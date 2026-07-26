@@ -1,0 +1,187 @@
+{
+  "candidate_groups": 1521,
+  "cohorts": {
+    "detail_complete_sensitivity": {
+      "candidate_groups": 949,
+      "cause_counts": {
+        "equipment failure": 42,
+        "fuel supply emergency": 24,
+        "intentional attack": 289,
+        "severe weather": 560,
+        "system operability disruption": 34
+      },
+      "duplicate_excess_rows": 7,
+      "rule": "primary_duration_and_nonmissing_normalized_cause_detail",
+      "source_rows": 956,
+      "unit": "candidate_group"
+    },
+    "known_loss_sensitivity": {
+      "candidate_groups": 751,
+      "cause_counts": {
+        "equipment failure": 44,
+        "fuel supply emergency": 22,
+        "intentional attack": 132,
+        "islanding": 38,
+        "public appeal": 28,
+        "severe weather": 384,
+        "system operability disruption": 103
+      },
+      "duplicate_excess_rows": 6,
+      "rule": "primary_duration_and_any_nonmissing_demand_loss",
+      "source_rows": 757,
+      "unit": "candidate_group"
+    },
+    "positive_loss_sensitivity": {
+      "candidate_groups": 611,
+      "cause_counts": {
+        "equipment failure": 44,
+        "fuel supply emergency": 20,
+        "intentional attack": 15,
+        "islanding": 34,
+        "public appeal": 19,
+        "severe weather": 376,
+        "system operability disruption": 103
+      },
+      "duplicate_excess_rows": 4,
+      "rule": "primary_duration_and_max_nonmissing_demand_loss_positive",
+      "source_rows": 615,
+      "unit": "candidate_group"
+    },
+    "primary_duration": {
+      "candidate_groups": 1385,
+      "cause_counts": {
+        "equipment failure": 54,
+        "fuel supply emergency": 37,
+        "intentional attack": 332,
+        "islanding": 44,
+        "public appeal": 63,
+        "severe weather": 735,
+        "system operability disruption": 120
+      },
+      "duplicate_excess_rows": 13,
+      "rule": "complete_temporal_and_nonnegative_timestamp_and_reported_duration_positive",
+      "source_rows": 1398,
+      "unit": "candidate_group"
+    },
+    "single_nerc_sensitivity": {
+      "candidate_groups": 1383,
+      "cause_counts": {
+        "equipment failure": 54,
+        "fuel supply emergency": 37,
+        "intentional attack": 332,
+        "islanding": 44,
+        "public appeal": 61,
+        "severe weather": 735,
+        "system operability disruption": 120
+      },
+      "duplicate_excess_rows": 9,
+      "rule": "primary_duration_and_single_nerc_region",
+      "source_rows": 1392,
+      "unit": "candidate_group"
+    },
+    "source_rows_sensitivity": {
+      "known_loss_rows": 756,
+      "positive_loss_rows": 614,
+      "primary_duration_rows": 1398,
+      "rule": "same_flags_without_candidate_deduplication",
+      "unit": "source_row",
+      "zero_duration_rows": 1476
+    },
+    "zero_duration_sensitivity": {
+      "candidate_groups": 1463,
+      "cause_counts": {
+        "equipment failure": 55,
+        "fuel supply emergency": 37,
+        "intentional attack": 403,
+        "islanding": 44,
+        "public appeal": 63,
+        "severe weather": 738,
+        "system operability disruption": 123
+      },
+      "duplicate_excess_rows": 13,
+      "rule": "complete_temporal_and_nonnegative_timestamp_and_reported_duration_nonnegative",
+      "source_rows": 1476,
+      "unit": "candidate_group"
+    }
+  },
+  "duplicate_candidate_event_groups": 10,
+  "duplicate_candidate_excess_rows": 13,
+  "duplicate_candidate_rows": 23,
+  "duration_mismatch_minutes": {
+    "-60": 14,
+    "60": 17
+  },
+  "evidence": {
+    "component_asset_ids_available": false,
+    "event_selection_rules_preregistered": true,
+    "grid_topology_available": false,
+    "independent_event_count_established": false,
+    "record_scope": "us_state_or_dc_major_outage_reports",
+    "rts_component_mapping_allowed": false,
+    "same_clock_business_trace_available": false,
+    "scuc_sced_available": false,
+    "status": "observed_empirical_outage_source_rows",
+    "unconditional_frequency_or_duration_inference_allowed": false
+  },
+  "forbidden_inferences": [
+    "independent_event_count",
+    "unconditional_annual_outage_frequency",
+    "unconditional_duration_distribution",
+    "component_outage_rate",
+    "rts_component_mapping",
+    "same_clock_business_or_contract_failure"
+  ],
+  "intersections": {
+    "complete_sustained_known_loss_candidate_groups": 751,
+    "complete_sustained_positive_loss_candidate_groups": 611,
+    "complete_timed_known_loss_candidate_groups": 799,
+    "complete_timed_positive_loss_candidate_groups": 615
+  },
+  "missing": {
+    "CAUSE.CATEGORY": 0,
+    "CAUSE.CATEGORY.DETAIL": 471,
+    "CUSTOMERS.AFFECTED": 443,
+    "DEMAND.LOSS.MW": 705,
+    "OUTAGE.DURATION": 58,
+    "OUTAGE.RESTORATION.DATE": 58,
+    "OUTAGE.RESTORATION.TIME": 58,
+    "OUTAGE.START.DATE": 9,
+    "OUTAGE.START.TIME": 9
+  },
+  "output_files": {
+    "candidate_groups": {
+      "bytes": 587782,
+      "path": "candidate_groups.csv",
+      "sha256": "4a82c60d9f0aca22133d729356a95c0d0de3b0b0253427f405c381443fdf24df"
+    },
+    "cohort_membership": {
+      "bytes": 286786,
+      "path": "cohort_membership.csv",
+      "sha256": "ab2b1c7c1005e9925881792704dd50b99c8c8cd5071575a560804eab51928c90"
+    },
+    "source_rows": {
+      "bytes": 1162645,
+      "path": "source_rows_clean.csv",
+      "sha256": "f8b30a82ffddd9db89b90d8542d1b1f9fddf80a2c42fb58211f9fb2b39db550f"
+    }
+  },
+  "outputs": {
+    "candidate_groups": "candidate_groups.csv",
+    "cohort_membership": "cohort_membership.csv",
+    "processing_summary": "processing_summary.json",
+    "source_rows": "source_rows_clean.csv"
+  },
+  "primary_cause_group_counts": {
+    "demand_management": 63,
+    "equipment_operational": 211,
+    "security": 332,
+    "topology_outcome": 44,
+    "weather": 735
+  },
+  "processing_id": "us_major_power_outages_candidate_cohorts_v1",
+  "source_rows": 1534,
+  "source_validation_summary_sha256": "3f014c00ca2653dca6bcf5f0e233d1a093889f1e7cd86cdab5184d80457c6305",
+  "source_workbook_member_sha256": "0129e24ed7c6872b794d0d2b515ad351a69b469034e3389c63ceda17426e71b2",
+  "zero_duration_records": 78,
+  "zero_duration_timestamp_consistent_records": 78
+}

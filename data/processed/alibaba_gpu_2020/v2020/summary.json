@@ -1,0 +1,247 @@
+{
+  "audit": {
+    "cohorts": {
+      "strict_completed_resource_complete_tasks": {
+        "jobs": 714903,
+        "tasks": 732318
+      },
+      "successful_gpu_task_candidates": {
+        "jobs": 714903,
+        "jobs_with_workload_tag": 87007,
+        "tasks": 732318,
+        "tasks_missing_requested_cpu": 0,
+        "tasks_missing_requested_memory": 0
+      }
+    },
+    "decompressed_bytes": 362281963,
+    "decompressed_bytes_by_archive": {
+      "pai_group_tag_table.tar.gz": 115521549,
+      "pai_job_table.tar.gz": 133288147,
+      "pai_machine_spec.tar.gz": 73311,
+      "pai_task_table.tar.gz": 113398956
+    },
+    "group_tags": {
+      "workload_missing_rows": 952234,
+      "workload_present_rows": 102798
+    },
+    "invalid_nonempty_numeric_counts": {
+      "jobs": {
+        "end_time": 0,
+        "start_time": 0
+      },
+      "machines": {
+        "cap_cpu": 0,
+        "cap_gpu": 0,
+        "cap_mem": 0
+      },
+      "tasks": {
+        "end_time": 0,
+        "inst_num": 0,
+        "plan_cpu": 0,
+        "plan_gpu": 0,
+        "plan_mem": 0,
+        "start_time": 0
+      }
+    },
+    "job_status_counts": {
+      "Failed": 256555,
+      "Running": 62928,
+      "Terminated": 732355,
+      "Waiting": 3663
+    },
+    "joins": {
+      "jobs_without_group": 1530,
+      "matched_job_group_rows": 1053971,
+      "matched_nonempty_user_conflicts": 0,
+      "orphan_group_rows": 1061,
+      "task_job_sets_equal": true,
+      "task_rows_without_parent_job": 0
+    },
+    "missing_counts": {
+      "group_tags": {
+        "gpu_type_spec": 1034399,
+        "group": 0,
+        "inst_id": 0,
+        "user": 1,
+        "workload": 952234
+      },
+      "jobs": {
+        "end_time": 296420,
+        "inst_id": 0,
+        "job_name": 0,
+        "start_time": 3663,
+        "status": 0,
+        "user": 0
+      },
+      "machines": {
+        "cap_cpu": 0,
+        "cap_gpu": 0,
+        "cap_mem": 0,
+        "gpu_type": 0,
+        "machine": 0
+      },
+      "tasks": {
+        "end_time": 349561,
+        "gpu_type": 217738,
+        "inst_num": 130,
+        "job_name": 0,
+        "plan_cpu": 18454,
+        "plan_gpu": 223965,
+        "plan_mem": 18454,
+        "start_time": 3714,
+        "status": 0,
+        "task_name": 0
+      }
+    },
+    "negative_numeric_counts": {
+      "jobs": {
+        "end_time": 0,
+        "start_time": 0
+      },
+      "machines": {
+        "cap_cpu": 0,
+        "cap_gpu": 0,
+        "cap_mem": 0
+      },
+      "tasks": {
+        "end_time": 0,
+        "inst_num": 0,
+        "plan_cpu": 0,
+        "plan_gpu": 0,
+        "plan_mem": 0,
+        "start_time": 0
+      }
+    },
+    "relative_hourly_workload": {
+      "calendar_dates_real": false,
+      "first_source_hour_index_anonymized": 150,
+      "last_source_hour_index_anonymized": 1791,
+      "population": "successful_gpu_task_candidates",
+      "rows": 1642
+    },
+    "table_rows": {
+      "group_tags": 1055032,
+      "jobs": 1055501,
+      "machines": 1897,
+      "tasks": 1261050
+    },
+    "task_missing_counts": {
+      "end_time": 349561,
+      "gpu_type": 217738,
+      "inst_num": 130,
+      "job_name": 0,
+      "plan_cpu": 18454,
+      "plan_gpu": 223965,
+      "plan_mem": 18454,
+      "start_time": 3714,
+      "status": 0,
+      "task_name": 0
+    },
+    "task_resource_audit": {
+      "maximum_plan_gpu_percent_per_instance": "800",
+      "maximum_requested_gpu_equivalents_per_task": "400"
+    },
+    "task_status_counts": {
+      "Failed": 256762,
+      "Running": 115501,
+      "Terminated": 885073,
+      "Waiting": 3714
+    },
+    "time_audit": {
+      "job_end_before_start_rows": 0,
+      "jobs_with_computable_earliest_task_start": 1051838,
+      "jobs_with_positive_earliest_task_start_gap": 0,
+      "jobs_with_zero_earliest_task_start_gap": 1051838,
+      "task_end_before_start_rows": 0,
+      "task_rows_starting_after_parent_job": 180757
+    },
+    "unique_keys": {
+      "group_inst_id": true,
+      "job_inst_id": true,
+      "job_name": true,
+      "machine": true,
+      "task_job_name_task_name": true
+    },
+    "zero_numeric_counts": {
+      "jobs": {
+        "end_time": 0,
+        "start_time": 0
+      },
+      "machines": {
+        "cap_cpu": 0,
+        "cap_gpu": 83,
+        "cap_mem": 0
+      },
+      "tasks": {
+        "end_time": 0,
+        "inst_num": 0,
+        "plan_cpu": 11,
+        "plan_gpu": 0,
+        "plan_mem": 0,
+        "start_time": 0
+      }
+    }
+  },
+  "calendar_status": "anonymized_relative_seconds_not_real_dates",
+  "cohort_rules": {
+    "strict_completed_resource_complete_tasks": {
+      "parent_job_status": "Terminated",
+      "require_end_not_before_start": true,
+      "require_positive_inst_num": true,
+      "required_numeric_fields": [
+        "start_time",
+        "end_time",
+        "inst_num",
+        "plan_gpu"
+      ],
+      "task_status": "Terminated"
+    },
+    "successful_gpu_task_candidates": {
+      "base": "strict_completed_resource_complete_tasks",
+      "require_positive_requested_gpu_equivalents": true
+    }
+  },
+  "dataset": "Alibaba PAI GPU Cluster Trace v2020",
+  "derivation_rules": {
+    "duration_seconds": "end_time - start_time",
+    "requested_cpu_cores": "inst_num * plan_cpu / 100",
+    "requested_gpu_equivalents": "inst_num * plan_gpu / 100",
+    "requested_memory_gb": "inst_num * plan_mem"
+  },
+  "documentation_commit": "0d0f3f1efdbf1add6a7bcc63676eafbd1eb11f71",
+  "evidence": {
+    "calendar_dates_real": false,
+    "checkpoint_progress_available": false,
+    "continuous_power_available": false,
+    "deadline_available": false,
+    "recovery_parameters_observed": false,
+    "relative_intervals_preserved": true,
+    "stage1_uses_lifetime_utilization": false,
+    "status": "observed_ai_workload_trace"
+  },
+  "missing_resource_policy": "preserve_null_never_fill_zero",
+  "outputs": {
+    "jobs.csv.gz": {
+      "bytes": 79673429,
+      "sha256": "f56b58e131c09e91b6cc81351a4069971f1ec88213807a133cb6a27373e24805"
+    },
+    "machine_catalog.csv.gz": {
+      "bytes": 30127,
+      "sha256": "ea4993e5362dbd3d682a399ea782d08bc76abbbd9b4f7590e12edd1f21dba840"
+    },
+    "relative_hourly_workload.csv.gz": {
+      "bytes": 35327,
+      "sha256": "30aaf50d27bc2487e760ae274f593a429ff675a1f13bbcfb7d57ccf69745f4b4"
+    },
+    "successful_gpu_task_candidates.csv.gz": {
+      "bytes": 24587429,
+      "sha256": "a53041f484144ea67c9a1777d85e2dde350c2341c94418da8072c0a94b3821d6"
+    },
+    "tasks.csv.gz": {
+      "bytes": 41097450,
+      "sha256": "9eb8fbc38997951d362a33a1a66699833e142360cfa5eec96c4ac6b9ae77fecf"
+    }
+  },
+  "schema": "alibaba_gpu_2020_stage1_processed_v1",
+  "source_profile": "stage1_core"
+}
