@@ -1,6 +1,7 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.pytest-*/
 .mypy_cache/
 .ruff_cache/
 .coverage
@@ -29,3 +30,26 @@ results/logs/*
 
 .DS_Store
 Thumbs.db
+
+data/raw/rts_gmlc/v*/upstream/
+data/raw/rts_gmlc/v*/matpower_reference/
+data/raw/google_power_2019/*/upstream/
+data/raw/google_power_workload_2019/*/upstream/
+data/raw/alibaba_gpu_2020/*/upstream/
+data/raw/us_major_power_outages/*/upstream/
+
+# 可由 experiments/process_*.py 从 data/raw 重新生成的大体量中间表。
+# 其 SHA256SUMS 与 summary.json 仍然入库，用于校验重生成结果是否一致。
+data/processed/alibaba_gpu_2020/*/jobs.csv.gz
+data/processed/alibaba_gpu_2020/*/tasks.csv.gz
+data/processed/alibaba_gpu_2020/*/successful_gpu_task_candidates.csv.gz
+
+# 求解器 resume 状态转储：单文件 7-10MB，属于可重算的中间断点而非科研结论。
+# 同目录的 SHA256SUMS、manifest、certificate、summary 一律保留入库。
+results/tables/**/candidate_checkpoints/**/candidate.json
+results/tables/**/candidate_checkpoints/**/round.json
+results/tables/**/pilot_checkpoints/**/candidate.json
+results/tables/**/pilot_checkpoints/**/round.json
+results/tables/**/level_set_checkpoints/**/round.json
+
+.claude/settings.local.json
