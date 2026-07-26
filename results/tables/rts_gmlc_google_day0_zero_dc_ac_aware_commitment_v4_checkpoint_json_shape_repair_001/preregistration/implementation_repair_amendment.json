@@ -1,0 +1,96 @@
+{
+  "amendment_id": "rts_gmlc_zero_dc_ac_aware_commitment_checkpoint_json_shape_repair_001",
+  "failed_attempts": [
+    {
+      "attempt_id": "formal_20260719T141959Z",
+      "eligible_for_resume": false,
+      "formal_result_published": false,
+      "terminal_event": "candidate_checkpoint_staging_identity_drift"
+    },
+    {
+      "attempt_id": "formal_20260719T161223Z",
+      "eligible_for_resume": false,
+      "formal_result_published": false,
+      "solver_started": false,
+      "terminal_event": "old_preregistration_rejected_repaired_runner"
+    }
+  ],
+  "failure_artifact_sha256": {
+    "results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4/formal_20260719T141959Z/attempt.json": "fe215ee690750bb4d0c1985c84b78bea07aea9fece7fab722304e461225fa32b",
+    "results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4/formal_20260719T141959Z/launcher.stderr.log": "0c6f65ef3d5bc8195cf35bd74e3ebd946a506df3e6b893562c5cf39a4c86cce0",
+    "results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4/formal_20260719T141959Z/progress.jsonl": "e9a2b78fad58f8f7ddbd8bda13325f2d1df89d399d49a035882e39ee70da9707",
+    "results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4/formal_20260719T161223Z/launcher.request.json": "95beae9dac069633f3fa61069160ed7264a1ee2b5541294dfa301c587251d491",
+    "results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4/formal_20260719T161223Z/launcher.started.json": "112efc7ab51ef3886f487aecca561d470e1956c5fc9d16ba1235688a64fb8d0b",
+    "results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4/formal_20260719T161223Z/launcher.stderr.log": "db5f395803d2134bea8ca27d759d293f807fbdc19071afe7b694d502043d8c91"
+  },
+  "frozen_protocol_proof": {
+    "acceptance_thresholds_changed": false,
+    "candidate_budget_grid_changed": false,
+    "config_bytes_identical_to_parent_preregistration": true,
+    "config_path": "configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4.yaml",
+    "joint_ac_protocol_changed": false,
+    "model_changed": false,
+    "new_config_sha256": "b107aba3908b04bbd677994ac272eeb98d35d5d957978dd42a70f5e44672b84b",
+    "old_config_sha256": "b107aba3908b04bbd677994ac272eeb98d35d5d957978dd42a70f5e44672b84b",
+    "scientific_interpretation_changed": false,
+    "shared_ac_aware_core_sha256": "bdd106e00bf1750b8867e9e3127c797054aa6f8ca9456821c4eb252ddf93d824",
+    "solver_or_algorithm_changed": false,
+    "time_limits_changed": false
+  },
+  "implementation_delta": {
+    "all_other_registered_implementation_hashes_unchanged": true,
+    "input_contract_delta_paths": [
+      "implementation_sha256.experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4.py"
+    ],
+    "new_runner_sha256": "f7cfbbde5403ba49203efc60916f0ccb08a953b1b3d528a01e6f012863e8a82a",
+    "old_runner_sha256": "629ef81b8b63025ad2cb73e4f5f2534cd8a2f7e976fe96792d14bbc05ebd4366"
+  },
+  "parent_preregistration": {
+    "candidate_frontier_artifact_published": false,
+    "input_contract_sha256": "2eed69c152ef6f1e659ee753fd597b5acd0c63e649fb2d4effc9d99583dc1561",
+    "joint_ac_solver_call_count": 0,
+    "manifest_sha256": "aeeeaa8891bd7a027cdfcec54e73cea5e0237062e4e9c33b94c4ce5d24fea827",
+    "output_directory": "results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4",
+    "runner_sha256": "629ef81b8b63025ad2cb73e4f5f2534cd8a2f7e976fe96792d14bbc05ebd4366",
+    "valid_budget_candidate_checkpoint_count": 0
+  },
+  "root_cause": {
+    "candidate_values_rounded_or_clamped": false,
+    "checkpoint_float_serialization_changed": false,
+    "failed_checkpoint_published": false,
+    "failed_checkpoint_resume_allowed": false,
+    "failure": "dataclass_asdict_preserved_nested_tuple_values_while_JSON_roundtrip_converted_them_to_lists_causing_a_false_staging_candidate_identity_mismatch",
+    "permitted_correction": "canonicalize_the_in_memory_candidate_through_the_exact_JSON_representation_before_all_checkpoint_identity_comparisons"
+  },
+  "schema": "rts_gmlc_zero_dc_ac_aware_commitment_implementation_repair_amendment_v1",
+  "scope": "candidate_checkpoint_json_shape_canonicalization_only",
+  "status": "implementation_only_repair_preregistered_before_successor_run",
+  "successor_output_directory": "results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_checkpoint_json_shape_repair_001",
+  "successor_preregistration": {
+    "input_contract_sha256": "b3aed21beff6b1e14d7c1c1c4a136bdf143e5f48f6d1dc1fab115ae07ef9faa8",
+    "runner_sha256": "f7cfbbde5403ba49203efc60916f0ccb08a953b1b3d528a01e6f012863e8a82a"
+  },
+  "verification_evidence": {
+    "checkpoint_repair_executor": {
+      "black": "passed",
+      "checkpoint_core_and_formal_contract": "23 passed",
+      "git_diff_check": "passed",
+      "py_compile": "passed",
+      "ruff": "passed",
+      "v4_runner": "34 passed"
+    },
+    "checkpoint_repair_independent_review": {
+      "black": "passed",
+      "external_signature_claimed": false,
+      "py_compile": "passed",
+      "ruff": "passed",
+      "runner_checkpoint_core_and_formal_contract": "57 passed",
+      "verdict": "PASS"
+    },
+    "test_source_sha256": {
+      "tests/test_rts_gmlc_zero_dc_ac_aware_commitment_v4_checkpoint_core.py": "af6ddaeb63e67f339965dbea8c3d219adf11ff5f48d4c18f7145ef86ce57ad5b",
+      "tests/test_rts_gmlc_zero_dc_ac_aware_commitment_v4_formal_contract.py": "dba4225d74dad6d5274d9284484c4b39d1d29dbdb0286a762f5a16df909fed8c",
+      "tests/test_rts_gmlc_zero_dc_ac_aware_commitment_v4_runner.py": "f283fa5fdec3261bbc385edf4487fd76e2a9b141e0322e611a59ec578d867362"
+    }
+  }
+}

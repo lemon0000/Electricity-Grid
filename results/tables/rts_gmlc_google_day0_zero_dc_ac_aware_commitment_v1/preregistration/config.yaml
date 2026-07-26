@@ -1,0 +1,175 @@
+preregistration:
+  id: rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v1
+  schema: rts_gmlc_zero_dc_ac_aware_commitment_preregistration_v1
+  status: repository_local_post_outcome_before_candidate_generation_or_joint_ac_execution
+  externally_timestamped: false
+  previous_ac_outcomes_observed: true
+  candidate_frontier_outcomes_observed: false
+  joint_ac_outcomes_observed: false
+
+parent_zero_control:
+  config_path: configs/rts_gmlc_google_day0_zero_dc_normal_ac_control.yaml
+  config_sha256: 1c98faa55dee7b6479526dda285657cce89e18cf737153902e8c4ab0883b2a1e
+  runner_path: experiments/run_rts_gmlc_zero_dc_normal_ac_control.py
+  runner_sha256: 32a690a3ac5d1c8bacbcfab80e02286a4c1d42e3a4292457df4d5d835b740365
+  scuc_core_path: src/grid/rts_gmlc_scuc.py
+  scuc_core_sha256: 1101b21cbdab0cdacd6755578208ce7d28cd3e6e04f932d397119a4dde2b6cfe
+  ac_core_path: src/grid/rts_gmlc_ac.py
+  ac_core_sha256: dafb8b307b074f3cf9079c5e80f8e2a1077550e9d0dec93edc4dc33676dc8c0e
+  output_directory: results/tables/rts_gmlc_google_day0_zero_dc_normal_ac_control_v1
+  preregistration_manifest_sha256: ee456378a822f0a97461546a385c1230d6d40e82920399599e4050f0ef812ec8
+  dc_dispatch_manifest_sha256: c7c5cb7f418382472f2adf949e62ce4e1abb399dfe906903bacc24037d40ca4d
+  ac_normal_manifest_sha256: 68aaa104312d7ef9966649e31759a59cd874eadf5fedab1147728ace9b8b68a6
+  input_contract_sha256: ea17c09e2dde55aef9f1376dc3670e1d32e1f8fd1af0426382af64c293bc3cd9
+  baseline_full_state_cost_usd: 1108454.611081534
+
+observed_diagnostic_disclosure:
+  amendment_004_converged_cases: 2296
+  amendment_004_total_cases: 2304
+  amendment_004_secure_cases: 0
+  zero_direct_converged_hours: 24
+  zero_direct_secure_hours: 0
+  primary_560_reference_witness_hours: 11
+  primary_560_distributed_witness_hours: 22
+  step_control_565_witness_hours: 22
+  ipopt_original_source_witness_hours: 22
+  ipopt_original_midpoint_witness_hours: 22
+  ipopt_original_flat_target_midq_witness_hours: 22
+  common_not_witnessed_hours: [15, 21]
+  ipopt_status_at_common_not_witnessed_hours: Infeasible_Problem_Detected
+  solver_reported_infeasibility_is_global_proof: false
+  rate_a_plus_5_percent_probe_succeeded: false
+  q_bounds_plus_minus_5_mvar_probe_succeeded: false
+  voltage_bounds_plus_minus_0p01_probe_succeeded: true
+  voltage_sensitivity_maximum_vm_pu: 1.06000001
+  voltage_sensitivity_excluded_from_official_envelope: true
+
+parent_diagnostics:
+  primary_560_result_manifest_sha256: db2b761b39529cf0b3b8deaeccc29b59b1571b1dc12d978b17f77426b2567d67
+  step_control_565_result_manifest_sha256: 64514670595a3857438bdbfe689bdb455f39a0273dc90cdcb20c5af7f316be39
+  ipopt_v2_preregistration_manifest_sha256: ffdf5d5df29101b463438cbf753e6b80b6babd31d74ea72df82c9648cf236ab3
+  ipopt_v2_result_manifest_sha256: 75d40ffe53ded9747f916d57a3d00921d5087549afc8148cb2953f5924bf7332
+  ipopt_v2_is_canonical_tabular_artifact: true
+  ipopt_v1_is_superseded_serialization: true
+
+official_voltage_limit_reference:
+  local_path: data/raw/rts_gmlc/v0.2.3/matpower_reference/RTS_Data/FormattedData/MATPOWER/RTS_GMLC.m
+  local_sha256: 10573aee70f793c28a0602516f85c4345e6f171512852f1162c3bb3b02ba575b
+  manifest_path: data/raw/rts_gmlc/v0.2.3/matpower_reference/SHA256SUMS
+  manifest_sha256: 0bd4a19e15969eb5ed30d1cfd4e5f13e343ca0286927497872f0c202fd2a86b2
+  expected_bus_count: 73
+  expected_uniform_vmin_pu: 0.95
+  expected_uniform_vmax_pu: 1.05
+
+candidate_frontier:
+  base_candidate_id: parent_zero_dc_selected_n1_dispatch
+  relative_cost_budget_deltas: [0.001, 0.0025, 0.005, 0.01, 0.02, 0.05]
+  candidate_generation_completed_before_any_joint_ac_solve: true
+  candidate_generation_uses_ac_outcomes: false
+  selected_n_minus_one_state_count_per_hour: 24
+  expected_hours: 24
+  areas: [1, 2, 3]
+  proxy: maximize_minimum_area_direction_online_reactive_capability_fraction
+  injection_capability_mvar: max_qmax_zero_floor
+  absorption_capability_mvar: max_negative_qmin_zero_floor
+  denominator: all_hourly_available_official_ac_active_capability_by_area_and_direction
+  primary_objective: maximize_proxy_within_cost_budget
+  secondary_objective: minimize_original_dc_scuc_cost_at_proxy_floor
+  proxy_floor_absolute_tolerance: 1.0e-7
+  cost_cap_absolute_tolerance_usd: 1.0e-4
+  duplicate_rule: commitment_sha256_keep_lowest_cost_then_lowest_budget
+  all_budget_candidates_completed_before_deduplication: true
+  solver:
+    name: highs
+    threads: 1
+    random_seed: 0
+    mip_relative_gap: 1.0e-6
+    feasibility_tolerance: 1.0e-6
+
+joint_ac:
+  engine: casadi_nlpsol_ipopt
+  casadi_version: 3.7.2
+  casadi_python_sha256: b55ee4543f628e2a52ff3ce94077e9929d4ca9032bf654601ec2cd7e91ee43b9
+  casadi_binary_sha256: 8d06e74e5360297686ee024522429d8d97557c387e764c510c3c7eea4cfb21bc
+  expected_hours: 24
+  initial_strategies: [source, midpoint, flat_target_midq]
+  all_candidates_and_strategies_run_no_early_stop: true
+  one_solver_call_per_candidate_strategy: true
+  retry_or_fallback_allowed: false
+  per_hour_method_selection_allowed: false
+  same_commitment_and_joint_pg_trajectory_required: true
+  normal_state_only: true
+  voltage_limits_pu: [0.95, 1.05]
+  voltage_bound_expansion_pu: 0.0
+  reactive_power_bound_expansion_mvar: 0.0
+  branch_rate_multiplier: 1.0
+  branch_rating: RATE_A_mva_proxy
+  branch_angle_limits_enforced: true
+  active_power_ramp_constraints_enforced: true
+  regional_spin_headroom_constraints_enforced: true
+  reserve_provider_scope: online_committable_units_in_original_spin_categories_conservative_subset
+  reserve_eligible_categories: [Coal, Gas CC, Gas CT, Oil CT, Oil ST, Solar PV, Wind]
+  objective: sum_squared_adjustable_pg_deviation_divided_by_base_mva_squared
+  ipopt_options:
+    ipopt.print_level: 0
+    print_time: false
+    ipopt.max_iter: 1000
+    ipopt.tol: 1.0e-9
+    ipopt.constr_viol_tol: 1.0e-8
+    ipopt.acceptable_tol: 1.0e-7
+    ipopt.acceptable_constr_viol_tol: 1.0e-6
+    ipopt.mu_strategy: adaptive
+    ipopt.fixed_variable_treatment: make_constraint
+
+independent_audit:
+  nlp_constraint_tolerance: 1.0e-6
+  nlp_variable_bound_tolerance: 1.0e-8
+  active_power_bound_tolerance_mw: 1.0e-4
+  reactive_power_bound_tolerance_mvar: 1.0e-4
+  voltage_bound_tolerance_pu: 1.0e-6
+  branch_loading_tolerance_fraction: 1.0e-6
+  branch_angle_tolerance_degree: 1.0e-6
+  fixed_generator_pg_tolerance_mw: 1.0e-6
+  offline_pg_qg_tolerance_mw_mvar: 1.0e-6
+  offline_branch_flow_tolerance_mva: 1.0e-6
+  nodal_p_q_balance_tolerance_mw_mvar: 1.0e-4
+  ybus_terminal_shunt_identity_tolerance_mva: 1.0e-6
+  returned_recomputed_branch_flow_tolerance_mva: 1.0e-6
+  reference_angle_tolerance_degree: 1.0e-6
+  objective_absolute_tolerance_mw2: 1.0e-4
+  objective_relative_tolerance: 1.0e-8
+  ramp_tolerance_mw: 1.0e-6
+  reserve_tolerance_mw: 1.0e-6
+
+forbidden_adaptivity:
+  forced_generator_uids_allowed: false
+  manual_failed_hours_allowed: false
+  per_hour_commitment_override_allowed: false
+  per_hour_solver_options_allowed: false
+  candidate_addition_after_joint_ac_start_allowed: false
+  voltage_or_q_or_rating_relaxation_allowed: false
+
+interpretation:
+  candidate_proxy_is_physical_feasibility_certificate: false
+  candidate_proxy_is_economic_optimum_claim: false
+  successful_claim: one_preregistered_24h_commitment_has_a_joint_normal_state_zero_dc_ac_numerical_feasibility_witness
+  unsuccessful_claim: not_witnessed_by_registered_candidate_frontier_and_joint_local_solver_starts
+  global_optimality_claimed: false
+  global_infeasibility_claimed: false
+  treatment_followup_gate: at_least_one_candidate_strategy_jointly_witnesses_all_24_hours
+  treatment_execution_in_this_protocol: false
+
+evidence:
+  evidence_status: derived_benchmark
+  result_evidence_ceiling: zero_dc_normal_state_ac_aware_commitment_joint_trajectory_diagnostic
+  physical_envelope_has_response_time_evidence: false
+  causal_poi_attribution_supported: false
+  engineering_ac_parameters_available: false
+  full_n_minus_one: false
+  ac_security: false
+  security_certified: false
+  full_m6_model_input_ready: false
+  formal_vma_published: false
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v1

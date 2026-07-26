@@ -1,0 +1,206 @@
+{
+  "amendment_id": "rts_gmlc_zero_dc_ac_aware_commitment_warmstart_scope_repair_002",
+  "failed_attempts": [
+    {
+      "attempt_id": "formal_repair_20260719T165115Z",
+      "candidate_frontier_artifact_published": false,
+      "completed_budget_candidate_checkpoint_count": 0,
+      "eligible_for_resume": false,
+      "failure_classification": "implementation_scope_failure",
+      "failure_is_infeasibility_evidence": false,
+      "first_master_execution_mode": "cold_start",
+      "formal_initial_proxy_warm_start_submitted_event_count": 0,
+      "formal_result_published": false,
+      "joint_ac_solver_call_count": 0,
+      "last_native_best_solution": "-inf",
+      "native_mip_start_acceptance_line_count": 0,
+      "native_mip_start_rejection_line_count": 0,
+      "pid": 4684,
+      "pid_confirmed_dead_before_amendment": true,
+      "terminal_state": "process_ended_without_terminal_progress_event"
+    }
+  ],
+  "failure_artifact_sha256": {
+    "results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4/formal_repair_20260719T165115Z/01_q_proxy_delta_0p0010/proxy_maximization/proxy_maximization__iteration_01__master.log": "64bf0ee9147bca47c3e4fa09dcb878c4bddff30fd5b0ff892dc07dd256bafa02",
+    "results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4/formal_repair_20260719T165115Z/attempt.json": "e7922ae4d300faa556a2dc78983a500eb4458c3c7657501d07ce0d0652381ba2",
+    "results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4/formal_repair_20260719T165115Z/progress.jsonl": "55183208e86807e03ca6f4c3840007470fa4b5e3e940f8136275a7d9217b4f33",
+    "results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_checkpoint_json_shape_repair_001/execution_lease/active/lease.json": "a2118b4fd6fcc93b129afc4e08c9767b50fbe09f84fb9da33dcef29cb9346e0c"
+  },
+  "frozen_protocol_proof": {
+    "acceptance_thresholds_changed": false,
+    "candidate_budget_grid": [
+      0.001,
+      0.0025,
+      0.005,
+      0.01,
+      0.02,
+      0.05
+    ],
+    "candidate_budget_grid_changed": false,
+    "candidate_frontier_contract_sha256": "c63572dbfc1dcc98c3a0aa956bb6c5633ec5f92e2645d7e45e69b545e0385f7e",
+    "config_bytes_identical_to_parent_preregistration": true,
+    "config_path": "configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4.yaml",
+    "exact_cg_runner_sha256": "50933c925ead6051a376b0773e2687505f42e2db222a3f9a3f141d6e864a036f",
+    "formal_solver": {
+      "algorithm": "exact_selected_state_constraint_generation",
+      "constraint_generation": {
+        "cross_contingency_shared_recourse_allowed": false,
+        "initial_active_state_source": "parent_zero_final_active_state_ids",
+        "rescreen_every_inactive_state_after_every_master": true,
+        "unresolved_is_infeasibility_evidence": false,
+        "unresolved_screen_action": "promote_and_label_unresolved_promoted"
+      },
+      "expected_full_model_size": {
+        "base_constraints": 350470,
+        "base_variables": 215688,
+        "proxy_stage_constraints": 350615,
+        "proxy_stage_variables": 215689
+      },
+      "final_audit": {
+        "eligible_requires_actual_gap_within_frozen_maximum": true,
+        "eligible_requires_full_state_feasible_incumbent": true,
+        "method": "all_selected_states_fixed_shared_lp_and_independent_residual_audit",
+        "required_after_each_stage": true,
+        "selected_state_count": 24
+      },
+      "optimality_reporting": {
+        "actual_interval_recomputed_for_every_completed_stage": true,
+        "post_result_threshold_relaxation_allowed": false,
+        "report_actual_absolute_gap": true,
+        "report_actual_relative_gap_to_feasible_incumbent": true,
+        "reported_interval": "actual_certified_lower_and_upper_bounds",
+        "target_and_maximum_acceptance_frozen_before_formal_start": true
+      },
+      "primary_regret": {
+        "hard_maximum": 0.0010011,
+        "numerical_audit_allowance": 1e-06,
+        "observed_regret_upper_bound": "stage1_actual_absolute_gap_plus_proxy_floor_tolerance_plus_numerical_audit_allowance",
+        "proxy_floor_tolerance": 1e-07
+      },
+      "progress_logging": {
+        "durable_jsonl_flush_and_fsync_each_event": true,
+        "heartbeat_interval_seconds": 30.0,
+        "log_directory": "results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4",
+        "native_solver_log_interval_seconds": 5.0,
+        "native_solver_logs_required": true,
+        "report_actual_lower_bound_upper_bound_interval_and_gap": true
+      },
+      "solver": {
+        "bound_consistency_tolerance": 1e-06,
+        "feasibility_tolerance": 1e-06,
+        "name": "highs",
+        "random_seed": 0,
+        "threads": 4
+      },
+      "stages": {
+        "cost_normalization": {
+          "certified_bound": "lower_bound_from_valid_active_master_dual_bound",
+          "feasible_bound": "upper_bound_from_final_full_state_feasible_incumbent",
+          "gap_measure": "certified_bound_interval_width",
+          "maximum_accepted_absolute_gap": null,
+          "maximum_accepted_relative_gap_to_feasible_incumbent": 0.001,
+          "objective_sense": "minimize",
+          "proxy_floor_absolute_tolerance": 1e-07,
+          "relative_gap_denominator": "max_abs_feasible_bound_1e-12",
+          "restart_constraint_generation_from_frozen_seed": true,
+          "target_relative_gap": 0.0001
+        },
+        "proxy_maximization": {
+          "certified_bound": "upper_bound_from_valid_active_master_dual_bound",
+          "feasible_bound": "lower_bound_from_final_full_state_feasible_incumbent",
+          "gap_measure": "certified_bound_interval_width",
+          "maximum_accepted_absolute_gap": 0.001,
+          "maximum_accepted_relative_gap_to_feasible_incumbent": 0.001,
+          "objective_sense": "maximize",
+          "relative_gap_denominator": "max_abs_feasible_bound_1e-12",
+          "target_relative_gap": 0.0001
+        }
+      },
+      "time_limits_seconds": {
+        "cost_master_per_call": 7200.0,
+        "final_full_state_audit_per_call": 1800.0,
+        "inactive_state_screen_per_call": 300.0,
+        "per_candidate_total": 43200.0,
+        "proxy_master_per_call": 7200.0
+      }
+    },
+    "joint_ac_contract_sha256": "11aafb1eb92784b8a913b932fba6d7cbe1da23f17ff3165040e73884574e7ac1",
+    "joint_ac_protocol_changed": false,
+    "model_changed": false,
+    "new_config_sha256": "b107aba3908b04bbd677994ac272eeb98d35d5d957978dd42a70f5e44672b84b",
+    "old_config_sha256": "b107aba3908b04bbd677994ac272eeb98d35d5d957978dd42a70f5e44672b84b",
+    "scientific_interpretation_changed": false,
+    "shared_ac_aware_core_sha256": "bdd106e00bf1750b8867e9e3127c797054aa6f8ca9456821c4eb252ddf93d824",
+    "solver_or_algorithm_changed": false,
+    "time_limits_changed": false
+  },
+  "implementation_delta": {
+    "all_other_registered_implementation_hashes_unchanged": true,
+    "input_contract_delta_paths": [
+      "implementation_sha256.experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4.py",
+      "implementation_sha256.src/grid/rts_gmlc_v4_initial_proxy_warmstart.py"
+    ],
+    "new_runner_sha256": "af0f727f29365955d534b0827fbb289f2c6d48cc2423b737eb980b4f41cf47cd",
+    "new_warm_start_adapter_sha256": "c655a3d60af60655a4430000f87651441b888e7b949d8b853e86af45628efcd3",
+    "old_runner_sha256": "f7cfbbde5403ba49203efc60916f0ccb08a953b1b3d528a01e6f012863e8a82a",
+    "old_warm_start_adapter_sha256": "1e35878998f6b464b9d3583d769a5461a8cab99efc788810fec1ed75756f9ce0"
+  },
+  "parent_preregistration": {
+    "candidate_frontier_artifact_published": false,
+    "implementation_repair_amendment_content_sha256": "78eef7beedd356717b43849f323778bc79a328bf986a9edf9dc16c3a258cc57a",
+    "input_contract_sha256": "b3aed21beff6b1e14d7c1c1c4a136bdf143e5f48f6d1dc1fab115ae07ef9faa8",
+    "joint_ac_solver_call_count": 0,
+    "manifest_sha256": "c7de877bf23c2bb0b9769cf2fd1c464da6599176c232ac13ba7a9b3d0c970b77",
+    "output_directory": "results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_checkpoint_json_shape_repair_001",
+    "runner_sha256": "f7cfbbde5403ba49203efc60916f0ccb08a953b1b3d528a01e6f012863e8a82a",
+    "valid_budget_candidate_checkpoint_count": 0,
+    "warm_start_adapter_sha256": "1e35878998f6b464b9d3583d769a5461a8cab99efc788810fec1ed75756f9ce0"
+  },
+  "root_cause": {
+    "acceptance_evidence_gates_weakened": false,
+    "failure": "warm_start_scope_predicate_used_the_wrong_exact_CG_iteration_ordinal_so_proxy_maximization_iteration_01_used_the_cold_FormalCgModelAdapter_path",
+    "model_or_feasible_region_changed": false,
+    "permitted_correction": "match_the_one_based_exact_CG_iteration_01_master_and_preserve_all_warm_start_mapping_submission_and_acceptance_gates",
+    "solver_options_changed": false,
+    "warm_start_values_changed": false
+  },
+  "schema": "rts_gmlc_zero_dc_ac_aware_commitment_implementation_repair_amendment_v1",
+  "scope": "initial_proxy_warm_start_first_master_scope_correction_only",
+  "status": "implementation_only_repair_preregistered_before_successor_run",
+  "successor_output_directory": "results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_warmstart_scope_repair_002",
+  "successor_preregistration": {
+    "input_contract_sha256": "b9d40f95a0f5f24b546f77a6d21ee6f59c43e8d5e2732a64075fa82c8100cc21",
+    "runner_sha256": "af0f727f29365955d534b0827fbb289f2c6d48cc2423b737eb980b4f41cf47cd",
+    "warm_start_adapter_sha256": "c655a3d60af60655a4430000f87651441b888e7b949d8b853e86af45628efcd3"
+  },
+  "verification_evidence": {
+    "test_source_sha256": {
+      "tests/test_rts_gmlc_exact_cg_runner.py": "4cbc9466e47c92ec11a2982beec2b9f91255321bf5ac2b7ec2d59001bd3feef4",
+      "tests/test_rts_gmlc_zero_dc_ac_aware_commitment_v4_checkpoint_core.py": "af6ddaeb63e67f339965dbea8c3d219adf11ff5f48d4c18f7145ef86ce57ad5b",
+      "tests/test_rts_gmlc_zero_dc_ac_aware_commitment_v4_formal_contract.py": "dba4225d74dad6d5274d9284484c4b39d1d29dbdb0286a762f5a16df909fed8c",
+      "tests/test_rts_gmlc_zero_dc_ac_aware_commitment_v4_runner.py": "43c39a97f5739879a71819270646d54ee767a9cdaf4eedbff5261154755e3fce"
+    },
+    "warm_start_scope_repair_executor": {
+      "broader_v4_before_second_amendment": "58 passed, 2 failed",
+      "broader_v4_failure_classification": "both_failures_were_expected_old_amendment_rejections_of_the_adapter_SHA_drift",
+      "py_compile": "passed",
+      "ruff": "passed",
+      "targeted_scope": "2 passed, 33 deselected"
+    },
+    "warm_start_scope_repair_independent_review": {
+      "black": "passed",
+      "combined_before_second_amendment": "53 passed, 2 failed",
+      "combined_failure_classification": "both_failures_were_expected_old_amendment_rejections_of_the_adapter_SHA_drift",
+      "exact_cg": "18 passed",
+      "external_signature_claimed": false,
+      "full_column_submission_gate_preserved": true,
+      "highs_status_k_ok_gate_preserved": true,
+      "native_acceptance_exactly_one_gate_preserved": true,
+      "native_rejection_zero_gate_preserved": true,
+      "py_compile": "passed",
+      "ruff": "passed",
+      "targeted_scope": "2 passed",
+      "verdict": "PASS"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "ac_security": false,
+  "all_24_original_envelope_cases_witnessed": false,
+  "all_24_voltage_plus_0p01_cases_witnessed": true,
+  "all_cases_reported": true,
+  "canonical_tabular_artifact": true,
+  "case_count": 96,
+  "causal_poi_attribution_supported": false,
+  "corrected_case_column_count": 70,
+  "corrected_case_columns_unique": true,
+  "duplicate_case_column_removed": "solver_objective_mw2",
+  "engineering_ac_parameters_available": false,
+  "evidence_status": "derived_benchmark",
+  "expected_case_count": 96,
+  "formal_vma_published": false,
+  "full_m6_model_input_ready": false,
+  "full_n_minus_one": false,
+  "input_contract_sha256": "158b820aca40cc3bf80109cbcd6a51d2cf459be8c6166899e46ae211ff6d016b",
+  "manual_per_hour_commitment_selection_used": false,
+  "maximum_original_witness_p_balance_residual_mw": 2e-09,
+  "maximum_original_witness_q_balance_residual_mvar": 1e-08,
+  "maximum_voltage_sensitivity_original_limit_violation_pu": 0.01000001,
+  "maximum_voltage_sensitivity_vm_pu": 1.06000001,
+  "mode_summaries": {
+    "original_flat_target_midq": {
+      "branch_rate_multiplier": 1.0,
+      "case_count": 24,
+      "initial_strategy": "flat_target_midq",
+      "not_witnessed_timestamps": [
+        "2020-01-01T15:00:00+00:00",
+        "2020-01-01T21:00:00+00:00"
+      ],
+      "reactive_power_bound_expansion_mvar": 0.0,
+      "registered_mode_feasibility_witness_count": 22,
+      "solver_success_count": 22,
+      "voltage_bound_expansion_pu": 0.0
+    },
+    "original_midpoint": {
+      "branch_rate_multiplier": 1.0,
+      "case_count": 24,
+      "initial_strategy": "midpoint",
+      "not_witnessed_timestamps": [
+        "2020-01-01T15:00:00+00:00",
+        "2020-01-01T21:00:00+00:00"
+      ],
+      "reactive_power_bound_expansion_mvar": 0.0,
+      "registered_mode_feasibility_witness_count": 22,
+      "solver_success_count": 22,
+      "voltage_bound_expansion_pu": 0.0
+    },
+    "original_source": {
+      "branch_rate_multiplier": 1.0,
+      "case_count": 24,
+      "initial_strategy": "source",
+      "not_witnessed_timestamps": [
+        "2020-01-01T15:00:00+00:00",
+        "2020-01-01T21:00:00+00:00"
+      ],
+      "reactive_power_bound_expansion_mvar": 0.0,
+      "registered_mode_feasibility_witness_count": 22,
+      "solver_success_count": 22,
+      "voltage_bound_expansion_pu": 0.0
+    },
+    "voltage_plus_0p01_source": {
+      "branch_rate_multiplier": 1.0,
+      "case_count": 24,
+      "initial_strategy": "source",
+      "not_witnessed_timestamps": [],
+      "reactive_power_bound_expansion_mvar": 0.0,
+      "registered_mode_feasibility_witness_count": 24,
+      "solver_success_count": 24,
+      "voltage_bound_expansion_pu": 0.01
+    }
+  },
+  "normal_state_only": true,
+  "official_uniform_vmax_pu": 1.05,
+  "official_uniform_vmin_pu": 0.95,
+  "original_multistart_feasibility_witness_count": 22,
+  "original_multistart_not_witnessed_timestamps": [
+    "2020-01-01T15:00:00+00:00",
+    "2020-01-01T21:00:00+00:00"
+  ],
+  "parent_step_control_result_manifest_sha256": "64514670595a3857438bdbfe689bdb455f39a0273dc90cdcb20c5af7f316be39",
+  "parent_v1_result_manifest_sha256": "d9f81179aa95078d4362257ef19156bcbb47bceb5583654e7250caae3f99e1b5",
+  "physical_envelope_has_response_time_evidence": false,
+  "preregistration_id": "rts_gmlc_google_day0_zero_dc_ac_ipopt_diagnostic_v1",
+  "result_evidence_ceiling": "zero_dc_normal_state_cross_solver_and_voltage_assumption_diagnostic",
+  "schema": "rts_gmlc_zero_dc_ac_ipopt_diagnostic_results_v2",
+  "scientific_outcomes_changed": false,
+  "security_certified": false,
+  "serialization_amendment_id": "rts_gmlc_google_day0_zero_dc_ac_ipopt_serialization_amendment_v2",
+  "solver_reported_infeasibility_is_global_proof": false,
+  "solver_rerun_count": 0,
+  "treatment_followup_gate_passed": false,
+  "voltage_plus_0p01_feasibility_witness_count": 24,
+  "voltage_sensitivity_cannot_replace_official_bounds": true
+}

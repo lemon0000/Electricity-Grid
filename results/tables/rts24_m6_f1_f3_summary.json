@@ -1,0 +1,259 @@
+{
+  "evaluation_id": "rts24_m6_f1_f3_synthetic_envelope_gate_v1",
+  "parameter_status": "synthetic_business_envelope_mechanism_not_contract_evidence",
+  "m3_state_sha256": "c3426acedfa43525a900373bf470eb1ab8ba9f2397f203e1292673baeb6c8997",
+  "m3_summary_sha256": "555e24a663f1de35115af28c61df020ed278743c55c80cf8ba8707bde08115db",
+  "source_security_state_count": 107,
+  "state_enumeration_interpretation": "mutually_exclusive_security_checks_not_event_frequency",
+  "timeline_hours": 8784,
+  "timeline_hours_by_quarter": {
+    "q1": 2184,
+    "q2": 2184,
+    "q3": 2208,
+    "q4": 2208
+  },
+  "timeline_load_values_used_as_business_data": false,
+  "network_call_magnitude_coupled": true,
+  "chronological_grid_dispatch_coupled": false,
+  "network_call_mw_by_layer_quarter": {
+    "actual": {
+      "q1": 0.0,
+      "q2": 0.0,
+      "q3": 0.0,
+      "q4": 0.0
+    },
+    "contract_counterfactual": {
+      "q1": 0.0,
+      "q2": 0.0,
+      "q3": 0.0,
+      "q4": 0.0
+    }
+  },
+  "network_replay_is_degenerate_zero_call": true,
+  "ablation_results": {
+    "network_minimum_call_replay": {
+      "F1_mw_only": {
+        "actual_feasible": true,
+        "contract_counterfactual_feasible": true,
+        "temporally_qualified_capacity_mw": {
+          "q1": 50.0,
+          "q2": 50.0,
+          "q3": 250.0,
+          "q4": 250.0
+        },
+        "T20": {
+          "threshold_mw": 50.0,
+          "reached": true,
+          "quarter": "q1",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q1"
+        },
+        "T50": {
+          "threshold_mw": 125.0,
+          "reached": true,
+          "quarter": "q3",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q3"
+        },
+        "T100": {
+          "threshold_mw": 250.0,
+          "reached": true,
+          "quarter": "q3",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q3"
+        }
+      },
+      "F2_temporal_no_recovery": {
+        "actual_feasible": true,
+        "contract_counterfactual_feasible": true,
+        "temporally_qualified_capacity_mw": {
+          "q1": 50.0,
+          "q2": 50.0,
+          "q3": 250.0,
+          "q4": 250.0
+        },
+        "T20": {
+          "threshold_mw": 50.0,
+          "reached": true,
+          "quarter": "q1",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q1"
+        },
+        "T50": {
+          "threshold_mw": 125.0,
+          "reached": true,
+          "quarter": "q3",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q3"
+        },
+        "T100": {
+          "threshold_mw": 250.0,
+          "reached": true,
+          "quarter": "q3",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q3"
+        }
+      },
+      "F3_full_recovery": {
+        "actual_feasible": true,
+        "contract_counterfactual_feasible": true,
+        "temporally_qualified_capacity_mw": {
+          "q1": 50.0,
+          "q2": 50.0,
+          "q3": 250.0,
+          "q4": 250.0
+        },
+        "T20": {
+          "threshold_mw": 50.0,
+          "reached": true,
+          "quarter": "q1",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q1"
+        },
+        "T50": {
+          "threshold_mw": 125.0,
+          "reached": true,
+          "quarter": "q3",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q3"
+        },
+        "T100": {
+          "threshold_mw": 250.0,
+          "reached": true,
+          "quarter": "q3",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q3"
+        }
+      }
+    },
+    "full_x_contract_stress": {
+      "F1_mw_only": {
+        "actual_feasible": true,
+        "contract_counterfactual_feasible": true,
+        "temporally_qualified_capacity_mw": {
+          "q1": 50.0,
+          "q2": 50.0,
+          "q3": 250.0,
+          "q4": 250.0
+        },
+        "T20": {
+          "threshold_mw": 50.0,
+          "reached": true,
+          "quarter": "q1",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q1"
+        },
+        "T50": {
+          "threshold_mw": 125.0,
+          "reached": true,
+          "quarter": "q3",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q3"
+        },
+        "T100": {
+          "threshold_mw": 250.0,
+          "reached": true,
+          "quarter": "q3",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q3"
+        }
+      },
+      "F2_temporal_no_recovery": {
+        "actual_feasible": true,
+        "contract_counterfactual_feasible": true,
+        "temporally_qualified_capacity_mw": {
+          "q1": 50.0,
+          "q2": 50.0,
+          "q3": 250.0,
+          "q4": 250.0
+        },
+        "T20": {
+          "threshold_mw": 50.0,
+          "reached": true,
+          "quarter": "q1",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q1"
+        },
+        "T50": {
+          "threshold_mw": 125.0,
+          "reached": true,
+          "quarter": "q3",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q3"
+        },
+        "T100": {
+          "threshold_mw": 250.0,
+          "reached": true,
+          "quarter": "q3",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q3"
+        }
+      },
+      "F3_full_recovery": {
+        "actual_feasible": false,
+        "contract_counterfactual_feasible": false,
+        "temporally_qualified_capacity_mw": {
+          "q1": 50.0,
+          "q2": 50.0,
+          "q3": 175.0,
+          "q4": 175.0
+        },
+        "T20": {
+          "threshold_mw": 50.0,
+          "reached": true,
+          "quarter": "q1",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q1"
+        },
+        "T50": {
+          "threshold_mw": 125.0,
+          "reached": true,
+          "quarter": "q3",
+          "right_censored": false,
+          "censor_quarter": null,
+          "display_label": "q3"
+        },
+        "T100": {
+          "threshold_mw": 250.0,
+          "reached": false,
+          "quarter": null,
+          "right_censored": true,
+          "censor_quarter": "q4",
+          "display_label": "q4+"
+        }
+      }
+    }
+  },
+  "m6_mechanism_gate_passed": true,
+  "security_certified": false,
+  "interpretation": "network_call_magnitude_replay_plus_synthetic_full_x_temporal_ablation_not_chronological_grid_or_contract_evidence",
+  "remaining_blockers": [
+    "frozen_m3_minimum_network_call_is_zero_in_all_quarters",
+    "network_security_states_are_not_an_event_chronology",
+    "data_center_hourly_workload_and_recovery_headroom_are_not_observed",
+    "failure_timing_and_frequency_are_not_observed",
+    "hourly_trace_is_not_coupled_to_scuc_sced_or_ac_security",
+    "envelope_parameters_are_synthetic_sensitivities"
+  ],
+  "output_paths": {
+    "quarter": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rts24_m6_f1_f3_quarters.csv",
+    "hourly": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rts24_m6_f1_f3_hourly.csv",
+    "summary": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rts24_m6_f1_f3_summary.json"
+  }
+}

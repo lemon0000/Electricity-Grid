@@ -1,0 +1,137 @@
+schema: rts_gmlc_v4_repair_003_formal_successor_config_v1
+
+preregistration:
+  id: rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_003
+  schema: rts_gmlc_zero_dc_ac_aware_commitment_preregistration_v4_repair_003
+  status: repository_local_hybrid_certificate_successor_before_formal_candidate_generation
+  candidate_frontier_outcomes_observed: false
+  joint_ac_outcomes_observed: false
+
+base_v4:
+  config_path: configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4.yaml
+  config_sha256: b107aba3908b04bbd677994ac272eeb98d35d5d957978dd42a70f5e44672b84b
+  runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4.py
+  runner_sha256: af0f727f29365955d534b0827fbb289f2c6d48cc2423b737eb980b4f41cf47cd
+  scientific_config_changed: false
+  joint_ac_protocol_changed: false
+
+predecessor_repair_002:
+  root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_warmstart_scope_repair_002
+  preregistration_manifest_sha256: 0fec4eb7eeae5aa83cdbce41bfffc04c2f73b76a3ce64579b2b00e046417e4df
+  input_contract_sha256: b9d40f95a0f5f24b546f77a6d21ee6f59c43e8d5e2732a64075fa82c8100cc21
+  completed_prefix_count: 3
+  candidate_checkpoint_manifest_sha256s:
+    - ad854739ef601e95e0f50a304bf9a6dabe84692c9407dc9d8a2444a2e4cbe681
+    - bab8a48b9a3db0b452e4220e512ffa30de61d6bb4a27b5e04524e6bc7f83853f
+    - 7fa4eead29345e287d304e7ec4e5a676f40d1f31d191ca092e88768ffc1ded34
+  failed_candidate_4_progress_path: results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4/formal_warmstart_repair_20260719T180650Z/progress.jsonl
+  failed_candidate_4_progress_sha256: c08a10cf92c3dbe5a8f1b7f229ac3d73c8ebb8231583b189924b4a8dd9980516
+  candidate_frontier_published: false
+  joint_ac_solver_call_count: 0
+  predecessor_resume_allowed: false
+
+control_plane_selection:
+  root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_hybrid_certificate_repair_003_decision_pilot
+  result_manifest_sha256: c1aff33bce2098923a274a72373597ae19dda1e3ad669ef125d7b986c4344023
+  summary_sha256: 5fabf96f1279b94056ca1c75a1d727fb3d0662f392ba3c33c5cfeb0bd121a888
+  required_schema: rts_gmlc_v4_repair_003_level_set_decision_pilot_v2
+  required_status: accepted
+  run_id: repair_003_delta_0p0075_decision_pilot_20260720_r5
+  selected_method: direct_max_or_level_set_bisection
+  selected_level_set_method: bracketed_budget_feasibility_decision_mip
+  warm_start_selection_frozen: true
+  objective_value_used_for_selection: false
+  formal_candidate_result: false
+  preregistration_published: false
+  joint_ac_solver_call_count: 0
+
+formal_successor:
+  algorithm_id: direct_exact_cg_then_bracketed_level_set_repair_003
+  direct_backend: exact_selected_state_constraint_generation
+  checkpoint_schema: rts_gmlc_v4_repair_003_hybrid_candidate_checkpoint_v1
+  float_serialization: python_json_roundtrip_full_precision_v1
+  prefix_candidate_count: 3
+  direct_phase_first_for_new_candidates: true
+  fallback_trigger: direct_stage_not_eligible_within_frozen_maximum_acceptance
+  fallback_method: bracketed_budget_feasibility_decision_mip
+  fallback_lower_bound_source: immediately_preceding_published_successor_checkpoint
+  fallback_upper_bound_uses_only_candidate_specific_preregistered_source: true
+  ineligible_direct_bounds_change_fallback_initial_bracket: false
+  strict_cost_separation_margin_usd: 1.0e-4
+  level_set_master_seconds_per_call: 3600.0
+  level_set_maximum_rounds: 12
+  target_relative_gap: 1.0e-4
+  maximum_accepted_absolute_gap: 1.0e-3
+  maximum_accepted_relative_gap_to_feasible_incumbent: 1.0e-3
+  unresolved_is_infeasibility_evidence: false
+  prefix_old_stage_certificate_import_allowed: false
+  prefix_reconstruction_and_new_24_state_audit_required: true
+  all_six_checkpoints_required_before_frontier: true
+  frontier_required_before_joint_ac: true
+  candidate_controls:
+    - ordinal: 1
+      relative_cost_budget_delta: 0.001
+      mode: verified_predecessor_prefix
+      upper_bound_source: not_applicable
+      initial_upper_bound: null
+    - ordinal: 2
+      relative_cost_budget_delta: 0.0025
+      mode: verified_predecessor_prefix
+      upper_bound_source: not_applicable
+      initial_upper_bound: null
+    - ordinal: 3
+      relative_cost_budget_delta: 0.005
+      mode: verified_predecessor_prefix
+      upper_bound_source: not_applicable
+      initial_upper_bound: null
+    - ordinal: 4
+      relative_cost_budget_delta: 0.01
+      mode: direct_then_level_set
+      upper_bound_source: candidate_4_failed_direct_certificate
+      initial_upper_bound: 0.2895372905465777
+      may_inherit_candidate_4_upper_bound: true
+    - ordinal: 5
+      relative_cost_budget_delta: 0.02
+      mode: direct_then_level_set
+      upper_bound_source: model_definition_global_upper_bound
+      initial_upper_bound: 1.0
+      may_inherit_candidate_4_upper_bound: false
+    - ordinal: 6
+      relative_cost_budget_delta: 0.05
+      mode: direct_then_level_set
+      upper_bound_source: model_definition_global_upper_bound
+      initial_upper_bound: 1.0
+      may_inherit_candidate_4_upper_bound: false
+  model_definition_upper_bound_proof:
+    value: 1.0
+    numerator: online_available_bidirectional_q_capability_by_area_direction_hour
+    denominator: all_available_bidirectional_q_capability_by_same_area_direction_hour
+    proof: numerator_is_a_nonnegative_subset_sum_of_denominator_terms
+
+implementation:
+  formulation_pilot_path: experiments/pilot_rts_gmlc_zero_dc_ac_aware_formulations.py
+  formulation_pilot_sha256: d4207debbd4945fa7a81196b2bfac401599ada18a02419f2255f610383af05ab
+  pilot_module_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_003.py
+  pilot_module_sha256: da0d3aefead200e7e6198cfab3c62cc1858c2f7a1b534eb1e97485d3348d695f
+  exact_cg_core_path: src/grid/rts_gmlc_exact_cg.py
+  exact_cg_core_sha256: b64d35cee6997b946c76260b6fa04cad805155f167185882e10560f27d4c02fe
+  exact_cg_runner_path: src/grid/rts_gmlc_exact_cg_runner.py
+  exact_cg_runner_sha256: 6289fc4692472740a51672885dd6c1ba7f47f5147271e0b73e621659d846b54b
+  formal_adapter_path: src/grid/rts_gmlc_formal_cg_adapter.py
+  formal_adapter_sha256: c66e7fc7e530baa0246a0ce70da75fb9fd475a2487b59b4758ffd077c6232788
+  level_set_path: src/grid/rts_gmlc_level_set.py
+  level_set_sha256: fb7b5be9b4b48e805798b7fd8ed4278ff2f8bdb373caef28eb86329eb7e86229
+  warm_start_adapter_path: src/grid/rts_gmlc_v4_initial_proxy_warmstart.py
+  warm_start_adapter_sha256: c655a3d60af60655a4430000f87651441b888e7b949d8b853e86af45628efcd3
+  runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_003_formal.py
+  runner_sha256: 07513a1c4cf7c92bc0e62080691827c20cc3e1c2277e103633848010830cb4a4
+  monitor_path: experiments/monitor_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_003.py
+  monitor_sha256: d8d9533e20a2fc6a576c850a13e853ccba5a44ead749e41dac6f1e2c91ecefc8
+  launcher_path: scripts/start_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_003.ps1
+  launcher_sha256: 91ec7a12f7e0e8f96c124e8ca2755547bfcce22c9b98db08211c13c090f72334
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_003
+
+logging:
+  directory: results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_003

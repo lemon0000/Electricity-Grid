@@ -1,0 +1,405 @@
+{
+  "all_zero_control_cases_blind": true,
+  "externally_timestamped": false,
+  "input_contract": {
+    "ac_assumptions": {
+      "colocated_q_inert_vg_normalized": true,
+      "conflicting_online_q_capable_vg_policy": "fail_before_runpf",
+      "hvdc_converter_reactive_power_modeled": false,
+      "poi_connection_equipment_added": false,
+      "q_limit_switching": false,
+      "restoration_or_redispatch": false,
+      "reuse_parent_ac_numerical_inputs": true,
+      "source_bus_vm_role": "newton_start_not_control_fallback",
+      "source_mw_rating_used_as_mva_proxy": true,
+      "unambiguous_single_online_committable_slack_required": true,
+      "voltage_control_target": "common_online_q_capable_generator_vg",
+      "voltage_limits_pu": [
+        0.95,
+        1.05
+      ]
+    },
+    "case_scope": {
+      "ac_security_states": "normal_only",
+      "branch_rating": "continuous",
+      "completion_policy": "all_24_cases_reported_no_failure_deletion",
+      "configured_power_factor_value": 1.0,
+      "dc_horizon": "all_24_hours",
+      "dc_security_states": "all_24_parent_common_states",
+      "expected_unique_ac_cases": 24,
+      "power_factor_case": "not_applicable_zero_active_power"
+    },
+    "common_security_contract": {
+      "branch_uids": [
+        "A11",
+        "A12-1",
+        "A34",
+        "B12-1",
+        "B22",
+        "B6",
+        "C12-1",
+        "C27",
+        "C6",
+        "CA-1"
+      ],
+      "excluded_islanding_branch_uids": [
+        "B11",
+        "C11"
+      ],
+      "generator_uids": [
+        "121_NUCLEAR_1",
+        "213_CC_3",
+        "313_CC_1"
+      ],
+      "selection_scope": "pre_registered_common_nonislanding_ac_branches_and_committable_generators",
+      "state_ids": [
+        "normal",
+        "branch_A11_immediate",
+        "branch_A11_sustained",
+        "branch_A12-1_immediate",
+        "branch_A12-1_sustained",
+        "branch_A34_immediate",
+        "branch_A34_sustained",
+        "branch_B12-1_immediate",
+        "branch_B12-1_sustained",
+        "branch_B22_immediate",
+        "branch_B22_sustained",
+        "branch_B6_immediate",
+        "branch_B6_sustained",
+        "branch_C12-1_immediate",
+        "branch_C12-1_sustained",
+        "branch_C27_immediate",
+        "branch_C27_sustained",
+        "branch_C6_immediate",
+        "branch_C6_sustained",
+        "branch_CA-1_immediate",
+        "branch_CA-1_sustained",
+        "generator_121_NUCLEAR_1_sustained",
+        "generator_213_CC_3_sustained",
+        "generator_313_CC_1_sustained"
+      ]
+    },
+    "config_sha256": "1c98faa55dee7b6479526dda285657cce89e18cf737153902e8c4ab0883b2a1e",
+    "evidence": {
+      "ac_security": false,
+      "causal_poi_attribution_supported": false,
+      "control_interpretation": "reoptimized_no_data_center_operational_counterfactual",
+      "engineering_ac_parameters_available": false,
+      "evidence_status": "derived_benchmark",
+      "formal_vma_published": false,
+      "full_n_minus_one": false,
+      "result_evidence_ceiling": "public_rts_gmlc_zero_dc_normal_ac_control_only",
+      "security_certified": false
+    },
+    "implementation_sha256": {
+      "experiments/run_rts_gmlc_day0_scuc.py": "b6e68a5dce62d587ae5253c7666a55c99cd325d045a3e6086249e564e58f4724",
+      "experiments/run_rts_gmlc_multi_poi_ac_replay.py": "0e2277f9c8096eaff695f70f95cc3e3898cf42ea0d69339cad8655e66c5d6e06",
+      "experiments/run_rts_gmlc_multi_poi_ac_replay_slack_amended.py": "6a9f2050a7882ef4c7fae72daefbc018d966ad46977bed22748383f15fe26ac0",
+      "experiments/run_rts_gmlc_multi_poi_ac_replay_timezone_amended.py": "4435727b3250af380b1ec4f20f0e6ba700902d6e6199da971c5758a9fced157a",
+      "experiments/run_rts_gmlc_multi_poi_ac_replay_voltage_control_amended.py": "b49a867f518fd29571a364bc0597b26085e32ed4b698c60128a9cfe6511dc56e",
+      "experiments/run_rts_gmlc_multi_poi_scan.py": "5adb6bbdc640663e86cd60016f02ad0e0e003ec88eacf7af56d8423e7e6b2769",
+      "experiments/run_rts_gmlc_zero_dc_normal_ac_control.py": "32a690a3ac5d1c8bacbcfab80e02286a4c1d42e3a4292457df4d5d835b740365",
+      "src/evaluation/chronology_inputs.py": "ef838c637b071ac89fffcdb5be9c9e7bc2d3fc75e1edf8172851b212e7c37c6b",
+      "src/grid/chronological_dispatch.py": "71d6c1da0e72942512810c651619c5cd73e915c3ac6d0d52684476d6133658ec",
+      "src/grid/rts_gmlc.py": "4180ab5ce86eb34a9de9e058ff9c56275ace3a6ffab06dbb464d93ef23382448",
+      "src/grid/rts_gmlc_ac.py": "dafb8b307b074f3cf9079c5e80f8e2a1077550e9d0dec93edc4dc33676dc8c0e",
+      "src/grid/rts_gmlc_scuc.py": "1101b21cbdab0cdacd6755578208ce7d28cd3e6e04f932d397119a4dde2b6cfe"
+    },
+    "parent_contracts": {
+      "common_security_contract_sha256": "7865c7544817acd2d0dd6a461766862af52f7175eb24f2c1466f52e70115aa87",
+      "common_security_manifest_sha256": "96d476b082d96b6204eca6093c9daf4f4f1aae175076122042960b0d9358347e",
+      "multi_poi_registration_contract_sha256": "16d9edc57d965e802dd17106a3a0aa7a99ae93f0f493ba977d8490573ce3fb78",
+      "multi_poi_scan_config_path": "configs/rts_gmlc_google_day0_multi_poi_scan.yaml",
+      "multi_poi_scan_config_sha256": "14f578c5ed1b781449759f479b804c324a7634301380ca478b23334b46b240e4",
+      "parent_ac_config_path": "configs/rts_gmlc_google_day0_multi_poi_ac_replay.yaml",
+      "parent_ac_config_sha256": "5c3c6d3925b78f743cf9e2e55578d1034c3d907782d03edfaa1dda3bdd1a5a9c",
+      "parent_ac_input_contract_sha256": "7dc28350aaa137a3f99a90a83365ebafb58c8de739a2999a5a93ed4ea0babd41",
+      "slack_amendment_config_path": "configs/rts_gmlc_google_day0_multi_poi_ac_replay_slack_amendment.yaml",
+      "slack_amendment_config_sha256": "ee0436c39530791ac055fedd5ec91624ba3926985c6f39b251d28f1ee504f2f1",
+      "slack_amendment_implementation_sha256": "6a9f2050a7882ef4c7fae72daefbc018d966ad46977bed22748383f15fe26ac0",
+      "slack_amendment_manifest_sha256": "3aa5c70b94f5771ba1822425b58eff4704ee1f93a7bb310146de7df8f79bfb87",
+      "slack_corrected_ac_result_manifest_sha256": "2b5b705d2074ddb8f846b7a8d897ed87d32021446fd867825b7dd3a0982e2a7e",
+      "voltage_control_amendment_config_path": "configs/rts_gmlc_google_day0_multi_poi_ac_replay_voltage_control_amendment.yaml",
+      "voltage_control_amendment_config_sha256": "67d118fb769474ee891ce17cebfe261f64b46e02b1bb8a606c5bc3889449da6e",
+      "voltage_control_amendment_id": "rts_gmlc_ac_replay_q_capable_voltage_control_amendment_004",
+      "voltage_control_amendment_implementation_sha256": "b49a867f518fd29571a364bc0597b26085e32ed4b698c60128a9cfe6511dc56e",
+      "voltage_control_amendment_manifest_sha256": "19001629898bbaf0af191978beabdf6b1d5c779246bf304242c072b2e03b9f9a",
+      "voltage_control_corrected_ac_result_manifest_sha256": "ee4894bba4e65433ffed4b31e4d96c78035bd2413dd4fa6accb3eb9f16c0609a"
+    },
+    "power_flow": {
+      "algorithm": "newton",
+      "engine": "pypower_runpf",
+      "loading_tolerance": 1e-06,
+      "maximum_iterations": 20,
+      "non_slack_pg_audit_tolerance_mw": 1e-06,
+      "power_violation_tolerance": 0.0001,
+      "tolerance": 1e-08,
+      "voltage_violation_tolerance_pu": 1e-06
+    },
+    "schema": "rts_gmlc_zero_dc_normal_ac_control_inputs_v1",
+    "software_versions": {
+      "highspy": "1.15.1",
+      "numpy": "1.26.4",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "pyomo": "6.10.1",
+      "pypower": "5.1.19",
+      "python": "3.12.12",
+      "pyyaml": "6.0.3",
+      "scipy": "1.17.0"
+    },
+    "solver": {
+      "mip_relative_gap": 1e-06,
+      "name": "highs",
+      "tee": false,
+      "threads": 4,
+      "tolerance_mw": 1e-06
+    },
+    "zero_business_payload": {
+      "points": [
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T00:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T01:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T02:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T03:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T04:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T05:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T06:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T07:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T08:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T09:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T10:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T11:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T12:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T13:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T14:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T15:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T16:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T17:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T18:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T19:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T20:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T21:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T22:00:00+00:00"
+        },
+        {
+          "flexible_demand_mw": 0.0,
+          "period": "day0_fixed_replay",
+          "physical_maximum_demand_mw": 0.0,
+          "recoverable_flexible_mw": 0.0,
+          "recovery_headroom_mw": 0.0,
+          "requested_demand_mw": 0.0,
+          "timestamp": "2020-01-01T23:00:00+00:00"
+        }
+      ],
+      "schema": "rts_gmlc_zero_dc_business_transform_v1",
+      "source_business_rule": "preserve_parent_timestamps_and_periods_zero_all_power_fields"
+    },
+    "zero_business_payload_sha256": "03f2a24b3c76c1a0b27d11ca08e09f96926eae2c89fe0d1d30bfb46c3aa55444",
+    "zero_control": {
+      "commitment_and_initial_state": "reoptimized_free_boundary_for_zero_dc_control",
+      "common_selected_n_minus_one_states_retained": true,
+      "connected_capacity_mw": 0.0,
+      "contract_call_limit_mw": 0.0,
+      "dc_bus_api_placeholder": 120,
+      "fixed_treatment_commitment_used": false,
+      "native_grid_inputs_changed": false,
+      "placeholder_is_not_a_poi_comparison": true,
+      "source_business_rule": "preserve_parent_timestamps_and_periods_zero_all_power_fields",
+      "zero_fields": [
+        "requested_demand_mw",
+        "flexible_demand_mw",
+        "recoverable_flexible_mw",
+        "physical_maximum_demand_mw",
+        "recovery_headroom_mw"
+      ]
+    }
+  },
+  "input_contract_sha256": "ea17c09e2dde55aef9f1376dc3670e1d32e1f8fd1af0426382af64c293bc3cd9",
+  "parent_treatment_outcomes_observed": true,
+  "preregistration_id": "rts_gmlc_google_day0_zero_dc_normal_ac_control_v1",
+  "schema": "rts_gmlc_zero_dc_normal_ac_control_preregistration_v1",
+  "status": "repository_local_frozen_after_treatment_outcomes_before_zero_control_solve",
+  "zero_control_outcomes_observed": false
+}

@@ -1,0 +1,138 @@
+preregistration:
+  id: rts_gmlc_google_day0_zero_dc_ac_ipopt_diagnostic_v1
+  schema: rts_gmlc_zero_dc_ac_ipopt_diagnostic_preregistration_v1
+  status: repository_local_post_outcome_diagnostic_before_full_24_mode_execution
+  externally_timestamped: false
+  primary_and_step_control_outcomes_observed: true
+  partial_ipopt_protocol_probes_observed: true
+  formal_full_24_mode_outcomes_observed: false
+  all_formal_cases_blind: false
+
+parent_step_control:
+  config_path: configs/rts_gmlc_google_day0_zero_dc_ac_step_control.yaml
+  config_sha256: 7dbc31112c41800e42fe9aa245a2749ae15dd5d41802ee209e194f0e1cc49576
+  implementation_path: experiments/run_rts_gmlc_zero_dc_ac_step_control.py
+  implementation_sha256: b44e490a4859de7e835f8c74a2866776e97cfa444dbb0f3c1a2a37f933975641
+  core_path: src/grid/rts_gmlc_ac_step_control.py
+  core_sha256: 60a75ef8aae9158d5de7ac761256edea90d5879a2a4423ae8b29743d2daa77f6
+  input_contract_sha256: b6fb282bb0318fa97a7653228a9b15ad58c05ebabe956f3313dcf87dec2a858e
+  output_directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_step_control_v1
+  preregistration_manifest_sha256: bfd86d9beb9ca639e0d4fcd579cab35ce1d6c6fea6dbfb8ba98fcdc5ad288400
+  result_manifest_sha256: 64514670595a3857438bdbfe689bdb455f39a0273dc90cdcb20c5af7f316be39
+
+official_voltage_limit_reference:
+  dataset: GridMod_RTS_GMLC_v0.2.3
+  commit: 3ece0d3725c844056132393ee252b3083dd4eab4
+  source_url: https://raw.githubusercontent.com/GridMod/RTS-GMLC/3ece0d3725c844056132393ee252b3083dd4eab4/RTS_Data/FormattedData/MATPOWER/RTS_GMLC.m
+  local_path: data/raw/rts_gmlc/v0.2.3/matpower_reference/RTS_Data/FormattedData/MATPOWER/RTS_GMLC.m
+  local_sha256: 10573aee70f793c28a0602516f85c4345e6f171512852f1162c3bb3b02ba575b
+  manifest_path: data/raw/rts_gmlc/v0.2.3/matpower_reference/SHA256SUMS
+  manifest_sha256: 0bd4a19e15969eb5ed30d1cfd4e5f13e343ca0286927497872f0c202fd2a86b2
+  expected_bus_count: 73
+  expected_uniform_vmax_pu: 1.05
+  expected_uniform_vmin_pu: 0.95
+
+observed_probe_disclosure:
+  evidence_role: exploratory_protocol_design_excluded_from_formal_full_batch_counts
+  known_success_control_hour: 0
+  known_success_control_source_ipopt_status: Solve_Succeeded
+  primary_and_step_control_failed_hours: [15, 21]
+  original_envelope_initial_strategies_probed: [source, midpoint, flat_target_midq]
+  original_envelope_all_three_probes_succeeded_at_failed_hours: false
+  original_envelope_ipopt_status_at_failed_hours: Infeasible_Problem_Detected
+  source_initial_q_balance_residual_mvar_at_failed_hours: [2.143130965107, 5.469106959392]
+  branch_rate_1p05_probe_succeeded_at_failed_hours: false
+  q_bound_plus_5_mvar_probe_succeeded_at_failed_hours: false
+  voltage_bound_plus_0p01_probe_succeeded_at_failed_hours: true
+  voltage_bound_plus_0p01_probe_max_vm_pu: 1.060000009924
+  manual_commitment_probe_claimed_as_solution: false
+  solver_reported_infeasibility_is_global_proof: false
+
+case_scope:
+  source: all_24_frozen_distributed_committable_prepared_cases
+  expected_hours: 24
+  expected_run_modes: 4
+  expected_runs: 96
+  execution_order: run_mode_then_chronological_hour_0_through_23
+  completion_policy: all_96_runs_reported_no_failure_deletion
+  run_modes:
+    - id: original_source
+      initial_strategy: source
+      branch_rate_multiplier: 1.0
+      reactive_power_bound_expansion_mvar: 0.0
+      voltage_bound_expansion_pu: 0.0
+    - id: original_midpoint
+      initial_strategy: midpoint
+      branch_rate_multiplier: 1.0
+      reactive_power_bound_expansion_mvar: 0.0
+      voltage_bound_expansion_pu: 0.0
+    - id: original_flat_target_midq
+      initial_strategy: flat_target_midq
+      branch_rate_multiplier: 1.0
+      reactive_power_bound_expansion_mvar: 0.0
+      voltage_bound_expansion_pu: 0.0
+    - id: voltage_plus_0p01_source
+      initial_strategy: source
+      branch_rate_multiplier: 1.0
+      reactive_power_bound_expansion_mvar: 0.0
+      voltage_bound_expansion_pu: 0.01
+
+solver:
+  engine: casadi_nlpsol_ipopt
+  casadi_version: 3.7.2
+  casadi_python_sha256: b55ee4543f628e2a52ff3ce94077e9929d4ca9032bf654601ec2cd7e91ee43b9
+  casadi_binary_sha256: 8d06e74e5360297686ee024522429d8d97557c387e764c510c3c7eea4cfb21bc
+  objective: squared_adjustable_pg_deviation_divided_by_base_mva_squared
+  ipopt_options:
+    ipopt.print_level: 0
+    print_time: false
+    ipopt.max_iter: 1000
+    ipopt.tol: 1.0e-9
+    ipopt.constr_viol_tol: 1.0e-8
+    ipopt.acceptable_tol: 1.0e-7
+    ipopt.acceptable_constr_viol_tol: 1.0e-6
+    ipopt.mu_strategy: adaptive
+    ipopt.fixed_variable_treatment: make_constraint
+  global_optimality_claimed: false
+  global_infeasibility_certificate_claimed: false
+
+postsolve_audit:
+  active_power_bound_tolerance_mw: 1.0e-4
+  reactive_power_bound_tolerance_mvar: 1.0e-4
+  voltage_bound_tolerance_pu: 1.0e-6
+  branch_loading_tolerance_fraction: 1.0e-6
+  branch_angle_tolerance_degree: 1.0e-6
+  fixed_generator_pg_tolerance_mw: 1.0e-6
+  offline_pg_qg_tolerance_mw_mvar: 1.0e-6
+  offline_branch_flow_tolerance_mva: 1.0e-6
+  nodal_p_q_balance_tolerance_mw_mvar: 1.0e-4
+  ybus_terminal_shunt_identity_tolerance_mva: 1.0e-6
+  returned_recomputed_branch_flow_tolerance_mva: 1.0e-6
+  reference_angle_tolerance_degree: 1.0e-6
+  objective_absolute_tolerance_mw2: 1.0e-4
+  objective_relative_tolerance: 1.0e-8
+  persisted_dynamic_solution_reconstructed_on_reload: true
+
+interpretation:
+  original_success_claim: cross_solver_local_numerical_feasibility_witness
+  original_failure_claim: not_witnessed_by_registered_multistart_no_global_infeasibility_proof
+  voltage_sensitivity_success_claim: feasible_only_after_symmetric_voltage_bound_expansion_not_original_envelope
+  voltage_sensitivity_cannot_replace_official_bounds: true
+  treatment_followup_gate: all_24_original_envelope_cases_witnessed_by_at_least_one_registered_ipopt_start
+  manual_per_hour_commitment_selection_allowed: false
+
+evidence:
+  evidence_status: derived_benchmark
+  result_evidence_ceiling: zero_dc_normal_state_cross_solver_and_voltage_assumption_diagnostic
+  normal_state_only: true
+  physical_envelope_has_response_time_evidence: false
+  causal_poi_attribution_supported: false
+  engineering_ac_parameters_available: false
+  full_n_minus_one: false
+  ac_security: false
+  security_certified: false
+  full_m6_model_input_ready: false
+  formal_vma_published: false
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_ipopt_diagnostic_v1

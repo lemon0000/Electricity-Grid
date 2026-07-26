@@ -1,0 +1,160 @@
+{
+  "all_zero_recovery_cases_blind": true,
+  "externally_timestamped": false,
+  "input_contract": {
+    "ac_opf": {
+      "added_connection_line_or_transformer": false,
+      "added_reactive_compensation": false,
+      "algorithm": "mips",
+      "branch_flow_limit": "maximum_two_terminal_apparent_power_over_continuous_rate_a",
+      "engine": "pypower_runopf",
+      "gencost_polynomial_coefficients": [
+        1.0,
+        "minus_2_times_target",
+        "target_squared"
+      ],
+      "global_optimality_claimed": false,
+      "hvdc_converter_reactive_power_modeled": false,
+      "objective": "sum_online_and_offline_generator_squared_pg_deviation_from_zero_dc_target",
+      "objective_interpretation": "minimum_active_dispatch_deviation_local_ac_opf_not_economic_cost_or_global_certificate",
+      "opf_alg": 560,
+      "opf_flow_lim": 0,
+      "pv_pq_switching_claimed": false,
+      "q_bounds": "source_qmin_qmax",
+      "q_limit_switching": false,
+      "topology_tap_shunt_and_hvdc_active_injection_fixed": true,
+      "voltage_limits_pu": [
+        0.95,
+        1.05
+      ],
+      "warm_start_claimed": false
+    },
+    "case_scope": {
+      "branch_rating": "continuous_rate_a_as_mva_proxy",
+      "commitment": "fixed_from_parent_zero_dc_dispatch",
+      "completion_policy": "all_hours_and_modes_reported_no_failure_deletion",
+      "expected_hours": 24,
+      "expected_unique_cases": 48,
+      "modes": [
+        "reference_provider",
+        "distributed_committable"
+      ],
+      "security_states": "normal_only",
+      "source_dispatch": "frozen_zero_dc_reoptimized_common_selected_n1_dispatch"
+    },
+    "config_sha256": "44abfdb5b0d8b3cdd71c34668f4b936c96e4ff01c327bc0e4ca15415a1f1f45d",
+    "evidence": {
+      "ac_security": false,
+      "causal_poi_attribution_supported": false,
+      "engineering_ac_parameters_available": false,
+      "evidence_status": "derived_benchmark",
+      "formal_vma_published": false,
+      "full_m6_model_input_ready": false,
+      "full_n_minus_one": false,
+      "result_evidence_ceiling": "zero_dc_normal_state_bounded_p_q_v_local_ac_opf_diagnostic",
+      "security_certified": false,
+      "zero_control_interpretation": "reoptimized_no_data_center_operational_counterfactual"
+    },
+    "implementation_sha256": {
+      "experiments/process_google_power_workload_day0.py": "80b4cf65650a105274ba7911a05f7d03e7849c933d63403d921cc8f081034780",
+      "experiments/run_rts_gmlc_zero_dc_ac_recovery.py": "5578cafa3cae53888970757c9c7100ea412dd6e96fd46f71c8f65e4cebd7919e",
+      "src/grid/rts_gmlc_ac_recovery.py": "729fabaa6ed2afb07c90ba2c5a0d3615773bf29ff2e4d8688a646a8bb975802c"
+    },
+    "independent_audit": {
+      "active_power_bound_tolerance_mw": 0.0001,
+      "all_numeric_results_finite": true,
+      "branch_loading_tolerance_fraction": 1e-06,
+      "fixed_generator_pg_tolerance_mw": 1e-06,
+      "nodal_p_q_balance_tolerance_mw_mvar": 0.0001,
+      "objective_absolute_tolerance_mw2": 0.0001,
+      "objective_relative_tolerance": 1e-08,
+      "offline_branch_flow_tolerance_mva": 1e-06,
+      "offline_pg_qg_tolerance_mw_mvar": 1e-06,
+      "reactive_power_bound_tolerance_mvar": 0.0001,
+      "result_identity_status_and_fixed_fields_preserved": true,
+      "solver_input_case_unchanged": true,
+      "source_controller_vg_to_optimized_vm_reported": true,
+      "voltage_bound_tolerance_pu": 1e-06
+    },
+    "interpretation": {
+      "minimum_common_mode_selected_only_if_all_24_hours_recovered": true,
+      "reference_success_distributed_failure_is_numerical_anomaly": true,
+      "solver_failure_does_not_prove_infeasibility": true,
+      "solver_failure_label": "not_recovered_by_local_solver",
+      "successful_case_claim": "local_solver_solution_passed_independent_frozen_envelope_audit",
+      "treatment_followup_allowed_only_after_zero_common_mode_24_of_24": true
+    },
+    "observed_evidence_disclosure": {
+      "amendment_004_voltage_control_probe_case": "bus120_unity_2020-01-01T00:00:00+00:00_normal",
+      "amendment_004_voltage_control_probe_formal_evidence_weight": "excluded",
+      "amendment_004_voltage_control_probe_secure": false,
+      "amendment_004_voltage_control_probe_source_amendment_id": "rts_gmlc_ac_replay_q_capable_voltage_control_amendment_004",
+      "legacy_vg_treatment_ac_opf_implementation_probe_observed": true,
+      "legacy_vg_treatment_ac_opf_probe_artifact_status": "not_formally_registered_implementation_probe",
+      "legacy_vg_treatment_ac_opf_probe_formal_evidence_weight": "excluded",
+      "legacy_vg_treatment_ac_opf_probe_outcomes_used": false,
+      "legacy_vg_treatment_ac_opf_probe_voltage_semantics": "superseded_pre_amendment_004_vg_semantics",
+      "zero_normal_ac_case_count": 24,
+      "zero_normal_ac_converged_count": 24,
+      "zero_normal_ac_secure_count": 0
+    },
+    "parent_zero_control": {
+      "config_path": "configs/rts_gmlc_google_day0_zero_dc_normal_ac_control.yaml",
+      "config_sha256": "1c98faa55dee7b6479526dda285657cce89e18cf737153902e8c4ab0883b2a1e",
+      "dc_dispatch_manifest_sha256": "c7c5cb7f418382472f2adf949e62ce4e1abb399dfe906903bacc24037d40ca4d",
+      "implementation_path": "experiments/run_rts_gmlc_zero_dc_normal_ac_control.py",
+      "implementation_sha256": "32a690a3ac5d1c8bacbcfab80e02286a4c1d42e3a4292457df4d5d835b740365",
+      "input_contract_sha256": "ea17c09e2dde55aef9f1376dc3670e1d32e1f8fd1af0426382af64c293bc3cd9",
+      "normal_ac_manifest_sha256": "68aaa104312d7ef9966649e31759a59cd874eadf5fedab1147728ace9b8b68a6",
+      "output_directory": "results/tables/rts_gmlc_google_day0_zero_dc_normal_ac_control_v1",
+      "preregistration_manifest_sha256": "ee456378a822f0a97461546a385c1230d6d40e82920399599e4050f0ef812ec8"
+    },
+    "recovery_modes": {
+      "distributed_committable": {
+        "active_power_bounds": "hourly_physical_pmin_pmax",
+        "adjustable_active_power": "all_online_committable_generators",
+        "noncommittable_fixed_disabled_and_sync_cond_active_power": "locked_to_zero_dc_target"
+      },
+      "per_hour_favorable_mode_selection": false,
+      "reference_provider": {
+        "active_power_bounds": "hourly_physical_pmin_pmax",
+        "adjustable_active_power": "unambiguous_online_committable_reference_generator_only",
+        "all_other_generators_active_power": "locked_to_zero_dc_target"
+      },
+      "response_time_or_ramp_constraint_used": false,
+      "shared_envelope_evidence": "physical_envelope_no_response_time",
+      "spin_reserve_constraint_used": false
+    },
+    "schema": "rts_gmlc_zero_dc_ac_recovery_inputs_v1",
+    "software_versions": {
+      "numpy": "1.26.4",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "pypower": "5.1.19",
+      "python": "3.12.12",
+      "pyyaml": "6.0.3",
+      "scipy": "1.17.0"
+    },
+    "solver_options": {
+      "OPF_ALG": 560,
+      "OPF_FLOW_LIM": 0,
+      "OPF_IGNORE_ANG_LIM": false,
+      "OPF_VIOLATION": 1e-08,
+      "PDIPM_COMPTOL": 1e-06,
+      "PDIPM_COSTTOL": 1e-06,
+      "PDIPM_FEASTOL": 1e-08,
+      "PDIPM_GRADTOL": 1e-06,
+      "PDIPM_MAX_IT": 150,
+      "PF_DC": false
+    }
+  },
+  "input_contract_sha256": "0ca0d8421d6f98408e59fd15d7dc0b42feab46062510cb0239888483fab60a0a",
+  "legacy_vg_treatment_ac_opf_implementation_probe_observed": true,
+  "parent_treatment_outcomes_observed": true,
+  "preregistration_id": "rts_gmlc_google_day0_zero_dc_ac_recovery_v1",
+  "schema": "rts_gmlc_zero_dc_ac_recovery_preregistration_v1",
+  "status": "repository_local_frozen_after_zero_direct_ac_outcomes_before_zero_recovery_solve",
+  "treatment_probe_evidence_role": "disclosed_implementation_diagnostic_excluded_from_zero_recovery_evidence",
+  "treatment_voltage_control_probe_observed": true,
+  "zero_normal_ac_outcomes_observed": true,
+  "zero_recovery_outcomes_observed": false
+}

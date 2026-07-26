@@ -1,0 +1,130 @@
+{
+  "ac_failed_states": [
+    "0.1:generator_22_sustained",
+    "0.1:generator_23_sustained",
+    "0.1:generator_32_sustained"
+  ],
+  "ac_restoration": [
+    {
+      "base_losses_mw": 33.28834668783293,
+      "post_remediation_failed_states": [
+        "generator_22_sustained",
+        "generator_23_sustained",
+        "generator_32_sustained"
+      ],
+      "post_remediation_states_secure": 104,
+      "raw_failed_states": [
+        "branch_4_sustained",
+        "branch_9_immediate",
+        "branch_9_sustained",
+        "branch_26_immediate",
+        "branch_26_sustained",
+        "generator_22_sustained",
+        "generator_23_sustained",
+        "generator_32_sustained"
+      ],
+      "raw_states_secure": 99,
+      "redispatch_fraction_pmax": 0.1,
+      "states_checked": 107
+    },
+    {
+      "base_losses_mw": 48.596536915129946,
+      "post_remediation_failed_states": [],
+      "post_remediation_states_secure": 107,
+      "raw_failed_states": [
+        "branch_4_sustained",
+        "branch_9_immediate",
+        "branch_9_sustained",
+        "branch_26_immediate",
+        "branch_26_sustained"
+      ],
+      "raw_states_secure": 102,
+      "redispatch_fraction_pmax": 0.5,
+      "states_checked": 107
+    }
+  ],
+  "ac_states_checked": 214,
+  "ac_states_failed": 3,
+  "ac_states_secure_after_remediation": 211,
+  "ac_states_secure_before_remediation": 201,
+  "case": "case24_ieee_rts",
+  "certification_blockers": [
+    "Redispatch limits are synthetic sensitivities without response-time evidence",
+    "Branch 10 (7-8) is an unresolved unplanned-islanding contingency",
+    "Chronological load and renewable conditions are not yet included",
+    "Some joint states could not be restored to AC feasibility"
+  ],
+  "excluded_islanding_branches": [
+    10
+  ],
+  "excluded_islanding_policy": "report_as_failure",
+  "generator_contingencies": 32,
+  "joint_state_count": 107,
+  "main_branch_contingencies": 37,
+  "redispatch_parameter_status": "synthetic_sensitivity_not_for_certification",
+  "scopf_sensitivity": [
+    {
+      "base_objective": "",
+      "excluded_branch_indices": "10",
+      "feasible": false,
+      "joint_states": 107,
+      "parameter_status": "synthetic_sensitivity_not_for_certification",
+      "redispatch_fraction_pmax": 0.0,
+      "solver_status": "error",
+      "termination_condition": "infeasible"
+    },
+    {
+      "base_objective": "",
+      "excluded_branch_indices": "10",
+      "feasible": false,
+      "joint_states": 107,
+      "parameter_status": "synthetic_sensitivity_not_for_certification",
+      "redispatch_fraction_pmax": 0.05,
+      "solver_status": "error",
+      "termination_condition": "infeasible"
+    },
+    {
+      "base_objective": 76414.42157674432,
+      "excluded_branch_indices": "10",
+      "feasible": true,
+      "joint_states": 107,
+      "parameter_status": "synthetic_sensitivity_not_for_certification",
+      "redispatch_fraction_pmax": 0.1,
+      "solver_status": "ok",
+      "termination_condition": "optimal"
+    },
+    {
+      "base_objective": 67630.80634700714,
+      "excluded_branch_indices": "10",
+      "feasible": true,
+      "joint_states": 107,
+      "parameter_status": "synthetic_sensitivity_not_for_certification",
+      "redispatch_fraction_pmax": 0.2,
+      "solver_status": "ok",
+      "termination_condition": "optimal"
+    },
+    {
+      "base_objective": 61001.24495582477,
+      "excluded_branch_indices": "10",
+      "feasible": true,
+      "joint_states": 107,
+      "parameter_status": "synthetic_sensitivity_not_for_certification",
+      "redispatch_fraction_pmax": 0.5,
+      "solver_status": "ok",
+      "termination_condition": "optimal"
+    },
+    {
+      "base_objective": 61001.244955824804,
+      "excluded_branch_indices": "10",
+      "feasible": true,
+      "joint_states": 107,
+      "parameter_status": "synthetic_sensitivity_not_for_certification",
+      "redispatch_fraction_pmax": 1.0,
+      "solver_status": "ok",
+      "termination_condition": "optimal"
+    }
+  ],
+  "security_certified": false,
+  "source_package": "pypower",
+  "source_version": "5.1.19"
+}

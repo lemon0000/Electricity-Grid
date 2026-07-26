@@ -1,0 +1,169 @@
+{
+  "T100": {
+    "censor_quarter": "q4",
+    "display_label": "q4+",
+    "quarter": null,
+    "reached": false,
+    "right_censored": true,
+    "threshold_mw": 250.0
+  },
+  "T20": {
+    "censor_quarter": null,
+    "display_label": "q1",
+    "quarter": "q1",
+    "reached": true,
+    "right_censored": false,
+    "threshold_mw": 50.0
+  },
+  "T50": {
+    "censor_quarter": null,
+    "display_label": "q3",
+    "quarter": "q3",
+    "reached": true,
+    "right_censored": false,
+    "threshold_mw": 125.0
+  },
+  "T_module": {
+    "censor_quarter": null,
+    "display_label": "q1",
+    "quarter": "q1",
+    "reached": true,
+    "right_censored": false,
+    "threshold_mw": 50.0
+  },
+  "actual_active_conditional_demand_mw": {
+    "q1": 0.0,
+    "q2": 0.0,
+    "q3": 75.0,
+    "q4": 0.0
+  },
+  "conditional_capacity_mw": {
+    "q1": 0.0,
+    "q2": 0.0,
+    "q3": 75.0,
+    "q4": 75.0
+  },
+  "firm_capacity_mw": {
+    "q1": 50.0,
+    "q2": 50.0,
+    "q3": 175.0,
+    "q4": 175.0
+  },
+  "full_trace_pass_by_quarter": {
+    "q1": true,
+    "q2": true,
+    "q3": false,
+    "q4": false
+  },
+  "interpretation": "mechanism_sensitivity_on_one_explicit_call_trace_not_event_frequency_evidence_or_chronological_grid_security_certification",
+  "layer_results": {
+    "actual": {
+      "curtailment_energy_mwh_by_quarter": {
+        "q1": 0.0,
+        "q2": 0.0,
+        "q3": 75.0,
+        "q4": 0.0
+      },
+      "event_count_by_quarter": {
+        "q1": 0,
+        "q2": 0,
+        "q3": 1,
+        "q4": 0
+      },
+      "feasible": false,
+      "feasible_by_quarter": {
+        "q1": true,
+        "q2": true,
+        "q3": false,
+        "q4": true
+      },
+      "peak_recovery_debt_mwh": 75.0,
+      "terminal_recovery_debt_mwh_by_quarter": {
+        "q1": 0.0,
+        "q2": 0.0,
+        "q3": 75.0,
+        "q4": 0.0
+      },
+      "violations": [
+        "terminal_debt_exceeded_for_period_q3"
+      ],
+      "violations_by_quarter": {
+        "q1": [],
+        "q2": [],
+        "q3": [
+          "terminal_debt_exceeded_for_period_q3"
+        ],
+        "q4": []
+      }
+    },
+    "contract_counterfactual": {
+      "curtailment_energy_mwh_by_quarter": {
+        "q1": 0.0,
+        "q2": 0.0,
+        "q3": 75.0,
+        "q4": 75.0
+      },
+      "event_count_by_quarter": {
+        "q1": 0,
+        "q2": 0,
+        "q3": 1,
+        "q4": 1
+      },
+      "feasible": false,
+      "feasible_by_quarter": {
+        "q1": true,
+        "q2": true,
+        "q3": false,
+        "q4": false
+      },
+      "peak_recovery_debt_mwh": 150.0,
+      "terminal_recovery_debt_mwh_by_quarter": {
+        "q1": 0.0,
+        "q2": 0.0,
+        "q3": 75.0,
+        "q4": 150.0
+      },
+      "violations": [
+        "terminal_debt_exceeded_for_period_q3",
+        "terminal_debt_exceeded_for_period_q4"
+      ],
+      "violations_by_quarter": {
+        "q1": [],
+        "q2": [],
+        "q3": [
+          "terminal_debt_exceeded_for_period_q3"
+        ],
+        "q4": [
+          "terminal_debt_exceeded_for_period_q4"
+        ]
+      }
+    }
+  },
+  "milestone_metric_scope": "released_capacity_model_validated_over_explicit_chronological_sensitivity_trace",
+  "network_hourly_coupling": false,
+  "parameter_status": "synthetic_chronological_witness_not_contract_or_event_evidence",
+  "recovery_headroom_basis": "released_capacity_minus_flat_layer_baseline",
+  "remaining_blockers": [
+    "data_center_hourly_workload_and_recovery_headroom_are_not_observed",
+    "failure_timing_and_frequency_are_not_observed",
+    "hourly_trace_is_not_coupled_to_chronological_unit_commitment_or_ac_security",
+    "envelope_parameters_are_synthetic_sensitivities"
+  ],
+  "security_certified": false,
+  "temporally_qualified_capacity_mw": {
+    "q1": 50.0,
+    "q2": 50.0,
+    "q3": 175.0,
+    "q4": 175.0
+  },
+  "timeline_hours": 8784,
+  "timeline_hours_by_quarter": {
+    "q1": 2184,
+    "q2": 2184,
+    "q3": 2208,
+    "q4": 2208
+  },
+  "timeline_load_values_used_in_envelope": false,
+  "timeline_source": "rts_gmlc_area1_2020_timestamps_only",
+  "trace_definition": "one_full_active_x_call_at_first_hour_of_each_positive_x_quarter"
+}

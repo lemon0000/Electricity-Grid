@@ -1,0 +1,68 @@
+{
+  "candidate": {
+    "area": 1,
+    "base_kv": 138.0,
+    "bus_name": "Alger",
+    "bus_type": "PQ",
+    "candidate_id": "poi_bus_108",
+    "candidate_order": 0,
+    "colocated_generator_uids": [],
+    "dc_bus": 108,
+    "incident_ac_branch_count": 3,
+    "incident_continuous_rating_sum_mw": 525.0,
+    "legacy_seen_anchor": true,
+    "remaining_rating_after_largest_incident_branch_mw": 350.0,
+    "static_load_mw": 171.0,
+    "stratum": "local_138kv_median_strength"
+  },
+  "economic_outcomes_published": false,
+  "empty_incident_chronology_sha256": "edc97d55f4ff4110cadc22b8ac656b0cae10e6033cfae9584100d7341cd0ed08",
+  "excluded_islanding_branch_uids": [
+    "B11",
+    "C11"
+  ],
+  "hours": 24,
+  "initial_state_status": "optimization_derived_free_boundary_not_observed_chronology",
+  "maximum_normal_loading_fraction": 0.986293737,
+  "preregistration_id": "rts_gmlc_google_day0_multi_poi_selected_n1_dc_scuc_v1",
+  "prescreen_generates_comparison_ranking": false,
+  "purpose": "common_security_union_only_not_candidate_ranking",
+  "registration_contract_sha256": "16d9edc57d965e802dd17106a3a0aa7a99ae93f0f493ba977d8490573ce3fb78",
+  "schema": "rts_gmlc_multi_poi_prescreen_v1",
+  "selected_branch_uids": [
+    "A12-1",
+    "B22",
+    "C6",
+    "CA-1"
+  ],
+  "selected_generator_uids": [
+    "121_NUCLEAR_1",
+    "213_CC_3",
+    "313_CC_1"
+  ],
+  "selected_state_ids": [
+    "normal",
+    "branch_A12-1_immediate",
+    "branch_A12-1_sustained",
+    "branch_B22_immediate",
+    "branch_B22_sustained",
+    "branch_C6_immediate",
+    "branch_C6_sustained",
+    "branch_CA-1_immediate",
+    "branch_CA-1_sustained",
+    "generator_121_NUCLEAR_1_sustained",
+    "generator_213_CC_3_sustained",
+    "generator_313_CC_1_sustained"
+  ],
+  "selection_scope": "maximum_normal_loading_internal_branch_per_area_plus_interarea_branch_and_largest_thermal_per_area_excluding_islanding",
+  "solver_acceptance_audit": {
+    "accepted": true,
+    "configured_mip_relative_gap": 1e-06,
+    "maximum_constraint_violation": 0.0,
+    "maximum_integrality_violation": 0.0,
+    "solver_message": "<undefined>",
+    "solver_status": "ok",
+    "solver_threads": 4,
+    "termination_condition": "optimal"
+  }
+}

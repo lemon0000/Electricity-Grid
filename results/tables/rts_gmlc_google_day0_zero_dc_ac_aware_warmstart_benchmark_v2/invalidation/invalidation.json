@@ -1,0 +1,48 @@
+{
+  "benchmark_id": "rts_gmlc_google_day0_zero_dc_ac_aware_warmstart_benchmark_v2",
+  "byte_level_source_difference_observed": true,
+  "candidate_or_joint_ac_result": false,
+  "competitive_solve_count": 2,
+  "completed_runs_allowed_for_successor_selection": false,
+  "completed_runs_are_diagnostic_only": true,
+  "diagnostic_completed_runs": [
+    {
+      "certified_lower_bound": null,
+      "certified_upper_bound": null,
+      "eligible": false,
+      "first_finite_incumbent_seconds": null,
+      "method": "highs_cold_start",
+      "relative_gap_to_incumbent": null,
+      "repetition": 1,
+      "residual_audit_passed": false,
+      "solve_seconds": 3606.6961934
+    },
+    {
+      "certified_lower_bound": 0.243281471,
+      "certified_upper_bound": 0.243281471,
+      "eligible": true,
+      "first_finite_incumbent_seconds": 2.8,
+      "method": "appsi_highs_full_mip_start",
+      "relative_gap_to_incumbent": 0.0,
+      "repetition": 1,
+      "residual_audit_passed": true,
+      "solve_seconds": 494.8550648
+    }
+  ],
+  "evidence_sha256": {
+    "appsi_highs_full_mip_start_r1.log": "4f119884c406390a72c54b8f787584fbfc0a3f934a36fbc1662af2e3639ca979",
+    "attempt.json": "277c8ef2003b78ef874d94b82200ee400fa9ecd3eb203801537be7ce0d0eecd6",
+    "highs_cold_start_r1.log": "d5722d2e0a556a81162d5da30361801ed700e0b2a8311a1306e6cde3cbf4bf53",
+    "launcher.stderr.log": "4e72d983f78e5004ec83f47061a32f1c1557336694718476d02631d98ece5746",
+    "progress.jsonl": "ae51d5fcfed115010bef388dd85b23472e780588b46da4f8f3b2ee62d45699cd"
+  },
+  "failure": "shared_ac_aware_core_line_endings_changed_after_warm_r1_and_strict_v3_hash_gate_stopped_before_warm_r2",
+  "input_contract_sha256": "66a8bc50430387842bae7766703eb777da0cfa2396359a234f0c325ace90ddc8",
+  "planned_solve_count": 4,
+  "preparation_manifest_sha256": "213d41ed5e512c67a8f1b3fe209ebcd82a1864941b27d946aca95c4ed35233d9",
+  "restored_core_sha256": "bdd106e00bf1750b8867e9e3127c797054aa6f8ca9456821c4eb252ddf93d824",
+  "schema": "rts_gmlc_zero_dc_ac_aware_warmstart_invalidation_v1",
+  "semantic_source_difference_observed": false,
+  "status": "invalidated_after_two_of_four_runs_due_to_shared_dependency_byte_drift",
+  "successor_must_rerun_complete_registered_matrix": true
+}

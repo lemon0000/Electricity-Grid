@@ -1,0 +1,124 @@
+schema: rts_gmlc_v4_repair_005_formal_successor_config_v1
+
+preregistration:
+  id: rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_005
+  schema: rts_gmlc_zero_dc_ac_aware_commitment_preregistration_v4_repair_005
+  status: repository_local_cost_decision_bisection_successor_before_formal_candidate_generation
+  candidate_frontier_outcomes_observed: false
+  joint_ac_outcomes_observed: false
+
+base_v4:
+  config_path: configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4.yaml
+  config_sha256: b107aba3908b04bbd677994ac272eeb98d35d5d957978dd42a70f5e44672b84b
+  runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4.py
+  runner_sha256: af0f727f29365955d534b0827fbb289f2c6d48cc2423b737eb980b4f41cf47cd
+  scientific_config_changed: false
+  joint_ac_protocol_changed: false
+
+predecessor_repair_004:
+  root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_004
+  config_path: configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_004.yaml
+  config_sha256: 83770f7963ba2f9a0163da03d3301bd0753e0b8cfdd60377440aefa4b2025576
+  formal_runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_004_formal.py
+  formal_runner_sha256: 97cea7fdd83a6af9faff371034e2103de130d832fed7f162d8f7b43d737805c2
+  monitor_path: experiments/monitor_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_004.py
+  monitor_sha256: 1bd4301f696edabbd79abbbd51342a635b74931d4d8adc90d0c68bd2b0c397a0
+  launcher_path: scripts/start_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_004.ps1
+  launcher_sha256: 66c4f8854d721811dd709f1de3567d8299fa3b275664aafb10de7e1eafad4cbe
+  preregistration_manifest_sha256: 925bad1b3e0da8573774cc77eb303835b2e0bf35b2074b914d1248dddf891041
+  input_contract_sha256: 4aaf38250e9a72ffcc475103ccad4f62781e8c17794425ad67986af744480e7b
+  failed_attempt_id: formal_repair_004_20260720T051834Z
+  failed_attempt_pid: 68116
+  failed_progress_sha256: 149675c2c7d4072088b2d62856b5484aa2893563dc85b4a21dbbb424b2d4c41c
+  failed_attempt_file_sha256:
+    attempt.json: 9a0ca686e9013f848d52cf3d7c3b1aed01fddf3e869acb7ce3d1164f2371c765
+    launcher.request.json: d8add83b868eb3e2818aeb3e2e082bb30ce12169671a3fcfba3a31fc40d87399
+    launcher.started.json: 839e32e0e689ddb7907049ec7356a01f314591605ed2e625546192c4810e3384
+    launcher.stderr.log: b4a8693ce3796cc8068242f8ee1708c86d0041620defd09b4eb66bf37c62386b
+    launcher.stdout.log: d631838e5d8c064904b20271a6cac1632b1906e847088c848d4a8b68dacdbd18
+    progress.jsonl: 149675c2c7d4072088b2d62856b5484aa2893563dc85b4a21dbbb424b2d4c41c
+    05_q_proxy_delta_0p0200/cost_normalization/cost_normalization/cost_normalization__iteration_01__master.log: 93e176a9718695ad4480b75c0c083c2628a143caaa8850dc87858d843585f3a7
+  failed_lease_relative_path: execution_lease/history/eb06af41870f4dbb827f814b3326b356.failed
+  failed_lease_sha256: 233528700fc3b88eb37a674248db1d496e4fc9552bf2573832da7ee6aa8b8561
+  failed_terminal_sha256: bc7401ca1b70f56c8a67ee8ecb7a6bbd2ed4d415079730ec09bcae480e4fa33c
+  invalidation_relative_path: invalidation
+  invalidation_manifest_sha256: 7d5ceca44d73698846f3d738a007909074b3990463695deebf4a89179d21b21e
+  required_invalidation_status: invalidated_after_four_valid_checkpoints_and_candidate_5_audited_cost_incumbent_but_direct_cost_bound_gap_exceeded_frozen_maximum
+  completed_prefix_count: 4
+  candidate_checkpoint_manifest_sha256s:
+    - 2bd1d1c6843c6397248d4cd5531f1911c2f91036174b00af0877987d01b74c41
+    - 98ab92e1a59f668203a66988b324cca75d764c4ed440fdf1c547d2279a00e8b2
+    - 42830c97b66be3f80231757aaa0f1a1732cfa5fa4d400f0c33be3b508c764f51
+    - f929c097922937f4f85ca86c3714da2095060a10d59b1a14dfc3a51ca6d0759c
+  candidate_json_sha256s:
+    - 60317c6f2ead2467d6a6e3b7e23dab692d054e8cb3e8f11691144ec2f32f737e
+    - 451a6cb559489f67e0b3a1d2e4f0fc02b9295238b0cf05aee06c9cc99df7c0b0
+    - 913c1f46d03f506c0c04f794eab5b6c64aabd084ac15d0f7f74b25472fe33b67
+    - 5efa62039ad86e3129d51d3ceba7a198311c9cfe9eb7048e3f78acf128d72448
+  candidate_frontier_published: false
+  joint_ac_solver_call_count: 0
+  predecessor_resume_allowed: false
+
+formal_successor:
+  algorithm_id: direct_exact_cg_then_proxy_level_set_then_cost_decision_bisection_repair_005
+  checkpoint_schema: rts_gmlc_v4_repair_005_cost_bisection_candidate_checkpoint_v1
+  prefix_evidence_schema: rts_gmlc_v4_repair_005_prefix_import_evidence_v1
+  hybrid_evidence_schema: rts_gmlc_v4_repair_005_hybrid_cost_evidence_v1
+  float_serialization: python_json_roundtrip_full_precision_v1
+  prefix_candidate_count: 4
+  proxy_algorithm_changed: false
+  direct_cost_phase_first_for_new_candidates: true
+  cost_fallback_trigger: exact_final_bound_certificate_exceeds_maximum_acceptance_only
+  cost_fallback_method: budget_capped_cost_decision_bisection
+  cost_decision_round_schema: rts_gmlc_cost_decision_round_v1
+  combined_cost_certificate_schema: rts_gmlc_v4_repair_005_combined_cost_certificate_v1
+  cost_match_tolerance_usd: 1.0e-4
+  cost_decision_maximum_rounds: 4
+  cost_decision_cross_attempt_resume_allowed: false
+  target_relative_gap: 1.0e-4
+  maximum_accepted_relative_gap_to_feasible_incumbent: 1.0e-3
+  direct_cost_ineligible_bounds_seed_bisection_only_for_exact_trigger: true
+  timeout_or_ambiguous_is_infeasibility_evidence: false
+  decision_derived_bound_is_ordinary_dual_bound: false
+  source_prefix_imported_as_recomputed: false
+  all_six_checkpoints_required_before_frontier: true
+  frontier_required_before_joint_ac: true
+  candidate_controls:
+    - ordinal: 1
+      relative_cost_budget_delta: 0.001
+      mode: verified_repair_004_prefix
+    - ordinal: 2
+      relative_cost_budget_delta: 0.0025
+      mode: verified_repair_004_prefix
+    - ordinal: 3
+      relative_cost_budget_delta: 0.005
+      mode: verified_repair_004_prefix
+    - ordinal: 4
+      relative_cost_budget_delta: 0.01
+      mode: verified_repair_004_prefix
+    - ordinal: 5
+      relative_cost_budget_delta: 0.02
+      mode: direct_then_cost_decision_bisection
+    - ordinal: 6
+      relative_cost_budget_delta: 0.05
+      mode: direct_then_cost_decision_bisection
+
+implementation:
+  cost_bisection_path: src/grid/rts_gmlc_cost_bisection.py
+  cost_bisection_sha256: 13b500206a6b51c8d5368985d02c2e953f32cdb9e8384265e55f3c6f20cc1854
+  parent_formal_runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_004_formal.py
+  parent_formal_runner_sha256: 97cea7fdd83a6af9faff371034e2103de130d832fed7f162d8f7b43d737805c2
+  invalidation_publisher_path: experiments/record_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_004_invalidation.py
+  invalidation_publisher_sha256: 1c1583095b6af3e47b0e789ebba1e7da196a3d5598a7e1487bfa7ac99718ce4f
+  runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_005_formal.py
+  runner_sha256: 989ef4fb376bcc97ae43b8fb2ca8dd33f159028fee523bed646bc958fd59fe08
+  monitor_path: experiments/monitor_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_005.py
+  monitor_sha256: 6cfe8383ec54d74b41e9e213fddae52f36ed014fafa4c9e1ef468ca482751a85
+  launcher_path: scripts/start_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_005.ps1
+  launcher_sha256: 0db926b4d82ad169199cc90ae7ba373e6c8edc45f17e89d2be6cdd1ec628d99b
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_005
+
+logging:
+  directory: results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_005

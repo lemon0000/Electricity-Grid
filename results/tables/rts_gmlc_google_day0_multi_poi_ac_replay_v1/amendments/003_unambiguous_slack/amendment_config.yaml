@@ -1,0 +1,45 @@
+amendment:
+  id: rts_gmlc_ac_replay_unambiguous_slack_amendment_003
+  schema: rts_gmlc_ac_replay_implementation_amendment_v1
+  parent_preregistration_id: rts_gmlc_google_day0_multi_poi_ac_replay_v1
+  parent_input_contract_sha256: 7dc28350aaa137a3f99a90a83365ebafb58c8de739a2999a5a93ed4ea0babd41
+  parent_amendment_id: rts_gmlc_ac_replay_grid_point_timezone_amendment_002
+  parent_amendment_implementation_sha256: 4435727b3250af380b1ec4f20f0e6ba700902d6e6199da971c5758a9fced157a
+  parent_batch_manifest_sha256: 51ba90b32ca7702d92b49fa70832a56160b41ad9ee286990d2d937142ee9e05e
+  status: repository_local_amendment_after_full_batch_slack_audit_failure
+  externally_timestamped: false
+
+observed_before_amendment:
+  full_parent_batch_outcomes_observed: true
+  parent_case_count: 2304
+  failure_detail: pypower_internal_generator_sort_selected_colocated_zero_pmax_rtpv_as_actual_slack
+  demonstrated_case:
+    dc_bus: 108
+    power_factor_case: lagging_095
+    timestamp: '2020-01-01T18:00:00+00:00'
+    state_id: branch_CA-1_immediate
+    reported_reference_generator_uid: 213_CC_3
+    actual_slack_generator_uid: 213_RTPV_1
+    actual_slack_adjustment_mw: 236.37316929152658
+  parent_batch_status: invalidated_for_final_ac_conclusions_retained_as_diagnostic
+
+scope:
+  permitted_change: select_reference_bus_with_exactly_one_online_generator_and_that_generator_committable
+  reference_ordering: maximum_up_headroom_then_down_headroom_then_q_range_then_lowest_bus_uid
+  forbidden_changes:
+    - parent_config
+    - representative_candidates
+    - hours_or_security_states
+    - power_factor_cases
+    - source_or_parent_dispatch_artifacts
+    - grid_point_values
+    - load_or_hvdc_mapping
+    - voltage_q_or_rating_assumptions
+    - power_flow_options
+    - q_limit_switching
+    - restoration_or_redispatch
+    - result_acceptance_or_summary_rules
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_multi_poi_ac_replay_v1
+  corrected_results_subdirectory: results_unambiguous_slack

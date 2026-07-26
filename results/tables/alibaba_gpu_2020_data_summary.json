@@ -1,0 +1,85 @@
+{
+  "archives": 4,
+  "checks": {
+    "all_table_samples_valid": true,
+    "archive_set": true,
+    "documentation_commit": true,
+    "sha256_manifest": true,
+    "source_profile": true
+  },
+  "compressed_bytes": 152674779,
+  "dataset": "Alibaba PAI GPU Cluster Trace v2020",
+  "documentation_commit": "0d0f3f1efdbf1add6a7bcc63676eafbd1eb11f71",
+  "evidence": {
+    "calendar_dates_real": false,
+    "checkpoint_progress_available": false,
+    "continuous_power_available": false,
+    "deadline_available": false,
+    "recovery_parameters_observed": false,
+    "relative_intervals_preserved": true,
+    "stage1_uses_lifetime_utilization": false,
+    "status": "observed_ai_workload_trace"
+  },
+  "license": "CC-BY-4.0",
+  "profile": "stage1_core",
+  "tables": [
+    {
+      "archive": "pai_group_tag_table.tar.gz",
+      "columns": [
+        "inst_id",
+        "user",
+        "gpu_type_spec",
+        "group",
+        "workload"
+      ],
+      "compressed_bytes": 55064781,
+      "member": "pai_group_tag_table.csv",
+      "sample_rows_validated": 100
+    },
+    {
+      "archive": "pai_job_table.tar.gz",
+      "columns": [
+        "job_name",
+        "inst_id",
+        "user",
+        "status",
+        "start_time",
+        "end_time"
+      ],
+      "compressed_bytes": 62065432,
+      "member": "pai_job_table.csv",
+      "sample_rows_validated": 100
+    },
+    {
+      "archive": "pai_machine_spec.tar.gz",
+      "columns": [
+        "machine",
+        "gpu_type",
+        "cap_cpu",
+        "cap_mem",
+        "cap_gpu"
+      ],
+      "compressed_bytes": 30449,
+      "member": "pai_machine_spec.csv",
+      "sample_rows_validated": 100
+    },
+    {
+      "archive": "pai_task_table.tar.gz",
+      "columns": [
+        "job_name",
+        "task_name",
+        "inst_num",
+        "status",
+        "start_time",
+        "end_time",
+        "plan_cpu",
+        "plan_mem",
+        "plan_gpu",
+        "gpu_type"
+      ],
+      "compressed_bytes": 35514117,
+      "member": "pai_task_table.csv",
+      "sample_rows_validated": 100
+    }
+  ]
+}

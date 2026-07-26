@@ -1,0 +1,142 @@
+pilot:
+  id: rts_gmlc_google_day0_zero_dc_ac_aware_formulation_pilot_v1
+  schema: rts_gmlc_zero_dc_ac_aware_formulation_pilot_v1
+  status: repository_local_formulation_pilot_after_solver_benchmark_v1
+  evidence_scope: nonformal_formulation_runtime_pilot_no_candidate_or_ac_claim
+  horizon_start_index: 0
+  horizon_hours: 6
+  selected_state_count: 24
+  relative_cost_budget_delta: 0.0075
+  candidate_or_joint_ac_outcomes_used: false
+
+provenance:
+  v2_root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v2
+  v2_config_path: configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v2.yaml
+  v2_config_sha256: 91a173d8c24d2aed6a91261b6c22130ddd7ae0bb1c5053cc62270f7fa1494b9a
+  v2_runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment.py
+  v2_runner_sha256: 5ace7a4d314f3a7031c8c30f63fa6fa9262c6196784baab15dc4ef62f8978c11
+  v2_preregistration_manifest_sha256: ee71eca750a4c6e8819c8d3b3c7de803c0736efa3327b5f89aec0d91edeff708
+  v2_operational_termination_manifest_sha256: e8bcef7466a1dfa44e4c0a444eb297fbf7160cf1f7596485c86a6fd9984b799b
+  v2_input_contract_sha256: 7cb101bfbdc26994354fd77d6525bfc2de5deaf97496cc970cea805ead9857d0
+  zero_dispatch_root: results/tables/rts_gmlc_google_day0_zero_dc_normal_ac_control_v1/dc_dispatch
+  zero_dispatch_manifest_sha256: c7c5cb7f418382472f2adf949e62ce4e1abb399dfe906903bacc24037d40ca4d
+  zero_dispatch_summary_sha256: ecfadfbc5e5d42b5170623405983f3ecd3cfe11c22c4d1d0d8e36ce696e8c4c6
+  expected_full_horizon_cost_usd: 1108454.611081534
+  solver_benchmark_root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_solver_benchmark_v1
+  solver_benchmark_config_path: configs/rts_gmlc_zero_dc_ac_aware_solver_benchmark.yaml
+  solver_benchmark_config_sha256: b2c5f0e40a3f79ce90e198da5c174b0e829434bec647cdd1042651d96dab4019
+  solver_benchmark_script_path: experiments/benchmark_rts_gmlc_zero_dc_ac_aware_solver.py
+  solver_benchmark_script_sha256: f0a060f02f9a01278d35bd5dfe7ccc683490593302a26aa7fc4832c9a5c5653b
+  solver_benchmark_preparation_manifest_sha256: df3ed026af2bfbf77169e816713f361ef36374f89c255cb84de1621677f3485b
+  solver_benchmark_result_manifest_sha256: 4b05c7d7fcbd8f64ddb9eb61d4ee15c571a7905d8ebd453ac19d07cbf56c63d1
+  solver_benchmark_summary_sha256: 4688a7280ca79694b731e3f1ae76ac171c2fcb75d058983c0a97a89a173d925a
+  solver_benchmark_selection_status: selected_by_preregistered_nonobjective_rule
+  solver_benchmark_selected_threads: 4
+  scuc_core_path: src/grid/rts_gmlc_scuc.py
+  scuc_core_sha256: 1101b21cbdab0cdacd6755578208ce7d28cd3e6e04f932d397119a4dde2b6cfe
+  exact_cg_module_path: src/grid/rts_gmlc_exact_cg.py
+  progress_helper_path: src/solvers/mip_progress.py
+
+formulations:
+  included:
+    - full_state_monolith
+    - exact_selected_state_constraint_generation
+  execution_order:
+    - full_state_monolith_r1
+    - exact_selected_state_constraint_generation_r1
+    - exact_selected_state_constraint_generation_r2
+    - full_state_monolith_r2
+  stage_executed: proxy_maximization
+  cost_normalization_executed: false
+  both_formulations_use_identical_full_problem_contract: true
+  no_formal_candidate_selection: true
+
+constraint_generation:
+  initial_active_state_source: parent_zero_final_active_state_ids
+  initial_active_state_ids:
+    - normal
+    - branch_A34_immediate
+    - branch_C12-1_sustained
+    - branch_C27_immediate
+    - branch_CA-1_immediate
+    - branch_CA-1_sustained
+    - generator_121_NUCLEAR_1_sustained
+    - generator_313_CC_1_sustained
+    - branch_A11_immediate
+  screen_policy_by_stage:
+    proxy_maximization: rescreen_every_inactive_state_after_every_master
+    cost_normalization: rescreen_every_inactive_state_after_every_master
+  screen_statuses: [feasible, certified_infeasible, unresolved]
+  promote_statuses: [certified_infeasible, unresolved]
+  unresolved_is_not_infeasibility_claim: true
+  shared_variable_components:
+    - commitment
+    - startup
+    - shutdown
+    - normal_generation
+    - normal_dc_flow
+    - normal_angle_degrees
+    - normal_branch_flow
+    - segment_power
+    - reserve_up
+    - reactive_proxy
+  shared_values_use_full_precision: true
+  shared_value_rounding_or_clamping_allowed: false
+  cross_contingency_shared_recourse_allowed: false
+  final_verification: all_24_state_fixed_shared_lp_and_independent_residual_audit
+  proxy_certificate_lower_bound: final_full_feasible_incumbent_proxy
+  proxy_certificate_upper_bound: minimum_valid_dual_upper_bound_across_all_masters
+
+budget:
+  baseline: published_parent_zero_dispatch_first_6h_reconstructed_with_scuc_cost_formula
+  full_horizon_reconstruction_absolute_tolerance_usd: 1.0e-6
+  cost_cap_absolute_tolerance_usd: 1.0e-4
+
+solver:
+  name: highs
+  threads: 4
+  threads_source: published_solver_benchmark_v1_nonobjective_selection
+  repetitions: 2
+  target_mip_relative_gap: 1.0e-4
+  mip_absolute_gap: 0.0
+  feasibility_tolerance: 1.0e-6
+  bound_consistency_tolerance: 1.0e-6
+  random_seed: 0
+  time_limit_seconds_per_call: 120.0
+  mip_report_level: 2
+  mip_min_logging_interval_seconds: 5.0
+  time_limit_incumbent_allowed_for_screening: true
+  eligibility_requires_final_full_audit_and_actual_gap: true
+
+timing:
+  heartbeat_interval_seconds: 30.0
+  measured_scope:
+    - model_build
+    - every_master_solve
+    - every_inactive_state_screen_build_and_solve
+    - active_set_rebuild
+    - final_full_state_fixed_shared_lp_build_solve_and_audit
+  native_solver_logs_included: true
+  durable_jsonl_events_fsync: true
+  completed_live_logs_snapshotted_into_atomic_artifact: true
+
+expected_full_model_size:
+  base_variables: 53922
+  base_constraints: 87508
+  proxy_stage_variables: 53923
+  proxy_stage_constraints: 87545
+
+selection:
+  eligibility_rule: both_repetitions_pass_formulation_specific_full_audit_and_actual_gap
+  ranking_rule:
+    - minimum_median_total_elapsed_seconds
+    - minimum_maximum_total_elapsed_seconds
+    - formulation_order
+  objective_value_used: false
+  no_eligible_formulation_rule: inconclusive_no_formulation_selected
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_formulation_pilot_v1
+  log_directory: results/logs/rts_gmlc_zero_dc_ac_aware_formulation_pilot_v1
+  preparation_subdirectory: preparation
+  comparison_subdirectory: comparison

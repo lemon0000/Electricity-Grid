@@ -1,0 +1,47 @@
+{
+  "amendment_config_sha256": "53458ae4c63a25448c485d42f4135e51654755e4cc74438f088ea489793c7945",
+  "amendment_id": "rts_gmlc_multi_poi_outcome_handling_amendment_001",
+  "amendment_implementation_sha256": "89222c695e120c2067dfc9e586cb1cb78e3cfe3c7315580a42eb37756434902e",
+  "externally_timestamped": false,
+  "observed_before_amendment": {
+    "diagnostic_result": "free_boundary_continuous_commitment_relaxation_infeasible_for_state_subset",
+    "failed_candidate_bus": 208,
+    "failed_termination": "active_state_scuc_infeasible",
+    "feasible_candidate_buses": [
+      108,
+      120
+    ],
+    "remaining_full_candidate_outcomes_unseen": [
+      220,
+      308,
+      320
+    ]
+  },
+  "observed_feasible_candidate_manifest_sha256": {
+    "108": "3c686a142e5936a9a6f03dac9876f7d55907851c6336a5c31a63bd197037e194",
+    "120": "c5baf3ca95c44e4bbd5dd1de1372bc897d9da47c8fc7cb975d0d6ff00a5fb0dd"
+  },
+  "parent_common_security_contract_sha256": "7865c7544817acd2d0dd6a461766862af52f7175eb24f2c1466f52e70115aa87",
+  "parent_common_security_manifest_sha256": "96d476b082d96b6204eca6093c9daf4f4f1aae175076122042960b0d9358347e",
+  "parent_preregistration_manifest_sha256": "841b3108683d62cdb8950956aca2830222b063e0aa6e21bc606f683848e04d1d",
+  "parent_registration_contract_sha256": "16d9edc57d965e802dd17106a3a0aa7a99ae93f0f493ba977d8490573ce3fb78",
+  "schema": "rts_gmlc_multi_poi_outcome_amendment_v1",
+  "scope": {
+    "forbidden_changes": [
+      "candidate_set",
+      "candidate_order",
+      "common_security_states",
+      "grid_or_business_inputs",
+      "model_constraints",
+      "solver_settings",
+      "comparison_or_representative_rules",
+      "candidate_substitution"
+    ],
+    "infeasibility_certificate_rule": "first_infeasible_prefix_of_frozen_common_states_under_free_boundary_continuous_commitment_relaxation",
+    "infeasible_candidate_counts_as_completed": true,
+    "infeasible_candidate_is_excluded_from_feasible_cost_and_ac_representative_sets": true,
+    "permitted_change": "serialize_certified_model_infeasibility_and_finalize_mixed_outcomes",
+    "reason": "original_runner_only_serialized_feasible_candidate_results"
+  },
+  "status": "repository_local_amendment_after_bus_208_infeasibility"
+}

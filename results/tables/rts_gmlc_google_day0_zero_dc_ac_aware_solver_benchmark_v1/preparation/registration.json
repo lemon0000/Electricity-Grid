@@ -1,0 +1,125 @@
+{
+  "benchmark_contract": {
+    "benchmark": {
+      "candidate_or_joint_ac_outcomes_used": false,
+      "evidence_scope": "nonformal_solver_configuration_pilot_no_candidate_or_ac_claim",
+      "horizon_hours": 6,
+      "horizon_start_index": 0,
+      "id": "rts_gmlc_google_day0_zero_dc_ac_aware_solver_benchmark_v1",
+      "schema": "rts_gmlc_zero_dc_ac_aware_solver_benchmark_v1",
+      "selected_state_count_per_hour": 24,
+      "status": "repository_local_solver_pilot_after_v2_operational_termination"
+    },
+    "budget": {
+      "baseline": "published_parent_zero_dispatch_first_6h_reconstructed_with_scuc_cost_formula",
+      "belongs_to_formal_v2_grid": false,
+      "cost_cap_absolute_tolerance_usd": 0.0001,
+      "full_horizon_reconstruction_absolute_tolerance_usd": 1e-06,
+      "proxy_floor_absolute_tolerance": 1e-07,
+      "relative_delta": 0.0075
+    },
+    "expected_model_size": {
+      "base_constraints": 87508,
+      "base_variables": 53922,
+      "cost_cap_constraints_added": 1,
+      "proxy_stage_total_constraints": 87545,
+      "proxy_stage_total_variables": 53923,
+      "proxy_variables_added": 1,
+      "reactive_proxy_constraints_added": 36
+    },
+    "formulation": {
+      "cost_normalization_exclusion_reason": "time_limited_proxy_targets_would_make_cross_configuration_cost_stages_noncomparable",
+      "cost_normalization_executed": false,
+      "exact_selected_state_constraint_generation_included": false,
+      "exclusion_reason": "no_independent_exact_equivalence_and_termination_proof_for_proxy_objective",
+      "full_state_monolith": "all_24_preregistered_selected_n_minus_one_states_in_one_model",
+      "included": [
+        "full_state_monolith"
+      ],
+      "stages_constructed": [
+        "proxy_maximization",
+        "cost_normalization"
+      ],
+      "stages_executed": [
+        "proxy_maximization"
+      ]
+    },
+    "parent": {
+      "expected_full_horizon_cost_usd": 1108454.611081534,
+      "input_contract_sha256": "7cb101bfbdc26994354fd77d6525bfc2de5deaf97496cc970cea805ead9857d0",
+      "operational_termination_manifest_sha256": "e8bcef7466a1dfa44e4c0a444eb297fbf7160cf1f7596485c86a6fd9984b799b",
+      "preregistration_id": "rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v2",
+      "preregistration_manifest_sha256": "ee71eca750a4c6e8819c8d3b3c7de803c0736efa3327b5f89aec0d91edeff708",
+      "termination_status": "terminated_before_candidate_frontier_publication_and_before_any_joint_ac_solver_call",
+      "v2_config_path": "configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v2.yaml",
+      "v2_root": "results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v2",
+      "zero_dispatch_manifest_sha256": "c7c5cb7f418382472f2adf949e62ce4e1abb399dfe906903bacc24037d40ca4d",
+      "zero_dispatch_root": "results/tables/rts_gmlc_google_day0_zero_dc_normal_ac_control_v1/dc_dispatch"
+    },
+    "selection": {
+      "eligibility_rule": "both_repetitions_attain_target_gap_and_pass_solution_audit",
+      "no_eligible_configuration_rule": "inconclusive_no_configuration_selected",
+      "objective_value_used": false,
+      "ranking_rule": [
+        "minimum_median_solver_wall_seconds",
+        "minimum_maximum_solver_wall_seconds",
+        "minimum_thread_count"
+      ]
+    },
+    "solver_matrix": {
+      "execution_order": [
+        "t1_r1",
+        "t4_r1",
+        "t8_r1",
+        "t8_r2",
+        "t4_r2",
+        "t1_r2"
+      ],
+      "feasibility_tolerance": 1e-06,
+      "mip_absolute_gap": 0.0,
+      "mip_min_logging_interval_seconds": 5.0,
+      "mip_report_level": 2,
+      "name": "highs",
+      "random_seed": 0,
+      "repetitions": 2,
+      "target_mip_relative_gap": 0.0001,
+      "threads": [
+        1,
+        4,
+        8
+      ],
+      "time_limit_seconds_per_stage": 120.0
+    }
+  },
+  "benchmark_id": "rts_gmlc_google_day0_zero_dc_ac_aware_solver_benchmark_v1",
+  "config_sha256": "b2c5f0e40a3f79ce90e198da5c174b0e829434bec647cdd1042651d96dab4019",
+  "parent": {
+    "operational_termination_manifest_sha256": "e8bcef7466a1dfa44e4c0a444eb297fbf7160cf1f7596485c86a6fd9984b799b",
+    "preregistration_manifest_sha256": "ee71eca750a4c6e8819c8d3b3c7de803c0736efa3327b5f89aec0d91edeff708",
+    "registration_sha256": "44d27ec7b03cb361a40553eff462e5de5bd46780c0ff15e026050d24a6e283df",
+    "source_snapshot_hashes": {
+      "configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v2.yaml": "91a173d8c24d2aed6a91261b6c22130ddd7ae0bb1c5053cc62270f7fa1494b9a",
+      "experiments/run_rts_gmlc_zero_dc_ac_aware_commitment.py": "5ace7a4d314f3a7031c8c30f63fa6fa9262c6196784baab15dc4ef62f8978c11",
+      "experiments/run_rts_gmlc_zero_dc_normal_ac_control.py": "32a690a3ac5d1c8bacbcfab80e02286a4c1d42e3a4292457df4d5d835b740365",
+      "src/grid/rts_gmlc_ac.py": "dafb8b307b074f3cf9079c5e80f8e2a1077550e9d0dec93edc4dc33676dc8c0e",
+      "src/grid/rts_gmlc_ac_aware_commitment.py": "bdd106e00bf1750b8867e9e3127c797054aa6f8ca9456821c4eb252ddf93d824",
+      "src/grid/rts_gmlc_ac_ipopt.py": "45426f1649fae663dc5262e86f6f3d042d0a3c810cda5d694faa29fb2b4c1362",
+      "src/grid/rts_gmlc_ac_recovery.py": "729fabaa6ed2afb07c90ba2c5a0d3615773bf29ff2e4d8688a646a8bb975802c",
+      "src/grid/rts_gmlc_ac_step_control.py": "60a75ef8aae9158d5de7ac761256edea90d5879a2a4423ae8b29743d2daa77f6",
+      "src/grid/rts_gmlc_scuc.py": "1101b21cbdab0cdacd6755578208ce7d28cd3e6e04f932d397119a4dde2b6cfe"
+    },
+    "termination_sha256": "90dd58ff6680aaa616f93214da58dfb0995b25a81148cd957394319b620cf521",
+    "zero_dispatch_manifest_sha256": "c7c5cb7f418382472f2adf949e62ce4e1abb399dfe906903bacc24037d40ca4d"
+  },
+  "schema": "rts_gmlc_zero_dc_ac_aware_solver_benchmark_preparation_v1",
+  "script_sha256": "f0a060f02f9a01278d35bd5dfe7ccc683490593302a26aa7fc4832c9a5c5653b",
+  "software_versions": {
+    "highspy": "1.15.1",
+    "numpy": "1.26.4",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pyomo": "6.10.1",
+    "python": "3.12.12",
+    "pyyaml": "6.0.3"
+  },
+  "status": "prepared_not_run"
+}

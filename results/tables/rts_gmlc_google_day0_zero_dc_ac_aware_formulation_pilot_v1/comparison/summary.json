@@ -1,0 +1,78 @@
+{
+  "all_runs_attempted": true,
+  "cost_budget_usd": 155156.906268331,
+  "evidence_scope": "nonformal_formulation_runtime_pilot_no_candidate_or_ac_claim",
+  "formal_candidate_result": false,
+  "horizon_hours": 6,
+  "input_contract_sha256": "4c28c2b792c48c3c794d33cc05c419fd99927d2bd74732c6148d2ba10d707b34",
+  "joint_ac_solver_call_count": 0,
+  "live_log_directory": "results/logs/rts_gmlc_zero_dc_ac_aware_formulation_pilot_v1",
+  "objective_value_used_for_selection": false,
+  "parent_full_cost_usd": 1108454.61108153,
+  "parent_horizon_cost_usd": 154001.892077748,
+  "pilot_id": "rts_gmlc_google_day0_zero_dc_ac_aware_formulation_pilot_v1",
+  "preparation_manifest_sha256": "ae3c19536341c0767f43dcbddb7ccabd60c9607f0baae7ab152507e750cf763a",
+  "relative_cost_budget_delta": 0.0075,
+  "run_count": 4,
+  "schema": "rts_gmlc_zero_dc_ac_aware_formulation_pilot_result_v1",
+  "selection": {
+    "formulations": [
+      {
+        "completed_repetitions": 2,
+        "eligible": false,
+        "eligible_repetitions": 0,
+        "formulation": "full_state_monolith",
+        "maximum_total_elapsed_seconds": 129.0135085,
+        "median_total_elapsed_seconds": 128.9087469
+      },
+      {
+        "completed_repetitions": 2,
+        "eligible": true,
+        "eligible_repetitions": 2,
+        "formulation": "exact_selected_state_constraint_generation",
+        "maximum_total_elapsed_seconds": 54.5015214,
+        "median_total_elapsed_seconds": 54.2794516
+      }
+    ],
+    "objective_value_used": false,
+    "selected_formulation": "exact_selected_state_constraint_generation",
+    "status": "selected_by_preregistered_nonobjective_runtime_rule"
+  },
+  "software_versions": {
+    "highspy": "1.15.1",
+    "numpy": "1.26.4",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pyomo": "6.10.1",
+    "python": "3.12.12",
+    "pyyaml": "6.0.3"
+  },
+  "state_count": 24,
+  "state_ids": [
+    "normal",
+    "branch_A11_immediate",
+    "branch_A11_sustained",
+    "branch_A12-1_immediate",
+    "branch_A12-1_sustained",
+    "branch_A34_immediate",
+    "branch_A34_sustained",
+    "branch_B12-1_immediate",
+    "branch_B12-1_sustained",
+    "branch_B22_immediate",
+    "branch_B22_sustained",
+    "branch_B6_immediate",
+    "branch_B6_sustained",
+    "branch_C12-1_immediate",
+    "branch_C12-1_sustained",
+    "branch_C27_immediate",
+    "branch_C27_sustained",
+    "branch_C6_immediate",
+    "branch_C6_sustained",
+    "branch_CA-1_immediate",
+    "branch_CA-1_sustained",
+    "generator_121_NUCLEAR_1_sustained",
+    "generator_213_CC_3_sustained",
+    "generator_313_CC_1_sustained"
+  ],
+  "target_mip_relative_gap": 0.0001,
+  "threads": 4
+}

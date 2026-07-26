@@ -1,0 +1,46 @@
+{
+  "amendment_config_sha256": "ee0436c39530791ac055fedd5ec91624ba3926985c6f39b251d28f1ee504f2f1",
+  "amendment_id": "rts_gmlc_ac_replay_unambiguous_slack_amendment_003",
+  "amendment_implementation_sha256": "6a9f2050a7882ef4c7fae72daefbc018d966ad46977bed22748383f15fe26ac0",
+  "externally_timestamped": false,
+  "observed_before_amendment": {
+    "demonstrated_case": {
+      "actual_slack_adjustment_mw": 236.373169292,
+      "actual_slack_generator_uid": "213_RTPV_1",
+      "dc_bus": 108,
+      "power_factor_case": "lagging_095",
+      "reported_reference_generator_uid": "213_CC_3",
+      "state_id": "branch_CA-1_immediate",
+      "timestamp": "2020-01-01T18:00:00+00:00"
+    },
+    "failure_detail": "pypower_internal_generator_sort_selected_colocated_zero_pmax_rtpv_as_actual_slack",
+    "full_parent_batch_outcomes_observed": true,
+    "parent_batch_status": "invalidated_for_final_ac_conclusions_retained_as_diagnostic",
+    "parent_case_count": 2304
+  },
+  "parent_amendment_id": "rts_gmlc_ac_replay_grid_point_timezone_amendment_002",
+  "parent_amendment_implementation_sha256": "4435727b3250af380b1ec4f20f0e6ba700902d6e6199da971c5758a9fced157a",
+  "parent_amendment_manifest_sha256": "245428330be041b882d04217c67152682987dc10454a31791170b7f35c063442",
+  "parent_batch_manifest_sha256": "51ba90b32ca7702d92b49fa70832a56160b41ad9ee286990d2d937142ee9e05e",
+  "parent_input_contract_sha256": "7dc28350aaa137a3f99a90a83365ebafb58c8de739a2999a5a93ed4ea0babd41",
+  "schema": "rts_gmlc_ac_replay_implementation_amendment_v1",
+  "scope": {
+    "forbidden_changes": [
+      "parent_config",
+      "representative_candidates",
+      "hours_or_security_states",
+      "power_factor_cases",
+      "source_or_parent_dispatch_artifacts",
+      "grid_point_values",
+      "load_or_hvdc_mapping",
+      "voltage_q_or_rating_assumptions",
+      "power_flow_options",
+      "q_limit_switching",
+      "restoration_or_redispatch",
+      "result_acceptance_or_summary_rules"
+    ],
+    "permitted_change": "select_reference_bus_with_exactly_one_online_generator_and_that_generator_committable",
+    "reference_ordering": "maximum_up_headroom_then_down_headroom_then_q_range_then_lowest_bus_uid"
+  },
+  "status": "repository_local_amendment_after_full_batch_slack_audit_failure"
+}

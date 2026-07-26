@@ -1,0 +1,51 @@
+{
+  "ac_review_status": "pending_preregistered_rts_gmlc_benchmark_ac_replay_not_engineering_certification",
+  "ac_security": false,
+  "all_candidates_completed": true,
+  "amendment_id": "rts_gmlc_multi_poi_outcome_handling_amendment_001",
+  "amendment_implementation_sha256": "89222c695e120c2067dfc9e586cb1cb78e3cfe3c7315580a42eb37756434902e",
+  "candidate_count": 6,
+  "candidate_substitution_used": false,
+  "evidence_status": "derived_benchmark",
+  "feasible_candidate_bus_ids": [
+    108,
+    120,
+    220,
+    320
+  ],
+  "formal_vma_published": false,
+  "full_n_minus_one": false,
+  "infeasible_candidates_excluded_from_cost_and_ac_representative_sets": true,
+  "model_infeasible_candidate_bus_ids": [
+    208,
+    308
+  ],
+  "parent_common_security_contract_sha256": "7865c7544817acd2d0dd6a461766862af52f7175eb24f2c1466f52e70115aa87",
+  "parent_registration_contract_sha256": "16d9edc57d965e802dd17106a3a0aa7a99ae93f0f493ba977d8490573ce3fb78",
+  "representative_selection_among_feasible_candidates": {
+    "ac_representative_bus_ids": [
+      120,
+      108
+    ],
+    "certified_overlap_bus_ids": [
+      120
+    ],
+    "certified_unique_minimum": true,
+    "maximum_stress_representative_bus": 108,
+    "minimum_upper_bound_usd": 1207456.214789805,
+    "numerical_minimum_upper_bound_bus": 120,
+    "primary_cost_representative_bus": 120,
+    "representative_reasons": [
+      {
+        "dc_bus": 120,
+        "reason": "unique_certified_minimum"
+      },
+      {
+        "dc_bus": 108,
+        "reason": "maximum_common_selected_state_stress"
+      }
+    ]
+  },
+  "schema": "rts_gmlc_multi_poi_mixed_outcome_aggregate_v1",
+  "security_certified": false
+}

@@ -1,0 +1,240 @@
+{
+  "ac_security": false,
+  "all_other_common_model_constraints_retained": true,
+  "amendment_id": "rts_gmlc_multi_poi_outcome_handling_amendment_001",
+  "amendment_implementation_sha256": "89222c695e120c2067dfc9e586cb1cb78e3cfe3c7315580a42eb37756434902e",
+  "candidate": {
+    "area": 3,
+    "base_kv": 138.0,
+    "bus_name": "Carrel",
+    "bus_type": "PQ",
+    "candidate_id": "poi_bus_308",
+    "candidate_order": 4,
+    "colocated_generator_uids": [
+      "308_RTPV_1"
+    ],
+    "dc_bus": 308,
+    "incident_ac_branch_count": 3,
+    "incident_continuous_rating_sum_mw": 525.0,
+    "legacy_seen_anchor": false,
+    "remaining_rating_after_largest_incident_branch_mw": 350.0,
+    "static_load_mw": 171.0,
+    "stratum": "local_138kv_median_strength"
+  },
+  "candidate_substituted": false,
+  "certificate_implication": "the_infeasible_lp_relaxation_is_a_superset_of_the_common_state_mixed_integer_model_so_the_candidate_mip_is_infeasible",
+  "certificate_rule": "first_infeasible_prefix_of_frozen_common_states_under_free_boundary_continuous_commitment_relaxation",
+  "commitment_integrality_relaxed": true,
+  "engineering_infeasibility_claimed": false,
+  "evidence_status": "derived_benchmark",
+  "farkas_ray_exported": false,
+  "first_infeasible_added_state_id": "branch_C12-1_immediate",
+  "fixed_initial_state_used": false,
+  "full_n_minus_one": false,
+  "infeasible_prefix_state_ids": [
+    "normal",
+    "branch_A11_immediate",
+    "branch_A11_sustained",
+    "branch_A12-1_immediate",
+    "branch_A12-1_sustained",
+    "branch_A34_immediate",
+    "branch_A34_sustained",
+    "branch_B12-1_immediate",
+    "branch_B12-1_sustained",
+    "branch_B22_immediate",
+    "branch_B22_sustained",
+    "branch_B6_immediate",
+    "branch_B6_sustained",
+    "branch_C12-1_immediate"
+  ],
+  "outcome_status": "model_infeasible",
+  "parent_common_security_contract_sha256": "7865c7544817acd2d0dd6a461766862af52f7175eb24f2c1466f52e70115aa87",
+  "parent_registration_contract_sha256": "16d9edc57d965e802dd17106a3a0aa7a99ae93f0f493ba977d8490573ce3fb78",
+  "prefix_diagnostic_audits": [
+    {
+      "added_state_id": "branch_A11_immediate",
+      "prefix_state_count": 2,
+      "solver_audit": {
+        "accepted": true,
+        "configured_mip_relative_gap": 1e-06,
+        "maximum_constraint_violation": 0.0,
+        "maximum_integrality_violation": 0.0,
+        "solver_message": "<undefined>",
+        "solver_status": "ok",
+        "solver_threads": 4,
+        "termination_condition": "optimal"
+      }
+    },
+    {
+      "added_state_id": "branch_A11_sustained",
+      "prefix_state_count": 3,
+      "solver_audit": {
+        "accepted": true,
+        "configured_mip_relative_gap": 1e-06,
+        "maximum_constraint_violation": 0.0,
+        "maximum_integrality_violation": 0.0,
+        "solver_message": "<undefined>",
+        "solver_status": "ok",
+        "solver_threads": 4,
+        "termination_condition": "optimal"
+      }
+    },
+    {
+      "added_state_id": "branch_A12-1_immediate",
+      "prefix_state_count": 4,
+      "solver_audit": {
+        "accepted": true,
+        "configured_mip_relative_gap": 1e-06,
+        "maximum_constraint_violation": 0.0,
+        "maximum_integrality_violation": 0.0,
+        "solver_message": "<undefined>",
+        "solver_status": "ok",
+        "solver_threads": 4,
+        "termination_condition": "optimal"
+      }
+    },
+    {
+      "added_state_id": "branch_A12-1_sustained",
+      "prefix_state_count": 5,
+      "solver_audit": {
+        "accepted": true,
+        "configured_mip_relative_gap": 1e-06,
+        "maximum_constraint_violation": 0.0,
+        "maximum_integrality_violation": 0.0,
+        "solver_message": "<undefined>",
+        "solver_status": "ok",
+        "solver_threads": 4,
+        "termination_condition": "optimal"
+      }
+    },
+    {
+      "added_state_id": "branch_A34_immediate",
+      "prefix_state_count": 6,
+      "solver_audit": {
+        "accepted": true,
+        "configured_mip_relative_gap": 1e-06,
+        "maximum_constraint_violation": 0.0,
+        "maximum_integrality_violation": 0.0,
+        "solver_message": "<undefined>",
+        "solver_status": "ok",
+        "solver_threads": 4,
+        "termination_condition": "optimal"
+      }
+    },
+    {
+      "added_state_id": "branch_A34_sustained",
+      "prefix_state_count": 7,
+      "solver_audit": {
+        "accepted": true,
+        "configured_mip_relative_gap": 1e-06,
+        "maximum_constraint_violation": 0.0,
+        "maximum_integrality_violation": 0.0,
+        "solver_message": "<undefined>",
+        "solver_status": "ok",
+        "solver_threads": 4,
+        "termination_condition": "optimal"
+      }
+    },
+    {
+      "added_state_id": "branch_B12-1_immediate",
+      "prefix_state_count": 8,
+      "solver_audit": {
+        "accepted": true,
+        "configured_mip_relative_gap": 1e-06,
+        "maximum_constraint_violation": 1e-09,
+        "maximum_integrality_violation": 0.0,
+        "solver_message": "<undefined>",
+        "solver_status": "ok",
+        "solver_threads": 4,
+        "termination_condition": "optimal"
+      }
+    },
+    {
+      "added_state_id": "branch_B12-1_sustained",
+      "prefix_state_count": 9,
+      "solver_audit": {
+        "accepted": true,
+        "configured_mip_relative_gap": 1e-06,
+        "maximum_constraint_violation": 0.0,
+        "maximum_integrality_violation": 0.0,
+        "solver_message": "<undefined>",
+        "solver_status": "ok",
+        "solver_threads": 4,
+        "termination_condition": "optimal"
+      }
+    },
+    {
+      "added_state_id": "branch_B22_immediate",
+      "prefix_state_count": 10,
+      "solver_audit": {
+        "accepted": true,
+        "configured_mip_relative_gap": 1e-06,
+        "maximum_constraint_violation": 1e-09,
+        "maximum_integrality_violation": 0.0,
+        "solver_message": "<undefined>",
+        "solver_status": "ok",
+        "solver_threads": 4,
+        "termination_condition": "optimal"
+      }
+    },
+    {
+      "added_state_id": "branch_B22_sustained",
+      "prefix_state_count": 11,
+      "solver_audit": {
+        "accepted": true,
+        "configured_mip_relative_gap": 1e-06,
+        "maximum_constraint_violation": 1e-09,
+        "maximum_integrality_violation": 0.0,
+        "solver_message": "<undefined>",
+        "solver_status": "ok",
+        "solver_threads": 4,
+        "termination_condition": "optimal"
+      }
+    },
+    {
+      "added_state_id": "branch_B6_immediate",
+      "prefix_state_count": 12,
+      "solver_audit": {
+        "accepted": true,
+        "configured_mip_relative_gap": 1e-06,
+        "maximum_constraint_violation": 0.0,
+        "maximum_integrality_violation": 0.0,
+        "solver_message": "<undefined>",
+        "solver_status": "ok",
+        "solver_threads": 4,
+        "termination_condition": "optimal"
+      }
+    },
+    {
+      "added_state_id": "branch_B6_sustained",
+      "prefix_state_count": 13,
+      "solver_audit": {
+        "accepted": true,
+        "configured_mip_relative_gap": 1e-06,
+        "maximum_constraint_violation": 0.0,
+        "maximum_integrality_violation": 0.0,
+        "solver_message": "<undefined>",
+        "solver_status": "ok",
+        "solver_threads": 4,
+        "termination_condition": "optimal"
+      }
+    },
+    {
+      "added_state_id": "branch_C12-1_immediate",
+      "prefix_state_count": 14,
+      "solver_audit": {
+        "accepted": false,
+        "configured_mip_relative_gap": 1e-06,
+        "maximum_constraint_violation": null,
+        "maximum_integrality_violation": null,
+        "solver_message": "<undefined>",
+        "solver_status": "error",
+        "solver_threads": 4,
+        "termination_condition": "infeasible"
+      }
+    }
+  ],
+  "schema": "rts_gmlc_multi_poi_infeasible_candidate_v1",
+  "security_certified": false,
+  "termination_class": "free_boundary_continuous_commitment_relaxation_infeasible"
+}

@@ -1,0 +1,69 @@
+{
+  "amendment_id": "rts_gmlc_google_day0_zero_dc_ac_ipopt_serialization_amendment_v2",
+  "externally_timestamped": false,
+  "input_contract": {
+    "config_sha256": "f775f935dde758d17d8b969d186670d0285779095d48aa3e1a6ba434c5c87b1e",
+    "deterministic_transformation": {
+      "branch_detail_action": "byte_for_byte_copy",
+      "bus_detail_action": "byte_for_byte_copy",
+      "corrected_column_count": 70,
+      "corrected_unique_column_count": 70,
+      "generator_detail_action": "byte_for_byte_copy",
+      "numeric_cell_reformatting_allowed": false,
+      "parent_result_validator_required": true,
+      "remove_duplicate_zero_based_position": 25,
+      "retain_audit_zero_based_position_before_removal": 43,
+      "solver_call_count": 0
+    },
+    "evidence": {
+      "ac_security": false,
+      "evidence_status": "derived_benchmark",
+      "formal_vma_published": false,
+      "full_m6_model_input_ready": false,
+      "result_evidence_ceiling": "zero_dc_normal_state_cross_solver_and_voltage_assumption_diagnostic",
+      "security_certified": false
+    },
+    "implementation_sha256": {
+      "experiments/run_rts_gmlc_zero_dc_ac_ipopt_serialization_amended.py": "9e35e9bc7cdc820058efc64d4adddac0d793a1fe22afd0fa87bec7e844c11291"
+    },
+    "interpretation": {
+      "corrected_v2_is_canonical_tabular_artifact": true,
+      "parent_v1_retained_as_transparent_superseded_serialization": true,
+      "scientific_outcomes_changed": false,
+      "treatment_followup_gate_rewritten": false
+    },
+    "observed_serialization_issue": {
+      "detail_files_affected": false,
+      "duplicate_field": "solver_objective_mw2",
+      "duplicate_values_identical_for_all_rows": true,
+      "duplicate_zero_based_positions": [
+        25,
+        43
+      ],
+      "file": "ipopt_cases.csv",
+      "numerical_result_ambiguity": false,
+      "parent_column_count": 71,
+      "parent_row_count": 96,
+      "parent_unique_column_count": 70,
+      "summary_affected": false
+    },
+    "parent_v1": {
+      "config_path": "configs/rts_gmlc_google_day0_zero_dc_ac_ipopt_diagnostic.yaml",
+      "config_sha256": "b088d4867aab2e24c3f54685dd04f09519c42b46ad4423830140e7af1c436e25",
+      "core_path": "src/grid/rts_gmlc_ac_ipopt.py",
+      "core_sha256": "45426f1649fae663dc5262e86f6f3d042d0a3c810cda5d694faa29fb2b4c1362",
+      "implementation_path": "experiments/run_rts_gmlc_zero_dc_ac_ipopt_diagnostic.py",
+      "implementation_sha256": "0f83c4f3f029603ac27ddb61e87eca85d9b72edd2deb892d116da9975dd2deb0",
+      "input_contract_sha256": "158b820aca40cc3bf80109cbcd6a51d2cf459be8c6166899e46ae211ff6d016b",
+      "output_directory": "results/tables/rts_gmlc_google_day0_zero_dc_ac_ipopt_diagnostic_v1",
+      "preregistration_manifest_sha256": "0826e298ffd96a5f893ea8dd31231adb68153fcf5b8f7b0c723dabdd8e449224",
+      "result_manifest_sha256": "d9f81179aa95078d4362257ef19156bcbb47bceb5583654e7250caae3f99e1b5"
+    },
+    "schema": "rts_gmlc_zero_dc_ac_ipopt_serialization_inputs_v2"
+  },
+  "input_contract_sha256": "9c6c9efef56fa0f88921fa06655714e47d33089afea0e75fadaa51b2ad254e28",
+  "parent_outcomes_observed": true,
+  "schema": "rts_gmlc_zero_dc_ac_ipopt_serialization_amendment_preregistration_v2",
+  "solver_rerun_allowed": false,
+  "status": "repository_local_post_outcome_deterministic_serialization_correction"
+}

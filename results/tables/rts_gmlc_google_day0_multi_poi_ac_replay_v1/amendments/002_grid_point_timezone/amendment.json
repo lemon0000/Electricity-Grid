@@ -1,0 +1,33 @@
+{
+  "amendment_config_sha256": "25d775afefc0fdf8d1128e56e0052c62b05d454b1b54d068fa4bbf28e321fa50",
+  "amendment_id": "rts_gmlc_ac_replay_grid_point_timezone_amendment_002",
+  "amendment_implementation_sha256": "4435727b3250af380b1ec4f20f0e6ba700902d6e6199da971c5758a9fced157a",
+  "externally_timestamped": false,
+  "observed_before_amendment": {
+    "batch_ac_case_outcomes_observed": false,
+    "failure_detail": "naive_grid_timestamp_did_not_match_aware_parent_artifact_timestamp",
+    "failure_stage": "before_first_ac_case_configuration_or_power_flow",
+    "failure_type": "KeyError"
+  },
+  "parent_amendment_id": "rts_gmlc_ac_replay_grid_point_lookup_amendment_001",
+  "parent_amendment_implementation_sha256": "bf628231bb1b32b8b8d2b7ddcc631ebca1d4c7d41b7a647444e542276a0dcb4b",
+  "parent_amendment_manifest_sha256": "5819dcf3394900b941510abe0cb19bbc3864e68a9dac1288dbf36f88e7b80674",
+  "parent_input_contract_sha256": "7dc28350aaa137a3f99a90a83365ebafb58c8de739a2999a5a93ed4ea0babd41",
+  "schema": "rts_gmlc_ac_replay_implementation_amendment_v1",
+  "scope": {
+    "forbidden_changes": [
+      "parent_config",
+      "representative_candidates",
+      "hours_or_security_states",
+      "power_factor_cases",
+      "source_or_parent_artifacts",
+      "grid_point_numerical_fields",
+      "ac_case_assumptions",
+      "power_flow_options",
+      "ac_case_module",
+      "result_acceptance_or_summary_rules"
+    ],
+    "permitted_change": "replace_mapped_grid_point_timestamp_with_same_instant_parent_business_timestamp"
+  },
+  "status": "repository_local_amendment_after_pre_batch_timezone_key_failure"
+}

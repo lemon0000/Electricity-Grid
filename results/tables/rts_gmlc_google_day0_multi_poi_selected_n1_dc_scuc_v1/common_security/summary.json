@@ -1,0 +1,151 @@
+{
+  "all_prescreen_selected_branches_retained": true,
+  "candidate_prescreens": [
+    {
+      "dc_bus": 108,
+      "prescreen_manifest_sha256": "8ec65568dfad0271addaa975d2b23a1269f9d743dbc02b2d75ddfd82bfaf8ee3",
+      "selected_branch_uids": [
+        "A12-1",
+        "B22",
+        "C6",
+        "CA-1"
+      ],
+      "selected_generator_uids": [
+        "121_NUCLEAR_1",
+        "213_CC_3",
+        "313_CC_1"
+      ]
+    },
+    {
+      "dc_bus": 120,
+      "prescreen_manifest_sha256": "3318730fc330e02dd4620156d3c67f04373eb1e3ead45f2e5cc02a897add314c",
+      "selected_branch_uids": [
+        "A11",
+        "B6",
+        "C27",
+        "CA-1"
+      ],
+      "selected_generator_uids": [
+        "121_NUCLEAR_1",
+        "213_CC_3",
+        "313_CC_1"
+      ]
+    },
+    {
+      "dc_bus": 208,
+      "prescreen_manifest_sha256": "d339a5f898f15b7372e8d5367e062304b3bb95021a35e264385d3f759ca89151",
+      "selected_branch_uids": [
+        "A34",
+        "B12-1",
+        "C6",
+        "CA-1"
+      ],
+      "selected_generator_uids": [
+        "121_NUCLEAR_1",
+        "213_CC_3",
+        "313_CC_1"
+      ]
+    },
+    {
+      "dc_bus": 220,
+      "prescreen_manifest_sha256": "a6673b4ea8fab2e00d95e61f21e4903947d3b0a6bd3331b073e3b470806251a3",
+      "selected_branch_uids": [
+        "A34",
+        "B12-1",
+        "C6",
+        "CA-1"
+      ],
+      "selected_generator_uids": [
+        "121_NUCLEAR_1",
+        "213_CC_3",
+        "313_CC_1"
+      ]
+    },
+    {
+      "dc_bus": 308,
+      "prescreen_manifest_sha256": "86b0475df22a003d586864dcea079e1e6d96b2c8848e4650c2c8e36958faa0fb",
+      "selected_branch_uids": [
+        "A34",
+        "B12-1",
+        "C12-1",
+        "CA-1"
+      ],
+      "selected_generator_uids": [
+        "121_NUCLEAR_1",
+        "213_CC_3",
+        "313_CC_1"
+      ]
+    },
+    {
+      "dc_bus": 320,
+      "prescreen_manifest_sha256": "3f3836241b82aa884c5d5dc2e2c35cbf406df994c9d4e93efe42d773d492bccd",
+      "selected_branch_uids": [
+        "A34",
+        "B12-1",
+        "C27",
+        "CA-1"
+      ],
+      "selected_generator_uids": [
+        "121_NUCLEAR_1",
+        "213_CC_3",
+        "313_CC_1"
+      ]
+    }
+  ],
+  "common_security_contract": {
+    "branch_uids": [
+      "A11",
+      "A12-1",
+      "A34",
+      "B12-1",
+      "B22",
+      "B6",
+      "C12-1",
+      "C27",
+      "C6",
+      "CA-1"
+    ],
+    "excluded_islanding_branch_uids": [
+      "B11",
+      "C11"
+    ],
+    "generator_uids": [
+      "121_NUCLEAR_1",
+      "213_CC_3",
+      "313_CC_1"
+    ],
+    "selection_scope": "pre_registered_common_nonislanding_ac_branches_and_committable_generators",
+    "state_ids": [
+      "normal",
+      "branch_A11_immediate",
+      "branch_A11_sustained",
+      "branch_A12-1_immediate",
+      "branch_A12-1_sustained",
+      "branch_A34_immediate",
+      "branch_A34_sustained",
+      "branch_B12-1_immediate",
+      "branch_B12-1_sustained",
+      "branch_B22_immediate",
+      "branch_B22_sustained",
+      "branch_B6_immediate",
+      "branch_B6_sustained",
+      "branch_C12-1_immediate",
+      "branch_C12-1_sustained",
+      "branch_C27_immediate",
+      "branch_C27_sustained",
+      "branch_C6_immediate",
+      "branch_C6_sustained",
+      "branch_CA-1_immediate",
+      "branch_CA-1_sustained",
+      "generator_121_NUCLEAR_1_sustained",
+      "generator_213_CC_3_sustained",
+      "generator_313_CC_1_sustained"
+    ]
+  },
+  "common_security_contract_sha256": "7865c7544817acd2d0dd6a461766862af52f7175eb24f2c1466f52e70115aa87",
+  "derivation_rule": "sorted_union_of_all_candidate_prescreen_branch_uids",
+  "post_prescreen_state_deletion_permitted": false,
+  "preregistration_id": "rts_gmlc_google_day0_multi_poi_selected_n1_dc_scuc_v1",
+  "registration_contract_sha256": "16d9edc57d965e802dd17106a3a0aa7a99ae93f0f493ba977d8490573ce3fb78",
+  "schema": "rts_gmlc_multi_poi_common_security_v1"
+}

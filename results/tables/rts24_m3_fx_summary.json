@@ -1,0 +1,163 @@
+{
+  "T100": {
+    "censor_quarter": "q4",
+    "display_label": "q4+",
+    "quarter": null,
+    "reached": false,
+    "right_censored": true,
+    "threshold_mw": 250.0
+  },
+  "T20": {
+    "censor_quarter": "q4",
+    "display_label": "q4+",
+    "quarter": null,
+    "reached": false,
+    "right_censored": true,
+    "threshold_mw": 50.0
+  },
+  "T50": {
+    "censor_quarter": "q4",
+    "display_label": "q4+",
+    "quarter": null,
+    "reached": false,
+    "right_censored": true,
+    "threshold_mw": 125.0
+  },
+  "T_module": {
+    "censor_quarter": "q4",
+    "display_label": "q4+",
+    "quarter": null,
+    "reached": false,
+    "right_censored": true,
+    "threshold_mw": 50.0
+  },
+  "ac_validation_scope": "not_run_missing_expansion_mva_reactive_and_chronological_network_parameters",
+  "access_shortfall_cost_synthetic_units": 27300000.0,
+  "access_shortfall_mw": {
+    "q1": 0.0,
+    "q2": 50.0,
+    "q3": 0.0,
+    "q4": 0.0
+  },
+  "active_conditional_demand_mw": {
+    "q1": 0.0,
+    "q2": 0.0,
+    "q3": 75.0,
+    "q4": 0.0
+  },
+  "all_modeled_layers_constraints_satisfied": true,
+  "breach_diagnostics_enabled": false,
+  "canonical_dispatch_primary_cost_deviation_synthetic_units": 0.0,
+  "canonical_dispatch_primary_objective_synthetic_units": 495930461.47444606,
+  "capacity_interpretation": "fixed_contract_capacity_separate_from_actual_connected_demand",
+  "case": "case24_ieee_rts",
+  "certification_blockers": [
+    "fixed_fx_policy_is_synthetic_and_not_optimized",
+    "static_network_gate_is_mw_only_temporal_envelope_evaluated_separately",
+    "static_m3_has_zero_chronologically_validated_hours",
+    "synthetic_redispatch_without_response_time_evidence",
+    "branch_10_unplanned_islanding_excluded",
+    "expansion_and_fx_ac_validation_not_run_missing_engineering_parameters",
+    "fixed_online_generators_without_chronological_commitment",
+    "deterministic_load_only_quarters_without_renewables_or_uncertainty",
+    "synthetic_objective_units_not_calibrated_to_currency_year",
+    "generator_outages_have_no_separate_immediate_frequency_state"
+  ],
+  "chronological_sensitivity_evaluated_separately": true,
+  "chronological_sensitivity_summary_path": "results/tables/rts24_m3_fx_chronology_summary.json",
+  "conditional_breach_after_contract_call_allowed": false,
+  "conditional_capacity_mw": {
+    "q1": 0.0,
+    "q2": 0.0,
+    "q3": 75.0,
+    "q4": 75.0
+  },
+  "connected_demand_mw": {
+    "q1": 50.0,
+    "q2": 50.0,
+    "q3": 250.0,
+    "q4": 125.0
+  },
+  "contingency_call_treatment": "minimum_call_feasibility_certificate_not_event_cost",
+  "continuous_window_status": "not_validated_no_chronological_network_trajectory",
+  "contract_counterfactual_dispatch_interpretation": "independent_counterfactual_dispatch_not_transition_from_actual",
+  "cost_interpretation": "direct_convex_qp_numerical_solution_then_l1_linear_feasibility_projection_and_minimum_call",
+  "excluded_islanding_branches": [
+    10
+  ],
+  "feasible": true,
+  "firm_breach_allowed": false,
+  "firm_capacity_mw": {
+    "q1": 50.0,
+    "q2": 50.0,
+    "q3": 175.0,
+    "q4": 175.0
+  },
+  "firm_demand_mw": {
+    "q1": 50.0,
+    "q2": 50.0,
+    "q3": 175.0,
+    "q4": 125.0
+  },
+  "fixed_plan_parameter_status": "synthetic_fixed_policy_mechanism_test_not_optimized",
+  "fixed_policy_optimized": false,
+  "generator_state_layer_rows": 28248,
+  "investment_cost_synthetic_units": 25000000.0,
+  "loading_tolerance_fraction": 1e-06,
+  "milestone_metric_scope": "released_capacity_threshold_in_static_dc_state_set_with_declared_window_assumption",
+  "minimum_call_certificate_interpretation": "global_sum_relative_to_layer_specific_reference_dispatches_across_mutually_exclusive_states_and_two_layers_for_tie_break_only",
+  "minimum_call_certificate_mw_sum": 0.0,
+  "modeled_state_layer_rows": 856,
+  "modeled_states_per_layer_quarter": 107,
+  "native_load_shedding_allowed": false,
+  "objective_at_repaired_numerical_qp_dispatch_synthetic_units": 495930461.47444606,
+  "objective_unit_basis": "synthetic_objective_units_not_calibrated_currency_year",
+  "operating_cost_exact_recalculation_synthetic_units": 443630461.47444606,
+  "planning_model": "deterministic_fixed_fx_policy_mw_only",
+  "planning_parameter_status": "synthetic_benchmark_not_site_evidence",
+  "power_tolerance_mw": 1e-06,
+  "primary_linear_repair_acceptance_interpretation": "numerical_feasibility_projection_envelopes_not_optimality_gap_or_error_certificate",
+  "primary_linear_repair_generation_movement_tolerance_mw": 1e-05,
+  "primary_linear_repair_max_generation_movement_mw": 2.5666508918220643e-07,
+  "primary_linear_repair_objective_deviation_synthetic_units": -0.040376484394073486,
+  "primary_linear_repair_objective_deviation_tolerance_synthetic_units": 4.959304614744461,
+  "primary_linear_repair_total_generation_movement_mw": 1.191049197490912e-06,
+  "primary_qp_dual_residual": 4.846613943509936e-10,
+  "primary_qp_iterations": 2075,
+  "primary_qp_max_bound_projection": 1.5482896742469165e-08,
+  "primary_qp_max_constraint_violation": 5.966302296656067e-08,
+  "primary_qp_primal_residual": 3.6428104976948816e-08,
+  "primary_qp_solve_seconds": 7.019693099995493,
+  "primary_qp_solver": "osqp",
+  "primary_qp_status": "solved",
+  "primary_repaired_numerical_qp_objective_synthetic_units": 495930461.47444606,
+  "project_branch_contingencies_included": true,
+  "project_branch_indices": [
+    11,
+    12
+  ],
+  "project_commissioned_by_quarter": {
+    "q1": false,
+    "q2": false,
+    "q3": true,
+    "q4": true
+  },
+  "project_name": "bus8_dual_corridor_thermal_uprating",
+  "project_start_quarter": "q1",
+  "redispatch_fraction_pmax": 0.5,
+  "redispatch_parameter_status": "synthetic_sensitivity_not_for_certification",
+  "response_model": "mw_only_sustained_states_no_duration_or_energy_limits",
+  "security_certified": false,
+  "service_parameter_status": "synthetic_mw_only_envelope_not_contract_evidence",
+  "solver_status": "ok",
+  "source_package": "pypower",
+  "source_version": "5.1.19",
+  "termination_condition": "optimal",
+  "total_capacity_mw": {
+    "q1": 50.0,
+    "q2": 50.0,
+    "q3": 250.0,
+    "q4": 250.0
+  },
+  "unused_capacity_mw_year": 31.506849315068493
+}

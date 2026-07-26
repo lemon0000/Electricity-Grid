@@ -1,0 +1,76 @@
+benchmark:
+  id: rts_gmlc_google_day0_zero_dc_ac_aware_solver_benchmark_v1
+  schema: rts_gmlc_zero_dc_ac_aware_solver_benchmark_v1
+  status: repository_local_solver_pilot_after_v2_operational_termination
+  evidence_scope: nonformal_solver_configuration_pilot_no_candidate_or_ac_claim
+  horizon_start_index: 0
+  horizon_hours: 6
+  selected_state_count_per_hour: 24
+  candidate_or_joint_ac_outcomes_used: false
+
+parent:
+  v2_root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v2
+  v2_config_path: configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v2.yaml
+  preregistration_manifest_sha256: ee71eca750a4c6e8819c8d3b3c7de803c0736efa3327b5f89aec0d91edeff708
+  operational_termination_manifest_sha256: e8bcef7466a1dfa44e4c0a444eb297fbf7160cf1f7596485c86a6fd9984b799b
+  preregistration_id: rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v2
+  input_contract_sha256: 7cb101bfbdc26994354fd77d6525bfc2de5deaf97496cc970cea805ead9857d0
+  termination_status: terminated_before_candidate_frontier_publication_and_before_any_joint_ac_solver_call
+  zero_dispatch_root: results/tables/rts_gmlc_google_day0_zero_dc_normal_ac_control_v1/dc_dispatch
+  zero_dispatch_manifest_sha256: c7c5cb7f418382472f2adf949e62ce4e1abb399dfe906903bacc24037d40ca4d
+  expected_full_horizon_cost_usd: 1108454.611081534
+
+formulation:
+  included: [full_state_monolith]
+  full_state_monolith: all_24_preregistered_selected_n_minus_one_states_in_one_model
+  exact_selected_state_constraint_generation_included: false
+  exclusion_reason: no_independent_exact_equivalence_and_termination_proof_for_proxy_objective
+  stages_constructed: [proxy_maximization, cost_normalization]
+  stages_executed: [proxy_maximization]
+  cost_normalization_executed: false
+  cost_normalization_exclusion_reason: time_limited_proxy_targets_would_make_cross_configuration_cost_stages_noncomparable
+
+budget:
+  relative_delta: 0.0075
+  belongs_to_formal_v2_grid: false
+  baseline: published_parent_zero_dispatch_first_6h_reconstructed_with_scuc_cost_formula
+  full_horizon_reconstruction_absolute_tolerance_usd: 1.0e-6
+  cost_cap_absolute_tolerance_usd: 1.0e-4
+  proxy_floor_absolute_tolerance: 1.0e-7
+
+solver_matrix:
+  name: highs
+  threads: [1, 4, 8]
+  repetitions: 2
+  execution_order: [t1_r1, t4_r1, t8_r1, t8_r2, t4_r2, t1_r2]
+  time_limit_seconds_per_stage: 120.0
+  target_mip_relative_gap: 1.0e-4
+  mip_absolute_gap: 0.0
+  feasibility_tolerance: 1.0e-6
+  random_seed: 0
+  mip_report_level: 2
+  mip_min_logging_interval_seconds: 5.0
+
+expected_model_size:
+  base_variables: 53922
+  base_constraints: 87508
+  cost_cap_constraints_added: 1
+  proxy_variables_added: 1
+  reactive_proxy_constraints_added: 36
+  proxy_stage_total_variables: 53923
+  proxy_stage_total_constraints: 87545
+
+selection:
+  eligibility_rule: both_repetitions_attain_target_gap_and_pass_solution_audit
+  ranking_rule:
+    - minimum_median_solver_wall_seconds
+    - minimum_maximum_solver_wall_seconds
+    - minimum_thread_count
+  no_eligible_configuration_rule: inconclusive_no_configuration_selected
+  objective_value_used: false
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_solver_benchmark_v1
+  log_directory: results/logs/rts_gmlc_zero_dc_ac_aware_solver_benchmark_v1
+  preparation_subdirectory: preparation
+  benchmark_subdirectory: benchmark

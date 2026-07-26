@@ -1,0 +1,99 @@
+preregistration:
+  id: rts_gmlc_google_day0_zero_dc_ac_aware_warmstart_benchmark_v1
+  schema: rts_gmlc_zero_dc_ac_aware_warmstart_benchmark_v1
+  status: repository_local_nonformal_warmstart_performance_pilot_after_v3_first_proxy_stage
+  externally_timestamped: false
+  formal_candidate_result: false
+  v3_runtime_outcome_used_to_motivate_pilot: true
+  v3_objective_value_used_for_method_selection: false
+  v3_candidate_frontier_outcomes_used_for_method_selection: false
+  joint_ac_solver_call_count: 0
+
+provenance:
+  v3_root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v3
+  v3_config_path: configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v3.yaml
+  v3_config_sha256: 68c89f2e2a14143e0c5581bff86193a530b935a57cdc388abbbf2806d27b95ba
+  v3_runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v3.py
+  v3_runner_sha256: f421465fbf2415fc98fd0f3b8f2022215afd923613ad315f2fb620f64d79cbfb
+  v3_preregistration_manifest_sha256: 01646721d15395668bf0079cb6fe218dc0625187d1fbf108c5db74e47ae33f88
+  v3_input_contract_sha256: af4a388d80c211611a8e1dad3861936decb7f3c3e2de3a422116c87c013d8aa0
+  v3_first_proxy_incumbent_seconds_observed: 2801.9
+  v3_first_proxy_final_objective_observed: 0.2432814710042433
+  parent_zero_dispatch_root: results/tables/rts_gmlc_google_day0_zero_dc_normal_ac_control_v1/dc_dispatch
+  parent_zero_dispatch_manifest_sha256: c7c5cb7f418382472f2adf949e62ce4e1abb399dfe906903bacc24037d40ca4d
+  formulation_module_path: experiments/pilot_rts_gmlc_zero_dc_ac_aware_formulations.py
+  formulation_module_sha256: e44fa7cb493700f1bf1687c86feb8a70c67089974db430e4681108318d2a1532
+  scuc_core_path: src/grid/rts_gmlc_scuc.py
+  scuc_core_sha256: 1101b21cbdab0cdacd6755578208ce7d28cd3e6e04f932d397119a4dde2b6cfe
+
+benchmark:
+  horizon_hours: 24
+  relative_cost_budget_delta: 0.001
+  stage: proxy_maximization_initial_exact_cg_master
+  active_state_source: parent_zero_final_active_state_ids
+  expected_active_state_count: 9
+  methods: [highs_cold_start, appsi_highs_full_mip_start]
+  repetitions: 2
+  execution_order:
+    - highs_cold_start_r1
+    - appsi_highs_full_mip_start_r1
+    - appsi_highs_full_mip_start_r2
+    - highs_cold_start_r2
+  rebuild_model_for_every_run: true
+  cross_run_solution_reuse_allowed: false
+  cost_normalization_executed: false
+  joint_ac_executed: false
+
+solver:
+  cold_interface: highs
+  warm_interface: appsi_highs
+  warmstart_argument: true
+  threads: 4
+  random_seed: 0
+  target_mip_relative_gap: 1.0e-4
+  feasibility_tolerance: 1.0e-6
+  bound_consistency_tolerance: 1.0e-6
+  time_limit_seconds_per_run: 3600.0
+  mip_min_logging_interval_seconds: 5.0
+  heartbeat_interval_seconds: 30.0
+
+warm_start:
+  source: published_parent_zero_full_selected_state_dispatch
+  submission_scope: every_solver_column
+  missing_values_allowed: false
+  zero_fill_missing_values_allowed: false
+  expected_proxy_objective: 0.24328147100424327
+  expected_operating_cost_usd: 1108454.611081534
+  maximum_constraint_violation: 1.0e-6
+  maximum_integrality_violation: 1.0e-8
+  objective_absolute_tolerance: 1.0e-6
+  appsi_set_solution_status_required: HighsStatus.kOk
+  native_acceptance_text: MIP start solution is feasible, objective value is
+  native_rejection_text: MIP start solution is infeasible
+  accepted_start_must_create_finite_incumbent: true
+  preaudit_required_before_submission: true
+
+result_contract:
+  legacy_solver_results_required: true
+  termination_condition_required: true
+  oriented_lower_and_upper_bounds_required: true
+  model_solution_load_required: true
+  final_residual_audit_required: true
+  native_log_required: true
+  time_to_first_finite_incumbent_required: true
+
+selection:
+  eligibility_rule: both_repetitions_pass_method_specific_start_gate_final_gap_and_residual_audit
+  ranking_rule:
+    - minimum_median_time_to_first_finite_incumbent_seconds
+    - minimum_median_solver_wall_seconds
+    - minimum_maximum_solver_wall_seconds
+    - method_order
+  objective_value_used: false
+  no_eligible_method_rule: inconclusive_no_warmstart_selected
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_warmstart_benchmark_v1
+  log_directory: results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_warmstart_benchmark_v1
+  preparation_subdirectory: preparation
+  benchmark_subdirectory: benchmark

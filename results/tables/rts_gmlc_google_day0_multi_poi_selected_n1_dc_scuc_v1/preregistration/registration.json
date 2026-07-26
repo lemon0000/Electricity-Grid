@@ -1,0 +1,246 @@
+{
+  "all_candidates_blind": false,
+  "contract": {
+    "base_benchmark_config_sha256": "e0e2a5c193ba73dc94ebfe90f334874aa8d2ec9c32693e7964b357f67a8f4887",
+    "business_input": {
+      "business_path": "data/processed/model_inputs/m6_google_power_workload_day0_no_flex_250mw_v1/business_chronology.csv",
+      "business_sha256": "1a4605d1f74df61b94c67aad408a1deff28d7426d13d661cd34092019c77f4be",
+      "recovery_path": "data/processed/model_inputs/m6_google_power_workload_day0_no_flex_250mw_v1/recovery_parameters.json",
+      "recovery_sha256": "cead28168f774dda539fe1d9a047bc3a34f769ebef877a94e241e151fbf99307",
+      "summary_path": "data/processed/model_inputs/m6_google_power_workload_day0_no_flex_250mw_v1/summary.json",
+      "summary_sha256": "e97c0e0c99fd221c389d8561f2f945da5007ae317400e5c813b5a4f7e28c880f"
+    },
+    "candidate_design": {
+      "allowed_candidate_specific_fields": [
+        "candidate_id",
+        "dc_bus",
+        "output_directory"
+      ],
+      "candidate_order": [
+        108,
+        120,
+        208,
+        220,
+        308,
+        320
+      ],
+      "candidate_order_rule": "ascending_area_then_138_before_230_kv",
+      "eligibility_rule": "positive_load_pq_bus_at_138_or_230_kv",
+      "ordering_rule": "ascending_topology_strength_then_bus_uid",
+      "selection_by_voltage": {
+        "138": "median_zero_based_floor",
+        "230": "maximum"
+      },
+      "strong_stratum_label": "backbone_230kv_max_strength",
+      "topology_strength_metric": "sum_incident_ac_branch_continuous_rating_mw",
+      "weak_stratum_label": "local_138kv_median_strength"
+    },
+    "candidate_metadata": [
+      {
+        "area": 1,
+        "base_kv": 138.0,
+        "bus_name": "Alger",
+        "bus_type": "PQ",
+        "candidate_id": "poi_bus_108",
+        "candidate_order": 0,
+        "colocated_generator_uids": [],
+        "dc_bus": 108,
+        "incident_ac_branch_count": 3,
+        "incident_continuous_rating_sum_mw": 525.0,
+        "legacy_seen_anchor": true,
+        "remaining_rating_after_largest_incident_branch_mw": 350.0,
+        "static_load_mw": 171.0,
+        "stratum": "local_138kv_median_strength"
+      },
+      {
+        "area": 1,
+        "base_kv": 230.0,
+        "bus_name": "Attila",
+        "bus_type": "PQ",
+        "candidate_id": "poi_bus_120",
+        "candidate_order": 1,
+        "colocated_generator_uids": [],
+        "dc_bus": 120,
+        "incident_ac_branch_count": 4,
+        "incident_continuous_rating_sum_mw": 2000.0,
+        "legacy_seen_anchor": false,
+        "remaining_rating_after_largest_incident_branch_mw": 1500.0,
+        "static_load_mw": 128.0,
+        "stratum": "backbone_230kv_max_strength"
+      },
+      {
+        "area": 2,
+        "base_kv": 138.0,
+        "bus_name": "Balch",
+        "bus_type": "PQ",
+        "candidate_id": "poi_bus_208",
+        "candidate_order": 2,
+        "colocated_generator_uids": [],
+        "dc_bus": 208,
+        "incident_ac_branch_count": 3,
+        "incident_continuous_rating_sum_mw": 525.0,
+        "legacy_seen_anchor": false,
+        "remaining_rating_after_largest_incident_branch_mw": 350.0,
+        "static_load_mw": 171.0,
+        "stratum": "local_138kv_median_strength"
+      },
+      {
+        "area": 2,
+        "base_kv": 230.0,
+        "bus_name": "Beethoven",
+        "bus_type": "PQ",
+        "candidate_id": "poi_bus_220",
+        "candidate_order": 3,
+        "colocated_generator_uids": [],
+        "dc_bus": 220,
+        "incident_ac_branch_count": 4,
+        "incident_continuous_rating_sum_mw": 2000.0,
+        "legacy_seen_anchor": false,
+        "remaining_rating_after_largest_incident_branch_mw": 1500.0,
+        "static_load_mw": 128.0,
+        "stratum": "backbone_230kv_max_strength"
+      },
+      {
+        "area": 3,
+        "base_kv": 138.0,
+        "bus_name": "Carrel",
+        "bus_type": "PQ",
+        "candidate_id": "poi_bus_308",
+        "candidate_order": 4,
+        "colocated_generator_uids": [
+          "308_RTPV_1"
+        ],
+        "dc_bus": 308,
+        "incident_ac_branch_count": 3,
+        "incident_continuous_rating_sum_mw": 525.0,
+        "legacy_seen_anchor": false,
+        "remaining_rating_after_largest_incident_branch_mw": 350.0,
+        "static_load_mw": 171.0,
+        "stratum": "local_138kv_median_strength"
+      },
+      {
+        "area": 3,
+        "base_kv": 230.0,
+        "bus_name": "Clive",
+        "bus_type": "PQ",
+        "candidate_id": "poi_bus_320",
+        "candidate_order": 5,
+        "colocated_generator_uids": [
+          "320_PV_1",
+          "320_RTPV_1",
+          "320_RTPV_2",
+          "320_RTPV_3",
+          "320_RTPV_4",
+          "320_RTPV_5",
+          "320_RTPV_6"
+        ],
+        "dc_bus": 320,
+        "incident_ac_branch_count": 4,
+        "incident_continuous_rating_sum_mw": 2000.0,
+        "legacy_seen_anchor": false,
+        "remaining_rating_after_largest_incident_branch_mw": 1500.0,
+        "static_load_mw": 128.0,
+        "stratum": "backbone_230kv_max_strength"
+      }
+    ],
+    "chronology_signature_sha256": "e481204e753e4f4a0374b57d9ef2c4f3fc18d4739ece962282ef5de267198616",
+    "common_model_excluding_dc_bus": {
+      "commitment_security_coupling": "exact_state_constraint_generation_then_fixed_commitment_all_state_sced",
+      "contract_call_limit_mw": 0.0,
+      "dc_connected_capacity_mw": 250.0,
+      "disabled_unit_types": [
+        "CSP",
+        "STORAGE",
+        "SYNC_COND"
+      ],
+      "dispatch_scope": "day_ahead_not_real_time_sced",
+      "horizon_hours": 24,
+      "initial_state_status": "optimization_derived_free_boundary_not_observed_chronology",
+      "network_losses": "zero_loss_dc_approximation",
+      "production_cost_scope": "published_three_segment_heat_rate_cold_start_for_all_starts",
+      "reserve_scope": "regional_spin_up_only_no_regulation_or_flex_reserve",
+      "selected_n_minus_one_commitment_cooptimized": true,
+      "source_window": "complete_day0_24_continuous_hours_fixed_replay",
+      "time_step_hours": 1.0
+    },
+    "common_security_selection_protocol": {
+      "branch_immediate": "fixed_dispatch_short_term_rating",
+      "branch_selection_rule": "max_loaded_nonislanding_intra_area_branch_per_area_plus_max_loaded_interarea_branch",
+      "branch_sustained": "hourly_ramp_corrective_continuous_rating",
+      "common_branch_rule": "sorted_union_of_all_candidate_prescreen_branch_uids",
+      "common_state_rule": "identical_union_branch_and_generator_states_for_every_candidate",
+      "excluded_islanding_policy": "exclude_and_report",
+      "generator_selection_rule": "largest_committable_generator_per_area",
+      "generator_sustained": "hourly_ramp_corrective_continuous_rating",
+      "permit_post_prescreen_state_deletion": false,
+      "prescreen_generates_comparison_ranking": false,
+      "prescreen_scope": "normal_state_24h_free_boundary_for_security_selection_only"
+    },
+    "comparison": {
+      "ac_representative_rules": [
+        "certified_or_ambiguous_primary_cost_representative",
+        "maximum_selected_state_stress_representative",
+        "legacy_seen_anchor"
+      ],
+      "ambiguous_primary_representative_rule": "first_certified_overlap_candidate_in_frozen_order",
+      "certified_overlap_rule": "candidate_lower_bound_less_than_or_equal_to_minimum_upper_bound",
+      "certified_separation_tolerance_usd": 1e-06,
+      "completion_policy": "all_candidates_required_no_replacement",
+      "failure_policy": "stop_and_diagnose_no_candidate_substitution",
+      "primary_metric": "fixed_commitment_all_common_state_ed_upper_bound_usd",
+      "required_candidate_count": 6,
+      "stress_metric": "maximum_common_selected_state_branch_loading_fraction",
+      "stress_representative_rule": "maximum_stress_metric_then_frozen_order",
+      "unique_minimum_rule": "winner_upper_bound_strictly_below_every_other_lower_bound"
+    },
+    "empty_incident_chronology_sha256": "edc97d55f4ff4110cadc22b8ac656b0cae10e6033cfae9584100d7341cd0ed08",
+    "evidence": {
+      "ac_security": false,
+      "evidence_status": "derived_benchmark",
+      "formal_vma_published": false,
+      "full_n_minus_one": false,
+      "result_evidence_ceiling": "public_benchmark_common_selected_n_minus_one_dc_mechanism_only",
+      "security_certified": false
+    },
+    "grid_source": {
+      "base_mva": 100.0,
+      "commit": "3ece0d3725c844056132393ee252b3083dd4eab4",
+      "manifest_sha256": "95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914",
+      "path": "data/raw/rts_gmlc/v0.2.3/upstream",
+      "release": "v0.2.3",
+      "repository": "https://github.com/GridMod/RTS-GMLC"
+    },
+    "implementation_sha256": {
+      "experiments/run_rts_gmlc_day0_scuc.py": "b6e68a5dce62d587ae5253c7666a55c99cd325d045a3e6086249e564e58f4724",
+      "experiments/run_rts_gmlc_multi_poi_scan.py": "5adb6bbdc640663e86cd60016f02ad0e0e003ec88eacf7af56d8423e7e6b2769",
+      "src/evaluation/chronology_inputs.py": "ef838c637b071ac89fffcdb5be9c9e7bc2d3fc75e1edf8172851b212e7c37c6b",
+      "src/grid/chronological_dispatch.py": "71d6c1da0e72942512810c651619c5cd73e915c3ac6d0d52684476d6133658ec",
+      "src/grid/rts_gmlc.py": "4180ab5ce86eb34a9de9e058ff9c56275ace3a6ffab06dbb464d93ef23382448",
+      "src/grid/rts_gmlc_scuc.py": "1101b21cbdab0cdacd6755578208ce7d28cd3e6e04f932d397119a4dde2b6cfe",
+      "src/scenarios/common_input_signature.py": "fe7f80d40df987d2b739a756b7a12fb7514e24c4e873f8b36e6aa0e0a3d6655f"
+    },
+    "scan_config_sha256": "14f578c5ed1b781449759f479b804c324a7634301380ca478b23334b46b240e4",
+    "schema": "rts_gmlc_multi_poi_common_inputs_v1",
+    "software_versions": {
+      "highspy": "1.15.1",
+      "numpy": "1.26.4",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "pyomo": "6.10.1",
+      "python": "3.12.12",
+      "pyyaml": "6.0.3"
+    },
+    "solver": {
+      "mip_relative_gap": 1e-06,
+      "name": "highs",
+      "tee": false,
+      "threads": 4,
+      "tolerance_mw": 1e-06
+    }
+  },
+  "contract_sha256": "16d9edc57d965e802dd17106a3a0aa7a99ae93f0f493ba977d8490573ce3fb78",
+  "externally_timestamped": false,
+  "legacy_seen_anchor_bus": 108,
+  "preregistration_id": "rts_gmlc_google_day0_multi_poi_selected_n1_dc_scuc_v1",
+  "schema": "rts_gmlc_multi_poi_preregistration_v1",
+  "status": "repository_local_frozen_before_nonreference_candidate_prescreens"
+}
