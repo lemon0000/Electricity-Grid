@@ -1,0 +1,33 @@
+case:
+  name: case24_ieee_rts
+  source: pypower
+
+solver:
+  name: highs
+
+network:
+  normal_and_sustained_rating: rate_a
+  immediate_post_contingency_rating: rate_c
+  # RATE_B is retained in the data but needs a documented duration mapping.
+  allow_unplanned_islanding: false
+
+contingencies:
+  branches: all_active
+  generators: all_positive_capacity
+
+redispatch:
+  model: symmetric_fraction_of_pmax_sensitivity
+  fractions: [0.0, 0.05, 0.10, 0.20, 1.0]
+  response_minutes: null
+  parameter_status: synthetic_sensitivity_not_for_certification
+
+ac_validation:
+  enabled: true
+  scope: base_and_worst_cases_at_upper_bound
+
+validation:
+  tolerance_mw: 1.0e-6
+
+output:
+  directory: results/tables
+  prefix: rts24_m1

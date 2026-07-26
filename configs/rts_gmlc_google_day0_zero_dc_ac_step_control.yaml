@@ -1,0 +1,137 @@
+preregistration:
+  id: rts_gmlc_google_day0_zero_dc_ac_step_control_v1
+  schema: rts_gmlc_zero_dc_ac_step_control_preregistration_v1
+  status: repository_local_post_outcome_amendment_before_any_formal_zero_step_control_case
+  externally_timestamped: false
+  primary_zero_recovery_outcomes_observed: true
+  formal_zero_step_control_outcomes_observed: false
+  all_24_formal_step_control_cases_blind: true
+
+parent_primary_recovery:
+  config_path: configs/rts_gmlc_google_day0_zero_dc_ac_recovery.yaml
+  config_sha256: 44abfdb5b0d8b3cdd71c34668f4b936c96e4ff01c327bc0e4ca15415a1f1f45d
+  implementation_path: experiments/run_rts_gmlc_zero_dc_ac_recovery.py
+  implementation_sha256: 5578cafa3cae53888970757c9c7100ea412dd6e96fd46f71c8f65e4cebd7919e
+  core_path: src/grid/rts_gmlc_ac_recovery.py
+  core_sha256: 729fabaa6ed2afb07c90ba2c5a0d3615773bf29ff2e4d8688a646a8bb975802c
+  input_contract_sha256: 0ca0d8421d6f98408e59fd15d7dc0b42feab46062510cb0239888483fab60a0a
+  output_directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_recovery_v1
+  preregistration_manifest_sha256: 70b62457083bc7ce0de629dc511f01c6defdbb7cc3c3c433da844d939778ca2b
+  recovery_manifest_sha256: db2b761b39529cf0b3b8deaeccc29b59b1571b1dc12d978b17f77426b2567d67
+
+observed_outcomes_disclosure:
+  primary_mode: distributed_committable
+  primary_case_count: 24
+  primary_witnessed_count: 22
+  primary_not_recovered_count: 2
+  primary_failed_hour_indices: [15, 21]
+  primary_failed_timestamps:
+    - "2020-01-01T15:00:00+00:00"
+    - "2020-01-01T21:00:00+00:00"
+  primary_failure_label: not_recovered_by_local_solver
+  primary_failure_message: Numerically failed
+  primary_failure_does_not_prove_infeasibility: true
+  case9_step_control_protocol_probe_observed: true
+  case9_unlocked_565_probe_success: true
+  case9_exact_pg_lock_probe_observed: true
+  case9_all_pg_exact_lock_560_success: false
+  case9_all_pg_exact_lock_565_success: false
+  case9_positive_pg_band_probes_observed: true
+  case9_560_successful_symmetric_pg_band_mw: [1.0e-8, 0.01, 0.1, 1.0, 5.0, 10.0]
+  case9_probe_formal_evidence_weight: excluded
+  case9_probe_use: protocol_design_only
+
+case_scope:
+  source: all_frozen_primary_distributed_committable_cases
+  mode: distributed_committable
+  state_id: normal
+  expected_hours: 24
+  expected_unique_cases: 24
+  execution_order: chronological_hour_index_0_through_23
+  completion_policy: all_24_cases_reported_no_failure_deletion
+  per_hour_method_selection: false
+
+numerical_protocol:
+  purpose: post_outcome_step_control_numerical_robustness_diagnostic
+  engine: pypower_runopf
+  algorithm_family: pips
+  algorithm_variant: pips_sc_step_control
+  opf_alg: 565
+  comparison_to_primary_560: same_pips_stack_step_control_enabled
+  independent_solver_claimed: false
+  exactly_one_solver_call_per_case: true
+  retry_allowed: false
+  fallback_allowed: false
+  per_hour_parameter_change_allowed: false
+  custom_warm_start_used: false
+  candidate_pg_lock_or_second_opf_used: false
+  original_prepared_case_used_unchanged: true
+  objective_interpretation: local_squared_pg_target_deviation_diagnostic_not_minimum_certificate
+
+solver_options:
+  PF_DC: false
+  OPF_ALG: 565
+  OPF_FLOW_LIM: 0
+  OPF_IGNORE_ANG_LIM: false
+  OPF_VIOLATION: 1.0e-8
+  PDIPM_FEASTOL: 1.0e-8
+  PDIPM_GRADTOL: 1.0e-6
+  PDIPM_COMPTOL: 1.0e-6
+  PDIPM_COSTTOL: 1.0e-6
+  PDIPM_MAX_IT: 150
+  SCPDIPM_RED_IT: 20
+
+solver_source_sha256:
+  pipsopf_solver.py: 8ec46a9557e046e119f6e481bb15ff8c21a205d052d37c34264d69be505d1237
+  pips.py: 4a8bdd34c65fd0c248fd6075740cf4bc8e3b6541ffc7aad04100956e0f6a589f
+  opf_execute.py: 467e3685718444259de9a63a378721e76bd52b1141f0b7ce832a044aa126b4d3
+  makeYbus.py: 671797eff455512abc91d9df3a8b54de1a452b51dcd119d1bb288088bfc17341
+
+postsolve_audit:
+  method: network_equation_reconstruction_from_frozen_case_and_returned_vm_va
+  network_model_code: pypower_makeYbus_shared_with_solver_stack
+  independent_implementation_claimed: false
+  active_power_bound_tolerance_mw: 1.0e-4
+  reactive_power_bound_tolerance_mvar: 1.0e-4
+  voltage_bound_tolerance_pu: 1.0e-6
+  branch_loading_tolerance_fraction: 1.0e-6
+  branch_angle_tolerance_degree: 1.0e-6
+  fixed_generator_pg_tolerance_mw: 1.0e-6
+  offline_pg_qg_tolerance_mw_mvar: 1.0e-6
+  offline_branch_flow_tolerance_mva: 1.0e-6
+  nodal_p_q_balance_tolerance_mw_mvar: 1.0e-4
+  ybus_terminal_shunt_identity_tolerance_mva: 1.0e-6
+  returned_recomputed_branch_flow_tolerance_mva: 1.0e-6
+  reference_angle_tolerance_degree: 1.0e-6
+  objective_absolute_tolerance_mw2: 1.0e-4
+  objective_relative_tolerance: 1.0e-8
+  solver_success_required_for_witness: true
+  all_numeric_results_finite: true
+  original_p_q_v_rate_a_angle_topology_tap_shunt_fixed: true
+
+interpretation:
+  successful_case_claim: audited_numerical_feasibility_witness_within_frozen_tolerances
+  failure_label: not_witnessed_by_registered_step_control_pipeline
+  failure_does_not_prove_infeasibility: true
+  global_optimality_claimed: false
+  minimum_dispatch_deviation_claimed: false
+  economic_optimality_claimed: false
+  primary_minimum_common_recovery_mode_rewritten: false
+  treatment_followup_gate: all_24_step_control_cases_solver_success_and_postsolve_audit_pass
+  treatment_followup_gate_interpretation: distributed_envelope_numerical_existence_only
+
+evidence:
+  evidence_status: derived_benchmark
+  result_evidence_ceiling: zero_dc_normal_state_distributed_p_q_v_step_control_numerical_feasibility_diagnostic
+  normal_state_only: true
+  physical_envelope_has_response_time_evidence: false
+  causal_poi_attribution_supported: false
+  engineering_ac_parameters_available: false
+  full_n_minus_one: false
+  ac_security: false
+  security_certified: false
+  full_m6_model_input_ready: false
+  formal_vma_published: false
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_step_control_v1

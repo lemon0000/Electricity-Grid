@@ -1,0 +1,62 @@
+preregistration:
+  id: rts_gmlc_google_day0_multi_poi_selected_n1_dc_scuc_v1
+  schema: rts_gmlc_multi_poi_preregistration_v1
+  status: repository_local_frozen_before_nonreference_candidate_prescreens
+  externally_timestamped: false
+  all_candidates_blind: false
+  legacy_seen_anchor_bus: 108
+  base_benchmark_config_path: configs/rts_gmlc_google_day0_full24h_scuc.yaml
+  base_benchmark_config_sha256: e0e2a5c193ba73dc94ebfe90f334874aa8d2ec9c32693e7964b357f67a8f4887
+
+evidence:
+  evidence_status: derived_benchmark
+  result_evidence_ceiling: public_benchmark_common_selected_n_minus_one_dc_mechanism_only
+  full_n_minus_one: false
+  ac_security: false
+  security_certified: false
+  formal_vma_published: false
+
+candidate_design:
+  eligibility_rule: positive_load_pq_bus_at_138_or_230_kv
+  topology_strength_metric: sum_incident_ac_branch_continuous_rating_mw
+  ordering_rule: ascending_topology_strength_then_bus_uid
+  selection_by_voltage:
+    138: median_zero_based_floor
+    230: maximum
+  candidate_order: [108, 120, 208, 220, 308, 320]
+  candidate_order_rule: ascending_area_then_138_before_230_kv
+  weak_stratum_label: local_138kv_median_strength
+  strong_stratum_label: backbone_230kv_max_strength
+  allowed_candidate_specific_fields: [candidate_id, dc_bus, output_directory]
+
+security_protocol:
+  prescreen_scope: normal_state_24h_free_boundary_for_security_selection_only
+  branch_selection_rule: max_loaded_nonislanding_intra_area_branch_per_area_plus_max_loaded_interarea_branch
+  common_branch_rule: sorted_union_of_all_candidate_prescreen_branch_uids
+  generator_selection_rule: largest_committable_generator_per_area
+  common_state_rule: identical_union_branch_and_generator_states_for_every_candidate
+  branch_immediate: fixed_dispatch_short_term_rating
+  branch_sustained: hourly_ramp_corrective_continuous_rating
+  generator_sustained: hourly_ramp_corrective_continuous_rating
+  excluded_islanding_policy: exclude_and_report
+  permit_post_prescreen_state_deletion: false
+  prescreen_generates_comparison_ranking: false
+
+comparison:
+  required_candidate_count: 6
+  completion_policy: all_candidates_required_no_replacement
+  primary_metric: fixed_commitment_all_common_state_ed_upper_bound_usd
+  certified_overlap_rule: candidate_lower_bound_less_than_or_equal_to_minimum_upper_bound
+  unique_minimum_rule: winner_upper_bound_strictly_below_every_other_lower_bound
+  certified_separation_tolerance_usd: 1.0e-6
+  ambiguous_primary_representative_rule: first_certified_overlap_candidate_in_frozen_order
+  stress_metric: maximum_common_selected_state_branch_loading_fraction
+  stress_representative_rule: maximum_stress_metric_then_frozen_order
+  ac_representative_rules:
+    - certified_or_ambiguous_primary_cost_representative
+    - maximum_selected_state_stress_representative
+    - legacy_seen_anchor
+  failure_policy: stop_and_diagnose_no_candidate_substitution
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_multi_poi_selected_n1_dc_scuc_v1

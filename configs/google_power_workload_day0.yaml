@@ -1,0 +1,159 @@
+source:
+  dataset: Google PowerData and ClusterData 2019 paired day-0 extract
+  billing_project: exalted-summer-490612-m6
+  public_project: google.com:google-cluster-data
+  location: US
+  license: CC-BY-4.0
+  documentation_commit: 3f6a61d380dc4ea847416d5414c5fa499f830b9d
+  query_path: experiments/sql/google_power_workload_day0_v1.sql
+  query_sha256: dc3d4cd11609fde8b4d4055dc23dcee70042a09f8a019fdfd464111c0e4f18ba
+  compact_query_path: experiments/sql/google_power_workload_compact_v1.sql
+  compact_query_sha256: b337c5024669e79b3141ac753538d1f767c0ab1ee56483e183cdd0b55a6be5f5
+  hourly_query_path: experiments/sql/google_power_workload_hourly_v1.sql
+  hourly_query_sha256: ff7b0efc26800c4b5012d47efddde41992ccc29f645bf8748cd41c64ce847d6b
+  mapping_source_path: data/raw/google_power_2019/2019/upstream/machine_to_pdu_mapping.csv.gz
+  output_directory: data/raw/google_power_workload_2019/v1/upstream
+
+parameters:
+  cell: f
+  pdu: pdu17
+  window_start_us: 0
+  window_end_us: 86400000000
+  population: official_notebook_non_nested_usage
+  population_rule: alloc_collection_id_is_null_or_zero
+
+cost_gate:
+  expected_dry_run_bytes: 540488836714
+  maximum_bytes_billed: 540489547776
+  expected_compact_dry_run_bytes: 3344307944
+  compact_maximum_bytes_billed: 3344957440
+  expected_hourly_dry_run_bytes: 7169294404
+  hourly_maximum_bytes_billed: 7172259840
+  monthly_scan_budget_bytes: 1099511627776
+
+expected:
+  mapping_machine_count: 1295
+  mapping_machine_ids_sha256: cbb77c38aa5184e8b8faf87aa1ffcc707e9f682e1d82bc85332f1f8d1e44d0a3
+  extract_fields:
+    - record_type
+    - start_time
+    - end_time
+    - event_time
+    - collection_type
+    - collection_id
+    - instance_index
+    - machine_id
+    - average_usage_cpus
+    - priority
+    - missing_type
+    - machine_event_type
+    - capacity_cpus
+    - machine_missing_data_reason
+  compact_fields:
+    - record_type
+    - start_time
+    - end_time
+    - collection_type
+    - collection_id
+    - instance_index
+    - machine_id
+    - average_usage_cpus
+    - fragment_start
+    - fragment_end
+    - priority_event_time
+    - priority
+    - priority_conflict_count
+    - priority_synthesized
+    - exact_duplicate_count
+    - cpu_value_conflict_count
+    - usage_group_id
+    - fragment_covered_us
+    - expected_covered_us
+    - fragment_overlap
+    - machine_event_time
+    - machine_event_type
+    - capacity_cpus
+    - machine_missing_data_reason
+  hourly_fields:
+    - record_type
+    - hour_index
+    - collection_type
+    - priority_tier
+    - observed_cpu_ncu_lower
+    - observed_cpu_ncu_upper
+    - observed_cpu_time_ncu_seconds_lower
+    - observed_cpu_time_ncu_seconds_upper
+    - observed_cpu_overlap_seconds
+    - missing_cpu_overlap_seconds
+    - cpu_conflict_overlap_seconds
+    - fragment_piece_count
+    - usage_group_count
+    - cpu_conflict_usage_group_count
+    - exact_duplicate_usage_group_count
+    - synthesized_cpu_time_ncu_seconds_lower
+    - synthesized_cpu_time_ncu_seconds_upper
+    - machine_event_time
+    - machine_id
+    - machine_event_type
+    - capacity_cpus
+    - machine_missing_data_reason
+    - audit_json
+  record_types: [usage, instance_event, machine_event]
+  table_snapshots:
+    powerdata_2019.machine_to_pdu_mapping:
+      etag: r5jy+cOCNLnnYnOytyXloA==
+      rows: 96616
+      bytes: 1718530
+    clusterdata_2019_f.instance_usage:
+      etag: DwR9AIlEg5hmUhVtYK584Q==
+      rows: 7707808700
+      bytes: 2297003786056
+    clusterdata_2019_f.instance_events:
+      etag: KslUGu5iSRhVbRl4nsi3yA==
+      rows: 1179245752
+      bytes: 211831196383
+    clusterdata_2019_f.machine_events:
+      etag: f1iXRPR+uPj+vzS8jGGVog==
+      rows: 49603
+      bytes: 6536140
+
+power_day0:
+  source_path: data/raw/google_power_2019/2019/upstream/cellf_pdu17.csv.gz
+  source_time_offset_us: 600000000
+  samples: 288
+  hours: 24
+  samples_per_hour: 12
+  time_step_us: 300000000
+  first_time_us: 600000000
+  last_time_us: 86700000000
+  bad_measurement_rows: 0
+  bad_production_rows: 288
+  minimum_measured_power_util: 0.676
+  maximum_measured_power_util: 0.763
+  hourly_power_fingerprint_rule: ascii_hour_source_first_source_last_mean_12dp_trimmed_lf
+  hourly_power_sha256: 0cb642804d18a4abceea081184dc7e4e248989d611881f6ec7b9f9100ea8e727
+
+processing:
+  schema: google_power_workload_day0_hourly_v1
+  output_directory: data/processed/google_power_workload_2019/v1
+  priority_tiers:
+    - 1_free
+    - 2_beb
+    - 3_mid
+    - 4_production
+    - 5_monitoring
+    - ambiguous
+    - unknown
+  priority_candidate_tiers:
+    - 1_free
+    - 2_beb
+    - 3_mid
+  priority_candidate_semantics: low_priority_usage_candidate_not_observed_flexibility
+  evidence_status: observed_same_system_normalized_power_and_ncu_usage_pair
+  absolute_power_mw_available: false
+  flexibility_observed: false
+  recovery_parameters_observed: false
+  expected_artifact_sha256:
+    hourly_pair.csv: 31c3e2560b5659e2d8c5b7b27bebc352ab351d6bf34ee6c099337b82fadac628
+    hourly_priority_usage.csv: ae0b20c908df4ff2f9a2f528a4d73ade3f7a19f51d012aa4fcd3b649da9736eb
+    summary.json: 6c69fe45b73459211129259238d857210d1c789b18c0dac4ceea4bc518faf874

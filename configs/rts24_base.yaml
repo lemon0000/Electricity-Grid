@@ -1,0 +1,24 @@
+case:
+  name: case24_ieee_rts
+  source: pypower
+
+solver:
+  name: highs
+
+network:
+  # L0 uses the long-term rating in every state as a conservative diagnostic.
+  contingency_rating: rate_a
+  allow_unplanned_islanding: false
+
+contingencies:
+  branches: all_active
+  # This is an optimistic upper bound, not an operational security certificate.
+  redispatch: independent_within_unit_bounds
+  parameter_status: unsupported_upper_bound_only
+
+validation:
+  tolerance_mw: 1.0e-6
+
+output:
+  directory: results/tables
+  prefix: rts24_l0

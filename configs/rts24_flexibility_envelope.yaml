@@ -1,0 +1,76 @@
+evaluation:
+  id: rts24_m6_f1_f3_synthetic_envelope_gate_v1
+  role: network_call_replay_and_full_x_temporal_ablation
+  parameter_status: synthetic_business_envelope_mechanism_not_contract_evidence
+  security_certified: false
+  chronological_grid_security_certified: false
+
+source:
+  fixed_policy_config: configs/rts24_deterministic_fx.yaml
+  m3_state_path: results/tables/rts24_m3_fx_states.csv
+  m3_state_sha256: c3426acedfa43525a900373bf470eb1ab8ba9f2397f203e1292673baeb6c8997
+  m3_summary_path: results/tables/rts24_m3_fx_summary.json
+  m3_summary_sha256: 555e24a663f1de35115af28c61df020ed278743c55c80cf8ba8707bde08115db
+  required_security_state_count: 107
+  required_layers: [actual, contract_counterfactual]
+  call_aggregation: maximum_minimum_call_across_bounded_security_states_by_quarter_and_layer
+  state_enumeration_interpretation: mutually_exclusive_security_checks_not_event_frequency
+
+timeline:
+  source: rts_gmlc_area1_2020_timestamps_only
+  path: data/raw/rts_gmlc/v0.2.3/upstream
+  load_values_used_as_business_data: false
+  time_step_hours: 1.0
+  event_placement: first_hour_of_each_quarter_with_positive_call
+  event_duration_hours: 1.0
+
+traces:
+  - name: network_minimum_call_replay
+    call_magnitude: frozen_m3_minimum_call_certificate
+    interpretation: network_derived_call_magnitude_not_chronological_event_or_grid_dispatch
+  - name: full_x_contract_stress
+    call_magnitude: full_active_or_contract_x_limit
+    interpretation: synthetic_contract_stress_not_observed_network_event
+
+ablation:
+  order: [F1_mw_only, F2_temporal_no_recovery, F3_full_recovery]
+  mechanism_gate_expectation:
+    network_minimum_call_replay:
+      F1_mw_only: {actual: true, contract_counterfactual: true}
+      F2_temporal_no_recovery: {actual: true, contract_counterfactual: true}
+      F3_full_recovery: {actual: true, contract_counterfactual: true}
+    full_x_contract_stress:
+      F1_mw_only: {actual: true, contract_counterfactual: true}
+      F2_temporal_no_recovery: {actual: true, contract_counterfactual: true}
+      F3_full_recovery: {actual: false, contract_counterfactual: false}
+  F1_mw_only:
+    checks: [call_mw_not_above_active_or_contract_x]
+  F2_temporal_no_recovery:
+    checks: [response, ramp, event_duration, interevent_rest, event_count, curtailment_energy]
+  F3_full_recovery:
+    checks: [F2_temporal_no_recovery, recovery_power, recovery_debt, terminal_debt]
+
+envelope:
+  maximum_event_duration_hours: 1.0
+  minimum_recovery_hours: 1.0
+  maximum_events_by_period: {q1: 0, q2: 0, q3: 1, q4: 1}
+  maximum_curtailment_energy_mwh_by_period: {q1: 0.0, q2: 0.0, q3: 75.0, q4: 75.0}
+  maximum_recovery_debt_mwh: 150.0
+  maximum_recovery_power_mw: 125.0
+  minimum_event_power_mw: 50.0
+  response_time_hours: 0.25
+  curtailment_ramp_mw_per_hour: 300.0
+  recovery_efficiency: 1.0
+  terminal_debt_limit_mwh_by_period: {q1: 0.0, q2: 0.0, q3: 0.0, q4: 0.0}
+  parameter_status: synthetic_business_envelope_mechanism_not_contract_evidence
+
+validation:
+  call_tolerance_mw: 1.0e-7
+  source_balance_tolerance_mw: 1.0e-6
+  require_zero_contract_breach: true
+  fail_closed_on_source_drift_or_audit_failure: true
+
+output:
+  quarter_path: results/tables/rts24_m6_f1_f3_quarters.csv
+  hourly_path: results/tables/rts24_m6_f1_f3_hourly.csv
+  summary_path: results/tables/rts24_m6_f1_f3_summary.json

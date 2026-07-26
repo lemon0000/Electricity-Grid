@@ -1,0 +1,73 @@
+case:
+  name: case24_ieee_rts
+  source: pypower
+
+planning:
+  model: deterministic_quarterly_fixed_poi_firm_only
+  parameter_status: synthetic_benchmark_not_site_evidence
+  quarters:
+    - name: q1
+      system_load_multiplier: 0.80
+      data_center_demand_mw: 50.0
+      operating_hours: 2184.0
+      discount_factor: 1.0
+    - name: q2
+      system_load_multiplier: 0.80
+      data_center_demand_mw: 100.0
+      operating_hours: 2184.0
+      discount_factor: 1.0
+    - name: q3
+      system_load_multiplier: 0.80
+      data_center_demand_mw: 200.0
+      operating_hours: 2208.0
+      discount_factor: 1.0
+    - name: q4
+      system_load_multiplier: 0.80
+      data_center_demand_mw: 250.0
+      operating_hours: 2208.0
+      discount_factor: 1.0
+
+fixed_poi:
+  bus: 8
+  initial_capacity_mw: 50.0
+  application_capacity_mw: 250.0
+  parameter_status: synthetic_benchmark_not_site_evidence
+
+existing_branch_upgrade:
+  name: bus8_dual_corridor_thermal_uprating
+  lead_time_quarters: 2
+  rate_a_increase_mw: {11: 100.0, 12: 100.0}
+  rate_c_increase_mw: {11: 100.0, 12: 100.0}
+  poi_capacity_increase_mw: 200.0
+  investment_cost: 25000000.0
+  parameter_status: synthetic_benchmark_not_site_evidence
+
+security:
+  branch_set: all_non_islanding
+  generator_set: all_positive_capacity
+  immediate_branch_rating: rate_c
+  sustained_rating: rate_a
+  excluded_islanding_policy: report_as_failure
+  redispatch_fraction_pmax: 0.50
+  response_parameter_status: synthetic_sensitivity_not_for_certification
+
+objective:
+  unit_basis: synthetic_objective_units_not_calibrated_currency_year
+  access_shortfall_cost_per_mwh: 250.0
+  reported_cost: original_quadratic_evaluated_at_repaired_numerical_solution
+  investment_cost_timing: input_cost_discounted_at_start_quarter
+
+solver:
+  qp_name: osqp
+  linear_repair_name: highs
+
+validation:
+  power_tolerance_mw: 1.0e-6
+  loading_tolerance_fraction: 1.0e-6
+  ac_scope: not_run_missing_expansion_mva_and_reactive_engineering_parameters
+
+output:
+  quarterly_path: results/tables/rts24_m2_deterministic_quarters.csv
+  state_path: results/tables/rts24_m2_deterministic_states.csv
+  candidate_path: results/tables/rts24_m2_deterministic_candidates.csv
+  summary_path: results/tables/rts24_m2_deterministic_summary.json

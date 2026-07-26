@@ -1,0 +1,136 @@
+preregistration:
+  id: rts_gmlc_google_day0_zero_dc_ac_recovery_v1
+  schema: rts_gmlc_zero_dc_ac_recovery_preregistration_v1
+  status: repository_local_frozen_after_zero_direct_ac_outcomes_before_zero_recovery_solve
+  externally_timestamped: false
+  parent_treatment_outcomes_observed: true
+  treatment_voltage_control_probe_observed: true
+  legacy_vg_treatment_ac_opf_implementation_probe_observed: true
+  treatment_probe_evidence_role: disclosed_implementation_diagnostic_excluded_from_zero_recovery_evidence
+  zero_normal_ac_outcomes_observed: true
+  zero_normal_ac_converged_count_observed: 24
+  zero_normal_ac_secure_count_observed: 0
+  zero_recovery_outcomes_observed: false
+  all_zero_recovery_cases_blind: true
+
+parent_zero_control:
+  config_path: configs/rts_gmlc_google_day0_zero_dc_normal_ac_control.yaml
+  config_sha256: 1c98faa55dee7b6479526dda285657cce89e18cf737153902e8c4ab0883b2a1e
+  implementation_path: experiments/run_rts_gmlc_zero_dc_normal_ac_control.py
+  implementation_sha256: 32a690a3ac5d1c8bacbcfab80e02286a4c1d42e3a4292457df4d5d835b740365
+  input_contract_sha256: ea17c09e2dde55aef9f1376dc3670e1d32e1f8fd1af0426382af64c293bc3cd9
+  output_directory: results/tables/rts_gmlc_google_day0_zero_dc_normal_ac_control_v1
+  preregistration_manifest_sha256: ee456378a822f0a97461546a385c1230d6d40e82920399599e4050f0ef812ec8
+  dc_dispatch_manifest_sha256: c7c5cb7f418382472f2adf949e62ce4e1abb399dfe906903bacc24037d40ca4d
+  normal_ac_manifest_sha256: 68aaa104312d7ef9966649e31759a59cd874eadf5fedab1147728ace9b8b68a6
+
+observed_evidence_disclosure:
+  zero_normal_ac_case_count: 24
+  zero_normal_ac_converged_count: 24
+  zero_normal_ac_secure_count: 0
+  amendment_004_voltage_control_probe_source_amendment_id: rts_gmlc_ac_replay_q_capable_voltage_control_amendment_004
+  amendment_004_voltage_control_probe_case: bus120_unity_2020-01-01T00:00:00+00:00_normal
+  amendment_004_voltage_control_probe_secure: false
+  amendment_004_voltage_control_probe_formal_evidence_weight: excluded
+  legacy_vg_treatment_ac_opf_implementation_probe_observed: true
+  legacy_vg_treatment_ac_opf_probe_voltage_semantics: superseded_pre_amendment_004_vg_semantics
+  legacy_vg_treatment_ac_opf_probe_artifact_status: not_formally_registered_implementation_probe
+  legacy_vg_treatment_ac_opf_probe_outcomes_used: false
+  legacy_vg_treatment_ac_opf_probe_formal_evidence_weight: excluded
+
+case_scope:
+  source_dispatch: frozen_zero_dc_reoptimized_common_selected_n1_dispatch
+  commitment: fixed_from_parent_zero_dc_dispatch
+  security_states: normal_only
+  expected_hours: 24
+  modes:
+    - reference_provider
+    - distributed_committable
+  expected_unique_cases: 48
+  completion_policy: all_hours_and_modes_reported_no_failure_deletion
+  branch_rating: continuous_rate_a_as_mva_proxy
+
+recovery_modes:
+  reference_provider:
+    adjustable_active_power: unambiguous_online_committable_reference_generator_only
+    active_power_bounds: hourly_physical_pmin_pmax
+    all_other_generators_active_power: locked_to_zero_dc_target
+  distributed_committable:
+    adjustable_active_power: all_online_committable_generators
+    active_power_bounds: hourly_physical_pmin_pmax
+    noncommittable_fixed_disabled_and_sync_cond_active_power: locked_to_zero_dc_target
+  shared_envelope_evidence: physical_envelope_no_response_time
+  response_time_or_ramp_constraint_used: false
+  spin_reserve_constraint_used: false
+  per_hour_favorable_mode_selection: false
+
+ac_opf:
+  engine: pypower_runopf
+  algorithm: mips
+  opf_alg: 560
+  objective: sum_online_and_offline_generator_squared_pg_deviation_from_zero_dc_target
+  objective_interpretation: minimum_active_dispatch_deviation_local_ac_opf_not_economic_cost_or_global_certificate
+  gencost_polynomial_coefficients: [1.0, minus_2_times_target, target_squared]
+  q_bounds: source_qmin_qmax
+  voltage_limits_pu: [0.95, 1.05]
+  branch_flow_limit: maximum_two_terminal_apparent_power_over_continuous_rate_a
+  opf_flow_lim: 0
+  q_limit_switching: false
+  pv_pq_switching_claimed: false
+  warm_start_claimed: false
+  global_optimality_claimed: false
+  added_reactive_compensation: false
+  added_connection_line_or_transformer: false
+  hvdc_converter_reactive_power_modeled: false
+  topology_tap_shunt_and_hvdc_active_injection_fixed: true
+
+solver_options:
+  PF_DC: false
+  OPF_ALG: 560
+  OPF_FLOW_LIM: 0
+  OPF_IGNORE_ANG_LIM: false
+  OPF_VIOLATION: 1.0e-8
+  PDIPM_FEASTOL: 1.0e-8
+  PDIPM_GRADTOL: 1.0e-6
+  PDIPM_COMPTOL: 1.0e-6
+  PDIPM_COSTTOL: 1.0e-6
+  PDIPM_MAX_IT: 150
+
+independent_audit:
+  all_numeric_results_finite: true
+  result_identity_status_and_fixed_fields_preserved: true
+  solver_input_case_unchanged: true
+  active_power_bound_tolerance_mw: 1.0e-4
+  reactive_power_bound_tolerance_mvar: 1.0e-4
+  offline_pg_qg_tolerance_mw_mvar: 1.0e-6
+  offline_branch_flow_tolerance_mva: 1.0e-6
+  voltage_bound_tolerance_pu: 1.0e-6
+  branch_loading_tolerance_fraction: 1.0e-6
+  fixed_generator_pg_tolerance_mw: 1.0e-6
+  nodal_p_q_balance_tolerance_mw_mvar: 1.0e-4
+  objective_absolute_tolerance_mw2: 1.0e-4
+  objective_relative_tolerance: 1.0e-8
+  source_controller_vg_to_optimized_vm_reported: true
+
+interpretation:
+  solver_failure_label: not_recovered_by_local_solver
+  solver_failure_does_not_prove_infeasibility: true
+  successful_case_claim: local_solver_solution_passed_independent_frozen_envelope_audit
+  minimum_common_mode_selected_only_if_all_24_hours_recovered: true
+  reference_success_distributed_failure_is_numerical_anomaly: true
+  treatment_followup_allowed_only_after_zero_common_mode_24_of_24: true
+
+evidence:
+  evidence_status: derived_benchmark
+  result_evidence_ceiling: zero_dc_normal_state_bounded_p_q_v_local_ac_opf_diagnostic
+  zero_control_interpretation: reoptimized_no_data_center_operational_counterfactual
+  causal_poi_attribution_supported: false
+  engineering_ac_parameters_available: false
+  full_n_minus_one: false
+  ac_security: false
+  security_certified: false
+  full_m6_model_input_ready: false
+  formal_vma_published: false
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_recovery_v1

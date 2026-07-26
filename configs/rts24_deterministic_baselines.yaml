@@ -1,0 +1,87 @@
+case:
+  name: case24_ieee_rts
+  source: pypower
+
+planning:
+  model: deterministic_b0_b2_lexicographic_access_baselines
+  parameter_status: synthetic_benchmark_not_site_evidence
+  evidence_label: synthetic_non_engineering_baseline_gate
+  demand_path_source: rts24_m2_frozen_nondecreasing_path
+  planning_variable_indexing: quarter_root_only_no_state_or_scenario
+  policy_order: [B0_WAIT, B1_FIRM, B2_STATIC_FX]
+  quarters:
+    - name: q1
+      system_load_multiplier: 0.80
+      data_center_demand_mw: 50.0
+      operating_hours: 2184.0
+      continuous_validation_hours: 0.0
+      discount_factor: 1.0
+    - name: q2
+      system_load_multiplier: 0.80
+      data_center_demand_mw: 100.0
+      operating_hours: 2184.0
+      continuous_validation_hours: 0.0
+      discount_factor: 1.0
+    - name: q3
+      system_load_multiplier: 0.80
+      data_center_demand_mw: 200.0
+      operating_hours: 2208.0
+      continuous_validation_hours: 0.0
+      discount_factor: 1.0
+    - name: q4
+      system_load_multiplier: 0.80
+      data_center_demand_mw: 250.0
+      operating_hours: 2208.0
+      continuous_validation_hours: 0.0
+      discount_factor: 1.0
+
+fixed_poi:
+  bus: 8
+  initial_capacity_mw: 50.0
+  application_capacity_mw: 250.0
+  parameter_status: synthetic_benchmark_not_site_evidence
+
+existing_branch_upgrade:
+  name: bus8_dual_corridor_thermal_uprating
+  lead_time_quarters: 2
+  rate_a_increase_mw: {11: 100.0, 12: 100.0}
+  rate_c_increase_mw: {11: 100.0, 12: 100.0}
+  poi_capacity_increase_mw: 200.0
+  investment_cost: 25000000.0
+  parameter_status: synthetic_benchmark_not_site_evidence
+
+service_envelope:
+  max_conditional_capacity_mw: 75.0
+  minimum_operational_block_mw: 50.0
+  minimum_validation_hours: 24.0
+  response_model: mw_only_sustained_states_no_duration_or_energy_limits
+  continuous_window_status: not_validated_no_chronological_network_trajectory
+  parameter_status: synthetic_mw_only_envelope_not_contract_evidence
+
+security:
+  branch_set: all_non_islanding
+  generator_set: all_positive_capacity
+  immediate_branch_rating: rate_c
+  sustained_rating: rate_a
+  excluded_islanding_policy: report_as_failure
+  redispatch_fraction_pmax: 0.50
+  response_parameter_status: synthetic_sensitivity_not_for_certification
+
+objective:
+  planning_objectives: lexicographic_min_u_then_min_max_x_no_economic_weights
+  unit_basis: mwh_physical_planning_metrics
+  access_shortfall_cost_per_mwh: 250.0
+  posthoc_cost_scope: displayed_minimum_x_plan_m3_dispatch_only
+
+solver:
+  name: highs
+
+validation:
+  security_certified: false
+  ac_scope: not_run_missing_expansion_mva_reactive_and_chronological_network_parameters
+  evidence_status: synthetic_non_engineering_not_for_certification
+
+output:
+  policy_endpoint_path: results/tables/rts24_b0_b2_policy_endpoints.csv
+  quarter_path: results/tables/rts24_b0_b2_quarters.csv
+  summary_path: results/tables/rts24_b0_b2_summary.json

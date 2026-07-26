@@ -1,0 +1,31 @@
+amendment:
+  id: rts_gmlc_ac_replay_grid_point_lookup_amendment_001
+  schema: rts_gmlc_ac_replay_implementation_amendment_v1
+  parent_preregistration_id: rts_gmlc_google_day0_multi_poi_ac_replay_v1
+  parent_input_contract_sha256: 7dc28350aaa137a3f99a90a83365ebafb58c8de739a2999a5a93ed4ea0babd41
+  parent_runner_sha256: 0e2277f9c8096eaff695f70f95cc3e3898cf42ea0d69339cad8655e66c5d6e06
+  parent_ac_module_sha256: dafb8b307b074f3cf9079c5e80f8e2a1077550e9d0dec93edc4dc33676dc8c0e
+  status: repository_local_amendment_after_pre_batch_lookup_failure
+  externally_timestamped: false
+
+observed_before_amendment:
+  batch_ac_case_outcomes_observed: false
+  failure_type: AttributeError
+  failure_detail: business_chronology_point_has_no_demand_by_bus_mw
+  failure_stage: before_first_ac_case_configuration_or_power_flow
+
+scope:
+  permitted_change: map_parent_business_timestamps_to_same_clock_rts_gmlc_hourly_grid_points
+  forbidden_changes:
+    - parent_config
+    - representative_candidates
+    - hours_or_security_states
+    - power_factor_cases
+    - source_or_parent_artifacts
+    - ac_case_assumptions
+    - power_flow_options
+    - ac_case_module
+    - result_acceptance_or_summary_rules
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_multi_poi_ac_replay_v1

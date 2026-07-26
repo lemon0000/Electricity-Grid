@@ -1,0 +1,396 @@
+preregistration:
+  id: rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4
+  schema: rts_gmlc_zero_dc_ac_aware_commitment_preregistration_v4
+  status: repository_local_full_precision_checkpoint_successor_after_v3_invalidated_before_any_valid_budget_frontier_or_joint_ac_result
+  externally_timestamped: false
+  previous_ac_outcomes_observed: true
+  candidate_frontier_outcomes_observed: false
+  joint_ac_outcomes_observed: false
+  parent_first_budget_solver_outcomes_observed: true
+  parent_invalid_checkpoint_payload_observed: true
+  parent_candidate_frontier_artifact_published: false
+
+predecessor_v2:
+  root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v2
+  config_path: configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v2.yaml
+  config_sha256: 91a173d8c24d2aed6a91261b6c22130ddd7ae0bb1c5053cc62270f7fa1494b9a
+  runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment.py
+  runner_sha256: 5ace7a4d314f3a7031c8c30f63fa6fa9262c6196784baab15dc4ef62f8978c11
+  preregistration_manifest_sha256: ee71eca750a4c6e8819c8d3b3c7de803c0736efa3327b5f89aec0d91edeff708
+  operational_termination_manifest_sha256: e8bcef7466a1dfa44e4c0a444eb297fbf7160cf1f7596485c86a6fd9984b799b
+  input_contract_sha256: 7cb101bfbdc26994354fd77d6525bfc2de5deaf97496cc970cea805ead9857d0
+  required_status: terminated_before_candidate_frontier_publication_and_before_any_joint_ac_solver_call
+  candidate_frontier_artifact_published: false
+  partial_candidate_solution_persisted: false
+  joint_ac_solver_call_count: 0
+  termination_is_infeasibility_evidence: false
+
+predecessor_v3:
+  root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v3
+  config_path: configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v3.yaml
+  config_sha256: 68c89f2e2a14143e0c5581bff86193a530b935a57cdc388abbbf2806d27b95ba
+  runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v3.py
+  runner_sha256: f421465fbf2415fc98fd0f3b8f2022215afd923613ad315f2fb620f64d79cbfb
+  preregistration_manifest_sha256: 01646721d15395668bf0079cb6fe218dc0625187d1fbf108c5db74e47ae33f88
+  invalidation_manifest_sha256: 30a112dc9c074533f7dbef07e0eb1508c85f6808f1af68631497b8104f1da548
+  input_contract_sha256: af4a388d80c211611a8e1dad3861936decb7f3c3e2de3a422116c87c013d8aa0
+  required_status: invalidated_after_one_semantically_invalid_budget_checkpoint_was_persisted_before_any_valid_budget_checkpoint_frontier_or_joint_ac_solver_call
+  valid_budget_candidate_checkpoint_count: 0
+  invalid_budget_candidate_checkpoint_count: 1
+  invalid_checkpoint_relative_path: candidate_checkpoints/01_q_proxy_delta_0p0010
+  invalid_checkpoint_manifest_sha256: e2f4e8849985cce5a72e2f9ad9ce906231c589e0d605b3f6dfbccc3df36e83bc
+  stored_dispatch_sha256: 7dc7e40ca9a90cf09018db76c959a8a2dafcfae91b7183364fb3884021a4c6e3
+  recomputed_persisted_dispatch_sha256: d50253747b3ba20adbb33c52eed4497465a369cd0f7a39f60c8608262bb13658
+  candidate_frontier_artifact_published: false
+  joint_ac_solver_call_count: 0
+  joint_ac_outcomes_observed: false
+  failure_is_infeasibility_evidence: false
+  invalid_checkpoint_is_resume_eligible: false
+  v3_resume_allowed: false
+  successor_must_use_new_preregistration_id: true
+  parent_first_budget_solver_outcomes_observed: true
+  parent_invalid_checkpoint_payload_observed: true
+
+solver_selection_provenance:
+  solver_inventory:
+    root: results/tables/rts_gmlc_solver_inventory_v1
+    manifest_sha256: ad39836b9ef94bc520ea2939750f9c4513b9db051d8c97513b813f566d97c9bf
+    required_schema: rts_gmlc_solver_inventory_v1
+    required_status: environment_inventory_completed_without_project_model_solve
+    formal_candidate_started: false
+    project_model_built_or_solved: false
+    only_formally_eligible_solver: highs
+  thread_benchmark:
+    root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_solver_benchmark_v1
+    preparation_manifest_sha256: df3ed026af2bfbf77169e816713f361ef36374f89c255cb84de1621677f3485b
+    result_manifest_sha256: 4b05c7d7fcbd8f64ddb9eb61d4ee15c571a7905d8ebd453ac19d07cbf56c63d1
+    summary_sha256: 4688a7280ca79694b731e3f1ae76ac171c2fcb75d058983c0a97a89a173d925a
+    required_selection_status: selected_by_preregistered_nonobjective_rule
+    selected_threads: 4
+    objective_value_used_for_selection: false
+    formal_candidate_result: false
+  formulation_pilot:
+    root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_formulation_pilot_v1
+    preparation_manifest_sha256: ae3c19536341c0767f43dcbddb7ccabd60c9607f0baae7ab152507e750cf763a
+    result_manifest_sha256: 82f1f0cb72d574b2054f193f6354383c5629bd30796b42a919323ef326c0d7e1
+    summary_sha256: 4b00c772adca19232de12fdf91967db88199123c928719a742bbdf431f211f30
+    input_contract_sha256: 4c28c2b792c48c3c794d33cc05c419fd99927d2bd74732c6148d2ba10d707b34
+    required_selection_status: selected_by_preregistered_nonobjective_runtime_rule
+    selected_formulation: exact_selected_state_constraint_generation
+    required_eligible_repetitions: 2
+    required_completed_repetitions: 2
+    objective_value_used_for_selection: false
+    formal_candidate_result: false
+  initial_proxy_warm_start:
+    root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_warmstart_benchmark_v3
+    preparation_manifest_sha256: 99ed1475e9f4d69af50eb418753d09d311bba4f0d6bb81eeefbf0b2fdf93aa83
+    result_manifest_sha256: e6b906a9038b51db08ca1f1775ac028a9cc221532d0b5c24e324d538797d23d2
+    summary_sha256: e345d8038e4ae74a1e528d48b4df503c4d6c6f0c6a8f9e9d4a0f4e5b226f2774
+    adapter_source_path: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_warmstart_benchmark_v3/preparation/benchmark.py
+    adapter_source_sha256: f2fa65a52277a258ea6d0888ed7816b13ca2f772f3914e3d6c353ca8a338397c
+    required_selection_status: selected_by_preregistered_nonobjective_runtime_rule
+    selected_method: appsi_highs_full_mip_start
+    solver_interface: appsi_highs
+    submission_scope: every_solver_column
+    application_scope: initial_proxy_maximization_master_only
+    selected_method_completed_repetitions: 2
+    selected_method_eligible_repetitions: 2
+    objective_value_used_for_selection: false
+    formal_candidate_result: false
+
+formal_solver:
+  algorithm: exact_selected_state_constraint_generation
+  optimality_reporting:
+    reported_interval: actual_certified_lower_and_upper_bounds
+    report_actual_absolute_gap: true
+    report_actual_relative_gap_to_feasible_incumbent: true
+    actual_interval_recomputed_for_every_completed_stage: true
+    target_and_maximum_acceptance_frozen_before_formal_start: true
+    post_result_threshold_relaxation_allowed: false
+  solver:
+    name: highs
+    threads: 4
+    random_seed: 0
+    feasibility_tolerance: 1.0e-6
+    bound_consistency_tolerance: 1.0e-6
+  stages:
+    proxy_maximization:
+      objective_sense: maximize
+      gap_measure: certified_bound_interval_width
+      target_relative_gap: 1.0e-4
+      maximum_accepted_absolute_gap: 1.0e-3
+      maximum_accepted_relative_gap_to_feasible_incumbent: 1.0e-3
+      feasible_bound: lower_bound_from_final_full_state_feasible_incumbent
+      certified_bound: upper_bound_from_valid_active_master_dual_bound
+      relative_gap_denominator: max_abs_feasible_bound_1e-12
+    cost_normalization:
+      objective_sense: minimize
+      gap_measure: certified_bound_interval_width
+      target_relative_gap: 1.0e-4
+      maximum_accepted_absolute_gap: null
+      maximum_accepted_relative_gap_to_feasible_incumbent: 1.0e-3
+      feasible_bound: upper_bound_from_final_full_state_feasible_incumbent
+      certified_bound: lower_bound_from_valid_active_master_dual_bound
+      relative_gap_denominator: max_abs_feasible_bound_1e-12
+      restart_constraint_generation_from_frozen_seed: true
+      proxy_floor_absolute_tolerance: 1.0e-7
+  primary_regret:
+    observed_regret_upper_bound: stage1_actual_absolute_gap_plus_proxy_floor_tolerance_plus_numerical_audit_allowance
+    proxy_floor_tolerance: 1.0e-7
+    numerical_audit_allowance: 1.0e-6
+    hard_maximum: 0.0010011
+  constraint_generation:
+    initial_active_state_source: parent_zero_final_active_state_ids
+    rescreen_every_inactive_state_after_every_master: true
+    unresolved_screen_action: promote_and_label_unresolved_promoted
+    unresolved_is_infeasibility_evidence: false
+    cross_contingency_shared_recourse_allowed: false
+  time_limits_seconds:
+    per_candidate_total: 43200.0
+    proxy_master_per_call: 7200.0
+    cost_master_per_call: 7200.0
+    inactive_state_screen_per_call: 300.0
+    final_full_state_audit_per_call: 1800.0
+  progress_logging:
+    log_directory: results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4
+    heartbeat_interval_seconds: 30.0
+    native_solver_log_interval_seconds: 5.0
+    native_solver_logs_required: true
+    durable_jsonl_flush_and_fsync_each_event: true
+    report_actual_lower_bound_upper_bound_interval_and_gap: true
+  final_audit:
+    required_after_each_stage: true
+    selected_state_count: 24
+    method: all_selected_states_fixed_shared_lp_and_independent_residual_audit
+    eligible_requires_full_state_feasible_incumbent: true
+    eligible_requires_actual_gap_within_frozen_maximum: true
+  expected_full_model_size:
+    base_variables: 215688
+    base_constraints: 350470
+    proxy_stage_variables: 215689
+    proxy_stage_constraints: 350615
+
+candidate_snapshot:
+  schema: exact_shared_snapshot_v1
+  discrete_components: [commitment, startup, shutdown]
+  exact_binary_normalization_allowed: true
+  maximum_distance_to_nearest_binary_before_normalization: 1.0e-8
+  normalized_values: [0.0, 1.0]
+  continuous_components: [generation, angle_degrees, branch_flow, dc_flow, segment_power, reserve_up, reactive_proxy, operating_cost]
+  continuous_values_use_full_precision: true
+  continuous_rounding_or_clamping_allowed: false
+  normalized_snapshot_requires_new_24_state_final_audit: true
+  checkpoint_schema: rts_gmlc_zero_dc_ac_aware_candidate_checkpoint_v2_full_precision
+  checkpoint_float_serialization: python_json_roundtrip_full_precision_v1
+  checkpoint_prepublication_roundtrip_identity_validation: true
+  checkpoint_existing_target_overwrite_allowed: false
+  frontier_continuous_json_uses_full_precision: true
+
+protocol_amendment:
+  id: rts_gmlc_zero_dc_ac_aware_commitment_reference_bus_chronology_amendment_001
+  schema: rts_gmlc_zero_dc_ac_aware_commitment_implementation_amendment_v1
+  parent_preregistration_id: rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v1
+  parent_config_path: configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment.yaml
+  parent_config_sha256: fee9870043b1269a0fea8cc9d8a38ca94bafa00cc6acc5c691b088962339b975
+  parent_output_directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v1
+  parent_input_contract_sha256: 2892a459137998fe7825acafc2391d9367f9cbfb66dcaeb2dc5c06f0a49237e8
+  parent_preregistration_manifest_sha256: 1aa4763bb72e89bbad03deeed7ebc837ff1a3620baa5ba39b409203531c8beae
+  parent_invalidation_manifest_sha256: 7ac6a6a2ecc76304376654b36d6a0e83e5bd506e9f3ff537356fa13ad94ac3dd
+  parent_ac_aware_core_sha256: 1e236963042bbe5818c08381a0110162f642a864ff92c4a05e7cfc2949e6e48e
+  corrected_ac_aware_core_sha256: bdd106e00bf1750b8867e9e3127c797054aa6f8ca9456821c4eb252ddf93d824
+  failure_detected_by_pre_solver_input_validation: true
+  failure: BUS_TYPE_was_incorrectly_required_to_be_cross_hour_static_even_though_reference_and_voltage_controller_bus_types_follow_hourly_commitment
+  permitted_correction: exclude_BUS_TYPE_from_cross_hour_static_equality_and_require_each_hour_to_use_only_PQ_PV_REF_with_exactly_one_REF
+  parent_candidate_generation_invocation_started: true
+  parent_candidate_frontier_artifact_published: false
+  parent_candidate_frontier_outcomes_available_to_amendment_design: false
+  parent_joint_ac_solver_call_count: 0
+  parent_joint_ac_outcomes_observed: false
+  candidate_budget_grid_changed: false
+  candidate_objectives_changed: false
+  joint_ac_envelope_changed: false
+  joint_ac_initial_strategies_changed: false
+
+parent_zero_control:
+  config_path: configs/rts_gmlc_google_day0_zero_dc_normal_ac_control.yaml
+  config_sha256: 1c98faa55dee7b6479526dda285657cce89e18cf737153902e8c4ab0883b2a1e
+  runner_path: experiments/run_rts_gmlc_zero_dc_normal_ac_control.py
+  runner_sha256: 32a690a3ac5d1c8bacbcfab80e02286a4c1d42e3a4292457df4d5d835b740365
+  scuc_core_path: src/grid/rts_gmlc_scuc.py
+  scuc_core_sha256: 1101b21cbdab0cdacd6755578208ce7d28cd3e6e04f932d397119a4dde2b6cfe
+  ac_core_path: src/grid/rts_gmlc_ac.py
+  ac_core_sha256: dafb8b307b074f3cf9079c5e80f8e2a1077550e9d0dec93edc4dc33676dc8c0e
+  output_directory: results/tables/rts_gmlc_google_day0_zero_dc_normal_ac_control_v1
+  preregistration_manifest_sha256: ee456378a822f0a97461546a385c1230d6d40e82920399599e4050f0ef812ec8
+  dc_dispatch_manifest_sha256: c7c5cb7f418382472f2adf949e62ce4e1abb399dfe906903bacc24037d40ca4d
+  ac_normal_manifest_sha256: 68aaa104312d7ef9966649e31759a59cd874eadf5fedab1147728ace9b8b68a6
+  input_contract_sha256: ea17c09e2dde55aef9f1376dc3670e1d32e1f8fd1af0426382af64c293bc3cd9
+  baseline_full_state_cost_usd: 1108454.611081534
+
+observed_diagnostic_disclosure:
+  amendment_004_converged_cases: 2296
+  amendment_004_total_cases: 2304
+  amendment_004_secure_cases: 0
+  zero_direct_converged_hours: 24
+  zero_direct_secure_hours: 0
+  primary_560_reference_witness_hours: 11
+  primary_560_distributed_witness_hours: 22
+  step_control_565_witness_hours: 22
+  ipopt_original_source_witness_hours: 22
+  ipopt_original_midpoint_witness_hours: 22
+  ipopt_original_flat_target_midq_witness_hours: 22
+  common_not_witnessed_hours: [15, 21]
+  ipopt_status_at_common_not_witnessed_hours: Infeasible_Problem_Detected
+  solver_reported_infeasibility_is_global_proof: false
+  rate_a_plus_5_percent_probe_succeeded: false
+  q_bounds_plus_minus_5_mvar_probe_succeeded: false
+  voltage_bounds_plus_minus_0p01_probe_succeeded: true
+  voltage_sensitivity_maximum_vm_pu: 1.06000001
+  voltage_sensitivity_excluded_from_official_envelope: true
+
+parent_diagnostics:
+  primary_560_result_manifest_sha256: db2b761b39529cf0b3b8deaeccc29b59b1571b1dc12d978b17f77426b2567d67
+  step_control_565_result_manifest_sha256: 64514670595a3857438bdbfe689bdb455f39a0273dc90cdcb20c5af7f316be39
+  ipopt_v2_preregistration_manifest_sha256: ffdf5d5df29101b463438cbf753e6b80b6babd31d74ea72df82c9648cf236ab3
+  ipopt_v2_result_manifest_sha256: 75d40ffe53ded9747f916d57a3d00921d5087549afc8148cb2953f5924bf7332
+  ipopt_v2_is_canonical_tabular_artifact: true
+  ipopt_v1_is_superseded_serialization: true
+
+official_voltage_limit_reference:
+  local_path: data/raw/rts_gmlc/v0.2.3/matpower_reference/RTS_Data/FormattedData/MATPOWER/RTS_GMLC.m
+  local_sha256: 10573aee70f793c28a0602516f85c4345e6f171512852f1162c3bb3b02ba575b
+  manifest_path: data/raw/rts_gmlc/v0.2.3/matpower_reference/SHA256SUMS
+  manifest_sha256: 0bd4a19e15969eb5ed30d1cfd4e5f13e343ca0286927497872f0c202fd2a86b2
+  expected_bus_count: 73
+  expected_uniform_vmin_pu: 0.95
+  expected_uniform_vmax_pu: 1.05
+
+candidate_frontier:
+  base_candidate_id: parent_zero_dc_selected_n1_dispatch
+  relative_cost_budget_deltas: [0.001, 0.0025, 0.005, 0.01, 0.02, 0.05]
+  candidate_generation_completed_before_any_joint_ac_solve: true
+  candidate_generation_uses_ac_outcomes: false
+  selected_n_minus_one_state_count_per_hour: 24
+  expected_hours: 24
+  areas: [1, 2, 3]
+  proxy: maximize_minimum_area_direction_online_reactive_capability_fraction
+  injection_capability_mvar: max_qmax_zero_floor
+  absorption_capability_mvar: max_negative_qmin_zero_floor
+  denominator: all_hourly_available_official_ac_active_capability_by_area_and_direction
+  primary_objective: maximize_proxy_within_cost_budget
+  secondary_objective: minimize_original_dc_scuc_cost_at_proxy_floor
+  proxy_floor_absolute_tolerance: 1.0e-7
+  cost_cap_absolute_tolerance_usd: 1.0e-4
+  duplicate_rule: commitment_sha256_keep_lowest_cost_then_lowest_budget
+  all_budget_candidates_completed_before_deduplication: true
+  solver:
+    name: highs
+    threads: 4
+    random_seed: 0
+    mip_relative_gap: 1.0e-4
+    feasibility_tolerance: 1.0e-6
+
+joint_ac:
+  engine: casadi_nlpsol_ipopt
+  casadi_version: 3.7.2
+  casadi_python_sha256: b55ee4543f628e2a52ff3ce94077e9929d4ca9032bf654601ec2cd7e91ee43b9
+  casadi_binary_sha256: 8d06e74e5360297686ee024522429d8d97557c387e764c510c3c7eea4cfb21bc
+  expected_hours: 24
+  initial_strategies: [source, midpoint, flat_target_midq]
+  all_candidates_and_strategies_run_no_early_stop: true
+  one_solver_call_per_candidate_strategy: true
+  retry_or_fallback_allowed: false
+  per_hour_method_selection_allowed: false
+  same_commitment_and_joint_pg_trajectory_required: true
+  normal_state_only: true
+  voltage_limits_pu: [0.95, 1.05]
+  voltage_bound_expansion_pu: 0.0
+  reactive_power_bound_expansion_mvar: 0.0
+  branch_rate_multiplier: 1.0
+  branch_rating: RATE_A_mva_proxy
+  branch_angle_limits_enforced: true
+  active_power_ramp_constraints_enforced: true
+  regional_spin_headroom_constraints_enforced: true
+  reserve_provider_scope: online_committable_units_in_original_spin_categories_conservative_subset
+  reserve_eligible_categories: [Coal, Gas CC, Gas CT, Oil CT, Oil ST, Solar PV, Wind]
+  objective: sum_squared_adjustable_pg_deviation_divided_by_base_mva_squared
+  ipopt_options:
+    ipopt.print_level: 0
+    print_time: false
+    ipopt.max_iter: 1000
+    ipopt.tol: 1.0e-9
+    ipopt.constr_viol_tol: 1.0e-8
+    ipopt.acceptable_tol: 1.0e-7
+    ipopt.acceptable_constr_viol_tol: 1.0e-6
+    ipopt.mu_strategy: adaptive
+    ipopt.fixed_variable_treatment: make_constraint
+  runtime_control:
+    max_cpu_time_seconds_per_call: 7200.0
+    max_wall_time_seconds_per_call: 7500.0
+    heartbeat_interval_seconds: 30.0
+    parent_watchdog_interval_seconds: 5.0
+    termination_grace_seconds: 30.0
+    native_file_print_level: 5
+    native_solver_logs_required: true
+    checkpoint_each_completed_call: true
+    retry_incomplete_call_allowed: false
+    isolated_worker_process_required: true
+    worker_pid_event_required: true
+    log_directory: results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4
+
+independent_audit:
+  nlp_constraint_tolerance: 1.0e-6
+  nlp_variable_bound_tolerance: 1.0e-8
+  active_power_bound_tolerance_mw: 1.0e-4
+  reactive_power_bound_tolerance_mvar: 1.0e-4
+  voltage_bound_tolerance_pu: 1.0e-6
+  branch_loading_tolerance_fraction: 1.0e-6
+  branch_angle_tolerance_degree: 1.0e-6
+  fixed_generator_pg_tolerance_mw: 1.0e-6
+  offline_pg_qg_tolerance_mw_mvar: 1.0e-6
+  offline_branch_flow_tolerance_mva: 1.0e-6
+  nodal_p_q_balance_tolerance_mw_mvar: 1.0e-4
+  ybus_terminal_shunt_identity_tolerance_mva: 1.0e-6
+  returned_recomputed_branch_flow_tolerance_mva: 1.0e-6
+  reference_angle_tolerance_degree: 1.0e-6
+  objective_absolute_tolerance_mw2: 1.0e-4
+  objective_relative_tolerance: 1.0e-8
+  ramp_tolerance_mw: 1.0e-6
+  reserve_tolerance_mw: 1.0e-6
+
+forbidden_adaptivity:
+  forced_generator_uids_allowed: false
+  manual_failed_hours_allowed: false
+  per_hour_commitment_override_allowed: false
+  per_hour_solver_options_allowed: false
+  candidate_addition_after_joint_ac_start_allowed: false
+  voltage_or_q_or_rating_relaxation_allowed: false
+  post_result_gap_or_time_limit_tuning_allowed: false
+  acceptance_threshold_change_after_formal_start_allowed: false
+  result_conditioned_retry_allowed: false
+  cross_solver_or_formulation_candidate_stitching_allowed: false
+
+interpretation:
+  candidate_proxy_is_physical_feasibility_certificate: false
+  candidate_proxy_is_economic_optimum_claim: false
+  successful_claim: one_preregistered_24h_commitment_has_a_joint_normal_state_zero_dc_ac_numerical_feasibility_witness
+  unsuccessful_claim: not_witnessed_by_registered_candidate_frontier_and_joint_local_solver_starts
+  global_optimality_claimed: false
+  global_infeasibility_claimed: false
+  treatment_followup_gate: at_least_one_candidate_strategy_jointly_witnesses_all_24_hours
+  treatment_execution_in_this_protocol: false
+
+evidence:
+  evidence_status: derived_benchmark
+  result_evidence_ceiling: zero_dc_normal_state_ac_aware_commitment_joint_trajectory_diagnostic
+  physical_envelope_has_response_time_evidence: false
+  causal_poi_attribution_supported: false
+  engineering_ac_parameters_available: false
+  full_n_minus_one: false
+  ac_security: false
+  security_certified: false
+  full_m6_model_input_ready: false
+  formal_vma_published: false
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4

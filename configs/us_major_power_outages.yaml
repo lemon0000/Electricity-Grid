@@ -1,0 +1,282 @@
+source:
+  dataset: U.S. Major Power Outage Events
+  article_title: Data on major power outage events in the continental U.S.
+  pmcid: PMC6141375
+  doi: 10.1016/j.dib.2018.06.067
+  path: data/raw/us_major_power_outages/v1/upstream
+  license: CC-BY-4.0
+  license_url: http://creativecommons.org/licenses/by/4.0/
+
+expected:
+  supplement_container_byte_stable: false
+  supplement_members:
+    mmc1.docx:
+      bytes: 24063
+      sha256: 968c6ca57fea172f529ef4bb88cee6010a7db272f0e24696e5c93e3ec001b019
+    mmc2.xlsx:
+      bytes: 660381
+      sha256: 0129e24ed7c6872b794d0d2b515ad351a69b469034e3389c63ceda17426e71b2
+  workbook_member: mmc2.xlsx
+  sheet: Masterdata
+  worksheet_rows: 1541
+  worksheet_columns: 57
+  header_row: 6
+  data_start_row: 8
+  source_rows: 1534
+  first_observation: 1
+  last_observation: 1534
+  first_year: 2000
+  last_year: 2016
+  postal_jurisdictions:
+    - AK
+    - AL
+    - AR
+    - AZ
+    - CA
+    - CO
+    - CT
+    - DC
+    - DE
+    - FL
+    - GA
+    - HI
+    - IA
+    - ID
+    - IL
+    - IN
+    - KS
+    - KY
+    - LA
+    - MA
+    - MD
+    - ME
+    - MI
+    - MN
+    - MO
+    - MS
+    - MT
+    - NC
+    - ND
+    - NE
+    - NH
+    - NJ
+    - NM
+    - NV
+    - NY
+    - OH
+    - OK
+    - OR
+    - PA
+    - SC
+    - SD
+    - TN
+    - TX
+    - UT
+    - VA
+    - VT
+    - WA
+    - WI
+    - WV
+    - WY
+  nerc_regions: 14
+  candidate_event_key:
+    - POSTAL.CODE
+    - OUTAGE.START.DATE
+    - OUTAGE.START.TIME
+    - OUTAGE.RESTORATION.DATE
+    - OUTAGE.RESTORATION.TIME
+    - CAUSE.CATEGORY
+    - CAUSE.CATEGORY.DETAIL
+  duplicate_candidate_event_groups: 10
+  duplicate_candidate_rows: 23
+  duplicate_candidate_excess_rows: 13
+  complete_temporal_records: 1476
+  duration_mismatch_minutes:
+    "-60": 14
+    "60": 17
+  zero_duration_records: 78
+  zero_duration_timestamp_consistent_records: 78
+  negative_timestamp_duration_records: 0
+  zero_duration_cause_counts:
+    intentional attack: 71
+    severe weather: 3
+    system operability disruption: 3
+    equipment failure: 1
+  known_demand_loss_records: 829
+  positive_demand_loss_records: 633
+  zero_demand_loss_records: 196
+  negative_demand_loss_records: 0
+  missing:
+    OUTAGE.START.DATE: 9
+    OUTAGE.START.TIME: 9
+    OUTAGE.RESTORATION.DATE: 58
+    OUTAGE.RESTORATION.TIME: 58
+    OUTAGE.DURATION: 58
+    DEMAND.LOSS.MW: 705
+    CUSTOMERS.AFFECTED: 443
+    CAUSE.CATEGORY: 0
+    CAUSE.CATEGORY.DETAIL: 471
+  cause_counts:
+    severe weather: 763
+    intentional attack: 418
+    system operability disruption: 127
+    public appeal: 69
+    equipment failure: 60
+    fuel supply emergency: 51
+    islanding: 46
+  required_columns:
+    - OBS
+    - YEAR
+    - MONTH
+    - U.S._STATE
+    - POSTAL.CODE
+    - NERC.REGION
+    - OUTAGE.START.DATE
+    - OUTAGE.START.TIME
+    - OUTAGE.RESTORATION.DATE
+    - OUTAGE.RESTORATION.TIME
+    - CAUSE.CATEGORY
+    - CAUSE.CATEGORY.DETAIL
+    - OUTAGE.DURATION
+    - DEMAND.LOSS.MW
+    - CUSTOMERS.AFFECTED
+
+evidence:
+  status: observed_empirical_outage_source_rows
+  record_scope: us_state_or_dc_major_outage_reports
+  independent_event_count_established: false
+  event_selection_rules_preregistered: true
+  unconditional_frequency_or_duration_inference_allowed: false
+  component_asset_ids_available: false
+  grid_topology_available: false
+  scuc_sced_available: false
+  rts_component_mapping_allowed: false
+  same_clock_business_trace_available: false
+
+output:
+  summary_path: results/tables/us_major_power_outages_data_summary.json
+  processed_root: data/processed/us_major_power_outages/v1
+  source_rows_path: data/processed/us_major_power_outages/v1/source_rows_clean.csv
+  candidate_groups_path: data/processed/us_major_power_outages/v1/candidate_groups.csv
+  cohort_membership_path: data/processed/us_major_power_outages/v1/cohort_membership.csv
+  processing_summary_path: data/processed/us_major_power_outages/v1/processing_summary.json
+
+processing:
+  id: us_major_power_outages_candidate_cohorts_v1
+  missing_token: __MISSING__
+  candidate_detail_normalization: trim_lower_collapse_whitespace
+  candidate_key:
+    - POSTAL.CODE
+    - OUTAGE.START.DATE
+    - OUTAGE.START.TIME
+    - OUTAGE.RESTORATION.DATE
+    - OUTAGE.RESTORATION.TIME
+    - CAUSE.CATEGORY
+    - normalized_cause_category_detail
+  duration:
+    primary_value: reported_duration_min
+    sensitivity_value: timestamp_duration_min
+    timestamp_timezone: local_naive_source_clock
+    require_timestamp_duration_nonnegative: true
+    sustained_rule: reported_duration_min > 0
+    zero_duration_rule: reported_duration_min == 0
+    missing_duration_action: exclude_from_timed_cohorts
+  duplicate_aggregation:
+    event_unit: candidate_group
+    demand_loss_primary: max_nonmissing_mw
+    demand_loss_sensitivity: min_nonmissing_mw
+    customers_primary: max_nonmissing_count
+    customers_sensitivity: min_nonmissing_count
+    duplicate_sum_allowed: false
+    nerc_aggregation: sorted_set_with_multi_nerc_flag
+  cause_groups:
+    weather:
+      - severe weather
+    equipment_operational:
+      - equipment failure
+      - system operability disruption
+      - fuel supply emergency
+    security:
+      - intentional attack
+    demand_management:
+      - public appeal
+    topology_outcome:
+      - islanding
+  cohorts:
+    primary_duration:
+      unit: candidate_group
+      rule: complete_temporal_and_nonnegative_timestamp_and_reported_duration_positive
+    known_loss_sensitivity:
+      unit: candidate_group
+      rule: primary_duration_and_any_nonmissing_demand_loss
+    positive_loss_sensitivity:
+      unit: candidate_group
+      rule: primary_duration_and_max_nonmissing_demand_loss_positive
+    zero_duration_sensitivity:
+      unit: candidate_group
+      rule: complete_temporal_and_nonnegative_timestamp_and_reported_duration_nonnegative
+    source_rows_sensitivity:
+      unit: source_row
+      rule: same_flags_without_candidate_deduplication
+    detail_complete_sensitivity:
+      unit: candidate_group
+      rule: primary_duration_and_nonmissing_normalized_cause_detail
+    single_nerc_sensitivity:
+      unit: candidate_group
+      rule: primary_duration_and_single_nerc_region
+    reported_vs_timestamp_sensitivity:
+      unit: candidate_group
+      rule: primary_duration_with_alternate_duration_value_only
+  expected_counts:
+    source_rows: 1534
+    candidate_groups: 1521
+    duplicate_candidate_event_groups: 10
+    duplicate_candidate_rows: 23
+    duplicate_candidate_excess_rows: 13
+    cohorts:
+      primary_duration:
+        candidate_groups: 1385
+        source_rows: 1398
+        duplicate_excess_rows: 13
+      known_loss_sensitivity:
+        candidate_groups: 751
+        source_rows: 757
+        duplicate_excess_rows: 6
+      positive_loss_sensitivity:
+        candidate_groups: 611
+        source_rows: 615
+        duplicate_excess_rows: 4
+      zero_duration_sensitivity:
+        candidate_groups: 1463
+        source_rows: 1476
+        duplicate_excess_rows: 13
+      source_rows_sensitivity:
+        primary_duration_rows: 1398
+        known_loss_rows: 756
+        positive_loss_rows: 614
+        zero_duration_rows: 1476
+      detail_complete_sensitivity:
+        candidate_groups: 949
+        source_rows: 956
+        duplicate_excess_rows: 7
+      single_nerc_sensitivity:
+        candidate_groups: 1383
+        source_rows: 1392
+        duplicate_excess_rows: 9
+    intersections:
+      complete_timed_known_loss_candidate_groups: 799
+      complete_timed_positive_loss_candidate_groups: 615
+      complete_sustained_known_loss_candidate_groups: 751
+      complete_sustained_positive_loss_candidate_groups: 611
+  expected_output_sha256:
+    source_rows: f8b30a82ffddd9db89b90d8542d1b1f9fddf80a2c42fb58211f9fb2b39db550f
+    candidate_groups: 4a82c60d9f0aca22133d729356a95c0d0de3b0b0253427f405c381443fdf24df
+    cohort_membership: ab2b1c7c1005e9925881792704dd50b99c8c8cd5071575a560804eab51928c90
+    processing_summary: 5aa5f1114d6cee5a5a4ef91e15bd3a146b34841e780bcb4278aef5089ce99611
+  forbidden_inferences:
+    - independent_event_count
+    - unconditional_annual_outage_frequency
+    - unconditional_duration_distribution
+    - component_outage_rate
+    - rts_component_mapping
+    - same_clock_business_or_contract_failure

@@ -1,0 +1,86 @@
+benchmark:
+  id: rts_gmlc_google_day0_full24h_selected_n1_dc_scuc_v1
+  artifact_schema: rts_gmlc_selected_n1_dc_scuc_artifacts_v1
+  evidence_status: derived_benchmark
+  result_evidence_ceiling: public_benchmark_selected_n_minus_one_dc_mechanism_only
+  chronological_dispatch_request_built: true
+  chronological_grid_dispatch_coupled: true
+  security_certified: false
+  formal_vma_published: false
+
+grid_source:
+  repository: https://github.com/GridMod/RTS-GMLC
+  release: v0.2.3
+  commit: 3ece0d3725c844056132393ee252b3083dd4eab4
+  path: data/raw/rts_gmlc/v0.2.3/upstream
+  manifest_sha256: 95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914
+  base_mva: 100.0
+
+business_input:
+  business_path: data/processed/model_inputs/m6_google_power_workload_day0_no_flex_250mw_v1/business_chronology.csv
+  business_sha256: 1a4605d1f74df61b94c67aad408a1deff28d7426d13d661cd34092019c77f4be
+  recovery_path: data/processed/model_inputs/m6_google_power_workload_day0_no_flex_250mw_v1/recovery_parameters.json
+  recovery_sha256: cead28168f774dda539fe1d9a047bc3a34f769ebef877a94e241e151fbf99307
+  summary_path: data/processed/model_inputs/m6_google_power_workload_day0_no_flex_250mw_v1/summary.json
+  summary_sha256: e97c0e0c99fd221c389d8561f2f945da5007ae317400e5c813b5a4f7e28c880f
+
+model:
+  horizon_hours: 24
+  time_step_hours: 1.0
+  source_window: complete_day0_24_continuous_hours_fixed_replay
+  dc_bus: 108
+  dc_connected_capacity_mw: 250.0
+  contract_call_limit_mw: 0.0
+  network_losses: zero_loss_dc_approximation
+  disabled_unit_types: [CSP, STORAGE, SYNC_COND]
+  initial_state_status: optimization_derived_free_boundary_not_observed_chronology
+  production_cost_scope: published_three_segment_heat_rate_cold_start_for_all_starts
+  reserve_scope: regional_spin_up_only_no_regulation_or_flex_reserve
+  dispatch_scope: day_ahead_not_real_time_sced
+  commitment_security_coupling: exact_state_constraint_generation_then_fixed_commitment_all_state_sced
+  selected_n_minus_one_commitment_cooptimized: true
+
+security:
+  selection_rule: max_loaded_nonislanding_intra_area_branch_per_area_plus_max_loaded_interarea_branch_plus_largest_committable_generator_per_area
+  branch_immediate: fixed_dispatch_short_term_rating
+  branch_sustained: hourly_ramp_corrective_continuous_rating
+  generator_sustained: hourly_ramp_corrective_continuous_rating
+  solution_method: fixed_base_dispatch_state_constraint_generation
+  full_n_minus_one: false
+  ac_security: false
+  security_state_enumeration_is_event_frequency: false
+
+solver:
+  name: highs
+  tee: false
+  tolerance_mw: 1.0e-6
+  threads: 4
+  mip_relative_gap: 1.0e-6
+
+expected:
+  critical_branch_uids:
+    - A12-1
+    - B22
+    - C6
+    - CA-1
+  critical_generator_uids:
+    - 121_NUCLEAR_1
+    - 213_CC_3
+    - 313_CC_1
+  excluded_islanding_branch_uids:
+    - B11
+    - C11
+  artifact_sha256:
+    generator_dispatch.csv: 5f6b2b68bab6fd32aaffb0b231a7649d57517632711b3f383c837c7c5f480561
+    hourly_dispatch.csv: 7759984fad84655832b974e0ea9ba86a9d0ed35e476f3fe54e27a8411ca1cc2c
+    incident_chronology.csv: edc97d55f4ff4110cadc22b8ac656b0cae10e6033cfae9584100d7341cd0ed08
+    initial_state.csv: 148faf35845d35ac8dba63ab9205c466481bfea80ffc57de6b95b12a98b8e187
+    normal_branch_flows.csv: 6313eb20c8339d5af674c262472ded9a27d4a50da1325bb1f72b7eca15c1316e
+    security_audit.csv: 5c510e4c01364c86e39d22b7822109376d9ff27b748a5f521abfe29f4c48c65c
+    security_branch_flows.csv: 4cef4c262b940d02ad1428ecf9eff002834d6d3366f2360459dc41f6a5b0b8c3
+    security_generator_dispatch.csv: 00f471d5681dffffadce2c4460ba1b95e1540e121f92e51d887e8a1a7b73f741
+    summary.json: 3b5e489e309fdd279d1e0413f69bf78a9013bdb4321cceefea9cbf53fcab54ab
+  artifact_manifest_sha256: 61b9d8c127354375769b5c1cf9e45e4340eafb0e89d8b07acbd8a08c9e1a0399
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_full24h_selected_n1_dc_scuc_v1

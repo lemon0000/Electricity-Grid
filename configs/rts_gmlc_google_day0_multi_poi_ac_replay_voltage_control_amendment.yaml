@@ -1,0 +1,66 @@
+amendment:
+  id: rts_gmlc_ac_replay_q_capable_voltage_control_amendment_004
+  schema: rts_gmlc_ac_replay_implementation_amendment_v1
+  parent_preregistration_id: rts_gmlc_google_day0_multi_poi_ac_replay_v1
+  parent_input_contract_sha256: 7dc28350aaa137a3f99a90a83365ebafb58c8de739a2999a5a93ed4ea0babd41
+  parent_amendment_id: rts_gmlc_ac_replay_unambiguous_slack_amendment_003
+  parent_amendment_config_sha256: ee0436c39530791ac055fedd5ec91624ba3926985c6f39b251d28f1ee504f2f1
+  parent_amendment_implementation_sha256: 6a9f2050a7882ef4c7fae72daefbc018d966ad46977bed22748383f15fe26ac0
+  parent_amendment_manifest_sha256: 3aa5c70b94f5771ba1822425b58eff4704ee1f93a7bb310146de7df8f79bfb87
+  parent_corrected_batch_manifest_sha256: 2b5b705d2074ddb8f846b7a8d897ed87d32021446fd867825b7dd3a0982e2a7e
+  status: repository_local_amendment_after_corrected_batch_voltage_control_audit_failure
+  externally_timestamped: false
+
+observed_before_amendment:
+  full_parent_batch_outcomes_observed: true
+  parent_case_count: 2304
+  failure_detail: pypower_duplicate_bus_voltage_initialization_allowed_online_q_inert_generator_vg_to_override_source_q_controller_vg
+  voltage_control_corrected_probe_outcomes_observed_before_freeze: true
+  full_voltage_control_corrected_batch_outcomes_observed: false
+  demonstrated_case:
+    dc_bus: 120
+    power_factor_case: unity
+    timestamp: '2020-01-01T00:00:00+00:00'
+    state_id: normal
+    control_bus: 314
+    controller_generator_uid: 314_SYNC_COND_1
+    controller_source_vg_pu: 1.05
+    q_inert_source_vg_pu: 1.0
+    parent_solved_control_bus_voltage_pu: 1.0
+    parent_controller_q_mvar: -102.20498757079912
+    parent_controller_q_limit_violation_mvar: 52.20498757079912
+    amended_probe_solved_control_bus_voltage_pu: 1.05
+    amended_probe_controller_q_mvar: 9.163432253344993
+    amended_probe_max_reactive_power_violation_mvar: 26.49335061366679
+    amended_probe_max_reactive_power_violation_generator_uid: 116_STEAM_1
+    amended_probe_max_voltage_violation_pu: 0.05714149350909459
+    amended_probe_secure: false
+  parent_batch_status: invalidated_for_final_ac_outcome_conclusions_retained_as_diagnostic
+
+scope:
+  permitted_change: copy_unique_online_q_capable_source_vg_to_colocated_online_q_inert_rows_at_pv_or_ref_buses
+  controller_rule: online_generator_with_qmax_minus_qmin_above_tolerance
+  conflict_policy: fail_if_no_online_q_capable_controller_or_nonunique_controller_vg
+  source_evidence_rule: generator_vg_is_the_pv_or_ref_control_target_and_bus_vm_remains_the_newton_initial_value
+  forbidden_changes:
+    - parent_config
+    - representative_candidates
+    - hours_or_security_states
+    - power_factor_cases
+    - source_or_parent_dispatch_artifacts
+    - grid_point_values
+    - load_or_hvdc_mapping
+    - generator_active_power_or_commitment
+    - generator_q_limits
+    - q_capable_controller_source_vg
+    - bus_vm_or_va_initial_values
+    - bus_type_or_slack_selection
+    - branch_shunt_tap_status_or_rating_inputs
+    - power_flow_options
+    - q_limit_switching
+    - restoration_or_redispatch
+    - result_acceptance_or_summary_rules
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_multi_poi_ac_replay_v1
+  corrected_results_subdirectory: results_q_capable_voltage_control

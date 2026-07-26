@@ -1,0 +1,90 @@
+evaluation:
+  id: rts24_b3_b4_synthetic_holdout_v1
+  role: fixed_policy_out_of_sample_mechanism_gate
+  parameter_status: synthetic_holdout_design_not_empirical_site_evidence
+  probability_basis: balanced_deterministic_holdout_weights_not_empirical_probability
+  selection_rule: preregistered_interpolation_and_boundary_stress_paths_before_holdout_execution
+  random_seed: null
+  security_certified: false
+  formal_vma_claimed: false
+  planning_reoptimization_allowed: false
+  runtime_recourse_only: true
+
+training_artifacts:
+  scenario_config: configs/rts24_stochastic_baselines.yaml
+  summary_path: results/tables/rts24_b3_b5_summary.json
+  summary_sha256: 9d34b3ee3bfc31a88bfa4dc149e8eb3ab2df9af594a810135893951c2613bbe0
+  endpoint_path: results/tables/rts24_b3_b5_endpoints.csv
+  endpoint_sha256: 029a0b76f28e9630d88e4488019d49883c3add9024f8412ee0cbbe882c5dee4c
+  policy_order: [B3, B4]
+  endpoint_order: [minimum_x, maximum_x]
+  required_training_endpoint_face: minimum_total_contract_exposure
+
+history_mapping:
+  q1_required_demand_mw: 50.0
+  q2_demand_class:
+    observed_value: current_q2_demand_mw
+    thresholds_mw: [75.0, 150.0]
+    labels: [delayed, baseline, accelerated]
+    boundary_rule: upper_bucket_on_equal
+  q3_project_state:
+    observed_value: realized_extra_lead_time_quarters
+    exact_mapping:
+      0: on_time
+      1: delayed_one_quarter
+  q4_terminal_outcome:
+    observed_value: current_q4_demand_mw
+    threshold_mw: 225.0
+    lower_label: lower
+    upper_label: upper
+    boundary_rule: upper_bucket_on_equal
+  q3_demand_is_not_an_additional_training_partition: true
+  unseen_history_manual_override_allowed: false
+
+holdout_design:
+  quarters: [q1, q2, q3, q4]
+  demand_paths:
+    - name: holdout_delayed_lower
+      probability: 0.16666666666666666
+      demand_mw: [50.0, 60.0, 120.0, 210.0]
+    - name: holdout_delayed_upper
+      probability: 0.16666666666666666
+      demand_mw: [50.0, 70.0, 160.0, 240.0]
+    - name: holdout_baseline_lower
+      probability: 0.16666666666666666
+      demand_mw: [50.0, 90.0, 170.0, 210.0]
+    - name: holdout_baseline_upper
+      probability: 0.16666666666666666
+      demand_mw: [50.0, 125.0, 220.0, 240.0]
+    - name: holdout_accelerated_lower
+      probability: 0.16666666666666666
+      demand_mw: [50.0, 175.0, 205.0, 215.0]
+    - name: holdout_accelerated_upper
+      probability: 0.16666666666666666
+      demand_mw: [50.0, 225.0, 250.0, 275.0]
+  project_states:
+    - name: on_time
+      probability: 0.5
+      extra_lead_time_quarters: 0
+    - name: delayed_one_quarter
+      probability: 0.5
+      extra_lead_time_quarters: 1
+  full_factorial_cross: true
+  expected_leaf_count: 12
+  require_demand_paths_disjoint_from_training: true
+
+execution:
+  fixed_policy_source: frozen_training_endpoint_csv
+  evaluator: m3_fixed_fx_actual_and_contract_counterfactual
+  service_validation: actual_and_contract_counterfactual_all_107_security_states
+  primary_objective_tolerance: 1.0e-5
+  primary_objective_tolerance_source: m3_m4_tested_default_numerical_acceptance
+  power_balance_tolerance_mw: 1.0e-6
+  contract_breach_tolerance_mw: 1.0e-7
+  value_metric: set_valued_synthetic_holdout_access_shortfall_difference
+  value_orientation: b3_minus_b4_positive_means_multistage_improves
+  economic_optimum_claimed: false
+
+output:
+  path_results: results/tables/rts24_b3_b4_holdout_paths.csv
+  summary_path: results/tables/rts24_b3_b4_holdout_summary.json

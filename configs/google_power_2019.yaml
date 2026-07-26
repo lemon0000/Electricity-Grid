@@ -1,0 +1,64 @@
+source:
+  dataset: Google PowerData 2019
+  repository: https://github.com/google/cluster-data
+  documentation_commit: 3f6a61d380dc4ea847416d5414c5fa499f830b9d
+  bucket: https://storage.googleapis.com/powerdata_2019
+  path: data/raw/google_power_2019/2019/upstream
+  license: CC-BY-4.0
+  object_manifest_sha256: bf820bc974b76432f8aa4c1865336e20833ffd4e961accde6a49cd7ff4881ca4
+  total_compressed_bytes: 3254733
+
+expected:
+  source_objects: 58
+  power_domains: 57
+  workload_linkable_power_domains: 55
+  power_only_mvpp_domains: 2
+  samples_per_domain: 8928
+  time_step_microseconds: 300000000
+  mapping_rows: 96616
+  cell_scoped_machine_keys: 96614
+  multi_pdu_cell_machine_keys: 2
+  trace_columns:
+    - time
+    - cell
+    - pdu
+    - measured_power_util
+    - production_power_util
+    - bad_measurement_data
+    - bad_production_power_data
+  mapping_columns:
+    - machine_id
+    - pdu
+    - cell
+
+evidence:
+  status: observed_production_trace_normalized_power
+  absolute_power_mw_available: false
+  pdu_capacity_available: false
+  workload_join_requires_bigquery: true
+  bigquery_project_billing_required: true
+  recovery_parameters_observed: false
+  mapping_join_key: [cell, pdu, machine_id]
+
+processing:
+  schema: google_power_2019_hourly_shape_v1
+  metric: measured_power_util
+  quality_flag: bad_measurement_data
+  domain_scope: workload_linkable_pdu_domains
+  source_samples_per_hour: 12
+  domain_hour_rule: require_all_12_samples_valid
+  cross_domain_rule: unweighted_mean_and_median_no_capacity_weighting
+  missing_policy: exclude_incomplete_domain_hour_without_imputation
+  normalization_rule: ex_post_full_window_peak_for_fixed_replay_only
+  expected_hours: 744
+  expected_eligible_domains: 55
+  expected_complete_domain_hours: 40896
+  expected_full_window_domains: 38
+  expected_minimum_complete_domains_per_hour: 54
+  expected_hourly_shape_sha256: 1089b409c06ad9a1ce1c0cfa9ceea4110a0b74c9a40cfe65e7614610f9f23931
+  expected_domain_quality_sha256: 709adfbf7d55ce2aa36a53ceeecaf4e5ac83fec9145ab2f26a72952163ee2c83
+  expected_summary_sha256: e281329a62cb6cfe693688eb9a0de05906955c51f3302fcf8593a5656f48068f
+  output_directory: data/processed/google_power_2019/v1
+
+output:
+  summary_path: results/tables/google_power_2019_data_summary.json

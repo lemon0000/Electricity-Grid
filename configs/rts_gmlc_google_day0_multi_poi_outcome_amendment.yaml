@@ -1,0 +1,34 @@
+amendment:
+  id: rts_gmlc_multi_poi_outcome_handling_amendment_001
+  schema: rts_gmlc_multi_poi_outcome_amendment_v1
+  parent_preregistration_id: rts_gmlc_google_day0_multi_poi_selected_n1_dc_scuc_v1
+  parent_registration_contract_sha256: 16d9edc57d965e802dd17106a3a0aa7a99ae93f0f493ba977d8490573ce3fb78
+  parent_common_security_contract_sha256: 7865c7544817acd2d0dd6a461766862af52f7175eb24f2c1466f52e70115aa87
+  status: repository_local_amendment_after_bus_208_infeasibility
+  externally_timestamped: false
+
+observed_before_amendment:
+  feasible_candidate_buses: [108, 120]
+  failed_candidate_bus: 208
+  failed_termination: active_state_scuc_infeasible
+  diagnostic_result: free_boundary_continuous_commitment_relaxation_infeasible_for_state_subset
+  remaining_full_candidate_outcomes_unseen: [220, 308, 320]
+
+scope:
+  reason: original_runner_only_serialized_feasible_candidate_results
+  permitted_change: serialize_certified_model_infeasibility_and_finalize_mixed_outcomes
+  forbidden_changes:
+    - candidate_set
+    - candidate_order
+    - common_security_states
+    - grid_or_business_inputs
+    - model_constraints
+    - solver_settings
+    - comparison_or_representative_rules
+    - candidate_substitution
+  infeasibility_certificate_rule: first_infeasible_prefix_of_frozen_common_states_under_free_boundary_continuous_commitment_relaxation
+  infeasible_candidate_counts_as_completed: true
+  infeasible_candidate_is_excluded_from_feasible_cost_and_ac_representative_sets: true
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_multi_poi_selected_n1_dc_scuc_v1

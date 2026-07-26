@@ -1,0 +1,330 @@
+scenario_tree:
+  id: rts24_b3_b5_synthetic_tree_v1
+  parameter_status: synthetic_scenario_structure_mechanism_gate_not_site_evidence
+  probability_basis: balanced_synthetic_factorial_mechanism_design_not_empirical_probability
+  common_input_config: configs/rts24_deterministic_baselines.yaml
+  common_input_signature_id: rts24_b0_b2_common_inputs_v1
+  common_input_signature_schema: rts24_common_fair_inputs_v2
+  common_input_signature_sha256: 76cda29db68705cc3f2ef5025f32d30ef07ceea62a552a97c45b01bf83287794
+  security_certified: false
+
+  quarters: [q1, q2, q3, q4]
+  revelation:
+    q2_signal_before: q2
+    project_state_before: q3
+    terminal_outcome_before: q4
+
+  project_timing:
+    base_lead_time_quarters: 2
+    signal_interpretation: exogenous_delivery_regime_or_progress_signal
+    decision_dependent_project_progress_modeled: false
+
+  objective_hierarchy:
+    - minimize_probability_weighted_physical_access_shortfall
+    - report_min_and_max_probability_weighted_total_contract_capacity_exposure
+    - fix_minimum_total_contract_capacity_exposure_for_display
+    - report_min_and_max_probability_weighted_conditional_capacity_exposure
+    - apply_non_economic_project_normalization_only_after_physical_faces_are_locked
+
+  demand_states:
+    - name: delayed_lower
+      probability: 0.16666666666666666
+      q2_signal: delayed
+      terminal_outcome: lower
+      demand_mw: [50.0, 50.0, 100.0, 200.0]
+    - name: delayed_upper
+      probability: 0.16666666666666666
+      q2_signal: delayed
+      terminal_outcome: upper
+      demand_mw: [50.0, 50.0, 100.0, 250.0]
+    - name: baseline_lower
+      probability: 0.16666666666666666
+      q2_signal: baseline
+      terminal_outcome: lower
+      demand_mw: [50.0, 100.0, 200.0, 200.0]
+    - name: baseline_upper
+      probability: 0.16666666666666666
+      q2_signal: baseline
+      terminal_outcome: upper
+      demand_mw: [50.0, 100.0, 200.0, 250.0]
+    - name: accelerated_lower
+      probability: 0.16666666666666666
+      q2_signal: accelerated
+      terminal_outcome: lower
+      demand_mw: [50.0, 200.0, 200.0, 200.0]
+    - name: accelerated_upper
+      probability: 0.16666666666666666
+      q2_signal: accelerated
+      terminal_outcome: upper
+      demand_mw: [50.0, 200.0, 200.0, 250.0]
+
+  project_states:
+    - name: on_time
+      probability: 0.5
+      extra_lead_time_quarters: 0
+    - name: delayed_one_quarter
+      probability: 0.5
+      extra_lead_time_quarters: 1
+
+  leaves:
+    - name: delayed_lower__on_time
+      demand_state: delayed_lower
+      project_state: on_time
+      probability: 0.08333333333333333
+    - name: delayed_lower__delayed_one_quarter
+      demand_state: delayed_lower
+      project_state: delayed_one_quarter
+      probability: 0.08333333333333333
+    - name: delayed_upper__on_time
+      demand_state: delayed_upper
+      project_state: on_time
+      probability: 0.08333333333333333
+    - name: delayed_upper__delayed_one_quarter
+      demand_state: delayed_upper
+      project_state: delayed_one_quarter
+      probability: 0.08333333333333333
+    - name: baseline_lower__on_time
+      demand_state: baseline_lower
+      project_state: on_time
+      probability: 0.08333333333333333
+    - name: baseline_lower__delayed_one_quarter
+      demand_state: baseline_lower
+      project_state: delayed_one_quarter
+      probability: 0.08333333333333333
+    - name: baseline_upper__on_time
+      demand_state: baseline_upper
+      project_state: on_time
+      probability: 0.08333333333333333
+    - name: baseline_upper__delayed_one_quarter
+      demand_state: baseline_upper
+      project_state: delayed_one_quarter
+      probability: 0.08333333333333333
+    - name: accelerated_lower__on_time
+      demand_state: accelerated_lower
+      project_state: on_time
+      probability: 0.08333333333333333
+    - name: accelerated_lower__delayed_one_quarter
+      demand_state: accelerated_lower
+      project_state: delayed_one_quarter
+      probability: 0.08333333333333333
+    - name: accelerated_upper__on_time
+      demand_state: accelerated_upper
+      project_state: on_time
+      probability: 0.08333333333333333
+    - name: accelerated_upper__delayed_one_quarter
+      demand_state: accelerated_upper
+      project_state: delayed_one_quarter
+      probability: 0.08333333333333333
+
+  nodes:
+    - name: root_q1
+      quarter: q1
+      parent: null
+      probability: 1.0
+      leaves: &all_leaf_names
+        - delayed_lower__on_time
+        - delayed_lower__delayed_one_quarter
+        - delayed_upper__on_time
+        - delayed_upper__delayed_one_quarter
+        - baseline_lower__on_time
+        - baseline_lower__delayed_one_quarter
+        - baseline_upper__on_time
+        - baseline_upper__delayed_one_quarter
+        - accelerated_lower__on_time
+        - accelerated_lower__delayed_one_quarter
+        - accelerated_upper__on_time
+        - accelerated_upper__delayed_one_quarter
+    - name: delayed_q2
+      quarter: q2
+      parent: root_q1
+      probability: 0.3333333333333333
+      leaves: &delayed_leaf_names
+        - delayed_lower__on_time
+        - delayed_lower__delayed_one_quarter
+        - delayed_upper__on_time
+        - delayed_upper__delayed_one_quarter
+    - name: baseline_q2
+      quarter: q2
+      parent: root_q1
+      probability: 0.3333333333333333
+      leaves: &baseline_leaf_names
+        - baseline_lower__on_time
+        - baseline_lower__delayed_one_quarter
+        - baseline_upper__on_time
+        - baseline_upper__delayed_one_quarter
+    - name: accelerated_q2
+      quarter: q2
+      parent: root_q1
+      probability: 0.3333333333333333
+      leaves: &accelerated_leaf_names
+        - accelerated_lower__on_time
+        - accelerated_lower__delayed_one_quarter
+        - accelerated_upper__on_time
+        - accelerated_upper__delayed_one_quarter
+    - name: delayed_on_time_q3
+      quarter: q3
+      parent: delayed_q2
+      probability: 0.16666666666666666
+      leaves: &delayed_on_time_leaf_names
+        - delayed_lower__on_time
+        - delayed_upper__on_time
+    - name: delayed_delayed_one_quarter_q3
+      quarter: q3
+      parent: delayed_q2
+      probability: 0.16666666666666666
+      leaves: &delayed_delayed_leaf_names
+        - delayed_lower__delayed_one_quarter
+        - delayed_upper__delayed_one_quarter
+    - name: baseline_on_time_q3
+      quarter: q3
+      parent: baseline_q2
+      probability: 0.16666666666666666
+      leaves: &baseline_on_time_leaf_names
+        - baseline_lower__on_time
+        - baseline_upper__on_time
+    - name: baseline_delayed_one_quarter_q3
+      quarter: q3
+      parent: baseline_q2
+      probability: 0.16666666666666666
+      leaves: &baseline_delayed_leaf_names
+        - baseline_lower__delayed_one_quarter
+        - baseline_upper__delayed_one_quarter
+    - name: accelerated_on_time_q3
+      quarter: q3
+      parent: accelerated_q2
+      probability: 0.16666666666666666
+      leaves: &accelerated_on_time_leaf_names
+        - accelerated_lower__on_time
+        - accelerated_upper__on_time
+    - name: accelerated_delayed_one_quarter_q3
+      quarter: q3
+      parent: accelerated_q2
+      probability: 0.16666666666666666
+      leaves: &accelerated_delayed_leaf_names
+        - accelerated_lower__delayed_one_quarter
+        - accelerated_upper__delayed_one_quarter
+    - name: delayed_lower_on_time_q4
+      quarter: q4
+      parent: delayed_on_time_q3
+      probability: 0.08333333333333333
+      leaves: [delayed_lower__on_time]
+    - name: delayed_upper_on_time_q4
+      quarter: q4
+      parent: delayed_on_time_q3
+      probability: 0.08333333333333333
+      leaves: [delayed_upper__on_time]
+    - name: delayed_lower_delayed_one_quarter_q4
+      quarter: q4
+      parent: delayed_delayed_one_quarter_q3
+      probability: 0.08333333333333333
+      leaves: [delayed_lower__delayed_one_quarter]
+    - name: delayed_upper_delayed_one_quarter_q4
+      quarter: q4
+      parent: delayed_delayed_one_quarter_q3
+      probability: 0.08333333333333333
+      leaves: [delayed_upper__delayed_one_quarter]
+    - name: baseline_lower_on_time_q4
+      quarter: q4
+      parent: baseline_on_time_q3
+      probability: 0.08333333333333333
+      leaves: [baseline_lower__on_time]
+    - name: baseline_upper_on_time_q4
+      quarter: q4
+      parent: baseline_on_time_q3
+      probability: 0.08333333333333333
+      leaves: [baseline_upper__on_time]
+    - name: baseline_lower_delayed_one_quarter_q4
+      quarter: q4
+      parent: baseline_delayed_one_quarter_q3
+      probability: 0.08333333333333333
+      leaves: [baseline_lower__delayed_one_quarter]
+    - name: baseline_upper_delayed_one_quarter_q4
+      quarter: q4
+      parent: baseline_delayed_one_quarter_q3
+      probability: 0.08333333333333333
+      leaves: [baseline_upper__delayed_one_quarter]
+    - name: accelerated_lower_on_time_q4
+      quarter: q4
+      parent: accelerated_on_time_q3
+      probability: 0.08333333333333333
+      leaves: [accelerated_lower__on_time]
+    - name: accelerated_upper_on_time_q4
+      quarter: q4
+      parent: accelerated_on_time_q3
+      probability: 0.08333333333333333
+      leaves: [accelerated_upper__on_time]
+    - name: accelerated_lower_delayed_one_quarter_q4
+      quarter: q4
+      parent: accelerated_delayed_one_quarter_q3
+      probability: 0.08333333333333333
+      leaves: [accelerated_lower__delayed_one_quarter]
+    - name: accelerated_upper_delayed_one_quarter_q4
+      quarter: q4
+      parent: accelerated_delayed_one_quarter_q3
+      probability: 0.08333333333333333
+      leaves: [accelerated_upper__delayed_one_quarter]
+
+  policies:
+    B3:
+      role: two_stage_root_commitment
+      implementable: true
+      decision_variables: [F, X, z_start]
+      decision_groups:
+        q1: &all_leaf_group
+          - *all_leaf_names
+        q2: *all_leaf_group
+        q3: *all_leaf_group
+        q4: *all_leaf_group
+    B4:
+      role: multistage_nonanticipative_policy
+      implementable: true
+      decision_variables: [F, X, z_start]
+      decision_groups:
+        q1: *all_leaf_group
+        q2:
+          - *delayed_leaf_names
+          - *baseline_leaf_names
+          - *accelerated_leaf_names
+        q3:
+          - *delayed_on_time_leaf_names
+          - *delayed_delayed_leaf_names
+          - *baseline_on_time_leaf_names
+          - *baseline_delayed_leaf_names
+          - *accelerated_on_time_leaf_names
+          - *accelerated_delayed_leaf_names
+        q4: &singleton_leaf_groups
+          - [delayed_lower__on_time]
+          - [delayed_lower__delayed_one_quarter]
+          - [delayed_upper__on_time]
+          - [delayed_upper__delayed_one_quarter]
+          - [baseline_lower__on_time]
+          - [baseline_lower__delayed_one_quarter]
+          - [baseline_upper__on_time]
+          - [baseline_upper__delayed_one_quarter]
+          - [accelerated_lower__on_time]
+          - [accelerated_lower__delayed_one_quarter]
+          - [accelerated_upper__on_time]
+          - [accelerated_upper__delayed_one_quarter]
+    B5:
+      role: perfect_information_bound
+      implementable: false
+      decision_variables: [F, X, z_start]
+      decision_groups:
+        q1: *singleton_leaf_groups
+        q2: *singleton_leaf_groups
+        q3: *singleton_leaf_groups
+        q4: *singleton_leaf_groups
+
+execution:
+  model: stochastic_b3_b5_physical_lexicographic_baselines
+  policy_order: [B3, B4, B5]
+  planning_variable_scope: policy_decision_groups_F_X_z_start_only
+  service_validation: embedded_actual_and_contract_counterfactual_all_security_states
+  dispatch_interpretation: feasibility_witness_not_canonical_cost_dispatch
+  evidence_status: synthetic_scenario_structure_mechanism_gate_not_site_evidence
+  security_certified: false
+
+output:
+  policy_path: results/tables/rts24_b3_b5_policies.csv
+  endpoint_path: results/tables/rts24_b3_b5_endpoints.csv
+  summary_path: results/tables/rts24_b3_b5_summary.json

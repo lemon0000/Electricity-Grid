@@ -1,0 +1,101 @@
+preregistration:
+  id: rts_gmlc_google_day0_zero_dc_normal_ac_control_v1
+  schema: rts_gmlc_zero_dc_normal_ac_control_preregistration_v1
+  status: repository_local_frozen_after_treatment_outcomes_before_zero_control_solve
+  externally_timestamped: false
+  parent_treatment_outcomes_observed: true
+  zero_control_outcomes_observed: false
+  all_zero_control_cases_blind: true
+
+parent_contracts:
+  multi_poi_scan_config_path: configs/rts_gmlc_google_day0_multi_poi_scan.yaml
+  multi_poi_scan_config_sha256: 14f578c5ed1b781449759f479b804c324a7634301380ca478b23334b46b240e4
+  multi_poi_registration_contract_sha256: 16d9edc57d965e802dd17106a3a0aa7a99ae93f0f493ba977d8490573ce3fb78
+  common_security_manifest_sha256: 96d476b082d96b6204eca6093c9daf4f4f1aae175076122042960b0d9358347e
+  common_security_contract_sha256: 7865c7544817acd2d0dd6a461766862af52f7175eb24f2c1466f52e70115aa87
+  parent_ac_config_path: configs/rts_gmlc_google_day0_multi_poi_ac_replay.yaml
+  parent_ac_config_sha256: 5c3c6d3925b78f743cf9e2e55578d1034c3d907782d03edfaa1dda3bdd1a5a9c
+  parent_ac_input_contract_sha256: 7dc28350aaa137a3f99a90a83365ebafb58c8de739a2999a5a93ed4ea0babd41
+  slack_amendment_config_path: configs/rts_gmlc_google_day0_multi_poi_ac_replay_slack_amendment.yaml
+  slack_amendment_config_sha256: ee0436c39530791ac055fedd5ec91624ba3926985c6f39b251d28f1ee504f2f1
+  slack_amendment_implementation_sha256: 6a9f2050a7882ef4c7fae72daefbc018d966ad46977bed22748383f15fe26ac0
+  slack_amendment_manifest_sha256: 3aa5c70b94f5771ba1822425b58eff4704ee1f93a7bb310146de7df8f79bfb87
+  slack_corrected_ac_result_manifest_sha256: 2b5b705d2074ddb8f846b7a8d897ed87d32021446fd867825b7dd3a0982e2a7e
+  voltage_control_amendment_config_path: configs/rts_gmlc_google_day0_multi_poi_ac_replay_voltage_control_amendment.yaml
+  voltage_control_amendment_config_sha256: 67d118fb769474ee891ce17cebfe261f64b46e02b1bb8a606c5bc3889449da6e
+  voltage_control_amendment_id: rts_gmlc_ac_replay_q_capable_voltage_control_amendment_004
+  voltage_control_amendment_implementation_sha256: b49a867f518fd29571a364bc0597b26085e32ed4b698c60128a9cfe6511dc56e
+  voltage_control_amendment_manifest_sha256: 19001629898bbaf0af191978beabdf6b1d5c779246bf304242c072b2e03b9f9a
+  voltage_control_corrected_ac_result_manifest_sha256: ee4894bba4e65433ffed4b31e4d96c78035bd2413dd4fa6accb3eb9f16c0609a
+
+zero_control:
+  source_business_rule: preserve_parent_timestamps_and_periods_zero_all_power_fields
+  zero_fields:
+    - requested_demand_mw
+    - flexible_demand_mw
+    - recoverable_flexible_mw
+    - physical_maximum_demand_mw
+    - recovery_headroom_mw
+  connected_capacity_mw: 0.0
+  contract_call_limit_mw: 0.0
+  dc_bus_api_placeholder: 120
+  placeholder_is_not_a_poi_comparison: true
+  commitment_and_initial_state: reoptimized_free_boundary_for_zero_dc_control
+  fixed_treatment_commitment_used: false
+  common_selected_n_minus_one_states_retained: true
+  native_grid_inputs_changed: false
+
+case_scope:
+  dc_horizon: all_24_hours
+  dc_security_states: all_24_parent_common_states
+  ac_security_states: normal_only
+  expected_unique_ac_cases: 24
+  power_factor_case: not_applicable_zero_active_power
+  configured_power_factor_value: 1.0
+  branch_rating: continuous
+  completion_policy: all_24_cases_reported_no_failure_deletion
+
+ac_assumptions:
+  reuse_parent_ac_numerical_inputs: true
+  unambiguous_single_online_committable_slack_required: true
+  voltage_control_target: common_online_q_capable_generator_vg
+  source_bus_vm_role: newton_start_not_control_fallback
+  colocated_q_inert_vg_normalized: true
+  conflicting_online_q_capable_vg_policy: fail_before_runpf
+  q_limit_switching: false
+  restoration_or_redispatch: false
+  poi_connection_equipment_added: false
+  hvdc_converter_reactive_power_modeled: false
+  source_mw_rating_used_as_mva_proxy: true
+  voltage_limits_pu: [0.95, 1.05]
+
+power_flow:
+  engine: pypower_runpf
+  algorithm: newton
+  tolerance: 1.0e-8
+  maximum_iterations: 20
+  voltage_violation_tolerance_pu: 1.0e-6
+  power_violation_tolerance: 1.0e-4
+  non_slack_pg_audit_tolerance_mw: 1.0e-6
+  loading_tolerance: 1.0e-6
+
+evidence:
+  evidence_status: derived_benchmark
+  result_evidence_ceiling: public_rts_gmlc_zero_dc_normal_ac_control_only
+  control_interpretation: reoptimized_no_data_center_operational_counterfactual
+  causal_poi_attribution_supported: false
+  engineering_ac_parameters_available: false
+  full_n_minus_one: false
+  ac_security: false
+  security_certified: false
+  formal_vma_published: false
+
+solver:
+  name: highs
+  tee: false
+  tolerance_mw: 1.0e-6
+  threads: 4
+  mip_relative_gap: 1.0e-6
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_zero_dc_normal_ac_control_v1

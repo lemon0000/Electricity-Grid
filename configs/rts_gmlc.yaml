@@ -1,0 +1,37 @@
+source:
+  repository: https://github.com/GridMod/RTS-GMLC
+  release: v0.2.3
+  commit: 3ece0d3725c844056132393ee252b3083dd4eab4
+  path: data/raw/rts_gmlc/v0.2.3/upstream
+  manifest_sha256: 95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914
+
+expected:
+  buses: 73
+  generators: 158
+  ac_branches: 120
+  day_ahead_hours: 8784
+
+legacy_rts24_proxy:
+  load_region: 1
+  static_peak_mw: 2850.0
+  parameter_status: rts_gmlc_area1_lineage_load_proxy
+  generator_ramp_mapping: forbidden
+
+security_snapshot_audit:
+  quantiles: [minimum, median, p95, maximum]
+  quantile_method: lower_order_statistic
+  commitment_model: single_snapshot_static_unit_selection
+  base_ac_restoration: true
+  redispatch_fraction_pmax: 0.50
+  response_parameter_status: synthetic_sensitivity_not_for_certification
+  load_parameter_status: rts_gmlc_area1_lineage_load_proxy_no_renewables
+  immediate_branch_rating: rate_c
+  sustained_rating: rate_a
+  cost_breakpoints: 65
+  solver: highs
+  excluded_islanding_policy: report_as_failure
+
+output:
+  path: results/tables/rts_gmlc_data_summary.json
+  security_snapshots: results/tables/rts24_hourly_load_security.csv
+  security_snapshot_generators: results/tables/rts24_hourly_load_commitment.csv

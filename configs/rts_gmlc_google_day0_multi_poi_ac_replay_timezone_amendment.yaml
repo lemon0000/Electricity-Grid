@@ -1,0 +1,32 @@
+amendment:
+  id: rts_gmlc_ac_replay_grid_point_timezone_amendment_002
+  schema: rts_gmlc_ac_replay_implementation_amendment_v1
+  parent_preregistration_id: rts_gmlc_google_day0_multi_poi_ac_replay_v1
+  parent_input_contract_sha256: 7dc28350aaa137a3f99a90a83365ebafb58c8de739a2999a5a93ed4ea0babd41
+  parent_amendment_id: rts_gmlc_ac_replay_grid_point_lookup_amendment_001
+  parent_amendment_implementation_sha256: bf628231bb1b32b8b8d2b7ddcc631ebca1d4c7d41b7a647444e542276a0dcb4b
+  status: repository_local_amendment_after_pre_batch_timezone_key_failure
+  externally_timestamped: false
+
+observed_before_amendment:
+  batch_ac_case_outcomes_observed: false
+  failure_type: KeyError
+  failure_detail: naive_grid_timestamp_did_not_match_aware_parent_artifact_timestamp
+  failure_stage: before_first_ac_case_configuration_or_power_flow
+
+scope:
+  permitted_change: replace_mapped_grid_point_timestamp_with_same_instant_parent_business_timestamp
+  forbidden_changes:
+    - parent_config
+    - representative_candidates
+    - hours_or_security_states
+    - power_factor_cases
+    - source_or_parent_artifacts
+    - grid_point_numerical_fields
+    - ac_case_assumptions
+    - power_flow_options
+    - ac_case_module
+    - result_acceptance_or_summary_rules
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_multi_poi_ac_replay_v1

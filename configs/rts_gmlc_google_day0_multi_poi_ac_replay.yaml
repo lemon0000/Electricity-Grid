@@ -1,0 +1,79 @@
+preregistration:
+  id: rts_gmlc_google_day0_multi_poi_ac_replay_v1
+  schema: rts_gmlc_multi_poi_ac_replay_preregistration_v1
+  status: repository_local_frozen_before_full_ac_batch
+  externally_timestamped: false
+  all_ac_cases_blind: false
+  observed_probe_cases_before_freeze:
+    - {dc_bus: 108, hour_index: 0, state_id: normal, power_factor_case: unity}
+    - {dc_bus: 108, hour_index: 0, state_id: normal, power_factor_case: lagging_095}
+
+parent_scan:
+  preregistration_contract_sha256: 16d9edc57d965e802dd17106a3a0aa7a99ae93f0f493ba977d8490573ce3fb78
+  common_security_contract_sha256: 7865c7544817acd2d0dd6a461766862af52f7175eb24f2c1466f52e70115aa87
+  aggregate_manifest_sha256: 85f157a5f14f73ffa851c8dc1bc263f67719d794a900101b987dcab3f21dac66
+  representative_bus_order: [120, 108]
+  representative_candidate_manifest_sha256:
+    120: c5baf3ca95c44e4bbd5dd1de1372bc897d9da47c8fc7cb975d0d6ff00a5fb0dd
+    108: 3c686a142e5936a9a6f03dac9876f7d55907851c6336a5c31a63bd197037e194
+
+ac_source:
+  upstream_path: data/raw/rts_gmlc/v0.2.3/upstream
+  upstream_manifest_sha256: 95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914
+  official_matpower_reference_path: data/raw/rts_gmlc/v0.2.3/ac_reference/RTS_GMLC.m
+  official_matpower_reference_sha256: 10573aee70f793c28a0602516f85c4345e6f171512852f1162c3bb3b02ba575b
+  base_mva: 100.0
+
+case_scope:
+  hours: all_24
+  security_states: all_24_common_states
+  expected_cases_per_candidate_power_factor: 576
+  candidate_representatives: [120, 108]
+  power_factor_cases:
+    - {id: unity, value: 1.0, direction: lagging}
+    - {id: lagging_095, value: 0.95, direction: lagging}
+  completion_policy: all_2304_cases_reported_no_failure_deletion
+
+ac_assumptions:
+  native_reactive_demand: static_nodal_power_factor_scaled_with_hourly_active_demand
+  data_center_reactive_demand: synthetic_power_factor_sensitivity_not_observed
+  voltage_limits_pu: [0.95, 1.05]
+  generator_q_limits_and_v_setpoints: pinned_source_data
+  generator_mbase_mva: official_matpower_conversion_system_base_100
+  synchronous_condensers: online_for_reactive_support_with_zero_active_power
+  csp_and_storage: offline_matching_dc_active_power_scope
+  fixed_bus_shunts: pinned_source_data_not_scaled_with_hourly_load
+  initial_voltage_magnitude_and_angle: pinned_source_snapshot_used_as_newton_start
+  transformer_taps: pinned_source_fixed_values
+  branch_phase_shift_degrees: zero_matching_official_conversion
+  poi_connection_equipment: absent_direct_bus_injection_without_transformer_or_line
+  hvdc: reconstruct_lossless_dc1_flow_from_saved_nodal_balances_as_fixed_endpoint_p_injections
+  hvdc_converter_reactive_power: zero_not_modeled
+  branch_rate_a: source_cont_rating_used_as_mva_proxy
+  branch_rate_b: source_lte_rating_used_as_mva_proxy
+  branch_rate_c: source_ste_rating_used_as_mva_proxy
+  source_rating_unit_is_mw_not_engineering_mva: true
+  q_limit_switching: false
+  active_power_slack: first_online_real_generator_at_reference_bus_absorbs_ac_losses
+  restoration_or_redispatch: false
+
+power_flow:
+  engine: pypower_runpf
+  algorithm: newton
+  tolerance: 1.0e-8
+  maximum_iterations: 20
+  voltage_violation_tolerance_pu: 1.0e-6
+  power_violation_tolerance: 1.0e-4
+  loading_tolerance: 1.0e-6
+
+evidence:
+  evidence_status: derived_benchmark
+  result_evidence_ceiling: public_rts_gmlc_direct_ac_replay_sensitivity_only
+  engineering_ac_parameters_available: false
+  full_n_minus_one: false
+  ac_security: false
+  security_certified: false
+  formal_vma_published: false
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_multi_poi_ac_replay_v1

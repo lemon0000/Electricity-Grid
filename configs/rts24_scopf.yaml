@@ -1,0 +1,47 @@
+case:
+  name: case24_ieee_rts
+  source: pypower
+
+solver:
+  name: highs
+
+security:
+  branch_set: all_non_islanding
+  generator_set: all_positive_capacity
+  immediate_branch_rating: rate_c
+  sustained_rating: rate_a
+  excluded_islanding_policy: report_as_failure
+
+redispatch:
+  model: symmetric_fraction_of_pmax_sensitivity
+  fractions: [0.0, 0.05, 0.10, 0.20, 0.50, 1.0]
+  response_minutes: null
+  parameter_status: synthetic_sensitivity_not_for_certification
+
+objective:
+  cost_breakpoints: 65
+  reported_cost: exact_quadratic_recalculation
+
+ac_restoration:
+  enabled: true
+  redispatch_fractions_pmax: [0.10, 0.50]
+  reference: minimum_deviation_ac_base
+  scope: all_joint_states
+
+provisional_remedial_actions:
+  parameter_status: benchmark_candidates_not_installed
+  branch_4:
+    branch_rating_overrides_mva: {9: 255.0}
+  branch_9:
+    # Bus 6 starts at BS=-100 MVAr; +140 gives a net +40 MVAr shunt.
+    shunt_injections_mvar: {6: 140.0}
+  branch_26:
+    # Open the remaining 3-24 zero-injection stub after 15-24 trips.
+    corrective_open_branch_indices: [6]
+
+validation:
+  tolerance_mw: 1.0e-6
+
+output:
+  directory: results/tables
+  prefix: rts24_m1_joint

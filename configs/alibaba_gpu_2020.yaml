@@ -1,0 +1,246 @@
+source:
+  dataset: Alibaba PAI GPU Cluster Trace v2020
+  repository: https://github.com/alibaba/clusterdata
+  documentation_commit: 0d0f3f1efdbf1add6a7bcc63676eafbd1eb11f71
+  data_base_url: https://aliopentrace.oss-cn-beijing.aliyuncs.com/v2020GPUTraces
+  path: data/raw/alibaba_gpu_2020/v2020/upstream
+  license: CC-BY-4.0
+  profile: stage1_core
+
+expected:
+  archives:
+    pai_group_tag_table.tar.gz:
+      size: 55064781
+      sha256: 722fef30b7fb7aa50dabd79155614b5423a9d65cf45a9b26c590d57725423a14
+      member: pai_group_tag_table.csv
+      header: pai_group_tag_table.header
+      header_sha256: 320470fa8f77182bc6052c95ff359b75542c748e9516b3d8148a6e2bafc1798d
+      columns: [inst_id, user, gpu_type_spec, group, workload]
+    pai_job_table.tar.gz:
+      size: 62065432
+      sha256: 5aad7f7caac501136d14ed6a48e40546f825d7b0617a3a4f337e2348fe0a6cb0
+      member: pai_job_table.csv
+      header: pai_job_table.header
+      header_sha256: 3ac33aefab9a4d81338794fa145fe280594a379444961a9c639f00181c508567
+      columns: [job_name, inst_id, user, status, start_time, end_time]
+    pai_machine_spec.tar.gz:
+      size: 30449
+      sha256: cc0d38a4045af1b1af8179de8b1b54b1ddd995e6160d6d061a6b1000f1276c2d
+      member: pai_machine_spec.csv
+      header: pai_machine_spec.header
+      header_sha256: 4c9ea25914ff3f0b73be9ff223fb91002e787138165abd3f584ba37281448e1c
+      columns: [machine, gpu_type, cap_cpu, cap_mem, cap_gpu]
+    pai_task_table.tar.gz:
+      size: 35514117
+      sha256: cd1d6dc3215d2a8607ccf6b6dd952b5db776df86926c73259fea7c1499ac40e5
+      member: pai_task_table.csv
+      header: pai_task_table.header
+      header_sha256: 978bbaabfc8695874c605c01c144b2977f611ceca73aeb72189988cdfbfb0a9c
+      columns: [job_name, task_name, inst_num, status, start_time, end_time, plan_cpu, plan_mem, plan_gpu, gpu_type]
+
+evidence:
+  status: observed_ai_workload_trace
+  continuous_power_available: false
+  checkpoint_progress_available: false
+  deadline_available: false
+  recovery_parameters_observed: false
+  stage1_uses_lifetime_utilization: false
+  calendar_dates_real: false
+  relative_intervals_preserved: true
+
+processing:
+  schema: alibaba_gpu_2020_stage1_processed_v1
+  output_path: data/processed/alibaba_gpu_2020/v2020
+  relative_hour_seconds: 3600
+  calendar_status: anonymized_relative_seconds_not_real_dates
+  jobs_group_join:
+    key: inst_id
+    statuses: [matched, missing_group_tag]
+  strict_completed_resource_complete_tasks:
+    parent_job_status: Terminated
+    task_status: Terminated
+    required_numeric_fields: [start_time, end_time, inst_num, plan_gpu]
+    require_end_not_before_start: true
+    require_positive_inst_num: true
+  successful_gpu_task_candidates:
+    base: strict_completed_resource_complete_tasks
+    require_positive_requested_gpu_equivalents: true
+  derived_units:
+    duration_seconds: end_time - start_time
+    requested_cpu_cores: inst_num * plan_cpu / 100
+    requested_gpu_equivalents: inst_num * plan_gpu / 100
+    requested_memory_gb: inst_num * plan_mem
+  missing_resource_policy: preserve_null_never_fill_zero
+
+processing_expected:
+  decompressed_bytes: 362281963
+  decompressed_bytes_by_archive:
+    pai_group_tag_table.tar.gz: 115521549
+    pai_job_table.tar.gz: 133288147
+    pai_machine_spec.tar.gz: 73311
+    pai_task_table.tar.gz: 113398956
+  table_rows:
+    jobs: 1055501
+    tasks: 1261050
+    group_tags: 1055032
+    machines: 1897
+  unique_keys:
+    job_name: true
+    job_inst_id: true
+    task_job_name_task_name: true
+    group_inst_id: true
+    machine: true
+  joins:
+    task_job_sets_equal: true
+    matched_job_group_rows: 1053971
+    orphan_group_rows: 1061
+    jobs_without_group: 1530
+    matched_nonempty_user_conflicts: 0
+    task_rows_without_parent_job: 0
+  group_tags:
+    workload_present_rows: 102798
+    workload_missing_rows: 952234
+  job_status_counts:
+    Terminated: 732355
+    Failed: 256555
+    Running: 62928
+    Waiting: 3663
+  task_status_counts:
+    Failed: 256762
+    Running: 115501
+    Terminated: 885073
+    Waiting: 3714
+  missing_counts:
+    group_tags:
+      inst_id: 0
+      user: 1
+      gpu_type_spec: 1034399
+      group: 0
+      workload: 952234
+    jobs:
+      job_name: 0
+      inst_id: 0
+      user: 0
+      status: 0
+      start_time: 3663
+      end_time: 296420
+    machines:
+      machine: 0
+      gpu_type: 0
+      cap_cpu: 0
+      cap_mem: 0
+      cap_gpu: 0
+    tasks:
+      job_name: 0
+      task_name: 0
+      inst_num: 130
+      status: 0
+      start_time: 3714
+      end_time: 349561
+      plan_cpu: 18454
+      plan_mem: 18454
+      plan_gpu: 223965
+      gpu_type: 217738
+  task_missing_counts:
+    job_name: 0
+    task_name: 0
+    inst_num: 130
+    status: 0
+    start_time: 3714
+    end_time: 349561
+    plan_cpu: 18454
+    plan_mem: 18454
+    plan_gpu: 223965
+    gpu_type: 217738
+  invalid_nonempty_numeric_counts:
+    jobs:
+      start_time: 0
+      end_time: 0
+    machines:
+      cap_cpu: 0
+      cap_mem: 0
+      cap_gpu: 0
+    tasks:
+      start_time: 0
+      end_time: 0
+      inst_num: 0
+      plan_cpu: 0
+      plan_mem: 0
+      plan_gpu: 0
+  zero_numeric_counts:
+    jobs:
+      start_time: 0
+      end_time: 0
+    machines:
+      cap_cpu: 0
+      cap_mem: 0
+      cap_gpu: 83
+    tasks:
+      start_time: 0
+      end_time: 0
+      inst_num: 0
+      plan_cpu: 11
+      plan_mem: 0
+      plan_gpu: 0
+  negative_numeric_counts:
+    jobs:
+      start_time: 0
+      end_time: 0
+    machines:
+      cap_cpu: 0
+      cap_mem: 0
+      cap_gpu: 0
+    tasks:
+      start_time: 0
+      end_time: 0
+      inst_num: 0
+      plan_cpu: 0
+      plan_mem: 0
+      plan_gpu: 0
+  time_audit:
+    job_end_before_start_rows: 0
+    task_end_before_start_rows: 0
+    task_rows_starting_after_parent_job: 180757
+    jobs_with_computable_earliest_task_start: 1051838
+    jobs_with_zero_earliest_task_start_gap: 1051838
+    jobs_with_positive_earliest_task_start_gap: 0
+  task_resource_audit:
+    maximum_plan_gpu_percent_per_instance: "800"
+    maximum_requested_gpu_equivalents_per_task: "400"
+  cohorts:
+    strict_completed_resource_complete_tasks:
+      tasks: 732318
+      jobs: 714903
+    successful_gpu_task_candidates:
+      tasks: 732318
+      jobs: 714903
+      jobs_with_workload_tag: 87007
+      tasks_missing_requested_cpu: 0
+      tasks_missing_requested_memory: 0
+  relative_hourly_workload:
+    rows: 1642
+    first_source_hour_index_anonymized: 150
+    last_source_hour_index_anonymized: 1791
+    calendar_dates_real: false
+    population: successful_gpu_task_candidates
+
+processing_expected_outputs:
+  jobs.csv.gz:
+    bytes: 79673429
+    sha256: f56b58e131c09e91b6cc81351a4069971f1ec88213807a133cb6a27373e24805
+  tasks.csv.gz:
+    bytes: 41097450
+    sha256: 9eb8fbc38997951d362a33a1a66699833e142360cfa5eec96c4ac6b9ae77fecf
+  successful_gpu_task_candidates.csv.gz:
+    bytes: 24587429
+    sha256: a53041f484144ea67c9a1777d85e2dde350c2341c94418da8072c0a94b3821d6
+  relative_hourly_workload.csv.gz:
+    bytes: 35327
+    sha256: 30aaf50d27bc2487e760ae274f593a429ff675a1f13bbcfb7d57ccf69745f4b4
+  machine_catalog.csv.gz:
+    bytes: 30127
+    sha256: ea4993e5362dbd3d682a399ea782d08bc76abbbd9b4f7590e12edd1f21dba840
+  summary_sha256: 2bbd3d48e9fc2f87f6c61e1a84f429b68a3dfdd2c002f9f993525f81ee315204
+
+output:
+  summary_path: results/tables/alibaba_gpu_2020_data_summary.json
