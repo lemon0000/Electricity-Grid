@@ -85,6 +85,12 @@ formal_successor:
   source_prefix_imported_as_recomputed: false
   all_six_checkpoints_required_before_frontier: true
   frontier_required_before_joint_ac: true
+  # Keys required by repair004._normalized_hybrid_certificate and related functions
+  # (repair-004 was designed for repair-004 config; these provide the same values)
+  maximum_accepted_absolute_gap: 1.0e-3
+  strict_cost_separation_margin_usd: 1.0e-4
+  level_set_maximum_rounds: 12
+  level_set_master_seconds_per_call: 3600.0
   candidate_controls:
     - ordinal: 1
       relative_cost_budget_delta: 0.001

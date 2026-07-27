@@ -595,11 +595,15 @@
       "float_serialization": "python_json_roundtrip_full_precision_v1",
       "frontier_required_before_joint_ac": true,
       "hybrid_evidence_schema": "rts_gmlc_v4_repair_006_hybrid_cost_evidence_v1",
+      "level_set_master_seconds_per_call": 3600.0,
+      "level_set_maximum_rounds": 12,
+      "maximum_accepted_absolute_gap": 0.001,
       "maximum_accepted_relative_gap_to_feasible_incumbent": 0.001,
       "prefix_candidate_count": 4,
       "prefix_evidence_schema": "rts_gmlc_v4_repair_006_prefix_import_evidence_v1",
       "proxy_algorithm_changed": false,
       "source_prefix_imported_as_recomputed": false,
+      "strict_cost_separation_margin_usd": 0.0001,
       "target_relative_gap": 0.0001,
       "timeout_or_ambiguous_is_infeasibility_evidence": false
     },
@@ -668,9 +672,9 @@
       "root": "results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_005"
     },
     "schema": "rts_gmlc_v4_repair_006_formal_inputs_v1",
-    "successor_config_sha256": "86b8d275783b642caa265909d5d289d9c77790356533e9652a81e0815d875cdb"
+    "successor_config_sha256": "0e4bfa535996e7b6ba49fb41265ce1abb4efa4c702bcf81d4d935fca078c783b"
   },
-  "input_contract_sha256": "04bfeb89c064bd9a3670196af4e308131014aa4f1f70297073d819db6f07eb1d",
+  "input_contract_sha256": "e1b30e87d53ccacd053c88680dddf0bf66f0775c97f4dbe9d5eb14d415ae7ed7",
   "joint_ac_outcomes_observed": false,
   "preregistration_id": "rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_006",
   "previous_ac_outcomes_observed": true,
