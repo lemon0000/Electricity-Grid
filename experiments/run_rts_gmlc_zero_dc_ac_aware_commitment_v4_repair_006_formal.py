@@ -1009,6 +1009,25 @@ def _hybrid_candidate(
     parent_successor = repair005._read_config(
         Path(context.input_contract["predecessor_repair_005"]["config_path"])
     )["formal_successor"]
+    # repair-004 functions read these keys directly; augment with fallbacks
+    # so they work when successor is repair-005 formal_successor (which renamed/removed them)
+    parent_successor = {
+        **parent_successor,
+        "maximum_accepted_absolute_gap": parent_successor.get(
+            "maximum_accepted_absolute_gap", 1.0e-3
+        ),
+        "strict_cost_separation_margin_usd": parent_successor.get(
+            "strict_cost_separation_margin_usd",
+            parent_successor.get("cost_match_tolerance_usd", 1.0e-4),
+        ),
+        "level_set_maximum_rounds": parent_successor.get(
+            "level_set_maximum_rounds",
+            parent_successor.get("cost_decision_maximum_rounds", 12),
+        ),
+        "level_set_master_seconds_per_call": parent_successor.get(
+            "level_set_master_seconds_per_call", 3600.0
+        ),
+    }
     proxy_hybrid = repair004.repair.run_hybrid_proxy_certificate(
         repair004._stable_fallback_input(direct_proxy),
         fallback_lower_snapshot=fallback_lower_snapshot,
@@ -1360,6 +1379,25 @@ def _validate_proxy_checkpoint_evidence(
     parent_successor = repair005._read_config(
         Path(context.input_contract["predecessor_repair_005"]["config_path"])
     )["formal_successor"]
+    # repair-004 functions read these keys directly; augment with fallbacks
+    # so they work when successor is repair-005 formal_successor (which renamed/removed them)
+    parent_successor = {
+        **parent_successor,
+        "maximum_accepted_absolute_gap": parent_successor.get(
+            "maximum_accepted_absolute_gap", 1.0e-3
+        ),
+        "strict_cost_separation_margin_usd": parent_successor.get(
+            "strict_cost_separation_margin_usd",
+            parent_successor.get("cost_match_tolerance_usd", 1.0e-4),
+        ),
+        "level_set_maximum_rounds": parent_successor.get(
+            "level_set_maximum_rounds",
+            parent_successor.get("cost_decision_maximum_rounds", 12),
+        ),
+        "level_set_master_seconds_per_call": parent_successor.get(
+            "level_set_master_seconds_per_call", 3600.0
+        ),
+    }
     expected_certificate = (
         repair004._normalized_hybrid_certificate(
             certificate, accepted_snapshot, parent_successor
