@@ -11,12 +11,16 @@ POI scan, and two-representative direct-AC plus zero-data-center control and
 recovery diagnostics are coupled end to end. The 24-hour and multi-POI software
 gates are closed, but the AC treatment-follow-up gate remains blocked by two
 zero-data-center hours without a feasibility witness under the official voltage
-limits. The immutable repair-002 preregistration is published and no solver
-process is active. After independent review passes, a new V4 successor attempt
-must build the six-budget-candidate AC-aware commitment frontier plus its frozen
-parent baseline; joint AC remains locked until that frontier, all manifests,
-both stage certificates, primary regret, and the final 24-state audit are
-complete and verified. Observed
+limits. The latest `repair_005` formal attempt published four of six required candidate
+checkpoints, then stopped during candidate 5 cost normalization. Its
+operational-interruption artifact records that the registered PID is no longer
+running, the active lease is retained as stale evidence, and no terminal
+failure, frontier, or joint-AC result was observed. This is not mathematical
+infeasibility or a formal solver failure, and the attempt must not be resumed.
+A fresh successor attempt must build the six-budget-candidate AC-aware
+commitment frontier plus its frozen parent baseline; joint AC remains locked
+until that frontier, all manifests, both stage certificates, primary regret, and
+the final 24-state audit are complete and verified. Observed
 absolute power, flexibility and recovery evidence, same-clock
 incidents, full N-1, engineering AC security, and annual/hourly CFE remain
 unimplemented or externally blocked.

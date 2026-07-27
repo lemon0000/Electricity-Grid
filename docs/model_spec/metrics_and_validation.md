@@ -414,11 +414,11 @@ proxy最大化的最终证书定义为`LB=q_feasible_full_state`、`UB=min(valid
 
 每个V3事件都对JSONL执行flush与fsync；每次`solver.solve`期间有30秒heartbeat，每次HiGHS调用保存独立原生日志，配置的5秒值只是MIP报告行的最小间隔，不保证每5秒产生一行。六个预算候选各自使用同目录原子rename发布checkpoint，并在resume时验证identity、完整文件集合、manifest、stage certificate、primary regret和最终审计；冻结父基线不写candidate checkpoint。只有六个预算候选全部完成并原子发布包含父基线的完整requested frontier后才允许joint AC；不得跨candidate、初值、solver或formulation拼接见证。V3 preregistration/input-contract SHA-256分别为`01646721d15395668bf0079cb6fe218dc0625187d1fbf108c5db74e47ae33f88`和`af4a388d80c211611a8e1dad3861936decb7f3c3e2de3a422116c87c013d8aa0`。
 
-历史V3 attempt `formal_20260719T061959Z`已停止且不得恢复；它没有发布六个预算checkpoint和完整frontier，也不构成数学不可行或无解证据。repair-002不可变preregistration已经发布，当前无solver进程；独立审查通过后必须从该successor root新建V4 candidate-generation attempt。只有六个预算checkpoint、包含冻结父baseline的完整frontier、manifests、两阶段certificates、primary regret和final 24-state audit全部发布并验证后，才允许joint AC。因此`treatment_followup_gate_passed=false`；此前保持`ac_security=false`、`security_certified=false`、`full_m6_model_input_ready=false`和`formal_vma_published=false`，停止依赖该对照的treatment及论文结果固定。
+历史V3 attempt `formal_20260719T061959Z`已停止且不得恢复；它没有发布六个预算checkpoint和完整frontier，也不构成数学不可行或无解证据。`repair_005`已发布4/6个checkpoint后在candidate 5运行性中断，当前无solver进程；旧attempt不得resume，后续必须使用新attempt ID和新output root重新取得lease。只有六个预算checkpoint、包含冻结父baseline的完整frontier、manifests、两阶段certificates、primary regret和final 24-state audit全部发布并验证后，才允许joint AC。因此`treatment_followup_gate_passed=false`；此前保持`ac_security=false`、`security_certified=false`、`full_m6_model_input_ready=false`和`formal_vma_published=false`，停止依赖该对照的treatment及论文结果固定。
 
 ## 13. 规格编码门槛与当前状态
 
-以下门槛用于约束后续编码；M0/M1电网安全基础、M2确定性扩建、M3固定F/X策略、M4 B0-B2基线、M5a/M5b随机基线、M5c固定政策合成holdout门、M6b接口门、具名原生RTS-GMLC 6小时/24小时后端、多POI共同状态比较、amendment-004 direct AC及零注入恢复诊断已经实现。AC-aware commitment的exact-CG runner、动态界证书、monitor、durable日志、原子checkpoint和resume门已经实现；repair-002不可变preregistration已发布并等待独立审查，当前无正式candidate-generation进程，不能写成V3或V4结果已完成。M5c只给出平衡确定性holdout适应性值与失败区域；原生DC结果只给出公开benchmark的日前selected-N-1运行见证，direct与zero-control AC结果均明确以0 secure关闭直接通过门，恢复诊断仍未见证h15/h21。它们都不构成正式经验VMA、频率、保护、工程AC或完整逐时运行认证：
+以下门槛用于约束后续编码；M0/M1电网安全基础、M2确定性扩建、M3固定F/X策略、M4 B0-B2基线、M5a/M5b随机基线、M5c固定政策合成holdout门、M6b接口门、具名原生RTS-GMLC 6小时/24小时后端、多POI共同状态比较、amendment-004 direct AC及零注入恢复诊断已经实现。AC-aware commitment的exact-CG runner、动态界证书、monitor、durable日志、原子checkpoint和resume门已经实现；`repair_005`已发布4/6个checkpoint后在candidate 5运行性中断，当前无正式candidate-generation进程；旧attempt不得resume，也不能写成V3或V4结果已完成。M5c只给出平衡确定性holdout适应性值与失败区域；原生DC结果只给出公开benchmark的日前selected-N-1运行见证，direct与zero-control AC结果均明确以0 secure关闭直接通过门，恢复诊断仍未见证h15/h21。它们都不构成正式经验VMA、频率、保护、工程AC或完整逐时运行认证：
 
 - 每个公式的功率、能量和时间单位一致；
 - 所有规划、短期、小时和事故索引在符号表中定义；

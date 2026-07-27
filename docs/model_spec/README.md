@@ -1,8 +1,8 @@
 # 模型规格总览
 
 版本：0.4  
-更新日期：2026-07-19  
-状态：L0/M1电网安全基础、L1确定性季度扩建MVP、L2固定策略F/X网络门、M4 B0-B2基线、M5a/M5b B3-B5场景树机制、M5c固定政策合成holdout、M6a连续包络和M6b逐时接口门均已实现；原生RTS-GMLC完整day-0 24小时selected-N-1 DC SCUC/ED、六候选共同状态多POI比较、amendment-004 direct AC sensitivity及零数据中心AC对照/恢复诊断已完成。AC-aware commitment的repair-002不可变preregistration已发布，当前无solver进程；独立审查通过后须新建V4 candidate-generation attempt，并在六个预算checkpoint、完整frontier、manifests、两阶段certificates、primary regret和final 24-state audit全部发布验证后才允许joint AC。direct AC安全门为`0/2304`，零注入对照为`0/24` secure，官方电压边界内的24小时共同恢复见证仍缺h15/h21；上述机制和benchmark均非场址/合同证据，`treatment_followup_gate_passed=false`且`security_certified=false`
+更新日期：2026-07-26
+状态：L0/M1电网安全基础、L1确定性季度扩建MVP、L2固定策略F/X网络门、M4 B0-B2基线、M5a/M5b B3-B5场景树机制、M5c固定政策合成holdout、M6a连续包络和M6b逐时接口门均已实现；原生RTS-GMLC完整day-0 24小时selected-N-1 DC SCUC/ED、六候选共同状态多POI比较、amendment-004 direct AC sensitivity及零数据中心AC对照/恢复诊断已完成。AC-aware commitment的`repair_005` formal attempt已发布4/6个prefix checkpoint，随后在candidate 5 cost normalization中断；`operational_interruption` manifest为`66fd455aa958c06c809f9a51a5a9588a932843b83b2cd2953b9982bd1bdb057b`，active lease作为stale evidence保留，旧attempt不得resume，当前无solver进程。后续须以新attempt和新output root重新取得lease，并在六个预算checkpoint、完整frontier、manifests、两阶段certificates、primary regret和final 24-state audit全部发布验证后才允许joint AC。direct AC安全门为`0/2304`，零注入对照为`0/24` secure，官方电压边界内的24小时共同恢复见证仍缺h15/h21；上述机制和benchmark均非场址/合同证据，`treatment_followup_gate_passed=false`且`security_certified=false`；当前中断不能写成正式失败或不可行。
 
 ## 目标
 
@@ -31,7 +31,7 @@ M5a冻结树为四季度12叶递进全因子：六条共享q1且只使用50/100/
 
 M5b已按上述规则完成B3/B4/B5各13项stage，B4相对B3的树内合成缺口改善为`128800 MWh`，B5与B4在该树上相同但保持不可实施。M5c在12条冻结holdout叶上执行B3/B4的minimum-X和maximum-X端点，48次执行全部通过；两端点的合成holdout适应性值均为`110400 MWh`，同时保留3条延期/低需求路径上B4劣化`22080-33120 MWh`的失败区域。概率和holdout均为平衡合成机制设计，不得称正式经验VMA。
 
-当前认证阻塞项包括：RTS-24没有响应时间/爬坡证据，机组故障也没有单列响应前频率状态；branch 10孤岛尚无规划处置；M1候选补救和M2/L2/M4扩建的热额定值、MVA/无功、工期及成本缺少工程证据；连续包络参数、事故轨迹和业务恢复头寸均为合成敏感性；RTS-24固定全在线机组仍没有启动、最小开停机和跨时爬坡；RTS-24扩建/F/X尚无工程AC复核；M4只识别B2集合值区间，没有可识别的唯一经济最优拆分。原生RTS-GMLC direct AC与零注入对照均为0 secure，且560、565和三初值IPOPT在官方边界内都未见证h15/h21；repair-002不可变preregistration已发布但当前无solver进程，独立审查通过后还须新建V4 attempt并完成全部candidate-generation门，才可取得单一candidate/初值的24小时joint AC见证。另一解除路径是取得有来源的tap、可切换shunt、补偿设备及控制参数；观测事故、full-N1和接入工程证据也仍缺失。逐项证据和解除条件见`blocker_register.md`。
+当前认证阻塞项包括：RTS-24没有响应时间/爬坡证据，机组故障也没有单列响应前频率状态；branch 10孤岛尚无规划处置；M1候选补救和M2/L2/M4扩建的热额定值、MVA/无功、工期及成本缺少工程证据；连续包络参数、事故轨迹和业务恢复头寸均为合成敏感性；RTS-24固定全在线机组仍没有启动、最小开停机和跨时爬坡；RTS-24扩建/F/X尚无工程AC复核；M4只识别B2集合值区间，没有可识别的唯一经济最优拆分。原生RTS-GMLC direct AC与零注入对照均为0 secure，且560、565和三初值IPOPT在官方边界内都未见证h15/h21；`repair_005`已发布4/6个checkpoint后在candidate 5中断，旧attempt不得resume且当前无solver进程；后续须以新attempt和新output root完成全部candidate-generation门，才可取得单一candidate/初值的24小时joint AC见证。另一解除路径是取得有来源的tap、可切换shunt、补偿设备及控制参数；观测事故、full-N1和接入工程证据也仍缺失。逐项证据和解除条件见`blocker_register.md`。
 
 ## 文档结构
 
@@ -92,7 +92,7 @@ M5b已按上述规则完成B3/B4/B5各13项stage，B4相对B3的树内合成缺�
 - Gurobi/CPLEX/Xpress均已安装并通过接口smoke test，但当前自动许可证容量不足；HiGHS 1.15.1是当前唯一正式合格引擎。冻结6小时、24状态的1/4/8线程重复benchmark按非目标值规则选择4线程，result manifest为`4b05c7d7fcbd8f64ddb9eb61d4ee15c571a7905d8ebd453ac19d07cbf56c63d1`。随后单体与exact-CG重复比较中，exact-CG以`54.057/54.502 s`两次通过最终24状态审计；单体两次到时限且认证区间宽度为`0.003796157`，因此机械选择exact-CG，result manifest为`82f1f0cb72d574b2054f193f6354383c5629bd30796b42a919323ef326c0d7e1`。
 - 上述选择只表示预注册比较矩阵中的最快合格配置。正式首个proxy master在`2801.9 s`才找到incumbent，约5秒后zero gap；父baseline本来就是成本帽内且proxy为`0.24328147100424327`的已知可行点，但当前Pyomo `highs`接口不支持MIP start。这是非阻塞性能缺口，不影响可行域或最终证书；任何`appsi_highs`/native warm-start后继都必须先独立重复pilot并建立新预注册，不能修改V3。
 - V3冻结每阶段实际`LB/UB/absolute gap/incumbent-relative gap`证书：目标相对gap为`1e-4`，最大相对接受值为`1e-3`，proxy另有`1e-3`绝对gap上限；动态变化的是实际界区间，不允许看结果后改阈值。正式资格只读取stage顶层incumbent-relative字段，嵌套certificate的通用relative/target字段只作辅助诊断。每轮筛查全部inactive state，未解析状态保守提升，最终必须通过24状态fixed-shared LP与残差审计；cost commitment还必须通过`stage1 gap + 1e-7 + 1e-6`和`0.0010011`双重primary proxy regret门。preregistration manifest为`01646721d15395668bf0079cb6fe218dc0625187d1fbf108c5db74e47ae33f88`，input contract为`af4a388d80c211611a8e1dad3861936decb7f3c3e2de3a422116c87c013d8aa0`。
-- 历史正式attempt `formal_20260719T061959Z`在每次solve期间启用30秒durable JSONL心跳，每个HiGHS调用有独立原生日志；截至2026-07-19 14:32 +08，首个预算候选当时仍在第一轮proxy master，尚无incumbent、预算候选checkpoint、最终24状态审计或frontier。该attempt现已停止且不得恢复，停止不构成不可行证据。repair-002审查通过后的新V4 attempt必须原子发布并验证六个预算checkpoint、包含冻结父baseline的完整frontier、manifests、两阶段certificates、primary regret和final 24-state audit；此前禁止joint AC且门禁保持false。
+- 历史正式attempt `formal_20260719T061959Z`在每次solve期间启用30秒durable JSONL心跳，每个HiGHS调用有独立原生日志；截至2026-07-19 14:32 +08，首个预算候选当时仍在第一轮proxy master，尚无incumbent、预算候选checkpoint、最终24状态审计或frontier。该attempt现已停止且不得恢复，停止不构成不可行证据。`repair_005`旧attempt已运行性中断且不得resume；后续新attempt必须原子发布并验证六个预算checkpoint、包含冻结父baseline的完整frontier、manifests、两阶段certificates、primary regret和final 24-state audit；此前禁止joint AC且门禁保持false。
 - 6小时归档`rts_gmlc_google_day0_first6h_selected_n1_dc_scuc_v1`继续保留：固定组合ED目标为`157084.446540127 USD`，有效master下界为`157084.446540126 USD`，认证absolute gap为`1e-9 USD`、relative gap为0；manifest SHA-256为`405c5109ef405f1961f6e9e461be5bfa42bd88f074bd30fa49e67006f6edcd10`。
 - 正确性修复已移除会删除合法crossing UC trajectories的逐时custom commitment symmetry；逻辑等价的`reserve_up <= 10min_ramp * commitment`保留为精确LP凸包cut。修复后的24小时normal master在118.9秒内达到zero gap。
 - 24小时、多POI和上述AC诊断只解除具名公开软件benchmark的计算与诊断门；`treatment_followup_gate_passed=false`、`ac_security=false`、`security_certified=false`、`full_m6_model_input_ready=false`和`formal_vma_published=false`。派生功率仍不是观测绝对MW，priority/NCU仍不是观测柔性；真实柔性/恢复、观测事故、full-N1和工程级AC参数/控制阻塞均未解除。
