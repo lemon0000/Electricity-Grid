@@ -27,6 +27,9 @@ from experiments import (
 from experiments import (
     run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_005_formal as repair005,
 )
+from experiments import (
+    run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_004_formal as repair004,
+)
 from experiments.process_google_power_workload_day0 import _verify_manifest
 from src.grid.rts_gmlc_exact_cg import SharedSnapshot
 from src.grid.rts_gmlc_cost_bisection import (
@@ -634,7 +637,7 @@ def _repeat_cost_audit(
         raise RuntimeError(
             "repair-005 candidate deadline exhausted before repeated cost audit"
         )
-    frozen_limit = repair005._stage_limits(
+    frozen_limit = repair004._stage_limits(
         context, "cost_normalization"
     ).final_audit_seconds
     limit = min(float(frozen_limit), remaining)
@@ -722,7 +725,7 @@ def _run_hybrid_cost_normalization(
             cost_spec["maximum_accepted_relative_gap_to_feasible_incumbent"]
         ),
         maximum_accepted_absolute_gap=cost_spec["maximum_accepted_absolute_gap"],
-        time_limits=repair005._stage_limits(context, "cost_normalization"),
+        time_limits=repair004._stage_limits(context, "cost_normalization"),
         callbacks=direct_adapter.callbacks(),
         proxy_floor=proxy_floor,
         candidate_deadline_monotonic=deadline_monotonic,
@@ -812,7 +815,7 @@ def _run_hybrid_cost_normalization(
                 cost_spec["maximum_accepted_relative_gap_to_feasible_incumbent"]
             ),
             maximum_accepted_absolute_gap=None,
-            time_limits=repair005._stage_limits(context, "cost_normalization"),
+            time_limits=repair004._stage_limits(context, "cost_normalization"),
             callbacks=adapter.callbacks(),
             proxy_floor=proxy_floor,
             candidate_deadline_monotonic=deadline_monotonic,
@@ -919,7 +922,7 @@ def _hybrid_candidate(
         "relative_cost_budget_delta": delta,
         "repair_005_cost_bisection": True,
     }
-    direct_adapter = repair005.V4InitialProxyWarmStartAdapter(
+    direct_adapter = repair004.V4InitialProxyWarmStartAdapter(
         problem=problem,
         formal_solver=context.config["formal_solver"],
         candidate_frontier=context.config["candidate_frontier"],
@@ -944,7 +947,7 @@ def _hybrid_candidate(
                 "maximum_accepted_absolute_gap"
             ]
         ),
-        time_limits=repair005._stage_limits(context, "proxy_maximization"),
+        time_limits=repair004._stage_limits(context, "proxy_maximization"),
         callbacks=direct_adapter.callbacks(),
         candidate_deadline_monotonic=deadline_monotonic,
     )
@@ -981,7 +984,7 @@ def _hybrid_candidate(
                 successor["maximum_accepted_relative_gap_to_feasible_incumbent"]
             ),
             maximum_accepted_absolute_gap=None,
-            time_limits=repair005.ExactCgTimeLimits(
+            time_limits=repair004.ExactCgTimeLimits(
                 master_seconds=float(
                     context.input_contract["predecessor_repair_005"].get(
                         "level_set_master_seconds_per_call", 3600.0
@@ -1006,8 +1009,8 @@ def _hybrid_candidate(
     parent_successor = repair005._read_config(
         Path(context.input_contract["predecessor_repair_005"]["config_path"])
     )["formal_successor"]
-    proxy_hybrid = repair005.repair.run_hybrid_proxy_certificate(
-        repair005._stable_fallback_input(direct_proxy),
+    proxy_hybrid = repair004.repair.run_hybrid_proxy_certificate(
+        repair004._stable_fallback_input(direct_proxy),
         fallback_lower_snapshot=fallback_lower_snapshot,
         imported_upper_bound=1.0,
         level_oracle=level_oracle,
@@ -1031,7 +1034,7 @@ def _hybrid_candidate(
     if proxy_hybrid.snapshot is not None:
         proxy_hybrid = replace(
             proxy_hybrid,
-            certificate=repair005._normalized_hybrid_certificate(
+            certificate=repair004._normalized_hybrid_certificate(
                 proxy_hybrid.certificate,
                 proxy_hybrid.snapshot,
                 parent_successor,
@@ -1358,7 +1361,7 @@ def _validate_proxy_checkpoint_evidence(
         Path(context.input_contract["predecessor_repair_005"]["config_path"])
     )["formal_successor"]
     expected_certificate = (
-        repair005._normalized_hybrid_certificate(
+        repair004._normalized_hybrid_certificate(
             certificate, accepted_snapshot, parent_successor
         )
         if isinstance(certificate, Mapping)
@@ -1388,7 +1391,7 @@ def _validate_proxy_checkpoint_evidence(
             or references != []
             or not isinstance(raw_certificate, Mapping)
             or v4._exact_json_text(
-                repair005._normalized_hybrid_certificate(
+                repair004._normalized_hybrid_certificate(
                     raw_certificate, accepted_snapshot, parent_successor
                 )
             )
@@ -1841,7 +1844,7 @@ def _save_candidate_checkpoint(
                 wrapper, context, ordinal, candidate, observed["evidence"]
             )
 
-    repair005._publish_recursive_payload(target, writer, validator)
+    repair004._publish_recursive_payload(target, writer, validator)
     observed = v4._load_json(target, "candidate.json")
     loaded = _validate_checkpoint_document(observed, context, ordinal)
     _validate_round_artifacts(target, context, ordinal, loaded[0], observed["evidence"])
