@@ -1016,14 +1016,14 @@ def _hybrid_candidate(
         level_oracle=level_oracle,
         effective_budget_usd=effective_budget,
         strict_separation_margin_usd=float(
-            parent_successor["strict_cost_separation_margin_usd"]
+            parent_successor.get("strict_cost_separation_margin_usd", parent_successor["cost_match_tolerance_usd"])
         ),
         target_relative_gap=float(parent_successor["target_relative_gap"]),
-        maximum_absolute_gap=float(parent_successor["maximum_accepted_absolute_gap"]),
+        maximum_absolute_gap=float(parent_successor.get("maximum_accepted_absolute_gap", 1.0e-3)),
         maximum_relative_gap=float(
             parent_successor["maximum_accepted_relative_gap_to_feasible_incumbent"]
         ),
-        maximum_rounds=int(parent_successor["level_set_maximum_rounds"]),
+        maximum_rounds=int(parent_successor.get("level_set_maximum_rounds", parent_successor["cost_decision_maximum_rounds"])),
         candidate_id=requested_id,
         candidate_ordinal=ordinal,
         input_contract_sha256=context.input_contract_sha256,
@@ -1405,7 +1405,7 @@ def _validate_proxy_checkpoint_evidence(
             or not isinstance(references, list)
             or not 1
             <= len(references)
-            <= int(parent_successor["level_set_maximum_rounds"])
+            <= int(parent_successor.get("level_set_maximum_rounds", parent_successor["cost_decision_maximum_rounds"]))
         ):
             raise RuntimeError("repair-005 fallback proxy evidence drifted")
     else:
