@@ -1,0 +1,63 @@
+{
+  "active_lease": {
+    "lease_id": "d99c538dbc2f43fcb55f0bf4015aa5bd",
+    "relative_path": "execution_lease/active/lease.json",
+    "retained": true,
+    "sha256": "79e24b281809062cc034edb7d69515f8350feafe3e6113bd49c8689d9bb95ddf",
+    "takeover_or_release_performed_by_recorder": false,
+    "terminal_record_present": false
+  },
+  "attempt_failed_event_present": false,
+  "attempt_file_sha256": {
+    "attempt.json": "077c823fa15c9a8ce993b76d2b5b6dc2fcb449b437edfe0175b61be8a1c33895",
+    "launcher.request.json": "cefd2f120143f5e59c995a62c668442e3822e254ef117ee788c77c3b6e0d54ad",
+    "launcher.started.json": "2a74a740057a9e0848a8a64183c6f1e954e2c8589d8b3cb74dd53f51dc087478",
+    "launcher.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "launcher.stdout.log": "a29229df5923b0711ead388e0c97fe86bf9650604c30089318e1452b762e2087",
+    "progress.jsonl": "21b717db139c74033bb1f22e55c6c16b3014af2c21e9c7d5fd9fd481736464c1"
+  },
+  "candidate_checkpoint_names": [
+    "01_q_proxy_delta_0p0010",
+    "02_q_proxy_delta_0p0025",
+    "03_q_proxy_delta_0p0050",
+    "04_q_proxy_delta_0p0100"
+  ],
+  "candidate_failed_event_present": false,
+  "candidate_frontier_artifact_published": false,
+  "formal_attempt_id": "formal_repair_005_20260722T135158Z",
+  "input_contract_sha256": "a32e2c6539387e7c5c07255c106debdc0e718b9e0fe0a121bea34da858ed9e0a",
+  "interruption_is_formal_failure": false,
+  "interruption_is_infeasibility_evidence": false,
+  "interruption_reason": "process_not_running_after_progress_stopped_without_a_terminal_event;_cause_is_not_observable_from_registered_artifacts",
+  "joint_ac_solver_call_count": 0,
+  "last_progress_event": {
+    "event": "heartbeat",
+    "monotonic_elapsed_seconds": 9571.639702199998,
+    "native_log": "cost_normalization__iteration_01__master.log",
+    "solve_label": "cost_normalization.iteration_01.master",
+    "timestamp_utc": "2026-07-22T16:32:15.138847+00:00"
+  },
+  "mathematical_infeasibility_certified": false,
+  "observed_at_utc": "2026-07-26T14:17:10.517978+00:00",
+  "preregistration_id": "rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_005",
+  "preregistration_manifest_sha256": "853964cb675d390a5fbf4e13ede0fb2e52267fdcfb141afc6b513155e6df8786",
+  "process_id": 3744,
+  "process_is_running": false,
+  "process_started_at_utc": "2026-07-22T13:52:43.498457+00:00",
+  "progress_sha256": "21b717db139c74033bb1f22e55c6c16b3014af2c21e9c7d5fd9fd481736464c1",
+  "repair_005_resume_allowed": false,
+  "schema": "rts_gmlc_v4_repair_005_operational_interruption_v1",
+  "scientific_protocol_changed": false,
+  "solver_failure": false,
+  "source_snapshot_sha256": {
+    "configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_005.yaml": "c0aa26f4bfa6b4e9c0bcb8a59c8ca17d9ea0fc91078a00fce63fc5b97385359a",
+    "experiments/monitor_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_005.py": "6cfe8383ec54d74b41e9e213fddae52f36ed014fafa4c9e1ef468ca482751a85",
+    "experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_005_formal.py": "989ef4fb376bcc97ae43b8fb2ca8dd33f159028fee523bed646bc958fd59fe08",
+    "scripts/start_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_005.ps1": "0db926b4d82ad169199cc90ae7ba373e6c8edc45f17e89d2be6cdd1ec628d99b"
+  },
+  "status": "operationally_interrupted_after_four_valid_checkpoints_and_during_candidate_5_cost_normalization_before_frontier_or_joint_ac",
+  "successor_must_use_new_attempt_id": true,
+  "successor_must_use_new_output_root": true,
+  "terminal_progress_event_present": false,
+  "valid_candidate_checkpoint_count": 4
+}

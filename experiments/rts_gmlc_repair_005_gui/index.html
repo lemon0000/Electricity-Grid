@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>repair-005 求解监控</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:ui-monospace,monospace;font-size:13px;background:#0f1117;color:#c9d1d9;min-height:100vh}
+header{display:flex;align-items:center;gap:12px;padding:10px 16px;background:#161b22;border-bottom:1px solid #30363d}
+header h1{font-size:14px;font-weight:600;color:#e6edf3}
+#attempt-select{background:#21262d;color:#c9d1d9;border:1px solid #30363d;border-radius:6px;padding:4px 8px;font-size:12px;cursor:pointer}
+#refresh-btn{background:#21262d;color:#8b949e;border:1px solid #30363d;border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer}
+#refresh-btn:hover{color:#c9d1d9}
+#auto-badge{font-size:11px;color:#8b949e;margin-left:4px}
+.main{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 16px}
+@media(max-width:800px){.main{grid-template-columns:1fr}}
+.card{background:#161b22;border:1px solid #30363d;border-radius:8px;overflow:hidden}
+.card-title{font-size:11px;font-weight:600;color:#8b949e;text-transform:uppercase;letter-spacing:.05em;padding:8px 12px;border-bottom:1px solid #30363d;background:#0d1117}
+.card-body{padding:10px 12px}
+.status-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600}
+.badge.running{background:#0d3320;color:#3fb950;border:1px solid #238636}
+.badge.stale{background:#2d1d02;color:#d29922;border:1px solid #9e6a03}
+.badge.completed{background:#0d2149;color:#58a6ff;border:1px solid #1f6feb}
+.badge.failed{background:#2d0f0f;color:#f85149;border:1px solid #b22222}
+.badge.missing,.badge.unknown{background:#161b22;color:#8b949e;border:1px solid #30363d}
+.dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.dot.pulse{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.metric{background:#0d1117;border-radius:6px;padding:6px 10px}
+.metric-label{font-size:10px;color:#8b949e;margin-bottom:2px}
+.metric-value{font-size:13px;color:#e6edf3;font-weight:600}
+.metric-value.gap-bad{color:#f0883e}
+.metric-value.gap-ok{color:#3fb950}
+.progress-bar-wrap{background:#21262d;border-radius:4px;height:8px;margin:8px 0;overflow:hidden}
+.progress-bar{height:100%;background:#238636;border-radius:4px;transition:width .4s}
+.work-label{font-size:11px;color:#8b949e;margin-top:4px;word-break:break-all}
+.work-value{color:#79c0ff;font-size:12px}
+#events-list{max-height:260px;overflow-y:auto;font-size:11px}
+.ev{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid #21262d}
+.ev:last-child{border-bottom:none}
+.ev-time{color:#484f58;flex-shrink:0;width:60px}
+.ev-name{color:#79c0ff;flex-shrink:0;min-width:120px}
+.ev-detail{color:#8b949e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ev-name.completed{color:#3fb950}
+.ev-name.failed{color:#f85149}
+#log-pre{max-height:260px;overflow-y:auto;font-size:11px;color:#8b949e;white-space:pre;background:#0d1117;padding:8px;border-radius:4px;line-height:1.5}
+.warn-list{font-size:11px;color:#d29922;padding:4px 12px 6px}
+</style>
+</head>
+<body>
+<header>
+  <h1>repair-005 求解监控</h1>
+  <select id="attempt-select"><option value="">（加载中…）</option></select>
+  <button id="refresh-btn">刷新</button>
+  <span id="auto-badge">自动刷新 5s</span>
+  <span id="updated-at" style="margin-left:auto;font-size:11px;color:#484f58"></span>
+</header>
+
+<div class="main">
+  <!-- 左上：状态 + 进度 + 当前工作 -->
+  <div class="card">
+    <div class="card-title">运行状态</div>
+    <div class="card-body">
+      <div class="status-row">
+        <span id="status-badge" class="badge missing"><span class="dot"></span>未知</span>
+        <span id="pid-label" style="font-size:11px;color:#484f58"></span>
+      </div>
+      <div class="progress-bar-wrap"><div id="progress-bar" class="progress-bar" style="width:0%"></div></div>
+      <div id="progress-text" style="font-size:11px;color:#8b949e;margin-bottom:8px">候选 0 / 0</div>
+      <div class="work-label">当前候选 <span id="cur-candidate" class="work-value">—</span></div>
+      <div class="work-label">阶段 <span id="cur-stage" class="work-value">—</span></div>
+      <div class="work-label">solve <span id="cur-solve" class="work-value" style="font-size:11px">—</span></div>
+      <div style="margin-top:8px;display:flex;gap:16px;font-size:11px;color:#8b949e">
+        <span>已运行 <b id="elapsed-label" style="color:#c9d1d9">—</b></span>
+        <span>心跳 <b id="hb-age-label" style="color:#c9d1d9">—</b> 前</span>
+        <span>剩余 <b id="remaining-label" style="color:#c9d1d9">—</b></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右上：求解指标 -->
+  <div class="card">
+    <div class="card-title">求解指标（最新可行解 / 对偶界）</div>
+    <div class="card-body">
+      <div class="metrics">
+        <div class="metric"><div class="metric-label">最优解 (incumbent)</div><div id="m-incumbent" class="metric-value">—</div></div>
+        <div class="metric"><div class="metric-label">对偶下界 (lower bound)</div><div id="m-lb" class="metric-value">—</div></div>
+        <div class="metric"><div class="metric-label">绝对间隙 (abs gap)</div><div id="m-absgap" class="metric-value">—</div></div>
+        <div class="metric"><div class="metric-label">相对间隙 (gap %)</div><div id="m-gap" class="metric-value">—</div></div>
+        <div class="metric"><div class="metric-label">B&amp;B 节点数</div><div id="m-nodes" class="metric-value">—</div></div>
+        <div class="metric"><div class="metric-label">上界 (upper bound)</div><div id="m-ub" class="metric-value">—</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 左下：事件日志 -->
+  <div class="card">
+    <div class="card-title">最近事件（排除心跳）</div>
+    <div class="card-body" style="padding:0"><div id="events-list"></div></div>
+  </div>
+
+  <!-- 右下：HiGHS 日志 -->
+  <div class="card">
+    <div class="card-title">HiGHS 日志末尾</div>
+    <div class="card-body" style="padding:6px 8px">
+      <pre id="log-pre">（等待求解器日志…）</pre>
+      <div id="log-warn" class="warn-list"></div>
+    </div>
+  </div>
+</div>
+<div id="global-warn" class="warn-list" style="padding:4px 16px"></div>
+<script>
+const $ = id => document.getElementById(id);
+const fmt = (v, dec=2) => v == null ? '—' : Number(v).toLocaleString('zh-CN', {maximumFractionDigits:dec});
+const fmtSec = s => { if(s==null) return '—'; s=Math.round(s); const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),ss=s%60; return h?`${h}h${m}m`:(m?`${m}m${ss}s`:`${ss}s`); };
+const fmtUTC = t => { if(!t) return ''; try{ return new Date(t).toLocaleTimeString('zh-CN',{hour12:false}); }catch{ return t; } };
+
+let currentAttempt = null;
+let refreshTimer = null;
+
+async function fetchJSON(url) {
+  const r = await fetch(url); return r.json();
+}
+
+async function loadAttempts() {
+  try {
+    const d = await fetchJSON('/api/attempts');
+    const sel = $('attempt-select');
+    sel.innerHTML = '';
+    if (!d.attempts || !d.attempts.length) {
+      sel.innerHTML = '<option value="">（暂无 attempt）</option>'; return;
+    }
+    d.attempts.forEach((a,i) => {
+      const opt = document.createElement('option');
+      opt.value = a.id; opt.textContent = a.id + (i===0?' (最新)':'');
+      sel.appendChild(opt);
+    });
+    if (!currentAttempt) currentAttempt = d.attempts[0].id;
+    sel.value = currentAttempt;
+  } catch(e) { console.error('loadAttempts', e); }
+}
+
+function renderStatus(d) {
+  const badge = $('status-badge');
+  const statusMap = {running:'运行中',stale:'已停滞',completed:'已完成',failed:'失败',missing:'无日志',unknown:'未知',malformed:'数据损坏'};
+  const s = d.status || 'missing';
+  badge.className = `badge ${s}`;
+  badge.innerHTML = `<span class="dot${s==='running'?' pulse':''}"></span>${statusMap[s]||s}`;
+  $('pid-label').textContent = d.pid ? `PID ${d.pid}` : '';
+
+  const done = d.completed_budget_candidate_count || 0;
+  const total = d.requested_budget_candidate_count || 6;
+  const pct = total ? Math.round(done/total*100) : 0;
+  $('progress-bar').style.width = pct + '%';
+  $('progress-text').textContent = `候选 ${done} / ${total} (${pct}%)`;
+
+  $('cur-candidate').textContent = d.current_candidate || '—';
+  $('cur-stage').textContent = d.current_stage || '—';
+  $('cur-solve').textContent = d.current_solve_label || '—';
+
+  $('elapsed-label').textContent = fmtSec(d.elapsed_seconds);
+  const hba = d.last_heartbeat_age_seconds;
+  const hbEl = $('hb-age-label');
+  hbEl.textContent = fmtSec(hba);
+  hbEl.style.color = (hba != null && hba > 120) ? '#f85149' : '#c9d1d9';
+  $('remaining-label').textContent = fmtSec(d.remaining_seconds);
+
+  $('m-incumbent').textContent = d.latest_incumbent != null ? fmt(d.latest_incumbent) + ' USD' : '—';
+  $('m-lb').textContent = d.latest_lower_bound != null ? fmt(d.latest_lower_bound) + ' USD' : '—';
+  $('m-ub').textContent = d.latest_upper_bound != null ? fmt(d.latest_upper_bound) + ' USD' : '—';
+  $('m-absgap').textContent = d.latest_absolute_gap != null ? fmt(d.latest_absolute_gap) + ' USD' : '—';
+  const gapPct = d.latest_gap != null ? d.latest_gap * 100 : null;
+  const gapEl = $('m-gap');
+  gapEl.textContent = gapPct != null ? gapPct.toFixed(4) + ' %' : '—';
+  gapEl.className = 'metric-value ' + (gapPct == null ? '' : gapPct > 0.1 ? 'gap-bad' : 'gap-ok');
+  $('m-nodes').textContent = d.latest_nodes != null ? d.latest_nodes.toLocaleString('zh-CN') : '—';
+
+  const warns = (d.warnings || []).join(' | ');
+  $('global-warn').textContent = warns;
+  $('updated-at').textContent = '更新于 ' + fmtUTC(d.observed_at_utc);
+}
+
+function renderEvents(d) {
+  const list = $('events-list');
+  if (!d.events || !d.events.length) { list.innerHTML = '<div style="padding:8px 12px;color:#484f58;font-size:11px">暂无事件</div>'; return; }
+  const GOOD = new Set(['attempt_completed','run_completed','candidate_completed','joint_call_completed','exact_cg_stage_completed','formal_full_state_audit_completed','candidate_checkpoint_loaded']);
+  const BAD = new Set(['attempt_failed','run_failed','candidate_failed','joint_call_failed','solve_failed']);
+  list.innerHTML = [...d.events].reverse().map(ev => {
+    const cls = GOOD.has(ev.event)?'completed':BAD.has(ev.event)?'failed':'';
+    const detail = [ev.candidate||ev.solve_label||ev.stage,'iter '+ev.iteration].filter(Boolean).join(' · ');
+    return `<div class="ev"><span class="ev-time">${fmtUTC(ev.timestamp_utc)}</span><span class="ev-name ${cls}">${ev.event}</span><span class="ev-detail">${detail}</span></div>`;
+  }).join('');
+}
+
+function renderLog(d) {
+  const pre = $('log-pre');
+  if (!d.log || !d.log.text) { pre.textContent = '（暂无 solver 日志）'; return; }
+  pre.textContent = (d.log.truncated ? '…（截断）\n' : '') + d.log.text;
+  pre.scrollTop = pre.scrollHeight;
+  $('log-warn').textContent = (d.warnings||[]).join(' | ');
+}
+
+async function refresh() {
+  if (!currentAttempt) { await loadAttempts(); }
+  try {
+    const [sd, ed] = await Promise.all([
+      fetchJSON(`/api/status?attempt=${encodeURIComponent(currentAttempt||'')}`),
+      fetchJSON(`/api/events?attempt=${encodeURIComponent(currentAttempt||'')}&limit=60`)
+    ]);
+    renderStatus(sd);
+    renderEvents(ed);
+    if (sd.native_log_path) {
+      const ld = await fetchJSON(`/api/log?attempt=${encodeURIComponent(currentAttempt||'')}&log=${encodeURIComponent(sd.native_log_path)}`);
+      renderLog(ld);
+    }
+    if (sd.attempts) {
+      const sel = $('attempt-select');
+      const cur = sel.value;
+      sel.innerHTML = '';
+      sd.attempts.forEach((a,i) => {
+        const opt = document.createElement('option');
+        opt.value = a.id; opt.textContent = a.id + (i===0?' (最新)':'');
+        sel.appendChild(opt);
+      });
+      sel.value = cur || (sd.attempts[0]||{}).id;
+    }
+  } catch(e) { $('global-warn').textContent = '请求失败: '+e; }
+}
+
+$('attempt-select').addEventListener('change', e => { currentAttempt = e.target.value; refresh(); });
+$('refresh-btn').addEventListener('click', () => refresh());
+
+loadAttempts().then(() => refresh());
+refreshTimer = setInterval(() => refresh(), 5000);
+</script>
+</body>
+</html>
