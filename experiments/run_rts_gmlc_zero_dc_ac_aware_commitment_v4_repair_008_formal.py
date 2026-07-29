@@ -166,19 +166,19 @@ def _verify_parent_failure(
     preregistration = root / "preregistration"
     _verify_manifest(preregistration)
     if _sha256(preregistration / "SHA256SUMS") != predecessor["preregistration_manifest_sha256"]:
-        raise RuntimeError("repair-007 parent preregistration manifest drifted")
+        raise RuntimeError("repair-008 parent preregistration manifest drifted")
     registration = v4._load_json(preregistration, "registration.json")
     if (
         registration.get("preregistration_id")
-        != "rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_006"
+        != "rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_007"
         or registration.get("input_contract_sha256")
         != predecessor["input_contract_sha256"]
         or registration.get("candidate_frontier_outcomes_observed") is not False
         or registration.get("joint_ac_outcomes_observed") is not False
     ):
-        raise RuntimeError("repair-007 parent preregistration content drifted")
+        raise RuntimeError("repair-008 parent preregistration content drifted")
     if (root / "candidate_frontier").exists() or (root / "joint_ac").exists():
-        raise RuntimeError("repair-007 parent gained forbidden downstream evidence")
+        raise RuntimeError("repair-008 parent gained forbidden downstream evidence")
     checkpoints = root / "candidate_checkpoints"
     names = predecessor["candidate_checkpoint_names"]
     for ordinal, name in enumerate(names, 1):
@@ -189,7 +189,7 @@ def _verify_parent_failure(
             or _sha256(cp / "candidate.json")
             != predecessor["candidate_json_sha256s"][ordinal - 1]
         ):
-            raise RuntimeError(f"repair-007 parent checkpoint {name} hash drifted")
+            raise RuntimeError(f"repair-008 parent checkpoint {name} hash drifted")
 
 
 def _source_context(config: Mapping[str, Any]) -> v4._FrontierContext:
