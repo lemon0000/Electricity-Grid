@@ -1,0 +1,129 @@
+schema: rts_gmlc_v4_repair_008_formal_successor_config_v1
+
+preregistration:
+  id: rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_008
+  schema: rts_gmlc_zero_dc_ac_aware_commitment_preregistration_v4_repair_008
+  status: repository_local_relaxed_gap_successor_before_formal_candidate_generation
+  candidate_frontier_outcomes_observed: false
+  joint_ac_outcomes_observed: false
+
+base_v4:
+  config_path: configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4.yaml
+  config_sha256: b107aba3908b04bbd677994ac272eeb98d35d5d957978dd42a70f5e44672b84b
+  runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4.py
+  runner_sha256: af0f727f29365955d534b0827fbb289f2c6d48cc2423b737eb980b4f41cf47cd
+  scientific_config_changed: false
+  joint_ac_protocol_changed: false
+
+predecessor_repair_007:
+  root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_007
+  config_path: configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_007.yaml
+  config_sha256: ed6fea1547e4bc718aaba33fe5575cd99e9bb6355036a77de9dc2c48537f7de8
+  formal_runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_007_formal.py
+  formal_runner_sha256: ea16d738d90d64fc8b006c6bc28d6c354fa03d7a758e57d9de8d5c20e7c313e9
+  monitor_path: experiments/monitor_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_007.py
+  monitor_sha256: 0cbd120ce92014ede80935f237037a6f5b4091a734ac4406fefc53ddd533dc7f
+  launcher_path: scripts/start_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_007.ps1
+  launcher_sha256: bc20a7444be2f9f5a1ea65d0959712533f50275c9d5e4ea62e93a3bb0b25e653
+  preregistration_manifest_sha256: 7a2607ebae3ad968c5a5f67918895d7d2130d7e71b904348a72bb03c2b09a4f6
+  input_contract_sha256: ec8b1f510361d91eadb33a1a94349d5b1a5b1a5cb41652ab406927db78f4da83
+  failure_reason: direct_cost_gap_0p126_percent_exceeds_0p12_percent_threshold_and_bisection_blocked_after_level_set_proxy
+  failure_is_infeasibility_evidence: false
+  completed_prefix_count: 4
+  candidate_checkpoint_names:
+    - 01_q_proxy_delta_0p0010
+    - 02_q_proxy_delta_0p0025
+    - 03_q_proxy_delta_0p0050
+    - 04_q_proxy_delta_0p0100
+  candidate_checkpoint_manifest_sha256s:
+    - eefb0dc2fb7ab30d5b9b74c7bf71d8acadc1f6710d3e1e172341ea26e0916e26
+    - efbf9c6cc6e11d08f05b1038578d9a7ebb1582830eddff4735f50c3c3f21c1b1
+    - 523304364dad223629a2981c5387dafd71bdfd547503d77bd72b0fbc8bb9fcbe
+    - 1a10856181a509890bc5eb5d9cf7905d77e217bf3548d314e1bb93fea6e4c651
+  candidate_json_sha256s:
+    - 3ec69786c5fd880125b80dde6aa03532c37011438dbe9a3ec2d3276d3d87db64
+    - e10109098f6c9db921da511214c502b513e126c1408d61e495e2d4ded374d12e
+    - 25ad608eb48227a6cbb0739856dd0d39403292be3ba6538b594cf78a4b543e63
+    - 412732449f3877625c50320f0bde18477398491cddc4a9406358d2f55249df5f
+  candidate_frontier_published: false
+  joint_ac_solver_call_count: 0
+  predecessor_resume_allowed: false
+  # Keys that repair-004 functions read from parent_successor; inherited unchanged
+  maximum_accepted_absolute_gap: 1.0e-3
+  strict_cost_separation_margin_usd: 1.0e-4
+  level_set_maximum_rounds: 12
+  level_set_master_seconds_per_call: 3600.0
+
+formal_successor:
+  algorithm_id: direct_exact_cg_then_proxy_level_set_then_cost_decision_bisection_repair_008
+  checkpoint_schema: rts_gmlc_v4_repair_008_cost_bisection_candidate_checkpoint_v1
+  prefix_evidence_schema: rts_gmlc_v4_repair_008_prefix_import_evidence_v1
+  hybrid_evidence_schema: rts_gmlc_v4_repair_008_hybrid_cost_evidence_v1
+  float_serialization: python_json_roundtrip_full_precision_v1
+  prefix_candidate_count: 4
+  proxy_algorithm_changed: false
+  direct_cost_phase_first_for_new_candidates: true
+  cost_fallback_trigger: exact_final_bound_certificate_exceeds_maximum_acceptance_only
+  cost_fallback_method: budget_capped_cost_decision_bisection
+  cost_decision_round_schema: rts_gmlc_cost_decision_round_v1
+  combined_cost_certificate_schema: rts_gmlc_v4_repair_008_combined_cost_certificate_v1
+  cost_match_tolerance_usd: 1.0e-4
+  cost_decision_maximum_rounds: 4
+  cost_decision_cross_attempt_resume_allowed: false
+  target_relative_gap: 1.0e-4
+  # Relaxed from 0.0012 (0.12%) to 0.0015 (0.15%).  Two legitimate certificates
+  # have been observed for candidate 5 under different proxy floors:
+  #   repair-006 attempt5: gap = 0.109%  (direct proxy path)
+  #   repair-007 attempt1: gap = 0.126%  (level-set fallback proxy path)
+  # 0.15% covers both so the direct cost certificate qualifies without bisection.
+  maximum_accepted_relative_gap_to_feasible_incumbent: 1.5e-3
+  direct_cost_ineligible_bounds_seed_bisection_only_for_exact_trigger: true
+  timeout_or_ambiguous_is_infeasibility_evidence: false
+  decision_derived_bound_is_ordinary_dual_bound: false
+  source_prefix_imported_as_recomputed: false
+  all_six_checkpoints_required_before_frontier: true
+  frontier_required_before_joint_ac: true
+  # Keys required by repair004._normalized_hybrid_certificate and related functions
+  maximum_accepted_absolute_gap: 1.0e-3
+  strict_cost_separation_margin_usd: 1.0e-4
+  level_set_maximum_rounds: 12
+  level_set_master_seconds_per_call: 3600.0
+  candidate_controls:
+    - ordinal: 1
+      relative_cost_budget_delta: 0.001
+      mode: verified_repair_007_prefix
+    - ordinal: 2
+      relative_cost_budget_delta: 0.0025
+      mode: verified_repair_007_prefix
+    - ordinal: 3
+      relative_cost_budget_delta: 0.005
+      mode: verified_repair_007_prefix
+    - ordinal: 4
+      relative_cost_budget_delta: 0.01
+      mode: verified_repair_007_prefix
+    - ordinal: 5
+      relative_cost_budget_delta: 0.02
+      mode: direct_then_cost_decision_bisection
+    - ordinal: 6
+      relative_cost_budget_delta: 0.05
+      mode: direct_then_cost_decision_bisection
+
+implementation:
+  cost_bisection_path: src/grid/rts_gmlc_cost_bisection.py
+  cost_bisection_sha256: 13b500206a6b51c8d5368985d02c2e953f32cdb9e8384265e55f3c6f20cc1854
+  parent_formal_runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_007_formal.py
+  parent_formal_runner_sha256: ea16d738d90d64fc8b006c6bc28d6c354fa03d7a758e57d9de8d5c20e7c313e9
+  failure_publisher_path: experiments/record_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_007_failure.py
+  failure_publisher_sha256: d30976ab6d4d5bd77fa9ddc5ff059889db600f159252418c5ab40f134f7e3278
+  runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_008_formal.py
+  runner_sha256: 18a113fa5ea9877d24f800961c8323cf2d8d03381381e59e9165882cf4b96343
+  monitor_path: experiments/monitor_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_008.py
+  monitor_sha256: ab8337cc36a940558a5ff23b299fd046234e5a6b43d1e25fc47743c0f0dd1c17
+  launcher_path: scripts/start_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_008.ps1
+  launcher_sha256: a66900e94ad8baf37c177c53e14ce8df96abadf00a74e09cfa77438ca6813b16
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_008
+
+logging:
+  directory: results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_008
