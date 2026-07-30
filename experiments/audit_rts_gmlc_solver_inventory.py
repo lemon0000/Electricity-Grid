@@ -61,14 +61,29 @@ _CAPACITY_BOUNDARIES = {
         "rejection_error_code": None,
     },
     "gurobi": {
-        "limit_kind": "separate_variables_and_linear_constraints",
-        "maximum_variables": 2000,
-        "maximum_constraints": 2000,
+        "limit_kind": "no_software_license_size_limit_observed_at_or_above_formal_scale",
+        "maximum_variables": None,
+        "maximum_constraints": None,
         "maximum_rows_plus_columns": None,
-        "tested_feasible": "2000_variables_and_2000_linear_constraints",
-        "tested_rejected": "2001_variables_or_2001_linear_constraints",
-        "boundary_source": "current_session_native_api_capacity_probe",
-        "rejection_error_code": 10010,
+        "tested_feasible": (
+            "215689_variables_and_350615_linear_constraints_solved_to_optimality;"
+            "_variable_dimension_additionally_accepted_at_431378_two_times_formal"
+        ),
+        "tested_rejected": (
+            "no_rejection_observed_up_to_the_tested_scale;"
+            "_an_upper_boundary_was_not_located_and_is_not_claimed_to_be_absent"
+        ),
+        "boundary_source": (
+            "current_session_native_api_capacity_probe_under_named_user_academic"
+            "_license_2846319_cores_9999_expiring_2027_07_29"
+        ),
+        "superseded_restricted_boundary": {
+            "maximum_variables": 2000,
+            "maximum_constraints": 2000,
+            "rejection_error_code": 10010,
+            "boundary_source": "pip_bundled_size_limited_license_before_activation",
+        },
+        "rejection_error_code": None,
     },
     "cplex": {
         "limit_kind": "separate_variables_and_constraints",

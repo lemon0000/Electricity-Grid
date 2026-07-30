@@ -176,7 +176,8 @@
 
 - 使用Pyomo建立规划模型；
 - 正式优化必须先通过求解器接口、当前许可证容量和真实模型规模门；只有通过全部门槛的引擎可进入正式比较，不能因已安装Gurobi、CPLEX、Xpress或其他商业求解器就默认其可用；
-- 线程数、求解算法和formulation必须由看正式结果前冻结、且不读取目标值的重复pilot机械选择；当前AC-aware commitment V3据此冻结为HiGHS 1.15.1、4线程和exact selected-state constraint generation；
+- 线程数、求解算法和formulation必须由看正式结果前冻结、且不读取目标值的重复pilot机械选择；AC-aware commitment V3至repair-008据此冻结为HiGHS 1.15.1、4线程和exact selected-state constraint generation；
+- 求解器许可容量发生变化时，必须重跑`experiments/audit_rts_gmlc_solver_inventory.py`更新容量门记录，并在同一冻结pilot上重做不读取目标值的线程/算法选择，才能把新引擎写入后继预注册；已启动的attempt不得中途更换求解器，只能作为新successor重新预注册。2026-07-29取得Gurobi学术许可（LICENSEID 2846319、NODE型、CORES 9999、到期2027-07-29）后，正式模型规模`215689`变量/`350615`约束已通过原生容量探测，因此HiGHS不再是唯一合格引擎；repair-008按此规则被运行性中止并由Gurobi后继承接，中止不是不可行证据；
 - 正式MIP必须持久记录实际可行界、认证对偶界、`LB/UB`、absolute gap和incumbent-relative gap；目标与最大接受阈值在正式启动前冻结，运行中只允许按实际界更新误差区间，不得按结果调阈值；
 - 多阶段实验必须在上游候选checkpoint、manifest、stage certificate、全状态审计和完整frontier全部发布并验证后，才允许调用下游joint AC或其他结果依赖步骤；
 - 使用pandapower或PYPOWER解析网络并进行AC复核；

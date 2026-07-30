@@ -1,0 +1,247 @@
+{
+  "capacity_boundaries": {
+    "cplex": {
+      "boundary_source": "current_session_native_api_capacity_probe",
+      "limit_kind": "separate_variables_and_constraints",
+      "maximum_constraints": 1000,
+      "maximum_rows_plus_columns": null,
+      "maximum_variables": 1000,
+      "rejection_error_code": 1016,
+      "tested_feasible": "1000_variables_and_1000_constraints",
+      "tested_rejected": "1001_variables_or_1001_constraints"
+    },
+    "gurobi": {
+      "boundary_source": "current_session_native_api_capacity_probe_under_named_user_academic_license_2846319_cores_9999_expiring_2027_07_29",
+      "limit_kind": "no_software_license_size_limit_observed_at_or_above_formal_scale",
+      "maximum_constraints": null,
+      "maximum_rows_plus_columns": null,
+      "maximum_variables": null,
+      "rejection_error_code": null,
+      "superseded_restricted_boundary": {
+        "boundary_source": "pip_bundled_size_limited_license_before_activation",
+        "maximum_constraints": 2000,
+        "maximum_variables": 2000,
+        "rejection_error_code": 10010
+      },
+      "tested_feasible": "215689_variables_and_350615_linear_constraints_solved_to_optimality;_variable_dimension_additionally_accepted_at_431378_two_times_formal",
+      "tested_rejected": "no_rejection_observed_up_to_the_tested_scale;_an_upper_boundary_was_not_located_and_is_not_claimed_to_be_absent"
+    },
+    "highs": {
+      "boundary_source": "unrestricted_open_source_distribution",
+      "limit_kind": "no_software_license_size_limit_observed",
+      "maximum_constraints": null,
+      "maximum_rows_plus_columns": null,
+      "maximum_variables": null,
+      "rejection_error_code": null
+    },
+    "xpress": {
+      "boundary_source": "current_session_native_api_capacity_probe",
+      "limit_kind": "combined_rows_plus_columns",
+      "maximum_constraints": null,
+      "maximum_rows_plus_columns": 5000,
+      "maximum_variables": null,
+      "rejection_error_code": 120,
+      "tested_feasible": "2500_columns_plus_2500_rows",
+      "tested_rejected": "5001_total_rows_plus_columns"
+    }
+  },
+  "capacity_boundaries_retested_by_this_audit": false,
+  "eligibility": {
+    "cplex": {
+      "eligibility_scope": "pyomo_interface_and_observed_software_license_capacity_only_not_runtime_or_legal_guarantee",
+      "eligible_for_6h_pilot": false,
+      "eligible_for_formal": false,
+      "formal_ineligibility_reasons": [
+        "variables_215689_exceed_observed_limit_1000",
+        "constraints_350615_exceed_observed_limit_1000"
+      ],
+      "six_hour_ineligibility_reasons": [
+        "variables_53923_exceed_observed_limit_1000",
+        "constraints_87545_exceed_observed_limit_1000"
+      ]
+    },
+    "gurobi": {
+      "eligibility_scope": "pyomo_interface_and_observed_software_license_capacity_only_not_runtime_or_legal_guarantee",
+      "eligible_for_6h_pilot": true,
+      "eligible_for_formal": true,
+      "formal_ineligibility_reasons": [],
+      "six_hour_ineligibility_reasons": []
+    },
+    "highs": {
+      "eligibility_scope": "pyomo_interface_and_observed_software_license_capacity_only_not_runtime_or_legal_guarantee",
+      "eligible_for_6h_pilot": true,
+      "eligible_for_formal": true,
+      "formal_ineligibility_reasons": [],
+      "six_hour_ineligibility_reasons": []
+    },
+    "xpress": {
+      "eligibility_scope": "pyomo_interface_and_observed_software_license_capacity_only_not_runtime_or_legal_guarantee",
+      "eligible_for_6h_pilot": false,
+      "eligible_for_formal": false,
+      "formal_ineligibility_reasons": [
+        "rows_plus_columns_566304_exceed_observed_limit_5000"
+      ],
+      "six_hour_ineligibility_reasons": [
+        "rows_plus_columns_141468_exceed_observed_limit_5000"
+      ]
+    }
+  },
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "D:/conda_envs/compute/python.exe",
+    "python_prefix": "D:/conda_envs/compute"
+  },
+  "formal_candidate_started": false,
+  "implementation_sha256": "b59f494e7a5f039779941996558e1031566aaf4f679a931ffbf1c6527b265c8d",
+  "license_observation_is_legal_conclusion": false,
+  "license_observations": {
+    "cplex": {
+      "classification": "community",
+      "expiry": null,
+      "expiry_observed": false,
+      "legal_conclusion": false,
+      "license_path": null,
+      "license_path_source": "not_observed",
+      "observable_evidence": "installed_package_metadata_summary",
+      "package_summary": "A Python interface to the CPLEX Callable Library, Community Edition."
+    },
+    "gurobi": {
+      "banner": "Set parameter LicenseID to value 2846319",
+      "classification": "unclassified",
+      "expiry": null,
+      "expiry_observed": false,
+      "legal_conclusion": false,
+      "license_path": "C:/Users/Psychobabble/gurobi/gurobi.lic",
+      "license_path_source": "GRB_LICENSE_FILE",
+      "observable_evidence": "native_environment_initialization_banner",
+      "probe_return_code": 0
+    },
+    "highs": {
+      "classification": "unrestricted_open_source",
+      "expiry": null,
+      "expiry_observed": false,
+      "legal_conclusion": false,
+      "license_expression": "MIT",
+      "license_path": "D:/conda_envs/compute/Lib/site-packages/highspy-1.15.1.dist-info/licenses/LICENSE.txt",
+      "license_path_source": "installed_distribution",
+      "observable_evidence": "package_metadata_license_expression"
+    },
+    "xpress": {
+      "classification": "community",
+      "expiry": null,
+      "expiry_observed": false,
+      "legal_conclusion": false,
+      "license_path": "D:/conda_envs/compute/Lib/site-packages/xpresslibs/bin/community-xpauth.xpr",
+      "license_path_source": "installed_xpresslibs_distribution",
+      "observable_evidence": "bundled_license_filename_and_runtime_warning",
+      "runtime_warning": null
+    }
+  },
+  "model_sizes": {
+    "formal_24h_candidate_proxy_stage": {
+      "constraints": 350615,
+      "variables": 215689
+    },
+    "solver_pilot_6h_candidate_proxy_stage": {
+      "constraints": 87545,
+      "variables": 53923
+    }
+  },
+  "package_versions": {
+    "cplex": "22.2.0.1",
+    "gurobipy": "13.0.2",
+    "highspy": "1.15.1",
+    "numpy": "1.26.4",
+    "pyomo": "6.10.1",
+    "xpress": "9.9.1",
+    "xpresslibs": "9.9.1"
+  },
+  "project_model_built_or_solved": false,
+  "pyomo_interfaces": {
+    "cplex": [
+      {
+        "available": false,
+        "error": null,
+        "implementation": "pyomo.solvers.plugins.solvers.CPLEX.CPLEXSHELL",
+        "name": "cplex"
+      },
+      {
+        "available": true,
+        "error": null,
+        "implementation": "pyomo.solvers.plugins.solvers.cplex_direct.CPLEXDirect",
+        "name": "cplex_direct"
+      },
+      {
+        "available": true,
+        "error": null,
+        "implementation": "pyomo.solvers.plugins.solvers.cplex_persistent.CPLEXPersistent",
+        "name": "cplex_persistent"
+      }
+    ],
+    "gurobi": [
+      {
+        "available": true,
+        "error": null,
+        "implementation": "pyomo.solvers.plugins.solvers.GUROBI.GUROBIFILE",
+        "name": "gurobi"
+      },
+      {
+        "available": true,
+        "error": null,
+        "implementation": "pyomo.solvers.plugins.solvers.gurobi_direct.GurobiDirect",
+        "name": "gurobi_direct"
+      },
+      {
+        "available": true,
+        "error": null,
+        "implementation": "pyomo.solvers.plugins.solvers.gurobi_persistent.GurobiPersistent",
+        "name": "gurobi_persistent"
+      }
+    ],
+    "highs": [
+      {
+        "available": true,
+        "error": null,
+        "implementation": "pyomo.contrib.solver.common.factory.LegacySolver",
+        "name": "highs"
+      },
+      {
+        "available": true,
+        "error": null,
+        "implementation": "pyomo.contrib.appsi.base.LegacySolver",
+        "name": "appsi_highs"
+      }
+    ],
+    "xpress": [
+      {
+        "available": true,
+        "error": null,
+        "implementation": "pyomo.solvers.plugins.solvers.xpress_direct.XpressDirect",
+        "name": "xpress"
+      },
+      {
+        "available": true,
+        "error": null,
+        "implementation": "pyomo.solvers.plugins.solvers.xpress_direct.XpressDirect",
+        "name": "xpress_direct"
+      },
+      {
+        "available": true,
+        "error": null,
+        "implementation": "pyomo.solvers.plugins.solvers.xpress_persistent.XpressPersistent",
+        "name": "xpress_persistent"
+      }
+    ]
+  },
+  "runtime_versions": {
+    "cplex": "22.2.0.0",
+    "gurobi": "13.0.2",
+    "highs": "1.15.1",
+    "numpy": "1.26.4",
+    "pyomo": "6.10.1",
+    "python": "3.12.12",
+    "xpress_optimizer": "47.01.02"
+  },
+  "schema": "rts_gmlc_solver_inventory_v1",
+  "status": "environment_inventory_completed_without_project_model_solve"
+}
