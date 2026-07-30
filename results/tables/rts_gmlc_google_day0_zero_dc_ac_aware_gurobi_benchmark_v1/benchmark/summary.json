@@ -1,0 +1,98 @@
+{
+  "all_matrix_entries_attempted": true,
+  "benchmark_id": "rts_gmlc_google_day0_zero_dc_ac_aware_gurobi_benchmark_v1",
+  "candidate_frontier_published": false,
+  "cost_normalization_executed": false,
+  "evidence_scope": "nonformal_solver_configuration_pilot_no_candidate_or_ac_claim",
+  "formal_candidate_result": false,
+  "formulations_executed": [
+    "full_state_monolith"
+  ],
+  "horizon_hours": 6,
+  "input_contract_sha256": "7cb101bfbdc26994354fd77d6525bfc2de5deaf97496cc970cea805ead9857d0",
+  "joint_ac_solver_call_count": 0,
+  "live_log_directory": "results/logs/rts_gmlc_zero_dc_ac_aware_gurobi_benchmark_v1",
+  "model": {
+    "base_constraints": 87508,
+    "base_variables": 53922,
+    "benchmark_constraints": 87545,
+    "benchmark_variables": 53923,
+    "state_ids": [
+      "normal",
+      "branch_A11_immediate",
+      "branch_A11_sustained",
+      "branch_A12-1_immediate",
+      "branch_A12-1_sustained",
+      "branch_A34_immediate",
+      "branch_A34_sustained",
+      "branch_B12-1_immediate",
+      "branch_B12-1_sustained",
+      "branch_B22_immediate",
+      "branch_B22_sustained",
+      "branch_B6_immediate",
+      "branch_B6_sustained",
+      "branch_C12-1_immediate",
+      "branch_C12-1_sustained",
+      "branch_C27_immediate",
+      "branch_C27_sustained",
+      "branch_C6_immediate",
+      "branch_C6_sustained",
+      "branch_CA-1_immediate",
+      "branch_CA-1_sustained",
+      "generator_121_NUCLEAR_1_sustained",
+      "generator_213_CC_3_sustained",
+      "generator_313_CC_1_sustained"
+    ]
+  },
+  "objective_value_used_for_selection": false,
+  "parent_first_6h_reconstructed_cost_usd": 154001.892077748,
+  "parent_full_horizon_reconstructed_cost_usd": 1108454.61108153,
+  "pilot_cost_budget_usd": 155156.906268331,
+  "preparation_manifest_sha256": "9e6414a4d2aeb5026143fcc3a30a1ce72e398384426f77ca3c59833c823d556e",
+  "relative_cost_budget_delta": 0.0075,
+  "run_count": 6,
+  "schema": "rts_gmlc_zero_dc_ac_aware_solver_benchmark_result_v1",
+  "selected_state_count_per_hour": 24,
+  "selection": {
+    "configurations": [
+      {
+        "accepted_repetitions": 2,
+        "completed_repetitions": 2,
+        "eligible": true,
+        "maximum_solver_wall_seconds": 33.7852718,
+        "median_solver_wall_seconds": 33.44751535,
+        "threads": 1
+      },
+      {
+        "accepted_repetitions": 2,
+        "completed_repetitions": 2,
+        "eligible": true,
+        "maximum_solver_wall_seconds": 23.4567896,
+        "median_solver_wall_seconds": 21.3070482,
+        "threads": 4
+      },
+      {
+        "accepted_repetitions": 2,
+        "completed_repetitions": 2,
+        "eligible": true,
+        "maximum_solver_wall_seconds": 29.3078064,
+        "median_solver_wall_seconds": 27.35605795,
+        "threads": 8
+      }
+    ],
+    "objective_value_used": false,
+    "selected_threads": 4,
+    "status": "selected_by_preregistered_nonobjective_rule"
+  },
+  "software_versions": {
+    "gurobipy": "13.0.2",
+    "numpy": "1.26.4",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pyomo": "6.10.1",
+    "python": "3.12.12",
+    "pyyaml": "6.0.3"
+  },
+  "stages_executed": [
+    "proxy_maximization"
+  ]
+}
