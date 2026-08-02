@@ -1,0 +1,17 @@
+# Datadog Agent log collection for the electricity-grid MIP solver.
+#
+# Copy this file to:
+#   C:\ProgramData\Datadog\conf.d\electricity_grid.d\conf.yaml
+# Then restart the Agent.
+#
+# Every progress.jsonl line is valid JSON; the Agent auto-parses it so
+# @event, @preregistration_id, @candidate_ordinal, etc. become searchable
+# attributes without any extra processing rules.
+
+logs:
+  - type: file
+    path: "D:/CUHKSZ/Research Project/electricity-grid/results/logs/*/*/progress.jsonl"
+    service: electricity-grid
+    source: electricity-grid
+    tags:
+      - "project:electricity-grid"
