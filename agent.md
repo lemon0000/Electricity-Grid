@@ -126,7 +126,37 @@
 
 详细执行步骤见`docs/plan/科研项目执行步骤.md`。
 
-## 7. 模型硬约束
+## 7. 任务分级、模型路由与独立审查
+
+本节是task classification、model routing、delegation和review rules的唯一权威来源。根目录`AGENTS.md`仅作为Codex自动发现的仓库入口，承载上下文bootstrap、工作区与实验安全和实施约束；不得复制、覆盖或另行定义本节的风险等级、model slug/effort、委派规则或审查状态机。
+
+每项任务开始前，主代理必须根据风险、科学影响和验收标准分级，并选择能够满足验收标准的最低成本模型。模型定位上，`gpt-5.6-sol`是旗舰级`frontier capability`模型，`gpt-5.6-terra`平衡`intelligence`与`cost`，`gpt-5.6-luna`面向高吞吐和高效率。`reasoning effort`应按任务有意设置，并用本项目的代表性任务、测试或证据检查其充分性，不默认越高越好。主代理负责需求边界、任务分类、集成、证据核验和最终回答；不得以多个代理的多数意见替代对仓库证据的核对。
+
+| 风险 | 默认路由 | 本项目典型任务 | 最低验证要求 |
+|---|---|---|---|
+| R0 | `luna_reader`（`gpt-5.6-luna`，`low`） | 文件inventory、日志解析、JSON/CSV提取、进度或产物清点 | 机械计数、schema、hash或直接来源证据 |
+| R1 | 只读任务可用`luna_reader`；写入任务用`terra_worker` | 格式整理、明确的机械转换、孤立测试、范围很窄的低风险修复 | 针对性测试和diff检查 |
+| R2 | `terra_worker`（`gpt-5.6-terra`，`medium`） | data contract、非正式实验plumbing、不改变结果语义的复现工具和普通跨模块修复 | 针对性测试、相关回归；跨模块、持久化产物或长运行行为变化时独立审查 |
+| R3 | `sol_modeler`（`gpt-5.6-sol`，`xhigh`） | 模型变量、目标和约束，AC/DC/N-1语义，非预见性，solver certificate，正式runner或冻结工件语义 | 领域不变量、解析或小型合成例、针对性测试、相关广泛回归，并由`sol_reviewer`独立审查 |
+| R4 | `sol_modeler`（`gpt-5.6-sol`，`xhigh`） | preregistration、验收阈值、正式结果解释、certification状态和paper claims | 完整证据链、manifest/hash与回归证据，`sol_reviewer`独立审查及用户明确授权 |
+
+以下事项即使文本改动很小，也不得降级：
+
+- `src/models/`中的变量、目标、约束、索引集、概率、场景映射或词典序阶段属于R3；
+- `src/grid/`中的SCUC/SCED、OPF/SCOPF、contingency选择、rating、redispatch、AC可行性、slack/Q-control或恢复语义属于R3；
+- `src/scenarios/`和`src/evaluation/`中的非预见性、历史分组、训练/holdout分离或未来信息边界属于R3；
+- certified bound、gap归一化、solver termination解释、warm start、constraint generation、checkpoint、resume、execution lease或atomic publication属于R3；一旦改变认证或正式结论则升级为R4；
+- 冻结YAML输入、preregistration、input hash、manifest、stage certificate、formal runner、canonical result、任何`*_certified`、`*_published`、`*_ready`或gate状态，以及VMA、F/X价值、安全性、工程可行性、因果效应、经验概率或正式CFE结论，属于R3或R4，并按其是否改变科研协议、认证或结论取更高等级。
+
+协作和审查遵循以下规则：
+
+- 每项任务只能有一个写入代理；并行仅限彼此独立的只读子任务，`agents.max_depth = 1`，不得让子代理继续分叉；一个命令或很小的确定性任务不为委派而委派；
+- R3/R4实现或正式分析完成后，必须由只读的`sol_reviewer`（`gpt-5.6-sol`，`high`）独立审查。审查输入应包含原始请求、验收标准、diff、相关规格以及测试和产物证据，输出必须是`PASS`、`REWORK`或`ESCALATE`；
+- `REWORK`最多触发一轮由原执行者完成的聚焦修复；同一验收项再次失败时升级给`sol_modeler`或用户，不得循环返工；执行者无法证明所需不变量时必须返回`ESCALATE`，不得猜测或弱化门禁；
+- `PASS`只表示工作产物满足已冻结的审查标准，不授权修改科研协议、预注册阈值、认证状态或论文结论；这些科学决定仍需用户对具体变更作出明确授权；
+- 审查通过后的自动推进只适用于冻结计划内、不受blocker约束且不需要新增权限的可逆开发和短验证。不得据此启动、重启、恢复或改变长时间formal run，不得发起付费查询、外部数据下载或其他需授权的外部操作，也不得绕过`docs/model_spec/blocker_register.md`中的停止条件。
+
+## 8. 模型硬约束
 
 所有实现必须遵守：
 
@@ -143,7 +173,7 @@
 - T20/T50/T100必须基于可运营容量块，不能由任意非零容量触发；
 - unused MW-year作为物理指标，不在无机会成本模型中随意货币化。
 
-## 8. 实验规范
+## 9. 实验规范
 
 ### 基线
 
@@ -172,7 +202,7 @@
 - 不因方法没有优势而只向更拥塞、更延期的方向调参；
 - 静态方法占优和方法失效区域必须报告。
 
-## 9. 技术标准
+## 10. 技术标准
 
 - 使用Pyomo建立规划模型；
 - 正式优化必须先通过求解器接口、当前许可证容量和真实模型规模门；只有通过全部门槛的引擎可进入正式比较，不能因已安装Gurobi、CPLEX、Xpress或其他商业求解器就默认其可用；
@@ -187,11 +217,12 @@
 - 所有随机实验固定并记录种子；
 - 结果图必须能够由保存的原始结果表重新生成。
 
-## 10. 项目目录
+## 11. 项目目录
 
 ```text
 electricity-grid/
-  agent.md                    # 本文件：身份、目标和科研规范
+  AGENTS.md                   # Codex自动发现入口、工作区/实验安全和实施约束
+  agent.md                    # 科研范围、科学契约、阶段顺序、路由与审查的权威来源
   configs/                    # YAML实验配置
   data/
     raw/                      # 原始数据，只读保存
@@ -217,7 +248,7 @@ electricity-grid/
     tables/                   # 投稿表
 ```
 
-## 11. 文件管理规则
+## 12. 文件管理规则
 
 - 根目录只保留项目级规范和必要入口文件；
 - 研究方案始终维护`docs/plan/智算中心分阶段接入与小时级绿电协同规划.docx`；
@@ -229,7 +260,7 @@ electricity-grid/
 - 日志进入`results/logs`，图表进入`results/figures`，表格进入`results/tables`；
 - Word临时文件、缓存、求解器临时文件和Python缓存不得提交。
 
-## 12. 协作与沟通规则
+## 13. 协作与沟通规则
 
 - 默认使用中文沟通，公式、变量和国际通用术语可保留英文；
 - 修改前先阅读本文件和`docs/plan`中的最新方案；
@@ -238,11 +269,11 @@ electricity-grid/
 - 对重大建模选择明确说明假设、影响和验证方法；
 - 发现用户预设与科学证据冲突时，应直接指出；
 - 完成工作时报告修改内容、验证结果、剩余风险和下一步；
-- 对冻结计划中的顺序步骤持续监控；审查通过后自动推进。运行失败时先诊断、修复、验证并重新运行，无需用户重复询问；只有冻结科学协议变更、外部授权或不可解除阻塞才升级。
+- 对冻结计划中的顺序步骤持续监控；审查通过后按第7节的授权边界推进。运行失败时先诊断、修复并完成小型或针对性验证，普通短验证可以重跑；长时间formal run须遵守预注册、lease和原子发布约束，未经用户明确授权不得启动、重启或恢复。timeout、局部失败、无incumbent或证书不完整都不是数学不可行证据；冻结科学协议变更、外部授权需求或blocker无法解除时必须升级。
 - 不删除用户数据或未确认的科研成果；
 - 文档、代码和实验结构发生变化时同步更新本文件或相关说明。
 
-## 13. 阶段完成标准
+## 14. 阶段完成标准
 
 只有同时满足以下条件，项目才进入论文结果固定阶段：
 

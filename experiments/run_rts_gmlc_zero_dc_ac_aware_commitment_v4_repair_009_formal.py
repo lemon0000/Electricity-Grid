@@ -31,6 +31,7 @@ from experiments import (
     run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_004_formal as repair004,
 )
 from experiments.process_google_power_workload_day0 import _verify_manifest
+from experiments.run_rts_gmlc_multi_poi_scan import _write_manifest
 from src.grid.rts_gmlc_exact_cg import SharedSnapshot
 from src.grid.rts_gmlc_cost_bisection import (
     CostBisectionResult,
@@ -56,9 +57,105 @@ from src.solvers.mip_progress import JsonlProgressWriter
 # on-disk file hash of the original pilot is still valid for chain integrity.
 import experiments.pilot_rts_gmlc_zero_dc_ac_aware_formulations as _frozen_pilot
 from experiments.pilot_rts_gmlc_zero_dc_ac_aware_formulations_gurobi import (
+    assemble_gurobi_options as _assemble_gurobi_options,
+)
+from experiments.pilot_rts_gmlc_zero_dc_ac_aware_formulations_gurobi import (
     _solve_handle as _gurobi_solve_handle,
 )
 _frozen_pilot._solve_handle = _gurobi_solve_handle
+
+# repair-009: restore the budget-decision infeasibility channel under Gurobi.
+#
+# rts_gmlc_formal_cg_adapter.py derives `globally_infeasible` only when the
+# solver API is "pyomo.contrib.solver.highs_v2" and HiGHS reported
+# provenInfeasible.  Under Gurobi the decision MIP runs through
+# "pyomo.environ.SolverFactory.gurobi_legacy" with the budget cap installed as
+# the Gurobi `Cutoff` parameter, so Gurobi proves "no in-budget solution
+# exists" by pruning the tree and terminating with CUTOFF (surfaced by legacy
+# Pyomo as minFunctionValue / objectiveLimit) while leaving a finite dual bound
+# above the cap.  That condition is never recognised, so `globally_infeasible`
+# stays False, the level-set bisection can neither raise its lower bound (no
+# feasible incumbent) nor lower its upper bound (no infeasibility proof), and
+# the round dies as decision_mip_unresolved_without_feasible_incumbent ->
+# strict_cost_separation_not_proven.
+#
+# The adapter is frozen by the repair-003/004 hash chain, so the equivalence is
+# restored here by wrapping the live method.  A dual bound strictly above the
+# cap is a bound certificate, not a timeout or an ambiguous status, so this does
+# not weaken `timeout_or_ambiguous_is_infeasibility_evidence: false`;
+# time-limit terminations are excluded explicitly.  No extra separation margin
+# is imposed, matching how the HiGHS provenInfeasible certificate was accepted.
+# The observed excess is recorded in the evidence so a numerical tie stays
+# auditable after the fact.
+_GUROBI_DECISION_API = "pyomo.environ.SolverFactory.gurobi_legacy"
+_GUROBI_CUTOFF_TERMINATIONS = frozenset({"minFunctionValue", "objectiveLimit"})
+_adapter_solve_master_original = FormalCgModelAdapter.solve_master
+
+
+def _adapter_solve_master_gurobi_decision(self, call):
+    result = _adapter_solve_master_original(self, call)
+    if (
+        call.stage != "level_set_budget_feasibility"
+        or result.globally_infeasible
+        or result.incumbent_usable
+        or result.snapshot is not None
+    ):
+        return result
+    solved = result.record.get("solve") if isinstance(result.record, Mapping) else None
+    if not isinstance(solved, Mapping):
+        return result
+    if str(solved.get("solver_api")) != _GUROBI_DECISION_API:
+        return result
+    if str(solved.get("termination_condition")) not in _GUROBI_CUTOFF_TERMINATIONS:
+        return result
+    cap = result.decision_budget_cap_usd
+    try:
+        bound = float(solved.get("raw_lower_bound"))
+        cap_value = float(cap)
+    except (TypeError, ValueError):
+        return result
+    if not math.isfinite(bound) or not math.isfinite(cap_value) or bound <= cap_value:
+        return result
+    record = dict(result.record)
+    decision = record.get("decision_mip")
+    if isinstance(decision, Mapping):
+        patched = dict(decision)
+        patched["termination_is_global_infeasible"] = True
+        patched["gurobi_cutoff_infeasibility_certificate"] = {
+            "schema": "rts_gmlc_v4_repair_009_gurobi_cutoff_certificate_v1",
+            "solver_api": str(solved.get("solver_api")),
+            "termination_condition": str(solved.get("termination_condition")),
+            "solver_status": str(solved.get("solver_status")),
+            "dual_bound_usd": bound,
+            "budget_cap_usd": cap_value,
+            "excess_over_cap_usd": bound - cap_value,
+        }
+        record["decision_mip"] = patched
+    return replace(result, globally_infeasible=True, record=record)
+
+
+FormalCgModelAdapter.solve_master = _adapter_solve_master_gurobi_decision
+
+# repair-009: carry preregistered Gurobi parameters through the frozen adapter.
+#
+# FormalCgModelAdapter._call_config rebuilds the solver dict key by key and drops
+# anything it does not enumerate, so a parameter written into
+# formal_solver.solver.options never reached pilot._solve_handle.  The first
+# IntegralityFocus attempt ran six hours against a solver that never saw the
+# parameter.  The adapter is frozen by the repair-003/004 hash chain, so the key
+# is reattached by wrapping the live method instead of editing the file.
+_adapter_call_config_original = FormalCgModelAdapter._call_config
+
+
+def _adapter_call_config_with_solver_options(self, call):
+    config = _adapter_call_config_original(self, call)
+    declared = dict(self.formal_solver["solver"].get("options") or {})
+    if declared:
+        config["solver"]["options"] = declared
+    return config
+
+
+FormalCgModelAdapter._call_config = _adapter_call_config_with_solver_options
 
 DEFAULT_CONFIG_PATH = Path(
     "configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009.yaml"
@@ -277,6 +374,118 @@ def _verify_frozen_inputs(
     _verify_parent_failure(config, predecessor_failure_root)
     if len(_verified_source_prefix(config)) != 4:
         raise RuntimeError("repair-009 source prefix count drifted")
+    _verify_solver_options_are_readable(config)
+
+
+def _verify_solver_options_are_readable(config: Mapping[str, Any]) -> None:
+    """Prove at startup that every preregistered Gurobi option reaches the solver.
+
+    The first IntegralityFocus attempt preregistered an option that no code read
+    and only discovered it after six hours of solving. This runs the real option
+    assembly against the declared values in well under a second, so a parameter
+    that cannot be applied stops the process before the warm-up.
+    """
+    successor = config["formal_successor"]
+    declared = dict(successor.get("solver_options") or {})
+    if not declared:
+        return
+    if str(successor["solver_name"]) != "gurobi":
+        raise RuntimeError(
+            "repair-009 solver_options are Gurobi-only but solver_name is "
+            f"{successor['solver_name']!r}"
+        )
+    probe = {
+        "name": "gurobi",
+        "threads": int(successor["solver_threads"]),
+        "random_seed": 0,
+        "feasibility_tolerance": 1.0e-6,
+        "bound_consistency_tolerance": 1.0e-6,
+        "target_mip_relative_gap": float(successor["target_relative_gap"]),
+        "time_limit_seconds_per_call": 1.0,
+        "mip_min_logging_interval_seconds": 5.0,
+        "options": declared,
+    }
+    with tempfile.TemporaryDirectory() as staging:
+        assembled = _assemble_gurobi_options(
+            probe,
+            native_log=Path(staging) / "solver_option_readability_probe.log",
+            objective_cutoff=None,
+        )
+    missing = sorted(
+        name for name, expected in declared.items() if assembled.get(name) != expected
+    )
+    if missing:
+        raise RuntimeError(
+            f"repair-009 preregistered solver options are unreachable: {missing}"
+        )
+    _verify_gurobi_accepts_options(declared)
+
+
+def _verify_gurobi_accepts_options(declared: Mapping[str, Any]) -> None:
+    """Hand the declared options to Gurobi on a trivial MIP before the warm-up.
+
+    Gurobi raises on a misspelled parameter name, but the first formal Gurobi
+    solve happens hours after start, so a typo would otherwise surface only after
+    the warm-up. This probe costs about a second and also captures Gurobi's own
+    "Non-default parameters" echo as independent proof of application.
+    """
+    from pyomo.environ import (
+        Binary,
+        ConcreteModel,
+        Constraint,
+        Objective,
+        SolverFactory,
+        Var,
+        maximize,
+    )
+
+    model = ConcreteModel()
+    model.b = Var(range(4), domain=Binary)
+    model.cap = Constraint(expr=sum(model.b[index] for index in range(4)) <= 2)
+    model.obj = Objective(
+        expr=sum(model.b[index] for index in range(4)), sense=maximize
+    )
+    solver = SolverFactory("gurobi")
+    if not bool(solver.available(exception_flag=False)):
+        raise RuntimeError("repair-009 requires Gurobi but it is unavailable")
+    # mkdtemp rather than TemporaryDirectory: on Windows Gurobi may still hold the
+    # log open when a bad parameter aborts the solve, and a cleanup PermissionError
+    # would mask the real GurobiError.
+    staging = Path(tempfile.mkdtemp(prefix="repair009_solver_option_probe_"))
+    try:
+        native_log = staging / "solver_option_acceptance_probe.log"
+        solver.solve(
+            model,
+            load_solutions=False,
+            tee=False,
+            options={"LogToConsole": 0, "LogFile": str(native_log), **dict(declared)},
+        )
+        echoed = native_log.read_text(encoding="utf-8", errors="replace")
+    finally:
+        shutil.rmtree(staging, ignore_errors=True)
+    unechoed = sorted(name for name in declared if name not in echoed)
+    if unechoed:
+        raise RuntimeError(
+            "repair-009 Gurobi accepted the solve but did not echo these options in "
+            f"its non-default parameter list: {unechoed}"
+        )
+
+
+def _apply_formal_successor_solver_override(
+    formal_solver: dict[str, Any],
+    formal_successor: Mapping[str, Any],
+) -> None:
+    """Mirror the Gurobi successor contract in ``formal_solver.solver``.
+
+    Hybrid candidate generation mutates ``context.config`` in-process before
+    publishing the frontier; a fresh ``_build_context`` must reconstruct the
+    same effective solver or ``_load_candidate_frontier`` rejects the published
+    ``summary.json`` as drifted (repair-009 ifocus4 joint-ac preflight).
+    """
+    formal_solver["solver"]["name"] = str(formal_successor["solver_name"])
+    formal_solver["solver"]["threads"] = int(formal_successor["solver_threads"])
+    if "solver_options" in formal_successor:
+        formal_solver["solver"]["options"] = dict(formal_successor["solver_options"])
 
 
 def _build_context(
@@ -300,7 +509,10 @@ def _build_context(
     effective["joint_ac"]["runtime_control"]["log_directory"] = successor_config[
         "logging"
     ]["directory"]
-    # Solver override applied only inside _hybrid_candidate, not globally.
+    _apply_formal_successor_solver_override(
+        effective["formal_solver"],
+        successor_config["formal_successor"],
+    )
     contract = {
         "schema": "rts_gmlc_v4_repair_009_formal_inputs_v1",
         "base_v4_input_contract": base.input_contract,
@@ -367,6 +579,219 @@ def prepare_preregistration(
         v4._write_exact_json(staging / "registration.json", expected)
 
     v4._publish_immutable_payload(target, writer)
+    return v4._load_json(target, "registration.json")
+
+
+def _implementation_hash_keys(implementation: Mapping[str, Any]) -> set[str]:
+    return {
+        key
+        for key in implementation
+        if key.endswith("_sha256")
+        and re.fullmatch(r"[0-9a-f]{64}", str(implementation[key])) is not None
+    }
+
+
+def _assert_implementation_only_contract_amendment(
+    published: Mapping[str, Any],
+    expected: Mapping[str, Any],
+) -> dict[str, object]:
+    """Allow only implementation hash / successor_config_sha256 changes."""
+    pub_contract = published["input_contract"]
+    exp_contract = expected["input_contract"]
+    if not isinstance(pub_contract, Mapping) or not isinstance(exp_contract, Mapping):
+        raise RuntimeError("repair-009 preregistration amendment contract missing")
+    for key in (
+        "schema",
+        "preregistration_id",
+        "status",
+        "externally_timestamped",
+        "previous_ac_outcomes_observed",
+        "candidate_frontier_outcomes_observed",
+        "joint_ac_outcomes_observed",
+        "warm_start_selection_frozen",
+        "selected_candidate_method",
+    ):
+        if published.get(key) != expected.get(key):
+            raise RuntimeError(
+                f"repair-009 preregistration amendment blocked on field: {key}"
+            )
+    for key in (
+        "schema",
+        "base_v4_input_contract",
+        "base_v4_input_contract_sha256",
+        "predecessor_repair_007",
+        "formal_successor",
+    ):
+        if v4._exact_json_text(pub_contract.get(key)) != v4._exact_json_text(
+            exp_contract.get(key)
+        ):
+            raise RuntimeError(
+                f"repair-009 preregistration amendment blocked on contract field: {key}"
+            )
+    pub_impl = pub_contract.get("implementation")
+    exp_impl = exp_contract.get("implementation")
+    if not isinstance(pub_impl, Mapping) or not isinstance(exp_impl, Mapping):
+        raise RuntimeError("repair-009 preregistration amendment implementation missing")
+    if set(pub_impl) != set(exp_impl):
+        raise RuntimeError("repair-009 preregistration amendment implementation keys drifted")
+    changed: dict[str, object] = {}
+    for key in sorted(pub_impl):
+        if pub_impl[key] == exp_impl[key]:
+            continue
+        if key not in _implementation_hash_keys(pub_impl):
+            raise RuntimeError(
+                "repair-009 preregistration amendment blocked on non-hash "
+                f"implementation field: {key}"
+            )
+        changed[f"implementation.{key}"] = {
+            "from": pub_impl[key],
+            "to": exp_impl[key],
+        }
+    if pub_contract.get("successor_config_sha256") != exp_contract.get(
+        "successor_config_sha256"
+    ):
+        changed["successor_config_sha256"] = {
+            "from": pub_contract.get("successor_config_sha256"),
+            "to": exp_contract.get("successor_config_sha256"),
+        }
+    if not changed:
+        raise RuntimeError("repair-009 preregistration amendment has no hash delta")
+    if published.get("input_contract_sha256") == expected.get("input_contract_sha256"):
+        raise RuntimeError("repair-009 preregistration amendment contract sha unchanged")
+    return changed
+
+
+def _write_nested_manifest(root: Path) -> None:
+    """Write SHA256SUMS including nested manifests (unlike flat artifact writer)."""
+    root_manifest = root / "SHA256SUMS"
+    paths = sorted(
+        path for path in root.rglob("*") if path.is_file() and path != root_manifest
+    )
+    root_manifest.write_bytes(
+        "".join(
+            f"{_sha256(path)}  {path.relative_to(root).as_posix()}\n" for path in paths
+        ).encode("ascii")
+    )
+
+
+def amend_preregistration_implementation(
+    config_path: Path,
+    *,
+    output_directory: Path | None = None,
+) -> dict[str, Any]:
+    """Atomically replace preregistration after implementation-hash-only edits.
+
+    Keeps an existing candidate frontier. Refuses if joint_ac already exists or if
+    any scientific / formal_successor field differs from the published registration.
+    """
+    context = _build_context(config_path)
+    output_root = output_directory or context.output_root
+    target = output_root / "preregistration"
+    frontier = output_root / "candidate_frontier"
+    if not target.exists():
+        raise RuntimeError("repair-009 preregistration missing; run prepare first")
+    if not frontier.exists():
+        raise RuntimeError(
+            "repair-009 amend requires a published candidate_frontier"
+        )
+    if (output_root / "joint_ac").exists():
+        raise RuntimeError(
+            "repair-009 refuse amend after joint_ac artifacts exist"
+        )
+    _verify_manifest(target)
+    _verify_manifest(frontier)
+    published = v4._load_json(target, "registration.json")
+    expected = _registration_payload(context)
+    if (
+        v4._exact_json_text(published) == v4._exact_json_text(expected)
+        and (target / "config.yaml").read_bytes() == config_path.read_bytes()
+    ):
+        return published
+    changed = _assert_implementation_only_contract_amendment(published, expected)
+    amendments_root = output_root / "preregistration_amendments"
+    amendments_root.mkdir(parents=True, exist_ok=True)
+    matching_archives = []
+    for candidate in amendments_root.iterdir():
+        if not candidate.is_dir():
+            continue
+        amendment_path = candidate / "amendment.json"
+        if not amendment_path.is_file():
+            continue
+        try:
+            _verify_manifest(candidate)
+            payload = v4._load_json(candidate, "amendment.json")
+        except Exception:
+            continue
+        if (
+            payload.get("previous_input_contract_sha256")
+            == published["input_contract_sha256"]
+            and payload.get("amended_input_contract_sha256")
+            == expected["input_contract_sha256"]
+        ):
+            matching_archives.append(candidate)
+    if matching_archives:
+        archive = sorted(matching_archives, key=lambda path: path.name)[-1]
+    else:
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+        archive = amendments_root / (
+            f"{published['input_contract_sha256'][:16]}_to_"
+            f"{expected['input_contract_sha256'][:16]}_{stamp}"
+        )
+        if archive.exists():
+            raise FileExistsError(f"Amendment archive already exists: {archive}")
+        staging_archive = Path(
+            tempfile.mkdtemp(dir=amendments_root, prefix=f".{archive.name}.processing-")
+        )
+        try:
+            shutil.copytree(target, staging_archive / "previous_preregistration")
+            v4._write_exact_json(
+                staging_archive / "amendment.json",
+                {
+                    "schema": (
+                        "rts_gmlc_v4_repair_009_preregistration_"
+                        "implementation_amendment_v1"
+                    ),
+                    "amended_utc": datetime.now(timezone.utc).isoformat(),
+                    "scientific_protocol_changed": False,
+                    "joint_ac_not_yet_started": True,
+                    "candidate_frontier_preserved": True,
+                    "published_frontier_input_contract_sha256": v4._load_json(
+                        frontier, "summary.json"
+                    )["input_contract_sha256"],
+                    "previous_input_contract_sha256": published["input_contract_sha256"],
+                    "amended_input_contract_sha256": expected["input_contract_sha256"],
+                    "changed_fields": changed,
+                    "reason": (
+                        "implementation_runner_hash_update_for_formal_successor_"
+                        "solver_override_and_frontier_reload_contract_bridge"
+                    ),
+                },
+            )
+            _write_nested_manifest(staging_archive)
+            staging_archive.rename(archive)
+            _verify_manifest(archive)
+        finally:
+            if staging_archive.exists():
+                shutil.rmtree(staging_archive)
+
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    retired = target.with_name(f".preregistration.retired-{stamp}")
+    if retired.exists():
+        raise FileExistsError(f"Retired preregistration already exists: {retired}")
+    target.rename(retired)
+    try:
+
+        def writer(staging: Path) -> None:
+            (staging / "config.yaml").write_bytes(config_path.read_bytes())
+            v4._write_exact_json(staging / "registration.json", expected)
+
+        v4._publish_immutable_payload(target, writer)
+    except Exception:
+        if target.exists():
+            shutil.rmtree(target)
+        retired.rename(target)
+        raise
+    shutil.rmtree(retired)
     return v4._load_json(target, "registration.json")
 
 
@@ -958,12 +1383,11 @@ def _hybrid_candidate(
         "relative_cost_budget_delta": delta,
         "repair_005_cost_bisection": True,
     }
-    # Apply Gurobi override only for new candidates (ordinals 5-6 that reach _hybrid_candidate).
-    # Prefix candidates 1-4 use _prefix_candidate and never call this function,
-    # so their physics validation continues using HiGHS from the original context.
-    _succ_cfg = context.input_contract["formal_successor"]
-    context.config["formal_solver"]["solver"]["name"] = str(_succ_cfg["solver_name"])
-    context.config["formal_solver"]["solver"]["threads"] = int(_succ_cfg["solver_threads"])
+    # Idempotent: _build_context already applies the successor solver contract.
+    _apply_formal_successor_solver_override(
+        context.config["formal_solver"],
+        context.input_contract["formal_successor"],
+    )
     direct_adapter = repair004.V4InitialProxyWarmStartAdapter(
         problem=problem,
         formal_solver=context.config["formal_solver"],
@@ -1362,9 +1786,21 @@ def _validate_persisted_cost_audit(
     state_ids: tuple[str, ...],
     cost_tolerance_usd: float,
     proxy_tolerance: float,
+    actual_proxy_tolerance: float,
     snapshot_sha_field: str,
     expected_schema: str | None = None,
 ) -> None:
+    """Validate a persisted full-state cost audit against the candidate witness.
+
+    ``proxy_tolerance`` gates identity between the commitment-capability proxy
+    and the candidate's stored proxy. ``actual_proxy_tolerance`` gates both the
+    continuous re-solve's ``actual_proxy_fraction`` and the accepted cost
+    snapshot's ``reactive_proxy`` (which records that same continuous value)
+    against the candidate; those must match the feasibility tolerance used by
+    ``FormalCgModelAdapter.audit_full_state`` when it accepted the audit.
+    Using the tighter floor tolerance here rejects audits the solver path
+    already passed (repair-009 ifocus2/ifocus3 candidate 6 knife-edge).
+    """
     callback = audit.get("callback_record")
     residual = callback.get("residual_audit") if isinstance(callback, Mapping) else None
     try:
@@ -1394,10 +1830,11 @@ def _validate_persisted_cost_audit(
         or abs(actual_cost - candidate.operating_cost_usd) > cost_tolerance_usd
         or abs(snapshot.operating_cost_usd - candidate.operating_cost_usd)
         > cost_tolerance_usd
-        or abs(actual_proxy - candidate.reactive_proxy_fraction) > proxy_tolerance
+        or abs(actual_proxy - candidate.reactive_proxy_fraction)
+        > actual_proxy_tolerance
         or abs(commitment_proxy - candidate.reactive_proxy_fraction) > proxy_tolerance
         or abs(snapshot.reactive_proxy - candidate.reactive_proxy_fraction)
-        > proxy_tolerance
+        > actual_proxy_tolerance
     ):
         raise RuntimeError("repair-005 persisted cost audit drifted")
 
@@ -1536,6 +1973,8 @@ def _validate_checkpoint_document(
     observed: Mapping[str, Any],
     context: v4._FrontierContext,
     ordinal: int,
+    *,
+    expected_input_contract_sha256: str | None = None,
 ) -> tuple[v4._Candidate, SharedSnapshot]:
     if set(observed) != {
         "schema",
@@ -1551,11 +1990,16 @@ def _validate_checkpoint_document(
     control = context.input_contract["formal_successor"]["candidate_controls"][
         ordinal - 1
     ]
+    contract_sha = (
+        expected_input_contract_sha256
+        if expected_input_contract_sha256 is not None
+        else context.input_contract_sha256
+    )
     if (
         observed.get("schema") != CHECKPOINT_SCHEMA
         or observed.get("float_serialization") != FLOAT_SERIALIZATION
         or observed.get("preregistration_id") != context.config["preregistration"]["id"]
-        or observed.get("input_contract_sha256") != context.input_contract_sha256
+        or observed.get("input_contract_sha256") != contract_sha
         or observed.get("ordinal") != ordinal
         or observed.get("mode") != control["mode"]
         or not isinstance(observed.get("candidate"), Mapping)
@@ -1654,6 +2098,9 @@ def _validate_checkpoint_document(
             "proxy_floor_absolute_tolerance"
         ]
     )
+    actual_proxy_tolerance = float(
+        context.config["formal_solver"]["solver"]["feasibility_tolerance"]
+    )
     state_ids = _context_state_ids(context)
     if (
         initial_snapshot.sha256 != cost.get("initial_direct_upper_snapshot_sha256")
@@ -1709,6 +2156,7 @@ def _validate_checkpoint_document(
             state_ids=state_ids,
             cost_tolerance_usd=tolerance,
             proxy_tolerance=proxy_tolerance,
+            actual_proxy_tolerance=actual_proxy_tolerance,
             snapshot_sha_field="reported_shared_snapshot_sha256",
         )
     elif method == "direct_exact_cg_plus_cost_decision_bisection":
@@ -1753,6 +2201,7 @@ def _validate_checkpoint_document(
             state_ids=state_ids,
             cost_tolerance_usd=tolerance,
             proxy_tolerance=proxy_tolerance,
+            actual_proxy_tolerance=actual_proxy_tolerance,
             snapshot_sha_field="shared_snapshot_sha256",
             expected_schema="rts_gmlc_v4_repair_005_repeated_cost_audit_v1",
         )
@@ -1767,6 +2216,8 @@ def _validate_round_artifacts(
     ordinal: int,
     candidate: v4._Candidate,
     evidence: Mapping[str, object],
+    *,
+    expected_input_contract_sha256: str | None = None,
 ) -> None:
     if ordinal <= 4:
         if (checkpoint_root / "level_set_rounds").exists() or (
@@ -1774,17 +2225,39 @@ def _validate_round_artifacts(
         ).exists():
             raise RuntimeError("repair-005 prefix gained decision rounds")
         return
+    # Round JSON freezes the generation-time contract hash. After an
+    # implementation-only prereg amendment, validate against the published
+    # frontier/checkpoint contract rather than the live amended sha.
+    if (
+        expected_input_contract_sha256 is not None
+        and expected_input_contract_sha256 != context.input_contract_sha256
+    ):
+        context = replace(
+            context, input_contract_sha256=expected_input_contract_sha256
+        )
     proxy = evidence["proxy_evidence"]
     if not isinstance(proxy, Mapping):
         raise RuntimeError("repair-005 proxy round evidence is missing")
+    cost = evidence["cost_evidence"]
+    # Every ancestor validator from repair-005 upward unpacks
+    # evidence["proxy_evidence"] on entry but forwards only that unpacked
+    # sub-mapping to its own parent, so handing down a bare proxy mapping
+    # raises KeyError('proxy_evidence') one level below.  The ancestors are
+    # frozen by the preregistration hash chain and cannot be corrected in
+    # place, so wrap the real proxy evidence once per intervening ancestor
+    # (repair-007 -> repair-006 -> repair-005).  repair-004 is the leaf and
+    # consumes the proxy mapping directly.  cost_evidence rides along at every
+    # level so each ancestor re-runs the same idempotent cost-side checks.
+    nested: Mapping[str, object] = proxy
+    for _ in range(3):
+        nested = {"proxy_evidence": nested, "cost_evidence": cost}
     repair007._validate_round_artifacts(
         checkpoint_root,
         context,
         ordinal,
         candidate,
-        proxy,
+        nested,
     )
-    cost = evidence["cost_evidence"]
     references = cost["cost_decision_rounds"]
     rounds_root = checkpoint_root / "cost_decision_rounds"
     if cost["method"] == "direct_exact_cg":
@@ -1929,6 +2402,8 @@ def _load_candidate_checkpoint(
     context: v4._FrontierContext,
     output_root: Path,
     ordinal: int,
+    *,
+    expected_input_contract_sha256: str | None = None,
 ) -> tuple[v4._Candidate, SharedSnapshot] | None:
     delta = float(
         context.input_contract["formal_successor"]["candidate_controls"][ordinal - 1][
@@ -1942,8 +2417,20 @@ def _load_candidate_checkpoint(
         return None
     _verify_manifest(target)
     observed = v4._load_json(target, "candidate.json")
-    loaded = _validate_checkpoint_document(observed, context, ordinal)
-    _validate_round_artifacts(target, context, ordinal, loaded[0], observed["evidence"])
+    loaded = _validate_checkpoint_document(
+        observed,
+        context,
+        ordinal,
+        expected_input_contract_sha256=expected_input_contract_sha256,
+    )
+    _validate_round_artifacts(
+        target,
+        context,
+        ordinal,
+        loaded[0],
+        observed["evidence"],
+        expected_input_contract_sha256=expected_input_contract_sha256,
+    )
     return loaded
 
 
@@ -1970,6 +2457,8 @@ def _candidate_to_loaded(
 def _frontier_material(
     context: v4._FrontierContext,
     output_root: Path,
+    *,
+    expected_input_contract_sha256: str | None = None,
 ) -> tuple[
     list[v4._Candidate],
     list[dict[str, object]],
@@ -1980,7 +2469,12 @@ def _frontier_material(
     candidates = [v4._baseline_candidate(context)]
     manifests: dict[str, str] = {}
     for ordinal in range(1, 7):
-        loaded = _load_candidate_checkpoint(context, output_root, ordinal)
+        loaded = _load_candidate_checkpoint(
+            context,
+            output_root,
+            ordinal,
+            expected_input_contract_sha256=expected_input_contract_sha256,
+        )
         if loaded is None:
             raise RuntimeError("repair-005 all six checkpoints are required")
         candidate, _snapshot = loaded
@@ -2002,11 +2496,16 @@ def _frontier_summary(
     manifests: Mapping[str, str],
     *,
     attempt_id: str,
+    input_contract_sha256: str | None = None,
 ) -> dict[str, Any]:
     return {
         "schema": FRONTIER_SCHEMA,
         "preregistration_id": context.config["preregistration"]["id"],
-        "input_contract_sha256": context.input_contract_sha256,
+        "input_contract_sha256": (
+            input_contract_sha256
+            if input_contract_sha256 is not None
+            else context.input_contract_sha256
+        ),
         "requested_candidate_count": len(candidates),
         "requested_budget_candidate_count": 6,
         "parent_baseline_included": True,
@@ -2045,8 +2544,20 @@ def _load_candidate_frontier(
     root = frontier_root or output_root / "candidate_frontier"
     _verify_manifest(root)
     summary = v4._load_json(root, "summary.json")
+    published_contract_sha = summary.get("input_contract_sha256")
+    if (
+        not isinstance(published_contract_sha, str)
+        or re.fullmatch(r"[0-9a-f]{64}", published_contract_sha) is None
+    ):
+        raise RuntimeError("repair-005 frontier summary drifted")
+    # Published frontier/checkpoints freeze the generation-time contract hash.
+    # After an implementation-hash-only preregistration amendment, the live
+    # context may carry a newer contract sha; reload authority stays with the
+    # published frontier summary (repair-009 ifocus4 joint-ac preflight).
     candidates, rows, selected, details, manifests = _frontier_material(
-        context, output_root
+        context,
+        output_root,
+        expected_input_contract_sha256=published_contract_sha,
     )
     attempt_id = summary.get("candidate_generation_attempt_id")
     if (
@@ -2060,6 +2571,7 @@ def _load_candidate_frontier(
                 selected,
                 manifests,
                 attempt_id=attempt_id,
+                input_contract_sha256=published_contract_sha,
             )
         )
     ):
@@ -2562,6 +3074,7 @@ def main() -> None:
         "--stage",
         choices=(
             "prepare",
+            "amend-preregistration-implementation",
             "generate-candidates",
             "run-joint-ac",
             "joint-call-worker",
@@ -2593,6 +3106,10 @@ def main() -> None:
         parser.error("joint worker arguments are only valid for joint-call-worker")
     if args.stage == "prepare":
         result = prepare_preregistration(
+            args.config, output_directory=args.output_directory
+        )
+    elif args.stage == "amend-preregistration-implementation":
+        result = amend_preregistration_implementation(
             args.config, output_directory=args.output_directory
         )
     elif args.stage == "generate-candidates":
@@ -2634,10 +3151,13 @@ __all__ = [
     "DEFAULT_CONFIG_PATH",
     "HYBRID_EVIDENCE_SCHEMA",
     "PREFIX_EVIDENCE_SCHEMA",
+    "_apply_formal_successor_solver_override",
+    "_assert_implementation_only_contract_amendment",
     "_build_context",
     "_cost_fallback_trigger",
     "_prefix_candidate",
     "_read_config",
     "_verified_source_prefix",
+    "amend_preregistration_implementation",
     "prepare_preregistration",
 ]

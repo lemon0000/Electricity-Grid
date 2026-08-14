@@ -1,0 +1,43 @@
+{
+  "adapter_acceptance_tolerance": 1e-06,
+  "candidate_6_checkpoint_published": false,
+  "candidate_frontier_artifact_published": false,
+  "completed_utc": "2026-08-10T04:52:03.712495+00:00",
+  "failed_lease_id": "c6f5447680bb4310ad52dd5d708683d2",
+  "failure_is_infeasibility_evidence": false,
+  "failure_is_persistence_gate_inconsistency": true,
+  "failure_is_solver_failure": false,
+  "failure_root_cause": "validate_persisted_cost_audit_compared_snapshot.reactive_proxy_to_candidate_proxy_with_proxy_floor_absolute_tolerance_1e-7_while_snapshot_stores_continuous_actual_proxy;_candidate_6_gap_1.0000000000287557e-7",
+  "formal_attempt_id": "candidate_20260809T230221675557Z_pid52492",
+  "ifocus3_resume_allowed": false,
+  "integrality_focus_applied": true,
+  "maximum_integrality_violation_on_final_cost_audit": 0.0,
+  "measured_actual_proxy_fraction": 0.3917962224893918,
+  "measured_commitment_capability_proxy_fraction": 0.3917963224893918,
+  "measured_proxy_gap": 1.0000000000287557e-07,
+  "permitted_successor_correction": "align_snapshot_reactive_proxy_persistence_tolerance_with_feasibility_tolerance_then_new_preregistration",
+  "persistence_tolerance_used_for_snapshot_vs_candidate": 1e-07,
+  "prefix_checkpoint_sha256": {
+    "01_q_proxy_delta_0p0010/candidate.json": "8d3fa1756877743053c1e456d87151b28d090b3823f7e531fd9cb0ebfb8acc19",
+    "02_q_proxy_delta_0p0025/candidate.json": "625067f72433c7aac3f699e20d721b45f663f4af74815ab6891215f402a434e1",
+    "03_q_proxy_delta_0p0050/candidate.json": "1ae18f5fc1e152d0f2e31a1887fda265ac60fd7cabbb9f0ea2652700c809a419",
+    "04_q_proxy_delta_0p0100/candidate.json": "f7d539d22fef8ad364229200dbf6d24f0d0b0fee9ffc6f09e3c3044fdcb058f2",
+    "05_q_proxy_delta_0p0200/candidate.json": "8462ad03a41cd19930636815076b3c026233eedcc748de296e99381e77c4450d"
+  },
+  "process_id": 52492,
+  "process_is_running": false,
+  "schema": "rts_gmlc_v4_repair_009_ifocus3_persisted_cost_audit_drift_invalidation_v1",
+  "scientific_protocol_changed": false,
+  "source_snapshot_sha256": {
+    "experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_009_formal.py": "4c1504438f4c5b05f94271e63869f14722bbbea1e13ad9e7d00c06882de3382e"
+  },
+  "started_utc": "2026-08-09T23:02:21.675557+00:00",
+  "status": "invalidated_after_candidate_6_solver_path_passed_but_persisted_cost_audit_rejected_snapshot_proxy_under_floor_tolerance",
+  "successor_may_import_prefix_from_this_root": true,
+  "successor_must_restart_from_candidate_ordinal": 6,
+  "successor_must_use_new_output_root": true,
+  "successor_must_use_new_preregistration_id": true,
+  "successor_output_root": "results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009_ifocus4",
+  "terminated_utc": "2026-08-10T04:46:10.789254+00:00",
+  "valid_candidate_checkpoint_count": 5
+}

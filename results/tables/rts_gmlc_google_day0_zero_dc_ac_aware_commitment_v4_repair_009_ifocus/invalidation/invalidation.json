@@ -1,0 +1,87 @@
+{
+  "attempt_file_sha256": {
+    "evidence_snapshot/logs/05_q_proxy_delta_0p0200/direct_proxy/proxy_maximization/proxy_maximization__iteration_01__master.log": "576e32cc5596218e91a089df5266dc16ee70b3fde745dcb1bc452c06f8c000a4",
+    "evidence_snapshot/logs/TERMINATION_SNAPSHOT_20260808T153341Z.txt": "f48ee45c54d9566b1ccd8da154f275bfa87bd1820ca7944c6203d69c4cd8c695",
+    "evidence_snapshot/logs/attempt.json": "0c1f0ca2abe08f79ee844e30cdf02de8b35f5e0ee9d61748c341f0d4d03bd7db",
+    "evidence_snapshot/logs/progress.jsonl": "ef3c41107bd8dc9a3754952a48c71813b809852d4ca0d13ed9d8c22d105c487b"
+  },
+  "candidate_frontier_artifact_published": false,
+  "declared_but_unreachable_solver_options": {
+    "IntegralityFocus": 1
+  },
+  "failed_lease_id": "7d2ec1a65d58404f98f3d58530b9341d",
+  "failure_is_infeasibility_evidence": false,
+  "failure_is_preregistration_implementation_mismatch": true,
+  "failure_is_solver_failure": false,
+  "failure_root_cause": "runner_wrote_context_config_formal_solver_solver_options_but_no_module_reads_that_key_gurobi_runtime_options_accepts_named_parameters_only",
+  "formal_attempt_id": "candidate_20260808T135608923269Z_pid31300",
+  "ifocus_resume_allowed": false,
+  "input_contract_sha256": "0e3fa59d1a8aed3669def91f5fdab593084990822534891faa39729e1b26923b",
+  "joint_ac_solver_call_count": 0,
+  "parent_root_file_sha256": {
+    "evidence_snapshot/execution_lease/history/7d2ec1a65d58404f98f3d58530b9341d.failed/lease.json": "6c5e2bfa8dbe94fe0a8f1ea2fc92d40d452ae6222001224393af121b742979fb",
+    "evidence_snapshot/execution_lease/history/7d2ec1a65d58404f98f3d58530b9341d.failed/terminal.json": "80332772ecb99853b0f3c939bff763be9898cff8f4efcad8b102947408aa4707",
+    "evidence_snapshot/preregistration/SHA256SUMS": "f5a671eac432100ec6edaac10ac6bcb69601a3b8dc210d2203bf0a48f3d1596c",
+    "evidence_snapshot/preregistration/config.yaml": "d7a3ce2b2cce977d2466a2fc55619d02c6dd3d05e18039eac5d96adaf2c82c00",
+    "evidence_snapshot/preregistration/registration.json": "4a8187f3df1774bd41b771a0f6643e349d61eb86db143df2cd59fb23afbc8555"
+  },
+  "permitted_successor_correction": "make_the_gurobi_integrality_tolerance_strictly_tighter_than_the_snapshot_gate_and_prove_the_option_dict_reaches_solver_solve_before_any_long_run",
+  "prefix_checkpoint_bytes_identical_to_predecessor_root": true,
+  "prefix_checkpoint_sha256": {
+    "01_q_proxy_delta_0p0010/candidate.json": "47d3957f0abfce198ef6669714f77f0dac198f3d3985d79fce4b31ec4984435b",
+    "02_q_proxy_delta_0p0025/candidate.json": "40a8e0b82b9b6c906d3db44ad67c82146117e7a8c31a360007017fbca13ae5e4",
+    "03_q_proxy_delta_0p0050/candidate.json": "6f7936cddf17c814a34826ac64ff9e3a13f32925db52e3c278e48ed2c6d9fcab",
+    "04_q_proxy_delta_0p0100/candidate.json": "7668c098240a22dd834b34cff479b1cf113eefd8f5b8a556c030498a822e8f56"
+  },
+  "preregistration_id": "rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009_ifocus",
+  "process_cpu_seconds_at_termination": 21503.125,
+  "process_id": 31300,
+  "process_is_running": false,
+  "progress_reached": {
+    "candidate_5_last_native_log_internal_seconds": 5531.8,
+    "candidate_5_native_log_time_limit_seconds": 7200.0,
+    "candidate_5_solver": "highs_via_frozen_initial_proxy_warm_start_adapter",
+    "candidate_5_stage": "proxy_maximization.iteration_01.master",
+    "candidate_6_started": false,
+    "level_set_rounds_started": 0,
+    "prefix_candidates_imported": 4,
+    "prefix_import_mode": "source_checkpoint_imported_from_predecessor_repair_007",
+    "verdict_reached": false,
+    "warmup_seconds": 15656
+  },
+  "schema": "rts_gmlc_v4_repair_009_ifocus_unread_solver_option_invalidation_v1",
+  "scientific_protocol_changed": false,
+  "source_snapshot_sha256": {
+    "source_snapshot/configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009.yaml": "d7a3ce2b2cce977d2466a2fc55619d02c6dd3d05e18039eac5d96adaf2c82c00",
+    "source_snapshot/experiments/pilot_rts_gmlc_zero_dc_ac_aware_formulations_gurobi.py": "00f2c77d641b46e89c98d0762190035c0685ff41355848153645b86d8eae4799",
+    "source_snapshot/experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_009_formal.py": "b79a294bce716534740fc727ec25b49a8fcf8f48a405ebfd0d5d97164b9352b9",
+    "source_snapshot/scripts/run_repair_009_ifocus_generate.ps1": "4a4ae423ffff44080be6160f0e4e1a365f7d0b94065bbb2c553dadf7264d7a2b",
+    "source_snapshot/scripts/run_repair_009_ifocus_prepare.ps1": "7aa4f9ef8ebf755fbb15752d369ba329dfb883cfd2bb63152c7d92e242192cb9"
+  },
+  "started_utc": "2026-08-08T09:35:12+00:00",
+  "status": "invalidated_because_the_preregistered_solver_option_had_no_reader_in_the_solve_path_so_the_attempt_could_not_test_the_declared_parameter",
+  "successor_must_restart_from_candidate_ordinal": 5,
+  "successor_must_use_new_output_root": true,
+  "successor_must_use_new_preregistration_id": true,
+  "terminated_utc": "2026-08-08T15:34:17+00:00",
+  "termination_kind": "operator_terminated_before_verdict",
+  "termination_requested_by": "user",
+  "underlying_defect_unchanged": {
+    "gurobi_intfeastol_in_force": 1e-06,
+    "gurobi_intfeastol_source": "formal_solver.solver.feasibility_tolerance via gurobi_runtime_options:867",
+    "note": "the returned solution is legal under the configured IntFeasTol; the gate is two orders of magnitude tighter than the tolerance handed to the solver",
+    "observed_in_attempt": "formal_repair_009_20260807T132046Z",
+    "observed_maximum_integrality_violation": 5.030864294042203e-07,
+    "snapshot_gate": 1e-08,
+    "snapshot_gate_key": "candidate_snapshot.maximum_distance_to_nearest_binary_before_normalization",
+    "snapshot_gate_site": "src/grid/rts_gmlc_formal_cg_adapter.py:207-221"
+  },
+  "unread_option_write_site": "experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_009_formal.py:1039-1040",
+  "valid_candidate_checkpoint_count": 0,
+  "verified_absent_reader_sites": [
+    "experiments/pilot_rts_gmlc_zero_dc_ac_aware_formulations_gurobi.py:841-875 (gurobi_runtime_options accepts keyword parameters only; no **extra)",
+    "experiments/pilot_rts_gmlc_zero_dc_ac_aware_formulations_gurobi.py:888-939 (_solve_handle builds options solely from named solver_config keys)",
+    "src/grid/rts_gmlc_v4_initial_proxy_warmstart.py:115-122 (initial proxy master uses highs_runtime_options, named parameters only)"
+  ],
+  "wall_clock_seconds": 21545
+}

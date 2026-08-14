@@ -838,6 +838,30 @@ def _legacy_incumbent_termination(v2_termination: object) -> object:
 
 
 
+# Keys whose values were fixed by the frozen Gurobi pilot benchmark or by the
+# per-call contract. A config-supplied override of any of these would silently
+# change the frozen solver selection, so it is refused instead of applied.
+FROZEN_GUROBI_OPTION_KEYS = frozenset(
+    {
+        "MIPGap",
+        "MIPGapAbs",
+        "Seed",
+        "Threads",
+        "FeasibilityTol",
+        "OptimalityTol",
+        "TimeLimit",
+        "LogToConsole",
+        "LogFile",
+        "DisplayInterval",
+        "Cutoff",
+    }
+)
+
+
+class UnreadableSolverOptionError(RuntimeError):
+    """Raised when configured Gurobi options cannot be applied as declared."""
+
+
 def gurobi_runtime_options(
     *,
     mip_relative_gap: float,
@@ -848,12 +872,18 @@ def gurobi_runtime_options(
     log_file: Path,
     mip_min_logging_interval_seconds: float,
     objective_cutoff: float | None = None,
+    extra_options: Mapping[str, object] | None = None,
 ) -> dict[str, object]:
     """Gurobi option dict (legacy Pyomo SolverFactory interface).
 
     Defined here rather than in src/solvers/mip_progress.py because
     mip_progress.py is frozen in the base-v4 _IMPLEMENTATION_PATHS chain;
     any change to it invalidates all repair checkpoint contracts.
+
+    ``extra_options`` carries preregistered Gurobi parameters such as
+    ``IntegralityFocus``. It may introduce new keys and may retune
+    ``IntFeasTol``, but it may not override any key in
+    ``FROZEN_GUROBI_OPTION_KEYS``.
     """
     resolved_log = Path(log_file).resolve()
     resolved_log.parent.mkdir(parents=True, exist_ok=True)
@@ -872,7 +902,52 @@ def gurobi_runtime_options(
     }
     if objective_cutoff is not None:
         opts["Cutoff"] = float(objective_cutoff)
+    if extra_options:
+        refused = sorted(set(extra_options) & FROZEN_GUROBI_OPTION_KEYS)
+        if refused:
+            raise UnreadableSolverOptionError(
+                "Configured Gurobi options may not override frozen keys: "
+                f"{refused}"
+            )
+        opts.update(dict(extra_options))
     return opts
+
+
+def assemble_gurobi_options(
+    solver_config: Mapping[str, Any],
+    *,
+    native_log: Path,
+    objective_cutoff: float | None,
+) -> dict[str, object]:
+    """Build the option dict handed to ``solver.solve`` for a Gurobi call.
+
+    Kept separate from ``_solve_handle`` so the configuration read path can be
+    tested without a solver. repair-009 lost five hours to a preregistered
+    ``IntegralityFocus`` that no code read; the post-condition below makes that
+    failure loud instead of silent.
+    """
+    configured = dict(solver_config.get("options") or {})
+    options = gurobi_runtime_options(
+        mip_relative_gap=float(solver_config["target_mip_relative_gap"]),
+        threads=int(solver_config["threads"]),
+        random_seed=int(solver_config["random_seed"]),
+        feasibility_tolerance=float(solver_config["feasibility_tolerance"]),
+        time_limit_seconds=float(solver_config["time_limit_seconds_per_call"]),
+        log_file=native_log,
+        mip_min_logging_interval_seconds=float(
+            solver_config["mip_min_logging_interval_seconds"]
+        ),
+        objective_cutoff=objective_cutoff,
+        extra_options=configured,
+    )
+    unapplied = sorted(
+        name for name, expected in configured.items() if options.get(name) != expected
+    )
+    if unapplied:
+        raise UnreadableSolverOptionError(
+            f"Configured Gurobi options did not reach the solver: {unapplied}"
+        )
+    return options
 
 
 def _solve_handle(
@@ -898,16 +973,9 @@ def _solve_handle(
             if handle.stage == "level_set_budget_feasibility"
             else None
         )
-        options = gurobi_runtime_options(
-            mip_relative_gap=float(solver_config["target_mip_relative_gap"]),
-            threads=int(solver_config["threads"]),
-            random_seed=int(solver_config["random_seed"]),
-            feasibility_tolerance=float(solver_config["feasibility_tolerance"]),
-            time_limit_seconds=float(solver_config["time_limit_seconds_per_call"]),
-            log_file=native_log,
-            mip_min_logging_interval_seconds=float(
-                solver_config["mip_min_logging_interval_seconds"]
-            ),
+        options = assemble_gurobi_options(
+            solver_config,
+            native_log=native_log,
             objective_cutoff=objective_target,
         )
     else:
@@ -925,6 +993,12 @@ def _solve_handle(
             if decision_api
             else "pyomo.environ.SolverFactory.highs_legacy"
         )
+        declared = dict(solver_config.get("options") or {})
+        if declared:
+            raise UnreadableSolverOptionError(
+                "Gurobi-only solver options were configured for a HiGHS solve: "
+                f"{sorted(declared)}"
+            )
         objective_target = None
         options = highs_runtime_options(
             mip_relative_gap=float(solver_config["target_mip_relative_gap"]),
@@ -951,6 +1025,11 @@ def _solve_handle(
         sense=handle.sense,
         state_ids=list(handle.state_ids),
         native_log=native_log.name,
+        solver_api=solver_api,
+        effective_solver_options={
+            key: (str(value) if isinstance(value, Path) else value)
+            for key, value in sorted(options.items())
+        },
     )
     if not _gurobi_mode:
         Highs.resetGlobalScheduler(True)

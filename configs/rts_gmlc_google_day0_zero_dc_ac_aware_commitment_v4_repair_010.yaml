@@ -1,0 +1,137 @@
+schema: rts_gmlc_v4_repair_010_joint_ac_successor_config_v1
+
+preregistration:
+  id: rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_010
+  schema: rts_gmlc_zero_dc_ac_aware_commitment_preregistration_v4_repair_010
+  status: blocked_before_repository_local_preregistration
+  candidate_frontier_outcomes_observed: true
+  joint_ac_outcomes_observed: false
+
+protocol_change:
+  scientific_config_changed: true
+  joint_ac_protocol_changed: true
+  maximum_accepted_relative_gap_to_feasible_incumbent: 1.0e-3
+  post_result_threshold_tuning_allowed: false
+
+predecessor_ifocus4:
+  root: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009_ifocus4
+  config_path: configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009.yaml
+  config_sha256: 1947d1e621b24fe7f18d7b531a09317d9721895596aa6847b245d573f6896aa6
+  runner_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_009_formal.py
+  runner_sha256: 7c0ad67b143a534dd60b13abeac51784f38da186d7b964cd0420d6707218bf31
+  preregistration_manifest_sha256: 8f8261ac00c3aef21cc93a381392e8fad4349fb90b600e7b8b0cb6e9680c89e3
+  input_contract_sha256: 978a8d4be15b0b82ce1df90514c3fe766f9fbff22771bf19a5ca911448c18f12
+  candidate_frontier_manifest_sha256: 6661c2b48b1d6e5f0e75df3852e99b0dd1606e621ea4c30f68873223b3579966
+  candidate_frontier_published: true
+  joint_ac_published: false
+  terminal_attempt_id: joint_20260812T044759183290Z_pid13700
+  terminal_attempt_pid: 13700
+  terminal_worker_pid: 21172
+  terminal_lease_id: 668f668226db419484387c8b6419669e
+  terminal_call_manifest_sha256: 0a56007ff240ccdfcad7ff1cea51b55dd96276112fded0f415744277a228d4f1
+  terminal_elapsed_seconds: 7500.494260399952
+  expected_joint_call_count: 21
+  completed_joint_call_count: 0
+  worker_process_log_bytes: 0
+  native_solver_log_published: false
+  solver_started_phase_verified: false
+  honest_incomplete: true
+  is_infeasibility_evidence: false
+  predecessor_resume_allowed: false
+
+formal_successor:
+  target_relative_gap: 1.0e-4
+  maximum_accepted_relative_gap_to_feasible_incumbent: 1.0e-3
+  candidate_frontier_outcomes_observed: true
+  timeout_or_incomplete_is_infeasibility_evidence: false
+  old_frontier_is_predecessor_evidence_only: true
+
+frontier_import:
+  schema: rts_gmlc_v4_repair_010_frontier_import_v1
+  mode: audited_immutable_copy
+  source_preregistration_id: rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009
+  source_preregistration_input_contract_sha256: 978a8d4be15b0b82ce1df90514c3fe766f9fbff22771bf19a5ca911448c18f12
+  source_frontier_input_contract_sha256: 0b34bfe901d054ff8d42562ce21f336b1c6b0b34009ba2f01bc687b4ec37598d
+  source_candidate_ids:
+    - candidate_00
+    - candidate_01
+    - candidate_02
+    - candidate_03
+    - candidate_04
+    - candidate_05
+    - candidate_06
+  source_budget_checkpoint_count: 6
+  source_nested_round_manifest_count: 22
+  destination_relative_directory: predecessor_frontier_import
+  authority_loader: repair_009_load_candidate_frontier
+  source_outcomes_observed: true
+  scientific_values_unchanged: true
+  solver_calls_allowed: false
+  direct_source_use_as_solver_input_allowed: false
+  hard_links_allowed: false
+  atomic_immutable_publication_required: true
+
+startup_calibration:
+  schema: rts_gmlc_v4_repair_010_startup_calibration_contract_v1
+  calibration_id: rts_gmlc_v4_repair_010_startup_calibration_v1
+  status: frozen_before_first_sample
+  sample_count: 1
+  candidate_id: candidate_00
+  initial_strategy: source
+  elapsed_start: parent_monotonic_immediately_before_popen
+  elapsed_stop: parent_first_verified_calibration_pre_solver_stop
+  elapsed_includes_process_creation: true
+  actual_nlpsol_construction_required: true
+  complete_solver_arguments_required: true
+  solver_callable_invocations_allowed: 0
+  solver_started_event_allowed: false
+  calibration_max_wall_seconds: 21600.0
+  parent_poll_interval_seconds: 5.0
+  post_stop_worker_exit_limit_seconds: 300.0
+  termination_grace_seconds: 30.0
+  startup_limit_rule: double_observed_then_ceil
+  startup_limit_multiplier: 2.0
+  startup_limit_round_up_seconds: 300.0
+  statistical_tail_guarantee: false
+  retry_or_resume_allowed: false
+  result_may_modify_formal_config_automatically: false
+  output_directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_010_startup_calibration
+  logging_directory: results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_010_startup_calibration
+  launcher_directory: results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_010_startup_calibration_launcher
+
+joint_ac_successor:
+  context_artifact_mode: disabled_unproven
+  context_artifact_equivalence_proven: false
+  fallback_mode: fresh_rebuild_in_fresh_isolated_worker
+  fresh_isolated_worker_required: true
+  startup_limit_seconds: null
+  startup_heartbeat_interval_seconds: 30.0
+  solver_wall_limit_seconds_per_call: 7500.0
+  ipopt_max_cpu_time_seconds_per_call: 7200.0
+  parent_watchdog_interval_seconds: 5.0
+  termination_grace_seconds: 30.0
+  phase_event_schema: rts_gmlc_joint_ac_phase_event_v1
+  required_phase_order:
+    - worker_started
+    - context_load_started
+    - context_load_completed
+    - prepared_cases_completed
+    - nlp_build_started
+    - nlp_build_completed
+    - solver_started
+    - solver_finished
+  solver_wall_starts_after_parent_verifies_solver_started: true
+  event_missing_or_hash_drift_is_honest_incomplete: true
+  pre_solver_incomplete_counts_as_solver_call: false
+  retry_or_resume_incomplete_call_allowed: false
+  formal_execution_ready: false
+  blocking_reasons:
+    - startup_limit_not_calibrated_on_fresh_isolated_worker
+    - formal_execution_ready_is_false
+    - successor_preregistration_not_published
+
+output:
+  directory: results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_010
+
+logging:
+  directory: results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_010

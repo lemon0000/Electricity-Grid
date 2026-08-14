@@ -169,6 +169,208 @@ M2当前只有“不启动”或在某一季度启动同一个捆绑工程这组
 
 正式逐时T需要同时具备：有来源的数据中心小时工作负荷和柔性比例、可恢复业务吞吐/恢复余量、事故起止和频次、逐时机组组合与爬坡、连续网络安全校核。缺一项都只能保留机制敏感性口径。
 
+## repair-009 求解器切换与实现修订（2026-08-05 登记）
+
+本节登记 repair-009 相对上文「HiGHS 1.15.1 是当前唯一通过正式容量门的引擎」（第119行）和「V3正式协议据此冻结为HiGHS 1.15.1、4线程、exact-CG」（第125行）的偏离。上文两处在冻结时是准确的，按 amendment 惯例保留原文，不改写。
+
+### 已独立复核的事实
+
+- repair-009 配置使用 `solver_name: gurobi`、`solver_threads: 4`（`configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009.yaml:66-67`）。
+- 配置记录 `gurobi_pilot_benchmark_sha256sums: 63f7398eed5ef95e0de13b38ffb6efc7d08f4531c5df95da4f2fc6ce2af0da8d`（同文件第68行）。该值与磁盘上 `results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_gurobi_benchmark_v1/benchmark/SHA256SUMS` 的实测哈希一致，已独立复算。
+- 引擎版本为 Gurobi 13.0.2：候选6的原生日志首行为 `Gurobi 13.0.2 (win64) logging started`、`Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64)`；环境内 `gurobipy` 版本亦为 13.0.2。
+- 候选6 level_set 原生日志显示 `Thread count: 8 physical cores, 16 logical processors, using up to 4 threads`，与配置的 4 线程一致。
+
+### 尚未复核的事实
+
+pilot 的具体运行结果（各线程档位的 wall time、gap、残差）本次未逐项读取 `benchmark/summary.json`，只核对了目录 manifest 哈希。学术许可的取得时点与许可类型亦未在本次核实。引用这些内容前需另行复核。
+
+### 实现方式：runner 加载期 monkeypatch
+
+`experiments/pilot_rts_gmlc_zero_dc_ac_aware_formulations.py`（冻结 HiGHS pilot）与 `src/grid/rts_gmlc_formal_cg_adapter.py` 均被哈希链锁定，不能改。切换改为在 runner-009 加载期打两处 monkeypatch，磁盘上被锁文件的哈希不变：
+
+1. **`_frozen_pilot._solve_handle = _gurobi_solve_handle`**（runner-009:61）。覆盖 iteration≥2 的 proxy master、screening、full-state audit、level_set 与 cost bisection。
+2. **`FormalCgModelAdapter.solve_master` 包装**（runner-009:65-130）。`rts_gmlc_formal_cg_adapter.py:239-245` 判定 `globally_infeasible` 时硬编码 `solver_api == "pyomo.contrib.solver.highs_v2"` 与 `termination_condition == provenInfeasible`。Gurobi 在 level_set 决策 MIP 下实报 `pyomo.environ.SolverFactory.gurobi_legacy` + `termination_condition=minFunctionValue` + `solver_status=aborted`，该条件永不成立，`globally_infeasible` 恒为 False，level-set 二分法的不可行通道对 Gurobi 完全关闭：既无可行 incumbent 抬下界，也无不可行证书压上界，最终抛 `strict_cost_separation_not_proven`。包装补回该通道——stage 为 `level_set_budget_feasibility`、求解器为 Gurobi、无可用 incumbent、且 `raw_lower_bound` 有限并严格超过 `decision_budget_cap_usd` 时置 `globally_infeasible=True`，与 HiGHS 的 `provenInfeasible` 同等对待。**未额外增加数值裕度门槛**：增加即等于对 Gurobi 施加比 HiGHS 基线更严的科学标准。`timeLimit` 终止被明确排除，符合 `timeout_or_ambiguous_is_infeasibility_evidence: false`。超出裕度写入 `decision_mip` 记录供审计。
+
+同一 runner 另修一处与求解器无关的潜伏缺陷：`_validate_round_artifacts` 的链式传参。repair-005 起每层校验器进入时解包 `evidence["proxy_evidence"]`，但向父层只传该子映射，导致下一层 `KeyError('proxy_evidence')`。repair-005~008 均在候选5保存路径之前失败或中断，该路径从未执行，缺陷因此潜伏；repair-009 是首个真正走到候选5 checkpoint 保存的版本并触发它。修法为按中间祖先层数（repair-007→006→005）嵌套包装真实 proxy evidence，repair-004 作为叶子直接消费；`cost_evidence` 每层随行，各祖先重跑同一幂等成本检查。
+
+runner-009 因上述改动的 SHA-256 变为 `c3c3c0c7b228bcaefc722b0b3ea55ea03365e241b737cfe40ad63929f5ce965c`，已同步写入配置 `implementation.runner_sha256` 并重新发布预注册。
+
+### 验证状态
+
+- **`proxy_evidence` 传参修订：真实链路已验证。** 候选5 checkpoint 成功原子发布，`checkpoint_manifest_sha256=a1bacf3706d7239aebdd1018c593675a2ea3e29c301a330e4bf64bb6d9d22aa9`，`reactive_proxy_fraction=0.29915134370579916`，`operating_cost_usd=1128585.043543376`。
+- **Gurobi 不可行通道修订：仅有合成单测背书。** 8 个用例通过，含候选6实测数值（`Cutoff=1163877.341735611`、根界 `1163877.341851999`、超出 `1.16e-4 USD`）与 7 个必须不触发的负例（界未超上限、HiGHS 路径、错误 stage、有可行 incumbent、`timeLimit` 终止、界非有限、上限为 None）。**真实链路验证点是候选6，尚未取得。**
+
+### 该路径并非全程 Gurobi
+
+`src/grid/rts_gmlc_v4_initial_proxy_warmstart.py:81` 的 `V4InitialProxyWarmStartAdapter.solve_master` 在 `stage=proxy_maximization && kind=master && iteration==1` 时走自己的 Appsi/HiGHS warm-start 分支（`:106` `SolverFactory(warm_start["solver_interface"])`、`:114` `highs_runtime_options(...)`），完全绕过 `pilot._solve_handle`，因此 monkeypatch 对它无效。该调用仍是单核 HiGHS：候选5 实测 1.71 h、候选6 跑满 7200 s 上限，原生日志显示 `Using 1 max workers. Parallel search off`。该文件被 repair-004 的 `warm_start_adapter_sha256: c655a3d60af60655a4430000f87651441b888e7b949d8b853e86af45628efcd3` 锁定，未改动；曾尝试直接修改，`_verify_frozen_inputs` 立即抛 `repair-004 warm_start_adapter_path hash drifted`。
+
+### 未闭合的程序性缺口
+
+上文第129行要求换求解器「必须先通过独立重复pilot验证start映射、接受日志、运行时间、最终界和原单位残差，再新建预注册；不得在V3中临时切换」。本次两处 monkeypatch 属于实现变更，其效果尚未经过独立重复 pilot 复核。解除条件：对 monkeypatch 后的链路做独立重复 pilot，收集上述五项证据，据此建立新预注册。
+
+## OPEN：候选6整数违约与求解器参数未生效（2026-08-08 登记，参数选择待定）
+
+### 阻塞本体：IntFeasTol 与快照闸门差两个数量级
+
+repair-009 候选6 在 `level_set_budget_feasibility` 第3轮返回 `maximum_integrality_violation = 5.030864294042203e-07`，`src/grid/rts_gmlc_formal_cg_adapter.py:217-220` 判 `usable=False`，快照被拒，前沿无法发布6个候选，下游 joint AC 被连带阻塞。
+
+该数值不是求解器缺陷，是配置矛盾：
+
+| 项 | 值 | 来源 |
+|---|---|---|
+| Gurobi `IntFeasTol` | `1e-6` | `gurobi_runtime_options` 用 `solver.feasibility_tolerance` 赋值 |
+| 快照闸门 | `1e-8` | `candidate_snapshot.maximum_distance_to_nearest_binary_before_normalization` |
+| 实测违约 | `5.03e-07` | 落在 `1e-6` 以内，求解器完全按配置执行 |
+
+原生日志实证（`formal_repair_009_20260807T132046Z/06_q_proxy_delta_0p0500/level_set_round_03/level_set_budget_feasibility/level_set_budget_feasibility__iteration_01__master.log`）的 `Non-default parameters` 区段为 `Cutoff / TimeLimit 3600 / IntFeasTol 1e-06 / MIPGapAbs 0 / LogToConsole 0 / Threads 4`，无 `IntegralityFocus`。
+
+HiGHS 时代该闸门从未被触发，属于 HiGHS 恰好返回更干净整数的偶然，不是设计保证。
+
+### 已失效的 ifocus 尝试：预注册了无读取方的参数
+
+`rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009_ifocus`（attempt `candidate_20260808T135608923269Z_pid31300`）预注册 `formal_successor.solver_options.IntegralityFocus = 1`，跑满 5 h 59 m 后由用户决定终止，未到判决点。终止不是不可行证据。
+
+失效原因是参数在两层被静默丢弃，两层都已独立复核：
+
+1. `experiments/pilot_rts_gmlc_zero_dc_ac_aware_formulations_gurobi.py` 的 `gurobi_runtime_options` 只接具名参数，无 `**extra`；`_solve_handle` 亦只从 `solver_config` 的具名键构造 options，从不读 `solver_config["options"]`。
+2. `src/grid/rts_gmlc_formal_cg_adapter.py:139-170` 的 `_call_config` 逐键重建 solver 字典，未枚举的键一律丢弃，因此即使 `_solve_handle` 读了也拿不到。
+
+作废记录见 `results/tables/.../repair_009_ifocus/invalidation/invalidation.json`（schema `rts_gmlc_v4_repair_009_ifocus_unread_solver_option_invalidation_v1`），租约归档为 `7d2ec1a65d58404f98f3d58530b9341d.failed`。前缀候选1-4 检查点字节数与旧 output root 逐一相同，证明前缀导入确定性；这些检查点不作为有效产物计入。
+
+### 已完成的通道修复（2026-08-08）
+
+- `gurobi_runtime_options` 增加 `extra_options`；`FROZEN_GUROBI_OPTION_KEYS`（`MIPGap/MIPGapAbs/Seed/Threads/FeasibilityTol/OptimalityTol/TimeLimit/LogToConsole/LogFile/DisplayInterval/Cutoff`）拒绝被配置覆盖，避免配置悄悄改写冻结 pilot 选型；`IntFeasTol` 刻意不在冻结集内，是唯一可调容差。
+- 新增 `assemble_gurobi_options`，含后置条件：声明的键若未出现在最终 options 中即抛 `UnreadableSolverOptionError`。`_solve_handle` 的 HiGHS 分支遇到非空 options 同样抛错，杜绝静默忽略。
+- runner 新增第三处 monkeypatch，包装 `FormalCgModelAdapter._call_config` 把 `options` 挂回去（该文件被 repair-003/004 的 `formal_adapter_sha256: c66e7fc7e530baa0246a0ce70da75fb9fd475a2487b59b4758ffd077c6232788` 锁定，不能直接改）。
+- runner 新增 `_verify_solver_options_are_readable`，在 `_verify_frozen_inputs` 内用真实装配函数对声明值做亚秒级探针，参数不可达则在预热前终止。
+- `solve_started` 事件新增 `effective_solver_options` 与 `solver_api`，此后每次求解都在 `progress.jsonl` 留下实际下发参数的可审计记录。
+- 新增 `tests/test_rts_gmlc_v4_repair_009_gurobi_solver_options.py`（12 用例）。相关回归 131 用例全通过。
+- 端到端实证：Gurobi 13.0.2 原生日志 `Non-default parameters` 区段确认 `IntegralityFocus 1` 与 `IntFeasTol 1e-09` 均被应用。
+
+**该修复只恢复了通道，未选定参数。** 通道修复本身不改变任何科学阈值。
+
+### 已完成：持久化 cost audit 的 actual_proxy 容差对齐（2026-08-09）
+
+ifocus2 attempt（`candidate_20260809T005341489745Z_pid32644`）在候选6的 `level_set` / cost 阶段整数违约为 0.0（`IntegralityFocus: 1` 对该目标生效），但落盘时失败于 `repair-005 persisted cost audit drifted`。
+
+根因：`_validate_persisted_cost_audit` 用 `proxy_floor_absolute_tolerance = 1e-7` 比较连续重解的 `actual_proxy_fraction` 与候选 proxy；而 `FormalCgModelAdapter.audit_full_state` 接受同一审计时用的是 `feasibility_tolerance = 1e-6`。候选6实测差值 `1.0000000000287557e-7`，严格 `>` 越界；候选5同类差值 `9.999e-8` 侥幸通过。求解路径已 `passed=True`，失败仅在持久化门。
+
+修复（仅 repair-009 runner）：`actual_proxy` 比较改用 `formal_solver.solver.feasibility_tolerance`；commitment 与候选 proxy 的恒等比较仍用 `proxy_floor_absolute_tolerance`。回归见 `tests/test_rts_gmlc_v4_repair_009_persisted_cost_audit.py`（复现候选6数值）。
+
+该修复改变 `implementation.runner_sha256`，ifocus2 预注册不可原地续跑；后继需新 output root / 新预注册。候选1–5 检查点仍在 ifocus2 root，可作前缀导入源。
+
+### 已完成：持久化 cost audit 的 snapshot.reactive_proxy 容差对齐（2026-08-10）
+
+ifocus3 attempt（`candidate_20260809T230221675557Z_pid52492`）再次在候选6落盘失败于同一错误串 `repair-005 persisted cost audit drifted`。求解路径仍成功：`IntegralityFocus: 1`，`maximum_integrality_violation=0.0`，`cost_normalization` `eligibility_status=target_attained`；候选1–5 检查点已落盘。
+
+根因：上一轮只放宽了 `actual_proxy_fraction` 比较，但 accepted cost snapshot 的 `reactive_proxy` 存的是同一连续重解值，与候选 commitment-capability proxy 的比较仍用 `proxy_floor_absolute_tolerance=1e-7`。候选5：`|snap-cand|≈9.999e-8` 侥幸过；候选6：`1.0000000000287557e-7` 严格 `>` 越界。
+
+修复（仅 repair-009 runner）：`snapshot.reactive_proxy` vs 候选 proxy 同样改用 `feasibility_tolerance`；commitment-capability 恒等门不变。回归补 `test_cand6_snapshot_actual_proxy_gap_*`。ifocus3 不可原地续跑；后继 output root：`..._repair_009_ifocus4`。
+
+### 已完成：ifocus4 候选前沿发布（2026-08-10/11）
+
+ifocus4 attempt（`candidate_20260810T124707278538Z_pid13556`）在新 output root `..._repair_009_ifocus4` 上完成 prepare + generate-candidates：候选1–6检查点全部落盘，`candidate_frontier` 已发布（`summary.json` schema `rts_gmlc_v4_repair_009_candidate_frontier_v1`，`unique_candidate_count=7`，含 parent baseline）。`IntegralityFocus: 1` 仍在求解器选项中；候选6不再被持久化 cost-audit 门拒绝。`joint_ac_solver_call_count` 仍为 0；该前沿仍是 derived benchmark / 非工程安全证书。
+
+### 进行中：ifocus4 `run-joint-ac`（2026-08-11 启动，preflight 失败后补全修正案）
+
+首次尝试在入口校验失败：`repair-005 frontier summary drifted`（未进入 IPOPT；`joint_ac` 未发布）。
+
+根因（两层）：
+1. generate 在进程内把 `formal_solver.solver` 改成 Gurobi 后才发布 `summary.json`；fresh `_build_context` 仍用 HiGHS → summary 重建不一致。
+2. 仅修 (1) 并更新 `implementation.runner_sha256` 后，会打破 ifocus4 冻结链：前沿/检查点仍绑定旧 `input_contract_sha256`，而 live prereg 期望新 contract。
+
+修复（仅 repair-009 runner）：
+- `_apply_formal_successor_solver_override` 在 `_build_context` 全局应用 Gurobi 合约；
+- `_load_candidate_frontier` 以已发布 `summary.input_contract_sha256` 作为检查点 reload 权威；
+- 新增 `amend-preregistration-implementation` stage：只允许 implementation hash / `successor_config_sha256` 变更，归档旧 prereg，保留 frontier；嵌套归档改用 `_write_nested_manifest`（避免漏记 `previous_preregistration/SHA256SUMS`）；
+- ifocus4 预注册已纠正发布（live contract `ea992b98…`；frontier 仍绑定生成时 `0b34bfe9…`）。
+
+第二次 `run-joint-ac` 仍在 preflight 失败：`repair-004 level-set round chain drifted`（约 4.5h `_build_context` 后；未进入 IPOPT；`joint_ac` 未发布）。根因：检查点 round JSON 冻结生成时 contract `0b34bfe9…`，而 leaf 校验对比 live amended contract。修复：`_validate_round_artifacts` / `_load_candidate_checkpoint` 在传入已发布 frontier contract 时，用其桥接 round 校验；再做一次 implementation-only prereg 修订后重跑 `run-joint-ac`。
+
+### 已终止：ifocus4 首次 joint-AC 子进程是 honest incomplete（2026-08-12）
+
+attempt `joint_20260812T044759183290Z_pid13700`（父 PID `13700`，worker PID `21172`）在首次 `candidate_00/source` 上于 parent 计时 `7500.494260399952 s` 超时。权威证据为：
+
+- progress：`results/logs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009_ifocus4/joint_20260812T044759183290Z_pid13700/progress.jsonl`，声明 `expected_joint_call_count=21`，终止时 `completed_joint_call_count=0`；
+- call registry：`results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009_ifocus4/joint_call_registry/candidate_00__source/call.json`，manifest SHA-256 `0a56007ff240ccdfcad7ff1cea51b55dd96276112fded0f415744277a228d4f1`；
+- execution lease：`results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009_ifocus4/execution_lease/history/668f668226db419484387c8b6419669e.failed/{lease.json,terminal.json}`；
+- worker process log `.../worker_process/candidate_00__source.log` 为 `0 bytes`；不存在 `.../native/candidate_00__source.log`，也没有 worker result/checkpoint 或 `joint_ac` 发布目录。
+
+该旧协议从子进程创建时即启动 `7500 s` wall deadline，没有 worker 内阶段事件，因而证据只能支持“在验证 IPOPT solver start 之前或其可观测性之前超时”的 **honest incomplete**。它不能定位为模型构造的某个具体函数卡点，不能解释为 IPOPT/模型不可行，也不计为已完成 solver call。最终计数固定为 `0/21`；旧 attempt、call registration 和 lease 不得 resume/retry 或原地改写。
+
+repair-010 后继 orchestration 已接入既有 immutable call registration、worker result、checkpoint 与 execution lease：fresh isolated worker 持久记录 `worker_started → context_load_started/completed → prepared_cases_completed → nlp_build_started/completed → solver_started → solver_finished` 的 hash-bound、flush+fsync phase journal；父进程以实际 spawn PID、aware timestamp、单调 worker elapsed、重算后的 expression/solver-input fingerprints 和冻结的 prepared/IPOPT/software identity 验证记录，只有完整验证 `solver_started` 后才开始 `7500 s` solver wall，IPOPT CPU `7200 s` 不变，并负责 terminate/kill/grace、worker exit和result manifest验证。startup limit 尚无 fresh-worker校准证据，保持 `null`；`formal_execution_ready=false`且successor preregistration未发布，因此prepare/formal-run/worker CLI在spawn前fail closed。lightweight context artifact 的完整语义等价性未证明，保持`disabled_unproven`，但这只禁用artifact路径；`fresh_rebuild_in_fresh_isolated_worker` fallback已冻结且不由artifact gate阻塞。不得把主进程 fresh `_build_context` 的约 `4.5–5.2 h` 直接当成 child startup limit。
+
+repair-010 的 recovery 接受门不再继承旧 repair-004/009 attempt：existing worker result、existing checkpoint、最终 `joint_ac` load/merge 都必须有 repair-010-local phase registration、父进程实际 PID spawn receipt、completion receipt、完整 journal、call/input/frontier/candidate/commitment/dispatch/IPOPT/software/fingerprint 和 result/native manifest 的一致绑定；缺失或 drift 均停止且不得补造、重试或解释为 solver/不可行证据。completion receipt 发布或后置重验证失败时，已验证的 `solver_started` 固定分类为一项 honest-incomplete call；recovery completion 缺失/损坏时仅在 registration + spawn receipt + journal 完整验证到 `solver_started` 后计 1，pre-solver 或坏 journal 计 0，worker result 本身不用于推断。旧 ifocus4 frontier 也不能由 solver 直接跨 root 读取，只能经显式 `import-predecessor-frontier` 使用 repair-009 权威 loader 审计全部 preregistration/frontier、7 candidates、6 checkpoints 和 22 nested round manifests 后原子深复制到 successor-local import；import record 固定 source outcomes 已观察、scientific values unchanged、solver calls `0`、无 hard link。当前未发布 prereg、startup limit 为 `null`，所以 import/run 同样在写 root 或 spawn 前 fail closed；真实 ifocus4 本轮仅只读审计，不创建 repair-010 root。
+
+repair-010 进一步冻结 parent finalization 状态机：可信 solver completion 后先原子发布 hash-bound intent；其后任一 completion/revalidation/checkpoint 或 success-seal commit 前 failure 均必须发布不可变 terminal-incomplete tombstone，固定计 1 次 call、非 infeasibility、禁止 resume。success seal 只能在 completion、checkpoint 与 parent完成事件后最后发布并绑定三者 manifest；若底层 publisher 在 atomic rename 后抛错，只有 target manifest 与预计算 exact payload 完整一致才按 committed success 继续，且不得调用 terminal publisher。target 已存在但无法证明 exact commit 时为 commit-indeterminate fail-closed 状态，不得同时登记 terminal incomplete。四类恢复入口按 terminal → intent/success seal → completion 的顺序 fail closed；terminal 损坏/绑定漂移拒绝接受。若 tombstone 自身发布失败，intent 存在而 success seal 缺失仍阻止既有 completion 被未来接受，同时抛显式 persistence error，不虚报 tombstone 已持久化。该机制不改变 pre-solver count 0 分类，也不解除 startup/prereg/formal readiness blocker。
+
+repair-010 startup calibration V1 was started once and ended after about 30 seconds as an immutable honest calibration incomplete: parent PID `18576`, worker PID `31312`, journal contains only `worker_started → context_load_started`, reason `calibration_worker_exit_code:1`, solver calls `0`, no native IPOPT log, non-infeasibility, and no-resume. Its contract/registration/spawn/incomplete manifest SHA-256 values are `a4ed4af3816061c42420a031f16a694827278fe94cda4e52cb8a980972eefa5f`, `2a3c20658cea11fc5f0ccb4b0e23d87f0e634d3f53815f8dc58c23b73582ee54`, `c8b951e64ede31017845b8c7ccefdbaf21f4c607b4af9ffa8faf13c9006e4e68`, and `4f3ba6e497e388c2e9713355f7e7a035fb8387c6f60b07958b711c884244930d`. The inherited repair-009→004 loader rejected checkpoint input-contract drift because repair-010 instrumentation had changed the shared V4 adapter from historical SHA `cf5cf1e3d133b7e60f63dbb0d072952a9e78de24cd05d0bb740683e8806013b7`; this is a successor implementation-isolation defect, not environment failure, old checkpoint corruption, solver evidence, or infeasibility.
+
+The calibration implementation now fixes the exact timing and terminal commit boundaries: start is sampled after log open immediately before `Popen`; stop is sampled only after full actual-PID/binding/journal/fingerprint validation, so validation time is included. Completion post-rename exceptions are reconciled against the exact precomputed payload/manifest; only a proven commit is success, an absent target may become incomplete, and an unprovable or completion+incomplete state is permanently rejected. The launcher publishes request intent before spawn and actual-PID/started receipts afterward; any post-spawn receipt failure terminates/kills and waits for only its child before publishing immutable failed state. Failure to prove child death plus failed receipt is unrecoverable and the launcher root still blocks retry. These mechanisms have only tiny/analytic fault-injection evidence and do not change the unresolved real startup-calibration blocker.
+
+The isolation defect is repaired without weakening the loader: the shared V4 adapter is restored exactly to the historical authority SHA, and observer/fingerprint/pre-solver-stop behavior lives only in `rts_gmlc_ac_aware_commitment_v4_repair_010_adapter.py`. Both calibration and formal joint workers now call that dedicated module directly; the formal worker uses a repair-010-local executor that reuses the legacy row/validation/metadata/publication helpers and forwards the phase observer, rather than entering the legacy executor's runtime shared-adapter import. Calibration V2 has a new ID and disjoint table/log/launcher roots, binds both adapter hashes, verifies the four repair-004 checkpoint contracts plus V1 immutable evidence before launch, and preserves the frozen single-sample/`21600 s`/`ceil((2*elapsed)/300)*300` rule. V2 has not been run and cannot reuse V1. Therefore `startup_limit_seconds: null`, unpublished preregistration, and `formal_execution_ready=false` remain active blockers.
+
+### 顺带修复：发布目录被 .pyc 污染会阻断下次启动
+
+`results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_warmstart_benchmark_v3/preparation/__pycache__/benchmark.cpython-312.pyc` 由候选5 warm start 经 `_load_frozen_benchmark_module` 动态导入时写入（实测生成于 2026-08-08T13:56:20Z）。它使该目录文件集偏离 `SHA256SUMS`，`_verify_solver_predecessors` → `_verify_manifest` 在下一次启动即抛 `Source manifest file set drifted`。即每一次跑到候选5 的运行都会给下一次运行埋雷。已删除该字节码；后继 launcher 必须设 `PYTHONDONTWRITEBYTECODE=1`。
+
+### 参数选择：待用户决定，两条路证据不对称
+
+Gurobi 官方文档（Parameter Reference，`IntegralityFocus` 与 `IntFeasTol` 条目）对本失败模式的判断是：
+
+- 本模型正是文档描述的 big-M trickle flow 结构（原生日志 `Matrix [4e-03, 6e+04]`、`RHS [1e-01, 1e+06]`，并有 `WARNING: Problem has some excessively large row bounds`）。
+- 文档原文：「Reducing the value of the IntFeasTol parameter can mitigate the effects of such trickle flows, but often at a significant cost, and often with limited success. The IntegralityFocus parameter provides a better alternative.」
+- Gurobi 支持文档另警告 `IntFeasTol = 1e-9` 配合宽松 FeasibilityTol 可能导致数值精度问题与错误变量固定，把可行模型报为不可行。
+
+因此把 `IntFeasTol` 收到 `1e-9` 并非厂商推荐路径，且在本项目有特殊风险：出问题的正是 `level_set_budget_feasibility` 决策 MIP，它的用途就是证明「预算上限内无解」。一个由过紧容差诱发的伪不可行，与 agent.md「不得把局部不可行状态重新解释为数学不可行」直接冲突，且 repair-009 的 Gurobi cutoff 不可行通道补丁会把它当作真证书接受。
+
+`IntegralityFocus: 1` 的代价是「modest performance penalty」，不引入伪不可行风险，但文档也明说「the solver won't always succeed」，即不保证 ≤1e-8。
+
+三条路各自的性质：（a）仅 `IntegralityFocus: 1`，厂商推荐、无伪不可行风险、不保证成功；（b）仅 `IntFeasTol: 1e-9`，直接约束违约上界但有伪不可行风险且厂商称收效有限；（c）两者并用，成功率最高但保留（b）的风险且失败时无法归因。
+
+**本节只登记证据，参数未写入 config。** `configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009.yaml:68-69` 仍为已证明无效的 `solver_options: {IntegralityFocus: 1}`，在选定并重新预注册之前不得据此启动正式运行。
+
+## gap 阈值放宽与预注册规格冲突（repair-010 已选择路径 a，formal 仍阻塞）
+
+`metrics_and_validation.md:411` 与 `formulation.md:344` 均写明 maximum accepted relative gap 在正式运行前冻结为 `1e-3`，且 `:411` 明确「不得按结果修改时限或阈值」。配置实测值：
+
+| 版本 | `maximum_accepted_relative_gap_to_feasible_incumbent` |
+|---|---|
+| v3 / v4 / repair-003~006 | `1.0e-3` |
+| repair-007 | `1.2e-3` |
+| repair-008 / repair-009 | `1.5e-3` |
+
+git 提交信息：`7297887 feat(repair-007): 放宽 maximum_accepted_relative_gap 至 0.12% 解除 candidate5 阻塞`；`c91b140 feat(repair-008): 阈值提至 0.15% 覆盖两个已观测的候选5证书`。后者与规格禁止「按结果修改阈值」直接冲突。
+
+同时 repair-009 的 `registration.json` 记录 `candidate_frontier_outcomes_observed: false`，与「已观测候选5证书」不能同时为真。
+
+本节只登记事实，不预判处置。两条可选路径：（a）退回 `1e-3`，按规格把候选5标记为 `eligible_within_maximum` 而非 target attained；（b）保留 `1.5e-3`，但在预注册中显式记录修订时点与理由，并把 `candidate_frontier_outcomes_observed` 改为 `true`。处置未定前，该 gap 阈值与候选5的资格状态不得写入论文正式结论。
+
+### 处置意向：倾向路径（a），执行时点在候选6真实链路验证之后
+
+以下数据取自 Gurobi 下候选5的已落盘检查点 `stage_audits`（备份路径 `.backup_repair009_output_20260805T113832Z/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009/candidate_checkpoints/05_q_proxy_delta_0p0200/candidate.json`，checkpoint manifest `a1bacf3706d7239aebdd1018c593675a2ea3e29c301a330e4bf64bb6d9d22aa9`）：
+
+| 阶段 | incumbent-relative gap | `target_attained` | 相对冻结值 `1e-3` 的富余 |
+|---|---|---|---|
+| `proxy_maximization_hybrid` | `8.979707997056543e-05` | True | 11.1 倍 |
+| `cost_normalization_hybrid` | `9.734785510674134e-05` | True | 10.3 倍 |
+
+两个 gap 均已低于 `target_relative_gap = 1e-4`，不只是低于最大门 `1e-3`。即：**在 Gurobi 下候选5根本不需要那次放宽**，路径（a）不会使候选5降级为 `eligible_within_maximum`，它仍是 target attained。这与登记时的初步判断不同，登记时尚未核对检查点内的实际 gap。
+
+放宽的动因是求解器缺陷而非科学需要。repair-007 config 记录的失败原因为 `heuristic_cost_gap_variance_across_proxy_paths_and_highs_time_limits`，即 HiGHS 在不同 proxy 路径下 cost gap 方差过大；Gurobi 下该 gap 收敛至 `1e-5` 量级。保留 `1.5e-3` 等于保留一个已失效缺陷的补丁。
+
+同一检查点内还留有跨版本继承的阈值不一致：`proxy_evidence.certificate.maximum_accepted_relative_gap_to_feasible_incumbent = 0.0012`（repair-007 值），而 `proxy_evidence.direct_stage_record.maximum_acceptance.maximum_accepted_relative_gap_to_feasible_incumbent = 0.0015`（repair-008/009 值）。退回 `1e-3` 会一并消除该不一致。
+
+不立即执行的理由：退回需改 config → runner 哈希链变 → 重新预注册（实测约 4.5 h）→ 候选5重跑（实测约 3 h），合计约 7.5 h。而该阈值对候选6无影响——候选6 proxy 阶段在 7200 s 上限处 gap 约 0.87%，超过 `1e-3`/`1.2e-3`/`1.5e-3` 全部三个值，无论取哪个都会进入 `level_set_budget_feasibility` 回退路径。若现在改而候选6随后暴露新缺陷，这 7.5 h 需重付一次。
+
+因此执行顺序为：候选6 完成并验证 Gurobi 不可行通道补丁 → 确认无新缺陷 → 一次性执行阈值退回与最终全量重跑。退回后候选5的数值不变（两个 gap 在两个阈值下均通过），变化仅限契约中记录的阈值与标签。
+
+**本节只记录意向，config 未改动**：`configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009.yaml:86` 仍为 `1.5e-3`。在执行退回并重新发布预注册之前，本节开头的处置未定约束继续生效。
+
+### repair-010 处置
+
+用户已明确授权路径（a）。旧 repair-009 config/preregistration/frontier 保持不可变 predecessor evidence；新 `configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_010.yaml` 将 `maximum_accepted_relative_gap_to_feasible_incumbent` 冻结回规格值 `1e-3`，并将 `candidate_frontier_outcomes_observed` 诚实登记为 `true`。这解决了 successor 设计中的 gap/observability 口径冲突，但不追溯改写 repair-009 产物。repair-010 当前因 startup limit 未校准、`formal_execution_ready=false`且successor preregistration未发布而 fail closed；context artifact等价性未证明只关闭artifact路径，不关闭fresh-rebuild fallback。阈值处置不得解释为 formal result 已完成。
+
 ## 外部证据阻塞
 
 ### RTS-24响应与频率

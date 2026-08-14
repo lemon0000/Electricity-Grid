@@ -1,0 +1,73 @@
+{
+  "ac_security": false,
+  "algorithm": "direct_exact_cg_then_proxy_level_set_then_cost_decision_bisection_repair_009",
+  "all_budget_candidates_completed_before_deduplication": true,
+  "candidate_checkpoint_manifest_sha256s": {
+    "q_proxy_delta_0p0010": "928a4d35d1584f7860cffd886be9989b696d814684f7af56a44ebe47423b096c",
+    "q_proxy_delta_0p0025": "03e0011e91cc71111e4cbb2fbbe1681daf8d8fd8ae33dca463fcf0574c97e546",
+    "q_proxy_delta_0p0050": "dc7700d82c2510d41fb37e05fccaef6d66a5fe87a9d5b9a8737e174dd1d900c8",
+    "q_proxy_delta_0p0100": "6dcef2cb094d67e4f04543e4d06ed00535c5bc3a04d56f916c75c61bd9ddd1a8",
+    "q_proxy_delta_0p0200": "eadd71e643f5be3ae2551a7e3a55e3dfa2ce78427ccf88729380c5c86c8063bc",
+    "q_proxy_delta_0p0500": "cad75678c9ac0dd829e43899a2f619cdf155b1d556e9a8196d0e44ba0e2eb516"
+  },
+  "candidate_generation_attempt_id": "candidate_20260810T124707278538Z_pid13556",
+  "candidate_generation_completed_before_any_joint_ac_solve": true,
+  "candidate_generation_uses_ac_outcomes": false,
+  "candidate_ids": [
+    "candidate_00",
+    "candidate_01",
+    "candidate_02",
+    "candidate_03",
+    "candidate_04",
+    "candidate_05",
+    "candidate_06"
+  ],
+  "causal_poi_attribution_supported": false,
+  "checkpoint_schema": "rts_gmlc_v4_repair_009_cost_bisection_candidate_checkpoint_v1",
+  "commitment_sha256s": [
+    "12e5b3ec6e1bd8704050b7632c0af35c81c714c3d318f7cc77b045980b5da0da",
+    "6838623399f5d760741aaa5e3cb395f92a87459576f5833e9753ab83347f982e",
+    "a53bc3509f7a1494991b310d2c84591ad388f385d43a53f0c41b6ec6965fd85f",
+    "af291bb6238a6ea3b2adad70d94feb92af66e31356f55fd16d3bac4e56fe6ab8",
+    "810123b44a8858fce51978b17e4f8072130b18f45987bebff2a9f74c4c761ee1",
+    "25973ed373e6118aa393f052e9cb499117a928778e41072f21248f95eea29c18",
+    "bd2c2d43c08fa316b4d2b43294ba03efebc61b18d963bee853444ac311dab91c"
+  ],
+  "engineering_ac_parameters_available": false,
+  "evidence_status": "derived_benchmark",
+  "float_serialization": "python_json_roundtrip_full_precision_v1",
+  "formal_vma_published": false,
+  "full_m6_model_input_ready": false,
+  "full_n_minus_one": false,
+  "input_contract_sha256": "0b34bfe901d054ff8d42562ce21f336b1c6b0b34009ba2f01bc687b4ec37598d",
+  "joint_ac_solver_call_count": 0,
+  "maximum_reactive_proxy_fraction": 0.3917963224893918,
+  "minimum_reactive_proxy_fraction": 0.24328147100424327,
+  "parent_baseline_included": true,
+  "physical_envelope_has_response_time_evidence": false,
+  "preregistration_id": "rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009",
+  "relative_cost_budget_deltas": [
+    0.001,
+    0.0025,
+    0.005,
+    0.01,
+    0.02,
+    0.05
+  ],
+  "requested_budget_candidate_count": 6,
+  "requested_candidate_count": 7,
+  "result_evidence_ceiling": "zero_dc_normal_state_ac_aware_commitment_joint_trajectory_diagnostic",
+  "schema": "rts_gmlc_v4_repair_009_candidate_frontier_v1",
+  "security_certified": false,
+  "solver": {
+    "bound_consistency_tolerance": 1e-06,
+    "feasibility_tolerance": 1e-06,
+    "name": "gurobi",
+    "options": {
+      "IntegralityFocus": 1
+    },
+    "random_seed": 0,
+    "threads": 4
+  },
+  "unique_candidate_count": 7
+}

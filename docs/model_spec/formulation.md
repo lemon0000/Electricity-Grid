@@ -357,6 +357,29 @@ $$
 
 求解器容量inventory在当前自动许可证下只允许HiGHS 1.15.1进入正式模型。冻结6小时、24状态重复pilot以非目标值规则选择4线程，再选择exact selected-state constraint generation；thread result manifest为`4b05c7d7fcbd8f64ddb9eb61d4ee15c571a7905d8ebd453ac19d07cbf56c63d1`，formulation preparation/result manifest为`ae3c19536341c0767f43dcbddb7ccabd60c9607f0baae7ab152507e750cf763a`和`82f1f0cb72d574b2054f193f6354383c5629bd30796b42a919323ef326c0d7e1`。本节只定义候选生成和误差证书，不构成AC见证；六个预算候选各自的checkpoint及包含冻结父基线在内的完整requested frontier原子发布并验证前，不得调用joint AC。
 
+### 1.7.1 repair-009修订：求解器由HiGHS切换为Gurobi
+
+上段“只允许HiGHS 1.15.1进入正式模型”是自动许可证下的容量结论，在repair-009已被取得的Gurobi学术许可解除。原文保留不改写，本小节记录修订后的实际口径。
+
+已独立复算核实的事实：
+
+- `configs/rts_gmlc_google_day0_zero_dc_ac_aware_commitment_v4_repair_009.yaml`设`solver_name: gurobi`、`solver_threads: 4`。
+- pilot benchmark产物在`results/tables/rts_gmlc_google_day0_zero_dc_ac_aware_gurobi_benchmark_v1/benchmark/`，其`SHA256SUMS`哈希为`63f7398eed5ef95e0de13b38ffb6efc7d08f4531c5df95da4f2fc6ce2af0da8d`，与配置中`gurobi_pilot_benchmark_sha256sums`逐字符一致。
+- 引擎版本为Gurobi 13.0.2：候选6的原生日志首行为`Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64)`，环境内`gurobipy`报告同一版本。
+
+本修订尚未复核的项：pilot benchmark内部的线程选择时间、gap与残差明细未在本次修订中读取，只核对了其manifest哈希。引用具体pilot数值前必须先读取该产物。
+
+因pilot模块与`src/grid/rts_gmlc_formal_cg_adapter.py`均被预注册哈希链锁定，切换以runner-009加载期的两处monkeypatch实现，不改动被锁文件：
+
+1. `_frozen_pilot._solve_handle = _gurobi_solve_handle`。影响iteration≥2的proxy master、screening、full-state audit、level-set与cost bisection。
+2. `FormalCgModelAdapter.solve_master`包装器。适配器原判定`globally_infeasible`时硬编码`solver_api == "pyomo.contrib.solver.highs_v2"`，Gurobi实报`gurobi_legacy` + `termination_condition=minFunctionValue` + `solver_status=aborted`，条件永不成立，level-set二分法的不可行性通道对Gurobi恒为关闭。包装器在stage为`level_set_budget_feasibility`、求解器为Gurobi、无可行incumbent、且`raw_lower_bound`有限并严格超过`decision_budget_cap_usd`时置`globally_infeasible=True`，与HiGHS的`provenInfeasible`同等对待。`timeLimit`终止被显式排除，符合`timeout_or_ambiguous_is_infeasibility_evidence: false`；未额外增加数值裕度门槛，因为基线对HiGHS的证书也未要求裕度。超出裕度写入`decision_mip`记录供审计。
+
+**这条链路并非全部Gurobi。** `src/grid/rts_gmlc_v4_initial_proxy_warmstart.py`的`V4InitialProxyWarmStartAdapter.solve_master`在`stage=proxy_maximization && kind=master && iteration==1`时走自有的Appsi/HiGHS warm-start分支，完全绕过`pilot._solve_handle`，因此每个新候选的第一次proxy master仍是单核HiGHS。实测候选5该调用耗时1.71 h，候选6跑满7200 s上限。该文件由repair-004的`warm_start_adapter_sha256`锁定，未改动。
+
+验证状态：`proxy_evidence`链式传参修订已由候选5 checkpoint（`candidate_manifest_sha256=a1bacf3706d7239aebdd1018c593675a2ea3e29c301a330e4bf64bb6d9d22aa9`）在真实链路验证通过。Gurobi不可行通道修订目前只有8项合成单测背书，真实链路验证点为候选6，尚未取得。
+
+未闭合的程序性缺口：`blocker_register.md`要求换求解器须先通过独立重复pilot验证start映射、接受日志、运行时间、最终界和原单位残差，再新建预注册。上述两处monkeypatch属实现变更，其效果尚未经独立重复pilot复核。
+
 ## 2. 数据中心基线需求
 
 基线IT功率在数据预处理阶段计算：
