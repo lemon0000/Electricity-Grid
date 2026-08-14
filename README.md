@@ -1,5 +1,7 @@
 # Electricity-Grid
 
+*Last updated: 2026-08-14*
+
 Research code for staged data-center interconnection and grid expansion.
 
 Current scope includes the reproducible grid-security foundation, deterministic
