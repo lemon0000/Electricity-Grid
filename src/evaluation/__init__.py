@@ -29,6 +29,14 @@ from .flexibility_envelope import (
     ChronologicalFlexibilityTrace,
     evaluate_chronological_flexibility,
 )
+from .service_risk import (
+    SERVICE_LOSS_RISK_SCOPE,
+    ScenarioServiceLoss,
+    ServiceCvarResult,
+    ServiceLossCoefficients,
+    evaluate_service_cvar,
+    service_loss_value,
+)
 from .stochastic_policy import (
     FrozenPolicyDecision,
     FrozenPolicyEndpoint,
@@ -67,10 +75,15 @@ __all__ = [
     "MappedFixedPolicy",
     "RecoveryParameters",
     "STATIC_ASSUMPTION_METRIC_SCOPE",
+    "SERVICE_LOSS_RISK_SCOPE",
+    "ScenarioServiceLoss",
+    "ServiceCvarResult",
+    "ServiceLossCoefficients",
     "StochasticHoldoutProtocol",
     "calculate_capacity_milestones",
     "evidence_kinds",
     "evaluate_chronological_flexibility",
+    "evaluate_service_cvar",
     "incident_by_time_step",
     "load_business_chronology_csv",
     "load_incident_chronology_csv",
@@ -79,5 +92,6 @@ __all__ = [
     "map_observed_history_to_group",
     "map_q2_demand_class",
     "map_q4_terminal_outcome",
+    "service_loss_value",
     "validate_incidents_against_business_timeline",
 ]
