@@ -19,6 +19,7 @@ from .deterministic_fx import (
     FixedFxPlan,
     FxQuarter,
     FxServiceEnvelope,
+    SharedFlexibilityBudget,
     evaluate_deterministic_fx_plan,
 )
 from .stochastic_baselines import (
@@ -41,6 +42,7 @@ __all__ = [
     "FxQuarter",
     "FxServiceEnvelope",
     "PlanningQuarter",
+    "SharedFlexibilityBudget",
     "StochasticBaselineEndpoint",
     "StochasticBaselinePolicy",
     "StochasticBaselineResult",

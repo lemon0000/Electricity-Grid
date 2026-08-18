@@ -76,6 +76,37 @@ class FxServiceEnvelope:
 
 
 @dataclass(frozen=True)
+class SharedFlexibilityBudget:
+    """Section 10.1 / section 8 shared MW flexibility budget.
+
+    Network curtailment, green/CFE peak shifting and permanent business drop
+    share the same real business resource. ``flexibility_budget_mw`` is the
+    per-quarter ``D^flex`` applied to the actual-operation curtailment; the
+    green/CFE deferral call ``green_call_mw`` is an exogenous ``c^green`` that
+    competes for the same budget. ``certified_flexibility_budget_mw`` is the
+    ``D^{flex,cert}`` used on the contract-capacity certification layer, and
+    ``connected_demand_budget_mw`` is the optional ``D^conn`` cap.
+
+    When ``enforce_joint_budget`` is ``True`` the correct model enforces the
+    single joint constraint ``c^grid + c^green + l^drop <= D^flex``. When it is
+    ``False`` the B6 error baseline is built: the joint constraint is dropped
+    and grid curtailment and the green call are each capped by the full budget
+    independently, so both can draw on it and overstate the certifiable X.
+    Permanent drop ``l^drop`` is 0 in this deterministic MW-only extension.
+
+    All quantities are synthetic mechanism parameters, not probabilities,
+    contract capabilities or hourly network certifications.
+    """
+
+    flexibility_budget_mw: Mapping[str, float]
+    certified_flexibility_budget_mw: Mapping[str, float]
+    green_call_mw: Mapping[str, float]
+    connected_demand_budget_mw: Mapping[str, float] | None
+    enforce_joint_budget: bool
+    parameter_status: str
+
+
+@dataclass(frozen=True)
 class DeterministicFxResult:
     feasible: bool
     termination_condition: str
@@ -394,6 +425,33 @@ def _extract_layer_results(
     return results
 
 
+def _validate_shared_flexibility_budget(
+    budget: SharedFlexibilityBudget | None,
+    quarter_names: tuple[str, ...],
+) -> SharedFlexibilityBudget | None:
+    """Validate the section 10.1 / section 8 shared flexibility budget."""
+    if budget is None:
+        return None
+    if not budget.parameter_status:
+        raise ValueError("Shared flexibility budget parameter status must be explicit")
+    expected = set(quarter_names)
+    mappings = [
+        ("Flexibility budget", budget.flexibility_budget_mw),
+        ("Certified flexibility budget", budget.certified_flexibility_budget_mw),
+        ("Green call", budget.green_call_mw),
+    ]
+    if budget.connected_demand_budget_mw is not None:
+        mappings.append(
+            ("Connected demand budget", budget.connected_demand_budget_mw)
+        )
+    for label, mapping in mappings:
+        if set(mapping) != expected:
+            raise ValueError(f"{label} must contain every quarter exactly once")
+        for quantity in mapping.values():
+            _validate_nonnegative_finite(label, quantity)
+    return budget
+
+
 def evaluate_deterministic_fx_plan(
     data: Rts24Data,
     *,
@@ -411,6 +469,7 @@ def evaluate_deterministic_fx_plan(
     sustained_rating: str = "rate_a",
     primary_objective_tolerance: float = 1.0e-5,
     solver_name: str = "highs",
+    shared_flexibility_budget: SharedFlexibilityBudget | None = None,
     tee: bool = False,
 ) -> DeterministicFxResult:
     """Evaluate one fixed quarterly F/X and project-start policy.
@@ -485,6 +544,9 @@ def evaluate_deterministic_fx_plan(
     )
     _validate_nonnegative_finite(
         "Primary objective tolerance", primary_objective_tolerance
+    )
+    budget = _validate_shared_flexibility_budget(
+        shared_flexibility_budget, quarter_names
     )
     bus_indices = tuple(bus.index for bus in data.buses)
     if poi.bus not in bus_indices:
@@ -739,6 +801,56 @@ def evaluate_deterministic_fx_plan(
                 model.certified_poi_load[key]
                 >= model.firm_capacity[quarter.name]
             )
+
+    if budget is not None:
+        # Section 10.1 / section 8: network curtailment, the green/CFE deferral
+        # call and permanent drop share one real business resource. l^drop is 0
+        # in this deterministic MW-only extension. c^green is exogenous. The
+        # correct model enforces the single joint budget; the B6 error baseline
+        # drops it and caps grid curtailment and the green call independently,
+        # letting both draw the full budget and overstate the certifiable X.
+        model.shared_flexibility_budget = ConstraintList()
+        for quarter in quarters:
+            green_call = float(budget.green_call_mw[quarter.name])
+            flex_budget = float(budget.flexibility_budget_mw[quarter.name])
+            cert_budget = float(
+                budget.certified_flexibility_budget_mw[quarter.name]
+            )
+            conn_budget = (
+                None
+                if budget.connected_demand_budget_mw is None
+                else float(budget.connected_demand_budget_mw[quarter.name])
+            )
+            for state in states:
+                if state.response_mode in {"base", "fixed"}:
+                    continue
+                key = (quarter.name, state.name)
+                actual_call = model.actual_grid_curtailment[key]
+                certified_call = model.certified_grid_curtailment[key]
+                if budget.enforce_joint_budget:
+                    model.shared_flexibility_budget.add(
+                        actual_call + green_call <= flex_budget
+                    )
+                    model.shared_flexibility_budget.add(
+                        certified_call + green_call <= cert_budget
+                    )
+                    if conn_budget is not None:
+                        model.shared_flexibility_budget.add(
+                            actual_call + green_call <= conn_budget
+                        )
+                        model.shared_flexibility_budget.add(
+                            certified_call + green_call <= conn_budget
+                        )
+                else:
+                    # B6: split budget, no joint coupling with the green call.
+                    model.shared_flexibility_budget.add(actual_call <= flex_budget)
+                    model.shared_flexibility_budget.add(
+                        certified_call <= cert_budget
+                    )
+                    if green_call > min(flex_budget, cert_budget) + 1.0e-9:
+                        raise ValueError(
+                            "B6 green call cannot exceed the flexibility budget"
+                        )
 
     actual = _add_dispatch_layer(
         model,
