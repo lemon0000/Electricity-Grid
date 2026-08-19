@@ -1,0 +1,33 @@
+# 跨机闭环的默认冒烟入口配置。
+#
+# 这是 docs/plan/科研实验闭环流程.md 第 3.4/5 节约定的“固定实验入口”所读取的
+# 通用配置。它有意保持轻量：只在执行机的独立 worktree 里运行本仓库自带的确定性
+# 单元测试子集，用来验证“打标签 → 拉取指定 SHA → 建 worktree → 运行 → 产出工件 →
+# 上传结果”这条闭环管道本身是否连通，而不是运行任何昂贵的正式求解。
+#
+# 该入口绝不触发 repair-010 等多阶段正式求解链（那些 runner 需要 Gurobi、原始数据
+# 与显式 --stage，且当前 formal_execution_ready=false）。正式实验请使用
+# docs/plan/科研实验闭环流程.md 新增“两类实验入口”一节所述的专用 runner 与配置，
+# 并单独打标签执行。
+
+experiment:
+  id: cross_machine_pipeline_smoke_v1
+  # kind 决定 run_experiment.ps1 的行为分支：
+  #   pytest-smoke —— 运行下方 selection 指定的测试；不需要 Gurobi 或原始数据。
+  kind: pytest-smoke
+  purpose: verify_cross_machine_loop_plumbing_only_not_a_scientific_result
+  # 该入口的产物只描述“管道与测试是否通过”，不得被解释为模型可行性、安全认证或科研结论。
+  evidence_status: pipeline_plumbing_smoke_only
+
+pytest_smoke:
+  # 仅选取不依赖外部求解器/原始数据集的确定性单元测试，保证在任何执行机可复现。
+  selection:
+    - tests/test_service_cvar.py
+    - tests/test_shared_flexibility_budget.py
+    - tests/test_deterministic_fx.py
+    - tests/test_capacity_metrics.py
+    - tests/test_flexibility_envelope.py
+  # 额外传给 pytest 的参数。-q 精简输出；--no-header 便于日志解析。
+  extra_args:
+    - -q
+    - --no-header
