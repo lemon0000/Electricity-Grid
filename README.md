@@ -1,8 +1,22 @@
 # Electricity-Grid
 
-*Last updated: 2026-08-14*
+*Last updated: 2026-08-20*
 
 Research code for staged data-center interconnection and grid expansion.
+
+## 论文主线聚焦（RQ2）
+
+毕业论文/期刊投稿的主线聚焦 **RQ2：网络条件服务与小时级 CFE 匹配共享同一业务灵活性预算**
+（共享时序包络 + B6 重复承诺错误基线 + 场景外 service-CVaR）。路线图、命题
+（H1/H2/H3）、资产映射与目标期刊（TSG 类）工作量评估见
+[RQ2\_论文路线图.md](docs/plan/RQ2_论文路线图.md)。
+
+本 README 其余部分描述的是**更广的项目全景与共享基础设施**（L0-M6、B0-B5 基线、
+RTS-GMLC 选择性 N-1 基准、AC 复算与 repair 认证链）。这些不是需要删除的"旧目标"：
+RQ2 的 B6 错误基线与共享预算复用 `deterministic_fx` / 随机基线脚手架，B2-B5 也是 RQ2
+叙事的对照基线，RQ1 多阶段自适应作为后续扩展保留其脚手架。论文只是从全景中**收窄主线**，
+而非替换代码树。范围与创新定位的权威来源仍是 `agent.md`（§4 已将 RQ2 定为首篇主创新），
+数学规格见 `docs/model_spec/formulation.md`。
 
 Current scope includes the reproducible grid-security foundation, deterministic
 quarterly fixed-POI expansion, B0-B5 synthetic planning mechanisms and

@@ -67,6 +67,19 @@
 | `arXiv:2606.25098` 写作 *Power-Flexible AI Data Centers: A Comprehensive Survey of Grid Integration, Modeling, and Control* | 官方题名为 *Power-Flexible AI Data Centers: A New Paradigm for Grid-Responsive Compute* | 矩阵和最新计划文档均已同步更正；该文是实证/架构论文，不按综合综述编码 |
 | Nature Communications条目的作者缩写和题名大小写不统一 | DOI `10.1038/s41467-026-72324-9` 已由Crossref和Europe PMC核验 | 采用Crossref正式题名和完整作者名 |
 
+## 2026-08-20 RQ2查新增补记录
+
+围绕RQ2护城河做定向查新，新增四条并全部核验官方元数据：
+
+| id | 标识符 | 核验来源 | 层级 | 纳入理由 |
+|---|---|---|---|---|
+| DC11 | arXiv:2511.08759（v1 2025-11-11，v2 2026-03-27，eess.SY） | arXiv官方页 | F | IEEE 73-bus OPF、单一空间负荷重分配变量联合缓解拥塞与弃光，是RQ2最近邻直接竞争，用于界定“统一变量天然不重复”反驳 |
+| DC12 | DOI 10.1049/stg2.70020（IET Smart Grid Vol 8 Issue 1 e70020, 2025） | 出版社官方页 | F | IEEE 39-node双层内生LMP驱动时空移峰，代表价格信号一体化目标路线，非分离合同承诺 |
+| DC13 | arXiv:2511.08936（2025-11-12，cs.DC） | arXiv官方页 | F | 数据中心负荷解耦碳收益，系统级、无输电N-1，界定研究边界 |
+| FLEX09 | DOI 10.1063/5.0302342（AIP Advances Vol 15, 115016, 2025） | 出版社官方页 | F | 两阶段随机鲁棒SCUC下传输受限对（发电侧）柔性资源可用性的运行风险，支持RQ2场景外履约风险动机，非数据中心接入模型 |
+
+排除说明：本轮同时检出但未纳入核心矩阵的相邻工作包括Ren et al. (2025, arXiv:2510.01050，数据中心频率响应Safe-UC)与若干配网拥塞市场/碳责任分摊文，因其目标为频率安全或市场机制、不服务RQ2重复承诺证据链，仅在下一轮按需追踪。
+
 ## 下一轮全文队列
 
 最高优先级：
