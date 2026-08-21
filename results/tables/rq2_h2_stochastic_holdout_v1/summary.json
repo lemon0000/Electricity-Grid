@@ -1,0 +1,82 @@
+{
+  "evaluation_id": "rq2_h2_stochastic_holdout_synthetic_v1",
+  "role": "out_of_sample_fixed_policy_execution_showing_b6_double_counting_underdelivery",
+  "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+  "risk_measure_scope": "synthetic_mechanism_only_out_of_sample_fixed_policy_execution_of_shared_budget_against_true_shared_physics_not_a_certification",
+  "solver_name": "highs",
+  "beta": 0.5,
+  "lambda_risk": 0.1,
+  "max_flexibility_budget_mw": 200.0,
+  "provisioning_cost_per_mw": 500.0,
+  "service_shortfall_tolerance_mw": 1e-06,
+  "training_scenario_count": 2,
+  "holdout_scenario_count": 3,
+  "training_scenarios": [
+    {
+      "name": "train_mild",
+      "probability": 0.5
+    },
+    {
+      "name": "train_stress",
+      "probability": 0.5
+    }
+  ],
+  "holdout_scenarios": [
+    {
+      "name": "holdout_mild",
+      "probability": 0.4
+    },
+    {
+      "name": "holdout_stress",
+      "probability": 0.4
+    },
+    {
+      "name": "holdout_severe",
+      "probability": 0.2
+    }
+  ],
+  "cvar_cross_check_tolerance": 1e-06,
+  "cvar_cross_check_max_abs_error": 0.0,
+  "cvar_cross_check_passed": true,
+  "training_feasible": true,
+  "gate_passed": true,
+  "correct_policy": {
+    "committed_flexibility_mw": 100.0,
+    "total_failure_probability": 0.6000000000000001,
+    "hard_infeasible_probability": 0,
+    "service_failure_probability": 0.6000000000000001,
+    "solver_unresolved_probability": 0,
+    "expected_access_shortfall_mwh": 14.0,
+    "holdout_service_cvar": 30660.0
+  },
+  "b6_policy": {
+    "committed_flexibility_mw": 60.0,
+    "total_failure_probability": 1.0,
+    "hard_infeasible_probability": 0.2,
+    "service_failure_probability": 0.8,
+    "solver_unresolved_probability": 0,
+    "expected_access_shortfall_mwh": 42.0,
+    "holdout_service_cvar": null
+  },
+  "h2_evaluated": true,
+  "h2_b6_extra_failure_probability": 0.3999999999999999,
+  "h2_b6_extra_expected_shortfall_mwh": 28.0,
+  "h2_b6_underdelivers_out_of_sample": true,
+  "random_seed": null,
+  "security_certified": false,
+  "formal_vma_published": false,
+  "empirical_holdout_claimed": false,
+  "touches_frozen_baselines": false,
+  "interpretation": "synthetic_out_of_sample_fixed_policy_execution_showing_the_b6_double_counting_error_underdelivers_service_against_the_true_shared_budget_not_an_empirical_vma_or_engineering_certification",
+  "certification_blockers": [
+    "synthetic_coefficients_budget_cap_and_scenario_probabilities_not_empirical",
+    "holdout_tree_is_a_synthetic_unseen_scenario_set_not_an_empirical_vma_sample",
+    "temporal_envelopes_recovery_debt_duration_event_count_out_of_scope",
+    "no_ac_or_n1_network_certification_in_this_entry_point"
+  ],
+  "output_paths": {
+    "leaves": "/Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/results/tables/rq2_h2_stochastic_holdout_v1/leaves.csv",
+    "policies": "/Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/results/tables/rq2_h2_stochastic_holdout_v1/policies.csv",
+    "summary": "/Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/results/tables/rq2_h2_stochastic_holdout_v1/summary.json"
+  }
+}

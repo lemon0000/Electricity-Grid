@@ -1,0 +1,120 @@
+# RQ2 H2 场景外（out-of-sample）既定策略执行的正式入口配置（formulation.md §12）。
+#
+# 该配置驱动 experiments/run_rq2_h2_stochastic_holdout.py：先在“训练场景树”上用
+# L5 经济随机模型分别规划“正确共享预算模型”与“B6 允许重复承诺的错误基线”的首阶段
+# 灵活性配置 D^flex；再把两个既定（非预见性）策略钉死在其 D^flex 上，在“未见 holdout
+# 场景树”上按真实共享预算 c_grid + c_green + l_drop <= D^flex 执行 recourse，量化：
+#
+#   H2：B6 规划出的策略在场景外执行时，服务欠交付幅度严格大于共享模型——更高的
+#       场景外失败概率（硬网络削减不可行 + 服务缺口）和/或更大的期望 access 缺口——
+#       在同一输入、同一场景、同一安全集下（agent.md §9 公平性）。
+#
+# 诚实边界（agent.md §4/§8）：所有系数、预算上限、价格与场景概率均为冻结的“合成机制
+# 参数”，不是真实停电概率、合同能力、小时级网络认证或工程/AC 结果；holdout 树是合成
+# 的“未见场景集”，不是经验 VMA 样本。security_certified 恒为 false；本入口不改写冻结
+# 的 B3/B4/B5 基线与 repair-010 认证链，也不启动多阶段正式长求解。场景外失败只在 MW
+# 预算维度度量（access 缺口、硬削减不可行、服务损失）；恢复债务/持续时间/事件次数等
+# 时序包络与 L5 模型一致，暂不在范围内。
+#
+# 下面这份是本机自检用的“微型合成算例”，用于验证入口管道与不变量；执行机跑更大规模的
+# 正式算例时，应在保持同一 schema 的前提下打标签运行。
+
+evaluation:
+  id: rq2_h2_stochastic_holdout_synthetic_v1
+  role: out_of_sample_fixed_policy_execution_showing_b6_double_counting_underdelivery
+  # 合成机制参数，不冒充工程/合同/AC/经验 VMA。
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+  security_certified: false
+  # 本入口不发布任何“经验 VMA/场景外认证”的正式结论，只给机制证据。
+  formal_vma_published: false
+
+model:
+  # 共享灵活性预算上限 D^flex 的可配置上界（MW）。
+  max_flexibility_budget_mw: 200.0
+  # 首阶段 D^flex 的单位配置成本 -> C^grid（合成价格）。
+  provisioning_cost_per_mw: 500.0
+  # 训练规划所用的 CVaR 权重 lambda^risk（>= 0）。执行 recourse 为单场景成本最小化，
+  # 不依赖 lambda^risk；此处只影响两个策略的 D^flex 规划量。
+  lambda_risk: 0.1
+  # CVaR 置信水平 beta（尾部），需在 [0, 1)。
+  beta: 0.5
+  # 可行叶上判定“服务欠交付”的 access 缺口阈值（MW）。
+  service_shortfall_tolerance_mw: 1.0e-6
+  # 求解器：与仓库其余单元测试一致，默认 HiGHS（开源、无许可限制）。
+  solver_name: highs
+
+# §13/§14 每 MWh 服务/业务损失系数（合成，结果前冻结；与 L5 入口保持一致）。
+coefficients:
+  kappa_access: 1000.0
+  kappa_grid: 50.0
+  kappa_green: 40.0
+  kappa_drop: 2000.0
+  # 本增量不激活 firm/conditional breach 通道（u^F = u^X = 0）。
+  kappa_breach_firm: 0.0
+  kappa_breach_conditional: 0.0
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+
+# 冻结的训练场景树（合成长周期路径，策略在此规划）。probability 严格为正且求和为 1。
+# 与 L5 入口同一机制点：绿电调用 60 MW 与网络需求 20/40 MW 同量级，使“同时服务两类
+# 需求”真正吃紧；正确共享模型满配需 grid+green（stress 40+60=100 MW），B6 分离预算
+# 只需 max(grid, green)=60 MW，故 B6 系统性欠配 -> 场景外必然暴露。
+training_scenarios:
+  - name: train_mild
+    probability: 0.5
+    grid_need_mw: 20.0
+    green_call_mw: 60.0
+    connected_demand_mw: 1000.0
+    hours: 1.0
+  - name: train_stress
+    probability: 0.5
+    grid_need_mw: 40.0
+    green_call_mw: 60.0
+    connected_demand_mw: 1000.0
+    hours: 1.0
+
+# 冻结的未见 holdout 场景树（策略从不在此规划，只在此执行）。probability 求和为 1。
+# 三类未见叶被有意冻结在能同时暴露两种场景外失败模式的点上（结果前冻结，agent.md §9）：
+#   * holdout_mild（grid 25 + green 60）：两个策略都可行，但 B6 的 60 MW 预算被 grid
+#     占用后绿电调用几乎全部转为 access 缺口 -> 服务欠交付；
+#   * holdout_stress（grid 50 + green 60）：B6 缺口更大；共享模型 D^flex=100 也不足以
+#     同时满足 50+60=110，故双方均有缺口，但 B6 更严重 -> 缺口差为正；
+#   * holdout_severe（grid 90 + green 60）：B6 的 60 MW 预算连硬网络削减 90 MW 都无法
+#     满足 -> recourse 不可行（硬安全失败，如实上报）；共享模型 100 MW 可满足硬需求，
+#     仅绿电有缺口 -> B6 场景外失败概率严格更高。
+holdout_scenarios:
+  - name: holdout_mild
+    probability: 0.4
+    grid_need_mw: 25.0
+    green_call_mw: 60.0
+    connected_demand_mw: 1000.0
+    hours: 1.0
+  - name: holdout_stress
+    probability: 0.4
+    grid_need_mw: 50.0
+    green_call_mw: 60.0
+    connected_demand_mw: 1000.0
+    hours: 1.0
+  - name: holdout_severe
+    probability: 0.2
+    grid_need_mw: 90.0
+    green_call_mw: 60.0
+    connected_demand_mw: 1000.0
+    hours: 1.0
+
+# 交叉校验容差：每个“全可行”策略在 holdout 上报告的 service-CVaR 必须与 §13 独立
+# evaluate_service_cvar 在同一执行分布上一致（否则 fail-closed）。
+# fail_closed_on_infeasible_training：训练规划不可行时 fail-closed（默认 true）。
+# 注意 holdout 叶的硬安全不可行是“阳性 H2 证据”，不触发 fail-closed。
+validation:
+  cvar_cross_check_tolerance: 1.0e-6
+  fail_closed_on_infeasible_training: true
+
+# 随机种子：本增量为确定性 LP 求解，无抽样，故声明为 null 并如实记录。
+random_seed: null
+
+# 产物路径（相对仓库根解析）。summary 内嵌 provenance 与诚实标签，
+# leaves/policies 为可复现原始结果表。
+output:
+  leaves_path: results/tables/rq2_h2_stochastic_holdout_v1/leaves.csv
+  policies_path: results/tables/rq2_h2_stochastic_holdout_v1/policies.csv
+  summary_path: results/tables/rq2_h2_stochastic_holdout_v1/summary.json

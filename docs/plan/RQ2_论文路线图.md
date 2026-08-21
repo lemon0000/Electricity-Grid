@@ -30,16 +30,35 @@ H1/H2/H3 必须在**相同输入、相同场景、相同安全集**下比较；V
 | 恢复债务 / 持续时间 / 事件数包络 | `formulation.md` §10.2、§10.3；[flexibility_envelope.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/src/evaluation/flexibility_envelope.py) | [test_flexibility_envelope.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_flexibility_envelope.py) | mechanism-only（F1-F3 门，F3 因恢复债务失败＝阳性结果） |
 | service-CVaR 尾部风险 | `formulation.md` §13；[service_risk.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/src/evaluation/service_risk.py) `evaluate_service_cvar` | [test_service_cvar.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_service_cvar.py) | 后处理度量（未接入优化目标） |
 | 场景外既定策略执行 | [stochastic_policy.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/src/evaluation/stochastic_policy.py)；`formulation.md` §12 | [test_stochastic_holdout_policy.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_stochastic_holdout_policy.py) | 合成 holdout（非经验 VMA） |
+| **L5 经济随机模型（CVaR 进目标）** | [economic_stochastic.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/src/models/economic_stochastic.py) `solve_economic_stochastic`；`formulation.md` §12-14 | [test_economic_stochastic.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_economic_stochastic.py) | mechanism-only（共享预算+B6+§13 CVaR 进 §14 目标） |
+| **L5 正式入口（λ 扫描 + H1/H3）** | [run_rq2_l5_economic_stochastic.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/experiments/run_rq2_l5_economic_stochastic.py)；[rq2_l5_economic_stochastic.yaml](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/configs/rq2_l5_economic_stochastic.yaml) | [test_rq2_l5_runner.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_rq2_l5_runner.py) | 本机微型合成算例自检通过；正式规模求解留执行机 |
+| **H2 场景外既定策略执行（钉死 D^flex）** | [economic_holdout.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/src/evaluation/economic_holdout.py) `evaluate_economic_holdout`；正式入口 [run_rq2_h2_stochastic_holdout.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/experiments/run_rq2_h2_stochastic_holdout.py)（读 [rq2_h2_stochastic_holdout.yaml](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/configs/rq2_h2_stochastic_holdout.yaml)）；`formulation.md` §12 | [test_economic_holdout.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_economic_holdout.py)、[test_rq2_h2_runner.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_rq2_h2_runner.py) | 本机微型合成 holdout 自检通过；正式规模留执行机 |
 
-结论：RQ2 的**度量层与错误基线已成型且有测试**，是本项目中数据风险最低、对照最干净的部分。缺的是把 CVaR 与共享预算接入一个**独立的经济随机优化目标**（下节 L5）并做场景外量化。
+结论：RQ2 的**度量层、错误基线、L5 经济随机目标与 H2 场景外量化均已成型且有测试**，是本项目中数据风险最低、对照最干净的部分。CVaR 与共享预算已接入统一经济目标（`min C^grid + C^op + λ·CVaR_β(L)`），并由正式入口在 λ 扫描下给出 H1（B6 高估量）与 H3（成本↔尾部风险单调权衡）；H2 入口把 L5 规划出的 correct/B6 两个 `D^flex` 钉死后在未见 holdout 场景上按真实共享预算执行，量化 B6 的场景外欠交付（失败概率 + 期望缺口，含硬安全不可行）。缺的是在执行机上跑更大规模的正式算例。
 
-## 4. 待建：L5 经济随机模型（R3 任务）
+## 4. L5 经济随机模型：入口已建，待正式求解（R3 任务）
 
-- 目标：`min C^grid + C^op + λ^risk · CVaR_β(L)`，共享时序包络作硬约束（`formulation.md` §13、§14）。
-- 边界：**新建独立模块**（如 `src/models/economic_stochastic.py`），复用现有场景树 API 与 §8/§10/§13 约束；不改写冻结的 B3/B4/B5 与 repair-010。
+- 目标：`min C^grid + C^op + λ^risk · CVaR_β(L)`，共享 MW 预算作硬约束（`formulation.md` §13、§14）。**已实现并进目标**（非后处理）。
+- 边界：**独立新模块** [economic_stochastic.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/src/models/economic_stochastic.py)，复用现有 §8/§10/§13 约束语义与 §13 服务损失系数；不改写冻结的 B3/B4/B5 与 repair-010。
 - 阻塞规避：L5 作为新功能，可独立预注册与求解，绕开 repair-010 的 calibration 阻塞链（见 `blocker_register.md`）。
-- TDD 顺序（对应 pending 任务 #4–#8）：精读现有随机模型 Pyomo 惯例与场景树 API → 写失败测试 → 实现模块 → 窄范围测试+不变量自检 → `sol_reviewer` 独立审查。
-- 实验设计：H1 用共享 vs B6 的 X 高估量；H2 用场景外既定策略执行的违约/债务/失败率；H3 用 λ 扫描 + ε-约束 Pareto。种子固定并记录（`agent.md` §10）。
+- 已完成（对应任务 #4-#8）：精读 API → TDD（模型 15 例 + 入口 12 例）→ 实现模块与正式入口 → 本机窄范围测试+不变量自检（CVaR 与 §13 独立 evaluator 交叉校验、fail-closed）→ 待 `sol_reviewer` 独立审查。
+- 正式入口：`experiments/run_rq2_l5_economic_stochastic.py`（读 `configs/rq2_l5_economic_stochastic.yaml`），产出 `results/tables/rq2_l5_economic_stochastic_v1/{runs,frontier}.csv` 与 `summary.json`（内嵌 provenance 与诚实标签）。本机仅用微型合成算例验证管道与不变量，不落盘 canonical 结果；正式规模算例保持同 schema、由执行机打标签运行。
+- 实验设计：H1 用共享 vs B6 的 X 高估量（入口 `h1_overestimation_mw`）；H2 用场景外既定策略执行的违约/债务/失败率（**已建**，见下）；H3 用 λ 扫描 + ε-约束 Pareto（入口 `frontier`）。种子固定并记录（`agent.md` §10；本增量为确定性 LP，`random_seed=null`）。
+
+### 4.1 H2 场景外既定策略执行：入口已建、R3 复审 3 项已修复，待正式求解
+
+- 目标：验证 §12 的场景外命题——B6 重复承诺错误规划出的 `D^flex`，在未见 holdout 场景上按**真实共享预算**执行时，服务欠交付幅度严格大于正确共享模型（更高失败概率 + 更大期望缺口，含硬安全不可行），在同一输入/场景/安全集下（`agent.md` §9 公平性）。
+- 识别策略（两阶段、既定策略）：① **规划（样本内）** 在训练场景树上分别解 L5 的 correct（`enforce_joint_budget=True`）与 B6（`False`）模型，读出各自首阶段非预见性 `D^flex`（correct ≥ B6，即 H1）；② **执行（样本外）** 把 `D^flex` **钉死**（不再优化 → 非预见性），在每个未见叶上仅解 recourse，且执行物理**恒为真实共享预算** `c_grid + c_green + l_drop ≤ D^flex`（B6 的错误只在规划期，执行期物理共享）。B6 欠配的预算无法同时服务两类需求 → 缺口；硬网络削减需求超过钉死预算的叶 → recourse 不可行（诚实上报为硬安全失败）。
+- 边界与复用：recourse 复用**同一** `solve_economic_stochastic` 模型（新增 `fixed_flexibility_mw` 钉死首阶段 + `enforce_joint_budget=True`），“同一安全集”是结构性保证而非口头断言。**不**走 `stochastic_policy.py`（那是 RQ1 B3/B4 的 F/X 多阶段 107 状态 RTS-24 holdout，策略语义不同）。场景外失败只在 MW 预算维度度量；恢复债务/持续时间/事件次数时序包络与 L5 一致，暂不在范围内（`certification_blockers` 已标注）。
+- 已完成（对应任务 #14-#18）：精读 L5/service_risk API → 实现核心模块 `evaluate_economic_holdout` 与正式入口 → TDD（核心 15 例 + 入口 12 例 + 模型钉死 3 例）→ 本机窄范围测试（上一会话 70 例全过）+ 不变量自检（holdout CVaR 与 §13 独立 evaluator 交叉校验=0、真实共享预算约束、非预见性、fail-closed）→ `sol_reviewer` 独立 R3 审查完成。
+- R3 审查结论（2026-08-21）：**PASS-WITH-COMMENTS**。审查逐一手工复算了冻结工件全部关键数字（承诺 D^flex、逐叶 dispatch/loss、失败概率、期望缺口、correct 策略 β=0.5 CVaR），与 `summary.json`/`leaves.csv`/`policies.csv` **完全一致**；硬约束（`c_grid≥grid_need` 从不与 CVaR 交易）、非预见性、真实共享预算执行、诚实标签均正确落地。冻结算例在其构造点上正确且诚实。
+- 复审 3 项已修复并回归通过（2026-08-21，本机 conda `compute` 环境 Python 3.11.15 + pyomo 6.10.1/highspy 1.15.1/pytest 9.0.2）：
+  - ① **假阴性（finding 1）**：硬失败叶现把整段未服务 green call 记为 access-shortfall 能量并计入 `expected_access_shortfall_mwh`；硬/软失败**概率通道保持互斥**（硬失败叶 `service_shortfall_failure=False`，`total = hard + soft`），杜绝"硬失败叶 + correct 同叶可行有缺口"下的假阴性。冻结算例 B6 期望缺口由 14→42 MWh（严格 > correct 14 MWh），H2 仍为真。回归：`test_hard_failure_leaf_counts_as_shortfall_energy`、`test_hard_and_soft_probability_channels_are_disjoint`。
+  - ② **诚实性映射（finding 2）**：`EconomicStochasticResult` 新增 `proven_infeasible`，仅 `TerminationCondition.infeasible` 置真；超时/数值失败/`infeasibleOrUnbounded` 等均 `feasible=False` 且 `proven_infeasible=False` 并保留真实终止串。holdout `_execute_leaf` 据此区分：未决 recourse 走独立 `solver_unresolved` 通道，绝不铸成硬安全失败或阳性 H2。回归：`test_timeout_is_unresolved_not_proven_infeasible`、`test_unresolved_recourse_is_not_a_hard_failure`。
+  - ③ **独立交叉校验（finding 3）**：runner 的 CVaR 交叉校验改为自含闭式 `_independent_service_cvar`（直接从 dispatch 能量与 κ 重算，不再调用 `evaluate_service_cvar`），是真正独立复算。回归：`test_independent_service_cvar_matches_hand_calculation`（手算 CVaR=120）、`test_cross_check_detects_a_corrupted_reported_cvar`（篡改上报值可被门捕获并 fail-closed）。
+- 本机环境状态：开发机改用 conda `compute` 环境（Python 3.11.15 + pyomo 6.10.1/highspy 1.15.1/pytest 9.0.2/scipy/pypower/osqp/casadi/openpyxl 等，与 `requirements.txt` 固定版本一致；临时 `.venv` 已删除）。三份受影响测试文件 50 例全过（其中 R3 三项修复对应 7 例专项复核通过），H2 入口以模块方式重跑并重新落盘工件。正式规模算例仍保持同 schema、由执行机打标签运行。
+- 正式入口：`experiments/run_rq2_h2_stochastic_holdout.py`（读 `configs/rq2_h2_stochastic_holdout.yaml`），产出 `results/tables/rq2_h2_stochastic_holdout_v1/{leaves,policies}.csv` 与 `summary.json`（内嵌 provenance 与诚实标签，`security_certified=false`、`formal_vma_published=false`）。本机仅用微型合成 holdout 验证管道与不变量，不落盘 canonical 结果；正式规模算例保持同 schema、由执行机打标签运行。
+- fail-closed 语义：训练规划不可行 → 门失败（`gate_passed=false`）；holdout 叶的硬安全不可行是**阳性 H2 证据**，不触发 fail-closed（否则会把 B6 的场景外失败误判为管道错误）。
 
 ## 5. 目标期刊评估：RQ2 单独发 TSG 是否够？
 

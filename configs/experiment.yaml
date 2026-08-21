@@ -27,6 +27,8 @@ pytest_smoke:
     - tests/test_deterministic_fx.py
     - tests/test_capacity_metrics.py
     - tests/test_flexibility_envelope.py
+    - tests/test_economic_stochastic.py
+    - tests/test_rq2_l5_runner.py
   # 额外传给 pytest 的参数。-q 精简输出；--no-header 便于日志解析。
   extra_args:
     - -q
