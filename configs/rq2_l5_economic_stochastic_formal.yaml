@@ -1,0 +1,72 @@
+# RQ2 L5 经济随机模型的【正式规模】入口配置（formulation.md §12-14）。
+#
+# 与本机自检用的 configs/rq2_l5_economic_stochastic.yaml 同一 schema、同一机制点，
+# 唯一差别是把 H3 的 lambda^risk 扫描加密到 13 点（在文档记载的买断拐点 λ≈0.021
+# 附近加密），使 “期望规划成本 ↔ 尾部服务损失” 的 Pareto 前沿是一条真正的曲线，
+# 而不是 5 个点连成的折线，从而支撑 §9 “H3 是单调权衡而非单点权重产物” 的主张。
+#
+# 诚实边界（agent.md §4/§8）完全不变：所有系数、预算上限、价格与场景概率仍是冻结的
+# “合成机制参数”，不是真实停电概率、合同能力、小时级网络认证或工程/AC 结果；
+# parameter_status 逐层携带；security_certified 恒为 false；本入口不改写冻结的
+# B3/B4/B5 基线与 repair-010 认证链，也不启动多阶段正式长求解。加密 λ 网格只提高
+# H3 前沿分辨率，不把机制证据升级为经济最优/VMA/CFE 结论。
+#
+# 求解器仍为 HiGHS（开源、无许可限制）；本入口是确定性 LP 扫描，无抽样，故
+# random_seed=null 如实记录。机制参数的邻域敏感性由 configs/rq2_formal_batch.yaml
+# 通过白名单覆写（model.beta / model.max_flexibility_budget_mw）派生，不在本 base 内展开。
+
+evaluation:
+  id: rq2_l5_economic_stochastic_formal_v1
+  role: shared_budget_and_service_cvar_economic_optimization_mechanism_demonstration_formal_lambda_grid
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+  security_certified: false
+  formal_economic_optimum_published: false
+
+model:
+  max_flexibility_budget_mw: 200.0
+  provisioning_cost_per_mw: 500.0
+  beta: 0.5
+  solver_name: highs
+
+# H3 加密 λ 网格：非降序、非负、无重复；结果前冻结（agent.md §9）。
+# 在拐点 λ≈0.021 附近加密（0.01/0.02/0.03/0.05/0.075），两端各留稀疏点看渐近行为。
+lambda_sweep: [0.0, 0.01, 0.02, 0.03, 0.05, 0.075, 0.1, 0.15, 0.25, 0.5, 0.75, 1.0, 2.0]
+
+coefficients:
+  kappa_access: 1000.0
+  kappa_grid: 50.0
+  kappa_green: 40.0
+  kappa_drop: 2000.0
+  kappa_breach_firm: 0.0
+  kappa_breach_conditional: 0.0
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+
+# 与自检算例同一机制点（结果前冻结，agent.md §9）：绿电调用 60 与网络需求 20/40 同量级，
+# 使 “同时服务两类需求” 真正吃紧；正确共享模型满配需 grid+green，B6 分离预算只需
+# max(grid, green)=60，故 B6 系统性欠配 -> H1 高估量为正。
+scenarios:
+  - name: mild
+    probability: 0.5
+    grid_need_mw: 20.0
+    green_call_mw: 60.0
+    connected_demand_mw: 1000.0
+    hours: 1.0
+  - name: stress
+    probability: 0.5
+    grid_need_mw: 40.0
+    green_call_mw: 60.0
+    connected_demand_mw: 1000.0
+    hours: 1.0
+
+validation:
+  cvar_cross_check_tolerance: 1.0e-6
+  fail_closed_on_infeasible_run: true
+
+random_seed: null
+
+# 独立运行时的产物路径；经 configs/rq2_formal_batch.yaml 触发时由批驱动改写到
+# results/tables/rq2_formal_batch/<batch_id>/<job_id>/ 下，避免与其它 job 冲突。
+output:
+  runs_path: results/tables/rq2_l5_economic_stochastic_formal_v1/runs.csv
+  frontier_path: results/tables/rq2_l5_economic_stochastic_formal_v1/frontier.csv
+  summary_path: results/tables/rq2_l5_economic_stochastic_formal_v1/summary.json

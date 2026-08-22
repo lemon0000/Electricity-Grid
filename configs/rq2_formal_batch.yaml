@@ -1,0 +1,142 @@
+# RQ2 正式规模批清单：由 experiments/run_rq2_formal_batch.py 读取。
+#
+# 本文件声明【看结果前冻结】的正式规模作业集（agent.md §9/§10）。每个 job 只声明
+# (runner, base_config, 白名单标量覆写)；批驱动会为每个 job 物化 “有效配置” 到独立目录
+# 并记录其 SHA-256，然后调用对应 runner 自身已过 R3 审查的 run(config)——批驱动不新增
+# 任何科学逻辑，也不认证任何东西。security_certified 恒为 false，覆写白名单禁止触碰任何
+# 诚实标签、parameter_status 或产物路径。
+#
+# 作业分三组（回应 §9 “非单点、非单次抽样” 与 “报告方法失效区域”）：
+#   A 核心（基准机制点）：L5 加密 λ 前沿 1 次；生成式 H2 与 3-source 消融各跑 3 个冻结种子
+#     [20260822, 20260823, 20260824]，逐种子报告 H2 符号是否稳定。
+#   B 机制敏感性（以消融为载体，种子固定 20260822，一次只动一个旋钮）：grid/green scale、
+#     预算上限、β 的邻域点，证明 H2 符号在机制邻域内稳健。
+#   C L5 机制敏感性（H1/H3）：预算上限与 β 的邻域点；其中 budget=80 是【故意】探到 H3
+#     单调权衡失效边界的点（预算不足以买断尾部时前沿坍缩为一点）——这是如实报告的失效区域，
+#     不是错误。H1/H3/H2 均为科学发现，逐 job 报告、绝不在此设门。
+#
+# 诚实边界：所有系数、预算、场景概率均为合成机制参数或 trace 派生量；生成式/缩减臂透传
+# 生成器/缩减诚实标签；holdout 树是合成未见集，不是经验 VMA；本批不改写冻结基线、不启动
+# repair-010 多阶段长求解。
+
+batch:
+  id: rq2_formal_batch_v1
+  output_root: results/tables/rq2_formal_batch
+
+jobs:
+  # --- A 核心（基准机制点）------------------------------------------------------
+  - id: A1_l5_lambda_frontier
+    runner: experiments.run_rq2_l5_economic_stochastic
+    base_config: configs/rq2_l5_economic_stochastic_formal.yaml
+
+  - id: A2_h2_generated_seed_20260822
+    runner: experiments.run_rq2_h2_stochastic_holdout
+    base_config: configs/rq2_h2_stochastic_holdout_generated_formal.yaml
+    overrides:
+      generator.seed: 20260822
+
+  - id: A3_h2_generated_seed_20260823
+    runner: experiments.run_rq2_h2_stochastic_holdout
+    base_config: configs/rq2_h2_stochastic_holdout_generated_formal.yaml
+    overrides:
+      generator.seed: 20260823
+
+  - id: A4_h2_generated_seed_20260824
+    runner: experiments.run_rq2_h2_stochastic_holdout
+    base_config: configs/rq2_h2_stochastic_holdout_generated_formal.yaml
+    overrides:
+      generator.seed: 20260824
+
+  - id: A5_ablation_seed_20260822
+    runner: experiments.run_rq2_h2_scenario_source_ablation
+    base_config: configs/rq2_h2_scenario_source_ablation_formal.yaml
+    overrides:
+      generator.seed: 20260822
+
+  - id: A6_ablation_seed_20260823
+    runner: experiments.run_rq2_h2_scenario_source_ablation
+    base_config: configs/rq2_h2_scenario_source_ablation_formal.yaml
+    overrides:
+      generator.seed: 20260823
+
+  - id: A7_ablation_seed_20260824
+    runner: experiments.run_rq2_h2_scenario_source_ablation
+    base_config: configs/rq2_h2_scenario_source_ablation_formal.yaml
+    overrides:
+      generator.seed: 20260824
+
+  # --- B 机制敏感性（消融载体，种子固定 20260822，一次一旋钮）--------------------
+  - id: B1_ablation_grid_scale_30
+    runner: experiments.run_rq2_h2_scenario_source_ablation
+    base_config: configs/rq2_h2_scenario_source_ablation_formal.yaml
+    overrides:
+      generator.grid_stress_scale_mw: 30.0
+
+  - id: B2_ablation_grid_scale_50
+    runner: experiments.run_rq2_h2_scenario_source_ablation
+    base_config: configs/rq2_h2_scenario_source_ablation_formal.yaml
+    overrides:
+      generator.grid_stress_scale_mw: 50.0
+
+  - id: B3_ablation_green_scale_45
+    runner: experiments.run_rq2_h2_scenario_source_ablation
+    base_config: configs/rq2_h2_scenario_source_ablation_formal.yaml
+    overrides:
+      generator.green_call_scale_mw: 45.0
+
+  - id: B4_ablation_green_scale_75
+    runner: experiments.run_rq2_h2_scenario_source_ablation
+    base_config: configs/rq2_h2_scenario_source_ablation_formal.yaml
+    overrides:
+      generator.green_call_scale_mw: 75.0
+
+  - id: B5_ablation_budget_80
+    runner: experiments.run_rq2_h2_scenario_source_ablation
+    base_config: configs/rq2_h2_scenario_source_ablation_formal.yaml
+    overrides:
+      model.max_flexibility_budget_mw: 80.0
+
+  - id: B6_ablation_budget_250
+    runner: experiments.run_rq2_h2_scenario_source_ablation
+    base_config: configs/rq2_h2_scenario_source_ablation_formal.yaml
+    overrides:
+      model.max_flexibility_budget_mw: 250.0
+
+  - id: B7_ablation_beta_0p3
+    runner: experiments.run_rq2_h2_scenario_source_ablation
+    base_config: configs/rq2_h2_scenario_source_ablation_formal.yaml
+    overrides:
+      model.beta: 0.3
+
+  - id: B8_ablation_beta_0p7
+    runner: experiments.run_rq2_h2_scenario_source_ablation
+    base_config: configs/rq2_h2_scenario_source_ablation_formal.yaml
+    overrides:
+      model.beta: 0.7
+
+  # --- C L5 机制敏感性（H1/H3）-------------------------------------------------
+  # budget_80 是【故意】的 H3 失效边界探点：预算不足以买断尾部时前沿坍缩为一点，
+  # H3 单调权衡不成立——如实报告的方法失效区域（§9），非错误。
+  - id: C1_l5_budget_80
+    runner: experiments.run_rq2_l5_economic_stochastic
+    base_config: configs/rq2_l5_economic_stochastic_formal.yaml
+    overrides:
+      model.max_flexibility_budget_mw: 80.0
+
+  - id: C2_l5_budget_250
+    runner: experiments.run_rq2_l5_economic_stochastic
+    base_config: configs/rq2_l5_economic_stochastic_formal.yaml
+    overrides:
+      model.max_flexibility_budget_mw: 250.0
+
+  - id: C3_l5_beta_0p3
+    runner: experiments.run_rq2_l5_economic_stochastic
+    base_config: configs/rq2_l5_economic_stochastic_formal.yaml
+    overrides:
+      model.beta: 0.3
+
+  - id: C4_l5_beta_0p7
+    runner: experiments.run_rq2_l5_economic_stochastic
+    base_config: configs/rq2_l5_economic_stochastic_formal.yaml
+    overrides:
+      model.beta: 0.7

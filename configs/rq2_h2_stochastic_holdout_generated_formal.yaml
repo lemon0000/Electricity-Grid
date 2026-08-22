@@ -1,0 +1,80 @@
+# RQ2 H2 场景外既定策略执行的【正式规模·生成式场景】入口配置（formulation.md §12）。
+#
+# 与自检用的 configs/rq2_h2_stochastic_holdout.yaml 同一 schema、同一 runner
+# （experiments/run_rq2_h2_stochastic_holdout.py），差别有二：
+#   1. scenario_source=generated —— 训练/holdout 场景不再是手工冻结树，而是由项目
+#      已有的真实 AI 负载 trace 形状经 split-aware 峰值归一化派生（Google 2019 PDU
+#      功率 -> grid_need_mw；Alibaba 2020 GPU 负载 -> green_call_mw），直接回应
+#      “高估幅度/失败概率是手搓场景的产物” 这一审稿软肋；
+#   2. 统计档位提升到 n_train=200 / n_holdout=60，使蒙特卡洛分辨率足以支撑 §9
+#      “结论非单次抽样产物” 的稳健性主张。种子由 configs/rq2_formal_batch.yaml 在
+#      [20260822, 20260823, 20260824] 上覆写重复 3 次，逐种子报告 H2 符号是否稳定。
+#
+# 诚实边界（agent.md §4/§8）不变：generated 模式把生成器诚实标签（MW 为 derived、
+# 概率是蒙特卡洛采样权重而非经验故障概率）拼进 summary 的 parameter_status 并记录
+# generator_provenance。split-aware 归一化的除数仅取训练段峰值，绝非全窗峰值，故无
+# holdout 泄漏（TraceShape.peak_normalized 对裸全局峰值 fail-closed）。holdout 树是
+# 合成的 “未见场景集”，不是经验 VMA 样本；security_certified 恒为 false；本入口不改写
+# 冻结的 B3/B4/B5 基线与 repair-010 认证链，也不启动多阶段正式长求解。场景外失败只在
+# MW 预算维度度量，时序包络暂不在范围内。
+
+evaluation:
+  id: rq2_h2_stochastic_holdout_generated_formal_v1
+  role: out_of_sample_fixed_policy_execution_on_generated_scenarios_showing_b6_double_counting_underdelivery_formal
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+  security_certified: false
+  formal_vma_published: false
+
+model:
+  max_flexibility_budget_mw: 200.0
+  provisioning_cost_per_mw: 500.0
+  lambda_risk: 0.1
+  beta: 0.5
+  service_shortfall_tolerance_mw: 1.0e-6
+  solver_name: highs
+
+coefficients:
+  kappa_access: 1000.0
+  kappa_grid: 50.0
+  kappa_green: 40.0
+  kappa_drop: 2000.0
+  kappa_breach_firm: 0.0
+  kappa_breach_conditional: 0.0
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+
+# 数据驱动场景来源。manual 树字段在此不再使用（scenario_source=generated 时被忽略），
+# 但 runner 仍要求 generator 块完整。
+scenario_source: generated
+
+# 生成式训练/holdout 场景生成器（正式统计档位）。每列经 split-aware 峰值归一化
+# （除数取训练段峰值，绝非全窗峰值），故无 holdout 泄漏；抽样在 seed 下可复现。
+# MW 由冻结 scale 与真实窗口均值派生，概率是蒙特卡洛采样权重，非经验故障概率。
+generator:
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+  split_fraction: 0.5
+  window_hours: 24
+  n_train: 200
+  n_holdout: 60
+  seed: 20260822
+  # 与自检机制点同量级：grid_need ~ [0, 40]，green_call ~ [0, 60]，使 “同时服务两类
+  # 需求” 真正吃紧，正确共享模型满配需 grid+green，B6 分离预算系统性欠配。
+  grid_stress_scale_mw: 40.0
+  green_call_scale_mw: 60.0
+  connected_demand_mw: 1000.0
+  grid_stress_shape:
+    path: data/processed/google_power_2019/v1/hourly_shape.csv
+    column: measured_power_util_unweighted_mean
+  green_workload_shape:
+    path: data/processed/alibaba_gpu_2020/v2020/relative_hourly_workload.csv.gz
+    column: requested_gpu_equivalents
+
+validation:
+  cvar_cross_check_tolerance: 1.0e-6
+  fail_closed_on_infeasible_training: true
+
+random_seed: null
+
+output:
+  leaves_path: results/tables/rq2_h2_stochastic_holdout_generated_formal_v1/leaves.csv
+  policies_path: results/tables/rq2_h2_stochastic_holdout_generated_formal_v1/policies.csv
+  summary_path: results/tables/rq2_h2_stochastic_holdout_generated_formal_v1/summary.json
