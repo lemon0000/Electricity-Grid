@@ -24,6 +24,7 @@ from .trace_scenario_generator import (
     TraceScenarioConfig,
     TraceShape,
     generate_holdout_scenarios,
+    load_peak_normalized_shape_from_csv,
     load_trace_shape_from_csv,
 )
 
@@ -45,6 +46,7 @@ __all__ = [
     "common_input_signature_sha256",
     "generate_holdout_scenarios",
     "load_frozen_scenario_tree",
+    "load_peak_normalized_shape_from_csv",
     "load_trace_shape_from_csv",
     "normalize_common_input_signature",
     "parse_frozen_scenario_tree",

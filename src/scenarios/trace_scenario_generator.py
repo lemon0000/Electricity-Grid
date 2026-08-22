@@ -488,17 +488,13 @@ def generate_holdout_scenarios(cfg: TraceScenarioConfig) -> GeneratedScenarioSet
     )
 
 
-def load_trace_shape_from_csv(
-    path: str | Path, *, column: str, name: str, source: str | None = None
-) -> TraceShape:
-    """Read one normalized-shape column from a (possibly gzipped) CSV.
+def _read_csv_column(path: Path, column: str) -> tuple[float, ...]:
+    """Read one numeric column from a (possibly gzipped) CSV in file order.
 
-    The value is used *as a shape only*; the caller supplies the frozen MW scale.
     Rows are read in file order, which for these traces is chronological
     (relative-hour ordering), so the block-bootstrap autocorrelation is real.
     """
 
-    path = Path(path)
     opener = gzip.open if path.suffix == ".gz" else open
     with opener(path, mode="rt", newline="") as handle:
         reader = csv.DictReader(handle)
@@ -510,8 +506,79 @@ def load_trace_shape_from_csv(
             if raw is None or raw == "":
                 raise ValueError(f"empty value for column {column!r} in {path}")
             values.append(float(raw))
+    return tuple(values)
+
+
+# Columns known to be *pre-normalized against a full-window (future-inclusive)
+# peak*. Loading one as a shape re-introduces exactly the holdout leak that
+# ``TraceShape.peak_normalized`` refuses (agent.md section 4/8; Google 2019 data
+# card ``normalization_uses_future_window_peak``). ``load_trace_shape_from_csv``
+# rejects them fail-closed and directs the caller to the raw column plus a
+# split-aware re-normalization.
+_FULL_WINDOW_PRENORMALIZED_COLUMNS = {
+    "peak_normalized_unweighted_mean": "measured_power_util_unweighted_mean",
+}
+
+
+def load_trace_shape_from_csv(
+    path: str | Path, *, column: str, name: str, source: str | None = None
+) -> TraceShape:
+    """Read one *already-normalized* shape column from a (possibly gzipped) CSV.
+
+    The value is used *as a shape only*; the caller supplies the frozen MW scale.
+    Use this only for a column that is already a leak-free 0-1 shape. A column
+    known to be normalized against a full-window (future-inclusive) peak is
+    rejected fail-closed, because using it would leak the holdout segment into
+    every training scenario through the shared divisor -- the exact defect the
+    Google 2019 data card forbids. Load the raw column with
+    ``load_peak_normalized_shape_from_csv`` instead, which re-normalizes with a
+    training-only (or pre-frozen external) peak.
+    """
+
+    path = Path(path)
+    if column in _FULL_WINDOW_PRENORMALIZED_COLUMNS:
+        raw_column = _FULL_WINDOW_PRENORMALIZED_COLUMNS[column]
+        raise ValueError(
+            f"column {column!r} is pre-normalized against a full-window "
+            "(future-inclusive) peak; loading it as a shape would leak the "
+            "holdout segment into training scenarios. Use "
+            "load_peak_normalized_shape_from_csv(path, column="
+            f"{raw_column!r}, split_fraction=...) or pass an external_peak"
+        )
     return TraceShape(
         name=name,
         source=source or f"{path.name}::{column}",
-        values=tuple(values),
+        values=_read_csv_column(path, column),
+    )
+
+
+def load_peak_normalized_shape_from_csv(
+    path: str | Path,
+    *,
+    column: str,
+    name: str,
+    split_fraction: float | None = None,
+    external_peak: float | None = None,
+    source: str | None = None,
+) -> TraceShape:
+    """Read a *raw* (unbounded) column and peak-normalize it leak-free.
+
+    This is the leak-free way to turn a raw trace column (e.g. Google
+    ``measured_power_util_unweighted_mean`` or Alibaba
+    ``requested_gpu_equivalents``) into a 0-1 shape: the divisor is either the
+    training-segment peak (``split_fraction``) or a pre-frozen constant
+    (``external_peak``), never the full-window peak. See
+    ``TraceShape.peak_normalized`` for the argument contract; exactly one of the
+    two divisor modes must be given. The ``split_fraction`` used here must match
+    the ``split_fraction`` of the draw that consumes the shape, or the generator
+    rejects it fail-closed.
+    """
+
+    path = Path(path)
+    return TraceShape.peak_normalized(
+        name=name,
+        source=source or f"{path.name}::{column}",
+        raw_values=_read_csv_column(path, column),
+        split_fraction=split_fraction,
+        external_peak=external_peak,
     )

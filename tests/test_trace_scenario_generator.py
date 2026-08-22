@@ -27,6 +27,7 @@ The scientific contract asserted here (the reason this generator exists) is:
 from __future__ import annotations
 
 import math
+from pathlib import Path
 
 import pytest
 
@@ -35,6 +36,18 @@ from src.scenarios.trace_scenario_generator import (
     TraceScenarioConfig,
     TraceShape,
     generate_holdout_scenarios,
+    load_peak_normalized_shape_from_csv,
+    load_trace_shape_from_csv,
+)
+
+
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+_GOOGLE_TRACE = (
+    _REPO_ROOT / "data/processed/google_power_2019/v1/hourly_shape.csv"
+)
+_ALIBABA_TRACE = (
+    _REPO_ROOT
+    / "data/processed/alibaba_gpu_2020/v2020/relative_hourly_workload.csv.gz"
 )
 
 
@@ -365,3 +378,103 @@ def test_external_peak_shape_is_accepted_by_any_split():
         )
     )
     assert result.provenance["normalization"]["grid"]["split_fraction"] is None
+
+
+def test_green_call_derived_mw_matches_window_mean_in_both_sets():
+    # The grid/training mapping is checked elsewhere; here we pin the *green*
+    # dimension for BOTH the training and holdout sets, so no derived channel is
+    # left unverified (task: derived-mapping coverage for green_call + holdout).
+    cfg = _config()
+    result = generate_holdout_scenarios(cfg)
+    green_values = cfg.green_workload_shape.values
+    grid_values = cfg.grid_stress_shape.values
+    for group, key in (("train", "training_scenarios"), ("holdout", "holdout_scenarios")):
+        scenarios = getattr(result, key)
+        green_windows = result.provenance["windows"][group]["green"]
+        grid_windows = result.provenance["windows"][group]["grid"]
+        for scenario, gw, dw in zip(scenarios, green_windows, grid_windows):
+            green_mean = sum(green_values[gw["start"] : gw["end"]]) / cfg.window_hours
+            grid_mean = sum(grid_values[dw["start"] : dw["end"]]) / cfg.window_hours
+            assert scenario.green_call_mw == pytest.approx(
+                cfg.green_call_scale_mw * green_mean, abs=1e-9
+            )
+            assert scenario.grid_need_mw == pytest.approx(
+                cfg.grid_stress_scale_mw * grid_mean, abs=1e-9
+            )
+
+
+# ---------------------------------------------------------------------------
+# CSV loaders against the real shipped traces (leak-free)
+# ---------------------------------------------------------------------------
+def test_load_trace_shape_rejects_full_window_prenormalized_google_column():
+    # The Google peak_normalized_unweighted_mean column is divided by the
+    # full-window (future-inclusive) peak; loading it as a shape would leak the
+    # holdout segment. It must be refused fail-closed with a redirect.
+    with pytest.raises(ValueError, match="full-window"):
+        load_trace_shape_from_csv(
+            _GOOGLE_TRACE,
+            column="peak_normalized_unweighted_mean",
+            name="google",
+        )
+
+
+def test_load_peak_normalized_shape_from_raw_google_column_is_split_aware():
+    shape = load_peak_normalized_shape_from_csv(
+        _GOOGLE_TRACE,
+        column="measured_power_util_unweighted_mean",
+        name="google_grid",
+        split_fraction=0.5,
+    )
+    assert len(shape.values) == 744
+    assert shape.normalization_split_fraction == pytest.approx(0.5, abs=1e-9)
+    assert shape.normalization_peak is not None
+    # The divisor is the training-segment (first-half) peak, not the global peak.
+    raw = shape.values  # already divided by the training peak
+    train_max = max(raw[: 744 // 2])
+    assert train_max == pytest.approx(1.0, abs=1e-9)
+
+
+def test_load_peak_normalized_shape_from_raw_alibaba_column_is_split_aware():
+    shape = load_peak_normalized_shape_from_csv(
+        _ALIBABA_TRACE,
+        column="requested_gpu_equivalents",
+        name="alibaba_green",
+        split_fraction=0.5,
+    )
+    assert len(shape.values) == 1642
+    assert shape.normalization_split_fraction == pytest.approx(0.5, abs=1e-9)
+    # A raw GPU-request series may spike above its training peak in the holdout
+    # segment; that is left honestly above 1.0 rather than clipped.
+    assert max(shape.values) >= 0.0
+
+
+def test_generated_scenarios_from_real_traces_pass_downstream_contract():
+    from src.evaluation.economic_holdout import _validate_scenarios
+
+    grid = load_peak_normalized_shape_from_csv(
+        _GOOGLE_TRACE,
+        column="measured_power_util_unweighted_mean",
+        name="google_grid",
+        split_fraction=0.5,
+    )
+    green = load_peak_normalized_shape_from_csv(
+        _ALIBABA_TRACE,
+        column="requested_gpu_equivalents",
+        name="alibaba_green",
+        split_fraction=0.5,
+    )
+    result = generate_holdout_scenarios(
+        _config(
+            grid_stress_shape=grid,
+            green_workload_shape=green,
+            window_hours=24,
+            n_train=8,
+            n_holdout=6,
+            split_fraction=0.5,
+        )
+    )
+    _validate_scenarios(result.training_scenarios, "training")
+    _validate_scenarios(result.holdout_scenarios, "holdout")
+    # Real traces flowing end to end must still carry the module honesty tag.
+    assert "derived" in result.parameter_status
+    assert "not_empirical" in result.parameter_status

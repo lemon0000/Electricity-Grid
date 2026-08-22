@@ -332,3 +332,106 @@ def test_empty_holdout_is_rejected(tmp_path):
 
     with pytest.raises(ValueError, match="holdout_scenarios"):
         runner.run(_write_config(tmp_path, empty_holdout))
+
+
+# ---------------------------------------------------------------------------
+# Generator-driven scenario source (scenario_source = "generated")
+# ---------------------------------------------------------------------------
+# These pin the *runner* branch that derives the training/holdout trees from the
+# real shipped AI-workload traces via split-aware peak normalization. The point
+# is not to re-test the generator internals (tests/test_trace_scenario_generator.py
+# does that) but the runner-level contract: the module honesty tag survives into
+# the on-disk summary, the run never certifies, provenance is recorded, and a
+# malformed generator block fails closed. Without these, a future refactor could
+# silently drop the ``::{generated_status}`` splice and let generated scenarios
+# masquerade as empirical evidence (agent.md sections 4/8).
+_N_HOLDOUT_GEN = 6
+
+
+def _generated(config):
+    config["scenario_source"] = "generated"
+    config["generator"] = {
+        "parameter_status": "synthetic_test_only_not_for_engineering",
+        "split_fraction": 0.5,
+        "window_hours": 24,
+        "n_train": 8,
+        "n_holdout": _N_HOLDOUT_GEN,
+        "seed": 7,
+        "grid_stress_scale_mw": 40.0,
+        "green_call_scale_mw": 60.0,
+        "connected_demand_mw": 1000.0,
+        "grid_stress_shape": {
+            "path": "data/processed/google_power_2019/v1/hourly_shape.csv",
+            "column": "measured_power_util_unweighted_mean",
+        },
+        "green_workload_shape": {
+            "path": "data/processed/alibaba_gpu_2020/v2020/"
+            "relative_hourly_workload.csv.gz",
+            "column": "requested_gpu_equivalents",
+        },
+    }
+
+
+def test_generated_source_runs_and_records_provenance(tmp_path):
+    summary = runner.run(_write_config(tmp_path, _generated))
+    assert summary["scenario_source"] == "generated"
+
+    provenance = summary["generator_provenance"]
+    assert isinstance(provenance, dict) and provenance
+    # A reviewer must be able to confirm from the artifact that no training MW
+    # depends on a holdout hour: the normalization divisor and the split it was
+    # estimated on are recorded, and the split matches the draw.
+    assert provenance["split_fraction"] == pytest.approx(0.5, abs=1e-9)
+    assert provenance["normalization"]["grid"]["split_fraction"] == pytest.approx(
+        0.5, abs=1e-9
+    )
+    assert provenance["normalization"]["green"]["split_fraction"] == pytest.approx(
+        0.5, abs=1e-9
+    )
+    assert provenance["windows"]["train"]["grid"]
+    assert provenance["windows"]["holdout"]["green"]
+
+    # n_holdout scenarios x 2 policies.
+    leaf_rows = _read_csv(tmp_path / "leaves.csv")
+    assert len(leaf_rows) == _N_HOLDOUT_GEN * 2
+
+
+def test_generated_summary_carries_module_honesty_tag_and_never_certifies(tmp_path):
+    summary = runner.run(_write_config(tmp_path, _generated))
+    status = summary["parameter_status"]
+    # The module honesty tag (MW derived, probabilities are Monte-Carlo sampling
+    # weights, NOT empirical outage / engineering / contract evidence) must be
+    # present in the on-disk summary, spliced onto the caller's own status.
+    assert "derived" in status
+    assert "not_empirical_outage" in status
+    assert "sampling_weights" in status
+    assert "not_for_engineering" in status  # caller status preserved too
+    assert summary["security_certified"] is False
+    leaf_rows = _read_csv(tmp_path / "leaves.csv")
+    assert all(row["security_certified"] == "False" for row in leaf_rows)
+
+
+def test_generated_source_requires_generator_block(tmp_path):
+    def drop_generator(config):
+        config["scenario_source"] = "generated"
+        config.pop("generator", None)
+
+    with pytest.raises(ValueError, match="generator"):
+        runner.run(_write_config(tmp_path, drop_generator))
+
+
+def test_generated_rejects_nonintegral_window_hours(tmp_path):
+    def bad_window(config):
+        _generated(config)
+        config["generator"]["window_hours"] = "24"
+
+    with pytest.raises(ValueError, match="window_hours"):
+        runner.run(_write_config(tmp_path, bad_window))
+
+
+def test_unknown_scenario_source_is_rejected(tmp_path):
+    def bad_source(config):
+        config["scenario_source"] = "empirical"
+
+    with pytest.raises(ValueError, match="scenario_source"):
+        runner.run(_write_config(tmp_path, bad_source))

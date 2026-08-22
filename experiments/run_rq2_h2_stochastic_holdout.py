@@ -58,6 +58,11 @@ from src.evaluation.economic_holdout import (
 )
 from src.evaluation.service_risk import ServiceLossCoefficients
 from src.models import EconomicScenario
+from src.scenarios import (
+    TraceScenarioConfig,
+    generate_holdout_scenarios,
+    load_peak_normalized_shape_from_csv,
+)
 
 
 _REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -194,6 +199,90 @@ def _build_scenarios(raw: object, label: str) -> tuple[EconomicScenario, ...]:
             )
         )
     return tuple(scenarios)
+
+
+def _positive_int(value: object, label: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ValueError(f"{label} must be an integer")
+    if value < 1:
+        raise ValueError(f"{label} must be a positive integer")
+    return value
+
+
+def _build_generated_scenarios(
+    raw: object,
+) -> tuple[tuple[EconomicScenario, ...], tuple[EconomicScenario, ...], str, dict]:
+    """Build (training, holdout) scenarios from real trace shapes.
+
+    This is the *generator-driven* scenario source: instead of a hand-crafted
+    frozen tree, the two demand dimensions are derived from the observed
+    AI-workload trace *shapes* the project ships (Google 2019 PDU power ->
+    grid-stress ``grid_need_mw``; Alibaba 2020 GPU workload -> green/CFE call
+    ``green_call_mw``). Each raw column is peak-normalized *split-aware* (the
+    divisor is the training-segment peak, never the full-window peak), so no
+    training scenario depends on a holdout hour. The block-bootstrap draw is
+    reproducible under ``seed`` and the honesty tag (MW derived, probabilities
+    are sampling weights, not empirical outage) is propagated downstream.
+    """
+
+    if not isinstance(raw, dict):
+        raise ValueError("generator must be a mapping when scenario_source=generated")
+    parameter_status = raw.get("parameter_status")
+    if not isinstance(parameter_status, str) or not parameter_status:
+        raise ValueError("generator.parameter_status must be a nonempty string")
+
+    split_fraction = _number(raw.get("split_fraction", 0.5), "generator.split_fraction")
+    window_hours = _positive_int(raw.get("window_hours"), "generator.window_hours")
+    n_train = _positive_int(raw.get("n_train"), "generator.n_train")
+    n_holdout = _positive_int(raw.get("n_holdout"), "generator.n_holdout")
+    seed = _positive_int(raw.get("seed"), "generator.seed")
+
+    def _shape(section: str):
+        block = raw.get(section)
+        if not isinstance(block, dict):
+            raise ValueError(f"generator.{section} must be a mapping")
+        external_peak = block.get("external_peak")
+        return load_peak_normalized_shape_from_csv(
+            _resolve_path(block.get("path")),
+            column=str(block.get("column")),
+            name=section,
+            split_fraction=None if external_peak is not None else split_fraction,
+            external_peak=(
+                _number(external_peak, f"generator.{section}.external_peak")
+                if external_peak is not None
+                else None
+            ),
+        )
+
+    grid_shape = _shape("grid_stress_shape")
+    green_shape = _shape("green_workload_shape")
+
+    cfg = TraceScenarioConfig(
+        grid_stress_shape=grid_shape,
+        green_workload_shape=green_shape,
+        grid_stress_scale_mw=_number(
+            raw.get("grid_stress_scale_mw"), "generator.grid_stress_scale_mw"
+        ),
+        green_call_scale_mw=_number(
+            raw.get("green_call_scale_mw"), "generator.green_call_scale_mw"
+        ),
+        connected_demand_mw=_nonnegative_number(
+            raw.get("connected_demand_mw"), "generator.connected_demand_mw"
+        ),
+        window_hours=window_hours,
+        n_train=n_train,
+        n_holdout=n_holdout,
+        seed=seed,
+        parameter_status=parameter_status,
+        split_fraction=split_fraction,
+    )
+    generated = generate_holdout_scenarios(cfg)
+    return (
+        generated.training_scenarios,
+        generated.holdout_scenarios,
+        generated.parameter_status,
+        generated.provenance,
+    )
 
 
 def _independent_service_cvar(
@@ -378,12 +467,32 @@ def run(config_path: Path) -> dict[str, object]:
         raise ValueError("model.solver_name must be a nonempty string")
 
     coefficients = _build_coefficients(config.get("coefficients"))
-    training_scenarios = _build_scenarios(
-        config.get("training_scenarios"), "training_scenarios"
-    )
-    holdout_scenarios = _build_scenarios(
-        config.get("holdout_scenarios"), "holdout_scenarios"
-    )
+
+    # Scenario source: hand-crafted frozen tree (default, backward compatible) or
+    # the data-driven generator that derives scenarios from real trace shapes.
+    # ``generated`` mode also *augments* the evaluation status with the
+    # generator's honesty tag (MW derived, probabilities are sampling weights),
+    # so no downstream artifact can mistake generated scenarios for empirical
+    # evidence (agent.md sections 4/8).
+    scenario_source = config.get("scenario_source", "manual")
+    if scenario_source not in ("manual", "generated"):
+        raise ValueError("scenario_source must be 'manual' or 'generated'")
+    generator_provenance: dict | None = None
+    if scenario_source == "generated":
+        (
+            training_scenarios,
+            holdout_scenarios,
+            generated_status,
+            generator_provenance,
+        ) = _build_generated_scenarios(config.get("generator"))
+        parameter_status = f"{parameter_status}::{generated_status}"
+    else:
+        training_scenarios = _build_scenarios(
+            config.get("training_scenarios"), "training_scenarios"
+        )
+        holdout_scenarios = _build_scenarios(
+            config.get("holdout_scenarios"), "holdout_scenarios"
+        )
 
     validation = config.get("validation") or {}
     if not isinstance(validation, dict):
@@ -445,6 +554,8 @@ def run(config_path: Path) -> dict[str, object]:
         "evaluation_id": evaluation_id,
         "role": evaluation.get("role"),
         "parameter_status": parameter_status,
+        "scenario_source": scenario_source,
+        "generator_provenance": generator_provenance,
         "risk_measure_scope": result.risk_measure_scope,
         "solver_name": solver_name,
         "beta": beta,
