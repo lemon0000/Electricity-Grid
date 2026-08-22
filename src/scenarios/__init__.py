@@ -18,6 +18,11 @@ from .frozen_tree import (
     load_frozen_scenario_tree,
     parse_frozen_scenario_tree,
 )
+from .scenario_reduction import (
+    SCENARIO_REDUCTION_PARAMETER_STATUS,
+    ScenarioReductionResult,
+    reduce_scenarios_fast_forward,
+)
 from .trace_scenario_generator import (
     TRACE_SCENARIO_PARAMETER_STATUS,
     GeneratedScenarioSet,
@@ -37,8 +42,10 @@ __all__ = [
     "ProjectState",
     "ProjectTiming",
     "QuarterDecisionGroups",
+    "SCENARIO_REDUCTION_PARAMETER_STATUS",
     "ScenarioLeaf",
     "ScenarioNode",
+    "ScenarioReductionResult",
     "TRACE_SCENARIO_PARAMETER_STATUS",
     "TraceScenarioConfig",
     "TraceShape",
@@ -50,4 +57,5 @@ __all__ = [
     "load_trace_shape_from_csv",
     "normalize_common_input_signature",
     "parse_frozen_scenario_tree",
+    "reduce_scenarios_fast_forward",
 ]

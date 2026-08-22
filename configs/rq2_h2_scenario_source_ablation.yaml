@@ -1,0 +1,131 @@
+# RQ2 H2 场景来源消融（scenario-source ablation）的正式入口配置（agent.md §4/§8/§9）。
+#
+# 该配置驱动 experiments/run_rq2_h2_scenario_source_ablation.py：固定同一“未见 holdout
+# 测试集”，只改变“训练场景来源”这一个受控变量，检验 H2 结论（B6 重复承诺策略在场景外
+# 欠交付）是否是训练场景构造方式的假象。三条臂共享同一 holdout、同一系数、同一预算上限、
+# 同一安全集与同一求解器，因此 H2 符号在各臂间稳定即可归因于机制而非某一次抽样：
+#
+#   * manual    —— 手工冻结训练树（原始设计）；
+#   * generated —— 由真实 AI 负载 trace 形状经 split-aware 峰值归一化派生的训练场景
+#                  （Google 2019 PDU 功率 -> 网络压力；Alibaba 2020 GPU 负载 -> 绿电/CFE 调用）；
+#   * reduced   —— 对上面 generated 训练场景做经典 fast-forward 场景缩减（最优 Kantorovich
+#                  再分配）后的训练树；纯概率质量变换，holdout 从不参与缩减。
+#
+# 门禁为“仅正确性”：每臂每个可行策略的 holdout 服务损失 CVaR 都与自洽闭式独立重算交叉校验，
+# 不一致或（按配置）训练不可行则 fail-closed；H2 稳健性本身是科学发现，逐臂报告、不设门。
+#
+# 诚实边界（agent.md §4/§8）：所有系数、预算上限、场景概率均为合成机制参数或 trace 派生量，
+# 不冒充真实停电概率、合同能力、小时级网络认证或工程/AC 结果；generated/reduced 臂额外透传
+# 生成器/缩减的诚实标签。security_certified 恒为 false；本入口不改写冻结的 B3/B4/B5 基线，
+# 也不启动多阶段正式长求解。场景外失败只在 MW 预算维度度量，时序包络暂不在范围内。
+#
+# 下面是本机自检用的“微型合成算例”，用于验证入口管道与不变量；执行机跑更大规模正式算例时，
+# 应在保持同一 schema 的前提下打标签运行。
+
+evaluation:
+  id: rq2_h2_scenario_source_ablation_synthetic_v1
+  role: out_of_sample_ablation_testing_h2_robustness_across_training_scenario_sources
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+  security_certified: false
+  formal_vma_published: false
+
+model:
+  max_flexibility_budget_mw: 200.0
+  provisioning_cost_per_mw: 500.0
+  lambda_risk: 0.1
+  beta: 0.5
+  service_shortfall_tolerance_mw: 1.0e-6
+  solver_name: highs
+
+coefficients:
+  kappa_access: 1000.0
+  kappa_grid: 50.0
+  kappa_green: 40.0
+  kappa_drop: 2000.0
+  kappa_breach_firm: 0.0
+  kappa_breach_conditional: 0.0
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+
+# 参与比较的臂（顺序即输出顺序）。可子集化，但至少一条。
+arms:
+  - manual
+  - generated
+  - reduced
+
+# 共享的“未见 holdout 测试集”：所有臂在此执行既定策略、从不在此规划。三类叶被有意冻结在
+# 能同时暴露两种场景外失败模式的点上（结果前冻结，agent.md §9）：B6 分离预算 60 MW 被 grid
+# 占用后绿电调用大量转为 access 缺口；stress/severe 叶上共享模型也可能不足，但 B6 更严重。
+holdout_scenarios:
+  - name: holdout_mild
+    probability: 0.4
+    grid_need_mw: 25.0
+    green_call_mw: 60.0
+    connected_demand_mw: 1000.0
+    hours: 1.0
+  - name: holdout_stress
+    probability: 0.4
+    grid_need_mw: 50.0
+    green_call_mw: 60.0
+    connected_demand_mw: 1000.0
+    hours: 1.0
+  - name: holdout_severe
+    probability: 0.2
+    grid_need_mw: 90.0
+    green_call_mw: 60.0
+    connected_demand_mw: 1000.0
+    hours: 1.0
+
+# manual 臂使用的手工冻结训练树（与 rq2_h2_stochastic_holdout.yaml 同一机制点）。
+training_scenarios:
+  - name: train_mild
+    probability: 0.5
+    grid_need_mw: 20.0
+    green_call_mw: 60.0
+    connected_demand_mw: 1000.0
+    hours: 1.0
+  - name: train_stress
+    probability: 0.5
+    grid_need_mw: 40.0
+    green_call_mw: 60.0
+    connected_demand_mw: 1000.0
+    hours: 1.0
+
+# generated / reduced 臂使用的数据驱动训练场景生成器。每个原始列经 split-aware 峰值归一化
+# （除数取训练段峰值，绝非全窗峰值），故无 holdout 泄漏；抽样在 seed 下可复现。MW 由冻结
+# scale 与真实窗口均值派生，概率是 Monte-Carlo 抽样权重，非经验故障概率。
+generator:
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+  split_fraction: 0.5
+  window_hours: 24
+  n_train: 24
+  n_holdout: 6
+  seed: 20260822
+  # 与 manual 训练树同量级：grid_need ~ [0, 40]，green_call ~ [0, 60]，使“同时服务两类
+  # 需求”真正吃紧，正确共享模型满配需 grid+green，B6 分离预算系统性欠配。
+  grid_stress_scale_mw: 40.0
+  green_call_scale_mw: 60.0
+  connected_demand_mw: 1000.0
+  grid_stress_shape:
+    # Google 2019 PDU 功率的原始（未归一化）列；loader 会用训练段峰值 split-aware 重归一化。
+    path: data/processed/google_power_2019/v1/hourly_shape.csv
+    column: measured_power_util_unweighted_mean
+  green_workload_shape:
+    # Alibaba 2020 相对 GPU 负载的原始列。
+    path: data/processed/alibaba_gpu_2020/v2020/relative_hourly_workload.csv.gz
+    column: requested_gpu_equivalents
+
+# reduced 臂：对 generated 训练场景做 fast-forward 缩减到 target_count 个代表点。
+reduction:
+  target_count: 8
+  # 需求向量 (grid_need_mw, green_call_mw) 上的地面度量范数阶（>=1）；2 即欧氏距离。
+  ground_norm_order: 2.0
+
+validation:
+  cvar_cross_check_tolerance: 1.0e-6
+  fail_closed_on_infeasible_training: true
+
+random_seed: null
+
+output:
+  arms_path: results/tables/rq2_h2_scenario_source_ablation/arms.csv
+  summary_path: results/tables/rq2_h2_scenario_source_ablation/summary.json
