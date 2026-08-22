@@ -60,9 +60,26 @@ H1/H2/H3 必须在**相同输入、相同场景、相同安全集**下比较；V
 - 正式入口：`experiments/run_rq2_h2_stochastic_holdout.py`（读 `configs/rq2_h2_stochastic_holdout.yaml`），产出 `results/tables/rq2_h2_stochastic_holdout_v1/{leaves,policies}.csv` 与 `summary.json`（内嵌 provenance 与诚实标签，`security_certified=false`、`formal_vma_published=false`）。本机仅用微型合成 holdout 验证管道与不变量，不落盘 canonical 结果；正式规模算例保持同 schema、由执行机打标签运行。
 - fail-closed 语义：训练规划不可行 → 门失败（`gate_passed=false`）；holdout 叶的硬安全不可行是**阳性 H2 证据**，不触发 fail-closed（否则会把 B6 的场景外失败误判为管道错误）。
 
-## 5. 目标期刊评估：RQ2 单独发 TSG 是否够？
+### 4.2 数据驱动生成式场景（P0，AI 融入点）：本机已建生成器，待接入 H2 入口
 
-结论：**度量层与错误基线的组合具备 TSG 级别的“机制+证据”骨架，但当前工作量偏单薄，需补齐三块才不至于被判为“一条约束 + 一个 CVaR 后处理”。**
+- 决策与定位（2026-08-22，用户决策）：不盯死 TSG，投**任一中科院一区 IEEE Trans**（TSG/TSTE 优先，均为一区/JCR Q1）；AI 元素以 **P0 生成式场景生成器**落地，作为**不确定性建模工具**服务 RQ2 主机制，**不进入安全认证层**。DFL（预测-决策一体化）作为可选升格增量（冲 TPWRS），本轮不做。
+- 动机（审稿软肋）：现有 H2 的 training/holdout 是**手工冻结树**，必被质疑"高估幅度/失败概率是手搓场景的产物"。生成器用项目已有的**真实 AI 负载 trace 形状**驱动场景，直接回应"参数全合成/单参数产物"。
+- 实现：[trace_scenario_generator.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/src/scenarios/trace_scenario_generator.py) `generate_holdout_scenarios`，仅依赖 numpy+scipy+stdlib（与 `requirements.txt` 一致，未引入 pandas）。
+  - **两条真实 trace 各驱动一个维度**：Google PowerData 2019 归一化 PDU 功率利用率形状 → 网络胁迫 `grid_need_mw`；Alibaba PAI GPU 2020 相对小时工作量形状（`peak_normalized` 显式归一化）→ 绿电/CFE 调用 `green_call_mw`。
+  - **归一化无 holdout 泄漏（split-aware）**：派生 MW = `frozen_scale × mean(normalized_window)`，而 `mean(v/peak)=mean(v)/peak`，故除数（peak）为所有窗口共享。若用**全序列全局峰值**（含 holdout 段、峰值可能落在 holdout）归一化，training 场景 MW 会经共享除数间接依赖 holdout 小时——样本外泄漏。Google 数据卡明确禁止（`normalization_uses_future_window_peak=true`、`normalization_allowed_use=fixed_replay_not_train_or_holdout_feature`：全窗峰值“must not be calculated across a train/holdout split”）。修法：`TraceShape.peak_normalized` **拒绝裸全局峰值**（fail-closed），只接受二选一除数——① `split_fraction`：峰值仅从 training 段 `[0, split)` 估计并统一施用于全段（holdout 若超训练峰值则诚实 >1，不裁剪）；② `external_peak`：投前冻结常数（无 holdout 依赖）。生成器另加**结构守卫**：断言形状归一化所用 `split_fraction` 与本次抽样 `split_fraction` 一致，否则拒绝；`provenance.normalization` 记录除数与其估计 split，供逐条复核。
+  - **块自助采样（block bootstrap）**：在 trace 内取连续窗口聚合，保留 trace 内部时序自相关（`relative_intervals_preserved=true`），优于逐时 i.i.d. 抽样。
+  - **样本外分离是结构性保证**：每条 trace 在时间轴按 `split_fraction` 单点切分，training 窗口取自早段 `[0, split)`、holdout 取自晚段 `[split, T)`，窗口为连续块 → **无 source 小时共享**（测试 `test_train_and_holdout_windows_come_from_disjoint_time_segments` 断言 `max train end ≤ split ≤ min holdout start`）。
+  - **种子控制**：`np.random.default_rng(seed)`，可复现且换种子确实改变抽样（`agent.md` §10）；`provenance` 记录 split 与每个抽中窗口，派生 MW 可逐条手算复现。
+- 诚实边界（`agent.md` §4/§8，已在 trace `summary.json` 佐证）：trace 只提供**归一化形状**，`recovery_parameters_observed=false`、`deadline_available=false`、`continuous_power_available=false`、`calendar_dates_real=false`。因此：
+  - 每个 MW 都是 **derived**：`demand = frozen_scale × mean(trace window)`，frozen_scale 是合成机制参数，不是实测功率；
+  - 两 trace 来自不同集群、匿名相对时间，按**独立边缘分布**采样，不声称二者时序相关；
+  - 场景概率是**蒙特卡洛采样权重**（对抽中窗口均匀），**不是**经验停电/失败概率；
+  - 输出 `parameter_status` 恒携带 `TRACE_SCENARIO_PARAMETER_STATUS`（含 `derived`/`not_empirical`/`outage` 标记）+ 调用方状态，下游无法误当认证。
+- 契约对接：生成的场景对齐 `EconomicScenario` 六字段并通过 H2 冻结校验器 `_validate_scenarios`（测试 `test_generated_scenarios_satisfy_the_downstream_holdout_contract`），可直接喂 `evaluate_economic_holdout`。
+- 状态：本机已实现 + TDD（22 例，含端到端真实 trace 自检：Google 744h + Alibaba 1642h，样本外分离/概率归一/MW 派生/归一化无 holdout 泄漏均通过），生成器测试 + H2 holdout + frozen tree 回归共 74 例全过（conda `compute` 环境）。**已修**：`peak_normalized` holdout 泄漏（split-aware，见上）。**待办**：① 交 `sol_reviewer` R3 审查（涉及 `src/scenarios/` 的 train/holdout 分离与非预见性）；② 在 H2 正式入口 YAML 增加"生成器驱动场景"模式（保留手工树作 ablation 对照，证明结论对场景来源稳健）——接线 Google `hourly_shape.csv` 时须注意其 `peak_normalized_unweighted_mean` 列已按全窗峰值预归一化，属同类泄漏，应改用原始 `measured_power_util_unweighted_mean` 列经 `peak_normalized(split_fraction=...)` 重新归一化，或用 `external_peak`；③ 正式规模由执行机打标签运行。
+- **ablation 设计（回应"AI 买到了什么"）**：同一 L5 correct/B6 策略，分别在 (a) 手工冻结树、(b) 生成式 holdout、(c) 经典场景缩减 三种场景来源上执行 H2，报告 B6 场景外欠交付排序是否稳健，并检验生成式是否揭示手工树漏掉的尾部履约失败。
+
+## 5. 目标期刊评估：RQ2 单独发 TSG 是否够？
 
 必须补齐（缺一即偏薄）：
 
