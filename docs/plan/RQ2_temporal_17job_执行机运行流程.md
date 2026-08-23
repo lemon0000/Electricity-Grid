@@ -25,18 +25,24 @@ formal_vma_published=false
 
 ## 2. 执行前环境检查
 
-以下示例假定主仓库位于：
+本机固定部署目录如下：
 
 ```text
-D:\research\Electricity-Grid
+代码仓库：D:\CUHKSZ\Research Project\electricity-grid
+本机配置：D:\CUHKSZ\Research Project\research\agent
+运行目录：D:\CUHKSZ\Research Project\research\runs
+结果 worktree：D:\CUHKSZ\Research Project\research\results
 ```
 
-若实际路径不同，只替换该路径，不修改仓库内配置。
+代码、文档和 Git 操作统一在 `electricity-grid` 中进行；机器专用配置放在
+`research\agent`；正式实验只在 `research\runs\<run-id>` 的 detached worktree
+中运行；结果只通过 `research\results` 发布到 `experiment-results`。不要在
+`Research Project` 或 `research` 根目录再克隆仓库。
 
 打开 PowerShell：
 
 ```powershell
-cd D:\research\Electricity-Grid
+Set-Location -LiteralPath "D:\CUHKSZ\Research Project\electricity-grid"
 
 git fetch origin --tags --prune
 git status
@@ -83,7 +89,7 @@ python -c "import highspy; print(highspy.Highs().version())"
 
 ```powershell
 powershell -ExecutionPolicy Bypass `
-  -File D:\research\agent\run-pending-experiment.ps1
+  -File "D:\CUHKSZ\Research Project\research\agent\run-pending-experiment.ps1"
 ```
 
 轮询器应自动完成：
@@ -115,19 +121,21 @@ Get-CimInstance Win32_Process |
 检查运行目录：
 
 ```powershell
-Get-ChildItem D:\research\runs -Directory |
+Get-ChildItem -LiteralPath "D:\CUHKSZ\Research Project\research\runs" -Directory |
   Where-Object { $_.Name -eq "run-20260823-001" }
 ```
 
 检查日志尾部：
 
 ```powershell
-Get-Content `
-  D:\research\runs\run-20260823-001\experiment.log `
+Get-Content -LiteralPath `
+  "D:\CUHKSZ\Research Project\research\runs\run-20260823-001\experiment.log" `
   -Tail 80
 ```
 
-实际目录以 `D:\research\agent\experiment-config.ps1` 中的配置为准。
+实际目录以
+`D:\CUHKSZ\Research Project\research\agent\experiment-config.ps1`
+中的配置为准。
 
 ## 6. 不推荐的手工兜底
 
@@ -154,10 +162,10 @@ python -m experiments.run_rq2_formal_batch
 ```powershell
 git fetch origin --tags --prune
 git worktree add --detach `
-  D:\research\runs\run-20260823-001-worktree `
+  "D:\CUHKSZ\Research Project\research\runs\run-20260823-001-worktree" `
   "run-20260823-001^{}"
 
-cd D:\research\runs\run-20260823-001-worktree
+Set-Location -LiteralPath "D:\CUHKSZ\Research Project\research\runs\run-20260823-001-worktree"
 git rev-parse HEAD
 ```
 
@@ -203,7 +211,7 @@ SHA256SUMS.json
 ## 8. 运行完成后的检查
 
 ```powershell
-cd D:\research\Electricity-Grid
+Set-Location -LiteralPath "D:\CUHKSZ\Research Project\electricity-grid"
 git fetch origin experiment-results
 
 git show `
@@ -265,11 +273,11 @@ run-20260823-001-r2
 正常情况下只有三步：
 
 ```powershell
-cd D:\research\Electricity-Grid
+Set-Location -LiteralPath "D:\CUHKSZ\Research Project\electricity-grid"
 git fetch origin --tags --prune
 conda activate compute
 powershell -ExecutionPolicy Bypass `
-  -File D:\research\agent\run-pending-experiment.ps1
+  -File "D:\CUHKSZ\Research Project\research\agent\run-pending-experiment.ps1"
 ```
 
 随后保持轮询器运行并等待结果上传。不要拉取当前 `experiment` HEAD 来替代标签运行，
