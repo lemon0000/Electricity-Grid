@@ -11,14 +11,13 @@
 # 并单独打标签执行。
 
 experiment:
-  id: rq2_h2_temporal_successor_batch_v1_trigger
+  id: cross_machine_pipeline_smoke_v1
   # kind 决定 run_experiment.ps1 的行为分支：
   #   pytest-smoke —— 运行下方 selection 指定的测试；不需要 Gurobi 或原始数据。
-  kind: rq2-formal-batch
-  batch_config: configs/rq2_h2_temporal_successor_batch_v1.yaml
-  purpose: execute_preregistered_rq2_temporal_h2_successor_17_job_batch
+  kind: pytest-smoke
+  purpose: verify_cross_machine_loop_plumbing_only_not_a_scientific_result
   # 该入口的产物只描述“管道与测试是否通过”，不得被解释为模型可行性、安全认证或科研结论。
-  evidence_status: trace_derived_temporal_mechanism_batch_not_certification
+  evidence_status: pipeline_plumbing_smoke_only
 
 pytest_smoke:
   # 仅选取不依赖外部求解器/原始数据集的确定性单元测试，保证在任何执行机可复现。
