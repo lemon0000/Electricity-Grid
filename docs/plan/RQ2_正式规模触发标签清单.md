@@ -106,6 +106,7 @@ Temporal H2 successor 另有独立 R4 预注册：
 - base config：`configs/rq2_h2_temporal_successor_formal_v1.yaml`
 - batch config：`configs/rq2_h2_temporal_successor_batch_v1.yaml`
 - 说明：`docs/plan/RQ2_temporal_successor_preregistration.md`
+- 执行机流程：`docs/plan/RQ2_temporal_17job_执行机运行流程.md`
 
 该 17-job 清单当前 `formal_execution_ready=false`。本次只冻结配置，不修改
 `configs/experiment.yaml`、不创建或推送 `run-*` 标签。即使 R4 审查通过，也
