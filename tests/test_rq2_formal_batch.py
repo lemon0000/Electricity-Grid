@@ -40,6 +40,7 @@ _L5_BASE = "configs/rq2_l5_economic_stochastic_formal.yaml"
 _H2_BASE = "configs/rq2_h2_stochastic_holdout_generated_formal.yaml"
 _ABLATION_BASE = "configs/rq2_h2_scenario_source_ablation_formal.yaml"
 _NETWORK_BASE = "configs/rq2_l5_economic_network_rts24.yaml"
+_TEMPORAL_BASE = "configs/rq2_h2_temporal_successor_formal_v1.yaml"
 
 
 def _tiny_batch(tmp_path: Path) -> dict:
@@ -203,6 +204,89 @@ def test_network_runner_root_is_rewritten_into_job_directory(tmp_path):
     assert config["output"]["summary_path"] == str(job_dir / "x.json")
 
 
+def test_temporal_runner_directory_is_rewritten_into_job_directory(tmp_path):
+    config = {
+        "output": {
+            "directory": "results/tables/temporal_successor_formal_v1"
+        }
+    }
+    job_dir = tmp_path / "job"
+
+    batch._rewrite_output(config, job_dir)
+
+    assert config["output"]["directory"] == str(
+        job_dir / "temporal_successor_formal_v1"
+    )
+
+
+def test_temporal_threshold_is_a_whitelisted_numeric_override():
+    config = {"generator": {"network_activation_threshold": 1.0}}
+
+    effective = batch._apply_overrides(
+        config, {"generator.network_activation_threshold": 0.9}
+    )
+
+    assert effective["generator"]["network_activation_threshold"] == 0.9
+
+
+def test_temporal_findings_are_carried_into_batch_manifest(
+    tmp_path, monkeypatch
+):
+    import experiments.run_rq2_h2_temporal_source_ablation as temporal
+
+    def fake_run(config_path):
+        effective = yaml.safe_load(Path(config_path).read_text(encoding="utf-8"))
+        assert Path(effective["output"]["directory"]).is_relative_to(tmp_path)
+        return {
+            "evaluation_id": "temporal_test",
+            "gate_passed": True,
+            "security_certified": False,
+            "parameter_status": "trace_derived_not_empirical",
+            "robustness_by_network_method": {
+                "minimum_curtailment": {
+                    "all_requested_arms_evaluable": True,
+                    "h2_robust_across_sources": False,
+                }
+            },
+            "arm_results": {"manual": {"gate_passed": True}},
+            "shared_holdout_sha256": "a" * 64,
+            "generated_draw_sha256": "b" * 64,
+        }
+
+    monkeypatch.setattr(temporal, "run", fake_run)
+    config = {
+        "batch": {
+            "id": "temporal_batch_test",
+            "output_root": str(tmp_path / "ignored"),
+        },
+        "jobs": [
+            {
+                "id": "temporal",
+                "runner": (
+                    "experiments.run_rq2_h2_temporal_source_ablation"
+                ),
+                "base_config": _TEMPORAL_BASE,
+                "overrides": {
+                    "generator.network_activation_threshold": 0.9
+                },
+            }
+        ],
+    }
+
+    manifest = batch.run(
+        _write_batch(tmp_path, config),
+        output_root_override=tmp_path / "out",
+    )
+    record = manifest["jobs"][0]
+
+    assert record["temporal_robustness_by_network_method"][
+        "minimum_curtailment"
+    ]["h2_robust_across_sources"] is False
+    assert record["temporal_arm_results"]["manual"]["gate_passed"] is True
+    assert record["shared_holdout_sha256"] == "a" * 64
+    assert record["generated_draw_sha256"] == "b" * 64
+
+
 # ---------------------------------------------------------------------------
 # Whitelist / honesty fail-closed behaviour
 # ---------------------------------------------------------------------------
@@ -300,6 +384,33 @@ def test_network_successor_batch_pins_base_config_sha256():
     assert job["base_config_sha256"] == batch._sha256(
         Path(__file__).resolve().parents[1] / _NETWORK_BASE
     )
+
+
+def test_temporal_successor_preregistration_validates_without_running():
+    from experiments.validate_rq2_h2_temporal_successor_preregistration import (
+        validate,
+    )
+
+    report = validate()
+
+    assert report["job_count"] == 17
+    assert report["confirmatory_cell_count"] == 24
+    assert report["primary_cell_count"] == 6
+    assert report["formal_execution_ready"] is False
+    assert report["formal_runner_invoked"] is False
+    assert report["solver_invoked"] is False
+    assert report["validation_passed"] is True
+
+
+def test_execution_entrypoint_uploads_complete_batch_tree():
+    script = (
+        Path(__file__).resolve().parents[1] / "scripts" / "run_experiment.ps1"
+    ).read_text(encoding="utf-8")
+
+    assert 'Join-Path $artifactDir "batch_results"' in script
+    assert "Copy-Item $batchRoot $batchArtifactRoot -Recurse" in script
+    assert "Get-ChildItem $artifactDir -File -Recurse" in script
+    assert "sha256" in script
 
 
 def test_batch_fails_closed_when_a_job_gate_fails(tmp_path, monkeypatch):

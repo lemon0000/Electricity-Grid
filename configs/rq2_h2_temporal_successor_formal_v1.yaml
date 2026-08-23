@@ -1,0 +1,123 @@
+# Frozen base input for the RQ2 temporal H2 formal successor.
+#
+# This is trace-derived/synthetic mechanism evidence. Google stress values
+# trigger a sensitivity indicator, not an observed outage process. Alibaba
+# workload values are an independent marginal trace. Recovery and envelope
+# parameters are synthetic. No output may be interpreted as empirical failure
+# probability, contract capability, engineering feasibility or security.
+
+evaluation:
+  id: rq2_h2_temporal_successor_formal_v1
+  role: preregistered_temporal_h2_training_source_and_threshold_sensitivity
+  parameter_status: preregistered_trace_derived_temporal_mechanism_not_empirical
+  security_certified: false
+  formal_vma_published: false
+
+arms: [manual, generated, reduced]
+
+network:
+  case_name: case24_ieee_rts
+  poi_bus: 8
+  balancing_bus: 13
+  methods: [minimum_curtailment, overload_sensitivity]
+  branch_indices:
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18,
+     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
+     35, 36, 37]
+  generator_indices:
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18,
+     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+  redispatch_fraction_of_pmax: 0.50
+  sustained_rating: rate_a
+  parameter_status: selected_n1_dc_derived_not_empirical_outage
+
+model:
+  max_flexibility_budget_mw: 150.0
+  provisioning_cost_per_mw: 500.0
+  lambda_risk: 0.1
+  beta: 0.9
+  service_shortfall_tolerance_mwh: 1.0e-6
+  solver_name: highs
+
+coefficients:
+  kappa_access: 1000.0
+  kappa_grid: 50.0
+  kappa_green: 40.0
+  kappa_drop: 2000.0
+  kappa_breach_firm: 0.0
+  kappa_breach_conditional: 0.0
+  parameter_status: synthetic_mechanism_only_not_contract_evidence
+
+envelope:
+  time_step_hours: 1.0
+  maximum_event_duration_hours: 2.0
+  minimum_recovery_hours: 2.0
+  maximum_events_by_period: {q1: 2}
+  maximum_curtailment_energy_mwh_by_period: {q1: 160.0}
+  maximum_recovery_debt_mwh: 160.0
+  maximum_recovery_power_mw: 40.0
+  minimum_event_power_mw: 1.0
+  response_time_hours: 1.0
+  curtailment_ramp_mw_per_hour: 150.0
+  recovery_efficiency: 1.0
+  terminal_debt_limit_mwh_by_period: {q1: 0.0}
+  parameter_status: synthetic_duration_event_energy_recovery_sensitivity
+
+# Manual training uses the same 8 h core + 4 h recovery-tail horizon as the
+# generated arms. It is a transparent mechanism comparator, not empirical data.
+manual_training_scenarios:
+  - name: manual_train_two_hour_overlap
+    probability: 1.0
+    periods: [q1, q1, q1, q1, q1, q1, q1, q1, q1, q1, q1, q1]
+    system_load_multiplier: [0.8, 0.8, 0.8, 0.8, 0.8, 0.8,
+                             0.8, 0.8, 0.8, 0.8, 0.8, 0.8]
+    data_center_demand_mw: [250, 250, 250, 250, 250, 250,
+                            250, 250, 250, 250, 250, 250]
+    network_call_active: [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    green_call_mw: [0, 40, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    connected_demand_mw: [250, 250, 250, 250, 250, 250,
+                          250, 250, 250, 250, 250, 250]
+    recovery_headroom_mw: [40, 40, 40, 40, 40, 40,
+                           40, 40, 40, 40, 40, 40]
+    completed_periods: [q1]
+    require_terminal_event_inactive: true
+    boundary_state_status: clean_boundary_with_zero_carry_in
+
+generator:
+  parameter_status: trace_shapes_derived_not_empirical_outage_or_recovery
+  split_fraction: 0.5
+  core_window_hours: 8
+  recovery_tail_hours: 4
+  n_train: 200
+  n_holdout: 60
+  seed: 20260822
+  period: q1
+  data_center_demand_mw: 250.0
+  system_load_multiplier: 0.8
+  green_call_scale_mw: 40.0
+  # Primary q90 threshold, computed from the normalized Google training half
+  # by the preregistered Type-7 linear quantile rule.
+  network_activation_threshold: 0.9805009394329972
+  recovery_headroom_mw: 40.0
+  grid_stress_shape:
+    path: data/processed/google_power_2019/v1/hourly_shape.csv
+    column: measured_power_util_unweighted_mean
+  green_workload_shape:
+    path: data/processed/alibaba_gpu_2020/v2020/relative_hourly_workload.csv.gz
+    column: requested_gpu_equivalents
+
+reduction:
+  target_count: 50
+  ground_norm_order: 2.0
+  component_scales:
+    network_call_active: 1.0
+    green_call_mw: 40.0
+    data_center_demand_mw: 250.0
+    system_load_multiplier: 1.0
+
+validation:
+  fail_closed_on_unresolved: true
+  fail_closed_on_infeasible_training: true
+
+output:
+  directory: results/tables/rq2_h2_temporal_successor_formal_v1

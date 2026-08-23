@@ -257,6 +257,35 @@ finally {
         }
     }
 
+    # 正式批次的完整结果树是必需工件。成功进程若缺 aggregate manifest，或复制
+    # effective config / summary / arms / leaves / nested manifest 失败，必须在状态
+    # 文件落盘前转为 failed，不能只留下成功状态与一个不完整上传目录。
+    if ($kind -eq "rq2-formal-batch") {
+        if (-not $batchManifestPath) {
+            if ($runStatus -eq "success") {
+                $runStatus = "failed"
+                $exitCode = 1
+                $failureMessage = "RQ2 批处理成功退出但缺少 batch_manifest.json"
+            }
+        }
+        else {
+            try {
+                Copy-Item $batchManifestPath (Join-Path $artifactDir "batch_manifest.json") -Force
+                $batchRoot = Split-Path -Parent $batchManifestPath
+                $batchArtifactRoot = Join-Path $artifactDir "batch_results"
+                if (Test-Path $batchArtifactRoot) {
+                    throw "批处理上传目标已存在，拒绝覆盖：$batchArtifactRoot"
+                }
+                Copy-Item $batchRoot $batchArtifactRoot -Recurse
+            }
+            catch {
+                $runStatus = "failed"
+                $exitCode = 1
+                $failureMessage = "RQ2 批处理工件复制失败：$($_ | Out-String)"
+            }
+        }
+    }
+
     Try-Step {
         if ($failureMessage) {
             Write-Utf8Lines (Join-Path $runDir "error.txt") @($failureMessage)
@@ -338,25 +367,25 @@ finally {
         Write-Utf8Lines (Join-Path $runDir "summary.md") $lines
     }
 
-    # 复制上传工件到 artifactDir。批处理另把 batch_manifest.json（科学发现与门状态的
-    # 权威载体）纳入上传集，否则公司 Mac 收不到本轮结果，只剩状态壳。
+    # 复制上传工件到 artifactDir。批处理除 aggregate manifest 外，必须递归复制
+    # 每个 job 的 effective config、summary、arms/leaves 和 SHA manifest；否则只能
+    # 看到汇总结论，无法复核 leaf-level H2 证据。
     Try-Step {
         $publish = @("run-info.txt", "status.txt", "status.json", "metrics.json", "summary.md", "error.txt")
         foreach ($name in $publish) {
             $src = Join-Path $runDir $name
             if (Test-Path $src) { Copy-Item $src (Join-Path $artifactDir $name) -Force }
         }
-        if ($kind -eq "rq2-formal-batch" -and $batchManifestPath -and (Test-Path $batchManifestPath)) {
-            Copy-Item $batchManifestPath (Join-Path $artifactDir "batch_manifest.json") -Force
-        }
     }
 
-    # manifest.json —— 第 7 节：列出除自身外每个上传文件的相对路径、字节数与 SHA-256。
+    # manifest.json —— 第 7 节：递归列出除自身外每个上传文件的相对路径、字节数
+    # 与 SHA-256。嵌套的 batch_results 也必须完整覆盖。
     Try-Step {
         $manifestEntries = @()
-        Get-ChildItem $artifactDir -File | Where-Object { $_.Name -ne "manifest.json" } | ForEach-Object {
+        Get-ChildItem $artifactDir -File -Recurse | Where-Object { $_.FullName -ne (Join-Path $artifactDir "manifest.json") } | ForEach-Object {
+            $relativePath = $_.FullName.Substring($artifactDir.Length).TrimStart("\", "/").Replace("\", "/")
             $manifestEntries += [PSCustomObject]@{
-                path       = $_.Name
+                path       = $relativePath
                 size_bytes = $_.Length
                 sha256     = (Get-FileHash -Algorithm SHA256 $_.FullName).Hash.ToLowerInvariant()
             }

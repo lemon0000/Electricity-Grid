@@ -66,6 +66,7 @@ _ALLOWED_OVERRIDE_KEYS = frozenset(
         "generator.n_holdout",
         "generator.grid_stress_scale_mw",
         "generator.green_call_scale_mw",
+        "generator.network_activation_threshold",
         "model.beta",
         "model.lambda_risk",
         "model.max_flexibility_budget_mw",
@@ -153,6 +154,9 @@ def _rewrite_output(config: dict, job_dir: Path) -> None:
         if key in output:
             basename = Path(str(output[key])).name
             output[key] = str(job_dir / basename)
+    if "directory" in output:
+        basename = Path(str(output["directory"])).name
+        output["directory"] = str(job_dir / basename)
 
 
 def _assert_honest(job_id: str, summary: dict) -> None:
@@ -301,6 +305,12 @@ def run(
                 ),
                 "network_provenance": summary.get("network_provenance"),
                 "method_summaries": summary.get("method_summaries"),
+                "temporal_robustness_by_network_method": summary.get(
+                    "robustness_by_network_method"
+                ),
+                "temporal_arm_results": summary.get("arm_results"),
+                "shared_holdout_sha256": summary.get("shared_holdout_sha256"),
+                "generated_draw_sha256": summary.get("generated_draw_sha256"),
                 "summary_path": summary.get("output_paths", {}).get("summary")
                 if isinstance(summary.get("output_paths"), dict)
                 else None,
@@ -312,6 +322,12 @@ def run(
             "network_provenance",
             "method_summaries",
         )
+        temporal_keys = (
+            "temporal_robustness_by_network_method",
+            "temporal_arm_results",
+            "shared_holdout_sha256",
+            "generated_draw_sha256",
+        )
         if not any(
             key in summary
             for key in (
@@ -322,6 +338,17 @@ def run(
             )
         ):
             for key in network_keys:
+                job_records[-1].pop(key)
+        if not any(
+            key in summary
+            for key in (
+                "robustness_by_network_method",
+                "arm_results",
+                "shared_holdout_sha256",
+                "generated_draw_sha256",
+            )
+        ):
+            for key in temporal_keys:
                 job_records[-1].pop(key)
 
     manifest = {

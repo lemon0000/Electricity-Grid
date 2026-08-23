@@ -107,6 +107,7 @@ H1/H2/H3 必须在**相同输入、相同场景、相同安全集**下比较；V
 - generated路径现从两个split-aware trace形状抽取完整连续小时窗口并追加合成恢复尾部；reduced路径在四个显式缩放分量的完整时序向量上执行fast-forward，只缩减training且保留输入代表轨迹。三来源消融只改变training，使用同一份生成后冻结并以SHA-256绑定的holdout。
 - 首次本机RTS-24三来源机制配置全部correctness gate通过，但A/B下`h2_robust_across_sources=false`：阈值`1.0`的共享holdout未激活网络调用，manual策略在该holdout也没有B6额外欠交付，generated/reduced的correct与B6提交量约均为`12.3244 MW`。这是必须保留的失败区域，不能据此事后下调阈值制造阳性H2；该配置只证明管道闭环，不支持跨来源H2主张。
 - R3独立审查：最终 **PASS**；新增连续trace、时序缩减与三来源消融的首轮REWORK四项均已闭环，复审确认period/terminal/recovery语义一致、training/holdout status分域、全请求arm可评估门和no-op计数正确。相关广泛回归135例、Ruff与manifest复核均通过。
+- R4 successor：`RQ2_temporal_successor_preregistration.md` 与对应机器YAML冻结training-only q80/q90/q95/q99、3个种子、200/60场景、A/B及三来源的17-job矩阵；阈值`1.0`只作已观察边界复现。独立R4审查最终PASS；`formal_execution_ready=false`，未运行、未打标签，仍待用户单独授权执行。
 
 ## 5. 目标期刊评估：RQ2 单独发 TSG 是否够？
 

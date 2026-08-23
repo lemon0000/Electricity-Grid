@@ -1,0 +1,213 @@
+schema: rq2_h2_temporal_successor_preregistration_v1
+
+preregistration:
+  id: rq2_h2_temporal_successor_preregistration_v1
+  date: "2026-08-23"
+  status: repository_local_frozen_before_formal_successor_execution
+  parent_commit_sha: 427b8bb714f389565e68e632d0760f271923bf42
+  user_authorization_scope: write_preregistration_and_batch_config_without_running
+  formal_execution_ready: false
+  formal_successor_solver_outcomes_observed: false
+  source_trace_files_available_to_authors: true
+  prior_temporal_v3_mechanism_outcome_observed: true
+  prior_temporal_v3_threshold: 1.0
+  prior_temporal_v3_h2_robust_across_sources: false
+  prior_result_role: descriptive_parent_evidence_not_confirmatory_successor_evidence
+
+research_question:
+  id: RQ2_H2_temporal_successor
+  estimand: >
+    Whether B6 double commitment causes greater fixed-policy out-of-sample
+    service failure or expected access shortfall than the correct shared
+    temporal envelope across training-source, network-definition, threshold
+    and random-window sampling choices.
+  unit_of_analysis: one_frozen_threshold_seed_network_method_training_source_cell
+  evidence_tier: trace_derived_and_synthetic_mechanism_evidence
+  causal_claimed: false
+  empirical_outage_probability_claimed: false
+  engineering_or_contract_certification_claimed: false
+  security_certified: false
+  formal_vma_published: false
+
+training_only_threshold_derivation:
+  source_path: data/processed/google_power_2019/v1/hourly_shape.csv
+  source_sha256: 1089b409c06ad9a1ce1c0cfa9ceea4110a0b74c9a40cfe65e7614610f9f23931
+  source_column: measured_power_util_unweighted_mean
+  total_hours: 744
+  split_fraction: 0.5
+  training_hours: 372
+  training_peak_raw: 0.726149691358
+  normalization: divide_all_hours_by_training_peak
+  quantile_rule: Hyndman_Fan_type_7_linear_interpolation
+  holdout_values_used_to_choose_thresholds: false
+  thresholds:
+    q80:
+      quantile: 0.80
+      normalized_threshold: 0.9708612624236891
+      training_hours_at_or_above: 75
+    q90:
+      quantile: 0.90
+      normalized_threshold: 0.9805009394329972
+      training_hours_at_or_above: 38
+      role: primary_confirmatory_threshold
+    q95:
+      quantile: 0.95
+      normalized_threshold: 0.9855289118330433
+      training_hours_at_or_above: 19
+    q99:
+      quantile: 0.99
+      normalized_threshold: 0.9921054212765977
+      training_hours_at_or_above: 4
+    boundary_1p0:
+      normalized_threshold: 1.0
+      role: prior_observed_descriptive_boundary_replication_not_confirmatory
+
+frozen_design:
+  base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+  batch_config: configs/rq2_h2_temporal_successor_batch_v1.yaml
+  runner: experiments.run_rq2_h2_temporal_source_ablation
+  batch_driver: experiments.run_rq2_formal_batch
+  job_count: 17
+  confirmatory_thresholds: [q80, q90, q95, q99]
+  descriptive_thresholds: [boundary_1p0]
+  seeds: [20260822, 20260823, 20260824]
+  primary_seed: 20260822
+  n_train: 200
+  n_holdout: 60
+  core_window_hours: 8
+  recovery_tail_hours: 4
+  arms: [manual, generated, reduced]
+  network_methods: [minimum_curtailment, overload_sensitivity]
+  primary_reduction_target_count: 50
+  reduction_sensitivity_target_counts: [25, 50, 100]
+  reduction_ground_norm_order: 2.0
+  solver_name: highs
+  model_beta: 0.9
+  model_lambda_risk: 0.1
+  fixed_window_rationale: >
+    Window and recovery-tail lengths remain fixed in this first successor
+    because changing horizon also changes exposure duration and would confound
+    the manual/generated/reduced comparison. Any horizon study requires a
+    separate preregistration with exposure-normalized estimands.
+  trace_pairing: independent_marginal_windows_from_different_clusters
+  linked_carry_in: false
+
+job_families:
+  threshold_seed_matrix:
+    job_ids:
+      [T01_q80_seed_20260822, T02_q80_seed_20260823,
+       T03_q80_seed_20260824, T04_q90_seed_20260822,
+       T05_q90_seed_20260823, T06_q90_seed_20260824,
+       T07_q95_seed_20260822, T08_q95_seed_20260823,
+       T09_q95_seed_20260824, T10_q99_seed_20260822,
+       T11_q99_seed_20260823, T12_q99_seed_20260824]
+    role: confirmatory
+  prior_boundary_replication:
+    job_ids:
+      [T13_boundary_1p0_seed_20260822,
+       T14_boundary_1p0_seed_20260823,
+       T15_boundary_1p0_seed_20260824]
+    role: descriptive_only
+  reduction_resolution:
+    job_ids:
+      [T04_q90_seed_20260822,
+       R01_q90_seed_20260822_reduce_25,
+       R02_q90_seed_20260822_reduce_100]
+    role: preregistered_sensitivity
+
+outcomes_and_decision_rules:
+  correctness_gate:
+    require_every_job_gate_passed: true
+    require_all_requested_arms_evaluable: true
+    require_no_solver_unresolved_leaf: true
+    scientific_h2_result_is_not_a_correctness_gate: true
+  cell_level_h2:
+    definition: >
+      For one threshold, seed and network method, all manual/generated/reduced
+      arms must be H2-evaluable and each arm must report non-improving B6
+      failure probability and expected shortfall, with at least one strictly
+      worse service metric.
+    implementation_field: h2_robust_across_sources
+  primary_confirmatory_claim:
+    cells: q90_x_3_seeds_x_2_network_methods
+    required_positive_cells: 6
+    total_cells: 6
+    failure_rule: >
+      Any non-evaluable or non-positive cell rejects the claim of primary-point
+      robustness; no seed or network definition may be omitted.
+  threshold_generalization_claim:
+    cells: q80_q90_q95_q99_x_3_seeds_x_2_network_methods
+    required_positive_cells: 24
+    total_cells: 24
+    failure_rule: >
+      Any non-evaluable or non-positive cell rejects broad threshold
+      generalization. The complete failure region remains reportable.
+  reduction_resolution_claim:
+    cells: q90_seed_20260822_x_targets_25_50_100_x_2_network_methods
+    required_positive_cells: 6
+    total_cells: 6
+  mandatory_reported_metrics:
+    - correct_committed_flexibility_mw
+    - b6_committed_flexibility_mw
+    - b6_extra_failure_probability
+    - b6_extra_expected_shortfall_mwh
+    - b6_extra_expected_terminal_debt_mwh
+    - h2_evaluated
+    - h2_b6_underdelivers_out_of_sample
+    - all_requested_arms_evaluable
+    - h2_robust_across_sources
+    - shared_holdout_sha256
+    - generated_draw_sha256
+  unresolved_handling: report_cell_as_not_evaluable_and_fail_any_claim_requiring_it
+  right_censoring_handling: report_separately_and_do_not_add_to_failure_probability
+  multiplicity_and_uncertainty: >
+    No p-values or IID confidence intervals are claimed. Seeds measure
+    algorithmic window-sampling robustness, not independent populations.
+    Complete cell-level outcomes and effect magnitudes are reported.
+  selective_reporting_allowed: false
+  negative_or_mixed_results_must_be_reported: true
+
+frozen_honesty_boundaries:
+  network_activation_is_observed_outage: false
+  google_and_alibaba_are_jointly_synchronized: false
+  recovery_parameters_are_empirical: false
+  selected_n1_dc_is_full_n1_or_ac_security: false
+  holdout_failure_rate_is_empirical_population_probability: false
+  security_certified: false
+  certification_blockers:
+    - threshold_stress_indicator_is_not_observed_outage_timing
+    - independent_trace_marginals_from_different_clusters
+    - synthetic_recovery_headroom_and_envelope_parameters
+    - no_linked_cross_window_carry_in
+    - selected_n1_dc_not_full_n1_or_ac_security
+
+frozen_inputs:
+  base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+  batch_config_sha256: bfbd0a43dcda52a7bc3805801f75a14ede3a7478ff07438efca8e2fe0694e446
+  google_trace_sha256: 1089b409c06ad9a1ce1c0cfa9ceea4110a0b74c9a40cfe65e7614610f9f23931
+  alibaba_trace_sha256: 30aaf50d27bc2487e760ae274f593a429ff675a1f13bbcfb7d57ccf69745f4b4
+  temporal_ablation_runner_sha256: fefd42eeeb7d552b4939cc5bda73afe624786bc8ff758d323996ba3c43ff60e7
+  temporal_holdout_runner_sha256: 52ad9c3396e393260fd4c648dc27355aad1eeaabcb1af821261f335bd3047ad8
+  temporal_generator_sha256: 8769588882099aace6d9c61faf51db4491920bad3610ac54097f7c7f941f5307
+  temporal_reducer_sha256: 2a1af9cb2483938480ca8e1cb4518c1d23fa1421daac1d5597b608018648ef2d
+  batch_driver_sha256: ba57540abbea5bae69bdda0ed4ff754009e436cb9a748799d18786f1bf09744d
+  executor_script_sha256: e1ec31300b0dcc2b23c44000844628b846e27fec3255b00c8e25a6f7d0b18d57
+  prior_v3_summary_sha256: 18e8899cff087319833e172248627845f71fceb177446e730ee599d863f9e1e7
+  prior_v3_manifest_sha256: 94867a58743904d46822634a372edf421c0d92c9838f0fc7dcf503994f492cd1
+
+execution_control:
+  experiment_yaml_must_remain_pytest_smoke: true
+  run_tag_created_by_this_task: false
+  formal_runner_invoked_by_this_task: false
+  solver_invoked_by_this_task: false
+  required_before_execution:
+    - independent_R4_sol_reviewer_PASS
+    - explicit_user_authorization_for_formal_execution
+    - trigger_commit_points_to_exact_reviewed_preregistration
+    - new_immutable_run_tag
+  prohibited:
+    - changing_thresholds_after_viewing_successor_results
+    - dropping_negative_or_unresolved_cells
+    - reusing_or_force_moving_a_run_tag
+    - interpreting_timeout_as_mathematical_infeasibility
+    - claiming_engineering_security_or_empirical_outage_probability

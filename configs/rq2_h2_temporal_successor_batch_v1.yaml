@@ -1,0 +1,160 @@
+# RQ2 temporal H2 formal successor batch.
+#
+# This file freezes 17 jobs before any successor result exists. Jobs T01-T12
+# form the confirmatory 4-threshold x 3-seed matrix. T13-T15 repeat the
+# previously observed threshold=1.0 boundary at formal scale and are
+# descriptive controls, not confirmatory evidence. R01-R02 assess scenario
+# reduction resolution at the primary q90/seed-20260822 point. Each job runs
+# both network definitions and all manual/generated/reduced training arms.
+#
+# This batch is not execution-authorized by this file. configs/experiment.yaml
+# remains kind=pytest-smoke, and no run-* tag is created by preregistration.
+
+batch:
+  id: rq2_h2_temporal_successor_batch_v1
+  output_root: results/tables/rq2_h2_temporal_successor_batch_v1
+  preregistration_id: rq2_h2_temporal_successor_preregistration_v1
+  formal_execution_ready: false
+  successor_outcomes_observed: false
+
+jobs:
+  # Confirmatory threshold grid: training-only q80/q90/q95/q99 x three seeds.
+  - id: T01_q80_seed_20260822
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9708612624236891
+      generator.seed: 20260822
+
+  - id: T02_q80_seed_20260823
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9708612624236891
+      generator.seed: 20260823
+
+  - id: T03_q80_seed_20260824
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9708612624236891
+      generator.seed: 20260824
+
+  - id: T04_q90_seed_20260822
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9805009394329972
+      generator.seed: 20260822
+
+  - id: T05_q90_seed_20260823
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9805009394329972
+      generator.seed: 20260823
+
+  - id: T06_q90_seed_20260824
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9805009394329972
+      generator.seed: 20260824
+
+  - id: T07_q95_seed_20260822
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9855289118330433
+      generator.seed: 20260822
+
+  - id: T08_q95_seed_20260823
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9855289118330433
+      generator.seed: 20260823
+
+  - id: T09_q95_seed_20260824
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9855289118330433
+      generator.seed: 20260824
+
+  - id: T10_q99_seed_20260822
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9921054212765977
+      generator.seed: 20260822
+
+  - id: T11_q99_seed_20260823
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9921054212765977
+      generator.seed: 20260823
+
+  - id: T12_q99_seed_20260824
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9921054212765977
+      generator.seed: 20260824
+
+  # Descriptive replication of the already-observed threshold=1.0 boundary.
+  - id: T13_boundary_1p0_seed_20260822
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 1.0
+      generator.seed: 20260822
+
+  - id: T14_boundary_1p0_seed_20260823
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 1.0
+      generator.seed: 20260823
+
+  - id: T15_boundary_1p0_seed_20260824
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 1.0
+      generator.seed: 20260824
+
+  # Reduction-resolution sensitivity at the primary q90/seed-20260822 point.
+  - id: R01_q90_seed_20260822_reduce_25
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9805009394329972
+      generator.seed: 20260822
+      reduction.target_count: 25
+
+  - id: R02_q90_seed_20260822_reduce_100
+    runner: experiments.run_rq2_h2_temporal_source_ablation
+    base_config: configs/rq2_h2_temporal_successor_formal_v1.yaml
+    base_config_sha256: 5feb9ebfe778127668829ab2d1be213bb3466d89e6ecd6c8221c82414890ebf1
+    overrides:
+      generator.network_activation_threshold: 0.9805009394329972
+      generator.seed: 20260822
+      reduction.target_count: 100

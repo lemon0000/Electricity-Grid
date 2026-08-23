@@ -63,6 +63,17 @@
 
 本门仍没有跨窗口linked carry-in、观测事故时点、真实恢复headroom或经验概率，不能报告经验履约失败率。Google压力阈值只是负荷形状触发器，不是故障发生模型；Google与Alibaba来自不同集群，只能作为独立边缘窗口配对。所有结果继续保持`security_certified=false`。
 
+R4 temporal successor 已在
+`configs/rq2_h2_temporal_successor_preregistration_v1.yaml` 冻结，但尚未
+执行。确认性阈值只由 Google training 半段按 Type-7 q80/q90/q95/q99
+机械计算；已观察过阴性结果的阈值 `1.0` 仅作为描述性边界复现。正式矩阵为
+17 job，固定 8 小时 core、4 小时 recovery tail、200/60
+training/holdout、3 个种子、A/B 两种网络口径和三种训练来源。当前
+`formal_execution_ready=false`，`configs/experiment.yaml` 仍为
+`pytest-smoke`。R4 独立审查已 PASS；剩余执行阻塞是用户另行明确授权和新的
+不可变 `run-*` 标签。不得在看到 successor 结果后删除 cell、改变阈值或把
+描述性 `1.0` 边界并入确认性结论。
+
 ## M4 B0-B2机制门验收
 
 公平比较冻结为输入签名ID`rts24_b0_b2_common_inputs_v1`。规范化schema为`rts24_common_fair_inputs_v2`，当前完整payload的SHA-256为`76cda29db68705cc3f2ef5025f32d30ef07ceea62a552a97c45b01bf83287794`：三政策共同使用`50/100/200/250 MW`需求路径、`2184/2184/2208/2208 h`季度权重、0.8系统负荷倍率、相同bus 8 POI与两季度branch 11/12捆绑增容工程、排除branch 10后的同一107态安全集合、同一响应前/持续态额定值和纠正再调度边界。payload还覆盖算例来源版本、服务窗口口径、完整安全状态描述、目标和solver；任一公平输入漂移都会改变哈希。工程与服务参数均为合成机制参数，政策之间没有更换需求、安全状态或数值容差。

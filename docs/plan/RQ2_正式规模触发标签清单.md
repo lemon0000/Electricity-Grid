@@ -99,6 +99,19 @@ git push origin run-20260822-002
 `batch_config: configs/rq2_formal_batch_network_rts24_v2.yaml`。该清单已绑定
 `configs/rq2_l5_economic_network_rts24.yaml` 的 SHA-256；本次开发不打标签、
 不启动该正式批次。
+
+Temporal H2 successor 另有独立 R4 预注册：
+
+- 预注册：`configs/rq2_h2_temporal_successor_preregistration_v1.yaml`
+- base config：`configs/rq2_h2_temporal_successor_formal_v1.yaml`
+- batch config：`configs/rq2_h2_temporal_successor_batch_v1.yaml`
+- 说明：`docs/plan/RQ2_temporal_successor_preregistration.md`
+
+该 17-job 清单当前 `formal_execution_ready=false`。本次只冻结配置，不修改
+`configs/experiment.yaml`、不创建或推送 `run-*` 标签。即使 R4 审查通过，也
+必须等待用户另行明确授权；届时使用全新标签，并在 trigger commit 中显式声明
+`batch_config: configs/rq2_h2_temporal_successor_batch_v1.yaml`。阈值、种子、
+样本数、窗口长度、恢复尾部和缩减规模不得在授权提交中修改。
 git add configs/experiment.yaml
 git commit -m "revert trigger: experiment.yaml 恢复 pytest-smoke 默认"
 git push origin experiment
