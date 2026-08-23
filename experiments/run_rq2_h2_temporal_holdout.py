@@ -31,6 +31,17 @@ from src.evaluation.temporal_economic_holdout import (
 )
 from src.grid import load_rts24
 from src.grid.network_grid_need import NETWORK_GRID_NEED_METHODS
+from src.scenarios.temporal_scenario_reduction import (
+    reduce_temporal_scenarios_fast_forward,
+)
+from src.scenarios.temporal_trace_scenario_generator import (
+    TemporalNetworkScenario,
+    TemporalTraceScenarioConfig,
+    generate_temporal_holdout_scenarios,
+)
+from src.scenarios.trace_scenario_generator import (
+    load_peak_normalized_shape_from_csv,
+)
 
 _ROOT = Path(__file__).resolve().parents[1]
 _LEAF_FIELDS = (
@@ -86,7 +97,10 @@ def _write_leaves(path: Path, rows: list[dict[str, object]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(
-            handle, fieldnames=_LEAF_FIELDS, extrasaction="raise"
+            handle,
+            fieldnames=_LEAF_FIELDS,
+            extrasaction="raise",
+            lineterminator="\n",
         )
         writer.writeheader()
         writer.writerows(rows)
@@ -239,6 +253,209 @@ def _policy_summary(policy) -> dict[str, object]:
     return raw
 
 
+def _positive_integer(raw: object, label: str) -> int:
+    value = _integer(raw, label)
+    if value < 1:
+        raise ValueError(f"{label} must be positive")
+    return value
+
+
+def _trace_shape(raw: object, label: str, split_fraction: float):
+    block = _mapping(raw, label)
+    path = _path(block.get("path"), f"{label}.path")
+    column = block.get("column")
+    if not isinstance(column, str) or not column:
+        raise ValueError(f"{label}.column must be explicit")
+    external_peak = block.get("external_peak")
+    return load_peak_normalized_shape_from_csv(
+        path,
+        column=column,
+        name=label.rsplit(".", 1)[-1],
+        split_fraction=split_fraction if external_peak is None else None,
+        external_peak=(
+            _number(external_peak, f"{label}.external_peak")
+            if external_peak is not None
+            else None
+        ),
+        source=f"{block.get('path')}::{column}::sha256={_sha256(path)}",
+    )
+
+
+def _scenario_to_raw(scenario: TemporalNetworkScenario) -> dict[str, object]:
+    return {
+        "name": scenario.name,
+        "probability": scenario.probability,
+        "periods": list(scenario.periods),
+        "system_load_multiplier": list(scenario.system_load_multiplier),
+        "data_center_demand_mw": list(scenario.data_center_demand_mw),
+        "network_call_active": list(scenario.network_call_active),
+        "green_call_mw": list(scenario.green_call_mw),
+        "connected_demand_mw": list(scenario.connected_demand_mw),
+        "recovery_headroom_mw": list(scenario.recovery_headroom_mw),
+        "completed_periods": sorted(scenario.completed_periods),
+        "require_terminal_event_inactive": (
+            scenario.require_terminal_event_inactive
+        ),
+        "boundary_state_status": scenario.boundary_state_status,
+    }
+
+
+def _generated_temporal_scenarios(raw: object):
+    generator = _mapping(raw, "generator")
+    status = generator.get("parameter_status")
+    if not isinstance(status, str) or not status:
+        raise ValueError("generator.parameter_status must be explicit")
+    period = generator.get("period")
+    if not isinstance(period, str) or not period:
+        raise ValueError("generator.period must be explicit")
+    split_fraction = _number(
+        generator.get("split_fraction"), "generator.split_fraction"
+    )
+    generated = generate_temporal_holdout_scenarios(
+        TemporalTraceScenarioConfig(
+            grid_stress_shape=_trace_shape(
+                generator.get("grid_stress_shape"),
+                "generator.grid_stress_shape",
+                split_fraction,
+            ),
+            green_workload_shape=_trace_shape(
+                generator.get("green_workload_shape"),
+                "generator.green_workload_shape",
+                split_fraction,
+            ),
+            data_center_demand_mw=_number(
+                generator.get("data_center_demand_mw"),
+                "generator.data_center_demand_mw",
+            ),
+            system_load_multiplier=_number(
+                generator.get("system_load_multiplier"),
+                "generator.system_load_multiplier",
+            ),
+            green_call_scale_mw=_number(
+                generator.get("green_call_scale_mw"),
+                "generator.green_call_scale_mw",
+            ),
+            network_activation_threshold=_number(
+                generator.get("network_activation_threshold"),
+                "generator.network_activation_threshold",
+            ),
+            recovery_headroom_mw=_number(
+                generator.get("recovery_headroom_mw"),
+                "generator.recovery_headroom_mw",
+            ),
+            core_window_hours=_positive_integer(
+                generator.get("core_window_hours"),
+                "generator.core_window_hours",
+            ),
+            recovery_tail_hours=_positive_integer(
+                generator.get("recovery_tail_hours"),
+                "generator.recovery_tail_hours",
+            ),
+            n_train=_positive_integer(
+                generator.get("n_train"), "generator.n_train"
+            ),
+            n_holdout=_positive_integer(
+                generator.get("n_holdout"), "generator.n_holdout"
+            ),
+            seed=_integer(generator.get("seed"), "generator.seed"),
+            period=period,
+            parameter_status=status,
+            split_fraction=split_fraction,
+        )
+    )
+    return generated
+
+
+def _source_scenarios(
+    config: dict,
+    scenario_source: str,
+) -> tuple[
+    tuple[dict, ...],
+    tuple[dict, ...],
+    str,
+    str,
+    dict[str, object],
+]:
+    if scenario_source == "manual":
+        training = _raw_scenarios(config.get("training_scenarios"))
+        holdout = _raw_scenarios(config.get("holdout_scenarios"))
+        manual_status = (
+            "manual_chronological_scenarios_synthetic_not_empirical"
+        )
+        training_status = config.get(
+            "training_parameter_status", manual_status
+        )
+        holdout_status = config.get("holdout_parameter_status", manual_status)
+        if not isinstance(training_status, str) or not training_status:
+            raise ValueError("training_parameter_status must be explicit")
+        if not isinstance(holdout_status, str) or not holdout_status:
+            raise ValueError("holdout_parameter_status must be explicit")
+        return (
+            training,
+            holdout,
+            training_status,
+            holdout_status,
+            {
+                "source": "manual",
+                "training_parameter_status": training_status,
+                "holdout_parameter_status": holdout_status,
+                "reduction": None,
+            },
+        )
+    if scenario_source not in {"generated", "reduced"}:
+        raise ValueError(
+            "scenario_source must be 'manual', 'generated', or 'reduced'"
+        )
+    generated = _generated_temporal_scenarios(config.get("generator"))
+    training = generated.training_scenarios
+    source_status = generated.parameter_status
+    reduction_provenance = None
+    if scenario_source == "reduced":
+        reduction = _mapping(config.get("reduction"), "reduction")
+        scales = _mapping(
+            reduction.get("component_scales"),
+            "reduction.component_scales",
+        )
+        reduced = reduce_temporal_scenarios_fast_forward(
+            training,
+            target_count=_positive_integer(
+                reduction.get("target_count"), "reduction.target_count"
+            ),
+            component_scales={
+                key: _number(value, f"reduction.component_scales.{key}")
+                for key, value in scales.items()
+            },
+            ground_norm_order=_number(
+                reduction.get("ground_norm_order", 2.0),
+                "reduction.ground_norm_order",
+            ),
+            parameter_status=source_status,
+        )
+        training = reduced.reduced_scenarios
+        source_status = reduced.parameter_status
+        reduction_provenance = reduced.provenance
+    return (
+        _raw_scenarios(
+            [_scenario_to_raw(scenario) for scenario in training]
+        ),
+        _raw_scenarios(
+            [
+                _scenario_to_raw(scenario)
+                for scenario in generated.holdout_scenarios
+            ]
+        ),
+        source_status,
+        generated.parameter_status,
+        {
+            "source": scenario_source,
+            "training_parameter_status": source_status,
+            "holdout_parameter_status": generated.parameter_status,
+            "generator": generated.provenance,
+            "reduction": reduction_provenance,
+        },
+    )
+
+
 def run(config_path: Path) -> dict[str, object]:
     config_bytes = config_path.read_bytes()
     config = _mapping(yaml.safe_load(config_bytes), "config")
@@ -254,12 +471,8 @@ def run(config_path: Path) -> dict[str, object]:
     if evaluation.get("formal_vma_published") is not False:
         raise ValueError("formal_vma_published must remain false")
     scenario_source = config.get("scenario_source")
-    if scenario_source != "manual":
-        raise ValueError(
-            "temporal H2 currently supports only manual chronological "
-            "scenarios; scalar generated/reduced scenarios cannot be promoted "
-            "to temporal evidence"
-        )
+    if not isinstance(scenario_source, str):
+        raise TypeError("scenario_source must be a string")
 
     network = _mapping(config.get("network"), "network")
     if network.get("case_name") != "case24_ieee_rts":
@@ -300,8 +513,13 @@ def run(config_path: Path) -> dict[str, object]:
         raise ValueError("model.solver_name must be explicit")
     envelope = _envelope(config.get("envelope"))
     coefficients = _coefficients(config.get("coefficients"))
-    raw_training = _raw_scenarios(config.get("training_scenarios"))
-    raw_holdout = _raw_scenarios(config.get("holdout_scenarios"))
+    (
+        raw_training,
+        raw_holdout,
+        training_source_status,
+        holdout_source_status,
+        source_provenance,
+    ) = _source_scenarios(config, scenario_source)
     if {item["name"] for item in raw_training} & {
         item["name"] for item in raw_holdout
     }:
@@ -341,7 +559,9 @@ def run(config_path: Path) -> dict[str, object]:
             redispatch_fraction_of_pmax=redispatch_fraction,
             sustained_rating=sustained_rating,
             solver_name=solver_name,
-            parameter_status=f"{status}|{network_status}|training",
+            parameter_status=(
+                f"{status}|{network_status}|{training_source_status}|training"
+            ),
         )
         planning_inputs = TemporalEconomicHoldoutInputs(
             training_scenarios=training,
@@ -360,7 +580,9 @@ def run(config_path: Path) -> dict[str, object]:
                 model.get("lambda_risk"), "model.lambda_risk"
             ),
             beta=_number(model.get("beta"), "model.beta"),
-            parameter_status=f"{status}|{network_status}",
+            parameter_status=(
+                f"{status}|{network_status}|{training_source_status}"
+            ),
             service_shortfall_tolerance_mwh=_number(
                 model.get("service_shortfall_tolerance_mwh"),
                 "model.service_shortfall_tolerance_mwh",
@@ -380,10 +602,16 @@ def run(config_path: Path) -> dict[str, object]:
             redispatch_fraction_of_pmax=redispatch_fraction,
             sustained_rating=sustained_rating,
             solver_name=solver_name,
-            parameter_status=f"{status}|{network_status}|holdout",
+            parameter_status=(
+                f"{status}|{network_status}|{holdout_source_status}|holdout"
+            ),
         )
         inputs = replace(
-            planning_inputs, holdout_scenarios=holdout
+            planning_inputs,
+            holdout_scenarios=holdout,
+            parameter_status=(
+                f"{status}|{network_status}|{holdout_source_status}"
+            ),
         )
         result = execute_temporal_economic_holdout(
             inputs, plans, solver_name=solver_name
@@ -405,6 +633,8 @@ def run(config_path: Path) -> dict[str, object]:
         leaves.extend(_leaf_rows(method, result))
         method_summaries[method] = {
             "gate_passed": method_gate,
+            "training_source_parameter_status": training_source_status,
+            "holdout_source_parameter_status": holdout_source_status,
             "correct": _policy_summary(result.correct),
             "b6": _policy_summary(result.b6),
             "h2_evaluated": result.h2_evaluated,
@@ -438,11 +668,14 @@ def run(config_path: Path) -> dict[str, object]:
     summary = {
         "evaluation_id": evaluation_id,
         "scenario_source": scenario_source,
+        "scenario_source_provenance": source_provenance,
         "methods": method_summaries,
         "gate_passed": gate_passed,
         "parameter_status": (
-            f"{status}|{network_status}|fixed_policy_temporal_holdout_"
-            "synthetic_not_empirical"
+            f"{status}|{network_status}|"
+            f"training_source={training_source_status}|"
+            f"holdout_source={holdout_source_status}|"
+            "fixed_policy_temporal_holdout_synthetic_not_empirical"
         ),
         "config_sha256": hashlib.sha256(config_bytes).hexdigest(),
         "effective_config": config,
@@ -455,7 +688,7 @@ def run(config_path: Path) -> dict[str, object]:
             "planned_flexibility_against_the_true_shared_temporal_envelope"
         ),
         "certification_blockers": [
-            "manual_chronologies_and_probabilities_are_synthetic",
+            "chronologies_and_probabilities_are_synthetic_or_trace_derived",
             "network_event_timing_is_not_empirical",
             "recovery_headroom_and_envelope_parameters_are_synthetic",
             "selected_n1_dc_not_full_n1_or_ac_security",

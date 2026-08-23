@@ -954,6 +954,10 @@ H2先分别在training chronology上求解正确模型与B6，冻结各自唯一
 
 H2的正向`underdelivers`判据只比较服务结果：B6相对correct的失败概率和期望短缺能量都不得改善，且至少一项严格恶化。恢复债务差值单独报告但不作为服务优势抵消项，因为少履约本身会机械降低需要恢复的能量；允许较低债务抵消更高短缺会奖励不服务。若任一服务delta为负，则只报告各delta，不生成单向H2结论。
 
+连续trace场景从Google压力形状与Alibaba工作负荷形状各自的training/holdout时间段抽取完整小时窗口，二者只按独立边缘分布配对，不声称跨数据集同钟相关。归一化除数只能来自training段或投前冻结的外部常数；窗口末追加的零调用恢复尾部及其headroom属于合成敏感性。网络事件由冻结阈值将Google压力指标映射为`network_call_active[t]`，该指标不是观测事故时点。
+
+时序场景缩减只作用于generated training分布。距离向量按`network_call_active[t]`、`green_call_mw[t]`、`data_center_demand_mw[t]`和`system_load_multiplier[t]`四个分量的显式尺度标准化后，按小时顺序展平并使用fast-forward选择；代表轨迹必须是输入training轨迹的子集，只允许把删除轨迹的概率质量重分配给最近代表点。holdout不得参与选择、距离计算或概率重分配。manual/generated/reduced消融使用同一份生成后冻结的holdout，H2跨来源稳健性只作结果报告，不作为correctness gate。
+
 ## 11. CFE归属与匹配
 
 CFE只在正常运行状态 $c=0$ 上核算；N-1状态是安全校核，不按事故状态概率重复计入年度用电。

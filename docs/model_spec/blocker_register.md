@@ -17,7 +17,7 @@
 | M6b逐时证据输入与调度接口 | resolved for interface gate | 新增业务/事故/恢复参数实质哈希锁定、同钟/N-1验证器、证据到调度的类型化构造器、跨窗口状态链接及具名安全状态审计；具名6小时和24小时派生benchmark均通过该接口 | 只关闭内部接入歧义和两个具名公开benchmark的软件门；不解除外部证据或安全认证阻塞，`security_certified=false` |
 | RQ2 `grid_need` 从 RTS-24 物理派生 | mechanism-only selected-N-1 DC bridge | 定义A逐状态最小化Bus 8削减并保持热限为硬约束；定义B用outage-topology POI PTDF折算过载；配置禁止手填`grid_need_mw`并保存逐状态provenance | 仅替代L5手填网络需求，不能解除响应时标、branch 10孤岛、full-N1、AC/无功或工程参数阻塞；概率仍非经验事故概率，`security_certified=false` |
 | RQ2 L5共享时序包络 | mechanism-only chronological MIP | `chi=c_grid+c_green`共享事件、能量、恢复与债务状态；B6分离双包络后回放真实合计轨迹；持续时间/事件数/能量/恢复债务均在recourse内为硬约束 | 网络事件时点、恢复头寸和业务包络参数仍为合成敏感性；未形成经验履约概率或合同能力，`security_certified=false` |
-| RQ2 H2时序场景外执行 | mechanism-only manual chronological holdout | training先冻结correct/B6的`D_flex`，holdout只解正确共享recourse；mandatory grid轨迹独立审计失败通道，unresolved与right-censoring单列 | 当前仅manual chronology；旧generated/reduced场景是窗口均值标量，不能升级为时序证据；无linked carry-in和经验事故/恢复分布，`security_certified=false` |
+| RQ2 H2时序场景外执行 | mechanism-only chronological source ablation | training先冻结correct/B6的`D_flex`，holdout只解正确共享recourse；manual/generated/reduced只改变training，使用同一SHA绑定holdout；时序缩减保留输入轨迹 | 首次trace-derived本机配置的跨来源H2为阴性，不能据此调参；仍无linked carry-in和经验事故/恢复分布，`security_certified=false` |
 | RTS-GMLC 6小时selected-N-1 DC SCUC/ED | resolved for scoped public benchmark | `rts_gmlc_google_day0_first6h_selected_n1_dc_scuc_v1`完成2020-01-01 00:00-05:00 UTC六小时求解；每小时12个预注册状态含normal，2轮约束生成后全部状态复核；固定组合ED目标`157084.446540127 USD`，有效master下界`157084.446540126 USD`，认证absolute gap为`1e-9 USD`、relative gap为0；产物manifest SHA-256为`405c5109ef405f1961f6e9e461be5bfa42bd88f074bd30fa49e67006f6edcd10` | 仅该具名范围可置`chronological_dispatch_request_built=true`和`chronological_grid_dispatch_coupled=true`；初值为派生自由边界，事故表为空，`completed_periods`为空，且非实时、非完整N-1、非AC，`security_certified=false` |
 | RTS-GMLC 24小时selected-N-1 DC SCUC/ED | resolved for scoped public benchmark | `rts_gmlc_google_day0_full24h_selected_n1_dc_scuc_v1`完成完整day-0 24小时求解；每小时12个预注册状态，关键支路`A12-1/B22/C6/CA-1`、关键机组`121_NUCLEAR_1/213_CC_3/313_CC_1`，3轮约束生成后全状态固定组合ED目标`1193156.5322057535 USD`，有效master下界`1193155.3829459916 USD`，absolute/relative gap为`1.1492597619 USD`/`9.632095e-7`，独立残差最大约`1.4835e-9`；产物manifest SHA-256为`61b9d8c127354375769b5c1cf9e45e4340eafb0e89d8b07acbd8a08c9e1a0399` | 只解除该具名公开软件benchmark的24小时计算规模门；不解除真实绝对MW、真实柔性/恢复、观测事故、full-N1、工程级AC或`security_certified`/正式VMA阻塞 |
 | RTS-GMLC 六候选共同状态多POI比较 | resolved for scoped benchmark comparison | 机械候选`108/120/208/220/308/320`共同使用每小时24个selected状态；120/108/220/320可行，208/308在自由边界连续commitment LP前缀中model-infeasible；bus 120为唯一证书分离的最低成本可行候选；aggregate manifest为`85f157a5f14f73ffa851c8dc1bc263f67719d794a900101b987dcab3f21dac66` | bus 108是已见锚点，不能称六点全盲；模型不可行不是工程场址不可接入，最低DC成本也不是站址推荐 |
@@ -57,7 +57,11 @@
 
 `src/evaluation/temporal_economic_holdout.py` 与 `experiments/run_rq2_h2_temporal_holdout.py` 已实现两阶段固定策略：先在training chronology上分别规划correct/B6的`D_flex`，两套计划都冻结后才开始任何holdout网络派生与recourse；每条holdout只求解正确共享包络。recourse不可行时另解green为零、`c_grid>=grid_need`且固定同一预算的mandatory-grid时序MIP，只有该诊断也证明不可行才计hard failure；固定下界轨迹审计只提供violation分类，solver unresolved不计为失败。未完成终端窗口保留并报告debt/state，right-censoring不计入失败概率。H2服务结论比较失败概率与短缺能量；恢复债务单列，不能以“少服务导致较低债务”抵消服务失败。
 
-本门当前只关闭manual chronological mechanism case。旧 `trace_scenario_generator.py` 和fast-forward reduction的输入是窗口均值后的二维标量，已丢失小时顺序，故新runner对`generated/reduced` fail-closed；不得把旧H2的200/60标量样本直接称为temporal H2。解除该限制需新增split-aware连续窗口生成器、时序距离与只作用于training的场景缩减，并重新R3审查。当前也没有跨窗口linked carry-in、观测事故时点、真实恢复headroom或经验概率，不能报告经验履约失败率。
+连续时序软件门已实现：`temporal_trace_scenario_generator.py`从training/holdout互斥时间段抽取完整小时窗口并追加合成恢复尾部；`temporal_scenario_reduction.py`按四个显式缩放分量的完整有序轨迹执行fast-forward，只重分配training概率且代表点保持为输入子集。`run_rq2_h2_temporal_source_ablation.py`在manual/generated/reduced三臂间固定同一份生成后SHA绑定的holdout，并原子发布arms、leaves、summary与manifest。旧二维均值场景仍不得升级为时序证据。
+
+本机配置`rq2_h2_temporal_source_ablation_rts24_v3`的三臂和A/B网络口径均通过solver、unresolved和artifact correctness gate，但`h2_robust_across_sources=false`。冻结阈值`1.0`下共享holdout没有网络事件，manual臂在该holdout没有B6额外欠交付，generated/reduced两模型的提交量约同为`12.3244 MW`。该阴性结果证明当前trace-threshold敏感性不足以支持跨来源H2，不得以结果为依据事后改变阈值。后续若做阈值、窗口或种子敏感性，必须先冻结网格并完整报告失败区域。
+
+本门仍没有跨窗口linked carry-in、观测事故时点、真实恢复headroom或经验概率，不能报告经验履约失败率。Google压力阈值只是负荷形状触发器，不是故障发生模型；Google与Alibaba来自不同集群，只能作为独立边缘窗口配对。所有结果继续保持`security_certified=false`。
 
 ## M4 B0-B2机制门验收
 
