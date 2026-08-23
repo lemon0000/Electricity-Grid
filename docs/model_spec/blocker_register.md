@@ -16,6 +16,7 @@
 | M6a F1-F3连续包络消融 | resolved for synthetic mechanism gate | 锁定M3网络调用证书；同一full-X轨迹下F1/F2通过、F3因恢复债务失败 | 证明MW-only会漏判恢复不可行；网络回放为零调用退化结果，不是合同或逐时网络认证 |
 | M6b逐时证据输入与调度接口 | resolved for interface gate | 新增业务/事故/恢复参数实质哈希锁定、同钟/N-1验证器、证据到调度的类型化构造器、跨窗口状态链接及具名安全状态审计；具名6小时和24小时派生benchmark均通过该接口 | 只关闭内部接入歧义和两个具名公开benchmark的软件门；不解除外部证据或安全认证阻塞，`security_certified=false` |
 | RQ2 `grid_need` 从 RTS-24 物理派生 | mechanism-only selected-N-1 DC bridge | 定义A逐状态最小化Bus 8削减并保持热限为硬约束；定义B用outage-topology POI PTDF折算过载；配置禁止手填`grid_need_mw`并保存逐状态provenance | 仅替代L5手填网络需求，不能解除响应时标、branch 10孤岛、full-N1、AC/无功或工程参数阻塞；概率仍非经验事故概率，`security_certified=false` |
+| RQ2 L5共享时序包络 | mechanism-only chronological MIP | `chi=c_grid+c_green`共享事件、能量、恢复与债务状态；B6分离双包络后回放真实合计轨迹；持续时间/事件数/能量/恢复债务均在recourse内为硬约束 | 网络事件时点、恢复头寸和业务包络参数仍为合成敏感性；未形成经验履约概率或合同能力，`security_certified=false` |
 | RTS-GMLC 6小时selected-N-1 DC SCUC/ED | resolved for scoped public benchmark | `rts_gmlc_google_day0_first6h_selected_n1_dc_scuc_v1`完成2020-01-01 00:00-05:00 UTC六小时求解；每小时12个预注册状态含normal，2轮约束生成后全部状态复核；固定组合ED目标`157084.446540127 USD`，有效master下界`157084.446540126 USD`，认证absolute gap为`1e-9 USD`、relative gap为0；产物manifest SHA-256为`405c5109ef405f1961f6e9e461be5bfa42bd88f074bd30fa49e67006f6edcd10` | 仅该具名范围可置`chronological_dispatch_request_built=true`和`chronological_grid_dispatch_coupled=true`；初值为派生自由边界，事故表为空，`completed_periods`为空，且非实时、非完整N-1、非AC，`security_certified=false` |
 | RTS-GMLC 24小时selected-N-1 DC SCUC/ED | resolved for scoped public benchmark | `rts_gmlc_google_day0_full24h_selected_n1_dc_scuc_v1`完成完整day-0 24小时求解；每小时12个预注册状态，关键支路`A12-1/B22/C6/CA-1`、关键机组`121_NUCLEAR_1/213_CC_3/313_CC_1`，3轮约束生成后全状态固定组合ED目标`1193156.5322057535 USD`，有效master下界`1193155.3829459916 USD`，absolute/relative gap为`1.1492597619 USD`/`9.632095e-7`，独立残差最大约`1.4835e-9`；产物manifest SHA-256为`61b9d8c127354375769b5c1cf9e45e4340eafb0e89d8b07acbd8a08c9e1a0399` | 只解除该具名公开软件benchmark的24小时计算规模门；不解除真实绝对MW、真实柔性/恢复、观测事故、full-N1、工程级AC或`security_certified`/正式VMA阻塞 |
 | RTS-GMLC 六候选共同状态多POI比较 | resolved for scoped benchmark comparison | 机械候选`108/120/208/220/308/320`共同使用每小时24个selected状态；120/108/220/320可行，208/308在自由边界连续commitment LP前缀中model-infeasible；bus 120为唯一证书分离的最低成本可行候选；aggregate manifest为`85f157a5f14f73ffa851c8dc1bc263f67719d794a900101b987dcab3f21dac66` | bus 108是已见锚点，不能称六点全盲；模型不可行不是工程场址不可接入，最低DC成本也不是站址推荐 |
@@ -44,6 +45,12 @@
 两线手算测试固定为80 MW POI负荷、两条40 MW并联线、单线故障，A与B均须返回40 MW。RTS-24回归使用0.8系统负荷、250 MW Bus 8负荷、37条非孤岛支路、32台正容量机组和0.5·Pmax纠正边界，A/B均得到36.8 MW且关键状态为`branch_11_sustained`；这仍不是正式批次或canonical结果。入口拒绝任何手填`grid_need_mw`，要求物理POI负荷与L5 `connected_demand_mw`一致，并将派生值送入既有L5的硬约束`c_grid >= grid_need`；B若估算削减超过POI负荷则保留估算值但禁止构造L5场景。逐状态审计覆盖节点平衡、热限、发电上下界、纠正边界、故障机组归零、潮流方程和削减边界。所有产物必须保留`derived`、`not_empirical_outage`和`security_certified=false`。
 
 本门只移除了“`grid_need`完全手填”的结构性缺陷。0.5·Pmax仍是无响应时标的合成边界，branch 10继续因非计划孤岛被排除，且没有full-N1、逐时SCUC、AC电压/无功、接入设备和工程控制参数。因此不得把A/B结果解释为容量认证、真实事故概率或工程可行性。
+
+## RQ2 L5时序recourse机制门
+
+`src/models/economic_temporal_stochastic.py` 已把第10.2-10.3节约束放入优化而非事后筛查。正确模型只有一套物理状态；B6分别为网络、绿电维护两套状态，其模型内可行性仅代表错误签约逻辑。所有B6结果再以合计调用回放 `evaluate_chronological_flexibility`，由评估器按最早可恢复规则确定唯一共享恢复轨迹；该回放失败是预期待量化结果，不使求解器 gate 伪装成失败。
+
+两类证据已固定：微型手算覆盖同小时重复承诺、最大持续时间、事件次数、累计能量、恢复债务，以及未完成终端债务的保留与报告；当前模型仍要求窗口起点为显式零carry-in，尚未实现跨窗口linked carry-in。8小时RTS-24机制算例使用合成单事件时点，A/B均派生`36.8 MW`，正确模型 provision `76.8 MW`，B6 provision `40 MW`，B6真实合计包络失败。该数值只证明机制链可运行；事件时点、恢复头寸、包络参数和单路径概率均非经验值，正式实验与统计外推仍阻塞。
 
 ## M4 B0-B2机制门验收
 
