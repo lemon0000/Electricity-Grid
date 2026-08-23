@@ -36,10 +36,10 @@ pytest.importorskip("pyomo")
 
 from experiments import run_rq2_formal_batch as batch
 
-
 _L5_BASE = "configs/rq2_l5_economic_stochastic_formal.yaml"
 _H2_BASE = "configs/rq2_h2_stochastic_holdout_generated_formal.yaml"
 _ABLATION_BASE = "configs/rq2_h2_scenario_source_ablation_formal.yaml"
+_NETWORK_BASE = "configs/rq2_l5_economic_network_rts24.yaml"
 
 
 def _tiny_batch(tmp_path: Path) -> dict:
@@ -121,6 +121,10 @@ def test_batch_runs_all_reviewed_entry_points_and_writes_manifest(tmp_path):
         assert len(record["base_config_sha256"]) == 64
         assert record["gate_passed"] is True
         assert record["security_certified"] is False
+        assert "network_methods" not in record
+        assert "scenario_method_comparison" not in record
+        assert "network_provenance" not in record
+        assert "method_summaries" not in record
 
 
 def test_h2_findings_are_carried_forward_not_gated(tmp_path):
@@ -189,6 +193,16 @@ def test_output_root_override_redirects_every_artifact(tmp_path):
     assert not (tmp_path / "ignored").exists()
 
 
+def test_network_runner_root_is_rewritten_into_job_directory(tmp_path):
+    config = {"output": {"root": "results/tables/network", "summary_path": "x.json"}}
+    job_dir = tmp_path / "job"
+
+    batch._rewrite_output(config, job_dir)
+
+    assert config["output"]["root"] == str(job_dir / "network")
+    assert config["output"]["summary_path"] == str(job_dir / "x.json")
+
+
 # ---------------------------------------------------------------------------
 # Whitelist / honesty fail-closed behaviour
 # ---------------------------------------------------------------------------
@@ -255,6 +269,37 @@ def test_missing_base_config_is_rejected(tmp_path):
     ]
     with pytest.raises(ValueError, match="base_config not found"):
         batch.run(_write_batch(tmp_path, config))
+
+
+def test_declared_base_config_sha256_drift_fails_closed(tmp_path):
+    config = _tiny_batch(tmp_path)
+    config["jobs"] = [
+        {
+            "id": "bad_hash",
+            "runner": "experiments.run_rq2_l5_economic_stochastic",
+            "base_config": _L5_BASE,
+            "base_config_sha256": "0" * 64,
+        }
+    ]
+    with pytest.raises(ValueError, match="SHA-256 drifted"):
+        batch.run(_write_batch(tmp_path, config))
+
+
+def test_network_successor_batch_pins_base_config_sha256():
+    successor = yaml.safe_load(
+        (
+            Path(__file__).resolve().parents[1]
+            / "configs"
+            / "rq2_formal_batch_network_rts24_v2.yaml"
+        ).read_text(encoding="utf-8")
+    )
+    job = successor["jobs"][0]
+
+    assert job["runner"] == "experiments.run_rq2_l5_economic_network"
+    assert job["base_config"] == _NETWORK_BASE
+    assert job["base_config_sha256"] == batch._sha256(
+        Path(__file__).resolve().parents[1] / _NETWORK_BASE
+    )
 
 
 def test_batch_fails_closed_when_a_job_gate_fails(tmp_path, monkeypatch):

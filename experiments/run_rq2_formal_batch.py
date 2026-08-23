@@ -77,6 +77,7 @@ _ALLOWED_OVERRIDE_KEYS = frozenset(
 # per-job directory, preserving only the configured basename, so jobs never
 # collide and the canonical formal outputs live under one auditable tree.
 _OUTPUT_KEYS = (
+    "root",
     "runs_path",
     "frontier_path",
     "leaves_path",
@@ -215,6 +216,21 @@ def run(
             raise ValueError(
                 f"job '{job_id}'.base_config not found: {base_config_path}"
             )
+        base_config_sha256 = _sha256(base_config_path)
+        expected_base_sha256 = job.get("base_config_sha256")
+        if expected_base_sha256 is not None:
+            if (
+                not isinstance(expected_base_sha256, str)
+                or len(expected_base_sha256) != 64
+            ):
+                raise ValueError(
+                    f"job '{job_id}'.base_config_sha256 must be a SHA-256 hex string"
+                )
+            if expected_base_sha256 != base_config_sha256:
+                raise ValueError(
+                    f"job '{job_id}' base config SHA-256 drifted: "
+                    f"expected {expected_base_sha256}, got {base_config_sha256}"
+                )
 
         # Build the effective config: frozen base + whitelisted overrides + a
         # per-job output block, then materialise it so its SHA-256 is on record.
@@ -249,7 +265,7 @@ def run(
                 "base_config": str(base_config_path.relative_to(_REPOSITORY_ROOT))
                 if base_config_path.is_relative_to(_REPOSITORY_ROOT)
                 else str(base_config_path),
-                "base_config_sha256": _sha256(base_config_path),
+                "base_config_sha256": base_config_sha256,
                 "effective_config": str(effective_path),
                 "effective_config_sha256": effective_sha256,
                 "overrides": dict(job.get("overrides", {})),
@@ -279,11 +295,34 @@ def run(
                     "h2_b6_underdelivers_out_of_sample"
                 ),
                 "h2_robust_across_sources": summary.get("h2_robust_across_sources"),
+                "network_methods": summary.get("methods"),
+                "scenario_method_comparison": summary.get(
+                    "scenario_method_comparison"
+                ),
+                "network_provenance": summary.get("network_provenance"),
+                "method_summaries": summary.get("method_summaries"),
                 "summary_path": summary.get("output_paths", {}).get("summary")
                 if isinstance(summary.get("output_paths"), dict)
                 else None,
             }
         )
+        network_keys = (
+            "network_methods",
+            "scenario_method_comparison",
+            "network_provenance",
+            "method_summaries",
+        )
+        if not any(
+            key in summary
+            for key in (
+                "methods",
+                "scenario_method_comparison",
+                "network_provenance",
+                "method_summaries",
+            )
+        ):
+            for key in network_keys:
+                job_records[-1].pop(key)
 
     manifest = {
         "batch_id": batch_id,

@@ -1,0 +1,14 @@
+# Successor to rq2_formal_batch_v1 for the network-derived grid-need increment.
+# The v1 19-job manifest remains unchanged and is retained as predecessor
+# evidence. This successor adds only the A/B RTS-24 physical derivation job.
+# It is not executed locally and requires the ordinary tagged-run authorization.
+
+batch:
+  id: rq2_formal_batch_network_rts24_v2
+  output_root: results/tables/rq2_formal_batch_network_rts24_v2
+
+jobs:
+  - id: N1_l5_network_grid_need_ab
+    runner: experiments.run_rq2_l5_economic_network
+    base_config: configs/rq2_l5_economic_network_rts24.yaml
+    base_config_sha256: 32738f8a5af72f3f329a25fb7a9e55390abfb9340e1776deba31131a48e1f148

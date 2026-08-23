@@ -29,6 +29,11 @@ from .economic_stochastic import (
     ScenarioDispatch,
     solve_economic_stochastic,
 )
+from .rq2_network_grid_need import (
+    NetworkDerivedEconomicScenarios,
+    NetworkEconomicScenarioSpec,
+    build_network_derived_economic_scenarios,
+)
 from .stochastic_baselines import (
     StochasticBaselineEndpoint,
     StochasticBaselinePolicy,
@@ -51,6 +56,8 @@ __all__ = [
     "EconomicScenario",
     "EconomicStochasticInputs",
     "EconomicStochasticResult",
+    "NetworkDerivedEconomicScenarios",
+    "NetworkEconomicScenarioSpec",
     "ScenarioDispatch",
     "PlanningQuarter",
     "SharedFlexibilityBudget",
@@ -58,6 +65,7 @@ __all__ = [
     "StochasticBaselinePolicy",
     "StochasticBaselineResult",
     "evaluate_deterministic_fx_plan",
+    "build_network_derived_economic_scenarios",
     "solve_deterministic_baseline",
     "solve_deterministic_expansion",
     "solve_stochastic_baseline",

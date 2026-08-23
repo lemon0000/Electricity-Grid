@@ -92,6 +92,13 @@ git push origin run-20260822-002
 
 # ③ 翻回安全默认，保证后续普通提交不再误触发批处理
 #    把 configs/experiment.yaml 的 kind 改回 pytest-smoke
+
+物理派生 `grid_need` 的 A/B 增量不改写上述 19-job v1。其 successor 清单为
+`configs/rq2_formal_batch_network_rts24_v2.yaml`；待单独授权运行时，仍使用
+`kind: rq2-formal-batch`，并显式设置
+`batch_config: configs/rq2_formal_batch_network_rts24_v2.yaml`。该清单已绑定
+`configs/rq2_l5_economic_network_rts24.yaml` 的 SHA-256；本次开发不打标签、
+不启动该正式批次。
 git add configs/experiment.yaml
 git commit -m "revert trigger: experiment.yaml 恢复 pytest-smoke 默认"
 git push origin experiment

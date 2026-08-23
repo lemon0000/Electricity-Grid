@@ -209,7 +209,9 @@ def test_static_unit_selection_makes_minimum_load_security_feasible(
     inactive_outage = result.state_results[
         f"generator_{uncommitted_outage}_sustained"
     ]
-    assert inactive_outage.generation_mw == pytest.approx(base.generation_mw)
+    assert inactive_outage.generation_mw == pytest.approx(
+        base.generation_mw, abs=1.0e-9
+    )
     assert inactive_outage.objective == pytest.approx(base.objective)
     expected_cost = sum(
         generator.cost_quadratic

@@ -17,6 +17,17 @@ from .chronological_dispatch import (
     validate_chronological_dispatch,
 )
 from .dc_opf import DcOpfResult, solve_dc_opf
+from .network_grid_need import (
+    METHOD_MINIMUM_CURTAILMENT,
+    METHOD_OVERLOAD_SENSITIVITY,
+    NETWORK_GRID_NEED_AUDIT_TOLERANCE_MW,
+    NETWORK_GRID_NEED_METHODS,
+    NETWORK_GRID_NEED_SCOPE,
+    NetworkGridNeedInputs,
+    NetworkGridNeedResult,
+    NetworkGridNeedStateResult,
+    derive_network_grid_need,
+)
 from .rts24 import (
     Branch,
     Bus,
@@ -80,11 +91,20 @@ __all__ = [
     "ChronologicalDispatchResult",
     "ChronologicalDispatchSolver",
     "build_chronological_dispatch_request",
+    "derive_network_grid_need",
     "dispatch_result_to_flexibility_trace",
     "DcOpfResult",
     "Generator",
     "GeneratorContingencyOutcome",
     "HourlyLoadPoint",
+    "METHOD_MINIMUM_CURTAILMENT",
+    "METHOD_OVERLOAD_SENSITIVITY",
+    "NETWORK_GRID_NEED_AUDIT_TOLERANCE_MW",
+    "NETWORK_GRID_NEED_METHODS",
+    "NETWORK_GRID_NEED_SCOPE",
+    "NetworkGridNeedInputs",
+    "NetworkGridNeedResult",
+    "NetworkGridNeedStateResult",
     "RTS_GMLC_COMMIT",
     "RTS_GMLC_MANIFEST_SHA256",
     "RTS_GMLC_RELEASE",

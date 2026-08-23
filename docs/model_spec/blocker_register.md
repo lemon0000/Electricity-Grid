@@ -15,6 +15,7 @@
 | M5c B3/B4固定政策场景外门 | resolved for deterministic synthetic holdout | 冻结6条训练集外需求路径、历史映射和训练端点哈希；48次固定政策双层107态执行全部通过 | 可报告合成holdout适应性值及失败区域；无经验抽样分布和统计区间时不得称正式经验VMA |
 | M6a F1-F3连续包络消融 | resolved for synthetic mechanism gate | 锁定M3网络调用证书；同一full-X轨迹下F1/F2通过、F3因恢复债务失败 | 证明MW-only会漏判恢复不可行；网络回放为零调用退化结果，不是合同或逐时网络认证 |
 | M6b逐时证据输入与调度接口 | resolved for interface gate | 新增业务/事故/恢复参数实质哈希锁定、同钟/N-1验证器、证据到调度的类型化构造器、跨窗口状态链接及具名安全状态审计；具名6小时和24小时派生benchmark均通过该接口 | 只关闭内部接入歧义和两个具名公开benchmark的软件门；不解除外部证据或安全认证阻塞，`security_certified=false` |
+| RQ2 `grid_need` 从 RTS-24 物理派生 | mechanism-only selected-N-1 DC bridge | 定义A逐状态最小化Bus 8削减并保持热限为硬约束；定义B用outage-topology POI PTDF折算过载；配置禁止手填`grid_need_mw`并保存逐状态provenance | 仅替代L5手填网络需求，不能解除响应时标、branch 10孤岛、full-N1、AC/无功或工程参数阻塞；概率仍非经验事故概率，`security_certified=false` |
 | RTS-GMLC 6小时selected-N-1 DC SCUC/ED | resolved for scoped public benchmark | `rts_gmlc_google_day0_first6h_selected_n1_dc_scuc_v1`完成2020-01-01 00:00-05:00 UTC六小时求解；每小时12个预注册状态含normal，2轮约束生成后全部状态复核；固定组合ED目标`157084.446540127 USD`，有效master下界`157084.446540126 USD`，认证absolute gap为`1e-9 USD`、relative gap为0；产物manifest SHA-256为`405c5109ef405f1961f6e9e461be5bfa42bd88f074bd30fa49e67006f6edcd10` | 仅该具名范围可置`chronological_dispatch_request_built=true`和`chronological_grid_dispatch_coupled=true`；初值为派生自由边界，事故表为空，`completed_periods`为空，且非实时、非完整N-1、非AC，`security_certified=false` |
 | RTS-GMLC 24小时selected-N-1 DC SCUC/ED | resolved for scoped public benchmark | `rts_gmlc_google_day0_full24h_selected_n1_dc_scuc_v1`完成完整day-0 24小时求解；每小时12个预注册状态，关键支路`A12-1/B22/C6/CA-1`、关键机组`121_NUCLEAR_1/213_CC_3/313_CC_1`，3轮约束生成后全状态固定组合ED目标`1193156.5322057535 USD`，有效master下界`1193155.3829459916 USD`，absolute/relative gap为`1.1492597619 USD`/`9.632095e-7`，独立残差最大约`1.4835e-9`；产物manifest SHA-256为`61b9d8c127354375769b5c1cf9e45e4340eafb0e89d8b07acbd8a08c9e1a0399` | 只解除该具名公开软件benchmark的24小时计算规模门；不解除真实绝对MW、真实柔性/恢复、观测事故、full-N1、工程级AC或`security_certified`/正式VMA阻塞 |
 | RTS-GMLC 六候选共同状态多POI比较 | resolved for scoped benchmark comparison | 机械候选`108/120/208/220/308/320`共同使用每小时24个selected状态；120/108/220/320可行，208/308在自由边界连续commitment LP前缀中model-infeasible；bus 120为唯一证书分离的最低成本可行候选；aggregate manifest为`85f157a5f14f73ffa851c8dc1bc263f67719d794a900101b987dcab3f21dac66` | bus 108是已见锚点，不能称六点全盲；模型不可行不是工程场址不可接入，最低DC成本也不是站址推荐 |
@@ -35,6 +36,14 @@
 | 固定在线机组、无逐时新能源与跨时约束 | external-blocked on RTS-24 mapping | RTS-24仍只使用8784小时时间轴和Area 1负荷代理；独立原生RTS-GMLC已完成24小时benchmark | 原生24小时结果不能回填机组集合不同的RTS-24，也不能据此声称RTS-24逐时SCUC、可再生联合安全或运行认证 |
 | 真实业务恢复轨迹与恢复头寸缺失 | external-blocked | Google现有同系统day-0配对仍只有priority和NCU usage，没有可恢复比例、checkpoint、真实恢复headroom/效率/功率或合同deadline；Alibaba也不提供这些字段 | 只能把低优先级或作业类型标为柔性候选并做预注册敏感性；不能签发持续容量、恢复或正式T指标认证 |
 | Word研究方案中文编码损坏 | external-blocked on clean source or approved reconstruction | Git初始提交与当前DOCX均已把大量UTF-8中文误存为乱码并含不可逆`U+FFFD`；无干净历史版本，未用Markdown覆盖原19张表和格式 | 当前以可读Markdown执行计划和模型规格为准；论文冻结前需取得干净源文件，或经确认后从现有可读文档重建DOCX |
+
+## RQ2 network-derived `grid_need` 机制门
+
+新增 `src/grid/network_grid_need.py`，不修改 `scopf.py` 既有语义。两种口径均先固定正常态全数据中心负荷的最小成本DC-OPF调度，再施加相同纠正边界。定义A在每个选定 sustained N-1 状态下只允许削减POI数据中心负荷，保留节点平衡、故障元件退出、纠正再调度边界与支路热限为硬约束，并以最小削减为目标；场景需求取状态最大值。定义B在相同故障拓扑上计算Bus 8削减、Bus 13平衡的PTDF，将该灵敏度直接写入所有支路估算热限后最小化折算削减。B是诊断近似；正削减时保持`direct_physical_dispatch_witness=false`，不提供A的直接可行调度见证。
+
+两线手算测试固定为80 MW POI负荷、两条40 MW并联线、单线故障，A与B均须返回40 MW。RTS-24回归使用0.8系统负荷、250 MW Bus 8负荷、37条非孤岛支路、32台正容量机组和0.5·Pmax纠正边界，A/B均得到36.8 MW且关键状态为`branch_11_sustained`；这仍不是正式批次或canonical结果。入口拒绝任何手填`grid_need_mw`，要求物理POI负荷与L5 `connected_demand_mw`一致，并将派生值送入既有L5的硬约束`c_grid >= grid_need`；B若估算削减超过POI负荷则保留估算值但禁止构造L5场景。逐状态审计覆盖节点平衡、热限、发电上下界、纠正边界、故障机组归零、潮流方程和削减边界。所有产物必须保留`derived`、`not_empirical_outage`和`security_certified=false`。
+
+本门只移除了“`grid_need`完全手填”的结构性缺陷。0.5·Pmax仍是无响应时标的合成边界，branch 10继续因非计划孤岛被排除，且没有full-N1、逐时SCUC、AC电压/无功、接入设备和工程控制参数。因此不得把A/B结果解释为容量认证、真实事故概率或工程可行性。
 
 ## M4 B0-B2机制门验收
 
