@@ -1,6 +1,6 @@
 # Electricity-Grid
 
-*Last updated: 2026-08-20*
+*Last updated: 2026-08-25*
 
 Research code for staged data-center interconnection and grid expansion.
 
@@ -38,8 +38,38 @@ commitment frontier plus its frozen parent baseline; joint AC remains locked
 until that frontier, all manifests, both stage certificates, primary regret, and
 the final 24-state audit are complete and verified. Observed
 absolute power, flexibility and recovery evidence, same-clock
-incidents, full N-1, engineering AC security, and annual/hourly CFE remain
-unimplemented or externally blocked.
+incidents, full N-1, engineering AC security, and formal annual/hourly CFE
+conclusions remain unimplemented or externally blocked.
+
+The RQ2 v6 successor uses public marginals rather than an invented cross-source
+joint distribution. It estimates normalized minimum-flexibility
+underprovisioning, not interconnection-capacity X. E0 grid states that remain
+infeasible at the zero-data-center endpoint retain their unconditional mass but
+are excluded from the conditional contract-risk transport support. Policies
+must pass the complete evaluable training support, partial-region compatibility
+uses one common coupling, and fixed-seed marginal block bootstrap intervals are
+reported separately from sharp identification bounds. The development host is
+blocked from formal execution; the executor must first pass the frozen
+HiGHS/Gurobi four-block pilot. See
+`docs/plan/RQ2_公开数据鲁棒识别路线图_v6.md` and
+`docs/plan/RQ2_执行机交接_v1.md`.
+
+### RQ2 v6 executor start
+
+The execution machine should check out the `experiment` branch and follow
+[`RQ2_执行机交接_v1.md`](docs/plan/RQ2_执行机交接_v1.md). The first authorized
+stage ends after packaging the four-block solver pilot:
+
+```bash
+conda env create -f environments/rq2_executor_v1.yml
+conda run -n rq2-executor python scripts/rq2_public_executor.py verify
+export RQ2_EXECUTION_MACHINE=EXECUTION_MACHINE_CONFIRMED
+conda run -n rq2-executor python scripts/rq2_public_executor.py preflight
+conda run -n rq2-executor python scripts/rq2_public_executor.py pilot
+conda run -n rq2-executor python scripts/rq2_public_executor.py package-pilot
+```
+
+Return the pilot package for review before activating the grid stage.
 
 ## L0: RTS-24 DC-OPF and N-1
 

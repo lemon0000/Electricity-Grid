@@ -1,0 +1,310 @@
+schema: rq2_public_data_robust_identification_preregistration_v5
+
+preregistration:
+  id: rq2_public_data_robust_identification_preregistration_v5
+  date: "2026-08-25"
+  status: frozen_before_formal_grid_need_and_pairwise_execution
+  predecessor: configs/rq2_public_data_robust_identification_preregistration_v4.yaml
+  predecessor_sha256: a9ccf927cbb72184b08e64b37aa7eaee49e86b026f4d8514ebae3e81b3893286
+  successor_change_scope: >
+    Preserve the v4 scientific and provenance protocol and replace only the
+    formal execution chain with v3 runners that require exact checkpoint
+    inventory key sets derived from all registered grid blocks and every
+    eligible Cartesian pair.
+  predecessor_outcomes_observed: false
+  predecessor_role: reviewed_software_predecessor_rejected_for_provenance
+  formal_execution_ready: false
+  formal_result: false
+  security_certified: false
+
+research_question:
+  estimand: >
+    Sharp lower and upper bounds on dimensionless fixed-policy duplicate
+    commitment, service loss, and recovery debt over every coupling of the
+    registered RTS-GMLC network+CFE and Alibaba workload holdout marginals.
+  primary_units:
+    capacity: fraction_of_D_DC
+    energy: fraction_of_D_DC_hours
+  empirical_joint_distribution_claimed: false
+  empirical_outage_probability_claimed: false
+  real_contract_failure_probability_claimed: false
+
+data_contract:
+  power_system_blocks:
+    hours_per_block: 24
+    training_blocks: 541
+    holdout_blocks: 530
+    reliability_components: 211
+    maximum_simultaneous_outages: 1
+    grid_need: >
+      Minimum POI curtailment from an hourly corrective DC LP against fixed
+      normal 24-hour SCUC commitment and dispatch.
+  workload_blocks:
+    hours_per_block: 24
+    training_blocks: 34
+    holdout_blocks: 34
+    normalization_fit_split: training_only
+    job_split_policy: exclude_jobs_contributing_to_both_sides
+    cross_split_jobs_excluded: 908
+    requested_GPU_occupancy_is_power: false
+  pair_construction:
+    available_flexibility: flexible_fraction_times_capped_workload_fraction
+    green_call: min_CFE_deficit_fraction_and_available_flexibility
+    grid_need: untruncated_physical_minimum_call
+    reason: >
+      Keep the individual CFE request within the paired business resource
+      while preserving network calls above that resource as common
+      insufficiency evidence.
+
+policy_freeze:
+  training_only: true
+  representative_selection: weighted_marginal_stress_quantiles
+  power_representatives: 8
+  workload_representatives: 8
+  objective: minimum_capacity_subject_to_zero_training_CFE_shortfall
+  correct_and_B6_frozen_before_holdout: true
+  holdout_provision_reoptimization: false
+  holdout_recourse_reoptimization: false
+  operational_policy: causal_myopic_grid_first_then_CFE_with_current_state_only
+  physical_holdout_envelope: correct_shared_envelope_for_both_policies
+  training_infeasible_cell: >
+    Fixed-policy estimand undefined; preserve the proof status and do not
+    fabricate pairwise metrics or classify it as solver uncertainty.
+
+provenance_contract:
+  schema: rq2_public_pipeline_provenance_contract_v2
+  stages:
+    - grid_need_dispatch_v3
+    - pairwise_replay_v3
+    - identification_grid_v3
+  runtime_verification:
+    - runner_and_direct_model_module_sha256
+    - solver_package_versions
+    - stage_config_sha256
+    - source_and_input_package_manifest_sha256
+    - checkpoint_inventory_sha256
+    - checkpoint_inventory_exact_expected_key_set
+    - lowercase_hexadecimal_sha256_digest
+    - upstream_stage_provenance_sha256
+    - downstream_result_package_manifest_sha256
+  checkpoint_rule: >
+    Every grid and pairwise checkpoint must bind the canonical stage-base
+    provenance hash. A checkpoint from another config, implementation,
+    solver, source package, or upstream result must be rejected before reuse.
+    Grid inventory keys must equal all registered block IDs. Pairwise
+    inventory keys must equal every cell policy checkpoint plus every
+    eligible row-by-column Cartesian pair checkpoint.
+  publication_rule: >
+    Every stage package must publish provenance.json. Checkpointed stages must
+    also publish an exact per-checkpoint SHA-256 inventory, and downstream
+    stages must verify both the package manifest and the upstream provenance.
+
+ambiguity_set:
+  type: complete_discrete_transport_polytope
+  row_marginal: 530_RTS_GMLC_network_and_CFE_holdout_blocks
+  column_marginal: 34_Alibaba_dimensionless_workload_holdout_blocks
+  pairs_per_eligible_cell: 18020
+  registered_parameter_cells: 15
+  maximum_pair_count_if_every_cell_is_eligible: 270300
+  support: unrestricted_complete_Cartesian_product
+  within_block_hour_order_preserved: true
+  sharpness_condition: every_pairwise_outcome_for_the_cell_is_resolved
+  canonical_diagnostics:
+    - independent_product
+    - comonotone_by_registered_stress_score
+    - countermonotone_by_registered_stress_score
+    - minimum_metric_transport
+    - maximum_metric_transport
+
+registered_metrics:
+  - delta_failure_probability
+  - delta_expected_shortfall
+  - flexibility_underprovisioning
+  - correct_failure_probability
+  - correct_expected_shortfall
+  - delta_peak_recovery_debt
+  - delta_terminal_recovery_debt
+  - correct_peak_recovery_debt
+  - correct_terminal_recovery_debt
+
+identification_rules:
+  identified_R1: all_differences_zero_and_correct_succeeds_for_every_coupling
+  identified_R2: >
+    B6 weakly dominated for every coupling and at least one registered
+    capacity or service-risk lower bound strictly positive.
+  identified_R3: all_differences_zero_and_correct_fails_for_every_coupling
+  partially_identified: multiple_regions_remain_compatible
+  unresolved: required_fixed_policy_estimand_or_pairwise_optimization_missing
+  probability_tolerance: 1.0e-9
+  normalized_outcome_tolerance: 1.0e-6
+
+parameter_design:
+  type: one_factor_at_a_time_threshold_diagnostic
+  cell_count: 15
+  joint_parameter_robustness_claimed: false
+  parameter_level_probability_assumed: false
+  ambiguity_reduction: >
+    Report minimum and maximum transport-interval width reduction if one OAT
+    parameter level were known; do not average over unsupported level
+    probabilities.
+  selective_subrange_reporting_allowed: false
+
+mandatory_outputs:
+  - policy_table_and_training_resolution_status
+  - complete_pairwise_outcome_table_for_every_eligible_cell
+  - unresolved_or_ineligible_cell_list
+  - lower_and_upper_bound_for_every_registered_metric
+  - optimizing_coupling_for_every_bound
+  - independent_comonotone_and_countermonotone_diagnostics
+  - identified_partial_or_unresolved_classification
+  - ambiguity_reduction_value_by_uncertain_dimension
+  - source_config_implementation_checkpoint_and_result_hashes
+
+negative_result_rule:
+  no_identified_R2: valid_result_do_not_shrink_ambiguity_set_after_observation
+  all_partially_identified: valid_result_report_identification_failure
+  all_identified_R3: valid_result_report_common_insufficiency
+  training_infeasible: preserve_as_undefined_fixed_policy_estimand
+  selective_reporting_allowed: false
+
+frozen_inputs:
+  predecessor_preregistration:
+    path: configs/rq2_public_data_robust_identification_preregistration_v4.yaml
+    sha256: a9ccf927cbb72184b08e64b37aa7eaee49e86b026f4d8514ebae3e81b3893286
+  scientific_config:
+    path: configs/rq2_public_data_ambiguity_set_v3.yaml
+    sha256: c2d46fc8f5bdbb893323a9f4bc4dc0af86c4a75df59b71e8c340eae5a3060744
+  formulation:
+    path: docs/model_spec/formulation.md
+    sha256: dad0fe7e59f611dc627cd697e06049e7f349cb9e6b92ff7b433514704843a3fb
+  checkpoint_inventory_amendment:
+    path: docs/model_spec/rq2_checkpoint_inventory_contract_v5.md
+    sha256: ff9b6c9aacee48bc30f83b67b8511633509ea78cb4862c01782f43c5ebe8c7f6
+  workload_config:
+    path: configs/alibaba_dimensionless_workload_blocks_v3.yaml
+    sha256: 571b10ff6874ae2c787420b3328e4f256e1d284864851d5099b7ecf9b5d43c2c
+  power_blocks_config:
+    path: configs/rts_gmlc_public_power_system_blocks_v4.yaml
+    sha256: cefec120fb77990a47fe7e89a77e4df8be00bde5bf7e4cd4c5ca047d52934688
+  grid_need_config:
+    path: configs/rts_gmlc_public_grid_need_dispatch_v3.yaml
+    sha256: 75b48c7d7d473340f73550a68d01160187889f88785a98bb68533a3ed4b9d314
+  pairwise_config:
+    path: configs/rq2_public_pairwise_replay_v3.yaml
+    sha256: d10304dfff747a86d3bdcf0f29f829f34818e5b2f16ded1cb1ae8133494a482a
+  identification_config:
+    path: configs/rq2_public_identification_grid_v3.yaml
+    sha256: 609141998075ddb274ffb31aeebd2c44bb5ec83fcbd17521051287fef59a094c
+  provenance_contract:
+    path: configs/rq2_public_pipeline_provenance_contract_v2.yaml
+    sha256: b219f2d7da2a03d9026f4ac72accf565bfd7c39b16c2b42b7283ea7e6ee6b877
+  provenance_module:
+    path: src/evaluation/rq2_provenance_v2.py
+    sha256: e297a633460c9e4653367590fb71bea89e587b030064d7b4516a5f41a13c1d25
+  analytic_module:
+    path: src/models/robust_shared_flexibility.py
+    sha256: 071c3c8f0e454a7999f61b7bb909fc2ddcf9360b6da8d6f79aa8842a2ccba427
+  coupling_module:
+    path: src/scenarios/block_coupling.py
+    sha256: e18e025c6482ecb38f745bb993d346f49c4bdd99802cdb1675e4bd7ab5243cc4
+  identification_module:
+    path: src/evaluation/rq2_identification_bounds.py
+    sha256: 6236401e54da87cad6e0265a911e81af79a8d4a583fcfb4f0765bada8bb14768
+  replay_scenario_module:
+    path: src/scenarios/rq2_public_replay.py
+    sha256: 2d1668b43c21ecdbf851cb750b3a6979d7942e6abe4255ebf0a0f9a1c6297028
+  grid_need_module:
+    path: src/grid/rts_gmlc_grid_need.py
+    sha256: 92325d08ff784c68224064dc8a0a3baff29a54875e922cf413a149a908d866b7
+  capacity_module:
+    path: src/models/temporal_flexibility_capacity.py
+    sha256: 962c36490ff59769bf536a20056eafa629643c77d888f22a8137f0d5423a8fbc
+  temporal_model:
+    path: src/models/economic_temporal_stochastic.py
+    sha256: bb2a2e8c51747fcae89d8e7c3dfe4e95d7f4d24aa6a620cf459ff590eb60ff89
+  holdout_module:
+    path: src/evaluation/temporal_economic_holdout.py
+    sha256: 44efaa99dc30b2e9b0043bc263d1daf2e7859684d76d31840be7fd2d3a768ed7
+  flexibility_envelope_module:
+    path: src/evaluation/flexibility_envelope.py
+    sha256: db007a9ac1fdd94779b734c6d39e841302f01a1ef49a121d2c00e0d0a996cd40
+  workload_builder:
+    path: experiments/build_alibaba_dimensionless_workload_blocks.py
+    sha256: 6f2e0c91733cb30846c85b03b3cd89c07f27c042b29ad3b002b76d64f9264d4b
+  power_blocks_builder:
+    path: experiments/build_rts_gmlc_public_power_system_blocks.py
+    sha256: cc24a77049af50d056364b2ad6a092442af3cd4efcdf32033ab228faef989644
+  grid_need_runner:
+    path: experiments/run_rts_gmlc_public_grid_need_dispatch_v3.py
+    sha256: 1f5fadab042241136ff5494bbccd46f2e645f1e16abe52318d812d72296dec7e
+  pairwise_runner:
+    path: experiments/run_rq2_public_pairwise_replay_v3.py
+    sha256: d1789e46ab8ead51009b168b72b6e13fbbbaac8744731aae414e555d4c602ac0
+  identification_runner:
+    path: experiments/run_rq2_public_identification_grid_v3.py
+    sha256: fd37e96472d2c55a54490ce634c2ff2744568ebda9067c0a91b9f3a1e701d7f8
+  route_document:
+    path: docs/plan/RQ2_公开数据鲁棒识别路线图_v5.md
+    sha256: b430e73f18665d53ab301e67fdf1741b3f7719b05479909f3ab727289cf21ba7
+  workload_tests:
+    path: tests/test_alibaba_dimensionless_workload_blocks.py
+    sha256: 60e00970f5e0d6e3f313f8c74fff78a2d5d15f0f8bd39feb4d5dfa1cc7752c1d
+  power_blocks_tests:
+    path: tests/test_rts_gmlc_public_power_system_blocks.py
+    sha256: 003dd01b273287cd9a807bfba1d68f5c7881732cd3ad0279e91416e0036ddab3
+  grid_need_tests:
+    path: tests/test_rts_gmlc_grid_need.py
+    sha256: 99c2e5a1f69253e047cae5cbcc7e73e5d034829fd4752d43f92654bceef88172
+  grid_need_runner_tests:
+    path: tests/test_rts_gmlc_public_grid_need_dispatch_v3_runner.py
+    sha256: 7e00f76511fc78e58f544856f19ec85ffe3fab9e16386afd4b391507f3756751
+  replay_scenario_tests:
+    path: tests/test_rq2_public_replay.py
+    sha256: 228b817cd0ee9a1d655d69c69afddce1ae9615387815af55301a6552598bcd20
+  capacity_tests:
+    path: tests/test_temporal_flexibility_capacity.py
+    sha256: 58ed35202bf4ba7d7481622559b66602ac9541bc8c51ff0c5998e98092dac169
+  pairwise_runner_tests:
+    path: tests/test_rq2_public_pairwise_replay_v3_runner.py
+    sha256: 9c9452d2dc7354ec7d614ae94a4d3d6e8961780001268d2ab5c37434528ab808
+  identification_runner_tests:
+    path: tests/test_rq2_public_identification_grid_v3_runner.py
+    sha256: 05315f2d4bf74bd33173d6c9e7fa7c70711728406aeb143c234cce17c1a6e36b
+  provenance_tests:
+    path: tests/test_rq2_provenance_v2.py
+    sha256: 4cc01cfd2629294cbf01cc69225c15bd19586366c1e4824ec6f44a833585b10c
+  coupling_tests:
+    path: tests/test_block_coupling.py
+    sha256: 5e248df1c0f3aa0c2dab558c50663e6e26a38613c02469aadc1571d18b4d722d
+  classification_tests:
+    path: tests/test_rq2_identification_bounds.py
+    sha256: 57840462f5d815b23f8551effbaba366f89f732b7563720dc7401aae1b14d1bf
+  preregistration_validator:
+    path: tests/test_rq2_public_data_preregistration_v5.py
+    sha256: 551613932335b0afcbc8a97c7cd8d0383a575eb580e9adf22616fcc97a21d289
+  source_packages:
+    workload_v3:
+      manifest_path: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3/SHA256SUMS.json
+      sha256: 62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524
+    power_system_blocks_v4:
+      manifest_path: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4/SHA256SUMS.json
+      sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+
+activation_gates:
+  grid_need_dispatch_ready: false
+  pairwise_replay_ready: false
+  complete_pairwise_outcomes_ready: false
+  all_pairwise_optimizations_resolved: false
+  independent_R4_review_passed: false
+  user_formal_run_authorized: true
+  formal_execution_ready: false
+
+claims:
+  real_contract_failure_probability: false
+  Alibaba_absolute_power: false
+  empirical_outage_probability: false
+  empirical_cross_source_joint_distribution: false
+  PPA_or_REC_delivery: false
+  full_N_minus_one: false
+  AC_security: false
+  security_certified: false

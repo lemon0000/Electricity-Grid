@@ -134,6 +134,48 @@ def test_shared_temporal_envelope_rejects_b6_same_hour_double_commitment():
     assert dispatch.physical_terminal_recovery_debt_mwh == pytest.approx(40.0)
 
 
+def test_time_varying_available_flexibility_is_shared_only_by_correct_model():
+    scenario = replace(
+        _scenario(
+            (0.0, 40.0, 0.0, 0.0),
+            (0.0, 40.0, 0.0, 0.0),
+        ),
+        available_flexibility_mw=(0.0, 40.0, 0.0, 0.0),
+    )
+
+    correct = solve_temporal_economic_stochastic(
+        _inputs(scenario, joint=True, fixed_flexibility_mw=40.0)
+    )
+    b6 = solve_temporal_economic_stochastic(
+        _inputs(scenario, joint=False, fixed_flexibility_mw=40.0)
+    )
+
+    assert correct.feasible and b6.feasible
+    assert correct.scenario_dispatch["stress"].access_shortfall_mw[1] == (
+        pytest.approx(40.0)
+    )
+    assert b6.scenario_dispatch["stress"].access_shortfall_mw[1] == (
+        pytest.approx(0.0)
+    )
+    assert b6.scenario_dispatch["stress"].physical_combined_call_mw[1] == (
+        pytest.approx(80.0)
+    )
+
+
+def test_grid_need_above_available_flexibility_is_proven_infeasible():
+    scenario = replace(
+        _scenario((0.0, 40.0, 0.0, 0.0)),
+        available_flexibility_mw=(0.0, 30.0, 0.0, 0.0),
+    )
+
+    result = solve_temporal_economic_stochastic(
+        _inputs(scenario, joint=True, fixed_flexibility_mw=100.0)
+    )
+
+    assert not result.feasible
+    assert result.proven_infeasible
+
+
 def test_hard_grid_need_cannot_buy_through_maximum_event_duration():
     scenario = _scenario((40.0, 40.0, 40.0, 0.0, 0.0))
     result = solve_temporal_economic_stochastic(

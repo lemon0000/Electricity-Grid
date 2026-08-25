@@ -1,0 +1,168 @@
+{
+  "config_sha256": "fac3b1177c15cf3b78d2580b49ea901022614817834e44c0f6c47e1d48140e2c",
+  "decision": "prepared_for_mapping_model_and_short_validation_only;formal_rq2_experiment_blocked",
+  "gates": {
+    "allocated_cfe_portfolio_ready": false,
+    "direct_job_to_power_mapping_ready": false,
+    "empirical_joint_distribution_ready": false,
+    "flexibility_contract_parameters_ready": false,
+    "formal_experiment_authorized": false,
+    "full_rq2_experiment_input_ready": false,
+    "job_execution_envelopes_ready": true,
+    "measured_power_calibration_reference_ready": true,
+    "observed_gpu_utilization_covariate_ready": true,
+    "outage_to_grid_need_dispatch_ready": false,
+    "source_archives_verified": true,
+    "synchronized_grid_cfe_reliability_benchmark_ready": true,
+    "t4_hardware_overlap_power_reference_ready": true
+  },
+  "implementation_sha256": "c0e6eab791d5b6fd4434ded9df0bad736479e56170914b7c528d203f003cbeb8",
+  "packages": {
+    "alibaba_gpu_telemetry": {
+      "directory": "data/processed/model_inputs/alibaba_gpu_telemetry_v1",
+      "live_provenance": {
+        "config_sha256": {
+          "path": "configs/alibaba_gpu_2020_telemetry_v1.yaml",
+          "sha256": "b576a0baf0d6d21e4009d5bfba4eef1ff9e412e7ce8ec7fad2a852efa282d026"
+        },
+        "implementation_sha256": {
+          "path": "experiments/process_alibaba_gpu_2020_telemetry.py",
+          "sha256": "f406e2640d85aeabcccc2953342103dd38725a09ef3bfe00d98d54bbfeb9eb0b"
+        }
+      },
+      "manifest_sha256": "908a3aec20a961bc8971f0944db3d18b33756021d7fedfa3c3d339a10aede51d",
+      "schema": "alibaba_gpu_telemetry_v1",
+      "summary_sha256": "616a150e70db96de27d64f9206821950926dafdcf86a45471d82e26d6b073eab"
+    },
+    "alibaba_job_execution_envelopes": {
+      "directory": "data/processed/model_inputs/alibaba_job_execution_envelopes_v1",
+      "live_provenance": {
+        "config_sha256": {
+          "path": "configs/alibaba_job_execution_envelopes_v1.yaml",
+          "sha256": "d46df0aca23d9e91a7c3f2135b2c92d32463ee12d4864d6cc81feec3ec05bcc6"
+        },
+        "implementation_sha256": {
+          "path": "experiments/build_alibaba_job_execution_envelopes.py",
+          "sha256": "acb998806cde74d29495daf73527539ed116bd8e46b0db531de18a13cec98335"
+        }
+      },
+      "manifest_sha256": "73539a65c7db2b7cf630624048c00262a8e650a96b1412d21dcdf04ad857c219",
+      "schema": "alibaba_job_execution_envelopes_v1",
+      "summary_sha256": "3f14894e559a010d034e469cfaf4234c7ec0dba6a63eec067bfff4859a407063"
+    },
+    "nlr_genai_power_profiles": {
+      "directory": "data/processed/model_inputs/nlr_genai_power_profiles_v2",
+      "live_provenance": {
+        "config_sha256": {
+          "path": "configs/nlr_genai_power_profiles_v2.yaml",
+          "sha256": "f2265f1f2d34d5d23e6c4466891d0287e1fec05021e8f83f05e091cb8aaa6640"
+        },
+        "implementation_sha256": {
+          "path": "experiments/process_nlr_genai_power_2026.py",
+          "sha256": "8c65c4eaa7e79da59925f1bfb24af2010fc533f04ba8ff109492a4c36db3a69e"
+        }
+      },
+      "manifest_sha256": "1cef65fe087340a109e0e29ed604e991e9cdedca902017d639d99a59b8f2c677",
+      "schema": "nlr_genai_power_profiles_v2",
+      "summary_sha256": "9af5612d810a66d42ec4df3aeaf6920b56e0c8d7db49fc0c0f44f092ea24111b"
+    },
+    "rts_gmlc_cfe_deficit": {
+      "directory": "data/processed/model_inputs/rts_gmlc_hourly_cfe_deficit_250mw_v2",
+      "live_provenance": {
+        "config_sha256": {
+          "path": "configs/rts_gmlc_cfe_deficit_v2.yaml",
+          "sha256": "b73660bb0d36df60612633ec3b93889c1abaf1f5c481b877a620c31a0c691b2f"
+        },
+        "derivation_module_sha256": {
+          "path": "src/scenarios/rts_gmlc_cfe_deficit.py",
+          "sha256": "27944b3ac9e30173f1b6d9708d2b8c7d15875ec73d187d2500028f4af837d1e6"
+        },
+        "implementation_sha256": {
+          "path": "experiments/build_rts_gmlc_cfe_deficit.py",
+          "sha256": "a7c5a13669546827552a935ceecb30b7f378d03d5bd999f44a9943e26d3af595"
+        }
+      },
+      "manifest_sha256": "cb6b941193db3a09cddb005c14f210bab754e5f9d12ba9c982f778b88409cc0a",
+      "schema": "rts_gmlc_hourly_cfe_deficit_v2",
+      "summary_sha256": "7abec73b8665c149539d3d652fbd9e0e43187a2e9ac822ca3486870e9cf65b1d"
+    },
+    "rts_gmlc_joint_data": {
+      "directory": "data/processed/model_inputs/rq2_joint_data_v1",
+      "live_provenance": {
+        "config_sha256": {
+          "path": "configs/rq2_joint_data_v1.yaml",
+          "sha256": "4cbc7f097e7f1ed0749907622139eba37675d08ecc3619ea3fb6014ef772367f"
+        },
+        "implementation_sha256": {
+          "path": "experiments/build_rq2_joint_data.py",
+          "sha256": "0cafb9fd126697c328fe9eda480ae0393d6d22f63d7ad3250d04190e44499770"
+        },
+        "reliability_module_sha256": {
+          "path": "src/scenarios/rts_gmlc_reliability.py",
+          "sha256": "2edddc1688f0db4d559c8d4d9ef2f1ed1a0e72f951afcee5950263a6adc4052e"
+        }
+      },
+      "manifest_sha256": "df6889870639e9f4b623c063c7e3fdf49bee671cf904489b3c69c4c05b0b5058",
+      "schema": "rq2_joint_rts_gmlc_data_v1",
+      "summary_sha256": "f58fdd89a1a3f0f90be78276fcf6a2ac7fe38eadfa90a32293b60712b3d687e8"
+    },
+    "wattgpu_power_reference": {
+      "directory": "data/processed/model_inputs/wattgpu_power_reference_v1",
+      "live_provenance": {
+        "config_sha256": {
+          "path": "configs/wattgpu_power_reference_v1.yaml",
+          "sha256": "99f6d4bc113b681964cad39ee7bfd75bc8366c5b91d0b58dfd2460437b9206cd"
+        },
+        "implementation_sha256": {
+          "path": "experiments/process_wattgpu_power_reference.py",
+          "sha256": "03280d1593d36273c0a4cc3eda2bcce1213343be83db057bc805831f9c3a3ea3"
+        }
+      },
+      "manifest_sha256": "fc5772007da61c0285368faf87b79c410f1f695c38fdbb99625eaceb79177446",
+      "schema": "wattgpu_power_reference_v1",
+      "summary_sha256": "f0f090db44c929ae87aeb7c6fd457aa3b18fde6c66af708b4f4c79aaee82b67f"
+    }
+  },
+  "predecessor": {
+    "manifest_path": "data/processed/model_inputs/rq2_data_readiness_v1/SHA256SUMS.json",
+    "manifest_sha256": "d77b78551d1b8195352d43c824bfbe85e26f775e728aea0d1bb31eda83886d87",
+    "schema": "rq2_data_readiness_v1",
+    "status": "superseded_by_live_provenance_validation"
+  },
+  "schema": "rq2_data_readiness_v2",
+  "source_manifests": {
+    "alibaba_gpu_2020": {
+      "entries": 12,
+      "manifest_sha256": "20cc9b61628e494a1f69339650b8eaa0d54e78fe4d33fcc8b96c11bbf4c283f9",
+      "path": "data/raw/alibaba_gpu_2020/v2020/upstream/SHA256SUMS"
+    },
+    "alibaba_gpu_2020_telemetry": {
+      "entries": 4,
+      "manifest_sha256": "36233bcfa052fcc3118783ecc183373b35904913650042b6d3963692aa2143d8",
+      "path": "data/raw/alibaba_gpu_2020_telemetry/v2020/upstream/SHA256SUMS"
+    },
+    "nlr_genai_power_2026": {
+      "entries": 1,
+      "manifest_sha256": "a70a793321b460f02ff82a3b129db9dd4d55daf945f6fdaa816250ef9d312cfd",
+      "path": "data/raw/nlr_genai_power_2026/v2/upstream/SHA256SUMS"
+    },
+    "rts_gmlc": {
+      "entries": 25,
+      "manifest_sha256": "95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914",
+      "path": "data/raw/rts_gmlc/v0.2.3/upstream/SHA256SUMS"
+    },
+    "wattgpu_2026": {
+      "entries": 8,
+      "manifest_sha256": "e7625271d755011c05d76faa424b3012452c0ec27d565265f5dff7fd910fc6e7",
+      "path": "data/raw/wattgpu_2026/v1/upstream/SHA256SUMS"
+    }
+  },
+  "unresolved_requirements": [
+    "paired workload and absolute power on compatible hardware",
+    "observed or contract-backed deadline and checkpoint semantics",
+    "observed recoverable fraction, recovery efficiency, and recovery headroom",
+    "allocated PPA or REC portfolio with locational deliverability assumptions",
+    "hourly SCOPF conversion of sampled outages into network calls",
+    "empirical joint chronology of workload, CFE, and network events"
+  ]
+}

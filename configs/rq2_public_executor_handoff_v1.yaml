@@ -1,0 +1,69 @@
+schema: rq2_public_executor_handoff_config_v1
+
+scope:
+  development_host_runs_formal_work: false
+  executor_runs_solver_pilot: true
+  executor_runs_formal_pipeline_only_after_activation: true
+  formal_execution_ready: false
+  formal_blocker: cross_solver_pilot_and_R4_activation_not_completed
+
+environment:
+  conda_environment_name: rq2-executor
+  specification_path: environments/rq2_executor_v1.yml
+  required_python_version: 3.11.15
+  required_packages:
+    numpy: 1.26.4
+    scipy: 1.17.0
+    pyomo: 6.10.1
+    highspy: 1.15.1
+    gurobipy: 13.0.2
+    PyYAML: 6.0.3
+    pytest: 9.0.2
+    ruff: 0.16.4
+
+execution:
+  forbidden_hostnames: [GQPD263XH9]
+  required_environment_value: EXECUTION_MACHINE_CONFIRMED
+
+bundle:
+  manifest_path: configs/rq2_public_executor_bundle_v1.SHA256SUMS.json
+  verify_nested_input_manifests: true
+  input_packages:
+    - path: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4
+      manifest: SHA256SUMS.json
+      manifest_sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+    - path: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3
+      manifest: SHA256SUMS.json
+      manifest_sha256: 62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524
+    - path: data/raw/rts_gmlc/v0.2.3/upstream
+      manifest: SHA256SUMS
+      manifest_sha256: 95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914
+
+runtime_preflight:
+  solvers: [highs, gurobi]
+  require_native_gurobi_import: true
+  require_pyomo_solver_interfaces: true
+  run_tiny_optimization_smoke: true
+  tiny_model_variables: 1
+  tiny_model_constraints: 1
+  license_observation_is_legal_conclusion: false
+
+pilot:
+  config_path: configs/rq2_public_solver_pilot_v1.yaml
+  result_directory: results/tables/rq2_public_solver_pilot_v1
+  required_before_formal_activation: true
+
+formal_pipeline:
+  grid_config_template: configs/rts_gmlc_public_grid_need_dispatch_v4.yaml
+  grid_result_directory: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_gurobi
+  pairwise_config_template: configs/rq2_public_pairwise_replay_v4.yaml
+  pairwise_result_directory: data/processed/model_inputs/rq2_public_pairwise_replay_v4_gurobi
+  identification_config_template: configs/rq2_public_identification_grid_v4.yaml
+  identification_result_directory: results/tables/rq2_public_identification_grid_v4_gurobi
+  activation_record_path: configs/rq2_public_successor_activation_v1.yaml
+  stage_order: [grid, pairwise, identification]
+  cross_stage_hash_activation_required: true
+
+output:
+  schema: rq2_public_executor_preflight_v1
+  directory: results/tables/rq2_public_executor_preflight_v1

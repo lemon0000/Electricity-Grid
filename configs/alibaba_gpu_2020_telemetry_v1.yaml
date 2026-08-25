@@ -1,0 +1,65 @@
+source:
+  dataset: Alibaba PAI GPU Cluster Trace v2020
+  repository: https://github.com/alibaba/clusterdata
+  documentation_commit: 0d0f3f1efdbf1add6a7bcc63676eafbd1eb11f71
+  data_base_url: https://aliopentrace.oss-cn-beijing.aliyuncs.com/v2020GPUTraces
+  path: data/raw/alibaba_gpu_2020_telemetry/v2020/upstream
+  license: CC-BY-4.0
+  profile: sensor_table_v1
+
+archive:
+  name: pai_sensor_table.tar.gz
+  size: 406119947
+  sha256: 9a0b82e8bdf3949281e4ba1423d9b4b34847e52799eecb138966de46da69c7a0
+  member: pai_sensor_table.csv
+  decompressed_size_bytes: 1056899391
+  rows: 3033232
+  decompressed_sha256: 12dd9929b70f3efe18d1279d9873e3a519c64f431613b23b059ed8c46a376dd7
+  header: pai_sensor_table.header
+  header_sha256: d3e26eb31fb3b833821373b487266312151a3bfb2f18fc62017a438546cc1362
+  columns:
+    - job_name
+    - task_name
+    - worker_name
+    - inst_id
+    - machine
+    - gpu_name
+    - cpu_usage
+    - gpu_wrk_util
+    - avg_mem
+    - max_mem
+    - avg_gpu_wrk_mem
+    - max_gpu_wrk_mem
+    - read
+    - write
+    - read_count
+    - write_count
+
+documentation:
+  README.md:
+    size: 20574
+    sha256: cc13cc69d12ab46c882a1dcc74614cab6956f85ebb0d47d9409ff340bf2e7c08
+  LICENSE:
+    size: 18653
+    sha256: 9bbc1ea9fe5c96df01b311a2ac864d5b18fc87b9948bfd14770e4b44db755ee9
+
+processing:
+  machine_catalog:
+    path: data/processed/alibaba_gpu_2020/v2020/machine_catalog.csv.gz
+    sha256: ea4993e5362dbd3d682a399ea782d08bc76abbbd9b4f7590e12edd1f21dba840
+  job_envelopes:
+    path: data/processed/model_inputs/alibaba_job_execution_envelopes_v1/job_execution_envelopes.csv.gz
+    sha256: c424322e9e4b2decc0817119be7031a534ff8992ef849dc7a4e297ffdc72021e
+  wattgpu_hardware_coverage:
+    path: data/processed/model_inputs/wattgpu_power_reference_v1/alibaba_hardware_coverage.csv.gz
+    sha256: 0e31f9581f995b80400f88ac842b64e011a94a9c0a0eda82d45e95337a85ecfb
+  output_directory: data/processed/model_inputs/alibaba_gpu_telemetry_v1
+  evidence:
+    temporal_resolution: lifetime_average_per_instance
+    cross_instance_aggregation: unweighted_mean_of_lifetime_averages
+    continuous_time_series: false
+    power_observed: false
+    gpu_work_utilization_percent_units_observed: true
+    gpu_memory_observed: true
+    worker_machine_assignment_observed: true
+    direct_job_to_power_mapping_ready: false

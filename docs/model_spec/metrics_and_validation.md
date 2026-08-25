@@ -171,6 +171,37 @@ $$
 
 B6场景外执行使用预先固定的分配规则：网络安全调用优先，剩余柔性才用于CFE移峰。被挤出的绿电移峰记为CFE缺口；若即使全部真实柔性用于网络仍不能履约，则记为条件容量服务违约。不得在看到未来路径后重新分配F/X或扩建。
 
+### 6.1 公开边缘v6的容量与E0口径
+
+上式$\Delta X^{over}$只适用于显式求解$X$的模型。公开边缘v6直接求解的是
+full-service所需最小业务柔性，故正式容量指标为
+
+$$
+\Delta D^{flex}_{min}
+=D^{flex,correct}_{min}-D^{flex,B6}_{min}.
+$$
+
+该指标无量纲，以$D^{DC}$归一化；机器字段固定为
+`flexibility_underprovisioning`。论文不得将其重命名为$X$高估。
+
+对含`exogenous_grid_infeasibility`小时的power block，报告无条件block质量
+$p_{E0}$，不生成有限服务、短缺或债务指标。其余合同风险指标均明确标注为
+条件量：
+
+$$
+\mathbb E_{\pi}[m\mid finite\ grid\ need],
+\qquad
+\pi\in\Pi(\tilde p,q).
+$$
+
+E0不得计入R3。每个报告表同时给出$p_{E0}$和$1-p_{E0}$，防止条件结果被
+误读为全样本风险。
+
+逐metric lower/upper endpoint由各自transport LP给出；区域兼容性必须由
+同一coupling的联合可行LP验证。200次固定seed的marginal block bootstrap
+只给endpoint sampling interval，不能标为population identified set或真实
+概率置信区间。
+
 ## 7. 履约失败概率
 
 分别定义而不是只给一个合成失败率：

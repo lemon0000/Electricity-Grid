@@ -1,0 +1,121 @@
+{
+  "alibaba_hardware_coverage": [
+    {
+      "alibaba_gpu_type": "CPU",
+      "candidate_job_count": 0,
+      "candidate_task_count": 0,
+      "declared_gpu_seconds": 0.0,
+      "direct_job_power_mapping_ready": 0,
+      "machine_count": 83,
+      "mapping_status": "non_gpu_machine",
+      "reference_experiment_count": 0,
+      "reference_model_count": 0,
+      "reference_workload_scope": "unavailable",
+      "wattgpu_type": ""
+    },
+    {
+      "alibaba_gpu_type": "MISC",
+      "candidate_job_count": 457007,
+      "candidate_task_count": 460256,
+      "declared_gpu_seconds": 7748554626.809893,
+      "direct_job_power_mapping_ready": 0,
+      "machine_count": 280,
+      "mapping_status": "heterogeneous_legacy_unresolved",
+      "reference_experiment_count": 0,
+      "reference_model_count": 0,
+      "reference_workload_scope": "unavailable",
+      "wattgpu_type": ""
+    },
+    {
+      "alibaba_gpu_type": "P100",
+      "candidate_job_count": 49945,
+      "candidate_task_count": 50264,
+      "declared_gpu_seconds": 3611601398.7100067,
+      "direct_job_power_mapping_ready": 0,
+      "machine_count": 798,
+      "mapping_status": "unavailable",
+      "reference_experiment_count": 0,
+      "reference_model_count": 0,
+      "reference_workload_scope": "unavailable",
+      "wattgpu_type": ""
+    },
+    {
+      "alibaba_gpu_type": "T4",
+      "candidate_job_count": 183415,
+      "candidate_task_count": 196065,
+      "declared_gpu_seconds": 2456139084.080047,
+      "direct_job_power_mapping_ready": 0,
+      "machine_count": 497,
+      "mapping_status": "exact_gpu_model",
+      "reference_experiment_count": 240,
+      "reference_model_count": 16,
+      "reference_workload_scope": "llm_inference_only",
+      "wattgpu_type": "Tesla T4"
+    },
+    {
+      "alibaba_gpu_type": "V100",
+      "candidate_job_count": 16676,
+      "candidate_task_count": 16691,
+      "declared_gpu_seconds": 1442635226.6000006,
+      "direct_job_power_mapping_ready": 0,
+      "machine_count": 104,
+      "mapping_status": "architecture_family_only_memory_variant_differs",
+      "reference_experiment_count": 525,
+      "reference_model_count": 35,
+      "reference_workload_scope": "llm_inference_only",
+      "wattgpu_type": "Tesla V100-SXM2-32GB"
+    },
+    {
+      "alibaba_gpu_type": "V100M32",
+      "candidate_job_count": 9042,
+      "candidate_task_count": 9042,
+      "declared_gpu_seconds": 1639074723.2499998,
+      "direct_job_power_mapping_ready": 0,
+      "machine_count": 135,
+      "mapping_status": "memory_capacity_match_form_factor_unverified",
+      "reference_experiment_count": 525,
+      "reference_model_count": 35,
+      "reference_workload_scope": "llm_inference_only",
+      "wattgpu_type": "Tesla V100-SXM2-32GB"
+    }
+  ],
+  "config_sha256": "99f6d4bc113b681964cad39ee7bfd75bc8366c5b91d0b58dfd2460437b9206cd",
+  "energy_mean_relative_difference_counts": {
+    "above_0p1pct": 1404,
+    "above_10pct": 18,
+    "above_1pct": 266,
+    "above_5pct": 25
+  },
+  "evidence_status": {
+    "alibaba_shared_clock": false,
+    "alibaba_shared_job_identity": false,
+    "direct_pai_job_to_power_mapping_ready": false,
+    "measured_quantity": "gpu_device_power_via_nvml",
+    "p100_hardware_reference_ready": false,
+    "t4_exact_hardware_reference_ready": true,
+    "v100_exact_hardware_reference_ready": false,
+    "workload_scope": "llm_inference_only"
+  },
+  "experiment_rows": 4798,
+  "gpu_scenario_group_rows": 24,
+  "implementation_sha256": "03280d1593d36273c0a4cc3eda2bcce1213343be83db057bc805831f9c3a3ea3",
+  "maximum_energy_mean_relative_difference": 0.13398439558383898,
+  "measured_gpu_count": 8,
+  "model_count": 49,
+  "prompt_generation_request_count_mismatch_rows": 200,
+  "scenario_counts": {
+    "offline": 1598,
+    "server_high_qps": 1600,
+    "server_low_qps": 1600
+  },
+  "schema": "wattgpu_power_reference_v1",
+  "source": {
+    "commit": "4e010359c167ac8c65b55aabd1aafbf765ae5d91",
+    "license": "Apache-2.0",
+    "paper_url": "https://arxiv.org/abs/2607.02391",
+    "release_date": "2026-06-25",
+    "release_version": "1.0.0",
+    "repository": "https://github.com/maufadel/wattgpu",
+    "source_manifest_sha256": "e7625271d755011c05d76faa424b3012452c0ec27d565265f5dff7fd910fc6e7"
+  }
+}

@@ -1,0 +1,160 @@
+schema: rq2_three_region_phase_map_preregistration_v1
+
+preregistration:
+  id: rq2_three_region_phase_map_preregistration_v1
+  date: "2026-08-24"
+  status: frozen_before_full_phase_map_execution
+  review_snapshot_parent_sha: 06e48bfaad40ebc0d7cc746b64311376df3aab68
+  immutable_manifest: configs/rq2_three_region_phase_map_preregistration_v1.SHA256SUMS.json
+  prior_cfe_v1_outcome_observed: true
+  prior_cfe_v1_role: motivating_pilot_not_confirmatory_phase_map
+  formal_result: false
+  security_certified: false
+
+research_question:
+  id: RQ2_three_region_boundary
+  estimand: >
+    Which combinations of hourly CFE target, network-stress activation,
+    business recovery headroom, flexibility budget and POI place the correct
+    shared-envelope and B6 policies in no-conflict, double-commitment-risk or
+    common-insufficiency regions?
+  evidence_tier: preregistered_local_derived_benchmark
+  causal_claimed: false
+  empirical_probability_claimed: false
+  engineering_certification_claimed: false
+
+regions:
+  R1_no_conflict:
+    rule: >
+      Both policies are training-feasible and fully evaluable, both have zero
+      holdout failure and shortfall within tolerance, and their commitment and
+      service metrics are equivalent within tolerance.
+  R2_double_commitment_risk:
+    rule: >
+      B6 is training-feasible when the shared model is proven infeasible, or
+      both policies are evaluable and B6 is weakly dominated with a strict
+      increase in capacity underprovisioning, failure probability or expected
+      shortfall.
+  R3_common_insufficiency:
+    rule: >
+      Both training models are proven infeasible, or both policies have
+      equivalent committed flexibility and equivalent positive holdout failure
+      or shortfall. A strict correct-minus-B6 capacity gap is classified as R2
+      even when both policies have equal positive service failure.
+  diagnostic_mixed:
+    rule: >
+      Directionally inconsistent metrics are reported and are not forced into
+      one of the three scientific regions.
+  unresolved:
+    rule: >
+      Any unresolved training or holdout solve is reported separately and is
+      not interpreted as infeasibility or as a scientific region.
+  tolerances:
+    probability: 1.0e-9
+    expected_shortfall_mwh: 1.0e-6
+    committed_flexibility_mw: 1.0e-6
+
+cfe_recovery_accounting:
+  green_call_formula: >
+    max(alpha_hr * D_DC - renewable_share_t * D_DC, 0) / alpha_hr
+  cfe_compatible_recovery_headroom_formula: >
+    max(renewable_share_t * D_DC / alpha_hr - D_DC, 0)
+  effective_recovery_headroom_formula: >
+    min(business_recovery_headroom_mw,
+    cfe_compatible_recovery_headroom_mw)
+  applies_to_core_and_recovery_tail: true
+  purpose: prevent_deferred_load_from_escaping_hourly_cfe_accounting
+  procurement_or_delivery_claimed: false
+
+frozen_design:
+  config: configs/rq2_three_region_phase_map_v1.yaml
+  expected_unique_cell_count: 70
+  primary_phase_surface:
+    poi_bus: 8
+    network_method: minimum_curtailment
+    hourly_cfe_targets: [0.50, 0.70, 0.85, 1.00]
+    threshold_labels: [q80, q90, q95, q99]
+    business_recovery_headroom_mw: [20.0, 40.0, 80.0]
+    max_flexibility_budget_mw: [150.0]
+    seeds: [20260822]
+  seed_robustness:
+    hourly_cfe_targets: [0.70, 0.85]
+    threshold_label: q90
+    seeds: [20260822, 20260823, 20260824]
+  budget_sensitivity:
+    hourly_cfe_targets: [0.70, 0.85]
+    threshold_label: q90
+    max_flexibility_budget_mw: [80.0, 150.0, 250.0]
+  multi_poi_network_definition:
+    poi_buses: [3, 8, 14, 18]
+    network_methods: [minimum_curtailment, overload_sensitivity]
+    hourly_cfe_targets: [0.70, 0.85]
+    threshold_label: q90
+  n_train: 12
+  n_holdout: 6
+  core_window_hours: 8
+  recovery_tail_hours: 4
+  split_fraction: 0.5
+  selective_reporting_allowed: false
+  all_cells_reported_regardless_of_sign: true
+
+frozen_inputs:
+  config_sha256: 0c2390ef3025ab94ceb0cf4a33654a895e8af2b9d4bd50e56c5c8b63bfcc3a1c
+  runner_sha256: c6e75747b8ead1eb2f79ee4f845a4d661e87b47cc95c01449817f242b870de76
+  classifier_sha256: 753289f39c57f20f88c998d744b57720a26310b207d1b6342403431d1c5821ab
+  scenario_builder_sha256: b800ce8faee994fbfa4b269815e078e92c68db5407572390670b3441f91ddc27
+  cfe_derivation_sha256: 27944b3ac9e30173f1b6d9708d2b8c7d15875ec73d187d2500028f4af837d1e6
+  temporal_holdout_sha256: 600a2d307b2daf1e792c370e6c7951e203e7c5e2d805ba7f6bcaebe4106301fb
+  temporal_model_sha256: 4e9647ac40c0ce9c003528acad56791311f6f177a9f38c1e7c1a4446b520fb09
+  network_grid_need_sha256: ca4ae719c8e1c96d398af6912994937272e31f4a29f7d485c74e0836d2199170
+  temporal_runner_helpers_sha256: faa7cd23b08204c5acc417e2105e059fa7721db1689a51661d87fac7e78288a4
+  trace_loader_sha256: 01117f70b0cae4eed2d40e50e9981dc035ad7109b7f02b32d57f6d4bc3dc325b
+  flexibility_envelope_sha256: aafaf317d5502b60352c0f903305bf893dee99c0846a8fc2ac7816b087a13c7b
+  service_risk_sha256: 67207f159297f7f4b6b02be61ab6df39c1832401ddb60bdc082abd4e99728989
+  rts24_sha256: 8c876b13fdc318ca98ab22309bae1aff0b8e56a12894f9aae98c84ed951eb8b5
+  dc_opf_sha256: 9e118d7e8c59e269274749a144654ea5a400e35c6b1cb371870329ff2601e827
+  scopf_sha256: cdd456ace5f704f31a80fab1c95dba272810cc815ffb6a4c71516e079982eb84
+  cfe_profile_sha256: f1c483fdf20ccc1ddc8e484d719b51f5b67a497bd99fd9bd7347dc57518586a5
+  google_trace_sha256: 1089b409c06ad9a1ce1c0cfa9ceea4110a0b74c9a40cfe65e7614610f9f23931
+  cfe_profile_equivalence:
+    artifact_summary_predecessor_derivation_sha256: 013354aaf85be074a7874a91d3706305fa917a2d5d6f70d24ce09e91adb89513
+    current_derivation_sha256: 27944b3ac9e30173f1b6d9708d2b8c7d15875ec73d187d2500028f4af837d1e6
+    rebuilt_csv_sha256: f1c483fdf20ccc1ddc8e484d719b51f5b67a497bd99fd9bd7347dc57518586a5
+    byte_identical_to_published_csv: true
+    verification_scope: >
+      Rebuilt from the pinned RTS-GMLC source and derivation config in an
+      isolated temporary directory before phase-map execution. The current
+      module only adds target-rescaling and recovery-headroom helpers; the
+      published alpha=1 CSV remains byte-identical.
+
+software:
+  python: 3.11.15
+  numpy: 1.26.4
+  pyomo: 6.10.1
+  highspy: 1.15.1
+  pypower: 5.1.19
+  pyyaml: 6.0.3
+
+decision_rules:
+  correctness_gate:
+    require_all_network_derivations_resolved: true
+    require_no_unresolved_cell: true
+    scientific_region_is_not_a_correctness_gate: true
+  primary_claim: >
+    The paper reports the location and movement of all three regions. It does
+    not require the double-commitment region to dominate the grid.
+  robustness_claim: >
+    A boundary is called robust only when its direction is unchanged across
+    the three seeds and both network definitions in the registered validation
+    subsets.
+  negative_result_rule: >
+    Absence of R2 cells or dominance of R3 is a valid result and triggers
+    narrowing of the claim, not parameter revision.
+
+honesty_boundaries:
+  network_activation_is_observed_outage: false
+  trace_pairing_is_joint_observation: false
+  recovery_parameters_are_empirical: false
+  cfe_is_procurement_or_physical_delivery: false
+  selected_n1_dc_is_full_n1_or_ac_security: false
+  local_phase_map_is_formal_confirmation: false

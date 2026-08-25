@@ -1,0 +1,86 @@
+source:
+  repository: https://github.com/maufadel/wattgpu
+  commit: 4e010359c167ac8c65b55aabd1aafbf765ae5d91
+  license: Apache-2.0
+  release_version: 1.0.0
+  release_date: "2026-06-25"
+  paper: WattGPU Predicting Inference Power and Latency on Unseen GPUs and LLMs
+  paper_url: https://arxiv.org/abs/2607.02391
+  path: data/raw/wattgpu_2026/v1/upstream
+
+objects:
+  README.md:
+    size: 1817
+    sha256: 2114d3cf28da87bc85757a9b7745e32a8e85f1cb3dcfebe90deacb014847837c
+  LICENSE:
+    size: 11353
+    sha256: 3af5dbba8030de47a427063bdeb834d44930d8ffb0c5d67313304b2e456c0e2b
+  CITATION.cff:
+    size: 2590
+    sha256: 67dd3e447c1c73bd5b8f170014878e99755f34788187af5487400fbcc4c0c5d9
+  WattGPU.ipynb:
+    size: 122567
+    sha256: 99a9b279b510e128e2eab32a6e8fdd8a49eb0241b2ef6fa1221965f3366deadd
+  requirements.txt:
+    size: 219
+    sha256: 82b97f08ba3b855e0763f0727901f9e312dfbb2ad9126c7ccc33cda160ff3fa6
+  data/gpu_features.csv:
+    size: 5330
+    sha256: a7f963bfb2f7e2003ffc324d2691ada347192880ac9eab754207d66f4fde19f0
+  data/model_features.csv:
+    size: 52412
+    sha256: e08ca4f603cde109f58759af237ad76a850efcb8099ddafe911fabdf978733e1
+  data/watt_counts_subset.csv:
+    size: 22255570
+    sha256: 280510e119b2ea75105f5fa46f4813930045cf90d027d3834813c022568740ba
+
+processing:
+  expected_experiment_rows: 4798
+  expected_model_count: 49
+  expected_measured_gpu_count: 8
+  expected_feature_gpu_count: 11
+  expected_scenario_counts:
+    offline: 1598
+    server_low_qps: 1600
+    server_high_qps: 1600
+  server_qps:
+    low: 0.017
+    high: 0.33
+  alibaba_machine_catalog:
+    path: data/processed/alibaba_gpu_2020/v2020/machine_catalog.csv.gz
+    sha256: ea4993e5362dbd3d682a399ea782d08bc76abbbd9b4f7590e12edd1f21dba840
+  alibaba_task_candidates:
+    path: data/processed/alibaba_gpu_2020/v2020/successful_gpu_task_candidates.csv.gz
+    sha256: a53041f484144ea67c9a1777d85e2dde350c2341c94418da8072c0a94b3821d6
+  alibaba_hardware_mapping:
+    CPU:
+      wattgpu_type:
+      status: non_gpu_machine
+    T4:
+      wattgpu_type: Tesla T4
+      status: exact_gpu_model
+    V100M32:
+      wattgpu_type: Tesla V100-SXM2-32GB
+      status: memory_capacity_match_form_factor_unverified
+    V100:
+      wattgpu_type: Tesla V100-SXM2-32GB
+      status: architecture_family_only_memory_variant_differs
+    P100:
+      wattgpu_type:
+      status: unavailable
+    MISC:
+      wattgpu_type:
+      status: heterogeneous_legacy_unresolved
+
+scientific_boundary:
+  measured_quantity: gpu_device_power_via_nvml
+  workload_scope: llm_inference_only
+  alibaba_shared_job_identity: false
+  alibaba_shared_clock: false
+  t4_exact_hardware_reference_ready: true
+  v100_exact_hardware_reference_ready: false
+  p100_hardware_reference_ready: false
+  direct_pai_job_to_power_mapping_ready: false
+
+output:
+  directory: data/processed/model_inputs/wattgpu_power_reference_v1

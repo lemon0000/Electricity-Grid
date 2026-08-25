@@ -958,6 +958,191 @@ H2的正向`underdelivers`判据只比较服务结果：B6相对correct的失败
 
 时序场景缩减只作用于generated training分布。距离向量按`network_call_active[t]`、`green_call_mw[t]`、`data_center_demand_mw[t]`和`system_load_multiplier[t]`四个分量的显式尺度标准化后，按小时顺序展平并使用fast-forward选择；代表轨迹必须是输入training轨迹的子集，只允许把删除轨迹的概率质量重分配给最近代表点。holdout不得参与选择、距离计算或概率重分配。manual/generated/reduced消融使用同一份生成后冻结的holdout，H2跨来源稳健性只作结果报告，不作为correctness gate。
 
+Alibaba工作负荷形状只能保留为旧结果复现输入，不能继续作为小时CFE scarcity的主代理。后继输入使用同一RTS-GMLC小时的系统负荷$L_t$和可再生可用出力
+$G^{RE}_t$；可再生集合固定为`WIND/PV/RTPV/HYDRO/ROR`，不包含禁用的CSP、储能、同步调相机或常规火电。定义
+
+$$
+s^{RE}_t=\min\left\{\frac{G^{RE}_t}{L_t},1\right\},\qquad
+y^{CFE,proxy}_t=s^{RE}_tD^{DC},
+$$
+
+$$
+d^{CFE}_t=\max\left\{\alpha^{hr}D^{DC}-y^{CFE,proxy}_t,0\right\},
+\qquad
+c^{green,req}_t=\frac{d^{CFE}_t}{\alpha^{hr}}.
+$$
+
+$d^{CFE}$是清洁属性缺口MW，$c^{green,req}$才是进入时序模型的负荷移出请求MW；当$\alpha^{hr}<1$时二者不得混用。该构造采用系统可再生比例分配，只是`derived_benchmark`，不证明数据中心拥有对应PPA、REC、属地可交付性或网络送达权。源CSV、公式、$\alpha^{hr}$、$D^{DC}$、可再生集合和SHA-256必须进入provenance；profile不得再次按training peak归一化或乘任意MW scale。Google网络压力与RTS-GMLC CFE profile仍按独立边缘窗口配对，不声称同钟联合分布。
+
+恢复电量仍属于数据中心小时用电，不能离开CFE核算边界。令
+
+$$
+r^{CFE,max}_t=
+\max\left\{\frac{y^{CFE,proxy}_t}{\alpha^{hr}}-D^{DC},0\right\},
+\qquad
+\overline r^{eff}_t=
+\min\left\{\overline r^{business}_t,r^{CFE,max}_t\right\}.
+$$
+
+时序recourse中的恢复功率必须满足$r_t\le\overline r^{eff}_t$。该写法只允许使用超过当前小时CFE目标的清洁归属余量恢复延期业务，避免把核心窗口内的CFE缺口机械转移到恢复尾部。相图successor的恢复尾部继续读取连续RTS-GMLC小时，不再人为把尾部`green_call_mw`置零。若$\alpha^{hr}=1$且$s^{RE}_t\le1$，则$r^{CFE,max}_t=0$；由此产生的共同不足是模型结论，不得通过豁免恢复电量的CFE核算消除。
+
+### 10.5 RQ2三区域相图
+
+每个冻结参数cell在相同training/holdout、相同安全集和相同求解标准下比较correct共享包络与B6分离包络，并按以下互斥规则分类：
+
+1. `R1_no_conflict`：两策略均可评估，提交容量、失败概率和期望短缺在容差内相同，且两者均无场景外失败或短缺。
+2. `R2_double_commitment_risk`：B6在共享模型已证明不可行时仍可签约，或两者均可评估且B6在提交容量不足、失败概率或期望短缺中至少一项严格更差、其余项不改善。
+3. `R3_common_insufficiency`：两训练模型均已证明不可行，或两策略的提交容量相同且在共享执行中产生等价的正失败/短缺。若服务失败相同但correct提交容量严格高于B6，则按容量低配归入R2。
+
+solver unresolved、缺失指标或方向冲突不得强塞入三区域，分别标记`unresolved`或`diagnostic_mixed`。相图只识别机制区域，不把cell权重解释为现实发生概率。主相面扫描$\alpha^{hr}$、training-only网络压力分位阈值和业务恢复headroom；预算、种子、POI与网络需求定义作为冻结稳健性族。全部cell无论正负均发布。
+
+### 10.6 公开边缘数据下的鲁棒部分识别后继
+
+公开数据后继将RTS-GMLC网络与CFE连续窗口视为一个联合电力系统边缘，将
+Alibaba连续业务窗口视为另一个边缘。两者没有共同日历，故不指定一个人为
+联合分布。设边缘概率分别为$p_i$和$q_j$，允许coupling集合为
+
+$$
+\Pi(p,q)=\left\{\pi\ge0:
+\sum_j\pi_{ij}=p_i,
+\sum_i\pi_{ij}=q_j
+\right\}.
+$$
+
+固定correct/B6策略后，完整执行每个Cartesian pair $(i,j)$，得到指标
+$m_{ij}$。其sharp identification interval为
+
+$$
+\underline m=\min_{\pi\in\Pi(p,q)}\sum_{ij}\pi_{ij}m_{ij},
+\qquad
+\overline m=\max_{\pi\in\Pi(p,q)}\sum_{ij}\pi_{ij}m_{ij}.
+$$
+
+该transport LP只改变配对概率，不改变任一块内小时顺序、物理调用或策略。
+若未计算完整Cartesian product，或任一pair未解析，不得称sharp bound。
+
+对非负网络与CFE调用$g_t,c_t$，MW-only层有精确关系
+
+$$
+R_S=\max_t(g_t+c_t),\qquad
+R_B=\max\{\max_tg_t,\max_tc_t\},
+$$
+
+$$
+0\le R_S-R_B
+\le\min\{\max_tg_t,\max_tc_t\}.
+$$
+
+完整事件模型不据此宣称一般可行域嵌套。分离轨迹可能改变事件分段数，因此
+duration/event/rest/energy/debt结果必须由完整MIP和固定策略回放计算。
+
+分类只对整个ambiguity set成立的结论：
+
+- 所有差值界为零且correct始终成功：`identified_R1_no_conflict`；
+- B6在所有coupling下弱劣且至少一项风险下界严格为正：
+  `identified_R2_double_commitment_risk`；
+- 所有差值界为零且correct始终失败：
+  `identified_R3_common_insufficiency`；
+- 多个区域仍相容：`partially_identified`；
+- 任一必要优化未解析：`unresolved`。
+
+主容量和能量指标以$D^{DC}$归一化。该后继不需要逐job绝对功率点映射，
+但也不得输出Alibaba绝对MW、真实合同违约概率或工程认证容量。
+
+对电力窗口$i$与业务窗口$j$的配对，令Alibaba training-only归一化后的
+requested-GPU occupancy为$w_{jt}$，注册柔性比例为$f$。逐时可用业务柔性
+定义为
+
+$$
+a_{jt}=f\min\{w_{jt},1\}.
+$$
+
+$w_{jt}$只提供availability shape，不解释为功率。RTS-GMLC原始CFE deficit
+fraction记为$d^{CFE}_{it}$，进入业务时序模型的单项CFE服务请求为
+
+$$
+c_{ijt}=\min\{d^{CFE}_{it},a_{jt}\}.
+$$
+
+这一截断保证CFE服务单独看不因请求超过该小时业务资源而机械失败；原始
+$d^{CFE}_{it}$仍保留在电力系统边缘作为压力信号，不被改写。网络安全所需
+最小调用$g_{it}$不作同类截断，因为$g_{it}>a_{jt}$本身就是共同不足证据。
+correct模型执行$g_{it}+c_{ijt}\le a_{jt}$，B6错误模型分别执行
+$g_{it}\le a_{jt}$和$c_{ijt}\le a_{jt}$。因此二者差异只来自共享资源是否
+被重复承诺，而不是CFE请求单独超出业务柔性。
+
+每个parameter cell先仅用training边缘的预注册weighted-stress代表点冻结
+correct/B6的minimum-capacity full-service策略；holdout不得重优化容量。
+holdout运行也不得读取完整24小时未来后重优化recourse。两策略统一使用冻结
+的因果`grid-first`规则：每小时先接受必须执行的当前网络调用，再在当前容量、
+availability、事件状态、累计能量和恢复债务允许范围内服务当前CFE请求；
+无活动调用时使用当前可见headroom尽快恢复。未来小时的调用与headroom不进入
+当前决策。该规则若因mandatory grid call或自身历史状态导致物理包络违约，
+必须报告policy failure，不能用事后全时域重优化修复。
+若任一training策略被证明不可行，该cell的fixed-policy transport estimand
+未定义：必须保留其infeasible状态，但不得伪造pairwise outcome，也不得把
+它记作solver unresolved或自动归入R1/R2/R3。只有两策略均成功冻结且完整
+Cartesian holdout pair全部解析的cell，才允许声明sharp transport bounds。
+
+正式successor的每个stage必须由同一冻结provenance contract验证其runner、
+直接模型模块和solver package版本。grid与pairwise checkpoint必须绑定
+canonical stage-base provenance hash；发布包必须包含逐checkpoint SHA-256
+inventory和`provenance.json`。下游除验证package manifest外，还必须验证
+上游config SHA、contract、implementation、software、source/input manifests
+及checkpoint inventory。不得用重新计算当前模块hash的方式给旧checkpoint
+重新署名，也不得只凭summary中的声明字段接受上游结果。
+
+### 10.7 v6 E0、容量estimand与共同coupling修订
+
+当前minimum-capacity planner的直接决策量是归一化业务柔性预算
+$D^{flex}_{min}$，不是条件接入容量$X$。因此v6容量差值固定为
+
+$$
+\Delta D^{flex}_{min}
+=D^{flex,correct}_{min}-D^{flex,B6}_{min},
+$$
+
+机器字段为`flexibility_underprovisioning`。没有显式$X$决策或经验证的映射
+时，不得把它改写为$X$高估。
+
+对每个事故小时，若在$0\le c^{grid}_t\le D^{DC}$下corrective LP证明不可行，
+再以$D^{DC}=0$重建同一固定commitment/normal-dispatch纠正模型。只有第二次
+仍为solver-proven infeasible时才记为
+`exogenous_grid_infeasibility`（E0）；其他非optimal状态均保留为
+`unresolved_grid_need`。含任一E0小时的24小时power block整体作为E0 block：
+其边缘概率质量无条件报告，Cartesian状态行完整保留，但不填有限
+`grid_need`或服务指标。
+
+令$\mathcal I_F$为`finite_grid_need` power blocks，E0质量为
+
+$$
+p_{E0}=\sum_{i\notin\mathcal I_F}p_i.
+$$
+
+contract-risk transport只在条件边缘
+
+$$
+\tilde p_i=\frac{p_i}{1-p_{E0}},\qquad i\in\mathcal I_F
+$$
+
+上求解。E0不进入`R3_common_insufficiency`，避免把系统本底不可行归因于共享
+业务柔性。
+
+8x8代表点给出的策略必须在完整$\mathcal I_F^{train}\times\mathcal J^{train}$
+上按冻结语义审计。correct检查合计调用的共享包络；B6分别检查网络与CFE
+包络。任一失败使该cell不具备holdout transport资格，且不得事后重选代表点
+或提高容量。
+
+逐metric transport endpoint仍各自sharp。对`partially_identified` cell，
+区域相容性另解一个共享transport coupling的LP：同一$\pi$必须同时满足该
+区域全部差值和correct-success/failure条件。不同metric各自极值对应的
+coupling不得拼接成区域见证。
+
+抽样不确定性使用两经验边缘的independent marginal block bootstrap；每个
+replicate重抽block并重算transport endpoints。固定200次、seed `20260825`
+和95% percentile interval。该区间不改变条件transport identified set，也
+不支持population或真实合同概率主张。
+
 ## 11. CFE归属与匹配
 
 CFE只在正常运行状态 $c=0$ 上核算；N-1状态是安全校核，不按事故状态概率重复计入年度用电。

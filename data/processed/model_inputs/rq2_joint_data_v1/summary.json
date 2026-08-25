@@ -1,0 +1,51 @@
+{
+  "area": 1,
+  "branch_reliability_components": 38,
+  "buses": 24,
+  "config_sha256": "4cbc7f097e7f1ed0749907622139eba37675d08ecc3619ea3fb6014ef772367f",
+  "event_counts": {
+    "20260822": {
+      "branch_events": 8,
+      "events": 264,
+      "generator_events": 256
+    },
+    "20260823": {
+      "branch_events": 14,
+      "events": 249,
+      "generator_events": 235
+    },
+    "20260824": {
+      "branch_events": 10,
+      "events": 236,
+      "generator_events": 226
+    }
+  },
+  "evidence_status": {
+    "cfe_contract": "eligible_resource_universe_not_allocated_portfolio",
+    "empirical_outage_probability_claimed": false,
+    "load_and_renewable": "observed_rts_gmlc_benchmark_chronology",
+    "outages": "derived_sequential_reliability_benchmark",
+    "security_certified": false
+  },
+  "first_timestamp": "2020-01-01T00:00:00",
+  "generator_reliability_components": 30,
+  "hours": 8784,
+  "implementation_sha256": "0cafb9fd126697c328fe9eda480ae0393d6d22f63d7ad3250d04190e44499770",
+  "last_timestamp": "2020-12-31T23:00:00",
+  "maximum_generator_for_identity_error": 0.0,
+  "outage_seeds": [
+    20260822,
+    20260823,
+    20260824
+  ],
+  "reliability_components": 68,
+  "reliability_module_sha256": "2edddc1688f0db4d559c8d4d9ef2f1ed1a0e72f951afcee5950263a6adc4052e",
+  "renewable_generators": 27,
+  "schema": "rq2_joint_rts_gmlc_data_v1",
+  "source": {
+    "commit": "3ece0d3725c844056132393ee252b3083dd4eab4",
+    "manifest_sha256": "95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914",
+    "release": "v0.2.3",
+    "repository": "https://github.com/GridMod/RTS-GMLC"
+  }
+}

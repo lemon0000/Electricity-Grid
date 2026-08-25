@@ -1,0 +1,44 @@
+schema: rq2_grid_need_anomaly_diagnostic_config_v1
+
+scope:
+  evidence_level: development_diagnostic
+  formal_grid_execution: false
+  blocks:
+    holdout_s20260822_0089:
+      checkpoint_sha256: 53a03a3c205b4a5929879823e56288beab88077e6287dd91dabe65a9a19ea1ce
+      expected_source_hours: [6598]
+    holdout_s20260822_0150:
+      checkpoint_sha256: d5f6294459828a55081b76ae94f3e120dd353dc905f385e3e025bf213d68b54e
+      expected_source_hours: [8057, 8058, 8059]
+
+parent:
+  config_path: configs/rts_gmlc_public_grid_need_dispatch_v3_formal.yaml
+  config_sha256: 120eb2862bc8ec7fe221fbd04282754b6e8ce804d0e4e27625d2cf210b35cd68
+  checkpoint_directory: results/checkpoints/rts_gmlc_public_grid_need_dispatch_v3
+  runner_path: experiments/run_rts_gmlc_public_grid_need_dispatch_v3.py
+  runner_sha256: 1f5fadab042241136ff5494bbccd46f2e645f1e16abe52318d812d72296dec7e
+  grid_need_module_path: src/grid/rts_gmlc_grid_need.py
+  grid_need_module_sha256: 92325d08ff784c68224064dc8a0a3baff29a54875e922cf413a149a908d866b7
+
+solver:
+  name: highs
+  expected_package_version: 1.15.1
+  threads: 4
+  mip_relative_gap: 1.0e-6
+  feasibility_tolerance: 1.0e-6
+  optimality_tolerance: 1.0e-6
+  integer_feasibility_tolerance: 1.0e-6
+  random_seed: 0
+  time_limit_seconds: null
+  tee: false
+
+diagnostic:
+  require_parent_primary_infeasible: true
+  require_zero_dc_endpoint_infeasible: true
+  thermal_relaxation_rating_mw: 1.0e9
+  thermal_relaxation_is_classification_evidence: false
+  second_solver_confirmation_required_before_formal_v6_activation: true
+
+output:
+  directory: results/tables/rq2_grid_need_anomaly_diagnostic_v1
+  schema: rq2_grid_need_anomaly_diagnostic_v1

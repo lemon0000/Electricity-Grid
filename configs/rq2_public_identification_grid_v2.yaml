@@ -1,0 +1,64 @@
+schema: rq2_public_identification_grid_v2
+
+input:
+  pairwise_replay_ready: false
+  pairwise_replay_package: data/processed/model_inputs/rq2_public_pairwise_replay_v2
+  pairwise_replay_manifest_sha256: null
+  expected_pairwise_schema: rq2_public_pairwise_replay_v2
+  expected_pairwise_config_sha256: 662757227f9686015c9cdd17b94880e2847e22d3730783fefb3fb211c7359ca1
+  expected_power_system_dispatch_manifest_sha256: null
+  expected_power_system_dispatch_provenance_sha256: null
+  expected_workload_manifest_sha256: 62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524
+  expected_workload_config_sha256: 571b10ff6874ae2c787420b3328e4f256e1d284864851d5099b7ecf9b5d43c2c
+  expected_workload_implementation_sha256: 6f2e0c91733cb30846c85b03b3cd89c07f27c042b29ad3b002b76d64f9264d4b
+  expected_workload_source_sha256: a53041f484144ea67c9a1777d85e2dde350c2341c94418da8072c0a94b3821d6
+  expected_parameter_cells: 15
+  expected_power_holdout_blocks: 530
+  expected_workload_holdout_blocks: 34
+
+ambiguity_set:
+  type: complete_discrete_transport_polytope
+  support: unrestricted_complete_Cartesian_product
+  within_block_hour_order_preserved: true
+  empirical_joint_distribution_claimed: false
+  canonical_diagnostics:
+    - independent_product
+    - comonotone_by_registered_stress_score
+    - countermonotone_by_registered_stress_score
+    - minimum_metric_transport
+    - maximum_metric_transport
+
+registered_metrics:
+  - delta_failure_probability
+  - delta_expected_shortfall
+  - flexibility_underprovisioning
+  - correct_failure_probability
+  - correct_expected_shortfall
+  - delta_peak_recovery_debt
+  - delta_terminal_recovery_debt
+  - correct_peak_recovery_debt
+  - correct_terminal_recovery_debt
+
+classification:
+  probability_tolerance: 1.0e-9
+  outcome_tolerance: 1.0e-6
+  fixed_policy_infeasible_or_missing: unresolved_estimand_not_failure
+
+ambiguity_reduction:
+  method: set_identification_width_reduction
+  parameter_design: one_factor_at_a_time
+  parameter_level_probability_assumed: false
+  joint_parameter_robustness_claimed: false
+
+provenance:
+  contract_path: configs/rq2_public_pipeline_provenance_contract_v1.yaml
+  contract_sha256: 08e8c96e28d1b0d5553c218a19eb8a720c53465fb88341a491a7d47bb1767c9f
+
+execution:
+  formal_execution_ready: false
+  independent_R4_review_passed: false
+  user_formal_run_authorized: false
+
+output:
+  schema: rq2_public_identification_grid_v2
+  directory: results/tables/rq2_public_identification_grid_v2

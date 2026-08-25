@@ -71,6 +71,7 @@ class TemporalEconomicScenario:
     completed_periods: frozenset[str]
     require_terminal_event_inactive: bool
     boundary_state_status: str
+    available_flexibility_mw: tuple[float, ...] | None = None
 
 
 @dataclass(frozen=True)
@@ -254,6 +255,8 @@ def _validate_inputs(inputs: TemporalEconomicInputs) -> tuple[int, int]:
             len(scenario.connected_demand_mw),
             len(scenario.recovery_headroom_mw),
         }
+        if scenario.available_flexibility_mw is not None:
+            lengths.add(len(scenario.available_flexibility_mw))
         if lengths == {0} or len(lengths) != 1:
             raise ValueError("scenario chronological arrays must be equal and nonempty")
         if any(not period for period in scenario.periods):
@@ -303,6 +306,15 @@ def _validate_inputs(inputs: TemporalEconomicInputs) -> tuple[int, int]:
                 raise ValueError("grid need cannot exceed connected demand")
             if green > connected + _TOLERANCE:
                 raise ValueError("green call cannot exceed connected demand")
+            if scenario.available_flexibility_mw is not None:
+                available = _nonnegative(
+                    f"available_flexibility_mw[{scenario.name},{index}]",
+                    scenario.available_flexibility_mw[index],
+                )
+                if available > connected + _TOLERANCE:
+                    raise ValueError(
+                        "available flexibility cannot exceed connected demand"
+                    )
         all_periods.update(scenario.periods)
     if abs(probability_sum - 1.0) > 1.0e-9:
         raise ValueError("scenario probabilities must sum to one")
@@ -371,6 +383,7 @@ def _build_model(
     model.grid_need = ConstraintList()
     model.green_balance = ConstraintList()
     model.connected_cap = ConstraintList()
+    model.available_flexibility = ConstraintList()
     for name, index in points:
         scenario = scenarios[name]
         model.grid_need.add(
@@ -387,6 +400,21 @@ def _build_model(
             + model.green_shift[name, index]
             <= scenario.connected_demand_mw[index]
         )
+        if scenario.available_flexibility_mw is not None:
+            available = scenario.available_flexibility_mw[index]
+            if inputs.enforce_joint_budget:
+                model.available_flexibility.add(
+                    model.grid_curtailment[name, index]
+                    + model.green_shift[name, index]
+                    <= available
+                )
+            else:
+                model.available_flexibility.add(
+                    model.grid_curtailment[name, index] <= available
+                )
+                model.available_flexibility.add(
+                    model.green_shift[name, index] <= available
+                )
 
     model.temporal = ConstraintList()
     for name in names:

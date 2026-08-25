@@ -1,0 +1,117 @@
+schema: rq2_public_pipeline_provenance_contract_v3
+
+stages:
+  grid_need_dispatch_v4:
+    runner:
+      path: experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py
+      sha256: 39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8
+    modules:
+      chronological_dispatch:
+        path: src/grid/chronological_dispatch.py
+        sha256: 71d6c1da0e72942512810c651619c5cd73e915c3ac6d0d52684476d6133658ec
+      execution_machine:
+        path: src/evaluation/execution_machine.py
+        sha256: f5a1ee567c6127c4dc85da7c5ca40d1974a2ee4cdad6cceca2b4e67a54102e7f
+      flexibility_envelope:
+        path: src/evaluation/flexibility_envelope.py
+        sha256: db007a9ac1fdd94779b734c6d39e841302f01a1ef49a121d2c00e0d0a996cd40
+      provenance:
+        path: src/evaluation/rq2_provenance_v3.py
+        sha256: c4376be60fda2499266f7593ca92eb1163c7ee156d7970dc1975d0e060f4bcec
+      rts_gmlc:
+        path: src/grid/rts_gmlc.py
+        sha256: 4180ab5ce86eb34a9de9e058ff9c56275ace3a6ffab06dbb464d93ef23382448
+      rts_gmlc_grid_need_predecessor:
+        path: src/grid/rts_gmlc_grid_need.py
+        sha256: 92325d08ff784c68224064dc8a0a3baff29a54875e922cf413a149a908d866b7
+      rts_gmlc_grid_need_successor:
+        path: src/grid/rts_gmlc_grid_need_successor.py
+        sha256: 9997c7a213908a39828ac3455876aecb39b64a544e76102fdd6ad3c27755d1f5
+      rts_gmlc_n1_chronology:
+        path: src/scenarios/rts_gmlc_n1_chronology.py
+        sha256: ebf412fd69864604c276972b6bcd0ae63559194e1e902e5f92a3357834784d64
+      rts_gmlc_scuc:
+        path: src/grid/rts_gmlc_scuc.py
+        sha256: 1101b21cbdab0cdacd6755578208ce7d28cd3e6e04f932d397119a4dde2b6cfe
+      rts_gmlc_scuc_successor:
+        path: src/grid/rts_gmlc_scuc_solver_successor.py
+        sha256: da75603f97b005dd3d4f2488e3ae2b49c16f93ea2278a629de4508032a976666
+      solver_adapter:
+        path: src/solvers/rq2_solver_adapter.py
+        sha256: bec0a6e58ba35d3f262a0df04d7695e91794d02c754ee939b75774c1cd3e6611
+    software:
+      gurobipy: 13.0.2
+      highspy: 1.15.1
+      pyomo: 6.10.1
+
+  pairwise_replay_v4:
+    runner:
+      path: experiments/run_rq2_public_pairwise_replay_v4.py
+      sha256: 64755213b6e01c307c6b2afd45ef0f8e9bfa18dc47b435dfd74afc1a46b752cf
+    modules:
+      economic_temporal_stochastic:
+        path: src/models/economic_temporal_stochastic.py
+        sha256: bb2a2e8c51747fcae89d8e7c3dfe4e95d7f4d24aa6a620cf459ff590eb60ff89
+      execution_machine:
+        path: src/evaluation/execution_machine.py
+        sha256: f5a1ee567c6127c4dc85da7c5ca40d1974a2ee4cdad6cceca2b4e67a54102e7f
+      flexibility_envelope:
+        path: src/evaluation/flexibility_envelope.py
+        sha256: db007a9ac1fdd94779b734c6d39e841302f01a1ef49a121d2c00e0d0a996cd40
+      grid_need_successor:
+        path: src/grid/rts_gmlc_grid_need_successor.py
+        sha256: 9997c7a213908a39828ac3455876aecb39b64a544e76102fdd6ad3c27755d1f5
+      provenance:
+        path: src/evaluation/rq2_provenance_v3.py
+        sha256: c4376be60fda2499266f7593ca92eb1163c7ee156d7970dc1975d0e060f4bcec
+      public_replay:
+        path: src/scenarios/rq2_public_replay.py
+        sha256: 2d1668b43c21ecdbf851cb750b3a6979d7942e6abe4255ebf0a0f9a1c6297028
+      public_replay_successor:
+        path: src/scenarios/rq2_public_replay_successor.py
+        sha256: c239ad337130781f97afd74b562045104a98060f67ac3632d997218c0548b8cd
+      service_risk:
+        path: src/evaluation/service_risk.py
+        sha256: 67207f159297f7f4b6b02be61ab6df39c1832401ddb60bdc082abd4e99728989
+      solver_adapter:
+        path: src/solvers/rq2_solver_adapter.py
+        sha256: bec0a6e58ba35d3f262a0df04d7695e91794d02c754ee939b75774c1cd3e6611
+      temporal_capacity_predecessor:
+        path: src/models/temporal_flexibility_capacity.py
+        sha256: 962c36490ff59769bf536a20056eafa629643c77d888f22a8137f0d5423a8fbc
+      temporal_capacity_successor:
+        path: src/models/temporal_flexibility_capacity_successor.py
+        sha256: 387fa428ed062f32700c5ac5a31baa6bf535a976e5674950f309b8f53be7372c
+      temporal_holdout:
+        path: src/evaluation/temporal_economic_holdout.py
+        sha256: 44efaa99dc30b2e9b0043bc263d1daf2e7859684d76d31840be7fd2d3a768ed7
+    software:
+      gurobipy: 13.0.2
+      pyomo: 6.10.1
+
+  identification_grid_v4:
+    runner:
+      path: experiments/run_rq2_public_identification_grid_v4.py
+      sha256: 3ed271169f62d4142f5c8c8d19a6a47d92b087201514fbd7041c3747f4b8a935
+    modules:
+      block_coupling:
+        path: src/scenarios/block_coupling.py
+        sha256: e18e025c6482ecb38f745bb993d346f49c4bdd99802cdb1675e4bd7ab5243cc4
+      execution_machine:
+        path: src/evaluation/execution_machine.py
+        sha256: f5a1ee567c6127c4dc85da7c5ca40d1974a2ee4cdad6cceca2b4e67a54102e7f
+      grid_need_successor:
+        path: src/grid/rts_gmlc_grid_need_successor.py
+        sha256: 9997c7a213908a39828ac3455876aecb39b64a544e76102fdd6ad3c27755d1f5
+      identification_bounds:
+        path: src/evaluation/rq2_identification_bounds.py
+        sha256: 6236401e54da87cad6e0265a911e81af79a8d4a583fcfb4f0765bada8bb14768
+      joint_identification:
+        path: src/evaluation/rq2_joint_identification.py
+        sha256: 37289ddf3277c0a6f11aa0e1192979fc6991098796254a7234a0414862757960
+      provenance:
+        path: src/evaluation/rq2_provenance_v3.py
+        sha256: c4376be60fda2499266f7593ca92eb1163c7ee156d7970dc1975d0e060f4bcec
+    software:
+      numpy: 1.26.4
+      scipy: 1.17.0

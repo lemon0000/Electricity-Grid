@@ -18,6 +18,17 @@ from .frozen_tree import (
     load_frozen_scenario_tree,
     parse_frozen_scenario_tree,
 )
+from .rts_gmlc_cfe_deficit import (
+    CFE_DEFICIT_FORMULA,
+    CFE_DEFICIT_PARAMETER_STATUS,
+    RENEWABLE_UNIT_TYPES,
+    CfeOperatingLimit,
+    RtsGmlcCfeDeficitPoint,
+    RtsGmlcCfeDeficitProfile,
+    derive_cfe_operating_limit,
+    derive_rts_gmlc_cfe_deficit,
+    load_rts_gmlc_cfe_deficit_profile,
+)
 from .scenario_reduction import (
     SCENARIO_REDUCTION_PARAMETER_STATUS,
     ScenarioReductionResult,
@@ -46,11 +57,15 @@ from .trace_scenario_generator import (
 )
 
 __all__ = [
+    "CFE_DEFICIT_FORMULA",
+    "CFE_DEFICIT_PARAMETER_STATUS",
     "COMMON_INPUT_SIGNATURE_SCHEMA",
+    "RENEWABLE_UNIT_TYPES",
     "SCENARIO_REDUCTION_PARAMETER_STATUS",
     "TEMPORAL_SCENARIO_REDUCTION_PARAMETER_STATUS",
     "TEMPORAL_TRACE_PARAMETER_STATUS",
     "TRACE_SCENARIO_PARAMETER_STATUS",
+    "CfeOperatingLimit",
     "DemandState",
     "FrozenScenarioTree",
     "GeneratedScenarioSet",
@@ -59,6 +74,8 @@ __all__ = [
     "ProjectState",
     "ProjectTiming",
     "QuarterDecisionGroups",
+    "RtsGmlcCfeDeficitPoint",
+    "RtsGmlcCfeDeficitProfile",
     "ScenarioLeaf",
     "ScenarioNode",
     "ScenarioReductionResult",
@@ -69,10 +86,13 @@ __all__ = [
     "TraceShape",
     "build_common_input_signature",
     "common_input_signature_sha256",
+    "derive_cfe_operating_limit",
+    "derive_rts_gmlc_cfe_deficit",
     "generate_holdout_scenarios",
     "generate_temporal_holdout_scenarios",
     "load_frozen_scenario_tree",
     "load_peak_normalized_shape_from_csv",
+    "load_rts_gmlc_cfe_deficit_profile",
     "load_trace_shape_from_csv",
     "normalize_common_input_signature",
     "parse_frozen_scenario_tree",

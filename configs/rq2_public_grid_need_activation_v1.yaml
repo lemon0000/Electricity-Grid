@@ -1,0 +1,37 @@
+schema: rq2_public_grid_need_activation_v1
+
+authorization:
+  user_authorized_all_required_permissions: true
+  user_authorization_date: "2026-08-25"
+  independent_R4_verdict: PASS
+  review_path: docs/review/2026-08-25_rq2_public_identification_v5_r4_review.md
+  review_sha256: 98508d346189730de3858e858049bdb03ca18d13c063ae8dd6df65e28cbb6380
+
+frozen_parent:
+  preregistration_path: configs/rq2_public_data_robust_identification_preregistration_v5.yaml
+  preregistration_sha256: dc7d47636531e3ca31c761d70cc4f2af0bf13db52c44e204ff7bbbb4861f07b7
+  manifest_path: configs/rq2_public_data_robust_identification_preregistration_v5.SHA256SUMS.json
+  manifest_sha256: 403c2cec7da1560a3ec0f68dab6463e2e290876990a25a7cf7ee5a7690e80697
+
+formal_stage:
+  stage: grid_need_dispatch_v3
+  config_path: configs/rts_gmlc_public_grid_need_dispatch_v3_formal.yaml
+  config_sha256: 120eb2862bc8ec7fe221fbd04282754b6e8ce804d0e4e27625d2cf210b35cd68
+  runner_path: experiments/run_rts_gmlc_public_grid_need_dispatch_v3.py
+  runner_sha256: 1f5fadab042241136ff5494bbccd46f2e645f1e16abe52318d812d72296dec7e
+  provenance_contract_path: configs/rq2_public_pipeline_provenance_contract_v2.yaml
+  provenance_contract_sha256: b219f2d7da2a03d9026f4ac72accf565bfd7c39b16c2b42b7283ea7e6ee6b877
+  expected_blocks: 1071
+  checkpoint_directory_must_not_preexist: true
+  output_directory_must_not_preexist: true
+
+downstream:
+  pairwise_replay_ready: false
+  identification_ready: false
+  activation_requires_verified_upstream_package: true
+
+claims:
+  formal_result_exists: false
+  security_certified: false
+  full_N_minus_one: false
+  AC_security: false

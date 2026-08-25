@@ -14,11 +14,10 @@ import tempfile
 import time
 from collections import Counter, defaultdict
 from contextlib import contextmanager
-from decimal import Decimal, InvalidOperation, ROUND_FLOOR
+from decimal import ROUND_FLOOR, Decimal, InvalidOperation
 from pathlib import Path
 
 import yaml
-
 
 JOB_FIELDS = (
     "job_name",
@@ -159,21 +158,19 @@ def _iter_archive_rows(
 
 @contextmanager
 def _gzip_csv(path: Path, fields: tuple[str, ...]):
-    with path.open("wb") as raw:
-        with gzip.GzipFile(filename="", mode="wb", fileobj=raw, mtime=0) as compressed:
-            with io.TextIOWrapper(
-                compressed,
-                encoding="utf-8",
-                newline="",
-            ) as text:
-                writer = csv.DictWriter(
-                    text,
-                    fieldnames=fields,
-                    lineterminator="\n",
-                    extrasaction="raise",
-                )
-                writer.writeheader()
-                yield writer
+    with (
+        path.open("wb") as raw,
+        gzip.GzipFile(filename="", mode="wb", fileobj=raw, mtime=0) as compressed,
+        io.TextIOWrapper(compressed, encoding="utf-8", newline="") as text,
+    ):
+        writer = csv.DictWriter(
+            text,
+            fieldnames=fields,
+            lineterminator="\n",
+            extrasaction="raise",
+        )
+        writer.writeheader()
+        yield writer
 
 
 def _decimal(
@@ -222,7 +219,7 @@ def _counts_for(counter: Counter[str], fields: list[str]) -> dict[str, int]:
 def _assert_expected(expected: object, actual: object, path: str = "processing") -> None:
     if isinstance(expected, dict):
         if not isinstance(actual, dict):
-            raise RuntimeError(f"{path} expected a mapping")
+            raise TypeError(f"{path} expected a mapping")
         for key, value in expected.items():
             if key not in actual:
                 raise RuntimeError(f"{path}.{key} is absent from the processing audit")
@@ -971,18 +968,26 @@ def run(
             "outputs": output_metadata,
         }
         summary_path = staging / "summary.json"
-        summary_path.write_text(
-            json.dumps(summary, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
+        summary_path.write_bytes(
+            (json.dumps(summary, indent=2, sort_keys=True) + "\n")
+            .replace("\n", "\r\n")
+            .encode("utf-8")
         )
-        if expected_outputs is not None and _sha256(summary_path) != expected_outputs[
-            "summary_sha256"
-        ]:
-            raise RuntimeError("Processed Alibaba summary hash drifted")
+        observed_summary_sha256 = _sha256(summary_path)
+        if (
+            expected_outputs is not None
+            and observed_summary_sha256 != expected_outputs["summary_sha256"]
+        ):
+            raise RuntimeError(
+                "Processed Alibaba summary hash drifted: "
+                f"expected={expected_outputs['summary_sha256']}, "
+                f"observed={observed_summary_sha256}"
+            )
         manifest_files = (*OUTPUT_FILES, "summary.json")
-        (staging / "SHA256SUMS").write_text(
-            "".join(f"{_sha256(staging / name)}  {name}\n" for name in manifest_files),
-            encoding="ascii",
+        (staging / "SHA256SUMS").write_bytes(
+            "".join(
+                f"{_sha256(staging / name)}  {name}\r\n" for name in manifest_files
+            ).encode("ascii")
         )
         _publish(staging, output_root)
     return summary

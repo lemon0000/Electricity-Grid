@@ -1,0 +1,58 @@
+{
+  "config_sha256": "f2265f1f2d34d5d23e6c4466891d0287e1fec05021e8f83f05e091cb8aaa6640",
+  "evidence_status": {
+    "alibaba_pairing": "no_shared_jobs_hardware_or_clock",
+    "checkpoint_state_observed": false,
+    "deadline_observed": false,
+    "direct_pai_gpu_to_power_mapping_ready": false,
+    "dynamic_ramp_calibration_ready": false,
+    "facility_power_observed": false,
+    "facility_profiles": "synthetic_diploee_examples",
+    "measured_hardware": "4x_nvidia_h100_per_node",
+    "measured_power_scope": "source_defined_aggregate_cpu_and_gpu_compute_node_power",
+    "measured_profiles": "observed_hpc_compute_node_power",
+    "published_measurement_intervals_s": [
+      0.1,
+      0.2
+    ],
+    "recoverable_fraction_observed": false,
+    "source_aggregation_recomputed": false
+  },
+  "implementation_sha256": "8c65c4eaa7e79da59925f1bfb24af2010fc533f04ba8ff109492a4c36db3a69e",
+  "measured_group_rows": 11,
+  "measured_profile_rows": 2467,
+  "measured_profiles_by_class": {
+    "inference_offline": 1200,
+    "inference_online_finite": 1026,
+    "inference_online_rate": 200,
+    "training": 41
+  },
+  "profile_sample_intervals_s": {
+    "0.001": 200,
+    "0.1": 2226,
+    "0.2": 41
+  },
+  "profiles_below_published_measurement_resolution": 200,
+  "schema": "nlr_genai_power_profiles_v2",
+  "source": {
+    "archive_members": 3191,
+    "archive_sha256": "dcad6de800fb565d850b163902e2eddae48aabd1ed1c7336f9a1cdaf3012f137",
+    "archive_size_bytes": 1070866623,
+    "catalog_last_updated": "2026-07-17",
+    "catalog_version": 2,
+    "dataset": "Dataset of Generative AI Workload Power Profiles",
+    "doi": "10.7799/3025227",
+    "landing_page": "https://data.nlr.gov/submissions/312",
+    "license": "CC BY 4.0",
+    "member_sha256": {
+      "01_aggregated_datasets/inference_offline_llama3_70b/metadata.csv": "537f31c05d634ed057bb0e3d7751497bf11c4978cfcd7bc10b98d37302b3e1d4",
+      "01_aggregated_datasets/inference_online_finite_llama3_70b/metadata.csv": "055f38ad49096ff539efe966e246e51afa585ee50234936aaa63516fd37caa96",
+      "01_aggregated_datasets/inference_online_rate_llama3_70b/metadata.csv": "ee59993cda9e3bdd830315f111fae026f879ac0803d617104afe667fab59a92a",
+      "01_aggregated_datasets/training/metadata.csv": "385f20516edeef936115d3f4d9a874ac7ee2e36a69863be496e9f017df67b5a8",
+      "03_whole-facility_profiles/colocation/metadata.csv": "964575ddfd1d53a2fd9b4cc3abfb97199e637c4d15687ec11c458051eb4ee8a0",
+      "03_whole-facility_profiles/inference/metadata.csv": "abb6a9f0b7fd35429fbfd6005feb70d06f5385d074063c69ee40b4f76e622be3",
+      "README.md": "e347e6d563048672d5e2966710e4b89035cfbc3dfb83dbb40a73e7095d2bd1b8"
+    }
+  },
+  "synthetic_facility_profile_rows": 8
+}

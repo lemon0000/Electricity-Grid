@@ -1,0 +1,117 @@
+schema: rq2_public_data_ambiguity_set_v3
+
+successor:
+  predecessor: configs/rq2_public_data_ambiguity_set_v2.yaml
+  predecessor_sha256: 4c898ab0982df9b2ba6bed3c57780cb8c72974921c74ef0f2e3c93da8877b7cb
+  change_scope: >
+    Bind 24-hour job-disjoint workload blocks, full-system non-islanding N-1
+    power blocks, physical grid-need dispatch, Cartesian replay, and
+    multi-cell identification.
+
+research_question:
+  id: RQ2_public_data_partial_identification
+  estimand: >
+    Sharp bounds on dimensionless duplicate flexibility commitment and
+    fixed-policy service loss over every coupling of the registered
+    RTS-GMLC network+CFE and Alibaba workload holdout marginals.
+  evidence_tier: public_benchmark_partial_identification
+  empirical_joint_distribution_claimed: false
+  engineering_certification_claimed: false
+
+normalization:
+  reference_demand_symbol: D_DC
+  reference_demand_value: 1.0
+  primary_capacity_unit: fraction_of_D_DC
+  primary_energy_unit: fraction_of_D_DC_hours
+  Alibaba_workload_fraction_is_power: false
+  available_flexibility: flexible_fraction_times_capped_workload_fraction
+  CFE_pressure_signal: RTS_GMLC_cfe_deficit_fraction
+  green_call: min_CFE_pressure_and_available_flexibility
+  grid_need: physical_corrective_LP_fraction_not_truncated
+
+public_marginals:
+  power_system:
+    block_package: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4
+    block_manifest_sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+    block_hours: 24
+    training_block_count: 541
+    holdout_block_count: 530
+    reliability_components: 211
+    maximum_simultaneous_outages: 1
+    outage_semantics: sampled_from_published_rate_not_empirical_probability
+    grid_need_dispatch:
+      config: configs/rts_gmlc_public_grid_need_dispatch_v1.yaml
+      package: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v1
+      ready: false
+  workload:
+    block_package: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3
+    block_manifest_sha256: 62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524
+    block_hours: 24
+    training_block_count: 34
+    holdout_block_count: 34
+    job_split_policy: exclude_jobs_contributing_to_both_sides
+    cross_split_jobs_excluded: 908
+    normalization_fit_split: training_only
+
+policy:
+  training_selection: weighted_marginal_stress_quantile_representatives
+  correct_and_B6_training_representatives: 8_by_8
+  objective: minimum_capacity_subject_to_full_training_service
+  holdout_provision_reoptimization: false
+  holdout_recourse_reoptimization: false
+  operational_policy: causal_myopic_grid_first_then_CFE_with_current_state_only
+  physical_holdout_envelope: correct_shared_envelope_for_both_policies
+  training_infeasible_cell: fixed_policy_estimand_undefined
+
+ambiguity_set:
+  type: complete_discrete_transport_polytope
+  row_marginal: RTS_GMLC_network_and_CFE_holdout_blocks
+  column_marginal: Alibaba_dimensionless_workload_holdout_blocks
+  support: unrestricted_complete_Cartesian_product
+  within_block_hour_order_preserved: true
+  pairwise_policy_execution: fixed_without_holdout_provision_reoptimization
+  sharpness_condition: every_pairwise_outcome_for_the_cell_is_resolved
+  canonical_diagnostics:
+    - independent_product
+    - comonotone_by_registered_stress_score
+    - countermonotone_by_registered_stress_score
+    - minimum_metric_transport
+    - maximum_metric_transport
+
+registered_metrics:
+  - delta_failure_probability
+  - delta_expected_shortfall
+  - flexibility_underprovisioning
+  - correct_failure_probability
+  - correct_expected_shortfall
+  - delta_peak_recovery_debt
+  - delta_terminal_recovery_debt
+  - correct_peak_recovery_debt
+  - correct_terminal_recovery_debt
+
+uncertain_physical_parameters:
+  design: one_factor_at_a_time_threshold_diagnostic
+  joint_parameter_robustness_claimed: false
+  parameter_level_probability_assumed: false
+  ambiguity_reduction: set_identification_width_reduction_if_level_known
+  selective_subrange_reporting_allowed: false
+
+execution:
+  grid_need_dispatch_configured: true
+  pairwise_replay_configured: true
+  identification_grid_configured: true
+  grid_need_dispatch_ready: false
+  complete_pairwise_outcomes_ready: false
+  independent_R4_review_passed: false
+  user_formal_run_authorized: false
+  formal_execution_ready: false
+
+claims:
+  real_contract_failure_probability: false
+  Alibaba_absolute_power: false
+  empirical_outage_probability: false
+  empirical_cross_source_joint_distribution: false
+  PPA_or_REC_delivery: false
+  full_N_minus_one: false
+  AC_security: false
+  security_certified: false

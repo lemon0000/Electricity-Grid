@@ -1,0 +1,95 @@
+inputs:
+  alibaba_job_execution_envelopes:
+    directory: data/processed/model_inputs/alibaba_job_execution_envelopes_v1
+    manifest_sha256: 73539a65c7db2b7cf630624048c00262a8e650a96b1412d21dcdf04ad857c219
+    expected_schema: alibaba_job_execution_envelopes_v1
+    live_provenance:
+      config_sha256: configs/alibaba_job_execution_envelopes_v1.yaml
+      implementation_sha256: experiments/build_alibaba_job_execution_envelopes.py
+  alibaba_gpu_telemetry:
+    directory: data/processed/model_inputs/alibaba_gpu_telemetry_v1
+    manifest_sha256: 908a3aec20a961bc8971f0944db3d18b33756021d7fedfa3c3d339a10aede51d
+    expected_schema: alibaba_gpu_telemetry_v1
+    live_provenance:
+      config_sha256: configs/alibaba_gpu_2020_telemetry_v1.yaml
+      implementation_sha256: experiments/process_alibaba_gpu_2020_telemetry.py
+  rts_gmlc_joint_data:
+    directory: data/processed/model_inputs/rq2_joint_data_v1
+    manifest_sha256: df6889870639e9f4b623c063c7e3fdf49bee671cf904489b3c69c4c05b0b5058
+    expected_schema: rq2_joint_rts_gmlc_data_v1
+    live_provenance:
+      config_sha256: configs/rq2_joint_data_v1.yaml
+      implementation_sha256: experiments/build_rq2_joint_data.py
+      reliability_module_sha256: src/scenarios/rts_gmlc_reliability.py
+  nlr_genai_power_profiles:
+    directory: data/processed/model_inputs/nlr_genai_power_profiles_v2
+    manifest_sha256: 1cef65fe087340a109e0e29ed604e991e9cdedca902017d639d99a59b8f2c677
+    expected_schema: nlr_genai_power_profiles_v2
+    live_provenance:
+      config_sha256: configs/nlr_genai_power_profiles_v2.yaml
+      implementation_sha256: experiments/process_nlr_genai_power_2026.py
+  wattgpu_power_reference:
+    directory: data/processed/model_inputs/wattgpu_power_reference_v1
+    manifest_sha256: fc5772007da61c0285368faf87b79c410f1f695c38fdbb99625eaceb79177446
+    expected_schema: wattgpu_power_reference_v1
+    live_provenance:
+      config_sha256: configs/wattgpu_power_reference_v1.yaml
+      implementation_sha256: experiments/process_wattgpu_power_reference.py
+  rts_gmlc_cfe_deficit:
+    directory: data/processed/model_inputs/rts_gmlc_hourly_cfe_deficit_250mw_v2
+    manifest_sha256: cb6b941193db3a09cddb005c14f210bab754e5f9d12ba9c982f778b88409cc0a
+    expected_schema: rts_gmlc_hourly_cfe_deficit_v2
+    live_provenance:
+      config_sha256: configs/rts_gmlc_cfe_deficit_v2.yaml
+      implementation_sha256: experiments/build_rts_gmlc_cfe_deficit.py
+      derivation_module_sha256: src/scenarios/rts_gmlc_cfe_deficit.py
+
+source_manifests:
+  alibaba_gpu_2020:
+    path: data/raw/alibaba_gpu_2020/v2020/upstream/SHA256SUMS
+    sha256: 20cc9b61628e494a1f69339650b8eaa0d54e78fe4d33fcc8b96c11bbf4c283f9
+  alibaba_gpu_2020_telemetry:
+    path: data/raw/alibaba_gpu_2020_telemetry/v2020/upstream/SHA256SUMS
+    sha256: 36233bcfa052fcc3118783ecc183373b35904913650042b6d3963692aa2143d8
+  nlr_genai_power_2026:
+    path: data/raw/nlr_genai_power_2026/v2/upstream/SHA256SUMS
+    sha256: a70a793321b460f02ff82a3b129db9dd4d55daf945f6fdaa816250ef9d312cfd
+  rts_gmlc:
+    path: data/raw/rts_gmlc/v0.2.3/upstream/SHA256SUMS
+    sha256: 95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914
+  wattgpu_2026:
+    path: data/raw/wattgpu_2026/v1/upstream/SHA256SUMS
+    sha256: e7625271d755011c05d76faa424b3012452c0ec27d565265f5dff7fd910fc6e7
+
+gates:
+  source_archives_verified: true
+  job_execution_envelopes_ready: true
+  observed_gpu_utilization_covariate_ready: true
+  synchronized_grid_cfe_reliability_benchmark_ready: true
+  measured_power_calibration_reference_ready: true
+  t4_hardware_overlap_power_reference_ready: true
+  direct_job_to_power_mapping_ready: false
+  flexibility_contract_parameters_ready: false
+  empirical_joint_distribution_ready: false
+  allocated_cfe_portfolio_ready: false
+  outage_to_grid_need_dispatch_ready: false
+  full_rq2_experiment_input_ready: false
+  formal_experiment_authorized: false
+
+unresolved_requirements:
+  - paired workload and absolute power on compatible hardware
+  - observed or contract-backed deadline and checkpoint semantics
+  - observed recoverable fraction, recovery efficiency, and recovery headroom
+  - allocated PPA or REC portfolio with locational deliverability assumptions
+  - hourly SCOPF conversion of sampled outages into network calls
+  - empirical joint chronology of workload, CFE, and network events
+
+predecessor:
+  schema: rq2_data_readiness_v1
+  manifest_path: data/processed/model_inputs/rq2_data_readiness_v1/SHA256SUMS.json
+  manifest_sha256: d77b78551d1b8195352d43c824bfbe85e26f775e728aea0d1bb31eda83886d87
+  status: superseded_by_live_provenance_validation
+
+output:
+  schema: rq2_data_readiness_v2
+  directory: data/processed/model_inputs/rq2_data_readiness_v2

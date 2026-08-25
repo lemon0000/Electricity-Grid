@@ -1,0 +1,58 @@
+input:
+  power_system_blocks_package: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4
+  power_system_blocks_manifest_sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+  power_system_blocks_schema: rts_gmlc_public_power_system_blocks_v4
+  power_system_blocks_config_sha256: cefec120fb77990a47fe7e89a77e4df8be00bde5bf7e4cd4c5ca047d52934688
+  power_system_blocks_implementation_sha256: cc24a77049af50d056364b2ad6a092442af3cd4efcdf32033ab228faef989644
+  power_system_blocks_n1_module_sha256: ebf412fd69864604c276972b6bcd0ae63559194e1e902e5f92a3357834784d64
+  power_system_blocks_cfe_manifest_sha256: cb6b941193db3a09cddb005c14f210bab754e5f9d12ba9c982f778b88409cc0a
+
+grid_source:
+  repository: https://github.com/GridMod/RTS-GMLC
+  release: v0.2.3
+  commit: 3ece0d3725c844056132393ee252b3083dd4eab4
+  path: data/raw/rts_gmlc/v0.2.3/upstream
+  manifest_sha256: 95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914
+  base_mva: 100.0
+
+model:
+  dc_bus: 108
+  dc_reference_demand_mw: 250.0
+  time_step_hours: 1.0
+  normal_baseline: free_boundary_24h_normal_state_SCUC
+  outage_response: fixed_commitment_and_normal_dispatch_hourly_corrective_LP
+  branch_rating: continuous
+  generator_response_limit: published_hourly_ramp
+  load_shedding_allowed: false
+  full_N_minus_one: false
+  AC_security: false
+
+solver:
+  name: gurobi
+  expected_package_version: 13.0.2
+  threads: 4
+  mip_relative_gap: 1.0e-6
+  feasibility_tolerance: 1.0e-6
+  optimality_tolerance: 1.0e-6
+  integer_feasibility_tolerance: 1.0e-6
+  random_seed: 0
+  time_limit_seconds: null
+  tolerance_mw: 1.0e-6
+  tee: false
+
+provenance:
+  contract_path: configs/rq2_public_pipeline_provenance_contract_v3.yaml
+  contract_sha256: 9a890f6cebf6a2b87b6cee97ec9b3a5074bb40892cee917c98fe58644ff178f9
+
+execution:
+  formal_execution_ready: false
+  independent_R4_review_passed: false
+  user_formal_run_authorized: true
+  require_all_blocks_resolved: true
+  forbidden_hostnames: [GQPD263XH9]
+  required_environment_value: EXECUTION_MACHINE_CONFIRMED
+  checkpoint_directory: results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_gurobi
+
+output:
+  schema: rts_gmlc_public_grid_need_dispatch_v4
+  directory: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_gurobi

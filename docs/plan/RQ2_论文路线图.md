@@ -5,6 +5,11 @@
 本页是导航与状态映射，不重述已冻结的科学契约。权威来源仍是 `agent.md`（范围/路由/审查；§4 已将 RQ2 定为首篇主创新、RQ1 降为后续扩展）、`docs/model_spec/formulation.md`（数学规格）、`docs/model_spec/blocker_register.md`（阻塞状态）与 `docs/literature/`（文献与缺口）。
 
 > 定位约束（来自 `agent.md` 与 project_memory）：RQ2 不改写冻结的 B3/B4/B5 基线与 repair-010 认证链；本机只做代码+单测，正式长求解与预注册留给执行机 + 用户授权。
+>
+> 2026-08-25 scope amendment：本页保留早期显式X研究蓝图。当前公开边缘
+> v6 successor的直接estimand是`normalized minimum flexibility
+> underprovisioning`，不是X高估；E0、条件transport、共同coupling与执行机
+> 门禁以`RQ2_公开数据鲁棒识别路线图_v6.md`为准。
 
 ---
 
@@ -38,6 +43,24 @@ H1/H2/H3 必须在**相同输入、相同场景、相同安全集**下比较；V
 | **H2 场景外既定策略执行（钉死 D^flex）** | [economic_holdout.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/src/evaluation/economic_holdout.py) `evaluate_economic_holdout`；正式入口 [run_rq2_h2_stochastic_holdout.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/experiments/run_rq2_h2_stochastic_holdout.py)（读 [rq2_h2_stochastic_holdout.yaml](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/configs/rq2_h2_stochastic_holdout.yaml)）；`formulation.md` §12 | [test_economic_holdout.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_economic_holdout.py)、[test_rq2_h2_runner.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_rq2_h2_runner.py) | 本机微型合成 holdout 自检通过；正式规模留执行机 |
 
 结论：RQ2 的**度量层、错误基线、L5 经济随机目标与 H2 场景外量化均已成型且有测试**，是本项目中数据风险最低、对照最干净的部分。CVaR 与共享预算已接入统一经济目标（`min C^grid + C^op + λ·CVaR_β(L)`），并由正式入口在 λ 扫描下给出 H1（B6 高估量）与 H3（成本↔尾部风险单调权衡）；H2 入口把 L5 规划出的 correct/B6 两个 `D^flex` 钉死后在未见 holdout 场景上按真实共享预算执行，量化 B6 的场景外欠交付（失败概率 + 期望缺口，含硬安全不可行）。缺的是在执行机上跑更大规模的正式算例。
+
+### 3.1 三区域叙事重构（2026-08-24）
+
+RTS-GMLC CFE successor显示：单一100%小时目标可能使correct与B6同时进入共同不足，不能继续把“B6总是增加场景外风险”作为预设主结论。首篇叙事改为识别以下三个运行区域及边界：
+
+- `R1_no_conflict`：两策略均成功且结果等价；
+- `R2_double_commitment_risk`：B6容量低配或场景外服务严格更差；
+- `R3_common_insufficiency`：两模型均不可行或在共享执行下等价失败。
+
+方向冲突与solver未决分别保留为`diagnostic_mixed`和`unresolved`，不得强制归类。恢复尾部继续读取连续RTS-GMLC CFE小时，恢复功率只能使用超过小时目标的CFE-compatible headroom，防止延期业务逃离CFE核算。冻结设计、70-cell实验矩阵与完整报告规则见：
+
+- `configs/rq2_three_region_phase_map_preregistration_v1.yaml`；
+- `configs/rq2_three_region_phase_map_v1.yaml`；
+- `docs/plan/RQ2_三区域相图实验清单.md`；
+- `paper/drafts/RQ2_three_region_narrative.md`。
+
+冻结benchmark已完成：70/70 cells、计算门通过，但结果为
+`R1=0, R2=0, R3=69, mixed=1, unresolved=0`。因此该设计没有识别出三区域边界，也不支持数据驱动时序下的稳健H2。首篇TSG投稿继续阻塞；后续不得在看过该结果后调整同一网格寻找R2，只能依据外部合同/恢复数据注册新验证，或把论文主问题改为严格小时CFE下的共同不足边界。
 
 ## 4. L5 经济随机模型：入口已建，待正式求解（R3 任务）
 

@@ -1,0 +1,20 @@
+source:
+  dataset: Alibaba PAI GPU Cluster Trace v2020
+  profile: stage1_core
+  path: data/processed/alibaba_gpu_2020/v2020
+  jobs_sha256: f56b58e131c09e91b6cc81351a4069971f1ec88213807a133cb6a27373e24805
+  candidate_tasks_sha256: a53041f484144ea67c9a1777d85e2dde350c2341c94418da8072c0a94b3821d6
+
+derivation:
+  population: successful_gpu_task_candidates
+  release_proxy: earliest_terminated_task_start_time
+  completion_proxy: latest_terminated_task_end_time
+  work_proxy: sum_task_duration_times_requested_gpu_equivalents
+  deadline_status: unobserved
+  checkpoint_status: unobserved
+  preemptibility_status: unobserved
+  power_conversion_status: not_applied
+  recoverable_fraction_status: not_inferred
+
+output:
+  directory: data/processed/model_inputs/alibaba_job_execution_envelopes_v1

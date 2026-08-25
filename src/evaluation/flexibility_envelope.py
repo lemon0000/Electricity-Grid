@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from datetime import datetime
 from math import isfinite
 from numbers import Integral, Real
-from typing import Mapping
 
 
 @dataclass(frozen=True)
@@ -171,9 +171,9 @@ def evaluate_chronological_flexibility(
         )
     )
     if not isinstance(trace.require_terminal_event_inactive, bool):
-        raise ValueError("require_terminal_event_inactive must be boolean")
+        raise TypeError("require_terminal_event_inactive must be boolean")
     if not isinstance(trace.initial_has_prior_event, bool):
-        raise ValueError("initial_has_prior_event must be boolean")
+        raise TypeError("initial_has_prior_event must be boolean")
     if initial_call > tolerance:
         if not trace.initial_has_prior_event:
             raise ValueError("Active carry-in requires prior-event state")
@@ -238,7 +238,7 @@ def evaluate_chronological_flexibility(
         raise ValueError("Trace periods must be nonempty strings")
     ordered_periods = tuple(dict.fromkeys(trace.periods))
     if not isinstance(trace.completed_periods, frozenset):
-        raise ValueError("completed_periods must be a frozenset")
+        raise TypeError("completed_periods must be a frozenset")
     unknown_completed_periods = set(trace.completed_periods) - set(ordered_periods)
     if unknown_completed_periods:
         raise ValueError(
@@ -291,7 +291,7 @@ def evaluate_chronological_flexibility(
     for period in ordered_periods:
         event_limit = envelope.maximum_events_by_period[period]
         if isinstance(event_limit, bool) or not isinstance(event_limit, Integral):
-            raise ValueError("Maximum event counts must be integers")
+            raise TypeError("Maximum event counts must be integers")
         if event_limit < 0:
             raise ValueError("Maximum event counts must be nonnegative")
         maximum_events[period] = int(event_limit)
@@ -462,11 +462,11 @@ def evaluate_chronological_flexibility(
             is_period_end
             and period_is_complete
             and period in terminal_limits
+            and debt > terminal_limits[period] + tolerance
         ):
-            if debt > terminal_limits[period] + tolerance:
-                code = f"terminal_debt_exceeded_for_period_{period}"
-                violations.append(code)
-                period_violations[period].append(code)
+            code = f"terminal_debt_exceeded_for_period_{period}"
+            violations.append(code)
+            period_violations[period].append(code)
         previous_call = call
 
     terminal_debt_by_period = {}

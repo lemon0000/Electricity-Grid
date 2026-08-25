@@ -1,0 +1,114 @@
+schema: rq2_public_pairwise_replay_config_v4
+
+input:
+  grid_need_dispatch_ready: false
+  power_system_dispatch_package: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_gurobi
+  power_system_dispatch_manifest_sha256: null
+  power_system_dispatch_schema: rts_gmlc_public_grid_need_dispatch_v4
+  power_system_dispatch_config_sha256: null
+  power_system_blocks_manifest_sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+  rts_gmlc_source_manifest_sha256: 95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914
+  power_training_blocks: 541
+  power_holdout_blocks: 530
+  workload_package: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3
+  workload_manifest_sha256: 62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524
+  workload_schema: alibaba_dimensionless_workload_blocks_v3
+  workload_config_sha256: 571b10ff6874ae2c787420b3328e4f256e1d284864851d5099b7ecf9b5d43c2c
+  workload_implementation_sha256: 6f2e0c91733cb30846c85b03b3cd89c07f27c042b29ad3b002b76d64f9264d4b
+  workload_source_sha256: a53041f484144ea67c9a1777d85e2dde350c2341c94418da8072c0a94b3821d6
+  workload_training_blocks: 34
+  workload_holdout_blocks: 34
+  block_hours: 24
+
+training_selection:
+  method: weighted_marginal_stress_quantile_representatives
+  power_system_representatives: 8
+  workload_representatives: 8
+  power_system_score: max_hourly_grid_need_plus_cfe_call_fraction
+  workload_score: maximum_requested_GPU_occupancy_fraction
+  selection_uses_holdout_outcomes: false
+  full_evaluable_training_support_audit: required
+  representative_failure_rule: cell_ineligible_no_holdout_metrics
+
+normalization:
+  reference_demand: D_DC
+  reference_demand_value: 1.0
+  absolute_MW_estimand: false
+  workload_fraction_role: time_varying_availability_shape_only
+  workload_fraction_is_power: false
+  cfe_deficit_role: exogenous_hourly_clean_energy_pressure_signal
+  green_call_rule: min(cfe_deficit_fraction_available_flexibility_fraction)
+  grid_need_rule: physical_minimum_call_not_truncated_by_business_availability
+  capacity_estimand: normalized_minimum_flexibility_underprovisioning
+  interconnection_capacity_X_claimed: false
+  exogenous_grid_infeasibility_rule: >
+    Preserve its marginal mass, publish an explicit E0 outcome for every
+    Cartesian pair, and exclude E0 rows only from the conditional
+    contract-risk transport estimand.
+
+fixed_policy:
+  planning_objective: lexicographic_minimum_flexibility_for_full_training_service
+  holdout_provision_reoptimization: false
+  holdout_recourse_reoptimization: false
+  operational_policy: causal_myopic_grid_first_then_CFE_with_current_state_only
+  physical_execution_envelope: correct_shared_envelope_for_both_policies
+  maximum_flexibility_budget: 1.0
+  minimum_event_power: 1.0e-6
+  response_time_hours: 1.0
+  curtailment_ramp_per_hour: 1.0
+  minimum_recovery_hours: 1.0
+  service_shortfall_tolerance: 1.0e-6
+
+registered_cells:
+  design: one_factor_at_a_time_threshold_diagnostic_not_joint_parameter_robustness
+  base:
+    flexible_fraction: 0.20
+    recovery_efficiency: 0.85
+    normalized_recovery_headroom: 0.10
+    maximum_event_duration_hours: 4
+    maximum_event_count: 2
+    normalized_energy_budget: 0.40
+    normalized_debt_limit: 0.20
+  levels:
+    flexible_fraction: [0.05, 0.20, 0.50]
+    recovery_efficiency: [0.60, 0.85, 1.00]
+    normalized_recovery_headroom: [0.00, 0.10, 0.30]
+    maximum_event_duration_hours: [1, 4, 8]
+    maximum_event_count: [1, 2, 4]
+    normalized_energy_budget: [0.10, 0.40, 1.00]
+    normalized_debt_limit: [0.05, 0.20, 0.50]
+  primary_coupling_claim_conditioned_on_each_cell: true
+  joint_parameter_robustness_claimed: false
+
+solver:
+  name: gurobi
+  expected_package_version: 13.0.2
+  threads: 4
+  mip_relative_gap: 1.0e-6
+  feasibility_tolerance: 1.0e-6
+  optimality_tolerance: 1.0e-6
+  integer_feasibility_tolerance: 1.0e-6
+  random_seed: 0
+  time_limit_seconds: null
+  tee: false
+
+provenance:
+  contract_path: configs/rq2_public_pipeline_provenance_contract_v3.yaml
+  contract_sha256: 9a890f6cebf6a2b87b6cee97ec9b3a5074bb40892cee917c98fe58644ff178f9
+
+execution:
+  formal_execution_ready: false
+  independent_R4_review_passed: false
+  user_formal_run_authorized: true
+  require_all_training_plans_resolved: true
+  require_all_pairwise_outcomes_resolved: true
+  forbidden_hostnames: [GQPD263XH9]
+  required_environment_value: EXECUTION_MACHINE_CONFIRMED
+  training_infeasible_cell_rule: >
+    Report the cell as fixed-policy estimand undefined; do not fabricate
+    pairwise outcomes or reinterpret infeasibility as solver uncertainty.
+  checkpoint_directory: results/checkpoints/rq2_public_pairwise_replay_v4_gurobi
+
+output:
+  schema: rq2_public_pairwise_replay_v4
+  directory: data/processed/model_inputs/rq2_public_pairwise_replay_v4_gurobi

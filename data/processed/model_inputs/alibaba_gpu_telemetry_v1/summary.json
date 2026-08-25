@@ -1,0 +1,116 @@
+{
+  "candidate_job_gpu_rows": 576724,
+  "candidate_job_population": 714903,
+  "candidate_sensor_rows": 1964411,
+  "config_sha256": "b576a0baf0d6d21e4009d5bfba4eef1ff9e412e7ce8ec7fad2a852efa282d026",
+  "evidence_status": {
+    "continuous_time_series": false,
+    "cross_instance_aggregation": "unweighted_mean_of_lifetime_averages",
+    "direct_job_to_power_mapping_ready": false,
+    "gpu_memory_observed": true,
+    "gpu_work_utilization_percent_units_observed": true,
+    "power_observed": false,
+    "temporal_resolution": "lifetime_average_per_instance",
+    "worker_machine_assignment_observed": true
+  },
+  "gpu_type_summary": [
+    {
+      "candidate_job_count": 369483,
+      "candidate_job_gpu_rows": 369483,
+      "candidate_sensor_rows": 1184499,
+      "direct_job_power_mapping_ready": 0,
+      "gpu_type": "MISC",
+      "hardware_reference_status": "heterogeneous_legacy_unresolved",
+      "machine_count": 280,
+      "mean_candidate_gpu_work_utilization_equivalents": 0.08841818722221934,
+      "mean_candidate_gpu_work_utilization_percent_units": 8.841818722221934,
+      "source_sensor_rows": 1893444,
+      "zero_candidate_gpu_work_utilization_rows": 246716
+    },
+    {
+      "candidate_job_count": 40293,
+      "candidate_job_gpu_rows": 40293,
+      "candidate_sensor_rows": 280588,
+      "direct_job_power_mapping_ready": 0,
+      "gpu_type": "P100",
+      "hardware_reference_status": "unavailable",
+      "machine_count": 798,
+      "mean_candidate_gpu_work_utilization_equivalents": 0.14422068509974,
+      "mean_candidate_gpu_work_utilization_percent_units": 14.422068509974,
+      "source_sensor_rows": 467327,
+      "zero_candidate_gpu_work_utilization_rows": 38089
+    },
+    {
+      "candidate_job_count": 144783,
+      "candidate_job_gpu_rows": 144783,
+      "candidate_sensor_rows": 442198,
+      "direct_job_power_mapping_ready": 0,
+      "gpu_type": "T4",
+      "hardware_reference_status": "exact_gpu_model",
+      "machine_count": 497,
+      "mean_candidate_gpu_work_utilization_equivalents": 0.17761942209105605,
+      "mean_candidate_gpu_work_utilization_percent_units": 17.761942209105605,
+      "source_sensor_rows": 564056,
+      "zero_candidate_gpu_work_utilization_rows": 65964
+    },
+    {
+      "candidate_job_count": 14219,
+      "candidate_job_gpu_rows": 14219,
+      "candidate_sensor_rows": 37094,
+      "direct_job_power_mapping_ready": 0,
+      "gpu_type": "V100",
+      "hardware_reference_status": "architecture_family_only_memory_variant_differs",
+      "machine_count": 104,
+      "mean_candidate_gpu_work_utilization_equivalents": 0.24942309609135066,
+      "mean_candidate_gpu_work_utilization_percent_units": 24.942309609135066,
+      "source_sensor_rows": 64843,
+      "zero_candidate_gpu_work_utilization_rows": 5762
+    },
+    {
+      "candidate_job_count": 7946,
+      "candidate_job_gpu_rows": 7946,
+      "candidate_sensor_rows": 20032,
+      "direct_job_power_mapping_ready": 0,
+      "gpu_type": "V100M32",
+      "hardware_reference_status": "memory_capacity_match_form_factor_unverified",
+      "machine_count": 135,
+      "mean_candidate_gpu_work_utilization_equivalents": 0.5280553100846103,
+      "mean_candidate_gpu_work_utilization_percent_units": 52.80553100846103,
+      "source_sensor_rows": 43553,
+      "zero_candidate_gpu_work_utilization_rows": 4046
+    }
+  ],
+  "implementation_sha256": "f406e2640d85aeabcccc2953342103dd38725a09ef3bfe00d98d54bbfeb9eb0b",
+  "schema": "alibaba_gpu_telemetry_v1",
+  "source": {
+    "archive_sha256": "9a0b82e8bdf3949281e4ba1423d9b4b34847e52799eecb138966de46da69c7a0",
+    "dataset": "Alibaba PAI GPU Cluster Trace v2020",
+    "decompressed_sha256": "12dd9929b70f3efe18d1279d9873e3a519c64f431613b23b059ed8c46a376dd7",
+    "documentation_commit": "0d0f3f1efdbf1add6a7bcc63676eafbd1eb11f71",
+    "license": "CC-BY-4.0",
+    "source_manifest_sha256": "36233bcfa052fcc3118783ecc183373b35904913650042b6d3963692aa2143d8"
+  },
+  "source_missing_numeric_counts": {
+    "avg_gpu_wrk_mem": 0,
+    "avg_mem": 1217,
+    "cpu_usage": 5829,
+    "gpu_wrk_util": 0,
+    "max_gpu_wrk_mem": 0,
+    "max_mem": 0,
+    "read": 3,
+    "read_count": 3,
+    "write": 3,
+    "write_count": 3
+  },
+  "source_sensor_rows": 3033232,
+  "source_sensor_rows_by_gpu_type": {
+    "MISC": 1893444,
+    "P100": 467327,
+    "T4": 564056,
+    "UNMAPPED": 9,
+    "V100": 64843,
+    "V100M32": 43553
+  },
+  "source_unmapped_machine_rows": 9,
+  "unmatched_sensor_rows": 1068821
+}

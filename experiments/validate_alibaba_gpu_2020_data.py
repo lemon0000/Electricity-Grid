@@ -125,9 +125,10 @@ def run(
     if write_output:
         output_path = Path(config["output"]["summary_path"])
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_text(
-            json.dumps(summary, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
+        output_path.write_bytes(
+            (json.dumps(summary, indent=2, sort_keys=True) + "\n")
+            .replace("\n", "\r\n")
+            .encode("utf-8")
         )
     return summary
 

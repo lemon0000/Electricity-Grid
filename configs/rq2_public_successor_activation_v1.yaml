@@ -1,0 +1,56 @@
+schema: rq2_public_successor_activation_v1
+
+successor:
+  preregistration_path: configs/rq2_public_data_robust_identification_preregistration_v6.yaml
+  preregistration_sha256: ef25deabfcd51fbd667e48dcddcfbe4b19a2115c6d4bc40b0fc556b5c1f332f2
+  provenance_contract_path: configs/rq2_public_pipeline_provenance_contract_v3.yaml
+  provenance_contract_sha256: 9a890f6cebf6a2b87b6cee97ec9b3a5074bb40892cee917c98fe58644ff178f9
+  executor_handoff_path: configs/rq2_public_executor_handoff_v1.yaml
+  executor_handoff_sha256: 52279c15ad4d27516821956b536886081987957d88dcd7fef3d409592694c289
+  stage_templates:
+    grid:
+      path: configs/rts_gmlc_public_grid_need_dispatch_v4.yaml
+      sha256: 84db8e7ad47bf51dd1ec94db1ebb7d3edc068b587afb4fba8d596861d58e6beb
+    pairwise:
+      path: configs/rq2_public_pairwise_replay_v4.yaml
+      sha256: 4e4ea40e71742198ff9b70d527d6bae91df486c87b3a540bbbb23f6ba4f72cf3
+    identification:
+      path: configs/rq2_public_identification_grid_v4.yaml
+      sha256: 1081ed0e52201323e3df7c1a5c39d0409fdcef8c2cc29c49edcd207c93ed3308
+
+review:
+  independent_R4_review_passed: false
+  review_path: null
+  review_sha256: null
+
+runtime_preflight:
+  required: true
+  result_directory: results/tables/rq2_public_executor_preflight_v1
+  result_manifest_sha256: null
+  passed: false
+
+solver_pilot:
+  required: true
+  config_path: configs/rq2_public_solver_pilot_v1.yaml
+  config_sha256: bcba9981628001ced20e466632bb33e4d9f44ca3ffad6b24fc8a0761f72c0ec1
+  result_directory: results/tables/rq2_public_solver_pilot_v1
+  result_manifest_sha256: null
+  gurobi_eligible_for_formal_successor: false
+
+formal_execution:
+  user_authorized_execution_machine: true
+  grid_need_dispatch_ready: false
+  pairwise_replay_ready: false
+  identification_ready: false
+  formal_execution_ready: false
+  activation_requires_new_checkpoint_directories: true
+  predecessor_HiGHS_checkpoint_reuse_allowed: false
+
+claims:
+  formal_result_exists: false
+  interconnection_capacity_X_estimand: false
+  empirical_joint_distribution: false
+  empirical_contract_failure_probability: false
+  full_N_minus_one: false
+  AC_security: false
+  security_certified: false

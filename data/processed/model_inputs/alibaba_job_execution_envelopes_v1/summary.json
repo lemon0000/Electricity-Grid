@@ -1,0 +1,34 @@
+{
+  "candidate_task_rows": 732318,
+  "config_sha256": "d46df0aca23d9e91a7c3f2135b2c92d32463ee12d4864d6cc81feec3ec05bcc6",
+  "derivation": {
+    "checkpoint_status": "unobserved",
+    "completion_proxy": "latest_terminated_task_end_time",
+    "deadline_status": "unobserved",
+    "population": "successful_gpu_task_candidates",
+    "power_conversion_status": "not_applied",
+    "preemptibility_status": "unobserved",
+    "recoverable_fraction_status": "not_inferred",
+    "release_proxy": "earliest_terminated_task_start_time",
+    "work_proxy": "sum_task_duration_times_requested_gpu_equivalents"
+  },
+  "evidence_status": {
+    "checkpoint_state_observed": false,
+    "deadline_observed": false,
+    "power_conversion_applied": false,
+    "preemptibility_observed": false,
+    "recoverable_fraction_inferred": false,
+    "workload_trace": "observed_anonymized_relative_chronology"
+  },
+  "implementation_sha256": "acb998806cde74d29495daf73527539ed116bd8e46b0db531de18a13cec98335",
+  "job_rows": 714903,
+  "maximum_observed_completion_time_s": 6451192.0,
+  "minimum_observed_release_time_s": 542323.0,
+  "schema": "alibaba_job_execution_envelopes_v1",
+  "source": {
+    "candidate_tasks_sha256": "a53041f484144ea67c9a1777d85e2dde350c2341c94418da8072c0a94b3821d6",
+    "dataset": "Alibaba PAI GPU Cluster Trace v2020",
+    "jobs_sha256": "f56b58e131c09e91b6cc81351a4069971f1ec88213807a133cb6a27373e24805",
+    "profile": "stage1_core"
+  }
+}

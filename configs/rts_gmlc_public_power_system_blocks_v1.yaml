@@ -1,0 +1,24 @@
+source:
+  joint_package: data/processed/model_inputs/rq2_joint_data_v1
+  joint_manifest_sha256: df6889870639e9f4b623c063c7e3fdf49bee671cf904489b3c69c4c05b0b5058
+  cfe_package: data/processed/model_inputs/rts_gmlc_hourly_cfe_deficit_250mw_v2
+  cfe_manifest_sha256: cb6b941193db3a09cddb005c14f210bab754e5f9d12ba9c982f778b88409cc0a
+
+derivation:
+  outage_seeds: [20260822, 20260823, 20260824]
+  outage_model: stationary_system_level_competing_risks_N_minus_one
+  split_fraction: 0.5
+  split_rounding: floor
+  cross_split_event_policy: exclude_every_block_touched_by_cross_split_event
+  block_hours: 12
+  block_stride_hours: 12
+  incomplete_terminal_block: drop
+  training_marginal_role: policy_fitting_only
+  holdout_marginal_role: transport_row_and_fixed_policy_evaluation
+  cfe_call_unit: fraction_of_D_DC
+  outage_frequency_semantics: sampled_from_published_rate
+  empirical_outage_probability_claimed: false
+
+output:
+  schema: rts_gmlc_public_power_system_blocks_v1
+  directory: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v1

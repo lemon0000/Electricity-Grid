@@ -238,6 +238,7 @@ def _single_leaf(
         completed_periods=scenario.completed_periods,
         require_terminal_event_inactive=scenario.require_terminal_event_inactive,
         boundary_state_status=scenario.boundary_state_status,
+        available_flexibility_mw=scenario.available_flexibility_mw,
     )
 
 
@@ -255,6 +256,7 @@ def _mandatory_grid_scenario(
         completed_periods=scenario.completed_periods,
         require_terminal_event_inactive=scenario.require_terminal_event_inactive,
         boundary_state_status=scenario.boundary_state_status,
+        available_flexibility_mw=scenario.available_flexibility_mw,
     )
 
 
@@ -367,6 +369,7 @@ def _execute_leaf(
                     scenario.require_terminal_event_inactive
                 ),
                 boundary_state_status=scenario.boundary_state_status,
+                available_flexibility_mw=scenario.available_flexibility_mw,
             ),
             inputs.envelope,
             committed,
@@ -457,6 +460,30 @@ def _execute_leaf(
         event_count_by_period=event_count,
         curtailment_energy_mwh_by_period=energy,
         scenario_loss=dispatch.scenario_loss if dispatch is not None else None,
+    )
+
+
+def execute_fixed_temporal_policy(
+    inputs: TemporalEconomicHoldoutInputs,
+    scenario: TemporalEconomicScenario,
+    committed_flexibility_mw: float,
+    *,
+    solver_name: str = "highs",
+) -> TemporalHoldoutLeafOutcome:
+    """Execute one fixed capacity under the true shared physical envelope."""
+
+    _validate_inputs(inputs, require_holdout=False)
+    committed = _nonnegative(
+        "committed_flexibility_mw",
+        committed_flexibility_mw,
+    )
+    if committed > inputs.max_flexibility_budget_mw + _TOLERANCE:
+        raise ValueError("committed flexibility exceeds maximum budget")
+    return _execute_leaf(
+        inputs,
+        scenario,
+        committed,
+        solver_name=solver_name,
     )
 
 

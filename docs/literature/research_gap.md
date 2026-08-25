@@ -5,16 +5,24 @@
 
 > 2026-08-20查新说明：为核实RQ2护城河，补入四篇2025-2026直接相关工作——Wan, Fang and Li (2026, DC11)、Ma et al. (2025, DC12)、Lin and Chien (2025, DC13)与Zhang et al. (2025, FLEX09)。四篇均已全文/官方元数据核验并编码入`literature_matrix.csv`。结论不变：这些工作分别在单一统一调度变量下联合拥塞与消纳、或做碳导向解耦、或做运行层传输受限风险，均未把网络条件服务与小时级CFE建成两项分开签约的独立合同承诺，也未构造重复承诺错误基线并量化场景外履约风险。RQ2仍是可检验空白。
 
+> 2026-08-24公开数据路线补充：2026年近邻工作已进一步覆盖AI负荷延迟/
+> 空间转移与扩建、IT/UPS/冷却duration envelope、计算-储能多服务协同、
+> 24/7 CFE鲁棒调度以及真实GPU集群电力响应。因此“数据中心柔性参与电网”
+> “恢复包络”或“鲁棒优化”均不足以构成创新。剩余可辩护缺口收窄为：
+> **分离合同对同一业务时序包络的重复承诺，以及仅观察到公开边缘分布时该
+> 风险的sharp partial-identification bounds**。该定位必须由解析边界和
+> transport ambiguity算法支撑，不能退化为参数热图。
+
 ## 一页结论
 
-截至当前筛选范围，相关研究已经分别覆盖数据中心可中断或可移峰运行、firm/flexible容量、数据中心选址与容量扩展、多阶段随机输电扩展、N-1安全约束运行，以及年度与24/7 CFE采购。因此，本项目不能把任何单一模块宣称为创新。仍然存在的可检验缺口是：对于一个固定接入点的大型AI智算中心，当业务达产和电网工程进度在季度节点逐步揭示时，现有直接竞争模型尚未同时给出满足非预见性的F/X序贯释放和未开工扩建调整策略；现有网络灵活性与绿电调度研究也尚未量化两类合同服务重复占用同一业务柔性所导致的条件容量高估及场景外履约风险；已有年度与小时级CFE研究则主要优化清洁发电、储能和采购组合，尚未回答时间粒度变化何时会反向改变固定POI的接入容量释放与电网扩建时序。该缺口是一组模型要素和证据链的特定交叉，不是“首次使用F/X、多阶段随机规划、N-1、CVaR或小时级CFE”。
+截至当前筛选范围，相关研究已经分别覆盖数据中心可中断或可移峰运行、firm/flexible容量、数据中心选址与容量扩展、多阶段随机输电扩展、N-1安全约束运行，以及年度与24/7 CFE采购。因此，本项目不能把任何单一模块宣称为创新。首篇论文的可检验缺口是：现有网络灵活性与绿电调度研究尚未量化两类分离合同重复占用同一业务时序包络所导致的minimum-flexibility underprovisioning及场景外服务风险，也没有在只观察到跨源公开边缘时给出sharp partial-identification bounds。长期项目仍研究非预见性的F/X序贯释放与CFE时间粒度，但这些不构成当前公开边缘successor已经识别的$X$效应。该缺口是一组机制与证据链的特定交叉，不是“首次使用F/X、多阶段随机规划、N-1、CVaR或小时级CFE”。
 
 ## 三条证据链
 
 | RQ | 最接近的已有工作 | 已经解决的内容 | 本项目仍需证明的内容 |
 |---|---|---|---|
 | RQ1 多阶段适应性 | Kim et al. (2026)；Chen and Zheng (2026)；Li et al. (2026)；Han et al. (2020) | 静态运行包络和选址；一次投资加小时调度；静态风险化F/X容量；通用多阶段随机输电扩展 | 固定POI下，需求达产与工程延期按季度揭示时，F/X和未开工工程满足非预见性的序贯策略；在同一外样本上识别其相对静态和两阶段方案的有效与失效区域 |
-| RQ2 重复承诺风险 | Wan and Li (2026, DC04)；Wan, Fang and Li (2026, DC11)；Ma et al. (2025, DC12)；Williams et al. (2026)；Radovanović et al. (2023)；Zhang et al. (2025, FLEX09) | 单一统一变量内联合时空移峰、拥塞缓解和新能源消纳；价格信号驱动的时空移峰；实证AI集群可快速持续削减；碳感知调度；运行层传输受限对柔性可用性的风险 | 将网络条件服务与CFE移峰表示为**分开签约、分开触发**的两个可审计承诺并共享同一业务时序包络；设置允许重复承诺的B6错误基线，在场景外执行既定策略，量化X高估、持续时间违约、恢复债务和失败概率 |
+| RQ2 重复承诺风险 | Wan and Li (2026, DC04)；Wan, Fang and Li (2026, DC11)；Ma et al. (2025, DC12)；Williams et al. (2026)；Radovanović et al. (2023)；Zhang et al. (2025, FLEX09) | 单一统一变量内联合时空移峰、拥塞缓解和新能源消纳；价格信号驱动的时空移峰；实证AI集群可快速持续削减；碳感知调度；运行层传输受限对柔性可用性的风险 | 将网络条件服务与CFE移峰表示为**分开签约、分开触发**的两个可审计承诺并共享同一业务时序包络；设置允许重复承诺的B6错误基线，在场景外执行既定策略，量化minimum-flexibility underprovisioning、持续时间违约、恢复债务和失败风险 |
 | RQ3 绿电时间粒度 | de Chalendar and Benson (2019)；Miller et al. (2022)；Riepin and Brown (2024)；Riepin et al. (2025) | 年度核算的时间错配；年度与小时核算偏差；年度与24/7 CFE对发电、储能、成本和技术选择的影响 | 在固定POI、N-1和扩建工期约束下，年度与小时级属地CFE是否改变F/X轨迹、T20/T50/T100、扩建启动/投运时序，以及网络服务与绿电服务之间的柔性分配 |
 
 ## 缺口边界
@@ -37,7 +45,7 @@ RQ1只有在相同安全标准、相同训练场景和相同外样本上比较B2
 
 因此必须正面预答审稿人最可能的反驳——“既然统一建模就不会重复，为什么还要研究重复承诺？”。答案是：现实中两类服务的**契约与触发机制是分离的**——网络条件削减是对N-1事件的被动、事后响应，小时级CFE移峰是跟随绿电的主动、事前调度；二者由不同合同、不同时间尺度触发，却抽取自**同一业务柔性物理包络**（同一MW上限、同一持续时间与恢复债务预算）。当规划者把两份合同分别按各自“可用灵活性”签出条件容量X时，就会在时序上重复占用同一物理包络。真正的冲突不仅在MW上限，更在于持续时间与恢复债务等**时序维度**：即便瞬时MW不冲突，两类服务在同一压力窗口内的累计调用、事件次数与恢复功率也可能同时突破物理上限。
 
-因此，RQ2的贡献不是单独写出 `c_grid + c_green <= D_flex` 这一条不等式，而是三个维度的组合：（i）机制创新——建立可执行的**共享时序包络**（MW、持续时间、事件次数、累计能量、恢复功率和恢复债务），把上述“契约分离但物理共享”结构显式化；（ii）概念创新——设置允许重复承诺的B6错误基线，将“忽略共享包络”这一被现有统一变量模型隐式规避、却在分离签约现实中真实存在的错误显式化并可证伪；（iii）评估创新——在训练集外独立场景上执行既定策略，量化X高估幅度、持续时间违约、恢复债务累积和场景外失败概率，并对 $\kappa/\lambda/\beta$ 系数做敏感性以证明合成参数下结论的稳健性。
+因此，RQ2的贡献不是单独写出 `c_grid + c_green <= D_flex` 这一条不等式，而是三个维度的组合：（i）机制创新——建立可执行的**共享时序包络**（MW、持续时间、事件次数、累计能量、恢复功率和恢复债务），把上述“契约分离但物理共享”结构显式化；（ii）概念创新——设置允许重复承诺的B6错误基线，将“忽略共享包络”这一被现有统一变量模型隐式规避、却在分离签约现实中真实存在的错误显式化并可证伪；（iii）评估创新——在训练集外独立场景上执行既定策略，量化minimum-flexibility underprovisioning、持续时间违约、恢复债务累积和场景外失败风险。公开边缘successor没有显式$X$决策，故不能把flexibility差值写成$X$高估；也不能用合成系数敏感性替代预注册的partial-identification与抽样不确定性分析。
 
 ### 3. 不是“首次比较年度和小时级CFE”，而是时间粒度是否改变接入与扩建
 
@@ -47,11 +55,11 @@ Riepin and Brown (2024)已经直接比较年度匹配与24/7 CFE，并联合优�
 
 ## 可用于 Introduction 的贡献定位
 
-现有研究分别表明，数据中心的可中断和时空移峰能力能够扩大接入可行域、缓解网络拥塞并改善清洁能源利用，多阶段随机规划也能够处理长期电网扩展不确定性。然而，已有数据中心接入模型主要采用静态运行包络、静态风险容量或一次投资后的小时级补救，尚未刻画业务达产与工程进度逐季揭示时的F/X容量释放和扩建调整；与此同时，年度与24/7清洁电力采购研究通常将负荷侧灵活性用于能源匹配，而未检验该灵活性与网络条件服务之间的合同资源冲突。为此，本文构建固定接入点下满足非预见性的多阶段F/X接入与扩建模型，并以统一的业务灵活性包络约束网络削减和小时级CFE移峰。通过静态、两阶段、多阶段及允许重复承诺的错误基线，本文在独立场景中识别多阶段适应性的有效区域、重复承诺造成的容量高估与履约风险，以及年度和小时级CFE对接入容量和扩建时序的差异化影响。
+现有研究分别表明，数据中心的可中断和时空移峰能力能够扩大接入可行域、缓解网络拥塞并改善清洁能源利用，但尚未检验分离签约的网络条件服务与小时级CFE是否重复信用同一业务时序包络。本文以共享包络correct模型和分离包络B6错误基线冻结策略，在全部公开边缘配对上回放，并用transport polytope给出minimum-flexibility underprovisioning、服务损失和恢复债务的sharp bounds。该公开边缘设计不含显式$X$决策，因此不声称识别条件容量高估。
 
 英文工作稿：
 
-> Existing studies show that interruptible and spatiotemporally shiftable data-center loads can expand interconnection feasibility, relieve network congestion, and improve clean-energy utilization, while multistage stochastic planning can address uncertainty in long-term grid expansion. Yet data-center interconnection models largely rely on static operating envelopes, static risk-based capacity allocations, or hourly recourse following a one-time investment decision; they do not represent sequential releases of firm and conditional capacity as data-center ramp-up and project delays are progressively observed. In parallel, annual and 24/7 clean-energy procurement studies optimize energy matching without testing whether the same workload flexibility has also been contractually reserved for network-contingent service. We therefore develop a nonanticipative multistage model for phased F/X interconnection and grid expansion at a fixed point of interconnection, coupled with a shared workload-flexibility envelope for network curtailment and hourly CFE shifting. Out-of-sample comparisons against static, two-stage, perfect-information, and double-counting baselines identify when multistage adaptation is valuable, how much duplicate flexibility commitments overstate conditional capacity and delivery performance, and when annual versus hourly CFE requirements change interconnection and expansion decisions.
+> Existing studies show that interruptible and spatiotemporally shiftable data-center loads can expand interconnection feasibility, relieve network congestion, and improve clean-energy utilization. Yet they do not test separately contracted network-contingent and hourly-CFE services against one shared temporal workload envelope. We formulate that contract-resource mismatch, construct a B6 double-counting baseline, and replay both fixed policies over all pairings of public power-system and workload marginals. Discrete optimal-transport programs identify sharp conditional bounds on minimum-flexibility underprovisioning, service loss, and recovery debt without inventing a cross-source joint distribution; exogenous grid infeasibility is reported separately. The present design does not identify an overstatement of interconnection capacity X.
 
 ## 不能宣称的创新
 

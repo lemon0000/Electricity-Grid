@@ -1,0 +1,29 @@
+source:
+  dataset: Alibaba PAI GPU Cluster Trace v2020
+  path: data/processed/alibaba_gpu_2020/v2020/successful_gpu_task_candidates.csv.gz
+  sha256: a53041f484144ea67c9a1777d85e2dde350c2341c94418da8072c0a94b3821d6
+
+successor:
+  predecessor: configs/alibaba_dimensionless_workload_blocks_v2.yaml
+  predecessor_manifest_sha256: 791b9a969083f80e64cc05b048f487495d0799c4b762346a6990501476da656e
+  reason: enforce_24_hour_continuous_recovery_window
+
+derivation:
+  occupancy_proxy: hourly_average_requested_gpu_equivalents_from_task_overlap
+  interval_semantics: half_open_start_inclusive_end_exclusive
+  normalization: divide_by_training_segment_peak_occupancy
+  split_fraction: 0.5
+  split_rounding: floor
+  job_split_policy: exclude_jobs_contributing_to_both_sides
+  block_hours: 24
+  block_stride_hours: 24
+  incomplete_terminal_block: drop
+  workload_fraction_semantics: normalized_requested_GPU_occupancy_not_power
+  flexible_fraction_status: not_inferred
+  deadline_status: unobserved
+  checkpoint_status: unobserved
+  recoverability_status: unobserved
+
+output:
+  schema: alibaba_dimensionless_workload_blocks_v3
+  directory: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3

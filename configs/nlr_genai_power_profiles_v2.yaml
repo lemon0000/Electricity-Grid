@@ -1,0 +1,69 @@
+source:
+  dataset: Dataset of Generative AI Workload Power Profiles
+  catalog_version: 2
+  catalog_last_updated: "2026-07-17"
+  doi: 10.7799/3025227
+  landing_page: https://data.nlr.gov/submissions/312
+  download_url: https://data.nlr.gov/system/files/312/1775845072-dataset.zip
+  license: CC BY 4.0
+  archive_path: data/raw/nlr_genai_power_2026/v2/upstream/dataset.zip
+  archive_size_bytes: 1070866623
+  archive_sha256: dcad6de800fb565d850b163902e2eddae48aabd1ed1c7336f9a1cdaf3012f137
+
+processing:
+  gpu_slots_per_node: 4
+  measured_profiles:
+    - workload_class: training
+      metadata_member: 01_aggregated_datasets/training/metadata.csv
+      results_prefix: 01_aggregated_datasets/training/results
+      expected_profiles: 41
+      node_count_source: metadata
+      expected_profile_interval_s: 0.2
+      sampling_semantics: published_measurement_resolution
+    - workload_class: inference_offline
+      metadata_member: 01_aggregated_datasets/inference_offline_llama3_70b/metadata.csv
+      results_prefix: 01_aggregated_datasets/inference_offline_llama3_70b/results
+      expected_profiles: 1200
+      node_count: 1
+      expected_profile_interval_s: 0.1
+      sampling_semantics: published_measurement_resolution
+    - workload_class: inference_online_finite
+      metadata_member: 01_aggregated_datasets/inference_online_finite_llama3_70b/metadata.csv
+      results_prefix: 01_aggregated_datasets/inference_online_finite_llama3_70b/results
+      expected_profiles: 1026
+      node_count: 1
+      expected_profile_interval_s: 0.1
+      sampling_semantics: published_measurement_resolution
+    - workload_class: inference_online_rate
+      metadata_member: 01_aggregated_datasets/inference_online_rate_llama3_70b/metadata.csv
+      results_prefix: 01_aggregated_datasets/inference_online_rate_llama3_70b/results
+      expected_profiles: 200
+      node_count: 1
+      expected_profile_interval_s: 0.001
+      sampling_semantics: source_linear_interpolation_below_published_measurement_resolution
+  synthetic_facility_metadata:
+    - workload_class: colocation
+      metadata_member: 03_whole-facility_profiles/colocation/metadata.csv
+      profile_prefix: 03_whole-facility_profiles/colocation/simulated_data
+      expected_profiles: 4
+    - workload_class: inference
+      metadata_member: 03_whole-facility_profiles/inference/metadata.csv
+      profile_prefix: 03_whole-facility_profiles/inference/simulated_data
+      expected_profiles: 4
+
+scientific_boundary:
+  measured_hardware: 4x_nvidia_h100_per_node
+  published_measurement_intervals_s: [0.1, 0.2]
+  measured_power_scope: source_defined_aggregate_cpu_and_gpu_compute_node_power
+  source_aggregation_recomputed: false
+  dynamic_ramp_calibration_ready: false
+  facility_power_observed: false
+  facility_profiles_status: synthetic_diploee_examples
+  alibaba_pairing_status: no_shared_jobs_hardware_or_clock
+  direct_pai_gpu_to_power_mapping_ready: false
+  deadline_observed: false
+  checkpoint_state_observed: false
+  recoverable_fraction_observed: false
+
+output:
+  directory: data/processed/model_inputs/nlr_genai_power_profiles_v2

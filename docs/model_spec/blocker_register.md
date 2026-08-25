@@ -17,7 +17,7 @@
 | M6b逐时证据输入与调度接口 | resolved for interface gate | 新增业务/事故/恢复参数实质哈希锁定、同钟/N-1验证器、证据到调度的类型化构造器、跨窗口状态链接及具名安全状态审计；具名6小时和24小时派生benchmark均通过该接口 | 只关闭内部接入歧义和两个具名公开benchmark的软件门；不解除外部证据或安全认证阻塞，`security_certified=false` |
 | RQ2 `grid_need` 从 RTS-24 物理派生 | mechanism-only selected-N-1 DC bridge | 定义A逐状态最小化Bus 8削减并保持热限为硬约束；定义B用outage-topology POI PTDF折算过载；配置禁止手填`grid_need_mw`并保存逐状态provenance | 仅替代L5手填网络需求，不能解除响应时标、branch 10孤岛、full-N1、AC/无功或工程参数阻塞；概率仍非经验事故概率，`security_certified=false` |
 | RQ2 L5共享时序包络 | mechanism-only chronological MIP | `chi=c_grid+c_green`共享事件、能量、恢复与债务状态；B6分离双包络后回放真实合计轨迹；持续时间/事件数/能量/恢复债务均在recourse内为硬约束 | 网络事件时点、恢复头寸和业务包络参数仍为合成敏感性；未形成经验履约概率或合同能力，`security_certified=false` |
-| RQ2 H2时序场景外执行 | mechanism-only chronological source ablation | training先冻结correct/B6的`D_flex`，holdout只解正确共享recourse；manual/generated/reduced只改变training，使用同一SHA绑定holdout；时序缩减保留输入轨迹 | 首次trace-derived本机配置的跨来源H2为阴性，不能据此调参；仍无linked carry-in和经验事故/恢复分布，`security_certified=false` |
+| RQ2 H2时序场景外执行 | mechanism-only chronological source ablation | training先冻结correct/B6的`D_flex`，holdout只解正确共享recourse；manual/generated/reduced只改变training，使用同一SHA绑定holdout；后继green call由RTS-GMLC可再生出力/负荷比例派生 | Alibaba代理和RTS-GMLC CFE-deficit两版跨来源H2均为阴性；后者在当前100%小时目标下correct/B6的holdout服务失败率均为1，缺少辨识度，不能据此调参；仍无linked carry-in和经验事故/恢复分布，`security_certified=false` |
 | RTS-GMLC 6小时selected-N-1 DC SCUC/ED | resolved for scoped public benchmark | `rts_gmlc_google_day0_first6h_selected_n1_dc_scuc_v1`完成2020-01-01 00:00-05:00 UTC六小时求解；每小时12个预注册状态含normal，2轮约束生成后全部状态复核；固定组合ED目标`157084.446540127 USD`，有效master下界`157084.446540126 USD`，认证absolute gap为`1e-9 USD`、relative gap为0；产物manifest SHA-256为`405c5109ef405f1961f6e9e461be5bfa42bd88f074bd30fa49e67006f6edcd10` | 仅该具名范围可置`chronological_dispatch_request_built=true`和`chronological_grid_dispatch_coupled=true`；初值为派生自由边界，事故表为空，`completed_periods`为空，且非实时、非完整N-1、非AC，`security_certified=false` |
 | RTS-GMLC 24小时selected-N-1 DC SCUC/ED | resolved for scoped public benchmark | `rts_gmlc_google_day0_full24h_selected_n1_dc_scuc_v1`完成完整day-0 24小时求解；每小时12个预注册状态，关键支路`A12-1/B22/C6/CA-1`、关键机组`121_NUCLEAR_1/213_CC_3/313_CC_1`，3轮约束生成后全状态固定组合ED目标`1193156.5322057535 USD`，有效master下界`1193155.3829459916 USD`，absolute/relative gap为`1.1492597619 USD`/`9.632095e-7`，独立残差最大约`1.4835e-9`；产物manifest SHA-256为`61b9d8c127354375769b5c1cf9e45e4340eafb0e89d8b07acbd8a08c9e1a0399` | 只解除该具名公开软件benchmark的24小时计算规模门；不解除真实绝对MW、真实柔性/恢复、观测事故、full-N1、工程级AC或`security_certified`/正式VMA阻塞 |
 | RTS-GMLC 六候选共同状态多POI比较 | resolved for scoped benchmark comparison | 机械候选`108/120/208/220/308/320`共同使用每小时24个selected状态；120/108/220/320可行，208/308在自由边界连续commitment LP前缀中model-infeasible；bus 120为唯一证书分离的最低成本可行候选；aggregate manifest为`85f157a5f14f73ffa851c8dc1bc263f67719d794a900101b987dcab3f21dac66` | bus 108是已见锚点，不能称六点全盲；模型不可行不是工程场址不可接入，最低DC成本也不是站址推荐 |
@@ -26,7 +26,7 @@
 | PYPOWER同址Q控制初始化语义 | resolved by transparent amendment 004 | 发现同址在线Q-inert机组`VG`可覆盖唯一Q-capable控制器的源`VG`；004只允许把唯一Q-capable源`VG`复制到同址Q-inert行，并保持bus VM作为Newton初值 | amendment-003结果manifest `2b5b705d...`及`2276/2304`统计只作invalidated parent diagnostic；正式direct replay只使用004结果 |
 | 零数据中心normal AC与共同恢复门 | method-blocked for treatment follow-up | direct control为24/24收敛、0/24 secure；560 reference/distributed为11/24和22/24，565为22/24，三组IPOPT原边界各22/24，均未见证h15/h21；`repair_005`已发布4/6 checkpoint，candidate 5在cost normalization中断，active lease为stale evidence但被保留，`operational_interruption` manifest为`66fd455aa958c06c809f9a51a5a9588a932843b83b2cd2953b9982bd1bdb057b`；当前无solver进程，历史attempt均不得恢复且不构成不可行证据 | `treatment_followup_gate_passed=false`；`repair_005_resume_allowed=false`，后续须新建attempt并重新取得lease；六个预算候选checkpoint、完整frontier、manifests、两阶段certificates、primary regret及final 24-state audit验证前，不得启动joint AC、依赖该对照的treatment或论文结果固定；另一解除路径是取得有来源的tap/shunt/补偿及控制参数 |
 | V3两套relative-gap字段的解释 | resolved as authoritative-field separation | stage顶层按feasible incumbent归一的`target_attained/eligibility_status/maximum_acceptance`是唯一正式资格；嵌套certificate按`max(abs(LB),abs(UB),1)`归一的relative/target字段仅作通用辅助诊断 | 判断target是否达到时只读取stage顶层字段，不读取嵌套`certificate.target_gap_attained`；checkpoint仍须检查`certificate.valid`、maximum acceptance、final audit、primary regret和residual audit。论文不得引用嵌套target字段；未来后继schema应删除或显式重命名该冗余字段 |
-| M6完整网络-业务时序闭环 | external-blocked after scoped 24-hour coupling | Google已形成744小时归一化形状、cell f/pdu17一天的同系统功率-NCU配对及24小时零柔性派生业务基准；原生RTS-GMLC已有完整day-0 24小时selected-N1 DC后端、amendment-004 direct AC和零注入恢复诊断 | 仍缺观测绝对MW、完整PDU工作负荷、真实柔性/恢复参数、同钟观测具名事故、full-N1和工程级AC参数/控制/恢复；零注入AC共同见证门也未通过，不得进入正式CFE/容量认证结论 |
+| M6完整网络-业务时序闭环 | v6 executor-pilot blocked | v5 HiGHS chain及202个checkpoint保留但停止且禁止formal resume；v6已实现E0、flexibility-underprovisioning、完整training-support、共同coupling、bootstrap和独立Gurobi目录，开发机实现R4已PASS | 先由执行机完成冻结四块HiGHS/Gurobi pilot并回传；pilot复核及最终activation通过前，grid/pairwise/identification全部关闭 |
 | 真实重大停电事件分布 | processed candidate cohorts; independent-event calibration blocked | 已冻结1534源行、1521候选组及主/敏感性队列；主持续队列1385组/1398源行，重复组保留source IDs并以非缺失max/min而非求和审计 | 候选组不证明独立物理事故，仍不得估计事故频次或无条件时长分布；无资产ID、拓扑和SCUC，不得映射为RTS具名N-1或声称与业务同钟 |
 | Google同系统工作负荷-功率配对 | resolved for one-PDU one-day normalized pairing | cell f/pdu17 day-0取得336格小时usage、1328条machine event和唯一audit；600秒偏移后形成24小时功率-NCU上下界、168行priority明细及可加载的零柔性`derived_benchmark`，全部SHA锁定 | 只解除“一PDU/一天/归一化功率/受限usage人口”和业务schema桥接缺口；不是绝对MW、完整PDU工作负荷、真实柔性或恢复证据 |
 | ENTSO-E观测资产事故 | external-blocked on security token | 匿名API实测401，当前环境无令牌；页面批量导出同样要求登录 | 用户完成免费注册和REST API令牌申请前不执行；取得后仍不得把ENTSO资产ID映射为RTS ID |
@@ -36,7 +36,8 @@
 | branch 10非计划孤岛 | external-blocked | 排除并作为失败单列；数学多岛平衡不视为处置证据 | 正式N-1认证受阻 |
 | 扩建缺少AC工程参数 | external-blocked | 只报告DC MW机制结果 | 不能进行扩建AC认证或把MW增量写成MVA |
 | 固定在线机组、无逐时新能源与跨时约束 | external-blocked on RTS-24 mapping | RTS-24仍只使用8784小时时间轴和Area 1负荷代理；独立原生RTS-GMLC已完成24小时benchmark | 原生24小时结果不能回填机组集合不同的RTS-24，也不能据此声称RTS-24逐时SCUC、可再生联合安全或运行认证 |
-| 真实业务恢复轨迹与恢复头寸缺失 | external-blocked | Google现有同系统day-0配对仍只有priority和NCU usage，没有可恢复比例、checkpoint、真实恢复headroom/效率/功率或合同deadline；Alibaba也不提供这些字段 | 只能把低优先级或作业类型标为柔性候选并做预注册敏感性；不能签发持续容量、恢复或正式T指标认证 |
+| PAI作业请求到绝对功率映射 | external-blocked for empirical MW claims; not required by dimensionless primary estimand | Alibaba已提供714,903个job执行包络及576,724个job×GPU生命周期平均遥测；NLR提供2,467条4×H100节点profile；WattGPU提供4,798条异构GPU inference实验，其中T4与PAI的497台机器/196,065条候选task同型号，但不共享job、模型或时钟，且V100型号未精确对齐 | `direct_job_to_power_mapping_ready=false`继续阻止Alibaba绝对MW与经验合同结论，但不阻止以`D_DC`归一化、把WattGPU/NLR仅作尺度外部检查的公开数据partial-identification主实验 |
+| 真实业务恢复轨迹与恢复头寸缺失 | external-blocked | Alibaba job-level包络仍没有可恢复比例、checkpoint、preemptibility、真实恢复headroom/效率/功率或合同deadline；NLR功率profile也不提供这些调度语义 | 只能把作业类型和请求特征用于候选分层及预注册敏感性；不能签发持续容量、恢复或正式T指标认证 |
 | Word研究方案中文编码损坏 | external-blocked on clean source or approved reconstruction | Git初始提交与当前DOCX均已把大量UTF-8中文误存为乱码并含不可逆`U+FFFD`；无干净历史版本，未用Markdown覆盖原19张表和格式 | 当前以可读Markdown执行计划和模型规格为准；论文冻结前需取得干净源文件，或经确认后从现有可读文档重建DOCX |
 
 ## RQ2 network-derived `grid_need` 机制门
@@ -61,7 +62,11 @@
 
 本机配置`rq2_h2_temporal_source_ablation_rts24_v3`的三臂和A/B网络口径均通过solver、unresolved和artifact correctness gate，但`h2_robust_across_sources=false`。冻结阈值`1.0`下共享holdout没有网络事件，manual臂在该holdout没有B6额外欠交付，generated/reduced两模型的提交量约同为`12.3244 MW`。该阴性结果证明当前trace-threshold敏感性不足以支持跨来源H2，不得以结果为依据事后改变阈值。后续若做阈值、窗口或种子敏感性，必须先冻结网格并完整报告失败区域。
 
-本门仍没有跨窗口linked carry-in、观测事故时点、真实恢复headroom或经验概率，不能报告经验履约失败率。Google压力阈值只是负荷形状触发器，不是故障发生模型；Google与Alibaba来自不同集群，只能作为独立边缘窗口配对。所有结果继续保持`security_certified=false`。
+后继`rq2_h2_temporal_cfe_source_ablation_rts24_v1`已删除generated/reduced中的Alibaba工作负荷代理，改用RTS-GMLC v0.2.3同小时`WIND/PV/RTPV/HYDRO/ROR`可用出力与系统负荷构造100%小时目标下的CFE deficit，再按模型单位换算为`green_call_mw`。为保持已冻结v1 runner字节不变，派生CSV同时保存`green_call_fraction=green_call_mw/D_DC`，旧runner以外部常数`1.0`和`green_call_scale_mw=D_DC`机械还原绝对MW，不重新归一化。8784小时派生调用范围为`0--244.07262873226085 MW`，均值`133.89189560828532 MW`，输入CSV SHA-256为`f1c483fdf20ccc1ddc8e484d719b51f5b67a497bd99fd9bd7347dc57518586a5`。本地三臂、A/B两口径均通过artifact gate，但`h2_robust_across_sources=false`：generated/reduced的correct与B6均承诺约`80 MW`，共享holdout服务失败率均为1，额外短缺约为0；manual臂B6相对correct多出`66.72768060856407 MWh`短缺。该结果说明100%目标与当前冻结包络形成普遍scarcity，导致两模型共同失败，不能作为B6差异的确认性证据，也不得事后降低目标或放宽包络追求阳性。
+
+该CFE profile使用系统可再生比例作透明归属代理，不表示数据中心实际拥有PPA/REC或获得网络可交付的清洁电量。Google压力与RTS-GMLC CFE时序仍是独立benchmark边缘配对，不是同钟观测联合分布。旧Alibaba路径只保留历史结果复现；后续确认性设计如改变`alpha_hr`、恢复参数或窗口，必须先建立新的预注册，不得覆盖本地v1结果。
+
+本门仍没有跨窗口linked carry-in、观测事故时点、真实恢复headroom或经验概率，不能报告经验履约失败率。Google压力阈值只是负荷形状触发器，不是故障发生模型；旧版Google/Alibaba和后继Google/RTS-GMLC都只允许作为独立边缘窗口配对。所有结果继续保持`security_certified=false`。
 
 R4 temporal successor 已在
 `configs/rq2_h2_temporal_successor_preregistration_v1.yaml` 冻结，但尚未
@@ -171,11 +176,15 @@ repair-005 attempt `formal_repair_005_20260722T135158Z`完成四个prefix checkp
 
 因此当前门禁固定为`treatment_followup_gate_passed=false`、`ac_security=false`、`security_certified=false`、`full_m6_model_input_ready=false`和`formal_vma_published=false`。当前无solver进程；`repair_005`旧attempt与stale lease不得resume，后续必须使用新attempt ID和新output root重新取得lease。该后继attempt只有在六个预算checkpoint、包含冻结父baseline的完整frontier、manifests、两阶段certificates、primary regret和final 24-state audit全部发布并验证后，才允许按冻结协议运行joint AC。所有历史V3/V4中断或失败attempt均不得恢复，也不构成数学不可行或无解证据；另一条解除路径是取得有来源的tap、可切换shunt、补偿设备及控制参数后分层启用。即使benchmark恢复成功，缺少真实接入拓扑、设备MVA、数据中心P/Q包络、converter Q和控制时序时仍不能签发工程安全结论。
 
-首批公开生产数据已于2026-07-16取得并完成分源处理。Google PowerData 2019的55个可连接PDU经`bad_measurement_data`过滤后形成744小时形状；40,896个domain-hour完整，每小时有54或55个域，跨域只作无容量权重均值/中位数而不求和或插补。全窗峰值归一化只允许固定回放，不能跨train/holdout使用。Alibaba `stage1_core`全表审计覆盖1,055,501个job、1,261,050个task、1,055,032个group-tag和1,897台machine；主正GPU请求队列为732,318个task/714,903个job，缺失`plan_gpu`的223,965行保留为空且不填零。两个源的处理产物均使用稳定gzip/CSV和SHA清单。
+首批公开生产数据已于2026-07-16取得并完成分源处理。Google PowerData 2019的55个可连接PDU经`bad_measurement_data`过滤后形成744小时形状；40,896个domain-hour完整，每小时有54或55个域，跨域只作无容量权重均值/中位数而不求和或插补。全窗峰值归一化只允许固定回放，不能跨train/holdout使用。Alibaba `stage1_core`全表审计覆盖1,055,501个job、1,261,050个task、1,055,032个group-tag和1,897台machine；主正GPU请求队列为732,318个task/714,903个job，缺失`plan_gpu`的223,965行保留为空且不填零。新增job-level包络保存release/completion代理、GPU请求和GPU-seconds，但不推断deadline或可恢复性。官方sensor表的3,033,232条实例生命周期平均记录已另行处理，形成576,724个完成候选job×GPU汇总；5,829个CPU usage、1,217个average memory及各3个网络字段缺失均单独计数，未填零。
+
+NLR GenAI Power Profiles v2已按DOI `10.7799/3025227`、CC BY 4.0和归档SHA-256 `dcad6de800fb565d850b163902e2eddae48aabd1ed1c7336f9a1cdaf3012f137`冻结。2,467条实测profile来自4×NVIDIA H100节点，输出11个工作负载/规模组的source-defined CPU+GPU node-power统计；8条DIPLOEE whole-facility profile保持为独立合成证据。200条online-rate profile被上游插值到`0.001 s`，不作为1 kHz独立测量或高频ramp证据。NLR与PAI不共享job、硬件或时钟，因此该来源不解除正式映射门。
+
+WattGPU固定Apache-2.0 commit `4e010359c167ac8c65b55aabd1aafbf765ae5d91`的8个对象已下载并逐哈希验证。4,798条LLM inference实验覆盖49个模型和8种实测GPU；T4提供精确型号硬件参考，V100/V100M32只作非精确架构参考，P100/MISC无覆盖。源数据200行prompt/generation请求数不一致，266行报告mean与`energy/duration`偏差超过1%，均由机器产物显式记录。统一门禁`rq2_data_readiness_v2`验证六个输入包、五份原始manifest及各包live config/implementation/module provenance；正式逐job映射门仍关闭。CFE/readiness v1仅保留为冻结predecessor，修订见`rq2_data_provenance_amendment_v2.md`。
 
 Google受限配对查询已在项目`exalted-summer-490612-m6`完成。三次成功Job processed合计551,002,439,062 bytes、billed合计551,004,667,904 bytes，低于1 TiB门限；两个失败Job均未报告processed/billed字节。质量审计折叠1109个完全重复组，并对98个CPU冲突键保留上下界；233,888个多priority组进入`ambiguous`，963,596个无先验priority组使用显式`synthesized`标记。PowerData以`time-600000000`对齐，day-0的288个`production_power_util`样本全部质量不合格，因此只使用`measured_power_util`。
 
-本地处理得到24行同系统小时配对和168行priority明细；CPU-time总下/上界为65,620,667.38184452/65,620,667.50039005 NCU-s，低优先级候选份额的小时边界范围为0.2860至0.4288。机器事件按ADD/REMOVE/UPDATE左闭状态重建，后续UPDATE不向前填补；`hour_index=18/19`共保留44.908767 unknown-capacity machine-seconds。该人口仍按`alloc_collection_id IS NULL OR 0`抽取且`population_is_complete_pdu_workload=false`，绝对PDU容量仍隐藏，priority候选不等于可削减或可恢复业务。Alibaba没有连续功率、checkpoint、deadline或恢复参数，且与Google没有可对齐真实日历；不得把两者拼成观测配对数据。ENTSO-E观测事故仍需令牌，RTS-GMLC故障率抽样只属`sampled_from_published_rate`；所以完整M6阻塞和全部正式认证字段保持不变。
+本地处理得到24行同系统小时配对和168行priority明细；CPU-time总下/上界为65,620,667.38184452/65,620,667.50039005 NCU-s，低优先级候选份额的小时边界范围为0.2860至0.4288。机器事件按ADD/REMOVE/UPDATE左闭状态重建，后续UPDATE不向前填补；`hour_index=18/19`共保留44.908767 unknown-capacity machine-seconds。该人口仍按`alloc_collection_id IS NULL OR 0`抽取且`population_is_complete_pdu_workload=false`，绝对PDU容量仍隐藏，priority候选不等于可削减或可恢复业务。Google、Alibaba和NLR没有可对齐的共同job与真实日历；不得拼成观测配对数据。ENTSO-E观测事故仍需令牌，RTS-GMLC故障率抽样只属`sampled_from_published_rate`；所以完整M6阻塞和全部正式认证字段保持不变。
 
 在此基础上，day-0 builder把`measured_power_util_mean`直接乘以假设的250 MW参考容量，不做day-0峰值再归一化，生成24小时、`172.770833333333-189.729166666667 MW`的零柔性`derived_benchmark`。priority/NCU候选只保存在审计表，所有M6柔性、可恢复量和恢复headroom均为0。该builder产物自身仍保持`absolute_power_mw_available=false`、`flexibility_observed=false`、`full_m6_model_input_ready=false`、`chronological_dispatch_request_built=false`、`chronological_grid_dispatch_coupled=false`和`security_certified=false`；只有上述独立6小时或24小时runner的具名结果可把request/coupled两项置为`true`，其余证据和认证字段不变。
 
@@ -432,3 +441,97 @@ branch 10是7-8单一连接。`allow_islanding=True`只能证明每个分量的�
 ### 逐时运行
 
 RTS-GMLC原始73节点系统具有负荷、风、PV、RTPV、水电、机组ramp和最小开停机字段；原生路径已完成完整day-0 24小时selected-N-1 day-ahead DC SCUC/固定组合ED软件benchmark，包含启动、按小时上取整的最小开停机、跨时ramp和三区Spin备用，并完成两个代表POI的amendment-004无补救direct AC sensitivity、零数据中心normal对照以及560/565/IPOPT恢复诊断。其初值仍是优化派生自由边界而非观测历史，事故表和`completed_periods`为空；direct与zero control均为0 secure，官方电压边界内h15/h21仍无共同恢复见证，且没有工程接入参数，仍未覆盖实时SCED、full-N1或工程级AC安全。因此这里只解除具名软件benchmark的计算与诊断门。另一条RTS-24路径仍需建立可审计的33台机组聚合映射并补齐新能源母线、容量和UID映射，原生RTS-GMLC结果不能直接解除该映射阻塞。
+
+## RQ2三区域相图退化（2026-08-24，阻塞TSG主张）
+
+冻结的本地derived benchmark
+`results/tables/rq2_three_region_phase_map_v1`已完成70/70 cells并通过计算门：
+
+- `R1_no_conflict=0`；
+- `R2_double_commitment_risk=0`；
+- `R3_common_insufficiency=69`；
+- `diagnostic_mixed=1`；
+- `unresolved=0`。
+
+其中50格correct/B6 training均由HiGHS证明不可行，19格在共享holdout上等价失败。唯一mixed格为Bus 8、`alpha_hr=0.50`、q99、20 MW业务恢复headroom：correct/B6分别提交12.00/14.02 MW，二者失败概率均为1，B6期望短缺反而低约1.01 MWh。该结果不支持“B6在数据驱动时序下稳健增加场景外风险”，也没有识别出三区域边界。结果与CFE scarcity或恢复约束压倒合同核算差异的解释一致，但50个training不可行cell尚未做逐约束归因，因此不能写成已识别的因果机制。
+
+该结果不得通过查看结果后降低CFE目标、增加恢复headroom、改变窗口或筛选POI来修复。当前TSG主张保持阻塞。解除条件至少满足其一：
+
+1. 获得外部合同/业务证据，独立冻结可辩护的恢复能力、deadline和CFE恢复核算参数，再注册新的外部验证；
+2. 获得同钟网络事件、负荷和CFE联合时序，替代独立边缘配对；
+3. 将论文问题重构为“严格小时CFE下的共同不足边界”，并补充与该新问题直接对应的理论或经验贡献。
+
+现有70-cell结果、manifest和图表必须保留为完整阴性证据，不能删除或覆盖。其`security_certified=false`、`formal_result=false`、`empirical_probability_claimed=false`状态不得提升。
+
+## RQ2公开边缘24小时successor门（2026-08-24）
+
+公开数据后继的软件与输入配置已闭环，但正式数值证据尚未生成：
+
+- Alibaba v3使用24小时块、training-only peak normalization和job-level
+  双侧排除，得到34个training与34个holdout块；manifest SHA-256为
+  `62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524`。
+- RTS-GMLC v4使用93台enabled generator与118条non-islanding AC branch，
+  system-level competing-risk chronology保证任一小时最多一个N-1停运，
+  得到541个training与530个holdout 24小时块；manifest SHA-256为
+  `28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63`。
+- `rts_gmlc_public_grid_need_dispatch_v2`已通过1071-block provenance preflight；
+  v1的单个真实24小时block smoke只保留为开发证据。v2正常态SCUC只冻结
+  commitment/dispatch；事故小时
+  corrective LP最小化POI削减。全削减仍不可行时返回
+  `proven_infeasible=true, grid_need=None`，不伪造有限调用。
+- pairwise successor只用training代表点冻结correct/B6 minimum-capacity
+  full-service策略。CFE请求截断到逐时可用业务柔性，物理`grid_need`不截断；
+  holdout在true shared envelope下固定策略执行。training策略不可行的cell
+  单列为fixed-policy estimand未定义，不生成虚构pairwise指标。
+- identification successor对每个eligible cell要求完整
+  `530 × 34` Cartesian outcome，输出九个注册指标的sharp lower/upper bound、
+  optimizing coupling、independent/comonotone/countermonotone诊断和无参数
+  先验的OAT ambiguity-reduction区间。
+
+v5 pipeline provenance contract除绑定实际runner、grid-need/SCUC或policy
+模块与solver版本，并逐级复核上游config、implementation、source和package
+身份外，还严格证明checkpoint inventory required key set完整。grid键集合
+等于全部注册block IDs；pairwise键集合等于全部cell policy checkpoints与
+eligible cells的完整Cartesian pair checkpoints；digest限定为小写hex
+SHA-256。v4保留为失败的predecessor，不得用于正式运行。
+
+v5独立R4已`PASS`，用户已授权，且grid-stage activation只把review/formal
+两门从false改为true并绑定全部live hash。grid stage允许正式执行；pairwise与
+identification仍在上游包发布和验证前保持关闭。当前仍不是
+`formal_result_ready`，不得把preflight、partial checkpoint或未解析结果写成
+正式结果；也不得把RTS抽样事故称为经验事故概率，或提升
+`security_certified=false`。
+
+### v6 E0与执行机successor（2026-08-25）
+
+v5正式HiGHS grid attempt保留202/1071个checkpoint，未继续运行。v5
+manifest锁定的旧`formulation.md`字节已不在当前worktree或可达Git历史，
+因此这些checkpoint仅保留为非正式诊断证据，禁止formal resume，也不是v6
+执行输入；旧`rts_gmlc_public_grid_need_dispatch_v3_formal.yaml`的三项执行门
+已全部关闭。开发机对
+`holdout_s20260822_0089`的source hour 6598和
+`holdout_s20260822_0150`的8057--8059完成冻结小规模诊断：原corrective LP
+不可行，`D_DC=0`端点仍不可行，放宽AC branch continuous ratings后4/4恢复
+finite。该证据只支持冻结selected-N-1 DC benchmark内的网络热约束外生
+不可行，不是业务柔性共同不足、总发电容量不足或工程安全结论。
+
+v6新增`exogenous_grid_infeasibility`（E0）状态：不填有限`grid_need`，保留
+无条件边缘质量与全部Cartesian状态行，contract-risk transport只条件于
+finite-grid blocks，E0不进入R3。capacity estimand改为
+`normalized minimum flexibility underprovisioning`；当前模型没有显式$X$
+决策，禁止使用“$X$高估”表述。代表点策略须通过完整evaluable training
+support；partial区域须由同一transport coupling见证；另报告固定seed
+marginal block bootstrap endpoint intervals。
+
+新Gurobi successor使用独立v4 config、checkpoint和output目录，并在
+`GQPD263XH9`开发机上由hostname与环境变量双门fail closed。已冻结四块
+HiGHS/Gurobi pilot设计，但尚未在执行机运行，故
+`cross_solver_confirmation_completed=false`、
+`formal_execution_ready=false`。解除条件为：执行机通过environment/license/
+Pyomo preflight，pilot在wall time、termination/status、incumbent/bound、
+residual、模型规模、finite grid need和E0分类上通过预注册一致性门，再完成
+基于回传证据的最终activation。开发机实现与handoff的独立R4已PASS，但为
+避免审查后改写immutable bundle，activation中的review receipt与pilot receipt
+将在pilot回传后一次写入；此前不得启动全量grid、pairwise或identification。
+pilot结果尚未观察时已补齐normal SCUC的incumbent-relative gap字段与比较门；
+该schema修复不改变模型、阈值、block或estimand。

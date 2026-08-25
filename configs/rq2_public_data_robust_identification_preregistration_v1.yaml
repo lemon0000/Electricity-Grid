@@ -1,0 +1,124 @@
+schema: rq2_public_data_robust_identification_preregistration_v1
+
+preregistration:
+  id: rq2_public_data_robust_identification_preregistration_v1
+  date: "2026-08-24"
+  status: frozen_before_pairwise_outcome_generation
+  predecessor_outcomes_observed: true
+  predecessor_role: exploratory_negative_evidence
+  formal_execution_ready: false
+  formal_result: false
+  security_certified: false
+
+research_question:
+  estimand: >
+    Sharp lower and upper bounds on fixed-policy duplicate commitment and
+    service loss over every coupling of the registered RTS-GMLC power-system
+    and Alibaba workload marginals.
+  primary_units:
+    capacity: fraction_of_D_DC
+    energy: fraction_of_D_DC_hours
+  empirical_joint_distribution_claimed: false
+  real_contract_failure_probability_claimed: false
+
+theorems:
+  instantaneous_capacity:
+    assumptions:
+      - both service-call trajectories are nonnegative
+      - both trajectories use one common time grid
+      - only the instantaneous MW resource is considered
+    shared_requirement: max_t(grid_call_t + cfe_call_t)
+    separate_requirement: max(max_t(grid_call_t), max_t(cfe_call_t))
+    exact_gap: shared_requirement - separate_requirement
+    lower_bound: 0
+    upper_bound: min(max_t(grid_call_t), max_t(cfe_call_t))
+  recovery_debt:
+    assumptions:
+      - recovery availability is zero during active calls
+      - recovery has no ramp constraint or intertemporal marginal cost
+      - supplied recovery availability is net of business, connection and CFE limits
+    claim: greedy_use_of_all_effective_recovery_minimizes_each_prefix_debt
+  exclusions:
+    - no_general_feasible_set_nesting_claim_for_the_full_event_MIP
+    - no_empirical_probability_guarantee
+    - no_engineering_security_guarantee
+
+ambiguity_set:
+  type: complete_discrete_transport_polytope
+  row_marginal: RTS_GMLC_joint_network_and_CFE_blocks
+  column_marginal: Alibaba_dimensionless_workload_blocks
+  within_block_hour_order_preserved: true
+  primary_support: complete_Cartesian_product
+  pairwise_policy_execution: fixed_without_holdout_provision_reoptimization
+  sharpness_condition: every_pairwise_outcome_is_resolved
+  canonical_diagnostics:
+    - independent_product
+    - comonotone
+    - countermonotone
+    - minimum_metric_transport
+    - maximum_metric_transport
+
+identification_rules:
+  identified_R1: all_differences_zero_and_correct_succeeds_for_every_coupling
+  identified_R2: >
+    b6_weakly_dominated_for_every_coupling_and_at_least_one_registered_risk_
+    lower_bound_strictly_positive
+  identified_R3: all_differences_zero_and_correct_fails_for_every_coupling
+  partially_identified: multiple_regions_remain_compatible
+  unresolved: any_required_optimization_or_pairwise_execution_is_unresolved
+  probability_tolerance: 1.0e-9
+  normalized_outcome_tolerance: 1.0e-6
+
+mandatory_outputs:
+  - complete_pairwise_outcome_table
+  - lower_and_upper_bound_for_every_registered_metric
+  - optimizing_coupling_for_every_bound
+  - identified_or_partial_region
+  - unresolved_pair_list
+  - ambiguity_reduction_value_by_uncertain_dimension
+  - source_config_implementation_and_result_hashes
+
+negative_result_rule:
+  no_identified_R2: valid_result_do_not_shrink_ambiguity_set_after_observation
+  all_partially_identified: valid_result_report_identification_failure
+  all_identified_R3: valid_result_report_common_insufficiency
+  selective_reporting_allowed: false
+
+frozen_inputs:
+  scientific_config:
+    path: configs/rq2_public_data_ambiguity_set_v1.yaml
+    sha256: e9f4f8234981cbc33f616fc3d32e77b4928fc7f8eed6b9c71649d9a3ae32ca04
+  analytic_module:
+    path: src/models/robust_shared_flexibility.py
+    sha256: 071c3c8f0e454a7999f61b7bb909fc2ddcf9360b6da8d6f79aa8842a2ccba427
+  coupling_module:
+    path: src/scenarios/block_coupling.py
+    sha256: e18e025c6482ecb38f745bb993d346f49c4bdd99802cdb1675e4bd7ab5243cc4
+  identification_module:
+    path: src/evaluation/rq2_identification_bounds.py
+    sha256: 9d1a3382bf73c0975fdfce1d2b381e0aab5fe22356273a5f90d1cf421aa45ab7
+  bound_runner:
+    path: experiments/run_rq2_public_data_identification.py
+    sha256: 9b830d93a007a82e6f47eed0cd4be42f3dd3f1f0762c373ceba02b421e1c7901
+  route_document:
+    path: docs/plan/RQ2_公开数据鲁棒识别路线图.md
+    sha256: 9f9b59a44eab465b144f28ca2e79b944373aca5c854c619373d09157f0736eaa
+  source_packages:
+    rq2_joint_data_v1: df6889870639e9f4b623c063c7e3fdf49bee671cf904489b3c69c4c05b0b5058
+    rts_gmlc_cfe_v2: cb6b941193db3a09cddb005c14f210bab754e5f9d12ba9c982f778b88409cc0a
+    alibaba_job_envelopes_v1: 73539a65c7db2b7cf630624048c00262a8e650a96b1412d21dcdf04ad857c219
+    alibaba_gpu_telemetry_v1: 908a3aec20a961bc8971f0944db3d18b33756021d7fedfa3c3d339a10aede51d
+    wattgpu_v1: fc5772007da61c0285368faf87b79c410f1f695c38fdbb99625eaceb79177446
+    nlr_v2: 1cef65fe087340a109e0e29ed604e991e9cdedca902017d639d99a59b8f2c677
+  frozen_predecessor:
+    path: results/tables/rq2_three_region_phase_map_v1/SHA256SUMS.json
+    sha256: 3763f9e5b295a42cf6fbea0e14a0aca6946e49cd79565166fea81179e5d49c87
+
+activation_gates:
+  hourly_outage_to_grid_need_dispatch_ready: false
+  dimensionless_workload_blocks_ready: false
+  complete_pairwise_outcomes_ready: false
+  all_pairwise_optimizations_resolved: false
+  independent_R4_review_passed: false
+  user_formal_run_authorized: false
+  formal_execution_ready: false

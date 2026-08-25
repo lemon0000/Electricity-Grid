@@ -1,0 +1,354 @@
+[
+  {
+    "assessment": {
+      "primary": {
+        "component_type": "generator",
+        "component_uid": "223_STEAM_3",
+        "event_id": "seed_20260822_event_0126",
+        "grid_need_mw": null,
+        "maximum_constraint_violation": null,
+        "proven_infeasible": true,
+        "resolved": false,
+        "solver_status": "error",
+        "source_hour": 6598,
+        "termination_condition": "infeasible"
+      },
+      "resolved_for_pipeline": true,
+      "solver_name": "highs",
+      "solver_options": {
+        "dual_feasibility_tolerance": 1e-06,
+        "mip_abs_gap": 0.0,
+        "mip_feasibility_tolerance": 1e-06,
+        "mip_rel_gap": 1e-06,
+        "primal_feasibility_tolerance": 1e-06,
+        "random_seed": 0,
+        "threads": 4
+      },
+      "state": "exogenous_grid_infeasibility",
+      "zero_dc_confirmation": {
+        "component_type": "generator",
+        "component_uid": "223_STEAM_3",
+        "event_id": "seed_20260822_event_0126",
+        "grid_need_mw": null,
+        "maximum_constraint_violation": null,
+        "proven_infeasible": true,
+        "resolved": false,
+        "solver_status": "error",
+        "source_hour": 6598,
+        "termination_condition": "infeasible"
+      }
+    },
+    "baseline_audit": {
+      "absolute_gap_usd": 0.0,
+      "accepted": true,
+      "configured_mip_relative_gap": 1e-06,
+      "gap_tolerance_usd": 2.0211216513182193,
+      "lower_bound_usd": 2021121.6513182193,
+      "maximum_constraint_violation": 3.844320417556446e-10,
+      "maximum_integrality_violation": 0.0,
+      "objective_usd": 2021121.6513182134,
+      "solver_message": "<undefined>",
+      "solver_status": "ok",
+      "solver_threads": 4,
+      "termination_condition": "optimal",
+      "upper_bound_usd": 2021121.6513182193
+    },
+    "block_id": "holdout_s20260822_0089",
+    "component_type": "generator",
+    "component_uid": "223_STEAM_3",
+    "event_id": "seed_20260822_event_0126",
+    "source_hour": 6598,
+    "thermal_limits_are_binding_evidence": true,
+    "thermal_relaxation_assessment": {
+      "primary": {
+        "component_type": "generator",
+        "component_uid": "223_STEAM_3",
+        "event_id": "seed_20260822_event_0126",
+        "grid_need_mw": 0.0,
+        "maximum_constraint_violation": 8.640199666842818e-12,
+        "proven_infeasible": false,
+        "resolved": true,
+        "solver_status": "ok",
+        "source_hour": 6598,
+        "termination_condition": "optimal"
+      },
+      "resolved_for_pipeline": true,
+      "solver_name": "highs",
+      "solver_options": {
+        "dual_feasibility_tolerance": 1e-06,
+        "mip_abs_gap": 0.0,
+        "mip_feasibility_tolerance": 1e-06,
+        "mip_rel_gap": 1e-06,
+        "primal_feasibility_tolerance": 1e-06,
+        "random_seed": 0,
+        "threads": 4
+      },
+      "state": "finite_grid_need",
+      "zero_dc_confirmation": null
+    }
+  },
+  {
+    "assessment": {
+      "primary": {
+        "component_type": "branch",
+        "component_uid": "CB-1",
+        "event_id": "seed_20260822_event_0157",
+        "grid_need_mw": null,
+        "maximum_constraint_violation": null,
+        "proven_infeasible": true,
+        "resolved": false,
+        "solver_status": "error",
+        "source_hour": 8057,
+        "termination_condition": "infeasible"
+      },
+      "resolved_for_pipeline": true,
+      "solver_name": "highs",
+      "solver_options": {
+        "dual_feasibility_tolerance": 1e-06,
+        "mip_abs_gap": 0.0,
+        "mip_feasibility_tolerance": 1e-06,
+        "mip_rel_gap": 1e-06,
+        "primal_feasibility_tolerance": 1e-06,
+        "random_seed": 0,
+        "threads": 4
+      },
+      "state": "exogenous_grid_infeasibility",
+      "zero_dc_confirmation": {
+        "component_type": "branch",
+        "component_uid": "CB-1",
+        "event_id": "seed_20260822_event_0157",
+        "grid_need_mw": null,
+        "maximum_constraint_violation": null,
+        "proven_infeasible": true,
+        "resolved": false,
+        "solver_status": "error",
+        "source_hour": 8057,
+        "termination_condition": "infeasible"
+      }
+    },
+    "baseline_audit": {
+      "absolute_gap_usd": 0.0,
+      "accepted": true,
+      "configured_mip_relative_gap": 1e-06,
+      "gap_tolerance_usd": 1.4009266813122656,
+      "lower_bound_usd": 1400926.6813122656,
+      "maximum_constraint_violation": 3.319655661471188e-11,
+      "maximum_integrality_violation": 9.838117974325624e-15,
+      "objective_usd": 1400926.6813122632,
+      "solver_message": "<undefined>",
+      "solver_status": "ok",
+      "solver_threads": 4,
+      "termination_condition": "optimal",
+      "upper_bound_usd": 1400926.6813122656
+    },
+    "block_id": "holdout_s20260822_0150",
+    "component_type": "branch",
+    "component_uid": "CB-1",
+    "event_id": "seed_20260822_event_0157",
+    "source_hour": 8057,
+    "thermal_limits_are_binding_evidence": true,
+    "thermal_relaxation_assessment": {
+      "primary": {
+        "component_type": "branch",
+        "component_uid": "CB-1",
+        "event_id": "seed_20260822_event_0157",
+        "grid_need_mw": 0.0,
+        "maximum_constraint_violation": 5.8548721426632255e-12,
+        "proven_infeasible": false,
+        "resolved": true,
+        "solver_status": "ok",
+        "source_hour": 8057,
+        "termination_condition": "optimal"
+      },
+      "resolved_for_pipeline": true,
+      "solver_name": "highs",
+      "solver_options": {
+        "dual_feasibility_tolerance": 1e-06,
+        "mip_abs_gap": 0.0,
+        "mip_feasibility_tolerance": 1e-06,
+        "mip_rel_gap": 1e-06,
+        "primal_feasibility_tolerance": 1e-06,
+        "random_seed": 0,
+        "threads": 4
+      },
+      "state": "finite_grid_need",
+      "zero_dc_confirmation": null
+    }
+  },
+  {
+    "assessment": {
+      "primary": {
+        "component_type": "branch",
+        "component_uid": "CB-1",
+        "event_id": "seed_20260822_event_0157",
+        "grid_need_mw": null,
+        "maximum_constraint_violation": null,
+        "proven_infeasible": true,
+        "resolved": false,
+        "solver_status": "error",
+        "source_hour": 8058,
+        "termination_condition": "infeasible"
+      },
+      "resolved_for_pipeline": true,
+      "solver_name": "highs",
+      "solver_options": {
+        "dual_feasibility_tolerance": 1e-06,
+        "mip_abs_gap": 0.0,
+        "mip_feasibility_tolerance": 1e-06,
+        "mip_rel_gap": 1e-06,
+        "primal_feasibility_tolerance": 1e-06,
+        "random_seed": 0,
+        "threads": 4
+      },
+      "state": "exogenous_grid_infeasibility",
+      "zero_dc_confirmation": {
+        "component_type": "branch",
+        "component_uid": "CB-1",
+        "event_id": "seed_20260822_event_0157",
+        "grid_need_mw": null,
+        "maximum_constraint_violation": null,
+        "proven_infeasible": true,
+        "resolved": false,
+        "solver_status": "error",
+        "source_hour": 8058,
+        "termination_condition": "infeasible"
+      }
+    },
+    "baseline_audit": {
+      "absolute_gap_usd": 0.0,
+      "accepted": true,
+      "configured_mip_relative_gap": 1e-06,
+      "gap_tolerance_usd": 1.4009266813122656,
+      "lower_bound_usd": 1400926.6813122656,
+      "maximum_constraint_violation": 3.319655661471188e-11,
+      "maximum_integrality_violation": 9.838117974325624e-15,
+      "objective_usd": 1400926.6813122632,
+      "solver_message": "<undefined>",
+      "solver_status": "ok",
+      "solver_threads": 4,
+      "termination_condition": "optimal",
+      "upper_bound_usd": 1400926.6813122656
+    },
+    "block_id": "holdout_s20260822_0150",
+    "component_type": "branch",
+    "component_uid": "CB-1",
+    "event_id": "seed_20260822_event_0157",
+    "source_hour": 8058,
+    "thermal_limits_are_binding_evidence": true,
+    "thermal_relaxation_assessment": {
+      "primary": {
+        "component_type": "branch",
+        "component_uid": "CB-1",
+        "event_id": "seed_20260822_event_0157",
+        "grid_need_mw": 0.0,
+        "maximum_constraint_violation": 4.092726157978177e-12,
+        "proven_infeasible": false,
+        "resolved": true,
+        "solver_status": "ok",
+        "source_hour": 8058,
+        "termination_condition": "optimal"
+      },
+      "resolved_for_pipeline": true,
+      "solver_name": "highs",
+      "solver_options": {
+        "dual_feasibility_tolerance": 1e-06,
+        "mip_abs_gap": 0.0,
+        "mip_feasibility_tolerance": 1e-06,
+        "mip_rel_gap": 1e-06,
+        "primal_feasibility_tolerance": 1e-06,
+        "random_seed": 0,
+        "threads": 4
+      },
+      "state": "finite_grid_need",
+      "zero_dc_confirmation": null
+    }
+  },
+  {
+    "assessment": {
+      "primary": {
+        "component_type": "branch",
+        "component_uid": "CB-1",
+        "event_id": "seed_20260822_event_0157",
+        "grid_need_mw": null,
+        "maximum_constraint_violation": null,
+        "proven_infeasible": true,
+        "resolved": false,
+        "solver_status": "error",
+        "source_hour": 8059,
+        "termination_condition": "infeasible"
+      },
+      "resolved_for_pipeline": true,
+      "solver_name": "highs",
+      "solver_options": {
+        "dual_feasibility_tolerance": 1e-06,
+        "mip_abs_gap": 0.0,
+        "mip_feasibility_tolerance": 1e-06,
+        "mip_rel_gap": 1e-06,
+        "primal_feasibility_tolerance": 1e-06,
+        "random_seed": 0,
+        "threads": 4
+      },
+      "state": "exogenous_grid_infeasibility",
+      "zero_dc_confirmation": {
+        "component_type": "branch",
+        "component_uid": "CB-1",
+        "event_id": "seed_20260822_event_0157",
+        "grid_need_mw": null,
+        "maximum_constraint_violation": null,
+        "proven_infeasible": true,
+        "resolved": false,
+        "solver_status": "error",
+        "source_hour": 8059,
+        "termination_condition": "infeasible"
+      }
+    },
+    "baseline_audit": {
+      "absolute_gap_usd": 0.0,
+      "accepted": true,
+      "configured_mip_relative_gap": 1e-06,
+      "gap_tolerance_usd": 1.4009266813122656,
+      "lower_bound_usd": 1400926.6813122656,
+      "maximum_constraint_violation": 3.319655661471188e-11,
+      "maximum_integrality_violation": 9.838117974325624e-15,
+      "objective_usd": 1400926.6813122632,
+      "solver_message": "<undefined>",
+      "solver_status": "ok",
+      "solver_threads": 4,
+      "termination_condition": "optimal",
+      "upper_bound_usd": 1400926.6813122656
+    },
+    "block_id": "holdout_s20260822_0150",
+    "component_type": "branch",
+    "component_uid": "CB-1",
+    "event_id": "seed_20260822_event_0157",
+    "source_hour": 8059,
+    "thermal_limits_are_binding_evidence": true,
+    "thermal_relaxation_assessment": {
+      "primary": {
+        "component_type": "branch",
+        "component_uid": "CB-1",
+        "event_id": "seed_20260822_event_0157",
+        "grid_need_mw": 0.0,
+        "maximum_constraint_violation": 1.9895196601282805e-12,
+        "proven_infeasible": false,
+        "resolved": true,
+        "solver_status": "ok",
+        "source_hour": 8059,
+        "termination_condition": "optimal"
+      },
+      "resolved_for_pipeline": true,
+      "solver_name": "highs",
+      "solver_options": {
+        "dual_feasibility_tolerance": 1e-06,
+        "mip_abs_gap": 0.0,
+        "mip_feasibility_tolerance": 1e-06,
+        "mip_rel_gap": 1e-06,
+        "primal_feasibility_tolerance": 1e-06,
+        "random_seed": 0,
+        "threads": 4
+      },
+      "state": "finite_grid_need",
+      "zero_dc_confirmation": null
+    }
+  }
+]

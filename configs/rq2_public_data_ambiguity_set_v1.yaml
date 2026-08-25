@@ -1,0 +1,130 @@
+schema: rq2_public_data_ambiguity_set_v1
+
+research_question:
+  id: RQ2_public_data_partial_identification
+  estimand: >
+    Sharp bounds on duplicate flexibility commitment and fixed-policy service
+    loss when the RTS-GMLC power-system chronology and Alibaba workload
+    chronology are observed only as separate marginal distributions.
+  evidence_tier: public_benchmark_partial_identification
+  empirical_joint_distribution_claimed: false
+  engineering_certification_claimed: false
+
+normalization:
+  primary_capacity_unit: fraction_of_data_center_reference_demand
+  reference_demand_symbol: D_DC
+  absolute_mw_primary_estimand: false
+  reason: paired_job_to_power_mapping_is_unavailable
+
+public_evidence:
+  power_system:
+    package: data/processed/model_inputs/rq2_joint_data_v1
+    package_manifest_sha256: df6889870639e9f4b623c063c7e3fdf49bee671cf904489b3c69c4c05b0b5058
+    cfe_package: data/processed/model_inputs/rts_gmlc_hourly_cfe_deficit_250mw_v2
+    cfe_manifest_sha256: cb6b941193db3a09cddb005c14f210bab754e5f9d12ba9c982f778b88409cc0a
+    joint_clock: RTS_GMLC_8784_hour_chronology
+    outage_semantics: sampled_from_published_reliability_parameters
+  workload:
+    envelope_package: data/processed/model_inputs/alibaba_job_execution_envelopes_v1
+    envelope_manifest_sha256: 73539a65c7db2b7cf630624048c00262a8e650a96b1412d21dcdf04ad857c219
+    telemetry_package: data/processed/model_inputs/alibaba_gpu_telemetry_v1
+    telemetry_manifest_sha256: 908a3aec20a961bc8971f0944db3d18b33756021d7fedfa3c3d339a10aede51d
+    clock_semantics: anonymous_relative_time_not_calendar_aligned
+  power_scale_validation:
+    wattgpu_manifest_sha256: fc5772007da61c0285368faf87b79c410f1f695c38fdbb99625eaceb79177446
+    nlr_manifest_sha256: 1cef65fe087340a109e0e29ed604e991e9cdedca902017d639d99a59b8f2c677
+    role: external_range_check_only_not_job_pairing
+
+ambiguity_set:
+  type: discrete_transport_polytope
+  fixed_marginals:
+    - RTS_GMLC_joint_network_and_CFE_blocks
+    - Alibaba_workload_blocks
+  unrestricted_support_primary: true
+  canonical_diagnostics:
+    - independent_product
+    - comonotone_by_registered_stress_score
+    - countermonotone_by_registered_stress_score
+    - minimum_metric_transport
+    - maximum_metric_transport
+  within_block_order_preserved: true
+  cross_source_calendar_alignment_claimed: false
+  pairwise_outcome_requirement: complete_Cartesian_product
+
+analytic_results:
+  instantaneous_shared_requirement: max_t(grid_call_t + cfe_call_t)
+  separate_commitment_requirement: max(max_t(grid_call_t), max_t(cfe_call_t))
+  duplicate_commitment_gap: shared_requirement - separate_requirement
+  gap_bounds:
+    lower: 0
+    upper: min(max_t(grid_call_t), max_t(cfe_call_t))
+  scope: exact_for_nonnegative_MW_only_calls
+  full_temporal_feasible_set_nesting_claimed: false
+
+identification:
+  classifications:
+    - identified_R1_no_conflict
+    - identified_R2_double_commitment_risk
+    - identified_R3_common_insufficiency
+    - partially_identified
+    - unresolved
+  probability_tolerance: 1.0e-9
+  normalized_outcome_tolerance: 1.0e-6
+  identified_R2_rule: >
+    B6 is weakly dominated for every admissible coupling and at least one
+    capacity or service-loss lower bound is strictly positive.
+  identified_R1_rule: >
+    All policy-difference bounds are zero and the correct policy succeeds for
+    every admissible coupling.
+  identified_R3_rule: >
+    All policy-difference bounds are zero and the correct policy fails for
+    every admissible coupling.
+  partial_rule: >
+    More than one scientific region remains compatible with the sharp bounds.
+
+uncertain_physical_parameters:
+  policy: threshold_identification_not_author_selected_point_estimates
+  dimensions:
+    - flexible_fraction
+    - recovery_efficiency
+    - normalized_recovery_headroom
+    - maximum_event_duration
+    - maximum_event_count
+    - normalized_energy_budget
+    - normalized_debt_limit
+  source_classes:
+    public_data_supported: externally bounded
+    physical_domain_only: report_full_threshold_curve
+    unsupported: excluded_from_primary_claim
+  selective_subrange_reporting_allowed: false
+
+execution:
+  pairwise_policies_are_fixed_before_holdout: true
+  holdout_reoptimization_of_provision: false
+  all_transport_objectives_reported: true
+  formal_execution_ready: false
+  activation_requirements:
+    - hourly_outage_to_grid_need_dispatch_package
+    - dimensionless_workload_block_package
+    - complete_pairwise_fixed_policy_outcome_table
+    - immutable_runtime_config_and_manifest
+    - independent_R4_review_PASS
+    - user_authorization
+
+legacy:
+  frozen_predecessor: results/tables/rq2_three_region_phase_map_v1
+  predecessor_result_preserved: true
+  predecessor_region_counts:
+    R1_no_conflict: 0
+    R2_double_commitment_risk: 0
+    R3_common_insufficiency: 69
+    diagnostic_mixed: 1
+    unresolved: 0
+
+claims:
+  real_contract_failure_probability: false
+  Alibaba_absolute_power: false
+  PPA_or_REC_delivery: false
+  full_N_minus_one: false
+  AC_security: false
+  security_certified: false
