@@ -1,0 +1,38 @@
+schema: rq2_public_solver_confirmatory_pilot_activation_v3
+authorized_on: "2026-08-28"
+status: escalation_remediation_candidate_only_independent_review_pending
+
+user_authority:
+  explicit_authorization_observed: true
+  authorization_record: "继续做/按路径全部做完"
+  authorized_scope: prepare_and_independently_review_v3_confirmatory_remediation
+  external_watchdog_seconds: 21600
+
+escalation_authority:
+  receipt_path: configs/rq2_public_solver_confirmatory_pilot_implementation_review_escalation_v3.yaml
+  receipt_sha256: 4561e17bf16f89a33efbde0b5cc9eee706bf53c82712dee6258bae5e451796d9
+  verdict: ESCALATE
+
+permissions:
+  prepare_versioned_v3_remediation_candidate: true
+  independently_review_v3_candidate: true
+  execute_v3_candidate: false
+  add_complete_v4_execution_successor_after_exact_independent_pass: true
+  execute_confirmatory_pilot_before_v4_gate: false
+  execute_formal_grid: false
+  execute_pairwise: false
+  execute_identification: false
+  make_formal_result_claim: false
+  make_security_claim: false
+
+gates:
+  v3_remediation_candidate_ready: true
+  independent_v3_implementation_review_passed: false
+  v4_execution_successor_present: false
+  confirmatory_execution_ready: false
+  confirmatory_pilot_executed: false
+  cross_solver_confirmation_completed: false
+  formal_execution_ready: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false

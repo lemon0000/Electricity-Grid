@@ -1,0 +1,83 @@
+evaluation:
+  id: rq2_h2_scenario_source_ablation_formal_v1
+  role: out_of_sample_ablation_testing_h2_robustness_across_training_scenario_sources_formal
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+  security_certified: false
+  formal_vma_published: false
+model:
+  max_flexibility_budget_mw: 200.0
+  provisioning_cost_per_mw: 500.0
+  lambda_risk: 0.1
+  beta: 0.5
+  service_shortfall_tolerance_mw: 1.0e-06
+  solver_name: highs
+coefficients:
+  kappa_access: 1000.0
+  kappa_grid: 50.0
+  kappa_green: 40.0
+  kappa_drop: 2000.0
+  kappa_breach_firm: 0.0
+  kappa_breach_conditional: 0.0
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+arms:
+- manual
+- generated
+- reduced
+holdout_scenarios:
+- name: holdout_mild
+  probability: 0.4
+  grid_need_mw: 25.0
+  green_call_mw: 60.0
+  connected_demand_mw: 1000.0
+  hours: 1.0
+- name: holdout_stress
+  probability: 0.4
+  grid_need_mw: 50.0
+  green_call_mw: 60.0
+  connected_demand_mw: 1000.0
+  hours: 1.0
+- name: holdout_severe
+  probability: 0.2
+  grid_need_mw: 90.0
+  green_call_mw: 60.0
+  connected_demand_mw: 1000.0
+  hours: 1.0
+training_scenarios:
+- name: train_mild
+  probability: 0.5
+  grid_need_mw: 20.0
+  green_call_mw: 60.0
+  connected_demand_mw: 1000.0
+  hours: 1.0
+- name: train_stress
+  probability: 0.5
+  grid_need_mw: 40.0
+  green_call_mw: 60.0
+  connected_demand_mw: 1000.0
+  hours: 1.0
+generator:
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+  split_fraction: 0.5
+  window_hours: 24
+  n_train: 200
+  n_holdout: 60
+  seed: 20260823
+  grid_stress_scale_mw: 40.0
+  green_call_scale_mw: 60.0
+  connected_demand_mw: 1000.0
+  grid_stress_shape:
+    path: data/processed/google_power_2019/v1/hourly_shape.csv
+    column: measured_power_util_unweighted_mean
+  green_workload_shape:
+    path: data/processed/alibaba_gpu_2020/v2020/relative_hourly_workload.csv.gz
+    column: requested_gpu_equivalents
+reduction:
+  target_count: 50
+  ground_norm_order: 2.0
+validation:
+  cvar_cross_check_tolerance: 1.0e-06
+  fail_closed_on_infeasible_training: true
+random_seed: null
+output:
+  arms_path: D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_formal_batch\rq2_formal_batch_v1\A6_ablation_seed_20260823\arms.csv
+  summary_path: D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_formal_batch\rq2_formal_batch_v1\A6_ablation_seed_20260823\summary.json

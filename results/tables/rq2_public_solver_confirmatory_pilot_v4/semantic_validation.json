@@ -1,0 +1,77 @@
+{
+  "controller_identity_sha256": "6d0d86a959c68b862d1b6b0a7f7cecb91eb697eba8aed7212985edc2307a3dc2",
+  "controller_receipt_sha256": "c4b7b80dc08f2a74323d3b5ad6b3e72c4517eb6533d56119230119c3e33d3c4a",
+  "cross_solver_confirmation_completed": true,
+  "durable_process_provenance_verified": true,
+  "evaluator_report": {
+    "block_run_count": 16,
+    "confirmatory_pilot_required": true,
+    "cross_solver_confirmation_completed": false,
+    "diagnostic_semantic_consistency_observed": true,
+    "hour_run_count": 384,
+    "pairwise_block_comparison_count": 24,
+    "raw_status_inventory": [
+      {
+        "count": 8,
+        "solver": "gurobi",
+        "solver_status": "warning",
+        "termination_condition": "infeasible"
+      },
+      {
+        "count": 54,
+        "solver": "gurobi",
+        "solver_status": "not_applicable",
+        "termination_condition": "not_applicable_no_active_outage"
+      },
+      {
+        "count": 130,
+        "solver": "gurobi",
+        "solver_status": "ok",
+        "termination_condition": "optimal"
+      },
+      {
+        "count": 8,
+        "solver": "highs",
+        "solver_status": "error",
+        "termination_condition": "infeasible"
+      },
+      {
+        "count": 54,
+        "solver": "highs",
+        "solver_status": "not_applicable",
+        "termination_condition": "not_applicable_no_active_outage"
+      },
+      {
+        "count": 130,
+        "solver": "highs",
+        "solver_status": "ok",
+        "termination_condition": "optimal"
+      }
+    ],
+    "run_count": 4,
+    "schema": "rq2_public_solver_pilot_semantic_diagnostic_v1",
+    "v1_eligibility_changed": false
+  },
+  "formal_grid_execution_started": false,
+  "fresh_execution_run_ids": [
+    "highs_r1",
+    "gurobi_r1",
+    "gurobi_r2",
+    "highs_r2"
+  ],
+  "fresh_worker_pids": [
+    29896,
+    25636,
+    31564,
+    12576
+  ],
+  "nested_worker_reports_reconstructed_independently": true,
+  "process_evidence_scope": "controller_observed_execution_evidence_not_third_party_os_attestation",
+  "runs_reconstructed_exactly_from_worker_payloads": true,
+  "schema": "rq2_public_solver_confirmatory_semantic_validation_v4",
+  "security_certified": false,
+  "semantic_authority_sha256": "c0b1a6a3074343ab5f281b268cd40898630ad1e2234830a4536189687832f471",
+  "semantic_contract_passed": true,
+  "semantic_successor_config_sha256": "cb0209a9a53962be8ebb6ee185d3bfbf3d004d7cd761e164b286a58e0c7887b0",
+  "v3_outer_sha256": "d7b8b7dd2cf0bc51f46602c1c7e28c1aad281c977ff8a15b0617be392e4a2f49"
+}

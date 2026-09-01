@@ -1,0 +1,72 @@
+schema: rq2_public_grid_activation_review_v1
+reviewed_on: "2026-08-29"
+review_scope: rq2_public_grid_need_activation_v2_pre_execution
+reviewer_role: independent_sol_reviewer
+verdict: PASS
+evidence_scope: independent_read_only_review_of_activation_contract_and_code
+
+reviewed_subject:
+  config_path: configs/rq2_public_grid_need_activation_v2.yaml
+  activation_subject_sha256: c6399e20448cb1a21f417660d1db192e3080d0c03cfb65ed233f17c53427f6bd
+
+materialization_contract:
+  activated_config_path: results/execution_configs/rq2_public_successor_v2/grid.yaml
+  activation_record_path: results/execution_configs/rq2_public_successor_v2/grid.activation.json
+  runner_path: experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py
+  runner_invocation: >-
+    python -m experiments.run_rts_gmlc_public_grid_need_dispatch_v4
+    --config results/execution_configs/rq2_public_successor_v2/grid.yaml
+    --validate-only
+  solver_calls: 0
+  result_files_written: 0
+
+reviewed_artifacts:
+  grid_template:
+    path: configs/rts_gmlc_public_grid_need_dispatch_v4.yaml
+    sha256: 84db8e7ad47bf51dd1ec94db1ebb7d3edc068b587afb4fba8d596861d58e6beb
+  grid_runner:
+    path: experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py
+    sha256: 39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8
+  grid_validator:
+    path: experiments/validate_rq2_public_grid_activation_v2.py
+    sha256: 8b3f2076b5bc44e6da0843f03d5b6dae4128750113dfdd7089bbd076e924fbd3
+  grid_activator:
+    path: experiments/activate_rq2_public_grid_v2.py
+    sha256: 7ac113c4970420f5acae76767e3ee77edea5187efbcfeed9d10e1a510739aab2
+  activation_tests:
+    path: tests/test_rq2_public_grid_activation_v2.py
+    sha256: 6de464c7bb81e8a89402d246523b8fef88f69838ff8057e1ca693a062a240297
+  provenance_contract:
+    path: configs/rq2_public_pipeline_provenance_contract_v3.yaml
+    sha256: 9a890f6cebf6a2b87b6cee97ec9b3a5074bb40892cee917c98fe58644ff178f9
+  preregistration:
+    path: configs/rq2_public_data_robust_identification_preregistration_v6.yaml
+    sha256: ef25deabfcd51fbd667e48dcddcfbe4b19a2115c6d4bc40b0fc556b5c1f332f2
+  input_package_manifest:
+    path: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4/SHA256SUMS.json
+    sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+  source_manifest:
+    path: data/raw/rts_gmlc/v0.2.3/upstream/SHA256SUMS
+    sha256: 95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914
+  pilot_result_manifest:
+    path: results/tables/rq2_public_solver_confirmatory_pilot_v4/SHA256SUMS.json
+    sha256: 70003e18566c208631768dd028d573cd0c5e45d4f8fb0e7104ec1f1158d98a58
+
+assertions:
+  frozen_template_execution_closed: true
+  activated_config_is_materialized_by_activator: true
+  activated_config_binds_review_receipt: true
+  activated_root_preexistence_fail_closed: true
+  checkpoint_output_preexistence_fail_closed: true
+  predecessor_checkpoint_reuse_disabled: true
+  require_all_blocks_resolved: true
+  required_environment_and_host_contract_declared: true
+  downstream_stage_order_and_upstream_gate_closed: true
+  source_manifest_frozen: true
+  no_solver_or_result_writes_during_activation: true
+
+effect:
+  opens_grid_activation_only: true
+  does_not_execute_solver: true
+  pairwise_identification_remain_closed: true
+  formal_result_claim_security_remain_false: true

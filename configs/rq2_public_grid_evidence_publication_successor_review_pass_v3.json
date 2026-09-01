@@ -1,0 +1,59 @@
+{
+  "schema": "rq2_public_grid_evidence_publication_successor_review_pass_v3",
+  "version": 3,
+  "reviewed_on": "2026-08-31",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "PASS",
+  "reviewed_outer": {
+    "path": "configs/rq2_public_grid_evidence_publication_successor_v3.OUTER.SHA256SUMS.json",
+    "sha256": "4b84fc86337ec82d6018bfe9c87bf23a75892afbf3d61e66b0a34549b0858ce7"
+  },
+  "review_conclusion": {
+    "blocker_findings": [],
+    "major_findings": [],
+    "minor_findings": [],
+    "sealed_execution_trace_exact_count": 68,
+    "sealed_execution_trace_mapping_sha256": "0b7652f73b84b3885a8f0d51a4c3eb909b553bc67e54ce38fed6f389b4740b54",
+    "successor_closure_exact_count": 95,
+    "successor_closure_mapping_sha256": "2c2969b97442165f212562e752830a81d6213978ca0501578aa814f20dc1e21f",
+    "exact_set_oracle_is_independent_of_implementation_under_test": true,
+    "v3_bundle_live_member_count": 8,
+    "v3_bundle_live_member_count_expected": 8
+  },
+  "verification_evidence": {
+    "focused_command": "python -B -m pytest tests/test_rq2_public_grid_evidence_publication_successor_v3.py -q",
+    "focused_result": "38 passed in 390.31s",
+    "related_command": "python -B -m pytest tests/test_rq2_public_grid_evidence_publication_successor_v1.py tests/test_rq2_public_grid_evidence_publication_successor_v2.py tests/test_rq2_public_grid_evidence_publication_successor_v3.py tests/test_rq2_public_grid_two_block_pilot_execution_controller_successor_v3.py tests/test_rq2_public_grid_two_block_pilot_candidate_v7.py tests/test_rq2_public_grid_two_block_pilot_activation_transport_v5.py tests/test_rq2_public_grid_solver_recovery_v2.py -q",
+    "related_result": "222 passed in 1215.85s",
+    "ruff_result": "All checks passed",
+    "canonical_validate_only_result": {
+      "validation_passed": true,
+      "closure_inventory_count": 95,
+      "closure_mapping_sha256": "2c2969b97442165f212562e752830a81d6213978ca0501578aa814f20dc1e21f",
+      "worker_processes_started": 0,
+      "scientific_loader_calls": 0,
+      "solver_calls": 0,
+      "result_writes": 0
+    },
+    "negative_execute_exit_code": 1,
+    "formal_runner_sha256": "39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8",
+    "activated_config_sha256": "b8f7a71f8aaf8150c8515089e90e1946732d4476e0855d8677523577bc17f416",
+    "formal_checkpoint_hashes_matched": 9,
+    "formal_checkpoint_count_expected": 9,
+    "canonical_roots_absent": true,
+    "related_process_count": 0
+  },
+  "effect": {
+    "v3_bytes_immutable": true,
+    "v3_independent_review_passed": true,
+    "versioned_nonformal_execution_successor_creation_authorized": true,
+    "zero_solver_successor_review_authorized": true,
+    "successor_execution_authorized": false,
+    "pilot_execution_authorized": false,
+    "formal_execution_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false,
+    "no_execution_authority": true
+  }
+}

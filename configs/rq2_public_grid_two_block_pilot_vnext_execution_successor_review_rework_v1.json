@@ -1,0 +1,36 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_vnext_execution_successor_review_rework_v1",
+  "version": 1,
+  "reviewed_on": "2026-08-31",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "REWORK",
+  "reviewed_outer": {
+    "path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v1.OUTER.SHA256SUMS.json",
+    "sha256": "f6874ef26b0ab13287fd6050c2617da65545fa19ffd3ea8bd92917af158fbb49"
+  },
+  "findings": [
+    {
+      "severity": "Major",
+      "id": "self_bundle_runtime_authority_missing",
+      "finding": "The runtime did not directly verify the successor outer-to-inner-to-exact-member seal at every controller, worker, science, and publication boundary; controller and worker source hashes were live self-reports rather than hashes frozen by the inner manifest."
+    },
+    {
+      "severity": "Major",
+      "id": "protocol_exact_schema_cross_binding_incomplete",
+      "finding": "HELLO, envelope, ACK, worker result, and attempt receipt lacked a single exact-keyset validator chain and complete cross-binding of transport identity, source authority, pipe authority, closure authority, source hashes, scientific payload hash, and solver accounting through publication readback."
+    }
+  ],
+  "effect": {
+    "v1_bytes_immutable": true,
+    "focused_versioned_rework_authorized": true,
+    "v1_independent_review_passed": false,
+    "v2_independent_review_passed": false,
+    "execution_authorized": false,
+    "pilot_execution_authorized": false,
+    "formal_execution_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false,
+    "no_execution_authority": true
+  }
+}

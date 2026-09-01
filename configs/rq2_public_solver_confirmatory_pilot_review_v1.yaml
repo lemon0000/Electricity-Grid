@@ -1,0 +1,30 @@
+schema: rq2_public_solver_confirmatory_pilot_review_receipt_v1
+reviewed_on: "2026-08-28"
+review_scope: rq2_public_solver_pilot_semantic_successor_v1_mechanical_fix
+reviewer_role: independent_sol_reviewer
+verdict: PASS
+
+reviewed_artifacts:
+  config:
+    path: configs/rq2_public_solver_pilot_semantic_successor_v1.yaml
+    sha256: cb0209a9a53962be8ebb6ee185d3bfbf3d004d7cd761e164b286a58e0c7887b0
+  validator:
+    path: experiments/validate_rq2_public_solver_pilot_semantic_successor_v1.py
+    sha256: 01b7f60a620c81a7a656ba6576c3b85af9e371b30d42dd5959f430ee220c80dd
+  tests:
+    path: tests/test_rq2_public_solver_pilot_semantic_successor_v1.py
+    sha256: 0137c3dfe6c71b183893dae1007f3e782eceec6030babb5a77dad8cc27c78584
+  manifest:
+    path: configs/rq2_public_solver_pilot_semantic_successor_v1.SHA256SUMS.json
+    sha256: c0b1a6a3074343ab5f281b268cd40898630ad1e2234830a4536189687832f471
+
+effect:
+  semantic_successor_review_passed: true
+  v1_eligibility_changed: false
+  confirmatory_implementation_reviewed: false
+  confirmatory_pilot_executed: false
+  cross_solver_confirmation_completed: false
+  formal_execution_ready: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false

@@ -1,0 +1,53 @@
+schema: rq2_public_solver_confirmatory_implementation_review_receipt_v2
+reviewed_on: "2026-08-28"
+reviewer_role: independent_sol_reviewer
+verdict: REWORK
+reviewed_bundle:
+  config:
+    path: configs/rq2_public_solver_confirmatory_pilot_v1.yaml
+    sha256: c78bd3b901fdf9ff8dc1cc66c9adda6156ed1f889d3cc37a5870021b38ac3975
+  activation:
+    path: configs/rq2_public_solver_confirmatory_pilot_activation_v1.yaml
+    sha256: b28a8254d93e8173e5cd9e62ad0200735ad6d3813b45401e42037266bc8ccc3f
+  runner:
+    path: experiments/run_rq2_public_solver_confirmatory_pilot_v1.py
+    sha256: 9f09327acb31b9ab174918a011a2fa0902e206731e898b8b150a6bbdc7eab007
+  validator:
+    path: experiments/validate_rq2_public_solver_confirmatory_pilot_v1.py
+    sha256: 7a4ab4e2afa9ffeabd3895d0152cb3bb7f438b06005058998257a70196064c7b
+  tests:
+    path: tests/test_rq2_public_solver_confirmatory_pilot_v1.py
+    sha256: 3ef675cbb8163304ad72c3ba6450797e7bd7d524b0b93360d265c6f43b599222
+  bundle:
+    path: configs/rq2_public_solver_confirmatory_pilot_bundle_v1.SHA256SUMS.json
+    sha256: ea3957c0ee3dd01f34efd6112db88fbfdec982e026aaec65e4780599db76dfe2
+  outer:
+    path: configs/rq2_public_solver_confirmatory_pilot_bundle_v1.OUTER.SHA256SUMS.json
+    sha256: 3bea21c2e1905d7a930c80da0dbf138cd130d85c221e436e961eb8965074205f
+findings:
+  - id: reachable_review_gate
+    disposition: remediate_in_versioned_v2_candidate
+  - id: durable_per_run_process_provenance
+    disposition: remediate_in_versioned_v2_candidate
+  - id: freshness_not_proven_by_runs_hash_difference
+    disposition: remediate_in_versioned_v2_candidate
+  - id: exact_semantic_evaluator_contract
+    disposition: remediate_in_versioned_v2_candidate
+  - id: strict_duplicate_key_json_loading
+    disposition: remediate_in_versioned_v2_candidate
+  - id: watchdog_termination_confirmation
+    disposition: remediate_in_versioned_v2_candidate
+  - id: canonical_module_entry_documentation
+    disposition: remediate_in_versioned_v2_candidate
+effect:
+  v1_bytes_remain_frozen: true
+  v2_remediation_candidate_authorized: true
+  v2_remediation_completed: false
+  independent_v2_rereview_required: true
+  independent_confirmatory_implementation_review_passed: false
+  confirmatory_execution_authorized: false
+  cross_solver_confirmation_completed: false
+  formal_execution_ready: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false

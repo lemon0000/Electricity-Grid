@@ -1,0 +1,42 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_vnext_execution_successor_review_evidence_escalate_v5",
+  "version": 1,
+  "recorded_on": "2026-09-01",
+  "authority": false,
+  "verdict_source": "/root/pilot_post_result_review",
+  "bound_authority_receipt_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_escalate_v5.json",
+  "reviewed_outer_sha256": "83ea9528f0f8f87bbc438a453c8365c97920a089161901692f4978591d5d8f20",
+  "same_deadline_persistence_finding_repeated": true,
+  "classification_reproducer": {
+    "deadline_detection_overrun_ns": 1,
+    "exact_owned_termination_duration_ns": 2000000000,
+    "last_sample_to_exit_ns": 8000000001,
+    "v5_status": "termination_indeterminate",
+    "v5_reason": "owned_termination_exit_window_exceeded",
+    "mathematical_infeasibility_inferred": false
+  },
+  "controller_reproducer": {
+    "hello_completed": true,
+    "envelope_completed": true,
+    "exit_notice_sent": false,
+    "controller_waited_for_exit_notice_before_monitor_future": true,
+    "resource_journal_persisted": false,
+    "real_controller_integration_probe_present": false
+  },
+  "review_observations": {
+    "zero_second_termination_classified_deadline_missed": true,
+    "one_second_termination_classified_deadline_missed": true,
+    "exact_two_second_termination_classified_deadline_missed": false,
+    "two_second_plus_one_ns_classified_grace_exceeded": true,
+    "v5_production_lease_seed_read_or_consumed": false
+  },
+  "effect": {
+    "opens_execution_gate": false,
+    "opens_pilot_gate": false,
+    "opens_formal_gate": false,
+    "opens_result_gate": false,
+    "claim": false,
+    "security_certified": false,
+    "v6_versioned_cycle_only": true
+  }
+}

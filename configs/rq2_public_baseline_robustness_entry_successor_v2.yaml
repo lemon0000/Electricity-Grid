@@ -1,0 +1,194 @@
+schema: rq2_public_baseline_robustness_entry_successor_v2
+version: 2
+frozen_on: 2026-08-27
+status: external_preflight_blocked_validate_only_not_executable
+
+scope:
+  purpose: external_preflight_and_computation_entry_implementation_only
+  changes_scientific_protocol: false
+  runs_solver_during_contract_validation: false
+  writes_during_contract_validation: false
+  runs_identification: false
+  writes_report: false
+  formal_result: false
+  claim: false
+
+predecessor_authority:
+  package_contract_config:
+    path: configs/rq2_public_baseline_robustness_successor_v1.yaml
+    sha256: 2d7a801b2cc0b078650a6b9917a45d282a3d9f273a0eb6043361a89a6c5f7d9a
+  package_contract_manifest:
+    path: configs/rq2_public_baseline_robustness_successor_v1.SHA256SUMS.json
+    sha256: 0234ed0eb54b30f15891ff49df7f74fea678e6f05309a8c1e4473a9ea7d34954
+
+implementation_authority:
+  planning_core:
+    path: src/models/rq2_baseline_robustness.py
+    sha256: 14e935043d5bbc8116fef88c592d3c5eb6e949395e318248cbf2d97eae7ec1b5
+  replay_core:
+    path: src/scenarios/rq2_baseline_robustness.py
+    sha256: adc970ecb4f070f0079131988682d87b7f8e42a75b370116158413e099ca2331
+  package_core:
+    path: src/evaluation/rq2_baseline_robustness_package_v1.py
+    sha256: 9075751220797c86270cc5877584d2aeb5ea128afe16a54befeb7831e7033e5f
+  public_replay_api:
+    path: src/scenarios/rq2_public_replay.py
+    sha256: 2d1668b43c21ecdbf851cb750b3a6979d7942e6abe4255ebf0a0f9a1c6297028
+  public_replay_successor_api:
+    path: src/scenarios/rq2_public_replay_successor.py
+    sha256: c239ad337130781f97afd74b562045104a98060f67ac3632d997218c0548b8cd
+  solver_adapter:
+    path: src/solvers/rq2_solver_adapter.py
+    sha256: bec0a6e58ba35d3f262a0df04d7695e91794d02c754ee939b75774c1cd3e6611
+  provenance_api:
+    path: src/evaluation/rq2_provenance_v3.py
+    sha256: c4376be60fda2499266f7593ca92eb1163c7ee156d7970dc1975d0e060f4bcec
+  execution_lease:
+    path: src/solvers/execution_lease.py
+    sha256: cb454d0eea168bbafdf75b89b07b8a5541077b05063c61d414a416c0cd2ab908
+  execution_machine:
+    path: src/evaluation/execution_machine.py
+    sha256: f5a1ee567c6127c4dc85da7c5ca40d1974a2ee4cdad6cceca2b4e67a54102e7f
+  repository_paths:
+    path: src/evaluation/repository_paths.py
+    sha256: e090d639289d93f0fb8cd292f60434d6379f5feaa6ab7396840ac72d8f000959
+  runner:
+    path: experiments/run_rq2_public_baseline_robustness_entry_successor_v2.py
+    sha256: 70e883dfb86fdf68d216a95192785cd7ae6d8ab6f41bc4db2061994d00998726
+
+frozen_scientific_authority:
+  v6_preregistration:
+    path: configs/rq2_public_data_robust_identification_preregistration_v6.yaml
+    sha256: ef25deabfcd51fbd667e48dcddcfbe4b19a2115c6d4bc40b0fc556b5c1f332f2
+  v6_manifest:
+    path: configs/rq2_public_data_robust_identification_preregistration_v6.SHA256SUMS.json
+    sha256: 07bb735df3cc5ad547c7d4741c5f69929b39a37df9b65c3c2ae004e74b08cdcf
+  pairwise_v4:
+    path: configs/rq2_public_pairwise_replay_v4.yaml
+    sha256: 4e4ea40e71742198ff9b70d527d6bae91df486c87b3a540bbbb23f6ba4f72cf3
+  grid_dispatch_v4_config:
+    path: configs/rts_gmlc_public_grid_need_dispatch_v4.yaml
+    sha256: 84db8e7ad47bf51dd1ec94db1ebb7d3edc068b587afb4fba8d596861d58e6beb
+  provenance_contract_v3:
+    path: configs/rq2_public_pipeline_provenance_contract_v3.yaml
+    sha256: 9a890f6cebf6a2b87b6cee97ec9b3a5074bb40892cee917c98fe58644ff178f9
+
+activation_authority:
+  path: null
+  sha256: null
+  activated: false
+
+external_inputs:
+  workload:
+    package: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3
+    manifest_sha256: 62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524
+    exact_members:
+      - holdout_marginal.csv.gz
+      - summary.json
+      - training_marginal.csv.gz
+      - workload_blocks.csv.gz
+    schema: alibaba_dimensionless_workload_blocks_v3
+    config_sha256: 571b10ff6874ae2c787420b3328e4f256e1d284864851d5099b7ecf9b5d43c2c
+    implementation_sha256: 6f2e0c91733cb30846c85b03b3cd89c07f27c042b29ad3b002b76d64f9264d4b
+    source_sha256: a53041f484144ea67c9a1777d85e2dde350c2341c94418da8072c0a94b3821d6
+    training_blocks: 34
+    holdout_blocks: 34
+    block_hours: 24
+  grid:
+    frozen_authority_gate: false
+    package: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_gurobi
+    manifest_sha256: null
+    config_sha256: null
+    provenance_sha256: null
+    exact_members:
+      - block_status.csv.gz
+      - checkpoint_inventory.json
+      - config.yaml
+      - dispatched_power_system_blocks.csv.gz
+      - holdout_marginal.csv.gz
+      - provenance.json
+      - summary.json
+      - training_marginal.csv.gz
+    schema: rts_gmlc_public_grid_need_dispatch_v4
+    training_blocks: 541
+    holdout_blocks: 530
+    block_hours: 24
+    checkpoint_count: 1071
+    allowed_states:
+      - finite_grid_need
+      - exogenous_grid_infeasibility
+    exogenous_grid_infeasibility_has_finite_grid_need: false
+
+runtime_design:
+  training_selection:
+    method: weighted_marginal_stress_quantile_representatives
+    power_system_representatives: 8
+    workload_representatives: 8
+    selection_uses_holdout_outcomes: false
+    full_evaluable_training_support_audit: required
+  fixed_policy:
+    maximum_flexibility_budget: 1.0
+    minimum_event_power: 1.0e-6
+    response_time_hours: 1.0
+    curtailment_ramp_per_hour: 1.0
+    minimum_recovery_hours: 1.0
+    service_shortfall_tolerance: 1.0e-6
+  registered_cells:
+    base:
+      flexible_fraction: 0.20
+      recovery_efficiency: 0.85
+      normalized_recovery_headroom: 0.10
+      maximum_event_duration_hours: 4
+      maximum_event_count: 2
+      normalized_energy_budget: 0.40
+      normalized_debt_limit: 0.20
+    levels:
+      flexible_fraction: [0.05, 0.20, 0.50]
+      recovery_efficiency: [0.60, 0.85, 1.00]
+      normalized_recovery_headroom: [0.00, 0.10, 0.30]
+      maximum_event_duration_hours: [1, 4, 8]
+      maximum_event_count: [1, 2, 4]
+      normalized_energy_budget: [0.10, 0.40, 1.00]
+      normalized_debt_limit: [0.05, 0.20, 0.50]
+  solver:
+    name: gurobi
+    expected_package_version: 13.0.2
+    threads: 4
+    mip_relative_gap: 1.0e-6
+    feasibility_tolerance: 1.0e-6
+    optimality_tolerance: 1.0e-6
+    integer_feasibility_tolerance: 1.0e-6
+    random_seed: 0
+    time_limit_seconds: null
+    tee: false
+
+execution:
+  external_inputs_ready: false
+  independent_review: false
+  user_execution_authorized: false
+  execution_ready: false
+  forbidden_hostnames: [GQPD263XH9]
+  required_environment_value: EXECUTION_MACHINE_CONFIRMED
+  checkpoint_root: results/checkpoints/rq2_public_baseline_robustness_entry_successor_v2
+  lease_root: results/leases/rq2_public_baseline_robustness_entry_successor_v2
+  output_directory: data/processed/model_inputs/rq2_public_baseline_robustness_entry_successor_v2
+
+validation_contract:
+  validator_path: experiments/validate_rq2_public_baseline_robustness_entry_successor_v2.py
+  runner_path: experiments/run_rq2_public_baseline_robustness_entry_successor_v2.py
+  test_path: tests/test_rq2_public_baseline_robustness_entry_successor_v2.py
+  manifest_path: configs/rq2_public_baseline_robustness_entry_successor_v2.SHA256SUMS.json
+  validator_imports_runtime_core: false
+  validator_writes_files: false
+
+gates:
+  external_inputs_ready: false
+  independent_review: false
+  user_execution_authorized: false
+  execution_ready: false
+  formal_result: false
+  claim: false
+
+manifest_contract:
+  self_manifest_in_files_inventory: false
+  exact_inventory_required: true

@@ -1,0 +1,3224 @@
+{
+  "evaluation_id": "rq2_h2_stochastic_holdout_generated_formal_v1",
+  "role": "out_of_sample_fixed_policy_execution_on_generated_scenarios_showing_b6_double_counting_underdelivery_formal",
+  "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence::mw_derived_from_normalized_trace_shape_via_frozen_synthetic_scale_probabilities_are_monte_carlo_sampling_weights_not_empirical_outage_and_not_engineering_or_contract_evidence::synthetic_mechanism_only_not_engineering_or_contract_evidence",
+  "scenario_source": "generated",
+  "generator_provenance": {
+    "seed": 20260822,
+    "window_hours": 24,
+    "split_fraction": 0.5,
+    "split_index": {
+      "grid": 372,
+      "green": 821
+    },
+    "sources": {
+      "grid": "hourly_shape.csv::measured_power_util_unweighted_mean::peak_normalized(train_peak=0.72615,split_fraction=0.5)",
+      "green": "relative_hourly_workload.csv.gz::requested_gpu_equivalents::peak_normalized(train_peak=5112.25,split_fraction=0.5)"
+    },
+    "normalization": {
+      "grid": {
+        "peak": 0.726149691358,
+        "split_fraction": 0.5
+      },
+      "green": {
+        "peak": 5112.25,
+        "split_fraction": 0.5
+      }
+    },
+    "scales_mw": {
+      "grid_stress": 40.0,
+      "green_call": 60.0
+    },
+    "windows": {
+      "train": {
+        "grid": [
+          {
+            "start": 68,
+            "end": 92
+          },
+          {
+            "start": 197,
+            "end": 221
+          },
+          {
+            "start": 268,
+            "end": 292
+          },
+          {
+            "start": 68,
+            "end": 92
+          },
+          {
+            "start": 1,
+            "end": 25
+          },
+          {
+            "start": 263,
+            "end": 287
+          },
+          {
+            "start": 230,
+            "end": 254
+          },
+          {
+            "start": 85,
+            "end": 109
+          },
+          {
+            "start": 58,
+            "end": 82
+          },
+          {
+            "start": 89,
+            "end": 113
+          },
+          {
+            "start": 227,
+            "end": 251
+          },
+          {
+            "start": 36,
+            "end": 60
+          },
+          {
+            "start": 21,
+            "end": 45
+          },
+          {
+            "start": 26,
+            "end": 50
+          },
+          {
+            "start": 322,
+            "end": 346
+          },
+          {
+            "start": 74,
+            "end": 98
+          },
+          {
+            "start": 72,
+            "end": 96
+          },
+          {
+            "start": 301,
+            "end": 325
+          },
+          {
+            "start": 238,
+            "end": 262
+          },
+          {
+            "start": 230,
+            "end": 254
+          },
+          {
+            "start": 70,
+            "end": 94
+          },
+          {
+            "start": 112,
+            "end": 136
+          },
+          {
+            "start": 194,
+            "end": 218
+          },
+          {
+            "start": 215,
+            "end": 239
+          },
+          {
+            "start": 116,
+            "end": 140
+          },
+          {
+            "start": 181,
+            "end": 205
+          },
+          {
+            "start": 233,
+            "end": 257
+          },
+          {
+            "start": 201,
+            "end": 225
+          },
+          {
+            "start": 258,
+            "end": 282
+          },
+          {
+            "start": 237,
+            "end": 261
+          },
+          {
+            "start": 308,
+            "end": 332
+          },
+          {
+            "start": 113,
+            "end": 137
+          },
+          {
+            "start": 194,
+            "end": 218
+          },
+          {
+            "start": 321,
+            "end": 345
+          },
+          {
+            "start": 321,
+            "end": 345
+          },
+          {
+            "start": 272,
+            "end": 296
+          },
+          {
+            "start": 190,
+            "end": 214
+          },
+          {
+            "start": 150,
+            "end": 174
+          },
+          {
+            "start": 172,
+            "end": 196
+          },
+          {
+            "start": 165,
+            "end": 189
+          },
+          {
+            "start": 330,
+            "end": 354
+          },
+          {
+            "start": 279,
+            "end": 303
+          },
+          {
+            "start": 266,
+            "end": 290
+          },
+          {
+            "start": 294,
+            "end": 318
+          },
+          {
+            "start": 230,
+            "end": 254
+          },
+          {
+            "start": 346,
+            "end": 370
+          },
+          {
+            "start": 169,
+            "end": 193
+          },
+          {
+            "start": 211,
+            "end": 235
+          },
+          {
+            "start": 295,
+            "end": 319
+          },
+          {
+            "start": 224,
+            "end": 248
+          },
+          {
+            "start": 59,
+            "end": 83
+          },
+          {
+            "start": 299,
+            "end": 323
+          },
+          {
+            "start": 302,
+            "end": 326
+          },
+          {
+            "start": 209,
+            "end": 233
+          },
+          {
+            "start": 179,
+            "end": 203
+          },
+          {
+            "start": 304,
+            "end": 328
+          },
+          {
+            "start": 156,
+            "end": 180
+          },
+          {
+            "start": 160,
+            "end": 184
+          },
+          {
+            "start": 45,
+            "end": 69
+          },
+          {
+            "start": 161,
+            "end": 185
+          },
+          {
+            "start": 167,
+            "end": 191
+          },
+          {
+            "start": 139,
+            "end": 163
+          },
+          {
+            "start": 208,
+            "end": 232
+          },
+          {
+            "start": 175,
+            "end": 199
+          },
+          {
+            "start": 162,
+            "end": 186
+          },
+          {
+            "start": 34,
+            "end": 58
+          },
+          {
+            "start": 88,
+            "end": 112
+          },
+          {
+            "start": 311,
+            "end": 335
+          },
+          {
+            "start": 276,
+            "end": 300
+          },
+          {
+            "start": 179,
+            "end": 203
+          },
+          {
+            "start": 198,
+            "end": 222
+          },
+          {
+            "start": 347,
+            "end": 371
+          },
+          {
+            "start": 50,
+            "end": 74
+          },
+          {
+            "start": 324,
+            "end": 348
+          },
+          {
+            "start": 263,
+            "end": 287
+          },
+          {
+            "start": 223,
+            "end": 247
+          },
+          {
+            "start": 168,
+            "end": 192
+          },
+          {
+            "start": 277,
+            "end": 301
+          },
+          {
+            "start": 281,
+            "end": 305
+          },
+          {
+            "start": 321,
+            "end": 345
+          },
+          {
+            "start": 156,
+            "end": 180
+          },
+          {
+            "start": 214,
+            "end": 238
+          },
+          {
+            "start": 32,
+            "end": 56
+          },
+          {
+            "start": 313,
+            "end": 337
+          },
+          {
+            "start": 130,
+            "end": 154
+          },
+          {
+            "start": 317,
+            "end": 341
+          },
+          {
+            "start": 328,
+            "end": 352
+          },
+          {
+            "start": 107,
+            "end": 131
+          },
+          {
+            "start": 245,
+            "end": 269
+          },
+          {
+            "start": 328,
+            "end": 352
+          },
+          {
+            "start": 169,
+            "end": 193
+          },
+          {
+            "start": 87,
+            "end": 111
+          },
+          {
+            "start": 136,
+            "end": 160
+          },
+          {
+            "start": 256,
+            "end": 280
+          },
+          {
+            "start": 243,
+            "end": 267
+          },
+          {
+            "start": 258,
+            "end": 282
+          },
+          {
+            "start": 279,
+            "end": 303
+          },
+          {
+            "start": 215,
+            "end": 239
+          },
+          {
+            "start": 246,
+            "end": 270
+          },
+          {
+            "start": 109,
+            "end": 133
+          },
+          {
+            "start": 101,
+            "end": 125
+          },
+          {
+            "start": 323,
+            "end": 347
+          },
+          {
+            "start": 203,
+            "end": 227
+          },
+          {
+            "start": 6,
+            "end": 30
+          },
+          {
+            "start": 330,
+            "end": 354
+          },
+          {
+            "start": 152,
+            "end": 176
+          },
+          {
+            "start": 97,
+            "end": 121
+          },
+          {
+            "start": 273,
+            "end": 297
+          },
+          {
+            "start": 13,
+            "end": 37
+          },
+          {
+            "start": 183,
+            "end": 207
+          },
+          {
+            "start": 318,
+            "end": 342
+          },
+          {
+            "start": 96,
+            "end": 120
+          },
+          {
+            "start": 69,
+            "end": 93
+          },
+          {
+            "start": 88,
+            "end": 112
+          },
+          {
+            "start": 18,
+            "end": 42
+          },
+          {
+            "start": 156,
+            "end": 180
+          },
+          {
+            "start": 255,
+            "end": 279
+          },
+          {
+            "start": 142,
+            "end": 166
+          },
+          {
+            "start": 175,
+            "end": 199
+          },
+          {
+            "start": 168,
+            "end": 192
+          },
+          {
+            "start": 238,
+            "end": 262
+          },
+          {
+            "start": 113,
+            "end": 137
+          },
+          {
+            "start": 313,
+            "end": 337
+          },
+          {
+            "start": 6,
+            "end": 30
+          },
+          {
+            "start": 78,
+            "end": 102
+          },
+          {
+            "start": 277,
+            "end": 301
+          },
+          {
+            "start": 313,
+            "end": 337
+          },
+          {
+            "start": 264,
+            "end": 288
+          },
+          {
+            "start": 148,
+            "end": 172
+          },
+          {
+            "start": 262,
+            "end": 286
+          },
+          {
+            "start": 269,
+            "end": 293
+          },
+          {
+            "start": 151,
+            "end": 175
+          },
+          {
+            "start": 91,
+            "end": 115
+          },
+          {
+            "start": 62,
+            "end": 86
+          },
+          {
+            "start": 324,
+            "end": 348
+          },
+          {
+            "start": 337,
+            "end": 361
+          },
+          {
+            "start": 36,
+            "end": 60
+          },
+          {
+            "start": 284,
+            "end": 308
+          },
+          {
+            "start": 327,
+            "end": 351
+          },
+          {
+            "start": 207,
+            "end": 231
+          },
+          {
+            "start": 75,
+            "end": 99
+          },
+          {
+            "start": 158,
+            "end": 182
+          },
+          {
+            "start": 258,
+            "end": 282
+          },
+          {
+            "start": 22,
+            "end": 46
+          },
+          {
+            "start": 130,
+            "end": 154
+          },
+          {
+            "start": 137,
+            "end": 161
+          },
+          {
+            "start": 157,
+            "end": 181
+          },
+          {
+            "start": 93,
+            "end": 117
+          },
+          {
+            "start": 215,
+            "end": 239
+          },
+          {
+            "start": 116,
+            "end": 140
+          },
+          {
+            "start": 192,
+            "end": 216
+          },
+          {
+            "start": 328,
+            "end": 352
+          },
+          {
+            "start": 70,
+            "end": 94
+          },
+          {
+            "start": 334,
+            "end": 358
+          },
+          {
+            "start": 231,
+            "end": 255
+          },
+          {
+            "start": 6,
+            "end": 30
+          },
+          {
+            "start": 197,
+            "end": 221
+          },
+          {
+            "start": 337,
+            "end": 361
+          },
+          {
+            "start": 291,
+            "end": 315
+          },
+          {
+            "start": 31,
+            "end": 55
+          },
+          {
+            "start": 201,
+            "end": 225
+          },
+          {
+            "start": 258,
+            "end": 282
+          },
+          {
+            "start": 306,
+            "end": 330
+          },
+          {
+            "start": 50,
+            "end": 74
+          },
+          {
+            "start": 1,
+            "end": 25
+          },
+          {
+            "start": 338,
+            "end": 362
+          },
+          {
+            "start": 92,
+            "end": 116
+          },
+          {
+            "start": 283,
+            "end": 307
+          },
+          {
+            "start": 18,
+            "end": 42
+          },
+          {
+            "start": 257,
+            "end": 281
+          },
+          {
+            "start": 34,
+            "end": 58
+          },
+          {
+            "start": 296,
+            "end": 320
+          },
+          {
+            "start": 131,
+            "end": 155
+          },
+          {
+            "start": 62,
+            "end": 86
+          },
+          {
+            "start": 264,
+            "end": 288
+          },
+          {
+            "start": 131,
+            "end": 155
+          },
+          {
+            "start": 333,
+            "end": 357
+          },
+          {
+            "start": 231,
+            "end": 255
+          },
+          {
+            "start": 71,
+            "end": 95
+          },
+          {
+            "start": 262,
+            "end": 286
+          },
+          {
+            "start": 94,
+            "end": 118
+          },
+          {
+            "start": 336,
+            "end": 360
+          },
+          {
+            "start": 316,
+            "end": 340
+          },
+          {
+            "start": 115,
+            "end": 139
+          },
+          {
+            "start": 119,
+            "end": 143
+          },
+          {
+            "start": 132,
+            "end": 156
+          },
+          {
+            "start": 257,
+            "end": 281
+          },
+          {
+            "start": 1,
+            "end": 25
+          },
+          {
+            "start": 347,
+            "end": 371
+          },
+          {
+            "start": 176,
+            "end": 200
+          },
+          {
+            "start": 158,
+            "end": 182
+          },
+          {
+            "start": 53,
+            "end": 77
+          },
+          {
+            "start": 327,
+            "end": 351
+          },
+          {
+            "start": 293,
+            "end": 317
+          },
+          {
+            "start": 200,
+            "end": 224
+          },
+          {
+            "start": 145,
+            "end": 169
+          },
+          {
+            "start": 217,
+            "end": 241
+          },
+          {
+            "start": 59,
+            "end": 83
+          },
+          {
+            "start": 175,
+            "end": 199
+          },
+          {
+            "start": 155,
+            "end": 179
+          }
+        ],
+        "green": [
+          {
+            "start": 94,
+            "end": 118
+          },
+          {
+            "start": 392,
+            "end": 416
+          },
+          {
+            "start": 400,
+            "end": 424
+          },
+          {
+            "start": 203,
+            "end": 227
+          },
+          {
+            "start": 87,
+            "end": 111
+          },
+          {
+            "start": 190,
+            "end": 214
+          },
+          {
+            "start": 321,
+            "end": 345
+          },
+          {
+            "start": 422,
+            "end": 446
+          },
+          {
+            "start": 749,
+            "end": 773
+          },
+          {
+            "start": 485,
+            "end": 509
+          },
+          {
+            "start": 559,
+            "end": 583
+          },
+          {
+            "start": 180,
+            "end": 204
+          },
+          {
+            "start": 624,
+            "end": 648
+          },
+          {
+            "start": 185,
+            "end": 209
+          },
+          {
+            "start": 399,
+            "end": 423
+          },
+          {
+            "start": 107,
+            "end": 131
+          },
+          {
+            "start": 606,
+            "end": 630
+          },
+          {
+            "start": 741,
+            "end": 765
+          },
+          {
+            "start": 713,
+            "end": 737
+          },
+          {
+            "start": 111,
+            "end": 135
+          },
+          {
+            "start": 109,
+            "end": 133
+          },
+          {
+            "start": 507,
+            "end": 531
+          },
+          {
+            "start": 786,
+            "end": 810
+          },
+          {
+            "start": 785,
+            "end": 809
+          },
+          {
+            "start": 398,
+            "end": 422
+          },
+          {
+            "start": 150,
+            "end": 174
+          },
+          {
+            "start": 531,
+            "end": 555
+          },
+          {
+            "start": 246,
+            "end": 270
+          },
+          {
+            "start": 167,
+            "end": 191
+          },
+          {
+            "start": 713,
+            "end": 737
+          },
+          {
+            "start": 461,
+            "end": 485
+          },
+          {
+            "start": 254,
+            "end": 278
+          },
+          {
+            "start": 467,
+            "end": 491
+          },
+          {
+            "start": 766,
+            "end": 790
+          },
+          {
+            "start": 705,
+            "end": 729
+          },
+          {
+            "start": 662,
+            "end": 686
+          },
+          {
+            "start": 79,
+            "end": 103
+          },
+          {
+            "start": 667,
+            "end": 691
+          },
+          {
+            "start": 387,
+            "end": 411
+          },
+          {
+            "start": 390,
+            "end": 414
+          },
+          {
+            "start": 659,
+            "end": 683
+          },
+          {
+            "start": 182,
+            "end": 206
+          },
+          {
+            "start": 283,
+            "end": 307
+          },
+          {
+            "start": 203,
+            "end": 227
+          },
+          {
+            "start": 455,
+            "end": 479
+          },
+          {
+            "start": 133,
+            "end": 157
+          },
+          {
+            "start": 457,
+            "end": 481
+          },
+          {
+            "start": 58,
+            "end": 82
+          },
+          {
+            "start": 66,
+            "end": 90
+          },
+          {
+            "start": 212,
+            "end": 236
+          },
+          {
+            "start": 660,
+            "end": 684
+          },
+          {
+            "start": 193,
+            "end": 217
+          },
+          {
+            "start": 635,
+            "end": 659
+          },
+          {
+            "start": 408,
+            "end": 432
+          },
+          {
+            "start": 651,
+            "end": 675
+          },
+          {
+            "start": 604,
+            "end": 628
+          },
+          {
+            "start": 529,
+            "end": 553
+          },
+          {
+            "start": 189,
+            "end": 213
+          },
+          {
+            "start": 200,
+            "end": 224
+          },
+          {
+            "start": 110,
+            "end": 134
+          },
+          {
+            "start": 48,
+            "end": 72
+          },
+          {
+            "start": 111,
+            "end": 135
+          },
+          {
+            "start": 253,
+            "end": 277
+          },
+          {
+            "start": 162,
+            "end": 186
+          },
+          {
+            "start": 437,
+            "end": 461
+          },
+          {
+            "start": 407,
+            "end": 431
+          },
+          {
+            "start": 405,
+            "end": 429
+          },
+          {
+            "start": 366,
+            "end": 390
+          },
+          {
+            "start": 271,
+            "end": 295
+          },
+          {
+            "start": 653,
+            "end": 677
+          },
+          {
+            "start": 238,
+            "end": 262
+          },
+          {
+            "start": 342,
+            "end": 366
+          },
+          {
+            "start": 360,
+            "end": 384
+          },
+          {
+            "start": 138,
+            "end": 162
+          },
+          {
+            "start": 525,
+            "end": 549
+          },
+          {
+            "start": 771,
+            "end": 795
+          },
+          {
+            "start": 561,
+            "end": 585
+          },
+          {
+            "start": 661,
+            "end": 685
+          },
+          {
+            "start": 183,
+            "end": 207
+          },
+          {
+            "start": 432,
+            "end": 456
+          },
+          {
+            "start": 554,
+            "end": 578
+          },
+          {
+            "start": 27,
+            "end": 51
+          },
+          {
+            "start": 520,
+            "end": 544
+          },
+          {
+            "start": 725,
+            "end": 749
+          },
+          {
+            "start": 636,
+            "end": 660
+          },
+          {
+            "start": 331,
+            "end": 355
+          },
+          {
+            "start": 18,
+            "end": 42
+          },
+          {
+            "start": 596,
+            "end": 620
+          },
+          {
+            "start": 392,
+            "end": 416
+          },
+          {
+            "start": 491,
+            "end": 515
+          },
+          {
+            "start": 407,
+            "end": 431
+          },
+          {
+            "start": 755,
+            "end": 779
+          },
+          {
+            "start": 136,
+            "end": 160
+          },
+          {
+            "start": 752,
+            "end": 776
+          },
+          {
+            "start": 426,
+            "end": 450
+          },
+          {
+            "start": 71,
+            "end": 95
+          },
+          {
+            "start": 221,
+            "end": 245
+          },
+          {
+            "start": 785,
+            "end": 809
+          },
+          {
+            "start": 98,
+            "end": 122
+          },
+          {
+            "start": 188,
+            "end": 212
+          },
+          {
+            "start": 234,
+            "end": 258
+          },
+          {
+            "start": 668,
+            "end": 692
+          },
+          {
+            "start": 73,
+            "end": 97
+          },
+          {
+            "start": 700,
+            "end": 724
+          },
+          {
+            "start": 203,
+            "end": 227
+          },
+          {
+            "start": 395,
+            "end": 419
+          },
+          {
+            "start": 730,
+            "end": 754
+          },
+          {
+            "start": 87,
+            "end": 111
+          },
+          {
+            "start": 629,
+            "end": 653
+          },
+          {
+            "start": 317,
+            "end": 341
+          },
+          {
+            "start": 234,
+            "end": 258
+          },
+          {
+            "start": 628,
+            "end": 652
+          },
+          {
+            "start": 409,
+            "end": 433
+          },
+          {
+            "start": 616,
+            "end": 640
+          },
+          {
+            "start": 369,
+            "end": 393
+          },
+          {
+            "start": 122,
+            "end": 146
+          },
+          {
+            "start": 476,
+            "end": 500
+          },
+          {
+            "start": 745,
+            "end": 769
+          },
+          {
+            "start": 186,
+            "end": 210
+          },
+          {
+            "start": 428,
+            "end": 452
+          },
+          {
+            "start": 160,
+            "end": 184
+          },
+          {
+            "start": 447,
+            "end": 471
+          },
+          {
+            "start": 795,
+            "end": 819
+          },
+          {
+            "start": 736,
+            "end": 760
+          },
+          {
+            "start": 289,
+            "end": 313
+          },
+          {
+            "start": 310,
+            "end": 334
+          },
+          {
+            "start": 521,
+            "end": 545
+          },
+          {
+            "start": 460,
+            "end": 484
+          },
+          {
+            "start": 236,
+            "end": 260
+          },
+          {
+            "start": 747,
+            "end": 771
+          },
+          {
+            "start": 366,
+            "end": 390
+          },
+          {
+            "start": 766,
+            "end": 790
+          },
+          {
+            "start": 65,
+            "end": 89
+          },
+          {
+            "start": 230,
+            "end": 254
+          },
+          {
+            "start": 605,
+            "end": 629
+          },
+          {
+            "start": 644,
+            "end": 668
+          },
+          {
+            "start": 268,
+            "end": 292
+          },
+          {
+            "start": 726,
+            "end": 750
+          },
+          {
+            "start": 194,
+            "end": 218
+          },
+          {
+            "start": 496,
+            "end": 520
+          },
+          {
+            "start": 416,
+            "end": 440
+          },
+          {
+            "start": 41,
+            "end": 65
+          },
+          {
+            "start": 614,
+            "end": 638
+          },
+          {
+            "start": 673,
+            "end": 697
+          },
+          {
+            "start": 785,
+            "end": 809
+          },
+          {
+            "start": 53,
+            "end": 77
+          },
+          {
+            "start": 366,
+            "end": 390
+          },
+          {
+            "start": 26,
+            "end": 50
+          },
+          {
+            "start": 586,
+            "end": 610
+          },
+          {
+            "start": 77,
+            "end": 101
+          },
+          {
+            "start": 769,
+            "end": 793
+          },
+          {
+            "start": 190,
+            "end": 214
+          },
+          {
+            "start": 353,
+            "end": 377
+          },
+          {
+            "start": 227,
+            "end": 251
+          },
+          {
+            "start": 697,
+            "end": 721
+          },
+          {
+            "start": 198,
+            "end": 222
+          },
+          {
+            "start": 412,
+            "end": 436
+          },
+          {
+            "start": 616,
+            "end": 640
+          },
+          {
+            "start": 25,
+            "end": 49
+          },
+          {
+            "start": 556,
+            "end": 580
+          },
+          {
+            "start": 470,
+            "end": 494
+          },
+          {
+            "start": 91,
+            "end": 115
+          },
+          {
+            "start": 411,
+            "end": 435
+          },
+          {
+            "start": 555,
+            "end": 579
+          },
+          {
+            "start": 274,
+            "end": 298
+          },
+          {
+            "start": 650,
+            "end": 674
+          },
+          {
+            "start": 382,
+            "end": 406
+          },
+          {
+            "start": 797,
+            "end": 821
+          },
+          {
+            "start": 758,
+            "end": 782
+          },
+          {
+            "start": 684,
+            "end": 708
+          },
+          {
+            "start": 220,
+            "end": 244
+          },
+          {
+            "start": 704,
+            "end": 728
+          },
+          {
+            "start": 316,
+            "end": 340
+          },
+          {
+            "start": 20,
+            "end": 44
+          },
+          {
+            "start": 608,
+            "end": 632
+          },
+          {
+            "start": 762,
+            "end": 786
+          },
+          {
+            "start": 427,
+            "end": 451
+          },
+          {
+            "start": 606,
+            "end": 630
+          },
+          {
+            "start": 362,
+            "end": 386
+          },
+          {
+            "start": 240,
+            "end": 264
+          },
+          {
+            "start": 144,
+            "end": 168
+          },
+          {
+            "start": 374,
+            "end": 398
+          },
+          {
+            "start": 446,
+            "end": 470
+          },
+          {
+            "start": 105,
+            "end": 129
+          },
+          {
+            "start": 748,
+            "end": 772
+          },
+          {
+            "start": 784,
+            "end": 808
+          },
+          {
+            "start": 166,
+            "end": 190
+          },
+          {
+            "start": 109,
+            "end": 133
+          },
+          {
+            "start": 319,
+            "end": 343
+          },
+          {
+            "start": 41,
+            "end": 65
+          },
+          {
+            "start": 735,
+            "end": 759
+          },
+          {
+            "start": 548,
+            "end": 572
+          },
+          {
+            "start": 350,
+            "end": 374
+          },
+          {
+            "start": 715,
+            "end": 739
+          },
+          {
+            "start": 203,
+            "end": 227
+          },
+          {
+            "start": 456,
+            "end": 480
+          },
+          {
+            "start": 50,
+            "end": 74
+          },
+          {
+            "start": 240,
+            "end": 264
+          },
+          {
+            "start": 522,
+            "end": 546
+          },
+          {
+            "start": 455,
+            "end": 479
+          }
+        ]
+      },
+      "holdout": {
+        "grid": [
+          {
+            "start": 514,
+            "end": 538
+          },
+          {
+            "start": 510,
+            "end": 534
+          },
+          {
+            "start": 383,
+            "end": 407
+          },
+          {
+            "start": 526,
+            "end": 550
+          },
+          {
+            "start": 549,
+            "end": 573
+          },
+          {
+            "start": 666,
+            "end": 690
+          },
+          {
+            "start": 449,
+            "end": 473
+          },
+          {
+            "start": 469,
+            "end": 493
+          },
+          {
+            "start": 508,
+            "end": 532
+          },
+          {
+            "start": 522,
+            "end": 546
+          },
+          {
+            "start": 696,
+            "end": 720
+          },
+          {
+            "start": 510,
+            "end": 534
+          },
+          {
+            "start": 555,
+            "end": 579
+          },
+          {
+            "start": 514,
+            "end": 538
+          },
+          {
+            "start": 652,
+            "end": 676
+          },
+          {
+            "start": 609,
+            "end": 633
+          },
+          {
+            "start": 454,
+            "end": 478
+          },
+          {
+            "start": 562,
+            "end": 586
+          },
+          {
+            "start": 720,
+            "end": 744
+          },
+          {
+            "start": 482,
+            "end": 506
+          },
+          {
+            "start": 554,
+            "end": 578
+          },
+          {
+            "start": 579,
+            "end": 603
+          },
+          {
+            "start": 596,
+            "end": 620
+          },
+          {
+            "start": 382,
+            "end": 406
+          },
+          {
+            "start": 579,
+            "end": 603
+          },
+          {
+            "start": 648,
+            "end": 672
+          },
+          {
+            "start": 482,
+            "end": 506
+          },
+          {
+            "start": 526,
+            "end": 550
+          },
+          {
+            "start": 610,
+            "end": 634
+          },
+          {
+            "start": 549,
+            "end": 573
+          },
+          {
+            "start": 490,
+            "end": 514
+          },
+          {
+            "start": 390,
+            "end": 414
+          },
+          {
+            "start": 661,
+            "end": 685
+          },
+          {
+            "start": 419,
+            "end": 443
+          },
+          {
+            "start": 553,
+            "end": 577
+          },
+          {
+            "start": 539,
+            "end": 563
+          },
+          {
+            "start": 510,
+            "end": 534
+          },
+          {
+            "start": 377,
+            "end": 401
+          },
+          {
+            "start": 425,
+            "end": 449
+          },
+          {
+            "start": 433,
+            "end": 457
+          },
+          {
+            "start": 603,
+            "end": 627
+          },
+          {
+            "start": 375,
+            "end": 399
+          },
+          {
+            "start": 456,
+            "end": 480
+          },
+          {
+            "start": 421,
+            "end": 445
+          },
+          {
+            "start": 411,
+            "end": 435
+          },
+          {
+            "start": 624,
+            "end": 648
+          },
+          {
+            "start": 502,
+            "end": 526
+          },
+          {
+            "start": 676,
+            "end": 700
+          },
+          {
+            "start": 507,
+            "end": 531
+          },
+          {
+            "start": 680,
+            "end": 704
+          },
+          {
+            "start": 395,
+            "end": 419
+          },
+          {
+            "start": 474,
+            "end": 498
+          },
+          {
+            "start": 694,
+            "end": 718
+          },
+          {
+            "start": 691,
+            "end": 715
+          },
+          {
+            "start": 459,
+            "end": 483
+          },
+          {
+            "start": 561,
+            "end": 585
+          },
+          {
+            "start": 631,
+            "end": 655
+          },
+          {
+            "start": 398,
+            "end": 422
+          },
+          {
+            "start": 653,
+            "end": 677
+          },
+          {
+            "start": 396,
+            "end": 420
+          }
+        ],
+        "green": [
+          {
+            "start": 1076,
+            "end": 1100
+          },
+          {
+            "start": 1453,
+            "end": 1477
+          },
+          {
+            "start": 1065,
+            "end": 1089
+          },
+          {
+            "start": 1063,
+            "end": 1087
+          },
+          {
+            "start": 1031,
+            "end": 1055
+          },
+          {
+            "start": 1497,
+            "end": 1521
+          },
+          {
+            "start": 1413,
+            "end": 1437
+          },
+          {
+            "start": 1046,
+            "end": 1070
+          },
+          {
+            "start": 850,
+            "end": 874
+          },
+          {
+            "start": 1056,
+            "end": 1080
+          },
+          {
+            "start": 1111,
+            "end": 1135
+          },
+          {
+            "start": 1608,
+            "end": 1632
+          },
+          {
+            "start": 851,
+            "end": 875
+          },
+          {
+            "start": 1537,
+            "end": 1561
+          },
+          {
+            "start": 1096,
+            "end": 1120
+          },
+          {
+            "start": 1065,
+            "end": 1089
+          },
+          {
+            "start": 1207,
+            "end": 1231
+          },
+          {
+            "start": 1141,
+            "end": 1165
+          },
+          {
+            "start": 1271,
+            "end": 1295
+          },
+          {
+            "start": 1558,
+            "end": 1582
+          },
+          {
+            "start": 1339,
+            "end": 1363
+          },
+          {
+            "start": 970,
+            "end": 994
+          },
+          {
+            "start": 1430,
+            "end": 1454
+          },
+          {
+            "start": 1253,
+            "end": 1277
+          },
+          {
+            "start": 891,
+            "end": 915
+          },
+          {
+            "start": 1105,
+            "end": 1129
+          },
+          {
+            "start": 1261,
+            "end": 1285
+          },
+          {
+            "start": 1614,
+            "end": 1638
+          },
+          {
+            "start": 1551,
+            "end": 1575
+          },
+          {
+            "start": 1598,
+            "end": 1622
+          },
+          {
+            "start": 1165,
+            "end": 1189
+          },
+          {
+            "start": 893,
+            "end": 917
+          },
+          {
+            "start": 1560,
+            "end": 1584
+          },
+          {
+            "start": 1576,
+            "end": 1600
+          },
+          {
+            "start": 846,
+            "end": 870
+          },
+          {
+            "start": 1404,
+            "end": 1428
+          },
+          {
+            "start": 1403,
+            "end": 1427
+          },
+          {
+            "start": 1307,
+            "end": 1331
+          },
+          {
+            "start": 1093,
+            "end": 1117
+          },
+          {
+            "start": 1586,
+            "end": 1610
+          },
+          {
+            "start": 1350,
+            "end": 1374
+          },
+          {
+            "start": 934,
+            "end": 958
+          },
+          {
+            "start": 1055,
+            "end": 1079
+          },
+          {
+            "start": 1472,
+            "end": 1496
+          },
+          {
+            "start": 1050,
+            "end": 1074
+          },
+          {
+            "start": 1106,
+            "end": 1130
+          },
+          {
+            "start": 1061,
+            "end": 1085
+          },
+          {
+            "start": 1411,
+            "end": 1435
+          },
+          {
+            "start": 1498,
+            "end": 1522
+          },
+          {
+            "start": 1116,
+            "end": 1140
+          },
+          {
+            "start": 1374,
+            "end": 1398
+          },
+          {
+            "start": 935,
+            "end": 959
+          },
+          {
+            "start": 1190,
+            "end": 1214
+          },
+          {
+            "start": 1191,
+            "end": 1215
+          },
+          {
+            "start": 964,
+            "end": 988
+          },
+          {
+            "start": 865,
+            "end": 889
+          },
+          {
+            "start": 1010,
+            "end": 1034
+          },
+          {
+            "start": 1165,
+            "end": 1189
+          },
+          {
+            "start": 1558,
+            "end": 1582
+          },
+          {
+            "start": 1279,
+            "end": 1303
+          }
+        ]
+      }
+    }
+  },
+  "risk_measure_scope": "synthetic_mechanism_only_out_of_sample_fixed_policy_execution_of_shared_budget_against_true_shared_physics_not_a_certification",
+  "solver_name": "highs",
+  "beta": 0.5,
+  "lambda_risk": 0.1,
+  "max_flexibility_budget_mw": 200.0,
+  "provisioning_cost_per_mw": 500.0,
+  "service_shortfall_tolerance_mw": 1e-06,
+  "training_scenario_count": 200,
+  "holdout_scenario_count": 60,
+  "training_scenarios": [
+    {
+      "name": "train_000",
+      "probability": 0.005
+    },
+    {
+      "name": "train_001",
+      "probability": 0.005
+    },
+    {
+      "name": "train_002",
+      "probability": 0.005
+    },
+    {
+      "name": "train_003",
+      "probability": 0.005
+    },
+    {
+      "name": "train_004",
+      "probability": 0.005
+    },
+    {
+      "name": "train_005",
+      "probability": 0.005
+    },
+    {
+      "name": "train_006",
+      "probability": 0.005
+    },
+    {
+      "name": "train_007",
+      "probability": 0.005
+    },
+    {
+      "name": "train_008",
+      "probability": 0.005
+    },
+    {
+      "name": "train_009",
+      "probability": 0.005
+    },
+    {
+      "name": "train_010",
+      "probability": 0.005
+    },
+    {
+      "name": "train_011",
+      "probability": 0.005
+    },
+    {
+      "name": "train_012",
+      "probability": 0.005
+    },
+    {
+      "name": "train_013",
+      "probability": 0.005
+    },
+    {
+      "name": "train_014",
+      "probability": 0.005
+    },
+    {
+      "name": "train_015",
+      "probability": 0.005
+    },
+    {
+      "name": "train_016",
+      "probability": 0.005
+    },
+    {
+      "name": "train_017",
+      "probability": 0.005
+    },
+    {
+      "name": "train_018",
+      "probability": 0.005
+    },
+    {
+      "name": "train_019",
+      "probability": 0.005
+    },
+    {
+      "name": "train_020",
+      "probability": 0.005
+    },
+    {
+      "name": "train_021",
+      "probability": 0.005
+    },
+    {
+      "name": "train_022",
+      "probability": 0.005
+    },
+    {
+      "name": "train_023",
+      "probability": 0.005
+    },
+    {
+      "name": "train_024",
+      "probability": 0.005
+    },
+    {
+      "name": "train_025",
+      "probability": 0.005
+    },
+    {
+      "name": "train_026",
+      "probability": 0.005
+    },
+    {
+      "name": "train_027",
+      "probability": 0.005
+    },
+    {
+      "name": "train_028",
+      "probability": 0.005
+    },
+    {
+      "name": "train_029",
+      "probability": 0.005
+    },
+    {
+      "name": "train_030",
+      "probability": 0.005
+    },
+    {
+      "name": "train_031",
+      "probability": 0.005
+    },
+    {
+      "name": "train_032",
+      "probability": 0.005
+    },
+    {
+      "name": "train_033",
+      "probability": 0.005
+    },
+    {
+      "name": "train_034",
+      "probability": 0.005
+    },
+    {
+      "name": "train_035",
+      "probability": 0.005
+    },
+    {
+      "name": "train_036",
+      "probability": 0.005
+    },
+    {
+      "name": "train_037",
+      "probability": 0.005
+    },
+    {
+      "name": "train_038",
+      "probability": 0.005
+    },
+    {
+      "name": "train_039",
+      "probability": 0.005
+    },
+    {
+      "name": "train_040",
+      "probability": 0.005
+    },
+    {
+      "name": "train_041",
+      "probability": 0.005
+    },
+    {
+      "name": "train_042",
+      "probability": 0.005
+    },
+    {
+      "name": "train_043",
+      "probability": 0.005
+    },
+    {
+      "name": "train_044",
+      "probability": 0.005
+    },
+    {
+      "name": "train_045",
+      "probability": 0.005
+    },
+    {
+      "name": "train_046",
+      "probability": 0.005
+    },
+    {
+      "name": "train_047",
+      "probability": 0.005
+    },
+    {
+      "name": "train_048",
+      "probability": 0.005
+    },
+    {
+      "name": "train_049",
+      "probability": 0.005
+    },
+    {
+      "name": "train_050",
+      "probability": 0.005
+    },
+    {
+      "name": "train_051",
+      "probability": 0.005
+    },
+    {
+      "name": "train_052",
+      "probability": 0.005
+    },
+    {
+      "name": "train_053",
+      "probability": 0.005
+    },
+    {
+      "name": "train_054",
+      "probability": 0.005
+    },
+    {
+      "name": "train_055",
+      "probability": 0.005
+    },
+    {
+      "name": "train_056",
+      "probability": 0.005
+    },
+    {
+      "name": "train_057",
+      "probability": 0.005
+    },
+    {
+      "name": "train_058",
+      "probability": 0.005
+    },
+    {
+      "name": "train_059",
+      "probability": 0.005
+    },
+    {
+      "name": "train_060",
+      "probability": 0.005
+    },
+    {
+      "name": "train_061",
+      "probability": 0.005
+    },
+    {
+      "name": "train_062",
+      "probability": 0.005
+    },
+    {
+      "name": "train_063",
+      "probability": 0.005
+    },
+    {
+      "name": "train_064",
+      "probability": 0.005
+    },
+    {
+      "name": "train_065",
+      "probability": 0.005
+    },
+    {
+      "name": "train_066",
+      "probability": 0.005
+    },
+    {
+      "name": "train_067",
+      "probability": 0.005
+    },
+    {
+      "name": "train_068",
+      "probability": 0.005
+    },
+    {
+      "name": "train_069",
+      "probability": 0.005
+    },
+    {
+      "name": "train_070",
+      "probability": 0.005
+    },
+    {
+      "name": "train_071",
+      "probability": 0.005
+    },
+    {
+      "name": "train_072",
+      "probability": 0.005
+    },
+    {
+      "name": "train_073",
+      "probability": 0.005
+    },
+    {
+      "name": "train_074",
+      "probability": 0.005
+    },
+    {
+      "name": "train_075",
+      "probability": 0.005
+    },
+    {
+      "name": "train_076",
+      "probability": 0.005
+    },
+    {
+      "name": "train_077",
+      "probability": 0.005
+    },
+    {
+      "name": "train_078",
+      "probability": 0.005
+    },
+    {
+      "name": "train_079",
+      "probability": 0.005
+    },
+    {
+      "name": "train_080",
+      "probability": 0.005
+    },
+    {
+      "name": "train_081",
+      "probability": 0.005
+    },
+    {
+      "name": "train_082",
+      "probability": 0.005
+    },
+    {
+      "name": "train_083",
+      "probability": 0.005
+    },
+    {
+      "name": "train_084",
+      "probability": 0.005
+    },
+    {
+      "name": "train_085",
+      "probability": 0.005
+    },
+    {
+      "name": "train_086",
+      "probability": 0.005
+    },
+    {
+      "name": "train_087",
+      "probability": 0.005
+    },
+    {
+      "name": "train_088",
+      "probability": 0.005
+    },
+    {
+      "name": "train_089",
+      "probability": 0.005
+    },
+    {
+      "name": "train_090",
+      "probability": 0.005
+    },
+    {
+      "name": "train_091",
+      "probability": 0.005
+    },
+    {
+      "name": "train_092",
+      "probability": 0.005
+    },
+    {
+      "name": "train_093",
+      "probability": 0.005
+    },
+    {
+      "name": "train_094",
+      "probability": 0.005
+    },
+    {
+      "name": "train_095",
+      "probability": 0.005
+    },
+    {
+      "name": "train_096",
+      "probability": 0.005
+    },
+    {
+      "name": "train_097",
+      "probability": 0.005
+    },
+    {
+      "name": "train_098",
+      "probability": 0.005
+    },
+    {
+      "name": "train_099",
+      "probability": 0.005
+    },
+    {
+      "name": "train_100",
+      "probability": 0.005
+    },
+    {
+      "name": "train_101",
+      "probability": 0.005
+    },
+    {
+      "name": "train_102",
+      "probability": 0.005
+    },
+    {
+      "name": "train_103",
+      "probability": 0.005
+    },
+    {
+      "name": "train_104",
+      "probability": 0.005
+    },
+    {
+      "name": "train_105",
+      "probability": 0.005
+    },
+    {
+      "name": "train_106",
+      "probability": 0.005
+    },
+    {
+      "name": "train_107",
+      "probability": 0.005
+    },
+    {
+      "name": "train_108",
+      "probability": 0.005
+    },
+    {
+      "name": "train_109",
+      "probability": 0.005
+    },
+    {
+      "name": "train_110",
+      "probability": 0.005
+    },
+    {
+      "name": "train_111",
+      "probability": 0.005
+    },
+    {
+      "name": "train_112",
+      "probability": 0.005
+    },
+    {
+      "name": "train_113",
+      "probability": 0.005
+    },
+    {
+      "name": "train_114",
+      "probability": 0.005
+    },
+    {
+      "name": "train_115",
+      "probability": 0.005
+    },
+    {
+      "name": "train_116",
+      "probability": 0.005
+    },
+    {
+      "name": "train_117",
+      "probability": 0.005
+    },
+    {
+      "name": "train_118",
+      "probability": 0.005
+    },
+    {
+      "name": "train_119",
+      "probability": 0.005
+    },
+    {
+      "name": "train_120",
+      "probability": 0.005
+    },
+    {
+      "name": "train_121",
+      "probability": 0.005
+    },
+    {
+      "name": "train_122",
+      "probability": 0.005
+    },
+    {
+      "name": "train_123",
+      "probability": 0.005
+    },
+    {
+      "name": "train_124",
+      "probability": 0.005
+    },
+    {
+      "name": "train_125",
+      "probability": 0.005
+    },
+    {
+      "name": "train_126",
+      "probability": 0.005
+    },
+    {
+      "name": "train_127",
+      "probability": 0.005
+    },
+    {
+      "name": "train_128",
+      "probability": 0.005
+    },
+    {
+      "name": "train_129",
+      "probability": 0.005
+    },
+    {
+      "name": "train_130",
+      "probability": 0.005
+    },
+    {
+      "name": "train_131",
+      "probability": 0.005
+    },
+    {
+      "name": "train_132",
+      "probability": 0.005
+    },
+    {
+      "name": "train_133",
+      "probability": 0.005
+    },
+    {
+      "name": "train_134",
+      "probability": 0.005
+    },
+    {
+      "name": "train_135",
+      "probability": 0.005
+    },
+    {
+      "name": "train_136",
+      "probability": 0.005
+    },
+    {
+      "name": "train_137",
+      "probability": 0.005
+    },
+    {
+      "name": "train_138",
+      "probability": 0.005
+    },
+    {
+      "name": "train_139",
+      "probability": 0.005
+    },
+    {
+      "name": "train_140",
+      "probability": 0.005
+    },
+    {
+      "name": "train_141",
+      "probability": 0.005
+    },
+    {
+      "name": "train_142",
+      "probability": 0.005
+    },
+    {
+      "name": "train_143",
+      "probability": 0.005
+    },
+    {
+      "name": "train_144",
+      "probability": 0.005
+    },
+    {
+      "name": "train_145",
+      "probability": 0.005
+    },
+    {
+      "name": "train_146",
+      "probability": 0.005
+    },
+    {
+      "name": "train_147",
+      "probability": 0.005
+    },
+    {
+      "name": "train_148",
+      "probability": 0.005
+    },
+    {
+      "name": "train_149",
+      "probability": 0.005
+    },
+    {
+      "name": "train_150",
+      "probability": 0.005
+    },
+    {
+      "name": "train_151",
+      "probability": 0.005
+    },
+    {
+      "name": "train_152",
+      "probability": 0.005
+    },
+    {
+      "name": "train_153",
+      "probability": 0.005
+    },
+    {
+      "name": "train_154",
+      "probability": 0.005
+    },
+    {
+      "name": "train_155",
+      "probability": 0.005
+    },
+    {
+      "name": "train_156",
+      "probability": 0.005
+    },
+    {
+      "name": "train_157",
+      "probability": 0.005
+    },
+    {
+      "name": "train_158",
+      "probability": 0.005
+    },
+    {
+      "name": "train_159",
+      "probability": 0.005
+    },
+    {
+      "name": "train_160",
+      "probability": 0.005
+    },
+    {
+      "name": "train_161",
+      "probability": 0.005
+    },
+    {
+      "name": "train_162",
+      "probability": 0.005
+    },
+    {
+      "name": "train_163",
+      "probability": 0.005
+    },
+    {
+      "name": "train_164",
+      "probability": 0.005
+    },
+    {
+      "name": "train_165",
+      "probability": 0.005
+    },
+    {
+      "name": "train_166",
+      "probability": 0.005
+    },
+    {
+      "name": "train_167",
+      "probability": 0.005
+    },
+    {
+      "name": "train_168",
+      "probability": 0.005
+    },
+    {
+      "name": "train_169",
+      "probability": 0.005
+    },
+    {
+      "name": "train_170",
+      "probability": 0.005
+    },
+    {
+      "name": "train_171",
+      "probability": 0.005
+    },
+    {
+      "name": "train_172",
+      "probability": 0.005
+    },
+    {
+      "name": "train_173",
+      "probability": 0.005
+    },
+    {
+      "name": "train_174",
+      "probability": 0.005
+    },
+    {
+      "name": "train_175",
+      "probability": 0.005
+    },
+    {
+      "name": "train_176",
+      "probability": 0.005
+    },
+    {
+      "name": "train_177",
+      "probability": 0.005
+    },
+    {
+      "name": "train_178",
+      "probability": 0.005
+    },
+    {
+      "name": "train_179",
+      "probability": 0.005
+    },
+    {
+      "name": "train_180",
+      "probability": 0.005
+    },
+    {
+      "name": "train_181",
+      "probability": 0.005
+    },
+    {
+      "name": "train_182",
+      "probability": 0.005
+    },
+    {
+      "name": "train_183",
+      "probability": 0.005
+    },
+    {
+      "name": "train_184",
+      "probability": 0.005
+    },
+    {
+      "name": "train_185",
+      "probability": 0.005
+    },
+    {
+      "name": "train_186",
+      "probability": 0.005
+    },
+    {
+      "name": "train_187",
+      "probability": 0.005
+    },
+    {
+      "name": "train_188",
+      "probability": 0.005
+    },
+    {
+      "name": "train_189",
+      "probability": 0.005
+    },
+    {
+      "name": "train_190",
+      "probability": 0.005
+    },
+    {
+      "name": "train_191",
+      "probability": 0.005
+    },
+    {
+      "name": "train_192",
+      "probability": 0.005
+    },
+    {
+      "name": "train_193",
+      "probability": 0.005
+    },
+    {
+      "name": "train_194",
+      "probability": 0.005
+    },
+    {
+      "name": "train_195",
+      "probability": 0.005
+    },
+    {
+      "name": "train_196",
+      "probability": 0.005
+    },
+    {
+      "name": "train_197",
+      "probability": 0.005
+    },
+    {
+      "name": "train_198",
+      "probability": 0.005
+    },
+    {
+      "name": "train_199",
+      "probability": 0.005
+    }
+  ],
+  "holdout_scenarios": [
+    {
+      "name": "holdout_000",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_001",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_002",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_003",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_004",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_005",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_006",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_007",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_008",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_009",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_010",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_011",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_012",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_013",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_014",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_015",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_016",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_017",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_018",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_019",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_020",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_021",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_022",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_023",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_024",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_025",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_026",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_027",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_028",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_029",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_030",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_031",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_032",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_033",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_034",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_035",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_036",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_037",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_038",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_039",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_040",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_041",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_042",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_043",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_044",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_045",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_046",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_047",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_048",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_049",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_050",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_051",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_052",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_053",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_054",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_055",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_056",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_057",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_058",
+      "probability": 0.016666666666666666
+    },
+    {
+      "name": "holdout_059",
+      "probability": 0.016666666666666666
+    }
+  ],
+  "cvar_cross_check_tolerance": 1e-06,
+  "cvar_cross_check_max_abs_error": 0.0,
+  "cvar_cross_check_passed": true,
+  "training_feasible": true,
+  "gate_passed": true,
+  "correct_policy": {
+    "committed_flexibility_mw": 57.87296733560118,
+    "total_failure_probability": 0.016666666666666666,
+    "hard_infeasible_probability": 0,
+    "service_failure_probability": 0.016666666666666666,
+    "solver_unresolved_probability": 0,
+    "expected_access_shortfall_mwh": 0.019418652536906222,
+    "holdout_service_cvar": 61911.856835282146
+  },
+  "b6_policy": {
+    "committed_flexibility_mw": 38.55423945863698,
+    "total_failure_probability": 1.0,
+    "hard_infeasible_probability": 0.5666666666666668,
+    "service_failure_probability": 0.4333333333333333,
+    "solver_unresolved_probability": 0,
+    "expected_access_shortfall_mwh": 340.27455305778676,
+    "holdout_service_cvar": null
+  },
+  "h2_evaluated": true,
+  "h2_b6_extra_failure_probability": 0.9833333333333333,
+  "h2_b6_extra_expected_shortfall_mwh": 340.25513440524986,
+  "h2_b6_underdelivers_out_of_sample": true,
+  "random_seed": null,
+  "security_certified": false,
+  "formal_vma_published": false,
+  "empirical_holdout_claimed": false,
+  "touches_frozen_baselines": false,
+  "interpretation": "synthetic_out_of_sample_fixed_policy_execution_showing_the_b6_double_counting_error_underdelivers_service_against_the_true_shared_budget_not_an_empirical_vma_or_engineering_certification",
+  "certification_blockers": [
+    "synthetic_coefficients_budget_cap_and_scenario_probabilities_not_empirical",
+    "holdout_tree_is_a_synthetic_unseen_scenario_set_not_an_empirical_vma_sample",
+    "temporal_envelopes_recovery_debt_duration_event_count_out_of_scope",
+    "no_ac_or_n1_network_certification_in_this_entry_point"
+  ],
+  "output_paths": {
+    "leaves": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A2_h2_generated_seed_20260822\\leaves.csv",
+    "policies": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A2_h2_generated_seed_20260822\\policies.csv",
+    "summary": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A2_h2_generated_seed_20260822\\summary.json"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_vnext_execution_successor_post_result_review_rework_v2",
+  "version": 2,
+  "reviewed_on": "2026-09-01",
+  "reviewer_agent": "/root/pilot_post_result_review",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "REWORK",
+  "reviewed_execution": {
+    "outer_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.OUTER.SHA256SUMS.json",
+    "outer_sha256": "526e38c6194ece2f41f0f260f80dd2bb5ddcfa3115fad80e1552eb26e1425009",
+    "pre_run_pass_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_pass_v2.json",
+    "pre_run_pass_sha256": "20154618e4dad98b2c65ae811debf7ec43cbed9ebf6f5fef8abc7d5b7ca607fb",
+    "session_id": "3878cc5ddd3222163609b132ca4caa6f7ec3c5de22b3231a133ef0694cdc3d01"
+  },
+  "sealed_v2_artifacts": {
+    "result_root": {
+      "path": "results/tables/rq2_public_grid_two_block_pilot_vnext_execution_successor_v2",
+      "file_count": 19,
+      "canonical_path_sha256_mapping_sha256": "3c7fb28bb183f0c01bfd9e5c442b9e5e2e44cba9f0b54f795178a9b19c343372",
+      "typed_tree_manifest_sha256": "b7fb776a48db2964e0372d07389051c9bcc6a4feef2dc82f261dadb09d53a3b3",
+      "result_manifest_sha256": "9cbc808de79a842c252bb1b2f3c09d81119c686bf9da00cf36941aa970b4ea28",
+      "controller_receipt_sha256": "dc1cf2bf7e8deb205f234cc4054fb2218e9cb49033ad8641f8a0e05104e60d53",
+      "summary_sha256": "8117213bfaef41f98af714c12f38a599a45415b8f4a1a5c65c5da3f8df34f163"
+    },
+    "success_root": {
+      "path": "results/tables/rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.PUBLISHED",
+      "file_count": 2,
+      "canonical_path_sha256_mapping_sha256": "f443c3e75977dae2c635bd6b28b630a757c67113d15fb714d7614c805747d946",
+      "typed_tree_manifest_sha256": "a511af614715dfe1ec02c002ff37411249650a47eaa18b12f3823125b9e62a18",
+      "success_json_sha256": "75e565f5cd8f9c0336fa101fb4d8bd3aed5e355f1fa5c0fa67d1732930833612"
+    },
+    "worker_root": {
+      "path": "results/workers/rq2_public_grid_two_block_pilot_vnext_execution_successor_v2",
+      "file_count": 5,
+      "canonical_path_sha256_mapping_sha256": "c4773a91638851334b81efb05961bb78ead4a6dc4e842e21803c6281f4acfd2f"
+    },
+    "blocks": {
+      "holdout_s20260822_0008": {
+        "scientific_payload_sha256": "c624195c32506042edc00473dd934a80f9098515640bff80d02acd533d9e88f1",
+        "accepted_record_digest": "cf8cb11e9d16c12290367098e0f3767f6f348c882ef0e2ac4520f5f9edaff760"
+      },
+      "holdout_s20260822_0009": {
+        "scientific_payload_sha256": "e48abc8573a2e5763e1b177e26b461ac7224400e2cddda3f9259a95c5e7f6e00",
+        "accepted_record_digest": "2d017fabd0f984af0deb3243367fb93bd4bfa11f7244647669734d6f5eddbf51"
+      }
+    },
+    "mutation_permitted": false
+  },
+  "positive_findings": {
+    "publication_classification": "committed_success",
+    "result_tree_exact": true,
+    "success_tree_exact": true,
+    "terminal_root_absent": true,
+    "scientific_payloads_accepted": true
+  },
+  "findings": [
+    {
+      "severity": "BLOCKER",
+      "id": "resource_journal_not_persisted",
+      "finding": "ResourceOutcome and the complete same-pair resource journal were not persisted through worker, controller, result and success evidence, so the resource gate cannot be reconstructed independently."
+    },
+    {
+      "severity": "BLOCKER",
+      "id": "controller_hmac_not_independently_verifiable",
+      "finding": "The controller session HMAC secret was destroyed after exit and no independently verifiable anchored attestation remained for records, controller receipt or success."
+    },
+    {
+      "severity": "MAJOR",
+      "id": "documentation_state_stale",
+      "finding": "The plan and blocker register still described the earlier 5.289886 GiB preflight block and no execution, conflicting with the committed v2 result."
+    },
+    {
+      "severity": "MAJOR",
+      "id": "actual_worker_solver_runtime_not_persisted",
+      "finding": "Worker artifacts recorded only expected highspy 1.15.1 and did not persist the actual worker-time package and runtime API versions."
+    }
+  ],
+  "remediation_boundary": {
+    "successor": "new_versioned_v3_evidence_run_not_v2_resume",
+    "must_preserve_v2_bytes": true,
+    "must_persist_complete_resource_journal_and_recomputed_aggregate": true,
+    "must_use_pre_run_anchored_independently_verifiable_one_time_controller_attestation": true,
+    "must_persist_actual_worker_solver_runtime": true,
+    "same_os_user_pre_execution_lease_exfiltration_out_of_scope": true,
+    "ordinary_import_or_api_must_not_expose_production_signing_authority": true,
+    "security_claim_from_controller_authentication": false,
+    "fixed_blocks": [
+      "holdout_s20260822_0008",
+      "holdout_s20260822_0009"
+    ],
+    "scientific_protocol_or_threshold_change_authorized": false,
+    "formal_run_authorized": false
+  },
+  "effect": {
+    "v2_payload_science_accepted": true,
+    "v2_post_result_review_passed": false,
+    "v2_unlocks_formal": false,
+    "v3_execution_authorized": false,
+    "pilot_execution_authorized": false,
+    "formal_execution_authorized": false,
+    "claim": false,
+    "security_certified": false,
+    "no_execution_authority": true
+  }
+}

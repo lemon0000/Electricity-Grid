@@ -1,0 +1,111 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_execution_controller_successor_v3",
+  "version": 3,
+  "frozen_on": "2026-08-31",
+  "status": "execution_controller_successor_v3_review_closed",
+  "predecessor": {
+    "outer_path": "configs/rq2_public_grid_two_block_pilot_execution_controller_successor_v2.OUTER.SHA256SUMS.json",
+    "outer_sha256": "9c2822fef43e34743e12f79fb4fd3545812a2cb797bb74d50ed132be15bf44c0",
+    "inner_path": "configs/rq2_public_grid_two_block_pilot_execution_controller_successor_v2.SHA256SUMS.json",
+    "inner_sha256": "4efc24caeeca09745d82c594d32c931a705bd9a7ad14e38e3e64418899a5a201",
+    "escalate_path": "configs/rq2_public_grid_two_block_pilot_execution_controller_review_escalate_v2.json",
+    "escalate_sha256": "6961754a46c0a868fb08f84855403e5e54e18a091b12a286c8c02eb5f8ce000f"
+  },
+  "recursive_dependency_authority": {
+    "predecessor_outer_schema": "rq2_public_grid_two_block_pilot_execution_controller_successor_outer_v2",
+    "predecessor_inner_schema": "rq2_public_grid_two_block_pilot_execution_controller_successor_bundle_v2",
+    "predecessor_exact_members": {
+      "configs/rq2_public_grid_two_block_pilot_execution_controller_successor_v2.json": "de75329751fd78651d280f11799282fbf1e77f360dc13ea17c34a10fea4fab6c",
+      "configs/rq2_public_grid_two_block_pilot_execution_controller_review_rework_v1.json": "a24f0d5a3c22b03ce2d3eaeaa20c644b819f491fd338f50e156b8f8098499135",
+      "experiments/rq2_public_grid_execution_dependency_closure_v2.py": "fb0857c239ecfe4014579b91924e3a14844e366f63ba89803ea3e3bc6eaf753f",
+      "experiments/bootstrap_rq2_public_grid_two_block_pilot_execution_controller_successor_v2.py": "6f8398d0ca00dbd88eae775eeb83404fe36c4f5ca2d9d340d5b84618389c5786",
+      "experiments/run_rq2_public_grid_two_block_pilot_execution_controller_successor_v2.py": "3716e21b32044b31c8ef8d395adab4c788dab8b17532222e7d5a2a77e9457b34",
+      "experiments/worker_rq2_public_grid_two_block_pilot_execution_controller_successor_v2.py": "4dbe7992050dd405911b0ca45f9d69f6af2d0aa4365939cb29b12d39e0e04c7a",
+      "tests/test_rq2_public_grid_two_block_pilot_execution_controller_successor_v2.py": "c624fafb1ef668921bec9a40048f94d94177871b1b27ee4b44bd76690211e8a9"
+    },
+    "predecessor_config_path": "configs/rq2_public_grid_two_block_pilot_execution_controller_successor_v2.json",
+    "delegated_closure_key": "dependency_closure",
+    "expected_recursive_bundle_count": 4,
+    "expected_flat_manifest_count": 1,
+    "expected_recovery_member_count": 7,
+    "expected_transitive_file_count": 12
+  },
+  "successor_identity": {
+    "contract_module": "experiments.rq2_public_grid_execution_runtime_contract_v3",
+    "contract_path": "experiments/rq2_public_grid_execution_runtime_contract_v3.py",
+    "contract_sha256": "17714b6ee759749f3085e53c2410d1eed0ba5adf37ee226ca828d0579ff871ec",
+    "bootstrap_module": "experiments.bootstrap_rq2_public_grid_two_block_pilot_execution_controller_successor_v3",
+    "bootstrap_path": "experiments/bootstrap_rq2_public_grid_two_block_pilot_execution_controller_successor_v3.py",
+    "bootstrap_sha256": "42d190882b6dcf5c9dac1f3cd4ac84e2b6980fa31773c4f4454ffc0d7d6863c8",
+    "controller_module": "experiments.run_rq2_public_grid_two_block_pilot_execution_controller_successor_v3",
+    "controller_path": "experiments/run_rq2_public_grid_two_block_pilot_execution_controller_successor_v3.py",
+    "controller_sha256": "c10794a0f6ae8cec7f0744017325f6cf0255f8a8f103753a00d8e5d09e21a2af",
+    "worker_module": "experiments.worker_rq2_public_grid_two_block_pilot_execution_controller_successor_v3",
+    "worker_path": "experiments/worker_rq2_public_grid_two_block_pilot_execution_controller_successor_v3.py",
+    "worker_sha256": "4b898326f08b6991754d61f89021041a31843dfe82fee3ff4decee8be9068a76"
+  },
+  "live_closure_stages": [
+    "bootstrap_pre_controller_import",
+    "worker_pre_loader",
+    "worker_post_solve_pre_validator",
+    "worker_post_validator_pre_write",
+    "worker_post_write_pre_ack",
+    "controller_post_child_pre_accept",
+    "controller_post_block2_pre_publish",
+    "controller_post_publish"
+  ],
+  "solver_call_accounting_authority": {
+    "baseline_solver_invoked_pairs": [["optimal", "ok"], ["globallyOptimal", "ok"]],
+    "baseline_not_applicable_object": {"accepted": true, "termination_condition": "not_applicable_no_active_outage"},
+    "primary_solver_invoked_pairs": [["optimal", "ok"], ["globallyOptimal", "ok"], ["infeasible", "warning"]],
+    "primary_not_applicable_pair": ["not_applicable_no_active_outage", "not_applicable"],
+    "zero_confirmation_solver_invoked_pairs": [["infeasible", "warning"]],
+    "real_gurobi_0008_payload_path": "results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_gurobi/holdout_s20260822_0008.json",
+    "real_gurobi_0008_payload_sha256": "f9b954669832bbfd467a0f6a3987718ce944a9414d27b3a0b5eb9171d66df8e6",
+    "real_gurobi_0008_stage_base_provenance_sha256": "d6d4b69df6c212c0b79c4bb99e7f518305b626bf82a3b1198da4a6306c95442f",
+    "real_gurobi_0008_expected_solver_calls": 3
+  },
+  "sealed_actual_integration": {
+    "candidate_v4_module": "experiments.run_rq2_public_grid_two_block_pilot_candidate_v4",
+    "candidate_v4_path": "experiments/run_rq2_public_grid_two_block_pilot_candidate_v4.py",
+    "candidate_v4_sha256": "3b6e55605f56cee1e871d72b15ddfec0963ce727ec863a08f4cbac441d7541e9",
+    "recovery_module": "experiments.run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_v1",
+    "recovery_path": "experiments/run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_v1.py",
+    "recovery_sha256": "c90f796aa9c9043d48560599b892681455b7c7ddee3881501ce449bfa1c3833e",
+    "publication_v7_module": "experiments.run_rq2_public_grid_two_block_pilot_candidate_v7",
+    "publication_v7_path": "experiments/run_rq2_public_grid_two_block_pilot_candidate_v7.py",
+    "publication_v7_sha256": "165b3ef4b1ef4f894b2d1740948ee92033776d547d90b74e02855820227ab105",
+    "candidate_v4_functions": ["_stage_context", "_validate_worker_result", "_revalidate_memory_evidence", "_build_worker_result", "_build_attempt_receipt", "_build_ack", "_build_controller_receipt", "_expected_accepted_digest"],
+    "candidate_v4_types": ["AcceptedEvidence", "ControllerLedger"],
+    "recovery_functions": ["_validate_scientific_payload"],
+    "publication_v7_functions": ["_publish_result", "_reconcile_publication", "load_verified_success_commit", "_publication_config"]
+  },
+  "fixed_execution_review": {
+    "path": "configs/rq2_public_grid_two_block_pilot_execution_controller_review_pass_v3.json",
+    "schema": "rq2_public_grid_two_block_pilot_execution_controller_review_pass_v3",
+    "present": false,
+    "receipt_path_is_cli_configurable": false,
+    "receipt_self_signing_allowed": false,
+    "exact_keyset": ["schema", "version", "reviewed_on", "reviewer_role", "verdict", "reviewed_outer", "bound_predecessor", "bound_recursive_dependency_authority", "findings", "effect"],
+    "exact_effect": {
+      "successor_v3_independent_review_passed": true,
+      "two_block_nonformal_pilot_execution_authorized": true,
+      "formal_execution_authorized": false,
+      "claim": false,
+      "security_certified": false
+    }
+  },
+  "runtime": {
+    "locked_python_executable": "D:\\conda_envs\\rq2-executor-v2-audit\\python.exe",
+    "locked_python_sha256": "91df9733b71b293eec9945cc8c5388bbfe1abc5e6ee94a14333076e5f55cb6bf",
+    "locked_python_version": "3.11.15",
+    "exact_cwd": "D:\\CUHKSZ\\Research Project\\electricity-grid",
+    "host": {"hostname": "LAPTOP-FT6J5Q9J", "system": "Windows", "release": "10", "machine": "AMD64"},
+    "sanitized_environment": {"COMSPEC": "C:\\WINDOWS\\system32\\cmd.exe", "NO_COLOR": "1", "PROCESSOR_ARCHITECTURE": "AMD64", "SYSTEMDRIVE": "C:", "SYSTEMROOT": "C:\\WINDOWS", "TEMP": "C:\\Users\\Psychobabble\\AppData\\Local\\Temp", "TMP": "C:\\Users\\Psychobabble\\AppData\\Local\\Temp", "WINDIR": "C:\\WINDOWS"}
+  },
+  "pilot": {"blocks": ["holdout_s20260822_0008", "holdout_s20260822_0009"], "fixed_order": true, "one_fresh_worker_per_block": true, "single_active_attempt": true, "attempt_consumed_before_spawn": true, "retry_resume_reorder_skip": false},
+  "resources": {"watchdog_seconds": 21600.0, "sample_interval_seconds": 5.0, "child_private_commit_stop_gib": 8.0, "system_commit_available_stop_gib": 2.0, "preflight_available_commit_gib": 10.0, "failure_classification": "honest_incomplete", "mathematical_infeasibility_inferred": false},
+  "paths": {"worker_root": "results/workers/rq2_public_grid_two_block_pilot_execution_controller_successor_v3", "publication_staging": "results/tables/.rq2_public_grid_two_block_pilot_execution_controller_successor_v3.staging", "result_root": "results/tables/rq2_public_grid_two_block_pilot_execution_controller_successor_v3", "success_root": "results/tables/rq2_public_grid_two_block_pilot_execution_controller_successor_v3.PUBLISHED", "terminal_root": "results/tables/rq2_public_grid_two_block_pilot_execution_controller_successor_v3.TERMINAL", "log_root": "results/logs/rq2_public_grid_two_block_pilot_execution_controller_successor_v3"},
+  "formal_protection": {"formal_runner_path": "experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py", "formal_runner_sha256": "39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8", "activated_config_path": "results/execution_configs/rq2_public_successor_v2/grid.yaml", "activated_config_sha256": "b8f7a71f8aaf8150c8515089e90e1946732d4476e0855d8677523577bc17f416", "checkpoint_directory": "results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_gurobi", "checkpoint_count": 9, "checkpoint_sha256": {"holdout_s20260822_0000.json": "f68f7bca3fbf66c7bf90840280502cb2eda69dd6a01d8258b5929c5e01e0f6b8", "holdout_s20260822_0001.json": "180762530c8450c0eb914b3fee5e8597563200d701dddbd64b5c48180b2904da", "holdout_s20260822_0002.json": "9a9af3c77af3de2a1396f2004352b97ebdbcbe77f2706c9851427e7f389e70ec", "holdout_s20260822_0003.json": "8d9d355f34865d72723d0418330f149d2a99cd0cb15e95f7eed08554da9fe260", "holdout_s20260822_0004.json": "f63a9e729c751c23bd61af7dae1f0bdd9bbaec542abd13eade9e09d083d956fc", "holdout_s20260822_0005.json": "f2fc2a34163b8aa18583c0554b477e68f149c1ee95cb6d17b6418715d59af7f8", "holdout_s20260822_0006.json": "51b642d9ccdd3afa7e7ba8fecef6f1b16eef71f0ac4434e1ee81694c65512b38", "holdout_s20260822_0007.json": "ecad02d8810b1c80c13fe4b69c931aff8e7669c643f5343c0dc3b584d0b81785", "holdout_s20260822_0008.json": "f9b954669832bbfd467a0f6a3987718ce944a9414d27b3a0b5eb9171d66df8e6"}},
+  "gates": {"successor_v3_independent_review_passed": false, "fixed_execution_review_receipt_present": false, "execution_ready": false, "pilot_executed": false, "formal_execution_ready": false, "user_formal_run_authorized": false, "formal_result_exists": false, "claim": false, "security_certified": false}
+}

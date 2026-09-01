@@ -1,0 +1,43 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_activation_transport_review_escalate_v4",
+  "version": 1,
+  "issued_on": "2026-08-31",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "ESCALATE",
+  "reviewed_outer": {
+    "path": "configs/rq2_public_grid_two_block_pilot_activation_transport_v4.OUTER.SHA256SUMS.json",
+    "sha256": "9ba787c2d3b1ae3db64c675be2409a2a5d1cf2b2fe6b703133885c27efa5d16d"
+  },
+  "findings": [
+    {
+      "severity": "major",
+      "finding": "The v4 runtime resource monitor samples only child private commit and does not simultaneously enforce the frozen recovery-v2 system commit available reserve."
+    },
+    {
+      "severity": "major",
+      "finding": "The v4 private-commit stop comparison is strict greater-than, while the frozen recovery-v2 contract stops at private commit greater-than-or-equal to 8 GiB; system available must stop at less-than-or-equal to 2 GiB."
+    },
+    {
+      "severity": "major",
+      "finding": "A 10 GiB preflight observation is necessary but cannot replace runtime sampling of the 2 GiB host reserve during every 5 second child sample."
+    }
+  ],
+  "accepted_v4_invariants": [
+    "production_literal_hard_close_before_config_pipe_popen_or_science_import",
+    "scientific_dependency_closure_and_registered_zero_solver_seam",
+    "RLock_atomic_attempt_consumption_single_active_no_retry",
+    "honest_incomplete_never_mathematical_infeasibility"
+  ],
+  "review_effect": {
+    "v4_independent_review_passed": false,
+    "v4_execution_authorized": false,
+    "v5_closed_candidate_creation_authorized": true,
+    "production_worker_authorized": false,
+    "loader_authorized": false,
+    "solver_authorized": false,
+    "pilot_authorized": false,
+    "formal_authorized": false,
+    "claim_authorized": false,
+    "security_certified": false
+  }
+}

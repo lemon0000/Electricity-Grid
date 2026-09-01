@@ -1,0 +1,37 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_execution_controller_review_escalate_v2",
+  "version": 2,
+  "reviewed_on": "2026-08-31",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "ESCALATE",
+  "reviewed_outer": {
+    "path": "configs/rq2_public_grid_two_block_pilot_execution_controller_successor_v2.OUTER.SHA256SUMS.json",
+    "sha256": "9c2822fef43e34743e12f79fb4fd3545812a2cb797bb74d50ed132be15bf44c0"
+  },
+  "findings": [
+    {
+      "severity": "Major",
+      "id": "live_closure_toctou_after_long_running_or_mutating_boundaries",
+      "finding": "v2 verifies the frozen dependency closure before controller dispatch and before the worker loader, but does not repeat the full exact double-read closure after the sealed scientific process returns, after scientific validation, around isolated result and ACK publication, before ledger acceptance, before publication, or after publication; review-to-use drift can therefore cross an acceptance or publication boundary without an honest stage-specific classification."
+    },
+    {
+      "severity": "Major",
+      "id": "solver_call_accounting_omits_exact_status_pair_semantics",
+      "finding": "v2 counts solver calls from termination_condition alone and does not bind termination_condition to the exact solver_status and applicability semantics accepted by the sealed recovery contract; forged, unknown, missing, or mismatched status evidence can be counted as an actual solve."
+    },
+    {
+      "severity": "Major",
+      "id": "acceptance_audit_uses_caller_supplied_validator_and_publisher_lambdas",
+      "finding": "v2 zero-solver orchestration accepts caller-supplied scientific validator and publisher callables, so the test does not prove integration with the exact sealed recovery validator, AcceptedEvidence/ControllerLedger/builders, and v7 publication/reconciliation primitives used by production."
+    }
+  ],
+  "effect": {
+    "v2_remains_immutable": true,
+    "v2_execution_authorized": false,
+    "v3_remediation_authorized": true,
+    "pilot_execution_authorized": false,
+    "formal_execution_authorized": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

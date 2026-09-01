@@ -1,0 +1,56 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_activation_review_rework_v1",
+  "version": 1,
+  "reviewed_on": "2026-08-31",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "REWORK",
+  "review_cycle": "activation_candidate_v1_first_and_only_rework",
+  "reviewed_artifacts": {
+    "configs/rq2_public_grid_two_block_pilot_activation_candidate_v1.json": "e18c3a1d4b6197068b96e93338eb48e8bca0b06535b51007c7340b2ba783c8a6",
+    "configs/rq2_public_grid_two_block_pilot_execution_successor_review_pass_v2.json": "ad692bfdfec2b90cda49dfc54dc08fd1383bf9e2a4524775676f0f31025ce855",
+    "experiments/bootstrap_rq2_public_grid_two_block_pilot_activation_candidate_v1.py": "c7928b06f7307c3eda001e5135dcbaae9696cd83bc44e3ff4c17e78b077a1590",
+    "tests/test_rq2_public_grid_two_block_pilot_activation_candidate_v1.py": "2cdd50071facf890c322df5bdc421cc013cc85c179ca806034d128ff91d959e9",
+    "configs/rq2_public_grid_two_block_pilot_activation_candidate_v1.SHA256SUMS.json": "7aef813591a753567281b0119620437fe1c04f444c1d04f743c44ef25a09d289",
+    "configs/rq2_public_grid_two_block_pilot_activation_candidate_v1.OUTER.SHA256SUMS.json": "844f4a59527306962e97e7879e4ccb7abb1893b65a819b782c56110e4df073f2"
+  },
+  "findings": {
+    "blocker": [
+      {
+        "id": "permanently_closed_v4_transport_authority",
+        "finding": "The activation candidate points to v4 dispatch/worker entrypoints that permanently reject execution and whose frozen argv/authority contract cannot match a future activation wrapper; the referenced path is therefore not an executable successor transport."
+      }
+    ],
+    "major": [
+      {
+        "id": "unverified_historical_ledger_records",
+        "finding": "The candidate validates only the newly appended mapping. Caller-supplied historical records are not reconstructed from genesis or revalidated for schema, digests, predecessor bindings, identity uniqueness, ordering, source bytes, ACK, and replay, so forged history can unlock block 0009."
+      },
+      {
+        "id": "activation_review_effect_overauthorizes_execution",
+        "finding": "The future activation-review receipt schema requires activation_execution_authorized and two_block_pilot_execution_authorized to be true too early. This review may authorize only construction and independent review of an immutable execution wrapper; a later exact receipt and human review must authorize dispatch."
+      }
+    ],
+    "minor": []
+  },
+  "required_remediation": {
+    "new_versioned_activation_transport_successor_required": true,
+    "activation_candidate_v1_bytes_immutable": true,
+    "new_self_consistent_controller_worker_transport_required": true,
+    "full_history_from_genesis_validation_required": true,
+    "execution_wrapper_and_dispatch_review_must_remain_separate": true,
+    "same_finding_failure_requires_escalate": true
+  },
+  "effect": {
+    "no_execution_authority": true,
+    "activation_candidate_v1_rejected_for_execution": true,
+    "activation_v2_creation_authorized": true,
+    "activation_execution_authorized": false,
+    "two_block_pilot_execution_authorized": false,
+    "formal_activation_authorized": false,
+    "formal_execution_ready": false,
+    "user_formal_run_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

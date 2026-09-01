@@ -1,6 +1,6 @@
 # RQ2 论文路线图与导航页
 
-创建日期：2026-08-20  
+创建日期：2026-08-20；更新日期：2026-08-26
 适用范围：毕业论文/期刊投稿主线 = RQ2（网络条件服务与小时级CFE共享业务灵活性预算）。  
 本页是导航与状态映射，不重述已冻结的科学契约。权威来源仍是 `agent.md`（范围/路由/审查；§4 已将 RQ2 定为首篇主创新、RQ1 降为后续扩展）、`docs/model_spec/formulation.md`（数学规格）、`docs/model_spec/blocker_register.md`（阻塞状态）与 `docs/literature/`（文献与缺口）。
 
@@ -13,19 +13,39 @@
 
 ---
 
-## 1. RQ2 一句话卖点
+## 1. RQ2 一句话定位
 
-现实中数据中心的两类服务是**分开签约、分开触发**的——网络条件削减是对 N-1 事件的被动事后响应，小时级 CFE 移峰是跟随绿电的主动事前调度——但二者抽取自**同一业务柔性物理包络**。规划者若按各自“可用灵活性”分别签出条件容量 X，就会在**时序维度**（持续时间、事件次数、恢复债务）重复占用同一包络。RQ2 用**共享时序包络 + B6 重复承诺错误基线 + 场景外 CVaR** 量化这种高估幅度与履约失败概率。
+官方primary sources分别建立了network-side flexible-load arrangements与hourly
+CFE accounting/procurement，但没有公开证据证明某个具名data center把同一份
+workload flexibility同时承诺给二者。RQ2因此把二者对同一temporal workload
+envelope的潜在重叠定义为`contract-overlap hypothesis`，用**共享时序包络 +
+B6 double-counting counterfactual + only-public-marginals下的sharp partial
+identification**检验这个假设在什么条件下会造成minimum-flexibility
+underprovisioning。该定位不把现实重叠、发生率、X高估或正效应当作既定事实。
 
-## 2. 三层创新与对应可证伪命题
+最近邻边界必须在摘要与Introduction中显式出现：Fan and Zhao (2026, DC14)
+已联合优化workload distribution与regulation capacity commitments，并处理瞬时与
+累计deliverability；Khanal et al. (2026, DC15)已在capacity expansion中建模
+firm/flexible/interruptible tiers及depth、duration、ramp、recovery和annual caps。
+本文不以deliverability、event-shape/recovery或sharp OT bound本身承载贡献。
 
-| 层 | 创新点 | 可证伪命题 | 判据（在结果前冻结） |
-|---|---|---|---|
-| 机制 | 共享时序包络（MW+持续时间+事件次数+累计能量+恢复功率+恢复债务） | H1：正确共享包络会拒绝 B6 分离预算仍认证的 X 水平 | 存在 X*，使 B6 认证而共享模型不可行；差额 = X 高估量 |
-| 概念 | B6 允许重复承诺的错误基线 | H2：B6 策略在场景外执行时产生正的持续时间违约/恢复债务/失败概率 | 场景外既定策略执行下，B6 的违约指标显著大于共享模型（同输入同安全集） |
-| 评估 | 场景外 service-CVaR 尾部风险 + λ/κ/β 敏感性 | H3：随 λ^risk 增大，最优在“期望成本↔尾部服务损失”上呈单调权衡且方法排序稳健 | ε-约束 Pareto 前沿与 λ 扫描给出稳定排序，非单点权重产物 |
+## 2. Problem–Method–Insight与可证伪命题
 
-H1/H2/H3 必须在**相同输入、相同场景、相同安全集**下比较；VMA/高估量接近零或错误基线不劣的区域也必须如实报告（`agent.md` §9 公平性）。
+| 结构 | 论文合同 | 可证伪判据（在新增结果前冻结） |
+|---|---|---|
+| Problem | 两类制度对象分别存在，但同一workload/resource mapping未被公开证据建立；P1必须在看结果前绑定具名设施/项目`U`或预注册抽样总体`S`，问题是该`U/S`内是否存在共同映射，而不是无边界的全球存在性 | P1(`U/S`)：同一预注册范围内的完整合同、计量与workload mapping支持共同占用才成立；具名`U`的完整隔离映射，或有限`S`按覆盖规则全部无重叠，才推翻该范围内命题。单个隔离案例不推翻总体外存在性；缺失单位为unresolved |
+| Method | 共享temporal envelope correct model与B6 double-counting counterfactual在相同输入、安全集和holdout上比较；主estimand冻结为`Δ=D_min^flex,correct-D_min^flex,B6`，只有公开边缘时在声明的coupling set上求条件sharp bounds | P2：`LB_Δ>0`才支持all-coupling robust正效应；`LB_Δ<=0<UB_Δ`中的nonpositive witness已排除该robust正主张，但现实未知coupling符号仍partially identified；`UB_Δ<=0`进一步排除任一admissible coupling上的严格正效应。必要arm上B6不劣或预注册稳健性失败本身只表示正主张未建立 |
+| Insight | 报告哪些边缘与结构假设能排除、容许或迫使风险，以及哪些联合数据能收窄区间；算法工具不自动形成经验结论 | P3 identification：若Cartesian outcomes不完整、primal/dual或coupling witness失败，或存在solver unresolved，则不得称端点sharp或把未决状态写成infeasible |
+
+所需外部证据是具名或去标识化的network contract、hourly-CFE obligation、共同
+计量窗口、workload queue/dispatch、actual calls与recovery轨迹。当前证据只达到
+`institutional_objects_separately_supported`；尚未达到
+`same_resource_overlap_observed`或`overlap_frequency_or_causal_effect_identified`。
+
+派生理论备忘
+[`rq2_theoretical_propositions_v1.md`](../model_spec/rq2_theoretical_propositions_v1.md)
+固定T1的MW-only精确界、T2的transport robust-sign三分法和T3的共同coupling
+witness要求。T1–T3不替代本节经验P1–P3，不修改v6、实验gate或结果状态。
 
 ## 3. 现有资产 → RQ2 映射（已实现，本机可复核）
 
@@ -42,7 +62,11 @@ H1/H2/H3 必须在**相同输入、相同场景、相同安全集**下比较；V
 | **Temporal H2 固定策略 holdout** | [temporal_economic_holdout.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/src/evaluation/temporal_economic_holdout.py)；入口 [run_rq2_h2_temporal_holdout.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/experiments/run_rq2_h2_temporal_holdout.py)；三来源入口 [run_rq2_h2_temporal_source_ablation.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/experiments/run_rq2_h2_temporal_source_ablation.py) | [test_temporal_economic_holdout.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_temporal_economic_holdout.py)、[test_temporal_trace_scenario_generator.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_temporal_trace_scenario_generator.py)、[test_temporal_scenario_reduction.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_temporal_scenario_reduction.py) | manual/generated/reduced chronology mechanism-only；固定`D_flex`、共享holdout、时序距离缩减、failure-channel与right-censoring诚实报告 |
 | **H2 场景外既定策略执行（钉死 D^flex）** | [economic_holdout.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/src/evaluation/economic_holdout.py) `evaluate_economic_holdout`；正式入口 [run_rq2_h2_stochastic_holdout.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/experiments/run_rq2_h2_stochastic_holdout.py)（读 [rq2_h2_stochastic_holdout.yaml](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/configs/rq2_h2_stochastic_holdout.yaml)）；`formulation.md` §12 | [test_economic_holdout.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_economic_holdout.py)、[test_rq2_h2_runner.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/tests/test_rq2_h2_runner.py) | 本机微型合成 holdout 自检通过；正式规模留执行机 |
 
-结论：RQ2 的**度量层、错误基线、L5 经济随机目标与 H2 场景外量化均已成型且有测试**，是本项目中数据风险最低、对照最干净的部分。CVaR 与共享预算已接入统一经济目标（`min C^grid + C^op + λ·CVaR_β(L)`），并由正式入口在 λ 扫描下给出 H1（B6 高估量）与 H3（成本↔尾部风险单调权衡）；H2 入口把 L5 规划出的 correct/B6 两个 `D^flex` 钉死后在未见 holdout 场景上按真实共享预算执行，量化 B6 的场景外欠交付（失败概率 + 期望缺口，含硬安全不可行）。缺的是在执行机上跑更大规模的正式算例。
+结论：度量、B6反事实、L5经济随机目标与场景外执行管道均已有机制测试，
+但这不等于经验命题成立，也不等于数据风险已经解除。当前公开边缘v6的estimand
+是normalized minimum flexibility underprovisioning；冻结70-cell结果没有识别出
+正的稳健H2。合同共同映射证据和预注册的外部验证仍是论文成立条件，且
+`formal_execution_ready=false`。
 
 ### 3.1 三区域叙事重构（2026-08-24）
 
@@ -62,6 +86,43 @@ RTS-GMLC CFE successor显示：单一100%小时目标可能使correct与B6同时
 冻结benchmark已完成：70/70 cells、计算门通过，但结果为
 `R1=0, R2=0, R3=69, mixed=1, unresolved=0`。因此该设计没有识别出三区域边界，也不支持数据驱动时序下的稳健H2。首篇TSG投稿继续阻塞；后续不得在看过该结果后调整同一网格寻找R2，只能依据外部合同/恢复数据注册新验证，或把论文主问题改为严格小时CFE下的共同不足边界。
 
+### 3.2 增强基线鲁棒性设计门（2026-08-25）
+
+[`RQ2_增强基线鲁棒性预注册_v1.md`](RQ2_增强基线鲁棒性预注册_v1.md)冻结
+`network-only / CFE-only / joint-correct / joint-B6`四臂 successor，用相同 v6
+数据、15 个 OAT cells、splits、代表点、时序包络和 solver contract 区分
+single-service scarcity、joint-service interaction 与 B6-specific
+underprovisioning。Primary仍为full transport sharp bounds；跨metric归因必须由
+同一`pi`见证，E0单列，T1 MW-only不替代full temporal arm。机制标签只使用
+capacity contrasts、failure probability与expected shortfall；recovery debt仅作
+描述，right-censored terminal debt不算失败。
+
+该文件是不可执行的设计预注册，不是对70-cell阴性结果的调参或证据升级。future
+four-arm implementation/config/runner/output尚未绑定；首阶段已绑定现有v6 grid v4
+config/runner/direct implementation/output/schema，但runtime receipt/provenance尚未
+出现且`ready=false`。独立R4、用户授权、execution readiness与formal-result门均为
+false；在四阶段工件链闭合前，不新增经验机制或因果主张。
+
+2026-08-26状态：四臂R3 core已实现不可变training/holdout call projection、四次
+minimum-capacity planning、finite-only shared-envelope causal replay及完整training
+support audit。B6的分离语义只用于planning audit，holdout与其余三臂共用真实共享
+包络；四臂容量按精确key set校验后规范为冻结顺序。机器输出已把registered
+service risk与raw physical/debt diagnostics分域：shortfall和已注册非debt physical
+violation进入failure，v1未绑定的debt-limit/terminal-condition channel及right-censored
+terminal debt仅保留诊断；未知physical violation保守进入failure，来源诊断不一致则
+标为unresolved。E0、缺容量、非有限值或arm inventory漂移均fail closed。现已新增
+versioned public planning/pair checkpoint、resume identity、partial no-publish、原子
+不可覆盖publication与exact package manifest合同，以及纯读validate-only successor；
+successor config/manifest SHA256分别为
+`2d7a801b2cc0b078650a6b9917a45d282a3d9f273a0eb6043361a89a6c5f7d9a`和
+`0234ed0eb54b30f15891ff49df7f74fea678e6f05309a8c1e4473a9ea7d34954`。合同同时锁定
+各arm planning joint-budget语义、finite pair容量与同cell planning minimum的精确绑定、
+checkpoint/final provenance、全cell Cartesian marginals、right-censor boundary、完整
+training pair inventory hash及symlink/Windows reparse fail-closed规则。该合同不是完整
+external-data runner/identification/report orchestration，尚无runtime证据或独立R3/R4
+复审，`implementation_bound=false`、`ready=false`且所有formal/claim gates不变；
+现有prereg与v4/v6冻结文件未修改。
+
 ## 4. L5 经济随机模型：入口已建，待正式求解（R3 任务）
 
 - 目标：`min C^grid + C^op + λ^risk · CVaR_β(L)`，共享 MW 预算作硬约束（`formulation.md` §13、§14）。**已实现并进目标**（非后处理）。
@@ -69,11 +130,16 @@ RTS-GMLC CFE successor显示：单一100%小时目标可能使correct与B6同时
 - 阻塞规避：L5 作为新功能，可独立预注册与求解，绕开 repair-010 的 calibration 阻塞链（见 `blocker_register.md`）。
 - 已完成（对应任务 #4-#8）：精读 API → TDD（模型 15 例 + 入口 12 例）→ 实现模块与正式入口 → 本机窄范围测试+不变量自检（CVaR 与 §13 独立 evaluator 交叉校验、fail-closed）→ 待 `sol_reviewer` 独立审查。
 - 正式入口：`experiments/run_rq2_l5_economic_stochastic.py`（读 `configs/rq2_l5_economic_stochastic.yaml`），产出 `results/tables/rq2_l5_economic_stochastic_v1/{runs,frontier}.csv` 与 `summary.json`（内嵌 provenance 与诚实标签）。本机仅用微型合成算例验证管道与不变量，不落盘 canonical 结果；正式规模算例保持同 schema、由执行机打标签运行。
-- 实验设计：H1 用共享 vs B6 的 X 高估量（入口 `h1_overestimation_mw`）；H2 用场景外既定策略执行的违约/债务/失败率（**已建**，见下）；H3 用 λ 扫描 + ε-约束 Pareto（入口 `frontier`）。种子固定并记录（`agent.md` §10；本增量为确定性 LP，`random_seed=null`）。
+- 历史L5机制设计：入口保留共享vs B6的`h1_overestimation_mw`诊断、场景外违约/
+  债务/失败率和λ扫描；这些合成机制量不得外推为当前v6的X高估或经验H2。v6的
+  estimand、coupling和判据以冻结successor协议为准。种子固定并记录（`agent.md`
+  §10；本增量为确定性LP，`random_seed=null`）。
 
 ### 4.1 H2 场景外既定策略执行：入口已建、R3 复审 3 项已修复，待正式求解
 
-- 目标：验证 §12 的场景外命题——B6 重复承诺错误规划出的 `D^flex`，在未见 holdout 场景上按**真实共享预算**执行时，服务欠交付幅度严格大于正确共享模型（更高失败概率 + 更大期望缺口，含硬安全不可行），在同一输入/场景/安全集下（`agent.md` §9 公平性）。
+- 历史机制目标：在同一输入、场景与安全集下，检验B6规划出的`D^flex`在未见
+  holdout上按真实共享预算执行时，是否比correct产生更大服务欠交付。零差异、
+  B6不劣或未决状态均须保留，不能把目标方向写成结果。
 - 识别策略（两阶段、既定策略）：① **规划（样本内）** 在训练场景树上分别解 L5 的 correct（`enforce_joint_budget=True`）与 B6（`False`）模型，读出各自首阶段非预见性 `D^flex`（correct ≥ B6，即 H1）；② **执行（样本外）** 把 `D^flex` **钉死**（不再优化 → 非预见性），在每个未见叶上仅解 recourse，且执行物理**恒为真实共享预算** `c_grid + c_green + l_drop ≤ D^flex`（B6 的错误只在规划期，执行期物理共享）。B6 欠配的预算无法同时服务两类需求 → 缺口；硬网络削减需求超过钉死预算的叶 → recourse 不可行（诚实上报为硬安全失败）。
 - 边界与复用：recourse 复用**同一** `solve_economic_stochastic` 模型（新增 `fixed_flexibility_mw` 钉死首阶段 + `enforce_joint_budget=True`），“同一安全集”是结构性保证而非口头断言。**不**走 `stochastic_policy.py`（那是 RQ1 B3/B4 的 F/X 多阶段 107 状态 RTS-24 holdout，策略语义不同）。场景外失败只在 MW 预算维度度量；恢复债务/持续时间/事件次数时序包络与 L5 一致，暂不在范围内（`certification_blockers` 已标注）。
 - 已完成（对应任务 #14-#18）：精读 L5/service_risk API → 实现核心模块 `evaluate_economic_holdout` 与正式入口 → TDD（核心 15 例 + 入口 12 例 + 模型钉死 3 例）→ 本机窄范围测试（上一会话 70 例全过）+ 不变量自检（holdout CVaR 与 §13 独立 evaluator 交叉校验=0、真实共享预算约束、非预见性、fail-closed）→ `sol_reviewer` 独立 R3 审查完成。
@@ -128,24 +194,36 @@ RTS-GMLC CFE successor显示：单一100%小时目标可能使correct与B6同时
 - solver unresolved不转译为失败。末端统计期未完成或允许事件延续的窗口标记right-censored，保留终端debt/state但不强制清零。
 - 当前本机RTS-24 manual mechanism case：A/B下correct均提交`76.8 MW`、B6均提交`40 MW`；B6相对correct增加`36.8 MWh`期望服务缺口。50%窗口为right-censored，该比例不进入失败概率。此结果不是正式统计或经验概率。
 - generated路径现从两个split-aware trace形状抽取完整连续小时窗口并追加合成恢复尾部；reduced路径在四个显式缩放分量的完整时序向量上执行fast-forward，只缩减training且保留输入代表轨迹。三来源消融只改变training，使用同一份生成后冻结并以SHA-256绑定的holdout。
-- 首次本机RTS-24三来源机制配置全部correctness gate通过，但A/B下`h2_robust_across_sources=false`：阈值`1.0`的共享holdout未激活网络调用，manual策略在该holdout也没有B6额外欠交付，generated/reduced的correct与B6提交量约均为`12.3244 MW`。这是必须保留的失败区域，不能据此事后下调阈值制造阳性H2；该配置只证明管道闭环，不支持跨来源H2主张。
+- 当前本机首轮RTS-24三来源机制配置全部correctness gate通过，但A/B下`h2_robust_across_sources=false`：阈值`1.0`的共享holdout未激活网络调用，manual策略在该holdout也没有B6额外欠交付，generated/reduced的correct与B6提交量约均为`12.3244 MW`。这是必须保留的失败区域，不能据此事后下调阈值制造阳性H2；该配置只证明管道闭环，不支持跨来源H2主张。
 - R3独立审查：最终 **PASS**；新增连续trace、时序缩减与三来源消融的首轮REWORK四项均已闭环，复审确认period/terminal/recovery语义一致、training/holdout status分域、全请求arm可评估门和no-op计数正确。相关广泛回归135例、Ruff与manifest复核均通过。
 - R4 successor：`RQ2_temporal_successor_preregistration.md` 与对应机器YAML冻结training-only q80/q90/q95/q99、3个种子、200/60场景、A/B及三来源的17-job矩阵；阈值`1.0`只作已观察边界复现。独立R4审查最终PASS；`formal_execution_ready=false`，未运行、未打标签，仍待用户单独授权执行。
 
 ## 5. 目标期刊评估：RQ2 单独发 TSG 是否够？
 
-必须补齐（缺一即偏薄）：
+当前判断：**按现有证据还不够**。不是缺一个更大的solver run，而是两个逻辑门
+尚未通过：公开primary evidence尚未建立同一workload envelope的实际合同重叠；
+冻结70-cell结果为`R1=0, R2=0, R3=69, mixed=1, unresolved=0`，original positive
+H2 unsupported。`formal_execution_ready=false`保持不变。
 
-1. **L5 闭环 + 场景外量化**：把共享预算与 CVaR 接入统一经济目标，给出 H1/H2/H3 的定量结果（X 高估 %、场景外失败概率、Pareto 前沿），而非仅机制门。这是从“实现了约束”到“回答了 RQ”的关键跨越。
-2. **敏感性与稳健性**：λ/κ/β 扫描 + 种子重复，证明结论非单点参数产物；同时如实标注合成参数边界（不冒充工程认证）。
-3. **正面回应最近邻竞争**：在引言/相关工作中显式区分 DC04/DC11/DC12 的“统一变量天然不重复”，把 RQ2 定位为“契约分离导致的重复承诺量化”（见 `research_gap.md` §缺口边界 2）。
+投稿前至少需要完成下列之一，并在新结果前冻结设计：
 
-加分但非必需：多 POI 或 RTS-GMLC 规模上的重复承诺敏感性；与 RQ1（多阶段自适应）的一条对照，说明重复承诺风险在自适应策略下是否被放大或缓解。
+1. **经验premise路线**：先冻结具名设施/项目`U`或抽样总体`S`及覆盖规则，再获得
+   同一范围内可审计的合同—计量—workload共同映射并用独立holdout检验B6机制。
+   完整隔离证据只否定对应`U/S`内的P1；缺失单位记为unresolved，不能换总体或
+   外推成全球不存在。
+2. **共同不足路线**：承认现有公开边缘不支持R2，把论文问题改为严格hourly CFE
+   下的common-insufficiency boundary，且重新定义与预注册主estimand；不得在同一
+   已见网格上追逐R2。
+3. **条件识别路线**：将贡献限定为“给定contract-overlap hypothesis与声明的
+   coupling set，哪些风险结论可由公开边缘识别”，并完整提供Cartesian outcomes、
+   primal/dual、coupling witnesses与negative regions。sharp OT bound本身不作为
+   方法优先权主张。
 
-风险提示（审稿人最可能攻击）：
-- “统一调度模型不会重复承诺，为何研究重复？”——已在 `research_gap.md` 预答（契约与触发分离 + 时序维度冲突）。
-- “合成参数能否支撑履约风险结论？”——只能作机制与敏感性证据，论文措辞不得升级为工程/合同认证（`agent.md` §8 硬约束）。
-- “CVaR 只是后处理还是进入决策？”——L5 必须把 CVaR 接入目标，否则评估创新站不住。
+最近邻对照必须包含DC14与DC15：前者封住capacity commitment/deliverability的
+宽泛主张，后者封住capacity expansion中event-shape/recovery的宽泛主张。DC04、
+DC11、DC12仍用于解释统一物理变量为何天然避免重复计数。合成参数、derived
+network need、selected-N-1 DC结果和企业方法材料都不得外推为工程认证、市场
+发生率或具体双重签约案例。
 
 ## 6. 与硬约束的一致性检查
 
@@ -154,7 +232,10 @@ RTS-GMLC CFE successor显示：单一100%小时目标可能使correct与B6同时
 
 ## 7. 文件与结构约定（RQ2 视角）
 
-- 文献：`docs/literature/literature_matrix.csv`（新增 DC11/DC12/DC13/FLEX09）、`research_gap.md`（缺口边界 2 已强化）、`search_protocol.md`（2026-08-20 查新记录）。
+- 文献：`docs/literature/literature_matrix.csv`（学术最近邻，含DC14/DC15）、
+  `docs/literature/contract_evidence_matrix.csv`（合同/监管primary evidence及正反
+  边界）、`research_gap.md`（Problem–Method–Insight与可证伪命题）、
+  `search_protocol.md`（证据分层与检索停止规则）。
 - 规格：`formulation.md` §8/§10/§13/§14 为 RQ2 数学权威。
 - 计划：本页为 RQ2 导航；总执行步骤仍见 `docs/plan/科研项目执行步骤.md`。
 - 正式规模触发：批清单 [rq2_formal_batch.yaml](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/configs/rq2_formal_batch.yaml) + 批驱动 [run_rq2_formal_batch.py](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/experiments/run_rq2_formal_batch.py)；执行机打标签操作见 [RQ2_正式规模触发标签清单.md](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/docs/plan/RQ2_正式规模触发标签清单.md)，跨机闭环见 [科研实验闭环流程.md](file:///Users/bytedance/Workspace/Electricty-Grid/Electricity-Grid/docs/plan/科研实验闭环流程.md)。

@@ -1,0 +1,154 @@
+schema: rq2_public_baseline_robustness_successor_v1
+version: 1
+frozen_on: 2026-08-26
+status: public_checkpoint_contract_validate_only_not_executable
+
+scope:
+  purpose: versioned_public_checkpoint_and_package_contract
+  loads_external_data: false
+  complete_external_orchestration: false
+  runs_solver: false
+  runs_identification: false
+  writes_report: false
+  amends_predecessor_preregistration: false
+
+predecessor:
+  preregistration:
+    path: configs/rq2_public_baseline_robustness_preregistration_v1.yaml
+    sha256: 017708b25c3e1702c938a108af070a7047517bd128552500d3ffcac6a3ee3554
+  manifest:
+    path: configs/rq2_public_baseline_robustness_preregistration_v1.SHA256SUMS.json
+    sha256: da6d13055ccfcd03c00939ab7fa61f43e05052556211f725b4550a09d33f64c9
+  future_bindings_remain_null:
+    four_arm_planning_pairwise_package:
+      implementation_path: null
+      config_path: null
+      runner_path: null
+      output_path: null
+      ready: false
+    t1_mw_only_reference:
+      future_implementation_path: null
+      implementation_bound: false
+
+implementation_authority:
+  planning_core:
+    path: src/models/rq2_baseline_robustness.py
+    sha256: 14e935043d5bbc8116fef88c592d3c5eb6e949395e318248cbf2d97eae7ec1b5
+  replay_core:
+    path: src/scenarios/rq2_baseline_robustness.py
+    sha256: adc970ecb4f070f0079131988682d87b7f8e42a75b370116158413e099ca2331
+  package_core:
+    path: src/evaluation/rq2_baseline_robustness_package_v1.py
+    sha256: 9075751220797c86270cc5877584d2aeb5ea128afe16a54befeb7831e7033e5f
+
+frozen_scientific_authority:
+  v6_preregistration:
+    path: configs/rq2_public_data_robust_identification_preregistration_v6.yaml
+    sha256: ef25deabfcd51fbd667e48dcddcfbe4b19a2115c6d4bc40b0fc556b5c1f332f2
+  v6_manifest:
+    path: configs/rq2_public_data_robust_identification_preregistration_v6.SHA256SUMS.json
+    sha256: 07bb735df3cc5ad547c7d4741c5f69929b39a37df9b65c3c2ae004e74b08cdcf
+  pairwise_v4:
+    path: configs/rq2_public_pairwise_replay_v4.yaml
+    sha256: 4e4ea40e71742198ff9b70d527d6bae91df486c87b3a540bbbb23f6ba4f72cf3
+  identification_v4:
+    path: configs/rq2_public_identification_grid_v4.yaml
+    sha256: 1081ed0e52201323e3df7c1a5c39d0409fdcef8c2cc29c49edcd207c93ed3308
+
+frozen_design_snapshot:
+  parameter_cell_count: 15
+  block_hours: 24
+  block_splits:
+    power_training_blocks: 541
+    power_holdout_blocks: 530
+    workload_training_blocks: 34
+    workload_holdout_blocks: 34
+  representative_selection:
+    method: weighted_marginal_stress_quantile_representatives
+    power_system_representatives: 8
+    workload_representatives: 8
+    selection_uses_holdout_outcomes: false
+    full_evaluable_training_support_audit: required
+  solver:
+    name: gurobi
+    expected_package_version: 13.0.2
+    threads: 4
+    mip_relative_gap: 1.0e-6
+    feasibility_tolerance: 1.0e-6
+    optimality_tolerance: 1.0e-6
+    integer_feasibility_tolerance: 1.0e-6
+    random_seed: 0
+    time_limit_seconds: null
+    tee: false
+  arm_canonical_order:
+    - network_only_shared
+    - cfe_only_shared
+    - joint_correct_shared
+    - joint_b6_separate_planning_shared_execution
+
+checkpoint_contract:
+  resume_identity_fields:
+    - run_id
+    - successor_config_sha256
+    - authority_sha256s
+    - identity_sha256
+  planning:
+    schema: rq2_baseline_planning_checkpoint_v1
+    exact_four_arm_inventory: true
+    full_training_support_inventory: true
+    full_training_cartesian_pair_ids_and_hash: true
+    timeout_or_unknown_is_proven_infeasible: false
+    proven_infeasible_estimand_defined: false
+    pair_checkpoint_allowed_when_estimand_undefined: false
+  pair:
+    finite_schema: rq2_baseline_finite_pair_checkpoint_v1
+    E0_schema: rq2_baseline_E0_checkpoint_v1
+    finite_requires_all_four_raw_and_registered_outcomes: true
+    E0_preserves_unconditional_probability_mass: true
+    E0_has_conditional_service_metrics: false
+    unresolved_or_missing_blocks_publication: true
+    probability_tolerance: 1.0e-9
+    checkpoint_probability_matches_expected_exactly: true
+    all_cells_share_complete_cartesian_inventory: true
+    grid_state_fixed_by_power_block: true
+    explicit_right_censor_and_terminal_boundary_fields: true
+    registered_layer_rebuilt_exactly_from_raw_v1_semantics: true
+  persistence:
+    idempotent_checkpoint_writes: true
+    checkpoint_drift_rejected: true
+    partial_maximum_pairs_publishes_final_package: false
+    final_target_overwrite_allowed: false
+    hidden_staging_and_exact_sha256_inventory: true
+    provenance_exact_across_checkpoints_and_package: true
+    symlink_or_windows_reparse_component_allowed: false
+
+package_contract:
+  required_schemas:
+    - four_arm_training_status
+    - four_arm_minimum_flexibility
+    - four_arm_pairwise_outcomes
+    - E0_outcomes
+    - checkpoint_inventory
+    - provenance
+  raw_and_registered_risk_layers_separate: true
+  exact_recursive_inventory_required: true
+  manifest_schema: rq2_baseline_package_manifest_v1
+  manifest_contains_itself: false
+
+validation_contract:
+  validator_path: experiments/validate_rq2_public_baseline_robustness_successor_v1.py
+  test_path: tests/test_rq2_public_baseline_robustness_successor_v1.py
+  manifest_path: configs/rq2_public_baseline_robustness_successor_v1.SHA256SUMS.json
+  validator_imports_solver_or_package_core: false
+  validator_writes_files: false
+
+gates:
+  implementation_bound: false
+  complete_external_orchestration: false
+  ready: false
+  independent_review: false
+  independent_R3_review_passed: false
+  independent_R4_review_passed: false
+  user_authorized: false
+  formal_result: false
+  claim: false

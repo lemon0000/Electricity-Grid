@@ -1,0 +1,99 @@
+schema: rq2_public_solver_pilot_config_v1
+
+implementation:
+  runner_path: experiments/run_rq2_public_solver_pilot_v1.py
+  runner_sha256: 094f93751c92d95f379ee34f7a236bb7a86a8cb3d81f359d96c5590bcb0cf200
+
+bundle:
+  handoff_path: configs/rq2_public_executor_handoff_v1.yaml
+  handoff_sha256: 52279c15ad4d27516821956b536886081987957d88dcd7fef3d409592694c289
+
+scope:
+  evidence_level: nonformal_cross_solver_pilot
+  formal_grid_execution: false
+  formal_pairwise_execution: false
+  formal_identification_execution: false
+  source_outcomes_observed: true
+  pilot_results_observed: false
+
+input:
+  power_system_blocks_package: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4
+  power_system_blocks_manifest_sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+  power_system_blocks_schema: rts_gmlc_public_power_system_blocks_v4
+  grid_source_path: data/raw/rts_gmlc/v0.2.3/upstream
+  grid_source_manifest_sha256: 95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914
+  base_mva: 100.0
+
+model:
+  dc_bus: 108
+  dc_reference_demand_mw: 250.0
+  tolerance_mw: 1.0e-6
+
+pilot_blocks:
+  - block_id: holdout_s20260822_0013
+    role: ordinary_no_outage
+    expected_exogenous_source_hours: []
+  - block_id: holdout_s20260822_0091
+    role: congested_finite_outage
+    expected_exogenous_source_hours: []
+  - block_id: holdout_s20260822_0089
+    role: generator_outage_anomaly
+    expected_exogenous_source_hours: [6598]
+  - block_id: holdout_s20260822_0150
+    role: branch_outage_anomaly
+    expected_exogenous_source_hours: [8057, 8058, 8059]
+
+solvers:
+  highs:
+    name: highs
+    expected_package_version: 1.15.1
+    threads: 4
+    mip_relative_gap: 1.0e-6
+    feasibility_tolerance: 1.0e-6
+    optimality_tolerance: 1.0e-6
+    integer_feasibility_tolerance: 1.0e-6
+    random_seed: 0
+    time_limit_seconds: null
+    tee: false
+  gurobi:
+    name: gurobi
+    expected_package_version: 13.0.2
+    threads: 4
+    mip_relative_gap: 1.0e-6
+    feasibility_tolerance: 1.0e-6
+    optimality_tolerance: 1.0e-6
+    integer_feasibility_tolerance: 1.0e-6
+    random_seed: 0
+    time_limit_seconds: null
+    tee: false
+
+execution:
+  pilot_execution_authorized: true
+  repetitions: 2
+  execution_order:
+    - highs_r1
+    - gurobi_r1
+    - gurobi_r2
+    - highs_r2
+  forbidden_hostnames: [GQPD263XH9]
+  required_environment_value: EXECUTION_MACHINE_CONFIRMED
+
+acceptance:
+  require_all_baselines_accepted: true
+  require_all_hours_resolved_for_pipeline: true
+  require_identical_hourly_state_classification: true
+  require_expected_E0_hour_sets: true
+  require_identical_model_scale: true
+  maximum_baseline_objective_difference_usd: 1.0e-4
+  maximum_finite_grid_need_difference_mw: 1.0e-5
+  maximum_constraint_violation: 1.0e-6
+  timeout_is_infeasibility_evidence: false
+  unresolved_is_infeasibility_evidence: false
+  solver_selection_rule: >
+    Gurobi is eligible only if every non-runtime acceptance check passes.
+    Wall time is reported but never overrides a status, bound, residual,
+    model-scale, finite-grid-need, or E0-classification mismatch.
+
+output:
+  schema: rq2_public_solver_pilot_v1
+  directory: results/tables/rq2_public_solver_pilot_v1

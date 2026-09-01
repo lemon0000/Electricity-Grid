@@ -1,8 +1,50 @@
 # Electricity-Grid
 
-*Last updated: 2026-08-25*
+*Last updated: 2026-09-01*
 
 Research code for staged data-center interconnection and grid expansion.
+
+当前 Vnext two-block evidence runner 为 isolated v8
+`NONFORMAL_COMMITTED_SUCCESS / POST_RESULT_INDEPENDENT_REVIEW_PASS`。外置 pre-run execution-review receipt
+SHA-256 为 `04cd6b421ebeef07e00c1d8ab08bb15d721110ff454c32e7898eca2eff6b486e`；独立 post-result PASS
+已物化为外部 machine receipt，SHA-256 为
+`28e546b8f5f3bc8c8402c86ec723ec9e35da041ba74676c9adb59cd338980ca6`，其中明确
+`cryptographic_reviewer_signature_present=false`。唯一一次 fixed 0008→0009
+运行使用 session `9d16ff4da3bab583876d6fbf5d09c0dde4bc5b3bc57334b891cfe38038044f62`，两个 fresh worker
+PID/create-time 分别为 `30404/13432731802848210300` 与 `8600/13432731839688457900`，0009 的 predecessor
+精确等于 0008 record digest。public-only readback 将 publication 分类为 `committed_success`：result/PUBLISHED
+typed-tree file SHA-256 分别为 `03528f052f127d819dc07edff860efd7652e5b28da34cfac6be245ba0e75331c`、
+`f01ec3391a20d692aa8974c08da8f1af81dd4b79a07e1aff9cb0290fea4f8920`；Lamport attestation payload/signature
+SHA-256 分别为 `158b14130823a80acfa643c2df7ab7611ad518ed7c1647864501c3ab719eecda`、
+`0a595309844822ba529db6e1a5c7d8ddf2f47ef60fc7a130dd8014e01b347c7f`。0008/0009 resource journals 均为
+`child_exited`、sample/expected=`6/6` 与 `39/39`、exact 5 s gaps、0 lateness、authority mapping match；两者实际
+HiGHS runtime 均为 1.15.1/4 threads。fresh/raw-consumed seed 均不存在，只保留 SHA-256
+`8e5f25e1b8a3aecb4d2a32a2a6d55aea65ca178425e6d47e9cf9fec35d378aa2` 的不可复用无 seed tombstone。
+block-zero formal activation successor v1 的独立 review 为 `REWORK`：后台 controller 在 Popen 后没有 exact
+PID/create-time 与 authority-accepted handshake，immediate exit 仍可能被报告为 spawned。machine REWORK receipt
+SHA-256 为 `bb398d74c67fdfce41d7fcc64e58820a5f8ad6f16d3ba1ff5c9e1a7d529b6a14`；v1 outer
+`b492e4babe182d38ad6be865df424d1cce59cef57c2c6a85b896cffddfad0b87` 及全部 v1 bytes 保持不变。
+
+新的 versioned successor v2 使用四阶段启动门：controller 验证 dynamic/consumed/cwd-env-Python/mapping/clean
+roots 后 atomic 写 handshake 并等待 bootstrap ACK；随后写 READY 并继续等待 science release。bootstrap 只有独立
+stable readback、验证同一 PID/create-time 仍存活后才发布 release 和 `formal_controller_spawned=true`。pre-handshake
+exit、timeout、PID reuse 或 tamper 均原子写 `launch_incomplete`，one-shot 保持 consumed、no retry/resume，且不推断
+infeasibility。v2 inner/outer SHA-256 为
+`ef1812d0b48426770e7137f668fbb64e6f4a7fe04f220e9d726fc10c37cc1e0d`、
+`8c5db5e265141378b537e9e3096198c0f86221a324423a646d6645d107b56764`；focused `7 passed`，related current-state
+`81 passed, 3 deselected`，Ruff/compile/两个 validate-only 入口通过且 0 solver/0 formal-root writes。v2 activation
+PASS absent、v2 lease fresh/unconsumed、四个 v3 formal roots absent；当前仅
+`READY_FOR_INDEPENDENT_FORMAL_ACTIVATION_REVIEW`。formal/result/claim/security gates 仍为 false。
+
+完整账目按实际时间顺序为：writer raw `479 passed, 13 failed`；writer first 13-deselect
+`478 passed, 1 failed, 13 deselected`（V4 fast 是唯一红点）；writer isolated V4 `1 passed`；writer second
+same command `479 passed, 13 deselected`；reviewer same command `478 passed, 1 failed, 13 deselected`；
+reviewer isolated V4 连续两次失败，且 exact argv/stdout/journal/state/returncode 缺失；current 14-deselect
+`478 passed, 14 deselected in 348.20s`。不修改 V4 的外部只读 runtime instrumentation 本次得到
+`child_exited`、sample/expected `1/1`、returncode 0，未复现失败；journal SHA-256 为
+`0d62844b8e02f763018b85ea200c168492bd8526fe6042a9016a7c845dfb1555`，非权威证据文件 SHA-256 为
+`e2138fd2038a6d330149e05e01507618f646bd5a9c5f4d60e026507242f16111`。该证据不建立失败根因，也不是
+V8 finding；V4 保持 sealed/superseded。V7/V8 fast probes 与全部 66 个 V8 tests 仍在 current-state broad 中保留。
 
 ## 论文主线聚焦（RQ2）
 
@@ -51,14 +93,15 @@ uses one common coupling, and fixed-seed marginal block bootstrap intervals are
 reported separately from sharp identification bounds. The development host is
 blocked from formal execution; the executor must first pass the frozen
 HiGHS/Gurobi four-block pilot. See
-`docs/plan/RQ2_公开数据鲁棒识别路线图_v6.md` and
-`docs/plan/RQ2_执行机交接_v1.md`.
+`docs/plan/RQ2_公开数据鲁棒识别路线图_v6.md` and the Windows execution
+successor `docs/plan/RQ2_执行机交接_v2.md`.
 
 ### RQ2 v6 executor start
 
 The execution machine should check out the `experiment` branch and follow
-[`RQ2_执行机交接_v1.md`](docs/plan/RQ2_执行机交接_v1.md). The first authorized
-stage ends after packaging the four-block solver pilot:
+[`RQ2_执行机交接_v2.md`](docs/plan/RQ2_执行机交接_v2.md). The first authorized
+stage ends after packaging the four-block solver pilot. For a manual diagnostic,
+the frozen commands remain:
 
 ```bash
 conda env create -f environments/rq2_executor_v1.yml
@@ -70,6 +113,15 @@ conda run -n rq2-executor python scripts/rq2_public_executor.py package-pilot
 ```
 
 Return the pilot package for review before activating the grid stage.
+The `run-*` automation uses the whitelist-only `rq2-public-pilot` kind in
+`scripts/run_experiment.ps1`, an explicit absolute `RQ2_EXECUTOR_PYTHON_EXE`,
+and an independent `RQ2_PILOT_TIMEOUT_SECONDS` of at least 21600 seconds. The
+runner safely canonicalizes the frozen executor's native-separator package receipt
+before exact registered-path comparison. The reviewed authority chain currently has
+outer SHA-256 `32bde980733ef80b04571d1fe328c893ff78b4ecb1aee2150c318970707e4942`
+and v2 bundle SHA-256
+`10129f473a521f37ae0c45bf89a4904c77156c92dcc55837adf91adb8d58e37e`.
+The branch-head default remains `pytest-smoke`; no pilot has been run yet.
 
 ## L0: RTS-24 DC-OPF and N-1
 

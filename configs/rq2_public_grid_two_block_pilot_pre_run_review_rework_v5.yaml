@@ -1,0 +1,64 @@
+schema: rq2_public_grid_two_block_pilot_pre_run_review_rework_v5
+version: 5
+reviewed_on: "2026-08-31"
+reviewer_role: independent_sol_reviewer
+verdict: REWORK
+
+reviewed_candidate:
+  version: 5
+  status: postcommit_remediation_candidate_v5_execution_closed
+  inner_manifest_path: configs/rq2_public_grid_two_block_pilot_candidate_v5.SHA256SUMS.json
+  inner_manifest_sha256: 0d81d1ebe376969bac02d17aec9f4afa4bd077a9c71cdd906ae0538cb0793818
+  outer_manifest_path: configs/rq2_public_grid_two_block_pilot_candidate_v5.OUTER.SHA256SUMS.json
+  outer_manifest_sha256: 1be9ddd051da3ae71f7529fadf02745d5e3e58ee84649d0b557e0f14e9e65fac
+  runner_path: experiments/run_rq2_public_grid_two_block_pilot_candidate_v5.py
+  runner_sha256: 41cdb2efab3ec96386be00c88f18ee5fa42233ddd3a88c78c81b3cc981bc9d48
+  validator_path: experiments/validate_rq2_public_grid_two_block_pilot_candidate_v5.py
+  validator_sha256: 605698b976b892dfb64002a1c44c5979cc45106a86cb05ec7958a7c3d955add6
+  tests_path: tests/test_rq2_public_grid_two_block_pilot_candidate_v5.py
+  tests_sha256: aca63aa0a2c901d6e0ed388b852321e5d1c9e8018b1d274cbc8e5a9f22a07316
+
+review_reproduction:
+  test_node: tests/test_rq2_public_grid_two_block_pilot_candidate_v6.py::test_v5_broken_success_link_is_misreported_as_clean_absent
+  command: D:/conda_envs/rq2-executor-v2-audit/python.exe -B -m pytest tests/test_rq2_public_grid_two_block_pilot_candidate_v6.py::test_v5_broken_success_link_is_misreported_as_clean_absent -q
+  observed_exit_code: 0
+  observed_test_result: 1_passed
+  host_platform: windows
+  reproduced_facts:
+    native_junction_created: true
+    junction_backing_removed: true
+    os_path_lexists_success_path: true
+    v5_path_exists_success_path: false
+    v5_classification: honest_incomplete
+    v5_outcome_success_commit_exists: false
+
+reviewer_finding:
+  id: presence_path_recovery_gate_erases_broken_alias_evidence
+  finding: >-
+    Candidate v5 uses Path.exists() in reconciliation and outcome fields. A broken
+    Windows junction remains a path appearance under os.path.lexists/lstat but is
+    classified as a cleanly absent success commit, so recovery can report honest
+    incomplete instead of fail-closed commit_indeterminate.
+  required_rule: >-
+    Before any resolve, inspect success, terminal, and every ancestor with
+    os.path.lexists and lstat, including Windows reparse and mount detection.
+    Only a cleanly absent path chain may be honest_incomplete; every alias,
+    reparse, broken-link, inaccessible, or nonordinary appearance must be
+    commit_indeterminate, while committed_success requires an exact ordinary
+    success directory and a completely clean-absent terminal chain.
+
+effect:
+  candidate_v5_bytes_immutable: true
+  candidate_v5_execution_authorized: false
+  candidate_v6_remediation_authorized: true
+  candidate_v6_execution_authorized: false
+  independent_pre_run_review_passed: false
+  execution_successor_present: false
+  two_block_pilot_execution_ready: false
+  two_block_pilot_executed: false
+  formal_execution_ready: false
+  user_formal_run_authorized: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false
+  no_execution_authority: true

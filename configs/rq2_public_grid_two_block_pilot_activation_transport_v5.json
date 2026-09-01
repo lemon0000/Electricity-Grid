@@ -1,0 +1,95 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_activation_transport_v5",
+  "version": 5,
+  "frozen_on": "2026-08-31",
+  "status": "activation_transport_v5_closed_candidate_pending_independent_review",
+  "predecessor_authority": {
+    "activation_v4_outer_path": "configs/rq2_public_grid_two_block_pilot_activation_transport_v4.OUTER.SHA256SUMS.json",
+    "activation_v4_outer_sha256": "9ba787c2d3b1ae3db64c675be2409a2a5d1cf2b2fe6b703133885c27efa5d16d",
+    "activation_v4_escalate_receipt_path": "configs/rq2_public_grid_two_block_pilot_activation_transport_review_escalate_v4.json",
+    "activation_v4_escalate_receipt_sha256": "af427494ccaade93428bf45f8409acb7ce33f50a7922e92ce14f326d42d0cd5f",
+    "activation_v4_controller_path": "experiments/run_rq2_public_grid_two_block_pilot_activation_transport_v4.py",
+    "activation_v4_controller_sha256": "04bfb1ac4deb51e1708c1eb668317b26e4cf2f3af68c35f18b96fb79f3af78a3",
+    "user_authorization_path": "configs/rq2_public_grid_two_block_pilot_user_authorization_v3.yaml",
+    "user_authorization_sha256": "f696e76a1fedba8335af62e8914b12bb9385606525cf8170d0b11ffdb3900e52",
+    "authorization_interpretation": "conditional_future_authority_only_after_all_review_wrapper_dispatch_pilot_postreview_and_activation_gates_pass"
+  },
+  "candidate_identity": {
+    "controller_module": "experiments.run_rq2_public_grid_two_block_pilot_activation_transport_v5",
+    "controller_path": "experiments/run_rq2_public_grid_two_block_pilot_activation_transport_v5.py",
+    "controller_sha256": "ff8868dea108e1d65886b916dc18a132c93f3532175d8a7cc8670c98fa25d5e0",
+    "worker_module": "experiments.worker_rq2_public_grid_two_block_pilot_activation_transport_v5",
+    "worker_path": "experiments/worker_rq2_public_grid_two_block_pilot_activation_transport_v5.py",
+    "worker_sha256": "b46a934fee417971d548d1e229a0c1d2ddf6dff58a8c42310941ed1ad221b4c4",
+    "production_literal_hard_close_inherited_from_sealed_v4": true,
+    "production_rejects_before_config_pipe_popen_or_science_import": true,
+    "review_only_preloader_boundary_status": "NON_ACCEPTED_PRELOADER_BOUNDARY"
+  },
+  "resource_contract": {
+    "frozen_authority_path": "configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_v1.yaml",
+    "frozen_authority_sha256": "e1306a375bba5d19d687cb2728a981528662064226b4661a0b74f894b647f3bd",
+    "external_watchdog_seconds_per_block": 21600.0,
+    "resource_sample_interval_seconds": 5.0,
+    "child_private_commit_limit_gib": 8.0,
+    "child_private_commit_stop_comparison": "greater_than_or_equal",
+    "minimum_system_commit_available_gib": 2.0,
+    "system_commit_available_stop_comparison": "less_than_or_equal",
+    "preflight_minimum_available_commit_gib": 10.0,
+    "preflight_replaces_runtime_reserve_monitor": false,
+    "same_sample_observes_private_and_system_commit": true,
+    "sampling_error": "honest_incomplete",
+    "watchdog": "honest_incomplete",
+    "resource_stop": "honest_incomplete",
+    "mathematical_infeasibility_inferred": false,
+    "termination_scope": "exact_controller_owned_pid_and_creation_time_only"
+  },
+  "preserved_v4_invariants": {
+    "scientific_dependency_closure_and_zero_solver_seam": true,
+    "RLock_atomic_attempt_consumption": true,
+    "single_active_attempt": true,
+    "no_retry": true,
+    "production_current_candidate_reachable": false,
+    "failure_never_infeasibility": true
+  },
+  "future_wrapper_successor_contract": {
+    "new_versioned_controller_and_worker_required": true,
+    "must_bind_exact_v5_outer_and_independent_PASS": true,
+    "must_use_v5_dual_resource_monitor": true,
+    "must_preserve_v4_atomic_no_retry": true,
+    "must_preserve_v4_science_closure": true,
+    "must_preserve_honest_incomplete_semantics": true,
+    "successor_tests_and_independent_review_cannot_omit_these_fields": true,
+    "current_candidate_can_be_opened_in_place": false,
+    "execution_authorized": false
+  },
+  "formal_protection": {
+    "formal_runner_path": "experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py",
+    "formal_runner_sha256": "39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8",
+    "activated_config_path": "results/execution_configs/rq2_public_successor_v2/grid.yaml",
+    "activated_config_sha256": "b8f7a71f8aaf8150c8515089e90e1946732d4476e0855d8677523577bc17f416",
+    "checkpoint_directory": "results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_gurobi",
+    "checkpoint_count": 9,
+    "protected_roots": [
+      "results/tables/rq2_public_grid_two_block_pilot_activation_transport_v5",
+      "results/workers/rq2_public_grid_two_block_pilot_activation_transport_v5",
+      "results/logs/rq2_public_grid_two_block_pilot_activation_transport_v5",
+      "data/processed/model_inputs/rq2_public_grid_two_block_pilot_activation_transport_v5",
+      "results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_v1"
+    ]
+  },
+  "gates": {
+    "remediation_user_authorized": true,
+    "candidate_implementation_ready": true,
+    "activation_v5_independent_review_passed": false,
+    "execution_wrapper_present": false,
+    "wrapper_independent_review_passed": false,
+    "dispatch_authorization_present": false,
+    "production_dispatch_permitted": false,
+    "pilot_executed": false,
+    "formal_execution_ready": false,
+    "user_formal_run_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

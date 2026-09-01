@@ -1,0 +1,42 @@
+schema: rq2_public_grid_solver_recovery_review_rework_v1
+version: 1
+reviewed_on: "2026-08-30"
+reviewer_role: R4_model_and_execution_audit
+verdict: REWORK
+
+reviewed_candidate:
+  preregistration_path: configs/rq2_public_grid_solver_recovery_preregistration_v1.yaml
+  preregistration_sha256: 8e520e9b8e27bd4acd53cb90b63e404e8c913f156108de83d3742edea594d591
+  template_path: configs/rts_gmlc_public_grid_need_dispatch_v4_highs_recovery_v1.yaml
+  template_sha256: 56d36eab1bf8a966b87b9dcb1848a9f41b230d394a05a775fe9b45be785e96e3
+  formal_runner_path: experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py
+  formal_runner_sha256: 39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8
+
+decisive_findings:
+  fresh_child_acceptance_scope: normal_baseline_only
+  formal_v1_execution_scope: all_1071_blocks_in_one_python_process
+  scope_extrapolation_valid: false
+  full_process_block_pilot_completed: false
+  named_outage_semantic_comparison_completed: false
+  same_process_formal_route_supported: false
+
+required_successor_gates:
+  - one_fresh_python_worker_per_complete_block
+  - parent_process_solver_calls_equal_zero
+  - worker_cannot_write_formal_checkpoint_or_output
+  - parent_validates_complete_process_and_scientific_evidence_before_atomic_publish
+  - resume_accepts_only_a_contiguous_new_schema_prefix_from_block_zero
+  - timeout_resource_stop_failure_and_unresolved_never_publish_completed_checkpoint
+  - timeout_resource_stop_failure_and_unresolved_never_imply_infeasibility
+  - full_process_block_pilot_on_0008_and_0009
+  - named_outage_output_comparison_against_frozen_Gurobi_0008_checkpoint
+  - independent_R4_implementation_PASS_and_post_result_PASS_before_activation
+
+effect:
+  v1_files_modified: false
+  v1_activation_allowed: false
+  v1_formal_execution_ready: false
+  successor_required: true
+  formal_result_exists: false
+  paper_claim: false
+  security_certified: false

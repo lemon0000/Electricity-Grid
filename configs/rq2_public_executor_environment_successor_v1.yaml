@@ -1,0 +1,57 @@
+schema: rq2_public_executor_environment_successor_v1
+status: implementation_only_environment_rebuild_contract_not_pilot_activation
+
+predecessor:
+  immutable: true
+  files:
+    environments/rq2_executor_v1.yml: 00ab8f2438993385b4d7f937603b0cbe70623588078728389de9a93b9ebc4bb1
+    requirements.txt: 32d801524eb4ecb69ce7af654fbef2318344462e3ebd92f4d169ca5096cf4be2
+    configs/rq2_public_executor_handoff_v2.yaml: e362b635dcd22c54162683d04686fd907681976c8c933e983584e19a175c34f0
+    configs/rq2_public_executor_bundle_v2.SHA256SUMS.json: 10129f473a521f37ae0c45bf89a4904c77156c92dcc55837adf91adb8d58e37e
+    configs/rq2_public_executor_bundle_v2.OUTER.SHA256SUMS.json: 32bde980733ef80b04571d1fe328c893ff78b4ecb1aee2150c318970707e4942
+    scripts/rq2_public_executor.py: 8fb1f8a57f2491f8c24f4fb91ebafdf4e3470b418bddc8f0e297c76a8ce8bf42
+
+observed_failure:
+  fresh_v1_environment_entrypoint_import_failed: true
+  missing_package_first_observed: pypower
+  additional_eager_import_dependency: osqp
+  solver_calls_before_failure: 0
+  result_files_written_before_failure: 0
+  mathematical_infeasibility_evidence: false
+
+successor:
+  environment_spec_path: environments/rq2_executor_v2.yml
+  environment_spec_sha256: 310b5c2f1261678269cf2e1424255f48582975aec7e492fe029f45cd5e73bdf6
+  manifest_path: configs/rq2_public_executor_environment_successor_v1.SHA256SUMS.json
+  validator_path: experiments/validate_rq2_public_executor_environment_successor_v1.py
+  validator_sha256: 405373122cb2299d0930ac552d5ba0dfad08aab864902234bbd43447fe847abc
+  entrypoint_path: scripts/rq2_public_executor.py
+  entrypoint_sha256: 8fb1f8a57f2491f8c24f4fb91ebafdf4e3470b418bddc8f0e297c76a8ce8bf42
+  required_python_version: 3.11.15
+  required_packages:
+    numpy: 1.26.4
+    scipy: 1.17.0
+    pyomo: 6.10.1
+    highspy: 1.15.1
+    pyyaml: 6.0.3
+    pytest: 9.0.2
+    gurobipy: 13.0.2
+    osqp: 1.0.5
+    pypower: 5.1.19
+    ruff: 0.16.4
+  runtime_validation_requires_entrypoint_import: true
+  runtime_validation_solver_calls: 0
+  runtime_validation_result_writes: 0
+  scientific_design_changed: false
+  solver_or_algorithm_changed: false
+  threads_seed_or_thresholds_changed: false
+  pilot_block_changed: false
+
+gates:
+  environment_successor_runtime_validated: false
+  runtime_receipt_published: false
+  pilot_executed: false
+  cross_solver_confirmation_completed: false
+  formal_execution_ready: false
+  formal_result_exists: false
+  security_certified: false

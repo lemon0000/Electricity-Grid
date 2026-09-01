@@ -1,0 +1,109 @@
+schema: rq2_public_grid_solver_recovery_preregistration_v1
+version: 1
+status: frozen_candidate_execution_closed
+registered_on: "2026-08-30"
+
+user_authority:
+  explicit_authorization_observed: true
+  original_authorization_record: "我给你完整授权，把所有东西都配置好然后开始实验吧"
+  continuation_record: "那你修好再结束啊"
+  authorized_scope: repair_grid_stage_then_continue_formal_rq2_pipeline
+
+predecessor:
+  preregistration_path: configs/rq2_public_data_robust_identification_preregistration_v6.yaml
+  preregistration_sha256: ef25deabfcd51fbd667e48dcddcfbe4b19a2115c6d4bc40b0fc556b5c1f332f2
+  activation_path: configs/rq2_public_grid_need_activation_v2.yaml
+  activation_sha256: 47d67114cde70638360d21d58a1ac0c1ee49cf34ebc4b709b60e9600fa207b0c
+  activated_config_path: results/execution_configs/rq2_public_successor_v2/grid.yaml
+  activated_config_sha256: b8f7a71f8aaf8150c8515089e90e1946732d4476e0855d8677523577bc17f416
+  runner_path: experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py
+  runner_sha256: 39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8
+  checkpoint_directory: results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_gurobi
+  completed_checkpoint_count: 9
+  checkpoint_sha256:
+    holdout_s20260822_0000.json: f68f7bca3fbf66c7bf90840280502cb2eda69dd6a01d8258b5929c5e01e0f6b8
+    holdout_s20260822_0001.json: 180762530c8450c0eb914b3fee5e8597563200d701dddbd64b5c48180b2904da
+    holdout_s20260822_0002.json: 9a9af3c77af3de2a1396f2004352b97ebdbcbe77f2706c9851427e7f389e70ec
+    holdout_s20260822_0003.json: 8d9d355f34865d72723d0418330f149d2a99cd0cb15e95f7eed08554da9fe260
+    holdout_s20260822_0004.json: f63a9e729c751c23bd61af7dae1f0bdd9bbaec542abd13eade9e09d083d956fc
+    holdout_s20260822_0005.json: f2fc2a34163b8aa18583c0554b477e68f149c1ee95cb6d17b6418715d59af7f8
+    holdout_s20260822_0006.json: 51b642d9ccdd3afa7e7ba8fecef6f1b16eef71f0ac4434e1ee81694c65512b38
+    holdout_s20260822_0007.json: ecad02d8810b1c80c13fe4b69c931aff8e7669c643f5343c0dc3b584d0b81785
+    holdout_s20260822_0008.json: f9b954669832bbfd467a0f6a3987718ce944a9414d27b3a0b5eb9171d66df8e6
+  output_directory: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_gurobi
+  output_exists: false
+  checkpoint_reuse_allowed: false
+
+root_cause_evidence:
+  classification: gurobi_specific_branch_and_bound_tree_growth_with_virtual_memory_pressure
+  checkpoint_logic_corrupted: false
+  mathematical_infeasibility_inferred: false
+  default_gurobi_result_manifest_path: results/tables/rq2_grid_need_gurobi_0009_diagnostic_v1/SHA256SUMS.json
+  default_gurobi_result_manifest_sha256: 055c5a1e68a007d0d6f802b0be5fcf4d9dcb0bd84207d251b870b41eba784e22
+  default_gurobi_summary_path: results/tables/rq2_grid_need_gurobi_0009_diagnostic_v1/summary.json
+  default_gurobi_summary_sha256: 902eb77ad1339268617787f6e4a1b46c30d4968ec8baae5b5c78db5470d9e395
+  bound_focus_result_manifest_path: results/tables/rq2_grid_need_gurobi_0009_bound_focus_acceptance_v1/SHA256SUMS.json
+  bound_focus_result_manifest_sha256: 950d11d35a4743cd73ff80ce23b60d9c8dad452b36e43adc82a426ee7a31b0a9
+  bound_focus_summary_path: results/tables/rq2_grid_need_gurobi_0009_bound_focus_acceptance_v1/summary.json
+  bound_focus_summary_sha256: 4e764035d250cb6912bc8de77b5db6a49c73095869f8bab8950dbbf4b9a65fbc
+  mitigation_result: memory_reduced_but_formal_gap_acceptance_not_reached
+
+successor_acceptance_evidence:
+  result_directory: results/tables/rq2_grid_need_highs_route_acceptance_v1
+  result_manifest_path: results/tables/rq2_grid_need_highs_route_acceptance_v1/SHA256SUMS.json
+  result_manifest_sha256: b646aff62498d37015d1305b8fd16b25a621cb98880cd74b53de362a917d8346
+  summary_path: results/tables/rq2_grid_need_highs_route_acceptance_v1/summary.json
+  summary_sha256: 294b48ea20e67de5c0be62700bf4658b3573fe03cfc2ebd38124e48769c3b527
+  diagnostic_runner_path: experiments/diagnose_rq2_grid_need_gurobi_block.py
+  diagnostic_runner_sha256: b0433059f0194a5617af81f73a99c08ad9f6363fa7bf30b346afd1a8abcd2517
+  accepted_blocks: [holdout_s20260822_0008, holdout_s20260822_0009]
+  target_block: holdout_s20260822_0009
+  formal_artifacts_unchanged: true
+
+successor:
+  template_path: configs/rts_gmlc_public_grid_need_dispatch_v4_highs_recovery_v1.yaml
+  template_sha256: 56d36eab1bf8a966b87b9dcb1848a9f41b230d394a05a775fe9b45be785e96e3
+  activated_config_path: results/execution_configs/rq2_public_grid_highs_recovery_v1/grid.yaml
+  activation_record_path: results/execution_configs/rq2_public_grid_highs_recovery_v1/grid.activation.json
+  checkpoint_directory: results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_highs_recovery_v1
+  output_directory: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_highs_recovery_v1
+  expected_block_count: 1071
+  starts_from_block_zero: true
+  predecessor_gurobi_checkpoint_reuse_allowed: false
+  predecessor_highs_checkpoint_reuse_allowed: false
+  scientific_change:
+    solver_name: [gurobi, highs]
+    expected_package_version: [13.0.2, 1.15.1]
+  observability_change:
+    tee: [false, true]
+  unchanged_solver_parameters:
+    threads: 4
+    mip_relative_gap: 1.0e-6
+    feasibility_tolerance: 1.0e-6
+    optimality_tolerance: 1.0e-6
+    integer_feasibility_tolerance: 1.0e-6
+    random_seed: 0
+    time_limit_seconds: null
+    tolerance_mw: 1.0e-6
+
+review:
+  independent_R4_review_required: true
+  receipt_path: configs/rq2_public_grid_solver_recovery_review_pass_v1.yaml
+  verdict: pending
+
+execution:
+  candidate_validation_only: true
+  formal_execution_ready: false
+  independent_R4_review_passed: false
+  user_formal_run_authorized: true
+  require_all_blocks_resolved: true
+
+claims:
+  formal_result_exists: false
+  checkpoint_0009_fixed_in_gurobi: false
+  successor_route_accepted_for_formal_execution: false
+  mathematical_infeasibility: false
+  full_N_minus_one: false
+  AC_security: false
+  security_certified: false
+  paper_claim: false

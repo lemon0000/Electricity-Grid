@@ -1,0 +1,61 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_pre_run_review_pass_v7",
+  "version": 7,
+  "reviewed_on": "2026-08-31",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "PASS",
+  "review_scope": "rq2_public_grid_two_block_pilot_candidate_v7_final_bundle",
+  "reviewed_artifacts": {
+    "configs/rq2_public_grid_two_block_pilot_candidate_v7.yaml": "9a5f1f342e4c4982b1b7bcdf13e71ed204cb2319fc2c29b5a49a7d4fdab8da17",
+    "configs/rq2_public_grid_two_block_pilot_pre_run_review_escalation_v6.yaml": "c26afa1ddf77c98e5048609bc6cf17e30231e6417c8208069acce42a803754bd",
+    "experiments/run_rq2_public_grid_two_block_pilot_candidate_v7.py": "165b3ef4b1ef4f894b2d1740948ee92033776d547d90b74e02855820227ab105",
+    "experiments/validate_rq2_public_grid_two_block_pilot_candidate_v7.py": "d84a9ba2919ff8ed59aa42c67e3f6f2f8a58c064007e9d755405217735cb0c92",
+    "tests/test_rq2_public_grid_two_block_pilot_candidate_v7.py": "052a2d11757656398538a0ab705a9abebf7fed165edb557b869d6f8adaced99d",
+    "configs/rq2_public_grid_two_block_pilot_candidate_v7.SHA256SUMS.json": "06ad8f34bbe5e9f52755431506e495a670e740092636305b8c12f1f495c6a976",
+    "configs/rq2_public_grid_two_block_pilot_candidate_v7.OUTER.SHA256SUMS.json": "101c0c1399505c9ddf9f1613afc3981139aedf85645a6e8797cc86d217faed35"
+  },
+  "review_conclusion": {
+    "blocker_findings": [],
+    "major_findings": [],
+    "minor_findings": [],
+    "publication_presence_snapshot_contract_passed": true,
+    "production_and_recovery_truth_table_passed": true,
+    "final_snapshot_full_revalidation_passed": true,
+    "scientific_transport_ledger_postcommit_semantics_unchanged": true
+  },
+  "verification_evidence": {
+    "focused_tests": "40 passed",
+    "v1_through_v7_related_tests": "197 passed",
+    "ruff_passed": true,
+    "canonical_validator_passed": true,
+    "runner_validate_only_passed": true,
+    "worker_processes_started": 0,
+    "scientific_loader_calls": 0,
+    "solver_calls": 0,
+    "result_files_written": 0,
+    "formal_writes": 0,
+    "v7_bundle_live_members": "5/5",
+    "v7_roots_clean_absent": true,
+    "related_process_count": 0,
+    "formal_runner_sha256": "39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8",
+    "activated_formal_config_sha256": "b8f7a71f8aaf8150c8515089e90e1946732d4476e0855d8677523577bc17f416",
+    "formal_checkpoint_count": 9,
+    "formal_checkpoint_hashes_unchanged": true,
+    "protected_formal_and_recovery_roots_absent": true
+  },
+  "effect": {
+    "candidate_v7_bytes_immutable": true,
+    "candidate_v7_independent_review_passed": true,
+    "versioned_execution_successor_creation_authorized": true,
+    "zero_solver_successor_review_authorized": true,
+    "successor_execution_authorized": false,
+    "two_block_pilot_execution_authorized": false,
+    "formal_activation_authorized": false,
+    "formal_execution_ready": false,
+    "user_formal_run_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false,
+    "no_execution_authority": true
+  }
+}

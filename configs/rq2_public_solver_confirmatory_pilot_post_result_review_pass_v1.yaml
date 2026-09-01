@@ -1,0 +1,47 @@
+schema: rq2_public_solver_confirmatory_pilot_post_result_review_v1
+reviewed_on: "2026-08-29"
+review_scope: rq2_public_solver_confirmatory_pilot_v4_post_result_artifact
+reviewer_role: independent_sol_reviewer
+verdict: PASS
+recording_scope: primary_agent_record_of_independent_read_only_review
+evidence_scope: controller_observed_execution_evidence_not_third_party_os_attestation
+
+reviewed_result:
+  result_directory: results/tables/rq2_public_solver_confirmatory_pilot_v4
+  result_manifest_path: results/tables/rq2_public_solver_confirmatory_pilot_v4/SHA256SUMS.json
+  result_manifest_sha256: 70003e18566c208631768dd028d573cd0c5e45d4f8fb0e7104ec1f1158d98a58
+  summary_path: results/tables/rq2_public_solver_confirmatory_pilot_v4/summary.json
+  summary_sha256: 5d32dd9636c43ea431b9998cd566bd7e4eb6d6a5ea6d7331655dbb862069a3e2
+  semantic_validation_path: results/tables/rq2_public_solver_confirmatory_pilot_v4/semantic_validation.json
+  semantic_validation_sha256: ee644933695b0749363f75e227fd3f4201d1f68da57900cd9097d2c378dd0399
+  controller_receipt_path: results/tables/rq2_public_solver_confirmatory_pilot_v4/controller_receipt.json
+  controller_receipt_sha256: c4b7b80dc08f2a74323d3b5ad6b3e72c4517eb6533d56119230119c3e33d3c4a
+  runs_path: results/tables/rq2_public_solver_confirmatory_pilot_v4/runs.json
+  runs_sha256: 5472780524d1ca39c97aad961385fcacdfcfb4d5972f6b5da567fd7ae6664b4c
+
+  pilot_config_path: configs/rq2_public_solver_confirmatory_pilot_v4.yaml
+  pilot_config_sha256: 8d23066e30e01cdcb54fb502aaf654548c44c0c9eb7d182d52b7f4e4f992bb48
+  pilot_runner_path: experiments/run_rq2_public_solver_confirmatory_pilot_v4.py
+  pilot_runner_sha256: 88835bb66fb168bc89feff0f124e00e29da7a0792e57e9101719cf7a2b591671
+  semantic_authority_manifest_sha256: c0b1a6a3074343ab5f281b268cd40898630ad1e2234830a4536189687832f471
+  v3_outer_sha256: d7b8b7dd2cf0bc51f46602c1c7e28c1aad281c977ff8a15b0617be392e4a2f49
+
+assertions:
+  result_member_count_excluding_manifest: 13
+  result_recursive_manifest_exact: true
+  fresh_execution_passed: true
+  durable_process_provenance_verified: true
+  nested_worker_reports_reconstructed_independently: true
+  runs_reconstructed_exactly_from_worker_payloads: true
+  semantic_contract_passed: true
+  confirmatory_pilot_executed: true
+  cross_solver_confirmation_completed: true
+  formal_grid_execution_started: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false
+
+effect:
+  pilot_result_is_confirmatory_only: true
+  opens_grid_activation_review_only: true
+  grid_pairwise_identification_formal_or_security_authorized: false

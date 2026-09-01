@@ -1,0 +1,58 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_activation_transport_review_escalate_v2",
+  "version": 2,
+  "reviewed_on": "2026-08-31",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "ESCALATE",
+  "review_cycle": "activation_transport_v2_same_finding_after_single_rework",
+  "reviewed_artifacts": {
+    "configs/rq2_public_grid_two_block_pilot_activation_review_rework_v1.json": "47977a68a61d4bdc1aa6281523dd6ecfd6d3a596a6a3184680ec8eb713c4464b",
+    "configs/rq2_public_grid_two_block_pilot_activation_transport_v2.json": "b63dd42ac4666066af298e38ea0ab289cc12302ca266c044ac39f5e6a8935535",
+    "experiments/run_rq2_public_grid_two_block_pilot_activation_transport_v2.py": "81fbe723939f890088842d1f03a5d8cf6c8a3abe39457ef9ad169e4752db69e8",
+    "experiments/bootstrap_rq2_public_grid_two_block_pilot_activation_transport_v2.py": "f37c1e205e2c1deb40a87d793486f4c82961eae146a8420b87e549cf26cc67de",
+    "tests/test_rq2_public_grid_two_block_pilot_activation_transport_v2.py": "953bee9808f068c261979c2eed96ff6f8613ec30d3b5fa6e063a16be5a8e9a6b",
+    "configs/rq2_public_grid_two_block_pilot_activation_transport_v2.SHA256SUMS.json": "8a4553bbf23cfde50b812877fd7ccaaa3d4cc73277a73f674d3d61efd97e65ef",
+    "configs/rq2_public_grid_two_block_pilot_activation_transport_v2.OUTER.SHA256SUMS.json": "24a1d75d43e7d1db8c59449781b947fdfb370e6658e8a5985e6b97656b96ed6a"
+  },
+  "findings": {
+    "blocker": [
+      {
+        "id": "caller_constructible_transport_acceptance",
+        "finding": "Activation transport v2 exposes begin_transport_attempt(process, ...) and accept_verified_transport(evidence, capability). A caller can supply an arbitrary live Popen and construct capability, ACK, source, receipt, and AcceptedEvidence objects, so acceptance proves only internal consistency and not origin from the sealed production-worker command and anonymous-pipe exchange."
+      }
+    ],
+    "major": [
+      {
+        "id": "test_seam_bypasses_origin_assurance",
+        "finding": "The v2 focused tests directly register caller-built AttemptCapability objects in the controller's active-attempt map and then accept synthetic production evidence; this does not establish a controller-owned spawn-to-append state machine."
+      },
+      {
+        "id": "production_worker_path_not_exercised",
+        "finding": "The only real child path is a pre-loader probe that is intentionally outside the production ledger. No sealed internal-production-worker command reaches the authority boundary and returns an explicitly non-accepted production attempt without permitting 0009."
+      }
+    ],
+    "minor": []
+  },
+  "required_remediation": {
+    "new_versioned_activation_transport_successor_required": true,
+    "activation_v1_and_v2_bytes_immutable": true,
+    "controller_exclusive_spawn_pipe_validate_append_state_machine_required": true,
+    "caller_submitted_process_capability_ack_source_or_evidence_forbidden": true,
+    "attempt_creation_permanently_consumes_block_index": true,
+    "real_internal_production_worker_preloader_boundary_required": true,
+    "same_privilege_parent_memory_tampering_outside_claimed_threat_model": true
+  },
+  "effect": {
+    "no_execution_authority": true,
+    "activation_transport_v2_rejected_for_execution": true,
+    "activation_transport_v3_creation_authorized": true,
+    "activation_execution_authorized": false,
+    "two_block_pilot_execution_authorized": false,
+    "formal_activation_authorized": false,
+    "formal_execution_ready": false,
+    "user_formal_run_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

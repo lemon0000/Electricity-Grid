@@ -1,0 +1,48 @@
+{
+  "accepted": true,
+  "baseline_audit": {
+    "absolute_gap_usd": 0.8522440351080149,
+    "accepted": true,
+    "configured_mip_relative_gap": 1e-06,
+    "gap_tolerance_usd": 2.0527969081214517,
+    "lower_bound_usd": 2052796.0558774169,
+    "maximum_constraint_violation": 3.1525004828836245e-11,
+    "maximum_integrality_violation": 0.0,
+    "model_constraints": 26513,
+    "model_variables": 21384,
+    "objective_usd": 2052796.9081214466,
+    "relative_gap": 4.1516237272975895e-07,
+    "solver_message": "Model was solved to optimality (subject to tolerances), and an optimal solution is available.",
+    "solver_name": "gurobi",
+    "solver_options": {
+      "FeasibilityTol": 1e-06,
+      "IntFeasTol": 1e-06,
+      "MIPGap": 1e-06,
+      "MIPGapAbs": 0.0,
+      "OptimalityTol": 1e-06,
+      "Seed": 0,
+      "Threads": 4,
+      "TimeLimit": 600.0
+    },
+    "solver_status": "ok",
+    "solver_threads": 4,
+    "termination_condition": "optimal",
+    "upper_bound_usd": 2052796.908121452
+  },
+  "block_id": "holdout_s20260822_0008",
+  "formal_checkpoint_written": false,
+  "formal_output_written": false,
+  "gurobi_probe_options": {
+    "MIPFocus": 3
+  },
+  "gurobi_probe_profile": "bound_focus",
+  "schema": "rq2_grid_need_gurobi_block_worker_v1",
+  "solver_call_returned": true,
+  "solver_finished_monotonic_seconds": 18008.6753039,
+  "solver_started_monotonic_seconds": 18004.3346177,
+  "worker_completed_at_utc": "2026-08-29T16:11:43.821426+00:00",
+  "worker_elapsed_seconds": 5.282050400001026,
+  "worker_pid": 7812,
+  "worker_started_at_utc": "2026-08-29T16:11:38.539820+00:00",
+  "worker_started_monotonic_seconds": 18003.3932686
+}

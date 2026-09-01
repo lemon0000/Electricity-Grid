@@ -1,0 +1,40 @@
+schema: rq2_h2_temporal_executor_entry_successor_v2
+
+predecessor:
+  preregistration_path: configs/rq2_h2_temporal_successor_preregistration_v1.yaml
+  preregistration_sha256: 3f519f1fe33169585eea6561ff0d2fd26a761af553529a58b4288b16a5ba00d2
+  manifest_path: configs/rq2_h2_temporal_successor_preregistration_v1.SHA256SUMS.json
+  manifest_sha256: bdd8d10b234852ed00a2b4a70919ee102731f0d421e01b97a528c732f1619d79
+  validator_path: experiments/validate_rq2_h2_temporal_successor_preregistration.py
+  validator_sha256: 4566c21f1a741b0d97813c6e0fc9ca0cd05bb1ae6860c4f81342e566c240c761
+  frozen_executor_sha256: e1ec31300b0dcc2b23c44000844628b846e27fec3255b00c8e25a6f7d0b18d57
+  immutable: true
+
+successor:
+  change_scope: executor_tag_entry_only
+  executor_path: scripts/run_experiment.ps1
+  executor_sha256: 4ced023bf911164579a8c273a0b88b068226e8639da05ba6d7f746413143a9cb
+  manifest_path: configs/rq2_h2_temporal_executor_entry_successor_v2.SHA256SUMS.json
+  validator_path: experiments/validate_rq2_h2_temporal_executor_entry_successor_v2.py
+  validator_sha256: 5094df573d6b158dff9634f168e7aea6cceaff69b1c62ffba862e8d0f912a4da
+  scientific_design_changed: false
+  thresholds_changed: false
+  seeds_changed: false
+  sample_sizes_changed: false
+  model_or_solver_semantics_changed: false
+  prior_results_changed: false
+
+predecessor_validator_retirement:
+  nodeid: tests/test_rq2_formal_batch.py::test_temporal_successor_preregistration_validates_without_running
+  test_file_sha256: 349ca9c0e798f5561b746181840a79181526120a3e189d67cea622c680366550
+  strict_xfail: true
+  reason: predecessor_validator_resolves_shared_executor_path_in_current_worktree
+  required_observed_failure_key: executor_script_sha256
+  any_other_failure_is_collection_error: true
+
+gates:
+  formal_execution_ready: false
+  formal_runner_invoked: false
+  solver_invoked: false
+  run_tag_created: false
+  security_certified: false

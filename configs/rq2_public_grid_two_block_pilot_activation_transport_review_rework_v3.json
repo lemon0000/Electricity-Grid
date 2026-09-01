@@ -1,0 +1,45 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_activation_transport_review_rework_v3",
+  "version": 1,
+  "issued_on": "2026-08-31",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "REWORK",
+  "reviewed_outer": {
+    "path": "configs/rq2_public_grid_two_block_pilot_activation_transport_v3.OUTER.SHA256SUMS.json",
+    "sha256": "b7b5d85000091c052d257ee5ce4a6e280a6de52b6a813eaaad82d3473c92daee"
+  },
+  "findings": [
+    {
+      "severity": "major",
+      "finding": "The candidate production method and worker production branch can be reached by caller-supplied, internally consistent receipt files; those files are not an external trust root and production must remain unconditionally closed before pipe creation, Popen, or scientific imports."
+    },
+    {
+      "severity": "major",
+      "finding": "A future executable route must be a new versioned controller/worker successor bound to the reviewed v4 outer, v4 PASS receipt, wrapper review and dispatch receipts, and exact code/module/argv/cwd/environment/host authority; the current candidate cannot be opened in place."
+    },
+    {
+      "severity": "major",
+      "finding": "The controller does not yet provide independently reviewable host-commit preflight, child-private-commit monitoring, exact owned-child stop semantics, or fail-closed sampling behavior."
+    },
+    {
+      "severity": "major",
+      "finding": "The single-active and attempt-consumption transition is not protected by a lock, so concurrent callers can race before spawn."
+    },
+    {
+      "severity": "major",
+      "finding": "The scientific bridge does not freeze and live-verify the complete recovery and staging dependency closure or exercise resolved, certificate and exception semantics through a registered zero-solver seam."
+    }
+  ],
+  "review_effect": {
+    "v3_independent_review_passed": false,
+    "v3_execution_authorized": false,
+    "v4_closed_candidate_creation_authorized": true,
+    "production_worker_authorized": false,
+    "loader_authorized": false,
+    "solver_authorized": false,
+    "pilot_authorized": false,
+    "formal_authorized": false,
+    "claim_authorized": false,
+    "security_certified": false
+  }
+}

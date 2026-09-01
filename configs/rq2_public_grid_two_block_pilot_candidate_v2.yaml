@@ -1,0 +1,142 @@
+schema: rq2_public_grid_two_block_pilot_candidate_v2
+version: 2
+frozen_on: "2026-08-30"
+status: pre_run_rework_successor_execution_closed
+
+predecessor_rework_authority:
+  rejected_outer_path: configs/rq2_public_grid_two_block_pilot_candidate_v1.OUTER.SHA256SUMS.json
+  rejected_outer_sha256: 7874a9bdb83d36de98e7626bbe259fd607f1d9d2f8e5669e9924c6f84a02306f
+  rework_receipt_path: configs/rq2_public_grid_two_block_pilot_review_rework_v1.yaml
+  rework_receipt_sha256: 8fd6f56403c593255ea2e7c36cbfc0c94329af7d716a6f4b336e8f0aff2d4d6a
+
+recovery_implementation_authority:
+  pass_receipt_path: configs/rq2_public_grid_solver_recovery_implementation_review_pass_v2.yaml
+  pass_receipt_sha256: 3153d72000fb7ea87f55adc3eed63af5fdb0901a48ded6ae92a616924088c720
+  recovery_bundle_path: configs/rq2_public_grid_solver_recovery_v2.SHA256SUMS.json
+  recovery_bundle_sha256: b300a040fc481beea094702404f4d00eb176403e40f7909d2d704f7fd2195729
+  exact_live_members:
+    configs/rq2_public_grid_solver_recovery_preregistration_v2.yaml: a767708dfd1bcb243df9d0466a092a7d7cf090c6583af162119e72cadc919e59
+    configs/rq2_public_grid_solver_recovery_review_rework_v1.yaml: cfe8d1f5fb7cef9514ab995b19b20bed43f3604af5ad84ab6433ae84a9810834
+    configs/rq2_public_pipeline_provenance_contract_v4_process_isolated_v1.yaml: cb6ae7c07a7745f90288cefafedb7df82221d06205b3d2aab68580e0587a89b1
+    configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_v1.yaml: e1306a375bba5d19d687cb2728a981528662064226b4661a0b74f894b647f3bd
+    experiments/run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_v1.py: c90f796aa9c9043d48560599b892681455b7c7ddee3881501ce449bfa1c3833e
+    experiments/validate_rq2_public_grid_solver_recovery_v2.py: cf563d95ea024b38587350cfae73af0c597d8d491544e2306def214b7a296fe1
+    tests/test_rq2_public_grid_solver_recovery_v2.py: 56eb993a3ad3856447690776b3d8a6f7ef08faad04a1fc85744f2004546561bb
+
+scientific_authority:
+  config_path: configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_v1.yaml
+  config_sha256: e1306a375bba5d19d687cb2728a981528662064226b4661a0b74f894b647f3bd
+  solver:
+    name: highs
+    expected_package_version: 1.15.1
+    threads: 4
+    mip_relative_gap: 1.0e-6
+    feasibility_tolerance: 1.0e-6
+    optimality_tolerance: 1.0e-6
+    integer_feasibility_tolerance: 1.0e-6
+    random_seed: 0
+    time_limit_seconds: null
+    tolerance_mw: 1.0e-6
+    tee: true
+
+semantic_authority:
+  config_path: configs/rq2_public_solver_pilot_semantic_successor_v1.yaml
+  config_sha256: cb0209a9a53962be8ebb6ee185d3bfbf3d004d7cd761e164b286a58e0c7887b0
+  manifest_path: configs/rq2_public_solver_pilot_semantic_successor_v1.SHA256SUMS.json
+  manifest_sha256: c0b1a6a3074343ab5f281b268cd40898630ad1e2234830a4536189687832f471
+  validator_path: experiments/validate_rq2_public_solver_pilot_semantic_successor_v1.py
+  validator_sha256: 01b7f60a620c81a7a656ba6576c3b85af9e371b30d42dd5959f430ee220c80dd
+  registered_raw_status:
+    highs:
+      optimal: [ok]
+      infeasible: [error]
+      not_applicable_no_active_outage: [not_applicable]
+    gurobi:
+      optimal: [ok]
+      infeasible: [warning]
+      not_applicable_no_active_outage: [not_applicable]
+
+pilot:
+  blocks: [holdout_s20260822_0008, holdout_s20260822_0009]
+  execution_order: [holdout_s20260822_0008, holdout_s20260822_0009]
+  one_fresh_python_worker_per_block: true
+  controller_calls_solver: false
+  worker_calls_complete_v4_process_block: true
+  external_watchdog_seconds: 21600
+  resource_sample_interval_seconds: 5.0
+  private_commit_limit_gib: 8.0
+  minimum_system_commit_available_gib: 2.0
+  timeout_resource_stop_nonzero_or_unresolved_is_infeasibility_evidence: false
+
+named_outage_comparison:
+  block_id: holdout_s20260822_0008
+  frozen_gurobi_checkpoint_path: results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_gurobi/holdout_s20260822_0008.json
+  frozen_gurobi_checkpoint_sha256: f9b954669832bbfd467a0f6a3987718ce944a9414d27b3a0b5eb9171d66df8e6
+  frozen_gurobi_config_path: results/execution_configs/rq2_public_successor_v2/grid.yaml
+  frozen_gurobi_config_sha256: b8f7a71f8aaf8150c8515089e90e1946732d4476e0855d8677523577bc17f416
+  maximum_finite_grid_need_difference_mw: 1.0e-5
+  maximum_baseline_incumbent_difference_usd: 1.0e-4
+  hourly_interval_overlap_absolute_envelope_mw: 1.0e-10
+  numeric_serialization_relative_tolerance: 1.0e-12
+  numeric_serialization_absolute_tolerance: 1.0e-12
+  require_registered_raw_status_normalization: true
+  block_0009_cross_solver_comparison_required: false
+
+immutable_formal_authority:
+  formal_runner_path: experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py
+  formal_runner_sha256: 39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8
+  activated_gurobi_config_path: results/execution_configs/rq2_public_successor_v2/grid.yaml
+  activated_gurobi_config_sha256: b8f7a71f8aaf8150c8515089e90e1946732d4476e0855d8677523577bc17f416
+  gurobi_checkpoint_directory: results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_gurobi
+  gurobi_output_directory: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_gurobi
+  recovery_checkpoint_directory: results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_v1
+  recovery_output_directory: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_v1
+  checkpoint_sha256:
+    holdout_s20260822_0000.json: f68f7bca3fbf66c7bf90840280502cb2eda69dd6a01d8258b5929c5e01e0f6b8
+    holdout_s20260822_0001.json: 180762530c8450c0eb914b3fee5e8597563200d701dddbd64b5c48180b2904da
+    holdout_s20260822_0002.json: 9a9af3c77af3de2a1396f2004352b97ebdbcbe77f2706c9851427e7f389e70ec
+    holdout_s20260822_0003.json: 8d9d355f34865d72723d0418330f149d2a99cd0cb15e95f7eed08554da9fe260
+    holdout_s20260822_0004.json: f63a9e729c751c23bd61af7dae1f0bdd9bbaec542abd13eade9e09d083d956fc
+    holdout_s20260822_0005.json: f2fc2a34163b8aa18583c0554b477e68f149c1ee95cb6d17b6418715d59af7f8
+    holdout_s20260822_0006.json: 51b642d9ccdd3afa7e7ba8fecef6f1b16eef71f0ac4434e1ee81694c65512b38
+    holdout_s20260822_0007.json: ecad02d8810b1c80c13fe4b69c931aff8e7669c643f5343c0dc3b584d0b81785
+    holdout_s20260822_0008.json: f9b954669832bbfd467a0f6a3987718ce944a9414d27b3a0b5eb9171d66df8e6
+
+activation:
+  path: configs/rq2_public_grid_two_block_pilot_user_activation_v2.yaml
+  bundle_path: configs/rq2_public_grid_two_block_pilot_candidate_v2.SHA256SUMS.json
+  outer_path: configs/rq2_public_grid_two_block_pilot_candidate_v2.OUTER.SHA256SUMS.json
+
+paths:
+  result_directory: results/tables/rq2_public_grid_two_block_pilot_v2
+  worker_staging_directory: results/workers/rq2_public_grid_two_block_pilot_v2
+  attempt_log_directory: results/logs/rq2_public_grid_two_block_pilot_v2
+
+publication:
+  mode: same_parent_staging_then_atomic_directory_rename
+  reread_and_revalidate_copied_worker_evidence: true
+  exact_recursive_sha256_manifest: true
+  success_requires_both_complete_valid_payloads: true
+  success_requires_named_outage_comparison_passed: true
+
+future_execution_successor:
+  current_candidate_bytes_become_immutable_after_outer_seal: true
+  current_candidate_execution_gate_remains_closed: true
+  independent_pre_run_review_required: true
+  separate_versioned_execution_successor_required: true
+
+gates:
+  recovery_v2_implementation_review_passed: true
+  user_two_block_pilot_authorized: true
+  candidate_implementation_ready: true
+  independent_pre_run_review_passed: false
+  execution_successor_present: false
+  two_block_pilot_execution_ready: false
+  two_block_pilot_executed: false
+  named_outage_comparison_passed: false
+  post_result_review_passed: false
+  formal_execution_ready: false
+  user_formal_run_authorized: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false

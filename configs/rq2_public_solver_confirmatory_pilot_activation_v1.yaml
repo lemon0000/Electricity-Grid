@@ -1,0 +1,31 @@
+schema: rq2_public_solver_confirmatory_pilot_activation_v1
+authorized_on: "2026-08-28"
+
+user_authority:
+  explicit_authorization_observed: true
+  authorization_record: "继续做/按路径全部做完"
+  authorized_scope: fresh_rq2_cross_solver_confirmatory_pilot_v1_only
+  external_watchdog_seconds: 21600
+
+semantic_review_authority:
+  receipt_path: configs/rq2_public_solver_confirmatory_pilot_review_v1.yaml
+  receipt_sha256: 1be79d21ac6f554b742d929b53e84c8e1c35c25bc8ccadaf78d76cf2cf5912b8
+  verdict: PASS
+
+permissions:
+  prepare_versioned_confirmatory_artifacts: true
+  execute_confirmatory_pilot_after_independent_implementation_review: true
+  execute_formal_grid: false
+  execute_pairwise: false
+  execute_identification: false
+  make_formal_result_claim: false
+  make_security_claim: false
+
+gates:
+  independent_confirmatory_implementation_review_passed: false
+  confirmatory_pilot_executed: false
+  cross_solver_confirmation_completed: false
+  formal_execution_ready: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false

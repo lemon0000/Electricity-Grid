@@ -1,0 +1,93 @@
+{
+  "evaluation_id": "rq2_h2_scenario_source_ablation_formal_v1",
+  "role": "out_of_sample_ablation_testing_h2_robustness_across_training_scenario_sources_formal",
+  "base_parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+  "arms": [
+    "manual",
+    "generated",
+    "reduced"
+  ],
+  "shared_holdout_scenario_count": 3,
+  "shared_holdout_scenarios": [
+    {
+      "name": "holdout_mild",
+      "probability": 0.4
+    },
+    {
+      "name": "holdout_stress",
+      "probability": 0.4
+    },
+    {
+      "name": "holdout_severe",
+      "probability": 0.2
+    }
+  ],
+  "solver_name": "highs",
+  "beta": 0.5,
+  "lambda_risk": 0.1,
+  "max_flexibility_budget_mw": 200.0,
+  "provisioning_cost_per_mw": 500.0,
+  "service_shortfall_tolerance_mw": 1e-06,
+  "cvar_cross_check_tolerance": 1e-06,
+  "arm_results": [
+    {
+      "arm": "manual",
+      "training_scenario_count": 2,
+      "reduction_kantorovich_distance": null,
+      "correct_committed_mw": 100.0,
+      "b6_committed_mw": 60.0,
+      "h2_b6_extra_failure_probability": 0.3999999999999999,
+      "h2_b6_extra_expected_shortfall_mwh": 28.0,
+      "h2_b6_underdelivers_out_of_sample": true,
+      "cvar_cross_check_max_abs_error": 0.0,
+      "cvar_cross_check_passed": true,
+      "training_feasible": true
+    },
+    {
+      "arm": "generated",
+      "training_scenario_count": 200,
+      "reduction_kantorovich_distance": null,
+      "correct_committed_mw": 53.0315997870658,
+      "b6_committed_mw": 38.55423945863698,
+      "h2_b6_extra_failure_probability": 0.0,
+      "h2_b6_extra_expected_shortfall_mwh": 7.003584046197844,
+      "h2_b6_underdelivers_out_of_sample": true,
+      "cvar_cross_check_max_abs_error": 0.0,
+      "cvar_cross_check_passed": true,
+      "training_feasible": true
+    },
+    {
+      "arm": "reduced",
+      "training_scenario_count": 50,
+      "reduction_kantorovich_distance": 0.10183853877185256,
+      "correct_committed_mw": 53.0315997870658,
+      "b6_committed_mw": 38.50749714145966,
+      "h2_b6_extra_failure_probability": 0.0,
+      "h2_b6_extra_expected_shortfall_mwh": 7.022280973068774,
+      "h2_b6_underdelivers_out_of_sample": true,
+      "cvar_cross_check_max_abs_error": 0.0,
+      "cvar_cross_check_passed": true,
+      "training_feasible": true
+    }
+  ],
+  "h2_robust_across_sources": true,
+  "evaluable_arm_count": 3,
+  "gate_passed": true,
+  "random_seed": null,
+  "security_certified": false,
+  "formal_vma_published": false,
+  "empirical_holdout_claimed": false,
+  "touches_frozen_baselines": false,
+  "interpretation": "synthetic_out_of_sample_ablation_that_holds_the_holdout_fixed_and_varies_only_the_training_scenario_source_manual_generated_reduced_to_test_whether_the_b6_under_delivery_finding_is_an_artifact_of_the_training_draw_not_an_empirical_vma_or_engineering_certification",
+  "certification_blockers": [
+    "synthetic_or_trace_derived_coefficients_budget_cap_and_scenario_probabilities_not_empirical",
+    "holdout_tree_is_a_synthetic_unseen_scenario_set_not_an_empirical_vma_sample",
+    "reduced_arm_is_a_probability_mass_transformation_of_the_generated_training_tree_not_new_data",
+    "temporal_envelopes_recovery_debt_duration_event_count_out_of_scope",
+    "no_ac_or_n1_network_certification_in_this_entry_point"
+  ],
+  "output_paths": {
+    "arms": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B3_ablation_green_scale_45\\arms.csv",
+    "summary": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B3_ablation_green_scale_45\\summary.json"
+  }
+}

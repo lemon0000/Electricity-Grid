@@ -1,0 +1,30 @@
+schema: rq2_public_grid_two_block_pilot_pre_run_review_rework_v1
+reviewed_on: "2026-08-30"
+reviewer_role: independent_sol_reviewer
+verdict: REWORK
+reviewed_candidate:
+  outer_path: configs/rq2_public_grid_two_block_pilot_candidate_v1.OUTER.SHA256SUMS.json
+  outer_sha256: 7874a9bdb83d36de98e7626bbe259fd607f1d9d2f8e5669e9924c6f84a02306f
+  exact_live_members:
+    configs/rq2_public_grid_two_block_pilot_candidate_v1.yaml: 89316d2f8de8ac43f84d615b2bb75f7ff6820b415b67c5ba2be27cd04194ef61
+    configs/rq2_public_grid_two_block_pilot_user_activation_v1.yaml: 03927d1dab6eaf18722900a0e1f225f675671ac2c01984edd5f04d6a9251f79b
+    experiments/run_rq2_public_grid_two_block_pilot_candidate_v1.py: f468d960768650b931d3b2bbc226642576807e393f216d2b9f1dde51b707b452
+    experiments/validate_rq2_public_grid_two_block_pilot_candidate_v1.py: 05e34709e2cab90241f1c135382d363c55cd58757621905cafd7220c22fe35eb
+    tests/test_rq2_public_grid_two_block_pilot_candidate_v1.py: 164cf437c0616fcdf7a6bc137fc5e1021f7bef89ce253c570f76109629b69f50
+    configs/rq2_public_grid_two_block_pilot_candidate_v1.SHA256SUMS.json: cdb70f0dc87eff25f0d2082d207bddfacb4701c75042065f1aa06e38a6a5fb15
+    configs/rq2_public_grid_two_block_pilot_candidate_v1.OUTER.SHA256SUMS.json: 7874a9bdb83d36de98e7626bbe259fd607f1d9d2f8e5669e9924c6f84a02306f
+findings:
+  - candidate_v1 did not enforce the registered semantic-v1 raw-status normalization
+  - runtime authority did not revalidate every recovery-v2 and semantic-v1 live byte
+  - hidden worker request provenance and path/PID-reuse defenses were incomplete
+  - staging publication did not reread and revalidate copied worker evidence
+effect:
+  candidate_v1_bytes_remain_immutable: true
+  candidate_v1_pre_run_review_passed: false
+  candidate_v1_execution_authorized: false
+  successor_candidate_review_required: true
+  pilot_executed: false
+  formal_execution_ready: false
+  claim: false
+  security_certified: false
+

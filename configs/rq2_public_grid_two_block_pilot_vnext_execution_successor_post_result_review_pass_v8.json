@@ -1,0 +1,101 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_vnext_execution_successor_post_result_review_pass_v8",
+  "version": 8,
+  "reviewed_on": "2026-09-01",
+  "reviewer_agent": "/root/pilot_post_result_review",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "PASS",
+  "findings": [],
+  "review_summary": "PASS; no blocker, major, or minor finding; the single focused REWORK was closed.",
+  "materialized_from_review_report": true,
+  "cryptographic_reviewer_signature_present": false,
+  "reviewed_v8_outer": {
+    "path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v8.OUTER.SHA256SUMS.json",
+    "sha256": "7090d339bc395fb714798ca8d96063943ef68113ab46091cdfe503c163a900d7"
+  },
+  "pre_run_review_pass": {
+    "path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_pass_v8.json",
+    "sha256": "04cd6b421ebeef07e00c1d8ab08bb15d721110ff454c32e7898eca2eff6b486e"
+  },
+  "reviewed_result": {
+    "result_manifest": {
+      "path": "results/tables/rq2_public_grid_two_block_pilot_vnext_execution_successor_v8/result_manifest.json",
+      "sha256": "99f56a6809f25eb0bf2916b84d76bd821513f6ce6d8ff7d6ddd53c3e9cf81af4"
+    },
+    "result_tree": {
+      "path": "results/tables/rq2_public_grid_two_block_pilot_vnext_execution_successor_v8/SHA256SUMS.json",
+      "sha256": "03528f052f127d819dc07edff860efd7652e5b28da34cfac6be245ba0e75331c"
+    },
+    "published_tree": {
+      "path": "results/tables/rq2_public_grid_two_block_pilot_vnext_execution_successor_v8.PUBLISHED/SHA256SUMS.json",
+      "sha256": "f01ec3391a20d692aa8974c08da8f1af81dd4b79a07e1aff9cb0290fea4f8920"
+    },
+    "published_success": {
+      "path": "results/tables/rq2_public_grid_two_block_pilot_vnext_execution_successor_v8.PUBLISHED/success.json",
+      "sha256": "957f5e759e6c4ba71d26a5a18b37b9ef8f3935005f8b09c545b73ec7dcb0c604"
+    },
+    "controller_receipt": {
+      "path": "results/tables/rq2_public_grid_two_block_pilot_vnext_execution_successor_v8/controller_receipt.json",
+      "sha256": "07313f039b443ba795f1f6c8ee127d9aa4467df0db1cc9f41f7d7308b59d9b5f"
+    },
+    "controller_attestation": {
+      "path": "results/tables/rq2_public_grid_two_block_pilot_vnext_execution_successor_v8/controller_attestation.json",
+      "sha256": "fcad55dd407c5725815ec4b6047833331f0424525129eb0288cf77bdea1ca53b"
+    },
+    "lamport_attestation_payload_sha256": "158b14130823a80acfa643c2df7ab7611ad518ed7c1647864501c3ab719eecda",
+    "lamport_signature_sha256": "0a595309844822ba529db6e1a5c7d8ddf2f47ef60fc7a130dd8014e01b347c7f",
+    "secret_free_tombstone": {
+      "path": "results/leases/rq2_public_grid_two_block_pilot_vnext_execution_successor_v8_lamport_ots_private.consumed.json",
+      "sha256": "8e5f25e1b8a3aecb4d2a32a2a6d55aea65ca178425e6d47e9cf9fec35d378aa2",
+      "seed_present": false,
+      "one_time_key_reusable": false
+    }
+  },
+  "protected_formal_artifacts": {
+    "base_science_runner": {
+      "path": "experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py",
+      "sha256": "39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8"
+    },
+    "process_isolated_predecessor_runner": {
+      "path": "experiments/run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_v1.py",
+      "sha256": "c90f796aa9c9043d48560599b892681455b7c7ddee3881501ce449bfa1c3833e"
+    },
+    "original_highs_candidate_config": {
+      "path": "configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_v1.yaml",
+      "sha256": "e1306a375bba5d19d687cb2728a981528662064226b4661a0b74f894b647f3bd"
+    },
+    "existing_activated_gurobi_config": {
+      "path": "results/execution_configs/rq2_public_successor_v2/grid.yaml",
+      "sha256": "b8f7a71f8aaf8150c8515089e90e1946732d4476e0855d8677523577bc17f416"
+    },
+    "existing_gurobi_checkpoint_inventory": {
+      "directory": "results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_gurobi",
+      "count": 9,
+      "inventory_sha256": "091b08a05f21c2c2bb711a93159f3d52b55757a8180f7058eb7d76b7d666496a",
+      "files": {
+        "holdout_s20260822_0000.json": "f68f7bca3fbf66c7bf90840280502cb2eda69dd6a01d8258b5929c5e01e0f6b8",
+        "holdout_s20260822_0001.json": "180762530c8450c0eb914b3fee5e8597563200d701dddbd64b5c48180b2904da",
+        "holdout_s20260822_0002.json": "9a9af3c77af3de2a1396f2004352b97ebdbcbe77f2706c9851427e7f389e70ec",
+        "holdout_s20260822_0003.json": "8d9d355f34865d72723d0418330f149d2a99cd0cb15e95f7eed08554da9fe260",
+        "holdout_s20260822_0004.json": "f63a9e729c751c23bd61af7dae1f0bdd9bbaec542abd13eade9e09d083d956fc",
+        "holdout_s20260822_0005.json": "f2fc2a34163b8aa18583c0554b477e68f149c1ee95cb6d17b6418715d59af7f8",
+        "holdout_s20260822_0006.json": "51b642d9ccdd3afa7e7ba8fecef6f1b16eef71f0ac4434e1ee81694c65512b38",
+        "holdout_s20260822_0007.json": "ecad02d8810b1c80c13fe4b69c931aff8e7669c643f5343c0dc3b584d0b81785",
+        "holdout_s20260822_0008.json": "f9b954669832bbfd467a0f6a3987718ce944a9414d27b3a0b5eb9171d66df8e6"
+      }
+    }
+  },
+  "review_report_document_hashes": {
+    "README.md": "88a443e8c541ca1aa5bc7e062cba252502007239b55e020825aee7a7c5ebc19b",
+    "docs/plan/科研项目执行步骤.md": "c16df751ac774c4594ec5a6d7d1a4106a3ecfe3b51f5d620a84884a58443b118",
+    "docs/model_spec/blocker_register.md": "d03db358082f5925694ae28d9964f32256ad876108275533cf2fcdc7a59cdf38"
+  },
+  "effect": {
+    "v8_post_result_independent_review_passed": true,
+    "opens_formal_activation_successor_review_only": true,
+    "formal_execution_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

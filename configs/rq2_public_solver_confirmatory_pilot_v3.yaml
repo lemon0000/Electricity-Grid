@@ -1,0 +1,158 @@
+schema: rq2_public_solver_confirmatory_pilot_config_v3
+version: 3
+frozen_on: "2026-08-28"
+status: escalation_remediation_candidate_independent_review_pending
+
+scope:
+  task_risk: R3_R4_gate_boundary
+  evidence_level: nonformal_cross_solver_confirmatory_pilot
+  fresh_solver_execution_required: true
+  source_outcomes_observed: true
+  confirmatory_outcomes_observed: false
+  changes_model_formulation: false
+  changes_solver_algorithm_threads_seed_or_tolerances: false
+  changes_pilot_blocks_or_repetitions: false
+  changes_only_durable_provenance_validation: true
+  formal_grid_execution: false
+  formal_pairwise_execution: false
+  formal_identification_execution: false
+  formal_claim_authorized: false
+  security_claim_authorized: false
+
+v2_predecessor_authority:
+  immutable: true
+  config:
+    path: configs/rq2_public_solver_confirmatory_pilot_v2.yaml
+    sha256: d0a5c3a898d89ce869a6647b4d8f271f82921c89069cdd9dd98b4f54e7c9f1e0
+  activation:
+    path: configs/rq2_public_solver_confirmatory_pilot_activation_v2.yaml
+    sha256: fd4e584b86de791f014e417499fa14c7db7de07f4e6e63adb8270b879c39a45b
+  review_receipt:
+    path: configs/rq2_public_solver_confirmatory_pilot_implementation_review_v2.yaml
+    sha256: 4e06fefc95addda419d8e721e2be6963a685ee3c6e136acf36efc3c2d1cc5c13
+  runner:
+    path: experiments/run_rq2_public_solver_confirmatory_pilot_v2.py
+    sha256: 59a54f9fb1c987baffe0a12a11d9584081da7bd8db60800b4fe0fc0da6a43eaa
+  validator:
+    path: experiments/validate_rq2_public_solver_confirmatory_pilot_v2.py
+    sha256: 605936ccca949d9f022b7b29c9b96738a43f72a6b2072a4bfecf277b31412e4f
+  tests:
+    path: tests/test_rq2_public_solver_confirmatory_pilot_v2.py
+    sha256: 9b19e3f4be515d9a6c20380326efd21761f9268d735089567c72f3de34c4e1d7
+  bundle:
+    path: configs/rq2_public_solver_confirmatory_pilot_bundle_v2.SHA256SUMS.json
+    sha256: b356dfa1d58eeb416cbe81d6d840142d4e676b296d39a7372825f7f1d5cc6687
+  outer:
+    path: configs/rq2_public_solver_confirmatory_pilot_bundle_v2.OUTER.SHA256SUMS.json
+    sha256: 601c10c53daa80661db39fd356a7987dce58dcf4ce98bf9c77197f71eb448490
+
+semantic_authority:
+  config_path: configs/rq2_public_solver_pilot_semantic_successor_v1.yaml
+  config_sha256: cb0209a9a53962be8ebb6ee185d3bfbf3d004d7cd761e164b286a58e0c7887b0
+  manifest_path: configs/rq2_public_solver_pilot_semantic_successor_v1.SHA256SUMS.json
+  manifest_sha256: c0b1a6a3074343ab5f281b268cd40898630ad1e2234830a4536189687832f471
+  review_verdict: PASS
+  evaluator_function: evaluate_runs
+
+escalation_review_receipt:
+  path: configs/rq2_public_solver_confirmatory_pilot_implementation_review_escalation_v3.yaml
+  sha256: 4561e17bf16f89a33efbde0b5cc9eee706bf53c82712dee6258bae5e451796d9
+  verdict: ESCALATE
+
+activation:
+  path: configs/rq2_public_solver_confirmatory_pilot_activation_v3.yaml
+  sha256: da07e16c7bca60a44c97803bd60919a6f9f3a83042da58065af4c5a7836763e9
+  authorization_scope: prepare_and_independently_review_v3_confirmatory_remediation
+
+scientific_inheritance:
+  source: v2_predecessor_config
+  exact_fields: [input, model, pilot_blocks, solvers, execution, acceptance]
+  execution_order: [highs_r1, gurobi_r1, gurobi_r2, highs_r2]
+  repetitions: 2
+  external_watchdog_seconds: 21600
+  solver_time_limit_seconds: null
+  solver_threads: 4
+  solver_random_seed: 0
+  timeout_is_infeasibility_evidence: false
+  unresolved_is_infeasibility_evidence: false
+  scientific_threshold_values_changed: false
+
+implementation:
+  runner_path: experiments/run_rq2_public_solver_confirmatory_pilot_v3.py
+  runner_hash_authority: configs/rq2_public_solver_confirmatory_pilot_bundle_v3.SHA256SUMS.json
+  controller_calls_solver: false
+  worker_process_model: one_fresh_independent_python_subprocess_per_run_id
+  expected_worker_report_constructor: build_expected_worker_report
+  expected_report_inputs_live: [registered_run_identity, payload, controller_receipt, payload_sha256, popen_pid, popen_returncode]
+  expected_report_inputs_post_result: [registered_run_identity, payload, controller_receipt, payload_sha256, registered_zero_exit_contract]
+  nested_worker_report_is_authority: false
+  nested_worker_report_requires_exact_reconstructed_equality: true
+  nested_worker_report_sha_uses_reconstructed_expected_report: true
+  result_reconstructed_from_durable_payloads: true
+  process_evidence_scope: controller_observed_execution_evidence_not_third_party_os_attestation
+
+provenance:
+  controller_receipt: controller_receipt.json
+  worker_root: workers
+  worker_files_per_run: [payload.json, receipt.json]
+  exact_tree_required: true
+  bind_controller_nonce_pid_and_start_identity: true
+  bind_v2_outer_config_runner_semantic_authority_hashes: true
+  bind_worker_pid_ppid_exit_code_payload_hash_and_execution_index: true
+  controller_receipts_form_ordered_hash_chain: true
+  controller_receipt_issue_times_strictly_increase: true
+  unique_worker_pid_per_run: true
+  worker_parent_pid_must_equal_controller_pid: true
+  reconstruct_runs_from_payloads: true
+  evidence_limit: controller_observed_execution_evidence_not_third_party_os_attestation
+
+output:
+  schema: rq2_public_solver_confirmatory_pilot_v3
+  directory: results/tables/rq2_public_solver_confirmatory_pilot_v3
+  directory_must_not_preexist: true
+  publication: same_parent_staging_then_atomic_rename
+  top_level_inventory: [config.yaml, controller_receipt.json, runs.json, semantic_validation.json, summary.json, workers, SHA256SUMS.json]
+  worker_directory_inventory: [payload.json, receipt.json]
+  exact_recursive_manifest_required: true
+  v1_or_v2_run_reuse_allowed: false
+
+gate_opening_successor_contract:
+  current_v3_bytes_become_immutable_after_sealing: true
+  current_v3_execution_gate_remains_closed: true
+  future_successor_version: 4
+  future_files_are_not_current_manifest_members: true
+  independent_pass_receipt:
+    required_verdict: PASS
+    reviewer_role: independent_sol_reviewer
+    must_bind_exact_v3_hashes: [config, activation, escalation_receipt, runner, validator, tests, bundle, outer]
+    receipt_must_be_new_after_v3_outer_is_sealed: true
+  v4_required_new_artifacts: [pass_receipt, activation, config, runner, validator, tests, bundle, outer]
+  v4_required_new_artifact_paths:
+    pass_receipt: configs/rq2_public_solver_confirmatory_pilot_implementation_review_pass_v4.yaml
+    activation: configs/rq2_public_solver_confirmatory_pilot_activation_v4.yaml
+    config: configs/rq2_public_solver_confirmatory_pilot_v4.yaml
+    runner: experiments/run_rq2_public_solver_confirmatory_pilot_v4.py
+    validator: experiments/validate_rq2_public_solver_confirmatory_pilot_v4.py
+    tests: tests/test_rq2_public_solver_confirmatory_pilot_v4.py
+    bundle: configs/rq2_public_solver_confirmatory_pilot_bundle_v4.SHA256SUMS.json
+    outer: configs/rq2_public_solver_confirmatory_pilot_bundle_v4.OUTER.SHA256SUMS.json
+  v4_must_bind_exact_v3_outer_sha256: true
+  v4_must_bind_exact_pass_receipt_sha256: true
+  v4_may_authorize_only_fresh_confirmatory_pilot: true
+  v4_output_directory: results/tables/rq2_public_solver_confirmatory_pilot_v4
+  modifying_v3_or_predecessor_bytes_forbidden: true
+  grid_pairwise_identification_formal_or_security_authority: false
+
+gates:
+  semantic_successor_review_passed: true
+  user_confirmatory_authorization_recorded: true
+  v3_remediation_candidate_ready: true
+  independent_v3_implementation_review_passed: false
+  v4_execution_successor_present: false
+  confirmatory_execution_ready: false
+  confirmatory_pilot_executed: false
+  cross_solver_confirmation_completed: false
+  formal_execution_ready: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false

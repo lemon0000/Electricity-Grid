@@ -1,0 +1,114 @@
+schema: rq2_public_grid_two_block_pilot_candidate_v5
+version: 5
+frozen_on: "2026-08-31"
+status: postcommit_remediation_candidate_v5_execution_closed
+
+predecessor_review:
+  candidate_v4_inner_path: configs/rq2_public_grid_two_block_pilot_candidate_v4.SHA256SUMS.json
+  candidate_v4_inner_sha256: 1f03580ef26467c069206a1144e8f6f575f03cb44565c7c82fe82360f128dfdb
+  candidate_v4_outer_path: configs/rq2_public_grid_two_block_pilot_candidate_v4.OUTER.SHA256SUMS.json
+  candidate_v4_outer_sha256: a4fa236bec8e6009bee75772e012fcccd09372068287674725c4d5a4fe8afd7b
+  escalation_receipt_path: configs/rq2_public_grid_two_block_pilot_pre_run_review_escalation_v4.yaml
+  escalation_receipt_sha256: 9288bc637f7ad9d7f4876e8dce2846597e56f288324b825d0cb9330dc007bcc9
+
+user_authorization:
+  path: configs/rq2_public_grid_two_block_pilot_user_authorization_v3.yaml
+  sha256: f696e76a1fedba8335af62e8914b12bb9385606525cf8170d0b11ffdb3900e52
+  exact_quote: "授权给你，修复好之后就开始正式实验吧"
+  interpretation: conditional_future_authority_only_after_all_pilot_postreview_and_activation_gates_pass
+
+scientific_and_precommit_authority:
+  predecessor_config_path: configs/rq2_public_grid_two_block_pilot_candidate_v4.yaml
+  predecessor_config_sha256: d71069e242ba90f6ce8c7af8a77fd470f4e45c794c849f04786faf763baa0fe1
+  predecessor_runner_path: experiments/run_rq2_public_grid_two_block_pilot_candidate_v4.py
+  predecessor_runner_sha256: 3b6e55605f56cee1e871d72b15ddfec0963ce727ec863a08f4cbac441d7541e9
+  predecessor_publish_result_source_sha256: e014b73c608e2bce7ee59a486a718ec54149b66c7f9308b424b907155ae3d791
+  delegation: exact_v4_publish_result_with_only_success_seal_io_interposed
+  semantic_transport_ledger_and_precommit_science_changed: false
+  solver:
+    name: highs
+    expected_package_version: 1.15.1
+    threads: 4
+    mip_relative_gap: 1.0e-6
+    feasibility_tolerance: 1.0e-6
+    optimality_tolerance: 1.0e-6
+    integer_feasibility_tolerance: 1.0e-6
+    random_seed: 0
+    time_limit_seconds: null
+    tolerance_mw: 1.0e-6
+    tee: true
+
+repair_010_commit_rule:
+  blocker_register_section: repair-010 further freezes parent finalization state machine
+  implementation_path: experiments/run_rts_gmlc_zero_dc_ac_aware_commitment_v4_repair_010_formal.py
+  implementation_sha256: 0195d5dfebf59fdbb740891223beea6bb3aaf7c065de4e344274d58357a40204
+  implementation_function: register_phase_finalization_success
+  implementation_lines_at_freeze: 2692-2785
+  recovery_test_path: tests/test_rts_gmlc_v4_repair_010_recovery_import.py
+  recovery_test_sha256: c9465f104172dbc9d6fccda9a9066588b05d4e13d6e413f455f64c6a55c49a2d
+  calibration_test_path: tests/test_rts_gmlc_v4_repair_010_startup_calibration.py
+  calibration_test_sha256: 699538e12497c133c13285ae7353e7a1b9ec13f550c969391153ba063bada515
+  unique_irreversible_commit_point: exact_immutable_success_directory_rename
+  exact_commit_after_exception_is_success: true
+  absent_seal_is_honest_incomplete: true
+  existing_unprovable_seal_is_commit_indeterminate: true
+  terminal_after_exact_success_forbidden: true
+  terminal_during_commit_indeterminate_forbidden: true
+  resume_after_any_publication_attempt: false
+
+pilot:
+  blocks: [holdout_s20260822_0008, holdout_s20260822_0009]
+  execution_index:
+    holdout_s20260822_0008: 1
+    holdout_s20260822_0009: 2
+  one_fresh_python_worker_per_block: true
+  parent_calls_solver: false
+  child_calls_complete_v4_process_block: true
+  external_watchdog_seconds: 21600
+  resource_sample_interval_seconds: 5.0
+  private_commit_limit_gib: 8.0
+  minimum_system_commit_available_gib: 2.0
+  timeout_resource_stop_nonzero_or_unresolved_is_infeasibility_evidence: false
+
+paths:
+  result_directory: results/tables/rq2_public_grid_two_block_pilot_v5
+  success_commit_directory: results/tables/rq2_public_grid_two_block_pilot_v5.SUCCESS
+  forbidden_terminal_directory: results/tables/rq2_public_grid_two_block_pilot_v5.TERMINAL
+  worker_staging_directory: results/workers/rq2_public_grid_two_block_pilot_v5
+  attempt_log_directory: results/logs/rq2_public_grid_two_block_pilot_v5
+
+publication:
+  attempt_receipt_claims_controller_validation: false
+  attempt_receipt_claims_published: false
+  staging_validation_receipt_claims_published: false
+  result_summary_claims_published: false
+  published_true_only_in_exact_success_commit_directory: true
+  success_commit_members: [success.json, SHA256SUMS.json]
+  success_payload_and_manifest_bytes_precomputed_before_rename: true
+  exact_result_and_authority_bindings_reverified_after_exception: true
+  failure_target_is_never_deleted_or_overwritten: true
+  success_and_terminal_dual_state_forbidden: true
+  commit_indeterminate_blocks_resume: true
+
+external_execution_trust_root:
+  required_for_any_future_execution: true
+  reviewed_outer_path: null
+  reviewed_outer_sha256: null
+  dynamic_self_acceptance_forbidden: true
+  future_execution_successor_required: true
+
+gates:
+  remediation_user_authorized: true
+  candidate_implementation_ready: true
+  independent_pre_run_review_passed: false
+  execution_successor_present: false
+  two_block_pilot_execution_ready: false
+  two_block_pilot_executed: false
+  named_outage_comparison_passed: false
+  post_result_review_passed: false
+  formal_activation_present: false
+  formal_execution_ready: false
+  user_formal_run_authorized: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false

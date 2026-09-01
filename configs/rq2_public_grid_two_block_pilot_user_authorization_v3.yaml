@@ -1,0 +1,32 @@
+schema: rq2_public_grid_two_block_pilot_user_authorization_v3
+version: 3
+recorded_on: "2026-08-30"
+status: remediation_authorized_future_execution_conditioned
+
+user_authority:
+  exact_quote: "授权给你，修复好之后就开始正式实验吧"
+  remediation_and_independent_review_authorized: true
+  future_formal_run_conditionally_authorized: true
+
+conditions_precedent:
+  candidate_v3_independent_pre_run_review_passed: false
+  separately_versioned_execution_successor_present: false
+  two_block_pilot_executed_and_complete: false
+  named_outage_comparison_passed: false
+  post_result_independent_review_passed: false
+  formal_activation_separately_sealed: false
+
+effect:
+  conditional_authorization_effective: false
+  current_candidate_execution_authorized: false
+  current_pilot_execution_authorized: false
+  current_formal_run_authorized: false
+  current_claim_authorized: false
+  current_security_certified: false
+  no_execution_authority: true
+
+interpretation:
+  - The exact user statement is preserved as future conditional authority only.
+  - Every listed condition precedent must be machine-bound and PASS before that authority can become effective.
+  - This receipt is neither an activation nor an execution successor.
+  - A timeout, resource stop, nonzero exit, unresolved payload, or invalid certificate is not infeasibility evidence.

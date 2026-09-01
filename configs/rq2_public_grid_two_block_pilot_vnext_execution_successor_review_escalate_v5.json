@@ -1,0 +1,85 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_vnext_execution_successor_review_escalate_v5",
+  "version": 5,
+  "reviewed_on": "2026-09-01",
+  "reviewer_agent": "/root/pilot_post_result_review",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "ESCALATE",
+  "reviewed_v5": {
+    "outer_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v5.OUTER.SHA256SUMS.json",
+    "outer_sha256": "83ea9528f0f8f87bbc438a453c8365c97920a089161901692f4978591d5d8f20",
+    "inner_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v5.SHA256SUMS.json",
+    "inner_sha256": "e9c5cb678e15dadf6ee883879e4488c16dd59a813d94b87d09e8fe22ddb29447",
+    "public_anchor_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v5_ots_public_key.json",
+    "public_anchor_sha256": "be3384bd8b40068e0b9aa81333617e93ca9bd96102fd9b9d51269345ca17ddf6",
+    "key_id": "96c07d7bbde974606a3b097e7de499b5a8a5aeee9df2dd88ac121afa39ed613b",
+    "public_key_commitment": "8344976a4758b431c091a0170f194803085fbf247e40fb352021ca3650d6a9d5"
+  },
+  "findings": [
+    {
+      "severity": "BLOCKER",
+      "finding_id": "DEADLINE_MISS_TERMINATION_JOURNAL_NOT_PERSISTABLE",
+      "same_deadline_persistence_finding_repeated": true,
+      "classification_counterexample": {
+        "previous_sample_position": "early_boundary",
+        "deadline_detection": "strictly_after_slot_plus_1000000000ns_by_1ns",
+        "exact_owned_termination_duration_ns": 2000000000,
+        "last_sample_to_exit_ns": 8000000001,
+        "v5_fixed_termination_cap_ns": 8000000000,
+        "observed_v5_status": "termination_indeterminate",
+        "observed_v5_reason": "owned_termination_exit_window_exceeded",
+        "required_honest_status": "resource_sample_deadline_missed"
+      },
+      "persistence_counterexample": {
+        "controller_order": "read_exit_notice_then_eof_then_process_wait_then_monitor_future_then_persist",
+        "dummy_child_behavior": "no_exit_notice_after_hello_and_envelope",
+        "first_failure": "exit_notice_read_or_eof_before_monitor_future_consumption",
+        "consequence": "monitor_journal_not_persisted_by_actual_controller"
+      },
+      "test_gap": {
+        "classification_test_used_previous_sample_late_boundary": true,
+        "persistence_test_was_source_order_only": true,
+        "real_pipe_exception_integration_test_present": false
+      },
+      "disposition": "escalate_to_new_isolated_versioned_v6_cycle_only"
+    }
+  ],
+  "closed_findings": {
+    "arbitrary_100s_observation_gap_rejected": true,
+    "two_second_catch_up_rejected": true,
+    "missing_slot_rejected": true,
+    "lateness_one_ns_above_budget_rejected": true,
+    "lease_seven_failure_points_seed_free_tombstone": true,
+    "lamport_runtime_cross_bindings_preserved": true,
+    "production_private_seed_read_or_consumed_by_reviewer": false
+  },
+  "positive_evidence": {
+    "v5_outer_inner_public_anchor_exact": true,
+    "sealed_termination_source_and_outer_exact": true,
+    "focused_result": "64 passed",
+    "ruff_passed": true,
+    "canonical_self_inventory_count": 13,
+    "canonical_live_inventory_count": 168,
+    "canonical_zero_execution_passed": true,
+    "v4_and_v5_fast_probes_sample_and_expected_count": "1/1",
+    "fast_probes_zero_solver_and_result_write": true,
+    "formal_assets_and_nine_checkpoints_exact": true,
+    "canonical_roots_and_related_processes_clean": true,
+    "broad_accounting_consistent": true
+  },
+  "effect": {
+    "v5_execution_review_passed": false,
+    "v5_execution_authorized": false,
+    "v5_pilot_authorized": false,
+    "formal_execution_authorized": false,
+    "result_authorized": false,
+    "claim": false,
+    "security_certified": false,
+    "v6_versioned_cycle_only": true
+  },
+  "workflow_provenance": {
+    "recorded_from_orchestrated_independent_review": true,
+    "reviewer_cryptographic_signature_present": false,
+    "does_not_claim_reviewer_signature": true
+  }
+}

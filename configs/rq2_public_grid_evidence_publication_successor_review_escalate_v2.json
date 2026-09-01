@@ -1,0 +1,24 @@
+{
+  "schema": "rq2_public_grid_evidence_publication_successor_review_escalate_v2",
+  "version": 1,
+  "reviewed_on": "2026-08-31",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "ESCALATE",
+  "reviewed_outer": {
+    "path": "configs/rq2_public_grid_evidence_publication_successor_v2.OUTER.SHA256SUMS.json",
+    "sha256": "693422c44d87fd230bcc2316ad87db9274025fd61ea354b7b679cc1afe8183ee"
+  },
+  "findings": [
+    "V2 delegates transitive closure provenance to the lossy V1 path-only wrapper, so its 27-item map omits the sealed execution-controller-v3 68-item path-to-digest trace.",
+    "V2 tests use a lower-bound inventory assertion rather than exact set equality, so a transitive omission, conflicting duplicate binding, or stable-read drift is not proven to fail closed.",
+    "V2 evidence HMAC, controller receipt, result manifest, and success readback therefore bind only the incomplete map and cannot support a complete provenance claim."
+  ],
+  "effect": {
+    "evidence_publication_successor_v2_review_passed": false,
+    "versioned_v3_provenance_remediation_authorized": true,
+    "pilot_execution_authorized": false,
+    "formal_execution_authorized": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

@@ -1,0 +1,208 @@
+schema: rq2_public_baseline_robustness_identification_successor_v1
+version: 1
+frozen_on: "2026-08-27"
+status: implementation_binding_validate_only_upstream_package_absent
+
+scope:
+  purpose: versioned_four_arm_identification_and_report_contract
+  loads_external_package_during_validation: false
+  runs_solver_during_validation: false
+  runs_formal_identification: false
+  writes_checkpoint_or_report: false
+  publishes_result: false
+  changes_preregistered_thresholds: false
+  formal_result: false
+  claim: false
+
+predecessor_authority:
+  preregistration:
+    path: configs/rq2_public_baseline_robustness_preregistration_v1.yaml
+    sha256: 017708b25c3e1702c938a108af070a7047517bd128552500d3ffcac6a3ee3554
+  preregistration_manifest:
+    path: configs/rq2_public_baseline_robustness_preregistration_v1.SHA256SUMS.json
+    sha256: da6d13055ccfcd03c00939ab7fa61f43e05052556211f725b4550a09d33f64c9
+  package_successor:
+    path: configs/rq2_public_baseline_robustness_successor_v1.yaml
+    sha256: 2d7a801b2cc0b078650a6b9917a45d282a3d9f273a0eb6043361a89a6c5f7d9a
+  package_successor_manifest:
+    path: configs/rq2_public_baseline_robustness_successor_v1.SHA256SUMS.json
+    sha256: 0234ed0eb54b30f15891ff49df7f74fea678e6f05309a8c1e4473a9ea7d34954
+
+implementation_authority:
+  package_core:
+    path: src/evaluation/rq2_baseline_robustness_package_v1.py
+    sha256: 9075751220797c86270cc5877584d2aeb5ea128afe16a54befeb7831e7033e5f
+  transport_core:
+    path: src/scenarios/block_coupling.py
+    sha256: e18e025c6482ecb38f745bb993d346f49c4bdd99802cdb1675e4bd7ab5243cc4
+  identification_core:
+    path: src/evaluation/rq2_baseline_robustness_identification_v1.py
+    sha256: 8f29faf7788a3f7c2578104fd34ff7e3301af47de55d66f3210907a3fe6d7722
+  report_core:
+    path: src/evaluation/rq2_baseline_robustness_report_v1.py
+    sha256: fd57bd03fea2a5e83d4b150cc941167bfbc37c80b4cf892d298361304bcbd56b
+  theoretical_propositions:
+    path: docs/model_spec/rq2_theoretical_propositions_v1.md
+    sha256: fc7ab30614a3d34a4d6740fc132679cb49f14e80137d6e420a20fdb23640edc8
+
+activation_authority:
+  path: null
+  sha256: null
+  activated: false
+
+upstream_four_arm_package:
+  path: null
+  manifest_path: null
+  manifest_sha256: null
+  provenance_sha256: null
+  validation_receipt_path: null
+  expected_schemas:
+    - four_arm_training_status
+    - four_arm_minimum_flexibility
+    - four_arm_pairwise_outcomes
+    - E0_outcomes
+    - checkpoint_inventory
+    - provenance
+  canonical_v1_validation_required: true
+  ready: false
+  blocked_reason: upstream_four_arm_package_not_activated_or_present
+
+identification_contract:
+  ambiguity_set: complete_discrete_transport_polytope
+  row_marginal: finite_grid_need_power_blocks_conditioned_after_E0_separation
+  column_marginal: workload_blocks
+  marginals_identical_across_registered_cells: true
+  scalar_endpoint_solver_api: src.scenarios.block_coupling.bound_transport_expectation
+  independent_explicit_dual_required: true
+  endpoint_attaining_pi_required: true
+  objective_recomputation_required: true
+  marginal_residual_required: true
+  dual_feasibility_required: true
+  primal_dual_gap_required: true
+  comparison_tolerance: 1.0e-6
+  certificate_tolerance: 1.0e-9
+  phase_one_positive_tolerance: 1.0e-8
+  timeout_or_solver_failure_is_infeasibility: false
+  incomplete_certificate_is_sharp: false
+  common_pi:
+    solver: scipy.optimize.linprog
+    method: highs
+    always_feasible_shared_slack_phase_one: true
+    status_2_alone_proves_incompatibility: false
+    feasible_requires_same_pi_marginals_and_all_inequalities: true
+    incompatible_requires_positive_primal_dual_certified_phase_one_optimum: true
+    ambiguous_or_uncertified_status: unknown
+    exact_branch_inventory:
+      - single_network_failure
+      - single_network_shortfall
+      - single_cfe_failure
+      - single_cfe_shortfall
+      - joint_capacity
+      - joint_failure
+      - joint_shortfall
+      - b6_capacity
+      - b6_failure
+      - b6_shortfall
+      - no_mechanism
+
+registered_estimands:
+  capacity:
+    D_by_arm: minimum_normalized_flexibility_for_each_of_four_arms
+    I_joint: D_joint_correct_minus_max_D_network_only_D_cfe_only
+    U_B6: D_joint_correct_minus_D_joint_B6
+  service_risk_metrics:
+    - failure_probability
+    - expected_shortfall
+  service_risk_contrasts:
+    - joint_correct_minus_network_only
+    - joint_correct_minus_cfe_only
+    - joint_b6_minus_joint_correct
+  exact_category_deciding_metric_count: 14
+  descriptive_debt_metrics:
+    - peak_recovery_debt
+    - terminal_recovery_debt
+  debt_category_deciding: false
+  right_censored_terminal_debt_is_failure: false
+  E0:
+    preserves_unconditional_probability_mass: true
+    conditional_service_metrics_defined: false
+    missing_or_unresolved_blocks_attribution: true
+  T1_mw_only_reference:
+    raw_grid_call_trajectory_path: null
+    raw_cfe_call_trajectory_path: null
+    current_package_contains_required_raw_trajectories: false
+    derivation_from_pairwise_outcomes_allowed: false
+    implementation_bound: false
+    status: future_raw_trajectory_input_required
+
+classification_contract:
+  comparison_tolerance: 1.0e-6
+  robust_positive: LB_greater_than_tolerance
+  robust_nonpositive: UB_less_than_or_equal_to_tolerance
+  crossing: LB_less_than_or_equal_to_tolerance_and_UB_greater_than_tolerance
+  global_failure_status: unresolved
+  exact_exclusive_priority:
+    - unresolved
+    - training_infeasible_estimand_undefined
+    - single_service_insufficiency_supported
+    - joint_only_interaction_supported
+    - b6_specific_underprovisioning_supported
+    - partially_identified
+    - no_registered_mechanism_supported
+  training_infeasible_requires_proof_under_frozen_solver_contract: true
+  timeout_missing_certificate_or_local_failure_is_training_infeasible: false
+  metricwise_possible_common_pi_certified_incompatible_is_partial: true
+  unknown_common_pi_is_unresolved: true
+  debt_can_change_category: false
+
+machine_contract:
+  identification_payload_schema: rq2_baseline_robustness_identification_payload_v1
+  upstream_package_authority_schema: rq2_baseline_upstream_package_authority_v1
+  scalar_endpoint_schema: rq2_baseline_scalar_transport_certificate_v1
+  common_pi_phase_one_schema: rq2_baseline_common_pi_phase_one_certificate_v1
+  common_pi_branch_schema: rq2_baseline_common_pi_branch_certificate_v1
+  report_schema: rq2_baseline_robustness_report_v1
+  report_sections:
+    - identification_evidence
+    - exclusive_attribution_by_cell
+    - negative_and_unresolved_cell_inventory
+    - descriptive_recovery_debt
+    - E0_outcomes
+    - claim_gate_report
+    - provenance
+  report_build_requires_canonical_upstream_package_directory: true
+  report_build_requires_manifest_sha256_authority: true
+  report_validation_requires_identification_payload_and_upstream_package: true
+  canonical_package_reidentification_before_report_required: true
+  standalone_report_scientific_validation_allowed: false
+  synthetic_document_adapter_is_public_validation_authority: false
+  all_registered_cells_including_negative_and_unresolved_required: true
+  immutable_checkpoint_identity_required: true
+  exact_recursive_manifest_required: true
+  manifest_contains_itself: false
+  provenance_bound_to_upstream_manifest_and_config: true
+  output_path: null
+  output_manifest_path: null
+  result_writer_or_publisher_implemented: false
+  claim_gates_all_false: true
+
+validation_contract:
+  validator_path: experiments/validate_rq2_public_baseline_robustness_identification_successor_v1.py
+  test_path: tests/test_rq2_public_baseline_robustness_identification_successor_v1.py
+  manifest_path: configs/rq2_public_baseline_robustness_identification_successor_v1.SHA256SUMS.json
+  canonical_config_and_manifest_only: true
+  reparse_or_symlink_component_allowed: false
+  validator_imports_identification_or_solver_core: false
+  validator_runs_solver: false
+  validator_writes_files: false
+
+gates:
+  upstream_package_ready: false
+  activation_authority_present: false
+  implementation_bound: false
+  independent_review: false
+  execution_ready: false
+  formal_identification_run: false
+  report_published: false
+  formal_result: false
+  claim: false

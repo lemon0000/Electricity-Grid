@@ -1,0 +1,90 @@
+schema: rq2_public_grid_need_activation_v2
+version: 2
+status: reviewed_successor_grid_activation
+authorized_on: "2026-08-29"
+
+user_authority:
+  explicit_authorization_observed: true
+  authorization_record: "我给你完整授权，把所有东西配置好然后开始实验吧"
+  authorized_scope: formal_rq2_pipeline_in_registered_stage_order
+
+pilot_post_result_review:
+  receipt_path: configs/rq2_public_solver_confirmatory_pilot_post_result_review_pass_v1.yaml
+  receipt_sha256: b0332d033a0c25aa756094bd3e86bbef81ef624e88c7cf30a73829419a1e5cd8
+  verdict: PASS
+  reviewer_role: independent_sol_reviewer
+
+pilot_evidence:
+  result_directory: results/tables/rq2_public_solver_confirmatory_pilot_v4
+  result_manifest_path: results/tables/rq2_public_solver_confirmatory_pilot_v4/SHA256SUMS.json
+  result_manifest_sha256: 70003e18566c208631768dd028d573cd0c5e45d4f8fb0e7104ec1f1158d98a58
+  summary_path: results/tables/rq2_public_solver_confirmatory_pilot_v4/summary.json
+  summary_sha256: 5d32dd9636c43ea431b9998cd566bd7e4eb6d6a5ea6d7331655dbb862069a3e2
+  semantic_validation_path: results/tables/rq2_public_solver_confirmatory_pilot_v4/semantic_validation.json
+  semantic_validation_sha256: ee644933695b0749363f75e227fd3f4201d1f68da57900cd9097d2c378dd0399
+  controller_receipt_path: results/tables/rq2_public_solver_confirmatory_pilot_v4/controller_receipt.json
+  controller_receipt_sha256: c4b7b80dc08f2a74323d3b5ad6b3e72c4517eb6533d56119230119c3e33d3c4a
+  runs_path: results/tables/rq2_public_solver_confirmatory_pilot_v4/runs.json
+  runs_sha256: 5472780524d1ca39c97aad961385fcacdfcfb4d5972f6b5da567fd7ae6664b4c
+  config_path: configs/rq2_public_solver_confirmatory_pilot_v4.yaml
+  config_sha256: 8d23066e30e01cdcb54fb502aaf654548c44c0c9eb7d182d52b7f4e4f992bb48
+  runner_path: experiments/run_rq2_public_solver_confirmatory_pilot_v4.py
+  runner_sha256: 88835bb66fb168bc89feff0f124e00e29da7a0792e57e9101719cf7a2b591671
+  semantic_authority_manifest_sha256: c0b1a6a3074343ab5f281b268cd40898630ad1e2234830a4536189687832f471
+  v3_outer_sha256: d7b8b7dd2cf0bc51f46602c1c7e28c1aad281c977ff8a15b0617be392e4a2f49
+
+frozen_scientific_authority:
+  preregistration_path: configs/rq2_public_data_robust_identification_preregistration_v6.yaml
+  preregistration_sha256: ef25deabfcd51fbd667e48dcddcfbe4b19a2115c6d4bc40b0fc556b5c1f332f2
+  provenance_contract_path: configs/rq2_public_pipeline_provenance_contract_v3.yaml
+  provenance_contract_sha256: 9a890f6cebf6a2b87b6cee97ec9b3a5074bb40892cee917c98fe58644ff178f9
+  input_package_path: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4
+  input_package_manifest_sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+  source_manifest_path: data/raw/rts_gmlc/v0.2.3/upstream/SHA256SUMS
+  source_manifest_sha256: 95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914
+
+grid_stage:
+  stage: grid_need_dispatch_v4
+  template_path: configs/rts_gmlc_public_grid_need_dispatch_v4.yaml
+  template_sha256: 84db8e7ad47bf51dd1ec94db1ebb7d3edc068b587afb4fba8d596861d58e6beb
+  runner_path: experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py
+  runner_sha256: 39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8
+  provenance_contract_path: configs/rq2_public_pipeline_provenance_contract_v3.yaml
+  provenance_contract_sha256: 9a890f6cebf6a2b87b6cee97ec9b3a5074bb40892cee917c98fe58644ff178f9
+  expected_block_count: 1071
+  checkpoint_directory: results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_gurobi
+  output_directory: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_gurobi
+  checkpoint_directory_must_not_preexist: true
+  output_directory_must_not_preexist: true
+  activated_config_path: results/execution_configs/rq2_public_successor_v2/grid.yaml
+  activation_record_path: results/execution_configs/rq2_public_successor_v2/grid.activation.json
+  activated_root_must_not_preexist: true
+
+grid_activation_review:
+  receipt_path: configs/rq2_public_grid_activation_review_pass_v1.yaml
+  receipt_sha256: e171d8971c642296815a37b75273a52775a917526e5cd3e16bdd00676a7640ed
+  verdict: PASS
+  reviewer_role: independent_sol_reviewer
+
+downstream:
+  pairwise_replay_ready: false
+  identification_ready: false
+  activation_requires_verified_upstream_package: true
+  stage_order: [grid, pairwise, identification]
+
+execution:
+  independent_R4_review_passed: true
+  formal_execution_ready: true
+  user_formal_run_authorized: true
+  required_environment_value: EXECUTION_MACHINE_CONFIRMED
+  forbidden_hostnames: [GQPD263XH9]
+  predecessor_HiGHS_checkpoint_reuse_allowed: false
+  require_all_blocks_resolved: true
+
+claims:
+  formal_result_exists: false
+  empirical_outage_probability: false
+  full_N_minus_one: false
+  AC_security: false
+  security_certified: false
+  paper_claim: false

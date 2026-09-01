@@ -1,6 +1,6 @@
 # 文献检索与编码协议
 
-更新日期：2026-07-13
+更新日期：2026-08-25
 
 ## 当前状态
 
@@ -32,6 +32,9 @@
 4. 生物医学索引覆盖的跨学科论文使用Europe PMC补充摘要。
 5. IEA、NERC和DOE报告只使用机构官网或OSTI官方页面。
 6. 搜索结果页只用于定位官方来源，不作为文献事实的最终证据。
+7. 学术最近邻与合同/监管材料分表编码：学术工作进入
+   `literature_matrix.csv`；制度对象、合同规则和企业核算方法进入
+   `contract_evidence_matrix.csv`，不得用监管材料替代同行评议的方法比较。
 
 ## 纳入规则
 
@@ -49,6 +52,11 @@
 
 从 `M` 或 `A` 升级为 `F` 时，应复核以下字段：不确定性、决策变量、N-1、工程工期/延期、柔性包络、绿电口径、测试系统，以及与本项目的直接差异。
 
+合同/监管证据使用独立的 `P-官方全文`、`P-官方方法页` 或
+`P-官方全文页` 标签。每行必须同时填写 `what_it_supports` 与
+`what_it_does_not_support`：前者记录该来源能够建立的制度对象，后者记录不能
+由该来源推出的行为、共同资源映射、发生率或因果结论。
+
 ## 编码规则
 
 - `否` 只用于全文中能够确认没有该机制的情形；证据不足时写“待全文核验”或“摘要未报告”。
@@ -58,6 +66,35 @@
 - “绿电”必须区分现场新能源利用、碳强度感知、年度证书匹配和同小时可归属CFE。
 - 数据中心柔性必须区分永久放弃、延期完成、跨地点迁移和事故削减，并记录是否有能量守恒或恢复状态。
 - 与项目的差异必须写成可验证的模型或实验差异，不能使用“研究较少”“尚不充分”等空泛表述。
+
+## 制度交集主张的证据规则
+
+合同重叠主张分三层核验，不能跨层推断：
+
+1. `institutional_objects_separately_supported`：network-side flexible
+   transmission service 与 hourly CFE accounting/procurement 分别有官方primary
+   source。当前证据达到本层。
+2. `same_resource_overlap_observed`：同一具名data center、同一workload
+   population或可审计物理包络，同时承担两类义务，并有合同、计量或运行映射。
+   当前没有公开primary evidence达到本层。
+3. `overlap_frequency_or_causal_effect_identified`：有抽样框、联合时钟和可复核
+   对照，足以估计发生率或因果影响。当前没有证据达到本层。
+
+因此论文只能把两类制度对象的潜在交集表述为
+`contract-overlap hypothesis`（可检验的制度交集风险），不能写成已观察到的
+普遍双重签约事实。若取得企业或运营商材料，仍须先证明内部workload与两个
+外部义务的共同物理映射，不能仅凭同一公司名称升级证据层级。
+
+可证伪命题必须在查证前冻结作用域：指定具名设施/项目`U`，或给出抽样总体`S`、
+纳入规则与完整覆盖判据。同一`U/S`内的共同映射支持该范围的P1；具名`U`的完整
+隔离映射，或有限`S`按规则完成全部单位核验且均无重叠，才否定该范围内命题。
+单个隔离案例不能推翻总体外存在性，缺失映射记为unresolved。
+
+经验机制的方向固定为
+`Δ=D_min^flex,correct-D_min^flex,B6`。在预注册coupling set上，只有sharp
+`LB_Δ>0`支持all-coupling robust正效应；`LB_Δ<=0<UB_Δ`是partially identified；
+`UB_Δ<=0`才排除严格正效应。必要arm上B6不劣或预注册稳健性失败表示正主张未建立，
+不能在没有`UB_Δ<=0`时写成反证。
 
 ## 已发现的书目信息修正
 
@@ -80,6 +117,18 @@
 
 排除说明：本轮同时检出但未纳入核心矩阵的相邻工作包括Ren et al. (2025, arXiv:2510.01050，数据中心频率响应Safe-UC)与若干配网拥塞市场/碳责任分摊文，因其目标为频率安全或市场机制、不服务RQ2重复承诺证据链，仅在下一轮按需追踪。
 
+## 2026-08-25 最近邻与制度证据增补
+
+| id | 标识符 | 核验来源 | 层级 | 对创新边界的约束 |
+|---|---|---|---|---|
+| DC14 | arXiv:2602.01508v1 | arXiv官方HTML全文 | F | Fan and Zhao 已联合优化workload distribution与regulation capacity commitment，并以chance/VaR queue constraints处理瞬时与累计可交付性；容量承诺或deliverability本身不能作为本项目优先权主张 |
+| DC15 | arXiv:2608.19622v1 | arXiv官方HTML全文 | F | Khanal et al. 已在PJM/Korea容量扩展中建模firm/flexible/interruptible tiers及depth、duration、ramp、recovery与年度上限；capacity expansion中的event-shape/recovery本身不能作为本项目优先权主张 |
+
+制度证据另记入`contract_evidence_matrix.csv`：FERC 195 FERC ¶61,216支持
+MW contract level与受控withdrawal这一network-side制度对象；EnergyTag与Google
+支持hourly CFE matching/accounting/procurement这一独立制度对象。三者均不证明
+同一数据中心把同一业务柔性同时承诺给两类义务。
+
 ## 下一轮全文队列
 
 最高优先级：
@@ -99,3 +148,6 @@
 - 对核心文献完成前向和后向引文追踪，并记录新增条目为何纳入或排除。
 - 2026年预印本的版本和发表状态重新核验。
 - Introduction中的每一项相关工作判断都能回到矩阵中的一行和一个证据层级。
+- 若论文仍以contract-overlap为问题前提，必须明确标注它是待外部证据检验的
+  hypothesis；只有达到上述第二层才可写成已观察案例，达到第三层才可报告
+  发生率或因果效应。

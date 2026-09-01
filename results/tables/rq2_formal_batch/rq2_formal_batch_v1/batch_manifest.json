@@ -1,0 +1,1326 @@
+{
+  "batch_id": "rq2_formal_batch_v1",
+  "job_count": 19,
+  "batch_gate_passed": true,
+  "jobs": [
+    {
+      "job_id": "A1_l5_lambda_frontier",
+      "runner": "experiments.run_rq2_l5_economic_stochastic",
+      "base_config": "configs\\rq2_l5_economic_stochastic_formal.yaml",
+      "base_config_sha256": "b65e6a870435cbb20fb800cf10ec3187a5c67ae73c4b38871320320e6457330a",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A1_l5_lambda_frontier\\effective_config.yaml",
+      "effective_config_sha256": "4acc4280638a9910d52fe8191e8d091266cd62d59dfc1b7f1f0227a0046d2011",
+      "overrides": {},
+      "evaluation_id": "rq2_l5_economic_stochastic_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": 20.0,
+      "h3_monotone_cost_tail_risk_tradeoff": true,
+      "h3_cvar_non_increasing": true,
+      "h3_expected_cost_non_decreasing": true,
+      "frontier": [
+        {
+          "lambda_risk": 0.0,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.01,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.02,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.03,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.05,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.075,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.1,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.15,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.25,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.5,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.75,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 1.0,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 2.0,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        }
+      ],
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A1_l5_lambda_frontier\\summary.json"
+    },
+    {
+      "job_id": "A2_h2_generated_seed_20260822",
+      "runner": "experiments.run_rq2_h2_stochastic_holdout",
+      "base_config": "configs\\rq2_h2_stochastic_holdout_generated_formal.yaml",
+      "base_config_sha256": "29613d08f2d7a879447ed7680aa9dd080d033cecdd2a063b9b12a2a6581e6abd",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A2_h2_generated_seed_20260822\\effective_config.yaml",
+      "effective_config_sha256": "679c62cd90f43f8517df402e64588d69c4f04d648a1d00c7bd9abce991165301",
+      "overrides": {
+        "generator.seed": 20260822
+      },
+      "evaluation_id": "rq2_h2_stochastic_holdout_generated_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence::mw_derived_from_normalized_trace_shape_via_frozen_synthetic_scale_probabilities_are_monte_carlo_sampling_weights_not_empirical_outage_and_not_engineering_or_contract_evidence::synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": true,
+      "h2_robust_across_sources": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A2_h2_generated_seed_20260822\\summary.json"
+    },
+    {
+      "job_id": "A3_h2_generated_seed_20260823",
+      "runner": "experiments.run_rq2_h2_stochastic_holdout",
+      "base_config": "configs\\rq2_h2_stochastic_holdout_generated_formal.yaml",
+      "base_config_sha256": "29613d08f2d7a879447ed7680aa9dd080d033cecdd2a063b9b12a2a6581e6abd",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A3_h2_generated_seed_20260823\\effective_config.yaml",
+      "effective_config_sha256": "659604caf7d1ad931877f637136ca5c6d64460fddba446add9f68fb8f8e3ea26",
+      "overrides": {
+        "generator.seed": 20260823
+      },
+      "evaluation_id": "rq2_h2_stochastic_holdout_generated_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence::mw_derived_from_normalized_trace_shape_via_frozen_synthetic_scale_probabilities_are_monte_carlo_sampling_weights_not_empirical_outage_and_not_engineering_or_contract_evidence::synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": true,
+      "h2_robust_across_sources": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A3_h2_generated_seed_20260823\\summary.json"
+    },
+    {
+      "job_id": "A4_h2_generated_seed_20260824",
+      "runner": "experiments.run_rq2_h2_stochastic_holdout",
+      "base_config": "configs\\rq2_h2_stochastic_holdout_generated_formal.yaml",
+      "base_config_sha256": "29613d08f2d7a879447ed7680aa9dd080d033cecdd2a063b9b12a2a6581e6abd",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A4_h2_generated_seed_20260824\\effective_config.yaml",
+      "effective_config_sha256": "cc87ee61860d02d6ee0e09583050019e73df6d20992c48d09c30342ed9898520",
+      "overrides": {
+        "generator.seed": 20260824
+      },
+      "evaluation_id": "rq2_h2_stochastic_holdout_generated_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence::mw_derived_from_normalized_trace_shape_via_frozen_synthetic_scale_probabilities_are_monte_carlo_sampling_weights_not_empirical_outage_and_not_engineering_or_contract_evidence::synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": true,
+      "h2_robust_across_sources": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A4_h2_generated_seed_20260824\\summary.json"
+    },
+    {
+      "job_id": "A5_ablation_seed_20260822",
+      "runner": "experiments.run_rq2_h2_scenario_source_ablation",
+      "base_config": "configs\\rq2_h2_scenario_source_ablation_formal.yaml",
+      "base_config_sha256": "d94d2580b68411ecb78cae66bbf51aa7ff9f736d5e6c2281c397868e7aeac56c",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A5_ablation_seed_20260822\\effective_config.yaml",
+      "effective_config_sha256": "b8ebb55ccca954706206fb9df7d1e82f1f69b0cc7c5f2edc29126097f5440d1c",
+      "overrides": {
+        "generator.seed": 20260822
+      },
+      "evaluation_id": "rq2_h2_scenario_source_ablation_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": true,
+      "temporal_robustness_by_network_method": null,
+      "temporal_arm_results": [
+        {
+          "arm": "manual",
+          "training_scenario_count": 2,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 100.0,
+          "b6_committed_mw": 60.0,
+          "h2_b6_extra_failure_probability": 0.3999999999999999,
+          "h2_b6_extra_expected_shortfall_mwh": 28.0,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "generated",
+          "training_scenario_count": 200,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 57.87296733560118,
+          "b6_committed_mw": 38.55423945863698,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 10.87667808502615,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "reduced",
+          "training_scenario_count": 50,
+          "reduction_kantorovich_distance": 0.11942045524207749,
+          "correct_committed_mw": 57.87296733560118,
+          "b6_committed_mw": 38.50749714145966,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 10.89537501189708,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        }
+      ],
+      "shared_holdout_sha256": null,
+      "generated_draw_sha256": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A5_ablation_seed_20260822\\summary.json"
+    },
+    {
+      "job_id": "A6_ablation_seed_20260823",
+      "runner": "experiments.run_rq2_h2_scenario_source_ablation",
+      "base_config": "configs\\rq2_h2_scenario_source_ablation_formal.yaml",
+      "base_config_sha256": "d94d2580b68411ecb78cae66bbf51aa7ff9f736d5e6c2281c397868e7aeac56c",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A6_ablation_seed_20260823\\effective_config.yaml",
+      "effective_config_sha256": "1b9a610d693384673da71bee6ce8fa326d782f9f6d89b206b77494fb9ab8dc22",
+      "overrides": {
+        "generator.seed": 20260823
+      },
+      "evaluation_id": "rq2_h2_scenario_source_ablation_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": true,
+      "temporal_robustness_by_network_method": null,
+      "temporal_arm_results": [
+        {
+          "arm": "manual",
+          "training_scenario_count": 2,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 100.0,
+          "b6_committed_mw": 60.0,
+          "h2_b6_extra_failure_probability": 0.3999999999999999,
+          "h2_b6_extra_expected_shortfall_mwh": 28.0,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "generated",
+          "training_scenario_count": 200,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 53.91601359907478,
+          "b6_committed_mw": 38.538878933751064,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 7.717259305759399,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "reduced",
+          "training_scenario_count": 50,
+          "reduction_kantorovich_distance": 0.11787032061632619,
+          "correct_committed_mw": 53.48680295037357,
+          "b6_committed_mw": 38.4199784453749,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 7.421450982148897,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        }
+      ],
+      "shared_holdout_sha256": null,
+      "generated_draw_sha256": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A6_ablation_seed_20260823\\summary.json"
+    },
+    {
+      "job_id": "A7_ablation_seed_20260824",
+      "runner": "experiments.run_rq2_h2_scenario_source_ablation",
+      "base_config": "configs\\rq2_h2_scenario_source_ablation_formal.yaml",
+      "base_config_sha256": "d94d2580b68411ecb78cae66bbf51aa7ff9f736d5e6c2281c397868e7aeac56c",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A7_ablation_seed_20260824\\effective_config.yaml",
+      "effective_config_sha256": "22d6049072813d3b0df9b10f98e3692f4133480ca123bcf24ed6113a6b0d6708",
+      "overrides": {
+        "generator.seed": 20260824
+      },
+      "evaluation_id": "rq2_h2_scenario_source_ablation_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": true,
+      "temporal_robustness_by_network_method": null,
+      "temporal_arm_results": [
+        {
+          "arm": "manual",
+          "training_scenario_count": 2,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 100.0,
+          "b6_committed_mw": 60.0,
+          "h2_b6_extra_failure_probability": 0.3999999999999999,
+          "h2_b6_extra_expected_shortfall_mwh": 28.0,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "generated",
+          "training_scenario_count": 200,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 57.32467676604378,
+          "b6_committed_mw": 38.55423945863698,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 10.438045629380227,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "reduced",
+          "training_scenario_count": 50,
+          "reduction_kantorovich_distance": 0.12820982453126012,
+          "correct_committed_mw": 57.32467676604378,
+          "b6_committed_mw": 38.37606341067955,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 10.509316048563207,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        }
+      ],
+      "shared_holdout_sha256": null,
+      "generated_draw_sha256": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\A7_ablation_seed_20260824\\summary.json"
+    },
+    {
+      "job_id": "B1_ablation_grid_scale_30",
+      "runner": "experiments.run_rq2_h2_scenario_source_ablation",
+      "base_config": "configs\\rq2_h2_scenario_source_ablation_formal.yaml",
+      "base_config_sha256": "d94d2580b68411ecb78cae66bbf51aa7ff9f736d5e6c2281c397868e7aeac56c",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B1_ablation_grid_scale_30\\effective_config.yaml",
+      "effective_config_sha256": "818d2cab94dd57c34d4a7ac6d9d8b867a0cf51a44aac26ec5e0c76679fe00a19",
+      "overrides": {
+        "generator.grid_stress_scale_mw": 30.0
+      },
+      "evaluation_id": "rq2_h2_scenario_source_ablation_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": true,
+      "temporal_robustness_by_network_method": null,
+      "temporal_arm_results": [
+        {
+          "arm": "manual",
+          "training_scenario_count": 2,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 100.0,
+          "b6_committed_mw": 60.0,
+          "h2_b6_extra_failure_probability": 0.3999999999999999,
+          "h2_b6_extra_expected_shortfall_mwh": 28.0,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "generated",
+          "training_scenario_count": 200,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 48.24609305023627,
+          "b6_committed_mw": 28.915679593977735,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 7.732165382503418,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "reduced",
+          "training_scenario_count": 50,
+          "reduction_kantorovich_distance": 0.10294436120819138,
+          "correct_committed_mw": 48.24609305023627,
+          "b6_committed_mw": 28.880622856094746,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 7.746188077656605,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        }
+      ],
+      "shared_holdout_sha256": null,
+      "generated_draw_sha256": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B1_ablation_grid_scale_30\\summary.json"
+    },
+    {
+      "job_id": "B2_ablation_grid_scale_50",
+      "runner": "experiments.run_rq2_h2_scenario_source_ablation",
+      "base_config": "configs\\rq2_h2_scenario_source_ablation_formal.yaml",
+      "base_config_sha256": "d94d2580b68411ecb78cae66bbf51aa7ff9f736d5e6c2281c397868e7aeac56c",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B2_ablation_grid_scale_50\\effective_config.yaml",
+      "effective_config_sha256": "4307647a82982bf9da86b7b3ac6a590db1f64b8c630606426d592c5089696303",
+      "overrides": {
+        "generator.grid_stress_scale_mw": 50.0
+      },
+      "evaluation_id": "rq2_h2_scenario_source_ablation_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": true,
+      "temporal_robustness_by_network_method": null,
+      "temporal_arm_results": [
+        {
+          "arm": "manual",
+          "training_scenario_count": 2,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 100.0,
+          "b6_committed_mw": 60.0,
+          "h2_b6_extra_failure_probability": 0.3999999999999999,
+          "h2_b6_extra_expected_shortfall_mwh": 28.0,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "generated",
+          "training_scenario_count": 200,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 67.4998416209661,
+          "b6_committed_mw": 48.19279932329623,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 14.722753567454383,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "reduced",
+          "training_scenario_count": 50,
+          "reduction_kantorovich_distance": 0.13186554139888657,
+          "correct_committed_mw": 67.4998416209661,
+          "b6_committed_mw": 48.13437142682457,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 14.74612472604305,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        }
+      ],
+      "shared_holdout_sha256": null,
+      "generated_draw_sha256": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B2_ablation_grid_scale_50\\summary.json"
+    },
+    {
+      "job_id": "B3_ablation_green_scale_45",
+      "runner": "experiments.run_rq2_h2_scenario_source_ablation",
+      "base_config": "configs\\rq2_h2_scenario_source_ablation_formal.yaml",
+      "base_config_sha256": "d94d2580b68411ecb78cae66bbf51aa7ff9f736d5e6c2281c397868e7aeac56c",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B3_ablation_green_scale_45\\effective_config.yaml",
+      "effective_config_sha256": "f4930eadaffd58c542416839f9ae14da6978be9967915f6a610658563c269d73",
+      "overrides": {
+        "generator.green_call_scale_mw": 45.0
+      },
+      "evaluation_id": "rq2_h2_scenario_source_ablation_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": true,
+      "temporal_robustness_by_network_method": null,
+      "temporal_arm_results": [
+        {
+          "arm": "manual",
+          "training_scenario_count": 2,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 100.0,
+          "b6_committed_mw": 60.0,
+          "h2_b6_extra_failure_probability": 0.3999999999999999,
+          "h2_b6_extra_expected_shortfall_mwh": 28.0,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "generated",
+          "training_scenario_count": 200,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 53.0315997870658,
+          "b6_committed_mw": 38.55423945863698,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 7.003584046197844,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "reduced",
+          "training_scenario_count": 50,
+          "reduction_kantorovich_distance": 0.10183853877185256,
+          "correct_committed_mw": 53.0315997870658,
+          "b6_committed_mw": 38.50749714145966,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 7.022280973068774,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        }
+      ],
+      "shared_holdout_sha256": null,
+      "generated_draw_sha256": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B3_ablation_green_scale_45\\summary.json"
+    },
+    {
+      "job_id": "B4_ablation_green_scale_75",
+      "runner": "experiments.run_rq2_h2_scenario_source_ablation",
+      "base_config": "configs\\rq2_h2_scenario_source_ablation_formal.yaml",
+      "base_config_sha256": "d94d2580b68411ecb78cae66bbf51aa7ff9f736d5e6c2281c397868e7aeac56c",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B4_ablation_green_scale_75\\effective_config.yaml",
+      "effective_config_sha256": "85dd6ae467724374ebfaa07eb5084377f9f5eec54e8332f555aa15f92336ce43",
+      "overrides": {
+        "generator.green_call_scale_mw": 75.0
+      },
+      "evaluation_id": "rq2_h2_scenario_source_ablation_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": true,
+      "temporal_robustness_by_network_method": null,
+      "temporal_arm_results": [
+        {
+          "arm": "manual",
+          "training_scenario_count": 2,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 100.0,
+          "b6_committed_mw": 60.0,
+          "h2_b6_extra_failure_probability": 0.3999999999999999,
+          "h2_b6_extra_expected_shortfall_mwh": 28.0,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "generated",
+          "training_scenario_count": 200,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 62.71433488413656,
+          "b6_committed_mw": 38.55423945863698,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 14.749772123854456,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "reduced",
+          "training_scenario_count": 50,
+          "reduction_kantorovich_distance": 0.13282656674205312,
+          "correct_committed_mw": 62.71433488413656,
+          "b6_committed_mw": 38.50749714145966,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 14.768469050725386,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        }
+      ],
+      "shared_holdout_sha256": null,
+      "generated_draw_sha256": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B4_ablation_green_scale_75\\summary.json"
+    },
+    {
+      "job_id": "B5_ablation_budget_80",
+      "runner": "experiments.run_rq2_h2_scenario_source_ablation",
+      "base_config": "configs\\rq2_h2_scenario_source_ablation_formal.yaml",
+      "base_config_sha256": "d94d2580b68411ecb78cae66bbf51aa7ff9f736d5e6c2281c397868e7aeac56c",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B5_ablation_budget_80\\effective_config.yaml",
+      "effective_config_sha256": "e06af0f56b9a10f1957dd3fe89ef4054d1e09c0af0a5d5b45a53bc09611723dd",
+      "overrides": {
+        "model.max_flexibility_budget_mw": 80.0
+      },
+      "evaluation_id": "rq2_h2_scenario_source_ablation_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": true,
+      "temporal_robustness_by_network_method": null,
+      "temporal_arm_results": [
+        {
+          "arm": "manual",
+          "training_scenario_count": 2,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 80.0,
+          "b6_committed_mw": 60.0,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 16.0,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "generated",
+          "training_scenario_count": 200,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 57.87296733560118,
+          "b6_committed_mw": 38.55423945863698,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 10.87667808502615,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "reduced",
+          "training_scenario_count": 50,
+          "reduction_kantorovich_distance": 0.11942045524207749,
+          "correct_committed_mw": 57.87296733560118,
+          "b6_committed_mw": 38.50749714145966,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 10.89537501189708,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        }
+      ],
+      "shared_holdout_sha256": null,
+      "generated_draw_sha256": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B5_ablation_budget_80\\summary.json"
+    },
+    {
+      "job_id": "B6_ablation_budget_250",
+      "runner": "experiments.run_rq2_h2_scenario_source_ablation",
+      "base_config": "configs\\rq2_h2_scenario_source_ablation_formal.yaml",
+      "base_config_sha256": "d94d2580b68411ecb78cae66bbf51aa7ff9f736d5e6c2281c397868e7aeac56c",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B6_ablation_budget_250\\effective_config.yaml",
+      "effective_config_sha256": "ff29bdc8db5e5893a1ae62ad927c054160b7ca46639e091f5ea990ff14af6001",
+      "overrides": {
+        "model.max_flexibility_budget_mw": 250.0
+      },
+      "evaluation_id": "rq2_h2_scenario_source_ablation_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": true,
+      "temporal_robustness_by_network_method": null,
+      "temporal_arm_results": [
+        {
+          "arm": "manual",
+          "training_scenario_count": 2,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 100.0,
+          "b6_committed_mw": 60.0,
+          "h2_b6_extra_failure_probability": 0.3999999999999999,
+          "h2_b6_extra_expected_shortfall_mwh": 28.0,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "generated",
+          "training_scenario_count": 200,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 57.87296733560118,
+          "b6_committed_mw": 38.55423945863698,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 10.87667808502615,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "reduced",
+          "training_scenario_count": 50,
+          "reduction_kantorovich_distance": 0.11942045524207749,
+          "correct_committed_mw": 57.87296733560118,
+          "b6_committed_mw": 38.50749714145966,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 10.89537501189708,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        }
+      ],
+      "shared_holdout_sha256": null,
+      "generated_draw_sha256": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B6_ablation_budget_250\\summary.json"
+    },
+    {
+      "job_id": "B7_ablation_beta_0p3",
+      "runner": "experiments.run_rq2_h2_scenario_source_ablation",
+      "base_config": "configs\\rq2_h2_scenario_source_ablation_formal.yaml",
+      "base_config_sha256": "d94d2580b68411ecb78cae66bbf51aa7ff9f736d5e6c2281c397868e7aeac56c",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B7_ablation_beta_0p3\\effective_config.yaml",
+      "effective_config_sha256": "73d692f3dee7a88e3c8fa3e31b77470147fcf7f00b81fd93cb7bafd7b02c120f",
+      "overrides": {
+        "model.beta": 0.3
+      },
+      "evaluation_id": "rq2_h2_scenario_source_ablation_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": true,
+      "temporal_robustness_by_network_method": null,
+      "temporal_arm_results": [
+        {
+          "arm": "manual",
+          "training_scenario_count": 2,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 100.0,
+          "b6_committed_mw": 60.0,
+          "h2_b6_extra_failure_probability": 0.3999999999999999,
+          "h2_b6_extra_expected_shortfall_mwh": 28.0,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "generated",
+          "training_scenario_count": 200,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 57.87296733560118,
+          "b6_committed_mw": 38.55423945863698,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 10.87667808502615,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "reduced",
+          "training_scenario_count": 50,
+          "reduction_kantorovich_distance": 0.11942045524207749,
+          "correct_committed_mw": 57.87296733560118,
+          "b6_committed_mw": 38.50749714145966,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 10.89537501189708,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        }
+      ],
+      "shared_holdout_sha256": null,
+      "generated_draw_sha256": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B7_ablation_beta_0p3\\summary.json"
+    },
+    {
+      "job_id": "B8_ablation_beta_0p7",
+      "runner": "experiments.run_rq2_h2_scenario_source_ablation",
+      "base_config": "configs\\rq2_h2_scenario_source_ablation_formal.yaml",
+      "base_config_sha256": "d94d2580b68411ecb78cae66bbf51aa7ff9f736d5e6c2281c397868e7aeac56c",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B8_ablation_beta_0p7\\effective_config.yaml",
+      "effective_config_sha256": "bb2d0e687843746c2330c918555ee902c29862cc193f7ffb8af998520979b6aa",
+      "overrides": {
+        "model.beta": 0.7
+      },
+      "evaluation_id": "rq2_h2_scenario_source_ablation_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": null,
+      "h3_monotone_cost_tail_risk_tradeoff": null,
+      "h3_cvar_non_increasing": null,
+      "h3_expected_cost_non_decreasing": null,
+      "frontier": null,
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": true,
+      "temporal_robustness_by_network_method": null,
+      "temporal_arm_results": [
+        {
+          "arm": "manual",
+          "training_scenario_count": 2,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 100.0,
+          "b6_committed_mw": 60.0,
+          "h2_b6_extra_failure_probability": 0.3999999999999999,
+          "h2_b6_extra_expected_shortfall_mwh": 28.0,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "generated",
+          "training_scenario_count": 200,
+          "reduction_kantorovich_distance": null,
+          "correct_committed_mw": 57.87296733560118,
+          "b6_committed_mw": 38.55423945863698,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 10.87667808502615,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        },
+        {
+          "arm": "reduced",
+          "training_scenario_count": 50,
+          "reduction_kantorovich_distance": 0.11942045524207749,
+          "correct_committed_mw": 57.87296733560118,
+          "b6_committed_mw": 38.50749714145966,
+          "h2_b6_extra_failure_probability": 0.0,
+          "h2_b6_extra_expected_shortfall_mwh": 10.89537501189708,
+          "h2_b6_underdelivers_out_of_sample": true,
+          "cvar_cross_check_max_abs_error": 0.0,
+          "cvar_cross_check_passed": true,
+          "training_feasible": true
+        }
+      ],
+      "shared_holdout_sha256": null,
+      "generated_draw_sha256": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\B8_ablation_beta_0p7\\summary.json"
+    },
+    {
+      "job_id": "C1_l5_budget_80",
+      "runner": "experiments.run_rq2_l5_economic_stochastic",
+      "base_config": "configs\\rq2_l5_economic_stochastic_formal.yaml",
+      "base_config_sha256": "b65e6a870435cbb20fb800cf10ec3187a5c67ae73c4b38871320320e6457330a",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\C1_l5_budget_80\\effective_config.yaml",
+      "effective_config_sha256": "9aa6579d9e481810e854b54b39ae6511a12367b42baaba07c492e5e5bd053d7a",
+      "overrides": {
+        "model.max_flexibility_budget_mw": 80.0
+      },
+      "evaluation_id": "rq2_l5_economic_stochastic_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": 20.0,
+      "h3_monotone_cost_tail_risk_tradeoff": true,
+      "h3_cvar_non_increasing": true,
+      "h3_expected_cost_non_decreasing": true,
+      "frontier": [
+        {
+          "lambda_risk": 0.0,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.01,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.02,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.03,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.05,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.075,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.1,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.15,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.25,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.5,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.75,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 1.0,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 2.0,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        }
+      ],
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\C1_l5_budget_80\\summary.json"
+    },
+    {
+      "job_id": "C2_l5_budget_250",
+      "runner": "experiments.run_rq2_l5_economic_stochastic",
+      "base_config": "configs\\rq2_l5_economic_stochastic_formal.yaml",
+      "base_config_sha256": "b65e6a870435cbb20fb800cf10ec3187a5c67ae73c4b38871320320e6457330a",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\C2_l5_budget_250\\effective_config.yaml",
+      "effective_config_sha256": "c21e324acf82f55edb561480551c10482de371c3badbfc722f78ec67526b460d",
+      "overrides": {
+        "model.max_flexibility_budget_mw": 250.0
+      },
+      "evaluation_id": "rq2_l5_economic_stochastic_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": 20.0,
+      "h3_monotone_cost_tail_risk_tradeoff": true,
+      "h3_cvar_non_increasing": true,
+      "h3_expected_cost_non_decreasing": true,
+      "frontier": [
+        {
+          "lambda_risk": 0.0,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.01,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.02,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.03,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.05,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.075,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.1,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.15,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.25,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.5,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.75,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 1.0,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 2.0,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        }
+      ],
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\C2_l5_budget_250\\summary.json"
+    },
+    {
+      "job_id": "C3_l5_beta_0p3",
+      "runner": "experiments.run_rq2_l5_economic_stochastic",
+      "base_config": "configs\\rq2_l5_economic_stochastic_formal.yaml",
+      "base_config_sha256": "b65e6a870435cbb20fb800cf10ec3187a5c67ae73c4b38871320320e6457330a",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\C3_l5_beta_0p3\\effective_config.yaml",
+      "effective_config_sha256": "cd1f277fe941ee66cb2331cc6bc0ab28a791f61b616a888f53b9ef80ef4bb6b6",
+      "overrides": {
+        "model.beta": 0.3
+      },
+      "evaluation_id": "rq2_l5_economic_stochastic_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": 20.0,
+      "h3_monotone_cost_tail_risk_tradeoff": true,
+      "h3_cvar_non_increasing": true,
+      "h3_expected_cost_non_decreasing": true,
+      "frontier": [
+        {
+          "lambda_risk": 0.0,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 17828.571428571428,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.01,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 17828.571428571428,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.02,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 17828.571428571428,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.03,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4114.285714285715,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.05,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4114.285714285715,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.075,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4114.285714285715,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.1,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4114.285714285715,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.15,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4114.285714285715,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.25,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4114.285714285715,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.5,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4114.285714285715,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.75,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4114.285714285715,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 1.0,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4114.285714285715,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 2.0,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4114.285714285715,
+          "provisioned_flexibility_mw": 100.0
+        }
+      ],
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\C3_l5_beta_0p3\\summary.json"
+    },
+    {
+      "job_id": "C4_l5_beta_0p7",
+      "runner": "experiments.run_rq2_l5_economic_stochastic",
+      "base_config": "configs\\rq2_l5_economic_stochastic_formal.yaml",
+      "base_config_sha256": "b65e6a870435cbb20fb800cf10ec3187a5c67ae73c4b38871320320e6457330a",
+      "effective_config": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\C4_l5_beta_0p7\\effective_config.yaml",
+      "effective_config_sha256": "461d9a012b30010918cd15a183a154a1380e80c2619147e504520e05185f3dd2",
+      "overrides": {
+        "model.beta": 0.7
+      },
+      "evaluation_id": "rq2_l5_economic_stochastic_formal_v1",
+      "gate_passed": true,
+      "security_certified": false,
+      "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+      "h1_overestimation_mw": 20.0,
+      "h3_monotone_cost_tail_risk_tradeoff": true,
+      "h3_cvar_non_increasing": true,
+      "h3_expected_cost_non_decreasing": true,
+      "frontier": [
+        {
+          "lambda_risk": 0.0,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.01,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.02,
+          "expected_planning_cost": 53500.0,
+          "conditional_value_at_risk": 23600.0,
+          "provisioned_flexibility_mw": 80.0
+        },
+        {
+          "lambda_risk": 0.03,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.05,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.075,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.1,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.15,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.25,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.5,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 0.75,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 1.0,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        },
+        {
+          "lambda_risk": 2.0,
+          "expected_planning_cost": 53900.0,
+          "conditional_value_at_risk": 4400.0,
+          "provisioned_flexibility_mw": 100.0
+        }
+      ],
+      "h2_b6_underdelivers_out_of_sample": null,
+      "h2_robust_across_sources": null,
+      "summary_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\C4_l5_beta_0p7\\summary.json"
+    }
+  ],
+  "security_certified": false,
+  "formal_vma_published": false,
+  "empirical_holdout_claimed": false,
+  "touches_frozen_baselines": false,
+  "interpretation": "formal_scale_batch_orchestration_of_reviewed_rq2_mechanism_entry_points_over_frozen_seeds_and_a_frozen_mechanism_parameter_neighbourhood_reusing_each_entry_points_own_correctness_gate_adds_no_science_and_certifies_nothing"
+}

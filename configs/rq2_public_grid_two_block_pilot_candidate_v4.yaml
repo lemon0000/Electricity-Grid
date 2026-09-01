@@ -1,0 +1,117 @@
+schema: rq2_public_grid_two_block_pilot_candidate_v4
+version: 4
+frozen_on: "2026-08-31"
+status: rework_candidate_v4_execution_closed
+
+predecessor_review:
+  candidate_v3_inner_path: configs/rq2_public_grid_two_block_pilot_candidate_v3.SHA256SUMS.json
+  candidate_v3_inner_sha256: 9c3e0318daa06d7cac830c3e65f7bc9950b26c63f775cdabbe7d0315a9dad1d0
+  candidate_v3_outer_path: configs/rq2_public_grid_two_block_pilot_candidate_v3.OUTER.SHA256SUMS.json
+  candidate_v3_outer_sha256: d08b3049e43837397b1459edc9f4ecfa8d7e20419bcbbbf73f68d109f3dd10f9
+  rework_receipt_path: configs/rq2_public_grid_two_block_pilot_pre_run_review_rework_v3.yaml
+  rework_receipt_sha256: af9a2b52b9bd3597804d523a5a16d0cec607f6616c40aa8b8b1a3e0373448ba3
+
+user_authorization:
+  path: configs/rq2_public_grid_two_block_pilot_user_authorization_v3.yaml
+  sha256: f696e76a1fedba8335af62e8914b12bb9385606525cf8170d0b11ffdb3900e52
+  exact_quote: "授权给你，修复好之后就开始正式实验吧"
+  interpretation: conditional_future_authority_only_after_all_pilot_postreview_and_activation_gates_pass
+
+scientific_authority:
+  predecessor_config_path: configs/rq2_public_grid_two_block_pilot_candidate_v3.yaml
+  predecessor_config_sha256: fd6f0c01a425c6a431a4ac384d723a1c61f5516f0056a4d17e451ff1ed490e01
+  base_config_path: configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_v1.yaml
+  base_config_sha256: e1306a375bba5d19d687cb2728a981528662064226b4661a0b74f894b647f3bd
+  solver:
+    name: highs
+    expected_package_version: 1.15.1
+    threads: 4
+    mip_relative_gap: 1.0e-6
+    feasibility_tolerance: 1.0e-6
+    optimality_tolerance: 1.0e-6
+    integer_feasibility_tolerance: 1.0e-6
+    random_seed: 0
+    time_limit_seconds: null
+    tolerance_mw: 1.0e-6
+    tee: true
+
+pilot:
+  blocks: [holdout_s20260822_0008, holdout_s20260822_0009]
+  execution_index:
+    holdout_s20260822_0008: 1
+    holdout_s20260822_0009: 2
+  one_fresh_python_worker_per_block: true
+  parent_calls_solver: false
+  child_calls_complete_v4_process_block: true
+  external_watchdog_seconds: 21600
+  resource_sample_interval_seconds: 5.0
+  private_commit_limit_gib: 8.0
+  minimum_system_commit_available_gib: 2.0
+  timeout_resource_stop_nonzero_or_unresolved_is_infeasibility_evidence: false
+
+capability_transport:
+  duplex_anonymous_pipes: true
+  exact_one_frame_then_bounded_eof_before_ack: true
+  replay_or_trailing_byte_rejected: true
+  windows_inheritance: explicit_handle_list
+  posix_inheritance: pass_fds
+  stdout_stderr: exclusive_ordinary_log_files
+  all_handshake_phases_under_watchdog_and_resource_monitor: true
+  cleanup: terminate_bounded_wait_kill_bounded_wait_assert_exited
+  no_request_file_or_environment_token: true
+  trust_boundary:
+    file_level_bypass_rejected: true
+    same_permission_process_injection_or_handle_duplication_resisted: false
+    administrator_or_kernel_adversary_resisted: false
+
+controller_ledger:
+  mode: immutable_in_memory_accepted_evidence_chain
+  first_block_has_no_predecessor: true
+  second_block_binds_first_accepted_evidence_digest: true
+  accepted_evidence_binds:
+    - pipe_ack_exact_bytes_and_sha256
+    - popen_pid_and_creation_time
+    - source_payload_bytes_sha256
+    - source_attempt_receipt_bytes_sha256
+    - scientific_payload_canonical_sha256
+    - envelope_sha256
+    - nonce
+
+paths:
+  result_directory: results/tables/rq2_public_grid_two_block_pilot_v4
+  success_seal_path: results/tables/rq2_public_grid_two_block_pilot_v4.PUBLISHED.json
+  worker_staging_directory: results/workers/rq2_public_grid_two_block_pilot_v4
+  attempt_log_directory: results/logs/rq2_public_grid_two_block_pilot_v4
+
+publication:
+  attempt_receipt_claims_controller_validation: false
+  attempt_receipt_claims_published: false
+  staging_validation_receipt_claims_published: false
+  final_published_true_only_in_postrename_success_seal: true
+  source_and_final_reread_bind_controller_memory_evidence: true
+  exact_recursive_typed_manifest: true
+  atomic_result_directory_rename: true
+  failure_is_honest_incomplete_not_infeasible: true
+
+external_execution_trust_root:
+  required_for_any_future_execution: true
+  reviewed_outer_path: null
+  reviewed_outer_sha256: null
+  dynamic_self_acceptance_forbidden: true
+  future_execution_successor_required: true
+
+gates:
+  remediation_user_authorized: true
+  candidate_implementation_ready: true
+  independent_pre_run_review_passed: false
+  execution_successor_present: false
+  two_block_pilot_execution_ready: false
+  two_block_pilot_executed: false
+  named_outage_comparison_passed: false
+  post_result_review_passed: false
+  formal_activation_present: false
+  formal_execution_ready: false
+  user_formal_run_authorized: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false

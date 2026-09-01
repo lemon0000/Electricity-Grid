@@ -1,0 +1,147 @@
+{
+  "evaluation_id": "rq2_l5_economic_stochastic_formal_v1",
+  "role": "shared_budget_and_service_cvar_economic_optimization_mechanism_demonstration_formal_lambda_grid",
+  "parameter_status": "synthetic_mechanism_only_not_engineering_or_contract_evidence",
+  "risk_measure_scope": "synthetic_mechanism_only_shared_budget_and_service_cvar",
+  "solver_name": "highs",
+  "beta": 0.7,
+  "max_flexibility_budget_mw": 200.0,
+  "provisioning_cost_per_mw": 500.0,
+  "lambda_sweep": [
+    0.0,
+    0.01,
+    0.02,
+    0.03,
+    0.05,
+    0.075,
+    0.1,
+    0.15,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    2.0
+  ],
+  "scenario_count": 2,
+  "scenarios": [
+    {
+      "name": "mild",
+      "probability": 0.5
+    },
+    {
+      "name": "stress",
+      "probability": 0.5
+    }
+  ],
+  "run_count": 26,
+  "all_runs_feasible": true,
+  "cvar_cross_check_tolerance": 1e-06,
+  "cvar_cross_check_max_abs_error": 0.0,
+  "cvar_cross_check_passed": true,
+  "gate_passed": true,
+  "h1_reference_lambda": 0.0,
+  "h1_evaluated": true,
+  "h1_overestimation_mw": 20.0,
+  "h1_shared_budget_rejects_b6_overprovision": true,
+  "h3_evaluated": true,
+  "h3_cvar_non_increasing": true,
+  "h3_expected_cost_non_decreasing": true,
+  "h3_monotone_cost_tail_risk_tradeoff": true,
+  "frontier": [
+    {
+      "lambda_risk": 0.0,
+      "expected_planning_cost": 53500.0,
+      "conditional_value_at_risk": 23600.0,
+      "provisioned_flexibility_mw": 80.0
+    },
+    {
+      "lambda_risk": 0.01,
+      "expected_planning_cost": 53500.0,
+      "conditional_value_at_risk": 23600.0,
+      "provisioned_flexibility_mw": 80.0
+    },
+    {
+      "lambda_risk": 0.02,
+      "expected_planning_cost": 53500.0,
+      "conditional_value_at_risk": 23600.0,
+      "provisioned_flexibility_mw": 80.0
+    },
+    {
+      "lambda_risk": 0.03,
+      "expected_planning_cost": 53900.0,
+      "conditional_value_at_risk": 4400.0,
+      "provisioned_flexibility_mw": 100.0
+    },
+    {
+      "lambda_risk": 0.05,
+      "expected_planning_cost": 53900.0,
+      "conditional_value_at_risk": 4400.0,
+      "provisioned_flexibility_mw": 100.0
+    },
+    {
+      "lambda_risk": 0.075,
+      "expected_planning_cost": 53900.0,
+      "conditional_value_at_risk": 4400.0,
+      "provisioned_flexibility_mw": 100.0
+    },
+    {
+      "lambda_risk": 0.1,
+      "expected_planning_cost": 53900.0,
+      "conditional_value_at_risk": 4400.0,
+      "provisioned_flexibility_mw": 100.0
+    },
+    {
+      "lambda_risk": 0.15,
+      "expected_planning_cost": 53900.0,
+      "conditional_value_at_risk": 4400.0,
+      "provisioned_flexibility_mw": 100.0
+    },
+    {
+      "lambda_risk": 0.25,
+      "expected_planning_cost": 53900.0,
+      "conditional_value_at_risk": 4400.0,
+      "provisioned_flexibility_mw": 100.0
+    },
+    {
+      "lambda_risk": 0.5,
+      "expected_planning_cost": 53900.0,
+      "conditional_value_at_risk": 4400.0,
+      "provisioned_flexibility_mw": 100.0
+    },
+    {
+      "lambda_risk": 0.75,
+      "expected_planning_cost": 53900.0,
+      "conditional_value_at_risk": 4400.0,
+      "provisioned_flexibility_mw": 100.0
+    },
+    {
+      "lambda_risk": 1.0,
+      "expected_planning_cost": 53900.0,
+      "conditional_value_at_risk": 4400.0,
+      "provisioned_flexibility_mw": 100.0
+    },
+    {
+      "lambda_risk": 2.0,
+      "expected_planning_cost": 53900.0,
+      "conditional_value_at_risk": 4400.0,
+      "provisioned_flexibility_mw": 100.0
+    }
+  ],
+  "random_seed": null,
+  "security_certified": false,
+  "formal_economic_optimum_published": false,
+  "formal_vma_published": false,
+  "economic_optimum_claimed": false,
+  "touches_frozen_baselines": false,
+  "interpretation": "synthetic_shared_budget_and_service_cvar_economic_mechanism_and_sensitivity_evidence_not_engineering_contract_or_economic_optimum_certification",
+  "certification_blockers": [
+    "synthetic_coefficients_budget_cap_and_scenario_probabilities_not_empirical",
+    "temporal_envelopes_recovery_debt_duration_event_count_out_of_scope",
+    "no_ac_or_n1_network_certification_in_this_entry_point"
+  ],
+  "output_paths": {
+    "runs": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\C4_l5_beta_0p7\\runs.csv",
+    "frontier": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\C4_l5_beta_0p7\\frontier.csv",
+    "summary": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_formal_batch\\rq2_formal_batch_v1\\C4_l5_beta_0p7\\summary.json"
+  }
+}

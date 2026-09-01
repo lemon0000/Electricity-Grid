@@ -1,0 +1,157 @@
+﻿{
+  "schema": "rq2_public_grid_two_block_pilot_vnext_execution_successor_v2",
+  "version": 2,
+  "frozen_on": "2026-08-31",
+  "status": "vnext_execution_successor_v2_review_closed",
+  "predecessor_v3": {
+    "outer_path": "configs/rq2_public_grid_evidence_publication_successor_v3.OUTER.SHA256SUMS.json",
+    "outer_sha256": "4b84fc86337ec82d6018bfe9c87bf23a75892afbf3d61e66b0a34549b0858ce7",
+    "pass_receipt_path": "configs/rq2_public_grid_evidence_publication_successor_review_pass_v3.json",
+    "pass_receipt_sha256": "f486e862e7caa7985dbed182163d68c6c4f6a044f233eef06e94d314da535de6",
+    "closure_exact_count": 95,
+    "closure_mapping_sha256": "2c2969b97442165f212562e752830a81d6213978ca0501578aa814f20dc1e21f"
+  },
+  "predecessor_v1": {
+    "outer_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v1.OUTER.SHA256SUMS.json",
+    "outer_sha256": "f6874ef26b0ab13287fd6050c2617da65545fa19ffd3ea8bd92917af158fbb49",
+    "rework_receipt_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_rework_v1.json",
+    "rework_receipt_sha256": "12ad4866243e1276e0b4e2454c7f9823748ec906cfd7b1958042ee0343d9a0b6"
+  },
+  "resource_authority": {
+    "v5_outer_path": "configs/rq2_public_grid_two_block_pilot_activation_transport_v5.OUTER.SHA256SUMS.json",
+    "v5_outer_sha256": "2afd26332d4965de625e46d8fdac3083559e5b6d8925876c00866ff368451e48",
+    "v5_pass_path": "configs/rq2_public_grid_two_block_pilot_activation_transport_review_pass_v5.json",
+    "v5_pass_sha256": "7378202388554a31ce4fd89ae6a9b7fec64360bc2c02cb8b916c936716c3d2c5",
+    "v5_controller_path": "experiments/run_rq2_public_grid_two_block_pilot_activation_transport_v5.py",
+    "v5_controller_sha256": "ff8868dea108e1d65886b916dc18a132c93f3532175d8a7cc8670c98fa25d5e0",
+    "preflight_available_commit_gib": 10.0,
+    "sample_interval_seconds": 5.0,
+    "child_private_commit_stop_gib": 8.0,
+    "child_private_stop_comparison": "greater_than_or_equal",
+    "system_commit_available_stop_gib": 2.0,
+    "system_available_stop_comparison": "less_than_or_equal",
+    "watchdog_seconds_per_block": 21600.0,
+    "same_sample_observes_private_and_system_commit": true,
+    "termination_scope": "exact_controller_owned_pid_and_creation_time_only",
+    "failure_semantics": "honest_incomplete_not_infeasible"
+  },
+  "science_authority": {
+    "execution_contract_module": "experiments.rq2_public_grid_execution_runtime_contract_v3",
+    "execution_contract_path": "experiments/rq2_public_grid_execution_runtime_contract_v3.py",
+    "execution_contract_sha256": "17714b6ee759749f3085e53c2410d1eed0ba5adf37ee226ca828d0579ff871ec",
+    "execution_config_path": "configs/rq2_public_grid_two_block_pilot_execution_controller_successor_v3.json",
+    "execution_config_sha256": "1aae6989cdefdef84ef8de7fc9cea56a2464b36f250e19ea37781526792c2428",
+    "candidate_v4_path": "experiments/run_rq2_public_grid_two_block_pilot_candidate_v4.py",
+    "candidate_v4_sha256": "3b6e55605f56cee1e871d72b15ddfec0963ce727ec863a08f4cbac441d7541e9",
+    "recovery_runner_path": "experiments/run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_v1.py",
+    "recovery_runner_sha256": "c90f796aa9c9043d48560599b892681455b7c7ddee3881501ce449bfa1c3833e",
+    "frozen_science_config_path": "configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_v1.yaml",
+    "frozen_science_config_sha256": "e1306a375bba5d19d687cb2728a981528662064226b4661a0b74f894b647f3bd",
+    "pilot_input_config_path": "configs/rq2_public_grid_two_block_pilot_candidate_v7.yaml",
+    "pilot_input_config_sha256": "9a5f1f342e4c4982b1b7bcdf13e71ed204cb2319fc2c29b5a49a7d4fdab8da17",
+    "solver": {
+      "name": "highs",
+      "expected_package_version": "1.15.1",
+      "threads": 4,
+      "mip_relative_gap": 1e-06,
+      "feasibility_tolerance": 1e-06,
+      "optimality_tolerance": 1e-06,
+      "integer_feasibility_tolerance": 1e-06,
+      "random_seed": 0,
+      "time_limit_seconds": null,
+      "tolerance_mw": 1e-06
+    },
+    "actual_hook_sequence": [
+      "sealed_candidate_v4_stage_context",
+      "sealed_candidate_v4_load_worker_data",
+      "sealed_recovery_v4_process_block",
+      "sealed_recovery_v2_validate_scientific_payload",
+      "sealed_execution_v3_solver_call_accounting"
+    ]
+  },
+  "pilot": {
+    "blocks": ["holdout_s20260822_0008", "holdout_s20260822_0009"],
+    "fixed_order": true,
+    "one_fresh_process_per_block": true,
+    "single_active_attempt": true,
+    "attempt_consumed_before_spawn": true,
+    "retry_resume_reorder_skip_allowed": false,
+    "block_0009_requires_exact_accepted_0008_predecessor": true,
+    "nonformal": true,
+    "claim": false
+  },
+  "runtime": {
+    "locked_python_executable": "D:\\conda_envs\\rq2-executor-v2-audit\\python.exe",
+    "locked_python_sha256": "91df9733b71b293eec9945cc8c5388bbfe1abc5e6ee94a14333076e5f55cb6bf",
+    "worker_module": "experiments.worker_rq2_public_grid_two_block_pilot_vnext_execution_successor_v2",
+    "controller_module": "experiments.run_rq2_public_grid_two_block_pilot_vnext_execution_successor_v2",
+    "bootstrap_path": "experiments/bootstrap_rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.py",
+    "exact_cwd": "D:\\CUHKSZ\\Research Project\\electricity-grid",
+    "sanitized_environment": {
+      "COMSPEC": "C:\\WINDOWS\\system32\\cmd.exe",
+      "NO_COLOR": "1",
+      "PROCESSOR_ARCHITECTURE": "AMD64",
+      "PYTHONHASHSEED": "0",
+      "PYTHONIOENCODING": "utf-8",
+      "SYSTEMDRIVE": "C:",
+      "SYSTEMROOT": "C:\\WINDOWS",
+      "TEMP": "C:\\Users\\Psychobabble\\AppData\\Local\\Temp",
+      "TMP": "C:\\Users\\Psychobabble\\AppData\\Local\\Temp",
+      "WINDIR": "C:\\WINDOWS"
+    }
+  },
+  "bundle": {
+    "inner_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.SHA256SUMS.json",
+    "outer_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.OUTER.SHA256SUMS.json",
+    "exact_member_count": 7,
+    "self_mapping_exact_count": 9,
+    "members": [
+      "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.json",
+      "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_rework_v1.json",
+      "experiments/rq2_public_grid_two_block_pilot_vnext_execution_contract_v2.py",
+      "experiments/run_rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.py",
+      "experiments/worker_rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.py",
+      "experiments/bootstrap_rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.py",
+      "tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.py"
+    ]
+  },
+  "fixed_execution_review": {
+    "path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_pass_v2.json",
+    "schema": "rq2_public_grid_two_block_pilot_vnext_execution_successor_review_pass_v2",
+    "present": false,
+    "path_cli_configurable": false,
+    "self_signing_allowed": false,
+    "effect": {
+      "candidate_independent_review_passed": true,
+      "nonformal_two_block_pilot_execution_authorized": true,
+      "formal_execution_authorized": false,
+      "claim": false,
+      "security_certified": false
+    }
+  },
+  "paths": {
+    "worker_root": "results/workers/rq2_public_grid_two_block_pilot_vnext_execution_successor_v2",
+    "result_root": "results/tables/rq2_public_grid_two_block_pilot_vnext_execution_successor_v2",
+    "success_root": "results/tables/rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.PUBLISHED",
+    "terminal_root": "results/tables/rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.TERMINAL",
+    "log_root": "results/logs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v2"
+  },
+  "formal_protection": {
+    "formal_runner_path": "experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py",
+    "formal_runner_sha256": "39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8",
+    "activated_config_path": "results/execution_configs/rq2_public_successor_v2/grid.yaml",
+    "activated_config_sha256": "b8f7a71f8aaf8150c8515089e90e1946732d4476e0855d8677523577bc17f416",
+    "checkpoint_count": 9
+  },
+  "gates": {
+    "candidate_independent_review_passed": false,
+    "fixed_execution_review_receipt_present": false,
+    "execution_ready": false,
+    "pilot_executed": false,
+    "formal_execution_ready": false,
+    "user_formal_run_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

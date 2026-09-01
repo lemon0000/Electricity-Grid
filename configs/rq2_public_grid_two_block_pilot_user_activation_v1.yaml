@@ -1,0 +1,45 @@
+schema: rq2_public_grid_two_block_pilot_user_activation_v1
+authorized_on: "2026-08-30"
+status: user_authorized_candidate_pre_run_review_pending
+
+user_authority:
+  explicit_authorization_observed: true
+  authorization_record: "封存R4 PASS并执行0008/0009非正式two-block pilot，不启动formal run"
+  authorized_scope: prepare_candidate_and_after_independent_pre_run_pass_execute_only_0008_0009_nonformal_pilot
+  user_two_block_pilot_authorized: true
+  user_formal_run_authorized: false
+
+implementation_authority:
+  recovery_pass_receipt_path: configs/rq2_public_grid_solver_recovery_implementation_review_pass_v2.yaml
+  recovery_pass_receipt_sha256: 3153d72000fb7ea87f55adc3eed63af5fdb0901a48ded6ae92a616924088c720
+  verdict: PASS
+  reviewer_role: independent_sol_reviewer
+
+candidate_authority:
+  config_path: configs/rq2_public_grid_two_block_pilot_candidate_v1.yaml
+  config_sha256: 89316d2f8de8ac43f84d615b2bb75f7ff6820b415b67c5ba2be27cd04194ef61
+  pre_run_review_receipt_path: null
+  candidate_outer_manifest_path: configs/rq2_public_grid_two_block_pilot_candidate_v1.OUTER.SHA256SUMS.json
+
+permissions:
+  prepare_candidate: true
+  independently_review_candidate: true
+  execute_current_candidate: false
+  create_reviewed_execution_successor_after_pass: true
+  execute_two_block_pilot_from_reviewed_successor: true
+  execute_formal_grid: false
+  make_formal_claim: false
+  make_security_claim: false
+
+gates:
+  recovery_v2_implementation_review_passed: true
+  user_two_block_pilot_authorized: true
+  independent_pre_run_review_passed: false
+  execution_successor_present: false
+  two_block_pilot_execution_ready: false
+  two_block_pilot_executed: false
+  post_result_review_passed: false
+  formal_execution_ready: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false

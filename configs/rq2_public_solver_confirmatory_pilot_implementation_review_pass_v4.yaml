@@ -1,0 +1,51 @@
+schema: rq2_public_solver_confirmatory_implementation_review_pass_v4
+reviewed_on: "2026-08-28"
+review_scope: rq2_public_solver_confirmatory_pilot_v3_execution_successor
+reviewer_role: independent_sol_reviewer
+verdict: PASS
+
+reviewed_v3_artifacts:
+  config:
+    path: configs/rq2_public_solver_confirmatory_pilot_v3.yaml
+    sha256: 3f7a1fd1e93ec46a608e8cd164abb685365fd04d4575a7f8890f0832791415ca
+  activation:
+    path: configs/rq2_public_solver_confirmatory_pilot_activation_v3.yaml
+    sha256: da07e16c7bca60a44c97803bd60919a6f9f3a83042da58065af4c5a7836763e9
+  escalation_receipt:
+    path: configs/rq2_public_solver_confirmatory_pilot_implementation_review_escalation_v3.yaml
+    sha256: 4561e17bf16f89a33efbde0b5cc9eee706bf53c82712dee6258bae5e451796d9
+  runner:
+    path: experiments/run_rq2_public_solver_confirmatory_pilot_v3.py
+    sha256: 7dd844ab96cb1db8c20a945d6ba60ec5133469a9e66b3d5d8200d792b9d1f7bf
+  validator:
+    path: experiments/validate_rq2_public_solver_confirmatory_pilot_v3.py
+    sha256: 7cd52649133d97ab7e06c8f72d3fd3334227e2346b4bb633873a530c96909877
+  tests:
+    path: tests/test_rq2_public_solver_confirmatory_pilot_v3.py
+    sha256: 46fc54b090f2cd7de36310421a7b7418df9fc6d58d6b8931815e76bb77b986c0
+  bundle:
+    path: configs/rq2_public_solver_confirmatory_pilot_bundle_v3.SHA256SUMS.json
+    sha256: d393c33b037457250eb14e5263dabc6277d6c9b9bd6a9e3697bf2c38b321c8a5
+  outer:
+    path: configs/rq2_public_solver_confirmatory_pilot_bundle_v3.OUTER.SHA256SUMS.json
+    sha256: d7b8b7dd2cf0bc51f46602c1c7e28c1aad281c977ff8a15b0617be392e4a2f49
+
+finding:
+  id: v3_durable_provenance_remediation_complete
+  severity: execution_successor_gate
+  observation: >-
+    The sealed v3 implementation independently reconstructs worker reports from
+    registered identities, durable payloads, controller receipts, payload hashes,
+    and live or registered zero-exit observations; nested reports are checked only
+    against that reconstruction.
+  required_remediation: none
+
+effect:
+  v3_bytes_immutable: true
+  independent_v3_review_passed: true
+  v4_execution_successor_authorized: true
+  confirmatory_execution_authorized_only: true
+  grid_pairwise_identification_formal_or_security_authorized: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false

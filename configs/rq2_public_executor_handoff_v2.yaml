@@ -1,0 +1,97 @@
+schema: rq2_public_executor_windows_successor_v2
+
+predecessor:
+  preregistration_path: configs/rq2_public_data_robust_identification_preregistration_v6.yaml
+  preregistration_sha256: ef25deabfcd51fbd667e48dcddcfbe4b19a2115c6d4bc40b0fc556b5c1f332f2
+  preregistration_manifest_path: configs/rq2_public_data_robust_identification_preregistration_v6.SHA256SUMS.json
+  preregistration_manifest_sha256: 07bb735df3cc5ad547c7d4741c5f69929b39a37df9b65c3c2ae004e74b08cdcf
+  executor_bundle_path: configs/rq2_public_executor_bundle_v1.SHA256SUMS.json
+  executor_bundle_sha256: 49613e3e400a31ee4888490c5939c4985efaaed3f13325baa1c4bbc28b319f04
+  immutable: true
+
+authority_chain:
+  outer_manifest_path: configs/rq2_public_executor_bundle_v2.OUTER.SHA256SUMS.json
+  outer_manifest_schema: rq2_public_executor_outer_manifest_v2
+  bundle_path: configs/rq2_public_executor_bundle_v2.SHA256SUMS.json
+  bundle_schema: rq2_public_executor_bundle_manifest_v2
+  handoff_records_outer_hash: false
+  verification_order: [outer, bundle, bundle_members]
+
+related_executor_predecessor:
+  amendment_path: configs/rq2_h2_temporal_executor_entry_successor_v2.yaml
+  manifest_path: configs/rq2_h2_temporal_executor_entry_successor_v2.SHA256SUMS.json
+  validator_path: experiments/validate_rq2_h2_temporal_executor_entry_successor_v2.py
+  change_scope: executor_tag_entry_only
+  scientific_design_changed: false
+
+path_contract:
+  manifest_key_format: repository_relative_posix
+  native_path_string_is_authoritative: false
+  package_receipt_native_separators_accepted: true
+  package_receipt_comparison_format: repository_relative_posix
+  package_receipt_absolute_drive_or_traversal_rejected: true
+  canonicalizer_path: src/evaluation/repository_paths.py
+  canonicalizer_sha256: e090d639289d93f0fb8cd292f60434d6379f5feaa6ab7396840ac72d8f000959
+  frozen_predecessor_test_path: tests/test_rq2_public_data_preregistration_v6.py
+  frozen_predecessor_test_sha256: f7a8ad71712c2ec731119ce02649c1c1dc2379f190d40238aed001da610edc47
+  windows_retirement_scope:
+    platform: win32
+    strict_xfail: true
+    nodeids:
+      - tests/test_rq2_public_data_preregistration_v6.py::test_preregistration_v6_frozen_hashes_and_outer_manifest_are_live
+      - tests/test_rq2_public_data_preregistration_v6.py::test_executor_bundle_has_the_exact_frozen_execution_inventory
+
+run_tag_entry:
+  kind: rq2-public-pilot
+  entrypoint_path: scripts/run_experiment.ps1
+  entrypoint_sha256: 4ced023bf911164579a8c273a0b88b068226e8639da05ba6d7f746413143a9cb
+  executor_python_environment_variable: RQ2_EXECUTOR_PYTHON_EXE
+  executor_python_must_be_absolute_regular_file: true
+  fallback_to_python_exe_or_path_allowed: false
+  command_sequence: [verify, preflight, pilot, package-pilot]
+  forbidden_commands:
+    - activate-grid
+    - grid
+    - resume-grid
+    - activate-pairwise
+    - pairwise
+    - resume-pairwise
+    - activate-identification
+    - identification
+    - package-results
+  timeout_environment_variable: RQ2_PILOT_TIMEOUT_SECONDS
+  timeout_default_seconds: 21600
+  timeout_minimum_seconds: 21600
+  smoke_timeout_is_inherited: false
+  timeout_is_infeasibility_evidence: false
+  timeout_termination_grace_milliseconds: 5000
+  timeout_termination_confirmation: [kill, bounded_wait_for_exit, refresh, has_exited]
+  termination_unconfirmed_status: failed
+  termination_unconfirmed_may_publish_success_artifacts: false
+
+artifact_contract:
+  upload_root_environment_variable: RUN_ARTIFACT_DIR
+  required_recursive_packages: [preflight, pilot]
+  required_transfer_files:
+    - rq2_public_successor_v1_pilot.tar.gz
+    - rq2_public_successor_v1_pilot.json
+  required_stage_logs: [verify, preflight, pilot, package-pilot]
+  required_log_streams_per_stage: [stdout, stderr]
+  required_log_file_count: 8
+  logs_must_be_regular_nonreparse_files: true
+  copied_log_hashes_must_match: true
+  artifact_validation_requires_all_four_stages_successful: true
+  successful_exit_without_complete_artifacts: failed
+  manifest_paths_are_posix: true
+  frozen_package_receipt_may_use_native_separators: true
+  package_receipt_is_canonicalized_before_registered_path_comparison: true
+
+gates:
+  pilot_executed: false
+  cross_solver_confirmation_completed: false
+  grid_need_dispatch_ready: false
+  pairwise_replay_ready: false
+  identification_ready: false
+  formal_execution_ready: false
+  formal_result_exists: false
+  security_certified: false

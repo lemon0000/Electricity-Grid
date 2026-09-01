@@ -1,0 +1,37 @@
+{
+  "schema": "rq2_public_grid_vnext_execution_successor_v3_ots_key_revocation_v2",
+  "version": 2,
+  "revoked_on": "2026-09-01",
+  "trigger": {
+    "review_receipt_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_escalate_v3.json",
+    "review_receipt_sha256": "f53245d8bd920782a6bb6793b632be04dea2ca8c5c55c38623d030a2b222e394",
+    "verdict": "ESCALATE"
+  },
+  "revoked_key": {
+    "public_anchor_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v3_ots_public_key.json",
+    "public_anchor_sha256": "00944590ff24d16307b2690169a6be746a2ff280232506dd94fc65fdd6237132",
+    "key_id": "2aa72810e4581787f33df92480a684352e709b5c92f4089a8da2b3b49ef86183",
+    "public_key_sha256": "91ff24ada1251873c3cbfba7d7e340999d4263f7ac0b8004846e87294e77ba40"
+  },
+  "lease_transition": {
+    "fresh_path": "results/leases/rq2_public_grid_two_block_pilot_vnext_execution_successor_v3_lamport_ots_private.lease.json",
+    "fresh_raw_seed_present": false,
+    "revoked_tombstone_path": "results/leases/rq2_public_grid_two_block_pilot_vnext_execution_successor_v3_lamport_ots_private.consumed.json",
+    "revoked_tombstone_sha256": "2fad5efb1a4c640ecd12d1c27798518cf68f56a6adf0d3e35b12af0d047474d9",
+    "revoked_tombstone_seed_present": false,
+    "raw_private_seed_read_during_revocation": false,
+    "atomic_fresh_to_consumed_rename_used": true,
+    "atomic_no_seed_tombstone_replacement_used": true
+  },
+  "effect": {
+    "state": "REVOKED",
+    "never_authorized": true,
+    "never_used_to_sign": true,
+    "never_used_to_start_worker": true,
+    "one_time_key_reusable": false,
+    "v3_execution_authorized": false,
+    "formal_execution_authorized": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

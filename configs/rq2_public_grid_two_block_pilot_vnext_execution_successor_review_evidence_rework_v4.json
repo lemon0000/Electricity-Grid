@@ -1,0 +1,31 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_vnext_execution_successor_review_evidence_rework_v4",
+  "version": 1,
+  "recorded_on": "2026-09-01",
+  "authority": false,
+  "verdict_source": "/root/pilot_post_result_review",
+  "bound_authority_receipt_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_rework_v4.json",
+  "reviewed_outer_sha256": "36e6f9fd971601a157583a73b37f73470095f6ae2046294705865118f2695a1d",
+  "deadline_miss_reproducer": {
+    "exact_owned_pid_and_create_time_termination_called": true,
+    "last_sample_to_exit_ns": "approximately_7000000000",
+    "validator_exception": "resource expected-slot/exit-gap binding drifted",
+    "resource_monitor_state_outcome": null,
+    "honest_incomplete_journal_returned": false,
+    "mathematical_infeasibility_inferred": false
+  },
+  "closed_predecessor_reproducers": {
+    "arbitrary_100s_observation_gap_accepted": false,
+    "two_second_catch_up_accepted": false,
+    "missing_slot_accepted": false,
+    "lateness_above_jitter_accepted": false,
+    "lease_raw_seed_remains_after_registered_failure": false
+  },
+  "effect": {
+    "opens_execution_gate": false,
+    "opens_pilot_gate": false,
+    "opens_formal_gate": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

@@ -1,0 +1,468 @@
+schema: rq2_public_baseline_robustness_preregistration_v1
+version: 1
+frozen_on: 2026-08-25
+status: design_only_not_executable
+
+purpose:
+  estimand: >-
+    Distinguish single-service scarcity, joint-service interaction, and
+    B6-specific underprovisioning without changing the frozen v6 data,
+    parameter cells, training/holdout split, representative selection,
+    physical execution envelope, or solver contract.
+  post_hoc_retuning_of_observed_phase_map: false
+  upgrades_predecessor_evidence: false
+
+predecessor_evidence:
+  observed_phase_map:
+    schema: rq2_three_region_phase_map_v1
+    manifest_path: results/tables/rq2_three_region_phase_map_v1/SHA256SUMS.json
+    manifest_sha256: 3763f9e5b295a42cf6fbea0e14a0aca6946e49cd79565166fea81179e5d49c87
+    summary_path: results/tables/rq2_three_region_phase_map_v1/summary.json
+    summary_sha256: 1e961e419169b998fda70ec17b0e084cf9020d89a655a0509dc136a27ad20c0a
+    total_cells: 70
+    region_counts:
+      R1: 0
+      R2: 0
+      R3: 69
+      mixed: 1
+      unresolved: 0
+    original_positive_H2_supported: false
+    derived_benchmark_only: true
+    formal_result: false
+  v6_pilot_observed: false
+  v6_formal_result_observed: false
+
+authority_inputs:
+  v6_preregistration:
+    path: configs/rq2_public_data_robust_identification_preregistration_v6.yaml
+    sha256: ef25deabfcd51fbd667e48dcddcfbe4b19a2115c6d4bc40b0fc556b5c1f332f2
+  v6_manifest:
+    path: configs/rq2_public_data_robust_identification_preregistration_v6.SHA256SUMS.json
+    sha256: 07bb735df3cc5ad547c7d4741c5f69929b39a37df9b65c3c2ae004e74b08cdcf
+  pairwise_v4:
+    path: configs/rq2_public_pairwise_replay_v4.yaml
+    sha256: 4e4ea40e71742198ff9b70d527d6bae91df486c87b3a540bbbb23f6ba4f72cf3
+  identification_v4:
+    path: configs/rq2_public_identification_grid_v4.yaml
+    sha256: 1081ed0e52201323e3df7c1a5c39d0409fdcef8c2cc29c49edcd207c93ed3308
+  formulation:
+    path: docs/model_spec/formulation.md
+    sha256: 7639ed6a2143aa25bccd8c0cf00db40c6c558bdacc5e2793fb89b75e1bfb3efe
+  v6_route:
+    path: docs/plan/RQ2_公开数据鲁棒识别路线图_v6.md
+    sha256: 58be54d537cebfdf85d89c8d785370bcc688ff9a540d4d94a4ebc6d86c394f08
+  theoretical_memo:
+    path: docs/model_spec/rq2_theoretical_propositions_v1.md
+    sha256: fc7ab30614a3d34a4d6740fc132679cb49f14e80137d6e420a20fdb23640edc8
+
+same_design_inheritance:
+  source_pairwise_config: configs/rq2_public_pairwise_replay_v4.yaml
+  source_identification_config: configs/rq2_public_identification_grid_v4.yaml
+  parameter_cell_count: 15
+  block_hours: 24
+  block_splits:
+    power_training_blocks: 541
+    power_holdout_blocks: 530
+    workload_training_blocks: 34
+    workload_holdout_blocks: 34
+  representative_selection:
+    method: weighted_marginal_stress_quantile_representatives
+    power_system_representatives: 8
+    workload_representatives: 8
+    power_system_score: max_hourly_grid_need_plus_cfe_call_fraction
+    workload_score: maximum_requested_GPU_occupancy_fraction
+    selection_uses_holdout_outcomes: false
+    full_evaluable_training_support_audit: required
+    representative_failure_rule: cell_ineligible_no_holdout_metrics
+  registered_cells:
+    design: one_factor_at_a_time_threshold_diagnostic_not_joint_parameter_robustness
+    base:
+      flexible_fraction: 0.20
+      recovery_efficiency: 0.85
+      normalized_recovery_headroom: 0.10
+      maximum_event_duration_hours: 4
+      maximum_event_count: 2
+      normalized_energy_budget: 0.40
+      normalized_debt_limit: 0.20
+    levels:
+      flexible_fraction: [0.05, 0.20, 0.50]
+      recovery_efficiency: [0.60, 0.85, 1.00]
+      normalized_recovery_headroom: [0.00, 0.10, 0.30]
+      maximum_event_duration_hours: [1, 4, 8]
+      maximum_event_count: [1, 2, 4]
+      normalized_energy_budget: [0.10, 0.40, 1.00]
+      normalized_debt_limit: [0.05, 0.20, 0.50]
+    primary_coupling_claim_conditioned_on_each_cell: true
+    joint_parameter_robustness_claimed: false
+  fixed_policy:
+    planning_objective: lexicographic_minimum_flexibility_for_full_training_service
+    holdout_provision_reoptimization: false
+    holdout_recourse_reoptimization: false
+    operational_policy: causal_myopic_grid_first_then_CFE_with_current_state_only
+    physical_execution_envelope: correct_shared_envelope_for_both_policies
+    maximum_flexibility_budget: 1.0
+    minimum_event_power: 1.0e-6
+    response_time_hours: 1.0
+    curtailment_ramp_per_hour: 1.0
+    minimum_recovery_hours: 1.0
+    service_shortfall_tolerance: 1.0e-6
+  solver:
+    name: gurobi
+    expected_package_version: 13.0.2
+    threads: 4
+    mip_relative_gap: 1.0e-6
+    feasibility_tolerance: 1.0e-6
+    optimality_tolerance: 1.0e-6
+    integer_feasibility_tolerance: 1.0e-6
+    random_seed: 0
+    time_limit_seconds: null
+    tee: false
+  forbidden_arm_specific_overrides:
+    - cfe_target
+    - poi
+    - acceptance_thresholds
+    - recovery_parameters
+    - event_windows
+    - training_or_holdout_support
+    - representative_selection
+    - solver
+
+arms:
+  - id: network_only_shared
+    grid_call: inherited_active
+    green_call: fixed_zero
+    planning_envelope: shared
+    execution_envelope: shared
+    E0_handling: retained_separately_and_excluded_from_service_metrics
+    parameter_overrides: {}
+  - id: cfe_only_shared
+    grid_call: fixed_zero
+    green_call: inherited_active
+    planning_envelope: shared
+    execution_envelope: shared
+    E0_handling: retained_separately_and_excluded_from_service_metrics
+    parameter_overrides: {}
+  - id: joint_correct_shared
+    grid_call: inherited_active
+    green_call: inherited_active
+    planning_envelope: shared
+    execution_envelope: shared
+    E0_handling: retained_separately_and_excluded_from_service_metrics
+    parameter_overrides: {}
+  - id: joint_b6_separate_planning_shared_execution
+    grid_call: inherited_active
+    green_call: inherited_active
+    planning_envelope: separate_by_service_then_combined
+    execution_envelope: shared
+    E0_handling: retained_separately_and_excluded_from_service_metrics
+    parameter_overrides: {}
+
+registered_estimands:
+  minimum_normalized_flexibility:
+    scope: each_arm_each_registered_cell
+    symbol: D_min_by_arm
+  joint_interaction_capacity:
+    expression: D_joint_correct - max(D_network_only, D_cfe_only)
+    positive_direction: joint_service_requires_more_capacity_than_either_single_service
+  b6_underprovisioning:
+    expression: D_joint_correct - D_joint_B6
+    positive_direction: B6_plans_less_capacity_than_correct_joint_planning
+  fixed_policy_metrics:
+    scope: each_arm_and_registered_pair
+    service_risk_metrics:
+      - failure_probability
+      - expected_shortfall
+    descriptive_state_metrics:
+      - peak_recovery_debt
+      - terminal_recovery_debt
+    service_risk_contrasts:
+      joint_correct_minus_network_only:
+        left_arm: joint_correct_shared
+        right_arm: network_only_shared
+        expressions:
+          failure_probability: failure_probability_joint_correct - failure_probability_network_only
+          expected_shortfall: expected_shortfall_joint_correct - expected_shortfall_network_only
+        positive_direction: left_arm_has_more_service_risk_than_right_arm
+        category_deciding: true
+      joint_correct_minus_cfe_only:
+        left_arm: joint_correct_shared
+        right_arm: cfe_only_shared
+        expressions:
+          failure_probability: failure_probability_joint_correct - failure_probability_cfe_only
+          expected_shortfall: expected_shortfall_joint_correct - expected_shortfall_cfe_only
+        positive_direction: left_arm_has_more_service_risk_than_right_arm
+        category_deciding: true
+      joint_b6_minus_joint_correct:
+        left_arm: joint_b6_separate_planning_shared_execution
+        right_arm: joint_correct_shared
+        expressions:
+          failure_probability: failure_probability_joint_B6 - failure_probability_joint_correct
+          expected_shortfall: expected_shortfall_joint_B6 - expected_shortfall_joint_correct
+        positive_direction: left_arm_has_more_service_risk_than_right_arm
+        category_deciding: true
+    descriptive_state_contrasts:
+      joint_correct_minus_network_only:
+        left_arm: joint_correct_shared
+        right_arm: network_only_shared
+        expressions:
+          peak_recovery_debt: peak_recovery_debt_joint_correct - peak_recovery_debt_network_only
+          terminal_recovery_debt: terminal_recovery_debt_joint_correct - terminal_recovery_debt_network_only
+        positive_direction: left_arm_has_more_recorded_debt_than_right_arm
+        category_deciding: false
+      joint_correct_minus_cfe_only:
+        left_arm: joint_correct_shared
+        right_arm: cfe_only_shared
+        expressions:
+          peak_recovery_debt: peak_recovery_debt_joint_correct - peak_recovery_debt_cfe_only
+          terminal_recovery_debt: terminal_recovery_debt_joint_correct - terminal_recovery_debt_cfe_only
+        positive_direction: left_arm_has_more_recorded_debt_than_right_arm
+        category_deciding: false
+      joint_b6_minus_joint_correct:
+        left_arm: joint_b6_separate_planning_shared_execution
+        right_arm: joint_correct_shared
+        expressions:
+          peak_recovery_debt: peak_recovery_debt_joint_B6 - peak_recovery_debt_joint_correct
+          terminal_recovery_debt: terminal_recovery_debt_joint_B6 - terminal_recovery_debt_joint_correct
+        positive_direction: left_arm_has_more_recorded_debt_than_right_arm
+        category_deciding: false
+    descriptive_state_rule:
+      positive_debt_is_service_failure: false
+      debt_offsets_or_reverses_service_risk_conclusions: false
+      right_censored_terminal_debt_is_failure: false
+    future_failure_channels:
+      debt_limit_violation:
+        planned_machine_field: debt_limit_violation
+        machine_field_registered_in_v1: false
+        requires_non_right_censored_window: true
+        category_deciding_in_v1: false
+      terminal_condition_violation:
+        planned_machine_field: terminal_condition_violation
+        machine_field_registered_in_v1: false
+        requires_non_right_censored_window: true
+        category_deciding_in_v1: false
+  b6_equals_maximum_single_arm_capacity:
+    status: identity_to_be_tested_not_assumed
+    expression: D_joint_B6 == max(D_network_only, D_cfe_only)
+
+coupling_contract:
+  primary: full_transport_sharp_bounds
+  ambiguity_set: complete_discrete_transport_polytope
+  endpoint_attainment_required: true
+  diagnostic_points:
+    - independent_product
+    - comonotone_by_registered_stress_score
+    - countermonotone_by_registered_stress_score
+  diagnostic_points_are_population_joint_law: false
+  multimetric_attribution_requires_one_common_pi_witness: true
+  marginal_support_only_population_claimed: false
+  unresolved_or_missing_pair_rule: not_sharp_and_no_attribution
+  t1_mw_only_reference:
+    role: analytic_diagnostic_only
+    substitutes_for_full_temporal_arm: false
+    raw_grid_call_trajectory_required: true
+    raw_cfe_call_trajectory_required: true
+    current_pairwise_v4_contains_required_raw_trajectories: false
+    future_implementation_path: null
+    implementation_bound: false
+
+attribution:
+  comparison_tolerance: 1.0e-6
+  robust_positive_rule: transport_LB_greater_than_tolerance
+  robust_nonpositive_rule: transport_UB_less_than_or_equal_to_tolerance
+  partial_identification_rule: transport_LB_less_than_or_equal_to_tolerance_and_UB_greater_than_tolerance
+  global_preconditions:
+    - all_four_arm_training_statuses_resolved
+    - all_required_pairwise_rows_and_E0_rows_present_and_resolved
+    - all_transport_endpoints_attained_with_valid_marginals
+    - every_multimetric_region_has_one_common_pi_witness
+    - configuration_and_upstream_hashes_verified
+  exclusive_priority_order:
+    - unresolved
+    - training_infeasible_estimand_undefined
+    - single_service_insufficiency_supported
+    - joint_only_interaction_supported
+    - b6_specific_underprovisioning_supported
+    - partially_identified
+    - no_registered_mechanism_supported
+  categories:
+    unresolved:
+      conditions:
+        any_of:
+          - global_precondition_failed
+          - required_result_unparsed
+      allowed_metric_domains: []
+      claim_gates:
+        registered_attribution_allowed: false
+        empirical_causal_claim_allowed: false
+    training_infeasible_estimand_undefined:
+      conditions:
+        all_of:
+          - arm_training_problem_proven_infeasible_under_frozen_solver_contract
+        excludes:
+          - timeout
+          - missing_certificate
+          - local_solver_failure
+      allowed_metric_domains: []
+      claim_gates:
+        fixed_policy_attribution_allowed: false
+        empirical_causal_claim_allowed: false
+    single_service_insufficiency_supported:
+      conditions:
+        all_of:
+          - global_preconditions_hold
+          - common_pi_witness_for_every_combined_service_risk_statement
+        any_of:
+          - network_only_service_risk_robust_positive
+          - cfe_only_service_risk_robust_positive
+      allowed_metric_domains: [service_risk]
+      forbidden_metric_domains: [descriptive_state]
+      claim_gates:
+        registered_attribution_allowed: true
+        empirical_causal_claim_allowed: false
+        joint_only_or_b6_specific_claim_allowed: false
+    joint_only_interaction_supported:
+      conditions:
+        all_of:
+          - global_preconditions_hold
+          - both_single_service_arms_service_risk_robust_nonpositive
+          - common_pi_witness_for_every_combined_service_risk_statement
+        any_of:
+          - joint_interaction_capacity_positive
+          - joint_correct_service_risk_robust_positive
+      allowed_metric_domains: [capacity, service_risk]
+      forbidden_metric_domains: [descriptive_state]
+      assumptions:
+        b6_identity_assumed: false
+      claim_gates:
+        registered_attribution_allowed: true
+        empirical_causal_claim_allowed: false
+    b6_specific_underprovisioning_supported:
+      conditions:
+        all_of:
+          - global_preconditions_hold
+          - single_service_and_joint_correct_service_risk_robust_nonpositive
+          - common_pi_witness_for_every_combined_service_risk_statement
+        any_of:
+          - b6_underprovisioning_positive
+          - joint_b6_minus_joint_correct_service_risk_robust_positive
+      allowed_metric_domains: [capacity, service_risk]
+      forbidden_metric_domains: [descriptive_state]
+      assumptions:
+        b6_identity_assumed: false
+      claim_gates:
+        registered_attribution_allowed: true
+        empirical_causal_claim_allowed: false
+    partially_identified:
+      conditions:
+        all_of:
+          - global_preconditions_hold
+          - no_earlier_supported_category_applies
+        any_of:
+          - capacity_or_service_risk_sign_crosses_tolerance
+          - category_requires_incompatible_coupling_witnesses
+      allowed_metric_domains: [capacity, service_risk]
+      forbidden_metric_domains: [descriptive_state]
+      claim_gates:
+        registered_attribution_allowed: false
+        empirical_causal_claim_allowed: false
+    no_registered_mechanism_supported:
+      conditions:
+        all_of:
+          - global_preconditions_hold
+          - no_earlier_supported_category_applies
+          - all_category_deciding_capacity_and_service_risk_contrasts_robust_nonpositive
+      allowed_metric_domains: [capacity, service_risk]
+      forbidden_metric_domains: [descriptive_state]
+      claim_gates:
+        registered_null_label_allowed: true
+        empirical_causal_claim_allowed: false
+  E0_rule:
+    preserve_unconditional_mass: true
+    exclude_from_conditional_service_metrics: true
+    include_in_R3_common_insufficiency: false
+    missing_or_unresolved_E0_blocks_formal_attribution: true
+
+result_chain:
+  stage_order:
+    - verified_v6_grid_package
+    - four_arm_planning_pairwise_package
+    - four_arm_identification_package
+    - baseline_robustness_report_package
+  common_stage_requirements:
+    - config_sha256
+    - upstream_manifest_and_provenance_sha256
+    - checkpoint_inventory
+    - declared_machine_readable_schemas
+    - all_registered_cells_including_negative_and_unresolved
+    - sha256_manifest
+  stages:
+    verified_v6_grid_package:
+      binding_status: existing_v6_authority_chain_runtime_not_verified
+      implementation_path: src/grid/rts_gmlc_grid_need_successor.py
+      config_path: configs/rts_gmlc_public_grid_need_dispatch_v4.yaml
+      runner_path: experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py
+      output_path: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_gurobi
+      expected_schema: rts_gmlc_public_grid_need_dispatch_v4
+      runtime_receipt_path: null
+      runtime_provenance_manifest_sha256: null
+      ready: false
+    four_arm_planning_pairwise_package:
+      implementation_path: null
+      config_path: null
+      runner_path: null
+      output_path: null
+      expected_schemas:
+        - four_arm_training_status
+        - four_arm_minimum_flexibility
+        - four_arm_pairwise_outcomes
+        - E0_outcomes
+        - checkpoint_inventory
+        - provenance
+      ready: false
+    four_arm_identification_package:
+      implementation_path: null
+      config_path: null
+      runner_path: null
+      output_path: null
+      expected_schemas:
+        - scalar_transport_endpoints
+        - optimizing_coupling_witnesses
+        - common_pi_multimetric_witnesses
+        - arm_and_contrast_cell_bounds
+        - provenance
+      ready: false
+    baseline_robustness_report_package:
+      implementation_path: null
+      config_path: null
+      runner_path: null
+      output_path: null
+      expected_schemas:
+        - exclusive_attribution_by_cell
+        - negative_and_unresolved_cell_inventory
+        - claim_gate_report
+        - provenance
+      ready: false
+
+execution_gates:
+  implementation_bound: false
+  independent_R4_review_passed: false
+  user_formal_run_authorized: false
+  formal_execution_ready: false
+  formal_result: false
+
+claim_gates:
+  empirical_contract_overlap_or_incidence: false
+  population_joint_law: false
+  causal_attribution: false
+  interconnection_capacity_X_overstatement: false
+  absolute_Alibaba_MW: false
+  empirical_outage_probability: false
+  full_N_minus_1_security_certification: false
+  AC_security_certification: false
+  security_certification: false
+
+manifest_contract:
+  path: configs/rq2_public_baseline_robustness_preregistration_v1.SHA256SUMS.json
+  self_manifest_in_files_inventory: false
+  planned_or_missing_files_in_inventory: false
+  exact_inventory_required: true

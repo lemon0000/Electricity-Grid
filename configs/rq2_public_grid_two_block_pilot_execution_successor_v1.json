@@ -1,0 +1,115 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_execution_successor_v1",
+  "version": 1,
+  "frozen_on": "2026-08-31",
+  "status": "execution_successor_candidate_closed",
+  "predecessor_authority": {
+    "v7_inner_path": "configs/rq2_public_grid_two_block_pilot_candidate_v7.SHA256SUMS.json",
+    "v7_inner_sha256": "06ad8f34bbe5e9f52755431506e495a670e740092636305b8c12f1f495c6a976",
+    "v7_outer_path": "configs/rq2_public_grid_two_block_pilot_candidate_v7.OUTER.SHA256SUMS.json",
+    "v7_outer_sha256": "101c0c1399505c9ddf9f1613afc3981139aedf85645a6e8797cc86d217faed35",
+    "v7_pass_receipt_path": "configs/rq2_public_grid_two_block_pilot_pre_run_review_pass_v7.json",
+    "user_authorization_path": "configs/rq2_public_grid_two_block_pilot_user_authorization_v3.yaml",
+    "user_authorization_sha256": "f696e76a1fedba8335af62e8914b12bb9385606525cf8170d0b11ffdb3900e52",
+    "user_authorization_scope": "future_conditional_authority_only_after_pilot_postreview_and_activation_pass"
+  },
+  "bootstrap_contract": {
+    "repository_root": "D:\\CUHKSZ\\Research Project\\electricity-grid",
+    "entry_script": "experiments/bootstrap_rq2_public_grid_two_block_pilot_execution_successor_v1.py",
+    "locked_python_executable": "D:\\conda_envs\\rq2-executor-v2-audit\\python.exe",
+    "locked_python_sha256": "91df9733b71b293eec9945cc8c5388bbfe1abc5e6ee94a14333076e5f55cb6bf",
+    "locked_python_version": "3.11.15",
+    "exact_argv_suffix": [
+      "-I",
+      "-B",
+      "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\bootstrap_rq2_public_grid_two_block_pilot_execution_successor_v1.py",
+      "--validate-only"
+    ],
+    "exact_cwd": "D:\\CUHKSZ\\Research Project\\electricity-grid",
+    "host": {
+      "hostname": "LAPTOP-FT6J5Q9J",
+      "system": "Windows",
+      "release": "10",
+      "machine": "AMD64"
+    },
+    "exact_environment": {
+      "COMSPEC": "C:\\WINDOWS\\system32\\cmd.exe",
+      "NO_COLOR": "1",
+      "PROCESSOR_ARCHITECTURE": "AMD64",
+      "SYSTEMDRIVE": "C:",
+      "SYSTEMROOT": "C:\\WINDOWS",
+      "TEMP": "C:\\Users\\Psychobabble\\AppData\\Local\\Temp",
+      "TMP": "C:\\Users\\Psychobabble\\AppData\\Local\\Temp",
+      "WINDIR": "C:\\WINDOWS"
+    },
+    "maximum_process_age_seconds": 120.0,
+    "reject_other_process_image_names": [
+      "cbc.exe",
+      "gurobi_cl.exe",
+      "highs.exe",
+      "python.exe",
+      "pythonw.exe"
+    ],
+    "pilot_child_private_commit_limit_gib": 8.0,
+    "minimum_host_commit_reserve_gib": 2.0,
+    "minimum_available_virtual_memory_gib": 10.0,
+    "project_module_prefixes": [
+      "src",
+      "experiments"
+    ]
+  },
+  "fresh_roots": [
+    "results/tables/rq2_public_grid_two_block_pilot_v7",
+    "results/tables/rq2_public_grid_two_block_pilot_v7.SUCCESS",
+    "results/tables/rq2_public_grid_two_block_pilot_v7.TERMINAL",
+    "results/workers/rq2_public_grid_two_block_pilot_v7",
+    "results/logs/rq2_public_grid_two_block_pilot_v7"
+  ],
+  "formal_invariants": {
+    "formal_runner_path": "experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py",
+    "formal_runner_sha256": "39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8",
+    "activated_formal_config_path": "results/execution_configs/rq2_public_successor_v2/grid.yaml",
+    "activated_formal_config_sha256": "b8f7a71f8aaf8150c8515089e90e1946732d4476e0855d8677523577bc17f416",
+    "checkpoint_directory": "results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_gurobi",
+    "checkpoint_sha256": {
+      "holdout_s20260822_0000.json": "f68f7bca3fbf66c7bf90840280502cb2eda69dd6a01d8258b5929c5e01e0f6b8",
+      "holdout_s20260822_0001.json": "180762530c8450c0eb914b3fee5e8597563200d701dddbd64b5c48180b2904da",
+      "holdout_s20260822_0002.json": "9a9af3c77af3de2a1396f2004352b97ebdbcbe77f2706c9851427e7f389e70ec",
+      "holdout_s20260822_0003.json": "8d9d355f34865d72723d0418330f149d2a99cd0cb15e95f7eed08554da9fe260",
+      "holdout_s20260822_0004.json": "f63a9e729c751c23bd61af7dae1f0bdd9bbaec542abd13eade9e09d083d956fc",
+      "holdout_s20260822_0005.json": "f2fc2a34163b8aa18583c0554b477e68f149c1ee95cb6d17b6418715d59af7f8",
+      "holdout_s20260822_0006.json": "51b642d9ccdd3afa7e7ba8fecef6f1b16eef71f0ac4434e1ee81694c65512b38",
+      "holdout_s20260822_0007.json": "ecad02d8810b1c80c13fe4b69c931aff8e7669c643f5343c0dc3b584d0b81785",
+      "holdout_s20260822_0008.json": "f9b954669832bbfd467a0f6a3987718ce944a9414d27b3a0b5eb9171d66df8e6"
+    },
+    "protected_roots_clean_absent": [
+      "data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_gurobi",
+      "results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_v1",
+      "data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_v1"
+    ]
+  },
+  "future_external_activation": {
+    "independent_successor_review_receipt_path": null,
+    "independent_successor_review_receipt_sha256": null,
+    "activation_wrapper_path": null,
+    "activation_wrapper_sha256": null,
+    "dynamic_self_acceptance_forbidden": true,
+    "immutable_successor_plus_later_activation_wrapper_required": true
+  },
+  "gates": {
+    "v7_independent_review_passed": true,
+    "successor_candidate_built": true,
+    "successor_independent_review_passed": false,
+    "successor_activation_present": false,
+    "successor_execution_ready": false,
+    "two_block_pilot_execution_ready": false,
+    "two_block_pilot_executed": false,
+    "formal_activation_present": false,
+    "formal_execution_ready": false,
+    "user_formal_run_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false
+  },
+  "scientific_transport_ledger_postcommit_or_frozen_formal_semantics_changed": false
+}

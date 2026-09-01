@@ -1,0 +1,245 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_v4_sealed_superseded_fast_probe_regression_evidence_v1",
+  "version": 1,
+  "recorded_on": "2026-09-01",
+  "authority": false,
+  "authoritative_review_receipt": false,
+  "security_certified": false,
+  "scientific_claim_supported": false,
+  "execution_authorized": false,
+  "pilot_authorized": false,
+  "formal_authorized": false,
+  "scope": "non_authoritative_runtime_observation_of_sealed_superseded_v4_fast_probe",
+  "included_in_v8_bundle": false,
+  "private_key_or_seed_material_included": false,
+  "sealed_v4_bindings": {
+    "controller": {
+      "path": "experiments/run_rq2_public_grid_two_block_pilot_vnext_execution_successor_v4.py",
+      "sha256": "92f43b91eaf67f2d69ccfc50e611fdd720f1a92c5793cbf0979254382932a303"
+    },
+    "contract": {
+      "path": "experiments/rq2_public_grid_two_block_pilot_vnext_execution_contract_v4.py",
+      "sha256": "564a7386f9371718c184408bfc14e73bf49b22f8742cd301d201b1931190c8ac"
+    },
+    "test": {
+      "path": "tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v4.py",
+      "sha256": "ae70b21209ce12500d86426da04b935216fc0663e6130b6fa28872077fe09e26"
+    },
+    "inner_bundle": {
+      "path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v4.SHA256SUMS.json",
+      "sha256": "3f70f046fec0acc9a1f22d59c58c1fb07c88c767446ddc782538c3d1fc2712ad"
+    },
+    "outer_bundle": {
+      "path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v4.OUTER.SHA256SUMS.json",
+      "sha256": "36e6f9fd971601a157583a73b37f73470095f6ae2046294705865118f2695a1d"
+    },
+    "public_anchor": {
+      "path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v4_ots_public_key.json",
+      "sha256": "55bcb2c119d25381c8c6f3edb7a0d3ca2f49ede4e7836185ada3f3c908cf9a47"
+    },
+    "review_rework_receipt": {
+      "path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_rework_v4.json",
+      "sha256": "975131dac0792b7f7b3016d7600b2aec0cba866214a5ab0b4e0e5f5300dd95c4"
+    },
+    "review_rework_evidence": {
+      "path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_evidence_rework_v4.json",
+      "sha256": "e54c94a182ebe809ef773445f6b108290bd6cf33483c1136f71e2b9a2cf1080d"
+    }
+  },
+  "independent_review_observation": {
+    "reviewer_agent": "/root/pilot_post_result_review",
+    "reviewer_role": "independent_sol_reviewer",
+    "reviewed_on": "2026-09-01",
+    "command_source": "reviewer explicitly confirmed same command",
+    "broad_argv": [
+      "D:/conda_envs/rq2-executor-v2-audit/python.exe",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v1.py",
+      "tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.py",
+      "tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v3.py",
+      "tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v4.py",
+      "tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v5.py",
+      "tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v6.py",
+      "tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v7.py",
+      "tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v8.py",
+      "tests/test_rq2_public_grid_two_block_pilot_candidate_v7.py",
+      "tests/test_rq2_public_grid_two_block_pilot_execution_controller_successor_v3.py",
+      "tests/test_rq2_public_grid_solver_recovery_v2.py",
+      "--deselect=tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.py::test_validate_only_is_closed_and_zero_execution",
+      "--deselect=tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.py::test_execute_absent_receipt_rejects_before_runner",
+      "--deselect=tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.py::test_future_review_receipt_is_external_to_noncyclic_bundle",
+      "--deselect=tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.py::test_canonical_direct_script_validate_and_closed_execute",
+      "--deselect=tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v2.py::test_real_preloader_child_stops_before_loader_solver_and_writes",
+      "--deselect=tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v3.py::test_execution_api_is_review_gated_before_private_lease_touch",
+      "--deselect=tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v3.py::test_no_production_seed_appears_in_candidate_members",
+      "--deselect=tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v4.py::test_execution_is_review_gated_before_v4_lease_touch",
+      "--deselect=tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v5.py::test_execution_is_review_gated_before_v5_lease_touch",
+      "--deselect=tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v5.py::test_real_fast_child_gate_and_preloader_make_zero_solver_calls",
+      "--deselect=tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v6.py::test_execution_review_gate_precedes_v6_production_lease_touch",
+      "--deselect=tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v6.py::test_fast_child_and_preloader_probes_make_zero_solver_calls",
+      "--deselect=tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v7.py::test_execution_review_gate_precedes_v7_production_lease_touch"
+    ],
+    "broad_result": {
+      "passed": 478,
+      "failed": 1,
+      "deselected": 13,
+      "sole_failure_nodeid": "tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v4.py::test_real_fast_child_gate_and_preloader_make_zero_solver_calls"
+    },
+    "isolated_result": {
+      "nodeid": "tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v4.py::test_real_fast_child_gate_and_preloader_make_zero_solver_calls",
+      "reported_attempt_count": 2,
+      "reported_failed_attempt_count": 2,
+      "exact_reviewer_isolate_argv_not_provided": true,
+      "exact_reviewer_isolate_stdout_not_provided": true,
+      "failure_resource_monitor_state_not_provided": true,
+      "failure_resource_journal_not_provided": true,
+      "failure_phase_counts_timestamps_overrun_termination_returncode_not_provided": true
+    }
+  },
+  "external_read_only_runtime_instrumentation": {
+    "executed_on": "2026-09-01",
+    "locked_interpreter": "D:/conda_envs/rq2-executor-v2-audit/python.exe",
+    "process_argv": [
+      "D:/conda_envs/rq2-executor-v2-audit/python.exe",
+      "-"
+    ],
+    "script_delivery": "PowerShell here-string piped to locked interpreter stdin",
+    "instrumentation_script_persisted": false,
+    "instrumentation_script_sha256": null,
+    "source_or_test_modified": false,
+    "wrapped_functions": [
+      "experiments.run_rq2_public_grid_two_block_pilot_vnext_execution_successor_v4._wait_first_sample",
+      "experiments.run_rq2_public_grid_two_block_pilot_vnext_execution_successor_v4._popen"
+    ],
+    "entrypoint": "tests.test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v4.run_review_resource_probe_e2e",
+    "failure_reproduced": false,
+    "returned": "success",
+    "raised": null,
+    "wait_exception": null,
+    "started_wall_time_ns": 1788256214476560400,
+    "started_monotonic_ns": 25651281000000,
+    "ended_wall_time_ns": 1788256216391636900,
+    "ended_monotonic_ns": 25653187000000,
+    "child": {
+      "pid": 4152,
+      "create_time_ns": 13432729814864796000,
+      "returncode": 0,
+      "stderr": null
+    },
+    "resource_monitor_state": {
+      "present": true,
+      "ready": true,
+      "first_sample_success": true,
+      "outcome_present": true
+    },
+    "probe_result": {
+      "release_sent_monotonic_ns": 25653140000000,
+      "status": "REVIEW_RESOURCE_PROBE_EXITING",
+      "worker_exited": true,
+      "loader_calls": 0,
+      "solver_calls": 0,
+      "result_writes": 0
+    },
+    "journal_sha256": "0d62844b8e02f763018b85ea200c168492bd8526fe6042a9016a7c845dfb1555",
+    "journal": {
+      "schema": "rq2_public_grid_resource_journal_vnext_execution_v4",
+      "version": 4,
+      "owned_identity": {
+        "pid": 4152,
+        "create_time_ns": 13432729814864796000
+      },
+      "monitor_start_wall_time_ns": 1788256214872792400,
+      "monitor_start_monotonic_ns": 25651671000000,
+      "first_sample_wall_time_ns": 1788256215837424000,
+      "first_sample_monotonic_ns": 25652640000000,
+      "exit_observed_wall_time_ns": 1788256216391636900,
+      "exit_observed_monotonic_ns": 25653187000000,
+      "watchdog_deadline_monotonic_ns": 47251671000000,
+      "watchdog_duration_ns": 21600000000000,
+      "sample_interval_ns": 5000000000,
+      "sample_jitter_budget_ns": 1000000000,
+      "expected_sample_count": 1,
+      "actual_sample_count": 1,
+      "last_sample_to_exit_ns": 547000000,
+      "deadline_missed": null,
+      "status": "child_exited",
+      "reason": null,
+      "phase": null,
+      "phase_field_present": false,
+      "honest_incomplete": false,
+      "mathematical_infeasibility_inferred": false,
+      "max_child_private_commit_bytes": 16445440,
+      "min_host_available_commit_bytes": 14327648256,
+      "sample_count": 1,
+      "detection_overrun_ns": null,
+      "detection_overrun_field_present": false,
+      "termination_evidence": null,
+      "termination_evidence_present": false,
+      "termination_not_invoked_on_captured_success": true,
+      "samples": [
+        {
+          "sequence": 0,
+          "wall_time_ns": 1788256215837424000,
+          "monotonic_ns": 25652640000000,
+          "scheduled_monotonic_ns": 25651671000000,
+          "sample_deadline_monotonic_ns": 25652671000000,
+          "actual_lateness_ns": 969000000,
+          "owned_pid": 4152,
+          "owned_create_time_ns": 13432729814864796000,
+          "child_private_commit_bytes": 16445440,
+          "host_available_commit_bytes": 14327648256,
+          "child_private_commit_limit_bytes": 8589934592,
+          "host_available_commit_floor_bytes": 2147483648,
+          "stop_reason": null
+        }
+      ]
+    }
+  },
+  "writer_history": {
+    "raw_broad": {
+      "passed": 479,
+      "failed": 13
+    },
+    "first_thirteen_deselect_broad": {
+      "passed": 478,
+      "failed": 1,
+      "deselected": 13
+    },
+    "writer_v4_isolated": {
+      "passed": 1,
+      "failed": 0
+    },
+    "second_thirteen_deselect_broad": {
+      "passed": 479,
+      "failed": 0,
+      "deselected": 13
+    }
+  },
+  "current_state_fourteen_deselect_broad": {
+    "additional_deselect_nodeid": "tests/test_rq2_public_grid_two_block_pilot_vnext_execution_successor_v4.py::test_real_fast_child_gate_and_preloader_make_zero_solver_calls",
+    "passed": 478,
+    "failed": 0,
+    "deselected": 14,
+    "elapsed_seconds": 348.20,
+    "v7_fast_probe_retained": true,
+    "v8_fast_probe_retained": true,
+    "all_v8_tests_retained": true
+  },
+  "evidence_limits_and_interpretation": {
+    "current_external_failure_reproduced": false,
+    "current_external_observation_is_a_success_path_only": true,
+    "reviewer_failure_journal_available": false,
+    "reviewer_failure_state_status_reason_phase_counts_timestamps_overrun_termination_returncode_available": false,
+    "failure_root_cause_established": false,
+    "failure_root_cause_must_not_be_inferred_from_this_record": true,
+    "v4_is_sealed_and_superseded": true,
+    "v4_bytes_modified": false,
+    "v8_finding": false,
+    "v8_bytes_modified": false,
+    "v8_status": "READY_FOR_INDEPENDENT_REVIEW",
+    "future_v8_pass_receipt_required": true,
+    "pilot_or_formal_run_performed": false
+  }
+}

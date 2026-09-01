@@ -1,0 +1,24 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_execution_controller_review_escalate_v3",
+  "version": 1,
+  "reviewed_on": "2026-08-31",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "ESCALATE",
+  "reviewed_outer": {
+    "path": "configs/rq2_public_grid_two_block_pilot_execution_controller_successor_v3.OUTER.SHA256SUMS.json",
+    "sha256": "bc6fb4b1d6999a0e38323b7605f16103f70fe27fc904fdd98ce28ec6a7b60976"
+  },
+  "findings": [
+    "The v3 controller execute path and worker production path remain unconditionally closed, so no controller-owned production pipe can create accepted evidence.",
+    "The v3 actual-integration positive path consumes a pre-existing v4 fixture ledger rather than evidence emitted by a v3-owned transport.",
+    "The v3 bundle therefore cannot establish a connected production transport-to-ledger-to-publication chain and must not be activated."
+  ],
+  "effect": {
+    "execution_successor_v3_review_passed": false,
+    "evidence_publication_successor_remediation_authorized": true,
+    "pilot_execution_authorized": false,
+    "formal_execution_authorized": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

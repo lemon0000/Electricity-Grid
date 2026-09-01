@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#666666"/></marker>
+    <style>
+      .title{font:700 30px Arial,Helvetica,sans-serif;fill:#222222}.lane{font:700 22px Arial,Helvetica,sans-serif;fill:#222222}.head{font:700 21px Arial,Helvetica,sans-serif;fill:#222222}.body{font:400 19px Arial,Helvetica,sans-serif;fill:#333333}.arrow{fill:none;stroke:#666666;stroke-width:2.5;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1600" height="760" fill="#FFFFFF"/>
+  <text x="800" y="40" text-anchor="middle" class="title">Overall Research Workflow</text>
+  <text x="235" y="82" text-anchor="middle" class="lane">Data and scenarios</text><text x="800" y="82" text-anchor="middle" class="lane">Coordination model</text><text x="1365" y="82" text-anchor="middle" class="lane">Evaluation and outputs</text>
+  <g>
+    <rect x="60" y="110" width="350" height="125" rx="14" fill="#EAF2FA" stroke="#2166AC" stroke-width="2"/><text x="235" y="150" text-anchor="middle" class="head">Public data</text><text x="235" y="185" text-anchor="middle" class="body">Grid, CFE, and workload power</text>
+    <rect x="60" y="300" width="350" height="125" rx="14" fill="#FFF3E1" stroke="#F1A340" stroke-width="2"/><text x="235" y="340" text-anchor="middle" class="head">Uncertainty scenarios</text><text x="235" y="375" text-anchor="middle" class="body">Ramp-up and expansion delays</text>
+    <rect x="60" y="490" width="350" height="125" rx="14" fill="#F1EAF5" stroke="#762A83" stroke-width="2"/><text x="235" y="530" text-anchor="middle" class="head">Train / holdout split</text><text x="235" y="565" text-anchor="middle" class="body">Seeds and information boundary</text>
+  </g>
+  <g>
+    <rect x="625" y="110" width="350" height="125" rx="14" fill="#FFF3E1" stroke="#F1A340" stroke-width="2"/><text x="800" y="150" text-anchor="middle" class="head">Multistage coordination</text><text x="800" y="185" text-anchor="middle" class="body">Interconnection, expansion, N-1</text>
+    <rect x="625" y="300" width="350" height="125" rx="14" fill="#F1EAF5" stroke="#762A83" stroke-width="2"/><text x="800" y="340" text-anchor="middle" class="head">Shared workload envelope</text><text x="800" y="375" text-anchor="middle" class="body">Power, duration, event counts</text>
+    <rect x="625" y="490" width="350" height="125" rx="14" fill="#EAF2FA" stroke="#2166AC" stroke-width="2"/><text x="800" y="530" text-anchor="middle" class="head">Annual and hourly constraints</text><text x="800" y="565" text-anchor="middle" class="body">Network and CFE services</text>
+  </g>
+  <g>
+    <rect x="1190" y="110" width="350" height="125" rx="14" fill="#E8F3EC" stroke="#1B7837" stroke-width="2"/><text x="1365" y="150" text-anchor="middle" class="head">Policy freeze</text><text x="1365" y="185" text-anchor="middle" class="body">Configure flexibility on training</text>
+    <rect x="1190" y="300" width="350" height="125" rx="14" fill="#E8F3EC" stroke="#1B7837" stroke-width="2"/><text x="1365" y="340" text-anchor="middle" class="head">Out-of-sample replay</text><text x="1365" y="375" text-anchor="middle" class="body">No future-information reoptimization</text>
+    <rect x="1190" y="490" width="350" height="125" rx="14" fill="#F8E9EB" stroke="#B2182B" stroke-width="2"/><text x="1365" y="530" text-anchor="middle" class="head">Results and risk</text><text x="1365" y="565" text-anchor="middle" class="body">Capacity, shortfall, debt, bounds</text>
+  </g>
+  <path d="M410 172 H625" class="arrow"/><path d="M410 362 H625" class="arrow"/><path d="M410 552 H625" class="arrow"/><path d="M975 172 H1190" class="arrow"/><path d="M975 362 H1190" class="arrow"/><path d="M975 552 H1190" class="arrow"/><path d="M235 235 V300" class="arrow"/><path d="M235 425 V490" class="arrow"/><path d="M800 235 V300" class="arrow"/><path d="M800 425 V490" class="arrow"/><path d="M1365 235 V300" class="arrow"/><path d="M1365 425 V490" class="arrow"/>
+</svg>

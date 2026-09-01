@@ -1,0 +1,83 @@
+{
+  "bundle": {
+    "bundle_file_count": 53,
+    "bundle_manifest_path": "configs\\rq2_public_executor_bundle_v1.SHA256SUMS.json",
+    "bundle_manifest_sha256": "49613e3e400a31ee4888490c5939c4985efaaed3f13325baa1c4bbc28b319f04",
+    "nested_package_member_counts": {
+      "data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3": 4,
+      "data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4": 5,
+      "data/raw/rts_gmlc/v0.2.3/upstream": 25
+    }
+  },
+  "config_sha256": "52279c15ad4d27516821956b536886081987957d88dcd7fef3d409592694c289",
+  "environment": {
+    "drift": {},
+    "matches_executor_lock": true,
+    "packages": {
+      "PyYAML": "6.0.3",
+      "gurobipy": "13.0.2",
+      "highspy": "1.15.1",
+      "numpy": "1.26.4",
+      "pyomo": "6.10.1",
+      "pytest": "9.0.2",
+      "ruff": "0.16.4",
+      "scipy": "1.17.0"
+    },
+    "python_executable": "D:\\conda_envs\\rq2-executor-v2-audit\\python.exe",
+    "python_version": "3.11.15"
+  },
+  "execution_host": {
+    "environment_authorized": true,
+    "hostname": "LAPTOP-FT6J5Q9J",
+    "hostname_allowed": true,
+    "observed_environment_value": "EXECUTION_MACHINE_CONFIRMED",
+    "required_environment_value": "EXECUTION_MACHINE_CONFIRMED",
+    "required_environment_variable": "RQ2_EXECUTION_MACHINE"
+  },
+  "formal_execution_started": false,
+  "schema": "rq2_public_executor_preflight_v1",
+  "solver_smokes": [
+    {
+      "configured_options": {
+        "dual_feasibility_tolerance": 1e-06,
+        "mip_abs_gap": 0.0,
+        "mip_feasibility_tolerance": 1e-06,
+        "mip_rel_gap": 1e-06,
+        "primal_feasibility_tolerance": 1e-06,
+        "random_seed": 0,
+        "threads": 4
+      },
+      "lower_bound": 1.0,
+      "model_constraints": 1,
+      "model_variables": 1,
+      "objective_incumbent": 1.0,
+      "package_version": "1.15.1",
+      "pyomo_interface": "pyomo.contrib.solver.common.factory.LegacySolver",
+      "solver_name": "highs",
+      "solver_status": "ok",
+      "termination_condition": "optimal",
+      "upper_bound": 1.0
+    },
+    {
+      "configured_options": {
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-06,
+        "MIPGap": 1e-06,
+        "MIPGapAbs": 0.0,
+        "OptimalityTol": 1e-06,
+        "Seed": 0,
+        "Threads": 4
+      },
+      "lower_bound": 1.0,
+      "model_constraints": 1,
+      "model_variables": 1,
+      "objective_incumbent": 1.0,
+      "package_version": "13.0.2",
+      "pyomo_interface": "pyomo.solvers.plugins.solvers.GUROBI.GUROBIFILE",
+      "solver_name": "gurobi",
+      "solver_status": "ok",
+      "termination_condition": "optimal",
+      "upper_bound": 1.0
+    }
+  ]
+}

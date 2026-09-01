@@ -1,0 +1,60 @@
+{
+  "schema": "rq2_public_grid_highs_formal_activation_successor_review_rework_v1",
+  "version": 1,
+  "reviewed_on": "2026-09-01",
+  "reviewer_agent": "/root/pilot_post_result_review",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "REWORK",
+  "cryptographic_reviewer_signature_present": false,
+  "materialized_from_review_report": true,
+  "reviewer_supplied_finding_id": false,
+  "materialized_finding_id": "background_controller_startup_identity_and_handshake_missing",
+  "finding_heading": "Background formal controller 启动证据不足，不能可靠证明已启动的是 exact PID/create-time 对应的受权 controller。",
+  "required_outcome": [
+    "Popen 后取得并验证 exact PID/create-time。",
+    "controller 在验证 dynamic authority、consumed tombstone、exact cwd/env/Python、authority mapping 和 clean roots 后 atomic persist + stable readback startup handshake。",
+    "bootstrap 有限等待并独立验证 handshake 与同一 PID/create-time 后才可报告 spawned。",
+    "pre-handshake exit、timeout、identity drift、malformed 或 tampered evidence 必须为 launch incomplete；one-shot 保持 consumed，no retry/no resume。",
+    "新增零 solver focused tests。"
+  ],
+  "reviewed_v1": {
+    "outer": {
+      "path": "configs/rq2_public_grid_highs_formal_activation_successor_v1.OUTER.SHA256SUMS.json",
+      "sha256": "b492e4babe182d38ad6be865df424d1cce59cef57c2c6a85b896cffddfad0b87"
+    },
+    "inner": {
+      "path": "configs/rq2_public_grid_highs_formal_activation_successor_v1.SHA256SUMS.json",
+      "sha256": "5e4eba6b7bc4ca7364725bbe73f4d7db4ba2e290ec413035ed4e5e5957cb204c"
+    },
+    "config": {
+      "path": "configs/rq2_public_grid_highs_formal_activation_successor_v1.json",
+      "sha256": "6a0b7c53772166cc8fa270ffeecdb79b7f87fa36f85c37c4d4f11a8eb6f8d04e"
+    },
+    "controller": {
+      "path": "experiments/run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_formal_v2.py",
+      "sha256": "9945e6965a1b44156089566a652b40a15d93b96591eaf77696c500d84af037a9"
+    },
+    "bootstrap": {
+      "path": "experiments/bootstrap_rq2_public_grid_highs_formal_activation_successor_v1.py",
+      "sha256": "cf2f935c72eb4cda689694b3a4760eec4aa7a348ec8c689cf579344ce421daaa"
+    },
+    "tests": {
+      "path": "tests/test_rq2_public_grid_highs_formal_activation_successor_v1.py",
+      "sha256": "79862922f35864e725b2ab27b3364f1cc5d9ad19341115c5b214ff2cf82a8571"
+    }
+  },
+  "v2_rework_authority": {
+    "authorized_by_reviewer_pass": false,
+    "authorization_source": "active_user_objective_plus_agent_md_section_7_unique_rework",
+    "scope": "new_versioned_formal_activation_successor_v2_startup_identity_and_handshake_only"
+  },
+  "effect": {
+    "v1_independent_review_passed": false,
+    "activation_pass_receipt_authorized": false,
+    "formal_execution_authorized": false,
+    "solver_or_formal_start_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

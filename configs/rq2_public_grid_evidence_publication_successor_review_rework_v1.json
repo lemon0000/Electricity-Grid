@@ -1,0 +1,26 @@
+{
+  "schema": "rq2_public_grid_evidence_publication_successor_review_rework_v1",
+  "version": 1,
+  "reviewed_on": "2026-08-31",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "REWORK",
+  "reviewed_outer": {
+    "path": "configs/rq2_public_grid_evidence_publication_successor_v1.OUTER.SHA256SUMS.json",
+    "sha256": "f255626708654b22d14b4c881921ff6f11646122de804582f1ef42bc65ac24c4"
+  },
+  "findings": [
+    "Module-level and ordinary-import-accessible token, session key, evidence factory, append, and seal attributes permit a caller to compose V1 acceptance authority.",
+    "Evidence HMAC validation does not independently replay exact HELLO, envelope, ACK, result, attempt-receipt, module/argv/environment, and raw anonymous-pipe authority semantics.",
+    "The V1 classifier treats an ordinary unsealed result directory as honest_incomplete instead of commit_indeterminate.",
+    "V1 live-closure verification returns only a path tuple and does not bind the complete predecessor plus self path-to-SHA256 mapping into every evidence and commit.",
+    "Publication adversarial coverage is incomplete for exact truth-table states, post-success readback, aliases, cross-session/replay/swap, and synchronized tamper."
+  ],
+  "effect": {
+    "evidence_publication_successor_v1_review_passed": false,
+    "versioned_v2_remediation_authorized": true,
+    "pilot_execution_authorized": false,
+    "formal_execution_authorized": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

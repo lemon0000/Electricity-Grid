@@ -1,0 +1,54 @@
+evaluation:
+  id: rq2_l5_economic_stochastic_formal_v1
+  role: shared_budget_and_service_cvar_economic_optimization_mechanism_demonstration_formal_lambda_grid
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+  security_certified: false
+  formal_economic_optimum_published: false
+model:
+  max_flexibility_budget_mw: 200.0
+  provisioning_cost_per_mw: 500.0
+  beta: 0.7
+  solver_name: highs
+lambda_sweep:
+- 0.0
+- 0.01
+- 0.02
+- 0.03
+- 0.05
+- 0.075
+- 0.1
+- 0.15
+- 0.25
+- 0.5
+- 0.75
+- 1.0
+- 2.0
+coefficients:
+  kappa_access: 1000.0
+  kappa_grid: 50.0
+  kappa_green: 40.0
+  kappa_drop: 2000.0
+  kappa_breach_firm: 0.0
+  kappa_breach_conditional: 0.0
+  parameter_status: synthetic_mechanism_only_not_engineering_or_contract_evidence
+scenarios:
+- name: mild
+  probability: 0.5
+  grid_need_mw: 20.0
+  green_call_mw: 60.0
+  connected_demand_mw: 1000.0
+  hours: 1.0
+- name: stress
+  probability: 0.5
+  grid_need_mw: 40.0
+  green_call_mw: 60.0
+  connected_demand_mw: 1000.0
+  hours: 1.0
+validation:
+  cvar_cross_check_tolerance: 1.0e-06
+  fail_closed_on_infeasible_run: true
+random_seed: null
+output:
+  runs_path: D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_formal_batch\rq2_formal_batch_v1\C4_l5_beta_0p7\runs.csv
+  frontier_path: D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_formal_batch\rq2_formal_batch_v1\C4_l5_beta_0p7\frontier.csv
+  summary_path: D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_formal_batch\rq2_formal_batch_v1\C4_l5_beta_0p7\summary.json

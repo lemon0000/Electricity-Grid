@@ -1,0 +1,44 @@
+schema: rq2_public_grid_two_block_pilot_pre_run_review_rework_v3
+version: 3
+reviewed_on: "2026-08-31"
+reviewer_role: independent_sol_reviewer
+verdict: REWORK
+rework_round_in_current_cycle: 1
+
+reviewed_candidate:
+  version: 3
+  status: remediation_candidate_v3_execution_closed
+  inner_manifest_path: configs/rq2_public_grid_two_block_pilot_candidate_v3.SHA256SUMS.json
+  inner_manifest_sha256: 9c3e0318daa06d7cac830c3e65f7bc9950b26c63f775cdabbe7d0315a9dad1d0
+  outer_manifest_path: configs/rq2_public_grid_two_block_pilot_candidate_v3.OUTER.SHA256SUMS.json
+  outer_manifest_sha256: d08b3049e43837397b1459edc9f4ecfa8d7e20419bcbbbf73f68d109f3dd10f9
+
+required_rework:
+  - id: production_single_frame_eof
+    finding: production worker must verify bounded EOF after the one authorized frame and before ACK or data loading; replay and trailing bytes must fail closed
+  - id: ordered_controller_ledger
+    finding: execution_index and immutable accepted-evidence predecessor binding are required for 0008 then 0009 ordering
+  - id: supervised_process_io_cleanup
+    finding: logs must not use undrained PIPEs; all handshake phases require watchdog/resource monitoring and deterministic terminate-wait-kill-wait cleanup
+  - id: receipt_state_separation
+    finding: worker attempt evidence must not claim controller validation or publication; published true may exist only in a post-rename success seal
+  - id: immutable_accepted_evidence
+    finding: publication must bind ACK process identity source bytes and scientific hashes to an immutable controller-memory record at copy and final reread
+  - id: canonical_attempt_paths
+    finding: payload and attempt receipt paths must be exact worker_root/block_id/nonce fixed filenames
+  - id: external_v4_trust_root
+    finding: a future executable successor must receive the reviewed v4 outer digest from an external trust root and may not dynamically self-accept it
+
+effect:
+  candidate_v3_bytes_immutable: true
+  candidate_v3_execution_authorized: false
+  candidate_v4_remediation_authorized: true
+  candidate_v4_execution_authorized: false
+  two_block_pilot_execution_ready: false
+  two_block_pilot_executed: false
+  formal_execution_ready: false
+  user_formal_run_authorized: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false
+  no_execution_authority: true

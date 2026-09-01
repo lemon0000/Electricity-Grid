@@ -1,0 +1,124 @@
+{
+  "schema": "rq2_public_grid_evidence_publication_successor_v2",
+  "version": 2,
+  "frozen_on": "2026-08-31",
+  "status": "evidence_publication_successor_v2_review_closed",
+  "predecessor": {
+    "outer_path": "configs/rq2_public_grid_evidence_publication_successor_v1.OUTER.SHA256SUMS.json",
+    "outer_sha256": "f255626708654b22d14b4c881921ff6f11646122de804582f1ef42bc65ac24c4",
+    "inner_path": "configs/rq2_public_grid_evidence_publication_successor_v1.SHA256SUMS.json",
+    "inner_sha256": "7c573ade9f031e039e6eb8873c40638006c4b137c6a0bafccd14a951ee6546ba",
+    "rework_path": "configs/rq2_public_grid_evidence_publication_successor_review_rework_v1.json",
+    "rework_sha256": "65c2f291eda3044a7794a4cce8dfe0542fd8f6e7e10b835a9a1df793f07b9757"
+  },
+  "bundle": {
+    "inner_path": "configs/rq2_public_grid_evidence_publication_successor_v2.SHA256SUMS.json",
+    "outer_path": "configs/rq2_public_grid_evidence_publication_successor_v2.OUTER.SHA256SUMS.json",
+    "exact_member_count": 8,
+    "members": {
+      "config": "configs/rq2_public_grid_evidence_publication_successor_v2.json",
+      "rework": "configs/rq2_public_grid_evidence_publication_successor_review_rework_v1.json",
+      "contract": "experiments/rq2_public_grid_evidence_publication_contract_v2.py",
+      "controller": "experiments/run_rq2_public_grid_evidence_publication_successor_v2.py",
+      "worker": "experiments/worker_rq2_public_grid_evidence_publication_successor_v2.py",
+      "publisher": "experiments/publish_rq2_public_grid_evidence_publication_successor_v2.py",
+      "bootstrap": "experiments/bootstrap_rq2_public_grid_evidence_publication_successor_v2.py",
+      "tests": "tests/test_rq2_public_grid_evidence_publication_successor_v2.py"
+    }
+  },
+  "closed_review": {
+    "future_review_path": "configs/rq2_public_grid_evidence_publication_successor_review_pass_v2.json",
+    "future_review_present": false,
+    "execution_ready": false,
+    "pilot_execution_authorized": false,
+    "formal_execution_authorized": false,
+    "claim": false,
+    "security_certified": false
+  },
+  "blocks": ["holdout_s20260822_0008", "holdout_s20260822_0009"],
+  "fixture": {
+    "purpose": "review_fixture_zero_solver",
+    "review_fixture": true,
+    "nonformal": true,
+    "claim": false,
+    "scientific_loader_calls": 0,
+    "solver_calls": 0,
+    "payload_sha256": {
+      "holdout_s20260822_0008": "ae9d068e74c6809e2b2a6f43f0643cad2c7dcfb1def3e5e522d602774f2d5868",
+      "holdout_s20260822_0009": "7714099e5b6500ee4e469150eb000e4a56b3215da57db530761f80a41ab11ef2"
+    }
+  },
+  "publication_truth_table": [
+    {
+      "condition": "result_clean_absent_and_success_clean_absent_and_terminal_clean_absent_with_ordinary_ancestors",
+      "classification": "honest_incomplete"
+    },
+    {
+      "condition": "exact_v2_result_and_exact_bound_success_and_terminal_clean_absent",
+      "classification": "committed_success"
+    },
+    {
+      "condition": "any_other_presence_alias_unreadable_corrupt_mismatch_or_dual_state",
+      "classification": "commit_indeterminate"
+    }
+  ],
+  "pipe_authority": {
+    "type": "anonymous_pipe",
+    "worker_read": {"role": "controller_to_worker", "direction": "read", "inherited": true},
+    "worker_ack": {"role": "worker_to_controller", "direction": "write", "inherited": true},
+    "controller_write": {"role": "controller_to_worker", "direction": "write", "inherited": false},
+    "controller_read": {"role": "worker_to_controller", "direction": "read", "inherited": false}
+  },
+  "runtime": {
+    "locked_python_executable": "D:\\conda_envs\\rq2-executor-v2-audit\\python.exe",
+    "locked_python_sha256": "91df9733b71b293eec9945cc8c5388bbfe1abc5e6ee94a14333076e5f55cb6bf",
+    "worker_module": "experiments.worker_rq2_public_grid_evidence_publication_successor_v2",
+    "exact_cwd": "D:\\CUHKSZ\\Research Project\\electricity-grid",
+    "watchdog_seconds": 21600.0,
+    "sample_interval_seconds": 5.0,
+    "child_private_commit_stop_gib": 8.0,
+    "system_commit_available_stop_gib": 2.0,
+    "preflight_available_commit_gib": 10.0,
+    "sanitized_environment": {
+      "COMSPEC": "C:\\WINDOWS\\system32\\cmd.exe",
+      "NO_COLOR": "1",
+      "PROCESSOR_ARCHITECTURE": "AMD64",
+      "PYTHONHASHSEED": "0",
+      "PYTHONIOENCODING": "utf-8",
+      "SYSTEMDRIVE": "C:",
+      "SYSTEMROOT": "C:\\WINDOWS",
+      "TEMP": "C:\\Users\\Psychobabble\\AppData\\Local\\Temp",
+      "TMP": "C:\\Users\\Psychobabble\\AppData\\Local\\Temp",
+      "WINDIR": "C:\\WINDOWS"
+    }
+  },
+  "paths": {
+    "worker_root": "results/workers/rq2_public_grid_evidence_publication_successor_v2",
+    "result_root": "results/tables/rq2_public_grid_evidence_publication_successor_v2",
+    "success_root": "results/tables/rq2_public_grid_evidence_publication_successor_v2.PUBLISHED",
+    "terminal_root": "results/tables/rq2_public_grid_evidence_publication_successor_v2.TERMINAL",
+    "log_root": "results/logs/rq2_public_grid_evidence_publication_successor_v2"
+  },
+  "formal_protection": {
+    "formal_runner_path": "experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py",
+    "formal_runner_sha256": "39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8",
+    "activated_config_path": "results/execution_configs/rq2_public_successor_v2/grid.yaml",
+    "activated_config_sha256": "b8f7a71f8aaf8150c8515089e90e1946732d4476e0855d8677523577bc17f416",
+    "checkpoint_count": 9
+  },
+  "threat_boundary": {
+    "rejects_ordinary_import_and_callable_attribute_authority_composition": true,
+    "same_privilege_process_memory_or_closure_introspection_out_of_scope": true,
+    "security_certified": false
+  },
+  "gates": {
+    "independent_review_passed": false,
+    "execution_ready": false,
+    "pilot_executed": false,
+    "formal_execution_ready": false,
+    "user_formal_run_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

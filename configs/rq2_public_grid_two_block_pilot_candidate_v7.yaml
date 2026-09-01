@@ -1,0 +1,100 @@
+schema: rq2_public_grid_two_block_pilot_candidate_v7
+version: 7
+frozen_on: "2026-08-31"
+status: publication_presence_snapshot_candidate_v7_execution_closed
+
+predecessor_review:
+  candidate_v6_inner_path: configs/rq2_public_grid_two_block_pilot_candidate_v6.SHA256SUMS.json
+  candidate_v6_inner_sha256: 990a9f5bec908a32d41b5d0c7fdecba064cb8e8df6b129295ef2489a82e468a9
+  candidate_v6_outer_path: configs/rq2_public_grid_two_block_pilot_candidate_v6.OUTER.SHA256SUMS.json
+  candidate_v6_outer_sha256: ab9bfb5d89a383a6b68ee8630c9ca14df819bd9f885899e2fd07f76f136dfb20
+  escalation_receipt_path: configs/rq2_public_grid_two_block_pilot_pre_run_review_escalation_v6.yaml
+  escalation_receipt_sha256: c26afa1ddf77c98e5048609bc6cf17e30231e6417c8208069acce42a803754bd
+
+user_authorization:
+  path: configs/rq2_public_grid_two_block_pilot_user_authorization_v3.yaml
+  sha256: f696e76a1fedba8335af62e8914b12bb9385606525cf8170d0b11ffdb3900e52
+  exact_quote: "授权给你，修复好之后就开始正式实验吧"
+  interpretation: conditional_future_authority_only_after_all_pilot_postreview_and_activation_gates_pass
+
+immutable_science_transport_ledger_and_postcommit_authority:
+  candidate_v4_runner_path: experiments/run_rq2_public_grid_two_block_pilot_candidate_v4.py
+  candidate_v4_runner_sha256: 3b6e55605f56cee1e871d72b15ddfec0963ce727ec863a08f4cbac441d7541e9
+  candidate_v4_publish_result_source_sha256: e014b73c608e2bce7ee59a486a718ec54149b66c7f9308b424b907155ae3d791
+  candidate_v5_runner_path: experiments/run_rq2_public_grid_two_block_pilot_candidate_v5.py
+  candidate_v5_runner_sha256: 41cdb2efab3ec96386be00c88f18ee5fa42233ddd3a88c78c81b3cc981bc9d48
+  candidate_v6_runner_path: experiments/run_rq2_public_grid_two_block_pilot_candidate_v6.py
+  candidate_v6_runner_sha256: 21c315f046b3bf62f1c8b16eb834e9bf172dfeb8f361fae17a7d2433e49151fa
+  candidate_v6_publish_result_source_sha256: b74b019f6914cb5f14e1496f61602f482008248d77188c13b73e6cc7dd1d47fa
+  candidate_v6_reconcile_source_sha256: 95d69a0b6ee461c29f4ad8f8a48e4ead1cd978a8450087da4b12ffcdfdf51275
+  candidate_v6_outcome_source_sha256: 9f8741bf889f226729141c7d402919929f16501445f112b1505321ba5ec7d3d9
+  candidate_v6_success_verify_source_sha256: 3a010ca3eddeb07d2e7e7e35a37f86bbaf553fd6ed7eaf26b6e6f869fee54802
+  candidate_v6_committed_result_source_sha256: 8f517cd776503bcb92bfebadcc3c904b6e8f4d4a86a5cfd632211d96f3f02faa
+  candidate_v6_probe_source_sha256: 28d7425b0d6e037e5c04728037c3831589bad907774f3fb98157e3e615c17c2c
+  semantic_transport_ledger_threshold_and_science_changed: false
+  candidate_v6_exact_commit_payload_semantics_changed: false
+
+publication_presence_snapshot_contract:
+  immutable_deep_snapshot: true
+  capture_before_any_classification_branch_or_resolve: true
+  paths: [result, success_commit, forbidden_terminal]
+  inspect_every_ancestor: true
+  evidence: [lexists, lstat, reparse, mount, accessibility]
+  independent_reprobe_within_decision_forbidden: true
+  honest_incomplete_states:
+    - all_three_leaves_clean_absent_with_ordinary_ancestors
+    - ordinary_unsealed_result_directory_with_success_and_terminal_clean_absent
+  any_terminal_appearance_is_commit_indeterminate: true
+  any_file_alias_reparse_mount_inaccessible_or_nonordinary_is_commit_indeterminate: true
+  corrupt_mismatch_or_dual_state_is_commit_indeterminate: true
+  committed_success_requires_exact_complete_result_and_bound_success: true
+  committed_success_requires_clean_absent_terminal: true
+  final_acceptance_requires_one_new_complete_snapshot_and_full_revalidation: true
+  snapshot_is_logically_consistent_not_os_transactional: true
+  same_privilege_adversarial_process_race_resistance_claimed: false
+
+scientific_contract:
+  solver:
+    name: highs
+    expected_package_version: 1.15.1
+    threads: 4
+    mip_relative_gap: 1.0e-6
+    feasibility_tolerance: 1.0e-6
+    optimality_tolerance: 1.0e-6
+    integer_feasibility_tolerance: 1.0e-6
+    random_seed: 0
+    time_limit_seconds: null
+    tolerance_mw: 1.0e-6
+    tee: true
+  blocks: [holdout_s20260822_0008, holdout_s20260822_0009]
+  timeout_resource_stop_nonzero_or_unresolved_is_infeasibility_evidence: false
+
+paths:
+  result_directory: results/tables/rq2_public_grid_two_block_pilot_v7
+  success_commit_directory: results/tables/rq2_public_grid_two_block_pilot_v7.SUCCESS
+  forbidden_terminal_directory: results/tables/rq2_public_grid_two_block_pilot_v7.TERMINAL
+  worker_staging_directory: results/workers/rq2_public_grid_two_block_pilot_v7
+  attempt_log_directory: results/logs/rq2_public_grid_two_block_pilot_v7
+
+external_execution_trust_root:
+  required_for_any_future_execution: true
+  reviewed_outer_path: null
+  reviewed_outer_sha256: null
+  dynamic_self_acceptance_forbidden: true
+  future_execution_successor_required: true
+
+gates:
+  remediation_user_authorized: true
+  candidate_implementation_ready: true
+  independent_pre_run_review_passed: false
+  execution_successor_present: false
+  two_block_pilot_execution_ready: false
+  two_block_pilot_executed: false
+  named_outage_comparison_passed: false
+  post_result_review_passed: false
+  formal_activation_present: false
+  formal_execution_ready: false
+  user_formal_run_authorized: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false

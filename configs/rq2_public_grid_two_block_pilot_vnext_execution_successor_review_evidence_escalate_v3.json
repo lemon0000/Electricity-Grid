@@ -1,0 +1,27 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_vnext_execution_successor_review_evidence_escalate_v3",
+  "version": 1,
+  "recorded_on": "2026-09-01",
+  "authority": false,
+  "verdict_source": "/root/pilot_post_result_review",
+  "bound_authority_receipt_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_escalate_v3.json",
+  "reviewed_outer_sha256": "017ca2c339974f1f33e14e141a0f48bbe528f927b585b9d8596d6f0b8fd04421",
+  "resource_reproducer": {
+    "description": "two-sample journal with a 100 second actual observation gap and internally consistent aggregate",
+    "arbitrary_100s_observation_gap_accepted": true,
+    "scientific_interpretation": "validator_gap_not_science_or_resource_evidence",
+    "mathematical_infeasibility_inferred": false
+  },
+  "lease_failure_window": {
+    "fresh_to_consumed_rename_completed": true,
+    "caller_key_seed_assignment_completed": false,
+    "raw_seed_can_remain_at_consumed_path_on_validation_exception": true
+  },
+  "effect": {
+    "opens_execution_gate": false,
+    "opens_pilot_gate": false,
+    "opens_formal_gate": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

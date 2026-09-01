@@ -1,0 +1,45 @@
+schema: rq2_public_grid_two_block_pilot_pre_run_review_escalation_v2
+version: 2
+reviewed_on: "2026-08-30"
+reviewer_role: independent_sol_reviewer
+verdict: ESCALATE
+escalation_basis: one_round_rework_limit_exhausted
+
+reviewed_candidate:
+  version: 2
+  status: pre_run_rework_successor_execution_closed
+  inner_manifest_path: configs/rq2_public_grid_two_block_pilot_candidate_v2.SHA256SUMS.json
+  inner_manifest_sha256: fd7e0d92e78c92991602fe1dcd25c0a20e00fd6bc8f4f927a3431dda816b2598
+  outer_manifest_path: configs/rq2_public_grid_two_block_pilot_candidate_v2.OUTER.SHA256SUMS.json
+  outer_manifest_sha256: fb2185a707e905480d6d0fc03b95c178420293807b309459548f99a31f782743
+
+reviewer_findings:
+  - id: worker_request_alias_provenance
+    finding: "_worker()在校验前对 request_path.resolve()，CLI symlink/junction alias证据被抹去，测试未覆盖完整 _worker(--worker-request alias)"
+  - id: forgeable_controller_request_evidence
+    finding: "任意父进程可调用公开 _build_controller_receipt/_build_request 自造内部一致证据，现有 forged test仅篡改既有nonce，未证明不可绕过"
+  - id: imported_v1_live_authority_unverified
+    finding: "v2 runtime import v1并委托 _formal_snapshot()，但未live-verify v1 outer/inner/imported runner bytes，review后v1 drift可被接受"
+  - id: result_tree_not_exact
+    finding: "_result_manifest()忽略额外空目录且仅is_symlink、不拒绝junction/reparse，exact tree不成立"
+  - id: publication_boundary_not_end_to_end_tested
+    finding: "publication对抗测试只调用 _validate_copied_worker_pair()，未覆盖 _publish_result()/manifest/final reread/extra member/rename boundary"
+
+review_status:
+  semantic_registered_mapping_reviewed_passed: true
+  independent_pre_run_review_passed: false
+  unresolved_finding_count: 5
+
+effect:
+  candidate_v2_bytes_must_remain_unchanged: true
+  candidate_v2_execution_authorized: false
+  execution_successor_creation_authorized: false
+  two_block_pilot_execution_ready: false
+  two_block_pilot_executed: false
+  post_result_review_passed: false
+  formal_execution_ready: false
+  user_formal_run_authorized: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false
+  no_execution_authority: true

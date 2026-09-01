@@ -1,0 +1,167 @@
+schema: rq2_public_solver_pilot_semantic_successor_v1
+version: 1
+frozen_on: "2026-08-27"
+status: observed_pilot_diagnostic_amendment_confirmatory_pilot_required
+
+scope:
+  task_risk: R3
+  purpose: normalize_cross_solver_certificate_semantics_without_reclassifying_v1
+  source_pilot_outcomes_observed_before_amendment: true
+  v1_result_reassessment_is_diagnostic_only: true
+  v1_eligibility_changed: false
+  runs_solver_during_validation: false
+  writes_result_during_validation: false
+  changes_model_formulation: false
+  changes_solver_algorithm_threads_seed_or_tolerances: false
+  changes_pilot_blocks_or_repetitions: false
+  changes_formal_result_or_certification: false
+
+predecessor_authority:
+  immutable: true
+  files:
+    configs/rq2_public_executor_bundle_v1.SHA256SUMS.json: 49613e3e400a31ee4888490c5939c4985efaaed3f13325baa1c4bbc28b319f04
+    configs/rq2_public_executor_bundle_v2.SHA256SUMS.json: 10129f473a521f37ae0c45bf89a4904c77156c92dcc55837adf91adb8d58e37e
+    configs/rq2_public_executor_bundle_v2.OUTER.SHA256SUMS.json: 32bde980733ef80b04571d1fe328c893ff78b4ecb1aee2150c318970707e4942
+    configs/rq2_public_solver_pilot_v1.yaml: bcba9981628001ced20e466632bb33e4d9f44ca3ffad6b24fc8a0761f72c0ec1
+    experiments/run_rq2_public_solver_pilot_v1.py: 094f93751c92d95f379ee34f7a236bb7a86a8cb3d81f359d96c5590bcb0cf200
+    tests/test_rq2_public_solver_pilot_v1.py: 4aab6b41ab8aa2be68e0cf7cd3878239405334098767ecb772a51a93329db609
+    results/tables/rq2_public_solver_pilot_v1/SHA256SUMS.json: 08a1f2c6808aa03b9601d20252421fb15a03c2d6686540b8b7d04b1cb4c52e90
+    results/tables/rq2_public_solver_pilot_v1/config.yaml: bcba9981628001ced20e466632bb33e4d9f44ca3ffad6b24fc8a0761f72c0ec1
+    results/tables/rq2_public_solver_pilot_v1/summary.json: e5ee6c960ab766ba2c8ba9752974491d1aa08b4165ce600b004a41f0246e460f
+    results/tables/rq2_public_solver_pilot_v1/comparison.json: ed1eb1f7c1dbdcf0a8140fd690a524c075b7f11b3fb0246c78b06ca2400aa267
+    results/tables/rq2_public_solver_pilot_v1/runs.json: dfdcbcced9f5ba6362856643e44e5e0fdd979334e0165c701a0c9fe3cc80a153
+    results/transfer/rq2_public_successor_v1_pilot.tar.gz: 701159a2a4bb55cb16837f14ccdebd473e5099145650c4d56fc87c82da9c21fc
+    results/transfer/rq2_public_successor_v1_pilot.json: be8df8e3ac0bb879fc3a4faf40707ef1bd5b618272ced799e8edf5e6e71c5b30
+    configs/rq2_public_executor_handoff_v1.yaml: 52279c15ad4d27516821956b536886081987957d88dcd7fef3d409592694c289
+    configs/rq2_public_executor_handoff_v2.yaml: e362b635dcd22c54162683d04686fd907681976c8c933e983584e19a175c34f0
+    configs/rq2_public_successor_activation_v1.yaml: eba653ef3e1e1131731b4f13df59136a2ea362b891be965b4e514f6d3e027856
+    results/tables/rq2_public_executor_preflight_v1/SHA256SUMS.json: aa765cf39ac4d8bc4c279128041764397eb7dcef6a76242fc0e29327d0ed903f
+    data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4/SHA256SUMS.json: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+
+observed_v1_outcome:
+  check_count: 280
+  passed_check_count: 268
+  failed_check_count: 12
+  gurobi_eligible_for_formal_successor: false
+  failed_check_classes:
+    holdout_s20260822_0013:
+      baseline_incumbent_bounds_and_gap: 4
+    holdout_s20260822_0089:
+      hourly_termination_and_status: 4
+    holdout_s20260822_0150:
+      hourly_termination_and_status: 4
+  all_other_v1_checks_passed: true
+  formal_grid_execution_started: false
+  security_certified: false
+
+semantic_acceptance:
+  objective_sense: minimize
+  threshold_provenance:
+    baseline_incumbent_difference:
+      v1_source_field: acceptance.maximum_baseline_objective_difference_usd
+      frozen_value: 1.0e-4
+      successor_use: incumbent_objective_only
+    finite_grid_need_difference:
+      v1_source_field: acceptance.maximum_finite_grid_need_difference_mw
+      frozen_value: 1.0e-5
+    constraint_violation:
+      v1_source_field: acceptance.maximum_constraint_violation
+      frozen_value: 1.0e-6
+    solver_relative_gap:
+      v1_source_field: solvers.*.mip_relative_gap
+      frozen_value: 1.0e-6
+    scientific_threshold_values_changed_after_observation: false
+    hourly_solver_report_absolute_tolerance:
+      value_mw: 1.0e-10
+      derivation: frozen_model_tolerance_times_1e-4
+      frozen_model_tolerance_source: model.tolerance_mw
+      frozen_model_tolerance_mw: 1.0e-6
+      fraction_of_frozen_model_tolerance: 1.0e-4
+      fraction_of_cross_solver_finite_grid_threshold: 1.0e-5
+      introduced_after_v1_observation: true
+      diagnostic_only_until_fresh_confirmatory_pilot: true
+      successor_use: same_record_objective_and_pairwise_interval_consistency_only
+  baseline:
+    maximum_cross_solver_incumbent_difference_usd: 1.0e-4
+    require_finite_lower_and_upper_bounds: true
+    require_lower_bound_not_above_upper_bound: true
+    require_incumbent_inside_interval: true
+    require_pairwise_intervals_overlap: true
+    compare_lower_bounds_across_solvers_for_equality: false
+    compare_absolute_gaps_across_solvers_for_equality: false
+    compare_gap_tolerances_across_solvers_for_equality: false
+    require_each_solver_own_gap_within_recorded_tolerance: true
+    require_each_solver_own_relative_gap_within_configured_limit: true
+    interval_direction_tolerance: numeric_serialization_consistency_tolerance_only
+    interval_overlap_tolerance: numeric_serialization_consistency_tolerance_only
+  hourly:
+    maximum_finite_grid_need_difference_mw: 1.0e-5
+    maximum_constraint_violation: 1.0e-6
+    require_identical_semantic_state: true
+    require_identical_model_scale: true
+    compare_raw_solver_status_across_solvers_for_equality: false
+    preserve_raw_termination_condition_and_solver_status: true
+    E0_requires_primary_and_zero_dc_proven_infeasible: true
+    E0_requires_null_grid_need_and_null_incumbent_bounds: true
+    require_nonnegative_residuals: true
+    no_active_outage_requires_zero_model_scale: true
+    active_finite_and_E0_require_positive_model_scale: true
+    require_exact_frozen_block_role_source_hour_and_event_inventory: true
+    require_same_record_grid_need_and_certificate_incumbent_consistency: true
+    require_pairwise_finite_certificate_intervals_overlap: true
+    interval_direction_tolerance: numeric_serialization_consistency_tolerance_only
+    same_record_objective_tolerance: hourly_solver_report_numeric_envelope_only
+    interval_overlap_tolerance: hourly_solver_report_numeric_envelope_only
+  registered_raw_status_mapping:
+    highs:
+      optimal: [ok]
+      infeasible: [error]
+      not_applicable_no_active_outage: [not_applicable]
+    gurobi:
+      optimal: [ok]
+      infeasible: [warning]
+      not_applicable_no_active_outage: [not_applicable]
+  unregistered_raw_status_or_termination: unresolved_fail_closed
+  timeout_is_infeasibility_evidence: false
+  timeout_is_semantic_confirmation: false
+  unresolved_is_infeasibility_evidence: false
+  unresolved_is_semantic_confirmation: false
+  missing_or_incomplete_certificate_is_confirmation: false
+  numeric_serialization_consistency_tolerance: 1.0e-12
+  hourly_solver_report_absolute_tolerance_mw: 1.0e-10
+
+confirmatory_pilot:
+  required: true
+  rationale: acceptance_semantics_were_amended_after_v1_results_were_observed
+  fresh_solver_executions_required: true
+  fresh_result_directory_required: true
+  v1_runs_or_transfer_package_may_satisfy_confirmation: false
+  inherit_v1_blocks_solvers_execution_order_repetitions_and_threshold_values: true
+  semantic_evaluator_path: experiments/validate_rq2_public_solver_pilot_semantic_successor_v1.py
+  runner_path: null
+  result_directory: null
+  result_manifest_sha256: null
+  executed: false
+  independent_sol_reviewer_required: true
+  user_authorization_required_before_execution: true
+  activation_authority_path: null
+
+validation_contract:
+  validator_path: experiments/validate_rq2_public_solver_pilot_semantic_successor_v1.py
+  test_path: tests/test_rq2_public_solver_pilot_semantic_successor_v1.py
+  manifest_path: configs/rq2_public_solver_pilot_semantic_successor_v1.SHA256SUMS.json
+  canonical_config_and_manifest_only: true
+  validator_runs_solver: false
+  validator_writes_files: false
+
+gates:
+  v1_diagnostic_semantic_consistency_observed: false
+  confirmatory_pilot_implementation_bound: false
+  independent_review_passed: false
+  confirmatory_pilot_authorized: false
+  confirmatory_pilot_executed: false
+  cross_solver_confirmation_completed: false
+  formal_execution_ready: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false

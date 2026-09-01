@@ -1,0 +1,43 @@
+{
+  "schema": "rq2_public_grid_two_block_pilot_vnext_execution_successor_review_evidence_escalate_v7",
+  "version": 1,
+  "recorded_on": "2026-09-01",
+  "authority": false,
+  "verdict_source": "/root/pilot_post_result_review",
+  "reviewer_role": "independent_sol_reviewer",
+  "bound_authority_receipt_path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_escalate_v7.json",
+  "bound_authority_receipt_sha256": "256f13db2a33c0a344b09230a7784a319b4bb20f8095c8bab2b44ae498b116d6",
+  "reviewed_outer_sha256": "7d3d6f08f2f73a0fe09639a76c5dde3c9b239ec11bd32b3113a45f85afb53d91",
+  "finding_id": "DUE_RESOURCE_SLOT_BYPASSED_BY_CHILD_EXIT_POLL",
+  "source_observation": {
+    "monitor_source_sha256": "c7b9f1b37ff1099f3a0b847a37b4824775b9e5bc616e7690dbb25f9930bf0b1f",
+    "poll_line": 1541,
+    "overdue_check_line": 1568,
+    "poll_precedes_overdue_check": true
+  },
+  "independent_reproducer": {
+    "now_monotonic_ns": 1006000000001,
+    "first_sample_success": true,
+    "child_poll_observed_exited": true,
+    "persist_calls": 0,
+    "resource_monitor_state_outcome": null,
+    "mathematical_infeasibility_inferred": false
+  },
+  "required_priority": [
+    "observe_now",
+    "global_watchdog_before_any_poll",
+    "compute_current_scheduled_slot_and_deadline",
+    "poll_clean_exit_only_before_scheduled_slot",
+    "strict_overdue_deadline_missed",
+    "inclusive_window_exact_same_pair_sample"
+  ],
+  "effect": {
+    "opens_execution_gate": false,
+    "opens_pilot_gate": false,
+    "opens_formal_gate": false,
+    "opens_result_gate": false,
+    "claim": false,
+    "security_certified": false,
+    "v8_versioned_cycle_only": true
+  }
+}

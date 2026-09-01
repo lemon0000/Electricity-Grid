@@ -1,0 +1,56 @@
+schema: rq2_public_solver_confirmatory_implementation_review_escalation_v3
+reviewed_on: "2026-08-28"
+review_scope: rq2_public_solver_confirmatory_pilot_v2_durable_provenance
+reviewer_role: independent_sol_reviewer
+verdict: ESCALATE
+
+reviewed_v2_artifacts:
+  config:
+    path: configs/rq2_public_solver_confirmatory_pilot_v2.yaml
+    sha256: d0a5c3a898d89ce869a6647b4d8f271f82921c89069cdd9dd98b4f54e7c9f1e0
+  activation:
+    path: configs/rq2_public_solver_confirmatory_pilot_activation_v2.yaml
+    sha256: fd4e584b86de791f014e417499fa14c7db7de07f4e6e63adb8270b879c39a45b
+  prior_review_receipt:
+    path: configs/rq2_public_solver_confirmatory_pilot_implementation_review_v2.yaml
+    sha256: 4e06fefc95addda419d8e721e2be6963a685ee3c6e136acf36efc3c2d1cc5c13
+  runner:
+    path: experiments/run_rq2_public_solver_confirmatory_pilot_v2.py
+    sha256: 59a54f9fb1c987baffe0a12a11d9584081da7bd8db60800b4fe0fc0da6a43eaa
+  validator:
+    path: experiments/validate_rq2_public_solver_confirmatory_pilot_v2.py
+    sha256: 605936ccca949d9f022b7b29c9b96738a43f72a6b2072a4bfecf277b31412e4f
+  tests:
+    path: tests/test_rq2_public_solver_confirmatory_pilot_v2.py
+    sha256: 9b19e3f4be515d9a6c20380326efd21761f9268d735089567c72f3de34c4e1d7
+  bundle:
+    path: configs/rq2_public_solver_confirmatory_pilot_bundle_v2.SHA256SUMS.json
+    sha256: b356dfa1d58eeb416cbe81d6d840142d4e676b296d39a7372825f7f1d5cc6687
+  outer:
+    path: configs/rq2_public_solver_confirmatory_pilot_bundle_v2.OUTER.SHA256SUMS.json
+    sha256: 601c10c53daa80661db39fd356a7987dce58dcf4ce98bf9c77197f71eb448490
+
+finding:
+  id: nested_worker_report_self_authority
+  severity: durable_provenance_gate_second_failure
+  observation: >-
+    Post-result validation accepted a last worker receipt whose nested
+    worker_report.run_id and worker_report_sha256 were changed together with the
+    result manifest, because the nested report defined its own expected value.
+  required_remediation: >-
+    A new version must construct the exact expected worker report from the
+    registered run identity, payload, controller receipt and live process
+    observation or persisted non-nested authority, then compare the nested
+    report and its hash to that independently reconstructed value.
+
+effect:
+  v1_v2_and_semantic_predecessors_immutable: true
+  v3_remediation_successor_authorized: true
+  v3_independent_review_required: true
+  independent_v3_implementation_review_passed: false
+  confirmatory_execution_authorized: false
+  cross_solver_confirmation_completed: false
+  formal_execution_ready: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false

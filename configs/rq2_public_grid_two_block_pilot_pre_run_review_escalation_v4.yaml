@@ -1,0 +1,60 @@
+schema: rq2_public_grid_two_block_pilot_pre_run_review_escalation_v4
+version: 4
+reviewed_on: "2026-08-31"
+reviewer_role: independent_sol_reviewer
+verdict: ESCALATE
+
+reviewed_candidate:
+  version: 4
+  status: rework_candidate_v4_execution_closed
+  inner_manifest_path: configs/rq2_public_grid_two_block_pilot_candidate_v4.SHA256SUMS.json
+  inner_manifest_sha256: 1f03580ef26467c069206a1144e8f6f575f03cb44565c7c82fe82360f128dfdb
+  outer_manifest_path: configs/rq2_public_grid_two_block_pilot_candidate_v4.OUTER.SHA256SUMS.json
+  outer_manifest_sha256: a4fa236bec8e6009bee75772e012fcccd09372068287674725c4d5a4fe8afd7b
+  runner_path: experiments/run_rq2_public_grid_two_block_pilot_candidate_v4.py
+  runner_sha256: 3b6e55605f56cee1e871d72b15ddfec0963ce727ec863a08f4cbac441d7541e9
+  tests_path: tests/test_rq2_public_grid_two_block_pilot_candidate_v4.py
+  tests_sha256: 3d4e6227eb78ca435c0e613f94e8df6b85ea1cd038dd1a95cb8c5b8044a9413a
+
+review_reproduction:
+  test_node: tests/test_rq2_public_grid_two_block_pilot_candidate_v5.py::test_v4_reproduces_postcommit_success_plus_reported_failure
+  command: D:/conda_envs/rq2-executor-v2-audit/python.exe -B -m pytest tests/test_rq2_public_grid_two_block_pilot_candidate_v5.py::test_v4_reproduces_postcommit_success_plus_reported_failure -q
+  observed_exit_code: 0
+  observed_test_result: 1_passed
+  reproduced_facts:
+    v4_publish_result_raised_after_success_seal_atomic_commit: true
+    result_target_existed: true
+    success_seal_existed: true
+    success_seal_published_true: true
+    caller_received_committed_success: false
+    success_and_reported_failure_coexisted: true
+
+reviewer_finding:
+  id: postrename_success_commit_dual_state
+  finding: >-
+    The v4 publisher can atomically commit a published=true success seal and then
+    propagate a post-commit exception as failure. The caller therefore receives
+    failure while exact committed success exists, and a later failure path could
+    create contradictory success and terminal states.
+  required_rule: >-
+    Reuse repair-010: the success seal is the unique irreversible commit point;
+    after any publisher exception, accept only an exact manifest-and-payload-bound
+    committed seal, classify an absent seal as honest incomplete, and classify an
+    existing but unprovable seal as commit_indeterminate with no terminal state and
+    no resume.
+
+effect:
+  candidate_v4_bytes_immutable: true
+  candidate_v4_execution_authorized: false
+  candidate_v5_remediation_authorized: true
+  candidate_v5_execution_authorized: false
+  independent_pre_run_review_passed: false
+  execution_successor_present: false
+  two_block_pilot_execution_ready: false
+  two_block_pilot_executed: false
+  formal_execution_ready: false
+  user_formal_run_authorized: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false
+  no_execution_authority: true

@@ -1,0 +1,24 @@
+schema: rq2_public_grid_two_block_pilot_user_activation_v2
+version: 2
+status: user_authorized_rework_candidate_pre_run_review_pending
+authorized_on: "2026-08-30"
+user_authority:
+  user_two_block_pilot_authorized: true
+  authorized_blocks: [holdout_s20260822_0008, holdout_s20260822_0009]
+  user_formal_run_authorized: false
+candidate_authority:
+  config_path: configs/rq2_public_grid_two_block_pilot_candidate_v2.yaml
+  config_sha256: 8b8283c59b4200d593c42528ee1792588a2051a00725fcd6f27798050ace0477
+  predecessor_rework_receipt_path: configs/rq2_public_grid_two_block_pilot_review_rework_v1.yaml
+  predecessor_rework_receipt_sha256: 8fd6f56403c593255ea2e7c36cbfc0c94329af7d716a6f4b336e8f0aff2d4d6a
+  pre_run_review_receipt_path: null
+gates:
+  recovery_v2_implementation_review_passed: true
+  user_two_block_pilot_authorized: true
+  independent_pre_run_review_passed: false
+  execution_successor_present: false
+  two_block_pilot_execution_ready: false
+  pilot_executed: false
+  formal_execution_ready: false
+  claim: false
+  security_certified: false

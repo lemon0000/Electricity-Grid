@@ -1,0 +1,66 @@
+schema: rq2_public_grid_two_block_pilot_pre_run_review_escalation_v6
+version: 6
+reviewed_on: "2026-08-31"
+reviewer_role: independent_sol_reviewer
+verdict: ESCALATE
+
+reviewed_candidate:
+  version: 6
+  status: presence_recovery_candidate_v6_execution_closed
+  inner_manifest_path: configs/rq2_public_grid_two_block_pilot_candidate_v6.SHA256SUMS.json
+  inner_manifest_sha256: 990a9f5bec908a32d41b5d0c7fdecba064cb8e8df6b129295ef2489a82e468a9
+  outer_manifest_path: configs/rq2_public_grid_two_block_pilot_candidate_v6.OUTER.SHA256SUMS.json
+  outer_manifest_sha256: ab9bfb5d89a383a6b68ee8630c9ca14df819bd9f885899e2fd07f76f136dfb20
+  runner_path: experiments/run_rq2_public_grid_two_block_pilot_candidate_v6.py
+  runner_sha256: 21c315f046b3bf62f1c8b16eb834e9bf172dfeb8f361fae17a7d2433e49151fa
+  validator_path: experiments/validate_rq2_public_grid_two_block_pilot_candidate_v6.py
+  validator_sha256: c9bdfb5e4113d8d5a5b1206339db67ab57a42fe48abb4f218a71a6e63e87fda4
+  tests_path: tests/test_rq2_public_grid_two_block_pilot_candidate_v6.py
+  tests_sha256: e0c1b0d3ebcb2a48b48e58f7c65cd5d1f08f61a9dd7b6c3b1b5a0d7c279b9cf4
+
+review_reproduction:
+  finding_kind: immutable_snapshot_and_result_presence_gate_not_closed
+  source_observations:
+    reconcile_source_sha256: 95d69a0b6ee461c29f4ad8f8a48e4ead1cd978a8450087da4b12ffcdfdf51275
+    outcome_source_sha256: 9f8741bf889f226729141c7d402919929f16501445f112b1505321ba5ec7d3d9
+    committed_result_source_sha256: 8f517cd776503bcb92bfebadcc3c904b6e8f4d4a86a5cfd632211d96f3f02faa
+  reproduced_facts:
+    reconciliation_probes_success_and_terminal_before_branch: true
+    outcome_reprobes_result_success_and_terminal: true
+    committed_validation_and_final_acceptance_reprobe_paths: true
+    clean_absent_success_branch_does_not_gate_invalid_result_presence: true
+    one_immutable_publication_presence_snapshot_consumed_end_to_end: false
+
+reviewer_finding:
+  id: publication_presence_snapshot_not_single_or_complete
+  finding: >-
+    Candidate v6 independently re-probes result, success, and terminal paths in
+    reconciliation, outcome construction, committed-result verification, recovery,
+    and final acceptance. Those observations can disagree under path-state change,
+    and the honest-incomplete branch does not require the result path itself to be
+    cleanly absent or an explicitly allowed ordinary unsealed result directory.
+  required_rule: >-
+    Construct one immutable PublicationPresenceSnapshot before any classification
+    branch or resolve, covering the canonical lexical result, success, and terminal
+    paths and every ancestor with lexists, lstat, reparse, mount, and accessibility
+    evidence. Every outcome, reconciliation, recovery, and validator decision must
+    consume that snapshot. Before accepting success, take one complete final snapshot
+    and revalidate exact result contents, success bytes, manifest, and bindings under
+    it. Any file, alias, reparse, mount, inaccessible, nonordinary, terminal, corrupt,
+    mismatch, or dual-state evidence is commit_indeterminate.
+
+effect:
+  candidate_v6_bytes_immutable: true
+  candidate_v6_execution_authorized: false
+  candidate_v7_remediation_authorized: true
+  candidate_v7_execution_authorized: false
+  independent_pre_run_review_passed: false
+  execution_successor_present: false
+  two_block_pilot_execution_ready: false
+  two_block_pilot_executed: false
+  formal_execution_ready: false
+  user_formal_run_authorized: false
+  formal_result_exists: false
+  claim: false
+  security_certified: false
+  no_execution_authority: true

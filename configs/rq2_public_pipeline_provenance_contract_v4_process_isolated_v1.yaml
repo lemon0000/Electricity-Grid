@@ -1,0 +1,45 @@
+schema: rq2_public_pipeline_provenance_contract_v3
+
+stages:
+  grid_need_dispatch_v4:
+    runner:
+      path: experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py
+      sha256: 39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8
+    modules:
+      chronological_dispatch:
+        path: src/grid/chronological_dispatch.py
+        sha256: 71d6c1da0e72942512810c651619c5cd73e915c3ac6d0d52684476d6133658ec
+      execution_machine:
+        path: src/evaluation/execution_machine.py
+        sha256: f5a1ee567c6127c4dc85da7c5ca40d1974a2ee4cdad6cceca2b4e67a54102e7f
+      flexibility_envelope:
+        path: src/evaluation/flexibility_envelope.py
+        sha256: db007a9ac1fdd94779b734c6d39e841302f01a1ef49a121d2c00e0d0a996cd40
+      provenance:
+        path: src/evaluation/rq2_provenance_v3.py
+        sha256: c4376be60fda2499266f7593ca92eb1163c7ee156d7970dc1975d0e060f4bcec
+      rts_gmlc:
+        path: src/grid/rts_gmlc.py
+        sha256: 4180ab5ce86eb34a9de9e058ff9c56275ace3a6ffab06dbb464d93ef23382448
+      rts_gmlc_grid_need_predecessor:
+        path: src/grid/rts_gmlc_grid_need.py
+        sha256: 92325d08ff784c68224064dc8a0a3baff29a54875e922cf413a149a908d866b7
+      rts_gmlc_grid_need_successor:
+        path: src/grid/rts_gmlc_grid_need_successor.py
+        sha256: 9997c7a213908a39828ac3455876aecb39b64a544e76102fdd6ad3c27755d1f5
+      rts_gmlc_n1_chronology:
+        path: src/scenarios/rts_gmlc_n1_chronology.py
+        sha256: ebf412fd69864604c276972b6bcd0ae63559194e1e902e5f92a3357834784d64
+      rts_gmlc_scuc:
+        path: src/grid/rts_gmlc_scuc.py
+        sha256: 1101b21cbdab0cdacd6755578208ce7d28cd3e6e04f932d397119a4dde2b6cfe
+      rts_gmlc_scuc_successor:
+        path: src/grid/rts_gmlc_scuc_solver_successor.py
+        sha256: da75603f97b005dd3d4f2488e3ae2b49c16f93ea2278a629de4508032a976666
+      solver_adapter:
+        path: src/solvers/rq2_solver_adapter.py
+        sha256: bec0a6e58ba35d3f262a0df04d7695e91794d02c754ee939b75774c1cd3e6611
+    software:
+      gurobipy: 13.0.2
+      highspy: 1.15.1
+      pyomo: 6.10.1
