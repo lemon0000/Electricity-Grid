@@ -2419,3 +2419,12 @@ V4 已成为历史 `ESCALATE` candidate，不得创建 PASS、user run authority
 必须由用户明确授权新的 versioned successor（V5）；此前 V4 design authorization不授权 V5，也不授权 formal run。V1–V4
 sealed bytes保持不变，PASS/user/consumed/audit/formal roots absent，fresh lease未消费，formal/solver process=0，formal/result/
 claim/security=false。
+
+## 2026-09-02 frozen candidate流程治理决策
+
+本次用户权限为documentation-only；未来candidate的权威治理规则仅见`agent.md` §7。核心commitment原则是：authoritative
+outer与`SEALED_READY_FOR_INDEPENDENT_REVIEW`状态成功原子发布前，candidate仍是可迭代non-authoritative draft；发布后
+bound bytes不可变且同version不得重封。该规则只对未来candidate生效。
+
+当前V4仍为historical `ESCALATE`，V1–V4 sealed chain不追溯改写；当前无candidate、无V5、无formal-run authority。V5
+任何阶段及formal run均未获授权，下一步必须等待用户明确授权创建V5 draft。

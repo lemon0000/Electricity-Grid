@@ -162,12 +162,25 @@
 - certified bound、gap归一化、solver termination解释、warm start、constraint generation、checkpoint、resume、execution lease或atomic publication属于R3；一旦改变认证或正式结论则升级为R4；
 - 冻结YAML输入、preregistration、input hash、manifest、stage certificate、formal runner、canonical result、任何`*_certified`、`*_published`、`*_ready`或gate状态，以及VMA、F/X价值、安全性、工程可行性、因果效应、经验概率或正式CFE结论，属于R3或R4，并按其是否改变科研协议、认证或结论取更高等级。
 
+### R3/R4 frozen candidate生命周期
+
+R3/R4 frozen candidate统一遵循以下可迭代生命周期：
+
+`DRAFT_NONAUTHORITATIVE ↔ PRE_SEAL_AUDIT → SEALED_READY_FOR_INDEPENDENT_REVIEW → official PASS/REWORK/ESCALATE`
+
+- `DRAFT_NONAUTHORITATIVE`可由同一个唯一写入代理在原路径反复修改；即使预留了`vN`文件名，版本号、内容和状态仍是provisional。draft不得拥有或生成production inner/outer manifest、production one-shot lease、review PASS receipt或user run authority；不得宣称review-ready或execution-ready，不得执行preflight、consume、spawn或formal run。临时测试工件只能位于pytest/system tmp或明确标记为non-authoritative的位置，不能冒充gate evidence。
+- `PRE_SEAL_AUDIT`必须在seal前完成冻结验收矩阵、targeted与相关broad tests、与并发/失败窗口相匹配的fault injection tests、适用时独立实现的oracle，以及hash、diff、process和root检查。可由只读`sol_reviewer`进行non-authoritative adversarial audit；其输出只能称为pre-seal findings，不能使用official `PASS/REWORK/ESCALATE`，不能生成review receipt或打开任何gate。唯一writer可在同一draft中反复修复pre-seal findings；本节的“official REWORK最多一轮”不限制pre-seal development iteration。
+- 只有全部pre-seal findings闭合后，才可生成canonical config/code/test、production lease、closure、inner/outer和hash并完成stable verification。authoritative outer与`SEALED_READY_FOR_INDEPENDENT_REVIEW`状态成功原子发布是唯一seal commitment point；从该时刻起，所有被outer绑定的bytes不可修改，同一路径或版本不得重封。在commitment point之前或seal机械过程中，只要authoritative outer/SEALED_READY状态尚未成功发布，candidate仍是同一个non-authoritative draft；可在核验并清理仅由本任务产生且可证明可恢复的临时工件、修复原因并重跑受影响pre-seal检查后，于同一draft/version重试。不得覆盖任何已成功发布的outer，不得把半成品当作gate evidence，也不得删除、覆盖或整理用户及其他任务工件。
+- 只有到达seal commitment point后，official independent R3/R4 review才可开始。review必须由未承担该candidate写入的只读`sol_reviewer`审查exact sealed outer，并输出official `PASS`、`REWORK`或`ESCALATE`。参与过pre-seal audit的reviewer不能沿用同一实例或上下文签发final official verdict；final review必须使用新的reviewer实例和独立上下文。
+- sealed official review后，任何实现字节变化都必须进入新的versioned successor，旧sealed bytes不得修改。official `REWORK`仍最多一轮，由原writer在新successor中只修复reviewer finding；同一验收项再次失败必须`ESCALATE`。official `PASS`只关闭independent review gate，不授权preflight、consume、spawn或formal run。
+- draft/design、pre-seal audit、production seal、official review与formal run必须保持effect separation，但不要求机械地对应多条用户消息。一条语义清楚的用户指令可以显式同时授权draft/design、正常范围内的安全短时pre-seal audit、seal和official review；已授权开发范围内的测试与机械检查无需逐项再次确认。formal-run authority仍必须单独且明确，不得由前述开发、audit、seal或review授权推导；长运行、付费查询、外部数据下载和其他外部动作继续遵守本节及仓库既有明确授权规则。documentation-only授权不授权创建candidate、seal或运行。
+
 协作和审查遵循以下规则：
 
 - 每项任务只能有一个写入代理；并行仅限彼此独立的只读子任务，`agents.max_depth = 1`，不得让子代理继续分叉；一个命令或很小的确定性任务不为委派而委派；
-- R3/R4实现或正式分析完成后，必须由只读的`sol_reviewer`（`gpt-5.6-sol`，`high`）独立审查。审查输入应包含原始请求、验收标准、diff、相关规格以及测试和产物证据，输出必须是`PASS`、`REWORK`或`ESCALATE`；
-- `REWORK`最多触发一轮由原执行者完成的聚焦修复；同一验收项再次失败时升级给`sol_modeler`或用户，不得循环返工；执行者无法证明所需不变量时必须返回`ESCALATE`，不得猜测或弱化门禁；
-- `PASS`只表示工作产物满足已冻结的审查标准，不授权修改科研协议、预注册阈值、认证状态或论文结论；这些科学决定仍需用户对具体变更作出明确授权；
+- R3/R4 official审查必须由只读的`sol_reviewer`（`gpt-5.6-sol`，`high`）按上述生命周期审查exact sealed candidate。审查输入应包含原始请求、冻结验收标准、sealed outer、diff、相关规格以及测试和产物证据，输出必须是official `PASS`、`REWORK`或`ESCALATE`；
+- official `REWORK`最多触发一轮由原执行者在新successor中完成的聚焦修复；同一验收项再次失败时升级给`sol_modeler`或用户，不得循环返工或修改旧sealed bytes；执行者无法证明所需不变量时必须返回`ESCALATE`，不得猜测或弱化门禁；
+- official `PASS`只表示exact sealed工作产物满足已冻结的审查标准并关闭review gate，不授权formal run，也不授权修改科研协议、预注册阈值、认证状态或论文结论；这些科学决定与运行仍需用户对具体动作作出明确授权；
 - 审查通过后的自动推进只适用于冻结计划内、不受blocker约束且不需要新增权限的可逆开发和短验证。不得据此启动、重启、恢复或改变长时间formal run，不得发起付费查询、外部数据下载或其他需授权的外部操作，也不得绕过`docs/model_spec/blocker_register.md`中的停止条件。
 
 ## 8. 模型硬约束
