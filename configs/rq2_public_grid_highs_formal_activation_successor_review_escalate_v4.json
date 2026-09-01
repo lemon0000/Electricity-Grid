@@ -1,0 +1,54 @@
+{
+  "schema": "rq2_public_grid_highs_formal_activation_successor_review_escalate_v4",
+  "version": 4,
+  "reviewed_on": "2026-09-01",
+  "reviewer_agent": "/root/v4_activation_review",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "ESCALATE",
+  "reviewed_outer": {
+    "path": "configs/rq2_public_grid_highs_formal_activation_successor_v4.OUTER.SHA256SUMS.json",
+    "sha256": "6936d06a5bc8d191f5eaf235fe7784c36193ac6343d88d16cbbd3e5bea8d2068"
+  },
+  "findings": [
+    {
+      "id": "V4-POST-RELEASE-BASEEXCEPTION-GAP",
+      "severity": "critical",
+      "finding": "In bootstrap v4 lines 430-546, the first protected startup try persists science release at line 481 and then waits for acceptance, but its line-491 except Exception does not catch KeyboardInterrupt or SystemExit. Reviewer fault injection observed release_persisted=true, post_release_unresolved=false, and the controller child still live.",
+      "execution_authority_effect": "none"
+    },
+    {
+      "id": "V4-DUAL-TERMINAL-RACE",
+      "severity": "critical",
+      "finding": "The terminal-success writer only prechecks for an unresolved artifact, while the unresolved writer does not check for terminal success. A bootstrap BaseException path can therefore leave both controller_terminal_success=true and post_release_unresolved=true. Per-file hard-link create-if-absent prevents overwrite of one file but does not provide cross-terminal mutual exclusion.",
+      "execution_authority_effect": "none"
+    },
+    {
+      "id": "V4-TEST-MATRIX-GAP",
+      "severity": "major",
+      "finding": "The focused tests did not cover the post-release pre-acceptance BaseException window or the cross-terminal terminal-success versus unresolved race.",
+      "execution_authority_effect": "none"
+    }
+  ],
+  "verified_without_new_blocker": {
+    "execution_closure_member_count": 77,
+    "independent_modulefinder_oracle_exact_set_match": true,
+    "execution_closure_finding_closed": true,
+    "dual_fixed_path_gates_present": true,
+    "review_pass_receipt_present": false,
+    "user_formal_run_authority_present": false,
+    "one_shot_lease_state": "fresh_unconsumed",
+    "formal_roots_present": false,
+    "related_formal_process_count": 0,
+    "solver_process_count": 0,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false
+  },
+  "materialized_from_independent_review_report": true,
+  "cryptographic_reviewer_signature_present": false,
+  "independent_formal_activation_review_passed": false,
+  "formal_execution_authorized": false,
+  "formal_result_exists": false,
+  "claim": false,
+  "security_certified": false
+}

@@ -2339,3 +2339,83 @@ test-first missing v2 module 为 red；focused `7 passed`，related current-stat
 compile、bootstrap/controller validate-only 均通过且 0 solver/0 formal-root writes。v2 review PASS、consumed lease、
 activation audit root、四个 formal roots及相关 process均 absent。当前仅
 `READY_FOR_INDEPENDENT_FORMAL_ACTIVATION_REVIEW`；formal/result/claim/security 全部 false。
+
+## 2026-09-01 formal activation v2 ESCALATE 与 successor v3 双门禁
+
+v2 独立 R4 verdict 为 `ESCALATE`。receipt
+`configs/rq2_public_grid_highs_formal_activation_successor_review_escalate_v2.json` SHA-256 为
+`e80c4bb85a977e6819b5ceb259761e6c1be642c12d37f83020772a569805f54c`，绑定 v2 outer
+`8c5db5e265141378b537e9e3096198c0f86221a324423a646d6645d107b56764`，明确来自 reviewer report、无 reviewer
+cryptographic signature、无 execution authority。重复验收失败包括 reviewer PASS/user run authority 未分离、实际执行
+import closure 未由 frozen expected hashes 封口、release 后失败状态不诚实，以及缺真实四阶段 E2E/失败矩阵。v2 全部
+sealed bytes、fresh lease 与 absent roots保持不变。
+
+用户只授权 `sol_modeler` 设计新的 versioned successor；该指令不是 formal-run authority，未被写成任何 run-authority
+receipt。v3 固定两条串联外部门：future review PASS effect 必须保持 `formal_execution_authorized=false`；future explicit
+user formal-run authority 必须另行绑定 exact outer/review/formal config/controller command/50-file closure/one-shot lease。
+后者 absent 时 bootstrap 必须在 preflight、consume、spawn 和 activation-audit-root write 前首先拒绝。
+
+v3 当时登记的 50-file execution closure 完整性已被独立 R4 review 否定。其 `ast.ImportFrom` resolver 不理解
+`node.level`/source package，因而漏掉 package initializer 实际导入的 local modules；至少包括 `ac_validation`、
+`network_grid_need`、`scopf`、`service_risk`、`osqp_qp`。V3 manifest 的 frozen expected hash 只能覆盖这个不完整集合，
+不能作为 actual execution closure 完整性的证据。
+
+V3 虽区分 release 前后 outcome，但 bootstrap 在 acceptance/spawn receipt 后即返回，不能监督完整 block lifecycle；
+acceptance 后 `os._exit`/kill 可绕开 controller self-report，且 controller/bootstrap 双写使用 overwrite-capable primitive。
+因此 V3 post-release closure 也未成立。1071 blocks、block zero、HiGHS 1.15.1/4 threads、10/8/2 GiB、
+5/1/1/2/21600 s 与 science/claim/security semantics 本身未改变。
+
+v3 closure/inner/outer SHA-256 为
+`cdc272b2f98d637c4ed020d4303c35ba29ed3e5c3c38994ece722509751f44e2`、
+`cf05fcf2c05a42b4b5cfb36c535fd7b54fc2dac69f2ebbbdc76f220f42971f51`、
+`087127892db1a55955ddc87b2491520a61a9b19d6d7f0e56040ce0c9d980ee3b`。focused `10 passed`；V1/V2/V3
+`28 passed`；related current-state `91 passed, 3 deselected`。transport broad 首轮
+`137 passed, 2 failed, 3 deselected`，两项 live preloader 是当时 available commit 未达冻结 10 GiB 的正确 fail-closed
+结果，未写正式 preflight evidence；精确 deselect 后 `137 passed, 5 deselected`。Ruff、AST、两个 validate-only 通过，
+0 solver/0 formal-root writes。negative execute 首先因 user authority absent 拒绝，fresh lease hash不变，consumed/audit/
+formal roots absent。
+
+V3 independent verdict 为 `ESCALATE`，故 `independent_v3_activation_review_passed=false` 是历史失败事实，不再是待满足
+gate；V3 不得创建 PASS 或继续启动。V3 fresh lease仍 unconsumed，formal/solver process=0、formal/result/claim/security=false。
+
+## 2026-09-01 formal activation v3 ESCALATE 与 V4 review gate
+
+V3 independent review receipt
+`configs/rq2_public_grid_highs_formal_activation_successor_review_escalate_v3.json` SHA-256 为
+`7c6afdfbd3eb7746ed8851162852c074f10d48ac117894c22a8d5487266d9c1c`，绑定 V3 outer
+`087127892db1a55955ddc87b2491520a61a9b19d6d7f0e56040ce0c9d980ee3b`。两个 critical blockers 是：
+
+1. V3 relative-import resolver 导致 actual local execution closure 不完整；
+2. V3 protected window 未覆盖 release acceptance 后的完整 controller lifecycle 与 immutable dual-writer evidence。
+
+V4 versioned successor 已以 77-file frozen expected-hash manifest闭合第一个 implementation finding。production AST
+resolver 实现 package-relative semantics，并只允许三处 sealed computed dynamic import sites；独立 stdlib
+`modulefinder` bytecode oracle（不复用 production helper）得到 exact 同集。V4 controller/bootstrap 以 immutable
+create-if-absent machine artifact 和持续 exact PID/create-time supervision 尝试闭合第二个 finding，但独立 review 证明
+该 closure 不成立：release persist→acceptance wait 的首个 bootstrap `try` 只捕获 `Exception`，漏掉
+`KeyboardInterrupt`/`SystemExit`；terminal-success 与 unresolved writers也没有共享的跨终态互斥。per-file hard-link
+create-if-absent 不能阻止两个不同 terminal artifacts 同时存在。
+
+V4 focused 为 `15 passed`；包含 closure oracle/drift、真实四阶段 PID/create-time、ACK/READY tamper、production
+spawn-receipt persistence failure、post-acceptance `os._exit`、block-0 injected exception、root observation、normal terminal
+success及 pre-release classification。V4 outer 为
+`6936d06a5bc8d191f5eaf235fe7784c36193ac6343d88d16cbbd3e5bea8d2068`。当前 V4 review PASS 与 explicit user
+formal-run authority 都 absent，V4 lease fresh/unconsumed；本轮用户指令仅是 design authority。formal roots/audit root absent，
+formal/solver process=0，formal/result/claim/security=false。
+
+V1–V4 为 `43 passed`；related raw/current-state 为 `106 passed, 3 failed` / `106 passed, 3 deselected`；transport broad
+raw/current-state 为 `154 passed, 3 failed` / `154 passed, 3 deselected`。三个 raw failure 均属于 sealed V8 已运行后失效的
+absent-state assertions；本次两项 live preloader tests 均通过，不存在 V4 implementation/science regression。
+
+V4 independent R4 verdict 为 `ESCALATE`。machine receipt
+`configs/rq2_public_grid_highs_formal_activation_successor_review_escalate_v4.json` SHA-256 为
+`1d4f5f1b65512a0092438051055171c5abf4dbbe2aa358675c5f580636bc4e9c`，绑定 exact V4 outer、reviewer
+`/root/v4_activation_review`、两个 critical finding与一个 major test gap，无 cryptographic reviewer signature、无 execution
+authority。reviewer fault injection 明确观察到 release persisted、unresolved absent、child still live；另一 critical 是同一
+attempt 可同时出现 terminal success 与 unresolved。77-file closure/oracle本次无新 blocker，但不能抵消 post-release gate
+再次失败。
+
+V4 已成为历史 `ESCALATE` candidate，不得创建 PASS、user run authority或运行。当前没有可启动 formal candidate。下一步
+必须由用户明确授权新的 versioned successor（V5）；此前 V4 design authorization不授权 V5，也不授权 formal run。V1–V4
+sealed bytes保持不变，PASS/user/consumed/audit/formal roots absent，fresh lease未消费，formal/solver process=0，formal/result/
+claim/security=false。

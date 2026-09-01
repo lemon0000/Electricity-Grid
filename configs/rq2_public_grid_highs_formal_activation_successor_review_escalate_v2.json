@@ -1,0 +1,27 @@
+{
+  "schema": "rq2_public_grid_highs_formal_activation_successor_review_escalate_v2",
+  "version": 1,
+  "reviewed_on": "2026-09-01",
+  "reviewer_role": "independent_sol_reviewer",
+  "verdict": "ESCALATE",
+  "materialized_from_review_report": true,
+  "cryptographic_reviewer_signature_present": false,
+  "reviewed_outer": {
+    "path": "configs/rq2_public_grid_highs_formal_activation_successor_v2.OUTER.SHA256SUMS.json",
+    "sha256": "8c5db5e265141378b537e9e3096198c0f86221a324423a646d6645d107b56764"
+  },
+  "findings": [
+    "The V2 independent activation-review PASS effect incorrectly sets formal_execution_authorized=true, so reviewer approval is not separated from explicit user formal-run authority while the frozen formal config remains closed.",
+    "The V2 outer does not freeze the complete project-code execution import closure; runtime self-hashes can accept mutually consistent post-review drift in resource, process-identity, termination, commit, science, and worker dependencies.",
+    "A failure after science_release persistence can still enter launch_incomplete and record formal_started=false even though formal roots or work may already have begun.",
+    "The V2 focused tests do not exercise a real four-stage handshake through science release or the required ACK, READY, closure-drift, post-release-exit, root-observation, and PID/create-time failure matrix."
+  ],
+  "effect": {
+    "formal_activation_successor_v2_review_passed": false,
+    "versioned_v3_remediation_authorized_by_user": true,
+    "formal_execution_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

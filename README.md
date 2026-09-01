@@ -25,16 +25,67 @@ PID/create-time 与 authority-accepted handshake，immediate exit 仍可能被�
 SHA-256 为 `bb398d74c67fdfce41d7fcc64e58820a5f8ad6f16d3ba1ff5c9e1a7d529b6a14`；v1 outer
 `b492e4babe182d38ad6be865df424d1cce59cef57c2c6a85b896cffddfad0b87` 及全部 v1 bytes 保持不变。
 
-新的 versioned successor v2 使用四阶段启动门：controller 验证 dynamic/consumed/cwd-env-Python/mapping/clean
-roots 后 atomic 写 handshake 并等待 bootstrap ACK；随后写 READY 并继续等待 science release。bootstrap 只有独立
-stable readback、验证同一 PID/create-time 仍存活后才发布 release 和 `formal_controller_spawned=true`。pre-handshake
-exit、timeout、PID reuse 或 tamper 均原子写 `launch_incomplete`，one-shot 保持 consumed、no retry/resume，且不推断
-infeasibility。v2 inner/outer SHA-256 为
-`ef1812d0b48426770e7137f668fbb64e6f4a7fe04f220e9d726fc10c37cc1e0d`、
-`8c5db5e265141378b537e9e3096198c0f86221a324423a646d6645d107b56764`；focused `7 passed`，related current-state
-`81 passed, 3 deselected`，Ruff/compile/两个 validate-only 入口通过且 0 solver/0 formal-root writes。v2 activation
-PASS absent、v2 lease fresh/unconsumed、四个 v3 formal roots absent；当前仅
-`READY_FOR_INDEPENDENT_FORMAL_ACTIVATION_REVIEW`。formal/result/claim/security gates 仍为 false。
+successor v2 的独立 R4 verdict 为 `ESCALATE`。machine receipt
+`configs/rq2_public_grid_highs_formal_activation_successor_review_escalate_v2.json` 绑定 v2 outer
+`8c5db5e265141378b537e9e3096198c0f86221a324423a646d6645d107b56764`，并明确无 reviewer cryptographic
+signature、不得授权 execution。四项 finding 是 reviewer PASS 与 user run authority 未分离、实际 project-code import
+closure 未由 frozen expected hashes 封口、release 后失败仍可能被误写成 `launch_incomplete/formal_started=false`，以及缺少
+四阶段真实 E2E/失败矩阵。
+
+successor v3 的独立 R4 verdict 为 `ESCALATE`。receipt
+`configs/rq2_public_grid_highs_formal_activation_successor_review_escalate_v3.json` 绑定 v3 outer
+`087127892db1a55955ddc87b2491520a61a9b19d6d7f0e56040ce0c9d980ee3b`，明确来自独立 review report 的转录、没有
+cryptographic reviewer signature，也不含 execution authority。V3 的 50-file closure 完整性陈述不成立：`ast.ImportFrom`
+没有实现 `node.level`/package 语义，漏掉 `ac_validation`、`network_grid_need`、`scopf`、`service_risk`、`osqp_qp`
+等实际 local imports；其 bootstrap 也在 release acceptance/spawn receipt 后停止监督，无法覆盖完整 block 生命周期和
+post-acceptance abrupt exit。因此 v3 只作为已失败历史版本保留，不能生成 PASS 或启动 formal。
+
+V4 versioned candidate 维持两个 fixed-path 串联门：review PASS 仍只能把 review 置 true且保持
+`formal_execution_authorized=false`；另一个当前 absent 的 explicit user formal-run authority 必须绑定 exact v4 outer、
+review、formal-v5 config、controller command、77-file execution closure 与 fresh lease。production closure 按 Python
+relative-import/package/namespace/submodule 语义递归解析，三处 computed dynamic import 由 sealed authority-key→module
+mapping 明确冻结；独立 stdlib `modulefinder` bytecode oracle 与 production AST discoverer 得到 exact 同集。每个 execution
+boundary 都比较 manifest 的 frozen expected SHA-256。独立 V4 review 对该 77-file closure 与 oracle 未发现新 blocker，
+因此 V3 的 closure finding 在 V4 已闭合。
+
+V4 对 post-release lifecycle 的完成性陈述已被独立 R4 review 推翻。bootstrap 首个 startup `try` 在 stable persist release
+并等待 acceptance 后仍只 `except Exception`，所以 `KeyboardInterrupt`/`SystemExit` 可留下
+`release_persisted=true/post_release_unresolved=false` 且 child 仍存活。terminal-success writer 只预查 unresolved，而
+unresolved writer 不反查 terminal；per-file hard-link 只能防止单文件覆盖，不能阻止同一 attempt 同时存在 terminal success
+与 unresolved。focused tests也没有覆盖这两个窗口。因此 V4 post-release/dual-terminal 同一验收项再次失败。
+
+v3 closure/inner/outer SHA-256 为
+`cdc272b2f98d637c4ed020d4303c35ba29ed3e5c3c38994ece722509751f44e2`、
+`cf05fcf2c05a42b4b5cfb36c535fd7b54fc2dac69f2ebbbdc76f220f42971f51`、
+`087127892db1a55955ddc87b2491520a61a9b19d6d7f0e56040ce0c9d980ee3b`。focused `10 passed`；related raw
+`91 passed, 3 failed`，3 项均为 sealed V8 已执行后的失效 absent-state 断言，current-state 为
+`91 passed, 3 deselected`。扩展 transport broad 首轮 `137 passed, 2 failed, 3 deselected`，两项 live preloader 在当时
+available commit 未达到冻结 10 GiB 时正确 fail closed；不把它们改写成实现或科学失败，精确 deselect 后为
+`137 passed, 5 deselected`。Ruff 与两个 validate-only 入口通过，后者机械报告 1071 blocks、HiGHS 1.15.1/4 threads、
+0 solver/0 formal-root writes。negative execute 首先因 user formal-run authority absent 拒绝，lease hash 前后不变，
+consumed/audit/formal roots absent。V3/V4 以上账目都是历史实现验证，不是独立 PASS。V4 independent verdict 为
+`ESCALATE`，receipt
+`configs/rq2_public_grid_highs_formal_activation_successor_review_escalate_v4.json` SHA-256 为
+`1d4f5f1b65512a0092438051055171c5abf4dbbe2aa358675c5f580636bc4e9c`，绑定 V4 outer
+`6936d06a5bc8d191f5eaf235fe7784c36193ac6343d88d16cbbd3e5bea8d2068`，无 cryptographic reviewer signature、无
+execution authority。V4 不得创建 PASS 或运行；当前没有可启动 formal candidate。下一步必须由用户明确授权新的
+versioned successor（V5）；此前 V4 design authorization 既不是 V5 design authority，也不是 formal-run authority。
+
+V4 config/closure/formal config/contract/controller/bootstrap/test/inner/outer SHA-256 为
+`78167060bcb456ff88124e8b8d628db5aeb2d2f8a17ad77643dfb381fd666431`、
+`ba9195283cf3ad149e08c875820198648d0a9c0cf6b99ac7e3c37b212683b948`、
+`935b430c3151dcaf3802d13259f8c9930d53c130f13a836d4fa737b1074f6f0c`、
+`8bb9fe840fc9a1ba8a6e3188240f42e1c3198436c4bb54395115af0a6d0f7583`、
+`4360ba651f1ae085f12ac21aab562d1e0138eca177085eb4e714e9e01b3a073a`、
+`9c3c8033377bc0539bcdfabdd93f4f3f15206123983e27abff9d7da38b534ca1`、
+`4c1007e88d7459621316b8f43c16cd943b48fbe000385c3358e5fc1dc9122022`、
+`89d465c31a963d87cc8173314941045b23798b51595b899ed8a1540890217588`、
+`6936d06a5bc8d191f5eaf235fe7784c36193ac6343d88d16cbbd3e5bea8d2068`。V3 red regression 精确复现
+五个漏项；V4 focused `15 passed`、V1–V4 `43 passed`。related raw `106 passed, 3 failed` 与 transport broad raw
+`154 passed, 3 failed` 的三项均为 sealed V8 已运行后失效的 absent-state 断言；精确 deselect 后分别为
+`106 passed, 3 deselected` 与 `154 passed, 3 deselected`。本次两项 live preloader 均通过，因此没有沿用旧的
+resource-dependent deselect。Ruff、AST、bootstrap/controller validate-only通过；negative execute 先因 explicit user
+formal-run authority absent 拒绝。
 
 完整账目按实际时间顺序为：writer raw `479 passed, 13 failed`；writer first 13-deselect
 `478 passed, 1 failed, 13 deselected`（V4 fast 是唯一红点）；writer isolated V4 `1 passed`；writer second

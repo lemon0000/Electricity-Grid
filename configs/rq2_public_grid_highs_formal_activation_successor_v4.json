@@ -1,0 +1,194 @@
+{
+  "schema": "rq2_public_grid_highs_formal_activation_successor_v4",
+  "version": 4,
+  "frozen_on": "2026-09-01",
+  "status": "READY_FOR_INDEPENDENT_FORMAL_ACTIVATION_REVIEW",
+  "scope": "versioned_v4_block_zero_highs_formal_activation_relative_import_closure_and_full_post_release_supervision",
+  "predecessor_rework": {
+    "v1_outer_path": "configs/rq2_public_grid_highs_formal_activation_successor_v1.OUTER.SHA256SUMS.json",
+    "v1_outer_sha256": "b492e4babe182d38ad6be865df424d1cce59cef57c2c6a85b896cffddfad0b87",
+    "receipt_path": "configs/rq2_public_grid_highs_formal_activation_successor_review_rework_v1.json",
+    "receipt_sha256": "bb398d74c67fdfce41d7fcc64e58820a5f8ad6f16d3ba1ff5c9e1a7d529b6a14",
+    "verdict": "REWORK"
+  },
+  "predecessor_escalate": {
+    "v3_outer_path": "configs/rq2_public_grid_highs_formal_activation_successor_v3.OUTER.SHA256SUMS.json",
+    "v3_outer_sha256": "087127892db1a55955ddc87b2491520a61a9b19d6d7f0e56040ce0c9d980ee3b",
+    "receipt_path": "configs/rq2_public_grid_highs_formal_activation_successor_review_escalate_v3.json",
+    "receipt_sha256": "7c6afdfbd3eb7746ed8851162852c074f10d48ac117894c22a8d5487266d9c1c",
+    "verdict": "ESCALATE"
+  },
+  "v8_evidence_authority": {
+    "v8_outer": {
+      "path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v8.OUTER.SHA256SUMS.json",
+      "sha256": "7090d339bc395fb714798ca8d96063943ef68113ab46091cdfe503c163a900d7"
+    },
+    "v8_pre_run_pass": {
+      "path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_pass_v8.json",
+      "sha256": "04cd6b421ebeef07e00c1d8ab08bb15d721110ff454c32e7898eca2eff6b486e"
+    },
+    "v8_post_result_pass": {
+      "path": "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_post_result_review_pass_v8.json",
+      "sha256": "28e546b8f5f3bc8c8402c86ec723ec9e35da041ba74676c9adb59cd338980ca6"
+    }
+  },
+  "formal_science": {
+    "formal_config_path": "configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v5.yaml",
+    "formal_config_sha256": "935b430c3151dcaf3802d13259f8c9930d53c130f13a836d4fa737b1074f6f0c",
+    "base_science_runner_path": "experiments/run_rts_gmlc_public_grid_need_dispatch_v4.py",
+    "base_science_runner_sha256": "39f73e42cb7ace84970d43a8593da81b619337c06f178d93a8c7ad33ca8a59c8",
+    "process_isolated_predecessor_runner_path": "experiments/run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_v1.py",
+    "process_isolated_predecessor_runner_sha256": "c90f796aa9c9043d48560599b892681455b7c7ddee3881501ce449bfa1c3833e",
+    "original_highs_candidate_config_path": "configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_v1.yaml",
+    "original_highs_candidate_config_sha256": "e1306a375bba5d19d687cb2728a981528662064226b4661a0b74f894b647f3bd",
+    "expected_block_count": 1071,
+    "starts_from_block_zero": true,
+    "resume_allowed": false,
+    "predecessor_gurobi_checkpoint_reuse_allowed": false,
+    "predecessor_highs_checkpoint_reuse_allowed": false,
+    "solver": {
+      "name": "highs",
+      "expected_package_version": "1.15.1",
+      "expected_runtime_api_version": "1.15.1",
+      "threads": 4,
+      "mip_relative_gap": 0.000001,
+      "feasibility_tolerance": 0.000001,
+      "optimality_tolerance": 0.000001,
+      "integer_feasibility_tolerance": 0.000001,
+      "random_seed": 0,
+      "time_limit_seconds": null,
+      "tolerance_mw": 0.000001,
+      "tee": true
+    }
+  },
+  "execution_closure": {
+    "manifest_path": "configs/rq2_public_grid_highs_formal_activation_successor_v4.EXECUTION_CLOSURE.SHA256SUMS.json",
+    "manifest_sha256": "ba9195283cf3ad149e08c875820198648d0a9c0cf6b99ac7e3c37b212683b948",
+    "derivation": "python_relative_semantics_static_local_import_closure_v4",
+    "runtime_expected_hash_comparison_required": true,
+    "independent_oracle": "python_stdlib_modulefinder_bytecode_import_graph_plus_explicit_script_root",
+    "dynamic_import_policy": "literal_local_plus_three_frozen_computed_authority_sites_only"
+  },
+  "resource_contract": {
+    "preflight_threshold_bytes": 10737418240,
+    "child_private_commit_stop_bytes": 8589934592,
+    "system_commit_available_stop_bytes": 2147483648,
+    "sample_interval_ns": 5000000000,
+    "observation_jitter_budget_ns": 1000000000,
+    "max_detection_overrun_ns": 1000000000,
+    "owned_termination_grace_ns": 2000000000,
+    "watchdog_ns_per_block": 21600000000000,
+    "monitor_semantics": "sealed_v8_exact_slot_deadline_persist_stable_readback",
+    "preflight_before_authority_consume_and_spawn": true,
+    "threshold_failure_consumes_authority": false,
+    "threshold_failure_creates_formal_roots": false,
+    "timeout_or_failure_is_mathematical_infeasibility": false
+  },
+  "runtime": {
+    "locked_python_executable": "D:\\conda_envs\\rq2-executor-v2-audit\\python.exe",
+    "locked_python_sha256": "91df9733b71b293eec9945cc8c5388bbfe1abc5e6ee94a14333076e5f55cb6bf",
+    "highspy_package_init_path": "D:\\conda_envs\\rq2-executor-v2-audit\\Lib\\site-packages\\highspy\\__init__.py",
+    "highspy_package_init_sha256": "152eab96c80668ff98d8447bdca93d1bd6253aebaf1df3e455872a05e7dbd0c2",
+    "highspy_python_source_path": "D:\\conda_envs\\rq2-executor-v2-audit\\Lib\\site-packages\\highspy\\highs.py",
+    "highspy_python_source_sha256": "5310ab9947289b49de9e8f650bec7aa24e058cdfcd45bdc57fdf80e0fb5a270a",
+    "highspy_binary_path": "D:\\conda_envs\\rq2-executor-v2-audit\\Lib\\site-packages\\highspy\\_core.cp311-win_amd64.pyd",
+    "highspy_binary_sha256": "b44417e1cae9c30e5fce3e38535c2970e25d6367a07a1e5ff8e94d623c22aa29",
+    "formal_controller_module": "experiments.run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_formal_v5",
+    "exact_cwd": "D:\\CUHKSZ\\Research Project\\electricity-grid",
+    "controller_command_prefix": [
+      "D:\\conda_envs\\rq2-executor-v2-audit\\python.exe",
+      "-B",
+      "-m",
+      "experiments.run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_formal_v5",
+      "--config",
+      "configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v5.yaml",
+      "--activation-authority"
+    ],
+    "sanitized_environment": {
+      "COMSPEC": "C:\\WINDOWS\\system32\\cmd.exe",
+      "NO_COLOR": "1",
+      "PROCESSOR_ARCHITECTURE": "AMD64",
+      "PYTHONHASHSEED": "0",
+      "PYTHONIOENCODING": "utf-8",
+      "RQ2_EXECUTION_MACHINE": "EXECUTION_MACHINE_CONFIRMED",
+      "RQ2_EXECUTOR_PYTHON_EXE": "D:\\conda_envs\\rq2-executor-v2-audit\\python.exe",
+      "SYSTEMDRIVE": "C:",
+      "SYSTEMROOT": "C:\\WINDOWS",
+      "TEMP": "C:\\Users\\Psychobabble\\AppData\\Local\\Temp",
+      "TMP": "C:\\Users\\Psychobabble\\AppData\\Local\\Temp",
+      "WINDIR": "C:\\WINDOWS"
+    }
+  },
+  "paths": {
+    "checkpoint_root": "results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v5",
+    "worker_root": "results/workers/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v5",
+    "log_root": "results/logs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v5",
+    "output_root": "data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v5",
+    "activation_audit_root": "results/formal_activation/rq2_public_grid_highs_formal_activation_successor_v4"
+  },
+  "one_shot_authority": {
+    "fresh_path": "results/leases/rq2_public_grid_highs_formal_activation_successor_v4.lease.json",
+    "fresh_sha256": "5ad32b68378885e6db993bc1e17ca2e61561fe963285e6471b0c8f222d62738c",
+    "consumed_path": "results/leases/rq2_public_grid_highs_formal_activation_successor_v4.consumed.json",
+    "authority_id": "6c5179d76cf0d2166e1836ea2e639817b18a5ad849413d235390fdd1c61199c5",
+    "one_shot": true,
+    "security_certified": false
+  },
+  "independent_formal_activation_review": {
+    "receipt_path": "configs/rq2_public_grid_highs_formal_activation_successor_review_pass_v4.json",
+    "schema": "rq2_public_grid_highs_formal_activation_successor_review_pass_v4",
+    "present": false,
+    "must_bind_outer": true,
+    "self_signing_allowed": false
+  },
+  "user_formal_run_authority": {
+    "receipt_path": "configs/rq2_public_grid_highs_formal_run_authority_v4.json",
+    "schema": "rq2_public_grid_highs_formal_run_authority_v4",
+    "present": false,
+    "must_bind_outer_review_config_command_and_lease": true,
+    "materialized_from_current_successor_design_authorization": false
+  },
+  "bundle": {
+    "inner_path": "configs/rq2_public_grid_highs_formal_activation_successor_v4.SHA256SUMS.json",
+    "outer_path": "configs/rq2_public_grid_highs_formal_activation_successor_v4.OUTER.SHA256SUMS.json"
+  },
+  "startup_handshake": {
+    "handshake_filename": "startup_handshake.json",
+    "bootstrap_ack_filename": "startup_ack.json",
+    "startup_ready_filename": "startup_ready.json",
+    "science_release_filename": "science_release.json",
+    "science_release_accepted_filename": "science_release_accepted.json",
+    "launch_incomplete_filename": "launch_incomplete.json",
+    "post_release_unresolved_filename": "post_release_unresolved.json",
+    "bootstrap_wait_timeout_seconds": 30,
+    "controller_wait_timeout_seconds": 30,
+    "poll_interval_seconds": 0.01,
+    "exact_pid_create_time_required": true,
+    "controller_waits_for_bootstrap_ack": true,
+    "controller_waits_for_science_release": true,
+    "formal_roots_before_science_release": false,
+    "retry_allowed": false,
+    "resume_allowed": false,
+    "controller_terminal_success_filename": "controller_terminal_success.json",
+    "bootstrap_supervises_until_controller_terminal": true,
+    "post_release_guarantee_scope": "at_least_one_supervising_process_remains_alive_and_can_write_attempt_root",
+    "post_release_evidence_immutable_first_observer_wins": true
+  },
+  "protected_predecessor_state": {
+    "existing_activated_gurobi_config_path": "results/execution_configs/rq2_public_successor_v2/grid.yaml",
+    "existing_activated_gurobi_config_sha256": "b8f7a71f8aaf8150c8515089e90e1946732d4476e0855d8677523577bc17f416",
+    "existing_gurobi_checkpoint_directory": "results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_gurobi",
+    "existing_gurobi_checkpoint_count": 9,
+    "existing_gurobi_checkpoint_inventory_sha256": "091b08a05f21c2c2bb711a93159f3d52b55757a8180f7058eb7d76b7d666496a"
+  },
+  "gates": {
+    "v8_post_result_independent_review_passed": true,
+    "formal_activation_successor_implementation_complete": true,
+    "independent_formal_activation_review_passed": false,
+    "user_formal_run_authorized": false,
+    "formal_execution_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false
+  }
+}

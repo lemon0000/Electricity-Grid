@@ -1,0 +1,113 @@
+schema: rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v5
+version: 4
+status: frozen_formal_activation_successor_v4_closed_pending_independent_review_and_user_authority
+
+input:
+  power_system_blocks_package: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4
+  power_system_blocks_manifest_sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+  power_system_blocks_schema: rts_gmlc_public_power_system_blocks_v4
+  power_system_blocks_config_sha256: cefec120fb77990a47fe7e89a77e4df8be00bde5bf7e4cd4c5ca047d52934688
+  power_system_blocks_implementation_sha256: cc24a77049af50d056364b2ad6a092442af3cd4efcdf32033ab228faef989644
+  power_system_blocks_n1_module_sha256: ebf412fd69864604c276972b6bcd0ae63559194e1e902e5f92a3357834784d64
+  power_system_blocks_cfe_manifest_sha256: cb6b941193db3a09cddb005c14f210bab754e5f9d12ba9c982f778b88409cc0a
+
+grid_source:
+  repository: https://github.com/GridMod/RTS-GMLC
+  release: v0.2.3
+  commit: 3ece0d3725c844056132393ee252b3083dd4eab4
+  path: data/raw/rts_gmlc/v0.2.3/upstream
+  manifest_sha256: 95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914
+  base_mva: 100.0
+
+model:
+  dc_bus: 108
+  dc_reference_demand_mw: 250.0
+  time_step_hours: 1.0
+  normal_baseline: free_boundary_24h_normal_state_SCUC
+  outage_response: fixed_commitment_and_normal_dispatch_hourly_corrective_LP
+  branch_rating: continuous
+  generator_response_limit: published_hourly_ramp
+  load_shedding_allowed: false
+  full_N_minus_one: false
+  AC_security: false
+
+solver:
+  name: highs
+  expected_package_version: 1.15.1
+  threads: 4
+  mip_relative_gap: 1.0e-6
+  feasibility_tolerance: 1.0e-6
+  optimality_tolerance: 1.0e-6
+  integer_feasibility_tolerance: 1.0e-6
+  random_seed: 0
+  time_limit_seconds: null
+  tolerance_mw: 1.0e-6
+  tee: true
+
+provenance:
+  contract_path: configs/rq2_public_pipeline_provenance_contract_v4_process_isolated_v1.yaml
+  contract_sha256: cb6ae7c07a7745f90288cefafedb7df82221d06205b3d2aab68580e0587a89b1
+
+execution:
+  formal_execution_ready: false
+  independent_R4_review_passed: false
+  user_formal_run_authorized: false
+  runtime_gate_state_source: external_fixed_path_review_and_user_authority_receipts
+  require_all_blocks_resolved: true
+  predecessor_Gurobi_checkpoint_reuse_allowed: false
+  predecessor_HiGHS_checkpoint_reuse_allowed: false
+  resume_allowed: false
+  starts_from_block_zero: true
+  forbidden_hostnames: [GQPD263XH9]
+  required_environment_value: EXECUTION_MACHINE_CONFIRMED
+  checkpoint_directory: results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v5
+  process_isolation:
+    mode: one_fresh_python_worker_per_complete_24h_block
+    receipt_mode: atomic_checkpoint_with_complete_resource_journal
+    starts_from_block_zero: true
+    resume_allowed: false
+    expected_block_count: 1071
+    python_authority_environment_variable: RQ2_EXECUTOR_PYTHON_EXE
+    external_watchdog_seconds: 21600
+    resource_sample_interval_seconds: 5.0
+    observation_jitter_budget_seconds: 1.0
+    maximum_detection_overrun_seconds: 1.0
+    owned_termination_grace_seconds: 2.0
+    private_commit_limit_gib: 8.0
+    minimum_system_commit_available_gib: 2.0
+    worker_staging_directory: results/workers/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v5
+    attempt_log_directory: results/logs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v5
+    release_after_first_same_pair_resource_sample: true
+    resource_journal_atomic_persist_and_stable_readback: true
+    resource_authority_pre_and_post_mapping_must_match: true
+    timeout_or_failure_is_mathematical_infeasibility: false
+    two_block_full_process_pilot_blocks:
+      - holdout_s20260822_0008
+      - holdout_s20260822_0009
+    two_block_full_process_pilot_post_result_passed: true
+    named_outage_comparison_passed: false
+
+output:
+  schema: rts_gmlc_public_grid_need_dispatch_v4
+  directory: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v5
+
+activation:
+  v8_outer_path: configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_v8.OUTER.SHA256SUMS.json
+  v8_pre_run_pass_path: configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_review_pass_v8.json
+  v8_post_result_pass_path: configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_post_result_review_pass_v8.json
+  formal_activation_config_path: configs/rq2_public_grid_highs_formal_activation_successor_v4.json
+  predecessor_rework_receipt_path: configs/rq2_public_grid_highs_formal_activation_successor_review_rework_v1.json
+  predecessor_escalate_receipt_path: configs/rq2_public_grid_highs_formal_activation_successor_review_escalate_v3.json
+  independent_formal_activation_review_pass_path: configs/rq2_public_grid_highs_formal_activation_successor_review_pass_v4.json
+  user_formal_run_authority_path: configs/rq2_public_grid_highs_formal_run_authority_v4.json
+  sealed_candidate_activation_allowed: false
+  runtime_activation_requires_review_and_user_authority: true
+
+claims:
+  formal_result_exists: false
+  mathematical_infeasibility: false
+  empirical_outage_probability: false
+  full_N_minus_one: false
+  AC_security: false
+  security_certified: false
+  paper_claim: false
