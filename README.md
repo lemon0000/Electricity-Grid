@@ -1,8 +1,12 @@
 # Electricity-Grid
 
-*Last updated: 2026-09-01*
+*Last updated: 2026-09-02*
 
 Research code for staged data-center interconnection and grid expansion.
+
+Current machine responsibilities, evidence status and the next gated action are
+summarized in
+[`RQ2_开发机任务与执行边界.md`](docs/plan/RQ2_开发机任务与执行边界.md).
 
 当前 Vnext two-block evidence runner 为 isolated v8
 `NONFORMAL_COMMITTED_SUCCESS / POST_RESULT_INDEPENDENT_REVIEW_PASS`。外置 pre-run execution-review receipt
@@ -142,37 +146,23 @@ are excluded from the conditional contract-risk transport support. Policies
 must pass the complete evaluable training support, partial-region compatibility
 uses one common coupling, and fixed-seed marginal block bootstrap intervals are
 reported separately from sharp identification bounds. The development host is
-blocked from formal execution; the executor must first pass the frozen
-HiGHS/Gurobi four-block pilot. See
-`docs/plan/RQ2_公开数据鲁棒识别路线图_v6.md` and the Windows execution
-successor `docs/plan/RQ2_执行机交接_v2.md`.
+blocked from formal execution. See
+`docs/plan/RQ2_公开数据鲁棒识别路线图_v6.md` for the scientific contract,
+`docs/plan/RQ2_开发机任务与执行边界.md` for the current state, and
+`docs/plan/RQ2_执行机交接_v2.md` for the immutable historical Windows handoff.
 
-### RQ2 v6 executor start
+### RQ2 execution status
 
-The execution machine should check out the `experiment` branch and follow
-[`RQ2_执行机交接_v2.md`](docs/plan/RQ2_执行机交接_v2.md). The first authorized
-stage ends after packaging the four-block solver pilot. For a manual diagnostic,
-the frozen commands remain:
+The fresh four-run HiGHS/Gurobi confirmatory pilot completed successfully.
+The process-isolated HiGHS V8 run also completed the fixed nonformal
+`0008 -> 0009` sequence and passed independent post-result review. Formal
+activation successors V1-V4 did not obtain execution authority; V4 ended in
+`ESCALATE`, so no formal candidate is currently executable.
 
-```bash
-conda env create -f environments/rq2_executor_v1.yml
-conda run -n rq2-executor python scripts/rq2_public_executor.py verify
-export RQ2_EXECUTION_MACHINE=EXECUTION_MACHINE_CONFIRMED
-conda run -n rq2-executor python scripts/rq2_public_executor.py preflight
-conda run -n rq2-executor python scripts/rq2_public_executor.py pilot
-conda run -n rq2-executor python scripts/rq2_public_executor.py package-pilot
-```
-
-Return the pilot package for review before activating the grid stage.
-The `run-*` automation uses the whitelist-only `rq2-public-pilot` kind in
-`scripts/run_experiment.ps1`, an explicit absolute `RQ2_EXECUTOR_PYTHON_EXE`,
-and an independent `RQ2_PILOT_TIMEOUT_SECONDS` of at least 21600 seconds. The
-runner safely canonicalizes the frozen executor's native-separator package receipt
-before exact registered-path comparison. The reviewed authority chain currently has
-outer SHA-256 `32bde980733ef80b04571d1fe328c893ff78b4ecb1aee2150c318970707e4942`
-and v2 bundle SHA-256
-`10129f473a521f37ae0c45bf89a4904c77156c92dcc55837adf91adb8d58e37e`.
-The branch-head default remains `pytest-smoke`; no pilot has been run yet.
+The branch-head automation default remains `pytest-smoke`. The 1071-block grid,
+pairwise and identification stages remain closed. A future formal activation
+successor requires its own draft, seal, independent review and explicit
+formal-run authority.
 
 ## L0: RTS-24 DC-OPF and N-1
 

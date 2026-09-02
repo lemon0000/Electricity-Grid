@@ -1,6 +1,6 @@
 # RQ2 论文路线图与导航页
 
-创建日期：2026-08-20；更新日期：2026-08-26
+创建日期：2026-08-20；更新日期：2026-09-02
 适用范围：毕业论文/期刊投稿主线 = RQ2（网络条件服务与小时级CFE共享业务灵活性预算）。  
 本页是导航与状态映射，不重述已冻结的科学契约。权威来源仍是 `agent.md`（范围/路由/审查；§4 已将 RQ2 定为首篇主创新、RQ1 降为后续扩展）、`docs/model_spec/formulation.md`（数学规格）、`docs/model_spec/blocker_register.md`（阻塞状态）与 `docs/literature/`（文献与缺口）。
 
@@ -10,6 +10,21 @@
 > v6 successor的直接estimand是`normalized minimum flexibility
 > underprovisioning`，不是X高估；E0、条件transport、共同coupling与执行机
 > 门禁以`RQ2_公开数据鲁棒识别路线图_v6.md`为准。
+
+## 0. 当前执行状态
+
+开发机与执行机的当前职责及下一门见
+[`RQ2_开发机任务与执行边界.md`](RQ2_开发机任务与执行边界.md)。截至本次更新：
+
+- fresh HiGHS/Gurobi confirmatory pilot v4 已完成并通过语义与独立结果审查；
+- process-isolated HiGHS V8 已完成 nonformal `0008 -> 0009` evidence run，
+  publication 为`committed_success`，独立post-result review为`PASS`；
+- formal activation V1-V4均未取得执行许可，V4结论为`ESCALATE`；当前没有
+  formal candidate、formal-run authority或正式grid结果；
+- 四臂增强基线的实现仍处于validate-only和external-input-blocked状态；
+- 1071-block grid、pairwise和identification均未发布，论文claim门保持关闭。
+
+冻结交接文档与历史receipt保留其生成时点状态，不作为当前进度导航。
 
 ---
 

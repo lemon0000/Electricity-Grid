@@ -10,6 +10,12 @@
 > 冻结 SHA256：config =
 > `017708b25c3e1702c938a108af070a7047517bd128552500d3ffcac6a3ee3554`；manifest =
 > `da6d13055ccfcd03c00939ab7fa61f43e05052556211f725b4550a09d33f64c9`。
+>
+> 当前状态导航：本文件正文保留预注册时点的设计与证据状态。后续已实现四臂
+> core、checkpoint/external-preflight及identification/report的validate-only合同，
+> 但正式grid输入、独立复审、用户执行授权、execution readiness和正式结果仍为
+> false。实时状态见`RQ2_开发机任务与执行边界.md`和
+> `docs/model_spec/blocker_register.md`。
 
 ## 1. Problem–Method–Insight
 
