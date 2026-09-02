@@ -90,13 +90,15 @@ RTS-GMLC网络/CFE块与Alibaba业务块没有共同日历，independent、comon
 
 ### 5.1 数据、模型与复现基础
 
-项目已形成RTS-GMLC 24小时网络/CFE块和Alibaba 24小时业务块的分源、版本化数据包，训练/holdout严格分离。当前主样本全部是完整 24h、zero-carry-in blocks；尚无跨日 carry-in linkage，也没有当前样本中的 right-censored block。实现已覆盖E0判定、完整training-support审计、minimum-flexibility规划、B6分离规划/共享执行、固定策略回放、transport bounds、共同coupling feasibility和bootstrap接口。配置、solver证书、残差、checkpoint和manifest均按版本与SHA-256审计。
+项目已形成 RTS-GMLC 24 小时网络/CFE blocks 和 Alibaba 24 小时 workload blocks 的分源、版本化数据包，训练/holdout 严格分离。当前主样本全部是完整 24h、zero-carry-in blocks；尚无跨日 carry-in linkage，也没有当前样本中的 right-censored block。实现已覆盖 E0 判定、完整 training-support 审计、minimum-flexibility 规划、B6 分离规划/共享执行、固定策略回放、transport bounds、共同 coupling feasibility、四臂增强基线的 validate-only 接口，以及按 block 隔离的 formal bootstrap/controller、checkpoint、resource journal 和 manifest 契约。配置、solver certificate、残差和工件均按版本与 SHA-256 审计。上述实现与 validate-only 能力仅证明代码路径和关闭门禁可检查，不等于正式实验已经执行，也不构成正式结果、论文结论或安全认证。
 
 ### 5.2 既有证据与当前执行状态
 
 冻结70-cell/旧formal-batch derived benchmark完整保留为 R1=0、R2=0、R3=69、mixed=1、unresolved=0；original positive H2 unsupported。该结果是阴性或边界证据，不能通过结果后调参改写。
 
-v4/v6 successor 的 fresh cross-solver confirmatory pilot 已完成并通过语义与独立审计。随后启动的 v4 Gurobi grid formal attempt 因用户发起整机重启而中断，现保留 holdout_s20260822_0000–0008 九个合法 checkpoint；successor formal output 尚未发布。pairwise、identification、paper-claim 和 security gates 均保持关闭。对 0009 的 Gurobi 900s default 与 1800s bound-focus 诊断均以 TimeLimit 结束并保持 unresolved；HiGHS fresh-child 诊断接受 0008/0009 的 normal baseline，但没有运行完整 `_process_block`，不能外推为同进程 formal route 已获支持。recovery v1 因而登记为 REWORK；per-block fresh-process v2 仅是 execution-closed 候选，仍等待独立 R4 实现审查、完整 `_process_block` 两块 pilot、具名 outage 比较及 post-result PASS。TimeLimit、resource stop、缺失 incumbent 或不完整 certificate 均不构成 infeasibility。以上仅为项目执行状态，不作为论文结果。
+固定顺序 `holdout_s20260822_0008 → holdout_s20260822_0009` 的 V8 nonformal two-block pilot 已分别取得 pre-run independent PASS 和 post-result independent PASS；该证据只关闭此次非正式 pilot 的对应门禁，不授予 formal execution authority。Formal activation V1–V4 均未取得执行许可，V4 现仅作为 historical `ESCALATE` 记录保留。V5 目前仍是 `DRAFT_NONAUTHORITATIVE`，处于 pre-seal findings 的原地整改与复核阶段，尚未 seal，也未获得独立 activation PASS 或 user formal-run authority。
+
+因此，1071-block grid、后续 pairwise replay 和 identification 均未运行或发布；formal result、paper claim 和 security certification gates 全部保持关闭。TimeLimit、resource stop、unresolved、缺失 incumbent 或不完整 certificate 均不构成 mathematical infeasibility。以上仅为项目执行状态，不作为论文结果。
 
 ## 6 预期成果与研究边界
 
