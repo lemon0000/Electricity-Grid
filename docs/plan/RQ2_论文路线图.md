@@ -1,7 +1,7 @@
 # RQ2 论文路线图与导航页
 
-创建日期：2026-08-20；更新日期：2026-09-02
-适用范围：毕业论文/期刊投稿主线 = RQ2（网络条件服务与小时级CFE共享业务灵活性预算）。  
+创建日期：2026-08-20；更新日期：2026-09-03
+适用范围：毕业论文/期刊投稿主线 = RQ2（网络安全与小时级CFE共同约束下的业务柔性可交付前沿与不足归因）。
 本页是导航与状态映射，不重述已冻结的科学契约。权威来源仍是 `agent.md`（范围/路由/审查；§4 已将 RQ2 定为首篇主创新、RQ1 降为后续扩展）、`docs/model_spec/formulation.md`（数学规格）、`docs/model_spec/blocker_register.md`（阻塞状态）与 `docs/literature/`（文献与缺口）。
 
 > 定位约束（来自 `agent.md` 与 project_memory）：RQ2 不改写冻结的 B3/B4/B5 基线与 repair-010 认证链；本机只做代码+单测，正式长求解与预注册留给执行机 + 用户授权。
@@ -10,6 +10,11 @@
 > v6 successor的直接estimand是`normalized minimum flexibility
 > underprovisioning`，不是X高估；E0、条件transport、共同coupling与执行机
 > 门禁以`RQ2_公开数据鲁棒识别路线图_v6.md`为准。
+>
+> 2026-09-03 scope amendment：首篇主问题升级为联合服务可交付前沿。
+> `network-only / CFE-only / joint-correct / joint-B6`四臂用于分解
+> `I_joint = D_J - max(D_N,D_C) = I_sep + A_B6`。确认性46-cell协议见
+> `RQ2_联合服务可交付前沿确认性方案_v2.md`；旧v6和四臂v1保持为不可覆盖前序。
 
 ## 0. 当前执行状态
 
@@ -22,6 +27,7 @@
 - formal activation V1-V4均未取得执行许可，V4结论为`ESCALATE`；当前没有
   formal candidate、formal-run authority或正式grid结果；
 - 四臂增强基线的实现仍处于validate-only和external-input-blocked状态；
+- 联合可交付前沿v2已seal并等待独立R4 review，46-cell implementation尚未绑定；
 - 1071-block grid、pairwise和identification均未发布，论文claim门保持关闭。
 
 冻结交接文档与历史receipt保留其生成时点状态，不作为当前进度导航。
@@ -30,13 +36,15 @@
 
 ## 1. RQ2 一句话定位
 
-官方primary sources分别建立了network-side flexible-load arrangements与hourly
-CFE accounting/procurement，但没有公开证据证明某个具名data center把同一份
-workload flexibility同时承诺给二者。RQ2因此把二者对同一temporal workload
-envelope的潜在重叠定义为`contract-overlap hypothesis`，用**共享时序包络 +
-B6 double-counting counterfactual + only-public-marginals下的sharp partial
-identification**检验这个假设在什么条件下会造成minimum-flexibility
-underprovisioning。该定位不把现实重叠、发生率、X高估或正效应当作既定事实。
+RQ2固定网络安全调用，逐级提高小时级CFE目标，刻画完整业务时序包络的最低柔性
+需求曲线，并把联合需求拆分为：
+
+- 单服务瓶颈`max(D_N,D_C)`；
+- B6分离包络的交互`I_sep`；
+- B6相对correct的有符号容量偏差`A_B6`。
+
+四臂满足`I_joint = I_sep + A_B6`后，再在共享物理包络中比较冻结策略的
+hard-grid、CFE和联合服务风险。完整事件包络下不预设四臂容量顺序。
 
 最近邻边界必须在摘要与Introduction中显式出现：Fan and Zhao (2026, DC14)
 已联合优化workload distribution与regulation capacity commitments，并处理瞬时与
@@ -48,9 +56,9 @@ firm/flexible/interruptible tiers及depth、duration、ramp、recovery和annual 
 
 | 结构 | 论文合同 | 可证伪判据（在新增结果前冻结） |
 |---|---|---|
-| Problem | 两类制度对象分别存在，但同一workload/resource mapping未被公开证据建立；P1必须在看结果前绑定具名设施/项目`U`或预注册抽样总体`S`，问题是该`U/S`内是否存在共同映射，而不是无边界的全球存在性 | P1(`U/S`)：同一预注册范围内的完整合同、计量与workload mapping支持共同占用才成立；具名`U`的完整隔离映射，或有限`S`按覆盖规则全部无重叠，才推翻该范围内命题。单个隔离案例不推翻总体外存在性；缺失单位为unresolved |
-| Method | 共享temporal envelope correct model与B6 double-counting counterfactual在相同输入、安全集和holdout上比较；主estimand冻结为`Δ=D_min^flex,correct-D_min^flex,B6`，只有公开边缘时在声明的coupling set上求条件sharp bounds | P2：`LB_Δ>0`才支持all-coupling robust正效应；`LB_Δ<=0<UB_Δ`中的nonpositive witness已排除该robust正主张，但现实未知coupling符号仍partially identified；`UB_Δ<=0`进一步排除任一admissible coupling上的严格正效应。必要arm上B6不劣或预注册稳健性失败本身只表示正主张未建立 |
-| Insight | 报告哪些边缘与结构假设能排除、容许或迫使风险，以及哪些联合数据能收窄区间；算法工具不自动形成经验结论 | P3 identification：若Cartesian outcomes不完整、primal/dual或coupling witness失败，或存在solver unresolved，则不得称端点sharp或把未决状态写成infeasible |
+| Problem | 网络安全调用保持为硬约束时，小时级CFE目标提高会把联合业务柔性推到什么边界，单服务与联合时序各贡献多少 | P1 frontier：完整报告四个注册目标上的`D_N,D_C,D_B,D_J`；不按结果删除cell或插值 |
+| Method | 46-cell设计、四臂最低柔性、同cell加法分解与固定策略共享执行 | P2 structure：`I_joint = I_sep + A_B6`；失败即停止归因 |
+| Insight | 区分single-service binding、joint extra requirement/portfolio relief、B6 under/overprovisioning和operational effect | P3 consequence：只有B6-minus-correct服务风险的transport区间越过注册阈值才支持对应方向的all-coupling稳健后果 |
 
 所需外部证据是具名或去标识化的network contract、hourly-CFE obligation、共同
 计量窗口、workload queue/dispatch、actual calls与recovery轨迹。当前证据只达到
@@ -137,6 +145,30 @@ training pair inventory hash及symlink/Windows reparse fail-closed规则。该�
 external-data runner/identification/report orchestration，尚无runtime证据或独立R3/R4
 复审，`implementation_bound=false`、`ready=false`且所有formal/claim gates不变；
 现有prereg与v4/v6冻结文件未修改。
+
+### 3.3 联合服务可交付前沿确认性后继（2026-09-03）
+
+[`RQ2_联合服务可交付前沿确认性方案_v2.md`](RQ2_联合服务可交付前沿确认性方案_v2.md)
+将四臂重新组织为离散前沿与加法归因。主设计是4个hourly-CFE targets、3个
+flexible fractions和3个recovery headrooms的36-cell full factorial；在中心点增加
+10个时序参数OAT cells，总计46个。
+
+主容量量为：
+
+- `I_joint = D_J - max(D_N,D_C)`；
+- `I_sep = D_B - max(D_N,D_C)`；
+- `A_B6 = D_J - D_B`；
+- `I_joint = I_sep + A_B6`。
+
+结果使用可并存的single-service binding、joint extra requirement/portfolio relief、
+B6 capacity under/overprovisioning和operational penalty/relief标签，不再依赖旧互斥
+分类器决定主结论。公开边缘transport用于holdout风险稳健性，主容量前沿由共同
+代表点和完整training-support审计确定。
+
+当前v2语义修正successor已seal，outer SHA-256为
+`ae1e8a8a5c4c276e5c0d54900636de94e5402f29923817cf8cb70067b90c90f7`；
+46-cell target builder、successor classifier、runner和output尚未绑定。独立R4
+review、实现复审、完整grid package和单独formal-run authority均是后续硬门。
 
 ## 4. L5 经济随机模型：入口已建，待正式求解（R3 任务）
 

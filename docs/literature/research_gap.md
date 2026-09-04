@@ -1,6 +1,6 @@
 # 研究缺口与贡献定位
 
-更新日期：2026-08-25
+更新日期：2026-09-03
 适用范围：当前已编码学术文献与官方制度来源；不等同于投稿前的穷尽式系统综述
 
 ## 一页结论
@@ -20,20 +20,18 @@ workload distribution与regulation capacity commitment，并用chance constraint
 已经把firm/flexible/interruptible tiers及depth、duration、ramp、recovery和年度
 上限放入PJM/Korea capacity expansion。故论文贡献不能写成容量承诺、
 deliverability、容量扩展中的event-shape/recovery或sharp optimal-transport bound
-本身。当前可守的候选组合是：
+本身。当前可守的首篇候选组合是：
 
-1. 把network-contingent claim与hourly-CFE claim表示为两个分离制度义务，并检验
-   它们是否映射到同一temporal workload envelope；
-2. 用B6 double-counting counterfactual表示“分别按完整包络记账”的错误机制，
-   与共享包络模型公平比较；
-3. 在only-public-marginals、unknown joint law下，报告minimum-flexibility
-   underprovisioning等estimand的sharp partial-identification application，并把
-   exogenous grid infeasibility、solver unresolved与服务欠交付分开。
+1. 固定网络安全调用，构造随小时级CFE目标变化的完整业务时序柔性需求前沿；
+2. 用network-only、CFE-only、joint-correct与joint-B6四臂得到
+   `I_joint = D_J - max(D_N,D_C)`，并分解为B6分离包络交互与相对correct的
+   有符号容量偏差；
+3. 冻结容量后在共享物理包络中回放策略，区分hard-grid failure、CFE shortfall和
+   联合服务失败。
 
-这个组合仍是**待证的研究设计**，不是已有经验结论。冻结70-cell formal phase-map
-必须同步保留：`R1=0, R2=0, R3=69, mixed=1, unresolved=0`；original positive H2
-unsupported。当前`formal_execution_ready=false`，文献更新不提升实验gate或
-认证状态。
+这个组合仍是**待证的研究设计**，不是已有经验结论。冻结70-cell phase-map必须
+同步保留：`R1=0, R2=0, R3=69, mixed=1, unresolved=0`；原正向H2不受支持。
+当前`formal_execution_ready=false`，研究定位变化不提升实验gate或认证状态。
 
 ## 最近邻与优先权边界
 
@@ -61,9 +59,9 @@ unsupported。当前`formal_execution_ready=false`，文献更新不提升实验
 
 | 结构 | 当前限定 |
 |---|---|
-| Problem | 在两类制度对象分别存在、但缺少共同资源映射的条件下，检验它们若同时索取同一temporal workload envelope，是否产生minimum-flexibility underprovisioning或服务欠交付；不预设现实中已经发生重叠 |
-| Method | 冻结共享包络correct model与B6 double-counting counterfactual，在相同输入、安全集和holdout上比较；当只观察到grid/workload公开边缘时，在transport polytope上计算sharp conditional bounds；保留right-censoring、solver-unresolved和exogenous infeasibility |
-| Insight | 可报告的是“哪些可观测边缘与结构假设足以排除、容许或迫使风险”，以及什么新增联合数据会收窄识别区间；不能把算法工具或合成敏感性直接升级为工程、合同或普遍行为结论 |
+| Problem | 网络安全调用保持为硬约束时，小时级CFE目标提高会把联合业务柔性推到什么可交付边界；该边界由单服务瓶颈还是联合时序冲突主导 |
+| Method | 对46个预注册cells求解network-only、CFE-only、joint-correct与joint-B6最低柔性，验证有符号加法分解，并在共享物理包络中回放冻结策略 |
+| Insight | 报告离散柔性需求前沿、`I_joint`、`I_sep`、`A_B6`和服务通道后果；公开边缘transport用于检验holdout结论对允许配对的稳健性 |
 
 T1–T3的定义、证明草图、tight/反例和外推边界见
 [`rq2_theoretical_propositions_v1.md`](../model_spec/rq2_theoretical_propositions_v1.md)。
@@ -86,18 +84,27 @@ robust正主张已被nonpositive witness排除；`UB_Δ<=0`进一步排除集合
 后调整阈值制造阳性；
 P3失败时，只能报告已验证的非sharp区间或未决状态。
 
+2026-09-03 successor另注册四臂容量命题：
+
+- P4 decomposition：
+  `I_joint = D_J-max(D_N,D_C) = I_sep + A_B6`；
+- P5 signed attribution：完整事件包络下不预设四臂顺序；正负差值都必须保留并
+  由trajectory与binding-constraint证据解释；
+- P6 operational consequence：B6固定容量进入共享执行后，只在注册transport
+  区间越过正或负阈值时才称为对应方向的稳健运行差异。
+
+P4恒等式失败属于协议、实现或数值证书失败，不是经验反例。P6符号跨越阈值时只
+报告部分识别。
+
 ## Introduction可用的条件化贡献表述
 
-> Network-side flexible-load arrangements and hourly carbon-free-energy
-> accounting are separately documented institutional objects, but public
-> primary evidence does not yet establish that a named data center commits the
-> same workload-flexibility envelope to both. We therefore treat their overlap
-> as a falsifiable hypothesis. We compare a shared temporal-envelope model with
-> a B6 double-counting counterfactual and, when only public marginals are
-> observed, characterize sharp conditional bounds on flexibility
-> underprovisioning under an unknown joint law. The design does not claim that
-> overlap is prevalent, that interconnection capacity X is overstated, or that
-> the present evidence establishes a positive empirical effect.
+> We characterize the workload-flexibility requirement frontier for jointly
+> delivering mandatory network response and progressively stricter hourly-CFE
+> targets. Four matched arms separate the limiting single service, signed
+> joint interaction, separate-envelope interaction, and B6 capacity bias.
+> Frozen policies are then replayed through the shared physical
+> envelope to quantify service consequences. Public-marginal transport bounds
+> assess the robustness of holdout conclusions to admissible block pairings.
 
 ## 优先权与外推边界
 

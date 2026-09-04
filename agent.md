@@ -38,7 +38,7 @@
 所有模型、实验和论文内容必须服务于以下三个RQ：
 
 1. 多阶段自适应接入相对静态F/X和两阶段规划，在什么条件下改善T20、T50、T100或尾部服务风险？
-2. 同一业务灵活性若同时被用于网络条件削减和小时级绿电匹配，会低估多少最低所需业务柔性并产生多大场景外履约风险？只有建立显式且可验证的映射后，才进一步讨论条件容量X。
+2. 在网络安全调用保持为硬约束时，小时级CFE目标提高会怎样改变联合服务的业务柔性可交付前沿？相对network-only与CFE-only，联合时序交互和分离记账会形成何种有符号容量偏差，并产生多大固定策略场景外服务风险？只有建立显式且可验证的映射后，才进一步讨论条件容量X。
 3. 年度绿电匹配与小时级属地CFE匹配是否会产生不同的接入容量、扩建时序和灵活性分配决策？
 
 新增工作若不能明确回答其中至少一个RQ，原则上不进入主项目。
@@ -49,19 +49,35 @@
 
 ### 首篇主创新（RQ2）
 
-建立网络条件服务与小时级CFE匹配共享的业务灵活性**时序包络**（MW、最大持续时间、事件次数、累计能量、恢复功率与恢复债务），避免同一柔性工作负载被重复承诺；设置允许重复承诺的B6错误基线，在场景外执行既定策略，量化minimum-flexibility underprovisioning、持续时间违约、恢复债务累积与失败概率。当前公开数据successor不含显式X决策或经验证的X映射，因此不得把该flexibility estimand写成条件容量X高估。这不是单独写出一条 `c_grid + c_green <= D_flex` 不等式，而是机制、错误基线与场景外风险评估三者的组合。
+建立网络安全调用约束下的**联合业务柔性可交付前沿**：在完整24小时
+时序包络中逐级提高小时级CFE目标，分别求解network-only、CFE-only、
+joint-correct与joint-B6四臂最低柔性，报告
+`D_N`、`D_C`、`D_B`、`D_J`及以下可审计分解：
 
-> 公开数据边界下的定位修订（2026-08-24，用户决策）：首篇不再以取得
-> 企业现场配对功率、真实SLA或观测事故作为可执行前提，也不估计真实合同
-> 违约概率。主estimand改为以`D_DC`归一化的minimum-flexibility
-> underprovisioning与固定策略服务损失
-> 的部分识别区间。RTS-GMLC网络+CFE连续窗口和Alibaba业务窗口保持为两个
-> 公开边缘分布，在保持各自边缘与块内时序的离散transport polytope上求
-> sharp lower/upper bounds；只有对全部允许coupling均成立的结论才标记为
-> `identified_R1/R2/R3`，否则标记`partially_identified`。方法贡献必须包括
-> 可证明的瞬时容量/恢复债务边界、完整共享时序包络、B6错误基线和固定策略
-> 场景外回放；不得把普通参数扫描或一条共享预算约束单独称为创新。权威执行
-> 路线见`docs/plan/RQ2_公开数据鲁棒识别路线图_v6.md`。
+`I_joint = D_J - max(D_N, D_C)`，
+`I_sep = D_B - max(D_N, D_C)`，
+`A_B6 = D_J - D_B`，
+且`I_joint = I_sep + A_B6`。
+
+主科学问题是单服务瓶颈、联合时序交互和服务边界；B6用于测量分离时序记账相对
+correct造成的有符号容量偏差，并在共享物理包络中回放固定策略后果。完整事件
+包络下四臂可行域不保证嵌套，因此不得预设`D_B <= D_J`或差值为正。当前公开数据successor不含
+显式X决策或经验证的X映射，因此这些flexibility estimands不得写成条件容量X高估。
+CFE-only与joint arms必须接受注册目标产生的完整CFE缺口，不能先截断到现有业务
+柔性；恢复功率必须同时满足业务headroom和同小时CFE-compatible surplus。
+
+> 联合可交付前沿定位修订（2026-09-03，用户决策）：首篇确认性设计采用
+> `hourly_cfe_target × flexible_fraction × normalized_recovery_headroom`的
+> 36-cell factorial，并在中心点增加10个时序参数OAT cells，共46个cells。
+> 主容量证据是四臂最低柔性曲线、有符号交互与加法归因；fixed-policy holdout
+> 报告hard-grid/CFE/联合服务风险。公开边缘的transport sharp bounds、共同
+> coupling witness与bootstrap作为holdout稳健性工具，不单独承担创新主张。
+> 权威科学协议见
+> `configs/rq2_joint_deliverability_preregistration_v1.yaml`和
+> `docs/model_spec/rq2_joint_deliverability_estimands_v1.md`；当前执行方案及
+> 非嵌套验收修正见
+> `configs/rq2_joint_deliverability_preregistration_amendment_v2.yaml`和
+> `docs/plan/RQ2_联合服务可交付前沿确认性方案_v2.md`。
 
 ### 后续扩展（RQ1）
 
@@ -77,9 +93,10 @@
 - 事件次数；
 - 恢复债务；
 - 连续代表周；
-- AC潮流事后校核。
+- AC潮流事后校核；
+- 公开边缘上的transport部分识别与bootstrap。
 
-不得宣称首次提出灵活接入、firm/flexible容量、数据中心需求响应、CVaR或一般绿电协同。RQ2主创新也不得宣称首次联合网络与新能源目标：已有工作（Wan and Li 2026、Wan/Fang/Li 2026、Ma et al. 2025）在单一统一调度变量下联合缓解拥塞与消纳，本项目的可辩护差异是"契约分离但物理共享导致的重复承诺量化"，须在引言正面区分（见 `docs/literature/research_gap.md` 缺口边界2）。
+不得宣称首次提出灵活接入、firm/flexible容量、数据中心需求响应、CVaR或一般绿电协同。已有工作（Wan and Li 2026、Wan/Fang/Li 2026、Ma et al. 2025）已在单一统一调度变量下联合缓解拥塞与消纳，Fan and Zhao (2026) 与 Khanal et al. (2026) 也已覆盖capacity commitment、deliverability及event-shape/recovery。RQ2必须以“固定网络安全调用下，小时级CFE目标变化对应的完整时序可交付前沿与四臂加法归因”建立相对差异，并由有符号分解、确认性前沿和固定策略后果共同支撑；普通联合优化、参数扫描、单条共享预算、B6名称或数据配对工具均不足以单独构成创新。
 
 ## 5. 研究边界
 

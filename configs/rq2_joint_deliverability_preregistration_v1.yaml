@@ -1,0 +1,429 @@
+schema: rq2_joint_deliverability_preregistration_v1
+version: 1
+created_on: 2026-09-03
+sealed_on: 2026-09-03
+status: SEALED_READY_FOR_INDEPENDENT_REVIEW
+
+scope:
+  paper_role: primary_RQ2_confirmatory_successor
+  scientific_object: joint_temporal_deliverability_frontier
+  implementation_bound: false
+  changes_predecessor_bytes: false
+  runs_solver: false
+  publishes_result: false
+  formal_result: false
+  claim: false
+
+research_question:
+  id: RQ2_joint_temporal_deliverability
+  primary: >-
+    With the network-security call retained as a mandatory service, how does
+    the minimum normalized workload flexibility required for joint delivery
+    change as the registered hourly-CFE target rises, and where does the
+    complete temporal envelope cease to deliver the registered service bundle?
+  attribution: >-
+    At each registered target, how much of the requirement is explained by
+    the limiting single service, the signed joint temporal interaction, and
+    the signed capacity bias induced by separate temporal accounting?
+  operational_consequence: >-
+    When the separately-accounted capacity is frozen and replayed through the
+    shared physical envelope, how much additional service failure or shortfall
+    occurs relative to correct joint planning?
+  evidence_tier: prospective_confirmatory_public_benchmark
+  external_replication_claimed: false
+  causal_claimed: false
+  engineering_certification_claimed: false
+
+predecessor_evidence:
+  observed_phase_map:
+    manifest_path: results/tables/rq2_three_region_phase_map_v1/SHA256SUMS.json
+    manifest_sha256: 3763f9e5b295a42cf6fbea0e14a0aca6946e49cd79565166fea81179e5d49c87
+    summary_path: results/tables/rq2_three_region_phase_map_v1/summary.json
+    summary_sha256: 1e961e419169b998fda70ec17b0e084cf9020d89a655a0509dc136a27ad20c0a
+    total_cells: 70
+    region_counts:
+      R1: 0
+      R2: 0
+      R3: 69
+      mixed: 1
+      unresolved: 0
+    role: exploratory_predecessor_used_to_motivate_reframing
+    formal_result: false
+  public_v6:
+    preregistration_path: configs/rq2_public_data_robust_identification_preregistration_v6.yaml
+    preregistration_sha256: ef25deabfcd51fbd667e48dcddcfbe4b19a2115c6d4bc40b0fc556b5c1f332f2
+    manifest_path: configs/rq2_public_data_robust_identification_preregistration_v6.SHA256SUMS.json
+    manifest_sha256: 07bb735df3cc5ad547c7d4741c5f69929b39a37df9b65c3c2ae004e74b08cdcf
+    formal_result_observed: false
+  four_arm_v1:
+    preregistration_path: configs/rq2_public_baseline_robustness_preregistration_v1.yaml
+    preregistration_sha256: 017708b25c3e1702c938a108af070a7047517bd128552500d3ffcac6a3ee3554
+    manifest_path: configs/rq2_public_baseline_robustness_preregistration_v1.SHA256SUMS.json
+    manifest_sha256: da6d13055ccfcd03c00939ab7fa61f43e05052556211f725b4550a09d33f64c9
+    role: immutable_mechanism_predecessor
+    superseded_for_primary_attribution: true
+
+data_contract:
+  block_hours: 24
+  boundary_state: clean_boundary_with_zero_carry_in
+  power_system_blocks:
+    package: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4
+    manifest_path: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4/SHA256SUMS.json
+    manifest_sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+    training_blocks: 541
+    holdout_blocks: 530
+  workload_blocks:
+    package: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3
+    manifest_path: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3/SHA256SUMS.json
+    manifest_sha256: 62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524
+    training_blocks: 34
+    holdout_blocks: 34
+  grid_need:
+    source: verified_v6_grid_package
+    config_path: configs/rts_gmlc_public_grid_need_dispatch_v4.yaml
+    config_sha256: 84db8e7ad47bf51dd1ec94db1ebb7d3edc068b587afb4fba8d596861d58e6beb
+    output_path: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_gurobi
+    output_manifest_sha256: null
+    ready: false
+  split_policy:
+    training_only_for_planning_and_representative_selection: true
+    holdout_provision_reoptimization: false
+    holdout_recourse_reoptimization: false
+    prior_70_cell_result_is_external_replication: false
+
+hourly_cfe_target:
+  symbol: alpha_hr
+  registered_levels: [0.50, 0.70, 0.85, 1.00]
+  level_source: inherited_exactly_from_predecessor_phase_map
+  source_field_at_alpha_1: cfe_call_fraction
+  renewable_share_reconstruction: 1 - cfe_call_fraction
+  raw_deficit_expression: max(alpha_hr - renewable_share, 0) / alpha_hr
+  service_call_expression: raw_deficit
+  service_call_truncated_to_available_flexibility: false
+  business_recovery_headroom_expression: >-
+    normalized_recovery_headroom * max(1 - workload_occupancy, 0)
+  cfe_compatible_recovery_headroom_expression: max(renewable_share / alpha_hr - 1, 0)
+  effective_recovery_headroom_expression: >-
+    min(business_recovery_headroom, cfe_compatible_recovery_headroom)
+  source_renewable_share_cap: 1.0
+  alpha_1_role: registered_stress_endpoint
+  alpha_1_zero_cfe_surplus_is_input_semantics: true
+  network_call_scaled_with_alpha: false
+  target_specific_grid_dispatch_required: false
+  interpolation_between_registered_levels: false
+
+arms:
+  canonical_order:
+    - network_only_shared
+    - cfe_only_shared
+    - joint_correct_shared
+    - joint_b6_separate_planning_shared_execution
+  definitions:
+    network_only_shared:
+      grid_call: mandatory_active
+      cfe_call: zero
+      planning_envelope: shared
+      execution_envelope: shared
+    cfe_only_shared:
+      grid_call: zero
+      cfe_call: target_specific_active
+      planning_envelope: shared
+      execution_envelope: shared
+    joint_correct_shared:
+      grid_call: mandatory_active
+      cfe_call: target_specific_active
+      planning_envelope: shared
+      execution_envelope: shared
+    joint_b6_separate_planning_shared_execution:
+      grid_call: mandatory_active
+      cfe_call: target_specific_active
+      planning_envelope: separate_by_service_with_shared_connected_demand_cap
+      execution_envelope: shared
+  forbidden_arm_specific_overrides:
+    - hourly_cfe_target
+    - grid_need
+    - workload_availability
+    - connected_demand
+    - temporal_envelope
+    - training_or_holdout_support
+    - representative_selection
+    - solver
+
+registered_design:
+  primary_factorial:
+    factors:
+      hourly_cfe_target: [0.50, 0.70, 0.85, 1.00]
+      flexible_fraction: [0.05, 0.20, 0.50]
+      normalized_recovery_headroom: [0.00, 0.10, 0.30]
+    cell_count: 36
+    interpretation: nine_discrete_requirement_curves_over_four_CFE_targets
+  fixed_parameters:
+    recovery_efficiency: 0.85
+    maximum_event_duration_hours: 4
+    maximum_event_count: 2
+    normalized_energy_budget: 0.40
+    normalized_debt_limit: 0.20
+  secondary_oat:
+    anchor:
+      hourly_cfe_target: 0.85
+      flexible_fraction: 0.20
+      normalized_recovery_headroom: 0.10
+      recovery_efficiency: 0.85
+      maximum_event_duration_hours: 4
+      maximum_event_count: 2
+      normalized_energy_budget: 0.40
+      normalized_debt_limit: 0.20
+    varied_levels:
+      recovery_efficiency: [0.60, 0.85, 1.00]
+      maximum_event_duration_hours: [1, 4, 8]
+      maximum_event_count: [1, 2, 4]
+      normalized_energy_budget: [0.10, 0.40, 1.00]
+      normalized_debt_limit: [0.05, 0.20, 0.50]
+    added_unique_cell_count: 10
+    joint_parameter_robustness_claimed: false
+  exact_unique_cell_count: 46
+  selective_cell_reporting_allowed: false
+  parameter_level_probability_assumed: false
+
+planning_contract:
+  objective: lexicographic_minimum_normalized_flexibility_for_full_training_service
+  minimum_flexibility_symbol: D_star
+  normalization: fraction_of_D_DC
+  registered_capacity_domain: [0.0, 1.0]
+  representative_selection:
+    method: weighted_marginal_stress_quantile_representatives
+    power_system_representatives: 8
+    workload_representatives: 8
+    common_power_and_workload_representative_ids_across_all_cells: true
+    selection_reference_target: 1.00
+    selection_uses_holdout_outcomes: false
+  full_evaluable_training_support_audit: required
+  representative_candidate_fails_full_support:
+    status: training_support_failure_estimand_undefined
+    capacity_increase_or_reselection_allowed: false
+  proven_infeasible_at_registered_cap:
+    status: proven_infeasible_at_registered_cap_estimand_undefined
+    numeric_capacity_imputation: forbidden
+  timeout_missing_incumbent_or_incomplete_certificate:
+    status: unresolved
+    infeasibility_claimed: false
+
+solver_contract:
+  name: gurobi
+  expected_package_version: 13.0.2
+  threads: 4
+  mip_relative_gap: 1.0e-6
+  feasibility_tolerance: 1.0e-6
+  optimality_tolerance: 1.0e-6
+  integer_feasibility_tolerance: 1.0e-6
+  random_seed: 0
+  time_limit_seconds: null
+  tee: false
+  incumbent_bound_gap_residual_certificate_required: true
+
+registered_capacity_estimands:
+  arm_requirements:
+    D_N: D_star_network_only
+    D_C: D_star_cfe_only
+    D_B: D_star_joint_B6
+    D_J: D_star_joint_correct
+  limiting_single_service:
+    symbol: D_single
+    expression: max(D_N, D_C)
+  joint_interaction_contrast:
+    symbol: I_joint
+    expression: D_J - max(D_N, D_C)
+    positive_direction: joint_delivery_requires_more_than_the_limiting_single_service
+    negative_direction: joint_temporal_portfolio_relief
+  separate_envelope_interaction:
+    symbol: I_sep
+    expression: D_B - max(D_N, D_C)
+    positive_direction: separate_envelopes_require_more_than_the_limiting_single_service
+    negative_direction: separate_envelopes_require_less_than_the_limiting_single_service
+  b6_capacity_bias:
+    symbol: A_B6
+    expression: D_J - D_B
+    positive_direction: B6_underprovisions_relative_to_correct_joint_planning
+    negative_direction: B6_overprovisions_relative_to_correct_joint_planning
+  exact_decomposition:
+    expression: I_joint == I_sep + A_B6
+    tolerance: 1.0e-6
+  cross_arm_ordering_assumed: false
+  ordering_rationale: >-
+    Duration, event-count, minimum-event-power, rest, energy, and recovery
+    constraints can make shared and separate temporal tracks non-nested.
+  signed_capacity_classification:
+    positive: contrast_greater_than_tolerance
+    near_zero: absolute_contrast_less_than_or_equal_to_tolerance
+    negative: contrast_less_than_negative_tolerance
+  across_target_monotonicity_assumed: false
+  inversion_requires_trajectory_and_binding_constraint_witness: true
+
+frontier_outputs:
+  primary_curve:
+    x: registered_hourly_cfe_target
+    y:
+      - D_N
+      - D_C
+      - D_B
+      - D_J
+    strata:
+      - flexible_fraction
+      - normalized_recovery_headroom
+  target_status:
+    - resolved
+    - training_support_failure_estimand_undefined
+    - proven_infeasible_at_registered_cap_estimand_undefined
+    - unresolved
+  first_registered_positive_joint_interaction:
+    rule: minimum_registered_alpha_with_I_joint_greater_than_tolerance
+    interpolation: false
+    none_observed_value: no_positive_joint_interaction_on_registered_grid
+  first_registered_negative_joint_interaction:
+    rule: minimum_registered_alpha_with_I_joint_less_than_negative_tolerance
+    interpolation: false
+    none_observed_value: no_negative_joint_interaction_on_registered_grid
+  highest_registered_deliverable_target:
+    registered_budget: 1.0
+    rule: maximum_registered_alpha_with_resolved_D_J_less_than_or_equal_to_budget
+    interpolation: false
+    no_feasible_target_value: none_on_registered_grid
+
+fixed_policy_holdout:
+  operational_policy: causal_myopic_grid_first_then_CFE_with_current_state_only
+  correct_policy_capacity: D_J
+  separate_policy_capacity: D_B
+  physical_execution_envelope_for_joint_policies: shared
+  registered_service_metrics:
+    - joint_service_failure_probability
+    - hard_grid_failure_probability
+    - cfe_service_failure_probability
+    - expected_total_service_shortfall
+    - expected_cfe_shortfall
+  primary_operational_contrasts:
+    - B6_minus_correct_joint_service_failure_probability
+    - B6_minus_correct_expected_total_service_shortfall
+    - B6_minus_correct_expected_cfe_shortfall
+  descriptive_state_metrics:
+    - peak_recovery_debt
+    - terminal_recovery_debt
+  debt_is_service_failure_without_registered_violation_field: false
+  current_complete_blocks_are_right_censored: false
+
+attribution_contract:
+  type: nonexclusive_bottleneck_vector
+  labels:
+    network_single_service_binding:
+      condition: network_only_proven_infeasible_or_registered_risk_robust_positive
+    cfe_single_service_binding:
+      condition: cfe_only_proven_infeasible_or_registered_risk_robust_positive
+    joint_extra_requirement:
+      condition: I_joint_greater_than_tolerance
+    joint_portfolio_relief:
+      condition: I_joint_less_than_negative_tolerance
+    b6_capacity_underprovisioning:
+      condition: A_B6_greater_than_tolerance
+    b6_capacity_overprovisioning:
+      condition: A_B6_less_than_negative_tolerance
+    b6_operational_penalty:
+      condition: any_B6_minus_correct_service_risk_transport_LB_greater_than_tolerance
+    b6_operational_relief:
+      condition: any_B6_minus_correct_service_risk_transport_UB_less_than_negative_tolerance
+  exclusive_region_frequency_is_population_probability: false
+  one_label_suppresses_another: false
+  common_insufficiency_rule: report_the_single_service_binding_vector
+  joint_only_rule: both_single_services_nonbinding_and_joint_infeasible_or_I_joint_positive
+  b6_bias_is_independent_of_joint_interaction: false
+
+holdout_uncertainty:
+  role: robustness_layer
+  ambiguity_set: complete_discrete_transport_polytope
+  primary_support: finite_grid_need_rows_cross_workload_holdout_blocks
+  scalar_endpoints_require_primal_dual_and_attaining_witness: true
+  multimetric_statement_requires_one_common_pi_witness: true
+  exogenous_grid_infeasibility:
+    state: E0
+    unconditional_mass_reported: true
+    excluded_from_conditional_service_metrics: true
+  sampling_uncertainty:
+    method: independent_marginal_block_bootstrap
+    replicates: 200
+    seed: 20260825
+    confidence_level: 0.95
+  population_joint_law_claimed: false
+
+decision_rules:
+  comparison_tolerance: 1.0e-6
+  capacity_claim_requires_all_four_resolved: true
+  holdout_robust_positive: transport_LB_greater_than_tolerance
+  holdout_robust_negative: transport_UB_less_than_negative_tolerance
+  holdout_robust_nonpositive: transport_UB_less_than_or_equal_to_tolerance
+  holdout_partially_identified: transport_LB_less_than_or_equal_to_tolerance_and_UB_greater_than_tolerance
+  publish_all_registered_cells: true
+  negative_result_retained: true
+  result_contingent_parameter_change_allowed: false
+  claim_map:
+    positive_I_joint:
+      allowed: joint_temporal_delivery_requires_additional_flexibility_on_registered_benchmark
+      requires: resolved_capacity_certificate_and_decomposition
+    negative_I_joint:
+      allowed: joint_temporal_portfolio_relief_on_registered_benchmark
+      requires: resolved_capacity_certificate_and_decomposition_and_trajectory_witness
+    positive_A_B6:
+      allowed: separate_temporal_accounting_omits_registered_joint_requirement
+      requires: resolved_capacity_certificate_and_decomposition
+    negative_A_B6:
+      allowed: separate_temporal_accounting_is_conservative_on_registered_benchmark
+      requires: resolved_capacity_certificate_and_decomposition_and_trajectory_witness
+    positive_holdout_B6_contrast:
+      allowed: frozen_separate_accounting_policy_has_higher_conditional_benchmark_service_risk
+      requires: sharp_transport_bound_and_common_pi_when_multimetric
+    null_I_joint:
+      allowed: no_material_joint_interaction_detected_on_registered_grid
+    widespread_single_service_binding:
+      allowed: registered_service_bundle_is_limited_by_identified_single_service_bottlenecks
+
+honesty_boundaries:
+  real_contract_overlap_or_incidence: false
+  empirical_joint_distribution: false
+  population_failure_probability: false
+  interconnection_capacity_X_overstatement: false
+  absolute_Alibaba_MW: false
+  empirical_outage_probability: false
+  cross_day_recovery_certification: false
+  full_N_minus_1_security: false
+  AC_security: false
+  security_certification: false
+
+implementation_requirements:
+  versioned_successor_required: true
+  target_specific_CFE_call_builder_required: true
+  CFE_compatible_recovery_builder_required: true
+  predecessor_min_deficit_availability_call_rule_reusable: false
+  exact_46_cell_inventory_required: true
+  four_arm_capacity_certificate_required: true
+  decomposition_audit_required: true
+  channel_separated_holdout_metrics_required: true
+  nonexclusive_attribution_payload_required: true
+  predecessor_exclusive_classifier_is_authority: false
+  implementation_path: null
+  runner_path: null
+  output_path: null
+  required_output_schemas:
+    - rq2_joint_deliverability_capacity_frontier_v1
+    - rq2_joint_deliverability_holdout_v1
+    - rq2_joint_deliverability_identification_v1
+    - rq2_joint_deliverability_report_v1
+  exact_recursive_manifest_required: true
+  provenance_binds_config_code_inputs_and_software: true
+
+gates:
+  pre_seal_audit_complete: true
+  sealed_ready_for_independent_review: true
+  independent_R4_review_passed: false
+  implementation_bound: false
+  upstream_grid_package_ready: false
+  user_formal_run_authorized: false
+  formal_execution_ready: false
+  formal_result: false
+  paper_claim: false

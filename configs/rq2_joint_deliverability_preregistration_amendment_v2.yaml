@@ -1,0 +1,59 @@
+schema: rq2_joint_deliverability_preregistration_amendment_v2
+version: 2
+created_on: 2026-09-03
+sealed_on: 2026-09-03
+status: SEALED_READY_FOR_INDEPENDENT_REVIEW
+
+scope:
+  purpose: correct_one_pre_review_explanatory_acceptance_item
+  changes_scientific_question: false
+  changes_estimands: false
+  changes_registered_cells: false
+  changes_thresholds: false
+  changes_solver_contract: false
+  changes_execution_authority: false
+  runs_solver: false
+  publishes_result: false
+  formal_result: false
+  claim: false
+
+predecessor:
+  outer_path: configs/rq2_joint_deliverability_preregistration_v1.OUTER.SHA256SUMS.json
+  outer_sha256: a1208841e5997f55095858e07b1592b5899e45e74d2da23406663491d590b958
+  config_path: configs/rq2_joint_deliverability_preregistration_v1.yaml
+  config_sha256: 2efd3fa275cccde2aee701662bb2718386b2fb54d2846b090d0828d8409bdc4f
+  specification_path: docs/model_spec/rq2_joint_deliverability_estimands_v1.md
+  specification_sha256: 28d38744d782aa9e9a8db239801b8ec44ef6290d41c4635ea6b76c208c9b5883
+  plan_path: docs/plan/RQ2_联合服务可交付前沿确认性方案_v1.md
+  plan_sha256: 940dbb01ef654b93aaa28958c049fe9568b67825a3c8eb3a87d268dd2408cb9d
+
+correction:
+  location: predecessor_plan_section_5_item_3
+  corrected_acceptance_item: >-
+    Use synthetic cases to verify the signed four-arm decomposition,
+    target-specific CFE reconstruction, CFE-compatible recovery, and
+    fail-closed outcome states.
+  cross_arm_capacity_ordering_assumed: false
+  exact_capacity_identity: I_joint == I_sep + A_B6
+  comparison_tolerance: 1.0e-6
+  reason: >-
+    Full temporal envelopes with duration, event-count, minimum-event-power,
+    rest, energy, and recovery constraints do not guarantee nested shared and
+    separate-track feasible sets.
+
+authoritative_combination:
+  scientific_config: configs/rq2_joint_deliverability_preregistration_v1.yaml
+  estimand_specification: docs/model_spec/rq2_joint_deliverability_estimands_v1.md
+  execution_plan: docs/plan/RQ2_联合服务可交付前沿确认性方案_v2.md
+  predecessor_plan_role: sealed_historical_body_superseded_at_declared_location
+  all_other_predecessor_bytes_and_semantics_unchanged: true
+
+gates:
+  pre_seal_audit_complete: true
+  sealed_ready_for_independent_review: true
+  independent_R4_review_passed: false
+  implementation_bound: false
+  user_formal_run_authorized: false
+  formal_execution_ready: false
+  formal_result: false
+  paper_claim: false

@@ -2,13 +2,13 @@
 
 ## 1 Abstract
 
-Network-contingent service arrangements and hourly carbon-free-energy (CFE) accounting and matching are separately documented institutional objects. The former can limit large-load withdrawals through a contracted MW level and associated control or protection measures; the latter attributes clean electricity to consumption within the same hour and specified region. Public institutional evidence does not yet establish that a named data center commits the same workload-flexibility resource to both obligations. This paper therefore poses a falsifiable contract-overlap hypothesis: if the two separate obligations map to the same temporal workload envelope, does separate planning understate the minimum flexibility required for joint delivery and cause service loss under a fixed policy?
+Network-contingent service and hourly carbon-free-energy (CFE) matching can draw on the same deferrable and recoverable computing workload. Separate deliverability does not imply that both services can be delivered jointly through one temporal workload envelope. This paper asks how progressively stricter hourly-CFE targets change the minimum workload flexibility required when mandatory network response is retained, whether joint chronology creates an extra requirement or portfolio relief, and what signed capacity bias arises from separate accounting.
 
-Under identical inputs, security sets, and solution standards, the paper compares a correct model with one complete shared within-window envelope over a 24-hour zero-carry-in block against a B6 double-commitment counterfactual in which each obligation is planned against that full within-window envelope. The envelope jointly constrains instantaneous power, maximum duration, event counts, cumulative energy, recovery power, and recovery debt within the block; it does not imply implemented cross-day carry-in linkage. The primary capacity estimand is minimum-flexibility underprovisioning normalized by D_DC, defined as the difference between the minimum flexibility required by the correct and B6 models. The operational estimands are fixed-policy service shortfall and recovery states on holdout data. When public grid/CFE blocks and workload blocks provide only marginal distributions, the analysis preserves both marginals and within-block chronology, computes conditional sharp bounds, the all-coupling sign, and a common-coupling witness over a discrete transport polytope, and replays the frozen policy on holdout blocks. The current main sample consists entirely of complete 24-hour blocks, so its observed states distinguish exogenous grid infeasibility (E0), service shortfall, and solver-unresolved outcomes. Right-censoring is reserved for a future incomplete-window extension and is not claimed as observed in the current sample.
+Under identical inputs, security sets, and solution standards, the paper compares four arms: network-only, CFE-only, joint-correct, and joint-B6. All arms use the same complete 24-hour zero-carry-in window, training support, and holdout rules. The envelope jointly constrains instantaneous power, maximum duration, event counts, cumulative energy, recovery power, and recovery debt. CFE service uses the complete deficit implied by each registered target, while recovery is limited by both business headroom and same-hour CFE-compatible surplus. For every target, the design estimates minimum normalized flexibility \(D_N,D_C,D_B,D_J\) and decomposes the signed joint interaction as \(I_{joint}=D_J-\max(D_N,D_C)=I_{sep}+A_{B6}\), where \(I_{sep}=D_B-\max(D_N,D_C)\) and \(A_{B6}=D_J-D_B\). Full event envelopes do not impose a cross-arm capacity ordering; positive and negative contrasts distinguish extra requirements, portfolio relief, and B6 under- or overprovisioning. The B6 capacity is then frozen and replayed through the shared physical envelope to measure hard-grid failure, CFE shortfall, and joint service loss.
 
-This design tests which marginal and structural conditions exclude, permit, or force underprovisioning and service loss, and identifies the joint timestamps and contract–meter–workload mappings that would narrow the identified set. The primary paper focuses on this RQ2 chain. Multistage F/X interconnection, grid-expansion delays, and the planning effects of annual versus hourly CFE remain project extensions.
+The confirmatory design contains 36 `hourly_cfe_target × flexible_fraction × recovery_headroom` factorial cells and 10 temporal-envelope OAT cells. Pairing uncertainty between public grid/CFE and workload blocks is handled as a holdout robustness layer over a discrete transport polytope; the primary capacity evidence comes from common representatives and a complete training Cartesian-support audit. Current samples are complete 24-hour blocks, with exogenous grid infeasibility (E0), service shortfall, and solver-unresolved outcomes encoded separately. The primary paper focuses on the joint-service deliverability frontier and insufficiency attribution. Multistage F/X interconnection, grid-expansion delays, and annual versus hourly CFE remain project extensions.
 
-**Keywords:** AI data center; network-contingent service; hourly CFE; workload flexibility; double commitment; partial identification; fixed-policy replay
+**Keywords:** AI data center; network-contingent service; hourly CFE; workload flexibility; deliverability frontier; joint service; fixed-policy replay
 
 ## 2 Related Work
 
@@ -30,7 +30,7 @@ For resource limits, Kwag and Kim [20] show why demand response requires more th
 
 Wan and Li [4] incorporate data-center spatiotemporal load flexibility into security-constrained unit commitment, using a unified dispatch variable to relieve congestion and improve renewable utilization. Wan, Fang, and Li [26], posted as arXiv:2511.08759 v1 in 2025 and updated as v2 in 2026, analyze congestion, renewable curtailment, and cost through one spatial-redispatch variable. Ma et al. [27] induce spatiotemporal shifting through endogenous locational prices; Lin and Chien [28] allocate multisite load-decoupling resources for carbon benefits; and Zhang et al. [29] characterize how transmission constraints reduce the availability of flexible resources. Together, these works establish the direct benchmark of network-renewable coordination under unified physical dispatch.
 
-Fan and Zhao [30] jointly optimize workload distribution and regulation-capacity commitment, using chance constraints and queue-VaR constraints for instantaneous and cumulative deliverability. Khanal et al. [31] model firm, flexible, and interruptible tiers in capacity expansion for PJM and Korea, including depth, duration, ramping, minimum recovery, annual energy, and hourly limits. Capacity commitment, deliverability, event shape, and recovery therefore have clear priority boundaries. The paper's identifiable difference is the combination of separate network-contingent and hourly-CFE obligations, a fair shared 24-hour within-window envelope versus B6 comparison, and estimand-specific identification under an unknown cross-source joint law.
+Fan and Zhao [30] jointly optimize workload distribution and regulation-capacity commitment, using chance constraints and queue-VaR constraints for instantaneous and cumulative deliverability. Khanal et al. [31] model firm, flexible, and interruptible tiers in capacity expansion for PJM and Korea, including depth, duration, ramping, minimum recovery, annual energy, and hourly limits. Capacity commitment, deliverability, event shape, and recovery therefore have clear priority boundaries. The paper focuses on the complete-temporal deliverability frontier as hourly-CFE targets increase under fixed mandatory network response, using a signed four-arm decomposition to separate single-service bottlenecks, joint interaction, and B6 capacity bias.
 
 ### 2.5 Multistage Transmission Expansion and Robust Planning
 
@@ -40,9 +40,9 @@ Han, Kim, and Lee [8] use a scenario tree for long-term multistage transmission 
 
 de Chalendar and Benson [21] show why annual 100% renewable-energy claims do not fully represent consumption timing or power-system decarbonization. Miller, Novan, and Jenn [22] quantify differences between hourly accounting and annual or monthly aggregation. Riepin and Brown [23] compare the cost and system effects of annual and 24/7 CFE procurement, and Riepin, Jenkins, Swezey, and Brown [24] examine how 24/7 matching affects the deployment of advanced clean technologies. Riepin, Brown, and Zavala [25] then jointly optimize spatiotemporal computing-load shifts to align computing activity with clean electricity across time and location. These studies form the direct accounting, procurement, and clean-computing baseline. The present paper asks whether a separate network-contingent obligation and hourly-CFE obligation draw on the same workload envelope.
 
-### 2.7 Public Marginals, Partial Identification, and Positioning
+### 2.7 Joint Deliverability, Attribution, and Robustness
 
-RTS-GMLC grid/CFE blocks and Alibaba workload blocks do not share a calendar. Independent, comonotone, and countermonotone pairings are therefore diagnostic points within the admissible coupling set. The paper represents the unknown joint law with a complete discrete transport polytope. Scalar endpoints retain primal/dual evidence and endpoint witnesses; an all-coupling sign is assigned only when it holds over every admissible coupling; and a multimetric region requires one common coupling witness. Joint timestamps, contract triggers, facility meters, workload queues and dispatch, and resource-pool records can tighten the ambiguity set. The 31 academic works and three institutional sources jointly define the problem and method boundaries. Negative findings, sign changes across couplings, E0, and unresolved outcomes remain auditable states for the current complete blocks; right-censoring belongs only to a future incomplete-window extension and is not a current observation.
+The scientific object is the workload-flexibility requirement frontier as hourly-CFE targets increase under a fixed mandatory network response. The four arms first identify the limiting single service, then estimate the signed joint interaction, separate-envelope interaction, and B6 capacity bias. Pairing uncertainty between RTS-GMLC grid/CFE blocks and Alibaba workload blocks affects holdout aggregation only. Independent, comonotone, and countermonotone pairings remain diagnostics, while a complete discrete transport polytope supplies conditional sharp bounds. Multimetric statements require one common coupling witness. Negative results, E0, and unresolved outcomes remain part of the auditable evidence chain.
 
 ![Figure 1. Literature landscape and project positioning](../figures/project_literature_landscape_en.svg)
 
@@ -50,13 +50,13 @@ RTS-GMLC grid/CFE blocks and Alibaba workload blocks do not share a calendar. In
 
 ## 3 Paper Contributions and Project Extensions
 
-### 3.1 Contribution A: Common-Resource Mapping and a Fair Counterfactual
+### 3.1 Contribution A: A Discrete Joint Workload-Flexibility Frontier
 
-The paper maps two separately supported institutional obligations to one temporal workload envelope and combines the complete 24-hour zero-carry-in within-window envelope, the shared correct model, and the B6 double-commitment counterfactual in a fair comparison. Both models use the same inputs, security standards, and training support, and holdout evaluation executes only frozen policies. The contribution unit is the combination of common-resource mapping, an explicit error counterfactual, and auditable service consequences; its individual building blocks follow established research foundations.
+The paper fixes mandatory network response and estimates complete-temporal-envelope flexibility requirements across four preregistered hourly-CFE targets, three workload-flexibility fractions, and three recovery-headroom levels. Network-only, CFE-only, joint-correct, and joint-B6 use the same inputs, security standards, training support, and solver contract. The resulting curves identify where joint service requires extra flexibility and where event coalescence creates portfolio relief.
 
-### 3.2 Contribution B: Conditional Sharp Partial Identification of Specific Estimands
+### 3.2 Contribution B: Four-Arm Additive Attribution and Fixed-Policy Consequences
 
-For normalized minimum-flexibility underprovisioning and fixed-policy service loss, the paper computes conditional sharp bounds, the all-coupling sign, and a common-coupling witness over the public-marginal transport polytope. Fixed-policy holdout replay connects planning differences to operational consequences. E0, service shortfall, and solver-unresolved outcomes are encoded separately for the current complete 24-hour blocks, while right-censoring is reserved for a future incomplete-window extension. The contribution is this estimand-specific partial-identification application, frozen-policy replay, and evidence-state chain.
+The signed joint interaction is decomposed as \(I_{joint}=I_{sep}+A_{B6}\): \(I_{sep}\) is the separate-envelope interaction relative to the limiting single service, and \(A_{B6}\) is B6's signed capacity bias relative to correct joint planning. After capacities are frozen, correct and B6 policies are replayed through the same shared physical envelope, with hard-grid, CFE, and joint service failures reported separately. Public-marginal transport bounds assess the robustness of holdout consequences; E0, service shortfall, and solver-unresolved outcomes remain distinct.
 
 ### 3.3 Project Extension: Multistage F/X, Expansion, and Annual/Hourly CFE
 
@@ -66,16 +66,16 @@ The broader project studies nonanticipative multistage F/X release and grid-expa
 
 ### 4.1 Primary Objective
 
-Under public-data constraints, test whether the potential overlap of two separate institutional obligations on one workload envelope produces normalized minimum-flexibility underprovisioning or fixed-policy service loss, and identify the marginal and structural conditions that exclude, permit, or force these risks.
+Characterize the workload-flexibility deliverability frontier as hourly-CFE targets increase under mandatory network response, decompose the limiting single service, signed joint interaction, and B6 capacity bias, and evaluate fixed-policy holdout consequences.
 
 ### 4.2 Main Contents
 
-1. Establish separate evidence chains for network-contingent arrangements and hourly-CFE accounting and matching, and freeze the contract-overlap hypothesis;
-2. Solve the shared correct model and B6 counterfactual for minimum flexibility on the same training support;
-3. Audit complete training support and replay frozen, current-state-only policies on holdout blocks;
-4. Compute sharp bounds, the all-coupling sign, and a common-coupling witness conditional on finite-grid support, while reporting unconditional E0 mass separately;
-5. Report underprovisioning, service shortfall, recovery debt, and unresolved states; if a future extension admits incomplete windows, report right-censoring separately;
-6. Evaluate how joint timestamps, contract triggers, and common-resource mapping data narrow the identified set;
+1. Build network-only, CFE-only, joint-correct, and joint-B6 arms at four registered hourly-CFE targets;
+2. Estimate \(D_N,D_C,D_B,D_J\) and verify \(I_{joint}=I_{sep}+A_{B6}\);
+3. Audit complete training support for the 36-cell primary factorial and 10 temporal OAT cells;
+4. Replay frozen current-state-only policies on holdout blocks and separate hard-grid, CFE, and joint service risks;
+5. Compute service-risk transport bounds and common-coupling witnesses on finite-grid support while reporting unconditional E0 mass separately;
+6. Publish all positive, negative, infeasible, and unresolved cells;
 7. Extend the broader project to multistage F/X, expansion timing, and annual/hourly CFE comparisons.
 
 Figure 2. Overall research workflow.
@@ -90,13 +90,13 @@ Figure 3. Coordinated network structure of the AI data center and power system.
 
 ### 5.1 Data, Model, and Reproducibility Foundations
 
-The project has versioned 24-hour RTS-GMLC grid/CFE blocks and 24-hour Alibaba workload blocks with strict training/holdout separation. The current main sample consists entirely of complete 24-hour zero-carry-in blocks; it has neither implemented cross-day carry-in linkage nor a currently observed right-censored block. Implementations cover E0 classification, complete-training-support audits, minimum-flexibility planning, separate B6 planning with shared physical execution, fixed-policy replay, transport bounds, common-coupling feasibility, validate-only interfaces for the enhanced four-arm baseline, and per-block-isolated formal bootstrap/controller, checkpoint, resource-journal, and manifest contracts. Versioned configurations, solver certificates, residuals, and artifacts are audited with SHA-256 hashes. These implementation and validate-only capabilities establish inspectable code paths and closed gates only; they do not mean that a formal experiment has run, and they are not formal results, paper conclusions, or security certification.
+The project has versioned 24-hour RTS-GMLC grid/CFE blocks and 24-hour Alibaba workload blocks with strict training/holdout separation. The current main sample consists entirely of complete 24-hour zero-carry-in blocks; it has neither implemented cross-day carry-in linkage nor a currently observed right-censored block. Implementations cover E0 classification, complete-training-support audits, minimum-flexibility planning, separate B6 planning with shared physical execution, fixed-policy replay, transport bounds, common-coupling feasibility, validate-only interfaces for the enhanced four-arm baseline, and per-block-isolated formal bootstrap/controller, checkpoint, resource-journal, and manifest contracts. The new 46-cell joint-deliverability v2 protocol is sealed and awaits independent R4 review; a target-specific CFE builder, frontier-attribution payload, and formal runner still require a versioned implementation successor. Versioned configurations, solver certificates, residuals, and artifacts are audited with SHA-256 hashes. These capabilities establish inspectable code paths and closed gates only; they are not formal results, paper conclusions, or security certification.
 
 ### 5.2 Existing Evidence and Current Execution Status
 
 The frozen 70-cell/legacy-formal-batch derived benchmark is preserved as R1=0, R2=0, R3=69, mixed=1, and unresolved=0; the original positive H2 is unsupported. These negative and boundary findings remain part of the evidence record and are not revised through post-result tuning.
 
-The V8 nonformal two-block pilot, run in the fixed order `holdout_s20260822_0008 → holdout_s20260822_0009`, received both a pre-run independent PASS and a post-result independent PASS. That evidence closes only the corresponding gates for this nonformal pilot and does not grant formal execution authority. Formal activation V1–V4 never received execution authorization, and V4 is retained only as a historical `ESCALATE` record. V5 remains `DRAFT_NONAUTHORITATIVE` and is undergoing in-place remediation and review of pre-seal findings; it has not been sealed and has no independent activation PASS or user formal-run authority.
+The V8 nonformal two-block pilot, run in the fixed order `holdout_s20260822_0008 → holdout_s20260822_0009`, received both a pre-run independent PASS and a post-result independent PASS. That evidence closes only the corresponding gates for this nonformal pilot and does not grant formal execution authority. Formal activation V1–V4 never received execution authorization, and V4 is retained only as a historical `ESCALATE` record. No V5 activation candidate exists, and there is no independent activation PASS or user formal-run authority.
 
 Accordingly, the 1,071-block grid, subsequent pairwise replay, and identification have not been run or published; the formal-result, paper-claim, and security-certification gates all remain closed. A TimeLimit, resource stop, unresolved outcome, missing incumbent, or incomplete certificate does not establish mathematical infeasibility. These statements report project execution status and are not paper results.
 
@@ -104,15 +104,15 @@ Accordingly, the 1,071-block grid, subsequent pairwise replay, and identificatio
 
 ### 6.1 Expected Outputs
 
-1. An auditable mapping from separate institutional obligations to one temporal workload envelope and a B6 counterfactual;
-2. Conditional sharp identified sets for normalized minimum-flexibility underprovisioning and fixed-policy service loss;
-3. All-coupling signs, common-coupling witnesses, and a data-requirements account for narrowing identified sets;
-4. A fixed-policy holdout evidence chain that preserves E0, service shortfall, and unresolved outcomes for the current complete 24-hour blocks, with right-censoring limited to a future incomplete-window extension;
+1. Four-arm minimum-flexibility requirement curves across registered hourly-CFE targets under mandatory network response;
+2. Signed capacity attribution through \(I_{joint}=I_{sep}+A_{B6}\) and a nonexclusive bottleneck vector;
+3. Hard-grid, CFE, and joint service consequences for frozen B6 and correct policies;
+4. A fixed-policy holdout evidence chain that preserves E0, service shortfall, and unresolved outcomes for the current complete 24-hour blocks;
 5. A multistage F/X–expansion–annual/hourly-CFE model as a broader project extension.
 
 ### 6.2 Research Boundaries
 
-The primary estimand is minimum-flexibility underprovisioning normalized by D_DC and is not interpreted as overestimation of interconnection capacity X. Bounds from public marginals are conditional identified sets relative to the stated transport polytope; they are not the incidence of real contract overlap, a real contract-failure probability, or a causal effect. The selected-N-1 DC benchmark supports planning and mechanism analysis and does not constitute engineering security certification. CFE denotes clean electricity attributable within the same hour and specified region; it does not trace electrons delivered to the data center. Institutional evidence supports the separate existence of the two objects. Until common contract, meter, and workload/resource mappings are available, formal interpretation remains limited to the public benchmark.
+The primary estimands are normalized \(D_N,D_C,D_B,D_J\) and their signed interaction decomposition; they are not interpreted as overestimation of interconnection capacity X. Public-marginal holdout bounds are conditional robustness intervals relative to the stated transport polytope, not real contract incidence, population failure probabilities, or causal effects. The selected-N-1 DC benchmark supports planning and mechanism analysis and does not constitute engineering security certification. CFE denotes clean electricity attributable within the same hour and specified region; it does not trace electrons delivered to the data center.
 
 ## 7 References
 

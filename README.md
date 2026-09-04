@@ -103,10 +103,14 @@ V8 finding；V4 保持 sealed/superseded。V7/V8 fast probes 与全部 66 个 V8
 
 ## 论文主线聚焦（RQ2）
 
-毕业论文/期刊投稿的主线聚焦 **RQ2：网络条件服务与小时级 CFE 匹配共享同一业务灵活性预算**
-（共享时序包络 + B6 重复承诺错误基线 + 场景外 service-CVaR）。路线图、命题
-（H1/H2/H3）、资产映射与目标期刊（TSG 类）工作量评估见
-[RQ2\_论文路线图.md](docs/plan/RQ2_论文路线图.md)。
+毕业论文/期刊投稿的主线聚焦 **RQ2：网络安全与小时级CFE共同约束下的业务柔性
+可交付前沿与不足归因**。确认性设计比较
+`network-only / CFE-only / joint-correct / joint-B6`，以
+`I_joint = D_J - max(D_N,D_C)`为主容量指标，并分解
+`I_joint = I_sep + A_B6`。B6用于量化分离时序记账相对correct造成的有符号容量
+偏差，并在共享物理包络中评估冻结策略后果。科学协议见
+[联合服务可交付前沿确认性方案v2](docs/plan/RQ2_联合服务可交付前沿确认性方案_v2.md)；
+[v1科学基础](docs/plan/RQ2_联合服务可交付前沿确认性方案_v1.md)保持不可变。
 
 本 README 其余部分描述的是**更广的项目全景与共享基础设施**（L0-M6、B0-B5 基线、
 RTS-GMLC 选择性 N-1 基准、AC 复算与 repair 认证链）。这些不是需要删除的"旧目标"：
@@ -138,18 +142,15 @@ absolute power, flexibility and recovery evidence, same-clock
 incidents, full N-1, engineering AC security, and formal annual/hourly CFE
 conclusions remain unimplemented or externally blocked.
 
-The RQ2 v6 successor uses public marginals rather than an invented cross-source
-joint distribution. It estimates normalized minimum-flexibility
-underprovisioning, not interconnection-capacity X. E0 grid states that remain
-infeasible at the zero-data-center endpoint retain their unconditional mass but
-are excluded from the conditional contract-risk transport support. Policies
-must pass the complete evaluable training support, partial-region compatibility
-uses one common coupling, and fixed-seed marginal block bootstrap intervals are
-reported separately from sharp identification bounds. The development host is
-blocked from formal execution. See
-`docs/plan/RQ2_公开数据鲁棒识别路线图_v6.md` for the scientific contract,
-`docs/plan/RQ2_开发机任务与执行边界.md` for the current state, and
-`docs/plan/RQ2_执行机交接_v2.md` for the immutable historical Windows handoff.
+The RQ2 confirmatory successor studies the joint temporal deliverability
+frontier across four registered hourly-CFE targets. Four matched arms estimate
+the limiting single-service requirement, signed joint interaction,
+separate-envelope interaction, and B6 capacity bias. Public-marginal
+transport bounds remain the robustness layer for fixed-policy holdout outcomes.
+E0 grid states retain their unconditional mass and remain outside conditional
+service-risk metrics. The development host is blocked from formal execution.
+See `docs/plan/RQ2_联合服务可交付前沿确认性方案_v1.md` for the prospective
+design and `docs/plan/RQ2_开发机任务与执行边界.md` for current execution gates.
 
 ### RQ2 execution status
 
@@ -158,6 +159,11 @@ The process-isolated HiGHS V8 run also completed the fixed nonformal
 `0008 -> 0009` sequence and passed independent post-result review. Formal
 activation successors V1-V4 did not obtain execution authority; V4 ended in
 `ESCALATE`, so no formal candidate is currently executable.
+
+The joint-deliverability preregistration amendment v2 is sealed for independent
+R4 review (`outer SHA-256 ae1e8a8a5c4c276e5c0d54900636de94e5402f29923817cf8cb70067b90c90f7`).
+Its 46-cell implementation and formal execution remain blocked; sealed v1 is
+the immutable scientific predecessor.
 
 The branch-head automation default remains `pytest-smoke`. The 1071-block grid,
 pairwise and identification stages remain closed. A future formal activation

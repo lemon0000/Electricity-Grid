@@ -29,7 +29,8 @@
 | M6完整网络-业务时序闭环 | formal activation blocked after V4 `ESCALATE` | v5的202个HiGHS checkpoint继续仅作诊断；fresh HiGHS/Gurobi confirmatory pilot v4已完成并通过语义与独立结果审查。Gurobi正式attempt只保留9/1071个历史checkpoint；process-isolated HiGHS V8已完成nonformal `0008 -> 0009`并通过post-result review。formal activation V1-V4均未取得执行许可，当前无formal candidate或正式grid package | 只有用户明确授权新的V5 draft后才能进入pre-seal开发；V5仍须seal、独立R4 review和单独formal-run authority。完整grid发布前pairwise/identification保持关闭 |
 | RQ2 HiGHS同进程thread scheduler隔离 | mitigated for V8 two-block route; formal activation blocked | 同进程污染不再用于当前执行路径；V8对每个block使用fresh process，并记录actual HiGHS 1.15.1/4 threads、PID/create-time、solver-call accounting和完整resource journal。该证据覆盖固定两块，不自动证明1071-block formal controller | future formal successor必须保持per-block process isolation并由独立review验证完整生命周期；不得回退到同进程连续求解或把资源停止解释为不可行 |
 | RQ2 Vnext two-block pilot post-result evidence | V8 nonformal `committed_success`; post-result `PASS` | v8唯一一次fixed `0008 -> 0009` run已发布result/PUBLISHED exact trees；public-only readback、fresh PID/predecessor、HiGHS runtime、resource journals和无seed tombstone均通过。独立post-result receipt SHA-256为`28e546b8f5f3bc8c8402c86ec723ec9e35da041ba74676c9adb59cd338980ca6` | 该PASS只关闭two-block evidence门，不形成formal result、论文claim或security certification。formal activation V4已`ESCALATE`，当前无可执行candidate |
-| RQ2增强基线四臂归因 | implementation-only; external-input blocked | `network-only/CFE-only/joint-correct/joint-B6` core、checkpoint/external-preflight与identification/report合同已实现为validate-only；现有70-cell阴性结果保持不变 | 完整v6 grid package、独立review、用户执行授权与execution readiness均为false；上游grid验签前不得运行四臂pairwise/identification或发布机制标签 |
+| RQ2四臂归因v1前序 | superseded for primary attribution; implementation-only | 四臂core、checkpoint/external-preflight与旧互斥identification/report合同已实现为validate-only；现有70-cell阴性结果和全部sealed bytes保持不变 | 旧exclusive classifier不作为联合前沿主结论authority；不得覆盖旧协议或用其启动新46-cell流程 |
+| RQ2联合服务可交付前沿 | v2 sealed; independent R4 review pending; implementation blocked | v1科学配置固定`D_N,D_C,D_B,D_J`离散曲线、`I_joint=I_sep+A_B6`有符号分解、46-cell设计和非互斥bottleneck vector；v2只修正非嵌套验收措辞 | 取得v2 exact outer的独立R4 PASS后，仍须versioned target builder/classifier/runner、独立实现复审、完整grid package及单独formal-run authority；当前所有execution/result/claim门关闭 |
 | 真实重大停电事件分布 | processed candidate cohorts; independent-event calibration blocked | 已冻结1534源行、1521候选组及主/敏感性队列；主持续队列1385组/1398源行，重复组保留source IDs并以非缺失max/min而非求和审计 | 候选组不证明独立物理事故，仍不得估计事故频次或无条件时长分布；无资产ID、拓扑和SCUC，不得映射为RTS具名N-1或声称与业务同钟 |
 | Google同系统工作负荷-功率配对 | resolved for one-PDU one-day normalized pairing | cell f/pdu17 day-0取得336格小时usage、1328条machine event和唯一audit；600秒偏移后形成24小时功率-NCU上下界、168行priority明细及可加载的零柔性`derived_benchmark`，全部SHA锁定 | 只解除“一PDU/一天/归一化功率/受限usage人口”和业务schema桥接缺口；不是绝对MW、完整PDU工作负荷、真实柔性或恢复证据 |
 | ENTSO-E观测资产事故 | external-blocked on security token | 匿名API实测401，当前环境无令牌；页面批量导出同样要求登录 | 用户完成免费注册和REST API令牌申请前不执行；取得后仍不得把ENTSO资产ID映射为RTS ID |
@@ -853,6 +854,41 @@ wrapper 结论。当前 pilot 层`confirmatory_pilot_executed=true`、
 `formal_result_exists=false`、`claim=false`、`security_certified=false`继续保持。该 PASS 不
 授权任何 grid/pairwise/identification/formal/security 后续工作，后续阶段必须重新取得对应
 versioned activation 和独立审查。
+
+#### 联合服务可交付前沿确认性设计门（2026-09-03）
+
+新RQ2科学协议以四臂离散需求前沿为主：
+`D_N`、`D_C`、`D_B`、`D_J`，并注册
+
+`I_joint = D_J - max(D_N,D_C)`，
+`I_sep = D_B - max(D_N,D_C)`，
+`A_B6 = D_J - D_B`，
+`I_joint = I_sep + A_B6`。
+
+完整事件包络下不预设四臂容量顺序；加法分解是fail-closed结构门。确认性参数矩阵由36个
+`hourly_cfe_target × flexible_fraction × normalized_recovery_headroom`
+full-factorial cells和10个锚点OAT cells组成，共46个唯一cells。结果采用可并存
+bottleneck vector，分别报告network/CFE single-service binding、joint extra
+requirement/portfolio relief、B6 capacity under/overprovisioning和operational
+penalty/relief。
+
+v1科学配置`configs/rq2_joint_deliverability_preregistration_v1.yaml`已seal；
+稳定回读发现v1执行方案第5节仍含一处与非嵌套口径冲突的旧验收措辞，因此v1
+outer只作不可变前序，不作为当前review入口。v2语义修正successor
+只替换该验收项，不改变研究问题、estimands、46 cells、阈值、solver contract或
+执行权限。v2状态为`SEALED_READY_FOR_INDEPENDENT_REVIEW`，inner与outer
+SHA-256分别为
+`1e4140558baac410898822d101c9516e54e01a5026fd8535e18df3cf44778ec3`和
+`ae1e8a8a5c4c276e5c0d54900636de94e5402f29923817cf8cb70067b90c90f7`。
+
+target-specific完整CFE缺口与CFE-compatible recovery builder、46-cell
+implementation、successor attribution payload、runner和output path均为null。
+旧v6、四臂v1及其exclusive classifier保持原字节，只作为前序机制资产。
+
+当前剩余设计门是由新`sol_reviewer`对exact outer签发独立R4 PASS；随后另建
+versioned implementation successor并通过R3/R4 review。即使科学协议review通过，
+完整grid package、单独user formal-run authority和execution readiness仍必须另行
+满足。当前solver/formal/result/paper-claim/security门全部关闭。
 
 ### v4 grid正式attempt的运行性中断与恢复授权（2026-08-29）
 
