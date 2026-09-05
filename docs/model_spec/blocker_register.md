@@ -30,7 +30,7 @@
 | RQ2 HiGHS同进程thread scheduler隔离 | mitigated for V8 two-block route; formal activation blocked | 同进程污染不再用于当前执行路径；V8对每个block使用fresh process，并记录actual HiGHS 1.15.1/4 threads、PID/create-time、solver-call accounting和完整resource journal。该证据覆盖固定两块，不自动证明1071-block formal controller | future formal successor必须保持per-block process isolation并由独立review验证完整生命周期；不得回退到同进程连续求解或把资源停止解释为不可行 |
 | RQ2 Vnext two-block pilot post-result evidence | V8 nonformal `committed_success`; post-result `PASS` | v8唯一一次fixed `0008 -> 0009` run已发布result/PUBLISHED exact trees；public-only readback、fresh PID/predecessor、HiGHS runtime、resource journals和无seed tombstone均通过。独立post-result receipt SHA-256为`28e546b8f5f3bc8c8402c86ec723ec9e35da041ba74676c9adb59cd338980ca6` | 该PASS只关闭two-block evidence门，不形成formal result、论文claim或security certification。formal activation V4已`ESCALATE`，当前无可执行candidate |
 | RQ2四臂归因v1前序 | superseded for primary attribution; implementation-only | 四臂core、checkpoint/external-preflight与旧互斥identification/report合同已实现为validate-only；现有70-cell阴性结果和全部sealed bytes保持不变 | 旧exclusive classifier不作为联合前沿主结论authority；不得覆盖旧协议或用其启动新46-cell流程 |
-| RQ2联合服务可交付前沿 | v5 independent R4 `PASS`; implementation v1 R3 `REWORK`; v2 independent R3 `PASS` | v1 official review发现四项Major；v2以独立package、14-member manifest和5类反例完成聚焦修复，outer为`e086f13cca12e198fd69553bc574662d615ab09b343ac6619e2448b94a7f2ee2`，唯一复审为`0/0/0 PASS` | 正式输入closure、native primal、trajectory/bootstrap重放、内部provenance authority及streaming/checkpoint仍阻塞execution successor。PASS不授权solver/formal run或生成正式结果/claim |
+| RQ2联合服务可交付前沿 | v5 independent R4 `PASS`; implementation v2 independent R3 `PASS`; execution v1 R3 `REWORK`; execution v2 post-review `ESCALATE` | execution v1因sealed lifecycle测试raw-red及opened-gate反例空洞被判`0/1/0 REWORK`；唯一聚焦v2的21-member outer为`ff70b138f61833908c84763c3a6df06ad255f6f6f26adfbf1e4051865a0e5f93`。初始PASS receipt物化后，v2自身focused suite再次因live authority状态变化raw-red，独立adjudication修订为`0/1/0 ESCALATE` | 同一validation-contract验收项再次失败，禁止自动 successor 循环；须由用户或sol_modeler明确重新授权。dispatched-grid、Windows runtime、native replay、memory/transport、activation及formal-run authority仍缺失，全部execution/result/claim门关闭 |
 | 真实重大停电事件分布 | processed candidate cohorts; independent-event calibration blocked | 已冻结1534源行、1521候选组及主/敏感性队列；主持续队列1385组/1398源行，重复组保留source IDs并以非缺失max/min而非求和审计 | 候选组不证明独立物理事故，仍不得估计事故频次或无条件时长分布；无资产ID、拓扑和SCUC，不得映射为RTS具名N-1或声称与业务同钟 |
 | Google同系统工作负荷-功率配对 | resolved for one-PDU one-day normalized pairing | cell f/pdu17 day-0取得336格小时usage、1328条machine event和唯一audit；600秒偏移后形成24小时功率-NCU上下界、168行priority明细及可加载的零柔性`derived_benchmark`，全部SHA锁定 | 只解除“一PDU/一天/归一化功率/受限usage人口”和业务schema桥接缺口；不是绝对MW、完整PDU工作负荷、真实柔性或恢复证据 |
 | ENTSO-E观测资产事故 | external-blocked on security token | 匿名API实测401，当前环境无令牌；页面批量导出同样要求登录 | 用户完成免费注册和REST API令牌申请前不执行；取得后仍不得把ENTSO资产ID映射为RTS ID |
@@ -1024,6 +1024,65 @@ SHA-256为
 该PASS只关闭reference implementation review gate；execution successor仍受本节
 登记的输入、primal、trajectory、bootstrap、provenance、streaming、checkpoint、
 memory与runtime硬门约束。所有formal/result/claim/security门继续关闭。
+
+#### 联合服务可交付前沿 execution successor v1 REWORK 与 v2 ESCALATE（2026-09-05）
+
+用户授权的平台无关 execution evidence/resume infrastructure 已完成构建、封存和
+独立 R3 审查；该授权不包括正式 46-cell、1,071-block grid、holdout、transport、
+bootstrap、结果发布或论文/安全 claim。
+
+execution v1 实现了注册输入递归审计、grid checkpoint 全量重放、strict JSON/CSV、
+native primal capture/replay、planning evidence index、content-addressed holdout、
+两遍式 resume、bootstrap certificate replay、原子持久化和 bounded working set。
+v1 inner/outer SHA-256 分别为
+`e9274340b35282923ff7fc50b308a56fe1079868d22c02162b73d5bf14658a86`和
+`1ec234a1279b1c5a09b2beedb66ec1dfffcda28ed4a024df44d7d47060c976d2`。
+official R3 review 发现一项 Major：sealed live config 被测试以
+`require_sealed=false`校验，使登记的 focused command raw-red，并使
+opened-gate 反例在 lifecycle 层提前失败。REWORK receipt 为
+`configs/rq2_joint_deliverability_execution_review_rework_v1.yaml`，SHA-256 为
+`9188549f0fc87b7094ff6f1422a36e36ee45718338aa4bc9230edcfee47ede5a`。
+
+v1 的 19 个 sealed members 保持不可变。唯一聚焦 v2 successor 只修复
+lifecycle-aware live validation、显式 draft fixture、opened-gate 精确错误断言和
+versioned predecessor authority；科学协议、solver、evidence schema、持久化与
+resume 逻辑不变。v2 pre-seal findings 为`0/0/0`；post-seal focused 为
+`139 passed, 1 skipped`，implementation-v2 + execution-v2 broad 为
+`210 passed, 1 skipped`。唯一 skip 是 Windows native directory flush 执行机
+probe，未计为通过。Ruff、format、py_compile、sealed validator、runner
+`--validate-only`及21/21成员哈希复核通过，且保持0 solver、0 formal write。
+
+v2 inner/outer SHA-256 分别为
+`e757b8662ce12c4b93d5bc826e00c77ad905a945384a120157d8da18203a98c8`和
+`ff70b138f61833908c84763c3a6df06ad255f6f6f26adfbf1e4051865a0e5f93`。
+全新 reviewer 对 receipt 尚不存在时的 exact outer 初始给出`PASS`，
+`Blocker/Major/Minor=0/0/0`。历史 PASS receipt 为
+`configs/rq2_joint_deliverability_execution_review_pass_v2.superseded.yaml`，
+SHA-256 为
+`20c13ff59f47a76eb9aad6962884b8605aa7de76833cdf00abc62229bc7f1a35`。
+
+该 receipt 物化后，v2 原样 focused command 变为
+`138 passed, 1 failed, 1 skipped`：`_load_live_registered_inputs()`正确通过
+review authority并在下一门报告 dispatched-grid manifest 未绑定，但 sealed test
+仍固定匹配 review receipt 缺失。精确 deselect 后 focused/broad 分别为
+`138 passed, 1 skipped, 1 deselected`和
+`209 passed, 1 skipped, 1 deselected`，但 deselect 不满足 v1 REWORK 已冻结的
+raw-green要求。独立 post-review adjudication 因同一验收项再次失败，将现行 verdict
+修订为`ESCALATE`，`Blocker/Major/Minor=0/1/0`。ESCALATE receipt 为
+`configs/rq2_joint_deliverability_execution_review_escalate_v2.yaml`，SHA-256 为
+`969cd58f090cc9fa6dfba986715ec67a8e18dfcf8e188d97c11748f421895b6d`。
+原 PASS receipt 仅在`.superseded.yaml`路径保留逐字节历史记录；sealed config
+要求的固定 PASS authority 路径保持 absent，因此当前 core 必须 fail closed。
+
+当前仍缺：
+完整 dispatched-grid package、Windows x86-64 runtime receipt、Gurobi 13.0.2
+native replay、注册规模 peak-memory、transport runtime projection、
+fresh-process activation successor及单独用户 formal-run authorization。
+因此`formal_execution_ready=false`、`formal_result=false`、
+`paper_claim=false`和`security_certified=false`；不得启动 solver 或把缺失输入
+解释为数学不可行。按`agent.md` §7，同一validation-contract验收项在唯一
+REWORK successor中再次失败，禁止自动创建后续 successor；必须升级给用户或
+`sol_modeler`重新授权。
 
 ### v4 grid正式attempt的运行性中断与恢复授权（2026-08-29）
 
