@@ -1,0 +1,100 @@
+schema: rq2_joint_deliverability_preregistration_review_rework_v2
+reviewed_on: "2026-09-04"
+review_scope: rq2_joint_deliverability_preregistration_amendment_v2_exact_outer
+reviewer_role: independent_sol_reviewer
+reviewer_model: gpt-5.6-sol
+verdict: REWORK
+
+reviewed_subject:
+  outer_path: configs/rq2_joint_deliverability_preregistration_amendment_v2.OUTER.SHA256SUMS.json
+  outer_sha256: ae1e8a8a5c4c276e5c0d54900636de94e5402f29923817cf8cb70067b90c90f7
+  commit: f163bac09060aa3d6ca821704732d71e74a04d47
+
+findings:
+  - id: network_only_recovery_semantics_alpha_contamination
+    severity: major
+    evidence:
+      - configs/rq2_joint_deliverability_preregistration_v1.yaml:103-107
+      - configs/rq2_joint_deliverability_preregistration_v1.yaml:122-150
+      - docs/model_spec/rq2_joint_deliverability_estimands_v1.md:23-31
+    scientific_effect: >-
+      Applying CFE-compatible recovery to the network-only arm makes D_N depend
+      on alpha and no longer isolates the network service. The limiting
+      single-service benchmark and every derived capacity contrast can then be
+      contaminated.
+    required_successor_fix: >-
+      Freeze service-specific recovery eligibility, including separate grid-
+      and CFE-track recovery semantics for B6 planning and shared CFE-compatible
+      recovery for both joint policies at execution.
+
+  - id: alpha_one_structural_recovery_endpoint
+    severity: major
+    evidence:
+      - configs/rq2_joint_deliverability_preregistration_v1.yaml:108-110
+      - docs/model_spec/rq2_joint_deliverability_estimands_v1.md:118-120
+    scientific_effect: >-
+      With renewable share capped at one, alpha=1 has zero CFE-compatible
+      recovery. Under zero terminal debt, any positive call assigned to that
+      recovery regime is structurally unrecoverable. Treating the endpoint as
+      an ordinary capacity point can overstate the empirical content of the
+      frontier and permit invalid interaction claims.
+    required_successor_fix: >-
+      Add an analytic structural-infeasibility status and witness, forbid
+      numeric capacity imputation and signed four-arm attribution when any
+      required arm is structurally undefined, and narrow the alpha=1 claim.
+
+  - id: capacity_contrast_ignores_solver_certificate_interval
+    severity: major
+    evidence:
+      - configs/rq2_joint_deliverability_preregistration_v1.yaml:211-260
+      - docs/model_spec/rq2_joint_deliverability_estimands_v1.md:33-37
+      - docs/model_spec/rq2_joint_deliverability_estimands_v1.md:84-85
+    scientific_effect: >-
+      Point-estimate sign rules can classify contrasts whose sign is not
+      determined by the registered lower bound, incumbent upper bound, and
+      solver tolerances.
+    required_successor_fix: >-
+      Propagate arm-level certified intervals into interval bounds for
+      D_single, I_joint, I_sep, and A_B6. Permit positive, negative, or near-zero
+      labels only when the complete certified interval supports that label.
+
+  - id: operational_estimands_not_uniquely_frozen
+    severity: major
+    evidence:
+      - configs/rq2_joint_deliverability_preregistration_v1.yaml:160-165
+      - configs/rq2_joint_deliverability_preregistration_v1.yaml:193-200
+      - configs/rq2_joint_deliverability_preregistration_v1.yaml:292-353
+      - docs/model_spec/rq2_joint_deliverability_estimands_v1.md:170-220
+    scientific_effect: >-
+      The omitted envelope constants, representative tie-breaking and mass
+      reassignment, causal replay transitions, service-failure definitions,
+      E0 denominator, and bootstrap mechanics allow materially different
+      implementations to satisfy the same prose.
+    required_successor_fix: >-
+      Freeze all temporal constants and boundary states, the complete
+      representative algorithm, the current-state replay policy, metric
+      formulas, finite-grid conditioning, E0 mass, and bootstrap algorithm.
+
+  - id: v2_validator_overstates_single_correction_proof
+    severity: major
+    evidence:
+      - configs/rq2_joint_deliverability_preregistration_amendment_v2.yaml:7-18
+      - experiments/validate_rq2_joint_deliverability_preregistration_amendment_v2.py:125-237
+    scientific_effect: >-
+      Field assertions and exact hashes establish byte identity, but do not
+      prove that the authoritative combination has only one scientific
+      correction or that the under-specified inherited semantics are complete.
+    required_successor_fix: >-
+      Acknowledge the scientific changes explicitly, enumerate every
+      superseded path, bind the review receipt, and validate the complete
+      replacement semantics without claiming zero scientific changes.
+
+effect:
+  reviewed_v1_v2_bytes_immutable: true
+  independent_R4_review_passed: false
+  focused_versioned_scientific_successor_allowed: true
+  implementation_authorized: false
+  solver_execution_authorized: false
+  formal_result_exists: false
+  paper_claim: false
+  security_certified: false

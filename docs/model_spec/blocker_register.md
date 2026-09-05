@@ -30,7 +30,7 @@
 | RQ2 HiGHS同进程thread scheduler隔离 | mitigated for V8 two-block route; formal activation blocked | 同进程污染不再用于当前执行路径；V8对每个block使用fresh process，并记录actual HiGHS 1.15.1/4 threads、PID/create-time、solver-call accounting和完整resource journal。该证据覆盖固定两块，不自动证明1071-block formal controller | future formal successor必须保持per-block process isolation并由独立review验证完整生命周期；不得回退到同进程连续求解或把资源停止解释为不可行 |
 | RQ2 Vnext two-block pilot post-result evidence | V8 nonformal `committed_success`; post-result `PASS` | v8唯一一次fixed `0008 -> 0009` run已发布result/PUBLISHED exact trees；public-only readback、fresh PID/predecessor、HiGHS runtime、resource journals和无seed tombstone均通过。独立post-result receipt SHA-256为`28e546b8f5f3bc8c8402c86ec723ec9e35da041ba74676c9adb59cd338980ca6` | 该PASS只关闭two-block evidence门，不形成formal result、论文claim或security certification。formal activation V4已`ESCALATE`，当前无可执行candidate |
 | RQ2四臂归因v1前序 | superseded for primary attribution; implementation-only | 四臂core、checkpoint/external-preflight与旧互斥identification/report合同已实现为validate-only；现有70-cell阴性结果和全部sealed bytes保持不变 | 旧exclusive classifier不作为联合前沿主结论authority；不得覆盖旧协议或用其启动新46-cell流程 |
-| RQ2联合服务可交付前沿 | v2 sealed; independent R4 review pending; implementation blocked | v1科学配置固定`D_N,D_C,D_B,D_J`离散曲线、`I_joint=I_sep+A_B6`有符号分解、46-cell设计和非互斥bottleneck vector；v2只修正非嵌套验收措辞 | 取得v2 exact outer的独立R4 PASS后，仍须versioned target builder/classifier/runner、独立实现复审、完整grid package及单独formal-run authority；当前所有execution/result/claim门关闭 |
+| RQ2联合服务可交付前沿 | v3 independent R4 `ESCALATE`; implementation blocked | v2首轮R4为`REWORK`；聚焦v3保留`I_joint=I_sep+A_B6`并修复纯network-only恢复、alpha=1结构端点、capacity interval及操作性合同，但复审仍发现4项Major：继承点值归因冲突、validator非fail-closed、零恢复precheck未覆盖全部cells、bootstrap随机合同不完整 | v3为historical escalated candidate，不得实现或签发PASS。只有用户明确授权新的versioned scientific successor后，才可按4项Major重构并重新进入完整R4；当前所有execution/result/claim门关闭 |
 | 真实重大停电事件分布 | processed candidate cohorts; independent-event calibration blocked | 已冻结1534源行、1521候选组及主/敏感性队列；主持续队列1385组/1398源行，重复组保留source IDs并以非缺失max/min而非求和审计 | 候选组不证明独立物理事故，仍不得估计事故频次或无条件时长分布；无资产ID、拓扑和SCUC，不得映射为RTS具名N-1或声称与业务同钟 |
 | Google同系统工作负荷-功率配对 | resolved for one-PDU one-day normalized pairing | cell f/pdu17 day-0取得336格小时usage、1328条machine event和唯一audit；600秒偏移后形成24小时功率-NCU上下界、168行priority明细及可加载的零柔性`derived_benchmark`，全部SHA锁定 | 只解除“一PDU/一天/归一化功率/受限usage人口”和业务schema桥接缺口；不是绝对MW、完整PDU工作负荷、真实柔性或恢复证据 |
 | ENTSO-E观测资产事故 | external-blocked on security token | 匿名API实测401，当前环境无令牌；页面批量导出同样要求登录 | 用户完成免费注册和REST API令牌申请前不执行；取得后仍不得把ENTSO资产ID映射为RTS ID |
@@ -889,6 +889,40 @@ implementation、successor attribution payload、runner和output path均为null�
 versioned implementation successor并通过R3/R4 review。即使科学协议review通过，
 完整grid package、单独user formal-run authority和execution readiness仍必须另行
 满足。当前solver/formal/result/paper-claim/security门全部关闭。
+
+#### 联合服务可交付前沿v3 R4 ESCALATE（2026-09-04）
+
+v2 exact outer
+`ae1e8a8a5c4c276e5c0d54900636de94e5402f29923817cf8cb70067b90c90f7`
+的首次独立R4 verdict为`REWORK`，记录见
+`configs/rq2_joint_deliverability_preregistration_review_rework_v2.yaml`。
+聚焦v3 successor随后显式区分network-only业务恢复、CFE-compatible恢复和B6
+grid/CFE双track恢复，增加alpha=1结构性undefined、solver证书区间传播、完整时序
+常数、代表点算法、holdout状态机及E0条件分母。v3 inner/outer SHA-256分别为
+`ae99e836bbaaa7a5c26674596e2600cfee94365b3ea8d4dd1cb2ec382425dd02`和
+`edbbe5be9ae559a258b8928a6678e4adc9abeda4ce9c841238d67589d372bc99`；
+定向继承测试为`40 passed`，Ruff和recursive hash检查通过，solver/result write均为0。
+
+唯一复审的official verdict为`ESCALATE`，无Blocker但仍有4项Major：
+
+1. v1的`frontier_outputs`与`attribution_contract`点值规则未被完整supersede，
+   与v3 interval-supported符号规则冲突；
+2. v3 validator对6类科学语义变异均未fail closed，硬编码
+   `corrected_major_findings=5`不能证明闭环；
+3. 结构性零恢复precheck只挂在alpha=1名下，未覆盖12个
+   `normalized_recovery_headroom=0` primary cells及所有arm-track-cell；
+4. bootstrap未冻结PRNG/version、ID顺序、random stream消费、加权抽样和percentile
+   estimator，仍不能保证逐字节复现。
+
+machine-readable ESCALATE receipt为
+`configs/rq2_joint_deliverability_preregistration_review_escalate_v3.yaml`，
+SHA-256为
+`0e0acf0ddf49d2eca3c68529b3cf111eb90f0cdda6d7c6ce6bbf6421d2d533d3`。
+v3 sealed bytes保持不变，状态为historical escalated candidate。
+`independent_R4_review_passed=false`、`implementation_bound=false`、
+`formal_execution_ready=false`、`formal_result=false`、`paper_claim=false`。
+只有用户明确授权新的versioned scientific successor，才能继续修复；此前不得
+开发46-cell implementation、运行solver或生成结果。
 
 ### v4 grid正式attempt的运行性中断与恢复授权（2026-08-29）
 

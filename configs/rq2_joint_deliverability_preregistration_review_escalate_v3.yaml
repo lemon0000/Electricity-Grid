@@ -1,0 +1,106 @@
+schema: rq2_joint_deliverability_preregistration_review_escalate_v3
+reviewed_on: "2026-09-04"
+review_scope: rq2_joint_deliverability_preregistration_successor_v3_exact_outer
+reviewer_role: independent_sol_reviewer
+reviewer_model: gpt-5.6-sol
+verdict: ESCALATE
+
+reviewed_subject:
+  outer_path: configs/rq2_joint_deliverability_preregistration_successor_v3.OUTER.SHA256SUMS.json
+  outer_sha256: edbbe5be9ae559a258b8928a6678e4adc9abeda4ce9c841238d67589d372bc99
+  inner_sha256: ae99e836bbaaa7a5c26674596e2600cfee94365b3ea8d4dd1cb2ec382425dd02
+  sealed_member_count: 6
+
+findings:
+  - id: inherited_point_value_attribution_remains_authoritative
+    severity: major
+    evidence:
+      - configs/rq2_joint_deliverability_preregistration_successor_v3.yaml:35-52
+      - configs/rq2_joint_deliverability_preregistration_v1.yaml:278-285
+      - configs/rq2_joint_deliverability_preregistration_v1.yaml:320-331
+      - configs/rq2_joint_deliverability_preregistration_successor_v3.yaml:238-251
+    scientific_effect: >-
+      The inherited point-value frontier and attribution rules can label a
+      contrast positive while the successor certificate interval classifies
+      the same contrast as numerically indeterminate.
+    required_future_fix: >-
+      A future user-authorized successor must supersede the complete
+      frontier_outputs and attribution_contract and use certified intervals
+      for every crossing, label, and claim.
+
+  - id: successor_validator_accepts_material_semantic_mutations
+    severity: major
+    evidence:
+      - experiments/validate_rq2_joint_deliverability_preregistration_successor_v3.py:273-339
+      - experiments/validate_rq2_joint_deliverability_preregistration_successor_v3.py:492-500
+      - experiments/validate_rq2_joint_deliverability_preregistration_successor_v3.py:535-543
+    scientific_effect: >-
+      The validator accepted six adversarial changes affecting service calls,
+      recovery efficiency, structural conditions, debt constraints, bootstrap,
+      and transport. The sealed schema therefore does not fail closed on its
+      claimed scientific semantics.
+    required_future_fix: >-
+      Validate exact keysets, deep values, and cross-field invariants for every
+      replacement section and add negative tests for all six mutation classes.
+
+  - id: zero_recovery_precheck_is_not_global
+    severity: major
+    evidence:
+      - configs/rq2_joint_deliverability_preregistration_successor_v3.yaml:170-175
+      - configs/rq2_joint_deliverability_preregistration_successor_v3.yaml:86-91
+      - configs/rq2_joint_deliverability_preregistration_successor_v3.yaml:253-269
+    scientific_effect: >-
+      Twelve primary cells set normalized recovery headroom to zero, but the
+      analytic precheck is registered only under alpha=1. Implementations can
+      disagree on whether other zero-recovery arm-track-cells are structural
+      undefined or should call the solver.
+    required_future_fix: >-
+      Register a mandatory zero-recovery structural precheck for every
+      arm-track-cell and define alpha=1 only as one sufficient route to that
+      general condition.
+
+  - id: bootstrap_randomization_not_reproducibly_frozen
+    severity: major
+    evidence:
+      - configs/rq2_joint_deliverability_preregistration_successor_v3.yaml:342-354
+    scientific_effect: >-
+      PRNG identity and version, canonical ID order, stream consumption,
+      weighted sampling rule, percentile estimator, and unresolved propagation
+      are not fully fixed, so compliant implementations can produce different
+      uncertainty intervals and conclusions.
+    required_future_fix: >-
+      Freeze the RNG and version, canonical sample order, independent stream
+      construction, probability rule, quantile method, and propagation of any
+      empty finite-support replicate to every bootstrap endpoint.
+
+minor_findings:
+  - id: sealed_plan_retains_preseal_pending_text
+    evidence:
+      - docs/plan/RQ2_联合服务可交付前沿确认性方案_v3.md:57-61
+    required_future_fix: >-
+      Synchronize lifecycle wording in a future successor without modifying
+      the rejected sealed v3 bytes.
+
+review_evidence:
+  recursive_hash_validation: passed
+  predecessor_outer_hashes_unchanged: true
+  validators_passed: true
+  focused_tests: 40
+  focused_tests_passed: 40
+  ruff_passed: true
+  adversarial_mutations_tested: 6
+  adversarial_mutations_incorrectly_accepted: 6
+  solver_calls: 0
+  result_files_written: 0
+
+effect:
+  v3_bytes_immutable: true
+  independent_v3_R4_review_passed: false
+  v3_status: historical_escalated_candidate
+  automatic_second_repair_forbidden: true
+  future_versioned_successor_requires_explicit_user_authority: true
+  implementation_authorized: false
+  solver_execution_authorized: false
+  formal_result_exists: false
+  paper_claim: false
+  security_certified: false
