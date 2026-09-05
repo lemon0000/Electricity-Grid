@@ -1,0 +1,225 @@
+schema: rq2_joint_deliverability_implementation_successor_v2
+version: 2
+created_on: "2026-09-05"
+
+lifecycle:
+  status: SEALED_READY_FOR_INDEPENDENT_REVIEW
+  sealed_on: "2026-09-05"
+  pre_seal_audit_complete: true
+  sealed_ready_for_independent_review: true
+
+scope:
+  task_risk: R3
+  purpose: v1_official_R3_review_focused_rework
+  changes_scientific_protocol: false
+  runs_solver_during_validation: false
+  writes_results_during_validation: false
+  formal_execution: false
+  formal_result: false
+  paper_claim: false
+  security_certification: false
+
+scientific_config: configs/rq2_joint_deliverability_preregistration_successor_v5.yaml
+
+scientific_authority:
+  sealed_v5_outer:
+    path: configs/rq2_joint_deliverability_preregistration_successor_v5.OUTER.SHA256SUMS.json
+    sha256: 92a58498e1de5f84b132067e3d4a4443ae841747846785e9df54cd9afd7efdfd
+  v5_pass_receipt:
+    path: configs/rq2_joint_deliverability_preregistration_review_pass_v5.yaml
+    sha256: 0ec073c38eac003255fa2d2753edb28f4d02e0f7756c34e185027ac23b140722
+
+predecessor_authority:
+  sealed_v1_outer:
+    path: configs/rq2_joint_deliverability_implementation_successor_v1.OUTER.SHA256SUMS.json
+    sha256: 61493905239137a3e82093ce3da0daa75b86f82f3ff47a30e7bcc29097298699
+  v1_rework_receipt:
+    path: configs/rq2_joint_deliverability_implementation_review_rework_v1.yaml
+    sha256: 5ee80168459bef736f25d833697bbb80498a72923edd4f995ce5680b24f907c0
+
+implementation:
+  model:
+    path: src/rq2_joint_deliverability_v2/model.py
+  scenarios:
+    path: src/rq2_joint_deliverability_v2/scenarios.py
+  evaluation:
+    path: src/rq2_joint_deliverability_v2/evaluation.py
+  runner:
+    path: experiments/run_rq2_joint_deliverability_implementation_v2.py
+  validator:
+    path: experiments/validate_rq2_joint_deliverability_implementation_v2.py
+  tests:
+    path: tests/test_rq2_joint_deliverability_implementation_v2.py
+  architecture:
+    path: docs/model_spec/rq2_joint_deliverability_implementation_v2.md
+
+local_dependencies:
+  experiments_package_initializer:
+    path: experiments/__init__.py
+  implementation_package_initializer:
+    path: src/rq2_joint_deliverability_v2/__init__.py
+  src_package_initializer:
+    path: src/__init__.py
+  solver_adapter:
+    path: src/rq2_joint_deliverability_v2/solver_adapter.py
+
+semantic_closure:
+  exact_46_cell_inventory: implemented
+  target_specific_full_cfe_deficit: implemented
+  service_tolerance_preprocessing: implemented
+  arm_and_track_specific_recovery: implemented
+  shared_physical_budget: implemented
+  B6_separate_planning_tracks: implemented
+  global_zero_recovery_precheck: implemented
+  network_only_alpha_invariance: implemented_by_solver_task_reuse
+  certified_capacity_intervals: implemented
+  signed_interval_attribution: implemented
+  registered_attribution_vector: implemented
+  registered_frontier_summary: implemented
+  solver_certificate_scalar_consistency_validation: implemented
+  full_support_grid_excess_fallback: implemented
+  representative_selection: implemented
+  current_state_holdout: implemented
+  channel_separated_shortfall: implemented
+  E0_finite_conditioning: implemented
+  scalar_transport_primal_dual_certificates: implemented
+  operational_exists_metric_forall_pi_quantifier: implemented
+  exact_PCG64DXSM_bootstrap_stream: implemented
+  exact_bootstrap_endpoint_recomputation: implemented_with_explicit_execution_flag
+  float_hex_certificate_serialization: implemented
+  recursive_output_manifest: implemented
+  atomic_result_publication: implemented
+  caller_bound_live_provenance_validation: implemented
+  sealed_holdout_probe_hash: implemented
+  solver_certificate_authority_binding: implemented
+  nested_output_internal_consistency_validation: implemented
+  fallback_certificate_audit_closure: implemented
+  network_alpha_certificate_identity: implemented
+  local_runtime_dependency_closure: implemented
+  durable_success_parent_fsync: implemented
+
+legacy_isolation:
+  modifies_old_sealed_implementation: false
+  old_exclusive_classifier_used: false
+  old_common_pi_classifier_used: false
+  old_result_artifacts_reinterpreted: false
+
+predecessor_isolation:
+  modifies_v1_sealed_members: false
+  rework_scope_limited_to_official_findings: true
+
+capacity_stage:
+  registered_cell_outputs: 46
+  registered_arm_outputs_per_cell: 4
+  total_arm_outputs: 184
+  unique_network_only_solver_tasks: 19
+  unique_other_arm_solver_tasks: 138
+  maximum_unique_representative_solver_tasks: 157
+  full_support_fallback_batch_size: 256
+  conditional_full_support_fallback_solver_calls: true
+  representative_power_blocks: 8
+  representative_workload_blocks: 8
+  representative_pair_count_per_cell: 64
+  precheck_scope: full_evaluable_training_cartesian_support
+  full_support_capacity_increase_after_failure: false
+  registered_input_package_counts_enforced: false
+  cross_split_disjointness_enforced: false
+
+solver_contract:
+  source: configs/rq2_joint_deliverability_preregistration_successor_v5.yaml
+  solver_called_by_validate_only: false
+  timeout_is_infeasible: false
+  missing_incumbent_is_infeasible: false
+  missing_bound_is_infeasible: false
+  local_failure_is_infeasible: false
+
+output_contract:
+  required_schemas:
+    - rq2_joint_deliverability_capacity_frontier_v3
+    - rq2_joint_deliverability_holdout_v3
+    - rq2_joint_deliverability_identification_v3
+    - rq2_joint_deliverability_report_v3
+  formal_output_path: null
+  exact_recursive_manifest_required: true
+  atomic_publication_required: true
+  publication_mechanics_implemented: true
+  solver_certificate_binding_required: true
+  nested_internal_consistency_required: true
+  independent_solver_primal_replay: false
+  independent_holdout_trajectory_replay: false
+  independent_bootstrap_interval_replay: false
+  provenance_authority_derived_internally: false
+  path_and_activation_binding_deferred_to_execution_successor: true
+  in_memory_reference_implementation_only: true
+  formal_publication_allowed_by_this_candidate: false
+
+formal_scale:
+  status: blocked_pending_streaming_execution_successor
+  maximum_holdout_policy_executions: 3315680
+  maximum_hourly_state_transitions: 79576320
+  point_transport_endpoint_solves: 2116
+  bootstrap_transport_endpoint_solves: 423200
+  dense_transport_equalities_used: false
+  holdout_trajectory_retention_default: false
+  required_before_formal_run:
+    - streaming_holdout_persistence
+    - resumable_cell_metric_bootstrap_checkpoints
+    - bounded_memory_profile_on_registered_dimensions
+    - measured_transport_runtime_projection
+    - exact_registered_input_package_and_split_closure
+    - native_solver_evidence_and_primal_replay
+    - content_addressed_holdout_trajectory_replay
+    - bootstrap_replicate_evidence_or_independent_recompute
+    - internally_derived_provenance_authority
+    - separate_R3_execution_successor_review
+
+validation_contract:
+  focused_test_command: >-
+    python -m pytest -q
+    tests/test_rq2_joint_deliverability_implementation_v2.py
+  related_regression_includes:
+    - tests/test_rq2_joint_deliverability_implementation_v1.py
+    - tests/test_rq2_joint_deliverability_preregistration_v1.py
+    - tests/test_rq2_joint_deliverability_preregistration_amendment_v2.py
+    - tests/test_rq2_joint_deliverability_preregistration_successor_v3.py
+    - tests/test_rq2_joint_deliverability_preregistration_successor_v4.py
+    - tests/test_rq2_joint_deliverability_preregistration_successor_v5.py
+    - tests/test_rq2_baseline_robustness_core.py
+    - tests/test_rq2_public_replay.py
+    - tests/test_rq2_identification_bounds.py
+  analytic_oracles:
+    - four_arm_fixed_service_minimum_capacity
+    - cfe_compatible_recovery_counterexample
+    - transport_primal_dual_witness
+    - holdout_golden_trajectory
+    - bootstrap_rng_golden_hash
+  adversarial_cases:
+    - CFE_request_exceeds_available_flexibility
+    - subthreshold_request_equals_tolerance
+    - E0_mass_equals_one
+    - transport_interval_crosses_zero
+    - invalid_transport_dual
+    - missing_capacity_bound
+    - raw_effective_request_aliasing
+    - nontraining_E0_split_bypass
+    - full_support_status_bypass
+    - forged_solver_options
+    - nested_output_semantic_drift
+    - publication_failure_windows
+    - fallback_capacity_exceeds_representative_incumbent
+    - fallback_infeasible_forged_as_passed
+    - network_alpha_reuse_certificate_drift
+    - success_parent_fsync_failure
+    - fresh_process_local_import_closure
+  validator_imports_or_calls_optimization_solver: false
+  validator_writes_files: false
+
+gates:
+  implementation_candidate_complete: true
+  pre_seal_audit_complete: true
+  independent_R3_review_passed: false
+  upstream_grid_package_ready: false
+  user_formal_run_authorized: false
+  formal_execution_ready: false
+  formal_result: false
+  paper_claim: false

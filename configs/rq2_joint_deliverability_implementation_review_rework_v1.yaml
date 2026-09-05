@@ -1,0 +1,109 @@
+schema: rq2_joint_deliverability_implementation_review_rework_v1
+reviewed_on: "2026-09-05"
+review_scope: rq2_joint_deliverability_implementation_successor_v1_exact_outer
+reviewer_role: independent_sol_reviewer
+reviewer_model: gpt-5.6-sol
+verdict: REWORK
+
+reviewed_subject:
+  outer_path: configs/rq2_joint_deliverability_implementation_successor_v1.OUTER.SHA256SUMS.json
+  outer_sha256: 61493905239137a3e82093ce3da0daa75b86f82f3ff47a30e7bcc29097298699
+  inner_sha256: e2039c4505ca72c53aae1c75844a431165cdaf993ab275d14bbdbde5bed4a4f7
+  sealed_member_count: 8
+
+findings:
+  - id: full_support_fallback_certificate_not_closed
+    severity: major
+    evidence:
+      - src/evaluation/rq2_joint_deliverability.py:1849-1856
+    implementation_effect: >-
+      Output validation accepts fallback certificates without requiring a
+      resolved certificate or proving that the fallback capacity does not
+      exceed the representative incumbent. Forged fallback evidence can
+      therefore leave a full-support audit marked passed.
+    required_successor_fix: >-
+      Reconstruct every fallback outcome with finalize_capacity_certificate,
+      require resolved status, compare its certified reported point with the
+      representative incumbent, and reject any inconsistency with the audit
+      status and failure inventory.
+
+  - id: network_alpha_reuse_certificate_identity_not_validated
+    severity: major
+    evidence:
+      - src/evaluation/rq2_joint_deliverability.py:2894-2930
+    implementation_effect: >-
+      Counting repeated planning-input hashes does not prove that every
+      network-only reuse carries the same capacity certificate and support
+      audit. Different network-only results can be published under one
+      alpha-invariant planning hash.
+    required_successor_fix: >-
+      Require canonical equality of all solver-backed network-only arm
+      evidence grouped by planning_input_sha256, including status, interval,
+      reported point, solver certificate, failures, and full-support audit.
+
+  - id: sealed_outer_omits_local_runtime_dependencies
+    severity: major
+    evidence:
+      - src/models/rq2_joint_deliverability.py:26-31
+      - configs/rq2_joint_deliverability_implementation_successor_v1.SHA256SUMS.json:4-12
+    implementation_effect: >-
+      The sealed model imports local residual and solver-adapter modules that
+      are not bound by the implementation outer. Their bytes can change solver
+      and certificate behavior without changing the reviewed outer hash.
+    required_successor_fix: >-
+      Include every local runtime dependency used by the versioned
+      implementation in the successor inventory and inner manifest, with
+      validator-enforced exact paths and hashes.
+
+  - id: success_directory_fsync_failure_reclassified_as_success
+    severity: major
+    evidence:
+      - src/evaluation/rq2_joint_deliverability.py:3163-3181
+    implementation_effect: >-
+      A parent-directory fsync exception after success rename can be converted
+      to committed success by readback even though readback does not prove
+      durable rename persistence.
+    required_successor_fix: >-
+      Track result and success parent-fsync completion explicitly. Any
+      exception after a rename but before its parent fsync completes must
+      remain commit_indeterminate and must not be reconciled to success by
+      readback alone.
+
+  - id: lifecycle_documentation_not_synchronized
+    severity: minor
+    evidence:
+      - docs/model_spec/blocker_register.md:964-992
+      - docs/plan/科研项目执行步骤.md:2160-2185
+    implementation_effect: >-
+      Governance prose still reports PRE_SEAL_AUDIT after the v1 outer was
+      sealed and reviewed.
+    required_successor_fix: >-
+      Record the v1 sealed hashes and official REWORK verdict, then track the
+      versioned successor without altering v1 bytes.
+
+verification_evidence:
+  recursive_hash_validation: passed
+  sealed_member_hashes_verified: 8
+  sealed_member_count: 8
+  v5_scientific_authority_verified: true
+  validator_passed: true
+  semantic_payload_sha256: d6dbf91c7859878fd674bece58cdb6175e6f9fc4cf0e3919b5f39e91317ff9dd
+  validator_output_repetition_count: 3
+  validator_output_repeated_sha256: 13abdaa6af1c2bc704db8fefe048204a4bda15a1b43110f49467b7244a5ae32e
+  focused_tests: 65
+  focused_tests_passed: 65
+  related_regression_tests: 150
+  related_regression_tests_passed: 150
+  ruff_static_check_passed: true
+  ruff_format_check_passed: true
+  solver_calls: 0
+  result_files_written: 0
+
+effect:
+  v1_bytes_immutable: true
+  independent_v1_R3_review_passed: false
+  one_focused_versioned_successor_allowed: true
+  formal_execution_authorized: false
+  formal_result_exists: false
+  paper_claim: false
+  security_certified: false

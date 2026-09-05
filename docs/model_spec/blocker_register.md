@@ -30,7 +30,7 @@
 | RQ2 HiGHS同进程thread scheduler隔离 | mitigated for V8 two-block route; formal activation blocked | 同进程污染不再用于当前执行路径；V8对每个block使用fresh process，并记录actual HiGHS 1.15.1/4 threads、PID/create-time、solver-call accounting和完整resource journal。该证据覆盖固定两块，不自动证明1071-block formal controller | future formal successor必须保持per-block process isolation并由独立review验证完整生命周期；不得回退到同进程连续求解或把资源停止解释为不可行 |
 | RQ2 Vnext two-block pilot post-result evidence | V8 nonformal `committed_success`; post-result `PASS` | v8唯一一次fixed `0008 -> 0009` run已发布result/PUBLISHED exact trees；public-only readback、fresh PID/predecessor、HiGHS runtime、resource journals和无seed tombstone均通过。独立post-result receipt SHA-256为`28e546b8f5f3bc8c8402c86ec723ec9e35da041ba74676c9adb59cd338980ca6` | 该PASS只关闭two-block evidence门，不形成formal result、论文claim或security certification。formal activation V4已`ESCALATE`，当前无可执行candidate |
 | RQ2四臂归因v1前序 | superseded for primary attribution; implementation-only | 四臂core、checkpoint/external-preflight与旧互斥identification/report合同已实现为validate-only；现有70-cell阴性结果和全部sealed bytes保持不变 | 旧exclusive classifier不作为联合前沿主结论authority；不得覆盖旧协议或用其启动新46-cell流程 |
-| RQ2联合服务可交付前沿 | v5 independent R4 `PASS`; implementation not authorized | v4 exact outer因operational attribution量词冲突得到`REWORK`；v5固定为`exists metric, then for all admissible pi`，只用certified scalar transport endpoints，并以0/0/0 findings通过exact sealed outer审查 | v4/v5均保持不可变；PASS只关闭scientific preregistration review gate，不授权implementation、solver或formal run。implementation successor需用户另行授权并重新通过R3/R4门禁；所有execution/result/claim门继续关闭 |
+| RQ2联合服务可交付前沿 | v5 independent R4 `PASS`; implementation v1 R3 `REWORK`; v2 independent R3 `PASS` | v1 official review发现四项Major；v2以独立package、14-member manifest和5类反例完成聚焦修复，outer为`e086f13cca12e198fd69553bc574662d615ab09b343ac6619e2448b94a7f2ee2`，唯一复审为`0/0/0 PASS` | 正式输入closure、native primal、trajectory/bootstrap重放、内部provenance authority及streaming/checkpoint仍阻塞execution successor。PASS不授权solver/formal run或生成正式结果/claim |
 | 真实重大停电事件分布 | processed candidate cohorts; independent-event calibration blocked | 已冻结1534源行、1521候选组及主/敏感性队列；主持续队列1385组/1398源行，重复组保留source IDs并以非缺失max/min而非求和审计 | 候选组不证明独立物理事故，仍不得估计事故频次或无条件时长分布；无资产ID、拓扑和SCUC，不得映射为RTS具名N-1或声称与业务同钟 |
 | Google同系统工作负荷-功率配对 | resolved for one-PDU one-day normalized pairing | cell f/pdu17 day-0取得336格小时usage、1328条machine event和唯一audit；600秒偏移后形成24小时功率-NCU上下界、168行priority明细及可加载的零柔性`derived_benchmark`，全部SHA锁定 | 只解除“一PDU/一天/归一化功率/受限usage人口”和业务schema桥接缺口；不是绝对MW、完整PDU工作负荷、真实柔性或恢复证据 |
 | ENTSO-E观测资产事故 | external-blocked on security token | 匿名API实测401，当前环境无令牌；页面批量导出同样要求登录 | 用户完成免费注册和REST API令牌申请前不执行；取得后仍不得把ENTSO资产ID映射为RTS ID |
@@ -960,6 +960,70 @@ official verdict为`PASS`，`Blocker/Major/Minor=0/0/0`。machine-readable recei
 `0ec073c38eac003255fa2d2753edb28f4d02e0f7756c34e185027ac23b140722`。
 该PASS只关闭scientific preregistration review gate；不授权implementation、solver或
 formal run。implementation successor和formal run均需用户另行明确授权。
+
+#### 联合服务可交付前沿 implementation successor v1（2026-09-05）
+
+用户已授权 V5 reference implementation、pre-seal audit、seal 和独立 R3 review，
+但未授权正式求解。v1 已封存为 `SEALED_READY_FOR_INDEPENDENT_REVIEW`，实现文件为
+`src/models/rq2_joint_deliverability.py`、
+`src/scenarios/rq2_joint_deliverability.py`、
+`src/evaluation/rq2_joint_deliverability.py` 和
+`experiments/run_rq2_joint_deliverability_implementation_v1.py`。
+
+已闭合的实现语义包括：exact 46-cell inventory、target-specific完整CFE缺口、
+四臂track-specific recovery、全training support结构门、network-only alpha复用、
+certified capacity interval、有符号归因、current-state holdout、E0 conditioning、
+scalar transport、PCG64DXSM bootstrap和nonformal typed-tree publication。
+pre-seal审计发现的 identification cell 顺序冲突已改为全链使用注册顺序，并由
+finite `runner -> output validator`端到端测试覆盖；raw/effective请求混用、
+非training E0绕过、full-support状态绕过、proven-infeasible残留数值字段和
+solver-options自报阈值也已fail closed。
+
+本 candidate 明确不提供正式结果的独立可重放证据。以下条件已登记为新的
+execution-successor硬门：
+
+1. 对注册 input manifests、`541/530/34/34`数量和跨split不相交做递归闭合；
+2. 保存native solver evidence及primal solution，并独立重算约束残差；
+3. 以content-addressed chunks持久化holdout trajectory并从轨迹重算metrics；
+4. 保存bootstrap draw-stream hash和replicate endpoints，或独立完整重算CI；
+5. 从sealed scientific/implementation outer和input manifests内部派生provenance
+   authority；
+6. streaming persistence、resumable checkpoints、bounded-memory profile、
+   runtime projection及单独R3 execution-successor review。
+
+因此当前`formal_execution_ready=false`、`formal_result=false`、
+`paper_claim=false`和`security_certified=false`。上述缺口是正式执行证据阻塞，
+不是数学不可行或V5科学设计失败。
+
+v1 inner/outer SHA-256分别为
+`e2039c4505ca72c53aae1c75844a431165cdaf993ab275d14bbdbde5bed4a4f7`和
+`61493905239137a3e82093ce3da0daa75b86f82f3ff47a30e7bcc29097298699`。
+全新 independent R3 reviewer 的 official verdict 为 `REWORK`：
+`Blocker/Major/Minor=0/4/1`。machine-readable receipt 为
+`configs/rq2_joint_deliverability_implementation_review_rework_v1.yaml`，
+SHA-256 为
+`5ee80168459bef736f25d833697bbb80498a72923edd4f995ce5680b24f907c0`。
+四项 Major 分别是 full-support fallback certificate 未与 audit 闭环、
+network-only 相同 planning hash 未强制完整证书同一、outer 未封存本地 solver
+依赖，以及 success rename 后 parent fsync 失败可被 readback 重分类为成功。
+
+v1 的 8 个 sealed members 保持不可变。唯一一次聚焦 v2 successor 使用独立
+versioned model/scenario/evaluation/runner/
+validator/test/architecture 路径，内聚 residual 审计并显式登记
+`src/rq2_joint_deliverability_v2/solver_adapter.py`，同时增加四类 reviewer 反例
+和 fresh-process import closure oracle。两轮 pre-seal audit findings 已闭合为
+`0/0/0`；focused `71/71`、related `215/215`、Ruff/format、validator 和 module
+入口均通过。v2 inner/outer SHA-256分别为
+`2344e72026a9ff8e113bfbb7e4ca232329c525c6910df52a288dbd23ca39f20b`和
+`e086f13cca12e198fd69553bc574662d615ab09b343ac6619e2448b94a7f2ee2`，
+状态为`SEALED_READY_FOR_INDEPENDENT_REVIEW`。全新 reviewer 的唯一 official
+R3复审为`PASS`，`Blocker/Major/Minor=0/0/0`。machine-readable receipt 为
+`configs/rq2_joint_deliverability_implementation_review_pass_v2.yaml`，
+SHA-256为
+`67beedbaa1c54118c0039acc1d8b038b7e0aada5ba416b6a9b5949d46ead30d3`。
+该PASS只关闭reference implementation review gate；execution successor仍受本节
+登记的输入、primal、trajectory、bootstrap、provenance、streaming、checkpoint、
+memory与runtime硬门约束。所有formal/result/claim/security门继续关闭。
 
 ### v4 grid正式attempt的运行性中断与恢复授权（2026-08-29）
 
