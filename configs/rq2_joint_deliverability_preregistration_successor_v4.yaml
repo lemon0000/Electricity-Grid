@@ -1,0 +1,1138 @@
+schema: rq2_joint_deliverability_preregistration_successor_v4
+version: 4
+created_on: "2026-09-05"
+
+lifecycle:
+  status: SEALED_READY_FOR_INDEPENDENT_REVIEW
+  sealed_on: "2026-09-05"
+  pre_seal_audit_complete: true
+  sealed_ready_for_independent_review: true
+  independent_R4_review_passed: false
+  implementation_bound: false
+  upstream_grid_package_ready: false
+  user_formal_run_authorized: false
+  formal_execution_ready: false
+  formal_result: false
+  paper_claim: false
+
+authority:
+  mode: complete_self_contained_replacement
+  predecessor_scientific_fields_inherited_by_omission: false
+  predecessor_role: provenance_and_review_history_only
+  reviewed_v3_outer:
+    path: configs/rq2_joint_deliverability_preregistration_successor_v3.OUTER.SHA256SUMS.json
+    sha256: edbbe5be9ae559a258b8928a6678e4adc9abeda4ce9c841238d67589d372bc99
+  v3_escalate_receipt:
+    path: configs/rq2_joint_deliverability_preregistration_review_escalate_v3.yaml
+    sha256: 0e0acf0ddf49d2eca3c68529b3cf111eb90f0cdda6d7c6ce6bbf6421d2d533d3
+  operative_specification: docs/model_spec/rq2_joint_deliverability_estimands_v3.md
+  operative_plan: docs/plan/RQ2_联合服务可交付前沿确认性方案_v4.md
+  prior_versions_may_define_current_semantics: false
+
+scope:
+  purpose: prospective_confirmatory_public_benchmark
+  research_object: joint_temporal_deliverability_frontier
+  changes_research_question: false
+  registered_arm_count: 4
+  registered_cell_count: 46
+  runs_solver: false
+  publishes_result: false
+  formal_result: false
+  claim: false
+
+research_question:
+  id: RQ2_joint_temporal_deliverability
+  primary: >-
+    With the network-security call retained as a mandatory service, how does
+    the minimum normalized workload flexibility required for joint delivery
+    change over the registered hourly-CFE targets?
+  attribution: >-
+    How much of the certified capacity requirement is associated with the
+    limiting single service, signed joint temporal interaction, and signed
+    capacity bias from separate temporal accounting?
+  operational_consequence: >-
+    When separately-accounted and correctly-accounted capacities are frozen,
+    how do their service outcomes differ under the same shared physical
+    execution policy and finite holdout support?
+
+evidence_scope:
+  prospective_confirmatory: true
+  public_benchmark: true
+  external_replication_claimed: false
+  causal_claimed: false
+  empirical_joint_distribution_claimed: false
+  population_probability_claimed: false
+  engineering_certification_claimed: false
+
+data_contract:
+  block_hours: 24
+  time_step_hours: 1.0
+  normalization:
+    D_DC: 1.0
+    capacity_unit: fraction_of_D_DC
+    shortfall_energy_unit: D_DC_hour
+  power_system_blocks:
+    package: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4
+    manifest_path: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4/SHA256SUMS.json
+    manifest_sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+    training_blocks: 541
+    holdout_blocks: 530
+  workload_blocks:
+    package: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3
+    manifest_path: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3/SHA256SUMS.json
+    manifest_sha256: 62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524
+    training_blocks: 34
+    holdout_blocks: 34
+  grid_need:
+    source: verified_v6_grid_package
+    config_path: configs/rts_gmlc_public_grid_need_dispatch_v4.yaml
+    config_sha256: 84db8e7ad47bf51dd1ec94db1ebb7d3edc068b587afb4fba8d596861d58e6beb
+    output_path: data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_gurobi
+    output_manifest_sha256: null
+    ready: false
+    allowed_states:
+      - finite_grid_need
+      - exogenous_grid_infeasibility
+  split_policy:
+    training_only_for_representative_selection_and_capacity: true
+    holdout_capacity_reoptimization: false
+    holdout_representative_reselection: false
+    predecessor_results_are_external_replication: false
+
+input_schema_contract:
+  power_hourly_file: dispatched_power_system_blocks.csv.gz
+  power_marginal_files:
+    training: training_marginal.csv.gz
+    holdout: holdout_marginal.csv.gz
+  power_marginal_columns_exact: [id, probability]
+  power_hourly_required_columns:
+    - block_id
+    - split
+    - hour_offset
+    - source_hour
+    - cfe_call_fraction
+    - grid_need_fraction
+    - dispatch_state
+  power_field_mapping:
+    block_id:
+      source_column: block_id
+      parse: nonempty_string
+    split:
+      source_column: split
+      parse: enum_training_holdout
+    hour_offset:
+      source_column: hour_offset
+      parse: integer_0_through_23
+    source_hour:
+      source_column: source_hour
+      parse: nonnegative_integer
+    cfe_call_fraction_at_alpha_1:
+      source_column: cfe_call_fraction
+      parse: finite_float64_closed_0_1
+    grid_need:
+      source_column: grid_need_fraction
+      parse_for_finite_block: finite_float64_closed_0_1
+      parse_for_E0_hour: exact_empty_string
+    hourly_grid_state:
+      source_column: dispatch_state
+      parse: enum_finite_grid_need_exogenous_grid_infeasibility
+  power_block_rules:
+    exact_rows_per_block: 24
+    unique_key: [block_id, hour_offset]
+    split_constant_within_block: true
+    hour_offsets_exact: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    block_state_lifting: >-
+      If any hourly row is exogenous_grid_infeasibility, the complete block is
+      E0; otherwise all 24 rows must be finite_grid_need and the block is
+      finite_grid_need. Any other or unresolved state invalidates the package.
+    marginal_join: marginal.id equals exactly one block_id
+    marginal_probability_parse: finite_float64_closed_0_1
+    marginal_probability_sum_tolerance: 1.0e-9
+  workload_hourly_file: workload_blocks.csv.gz
+  workload_marginal_files:
+    training: training_marginal.csv.gz
+    holdout: holdout_marginal.csv.gz
+  workload_marginal_columns_exact: [id, probability]
+  workload_hourly_required_columns:
+    - block_id
+    - split
+    - hour_offset
+    - source_relative_hour
+    - workload_fraction
+  workload_field_mapping:
+    block_id:
+      source_column: block_id
+      parse: nonempty_string
+    split:
+      source_column: split
+      parse: enum_training_holdout
+    hour_offset:
+      source_column: hour_offset
+      parse: integer_0_through_23
+    source_relative_hour:
+      source_column: source_relative_hour
+      parse: nonnegative_integer
+    raw_workload_fraction:
+      source_column: workload_fraction
+      parse: finite_float64_nonnegative
+  workload_block_rules:
+    exact_rows_per_block: 24
+    unique_key: [block_id, hour_offset]
+    split_constant_within_block: true
+    hour_offsets_exact: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    marginal_join: marginal.id equals exactly one block_id
+    marginal_probability_parse: finite_float64_closed_0_1
+    marginal_probability_sum_tolerance: 1.0e-9
+
+cfe_contract:
+  target_symbol: alpha_hr
+  registered_levels: [0.50, 0.70, 0.85, 1.00]
+  source_field: cfe_call_fraction_at_alpha_1
+  renewable_share_expression: 1 - cfe_call_fraction_at_alpha_1
+  renewable_share_domain: [0.0, 1.0]
+  raw_call_expression: max(alpha_hr - renewable_share, 0) / alpha_hr
+  effective_call_expression: >-
+    0 if raw_call <= service_shortfall_tolerance, else raw_call
+  raw_call_truncated_to_available_flexibility: false
+  network_call_scaled_with_alpha: false
+  target_specific_grid_dispatch_required: false
+  interpolation_between_registered_levels: false
+  across_target_monotonicity_assumed: false
+
+workload_and_recovery_contract:
+  negative_raw_workload_rejected: true
+  workload_occupancy_expression: min(raw_workload_fraction, 1)
+  available_flexibility_expression: >-
+    flexible_fraction * workload_occupancy
+  connected_demand: 1.0
+  business_recovery_headroom_expression: >-
+    normalized_recovery_headroom * max(1 - workload_occupancy, 0)
+  cfe_compatible_recovery_headroom_expression: >-
+    max(renewable_share / alpha_hr - 1, 0)
+  cfe_service_recovery_headroom_expression: >-
+    min(business_recovery_headroom, cfe_compatible_recovery_headroom)
+  recovery_only_when_corresponding_track_inactive: true
+
+temporal_envelope:
+  initial_recovery_debt: 0.0
+  initial_event_active: false
+  one_completed_period_per_block: true
+  require_terminal_event_inactive: true
+  terminal_recovery_debt_limit: 0.0
+  maximum_flexibility_budget: 1.0
+  minimum_recovery_hours: 1.0
+  minimum_event_power: 1.0e-6
+  response_time_hours: 1.0
+  curtailment_ramp_per_hour: 1.0
+  service_shortfall_tolerance: 1.0e-6
+  fixed_parameters:
+    recovery_efficiency: 0.85
+    maximum_event_duration_hours: 4
+    maximum_event_count: 2
+    normalized_energy_budget: 0.40
+    normalized_debt_limit: 0.20
+  oat_levels:
+    recovery_efficiency: [0.60, 0.85, 1.00]
+    maximum_event_duration_hours: [1, 4, 8]
+    maximum_event_count: [1, 2, 4]
+    normalized_energy_budget: [0.10, 0.40, 1.00]
+    normalized_debt_limit: [0.05, 0.20, 0.50]
+
+arm_contract:
+  canonical_order:
+    - network_only_shared
+    - cfe_only_shared
+    - joint_correct_shared
+    - joint_b6_separate_planning_shared_execution
+  definitions:
+    network_only_shared:
+      grid_call: mandatory_active
+      cfe_call: zero
+      planning_tracks: [shared]
+      planning_recovery_by_track:
+        shared: business_recovery_headroom
+      execution_tracks: [shared]
+      execution_recovery_by_track:
+        shared: business_recovery_headroom
+      canonical_capacity_key_excludes:
+        - hourly_cfe_target
+    cfe_only_shared:
+      grid_call: zero
+      cfe_call: target_specific_raw_active
+      planning_tracks: [shared]
+      planning_recovery_by_track:
+        shared: cfe_service_recovery_headroom
+      execution_tracks: [shared]
+      execution_recovery_by_track:
+        shared: cfe_service_recovery_headroom
+      canonical_capacity_key_excludes: []
+    joint_correct_shared:
+      grid_call: mandatory_active
+      cfe_call: target_specific_raw_active
+      planning_tracks: [shared]
+      planning_recovery_by_track:
+        shared: cfe_service_recovery_headroom
+      execution_tracks: [shared]
+      execution_recovery_by_track:
+        shared: cfe_service_recovery_headroom
+      canonical_capacity_key_excludes: []
+    joint_b6_separate_planning_shared_execution:
+      grid_call: mandatory_active
+      cfe_call: target_specific_raw_active
+      planning_tracks: [grid, cfe]
+      planning_recovery_by_track:
+        grid: business_recovery_headroom
+        cfe: cfe_service_recovery_headroom
+      planning_available_flexibility_cap: separate_full_cap_by_track
+      planning_connected_demand_cap: shared_sum_cap
+      planning_temporal_states: separate_event_energy_recovery_debt_by_track
+      execution_tracks: [shared]
+      execution_recovery_by_track:
+        shared: cfe_service_recovery_headroom
+      canonical_capacity_key_excludes: []
+  common_inputs:
+    - grid_need
+    - workload_occupancy
+    - available_flexibility
+    - connected_demand
+    - training_or_holdout_support
+    - representative_selection
+    - non_recovery_temporal_parameters
+    - solver
+  network_only_invariance:
+    applies_across_alpha_with_identical_nonalpha_parameters: true
+    same_input_hash_required: true
+    same_capacity_certificate_required: true
+    repeated_solver_call_required: false
+  cross_arm_capacity_ordering_assumed: false
+
+planning_formulation:
+  indices:
+    scenario: frozen_representative_power_workload_pairs
+    hour: integers_0_through_23
+    track_by_arm:
+      network_only_shared: [shared]
+      cfe_only_shared: [shared]
+      joint_correct_shared: [shared]
+      joint_b6_separate_planning_shared_execution: [grid, cfe]
+  variables:
+    D: continuous_nonnegative_capacity
+    x_grid: nonnegative_grid_service
+    x_cfe: nonnegative_cfe_service
+    q: nonnegative_track_call
+    "on": binary_track_activity
+    start: binary_track_event_start
+    stop: binary_track_event_stop
+    recovery: nonnegative_track_recovery
+    debt: nonnegative_track_recovery_debt
+  objective: minimize_D
+  effective_service_requests:
+    grid: >-
+      0 if grid_request <= service_shortfall_tolerance, else grid_request
+    cfe: >-
+      0 if raw_cfe_request <= service_shortfall_tolerance, else
+      raw_cfe_request
+    raw_requests_retained_for_audit: true
+  service_constraints:
+    network_active: x_grid_greater_than_or_equal_to_effective_grid_request
+    network_inactive: x_grid_equal_to_zero
+    cfe_active: x_cfe_equal_to_effective_cfe_request
+    cfe_inactive: x_cfe_equal_to_zero
+    service_shortfall_variable_present: false
+    excess_cfe_service_allowed: false
+    excess_grid_service_allowed: true
+  track_call_mapping:
+    shared: q_equals_x_grid_plus_x_cfe
+    grid: q_equals_x_grid
+    cfe: q_equals_x_cfe
+  physical_caps:
+    every_arm_connected_demand: x_grid_plus_x_cfe_less_than_or_equal_to_connected_demand
+    shared_arm_available_flexibility: x_grid_plus_x_cfe_less_than_or_equal_to_available_flexibility
+    B6_grid_available_flexibility: x_grid_less_than_or_equal_to_available_flexibility
+    B6_cfe_available_flexibility: x_cfe_less_than_or_equal_to_available_flexibility
+    B6_connected_demand_cap_scope: curtailment_calls_only_not_recovery_or_net_load
+    recovery_is_separate_rebound_limit: true
+  capacity_and_activity_constraints:
+    capacity: q_less_than_or_equal_to_D
+    capacity_domain: 0_less_than_or_equal_to_D_less_than_or_equal_to_1
+    inactive_upper: q_less_than_or_equal_to_on
+    active_lower: q_greater_than_or_equal_to_minimum_event_power_times_on
+    activity_tolerance: 1.0e-6
+  initial_state:
+    q_before_hour_0: 0.0
+    on_before_hour_0: 0
+    active_duration_before_hour_0: 0.0
+    interevent_rest_before_hour_0: null
+    event_count_before_hour_0: 0
+    cumulative_energy_before_hour_0: 0.0
+    debt_before_hour_0: 0.0
+  event_constraints:
+    start_lower: start_t_greater_than_or_equal_to_on_t_minus_on_previous
+    start_upper_current: start_t_less_than_or_equal_to_on_t
+    start_upper_previous: start_t_less_than_or_equal_to_1_minus_on_previous
+    stop_lower: stop_t_greater_than_or_equal_to_on_previous_minus_on_t
+    stop_upper_previous: stop_t_less_than_or_equal_to_on_previous
+    stop_upper_current: stop_t_less_than_or_equal_to_1_minus_on_t
+    maximum_duration: every_window_of_W_plus_1_hours_has_sum_on_less_than_or_equal_to_W
+    W_expression: floor(maximum_event_duration_hours/time_step_hours+1e-6)
+    minimum_rest: >-
+      for each stop hour t, on_u + stop_t <= 1 for
+      u=t,...,min(t+R-1,23)
+    R_expression: ceil(minimum_recovery_hours/time_step_hours-1e-6)
+    maximum_events: sum_start_over_block_less_than_or_equal_to_maximum_event_count
+  ramp_constraints:
+    direction: upward_only
+    hourly: q_t_minus_q_previous_less_than_or_equal_to_curtailment_ramp_per_hour_times_time_step_hours
+    response: q_t_minus_q_previous_less_than_or_equal_to_curtailment_ramp_per_hour_times_response_time_hours
+  energy_and_recovery_constraints:
+    energy: sum_q_times_time_step_hours_less_than_or_equal_to_normalized_energy_budget
+    recovery_power: recovery_less_than_or_equal_to_normalized_recovery_headroom
+    recovery_headroom: recovery_less_than_or_equal_to_registered_track_headroom
+    inactive_recovery: recovery_less_than_or_equal_to_normalized_recovery_headroom_times_1_minus_on
+    debt_recurrence: debt_t_equals_debt_previous_plus_q_t_times_dt_minus_recovery_efficiency_times_recovery_t_times_dt
+    debt_bounds: 0_less_than_or_equal_to_debt_t_less_than_or_equal_to_normalized_debt_limit
+  terminal_constraints:
+    terminal_on: on_at_hour_23_equals_zero
+    terminal_debt: debt_at_hour_23_less_than_or_equal_to_zero
+  B6_simultaneous_track_semantics:
+    one_track_may_recover_while_other_track_calls: true
+    recovery_caps_applied_to_each_track_independently: true
+    connected_demand_does_not_sum_recovery: true
+    interpretation: separate_temporal_accounting_counterfactual
+
+registered_design:
+  primary_factorial:
+    factors:
+      hourly_cfe_target: [0.50, 0.70, 0.85, 1.00]
+      flexible_fraction: [0.05, 0.20, 0.50]
+      normalized_recovery_headroom: [0.00, 0.10, 0.30]
+    exact_cell_count: 36
+  secondary_oat:
+    anchor:
+      hourly_cfe_target: 0.85
+      flexible_fraction: 0.20
+      normalized_recovery_headroom: 0.10
+      recovery_efficiency: 0.85
+      maximum_event_duration_hours: 4
+      maximum_event_count: 2
+      normalized_energy_budget: 0.40
+      normalized_debt_limit: 0.20
+    varied_dimensions:
+      - recovery_efficiency
+      - maximum_event_duration_hours
+      - maximum_event_count
+      - normalized_energy_budget
+      - normalized_debt_limit
+    non_anchor_levels_per_dimension: 2
+    exact_added_cell_count: 10
+  exact_unique_cell_count: 46
+  duplicate_parameter_tuples_forbidden: true
+  duplicate_cell_ids_forbidden: true
+  selective_reporting_forbidden: true
+  parameter_level_probability_assumed: false
+
+representative_selection:
+  input_split: training_only
+  power_input_rows: finite_grid_need_only
+  finite_power_probabilities_renormalized_before_selection: true
+  representative_counts:
+    power: 8
+    workload: 8
+  power_score_expression: max_t(grid_need_t + raw_cfe_call_t_at_alpha_1)
+  workload_score_expression: max_t(workload_occupancy_t)
+  ordering: ascending_score_then_unsigned_UTF8_block_id_bytes
+  quantile_targets: [0.0625, 0.1875, 0.3125, 0.4375, 0.5625, 0.6875, 0.8125, 0.9375]
+  quantile_selection_rule: >-
+    For each target in ascending order, choose the first ordered block whose
+    cumulative normalized probability is greater than or equal to the target.
+  duplicate_quantile_rule: >-
+    Keep the first occurrence of each selected ID, then append unselected IDs
+    in the same canonical order until eight unique IDs are present.
+  mass_reassignment_rule: >-
+    Assign each source block to the selected representative minimizing
+    absolute score distance; break ties by unsigned UTF-8 block-ID bytes.
+  representative_probability_rule: sum_assigned_source_probabilities
+  selected_ids_frozen_once_for_all_46_cells: true
+  holdout_outcomes_used: false
+
+zero_recovery_structural_precheck:
+  scope: every_arm_track_cell_over_full_evaluable_training_cartesian_support
+  execution_order: before_any_capacity_solver_call_for_the_arm_cell
+  tolerance: 1.0e-12
+  track_required_call:
+    network_only_shared:
+      shared: effective_grid_call
+    cfe_only_shared:
+      shared: effective_cfe_call
+    joint_correct_shared:
+      shared: effective_grid_call_plus_effective_cfe_call
+    joint_b6_separate_planning_shared_execution:
+      grid: effective_grid_call
+      cfe: effective_cfe_call
+  eligible_recovery_power_expression: >-
+    First map each raw required call to zero when it is less than or equal to
+    service_shortfall_tolerance. Then use
+    min(normalized_recovery_headroom, registered_track_headroom_t) only when
+    effective_required_call_t = 0, else 0.
+  terminal_debt_lower_bound_expression: >-
+    initial_recovery_debt + sum_t(effective_required_call_t*time_step_hours) -
+    recovery_efficiency*sum_t(eligible_recovery_power_t*time_step_hours)
+  trigger_for_one_pair_track: >-
+    terminal_debt_lower_bound >
+    terminal_recovery_debt_limit + tolerance
+  arm_cell_trigger: any_full_support_pair_track_triggers
+  status: structural_recovery_infeasible_estimand_undefined
+  solver_call_when_triggered: false
+  numeric_capacity_imputation: false
+  holdout_execution_when_triggered: false
+  capacity_contrast_when_any_required_arm_undefined: false
+  alpha_1_role: sufficient_input_route_not_exclusive_scope
+  required_witness_fields:
+    - cell_id
+    - arm_id
+    - track_id
+    - power_block_id
+    - workload_block_id
+    - total_required_call_energy
+    - eligible_recovery_power_by_hour
+    - maximum_eligible_recovery_energy
+    - recovery_efficiency
+    - initial_recovery_debt
+    - terminal_recovery_debt_limit
+    - terminal_debt_lower_bound
+    - tolerance
+    - debt_balance_identity
+
+planning_contract:
+  objective: minimum_normalized_flexibility_for_zero_service_shortfall
+  capacity_domain: [0.0, 1.0]
+  representative_candidate_uses_frozen_representatives: true
+  full_evaluable_training_cartesian_support_audit: required
+  full_support_audit_uses_same_arm_track_semantics: true
+  capacity_increase_after_full_support_failure: false
+  representative_reselection_after_full_support_failure: false
+  statuses:
+    resolved: certified_interval_and_full_support_pass
+    structural_recovery_infeasible_estimand_undefined: analytic_precheck_witness
+    training_support_failure_estimand_undefined: representative_candidate_fails_full_support
+    proven_infeasible_at_registered_cap_estimand_undefined: solver_certificate_at_cap
+    unresolved: timeout_missing_incumbent_missing_bound_or_failed_numeric_audit
+  undefined_status_numeric_imputation: false
+
+solver_contract:
+  name: gurobi
+  expected_package_version: 13.0.2
+  threads: 4
+  mip_relative_gap: 1.0e-6
+  feasibility_tolerance: 1.0e-6
+  optimality_tolerance: 1.0e-6
+  integer_feasibility_tolerance: 1.0e-6
+  random_seed: 0
+  time_limit_seconds: null
+  tee: false
+  required_certificate_fields:
+    - incumbent_capacity
+    - objective_lower_bound
+    - objective_upper_bound
+    - absolute_gap
+    - incumbent_relative_gap
+    - maximum_constraint_residual
+    - termination_condition
+    - solver_status
+    - model_variables
+    - model_constraints
+    - solver_name
+    - solver_version
+    - solver_options
+
+capacity_estimands:
+  arm_symbols:
+    network_only_shared: D_N
+    cfe_only_shared: D_C
+    joint_correct_shared: D_J
+    joint_b6_separate_planning_shared_execution: D_B
+  arm_certified_interval: D_a in [L_a, U_a]
+  lower_endpoint: valid_solver_objective_lower_bound
+  upper_endpoint: audited_full_support_feasible_incumbent_capacity
+  reported_point: U_a
+  limiting_single_service:
+    point: max(D_N, D_C)
+    interval: "[max(L_N,L_C), max(U_N,U_C)]"
+  contrasts:
+    I_joint:
+      point: D_J - max(D_N, D_C)
+      interval: "[L_J-max(U_N,U_C), U_J-max(L_N,L_C)]"
+    I_sep:
+      point: D_B - max(D_N, D_C)
+      interval: "[L_B-max(U_N,U_C), U_B-max(L_N,L_C)]"
+    A_B6:
+      point: D_J - D_B
+      interval: "[L_J-U_B, U_J-L_B]"
+  point_decomposition:
+    expression: I_joint == I_sep + A_B6
+    tolerance: 1.0e-6
+  sign_classification:
+    robust_positive: interval_lower_greater_than_1e-6
+    robust_negative: interval_upper_less_than_negative_1e-6
+    certified_near_zero: interval_subset_of_closed_negative_1e-6_positive_1e-6
+    numerically_indeterminate: all_other_resolved_intervals
+  point_sign_used_for_label_or_claim: false
+
+frontier_outputs:
+  x: registered_hourly_cfe_target
+  y:
+    - D_N
+    - D_C
+    - D_B
+    - D_J
+  strata:
+    - flexible_fraction
+    - normalized_recovery_headroom
+  target_statuses:
+    - resolved
+    - structural_recovery_infeasible_estimand_undefined
+    - training_support_failure_estimand_undefined
+    - proven_infeasible_at_registered_cap_estimand_undefined
+    - unresolved
+  resolved_point_requires_all_four_arms_resolved: true
+  first_registered_robust_positive_joint_interaction: >-
+    minimum registered alpha with certified I_joint interval lower > 1e-6
+  first_registered_robust_negative_joint_interaction: >-
+    minimum registered alpha with certified I_joint interval upper < -1e-6
+  no_supported_crossing_value: no_interval_supported_crossing_on_registered_grid
+  interpolation: false
+  highest_registered_deliverable_target: >-
+    maximum registered alpha with resolved D_J and U_J <= 1
+  structural_status_is_numeric_frontier_point: false
+  target_monotonicity_assumed: false
+  inversion_requires_trajectory_binding_and_certificate_witness: true
+
+attribution_contract:
+  type: nonexclusive_interval_supported_bottleneck_vector
+  evaluation_order:
+    - status_based_single_service_labels
+    - signed_capacity_labels_if_all_four_arms_resolved
+    - operational_labels_if_holdout_and_transport_resolved
+  status_based_single_service_labels_require_all_four_resolved: false
+  signed_capacity_labels_require_all_four_resolved: true
+  operational_labels_require_holdout_and_transport_resolved: true
+  unavailable_label_value: not_evaluable
+  labels:
+    network_single_service_binding:
+      condition: >-
+        D_N has structural_recovery_infeasible_estimand_undefined or
+        proven_infeasible_at_registered_cap_estimand_undefined status; or D_N
+        is resolved and the network-only service-risk transport lower bound is
+        greater than 1e-6.
+      requires_other_arms_resolved: false
+    cfe_single_service_binding:
+      condition: >-
+        D_C has structural_recovery_infeasible_estimand_undefined or
+        proven_infeasible_at_registered_cap_estimand_undefined status; or D_C
+        is resolved and the CFE-only service-risk transport lower bound is
+        greater than 1e-6.
+      requires_other_arms_resolved: false
+    joint_extra_requirement:
+      condition: certified_I_joint_interval_is_robust_positive
+      requires_all_four_arms_resolved: true
+    joint_portfolio_relief:
+      condition: certified_I_joint_interval_is_robust_negative
+      requires_all_four_arms_resolved: true
+    joint_interaction_near_zero:
+      condition: certified_I_joint_interval_is_certified_near_zero
+      requires_all_four_arms_resolved: true
+    joint_interaction_indeterminate:
+      condition: certified_I_joint_interval_is_numerically_indeterminate
+      requires_all_four_arms_resolved: true
+    b6_capacity_underprovisioning:
+      condition: certified_A_B6_interval_is_robust_positive
+      requires_all_four_arms_resolved: true
+    b6_capacity_overprovisioning:
+      condition: certified_A_B6_interval_is_robust_negative
+      requires_all_four_arms_resolved: true
+    b6_capacity_near_zero:
+      condition: certified_A_B6_interval_is_certified_near_zero
+      requires_all_four_arms_resolved: true
+    b6_capacity_indeterminate:
+      condition: certified_A_B6_interval_is_numerically_indeterminate
+      requires_all_four_arms_resolved: true
+    b6_operational_penalty:
+      condition: >-
+        at least one registered B6-minus-correct service metric has transport
+        lower bound greater than 1e-6 under one common coupling witness.
+      requires_holdout_and_transport_resolved: true
+    b6_operational_relief:
+      condition: >-
+        at least one registered B6-minus-correct service metric has transport
+        upper bound less than -1e-6 under one common coupling witness.
+      requires_holdout_and_transport_resolved: true
+  truth_table:
+    D_N_structural_or_cap_infeasible:
+      network_single_service_binding: true
+      signed_capacity_labels: not_evaluable
+      operational_labels: not_evaluable
+    D_C_structural_or_cap_infeasible:
+      cfe_single_service_binding: true
+      signed_capacity_labels: not_evaluable
+      operational_labels: not_evaluable
+    any_arm_unresolved_or_training_support_failure:
+      affected_arm_status_label: not_evaluable
+      structural_or_cap_infeasible_labels_for_other_arms: evaluate
+      signed_capacity_labels: not_evaluable
+      operational_labels: not_evaluable
+    all_four_resolved_holdout_not_resolved:
+      status_based_single_service_labels: not_evaluable
+      signed_capacity_labels: evaluate_from_certified_intervals
+      operational_labels: not_evaluable
+    all_four_resolved_holdout_and_transport_resolved:
+      status_based_single_service_labels: evaluate
+      signed_capacity_labels: evaluate_from_certified_intervals
+      operational_labels: evaluate_from_transport_and_common_pi
+  one_label_suppresses_another: false
+  exclusive_region_frequency_is_population_probability: false
+  structural_status_does_not_create_signed_capacity_label: true
+
+holdout_policy:
+  eligible_cell: all_four_arms_resolved_and_full_training_support_passed
+  capacity_reoptimization: false
+  representative_reselection: false
+  future_calls_or_states_used: false
+  request_preprocessing:
+    grid: >-
+      0 if current_grid_request <= service_shortfall_tolerance, else
+      current_grid_request
+    cfe: >-
+      0 if current_cfe_request <= service_shortfall_tolerance, else
+      current_cfe_request
+    raw_requests_retained_for_audit: true
+  state_observed_at_hour_start:
+    - previous_total_call
+    - previous_active
+    - active_event_duration
+    - event_count
+    - interevent_rest
+    - cumulative_call_energy
+    - recovery_debt
+    - current_grid_request
+    - current_cfe_request
+    - current_available_flexibility
+    - current_connected_demand
+    - current_recovery_headroom
+  per_hour_lexicographic_action:
+    - maximize_grid_served_over_current_shared_feasible_action_set
+    - fix_grid_served_then_maximize_cfe_served_over_remaining_current_set
+    - if_inactive_maximize_recovery_over_remaining_current_set
+  current_shared_feasible_action_set_includes:
+    - committed_capacity
+    - available_flexibility
+    - connected_demand
+    - response_and_ramp
+    - minimum_event_power
+    - maximum_event_duration
+    - maximum_event_count
+    - minimum_recovery_hours
+    - cumulative_energy_budget
+    - maximum_recovery_debt
+    - current_recovery_headroom
+    - terminal_inactivity_when_hour_offset_is_23
+  action_variables:
+    grid_served: closed_interval_0_current_grid_request
+    cfe_served: closed_interval_0_current_cfe_request
+    recovery: nonnegative
+    total_call: grid_served_plus_cfe_served
+  activity_rule:
+    tolerance: 1.0e-6
+    active: total_call_greater_than_or_equal_to_minimum_event_power
+    inactive: total_call_equal_to_zero
+    active_minimum_power: total_call_greater_than_or_equal_to_minimum_event_power
+  initial_state:
+    previous_total_call: 0.0
+    previous_active: false
+    active_event_duration: 0.0
+    event_count: 0
+    interevent_rest: null
+    cumulative_call_energy: 0.0
+    recovery_debt: 0.0
+    has_prior_event: false
+  action_constraints:
+    call_limit: >-
+      total_call <= min(committed_capacity, current_available_flexibility,
+      current_connected_demand)
+    upward_hourly_ramp: >-
+      total_call - previous_total_call <=
+      curtailment_ramp_per_hour*time_step_hours
+    upward_response_ramp: >-
+      total_call - previous_total_call <=
+      curtailment_ramp_per_hour*response_time_hours
+    downward_ramp_constrained: false
+    event_start: active and not previous_active
+    start_requires_rest: >-
+      no_prior_event or interevent_rest >= minimum_recovery_hours
+    event_count_limit: event_count_plus_event_start <= maximum_event_count
+    active_duration_update: >-
+      previous_active ? active_event_duration+time_step_hours : time_step_hours
+    active_duration_limit: updated_active_duration <= maximum_event_duration_hours
+    energy_limit: >-
+      cumulative_call_energy+total_call*time_step_hours <=
+      normalized_energy_budget
+    debt_before_recovery: recovery_debt+total_call*time_step_hours
+    recovery_when_active: 0.0
+    recovery_when_inactive: >-
+      0 <= recovery <= min(normalized_recovery_headroom,
+      current_recovery_headroom,
+      debt_before_recovery/(recovery_efficiency*time_step_hours))
+    debt_after_recovery: >-
+      debt_before_recovery -
+      recovery_efficiency*recovery*time_step_hours
+    debt_limit: debt_after_recovery <= normalized_debt_limit
+    terminal_hour_23: >-
+      total_call = 0; debt_after_recovery above
+      terminal_recovery_debt_limit is recorded as recovery_completion_failure
+      rather than making the current action set empty
+  scalar_action_uniqueness: >-
+    grid_served, cfe_served, and recovery are fixed by the three ordered
+    scalar optima; all state updates are deterministic functions of them.
+  state_transition_order:
+    - determine_served_grid_and_cfe
+    - derive_active_start_and_stop
+    - compute_debt_before_recovery
+    - choose_recovery_if_inactive
+    - compute_debt_after_recovery
+    - update_duration_event_count_rest_energy_and_prior_event
+  state_transition_equations:
+    previous_total_call_next: total_call
+    previous_active_next: active
+    active_event_duration_next: >-
+      active ? (previous_active ?
+      active_event_duration+time_step_hours : time_step_hours) : 0
+    event_count_next: event_count+integer(event_start)
+    interevent_rest_next: >-
+      active ? null : (previous_active ? time_step_hours :
+      (has_prior_event ? interevent_rest+time_step_hours : null))
+    cumulative_call_energy_next: >-
+      cumulative_call_energy+total_call*time_step_hours
+    recovery_debt_next: debt_after_recovery
+    has_prior_event_next: has_prior_event or event_start
+  deterministic_probe:
+    committed_capacity: 0.50
+    grid_request: [0.30, 0.00, 0.20, 0.00, 0.00]
+    cfe_request: [0.30, 0.00, 0.30, 0.00, 0.00]
+    available_flexibility: [0.50, 0.50, 0.50, 0.50, 0.50]
+    connected_demand: [1.00, 1.00, 1.00, 1.00, 1.00]
+    current_recovery_headroom: [0.50, 0.50, 0.50, 0.50, 0.50]
+    maximum_recovery_power: 0.50
+    recovery_efficiency: 0.85
+    maximum_event_duration_hours: 2.0
+    maximum_event_count: 2
+    minimum_recovery_hours: 1.0
+    normalized_energy_budget: 1.0
+    normalized_debt_limit: 1.0
+    canonical_trajectory_payload_sha256: 3a6f2cf0169d238f884ebd26bbf1d383c3c444923831610a39216e684a18c453
+  joint_policy_capacities:
+    correct: D_J
+    b6: D_B
+  joint_policy_execution_recovery: cfe_service_recovery_headroom
+  diagnostic_single_policy_execution_recovery:
+    network_only: business_recovery_headroom
+    cfe_only: cfe_service_recovery_headroom
+  metric_definitions:
+    grid_shortfall: >-
+      sum_t(max(effective_grid_request-grid_served,0))*time_step_hours
+    cfe_shortfall: >-
+      sum_t(max(effective_cfe_request-cfe_served,0))*time_step_hours
+    total_service_shortfall: grid_shortfall+cfe_shortfall
+    hard_grid_failure: grid_shortfall_greater_than_1e-6
+    cfe_service_failure: cfe_shortfall_greater_than_1e-6
+    recovery_completion_failure: terminal_recovery_debt_greater_than_1e-6
+    joint_service_failure: >-
+      hard_grid_failure or cfe_service_failure or recovery_completion_failure
+  incomplete_or_right_censored_block_metrics: undefined
+  descriptive_state_metrics:
+    - peak_recovery_debt
+    - terminal_recovery_debt
+  primary_operational_contrasts:
+    - B6_minus_correct_joint_service_failure_probability
+    - B6_minus_correct_expected_total_service_shortfall
+    - B6_minus_correct_expected_cfe_shortfall
+
+holdout_identification:
+  E0:
+    state: exogenous_grid_infeasibility
+    block_state_source: input_schema_contract.power_block_rules.block_state_lifting
+    mass_expression: >-
+      sum original power marginal probability once per unique block_id whose
+      lifted block state is exogenous_grid_infeasibility
+    reported_unconditionally_once: true
+    pairwise_service_metrics_defined: false
+    excluded_from_finite_service_numerator: true
+    excluded_from_finite_service_denominator: true
+  finite_conditioning:
+    support: finite_grid_need_power_rows_cross_all_workload_holdout_rows
+    power_probability_expression: original_power_probability/(1-E0_mass)
+    workload_probability_expression: original_workload_probability
+  empty_finite_support:
+    condition: E0_mass_greater_than_or_equal_to_1_minus_1e-9
+    status: finite_service_identification_unresolved
+    transport_solver_called: false
+    common_pi_solver_called: false
+    pairwise_service_metrics_defined: false
+    E0_mass_still_reported_unconditionally: true
+  transport:
+    ambiguity_set: >-
+      all nonnegative finite matrices pi with row sums equal to conditioned
+      finite power probabilities and column sums equal to workload probabilities
+    software:
+      python: 3.11.15
+      numpy: 1.26.4
+      scipy: 1.17.0
+      scipy_bundled_highs: 1.8.0
+    scalar_endpoint_solver:
+      api: scipy.optimize.linprog
+      method: highs-ds
+      options:
+        presolve: true
+        dual_feasibility_tolerance: 1.0e-9
+        primal_feasibility_tolerance: 1.0e-9
+      environment:
+        OMP_NUM_THREADS: "1"
+    canonical_order:
+      power_rows: ascending_unsigned_UTF8_block_id_bytes
+      workload_columns: ascending_unsigned_UTF8_block_id_bytes
+      variables: row_major_pi_i_j
+      equality_rows:
+        - all_power_row_sums_in_canonical_order
+        - workload_column_sums_except_last_in_canonical_order
+      omitted_redundant_equality: final_workload_column_sum
+    scalar_primal:
+      lower_objective: minimize_sum_metric_i_j_times_pi_i_j
+      upper_objective: minimize_sum_negative_metric_i_j_times_pi_i_j
+      bounds: pi_i_j_in_closed_0_infinity
+    scalar_dual:
+      equality_multipliers: free
+      feasibility_for_minimum: A_eq_transpose_y_less_than_or_equal_to_metric_vector
+      objective_for_minimum: maximize_b_eq_transpose_y
+      upper_endpoint_uses_negative_metric_then_negates_objective: true
+    scalar_endpoints:
+      - minimum_over_transport_polytope
+      - maximum_over_transport_polytope
+    certificate_requirements:
+      - primal_feasible_attaining_coupling
+      - dual_feasible_solution
+      - primal_dual_gap_not_greater_than_1e-8
+      - marginal_residual_not_greater_than_1e-8
+    multimetric_sign_statement_requires_one_common_pi_witness: true
+    common_pi_problem:
+      predicate_order: registered_metric_order_then_predicate_order
+      predicate_forms:
+        robust_positive: negative_metric_dot_pi_less_than_or_equal_to_negative_1e-6
+        robust_negative: metric_dot_pi_less_than_or_equal_to_negative_1e-6
+        nonpositive: metric_dot_pi_less_than_or_equal_to_1e-6
+      phase_one_variable: z_nonnegative
+      phase_one_constraint: each_predicate_left_side_minus_z_less_than_or_equal_to_rhs
+      phase_one_objective: minimize_z
+      compatible: >-
+        valid primal feasible witness with phase_one_optimum less than or
+        equal to 1e-8 and all certificate residuals at most 1e-8
+      certified_incompatible: >-
+        valid dual feasible lower bound on phase_one_optimum greater than
+        1e-8
+      otherwise: unresolved
+      certificate_requirements:
+        - primal_feasible_solution
+        - dual_feasible_solution
+        - primal_dual_gap_not_greater_than_1e-8
+        - marginal_residual_not_greater_than_1e-8
+        - predicate_residual_not_greater_than_1e-8
+        - dual_lower_bound_serialized
+    common_pi_registered_statements:
+      b6_operational_penalty:
+        logic: any_single_branch_compatible
+        branches:
+          - branch_id: b6_joint_service_failure_positive
+            predicates:
+              - metric: B6_minus_correct_joint_service_failure
+                form: robust_positive
+          - branch_id: b6_total_service_shortfall_positive
+            predicates:
+              - metric: B6_minus_correct_total_service_shortfall
+                form: robust_positive
+          - branch_id: b6_cfe_shortfall_positive
+            predicates:
+              - metric: B6_minus_correct_cfe_shortfall
+                form: robust_positive
+      b6_operational_relief:
+        logic: any_single_branch_compatible
+        branches:
+          - branch_id: b6_joint_service_failure_negative
+            predicates:
+              - metric: B6_minus_correct_joint_service_failure
+                form: robust_negative
+          - branch_id: b6_total_service_shortfall_negative
+            predicates:
+              - metric: B6_minus_correct_total_service_shortfall
+                form: robust_negative
+          - branch_id: b6_cfe_shortfall_negative
+            predicates:
+              - metric: B6_minus_correct_cfe_shortfall
+                form: robust_negative
+    registered_metric_order:
+      - network_only_joint_service_failure
+      - network_only_hard_grid_failure
+      - network_only_cfe_service_failure
+      - network_only_total_service_shortfall
+      - network_only_cfe_shortfall
+      - cfe_only_joint_service_failure
+      - cfe_only_hard_grid_failure
+      - cfe_only_cfe_service_failure
+      - cfe_only_total_service_shortfall
+      - cfe_only_cfe_shortfall
+      - joint_correct_joint_service_failure
+      - joint_correct_hard_grid_failure
+      - joint_correct_cfe_service_failure
+      - joint_correct_total_service_shortfall
+      - joint_correct_cfe_shortfall
+      - joint_b6_joint_service_failure
+      - joint_b6_hard_grid_failure
+      - joint_b6_cfe_service_failure
+      - joint_b6_total_service_shortfall
+      - joint_b6_cfe_shortfall
+      - B6_minus_correct_joint_service_failure
+      - B6_minus_correct_total_service_shortfall
+      - B6_minus_correct_cfe_shortfall
+    certificate_serialization:
+      schema: rq2_joint_deliverability_transport_certificate_v3
+      mapping_key_order: lexicographic_via_json_sort_keys
+      list_order: registered_canonical_order
+      float_authority: IEEE754_binary64_hex_via_float.hex
+      JSON_options: allow_nan_false_ensure_ascii_false_compact_separators_newline
+    deterministic_probe:
+      row_probabilities: [0.4, 0.6]
+      column_probabilities: [0.5, 0.5]
+      metric_row_major: [[0.0, 1.0], [2.0, 0.0]]
+      expected_lower: 0.2
+      expected_upper: 1.4
+      analytic_lower_coupling_row_major: [0.4, 0.0, 0.1, 0.5]
+      analytic_lower_dual_equality_variables: [-2.0, 0.0, 2.0]
+      analytic_upper_coupling_row_major: [0.0, 0.4, 0.5, 0.1]
+      analytic_upper_dual_equality_variables: [-1.0, 0.0, -2.0]
+      canonical_certificate_payload_sha256: 510ef5cd1578927cf134893e8a17bf5172bc0f875cdb8c5cfb4e381b1181ce76
+
+bootstrap_contract:
+  role: empirical_marginal_sampling_sensitivity
+  software:
+    python: 3.11.15
+    numpy: 1.26.4
+  pseudorandom_generator:
+    api: numpy.random.Generator
+    bit_generator: numpy.random.PCG64DXSM
+    seed: 20260825
+    one_generator_for_complete_run: true
+    reset_between_replicates: false
+  canonical_categories:
+    order: ascending_unsigned_UTF8_block_id_bytes
+    probability_dtype: float64
+    probability_normalization: divide_each_weight_by_math_fsum_all_weights
+  replicate_count: 200
+  replicate_iteration_order: ascending_integer_0_through_199
+  random_stream_consumption_per_replicate:
+    - >-
+      Generator.choice(power_ID_array, size=530, replace=True,
+      p=normalized_original_power_probabilities)
+    - >-
+      Generator.choice(workload_ID_array, size=34, replace=True,
+      p=normalized_original_workload_probabilities)
+  duplicate_draw_rule: collapse_counts_to_count_divided_by_draw_count
+  E0_state_preserved_by_power_ID: true
+  finite_conditioning_recomputed_each_replicate: true
+  transport_endpoints_recomputed_each_replicate: true
+  endpoint_iteration_order:
+    - ascending_cell_id_unsigned_UTF8_bytes
+    - registered_metric_order
+    - lower_then_upper
+  percentile:
+    api: numpy.quantile
+    q: [0.025, 0.975]
+    axis: 0
+    method: linear
+    input_dtype: float64
+  deterministic_probe:
+    power_IDs: [p0, p1, p2, p3]
+    power_probabilities: [0.1, 0.2, 0.3, 0.4]
+    power_draw_count: 7
+    workload_IDs: [w0, w1, w2]
+    workload_probabilities: [0.2, 0.3, 0.5]
+    workload_draw_count: 5
+    replicates: 3
+    canonical_draw_payload_sha256: f2a5ed36b6bb1c263b16c5888efe6a36b6072d3caf0c98d7ad50fdfca296c9d9
+  empty_finite_support_rule: >-
+    If any replicate has zero finite power mass, every bootstrap endpoint and
+    confidence interval for every cell and metric is unresolved.
+  bootstrap_replication_claimed: false
+
+decision_and_claim_rules:
+  comparison_tolerance: 1.0e-6
+  all_four_resolved_for_capacity_contrast: true
+  certified_interval_required_for_capacity_sign: true
+  structural_status_excluded_from_signed_capacity_contrast: true
+  transport_robust_positive: lower_bound_greater_than_1e-6
+  transport_robust_negative: upper_bound_less_than_negative_1e-6
+  transport_partially_identified: >-
+    lower_bound_less_than_or_equal_to_1e-6_and_upper_bound_greater_than_1e-6
+  all_registered_cells_published: true
+  negative_near_zero_indeterminate_and_undefined_results_retained: true
+  result_contingent_design_change_allowed: false
+  allowed_claims:
+    robust_positive_I_joint: >-
+      joint temporal delivery requires additional flexibility on the
+      registered benchmark.
+    robust_negative_I_joint: >-
+      joint temporal delivery exhibits portfolio relief on the registered
+      benchmark with trajectory and binding-constraint witness.
+    robust_positive_A_B6: >-
+      separate temporal accounting underprovides flexibility relative to
+      correct joint planning on the registered benchmark.
+    robust_negative_A_B6: >-
+      separate temporal accounting is conservative relative to correct joint
+      planning on the registered benchmark with trajectory witness.
+    structural_recovery_boundary: >-
+      the registered accounting and boundary conditions produce a structural
+      recovery limit for the identified arm-track-pair.
+    positive_holdout_B6_contrast: >-
+      the frozen separately-accounted policy has higher conditional benchmark
+      service risk under the certified transport statement.
+  forbidden_claims:
+    - real_contract_overlap_or_incidence
+    - empirical_joint_distribution
+    - population_failure_probability
+    - interconnection_capacity_X_overstatement
+    - absolute_Alibaba_MW
+    - empirical_outage_probability
+    - cross_day_recovery_certification
+    - full_N_minus_1_security
+    - AC_security
+    - engineering_or_security_certification
+
+implementation_requirements:
+  versioned_successor_required: true
+  implementation_path: null
+  runner_path: null
+  output_path: null
+  exact_46_cell_inventory_required: true
+  arm_track_recovery_builder_required: true
+  global_zero_recovery_precheck_required: true
+  network_only_alpha_invariance_required: true
+  capacity_interval_propagation_required: true
+  interval_supported_attribution_required: true
+  exact_representative_selection_required: true
+  current_state_policy_transition_audit_required: true
+  channel_separated_shortfall_required: true
+  E0_and_finite_denominator_audit_required: true
+  common_pi_witness_required: true
+  exact_bootstrap_reproduction_required: true
+  required_output_schemas:
+    - rq2_joint_deliverability_capacity_frontier_v3
+    - rq2_joint_deliverability_holdout_v3
+    - rq2_joint_deliverability_identification_v3
+    - rq2_joint_deliverability_report_v3
+  exact_recursive_manifest_required: true
+  provenance_binds_config_code_inputs_and_software: true

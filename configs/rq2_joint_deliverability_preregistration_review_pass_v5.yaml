@@ -1,0 +1,45 @@
+schema: rq2_joint_deliverability_preregistration_review_pass_v5
+reviewed_on: "2026-09-05"
+review_scope: rq2_joint_deliverability_preregistration_successor_v5_exact_outer
+reviewer_role: independent_sol_reviewer
+reviewer_model: gpt-5.6-sol
+verdict: PASS
+
+reviewed_subject:
+  outer_path: configs/rq2_joint_deliverability_preregistration_successor_v5.OUTER.SHA256SUMS.json
+  outer_sha256: 92a58498e1de5f84b132067e3d4a4443ae841747846785e9df54cd9afd7efdfd
+  inner_sha256: 84847114b6cd66925326f541f2ecfbd0ad825ca0591d09894c51c2db2ac1162f
+  sealed_member_count: 5
+
+review_conclusion:
+  blocker_findings: []
+  major_findings: []
+  minor_findings: []
+  v4_operational_attribution_quantifier_finding_closed: true
+  operational_quantifier_order: exists_registered_metric_then_for_all_admissible_pi
+  existential_common_pi_witness_used_for_label_or_claim: false
+
+verification_evidence:
+  recursive_hash_validation: passed
+  semantic_payload_sha256: 31be646a725f9aef7498fd57b140b404828bfba4afa9c98912c20346aae4b8e4
+  focused_tests: 36
+  focused_tests_passed: 36
+  related_regression_tests: 111
+  related_regression_tests_passed: 111
+  ruff_static_check_passed: true
+  ruff_format_check_passed: true
+  validator_output_repetition_count: 3
+  validator_output_repeated_sha256: ed8a012b95c1a5c3bd445dfbe038554937d01252742cabcf65de94844ae8548f
+  solver_calls: 0
+  result_files_written: 0
+
+effect:
+  v5_bytes_immutable: true
+  independent_v5_R4_review_passed: true
+  independent_review_gate_closed: true
+  implementation_authorized: false
+  solver_execution_authorized: false
+  formal_execution_authorized: false
+  formal_result_exists: false
+  paper_claim: false
+  security_certified: false

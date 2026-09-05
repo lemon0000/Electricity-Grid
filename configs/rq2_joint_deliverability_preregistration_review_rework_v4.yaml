@@ -1,0 +1,61 @@
+schema: rq2_joint_deliverability_preregistration_review_rework_v4
+reviewed_on: "2026-09-05"
+review_scope: rq2_joint_deliverability_preregistration_successor_v4_exact_outer
+reviewer_role: independent_sol_reviewer
+reviewer_model: gpt-5.6-sol
+verdict: REWORK
+
+reviewed_subject:
+  outer_path: configs/rq2_joint_deliverability_preregistration_successor_v4.OUTER.SHA256SUMS.json
+  outer_sha256: 101fc1bc071b06779ee779beb1bb7b5f61640af8fa4b8ccb7f44b7c019710a3e
+  inner_sha256: 830507026508d051592861c9010142d1cf8a9823638fbb71b0066dba594653c5
+  sealed_member_count: 5
+
+findings:
+  - id: operational_attribution_quantifier_conflict
+    severity: major
+    evidence:
+      - configs/rq2_joint_deliverability_preregistration_successor_v4.yaml:659-668
+      - configs/rq2_joint_deliverability_preregistration_successor_v4.yaml:923-977
+      - docs/model_spec/rq2_joint_deliverability_estimands_v3.md:344-351
+    scientific_effect: >-
+      A certified transport lower or upper endpoint is a universal statement
+      over every admissible coupling, whereas compatibility of a common-pi
+      phase-I branch is an existential statement about at least one coupling.
+      The sealed operational labels combine these incompatible quantifiers, so
+      a coupling-compatible sign can be reported as a transport-robust
+      operational attribution even when the scalar robust endpoint crosses
+      zero.
+    required_successor_fix: >-
+      Freeze one explicit quantifier order for each operational label. For a
+      robust label, require at least one registered metric whose certified
+      scalar lower bound exceeds 1e-6 for penalty or whose certified scalar
+      upper bound is below -1e-6 for relief, and do not use existential
+      common-pi compatibility as evidence for that label. Add adversarial
+      tests that distinguish robust endpoint certification from existence of
+      a favorable coupling.
+
+review_evidence:
+  recursive_hash_validation: passed
+  validator_passed: true
+  focused_tests: 35
+  focused_tests_passed: 35
+  related_regression_tests: 75
+  related_regression_tests_passed: 75
+  validator_output_repetition_count: 3
+  validator_output_repeated_sha256: 27b46f0d8f25f6eed03223af5dd9a672736921ca1f95535ba80589b39c536ff5
+  ruff_static_check_passed: true
+  ruff_format_check_passed: false
+  formatter_only_difference_blocks_verdict: false
+  solver_calls: 0
+  result_files_written: 0
+
+effect:
+  v4_bytes_immutable: true
+  independent_v4_R4_review_passed: false
+  one_focused_versioned_successor_allowed: true
+  implementation_authorized: false
+  solver_execution_authorized: false
+  formal_result_exists: false
+  paper_claim: false
+  security_certified: false

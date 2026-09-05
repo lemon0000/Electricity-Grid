@@ -30,7 +30,7 @@
 | RQ2 HiGHS同进程thread scheduler隔离 | mitigated for V8 two-block route; formal activation blocked | 同进程污染不再用于当前执行路径；V8对每个block使用fresh process，并记录actual HiGHS 1.15.1/4 threads、PID/create-time、solver-call accounting和完整resource journal。该证据覆盖固定两块，不自动证明1071-block formal controller | future formal successor必须保持per-block process isolation并由独立review验证完整生命周期；不得回退到同进程连续求解或把资源停止解释为不可行 |
 | RQ2 Vnext two-block pilot post-result evidence | V8 nonformal `committed_success`; post-result `PASS` | v8唯一一次fixed `0008 -> 0009` run已发布result/PUBLISHED exact trees；public-only readback、fresh PID/predecessor、HiGHS runtime、resource journals和无seed tombstone均通过。独立post-result receipt SHA-256为`28e546b8f5f3bc8c8402c86ec723ec9e35da041ba74676c9adb59cd338980ca6` | 该PASS只关闭two-block evidence门，不形成formal result、论文claim或security certification。formal activation V4已`ESCALATE`，当前无可执行candidate |
 | RQ2四臂归因v1前序 | superseded for primary attribution; implementation-only | 四臂core、checkpoint/external-preflight与旧互斥identification/report合同已实现为validate-only；现有70-cell阴性结果和全部sealed bytes保持不变 | 旧exclusive classifier不作为联合前沿主结论authority；不得覆盖旧协议或用其启动新46-cell流程 |
-| RQ2联合服务可交付前沿 | v3 independent R4 `ESCALATE`; implementation blocked | v2首轮R4为`REWORK`；聚焦v3保留`I_joint=I_sep+A_B6`并修复纯network-only恢复、alpha=1结构端点、capacity interval及操作性合同，但复审仍发现4项Major：继承点值归因冲突、validator非fail-closed、零恢复precheck未覆盖全部cells、bootstrap随机合同不完整 | v3为historical escalated candidate，不得实现或签发PASS。只有用户明确授权新的versioned scientific successor后，才可按4项Major重构并重新进入完整R4；当前所有execution/result/claim门关闭 |
+| RQ2联合服务可交付前沿 | v5 independent R4 `PASS`; implementation not authorized | v4 exact outer因operational attribution量词冲突得到`REWORK`；v5固定为`exists metric, then for all admissible pi`，只用certified scalar transport endpoints，并以0/0/0 findings通过exact sealed outer审查 | v4/v5均保持不可变；PASS只关闭scientific preregistration review gate，不授权implementation、solver或formal run。implementation successor需用户另行授权并重新通过R3/R4门禁；所有execution/result/claim门继续关闭 |
 | 真实重大停电事件分布 | processed candidate cohorts; independent-event calibration blocked | 已冻结1534源行、1521候选组及主/敏感性队列；主持续队列1385组/1398源行，重复组保留source IDs并以非缺失max/min而非求和审计 | 候选组不证明独立物理事故，仍不得估计事故频次或无条件时长分布；无资产ID、拓扑和SCUC，不得映射为RTS具名N-1或声称与业务同钟 |
 | Google同系统工作负荷-功率配对 | resolved for one-PDU one-day normalized pairing | cell f/pdu17 day-0取得336格小时usage、1328条machine event和唯一audit；600秒偏移后形成24小时功率-NCU上下界、168行priority明细及可加载的零柔性`derived_benchmark`，全部SHA锁定 | 只解除“一PDU/一天/归一化功率/受限usage人口”和业务schema桥接缺口；不是绝对MW、完整PDU工作负荷、真实柔性或恢复证据 |
 | ENTSO-E观测资产事故 | external-blocked on security token | 匿名API实测401，当前环境无令牌；页面批量导出同样要求登录 | 用户完成免费注册和REST API令牌申请前不执行；取得后仍不得把ENTSO资产ID映射为RTS ID |
@@ -923,6 +923,43 @@ v3 sealed bytes保持不变，状态为historical escalated candidate。
 `formal_execution_ready=false`、`formal_result=false`、`paper_claim=false`。
 只有用户明确授权新的versioned scientific successor，才能继续修复；此前不得
 开发46-cell implementation、运行solver或生成结果。
+
+#### 联合服务可交付前沿v4 REWORK与v5 PASS（2026-09-05）
+
+v4以完整、自包含协议关闭v3的4项Major，inner/outer SHA-256分别为
+`830507026508d051592861c9010142d1cf8a9823638fbb71b0066dba594653c5`和
+`101fc1bc071b06779ee779beb1bb7b5f61640af8fa4b8ccb7f44b7c019710a3e`。
+独立R4 verdict为`REWORK`：v4将scalar transport endpoint的全称量词与
+common-\(\pi\) compatibility的存在量词混用于operational attribution。
+machine-readable receipt为
+`configs/rq2_joint_deliverability_preregistration_review_rework_v4.yaml`，
+SHA-256为
+`dab9573ed70689edbf64408c2b690f7016520839c706e2592cf5177ef7bad954`。
+v4字节保持不可变，未取得implementation或execution权限。
+
+聚焦v5封口后的config SHA-256为
+`19d61a2913e346090db23d01de587b650d8599999c40a78a291f627915ec2a69`，
+semantic payload SHA-256为
+`31be646a725f9aef7498fd57b140b404828bfba4afa9c98912c20346aae4b8e4`。
+v5把operational label量词唯一冻结为
+`exists_registered_metric_then_for_all_admissible_pi`：penalty只在至少一个
+metric的certified scalar lower endpoint严格大于`1e-6`时成立，relief只在至少
+一个metric的certified scalar upper endpoint严格小于`-1e-6`时成立；
+existential common-\(\pi\) witness不进入label或claim。
+四臂点值恒等式继续固定为`I_joint=I_sep+A_B6`，但所有符号标签只读取证书区间。
+
+v5 pre-seal审计发现的登记不同步已由本节和状态总表闭合；严格阈值的4个
+`nextafter`边界测试也已补齐。当前focused tests为`36 passed`，v1-v5相关回归为
+`111 passed`，Ruff check/format通过，validator报告0 solver call、0 result write。
+v5 inner/outer SHA-256分别为
+`84847114b6cd66925326f541f2ecfbd0ad825ca0591d09894c51c2db2ac1162f`和
+`92a58498e1de5f84b132067e3d4a4443ae841747846785e9df54cd9afd7efdfd`，
+状态为`SEALED_READY_FOR_INDEPENDENT_REVIEW`。全新独立reviewer对exact outer的
+official verdict为`PASS`，`Blocker/Major/Minor=0/0/0`。machine-readable receipt为
+`configs/rq2_joint_deliverability_preregistration_review_pass_v5.yaml`，SHA-256为
+`0ec073c38eac003255fa2d2753edb28f4d02e0f7756c34e185027ac23b140722`。
+该PASS只关闭scientific preregistration review gate；不授权implementation、solver或
+formal run。implementation successor和formal run均需用户另行明确授权。
 
 ### v4 grid正式attempt的运行性中断与恢复授权（2026-08-29）
 
