@@ -1,0 +1,228 @@
+{
+  "schema": "rq2_joint_deliverability_activation_successor_v2",
+  "version": 2,
+  "created_on": "2026-09-06",
+  "lifecycle": {
+    "status": "SEALED_READY_FOR_INDEPENDENT_REVIEW",
+    "sealed_on": "2026-09-06",
+    "pre_seal_audit_complete": true,
+    "sealed_ready_for_independent_review": true
+  },
+  "scope": {
+    "purpose": "fresh_process_activation_boundary_for_sealed_execution_v3",
+    "scientific_protocol_changed": false,
+    "solver_semantics_changed": false,
+    "evidence_schema_changed": false,
+    "formal_run_authorized_by_this_candidate": false,
+    "runs_solver_during_validation": false,
+    "writes_formal_results_during_validation": false
+  },
+  "predecessor_activation": {
+    "outer_path": "configs/rq2_joint_deliverability_activation_successor_v1.OUTER.SHA256SUMS.json",
+    "outer_sha256": "7672d1a6f3382e268b5ffa0b22a561e72615bb0b5dc419f0b48916652da860d4",
+    "inner_sha256": "c6c057d97b8accb268705f501d513fd3d3d2fa9b1238e9ea37d64a161d774585",
+    "sealed_member_count": 22,
+    "review_rework_path": "configs/rq2_joint_deliverability_activation_review_rework_v1.json",
+    "review_rework_sha256": "11363e30bfe497dfb1f6f8f35fbb3c44297300bdcc9fc68b2eae0a3afcd6093a",
+    "finding_id": "activation-v1-ancestor-directory-swap"
+  },
+  "execution_authority": {
+    "outer_path": "configs/rq2_joint_deliverability_execution_successor_v3.OUTER.SHA256SUMS.json",
+    "outer_sha256": "b153f0320fe9dfe961575be4836f4bcf4044836be4fa66618119fc08d4cbce80",
+    "review_path": "configs/rq2_joint_deliverability_execution_review_pass_v3.yaml",
+    "review_sha256": "1d8312e1458ce73dc76863a4b5c85f95506272ec53eaa088e523127b6ce0fa41",
+    "static_authority_sha256": "b8fc7b3471d20e3efe6ca879de27379d3768ec31c1a978d2e538f98543004187",
+    "sealed_member_count": 22,
+    "recursive_predecessors": [
+      {
+        "version": 2,
+        "outer_path": "configs/rq2_joint_deliverability_execution_successor_v2.OUTER.SHA256SUMS.json",
+        "outer_sha256": "ff70b138f61833908c84763c3a6df06ad255f6f6f26adfbf1e4051865a0e5f93",
+        "sealed_member_count": 21
+      },
+      {
+        "version": 1,
+        "outer_path": "configs/rq2_joint_deliverability_execution_successor_v1.OUTER.SHA256SUMS.json",
+        "outer_sha256": "1ec234a1279b1c5a09b2beedb66ec1dfffcda28ed4a024df44d7d47060c976d2",
+        "sealed_member_count": 19
+      }
+    ]
+  },
+  "python_closure": {
+    "policy": "stdlib_first_preimport_hash_then_verified_bytes_import",
+    "roots": [
+      "experiments/bootstrap_rq2_joint_deliverability_activation_v2.py",
+      "experiments/run_rq2_joint_deliverability_activation_v2.py",
+      "src/rq2_joint_deliverability_execution_v3/core.py",
+      "experiments/run_rq2_joint_deliverability_implementation_v2.py"
+    ],
+    "members": {
+      "experiments/bootstrap_rq2_joint_deliverability_activation_v2.py": "57da4609f63a088599e2595566d9c5ae625916cd08bc90c5cd61b476b7903510",
+      "experiments/run_rq2_joint_deliverability_activation_v2.py": "cb151341058bda0db711be85341017595286ba6c8fcbd7b250db50a041526322",
+      "experiments/__init__.py": "f67a437b3910b0400486a45167d0001163081e3b8b3f1d6166df4e3a3adf3581",
+      "experiments/run_rq2_joint_deliverability_implementation_v2.py": "1c04e552b57a073056bb698bde04def7385814f89ffe78daf5d6d5b8dc43ab4e",
+      "experiments/validate_rq2_joint_deliverability_implementation_v2.py": "c3e51a7325484fe5fdeaf0b2743d36f5575f57e242244cc4886ef0ed356d724f",
+      "src/__init__.py": "ad4caa31a8bd5d534f5c65b38b67a393b740a5efd947988f47e1b55642c4cfc0",
+      "src/rq2_joint_deliverability_execution_v3/__init__.py": "9229bfa04de7d1a433c9d9cd1e1ea40a03a47cbde7e5348acadb7f559afb62f3",
+      "src/rq2_joint_deliverability_execution_v3/core.py": "bed97366e47cc5b3d93f771844f32cfddb9932a30eeeb6b12ade53d1c531c085",
+      "src/rq2_joint_deliverability_v2/__init__.py": "fc9a545f879fe6d8d1c43c35fcb23ccd11d5ba1282d77254bbdc9c1b17e3f582",
+      "src/rq2_joint_deliverability_v2/evaluation.py": "70c515f5ad065ba28dbe5611578c20c0a9edf3a82b5720d726c4b390acf89c64",
+      "src/rq2_joint_deliverability_v2/model.py": "f79039fe018e2c581a044852b2418dd6e75d839b7f5d4a6f674cfea9fbdd6ccc",
+      "src/rq2_joint_deliverability_v2/scenarios.py": "0dcb1879c1864746770b248a1383da0b8588bbae9571f0bb4dc9eab211c597dd",
+      "src/rq2_joint_deliverability_v2/solver_adapter.py": "9de777eeb52e1b29774ce12bf4181ea280d1c7477af44c3321a89f0b837b4ad9"
+    },
+    "preimport_project_module_count": 1,
+    "postimport_probe_members": [
+      "experiments/__init__.py",
+      "experiments/bootstrap_rq2_joint_deliverability_activation_v2.py",
+      "experiments/run_rq2_joint_deliverability_activation_v2.py",
+      "src/__init__.py",
+      "src/rq2_joint_deliverability_execution_v3/__init__.py",
+      "src/rq2_joint_deliverability_execution_v3/core.py",
+      "src/rq2_joint_deliverability_v2/__init__.py",
+      "src/rq2_joint_deliverability_v2/evaluation.py",
+      "src/rq2_joint_deliverability_v2/model.py",
+      "src/rq2_joint_deliverability_v2/scenarios.py",
+      "src/rq2_joint_deliverability_v2/solver_adapter.py"
+    ],
+    "isolated_interpreter_flags": [
+      "-I",
+      "-B",
+      "-S",
+      "-X",
+      "pycache_prefix=<fresh-empty-private-directory>"
+    ],
+    "site_initialization_allowed": false,
+    "dependency_path_policy": "sysconfig_purelib_platlib_after_local_hash_verification",
+    "project_bytecode_cache_policy": "fresh_empty_private_pycache_prefix",
+    "bootstrap_launch_policy": "verified_bytes_over_stdin_to_isolated_stage0",
+    "project_source_import_policy": "verified_bytes_in_memory_source_loader",
+    "artifact_open_policy": "descriptor_or_handle_anchored_component_traversal_with_replay",
+    "caller_supplied_pythonpath_allowed": false,
+    "postimport_unregistered_local_module_allowed": false
+  },
+  "external_authorities": {
+    "activation_review": {
+      "path": "configs/rq2_joint_deliverability_activation_review_pass_v2.json",
+      "schema": "rq2_joint_deliverability_activation_review_pass_v2",
+      "review_scope": "rq2_joint_deliverability_activation_successor_v2_exact_outer",
+      "reviewer_model": "gpt-5.6-sol",
+      "required_effect": {
+        "independent_activation_R3_review_passed": true,
+        "activation_review_gate_closed": true,
+        "formal_execution_authorized": false,
+        "formal_result_exists": false,
+        "paper_claim": false,
+        "security_certified": false
+      },
+      "present": false
+    },
+    "dispatched_grid_manifest": {
+      "path": "data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_gurobi/SHA256SUMS.json",
+      "schema": "rts_gmlc_public_grid_need_dispatch_v4_gurobi_manifest_v1",
+      "present": false
+    },
+    "runtime": {
+      "path": "results/execution_configs/rq2_joint_deliverability_activation_v2/runtime_receipt.json",
+      "schema": "rq2_joint_deliverability_execution_runtime_receipt_v1",
+      "present": false
+    },
+    "execution_activation": {
+      "path": "configs/rq2_joint_deliverability_execution_activation_pass_v3.yaml",
+      "schema": "rq2_joint_deliverability_execution_activation_pass_v3",
+      "present": false
+    },
+    "formal_run": {
+      "path": "configs/rq2_joint_deliverability_formal_run_authority_v1.json",
+      "schema": "rq2_joint_deliverability_formal_run_authority_v1",
+      "present": false
+    }
+  },
+  "stage_contract": {
+    "write_capable_stage_surface": "absent",
+    "execution_v3_private_helper_bypass_allowed": false,
+    "execution_v3_null_authority_override_allowed": false,
+    "future_bound_execution_successor_required": true,
+    "future_formal_run_authority_required": true
+  },
+  "side_effect_order": [
+    "verify_activation_outer_and_inner",
+    "verify_activation_v1_outer_and_rework_receipt",
+    "verify_execution_v3_outer_review_and_recursive_members",
+    "verify_complete_python_closure_before_project_import",
+    "spawn_isolated_fresh_process",
+    "verify_exact_executed_source_hash_inventory",
+    "revalidate_execution_v3_static_authority",
+    "confirm_execution_v3_public_stage_surface_remains_closed"
+  ],
+  "formal_roots": [
+    "results/execution_evidence/rq2_joint_deliverability/formal_v1",
+    "results/execution_configs/rq2_joint_deliverability_activation_v2"
+  ],
+  "validation_contract": {
+    "fresh_process_probe_required": true,
+    "fresh_process_probe_is_nonformal": true,
+    "fresh_process_timeout_seconds": 60,
+    "fresh_process_BaseException_cleanup_required": true,
+    "parent_snapshot_envelope_required": true,
+    "parent_post_probe_revalidation_required": true,
+    "child_exact_inventory_required": true,
+    "artifact_reads_descriptor_anchored": true,
+    "windows_relative_handle_traversal_required": true,
+    "ancestor_swap_fault_test_required": true,
+    "solver_calls": 0,
+    "formal_result_files_written": 0,
+    "authority_presence_checked_with_anchored_traversal": true,
+    "authority_presence_double_snapshot_required": true,
+    "anchored_handle_cleanup_required": true,
+    "close_failure_recovery_required": true,
+    "single_field_fault_tests_required": true,
+    "receipt_presence_must_not_change_validation_pass": true
+  },
+  "bundle": {
+    "inner_path": "configs/rq2_joint_deliverability_activation_successor_v2.SHA256SUMS.json",
+    "outer_path": "configs/rq2_joint_deliverability_activation_successor_v2.OUTER.SHA256SUMS.json",
+    "members": [
+      "configs/rq2_joint_deliverability_activation_review_rework_v1.json",
+      "configs/rq2_joint_deliverability_activation_successor_v1.OUTER.SHA256SUMS.json",
+      "configs/rq2_joint_deliverability_activation_successor_v2.json",
+      "configs/rq2_joint_deliverability_execution_review_pass_v3.yaml",
+      "configs/rq2_joint_deliverability_execution_successor_v1.OUTER.SHA256SUMS.json",
+      "configs/rq2_joint_deliverability_execution_successor_v2.OUTER.SHA256SUMS.json",
+      "configs/rq2_joint_deliverability_execution_successor_v3.OUTER.SHA256SUMS.json",
+      "docs/model_spec/rq2_joint_deliverability_activation_v2.md",
+      "environments/rq2_executor_v2.yml",
+      "experiments/__init__.py",
+      "experiments/bootstrap_rq2_joint_deliverability_activation_v2.py",
+      "experiments/run_rq2_joint_deliverability_activation_v2.py",
+      "experiments/run_rq2_joint_deliverability_implementation_v2.py",
+      "experiments/validate_rq2_joint_deliverability_activation_v2.py",
+      "experiments/validate_rq2_joint_deliverability_implementation_v2.py",
+      "src/__init__.py",
+      "src/rq2_joint_deliverability_execution_v3/__init__.py",
+      "src/rq2_joint_deliverability_execution_v3/core.py",
+      "src/rq2_joint_deliverability_v2/__init__.py",
+      "src/rq2_joint_deliverability_v2/evaluation.py",
+      "src/rq2_joint_deliverability_v2/model.py",
+      "src/rq2_joint_deliverability_v2/scenarios.py",
+      "src/rq2_joint_deliverability_v2/solver_adapter.py",
+      "tests/test_rq2_joint_deliverability_activation_v2.py"
+    ]
+  },
+  "gates": {
+    "activation_candidate_complete": true,
+    "pre_seal_audit_complete": true,
+    "independent_activation_R3_review_passed": false,
+    "dispatched_grid_package_ready": false,
+    "execution_machine_runtime_ready": false,
+    "native_solver_replay_passed": false,
+    "registered_memory_profile_passed": false,
+    "transport_runtime_projection_accepted": false,
+    "execution_activation_authority_present": false,
+    "user_formal_run_authorized": false,
+    "formal_execution_ready": false,
+    "formal_result": false,
+    "paper_claim": false,
+    "security_certified": false
+  }
+}

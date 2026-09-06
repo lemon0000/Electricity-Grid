@@ -1,0 +1,82 @@
+{
+  "schema": "rq2_joint_deliverability_activation_review_escalate_v2",
+  "version": 2,
+  "reviewed_on": "2026-09-06",
+  "review_scope": "rq2_joint_deliverability_activation_successor_v2_exact_outer",
+  "reviewer_role": "independent_sol_reviewer",
+  "reviewer_model": "gpt-5.6-sol",
+  "verdict": "ESCALATE",
+  "reviewed_subject": {
+    "outer_path": "configs/rq2_joint_deliverability_activation_successor_v2.OUTER.SHA256SUMS.json",
+    "outer_sha256": "34e35c91a5af25903582c21b6736254f2fe0cd2dea879b9a0c6858f67135b37d",
+    "inner_sha256": "de024959d1557c87b43ee3eb56eb8cae10dfc879820dab7f315f2a7f08a82184",
+    "sealed_member_count": 24
+  },
+  "predecessor_review": {
+    "activation_v1_outer_sha256": "7672d1a6f3382e268b5ffa0b22a561e72615bb0b5dc419f0b48916652da860d4",
+    "activation_v1_inner_sha256": "c6c057d97b8accb268705f501d513fd3d3d2fa9b1238e9ea37d64a161d774585",
+    "activation_v1_sealed_member_count": 22,
+    "activation_v1_review_rework_path": "configs/rq2_joint_deliverability_activation_review_rework_v1.json",
+    "activation_v1_review_rework_sha256": "11363e30bfe497dfb1f6f8f35fbb3c44297300bdcc9fc68b2eae0a3afcd6093a",
+    "activation_v1_finding_closed": true
+  },
+  "review_conclusion": {
+    "blocker_findings": [],
+    "major_findings": [
+      {
+        "id": "activation-v2-close-error-resource-ownership",
+        "summary": "Leaf descriptor and Windows handle ownership is not proven closed when cleanup itself fails.",
+        "evidence": [
+          "experiments/bootstrap_rq2_joint_deliverability_activation_v2.py:639-670 transfers the leaf descriptor to os.fdopen, clears the explicit owner, and does not run ownership recovery when the context-manager close fails.",
+          "experiments/bootstrap_rq2_joint_deliverability_activation_v2.py:521-530 discards descriptor and HANDLE cleanup recovery results on the Windows exception path.",
+          "tests/test_rq2_joint_deliverability_activation_v2.py:731-776 covers one POSIX ancestor cleanup failure, while lines 851-856 only perform a source-string check for the Windows relative-handle contract."
+        ],
+        "fault_injection": {
+          "observed_exception": "ActivationRejected: artifact descriptor read failed",
+          "leaf_fd_still_open_after_rejection": true
+        },
+        "required_future_remediation": "A separately authorized versioned successor must model explicit leaf and ancestor descriptor/HANDLE ownership, check every cleanup result, perform bounded recovery on all exceptional and finally paths, and add behavior-level POSIX and Windows close-failure tests."
+      }
+    ],
+    "minor_findings": []
+  },
+  "verification_evidence": {
+    "recursive_hash_validation": "passed",
+    "sealed_member_hashes_verified": 24,
+    "activation_v1_member_hashes_verified": 22,
+    "execution_v3_member_hashes_verified": 22,
+    "execution_v2_member_hashes_verified": 21,
+    "execution_v1_member_hashes_verified": 19,
+    "activation_v1_ancestor_swap_finding_closed": true,
+    "post_seal_require_sealed_validation": "passed",
+    "post_seal_fresh_validate_only": "passed",
+    "post_seal_focused": {
+      "passed": 55,
+      "skipped": 1
+    },
+    "post_seal_broad": {
+      "passed": 769,
+      "skipped": 5,
+      "deselected": 1,
+      "deselected_test": "tests/test_rq2_joint_deliverability_execution_v1.py::test_static_candidate_and_validate_only_are_closed",
+      "deselection_reason": "historical sealed execution-v1 state assertion"
+    },
+    "solver_calls": 0,
+    "formal_result_files_written": 0
+  },
+  "review_provenance": {
+    "materialized_from_independent_review_report": true,
+    "cryptographic_reviewer_signature_present": false
+  },
+  "effect": {
+    "activation_v2_bytes_immutable": true,
+    "independent_activation_R3_review_passed": false,
+    "activation_review_gate_closed": false,
+    "automatic_successor_allowed": false,
+    "future_versioned_successor_requires_explicit_user_or_sol_modeler_authority": true,
+    "formal_execution_authorized": false,
+    "formal_result_exists": false,
+    "paper_claim": false,
+    "security_certified": false
+  }
+}

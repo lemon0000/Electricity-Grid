@@ -1,0 +1,44 @@
+{
+  "schema": "rq2_joint_deliverability_activation_review_rework_v1",
+  "version": 1,
+  "reviewed_on": "2026-09-06",
+  "review_scope": "rq2_joint_deliverability_activation_successor_v1_exact_outer",
+  "reviewer_role": "independent_sol_reviewer",
+  "reviewer_model": "gpt-5.6-sol",
+  "verdict": "REWORK",
+  "reviewed_subject": {
+    "outer_path": "configs/rq2_joint_deliverability_activation_successor_v1.OUTER.SHA256SUMS.json",
+    "outer_sha256": "7672d1a6f3382e268b5ffa0b22a561e72615bb0b5dc419f0b48916652da860d4",
+    "inner_sha256": "c6c057d97b8accb268705f501d513fd3d3d2fa9b1238e9ea37d64a161d774585",
+    "sealed_member_count": 22
+  },
+  "review_conclusion": {
+    "blocker_findings": [],
+    "major_findings": [
+      {
+        "id": "activation-v1-ancestor-directory-swap",
+        "summary": "The lstat walk and pathname open are not one descriptor-anchored traversal, so an ancestor directory can be replaced between them.",
+        "evidence": "A single-point fault injection replaced the ancestor after _strict_file() and before _stable() opened the leaf; the replacement bytes were accepted.",
+        "required_remediation": "Create a versioned successor using descriptor-anchored component traversal and add an ancestor-directory swap fault test."
+      }
+    ],
+    "minor_findings": []
+  },
+  "broad_regression": {
+    "raw_result": "714 passed, 4 skipped, 1 failed",
+    "raw_failure": "tests/test_rq2_joint_deliverability_execution_v1.py::test_static_candidate_and_validate_only_are_closed",
+    "failure_is_historical_execution_v1_state_assertion": true,
+    "failure_blocks_activation_v1_review": false,
+    "current_state_result": "714 passed, 4 skipped, 1 deselected"
+  },
+  "effect": {
+    "activation_v1_bytes_immutable": true,
+    "versioned_v2_rework_permitted": true,
+    "independent_activation_R3_review_passed": false,
+    "activation_review_gate_closed": false,
+    "formal_execution_authorized": false,
+    "formal_result_exists": false,
+    "paper_claim": false,
+    "security_certified": false
+  }
+}

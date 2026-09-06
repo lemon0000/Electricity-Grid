@@ -2697,3 +2697,47 @@ bound bytes不可变且同version不得重封。该规则只对未来candidate�
 
 当前V4仍为historical `ESCALATE`，V1–V4 sealed chain不追溯改写；当前无candidate、无V5、无formal-run authority。V5
 任何阶段及formal run均未获授权，下一步必须等待用户明确授权创建V5 draft。
+
+## 2026-09-06 RQ2 fresh-process activation v2 ESCALATE
+
+execution successor v3 已取得独立 R3 `PASS`，但该 PASS 只关闭 execution implementation review gate。用户随后明确授权
+构建、测试、封存和独立审查 fresh-process activation successor，未授权 46-cell、1,071-block grid、holdout、
+transport、bootstrap、solver 或 formal run。
+
+activation v1 inner/outer SHA-256 分别为
+`c6c057d97b8accb268705f501d513fd3d3d2fa9b1238e9ea37d64a161d774585`和
+`7672d1a6f3382e268b5ffa0b22a561e72615bb0b5dc419f0b48916652da860d4`，22/22 members 稳定。其 official
+R3 verdict 为 `REWORK (0/1/0)`：逐段 `lstat` 后按完整 pathname 重开文件，无法阻止 ancestor directory 在两步之间
+被替换。REWORK receipt
+`configs/rq2_joint_deliverability_activation_review_rework_v1.json` SHA-256 为
+`11363e30bfe497dfb1f6f8f35fbb3c44297300bdcc9fc68b2eae0a3afcd6093a`。
+
+唯一 versioned REWORK successor v2 改为 descriptor/HANDLE-anchored component traversal。POSIX 使用 held parent
+`dir_fd`、`O_NOFOLLOW`和`O_DIRECTORY`；Windows 从 volume root 开始，以 `NtCreateFile`、
+`OBJECT_ATTRIBUTES.RootDirectory`和`FILE_OPEN_REPARSE_POINT`逐段相对打开。authority presence 使用两次完整
+anchored snapshot；fresh child 使用`-I -B -S -X pycache_prefix=<fresh-empty-private-directory>`，并从 parent
+digest-bound envelope 中执行已验证 source bytes。v1 ancestor-swap finding 已关闭。
+
+v2 pre-seal findings 曾闭合为`0/0/0`。封存后 inner/outer SHA-256 分别为
+`de024959d1557c87b43ee3eb56eb8cae10dfc879820dab7f315f2a7f08a82184`和
+`34e35c91a5af25903582c21b6736254f2fe0cd2dea879b9a0c6858f67135b37d`，24/24 members 稳定。
+post-seal sealed validator、fresh validate-only 均通过；focused 为`55 passed, 1 skipped`，current-state broad 为
+`769 passed, 5 skipped, 1 deselected`。唯一 deselect 是已登记的 sealed execution-v1 历史状态断言。全部验证保持
+0 solver call、0 formal result write。
+
+全新 official reviewer 对 exact v2 outer 给出`ESCALATE (0/1/0)`。Major
+`activation-v2-close-error-resource-ownership`指出：`_stable()`把 leaf fd 转交`os.fdopen()`后清空显式 owner，
+context-manager close 失败时没有 ownership probe 或 bounded recovery；Windows exception cleanup 也丢弃 descriptor/
+HANDLE recovery 结果。独立单点复现得到
+`ActivationRejected: artifact descriptor read failed`且`leaf_fd_still_open_after_rejection=true`。现有测试只覆盖一次
+POSIX ancestor close failure；Windows relative-handle 检查仍是源码字符串断言，未形成行为级 HANDLE close-failure
+证据。
+
+machine receipt
+`configs/rq2_joint_deliverability_activation_review_escalate_v2.json` SHA-256 为
+`5d94ca406f8e70309e000f85d1534e607241f87e1114bbf2d26e399c8d39c0da`。v2 是 v1 official REWORK 后的唯一
+successor，按`agent.md` §7 不得自动进入另一轮修复；v1/v2 sealed bytes保持不可变，fixed PASS receipt路径保持
+absent。当前 activation review gate未关闭，dispatched-grid package、Windows runtime receipt、Gurobi 13.0.2
+native replay、registered peak-memory、transport projection、execution activation与user formal-run authority仍缺失；
+formal execution/result/paper claim/security certification全部为false。后续versioned successor须由用户或
+`sol_modeler`重新明确授权。
