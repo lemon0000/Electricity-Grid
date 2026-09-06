@@ -1,0 +1,57 @@
+schema: rq2_joint_deliverability_execution_review_pass_v3
+reviewed_on: "2026-09-05"
+review_scope: rq2_joint_deliverability_execution_successor_v3_exact_outer
+reviewer_role: independent_sol_reviewer
+reviewer_model: gpt-5.6-sol
+verdict: PASS
+
+reviewed_subject:
+  outer_path: configs/rq2_joint_deliverability_execution_successor_v3.OUTER.SHA256SUMS.json
+  outer_sha256: b153f0320fe9dfe961575be4836f4bcf4044836be4fa66618119fc08d4cbce80
+  inner_sha256: 0e3a71b660f2e8d8371561614abf0577d6b6a9e36e1a7521ad7ced5f88c989e2
+  sealed_member_count: 22
+
+predecessor:
+  v2_outer_sha256: ff70b138f61833908c84763c3a6df06ad255f6f6f26adfbf1e4051865a0e5f93
+  v2_escalate_receipt_sha256: 969cd58f090cc9fa6dfba986715ec67a8e18dfcf8e188d97c11748f421895b6d
+  v2_superseded_pass_sha256: 20c13ff59f47a76eb9aad6962884b8605aa7de76833cdf00abc62229bc7f1a35
+  v1_and_v2_sealed_bytes_immutable: true
+
+review_conclusion:
+  blocker_findings: []
+  major_findings: []
+  minor_findings: []
+  live_review_receipt_assumption_removed: true
+  receipt_absent_present_transition_hermetic: true
+  reviewed_state_advances_to_grid_gate: true
+  fixed_v2_pass_clean_absence_verified: true
+  dangling_symlink_rejected: true
+  predecessor_authority_is_recursive: true
+  scientific_solver_and_evidence_semantics_unchanged: true
+
+verification_evidence:
+  recursive_hash_validation: passed
+  sealed_member_hashes_verified: 22
+  predecessor_v2_member_hashes_verified: 21
+  predecessor_v1_member_hashes_verified: 19
+  validator_require_sealed_passed: true
+  validate_only_runner_passed: true
+  focused_tests_passed_before_receipt: 144
+  focused_tests_skipped_before_receipt: 1
+  related_regression_tests_passed_before_receipt: 215
+  related_regression_tests_skipped_before_receipt: 1
+  skipped_test_scope: windows_native_directory_flush_execution_machine_probe
+  ruff_static_check_passed: true
+  ruff_format_check_passed: true
+  py_compile_passed: true
+  solver_calls: 0
+  formal_result_files_written: 0
+
+effect:
+  v3_bytes_immutable: true
+  independent_v3_R3_review_passed: true
+  independent_review_gate_closed: true
+  formal_execution_authorized: false
+  formal_result_exists: false
+  paper_claim: false
+  security_certified: false

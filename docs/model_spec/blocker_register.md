@@ -30,7 +30,7 @@
 | RQ2 HiGHS同进程thread scheduler隔离 | mitigated for V8 two-block route; formal activation blocked | 同进程污染不再用于当前执行路径；V8对每个block使用fresh process，并记录actual HiGHS 1.15.1/4 threads、PID/create-time、solver-call accounting和完整resource journal。该证据覆盖固定两块，不自动证明1071-block formal controller | future formal successor必须保持per-block process isolation并由独立review验证完整生命周期；不得回退到同进程连续求解或把资源停止解释为不可行 |
 | RQ2 Vnext two-block pilot post-result evidence | V8 nonformal `committed_success`; post-result `PASS` | v8唯一一次fixed `0008 -> 0009` run已发布result/PUBLISHED exact trees；public-only readback、fresh PID/predecessor、HiGHS runtime、resource journals和无seed tombstone均通过。独立post-result receipt SHA-256为`28e546b8f5f3bc8c8402c86ec723ec9e35da041ba74676c9adb59cd338980ca6` | 该PASS只关闭two-block evidence门，不形成formal result、论文claim或security certification。formal activation V4已`ESCALATE`，当前无可执行candidate |
 | RQ2四臂归因v1前序 | superseded for primary attribution; implementation-only | 四臂core、checkpoint/external-preflight与旧互斥identification/report合同已实现为validate-only；现有70-cell阴性结果和全部sealed bytes保持不变 | 旧exclusive classifier不作为联合前沿主结论authority；不得覆盖旧协议或用其启动新46-cell流程 |
-| RQ2联合服务可交付前沿 | v5 independent R4 `PASS`; implementation v2 independent R3 `PASS`; execution v1 R3 `REWORK`; execution v2 post-review `ESCALATE` | execution v1因sealed lifecycle测试raw-red及opened-gate反例空洞被判`0/1/0 REWORK`；唯一聚焦v2的21-member outer为`ff70b138f61833908c84763c3a6df06ad255f6f6f26adfbf1e4051865a0e5f93`。初始PASS receipt物化后，v2自身focused suite再次因live authority状态变化raw-red，独立adjudication修订为`0/1/0 ESCALATE` | 同一validation-contract验收项再次失败，禁止自动 successor 循环；须由用户或sol_modeler明确重新授权。dispatched-grid、Windows runtime、native replay、memory/transport、activation及formal-run authority仍缺失，全部execution/result/claim门关闭 |
+| RQ2联合服务可交付前沿 | v5 independent R4 `PASS`; implementation v2 independent R3 `PASS`; execution v3 independent R3 `PASS` | 用户在v2 `ESCALATE`后明确授权v3；v3移除live receipt永久缺失假设，递归绑定v2/v1 authority并拒绝旧fixed PASS普通entry与dangling symlink。22-member outer为`b153f0320fe9dfe961575be4836f4bcf4044836be4fa66618119fc08d4cbce80`，official review及post-receipt stability均为`0/0/0` | independent review gate已关闭；dispatched-grid、Windows runtime、native replay、memory/transport、fresh-process activation及单独formal-run authority仍缺失，全部formal execution/result/claim门关闭 |
 | 真实重大停电事件分布 | processed candidate cohorts; independent-event calibration blocked | 已冻结1534源行、1521候选组及主/敏感性队列；主持续队列1385组/1398源行，重复组保留source IDs并以非缺失max/min而非求和审计 | 候选组不证明独立物理事故，仍不得估计事故频次或无条件时长分布；无资产ID、拓扑和SCUC，不得映射为RTS具名N-1或声称与业务同钟 |
 | Google同系统工作负荷-功率配对 | resolved for one-PDU one-day normalized pairing | cell f/pdu17 day-0取得336格小时usage、1328条machine event和唯一audit；600秒偏移后形成24小时功率-NCU上下界、168行priority明细及可加载的零柔性`derived_benchmark`，全部SHA锁定 | 只解除“一PDU/一天/归一化功率/受限usage人口”和业务schema桥接缺口；不是绝对MW、完整PDU工作负荷、真实柔性或恢复证据 |
 | ENTSO-E观测资产事故 | external-blocked on security token | 匿名API实测401，当前环境无令牌；页面批量导出同样要求登录 | 用户完成免费注册和REST API令牌申请前不执行；取得后仍不得把ENTSO资产ID映射为RTS ID |
@@ -1083,6 +1083,44 @@ fresh-process activation successor及单独用户 formal-run authorization。
 解释为数学不可行。按`agent.md` §7，同一validation-contract验收项在唯一
 REWORK successor中再次失败，禁止自动创建后续 successor；必须升级给用户或
 `sol_modeler`重新授权。
+
+#### 联合服务可交付前沿 execution successor v3 independent R3 PASS（2026-09-05）
+
+用户已在 v2 `ESCALATE` 后明确授权新的 versioned execution successor 修复和
+重新审查；该授权不包括 formal run。v3 保持 v1/v2 sealed bytes、科学协议、
+solver、evidence schema、persistence/resume 和公开 stage 关闭语义不变，只修复
+review-authority 状态测试：
+
+1. public-stage closure test 不再读取 live fixed-path receipt；
+2. 同一临时根依次验证 receipt absent、合法 present 和 tamper；
+3. 合法 review 后独立验证准确停在 unbound dispatched-grid gate，且 input audit
+   调用数为 0；
+4. validator 递归重算 v2 outer/21 members 及 v1 outer/19 members，并绑定
+   v2 `ESCALATE`、superseded PASS 和旧 fixed PASS clean absence；
+5. 普通 entry 与 dangling symlink 分别作为单点 fault case，均不得冒充 absent。
+
+首轮 pre-seal audit 发现 dangling symlink 漏检一项 Major；修复后全新复审为
+`Blocker/Major/Minor=0/0/0`。sealed v3 inner/outer SHA-256 分别为
+`0e3a71b660f2e8d8371561614abf0577d6b6a9e36e1a7521ad7ced5f88c989e2`和
+`b153f0320fe9dfe961575be4836f4bcf4044836be4fa66618119fc08d4cbce80`，
+22/22 members 重算一致。
+
+receipt 物化前后，原样 focused 均为`144 passed, 1 skipped`，原样
+implementation-v2 + execution-v3 broad 均为`215 passed, 1 skipped`；唯一 skip
+是 Windows native directory flush 执行机 probe，未计为通过。official R3 verdict
+为`PASS`，`Blocker/Major/Minor=0/0/0`。固定 receipt 为
+`configs/rq2_joint_deliverability_execution_review_pass_v3.yaml`，SHA-256 为
+`1d8312e1458ce73dc76863a4b5c85f95506272ec53eaa088e523127b6ce0fa41`。
+post-review stability 复核为`0/0/0`；私有 loader 已验证 review authority，随后
+准确 fail closed 于`dispatched grid manifest is not bound by the sealed
+execution candidate`。
+
+该 PASS 只关闭 independent review gate。当前仍缺完整 dispatched-grid package、
+Windows x86-64 runtime receipt、Gurobi 13.0.2 native replay、注册规模
+peak-memory、transport runtime projection、fresh-process activation successor
+及单独用户 formal-run authorization。因此`formal_execution_ready=false`、
+`formal_result=false`、`paper_claim=false`和`security_certified=false`；不得
+启动 solver 或把缺失输入解释为数学不可行。
 
 ### v4 grid正式attempt的运行性中断与恢复授权（2026-08-29）
 
