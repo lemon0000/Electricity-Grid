@@ -2741,3 +2741,23 @@ absent。当前 activation review gate未关闭，dispatched-grid package、Wind
 native replay、registered peak-memory、transport projection、execution activation与user formal-run authority仍缺失；
 formal execution/result/paper claim/security certification全部为false。后续versioned successor须由用户或
 `sol_modeler`重新明确授权。
+
+## 2026-09-07 RQ2 fresh-process activation v3 draft
+
+用户已在 activation v2 `ESCALATE` 后明确授权创建 activation v3 并继续修复
+`activation-v2-close-error-resource-ownership`。当前 v3 为
+`DRAFT_NONAUTHORITATIVE`，production inner/outer manifest 与 PASS receipt 均
+absent；本次授权不包含 seal、official review 或 formal run。
+
+draft 已将 stable read 改为显式 leaf descriptor ownership，使用
+`os.read/os.lseek`并在正常、read-error、first-pass close-error 与 replay
+close-error 路径统一检查 bounded recovery 结果。Windows close recovery 与
+relative parent-handle chain 已提取为可行为测试的 helper，ancestor HANDLE
+cleanup failure 会同时回收 transferred leaf descriptor 后 fail closed。
+
+当前 focused 为`60 passed, 1 skipped`；新增 5 个单点 fault tests 覆盖 leaf
+close、replay close、read failure、Windows `CloseHandle` retry 及 Windows
+relative-handle cleanup。该结果仅证明当前 draft 的针对性回归，不是
+pre-seal audit、seal 或 independent R3 PASS。v1/v2 sealed bytes及 v2
+ESCALATE receipt保持不变，所有 formal execution/result/claim/security gate
+继续关闭。
