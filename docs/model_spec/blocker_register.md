@@ -2761,3 +2761,23 @@ relative-handle cleanup。该结果仅证明当前 draft 的针对性回归，�
 pre-seal audit、seal 或 independent R3 PASS。v1/v2 sealed bytes及 v2
 ESCALATE receipt保持不变，所有 formal execution/result/claim/security gate
 继续关闭。
+
+全新只读 reviewer 对 commit `2e902c4` 的 live draft 完成非权威 pre-seal
+audit，结论为`pre-seal findings = 2/2/1`：
+
+1. Blocker：sealed-path 对 v3 outer/inner schema 仍传入
+   `expected_version=2`，机械 seal 后验证必然失败；
+2. Blocker：POSIX recovery 仅用`samestat`、Windows recovery 仅用 live
+   boolean 判断 ownership generation。首次 close 已释放原对象但报告失败、
+   同一 fd/HANDLE 数值被复用时，retry 会误关 replacement；
+3. Major：Windows cleanup outcome未区分`closed/unresolved/indeterminate`，
+   且以最后一个failure为cause，可能掩盖更严重的未关闭状态；
+4. Major：fault matrix缺少已关闭、复用、retry failure、indeterminate probe、
+   callback exception，以及Windows primary failure与cleanup failure组合；
+5. Minor：activation controller模块说明仍标为v2。
+
+主代理独立复现两个Blocker：v3 config version为3而sealed verifier要求2；
+POSIX注入观察到同一数字fd被close两次且replacement最终`EBADF`，模拟Windows
+观察到第二次close作用于replacement。审查前后六个输入hash一致、工作区干净、
+0 file write、0 solver/formal effect。当前不得进入seal；须在同一
+`DRAFT_NONAUTHORITATIVE`中修复并由新的只读pre-seal reviewer复审至`0/0/0`。
