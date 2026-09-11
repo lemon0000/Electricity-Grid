@@ -2,10 +2,12 @@
 
 ## 1. Status and authority
 
-This R3 candidate is the explicitly authorized versioned successor to sealed
+This sealed R3 candidate is the explicitly authorized versioned successor to
 activation v2 after its official `ESCALATE`. It retains v2's anchored traversal
-and repairs the unclosed descriptor/HANDLE ownership paths. It remains
-`DRAFT_NONAUTHORITATIVE`, has no production manifest or review receipt, and
+and repairs the unclosed descriptor/HANDLE ownership paths. Fresh pre-seal
+review returned `0/0/0`, closing the historical `2/2/1` and `0/3/0` findings.
+It is `SEALED_READY_FOR_INDEPENDENT_REVIEW`; its canonical production manifests
+authorize only independent activation review. No review receipt exists, and it
 does not authorize or expose a write-capable experiment stage.
 
 It binds:
@@ -121,7 +123,26 @@ Presence checks require two complete anchored traversals to agree. Only a
 stable missing component is accepted as absence; aliases, absent-to-present
 ancestor swaps, type mismatches and indeterminate errors fail closed. A
 dangling Windows junction therefore cannot satisfy an authority-absence or
-draft-manifest-absence gate.
+draft-manifest-absence gate. POSIX presence traversal retains its primary
+failure while completing cleanup; if cleanup also fails, the structured
+cleanup failure contains that exact primary error and every close outcome.
+
+Close recovery is generation-safe and bounded. A failed close is retried at
+most once, and only after an explicit probe proves that the numeric fd/HANDLE
+still denotes the same ownership generation without reporting any probe
+error. Any nonempty probe error or invalid/malformed status is retained and
+forces `indeterminate` without retry; in particular, a `closed` or
+`same_generation` status cannot mask its accompanying error. The production
+POSIX and Windows probes can prove only that the number is closed; a live
+number, matching file metadata, or a successful Windows liveness query is not
+generation proof and is classified `indeterminate` without retry. The
+production Windows adapter maps only `ERROR_INVALID_HANDLE` to `closed` and
+retains every other Win32 probe error as `indeterminate`. This prevents a
+replacement that reuses the number from being closed. Cleanup reports retain the exact
+`closed`, `unresolved`, or `indeterminate` outcome, every cleanup error, and
+the primary failure. `unresolved` outranks `indeterminate`, which outranks a
+`closed` outcome that still reported an error; every such finding rejects the
+activation.
 
 `--execute` is intentionally hard closed before config reads, project imports,
 subprocess creation or filesystem mutation. This prevents an activation review
@@ -156,8 +177,14 @@ Focused tests cover:
 - descriptor-open path-swap detection;
 - ancestor-directory replacement during descriptor-anchored traversal;
 - absent-to-present ancestor replacement during authority presence checks;
-- stable-read leaf/replay close failures and explicit descriptor cleanup;
-- Windows relative parent-handle traversal and `CloseHandle` recovery behavior;
+- stable-read leaf/replay close failures and explicit descriptor ownership;
+- already-closed resources, POSIX and Windows numeric reuse, retry failure,
+  invalid/error-bearing/indeterminate probes, retry generation changes, and
+  close callback exceptions;
+- Windows relative parent-handle traversal, exact cleanup outcome severity,
+  production probe mapping/wiring, and combined primary/cleanup failures;
+- POSIX presence traversal with combined primary and multi-severity cleanup
+  failures;
 - activation v2 outer and official ESCALATE receipt binding;
 - POSIX relative-descriptor and Windows relative-handle traversal contracts;
 - terminate, wait and kill exception cleanup with explicit reap failure;

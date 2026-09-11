@@ -3,9 +3,10 @@
   "version": 3,
   "created_on": "2026-09-06",
   "lifecycle": {
-    "status": "DRAFT_NONAUTHORITATIVE",
-    "pre_seal_audit_complete": false,
-    "sealed_ready_for_independent_review": false
+    "status": "SEALED_READY_FOR_INDEPENDENT_REVIEW",
+    "sealed_on": "2026-09-07",
+    "pre_seal_audit_complete": true,
+    "sealed_ready_for_independent_review": true
   },
   "scope": {
     "task_risk": "R3",
@@ -58,8 +59,8 @@
       "experiments/run_rq2_joint_deliverability_implementation_v2.py"
     ],
     "members": {
-      "experiments/bootstrap_rq2_joint_deliverability_activation_v3.py": "20b1273c0f407b26fc0ec73fc886f65a3cbd620d3ad318b90d109376f17578c8",
-      "experiments/run_rq2_joint_deliverability_activation_v3.py": "1e3376981ddf32e3fe037de22df616697305523f80bd968f715ee1540e03bc19",
+      "experiments/bootstrap_rq2_joint_deliverability_activation_v3.py": "174f6b163e05d9aee6f8d72efbd281e299ffd9d8d75abb02f6d846397d399207",
+      "experiments/run_rq2_joint_deliverability_activation_v3.py": "76f8fdc08f53dce380b01785b1ba8e1420b9597b095ed42fabb0a6abeeebb507",
       "experiments/__init__.py": "f67a437b3910b0400486a45167d0001163081e3b8b3f1d6166df4e3a3adf3581",
       "experiments/run_rq2_joint_deliverability_implementation_v2.py": "1c04e552b57a073056bb698bde04def7385814f89ffe78daf5d6d5b8dc43ab4e",
       "experiments/validate_rq2_joint_deliverability_implementation_v2.py": "c3e51a7325484fe5fdeaf0b2743d36f5575f57e242244cc4886ef0ed356d724f",
@@ -177,6 +178,21 @@
     "authority_presence_double_snapshot_required": true,
     "anchored_handle_cleanup_required": true,
     "close_failure_recovery_required": true,
+    "close_recovery_max_retries_after_generation_proof": 1,
+    "same_generation_retry_requires_error_free_probe": true,
+    "any_probe_error_forces_indeterminate": true,
+    "numeric_liveness_is_generation_proof": false,
+    "cleanup_preserves_primary_failure": true,
+    "windows_probe_outcome_mapping": {
+      "successful_liveness_query": "indeterminate",
+      "error_invalid_handle": "closed",
+      "other_win32_error": "indeterminate"
+    },
+    "cleanup_outcome_statuses": [
+      "closed",
+      "unresolved",
+      "indeterminate"
+    ],
     "explicit_leaf_descriptor_ownership_required": true,
     "implicit_fdopen_ownership_allowed": false,
     "cleanup_result_checked_on_all_paths": true,
@@ -215,8 +231,8 @@
     ]
   },
   "gates": {
-    "activation_candidate_complete": false,
-    "pre_seal_audit_complete": false,
+    "activation_candidate_complete": true,
+    "pre_seal_audit_complete": true,
     "independent_activation_R3_review_passed": false,
     "dispatched_grid_package_ready": false,
     "execution_machine_runtime_ready": false,

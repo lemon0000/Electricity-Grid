@@ -1,4 +1,4 @@
-"""Imported validation endpoint for the RQ2 fresh-process boundary v2."""
+"""Imported validation endpoint for the RQ2 fresh-process boundary v3."""
 
 from __future__ import annotations
 

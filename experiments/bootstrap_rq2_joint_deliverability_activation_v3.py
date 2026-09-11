@@ -186,37 +186,161 @@ def _absolute_parts(path: Path) -> tuple[Path, tuple[str, ...]]:
     return absolute, parts[1:]
 
 
-def _close_descriptor_with_recovery(descriptor: int) -> BaseException | None:
-    try:
-        before = os.fstat(descriptor)
-    except BaseException:  # noqa: BLE001 - cleanup must survive process-control exceptions
-        before = None
-    try:
-        os.close(descriptor)
-        return None
-    except BaseException as first_error:  # noqa: BLE001
-        try:
-            after = os.fstat(descriptor)
-        except BaseException as probe_error:  # noqa: BLE001
-            if isinstance(probe_error, OSError) and probe_error.errno == errno.EBADF:
-                return first_error
-            return probe_error
-        if before is None or not os.path.samestat(before, after):
-            return ActivationRejected("descriptor ownership changed after close error")
-        try:
-            os.close(descriptor)
-        except BaseException as retry_error:  # noqa: BLE001
-            return retry_error
-        return first_error
+_CLOSE_STATUSES = frozenset({"closed", "unresolved", "indeterminate"})
+_PROBE_STATUSES = frozenset(
+    {"closed", "same_generation", "different_generation", "indeterminate"}
+)
+_CLOSE_SEVERITY = {"closed": 0, "indeterminate": 1, "unresolved": 2}
 
 
-def _cleanup_descriptors(descriptors: list[int]) -> list[BaseException]:
-    failures: list[BaseException] = []
-    while descriptors:
-        descriptor = descriptors.pop()
-        error = _close_descriptor_with_recovery(descriptor)
+class _CloseOutcome:
+    __slots__ = ("errors", "resource", "status")
+
+    def __init__(
+        self,
+        resource: str,
+        status: str,
+        errors: tuple[BaseException, ...] = (),
+    ) -> None:
+        if status not in _CLOSE_STATUSES:
+            raise ValueError(f"invalid close outcome: {status}")
+        self.resource = resource
+        self.status = status
+        self.errors = errors
+
+    @property
+    def failed(self) -> bool:
+        return bool(self.errors) or self.status != "closed"
+
+
+class _CleanupFailure(RuntimeError):
+    def __init__(
+        self,
+        *,
+        primary_error: BaseException | None,
+        outcomes: list[_CloseOutcome],
+    ) -> None:
+        if not outcomes or any(not outcome.failed for outcome in outcomes):
+            raise ValueError("cleanup failure requires failed close outcomes")
+        self.primary_error = primary_error
+        self.outcomes = tuple(outcomes)
+        self.most_severe_status = max(
+            (outcome.status for outcome in outcomes),
+            key=_CLOSE_SEVERITY.__getitem__,
+        )
+        primary = (
+            "none"
+            if primary_error is None
+            else f"{type(primary_error).__name__}: {primary_error}"
+        )
+        cleanup = ", ".join(
+            f"{outcome.resource}={outcome.status}" for outcome in self.outcomes
+        )
+        super().__init__(
+            f"primary={primary}; cleanup=[{cleanup}]; "
+            f"most_severe={self.most_severe_status}"
+        )
+
+
+def _generation_safe_close(
+    owned: int,
+    *,
+    resource_kind: str,
+    close_once: Callable[[int], BaseException | None],
+    probe_generation: Callable[[int], tuple[str, BaseException | None]],
+) -> _CloseOutcome:
+    resource = f"{resource_kind}:{owned}"
+    errors: list[BaseException] = []
+    try:
+        first_error = close_once(owned)
+    except BaseException as error:  # noqa: BLE001
+        return _CloseOutcome(resource, "indeterminate", (error,))
+    if first_error is None:
+        return _CloseOutcome(resource, "closed")
+    errors.append(first_error)
+
+    def probe() -> str:
+        try:
+            status, error = probe_generation(owned)
+        except BaseException as error:  # noqa: BLE001
+            errors.append(error)
+            return "indeterminate"
         if error is not None:
-            failures.append(error)
+            errors.append(error)
+        if not isinstance(status, str) or status not in _PROBE_STATUSES:
+            errors.append(ActivationRejected("invalid ownership-generation probe"))
+            return "indeterminate"
+        if error is not None:
+            return "indeterminate"
+        return status
+
+    status = probe()
+    if status == "closed":
+        return _CloseOutcome(resource, "closed", tuple(errors))
+    if status != "same_generation":
+        if status == "different_generation":
+            errors.append(
+                ActivationRejected("resource number belongs to a later generation")
+            )
+        return _CloseOutcome(resource, "indeterminate", tuple(errors))
+
+    try:
+        retry_error = close_once(owned)
+    except BaseException as error:  # noqa: BLE001
+        errors.append(error)
+        status = probe()
+    else:
+        if retry_error is None:
+            return _CloseOutcome(resource, "closed", tuple(errors))
+        errors.append(retry_error)
+        status = probe()
+    if status == "closed":
+        return _CloseOutcome(resource, "closed", tuple(errors))
+    if status == "same_generation":
+        return _CloseOutcome(resource, "unresolved", tuple(errors))
+    if status == "different_generation":
+        errors.append(ActivationRejected("resource generation changed after retry"))
+    return _CloseOutcome(resource, "indeterminate", tuple(errors))
+
+
+def _close_descriptor_with_recovery(descriptor: int) -> _CloseOutcome:
+    def close_once(owned: int) -> BaseException | None:
+        try:
+            os.close(owned)
+        except BaseException as error:  # noqa: BLE001
+            return error
+        return None
+
+    def probe_generation(
+        owned: int,
+    ) -> tuple[str, BaseException | None]:
+        try:
+            os.fstat(owned)
+        except BaseException as error:  # noqa: BLE001
+            if isinstance(error, OSError) and error.errno == errno.EBADF:
+                return "closed", None
+            return "indeterminate", error
+        return (
+            "indeterminate",
+            ActivationRejected(
+                "live descriptor number is not ownership-generation proof"
+            ),
+        )
+
+    return _generation_safe_close(
+        descriptor,
+        resource_kind="descriptor",
+        close_once=close_once,
+        probe_generation=probe_generation,
+    )
+
+
+def _cleanup_descriptors(descriptors: list[int]) -> list[_CloseOutcome]:
+    failures: list[_CloseOutcome] = []
+    while descriptors:
+        outcome = _close_descriptor_with_recovery(descriptors.pop())
+        if outcome.failed:
+            failures.append(outcome)
     return failures
 
 
@@ -224,48 +348,63 @@ def _close_windows_handle_with_recovery(
     owned: int,
     *,
     close_once: Callable[[int], int | None],
-    probe_open: Callable[[int], tuple[bool, int | None]],
-) -> BaseException | None:
-    try:
-        first_code = close_once(owned)
-    except BaseException as error:  # noqa: BLE001
-        return error
-    if first_code is None:
-        return None
-    first_error = OSError(first_code, "CloseHandle failed")
-    try:
-        is_open, probe_code = probe_open(owned)
-    except BaseException as error:  # noqa: BLE001
-        return error
-    if not is_open:
-        if probe_code == 6:
-            return first_error
-        return OSError(
-            probe_code or 0,
-            "handle close state is indeterminate",
+    probe_generation: Callable[[int], tuple[str, int | None]],
+) -> _CloseOutcome:
+    def close(owned_handle: int) -> BaseException | None:
+        code = close_once(owned_handle)
+        return None if code is None else OSError(code, "CloseHandle failed")
+
+    def probe(
+        owned_handle: int,
+    ) -> tuple[str, BaseException | None]:
+        status, code = probe_generation(owned_handle)
+        error = (
+            None if code is None else OSError(code, "handle generation probe failed")
         )
-    try:
-        retry_code = close_once(owned)
-    except BaseException as error:  # noqa: BLE001
-        return error
-    if retry_code is not None:
-        return OSError(retry_code, "CloseHandle retry failed")
-    return first_error
+        return status, error
+
+    return _generation_safe_close(
+        owned,
+        resource_kind="handle",
+        close_once=close,
+        probe_generation=probe,
+    )
+
+
+def _close_windows_handle_production(
+    owned: int,
+    *,
+    close_once: Callable[[int], int | None],
+    query_live: Callable[[int], tuple[bool, int | None]],
+) -> _CloseOutcome:
+    def probe_generation(handle: int) -> tuple[str, int | None]:
+        live, code = query_live(handle)
+        if live:
+            return "indeterminate", code
+        if code == 6:
+            return "closed", None
+        return "indeterminate", code
+
+    return _close_windows_handle_with_recovery(
+        owned,
+        close_once=close_once,
+        probe_generation=probe_generation,
+    )
 
 
 def _cleanup_windows_handles(
     handles: list[int],
-    close_handle: Callable[[int], BaseException | None],
-) -> list[BaseException]:
-    failures: list[BaseException] = []
+    close_handle: Callable[[int], _CloseOutcome],
+) -> list[_CloseOutcome]:
+    failures: list[_CloseOutcome] = []
     while handles:
         owned = handles.pop()
         try:
-            error = close_handle(owned)
-        except BaseException as close_error:  # noqa: BLE001
-            error = close_error
-        if error is not None:
-            failures.append(error)
+            outcome = close_handle(owned)
+        except BaseException as error:  # noqa: BLE001
+            outcome = _CloseOutcome(f"handle:{owned}", "indeterminate", (error,))
+        if outcome.failed:
+            failures.append(outcome)
     return failures
 
 
@@ -278,7 +417,7 @@ def _windows_open_from_root(
     reject_reparse: Callable[[int, str], None],
     open_relative: Callable[[int, str, bool], int],
     transfer_to_descriptor: Callable[[int], int],
-    close_handle: Callable[[int], BaseException | None],
+    close_handle: Callable[[int], _CloseOutcome],
 ) -> int:
     handles = [root_handle]
     descriptor = -1
@@ -309,14 +448,18 @@ def _windows_open_from_root(
     cleanup_failures = _cleanup_windows_handles(handles, close_handle)
     if primary_error is not None or cleanup_failures:
         if descriptor >= 0:
-            descriptor_error = _close_descriptor_with_recovery(descriptor)
+            descriptor_outcome = _close_descriptor_with_recovery(descriptor)
             descriptor = -1
-            if descriptor_error is not None:
-                cleanup_failures.append(descriptor_error)
+            if descriptor_outcome.failed:
+                cleanup_failures.append(descriptor_outcome)
         if cleanup_failures:
+            failure = _CleanupFailure(
+                primary_error=primary_error,
+                outcomes=cleanup_failures,
+            )
             raise ActivationRejected(
-                f"Windows anchored resource cleanup failed: {path}"
-            ) from cleanup_failures[-1]
+                f"Windows anchored resource cleanup failed: {path}; {failure}"
+            ) from failure
         if isinstance(primary_error, ActivationRejected):
             raise primary_error
         if isinstance(primary_error, (OSError, ValueError)):
@@ -371,31 +514,38 @@ def _posix_open_anchored(path: Path, *, final_directory: bool = False) -> int:
             rejection = ActivationRejected(f"descriptor-anchored open failed: {path}")
         failures = _cleanup_descriptors(descriptors)
         if result >= 0:
-            result_error = _close_descriptor_with_recovery(result)
-            if result_error is not None:
-                failures.append(result_error)
+            result_outcome = _close_descriptor_with_recovery(result)
+            if result_outcome.failed:
+                failures.append(result_outcome)
         if failures:
+            failure = _CleanupFailure(primary_error=error, outcomes=failures)
             raise ActivationRejected(
-                f"descriptor cleanup failed after anchored open error: {path}"
-            ) from failures[-1]
+                "descriptor cleanup failed after anchored open error: "
+                f"{path}; {failure}"
+            ) from failure
         raise rejection from error
-    except BaseException:
+    except BaseException as error:
         failures = _cleanup_descriptors(descriptors)
         if result >= 0:
-            result_error = _close_descriptor_with_recovery(result)
-            if result_error is not None:
-                failures.append(result_error)
+            result_outcome = _close_descriptor_with_recovery(result)
+            if result_outcome.failed:
+                failures.append(result_outcome)
         if failures:
+            failure = _CleanupFailure(primary_error=error, outcomes=failures)
             raise ActivationRejected(
-                f"descriptor cleanup failed after anchored open rejection: {path}"
-            ) from failures[-1]
+                "descriptor cleanup failed after anchored open rejection: "
+                f"{path}; {failure}"
+            ) from failure
         raise
     failures = _cleanup_descriptors(descriptors)
     if failures:
-        result_error = _close_descriptor_with_recovery(result)
-        if result_error is not None:
-            failures.append(result_error)
-        raise ActivationRejected(f"descriptor cleanup failed: {path}") from failures[-1]
+        result_outcome = _close_descriptor_with_recovery(result)
+        if result_outcome.failed:
+            failures.append(result_outcome)
+        failure = _CleanupFailure(primary_error=None, outcomes=failures)
+        raise ActivationRejected(
+            f"descriptor cleanup failed: {path}; {failure}"
+        ) from failure
     return result
 
 
@@ -510,7 +660,7 @@ def _windows_open_anchored(path: Path, *, final_directory: bool = False) -> int:
             return None
         return int(ctypes.get_last_error())
 
-    def probe_open(owned: int) -> tuple[bool, int | None]:
+    def query_live(owned: int) -> tuple[bool, int | None]:
         info = FileAttributeTagInfo()
         if kernel32.GetFileInformationByHandleEx(
             owned,
@@ -521,11 +671,11 @@ def _windows_open_anchored(path: Path, *, final_directory: bool = False) -> int:
             return True, None
         return False, int(ctypes.get_last_error())
 
-    def close_handle_with_recovery(owned: int) -> BaseException | None:
-        return _close_windows_handle_with_recovery(
+    def close_handle_with_recovery(owned: int) -> _CloseOutcome:
+        return _close_windows_handle_production(
             owned,
             close_once=close_once,
-            probe_open=probe_open,
+            query_live=query_live,
         )
 
     def open_relative(parent: int, name: str, directory: bool) -> int:
@@ -616,9 +766,81 @@ def _open_anchored(path: Path, *, final_directory: bool = False) -> int:
 
 def _strict_file(path: Path) -> None:
     descriptor = _open_anchored(path)
-    error = _close_descriptor_with_recovery(descriptor)
-    if error is not None:
-        raise ActivationRejected(f"descriptor cleanup failed: {path}") from error
+    outcome = _close_descriptor_with_recovery(descriptor)
+    if outcome.failed:
+        failure = _CleanupFailure(primary_error=None, outcomes=[outcome])
+        raise ActivationRejected(
+            f"descriptor cleanup failed: {path}; {failure}"
+        ) from failure
+
+
+def _path_presence_posix(
+    path: Path,
+    *,
+    absolute_parts: Callable[[Path], tuple[Path, tuple[str, ...]]] | None = None,
+    open_component: Callable[..., int] | None = None,
+    stat_component: Callable[..., object] | None = None,
+    cleanup_descriptors: (Callable[[list[int]], list[_CloseOutcome]] | None) = None,
+) -> bool:
+    resolve_parts = _absolute_parts if absolute_parts is None else absolute_parts
+    open_call = os.open if open_component is None else open_component
+    stat_call = os.stat if stat_component is None else stat_component
+    cleanup = (
+        _cleanup_descriptors if cleanup_descriptors is None else cleanup_descriptors
+    )
+    absolute, parts = resolve_parts(path)
+    directory_flags = (
+        os.O_RDONLY
+        | int(getattr(os, "O_CLOEXEC", 0))
+        | int(getattr(os, "O_DIRECTORY", 0))
+        | int(getattr(os, "O_NOFOLLOW", 0))
+    )
+    descriptors: list[int] = []
+    result: bool | None = None
+    try:
+        descriptor = open_call(absolute.anchor, directory_flags)
+        descriptors.append(descriptor)
+    except OSError as error:
+        raise ActivationRejected(f"path presence is indeterminate: {path}") from error
+    primary_error: BaseException | None = None
+    try:
+        for part in parts[:-1]:
+            try:
+                child = open_call(part, directory_flags, dir_fd=descriptor)
+            except FileNotFoundError:
+                result = False
+                break
+            except OSError as error:
+                if error.errno in {errno.ELOOP, errno.ENOTDIR}:
+                    result = True
+                    break
+                raise ActivationRejected(
+                    f"path presence is indeterminate: {path}"
+                ) from error
+            descriptors.append(child)
+            descriptor = child
+        if result is None:
+            try:
+                stat_call(parts[-1], dir_fd=descriptor, follow_symlinks=False)
+            except FileNotFoundError:
+                result = False
+            except OSError as error:
+                raise ActivationRejected(
+                    f"path presence is indeterminate: {path}"
+                ) from error
+            else:
+                result = True
+    except BaseException as error:  # noqa: BLE001
+        primary_error = error
+    failures = cleanup(descriptors)
+    if failures:
+        failure = _CleanupFailure(primary_error=primary_error, outcomes=failures)
+        raise ActivationRejected(
+            f"descriptor cleanup failed during presence check: {path}; {failure}"
+        ) from failure
+    if primary_error is not None:
+        raise primary_error
+    return bool(result)
 
 
 def _path_presence_once(path: Path) -> bool:
@@ -637,61 +859,15 @@ def _path_presence_once(path: Path) -> bool:
                 return True
             raise
         else:
-            error = _close_descriptor_with_recovery(descriptor)
-            if error is not None:
+            outcome = _close_descriptor_with_recovery(descriptor)
+            if outcome.failed:
+                failure = _CleanupFailure(primary_error=None, outcomes=[outcome])
                 raise ActivationRejected(
-                    f"descriptor cleanup failed during presence check: {path}"
-                ) from error
+                    "descriptor cleanup failed during presence check: "
+                    f"{path}; {failure}"
+                ) from failure
             return True
-
-    absolute, parts = _absolute_parts(path)
-    directory_flags = (
-        os.O_RDONLY
-        | int(getattr(os, "O_CLOEXEC", 0))
-        | int(getattr(os, "O_DIRECTORY", 0))
-        | int(getattr(os, "O_NOFOLLOW", 0))
-    )
-    descriptors: list[int] = []
-    result: bool | None = None
-    try:
-        descriptor = os.open(absolute.anchor, directory_flags)
-        descriptors.append(descriptor)
-    except OSError as error:
-        raise ActivationRejected(f"path presence is indeterminate: {path}") from error
-    try:
-        for part in parts[:-1]:
-            try:
-                child = os.open(part, directory_flags, dir_fd=descriptor)
-            except FileNotFoundError:
-                result = False
-                break
-            except OSError as error:
-                if error.errno in {errno.ELOOP, errno.ENOTDIR}:
-                    result = True
-                    break
-                raise ActivationRejected(
-                    f"path presence is indeterminate: {path}"
-                ) from error
-            descriptors.append(child)
-            descriptor = child
-        if result is None:
-            try:
-                os.stat(parts[-1], dir_fd=descriptor, follow_symlinks=False)
-            except FileNotFoundError:
-                result = False
-            except OSError as error:
-                raise ActivationRejected(
-                    f"path presence is indeterminate: {path}"
-                ) from error
-            else:
-                result = True
-    finally:
-        failures = _cleanup_descriptors(descriptors)
-        if failures:
-            raise ActivationRejected(
-                f"descriptor cleanup failed during presence check: {path}"
-            ) from failures[-1]
-    return bool(result)
+    return _path_presence_posix(path)
 
 
 def _path_is_present_or_aliased(path: Path) -> bool:
@@ -733,11 +909,15 @@ def _stable(path: Path) -> bytes:
         after_second = os.fstat(descriptor)
     except BaseException as error:  # noqa: BLE001
         read_error = error
-    close_error = _close_descriptor_with_recovery(descriptor)
-    if close_error is not None:
+    close_outcome = _close_descriptor_with_recovery(descriptor)
+    if close_outcome.failed:
+        failure = _CleanupFailure(
+            primary_error=read_error,
+            outcomes=[close_outcome],
+        )
         raise ActivationRejected(
-            f"artifact descriptor cleanup failed: {path}"
-        ) from close_error
+            f"artifact descriptor cleanup failed: {path}; {failure}"
+        ) from failure
     if read_error is not None:
         if isinstance(read_error, OSError):
             raise ActivationRejected(
@@ -753,11 +933,15 @@ def _stable(path: Path) -> bytes:
         replay_after = os.fstat(replay_descriptor)
     except BaseException as error:  # noqa: BLE001
         replay_error = error
-    replay_close_error = _close_descriptor_with_recovery(replay_descriptor)
-    if replay_close_error is not None:
-        raise ActivationRejected(f"artifact replay cleanup failed: {path}") from (
-            replay_close_error
+    replay_close_outcome = _close_descriptor_with_recovery(replay_descriptor)
+    if replay_close_outcome.failed:
+        failure = _CleanupFailure(
+            primary_error=replay_error,
+            outcomes=[replay_close_outcome],
         )
+        raise ActivationRejected(
+            f"artifact replay cleanup failed: {path}; {failure}"
+        ) from failure
     if replay_error is not None:
         if isinstance(replay_error, OSError):
             raise ActivationRejected(f"artifact replay failed: {path}") from (
@@ -919,7 +1103,7 @@ def _verify_bundle(
             OUTER,
             expected_outer_schema=("rq2_joint_deliverability_activation_outer_v3"),
             expected_inner_schema=("rq2_joint_deliverability_activation_inner_v3"),
-            expected_version=2,
+            expected_version=3,
             expected_inner_path=INNER_RELATIVE,
         )
         if (

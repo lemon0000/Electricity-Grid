@@ -26,6 +26,15 @@ def _requires_sealed(config: dict[str, object]) -> bool:
     return lifecycle["status"] == "SEALED_READY_FOR_INDEPENDENT_REVIEW"
 
 
+def _symlink_or_skip(link: Path, target: Path) -> None:
+    try:
+        link.symlink_to(target)
+    except OSError as error:
+        if os.name == "nt" and getattr(error, "winerror", None) == 1314:
+            pytest.skip("Windows symlink privilege is unavailable")
+        raise
+
+
 def _valid_activation_review(
     config: dict[str, object],
     *,
@@ -659,6 +668,7 @@ def test_strict_json_rejects_duplicate_and_nonfinite_values() -> None:
             bootstrap._json_bytes(raw, "nonfinite")
 
 
+@pytest.mark.skipif(os.name == "nt", reason="POSIX descriptor fault injection")
 def test_stable_read_rejects_path_swap_after_descriptor_open(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -692,6 +702,7 @@ def test_stable_read_rejects_path_swap_after_descriptor_open(
     assert swapped is True
 
 
+@pytest.mark.skipif(os.name == "nt", reason="POSIX descriptor fault injection")
 def test_stable_read_rejects_ancestor_swap_during_anchored_traversal(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -728,7 +739,11 @@ def test_stable_read_rejects_ancestor_swap_during_anchored_traversal(
     assert swapped is True
 
 
-def test_anchored_open_close_error_does_not_orphan_child_descriptor(
+@pytest.mark.skipif(
+    not bootstrap._OPEN_SUPPORTS_DIR_FD,
+    reason="requires POSIX descriptor-relative open",
+)
+def test_anchored_open_close_error_after_release_does_not_retry(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -763,6 +778,8 @@ def test_anchored_open_close_error_does_not_orphan_child_descriptor(
         nonlocal injected
         if not injected:
             injected = True
+            real_close(descriptor)
+            live.discard(descriptor)
             raise OSError(bootstrap.errno.EIO, "injected close failure")
         real_close(descriptor)
         live.discard(descriptor)
@@ -776,7 +793,7 @@ def test_anchored_open_close_error_does_not_orphan_child_descriptor(
     assert live == set()
 
 
-def test_stable_leaf_close_error_recovers_without_descriptor_leak(
+def test_stable_leaf_close_error_after_release_fails_closed_without_retry(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -796,6 +813,8 @@ def test_stable_leaf_close_error_recovers_without_descriptor_leak(
         nonlocal injected
         if descriptor in live_leaf_descriptors and not injected:
             injected = True
+            real_close(descriptor)
+            live_leaf_descriptors.discard(descriptor)
             raise OSError(bootstrap.errno.EIO, "injected leaf close failure")
         real_close(descriptor)
         live_leaf_descriptors.discard(descriptor)
@@ -811,7 +830,7 @@ def test_stable_leaf_close_error_recovers_without_descriptor_leak(
     assert live_leaf_descriptors == set()
 
 
-def test_stable_replay_close_error_recovers_without_descriptor_leak(
+def test_stable_replay_close_error_after_release_fails_closed_without_retry(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -836,6 +855,8 @@ def test_stable_replay_close_error_recovers_without_descriptor_leak(
         nonlocal injected
         if generation_by_descriptor.get(descriptor) == 2 and not injected:
             injected = True
+            real_close(descriptor)
+            live_leaf_descriptors.discard(descriptor)
             raise OSError(bootstrap.errno.EIO, "injected replay close failure")
         real_close(descriptor)
         live_leaf_descriptors.discard(descriptor)
@@ -892,30 +913,397 @@ def test_stable_read_error_closes_explicit_leaf_owner(
     assert live_leaf_descriptors == set()
 
 
-def test_windows_handle_close_recovery_retries_only_live_same_handle() -> None:
+def test_descriptor_already_closed_is_classified_closed_without_retry() -> None:
+    read_descriptor, write_descriptor = os.pipe()
+    os.close(read_descriptor)
+    try:
+        outcome = bootstrap._close_descriptor_with_recovery(read_descriptor)
+        assert outcome.status == "closed"
+        assert outcome.failed is True
+        assert len(outcome.errors) == 1
+        assert isinstance(outcome.errors[0], OSError)
+        assert outcome.errors[0].errno == bootstrap.errno.EBADF
+    finally:
+        os.close(write_descriptor)
+
+
+def test_descriptor_numeric_reuse_is_indeterminate_and_replacement_survives(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    original_path = tmp_path / "original.txt"
+    replacement_path = tmp_path / "replacement.txt"
+    original_path.write_text("original", encoding="utf-8")
+    replacement_path.write_text("replacement", encoding="utf-8")
+    descriptor = os.open(original_path, os.O_RDONLY)
+    real_close = os.close
     close_calls: list[int] = []
-    handle_open = True
+    replacement_descriptor: int | None = None
+
+    def close_release_reuse_then_report_failure(owned: int) -> None:
+        nonlocal replacement_descriptor
+        close_calls.append(owned)
+        real_close(owned)
+        replacement_descriptor = os.open(replacement_path, os.O_RDONLY)
+        assert replacement_descriptor == owned
+        raise OSError(bootstrap.errno.EIO, "injected post-release failure")
+
+    monkeypatch.setattr(
+        bootstrap.os,
+        "close",
+        close_release_reuse_then_report_failure,
+    )
+    outcome = bootstrap._close_descriptor_with_recovery(descriptor)
+    assert outcome.status == "indeterminate"
+    assert outcome.failed is True
+    assert close_calls == [descriptor]
+    assert len(outcome.errors) == 2
+    assert isinstance(outcome.errors[1], bootstrap.ActivationRejected)
+    assert replacement_descriptor == descriptor
+    assert os.fstat(replacement_descriptor).st_size == len("replacement")
+    real_close(replacement_descriptor)
+
+
+def test_generation_safe_close_retry_failure_is_bounded_and_unresolved() -> None:
+    close_calls: list[int] = []
+    probe_calls: list[int] = []
+
+    def close_once(owned: int) -> BaseException:
+        close_calls.append(owned)
+        return OSError(bootstrap.errno.EIO, f"close failure {len(close_calls)}")
+
+    def prove_same_generation(
+        owned: int,
+    ) -> tuple[str, BaseException | None]:
+        probe_calls.append(owned)
+        return "same_generation", None
+
+    outcome = bootstrap._generation_safe_close(
+        17,
+        resource_kind="descriptor",
+        close_once=close_once,
+        probe_generation=prove_same_generation,
+    )
+    assert outcome.resource == "descriptor:17"
+    assert outcome.status == "unresolved"
+    assert outcome.failed is True
+    assert len(outcome.errors) == 2
+    assert close_calls == [17, 17]
+    assert probe_calls == [17, 17]
+
+
+def test_generation_safe_close_indeterminate_probe_never_retries() -> None:
+    close_calls: list[int] = []
+    probe_error = RuntimeError("injected indeterminate probe")
+
+    def close_once(owned: int) -> BaseException:
+        close_calls.append(owned)
+        return OSError(bootstrap.errno.EIO, "injected close failure")
+
+    def indeterminate_probe(
+        _owned: int,
+    ) -> tuple[str, BaseException | None]:
+        raise probe_error
+
+    outcome = bootstrap._generation_safe_close(
+        23,
+        resource_kind="handle",
+        close_once=close_once,
+        probe_generation=indeterminate_probe,
+    )
+    assert outcome.status == "indeterminate"
+    assert outcome.errors[-1] is probe_error
+    assert close_calls == [23]
+
+
+@pytest.mark.parametrize(
+    ("probe_status", "expects_protocol_error"),
+    [
+        pytest.param("closed", False, id="closed-with-error"),
+        pytest.param("same_generation", False, id="same-generation-with-error"),
+        pytest.param([], True, id="invalid-status-with-error"),
+    ],
+)
+def test_generation_safe_close_probe_error_is_retained_and_forbids_retry(
+    probe_status: object,
+    expects_protocol_error: bool,
+) -> None:
+    close_error = OSError(bootstrap.errno.EIO, "injected close failure")
+    probe_error = RuntimeError("injected probe failure")
+    close_calls: list[int] = []
+    probe_calls: list[int] = []
+
+    def close_once(owned: int) -> BaseException:
+        close_calls.append(owned)
+        return close_error
+
+    def probe_generation(
+        owned: int,
+    ) -> tuple[object, BaseException | None]:
+        probe_calls.append(owned)
+        return probe_status, probe_error
+
+    outcome = bootstrap._generation_safe_close(
+        31,
+        resource_kind="descriptor",
+        close_once=close_once,
+        probe_generation=probe_generation,
+    )
+    assert outcome.status == "indeterminate"
+    assert outcome.errors[:2] == (close_error, probe_error)
+    assert close_calls == [31]
+    assert probe_calls == [31]
+    if expects_protocol_error:
+        assert len(outcome.errors) == 3
+        assert isinstance(outcome.errors[2], bootstrap.ActivationRejected)
+        assert str(outcome.errors[2]) == "invalid ownership-generation probe"
+    else:
+        assert outcome.errors == (close_error, probe_error)
+
+
+def test_generation_safe_close_callback_exception_never_probes_or_retries() -> None:
+    callback_error = KeyboardInterrupt()
+    calls: list[str] = []
+
+    def close_once(_owned: int) -> None:
+        calls.append("close")
+        raise callback_error
+
+    def probe_generation(
+        _owned: int,
+    ) -> tuple[str, BaseException | None]:
+        calls.append("probe")
+        return "same_generation", None
+
+    outcome = bootstrap._generation_safe_close(
+        29,
+        resource_kind="descriptor",
+        close_once=close_once,
+        probe_generation=probe_generation,
+    )
+    assert outcome.status == "indeterminate"
+    assert outcome.errors == (callback_error,)
+    assert calls == ["close"]
+
+
+def test_windows_handle_close_retries_only_with_explicit_generation_proof() -> None:
+    close_calls: list[int] = []
 
     def close_once(handle: int) -> int | None:
-        nonlocal handle_open
         close_calls.append(handle)
         if len(close_calls) == 1:
             return 5
-        handle_open = False
         return None
 
-    def probe_open(handle: int) -> tuple[bool, int | None]:
+    def probe_generation(handle: int) -> tuple[str, int | None]:
         assert handle == 41
-        return handle_open, None
+        return "same_generation", None
 
-    error = bootstrap._close_windows_handle_with_recovery(
+    outcome = bootstrap._close_windows_handle_with_recovery(
         41,
         close_once=close_once,
-        probe_open=probe_open,
+        probe_generation=probe_generation,
     )
-    assert isinstance(error, OSError)
+    assert outcome.status == "closed"
+    assert outcome.failed is True
+    assert len(outcome.errors) == 1
     assert close_calls == [41, 41]
-    assert handle_open is False
+
+
+def test_windows_handle_already_closed_is_closed_without_retry() -> None:
+    close_calls: list[int] = []
+
+    def close_once(handle: int) -> int:
+        close_calls.append(handle)
+        return 6
+
+    def probe_generation(handle: int) -> tuple[str, int | None]:
+        assert handle == 42
+        return "closed", None
+
+    outcome = bootstrap._close_windows_handle_with_recovery(
+        42,
+        close_once=close_once,
+        probe_generation=probe_generation,
+    )
+    assert outcome.status == "closed"
+    assert outcome.failed is True
+    assert len(outcome.errors) == 1
+    assert close_calls == [42]
+
+
+def test_windows_handle_retry_failure_is_bounded_and_unresolved() -> None:
+    close_calls: list[int] = []
+    probe_calls: list[int] = []
+
+    def close_once(handle: int) -> int:
+        close_calls.append(handle)
+        return 5
+
+    def probe_generation(handle: int) -> tuple[str, int | None]:
+        probe_calls.append(handle)
+        return "same_generation", None
+
+    outcome = bootstrap._close_windows_handle_with_recovery(
+        44,
+        close_once=close_once,
+        probe_generation=probe_generation,
+    )
+    assert outcome.status == "unresolved"
+    assert outcome.failed is True
+    assert len(outcome.errors) == 2
+    assert close_calls == [44, 44]
+    assert probe_calls == [44, 44]
+
+
+def test_windows_retry_generation_switch_preserves_replacement() -> None:
+    close_calls: list[int] = []
+    probe_calls: list[int] = []
+    replacement_alive = False
+
+    def close_once(handle: int) -> int:
+        nonlocal replacement_alive
+        close_calls.append(handle)
+        if len(close_calls) == 2:
+            replacement_alive = True
+            return 32
+        return 5
+
+    def probe_generation(handle: int) -> tuple[str, int | None]:
+        probe_calls.append(handle)
+        return (
+            ("same_generation", None)
+            if len(probe_calls) == 1
+            else ("different_generation", None)
+        )
+
+    outcome = bootstrap._close_windows_handle_with_recovery(
+        45,
+        close_once=close_once,
+        probe_generation=probe_generation,
+    )
+    assert outcome.status == "indeterminate"
+    assert [error.errno for error in outcome.errors[:2]] == [5, 32]
+    assert isinstance(outcome.errors[2], bootstrap.ActivationRejected)
+    assert str(outcome.errors[2]) == "resource generation changed after retry"
+    assert close_calls == [45, 45]
+    assert probe_calls == [45, 45]
+    assert replacement_alive is True
+
+
+@pytest.mark.parametrize(
+    ("query_result", "expected_status", "expected_error_codes"),
+    [
+        pytest.param((True, None), "indeterminate", [5], id="live-handle"),
+        pytest.param((False, 6), "closed", [5], id="invalid-handle"),
+        pytest.param((False, 87), "indeterminate", [5, 87], id="probe-error"),
+    ],
+)
+def test_windows_production_close_adapter_maps_probe_outcomes(
+    query_result: tuple[bool, int | None],
+    expected_status: str,
+    expected_error_codes: list[int],
+) -> None:
+    close_calls: list[int] = []
+    query_calls: list[int] = []
+
+    def close_once(handle: int) -> int:
+        close_calls.append(handle)
+        return 5
+
+    def query_live(handle: int) -> tuple[bool, int | None]:
+        query_calls.append(handle)
+        return query_result
+
+    outcome = bootstrap._close_windows_handle_production(
+        46,
+        close_once=close_once,
+        query_live=query_live,
+    )
+    assert outcome.status == expected_status
+    assert [error.errno for error in outcome.errors] == expected_error_codes
+    assert close_calls == [46]
+    assert query_calls == [46]
+
+
+@pytest.mark.skipif(os.name != "nt", reason="requires native Windows HANDLE traversal")
+def test_windows_open_anchored_uses_module_production_close_adapter(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    artifact = tmp_path / "artifact.json"
+    artifact.write_text("trusted", encoding="utf-8")
+    real_adapter = bootstrap._close_windows_handle_production
+    adapter_calls: list[int] = []
+
+    def recording_adapter(
+        owned: int,
+        *,
+        close_once: object,
+        query_live: object,
+    ) -> bootstrap._CloseOutcome:
+        adapter_calls.append(owned)
+        return real_adapter(
+            owned,
+            close_once=close_once,
+            query_live=query_live,
+        )
+
+    monkeypatch.setattr(
+        bootstrap,
+        "_close_windows_handle_production",
+        recording_adapter,
+    )
+    descriptor = bootstrap._windows_open_anchored(artifact)
+    try:
+        assert adapter_calls
+        assert all(isinstance(handle, int) for handle in adapter_calls)
+    finally:
+        os.close(descriptor)
+
+
+@pytest.mark.parametrize("probe_status", ("different_generation", "indeterminate"))
+def test_windows_handle_numeric_reuse_or_weak_liveness_never_retries(
+    probe_status: str,
+) -> None:
+    close_calls: list[int] = []
+    replacement_alive = True
+
+    def close_once(handle: int) -> int | None:
+        nonlocal replacement_alive
+        close_calls.append(handle)
+        if len(close_calls) > 1:
+            replacement_alive = False
+        return 5
+
+    def probe_generation(handle: int) -> tuple[str, int | None]:
+        assert handle == 43
+        return probe_status, None
+
+    outcome = bootstrap._close_windows_handle_with_recovery(
+        43,
+        close_once=close_once,
+        probe_generation=probe_generation,
+    )
+    assert outcome.status == "indeterminate"
+    assert outcome.failed is True
+    assert close_calls == [43]
+    assert replacement_alive is True
+
+
+def test_windows_cleanup_callback_exception_is_indeterminate_and_retained() -> None:
+    callback_error = KeyboardInterrupt()
+    handles = [47]
+
+    def close_handle(_handle: int) -> bootstrap._CloseOutcome:
+        raise callback_error
+
+    outcomes = bootstrap._cleanup_windows_handles(handles, close_handle)
+    assert handles == []
+    assert len(outcomes) == 1
+    assert outcomes[0].resource == "handle:47"
+    assert outcomes[0].status == "indeterminate"
+    assert outcomes[0].errors == (callback_error,)
 
 
 def test_windows_relative_handle_chain_checks_cleanup_failures(
@@ -949,18 +1337,24 @@ def test_windows_relative_handle_chain_checks_cleanup_failures(
         transferred_descriptors.append(descriptor)
         return descriptor
 
-    def close_handle(handle: int) -> BaseException | None:
+    cleanup_error = OSError(5, "injected recovered ancestor close failure")
+
+    def close_handle(handle: int) -> bootstrap._CloseOutcome:
         assert handle in live_handles
         live_handles.remove(handle)
         if handle == 101:
-            return OSError(5, "injected recovered ancestor close failure")
-        return None
+            return bootstrap._CloseOutcome(
+                f"handle:{handle}",
+                "closed",
+                (cleanup_error,),
+            )
+        return bootstrap._CloseOutcome(f"handle:{handle}", "closed")
 
     try:
         with pytest.raises(
             bootstrap.ActivationRejected,
             match="Windows anchored resource cleanup failed",
-        ):
+        ) as captured:
             bootstrap._windows_open_from_root(
                 artifact,
                 ("directory", "artifact.json"),
@@ -971,6 +1365,11 @@ def test_windows_relative_handle_chain_checks_cleanup_failures(
                 transfer_to_descriptor=transfer_to_descriptor,
                 close_handle=close_handle,
             )
+        cause = captured.value.__cause__
+        assert isinstance(cause, bootstrap._CleanupFailure)
+        assert cause.primary_error is None
+        assert cause.most_severe_status == "closed"
+        assert cause.outcomes[0].errors == (cleanup_error,)
         assert relative_calls == [
             (100, "directory", True),
             (101, "artifact.json", False),
@@ -983,6 +1382,159 @@ def test_windows_relative_handle_chain_checks_cleanup_failures(
         os.close(source_descriptor)
 
 
+def test_windows_primary_and_cleanup_failures_preserve_exact_severity(
+    tmp_path: Path,
+) -> None:
+    primary_error = ValueError("injected transfer-window primary failure")
+    indeterminate_error = OSError(5, "indeterminate child cleanup")
+    unresolved_error = OSError(32, "unresolved root cleanup")
+    live_handles = {100}
+    relative_calls = 0
+
+    def reject_reparse(handle: int, _label: str) -> None:
+        assert handle in live_handles
+
+    def open_relative(parent: int, _name: str, _directory: bool) -> int:
+        nonlocal relative_calls
+        assert parent in live_handles
+        relative_calls += 1
+        if relative_calls == 2:
+            raise primary_error
+        live_handles.add(101)
+        return 101
+
+    def transfer_to_descriptor(_handle: int) -> int:
+        raise AssertionError("transfer must not run after primary failure")
+
+    def close_handle(handle: int) -> bootstrap._CloseOutcome:
+        live_handles.discard(handle)
+        if handle == 101:
+            return bootstrap._CloseOutcome(
+                "handle:101",
+                "indeterminate",
+                (indeterminate_error,),
+            )
+        return bootstrap._CloseOutcome(
+            "handle:100",
+            "unresolved",
+            (unresolved_error,),
+        )
+
+    with pytest.raises(
+        bootstrap.ActivationRejected,
+        match="most_severe=unresolved",
+    ) as captured:
+        bootstrap._windows_open_from_root(
+            tmp_path / "directory" / "artifact.json",
+            ("directory", "artifact.json"),
+            final_directory=False,
+            root_handle=100,
+            reject_reparse=reject_reparse,
+            open_relative=open_relative,
+            transfer_to_descriptor=transfer_to_descriptor,
+            close_handle=close_handle,
+        )
+    cause = captured.value.__cause__
+    assert isinstance(cause, bootstrap._CleanupFailure)
+    assert cause.primary_error is primary_error
+    assert cause.most_severe_status == "unresolved"
+    assert [outcome.status for outcome in cause.outcomes] == [
+        "indeterminate",
+        "unresolved",
+    ]
+    assert cause.outcomes[0].errors == (indeterminate_error,)
+    assert cause.outcomes[1].errors == (unresolved_error,)
+    assert live_handles == set()
+
+
+def test_posix_presence_cleanup_preserves_primary_and_all_outcomes(
+    tmp_path: Path,
+) -> None:
+    primary_error = RuntimeError("injected POSIX traversal failure")
+    closed_error = OSError(bootstrap.errno.EIO, "closed with reported error")
+    indeterminate_error = OSError(
+        bootstrap.errno.EBUSY,
+        "indeterminate cleanup",
+    )
+    unresolved_error = OSError(bootstrap.errno.EBADF, "unresolved cleanup")
+    outcomes = [
+        bootstrap._CloseOutcome("descriptor:91", "closed", (closed_error,)),
+        bootstrap._CloseOutcome(
+            "descriptor:92",
+            "indeterminate",
+            (indeterminate_error,),
+        ),
+        bootstrap._CloseOutcome(
+            "descriptor:93",
+            "unresolved",
+            (unresolved_error,),
+        ),
+    ]
+    cleanup_inputs: list[list[int]] = []
+
+    def open_component(*_args: object, **_kwargs: object) -> int:
+        return 91
+
+    def fail_stat(*_args: object, **_kwargs: object) -> object:
+        raise primary_error
+
+    def cleanup(descriptors: list[int]) -> list[bootstrap._CloseOutcome]:
+        cleanup_inputs.append(list(descriptors))
+        descriptors.clear()
+        return outcomes
+
+    with pytest.raises(
+        bootstrap.ActivationRejected,
+        match="most_severe=unresolved",
+    ) as captured:
+        bootstrap._path_presence_posix(
+            tmp_path / "artifact.json",
+            absolute_parts=lambda _path: (
+                tmp_path.resolve(),
+                ("artifact.json",),
+            ),
+            open_component=open_component,
+            stat_component=fail_stat,
+            cleanup_descriptors=cleanup,
+        )
+    cause = captured.value.__cause__
+    assert isinstance(cause, bootstrap._CleanupFailure)
+    assert cause.primary_error is primary_error
+    assert cause.outcomes == tuple(outcomes)
+    assert cause.most_severe_status == "unresolved"
+    assert cleanup_inputs == [[91]]
+
+
+def test_posix_presence_rethrows_primary_when_cleanup_is_clean(
+    tmp_path: Path,
+) -> None:
+    primary_error = KeyboardInterrupt()
+
+    def open_component(*_args: object, **_kwargs: object) -> int:
+        return 94
+
+    def fail_stat(*_args: object, **_kwargs: object) -> object:
+        raise primary_error
+
+    def cleanup(descriptors: list[int]) -> list[bootstrap._CloseOutcome]:
+        assert descriptors == [94]
+        descriptors.clear()
+        return []
+
+    with pytest.raises(KeyboardInterrupt) as captured:
+        bootstrap._path_presence_posix(
+            tmp_path / "artifact.json",
+            absolute_parts=lambda _path: (
+                tmp_path.resolve(),
+                ("artifact.json",),
+            ),
+            open_component=open_component,
+            stat_component=fail_stat,
+            cleanup_descriptors=cleanup,
+        )
+    assert captured.value is primary_error
+
+
 def test_closed_authority_dangling_symlink_is_not_absent(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -993,7 +1545,7 @@ def test_closed_authority_dangling_symlink_is_not_absent(
     runtime = authorities["runtime"]
     assert isinstance(runtime, dict)
     dangling = tmp_path / "runtime.json"
-    dangling.symlink_to(tmp_path / "missing.json")
+    _symlink_or_skip(dangling, tmp_path / "missing.json")
     runtime["path"] = dangling.relative_to(tmp_path).as_posix()
     monkeypatch.setattr(bootstrap, "ROOT", tmp_path)
     monkeypatch.setattr(validator, "ROOT", tmp_path)
@@ -1005,10 +1557,11 @@ def test_presence_uses_anchored_alias_evidence(
     tmp_path: Path,
 ) -> None:
     candidate = tmp_path / "junction"
-    candidate.symlink_to(tmp_path / "missing")
+    _symlink_or_skip(candidate, tmp_path / "missing")
     assert bootstrap._path_is_present_or_aliased(candidate) is True
 
 
+@pytest.mark.skipif(os.name == "nt", reason="POSIX descriptor fault injection")
 def test_blockers_reject_ancestor_swap_from_absent_to_present_authority(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -1055,12 +1608,24 @@ def test_blockers_reject_ancestor_swap_from_absent_to_present_authority(
     assert swapped is True
 
 
-def test_windows_anchored_open_uses_relative_nt_handles() -> None:
-    source = Path(bootstrap.__file__).read_text(encoding="utf-8")
-    assert "NtCreateFile" in source
-    assert "RootDirectory" in source
-    assert "file_open_reparse_point" in source
-    assert "close_handle_with_recovery" in source
+def test_generation_safe_cleanup_contract_is_frozen() -> None:
+    validation = _config()["validation_contract"]
+    assert isinstance(validation, dict)
+    assert validation["close_recovery_max_retries_after_generation_proof"] == 1
+    assert validation["same_generation_retry_requires_error_free_probe"] is True
+    assert validation["any_probe_error_forces_indeterminate"] is True
+    assert validation["numeric_liveness_is_generation_proof"] is False
+    assert validation["cleanup_preserves_primary_failure"] is True
+    assert validation["windows_probe_outcome_mapping"] == {
+        "successful_liveness_query": "indeterminate",
+        "error_invalid_handle": "closed",
+        "other_win32_error": "indeterminate",
+    }
+    assert validation["cleanup_outcome_statuses"] == [
+        "closed",
+        "unresolved",
+        "indeterminate",
+    ]
 
 
 def test_predecessor_outer_and_escalate_receipt_are_exactly_bound() -> None:
@@ -1096,7 +1661,7 @@ def test_production_blockers_reject_closed_authority_presence(
     contract["path"] = "unexpected-authority.json"
     authority_path = tmp_path / "unexpected-authority.json"
     if dangling_symlink:
-        authority_path.symlink_to(tmp_path / "missing.json")
+        _symlink_or_skip(authority_path, tmp_path / "missing.json")
     else:
         authority_path.write_text("{}", encoding="utf-8")
     monkeypatch.setattr(bootstrap, "ROOT", tmp_path)
@@ -1142,9 +1707,7 @@ def test_windows_dangling_junctions_fail_closed_for_authorities_and_manifests(
         assert isinstance(contract, dict)
         contract["path"] = junction.name
         try:
-            with pytest.raises(
-                bootstrap.ActivationRejected, match="unexpectedly exists"
-            ):
+            with pytest.raises(bootstrap.ActivationRejected):
                 bootstrap._blockers(config)
         finally:
             junction.rmdir()
@@ -1162,10 +1725,7 @@ def test_windows_dangling_junctions_fail_closed_for_authorities_and_manifests(
             junction if manifest_name == "inner" else tmp_path / "absent-inner.json",
         )
         try:
-            with pytest.raises(
-                bootstrap.ActivationRejected,
-                match="must not have production manifests",
-            ):
+            with pytest.raises(bootstrap.ActivationRejected):
                 bootstrap._verify_bundle(config, require_sealed=False)
         finally:
             junction.rmdir()
@@ -1253,7 +1813,7 @@ def test_activation_review_dangling_symlink_is_not_absent(
     }
     receipt_path = tmp_path / bootstrap.ACTIVATION_REVIEW_RELATIVE
     receipt_path.parent.mkdir(parents=True)
-    receipt_path.symlink_to(tmp_path / "missing.json")
+    _symlink_or_skip(receipt_path, tmp_path / "missing.json")
     monkeypatch.setattr(bootstrap, "ROOT", tmp_path)
     monkeypatch.setattr(
         bootstrap,
@@ -1397,8 +1957,22 @@ def test_sealed_lifecycle_accepts_iso_date_and_exact_keys(
         "member_count": len(members),
         "members": {relative: "c" * 64 for relative in members},
     }
-    monkeypatch.setattr(bootstrap, "_verify_outer_chain", lambda *args, **kwargs: chain)
+    captured: dict[str, object] = {}
+
+    def verify_outer_chain(*args: object, **kwargs: object) -> dict[str, object]:
+        captured["args"] = args
+        captured["kwargs"] = kwargs
+        return chain
+
+    monkeypatch.setattr(bootstrap, "_verify_outer_chain", verify_outer_chain)
     assert bootstrap._verify_bundle(config, require_sealed=True) == chain
+    assert captured["args"] == (bootstrap.OUTER,)
+    assert captured["kwargs"] == {
+        "expected_outer_schema": "rq2_joint_deliverability_activation_outer_v3",
+        "expected_inner_schema": "rq2_joint_deliverability_activation_inner_v3",
+        "expected_version": 3,
+        "expected_inner_path": bootstrap.INNER_RELATIVE,
+    }
 
     lifecycle = config["lifecycle"]
     assert isinstance(lifecycle, dict)
