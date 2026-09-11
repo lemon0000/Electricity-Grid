@@ -1,0 +1,93 @@
+{
+  "schema": "rq2_public_grid_highs_formal_activation_successor_v5_pre_seal_audit",
+  "version": 5,
+  "status": "PRE_SEAL_PASS_NONAUTHORITATIVE",
+  "authority_effect": "none",
+  "reviewed_on": "2026-09-10",
+  "reviewer": {
+    "agent": "/root/v5_production_reaudit_2",
+    "role": "independent_sol_reviewer",
+    "model": "gpt-5.6-sol",
+    "verdict": "PASS",
+    "blocker_count": 0,
+    "major_count": 0,
+    "minor_count": 0,
+    "cryptographic_reviewer_signature_present": false
+  },
+  "findings_in_scope": [
+    "V4-POST-RELEASE-BASEEXCEPTION-GAP",
+    "V4-DUAL-TERMINAL-RACE",
+    "V4-TEST-MATRIX-GAP",
+    "V5-BOOTSTRAP-ACCEPTANCE-ENVELOPE-GAP",
+    "V5-ORDINARY-STABLE-BYTES-ANCESTOR-IDENTITY-GAP",
+    "V5-WINDOWS-8DOT3-CANONICALIZATION-GAP",
+    "V5-PRODUCTION-RUNTIME-AUTHORITY-GAP",
+    "V5-PRODUCTION-DYNAMIC-CLOSURE-REVALIDATION-TIMEOUT-GAP",
+    "V5-ONE-SHOT-CONSUMED-DESTINATION-RACE",
+    "V5-ONE-SHOT-SECONDARY-BASEEXCEPTION-GAP",
+    "V5-SEALED-AUTHORITY-PLACEHOLDER-GAP",
+    "V5-POST-SEAL-VALIDATION-LIFECYCLE-GAP"
+  ],
+  "findings": {
+    "blocker": [],
+    "major": [],
+    "minor": []
+  },
+  "source_draft_audit": {
+    "path": "configs/rq2_public_grid_highs_formal_activation_successor_v5.PRE_SEAL_AUDIT_DRAFT.json",
+    "sha256": "38561a4efff5c001170300ef5e30c68c604b228ef25fb444f208d336f4747c3b"
+  },
+  "exact_nonself_sealed_sha256": {
+    "configs/rq2_public_grid_highs_formal_activation_successor_v5.json": "66104838043d21ab20372418cd0632c42ce976ad3d6df8d1a650121ea0c0067e",
+    "configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v6.yaml": "be8e7f158bbde49f9f58ed7f89bd0220c48b7cd793e2e31cba7a6b7273aa51d7",
+    "experiments/bootstrap_rq2_public_grid_highs_formal_activation_successor_v5.py": "9e4ab63901145402ba16a8b649b919eae1e3d455fdf31dcd89585550c3a289c1",
+    "experiments/rq2_public_grid_highs_formal_activation_contract_v5.py": "1e235899d2636fa3bfdc74b18cfc2973c6e994d0d11fad288a3843da014ead5e",
+    "experiments/run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_formal_v6.py": "50f7e3cb73e57c26156b88fc0f8d672a5e36403a4b0683217edd04a98251e20b",
+    "tests/test_rq2_public_grid_highs_formal_activation_successor_v5.py": "e2e25133aed071d1a27699d844da5b52ef412c1eb966dc5dc570a0741a4cc5e8"
+  },
+  "self_sha256_binding": "external_only_non_circular",
+  "execution_closure": {
+    "path": "configs/rq2_public_grid_highs_formal_activation_successor_v5.EXECUTION_CLOSURE.SHA256SUMS.json",
+    "sha256": "f844b0ef12cf8111e533d13104d02e41e70eafbc6d1b56972dfd267fbdf5b08e",
+    "member_count": 91,
+    "members_sha256": "36f70cc0ce1dcc0817acab23aadde02f569b33f648bb80c6a0ac96fb17b8ed99",
+    "hash_authority": "frozen_expected",
+    "expected_hashes_verified": true
+  },
+  "fresh_one_shot_authority": {
+    "path": "results/leases/rq2_public_grid_highs_formal_activation_successor_v5.lease.json",
+    "sha256": "4fc3da709214be3d8ea358b73a12e963ab18911db2fa414560a4c4636e45118c",
+    "authority_id": "c7425aeee171a14bbaa42c57deb8828fcdc8cb4a30f5dcfc80ab50451c536c2f",
+    "state": "fresh",
+    "one_shot": true
+  },
+  "verification": {
+    "v5_full": "83 passed in 4849.27s (1:20:49)",
+    "related_current_state": "106 passed, 3 registered historical-state nodes deselected in 76.84s",
+    "reviewer_targeted": "15 passed, 68 deselected",
+    "dual_process_one_shot_repetitions": 10,
+    "one_shot_additional_baseexception_faults": 6,
+    "production_dynamic_full_closure_call_count": 1,
+    "production_startup_timeout_seconds_unchanged": 30,
+    "ruff_check_passed": true,
+    "ruff_format_check_passed": true,
+    "in_memory_compile_count": 4,
+    "pyc_written": 0,
+    "bootstrap_validate_only_exit": 0,
+    "controller_validate_only_exit": 0,
+    "solver_calls": 0,
+    "formal_root_writes": 0,
+    "related_process_count": 0,
+    "planned_root_count_present": 0,
+    "future_review_user_consumed_artifact_count_present": 0
+  },
+  "pre_seal_findings_closed": true,
+  "writer_pre_seal_evidence_complete": true,
+  "sealed_ready_for_independent_review": true,
+  "independent_formal_activation_review_passed": false,
+  "user_formal_run_authorized": false,
+  "formal_execution_authorized": false,
+  "formal_result_exists": false,
+  "claim": false,
+  "security_certified": false
+}

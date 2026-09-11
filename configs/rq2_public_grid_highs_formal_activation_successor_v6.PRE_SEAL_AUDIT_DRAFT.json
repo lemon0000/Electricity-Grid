@@ -1,0 +1,61 @@
+{
+  "schema": "rq2_public_grid_highs_formal_activation_successor_v6_pre_seal_audit_draft",
+  "version": 6,
+  "status": "PRE_SEAL_FINDINGS_OPEN_NONAUTHORITATIVE",
+  "authority_effect": "none",
+  "findings_in_scope": [
+    "V5-POST-SEAL-TRACE-SCOPE-TIMEOUT"
+  ],
+  "sealed_predecessor": {
+    "outer_path": "configs/rq2_public_grid_highs_formal_activation_successor_v5.OUTER.SHA256SUMS.json",
+    "outer_sha256": "7d6a217ab1536e52b37180d5a1fa5b715eb03980ae3cbb3e4de2e9fd315e64ea",
+    "inner_sha256": "5cca0675bfd9a0b624287cf2705d089a4044493eacfa54c6ac82e074227c1a03",
+    "execution_closure_sha256": "f844b0ef12cf8111e533d13104d02e41e70eafbc6d1b56972dfd267fbdf5b08e",
+    "one_shot_lease_sha256": "4fc3da709214be3d8ea358b73a12e963ab18911db2fa414560a4c4636e45118c"
+  },
+  "exact_nonself_draft_sha256": {
+    "configs/rq2_public_grid_highs_formal_activation_successor_v6.DRAFT.json": "1dd0e89ccfac25a85268bba4a7c625df8f7042037fe4bd1bf8b5fb4e64b1cb83",
+    "configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v7.DRAFT.yaml": "86d956fe07cda6fda015566a1f4b7fae9da85447b1e713725af8525cab11a0e9",
+    "experiments/bootstrap_rq2_public_grid_highs_formal_activation_successor_v6.py": "59e44e0b576ad77b995df0445512cadcc37845f82601b7d793ced2de1b8b8fbc",
+    "experiments/rq2_public_grid_highs_formal_activation_contract_v6.py": "34056810904bcb53a38eab86e3d3a9c2938c66bc1e69f1626199dd396ad0e3bb",
+    "experiments/run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_formal_v7.py": "4b337c4ee59086fb2f3edfdfee5790c03a1153d76da01eb2ec30ad5453e1e9e2",
+    "tests/test_rq2_public_grid_highs_formal_activation_successor_v6.py": "9c2a6c4ea62880982ee24781a0c88a8c69f49acd038c543deec8278ece8f2e67"
+  },
+  "self_sha256_binding": "external_only_non_circular",
+  "frozen_acceptance_matrix": {
+    "old_unscoped_trace_reproduced_postseal_timeout": true,
+    "old_unscoped_trace_red": "2 failed in 294.94s",
+    "trace_is_limited_to_spawn_controller_frame": true,
+    "trace_is_armed_only_after_release_acceptance": true,
+    "nested_closure_frames_are_not_line_traced": true,
+    "exact_target_line_injection_count_per_case": 1,
+    "consecutive_exact_pair_stability_rounds": 3,
+    "keyboard_interrupt_exact_line_recovered": true,
+    "system_exit_exact_line_recovered": true,
+    "startup_timeout_seconds_unchanged": 30,
+    "scientific_protocol_changed": false,
+    "formal_execution_authorized": false
+  },
+  "writer_observed_evidence": {
+    "root_cause": "The V5 post-seal test tracer returned itself for every frame. Under sealed 91-member closure replay this traced nested validation line-by-line until the child timed out waiting 30 seconds for science_release.json. The production controller failed closed; no solver or formal run started.",
+    "test_first_red": "The exact sealed V5 KeyboardInterrupt/SystemExit node reproduced 2 failed in 294.94s. Both child stderr logs ended at startup control timed out: science_release.json.",
+    "intermediate_red": "A frame-filtered global tracer remained active during the handshake. The full V6 matrix exposed one KeyboardInterrupt timeout: 82 passed and 1 failed in 5229.54s; startup_ack preceded the late science_release publication by 50.25 seconds.",
+    "minimal_green": "The V6 test now arms the local _spawn_controller line tracer only after real release acceptance and still raises at the exact registered line. Both parameters passed in 186.39s with injection_count exactly one, one terminal authority, and the owned child stopped.",
+    "stability_green": "Three additional consecutive exact two-parameter rounds passed in 187.84s, 180.73s, and 181.42s. Each case retained injection_count exactly one, proven release acceptance, one terminal outcome, no launch_incomplete marker, and a stopped owned child.",
+    "full_v6_green": "83 passed in 5143.15s with no failure, error, or skip.",
+    "adjacent_green": "V1-V4 plus the current V8 suite passed 106 tests with three explicitly deselected current-state V8 execution-artifact nodes; 106 passed, 3 deselected in 82.10s.",
+    "static_green": "Independent modulefinder closure oracle passed; 83 tests collected; Ruff check and format check passed; four Python files parsed in memory.",
+    "validate_only_green": "Bootstrap and controller validate-only both passed with 91 derived-current closure members, members_sha256 86008a26f172cd5dcfe8881c8f9bcd883918d65b2f45d115772c19c2dfa24756, HiGHS 1.15.1, 1071 blocks, zero solver calls, and zero formal-root writes.",
+    "negative_execute_green": "Draft --execute exited 1 at require_sealed_for_execution before preflight, lease consumption, controller spawn, or formal-root writes.",
+    "remaining": "Fresh independent R4 review, canonical materialization, sealing, and any user-authorized formal run remain pending."
+  },
+  "writer_pre_seal_evidence_complete": true,
+  "pre_seal_findings_closed": false,
+  "sealed_ready_for_independent_review": false,
+  "independent_formal_activation_review_passed": false,
+  "user_formal_run_authorized": false,
+  "formal_execution_authorized": false,
+  "formal_result_exists": false,
+  "claim": false,
+  "security_certified": false
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "rq2_public_grid_highs_formal_activation_successor_review_escalate_v6",
+  "version": 6,
+  "reviewed_on": "2026-09-10",
+  "reviewer_agent": "/root/v6_official_reviewer",
+  "reviewer_role": "independent_sol_reviewer",
+  "reviewer_model": "gpt-5.6-sol",
+  "reviewer_reasoning_effort": "high",
+  "verdict": "ESCALATE",
+  "reviewed_outer": {
+    "path": "configs/rq2_public_grid_highs_formal_activation_successor_v6.OUTER.SHA256SUMS.json",
+    "sha256": "12a00b1c4a75943c81e712bc02f53ed38d67a6749e440c1103294a3c568937aa"
+  },
+  "finding_counts": {
+    "blocker": 1,
+    "major": 0,
+    "minor": 0
+  },
+  "findings": [
+    {
+      "id": "V6-OFFICIAL-REWORK-SUCCESSOR-LIFECYCLE-GAP",
+      "severity": "critical",
+      "finding": "The sole V6 official REWORK finding was an authoritative-state documentation mismatch. That documentation finding was corrected, but the proposed recheck kept the same sealed V6 outer instead of entering a new versioned successor as required after official REWORK. The repeated acceptance item therefore escalates; V6 cannot receive a PASS receipt or execution authority.",
+      "original_documentation_finding_corrected": true,
+      "execution_authority_effect": "none"
+    }
+  ],
+  "verified_without_new_blocker": {
+    "postseal_full_passed": 83,
+    "postseal_full_failed": 0,
+    "execution_closure_member_count": 91,
+    "inner_manifest_member_count": 15,
+    "artifact_and_code_checks_otherwise_green": true,
+    "review_pass_receipt_present": false,
+    "user_formal_run_authority_present": false,
+    "one_shot_lease_state": "fresh_unconsumed",
+    "preflight_started": false,
+    "lease_consumed": false,
+    "controller_spawned": false,
+    "formal_roots_present": false,
+    "related_formal_process_count": 0,
+    "solver_process_count": 0,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false
+  },
+  "materialized_from_independent_review_report": true,
+  "cryptographic_reviewer_signature_present": false,
+  "independent_formal_activation_review_passed": false,
+  "formal_execution_authorized": false,
+  "formal_result_exists": false,
+  "claim": false,
+  "security_certified": false
+}

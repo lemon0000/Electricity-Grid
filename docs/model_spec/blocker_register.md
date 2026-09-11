@@ -26,9 +26,9 @@
 | PYPOWER同址Q控制初始化语义 | resolved by transparent amendment 004 | 发现同址在线Q-inert机组`VG`可覆盖唯一Q-capable控制器的源`VG`；004只允许把唯一Q-capable源`VG`复制到同址Q-inert行，并保持bus VM作为Newton初值 | amendment-003结果manifest `2b5b705d...`及`2276/2304`统计只作invalidated parent diagnostic；正式direct replay只使用004结果 |
 | 零数据中心normal AC与共同恢复门 | method-blocked for treatment follow-up | direct control为24/24收敛、0/24 secure；560 reference/distributed为11/24和22/24，565为22/24，三组IPOPT原边界各22/24，均未见证h15/h21；`repair_005`已发布4/6 checkpoint，candidate 5在cost normalization中断，active lease为stale evidence但被保留，`operational_interruption` manifest为`66fd455aa958c06c809f9a51a5a9588a932843b83b2cd2953b9982bd1bdb057b`；当前无solver进程，历史attempt均不得恢复且不构成不可行证据 | `treatment_followup_gate_passed=false`；`repair_005_resume_allowed=false`，后续须新建attempt并重新取得lease；六个预算候选checkpoint、完整frontier、manifests、两阶段certificates、primary regret及final 24-state audit验证前，不得启动joint AC、依赖该对照的treatment或论文结果固定；另一解除路径是取得有来源的tap/shunt/补偿及控制参数 |
 | V3两套relative-gap字段的解释 | resolved as authoritative-field separation | stage顶层按feasible incumbent归一的`target_attained/eligibility_status/maximum_acceptance`是唯一正式资格；嵌套certificate按`max(abs(LB),abs(UB),1)`归一的relative/target字段仅作通用辅助诊断 | 判断target是否达到时只读取stage顶层字段，不读取嵌套`certificate.target_gap_attained`；checkpoint仍须检查`certificate.valid`、maximum acceptance、final audit、primary regret和residual audit。论文不得引用嵌套target字段；未来后继schema应删除或显式重命名该冗余字段 |
-| M6完整网络-业务时序闭环 | formal activation blocked after V4 `ESCALATE` | v5的202个HiGHS checkpoint继续仅作诊断；fresh HiGHS/Gurobi confirmatory pilot v4已完成并通过语义与独立结果审查。Gurobi正式attempt只保留9/1071个历史checkpoint；process-isolated HiGHS V8已完成nonformal `0008 -> 0009`并通过post-result review。formal activation V1-V4均未取得执行许可，当前无formal candidate或正式grid package | 只有用户明确授权新的V5 draft后才能进入pre-seal开发；V5仍须seal、独立R4 review和单独formal-run authority。完整grid发布前pairwise/identification保持关闭 |
-| RQ2 HiGHS同进程thread scheduler隔离 | mitigated for V8 two-block route; formal activation blocked | 同进程污染不再用于当前执行路径；V8对每个block使用fresh process，并记录actual HiGHS 1.15.1/4 threads、PID/create-time、solver-call accounting和完整resource journal。该证据覆盖固定两块，不自动证明1071-block formal controller | future formal successor必须保持per-block process isolation并由独立review验证完整生命周期；不得回退到同进程连续求解或把资源停止解释为不可行 |
-| RQ2 Vnext two-block pilot post-result evidence | V8 nonformal `committed_success`; post-result `PASS` | v8唯一一次fixed `0008 -> 0009` run已发布result/PUBLISHED exact trees；public-only readback、fresh PID/predecessor、HiGHS runtime、resource journals和无seed tombstone均通过。独立post-result receipt SHA-256为`28e546b8f5f3bc8c8402c86ec723ec9e35da041ba74676c9adb59cd338980ca6` | 该PASS只关闭two-block evidence门，不形成formal result、论文claim或security certification。formal activation V4已`ESCALATE`，当前无可执行candidate |
+| M6完整网络-业务时序闭环 | V6 official `ESCALATE`; V7 PRE_SEAL `REWORK` remediation in progress | v5的202个HiGHS checkpoint继续仅作诊断；fresh HiGHS/Gurobi confirmatory pilot v4已完成并通过语义与独立结果审查。Gurobi正式attempt只保留9/1071个历史checkpoint；process-isolated HiGHS V8已完成nonformal `0008 -> 0009`并通过post-result review。V6 official reviewer以1/0/0 `ESCALATE`关闭同一outer复核的successor-lifecycle缺口；receipt SHA-256为`ee41fe26122862650fd492fe54aa950936f8cb38da21991b063130a771f6a2aa`。V7 PRE_SEAL reviewer随后以1/0/0 `REWORK`指出该receipt虽由validate-only校验，却未进入future sealed inner member set。当前最小整改已把receipt加入expected inner set，并以真实sealed execution gate覆盖缺失/内容漂移，两种路径的review/user/preflight/consume/spawn调用均为0；focused为`1 passed in 0.57s`和`7 passed in 20.06s`。整改后的full matrix尚未完成，V7仍无canonical/lease/review/user artifacts、preflight、consume、spawn或formal run | 先完成writer remediation matrix，再由fresh只读R4 PRE_SEAL reviewer审查整改后的exact draft bytes；findings闭合前不得seal。official PASS receipt及另行用户运行授权前，formal execution/result/claim/security均为false；完整grid发布前pairwise/identification保持关闭 |
+| RQ2 HiGHS同进程thread scheduler隔离 | mitigated for V8与V7 draft controller；PRE_SEAL remediation in progress | 同进程污染不再用于当前执行路径；V8对每个block使用fresh process；V7 draft/formal-controller V8逐字继承V6的per-block fresh worker、1071 blocks、HiGHS 1.15.1、4 threads、PID/create-time、solver-call accounting和完整resource journal。整改前双validate-only与V7 full均通过且solver/formal writes为0/0；formal run从未启动。当前PRE_SEAL finding只涉及V6 ESCALATE receipt的future sealed-inner绑定，不改变solver或科学协议 | 完成整改后的测试矩阵及fresh PRE_SEAL复核前不得seal或启动formal run。正式执行路径必须保持per-block process isolation，不得回退到同进程连续求解或把资源停止解释为不可行 |
+| RQ2 Vnext two-block pilot post-result evidence | V8 nonformal `committed_success`; post-result `PASS` | v8唯一一次fixed `0008 -> 0009` run已发布result/PUBLISHED exact trees；public-only readback、fresh PID/predecessor、HiGHS runtime、resource journals和无seed tombstone均通过。独立post-result receipt SHA-256为`28e546b8f5f3bc8c8402c86ec723ec9e35da041ba74676c9adb59cd338980ca6` | 该PASS只关闭two-block evidence门，不形成formal result、论文claim或security certification。它是V6/V7绑定的前序证据；V6 official review已`ESCALATE`，V7仍为无执行权限的draft。下一步仅为fresh V7 PRE_SEAL review，不创建production artifacts、不启动formal run |
 | RQ2四臂归因v1前序 | superseded for primary attribution; implementation-only | 四臂core、checkpoint/external-preflight与旧互斥identification/report合同已实现为validate-only；现有70-cell阴性结果和全部sealed bytes保持不变 | 旧exclusive classifier不作为联合前沿主结论authority；不得覆盖旧协议或用其启动新46-cell流程 |
 | RQ2联合服务可交付前沿 | v5 independent R4 `PASS`; implementation v2 independent R3 `PASS`; execution v3 independent R3 `PASS` | 用户在v2 `ESCALATE`后明确授权v3；v3移除live receipt永久缺失假设，递归绑定v2/v1 authority并拒绝旧fixed PASS普通entry与dangling symlink。22-member outer为`b153f0320fe9dfe961575be4836f4bcf4044836be4fa66618119fc08d4cbce80`，official review及post-receipt stability均为`0/0/0` | independent review gate已关闭；dispatched-grid、Windows runtime、native replay、memory/transport、fresh-process activation及单独formal-run authority仍缺失，全部formal execution/result/claim门关闭 |
 | 真实重大停电事件分布 | processed candidate cohorts; independent-event calibration blocked | 已冻结1534源行、1521候选组及主/敏感性队列；主持续队列1385组/1398源行，重复组保留source IDs并以非缺失max/min而非求和审计 | 候选组不证明独立物理事故，仍不得估计事故频次或无条件时长分布；无资产ID、拓扑和SCUC，不得映射为RTS具名N-1或声称与业务同钟 |
@@ -2781,3 +2781,466 @@ POSIX注入观察到同一数字fd被close两次且replacement最终`EBADF`，�
 观察到第二次close作用于replacement。审查前后六个输入hash一致、工作区干净、
 0 file write、0 solver/formal effect。当前不得进入seal；须在同一
 `DRAFT_NONAUTHORITATIVE`中修复并由新的只读pre-seal reviewer复审至`0/0/0`。
+
+### 2026-09-07 activation v3 remediation（等待全新 pre-seal reviewer）
+
+同一 `DRAFT_NONAUTHORITATIVE` 已实现针对上述 `2/2/1` findings 的修复候选：sealed-path
+outer/inner version 改为 v3；close recovery 仅在显式 `same_generation` proof 后至多 retry
+一次，production POSIX/Windows probe 只可证明 `closed`，数值存活、`samestat` 或 HANDLE
+liveness 均不作为 generation proof；cleanup 以 `closed/unresolved/indeterminate` 结构化保留
+全部 errors、primary failure 与最严重 outcome；controller 模块说明改为 v3。行为级 fault matrix
+覆盖 already-closed、numeric reuse、retry failure、indeterminate probe、callback exception，以及
+Windows primary failure 与多个 cleanup severity 的组合，并断言 replacement 保持存活及 exact
+outcome。此段只记录 remediation implementation，尚无新的 reviewer verdict，不能把旧 findings
+记为已独立清零。
+
+activation-v3 focused 为 `61 passed, 11 skipped in 18.57s`；11 个 skip 精确为 3 个 POSIX-only
+fault injection、1 个 POSIX descriptor-relative open，以及当前 Windows 无 symlink privilege 导致的
+7 个 symlink tests。activation-v3 + implementation-v2 + execution-v3 原样 raw broad 为
+`7 failed, 268 passed, 13 skipped in 456.64s`。7 个失败全部来自未修改的 sealed
+`tests/test_rq2_joint_deliverability_implementation_v2.py`：
+
+- `test_atomic_output_publication_has_exact_recursive_manifest`；
+- `test_recursive_manifest_rejects_extra_empty_directory`；
+- `test_publication_marks_post_result_failure_indeterminate`；
+- `test_publication_cleans_up_failure_before_result_rename`；
+- `test_publication_reconciles_transient_post_success_readback_failure`；
+- `test_publication_keeps_success_parent_fsync_failure_indeterminate`；
+- `test_output_publication_rejects_symlink_ancestor`。
+
+前 6 个在 Windows directory `os.open` 的 `_fsync_directory` 处得到 `PermissionError`，最后一个因
+WinError 1314 无 symlink privilege。该测试文件、implementation-v2 runner/validator 与
+`src/rq2_joint_deliverability_v2` 均不 import 或引用 activation-v3，且本轮 changed paths 不含上述
+sealed implementation 路径。同一 7-node 命令已在 clean HEAD
+`e93eb573b4185c937a2a23ade6f0ceed614f6005` 独立 clone 原样复现为
+`7 failed in 70.56s`，节点及 traceback 原因一致。精确 deselect 仅作为其余覆盖证据：
+`268 passed, 13 skipped, 7 deselected in 406.59s`；不得把该结果描述为 raw broad green。
+
+Ruff check/format-check 与 4-file `py_compile` 通过。static validator 与 fresh validate-only 均通过；
+fresh inventory 为 closure `13/13`、observed/executed `11/11`，并报告
+`solver_calls=0`、`formal_result_files_written=0`、`formal_execution_ready=false`。`--execute`
+仍在 review-only boundary exit 1。production inner/outer manifest、activation PASS receipt、外部
+authority 与 formal roots 均不得物化。下一步只能由另一名全新只读 reviewer 对当前 live draft
+执行 pre-seal re-audit；在其 verdict 前保持 draft，不得 seal、official review 或 formal run。
+
+### 2026-09-07 activation v3 第二轮 pre-seal findings：`0/3/0`
+
+全新只读 reviewer 对第一轮 remediation 后的 live draft 给出非权威
+`Blocker/Major/Minor=0/3/0`。该结论不打开任何 gate：
+
+1. `_generation_safe_close.probe()` 在非法 status 时先返回，可能丢失同次 probe 返回的原始
+   error；`same_generation` 或 `closed` 与非空 error 同时出现时也未统一强制
+   `indeterminate`，前者仍可错误授权 retry；
+2. POSIX `_path_presence_once` 的 traversal primary failure 未跨 finally cleanup 保留，cleanup
+   finding 会以 `primary_error=None` 覆盖原始异常；
+3. Windows 测试主要约束通用 generation helper，未直接冻结 production Win32 query 到
+   `closed/indeterminate` 的映射，也未证明 `_windows_open_anchored()` 实际使用同一受测 adapter。
+
+旧 `0/3/0` 作为第二轮审查事实保留，不得因后续 writer remediation 被改写为 reviewer 已清零。
+
+### 2026-09-07 activation v3 第二轮 remediation（等待全新 re-audit）
+
+同一 `DRAFT_NONAUTHORITATIVE` 已实现第二轮修复候选。probe 先保留原始 error，再验证 status；
+任何非空 error、非法或畸形 status 均强制 `indeterminate` 且禁止 retry，只有 error-free exact
+`same_generation` 可授权一次 retry。retry 后 generation 改变会保留两次 close error、标记
+`indeterminate`并停止，replacement 不再被后续 close。POSIX presence traversal 已抽成直接可注入
+的内部路径，先捕获 primary、完成全部 cleanup；cleanup 有 finding 时 `_CleanupFailure` 保留同一
+primary 对象与全部 outcome，否则重抛同一 primary。模块级 production Windows adapter 冻结
+successful live query→`indeterminate`、`ERROR_INVALID_HANDLE`→`closed`、其他 Win32 error→
+`indeterminate`且保留 error；native wiring test 通过 monkeypatch 该模块级 adapter，证明
+`_windows_open_anchored()` 实际调用同一对象。
+
+新增单点矩阵为 `11 passed, 71 deselected in 1.63s`；完整 activation-v3 focused 为
+`71 passed, 11 skipped in 15.86s`；受影响 activation-v3 + execution-v3 覆盖为
+`214 passed, 13 skipped in 97.02s`。此前三文件 raw broad 的 7 个 sealed implementation-v2
+Windows baseline failures 已在 clean HEAD 原样复现，本轮未修改该 sealed 路径，故仅复用既有
+baseline 账目，未将其描述为 green。Ruff/format-check、4-file `py_compile`、static validator 与
+fresh validate-only 通过；fresh closure/observed/executed 为 `13/11/11`，solver call/formal write
+为 `0/0`。negative `--execute` 仍在 review-only boundary exit 1。当前不得宣称第二轮 findings
+为 `0/0/0`；下一步仅为另一名全新只读 reviewer 的 pre-seal re-audit，期间不得 seal、生成
+manifest/receipt 或启动 solver/formal run。
+
+### 2026-09-07 activation v3 pre-seal `0/0/0` 与 production seal
+
+第二名全新只读 reviewer 对第二轮 remediation 后的 live draft 完成非权威 pre-seal re-audit，
+登记 `Blocker/Major/Minor=0/0/0`；历史 `2/2/1` 与 `0/3/0` findings 据此关闭，允许进入 seal，
+但该结论不是 exact sealed outer 的 official verdict。commitment 前 focused 为
+`71 passed, 11 skipped in 15.82s`，受影响 activation-v3 + execution-v3 为
+`214 passed, 13 skipped in 98.32s`；Ruff/format-check、4-file `py_compile`、static validator、
+fresh validate-only 与 negative execute 均满足冻结合同。此前 clean HEAD 已复现的 7 个 sealed
+implementation-v2 Windows baseline failures 继续保留为 raw broad 红项，不描述为全绿。
+
+production seal 先在系统临时目录以 Python production verifier 与独立 PowerShell
+`ConvertFrom-Json`/`Get-FileHash` 两种机械方式复算，均得到 bundle `24/24`、Python closure
+`13/13`、activation v2 predecessor `24/24`、execution v3 `22/22`。activation v3 inner/outer
+SHA-256 分别为 `5f4bc77aabff64cc6b4b8c257bd955a6315548a6a24eebdf607b815fbd21a262` 与
+`f1fcd7e77b188778466319c993538db1100730026a89b884711fc51497409ee7`；outer 最后单独发布，
+状态为 `SEALED_READY_FOR_INDEPENDENT_REVIEW`，24 个 bound members 自 commitment 起不可修改。
+
+post-seal sealed validator 与 fresh validate-only 均通过，24/24 member replay、13/13 closure、
+v2 24/24 与 execution-v3 22/22 复核通过；fresh observed/executed 为 `11/11`，solver call 与
+formal result write 为 `0/0`。activation review receipt、dispatched-grid、runtime、execution
+activation、user formal-run authority 及两个 formal roots 共 `7/7` absent，相关进程为 0。
+当前没有 official activation PASS receipt；independent review、formal execution/result、paper
+claim 与 security gate 均保持 false。下一步只能由另一名全新 official reviewer 审查 exact outer。
+
+### 2026-09-07 activation v3 official R3 PASS
+
+全新 official `sol_reviewer` 已对 exact activation v3 outer
+`f1fcd7e77b188778466319c993538db1100730026a89b884711fc51497409ee7` 完成独立审查，最终
+verdict 为 `PASS`，`Blocker/Major/Minor=0/0/0`。审查绑定 inner
+`5f4bc77aabff64cc6b4b8c257bd955a6315548a6a24eebdf607b815fbd21a262` 与 24/24 members，
+并复核 focused `71 passed, 11 skipped`、activation+execution `214 passed, 13 skipped`、
+Windows 高风险矩阵 `6 passed`、sealed/fresh/Ruff/format/diff 与 0 solver/0 formal write。
+
+machine receipt `configs/rq2_joint_deliverability_activation_review_pass_v3.json` 的 SHA-256 为
+`3bc4751d2478e9e216e829233ec21dc96c5340f4d81ebae4dcd46ec222f3ddd8`；其 reviewer role/model
+分别为 `independent_sol_reviewer`/`gpt-5.6-sol`，`reviewed_on=2026-09-07`，三类 finding arrays
+均为空。official report 不含 cryptographic signature，receipt exact schema 不添加额外 provenance
+或 evidence 字段。
+
+该 PASS 只关闭 activation review gate。receipt-aware sealed validator 与 fresh validate-only 通过，
+fresh blocker 仅剩 dispatched grid、runtime、execution activation 与 user formal-run authority 四项；
+negative execute 仍在 review-only boundary exit 1。其余四项 authority 与两个 formal roots 共
+`6/6` absent，formal execution/result、paper claim 与 security 均为 false，相关进程为 0。
+历史 raw broad 的 7 个 sealed implementation-v2 Windows publication baseline failures 继续作为
+残余风险保留，不描述为 broad green。
+
+## 2026-09-08 public-grid HiGHS formal activation V5 writer remediation（等待独立 pre-seal audit）
+
+V4 official R4 `ESCALATE` receipt
+`configs/rq2_public_grid_highs_formal_activation_successor_review_escalate_v4.json`
+（SHA-256 `1d4f5f1b65512a0092438051055171c5abf4dbbe2aa358675c5f580636bc4e9c`）登记的
+`V4-POST-RELEASE-BASEEXCEPTION-GAP`、`V4-DUAL-TERMINAL-RACE` 与
+`V4-TEST-MATRIX-GAP` 已在同一个 V5 `DRAFT_NONAUTHORITATIVE` 中形成 writer remediation。
+V5 使用单一跨进程 lifecycle decision 和全局 terminal decision；success/unresolved 竞争者共享同一
+create-if-absent authority，loser 必须校验磁盘 winner。release persist、stable readback、phase return、
+acceptance persist 及 recovery 的 `KeyboardInterrupt`/`SystemExit` 窗口均进入 fault matrix。
+
+本轮独立代码核查另发现一个未被原矩阵覆盖的 post-commit 窗口：terminal JSON 已完成原子 hard-link
+commit，但 stable readback 之前发生 `KeyboardInterrupt` 或 `SystemExit` 时，原实现会让异常逃逸，磁盘上的
+terminal class 与 controller return code 可能矛盾。先加入 success/unresolved ×
+`KeyboardInterrupt`/`SystemExit` 四例复现；初始 `KeyboardInterrupt` 注入在 32.86s 后中止 pytest，未完成
+测试。最小修复只在 terminal path 已是 ordinary file 时重新读取并严格验证磁盘 authority，否则继续抛出；
+修复后四例为 `4 passed in 340.46s`。15-node 受影响矩阵为
+`15 passed, 38 deselected in 1290.35s`，覆盖 release 三类窗口、双进程 terminal 三种竞争、terminal
+post-commit reconstruction、正常 success 与 block-zero exception。
+
+final exact-byte V5 focused 为 `53 passed in 4028.14s`，0 failure、0 skip。正确 related 范围为
+activation V1–V4 + V8；精确排除三个已登记的 V8 历史状态节点后为
+`106 passed, 3 deselected in 76.42s`。raw V8 必须保留为
+`63 passed, 3 failed in 13.53s`，三个 failure 精确是
+`test_execution_review_gate_precedes_v8_production_lease_touch`、
+`test_bundle_live_closure_new_roots_and_review_absence`、
+`test_canonical_validate_only_and_execute_remain_review_gated`；它们是 V8 已运行后失效的
+review/lease/root-absence 断言，不得把 raw broad 写成 green。
+
+Ruff check/format-check、4-file in-memory compile 与独立 `modulefinder` exact-set oracle 均通过；无 `.pyc`
+写入。bootstrap/controller validate-only 均 exit 0，保持 1071 blocks、HiGHS 1.15.1、4 threads，
+并报告 solver/formal-root write=`0/0`。当前 80-member closure digest 为
+`a0a9d1429e516bbdd0c42ca30155a6174de3b736495bd1c0f905d3e475a248c2`，但 authority 仍仅为
+`derived_current`，`expected_hashes_verified=false`，不是 frozen execution closure。negative
+`--execute` 在 draft gate exit 1，未进入 preflight、consume 或 spawn。测试后相关进程为 0，五个计划
+checkpoint/worker/log/output/activation roots 全部 absent，production inner/outer/closure、review receipt、
+run authority 与 lease 均未物化；V4 outer、77-member closure及两份用户 PDF 的受保护 hash 保持不变。
+
+用户已授权继续 V5 的后续门禁流程，并允许在全部 gate 闭合后进入正式 1071-block run；本 checkpoint
+只完成 writer 级 DRAFT/PRE_SEAL 证据，未把该授权物化为 run-authority artifact。当前
+`writer_pre_seal_evidence_complete=true`，但 `pre_seal_findings_closed=false`、
+`sealed_ready_for_independent_review=false`、formal/result/claim/security 均为 false。下一步只能由全新
+只读 R4 reviewer 对 live exact bytes 做非权威 pre-seal audit；在 reviewer verdict 前不得 seal、生成
+production/review/authority artifacts 或启动 solver/formal run。
+
+### 2026-09-08 V5 fresh pre-seal 2/0/0 findings remediation（等待再次独立复审）
+
+全新只读 pre-seal reviewer 对上一 writer checkpoint 登记了非权威
+`Blocker/Major/Minor=2/0/0`；该历史 verdict 不打开任何 gate。B1 是 controller 已严格提交并返回
+terminal `success` 后，在 guard 返回前发生 `KeyboardInterrupt`/`SystemExit` 时，outer exception path
+虽接受磁盘 success winner 却继续重抛，造成 success terminal 与 child nonzero return code 矛盾。B2 是
+release acceptance 已验证到 controller protected envelope/immutable spawn receipt 之间仍有 exit race，
+bootstrap 可能把已退出 child 写成 receipt，随后 strict readback 失败而未形成 lifecycle/terminal closure。
+
+两项均先保留 test-first red。B1 的 `KeyboardInterrupt` 注入曾直接逃逸并在 88.44s 后中止 pytest，未完成
+测试；B2 的 dead-child `rc=17` 复现为 `1 failed in 31.17s`，并错误进入 committed-spawn recovery。最小
+实现保持 validator、PID/create-time、timeout 与 one-shot/gate order 不变：严格 global terminal winner
+现在决定 controller exit 语义，只有 success winner 且已取得完整 result 才正常返回，unresolved winner
+继续传播异常；acceptance 之后的 controller path 整体进入 `BaseException` envelope。bootstrap 在 immutable
+spawn receipt commit 前先严格校验 prospective payload，并在 commit 两侧之前完成两次 exact PID/create-time
+liveness 证明；receipt commit 确认后的第一操作仍是 postcommit fault hook，随后才做 strict disk readback；
+precommit dead-child 分支归入 pre-spawn post-release recovery。没有放松 unresolved/timeout 语义，也没有将其
+解释为 infeasible。
+
+精确六个旧失败与四个 sibling 最终为 `10 passed in 1643.39s`。首次 full 暴露两项测试夹具预期差异，账目为
+`59 passed, 2 failed in 6620.97s`：dual-contender fixture 缺少显式 arrivals 诊断，cross-attempt replay regex
+遗漏更早且同样严格的 `dynamic pre-seal authority drifted`。仅修夹具后两点为 `2 passed in 71.04s`；
+controller-owned race 独立重复三次均通过，并继续断言 300s bounded rendezvous、cancel/controller 两条真实
+arrival、controller winner、无 thread error 与 postcommit-first fault window。最终 exact-byte V5 full 为
+`61 passed in 6425.67s`，0 failure、0 skip；activation V1–V4 + V8 current-state related 为
+`106 passed, 3 deselected in 80.01s`。raw V8 历史账目仍是 `63 passed, 3 failed in 13.53s`，三个已登记
+review/lease/root-absence 节点不得称为 raw broad green。
+
+Ruff/format、4-file in-memory compile、双 validate-only、negative execute 与独立 `modulefinder` exact-set
+均通过。derived closure 为 80 members，digest
+`5ef558bfd51eb17d0e217dd254a0c23e52e702a84c9692d98e86a24b75e3cc6c`，仍明确是
+`hash_authority=derived_current`、`expected_hashes_verified=false`，不是 frozen commitment。最终相关进程
+为 0；五个计划 roots 与七个 candidate production/review/authority/lease artifacts 均 absent。V4 outer
+`6936d06a5bc8d191f5eaf235fe7784c36193ac6343d88d16cbbd3e5bea8d2068`、V4 closure
+`ba9195283cf3ad149e08c875820198648d0a9c0cf6b99ac7e3c37b212683b948` 的 77/77 replay，以及两份用户
+PDF hash 均保持不变。
+
+本段只登记 writer remediation 与可复核证据，不把历史 `2/0/0` 自行改写成 `0/0/0`。PRE_SEAL audit
+保持 `pre_seal_findings_closed=false`、`sealed_ready_for_independent_review=false`，且 formal/result/claim/
+security 全为 false。当前状态是可供另一名全新只读 R4 reviewer 执行独立非权威 pre-seal re-audit；在其
+verdict 前不得 seal、生成 production/review/run-authority/lease artifacts 或启动 preflight/solver/formal run。
+
+### 2026-09-10 V5 fresh pre-seal 1/1/1 findings remediation（等待全新独立复审）
+
+在上一 `2/0/0` remediation checkpoint 之后，另一名全新只读 pre-seal reviewer 对当时 live exact bytes 登记
+`Blocker/Major/Minor=1/1/1`。Blocker 是 bootstrap 在 validated acceptance 后、spawn-receipt protected
+recovery 前仍有一条可注入 `KeyboardInterrupt`/`SystemExit` 的 executable line gap；Major 是 ordinary
+stable-byte helper 仍按 pathname 重开文件，不能证明 ancestor/endpoint 在读取期间保持同一对象；Minor 是
+Windows 8.3 absolute alias prepare 后不能通过同一 canonical validator。该历史 verdict 不打开任何 gate，且不会
+被 writer 后续结果改写为 reviewer `0/0/0`。
+
+同一 V5 draft 的 remediation 将 acceptance 后完整 bootstrap 区间并入统一 `BaseException` envelope；ordinary
+JSON 读取改为 descriptor/handle-anchored traversal、ancestor 与 endpoint identity 复核，并 fail closed 拒绝
+symlink/hardlink/reparse、ancestor swap/read/swap-back 与不确定 cleanup；Windows 8.3 alias 和 canonical long path
+使用一致 round-trip。line-gap 两个真实进程参数为 `2 passed in 248.46s`。首次 70-test full 是
+`69 passed, 1 failed in 7393.36s`；唯一 failure 为旧夹具仍 monkeypatch `Path.is_symlink`，替换为真实
+symlink 或 Windows junction/reparse parent 后精确节点 `1 passed in 217.36s`，production code 未改变。
+
+随后完整运行发现一个独立的 startup performance blocker：`63 passed, 7 failed in 8435.02s (2:20:35)`；七项
+均严格落为 unresolved，原因是 91-member closure 的 full dynamic-authority validation 经 nested
+protocol/startup/runtime APIs 重复执行，spawn receipt 未能在冻结 30 秒 supervision timeout 内发布。最小修复不
+改变 timeout，只完整验证 dynamic authority 一次并把同一 stable validated snapshot 传给已有 nested APIs；这些
+API 仍对 authority 做 stable-byte reread/equality check。新增 exact-one-call regression 为
+`1 passed in 24.64s`，原七项失败矩阵为 `7 passed in 13:59`。同步 pre-seal audit hash 前的 full 如实为
+`70 passed, 1 failed in 4471.92s (1:14:31)`，唯一红项是 stale exact hash binding；同步后 binding 节点
+`1 passed in 0.22s`，最终 exact-byte V5 full 为 `71 passed in 4520.02s (1:15:20)`。
+
+activation V1–V4 + V8 current-state related 为 `106 passed, 3 deselected in 72.76s`，raw V8 的三项历史
+review/lease/root-absence failure 账目不变。Ruff/format、4/4 in-memory compile 且 0 pyc、bootstrap/controller
+validate-only、negative execute draft gate 与独立 `modulefinder` exact-set 均通过；solver/formal write=`0/0`。
+当前 derived closure 为 91 members，digest
+`ff11e25901b75387ce3b5b37278ed964ed93ab694ed760d27cf566a9d030c895`，仍为
+`hash_authority=derived_current`、`expected_hashes_verified=false`。
+
+最终 related process=0；五个计划 formal/activation roots 与七个 candidate production/review/run-authority/lease
+paths 全部 absent。V4 outer SHA-256
+`6936d06a5bc8d191f5eaf235fe7784c36193ac6343d88d16cbbd3e5bea8d2068`、V4 closure SHA-256
+`ba9195283cf3ad149e08c875820198648d0a9c0cf6b99ac7e3c37b212683b948` 的 77/77 replay，以及两份用户 PDF
+hash 均保持不变。当前只允许 `writer_pre_seal_evidence_complete=true`；
+`pre_seal_findings_closed=false`、`sealed_ready_for_independent_review=false`、formal/result/claim/security 均为
+false。下一步必须由另一名全新只读 R4 reviewer 对当前 live exact bytes 做非权威 pre-seal re-audit；其 verdict
+前不得 seal、生成 production/review/authority/lease artifacts 或启动 preflight/solver/formal run。
+
+### 2026-09-10 V5 fresh pre-seal 0/1/0 evidence remediation（等待下一名独立复审）
+
+全新只读 pre-seal reviewer 对上一 writer checkpoint 给出 `REWORK`，分级为
+`Blocker/Major/Minor=0/1/0`。Major 是 ancestor swap 测试仍 monkeypatch `Path.lstat/read_bytes`，而 live
+`_ordinary_stable_bytes` 仅使用 `_open_ordinary_anchored`、descriptor `fstat/read` 与 production close；旧注入从未
+执行且无调用计数断言，却在 audit matrix 中登记为 rejected。该证据诚信缺口使上一 checkpoint 不可 seal。
+
+同一 draft 只修正测试证据：注入现发生在 live `_open_ordinary_anchored`/`_close_ordinary_descriptor` seams，
+明确断言 swap/restoration 各一次、anchored open/close 各两次，并证明首个 descriptor identity 是 alternate file。
+首个有效版本因在 descriptor 仍打开时 swap-back 而于 Windows 得到 `1 failed in 0.55s`、`WinError 5`；把恢复
+放到 production close 完成后，第一轮 descriptor 读取 alternate，第二轮 replay 打开 restored original，strict
+identity gate 以 `stable file identity drifted` fail closed。精确节点为 `1 passed in 0.36s`，相邻 anchored
+replacement/link/cleanup/Windows path 矩阵为 `7 passed, 64 deselected in 19.30s`。production code 未改变。
+
+同步 current test SHA-256 后，final exact-byte V5 full 为
+`71 passed in 4573.00s (1:16:12)`；Ruff check/format 与 4/4 in-memory compile（0 pyc）再次通过。最终
+related process=0，五个计划 roots 与七个 candidate production/review/run-authority/lease paths 均 absent，
+solver/formal execution 未启动。PRE_SEAL audit 当前允许 `writer_pre_seal_evidence_complete=true`，但继续保持
+`pre_seal_findings_closed=false`、`sealed_ready_for_independent_review=false` 与全部 formal/result/claim/security
+flags=false。下一步须由另一名全新只读 R4 reviewer 复审当前 live exact bytes；本轮 0/1/0 reviewer 不得复用。
+
+### 2026-09-10 V5 production-seal design audit：四项生产路径阻塞开放
+
+修正 ancestor-swap fault injection 后，一名全新只读 reviewer 对当时实际覆盖的 pre-seal 路径登记
+`Blocker/Major/Minor=0/0/0`。随后只读 R4 production-seal 设计核查发现四个此前未被真实生产分支覆盖的
+阻塞，故该有限范围历史结论不能关闭当前 gate：
+
+1. `V5-PRODUCTION-RUNTIME-AUTHORITY-GAP`：V5 runtime authority 缺少真实 worker runtime evidence
+   必需的 HiGHS package init、Python source 和 binary 的 path/SHA-256；
+2. `V5-PRODUCTION-DYNAMIC-CLOSURE-REVALIDATION-TIMEOUT-GAP`：production dynamic validator 经嵌套
+   mapping/preflight 调用重复约五次完整 91-member closure，可能越过未改变的 30 秒 startup 门；
+3. `V5-ONE-SHOT-CONSUMED-DESTINATION-RACE`：`consumed.exists()` 与 `os.replace(fresh, consumed)` 之间
+   存在 destination overwrite 竞态，必须改为 destination-exclusive create-if-absent 消费协议；
+4. `V5-SEALED-AUTHORITY-PLACEHOLDER-GAP`：sealed bundle/fresh lease/review/user authority 仍需 strict
+   exact-key validation，`require_sealed_for_execution()` 仍为 draft 占位，且 `production_artifact_paths()`
+   不能正确展开 one-shot mapping。
+
+当前仍是同一 `DRAFT_NONAUTHORITATIVE`；未生成 production inner/outer/closure/lease/review/user authority，
+未创建 formal roots，未启动 solver 或 1071-block formal run。机器字段恢复为
+`writer_pre_seal_evidence_complete=false`、`focused_tests_passed=false`、
+`pre_seal_findings_closed=false`、`sealed_ready_for_independent_review=false`，所有 execution/result/claim/
+security flags 继续为 false。解除条件为四项修复与对应 fault injection、生产路径完整 closure call-count
+`==1`、真实零-solver startup `<30s`、完整及相关回归全部通过，并由新的只读 reviewer 再次审查 exact bytes。
+
+### 2026-09-10 V5 production-path remediation complete（等待 fresh pre-seal review）
+
+四项开放 finding 已在同一非权威 draft 内完成 writer remediation：
+
+- runtime authority 增补并复核 locked Python 与 HiGHS package init/Python source/binary 的 path/hash，真实
+  `Highs` instance probe 保持 `solver_solve_called_by_runtime_probe=false`；
+- production dynamic authority 对 frozen closure 只做一次完整验证，再传递 closure/static/preflight/review/user
+  snapshots；实际 91-member frozen closure call count=`1` 且低于冻结 30 秒，real block-zero zero-solver
+  production sandbox 为 5.92s；
+- one-shot consume 使用 destination-exclusive hard-link reservation 后不可逆 unlink fresh，再原子替换 consumed
+  为 tombstone；双 spawned contenders 精确一胜一拒，预存 destination 不覆盖，link-return 后 BaseException 与
+  unlink 后 tombstone failure 均保持 fresh absent；
+- sealed bundle gate、fresh lease、review/user receipts 与 nested one-shot paths 已实现 strict schema/exact-key/
+  hash binding，sealed gate 不等于 independent review 或 formal-run authority。
+
+第一轮 full `80/80 in 4762.79s` 后 Ruff 发现的唯一 unused `noqa`/format 项导致 exact-byte style-only 更新，故
+该轮只保留为 intermediate evidence。最终 current exact-byte full 为
+`80 passed in 4804.17s (1:20:04)`；related V1–V4 + V8 current-state 为
+`106 passed, 3 deselected in 77.10s`。Ruff/format、4/4 in-memory compile、独立 modulefinder exact-set、
+bootstrap/controller validate-only 与 negative execute draft gate 均通过；current derived closure 为
+91 members/digest `997b96c1269a7d1780158cf11836d530774578c2b0f4f1b8753c5cebd6fd21ae`，仍为
+`derived_current`、`expected_hashes_verified=false`。
+
+最终相关进程、五个 planned roots、十个 production candidate artifacts 全为 0，solver/formal write=`0/0`。
+机器状态现为 `writer_pre_seal_evidence_complete=true`、`focused_tests_passed=true`，但继续保持
+`pre_seal_findings_closed=false`、`sealed_ready_for_independent_review=false` 及全部 execution/result/claim/
+security flags=false。当前唯一下一步是新的只读 `sol_reviewer` 对这些 exact bytes 做非权威 pre-seal
+re-audit；其明确闭合四项 finding 前不得 seal，其结论也不能授权 formal run。
+
+### 2026-09-10 V5 production pre-seal second-BaseException/lifecycle blockers
+
+fresh production reviewer 对上一组 exact bytes 登记非权威 `REWORK`，
+`Blocker/Major/Minor=2/0/0`：
+
+1. `V5-ONE-SHOT-SECONDARY-BASEEXCEPTION-GAP`：旧 hard-link reservation 在首次中断后进入 cleanup，
+   cleanup 第一条 presence/stat/unlink 路径再次中断可留下 fresh+consumed 同 inode；test-first 实际复现
+   为 `fresh_exists=true`。
+2. `V5-POST-SEAL-VALIDATION-LIFECYCLE-GAP`：validator report、测试与 audit selector 中的 DRAFT-only
+   断言会在 canonical seal 后失败或误报，因 sealed inner 会冻结这些 bytes，不能留待 seal 后修复。
+
+writer remediation 将 one-shot 的不可逆点提前为 exclusive reservation directory：reservation 一旦创建，
+fresh verifier 必须拒绝；随后仅由 reservation winner 执行 Windows 原子 move、stable validation 与 tombstone
+replace，只有 exact tombstone 稳定后才移除 marker。双中断红例已转绿；预存 consumed 不被覆盖；move 后
+中断与 tombstone failure 均保持 fresh absent；move 前中断虽可保留 fresh 文件，但 reservation marker 使其
+不可复用。双进程 contender 连续 10 次均精确一胜一拒。
+
+生命周期修复使用 draft/canonical 三组 selector，并让 bootstrap/controller validate-only schema/status 与
+实际选中 config 一致；execute 的 sealed 分支在 review PASS absent 时仍于 preflight/consume/spawn 前拒绝；
+closure 与 audit binding 测试按 selected lifecycle 验证。当前 targeted 为
+`13 passed, 70 deselected in 13.68s`，production/review/one-shot 为
+`28 passed, 55 deselected in 992.15s`，完整 V5 为
+`83 passed in 4849.27s (1:20:49)`，related current-state 为
+`106 passed, 3 deselected in 76.84s`。current 91-member derived closure digest 为
+`8dec02efa845120bf7134cd04332012750a83e85eac309263b9c647b06a7bba8`，不是 frozen authority。
+
+最终 process/roots/canonical-production-reservation census 为 0，双 validate-only 保持 1071 blocks、HiGHS
+1.15.1、4 threads、solver/formal write=`0/0`，negative execute 仍在 draft gate exit 1。writer evidence 已完整，
+但 reviewer findings 尚未由 fresh review 闭合：`pre_seal_findings_closed=false`、
+`sealed_ready_for_independent_review=false`，所有 formal/result/claim/security flags=false。禁止在新的只读
+R4 reviewer 给出明确 `0/0/0` 前 seal 或启动 formal run。
+
+## 2026-09-10 V5 post-seal trace-scope timeout 与 V6 successor gate
+
+V5 canonical bundle 已封存；outer/inner/execution-closure SHA-256 分别为
+`7d6a217ab1536e52b37180d5a1fa5b715eb03980ae3cbb3e4de2e9fd315e64ea`、
+`5cca0675bfd9a0b624287cf2705d089a4044493eacfa54c6ac82e074227c1a03`、
+`f844b0ef12cf8111e533d13104d02e41e70eafbc6d1b56972dfd267fbdf5b08e`。post-seal full validation 为
+`81 passed, 2 failed in 294.94s`；两个失败 child 均以
+`startup control timed out: science_release.json` fail closed，正式 solver 未启动，不能解释为不可行。
+
+blocker `V5-POST-SEAL-TRACE-SCOPE-TIMEOUT` 的根因位于封存测试的 fault-injection tracer：全局 tracer 在两次
+91-member post-spawn closure replay 期间持续接收 nested call/line events。完整负载时第一段
+handshake→ack 为 3.235 秒，child ack→ready 为 15.510 秒，第二次 parent replay 的 ready→release 为
+34.744 秒，越过未改变的 30 秒门。不得以增大 timeout、跳过节点或复用 production closure snapshot 来关闭该
+blocker，因为这会削弱冻结 stable reread/equality 与 TOCTOU gate。
+
+V5 sealed bytes 保持不可变；最小 remediation 已进入 V6 draft/formal-controller V7 namespace，且唯一行为变化在
+test-side injection seam：真实 release acceptance 返回后才给 `_spawn_controller` caller frame 安装 line tracer，
+随后仍在登记的 exact line 注入一次。两个异常参数转绿后又连续三轮通过，并与正常 real two-process zero-solver
+probe 合跑通过；最终 V6 为 `83 passed in 5143.15s`，related current-state 为
+`106 passed, 3 deselected in 82.10s`。独立 modulefinder exact closure 为 91 members/digest
+`86008a26f172cd5dcfe8881c8f9bcd883918d65b2f45d115772c19c2dfa24756`；Ruff/format、4/4 parse、双
+validate-only 和 negative execute gate 均通过，solver calls/formal writes=`0/0`。
+
+当前该 blocker 仅在 writer 证据层完成 remediation，尚未由 fresh independent R4 review 关闭。V6 canonical
+manifest/seal/lease/review/user-authority 与五个 formal roots 全 absent，related process=0；V5 fresh lease
+`4fc3da709214be3d8ea358b73a12e963ab18911db2fa414560a4c4636e45118c` 未消费，sealed hashes 未变。
+机器状态保持 `writer_pre_seal_evidence_complete=true`、`pre_seal_findings_closed=false`、
+`sealed_ready_for_independent_review=false`，所有 execution/result/claim/security flags=false。下一步只能由 fresh
+只读 R4 reviewer 审查 live exact bytes；在其明确 `0/0/0` 前不得 seal，更不得把 writer test PASS 当作 formal-run
+authority。
+
+## 2026-09-10 V6 sealed-ready：post-seal validation complete
+
+V6 PRE_SEAL reviewer `/root/v6_preseal_reviewer` 已对 live draft 登记非权威 `PASS 0/0/0`，关闭 pre-seal
+findings 并仅允许 production seal。V6 已按无循环 publication DAG 封存，outer 为最后且 create-if-absent 的
+commit point；其 SHA-256 为
+`12a00b1c4a75943c81e712bc02f53ed38d67a6749e440c1103294a3c568937aa`。inner SHA-256 为
+`6e4470ea6903c34aac046ca22f8aff043a1ae3a22a474d8ab886c84070718ee3`，包含 contract exact set 的
+15 members；closure file SHA-256 为
+`535bb0eba4c36b58efd45711f1e9fffbcaf65f703754517896fd67c7b0c3c0e4`，91-member digest 为
+`e03b7d3e41708cc679acf14b16764531cfe7bdcbdf42875d1068a0643f9e62b1`。inner `15/15`、closure
+`91/91` 的 stable replay、ordinary-single-link、hash/schema 验证全部通过；fresh lease SHA-256 为
+`da599ee30522cd6597636bf8317ac8a90f518650a757cebc52ef41f57d325612`。
+
+root 独立 post-seal 证据为：sealed targeted `11 passed in 385.25s`；V6 full
+`83 passed in 5762.17s`；related current-state `106 passed, 3 deselected in 95.25s`；Ruff/format 与
+4/4 parse green。双 validate-only 均 exit 0，继续报告 1071 blocks、HiGHS 1.15.1、4 threads、0 solver call、
+0 formal-root write。negative execute 以 exit 1 在缺失 official review receipt 处 fail closed，fresh lease 未改变，
+没有进入 preflight、consume、spawn 或 formal run。
+
+最终 related process 与五个 formal roots 均为 0；official review receipt、V6 user authority、consumed lease、
+reservation 全 absent，V5 sealed bytes/fresh lease 未漂移。状态现为
+`pre_seal_findings_closed=true`、`sealed_ready_for_independent_review=true`；official review、formal execution、
+result、claim、security 仍为 false。`V5-POST-SEAL-TRACE-SCOPE-TIMEOUT` 已在 V6 exact sealed bytes 中通过
+post-seal validation，但 formal activation gate 仍由新的 official independent R4 review 阻塞；PRE_SEAL reviewer
+实例不得复用为 official reviewer，且任何 review verdict 均不自动授权 formal run。
+
+## 2026-09-10 V6 official ESCALATE 与 V7 draft successor
+
+fresh official reviewer `/root/v6_official_reviewer`（independent `sol_reviewer`，`gpt-5.6-sol/high`）先对 exact
+V6 outer `12a00b1c4a75943c81e712bc02f53ed38d67a6749e440c1103294a3c568937aa` 给出
+`REWORK 0/1/0`：唯一 Major 是顶部权威状态总表仍停在 V4/V5 draft 语境。该文档 finding 已被最小修正，
+但把修正后的非封存文档继续提交给同一 V6 outer 复核，没有按 `agent.md` 第7节在 official REWORK 后进入新的
+versioned successor；同一验收项因此最终 official `ESCALATE 1/0/0`。machine-readable receipt 为
+`configs/rq2_public_grid_highs_formal_activation_successor_review_escalate_v6.json`，SHA-256
+`ee41fe26122862650fd492fe54aa950936f8cb38da21991b063130a771f6a2aa`；无cryptographic signature，
+`execution_authority_effect=none`，且没有生成 V6 PASS receipt。
+
+V7 已以 `DRAFT_NONAUTHORITATIVE` 建立，formal-controller 使用 V8 namespace。V7 明确绑定 V6 outer、
+91-member frozen closure、canonical formal V7 config及上述 ESCALATE receipt；`frozen_science`、startup handshake、
+runtime environment、模型/solver/threads/阈值、recovery、one-shot与per-block fresh-process语义均逐字继承 V6，
+仅version/path/schema机械前移。test-first collection 在实现前以缺失V7 bootstrap `ImportError`转红；实现后绑定/
+gate/保护哈希节点为`3 passed in 2.08s`，post-acceptance local tracer的精确
+`KeyboardInterrupt`/`SystemExit`两参数为`2 passed in 264.92s`，并继续断言注入次数1、release acceptance、
+唯一terminal、无`launch_incomplete`及owned child停止。
+
+最终 V7 full 为`83 passed in 5348.26s (1:29:08)`，0 failure/error/skip；activation V1-V4 + V8
+current-state related为`106 passed, 3 deselected in 77.93s`。Ruff/format、4/4 in-memory parse、独立
+modulefinder exact-set及audit binding均通过。bootstrap/controller validate-only都exit 0，报告91-member
+derived-current closure digest `7ba080085d223766954253ff76596fed98043252c58b3dc4115915326d2c2821`、1071 blocks、
+HiGHS 1.15.1、4 threads、solver calls/formal-root writes=`0/0`；negative execute exit 1于draft gate。
+
+最终 related process=0、五个V7 planned roots absent、11个V7 production canonical/lease/manifest/review/user/
+reservation artifacts全部absent；V5/V6共11项受保护hash不变。当前仅
+`writer_pre_seal_evidence_complete=true`；`pre_seal_findings_closed=false`、
+`sealed_ready_for_independent_review=false`以及formal/result/claim/security全部false。下一步只能由fresh只读R4
+reviewer审查当前V7 exact draft bytes；其明确闭合findings前不得seal，且本节不授权preflight、consume、spawn或
+formal run。
+
+## 2026-09-11 V7 PRE_SEAL REWORK remediation checkpoint
+
+fresh只读R4 PRE_SEAL reviewer对V7给出`REWORK 1/0/0`。唯一Blocker为：V6 official ESCALATE receipt虽在
+validate-only中校验，但未列入V7 future sealed inner member set，因此sealed execution gate不能在review、
+user-authority、preflight、lease consume或spawn之前证明该receipt仍存在且内容未漂移。该verdict不产生执行权限。
+
+整改采用test-first最小变更：先由新sealed execution-path regression证明expected inner set缺少该receipt，再仅把
+`configs/rq2_public_grid_highs_formal_activation_successor_review_escalate_v6.json`加入inner member set；不复制
+validator。测试通过真实`require_sealed_for_execution -> _verify_sealed_bundle`路径分别注入receipt缺失和内容漂移，
+两种情况均在review/user/preflight/consume/spawn之前拒绝，五类调用计数全部为0。精确节点为
+`1 passed in 0.57s`，七个lifecycle/closure/oracle focused节点为`7 passed in 20.06s`。
+
+当前机器审计状态为`PRE_SEAL_REWORK_REMEDIATION_IN_PROGRESS_NONAUTHORITATIVE`；整改后的full V7 matrix尚未完成，
+`writer_pre_seal_evidence_complete=false`、`pre_seal_findings_closed=false`、
+`sealed_ready_for_independent_review=false`。V7仍为draft，formal execution/result/claim/security全部为false，且没有
+正式运行。下一步仅为完成writer remediation matrix并提交fresh只读R4 PRE_SEAL复核。

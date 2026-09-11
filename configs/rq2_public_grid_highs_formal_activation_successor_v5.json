@@ -1,0 +1,131 @@
+{
+  "schema": "rq2_public_grid_highs_formal_activation_successor_v5",
+  "version": 5,
+  "status": "SEALED_READY_FOR_INDEPENDENT_REVIEW",
+  "scope": "v4_lifecycle_remediation_and_v5_production_authority_hardening",
+  "authority_effect": "independent_review_only_no_execution",
+  "predecessor": {
+    "v4_outer_path": "configs/rq2_public_grid_highs_formal_activation_successor_v4.OUTER.SHA256SUMS.json",
+    "v4_outer_sha256": "6936d06a5bc8d191f5eaf235fe7784c36193ac6343d88d16cbbd3e5bea8d2068",
+    "v4_escalate_receipt_path": "configs/rq2_public_grid_highs_formal_activation_successor_review_escalate_v4.json",
+    "v4_escalate_receipt_sha256": "1d4f5f1b65512a0092438051055171c5abf4dbbe2aa358675c5f580636bc4e9c",
+    "v4_execution_closure_path": "configs/rq2_public_grid_highs_formal_activation_successor_v4.EXECUTION_CLOSURE.SHA256SUMS.json",
+    "v4_execution_closure_sha256": "ba9195283cf3ad149e08c875820198648d0a9c0cf6b99ac7e3c37b212683b948",
+    "v4_execution_closure_member_count": 77
+  },
+  "frozen_science": {
+    "expected_block_count": 1071,
+    "starts_from_block_zero": true,
+    "solver": "highs",
+    "expected_package_version": "1.15.1",
+    "expected_runtime_api_version": "1.15.1",
+    "threads": 4,
+    "per_block_fresh_process": true,
+    "preflight_threshold_bytes": 10737418240,
+    "child_private_commit_stop_bytes": 8589934592,
+    "system_commit_available_stop_bytes": 2147483648,
+    "sample_interval_ns": 5000000000,
+    "observation_jitter_budget_ns": 1000000000,
+    "max_detection_overrun_ns": 1000000000,
+    "owned_termination_grace_ns": 2000000000,
+    "watchdog_ns_per_block": 21600000000000,
+    "resume_allowed": false,
+    "retry_allowed": false,
+    "predecessor_checkpoint_reuse_allowed": false
+  },
+  "startup_handshake": {
+    "handshake_filename": "startup_handshake.json",
+    "bootstrap_ack_filename": "startup_ack.json",
+    "startup_ready_filename": "startup_ready.json",
+    "science_release_filename": "science_release.json",
+    "science_release_accepted_filename": "science_release_accepted.json",
+    "launch_incomplete_filename": "launch_incomplete.json",
+    "authoritative_terminal_outcome_filename": "terminal_outcome.json",
+    "controller_cancellation_filename": "controller_cancellation.json",
+    "controller_cancellation_ack_filename": "controller_cancellation_ack.json",
+    "spawn_receipt_filename": "spawn_receipt.json",
+    "lifecycle_decision_filename": "lifecycle_decision.json",
+    "deferred_supervisor_interruption_filename": "deferred_supervisor_interruption.json",
+    "lifecycle_decision_classes": [
+      "cancelled_before_science",
+      "controller_owned_lifecycle"
+    ],
+    "terminal_classes": [
+      "success",
+      "unresolved"
+    ],
+    "disk_phase_authority": true,
+    "volatile_release_boolean_is_authority": false,
+    "global_terminal_mutual_exclusion": true,
+    "bootstrap_wait_timeout_seconds": 30,
+    "controller_wait_timeout_seconds": 30,
+    "poll_interval_seconds": 0.01
+  },
+  "runtime": {
+    "locked_python_executable": "D:\\conda_envs\\rq2-executor-v2-audit\\python.exe",
+    "locked_python_sha256": "91df9733b71b293eec9945cc8c5388bbfe1abc5e6ee94a14333076e5f55cb6bf",
+    "highspy_package_init_path": "D:\\conda_envs\\rq2-executor-v2-audit\\Lib\\site-packages\\highspy\\__init__.py",
+    "highspy_package_init_sha256": "152eab96c80668ff98d8447bdca93d1bd6253aebaf1df3e455872a05e7dbd0c2",
+    "highspy_python_source_path": "D:\\conda_envs\\rq2-executor-v2-audit\\Lib\\site-packages\\highspy\\highs.py",
+    "highspy_python_source_sha256": "5310ab9947289b49de9e8f650bec7aa24e058cdfcd45bdc57fdf80e0fb5a270a",
+    "highspy_binary_path": "D:\\conda_envs\\rq2-executor-v2-audit\\Lib\\site-packages\\highspy\\_core.cp311-win_amd64.pyd",
+    "highspy_binary_sha256": "b44417e1cae9c30e5fce3e38535c2970e25d6367a07a1e5ff8e94d623c22aa29",
+    "formal_controller_module": "experiments.run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_formal_v6",
+    "exact_cwd": "D:\\CUHKSZ\\Research Project\\electricity-grid",
+    "controller_command_prefix": [
+      "D:\\conda_envs\\rq2-executor-v2-audit\\python.exe",
+      "-B",
+      "-m",
+      "experiments.run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_formal_v6",
+      "--config",
+      "configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v6.yaml",
+      "--activation-authority"
+    ],
+    "sanitized_environment": {
+      "COMSPEC": "C:\\WINDOWS\\system32\\cmd.exe",
+      "NO_COLOR": "1",
+      "PROCESSOR_ARCHITECTURE": "AMD64",
+      "PYTHONHASHSEED": "0",
+      "PYTHONIOENCODING": "utf-8",
+      "RQ2_EXECUTION_MACHINE": "EXECUTION_MACHINE_CONFIRMED",
+      "RQ2_EXECUTOR_PYTHON_EXE": "D:\\conda_envs\\rq2-executor-v2-audit\\python.exe",
+      "SYSTEMDRIVE": "C:",
+      "SYSTEMROOT": "C:\\WINDOWS",
+      "TEMP": "C:\\Users\\Psychobabble\\AppData\\Local\\Temp",
+      "TMP": "C:\\Users\\Psychobabble\\AppData\\Local\\Temp",
+      "WINDIR": "C:\\WINDOWS"
+    }
+  },
+  "planned_paths": {
+    "checkpoint_root": "results/checkpoints/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v6",
+    "worker_root": "results/workers/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v6",
+    "log_root": "results/logs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v6",
+    "output_root": "data/processed/model_inputs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v6",
+    "activation_audit_root": "results/formal_activation/rq2_public_grid_highs_formal_activation_successor_v5"
+  },
+  "production_artifacts": {
+    "inner_manifest": "configs/rq2_public_grid_highs_formal_activation_successor_v5.SHA256SUMS.json",
+    "outer_manifest": "configs/rq2_public_grid_highs_formal_activation_successor_v5.OUTER.SHA256SUMS.json",
+    "execution_closure": "configs/rq2_public_grid_highs_formal_activation_successor_v5.EXECUTION_CLOSURE.SHA256SUMS.json",
+    "one_shot_lease": {
+      "fresh_path": "results/leases/rq2_public_grid_highs_formal_activation_successor_v5.lease.json",
+      "fresh_sha256": "4fc3da709214be3d8ea358b73a12e963ab18911db2fa414560a4c4636e45118c",
+      "consumed_path": "results/leases/rq2_public_grid_highs_formal_activation_successor_v5.consumed.json",
+      "authority_id": "c7425aeee171a14bbaa42c57deb8828fcdc8cb4a30f5dcfc80ab50451c536c2f",
+      "one_shot": true
+    },
+    "activation_review_receipt": "configs/rq2_public_grid_highs_formal_activation_successor_review_pass_v5.json",
+    "user_formal_run_authority": "configs/rq2_public_grid_highs_formal_run_authority_v5.json"
+  },
+  "gates": {
+    "draft_non_authoritative": false,
+    "pre_seal_audit_complete": true,
+    "sealed_ready_for_independent_review": true,
+    "independent_formal_activation_review_passed": false,
+    "user_formal_run_authorized": false,
+    "formal_execution_authorized": false,
+    "formal_result_exists": false,
+    "claim": false,
+    "security_certified": false
+  }
+}
