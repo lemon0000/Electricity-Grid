@@ -82,9 +82,10 @@ def _require_clean_start() -> None:
 
 
 def _capture_preflight() -> dict[str, Any]:
+    authority_mapping = contract.preflight_authority_mapping()
     return contract.capture_preflight_evidence(
         contract.next_attempt_root(),
-        authority_mapping=contract.preflight_authority_mapping(),
+        authority_mapping=authority_mapping,
         observed_available_commit_bytes=resource_primitives.available_commit_bytes,
     )
 

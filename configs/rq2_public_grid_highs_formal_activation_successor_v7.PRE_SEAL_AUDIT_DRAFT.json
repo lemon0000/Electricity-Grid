@@ -34,10 +34,10 @@
   "exact_nonself_draft_sha256": {
     "configs/rq2_public_grid_highs_formal_activation_successor_v7.DRAFT.json": "047d8b93a5b441b1d250d07d3417688c63c9b06251c36a24a7d7a02cc638e750",
     "configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v8.DRAFT.yaml": "51e127b7814e570ab38e5b21ce9779a114aebd0cf7e8132fefd7fc31a677ee60",
-    "experiments/bootstrap_rq2_public_grid_highs_formal_activation_successor_v7.py": "746578d902ca4a826d65c5f537125ef6ef2eb0fe1968a3a10acef92b6c6795a7",
+    "experiments/bootstrap_rq2_public_grid_highs_formal_activation_successor_v7.py": "68c0fe0dc1249b1bff9a59cf18bbcf6edf8859156bab752a189725e0eeb25607",
     "experiments/rq2_public_grid_highs_formal_activation_contract_v7.py": "5c70d01b6e2b9aa799e113a320802af7258902a62d0600c36f63500de2faf72d",
     "experiments/run_rts_gmlc_public_grid_need_dispatch_v4_process_isolated_formal_v8.py": "68bfd8d1e7bec3148eb5244cde634979a0dd0d80a4d12365ea170ea873fbd541",
-    "tests/test_rq2_public_grid_highs_formal_activation_successor_v7.py": "c09c3f3bd0e0f7296e550f44f72bcda3870e93c62c996fe6fc0308e35fd80d6c"
+    "tests/test_rq2_public_grid_highs_formal_activation_successor_v7.py": "d3385d4581823d881ea7aedc77e878809ee353c0b8ff1da11b152cfa11b946e6"
   },
   "self_sha256_binding": "external_only_non_circular",
   "frozen_acceptance_matrix": {
@@ -64,6 +64,7 @@
     "scientific_protocol_changed": false,
     "formal_execution_authorized": false
   },
+  "writer_observed_evidence_scope": "Historical checkpoints before the development-machine production-path changes below. The 83-test full/adjacent/validate-only results do not validate the current bootstrap/test bytes.",
   "writer_observed_evidence": {
     "root_cause": "V6 official review issued REWORK for one stale authoritative-state documentation summary. The text was corrected, but presenting the same sealed V6 outer for recheck did not enter the versioned successor required after official REWORK. The same acceptance item therefore received official ESCALATE; this is a lifecycle-governance blocker, not a solver or scientific-model finding.",
     "test_first_red": "Before V7 implementation existed, V7 test collection failed with ImportError for bootstrap_rq2_public_grid_highs_formal_activation_successor_v7.",
@@ -77,6 +78,77 @@
     "validate_only_green": "Bootstrap and controller validate-only both exited zero with 91 derived-current closure members, members_sha256 7ba080085d223766954253ff76596fed98043252c58b3dc4115915326d2c2821, HiGHS 1.15.1, 1071 blocks, four threads, zero solver calls, and zero formal-root writes.",
     "negative_execute_green": "Draft --execute exited 1 at require_sealed_for_execution before preflight, lease consumption, controller spawn, or formal-root writes.",
     "remaining": "The writer remediation matrix is still in progress. After it is complete, a fresh independent R4 PRE_SEAL reviewer must audit the remediated exact draft bytes. Canonical materialization, sealing, official review, and any formal run remain forbidden."
+  },
+  "production_path_acceptance_development": {
+    "observed_on": "2026-09-11",
+    "status": "PARTIAL_DEVELOPMENT_EVIDENCE_WINDOWS_AND_INDEPENDENT_REVIEW_PENDING",
+    "authority_effect": "none",
+    "host_platform": "macOS arm64",
+    "python_version": "3.11.15",
+    "pytest_version": "9.0.2",
+    "test_node": "tests/test_rq2_public_grid_highs_formal_activation_successor_v7.py::test_v7_sealed_snapshot_real_authority_chain",
+    "current_test_collection_count": 101,
+    "snapshot_case_count": 18,
+    "snapshot_inner_member_count": 16,
+    "snapshot_execution_closure_member_count": 91,
+    "predecessor_closure_member_count": 77,
+    "observed_targeted_result": "24 passed in 100.18s; 18 snapshot cases plus 6 adjacent regressions",
+    "observed_collection_result": "101 tests collected in 0.17s",
+    "static_checks": "Ruff check and format check passed; both changed Python files parsed in memory",
+    "fixture_scope": "Copied source/config tree in pytest TemporaryDirectory, fresh interpreter import of the canonical selectors, synthetic review/user receipts visibly labelled NONAUTHORITATIVE_TEST_ONLY. Only the test snapshot exact_cwd and canonical config selection are relocated; production repository artifacts are not materialized.",
+    "unreplaced_validators": [
+      "load_config",
+      "validate_formal_config",
+      "require_sealed_for_execution",
+      "_verify_sealed_bundle",
+      "verify_execution_closure",
+      "require_activation_review_pass",
+      "require_user_formal_run_authority",
+      "_verify_fresh_one_shot_authority",
+      "preflight_authority_mapping",
+      "publish_dynamic_authority",
+      "validate_dynamic_authority",
+      "consume_one_shot_authority"
+    ],
+    "substituted_or_stopped_boundaries": [
+      "OS process-census observation",
+      "OS available-commit observation",
+      "non-Windows process creation time",
+      "stop before production controller spawn; scientific loader forbidden"
+    ],
+    "normal_case": "The real bootstrap.execute chain accepts the complete fixture and reaches the native consume boundary. macOS must reject Windows no-replace rename; the Windows branch must consume the copied lease, validate the controller-side tombstone, reject reuse, and stop before actual spawn.",
+    "late_drift_cases": "Dynamic authority or review receipt is independently changed after real publish_dynamic_authority. Both fail before lease consumption or spawn.",
+    "dynamic_full_closure_replay_count": 1,
+    "dynamic_validation_under_30_seconds": true,
+    "single_fault_injection_count_each_negative": 1,
+    "test_first_production_defect": {
+      "id": "V7-PREFLIGHT-ALLOCATION-BEFORE-AUTHORITY-VALIDATION",
+      "red": "13 passed, 1 failed in 66.02s: an already-reserved lease was rejected, but next_attempt_root had already created the activation directory.",
+      "fix": "_capture_preflight now obtains the verified preflight authority mapping before allocating the attempt root.",
+      "focused_green": "4 passed, 12 deselected in 23.60s, including reserved-lease and valid-chain cases",
+      "thresholds_or_scientific_protocol_changed": false,
+      "independent_review_completed": false
+    },
+    "fixture_development_failures": [
+      "Initial snapshot construction copied configs into an existing directory; corrected only the fixture copy operation.",
+      "Initial fixture closure retained draft config names after canonical selection; corrected only the two fixture config bindings.",
+      "18 failed, 6 passed in 57.99s when the test unconditionally requested Windows locked-runtime validation on macOS. Native validation now remains mandatory on Windows; macOS explicitly checks rejection at the missing locked Python, without replacing validate_runtime_files."
+    ],
+    "protected_predecessor_replay": {
+      "v5_inner": "13/13",
+      "v5_execution_closure": "91/91",
+      "v6_inner": "15/15",
+      "v6_execution_closure": "91/91",
+      "activation_v3_static_sealed_validation": "24 members, 13 Python closure members; no solver or formal write"
+    },
+    "full_current_v7_suite_run": false,
+    "windows_locked_runtime_verified": false,
+    "windows_native_consume_verified": false,
+    "real_sealed_controller_handshake_and_terminal_verified": false,
+    "fresh_independent_pre_seal_review_completed": false,
+    "formal_solver_calls": 0,
+    "formal_repository_artifacts_written": 0,
+    "remaining": "Run the current 101-test V7 suite and related current-state regression on the locked Windows executor; obtain real controller/worker lifecycle evidence with declared test boundaries, then a fresh independent PRE_SEAL audit of the exact bytes. Do not seal or start a formal run from this development-machine result."
   },
   "writer_pre_seal_evidence_complete": false,
   "pre_seal_findings_closed": false,

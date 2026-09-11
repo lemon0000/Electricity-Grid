@@ -26,9 +26,9 @@
 | PYPOWER同址Q控制初始化语义 | resolved by transparent amendment 004 | 发现同址在线Q-inert机组`VG`可覆盖唯一Q-capable控制器的源`VG`；004只允许把唯一Q-capable源`VG`复制到同址Q-inert行，并保持bus VM作为Newton初值 | amendment-003结果manifest `2b5b705d...`及`2276/2304`统计只作invalidated parent diagnostic；正式direct replay只使用004结果 |
 | 零数据中心normal AC与共同恢复门 | method-blocked for treatment follow-up | direct control为24/24收敛、0/24 secure；560 reference/distributed为11/24和22/24，565为22/24，三组IPOPT原边界各22/24，均未见证h15/h21；`repair_005`已发布4/6 checkpoint，candidate 5在cost normalization中断，active lease为stale evidence但被保留，`operational_interruption` manifest为`66fd455aa958c06c809f9a51a5a9588a932843b83b2cd2953b9982bd1bdb057b`；当前无solver进程，历史attempt均不得恢复且不构成不可行证据 | `treatment_followup_gate_passed=false`；`repair_005_resume_allowed=false`，后续须新建attempt并重新取得lease；六个预算候选checkpoint、完整frontier、manifests、两阶段certificates、primary regret及final 24-state audit验证前，不得启动joint AC、依赖该对照的treatment或论文结果固定；另一解除路径是取得有来源的tap/shunt/补偿及控制参数 |
 | V3两套relative-gap字段的解释 | resolved as authoritative-field separation | stage顶层按feasible incumbent归一的`target_attained/eligibility_status/maximum_acceptance`是唯一正式资格；嵌套certificate按`max(abs(LB),abs(UB),1)`归一的relative/target字段仅作通用辅助诊断 | 判断target是否达到时只读取stage顶层字段，不读取嵌套`certificate.target_gap_attained`；checkpoint仍须检查`certificate.valid`、maximum acceptance、final audit、primary regret和residual audit。论文不得引用嵌套target字段；未来后继schema应删除或显式重命名该冗余字段 |
-| M6完整网络-业务时序闭环 | V6 official `ESCALATE`; V7 PRE_SEAL `REWORK` remediation in progress | v5的202个HiGHS checkpoint继续仅作诊断；fresh HiGHS/Gurobi confirmatory pilot v4已完成并通过语义与独立结果审查。Gurobi正式attempt只保留9/1071个历史checkpoint；process-isolated HiGHS V8已完成nonformal `0008 -> 0009`并通过post-result review。V6 official reviewer以1/0/0 `ESCALATE`关闭同一outer复核的successor-lifecycle缺口；receipt SHA-256为`ee41fe26122862650fd492fe54aa950936f8cb38da21991b063130a771f6a2aa`。V7 PRE_SEAL reviewer随后以1/0/0 `REWORK`指出该receipt虽由validate-only校验，却未进入future sealed inner member set。当前最小整改已把receipt加入expected inner set，并以真实sealed execution gate覆盖缺失/内容漂移，两种路径的review/user/preflight/consume/spawn调用均为0；focused为`1 passed in 0.57s`和`7 passed in 20.06s`。整改后的full matrix尚未完成，V7仍无canonical/lease/review/user artifacts、preflight、consume、spawn或formal run | 先完成writer remediation matrix，再由fresh只读R4 PRE_SEAL reviewer审查整改后的exact draft bytes；findings闭合前不得seal。official PASS receipt及另行用户运行授权前，formal execution/result/claim/security均为false；完整grid发布前pairwise/identification保持关闭 |
-| RQ2 HiGHS同进程thread scheduler隔离 | mitigated for V8与V7 draft controller；PRE_SEAL remediation in progress | 同进程污染不再用于当前执行路径；V8对每个block使用fresh process；V7 draft/formal-controller V8逐字继承V6的per-block fresh worker、1071 blocks、HiGHS 1.15.1、4 threads、PID/create-time、solver-call accounting和完整resource journal。整改前双validate-only与V7 full均通过且solver/formal writes为0/0；formal run从未启动。当前PRE_SEAL finding只涉及V6 ESCALATE receipt的future sealed-inner绑定，不改变solver或科学协议 | 完成整改后的测试矩阵及fresh PRE_SEAL复核前不得seal或启动formal run。正式执行路径必须保持per-block process isolation，不得回退到同进程连续求解或把资源停止解释为不可行 |
-| RQ2 Vnext two-block pilot post-result evidence | V8 nonformal `committed_success`; post-result `PASS` | v8唯一一次fixed `0008 -> 0009` run已发布result/PUBLISHED exact trees；public-only readback、fresh PID/predecessor、HiGHS runtime、resource journals和无seed tombstone均通过。独立post-result receipt SHA-256为`28e546b8f5f3bc8c8402c86ec723ec9e35da041ba74676c9adb59cd338980ca6` | 该PASS只关闭two-block evidence门，不形成formal result、论文claim或security certification。它是V6/V7绑定的前序证据；V6 official review已`ESCALATE`，V7仍为无执行权限的draft。下一步仅为fresh V7 PRE_SEAL review，不创建production artifacts、不启动formal run |
+| M6完整网络-业务时序闭环 | V6 official `ESCALATE`; V7 development evidence partial, Windows/PRE_SEAL pending | v5的202个HiGHS checkpoint仅作诊断，Gurobi正式attempt仅保留9/1071个历史checkpoint；HiGHS V8 nonformal `0008 -> 0009`已有post-result review。V7已补前序ESCALATE receipt的sealed-inner绑定；开发机新增18个完整临时封存快照用例，真实校验器串联到spawn边界，连同6个相邻回归为`24 passed in 100.18s`。其中有效反例发现lease已reserved时仍先创建activation目录，已在同一draft把preflight authority校验移至目录分配之前。当前收集101项；macOS证据不覆盖Windows原生consume、实际controller握手/终态和全量回归，原83项通过记录是历史字节证据。未物化仓库production artifacts或启动正式运行 | 完成Windows当前矩阵与fresh独立PRE_SEAL审查前，writer evidence complete、sealed-ready及formal/result/claim/security全部保持false；完整grid发布前pairwise/identification保持关闭 |
+| RQ2 HiGHS同进程thread scheduler隔离 | mitigated for V8与V7 draft controller；PRE_SEAL remediation in progress | V8及V7 controller保持per-block fresh worker、1071 blocks、HiGHS 1.15.1、4 threads、PID/create-time、solver-call accounting和resource journal。当前V7补充的是生产授权链测试及preflight写入顺序修复；不改变solver、资源阈值、进程隔离或科学协议。开发机未启动solver，原双validate-only及83项full记录不代表整改后执行机验收 | 完成整改后的测试矩阵及fresh PRE_SEAL复核前不得seal或启动formal run。正式执行路径必须保持per-block process isolation，不得回退到同进程连续求解或把资源停止解释为不可行 |
+| RQ2 Vnext two-block pilot post-result evidence | V8 nonformal `committed_success`; post-result `PASS` | v8唯一一次fixed `0008 -> 0009` run已发布result/PUBLISHED exact trees；public-only readback、fresh PID/predecessor、HiGHS runtime、resource journals和无seed tombstone均通过。独立post-result receipt SHA-256为`28e546b8f5f3bc8c8402c86ec723ec9e35da041ba74676c9adb59cd338980ca6` | 该PASS只关闭two-block evidence门，不形成formal result、论文claim或security certification。它是V6/V7绑定的前序证据；V6 official review已`ESCALATE`，V7仍为无执行权限的draft。先完成V7当前Windows验收矩阵，再交fresh PRE_SEAL review；不创建production artifacts、不启动formal run |
 | RQ2四臂归因v1前序 | superseded for primary attribution; implementation-only | 四臂core、checkpoint/external-preflight与旧互斥identification/report合同已实现为validate-only；现有70-cell阴性结果和全部sealed bytes保持不变 | 旧exclusive classifier不作为联合前沿主结论authority；不得覆盖旧协议或用其启动新46-cell流程 |
 | RQ2联合服务可交付前沿 | v5 independent R4 `PASS`; implementation v2 independent R3 `PASS`; execution v3 independent R3 `PASS` | 用户在v2 `ESCALATE`后明确授权v3；v3移除live receipt永久缺失假设，递归绑定v2/v1 authority并拒绝旧fixed PASS普通entry与dangling symlink。22-member outer为`b153f0320fe9dfe961575be4836f4bcf4044836be4fa66618119fc08d4cbce80`，official review及post-receipt stability均为`0/0/0` | independent review gate已关闭；dispatched-grid、Windows runtime、native replay、memory/transport、fresh-process activation及单独formal-run authority仍缺失，全部formal execution/result/claim门关闭 |
 | 真实重大停电事件分布 | processed candidate cohorts; independent-event calibration blocked | 已冻结1534源行、1521候选组及主/敏感性队列；主持续队列1385组/1398源行，重复组保留source IDs并以非缺失max/min而非求和审计 | 候选组不证明独立物理事故，仍不得估计事故频次或无条件时长分布；无资产ID、拓扑和SCUC，不得映射为RTS具名N-1或声称与业务同钟 |
@@ -3244,3 +3244,42 @@ validator。测试通过真实`require_sealed_for_execution -> _verify_sealed_bu
 `writer_pre_seal_evidence_complete=false`、`pre_seal_findings_closed=false`、
 `sealed_ready_for_independent_review=false`。V7仍为draft，formal execution/result/claim/security全部为false，且没有
 正式运行。下一步仅为完成writer remediation matrix并提交fresh只读R4 PRE_SEAL复核。
+
+## 2026-09-11 V7 生产授权链开发机验收与 preflight 写入顺序修复
+
+### 1. 本轮范围
+
+用户授权补齐V7真实生产路径验收；本轮保持同一未封存V7 draft，未创建successor、production seal、
+review PASS或用户运行回执。所有合成授权只存在于带`NONAUTHORITATIVE_TEST_ONLY.json`标记的
+pytest `TemporaryDirectory`；fresh子进程结束后自动清理。production源码保持原样复制，只有测试快照的
+canonical配置选择及cwd重定位；18项快照用例使用16-member inner、91-member closure和77-member前序closure。
+
+### 2. 实际缺陷与修复
+
+`V7-PREFLIGHT-ALLOCATION-BEFORE-AUTHORITY-VALIDATION`：`_capture_preflight()`参数求值先调用
+`next_attempt_root()`，然后才执行`preflight_authority_mapping()`。完整快照只注入lease reservation时，
+校验虽然拒绝，却已创建activation目录；test-first为`13 passed, 1 failed in 66.02s`。
+最小修复先取得verified mapping，再分配目录；4项focused为`4 passed, 12 deselected in 23.60s`。
+阈值、lease消费协议、solver及科学配置未改变。该修复尚未完成fresh独立审查。
+
+### 3. 已取得证据与边界
+
+最终开发机Python 3.11.15 / pytest 9.0.2：`24 passed in 100.18s`，包括18项完整快照与6项相邻回归；
+当前V7共收集101项，未运行全量。真实`bootstrap.execute`依次调用config/formal/closure/seal、
+review/user、preflight及dynamic authority验证器，未替换这些gate。17个负例均单点注入且验证后续调用计数；
+覆盖前序回执缺失/漂移、source/closure/outer/fresh漂移、review越权、user授权缺失或无效、
+reserved lease、已有root、资源不足，以及dynamic发布后的回执或authority漂移。正常例独立复算modulefinder
+exact-set，dynamic validator完整closure replay为1次且小于原30秒阈值。
+
+OS进程枚举、available commit观测及非Windows进程创建时间是声明的测试替代边界；production spawn处硬停止，
+科学loader被禁止。Windows分支要求真实locked runtime校验、原生no-replace consume和controller-side tombstone
+回读；本机仅证明缺失Windows runtime及native consume会正确拒绝，不能记为Windows通过。
+V5/V6 inner分别13/13、15/15，closure均91/91；activation v3静态sealed验证通过，冻结前序未改。
+
+### 4. 未完成验收
+
+本轮不证明真实sealed controller握手/终态、worker/resource journal、完整Windows回归或formal结果。
+执行机须先运行新增快照矩阵，再完成当前101项及已登记related回归；验收矩阵必须逐项记录真实路径、
+替代边界、fault计数、唯一终态、owned child停止和0 solver/formal-root write。fresh独立PRE_SEAL reviewer
+完成前，`writer_pre_seal_evidence_complete=false`、`pre_seal_findings_closed=false`及全部运行门保持关闭。
+执行命令见执行计划同日“V7生产路径验收交接”；历史83项green不得复用为本轮验收。

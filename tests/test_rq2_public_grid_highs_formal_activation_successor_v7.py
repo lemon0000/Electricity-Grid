@@ -7,6 +7,7 @@ import os
 import shutil
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 from collections.abc import Mapping
@@ -15,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+import yaml
 
 from experiments import bootstrap_rq2_joint_deliverability_activation_v3 as anchored_v3
 from experiments import (
@@ -2970,14 +2972,16 @@ def test_sealed_gate_rejects_missing_or_drifted_predecessor_escalate_before_effe
                     "production_artifacts": {"one_shot_lease": lease},
                 },
             )
-            case_patch.setattr(contract, "validate_formal_config", lambda: {})
+            case_patch.setattr(contract, "validate_formal_config", dict)
             case_patch.setattr(
-                contract, "verify_execution_closure", lambda **kwargs: closure
+                contract,
+                "verify_execution_closure",
+                lambda bound=closure, **kwargs: bound,
             )
             case_patch.setattr(
                 contract,
                 "_production_artifact_path",
-                lambda name: artifact_paths[name],
+                lambda name, paths=artifact_paths: paths[name],
             )
             case_patch.setattr(
                 contract,
@@ -2987,36 +2991,42 @@ def test_sealed_gate_rejects_missing_or_drifted_predecessor_escalate_before_effe
             case_patch.setattr(
                 contract,
                 "_repo_path",
-                lambda raw_path, label: (
-                    consumed_path
+                lambda raw_path, label, consumed=consumed_path, paths=member_paths: (
+                    consumed
                     if str(raw_path) == lease["consumed_path"]
-                    else member_paths[str(raw_path)]
+                    else paths[str(raw_path)]
                 ),
             )
             case_patch.setattr(
                 contract,
                 "require_activation_review_pass",
-                lambda: calls.__setitem__("review", calls["review"] + 1),
+                lambda counts=calls: counts.__setitem__("review", counts["review"] + 1),
             )
             case_patch.setattr(
                 contract,
                 "require_user_formal_run_authority",
-                lambda: calls.__setitem__("user", calls["user"] + 1),
+                lambda counts=calls: counts.__setitem__("user", counts["user"] + 1),
             )
             case_patch.setattr(
                 bootstrap,
                 "_capture_preflight",
-                lambda: calls.__setitem__("preflight", calls["preflight"] + 1),
+                lambda counts=calls: counts.__setitem__(
+                    "preflight", counts["preflight"] + 1
+                ),
             )
             case_patch.setattr(
                 bootstrap,
                 "_consume_one_shot_authority",
-                lambda value: calls.__setitem__("consume", calls["consume"] + 1),
+                lambda value, counts=calls: counts.__setitem__(
+                    "consume", counts["consume"] + 1
+                ),
             )
             case_patch.setattr(
                 bootstrap,
                 "_spawn_controller",
-                lambda *args, **kwargs: calls.__setitem__("spawn", calls["spawn"] + 1),
+                lambda *args, counts=calls, **kwargs: counts.__setitem__(
+                    "spawn", counts["spawn"] + 1
+                ),
             )
             with pytest.raises(
                 contract.FormalActivationRejected,
@@ -3483,3 +3493,588 @@ def test_selected_preseal_audit_commits_six_nonself_hashes() -> None:
         for path, digest in bindings.items()
     )
     assert audit["self_sha256_binding"] == "external_only_non_circular"
+
+
+def _materialize_v7_sealed_test_snapshot(root: Path) -> None:
+    """Build a complete test-only seal; production validators run in a fresh process."""
+    root.mkdir()
+    (root / "NONAUTHORITATIVE_TEST_ONLY.json").write_text(
+        json.dumps(
+            {
+                "scope": "v7_sealed_gate_integration_fixture",
+                "authority_effect": "none",
+                "review_and_user_receipts": "synthetic_test_data",
+                "production_spawn_permitted": False,
+            }
+        ),
+        encoding="utf-8",
+    )
+    members = contract.derive_execution_closure_members()
+    assert len(members) == 91
+    predecessor_members = json.loads(contract.PREDECESSOR_CLOSURE.read_bytes())[
+        "members"
+    ]
+    test_path = Path(__file__).resolve().relative_to(contract.ROOT)
+    for relative in sorted(
+        set(members) | set(predecessor_members) | {test_path.as_posix()}
+    ):
+        destination = root / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(contract.ROOT / relative, destination)
+    shutil.copytree(contract.ROOT / "configs", root / "configs", dirs_exist_ok=True)
+
+    stem = "configs/rq2_public_grid_highs_formal_activation_successor_v7"
+    formal_path = "configs/rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v8.yaml"
+
+    def write(relative: str, payload: Mapping[str, Any]) -> None:
+        path = root / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(contract.canonical_bytes(payload))
+
+    def binding(relative: str) -> dict[str, str]:
+        return {"path": relative, "sha256": contract.sha256_file(root / relative)}
+
+    fresh_path = "results/leases/v7-test.lease.json"
+    authority_id = contract.canonical_sha256({"test_root": str(root)})
+    write(
+        fresh_path,
+        {
+            "schema": "rq2_public_grid_highs_formal_activation_successor_v7_one_shot_authority",
+            "version": 7,
+            "authority_id": authority_id,
+            "state": "fresh",
+            "one_shot": True,
+            "formal_execution_authorized": False,
+            "materialized_from_successor_design_authorization": False,
+            "security_certified": False,
+        },
+    )
+    lease = {
+        "fresh_path": fresh_path,
+        "fresh_sha256": binding(fresh_path)["sha256"],
+        "consumed_path": "results/leases/v7-test.consumed.json",
+        "authority_id": authority_id,
+        "one_shot": True,
+    }
+    review_path = (
+        "configs/rq2_public_grid_highs_formal_activation_successor_review_pass_v7.json"
+    )
+    user_path = "configs/rq2_public_grid_highs_formal_run_authority_v7.json"
+    config = json.loads(contract.DRAFT_CONFIG.read_bytes())
+    config.update(
+        schema="rq2_public_grid_highs_formal_activation_successor_v7",
+        status="SEALED_READY_FOR_INDEPENDENT_REVIEW",
+        authority_effect="independent_review_only_no_execution",
+    )
+    config["gates"].update(
+        draft_non_authoritative=False,
+        pre_seal_audit_complete=True,
+        sealed_ready_for_independent_review=True,
+    )
+    config["runtime"]["exact_cwd"] = str(root)
+    config["runtime"]["controller_command_prefix"][5] = formal_path
+    config["production_artifacts"] = {
+        "inner_manifest": stem + ".SHA256SUMS.json",
+        "outer_manifest": stem + ".OUTER.SHA256SUMS.json",
+        "execution_closure": stem + ".EXECUTION_CLOSURE.SHA256SUMS.json",
+        "one_shot_lease": lease,
+        "activation_review_receipt": review_path,
+        "user_formal_run_authority": user_path,
+    }
+    write(stem + ".json", config)
+    formal = yaml.safe_load(contract.DRAFT_FORMAL_CONFIG.read_text(encoding="utf-8"))
+    formal.update(
+        schema="rts_gmlc_public_grid_need_dispatch_v4_highs_process_isolated_formal_v8",
+        status="SEALED_READY_FOR_INDEPENDENT_REVIEW",
+    )
+    lifecycle = formal.pop("draft_lifecycle")
+    lifecycle.update(
+        authority_effect="independent_review_only_no_execution",
+        pre_seal_audit_complete=True,
+        sealed_ready_for_independent_review=True,
+    )
+    formal["activation_lifecycle"] = lifecycle
+    (root / formal_path).write_text(yaml.safe_dump(formal), encoding="utf-8")
+    members.pop(contract.CONFIG.relative_to(contract.ROOT).as_posix())
+    members.pop(contract.FORMAL_CONFIG.relative_to(contract.ROOT).as_posix())
+    members[stem + ".json"] = binding(stem + ".json")["sha256"]
+    members[formal_path] = binding(formal_path)["sha256"]
+    members = dict(sorted(members.items()))
+    closure_path = config["production_artifacts"]["execution_closure"]
+    write(
+        closure_path,
+        {
+            "schema": "rq2_public_grid_highs_formal_activation_v7_execution_closure",
+            "version": 7,
+            "status": "FROZEN_EXPECTED",
+            "member_count": len(members),
+            "members": members,
+            "members_sha256": contract.canonical_sha256(members),
+            "hash_authority": "frozen_expected",
+            "derived_current_hashes_verified": True,
+            "expected_hashes_verified": True,
+            "formal_execution_authorized": False,
+            "claim": False,
+            "security_certified": False,
+        },
+    )
+    code_paths = [
+        Path(module.__file__).resolve().relative_to(contract.ROOT).as_posix()
+        for module in (bootstrap, contract, controller)
+    ]
+    audit = json.loads(contract.DRAFT_PRE_SEAL_AUDIT.read_bytes())
+    audit.pop("exact_nonself_draft_sha256")
+    audit["exact_nonself_sealed_sha256"] = {
+        relative: binding(relative)["sha256"]
+        for relative in [stem + ".json", formal_path, *code_paths, test_path.as_posix()]
+    }
+    write(stem + ".PRE_SEAL_AUDIT.json", audit)
+    # Independent inventory: never obtain the fixture's expected set from the validator.
+    inner_paths = {
+        *(
+            path.relative_to(contract.ROOT).as_posix()
+            for path in (
+                contract.PREDECESSOR_OUTER,
+                contract.PREDECESSOR_CLOSURE,
+                contract.PREDECESSOR_ESCALATE,
+                contract.SEALED_PREDECESSOR_OUTER,
+                contract.SEALED_PREDECESSOR_CLOSURE,
+                contract.SEALED_PREDECESSOR_ESCALATE,
+            )
+        ),
+        "configs/rq2_public_grid_two_block_pilot_vnext_execution_successor_post_result_review_pass_v8.json",
+        stem + ".json",
+        formal_path,
+        closure_path,
+        stem + ".PRE_SEAL_AUDIT.json",
+        *code_paths,
+        test_path.as_posix(),
+        fresh_path,
+    }
+    assert len(inner_paths) == 16
+    inner_path = config["production_artifacts"]["inner_manifest"]
+    outer_path = config["production_artifacts"]["outer_manifest"]
+    write(
+        inner_path,
+        {
+            "schema": "rq2_public_grid_highs_formal_activation_successor_v7_inner",
+            "version": 7,
+            "members": {
+                relative: binding(relative)["sha256"]
+                for relative in sorted(inner_paths)
+            },
+        },
+    )
+    write(
+        outer_path,
+        {
+            "schema": "rq2_public_grid_highs_formal_activation_successor_v7_outer",
+            "version": 7,
+            "inner": binding(inner_path),
+        },
+    )
+    write(
+        review_path,
+        {
+            "schema": "rq2_public_grid_highs_formal_activation_successor_review_pass_v7",
+            "version": 7,
+            "reviewed_on": "2000-01-01",
+            "reviewer_agent": "/root/non_authoritative_test_fixture",
+            "reviewer_role": "independent_sol_reviewer",
+            "reviewer_model": "gpt-5.6-sol",
+            "verdict": "PASS",
+            "reviewed_outer": binding(outer_path),
+            "findings": [],
+            "materialized_from_independent_review_report": True,
+            "cryptographic_reviewer_signature_present": False,
+            "effect": {
+                "formal_activation_successor_independent_review_passed": True,
+                "formal_execution_authorized": False,
+                "formal_result_exists": False,
+                "claim": False,
+                "security_certified": False,
+            },
+        },
+    )
+    write(
+        user_path,
+        {
+            "schema": "rq2_public_grid_highs_formal_run_authority_v7",
+            "version": 7,
+            "authority_source": "explicit_user_formal_run_authorization",
+            "materialized_from_user_instruction": True,
+            "cryptographic_user_signature_present": False,
+            "review_pass": binding(review_path),
+            "reviewed_outer": binding(outer_path),
+            "formal_config": binding(formal_path),
+            "execution_closure": binding(closure_path),
+            "controller_command_prefix": config["runtime"]["controller_command_prefix"],
+            "one_shot_authority": lease,
+            "effect": {
+                "formal_activation_successor_independent_review_passed": True,
+                "user_formal_run_authorized": True,
+                "formal_execution_authorized": True,
+                "formal_result_exists": False,
+                "claim": False,
+                "security_certified": False,
+            },
+        },
+    )
+
+
+def _exercise_v7_sealed_test_snapshot(case: str) -> dict[str, Any]:
+    """Called only in the copied test tree; stop before any production process spawn."""
+    root = contract.ROOT
+    marker = json.loads((root / "NONAUTHORITATIVE_TEST_ONLY.json").read_bytes())
+    assert marker["authority_effect"] == "none"
+    assert marker["production_spawn_permitted"] is False
+    assert root == Path.cwd().resolve()
+    assert contract.CONFIG == contract.SEALED_CONFIG
+    assert contract.FORMAL_CONFIG == contract.SEALED_FORMAL_CONFIG
+    assert controller.CONFIG == contract.SEALED_FORMAL_CONFIG
+    os.environ.pop("RQ2_V7_PRESEAL_CLOSURE", None)
+    healthy = contract.require_sealed_for_execution()
+    bootstrap._require_execution_gates()
+    contract._verify_fresh_one_shot_authority()
+    assert healthy["closure"]["member_count"] == 91
+    if os.name == "nt":
+        static_report = contract.validate_only()
+        assert static_report["status"] == "SEALED_READY_FOR_INDEPENDENT_REVIEW"
+        assert static_report["solver_calls"] == static_report["formal_root_writes"] == 0
+        assert (
+            Path(sys.executable).resolve()
+            == Path(contract.EXPECTED_RUNTIME_FILES["locked_python"]["path"]).resolve()
+        )
+    else:
+        with pytest.raises(
+            contract.FormalActivationRejected,
+            match="runtime file locked_python anchored open failed",
+        ):
+            contract.validate_only()
+        assert contract.v4.verify_execution_closure()["member_count"] == 77
+    test_selected_preseal_audit_commits_six_nonself_hashes()
+    if case == "valid":
+        test_tmp_v7_closure_matches_independent_modulefinder_exact_set(root / "oracle")
+
+    injections = 0
+    calls = {
+        name: 0
+        for name in (
+            "seal",
+            "review",
+            "user",
+            "preflight",
+            "publish",
+            "consume",
+            "spawn",
+        )
+    }
+
+    def observe(owner: Any, attribute: str, label: str) -> None:
+        original = getattr(owner, attribute)
+
+        def counted(*args: Any, **kwargs: Any) -> Any:
+            nonlocal injections
+            calls[label] += 1
+            result = original(*args, **kwargs)
+            if label == "publish" and case == "late_dynamic_drift":
+                change_json(Path(result["authority_path"]), "resume_allowed", True)
+                injections += 1
+            elif label == "publish" and case == "late_review_drift":
+                change_json(paths["activation_review_receipt"], "verdict", "REWORK")
+                injections += 1
+            return result
+
+        setattr(owner, attribute, counted)
+
+    for owner, attribute, label in (
+        (contract, "require_sealed_for_execution", "seal"),
+        (contract, "require_activation_review_pass", "review"),
+        (contract, "require_user_formal_run_authority", "user"),
+        (bootstrap, "_capture_preflight", "preflight"),
+        (contract, "publish_dynamic_authority", "publish"),
+        (bootstrap, "_consume_one_shot_authority", "consume"),
+    ):
+        observe(owner, attribute, label)
+
+    def forbidden_process(*args: Any, **kwargs: Any) -> Any:
+        raise AssertionError("production process or scientific loader reached")
+
+    def stop_at_spawn(*args: Any, **kwargs: Any) -> Any:
+        calls["spawn"] += 1
+        raise RuntimeError("test boundary reached before production spawn")
+
+    bootstrap._spawn_controller = stop_at_spawn
+    bootstrap.subprocess.Popen = forbidden_process
+    controller._load_science_dependencies = forbidden_process
+    # Only OS observations are synthetic. All authority/schema/hash gates call through.
+    contract._powershell_related_processes = lambda _module: []
+    resource_observations = 0
+
+    def available_commit() -> int:
+        nonlocal resource_observations
+        resource_observations += 1
+        return contract.PREFLIGHT_THRESHOLD_BYTES - (1 if case == "low_commit" else 0)
+
+    bootstrap.resource_primitives.available_commit_bytes = available_commit
+    if os.name != "nt":
+        bootstrap._current_process_identity = lambda: {
+            "pid": os.getpid(),
+            "create_time_ns": 123456789,
+        }
+    paths = {
+        name: contract._production_artifact_path(name)
+        for name in (
+            "inner_manifest",
+            "outer_manifest",
+            "execution_closure",
+            "activation_review_receipt",
+            "user_formal_run_authority",
+        )
+    }
+    lease = contract._production_one_shot()
+    fresh = root / lease["fresh_path"]
+    consumed = root / lease["consumed_path"]
+    initial_fresh_hash = contract.sha256_file(fresh)
+
+    def change_json(path: Path, key: str, value: Any) -> None:
+        payload = json.loads(path.read_bytes())
+        payload[key] = value
+        path.write_bytes(contract.canonical_bytes(payload))
+
+    if case.startswith("predecessor_"):
+        if case == "predecessor_missing":
+            contract.SEALED_PREDECESSOR_ESCALATE.unlink()
+        else:
+            change_json(contract.SEALED_PREDECESSOR_ESCALATE, "verdict", "drift")
+        injections += 1
+    elif case == "source_drift":
+        source = root / "src/grid/rts_gmlc.py"
+        source.write_bytes(source.read_bytes() + b"\n")
+        injections += 1
+    elif case == "closure_drift":
+        change_json(paths["execution_closure"], "members_sha256", "0" * 64)
+        injections += 1
+    elif case == "outer_drift":
+        change_json(paths["outer_manifest"], "version", 0)
+        injections += 1
+    elif case.startswith("review_"):
+        path = paths["activation_review_receipt"]
+        if case == "review_missing":
+            path.unlink()
+        elif case == "review_overauthorizes":
+            effect = json.loads(path.read_bytes())["effect"]
+            effect["formal_execution_authorized"] = True
+            change_json(path, "effect", effect)
+        else:
+            change_json(path, "verdict", "REWORK")
+        injections += 1
+    elif case.startswith("user_"):
+        path = paths["user_formal_run_authority"]
+        if case == "user_missing":
+            path.unlink()
+        elif case == "user_not_authorized":
+            effect = json.loads(path.read_bytes())["effect"]
+            effect["user_formal_run_authorized"] = False
+            change_json(path, "effect", effect)
+        else:
+            change_json(path, "review_pass", {"path": "wrong", "sha256": "0" * 64})
+        injections += 1
+    elif case == "fresh_drift":
+        change_json(fresh, "authority_id", "0" * 64)
+        injections += 1
+    elif case == "lease_reserved":
+        contract._one_shot_reservation_path(consumed).mkdir()
+        injections += 1
+    elif case == "root_preexists":
+        contract.formal_roots()["checkpoint"].mkdir(parents=True)
+        injections += 1
+    elif case == "low_commit":
+        injections += 1
+    else:
+        assert case in {"valid", "late_dynamic_drift", "late_review_drift"}
+
+    started = time.monotonic()
+    try:
+        bootstrap.execute()
+    except (contract.FormalActivationRejected, RuntimeError) as exc:
+        error = str(exc)
+    else:
+        raise AssertionError("test must terminate at rejection or the spawn boundary")
+    duration = time.monotonic() - started
+    if case == "valid":
+        assert calls["consume"] == 1
+        if os.name == "nt":
+            assert calls["spawn"] == 1
+            assert not fresh.exists()
+            tombstone = contract._validate_consumed_one_shot_authority(lease=lease)
+            assert tombstone["one_shot_reusable"] is False
+            dynamic_path = Path(tombstone["dynamic_authority_path"])
+            assert controller._require_consumed_controller_authority(dynamic_path)
+        else:
+            assert calls["spawn"] == 0
+            assert "Windows no-replace rename semantics" in error
+            assert fresh.is_file() and not consumed.exists()
+            assert contract.sha256_file(fresh) == initial_fresh_hash
+        if os.name == "nt":
+            with pytest.raises(
+                contract.FormalActivationRejected,
+                match="consumed one-shot authority already exists",
+            ):
+                contract._verify_fresh_one_shot_authority()
+        attempts = list(contract.activation_audit_root().glob("attempt_*"))
+        assert len(attempts) == 1
+        original_verify = contract.verify_execution_closure
+        full_replays = 0
+
+        def counted_verify(**kwargs: Any) -> dict[str, Any]:
+            nonlocal full_replays
+            full_replays += 1
+            return original_verify(**kwargs)
+
+        contract.verify_execution_closure = counted_verify
+        validation_started = time.monotonic()
+        dynamic = contract.validate_dynamic_authority(attempts[0] / "authority.json")
+        dynamic_validation_seconds = time.monotonic() - validation_started
+        assert full_replays == 1
+        assert dynamic_validation_seconds < 30.0
+        assert dynamic["preseal_startup_probe"] is False
+        assert dynamic["execution_closure"]["expected_hashes_verified"] is True
+    else:
+        assert calls["consume"] == (1 if case.startswith("late_") else 0)
+        assert calls["spawn"] == 0
+        assert not consumed.exists()
+        if case != "fresh_drift":
+            assert contract.sha256_file(fresh) == initial_fresh_hash
+        if case.startswith("late_"):
+            assert calls["publish"] == 1
+            assert len(list(contract.activation_audit_root().glob("attempt_*"))) == 1
+        elif case != "low_commit":
+            assert not contract.activation_audit_root().exists()
+        else:
+            assert calls["publish"] == 0
+            assert not list(contract.activation_audit_root().rglob("authority.json"))
+        full_replays = 0
+        dynamic_validation_seconds = None
+    assert resource_observations == (
+        1 if case in {"valid", "low_commit"} or case.startswith("late_") else 0
+    )
+    for name, path in contract.formal_roots().items():
+        assert path.exists() == (case == "root_preexists" and name == "checkpoint")
+    return {
+        "case": case,
+        "scope": "sealed_authority_chain_to_spawn_boundary",
+        "authority_effect": "none",
+        "healthy_snapshot_verified": True,
+        "inner_members": len(healthy["inner"]["members"]),
+        "closure_members": healthy["closure"]["member_count"],
+        "injection_count": injections,
+        "calls": calls,
+        "error": error,
+        "duration_seconds": duration,
+        "dynamic_full_closure_replays": full_replays,
+        "dynamic_validation_seconds": dynamic_validation_seconds,
+        "resource_observations": resource_observations,
+        "native_windows_consume_exercised": case == "valid" and os.name == "nt",
+        "native_runtime_static_validation_passed": os.name == "nt",
+        "production_process_spawns": 0,
+        "solver_calls": 0,
+        "substituted_boundaries": [
+            "process_census_observation",
+            "available_commit_observation",
+            "spawn_stop",
+            "non_windows_identity" if os.name != "nt" else "none",
+        ],
+    }
+
+
+@pytest.fixture
+def v7_sealed_test_root(tmp_path: Path) -> Any:
+    with tempfile.TemporaryDirectory(prefix="v7-nonauth-", dir=tmp_path) as directory:
+        root = (Path(directory) / "snapshot").resolve()
+        _materialize_v7_sealed_test_snapshot(root)
+        yield root
+
+
+@pytest.mark.parametrize(
+    ("case", "rejected_at", "error_pattern"),
+    [
+        ("predecessor_missing", "seal", "successor_review_escalate_v6"),
+        ("predecessor_drift", "seal", "successor_review_escalate_v6"),
+        ("source_drift", "seal", "frozen execution closure drifted"),
+        ("closure_drift", "seal", "frozen execution closure drifted"),
+        ("outer_drift", "seal", "sealed bundle drifted"),
+        ("fresh_drift", "seal", "v7-test.lease.json"),
+        ("review_missing", "review", "activation review PASS receipt"),
+        ("review_drift", "review", "activation review PASS receipt"),
+        ("review_overauthorizes", "review", "activation review PASS receipt"),
+        ("user_missing", "user", "user formal-run authority"),
+        ("user_drift", "user", "user formal-run authority"),
+        ("user_not_authorized", "user", "user formal-run authority"),
+        ("lease_reserved", "preflight", "consumed one-shot authority already exists"),
+        ("root_preexists", "clean_start", "formal roots must not preexist"),
+        ("low_commit", "preflight", "frozen 10 GiB threshold"),
+        ("late_dynamic_drift", "consume", "dynamic production authority drifted"),
+        ("late_review_drift", "consume", "production preflight binding drifted"),
+        ("valid", "platform_or_spawn", ""),
+    ],
+)
+def test_v7_sealed_snapshot_real_authority_chain(
+    v7_sealed_test_root: Path, case: str, rejected_at: str, error_pattern: str
+) -> None:
+    root = v7_sealed_test_root
+    test_relative = Path(__file__).resolve().relative_to(contract.ROOT).as_posix()
+    command = (
+        "import json,runpy,sys; "
+        "scope=runpy.run_path(sys.argv[1]); "
+        "print(json.dumps(scope['_exercise_v7_sealed_test_snapshot'](sys.argv[2])))"
+    )
+    completed = subprocess.run(
+        [sys.executable, "-B", "-c", command, test_relative, case],
+        cwd=root,
+        env={
+            key: value
+            for key, value in os.environ.items()
+            if key not in {"PYTHONPATH", "RQ2_V7_PRESEAL_CLOSURE"}
+        },
+        capture_output=True,
+        text=True,
+        timeout=180,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    evidence = json.loads(completed.stdout)
+    assert evidence["healthy_snapshot_verified"] is True
+    assert evidence["inner_members"] == 16
+    assert evidence["closure_members"] == 91
+    assert evidence["injection_count"] == (0 if case == "valid" else 1)
+    assert error_pattern in evidence["error"]
+    assert evidence["production_process_spawns"] == evidence["solver_calls"] == 0
+    calls = evidence["calls"]
+    assert calls["seal"] == 1
+    if rejected_at == "seal":
+        assert all(
+            calls[name] == 0
+            for name in ("review", "user", "preflight", "publish", "consume", "spawn")
+        )
+    elif rejected_at == "review":
+        assert calls["review"] == 1
+        assert all(
+            calls[name] == 0
+            for name in ("user", "preflight", "publish", "consume", "spawn")
+        )
+    elif rejected_at in {"user", "clean_start"}:
+        assert calls["user"] == 1
+        assert all(
+            calls[name] == 0 for name in ("preflight", "publish", "consume", "spawn")
+        )
+    elif rejected_at == "preflight":
+        assert calls["preflight"] == 1
+        assert calls["publish"] == calls["consume"] == calls["spawn"] == 0
+    elif rejected_at == "consume":
+        assert calls["publish"] == calls["consume"] == 1
+        assert calls["spawn"] == 0
+    else:
+        assert calls["publish"] == calls["consume"] == 1
+        assert evidence["dynamic_full_closure_replays"] == 1
+    assert not list(root.rglob("*.pyc"))
