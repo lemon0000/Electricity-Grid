@@ -1,0 +1,37 @@
+# 显式许可环境的 normal 开发后继
+
+状态：DRAFT_NONAUTHORITATIVE。前一direct H25任务因受控child缺少宿主GRB_LICENSE_FILE而回落到限规模许可；本后继只补许可路由，复用完整normal数学模型、native direct求解、来源绑定、store/replay/capture。旧字节与旧失败记录保持。
+
+## 最小变更和预定范围
+
+新增normal_licensed_environment.py，在旧10键exact environment上只允许新增GRB_LICENSE_FILE，要求存在的绝对本地文件路径。许可内容不读取、不复制、不hash、不写入仓库。新worker/controller只改变环境codec、外层类型/schema、worker argv及相应身份；worker依赖闭包同时绑定新codec和原normal_worker源码。normal/source/declared/replay四级pin及完整request与前一direct声明逐字相同。
+
+新声明configs/rq2_normal_task_gurobi_licensed_h25_development_v1.DRAFT.yaml，SHA256 49d64f99823e3a7ed0620dba65cc6632d60f3c766e891ed99ea8c242d58cd694。新runner experiments/audit_rq2_normal_task_gurobi_licensed_v1.py，SHA256 6e86dc80e92bf692a3a9a47e0aefc9f00d8378c456052512f92037905f22c683。其以旧direct声明SHA为固定基线，仅允许外层schema/root/controller pin和许可定位键变化，仍重算四级内层pin。
+
+预定一次H25开发任务：5秒/1thread/seed0及全部数值容差保持；normal60秒/768MiB、execute/replay各240秒、controller600秒保持。独占root为results/tables/rq2_normal_task_gurobi_licensed_h25_attempt1_non_authoritative。不得由许可容量检查推导正式研究模型可行、最优或正式引擎选择。
+
+## 同环境容量检查
+
+experiments/diagnose_rq2_gurobi_license_environment_v1.py（SHA256 447332c6482f3722d877e29080d71cf7e2998ea808f22408e2ab9ec90a61638e）经独立pre-seal修正脚本外部pin和结果严格校验后执行一次。沿用Windows Job，原10键环境加许可定位、单次5秒/1thread，Job30秒/768MiB。创建22275个连续变量、28004条平凡约束；不构建研究模型。14项字段/类型/规模/状态/数值失败反例通过，独立14项通过。
+
+results/tables/rq2_gurobi_license_environment_probe1_non_authoritative中保留request、process、capacity、summary四个JSON。实际规模22275/28004，status2、solution_count1、objective0，native0.0120000839秒；child0.453秒、exit0、Job静默，commit峰61292544 bytes。summary绑定其余三个JSON的摘要及process/script身份。该证据仅证明此受控环境/native接口可以处理此规模的合成检查。
+
+## 验证进度
+
+runner20项通过（4.63秒）；许可路径改变影响outer identity、旧request/argv拒绝两项通过（4.70秒）。环境及worker/controller/reports全组125项通过（334.14秒）。独立环境+runner28项通过（4.53秒），源码、完整身份链与probe四JSON交叉核验一致，pre-seal实质finding已闭合；支持按上述固定预算执行一次H25开发任务，不产生official verdict。此前已验证的normal内层无需重新实现。
+
+## 2026-09-27 H25完整可行赋值
+
+上述runner用compute Python `-B`、固定config/script SHA及 `--execute-development`执行一次，无重试。controller276.781秒，execute/replay152.156/121.032秒，exit0且Job静默，commit峰711766016/663388160 bytes。API状态completed_development_replay_diagnostic，落盘状态validated_before_final_observation_write，保持各自写入时点。
+
+native为1 call、aborted/maxTimeLimit、solution_status=stoppedByLimit、solution_count=1；assignment_valid=true，optimal=false，native_infeasible=false，native errors=[]。objective1389951.5633491299、原生LB1386241.4910508937、UB1389951.5633491308；据所报界计算absolute gap3710.0722982371、incumbent-relative gap0.002669209774，尚未满足原1e-8门。最大残差3.211653165635653e-11，integrality violation0。此为完整可行赋值的开发证据，不是最优或正式容量/安全证书。
+
+normal71.429665秒，唯一normal error为observed_wall_time_exceeds_budget；preflight21.6215334、solve/load/canonical pipeline40.2088485、witness5.1137269秒，嵌套builders4.3864097/4.478326/4.5081481秒，不重复累加。完整赋值路径首次触及canonical重建和witness成本；仅凭上述总时间不能细分其余结构/编码成本或作受控性能比较。最优性及60秒验收均未通过，normal_accepted=false。
+
+独立零solver回放archive_consistent/source_input_binding_verified/assignment_recomputed/normal_witness_reproduced均true，native replay_consistent=true、errors=[]，残差与objective复算一致；accepted_record_reproduced=false。SQLite integrity=ok，record6810398 bytes、SHA256 00df3a8d34c7d5434b5f11d2ebb4b79b102ea00b46c6c7c03873fcb728fc8bb4，result identity119b8635df736c0ff734bc19901c6e7777843eacb4f1835f50fbd0bacfdd195d；replay SHA256 bfe4dd0dde0d4266883813065d9500409a519e8ce59019f1cb8be244c725a0fd。
+
+新138项索引results/tables/rq2_normal_task_h25_audit_v1_non_authoritative/gurobi_licensed_task_attempt1_evidence.json，SHA256 fd6d0f32a768866282b4dd2b1211c817956d4ede16daa5ca9f53847abdfdd9b2，含许可probe及完整任务工件；另15个历史索引/691条证据root复核一致。原许可阻塞已在本受控环境排除，机制初态/业务映射与正式门保持。
+
+下一必要工作是针对完整赋值路径降低校验开销并解决有界最优性，保留全部检查位置、完整矩阵和原数值/60秒门。已有native _structure对每个线性系数重复获取变量名称、再走通用身份编码，是可检查的实现候选；这只是源码定位，尚无耗时归因或性能改善证据，需用原结构身份作为oracle验证，再决定是否接入。不得仅增加求解时间而忽略已触发的总时间门。
+
+独立只读结果审计已闭合，138/138新项、15个历史索引与691/691历史证据、SQLite/双pins/赋值/witness/回放及计时门解释一致，无开放实质finding。terminal carry为H25的derived development witness；formal/security/auth/resource标志保持false。本审计不构成official verdict或正式门授权。最终git diff --check通过。

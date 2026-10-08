@@ -1,0 +1,106 @@
+{
+  "schema": "h1_scoped_inspection_development_checks_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "date": "2026-09-30",
+  "files": {
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_scoped_child_inspection.py": "fafc812a333617fe13f21491e2d4acfc8ff5cccb62b9b3488af2fa7bf6445ca2",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_scoped_source_episode.py": "baddce609aab2bed3cfa8f2bfcdc4011f260121c7dde2075132f159883b05c95",
+    "tests/test_rq2_normal_h1_scoped_child_inspection_v1.py": "29a4d02c4e49717804b325af3125053f3f25c8a8e7eccbe0eac3ac6497695540",
+    "tests/test_rq2_normal_h1_scoped_source_episode_v1.py": "74b77ca6ea259c655c952d23cba1f527c2349cf52560b3eb8a156801f151ca22",
+    "docs/model_spec/rq2_normal_h1_scoped_inspection_v1.md": "02621dba19c453880d5fdc0a79c723164d9430ccb7b2dd9bbe855aa01e665522",
+    "experiments/profile_rq2_normal_h1_parent_replay_v1.py": "cccab3bcb0d18b097faf57b20b897bd1d046db09cceeaf2f6af41ef281513edf",
+    "experiments/compare_rq2_normal_h1_child_inspection_v1.py": "30d25e22c3ce87954c55abb26cfe20ab4a4cbfe2e0b3be05964ef5626ad911ad",
+    "results/tables/rq2_normal_h1_parent_profile_v1_non_authoritative/replay_profile.json": "486465e54c935eba6df23f7a732a0ddbc6029e61e49c282dc45af3f32e4a5641",
+    "results/tables/rq2_normal_h1_parent_profile_v1_non_authoritative/child_comparison.json": "a04bc63eb2889d6667affa096164cf9b45653db43aa4a9bcf76ab138af32c074"
+  },
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_scoped_child_inspection_v1.py tests/test_rq2_normal_h1_scoped_source_episode_v1.py",
+      "passed": 14,
+      "failed": 1,
+      "seconds": 270.14,
+      "child_tests_passed": 11,
+      "limitation": "Parent isolation fixture missed temporary ancestor mkdir; corrected and rerun below. Child implementation and tests unchanged after this run."
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_scoped_source_episode_v1.py tests/test_rq2_normal_h1_incremental_archive_v1.py tests/test_rq2_normal_h1_hour_archive_v1.py tests/test_rq2_normal_h1_chunk_journal_v1.py",
+      "passed": 109,
+      "failed": 0,
+      "seconds": 204.6,
+      "exit_code": 0,
+      "scope": "Final parent 6 tests plus 103 related regression tests, after explicit inner receipt gate."
+    }
+  ],
+  "comparison": {
+    "schema": "h1_same_evidence_inspection_comparison_v1",
+    "status": "DRAFT_NONAUTHORITATIVE",
+    "metrics": [
+      {
+        "strategy": "legacy",
+        "profiled_elapsed_seconds": 6.524654900000314,
+        "stage_audits": 12,
+        "primitive_calls": 8551377,
+        "total_calls": 8683513
+      },
+      {
+        "strategy": "scoped",
+        "profiled_elapsed_seconds": 2.5665431000088574,
+        "stage_audits": 3,
+        "primitive_calls": 3044486,
+        "total_calls": 3092588
+      }
+    ],
+    "inspection_equal": true,
+    "solver_calls": 0,
+    "preserved_members": 20,
+    "drift_count": 0,
+    "inspector_identity": "59fd098e392b73fb04b225d3c74c5a0907f9fcd00c4eab62253c397bfd73b92d",
+    "runner_sha256": "30d25e22c3ce87954c55abb26cfe20ab4a4cbfe2e0b3be05964ef5626ad911ad",
+    "sample_manifest_sha256": "95cadc832ff7438bf254abe8c052a48b30507450db4fce83fe8979d575b6d0ab",
+    "formal_result": false,
+    "hard_resources_admitted": false,
+    "limitations": [
+      "One retained synthetic hour; instrumented local timing, not a multi-day resource bound."
+    ]
+  },
+  "preservation": [
+    {
+      "manifest": "configs/rq2_cfe_preallocation_v1.SHA256SUMS.json",
+      "sha256": "2ad227ff41c9e9419329568457403ec45b35a2f34114809079f6525bed5f6623",
+      "members": 587,
+      "drift_count": 0
+    },
+    {
+      "manifest": "results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/development_checks.json",
+      "sha256": "95cadc832ff7438bf254abe8c052a48b30507450db4fce83fe8979d575b6d0ab",
+      "members": 20,
+      "drift_count": 0
+    },
+    {
+      "manifest": "results/tables/rq2_normal_h1_anchored_source_episode_v1_non_authoritative/development_checks.json",
+      "sha256": "d60d32fd1afb18ee29b3fe3be82d368ab14f050e97bad5c02c8d0d1bc3ac9ecc",
+      "members": 39,
+      "drift_count": 0
+    }
+  ],
+  "review": {
+    "stage": "PRE_SEAL_AUDIT",
+    "reviewer": "/root/cfe_preallocation_official",
+    "findings_closed": true,
+    "independent_read_only": true,
+    "reviewer_reran_tests": false,
+    "official_verdict": null
+  },
+  "solver_calls": 0,
+  "production_sealed": false,
+  "formal_run_started": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "limitations": [
+    "Synthetic retained raw evidence only; zero new native solves.",
+    "Inspection-only API still opens writable SQLite and takes BEGIN IMMEDIATE.",
+    "Single local instrumented measurement; no universal speed ratio or hard resource bound.",
+    "Parent prefix full replay and dependency identity sampling still repeat.",
+    "Real RTS 232-stage resource admission, cross-namespace uniqueness, common Rref/A prefix and full-support bounds remain open."
+  ]
+}

@@ -1,0 +1,20 @@
+schema: rq2_bidirectional_capacity_policy_v1
+status: DRAFT_NONAUTHORITATIVE
+rule: fixed_bidirectional_grid_cfe_recovery_open_boundary_v1
+evidence_class: mechanism_assumption
+training_capacity_certificate: null
+continuous_service_protocol_registered: false
+formal_experiment_authorized: false
+formal_result: false
+paper_claim: false
+security_certified: false
+fixture:
+  source_config: configs/rq2_continuous_causal_policy_v1.DRAFT.yaml
+  committed_capacity: 0.5
+  capacity_declaration_id: synthetic_capacity_half
+  minimum_event_power: 0.0625
+  curtailment_ramp_per_hour: 0.25
+  response_time_hours: 0.5
+  maximum_recovery_power: 0.5
+  recovery_decimal_places: 12
+  available_flexibility: 0.4

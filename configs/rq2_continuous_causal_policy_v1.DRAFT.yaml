@@ -1,0 +1,40 @@
+schema: rq2_continuous_causal_policy_v1_draft
+status: DRAFT_NONAUTHORITATIVE
+scope: synthetic_fixed_causal_prefix_policy_and_audit
+continuous_service_protocol_registered: false
+formal_experiment_authorized: false
+formal_result: false
+paper_claim: false
+security_certified: false
+policy:
+  rule: full_request_edf_known_then_unknown_fifo_v1
+  recovery_decimal_places: 12
+  known_deadline_priority: ascending_due_hour_then_birth_hour
+  unidentified_deadline_priority: after_known_then_birth_hour
+  active_call_recovery: zero
+  idle_recovery: min_current_business_cfe_max_power_and_debt_over_eta
+  recovery_quantization: floor_to_fixed_decimal_grid_then_conservative_float
+  rejection: halt_preserve_last_committed_state
+  input_visibility: single_current_observation_and_carried_state
+  b6: same_fixed_rule_on_separate_tracks_then_prescribed_shared_execution
+  b6_effective_obligation_mismatch: reject_before_planning
+  numerical_overflow: reject_at_current_stage_preserve_committed_state
+  audit_binding: deterministic_replay_from_before_states_and_prefix_chain
+fixture:
+  hours: 48
+  call_hours: [23, 24, 25]
+  grid_request: 0.125
+  cfe_request: 0.125
+  deadline_offset_hours: 3
+  call_limit: 0.5
+  business_recovery_headroom: 0.3125
+  cfe_compatible_surplus: 0.3125
+  maximum_recovery_power: 0.5
+  envelope:
+    time_step_hours: 1.0
+    recovery_efficiency: 0.8
+    maximum_event_duration_hours: 3.0
+    maximum_event_count: 2
+    normalized_energy_budget: 1.0
+    normalized_debt_limit: 1.0
+    minimum_recovery_hours: 2.0

@@ -1,0 +1,57 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE_PUBLIC_SOURCE",
+  "source": "Google ClusterData2019 public GCS buckets",
+  "cell": "f",
+  "official_repository_entry": "https://github.com/google/cluster-data/blob/3f6a61d380dc4ea847416d5414c5fa499f830b9d/ClusterData2019.md",
+  "official_v3_documentation": {
+    "url": "https://drive.google.com/file/d/10r6cnJ5cJ89fPWCgj7j4LtLBqYN9RiI9/view",
+    "locally_verified_pdf_sha256": "17267c7c634a6ee01146b8032bacc26d9c7354e7b3bdb6a48fc0cbb69f02d6f9",
+    "relevant_page": 14,
+    "documented_format": "newline-delimited JSON compressed with gzip"
+  },
+  "object_listing_url": "https://storage.googleapis.com/storage/v1/b/clusterdata_2019_f/o?maxResults=1000&fields=nextPageToken,items(name,size,generation,md5Hash,crc32c)",
+  "schema_listing_url": "https://storage.googleapis.com/storage/v1/b/clusterdata_2019_schema/o?maxResults=1000&fields=nextPageToken,items(name,size,generation,md5Hash,crc32c)",
+  "inventory_retrieved_at_utc": "2026-09-12T08:18:00Z",
+  "download_completed_at_utc": "2026-09-12T08:24:25Z",
+  "media_url_template": "https://storage.googleapis.com/storage/v1/b/{bucket}/o/{urlencoded_object_name}?alt=media&generation={generation}",
+  "cell_bucket_inventory": {
+    "pages": 16,
+    "objects": 15264,
+    "by_table_and_format": [
+      {"table": "collection_events", "format": "json.gz", "objects": 1, "bytes": 270631447},
+      {"table": "collection_events", "format": "parquet.gz", "objects": 6, "bytes": 159366985},
+      {"table": "instance_events", "format": "json.gz", "objects": 239, "bytes": 44636950553},
+      {"table": "instance_events", "format": "parquet.gz", "objects": 1180, "bytes": 14100104301},
+      {"table": "instance_usage", "format": "json.gz", "objects": 1575, "bytes": 990791658431},
+      {"table": "instance_usage", "format": "parquet.gz", "objects": 12259, "bytes": 447312709954},
+      {"table": "machine_attributes", "format": "json.gz", "objects": 1, "bytes": 19884918},
+      {"table": "machine_attributes", "format": "parquet.gz", "objects": 1, "bytes": 8537961},
+      {"table": "machine_events", "format": "json.gz", "objects": 1, "bytes": 792540},
+      {"table": "machine_events", "format": "parquet.gz", "objects": 1, "bytes": 452862}
+    ],
+    "format_totals": {
+      "json.gz": {"objects": 1817, "bytes": 1035719917889},
+      "parquet.gz": {"objects": 13447, "bytes": 461581172063}
+    }
+  },
+  "schema_bucket_inventory": {"pages": 1, "objects": 5, "bytes": 6396},
+  "files": [
+    {"path": "machine_events-000000000000.json.gz", "object_name": "machine_events-000000000000.json.gz", "download_url": "https://storage.googleapis.com/storage/v1/b/clusterdata_2019_f/o/machine_events-000000000000.json.gz?alt=media&generation=1596913537248175", "bucket": "clusterdata_2019_f", "generation": "1596913537248175", "bytes": 792540, "md5_base64": "D63mE3bAhywXxE3hVz8BFA==", "crc32c_base64": "OM/QIQ==", "sha256": "a4fd1c97ddda3d5f8e66e8542b317f4e214f7ec4b29130b2be67c5fcfa56fcbe", "role": "complete_documented_machine_events_table"},
+    {"path": "machine_events-000000000000.parquet.gz", "object_name": "machine_events-000000000000.parquet.gz", "download_url": "https://storage.googleapis.com/storage/v1/b/clusterdata_2019_f/o/machine_events-000000000000.parquet.gz?alt=media&generation=1682722643542165", "bucket": "clusterdata_2019_f", "generation": "1682722643542165", "bytes": 452862, "md5_base64": "ug4X4TSTycql0jKGFxgQ7g==", "crc32c_base64": "nls8bg==", "sha256": "57b62825d86600762b8b44053e54e742753c2001bfd1c3eb95bde52673635d3c", "role": "undocumented_later_parquet_transport_candidate"},
+    {"path": "instance_usage-000000000000.parquet.gz", "object_name": "instance_usage-000000000000.parquet.gz", "download_url": "https://storage.googleapis.com/storage/v1/b/clusterdata_2019_f/o/instance_usage-000000000000.parquet.gz?alt=media&generation=1682722511382315", "bucket": "clusterdata_2019_f", "generation": "1682722511382315", "bytes": 36464842, "md5_base64": "+M9CjW1OhV0bhZPdPmRa1w==", "crc32c_base64": "M3S6BA==", "sha256": "5aa2b2909a419d38d124b35921e78cf3162688ef8edc11a8f98d5f9ec6a5c516", "role": "lexicographically_first_single_shard_transport_pilot"},
+    {"path": "collection_events.schema.json", "object_name": "collection_events.schema.json", "download_url": "https://storage.googleapis.com/storage/v1/b/clusterdata_2019_schema/o/collection_events.schema.json?alt=media&generation=1596854498220506", "bucket": "clusterdata_2019_schema", "generation": "1596854498220506", "bytes": 1440, "md5_base64": "kL3yk+8pEQqKkOQ6h6q+Mg==", "crc32c_base64": "prrDYg==", "sha256": "63e6cea700e31608b982206c375bc091fbb7ae1d6e8ab92ed499050af4c77dc3", "role": "documented_json_schema"},
+    {"path": "instance_events.schema.json", "object_name": "instance_events.schema.json", "download_url": "https://storage.googleapis.com/storage/v1/b/clusterdata_2019_schema/o/instance_events.schema.json?alt=media&generation=1596854524104375", "bucket": "clusterdata_2019_schema", "generation": "1596854524104375", "bytes": 1605, "md5_base64": "7//sFu3eGuhFADo14sACtg==", "crc32c_base64": "K1RvcQ==", "sha256": "77f517bde1916cfde558e14bcb851d8ce0c1aac9c984d6e39041554c7460c52d", "role": "documented_json_schema"},
+    {"path": "instance_usage.schema.json", "object_name": "instance_usage.schema.json", "download_url": "https://storage.googleapis.com/storage/v1/b/clusterdata_2019_schema/o/instance_usage.schema.json?alt=media&generation=1596854535885870", "bucket": "clusterdata_2019_schema", "generation": "1596854535885870", "bytes": 2193, "md5_base64": "z5SzISgHuOb85LkQw+ghlA==", "crc32c_base64": "eCj9mw==", "sha256": "82c1ffb74988c2b7a7b60a134840bb234f588949950bfab762dac8863a72b559", "role": "documented_json_schema"},
+    {"path": "machine_attributes.schema.json", "object_name": "machine_attributes.schema.json", "download_url": "https://storage.googleapis.com/storage/v1/b/clusterdata_2019_schema/o/machine_attributes.schema.json?alt=media&generation=1596854545097024", "bucket": "clusterdata_2019_schema", "generation": "1596854545097024", "bytes": 386, "md5_base64": "aeOuhfQagRCsB5U1rnxj1A==", "crc32c_base64": "x1ovbA==", "sha256": "db53f4071d2c6cc685d64d22d1ebb9ad39f4c43b9f34d61245f4e73a0a77931e", "role": "documented_json_schema"},
+    {"path": "machine_events.schema.json", "object_name": "machine_events.schema.json", "download_url": "https://storage.googleapis.com/storage/v1/b/clusterdata_2019_schema/o/machine_events.schema.json?alt=media&generation=1596854554102915", "bucket": "clusterdata_2019_schema", "generation": "1596854554102915", "bytes": 772, "md5_base64": "0y6J0hqGLbodCMF9j/C8ZQ==", "crc32c_base64": "tBy8fQ==", "sha256": "49e30a5eb30ad03a46b32bbfc4c272ffc7eee29cbf0eb1bc544e73dcaeaef60f", "role": "documented_json_schema"}
+  ],
+  "usage_pilot": {
+    "selection_rule": "lexicographically_first_instance_usage_parquet_object",
+    "complete_table": false,
+    "content_schema_verified": false,
+    "row_count_verified": false,
+    "time_range_verified": false,
+    "continuity_verified": false,
+    "reason": "No Parquet reader in the locked environments; one temporary DuckDB install attempt required a missing compiler and was stopped."
+  }
+}

@@ -1,0 +1,354 @@
+{
+  "budget": {
+    "max_constraints": 500,
+    "max_horizon": 1,
+    "max_seconds_per_solve": 1.0,
+    "max_solver_calls": 3,
+    "max_threads": 1,
+    "max_total_solver_seconds": 3.0,
+    "max_variables": 100,
+    "purpose": "h1_normal_numerical_lex_short_development_v1"
+  },
+  "cases": [
+    {
+      "case": "positive",
+      "chain_identity": "25a5b323a86a9b9512789c328d7fe2f3ca8ac97ea4a85b389aeceb516e57fce3",
+      "collector_attempts": 3,
+      "errors": [],
+      "fixture_arguments": {
+        "horizon": 1
+      },
+      "numerical_chain_accepted": true,
+      "solver_calls": 3,
+      "stages": [
+        {
+          "accepted": true,
+          "assignment_audit": {
+            "assignment_identity": "53ceb47940baf81adb31b28af63b7ea1c9bd4f7c0c20551a355edfb26e1c5387",
+            "canonical_objective": 20.0,
+            "errors": [],
+            "evidence_role": "derived_h1_assignment_audit_no_native_optimality",
+            "lock_residuals": [],
+            "maximum_constraint_violation": 0.0,
+            "maximum_integrality_violation": 0.0,
+            "stage_identity": "404732534924c1a0e931dd3aa0c3afac5b4db218310f64ba51a757ac9fb84c0d"
+          },
+          "errors": [],
+          "index": 0,
+          "lock_value": 20.0,
+          "native_file": "results/tables/rq2_normal_h1_native_v1_non_authoritative/positive_stage_0_native.json",
+          "numerical_predicate": {
+            "candidate_numeric_predicate_passed": true,
+            "canonical_minus_native_objective_exact": "0",
+            "checks": {
+              "assignment_valid": true,
+              "integrality_within_original_limit": true,
+              "linear_mip_minimization_scope": true,
+              "native_to_pyomo_bound_hex_equal": true,
+              "objective_algebra_equal": true,
+              "objective_channel_consistent": true,
+              "optimal_status": true,
+              "raw_bounds_ordered": true,
+              "raw_relative_gap_within_original_limit": true,
+              "residual_within_original_limit": true
+            },
+            "formal_acceptance_authorized": false,
+            "native_execution_authenticated": false,
+            "raw_relative_gap_exact": "0",
+            "rigorous_exact_optimality_certified": false,
+            "strict_legacy_lower_le_canonical": true
+          },
+          "objective": [
+            "operating_cost",
+            null
+          ],
+          "prior_locks": [],
+          "stage_identity": "404732534924c1a0e931dd3aa0c3afac5b4db218310f64ba51a757ac9fb84c0d"
+        },
+        {
+          "accepted": true,
+          "assignment_audit": {
+            "assignment_identity": "6c21253aa44dffd9c8e146c20b7d3ee26ed9a9d1b641eff24b2e16e7d1611520",
+            "canonical_objective": 1.0,
+            "errors": [],
+            "evidence_role": "derived_h1_assignment_audit_no_native_optimality",
+            "lock_residuals": [
+              0.0
+            ],
+            "maximum_constraint_violation": 0.0,
+            "maximum_integrality_violation": 0.0,
+            "stage_identity": "8eaa205404dfb8bd109aeaed270cfa3e959cc78ad5ea717622b82c22f58bbeff"
+          },
+          "errors": [],
+          "index": 1,
+          "lock_value": 1.0,
+          "native_file": "results/tables/rq2_normal_h1_native_v1_non_authoritative/positive_stage_1_native.json",
+          "numerical_predicate": {
+            "candidate_numeric_predicate_passed": true,
+            "canonical_minus_native_objective_exact": "0",
+            "checks": {
+              "assignment_valid": true,
+              "integrality_within_original_limit": true,
+              "linear_mip_minimization_scope": true,
+              "native_to_pyomo_bound_hex_equal": true,
+              "objective_algebra_equal": true,
+              "objective_channel_consistent": true,
+              "optimal_status": true,
+              "raw_bounds_ordered": true,
+              "raw_relative_gap_within_original_limit": true,
+              "residual_within_original_limit": true
+            },
+            "formal_acceptance_authorized": false,
+            "native_execution_authenticated": false,
+            "raw_relative_gap_exact": "0",
+            "rigorous_exact_optimality_certified": false,
+            "strict_legacy_lower_le_canonical": true
+          },
+          "objective": [
+            "commitment",
+            "G1"
+          ],
+          "prior_locks": [
+            20.0
+          ],
+          "stage_identity": "8eaa205404dfb8bd109aeaed270cfa3e959cc78ad5ea717622b82c22f58bbeff"
+        },
+        {
+          "accepted": true,
+          "assignment_audit": {
+            "assignment_identity": "6c21253aa44dffd9c8e146c20b7d3ee26ed9a9d1b641eff24b2e16e7d1611520",
+            "canonical_objective": 20.0,
+            "errors": [],
+            "evidence_role": "derived_h1_assignment_audit_no_native_optimality",
+            "lock_residuals": [
+              0.0,
+              0.0
+            ],
+            "maximum_constraint_violation": 0.0,
+            "maximum_integrality_violation": 0.0,
+            "stage_identity": "2d45fde295426dbcc2421f143de28d8301a92552465720620ee046e8e7bd1d9c"
+          },
+          "errors": [],
+          "index": 2,
+          "lock_value": 20.0,
+          "native_file": "results/tables/rq2_normal_h1_native_v1_non_authoritative/positive_stage_2_native.json",
+          "numerical_predicate": {
+            "candidate_numeric_predicate_passed": true,
+            "canonical_minus_native_objective_exact": "0",
+            "checks": {
+              "assignment_valid": true,
+              "integrality_within_original_limit": true,
+              "linear_mip_minimization_scope": true,
+              "native_to_pyomo_bound_hex_equal": true,
+              "objective_algebra_equal": true,
+              "objective_channel_consistent": true,
+              "optimal_status": true,
+              "raw_bounds_ordered": true,
+              "raw_relative_gap_within_original_limit": true,
+              "residual_within_original_limit": true
+            },
+            "formal_acceptance_authorized": false,
+            "native_execution_authenticated": false,
+            "raw_relative_gap_exact": "0",
+            "rigorous_exact_optimality_certified": false,
+            "strict_legacy_lower_le_canonical": true
+          },
+          "objective": [
+            "generation",
+            "G1"
+          ],
+          "prior_locks": [
+            20.0,
+            1.0
+          ],
+          "stage_identity": "2d45fde295426dbcc2421f143de28d8301a92552465720620ee046e8e7bd1d9c"
+        }
+      ]
+    },
+    {
+      "case": "double_zero",
+      "chain_identity": "eb0deaf640b84bd33a203e5fcca4d680ce15e176b138ffa3b57c62ce23eb9e7b",
+      "collector_attempts": 3,
+      "errors": [],
+      "fixture_arguments": {
+        "age": 3,
+        "committed": false,
+        "demand": 0.0,
+        "horizon": 1
+      },
+      "numerical_chain_accepted": true,
+      "solver_calls": 3,
+      "stages": [
+        {
+          "accepted": true,
+          "assignment_audit": {
+            "assignment_identity": "02679fefde5647cf2165601f9afce8e029038ee5864a13d1498e47fb04e05174",
+            "canonical_objective": 0.0,
+            "errors": [],
+            "evidence_role": "derived_h1_assignment_audit_no_native_optimality",
+            "lock_residuals": [],
+            "maximum_constraint_violation": 0.0,
+            "maximum_integrality_violation": 0.0,
+            "stage_identity": "0e75b2ac7e02a271088d0b037f053565d2ebe2837c9501dc5f31fff88247ad57"
+          },
+          "errors": [],
+          "index": 0,
+          "lock_value": 0.0,
+          "native_file": "results/tables/rq2_normal_h1_native_v1_non_authoritative/double_zero_stage_0_native.json",
+          "numerical_predicate": {
+            "candidate_numeric_predicate_passed": true,
+            "canonical_minus_native_objective_exact": "0",
+            "checks": {
+              "assignment_valid": true,
+              "integrality_within_original_limit": true,
+              "linear_mip_minimization_scope": true,
+              "native_to_pyomo_bound_hex_equal": true,
+              "objective_algebra_equal": true,
+              "objective_channel_consistent": true,
+              "optimal_status": true,
+              "raw_bounds_ordered": true,
+              "raw_relative_gap_within_original_limit": true,
+              "residual_within_original_limit": true
+            },
+            "formal_acceptance_authorized": false,
+            "native_execution_authenticated": false,
+            "raw_relative_gap_exact": "0",
+            "rigorous_exact_optimality_certified": false,
+            "strict_legacy_lower_le_canonical": true
+          },
+          "objective": [
+            "operating_cost",
+            null
+          ],
+          "prior_locks": [],
+          "stage_identity": "0e75b2ac7e02a271088d0b037f053565d2ebe2837c9501dc5f31fff88247ad57"
+        },
+        {
+          "accepted": true,
+          "assignment_audit": {
+            "assignment_identity": "02679fefde5647cf2165601f9afce8e029038ee5864a13d1498e47fb04e05174",
+            "canonical_objective": 0.0,
+            "errors": [],
+            "evidence_role": "derived_h1_assignment_audit_no_native_optimality",
+            "lock_residuals": [
+              0.0
+            ],
+            "maximum_constraint_violation": 0.0,
+            "maximum_integrality_violation": 0.0,
+            "stage_identity": "3271a53136afcc2f9889216299e090ef1bc63d7d9f439e2378b187e1c7e4ac21"
+          },
+          "errors": [],
+          "index": 1,
+          "lock_value": 0.0,
+          "native_file": "results/tables/rq2_normal_h1_native_v1_non_authoritative/double_zero_stage_1_native.json",
+          "numerical_predicate": {
+            "candidate_numeric_predicate_passed": true,
+            "canonical_minus_native_objective_exact": "0",
+            "checks": {
+              "assignment_valid": true,
+              "integrality_within_original_limit": true,
+              "linear_mip_minimization_scope": true,
+              "native_to_pyomo_bound_hex_equal": true,
+              "objective_algebra_equal": true,
+              "objective_channel_consistent": true,
+              "optimal_status": true,
+              "raw_bounds_ordered": true,
+              "raw_relative_gap_within_original_limit": true,
+              "residual_within_original_limit": true
+            },
+            "formal_acceptance_authorized": false,
+            "native_execution_authenticated": false,
+            "raw_relative_gap_exact": "0",
+            "rigorous_exact_optimality_certified": false,
+            "strict_legacy_lower_le_canonical": true
+          },
+          "objective": [
+            "commitment",
+            "G1"
+          ],
+          "prior_locks": [
+            0.0
+          ],
+          "stage_identity": "3271a53136afcc2f9889216299e090ef1bc63d7d9f439e2378b187e1c7e4ac21"
+        },
+        {
+          "accepted": true,
+          "assignment_audit": {
+            "assignment_identity": "6f489138e581ce0e351c3e09819e60bfd8cfc05ee2e98b3dc78be2b73efb6c44",
+            "canonical_objective": 0.0,
+            "errors": [],
+            "evidence_role": "derived_h1_assignment_audit_no_native_optimality",
+            "lock_residuals": [
+              0.0,
+              0.0
+            ],
+            "maximum_constraint_violation": 0.0,
+            "maximum_integrality_violation": 0.0,
+            "stage_identity": "66141bcb4d84ceb022a5998faf4cc2aa6ad1b59f8ff8f9c7bfd2b5697d9cf382"
+          },
+          "errors": [],
+          "index": 2,
+          "lock_value": 0.0,
+          "native_file": "results/tables/rq2_normal_h1_native_v1_non_authoritative/double_zero_stage_2_native.json",
+          "numerical_predicate": {
+            "candidate_numeric_predicate_passed": true,
+            "canonical_minus_native_objective_exact": "0",
+            "checks": {
+              "assignment_valid": true,
+              "integrality_within_original_limit": true,
+              "linear_mip_minimization_scope": true,
+              "native_to_pyomo_bound_hex_equal": true,
+              "objective_algebra_equal": true,
+              "objective_channel_consistent": true,
+              "optimal_status": true,
+              "raw_bounds_ordered": true,
+              "raw_relative_gap_within_original_limit": true,
+              "residual_within_original_limit": true
+            },
+            "formal_acceptance_authorized": false,
+            "native_execution_authenticated": false,
+            "raw_relative_gap_exact": "0",
+            "rigorous_exact_optimality_certified": false,
+            "strict_legacy_lower_le_canonical": true
+          },
+          "objective": [
+            "generation",
+            "G1"
+          ],
+          "prior_locks": [
+            0.0,
+            0.0
+          ],
+          "stage_identity": "66141bcb4d84ceb022a5998faf4cc2aa6ad1b59f8ff8f9c7bfd2b5697d9cf382"
+        }
+      ]
+    }
+  ],
+  "exact_mathematical_certificate": false,
+  "files": {
+    "results/tables/rq2_normal_h1_native_v1_non_authoritative/double_zero_stage_0_native.json": "e8743f4f8970d2a49d08fb30488e6eb264189e9e83ee246742b07947ca491daf",
+    "results/tables/rq2_normal_h1_native_v1_non_authoritative/double_zero_stage_1_native.json": "7d77765020015fab54e02b2e59ec1b795cc5674ce64eb10da7f3db275ffadb2e",
+    "results/tables/rq2_normal_h1_native_v1_non_authoritative/double_zero_stage_2_native.json": "eb0d454dea1d8b36eb69d60b0efd42b0a08af64026388f2083f0ad1ea60333e4",
+    "results/tables/rq2_normal_h1_native_v1_non_authoritative/positive_stage_0_native.json": "2b7e8ac5fe5c5df2ee33aa267ab24b03867712b78c31d2eff0ce5fed1ada8928",
+    "results/tables/rq2_normal_h1_native_v1_non_authoritative/positive_stage_1_native.json": "d7b0928339301c455435cb56b0774aa450124c649fcebbeb3b07393e00dde573",
+    "results/tables/rq2_normal_h1_native_v1_non_authoritative/positive_stage_2_native.json": "73aa7210e3737f398bac60e8affbb438b7a05aa50891538ba49ae5c81ada773a"
+  },
+  "fixture_sha256": "77c16bd08854c5b9bc1b9a85fe88371fb61ecfaa1b842420c9a135f3c36d90f5",
+  "fixture_source": "tests/test_rq2_continuous_grid_normal_v1.py",
+  "formal_result": false,
+  "hard_process_resources_verified": false,
+  "official_verdict": null,
+  "schema": "rq2_h1_native_short_development_archive_v1",
+  "specification": {
+    "expected_package_version": "13.0.2",
+    "feasibility_tolerance": 1e-09,
+    "integer_feasibility_tolerance": 1e-09,
+    "mip_relative_gap": 1e-08,
+    "name": "gurobi",
+    "optimality_tolerance": 1e-09,
+    "random_seed": 0,
+    "tee": false,
+    "threads": 1,
+    "time_limit_seconds": 1.0
+  }
+}

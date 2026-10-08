@@ -1,0 +1,48 @@
+{
+  "checker_and_fixture_sha256": {
+    "experiments/verify_rq2_open_activity_native_development_v1.py": "cc4fb1c4d616e9412711e0f9cb2e2a3824c2d1e6ce97f686f75a1d7b7a602f49",
+    "tests/test_rq2_continuous_planner_open_activity_native_v1.py": "4d06773250fc2fdcee0eb89b0137a42218885296f5f94f2cf3cbc5bbb99ae5fe",
+    "tests/test_rq2_continuous_planner_open_activity_v1.py": "8634bcf235ebe48b01dd91fd8870d076c53dde6ed1a2dac919884119e83d61cc",
+    "tests/test_rq2_continuous_planner_short_solve_v1.py": "145ad7dbbce1cd5e18a1598908169bd7ecc8ffbfb09e8d1e54feb6040951b276",
+    "tests/test_rq2_continuous_planner_v1.py": "b55e55ac2ffd4133643dea9e2b9d1d08abb134c6c106fd54e86cb891a0ca73ea"
+  },
+  "command": "D:/Miniconda3/envs/compute/python.exe -B experiments/verify_rq2_open_activity_native_development_v1.py --output results/tables/rq2_continuous_planner_open_activity_native_v1_non_authoritative/assignment_replay_checks_v2.json",
+  "comparisons": [
+    {
+      "arm": "network_only_shared",
+      "assignment_id": "e72aa852d5d0b0e6667d749f2d4fb8e52ab90706b86b269b634eb25d5a78206c",
+      "native_values_match": true,
+      "recomputed_assignment_sha256": "a6d688d9129258deda36fa8cc14768c46149dc683f4a41293ed9ea7a1392a1c5",
+      "saved_assignment_sha256": "a6d688d9129258deda36fa8cc14768c46149dc683f4a41293ed9ea7a1392a1c5"
+    },
+    {
+      "arm": "cfe_only_shared",
+      "assignment_id": "19276a79bd7b305de84603dca7b9631eeedea033b53d535f7cce26a958d6c6d5",
+      "native_values_match": true,
+      "recomputed_assignment_sha256": "0fce24e87149a5c49f629a30b293cb31b6e31bed2b541c4b91e389df7e94dbe1",
+      "saved_assignment_sha256": "0fce24e87149a5c49f629a30b293cb31b6e31bed2b541c4b91e389df7e94dbe1"
+    },
+    {
+      "arm": "joint_correct_shared",
+      "assignment_id": "bcfdd367aa967c9098fa902963122ee7c4a0e60d9735149b765f27b3ddf1b4d1",
+      "native_values_match": true,
+      "recomputed_assignment_sha256": "3fc4cdcb01d4447a85d7b132f384915ba6e307fdbacbea0acc3f9c691e05dfb4",
+      "saved_assignment_sha256": "3fc4cdcb01d4447a85d7b132f384915ba6e307fdbacbea0acc3f9c691e05dfb4"
+    },
+    {
+      "arm": "joint_b6_separate_planning_shared_execution",
+      "assignment_id": "fc7a99774860880aa5ea4fb23aedbe0699bce1b0e9784f5e600f5d3d597c49fc",
+      "native_values_match": true,
+      "recomputed_assignment_sha256": "572db64c3d87d48687245a7d9c440ab6be408e714099a50bc428c65e23c26abc",
+      "saved_assignment_sha256": "572db64c3d87d48687245a7d9c440ab6be408e714099a50bc428c65e23c26abc"
+    }
+  ],
+  "complete_capacity_certificate": null,
+  "formal_result": false,
+  "inventory_sha256": "034267d7fc0bc2d2e9896cfd191cfcdb6da3823fb678be52b48846d2112ede3a",
+  "native_history_authenticated": false,
+  "schema": "rq2_open_activity_saved_assignment_replay_v2",
+  "solver_calls": 0,
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "synthetic_fixture_reconstruction": true
+}

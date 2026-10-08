@@ -1,0 +1,103 @@
+schema: rq2_joint_deliverability_continuation_audit_v1_draft
+version: 1
+created_on: "2026-09-12"
+
+lifecycle:
+  status: DRAFT_NONAUTHORITATIVE
+  pre_seal_audit_complete: false
+  sealed_ready_for_independent_review: false
+  independent_review_passed: false
+  formal_execution_ready: false
+  formal_result: false
+  paper_claim: false
+  security_certified: false
+
+authority:
+  role: raw_continuation_availability_and_provenance_diagnostic_only
+  may_open_any_execution_gate: false
+  may_modify_predecessor_boundary_diagnostic: false
+  may_register_continuous_scientific_protocol: false
+  may_run_solver_or_formal_execution: false
+
+predecessor_boundary_diagnostic:
+  config_path: configs/rq2_joint_deliverability_boundary_successor_v1.DRAFT.yaml
+  config_sha256: 06052383fa461cf505112fe9ae5ba3ca725f3d65ed9f3cac4a50938739b91f57
+  audit_path: src/rq2_joint_deliverability_boundary_v1/audit.py
+  audit_sha256: fb2b5398850492d3915930b4a755138f5aa7c0abfbb647d31f886f2966cb0eef
+  boundary_path: src/rq2_joint_deliverability_boundary_v1/boundary.py
+  boundary_sha256: b8c424ee8e05b819e8d59522b4ed36e84c86223b1af1e4bf357c00837d5d5c8b
+  runner_path: experiments/audit_rq2_joint_deliverability_boundary_v1.py
+  runner_sha256: 5fada9507a007e48759963ff095a63523efe56e8a612311db674e4ff60aeaba8
+  result_directory: results/tables/rq2_joint_deliverability_boundary_diagnostic_v1_non_authoritative
+  result_files:
+    summary.json: 7702f71e27fedb608940f28565b03f27b78d11e0ae834f7247b3ed0a5c896080
+    cells.json: 6f9bf70818d80872d3454da5e653c409273305b4165bef8f30f18941357a2db4
+    SHA256SUMS.json: dde1a98b01a65ab2899c7a7ef1c201a02ba5c890ba323fd02c2bb375d430ea6c
+
+inputs:
+  power:
+    package: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4
+    manifest_sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+    members:
+      holdout_marginal.csv.gz: 127f0ae8ee17986fa0e4b4f8c9833153a65846b8eff068a2c1cfed28ad0c7984
+      n1_outage_events.csv.gz: 6b18f27a090e1e0c71f8878dd77007957e7b898e8a5f99543a6e26fb0856092d
+      power_system_blocks.csv.gz: b8b76fcfaa4dfbf63ff8c92092f357d43a7f21ffb51e76552593bb63f6a34ff1
+      summary.json: f74d3a15520562d319cff49cf19fdca87ac04ae5687a639548f1a6dd7c36ce2a
+      training_marginal.csv.gz: e34434955f5d6d3dde21f684dc95799fe31a799791f9a3a8ce8525ebfe528546
+    builder_config_path: configs/rts_gmlc_public_power_system_blocks_v4.yaml
+    builder_config_sha256: cefec120fb77990a47fe7e89a77e4df8be00bde5bf7e4cd4c5ca047d52934688
+    builder_path: experiments/build_rts_gmlc_public_power_system_blocks.py
+    builder_sha256: cc24a77049af50d056364b2ad6a092442af3cd4efcdf32033ab228faef989644
+    chronology_path: src/scenarios/rts_gmlc_n1_chronology.py
+    chronology_sha256: ebf412fd69864604c276972b6bcd0ae63559194e1e902e5f92a3357834784d64
+    expected_schema: rts_gmlc_public_power_system_blocks_v4
+    expected_hours: 8784
+    expected_split_hour: 4392
+    expected_block_hours: 24
+    expected_block_stride_hours: 24
+    expected_training_blocks: 541
+    expected_holdout_blocks: 530
+    expected_outage_seeds: [20260822, 20260823, 20260824]
+  workload:
+    package: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3
+    manifest_sha256: 62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524
+    members:
+      holdout_marginal.csv.gz: 0866c8677eb7f8f327ae61d30b63048e4be18e54a9b9acd2c20d9a26380eb98c
+      summary.json: d4207d34757dd9b02a1f52f0cf8e44b5bb22175721ffd77ca8aa9245da7c874b
+      training_marginal.csv.gz: cd813c1679d419b6c9b8610f241db10830aa0f3eea5d496926e8f6f1216b8eb2
+      workload_blocks.csv.gz: 99da69e6a98ec45584339e57a37b3fbbf90d3d2d8f1e2c915229a1e4890faef3
+    builder_config_path: configs/alibaba_dimensionless_workload_blocks_v3.yaml
+    builder_config_sha256: 571b10ff6874ae2c787420b3328e4f256e1d284864851d5099b7ecf9b5d43c2c
+    builder_path: experiments/build_alibaba_dimensionless_workload_blocks.py
+    builder_sha256: 6f2e0c91733cb30846c85b03b3cd89c07f27c042b29ad3b002b76d64f9264d4b
+    expected_schema: alibaba_dimensionless_workload_blocks_v3
+    expected_hour_count: 1642
+    expected_split_hour: 821
+    expected_block_hours: 24
+    expected_block_stride_hours: 24
+    expected_training_blocks: 34
+    expected_holdout_blocks: 34
+
+audit_contract:
+  evidence_level: non_authoritative_zero_solver_raw_continuation_diagnostic
+  source_scope: frozen_published_predispatch_marginal_packages
+  same_split_links_only: true
+  cross_split_links_allowed: false
+  same_power_outage_seed_required: true
+  active_event_id_may_change_along_one_power_trajectory: true
+  workload_trace_identity_basis: package_source_and_training_normalization
+  power_and_workload_share_observed_clock: false
+  potential_pair_adjacency_is_registered_coupling: false
+  raw_workload_fraction_may_be_clipped: false
+  v5_workload_occupancy_mapping_is_separate: min_raw_workload_fraction_and_1
+  dispatched_grid_continuation_audited: false
+  full_joint_service_continuation_ready: false
+  future_contract_parameters_may_be_invented: false
+  solver_calls_allowed: false
+  result_contingent_selection_allowed: false
+
+output:
+  directory: results/tables/rq2_joint_deliverability_continuation_availability_v1_non_authoritative
+  files: [summary.json, chains.json, SHA256SUMS.json]
+  overwrite_allowed: false
+

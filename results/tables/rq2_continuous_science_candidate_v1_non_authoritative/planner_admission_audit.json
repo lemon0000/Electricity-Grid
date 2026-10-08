@@ -1,0 +1,21 @@
+{
+  "candidate_field_refused": {
+    "exception_type": "ValueError",
+    "message": "positive response/ramp, duration >=1 and minimum event above activity tolerance required"
+  },
+  "candidate_minimum_event_power": 1e-06,
+  "candidate_sha256": "2a0e7686b9f92355dc421531c2150ecab354a8106abea54c2d2c5d25259c9051",
+  "candidate_values_changed": false,
+  "existing_service_tolerance": 1e-06,
+  "fixture": "tests/test_rq2_continuous_planner_v1.py::inputs",
+  "fixture_sha256": "b55e55ac2ffd4133643dea9e2b9d1d08abb134c6c106fd54e86cb891a0ca73ea",
+  "formal_result": false,
+  "interpretation": "existing_closed_MILP_does_not_admit_candidate_open_activity_boundary_not_physical_infeasibility",
+  "only_field_changed": "minimum_event_power",
+  "ordinary_fixture_admitted": true,
+  "planner_sha256": "7074867f8d9080e9b093703fdfda4c43c2f9fe197dec6bcd34aad88fcca27384",
+  "required_next_work": "prove_and_implement_open_activity_boundary_relaxation_and_strict_witness_or_explicitly_revise_scientific_contract",
+  "schema": "rq2_continuous_candidate_planner_admission_audit_v1",
+  "solver_calls": 0,
+  "status": "DRAFT_NONAUTHORITATIVE"
+}

@@ -1,0 +1,55 @@
+{
+  "actual_child_exception_identified": false,
+  "diagnosis": "Deterministic process identity mismatch from environment insertion order; child traceback absent.",
+  "evidence": {
+    "configs/rq2_normal_task_h25_development_v1.DRAFT.yaml": {
+      "bytes": 3938,
+      "sha256": "9a49cccf52e23d91a43511322a5abaf569e6cd2dfbf8d6db67b7d43d3c228aa6"
+    },
+    "experiments/diagnose_rq2_stream_source_v1.py": {
+      "bytes": 17180,
+      "sha256": "bad1194172ad67dfb401a1e076b57eb75e112f757ed25078e2af963b28bb70f2"
+    },
+    "results/logs/rq2_stream_source_probe1_non_authoritative.log": {
+      "bytes": 620,
+      "sha256": "5be7b3cf663646f62096a84d35eda08f2ba9ed2058d4eba5613be7994c9ac460"
+    },
+    "results/tables/rq2_stream_source_probe1_non_authoritative/execution.lock": {
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    "results/tables/rq2_stream_source_probe1_non_authoritative/launch.json": {
+      "bytes": 160,
+      "sha256": "314dddb62140f4de1dfe49dfcddf08ec527bd7d6ac8444248cf88c01684a50c3"
+    },
+    "results/tables/rq2_stream_source_probe1_non_authoritative/observation.json": {
+      "bytes": 774,
+      "sha256": "5a706440d53b11f09a986773b6fd87bfe13a472d8d1970c7e3543f642845c059"
+    },
+    "results/tables/rq2_stream_source_probe1_non_authoritative/request.json": {
+      "bytes": 2211,
+      "sha256": "f9995f1c6183110d1f54ebd8ec1a04ac84b8730987b39e750ad26d5314b15f97"
+    },
+    "results/tables/rq2_stream_source_probe1_non_authoritative/summary.json": {
+      "bytes": 290,
+      "sha256": "1c0e29fc58abef4825a8ee0f94f522f8d5f0bf3c21ebfc36c7f22451a9450b8f"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/identity_stream.py": {
+      "bytes": 2128,
+      "sha256": "3a71d8fe0c20e292258bd04fb2645b1dddb0cf08d1dfef1e12a6ee1feab99b66"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/source_normal_stream.py": {
+      "bytes": 5266,
+      "sha256": "4877815bcce25bd5793d852b6202469599956f365e13671582ab39b4b2b93821"
+    },
+    "tests/test_diagnose_rq2_stream_source_v1.py": {
+      "bytes": 11273,
+      "sha256": "46a06004ef77be820f58f0487a1b0183c0d2ce1fc60f728d55a0d33af45d2d19"
+    }
+  },
+  "formal_result": false,
+  "parent_process_identity": "f45c2193211f60f3ea76e734419ff1559f4e52dccc983b73bb91cf8328899965",
+  "schema": "stream_source_probe1_evidence_v1",
+  "status": "unresolved_before_source_marker",
+  "windows_environment_order_process_identity": "7cd65a03f6c9eb87196f133acaa88c4726d12f7b4978d2f0c286dd89fc16d7a6"
+}

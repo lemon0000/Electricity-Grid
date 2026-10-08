@@ -1,0 +1,68 @@
+{
+  "formal_result": false,
+  "git_diff_check_passed": true,
+  "h25_assessment_sha256": "330ca678c4d31de4c765290fec62d54a87fe90a37a8b05f5c8a0ef1715255dca",
+  "independent_implementation_oracle": false,
+  "maximum_integrality_violation": 0,
+  "maximum_residual": 2.788453912216937e-10,
+  "official_verdict": null,
+  "old_h25_attempt_files_verified_unchanged": 14,
+  "preseal_findings_closed": true,
+  "preseal_reviewer": "/root/normal_cost_preseal",
+  "raw_objective_lower_hex": "0x1.53125e9f2afa1p+20",
+  "raw_objective_upper_hex": "0x1.53125e9f2afa2p+20",
+  "review_scope": "numerical_normal_archive_component",
+  "runtime": [
+    [
+      "python",
+      "3.12.12"
+    ],
+    [
+      "implementation",
+      "CPython"
+    ],
+    [
+      "Pyomo",
+      "6.10.1"
+    ],
+    [
+      "highspy",
+      "1.15.1"
+    ],
+    [
+      "numpy",
+      "1.26.4"
+    ],
+    [
+      "scipy",
+      "1.17.0"
+    ],
+    [
+      "PYPOWER",
+      "5.1.19"
+    ],
+    [
+      "PyYAML",
+      "6.0.3"
+    ],
+    [
+      "osqp",
+      "1.0.5"
+    ]
+  ],
+  "schema": "rq2_normal_numerical_preseal_closure_v1",
+  "tests": [
+    {
+      "command": "python -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_numerical_acceptance_v1.py tests/test_verify_rq2_h25_normal_acceptance_v1.py tests/test_rq2_normal_numerical_candidate_v1.py tests/test_rq2_h25_native_provenance_replay_v1.py",
+      "passed": 58,
+      "seconds": 3.86
+    },
+    {
+      "command": "python -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_numerical_acceptance_v1.py tests/test_verify_rq2_h25_normal_acceptance_v1.py tests/test_rq2_normal_numerical_candidate_v1.py tests/test_rq2_h25_native_provenance_replay_v1.py tests/test_rq2_scale_normal_v1.py",
+      "passed": 96,
+      "seconds": 47.69,
+      "stage": "before_additional_guard_tests_and_role_metadata"
+    }
+  ],
+  "verifier_solver_calls": 0
+}

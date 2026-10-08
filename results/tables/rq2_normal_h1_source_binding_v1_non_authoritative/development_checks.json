@@ -1,0 +1,56 @@
+{
+  "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_source_binding_v1.py tests/test_rq2_source_window_v1.py tests/test_rq2_source_normal_v1.py tests/test_rq2_normal_h1_source_v1.py",
+  "date": "2026-09-30",
+  "episode_intent_bound": false,
+  "files": {
+    "docs/model_spec/rq2_normal_h1_source_binding_v1.md": "0df89c5b89e8b699890995f0b3e46eb377a4c9b113a9b6520ea7c42ef8e3258d",
+    "results/tables/rq2_normal_h1_source_binding_v1_non_authoritative/sample_audit.json": "ed57f4cb3c471c1436292232961c753ba9c12761ed1641c321751e9b1ad6eaf1",
+    "results/tables/rq2_normal_h1_source_binding_v1_non_authoritative/sample_checks.json": "dac2a3a910eca1009c2334f67bd979de4d3afacbf5a1afe17927463741ed22e1",
+    "results/tables/rq2_normal_h1_source_binding_v1_non_authoritative/sample_identity.json": "8189d796e044328783d943adf66ca3773499652502c777eb43aedd65e09ffc0a",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_source_binding.py": "4c840ce0a2614e05c2aafa0f31c60fb3cf1f098fbe988bbe9017e27aa5021b57",
+    "tests/test_rq2_normal_h1_source_binding_v1.py": "79c0262865bcf6c0521a97101027a4beacc24db082f961220072f16f3d989118"
+  },
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "formal_run_started": false,
+  "preservation": {
+    "old_A_drift": [],
+    "old_A_members": 587,
+    "previous_episode_artifact_drift": []
+  },
+  "production_sealed": false,
+  "review": {
+    "kind": "read_only_R3_pre_seal",
+    "official_verdict": null,
+    "open_substantive_findings": 0,
+    "reviewer": "/root/cfe_preallocation_official",
+    "reviewer_ran_pytest": false,
+    "reviewer_ran_solver": false
+  },
+  "schema": "h1_pinned_current_source_development_checks_v1",
+  "selection_registered": false,
+  "solver_calls": 0,
+  "source_authenticated": false,
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "tests": [
+    {
+      "final_bytes": false,
+      "passed": 16,
+      "scope": "initial_source_binding",
+      "seconds": 5.08
+    },
+    {
+      "final_bytes": false,
+      "passed": 112,
+      "scope": "source_binding/source_window/source_normal/normal_h1_source",
+      "seconds": 18.98
+    },
+    {
+      "final_bytes": true,
+      "passed": 121,
+      "scope": "source_binding/source_window/source_normal/normal_h1_source",
+      "seconds": 21.69,
+      "source_binding_cases": 32
+    }
+  ]
+}

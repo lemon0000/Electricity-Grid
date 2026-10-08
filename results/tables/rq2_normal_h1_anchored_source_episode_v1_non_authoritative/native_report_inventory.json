@@ -1,0 +1,1007 @@
+{
+  "reported_solver_calls": 6,
+  "reports": [
+    {
+      "hour": 0,
+      "stage": 0,
+      "raw_sha256": "28b93fca2dddb0c9c5147324cfa073b65d6c1c89779a1e8ee2605a22564ccd7a",
+      "solver_calls": 1,
+      "provenance": {
+        "adapter_identity": "2fd81f2f8f47c0dd7dc883cfa1bda07839b78dcd89aad1c225c6020238928406",
+        "assignment_sha256": "93e0667482b788d18e98cec963e5f2824664e14c2002a42fc912c8d5ca97e5fd",
+        "canonical_objective_algebra": [
+          "0",
+          [
+            [
+              "commitment[0,G1]",
+              "10"
+            ],
+            [
+              "segment_power[0,G1,0]",
+              "1"
+            ],
+            [
+              "segment_power[0,G1,1]",
+              "1"
+            ],
+            [
+              "segment_power[0,G1,2]",
+              "1"
+            ]
+          ]
+        ],
+        "canonical_objective_hex": "0x1.4000000000000p+4",
+        "collector_sha256": "fa044dcc8d963b0d8503b8f7711a34913dc15c15e83ce3557edd4ece782150fe",
+        "comparisons": {
+          "canonical_minus_native_objective": "0",
+          "exact_minus_lower": "0",
+          "lower_le_canonical": true,
+          "lower_le_exact": true,
+          "lower_le_upper": true,
+          "native_to_pyomo_lower_hex_equal": true,
+          "native_to_pyomo_upper_hex_equal": true
+        },
+        "constant_hex": "0x0.0p+0",
+        "exact_objective": {
+          "denominator": "1",
+          "numerator": "20"
+        },
+        "formal_result": false,
+        "is_mip": true,
+        "native": {
+          "ObjBound": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.4000000000000p+4"
+          },
+          "ObjBoundC": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.4000000000000p+4"
+          },
+          "ObjVal": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.4000000000000p+4"
+          },
+          "Runtime": {
+            "available": true,
+            "error": null,
+            "hex": "0x0.0p+0"
+          }
+        },
+        "native_algebra_equals_canonical_algebra": true,
+        "native_constant_hex": "0x0.0p+0",
+        "native_exact_objective": {
+          "denominator": "1",
+          "numerator": "20"
+        },
+        "native_exact_value_equals_canonical_exact_value": true,
+        "native_execution_authenticated": false,
+        "native_model_sense": 1,
+        "native_objective_algebra": [
+          "0",
+          [
+            [
+              "commitment[0,G1]",
+              "10"
+            ],
+            [
+              "segment_power[0,G1,0]",
+              "1"
+            ],
+            [
+              "segment_power[0,G1,1]",
+              "1"
+            ],
+            [
+              "segment_power[0,G1,2]",
+              "1"
+            ]
+          ]
+        ],
+        "native_solution_count": 1,
+        "native_status": 2,
+        "optimal_status_channels_consistent": true,
+        "optimality_certified": false,
+        "ordered_native_objective_terms": [
+          [
+            "commitment[0,G1]",
+            "0x1.4000000000000p+3",
+            "0x1.0000000000000p+0"
+          ],
+          [
+            "segment_power[0,G1,0]",
+            "0x1.0000000000000p+0",
+            "0x1.4000000000000p+3"
+          ],
+          [
+            "segment_power[0,G1,1]",
+            "0x1.0000000000000p+0",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,2]",
+            "0x1.0000000000000p+0",
+            "0x0.0p+0"
+          ]
+        ],
+        "ordered_objective_terms": [
+          [
+            "commitment[0,G1]",
+            "0x1.4000000000000p+3",
+            "0x1.0000000000000p+0"
+          ],
+          [
+            "segment_power[0,G1,0]",
+            "0x1.0000000000000p+0",
+            "0x1.4000000000000p+3"
+          ],
+          [
+            "segment_power[0,G1,1]",
+            "0x1.0000000000000p+0",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,2]",
+            "0x1.0000000000000p+0",
+            "0x0.0p+0"
+          ]
+        ],
+        "pyomo_lower_hex": "0x1.4000000000000p+4",
+        "pyomo_lower_source": "ObjBound",
+        "pyomo_solution_status": "optimal",
+        "pyomo_status": "ok",
+        "pyomo_termination": "optimal",
+        "pyomo_upper_hex": "0x1.4000000000000p+4",
+        "referenced_assignment": [
+          [
+            "angle_degrees[normal,0,2]",
+            "0x1.6eb167b830193p+2"
+          ],
+          [
+            "branch_flow[normal,0,AC1]",
+            "-0x1.9000000000000p+6"
+          ],
+          [
+            "commitment[0,G1]",
+            "0x1.0000000000000p+0"
+          ],
+          [
+            "dc_flow[normal,0,DC1]",
+            "0x1.9000000000000p+6"
+          ],
+          [
+            "generation[normal,0,G1]",
+            "0x1.4000000000000p+4"
+          ],
+          [
+            "reserve_up[0,G1]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,0]",
+            "0x1.4000000000000p+3"
+          ],
+          [
+            "segment_power[0,G1,1]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,2]",
+            "0x0.0p+0"
+          ],
+          [
+            "shutdown[0,G1]",
+            "0x0.0p+0"
+          ],
+          [
+            "startup[0,G1]",
+            "0x1.0000000000000p+0"
+          ]
+        ],
+        "schema": "rq2_objective_provenance_v1",
+        "solver_calls_by_collector": 0
+      }
+    },
+    {
+      "hour": 0,
+      "stage": 1,
+      "raw_sha256": "046a632fdad11723e5048a53bdadf8c7950e2ce4ffc852e539a73bccf5635d28",
+      "solver_calls": 1,
+      "provenance": {
+        "adapter_identity": "2fd81f2f8f47c0dd7dc883cfa1bda07839b78dcd89aad1c225c6020238928406",
+        "assignment_sha256": "f0ed9e8ad5af94e60e4df5583322a0b16b0db362e511beb2f4c85f31cd120a00",
+        "canonical_objective_algebra": [
+          "0",
+          [
+            [
+              "commitment[0,G1]",
+              "1"
+            ]
+          ]
+        ],
+        "canonical_objective_hex": "0x1.0000000000000p+0",
+        "collector_sha256": "fa044dcc8d963b0d8503b8f7711a34913dc15c15e83ce3557edd4ece782150fe",
+        "comparisons": {
+          "canonical_minus_native_objective": "0",
+          "exact_minus_lower": "0",
+          "lower_le_canonical": true,
+          "lower_le_exact": true,
+          "lower_le_upper": true,
+          "native_to_pyomo_lower_hex_equal": true,
+          "native_to_pyomo_upper_hex_equal": true
+        },
+        "constant_hex": "0x0.0p+0",
+        "exact_objective": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "formal_result": false,
+        "is_mip": true,
+        "native": {
+          "ObjBound": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.0000000000000p+0"
+          },
+          "ObjBoundC": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.0000000000000p+0"
+          },
+          "ObjVal": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.0000000000000p+0"
+          },
+          "Runtime": {
+            "available": true,
+            "error": null,
+            "hex": "0x0.0p+0"
+          }
+        },
+        "native_algebra_equals_canonical_algebra": true,
+        "native_constant_hex": "0x0.0p+0",
+        "native_exact_objective": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "native_exact_value_equals_canonical_exact_value": true,
+        "native_execution_authenticated": false,
+        "native_model_sense": 1,
+        "native_objective_algebra": [
+          "0",
+          [
+            [
+              "commitment[0,G1]",
+              "1"
+            ]
+          ]
+        ],
+        "native_solution_count": 1,
+        "native_status": 2,
+        "optimal_status_channels_consistent": true,
+        "optimality_certified": false,
+        "ordered_native_objective_terms": [
+          [
+            "commitment[0,G1]",
+            "0x1.0000000000000p+0",
+            "0x1.0000000000000p+0"
+          ]
+        ],
+        "ordered_objective_terms": [
+          [
+            "commitment[0,G1]",
+            "0x1.0000000000000p+0",
+            "0x1.0000000000000p+0"
+          ]
+        ],
+        "pyomo_lower_hex": "0x1.0000000000000p+0",
+        "pyomo_lower_source": "ObjBound",
+        "pyomo_solution_status": "optimal",
+        "pyomo_status": "ok",
+        "pyomo_termination": "optimal",
+        "pyomo_upper_hex": "0x1.0000000000000p+0",
+        "referenced_assignment": [
+          [
+            "angle_degrees[normal,0,2]",
+            "0x1.6eb167b830193p+2"
+          ],
+          [
+            "branch_flow[normal,0,AC1]",
+            "-0x1.9000000000000p+6"
+          ],
+          [
+            "commitment[0,G1]",
+            "0x1.0000000000000p+0"
+          ],
+          [
+            "dc_flow[normal,0,DC1]",
+            "0x1.9000000000000p+6"
+          ],
+          [
+            "generation[normal,0,G1]",
+            "0x1.4000000000000p+4"
+          ],
+          [
+            "reserve_up[0,G1]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,0]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,1]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,2]",
+            "0x1.4000000000000p+3"
+          ],
+          [
+            "shutdown[0,G1]",
+            "0x0.0p+0"
+          ],
+          [
+            "startup[0,G1]",
+            "0x1.0000000000000p+0"
+          ]
+        ],
+        "schema": "rq2_objective_provenance_v1",
+        "solver_calls_by_collector": 0
+      }
+    },
+    {
+      "hour": 0,
+      "stage": 2,
+      "raw_sha256": "0d9252578266066f2c7209ff2eacf856381e6f13ef920334fcbf31a41b83fb62",
+      "solver_calls": 1,
+      "provenance": {
+        "adapter_identity": "2fd81f2f8f47c0dd7dc883cfa1bda07839b78dcd89aad1c225c6020238928406",
+        "assignment_sha256": "f0ed9e8ad5af94e60e4df5583322a0b16b0db362e511beb2f4c85f31cd120a00",
+        "canonical_objective_algebra": [
+          "0",
+          [
+            [
+              "generation[normal,0,G1]",
+              "1"
+            ]
+          ]
+        ],
+        "canonical_objective_hex": "0x1.4000000000000p+4",
+        "collector_sha256": "fa044dcc8d963b0d8503b8f7711a34913dc15c15e83ce3557edd4ece782150fe",
+        "comparisons": {
+          "canonical_minus_native_objective": "0",
+          "exact_minus_lower": "0",
+          "lower_le_canonical": true,
+          "lower_le_exact": true,
+          "lower_le_upper": true,
+          "native_to_pyomo_lower_hex_equal": true,
+          "native_to_pyomo_upper_hex_equal": true
+        },
+        "constant_hex": "0x0.0p+0",
+        "exact_objective": {
+          "denominator": "1",
+          "numerator": "20"
+        },
+        "formal_result": false,
+        "is_mip": true,
+        "native": {
+          "ObjBound": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.4000000000000p+4"
+          },
+          "ObjBoundC": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.4000000000000p+4"
+          },
+          "ObjVal": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.4000000000000p+4"
+          },
+          "Runtime": {
+            "available": true,
+            "error": null,
+            "hex": "0x0.0p+0"
+          }
+        },
+        "native_algebra_equals_canonical_algebra": true,
+        "native_constant_hex": "0x0.0p+0",
+        "native_exact_objective": {
+          "denominator": "1",
+          "numerator": "20"
+        },
+        "native_exact_value_equals_canonical_exact_value": true,
+        "native_execution_authenticated": false,
+        "native_model_sense": 1,
+        "native_objective_algebra": [
+          "0",
+          [
+            [
+              "generation[normal,0,G1]",
+              "1"
+            ]
+          ]
+        ],
+        "native_solution_count": 1,
+        "native_status": 2,
+        "optimal_status_channels_consistent": true,
+        "optimality_certified": false,
+        "ordered_native_objective_terms": [
+          [
+            "generation[normal,0,G1]",
+            "0x1.0000000000000p+0",
+            "0x1.4000000000000p+4"
+          ]
+        ],
+        "ordered_objective_terms": [
+          [
+            "generation[normal,0,G1]",
+            "0x1.0000000000000p+0",
+            "0x1.4000000000000p+4"
+          ]
+        ],
+        "pyomo_lower_hex": "0x1.4000000000000p+4",
+        "pyomo_lower_source": "ObjBound",
+        "pyomo_solution_status": "optimal",
+        "pyomo_status": "ok",
+        "pyomo_termination": "optimal",
+        "pyomo_upper_hex": "0x1.4000000000000p+4",
+        "referenced_assignment": [
+          [
+            "angle_degrees[normal,0,2]",
+            "0x1.6eb167b830193p+2"
+          ],
+          [
+            "branch_flow[normal,0,AC1]",
+            "-0x1.9000000000000p+6"
+          ],
+          [
+            "commitment[0,G1]",
+            "0x1.0000000000000p+0"
+          ],
+          [
+            "dc_flow[normal,0,DC1]",
+            "0x1.9000000000000p+6"
+          ],
+          [
+            "generation[normal,0,G1]",
+            "0x1.4000000000000p+4"
+          ],
+          [
+            "reserve_up[0,G1]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,0]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,1]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,2]",
+            "0x1.4000000000000p+3"
+          ],
+          [
+            "shutdown[0,G1]",
+            "0x0.0p+0"
+          ],
+          [
+            "startup[0,G1]",
+            "0x1.0000000000000p+0"
+          ]
+        ],
+        "schema": "rq2_objective_provenance_v1",
+        "solver_calls_by_collector": 0
+      }
+    },
+    {
+      "hour": 1,
+      "stage": 0,
+      "raw_sha256": "2b7e8ac5fe5c5df2ee33aa267ab24b03867712b78c31d2eff0ce5fed1ada8928",
+      "solver_calls": 1,
+      "provenance": {
+        "adapter_identity": "2fd81f2f8f47c0dd7dc883cfa1bda07839b78dcd89aad1c225c6020238928406",
+        "assignment_sha256": "1fde70aa18c625170a53a162e62faf70ec5b8ddedd230eef98e57d797a16e5bf",
+        "canonical_objective_algebra": [
+          "0",
+          [
+            [
+              "commitment[0,G1]",
+              "10"
+            ],
+            [
+              "segment_power[0,G1,0]",
+              "1"
+            ],
+            [
+              "segment_power[0,G1,1]",
+              "1"
+            ],
+            [
+              "segment_power[0,G1,2]",
+              "1"
+            ]
+          ]
+        ],
+        "canonical_objective_hex": "0x1.4000000000000p+4",
+        "collector_sha256": "fa044dcc8d963b0d8503b8f7711a34913dc15c15e83ce3557edd4ece782150fe",
+        "comparisons": {
+          "canonical_minus_native_objective": "0",
+          "exact_minus_lower": "0",
+          "lower_le_canonical": true,
+          "lower_le_exact": true,
+          "lower_le_upper": true,
+          "native_to_pyomo_lower_hex_equal": true,
+          "native_to_pyomo_upper_hex_equal": true
+        },
+        "constant_hex": "0x0.0p+0",
+        "exact_objective": {
+          "denominator": "1",
+          "numerator": "20"
+        },
+        "formal_result": false,
+        "is_mip": true,
+        "native": {
+          "ObjBound": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.4000000000000p+4"
+          },
+          "ObjBoundC": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.4000000000000p+4"
+          },
+          "ObjVal": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.4000000000000p+4"
+          },
+          "Runtime": {
+            "available": true,
+            "error": null,
+            "hex": "0x0.0p+0"
+          }
+        },
+        "native_algebra_equals_canonical_algebra": true,
+        "native_constant_hex": "0x0.0p+0",
+        "native_exact_objective": {
+          "denominator": "1",
+          "numerator": "20"
+        },
+        "native_exact_value_equals_canonical_exact_value": true,
+        "native_execution_authenticated": false,
+        "native_model_sense": 1,
+        "native_objective_algebra": [
+          "0",
+          [
+            [
+              "commitment[0,G1]",
+              "10"
+            ],
+            [
+              "segment_power[0,G1,0]",
+              "1"
+            ],
+            [
+              "segment_power[0,G1,1]",
+              "1"
+            ],
+            [
+              "segment_power[0,G1,2]",
+              "1"
+            ]
+          ]
+        ],
+        "native_solution_count": 1,
+        "native_status": 2,
+        "optimal_status_channels_consistent": true,
+        "optimality_certified": false,
+        "ordered_native_objective_terms": [
+          [
+            "commitment[0,G1]",
+            "0x1.4000000000000p+3",
+            "0x1.0000000000000p+0"
+          ],
+          [
+            "segment_power[0,G1,0]",
+            "0x1.0000000000000p+0",
+            "0x1.4000000000000p+3"
+          ],
+          [
+            "segment_power[0,G1,1]",
+            "0x1.0000000000000p+0",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,2]",
+            "0x1.0000000000000p+0",
+            "0x0.0p+0"
+          ]
+        ],
+        "ordered_objective_terms": [
+          [
+            "commitment[0,G1]",
+            "0x1.4000000000000p+3",
+            "0x1.0000000000000p+0"
+          ],
+          [
+            "segment_power[0,G1,0]",
+            "0x1.0000000000000p+0",
+            "0x1.4000000000000p+3"
+          ],
+          [
+            "segment_power[0,G1,1]",
+            "0x1.0000000000000p+0",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,2]",
+            "0x1.0000000000000p+0",
+            "0x0.0p+0"
+          ]
+        ],
+        "pyomo_lower_hex": "0x1.4000000000000p+4",
+        "pyomo_lower_source": "ObjBound",
+        "pyomo_solution_status": "optimal",
+        "pyomo_status": "ok",
+        "pyomo_termination": "optimal",
+        "pyomo_upper_hex": "0x1.4000000000000p+4",
+        "referenced_assignment": [
+          [
+            "angle_degrees[normal,0,2]",
+            "0x1.6eb167b830193p+2"
+          ],
+          [
+            "branch_flow[normal,0,AC1]",
+            "-0x1.9000000000000p+6"
+          ],
+          [
+            "commitment[0,G1]",
+            "0x1.0000000000000p+0"
+          ],
+          [
+            "dc_flow[normal,0,DC1]",
+            "0x1.9000000000000p+6"
+          ],
+          [
+            "generation[normal,0,G1]",
+            "0x1.4000000000000p+4"
+          ],
+          [
+            "reserve_up[0,G1]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,0]",
+            "0x1.4000000000000p+3"
+          ],
+          [
+            "segment_power[0,G1,1]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,2]",
+            "0x0.0p+0"
+          ],
+          [
+            "shutdown[0,G1]",
+            "0x0.0p+0"
+          ],
+          [
+            "startup[0,G1]",
+            "0x0.0p+0"
+          ]
+        ],
+        "schema": "rq2_objective_provenance_v1",
+        "solver_calls_by_collector": 0
+      }
+    },
+    {
+      "hour": 1,
+      "stage": 1,
+      "raw_sha256": "d7b0928339301c455435cb56b0774aa450124c649fcebbeb3b07393e00dde573",
+      "solver_calls": 1,
+      "provenance": {
+        "adapter_identity": "2fd81f2f8f47c0dd7dc883cfa1bda07839b78dcd89aad1c225c6020238928406",
+        "assignment_sha256": "3a0d252437699ee809844b24ddb852f1a6f786f13fa8c76b0387a11ee5466e3c",
+        "canonical_objective_algebra": [
+          "0",
+          [
+            [
+              "commitment[0,G1]",
+              "1"
+            ]
+          ]
+        ],
+        "canonical_objective_hex": "0x1.0000000000000p+0",
+        "collector_sha256": "fa044dcc8d963b0d8503b8f7711a34913dc15c15e83ce3557edd4ece782150fe",
+        "comparisons": {
+          "canonical_minus_native_objective": "0",
+          "exact_minus_lower": "0",
+          "lower_le_canonical": true,
+          "lower_le_exact": true,
+          "lower_le_upper": true,
+          "native_to_pyomo_lower_hex_equal": true,
+          "native_to_pyomo_upper_hex_equal": true
+        },
+        "constant_hex": "0x0.0p+0",
+        "exact_objective": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "formal_result": false,
+        "is_mip": true,
+        "native": {
+          "ObjBound": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.0000000000000p+0"
+          },
+          "ObjBoundC": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.0000000000000p+0"
+          },
+          "ObjVal": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.0000000000000p+0"
+          },
+          "Runtime": {
+            "available": true,
+            "error": null,
+            "hex": "0x0.0p+0"
+          }
+        },
+        "native_algebra_equals_canonical_algebra": true,
+        "native_constant_hex": "0x0.0p+0",
+        "native_exact_objective": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "native_exact_value_equals_canonical_exact_value": true,
+        "native_execution_authenticated": false,
+        "native_model_sense": 1,
+        "native_objective_algebra": [
+          "0",
+          [
+            [
+              "commitment[0,G1]",
+              "1"
+            ]
+          ]
+        ],
+        "native_solution_count": 1,
+        "native_status": 2,
+        "optimal_status_channels_consistent": true,
+        "optimality_certified": false,
+        "ordered_native_objective_terms": [
+          [
+            "commitment[0,G1]",
+            "0x1.0000000000000p+0",
+            "0x1.0000000000000p+0"
+          ]
+        ],
+        "ordered_objective_terms": [
+          [
+            "commitment[0,G1]",
+            "0x1.0000000000000p+0",
+            "0x1.0000000000000p+0"
+          ]
+        ],
+        "pyomo_lower_hex": "0x1.0000000000000p+0",
+        "pyomo_lower_source": "ObjBound",
+        "pyomo_solution_status": "optimal",
+        "pyomo_status": "ok",
+        "pyomo_termination": "optimal",
+        "pyomo_upper_hex": "0x1.0000000000000p+0",
+        "referenced_assignment": [
+          [
+            "angle_degrees[normal,0,2]",
+            "0x1.6eb167b830193p+2"
+          ],
+          [
+            "branch_flow[normal,0,AC1]",
+            "-0x1.9000000000000p+6"
+          ],
+          [
+            "commitment[0,G1]",
+            "0x1.0000000000000p+0"
+          ],
+          [
+            "dc_flow[normal,0,DC1]",
+            "0x1.9000000000000p+6"
+          ],
+          [
+            "generation[normal,0,G1]",
+            "0x1.4000000000000p+4"
+          ],
+          [
+            "reserve_up[0,G1]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,0]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,1]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,2]",
+            "0x1.4000000000000p+3"
+          ],
+          [
+            "shutdown[0,G1]",
+            "0x0.0p+0"
+          ],
+          [
+            "startup[0,G1]",
+            "0x0.0p+0"
+          ]
+        ],
+        "schema": "rq2_objective_provenance_v1",
+        "solver_calls_by_collector": 0
+      }
+    },
+    {
+      "hour": 1,
+      "stage": 2,
+      "raw_sha256": "73aa7210e3737f398bac60e8affbb438b7a05aa50891538ba49ae5c81ada773a",
+      "solver_calls": 1,
+      "provenance": {
+        "adapter_identity": "2fd81f2f8f47c0dd7dc883cfa1bda07839b78dcd89aad1c225c6020238928406",
+        "assignment_sha256": "3a0d252437699ee809844b24ddb852f1a6f786f13fa8c76b0387a11ee5466e3c",
+        "canonical_objective_algebra": [
+          "0",
+          [
+            [
+              "generation[normal,0,G1]",
+              "1"
+            ]
+          ]
+        ],
+        "canonical_objective_hex": "0x1.4000000000000p+4",
+        "collector_sha256": "fa044dcc8d963b0d8503b8f7711a34913dc15c15e83ce3557edd4ece782150fe",
+        "comparisons": {
+          "canonical_minus_native_objective": "0",
+          "exact_minus_lower": "0",
+          "lower_le_canonical": true,
+          "lower_le_exact": true,
+          "lower_le_upper": true,
+          "native_to_pyomo_lower_hex_equal": true,
+          "native_to_pyomo_upper_hex_equal": true
+        },
+        "constant_hex": "0x0.0p+0",
+        "exact_objective": {
+          "denominator": "1",
+          "numerator": "20"
+        },
+        "formal_result": false,
+        "is_mip": true,
+        "native": {
+          "ObjBound": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.4000000000000p+4"
+          },
+          "ObjBoundC": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.4000000000000p+4"
+          },
+          "ObjVal": {
+            "available": true,
+            "error": null,
+            "hex": "0x1.4000000000000p+4"
+          },
+          "Runtime": {
+            "available": true,
+            "error": null,
+            "hex": "0x0.0p+0"
+          }
+        },
+        "native_algebra_equals_canonical_algebra": true,
+        "native_constant_hex": "0x0.0p+0",
+        "native_exact_objective": {
+          "denominator": "1",
+          "numerator": "20"
+        },
+        "native_exact_value_equals_canonical_exact_value": true,
+        "native_execution_authenticated": false,
+        "native_model_sense": 1,
+        "native_objective_algebra": [
+          "0",
+          [
+            [
+              "generation[normal,0,G1]",
+              "1"
+            ]
+          ]
+        ],
+        "native_solution_count": 1,
+        "native_status": 2,
+        "optimal_status_channels_consistent": true,
+        "optimality_certified": false,
+        "ordered_native_objective_terms": [
+          [
+            "generation[normal,0,G1]",
+            "0x1.0000000000000p+0",
+            "0x1.4000000000000p+4"
+          ]
+        ],
+        "ordered_objective_terms": [
+          [
+            "generation[normal,0,G1]",
+            "0x1.0000000000000p+0",
+            "0x1.4000000000000p+4"
+          ]
+        ],
+        "pyomo_lower_hex": "0x1.4000000000000p+4",
+        "pyomo_lower_source": "ObjBound",
+        "pyomo_solution_status": "optimal",
+        "pyomo_status": "ok",
+        "pyomo_termination": "optimal",
+        "pyomo_upper_hex": "0x1.4000000000000p+4",
+        "referenced_assignment": [
+          [
+            "angle_degrees[normal,0,2]",
+            "0x1.6eb167b830193p+2"
+          ],
+          [
+            "branch_flow[normal,0,AC1]",
+            "-0x1.9000000000000p+6"
+          ],
+          [
+            "commitment[0,G1]",
+            "0x1.0000000000000p+0"
+          ],
+          [
+            "dc_flow[normal,0,DC1]",
+            "0x1.9000000000000p+6"
+          ],
+          [
+            "generation[normal,0,G1]",
+            "0x1.4000000000000p+4"
+          ],
+          [
+            "reserve_up[0,G1]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,0]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,1]",
+            "0x0.0p+0"
+          ],
+          [
+            "segment_power[0,G1,2]",
+            "0x1.4000000000000p+3"
+          ],
+          [
+            "shutdown[0,G1]",
+            "0x0.0p+0"
+          ],
+          [
+            "startup[0,G1]",
+            "0x0.0p+0"
+          ]
+        ],
+        "schema": "rq2_objective_provenance_v1",
+        "solver_calls_by_collector": 0
+      }
+    }
+  ]
+}

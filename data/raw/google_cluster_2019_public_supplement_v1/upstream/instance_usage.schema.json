@@ -1,0 +1,128 @@
+[
+  {
+    "type": "INTEGER",
+    "name": "start_time",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "end_time",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "collection_id",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "instance_index",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "machine_id",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "alloc_collection_id",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "alloc_instance_index",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "collection_type",
+    "mode": "NULLABLE"
+  },
+  {
+    "fields": [
+      {
+        "type": "FLOAT",
+        "name": "cpus",
+        "mode": "NULLABLE"
+      },
+      {
+        "type": "FLOAT",
+        "name": "memory",
+        "mode": "NULLABLE"
+      }
+    ],
+    "type": "RECORD",
+    "name": "average_usage",
+    "mode": "NULLABLE"
+  },
+  {
+    "fields": [
+      {
+        "type": "FLOAT",
+        "name": "cpus",
+        "mode": "NULLABLE"
+      },
+      {
+        "type": "FLOAT",
+        "name": "memory",
+        "mode": "NULLABLE"
+      }
+    ],
+    "type": "RECORD",
+    "name": "maximum_usage",
+    "mode": "NULLABLE"
+  },
+  {
+    "fields": [
+      {
+        "type": "FLOAT",
+        "name": "cpus",
+        "mode": "NULLABLE"
+      },
+      {
+        "type": "FLOAT",
+        "name": "memory",
+        "mode": "NULLABLE"
+      }
+    ],
+    "type": "RECORD",
+    "name": "random_sample_usage",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "FLOAT",
+    "name": "assigned_memory",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "FLOAT",
+    "name": "page_cache_memory",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "FLOAT",
+    "name": "cycles_per_instruction",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "FLOAT",
+    "name": "memory_accesses_per_instruction",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "FLOAT",
+    "name": "sample_rate",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "FLOAT",
+    "name": "cpu_usage_distribution",
+    "mode": "REPEATED"
+  },
+  {
+    "type": "FLOAT",
+    "name": "tail_cpu_usage_distribution",
+    "mode": "REPEATED"
+  }
+]

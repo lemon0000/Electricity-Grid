@@ -1,0 +1,27 @@
+{
+  "reviewer": "/root/h1_parent_review",
+  "scope": "independent read-only PRE_SEAL_AUDIT",
+  "official_verdict": null,
+  "open_findings": [],
+  "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_lifecycle_driver_development_v1.py",
+  "passed": 13,
+  "seconds": 573.1,
+  "exit_code": 0,
+  "synthetic_short_jobs_by_static_test_path_count": 8,
+  "real_native_calls": 0,
+  "related_processes_after_tests": [],
+  "pre_and_post_files_sha256": {
+    "experiments/h1_lifecycle_driver_development_v1.py": "0f661c9f1bd11a950e73e62a7131d372d8d68635a8fc4982c087bc20e6986e75",
+    "tests/test_h1_lifecycle_driver_development_v1.py": "dbdec91246eaa267a2dca15b455fbed651508c6ac06f126149288dc8f094fc42",
+    "docs/model_spec/rq2_h1_lifecycle_driver_development_v1.md": "925c4357f7de8c14cf65b8890c5411213666622941e4283ddc253fca0c188321"
+  },
+  "limits": [
+    "imports/caller/return/process exit outside declared window",
+    "tail live only",
+    "worker granular phase and observer separation remain open",
+    "192-hour actual chain not run",
+    "2440-second component budget not compared",
+    "full resource admission and fresh official review pending",
+    "new native run requires new explicit authority"
+  ]
+}

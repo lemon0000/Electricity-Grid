@@ -1,0 +1,47 @@
+{
+  "schema": "h1_stage_collector_development_checks_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "date": "2026-09-30",
+  "files": {
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_stage_collector.py": "4e48298f58689a230ca558bf97c84a74d66ddf620ead755572e3148c242fde13",
+    "tests/test_rq2_normal_h1_stage_collector_v1.py": "f893706e4a500f0a076b9d8809d41056df93a3e26cda4a86bc3f1fbbc931e698",
+    "docs/model_spec/rq2_normal_h1_stage_collector_v1.md": "84bba0a551565e236e9e468b580dddfa31dc06e07d4edf01bb4317396b05639d"
+  },
+  "solver_calls": 0,
+  "public_execution_enabled": false,
+  "formal_run_started": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "production_sealed": false,
+  "tests": [
+    {
+      "scope": "final checkpoint and execution-gate targeted",
+      "passed": 11,
+      "seconds": 66.74,
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_stage_collector_v1.py"
+    },
+    {
+      "scope": "earlier two-event implementation regression, superseded by checkpoint changes",
+      "passed": 23,
+      "seconds": 76.79
+    }
+  ],
+  "review": {
+    "stage": "PRE_SEAL_AUDIT",
+    "reviewer": "/root/cfe_preallocation_official",
+    "findings_closed": false,
+    "official_verdict": null,
+    "remaining": "Typed durable parent registry-head anchor must confirm each append before dependent effects."
+  },
+  "preservation": {
+    "cfe_members_checked": 587,
+    "incremental_files_checked": 3,
+    "drift_count": 0
+  },
+  "limitations": [
+    "Private checkpoint tests mock native adapter; zero new solver calls.",
+    "Public run rejects until typed durable parent anchor integration.",
+    "Latest checkpoint tests use independently retained registry anchors, not production parent integration.",
+    "Cross-root request deduplication and full physical resources remain unimplemented."
+  ]
+}

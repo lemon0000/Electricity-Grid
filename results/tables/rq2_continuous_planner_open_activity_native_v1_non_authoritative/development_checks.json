@@ -1,0 +1,54 @@
+{
+  "additional_replay_evidence_sha256": {
+    "experiments/verify_rq2_open_activity_native_development_v1.py": "cc4fb1c4d616e9412711e0f9cb2e2a3824c2d1e6ce97f686f75a1d7b7a602f49",
+    "results/tables/rq2_continuous_planner_open_activity_native_v1_non_authoritative/assignment_replay_checks.json": "c6d70e1d43703fa779c22b23b6dc15be1f4b4f9a879a2f06e46e8e4656f32c83",
+    "results/tables/rq2_continuous_planner_open_activity_native_v1_non_authoritative/assignment_replay_checks_v2.json": "64e60dc30309e966dfe9959013fce8971b6f7c6d0f5eee66d52198e8af50ae3a"
+  },
+  "development_sha256": {
+    "docs/model_spec/rq2_continuous_planner_open_activity_native_v1.md": "1efed0f7366f5afb6080f3fe055f4a9df7dc805f4084965142c218ddf3de1493",
+    "src/rq2_joint_deliverability_boundary_v1/continuous_planner_open_activity.py": "5cf1693cf9e3352f57e020aa61f30e278632564151dadefb744ac78cc5e97690",
+    "src/rq2_joint_deliverability_boundary_v1/planner_open_activity_assignment.py": "aff63720020a00da9eda62b3321544943230f23482f3d3a51eab599a32f033b9",
+    "src/rq2_joint_deliverability_boundary_v1/planner_open_activity_short_solve.py": "ead317f3b0f0f6dcac59ac73fcc72c3b55e9423b430f4308baa9502f8f148113",
+    "src/rq2_joint_deliverability_boundary_v1/planner_open_activity_witness.py": "9ac29f32e67d21d0cee51d2959a8199024e8714862ddabbdc511297db04ee964",
+    "tests/test_rq2_continuous_planner_open_activity_native_v1.py": "4d06773250fc2fdcee0eb89b0137a42218885296f5f94f2cf3cbc5bbb99ae5fe"
+  },
+  "earlier_checks": [
+    {
+      "new_native_tests_passed": 46,
+      "seconds": 2.03
+    },
+    {
+      "related_tests_passed": 297,
+      "seconds": 3.58
+    }
+  ],
+  "evidence_files_verified": 4,
+  "evidence_inventory_sha256": "034267d7fc0bc2d2e9896cfd191cfcdb6da3823fb678be52b48846d2112ede3a",
+  "formal_result": false,
+  "formal_run_authority": false,
+  "initial_collection_error": "test_function_missing_expected_argument_fixed_before_targeted_and_regression_pass",
+  "normal_acceptance_repair_extended": false,
+  "original_numerical_rules_preserved": true,
+  "preseal_added_evidence": "mock_and_real_three_hour_optimal_relaxed_interval_with_boundary_physical_witness_rejected",
+  "schema": "rq2_open_activity_native_development_checks_v1",
+  "science_candidate_sha256": "2a0e7686b9f92355dc421531c2150ecab354a8106abea54c2d2c5d25259c9051",
+  "sealed_members_verified": 518,
+  "sealed_outer_sha256": "7c47018cff8267575c3cbe218cc6225969c6c5c20a25e22eefd52c9f0c1d2567",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_continuous_planner_open_activity_native_v1.py tests/test_rq2_continuous_planner_open_activity_v1.py tests/test_rq2_continuous_planner_v1.py tests/test_rq2_continuous_planner_witness_v1.py tests/test_rq2_continuous_planner_assignment_v1.py tests/test_rq2_continuous_planner_short_solve_v1.py",
+      "new_native_tests": 48,
+      "passed": 299,
+      "seconds": 3.52
+    }
+  ],
+  "unresolved": [
+    "finite_enrollment_contract_and_support",
+    "training_capacity_to_holdout_binding",
+    "full_support_resources",
+    "official_sealed_review"
+  ],
+  "zero_solver_assignments_replayed": 4,
+  "zero_solver_replay_command": "D:/Miniconda3/envs/compute/python.exe -B experiments/verify_rq2_open_activity_native_development_v1.py --output results/tables/rq2_continuous_planner_open_activity_native_v1_non_authoritative/assignment_replay_checks_v2.json"
+}

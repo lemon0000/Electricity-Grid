@@ -31,8 +31,10 @@
 | RQ2 Vnext two-block pilot post-result evidence | V8 nonformal `committed_success`; post-result `PASS` | v8唯一一次fixed `0008 -> 0009` run已发布result/PUBLISHED exact trees；public-only readback、fresh PID/predecessor、HiGHS runtime、resource journals和无seed tombstone均通过。独立post-result receipt SHA-256为`28e546b8f5f3bc8c8402c86ec723ec9e35da041ba74676c9adb59cd338980ca6` | 该PASS只关闭two-block evidence门，不形成formal result、论文claim或security certification。它是V6/V7绑定的前序证据；V6 official review已`ESCALATE`，V7仍为无执行权限的draft。先完成V7当前Windows验收矩阵，再交fresh PRE_SEAL review；不创建production artifacts、不启动formal run |
 | RQ2四臂归因v1前序 | superseded for primary attribution; implementation-only | 四臂core、checkpoint/external-preflight与旧互斥identification/report合同已实现为validate-only；现有70-cell阴性结果和全部sealed bytes保持不变 | 旧exclusive classifier不作为联合前沿主结论authority；不得覆盖旧协议或用其启动新46-cell流程 |
 | RQ2联合服务可交付前沿 | v5 independent R4 `PASS`; implementation v2 independent R3 `PASS`; execution v3 independent R3 `PASS` | 用户在v2 `ESCALATE`后明确授权v3；v3移除live receipt永久缺失假设，递归绑定v2/v1 authority并拒绝旧fixed PASS普通entry与dangling symlink。22-member outer为`b153f0320fe9dfe961575be4836f4bcf4044836be4fa66618119fc08d4cbce80`，official review及post-receipt stability均为`0/0/0` | independent review gate已关闭；dispatched-grid、Windows runtime、native replay、memory/transport、fresh-process activation及单独formal-run authority仍缺失，全部formal execution/result/claim门关闭 |
+| RQ2联合服务24小时边界与training support | scientific-protocol blocked; continuous-boundary draft non-authoritative | 零solver审计发现sealed v5每个block强制hour 23 inactive/零债务，与hour 23正CFE必需请求结构冲突；冻结training中按alpha为358/478/541/541个power blocks触发。用户已选择continuous multi-day state carry；新增草案与边界组件仅验证状态/provenance延续 | 不改写sealed v5或既有review。必须先完成versioned continuous科学协议、continuation/deadline/accounting数据门、正式planner与fresh独立R4 review；不得用V7计算链或移除terminal条件直接打开46-cell planning/formal/result gate |
 | 真实重大停电事件分布 | processed candidate cohorts; independent-event calibration blocked | 已冻结1534源行、1521候选组及主/敏感性队列；主持续队列1385组/1398源行，重复组保留source IDs并以非缺失max/min而非求和审计 | 候选组不证明独立物理事故，仍不得估计事故频次或无条件时长分布；无资产ID、拓扑和SCUC，不得映射为RTS具名N-1或声称与业务同钟 |
-| Google同系统工作负荷-功率配对 | resolved for one-PDU one-day normalized pairing | cell f/pdu17 day-0取得336格小时usage、1328条machine event和唯一audit；600秒偏移后形成24小时功率-NCU上下界、168行priority明细及可加载的零柔性`derived_benchmark`，全部SHA锁定 | 只解除“一PDU/一天/归一化功率/受限usage人口”和业务schema桥接缺口；不是绝对MW、完整PDU工作负荷、真实柔性或恢复证据 |
+| Google同系统工作负荷-功率配对 | unfiltered full-month CPU-power-capacity alignment available; quality/population/model input blocked | 744小时每小时保留14个CPU strata、12个五分钟power样本均值/原flag计数和同钟capacity evidence；23小时诊断与原获取包仍保留 | 只关闭未过滤同钟数据对齐；不是quality-eligible功率、完整PDU人口、绝对MW、真实柔性或恢复证据，不能替换Alibaba或进入continuous/formal模型 |
+| RQ2本地公开数据交付入口 | resolved for offline catalog/validation/loading scope only | 12个既有Google、Alibaba、RTS-GMLC、Zeus、NLR、WattGPU与continuation包由统一catalog、双轴field dictionary、input status和流式loader逐字节校验 | 只关闭本地软件交付与可读性；20项业务/恢复输入仍为null，6项科学协议未注册，`full_rq2_experiment_input_ready=false`、`formal_result=false` |
 | ENTSO-E观测资产事故 | external-blocked on security token | 匿名API实测401，当前环境无令牌；页面批量导出同样要求登录 | 用户完成免费注册和REST API令牌申请前不执行；取得后仍不得把ENTSO资产ID映射为RTS ID |
 | X只有MW上限 | mechanism-only | 新增连续轨迹包络，硬检查响应、持续时间、休息、事件数、MWh、债务、恢复功率和期末债务 | 合成参数不能解除合同认证阻塞 |
 | T指标依赖声明的静态24小时 | resolved as evidence separation | 静态M3的连续验证小时改为0；另以8784小时时间轴输出显式压力轨迹里程碑 | 正式逐时运行T仍受时序电网和业务数据阻塞 |
@@ -40,7 +42,7 @@
 | branch 10非计划孤岛 | external-blocked | 排除并作为失败单列；数学多岛平衡不视为处置证据 | 正式N-1认证受阻 |
 | 扩建缺少AC工程参数 | external-blocked | 只报告DC MW机制结果 | 不能进行扩建AC认证或把MW增量写成MVA |
 | 固定在线机组、无逐时新能源与跨时约束 | external-blocked on RTS-24 mapping | RTS-24仍只使用8784小时时间轴和Area 1负荷代理；独立原生RTS-GMLC已完成24小时benchmark | 原生24小时结果不能回填机组集合不同的RTS-24，也不能据此声称RTS-24逐时SCUC、可再生联合安全或运行认证 |
-| PAI作业请求到绝对功率映射 | external-blocked for empirical MW claims; not required by dimensionless primary estimand | Alibaba已提供714,903个job执行包络及576,724个job×GPU生命周期平均遥测；NLR提供2,467条4×H100节点profile；WattGPU提供4,798条异构GPU inference实验，其中T4与PAI的497台机器/196,065条候选task同型号，但不共享job、模型或时钟，且V100型号未精确对齐 | `direct_job_to_power_mapping_ready=false`继续阻止Alibaba绝对MW与经验合同结论，但不阻止以`D_DC`归一化、把WattGPU/NLR仅作尺度外部检查的公开数据partial-identification主实验 |
+| PAI作业请求到绝对功率映射 | external-blocked for empirical MW claims; not required by dimensionless primary estimand | Alibaba已有job包络与生命周期遥测；NLR、WattGPU及新增Zeus受控DNN训练功率表提供外部硬件证据，但均不共享Alibaba job、模型与时钟；Zeus的Alibaba映射为作者构造而非观测链接 | `direct_job_to_power_mapping_ready=false`继续阻止Alibaba绝对MW与经验合同结论；外部GPU表只作尺度/机制检查，不能回填逐job绝对功率 |
 | 真实业务恢复轨迹与恢复头寸缺失 | external-blocked | Alibaba job-level包络仍没有可恢复比例、checkpoint、preemptibility、真实恢复headroom/效率/功率或合同deadline；NLR功率profile也不提供这些调度语义 | 只能把作业类型和请求特征用于候选分层及预注册敏感性；不能签发持续容量、恢复或正式T指标认证 |
 | Word研究方案中文编码损坏 | external-blocked on clean source or approved reconstruction | Git初始提交与当前DOCX均已把大量UTF-8中文误存为乱码并含不可逆`U+FFFD`；无干净历史版本，未用Markdown覆盖原19张表和格式 | 当前以可读Markdown执行计划和模型规格为准；论文冻结前需取得干净源文件，或经确认后从现有可读文档重建DOCX |
 
@@ -3283,3 +3285,2560 @@ V5/V6 inner分别13/13、15/15，closure均91/91；activation v3静态sealed验�
 替代边界、fault计数、唯一终态、owned child停止和0 solver/formal-root write。fresh独立PRE_SEAL reviewer
 完成前，`writer_pre_seal_evidence_complete=false`、`pre_seal_findings_closed=false`及全部运行门保持关闭。
 执行命令见执行计划同日“V7生产路径验收交接”；历史83项green不得复用为本轮验收。
+
+## 2026-09-12 RQ2 24小时终止边界诊断与 continuous successor 数据门
+
+对sealed joint-deliverability v5的冻结training输入完成了非权威零solver必要条件审计。旧协议同时要求
+CFE服务精确满足有效请求、对应track的`q`包含该服务，并在每个24小时block的hour 23强制inactive和
+零债务。冻结541个power training blocks中，hour 23正CFE请求按
+`alpha=0.50/0.70/0.85/1.00`分别为`358/478/541/541`个；因此后两档的每个raw training pair均触发
+旧完成期CFE track的terminal-inactivity必要失败。该标签严格属于
+`legacy_sealed_v5_single_24h_completed_period`，不适用于新的continuous observation边界。
+
+审计保持sealed v5的46 cells和四臂inventory，并覆盖逐时available flexibility、energy、duration、
+event-count乐观必要下界、总恢复下界、causal debt及旧完成期causal terminal debt。每cell有18,394个raw pairs；
+available-flexibility违反数在`alpha=0.85, flex_fraction=0.20`时为18,394/18,394，说明只移除terminal
+condition仍不足以产生非退化前沿。该投影可为含CFE track提供充分失败见证，但raw包没有dispatched
+`grid_need`或E0；`network_only`、finite training support及完整物理可行性仍unknown，未触发必要条件不等于
+feasible，也未运行任何solver。
+
+用户已明确选择continuous multi-day service。新增
+`configs/rq2_joint_deliverability_boundary_successor_v1.DRAFT.yaml`与
+`docs/model_spec/rq2_joint_deliverability_boundary_successor_v1.md`只形成
+`DRAFT_NONAUTHORITATIVE`合同：hour 23义务保留，跨chunk精确携带事件、duration/rest、event/energy预算、
+recovery debt及prior-event状态；边界不恢复、不重置。split、arm/track、power trajectory/outage seed、
+workload trace/normalization和provenance必须连续匹配。缺未来观察使completion right-censored；缺注册deadline
+是completion合同缺失，均不抹去已观察到的服务或违规。
+
+当前可执行组件只支持一个显式nonrolling accounting period并拒绝period切换；多period预算/reset、
+deadline/recoverability来源、连续grid/CFE义务和holdout estimand必须在新的完整科学协议中先注册。
+workload v3的`deadline_observed/checkpoint_observed/recoverability_observed`均为false，不能用任意零尾部或
+虚构deadline补齐。additive `q=x_grid+x_cfe`只登记为分离义务的机制假设；co-benefit结算保持未决。
+
+非权威机器包位于
+`results/tables/rq2_joint_deliverability_boundary_diagnostic_v1_non_authoritative/`，其
+`summary.json/cells.json` SHA-256分别为
+`7702f71e27fedb608940f28565b03f27b78d11e0ae834f7247b3ed0a5c896080`/
+`6f9bf70818d80872d3454da5e653c409273305b4165bef8f30f18941357a2db4`，绑定输入及audit/boundary/runner实现，
+并明确`solver_calls=0`、formal/result/claim/security全false。focused为`50 passed in 29.55s`；最终静态及
+文档回读另按本轮命令记录。下一步先完成continuation数据可用性审计和完整versioned continuous protocol，
+再实现正式planner并交fresh独立R4 review；V7 Windows执行/授权问题是另一流程与计算blocker，不能替代
+本节科学blocker的关闭。
+
+## 2026-09-12 RQ2 frozen-margin continuation availability 证据
+
+新增非权威零solver审计逐成员绑定power v4/workload v3 manifests、builder configs/实现及power N-1
+chronology，并逐字节验证上一轮boundary config/code/result未漂移。power 1,071 blocks按split×seed形成
+6条连续片段，training/holdout block links为538/527；workload 68 blocks按split形成2条片段，各33 links。
+双侧同时有下一块的Cartesian potential adjacency为17,754/17,391，但
+`potential_pair_adjacency_is_registered_coupling=false`且无共同物理时钟。
+
+power跨split事件schedule逐行核对通过；三个模拟事件实际持续57/216/289小时，对应构建策略排除的整块
+范围为96/240/312小时。该缺口是frozen margin unavailable，不声称上游source未观测。workload完整块未覆盖
+training 816–820及holdout 1,637–1,641；training-peak normalization逐行Decimal恒等通过，holdout有6小时/
+3 blocks的raw fraction大于1，maximum为1.070370705271957780430251624，未clip。
+
+当前仍缺dispatched grid、共同clock、absolute workload power、观测flexibility/call/recovery bounds、
+业务event/energy/debt合同、accounting period与deadline/checkpoint/recoverability。缺失表示未来协议尚未绑定，
+不排除用户另行授权机制假设，但本轮没有选值。故`raw_chronology_candidate_available=true`仅限各margin包内，
+`full_joint_service_continuation_ready=false`、`continuous_scientific_protocol_registered=false`及全部
+formal/result/claim/security gates继续关闭。
+
+机器包
+`results/tables/rq2_joint_deliverability_continuation_availability_v1_non_authoritative/`的summary/chains
+SHA-256为`faba770bf8f3d83229f840fc1074939742e847bd55ab793b63264cb2322dd45e`/
+`0f661707d4ebb6ceb6f12073e6426a03b542322324df8a4f99b6d229ced8fc48`。下一步是形成完整versioned
+continuous科学协议并接受fresh独立R4 review，不是运行planner、V7或formal。
+
+## 2026-09-12 Google公开数据适用性与重建门
+
+PowerData获取不是blocker：57域、mapping及既有day-0提取均在本地，本轮0下载、0付费查询。当前blocker是
+数据合同语义与可复现性：官方Power PDF和notebook对`bad_*` flag方向冲突；legacy day-0按共同epoch确定
+存在10分钟错位；当前Windows重建因约15位浮点字符串末位差异fail closed（`1 failed, 9 passed`），
+canonical/source bytes未漂移且核心aggregate未变。上述证据不等于raw损坏或科学结果改变，但已推翻
+legacy day-0“同步配对已验证”和“当前环境逐字节可重建”的解释。
+
+故`google_power_source_integrity_verified=true`仅限source bytes；
+`google_cluster_day0_temporal_alignment_verified=false`、
+`google_cluster_day0_reproducible_in_current_environment=false`、
+`google_power_quality_flag_semantics_resolved=false`、
+`google_continuous_successor_model_input_ready=false`。如用户授权后继修复，versioned successor须按共同
+epoch/interval overlap修复时间窗并冻结确定性算术/序列化；Google仍只作CPU—PDU external robustness，不提供absolute MW、
+flexibility、deadline或recovery。continuous/full M6/formal/result/claim/security gates均不变。完整证据见
+`docs/model_spec/google_public_data_suitability_audit_v1.md`。
+
+## 2026-09-12 Google 23小时完整区间 successor 诊断
+
+新增独立`DRAFT_NONAUTHORITATIVE`路径，从锁定CPU小时源与PowerData legacy窗口机械求最大完整raw-hour
+交集`[3600s,86400s)`；相对正式trace起点为00:50–23:50。它使用CPU source hours 1–23和276个五分钟
+Power样本，排除CPU hour 0与前/后10/2个Power样本，不拆分、插值或平移小时CPU。pair/summary SHA-256为
+`54d664f2fa261413c1dfb5c05479d6aa6977e74ea8a6f36c3a5f41dba79f5930`/
+`e7d6edad6f2e5abf4ad07b096b2c6c584156532fbfea452648ce78d07b551d53`。
+
+本门仅更新为`google_cluster_23h_alignment_diagnostic_available=true`和
+`google_cluster_23h_cross_process_reproducible=true`。`google_cluster_complete_24h_pair_available=false`、
+`google_power_quality_flag_semantics_resolved=false`、`population_is_complete_pdu_workload=false`、
+`google_continuous_successor_model_input_ready=false`保持；priority/capacity未重建，legacy逐字节重建失败未隐藏。
+新路径focused为`11 passed in 1.26s`，相关green回归`14 passed in 14.19s`；legacy独立为
+`1 failed, 6 passed in 0.66s`。零solver/查询/下载，不生成production manifest、lease、PASS或正式结论。
+
+## 2026-09-12 Google 23小时描述性关联诊断
+
+锁定第7节23小时pair并使用全部23行、零flag筛选。CPU lower/upper每小时各为14个
+`collection_type × priority_tier` source strata的NCU总端点；与measured PDU归一化小时功率的Pearson分别为
+`0.962184945123159126/0.962184943013110584`，平均秩Spearman均为`0.962450592885375494`。两组是端点
+描述性分析，不是相关系数上下界。CPU missing overlap为0；conflict overlap总计109、涉及22小时；原276个
+power样本flag未过滤，quality方向仍unknown。
+
+机器summary SHA-256为`030626393f2ac96fcfd91f151017ad8b7c5bafa3476dd1daf67a3b500e8e23e2`，绑定上一轮
+pair/summary/config/implementation与本轮实现。focused+alignment为`23 passed in 1.06s`，独立review无新增
+finding。仅置`google_cluster_23h_descriptive_association_available=true`；population、24h/multiday、MW、
+quality、flexibility、deadline、recovery、continuous model、formal/result/claim/security gates不变。
+
+## 2026-09-12 Google/Zeus 有界公开数据补充
+
+实际新增Google cell-f完整machine-events JSON/Parquet、5个schema和一个usage Parquet pilot，以及Zeus固定
+commit的训练与四GPU功率小表，共38,044,870 bytes（含metadata）。cell-f全JSON约964.6 GiB、全Parquet约
+429.9 GiB，超出本轮为控制资源自行采用的1 GiB下载范围（非用户预算）和当时磁盘余量，未扩大全量下载。
+临时DuckDB读取因无编译工具链失败后停止；
+Parquet仅绑定generation/MD5/SHA和`PAR1` magic，usage schema/row/time/continuity保持unknown。
+
+Google machine JSON为49,603行/12,201机；716条首次ADD缺capacity且稍后UPDATE，缺口不补零或填充；
+`missing_data_reason`字段全缺省。pdu17 time-zero snapshot为1221台、normalized CPU 1220.5，不是物理/MW或
+完整人口。Zeus训练表3,759行，`target_epoch=nan`849行只作未解释sentinel；63配置中6个少于4 distinct runs。
+四GPU功率表每配置单次测量，不能作生产PDU时序或Alibaba观测映射。
+
+summary SHA-256为`472a2809807e0bdc10934a99dab3b6064c88f89add0945afd5917efe7a789334`，focused
+`6 passed in 2.46s`。新增状态只限machine chronology与controlled-training hardware evidence；Google usage/
+capacity completeness、multiday、absolute MW、flexibility、deadline、recovery、continuous model以及全部
+formal/result/claim/security gates保持关闭。
+
+## 2026-09-12 Google/Zeus 全月公开数据准备状态
+
+`public_compute_multiday_v1_non_authoritative`已生成三项可复用但非模型输入的数据：508,896行全57域五分钟
+功率原值与原flag、744行PDU17 normalized capacity小时积分、1,609行Zeus四GPU受控功率/性能。
+machine-events JSON/Parquet 49,603行逐行等价；PDU17状态转换合法，72个active capacity缺口合
+117.081411 machine-seconds并保持unknown。公开Google DR网页给出17:00–21:00实际调用窗口，CICS摘要给出
+日内容量保持/日内完成的系统设计边界，但二者均不关闭2019 cell-f或Alibaba逐job deadline/recovery/budget门。
+
+8个分散usage footer样本的16个row group均不可按全月/PDU17范围剪除，六列压缩外推约71.916 GB；该probe
+不等于全对象证明，完整PDU17 CPU仍未提取。实现/summary SHA-256为
+`92c727c4c2a275295ebf85039523e5ddc5ade599984f1c7333ce9ca6adbf42a0`/
+`d3349e6b00cbd77c5b83f98bc208b90ff62612f1c2f185e1aade847970f18562`；focused/独立复核分别为
+`11 passed in 29.77s`/`11 passed in 22.60s`。因此只新增
+`google_power_unfiltered_multiday_prepared=true`、`google_pdu17_normalized_capacity_integral_prepared=true`、
+`zeus_four_gpu_performance_prepared=true`；`google_complete_pdu17_multiday_cpu_prepared=false`以及quality、
+population、MW、flexibility、deadline、recovery、continuous model、formal/result/claim/security均保持false。
+
+## 2026-09-12 Google PDU17 全月 CPU 获取状态
+
+用户授权按量查询和本任务累计1 TiB上限后，固定作业
+`google_pdu17_multiday_v1_5f0ddc384afe27ac`已完成。dry-run/实际processed均为554,760,728,186 bytes，
+实际billed为554,761,715,712 bytes，低于600,000,000,000-byte单作业上限；两个验证作业均为零计费。
+公共7.7B行usage原始表仍在BigQuery，本地只保存10,416行小时网格与1行审计。共同raw窗口为
+`[600000000,2679000000000)`，共744小时、2种collection type和7个priority tier；source snapshot、
+query hash、参数、固定job ID、费用与本地manifest均已绑定。
+
+审计保留55,947个exact-duplicate value groups、6,659个CPU-conflict usage groups、67,327,137个
+synthesized-priority groups和21个unknown-priority groups；硬质量项均为0，PDU17映射机器数为1,295。
+这些结果关闭`google_pdu17_multiday_hourly_cpu_acquisition_available=true`，并取代本register此前
+“完整PDU17 CPU仍未提取”的时间点状态；不把root usage解释为完整PDU业务人口，也不把normalized CPU解释为
+物理核或MW。PowerData的`bad_*`语义、全月CPU—power适配、真实flexibility/deadline/recovery/budget、
+continuous model以及formal/result/claim/security gates仍未关闭。
+
+本地包位于`data/raw/google_power_workload_2019/multiday_v1_non_authoritative/`。config/SQL/implementation/
+records/metadata SHA-256分别为`594a32c8c708796ded88682bcc8e3b059ef44d246d0778d1c072dc37a69f5b3a`/
+`5f0ddc384afe27accbd568830d70b924f850aea20527486e92f2f69e76d8a742`/
+`91bffda376d5ec6a3b78af59b8d825b1db7df2936510f0dcea6102f4cabbde56`/
+`3c204c39cc099fb344a663801e2977adcc063ab988de465e8069a62ccd987ca0`/
+`557e75d553a781bb556e5b1e1a972d36302790197f3bd90a0be562a525573a57`；相关回归`52 passed in 24.08s`。
+
+## 2026-09-12 Google PDU17 744小时未过滤同钟配对
+
+新增独立`google_power_workload_multiday_pair_v1_non_authoritative`，仅连接已绑定本地CPU、PowerData和
+capacity工件，零query、零下载、零solver。744个raw-clock小时各有14个CPU source strata、12个连续五分钟
+power样本的Decimal mean与原flag计数，以及同key的capacity/unknown字段。31个24小时coverage block均从
+raw trace起点划分，不解释为自然日，不作train/holdout选择。
+
+8928个PDU17 power样本未筛选，flag组合`00/01/10/11`为6621/2307/0/0；production flag涉及194小时。
+CPU conflict overlap涉及711小时，missing overlap涉及0小时，unknown tier有usage涉及21小时。capacity unknown
+涉及16小时、合117.081411 machine-seconds。源CPU审计中的55,947个exact-duplicate value groups、6,659个
+CPU-conflict groups、67,327,137个synthesized-priority groups和21个unknown-priority groups原样保留。
+这些非零诊断意味着该包不能解释成无数据缺陷、完整PDU人口或quality-eligible pair。
+
+aligned/summary SHA-256为`ca196505690a1b744bba2e2d689d751f454d30fb0f97856ce4d43587201380fd`/
+`40fdb668b21a5d9392df1bfd32a2603e76d01be2d3c44ef11d8d11c38f032eda`；focused与相关回归分别为
+`8 passed in 6.54s`/`37 passed in 46.92s`。仅置
+`google_pdu17_multiday_unfiltered_cpu_power_capacity_alignment_available=true`；quality、population、MW、
+headroom、flexibility、deadline、recovery、continuous model、formal/result/claim/security gates保持false。
+
+## 2026-09-12 RQ2 本地公开数据统一交付状态
+
+`rq2_public_data_delivery_v1_non_authoritative`已把当前scope内12个既有公开/派生数据包统一登记为catalog、
+双轴field dictionary、input status和可离线验证/流式读取的交付入口。所有package/manifest/summary/primary
+文件、schema和行数均逐字节绑定；Google另提供744小时扁平投影和31个raw-origin block索引。交付保持空字段
+为`None`、数值CSV为原字符串，并保留Alibaba workload的6条raw>1值、Google未决flag和capacity unknown。
+
+机器状态为`DRAFT_NONAUTHORITATIVE_LOCAL_DATA_DELIVERY_COMPLETE`，summary SHA-256为
+`53b898e30d807b3b532cfaed78de20fdb0653fa53817f65fcc5a6a5d78483586`；focused为`15 passed in 43.28s`。
+本步未发query、下载或solver调用，也未新增split或cross-source coupling。它只关闭
+`local_delivery_catalog_available`、`offline_validation_and_loading_available`及本地软件交付scope；20项
+业务/恢复输入仍为`null`，6项科学协议仍未注册。`full_rq2_experiment_input_ready=false`、
+`continuous_model_input_ready=false`、`formal_result=false`、`paper_claim=false`、`security_certified=false`。
+
+## 2026-09-12 连续多日服务 DRAFT 开发证据
+
+新增`rq2_continuous_multiday_service_v1`协议草案、20项参数证据表和48小时合成joint-correct动作回放。
+复用既有boundary组件，跨chunk保留事件、duration/rest、count、energy、debt与身份；显式检查共享调用、
+服务功率平衡以及business/CFE-compatible双侧恢复头寸。解析prefix oracle和分块等价测试用于验证机制实现，
+不把合成参数或初始零状态转成真实观测，也不把给定动作失败解释为数学不可行。
+
+本草案明确采用单一nonrolling period；不支持period切换。deadline、tail、新split、cross-source coupling和
+raw>1模型映射仍待注册；逐笔deadline需要债务age ledger。四臂planner、B6共享执行、完整holdout与正式服务合同
+尚未由该小组件实现。`continuous_service_protocol_registered`及原有continuous/full-input/formal/result/claim/security
+状态全部保持false。本次只增加开发证据，不关闭科学blocker。
+
+可审阅入口：`docs/model_spec/rq2_continuous_multiday_service_v1.md`、
+`docs/model_spec/rq2_continuous_multiday_parameter_evidence_v1.md`和
+`docs/model_spec/rq2_continuous_multiday_validation_v1.md`。保留全部旧冻结协议与结果，未清理仓库、下载或启动正式实验。
+相关旧v5回归的symlink测试在创建fixture时遇到Windows `WinError 1314`；该分支尚未验证，须在具备symlink权限的环境重跑。
+未修改冻结测试或放宽验收，本轮不声明完整PRE_SEAL验收完成。
+
+## 连续恢复债务 cohort deadline 开发证据
+
+新增DRAFT cohort账，按产生小时/假设到期小时携带余额与永久到期短缺。
+合成测试用于验证跨日守恒、晚恢复保留违规和unknown/right-censoring区分，并对照既有aggregate债务递推。
+详情见`docs/model_spec/rq2_continuous_debt_cohorts_v1.md`。该组件不提供真实deadline来源、恢复功率可行性、
+自动分配策略或四臂controller；known deadline仅为mechanism_assumption，真实输入仍null。
+连续科学协议、full-input、formal/result/claim/security各门均不变；旧冻结字节及结果保留。
+
+## 连续四臂物理/cohort绑定开发证据
+
+新增非权威四臂显式动作适配器，提供B6分离规划动作的共享物理重放；分离成功不推断共享成功。
+物理恢复与cohort allocation逐时守恒，状态按arm/mode/track、轨迹/时钟、envelope与period绑定；
+保留逾期记录，拒绝跨轨串账和planning历史替换。详见`docs/model_spec/rq2_continuous_four_arm_replay_v1.md`。
+这里的物理校验仅为归一化数据中心服务功率与业务包络，不涉及电网dispatch/AC/N-1或最优性证明。
+真实deadline、非零carry-in适配、异质逐服务deadline、因果策略与正式四臂planner仍未完成；
+全部正式协议/输入/结果/claim/security门保持关闭，旧冻结协议和结果继续保留。
+
+## 2026-09-13 固定因果恢复规则的前缀开发证据
+
+新增单current-observation策略接口与不可变接受/拒绝记录，固定known EDF/unknown FIFO恢复机制，
+调用请求保持完整，B6共享执行失败不重优化。首次失败停留在最后已提交的物理/cohort状态，
+汇总明确分开submitted、accepted和rejected小时，并保留既有deadline miss/unknown/censoring状态。
+详见`docs/model_spec/rq2_continuous_causal_policy_v1.md`。该开发证明固定规则的因果前缀回放行为，
+不证明其他策略不可行、完整连续holdout风险或真实业务违约率。
+失败小时后的实际服务动作和债务递推、非零carry-in、异质deadline及真实参数来源仍未完成；
+正式科学协议、full-input、formal/result/claim/security门全部保持关闭。
+开发与独立复核的六文件回归均为182项通过；三项审查实现问题已修复，当前无开放实现finding。
+此状态只覆盖合成固定策略前缀，不关闭上述科学输入及完整轨迹blocker。
+
+## 2026-09-13 前缀诊断交付开发证据
+
+`rq2_continuous_prefix_diagnostics_v1`将固定策略的六个合成场景和四臂回放持久化为可重放诊断包。
+输入均为mechanism_assumption；真实观测未用于填补业务deadline、恢复参数或carry-in。
+接受/拒绝/未提交小时、规划候选/已提交状态、unknown/逾期/截尾分别保留，拒绝后实际轨迹仍为未评价。
+文档入口为`docs/model_spec/rq2_continuous_prefix_diagnostics_v1.md`；此本地交付不关闭真实参数或完整失败轨迹blocker，
+continuous-service/full-input/formal/result/claim/security各门保持原状态。
+本地包已生成且完整重放匹配（24组合、1038记录）；独立最终相关回归194项通过。该软件交付证据不改变上述科学门。
+
+## 2026-09-13 拒绝后实际动作合同的开发边界
+
+`rq2_continuous_actual_action_contract_v1`已明确显式assumed实际动作与原规划拒绝的区分，
+提供同一原观测/约束下的共享物理-cohort后继校验。迟到恢复、unknown和缺失实际动作分别保留；
+网络/CFE完整请求无法履行时仍未评价，未引入削减硬请求或额外救援资源。
+这补齐了“已给定合法机制动作”的递推接口，尚未补齐实际动作选择的因果规则、B6后继完整policy、
+真实运行证据或所有失效类型的实际轨迹。旧B6 planning不恢复，原拒绝结果不改写。
+详见`docs/model_spec/rq2_continuous_actual_action_contract_v1.md`；正式协议/full-input/formal/result/claim/security门保持原状态。
+主线程和独立最终相关回归均216项通过，当前无开放实现finding；这仅完成显式机制动作递推开发，不关闭动作选择与真实轨迹blocker。
+
+## 2026-09-13 固定因果补救机制开发
+
+`rq2_continuous_recovery_controller_v1`为已支持的physical/shared拒绝固定当前小时共享恢复规则及组合策略身份，
+从原拒绝小时开始永久走共享物理账。该模块补齐一个明确机制的动作选择，不声称覆盖全部拒绝类型或真实运行政策。
+B6后继与旧分离策略结果单独标识；输入/decision/planning拒绝及完整请求仍无法实现的小时保持未评价。
+未来输入扰动与跨chunk一致性用于开发非预见性验证；真实输入揭示时序、参数、非零carry-in、损失模型、正式split及经验风险仍缺证据。
+详见`docs/model_spec/rq2_continuous_recovery_controller_v1.md`；全部正式科学与运行门保持原状态。
+该固定机制controller已通过开发与独立最终九文件回归（均244项），当前无开放实现finding；此证据不关闭未覆盖失效类型和真实运行风险blocker。
+
+## 2026-09-13 组合策略后继交付证据
+
+`rq2_continuous_composite_diagnostics_v1`将primary/补救/未评价各段持久化，八个合成场景共32个场景与臂组合。
+原拒绝与补救不重复计算小时；来源fault的raw hour独立于输入序号和已验证服务时钟。
+本项保留未评价小时及后缀，不转成真实服务风险或B6原策略效果；真实参数、非零carry-in、未覆盖失效类型与正式split/coupling仍缺证据。
+详见`docs/model_spec/rq2_continuous_composite_diagnostics_v1.md`；正式协议/full-input/formal/result/claim/security门不变。
+本地包已生成且离线重放一致，独立最终相关回归257项通过；raw-source字段歧义已修复。此交付不关闭上述科学输入或未覆盖实际动作blocker。
+
+## 2026-09-16 连续机制拒绝覆盖核对
+
+三套既有公开/前缀/组合交付只读核验通过，当前开发产物无需重复生成。新增拒绝覆盖矩阵见
+`docs/model_spec/rq2_continuous_rejection_coverage_v1.md`；primary policy_decision阶段补充5项合成测试，
+相关四文件回归68项通过，验证拒绝不推进shared/planning状态、不激活补救且不允许消费后缀。
+既有input/separate-planning拒绝仍不属于实际后继入口；B6 separate-planning拒绝后的共享动作及独立policy合同
+是下一开发缺口。此核对没有新设实际失效行为或改变任何trigger、阈值与正式门禁。
+20项实证参数null、6项协议未注册、四臂非零carry-in及未覆盖实际动作blocker保持；底层aggregate carry-in
+小例已存在，不应重复宣称未开发。正式科学/输入/运行/result/claim/security门均保持原状态。
+
+## 2026-09-16 formal-ready关键路径与网侧连续性缺口
+
+依据用户持续推进到可开始正式实验的目标，完成只读科学关键路径审计，决策包为
+`docs/plan/RQ2_连续正式实验决策与验收_v1.md`。B6 separate-planning后fallback不是主容量定义的前置，
+暂不扩展；当前优先完整continuous科学协议、输入与planner。
+
+旧grid v4配置为`free_boundary_24h_normal_state_SCUC`，`_process_block`逐块调用normal prescreen，
+prescreen使用`fixed_initial=None`；无active outage块未求normal generation/commitment。
+因此旧1071块即使全部发布，也不单独证明跨块UC/generation/ramp/min-up/down连续性。
+这不是已发现具体旧解违反ramp，而是缺少所需保证；旧具名benchmark结论保持原范围。
+解除continuous网侧门需要注册连续dispatch合同并提供跨边界状态/初态与全小时约束证据，不能直接拼接旧自由边界结果。
+
+开放观察末端只给prefix证据，完整恢复服务的容量UB仍需要延续/closure见证；期限、accounting、
+coupling、raw>1映射与风险分母等科学决策待明确。未知不能填0或解释为完整服务成功。
+已提交用户选择是否接受有明确机制假设的区间/unresolved正式结果；问题未答时不代选验收口径。
+独立零solver机组carry审计草案已新增，见`docs/model_spec/rq2_continuous_grid_carry_v1.md`；
+它只验证给定committable轨迹的局部bounds/ramp/dwell，不关闭上述网侧、科学或formal门。
+主线程相关回归116项通过；独立pre-seal targeted/相关回归25/75项通过，8,000状态组合与20,052分块重放无差异，
+未发现开放局部实现finding。旧科学v5/implementation v2/execution v3的5/14/22个inner成员hash均匹配。
+该证据只完成机组chronology审计组件的DRAFT验证，不是完整continuous grid生成、输入验签或official审查。
+
+## 2026-09-16 用户指定拒绝语义补缺后的推进
+
+用户明确先补缺项、优先梳理尚未覆盖拒绝类型及实际动作语义。上条“暂不扩展fallback”的开发顺序
+由此更新；正式科学选择仍待注册，但不阻止独立机制合同的开发与短验证。
+新增B6分离规划拒绝后的独立固定共享后继，见`rq2_continuous_b6_planning_recovery_v1.md`。
+原拒绝与规划保持归档；同一小时从最后已提交共享状态尝试完整请求，失败不推进，成功后永久共享执行。
+18项针对性测试通过；最终相关8文件167项通过，旧三个冻结包41个成员哈希匹配。
+独立pre-seal审查完成：另8文件228项回归及125组恢复cap枚举通过，限定范围无阻塞实现finding。
+这是一项mechanism_assumption开发产物，不提供真实故障处置证据或原B6容量结果。
+剩余输入/决策错误、完整请求无法满足时的实际服务/损失合同、非零carry-in、多period与正式planner等继续开放。
+
+## 2026-09-16 显式部分响应与请求短缺分账
+
+已核对既有formulation及v4 holdout，确认永久drop不是未满足调用，主实验默认drop=0。
+新增`rq2_continuous_partial_response_v1.md`和显式动作核算接口，保留原请求/拒绝，按执行量递推债务。
+grid短缺candidate不提交且禁止后缀；grid足额/CFE不足可提交局部机制状态并明确CFE failure。
+37项新测试覆盖功率/债务/包络、来源与表示故障、deadline、原容差及历史链；主线程相关186项通过。
+独立pre-seal数值finding已修复并复核，fresh相关186项通过；正式组合/导出须保留原观测与投影角色的外层记录绑定。
+最终只读pre-seal审查限定范围无开放实现finding，另四臂20组枚举无提交/债务/failure分类差异。
+本项不包含自动fallback、完整因果策略、永久损失或网络安全认证，所有formal/result/security门保持。
+下一缺口是为已明确动作合同建立完整事前策略及训练容量/可用柔性绑定，并补minimum-event-power、响应/ramp等完整包络。
+
+## 2026-09-16 连续固定容量动作策略开发
+
+新增`capacity_policy.py`与薄`aggregate_response.py`，见`rq2_continuous_capacity_policy_v1.md`。
+事前固定声明容量、min-event、up-ramp/response及最大恢复功率；逐小时读取当前可用柔性，精确选择grid→CFE响应，
+inactive时复用既有EDF恢复。原始请求与Fraction执行投影分别保留；grid短缺candidate-only停止；无hour23 reset。
+51项新增测试及主线程248项相关回归通过，设计与实现pre-seal审查finding均闭合。
+独立审查另有321项连续模型测试、39,256组Fraction枚举、四臂恢复4例与10个policy身份变体通过。
+当前容量为mechanism_assumption，training_capacity_certificate=null；旧24h D_a不直接成为开放连续training证书。
+后续还需continuous training产物闭包、原观测/投影的正式导出绑定、累计shortfall/删失汇总及完整科学协议与planner。
+
+## 2026-09-16 容量策略诊断开发
+
+新增`rq2_continuous_capacity_diagnostics_v1.md`对应导出器，复用旧prefix输入和Fraction编码。
+原请求/可用柔性、派生投影、业务候选与提交状态分别保留；累计短缺含容差内小量，候选与提交分账。
+cohort仅按最后提交账本评价；来源错误、未提交后缀与完整服务结果保持未知。
+15项新诊断测试与5文件91项相关回归通过；独立pre-seal依赖闭包finding已修复并复核，限定范围无开放finding。
+36个case-arms/1091条记录已发布到新的non_authoritative诊断目录，verify-existing完整重放一致。
+formal training、真实输入闭包和风险定义仍未完成；本地交付不提供正式容量或经验风险结论。
+下一项为同一policy/split/trace/period的已验证前缀持久化交接：由canonical zero origin重放证明
+非零物理/cohort状态来源，不接受裸snapshot、不重做已有chunk推进、不将training末态接holdout。
+任意非零初态分布、rolling reset、正式burn-in/scoring和closure仍依赖科学协议。
+
+## 2026-09-16 已验证前缀状态交接开发
+
+新增`prefix_handoff.py`，规格见`rq2_continuous_prefix_handoff_v1.md`。由接收方独立提供摘要与canonical zero origin，
+只从完整已提交原始前缀重放恢复cursor；不直接导入裸物理/cohort snapshot。spec/策略/双时钟/来源/period不变，
+精确动作、执行投影、终态、deadline历史和运行代码依赖均校验。现有初始化、推进和旧诊断包不修改。
+45项新测试通过（含全新Python进程恢复）；最终7文件195项相关回归通过；独立pre-seal限定范围无开放finding，
+独立复核45项targeted及全部连续模型381项测试通过。旧capacity诊断包36组/1091条完整重放一致。
+这是derived mechanism state持久化，不是observed carry-in、任意初态分布、正式burn-in或training容量证书。
+下一主线核查continuous四臂training planner可复用kernel及24h/terminal限制；完整服务closure仍须科学协议。
+
+## 2026-09-16 continuous planner关键路径核查
+
+只读领域核查定位`src/rq2_joint_deliverability_v2/model.py::build_arm_planning_model`：kernel按输入向量长度构建，
+但旧输入schema固定24h，模型固定zero initial、末小时inactive，并施加terminal debt上限（旧协议为0），且尚无逐cohort deadline。
+旧`structural_recovery_witness`依赖末端清债，不能直接用于开放末端。
+
+新增需显式处理的行动集差异：旧planner允许grid响应超过有效请求以满足minimum-event-power，
+新continuous capacity policy限制served不超过原请求。两者不能直接混用成同一training-policy证书。
+旧training也使用scenario-separable、可见未来的离线追索，只共享D；不是现有固定因果策略的训练证书。
+
+下一可开发对象为独立DRAFT开放前缀离线容量规划kernel：显式行动模式、共同H/same nonrolling period、
+四臂共享/分离账、cohort恢复与已观察deadline。先做解析小例和约束构建，保留旧sealed实现。
+该对象提供prefix容量证据；仅当证明它是同一完整服务对象的必要投影/松弛时，才可传递有效prefix LB。
+prefix可行解/UB不构成complete UB，后者保持null/unresolved；不据此生成完整四臂归因。
+正式行动集、因果policy class、输入支持/权重/窗口和closure仍须科学协议明确后验收。
+具体无默认模式、集合包含门与最小验收见`rq2_continuous_planner_contract_v1.md`。
+
+## 2026-09-16 continuous planner内核开发
+
+新增独立`continuous_planner.py`：任意共同H的build-only Pyomo模型、显式行动/离线信息模式、training源连续性、
+zero/single-period/open-terminal、四臂shared/B6分离账、逐cohort有效能量分配及due-hour恢复后的硬期限约束。
+58项解析构模测试及6文件193项相关回归通过；未调用solver，领域与实现pre-seal限定范围无开放finding。
+独立复核58项targeted及全部连续模型439项通过；恢复集合术语finding已修复，旧capacity诊断36组/1091条重放一致。
+minimum-event须大于原活动容差、输入限1h built-in数值；这些是开发接口限制，不改正式阈值。
+模型恢复显式标识为continuous_nonnegative_recovery_relaxation，未完成物理effective recovery及causal量化桥接；不能直接视为因果策略行动集。
+精确duration/rest离散规则进入identity/evidence；GRID_EXCESS仅旧service方程，不等于旧sealed完整模型。
+所有prefix/complete容量证书字段保持null。下一步仍需独立逐时incumbent witness与solver证据适配，
+并在明确projection关系前保持完整对象LB/UB与四臂归因unresolved。
+
+## 2026-09-16 连续规划逐时动作见证开发
+
+新增`planner_witness.py`，规格见`rq2_continuous_planner_witness_v1.md`。完整有序场景/小时候选绑定planner identity，
+以Fraction独立核验调用/恢复包络和分配守恒，再复用物理/cohort账；保留原始请求、执行投影与失败候选。
+已知deadline在到期小时恢复后验收，失败不推进已接受状态；B6通过仅属于分离规划。
+独立pre-seal发现ramp预计算系数与逐时精确乘积的边界差异，已绑定canonical模型实际系数并补反例；
+41项针对性测试及7文件234项相关回归通过（1.56s），独立复核限定范围无开放finding。
+审查方另复跑41项targeted及planner/witness合计99项通过；修复前479项全连续回归不冒充最终snapshot全回归。
+源码SHA256为`88664772c4d4a7006cae835b05de4dc80a998e048d58e36e2bb8fb5600478f78`，
+测试SHA256为`7529670a455fc98daf092912d44ef3f0300e8f52faec3d34a31ce5e1b4e2ef4d`。
+主线程另完成324组四臂两小时无恢复赋值对照，witness与模型约束检查一致；初次枚举fixture误给零义务deadline被拒绝，修正fixture后通过。
+solver原变量残差/整数性及bound适配尚未完成，全部容量界与因果训练证书仍null；本项未调用solver。
+下一项复用旧solver配置/版本/规模工具，独立重建canonical模型审计赋值，不能沿用旧24h完成期证书。
+
+## 2026-09-16 连续规划赋值审计开发
+
+新增`planner_assignment.py`，规格见`rq2_continuous_planner_assignment_v1.md`。从全部变量保存原数值/表示与错误，
+用调用方可信inputs/arm重建canonical模型，分别核验变量界、整数性和全部原约束残差；提取Fraction动作复用逐时见证。
+当前提交结构摘要覆盖域/界、约束、目标及active状态，不能冒充solver实际输入来源证明。
+raw solver outcome保留status/termination/bounds及失败原因，绑定assignment身份；全部仍unaudited/unresolved。
+独立pre-seal发现公开审计对象可重标及整数容差>=.5使验收失效，已加构造时canonical快照重算和整数容差适用性门。
+47项新测试及8文件281项相关回归通过（2.12s）；两项finding已由独立pre-seal复核闭合，限定范围无开放finding。
+审查方另复跑47项targeted及planner/witness/assignment共146项通过，原重标攻击与半整数门反例均被拒绝。
+源码SHA256：`4e1a7fdc991accb61e613d79d8a3f958362bd1cf022e590dc66642f9388296b6`；
+测试SHA256：`59992c8d93483893fc7f5464dac542336df61ef48cc9eb5db0b9f78138cac396`。
+只读版本查询为Pyomo 6.10.1、HiGHS 1.15.1、Gurobi 13.0.2；不作为新模型规模/许可证门通过证据。
+模块与单元测试不调用solver；另做4次H=2手工机制接口探测，HiGHS单线程、各限1秒，规模23变量/47约束（B6为41/88）。
+四臂raw optimal容量依次.25/.125/.375/.25，1个solution、canonical最大约束残差0，精确见证通过；报告仍raw/unresolved，
+该探测发生在审计对象重算修复前，不冒充最终组件或正式规模验收。下一项是独占build→solve→snapshot的短合成适配与真实solver证据绑定。
+
+## 2026-09-16 连续规划短求解流程开发
+
+新增`planner_short_solve.py`，规格见`rq2_continuous_planner_short_solve_v1.md`。内部fresh build、显式短预算、
+一次version-checked native solve、完整solver/problem/solution记录检查、原生label/变量解析、显式load及canonical/精确见证审计。
+前后结构/options/version、加载前初值与native/loaded变量一致性均进入证据；timeout候选可审计但区间保持未决。
+独立pre-seal先后指出solution status一致性、runner contract身份、native多记录inventory及过大容差导致负UB问题，
+均已添加限制与反例，另补problem目标数与native objective一致性。独立pre-seal限定范围无开放finding。
+最终72项targeted及9文件353项相关回归通过（3.49s），独立方另复跑72项通过（1.51s），均包含4个真实
+HiGHS 1.15.1 H=2/每次1秒小例，尚不作正式规模验收。
+源码SHA256：`566c05a85df84b7b33c1e8e60aa589aaf2f1760b16be8b0a3fc6a4651627ee23`；
+测试SHA256：`145ad7dbbce1cd5e18a1598908169bd7ecc8ffbfb09e8d1e54feb6040951b276`。
+仅在完整门通过时提供声明数值容差下的development relaxed-prefix solver区间；effective见证单列，
+physical prefix区间、complete/causal/infeasibility证书仍null，formal/security仍false。无生产seal/lease或正式运行。
+
+## 2026-09-16 下一主线：连续normal网侧构模缺口
+
+只读领域核查确认`rts_gmlc_scuc._build_context/_build_model`按len(points)构造，可由新DRAFT入口复用；
+旧`_validate_inputs`限制H<=24，旧normal prescreen强制free initial，不修改这些已存在入口与冻结依赖。
+旧fixed_initial虽连接首小时commitment/ramp，却未使用time_in_state_hours约束初始残余minimum-up/down，
+旧audit亦未覆盖。现`grid_carry`已用ceil(raw minimum)和严格非负integer age审计，因此新normal薄层须补
+R=max(ceil(minimum)-age,0)个未来同态小时；fractional age非法，不静默改合同。
+下一实现：新连续输入验证→复用旧纯context/model核心→附加residual dwell→由accepted末小时轨迹回放得到terminal carry。
+`_derive_initial_state`取第0小时并人为设置age，不可用作末态；normal baseline需覆盖无事故小时。
+normal-only不能冒充现`validate_chronological_dispatch`要求normal加contingency的全安全结果。
+逐小时corrective LP若后续复用，需保留原事件seed/start/end，不能证明事故态跨小时ramp；其正式语义仍待科学协议。
+以上尚是定位与实现入口，未生成continuous grid、未关闭输入或网络安全门。
+
+## 2026-09-16 连续normal构模与末态见证开发
+
+新增`continuous_grid_normal.py`，见`rq2_continuous_grid_normal_v1.md`：连续来源索引/时钟与完整初态绑定，
+复用旧SCUC纯核心，附加initial residual minimum-up/down，独立canonical全变量审计后回放末态GridCarry。
+normal基线覆盖无事故小时；保留发电、AC/DC flow、reserve、功率平衡和成本约束。
+末端不重置开停义务；同一输入摘要覆盖数据、初态、机组carry、时钟声明及代码依赖。
+最终六文件325项相关回归通过（16.19s）；新组件82项targeted经独立复核通过（14.06s）。
+128组三小时开停轨迹与独立carry核验一致。已有RTS源25h build-only产生22,275变量/28,004约束，未调用solver；
+仅合成2h用1线程/1秒HiGHS做开发测试。旧SCUC和chronological_dispatch无diff。
+独立pre-seal的结果重标、业务边界、摘要类型、角色类型和依赖闭包finding均已修复复核；限定范围无开放finding。
+本条不提供输入已发布、完整安全或formal-ready证据。下一项为owned normal短执行产物与事故响应连接器：
+normal先于事件求解，保留全小时baseline、原事件seed/id/start/end及1-based到zero-based显式映射。
+事故态跨小时语义、完整输入、科学协议及正式规模门仍开放；逐小时corrective不冒充跨小时安全轨迹。
+
+## 2026-09-16 连续normal短执行与事故连接开发
+
+新增`continuous_grid_candidate.py`，规格见`rq2_continuous_grid_candidate_v1.md`。owned fresh normal短求解，
+完整native记录/变量映射、显式load与fresh canonical赋值审计后，保留全小时baseline并逐小时连接原事件corrective LP。
+事件保留原seed/id/start/end，明确1-based source_hour到zero-based事件索引；无事故小时仍保存normal调度。
+候选保留normal与corrective完整赋值，native省略fixed或完全unused无界连续变量时仅作显式canonical completion；
+used变量缺失、timeout、异常及不合格bound均未决。精确版本限定的HiGHS不可行报告只用于fresh zero-DC确认，
+双报告标签为`solver_reported_exogenous_infeasibility`，数学不可行证书仍null。
+最终44项targeted通过（8.76s），五文件270项相关回归通过（23.09s）；独立pre-seal另复核44项通过（8.70s），
+限定范围未发现开放finding。四个真实H1/2/3微例包括20 MW正grid need，每例中的各次solver调用限1秒/1线程。
+未运行真实RTS多日求解，未发布production manifest或continuous输入包；旧normal与corrective源码保持。
+事故态跨小时ramp/开停/修复回接尚不由该逐小时连接器证明，完整连续安全与formal门继续开放。
+
+## 2026-09-16 多小时事故态约束内核
+
+新增`outage_trajectory.py`，规格见`rq2_outage_trajectory_v1.md`。共同horizon下建立实际出力、拓扑、
+节点平衡及跨小时ramp；normal commitment固定，forced trip仅豁免故障机组下降ramp，repair逐原event显式限额。
+actual origin与normal carry分离；源起点stationary-down不伪造新trip，中途首小时repair核对原事件与实际前态。
+目标明确为fixed curtailment vector可行性或正权重总削减，均为offline full-event-path机制问题。
+27项targeted通过（9.42s）；最后两项测试补充前四文件176项相关回归通过（26.62s），源码随后未变。
+独立pre-seal当前27项通过（9.11s）；前序小时界与计数文档已同步并完成最终复核，限定范围无开放finding。
+fresh import闭包精确匹配；旧SCUC/corrective与solver adapter无本轮修改。新事故态LP仅构模及解析赋值。
+下一项为完整事故态赋值审计、独立实际轨迹见证与实际末态交接，再接owned短求解；不能直接复用旧标量curtailment结果验收。
+repair数值、因果响应信息结构及grid_need estimand尚未注册，完整continuous输入与formal门仍开放。
+
+## 2026-09-16 事故态赋值见证与同轨迹实际交接
+
+新增`outage_assignment.py`及`rq2_outage_assignment_v1.md`，fresh重建完整事故态模型，分别审核原赋值fixed值、
+变量界、全部约束及目标有限性；同一完整problem/assignment下按绝对小时提取实际末态，normal carry单列回放。
+每次交接重审全赋值并精确核对前缀末态，不提供suffix重优化或通用新窗口origin导入。
+独立pre-seal发现运行时contract/容差漂移能改变旧ID或验收，已改为见证捕获并在入口拒绝漂移，补两项反例。
+修复后五文件211项相关回归通过（52.98s），包含33项新测试；独立复跑33项通过（25.11s），运行时合同finding已闭合，限定范围无开放实质finding。
+当前只证明固定1e-6下的给定离线赋值可行性，solver来源/最优bound/唯一grid_need/因果性均不由本组件证明。
+下一项是事故态owned短求解与native/load/canonical证据连接；正式完整输入、科学及执行门保持未完成。
+
+## 2026-09-16 多小时事故态短求解连接
+
+新增`outage_short_solve.py`，规格见`rq2_outage_short_solve_v1.md`。内部构模、规模预算、一次native求解、
+完整原生记录/变量与canonical completion、显式load及独立完整赋值审计已连接；结构/options/version前后核对。
+weighted模式只给当前offline标量目标的开发区间，fixed-vector模式只给可行赋值见证；物理见证与solver lineage分列。
+五次真实H2/3事故LP微求解各限1秒/1线程，含c=(20,20)、w=(2,3)、目标100，以及同固定向量目标0不输出调用界。
+40项targeted通过（25.46s），六文件251项相关回归通过（76.57s），独立pre-seal另复跑40项通过（25.85s），限定范围无开放实质finding。
+无解/timeout/错误只保留原始证据；不继承旧corrective的HiGHS不可行兼容认证，infeasibility certificate仍null。
+本组件未发布正式grid_need包、未建立因果调用或业务容量证书。下一主线核对业务实际功率/恢复与连续网侧可行域的连接，
+并保持主estimand、机制参数、完整输入、正式规模与执行门开放。
+
+### 下一接口缺口：业务动作和恢复后的实际节点负荷
+
+源码核对：`outage_trajectory.py`的节点负荷为`dc_requested_mw[t]-curtailment[t]`，其curtailment是净减载MW；
+`continuous_planner.py`的service power为`workload_occupancy-track_call+recovery`。前者没有后者的业务债务、
+grid/CFE分账或recovery变量，后者没有连续事故网络方程。两边各自通过不能证明组合实际功率可由网络交付。
+因此禁止将当前weighted/fixed事故解自动命名为外生grid_need后直接发布正式下游包。
+下一最小开发是显式固定业务动作轨迹的联合物理检查：用已声明MW映射得到实际DC功率，把该功率送入事故节点平衡，
+分别复核业务轨迹和连续网络赋值；首版不优化业务动作、不替用户选择grid_need向量或放宽完整硬请求。
+MW归一化基准、grid/CFE调用归属、事故向量的等式/下界/内生语义和网侧受限时恢复规则须显式合同，
+未注册部分保持机制/未决；这一接口补缺不授权正式输入生成或改变旧冻结结果。
+
+## 2026-09-16 固定业务实际功率与连续网侧联合赋值
+
+新增`business_grid.py`，规格见`rq2_business_grid_v1.md`。重放完整已提交CapacityPolicyCursor并核对预存digest，
+以显式decimal MW单位线性映射baseline/grid/CFE/recovery/actual，精确核对baseline及physical/connected界。
+新prescribed-load模型保留事故generation/response/ramp/repair/topology，用实际业务功率替换节点负荷；旧模型源码不改。
+canonical审计外另用原exact MW和Fraction计算节点平衡，均用1e-6，不以投影误差放宽门槛。
+服务适用性/原请求/shortfall与网络赋值分列；CFE-only不获grid履约证书，B6仅验证共享实际执行；完整恢复/因果网侧证书仍null。
+最终37项targeted通过（20.88s），六文件193项相关回归通过（53.05s），独立pre-seal37项通过（20.61s），限定范围无开放实质finding。
+覆盖recovery>baseline、无事故CFE减载、业务合法但网络ramp失败、generator trip/repair和支路故障约束保留。
+映射、配对和origin仍是机制假设，不提供经验风险或完整履约认证。下一项是固定动作的owned短网络可行性求解，
+然后才可按科学合同准备完整连续输入；正式数据/协议/规模/运行门保持未完成。
+
+## 2026-09-16 固定业务动作网络短求解接口
+
+新增`business_grid_short_solve.py`，详见`rq2_business_grid_short_solve_v1.md`。复用既有native/加载/canonical
+流程，对固定完整业务动作运行一次显式短预算LP，再用原exact MW独立审核节点平衡。
+最终37项新测试随六文件236项相关回归通过（115.12s）；独立pre-seal发现的矛盾solver termination误标
+lineage已修复，独立8项status测试通过（12.09s），限定范围无开放实质finding。
+真实3h恢复例取得网络赋值，4 MW/h ramp例保持unresolved，CFE短缺未被网络成功掩盖；所有证书仍null。
+本组件不生成因果grid_need或完整服务容量。正式continuous输入、训练容量/策略绑定、完整恢复及科学/执行门继续开放。
+
+下一上游缺口为因果网侧请求的信息合同：当前完整未来事故路径和完整业务轨迹只能提供offline见证。
+已整理`rq2_causal_grid_request_contract_v1.md`的逐小时可见信息、actual状态、请求/动作/调度顺序与前缀不变性验收。
+请求的净减载/独立义务含义、CFE credit、事件/修复揭示时点、dispatch选择与失败处理尚未注册；
+这些选择不能从测试fixture或当前offline区间代入。合同草案未实现generator或改变formal门。
+
+## 2026-09-16 当前事故揭示输入开发
+
+`simulate_n_minus_one_events`的raw event ID含seed，事件end还可能是horizon截断；直接交给策略会暴露未来信息，
+截断末端不能证明repair。新增`event_disclosure.py`与`rq2_event_disclosure_v1.md`，以显式完整当前N-1
+outage overlay机制推进揭示状态；initial-down onset未知、只用本地序号，repair cap仅在当前返回报告出现。
+36项新测试随63项相关回归通过（1.54s）；独立pre-seal的公开state伪造历史finding已修复并复核闭合，
+独立36项通过（1.50s），限定范围无开放实质finding。
+normal计划仍含未来source/身份，完整请求链不因此因果。
+该模块无solver、无grid_need或dispatch、无正式输入发布；科学/数据/规模/运行门继续保持。
+
+## 2026-09-16 正常计划与当前网络条件隔离开发
+
+新增`grid_information.py`及规格`rq2_grid_information_v1.md`，审计侧重验完整normal赋值，策略侧仅投影
+当前计划/上小时planned commitment、静态物理参数和独立当前报告。allowed身份不继承原source/seed摘要。
+36项新测试随四文件179项相关回归通过（16.36s），独立pre-seal另复跑36项通过（3.60s），限定范围无开放实质finding。
+给定完整assignment通过不证明选择过程未看未来，origin前发布时间仍是机制声明；receipt/确定性normal选择规则未完成。
+当前request/dispatch、真实来源、完整服务和formal门未关闭。
+继承限制：旧SCUC区域无备用资格机组时构模失败，新入口明确不产view；若后续源输入出现该情况，需backend successor修复后再推进依赖工作。
+
+## 2026-09-19 当前小时实际网络状态验收开发
+
+新增`current_grid_step.py`及`rq2_current_grid_step_v1.md`，连接隔离当前信息、当前事故揭示、prior actual carry与固定exact MW业务功率。
+包含当前节点平衡、normal response、actual ramp、trip/repair及完整赋值/Fraction审计；无有效赋值时不产生next carry。
+最终41项针对性测试通过（8.86s），修复后五文件173项相关回归通过（50.01s）。
+独立pre-seal发现fixed机组current bounds歧义已修复；独立41项通过（8.49s），限定范围无开放实质finding。
+当前没有solver入口、请求/dispatch选择、因果或完整服务证书。
+基础availability变化没有额外trip/repair合同，入口停止；当前修复cap、origin与normal事前信息仍是机制输入。
+下一项接owned当前小时短求解。科学/完整continuous输入/规模/正式执行门保持未完成。
+
+## 2026-09-19 当前小时网络短求解开发
+
+新增`current_grid_short_solve.py`，规格见`rq2_current_grid_short_solve_v1.md`。复用既有native/显式load/canonical流程，
+单次预算内求解后fresh exact审计；physical见证、solver来源与owned carry分别记录。来源异常不发布本result的next carry。
+最终37项针对性测试通过（14.28s），五文件193项回归通过（79.22s，最后两项新增前，源码未变）；
+独立pre-seal当前37项通过（13.97s），限定范围无开放实质finding。真实微求解每次1秒/1线程，无正式输出。
+当前请求生成与dispatch选择仍缺，不能从零目标任意可行解推导固定因果策略。已核对减少DC负荷可能违反下降ramp，
+标量完整调用不替代实际功率网络校验，见`rq2_causal_grid_request_contract_v1.md`新增机制反例。
+下一项为共同参考请求与各臂actual carry的自包含设计，保留原四臂估计对象。完整恢复、输入与正式运行门保持开放。
+
+具体设计候选已写入`rq2_common_reference_request_design_v1.md`，包括共同reference LP、数值selector、各臂双提交和单位分辨率拒绝。
+该页不是正式选择；CFE-only的物理验收是否进入D_C、reference定义、全小时调用范围、selector/容差与实时reserve仍须新科学协议明确。
+
+## 2026-09-19 共同参考 LP 与赋值审计开发
+
+新增`reference_grid.py`，规格见`rq2_reference_grid_v1.md`。共同reference origin为显式反事实机制，不能直接传入arm actual carry；
+继承current-step物理约束，以P_ref∈[0,B]变量最小化B-P_ref。完整赋值以exact P重建fixed-power核独立审计。
+44项targeted通过（16.41s），修复后五文件193项相关回归通过（39.15s，最后远端节点例新增前，源码相同）。
+独立pre-seal发现expected_identity类型可被自定义相等绕过，已加严格SHA256门及10个反例，独立43项通过（17.13s），finding闭合。
+限定范围无开放实质finding；模型已有非单调功率域、repair/outage及远端节点解析证据，但尚未求得/发布最小请求或reference后继。
+下一项为总预算约束下的数值selector及reference状态递推，再接共同请求适配与逐臂事务；完整科学/输入/正式运行门保持开放。
+
+## 2026-09-19 共同参考数值selector与跨小时状态开发
+
+`reference_selector.py`实现G、真实L1偏差与逐UID generation的数值词典序选择，
+`reference_grid.py`扩展受控ReferenceGridState；各级要求owned optimal、finite bounds/gap和fresh物理/目标审计，
+全部通过才提供所选exact请求和末态。完整n+2调用及最大模型规模在首次solve前检验，策略身份禁止中途变更。
+52项targeted通过（56.94s），四文件174项相关回归通过（105.29s）。独立pre-seal发现原1e-6锁定门
+可接受超过声明gap的目标漂移，已改必填lock_tolerance_mw<=absolute_gap_mw并按实际L1复算；
+独立52项通过（58.80s），finding闭合，限定范围无开放实质finding，见`rq2_reference_selector_v1.md`。
+当前仅开发短预算，20次调用硬上限对应最多18个机组UID，不等于正式规模可用。
+下一必要工作为各臂fixed-power actual selector，再接exact共同请求适配与业务/网络双提交；
+完整来源、训练容量与策略绑定、完整恢复、正式科学协议及运行门继续未完成。无新正式结果或证书。
+
+## 2026-09-19 固定实际功率数值dispatch选择
+
+新增`actual_dispatch_selector.py`，固定PrescribedDcPower，按真实L1偏差及sorted UID generation选择。
+ActualDispatchOrigin即绑定selector/solver/预算/runtime/source policy；跨小时受控state继续绑定，
+raw/reference状态不能作为actual selector前态。每级owned optimal、finite bounds/gap、fresh物理与Q目标锁定审计，
+全部通过才发布候选末态，result显式保存exact功率，见`rq2_actual_dispatch_selector_v1.md`。
+46项targeted通过（36.65s），五文件220项相关回归通过（140.85s）；独立46项通过（38.99s），
+限定pre-seal无开放实质finding。旧reference及当前网络核/短求解源码保持，git diff --check通过。
+本组件最多19个generator UID；不是正式RTS规模接口，也不提供业务/网络双提交或四臂身份绑定。
+下一项为共同请求exact单位适配，再连接各臂业务candidate与网侧候选的原子提交、失败保留和跨chunk递推。
+正式来源、训练容量绑定、完整恢复/right-censoring、科学协议与运行门保持未完成。
+
+## 2026-09-19 共同请求精确单位适配开发
+
+新增`common_request_adapter.py`，复用既有Fraction业务路径，G/U原样进入共同JOINT/shared hour。
+显式canonical decimal U绑定workload normalization身份，exact occupancy*U必须与reference baseline相等；
+仅接受完整owned selected reference。正请求被旧活动阈值消去或分离/合计活动不一致时保留原值并unresolved，
+不归零、不上调。独立pre-seal发现原正例跨training/holdout与outage seed仍被接受，已新增审计侧
+RequestSourceAudit：完整normal input与prepared绑定、重建current view，并严格匹配business split/seed/hour。
+修复后38项targeted通过（18.06s），六文件223项相关回归通过（116.46s）；独立38项通过（21.88s），
+来源finding闭合，限定范围无开放实质finding；直接digest依赖与60模块fresh-import闭包也已核对。
+详见`rq2_common_request_adapter_v1.md`。1/3请求经四臂债务及prefix导入导出保持精确；prefix本身不证明reference来源。
+下一项仍是共同mapping/ref身份的跨小时固定与业务/网络双提交，不能仅把业务成功cursor当成网侧已提交。
+正式连续输入、训练容量与固定策略绑定、完整恢复及科学/运行门保持未完成；没有正式证书或结果。
+
+
+## 2026-09-20 小时事务验证与下一步
+
+共同小时与业务/网络双状态事务已完成DRAFT开发，见`docs/model_spec/rq2_hourly_transaction_v1.md`。
+共同请求未完成不填0；业务拒绝不调用网侧求解；网络输入拒绝或求解未完成保留候选证据，两侧已提交状态均不推进。
+CFE-only物理检查与grid服务义务分别记账。独立pre-seal发现的共同发布前实现身份重验缺口已修复并复核闭合。
+修复后22项针对性通过（27.43s），独立22项通过（27.26s），八文件291项相关回归通过（128.23s，exit 0）。
+下一项为四臂连续运行协调：公平初态与固定策略核验、唯一公共链、整段预算、完整证据持久化与重放。
+当前仅为内存事务；训练容量绑定、正式规模、连续输入、完整恢复/right-censoring及科学/正式运行门仍未完成。
+
+
+## 2026-09-20 四臂连续小时协调开发
+
+`episode_coordinator.py`已连接单对象内存中的四臂共同请求链、固定策略、公平物理/业务初态、整窗最坏预算预检和逐小时预留。
+保留各臂独立停止；末小时保留恢复债务，窗口消费完不代表完整履约。完整小时输入、候选、外层提交、已开始/未完成/未开始臂分别记录。
+`hourly_transaction.py`同步区分dispatch执行异常与求解前网络输入拒绝，缺失执行结果不猜零调用。
+独立pre-seal 31项episode（44.69s）及23项hourly（32.10s）通过，findings闭合；九文件323项相关回归通过（170.08s，exit 0）。
+完整合同、开发hash和命令见`docs/model_spec/rq2_episode_coordinator_v1.md`；旧22/291项记录保留为此前版本证据。
+下一项为完整episode证据的持久化及无solver重放，再处理跨进程唯一性/恢复；现有业务prefix不能替代reference→mapping→business→actual全链。
+本组件仍为DRAFT_NONAUTHORITATIVE。完整连续输入、训练容量与四臂策略绑定、正式规模、恢复/right-censoring及科学/正式运行门未关闭。
+所有初态与未识别业务参数保持机制声明；没有新增真实运行观测、正式结果、容量/安全认证或formal-run authority。
+
+
+## 2026-09-20 完整episode重放的原生证据前置核
+
+新增`grid_evidence_replay.py`，保存原生求解记录并相对于独立提供的canonical模型重算结构、原生赋值、completion、残差、目标、状态与bound投影。
+不从JSON直接制造owned求解结果或可执行cursor；缺失原生记录保留partial/unresolved。报告显式model_relative_only，未验证来源/selector chain及外部builder效果。
+58项针对性通过（20.58s），独立58项通过（20.15s）；修复后六文件276项相关回归通过（122.60s，exit 0），限定pre-seal findings闭合。
+详细合同、命令和hash见`docs/model_spec/rq2_grid_evidence_replay_v1.md`。现有episode、hourly transaction与两个selector源码未改。
+下一项先接reference/actual专用stage及选择链重审，再完成全episode归档、无solver重放和跨进程恢复；当前不能声明完整episode持久化已完成。
+本轮新增的是机制开发证据，非真实运行观测；完整连续输入、训练容量、恢复/right-censoring、正式规模和科学/正式运行门保持开放。
+
+
+## 2026-09-20 Reference/actual选择链来源绑定重放
+
+`selector_replay.py`已实现独立输入/policy绑定、逐级canonical模型重建、目标锁定/物理重审及完整结果身份比对；公开接口只返回诊断。
+完整拒绝与partial中断分别记账；partial只验证此前prefix，不产生所选末态或恢复游标。
+独立pre-seal发现partial单级及总调用数可联动改小，现按capture阶段绑定调用数并拒绝create与post-call证据混存。
+修复后100项targeted通过（78.41s），独立100项通过（79.66s），finding闭合；七文件348项相关回归通过（223.48s，exit 0）。
+合同、命令与开发hash见`docs/model_spec/rq2_selector_replay_v1.md`。现有episode/hourly/两类selector及原生重放核源码保持。
+下一项为全episode来源绑定归档与无solver重放，连接mapping、业务动作与实际功率、预算预留及外层提交；随后验收跨进程唯一性与安全恢复。
+本组件仍为DRAFT_NONAUTHORITATIVE；没有新增真实观测、正式结果或认证。完整连续输入、训练容量与策略绑定、正式规模、恢复/right-censoring及科学/运行门仍未完成。
+
+
+## 2026-09-20 完整返回episode归档与来源绑定重放
+
+`episode_replay.py`已连接独立初态/逐小时输入、reference选择链、共同映射、四臂业务动作至exact实际功率、actual选择链及外层提交的无solver重放。
+完整返回链逐字段比对；partial只报告证据可达prefix，真实actual gap之后可保留未验证后缀；外层中断必须回滚且保留预留。
+缺返回不能冒充合法成功或零调用；重审同小时已返回臂并核known/unknown调用及started/skipped/incomplete/unattempted库存。
+最终39项targeted通过（170.63s），独立39项通过（176.58s）；限定pre-seal findings闭合。
+四文件192项相关回归通过（289.75s），对应最后interrupted-error非空门和相同依赖清单提取之前的直接前驱；最终局部变更由39项完整targeted覆盖，未重跑同范围broad。
+合同、精确hash与命令见`docs/model_spec/rq2_episode_replay_v1.md`。原selector重放、hourly transaction与episode coordinator源码保持。
+下一必要工作为跨进程唯一执行、持久化提交及安全恢复，包含尚缺invocation journal的in-flight边界；当前不提供可执行恢复游标。
+本组件仍为DRAFT_NONAUTHORITATIVE；完整数据、训练容量/固定策略绑定、正式规模、恢复/right-censoring及科学/运行门保持开放。无新真实观测、正式结果或证书。
+
+
+## 2026-09-20 本地事务日志与开发恢复
+
+`episode_store.py`已接入同一规范NTFS目录内的合作进程排他、SQLite intent/result事务、完整来源重放后的开发续跑。
+调用前commit并重新打开核intent；已有intent但无result保持unknown并禁止重跑，结果commit响应丢失通过inspect与外部保留head对账。
+每个新archive须延续此前已提交的exact历史和前态；复制目录、schema/源/提交链漂移、reparse/hardlink与不完整初始化均拒绝。
+独立31项targeted通过（360.92s），同一最终字节三文件101项相关回归通过（562.22s，exit 0），限定pre-seal findings闭合。
+覆盖真实进程竞争、五个os._exit崩溃窗、提交异常、NTFS路径及历史改写反例；进程退出测试不等于断电硬件认证。
+`episode_replay._verify`现在私有返回诊断及完整重建snapshot，公开wrapper仍只返回诊断；最新source/hash与完整命令见`docs/model_spec/rq2_episode_store_v1.md`，旧验证历史保留。
+本组件仍为DRAFT_NONAUTHORITATIVE，仅沿用120调用/60秒短预算；没有生产lease、正式运行授权或新真实观测。
+下一必要工作为正式网络规模与continuous输入适配的仓库核查/开发；完整数据、训练容量/固定策略绑定、恢复/right-censoring及科学/运行门保持开放。
+
+
+## 2026-09-20 真实RTS来源与连续选择器规模核查
+
+本地RTS-GMLC固定manifest及25条源文件校验通过：73母线、120 AC支路、1 DC支路、158机组、8784连续小时。
+当前完整UID词典序reference需160次/小时，actual每臂159次，四臂整链796次/小时；168小时预留133728次。
+这超出现有单selector 20次、episode整窗120次/60秒开发上限；是准入规模差距，不是运行失败或不可行证据。
+新增create-only库存机器记录及源码绑定，详见`docs/model_spec/rq2_continuous_source_scale_audit_v1.md`；没有solver或正式运行。
+独立只读核查确认旧源小时zero-based、新continuous one-based；旧free-boundary不能直接作为continuous incoming carry。
+既有真实H=25构模计数仅找到文字记录，缺输入/初态绑定的可重算机器产物；不重复开发normal/current/episode核心。
+下一步补真实来源组装与build-only证据，并审查158 UID规模下的执行合同；不直接放宽旧预算或替换词典序目标。
+完整连续输入、训练容量绑定、恢复/right-censoring及科学/正式运行门仍开放。
+
+
+## 2026-09-20 真实来源适配与H=25构模机器证据
+
+新增source_normal薄层，将固定RTS文件manifest、显式request/initial/carry和zero/one-based小时映射绑定；不推定初态或认证split/trajectory。
+真实H=25 build-only已落盘完整输入与依赖：22275变量/28004约束、solver_calls=0。此前只有文字计数的缺口现有可重算开发记录。
+此例使用热机全关/零出力/min-down age机制初态，未证明前序网络可行性，不能作为已发布normal plan或正式数据输入。
+24项source适配测试与normal/grid-information相关回归共142项通过（17.06s）；产物hash/时钟/映射/非认证flags核验通过。
+合同、命令、最终产物及源码hash见`docs/model_spec/rq2_source_normal_v1.md`。旧冻结文件和开发中间记录均保留。
+剩余真实输入义务包括power-block来源/split/trajectory映射及normal assignment；158 UID选择器规模、训练容量、完整恢复与科学/正式运行门仍开放。
+
+独立pre-seal最终复跑24项通过（2.04s），限定范围findings闭合；最终构模JSON与runner/adapter/计数模块及40个依赖源码hash独立核验匹配。详细证据见`rq2_source_normal_v1.md`，无official gate变化。
+
+
+## 2026-09-20 公开边缘连续窗口提取
+
+新增source_window，复用已有continuation审计，按显式split/raw起点/长度及power seed提取唯一连续chain窗口，保留原始CSV值及训练归一化依据。
+真实power seed20260822的holdout链从4440开始；split边界4392周边排除小时不能补造。workload holdout继续使用training peak，>1值不裁剪。
+四份独立25h power/workload training/holdout样例已create-only落盘并从源重建逐字段一致；不声明同钟或已注册coupling，不生成可执行episode。
+三文件64项相关测试通过（4.39s），已有输出覆盖尝试exit2且hash不变，diff检查通过。合同/命令/产物hash见`docs/model_spec/rq2_source_window_v1.md`。
+下一项连接power窗口身份到normal assembly/carry，再按登记机制处理workload功率映射。真实normal assignment、158 UID执行规模、训练容量、恢复及科学/正式运行门保持开放。
+
+公开来源窗口独立pre-seal完成：同范围64项通过（4.42s），四份记录完整来源重建及身份hash独立匹配，限定范围无开放实质finding；正式门不变。
+
+
+## 2026-09-20 电力窗口与normal来源绑定
+
+新增power_normal_binding，从外部assembly/window/config身份重建两端并核split、seed、trajectory、raw/continuous小时、timestamp、系统负荷及RTS源manifest。
+真实25小时来源对应已落盘：最大系统负荷差0.0 MW，solver_calls=0。CLI预审发现的现场身份自比较已修为必填外部expected assembly pin，首次派生记录保留。
+五文件164项回归通过（18.81s），产物身份/源码hash/时钟与非认证flags核验通过。详见`docs/model_spec/rq2_power_normal_binding_v1.md`。
+本层只证明来源对应；初态仍为机制声明，未证明前序网络可行、normal赋值或事故dispatch。
+下一项为workload→业务功率机制映射与coupling合同；真实normal assignment、158 UID执行规模、训练容量、完整恢复与科学/正式运行门仍开放。
+
+电力窗口/normal绑定独立pre-seal最终18项通过（1.56s），外部pin finding闭合，最终产物/core/test/runner hash核验一致；限定范围无开放实质代码finding，正式门不变。
+
+
+## 2026-09-20 workload数值投影与精确功率接口
+
+核查真实1632小时：普通float(raw)*250在training599/816、holdout592/810个in-range小时不满足CommonRequestMapping精确十进制恒等式；精确十进制乘积再投float对应553/543，报告分开公式和计数。
+新增显式half-even数值投影，保留raw与有符号误差；不放宽旧接口，不自动clip。250MW/12dp仅为开发声明，816training+810holdout投影后精确等式成立，6个holdout原>1保持unresolved。
+四文件97项回归通过（14.36s），含独立Decimal全1632行oracle；source-bound checked诊断重新生成与落盘逐字段一致，diff检查通过。
+详细合同、命令、最终hash与中间记录边界见`docs/model_spec/rq2_workload_projection_v1.md`。原数据和旧协议保持。
+正式精度/功率映射与raw>1策略尚未注册；CFE/coupling、业务恢复合同、真实normal赋值、执行规模及正式门继续开放。
+
+workload数值投影独立pre-seal最终19项通过（0.22s），两项findings闭合；全源精确等式/误差/6项超界及两类计数独立复算一致，最终产物与源码hash匹配。正式门不变。
+
+
+## 2026-09-20 独立来源显式配对与CFE请求暂存
+
+新增source_pair，外部pin重建同split的power/workload独立窗口，显式relative-offset机制配对；normalization绑定原训练来源、投影/功率规则。
+复用完整既有CFE target缺口公式，不乘occupancy或截断请求；grid0明示待reference填写的空槽。两个raw时钟分别+1保留各自前边界，不声称同钟。
+任一小时projection未解决则顶层hours=null，全部诊断行保留。training25h正例staged，holdout1190..1214含5个超界的25h例unresolved。
+两份DRAFT声明和create-only诊断已从源完整重建相等；五文件114项相关测试通过（17.06s），hash与diff检查通过。见`docs/model_spec/rq2_source_pair_v1.md`。
+下一项绑定pair动态baseline到normal request；旧常量250MW构模例不能替代。真实normal赋值、规模执行、训练容量、恢复与正式coupling/科学门仍开放。
+
+source_pair独立pre-seal三文件54项通过（5.46s），两份JSON/声明/pair identity及实现hash匹配，限定范围无开放实质finding；114项broad采用主线程证据，正式门不变。
+
+
+## 2026-09-20 配对动态baseline与normal输入
+
+新增pair_normal_binding，外部pair/assembly身份重建后复用power来源核查，逐小时精确校验normal DC baseline=pair投影MW=occupancy*U；私有快照隔离caller变更，未解决pair在网络来源前拒绝。
+真实H25先derive候选身份，再用外部保留pin verify并构模，22275变量/28004约束、solver_calls=0；动态baseline为0.0093335315–0.02631222675MW，原250常量声明保留。
+该范围是所选开发窗口/线性机制结果，不是功率标定、正式代表样本或履约证据。两阶段完整输入与pair逐小时等式已核验。
+五文件152项回归通过（17.84s），模式/pin/产物hash及diff检查通过。详见`docs/model_spec/rq2_pair_normal_binding_v1.md`。
+下一项需合法normal赋值及current连接；H25变量与158 UID selector调用数仍超既有短预算，正式规模合同与科学/运行门保持开放。
+
+动态normal绑定独立pre-seal限定范围无开放实质finding，最终两阶段产物/身份/输入/模式flags复核一致；独立44项对应新增2项CLI测试前库存，最终152项由主线程覆盖。正式门不变。
+
+
+## 2026-09-20 连续真实规模执行合同草案
+
+新增`docs/model_spec/rq2_continuous_scale_execution_contract_v1.md`，把前置normal、逐小时reference/actual与完整任务资源分开。
+代码核查确认episode预留不含normal及构模/审计/归档；solver TimeLimit总和不等于wall-clock、内存或存储上限。
+保留158 UID选择语义时H25四臂预留19900次，加一次normal为19901次；这是完整路径计数，不是实测耗时或成功保证。
+下一实现明确为normal-only后继入口：外部输入/规模/资源pin、完整原生证据、normal.optimal及无错witness后才接prepared/current。
+草案列出规模、求解与进程时间、RSS/存储、许可/pilot、未知调用及六步验收义务；不扩展旧GridDevelopmentBudget或EpisodeBudget。
+本轮只有文档设计及源码/产物hash/计数核对，没有solver、代码行为变更或正式门变化；所有后续实现/真实规模pilot证据仍待补齐。
+
+
+## 2026-09-20 独立normal短执行内核
+
+新增`normal_execution.py`及规格`docs/model_spec/rq2_normal_execution_v1.md`，实现外部input/execution/实际scale绑定的单次normal执行，复用原canonical模型和原生证据核心。
+保留normal.optimal且完整witness无错的接受门；可行但未最优、资源超限及返回后身份漂移保留证据并拒绝接受，缺raw的中断调用数保持unknown。
+新预算独立于旧GridDevelopmentBudget，旧selector/episode上限不变。资源记录为同步observed wall、Windows进程生命周期peak working set及core数值payload大小；不是强制终止或完整归档门。
+结果明确hard_resource_limits_enforced=false、durable_invocation_tracking=false、public_source_binding_verified=false；完整结果identity绑定raw/witness、资源及错误字段。
+当前只推进了normal-only内核，真实来源接入、独立进程/持久化监督、完整归档资源验收及真实规模normal验证仍待补齐；正式实验门保持开放。
+
+独立normal内核最终四文件216项回归通过（41.52s），独立54项targeted通过（18.54s）；完整result identity与core字节命名两项pre-seal findings闭合。
+最终source/test hash与命令见`docs/model_spec/rq2_normal_execution_v1.md`；旧candidate/episode源码hash保持，diff及新文件空白检查通过。该证据仅支持tiny同步内核，正式门不变。
+
+
+## 2026-09-20 公开来源与normal执行连接
+
+新增`source_normal_execution.py`与规格`docs/model_spec/rq2_source_normal_execution_v1.md`，把已核验assembly/pair动态baseline接入独立normal内核，前后从源重建绑定。
+连接层独立核assembly/pair/binding/input/kernel/source execution外部pins，重算绑定内容摘要；检查内核成功标志与raw/witness/调用/状态一致。
+post-source失败保留内核证据并拒绝外层接受；无完整内核返回仍记调用数unknown。来源报告以不可变JSON保存，完整返回有内容identity。
+此层仍无独立进程/持久化intent/完整归档资源监督；旧kernel及来源适配源码保持。真实H25用来源重建测试在kernel边界停止，没有真实RTS求解。
+下一步先核查已有transport_v5所属子进程监控和episode_store事务日志的复用适用性，旧冻结资源阈值/receipt/授权不继承；再补normal监督与真实规模验证。
+
+来源连接层最终独立覆盖32项（31项17.65s及真实H25来源边界1项103.14s，均exit0），主线程相关五文件124项通过（24.17s）。
+assembly/pair直接pin、绑定正文摘要及内核成功证据一致性findings闭合；最终hash/命令见`docs/model_spec/rq2_source_normal_execution_v1.md`。
+H25仅完成来源连接验证，数值内核在测试边界停止；没有真实网络normal赋值或正式运行，监督/持久化/真实规模/科学门继续开放。
+
+
+## 2026-09-20 Normal一次性开发调用日志与监督复用核查
+
+新增`normal_store.py`，复用旧episode的NTFS路径/文件身份/合作进程排他原语，独立normal schema绑定完整运行请求和源码。
+intent经SQLite DELETE/FULL事务提交并重新连接读回后才调用source-normal；已有intent禁止重试。完整encoded result及identity有独立字节门、提交与读回。
+重开可用外部genesis/current head核对丢失返回；只提供returned_record_unreplayed诊断，不恢复owned游标、不认证native来源或数值结果。
+原normal/kernel/source执行模块及旧episode存储源码保持；当前仍为同步执行，真实RTS求解与正式门未变化。
+独立复用核查确认旧transport_v4/v5缺明确HANDLE ABI、存在PID二次打开窗口且没有父死亡保护；这些原语不能直接继承到新normal监督器。
+下一项为显式wintypes、同一保留HANDLE及Job/释放握手的normal进程监督，再补完整资源/结果重放验收；旧冻结阈值、源和结果保留。详见`docs/model_spec/rq2_normal_store_v1.md`。
+
+Normal日志最终独立19项通过（26.06s），相关55项通过/1项未重复H25（55.94s）。create/head模式finding闭合，四个os._exit窗、跨进程排他、readback/提交响应丢失及完整record门有开发证据。
+最终source/test hash和命令见`docs/model_spec/rq2_normal_store_v1.md`；旧episode_store及source execution hash保持，diff通过。独立进程监督/父死亡保护、数值replay、真实规模和正式门继续开放。
+
+
+## 2026-09-20 Normal 开发子进程所有权原语
+
+新增`normal_process.py`与`docs/model_spec/rq2_normal_process_v1.md`，使用显式WinAPI ABI和创建时JOB_LIST绑定，持有同一process HANDLE，挂起核查后单次释放；Job非继承且kill-on-close，提供每进程commit门与短时deadline终止。
+真实短子进程测试覆盖父死亡三个窗口、异常退出、后代终止、内存分配拒绝、旁观进程不受影响及创建后中断句柄回收；没有solver或真实电网求解。相关process+store回归41项通过（27.47s）。
+这只完成监督链底层所有权原语，尚未连接normal专用worker/持久化请求与结果核对，也未补Job总内存/系统commit储备、数值重放和真实规模验证。正式门保持开放；旧冻结源、结果及未提交文件保留。
+
+
+Normal进程原语独立pre-seal限定范围无开放实质代码finding；规格中崩溃窗口措辞已按实际注入位置修正。最终22项独立targeted通过（1.04s），源码与测试hash见`docs/model_spec/rq2_normal_process_v1.md`。后继worker仍须补请求/环境身份绑定、同线程或并发合同、整Job静默后读取工件以及资源/日志/数值重放验收；不能把进程原语测试升级为完整监督或正式运行通过。
+
+
+## 2026-09-20 Normal worker 与一次性日志连接
+
+新增`normal_worker.py`，已把显式输入/运行pins、受限环境、挂起Job worker与原normal_store连接：父目录排他、request及launch intent持久化、worker exclusive claim、normal intent/result日志、整Job静默后parent readback。normal_process draft补同线程校验、显式环境、Job总commit与quiesce。
+worker正常退出且有完整记录仅标returned_record_unreplayed；零退出无结果、超时、中断和提交后异常退出均不升级成功，也不自动重试。下层normal_store/source execution/kernel及旧冻结transport未变。
+主线程process+worker+store相关回归68项通过（57.92s），含tiny 1秒/1线程HiGHS、三类intent/result崩溃窗、worker重复claim、环境漂移及未静默禁止读结果。正例来源边界为明确synthetic stub；固定worker入口另验证真实来源缺失拒绝，未执行RTS求解。
+下一项为持久化normal结果的独立数值重放；系统commit储备、父进程/整个任务资源与磁盘验收、真实规模normal/current/四臂及科学注册门仍开放。详见`docs/model_spec/rq2_normal_worker_v1.md`。本轮非正式开发，不产生seal/receipt/正式运行授权。
+
+
+Normal worker连接最终相关回归69项通过（62.41s），最新24项worker独立targeted通过（34.95s）。实际argv及摘要已加入launch并由worker核对sys.orig_argv，claim/Observation绑定launch摘要；旧进程规格明确区分历史快照与当前合同。限定范围预审finding已修复；完整资源验收、独立数值replay及真实规模证据仍待补齐，详见`docs/model_spec/rq2_normal_worker_v1.md`最终验证记录。
+
+
+worker监督后续补齐两项实测证据：Job合计内存160/256 MiB成对控制，以及worker已提交intent后的集成父死亡窗口。新增3 cases主线程6.57s、独立6.54s均通过；限定范围pre-seal findings闭合。它们补充此前69项相关回归，仍不构成normal数值重放、真实规模或正式门通过。最终source/test hash及精确命令见`docs/model_spec/rq2_normal_worker_v1.md`。
+
+
+## 2026-09-20 Normal 保存结果独立数值重放
+
+新增`normal_replay.py`与`docs/model_spec/rq2_normal_replay_v1.md`：以外部record/result/store/replay/input/execution pins核对持久化内容，前后重建来源绑定，固定normal模型复用既有纯数值replay核，复核赋值/目标/残差/界投影，重新计算完整normal witness并核对接受标志。store入口要求独立保留的当前结果head，不以genesis替代。
+初步targeted29项通过（49.87s）。生成tiny记录后禁止solver factory、normal/source执行入口，重放无native求解；重算哈希的赋值/目标/资源/标志篡改仍不能接受。partial/timeout/缺返回保留未决状态，不恢复执行游标、不认证原生来源或最优性。
+旧normal/source/kernel/store/worker/native replay源未修改。相关回归与独立预审继续核验，正式门保持开放；完整资源、真实规模normal/current/四臂、恢复/风险/科学注册仍待对应证据。
+
+
+## 2026-09-20 Normal 数值重放最终开发验证
+
+normal_replay 已补齐资源拒绝的精确计数、保存计时的 float 类型与偏序、lifetime peak 单调性、spec/budget/scale 编码类型，以及 admission/native/canonical 构模计时数量检查。保持成功标志并重算哈希的篡改反例也被拒绝；来源后检失败在来源恢复后仍保持 unresolved。
+最终四文件相关回归 177 passed in 148.23s；独立 targeted 46 passed in 82.15s。限定范围 pre-seal findings 已闭合，完整命令和最终 source/test hashes 见 `docs/model_spec/rq2_normal_replay_v1.md`。旧 normal/source/store/worker/native replay 文件哈希保持。
+以上支持 tiny 合成网络及显式来源 stub 的记录一致性，不认证 native 执行历史、资源测量或真实 RTS 求解，不生成 seal、receipt 或正式授权。
+下一必要工作为整个 normal 任务的资源验收：父进程输入准备/归档/重放预算、系统 commit 储备、临时文件与归档磁盘边界及故障停止规则。已有 worker 的子进程 Job 限制和单条 payload 字节门不能替代这些项目；真实规模 normal/current/四臂、恢复/右删失及科学参数注册门继续开放。
+
+
+## 2026-09-20 Normal 主机资源余量观测原语
+
+新增 normal_resources.py 和 docs/model_spec/rq2_normal_resources_v1.md：固定 Windows ABI 观测系统 commit 与 caller-available 磁盘余量；明确追加需求/储备，同卷需求合计、储备取最大、采样可用空间取最小。外部 identity 绑定目录 dev/ino/volume GUID、预算与源码，前后检查；失败不返回 sufficient 报告。
+相关 resources/process/store 回归 82 passed in 29.79s；独立 targeted 35 passed in 1.86s，限定范围无开放实质代码 finding。测试包括真实只读 Windows 调用和目录替换，以及模拟边界、配额可用量不足与 API 故障；没有 solver 或磁盘/内存压力运行。
+本项仅补只读观测及声明比较，未接入 worker，未创建资源预留或硬配额。下一项是完整 normal 任务监督连接：内部固定调用 observer，覆盖输入准备、执行、审计、归档及重放，明确父进程与子进程预算、专用临时目录、持续观测/停止及写入失败保留规则；不能信任 caller-supplied observation。真实规模、科学注册与正式运行门保持开放，旧冻结代码、结果及未提交文件保留。
+
+
+## 2026-09-20 整任务来源准备入口与监督范围核查
+
+新增 normal_task_inputs.py 及规格 docs/model_spec/rq2_normal_task_inputs_v1.md，以有界三文件声明与独立 assembly/input/pair/binding/scale pins 重建完整来源输入；保留机制初态和 build-only 角色，实际重建 binding，前后核声明及依赖。准备结果沿用 owned construction，不能直接构造或 dataclass.replace；不形成执行授权。
+最终相关回归 99 passed, 2 deselected in 21.55s；独立短测 33 passed, 1 deselected in 4.17s。最终真实 H25 来源准备单独 1 passed in 52.13s，内部准备50.381511秒，solver factory禁止调用；assembly/binding保持原固定产物身份，未重新构模或获得真实normal赋值。两项限定pre-seal findings已闭合，最终哈希/命令见规格。
+监督核查确认旧worker的输入deepcopy/encode/store初始化位于Job外，replay也未纳入。既有scale execution contract已补两阶段task设计：受限execution/archive child，全Job静默后保留结果pins，再起独立replay child；尚缺task process owner、wire-level pin捕获、固定runtime reserve采样/停止、私有scratch及phase日志故障验证。旧60秒process/worker和30/60秒kernel预算保持；不得把一次准备耗时当引擎pilot或调阈值依据。正式实验门仍开放，旧冻结结果与未提交文件保留。
+
+
+## 2026-09-20 Normal 整任务进程监督原语
+
+normal_task_process.py 已实现独立任务预算、固定 host reserve 采样、deadline/资源/API/身份失败停止，以及整 Job 无活动成员和直接子进程已退出的共同确认；记录 process/Job peaks，不推断 solver 状态。运行中只比较 reserve，避免重复计入已分配需求。公开 normal_task_child contextmanager 覆盖初始化、交接和 finally 清理，直接构造拒绝。
+
+主 targeted 34 passed in 6.78s；task process/process/resources 相关回归 97 passed in 7.81s；独立 targeted 34 passed in 5.91s。初始化前后与 base constructor 返回中断、父死亡、资源竞态等限定范围 pre-seal findings 已闭合。最终 source/test hashes 和命令见 docs/model_spec/rq2_normal_task_process_v1.md。旧 normal_process 字节与 60 秒限制保持。
+
+本项尚未接入 phase intent、来源准备、normal execution/store 或 replay。下一项为整 Job 静默后 controller 有界读取并独立保留归档 lineage pins，再连接 execution/replay 两阶段，避免在 controller 重建完整 assembly。磁盘是采样式停止而非硬配额；完整任务故障验收、真实规模求解、四臂恢复/右删失及科学注册门继续开放。没有正式运行，旧冻结协议/结果和所有现有未提交文件保留。
+
+
+## 2026-09-20 Normal 归档身份有界捕获
+
+新增 normal_archive_capture.py 与规格 docs/model_spec/rq2_normal_archive_capture_v1.md。Controller 可在独立确认 Job 静默后，复用旧合作式 lease，在同一只读 SQLite 事务中核精确 schema/header/intent，分块哈希 opaque record，沿旧公式保留 current head 和 record SHA；result identity 仅保留 external claim，交原 replay_normal_store 核验。此入口不加载完整 assembly/赋值，不把不透明字节一致性提升为数值或 native 认证。
+
+数据库/metadata/record/lock 有明确读取边界；残留 sidecar/reparse、来源/文件漂移、扫描/分块 deadline 和中断均拒绝返回 pins。无 result 仅 unused/unresolved_intent，不推断原生调用次数、不重试。只读指数据库连接，原 lease 仍 r+b 打开锁文件；deadline 是合作式检查，不是硬实时 I/O 保证。
+
+capture/store/replay 相关回归 94 passed in 235.45s；之后补 lock/sidecar 边界，最终 targeted 31 passed in 30.07s，独立 targeted 31 passed in 31.66s。限定范围 pre-seal findings 闭合；最终 source/test hashes 与命令见规格。旧 normal_store、normal_replay、episode_store、normal_process 源码哈希保持，未启动真实 RTS 求解或正式实验。
+
+下一必要工作为 compact request 与两阶段 phase controller/worker：把来源准备、normal 执行/归档放入受限 Job，持久化 intent/launch/claim，Job 静默后捕获 pins，再启动独立重放 Job。需同时补私有 scratch、父进程预算与准备/执行/结果/重放各故障窗口；claim 来源与 Job 静默不能由本 capture 返回值自证。真实规模 normal/current/四臂、完整恢复/右删失和科学注册门继续开放，旧冻结协议、结果及现有未提交文件保留。
+
+
+## 2026-09-20 Normal compact request 与两阶段固定 worker
+
+新增 normal_task_worker.py 和规格 docs/model_spec/rq2_normal_task_worker_v1.md：小型 typed request/64 KiB phase packet 不携带 assembly 或赋值，绑定来源/normal/replay pins、环境、实际模块和 Python 可执行文件。worker 验证 controller 预存 intent/launch 与实际 PID/creation FILETIME/argv/cwd/environment 后才 exclusive claim，再进入固定 prepare→旧 store execute 或重新 prepare→旧 replay 路径。完整 replay 诊断经字节门/fsync/readback 后才写 small completion；异常保留 intent/claim，不能自动重试。完成记录仍是 worker 声明，不是 controller 数值验收。
+
+相关 task_worker/task_inputs/oldworker 回归 81 passed, 1 deselected in 170.68s；之后补准备后运行上下文复核，最终 targeted 26 passed in 78.71s，独立 targeted 26 passed in 76.31s，限定范围 pre-seal findings 闭合。测试包括显式 tiny 来源 stub 的 execute→capture→独立 replay（replay 禁止 solver），运行上下文漂移、写入失败、丢失 completion，以及真实固定 argv 挂起 Job 的缺失来源负例。真实入口短测试初始被 host commit 准入拒绝，收紧本测试 process/Job 上限后通过；不能推断真实规模资源充足。最终 hashes/命令/准确证据边界见规格，六个复用模块字节保持。
+
+下一项是父 controller：外层排他、phase 顺序、专用 scratch、父进程/Job/磁盘预算、release 前持久化 intent/launch、Job 静默后的独立小文件与 capture/report 核验，并补各父死亡/写满/SQLite/fsync 窗口。当前尚未有完整任务 supervisor 或真实 RTS 求解，normal/current/四臂真实规模、完整恢复与右删失、科学注册及正式启动门继续开放。旧冻结协议、结果和现有未提交文件保留。
+
+
+## 2026-09-20 Normal 整任务顺序 controller
+
+新增 normal_task_controller.py 与 docs/model_spec/rq2_normal_task_controller_v1.md，连接现有 compact worker、受限 Job、opaque capture 与 numerical replay。外层 lease、专用 scratch、release 前 intent/launch、进程身份和整 Job 静默核验、独立保留 pins、完整有界报告及 replay 后第二次 capture 已接通；报告复读与 archive pins 共同检查最终归档一致性。成功持久文件仅为最终写入前验证快照；API 在最终写入/回读与 elapsed 检查后才返回开发流程完成。数值报告继续区分 accepted/unresolved/inconsistent，全部正式权限标记为 false。
+
+资源合同保留 process/Job commit 限制、host reserve 采样、父进程 lifetime working-set 观测与有界目录盘点；没有硬磁盘配额或整任务资源认证。故障保留已有 intent/claim/store/report，不自动重试。测试使用明确 tiny synthetic 来源与真实 Windows Jobs；未修改入口的缺失来源负例另测。真实公共数据、机制参数、synthetic fault injection 分开标注。
+
+本轮曾完成 26 项基础测试、56 项故障扩展测试；最终源码、相关回归、独立 targeted 计数与 hashes 以 controller 规格的开发验证记录为准。公共数据交付包 6 个输出绑定、复合诊断包 7 个文件哈希和 8 个复用模块源码哈希核验一致。连续多日、恢复债务、四臂及拒绝动作/诊断已有开发产物继续复用。
+
+下一必要工作为真实来源 normal 整任务受限端到端验证，以及 normal witness 到 current/episode 的输入与时序交接；不能把 normal terminal carry 当成 incoming origin。真实规模 full-UID selectors/四臂资源、完整恢复与右删失、风险分母和科学注册/正式启动门仍开放。本次不变更旧冻结协议或结果，不清理现有未提交文件。
+
+
+Controller 最终验证补记：相关回归 186 passed in 289.44s；最终单时钟判定修复后定向 5 passed, 56 deselected in 27.79s；独立最终 targeted 61 passed in 133.65s。首次定向复测遇到实时 host commit 余量拒绝，原预算重跑通过，详情见规格。限定范围 pre-seal findings 闭合，不关闭真实规模、整任务资源或正式门。最终 source/test hashes 见 docs/model_spec/rq2_normal_task_controller_v1.md。
+
+
+## 2026-09-21 真实来源 H25 整任务首次短验证与诊断缺口
+
+已新增固定开发声明 configs/rq2_normal_task_h25_development_v1.DRAFT.yaml 与薄入口 experiments/audit_rq2_normal_task_v1.py；入口默认只读，显式开发调用绑定 exact YAML/script SHA。主/独立声明测试均7项通过；沿用原机制输入，固定HiGHS单次1秒/1线程，Job/process各768 MiB，未扩展科学或正式预算。
+
+首次实际调用已终态，controller为unresolved_task_attempt/execute，25.562秒；子进程exit1，整Job静默true。仅保留request/intent/launch/claim及观测，没有normal store/completion/capture/replay。process/Job峰值接近声明cap，runtime host reserve没有拒绝；但无child traceback，不能认定具体异常/limit触发，也不能推断solver_calls=0或数学不可行。此次不重试、不换root、不放宽预算。完整22工件hash索引在 results/tables/rq2_normal_task_h25_audit_v1_non_authoritative/summary.json，合同和日志位置见 docs/model_spec/rq2_normal_task_h25_development_v1.md。
+
+当前下一必要工作已收敛为独立零solver来源准备诊断：同source pins和768 MiB上限，记录prepare/assembly/binding阶段与有界异常栈，先区分来源准备失败与后续执行失败。诊断不会追认原attempt确切异常。normal真实来源成功、current/episode交接、四臂/恢复/右删失、资源与科学注册/正式启动门继续开放。旧冻结协议/结果、已有未提交文件和失败attempt全部保留。
+
+
+## 2026-09-21 来源准备探针定位身份编码 MemoryError
+
+独立零solver prepare probe已执行一次并终态；保持原source-request pin与768 MiB process/Job cap，117秒phase+3秒quiet。实际11.016秒exit1、Jobquiet=true，无host reserve/API error；保留阶段before_prepare→source_assembly_enter，捕获本次probe的MemoryError，栈为continuous_grid_normal.normal_input_identity→_digest→_encode。详见 docs/model_spec/rq2_normal_task_h25_development_v1.md 及 results/tables/rq2_normal_prepare_probe1_non_authoritative/probe.summary.json。13项新probe证据另存prepare_probe1_evidence.json；原attempt1及22项hash均保持。此结果不追认attempt1异常，不认证cap唯一因果或数学不可行。
+
+据此新增独立identity_stream.py原语，流式处理dataclass/序列，mapping/set保留旧repr排序与局部物化。内容字节/hash差分与合成内存分配测试26项通过；与旧normal相关回归108 passed in14.98s。它尚未接入任何执行路径，合成编码峰值改善不等于真实H25资源通过。旧normal源码将自身hash纳入依赖，因此后继接入必须显式绑定新实现并保留旧声明/结果，不能静默更新原pins。
+
+下一必要工作为受限真实来源下验证新编码的身份等价性和内存表现，再设计明确绑定实现的接入；来源准备、normal/replay/current/四臂真实规模与恢复/右删失、科学注册和正式启动门继续开放。
+
+
+流式原语最终补记：独立相关回归108 passed in14.70s，限定pre-seal无开放实质finding；source/test hashes及命令见docs/model_spec/rq2_identity_stream_v1.md。独立核验确认原22项及新probe13项bytes/hash均匹配。后继先清点source assembly/validate、pair binding、normal execution/store/replay全部身份调用点，设计显式绑定新原语与adapter bytes的后继合同，再开展真实H25身份/资源验证；不把局部替换当作完整接入，不复用旧execution pin宣称新实现已执行。
+
+
+## 2026-09-21 流式来源组装后继与全链清点
+
+已新增独立 source_normal_stream.py（DRAFT_NONAUTHORITATIVE），在外部 implementation pin 下复用来源校验/loader及原输入验证，流式计算完整年度输入摘要；新类型分别保留 normal 内容、旧 assembly 内容对照、新实现和新 assembly 身份。旧代码、旧执行 pins、失败 attempt 和 probe 保持，不能用新候选冒充旧执行记录。接入清单已覆盖 prepare、pair/power binding、kernel build、execution/store/replay，以及 common_request_adapter/grid_information/outage_trajectory，详见 docs/model_spec/rq2_source_normal_stream_v1.md。
+
+主相关回归165 passed in17.91s，含33项新适配器测试；原 attempt 的22项、probe的13项文件bytes/hash核验一致。独立审查提出的loader原对象冗余引用已在hash前释放，并用weakref测试验证。本次仅完成来源候选层，尚未接入整任务，未执行真实H25或solver。下一必要工作是独立受限零solver H25来源组装的内容对照与资源验证，再依清单接通后继链；完整prepare/normal/current/四臂资源、恢复右删失、科学注册及正式启动门继续开放。
+
+
+## 2026-09-21 真实 H25 流式来源组装验证完成
+
+独立流式来源候选已取得真实数据证据：probe2保留完整8784小时RTS数据，25小时请求对应raw0..24/source1..25；normal内容摘要d9959966…与旧assembly内容reference626f7dbe…均复现，新assembly身份689ac1bc…独立记录。source阶段8.862秒，进程10.89秒exit0、Job静默true，51次采样；process/Job commit峰值339828736/341061632 bytes，低于原768 MiB cap，working-set峰值362663936 bytes，无reserve/API error，solver_calls=0。机制初值与workload-power映射标签保持，不转为真实观测。
+
+先前probe1在来源开始前exit1；只读复算定位到环境dict插入序导致父子进程身份不同。保留v1/probe1全部字节，v2只修复环境指纹重建并验证实际键值，独立55项通过。完整证据与边界见docs/model_spec/rq2_source_normal_stream_v1.md；probe2 root为results/tables/rq2_stream_source_probe2_non_authoritative，13工件hash索引为results/tables/rq2_normal_task_h25_audit_v1_non_authoritative/stream_source_probe2_evidence.json。
+
+下一必要工作已从“验证来源流式编码”推进到后继power/pair binding与prepare整链接入，须保留独立实现pins并核验重复重建/快照的资源。此次只证明一次来源候选内容复现与受限进程观察，未证明完整prepare、normal执行/replay、current/四臂资源、完整恢复或右删失口径；科学注册与正式启动门继续开放。原22+13+11项历史工件及新13项bytes/hash均核验一致，未清理仓库。
+
+
+## 2026-09-21 流式 binding 与 prepare 整链接入完成（开发态）
+
+已新增pair_normal_stream.py与normal_task_inputs_stream.py，贯通pinned机制声明→流式来源组装→来源重建→power窗口对应→pair业务baseline→完整prepare。来源重建的owned快照供power和baseline共用，省去额外年度assembly deepcopy；旧内容报告canonical JSON与原saved binding逐字节核验，新source/binding/prepare指纹独立绑定。旧full-input hash/binder不在新prepare路径中，旧执行链未被修改。
+
+相关回归140 passed,1 deselected in19.52s；独立binder+prepare targeted45 passed in14.71s，限定pre-seal无开放实质finding。排除项为旧uncontained真实H25准备测试，未用tiny结果声称真实资源通过。规格、命令、hash与边界见docs/model_spec/rq2_normal_task_inputs_stream_v1.md。原22+13+11+13项工件bytes/hash保持。
+
+下一必要工作为同768 MiB开发预算下的一次受限零solver真实H25完整prepare验证，重点观察caller assembly与rebuilt同时存在的峰值，再接normal execution/store/replay及current/四臂。科学参数仍按机制假设标注；来源/prepare开发进展不关闭恢复右删失、风险分母、科学注册或正式启动门。
+
+
+## 2026-09-21 真实 H25 完整流式 prepare 验证完成
+
+受限零solver探针已终态成功：prepared_content_reproduced，errors=[]，完整8784小时数据保留，旧normal/assembly/binding内容全部复现，并单独记录新prepare/binding identities。prepare本体31.440253秒，进程33.734秒exit0、Job静默true，156次采样；process/Job commit峰值474931200/476151808 bytes，working-set峰值496750592 bytes，无reserve/API error。原768 MiB上限保持；initial state/workload-power等机制假设仍未变成真实观测。
+
+probe主相关114项、独立69项通过后运行一次；15项证据索引为results/tables/rq2_normal_task_h25_audit_v1_non_authoritative/stream_prepare_probe1_evidence.json，详细命令、hash和分段耗时见docs/model_spec/rq2_normal_task_inputs_stream_v1.md。历史22+13+11+13项与本次15项bytes/hash均匹配，旧失败记录/源码全部保留。
+
+下一必要工作推进到normal模型build/audit与数值执行的流式后继，覆盖内部旧normal identity调用，随后连接store/replay/controller与current/四臂。此次只验证完整输入准备，未求解normal或验证assignment，whole_task_resources_verified/formal_result均false；恢复右删失、风险分母、科学注册及正式启动门继续开放。
+
+## 2026-09-21 流式 normal 模型与同步内核开发
+
+新增 continuous_grid_normal_stream.py 与 normal_execution_stream.py，保持旧模型和数值门，另绑新实现及执行身份。合成 H1/H25/H49 的完整变量、约束线性系数与目标逐项对比一致，assignment 故障与原生求解失败语义验证通过；旧执行 pin 不能授权新内核。两项新模块及旧模型/旧内核/identity_stream 相关回归共242 passed in63.40s。详见 docs/model_spec/rq2_normal_execution_stream_v1.md。
+
+本轮仍为 DRAFT_NONAUTHORITATIVE，真实来源证据止于完整prepare；新内核尚未接入来源执行/store/replay/controller，未证明真实 H25 assignment 或整任务资源。下一必要工作为消费独立新 source/prepare/binding pins 的来源执行后继，随后完成持久化和独立回放。历史五批74项工件bytes/hash保持一致。科学注册、恢复右删失及正式启动门保持开放。
+
+独立只读 R3 pre-seal 审查：两新文件80 passed in32.28s，未发现需返工的实质finding；同步检查不能替代Job硬资源限制，外层来源绑定与整任务资源仍待验证。此次无official verdict/receipt。
+
+
+## 2026-09-21 流式来源执行与声明入口开发
+
+新增 source_normal_execution_stream.py 和 normal_declared_execution_stream.py，接通外部 pinned request→完整流式prepare→source/pair重建与binding→normal kernel→返回后声明及实现链复核。tiny三小时合成网络经过实际HiGHS求解，objective=120、terminal carry.source_hour=3；公开loader/package仍为synthetic fixture，不能视为真实RTS规模或业务观测。
+
+新入口要求独立的新source/binder/assembly/binding/request/kernel/source execution pins，旧内容reference不授权新执行。post-source或post-declaration失败保留已返回数值证据及调用数，缺完整owned返回保持unknown，无自动重试。详见 docs/model_spec/rq2_source_normal_execution_stream_v1.md。
+
+下一必要工作为把声明入口接入已有一次性intent/result日志的流式后继，并实现嵌套证据独立replay，再接controller/worker Job监督。真实H25证据仍止于prepare，whole-chain资源、current/四臂、恢复右删失、风险分母、科学注册和正式启动门继续开放。旧五批74项诊断工件bytes/hash一致。
+
+最终相关回归201 passed,1 deselected in155.96s，排除旧未受Job监督的真实H25测试；独立只读R3 pre-seal审查无开放实质finding。详细测试与工件SHA见上述规格，未生成official verdict/receipt或正式运行授权。
+
+
+## 2026-09-21 流式声明一次性日志开发
+
+新增 normal_declared_store_stream.py，接入完整声明执行入口。日志只持有小型pinned request，在独立intent COMMIT及readback后才运行prepare/source/kernel，保存完整DeclaredStreamingNormalResult嵌套证据。沿用NTFS lease和SQLite事务合同，新schema/application ID与旧日志分离。首轮19项通过，覆盖四个真实进程退出窗口；新增声明漂移、wrong返回、intent早于prepare和完整wire核验，详见 docs/model_spec/rq2_normal_declared_store_stream_v1.md。
+
+当前日志只提供一次性调用与内容完整性，numerical_evidence_replayed/native_execution_authenticated/formal_result仍false。下一必要工作是独立重建并回放三层nested result的流式replay，再接worker/controller Job监督与真实H25资源验证。旧五批74项诊断工件bytes/hash一致；current/四臂、恢复右删失、风险分母、科学注册和正式启动门继续开放。
+
+主相关回归81 passed in202.15s，独立新日志26 passed in100.65s；限定R3 pre-seal审查无开放实质finding。源码、测试hash及完整命令见日志规格，未生成official verdict/receipt或正式运行授权。
+
+
+## 2026-09-21 流式声明日志独立回放开发
+
+新增 normal_declared_replay_stream.py，从独立pinned request重建prepare/source/binding，解析声明→source→kernel三层wire，零solver复核原生数值、完整assignment/witness、调用记账和timing/peak/payload。store入口要求独立current head，genesis不授权数值回放。新增拒绝词表与静态错误投影、prepare role消费门，修复伪造降级拒绝可被误判一致的pre-seal finding。详见 docs/model_spec/rq2_normal_declared_replay_stream_v1.md。
+
+结果仍区分archive consistency与原生/测量认证，native_execution_authenticated/resource_measurements_authenticated/resume_authorized/formal_result均false；历史动态异常只能核记录相容性，不认证其实际发生。下一必要工作是接入固定worker、归档捕获及controller的流式schema后继，在Job内覆盖执行与独立replay，再验证真实H25全链资源。旧五批74项工件bytes/hash一致，current/四臂、恢复右删失、风险分母、科学注册和正式启动门继续开放。
+
+验证：78项全组通过后，末次phase审查补2项反例明确复现失败，修复后受影响16项通过；旧normal/native回放相关104项通过。各批范围、命令和最终源码/测试SHA见回放规格，不把前一候选的通过结果冒充最后修复的直接证据。
+
+末次独立只读R3 pre-seal受影响6项通过，最终SHA一致，两轮findings闭合；未生成official verdict/receipt或打开正式门。
+
+
+## 2026-09-21 流式声明归档有界捕获开发
+
+新增 normal_archive_capture_stream.py，复用原budget和64 KiB只读分块捕获，连接新声明日志schema/application ID与declared execution pin。result claim仍opaque，必须经独立replay核验。补齐unused时header执行pin交叉核验，新增反例先复现失败再修复；双向旧新schema隔离、禁止prepare/model/solver和完整capture→replay链已有tiny测试。
+
+相关回归91项通过后完成上述修复，最终新capture全组36项通过；旧五批74项工件bytes/hash一致。详细命令/范围/SHA见 docs/model_spec/rq2_normal_archive_capture_stream_v1.md。下一必要工作为固定worker及controller接入，必须保留prepare后求解前的packet/cwd/environment/argv与身份复核位置；当前尚未实现这一连接。真实H25全链、Job资源、current/四臂、恢复右删失、风险分母、科学注册和正式启动门继续开放。
+
+独立只读R3 pre-seal全组36项通过，最终SHA一致，finding闭合；未生成official verdict/receipt或运行授权。
+
+## 2026-09-21 流式固定 worker 与求解前运行态复核
+
+新增 normal_task_worker_stream.py，把独立 compact pins、一次性声明日志和独立 replay 接入固定 execute/replay 分支。声明入口和日志的未seal draft 增加 before_source 检查位置；固定worker在 intent COMMIT/readback→prepare 后、source求解前核对 packet/cwd/environment/argv/intent/launch/claim及身份。检查失败保持 unresolved intent，不求解、不重试。旧worker/controller及冻结输入和结果不变。详见 docs/model_spec/rq2_normal_task_worker_stream_v1.md。
+
+相关回归118项通过，另6项因新增测试漏传重开日志 required expected_head 而失败；修复测试后6项重跑通过。独立replay相关8项通过。完整命令、分批范围与当前SHA见规格，不把此记录写成最终124项整组通过。五批74项历史工件bytes/hash一致。
+
+下一必要工作是流式controller后继：消费新的declared/source/native嵌套报告，保留两Job顺序、静默后独立双capture及完整资源门。真实H25观测仍止于完整prepare，尚无新全链assignment或整任务资源证明；current/四臂、恢复右删失、风险分母、科学注册与正式启动门保持开放。
+
+独立只读R3 pre-seal审查最终worker全组29 passed in125.44s，journal callback定向2 passed,26 deselected in6.39s；最终源码/测试SHA一致，无开放实质finding。该结论不认证Job membership、整Job静默或资源上限；controller接入和真实H25全链仍待完成。未生成official verdict/receipt或运行授权。
+
+## 2026-09-21 流式controller与真实H25全链开发观测
+
+新增 normal_task_controller_stream.py，完成declared/source/native三层报告核验、顺序两Job、静默后独立双capture和完整报告复读。pre-seal发现未知/重复错误及遗漏native错误投影的降级报告漏洞，四项反例先复现失败再修复；最终报告23项、controller与runner68项、相关134项通过；独立报告/双Job24项及runner7项通过，finding闭合。详见 docs/model_spec/rq2_normal_task_controller_stream_v1.md。
+
+随后新目录真实H25单次短开发验证完成：总274.39秒，execute151.094/replay119.812秒，均exit0且整Job静默，Job commit峰623742976/624693248 bytes，低于原805306368上限。capture前后pins一致，replay archive_consistent=true/errors为空，但数值仍unresolved：native calls=1、solution_count=0、aborted/maxTimeLimit；normal总耗时67.5576574秒超过60秒门。没有有效assignment或terminal witness，不能推断数学不可行，也不报告全四臂/恢复/工程认证。初态和业务功率映射仍为机制参数。
+
+旧五批74项工件保持；新增结果索引 stream_task_attempt1_evidence.json 绑定54项，SHA4f5c61bc8f4ebfa615448cfbbb29c45ae25409e8d290c8583847ae9aff001f1c。原始观测、预算和解释见 docs/model_spec/rq2_normal_task_stream_h25_development_v1.md。相关代码与声明现被真实工件绑定，后续使用明确后继，不覆写本次记录。
+
+下一必要工作：定位normal preflight/pipeline和末端检查的时间开销，保持全部身份/数值/资源门；随后取得有效normal assignment，再接current/episode。whole_task_resources_verified仍false；完整UID/four-arm、恢复右删失、风险分母、科学注册及正式启动门继续开放。
+
+
+## 2026-09-27 真实H25零求解组件成本定位
+
+normal组件探针已完成：最终相关193项通过，独立审查发现并闭合父进程汇总前后实现漂移窗口，两项反例先失败后通过。一次真实H25测量保留完整8784小时来源和原768 MiB上限，正常退出且Job静默，86.125秒，Job commit峰476012544 bytes，solver_calls=0，model_builds=1；normal/assembly/binding内容复现。详见 docs/model_spec/rq2_normal_component_cost_probe_v1.md。
+
+完整input identity两次分别10.223881/9.739884秒，model build10.610566秒（含内部校验），完整prepare47.835529秒。下一必要工作为保留逐字节编码与全部检查位置的身份编码性能后继；本次测量未细分验证/递归编码/SHA成本，不能直接外推旧67.56秒或声称60秒门已过。尚无有效normal assignment，随后仍须完成current/episode与完整UID/four-arm资源验证。
+
+29项证据索引 normal_cost_probe1_evidence.json 位于 results/tables/rq2_normal_task_h25_audit_v1_non_authoritative，SHA7f0d5fa4fb3fce23588bbb117bfa319ca3abdb1f987e609ff6a240ac924a9e50。六批历史128项索引绑定、公开数据交付包7文件、复合诊断7文件与16依赖核验一致；连续多日、恢复债务、四臂、拒绝动作与诊断已有产物继续复用。机制初态与功率映射仍非真实业务观测；恢复右删失、风险分母、科学注册及正式启动门继续开放。
+
+
+## 2026-09-27 身份编码后继的真实等价与性能对照
+
+新增identity_stream_fast.py，保持原JSON字节、float hex与repr排序，完整重算验证/依赖，不缓存输入或摘要。相关新旧identity/cost回归157项通过，独立identity41项通过。新增受限对照probe相关170项及独立差分14项通过；旧实现和既有工件全部保留。
+
+真实H25一次零solver对照已完成：四次old/fast内容摘要一致；旧identity9.834936/9.786799秒，新6.865299/6.754984秒，本次耗时减少30.19%/30.98%。Job98.625秒、exit0且静默，commit峰475328512 bytes，仍在原768 MiB上限内。数值模型仍使用旧kernel，未验证新kernel或60秒门，也未产生assignment。
+
+详见 docs/model_spec/rq2_identity_stream_fast_v1.md；31项索引为 results/tables/rq2_normal_task_h25_audit_v1_non_authoritative/normal_identity_comparison_probe1_evidence.json，SHA08eee9f3134b3f82e6eb59a3c5fd920fb087e99178b3b16979a1f08d0166d316。下一必要工作为接入独立normal模型/内核后继，保留全部身份复核和数值/资源门，再验证完整执行链。有效normal解、current/episode、完整UID/四臂资源、恢复右删失、风险分母、科学注册及正式启动门仍开放；机制初态与业务功率映射仍非真实观测。
+
+
+## 2026-09-27 快速编码接入normal模型、内核与声明入口
+
+新增continuous_grid_normal_stream_fast、normal_execution_stream_fast、source_normal_execution_stream_fast和normal_declared_execution_stream_fast四个独立后继。新CONTRACT、owned result类型与execution pins区分实现；保留模型全矩阵、全部身份复核位置、数值/资源门、source前后绑定与求解前callback。来源prepare/binder继续复用现有stream路径。旧源码、配置和八批188项历史工件bytes/SHA保持。
+
+新旧模型/kernel相关204项、来源/声明/prepare/binder相关115项通过；随后新增callback失败窗口四项，定向9项通过，未声称最终119项单次整组通过。独立模型/kernel31项、来源/声明4项及新增callback4项通过，pre-seal测试覆盖缺口闭合。tiny完整声明链得到objective120、terminal source_hour3，仅为显式合成来源；详见 docs/model_spec/rq2_normal_execution_stream_fast_v1.md。
+
+下一必要工作为新类型的持久化日志和独立replay后继，随后连接固定worker/controller并做真实H25受限验证。尚未运行真实fast kernel，不把此前编码30%改善外推为60秒门通过或有效normal assignment；current/episode、完整UID/四臂资源、恢复右删失、风险分母、科学注册和正式启动门继续开放。机制初态与业务功率映射仍非真实观测。
+
+
+## 2026-09-27 fast日志、回放、归档与固定worker接入
+
+新增normal_declared_store_stream_fast、normal_declared_replay_stream_fast、normal_archive_capture_stream_fast与normal_task_worker_stream_fast独立后继。新schema/application ID/owned types与旧链隔离，intent先于prepare、完整三层数值回放、current head要求、opaque有界capture和prepare后source前运行态复核保持。旧文件与八批188项工件bytes/SHA一致。
+
+日志/回放首轮108项及后加隔离定向6项通过；capture首轮37通过1项测试fixture失败，修正多余fixture依赖后最终全38项通过；worker首轮29项及后加旧request type定向1项通过。分批计数不混写为最终一次全组结果。独立日志/回放7项、四个真实进程窗口4项、capture4项、worker关键链8项及旧type1项通过；限定pre-seal审查无开放实质finding。详见 docs/model_spec/rq2_normal_persistence_stream_fast_v1.md，含命令、准确时间及最终hash。
+
+下一必要工作为fast controller消费新worker/request、capture和三层replay报告，保留两Job顺序、整Job静默后双capture与原资源门，再做真实H25受限开发验证。当前仍只有tiny正例和真实固定argv缺失来源负例，未运行真实fast kernel或取得有效normal解；不能从编码改善推断60秒门通过。current/episode、完整UID/四臂资源、恢复右删失、风险分母、科学注册及正式启动门继续开放，机制参数继续与真实观测区分。
+
+
+## 2026-09-27 fast controller 与真实 H25 单次验证终态
+
+fast controller/runner 已接通新 worker、双 capture 和三层 replay；最终相关回归 92 passed in 223.37s，独立 pre-seal 定向 9 项及 34 项通过。一次受限 H25 开发任务已结束，execute/replay 均 exit 0 且 Job 静默，归档和来源回放一致。normal 63.5284186 秒超过原 60 秒；1 秒 solver 调用返回 aborted/maxTimeLimit、solution_count=0，无 assignment/witness，仍为 unresolved，不能解释为数学不可行。
+
+API 返回 completed_development_replay_diagnostic，落盘 observation 为 validated_before_final_observation_write，分别保留。新 76 项证据索引 stream_fast_task_attempt1_evidence.json 的 SHA256 为 91dda12ffceb2463b3fa1fda666ede79d23d0b888953a223e3e3eb1d1ca94a69，位于 results/tables/rq2_normal_task_h25_audit_v1_non_authoritative；旧八批 188 项 bytes/SHA 重核一致。详情见 docs/model_spec/rq2_normal_task_stream_fast_h25_development_v1.md。整任务资源、native authentication、formal/security 门均未解除；机制初态与业务功率映射不是真实观测。
+
+下一必要工作改为进一步定位 normal 身份复核/构建/加载耗时，并独立诊断 1 秒求解无可行解；保留原限额和复核点，在明确后继中开发。本次绑定代码/配置/结果保留，已有连续多日、债务、拒绝动作、四臂及回放组件不重复开发。有效 normal、真实 current/episode、完整 UID/四臂资源、恢复右删失、风险分母、科学注册及正式启动门继续开放。
+
+
+## 2026-09-27 身份分段定位与数值映射编码对照
+
+真实 H25 零 solver 分段测量已完成：validation 0.0039583 秒、dependencies 0.0165303 秒、encoding+digest 4.7174440 秒，优先优化编码有实际依据。新分段工具 100 项、相关旧工具/fast 编码 136 项通过，独立窄测 8 项及 33 项结果索引审计闭合。详情见 docs/model_spec/rq2_normal_identity_breakdown_probe_v1.md。
+
+新增 identity_stream_numeric 仅特化 exact primitive-key/float-value 字典，保留完整 repr 排序、finite/float.hex、旧类型回退与所有 validation/dependency 复核，无缓存。新旧编码相关 118 项通过，独立新 51 项及 2000 个随机映射字节/摘要对照一致。真实对照 probe 首轮多余参数错误已修复，最终 156 项及独立 4+28 项通过。
+
+一次真实零 solver 对照取得 fast 5.4537921/5.1988746 秒、numeric 4.3547956/4.2227902 秒，单次局部观测下降约 20.15%/18.77%，所有输入摘要与模型结构保持。Job 88.078 秒、exit 0 且静默，commit 峰 474370048 bytes；仍使用 fast 模型，尚未验证 numeric kernel 或 60 秒门。37 项索引 normal_numeric_identity_probe1_evidence.json 的 SHA 为 7ce289bed9a74d99e1e39fc495f8f8813e06443e6ff5f0eb25a7349b57ec4dfe，位于 results/tables/rq2_normal_task_h25_audit_v1_non_authoritative。详见 docs/model_spec/rq2_identity_stream_numeric_v1.md。
+
+下一必要工作为 numeric 编码的独立 normal 模型/kernel 后继及完整链验证；1 秒求解无可行解仍单独 unresolved。机制初态与业务映射仍非真实观测，有效 normal、current/episode、完整 UID/四臂资源、恢复右删失、风险分母、科学注册和正式启动门继续开放。既有多日/债务/拒绝动作/四臂产物及全部历史协议、代码、结果保留。
+
+
+## 2026-09-27 numeric 完整执行链与 H25 开发终态
+
+numeric normal 模型/kernel/source/declared、持久化/独立回放/capture/worker/controller/runner 后继均已接通。完整矩阵、所有身份复核点、旧机制与资源/数值门保持；numeric fallback 依赖显式绑定。root 分组终态为179、121、118、71、61、33 passed，独立 pre-seal finding 闭合；不是单次全组统计，也不构成 official review 或正式授权。
+
+一次 numeric H25 开发任务已完整结束，normal 53.8714377 秒，本次未触发原60秒超时；native仍为1 call、aborted/maxTimeLimit、solution_count=0，无assignment/witness，数值状态保持 unresolved。execute/replay147.25/121.656秒，均exit0且Job静默；双capture和零solver replay一致。不同运行时点的53.87与旧63.53秒不可用来证明受控性能提升或一般资源保证。
+
+新99项索引 stream_numeric_task_attempt1_evidence.json，SHA d5679002d9c4a388a4c955eb4a95096321169196eb26bf3c1a266d46180ad983，位于 results/tables/rq2_normal_task_h25_audit_v1_non_authoritative；自包含11个历史索引映射，旧334条bytes/SHA保持。详细测试、命令、预算、记录和解释见 docs/model_spec/rq2_normal_task_stream_numeric_h25_development_v1.md 及其引用的三个实现规格。
+
+下一必要工作转为独立有界的native求解阶段诊断，区分model transfer、presolve和搜索；现有证据不能定位1秒无solution的内部原因，不能据此放宽门槛或宣称不可行。有效normal、真实current/episode、完整UID/四臂资源、恢复右删失、风险分母、科学注册与正式启动门继续开放；机制初态和业务功率映射仍非真实观测。所有现有未提交文件、旧协议和结果保留。
+
+
+## 2026-09-27 native 求解阶段诊断
+
+单次有界 H25 开发诊断已完成：set_instance 1.7605765秒、optimize 1.0094633秒、legacy interface 2.7725891秒；1 call，aborted/maxTimeLimit、noSolution，simplex_iteration_count=4844、mip_node_count=0。进程exit0且Job静默，60.969秒、commit峰526721024 bytes。计数器不能证明不可行，presolve/搜索细分仍未知；接口耗时不能与旧完整normal pipeline直接作性能差值。
+
+helper/runner独立pre-seal已闭合；helper独立36项通过，补齐最终runner依赖pin后runner85项包含于215项相关回归终态。新38项证据索引 normal_solver_phases_probe1_evidence.json（SHA256 5ed4385cf074e0dc5e260a7ba11ab3c3d7ea1c6f0fd70449b303e46939f6ad89），位于 results/tables/rq2_normal_task_h25_audit_v1_non_authoritative；另复核12个历史索引的433条证据一致。完整规格、预算、测试时序和结果解释见 docs/model_spec/rq2_normal_solver_phases_probe_v1.md。
+
+当前仍缺满足原最优性和witness验收的有效normal。下一项是预先固定后继有界可行性验证的预算、成功标准及失败语义，保留原1秒探针与全部旧结果；不把到时无解当不可行，也不以incumbent代替原验收。真实current/episode、完整UID/四臂资源及正式实验门继续开放，机制初态和业务映射仍非真实观测。
+
+本次独立只读结果审计已闭合，38项新证据与433项历史证据、进程/来源/身份/计时链均复算一致，无开放实质finding；不构成official verdict或正式实验门证据。
+
+
+## 2026-09-27 五秒完整 normal 开发终态
+
+固定5秒、1 thread的numeric完整任务已执行一次，无重试。normal51.3511618秒、errors=()，native仍为1 call、aborted/maxTimeLimit、solution_count=0，无assignment/witness。60秒normal及全部数值门保持，未解不能判不可行。execute/replay131.438/103.297秒，均exit0且Job静默，独立回放archive/source一致、errors=[]、solver calls=0；accepted_record_reproduced=false。API completed_development_replay_diagnostic与落盘validated_before_final_observation_write对应不同写入时点。
+
+新20项与旧runner8项共28 passed（5.29秒），独立20项通过。新98项索引 numeric_5s_task_attempt1_evidence.json（SHA256 4dc646b77c9e5aa71114b577117fc6a6493976c6e0a0fc6f7d9bcdb2cca55af6），位于 results/tables/rq2_normal_task_h25_audit_v1_non_authoritative；另13个历史索引/471条旧证据复核一致。详见 docs/model_spec/rq2_normal_task_numeric_5s_h25_development_v1.md。
+
+下一步核对当前Gurobi接口与相同模型的有界交叉验证路径，复用已有adapter和旧跨引擎证据，不继续机械增加HiGHS时间。旧pilot不直接认证当前H25，正式引擎选择与正式运行门保持关闭；原机制初态、业务映射与未解状态不变。
+
+
+五秒结果独立只读审计已闭合，98/98新项、13个历史索引/471条旧证据及结果解释一致。随后tiny检查定位当前Pyomo默认Gurobi接口的solution status字符串与现有严格枚举门不兼容；新增独立direct接口draft，在pytest内注入后通过原native/完整assignment/normal witness逻辑，补齐类型定义源码绑定后15项测试通过。该factory尚未集成到独立身份的H25执行与回放链，不能作为有效H25 normal或正式引擎选择证据。详见 docs/model_spec/rq2_gurobi_direct_development_v1.md；下一项为该接口的最小normal后继集成。
+
+
+## 2026-09-27 Gurobi direct 完整链与许可证阻塞
+
+Gurobi direct 的 normal/source/declared/store/replay/capture/worker/controller 后继已接通。最终分组检查为核心156、store/replay118、worker/controller/reports117、runner20项通过；capture40项在此前分组通过，独立pre-seal实质finding已闭合。共享数学模型、机制输入、容差和资源门保持，已有连续多日、恢复债务、四臂及拒绝动作实现无需重建。
+
+固定5秒、1线程H25开发任务已执行一次：normal42.8698899秒，native调用因 `Model too large for size-limited license` 失败，并保留 `structure_options_or_version_drift`；没有assignment/witness或可行/最优证据。execute/replay122.797/102.828秒，均exit0且Job静默；零solver回放确认archive/source一致，accepted_record_reproduced=false。该失败属于运行环境/许可容量阻塞，不能解释为数学不可行或Gurobi求解性能不足。
+
+宿主存在GRB_LICENSE_FILE指定的许可文件；当前受控environment未传入该键，继承的exact whitelist亦不允许该键。下一必要工作是显式许可证路径传递的最小后继及同受控环境容量核查；许可文件内容不进入仓库，不修改本次已绑定源码/配置/结果。现有tiny测试不足以证明许可容量。真实current/episode、完整UID/四臂资源、恢复右删失、风险分母及正式实验门继续开放；业务映射与初态仍是机制假设。
+
+本次122项证据索引为 results/tables/rq2_normal_task_h25_audit_v1_non_authoritative/gurobi_direct_task_attempt1_evidence.json，SHA256 289173afc81967b76eeb7cbc58ed8588fd695d5313f9eda2234ecfc79d9c0da0；另14个历史索引/569条旧证据经root复核一致。详细范围和实测见 docs/model_spec/rq2_normal_gurobi_direct_chain_v1.md。
+
+独立只读结果审计已核对122项新证据及569项历史证据一致。许可变量未传入受控child已确认；calls=1是wrapper调用前计数，不证明进入optimize。structure_options_or_version_drift是异常路径中pre_structure=None触发的次生guard标签，不是独立观测到漂移。该结果保留为环境失败，不开启正式门。
+
+## 2026-09-27 许可修复与首份H25完整可行赋值
+
+显式许可环境后继已完成，同受控环境22275变量/28004约束合成容量检查通过。复用既有normal内层，仅后继环境codec、worker/controller及声明runner；125项外层、20项runner、2项身份反例通过，独立pre-seal闭合。固定5秒H25首次得到完整可行赋值；零solver回放确认assignment/witness、来源及残差一致。许可阻塞在该环境已排除。
+
+有效normal门仍开放：原生到时终止、optimal=false，所报界相对gap约0.267%；完整normal71.429665秒，超过原60秒门。下一工作针对完整赋值路径的校验开销及有界最优性，保留全部数值/资源标准，随后才推进真实current/episode。机制初态和功率映射仍非真实观测；四臂资源、恢复右删失、风险分母与正式注册/运行门不变。
+
+详细证据见docs/model_spec/rq2_normal_gurobi_licensed_v1.md；新138项索引gurobi_licensed_task_attempt1_evidence.json位于results/tables/rq2_normal_task_h25_audit_v1_non_authoritative，SHA256 fd6d0f32a768866282b4dd2b1211c817956d4ede16daa5ca9f53847abdfdd9b2；另15个历史索引/691条证据已复核一致。
+
+独立只读结果审计已闭合：138项新工件、691条历史证据以及赋值/witness/回放、双capture、计时与验收字段一致，无开放实质finding；不构成official verdict或正式门授权。
+
+## 2026-09-27 结构身份等价比较
+
+新增单次调用内变量名复用与primitive优先编码helper，保留原完整结构字段/排序/数值规则。87项组合及3项新增依赖漂移反例通过；独立pre-seal闭合。一次零solver H25构模ABBA比较的四次结构摘要与旧e18f值一致：旧1.79–1.83秒/次，新1.29–1.43秒/次。Job47.891秒、exit0且静默；只证明局部等价及本次耗时，不能外推完整normal的60秒门。
+
+暂不为此局部收益机械后继整条执行链；下一项复用既有numeric输入身份约4.22–4.35秒/次的观测，优先降低完整编码成本并保留全部检查位置/字节。有效normal最优性、60秒及后续正式门仍开放。详见docs/model_spec/rq2_grid_structure_fast_v1.md；新118项索引grid_structure_fast_probe1_evidence.json（SHA256 fb1291f309030428ee9377c25d8593969188e55f31e51945faf33edcb574287b），另16个历史索引/829条旧证据一致。
+
+## 2026-09-28 完整输入编码比较与执行集成
+
+完整年度输入ABBA比较已完成，numeric约3.93秒/次、ordered约2.12秒/次，四次输入摘要一致；零构模、零solver。122项新证据及947条历史证据的独立结果审计闭合，详见docs/model_spec/rq2_identity_stream_ordered_v1.md。此局部改善支持接入完整链验证，不能直接推出60秒通过。
+
+当前必要工作为gurobi_ordered完整执行集成：保留全部检查、源数据与机制参数、60秒/768MiB门，预先固定单次15秒求解预算；runner20项测试通过，内外层回归及独立pre-seal进行中，尚未启动新H25任务。详见docs/model_spec/rq2_normal_gurobi_ordered_v1.md。有效normal、真实current/episode及四臂完整资源、恢复尾部与正式协议门均未据此关闭。
+
+完整集成验证及独立pre-seal现已收束，单次H25运行与零solver回放完成：normal56.4923187秒，在原60秒门内，完整赋值/witness及回放一致且errors=[]；15秒求解到时，optimal=false，gap约0.125%，normal_accepted=false。当前normal阻塞已集中到最优性，下一步针对有界求解收敛，不再新增独立编码探针；本次normal余量约3.51秒，不能直接延长求解并假定总门可过。详细状态、界和资源见docs/model_spec/rq2_normal_gurobi_ordered_v1.md。169项新证据索引gurobi_ordered_task_attempt1_evidence.json，SHA256 1aeebb6f2ea6b1416f689f232c95d2fc9b7473265f8233b0754f43b6a1810da3；18个历史索引1069条证据保持。正式门及其他科学输入缺口继续开放。
+
+同配置单次15秒convergence诊断已完成：根松弛约0.5秒，约2秒进入搜索，终态730节点、原生SolCount=9，仍TIME_LIMIT，日志gap约0.1263%。这定位到已进入分支搜索后的有界收敛问题；尚不能归因某一具体启发式。下一项验证声明的线程并行度，保留模型与数值/资源门，不据此选择正式引擎。156项新索引gurobi_convergence_probe1_evidence.json（SHA256 008be53a6cf7593c27b5ac6903026103eeef96d45ade190d5a7aeca81d2b795d），19个历史索引1238条证据一致。细节及诊断/完整执行的计时区别见docs/model_spec/rq2_gurobi_convergence_profile_v1.md。
+
+Threads参数=4的单次15秒诊断现已完成：仍TIME_LIMIT，原生1721节点/SolCount10，日志gap0.203%；Job62.656秒、commit峰752758784 bytes，在768MiB内。child60.0569秒属于prepare+diagnostic，不能与normal60秒门混用。参数回读不认证实际worker利用率，顺序单次结果不支持因果性能比较。该attempt未收敛，不接入完整normal链；下一步核查可行赋值warm start的输入/结构同一性、审计及累计成本前提，不重复已有连续transition/reserve envelope，也不添加会删除crossing trajectories的逐时排序。160项新索引gurobi_four_thread_probe1_evidence.json（SHA256 30bf1e3de7bea997d7418b0efd343a447a9d7f9c2b493f2f5c95b5fddc96a175），20历史索引1394条证据一致。详见docs/model_spec/rq2_gurobi_four_thread_profile_v1.md；正式门保持。
+
+## 2026-09-28 warm start前提与资源门来源核查
+
+零solver读取既有H25 SQLite：完整性正常，6806997-byte record的SHA256仍为2fc450ac5e19e434dcb8e2f7408b9beb442e89113e732f1d3cec63967d54173e；loaded_values为22275个唯一、有限值，与initial_values有序变量名一致。可作为候选start，不证明新调用收敛。复用来源链已有一次solver调用，必须区分新调用计数与累计来源成本；不能把离线求解结果视为免费外生观测。
+
+进一步核实normal的30秒solver/60秒wall上限来自短开发内核，normal_accepted也不等于formal-ready。旧ordered声明及结果保留原60秒门；这一开发cap不自动成为所有正式任务的科学验收标准。现有EpisodeBudget仍最多120次/60秒solver预留，而H25全158 UID路径需要19900次加normal一次，说明完整资源合同依然是独立缺口。
+
+当前动作调整为先形成真实规模资源方案及验收矩阵，明确normal、current/selector、全episode与预计算成本；暂不新增warm-start整条执行链或H25探针。保持gap、残差、物理约束、来源、右删失及四臂公平性，未改变任何旧预算或启动更长运行。细节见docs/model_spec/rq2_normal_warm_start_feasibility_v1.md。
+## 2026-09-28 显式任务清单核算实现
+
+新增execution_workload.py和规格docs/model_spec/rq2_execution_workload_v1.md。由显式normal/episode清单核算完整UID reference及四臂actual调用和各自solver预留；共享normal仅按明确依赖计一次，每个容量评估仍独立列项。拒绝重复ID、缺失依赖、split/输入/UID不一致和非连续或越界小时，不默认将46 cells视为完整任务数。报告回显完整声明，固定保留来源/复用、清单完整性、wall/内存/磁盘和正式注册未解项；不提供执行准入。
+
+26项零solver针对性测试通过（1.53秒），与现有EpisodeSession._requirements及独立逐阶段枚举一致。只读核对既有source record的158 UID/25行，示例预算normal15秒、selector每阶段1秒得到19901 calls/19915秒solver预留；这不是建议预算或真实运行。进一步确认reference/actual入口只接受max_calls<=20的GridDevelopmentBudget，无法容纳160/159级，不能只提高episode cap后运行。下一项补独立真实规模selector/episode资源合同，保留完整阶段与原数值审计；旧执行类型、配置和结果未改。
+## 2026-09-28 完整串行资源声明合同
+
+新增execution_resource_contract.py和docs/model_spec/rq2_execution_resource_contract_v1.md，在显式workload清单上要求每个normal/episode都有完整wall、非solver开销、Job commit、archive/scratch、线程及模型规模上限。检查单任务预留、总wall、最大串行Job加supervisor/reserve，以及不回收scratch的全量磁盘需求。预算短缺逐项报告，完整声明可重建；declaration_consistent不表示资源实测或运行准入，三个资源验证/授权/formal标志固定false。
+
+组合42项零solver测试通过（主代理1.59秒、独立复跑1.58秒），代码限定审查无实质finding。旧budget类型、selector、episode及结果未改。真实规模入口接入、实际模型/宿主/多卷空间核验、硬进程监督和normal最优性仍缺；下一项为保留全部UID阶段与数值审计的独立selector执行接口，先以合成例验证，不启动依赖accepted normal的真实episode。
+## 2026-09-28 完整UID selector接口与合成验证
+
+新增scale_selector.py和docs/model_spec/rq2_scale_selector_v1.md。独立预算由完整资源合同派生，保留原reference request→L1→全部UID和actual L1→全部UID；复用既有构模、canonical/native及物理/锁定审计。新结果类型与policy隔离旧入口，当前小时逐项绑定而固定policy可跨小时接续。资源派生源码纳入身份，最终状态构造失败保留已返回阶段和known calls，pipeline无完整返回仍记unknown。
+
+最终36项通过（39.52秒）：21 UID合成reference完成23阶段、actual完成22阶段，确实跨越旧20调用cap；两类选择均验证连续两小时。此前旧selector/core及资源相关184项回归通过（69.97秒）。两项独立pre-seal finding已修复并复核闭合，git diff --check通过。未运行H25 selector/episode，也未改变旧预算或结果。
+
+下一实施项为该内核的持久调用记账及资源监督连接，再接episode角色映射/事务；actual:0..3尚须由business arm cursor验证，normal来源/最优仍由上游证明。当前durable tracking/hard resource enforcement/formal/security均false，不能据合成接口通过启动真实完整任务。
+## 2026-09-28 selector完整调用持久记账
+
+新增scale_selector_store.py和docs/model_spec/rq2_scale_selector_store_v1.md，复用本地NTFS lease，独立SQLite schema。数值内核前持久化覆盖全部有序阶段的intent并exact回读；返回完整typed结果后归档、摘要核对并exact回读。pending_unknown不能推为零调用，重开仅允许inspection，不重试/resume。intent存在即全额charged calls/solver seconds占用，早停不释放。returned_unverified只代表记录一致，不作数值回放或原生认证；原selector返回flags保持。
+
+最终18项通过（19.02秒），含进程intent后exit17、intent/result INSERT no-op、提交/回读/确认失败、codec漂移、结果请求错配、早停全额charge及复制root拒绝；相关复用lease回归5项通过（20.87秒），此前与selector组合47项通过（51.43秒）。两项pre-seal finding及计费字段缺口已修复，限定独立复核闭合。git diff --check通过；未修改旧core/store/结果。
+
+下一项接进程资源监督：明确wall/commit硬限制、终止后Job静默、再检查落盘状态及归档资源；当前无硬资源执行保证、无真实H25 selector/episode或正式准入。normal最优性和科学/数据门继续开放。
+## 2026-09-28 selector固定worker与Job边界验证
+
+新增scale_selector_worker.py和docs/model_spec/rq2_scale_selector_worker_v1.md，固定CLI接收有SHA pin、类型白名单、完整字段及结构/字节上限的canonical请求，创建一次性selector store。实现pin覆盖reference selector等依赖；回执exclusive写入后核验长度、文件身份、exact回读及最终源码/请求。回执失败保留store证据，不提供重执行或恢复授权。
+
+17项worker测试通过（16.40秒、exit0），包括reference/actual真实tiny Windows Job及回执no-op/短写/错误字节/读取失败；进程期限、reserve停止及后代静默4项回归通过（2.07秒）。两项独立pre-seal finding已修复并限定复核闭合，git diff --check通过。Job测试只证明合成小例的执行边界，不证明H25、完整资源或正式环境；输入重建不认证normal/前驱来源。
+
+下一项为复用现有监督工具的持久父控制器：释放前启动意图与PID/creation-time登记，停止后整Job静默，随后验证回执及store；再接episode四臂角色和跨小时事务。尚未完成父控制器、真实规模全episode、normal最优性或科学/数据验收，formal门保持。旧冻结协议、结果及所有无关未提交文件保留。
+## 2026-09-28 selector持久父控制器
+
+新增scale_selector_controller.py、对应测试及docs/model_spec/rq2_scale_selector_controller_v1.md。复用NTFS lease和既有Windows Job owner，持久请求/intent后创建suspended child，PID/creation-time登记和全链检查完成才release；wait确认整Job静默后读取回执及store，核完整request、result identity/status及inspection。新root一次性，失败保留记录，不重执行。资源声明先绑定现有父目录，实际Job再绑定新建archive/scratch。
+
+controller与worker组合23项通过（28.55秒）；独立pre-seal的早期lease异常覆盖、terminal后的检查及receipt字段inventory三项已修复，controller最终11项通过（25.10秒、exit0），限定复核闭合。git diff --check通过。状态仍returned_unverified，不是数值接受或完整资源认证；锁释放/I/O异常保留不确定性。
+
+下一项为新ScaleSelectionResult落盘记录的独立数值回放，再接四臂/跨小时事务。旧selector_replay、episode_coordinator、hourly_transaction均绑定旧结果类型/预算，不能直接放宽旧门。父控制器整体wall/内存/目录大小验收、真实normal最优性、完整episode和科学/数据门仍开放；未启动H25或正式实验，旧冻结协议及结果未改。
+## 2026-09-28 完整UID归档数值回放
+
+新增scale_selector_replay.py、对应测试和docs/model_spec/rq2_scale_selector_replay_v1.md。在外部record SHA、实现pin及完整request下，以既有纯native replay核和固定构模函数复核每个selected阶段的结构、版本/options、赋值、界、残差、目标锁与物理witness；完整stage与最终state/result逐字节重建相等。未调用solver或放宽旧public预算类型门。unresolved只报告未重放，不生成后继；public仅返回诊断，不授予resume/native真实性/formal权限。
+
+12项针对性测试通过（23.62秒），另21 UID/23阶段真实store回放1项通过（18.74秒）；旧selector/native replay相关158项回归通过（98.92秒、exit0）。限定独立pre-seal无待修实质finding，git diff --check通过。篡改赋值/界、partial、阶段次序/目标锁/截断前缀，即使重算摘要也不能伪造selected。
+
+下一项为将经核验的落盘结果接入新四臂事务适配，保留旧episode exact-type门；还需跨小时链、整体资源验收和真实normal最优性。归档相对输入一致不等于真实观测、数据库来源或工程认证；科学/数据和正式运行门保持，旧协议与结果未改。
+## 2026-09-28 四臂回放结果的分阶段事务
+
+新增scale_hourly_transaction.py、测试与docs/model_spec/rq2_scale_hourly_transaction_v1.md。完整reference回放形成精确共同请求；固定NETWORK/CFE/JOINT/B6→actual:0..3，复用capacity policy产生业务candidate及实际功率请求，actual归档回放接受后才成对返回业务/电网后继。拒绝和unresolved保留旧已提交状态并halt；CFE服务适用性与物理检查分开。跨小时绑定common前驱、source audit、mapping、业务policy及actual policy。
+
+初轮6项25.28秒通过，两小时债务累积/恢复2项18.45秒通过；与旧事务/映射组合69项75.80秒通过。独立pre-seal发现业务policy未显式固定，已补business_policy_identity和origin_identity及替换反例；修复后最终9项44.91秒通过（exit0），限定复核闭合，git diff --check通过。两个小时验证债务由1/3到2/3或在高于baseline的恢复功率下下降，原状态保持不变。
+
+下一项为完整episode owner串接这些纯事务与受控selector执行，检查共同曝光下四个不同arm、唯一消费及全量预算，持久提交跨小时cursor。当前只有纯内存分阶段接口，未完成磁盘原子episode、整体资源或真实normal最优性；normal来源、右删失及科学/数据门仍开放。未运行H25或正式实验，旧冻结接口/协议/结果未改。
+## 2026-09-28 受控四臂episode端到端开发链
+
+新增scale_episode.py、测试及docs/model_spec/rq2_scale_episode_v1.md。新NTFS独占owner固定连续窗口、规范四臂、同源physical origin/业务机制/actual policy与资源声明，按完整reference+四actual预留calls/solver seconds。每小时先持久intent，再通过现有父控制器逐Job执行，静默后收集归档并回放；全部臂结果准备完成才写hour result并发布内存cursor。失败poison、无重试/恢复入口；halted臂跳过执行但不释放预留。
+
+hour result持久保存五phase evidence及消费文件pin，task/archive双lease覆盖读取、pin和crosslink；实现闭包固定worker/process/resources/lease/native replay依赖；环境只保存private copy摘要，close与advance共用guard。独立pre-seal的证据关联、读取窗口、依赖闭包与环境值问题均已修复，限定复核闭合。
+
+最终15项通过（152.28秒、exit0），含第一小时五Job、第二小时四Job（已halted CFE跳过），累计仍预留22calls/22solver seconds，JOINT债务1/3到2/3；late failure不发布小时，消费归档改动、读取至pin之间替换、传递依赖漂移和环境变化均拒绝。git diff --check通过；旧reference_selector/actual_dispatch_selector/continuous_grid_candidate完整SHA仍匹配既有记录。测试仅pytest临时目录，无H25或正式运行。
+
+下一必要项为已落盘整episode的独立离线核验，覆盖完整输入/phase证据/跨小时cursor和未知中断，不授予resume；另有整任务wall/内存/磁盘资源验收、真实normal最优性及科学/数据/right-censoring门。合成端到端链已接通，正式就绪仍未证明，旧协议与结果保留。
+## 2026-09-28 完整episode离线核验
+
+新增scale_episode_replay.py、测试及docs/model_spec/rq2_scale_episode_replay_v1.md。外部typed输入窗口及header/有序intent/result SHA、audit实现pin共同约束只读核验；固定五phase目录，task/archive双lease核文件与controller/receipt/store交叉链，独立重算worker命令、环境/host/process身份，检查启动和正常退出记录。纯回放重建reference共同请求、四臂与跨小时状态，完整hour body须一致；不反序列化可执行cursor，不启动Job或solver。
+
+完成小时拒绝额外/跳过却存在的task目录；末尾pending intent保留unknown并全额charge，不打开其子DB。unresolved阶段数值细节未重放，单列报告；观察窗口消费完不等于完整履约或恢复完成。
+
+9项通过（117.43秒），含连续两小时核验及重hash篡改反例。独立pre-seal的process身份/记录一致性、子task inventory问题修复后，最终相关6项通过（40.67秒、exit0），正常前缀与5类联动重hash进程记录均覆盖；git diff --check通过。旧episode执行器与冻结成果未改，所有测试仅合成/tmp，无H25或正式运行。
+
+下一项集中核对完整episode的整任务资源验收缺口，并接入已有资源合同；真实normal最优性、实际数据/机制参数、末端右删失和正式科学验收继续开放。现有小例执行与离线核验链已具开发证据，正式就绪仍未证明。
+## 2026-09-28 Episode资源声明与采样检查收尾
+
+现有TaskEnvelope已接入scale_episode_resources.py、episode owner和离线核验：完整窗口五phase预留、父header/小时intent/result空间、累计wall/working set/archive/scratch/tree及host headroom检查。owner和离线核验拒绝elapsed、lifetime peak、保留字节与条目倒退；host可用commit允许波动。开发规格见docs/model_spec/rq2_scale_episode_resources_v1.md。
+
+验证：episode执行与离线核验组合29项通过（285.39秒）；单调性修复后资源边界、传递依赖漂移、在线/离线连续两小时及完整前缀共32项通过、21项未选择（118.67秒、exit0）。命令为compute Python -B -m pytest -q -p no:cacheprovider，最终选择三个test_rq2_scale_episode*_v1.py中的resource/dependency_drift/two_hour/complete_prefix。独立pre-seal代码复核已确认五项单调性修复；未产生official verdict。git diff --check通过。
+
+本项只完成声明与采样拒绝条件，不完成整任务资源认证：父进程硬wall/commit、最终写入关闭及离线audit成本、完整任务清单与SerialResourceBudget绑定仍需证明；记录未保存历史disk free/volume requirements。hard_parent_wall_limit/hard_parent_commit_limit/hard_disk_quota/whole_task_resources_verified均为false。
+
+当前主线状态：多日状态、恢复债务、四臂策略及拒绝动作已有开发产物，合成执行与离线回放链已具验证。下一项先核对完整任务资源验收矩阵，复用现有监督组件并明确剩余解除条件；真实normal最优性、实际观测与机制参数登记、右删失和科学验收保持独立阻塞。不得用新增局部测试替代这些条件。未启动正式实验，旧冻结协议、结果及无关未提交文件保留。
+
+## 2026-09-28 完整资源连接核对与嵌套监督验证
+
+已在docs/model_spec/rq2_execution_resource_contract_v1.md补完整执行验收矩阵。确认selector预算工厂能重算合同，但episode当前仅比较传入摘要相同，尚缺原始normal/episode/envelope/serial声明与实际窗口重新绑定；此项先于外层执行入口。normal_task_process的3600秒开发上限不能直接承载H25完整预留，父episode加inner Job及独立offline audit成本也不能遗漏。wall为轮询终止，不是OS硬wall quota。
+
+新增test_nested_task_job_membership_and_outer_quiescence的正常/停止两个短案例：使用既有normal_task_child嵌套，不增加监督框架；IsProcessInJob证实inner属于outer，持有同一HANDLE核验外层停止后inner死亡，正常报告和outer/inner peak关系均检查。首轮测试专用256 MiB父导入MemoryError已定位，测试改用768 MiB process/1 GiB Job及单线程后通过；这些数值不是正式预算建议。运行代码、旧cap、冻结配置与结果未改。
+
+验证命令：compute Python -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_task_process_v1.py。新增两项5.19秒通过；整个文件36项8.91秒通过、exit0。独立限定pre-seal未见实质finding；无official verdict或资源认证。下一项为原始完整资源声明的episode绑定及离线重算；真实normal最优性、数据/机制身份、删失及正式科学验收仍开放。未启动solver或正式实验，未清理工作区。
+
+## 2026-09-28 原始完整资源声明绑定
+
+scale_episode_resources新增EpisodeResourcePlan；episode owner和离线核验强制携带原始normal/episode/envelope/serial声明，在创建或读取root前重新核算。实际完整小时窗口、source audit的normal身份/split/UID/可见信息、五role预算、总调用与秒数及envelope须匹配；task Job声明覆盖父controller加inner Job，全局commit/disk reserve至少覆盖运行时reserve。header保存完整原始声明，offline从独立typed输入重算并比较，不接受仅一致的摘要。
+
+验证：单小时五Job1项26.93秒通过；plan/resources组合35项8.38秒通过；episode与offline完整回归30项291.96秒通过。独立pre-seal发现全局reserve与局部runtime未关联，已修复并新增两反例；最终plan正反例、完整离线前缀、重hash原始plan header篡改共16项通过、12项未选择（39.30秒、exit0）。命令均为compute Python -B -m pytest -q -p no:cacheprovider，相关文件tests/test_rq2_scale_episode_plan_v1.py、tests/test_rq2_scale_episode_resources_v1.py及tests/test_rq2_scale_episode_replay_v1.py；完整回归使用test_rq2_scale_episode_v1.py与test_rq2_scale_episode_replay_v1.py。
+
+此项证明调用者声明与实际episode内部一致，不证明研究任务全部列齐、完整normal源范围、normal复用或最优性，也不把owned source audit提升为真实观测。独立offline仍需单独资源预算与受监督入口；下一项复用既有Job原语接固定episode/audit worker及封闭transport，覆盖父进程、最终发布/关闭与离线核验成本。3600秒开发cap、真实normal最优性、数据/机制参数及右删失/科学验收仍开放。未启动正式实验，旧冻结协议、结果及无关未提交文件保留。
+
+## 2026-09-28 Episode固定transport与执行/审计worker
+
+新增scale_episode_transport.py、scale_episode_worker.py及对应测试；规格见docs/model_spec/rq2_scale_episode_worker_v1.md。输入固定初态/四臂/窗口/原始资源计划白名单，支持精确Fraction和finite hex float，16MiB/64层/500000节点限制；canonical roundtrip后复验初态和资源绑定，不恢复结果或可执行后继。环境值不写入packet，仅从继承环境及指定目录重建后核外部摘要。
+
+固定CLI分别execute新episode及audit外部header/有序pins；复用既有owner与离线核验。测试中外层Job内完成一小时五phase，再另起audit Job，四条selected数值链回放，归档全部文件hash前后相同；receipt独占fsync/回读，root及外部audit pins显式关联，全部权限标志false。request、环境目录与receipt均在evidence root外，replay要求exact顶层清单。
+
+初轮transport22项6.23秒通过，后补embedded successor/wrong contract及直接/传递源码漂移，29项7.19秒通过；worker初轮6项58.54秒通过。独立pre-seal发现reference origin可嵌入后继carry、输入/环境可混入evidence root，均已修复。最终针对性组合16项通过、38项未选择（82.43秒、exit0），包含outer execute+独立audit、路径隔离、后继拒绝、源码漂移、extra root拒绝、正常prefix与pending_unknown。命令为compute Python -B -m pytest -q -p no:cacheprovider，文件为tests/test_rq2_scale_episode_worker_v1.py、tests/test_rq2_scale_episode_transport_v1.py和tests/test_rq2_scale_episode_replay_v1.py；最终使用-k筛选上述相关项。
+
+receipt的pins只是owner持锁时快照；关闭后仍须独立audit与进程正常退出/Job静默。测试90秒outer不代表600秒episode声明全量可覆盖，更不认证H25资源。下一项为持久外层controller的request/intent/launch/result事务，将outer预算与完整声明绑定并计入最终写入/关闭和audit成本；3600秒开发cap、normal最优性、正式数据/机制及右删失/科学门仍开放。旧冻结协议、结果及无关未提交文件保留，无正式实验或仓库清理。
+
+## 2026-09-28 Episode execute/audit持久外层控制器
+
+新增scale_episode_controller.py、tests/test_rq2_scale_episode_controller_v1.py及docs/model_spec/rq2_scale_episode_controller_v1.md。PipelineBudget把同一TaskEnvelope分解为execute/audit两worker、两次quiet、controller allowance、outer metadata与两个scratch；root创建前核wall/commit/archive/scratch/条目覆盖，不借全局controller_seconds。运行时独立限制controller耗时，phase host未来空间扣除已保留字节；记录采样hard wall/commit/disk=false。
+
+两phase分别保存intent、launch、observation和外部receipt，release前持久化PID/creation-time；只有Job quiet和exact正常观察字段、receipt一致后推进。execute保存的ordered pins进入audit intent，跨phase核episode全部证据文件身份/hash；根锁由lease检查。audit完成后在读取receipt/归档前取得episode lease并保持至final，重算完整audit报告计数，独占写result后再检查。关闭异常仍尝试释放两层lease，失败不自动重试或resume，文件存在不代表调用成功。
+
+验证：首轮1失败/7通过定位Windows锁首字节不可另流读取，改为lease核根锁后真实pipeline1项44.77秒通过。独立预审要求controller独立计时、完整条目预留、exact进程观察及finally清理，修复后19项127.97秒通过。剩余host空间修正后4项49.36秒通过；最终锁窗口修复后真实pipeline与晚期close异常2项通过、18项未选择（87.97秒、exit0），真实测试在每次audit receipt读取时断言episode lease已被持有。命令均为compute Python -B -m pytest -q -p no:cacheprovider tests/test_rq2_scale_episode_controller_v1.py；后两轮分别用-k选择real_persistent/scratch/host_demand与real_persistent/late_evidence。git diff --check通过。
+
+当前获得的是短合成观察窗口的持久执行和独立回放，不是完整服务或资源认证。最外层controller资源仍为采样，正式长预算及3600秒开发cap适用性、真实normal最优性、完整研究清单/数据/机制参数与右删失科学验收保持开放。下一步核对真实规模执行预算与现有开发cap的具体冲突及可复用路径，不再次开发已具证据的两phase事务。未启动正式实验或长solver，旧冻结协议、结果及无关未提交文件保留。
+
+## 2026-09-28 外层声明预算接入与主线状态
+
+declared_task_process.py复用旧Job生命周期，新增绑定原始资源合同SHA及TaskEnvelope的预算；scale_episode_controller支持该预算的execute/audit分配并拒绝错误绑定。旧normal_task_process及3600秒开发cap保持原SHA c7c46c08297c083338cc555a887313a94cb9e767480709caa205011b6e4d080c。校验用1秒投影保留完整内存/host需求，实际child仍使用完整新预算。仅outer接入，inner phase仍是旧短预算；不能据此宣称真实长任务或整体资源已认证。
+
+验证命令均为D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider。tests/test_rq2_declared_task_process_v1.py与tests/test_rq2_normal_task_process_v1.py共50项通过（9.46秒）；tests/test_rq2_scale_episode_controller_v1.py -k 'real_persistent or declared_outer'共4项通过、19项未选择（97.81秒）。超过3600秒行为通过时间注入测试，端到端仍为短合成案例。git diff --check通过；未启动长求解或正式实验。
+
+当前主线：连续多日、恢复债务、四臂、拒绝动作与诊断包已有开发产物，短合成持久执行/独立回放已接通。真实H25 normal仍只有TIME_LIMIT可行解，gap约0.125%，最优性未过；完整任务规模与内层预算、实际观测/机制参数登记、右删失和正式科学验收继续开放。下一项应直接核对这些未闭合项的可执行解除条件，优先形成normal求解及参数登记的具体任务，避免继续无边界扩展执行设施。保留旧冻结协议、结果及所有无关未提交文件。
+
+## 2026-09-28 参数登记入口与normal前置核对
+
+已更新docs/model_spec/rq2_continuous_multiday_parameter_evidence_v1.md：逐项关联20个未识别输入、6个未注册选择与当前代码/待登记内容，纠正早期“响应/ramp/逐笔deadline尚未实现”的范围过时说明。现有机制实现可复用，实证null和正式登记缺口保持；Google绝对功率、逐job checkpoint/抢占证据不能由聚合机制补出。代码字段之外的minimum-event-power、ramp、精度及容量声明亦明确列为待登记项。
+
+零solver机械核对通过：20行与交付unidentified顺序完全一致、6项协议集合一致、实证仍全null/协议仍unregistered、所列代码symbol存在。input_status SHA256=263643c83cf4ec60fd25fb176f50c3aae2bd7f158f8bb550fe241f3a18d88302。旧H25 replay SHA256=b1a67d96fcda78434472440b9b31ebb9028f2f14a1bf9ec5fd00b3f8cb9df8d5，accepted_record_reproduced=false、optimality_certificate=null。首轮检查因PowerShell管道中文编码导致标题匹配失败，改用ASCII锚点后通过；未改变被核工件。
+
+明确下一项normal前置：gurobi_ordered数值内核仍复用NormalExecutionBudget的30秒单solve/60秒总normal上限，新outer接口未覆盖它。应准备显式数值预算后继及身份/回放绑定，保留旧声明、验收精度及证据；现有15秒结果不能保证长预算收敛。科学候选还需将参数取值、单位、机制身份、窗口、事件及删失分母集中登记后审阅。此次仅更新证据索引与任务定位，未注册数值、改变科学门、运行solver或清理仓库。
+
+## 2026-09-28 显式normal数值预算及独立回放
+
+新增scale_normal_budget/native/kernel/replay与单线程declared Gurobi adapter，规格见docs/model_spec/rq2_scale_normal_v1.md。完整原始resource plan重新核算，绑定实际normal输入摘要、完整小时和机组清单及carry split声明；spec时限必须等于NormalWork预留。保留gap1e-8、三项1e-9容差、seed0和版本，native _solve AST与旧ordered相同。wall/working-set/payload为显式数值子分配，source/归档/离线回放整体成本仍待outer绑定。
+
+新记录具有独立type/schema，零solver回放重算赋值、界/optimal flag、witness及调用/资源记录一致性，拒绝旧类型和重hash篡改，不返回可执行carry。新全组最终43项37.00秒通过，旧normal/native replay/resource contract相关139项57.35秒通过；600秒预算仅假solver传递，真实Gurobi仅一秒上限两小时单机小例。六个旧core/adapter/config/replay文件与H25保留索引bytes/SHA一致，git diff --check通过。
+
+已补数值内核的长声明路径，尚未接入source-bound持久worker/controller。下一项复用已有source核验与进程监督连接该新type及回放，完整分配准备/归档/audit成本；不重建数值算法或监督框架。真实H25最优性、episode内层预算、科学参数及删失登记仍开放。没有长求解、正式运行、旧冻结修改或仓库清理。
+
+normal数值回放限定预审补充：继承raw/witness错误从按值过滤改为逐次精确消费，防止重复错误自洽重hash后仍称一致。首轮补充用例13通过/1失败，修正raw反例使其先具有完整可回放的无效赋值后，最终受影响14项通过、31项未选择（23.43秒）。原43项是该修复前全组，不混为最终45项全组。源码、测试与准确时序见rq2_scale_normal_v1.md。
+
+## 2026-09-28 Scale normal来源连接与固定worker
+
+新增scale_normal_source/transport/worker，规格见docs/model_spec/rq2_scale_normal_source_worker_v1.md。复用已有prepare，执行前后重建RTS/pair并核外部assembly/binding/实现pin和完整资源计划；caller检查在kernel捕获区之外，无完整返回保留unknown调用。来源回放从当前prepare的inputs重算，并末尾再prepare。transport固定类/字段/大小，worker先intent再执行，独占记录后receipt；audit持lease、核外部intent/record/执行环境pin，并在运行时阻断四个执行入口，finally恢复。
+
+source首轮21项83.67秒通过；修复伪错误降级后组合19项75.88秒通过；旧prepare/pair/declared相关82项94.26秒通过。最终audit guard补充后执行—审计正例及四入口阻断/恢复5项48.88秒通过。准确筛选与分批时序见规格，worker测试为合成来源下直接调用入口，不是父控制器子进程验收。
+
+真实本地H25只读prepare、新预算绑定和transport roundtrip亦通过：25小时、158UID、原输入d9959966c52fe618e73974fc53203ad2caed5169bd7f360fc79e0ecafd06780c、0 solver calls、34.9373秒。诊断packet仅内存构造，资源清单只作一致性例，未发布运行配置或取得新normal结果。
+
+下一项为持久父控制器连接：复用已具证据的Job/intent/launch/receipt原语，将source准备、normal、归档、独立audit与关闭成本绑定同一完整声明；固定worker自身不证明这些条件。真实normal最优性、episode内层预算、完整研究清单及机制/删失科学登记仍开放。未启动长求解或正式实验，旧冻结协议/结果及无关未提交文件保留。
+
+## 2026-09-28 Normal父控制器审计语义修复（端到端验收未完成）
+
+scale_normal_controller.py已形成草案，复用现有进程监督和execute/audit事务。当前完成的限定修复：不完整normal返回或调用计数未知时输出normal_invocation_unknown_not_replayed，保留solver_calls与call_count_complete原值及完整reserved_solver_seconds；只有完整数值记录可进入replayed分类。父端独立调用source.audit_source，逐字节比较完整审计报告，防止嵌套native_replay被自洽改写；父端回放封住四个求解/执行入口并在finally恢复，耗时计入controller allowance。request以packet SHA进入controller identity，修正identity encoder不支持bytes的问题。
+
+验证：D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_scale_normal_controller_v1.py，17 passed in 31.10s。覆盖missing-return、TIME_LIMIT类未接受状态分类、完整预算保留、真实一秒上限合成normal的零solver父端回放、嵌套报告篡改、四入口阻断及恢复、预算不足拒绝和identity绑定。测试没有启动父控制器子进程，不代表完整pipeline或真实规模验收。
+
+下一项是该既有控制器的短合成子进程execute/audit联通与失败窗口测试；完成前不进入依赖它的真实长任务。真实H25最优性、episode内层预算、完整任务清单、机制参数与删失登记仍开放。此次仅修改草案控制器、其测试及进度说明；旧冻结协议、结果、公开观测及无关未提交文件保持。
+
+## 2026-09-28 Normal父控制器短流程验收
+
+限定pre-seal已闭合：真实Job execute/audit合成流程及5个audit失败窗口6项通过（106.30秒）；当前controller其余19项与新旧process相关50项共69项通过（47.53秒，6项未选择）。最终字节下终态前完成全链核验，跨phase保存目录/锁及文件身份，audit读取与终态写入实测持锁。规格、准确命令与证据边界见docs/model_spec/rq2_scale_normal_controller_v1.md。来源使用显式synthetic替身，native上限一秒，不改变真实H25 TIME_LIMIT或正式数据/资源门。
+
+下一项转向实际研究任务清单及逐阶段预算核算，先判断所选预算是否触发episode内层3600秒限制，再确定必要接口变更；同时准备normal验证和机制参数/删失登记候选。完整科学协议及正式运行许可仍开放，不宣称已能开始正式实验。
+
+## 2026-09-28 实际清单与3600秒限制核对
+
+新增只读核算experiments/audit_rq2_current_workload_inventory_v1.py及results/tables/rq2_current_workload_inventory_v1_non_authoritative/audit.json（SHA256 648ed752cb47f1628a2895f8d751d73a6d62719064775dafd22f2bc2fa4101fc），规格见docs/model_spec/rq2_current_workload_inventory_v1.md。四个来源/配置pin通过，实际158 UID、25小时，单episode加normal共19901次完整路径预留；20项实证null及6项未注册选择保持。
+
+3600秒限制作用于每个selector子进程，而非整窗episode。15秒/级的reference与actual solver预留为2400/2385秒；22秒/级剩余80/102秒非solver空间；23秒/级则solver预留本身超限。未测逐级非solver成本，不能把算术余量当资源通过，也不应在正式预算尚未选定时断言必须扩接口。现有normal与episode短流程继续复用。
+
+旧36+10=46-cell数目重算一致，但不是完整episode数。当前缺连续窗口/coupling、training容量评估清单、holdout容量策略绑定、normal复用/信息声明、pilot重试清单、完整phase和回放资源分配。全实验调用和wall保持null；不以46乘H25假装完整预算。下一项为完整科学候选的参数/窗口/评分登记内容，再据其展开逐项执行清单；normal预算候选可独立准备。
+
+运行compute Python -B脚本及runpy机械断言，生成后两次重算bytes一致，zero solver；首次runpy暴露相对__file__路径问题，改为resolve后通过。git diff --check通过。此核对未注册科学值、修改旧阈值、执行长求解或正式实验。
+
+## 2026-09-28 连续科学参数/窗口/评分候选
+
+新增configs/rq2_continuous_science_candidate_v1.DRAFT.yaml及docs/model_spec/rq2_continuous_science_candidate_v1.md，明确complete_preregistration=false、全部注册/执行门false。候选以自包含sealed v5作逐字段比较，提出168h观察/24h stride、birth+24机制期限、单期预算显式7倍、新46-cell身份、具名功率/CFE机制和次级有限窗口F/S/U评分；没有把20项实证null改成机制观测，也未批准这些科学选择。
+
+独立R4设计预审推动修正：完整未来/period合同未定义，complete target保持unbound、prefix LB仅条件命题；仅观察168h，不虚构169-192h动作预算；deadline越界未偿为U，due-hour先恢复后exact检查；明确N/A、同维已证F优先、seed非等权、独立窗口初态、非rolling周预算可集中使用及新增恢复cap/损失假设。完整protocol/schema测试、training证书与holdout绑定及计算方案仍开放，不称完整pre-seal通过。
+
+机械证据results/tables/rq2_continuous_science_candidate_v1_non_authoritative/structure_audit.json SHA256=6ba0fc07cf551a9fc1d18952849b46e8e8ffb051dca8accb8da41e9b5c4ec884，绑定candidate SHA256=2a0e7686b9f92355dc421531c2150ecab354a8106abea54c2d2c5d25259c9051。3pins、46个唯一物化新cell及实际窗口计数通过；gzip exact重算6个raw>1小时涉及holdout三个块、10/28窗口。沿用当前source_pair整窗预验证时该10/28为U质量下界，不是服务失败率。birth1/due25的已有cohort小例确认hour24删失、hour25偿还成功；零solver。
+
+计算关键缺口：该候选全部配对为training14644/holdout14336。若每pair-cell直接跑一次现有168h四臂episode，对应90082390272/88187731968次selector调用；这仅是特定直接展开条件算术，不是全部算法下界。不能只扩超时或擅自缩支持；下一步须审计哪些计算可在相同输入/信息/策略身份下严格复用，并形成可行计算路线与完整training/holdout证书合同，再完善科学协议。旧冻结字节和结果保留，未启动正式或长solver实验。
+
+## 2026-09-28 计算复用及容量证书绑定边界
+
+新增docs/model_spec/rq2_computation_reuse_and_capacity_binding_v1.md及tests/test_rq2_computation_reuse_boundaries_v1.py；现有实现未改。10项通过（14.34秒）：同reference归档改变CFE/limits/due/available后publication身份不同、重建不调用solver；物理input相同但task/resource/caps变化时原record重挂被拒绝；actual角色身份、容量改变动作及同功率不同前序状态均有直接反例。核查与旧源码一致：policy只归零source_hour，source/预算/角色身份不能因物理输入相同而绕过。
+
+在上一候选全部pair-cell路径的条件算术中，即使每pair reference跨46cell只做一次，也仅从178270122240降至143215914240次selector调用（减少900/4577约19.7%）；没有证明该跨task复用已实现或计算路线可运行。actual业务历史通过动作影响功率，完整网侧输入相同仍需分别核来源/cursor和任务证据归属。
+
+training→holdout当前不是漏填一个certificate SHA：capacity_policy配置明确要求training_capacity_certificate=None。后继必须绑定目标/arm/cell/完整或前缀语义、training支持及证书、注册容量选择规则、固定策略、独立holdout来源/初态和B6规划/共享执行区别。完整目标未定义前不开发默认接受机制容量的适配器。现有normal最优性与全支持可行计算路线仍开放，不将窄测试写成formal-ready。
+
+命令为compute Python -B -m pytest -q -p no:cacheprovider tests/test_rq2_computation_reuse_boundaries_v1.py；git diff --check通过。未启动长solver、修改冻结协议/产物或清理仓库。
+
+
+## 2026-09-28 拒绝后动作的跨层验收补齐
+
+复核确认拒绝覆盖、B6共享后继、部分响应和业务/网络事务均已有开发实现，不重复建设。
+新增tests/test_rq2_scale_rejection_action_semantics_v1.py的6例，验证JOINT/B6的CFE短缺及到期小时候选恢复/miss仅在网侧接受后提交；网侧数值未决时保留候选、两侧原状态及到期前账本。timeout反例明确固定有效赋值/物理见证、maxTimeLimit和唯一optimality错误，避免把残差失败误称timeout。
+新增6例与既有scale小时事务9例合并运行，15 passed in 78.92s，exit 0；独立限定预审findings闭合。命令及边界见docs/model_spec/rq2_continuous_rejection_coverage_v1.md。生产源码、配置和研究结果未改；无新增真实处置观测、正式风险或认证。
+该拒绝语义验收缺口已补，后续不继续扩建此支线。真实normal最优性、全支持计算可行性与训练容量/holdout证书仍开放。600s normal诊断入口仅有未完成草案；资源API需真实任务清单，禁止用虚构episode占位。本轮未启动该长任务。
+
+## 2026-09-28 单 normal 的真实H25诊断准备
+
+新增SingleNormalResourcePlan独立资源声明，严格单normal/单envelope、无episode；旧完整episode清单规则保持。新类型接入既有source/transport/worker/controller，不再用占位episode满足API。
+已生成configs/rq2_scale_normal_h25_600s_development_v1.DRAFT.yaml及同前缀request packet。旧H25来源、初态、158 UID/25小时和精度保持，只将native预算15秒改600秒；normal envelope1500秒，任务外serial监督20秒，总声明1520秒。默认只读入口经过前后外层pins核验，不覆盖已有attempt，不重试。
+61项资源/数值测试通过；controller25项通过；入口夹具修正及外层漂移反例后最终21项通过。真实H25只读source prepare34.7656秒，0 solver，input d9959966c52fe618e73974fc53203ad2caed5169bd7f360fc79e0ecafd06780c。来源核验及最终外层复核产物在results/tables/rq2_scale_normal_h25_600s_preparation_v1_non_authoritative/；旧结果25文件hash保持一致。
+具体预算、准确分批测试记录、配置/packet/runner/payload SHA及只读命令见docs/model_spec/rq2_single_normal_h25_diagnostic_v1.md。新执行目录不存在，长任务尚未启动。须明确授权本次开发长求解；正式协议、全支持计算路线及training容量/holdout绑定仍开放，不宣称formal-ready。
+
+## 2026-09-28 成对已提交状态的诊断入口
+
+新增experiments/summarize_rq2_scale_committed_prefix_v1.py，复用旧容量诊断的精确能量/cohort汇总，只接收规模化事务ArmCursor。拒绝裸business_candidate、未提交记录、非canonical策略/记录子类、错源小时前缀及业务/网侧末端错位；只统计已提交记录，未提交源小时显式保留。不从halted推断尝试/失败次数，完整服务/风险/容量证书保持None，历史网侧archive及风险support未验证。
+新18项与旧容量诊断15项合计33项通过；补端点反例后18项通过；预审record子类绕过修复后最终20项通过（17.14秒）。代码/测试/准确命令及分批证据见docs/model_spec/rq2_scale_committed_prefix_diagnostics_v1.md。旧summarizer SHA与原记录一致，旧包/执行链未改。
+该薄层关闭候选误作已提交汇总的接口缺口，不替代完整episode重放或正式评分。600秒H25诊断仍待明确长任务授权，未启动；正式科学合同、全支持计算及training/holdout证书保持开放。
+
+## 2026-09-28 已授权H25单次诊断：native optimal但严格界一致性未过
+
+用户明确授权后执行600秒native上限的单次开发诊断，未重试。results/tables/rq2_scale_normal_h25_600s_attempt1_non_authoritative/result.json已生成：总537.953秒、execute317.266秒、audit109.719秒，两个worker exit0且Job静默，solver_calls=1。来源及独立数值回放一致；最终replayed_unresolved_normal，formal_result=false。
+本次native termination/solution均optimal、赋值有效、最大残差2.788453912216937e-10，但LB1388837.9138593453比canonical objective1388837.913859345高1ULP，严格lower<=objective未过；UB1388837.9138593455，报告相对界差1.6764421631237928e-16。它不是TIME_LIMIT或不可行。9050项binary64系数/赋值的零solver精确有理点积仍低于LB，fsum也未消除差异；不能靠重求和或剪裁下界自动升格认证。
+结果hash、精确诊断、资源实测与保留清单见docs/model_spec/rq2_single_normal_h25_diagnostic_v1.md及results/tables/rq2_scale_normal_h25_600s_diagnosis_v1_non_authoritative/。旧结果25文件hash未变。该项不再缺本次运行授权或长预算实测；下一必要工作转为界/目标数值一致性合同审查与针对性零solver验证，保留旧门与此次未决结果，不自动追加长求解。完整科学合同、全支持计算和training/holdout证书仍开放。
+
+## 2026-09-28 Objective / bound 来源采集开发
+
+新增 src/solvers/rq2_objective_provenance_v1.py 及对应测试，分别记录 direct Gurobi、Pyomo 与 canonical/exact 目标通道，以及原生/模型目标项和 referenced assignment。保留原严格界谓词、旧 runner 和 H25 未决结果。短例确认 Pyomo 对 MIP 从 ObjBound 取 lower，对连续 LP 从 ObjVal 填 lower；不将后者自动写成独立对偶证据。
+
+组合新测试与旧 normal 回归57项通过（44.26秒）；补原生目标项、篡改及合成 TIME_LIMIT 通道后最终12项通过（1.48秒）。实际仅使用1秒上限的小型合成 LP/MIP；没有追加 H25 或正式运行。独立 sol_reviewer 服务返回 model capacity，限定预审尚未完成。详见 docs/model_spec/rq2_objective_provenance_v1.md。
+
+下一项是预审后接入版本化 successor 的原生通道归档与回放；尚不能从旧记录补造原生 ObjVal/ObjBound，也没有闭合1 ULP问题。完整科学合同、全支持计算及training/holdout证书继续开放。用户授权已收到，不重复以一般开发许可阻塞；该采集器尚不构成正式实验准入。
+
+补充：第三次独立预审已执行；已按finding补目标代数inventory（区别于点值）、solution status与optimal声明一致性、原生属性缺失异常分类。最终新增16项通过（1.70秒）；限定复核尚待结束。接入前还需caller payload限额与持久归档绑定，未更改旧normal验收。
+
+限定复核结论：collector的findings 1–3已闭合，无新增实质问题；不是official verdict。H25已完成attempt的14个文件与既有inventory的bytes/hash逐项一致，git diff --check通过。后继接入、原生通道实测及可证明界处理仍待完成，不能把采集器预审闭合写成normal最优性问题已修复。
+
+## 2026-09-28 真实原生通道已取得，数值验收修复候选
+
+已完成一次H25原生来源诊断，复用Job监督：native600秒上限/worker900秒/1GiB；实际227.921秒、原生Runtime176.747秒、1次solver、exit0/whole Job quiet。新目录rq2_h25_native_provenance_attempt1_non_authoritative保留完整native目标/界/表达式和赋值。ObjBoundC=ObjBound=旧LB，ObjVal=旧UB，canonical=旧值；22275赋值与旧attempt逐hex一致，原生/canonical目标代数一致，排除了该记录的目标导出差异。
+
+父端入口24项通过（8.77秒）且限定预审闭合。fresh source/model的零solver重放7项小例通过后在真实记录通过；它使用共享kernel，是独立执行而不是独立算法实现，只重算归档native通道关系，不能重获原生值。准确hash、命令、资源和字段解释见docs/model_spec/rq2_h25_native_provenance_diagnostic_v1.md。旧结果和旧严格验收未改。
+
+领域审计确认下一修复应区分原生界排序与跨通道目标一致性：保留raw ObjBound<=ObjVal，用原1e-9检查canonical/ObjVal一致，用原1e-8检查raw界gap，保留残差/整数/来源/witness门，明确数值最优与exact数学证明不同。候选docs/model_spec/rq2_normal_numerical_acceptance_candidate_v1.md及纯条件谓词已完成29项开发测试，正在限定复核；具体R4语义授权及正式successor接入未完成。当前不再缺原生来源证据，也不应继续重复H25求解。完整连续服务合同、全支持计算和training/holdout证书仍开放。
+
+候选限定复核已闭合：独立reviewer重跑29项通过（1.74秒），未发现新的实质科学矛盾。真实记录的条件谓词输出已单独保存在rq2_h25_native_provenance_replay_v1_non_authoritative/candidate_evaluation.json，SHA 15e7f2b58cd847ef637c8b90edb4c03ec44f8dc6afef04d74e8445dcd343f1ef；formal/normal acceptance仍false。已就“保留原容差、删除跨通道严格排序、用raw界gap及明确双零约定”的具体R4语义向用户请求授权，尚未收到回答；通用修复/运行授权不重复询问。旧已完成H25 attempt的14文件再次核验bytes/hash全保持。
+
+## 2026-09-28 数值验收修复已获明确授权
+
+用户明确回复“同意该数值验收修复，继续推进（推荐）”。此前关于该具体 R4 语义“尚未收到回答”的记录已被此授权更新。保留 raw ObjBound/ObjVal、原生界排序、1e-9 目标一致性/残差/整数限及 1e-8 raw gap，双零约定 gap=0，其余零目标未决；exact 数学认证保持 false。旧严格协议与原始结果保留。
+
+正在接入版本化 normal 数值验收 successor，加入 fresh canonical 重算与连续时序 witness，并复用现有 H25 归档作零 solver 验证；不再重复 H25 求解。完整连续服务合同、全支持计算路线及 training/holdout 证书是另外的开放项，本次数值授权不自动关闭它们。
+
+## 2026-09-28 数值 normal successor 已封存待独立审查
+
+用户授权已落实至只读归档验收组件。完整 canonical 重算、原生目标/界口径与连续时序 witness 在实际 H25 归档通过；assessment_preseal.json SHA256=330ca678c4d31de4c765290fec62d54a87fe90a37a8b05f5c8a0ef1715255dca，numerical_solver_optimality_accepted=true、witness errors=[]、verifier solver calls=0。机制初态、非观测功率映射、未注册 coupling 显式保留；exact/security/native-auth/resource/formal 均 false。首份旧开发 assessment 保留，spec 明确其非 seal evidence。
+
+最终窄测试58项通过（3.86秒）；相关旧 normal 回归组合96项通过（47.69秒，额外guard测试和角色元数据之前）；限定pre-seal findings已闭合。旧H25 attempt14文件bytes/hash一致。150成员生产outer已原子发布SEALED_READY_FOR_INDEPENDENT_REVIEW，路径configs/rq2_normal_numerical_acceptance_v1.OUTER.SHA256SUMS.json，SHA256=b6214eae0848d580f903191f78281b0c50ff408aca34b090e506816088812115。fresh reviewer正在审查，不先写PASS或正式实验已启动。
+
+数值组件不改旧normal record及其strict acceptance。后续正式流程需要显式消费新证据；完整连续合同、training/holdout证书与全支持可行计算继续开放。计算路线独立审计已证明精确零L1时UID词典序后缀为常数，尚待混合native/analytic证据链实现，不能把近零当零或只凭normal generation向量跳过物理求解；详见rq2_computation_reuse_and_capacity_binding_v1.md。
+
+## 2026-09-28 数值 normal successor official PASS
+
+新实例只读 sol_reviewer /root/normal_numerical_official_v1 对 exact sealed outer（SHA b6214eae0848d580f903191f78281b0c50ff408aca34b090e506816088812115）给出 official PASS，无实质 finding。独立核对150成员与旧14文件hash，并fresh零solver重放H25：10项条件true、witness无错；独立58项通过3.82秒，当前组合103项通过46.72秒。结论由root原样记录于results/tables/rq2_h25_normal_acceptance_v1_non_authoritative/official_review_receipt.json；sealed bytes未改。
+
+本次具体数值修复的授权、实现、真实归档验证和组件独立审查已经闭合，无需继续停留在1 ULP问题或重复H25求解。PASS仅覆盖retained_h25_numerical_normal_archive_only；完整正式runner的新证据接入、四臂完整合同、全支持计算及training/holdout证书仍开放。下一项应推进显式新证据接入与已证明零L1后缀的versioned selector路线，继续保留机制/观测区别、完整支持、旧结果及全部未提交文件。正式实验尚未启动。
+
+## 2026-09-28 零L1解析后缀 core 与 replay 已实现并封存
+
+新增 selector_zero_face、scale_selector_zero_face、scale_selector_zero_face_replay 三个versioned development模块；原selector及normal封存包不动。真实native prefix继续原数值门；只有精确零L1及逐UID generation=plan才尝试解析。实际模型repn核验双侧偏差约束、非负domain、精确零和锁和唯一激活的minimize UID目标；完整物理赋值仍按原容差另验。近零走native，prefix未通过不解析，解析失败保留prefix且无next state。
+
+21UID合成对照原23次/new2次native调用，逐目标hex、request、物理carry相同；新记录111359字节，SHA a0081bb0f1d2b1bdaaa45f33c6ca05731b61ebbade9e04d141823405e795ad89，位于results/tables/rq2_selector_zero_face_21uid_v1_non_authoritative/result.json。对应replay逐字节重建native prefix和21解析阶段、solver0；不能外推为真实158UID命中率或wall-time。
+
+当前core新旧selector及旧replay组合82项通过128.84秒；后加positive-request/zero-L1和20.1 binary64 exact两项通过3.88秒（core未改）。限定pre-seal findings闭合。94成员outer已原子封存：configs/rq2_selector_zero_face_v1.OUTER.SHA256SUMS.json，SHA626ca0d72cb8f05a13453c9648980a2bfeea55ef48bc093ad5bda5761d77efe1；fresh official review进行中，尚未写PASS。
+
+范围仅mixed core+zero-solver replay。核查现有store的_validate_record仍严格要求ScaleSelectionResult，worker固定CLASSES/实现身份，controller调用旧worker；新MixedSelectionResult不能直接重挂旧归档。下一项是显式versioned store/worker/controller接入，沿用完整最坏预算、Job监督、one-shot intent、无resume和失败保持unknown的门，然后再接episode。完整计算路线、正式科学合同及training/holdout门继续开放；未启动正式实验。
+
+## 2026-09-28 零L1混合selector core official PASS
+
+新实例只读 /root/selector_zero_face_official_v1 对exact outer 626ca0d72cb8f05a13453c9648980a2bfeea55ef48bc093ad5bda5761d77efe1 给出 official PASS，无finding。独立核对94成员；fresh新35项通过59.75秒，fresh新旧组合84项通过133.02秒。绑定的compute/Python3.12.12中fresh跨process禁solver回放21UID归档，2native前级+21analytic阶段及全部结果字节一致，新增solver0。Python3.11.15因input/policy绑定runtime不同正确拒绝重挂，不是跨process缺陷。
+
+root将独立结论记录于results/tables/rq2_selector_zero_face_21uid_v1_non_authoritative/official_review_receipt.json，sealed字节未改。此PASS只关闭mixed core+replay审查；旧normal包保持不变，不授权正式运行。下一项直接推进versioned store/worker/controller接入；无需重复零L1设计或21UID证明。资源与真实158UID/全支持性能、完整科学合同和training/holdout继续开放。
+
+## 2026-09-28 混合 selector 外层执行接入已封存
+
+版本化 store/worker/controller 与 source-bound archive replay 已实现，限定 pre-seal findings 闭合。新路径52项通过（54.05秒），旧 store/worker/controller 回归46项通过（63.00秒）。真实小型合成 Job 的 reference/actual 分别消耗2/1次 native calls，仍预留3/2完整stage；exit0、Job quiet，随后零solver回放成功。这里的输入是机制合成例，不能写成公开数据实测或完整资源认证。
+
+132成员 outer configs/rq2_selector_zero_face_execution_v1.OUTER.SHA256SUMS.json 已原子封存，SHA e633eed51afa8c02e194470258cc45e0324565864c40868de2343088dd263a60；独立 official review 进行中。证据位于 results/tables/rq2_selector_zero_face_execution_v1_non_authoritative/，inventory SHA 057d9542f17a078da8052222b10363e14e44c3ce3d3bdcf5d76764ddc7b34fa1。root再次逐项验证新132成员、旧normal150成员及core94成员hash全部一致。
+
+下一必要接入点已由源码确认：scale_hourly_transaction 的 request 类型、scale_episode 的 controller 与归档 pins、scale_episode_replay 的 exact result 类型、scale_episode_transport 的固定词汇仍属于旧链。后继必须显式传递外部 store_binding_identity 到归档回放，更新实现身份闭包，并保持 reference 连续历史、四臂固定策略、业务/网侧成对提交、完整最坏预算与失败后不重试。不得将新记录重挂旧类型，也不得把现有拒绝动作/恢复债务实现重做一遍。episode接入、真实158UID命中率/成本、完整科学合同、全支持计算与training/holdout门继续开放。
+
+独立审查已完成：新实例 /root/selector_execution_official_v1 对上述exact outer给出official PASS，无finding；fresh52项通过54.47秒、旧链46项通过63.29秒，132成员及inventory20文件匹配，旧normal150/core94成员不变。独立reference/actual归档回放均接受且新增solver0。root记录见同证据目录official_review_receipt.json；封存字节未改。PASS仅关闭mixed_selector_store_worker_controller_archive_replay审查门，下一工作按上述episode接入推进。
+
+## 2026-09-28 混合 selector 完整 episode 接入已封存
+
+新增scale_hourly_zero_face_transaction与scale_episode_zero_face系列共6个源文件，将Mixed request/result、外部journal binding接入小时事务、连续episode、offline replay、固定输入transport、独立execute/audit worker与顶层controller。保留四臂固定策略、业务/网侧成对提交、恢复债务、完整最坏预算、pending unknown和禁止重试；离线成功observation增加与封存子控制器一致的严格复核。旧链代码不变。
+
+测试终态分批为：事务17项通过93.40秒；内部episode/replay33项通过423.92秒；外层及补充反例93项通过441.45秒；旧事务/拒绝动作/transport回归44项通过88.47秒。批次存在重叠，不相加声称unique计数。早期episode依赖名适配错误已修正并由上述终态覆盖；没有放宽阈值或预算。限定pre-seal findings全部闭合。
+
+完整短例交付包在results/tables/rq2_selector_zero_face_episode_v1_non_authoritative/，inventory SHA343e939663873aecfb71b48dcecb6f49f378ab561dc41a2a22debd4620b6523c，60归档文件逐项核验。合成机制的一小时reference+四臂实际native calls为(2,1,1,1,1)，仍预留11；execute30.578秒/audit12.594秒、exit0且Job quiet，5selected/0unresolved，audit新增solver0。输入准备另有2次短求解。formal、完整服务与资源认证均false，不是真实公开数据实验。
+
+246成员outer configs/rq2_selector_zero_face_episode_v1.OUTER.SHA256SUMS.json已原子发布SEALED_READY_FOR_INDEPENDENT_REVIEW，SHA91f031bf1d51fac67439594842237389e669fd8772aa88a641fa39af067270be。fresh reviewer /root/selector_episode_official_v1正在official review，尚未写PASS。旧normal150/core94/执行层132成员hash保持。下一工作转向正式来源链消费normal数值successor、真实158UID命中率与成本及科学/容量/training-holdout合同；不得重做已覆盖的拒绝动作或把本短例当作全支持计算可行性证明。
+
+独立审查终态：/root/selector_episode_official_v1对上述exact outer给出official PASS，无finding。fresh端到端3项通过151.79秒、binding/pending unknown/audit guards五项通过28.67秒；审查后246成员、60交付文件和旧150/94/132成员保持一致，配置member顺序与实现身份匹配。root receipt已保存于同交付目录official_review_receipt.json。PASS仅关闭本完整episode接入组件审查，正式实验尚未启动。
+
+后继接口已定位：src/solvers/rq2_objective_provenance_run_v1.solve_once可复用通用原生通道采集；grid_information.prepare_normal_information已有完整赋值见证与逐小时计划投影。尚需版本化来源绑定，将新数值验收证据与这些投影、外部源身份及后续selector输入连起来；当前固定H25 assessment不能冒充通用正式normal输入。机制forecast/初态/功率映射继续明示，旧严格record不原地升格。
+
+## 2026-09-28 Normal 数值证据的通用来源与计划投影接入
+
+新增 normal_numerical_source 只读连接层，绑定通用 solve_once canonical 数值记录、外部 record SHA、source request 与机制信息声明；重建实际输入/模型、复用已授权数值验收，再独立复算静态网络、全部逐小时出力与启停、forecast/初态/planning 参数及 allowed-plan identity。超时、无 incumbent 与未决均不发布 accepted plan；不修改旧严格 normal record。现有 current-hour view 和 common request binding 已验证兼容。
+
+新组件42项通过195.58秒、相关旧接口回归131项通过139.61秒、H25 wrapper漂移2项通过1.80秒。限定 pre-seal findings 全部闭合。已有H25归档零求解生成25小时/158UID完整计划；最终报告 results/tables/rq2_normal_numerical_source_v1_non_authoritative/h25_projection_verified.json 为588533字节，SHA eb8f51013eb4c76e8fa7641ff71aa174143fd6c42f36a8fda01413f59db1ecd9。报告显式绑定wrapper/API实现并前后复核，原初步报告保留。初态、forecast和功率映射继续标为机制假设，native历史执行认证、完整资源、exact、安全、formal及resume均false。
+
+189成员 configs/rq2_normal_numerical_source_v1.OUTER.SHA256SUMS.json 已原子封存，SHA e216eebe557d6c7cf4d903e9665dc769548a95c45cf02a28ff7730ef927f8553。新实例 /root/normal_source_official_v1 已给出 official PASS，无finding；fresh44项通过183.49秒，H25对象及canonical bytes与封存报告一致，独立完整投影编码、network、25小时及allowed-plan identity一致。旧normal/core/execution/episode四包150/94/132/246成员hash均保持。准确测试命令与范围见同交付目录preseal_closure.json，root记录的独立结论见official_review_receipt.json。
+
+下一必要工作是versioned normal执行来源链：当前scale_normal_worker仍固定source.run_source/audit_source及旧schema，scale_normal_controller仍固定旧receipt投影。后继应接通新原生通道采集、来源前后检查、durable intent/Job监督、独立零solver audit，并将新plan与episode初始输入绑定。此连接层不关闭该运行链、完整科学合同、真实规模全支持成本、capacity及training/holdout门；正式实验未启动。已有四臂、拒绝动作、恢复债务及mixed selector episode产物继续复用。
+
+## 2026-09-28 Normal 数值执行与持久监督接入
+
+新增 normal_numerical_execution/transport/worker/controller 四个版本化模块，接通原生采集、来源及声明前后复核、已授权数值验收、完整计划持久化、Job监督、独立子进程审计和父进程完整重放。replay_information 返回已重建的 typed plan，record/audit 同时保留完整 encoded plan；不是只留下计划摘要。collector 异常继续 calls=None、complete=false，保留完整预留且不重试。原 scale_normal 链及所有科学阈值保持。
+
+主执行及controller57项通过532.87秒，补充失败窗口5项通过118.32秒，旧worker/controller42项通过259.91秒。最后补入transport的legacy源SHA和class inventory身份绑定后，两个漂移反例及direct worker/真实process端到端共4项通过73.93秒；该批与主批有重叠，不累加为unique总数。三项pre-seal findings已闭合：求解前声明漂移拒绝、完整计划归档回放、transport依赖闭包。
+
+短例交付 results/tables/rq2_normal_numerical_execution_v1_non_authoritative/ 包含20文件，inventory SHA a7582e24860146885aa1fb818a2cb9e3a8bc5dddc96e0f2700feba9ce3366c82。该例为3小时/1UID、36变量/51约束的合成机制source/bootstrap，准备0solver、目标执行1次native、audit0solver；execute14.297秒/audit11.203秒，exit0且Job quiet，完整plan与projection一致。它不证明公开H25来源执行、全支持资源或完整服务认证。
+
+228成员outer configs/rq2_normal_numerical_execution_v1.OUTER.SHA256SUMS.json已原子封存，SHA 62eed9c78d89cc7af614f5527ca1afc3c3859694d79c11577f21fed32d3d3494；fresh独立审查结论为下述REWORK。旧projection189/normal150/core94/execution132/episode246成员hash均保持。准确命令、阶段与测试重叠信息见交付目录preseal_closure.json。
+
+独立审查现已给出 official REWORK，确认三项：遗漏 max_process_peak_working_set_bytes 门、完整 core payload 未受原限额约束、缺少 elapsed 覆盖 native Runtime 的检查。审查 fresh 18项通过202.32秒，228成员及旧五包哈希保持，但这些通过项不能关闭资源门。root 已记录 official_review_receipt.json；v1封存字节保留。
+
+v2 successor 四模块以 _v2 路径接续，只恢复上述三项原接受条件。完整 core 限额覆盖 canonical record 中的数值、projection、prepared plan 和来源/资源记录；记录严格正整数且单调的 lifetime working-set before/after；计时一致性沿用旧1e-6限。说明见 docs/model_spec/rq2_normal_numerical_execution_v2.md。
+
+v2 主批74项通过817.87秒，主批收集后新增的执行端 Runtime 反例1项通过16.33秒；pre-seal 独立4项通过68.83秒且无剩余finding（与主批/新增项重叠）。短例交付20文件，inventory SHA13410a24b2fe877898f0f6a57f49bd8e411540a9358c84bd718ebd3f1607b019；完整记录34815字节，working-set158748672→159010816字节，wall9.8594575秒覆盖native Runtime0.0009999275秒；execute18.813秒/audit14.547秒，均exit0/quiet，执行1native、audit0solver。证据仍为3小时/1UID的合成机制来源。
+
+264成员 configs/rq2_normal_numerical_execution_v2.OUTER.SHA256SUMS.json 已原子封存，SHA475974d853c3132486c80aeb70a56edf00dbd4b59a2816d4fb2a3168b7a9dea9。fresh独立审查 /root/normal_execution_official_v2 已给出 official PASS，无finding；独立13项通过211.56秒，覆盖全部资源门、真实进程链及persistent unknown one-shot。测试后264成员及inventory均未变；相对v1零删除、零修改、36新增，旧六包228/189/150/94/132/246成员hash保持。root记录回执见v2交付目录official_review_receipt.json，完整开发命令见preseal_closure.json。此组件的执行/持久监督独立审查门关闭，episode初始来源接入可继续按下述既有接口推进。
+
+下一接入点是来源绑定的normal归档→既有current-hour information/common request binding→mixed episode初始输入，复用现有初始化与四臂逻辑，不再重做normal数值验收或持久监督。完整科学合同、公开来源全支持计算预算、capacity与training/holdout门仍开放；机制参数不升格为观测，formal/exact/security/native历史认证/完整资源/resume仍false，正式实验未启动。
+
+## 2026-09-28 Normal 到 mixed episode 的完整输入对应开发
+
+新增 normal_episode_binding.py，仍为 DRAFT_NONAUTHORITATIVE。已从外部pin绑定的normal v2归档零solver重建完整plan，逐小时核对CurrentGridInformation和RequestSourceAudit；从PairDeclaration独立重建完整业务ContinuationHour及mapping，覆盖workload小时、来源标识和CFE请求。四字段完整资源计划逐字节一致，并核对normal task依赖；SingleNormalResourcePlan不能进入episode绑定。
+
+沿用既有科学合同：reference/actual初态分别按声明重建，实际出力不强制等于normal初态；episode允许normal覆盖的连续中间子窗。reference输入/策略身份及_admit在solver前重验，disclosure逐时重放。paired baseline的精确对应只限定此bridge的适用范围，不能推广为通用CurrentGridInformation合同。设计审计由/root/normal_episode_binding_design只读完成，主要finding已落实为代码和反例。
+
+主批5项通过278.39秒；将single-normal门前移后，新增guard/unknown/source-drift及两种合法起点共9项通过132.11秒，两批重叠2项，unique共12项。短合成normal归档经bridge交给既有mixed episode，四臂均committed，完整最坏调用预留仍为11。源pair preparation为显式合成fixture，此结果证明接口兼容，不能解释为public/H25来源执行。七个旧包264/228/189/150/94/132/246成员hash均保持。准确命令、阶段及当前代码hash见 results/tables/rq2_normal_episode_binding_v1_non_authoritative/development_checks.json。
+
+该轮 standalone 交付时端到端来源门仍开放；后续持久接入进度见下节。规范见 docs/model_spec/rq2_normal_episode_binding_v1.md。
+
+## 2026-09-28 Normal 到 mixed episode 的持久来源接入开发
+
+新增 normal_episode_transport/worker/controller，完整输入包携带 normal request/archive、episode SHA 与 bridge identity；parent、execute worker、audit worker 均独立重建绑定，两份 receipt 与最终 result 保存同一报告。四臂、债务、拒绝动作、Job 监督与完整资源预留复用旧 sealed episode。
+
+pre-seal 发现的来源读取集缺口已修复：RTS 清单及全成员，power/workload 两包清单及全成员、builder/config、power chronology 均做 SHA/identity 检查；输出隔离覆盖这些目录和文件。实际读取的文件必须列入 config members。运行期间及 release 前重验，最终完整 source rebuild 保留。真实公开包 2 个、间接文件 16 个已零 solver 核验哈希一致；完整 pipeline 仍使用明确标记的合成来源 fixture，不能据此宣称真实 H25 端到端执行。
+
+当前字节的 inventory、transport 与真实子进程 execute/audit 合成链共 8 项通过；该批因故障测试 spy 的 context manager 用法错误停于 1 failed/8 passed（387.36秒）。修正测试后单独重跑失败窗口文件，3 项通过395.69秒：来源在 durable launch 后漂移阻止 release；execute/audit receipt 的 binding 重编码篡改分别拒绝且无最终 result、one-shot 保持。当前新增 unique 11 项通过，历史批次不重复累计。
+
+只读 pre-seal 审计 /root/normal_episode_binding_design 未留开放实质代码 finding；它不是 official verdict。准确命令、历史测试错误及该轮字节 hash 见 results/tables/rq2_normal_episode_binding_v1_non_authoritative/persistent_development_checks.json。7 个旧包 264/228/189/150/94/132/246 成员哈希保持；完整科学合同、全支持资源、capacity、training/holdout 门仍开放，正式实验未启动。
+
+随后保存已有短例83文件快照，inventory SHA91ab8d751338da12d66e3ad79de1b0122767ac51c2f165e62fff681cd31a4636；保存前零solver重建绑定并核对两份worker回执，execute73.078秒/audit52.234秒、exit0且whole Job quiet，5条selector链重放、完整调用预留11。快照保留原始pytest路径，不提供重定位执行或resume。518成员outer configs/rq2_normal_episode_binding_v1.OUTER.SHA256SUMS.json已原子封存，SHA7c47018cff8267575c3cbe218cc6225969c6c5c20a25e22eefd52c9f0c1d2567，状态SEALED_READY_FOR_INDEPENDENT_REVIEW；fresh /root/normal_episode_official_v1 正在审查，尚无official verdict。代码和测试在封存前后未改，规范仅调整生命周期措辞，准确冻结清单与验收矩阵见config及preseal_closure.json。
+
+独立审查现已完成，official PASS、无finding。fresh三批11项388.81秒、7项153.87秒、2项350.37秒，共20项通过；覆盖完整normal/资源/子窗与伪造拒绝、零solver guard、完整来源inventory/隔离、真实execute/audit及release前来源漂移。审查后518成员、83文件inventory及7个旧包均保持；两条继承链412成员零修改/零遗漏。root已记录同目录official_review_receipt.json，SHA32863fdbbcd190492c315ed5ee580aad637d6a931abde088995ce2aa741a2b95。该组件审查门关闭，不继续重做此绑定链；formal、完整科学合同、capacity/training-holdout及全支持资源门仍开放。
+
+## 2026-09-28 连续科学候选与 planner 活动边界适配核对
+
+零solver反例确认：在现有合法 ContinuousPlanningInputs 小例中，仅将 minimum_event_power 改为科学候选声明的1e-6，即被现有“严格大于 SERVICE_TOLERANCE”门拒绝。证据 results/tables/rq2_continuous_science_candidate_v1_non_authoritative/planner_admission_audit.json，SHA564718a6947738da9f4189bcf7157a0ef70205dae523eceae52f298e005e1d57，绑定原候选SHA2a0e7686b9f92355dc421531c2150ecab354a8106abea54c2d2c5d25259c9051。此为构造适用性缺口，不是数学/物理不可行；没有调整候选值、活动阈值或旧planner。
+
+下一适配须区分开放物理活动集合与闭下界松弛，并通过独立精确动作见证决定有效前缀可行性；仍不能把松弛incumbent当完整/因果容量UB。完整future/period目标、policy class及training到holdout证书合同继续待定义，相关限定科学设计核对进行中。
+
+限定设计已形成 docs/model_spec/rq2_continuous_complete_target_contract_candidate_v1.md：分别列明有限登记与长期持续对象，显式完整目标量词、初态/路径兼容关系、prefix集合投影、全部支持的continuation证明及B6分离规划边界。区分任意可接受因果策略最低容量与既有固定greedy/EDF策略族；严格request-bounded响应的峰值容量条件不能推广到容差评分。当时已提交研究对象澄清，后续选择见下节；未修改科学候选YAML。
+
+## 2026-09-28 开放活动边界开发与有限登记对象选择
+
+新增 continuous_planner_open_activity.py 与 planner_open_activity_witness.py：独立输入类型/identity
+允许 minimum_event_power 等于1e-6，闭模型标注 open_activity_boundary_outer_relaxation；
+严格动作见证继续拒绝 q<=tol 的正调用及微小正恢复。边界假活动只属于松弛模型，不能作为完整或
+因果容量UB；B6保持separate planning。旧代码及候选参数保持。
+
+新33项及旧planner/witness/assignment回归共179项通过2.13秒，无solver调用。
+包括两模式×四臂的新旧标准线性模型一致性、边界反例、到期恢复和身份隔离。
+开发证据 results/tables/rq2_continuous_planner_open_activity_v1_non_authoritative/development_checks.json，
+SHA a6d538752bee48cc0b369f69d0e4856c878a495136777bca6679911e42da16d5。
+518 sealed成员、公开交付7成员、复合诊断7文件及16依赖重新核对一致。
+此项目前为build-only DRAFT；原生赋值/界审计适配和official封存审查仍开放。
+
+用户本轮明确选择有限登记合同为主对象：登记期内全部延期工作须按期履约，后续真实输入不足仍报
+unresolved。已同步目标合同和决策包；这关闭主对象分支选择，不批准登记长度、机制deadline、
+预算、策略类或完整科学协议。下一步需将该对象的 enrollment/follow-up 与训练证书、holdout
+评分范围明确绑定。完整支持资源门仍开放，正式实验未启动。
+
+只读预审 /root/open_activity_preseal 已闭合开发报告引用finding，未留实质实现finding。
+独立目标33项通过0.69秒；含旧short-solve的相关回归251项通过3.01秒（两批重叠）。
+518成员零漂移，有限登记选择未扩展为参数批准。记录见同开发目录preseal_findings.json；
+这是non-authoritative预审记录，不是official verdict或运行许可。
+
+## 2026-09-28 开放活动 planner 原生审计接入
+
+新增 planner_open_activity_assignment.py / planner_open_activity_short_solve.py，将版本化输入、
+canonical赋值和严格见证接到owned短求解流程；原数值限、原始界、逐变量原生来源、预算和单次调用
+保持，normal专用数值修复未扩展。新旧类型拒绝混用，已知旧封存字节保持。
+
+新48项及六文件相关回归共299项通过3.52秒。预审补入3小时、单事件跨空请求小时的反例：
+mock和真实solver均得到松弛区间[0.25,0.25]，中间q=1e-6使严格物理见证拒绝。
+这证明两类证据分离，不是不可行证明。timeout、缺解、加载/结构/选项篡改不发布区间或重试。
+
+四臂H2真实HiGHS合成短例各1次求解、单线程、每次time limit1秒，完整快照已保存于
+results/tables/rq2_continuous_planner_open_activity_native_v1_non_authoritative/；
+inventory SHA034267d7fc0bc2d2e9896cfd191cfcdb6da3823fb678be52b48846d2112ede3a。
+四臂松弛区间分别[.25,.25]/[.125,.125]/[.375,.375]/[.25,.25]，精确恢复见证均通过，
+仅为合成机制前缀结果。development_checks SHA67e4660f994e152da29fb1b480aa014a0cba619762de57775fd74154cf9b7992。
+518旧成员及原科学候选SHA保持。该接入仍DRAFT，正式独立封存审查门未关闭。
+
+下一必要项转向有限登记合同的登记集合、follow-up支持和完整验收实现，再绑定training容量与holdout。
+尤其原短验证预算H<=168，不能据此执行168小时登记加24小时follow-up；不能静默减少登记小时或
+扩大预算。完整合同/支持/资源注册及正式实验门继续开放。
+
+已用 experiments/verify_rq2_open_activity_native_development_v1.py 零solver重装并复算4份保存的
+完整assignment/witness，全部逐字段一致；checker及fixture SHA、准确命令、逐臂保存/复算摘要
+见assignment_replay_checks_v2.json，已由development_checks绑定。初步检查记录保持，仅v2提供
+完整重现元数据。该检查不认证原生历史执行，不升级合成例为正式结果。
+
+限定只读预审 /root/open_activity_native_preseal 已闭合上述两项补证，未留实质实现finding。
+独立新48项通过1.43秒、六文件299项通过3.79秒；独立零solver回放4份assignment/witness一致，
+9项开发/回放hash及518旧成员保持。预审记录见同目录preseal_findings.json，不是official verdict。
+
+## 2026-09-28 有限登记来源支持已逐窗核对
+
+新增 enrollment_support_audit 与零solver入口，重新从已绑定小时源包构建continuation chains，
+核对固定summary/config/实现及chains身份。在待批准E168/F24/stride24条件下保留全部1,091个
+边缘登记窗口：training配对14644、两源完整follow-up14040、缺至少一源604；holdout为
+14336/13743/593。缺尾部的窗口不删、不跨split/seed/chain借数据，单独保存实际和所需末时。
+
+holdout raw>1仍是6小时；登记期影响10/28个workload窗，observed follow-up-only再增加1窗，
+合计11/28。原值保留。缺源比例仅是来源覆盖算术，不是失败率或U质量下界：已提前偿清的登记
+cohort可能无需该尾部；来源齐全也不能据此算履约成功。RTS模拟事故/派生边缘与业务观测继续区分。
+
+当前报告仅为results/tables/rq2_finite_enrollment_support_v1_non_authoritative/coverage_168_24_verified.json，
+SHA29ba7f5662c3dee019f183104479d8fa354f726bea0e055ee456b3dd337042c4；同目录初版已在
+development_checks.json明确标为superseded draft并保留。开发报告SHAc952ef7534675b936a4c2a2bd03a9a12eec773f8807ba92cd7572e2a444db38e。
+新16项及相关56项通过；固定summary SHA补入后新16项复测通过0.48秒，覆盖行/计数不变。
+普通R2只读审查独立56项通过3.14秒，最终fresh run与当前报告逐字节对象一致，无开放finding，
+不创建official gate/receipt。规格见docs/model_spec/rq2_finite_enrollment_support_v1.md。
+
+有限登记对象已由用户选择，E/F数值、请求评分范围、按需停止、跨follow-up预算以及策略/容量
+语义仍需形成并审阅自包含合同。source coverage检查未启动solver或正式实验。
+
+有限登记候选已形成docs/model_spec/rq2_finite_enrollment_contract_candidate_v1.md，包括全部登记
+请求及birth评分、按需真实follow-up、非登记新birth持续入账、按维度S/F/U、单一不reset账期
+以及training的策略量词。E168/F24及整个最长192h episode使用原建议14事件/2.8能量均待批准。
+
+只读领域核对进一步确认容量解释缺口：现有D只限制call，strict bounded可行时D等于峰值；
+GRID_EXCESS在当前闭MILP/连续恢复下也可按max(请求峰值,qmin)截断，不自动获得恢复时序
+敏感的最低容量。不能以切换现有mode就宣称解决。候选提出双向物理功率容量q+r<=D，B6按
+分离规划track施加，shared执行另验；解析例显示单小时恢复的D可由0.4升至0.5、两小时恢复
+回到0.4。此为R4科学选择，尚未修改planner/witness/policy或授权正式运行，待用户明确审阅。
+
+## 2026-09-28 登记期诊断收尾及双向容量授权
+
+mixed paired cursor 登记/后续分区诊断已完成，保留全部cohort及债务，只汇总成对提交记录，不适用shortfall为None。13项通过24.67秒；只读 /root/enrollment_review 未发现开放实质finding，普通R2任务闭合。记录见 results/tables/rq2_mixed_enrollment_prefix_v1_non_authoritative/development_checks.json。该诊断不注册评分或签发容量证书。
+
+用户已明确批准双向物理功率容量修复：保留四臂最低D主目标，D按声明D_DC归一化，每条规划track施加q+r<=D，eta仅用于工作恢复；B6仍分离规划、共享实际执行另验。此前等待容量定义授权的状态已解除，转入独立bidirectional版本开发。E168/F24/stride24、birth+24、192h账期、事件/能量预算及其他候选参数仍未批准；正式实验未启动。最新outer及518成员零漂移，科学候选YAML和coverage报告SHA与用户保全锚点一致。
+
+## 2026-09-29 双向物理功率容量实现与预审
+
+独立bidirectional版本六模块已实现planner、严格witness、assignment/native、固定策略及mixed小时事务，四测试文件覆盖新语义。各规划track为q+r<=D，B6分离规划而实际执行只用一份shared容量。旧planner与normal数值阈值保持；新旧类型/身份隔离，拒绝不推进。
+
+首批119项通过99.52秒。增加恢复容量/类型隔离后，新旧组合476通过、1项临时父目录fixture失败（149.77秒）；仅补测试mkdir后该项1通过12.33秒。共477项unique获得通过证据，不称整批首次全绿。只读预审独立复验该项1通过10.55秒，未留实质实现finding；要求补齐checker/inventory当前hash及本记录，现已同步。开发命令、hash与6份native快照、2份精确解析witness见 results/tables/rq2_bidirectional_capacity_v1_non_authoritative/。当前assignment_replay_checks_v2.json重建6+2份完整assignment/witness，零solver；旧checks保留且标注superseded。
+
+解析0.4/eta0.8的单小时恢复D=0.5、两小时恢复D=0.4均有手工精确见证。H3原生浮点assignment虽然数值区间为[0.4,0.4]，exact allocation等式仍拒绝；未修补成物理认证。518旧成员和保全锚点无漂移。
+
+当前等待补证的只读复核及封存后fresh official review。2026-09-29用户已要求修复后开始正式实验；该目标持续推进，但E/F、deadline、预算、评分/停止、training因果容量证明及全支持可行计算方案尚未注册。新类型接入到小时事务；persistent episode transport/worker/controller仍需显式版本化。下一步闭合当前审查并完成自包含科学候选、有限登记验收和完整执行接入，不能用这组开发小例直接启动未定协议的正式实验。
+
+## 2026-09-29 后续核验：容量 PASS、CFE 合同阻塞
+
+上段等待状态已更新：双向容量组件已封存，outer 为 configs/rq2_bidirectional_capacity_v1.OUTER.SHA256SUMS.json，SHA256=14f0ff3ea3bc98a66c1bc79ba66c644a4e97bac32a5277ce44c10801a630dfb1。fresh只读独立审查 official PASS，独立125项及相关477项通过，6+2 assignment/witness零solver复算，566成员及旧518成员无漂移。receipt见 results/tables/rq2_bidirectional_capacity_v1_non_authoritative/official_review_receipt.json。此 PASS 不注册新科学合同或授权正式运行。
+
+持久episode五模块及测试已开发，仍为DRAFT_NONAUTHORITATIVE：118项通过633.88秒；补业务拒绝成对前状态/无actual目录/其他臂继续/离线回放，以及不一致预算入口拒绝，2项通过31.75秒。预算“允许额外余量”的预审finding经现有resource-plan精确绑定否证，撤回无必要实现修改；中间1失败、2通过的开发尝试保留记录。证据见 results/tables/rq2_bidirectional_episode_v1_non_authoritative/development_checks.json。normal来源桥接四模块、六测试仅为未验收draft，不能称已完成接入。episode尚未封存。
+
+新科学阻塞：当前绝对CFE映射未随配对baseline w调整。exact rational零solver审计确认46/46候选cell在登记支持中都有q_C>w的training反例，足以排除当前完整请求合同下CFE相关规划账的有限D，增大D或延长期限无法修复该瞬时矛盾。network-only没有据此定性；不是solver infeasibility或正式结果。当前证据为 results/tables/rq2_finite_request_feasibility_v1_non_authoritative/necessary_conflicts_verified.json，SHA256=bd498113d2342da1237c6433c976b6fb4d963885f83515ca47f56544d635cafa；5测试通过0.09秒，领域只读复算exact-object一致。旧diagnostic及初版报告保留。
+
+用户已选择“先审阅保留最低D主目标、完整支持的CFE映射与机制修正方案”。具体审阅稿 docs/model_spec/rq2_finite_cfe_mapping_candidate_v1.md 比较动作前锁定Rw额度、固定绝对R额度及按执行负载同比归属。A映射即使修正尺度，当前alpha/f仍存在必要条件冲突，不能承诺有限前沿。联合动作共服务或分离请求的含义、因果策略类、normal horizon与按需follow-up、E/F/期限/预算/评分及具体正式运行协议仍待决定。只继续独立开发验证与科学证据收集；依赖该合同的正式实验保持阻塞，不改变原冻结协议、20项empirical unknown或任何验收限。
+
+证据口径补充：necessary_conflicts_verified是raw-source exact算术；审查指出它不是实际浮点/负载projection逐字回放。新增 experiments/verify_rq2_finite_request_projection_v1.py 使用现有12位half-even workload projection、float CFE及有效请求接口重放保留反例，projection_replay.json仍为46/46，0solver，最小q-w约0.00853765916；不是完整source window staging。未放宽阈值或覆盖旧报告。episode pre-seal已只读闭合，无开放实质finding，仍未seal；科学审阅稿与正式运行状态保持区分。
+
+## 2026-09-29 normal→bidirectional 固定窗口桥接开发验证
+
+此前“normal桥接尚未验收”的开发状态已有后续证据：四个独立normal_bidirectional_episode模块保持原normal桥接语义，只替换新transport/replay/owner及schema。六文件测试批次23项通过812.71秒（session71288，exit0），新增旧新outer type/schema互拒和依赖身份传播5项通过2.42秒。覆盖完整normal来源/资源/初态绑定、unknown拒绝、来源清单、真实合成execute→audit→parent、来源漂移与回执篡改失败窗。现有normal专属数值规则未传播到planner或selector，旧代码未修改。
+
+证据与hash见 results/tables/rq2_normal_bidirectional_episode_v1_non_authoritative/development_checks.json，规格见 docs/model_spec/rq2_normal_bidirectional_episode_v1.md。容量封存566成员零漂移。该桥接仍为未封存DRAFT，pre-seal初审无实现缺陷，补充测试及记录正待只读闭合；它仅接显式固定window，不能解除按需follow-up/normal horizon、CFE映射A、联合服务定义及正式科学合同的阻塞。A尚未获得实施批准，正式实验未启动。
+
+随后只读pre-seal复核已闭合：12项文件hash零不一致，28项通过证据与范围记录一致，无开放实质finding；同目录preseal_closure.json保存闭合记录，未seal及科学阻塞状态不变。
+
+## 2026-09-29 方案 A 已授权实施：映射修复与完整训练必要条件
+
+用户随后明确“授权实施”，解除 A 动作前共同额度 y=Rw 的实施授权阻塞。独立cfe_preallocation与source_pair_preallocated已实现exact request/surplus共用同一额度、新旧类型身份隔离、当前额度不依赖未来或动作、原活动阈值及分量/合计分类诊断；raw>1及正值投影零保留并unresolved。旧封存接口保持原字节，本组件不生成可执行旧hour，不引入新的浮点定向舍入规则。
+
+新诊断逐cell保留全部14644条件training配对，46 cells按12个alpha/f组共享瞬时算术矩阵。当前报告results/tables/rq2_cfe_preallocation_v1_non_authoritative/training_support_verified.json，SHA256=eee1ef38b744fdf63bf51fc0a659252665f3c9322ff6fdf6a0d92f0445d0feab；初稿保留，阈值漂移门及source身份补强前后矩阵一致。alpha=.5/f=.5有14392个配对找到q_C>f*w反例、252个未找到；其余11组全14644个有反例。46/46 cells各自仍有反例，故当前全支持硬履约候选的CFE相关规划账依旧无有限D；这不是正式实验结果或failure概率。null不是成功，未读取holdout作评价，缺尾及全部来源保留，0solver。
+
+新旧相关最终116项测试通过4.66秒，旧容量封存566成员零漂移。验收矩阵见docs/model_spec/rq2_cfe_preallocation_v1.md；开发证据同结果目录development_checks.json。当前进行R3只读预审。后续仍须决定全支持科学合同（联合服务含义、alpha/f独立依据、E/F/期限/预算、normal follow-up及因果策略类），并显式实现operational转换与身份接入。不得为获得有限前沿删支持、裁请求或松阈值；A授权不能替代其余参数和具体正式运行协议。
+
+随后已完成预审闭合、独立版本封存及fresh official PASS。外层configs/rq2_cfe_preallocation_v1.OUTER.SHA256SUMS.json SHA256=8b2c9fae1353bb3d3cbca6a38a54d80582cda95b16f6534af8eeed2fddba9007，绑定587成员，含原566成员零漂移。fresh reviewer独立116项通过4.69秒，全175728矩阵条目exact oracle一致，真实25小时training来源staging及holdout5个原始越界行保留unresolved通过（该来源接口检查不是holdout服务评价）。official记录位于results/tables/rq2_cfe_preallocation_v1_non_authoritative/official_review_receipt.json。PASS仅关闭精确mapper/非执行source packet/条件训练必要条件audit组件审查门；上述科学合同和operational接入、正式运行仍未完成。
+
+正式研究路线决策包已形成 docs/model_spec/rq2_post_preallocation_experiment_decision_v1.md。回查原estimands/preregistration后明确：完整training支持不是新增的任意筛选标准；失败时原协议estimand undefined，数学上的空集inf不能进入I_joint/I_sep/A_B6减法，也不能置零。当前反例意味着相关臂没有可直接冻结给原合同holdout的全支持可行训练D。已向用户询问保留当前候选准备负结果协议，或在最低D/完整支持不变的约束下依据独立业务/清洁电理论与证据重审合同。此为新的研究路线选择，不重复请求A实施授权；具体参数及正式运行均未擅自批准。
+
+
+## 2026-09-29 已选择合同与参数重审
+
+用户回复“1”对应紧邻会话选项“依据独立证据重审合同与参数，保留最低D和完整支持（推荐）”，不是早期决策表的行序；据此解除研究路线选择等待，授权依据独立证据重审合同与参数，保留最低双向D和完整支持。新提案见 docs/model_spec/rq2_contract_reassessment_v1.md：将现有负区域保留在完整alpha数学域的机制前沿设计中，区分分离承诺与物理共服务，参数依据不足保持明确。当前进行只读独立草案审查；具体theta、计算网格及正式运行包仍未注册，不能将路线选择等同于这些数值的批准。
+
+当前沙箱对部分旧数据/结果及input_status.json返回Access denied，git所示D不能据此认定真实删除；未恢复或清理。本轮未重新证明全包无漂移。该访问限制不阻止可读文档和官方来源的合同论证，但正式运行前须恢复可验证的输入与封存依赖访问。
+
+只读草案审阅已完成：/root/formal_training_route提供领域核对，/root/cfe_preallocation_official对最终稿SHA256=9a97d60ac208a62ed0579743bb124d086052cda0672ef5b9b682b65caef7b15b补核后无开放实质finding。已明确完整网格含零请求退化区、整体alpha可行性未证单调、B6共同available口径须登记；路线编号歧义通过引用即时会话选项闭合。此为非official文档审查，未seal、未测试或运行solver；文档diff检查通过。下一步形成自包含theta与计算协议，保持新科学取值待具体审阅。
+
+
+## 2026-09-29 具体机制协议v2草案与访问复核
+
+权限恢复后重读A包587个成员，全部哈希一致；input_status的20项unidentified仍全部null。上轮Access denied造成的不可验证状态已解除，本轮git status未再显示这些旧路径删除。未恢复、覆盖或清理旧产物，无相关运行进程。
+
+新增docs/model_spec/rq2_finite_mechanism_protocol_candidate_v2.md及configs/rq2_finite_mechanism_protocol_candidate_v2.DRAFT.yaml，列出待批准theta、1% alpha网格、三条H1/reference/actual状态链、逐cell因果Pi、分账B6和共享实际策略、完整支持LB/UB与holdout绑定。独立物化去重19theta、1900cells、27823600 training cell-pairs；这只是提案规模，不是计算可承受证据。
+
+领域/root/formal_training_route指出三链及Pi缺口并已修；只读/root/cfe_preallocation_official复核关闭effective mismatch、全部theta独立性及B6 actual确定映射缺口，当前无新增实质矛盾。doc SHA256=d218ad94cbf734bb7cdf5946283e17bebc82fa87b5d9bb101d9ed24e9359d364，YAML SHA256=7cc2adc392ff46e0898a50fd792223a75dbcf28a783d94792e902162a3c416d6。仅非official草案审阅；parse/计数/空白检查通过，未运行pytest或solver。
+
+下一步闭合H1 objective/boundary/tie明细及具体科学合同审阅，再推进A operational、按需follow-up、同合同LB/UB证明与计算资源门。参数与执行开关全部false，正式实验未开始；不得把草案审查当作批准。
+
+
+## 2026-09-29 H1规则补齐与具体开发合同待审批
+
+新增docs/model_spec/rq2_h1_common_reference_candidate_v1.md，补正常成本目标、开放终端与残余dwell、逐mode唯一初态、三链原点、normal成本→UID commitment→UID generation数值词典序。canonical锁值独立重算，等式锁用既有normal residual 1e-9，不借reference阈值；保留native gap 1e-8和零目标规则。同输入决策projection冲突拒绝；完整assignment辅助量只作运行见证。v2 spec/YAML同步关联H1并补call_limit=1、time_step=1h。
+
+领域/root/formal_training_route已核规则；只读/root/cfe_preallocation_official定点复核关闭noncommittable初态与projection/witness比较范围两项finding，当前足以提交具体科学开发合同审批，无开放实质finding。H1 SHA256=4316e240e7e64c5d74be280aa623cabad70573a6d4962c2ee2efffef9de7c464；v2 spec SHA256=d083a2eb32f1fe6bcaa0a1ece836f857527930514ce3ce5ca31c676292b07256；YAML SHA256=7401550ed85c7d9f0bde4ded450ccb2a89d38dbc7646ff1ff5fff9a7e92ef2c6。YAML解析、引用、空白检查通过；未跑pytest/solver，未改旧封存字节。本次为非official草案审阅，不是实现验收或执行ready。
+
+拟一次审批v2的E168/F24/stride24、birth+24、单账期预算、19theta×100alpha、分离承诺/B6、因果Pi、H1及LB/UB/holdout规则，授权独立版本开发及短合成验证；资源pilot和正式运行包另有门槛。此前A和双向D授权不重复申请。
+
+
+## 2026-09-30 v2已批准，H1构模首个实现闭合
+
+用户明确“批准 v2 合同并开发验证”，具体科学参数及H1开发授权已获得。配套DRAFT YAML已同步scientific_parameters_approved及H1规则批准，完整执行/正式运行仍false；不再等待该合同批准。根保持唯一writer。
+
+新增normal_h1_model.py和测试：逐mode唯一初态、单小时UID词典序构模、前目标严格等式锁、独立重建assignment审计(残差/整数1e-9)。stage身份仅作构模/审计用途，不冒充causal shared-prefix key；赋值审计无native最优性认证。最终110项通过13.76秒，含原normal构模回归及旧小例求解。开发中两次fixture/断言失败和后续修复记录在results/tables/rq2_normal_h1_model_v1_non_authoritative/development_checks.json。
+
+只读/root/cfe_preallocation_official预审finding全部闭合，未独立重跑测试；当前仍未seal，无official verdict。旧A包587成员零漂移，未清理或覆盖旧产物。下一步接native逐阶段验收及前级锁值来源，然后补H1 current-source/三链发布、A operational、按需后续和完整支持LB/UB；不能把首个构模模块当作正式H1执行链。
+
+
+## 2026-09-30 H1原生短求解链与离线重算
+
+normal_h1_short_solve.py已实现完整短预算预验、逐阶段owned provenance求解、canonical重算与严格assignment审计、只由已接受前级生成锁值。沿用原normal数值predicate，原始native上下界/报告逐字保留；失败停止且不重试，collector返回不完整或异常时调用数unknown。budget实现绑定及非法返回类型finding已修，/root/cfe_preallocation_official只读pre-seal闭合，无开放实质finding（未独立重跑测试）。
+
+新旧相关四文件100项通过17.68秒；真实等成本双机组五阶段锁[20,0,1,0,20]及doublezero规则均通过。两份合成三阶段链的6个原始native报告保存至results/tables/rq2_normal_h1_native_v1_non_authoritative/，另禁用solver进行6阶段离线复算一致，0calls；development_checks.json记录源码/测试/产物hash。旧A封存587成员无漂移。
+
+该链仍为短开发组件，最多20阶段/累计60秒继承显式短预算范围；非正式controller、不验证全任务硬资源，不提供causal shared-prefix key或完整三链发布。没有修改normal/planner旧门，也未开始正式实验。下一步完成当前小时source adapter与公开decision projection、三链持久化及按需后续，再形成完整支持容量和正式执行证据。
+
+
+## 2026-09-30 H1当前小时适配与normal开发状态传递
+
+新增 normal_h1_source.py、normal_h1_current_solve.py 及独立测试/规格。静态网络提取不读未来行；当前base row与workload按250MW/12位half-even映射，中性relative clock与真实source timestamp/time basis审计分离。旧normal内核仅使用局部(0→1)索引，全部UID出力/启停与committable持续时间跨小时保留；逐mode值域、可达age及boundary/input/static/clock绑定均有检查。
+
+完整owned native lex chain通过且carry域合法才产生nonpublished numerical candidate。容差内assignment若不满足精确carry域，返回明确unresolved、无decision；连续出力和锁值不舍入。native后输入复核或carry拒绝保留完整native证据与调用计数。原始projection改为不可变bytes，独立audit identity绑定raw、timestamp、time basis及输入，不进入共同计算键。
+
+/root/cfe_preallocation_official只读pre-seal findings已闭合；独立运行一个零solver 5e-10边界反例，未重跑pytest/native。最终47项定向测试通过12.87秒；相关四文件回归112项通过22.53秒发生于最后postsolve证据保留补丁之前，该补丁已由最终定向测试和定点预审覆盖。此前含旧normal的171项回归通过33.70秒。两次早期测试配置错误与修复、各次范围和hash保存在 results/tables/rq2_normal_h1_source_v1_non_authoritative/development_checks.json，旧A包587成员无漂移。
+
+本轮未seal、无official verdict、无正式实验；模块只支持同进程开发组合。后续需来源认证、精确predecessor存档回放、same-key projection冲突拒绝、原子共同发布及三链/按需后续；不能把candidate用作已发布N或完整履约证书。下一步先接共同projection存储与零solver回放。
+
+
+## 2026-09-30 H1完整锁链零求解回放与共同投影日志
+
+新增 normal_h1_replay.py 与 normal_h1_projection_store.py、两组测试及独立规格。每个stage重建模型/前级canonical锁，重跑原normal predicate和严格assignment/carry域门；owned结果权限及全部数值派生证据逐项核对，原始native报告逐字保存。回放不创建可执行boundary，也不认证历史native执行。
+
+共同投影开发日志复用本地NTFS owner，SQLite DELETE/FULL，只追加archive与head链。每次读取一个key会重放全部witness；不同projection使该key持续unresolved_conflict，不覆盖旧投影。commit后freshconnection逐字读回已提交历史才返回成功；commit/读回异常停止本owner，按独立保留head检查恢复。原始report aggregate32MiB、全库archive aggregate64MiB在解码/取blob前检查。
+
+/root/cfe_preallocation_official只读pre-seal findings已闭合，未独立运行pytest/solver；最终相关四文件107项通过74.95秒，含已有source/native回归。测试覆盖权限/派生值篡改、阶段缺失和顺序、auxiliary witness差异、冲突、commit前后及readback失败。冲突测试采用validator-output故障注入，不冒充第二份真实native证书。
+
+results/tables/rq2_normal_h1_projection_store_v1_non_authoritative/ 保存一份实际3-call合成完整archive、sample_checks及NTFS日志；禁用solver后回放/幂等追加/重开一致，replay0calls。development_checks.json记录源代码、测试、示例及数据库hash；旧A包587成员零漂移。未seal、无official verdict、无正式实验。
+
+日志当前只持久保存开发证据，不登记native invocation、不推进episode N/Rref/A head；来源认证与审计lineage、精确episode predecessor/可执行状态恢复、三链发布、按需后续及完整支持容量/资源门仍待闭合。下一步接显式episode状态与持久前驱绑定，保持已有normal数值门和reference/planner独立门。
+
+
+## 2026-09-30 H1 normal 短 episode 前驱与调用持久化
+
+新增 normal_h1_episode.py、34项定向测试及 rq2_normal_h1_episode_v1.md。独立类型/schema/application ID/head 域；normal 初态与逐小时精确前驱由日志拥有，先提交并逐字读回 intent，再调用 owned H1 链。accepted archive 完整回放、outcome 提交/fresh readback/最终历史复核均成功才返回 decision 并推进 normal；rejected/exception 返回 None，pending/halted 不重试。commit、读回或最终历史复核异常锁止 owner，需按独立核对 head 重开。
+
+预审发现并修复了字节编码膨胀、head 域复用、归档失败泄露 accepted decision、最终回放后实现复核及提交歧义未锁止等问题。binary frame 保留 accepted archive 和失败 native payload 原字节，绑定索引/长度/hash；调用前按全部计划预算声明足够内容容量。派生失败 audit/numeric 只保留长度/hash，异常长文本是明确标注 complete 的有界摘要，不冒充完整失败回放或原生历史认证；物理磁盘未预留。
+
+最终34项定向测试通过61.58秒；相关五文件134项回归通过129.21秒发生于最后 poison 包装补丁之前，最终定向已覆盖该补丁及新增故障窗。/root/cfe_preallocation_official只读R3 pre-seal findings闭合，无开放实质finding；独立审阅源码/测试/规格、复核hash及diff，未独立运行pytest或solver，无official verdict。
+
+results/tables/rq2_normal_h1_episode_v1_non_authoritative/ 保存两小时合成例（6次native调用）、4条intent/outcome日志及禁用solver后重开一致证据（0调用）。development_checks.json绑定源码、测试、规格及示例hash。旧A封存587成员零漂移，原normal outer与旧science候选hash保持。未seal、未启动正式实验。
+
+该组件只拥有normal开发状态，不认证caller-declared来源，不构成共同发布N、完整履约或最低容量证书。后续继续来源认证及共同key一致性集成、Rref/A三链发布、按需后续、完整支持LB/UB与正式执行资源门；这些尚未完成，v2总体开发未完成。
+
+
+## 2026-09-30 H1 单小时固定来源对应与信息边界
+
+新增 normal_h1_source_binding.py、32项测试及 rq2_normal_h1_source_binding_v1.md。复用固定RTS manifest/成员与source_window两侧package审计，按显式split/raw indices/seed/config pin只输出静态网络、当前base row和原始workload。真实时间、来源坐标及package/window/chain身份留在独立audit，不进入normal计算键；保持两侧独立边际时钟，不推断共同观测或pair概率。
+
+输入端重算两份window完整自哈希并检查exact schema/type、canonical CSV坐标、实现hash和负权限；复核当前RTS行与power的index/时间/系统负载对应，读取前后再验固定文件。candidate receipt经独立expected identity驱动全来源重建才可组装H1，改字段后自行重hash不能替代来源核对。raw workload>1保留，组装仍由原mapper拒绝。
+
+最终相关四文件121项通过21.69秒（本模块32项），包含固定真实source零solver检查、非当前信息隔离、篡改、bool/int别名和普通读入漂移。/root/cfe_preallocation_official只读R3 pre-seal findings闭合，未独立运行pytest/solver，无official verdict。results/tables/rq2_normal_h1_source_binding_v1_non_authoritative/ 保存真实training首小时audit、candidate identity及禁用solver后的重建一致检查；development_checks.json绑定hash。旧A包587成员及上一轮episode开发产物零漂移。
+
+source_files_verified/source_correspondence_verified只证明固定内容对应；source_authenticated、selection_registered、shared_observed_clock、formal_result仍false。全年loader/package审计可以读取完整文件，算法接口只暴露当前行。无源文件writer lock或hostile ABA保证。尚未把receipt原子绑定进episode intent，也未完成登记origin/E/F选择、共同key发布、Rref/A三链、按需后续和完整支持LB/UB；正式实验未启动。下一步把来源receipt与episode前驱、调用意图共同持久化，保留已完成旧模块与结果。
+
+
+## 2026-09-30 来源凭据与 H1 normal intent 同事务绑定
+
+新增 normal_h1_source_episode.py、独立测试与规格。独立type/schema/DB/application ID/head，复用原normal数值链、binary codec与失败诊断。header绑定origin、绝对source/config路径、config pin及实现身份；step只接收独立source pin与前head，按两侧origin+completed重建来源，核对同一source chain和连续power时间。receipt identity、原始audit bytes、当前observation和normal前驱/请求/预算同一intent事务落盘；恢复只用来源重建后的当前值。source/实现漂移、提交或最终回放歧义均拒绝返回decision并锁止owner，pending/halted不重试。
+
+最终23项定向测试通过58.29秒；相关三文件85项回归通过120.09秒发生于最后receipt gate/origin deepcopy之前，最终定向覆盖两项局部硬化。测试包含两小时合成native链及零solver重开、source/native/commit漂移和故障、篡改、来源链断裂、输入/预算拒绝与接口隔离。/root/cfe_preallocation_official只读R3 pre-seal findings闭合，未独立跑pytest/solver，无official verdict。结果记录位于 results/tables/rq2_normal_h1_source_episode_v1_non_authoritative/development_checks.json；旧A包587成员、旧episode及source-binding开发产物零漂移。
+
+**真实资源门仍未闭合**：固定RTS有158台generator，其中73台committable，H1每小时232个native stages。实际零solver构造检查确认现20calls短门在创建episode目录前拒绝真实网络；门未放宽。192h的44544calls仅机械计数，运行时间尚未测量。real_network_stage_budget_check.json绑定来源和网络identity及拒绝证据；本组件的native通过例仍是带来源验证mock的小型合成例，不是真实RTS episode执行。
+
+下一步需独立真实网络资源合同/零solver规模与共享键预算，保持normal科学规则和验收门；同时继续共同key发布、Rref/A三链、正式E/F来源登记、按需后续和完整支持LB/UB集成。当前来源凭据同事务的软件链已开发验证，但selection_registered/source_authenticated/formal_execution_ready仍false，正式实验未启动。
+
+
+## 2026-09-30 H1 真实网络零求解规模与存储门
+
+新增 normal_h1_resource_shape.py、normal_h1_shape_process.py 与 probe_rq2_normal_h1_shape_v1.py；规格 rq2_normal_h1_resource_shape_v1.md。独立非正式 Windows Job（60s、进程1GiB、Job1.5GiB）仅构造首/末 Pyomo 模型；固定来源双侧首小时、probe DC bus108 不构成正式样本/地点登记。末阶段231个零占位locks没有验收来源，不检查可行性；未调用solver。
+
+真实观测：232 stages 两端均891 variables（73 binary、818 continuous），980/1211 constraints，2789/3381 standard_repn_after_fixed_substitution linear terms；Job wall5.407s，peak process commit257871872、Job259145728 bytes。只测两个模型，不推算完整native链时间或内存。结果保存在 results/tables/rq2_normal_h1_shape_v1_non_authoritative/；source/network/implementation/stage/runtime版本均绑定并独立核对。
+
+确认架构blocker：当前每阶段16MiB原始报告上限对应单事件最坏3892576270 bytes，大于实查SQLite SQLITE_LIMIT_LENGTH=1000000000；checks显式 current_one_blob_worst_case_persistence_blocked=true。192h反事实内容753917760768 bytes超出现有短门，未实例化、未预留、未准入。正式资源合同和native时间仍null，旧20calls门保持原值。下一步开发独立分块journal/archive及总量准入；不删除raw reports或把构造测试等同正式运行。
+
+最终44项定向测试通过7.36s；此前同实现resource+既有Windows Job回归68项通过14.14s（随后仅补测试）。旧A包587成员、此前三个H1开发记录绑定的16项文件零漂移。selection_registered/source_authenticated/formal_result/formal_execution_ready=false，正式实验未启动。独立预审状态以本轮development_checks.json为准，无production seal或official verdict。
+
+
+## 2026-09-30 H1 单小时分块 journal 原语
+
+新增 normal_h1_chunk_journal.py、tests/test_rq2_normal_h1_chunk_journal_v1.py 和规格 rq2_normal_h1_chunk_journal_v1.md。独立type/schema/applicationID/数据库，STRICT三表，复用NTFS排他lease；每块≤1MiB，元数据≤256KiB。声明payload长度/SHA、逐块hash chain、whole-payload hash、元数据hash与前驱共同绑定event head，chunks和event同事务。fresh连接流式复核完整prefix后才返回成功；commit/no-op/readback歧义锁止owner，不暴露不确定head；非重入guard拒绝活动reader期间的重入。
+
+最终47项定向测试通过5.60s；此前chunk+旧projection store回归52项通过35.23s，之后局部身份/guard硬化由最终定向覆盖。测试实际降低SQLite单值上限，在该上限之上保存并重开3MiB分块事件，含独立hash oracle、篡改/预算/类型隔离/流中断/commit前后故障。未实际写入3.89GB或754GB，未运行真实native或正式实验。只读领域复核已明确hour-local定位；实现独立预审结论以本轮development_checks.json为准。
+
+本原语的content_verified只证明字节完整性，物理空间/数值重放/来源真实性/formal均不认证；旧one-BLOB blocker仍适用于旧实现，完整资源门仍开放。逻辑预算不计SQLite页/index/rollback journal/temp与磁盘reserve。
+
+下一步明确为独立full-hour stage archive/replay：单小时≤384events容纳intent+232stage receipts+terminal；每个raw报告返回后、下一阶段前先持久化。sink失败立即停止并如实报raw incomplete/U；父日志只有在指定child head完整重放与source/normal前驱再验之后才能推进小时状态。旧20-stage/32MiB replay入口与短budget身份不能直接复用或放宽；新版本复用原numeric predicate和strict audit。parent192h控制日志、共同链发布、Rref/A、完整支持LB/UB及物理资源合同仍待完成。
+
+
+本轮分块原语 PRE_SEAL_AUDIT 已闭合；独立审查代理另跑47项定向测试通过5.79s，无official verdict。results/tables/rq2_normal_h1_chunk_journal_v1_non_authoritative/development_checks.json绑定源码/测试/规格及3MiB合成样例。样例零solver、独立head重开和逐块复原一致。旧A包587成员与上一轮shape记录11文件均零漂移。
+
+领域复核补充性能门：当前append写前、fresh readback及每次iter_event都扫描完整prefix，逐stage直接使用会带来二次增长的重复I/O。后继需要独立单遍prefix replay/受控增量append协议及terminal前完整重验；不能据小样例批准232-stage wall/磁盘预算。本轮不改已审原语以弱化其检查。下一层stage顺序固定为raw返回→原数值/assignment审计→receipt原子持久化→成功后才推进canonical lock。
+
+
+## 2026-09-30 H1 单小时阶段存档与流式数值重放
+
+新增 normal_h1_hour_replay.py / normal_h1_hour_archive.py、独立测试和 rq2_normal_h1_hour_archive_v1.md。新replay-only限额≤232stage、每raw≤16MiB及独立type/key；旧20-stage/32MiB入口保持原版本。fresh模型导出阶段顺序；每份已提供raw经原numeric predicate和strict assignment audit，再chunk原子写入、fresh物理/语义readback成功后才推进canonical lock。typed报告审计拒绝保存raw并停止；模型/资源/声明错误和持久化unknown分别拒绝并锁止，不改写为数学不可行。完整terminal重算projection，部分prefix无projection。inspect在同一SQLite snapshot一次物理_scan和一次有序读，最多组装单份16MiB报告。
+
+复用旧固定SHA的三阶段报告，零新增solver，projection payload与旧链逐字一致。新archive样例可按独立head重开。定向41项通过49.96s；相关4文件145项通过56.36s。只读R3预审闭合，独立代理另跑41项通过50.44s，无official verdict。结果及hash在 results/tables/rq2_normal_h1_hour_archive_v1_non_authoritative/development_checks.json。旧A包587成员、shape11/chunk5开发文件及旧normal outer/科学draft锚点零漂移。
+
+真实RTS只验证232阶段声明与空stream incomplete，并确认旧短门仍拒绝；没有真实232-stage数值链/native运行。外部parent intent/source pin只是绑定引用，parent_intent_verified/source_authenticated/native_execution_authenticated/formal均false。当前写路径重复完整prefix扫描和数值重放，二次增长成本仍未资源准入。下一步优先受控增量写与collector-owned逐阶段sink，使raw落盘成为推进下一stage的必要条件；之后仍需durable parent/source-normal集成和完整物理资源合同。正式实验尚未启动。
+
+
+## 2026-09-30 H1 受控增量阶段存档
+
+新增 normal_h1_incremental_archive.py、独立测试和 rq2_normal_h1_incremental_archive_v1.md。活跃排他 lease 内使用持续 writer 的 data_version/total_changes、精确 schema/header、累计计数及 tail；当前 raw 预审、原子分块提交、保护写锁下 fresh 读回、当前 raw 二次语义审计成功后才推进 lock。提交歧义或语义恢复异常同时 poison 两层 owner。终端完整重放与缓存一致性检查保留，旧封存模块不变。每stage不再读取旧raw或重审旧stage；SQL累计计数仍遍历表，不据此声明全部线性成本或资源准入。
+
+定向15项通过30.92s；incremental/hour/chunk相关103项通过83.98s，零新增solver。只读R3 PRE_SEAL_AUDIT无阻断项，审查者未重复运行测试，无production seal或official verdict。机器记录：results/tables/rq2_normal_h1_incremental_archive_v1_non_authoritative/development_checks.json。旧A587成员和shape11/chunk5/hour10开发文件零漂移。该模块仍只归档已有raw，source/native/parent真实性、published/formal/ready均false；真实RTS232-stage链未运行。
+
+下一步collector必须在第一次调用前原子持久并fresh验证唯一attempt intent，绑定父/来源/当前输入、完整stage order、solver声明、旧短预算和collector/sink身份。前一receipt durable后才可下一调用；crash、calls unknown、提交不确定保留pending/unknown并由持久registry拒绝同attempt重试，不能只靠内存标志。完整child terminal验证后才能发布parent outcome。父控制器、完整支持LB/UB及物理资源合同仍开放，正式实验尚未启动。
+
+
+## 2026-09-30 H1 逐阶段 collector 与 child checkpoint 开发
+
+新增 normal_h1_stage_collector.py、测试与规格。声明保留旧短求解预算；独立registry登记intent、每stage/terminal写前checkpoint及outcome（最多n+3事件）。checkpoint机械绑定previous/expected child heads和raw/metadata SHA，child提交成功须等于预期head，再推进下一stage。给定独立registry head，重开可按checkpoint登记的两种child状态完整验证，所有pending均不续跑、不交付projection。
+
+独立预审发现根锚点缺口，尚未闭合：registry每次更新后必须由exact typed durable parent anchor确认，才能允许后续调用、child写入或outcome交付。公开run已暂时拒绝执行，继续开发typed anchor；没有将内存one-shot标记当崩溃持久证明。只读仓库定位确认现有controller retained哈希为内存状态，可复用scale_selector_controller的xb/fsync/fresh-read文件原语和episode_store NTFS lease，但没有现成可复用根锚点。
+
+最终11项checkpoint/故障/公开门定向测试通过66.74s，全部mock内部adapter且零新增solver。此前两事件实现的23项相关回归通过76.79s，但不外推为修改后完整回归。旧A587成员与incremental3个绑定文件零漂移。结果：results/tables/rq2_normal_h1_stage_collector_v1_non_authoritative/development_checks.json。PRE_SEAL findings仍开放，无seal/official verdict/native运行或正式实验；下一步完成typed parent anchor后重跑受影响回归和独立审查。
+
+
+## 2026-09-30 H1 本地持久根锚点集成验证
+
+新增 normal_h1_attempt_anchor.py、normal_h1_anchored_collector.py、两组测试与规格；旧collector/incremental字节不变。独立NTFS根目录明确作为local trust root，immutable编号记录xb/fsync/fresh验证，每次registry genesis/intent/checkpoint/terminal/outcome后持久锚定，再允许child/native继续。重开从anchor取得registry head，只审计不续跑；不声明退出后整个目录恶意回滚抵抗。
+
+19项联合回归通过117.40s；同源代码后增真实子进程commit前/后os._exit测试2项通过18.82s，anchor写前/已持久确认异常与错误pin测试5项通过18.88s。R3独立预审已关闭此前根锚点与故障证据findings，审查者未重复执行测试，无official verdict。旧A587、incremental3、原collector3绑定文件零漂移。
+
+额外运行三阶段tiny native开发例，旧预算3calls×1s；3份raw accepted，locks=(20,1,20)，7条anchor records，16.30s含I/O/构模/重放；关闭后独立末anchor SHA重开一致。结果和哈希：results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/development_checks.json。本地短链集成已验证，非真实RTS232-stage、非hard资源准入或native历史认证。
+
+下一步接source-normal父控制器，绑定唯一请求/跨root去重、共同prefix发布及完整资源准入；不得把该local trust root或短例解释为正式履约/容量证书。真实完整支持LB/UB与正式实验仍未完成，formal/ready保持false。
+
+
+## 2026-09-30 H1 来源绑定父控制器与两小时集成
+
+新增 normal_h1_anchored_source_episode.py、测试和规格。复用严格来源加载/链和时间连续性、旧完整短预算预留；父chunk日志仅存source audit与child引用。父intent锚定后才创建固定小时child目录；运行child关闭后先凭最终anchor SHA fresh reopen并逐字段一致，再重载parent/source、提交outcome并最终restore。before仅由完整child projection私有重建。pending/rejected不推进、不退预算，reopen仅审计。独立父namespace跨root全局去重、Rref/A共同发布仍未实现。
+
+最终9项父测试通过178.42s；相关来源绑定/anchored collector 44项通过95.72s。R3独立预审关闭fresh reopen顺序finding，新增损坏/漂移测试保证parent仍只有intent；无official verdict。旧A587成员、上一轮anchored collector20文件零漂移。
+
+两小时synthetic source native开发例完成6份accepted raw，逐小时completed=1、2，最终G1出力20/on age2，独立父anchor重开一致。原6calls×1s solver预算，116.14s总耗时含完整重放，不是硬wall资源认证。结果与原生provenance清单：results/tables/rq2_normal_h1_anchored_source_episode_v1_non_authoritative/development_checks.json。没有真实RTS/完整多日实验，formal/ready/source/native-auth均false。
+
+下一步仍需完整资源准入及可扩展父级执行/共同prefix发布。当前short parent反复重放完整prefix，不能外推192h运行预算；真实232-stage执行、完整支持LB/UB与正式实验尚未完成。
+
+
+## 2026-09-30 H1 有界 child 审计作用域
+
+新增 normal_h1_scoped_child_inspection.py 和 normal_h1_scoped_source_episode.py，保留旧绑定实现与数据。构造期完整 replay 后，仅在持续连接 epoch、cache/结构/计数/head/身份验证通过时以一次性 token 供首次 inspect 消费；再次 inspect 完整重放。独立 outer audit receipt、父 adapter 内外 exact type 与七项权限 false gate、防凭据重用和新旧 parent 声明隔离均已验证。inspection-only 为 API 边界，底层仍 rw SQLite 与 BEGIN IMMEDIATE。
+
+child 11 项通过；同轮联合测试 14 passed/1 failed（父测试临时目录缺失），修正后最终父 6 项和相关 103 项共109 passed/204.60s。独立 R3 pre-seal 实质 findings 已闭合，审查者未重复执行测试，无 production seal/official verdict。旧 CFE 587、collector20、source parent39 个绑定文件零漂移；保全锚点未改变。
+
+零新增 solver 的同一三阶段 raw 对照中，结果逐字段相等，阶段审计12降为3次；单次 instrumented wall 6.52s降为2.57s。结果与哈希见 results/tables/rq2_normal_h1_scoped_inspection_v1_non_authoritative/development_checks.json；详细诊断见 rq2_normal_h1_parent_profile_v1_non_authoritative。仅支持局部重复审计消除，不能外推真实多日硬资源预算。
+
+下一步仍需处理父完整 prefix 重放与依赖身份重复采样的扩展成本，完成真实232阶段资源合同、共同 Rref/A prefix 发布及完整支持 LB/UB。正式实验尚未启动，formal/ready保持false。
+
+
+## 2026-09-30 H1 完整 normal 资源库存与版本化 full anchor
+
+核对发现旧 NormalWork 按每个normal任务一次求解核算，不能直接用于每小时232阶段H1。新增 normal_h1_full_resource_contract.py，以独立typed workload和资源声明复用TaskEnvelope/SerialResourceBudget，完整登记stage/UID/solver spec，192小时为44544次；Fraction精确累计TimeLimit，分别检查task/plan wall、串行max Job commit、保留全部archive/scratch及显式overhead。bind_current_hour实际构造首/末shape，零占位locks仅用于计数，不声称可行性或未来carry。旧短预算20calls/60秒保持。
+
+新增 normal_h1_full_attempt_anchor.py，独立schema/receipt/实现及直接依赖身份，cap385与单记录64KiB；覆盖232-stage小时236records和192h父385records。初始33项通过395.88s，含完整385循环；仅anchor identity依赖修复后，最终67 passed/1 deselected3.91s覆盖全部受影响门与相关回归，未重复未变容量循环。早期耗时不作为最终实现资源测量。R3只读pre-seal findings闭合，无seal/official verdict。
+
+零solver runner核验旧shape11绑定文件及1+73+158完整stage结构。含child/registry/anchors/parent的内容cap上界：1h4031840256bytes、192h774088294400bytes；均非实际使用量、最低磁盘需求或物理保留。per-stage/non-solver/overhead/commit/host仍null。结果：results/tables/rq2_normal_h1_full_resources_v1_non_authoritative/。旧CFE587、shape11、scoped9绑定文件零漂移。
+
+下一步直接接独立full collector与已有declared_task_process Windows Job controller，保留逐stage raw/checkpoint/anchor/fresh审计顺序，再形成真实单小时native校准候选包。现source parent仍受旧短预算/anchor cap，不得偷接新类型或启动真实232-stage链。完整研究任务清单、共同Rref/A、完整支持LB/UB及正式实验继续开放，formal/ready保持false。
+
+
+## 2026-09-30 H1 完整 collector 与单小时 Job 校准候选封存
+
+已接独立 full collector、full anchor 与已有 declared_task_process Windows Job；保留原 numeric predicate、strict locks 与 raw/checkpoint/anchor/fresh 顺序。worker/supervisor/full collector native 入口均要求 exact consumed gate，独立 inner/outer、official PASS receipt 与单次用户 authority 分离；partial claim 或任何失败不自动 retry/resume。Job observation 的 identity/PID/creation、quiet、资源类型/权限位及显式 licensed environment allowlist 已验证，原 typed observation 和 controller records 的 SHA 保留。
+
+最终主代理定向87项通过235.49s；追加 inner/holdout 反例后 gate 28项通过2.56s。只读 pre-seal 审查者独立87项通过219.48s、gate28项通过2.61s，全部 findings 闭合；这些仍是 PRE_SEAL，不是 official verdict。此前未变 resource/declared-process 广泛回归包含于122项通过247.89s。真实 Windows Job 验证只消费保存的三阶段 raw，新增solver调用为0。旧 CFE587、full_resources7、shape11成员无漂移。
+
+具体校准 request 复用 training 原点来源、dc_bus108，232=1+73+158 stages，5s/stage、3600s task、2GiB Job；archive内容cap4031840256bytes另加256MiB overhead，scratch256MiB。fresh source/shape准备实际核到891 variables、terminal1211 constraints，零solver。时间/overhead仍是待测allowance，不是完整资源准入。
+
+canonical configs/rq2_normal_h1_calibration_v1.json SHA256=bf1a66754a69ec6f87d53dc029e88c44e0fb0e0d07648f62076d2fc9f7e62686；outer configs/rq2_normal_h1_calibration_v1.OUTER.SHA256SUMS.json SHA256=289f9b147afa7a00b1abc4ff5dc10da09b57e0920d57be0215c352ff4648438d，813成员。config/lease/evidence/inner通过xb/fsync/fresh读回，outer经非覆盖原子rename发布SEALED_READY_FOR_INDEPENDENT_REVIEW，再次verify_package及全部成员hash一致。已封存字节不再修改。
+
+当前由全新上下文 /root/h1_calibration_official 独立审查 exact outer，尚无official verdict，claim未消费，真实232-stage native与正式实验均未启动。开发证据见 results/tables/rq2_normal_h1_full_job_v1_non_authoritative/development_checks.json（SHA256=340a9d199ce8b03d0573b7b17b32c54b86e0539891bc0bb9da858b4bf0af8a99）。旧漂移开发草案保留，只以canonical request为封存输入。完整研究资源清单、共同Rref/A发布、完整支持LB/UB与正式实验继续开放；formal/ready保持false。
+
+## 2026-09-30 H1 单小时校准 official PASS 与首次启动
+
+全新只读 reviewer /root/h1_calibration_official 对 exact outer 289f9b147afa7a00b1abc4ff5dc10da09b57e0920d57be0215c352ff4648438d 给出 official PASS，冻结矩阵1–8满足，无阻断finding；独立91 passed in 215.37s，退出码0，测试后813成员零漂移。该PASS只关闭review gate。
+
+依据本次用户“修复问题，然后完成必要门禁并开始正式实验”及指定232-stage单小时校准下一步的指令，另行记录单次native校准authority，retry_authorized=false。独立review/authority/gate及启动前headroom记录位于 results/tables/rq2_normal_h1_full_job_v1_non_authoritative/。启动前commit和合并同卷disk余量满足；该快照不是预留或完整研究资源证明。记录快照后，交互脚本误用sufficient属性导致显示检查异常；读取实际observed_headroom_sufficient=true且errors=[]后继续，未重写记录、未提前consume/native。
+
+一次性claim已消耗；2026-09-30 19:52（Asia/Shanghai）父控制器3528启动受监督Windows Job worker42132。运行根 results/tables/rq2_normal_h1_origin_calibration_v1_non_authoritative/。当前等待whole Job quiescence再读数值结果，不自动retry/resume。完整研究资源、共同Rref/A、完整支持LB/UB仍开放；正式研究实验尚未启动。
+
+## 2026-09-30 H1 单小时首次校准终态与数值阻断
+
+受监督 Job 已whole_job_quiescent=true，exit_code=0，elapsed=304.35899999999674s，无runtime资源错误；process/Job peak commit分别267927552/269197312 bytes。worker完成fresh reopen且逐字段一致，controller完成retained records与report检查。
+
+本次status=rejected，stored_reports=26，其中25份stage_accepted、1份stage_rejected；published solver_calls=null、projection_identity=null，未完成232-stage小时。拒绝位于index25、commitment/201_CT_1。保存raw的native numeric predicate全部通过（gap0，maximum residual=2.6987936877750535e-12，integrality=2.668088179630103e-13），但独立H1 assignment审计复现unit_chronology严格非负错误：generation[normal,0,201_CT_2]=-2.6987936877750535e-12 MW。canonical objective hex两通道一致，不是objective mismatch。拒绝不构成数学不可行，不能放宽门限或clip后重新解释旧raw。
+
+26份已保存raw累计2261621bytes，native Runtime字段累计3.9769997596740723s；整个run root逻辑文件大小2426133bytes（非物理分配量）。这些只是已观察前缀，不能外推完整小时/192h/全研究资源充分性。
+
+只读零solver诊断及运行观测：results/tables/rq2_normal_h1_full_job_v1_non_authoritative/calibration_v1.run_observation.json，SHA256=dbf51a7c6cc18cb8369943094ce749bc918e99848bbcba01773dbae9ba82ff84；postrun inventory SHA256=37d55a780e7d92936a9e6d80082428293f703ed96714ba16a0b4809a5ff375ef。旧sealed包及结果保留，claim已消耗，没有retry/resume。正在只读领域诊断与独立运行证据复核；完整研究资源、共同Rref/A、完整支持LB/UB继续开放，formal_execution_ready/formal_result保持false。
+
+## 2026-09-30 H1 校准运行证据复核与科学决策边界
+
+独立只读post-run复核已完成：run inventory44成员和sealed outer813成员均零漂移；两个SQLite integrity_check=ok，registry28events、child26events、29条full-anchor连续；PID/creation/process identity及全部retained pins一致。零solver重放26份raw独立复现25accepted+1rejected。该复核不是新的official verdict；审查摘要见 results/tables/rq2_normal_h1_full_job_v1_non_authoritative/calibration_v1.postrun_review.json。
+
+领域诊断确认当前拒绝符合冻结合同。rq2_h1_common_reference_candidate_v1.md第45行禁止连续量因锁定失败自行舍入或移动，rq2_continuous_grid_normal_v1.md第47–49行要求保留原generation，失败不发布carry且不clip。1e-9 residual容差不能自行变为carry-domain转换权限。修复若引入独立normalized candidate及全约束/目标/locks/chronology重审，属于R4科学规则变更；根已请求用户对generation[-1e-9,0)→0这个明确候选作出新授权，尚未实施。候选阈值不是从本次失败推定批准；旧v1拒绝结果永不改写。决策记录 calibration_v1.blocker_decision.json（SHA256=ea3031457e3f3d61da5ab95acddee824d9333927a20492753e71c51f6e732b4e）。
+
+当前正式研究实验未启动。依赖该科学决策的successor开发与后续native运行保持关闭；既有完整研究资源、共同Rref/A、完整支持LB/UB门亦未闭合。无自动retry，无活动的校准worker。
+
+## 2026-09-30 用户批准 H1 generation-domain R4 successor 开发
+
+用户已明确回复“授权上述 R4 successor 开发与审查”：normal/time0 generation 的[-1e-9,0)区间映射为正零，保留raw/delta，完整约束、功率平衡、原objective hex、strict locks和chronology重新审计，任一失败仍拒绝。授权不包括新的native运行。独立记录 results/tables/rq2_normal_h1_full_job_v2_non_authoritative/scientific_development_authority.json（SHA256=447ae2cbd3161f23c1916f2bbbd1c55a382ddd8cb1ddc50b2ac44d86dc912c70）；此前pending决策记录作为历史保留。
+
+根代理正在实现独立v2 generation helper、replay/archive/collector/resource/Job/gate链，全部v1成员字节保持。当前v2链路91项通过295.60s，规则+gate47项通过26.68s，旧H1模型28项通过2.89s；全为零native的saved-raw/合成验证。独立只读PRE_SEAL审查进行中，已指出prepare schema、diagnostic显式成功检查与强制脚本闭包问题，正在按finding修复。尚无v2production seal/official verdict/consume/native。正式研究的资源、共同Rref/A与完整支持LB/UB门继续开放。
+
+## 2026-09-30 H1 generation-domain v2 PRE_SEAL 闭合与正式封存
+
+R4 successor的独立PRE_SEAL findings已全部闭合。修正版诊断以python -B -O运行退出0，显式检查不依赖assert；从独立pin的旧outer及postrun inventory读取/核验旧结果，保存26raw的新candidate prefix、末阶段mapping及fresh reopen均通过。新prefix仍collecting、无projection、solver_calls=0；末阶段仅归零201_CT_2，candidate最大constraint residual5.3362e-12、power balance4.1354e-12、锁残差0，原objective仍-0x0.0p+0。诊断SHA256=124a8999651ea6ccd271e2f8c82681cd8dd50e0b9dc9860cb52b6f1de2ad8255；旧813sealed与44run成员零漂移。旧初始prepare/诊断草案保留，不作为最终门证据。
+
+独立preseal规则19项、gate28项均通过。主代理v2链路91项、规则+gate47项、最终closure gate28项、旧H1模型28项通过；git diff --check通过。最终开发证据 results/tables/rq2_normal_h1_full_job_v2_non_authoritative/development_checks.json，SHA256=7f63a5dd8c24c1096f1af83f78091821f01ddc159fb95916bd601ec2d3acaa81。
+
+canonical request configs/rq2_normal_h1_calibration_v2.json SHA256=00184fba4c48a6479ff69583e5eb585104fc3a878789af25c6da59f2808868d5；inner SHA256=0a69791c6721429f590698562da2e17f90cea0f6ce240970114384e1264033e8；outer configs/rq2_normal_h1_calibration_v2.OUTER.SHA256SUMS.json SHA256=79830ab6c1b31aaef41174544e472ef800674de1f76228793f30f6b87e4f6eba。895成员、331required closure，含科学开发authority、最终规格、诊断脚本与实际产物。经过exclusive写入/fsync/读回、pending验证、非覆盖rename发布SEALED_READY_FOR_INDEPENDENT_REVIEW，再次全量verify_package成功。自此不再修改成员字节。
+
+全新上下文 /root/h1_projection_v2_official 已开始official R4只读审查。当前无official verdict，新claim与native root不存在，未启动新native。现用户授权仅开发/审查；新的单次native校准待exact package审查通过后另行确认。其余206阶段、完整projection、完整研究资源、共同Rref/A和完整支持LB/UB仍无通过证据，formal/ready保持false。
+
+## 2026-09-30 H1 generation-domain v2 official PASS，待单次运行授权
+
+全新只读reviewer /root/h1_projection_v2_official 已对exact outer 79830ab6c1b31aaef41174544e472ef800674de1f76228793f30f6b87e4f6eba给出official PASS，矩阵1–7全部满足，无阻断finding。独立四文件110 passed in 219.26s，退出码0；测试后895成员再次全量核验零漂移，inner894成员与331closure关系一致；旧813sealed+44run成员保全。official回执与审查证据位于 results/tables/rq2_normal_h1_full_job_v2_non_authoritative/calibration_v2.official_review*.json。
+
+此次PASS只关闭独立审查门。用户本轮R4授权限于开发、测试和独立审查，尚无新native权限；新claim与root仍不存在。待确认的具体动作是该exact包的一次training原点native校准：232stages、单线程、每stage5s、总task3600s、2GiB Job，raw/失败结果全保留，不自动retry/resume。完整projection、完整研究资源、共同Rref/A及完整支持LB/UB仍未闭合，正式研究实验尚未启动。
+
+## 2026-10-02 H1 v2 单次 native 校准获授权并启动
+
+用户明确“确认启动”。启动前git status/相关进程检查完成，无冲突运行；exact outer 79830ab6c1b31aaef41174544e472ef800674de1f76228793f30f6b87e4f6eba的895成员及official PASS回执复核通过，claim与root起初不存在。单次user authority SHA256=d7c7cb576a365f0c2431c4a238a65015d3a3dfe5c5ebc9d85ae8cbdb1205f9d1；execution gate SHA256=808801c8d5fdfd2281fdade1a009beb640c3d259b5b6fa48162c993816ceea8e。资源余量快照满足，记录在v2开发目录calibration_v2.prelaunch_headroom.json；不是物理预留或完整研究资源充分性证明。
+
+单次claim已消耗，父控制器PID30156、受监督Windows Job worker PID5260已启动，运行根results/tables/rq2_normal_h1_origin_calibration_v2_non_authoritative/。参数保持232stages、单线程、每stage5s、task3600s、2GiB Job；不自动retry/resume。等待whole Job quiescence后才读数值产物。本次为单小时native校准，完整研究实验及资源、共同Rref/A、完整支持LB/UB门仍未完成。
+
+
+## 2026-10-02 H1 v2 单次校准超时，完整 raw 已保留但终态未提交
+
+本次授权运行已结束，父控制器退出码1；Windows Job记录 reason=task_deadline_stop、elapsed=3598.0469999999914s、worker exit_code=57346、whole_job_quiescent=true。原task3600s含2s quiet预算，时限没有延长。无runtime资源余量错误，process/Job peak commit分别263905280/265134080 bytes。claim永久消耗，没有retry/resume；相关native进程已结束。超时不是数学不可行或数值拒绝。
+
+只读提取确认child保存232份stage_accepted raw、0份stage_rejected，raw累计19438785bytes；两个SQLite integrity_check=ok，逐raw长度/SHA匹配。registry有234events（1intent+233checkpoints）、full anchor有235records；最后预登记child event233为空payload的terminal checkpoint，但child中只有232stage events，无accepted_terminal，无attempt_outcome，worker_result.json及job_checks.json均缺失。因此本次仍为unresolved/pending_unknown，published_solver_calls=null、projection_identity=null；不能用完整raw库存替代终态、fresh reopen或Job成功门。
+
+232个raw内native Runtime字段累计7.084001064300537s、最大0.745999813079834s。仅1个stage对1个generation作批准范围内映射。保存receipt中的candidate最大constraint residual=4.533475816970167e-10、power balance=4.9965365178650245e-11、lock residual=2.764863893389702e-10。这里是保留证据的提取，独立数值重放另行核验；不能改写旧运行状态。总耗时主要位于native Runtime计时之外，代码在完整阶段之后仍执行多轮完整重放；当前证据定位到terminal checkpoint已登记而child terminal未提交，缺少中断栈，不能指定精确被中止函数或定量归因。
+
+postrun inventory：results/tables/rq2_normal_h1_full_job_v2_non_authoritative/calibration_v2.postrun_inventory.json，SHA256=281ad90c2da8bdb2ff0a1031d94379f2887dc663f235c52619a1c75e25521fb4，248files、logical20931567bytes（不是物理分配量）；运行观测calibration_v2.run_observation.json SHA256=ff23cbead74ff468039db97aaa11971f6f5f73b9bfa606c4314377eafd2e6e69。sealed outer895成员零漂移，exact consumed gate再次核验通过，git diff --check通过。独立只读post-run evidence audit正在进行，不生成新的official verdict。
+
+后续需先对零solver重放/持久化开销作隔离诊断，再准备有完整性能与失败窗口证据的versioned successor；旧v2包和运行根不修改，不补写terminal、不延长旧lease。新native启动须有新的可审查包和明确运行授权。完整研究资源、共同Rref/A、完整支持LB/UB继续开放，formal_execution_ready/formal_result均false，正式研究实验尚未启动。
+
+
+## 2026-10-02 H1 v2 post-run 独立复核闭合
+
+只读reviewer /root/h1_projection_v2_official 完成post-run evidence audit（不是新official verdict）。895sealed成员和248run文件零漂移，两个SQLite完整hash/chunk/predecessor链、234registry events、232child stages、235anchor records及全部绑定通过。一次且仅一次完整232-stage零solver重放退出0，wall309.4148276000051s；全部stage约束、locks、功率平衡与最终transition重审通过。重建候选projection identity=382ec2bea1674f24b144afa74151c69cba2b780c1a240a5ed72d99a111908121，payload SHA256=034d14eb5728732790177a2f76af7fa552d9a7dad56ecfbfaf43d217eb7b2cc9（8799bytes）；重建terminal metadata SHA256=cef09d5f29cc687fd2e31d08421a65c6a067a21b617e5acf76b91147afcdf67f与拟child head=4b0b9baa8ce614c2a246f89e05fcf41b32f7d712d5263d333619795182672dff均匹配registry最后checkpoint。
+
+这证明保存raw可重建完整候选projection；原child terminal/outcome/worker_result/job_checks仍缺失，本次status仍unresolved_task_deadline_stop，不能补认Job成功、发布projection或解除资源准入。独立审查摘要calibration_v2.postrun_review.json SHA256=9c034035f67bc8d891d966d19b5fd6e5f90ea8443c58949e19e9c93273c16cf2，位于results/tables/rq2_normal_h1_full_job_v2_non_authoritative/。
+
+额外零solver单stage231 cProfile诊断：calibration_v2.saved_stage_profile.json SHA256=94cdb129edb172bb2add3eb6971df839ee17873bb3451ad81c4b0100457a7595。单次audit wall2.6078496s，normal_input_identity调用18次、H1构建4次、底层模型构建6次。独立审查认可其支持重复模型构建/identity计算为该stage热点的质性判断；它带profiling开销且与只读重放并行，不是全任务benchmark，不能定量外推总耗时。原run248files再次核验零漂移，无native活动进程，没有代码/阈值/资源上限变更。下一步先以保存raw对性能successor作隔离开发与完整一致性/失败窗口验证，再封存和独立审查；新native运行另需明确授权。完整研究门继续阻塞。
+
+
+## 2026-10-02 H1 性能 successor v3 开发与整链验证
+
+用户要求“什么情况，解决下问题”，按R3开展独立v3性能修复，根唯一写入，旧v2封存和运行根保留。只读PRE_SEAL reviewer /root/h1_perf_preseal 已审查数值等价与失败边界；raw/candidate窗口阈值漂移、离线benchmark预算门、完整projection payload核验和旧run输出隔离等findings已修。每次_audit_stage的H1构建由4次降2次、底层构建由6次降2次，raw/candidate各自完整检查，fixed基准保存，legacy residual临时排除H1 locks且finally恢复，chronology独立重验，v2 scientific rule identity保持。terminal/fresh-owner完整重放及一次性门禁保留。
+
+最终v3四文件137 passed in247.66s，退出0；相关旧v2规则与H1模型47 passed in24.88s，退出0。初轮123pass/1failure是缺变量测试fixture在被测入口前抛KeyError，已修正测试入口；没有放宽实现检查。测试明细results/tables/rq2_normal_h1_full_job_v3_non_authoritative/development_test_results.json。
+
+初次离线草案诊断在18份raw后为修复脚本门禁主动停止，全部文件保留，不作为完整证据。修正版用python -B -O在final_saved_worker_non_authoritative新目录运行真实232-stage saved-worker，禁止native，逐次比较v2 numeric SHA、lock hex、mapping receipt，并要求完整terminal payload一致和offline wall<2440s；当前尚在运行，未封存、无official verdict和新native权限。完整研究门继续阻塞。
+
+
+## 2026-10-02 H1 v3 clone 与完整 snapshot 复用修复
+
+上一版 saved-worker 草案为继续性能修复主动停止，保留172份child stage及173个registry events，未完成terminal，不能作为性能通过证据。停止记录为 results/tables/rq2_normal_h1_full_job_v3_non_authoritative/second_saved_benchmark_stopped.json。
+
+当前每次stage audit改为一次canonical构建加独立clone，运行时复核变量对象隔离、fixed基准、locks和structure；同一owner、同一完整head的数值结果可复用，但每次仍新事务全量scan全部raw/hash/metadata，复核完整语义身份及缓存receipt digest。新增terminal head与fresh owner重新完整数值审计。统一snapshot对检查、读取、缓存写入及连接关闭异常均清缓存并poison；原异常保留。阈值、v2科学规则、232-stage顺序、3600s task和2440s overhead预算均保持。
+
+独立PRE_SEAL reviewer /root/h1_perf_preseal静态findings已闭合。稳定版本7文件205 passed in347.70s、exit0；随后只修复最外层precheck异常覆盖并新增反例，正在重跑受影响archive/collector/Job/gate四文件。最终DRAFT request SHA256=b573084c40c46774e13a3f14148ac903d3ab3d1dec4f30a9b5278e856f594f3a，位于review_candidate_complete_non_authoritative目录；完整232 saved-worker计时仍待完成。旧895 sealed成员和248 run文件复核零漂移。未封存v3、无official verdict、新native未授权且未启动；正式研究资源、共同Rref/A及完整支持LB/UB继续开放。
+
+## 2026-10-02 H1 v3 完整 worker 收尾成功但性能门未通过
+
+完整保存数据worker已完成232阶段、child accepted_terminal（233 events）、registry attempt_outcome（235 events）、236条anchor和fresh reopen，最终程序因固定non_solver_seconds=2440性能门拒绝而退出1。无新的native调用；mocked capture的summary计数232不代表native solver调用。该轮脚本未输出精确elapsed，不补造精确时长；worker_result SHA256=22c2f0e764c219f94777061cef5ea5ba2d29c5f1baa04e83b0dc78746fc6b370。失败观察及245文件inventory为saved_worker_budget_rejection.json（SHA256=3f6c2a92ba30a04c13233c29b3ba2f992ac4e6738d9b9dc64125876288a69acd），改前v3源码/test/spec已保存到pre_anchor_source_snapshot_non_authoritative。
+
+尚未封存v3。正在增加独立full_attempt_anchor_v3：同一次完整scan以一次稳定读取同时校验retained identity/hash和chain；每次inspect/confirm仍full scan，advance前后检查、fsync及读回保持。旧236-record anchor单次profile为474次read、0.72426s，主要位于路径/文件identity检查；该profile带测量开销，不外推正式运行充分性。新anchor容量和失败窗口测试、独立PRE_SEAL、完整2440s保存数据性能门仍待。后续脚本将在性能门判定前保留精确measurement。旧冻结产物不改，新native未授权且未启动，正式研究资源/Rref/A/完整支持LB/UB仍开放。
+## 2026-10-02 H1 v3 完整性能门通过，封存机械修复
+
+最终 anchor_saved_worker_non_authoritative 已完成 232-stage、terminal/outcome 和 fresh reopen；2264.4797890000045s < 固定 overhead 2440s，余量 175.52021099999547s。逐次 1392 项 stage audit 比较通过，raw 顺序、numeric pin、lock hex、mapping 和完整 projection payload 与保留的 v2 oracle 一致。diagnostic SHA256=9ea373b9d34e469be6b96d9153771981865d228a7e1dc233ecfbace187341451。当前源码绑定测试：anchor 34 passed、v3 integration 159 passed，退出均 0；证据 anchor_development_test_results.json SHA256=dae424c4ee2325036cea3836000bf8aa240c1884dfb7677d8364c29c72153d7b。旧 895 个 sealed 成员和旧 run 248 文件均保持。
+
+/root/h1_perf_preseal 独立 PRE_SEAL findings 已闭合。首次机械封存在写 inner 前被普通 Job 记录 256KiB 上限拒绝；只留下 config/lease，未到 outer commitment，未 consume/native。原脚本、证据和两叶完整保留，mechanical_seal_failure.json 记录失败；独立 recovery 脚本按清单 reader 原有 2MiB 上限预检大小、核验两叶独立 pin 后完成排他写入，不改变 runner、资源预算或科学规则。机械修复仍须预审后封存，再由全新 reviewer 审查 exact outer。
+
+本轮为零 solver 保存数据开发验证，未测 native capture 开销及完整 Windows Job 监督，不证明 whole-task 资源充足。新 native 未授权且未启动；正式研究资源准入、共同 Rref/A 和完整支持 LB/UB 仍待完成，formal_execution_ready/formal_result 继续 false。
+## 2026-10-02 H1 v3 seal commitment 完成
+
+机械 recovery 在独立 PRE_SEAL 闭合后执行，退出 0。config/lease 原字节保持，inner/outer 使用既有 manifest 2MiB 上限完成排他写入、fsync/readback；pending 完整验证后原子 rename，canonical outer 再次验证通过。exact outer：configs/rq2_normal_h1_calibration_v3.OUTER.SHA256SUMS.json，SHA256=e3acc7a6de1c1863ab64a8c1ae67ded9676e01c564a3d4ef2d0be29252f0edcf，共1695成员。PRE_SEAL证据 development_checks_recovery.json SHA256=4297ce0e3a910067b97bba7ea72dac9ad50d182d6bc5e31ce407a9dc54109af7。
+
+全新只读 /root/h1_performance_v3_official 已开始对 exact outer 作 official review。当前尚无 official verdict；native authority/consume/root 均未创建。sealed 实现与证据不可再改。完整研究资源/Rref/A/完整支持LB/UB仍开放，formal_execution_ready/formal_result=false。
+## 2026-10-02 H1 v3 official PASS；等待新的单次 native 授权
+
+全新独立只读 /root/h1_performance_v3_official 对 exact outer e3acc7a6de1c1863ab64a8c1ae67ded9676e01c564a3d4ef2d0be29252f0edcf 给出 official PASS，无开放 finding，冻结验收矩阵1–7满足。独立回归159 passed in333.98s/exit0；anchor故障窗口33 passed、1 deselected in5.13s/exit0，完整385-record容量循环已有封存开发证据。测试后1695成员零漂移、verify_package通过；旧895成员/248运行文件全保持。根记录 results/tables/rq2_normal_h1_full_job_v3_non_authoritative/calibration_v3.official_review.json，SHA256=cc5d7f3196df898f58356463cc6538cf5787aef135bd0e7392caed4faff9660c；详细审查证据 calibration_v3.official_review_evidence.json，SHA256=208562b4880a2e0484c3e4043d01f575d10f5ca46934c683d5a1436e82315f92。
+
+review gate已关闭，native运行权限门仍未打开：旧v2一次性claim已消费；本次请求新v3一次训练单小时232-stage native calibration，固定单线程、5s/stage、3600s task、2GiB Job、不自动重试。尚未创建v3 authority/consume/native root，未启动。须用户对该具体新动作明确授权后才能进入预检查和执行。完整研究资源准入、共同Rref/A和完整支持LB/UB仍开放，正式研究实验尚未开始；formal_execution_ready/formal_result=false。
+## 2026-10-02 H1 v3 用户授权并启动单次 native 校准
+
+用户对上一条具体 v3 单次运行请求回复“确认”。根核验 exact outer e3acc7a6de1c1863ab64a8c1ae67ded9676e01c564a3d4ef2d0be29252f0edcf、official PASS 和无活动相关进程后，登记 calibration_v3.user_authority.json SHA256=0498995a241b687f606ea8a0674918df83ea6904096b15124d34804d0b373294；execution_gate SHA256=6ec6b6bd95212bf9f044518ebcabf9c830c62106c23c851f2341a64e8fc25137。prelaunch_headroom SHA256=228b7dbd626a412d9be734eb584344b4237232e132d32bc71865c5271bc756b7，observed_headroom_sufficient=true、errors=[]，仅为启动前快照。
+
+公共 run_job 已消费一次性 claim 并启动新的 Windows Job，controller PID33484、worker PID35044，根为 results/tables/rq2_normal_h1_origin_calibration_v3_non_authoritative。固定232 stages、5s/stage、单线程、3600s task（含2s quiet）、2GiB Job；不自动重试。当前运行中，尚无终态，不记为成功。该动作仅为单小时校准；完整研究资源/Rref/A/完整支持LB/UB仍开放，正式研究实验尚未启动，formal_execution_ready/formal_result=false。
+## H1 v3 单次 native 完整结束，待独立 post-run 复核
+
+已授权的一次v3 native校准正常结束，controller与worker均exit0；process_observation reason=child_exited、elapsed=2744.9839999999967s、whole_job_quiescent=true、last_resource_errors=[]。Job commit limits已配置，peak process268324864 bytes、peak total Job269524992 bytes。worker保存232份报告并返回accepted，fresh_reopen_equal=true、solver_calls_by_replay=0；worker_result和job_checks均存在且绑定通过。原PID33484/35044已退出，无自动重试。
+
+运行根 results/tables/rq2_normal_h1_origin_calibration_v3_non_authoritative 保留251files/20938085bytes；postrun_inventory SHA256=e80dacf5c44b39ad71ff29dce980d3e03cee6f4bf9fad6d3be620061e171d596，run_observation SHA256=29b1b997cb15623bfe956c6d37b6e112974323a8c168506692001a0fdd958edd，均在 results/tables/rq2_normal_h1_full_job_v3_non_authoritative。根SQLite完整性检查通过：child233 events、registry235 events；anchor236 records。sealed package/consumed gate复核通过，旧v2 run248files保持。独立只读 /root/h1_performance_v3_official 正作post-run evidence audit，不是新official verdict。
+
+此次证明单小时校准在总task/Job限额内完成；2744.984s整体wall不单独证明2440s non-solver分项预算充足，native capture开销未单独计时。机器记录whole_task_resources_verified/formal_execution_ready/formal_result/native_execution_authenticated仍false。完整研究资源准入、共同Rref/A、完整支持LB/UB继续开放；不启动后续实验，不重复使用已消费claim。
+## H1 v3 单次 native post-run 独立复核闭合
+
+/root/h1_performance_v3_official 完成有界只读post-run evidence audit：证据充分、无阻断finding；不是新的official verdict，不授予后续运行。calibration_v3.postrun_review.json SHA256=51519252f9d570a45625cabf9b2f9e20e5701f530608b9e599d4ccafa0144ff4，位于 results/tables/rq2_normal_h1_full_job_v3_non_authoritative。
+
+独立重算registry235/child233 events、232 chunks、233 checkpoints、236 anchor全链闭合，无孤儿数据；232 stages的index/objective/stage_identity/numeric SHA/locks/prior-locks/generation mapping与saved-worker均无差异，terminal完全一致，payload SHA256=034d14eb5728732790177a2f76af7fa552d9a7dad56ecfbfaf43d217eb7b2cc9。203份raw含不同attempt运行字段，各自原始链均完整，不要求跨attempt raw字节相同。唯一normalization仍是获批stage25的小负generation转零，candidate errors=[]。新1695 sealed成员、251运行文件、旧895成员和旧248运行文件均零漂移。worker和job_checks完整绑定，fresh reopen一致。
+
+单小时native校准已完成：2744.984s、controller/worker exit0、Job quiescent；原v2超时结果保持不变。本次成功只关闭该校准执行与post-run完整性检查，2440s non-solver分项仍未独立证明；完整研究资源准入、共同Rref/A、完整支持LB/UB继续开放，formal_execution_ready/formal_result/whole_task_resources_verified/native_execution_authenticated均false。一次授权已使用，不自动重试或启动后续实验。
+## 2026-10-03 v2完整支持资源目录与后继设计开发
+
+用户要求“继续做吧”。本轮新增零solver资源审计 experiments/audit_rq2_h1_resource_readiness_v1.py，独立pin已批准v2配置95eb158f0a8e6784d2af401e67164965543c98f42ff02b756c214982601e5430、既有完整coverage29ba7f5662c3dee019f183104479d8fa354f726bea0e055ee456b3dd337042c4及v3封存/运行/复核证据。由1091条边际窗口重算training14644/holdout14336，保留604/593缺尾pair；19theta×100alpha=1900cell，不沿用旧46cell提案。
+
+可索引因子目录覆盖training27,823,600 cell-pair、111,294,400四臂对象；潜在D网格LB/UB义务22,481,468,800，不是必须执行的solver任务；holdout108,953,600条件评价身份不乘D网格且未冻结UB保持null。真实causal keys、可执行task manifest和全研究资源总量仍null，复用边与解析排除证明均空，不作资源折扣。
+
+审计产物 results/tables/rq2_h1_resource_readiness_v1_non_authoritative/resource_gap_audit.json SHA256=d8110cdf8d448cef78f1cb9432125521bf917d84896ebb99ada862e243b73f02。当前一条192h normal内容cap774088294400bytes大于卷快照free110590214144bytes，差额663498080256bytes，尚未加额外overhead/scratch/reserve；这只拒绝当前cap全预留方案，不证明最低实际存储量或完整研究不可行。单小时Job2744.984s不证明2440s non-solver分项，相关字段保留null。
+
+23项定向测试通过（0.40s、exit0），审计CLI exit0；新设计 docs/model_spec/rq2_h1_resource_successor_design_v1.md 规定专用序列化上界证明、分段monotonic timing、完整parent、合法复用DAG、Rref/A和容量证明任务的后继验收。现阶段只完成目录、条件算术和设计，没有实现这些后继组件或创建新run authority。独立只读开发审查进行中。v3 1695封存成员/251运行文件及旧v2 248运行文件复核保持，未修改src、未启动native，正式研究门仍开放。
+## 2026-10-03 资源义务目录开发审查闭合（纠正前段初版计数）
+
+独立只读 /root/h1_performance_v3_official 开发审查无开放finding，非official verdict且不授予运行。初版把offline LB也乘101个D，并漏可索引B6 shared actual；两项均已修复，D=0/1端点保护与不兼容schema版本问题也已修复。前段22,481,468,800统一LB/UB计数已失效，仅保留为开发历史。当前四family为：training LB111,294,400（无D），training UB11,240,734,400（101D），training B6 actual27,823,600（无D、条件评价），holdout108,953,600（无D/proof）。所有eligible counts、frozen UB、solver task及证书仍null，不构成实际调度清单。
+
+最终 results/tables/rq2_h1_resource_readiness_v1_non_authoritative/resource_gap_audit_v2_final.json SHA256=1a31bdd0d69b717525e1d281f4d53d21bf8f8cca929732b76847cfa332843ad1，外层schema=h1_resource_readiness_gap_audit_v2、目录schema=factorized_capacity_obligation_catalog_v2；开发检查 development_checks.json 绑定最终代码/test/spec与全部历史。根27passed in0.42s/exit0，独立27passed in0.41s/exit0；只读重算除磁盘瞬时值与时间戳外完全相同。原始及中间产物和两轮代码快照完整保留。当前卷free110588981248bytes，192h单条normal的774088294400bytes内容cap仍超出该快照；这是cap预留方案差额，不是最低实际磁盘需求或科学不可行证书。
+
+本轮关闭固定证据/支持量、可索引潜在义务目录、normal-only条件算术及后继设计的开发检查。专用序列化cap证明、分段timing、192h parent、实际causal reuse DAG、Rref/A、LB/UB算法、可执行任务manifest和完整资源pilot/准入仍待；未启动native或formal run，无新lease/authority/official receipt。全部formal/whole-resource ready标志保持false。
+## 2026-10-03 H1 条件存档界与计时原语开发
+
+用户要求继续推进。根唯一写入新增 experiments/h1_report_byte_bound_development_v1.py、experiments/h1_segment_timing_development_v1.py、对应两份 tests 与 docs/model_spec/rq2_h1_resource_primitives_development_v1.md，未改 v3 sealed source closure 或 native runner。
+
+存档语法在每通道最多362 objective terms、891 assignments、UID完整JSON token最多38字节、有限字段语法的条件下，compact serializer组合上界为929218 bytes；将term上限设为891时为2093021 bytes。整数算术覆盖Fraction聚合/乘积/差，拒绝额外key、错误类型、超长及超量。v3全部232原始raw逐项hash/length/canonical bytes验证通过，最大实测177312 bytes，原字节不变。362及UID条件尚待对所有未来模型和native导出证明，producer_coverage_proven=false；不把该条件界登记为已生效1MiB cap。旧16MiB采集、异常/oversize持久化路径保持。
+
+计时原语实现逐span open/complete/unknown、单PID/thread/domain、嵌套exclusive合计、未分类余量、clock/usage/exception poison及bounded exclusive snapshot写入。recorded_window_wall_ns仅为记录窗口；最终snapshot写入有单独observer interval，snapshot构造和receipt后续开销未全部归属。它仍是内存ledger，未接完整worker、未实现crash-durable start；instrumentation/component-budget标志为false，不能证明2440s分项预算。
+
+根合并验证77 passed in2.04s/exit0；独立只读复跑77 passed in2.20s/exit0。旧v2 outer895成员及run248文件、v3 outer1695成员及run251文件均零漂移，git diff --check通过，无相关Python/Gurobi进程。当前机器证据 results/tables/rq2_h1_resource_primitives_v1_non_authoritative/primitive_audit_v2_final.json SHA256=3d37dc951f586055fff5dc6a1e0e8803851d22797a6840612b97e39e2111ce29；初版artifact保留，最终补显式resource_admission=false和source/test/spec哈希绑定。独立开发审查闭合记录以同目录development_checks.json为准，非official verdict或运行许可。
+
+本轮没有新native调用、封存包、lease或authority。完整producer覆盖证明、collector持久化失败通道、worker timing接入、192h parent、实际reuse DAG、Rref/A、完整支持LB/UB及完整资源准入仍待；全部正式执行/结果/完整资源标志继续false。
+## 2026-10-03 H1 future shape 与 raw-before-audit 入口开发
+
+本轮发现并复现旧单小时1211约束上限不覆盖future carry：固定pinned RTS loader族下，core954 + reserve26 + residual dwell最多61 + strict locks最多231 = 1272。新增零solver脚本枚举891变量名及362项成本系数，逐项与canonical模型一致；后231目标为单变量，UID JSON token上限38保持。192个来源行的thermal bounds和reserve area keys已核对。合成relative_hour=1 carry及合成locks得到1272约束，但reachable_assignment_proven/scientific_witness=false；这是接口规模反例，不是可行调度或已发生的未来轨迹。任意hourly bounds族需1465，允许generic age0需1477，不能混用为1272。
+
+新增 experiments/h1_producer_shape_development_v1.py、h1_report_byte_bound_development_v2.py；v2仅开发grammar将constraints改为1272，字节界仍929218。旧v1 grammar、v3的1211和16MiB合同均保留。proof现显式verify既有v3 exact outer e3acc7a6de1c1863ab64a8c1ae67ded9676e01c564a3d4ef2d0be29252f0edcf/1695成员，并直接pin residual dwell和job binding模块，关闭首轮遗漏依赖问题。producer/native export总覆盖标志仍false，真实successor尚未绑定完整逐hour source入口或native terms guard。
+
+新增 experiments/h1_raw_ingress_development_v1.py：create-once单owner，intent→原raw完整写入/fsync/fresh readback→receipt→consumer→outcome；异常poison、external abort、无retry/repair。reader改为同handle cap+1有界读取、前后文件身份及最终完整视图复核，修复独立审查发现的stat/read增长窗口。232份保存raw经新tmp磁盘入口逐字节保留；既有3stage collector的saved-capture测试接缝证明科学audit前raw/receipt已存在，audit异常后raw保留且入口拒绝继续。只在test使用gate替身及saved provider，solver被显式禁止；未生产接线。fsync不升格为断电目录项/卷级保证；额外raw副本与metadata仍需完整资源预算。
+
+修复闭包前合并113 passed in40.83s/exit0；闭包修订后受影响5项tests passed in7.56s/exit0。独立审查终态以 results/tables/rq2_h1_producer_ingress_v1_non_authoritative/development_checks.json 为准。当前 producer_shape_audit_v2_final.json SHA256=9670a3cae30b40a9963aba73e757b25a27635598b9e6bed89c4fc489b076fd49；初版e073f1b9f2559b6c6659d297e3723ced48be0610500c72c5661843b8a06f1bf4及七文件snapshot保留。细节见 docs/model_spec/rq2_h1_producer_ingress_development_v1.md。
+
+旧v2/v3封存895/1695成员及run248/251文件无漂移，上一轮development evidence pins无漂移，git diff --check通过。正式实验仍未启动；本轮native调用0，无新封存包/lease/authority。后续须完整source parent、native guard、collector/timing生产接线、fail-stop存储分类与资源预算、Rref/A、完整支持LB/UB和完整准入；formal_execution_ready/resource_admission/producer_coverage_proven均false。
+## 2026-10-04 H1 saved-source parent 与 native export guard 开发审查闭合
+
+根唯一写入，新增 experiments/h1_saved_source_parent_development_v1.py、experiments/h1_native_export_guard_development_v1.py、对应两份 tests/spec。saved parent 按固定 origin 推进双 raw index，逐 hour 绑定 source/chain/package/clock 与前驱 carry；先锚定 intent，再消费 saved reports，child fresh reopen 和父前缀重验后写 outcome；异常 poison，无 retry，reopen 只读。没有独立 hour Job/native 入口；missing-tail 仅 pre-intent fail-closed，无 typed censor 终态；raw ingress 和完整 timing 未接。
+
+192h 合成状态机容量单项通过：384父events、385anchor、192完成/attempted小时及fresh reopen。child采用明确test-only oracle，每小时3stages、共576合成槽位，不是RTS future producer/native witness。另用真实 pinned RTS 静态网络验证232×192=44544槽位的初始声明、0attempt/events、385anchor容量；不是192h执行或资源准入。调用计数为solver_calls_by_parent=0、历史source_solver_calls=None。
+
+native guard检查live retained handles全集/正反映射、native ModelSense精确int1及canonical/native Fraction algebra；saved guard检查v2 grammar、变量全集、referenced assignment和objective terms/algebra/exact值。保存v3 origin的232份raw逐阶段actual model检查通过。fake live handles未证明adapter实际wrapper身份；saved raw不证明live reverse map或future carry。返回仅表示shape/objective对应，完整科学replay仍必需。ingress后的超界/错配guard拒绝测试保留完整raw并禁止retry；尚未生产接线。
+
+根初轮parent16 passed/145.58s。扩展批1 failed、20 passed/1137.00s、exit1：唯一失败是test-only restore注入器在检查poison时再次抛模拟异常，192h单项本身通过。修正fixture及调用计数字段后，最终受影响20 passed/114.18s、exit0；另加RTS声明1 passed/6.16s、exit0。容量被测三文件snapshot保留；snapshot到最终parent实现只有Inspection调用计数字段改名及新增None，独立审查确认状态机/容量无变；不得把原失败整批记成通过。相关source/anchor/shape回归70 passed、1 deselected/10.70s、exit0。guard修复native sense遗漏后30 passed/52.11s；新增超界保留反例4 passed/6.74s，均exit0。
+
+独立只读 /root/h1_parent_review 开发审查无开放finding；独立guard完整33 passed/53.31s、parent关键子集10 passed、12 deselected/93.43s，均exit0；git diff --check通过。非official verdict，不授予运行。机器记录：results/tables/rq2_h1_saved_source_parent_v1_non_authoritative/development_checks.json；测试历史、失败分类、容量snapshot单独保留。旧封存895/1695成员、运行248/251文件及上一轮开发pins核验无漂移。
+
+仍待：独立hour Job/完整worker，raw ingress/guard/timing生产接线，typed missing-tail、失败storage分类及新增副本资源预算，实际合法reuse DAG，共同Rref/A，完整支持LB/UB及全任务manifest，完整准入/封存/全新official审查。新native须针对具体就绪包另行明确授权。producer_coverage_proven/native_export_coverage/collector_integrated/resource_admission/formal_execution_ready/formal_result均false；本轮新native调用0，无新lease/authority/production outer。
+
+最终开发检查 SHA256：b2874c1d29577ebc7360416b3113702c41303ab03733fe72fcf701a4bd54afe3。补充区分：v2旧895成员/248运行文件字节保持，但其动态all-src verify_package在当前checkout返回complete local source closure required；缺口恰为10个早已封存于v3的源文件，非本轮新增或漂移。v3 exact verify_package通过。旧v2执行门不能在此checkout据此复用，不修改旧gate；这不改变本轮零native或全部正式门关闭的状态。
+
+### 2026-10-04 H1 durable guarded ingress development v1
+
+新增 experiments/h1_durable_timing_development_v1.py、experiments/h1_guarded_ingress_development_v1.py 及对应 tests/spec。持久 begin/end journal 支持重复 phase、嵌套 exclusive、单 owner、create-once、4096 spans/8193 events、每文件2048 bytes；begin写盘/fsync/fresh确认后才执行body。缺尾/部分写/时钟倒退/未知terminal pin均unknown、总量None，poison不重试。成功receipt带request/binding/terminal pins，完整计量依赖外部独立保留pin。真实子进程os._exit(17)覆盖begin后中断；不声称目录项断电持久或hostile ABA防御。
+
+SavedStages固定guard及完整开发依赖pins，顺序raw完整保存→receipt→guard→scientific consumer→outcome。SavedHour从真实packet/spec/limits构建stage模型，执行v3 _audit_stage，audit前后核验request/实现，outcome后才推进lock；完整finish要求全部保存raw fresh replay_stream。真实RTS origin原raw前2stage科学复核通过。完整finish另用明确test-only synthetic三stage fixture：复制旧tiny raw，仅TimeLimit元数据1→5，源SHA/原文件不变、新SHA不同；真实guard/audit/replay代码执行。该fixture不构成5秒native采集或scientific/native witness，不提升RTS整小时或producer coverage。
+
+根合并回归88 passed/80.04s/exit0；末次post-audit身份漂移修复后guarded整批15 passed/38.09s/exit0。独立只读 /root/h1_parent_review 初整批30 passed/37.02s/exit0（末次修复前），修复单项1 passed、14 deselected/14.81s/exit0；三项finding全部闭合。非official verdict，不授予运行。git diff --check通过。v2/v3封存895/1695成员、运行248/251文件及上轮15 pins无漂移；旧v2动态all-src closure限制继续保留。
+
+单adapter规定内部路径232stage逻辑上界3896610816 bytes、2330 files、235 directories。保留16MiB raw cap，不用929218条件界替代保存预算；不含旧SQLite、parent/Job产物、任意callback额外写入或filesystem allocation，不能据此准入。guard_execution_durably_attested=false：raw outcome未绑定guard receipt/adapter terminal。observer开销未独立分离，terminal tick后I/O不在recorded window，2440秒分项仍未证。完整232stage新入口finish未验证，尚未接独立hour Job/生产collector。
+
+开发检查：results/tables/rq2_h1_durable_guarded_ingress_v1_non_authoritative/development_checks.json，SHA256 c506cce23c9202b31e00561dbaed0af5019e305029d5715f8c22a6b233d91d96。同目录保留test_results、independent_development_review、preservation。producer_coverage_proven/native_export_coverage/collector_integrated/resource_admission/formal_execution_ready/formal_result均false；本轮新native调用0，无新production outer/lease/authority。
+
+仍待持久guard/scientific attestation、完整worker与独立hour Job、逐hour source/carry及typed missing-tail、全分段与observer计量、失败storage分类和整任务副本预算、实际reuse DAG/task manifest、共同Rref/A及完整支持LB/UB、完整准入/封存/全新official审查。新native须待具体包和门禁就绪后另行明确授权。
+
+### 2026-10-04 H1 attested saved hour development v1
+
+新增 experiments/h1_attested_saved_hour_development_v1.py、对应tests及docs/model_spec/rq2_h1_attested_saved_hour_development_v1.md，保留全部旧绑定字节。saved-only小时binding固定科学request、packet.audit_identity（含来源时钟）、开发/科学实现、adapter/raw/timing bindings。因果计算key不变，额外audit pin拒绝inputs相同但sourceclock不同的packet。
+
+持久顺序为raw/receipt→固定guard/guard receipt→v3科学audit→完整generation mapping→science summary→raw outcome/capture timing end→stage commit；commit fresh确认及postcheck后才推进lock。失败poison且保留部分文件、不重试/恢复。科学拒绝若附mapping也先按cap保存再停止。mapping保留原值/新值/差值、raw/candidate audit，science hash与reader完整重算共同绑定，不只保存摘要。
+
+full finish先全部保存raw fresh replay_stream，再raw/timing terminal，随后projection和hour terminal；hour terminal绑定最后commit、projection及report/stage/numeric向量、raw/timing终态。独立reader要求外部保留binding/terminal pins，重建每stage guard/audit并完整replay_stream，核对精确timing事件及所有文件完整fresh view。该链证明saved-data复核闭合，不认证历史native或live reverse map。完整RTS 232stage finish尚未验证，也未生产collector/Job接线。
+
+真实RTS原raw前2stage前缀通过。完整成功/失败路径使用明确test-only synthetic三stage fixture，旧tiny样本仅TimeLimit元数据1→5，源bytes/SHA保留；不构成新native/scientific witness。另直接验证既有v3 stage25已审negative mapping原样存档：1838 bytes，SHA256 2f508ce4d138317d049cc08ec7e6e705b16890237f139929d7dab925e30bad13；原raw SHA256 0bbffb4cb0ceb39354854ad7bbde60cdda62ecbf94ce74577091455021701588，唯一201_CT_2 negative→0及delta完整保留。此项为storage-only，不重做0..25 prefix或科学规则。
+
+测试历史分列保存：初27 passed/58.98s；扩展合并71 passed/120.98s（完整mapping增加前）；reader末端clock检查2 passed、39 deselected/11.38s。mapping扩展批1 failed、45 passed/155.92s/exit1，唯一失败为test将JSON list与内存tuple比较；改为canonical bytes比较后affected3 passed、44 deselected/9.85s/exit0。独立审查先前41项因根并发修改draft而失效，1 failed、40 passed/139.47s/exit1，记录INVALIDATED_BY_CONCURRENT_DRAFT_EDITS，不作稳定实现通过或失败判定。最终静止快照独立 /root/h1_parent_review 单文件47 passed/158.00s/exit0，无开放finding；非official verdict。git diff --check通过。旧895/1695封存成员、248/251运行文件及上轮15pins核验无漂移；旧v2动态all-src closure限制不变。
+
+新增每stage三个2048-byte metadata及一个256KiB mapping上限，另计binding/terminal/projection。232stage单入口内部路径逻辑上界3959119872 bytes、3261 files、236 directories；不含外层parent、旧SQLite/Job日志、allocation及目录开销，不能升级资源准入。guard/mapping/science I/O在audit span，raw outcome在capture；stage commit/postcheck在recorded window内未分类，最终projection/attestation terminal/reader在window外。observer未分离，2440秒分项仍未证明。
+
+开发检查：results/tables/rq2_h1_attested_saved_hour_v1_non_authoritative/development_checks.json，SHA256 cf873d74425b36e9d59f1bcb80b3f8d5245010f9bc1eb68bc839bb08f4f1279d。该目录保留preservation、test_results、invalidated_independent_run、independent_development_review。producer_coverage_proven/native_export_coverage/collector_integrated/resource_admission/formal_execution_ready/formal_result均false；新native调用0，无新production outer/lease/authority。
+
+整体目标继续进行：尚需完整worker/独立hour Job、逐hour source/carry和typed missing-tail、全分段/observer计量、失败storage分类/整任务预算、实际reuse DAG/task manifest、共同Rref/A和完整支持LB/UB、完整准入/封存/全新official审查。具体新native运行仍须就绪包与门禁完成后另行明确授权。
+
+### 2026-10-04 H1 attested source parent development v1
+
+新增 experiments/h1_attested_source_parent_development_v1.py、对应tests及docs/model_spec/rq2_h1_attested_source_parent_development_v1.md。继承已审saved parent的逐小时source/carry/journal/anchor状态机，以新declaration identity接入持久guard/scientific attested child。wrapper绑定parent intent、source lineage、科学request、packet audit、core binding/terminal和owned replay projection；完整fresh reader及typed projection通过后才允许parent outcome/carry推进。既有源码、封存与结果字节保留。
+
+两个小时、每小时3stage的显式synthetic fixture已通过来源/时钟/连续carry、4个parent events/5个编号anchors、fresh reopen；hour1根据真实before carry构造transition bits，再经真实guard/audit/replay，原raw不改。错误来源、hour0 raw用于hour1、跨小时terminal替换均拒绝。此项不是native capture或RTS可达性/192×232 producer覆盖；192小时容量仍仅引用旧基类test-only child oracle证据。
+
+失败测试覆盖child未完成、wrapper terminal写前/确认后/reader失败、parent outcome前失败、outcome journal已写但anchor未推进，以及typed projection重放期间core变化。保留部分归档、停止，不补做outcome/重试/恢复。最后一类anchor失败重开由independent chunk head校验拒绝；未把unknown解释为数学不可行。
+
+根14项整批248.25s/exit0；新增两个失败窗口初1 failed+1 passed/33.64s，失败仅为断言预期错误文本与实际更早fail-closed检查不一致；修正后定向1 passed/15 deselected/20.19s/exit0。最终静止快照独立只读 /root/h1_parent_review 16 passed/279.07s/exit0，无开放finding，非official verdict。完整早期fixture错误和修复历史保存在test_history.json。git diff --check通过。v2/v3封存895/1695成员、运行248/251文件及前序saved-hour16pins、saved-parent15pins无漂移。
+
+232stage每child逻辑上界3959123968 bytes、3263 files、237 directories；未计parent/Job/filesystem allocation。core与wrapper为完整独立读与typed projection存在重复科学重放，parent历史restore累计O(hours²)，不能沿用旧v3 wall或2440秒non-solver预算进行资源准入。
+
+开发检查：results/tables/rq2_h1_attested_source_parent_v1_non_authoritative/development_checks.json，SHA256 122e4928cade82c7165fdbe2c46e36bf4f7a01ddaa20a1d2f901c02e1e25f498。43个文件pins包含前序开发依赖、10个测试fixture传递依赖、sample archive及本轮审查/测试/保存性证据。所有producer/native_export/collector/independent_hour_jobs/resource/formal_execution_ready/formal_result门均false；新native调用0，无新production outer/lease/authority。
+
+下一步为完整worker与独立hour Job、typed missing-tail、完整分段/observer、失败storage分类与全任务资源预算；仍需实际reuse DAG/task manifest、共同Rref/A及完整支持LB/UB、完整准入/封存/全新official独立审查。具体新native运行须在包和门禁就绪后另行明确授权。整体目标继续进行。
+
+### 2026-10-04 H1 child storage classes development v1
+
+新增experiments/h1_child_storage_classes_development_v1.py、对应tests及docs/model_spec/rq2_h1_child_storage_classes_development_v1.md，为后继独立hour Job预算补齐固定saved parent路径的成功／首次失败存储分类。保持所有原代码与原16MiB上界不变。
+
+成功stage经canonical grammar guard限制raw≤929218 bytes；raw-before-guard允许首次失败raw完整或部分保存至16MiB。固定parent逐层poison、create-once、重开仅检查，因此整个H小时路径至多一个raw未成功经过guard，未来小时不创建。此条件排除直接调用内部owner/abort、任意callback、外部写入及重试。每child完整nonraw槽位继续保守计入：C=(12S+14)×2048+(S+1)×262144。完整成功界H×C+HS×929218；首次失败停止界H×C+(HS−1)×929218+16777216。
+
+H=192、S=232时，成功内容54218578944 bytes；包含首次失败的保留内容54234426942 bytes；文件626496、目录45504。原全raw-cap界760151801856 bytes继续保留。可显式给allocation quantum逐文件round，但只给条件file-content界，不含filesystem metadata、parent SQLite/anchor、Job/scratch、上游raw副本或其他写入；不是磁盘准入。O(H²) replay计时与全任务预算仍未证明。
+
+根最终20 passed/15.02s/exit0；独立只读 /root/h1_parent_review 20 passed/15.73s/exit0，无开放finding，非official verdict。测试独立枚举首次失败位置，覆盖H/S端点、B+1和16MiB raw（首stage或成功前缀后）、部分写入保留、poison后无新增文件，以及完整synthetic child逐文件cap；新native调用0。git diff --check通过。v2/v3895/1695封存成员、248/251运行文件和前序43pins无漂移。
+
+开发检查：results/tables/rq2_h1_child_storage_classes_v1_non_authoritative/development_checks.json，SHA256 6168eb58d57d6292ef909dc20eeed0356b3994fece89dd8f482e70292289a425，绑定51文件pins。条件child内容界已完成开发审查；parent/Job/filesystem及完整resource admission仍false，producer/native_export/collector/formal_execution_ready/formal_result仍false。无新production outer/lease/authority。下一步继续完整worker与独立hour Job、全计时/observer、完整资源与任务manifest/reuse DAG、共同Rref/A和LB/UB；正式运行须完整门禁及新的具体授权。
+
+### 2026-10-04 H1 bounded file parent development v1
+
+新增experiments/h1_file_parent_journal_development_v1.py、experiments/h1_bounded_file_parent_development_v1.py、对应2tests及docs/model_spec/rq2_h1_bounded_file_parent_development_v1.md。旧parent的SQLite内容预算不覆盖index/rollback空间；后继parent实际接入有界不可变事件文件，旧SQLite实现/封存/结果保持原字节。metadata.bin和payload.bin各≤256KiB，commit.json≤2048bytes；xb/fsync/fresh read后完整prefix核验，最后推进live head；原anchor独立保留head。最多384events，部分/完整但未锚定tail、gap、额外文件、live替换均拒绝，无截断/修复/恢复。
+
+parent来源/clock/carry/typed child/anchor语义保留；_restore仅把私有SQL head查询换成event_head接口，以AST等价测试核对。构造器增加独立root lease并接入新journal；新declaration阻止旧协议误开。root、journal、anchor分别计入预算。close修复了重入拒绝后误释放root、inner关闭失败及root已释放后确认异常的窗口：parent guard先行；inner成功后detach；root最后先detach再close，旧对象不能影响新owner。失败后只允许完成teardown，不允许继续实验。
+
+测试按快照分列：根初短16 passed/2 deselected/11.95s；初完整19 passed/552.25s/exit0，实际384event写入及385拒绝、两小时synthetic carry和fresh reopen通过。独立22 passed/1 deselected/153.50s是close窗口修复前快照；根后续21 passed/2 deselected/13.20s、中间close根7 passed/1 deselected/12.50s及独立7 passed/1 deselected/12.43s分列保留。最终root close定向根5 passed/4 deselected/8.74s，独立 /root/h1_parent_review 5 passed/4 deselected/8.82s/exit0，最终无开放finding，非official verdict。journal实现及容量测试AST与初完整快照相同；parent source/carry等函数AST未变。没有声称最终27项在同一次命令中全部运行。
+
+H=192/S=232的条件parent+child文件内容界54461838913 bytes、628038 files、45891 directories；包含全部child、parent events/header/locks、anchor header/385records/lock及root lock。尚未含Job/scratch/上游raw副本/FS metadata和allocation。科学重放累计O(H²)；逐event全prefix扫描在反复restore中可累计O(H³)文件工作量，时间准入和2440秒分项未证。
+
+开发检查：results/tables/rq2_h1_bounded_file_parent_v1_non_authoritative/development_checks.json，SHA256 5f7a70ee1ee0d97216c4a63f6c2cfb04081d1b6ac7c533aa044c72861b76cbc8，绑定68文件pins；初完整snapshot和全部后续测试/审查历史保留。git diff --check通过；旧v2/v3的895/1695封存成员、248/251运行文件和前序51pins无漂移。新native调用0，无新production outer/lease/authority；producer/native_export/collector/independent_hour_jobs/resource/formal_execution_ready/formal_result均false。
+
+继续完整worker与独立hour Job、typed missing-tail、Job/FS/完整任务资源及observer/时间门禁、实际reuse DAG/full task manifest、共同Rref/A和完整LB/UB，随后封存及全新official独立审查。具体新native运行仍须就绪包与门禁完成后另行明确授权。整体目标保持进行中。
+
+### 2026-10-04 H1 parent snapshot worker-input development v1
+
+新增experiments/h1_parent_snapshot_development_v1.py、对应tests及docs/model_spec/rq2_h1_parent_snapshot_development_v1.md。只读snapshot允许parent保留writer root/journal/anchor lease时，由另一进程核验外部pin下的完整前缀并重建当前source/carry；不注册、获取或释放writer锁，不读msvcrt锁住的首字节。Journal/Anchor Snapshot复用已审扫描器，写接口硬拒绝；network由pinned origin加载，future before仅由已保存完整child科学replay得到，不反序列化owned carry。
+
+只接受events=2h+1、attempted=h+1、anchor.sequence=events、anchor.registry_head=外部head的pending；当前child根必须不存在，前后root精确拓扑/身份、完整restore、最后intent metadata/source audit payload/event head/source/request/packet audit均核对。已有partial child、journal/anchor推进或clock/config漂移均拒绝。snapshot不认证writer活跃、持锁或quiescence；历史pending只能作为evidence。最终读取后writer仍可能推进，未来controller必须提供live create-owner→Job的一次性handoff，不能据此恢复/重试/native。
+
+独立审查F1指出只返回packet不足以绑定worker上下文；已增加冻结PendingWorkerInput(packet/spec/limits/canonical receipt)，receipt≤2048bytes，绑定parent/declaration、anchor、journal/intent head、hour/source、before、request/packet audit、stage inventory与实现。构造时重验receipt，消费前validate要求外部receipt SHA。writer_lock_authenticated/quiescence_certified/native_execution_authorized/independent_job_integrated/resource/formal均false，external_live_handoff_required=true。
+
+测试历史：primitive短10 passed/1 deselected/39.45s；primitive完整14 passed/124.32s；typed receipt定向3 passed/12 deselected/35.59s；最终根整批19 passed/147.43s/exit0，独立只读 /root/h1_parent_review 19 passed/146.13s/exit0，无开放finding，非official verdict。实际已保存v3 source declaration用于独立Python重建pinned RTS origin、before identity、audit及232stage inventory，writer三个lease仍有效，文件/mtime不变、未创建child；这是0 solver stages的输入验证，不是232stage求解或192小时producer覆盖。future carry使用明确synthetic三stage子归档。
+
+开发检查：results/tables/rq2_h1_parent_snapshot_v1_non_authoritative/development_checks.json，SHA256 fa2479b2f55da31bbc12f91d5a4b5f28312b4ab79181c79bf5cf573b07b933cc，绑定76文件pins，显式包含v3 request.json测试输入。git diff --check通过；旧895/1695封存成员、248/251运行文件及前序68pins无漂移。新native调用0，无新production outer/lease/authority；producer/native_export/collector/independent_hour_jobs/resource/formal_execution_ready/formal_result仍false。
+
+下一步：controller须在创建当前child之前核验typed input并执行新的live handoff，再接独立hour Job和完整worker/native raw-before-audit路径。完整分段/observer、Job/FS/时间及全任务资源、typed missing-tail、实际reuse DAG/task manifest、共同Rref/A和完整LB/UB、封存和全新official独立审查仍未完成；新native须具体就绪包与门禁后另行明确授权。整体目标继续进行。
+
+### 2026-10-04 H1 synchronous saved-worker handoff development v1
+
+新增 experiments/h1_saved_worker_handoff_development_v1.py、对应 tests 及 docs/model_spec/rq2_h1_saved_worker_handoff_development_v1.md。LiveSavedController 内部 create exact bounded parent，不接收旧 owner、reopen token 或 resume。parent guard 与三个 writer lease 全程保持：ready/source/clock/carry → intent journal+anchor → 当前 child 不存在时 snapshot 重建 typed input → 单次内存消费 → 固定 attested child → 完整保存/审计/finish → fresh reopen → source 复核 → outcome journal+anchor → 完整 restore。补齐旧 step_saved 先建 child 导致 snapshot 无法接入的开发断点。
+
+consume 在任何 child mkdir 前标记 used；校验 controller-local receipt SHA、parent/intent/source/request/packet audit/anchor/head，并显式比较 packet/spec/limits。整个 step 禁止 solver 调用。snapshot、receipt、constructor、iterator、finish、fresh reopen、source 及 outcome anchor 前后异常均 poison；部分 raw、完整 child 或未锚定 tail 保留，无补写、清理、二次消费或重试。reentrant close/inspect/step 不释放 live lease。两小时 synthetic 三stage测试从真实前一小时 replay carry 构造第二小时输入；不是 native 或 pinned RTS 全192小时覆盖。
+
+初版根整批 9 passed/242.83s/exit0，初版三文件 snapshot 保留；独立静态审查后补显式值比较、修正 local pin 措辞并增加 fresh-reopen 窗口。最终根定向 4 passed/6 deselected/31.99s/exit0；最终独立只读 /root/h1_parent_review 整批 10 passed/258.44s/exit0，无开放 finding，非 official verdict。测试历史按快照保存，不将初版测试混称最终整批。
+
+开发检查 results/tables/rq2_h1_saved_worker_handoff_v1_non_authoritative/development_checks.json，SHA256 9bdbc977cf7397be32bfb2e66e2f69e384976dd5ced5005e0388a60802538d27，绑定87文件 pins。前序76pins、v2/v3的895/1695封存成员及248/251运行文件无漂移。新 native 调用0，无新 production outer/lease/authority。未新增 handoff 文件或 raw 副本；原条件 saved-path 文件内容界沿用，内存与新增重放时间未证明。旧磁盘归档本身不证明使用了本 controller。
+
+此项仅 synchronous in-process saved handoff；last_input_receipt 是最近成功输入的内存记录，不是持久 journal 或续跑 token。durable_handoff、independent_hour_jobs、producer_coverage_proven、native_export_coverage、collector_integrated、resource_admission、formal_execution_ready、formal_result 仍 false。后续须接新的 durable one-shot 独立 hour Job 与完整 worker/native raw-before-audit、完整分段/observer、Job/scratch/FS/时间资源、typed missing-tail、实际 reuse DAG/full task manifest、共同 Rref/A 与完整 LB/UB，再封存并开展全新 official 独立审查。具体新 native 运行仍须就绪包与门禁完成后另行明确授权；整体目标继续进行。
+
+### 2026-10-04 H1 saved-only independent Job development v1
+
+新增 experiments/h1_saved_job_development_v1.py、experiments/run_h1_saved_job_worker_development_v1.py、tests/test_h1_saved_job_development_v1.py 和 docs/model_spec/rq2_h1_saved_job_development_v1.md。SavedJobController 在独立 outer root 持有 lease；source_parent 与逐hour Job目录互为 sibling，旧parent拓扑及src闭包不变。controller/parent guard覆盖 ready/source/carry、intent+anchor、typed snapshot、Job、fresh child/source复核和outcome全过程。每次请求、PID/creation、初始headroom、release intent、consumption及result均有界持久写入；不存在 reopen/resume/native路线。
+
+固定顺序为 request/launch → 已入Windows Job的suspended child → initial observation/child身份 → 复核parent pending/current child absent与全部pins → release_intent → release/wait。worker校验exact schema、argv/cwd/无license allowlist环境、预算/host/完整process identity及实际PID/creation，先xb/fsync/fresh readback保存consumed，再独立重建typed input并比对receipt，最后运行固定saved-report AttestedChild。父端只在exit0、whole-job-quiescent、无resource/observation error且峰值在界内时读result，之后重验raw来源、fresh科学replay与source，再锚定outcome。release intent不证明运行；consume不证明完成；job_checks不证明后续parent outcome闭合。任何失败保留partial/full证据并poison，无清理/修复/重试。目录断电durability没有声称。
+
+独立审查闭合exact schema、统一false flags和initial headroom重建：有限有序clock，精确commit/disk类型，当前目录/volume身份，同volume demand/reserve/minavailable，以及sufficient=true、reservation/hard/formal=false。全worker禁止solver调用。两次真实Windows Job消费synthetic三stage reports完成两小时carry，第二小时由前一小时科学replay重建；research级independent_hour_jobs门仍false。另默认-I -B入口重建真实pinned RTS origin与232stage inventory后，故意供给无效saved raw，验证先保留raw再拒绝、exit2、无parent outcome；不是完整RTS小时或232stage执行。
+
+测试按真实快照保留：初版2 failed/11 passed/4 deselected/39.92s和诊断1 failed/16 deselected/9.80s源于test-only隔离launcher导入pytest缺pygments；不能视作预定故障窗口已覆盖。仅测试shim显式添加定位到的pytest依赖目录（含pygments/colorama），默认worker不变、环境不安装。修后2 passed/15 deselected/32.61s及中间23 passed/5 deselected/111.61s单列。后续整批1 failed/37 passed/318.36s为3秒deadline先于result marker，保留完整失败快照；修为等待marker后只注入该owner计时年龄，触发真实deadline/quiescence，不放宽实现或科研阈值。最终根新增/修复定向2 passed/37 deselected/33.74s；底层parent-death/descendant-quiescence/failed-wait回归5 passed/31 deselected/3.71s，均exit0。最终独立只读 /root/h1_parent_review 整批39 passed/339.51s/exit0，4文件pins前后相同，无开放finding；非official verdict。
+
+单Job受控文件内容界1062913 bytes、11files、2directories，包含4个256KiB JSON、5个2048-byte JSON、4096-byte诊断和1-byte lease。H192/S232的parent+children+192Jobs+outer lease条件和为54665918210 bytes、630151files、46276directories；补充独立只读算术/作用域审查无finding。此界排除外部source raw、任意scratch、FS metadata/allocation和时间，不能用于完整resource admission。Job目录未新增raw副本，child副本仍在既有parent界内；完整分段/observer与2440秒non-solver分项未证。
+
+开发检查 results/tables/rq2_h1_saved_job_v1_non_authoritative/development_checks.json，SHA256 d637de8ec26ff7cc8fbc4aae708aa8b2fe06fa88b307d5daf6c8ff4828929ab9，绑定107文件pins。前序87pins、v2/v3的895/1695封存成员及248/251运行文件无漂移；git diff --check通过。新native调用0，无新production outer/lease/authority。producer_coverage_proven、native_export_coverage、collector_integrated、independent_hour_jobs_integrated、resource_admission、formal_execution_ready、formal_result保持false。
+
+下一步继续native export与raw-before-audit生产producer/worker接线、完整192小时source/carry覆盖、完整分段/observer、source/raw/scratch/FS/时间及全任务资源、typed missing-tail、实际reuse DAG/full task manifest、共同Rref/A与完整LB/UB，再封存及全新official独立审查。新的具体native运行仍须就绪包与门禁完成后另行明确授权。整体目标继续进行。
+
+### 2026-10-04 H1 complete linear export guard development v1
+
+新增 experiments/h1_linear_export_guard_development_v1.py、tests/test_h1_linear_export_guard_development_v1.py 和 docs/model_spec/rq2_h1_linear_export_guard_development_v1.md。后继只读predicate补齐全部native变量domain/bounds、fixed bounds、完整linear constraints的terms/sense/RHS及objective核对；完整forward/reverse双射、native index和双向sameAs对应，允许同一native对象的不同Python wrapper。拒绝hidden quadratic/SOS/general/scenario/PWL结构、lazy rows、extra/missing variables/rows、duplicate terms、range及精确binary64 rational algebra差异。没有修改旧guard、src、v2/v3合同或report grammar。
+
+独立开发审查及根自检发现两项无限语义漏检：Gurobi把部分达到1e20的finite variable bounds及inequality RHS视作无限/恒满足。修复为所有finite canonical variable bounds和normalized exact Fraction RHS统一abs<1e20；双侧/双符号/全部sense（含equality）均为明确更窄协议，未改变科研阈值或数据。边界测试覆盖±1e20拒绝及nextafter向0最近值通过。exact RHS subtraction有rounding差异仍拒绝，不修补系数。native infinity getter是否返回声明的±1e100尚未live验证，其他表示当前fail closed。
+
+零solver检查构造pinned RTS origin的980rows（339eq/638upper/3lower）及既有synthetic future carry+locks的1272rows（631eq/638upper/3lower），均无range、normalized RHS可精确binary64表示且在新范围内。synthetic_boundary=true、reachable_assignment_proven=false、scientific_witness=false；不是全192小时或actual native export覆盖。
+
+测试历史逐快照保存：初33 passed/0.58s；增加pinned model test后因错误直接调用pytest fixture出现1 failed/33 passed/2.01s，该3文件snapshot及失败记录保留；修fixture后根34 passed/8.37s、独立34 passed/8.80s及相关17项回归仅对应1e20修复前快照，不能作为最终版本结论。修复无限语义后最终根44 passed/8.39s/exit0，独立只读 /root/h1_parent_review 44 passed/8.05s/exit0及17 passed/21 deselected/1.96s/exit0，三文件pins前后相同，无开放finding；非official verdict。
+
+开发检查 results/tables/rq2_h1_linear_export_guard_v1_non_authoritative/development_checks.json，SHA256 7ddb39a20a94da76306d822780640e48a73ac817bbfa2643dfe95caa38e1a031，绑定128文件pins。前序107pins、v2/v3的895/1695封存成员及248/251运行文件无漂移。新native调用0，无新production outer/lease/authority；producer_coverage_proven、native_export_coverage、collector_integrated、independent_hour_jobs_integrated、resource_admission、formal_execution_ready、formal_result仍false。
+
+本predicate尚未接worker；future caller须认证exact adapter、update native model后核验并保持到optimize前不变。旧solve_once在encode raw前已load并做residual audit，不能直接复用为raw-before-audit生产路径。下一步继续拆分原始native输出保存与科学审计、producer/worker接线、完整分段/observer、192小时source/carry与全任务资源、typed missing-tail、actual reuse DAG/manifest、共同Rref/A和完整LB/UB，再封存及全新official独立审查。新的具体native运行仍须就绪包与门禁后另行明确授权；整体目标继续进行。
+
+### 2026-10-04 H1 raw capture before adapter postprocessing development v1
+
+新增 experiments/h1_native_raw_capture_development_v1.py、对应tests及docs/model_spec/rq2_h1_native_raw_capture_development_v1.md。StageCapture为单stage/create-once的版本化producer边界：request/structure/implementation绑定、spec/options记录 → exact direct instance的单次_apply_solver入口 → update与完整linear export检查 → raw intent → 原apply一次 → native原始状态/变量/目标读取并xb/fsync/fresh readback/receipt → 才返回Pyomo DirectSolver.solve进行_postsolve → canonical/native export/recapture及磁盘raw复核 → downstream consumer → close一次及close后metadata/raw复核 → raw finish和complete记录。没有新CLI、production封存或Job/worker连接。
+
+新raw独立schema，不冒用旧runner identity，也不作为旧v3 report输入。原始变量X、native index/name/type/bounds、objective terms和状态/ObjVal/ObjBound/ObjBoundC/Runtime/MIPGap保留；binary64同时存big-endian 16hex位bits与可读float.hex，保留negative zero和NaN sign/payload。微小负generation不在捕获时转换；批准的映射及全约束重验仍须下游科学consumer实施。缺失getter通道保留unavailable及bounded exception class，不伪造0；optional diagnostic缺失不代表数值接受。apply异常在raw保存后重抛；无incumbent不解释为数学不可行。
+
+实现拥有process/thread和nonblocking guard；第二次run/apply及重入不重复native apply，escaping exception poison，不重试/恢复/修补。消费者没有solver handle，known solver entries禁止。close只尝试一次；默认Gurobi全局environment存活与whole-Job quiet须由future controller处理。raw terminal只表示Ingress callback闭合；finish已closed或complete已写出后确认失败时不保证aborted.json存在，owner仍unresolved。complete文件存在本身不构成持久接受；external complete pin与independent fresh reader尚未提供。
+
+独立开发审查闭合5项：close后再次核对binding/spec/export/raw；runtime identity直接绑定继承guard及两版grammar；float bits完整保留；binding/raw/complete统一false flags；finish与complete publication前后故障窗口。初18 passed/4.01s保存两文件snapshot；补secondapply后的根19 passed/4.02s与独立19 passed/3.95s、根相关74 passed/15.49s为pre-fix历史，三文件pre-review snapshot保留。最终根31 passed/5.92s/exit0；独立只读 /root/h1_parent_review 31 passed/5.71s及相关raw ingress+linear guard回归74 passed/15.16s，均exit0、3pins前后一致，无开放finding，非official verdict。
+
+测试使用FakeDirect并借用真实installed DirectSolver.solve，_save_results=False；没有实例化真实Gurobi，未覆盖actual Gurobi _postsolve、_save_results=True符号映射分支、native infinity getter、whole-Job quiescence或完整232×192覆盖。注入外部raw破坏时检测并停止，不修复原文件。新增native raw副本使用16MiB硬入口cap，提取/序列化/写入中断或超cap不保证完整raw；更紧grammar内容界、内存、新增副本全任务磁盘/FS和完整分段时间准入仍缺，不能沿用旧磁盘准入。
+
+最终开发检查 results/tables/rq2_h1_native_raw_capture_v1_non_authoritative/development_checks_v2_final.json，SHA256 2c2dddaf3cce31a443f9b01243597a6404ce8182871508d0fe237eb567400128，绑定145文件pins。首版development_checks.json保留；final revision仅显式增加solver-entry guard依赖pin（原已在旧outer及runtime identity中），3实现/测试/spec字节不变。前序128pins、v2/v3的895/1695封存成员与248/251运行文件无漂移。新native调用0，producer_coverage_proven/native_export_coverage/collector_integrated/independent_hour_jobs_integrated/resource_admission/formal_execution_ready/formal_result均false。
+
+下一步为新native raw格式实现版本化科学consumer和independent fresh replay，绑定原始X与Pyomo结果/完整assignment及approved generation mapping，然后接attested worker、external completion pin/fresh reader、完整计时与独立hour Job。完整source/carry覆盖、实际reuse DAG/full manifest、共同Rref/A、完整LB/UB及资源/official门继续未闭合；新的具体native运行仍须就绪包与全部门禁后明确授权。整体目标保持进行中。
+
+### 2026-10-05 H1 retained native capsule science consumer development v1
+
+新增 experiments/h1_native_raw_science_development_v1.py、tests/test_h1_native_raw_science_development_v1.py、docs/model_spec/rq2_h1_native_raw_science_development_v1.md。新consumer把已保存native capsule接到原有科学判据：fresh canonical模型检查完整native变量/domain/bounds/objective与binary64 bits；postsolve reported rows与合法fixed/unused-unbounded-continuous completions逐位对应原始X；sidecar及receipt在残差/判据/映射之前保存；独立verify_numerical和未改predicate通过后，按已批准v3 generation规则映射并完整重验，保留原始assignment及完整mapping。referenced variables由canonical repn独立重建。新numerical外层标为derived_legacy_predicate_view，旧v3 reader拒绝它，不冒充历史native report。
+
+create-once science root绑定producer request/spec/export及raw ingress链，fresh reader需外部science terminal pin，重建模型并重算全部输出，完整字节/身份前后复核拒绝恢复mtime后的漂移。science terminal仍不代表producer后续close/finish成功，stage_capture_completion_checked=false。拒绝/写入失败保留已有raw/sidecar/receipt；ProjectionRejected保留原receipt；terminal落盘后确认抛错不会返回成功或外部pin，根目录不能retry。
+
+零native证据使用旧assignment的派生test capsule：三个synthetic stages、pinned RTS origin 0/1/231及合成tiny-negative映射；三阶段组合借真实DirectSolver.solve驱动和synthetic adapter（_save_results=False），下一stage使用前阶段新consumer返回lock。没有actual Gurobi/native witness或完整小时执行，actual symbol-map postsolve分支仍待验证。新增sidecar/科学输出、模型clone、重复读取/replay的内存、时间、磁盘/FS须计入后继预算，caps不构成资源准入。
+
+初始33 failed/7.46s为fixture缺_cuid，后1 failed/3 passed/4.11s为bits测试未实际改变bits，初版/失败记录均保留。中间33 passed/17.92s、41 passed/29.27s、单项1 passed/41 deselected/4.88s和根43 passed/33.17s仅对应各自快照。独立43 passed/33.35s发现failure-window测试缺口；三文件pre_failure_window_review_snapshot保留。根仅增加10项测试覆盖拒绝mapping保留、numerical/mapping/result写前与写后确认失败、terminal写后确认失败、producer源在consume/inspect期间漂移。最终根53 passed/40.31s/exit0；独立新增10 passed/43 deselected/8.98s/exit0，相关独立14 passed/68 deselected/4.08s/exit0。根相关raw capture+generation projection共82 passed/18.69s/exit0，对应未变实现。只读R3 pre-seal审查无开放finding，非official verdict。
+
+最终开发检查 results/tables/rq2_h1_native_raw_science_v1_non_authoritative/development_checks.json，SHA256 c3325211000a4ef26a7ea4a55304550ac2436b53622aeaeb589aab06803afb08，绑定171文件pins。前序145pins、v2/v3的895/1695封存成员及248/251运行文件无漂移。新native调用0；全部未提交工作、冻结协议/结果和中间证据保留。producer_coverage_proven、native_export_coverage、collector_integrated、independent_hour_jobs_integrated、resource_admission、formal_execution_ready、formal_result均false。
+
+下一步：externally pinned producer completion与fresh reader握手、完整worker/独立hour Job/分段及observer计时、0..191 source/carry连续覆盖、资源内容界及全任务新增副本预算、actual reuse DAG/full manifest、共同Rref/A与完整LB/UB证书，然后successor封存和全新official独立审查。新的具体native运行仍需就绪包、门禁及明确授权。整体目标继续进行中。
+
+### 2026-10-05 H1 owned stage completion development v1
+
+新增 experiments/h1_stage_completion_development_v1.py、tests/test_h1_stage_completion_development_v1.py、docs/model_spec/rq2_h1_stage_completion_development_v1.md。OwnedStage内部构建stage并创建StageCapture，固定science.consume回调；仅在同owner的StageCapture.run真实返回、返回对象就是callback对象、producer/raw状态成功且guard释放、fresh复核完成后mint不可普通构造的进程内Completion。取得guard后的异常poison；未取得guard的重入/并发调用仅拒绝且不改active owner状态。无retry/resume。
+
+独立inspect需外部producer complete pin、science terminal pin及reader implementation pin，核验root/source containment、17文件/3子目录精确拓扑、raw ingress terminal与producer complete完整链及science fresh replay，并前后复核全部字节/identity/listing/context/implementation。reader仅返回条件证据，producer_run_return_observed=false、whole_job_quiescence_checked=false，不能从磁盘重建live Completion。双pin识别确定性字节，不证明唯一执行实例；Completion为可信Python调用边界，不是对任意Python对象篡改的安全边界。没有新增成功输出文件，新增replay工作及内存仍需计入后继资源预算。
+
+失败窗口验证涵盖science terminal已存在后close失败、raw terminal/producer complete写前及写后确认失败、返回后poison/raw状态不一致或返回对象替换、fresh replay失败、pin/root/request混配、completion/source/目录中途漂移、owner/reentry和dependency漂移。文件完整存在但调用抛错时不返回live receipt。测试使用真实DirectSolver.solve驱动加synthetic adapter和派生saved assignment；没有actual Gurobi或新的native求解。
+
+历史初版handshake设计源码保留，后按设计审查简化为双pin接口；首次22 passed/36.25s快照保留。增加reader implementation pin/root规范化及跨root/目录增长后根24 passed/42.60s。独立静态审查指出spec的Any escaping exception未区分guard取得失败；修spec及reentry测试断言，三文件pre-review快照和finding保留，实现不变。最终根24 passed/42.70s/exit0；独立只读R3最终24 passed/42.48s/exit0，capture/science失败窗口窄回归7 passed/4.72s/exit0，三文件pins前后一致，无开放finding。非official verdict。
+
+开发检查 results/tables/rq2_h1_stage_completion_v1_non_authoritative/development_checks.json，SHA256 97c1286673f4c8a58f8cc624e0b34152241d671468b5f7ed7595ef8ce2e6f242，绑定187文件pins。前序171pins、v2/v3的895/1695封存成员及248/251运行文件无漂移。新native调用0。producer_coverage_proven、native_export_coverage、collector_integrated、independent_hour_jobs_integrated、resource_admission、formal_execution_ready、formal_result全部false，未建立production outer/lease/运行许可。
+
+下一步将owned stage completion接入完整小时worker，完成232-stage lock链、approved mapping后的小时projection与fresh replay，并接完整分段/observer计时、独立hour Job及source/carry parent。实际Gurobi/symbol-map分支、全部0..191小时覆盖、资源内容界及新增副本预算、actual reuse DAG/full manifest、共同Rref/A、完整LB/UB仍缺；需后继封存及全新official独立审查。新具体native运行必须在包与门禁就绪后获得明确授权。整体目标保持进行中。
+
+### 2026-10-05 H1 sequential owned hour development v1
+
+新增 experiments/h1_owned_hour_development_v1.py、tests/test_h1_owned_hour_development_v1.py、docs/model_spec/rq2_h1_owned_hour_development_v1.md。OwnedHour按真实stage_order（1..232）内部创建OwnedStage，要求exact live Completion并fresh inspect后才写create-once commit；确认commit后仅使用fresh-inspected lock推进前缀。binding显式绑定input/source audit/relative hour、spec/limits/order和implementation。commit绑定previous head、index/child、stage request/implementation、进入lock hash、双pin与科学结果摘要。失败停止，无retry/resume/partial-hour结果。
+
+全序列完成后先从空locks独立重验全部stage/commit链，最终fresh assignment仅交既有approved replay_feasible_boundary生成新schema projection。新projection绑定before/after、locks、完整stage双pin/commit vector、generation规则与新implementation；不构造旧v3 projection类型或冒充旧raw report。全链prepublication replay通过后写projection/terminal，再全链fresh inspection通过才返回HourCompletion。reader需外部hour terminal及implementation pins，前后核验全部目录/文件hash+identity/source audit/clock/context；reader不能从磁盘重建owned成功返回证明。publication确认失败可留字节，但没有live hour receipt。
+
+验证包括完整三阶段synthetic adapter pipeline，与旧v3 oracle的network/completed_hours/units/locks核心值一致；stage成功但fresh失败、commit写前/写后、projection/terminal写前/写后失败、断链/prefix/request/双pin/child/topology/源identity漂移、全链中途同长度字节变化恢复mtime、非live stage结果、owner/reentry与dependency边界。初23 passed/91.99s快照及初始设计源码保留。最终根28 passed/104.79s/exit0；独立只读R3 28 passed/103.07s/exit0，三文件pins前后一致，无开放finding。pinned RTS仅检查真实232-stage声明；没有运行232-stage长链或actual native solver。非official verdict。
+
+受控文件cap算术另存controlled_content_cap_arithmetic.json并经独立复核：每stage 17文件共34365440 bytes；S=232含commits/binding/projection/terminal共7973523456 bytes、4179 files、931 directories（含root），即232*34365440+232*2048+2*2048+262144。此为列明入口cap的受控内容算术，不是conditional grammar证明或完整资源准入；排除native scratch/log、外部输入、FS分配、内存及序列化buffer、timing/Job/controller/parent产物。旧磁盘预算不能沿用，重复science replay时间也未准入。
+
+开发检查 results/tables/rq2_h1_owned_hour_v1_non_authoritative/development_checks.json，SHA256 c7df90c811fbc13a8c07cadf65182cb37dc74675429852cc224b255ae07b0c54，绑定201文件pins。前序187pins、v2/v3的895/1695封存成员及248/251运行文件无漂移。新native调用0；全部未提交工作及冻结协议/结果保留。producer_coverage_proven、native_export_coverage、collector_integrated、independent_hour_jobs_integrated、resource_admission、formal_execution_ready、formal_result均false。
+
+下一步接完整分段durable timing/独立observer、完整worker与独立hour Job、source/carry parent；actual Gurobi/symbol-map分支、232-stage实际执行及0..191连续carry覆盖、条件内容界/全任务预算、actual reuse DAG/full manifest、共同Rref/A与完整LB/UB仍待完成。之后才能后继封存、全新official独立审查，并对具体新native运行取得明确授权。整体目标保持进行中。
+
+### 2026-10-05 H1 exact optimize-call timing boundary development v1
+
+新增 experiments/h1_native_call_timing_development_v1.py、tests/test_h1_native_call_timing_development_v1.py、docs/model_spec/rq2_h1_native_call_timing_development_v1.md。核对installed源码发现_apply_solver含参数/log/stale等非solver工作，而旧durable Journal.span在begin文件fsync/readback前取tick，会把begin I/O计入native。两者不能直接作为whole-worker wall中扣除的native时间，否则低估non-solver。本单元修复精确调用边界前置条件，尚未接完整worker。
+
+显式versioned apply副本固定Pyomo6.10.1、gurobi_direct.py SHA cef4ef2bc51d819a83ad4a3ce467fb6cbde6594b201c8ee34e9649953cf451e6、原apply source和_set_options source pins。去掉唯一measurement.invoke后AST与installed apply完全相等，保留参数过滤、suffix、log reset等顺序；真实model身份不变，不用facade/实例native方法替换。Pyomo版权及BSD-3-Clause条件全文随复制实现保留。installed漂移在solver调用前拒绝。
+
+顺序：binding → apply start → setup/options → optimize intent写盘/fsync/readback → native start → optimize(None)一次 → native end → completion持久化 → apply tail → apply end → terminal与fresh inspection。intent/completion I/O均在native区间外、apply窗口内。模拟优化73ns，intent和completion各延迟1000ns时native仍73ns，non-native apply为2022ns。边缘clock读取/校验/Python调用开销属于声明的外部调用边界，不冒充Gurobi Runtime或纯C算法时间。
+
+未知状态保持fail closed：optimize异常、clock回退、intent/completion/terminal写前或写后确认失败、tail异常均不返回成功timing receipt；残留完整文件不证明owned调用成功返回，不重试。canonical root/普通目录identity在创建及调用前检查、reader全视图前后复核，避免原本可能到optimize后才拒绝alias的路径。可信Python接口不是任意module/object篡改的安全边界。4份metadata共8192 bytes内容cap不包含其他worker成本。
+
+首次21 passed/1 failed/2.47s为注入lambda源码引起SyntaxError未归一化，初始快照保留；修为ValueError后22 passed/2.15s快照保留。独立pre-seal指出许可保留和root前置拒绝，两项修复后最终根24 passed/2.15s/exit0，独立只读R3 24 passed/2.06s/exit0，三文件pins前后一致、无开放finding；非official verdict。所有测试使用fake model，三条独立synthetic interval不是三阶段完整timed hour，更不是actual Gurobi验证。
+
+开发检查 results/tables/rq2_h1_native_call_timing_v1_non_authoritative/development_checks.json，SHA256 5d8bb9a4bd7e48d35989d44e5d2aa4e2ab867aa7fc20d3dd1c5a30fd1a898d6a，绑定218文件pins（含installed vendor文件及许可）。前序201pins、v2/v3的895/1695封存成员及248/251运行文件无漂移。新native调用0。
+
+下一步将此边界接入版本化timed capture/science/hour，计量其余完整phase与独立observer，并接worker/独立hour Job和source/carry parent。binding构造、terminal/review、worker其他阶段、controller/Job等待仍在本apply窗口外，必须纳入外层non-solver计量；instrumentation_coverage_verified、component_budget_verified、resource_admission、formal_execution_ready、formal_result仍false，不能证明2440秒分项预算。actual Gurobi/symbol-map、232-stage实际执行/192小时carry、资源/任务DAG/manifest/Rref/A/LBUB及新official审查仍待完成。新native运行需具体就绪包和明确授权；整体目标保持进行中。
+
+### 2026-10-05 H1 native-timed hour successor development v1
+
+新增 experiments/h1_timed_native_capture_development_v1.py、experiments/h1_timed_native_science_development_v1.py、experiments/h1_timed_stage_development_v1.py、experiments/h1_timed_hour_development_v1.py，以及 tests/test_h1_timed_hour_development_v1.py 和 docs/model_spec/rq2_h1_timed_hour_development_v1.md。四层版本化后继将精确optimize调用计时接入raw/science/stage/hour链；旧实现及封存成员保留。11项science核心函数AST与旧版本相等，approved generation转换及全部科学谓词不变。
+
+capture持有同request/index的Measurement；仅接受owned调用返回的binding/terminal/completion pins，固定四份计时文件完整bytes/identity视图，后续复核不得重新hash以采纳漂移。science要求live capture传入外部pins，stage检查21文件及capture/science/timing一致性；hour commit、projection和terminal绑定完整timing vector与各完整区间之和。各区间在各自clock domain内求差，不跨域相减，也未推导whole-worker non-solver时间。计时terminal可先于raw存在；此时发生中断或raw capture失败仍是unknown witness，不能产生成功stage/hour或重试。apply/timing异常尽力保存原native channels和错误后停止。
+
+初版23 passed/60.46s及源码快照保留；最终根29 passed/67.88s/exit0，独立只读R3合并53 passed/68.59s/exit0，无开放finding，非official verdict。测试使用installed DirectSolver.solve、pinned timed apply body、synthetic native model和注入clock。完整三阶段assignment/mapping/lock及hour边界与既有oracle一致；三个73ns区间合计219ns仅为测试fixture，不是native性能实测。故障覆盖timing、raw、science、close、stage/hour publication写前写后及live pin漂移；无新actual native调用。
+
+受控内容cap每stage增加4份2048-byte metadata和一个目录。232 stages合计7975424000 bytes、5107 files、1163 directories（含root）；排除native scratch/log、外部输入、FS分配、内存、其他phase journal及worker/controller/parent/Job成本，仍不是完整资源准入。
+
+开发检查 results/tables/rq2_h1_timed_hour_v1_non_authoritative/development_checks.json，SHA256 0cb1bd422161f02f8671e4a02d478220f21a10024d58374b679478ddd7f09c61，绑定236文件pins，本次fresh核验一致。前序218pins及v2/v3的895/1695封存成员、248/251运行文件保留核验证据见preservation.json。当前无相关求解进程。全部未提交文件及冻结协议/结果保留。
+
+下一步完成其余phase、worker生命周期与独立Job observer计量，再接完整worker/独立hour Job及source/carry parent。actual adapter、完整232-stage及0..191连续carry、条件grammar/新增副本资源预算、actual reuse DAG/full manifest、共同Rref/A及完整LB/UB仍待完成。producer_coverage_proven、native_export_coverage、collector_integrated、independent_hour_jobs_integrated、instrumentation_coverage_verified、observer_overhead_separated、component_budget_verified、resource_admission、formal_execution_ready、formal_result保持false；未证明2440秒non-solver预算。后续须successor封存及全新official独立审查，具体新native运行仍需明确授权。整体目标继续进行中。
+
+### 2026-10-05 H1 lifecycle timing coverage gap audit development v1
+
+新增 experiments/h1_lifecycle_timing_gap_audit_development_v1.py、tests/test_h1_lifecycle_timing_gap_audit_development_v1.py、docs/model_spec/rq2_h1_lifecycle_timing_gap_audit_development_v1.md。真实durable Journal的无求解合成反例：100ns主体加1000ns terminal写盘与2000ns fresh inspection，返回recorded=100ns，外层enclosing=3100ns，遗漏tail=3000ns。数值来自注入clock，不是性能实测。证明现有journal终点不能覆盖其自身最终持久化与复核。
+
+五份源码hash及AST函数定位存于coverage_audit.json。静态核对Job elapsed始于initial headroom/child creation前，止于whole-Job quiet及exit/peak/identity查询后；不含调用方request/launch准备、wait后close、observation持久化、结果fresh检查和parent outcome。该结论是源码审计，尚非完整runtime integration。下一步实现应从controller transaction外层envelope入手，再桥接worker native区间的clock rate/units、owner/Job、顺序不重叠及真实包含关系；native_total<=wall不能替代此证明。observer与worker重叠耗时不能顺序相加或从non-solver扣除；最终计量receipt自身写盘须另列observer tail并纳入资源边界。随后再在此完整外层窗口内添加phase attribution，避免先把局部journal宣称为完整预算证据。
+
+根定向9 passed/0.19s/exit0；独立只读R3合并25 passed/0.51s/exit0，三文件pins测试前后一致，五份源码定位核验一致，无开放finding；非official verdict。新native调用0。前序236pins、v2/v3 outer895/1695成员和run248/251文件fresh核验无漂移，全部未提交与冻结产物保留。开发检查 results/tables/rq2_h1_lifecycle_timing_gap_v1_non_authoritative/development_checks.json，SHA256 d5e959bb38869908bf39d4d844fe5e79cdaa726211ffd4c65ea1e5fce1f68845，绑定247pins。
+
+此单元仅关闭计时缺口定位与后继边界审查，未完成worker/observer/Job集成或2440秒预算证明。runtime_integration_verified、instrumentation_coverage_verified、observer_overhead_separated、component_budget_verified、resource_admission、formal_execution_ready、formal_result保持false；其余科学覆盖、全任务资源/DAG/manifest/Rref/A/LBUB、封存及全新official审查仍待完成。新native运行需就绪具体包和明确授权。整体目标继续进行中。
+
+### 2026-10-05 H1 saved controller transaction timing development v1
+
+新增 experiments/h1_controller_timing_development_v1.py、tests/test_h1_controller_timing_development_v1.py、docs/model_spec/rq2_h1_controller_timing_development_v1.md。TimedSavedController调用未改动的saved-only controller transaction与cleanup，分别观察初始化、step transaction、close窗口。step外层覆盖intent、source/carry准备、request/launch、Job创建及release、worker启动/工作/退出、whole-Job quiet、fresh结果检查和parent outcome及最终restore；terminal写盘和fresh确认另计confirmation tail。既有Job elapsed仅作诊断，不相加、不扣减native。caller setup、调用间隙及最后live receipt构造/返回后的成本未覆盖，不能称完整program预算。
+
+binding绑定controller PID/thread、clock domain、implementation和声明hours。固定bytes/identity、bounded目录、guard、跨调用单调tick、逐hour前驱链及外部pins阻止漂移与越界创建。reader只检查当前hour计时及Job引用，scientific_replay_verified/prefix_verified/live_return_observed均false，不能恢复live tail或继续执行权限。Observation显式record_kind/index/outcome_head/record_sha256；新step清除旧last_observation。base已成功发布parent outcome后，外层terminal或确认仍可能失败；此时保留outcome但poison wrapper/parent，无新live observation、不重试。
+
+独立timing-root NTFS lease覆盖base close释放outer lease后close.json的写盘与复核，之后才释放timing lease并取live最终tick。固定_Lease.close在finally释放stream/registry，即使unlock报错；wrapper先detach引用再close，避免异常cleanup重复关闭旧owner并移除新owner registry。验证覆盖close写前写后、固定unlock前后故障，以及旧owner释放后新owner取得lease再发生确认失败；也用独立Python进程验证outer lease已释放的close-write窗口内timing lease仍阻止并发重开。无新native调用。
+
+初版13 passed/1 failed/5.12s为测试root缺少_non_authoritative后缀，未启动Job，源码快照保留；修后14 passed/27.91s。扩展18 passed/58.00s后自检修复declared-hours越界先写intent问题，定向1 passed/18 deselected/2.59s。独立审查指出close lease和receipt语义，修后23 passed/61.38s；进一步修复close registry ABA语义，最终根窄回归21 passed/3 deselected/6.84s/exit0。最终独立只读R3全24 passed/62.29s/exit0，三文件pins前后一致，无开放finding；包含三个真实短saved Jobs（成功、worker exit7、parent outcome后outer terminal确认失败）和独立lease探针。全部历史快照及finding保留，非official verdict。
+
+新增受控内容界H=192为792577 bytes、388 files、193 directories，包含timing execution.lock一字节；排除旧controller/Job/parent/child、FS分配、内存、外部输入、scratch及native logs。开发检查 results/tables/rq2_h1_controller_timing_v1_non_authoritative/development_checks.json，SHA256 c09b4fc7d7a0726e903257d835ac3ac78a6a4d2dacff5103593efa716493b551，绑定273pins。前序247pins及v2/v3 outer895/1695、run248/251文件fresh核验无漂移；全部未提交及冻结产物保留。
+
+下一步将timed native hour接入successor worker/controller，证明native区间clock rate/units、owner/Job及真实包含关系，再接worker phase和独立observer重叠计量、caller lifecycle/最后live return tail。producer_coverage_proven、native_export_coverage、collector_integrated、independent_hour_jobs_integrated、instrumentation_coverage_verified、observer_overhead_separated、component_budget_verified、resource_admission、formal_execution_ready、formal_result均false。完整232-stage/192小时source-carry覆盖、资源/DAG/manifest/Rref/A/LBUB、封存和全新official独立审查仍待完成，具体新native运行仍需明确授权。整体目标继续进行中。
+
+### 2026-10-05 H1 owned timed worker-hour envelope development v1
+
+新增 experiments/h1_timed_worker_hour_development_v1.py、tests/test_h1_timed_worker_hour_development_v1.py、docs/model_spec/rq2_h1_timed_worker_hour_development_v1.md。OwnedWorkerHour内部构建既有timed OwnedHour，要求exact live HourCompletion及owner成功状态，然后完整fresh science replay才发布worker terminal。绑定实际Windows PID/creation FILETIME/thread与外部controller request SHA；该SHA只是调用方链接，尚不证明release/consume或Job membership。没有CLI或Job launcher，真实native-capable调用仍需具体包、资源/Job监督与新授权。
+
+本地clock合同核验Windows CPython、retained builtin perf_counter_ns、monotonic/non-adjustable QPC profile、Measurement.__init__及其默认clock未替换；既有capture不传自定义clock。全部stage PID/thread须与worker一致，序号完整、clock标签互异，apply区间有序不重叠、包含native区间且落在constructor-entry/end-tick窗口内。native总量同时绑定stage/hour/worker vector与terminal；worker_window_non_native_ns=(end-start)-sum(native_end-native_start)。此为可信Python本地默认clock合同下的局部差值，不由小于wall的总数推断包含关系，也不证明跨进程clock或真实native来源。
+
+end tick之后的最终算术、terminal写盘、fresh worker inspection、完整hour snapshot复核及lease释放计入live confirmation_tail_ns；最后tick不持久化，随后receipt构造/guard release/调用方/退出仍在窗口外，模块import/startup也在窗口外。reader只返回条件证据，clock_source_authenticated/owned_run_return_observed为false且tail未知。private-token Completion仅由owned成功run返回local_clock_binding_checked=true，全部资源/正式/运行授权flags仍false。
+
+独立pre-seal发现两项：外层inspect返回后只复查timing不足以覆盖science/commit晚漂移；worker固定lease失败窗口缺测。已在conditional reader及owned completion前加入完整hour snapshot前后对比，并加入science/result.bin及commit同长度/恢复mtime漂移、固定LK_UNLCK前后故障、旧owner释放后新owner接管registry ABA验证。hour已成功仍不能绕过worker后续失败；所有证据保留，poison且不返回Completion、不重试。lease沿用detach-before-close，避免finally重复关闭旧owner影响新owner。
+
+初版根21 passed/124.54s/exit0。新增定向测试一次插入位置错误导致NameError，2 passed/1 failed/20 deselected/2.50s快照保留；测试修正后3 passed/20 deselected/2.08s。R3 findings修复后最终根28 passed/224.08s/exit0；独立只读R3最终28 passed/223.32s/exit0，三文件pins前后一致，无开放finding，非official verdict。使用synthetic adapter及真实Windows process/QPC，完整三阶段projection与旧saved oracle一致；没有真实native/solver/Job或232-stage执行。
+
+新增受控内容仅两份<=2048-byte metadata和一字节execution.lock：4097 bytes、3 files、1 wrapper directory，不含既有hour子树、内存/vector、FS分配、外部输入、scratch/logs及controller/observer/lifecycle。开发检查 results/tables/rq2_h1_timed_worker_hour_v1_non_authoritative/development_checks.json，SHA256 63b336783fb98ea5a528f384e32eeff60c76975cdbef5cd5c8c1cde2c77d47f0，绑定293pins。前序273pins及v2/v3 outer895/1695成员、run248/251文件fresh核验无漂移；旧协议、全部未提交和历史测试/finding快照保留。
+
+下一步接successor worker entry和独立Job/controller，核验request/release/consume、实际Job membership及跨进程clock/containment bridge，再补完整phase/observer/startup/exit/caller/return-tail。worker_job_membership_verified、cross_process_clock_bridge_verified、producer_coverage_proven、native_export_coverage、collector_integrated、independent_hour_jobs_integrated、instrumentation_coverage_verified、observer_overhead_separated、component_budget_verified、resource_admission、formal_execution_ready、formal_result均false。完整232-stage/192小时覆盖、条件grammar/资源、actual DAG/manifest/Rref/A/LBUB、封存及全新official审查仍待完成，2440秒预算未证明。新native运行仍需具体就绪包与明确授权。整体目标继续进行中。
+
+### 2026-10-05 H1 released timed worker development v1
+
+新增 experiments/h1_timed_released_worker_development_v1.py、tests/test_h1_timed_released_worker_development_v1.py、docs/model_spec/rq2_h1_timed_released_worker_development_v1.md。开发 API 将 released request 接到既有 OwnedWorkerHour，校验 canonical request、implementation/source/anchor/pending/input receipt、实际 Windows PID/creation FILETIME、argv/cwd/environment、budget/host、release/launch/child/initial observation。exclusive consumed 写盘/fsync/稳定复读后才重建 source/carry；request/release/launch/child/initial/consumed 的固定 bytes/identity 在重建和发布前后复核。已有 DevelopmentNormalChild suspended-create 使用精确 process/Job handles 的 IsProcessInJob 和不可继承句柄检查，本轮复用而未重做。
+
+owned worker 成功后要求 exact live Completion，完整 fresh hour science replay，再 fresh reopen parent snapshot。完整 worker metadata/lock/hour science/commit/timing/projection 的文件与目录 snapshot 包围最终 inspect/source/result write；晚漂移拒绝。worker_result 绑定 request/consume/input receipt、实际进程、worker binding/terminal/implementation 和 projection SHA，返回前再次按 pin 复读。结果文件存在不证明成功返回、exit0 或 parent acceptance。本单元无 CLI、生产 controller、parent outcome 路由；真实 native-capable调用仍需具体包、Job/resource 监督与新的明确授权。
+
+根首轮6 failed/2 passed/21.06s：测试 host request 漏列独立 scratch DirectoryDemand，被检查在 Job 创建前拒绝，无 native，原快照保留。补齐后8 passed/149.11s；加入开发 root guard/结果最终复读后9 passed/148.96s/exit0。独立pre-seal指出三类持久化失败窗口缺测，补 consumed 完整写盘后抛错、worker_result 完整写盘后抛错、最终结果 pin-read 失败；根新增定向3 passed/9 deselected/75.21s/exit0。consumed write-after 保留记录且 source/worker 未启动；后两者可保留完整结果但 execute 不返回成功、child 非零退出。全部再次消费被 FileExistsError 拒绝。初报规格编码问题经双方 Unicode escape 核验撤销：原始和最终文件均为正确 UTF-8，乱码来自控制台显示链；历史报告/快照照保留。
+
+最终独立只读 R3 全12 passed/218.50s/exit0，三文件测试前后pins一致，无开放 correctness finding，非official verdict。9项使用真实受控短 Windows Job、synthetic loader/adapter、真实PID/QPC，零真实 native/solver。成功与全部失败路径的 parent 均只有一条intent并保持 pending_unknown，没有 parent outcome。未重复运行未改的前序28项worker-hour测试；终态无相关进程。
+
+consumer 新增两份各<=262144-byte文件：条件逻辑内容界524288 bytes、2 files、0 additional directories，排除既有worker/hour、caller records、root lease、scratch/logs、外部source、内存和FS分配。小型合成Job的预算不能替代全研究资源准入。开发检查 results/tables/rq2_h1_timed_released_worker_v1_non_authoritative/development_checks.json，SHA256 f1df59f995cd750bac1f0c4f28e37a83a32fd2e64e0f7942984a096c0e2d483b，绑定309pins。前序293pins与v2/v3 outer895/1695成员、run248/251文件fresh核验无漂移，全部未提交、旧协议、冻结和历史产物保留。
+
+下一步：实现successor Job/controller的完整worker输出验收和parent outcome接续，再完成跨进程clock containment、完整phase/observer/startup/exit/caller/return-tail计量。producer_coverage_proven、native_export_coverage、collector_integrated、independent_hour_jobs_integrated、worker_job_membership_verified、cross_process_clock_bridge_verified、instrumentation_coverage_verified、observer_overhead_separated、component_budget_verified、resource_admission、formal_execution_ready、formal_result、native_execution_authorized均false。完整232-stage/192小时source-carry覆盖、新增副本资源预算、actual reuse DAG/manifest/common Rref/A/full LB/UB、封存及全新official独立审查仍待完成；2440秒分项预算未证明。新的具体native运行仍需明确授权，整体目标继续进行中。
+
+### 2026-10-05：timed Job controller / source parent 开发复审闭合
+
+新增 experiments/h1_timed_job_parent_development_v1.py、h1_timed_job_snapshot_development_v1.py、h1_timed_released_worker_development_v2.py、h1_timed_job_controller_development_v1.py，以及对应 test_h1_timed_job_controller_development_v1.py 和 rq2_h1_timed_job_controller_development_v1.md。根代理唯一写入，旧 src、冻结协议、历史结果和此前开发 pins 保留。新 parent/child protocol 与旧 saved-only 路由隔离；released-worker v2 保留 v1 算法，仅切换 snapshot 和共同 implementation identity。
+
+controller 每小时使用独立 suspended Windows Job，绑定 request/launch/child/initial/release；实际 typed exit0、whole_job_quiescent 和资源观察检查后才读取 worker result。父端重新核对 pinned source/carry，完整 fresh science replay，并用全部受控 Job evidence byte/identity view 包围 reference、outcome 和返回。原 generation witness、差值、批准映射及全部约束审计保留；连续 carry 只取经完整复核的 timed projection。任意失败 poison、不重试；结果或 accepted event 已落盘不代表 step 成功返回。关闭先 detach owner，再尝试全部清理，防止二次 close 影响后来 owner。
+
+根初轮 1 failed/37.82s：检查器读取持有中的 Windows Job lock 被拒绝，改为固定 identity/size 检查，失败快照保留。随后 5 passed/251.63s；故障矩阵扩展后 quick 14 passed/15 deselected/8.30s（后续增补前历史状态）、主选择 16 passed/14 deselected/680.06s。补 parent_updates 资源登记及 wait/inspect reach 断言后，定向 5 passed/25 deselected/97.98s，均 exit0。独立只读 R3 最终完整 30 passed/683.83s/exit0，六份候选测试前后 SHA256 一致，无开放 pre-seal finding，终态无相关进程。按测试路径静态计数为 16 次受控 Job 创建、15 次 release；这不是 runtime instrumentation 计数。全部 synthetic adapter，零真实 native。
+
+每 Job 的条件逻辑内容界：3 stages 为 105494530 bytes/81 files；232 stages 为 7977525250 bytes/5119 files。parent_updates 另登记 856065 bytes，覆盖 reference、保守单事件 journal 与下一 anchor record；既有 intent/anchor 已在该次 headroom 检查前落盘。scratch、FS 分配、模型和 replay 峰值内存、完整生命周期时间等仍需另行准入。job_view 保留有限 records 与逐文件 hash/identity/cap，不常驻全部 raw；磁盘界不代表内存界。
+
+开发检查：results/tables/rq2_h1_timed_job_controller_v1_non_authoritative/development_checks.json，SHA256 e450cc2f28765b4ee6592384365eebabeae518d20f926923ddb4acb425ecb776，绑定 339 pins。前序 309 pins、v2/v3 outer 的 895/1695 成员和 run 的 248/251 文件 fresh 核验无漂移；初版、五项和十六项快照及历史失败证据全部保留。
+
+下一步接通 controller/worker 跨进程 clock containment，补完整 phase/observer/startup/exit/caller/return-tail 计量；2440 秒 non-solver 分项预算仍未证明。完整 232-stage/192-hour source-carry 覆盖、全资源准入、实际复用 DAG/全任务 manifest/common Rref/A/full LB/UB、successor 封存与全新 official 独立审查仍未完成。producer_coverage_proven、native_export_coverage、collector_integrated、independent_hour_jobs_integrated、worker_job_membership_verified、cross_process_clock_bridge_verified、instrumentation_coverage_verified、observer_overhead_separated、component_budget_verified、resource_admission、formal_execution_ready、formal_result、native_execution_authorized 均保持 false。本次开发审查闭合不等于 official verdict 或运行许可；具体新 native 运行仍需新的明确授权，整体目标继续进行中。
+
+### 2026-10-05：Job clock bridge 开发复审闭合
+
+新增 experiments/h1_job_clock_bridge_development_v1.py、tests/test_h1_job_clock_bridge_development_v1.py、docs/model_spec/rq2_h1_job_clock_bridge_development_v1.md。根代理唯一写入，旧 src、协议、冻结结果及已闭合开发文件保留。新版 Controller 以独立 outer guard 串行 step/inspect/close；原 Job/source/carry/science 事务继续使用已闭合实现。clock profile 采用受信 Windows CPython >=3.10 system-wide QPC 合同，并核对 builtin/default clock、完整 profile、同机实际 Job PID/creation 和整数 ns 区间包含。Python/Microsoft 官方依据已链接于规格；profile 匹配不替代 live Job 身份链或物理时钟误差证明。
+
+bridge intent → 原 parent intent/Job → bridge job.json → 原 parent reference/outcome → bridge terminal → fresh science/parent/计时复核 → live Observation。Job envelope 包含原 _job 的创建、释放、whole-Job静止和完整验收；worker core window 与完整 worker lifecycle 明确区分。记录绑定 parent identity/input head/source、八份Job pins、worker证据链、outcome/head/历史anchor和前一terminal。只在严格包含时计算 observed_non_native_ns=transaction_wall_ns-actual_native_total_ns；confirmation tail 单列live值，最后tick后的返回/caller、初始化、close等仍非完整计量。step 返回原parent result，新增live凭据为 last_observation。fresh reader仅验证单小时及立即前驱条件证据，完整 clock/parent prefix 未由它证明。
+
+持久化失败矩阵已覆盖 job/terminal 写前写后、最终读、晚Job漂移、最后live tick、job.json之后原source失败、并发入口拒绝及close/registry ABA。parent outcome 已提交后计时失败可保留完整parent记录，但 successor poison、无Observation、禁止重试。新增headroom检查要求exact typed observation、request identity和五个false authority flags；只是live同卷需求观察，fresh reader无法证明该次观察或资源预留。
+
+首两次测试setup分别漏supplied和saved fixture，均2 passed/1 error（1.91s和1.83s）、无Job，快照保留。补齐后根完整10 passed/505.27s/exit0；审查补项后根定向7 passed/10 deselected/179.52s/exit0。独立完整17 passed/679.91s/exit0对应精确profile修复前快照，原成功和失败矩阵均有覆盖。随后修复Python dict相等把True/1、False/0视为相等的问题：四处clock匹配统一canonical io.same，增加保留旧Job pins且重签bridge链的monotonic=1、adjustable=0反例。根最终定向1 passed/16 deselected/70.17s；独立同项1 passed/16 deselected/69.48s，均exit0，覆盖正常受控Job及完整reader反例。其余16项未重复运行，结合静态差异复核闭合本单元；不把此前17项冒称最终字节的全量重跑。最终三pins前后一致、无开放pre-seal finding、无相关残留进程，零真实native；非official verdict或运行许可。
+
+资源条件界为(1+3H)*262144+1 bytes、2+3H files、1+H directories；H=192为151257089 bytes/578 files/193 directories，仅新增clock子树。逐step同卷观察合并当前Job内容、parent_updates、剩余clock records与scratch，FS分配、峰值内存、全部运行时间仍未准入。开发检查 results/tables/rq2_h1_job_clock_bridge_v1_non_authoritative/development_checks.json，SHA256 f2c1abe2cec77c93821a270c400b96e7d484663899134de5697caaa3bc820c67，绑定362pins。前序339pins、v2/v3 outer895/1695成员及run248/251文件fresh核验无漂移，全部初版/失败/复审前快照保留。
+
+新确认的预算语义缺口：旧 normal_h1_full_resource_contract.py 的non_solver allowance包括solver TimeLimit overshoot；bridge observed_non_native扣除了实际native全部时间，不能直接当作旧2440秒账本值。后继须绑定同一stage向量的reserved solver allowance并处理overshoot归属，同时完成完整phase/observer/startup/exit/caller/return-tail计量。未更改旧合同或阈值。
+
+producer_coverage_proven、native_export_coverage、collector_integrated、independent_hour_jobs_integrated、worker_job_membership_verified、cross_process_clock_bridge_verified、instrumentation_coverage_verified、observer_overhead_separated、component_budget_verified、resource_admission、formal_execution_ready、formal_result、native_execution_authorized均保持false。完整232-stage/192-hour覆盖、全资源准入、实际复用DAG/任务manifest/common Rref/A/full LB/UB、successor封存及全新official独立审查仍待完成。具体新native运行仍需新的明确授权，整体目标继续进行中。
+
+### 2026-10-05：overshoot accounting 开发复审闭合
+
+新增 experiments/h1_overshoot_accounting_development_v1.py、tests/test_h1_overshoot_accounting_development_v1.py、docs/model_spec/rq2_h1_overshoot_accounting_development_v1.md。根代理唯一写入；旧src、bridge、resource contract、冻结及历史产物均保留。新模块是只读零native reader，仅返回条件内存账目，无writer、运行入口、resume或预算PASS。
+
+复用旧v3资源合同validate_work，按同一完整canonical stage_order取得精确Fraction(time_limit_seconds)，乘10^9仍保留有理数，不round/floor。绑定外部bridge binding/intent/terminal、完整Job/science、逐stage specification/binding/options及QPC interval vector。分析前后固定完整hour_request、spec bytes、stage order、clock root/hour目录identity、全部相关文件views及implementation闭包；report显式绑定hour_request。声明TimeLimit与固定apply路径不等于native实际硬限时认证；这是一项未声称能力，不新增旧合同之外的硬TimeLimit前置门槛，原合同允许overshoot并使用whole-Job限额。
+
+令W为观察窗口、A_i为各stage实际native区间、T_i为各call预留。outside=W-sum(A_i)。aggregate=max(0,sum(A_i)-sum(T_i))允许借用其他stage未用额度，只作descriptive lower bound；逐stage sum(max(0,A_i-T_i))遵守no-sharing语义，outside加该值才是contract candidate。A=[6,0]、T=[5,5]时聚合overshoot=0、逐stage overshoot=1，不能用前者掩盖单call超时。窗口仍缺confirmation/return/close/caller等生命周期及observer覆盖，因此不比较2440阈值，不声称完整non_solver账本已验证。
+
+根首轮19 passed/73.74s/exit0；独立静态指出调用方内存输入可能漂移，补完整request/spec/order前后重验和目录identity，加入有效JSON options.TimeLimit同长度/恢复mtime漂移、最终readback后spec漂移及保留文件identity替换hour目录，根19 passed/85.03s/exit0。最终将内存反例扩到limits.max_constraints，根定向1 passed/18 deselected/88.09s/exit0。独立只读R3最终完整19 passed/88.80s/exit0，其中18项纯算术/反例、一项真实受控短Windows Job加synthetic adapter；零真实native。三份最终候选测试前后SHA一致，无开放pre-seal finding，无相关残留进程；不是official verdict或运行许可。
+
+开发检查 results/tables/rq2_h1_overshoot_accounting_v1_non_authoritative/development_checks.json，SHA256 7693f5b35aa2a89a34e7a9d0faf4cab8bb964e88462dd28202c0679cd1e91499，绑定380pins。前序362pins、v2/v3 outer895/1695成员及run248/251文件fresh核验无漂移；两轮快照和初版检查JSON均保留。内存报告编码cap为262144 bytes，不构成全任务存储、内存或时间准入。
+
+下一步仍需完整phase/observer/startup/exit/caller/return-tail计量，并把同stage预留/overshoot放入完整生命周期2440账本。完整232-stage/192-hour source-carry覆盖、全资源准入、实际复用DAG/任务manifest/common Rref/A/full LB/UB、successor封存及全新official独立审查仍待完成。producer_coverage_proven、native_export_coverage、collector_integrated、independent_hour_jobs_integrated、worker_job_membership_verified、cross_process_clock_bridge_verified、instrumentation_coverage_verified、observer_overhead_separated、component_budget_verified、resource_admission、formal_execution_ready、formal_result、native_execution_authorized均保持false。新的具体native运行仍须明确授权；整体目标继续进行中。
+
+
+### 2026-10-05：固定 lifecycle driver 开发复审闭合
+
+新增 experiments/h1_lifecycle_driver_development_v1.py、tests/test_h1_lifecycle_driver_development_v1.py、docs/model_spec/rq2_h1_lifecycle_driver_development_v1.md。根代理唯一写入；组合现有 bridge/controller，不改旧 src、worker、封存协议或历史结果。外部固定 H 个 source identities，controller 同时声明 H；仅按前一 live outcome head 顺序推进。入口 QPC tick 覆盖 root/controller 构造、逐小时完整事务、fresh overshoot、最终完整 parent/source prefix replay 和 controller close。主账只用连续 end-start，扣一次完整 native 区间，再加逐 call Fraction overshoot；未知和未细分工作全部留在 non-solver 候选账，不进行2440秒比较。
+
+end 后的终账编码、写盘/fsync/readback、metadata复核、完整证据复查和 driver lease 释放计入单独 live tail；最后不递归写一份计时回执。只有私有 Completion 的 declared_driver_call_window_complete 为 true。imports/caller/return/process exit、持久化 tail 重建及 worker granular phase/observer separation 仍未闭合，不能称完整 program 生命周期或正式分项预算。
+
+独立 pre-seal 审查发现并关闭 F1（close/terminal 后完整 Job/parent 晚漂移）、F2（保留文件identity替换 clock 小时目录）、F3（嵌套 metadata grammar/逐stage算术未严格复算）。新增有界 parent events/anchor/child reference、clock及全部Job的目录identity、文件stamp/hash和lock identity视图，包围最终科学复核、close、terminal确认与driver lease释放；held lock不读锁中字节。fresh metadata reader检查exact schema/false authority、同源head/bridge链，从完整stage向量调用已有account重算，并绑定最终anchor；不冒称重新执行了science或重建live authority。全部后置失败保留原parent outcome，无Completion、无retry。
+
+初版根验证5 passed/5.38s、1 passed/74.12s、5 passed/357.00s；修订后三项受影响验证3 passed/215.28s，相关精确算术回归18 passed/2.13s，均exit0。最终独立只读R3完整13 passed/573.10s/exit0；按测试路径静态计数8个受控短synthetic Jobs，零真实native。最终三文件pins前后一致，无开放pre-seal finding，终态无相关进程。不是official verdict或运行许可。
+
+新增metadata条件逻辑界为(2H+3)*524288+1 bytes、2H+4 files、1 root directory；H=192为202899457 bytes/388 files，排除controller子树、scratch、FS分配和内存。每hour live headroom合并该保守metadata界、当前Job、parent update、剩余clock records和scratch；没有资源预留或全任务准入。多次全树hash和保留有界视图的时间/内存成本须另行纳入资源合同。
+
+开发检查 results/tables/rq2_h1_lifecycle_driver_v1_non_authoritative/development_checks.json，SHA256 e300a101fc841c1c5ca1f2b05cadc21e9e6e574b070a9c014f842303de735bee，绑定401pins。前序380pins、v2/v3 outer的895/1695成员及run的248/251文件fresh核验无漂移；初版及审查前后快照全部保留。完整192-hour实际链、producer/native coverage、完整phase/observer/分项预算、全资源准入、正式结果和新native授权均未取得；相应全局flags保持false。
+
+下一步推进实际任务manifest及causal-key复用DAG，区分数值计算、来源与资源身份，并核对已有CFE必要条件诊断到已批准v2义务目录的证明绑定；不重做CFE映射，不把旧候选诊断直接作为v2排除证书。共同Rref/A、同合同完整LB/UB、完整资源合同、successor封存及全新official独立审查仍待完成。新具体native运行必须另获明确授权；整体目标继续进行中。
+
+
+### 2026-10-05：v2 CFE 整 cell 解析排除 overlay 开发复审闭合
+
+新增 experiments/rq2_v2_cfe_exclusion_development_v1.py、tests/test_rq2_v2_cfe_exclusion_development_v1.py、docs/model_spec/rq2_v2_cfe_exclusion_development_v1.md。根代理唯一写入，零 solver/native；复用既有 exact CFE preallocation，不改 src、已批准 v2 科学合同或旧封存结果。此为 R3 DRAFT/PRE_SEAL 开发证据，不是 official verdict、容量证书或运行许可。
+
+固定 training witness：power start=192、outage seed=20260822，workload start=408，enrollment offset=162，原始 source hours=354/570。两份完整168h source windows及全部workload投影通过已有 pinned loader/projection；保留完整来源receipt、选定原行和精确有理数。package完整性读取包含holdout文件，但证明仅使用training rows，不以holdout结果选证据。w=407772206073/500000000000，R=118547425354783/5000000000000000。
+
+并列保留已批准 q_eff>tau && q_eff>f*w，以及更强充分反例 q_eff>f*w+2*tau。后者来自局部放松 served_C<=f*w+tau、q_eff-served_C<=tau；不替换合同或认证现有runtime float bridge。若完整支持策略成功，就必须在具名pair该小时履约；若此前N/Rref/状态链失败或未决，它本身也不是完整支持UB。此反证不主张已构造可达N/Rref/A轨迹。对CFE-only、joint-correct及B6的CFE规划账适用，network-only无结论。
+
+最终保留300个(alpha,f)算术组及全部1900完整theta/alpha身份；1856 cells有该强反例，44保持unknown。最小正relaxed gap为197389855855280462600947/25000000000000000000000000。解析依赖覆盖training LB 81537792、training UB 8235316992个义务身份；其中直接witness为LB 5568、UB 562368，其余pair仅依赖parent cell proof，不逐pair宣称失败。条件B6actual 27179264、holdout 79822848个身份记training UB前提不成立/未执行，不标不可行或实际失败。LB没有D轴；完整D网格、全部pair与原身份保留，omitted=0。仍待处理身份LB 29756608、UB 3005417408、B6actual 644336、holdout 29130752；这些不是必要求解次数或实测资源节省。
+
+独立首审发现F1：单一conditional disposition可能误覆盖network-only holdout。已改为cell及coverage均按family/arm显式记录：holdout四臂中network-only全部unknown；B6actual仅joint-B6；44未知cells全部条件评价仍unknown。测试逐臂验证并核对数量守恒。初版报告、pre-review/post-review快照及首审finding全部保留。
+
+根首轮18 passed/67.89s，相关CFE/projection/旧support/catalog回归77 passed/0.87s；首轮独立18 passed/64.94s，修订根18 passed/73.03s，最终独立18 passed/58.95s，均exit0。命令使用指定compute Python -B与-m pytest -q -p no:cacheprovider。初版及最终报告均audit后fresh inspect完整重建一致；最终候选三pins前后一致，无开放pre-seal finding，无残留相关Python/native进程。
+
+最终报告 results/tables/rq2_v2_cfe_exclusion_v1_non_authoritative/cell_exclusion_audit_v2_final.json，4019867 bytes，SHA256 2e8c9f07db03426c02f3c38f5f938231cb6ca47f30537ad0d740ed9e22341e7c，绑定1711 source pins。开发检查 results/tables/rq2_v2_cfe_exclusion_v1_non_authoritative/development_checks.json，SHA256 39bbb8ba1e0d5c9337bafbec275da83aba99450358c41f900ef35f8ee02bb27a，绑定419 pins。前序401开发pins、v2/v3 outer895/1695成员、run248/251文件及字节数fresh核验无漂移。
+
+后续须把该解析依赖绑定到实际任务manifest，完善合法causal-key复用DAG、共同Rref/A、剩余cell的同合同offline LB与完整policy UB，并完成192-hour/232-stage生产覆盖、计时与全资源准入、successor封存及全新official独立审查。complete_executable_task_inventory、causal_reuse_DAG_verified、operational_projection_bridge_verified、producer_coverage_proven、native_export_coverage、collector_integrated、component_budget_verified、resource_admission、formal_execution_ready、formal_result均保持false。新的具体native运行另需明确授权；整体目标继续进行中。
+
+
+### 2026-10-05：v2 proof-aware obligation manifest 开发复审闭合
+
+新增 experiments/rq2_v2_obligation_manifest_development_v1.py、tests/test_rq2_v2_obligation_manifest_development_v1.py、docs/model_spec/rq2_v2_obligation_manifest_development_v1.md。根代理唯一写入，零solver/native。基于固定catalog及上轮source-bound exclusion报告fresh inspect，编译前后重验全部1711 source views；自身实现也绑定并复查。四类目录全部身份可按family/ordinal按需查询，不物化数十亿记录；这仍不是complete executable task inventory。
+
+resolve/encode_coordinate按原axis_order构成mixed-radix双向映射，严格拒bool/float/负数/越界及错轴。新义务identity绑定catalog SHA、family、ordinal、axis_order与完整coordinate。每次由完整theta+alpha重算cell SHA；直接witness比较完整power/workload window canonical bytes。UB的D=0/1身份不同但可关联同一D无关解析证明；LB/B6actual/holdout不新增D轴。ordinal、pair、split和proof disposition均为controller/audit记账，不进入policy输入。
+
+逻辑DAG含8020节点：contract/catalog/source witness、一个exclusion overlay根、300算术组、292正反例组、1856 cell bindings及5568 arm-cell implications。边仅proof_reference/logical_implication，solver_reuse_edge=false；各node的solver_task_id、causal_key、runtime_request全部null。四类terminal disposition明确区分具名直接witness、同cell其他pair依赖parent proof、条件评价前提不成立/未执行、未取得证书。network-only及44未知cells继续unknown，B6actual仅joint-B6，holdout无默认D、UB或失败状态。义务总量与原四family目录一致，未删pair、未减资源预留。
+
+独立首审F1发现unknown terminal只依赖catalog，无法单独绑定absence-of-proof scope；已令所有terminal依赖catalog与包含report/protocol/catalog/implementation pins的overlay，affected另依赖arm implication。反事实report pin改变时unknown terminal node ID改变，而义务identity保持不变；公开build拒绝该反事实无效pin。F2发现dataclasses.replace可保留token制造raw/cache不一致；已改受控public构造、只保留immutable bytes/tuples，拒绝direct constructor、replace、copy/deepcopy及pickle，原始bytes须fresh inspect重建。private compiler helper不是验证API。初版manifest、快照及findings全部保留。
+
+根初版24 passed/113.17s，相邻exclusion/catalog回归45 passed/96.25s；独立初版24 passed/118.93s。修订根完整33 passed/143.22s；独立定向11 passed、22 deselected/29.76s，覆盖F1/F2、8020拓扑及快照无别名，未重复未改项。均exit0，使用指定compute Python -B -m pytest -q -p no:cacheprovider。初版和最终manifest均fresh inspect完整重建一致；三候选pins前后稳定，无开放pre-seal finding，无残留相关Python/native进程。不是official verdict或运行许可。
+
+最终manifest results/tables/rq2_v2_obligation_manifest_v1_non_authoritative/obligation_manifest_v2_final.json，9219017 bytes，SHA256 befcfab8180a0124f15ad7652b085514c7aec6278e2b9d967e9885fc5a65fdd7。开发检查 results/tables/rq2_v2_obligation_manifest_v1_non_authoritative/development_checks.json，SHA256 fadec65f40904ed4a7a2ec484767a3bd6d14b6e4a5e9ab759d47fd798a72f246，绑定437 pins。前序419pins、v2/v3 outer895/1695成员、run248/251文件及字节数fresh核验无漂移。16MiB manifest cap和新增实际文件仅是本地开发边界，不是完整磁盘/内存/wall准入。
+
+下一单元转实际causal-key/runtime任务绑定：复用已有H1 source packet、完整before/carry、role/resource身份及parent机制，区分数值键、来源身份与证据归属，不再扩展泛用graph/manifest层。共同Rref/A、剩余同合同offline LB/完整policy UB、192-hour/232-stage生产覆盖、计时与全资源门、successor封存及全新official独立审查仍开放。complete_executable_task_inventory、causal_request_keys_materialized、causal_reuse_DAG_verified、producer_coverage_proven、native_export_coverage、collector_integrated、component_budget_verified、resource_admission、formal_execution_ready、formal_result、native_execution_authorized均保持false。新的具体native运行须在包与门禁就绪后另获明确授权；整体目标继续进行中。
+
+### 2026-10-05：v2 obligation → pending normal 输入绑定开发复审闭合
+
+新增 experiments/rq2_v2_normal_obligation_binding_development_v1.py、tests/test_rq2_v2_normal_obligation_binding_development_v1.py、docs/model_spec/rq2_v2_normal_obligation_binding_development_v1.md。根代理唯一写入；复用现有 immutable obligation Resolver、H1 source parent、PendingWorkerInput 和 v3 request_key，未修改 src 或封存合同。仅接受 enrollment 0..167 的 unresolved training-UB obligation；四臂角色明确，已解析排除的 cell 拒绝，LB/actual/holdout/follow-up 不由此入口处理。
+
+完整168-hour边际窗口校验包括catalog chain、CFE domain及250MW/12-place workload projection；仅当前hour独立校验RTS对应。whole_enrollment_marginal_domains_and_workload_projection_checked=true；whole_enrollment_RTS_correspondence_checked=false、future_dispatch_mapping_checked=false。完整坐标、原始来源时钟/展示时钟/相对模型时钟、parent/anchor/head/receipt、before/spec/limits及proposed Job budget分别绑定；不将记账标签传给policy。坐标或预算单独变化会改变binding ID，相同N数值输入仍复用原request_key。相同key不授予跨任务结果复用权。
+
+独立首审F1收窄过宽全窗口表述；T1严格核对原request_key；T2分别验证坐标与budget变化。首次测试1 failed/22 passed/278.02s exit1是测试把receipt内部source pin自洽误当来源认证：保留实现，改为伪造receipt可自洽构造但原external receipt SHA拒绝；真实来源由fresh parent pending_input、外部receipt pin及独立current source重建认证。失败记录及修订前后快照保留。
+
+修订根全量24 passed/314.56s；相关旧source/parent回归51 passed/95.85s；独立只读定向4 passed、20 deselected/289.61s，均exit0，指定compute Python -B -m pytest -q -p no:cacheprovider。三候选pins稳定，无开放pre-seal finding。零solver/native、零worker/Job，终态无相关进程。仅开发审查，非official verdict或运行许可。
+
+固定真实来源样例：power raw192/workload raw408、seed20260822，模型hour0。results/tables/rq2_v2_normal_obligation_binding_v1_non_authoritative/binding_v1_final.json 为8052 bytes，SHA256 9f756d724a305ff2039d85157eb89ce28e1322a45f7b7fa5db861122b83e1849。N request key为85b7f386f7ec4aadb01b1c9c3e1f66024d052056b8f86bdb6c996a8bfe3b57cb。写后fresh inspect一致；父级关闭后的独立新Python进程按保存context重建仍一致。样例parent为pending_unknown，未产生accepted scientific carry，不可视为续跑许可。
+
+开发检查 results/tables/rq2_v2_normal_obligation_binding_v1_non_authoritative/development_checks.json，SHA256 2ff5646b492c17becdb685c01ee49d03ccd81251b483921bae57da661a10a84e，471 pins。前序437 pins、v2/v3 outer895/1695成员、run248/251文件及字节数重验无漂移。新增样例/副本仍须纳入后继资源预算；128KiB局部record cap不等于资源准入。
+
+下一步直接推进真实runtime交接和common Rref/A各自状态链，验证later-hour accepted carry与phase需求，完善完整任务及合法复用DAG、同合同LB/完整policy UB；避免再扩展泛用metadata层。live_parent_state_at_use_verified、writer_lease_authenticated、complete_executable_task_inventory、causal_reuse_DAG_verified、common_Rref_A_verified、producer_coverage_proven、native_export_coverage、collector_integrated、component_budget_verified、resource_admission、formal_execution_ready、formal_result均为false。仍需完整资源准入、successor封存及全新official独立审查；新的具体native运行另需明确授权。整体目标继续进行中。
+
+### 2026-10-05：obligation controller 实际 release gate 与历史回放开发复审闭合
+
+新增 experiments/rq2_v2_normal_obligation_controller_development_v1.py、tests/test_rq2_v2_normal_obligation_controller_development_v1.py、docs/model_spec/rq2_v2_normal_obligation_controller_development_v1.md。根代理唯一写入，旧src/worker/parent/clock及所有封存字节未改。constructor固定同一个training-UB obligation、168小时enrollment和exact Job budget；新增outer guard顺序在clock/controller/parent之前，独立obligation目录与lease不改变旧clock严格目录。
+
+完整边际窗口预验证在旧_headroom hook内、clock/source intent之前完成。_job在live guards/leases内调用已有binder，核对typed pending输入，并预计算旧worker exact request SHA。旧controller在suspended child release前动态调用_check时，必须复核obligation bytes及已写request完整pin；同长改写并恢复mtime亦拒绝。worker schema与N数值输入保持原样，worker_obligation_authenticated=false。新controller header、每hour binding/job-link/terminal构成链；terminal确认及final check后才产生不可copy/replace/pickle的last_obligation_observation，入口及任何失败清空。
+
+历史reader从完整source-parent prefix的_child取得经来源/carry重建的packet，独立重建历史obligation记录，核验exact Job、clock、outcome/anchor和三记录链；不对已消费pending调用旧binder，不重建live release授权。Windows持有中的一字节lease仅核验stat identity/size，避免读锁字节。成功前写job-link失败保留worker结果、parent pending；terminal写前/写后确认失败可留accepted parent，但无successor completion且禁止重试。新增逻辑存档界为(3H+1)*128KiB+1 bytes、3H+2 files，组合headroom纳入新增记录；不是完整磁盘/内存/wall准入。terminal写入仍在旧bridge interval之外，逐hour重复full-window/closure扫描成本尚未优化或准入。
+
+首轮guard 1 passed/12 deselected/31.29s。首轮四项3 passed/1 failed/9 deselected/417.63s：真实三种release gate通过，合成两hour已完成但reader的fresh manifest重建被synthetic一小时source fixture拦截；已将已fresh验证Resolver明确接入test-only synthetic seam，保留失败记录与快照。独立F1锁字节、F2固定episode预算、F3公开typed成功receipt均修复；F4依赖闭包疑点经parent MEMBERS递归核查撤销，只读counterfactual确认base controller读取内容变化会改变新identity，不需重复改代码。
+
+根最终全量14 passed/833.16s，6个短synthetic Jobs、0 real native；旧bridge三项回归3 passed/14 deselected/3.37s。独立定向2 passed/12 deselected/388.91s，2个短synthetic Jobs、0 real native。均exit0，使用指定compute Python -B -m pytest -q -p no:cacheprovider。真实来源测试以fake suspended child截住release，未启动真实worker；synthetic两hour测试明确使用source/catalog seam和保存raw，不是real RTS later-hour科学见证。覆盖request/binding漂移、固定坐标/预算、四个publication失败窗口、live-owner历史回放、重签previous/joblink/clock/outcome、错外部pin、缺失/额外文件及guard。最终三候选pins稳定，无开放pre-seal finding，相关进程为空。不是official verdict或运行许可。
+
+开发检查 results/tables/rq2_v2_normal_obligation_controller_v1_non_authoritative/development_checks.json，SHA256 bb7882c34a9157402594be2107a20a2c71f09d3c54179124d8550e0a47e6cd12，491 pins。前序471pins及v2/v3 outer895/1695成员、run248/251文件和字节数均重验无漂移；初始失败、pre/post-review快照及counterfactual记录全部保留。
+
+后续优先接入共同Rref/A各自state chain及已有业务小时事务，明确normal输出到同合同reference/actual输入的边界，补完整192小时phase/producer覆盖和实际任务/合法复用DAG、同合同LB/UB与全资源计时准入。新controller与完整生命周期driver尚须有意整合，不能把其继承bridge等同于完整lifecycle证明。real_RTS_accepted_carry_verified、full_enrollment_execution_verified、runtime_task_inventory_complete、common_Rref_A_verified、causal_reuse_DAG_verified、complete_LB_UB_certificates、producer_coverage_proven、native_export_coverage、collector_integrated、component_budget_verified、resource_admission、formal_execution_ready、formal_result、native_execution_authorized均false。仍需successor封存、全新official独立审查和具体新native运行明确授权；总体目标继续进行中。
+
+
+### 2026-10-05：H1 current-only 信息入口开发复审闭合
+
+新增 experiments/h1_current_grid_information_development_v1.py、tests/test_h1_current_grid_information_development_v1.py、docs/model_spec/rq2_h1_current_information_development_v1.md。根代理唯一写入，旧src及全部冻结产物保持原样。旧grid_information把完整未来forecast/normal schedule纳入pre_episode allowed_plan身份，旧carry要求该身份不变，不能直接承载批准的滚动H1合同。本单元仅复用纯静态network结构，不构造旧plan/current-information类型。
+
+prepare(root, external header/terminal pins, completed_hours)重验完整obligation/source/carry/Job/clock prefix，从fresh accepted child重建最后一小时N；校验阶段数、projection身份、request/before/network/locks及N边界，返回前再次重验。decision view仅含中性relative hour、静态network、当期base/bounds/DC limits与前后normal commitment/当期generation。source clocks、完整carry、solver/run身份和canonical locks只在audit envelope中。该对象仅fresh-at-return，detached_consumer_authenticated=false；后继public physical kernel必须在同一owned调用中以root和外部pins重新prepare、消费并在返回前重验，或另立持久receipt/reader，不能凭exact type接受detached对象。
+
+初版集成因old.json模块引用失败，1 failed/4 deselected/122.45s，首版纯4 passed/2.25s；旧接口相关5 passed/72 deselected/2.72s。全部失败记录和pre-review snapshot保留。独立F1已改显式json导入；F2新增非零workload .1/.2映射25/50MW、当期敏感性与未来行/审计clock不变性；F3在代码flags和spec明确认证边界。根最终6 passed/152.71s exit0，独立5 passed/1 deselected/2.65s exit0；指定compute Python -B -m pytest -q -p no:cacheprovider。完整测试含一个saved-report synthetic Windows Job，零真实native；不是real RTS accepted-carry科学见证。独立PRE_SEAL审查无开放finding，非official verdict。
+
+开发检查 results/tables/rq2_h1_current_information_v1_non_authoritative/development_checks.json，SHA256 93e284449074302322d540c119ce7bcec40304145b2f41cca33b86eb42c92dbe，513 pins。前序491pins及v2/v3 outer895/1695成员、运行248/251文件（20931567/20938085 bytes）重验无漂移；最终无相关Python/Gurobi进程。初版失败、pre/post-review快照及独立记录均保留。
+
+下一步进入H1物理protocol/carry/kernel及reference/actual各自selector和状态链，保持N→Rref→业务/A mapping→actual→paired commit顺序，明确当期outage disclosure与独立历史；不能把当前信息入口当共同前缀发布或Rref/A执行完成。公共冲突registry、完整192小时phase/producer覆盖、实际任务和合法复用DAG、同合同LB/UB、全资源计时、successor封存、全新official独立审查及具体新native授权仍待完成。detached_consumer_authenticated、common_prefix_publication_verified、reference_or_actual_ready、real_RTS_accepted_carry_verified、producer_coverage_proven、native_export_coverage、collector_integrated、component_budget_verified、resource_admission、formal_execution_ready、formal_result、native_execution_authorized均false。总体目标继续进行中。
+
+
+### 2026-10-05：H1物理候选kernel开发复审闭合
+
+新增 experiments/h1_current_grid_step_development_v1.py、tests/test_h1_current_grid_step_development_v1.py、docs/model_spec/rq2_h1_current_grid_step_development_v1.md。旧current_grid_step数学主体与exact residual机械移植到新H1类型，旧src/封存字节不改。保留全部DC balance、AC/DC bounds与flow、normal response、committable own-history ramp、startup/shutdown allowance、forced-trip down-ramp例外、explicit repair return cap及1e-6验收门；不修改normal reserve/dwell合同。
+
+候选carry逐步绑定完整N boundary（network/completed hour/全部UID commitment+generation+age/evidence role），不沿用旧constant allowed_plan_identity；current decision identity可随hour变化。frame同时绑定packet的normal network pin；Rref与四个公开A arm严格隔离，own generation/disclosure/predecessor独立于N。新接口relative hour为0..191，旧disclosure只在内部使用boundary0与current h+1映射。origin必须显式提供incoming outage；可用机组取N声明初值、不可用取0，静态验收失败即拒绝，不提供替代初值。
+
+本单元仅提供detached development数学入口和candidate carry。_frame只接受合成或上层已验证packet，不验证normal lex/native/共同发布；物理可行assignment不选择g、不认证Rref/A committed state或不可行性。后继operational owner必须从持久history与外部pins重建双方状态、在同一owned调用中fresh消费和返回前重验，不能把此detached candidate当认证凭据。
+
+首轮kernel23 passed/11.35s，旧物理全量+H1信息纯相关46 passed/1 deselected/8.56s，均exit0。独立F1发现双N boundary可以同换foreign network，已新增normal_network_identity并补反例；F2发现expected SHA可被自定义相等对象绕过，已加exact built-in lowerhex SHA gate并覆盖custom-equal/bool/int/uppercase/长度，同时收紧lane字段类型；F3补完整build数学主体AST等价测试，覆盖未逐个实例化的fixed/curtailable/disabled分支。exact-residual AST也相同，10个数值case逐项比较完整变量域/bounds/fixed、线性系数/约束bounds/objective及assignment残差和next-carry数值。
+
+修后根合并77 passed/1 deselected/18.35s，独立kernel31 passed/11.85s，均exit0，指定compute Python -B -m pytest -q -p no:cacheprovider；零solver、零Job。三小时own-generation反例、trip/continuation/repair、planned shutdown、full N boundary splice、cross-lane、clock及mid-audit drift覆盖。合成N frame只用于物理数学连续性，不声称normal可达/可行或real RTS accepted carry。独立PRE_SEAL无开放finding，非official verdict；当前无相关进程。
+
+开发检查 results/tables/rq2_h1_current_grid_step_v1_non_authoritative/development_checks.json，SHA256 a22fc23c37f956ffce9e2d528126be3c990622e66b3db4f0cd66f444929b2c1f，533 pins。前序513pins、v2/v3 outer895/1695成员、run248/251文件及20931567/20938085 bytes均重验无漂移。pre/post-review snapshots、初版通过记录及全部findings保留。
+
+下一步在此kernel上实现H1 reference LP/selector与actual selector，保持各自旧数值门和canonical locks；随后接共同同key冲突发布、persistent lane owner及业务/actual原子提交，不能把纯kernel通过当完整statechain完成。完整192小时phase/producer覆盖、合法复用DAG与全任务manifest、同合同LB/UB、完整资源计时准入、successor封存、全新official review及具体新native运行授权仍开放。detached_consumer_authenticated、normal_selection_authenticated、common_publication_verified、reference_or_actual_ready、persistent_lane_owner_implemented、real_RTS_accepted_carry_verified、producer_coverage_proven、native_export_coverage、collector_integrated、component_budget_verified、resource_admission、formal_execution_ready、formal_result、native_execution_authorized均false。总体目标继续进行中。
+
+
+### 2026-10-05：H1 reference/actual阶段与saved-record回放开发复审闭合
+
+新增 experiments/h1_selector_replay_development_v1.py、tests/test_h1_selector_replay_development_v1.py、docs/model_spec/rq2_h1_selector_replay_development_v1.md。根代理唯一写入，旧src、v2/v3封存与运行产物保持。reference LP采用P_ref∈[0,B]及(B-P_ref,L1,全部sorted UID generation)；actual固定外部exact power，采用(L1,全部UID generation)。复用旧Spec参数grammar和grid_evidence_replay独立重建能力，不能复用旧fixed-plan policy身份。
+
+每stage exact envelope绑定input/policy/implementation、lane/power、spec/limits、model structure、index/label/purpose、完整前级frozen及float.hex与canonical objective hex。内部固定builder逐级fresh重建，native-shaped metadata/full assignment/canonical objective/residual经旧_replay复核后，再执行物理和rational selector lock/deviation审计。后续锁仅取diagnostic.recomputed_objective。完整reference n+2级、actual n+1级才出nonpublished numerical candidate；前缀、timeout、infeasible/feasible-only、任何数值失败均无candidate，失败record后仍附suffix直接拒绝。没有native执行入口，不产生执行认证或g的共同发布。
+
+保留旧数值门原样：非负有限LB/UB/objective、LB<=objective、UB-LB>=0、abs(UB-objective)<=min(feasibility_tolerance,1e-9)、原absolute/relative gap和strict lock参数。独立设计说明中的精确objective<=UB要求经来源核对撤回，未额外收紧或放宽合同。typed ReplayLimits同时约束声明的per-solve秒数、threads、完整call count及count*time总秒数；仅证明声明自洽，不认证实际历史执行资源，也不把旧short20stage绝对cap当完整UID支持上限。
+
+独立F1确认根自查：raw report SHA会污染后继计算键，现selection identity只含input/policy/canonical locks/公开carry/request，raw SHA留审计；两个合法不同AC/DC循环flow witness给出同一candidate及下一小时key。F2禁止失败后suffix；F3补声明budget门；F4使用批准范围内feasibility=1e-6并先确认raw valid/optimal，证明5e-7反例确由1e-9 strict selector lock拒绝。E1新增committable/fixed/curtailable/disabled混合UID每级完整变量/线性rows/objective等价；E2补末级carry-generation不一致拒绝。
+
+初版29 passed/125.68s。修后定向16 passed/1 failed/22 deselected/64.85s：唯一失败是混合4UID的旧actual oracle fixture仍声明2stage，已改为其实际5stage预算，未改实现门限；失败与中间快照保留。根最终合并75 passed/1 deselected/182.19s，独立定向14 passed/25 deselected/58.52s，均exit0。随后仅强化Fraction纯测试，用B=.3、P=.1要求精确1/5且不同于先浮点减法所得值；根1 passed/38 deselected/2.47s、独立1 passed/38 deselected/2.35s覆盖最终test字节，code/spec未变。指定compute Python -B -m pytest -q -p no:cacheprovider；全程零真实native、零Job。fake solver-shaped records仅测试自洽回放，不证明实际最优/真实执行。PRE_SEAL无开放finding，非official verdict；终态无相关进程。
+
+开发检查 results/tables/rq2_h1_selector_replay_v1_non_authoritative/development_checks.json，SHA256 28f842ce44c6c36ad45f92ad92f95f86a6152f061e9716c6356323be5d167967，701 pins；包含最终fresh import的197个repo依赖和前序533pins。前序证据及v2/v3 outer895/1695成员、run248/251文件与20931567/20938085 bytes均重验无漂移。各轮测试、初版/修订/纯oracle强化前及最终快照、findings和两次import closure完整保留。
+
+下一步把科学projection与独立run witness接入same-key冲突发布、persistent lane owner和业务/actual原子事务，同时建立H1 reference/actual的真实raw ingress/Job/计时与全UID资源包；已有zero-face数学优化待H1专门适配，仅在认证accepted native prefix和exact L1=0后使用。source/normal/native认证、detached consumer、common publication、reference_or_actual_ready、persistent_lane_owner_implemented、producer_coverage_proven、native_export_coverage、collector_integrated、component_budget_verified、resource_admission、formal_execution_ready、formal_result、native_execution_authorized保持false。完整192小时phase覆盖、合法复用DAG/任务manifest、同合同LB/UB、successor封存、全新official独立审查和具体新native运行授权仍开放；总体目标继续进行中。
+
+
+### 2026-10-08：H1 outage 来源适配开发审查闭合；完整支持左边界仍阻塞
+
+环境恢复：exec_command 可用；初始 git status 852条，未发现Python/Gurobi进程。原outage草稿6704 bytes已fresh readback，test原不存在。根代理唯一写入，保留全部未提交文件、冻结协议、旧结果与失败记录。
+
+新增 tests/test_h1_outage_source_development_v1.py、docs/model_spec/rq2_h1_outage_source_development_v1.md、experiments/audit_h1_outage_boundary_development_v1.py；既有 experiments/h1_outage_source_development_v1.py 草稿本轮未改字节。适配器从pinned同split/seed/chain读取raw_start-1与当前prefix，boundary0/current1..192；入窗持续事故onset=None；拒绝缺行/隐藏替换/ID复现，显式generator repair cap。source ID/clock仅审计，prepare前后重读。返回的Prefix可构造，仅fresh-at-return，不是认证凭据。
+
+根outage32 passed/1.65s；相关source_window/event_disclosure/H1 physical85 passed/25.22s；独立合并117 passed/21.97s，均exit0，指定compute Python -B -m pytest -q -p no:cacheprovider。独立boundary JSON重建一致。零solver/native、零Job。PRE_SEAL在detached adapter范围无开放实现finding，不是official verdict。五个待审文件前后hash稳定。开发检查 results/tables/rq2_h1_outage_source_v1_non_authoritative/development_checks.json，SHA256 179480df368ea468e4c69be908e77ddbb6d29b842726991d6dd8115deefb77f0，714 pins。前序701pins与v2/v3 outer895/1695成员、run248/251文件及20931567/20938085 bytes无漂移。初次冻结复核记录器因v2缺top-level files发生KeyError，已按实际members重验并在frozen_recheck保留说明，未改旧产物。
+
+完整catalog来源边界审计保留全部义务：holdout512条中3条缺前置行，training_lb/training_ub/training_b6_actual各523条中3条缺前置行；共6个独立窗口、12个family实例。training seeds20260822/23/24的raw_start=0缺hour-1；holdout对应raw_start4440/4560/4632缺4439/4559/4631。boundary_coverage.json SHA256 a1d5bcafde41ed9bf9a3d3c4d46ebaf6bd0a57641837d3937e9dda18e31a3dc8。obligations_removed=0，full_boundary_coverage_verified=false。不得删掉窗口、用当前行代前置状态、跨split借行或查询未来event结局补初态。完整执行依赖的初态来源仍input unresolved；解除需明确科学决定及versioned predecessor/origin输入依据，再全catalog复核unresolved=0且删除义务数=0。
+
+另两项后继门保持开放：多小时offline Prefix没有owned current-hour进度绑定，不得把完整steps/audit.rows传给hour-local policy，必须按已提交进度逐小时消费；repair cap仅外部机制输入，来源及持久绑定尚未注册（下游kernel现有nameplate gate已核验）。N source correspondence、persistent lane owner、same-key registry、paired commit、H1真实raw ingress/Job/分项计时、完整192小时phase/producer、合法复用DAG/任务manifest、完整同合同LB/UB与资源准入仍未完成。resource_admission、formal_execution_ready、formal_result、native_execution_authorized保持false。v3单次native授权已消费，本轮未执行新native。总体目标未完成；依赖缺失初态的正式接线和运行暂停，待科学输入问题解除后继续，仍需successor封存、全新official独立审查及具体新native另行明确授权。

@@ -1,0 +1,408 @@
+schema: rq2_public_data_delivery_config_v1
+status: DRAFT_NONAUTHORITATIVE_LOCAL_DATA_DELIVERY
+
+output:
+  directory: data/processed/rq2_public_data_delivery_v1_non_authoritative
+  schema: rq2_public_data_delivery_v1
+
+datasets:
+  google_pdu17_744h_pair:
+    package: results/tables/google_power_workload_multiday_pair_v1_non_authoritative
+    summary: results/tables/google_power_workload_multiday_pair_v1_non_authoritative/summary.json
+    summary_sha256: 40fdb668b21a5d9392df1bfd32a2603e76d01be2d3c44ef11d8d11c38f032eda
+    expected_schema: google_power_workload_multiday_pair_v1
+    primary: results/tables/google_power_workload_multiday_pair_v1_non_authoritative/aligned_hourly.jsonl.gz
+    primary_sha256: ca196505690a1b744bba2e2d689d751f454d30fb0f97856ce4d43587201380fd
+    format: jsonl_gzip
+    records: 744
+    license: CC-BY-4.0
+    license_evidence: data/raw/google_power_2019/README.md
+    license_evidence_sha256: 8c72b65e37e40dfdaeb518d52f344233a6175f57792a8e11c6bf19a94e3a436b
+    time_basis: raw_trace_clock_half_open_hourly_intervals_from_600000000_us; 31 raw-origin 24h blocks are not identified natural days
+    units: CPU normalized compute units for selected root-usage population; power normalized PDU ratio; capacity normalized resource-time
+    intended_use: unfiltered same-clock descriptive alignment and coverage audit
+    limitations: population incomplete; power flag direction unresolved; capacity is not physical cores or MW; no flexibility contract
+    role_origin_defaults: {identifier: derived_from_observed_source, diagnostic: derived_from_observed_source}
+    field_groups:
+      identifier: [hour_index, raw_interval_start_us, raw_interval_end_us, cpu.strata.item.collection_type, cpu.strata.item.priority_tier, capacity.unit, cpu.unit, power.unit]
+      observed_source_value: []
+      derived_from_observed_source: [capacity.inactive_machine_seconds, capacity.known_active_machine_seconds, capacity.known_active_normalized_cpu_seconds, capacity.known_active_normalized_memory_seconds, capacity.mapped_machine_seconds, capacity.unknown_active_machine_seconds, cpu.hourly_endpoint_sum_lower_ncu, cpu.hourly_endpoint_sum_upper_ncu, cpu.strata.item.observed_cpu_ncu_lower, cpu.strata.item.observed_cpu_ncu_upper, cpu.strata.item.observed_cpu_overlap_seconds, cpu.strata.item.observed_cpu_time_ncu_seconds_lower, cpu.strata.item.observed_cpu_time_ncu_seconds_upper, cpu.strata.item.synthesized_cpu_time_ncu_seconds_lower, cpu.strata.item.synthesized_cpu_time_ncu_seconds_upper, power.measured_power_util_mean, power.production_power_util_mean]
+      derived_benchmark: []
+      diagnostic: [cpu.cpu_conflict_overlap_seconds, cpu.missing_cpu_overlap_seconds, cpu.source_strata_count, cpu.strata.item.cpu_conflict_overlap_seconds, cpu.strata.item.cpu_conflict_usage_group_count, cpu.strata.item.exact_duplicate_usage_group_count, cpu.strata.item.fragment_piece_count, cpu.strata.item.missing_cpu_overlap_seconds, cpu.strata.item.usage_group_count, power.bad_flag_pair_counts.00, power.bad_flag_pair_counts.01, power.bad_flag_pair_counts.10, power.bad_flag_pair_counts.11, power.quality_filter_applied, power.sample_count]
+    unit_overrides:
+      raw_interval_start_us: microseconds_on_raw_trace_clock
+      raw_interval_end_us: microseconds_on_raw_trace_clock
+      cpu.hourly_endpoint_sum_lower_ncu: normalized_compute_units
+      cpu.hourly_endpoint_sum_upper_ncu: normalized_compute_units
+      power.measured_power_util_mean: normalized_PDU_power_ratio
+      power.production_power_util_mean: normalized_PDU_power_ratio
+      capacity.unknown_active_machine_seconds: machine_seconds
+
+  google_power_57_domains:
+    package: results/tables/public_compute_multiday_v1_non_authoritative
+    summary: results/tables/public_compute_multiday_v1_non_authoritative/summary.json
+    summary_sha256: d3349e6b00cbd77c5b83f98bc208b90ff62612f1c2f185e1aade847970f18562
+    expected_schema: public_compute_multiday_v1
+    primary: results/tables/public_compute_multiday_v1_non_authoritative/google_power_57_domains_unfiltered.jsonl.gz
+    primary_sha256: 61039c87c37de7d8a82c1cf96b08b3e5cf01148247477b2e9265645637c3a4b4
+    format: jsonl_gzip
+    records: 508896
+    license: CC-BY-4.0
+    license_evidence: data/raw/google_power_2019/README.md
+    license_evidence_sha256: 8c72b65e37e40dfdaeb518d52f344233a6175f57792a8e11c6bf19a94e3a436b
+    time_basis: five-minute half-open intervals on raw trace clock; shared epoch begins at raw 600000000 us
+    units: measured and estimated production power are normalized PDU ratios
+    intended_use: retain every public power value and both original quality flags
+    limitations: two flag definitions conflict across official PDF and notebook; no filtering rule is identified
+    role_origin_defaults: {identifier: observed_source_value, diagnostic: observed_source_value}
+    field_origin_overrides: {raw_interval_end_us: derived_from_observed_source, trace_relative_start_us: derived_from_observed_source}
+    field_groups:
+      identifier: [cell, pdu, source_object, raw_interval_start_us, raw_interval_end_us, trace_relative_start_us]
+      observed_source_value: [measured_power_util]
+      derived_from_observed_source: [production_power_util]
+      derived_benchmark: []
+      diagnostic: [bad_measurement_data, bad_production_power_data]
+    unit_overrides:
+      measured_power_util: normalized_PDU_power_ratio
+      production_power_util: estimated_normalized_PDU_power_ratio
+      raw_interval_start_us: microseconds_on_raw_trace_clock
+      raw_interval_end_us: microseconds_on_raw_trace_clock
+      trace_relative_start_us: microseconds_from_trace_start
+
+  google_pdu17_capacity:
+    package: results/tables/public_compute_multiday_v1_non_authoritative
+    summary: results/tables/public_compute_multiday_v1_non_authoritative/summary.json
+    summary_sha256: d3349e6b00cbd77c5b83f98bc208b90ff62612f1c2f185e1aade847970f18562
+    expected_schema: public_compute_multiday_v1
+    primary: results/tables/public_compute_multiday_v1_non_authoritative/pdu17_hourly_normalized_capacity.jsonl.gz
+    primary_sha256: 06d0ad33980ecd3c7644ff9c8d66e7f11e84f2b627fd54403010ae4934019f31
+    format: jsonl_gzip
+    records: 744
+    license: CC-BY-4.0
+    license_evidence: data/raw/google_power_2019/README.md
+    license_evidence_sha256: 8c72b65e37e40dfdaeb518d52f344233a6175f57792a8e11c6bf19a94e3a436b
+    time_basis: hourly integration on raw trace clock from 600000000 us
+    units: machine-seconds and normalized CPU/memory resource-seconds
+    intended_use: capacity coverage and missing-capacity audit for mapped PDU17 machines
+    limitations: unknown capacity remains unknown; normalized available resources are not physical capacity, workload population, MW, or flexibility
+    role_origin_defaults: {identifier: derived_from_observed_source, diagnostic: derived_from_observed_source}
+    field_groups:
+      identifier: [hour_index, raw_interval_start_us, raw_interval_end_us]
+      observed_source_value: []
+      derived_from_observed_source: [inactive_machine_seconds, known_active_machine_seconds, known_active_normalized_cpu_seconds, known_active_normalized_memory_seconds, mapped_machine_seconds, unknown_active_machine_seconds]
+      derived_benchmark: []
+      diagnostic: []
+    unit_overrides:
+      raw_interval_start_us: microseconds_on_raw_trace_clock
+      raw_interval_end_us: microseconds_on_raw_trace_clock
+      inactive_machine_seconds: machine_seconds
+      known_active_machine_seconds: machine_seconds
+      mapped_machine_seconds: machine_seconds
+      unknown_active_machine_seconds: machine_seconds
+      known_active_normalized_cpu_seconds: normalized_CPU_resource_seconds
+      known_active_normalized_memory_seconds: normalized_memory_resource_seconds
+
+  zeus_four_gpu_power_performance:
+    package: results/tables/public_compute_multiday_v1_non_authoritative
+    summary: results/tables/public_compute_multiday_v1_non_authoritative/summary.json
+    summary_sha256: d3349e6b00cbd77c5b83f98bc208b90ff62612f1c2f185e1aade847970f18562
+    expected_schema: public_compute_multiday_v1
+    primary: results/tables/public_compute_multiday_v1_non_authoritative/zeus_four_gpu_power_performance.jsonl.gz
+    primary_sha256: eabe75936d0b7924122c1de7dbd4928d165482cca6fc7c5935c295e286ad124b
+    format: jsonl_gzip
+    records: 1609
+    license: Apache-2.0
+    license_evidence: data/raw/zeus_training_energy_public_v1/upstream/LICENSE
+    license_evidence_sha256: c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4
+    time_basis: independent controlled training configurations; no shared production clock
+    units: watts, seconds per epoch, and derived joules per epoch
+    intended_use: external four-GPU training power/performance reference
+    limitations: one power measurement per configuration; target epoch is not a service deadline; not PDU or facility power; no observed Alibaba job join
+    role_origin_defaults: {identifier: observed_source_value, diagnostic: derived_from_observed_source}
+    field_origin_overrides: {gpu: derived_from_observed_source}
+    field_groups:
+      identifier: [gpu, dataset, network, optimizer, batch_size]
+      observed_source_value: [power_limit_w, time_per_epoch_seconds, average_gpu_power_w]
+      derived_from_observed_source: [derived_energy_per_epoch_joule]
+      derived_benchmark: []
+      diagnostic: []
+    unit_overrides: {power_limit_w: watt, average_gpu_power_w: watt, time_per_epoch_seconds: second_per_epoch, derived_energy_per_epoch_joule: joule_per_epoch}
+
+  alibaba_job_execution_envelopes:
+    package: data/processed/model_inputs/alibaba_job_execution_envelopes_v1
+    manifest: data/processed/model_inputs/alibaba_job_execution_envelopes_v1/SHA256SUMS.json
+    manifest_sha256: 73539a65c7db2b7cf630624048c00262a8e650a96b1412d21dcdf04ad857c219
+    summary: data/processed/model_inputs/alibaba_job_execution_envelopes_v1/summary.json
+    summary_sha256: 3f14894e559a010d034e469cfaf4234c7ec0dba6a63eec067bfff4859a407063
+    expected_schema: alibaba_job_execution_envelopes_v1
+    primary: data/processed/model_inputs/alibaba_job_execution_envelopes_v1/job_execution_envelopes.csv.gz
+    primary_sha256: c424322e9e4b2decc0817119be7031a534ff8992ef849dc7a4e297ffdc72021e
+    format: csv_gzip
+    records: 714903
+    license: CC-BY-4.0
+    license_evidence: data/raw/alibaba_gpu_2020/README.md
+    license_evidence_sha256: ee27f323a4dcebf9573237025c89816f6bbeeb991e23819c188cacf69e8fd80d
+    time_basis: anonymized relative seconds; release/completion are earliest-start/latest-terminated-task-end proxies
+    units: seconds, declared normalized GPU equivalents, requested CPU cores, memory GB, and GPU-seconds
+    intended_use: successful-GPU-task-derived job execution envelopes
+    limitations: no submitted arrival, deadline, checkpoint, preemptibility, recovery, or power conversion
+    role_origin_defaults: {identifier: observed_source_value, diagnostic: derived_from_observed_source}
+    field_groups:
+      identifier: [job_name, group_tag, workload_tag]
+      observed_source_value: []
+      derived_from_observed_source: [observed_release_time_s, observed_completion_time_s, observed_execution_span_s, terminated_task_count, declared_instance_count_sum, declared_gpu_equivalents_sum, maximum_task_requested_gpu_equivalents, declared_cpu_cores_sum, declared_memory_gb_sum, declared_gpu_time_gpu_seconds]
+      derived_benchmark: []
+      diagnostic: [deadline_observed, checkpoint_state_observed, preemptibility_observed, recoverable_fraction_inferred, power_conversion_applied]
+    unit_overrides: {observed_release_time_s: relative_second, observed_completion_time_s: relative_second, observed_execution_span_s: second, declared_gpu_time_gpu_seconds: GPU_second, declared_memory_gb_sum: GB}
+
+  alibaba_gpu_telemetry:
+    package: data/processed/model_inputs/alibaba_gpu_telemetry_v1
+    manifest: data/processed/model_inputs/alibaba_gpu_telemetry_v1/SHA256SUMS.json
+    manifest_sha256: 908a3aec20a961bc8971f0944db3d18b33756021d7fedfa3c3d339a10aede51d
+    summary: data/processed/model_inputs/alibaba_gpu_telemetry_v1/summary.json
+    summary_sha256: 616a150e70db96de27d64f9206821950926dafdcf86a45471d82e26d6b073eab
+    expected_schema: alibaba_gpu_telemetry_v1
+    primary: data/processed/model_inputs/alibaba_gpu_telemetry_v1/job_gpu_telemetry.csv.gz
+    primary_sha256: a198cddc36f54044c01589c3e2b4c3b865e9752755163b8afdcf3cf396913046
+    format: csv_gzip
+    records: 576724
+    license: CC-BY-4.0
+    license_evidence: data/raw/alibaba_gpu_2020/README.md
+    license_evidence_sha256: ee27f323a4dcebf9573237025c89816f6bbeeb991e23819c188cacf69e8fd80d
+    time_basis: lifetime averages per instance combined as unweighted job-GPU means; not a continuous time series
+    units: percent units/equivalents, cores, GB, bytes, and relative seconds
+    intended_use: observed utilization and resource covariates at job-GPU aggregate grain
+    limitations: no power; unmatched sensor rows exist; hardware mapping is unresolved except as separately stated
+    role_origin_defaults: {identifier: observed_source_value, diagnostic: derived_from_observed_source}
+    field_groups:
+      identifier: [job_name, gpu_type, group_tag, workload_tag]
+      observed_source_value: []
+      derived_from_observed_source: [observed_release_time_s, observed_completion_time_s, observed_execution_span_s, mean_gpu_work_utilization_percent_units, mean_gpu_work_utilization_equivalents, minimum_gpu_work_utilization_percent_units, maximum_gpu_work_utilization_percent_units, mean_cpu_usage_cores, mean_gpu_memory_gb, maximum_gpu_memory_gb, mean_main_memory_gb, maximum_main_memory_gb, mean_network_read_bytes, mean_network_write_bytes]
+      derived_benchmark: []
+      diagnostic: [sensor_rows, gpu_work_utilization_observed_rows, zero_gpu_work_utilization_rows, cpu_usage_observed_rows, mean_gpu_memory_observed_rows, mean_main_memory_observed_rows, network_read_observed_rows, network_write_observed_rows, hardware_reference_status, direct_job_power_mapping_ready]
+    unit_overrides: {observed_release_time_s: relative_second, observed_completion_time_s: relative_second, observed_execution_span_s: second, mean_gpu_work_utilization_percent_units: percent_unit, mean_gpu_work_utilization_equivalents: normalized_equivalent, mean_cpu_usage_cores: core, mean_gpu_memory_gb: GB, maximum_gpu_memory_gb: GB, mean_main_memory_gb: GB, maximum_main_memory_gb: GB, mean_network_read_bytes: byte, mean_network_write_bytes: byte}
+
+  alibaba_dimensionless_workload_blocks_v3:
+    package: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3
+    manifest: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3/SHA256SUMS.json
+    manifest_sha256: 62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524
+    summary: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3/summary.json
+    summary_sha256: d4207d34757dd9b02a1f52f0cf8e44b5bb22175721ffd77ca8aa9245da7c874b
+    expected_schema: alibaba_dimensionless_workload_blocks_v3
+    primary: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3/workload_blocks.csv.gz
+    primary_sha256: 99da69e6a98ec45584339e57a37b3fbbf90d3d2d8f1e2c915229a1e4890faef3
+    format: csv_gzip
+    records: 1632
+    license: CC-BY-4.0
+    license_evidence: data/raw/alibaba_gpu_2020/README.md
+    license_evidence_sha256: ee27f323a4dcebf9573237025c89816f6bbeeb991e23819c188cacf69e8fd80d
+    time_basis: anonymized relative hours; existing historical split at source hour 821 is preserved
+    units: requested GPU occupancy and dimensionless fraction
+    intended_use: existing marginal workload chronology candidate
+    limitations: workload fraction is not power; historical 0.5 split is not a newly selected continuous-service split; raw values above one are retained
+    role_origin_defaults: {identifier: derived_from_observed_source, diagnostic: derived_from_observed_source}
+    field_groups:
+      identifier: [block_id, split, hour_offset, source_relative_hour]
+      observed_source_value: []
+      derived_from_observed_source: [requested_gpu_occupancy, workload_fraction]
+      derived_benchmark: [block_probability]
+      diagnostic: []
+    unit_overrides: {requested_gpu_occupancy: normalized_requested_GPU_occupancy, workload_fraction: dimensionless_unclipped, block_probability: probability}
+
+  rts_gmlc_power_blocks_v4:
+    package: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4
+    manifest: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4/SHA256SUMS.json
+    manifest_sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+    summary: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4/summary.json
+    summary_sha256: f74d3a15520562d319cff49cf19fdca87ac04ae5687a639548f1a6dd7c36ce2a
+    expected_schema: rts_gmlc_public_power_system_blocks_v4
+    primary: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4/power_system_blocks.csv.gz
+    primary_sha256: b8b76fcfaa4dfbf63ff8c92092f357d43a7f21ffb51e76552593bb63f6a34ff1
+    format: csv_gzip
+    records: 25704
+    license: NREL_Data_Use_Disclaimer
+    license_evidence: data/raw/rts_gmlc/README.md
+    license_evidence_sha256: d3aadb8a39ab843898f50a543731c2647baa1dd9ca6988906f291340f1c79f7e
+    time_basis: UTC hourly 2020 benchmark chronology; fixed historical train/holdout construction
+    units: MW, dimensionless CFE-call fraction, source hours
+    intended_use: independent RTS-GMLC power-system marginal blocks with sampled N-1 chronology
+    limitations: outage schedule is sampled from published rates, not observed; no security certification or dispatched-grid proof
+    role_origin_defaults: {identifier: derived_benchmark, diagnostic: derived_benchmark}
+    field_groups:
+      identifier: [block_id, split, outage_seed, hour_offset, source_hour, timestamp, active_event_id, active_component_type, active_component_uid]
+      observed_source_value: []
+      derived_from_observed_source: []
+      derived_benchmark: [block_probability, system_load_mw, cfe_call_fraction]
+      diagnostic: []
+    unit_overrides: {block_probability: probability, source_hour: hour_index, timestamp: UTC_hour, system_load_mw: MW, cfe_call_fraction: dimensionless}
+
+  rts_gmlc_cfe_deficit_v2:
+    package: data/processed/model_inputs/rts_gmlc_hourly_cfe_deficit_250mw_v2
+    manifest: data/processed/model_inputs/rts_gmlc_hourly_cfe_deficit_250mw_v2/SHA256SUMS.json
+    manifest_sha256: cb6b941193db3a09cddb005c14f210bab754e5f9d12ba9c982f778b88409cc0a
+    summary: data/processed/model_inputs/rts_gmlc_hourly_cfe_deficit_250mw_v2/summary.json
+    summary_sha256: 7abec73b8665c149539d3d652fbd9e0e43187a2e9ac822ca3486870e9cf65b1d
+    expected_schema: rts_gmlc_hourly_cfe_deficit_v2
+    primary: data/processed/model_inputs/rts_gmlc_hourly_cfe_deficit_250mw_v2/hourly_cfe_deficit.csv
+    primary_sha256: f1c483fdf20ccc1ddc8e484d719b51f5b67a497bd99fd9bd7347dc57518586a5
+    format: csv
+    records: 8784
+    license: NREL_Data_Use_Disclaimer
+    license_evidence: data/raw/rts_gmlc/README.md
+    license_evidence_sha256: d3aadb8a39ab843898f50a543731c2647baa1dd9ca6988906f291340f1c79f7e
+    time_basis: hourly 2020 RTS-GMLC timestamps
+    units: MW and dimensionless shares
+    intended_use: derived system-mix CFE-scarcity benchmark
+    limitations: not procurement, REC/PPA ownership, locational delivery, or observed grid call
+    role_origin_defaults: {identifier: derived_benchmark, diagnostic: derived_benchmark}
+    field_groups:
+      identifier: [timestamp]
+      observed_source_value: []
+      derived_from_observed_source: []
+      derived_benchmark: [system_load_mw, renewable_available_mw, renewable_share, dc_demand_mw, hourly_cfe_target, attributed_cfe_mw, cfe_deficit_mw, green_call_mw, green_call_fraction]
+      diagnostic: []
+    unit_overrides: {timestamp: source_hour, system_load_mw: MW, renewable_available_mw: MW, renewable_share: dimensionless, dc_demand_mw: MW, hourly_cfe_target: dimensionless, attributed_cfe_mw: MW, cfe_deficit_mw: MW, green_call_mw: MW, green_call_fraction: dimensionless}
+
+  nlr_genai_power_profiles_v2:
+    package: data/processed/model_inputs/nlr_genai_power_profiles_v2
+    manifest: data/processed/model_inputs/nlr_genai_power_profiles_v2/SHA256SUMS.json
+    manifest_sha256: 1cef65fe087340a109e0e29ed604e991e9cdedca902017d639d99a59b8f2c677
+    summary: data/processed/model_inputs/nlr_genai_power_profiles_v2/summary.json
+    summary_sha256: 9af5612d810a66d42ec4df3aeaf6920b56e0c8d7db49fc0c0f44f092ea24111b
+    expected_schema: nlr_genai_power_profiles_v2
+    primary: data/processed/model_inputs/nlr_genai_power_profiles_v2/measured_power_profile_catalog.csv.gz
+    primary_sha256: f5367d13cefc42f1b21705b2f977fb5c62958d3a248c077483b0700c4f6cb5fc
+    format: csv_gzip
+    records: 2467
+    license: CC-BY-4.0
+    license_evidence: data/processed/model_inputs/nlr_genai_power_profiles_v2/summary.json
+    license_evidence_sha256: 9af5612d810a66d42ec4df3aeaf6920b56e0c8d7db49fc0c0f44f092ea24111b
+    time_basis: per-profile sample intervals; 0.001-second rows are upstream interpolation below published resolution
+    units: source-defined aggregate CPU+GPU compute-node watts, seconds, joule-derived Wh, and ramps
+    intended_use: measured H100 compute-node power-scale and low-frequency shape reference
+    limitations: no shared Alibaba jobs/hardware/clock; synthetic facility catalog is separate; not facility power or high-frequency independent measurements
+    role_origin_defaults: {identifier: derived_from_observed_source, diagnostic: derived_from_observed_source}
+    field_groups:
+      identifier: [profile_id, workload_class, model, source_member, sampling_semantics]
+      observed_source_value: [source_metadata_mean_power_w, source_metadata_peak_power_w, source_metadata_json]
+      derived_from_observed_source: [node_count, gpu_slots, sample_count, sample_interval_s, sample_rate_hz, duration_s, minimum_compute_power_w, mean_compute_power_w, standard_deviation_compute_power_w, p05_compute_power_w, median_compute_power_w, p95_compute_power_w, maximum_compute_power_w, peak_to_average_ratio, energy_wh, mean_compute_power_per_node_w, mean_compute_power_per_gpu_slot_w, p95_absolute_ramp_w_per_s, maximum_absolute_ramp_w_per_s]
+      derived_benchmark: []
+      diagnostic: [published_measurement_resolution_supported]
+    unit_overrides: {sample_interval_s: second, sample_rate_hz: Hz, duration_s: second, minimum_compute_power_w: watt, mean_compute_power_w: watt, standard_deviation_compute_power_w: watt, p05_compute_power_w: watt, median_compute_power_w: watt, p95_compute_power_w: watt, maximum_compute_power_w: watt, energy_wh: Wh, mean_compute_power_per_node_w: watt_per_node, mean_compute_power_per_gpu_slot_w: watt_per_GPU_slot, p95_absolute_ramp_w_per_s: watt_per_second, maximum_absolute_ramp_w_per_s: watt_per_second}
+
+  wattgpu_power_reference_v1:
+    package: data/processed/model_inputs/wattgpu_power_reference_v1
+    manifest: data/processed/model_inputs/wattgpu_power_reference_v1/SHA256SUMS.json
+    manifest_sha256: fc5772007da61c0285368faf87b79c410f1f695c38fdbb99625eaceb79177446
+    summary: data/processed/model_inputs/wattgpu_power_reference_v1/summary.json
+    summary_sha256: f0f090db44c929ae87aeb7c6fd457aa3b18fde6c66af708b4f4c79aaee82b67f
+    expected_schema: wattgpu_power_reference_v1
+    primary: data/processed/model_inputs/wattgpu_power_reference_v1/experiment_power_reference.csv.gz
+    primary_sha256: 0f3f368a6314420d5236ed2231c916d5fdbe87a9ea85f04c933258c8de94e1b1
+    format: csv_gzip
+    records: 4798
+    license: Apache-2.0
+    license_evidence: data/processed/model_inputs/wattgpu_power_reference_v1/summary.json
+    license_evidence_sha256: f0f090db44c929ae87aeb7c6fd457aa3b18fde6c66af708b4f4c79aaee82b67f
+    time_basis: independent LLM inference experiments; no shared Alibaba clock
+    units: seconds, joules, watts, tokens, QPS
+    intended_use: T4 exact-model and heterogeneous GPU inference sensitivity reference
+    limitations: no shared job identity; P100 absent; V100 exact match unresolved; 200 prompt/request mismatches and 266 power-consistency differences above 1 percent
+    role_origin_defaults: {identifier: observed_source_value, diagnostic: derived_from_observed_source}
+    field_origin_overrides: {source_row_index: derived_from_observed_source, gpu_architecture: derived_from_observed_source, scenario: derived_from_observed_source}
+    field_groups:
+      identifier: [source_row_index, model, gpu_type, gpu_architecture, scenario]
+      observed_source_value: [measurement_duration_s, gpu_energy_j, reported_mean_gpu_power_w, reported_minimum_gpu_power_w, reported_maximum_gpu_power_w, reported_standard_deviation_gpu_power_w]
+      derived_from_observed_source: [gpu_memory_gb, gpu_tdp_w, arrival_rate_qps, request_count, source_prompt_request_count, source_prompt_tokens_total, generation_tokens_total, energy_duration_mean_gpu_power_w, energy_mean_relative_difference, energy_per_generation_token_j, generation_throughput_tokens_per_s, median_time_to_first_token_s, p95_time_to_first_token_s, median_request_latency_s, p95_request_latency_s]
+      derived_benchmark: []
+      diagnostic: [prompt_generation_request_counts_match]
+    unit_overrides: {gpu_memory_gb: GB, gpu_tdp_w: watt, arrival_rate_qps: request_per_second, measurement_duration_s: second, gpu_energy_j: joule, reported_mean_gpu_power_w: watt, energy_duration_mean_gpu_power_w: watt, reported_minimum_gpu_power_w: watt, reported_maximum_gpu_power_w: watt, reported_standard_deviation_gpu_power_w: watt, energy_per_generation_token_j: joule_per_token, generation_throughput_tokens_per_s: token_per_second, median_time_to_first_token_s: second, p95_time_to_first_token_s: second, median_request_latency_s: second, p95_request_latency_s: second}
+
+  continuation_availability_audit_v1:
+    package: results/tables/rq2_joint_deliverability_continuation_availability_v1_non_authoritative
+    manifest: results/tables/rq2_joint_deliverability_continuation_availability_v1_non_authoritative/SHA256SUMS.json
+    manifest_sha256: e33505737d034552fdb3ae243fbbc5aa86137cabf1bf5bdd00a517242e33cf28
+    summary: results/tables/rq2_joint_deliverability_continuation_availability_v1_non_authoritative/summary.json
+    summary_sha256: faba770bf8f3d83229f840fc1074939742e847bd55ab793b63264cb2322dd45e
+    expected_schema: rq2_joint_deliverability_continuation_availability_v1_non_authoritative
+    primary: results/tables/rq2_joint_deliverability_continuation_availability_v1_non_authoritative/chains.json
+    primary_sha256: 0f661707d4ebb6ceb6f12073e6426a03b542322324df8a4f99b6d229ced8fc48
+    format: json
+    records: 1
+    license: null
+    license_evidence: null
+    license_evidence_sha256: null
+    time_basis: within-source marginal chronology only; power and workload have no observed shared clock
+    units: source hours, UTC timestamps for RTS, dimensionless workload fractions
+    intended_use: zero-solver audit of within-source continuation availability
+    limitations: adjacency is not coupling; raw fraction above one is retained; continuous protocol, censoring estimand, deadline, recovery and shared budget remain unidentified
+    role_origin_defaults: {identifier: derived_benchmark, diagnostic: derived_benchmark}
+    field_groups:
+      identifier: [schema, scope, power.item.block_boundary_links.item.predecessor_active_event_id, power.item.block_boundary_links.item.predecessor_block_id, power.item.block_boundary_links.item.successor_active_event_id, power.item.block_boundary_links.item.successor_block_id, power.item.block_ids.item, power.item.chain_id, power.item.outage_seed, power.item.split, power.item.trajectory_identity_basis.outage_seed, power.item.trajectory_identity_basis.package_manifest_sha256, power_cross_split_events_and_whole_block_exclusions.item.component_type, power_cross_split_events_and_whole_block_exclusions.item.component_uid, power_cross_split_events_and_whole_block_exclusions.item.event_id, power_cross_split_events_and_whole_block_exclusions.item.outage_seed, workload.item.block_boundary_links.item.predecessor_block_id, workload.item.block_boundary_links.item.successor_block_id, workload.item.block_ids.item, workload.item.chain_id, workload.item.split, workload.item.trace_identity_basis.builder_config_sha256, workload.item.trace_identity_basis.builder_sha256, workload.item.trace_identity_basis.package_summary_sha256, workload.item.trace_identity_basis.source_sha256]
+      observed_source_value: []
+      derived_from_observed_source: []
+      derived_benchmark: [power.item.block_boundary_link_count, power.item.block_boundary_links.item.predecessor_source_end, power.item.block_boundary_links.item.predecessor_timestamp, power.item.block_boundary_links.item.same_nonempty_active_event, power.item.block_boundary_links.item.successor_source_start, power.item.block_boundary_links.item.successor_timestamp, power.item.block_count, power.item.row_count, power.item.source_end, power.item.source_start, power.item.timestamp_end, power.item.timestamp_start, power.item.unavailable_in_frozen_margin.item.end_inclusive, power.item.unavailable_in_frozen_margin.item.hour_count, power.item.unavailable_in_frozen_margin.item.position, power.item.unavailable_in_frozen_margin.item.start, workload.item.block_boundary_link_count, workload.item.block_boundary_links.item.predecessor_source_end, workload.item.block_boundary_links.item.successor_source_start, workload.item.block_count, workload.item.row_count, workload.item.row_trace_id_present, workload.item.source_end, workload.item.source_start, workload.item.trace_identity_basis.normalization_method, workload.item.trace_identity_basis.training_peak_requested_gpu_occupancy, workload.item.unavailable_in_frozen_margin.item.end_inclusive, workload.item.unavailable_in_frozen_margin.item.hour_count, workload.item.unavailable_in_frozen_margin.item.position, workload.item.unavailable_in_frozen_margin.item.start]
+      diagnostic: [power.item.unavailable_in_frozen_margin_reason, power_cross_split_events_and_whole_block_exclusions.item.duration_hours, power_cross_split_events_and_whole_block_exclusions.item.end_hour_exclusive, power_cross_split_events_and_whole_block_exclusions.item.excluded_whole_block_end_inclusive, power_cross_split_events_and_whole_block_exclusions.item.excluded_whole_block_hour_count, power_cross_split_events_and_whole_block_exclusions.item.excluded_whole_block_start, power_cross_split_events_and_whole_block_exclusions.item.start_hour, workload.item.unavailable_in_frozen_margin_reason]
+    unit_overrides: {workload.item.trace_identity_basis.training_peak_requested_gpu_occupancy: normalized_requested_GPU_occupancy}
+
+conceptual_inputs:
+  observed:
+    - {name: google_pdu_measured_power_ratio, value_status: observed_normalized_value, source: google_power_57_domains}
+    - {name: alibaba_anonymized_job_and_utilization_trace, value_status: observed_source_under_derived_aggregates, sources: [alibaba_job_execution_envelopes, alibaba_gpu_telemetry]}
+    - {name: zeus_gpu_power_and_epoch_time, value_status: observed_controlled_measurements, source: zeus_four_gpu_power_performance}
+    - {name: nlr_compute_node_power_profiles, value_status: observed_source_under_catalog_statistics, source: nlr_genai_power_profiles_v2}
+    - {name: wattgpu_device_power_experiments, value_status: observed_source_under_reference_table, source: wattgpu_power_reference_v1}
+  derived:
+    - {name: google_cpu_hourly_endpoints, value_status: derived_with_conflict_diagnostics}
+    - {name: google_pdu17_hourly_capacity_integrals, value_status: derived_with_unknown_capacity_preserved}
+    - {name: google_hourly_power_means, value_status: derived_without_quality_filter}
+    - {name: alibaba_job_execution_envelopes, value_status: derived_release_and_completion_proxies}
+    - {name: alibaba_dimensionless_workload_blocks, value_status: derived_unclipped_marginal_blocks}
+    - {name: rts_gmlc_cfe_and_outage_blocks, value_status: derived_benchmark_not_empirical_joint_observation}
+  unidentified:
+    - {name: service_deadline, value: null, reason: no scoped local source observes the business deadline}
+    - {name: recovery_deadline, value: null, reason: no scoped local source observes a recovery due time}
+    - {name: shared_flexibility_budget, value: null, reason: no scoped local source observes the accounting budget}
+    - {name: recovery_headroom, value: null, reason: no scoped local source identifies compatible recovery power headroom}
+    - {name: recovery_efficiency, value: null, reason: no scoped local source identifies recovery efficiency}
+    - {name: absolute_google_pdu_power_mw, value: null, reason: Google PowerData is normalized and publishes no PDU capacity}
+    - {name: observed_job_to_power_mapping, value: null, reason: workload and hardware-power references do not share job identity and clock}
+    - {name: flexible_fraction, value: null, reason: low priority or completed work does not identify recoverable flexibility}
+    - {name: recoverable_fraction, value: null, reason: no scoped local source observes checkpoint-safe recoverability}
+    - {name: checkpoint_state, value: null, reason: no scoped local workload source observes checkpoint state}
+    - {name: preemptibility, value: null, reason: no scoped local workload source observes preemptibility}
+    - {name: response_time_limit, value: null, reason: public operating-window evidence does not identify a job-level response contract}
+    - {name: maximum_event_duration, value: null, reason: no scoped local paired source identifies an event-duration contract}
+    - {name: minimum_rest_time, value: null, reason: no scoped local source observes minimum rest between calls}
+    - {name: event_count_limit, value: null, reason: no scoped local source observes a call-count contract}
+    - {name: energy_debt_limit, value: null, reason: no scoped local source observes a recovery-debt limit}
+    - {name: accounting_period_id, value: null, reason: no scoped local source maps workloads to a business budget period}
+    - {name: initial_recovery_debt_carry_in, value: null, reason: no scoped local source observes initial carry-in state}
+    - {name: maximum_recovery_power, value: null, reason: no scoped local source identifies recoverable power capacity}
+    - {name: call_limit, value: null, reason: no scoped local source observes an operational call limit}
+
+protocol_choices:
+  delivery_new_split: {value: null, status: unregistered, note: existing package splits are preserved but this delivery adds no split}
+  cross_source_coupling: {value: null, status: unregistered}
+  raw_workload_fraction_above_one_mapping: {value: null, status: unregistered, note: values above one remain unchanged}
+  tail_handling: {value: null, status: unregistered}
+  censoring_estimand: {value: null, status: unregistered}
+  deadline_and_recovery_accounting: {value: null, status: unregistered}
+
+gates:
+  local_delivery_catalog_available: true
+  offline_validation_and_loading_available: true
+  google_unfiltered_alignment_available: true
+  empirical_joint_distribution_ready: false
+  direct_job_to_power_mapping_ready: false
+  power_quality_flag_semantics_resolved: false
+  complete_pdu_population_observed: false
+  absolute_power_mw_available: false
+  flexibility_contract_parameters_ready: false
+  continuous_service_protocol_registered: false
+  continuous_model_input_ready: false
+  full_rq2_experiment_input_ready: false
+  formal_experiment_authorized: false
+  formal_result: false
+  paper_claim: false
+  security_certified: false

@@ -1,0 +1,65 @@
+{
+  "exact_mathematical_certificate": false,
+  "file_sha256": {
+    "results/tables/rq2_normal_h1_native_v1_non_authoritative/native_cases.json": "97a2c3b5623e125862a337a4078af88be787e4091ef71303b6fdb84020c7a201",
+    "results/tables/rq2_normal_h1_native_v1_non_authoritative/offline_replay_checks.json": "0003fe209fa18339185ace21fbe210646c81c937ff62bafe7a6b3c076b214ebe",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_model.py": "9e6e5497ca3091acd9e1286c000026b16f4e3f744eb83748044a54bafdff05bb",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_short_solve.py": "9499dba5af6b59a84af93b836c0826a412e4c3fbc90479f25ad8b18f1f9a1768",
+    "tests/test_rq2_normal_h1_short_solve_v1.py": "11cd62d782772f24e10a034d9c271d61df9b2939723d4a36b4210dea2aab03d7"
+  },
+  "formal_result": false,
+  "hard_process_resources_verified": false,
+  "intermediate_test_batches": [
+    {
+      "passed": 11,
+      "seconds": 6.43
+    },
+    {
+      "passed": 96,
+      "seconds": 14.88
+    },
+    {
+      "passed": 97,
+      "seconds": 16.85
+    }
+  ],
+  "native_archive": {
+    "solver_calls": 6,
+    "stages": 6,
+    "synthetic_cases": 2
+  },
+  "official_verdict": null,
+  "offline_replay": {
+    "solver_calls": 0,
+    "stages": 6
+  },
+  "preseal_review": {
+    "closed_findings": [
+      "budget implementation included in chain identity",
+      "nonbytes and oversized payload do not violate evidence schema"
+    ],
+    "independently_reran_tests": false,
+    "open_substantive_findings": [],
+    "reviewer": "/root/cfe_preallocation_official"
+  },
+  "remaining": [
+    "current-source adapter and causal decision projection",
+    "three-state-chain durable publication and failure windows",
+    "A operational integration and enrollment followup",
+    "same-contract full-support capacity evidence",
+    "complete execution/resource gates and explicit formal-run authority"
+  ],
+  "schema": "rq2_h1_native_development_checks_v1",
+  "sealed_preservation": {
+    "drift": [],
+    "members": 587
+  },
+  "status": "DRAFT_PRESEAL_FINDINGS_CLOSED",
+  "test_command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_short_solve_v1.py tests/test_rq2_normal_h1_model_v1.py tests/test_rq2_normal_numerical_candidate_v1.py tests/test_rq2_objective_provenance_run_v1.py",
+  "tests": {
+    "failed": 0,
+    "passed": 100,
+    "seconds": 17.68,
+    "session_id": 98808
+  }
+}

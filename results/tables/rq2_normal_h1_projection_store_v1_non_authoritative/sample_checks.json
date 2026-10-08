@@ -1,0 +1,46 @@
+{
+  "schema": "h1_projection_store_synthetic_sample_v1",
+  "fixture": "tests.test_rq2_normal_h1_source_v1.packet",
+  "fixture_sha256": "946f93d3591b3099d337f6aff7cf99cf3a211e482b5dbab510c7f224ee97aa17",
+  "solver_specification": {
+    "name": "gurobi",
+    "expected_package_version": "13.0.2",
+    "threads": 1,
+    "mip_relative_gap": 1e-08,
+    "feasibility_tolerance": 1e-09,
+    "optimality_tolerance": 1e-09,
+    "integer_feasibility_tolerance": 1e-09,
+    "random_seed": 0,
+    "time_limit_seconds": 1.0,
+    "tee": false
+  },
+  "budget": {
+    "purpose": "h1_normal_numerical_lex_short_development_v1",
+    "max_seconds_per_solve": 1.0,
+    "max_threads": 1,
+    "max_horizon": 1,
+    "max_variables": 100,
+    "max_constraints": 500,
+    "max_solver_calls": 3,
+    "max_total_solver_seconds": 3.0
+  },
+  "source_audit_identity": "130c5dd3dc968a1e784fb0178f7a230369009cebcab1d8b4901c82643154b057",
+  "request_key": "a76b57f877b148dee7036252b914fdb548e2f9b14c6d55f2d42824e68da8cfeb",
+  "archive_sha256": "0a8f3ddbd3dd6895dc957378e361a88d3ef27ef08c419db744c1a7d0cd335fca",
+  "projection_identity": "2b494335f1f32a39af1ad1810dd3abbedb8993340e0baef5f7048b4842609bfc",
+  "canonical_locks_hex": [
+    "0x1.4000000000000p+4",
+    "0x1.0000000000000p+0",
+    "0x1.4000000000000p+4"
+  ],
+  "native_solver_calls": 3,
+  "replay_solver_calls": 0,
+  "journal_head": "e94e203415b6aee9c362df74971fc7dee56162516abd88810eb8681e88272778",
+  "reopened_status": "available",
+  "reopened_witness_count": 1,
+  "idempotent_append_verified": true,
+  "exact_mathematical_certificate": false,
+  "native_execution_authenticated": false,
+  "executable_boundary_restored": false,
+  "formal_result": false
+}

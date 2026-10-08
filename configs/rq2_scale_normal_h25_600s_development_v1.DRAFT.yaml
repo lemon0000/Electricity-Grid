@@ -1,0 +1,64 @@
+schema: rq2_scale_normal_h25_diagnostic_v1
+scope: single_H25_normal_diagnostic_only
+formal_result: false
+episode_execution_allowed: false
+task_root: D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_scale_normal_h25_600s_attempt1_non_authoritative
+request_path: D:\CUHKSZ\Research Project\electricity-grid\configs\rq2_scale_normal_h25_600s_request_v1.DRAFT.json
+request_sha256: da633e1120ed768ab1b6a8d1030338c328bd9f56e6cd2917e4305bdf48ac2ade
+request_identity: efb988a1a55dddb44e3293e7b4d987a30133600964b133ac733d186adedab7a6
+allocation:
+  execute:
+    resource_contract_identity: 92239cf6bd596b4fe4721563442d008f879d0c0ad690959dd9405936b4313c65
+    envelope:
+      task_id: normal_h25_600s
+      max_wall_seconds: 1500
+      non_solver_seconds: 900
+      max_job_commit_bytes: 1073741824
+      archive_bytes: 268435456
+      scratch_bytes: 33554432
+      max_threads: 1
+      max_variables: 30000
+      max_constraints: 100000
+    max_elapsed_seconds: 900.0
+    sample_interval_seconds: 0.2
+    max_process_commit_bytes: 1073741824
+    max_job_commit_bytes: 1073741824
+    max_quiescence_seconds: 3.0
+  audit:
+    resource_contract_identity: 92239cf6bd596b4fe4721563442d008f879d0c0ad690959dd9405936b4313c65
+    envelope:
+      task_id: normal_h25_600s
+      max_wall_seconds: 1500
+      non_solver_seconds: 900
+      max_job_commit_bytes: 1073741824
+      archive_bytes: 268435456
+      scratch_bytes: 33554432
+      max_threads: 1
+      max_variables: 30000
+      max_constraints: 100000
+    max_elapsed_seconds: 300.0
+    sample_interval_seconds: 0.2
+    max_process_commit_bytes: 1073741824
+    max_job_commit_bytes: 1073741824
+    max_quiescence_seconds: 3.0
+  controller_seconds: 180
+  execute_overhead_seconds: 180
+  max_record_bytes: 33554432
+  execute_scratch_bytes: 16777216
+  audit_scratch_bytes: 16777216
+  max_supervisor_peak_working_set_bytes: 1073741824
+  max_tree_entries: 1017
+  max_outer_scratch_entries: 1000
+environment:
+  SYSTEMROOT: C:\Windows
+  WINDIR: C:\Windows
+  TEMP: C:\Users\Psychobabble\AppData\Local\Temp
+  TMP: C:\Users\Psychobabble\AppData\Local\Temp
+  PATH: D:\Miniconda3\envs\compute;D:\Miniconda3\envs\compute\Library\bin;C:\Windows\System32;C:\Windows
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  NUMEXPR_NUM_THREADS: '1'
+  KMP_DUPLICATE_LIB_OK: 'True'
+  GRB_LICENSE_FILE: C:\Users\Psychobabble\gurobi\gurobi.lic
+controller_identity: e2b0261d35a8dd12aeff3f871b58f2409b65dc6a486252da277819539ab91cb5

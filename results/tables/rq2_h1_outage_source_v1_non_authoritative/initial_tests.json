@@ -1,0 +1,25 @@
+{
+  "root_only_writer": true,
+  "real_native_calls": 0,
+  "synthetic_jobs": 0,
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_outage_source_development_v1.py",
+      "passed": 32,
+      "seconds": 1.65,
+      "exit_code": 0
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_source_window_v1.py tests/test_rq2_event_disclosure_v1.py tests/test_h1_current_grid_step_development_v1.py",
+      "passed": 85,
+      "seconds": 25.22,
+      "exit_code": 0
+    }
+  ],
+  "files_sha256": {
+    "experiments/h1_outage_source_development_v1.py": "6c4328aab1b95977d1152e75a9d46963a8e6f1f81156ea94a03ef96304f867a6",
+    "tests/test_h1_outage_source_development_v1.py": "bad76abb9fd2f254d8d46e67fb59b7029c0d5b512640cbfd35b5f04c98cf7473",
+    "docs/model_spec/rq2_h1_outage_source_development_v1.md": "46b6cdd43eb12032c7b2c7265f9ba4b339f371f6f20c6046088c8703036dcd87",
+    "experiments/audit_h1_outage_boundary_development_v1.py": "fafd8ade2268472b33e6a60fa21cbc3d3091a0f6e0b6f8e50e159613acec48e5"
+  }
+}

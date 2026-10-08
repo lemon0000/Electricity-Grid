@@ -1,0 +1,116 @@
+{
+  "analysis_implementation_sha256": "fdf821a074ce7b4cfaeefc306500b76ec100a830ae11557d07df4bafd5ab9a60",
+  "correlations": {
+    "cpu_lower_vs_measured_power": {
+      "pearson": {
+        "coefficient": "0.962184945123159126",
+        "status": "available"
+      },
+      "spearman": {
+        "coefficient": "0.962450592885375494",
+        "status": "available"
+      }
+    },
+    "cpu_upper_vs_measured_power": {
+      "pearson": {
+        "coefficient": "0.962184943013110584",
+        "status": "available"
+      },
+      "spearman": {
+        "coefficient": "0.962450592885375494",
+        "status": "available"
+      }
+    }
+  },
+  "cpu_aggregation_contract": {
+    "collection_types_per_hour": 2,
+    "endpoint_semantics": "hourly_sum_across_collection_types_and_priority_tiers",
+    "priority_tiers_per_collection_type": 7,
+    "source_rows_per_hour": 14
+  },
+  "cpu_source_diagnostics": {
+    "cpu_conflict_overlap_seconds_total": "109",
+    "hours_with_cpu_conflict_overlap": 22,
+    "hours_with_missing_cpu_overlap": 0,
+    "missing_cpu_overlap_seconds_total": "0"
+  },
+  "interpretation": {
+    "absolute_power_mw_available": false,
+    "complete_24h_pair": false,
+    "confidence_intervals_computed": false,
+    "continuous_model_input_ready": false,
+    "correlations_are_identification_bounds": false,
+    "correlations_are_separate_cpu_endpoint_analyses": true,
+    "cpu_bounds_scope": "extracted_population_only",
+    "cpu_overlap_seconds_are_aggregated_across_fragments_and_instances": true,
+    "cpu_unit": "normalized_compute_unit_ncu",
+    "deadline_observed": false,
+    "fit_or_calibration_performed": false,
+    "flexibility_estimated": false,
+    "flexibility_observed": false,
+    "formal_result": false,
+    "lag_search_performed": false,
+    "model_input_ready": false,
+    "p_values_computed": false,
+    "paper_claim": false,
+    "population_is_complete_pdu_workload": false,
+    "population_parameter_estimated": false,
+    "power_quality_flag_semantics_resolved": false,
+    "power_unit": "normalized_pdu_utilization_ratio",
+    "quality_eligibility_inferred": false,
+    "quality_flags_preserved_unfiltered": true,
+    "recovery_parameters_observed": false,
+    "security_certified": false
+  },
+  "numeric_contract": {
+    "coefficient_decimal_places": 18,
+    "decimal_context_precision": 50,
+    "decimal_rounding": "ROUND_HALF_EVEN",
+    "mean_decimal_places": 18,
+    "spearman_tie_method": "average_rank"
+  },
+  "observation_count": 23,
+  "quality_flag_counts_unfiltered": {
+    "bad_measurement_false_count": 276,
+    "bad_measurement_true_count": 0,
+    "bad_production_false_count": 0,
+    "bad_production_true_count": 276
+  },
+  "schema": "google_power_workload_23h_descriptive_v1",
+  "scope": "all_23_aligned_hours_unfiltered",
+  "series_descriptives": {
+    "measured_power_util_mean": {
+      "maximum": "0.758916666667",
+      "mean": "0.738507246376869565",
+      "minimum": "0.694000000000",
+      "status": "available"
+    },
+    "observed_cpu_ncu_lower": {
+      "maximum": "819.99072570032545898353",
+      "mean": "764.722633326445243064",
+      "minimum": "688.10765921884108748542",
+      "status": "available"
+    },
+    "observed_cpu_ncu_upper": {
+      "maximum": "819.99073299778825998353",
+      "mean": "764.722634757912693568",
+      "minimum": "688.10765956401822748542",
+      "status": "available"
+    }
+  },
+  "source_interval": {
+    "common_raw_end_us": 86400000000,
+    "common_raw_start_us": 3600000000,
+    "trace_relative_end_minutes": 1430,
+    "trace_relative_end_us": 85800000000,
+    "trace_relative_start_minutes": 50,
+    "trace_relative_start_us": 3000000000
+  },
+  "source_sha256": {
+    "aligned_hourly_pair": "54d664f2fa261413c1dfb5c05479d6aa6977e74ea8a6f36c3a5f41dba79f5930",
+    "alignment_config": "dc8285d3799d62c9ecebee47ecdf480f461d9f0f0ea033310fab88fbea945ae1",
+    "alignment_implementation": "7011b96f3141a3937b49a2b6493b00ee01a05e770ed2fdf922d7bee1e76054d5",
+    "alignment_summary": "e7d6edad6f2e5abf4ad07b096b2c6c584156532fbfea452648ce78d07b551d53"
+  },
+  "status": "DRAFT_NONAUTHORITATIVE"
+}

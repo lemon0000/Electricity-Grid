@@ -1,0 +1,57 @@
+schema: rq2_continuous_multiday_service_v1_draft
+status: DRAFT_NONAUTHORITATIVE
+scope: protocol_design_and_synthetic_replay_only
+continuous_service_protocol_registered: false
+formal_experiment_authorized: false
+formal_result: false
+paper_claim: false
+security_certified: false
+replaces_legacy_protocol: false
+delivery:
+  summary: data/processed/rq2_public_data_delivery_v1_non_authoritative/summary.json
+  summary_sha256: 53b898e30d807b3b532cfaed78de20fdb0653fa53817f65fcc5a6a5d78483586
+  input_status: data/processed/rq2_public_data_delivery_v1_non_authoritative/input_status.json
+  input_status_sha256: 263643c83cf4ec60fd25fb176f50c3aae2bd7f158f8bb550fe241f3a18d88302
+draft_choices:
+  observation_chunk_hours: 24
+  accounting: single_explicit_nonrolling_period
+  period_reset: forbidden
+  initial_state: explicit_scenario_assumption_or_evidenced_carry_in
+  service_mapping: additive_disjoint_obligations_mechanism_assumption
+  recovery_during_call: forbidden_mechanism_assumption
+  recovery_headroom: min_business_and_cfe_compatible_surplus
+  effective_action_mapping: sum_grid_cfe_then_zero_call_or_recovery_at_or_below_1e_minus_6
+  continuation: immutable_cursor_binds_state_last_hour_and_fixed_envelope
+  debt_balance: b_next_equals_b_plus_q_dt_minus_eta_r_dt
+  observation_end: carry_state_and_report_censoring
+  completion_deadline: null
+  tail_hours: null
+  new_split: null
+  cross_source_coupling: null
+  raw_workload_above_one_mapping: null
+  holdout_policy: fixed_causal_policy_no_future_reoptimization
+  completion_estimand: undefined_until_deadline_and_tail_contract_registered
+synthetic_fixture:
+  evidence_class: mechanism_assumption_test_only
+  hours: 48
+  source_hour_start: 1
+  accounting_period_id: synthetic-48h-period
+  baseline_power: 1.0
+  initial_debt: 0.0
+  call_hours: [23, 24, 25]
+  grid_request: 0.125
+  cfe_request: 0.125
+  recovery_hours: [26, 27, 28]
+  recovery: 0.3125
+  call_limit: 0.5
+  business_recovery_headroom: 0.5
+  cfe_compatible_surplus: 0.5
+  maximum_recovery_power: 0.5
+  envelope:
+    time_step_hours: 1.0
+    recovery_efficiency: 0.8
+    maximum_event_duration_hours: 3.0
+    maximum_event_count: 2
+    normalized_energy_budget: 1.0
+    normalized_debt_limit: 1.0
+    minimum_recovery_hours: 2.0

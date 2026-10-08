@@ -1,0 +1,16 @@
+schema: rq2_continuous_composite_diagnostics_v1
+status: DRAFT_NONAUTHORITATIVE
+evidence_class: mechanism_assumption
+scenario_config: configs/rq2_continuous_prefix_diagnostics_v1.DRAFT.yaml
+controller_config: configs/rq2_continuous_recovery_controller_v1.DRAFT.yaml
+extra_cases:
+  - id: recovery_then_hard_call
+    cfe_request: 0.125
+    input_role: synthetic_mechanism
+    overrides:
+      29: {grid_request: 0.3, cfe_request: 0.3}
+  - id: recovery_then_source_gap
+    cfe_request: 0.125
+    input_role: synthetic_identity_fault_injection
+    overrides:
+      29: {power_source_hour: 99}

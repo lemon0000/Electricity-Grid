@@ -1,0 +1,32 @@
+{
+  "schema": "h1_same_evidence_inspection_comparison_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "metrics": [
+    {
+      "strategy": "legacy",
+      "profiled_elapsed_seconds": 6.524654900000314,
+      "stage_audits": 12,
+      "primitive_calls": 8551377,
+      "total_calls": 8683513
+    },
+    {
+      "strategy": "scoped",
+      "profiled_elapsed_seconds": 2.5665431000088574,
+      "stage_audits": 3,
+      "primitive_calls": 3044486,
+      "total_calls": 3092588
+    }
+  ],
+  "inspection_equal": true,
+  "solver_calls": 0,
+  "preserved_members": 20,
+  "drift_count": 0,
+  "inspector_identity": "59fd098e392b73fb04b225d3c74c5a0907f9fcd00c4eab62253c397bfd73b92d",
+  "runner_sha256": "30d25e22c3ce87954c55abb26cfe20ab4a4cbfe2e0b3be05964ef5626ad911ad",
+  "sample_manifest_sha256": "95cadc832ff7438bf254abe8c052a48b30507450db4fce83fe8979d575b6d0ab",
+  "formal_result": false,
+  "hard_resources_admitted": false,
+  "limitations": [
+    "One retained synthetic hour; instrumented local timing, not a multi-day resource bound."
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "current_one_blob_worst_case_persistence_blocked": true,
+  "date": "2026-09-30",
+  "files": {
+    "docs/model_spec/rq2_normal_h1_resource_shape_v1.md": "49694f496b2ca40e3febebc3d3da0f861d5bd54b3ab858561608d64109994465",
+    "experiments/probe_rq2_normal_h1_shape_v1.py": "bd4a0abefaab63518ca8a0844eb1cfe4d197f1e6e4db789153bddbf257428539",
+    "results/tables/rq2_normal_h1_shape_v1_non_authoritative/child_identity.json": "5a20d580888cd4296351d2ad1faa6a31b1ee5b4b51adcb1e100bec328d374152",
+    "results/tables/rq2_normal_h1_shape_v1_non_authoritative/intent.json": "e0406184dc0d5edf13b8b436151a13522b4976b6779e140e134c37490847cb4d",
+    "results/tables/rq2_normal_h1_shape_v1_non_authoritative/process_observation.json": "1502d1a630fb4af6962e64664574870a1025497699faf8d0095ee9ea28f910b7",
+    "results/tables/rq2_normal_h1_shape_v1_non_authoritative/request.json": "819a3464ef218ee83f1abc03d2741fec8aac75df60d156c236e4ba2b561c7745",
+    "results/tables/rq2_normal_h1_shape_v1_non_authoritative/scratch_non_authoritative/shape_result.json": "5027e13372b54f1364cc4ad0add09c194f33a22f36f2ff470d25a41e0a7db5f7",
+    "results/tables/rq2_normal_h1_shape_v1_non_authoritative/shape_job_checks.json": "8fb4c6c943fe31c83ad5bf6674c3844739f93dd51abeadf5bb7ba8cbb6cf4b2b",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_resource_shape.py": "a532a053f0fba29af45b208d7fb4216980a245b5fb16cb179b615419547bb374",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_shape_process.py": "cea9fed43270be3654f5ad2b8e4e3243c610c6ae404632edd5ad460c162d6c62",
+    "tests/test_rq2_normal_h1_resource_shape_v1.py": "254ccdc757e1d11a469eec73a5aef9d220f3bd92d2d45802ef1b2221634c15b7"
+  },
+  "formal_execution_ready": false,
+  "formal_resource_contract_approved": false,
+  "formal_result": false,
+  "formal_run_started": false,
+  "limitations": [
+    "Two Pyomo endpoint builds only; placeholder locks carry no accepted provenance.",
+    "No native/all-stage/audit/archive/replay/complete-episode resource measurements.",
+    "Full process environment was hashed at launch, not persisted; successor requires reproducible environment contract.",
+    "Counterfactual 192-hour content is unadmitted, not reserved or measured."
+  ],
+  "preservation": {
+    "cfe_preallocation_members_checked": 587,
+    "drift_count": 0,
+    "prior_h1_development_files_checked": 16,
+    "prior_h1_drift_count": 0
+  },
+  "production_sealed": false,
+  "review": {
+    "findings_closed": true,
+    "official_verdict": null,
+    "reviewer": "/root/cfe_preallocation_official",
+    "reviewer_rechecked_actual_receipt": true,
+    "reviewer_reran_job": false,
+    "reviewer_reran_pytest": false,
+    "stage": "PRE_SEAL_AUDIT"
+  },
+  "schema": "h1_resource_shape_development_checks_v1",
+  "selection_registered": false,
+  "solver_calls": 0,
+  "source_authenticated": false,
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_resource_shape_v1.py",
+      "passed": 44,
+      "scope": "final targeted",
+      "seconds": 7.36
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_resource_shape_v1.py tests/test_rq2_normal_task_process_v1.py",
+      "passed": 68,
+      "scope": "same implementation before 12 test-only additions",
+      "seconds": 14.14
+    }
+  ],
+  "whole_task_resources_verified": false
+}

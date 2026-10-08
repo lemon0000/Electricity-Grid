@@ -1,0 +1,81 @@
+status: DRAFT_NONAUTHORITATIVE
+schema: google_power_workload_alignment_successor_v1
+purpose: 23_complete_raw_hour_temporal_alignment_diagnostic
+
+source:
+  workload_records_path: data/raw/google_power_workload_2019/v1/upstream/records.csv.gz
+  workload_records_sha256: 596f9546ca1910118b1f81d02997027c3cea8b91db522203cfb97f0588b7ac71
+  workload_metadata_path: data/raw/google_power_workload_2019/v1/upstream/SOURCE_METADATA.json
+  workload_metadata_sha256: 4e461fa1aae7f55b127d5eceed1201dbc626c8ebae9788250ee2d9785da375dc
+  workload_manifest_path: data/raw/google_power_workload_2019/v1/upstream/SHA256SUMS
+  workload_manifest_sha256: 710ec08f41408e7b7b6c65db6f8226d31650a325ee54a2d37526b8907251542c
+  power_path: data/raw/google_power_2019/2019/upstream/cellf_pdu17.csv.gz
+  power_sha256: 62af3015031d0430c1b6ff82f8b5a692fbe7303a15005a3c2bd2a60b1861d28e
+  power_manifest_path: data/raw/google_power_2019/2019/upstream/SHA256SUMS
+  power_manifest_sha256: fc11c3a59cc078799bcc289cc40579025d8b82b5c009679b1690f987b91c7c47
+  cell: f
+  pdu: pdu17
+
+source_contract:
+  workload_schema: google_power_workload_bigquery_hourly_extract_v1
+  workload_rows: 1665
+  hourly_usage_rows: 336
+  machine_event_rows: 1328
+  audit_rows: 1
+  source_hour_start: 0
+  source_hour_end_exclusive: 24
+  collection_types: [0, 1]
+  priority_tiers:
+    - 1_free
+    - 2_beb
+    - 3_mid
+    - 4_production
+    - 5_monitoring
+    - ambiguous
+    - unknown
+  power_domain_rows: 8928
+  legacy_power_window_start_us: 600000000
+  legacy_power_window_end_us: 87000000000
+
+alignment:
+  common_raw_start_us: 3600000000
+  common_raw_end_us: 86400000000
+  trace_start_raw_us: 600000000
+  power_step_us: 300000000
+  expected_complete_hours: 23
+  expected_power_samples: 276
+
+serialization:
+  measured_power_mean_decimal_places: 12
+  measured_power_mean_rounding: ROUND_HALF_EVEN
+  line_ending: LF
+
+output:
+  directory: results/tables/google_power_workload_alignment_successor_v1_non_authoritative
+  pair_file: aligned_hourly_pair.csv
+  summary_file: summary.json
+
+interpretation:
+  pairing_status: provisional_temporal_alignment_only
+  cpu_unit: normalized_compute_unit_ncu
+  cpu_bounds_scope: extracted_population_only
+  power_unit: normalized_pdu_utilization_ratio
+  population_is_complete_pdu_workload: false
+  cpu_subhour_disaggregation_performed: false
+  priority_strata_reconstructed: false
+  priority_evidence_remains_in_bound_source: true
+  machine_capacity_reconstructed: false
+  machine_capacity_completeness_resolved: false
+  capacity_used_to_normalize_cpu: false
+  power_quality_flags_preserved_unfiltered: true
+  power_quality_flag_semantics_resolved: false
+  absolute_power_mw_available: false
+  flexibility_observed: false
+  deadline_observed: false
+  recovery_parameters_observed: false
+  complete_24h_pair: false
+  continuous_input_ready: false
+  model_input_ready: false
+  formal_result: false
+  paper_claim: false
+  security_certified: false

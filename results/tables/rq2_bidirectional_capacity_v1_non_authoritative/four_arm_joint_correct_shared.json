@@ -1,0 +1,2954 @@
+{
+  "case": "four_arm_joint_correct_shared",
+  "evidence": {
+    "activity_representation": "open_activity_boundary_outer_relaxation",
+    "assessment": "development_relaxed_prefix_interval",
+    "causal_policy_certificate": null,
+    "complete_capacity_lower_bound": null,
+    "complete_capacity_upper_bound": null,
+    "contract": "continuous_bidirectional_planner_short_solve_v1",
+    "effective_prefix_witness_available": true,
+    "formal_result": false,
+    "infeasibility_certificate": null,
+    "interval_interpretation": "native_mip_bounds_under_declared_numerical_tolerances",
+    "planner_id": "bidirectional_prefix_capacity_relaxation_v1:13d1f2aaf1fab7cf601c6d39316e484a5151c1b8875ad7a8668aa181f0e0691f",
+    "prefix_capacity_interval": null,
+    "relaxed_incumbent_is_physical_witness": false,
+    "relaxed_prefix_assignment_audited": true,
+    "relaxed_prefix_solver_interval": [
+      0.46875,
+      0.46875
+    ],
+    "result_id": "aac47edb6f975a4d5733eddb3be7c8a11e3756850fd616f01dfa0144f0cddcb3",
+    "security_certified": false,
+    "status": "DRAFT_NONAUTHORITATIVE"
+  },
+  "scope": "synthetic_development_only",
+  "snapshot": {
+    "arm": "joint_correct_shared",
+    "assignment": {
+      "arm": "joint_correct_shared",
+      "canonical_structure": "0701c1f5aa221354c9f6641265db79ac4d43f416a1ecc1aa850412bfb1f4a293",
+      "constraint_residuals": [
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "service[1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "service[2]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "service[3]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "service[4]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "service[5]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "service[6]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "service[7]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "service[8]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "service[9]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "service[10]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "service[11]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "service[12]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[2]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[3]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[4]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[5]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[6]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[7]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[8]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[9]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[10]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[11]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[12]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[13]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[14]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[15]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[16]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[17]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[18]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[19]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[20]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[21]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[22]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[23]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[24]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[25]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[26]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "temporal[27]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "cohort_balance[1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "cohort_balance[2]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "cohort_balance[3]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "cohort_balance[4]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "cohort_balance[5]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "cohort_balance[6]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "cohort_balance[7]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "deadline[1]",
+          "upper_violation": 0.0
+        }
+      ],
+      "evaluation_error": null,
+      "extra_variables": [],
+      "extraction_error": null,
+      "feasibility_tolerance": 1e-09,
+      "inputs": {
+        "accounting_period_id": "synthetic-period",
+        "activity_representation": "open_activity_boundary_outer_relaxation",
+        "curtailment_ramp_per_hour": 1.0,
+        "decision_information_mode": "offline_full_prefix_recourse",
+        "evidence_class": "mechanism_assumption",
+        "initialization_mode": "canonical_zero_period_start",
+        "maximum_capacity": 1.0,
+        "maximum_event_count": 3,
+        "maximum_event_duration_hours": 3.0,
+        "maximum_recovery_power": 1.0,
+        "minimum_event_power": 1e-06,
+        "minimum_recovery_hours": 2.0,
+        "normalized_debt_limit": 2.0,
+        "normalized_energy_budget": 2.0,
+        "period_mode": "single_nonrolling",
+        "planner_scope": "bidirectional_prefix_capacity_relaxation_v1",
+        "recovery_efficiency": 0.8,
+        "recovery_representation": "continuous_nonnegative_recovery_relaxation",
+        "response_time_hours": 1.0,
+        "scenarios": [
+          {
+            "anchor": {
+              "arm_id": "joint_correct_shared",
+              "power_outage_seed": 0,
+              "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+              "power_source_hour": 0,
+              "power_trajectory_id": "power-s",
+              "split": "training",
+              "track_id": "shared",
+              "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+              "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+              "workload_source_hour": 100,
+              "workload_trace_id": "work-s"
+            },
+            "evidence_class": "mechanism_assumption",
+            "name": "s",
+            "observations": [
+              {
+                "available_flexibility": 1.0,
+                "observation": {
+                  "due_hour": 2,
+                  "hour": {
+                    "arm_id": "joint_correct_shared",
+                    "cfe_request": 0.125,
+                    "grid_request": 0.25,
+                    "power_outage_seed": 0,
+                    "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                    "power_source_hour": 1,
+                    "power_trajectory_id": "power-s",
+                    "split": "training",
+                    "track_id": "shared",
+                    "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                    "workload_occupancy": 1.0,
+                    "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                    "workload_source_hour": 101,
+                    "workload_trace_id": "work-s"
+                  },
+                  "limits": {
+                    "business_recovery_headroom": 1.0,
+                    "call_limit": 1.0,
+                    "cfe_compatible_surplus": 1.0,
+                    "maximum_recovery_power": 1.0
+                  }
+                }
+              },
+              {
+                "available_flexibility": 1.0,
+                "observation": {
+                  "due_hour": null,
+                  "hour": {
+                    "arm_id": "joint_correct_shared",
+                    "cfe_request": 0.0,
+                    "grid_request": 0.0,
+                    "power_outage_seed": 0,
+                    "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                    "power_source_hour": 2,
+                    "power_trajectory_id": "power-s",
+                    "split": "training",
+                    "track_id": "shared",
+                    "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                    "workload_occupancy": 1.0,
+                    "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                    "workload_source_hour": 102,
+                    "workload_trace_id": "work-s"
+                  },
+                  "limits": {
+                    "business_recovery_headroom": 1.0,
+                    "call_limit": 1.0,
+                    "cfe_compatible_surplus": 1.0,
+                    "maximum_recovery_power": 1.0
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "service_action_mode": "request_bounded_exact_fulfillment",
+        "terminal_mode": "open_carry",
+        "time_step_hours": 1.0
+      },
+      "integer_tolerance": 1e-09,
+      "missing_variables": [],
+      "objective": 0.46875,
+      "planner_id": "bidirectional_prefix_capacity_relaxation_v1:13d1f2aaf1fab7cf601c6d39316e484a5151c1b8875ad7a8668aa181f0e0691f",
+      "snapshot": [
+        [
+          "allocation[s,shared,0,0]",
+          {
+            "error": null,
+            "float_hex": "0x0.0p+0",
+            "number": 0.0,
+            "raw_repr": "0.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "allocation[s,shared,0,1]",
+          {
+            "error": null,
+            "float_hex": "0x1.8000000000000p-2",
+            "number": 0.375,
+            "raw_repr": "0.375",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "allocation[s,shared,1,1]",
+          {
+            "error": null,
+            "float_hex": "0x0.0p+0",
+            "number": 0.0,
+            "raw_repr": "0.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "capacity",
+          {
+            "error": null,
+            "float_hex": "0x1.e000000000000p-2",
+            "number": 0.46875,
+            "raw_repr": "0.46875",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "cfe_service[s,0]",
+          {
+            "error": null,
+            "float_hex": "0x1.0000000000000p-3",
+            "number": 0.125,
+            "raw_repr": "0.125",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "cfe_service[s,1]",
+          {
+            "error": null,
+            "float_hex": "0x0.0p+0",
+            "number": 0.0,
+            "raw_repr": "0.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "debt[s,shared,0]",
+          {
+            "error": null,
+            "float_hex": "0x1.8000000000000p-2",
+            "number": 0.375,
+            "raw_repr": "0.375",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "debt[s,shared,1]",
+          {
+            "error": null,
+            "float_hex": "0x0.0p+0",
+            "number": 0.0,
+            "raw_repr": "0.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "grid_service[s,0]",
+          {
+            "error": null,
+            "float_hex": "0x1.0000000000000p-2",
+            "number": 0.25,
+            "raw_repr": "0.25",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "grid_service[s,1]",
+          {
+            "error": null,
+            "float_hex": "0x0.0p+0",
+            "number": 0.0,
+            "raw_repr": "0.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "on[s,shared,0]",
+          {
+            "error": null,
+            "float_hex": "0x1.0000000000000p+0",
+            "number": 1.0,
+            "raw_repr": "1.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "on[s,shared,1]",
+          {
+            "error": null,
+            "float_hex": "0x0.0p+0",
+            "number": 0.0,
+            "raw_repr": "0.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "recovery[s,shared,0]",
+          {
+            "error": null,
+            "float_hex": "0x0.0p+0",
+            "number": 0.0,
+            "raw_repr": "0.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "recovery[s,shared,1]",
+          {
+            "error": null,
+            "float_hex": "0x1.e000000000000p-2",
+            "number": 0.46875,
+            "raw_repr": "0.46875",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "remaining[s,shared,0,0]",
+          {
+            "error": null,
+            "float_hex": "0x1.8000000000000p-2",
+            "number": 0.375,
+            "raw_repr": "0.375",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "remaining[s,shared,0,1]",
+          {
+            "error": null,
+            "float_hex": "0x0.0p+0",
+            "number": 0.0,
+            "raw_repr": "0.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "remaining[s,shared,1,1]",
+          {
+            "error": null,
+            "float_hex": "0x0.0p+0",
+            "number": 0.0,
+            "raw_repr": "0.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "start[s,shared,0]",
+          {
+            "error": null,
+            "float_hex": "0x1.0000000000000p+0",
+            "number": 1.0,
+            "raw_repr": "1.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "start[s,shared,1]",
+          {
+            "error": null,
+            "float_hex": "0x0.0p+0",
+            "number": 0.0,
+            "raw_repr": "0.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "stop[s,shared,0]",
+          {
+            "error": null,
+            "float_hex": "0x0.0p+0",
+            "number": 0.0,
+            "raw_repr": "0.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "stop[s,shared,1]",
+          {
+            "error": null,
+            "float_hex": "0x1.0000000000000p+0",
+            "number": 1.0,
+            "raw_repr": "1.0",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "track_call[s,shared,0]",
+          {
+            "error": null,
+            "float_hex": "0x1.8000000000000p-2",
+            "number": 0.375,
+            "raw_repr": "0.375",
+            "raw_type": "float"
+          }
+        ],
+        [
+          "track_call[s,shared,1]",
+          {
+            "error": null,
+            "float_hex": "0x0.0p+0",
+            "number": 0.0,
+            "raw_repr": "0.0",
+            "raw_type": "float"
+          }
+        ]
+      ],
+      "structure_error": null,
+      "submitted_structure": "0701c1f5aa221354c9f6641265db79ac4d43f416a1ecc1aa850412bfb1f4a293",
+      "variable_residuals": [
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "capacity",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "grid_service[s,0]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "grid_service[s,1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "cfe_service[s,0]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "cfe_service[s,1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "track_call[s,shared,0]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "track_call[s,shared,1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "on[s,shared,0]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "on[s,shared,1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "start[s,shared,0]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "start[s,shared,1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "stop[s,shared,0]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "stop[s,shared,1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "recovery[s,shared,0]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "recovery[s,shared,1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "debt[s,shared,0]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "debt[s,shared,1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "allocation[s,shared,0,0]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "allocation[s,shared,0,1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "allocation[s,shared,1,1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "remaining[s,shared,0,0]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "remaining[s,shared,0,1]",
+          "upper_violation": 0.0
+        },
+        {
+          "integrality_violation": 0.0,
+          "lower_violation": 0.0,
+          "name": "remaining[s,shared,1,1]",
+          "upper_violation": 0.0
+        }
+      ],
+      "witness": {
+        "arm": "joint_correct_shared",
+        "candidate": {
+          "capacity": {
+            "denominator": "32",
+            "numerator": "15"
+          },
+          "evidence_class": "mechanism_assumption",
+          "planner_id": "bidirectional_prefix_capacity_relaxation_v1:13d1f2aaf1fab7cf601c6d39316e484a5151c1b8875ad7a8668aa181f0e0691f",
+          "scenarios": [
+            [
+              "s",
+              [
+                {
+                  "cfe_service": {
+                    "denominator": "8",
+                    "numerator": "1"
+                  },
+                  "grid_service": {
+                    "denominator": "4",
+                    "numerator": "1"
+                  },
+                  "tracks": [
+                    [
+                      "shared",
+                      {
+                        "actual_service_power": {
+                          "denominator": "8",
+                          "numerator": "5"
+                        },
+                        "allocations": [],
+                        "recovery": {
+                          "denominator": "1",
+                          "numerator": "0"
+                        }
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "cfe_service": {
+                    "denominator": "1",
+                    "numerator": "0"
+                  },
+                  "grid_service": {
+                    "denominator": "1",
+                    "numerator": "0"
+                  },
+                  "tracks": [
+                    [
+                      "shared",
+                      {
+                        "actual_service_power": {
+                          "denominator": "32",
+                          "numerator": "47"
+                        },
+                        "allocations": [
+                          [
+                            1,
+                            {
+                              "denominator": "8",
+                              "numerator": "3"
+                            }
+                          ]
+                        ],
+                        "recovery": {
+                          "denominator": "32",
+                          "numerator": "15"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              ]
+            ]
+          ]
+        },
+        "inputs": {
+          "accounting_period_id": "synthetic-period",
+          "activity_representation": "open_activity_boundary_outer_relaxation",
+          "curtailment_ramp_per_hour": 1.0,
+          "decision_information_mode": "offline_full_prefix_recourse",
+          "evidence_class": "mechanism_assumption",
+          "initialization_mode": "canonical_zero_period_start",
+          "maximum_capacity": 1.0,
+          "maximum_event_count": 3,
+          "maximum_event_duration_hours": 3.0,
+          "maximum_recovery_power": 1.0,
+          "minimum_event_power": 1e-06,
+          "minimum_recovery_hours": 2.0,
+          "normalized_debt_limit": 2.0,
+          "normalized_energy_budget": 2.0,
+          "period_mode": "single_nonrolling",
+          "planner_scope": "bidirectional_prefix_capacity_relaxation_v1",
+          "recovery_efficiency": 0.8,
+          "recovery_representation": "continuous_nonnegative_recovery_relaxation",
+          "response_time_hours": 1.0,
+          "scenarios": [
+            {
+              "anchor": {
+                "arm_id": "joint_correct_shared",
+                "power_outage_seed": 0,
+                "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                "power_source_hour": 0,
+                "power_trajectory_id": "power-s",
+                "split": "training",
+                "track_id": "shared",
+                "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                "workload_source_hour": 100,
+                "workload_trace_id": "work-s"
+              },
+              "evidence_class": "mechanism_assumption",
+              "name": "s",
+              "observations": [
+                {
+                  "available_flexibility": 1.0,
+                  "observation": {
+                    "due_hour": 2,
+                    "hour": {
+                      "arm_id": "joint_correct_shared",
+                      "cfe_request": 0.125,
+                      "grid_request": 0.25,
+                      "power_outage_seed": 0,
+                      "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                      "power_source_hour": 1,
+                      "power_trajectory_id": "power-s",
+                      "split": "training",
+                      "track_id": "shared",
+                      "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                      "workload_occupancy": 1.0,
+                      "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                      "workload_source_hour": 101,
+                      "workload_trace_id": "work-s"
+                    },
+                    "limits": {
+                      "business_recovery_headroom": 1.0,
+                      "call_limit": 1.0,
+                      "cfe_compatible_surplus": 1.0,
+                      "maximum_recovery_power": 1.0
+                    }
+                  }
+                },
+                {
+                  "available_flexibility": 1.0,
+                  "observation": {
+                    "due_hour": null,
+                    "hour": {
+                      "arm_id": "joint_correct_shared",
+                      "cfe_request": 0.0,
+                      "grid_request": 0.0,
+                      "power_outage_seed": 0,
+                      "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                      "power_source_hour": 2,
+                      "power_trajectory_id": "power-s",
+                      "split": "training",
+                      "track_id": "shared",
+                      "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                      "workload_occupancy": 1.0,
+                      "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                      "workload_source_hour": 102,
+                      "workload_trace_id": "work-s"
+                    },
+                    "limits": {
+                      "business_recovery_headroom": 1.0,
+                      "call_limit": 1.0,
+                      "cfe_compatible_surplus": 1.0,
+                      "maximum_recovery_power": 1.0
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "service_action_mode": "request_bounded_exact_fulfillment",
+          "terminal_mode": "open_carry",
+          "time_step_hours": 1.0
+        },
+        "scenarios": [
+          {
+            "configured_hours": 2,
+            "execution": {
+              "arm_id": "joint_correct_shared",
+              "last_plan_cursor": null,
+              "mode": "physical_execution",
+              "tracks": [
+                [
+                  "shared",
+                  {
+                    "ledger": {
+                      "accounting_period_id": "synthetic-period",
+                      "cohorts": [
+                        {
+                          "created_hour": 1,
+                          "deadline_evidence": "mechanism_assumption",
+                          "due_hour": 2,
+                          "incurred": {
+                            "denominator": "8",
+                            "numerator": "3"
+                          },
+                          "missed_at_deadline": {
+                            "denominator": "1",
+                            "numerator": "0"
+                          },
+                          "remaining": {
+                            "denominator": "1",
+                            "numerator": "0"
+                          }
+                        }
+                      ],
+                      "last_hour": 2,
+                      "trajectory_identity": "6213f92248b7185bb624dda8ecbe149099d9dcbcd9b036968876336bc860762d"
+                    },
+                    "physical": {
+                      "anchor": {
+                        "arm_id": "joint_correct_shared",
+                        "cfe_request": {
+                          "denominator": "1",
+                          "numerator": "0"
+                        },
+                        "grid_request": {
+                          "denominator": "1",
+                          "numerator": "0"
+                        },
+                        "power_outage_seed": 0,
+                        "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                        "power_source_hour": 2,
+                        "power_trajectory_id": "power-s",
+                        "split": "training",
+                        "track_id": "shared",
+                        "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                        "workload_occupancy": 1.0,
+                        "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                        "workload_source_hour": 102,
+                        "workload_trace_id": "work-s"
+                      },
+                      "envelope": [
+                        [
+                          "maximum_event_count",
+                          3
+                        ],
+                        [
+                          "maximum_event_duration_hours",
+                          3.0
+                        ],
+                        [
+                          "minimum_recovery_hours",
+                          2.0
+                        ],
+                        [
+                          "normalized_debt_limit",
+                          2.0
+                        ],
+                        [
+                          "normalized_energy_budget",
+                          2.0
+                        ],
+                        [
+                          "recovery_efficiency",
+                          0.8
+                        ],
+                        [
+                          "time_step_hours",
+                          1.0
+                        ]
+                      ],
+                      "state": {
+                        "accounting_period_id": "synthetic-period",
+                        "active_duration_hours": 0.0,
+                        "arm_id": "joint_correct_shared",
+                        "cumulative_call_energy": 0.375,
+                        "event_active": false,
+                        "event_count": 1,
+                        "has_prior_event": true,
+                        "interevent_rest_hours": 1.0,
+                        "observed_violations": [],
+                        "previous_call": 0.0,
+                        "recovery_debt": 0.0,
+                        "track_id": "shared"
+                      }
+                    }
+                  }
+                ]
+              ]
+            },
+            "name": "s",
+            "records": [
+              {
+                "action": {
+                  "cfe_service": {
+                    "denominator": "8",
+                    "numerator": "1"
+                  },
+                  "grid_service": {
+                    "denominator": "4",
+                    "numerator": "1"
+                  },
+                  "tracks": [
+                    [
+                      "shared",
+                      {
+                        "actual_service_power": {
+                          "denominator": "8",
+                          "numerator": "5"
+                        },
+                        "allocations": [],
+                        "recovery": {
+                          "denominator": "1",
+                          "numerator": "0"
+                        }
+                      }
+                    ]
+                  ]
+                },
+                "before": {
+                  "arm_id": "joint_correct_shared",
+                  "last_plan_cursor": null,
+                  "mode": "physical_execution",
+                  "tracks": [
+                    [
+                      "shared",
+                      {
+                        "ledger": {
+                          "accounting_period_id": "synthetic-period",
+                          "cohorts": [],
+                          "last_hour": 0,
+                          "trajectory_identity": "6213f92248b7185bb624dda8ecbe149099d9dcbcd9b036968876336bc860762d"
+                        },
+                        "physical": {
+                          "anchor": {
+                            "arm_id": "joint_correct_shared",
+                            "power_outage_seed": 0,
+                            "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                            "power_source_hour": 0,
+                            "power_trajectory_id": "power-s",
+                            "split": "training",
+                            "track_id": "shared",
+                            "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                            "workload_source_hour": 100,
+                            "workload_trace_id": "work-s"
+                          },
+                          "envelope": [
+                            [
+                              "maximum_event_count",
+                              3
+                            ],
+                            [
+                              "maximum_event_duration_hours",
+                              3.0
+                            ],
+                            [
+                              "minimum_recovery_hours",
+                              2.0
+                            ],
+                            [
+                              "normalized_debt_limit",
+                              2.0
+                            ],
+                            [
+                              "normalized_energy_budget",
+                              2.0
+                            ],
+                            [
+                              "recovery_efficiency",
+                              0.8
+                            ],
+                            [
+                              "time_step_hours",
+                              1.0
+                            ]
+                          ],
+                          "state": {
+                            "accounting_period_id": "synthetic-period",
+                            "active_duration_hours": 0.0,
+                            "arm_id": "joint_correct_shared",
+                            "cumulative_call_energy": 0.0,
+                            "event_active": false,
+                            "event_count": 0,
+                            "has_prior_event": false,
+                            "interevent_rest_hours": null,
+                            "observed_violations": [],
+                            "previous_call": 0.0,
+                            "recovery_debt": 0.0,
+                            "track_id": "shared"
+                          }
+                        }
+                      }
+                    ]
+                  ]
+                },
+                "candidate_step": {
+                  "actions": [
+                    [
+                      "shared",
+                      {
+                        "allocations": [],
+                        "physical": {
+                          "actual_service_power": {
+                            "denominator": "8",
+                            "numerator": "5"
+                          },
+                          "business_recovery_headroom": 1.0,
+                          "call_limit": {
+                            "denominator": "32",
+                            "numerator": "15"
+                          },
+                          "cfe_compatible_surplus": 1.0,
+                          "maximum_recovery_power": 1.0,
+                          "recovery": {
+                            "denominator": "1",
+                            "numerator": "0"
+                          }
+                        }
+                      }
+                    ]
+                  ],
+                  "before": {
+                    "arm_id": "joint_correct_shared",
+                    "last_plan_cursor": null,
+                    "mode": "physical_execution",
+                    "tracks": [
+                      [
+                        "shared",
+                        {
+                          "ledger": {
+                            "accounting_period_id": "synthetic-period",
+                            "cohorts": [],
+                            "last_hour": 0,
+                            "trajectory_identity": "6213f92248b7185bb624dda8ecbe149099d9dcbcd9b036968876336bc860762d"
+                          },
+                          "physical": {
+                            "anchor": {
+                              "arm_id": "joint_correct_shared",
+                              "power_outage_seed": 0,
+                              "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                              "power_source_hour": 0,
+                              "power_trajectory_id": "power-s",
+                              "split": "training",
+                              "track_id": "shared",
+                              "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                              "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                              "workload_source_hour": 100,
+                              "workload_trace_id": "work-s"
+                            },
+                            "envelope": [
+                              [
+                                "maximum_event_count",
+                                3
+                              ],
+                              [
+                                "maximum_event_duration_hours",
+                                3.0
+                              ],
+                              [
+                                "minimum_recovery_hours",
+                                2.0
+                              ],
+                              [
+                                "normalized_debt_limit",
+                                2.0
+                              ],
+                              [
+                                "normalized_energy_budget",
+                                2.0
+                              ],
+                              [
+                                "recovery_efficiency",
+                                0.8
+                              ],
+                              [
+                                "time_step_hours",
+                                1.0
+                              ]
+                            ],
+                            "state": {
+                              "accounting_period_id": "synthetic-period",
+                              "active_duration_hours": 0.0,
+                              "arm_id": "joint_correct_shared",
+                              "cumulative_call_energy": 0.0,
+                              "event_active": false,
+                              "event_count": 0,
+                              "has_prior_event": false,
+                              "interevent_rest_hours": null,
+                              "observed_violations": [],
+                              "previous_call": 0.0,
+                              "recovery_debt": 0.0,
+                              "track_id": "shared"
+                            }
+                          }
+                        }
+                      ]
+                    ]
+                  },
+                  "cursor": {
+                    "arm_id": "joint_correct_shared",
+                    "last_plan_cursor": null,
+                    "mode": "physical_execution",
+                    "tracks": [
+                      [
+                        "shared",
+                        {
+                          "ledger": {
+                            "accounting_period_id": "synthetic-period",
+                            "cohorts": [
+                              {
+                                "created_hour": 1,
+                                "deadline_evidence": "mechanism_assumption",
+                                "due_hour": 2,
+                                "incurred": {
+                                  "denominator": "8",
+                                  "numerator": "3"
+                                },
+                                "missed_at_deadline": null,
+                                "remaining": {
+                                  "denominator": "8",
+                                  "numerator": "3"
+                                }
+                              }
+                            ],
+                            "last_hour": 1,
+                            "trajectory_identity": "6213f92248b7185bb624dda8ecbe149099d9dcbcd9b036968876336bc860762d"
+                          },
+                          "physical": {
+                            "anchor": {
+                              "arm_id": "joint_correct_shared",
+                              "cfe_request": {
+                                "denominator": "8",
+                                "numerator": "1"
+                              },
+                              "grid_request": {
+                                "denominator": "4",
+                                "numerator": "1"
+                              },
+                              "power_outage_seed": 0,
+                              "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                              "power_source_hour": 1,
+                              "power_trajectory_id": "power-s",
+                              "split": "training",
+                              "track_id": "shared",
+                              "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                              "workload_occupancy": 1.0,
+                              "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                              "workload_source_hour": 101,
+                              "workload_trace_id": "work-s"
+                            },
+                            "envelope": [
+                              [
+                                "maximum_event_count",
+                                3
+                              ],
+                              [
+                                "maximum_event_duration_hours",
+                                3.0
+                              ],
+                              [
+                                "minimum_recovery_hours",
+                                2.0
+                              ],
+                              [
+                                "normalized_debt_limit",
+                                2.0
+                              ],
+                              [
+                                "normalized_energy_budget",
+                                2.0
+                              ],
+                              [
+                                "recovery_efficiency",
+                                0.8
+                              ],
+                              [
+                                "time_step_hours",
+                                1.0
+                              ]
+                            ],
+                            "state": {
+                              "accounting_period_id": "synthetic-period",
+                              "active_duration_hours": 1.0,
+                              "arm_id": "joint_correct_shared",
+                              "cumulative_call_energy": 0.375,
+                              "event_active": true,
+                              "event_count": 1,
+                              "has_prior_event": true,
+                              "interevent_rest_hours": null,
+                              "observed_violations": [],
+                              "previous_call": 0.375,
+                              "recovery_debt": 0.375,
+                              "track_id": "shared"
+                            }
+                          }
+                        }
+                      ]
+                    ]
+                  },
+                  "due_hour": 2,
+                  "hour": {
+                    "arm_id": "joint_correct_shared",
+                    "cfe_request": {
+                      "denominator": "8",
+                      "numerator": "1"
+                    },
+                    "grid_request": {
+                      "denominator": "4",
+                      "numerator": "1"
+                    },
+                    "power_outage_seed": 0,
+                    "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                    "power_source_hour": 1,
+                    "power_trajectory_id": "power-s",
+                    "split": "training",
+                    "track_id": "shared",
+                    "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                    "workload_occupancy": 1.0,
+                    "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                    "workload_source_hour": 101,
+                    "workload_trace_id": "work-s"
+                  }
+                },
+                "error": null,
+                "executed_request_projection": {
+                  "arm_id": "joint_correct_shared",
+                  "cfe_request": {
+                    "denominator": "8",
+                    "numerator": "1"
+                  },
+                  "grid_request": {
+                    "denominator": "4",
+                    "numerator": "1"
+                  },
+                  "power_outage_seed": 0,
+                  "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                  "power_source_hour": 1,
+                  "power_trajectory_id": "power-s",
+                  "split": "training",
+                  "track_id": "shared",
+                  "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                  "workload_occupancy": 1.0,
+                  "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                  "workload_source_hour": 101,
+                  "workload_trace_id": "work-s"
+                },
+                "original_current": {
+                  "available_flexibility": 1.0,
+                  "observation": {
+                    "due_hour": 2,
+                    "hour": {
+                      "arm_id": "joint_correct_shared",
+                      "cfe_request": 0.125,
+                      "grid_request": 0.25,
+                      "power_outage_seed": 0,
+                      "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                      "power_source_hour": 1,
+                      "power_trajectory_id": "power-s",
+                      "split": "training",
+                      "track_id": "shared",
+                      "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                      "workload_occupancy": 1.0,
+                      "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                      "workload_source_hour": 101,
+                      "workload_trace_id": "work-s"
+                    },
+                    "limits": {
+                      "business_recovery_headroom": 1.0,
+                      "call_limit": 1.0,
+                      "cfe_compatible_surplus": 1.0,
+                      "maximum_recovery_power": 1.0
+                    }
+                  }
+                },
+                "stage": "hard_deadline_validation"
+              },
+              {
+                "action": {
+                  "cfe_service": {
+                    "denominator": "1",
+                    "numerator": "0"
+                  },
+                  "grid_service": {
+                    "denominator": "1",
+                    "numerator": "0"
+                  },
+                  "tracks": [
+                    [
+                      "shared",
+                      {
+                        "actual_service_power": {
+                          "denominator": "32",
+                          "numerator": "47"
+                        },
+                        "allocations": [
+                          [
+                            1,
+                            {
+                              "denominator": "8",
+                              "numerator": "3"
+                            }
+                          ]
+                        ],
+                        "recovery": {
+                          "denominator": "32",
+                          "numerator": "15"
+                        }
+                      }
+                    ]
+                  ]
+                },
+                "before": {
+                  "arm_id": "joint_correct_shared",
+                  "last_plan_cursor": null,
+                  "mode": "physical_execution",
+                  "tracks": [
+                    [
+                      "shared",
+                      {
+                        "ledger": {
+                          "accounting_period_id": "synthetic-period",
+                          "cohorts": [
+                            {
+                              "created_hour": 1,
+                              "deadline_evidence": "mechanism_assumption",
+                              "due_hour": 2,
+                              "incurred": {
+                                "denominator": "8",
+                                "numerator": "3"
+                              },
+                              "missed_at_deadline": null,
+                              "remaining": {
+                                "denominator": "8",
+                                "numerator": "3"
+                              }
+                            }
+                          ],
+                          "last_hour": 1,
+                          "trajectory_identity": "6213f92248b7185bb624dda8ecbe149099d9dcbcd9b036968876336bc860762d"
+                        },
+                        "physical": {
+                          "anchor": {
+                            "arm_id": "joint_correct_shared",
+                            "cfe_request": {
+                              "denominator": "8",
+                              "numerator": "1"
+                            },
+                            "grid_request": {
+                              "denominator": "4",
+                              "numerator": "1"
+                            },
+                            "power_outage_seed": 0,
+                            "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                            "power_source_hour": 1,
+                            "power_trajectory_id": "power-s",
+                            "split": "training",
+                            "track_id": "shared",
+                            "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                            "workload_occupancy": 1.0,
+                            "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                            "workload_source_hour": 101,
+                            "workload_trace_id": "work-s"
+                          },
+                          "envelope": [
+                            [
+                              "maximum_event_count",
+                              3
+                            ],
+                            [
+                              "maximum_event_duration_hours",
+                              3.0
+                            ],
+                            [
+                              "minimum_recovery_hours",
+                              2.0
+                            ],
+                            [
+                              "normalized_debt_limit",
+                              2.0
+                            ],
+                            [
+                              "normalized_energy_budget",
+                              2.0
+                            ],
+                            [
+                              "recovery_efficiency",
+                              0.8
+                            ],
+                            [
+                              "time_step_hours",
+                              1.0
+                            ]
+                          ],
+                          "state": {
+                            "accounting_period_id": "synthetic-period",
+                            "active_duration_hours": 1.0,
+                            "arm_id": "joint_correct_shared",
+                            "cumulative_call_energy": 0.375,
+                            "event_active": true,
+                            "event_count": 1,
+                            "has_prior_event": true,
+                            "interevent_rest_hours": null,
+                            "observed_violations": [],
+                            "previous_call": 0.375,
+                            "recovery_debt": 0.375,
+                            "track_id": "shared"
+                          }
+                        }
+                      }
+                    ]
+                  ]
+                },
+                "candidate_step": {
+                  "actions": [
+                    [
+                      "shared",
+                      {
+                        "allocations": [
+                          [
+                            1,
+                            {
+                              "denominator": "8",
+                              "numerator": "3"
+                            }
+                          ]
+                        ],
+                        "physical": {
+                          "actual_service_power": {
+                            "denominator": "32",
+                            "numerator": "47"
+                          },
+                          "business_recovery_headroom": 1.0,
+                          "call_limit": {
+                            "denominator": "32",
+                            "numerator": "15"
+                          },
+                          "cfe_compatible_surplus": 1.0,
+                          "maximum_recovery_power": 1.0,
+                          "recovery": {
+                            "denominator": "32",
+                            "numerator": "15"
+                          }
+                        }
+                      }
+                    ]
+                  ],
+                  "before": {
+                    "arm_id": "joint_correct_shared",
+                    "last_plan_cursor": null,
+                    "mode": "physical_execution",
+                    "tracks": [
+                      [
+                        "shared",
+                        {
+                          "ledger": {
+                            "accounting_period_id": "synthetic-period",
+                            "cohorts": [
+                              {
+                                "created_hour": 1,
+                                "deadline_evidence": "mechanism_assumption",
+                                "due_hour": 2,
+                                "incurred": {
+                                  "denominator": "8",
+                                  "numerator": "3"
+                                },
+                                "missed_at_deadline": null,
+                                "remaining": {
+                                  "denominator": "8",
+                                  "numerator": "3"
+                                }
+                              }
+                            ],
+                            "last_hour": 1,
+                            "trajectory_identity": "6213f92248b7185bb624dda8ecbe149099d9dcbcd9b036968876336bc860762d"
+                          },
+                          "physical": {
+                            "anchor": {
+                              "arm_id": "joint_correct_shared",
+                              "cfe_request": {
+                                "denominator": "8",
+                                "numerator": "1"
+                              },
+                              "grid_request": {
+                                "denominator": "4",
+                                "numerator": "1"
+                              },
+                              "power_outage_seed": 0,
+                              "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                              "power_source_hour": 1,
+                              "power_trajectory_id": "power-s",
+                              "split": "training",
+                              "track_id": "shared",
+                              "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                              "workload_occupancy": 1.0,
+                              "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                              "workload_source_hour": 101,
+                              "workload_trace_id": "work-s"
+                            },
+                            "envelope": [
+                              [
+                                "maximum_event_count",
+                                3
+                              ],
+                              [
+                                "maximum_event_duration_hours",
+                                3.0
+                              ],
+                              [
+                                "minimum_recovery_hours",
+                                2.0
+                              ],
+                              [
+                                "normalized_debt_limit",
+                                2.0
+                              ],
+                              [
+                                "normalized_energy_budget",
+                                2.0
+                              ],
+                              [
+                                "recovery_efficiency",
+                                0.8
+                              ],
+                              [
+                                "time_step_hours",
+                                1.0
+                              ]
+                            ],
+                            "state": {
+                              "accounting_period_id": "synthetic-period",
+                              "active_duration_hours": 1.0,
+                              "arm_id": "joint_correct_shared",
+                              "cumulative_call_energy": 0.375,
+                              "event_active": true,
+                              "event_count": 1,
+                              "has_prior_event": true,
+                              "interevent_rest_hours": null,
+                              "observed_violations": [],
+                              "previous_call": 0.375,
+                              "recovery_debt": 0.375,
+                              "track_id": "shared"
+                            }
+                          }
+                        }
+                      ]
+                    ]
+                  },
+                  "cursor": {
+                    "arm_id": "joint_correct_shared",
+                    "last_plan_cursor": null,
+                    "mode": "physical_execution",
+                    "tracks": [
+                      [
+                        "shared",
+                        {
+                          "ledger": {
+                            "accounting_period_id": "synthetic-period",
+                            "cohorts": [
+                              {
+                                "created_hour": 1,
+                                "deadline_evidence": "mechanism_assumption",
+                                "due_hour": 2,
+                                "incurred": {
+                                  "denominator": "8",
+                                  "numerator": "3"
+                                },
+                                "missed_at_deadline": {
+                                  "denominator": "1",
+                                  "numerator": "0"
+                                },
+                                "remaining": {
+                                  "denominator": "1",
+                                  "numerator": "0"
+                                }
+                              }
+                            ],
+                            "last_hour": 2,
+                            "trajectory_identity": "6213f92248b7185bb624dda8ecbe149099d9dcbcd9b036968876336bc860762d"
+                          },
+                          "physical": {
+                            "anchor": {
+                              "arm_id": "joint_correct_shared",
+                              "cfe_request": {
+                                "denominator": "1",
+                                "numerator": "0"
+                              },
+                              "grid_request": {
+                                "denominator": "1",
+                                "numerator": "0"
+                              },
+                              "power_outage_seed": 0,
+                              "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                              "power_source_hour": 2,
+                              "power_trajectory_id": "power-s",
+                              "split": "training",
+                              "track_id": "shared",
+                              "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                              "workload_occupancy": 1.0,
+                              "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                              "workload_source_hour": 102,
+                              "workload_trace_id": "work-s"
+                            },
+                            "envelope": [
+                              [
+                                "maximum_event_count",
+                                3
+                              ],
+                              [
+                                "maximum_event_duration_hours",
+                                3.0
+                              ],
+                              [
+                                "minimum_recovery_hours",
+                                2.0
+                              ],
+                              [
+                                "normalized_debt_limit",
+                                2.0
+                              ],
+                              [
+                                "normalized_energy_budget",
+                                2.0
+                              ],
+                              [
+                                "recovery_efficiency",
+                                0.8
+                              ],
+                              [
+                                "time_step_hours",
+                                1.0
+                              ]
+                            ],
+                            "state": {
+                              "accounting_period_id": "synthetic-period",
+                              "active_duration_hours": 0.0,
+                              "arm_id": "joint_correct_shared",
+                              "cumulative_call_energy": 0.375,
+                              "event_active": false,
+                              "event_count": 1,
+                              "has_prior_event": true,
+                              "interevent_rest_hours": 1.0,
+                              "observed_violations": [],
+                              "previous_call": 0.0,
+                              "recovery_debt": 0.0,
+                              "track_id": "shared"
+                            }
+                          }
+                        }
+                      ]
+                    ]
+                  },
+                  "due_hour": null,
+                  "hour": {
+                    "arm_id": "joint_correct_shared",
+                    "cfe_request": {
+                      "denominator": "1",
+                      "numerator": "0"
+                    },
+                    "grid_request": {
+                      "denominator": "1",
+                      "numerator": "0"
+                    },
+                    "power_outage_seed": 0,
+                    "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                    "power_source_hour": 2,
+                    "power_trajectory_id": "power-s",
+                    "split": "training",
+                    "track_id": "shared",
+                    "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                    "workload_occupancy": 1.0,
+                    "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                    "workload_source_hour": 102,
+                    "workload_trace_id": "work-s"
+                  }
+                },
+                "error": null,
+                "executed_request_projection": {
+                  "arm_id": "joint_correct_shared",
+                  "cfe_request": {
+                    "denominator": "1",
+                    "numerator": "0"
+                  },
+                  "grid_request": {
+                    "denominator": "1",
+                    "numerator": "0"
+                  },
+                  "power_outage_seed": 0,
+                  "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                  "power_source_hour": 2,
+                  "power_trajectory_id": "power-s",
+                  "split": "training",
+                  "track_id": "shared",
+                  "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                  "workload_occupancy": 1.0,
+                  "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                  "workload_source_hour": 102,
+                  "workload_trace_id": "work-s"
+                },
+                "original_current": {
+                  "available_flexibility": 1.0,
+                  "observation": {
+                    "due_hour": null,
+                    "hour": {
+                      "arm_id": "joint_correct_shared",
+                      "cfe_request": 0.0,
+                      "grid_request": 0.0,
+                      "power_outage_seed": 0,
+                      "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                      "power_source_hour": 2,
+                      "power_trajectory_id": "power-s",
+                      "split": "training",
+                      "track_id": "shared",
+                      "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                      "workload_occupancy": 1.0,
+                      "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                      "workload_source_hour": 102,
+                      "workload_trace_id": "work-s"
+                    },
+                    "limits": {
+                      "business_recovery_headroom": 1.0,
+                      "call_limit": 1.0,
+                      "cfe_compatible_surplus": 1.0,
+                      "maximum_recovery_power": 1.0
+                    }
+                  }
+                },
+                "stage": "hard_deadline_validation"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "budget": {
+      "max_constraints": 2000,
+      "max_horizon_hours": 8,
+      "max_scenarios": 2,
+      "max_threads": 1,
+      "max_time_limit_seconds": 1.0,
+      "max_variables": 1000,
+      "purpose": "tiny synthetic test"
+    },
+    "constraints": 47,
+    "contract": "continuous_bidirectional_planner_short_solve_v1",
+    "elapsed_seconds": 0.02715810000017882,
+    "errors": [],
+    "initial_values": [
+      [
+        "allocation[s,shared,0,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "allocation[s,shared,0,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "allocation[s,shared,1,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "capacity",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "cfe_service[s,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "cfe_service[s,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "debt[s,shared,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "debt[s,shared,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "grid_service[s,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "grid_service[s,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "on[s,shared,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "on[s,shared,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "recovery[s,shared,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "recovery[s,shared,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "remaining[s,shared,0,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "remaining[s,shared,0,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "remaining[s,shared,1,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "start[s,shared,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "start[s,shared,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "stop[s,shared,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "stop[s,shared,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "track_call[s,shared,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "track_call[s,shared,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ]
+    ],
+    "inputs": {
+      "accounting_period_id": "synthetic-period",
+      "activity_representation": "open_activity_boundary_outer_relaxation",
+      "curtailment_ramp_per_hour": 1.0,
+      "decision_information_mode": "offline_full_prefix_recourse",
+      "evidence_class": "mechanism_assumption",
+      "initialization_mode": "canonical_zero_period_start",
+      "maximum_capacity": 1.0,
+      "maximum_event_count": 3,
+      "maximum_event_duration_hours": 3.0,
+      "maximum_recovery_power": 1.0,
+      "minimum_event_power": 1e-06,
+      "minimum_recovery_hours": 2.0,
+      "normalized_debt_limit": 2.0,
+      "normalized_energy_budget": 2.0,
+      "period_mode": "single_nonrolling",
+      "planner_scope": "bidirectional_prefix_capacity_relaxation_v1",
+      "recovery_efficiency": 0.8,
+      "recovery_representation": "continuous_nonnegative_recovery_relaxation",
+      "response_time_hours": 1.0,
+      "scenarios": [
+        {
+          "anchor": {
+            "arm_id": "joint_correct_shared",
+            "power_outage_seed": 0,
+            "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+            "power_source_hour": 0,
+            "power_trajectory_id": "power-s",
+            "split": "training",
+            "track_id": "shared",
+            "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+            "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+            "workload_source_hour": 100,
+            "workload_trace_id": "work-s"
+          },
+          "evidence_class": "mechanism_assumption",
+          "name": "s",
+          "observations": [
+            {
+              "available_flexibility": 1.0,
+              "observation": {
+                "due_hour": 2,
+                "hour": {
+                  "arm_id": "joint_correct_shared",
+                  "cfe_request": 0.125,
+                  "grid_request": 0.25,
+                  "power_outage_seed": 0,
+                  "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                  "power_source_hour": 1,
+                  "power_trajectory_id": "power-s",
+                  "split": "training",
+                  "track_id": "shared",
+                  "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                  "workload_occupancy": 1.0,
+                  "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                  "workload_source_hour": 101,
+                  "workload_trace_id": "work-s"
+                },
+                "limits": {
+                  "business_recovery_headroom": 1.0,
+                  "call_limit": 1.0,
+                  "cfe_compatible_surplus": 1.0,
+                  "maximum_recovery_power": 1.0
+                }
+              }
+            },
+            {
+              "available_flexibility": 1.0,
+              "observation": {
+                "due_hour": null,
+                "hour": {
+                  "arm_id": "joint_correct_shared",
+                  "cfe_request": 0.0,
+                  "grid_request": 0.0,
+                  "power_outage_seed": 0,
+                  "power_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                  "power_source_hour": 2,
+                  "power_trajectory_id": "power-s",
+                  "split": "training",
+                  "track_id": "shared",
+                  "workload_normalization_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                  "workload_occupancy": 1.0,
+                  "workload_provenance_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+                  "workload_source_hour": 102,
+                  "workload_trace_id": "work-s"
+                },
+                "limits": {
+                  "business_recovery_headroom": 1.0,
+                  "call_limit": 1.0,
+                  "cfe_compatible_surplus": 1.0,
+                  "maximum_recovery_power": 1.0
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "service_action_mode": "request_bounded_exact_fulfillment",
+      "terminal_mode": "open_carry",
+      "time_step_hours": 1.0
+    },
+    "loaded": true,
+    "lower": {
+      "error": null,
+      "float_hex": "0x1.e000000000000p-2",
+      "number": 0.46875,
+      "raw_repr": "0.46875",
+      "raw_type": "float"
+    },
+    "native_objectives": [],
+    "native_values": [
+      [
+        "allocation[s,shared,0,0]",
+        {
+          "error": null,
+          "float_hex": "0x0.0p+0",
+          "number": 0.0,
+          "raw_repr": "0.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "allocation[s,shared,0,1]",
+        {
+          "error": null,
+          "float_hex": "0x1.8000000000000p-2",
+          "number": 0.375,
+          "raw_repr": "0.375",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "allocation[s,shared,1,1]",
+        {
+          "error": null,
+          "float_hex": "0x0.0p+0",
+          "number": 0.0,
+          "raw_repr": "0.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "capacity",
+        {
+          "error": null,
+          "float_hex": "0x1.e000000000000p-2",
+          "number": 0.46875,
+          "raw_repr": "0.46875",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "cfe_service[s,0]",
+        {
+          "error": null,
+          "float_hex": "0x1.0000000000000p-3",
+          "number": 0.125,
+          "raw_repr": "0.125",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "cfe_service[s,1]",
+        {
+          "error": null,
+          "float_hex": "0x0.0p+0",
+          "number": 0.0,
+          "raw_repr": "0.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "debt[s,shared,0]",
+        {
+          "error": null,
+          "float_hex": "0x1.8000000000000p-2",
+          "number": 0.375,
+          "raw_repr": "0.375",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "debt[s,shared,1]",
+        {
+          "error": null,
+          "float_hex": "0x0.0p+0",
+          "number": 0.0,
+          "raw_repr": "0.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "grid_service[s,0]",
+        {
+          "error": null,
+          "float_hex": "0x1.0000000000000p-2",
+          "number": 0.25,
+          "raw_repr": "0.25",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "grid_service[s,1]",
+        {
+          "error": null,
+          "float_hex": "0x0.0p+0",
+          "number": 0.0,
+          "raw_repr": "0.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "on[s,shared,0]",
+        {
+          "error": null,
+          "float_hex": "0x1.0000000000000p+0",
+          "number": 1.0,
+          "raw_repr": "1.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "on[s,shared,1]",
+        {
+          "error": null,
+          "float_hex": "0x0.0p+0",
+          "number": 0.0,
+          "raw_repr": "0.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "recovery[s,shared,0]",
+        {
+          "error": null,
+          "float_hex": "0x0.0p+0",
+          "number": 0.0,
+          "raw_repr": "0.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "recovery[s,shared,1]",
+        {
+          "error": null,
+          "float_hex": "0x1.e000000000000p-2",
+          "number": 0.46875,
+          "raw_repr": "0.46875",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "remaining[s,shared,0,0]",
+        {
+          "error": null,
+          "float_hex": "0x1.8000000000000p-2",
+          "number": 0.375,
+          "raw_repr": "0.375",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "remaining[s,shared,0,1]",
+        {
+          "error": null,
+          "float_hex": "0x0.0p+0",
+          "number": 0.0,
+          "raw_repr": "0.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "remaining[s,shared,1,1]",
+        {
+          "error": null,
+          "float_hex": "0x0.0p+0",
+          "number": 0.0,
+          "raw_repr": "0.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "start[s,shared,0]",
+        {
+          "error": null,
+          "float_hex": "0x1.0000000000000p+0",
+          "number": 1.0,
+          "raw_repr": "1.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "start[s,shared,1]",
+        {
+          "error": null,
+          "float_hex": "0x0.0p+0",
+          "number": 0.0,
+          "raw_repr": "0.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "stop[s,shared,0]",
+        {
+          "error": null,
+          "float_hex": "0x0.0p+0",
+          "number": 0.0,
+          "raw_repr": "0.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "stop[s,shared,1]",
+        {
+          "error": null,
+          "float_hex": "0x1.0000000000000p+0",
+          "number": 1.0,
+          "raw_repr": "1.0",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "track_call[s,shared,0]",
+        {
+          "error": null,
+          "float_hex": "0x1.8000000000000p-2",
+          "number": 0.375,
+          "raw_repr": "0.375",
+          "raw_type": "float"
+        }
+      ],
+      [
+        "track_call[s,shared,1]",
+        {
+          "error": null,
+          "float_hex": "0x0.0p+0",
+          "number": 0.0,
+          "raw_repr": "0.0",
+          "raw_type": "float"
+        }
+      ]
+    ],
+    "numerical_limits": [
+      [
+        "feasibility_tolerance",
+        1e-06
+      ],
+      [
+        "optimality_tolerance",
+        1e-06
+      ],
+      [
+        "integer_feasibility_tolerance",
+        1e-06
+      ],
+      [
+        "objective_consistency_tolerance",
+        1e-09
+      ]
+    ],
+    "passed_options": [
+      [
+        "dual_feasibility_tolerance",
+        1e-09
+      ],
+      [
+        "mip_abs_gap",
+        0.0
+      ],
+      [
+        "mip_feasibility_tolerance",
+        1e-09
+      ],
+      [
+        "mip_rel_gap",
+        1e-08
+      ],
+      [
+        "primal_feasibility_tolerance",
+        1e-09
+      ],
+      [
+        "random_seed",
+        0
+      ],
+      [
+        "threads",
+        1
+      ],
+      [
+        "time_limit",
+        1.0
+      ]
+    ],
+    "post_structure": "0701c1f5aa221354c9f6641265db79ac4d43f416a1ecc1aa850412bfb1f4a293",
+    "pre_structure": "0701c1f5aa221354c9f6641265db79ac4d43f416a1ecc1aa850412bfb1f4a293",
+    "preload_structure": "0701c1f5aa221354c9f6641265db79ac4d43f416a1ecc1aa850412bfb1f4a293",
+    "preload_values": [
+      [
+        "allocation[s,shared,0,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "allocation[s,shared,0,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "allocation[s,shared,1,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "capacity",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "cfe_service[s,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "cfe_service[s,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "debt[s,shared,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "debt[s,shared,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "grid_service[s,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "grid_service[s,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "on[s,shared,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "on[s,shared,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "recovery[s,shared,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "recovery[s,shared,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "remaining[s,shared,0,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "remaining[s,shared,0,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "remaining[s,shared,1,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "start[s,shared,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "start[s,shared,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "stop[s,shared,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "stop[s,shared,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "track_call[s,shared,0]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ],
+      [
+        "track_call[s,shared,1]",
+        {
+          "error": "missing_value",
+          "float_hex": null,
+          "number": null,
+          "raw_repr": "None",
+          "raw_type": "NoneType"
+        }
+      ]
+    ],
+    "problem_records": [
+      {
+        "constraints": {
+          "error": "nonfinite_value",
+          "float_hex": "nan",
+          "number": null,
+          "raw_repr": "nan",
+          "raw_type": "float"
+        },
+        "lower": {
+          "error": null,
+          "float_hex": "0x1.e000000000000p-2",
+          "number": 0.46875,
+          "raw_repr": "0.46875",
+          "raw_type": "float"
+        },
+        "objectives": {
+          "error": null,
+          "float_hex": "0x1.0000000000000p+0",
+          "number": 1.0,
+          "raw_repr": "1",
+          "raw_type": "int"
+        },
+        "sense": {
+          "member_name": "minimize",
+          "raw_repr": "<ObjectiveSense.minimize: 1>",
+          "type_name": "pyomo.common.enums.ObjectiveSense"
+        },
+        "upper": {
+          "error": null,
+          "float_hex": "0x1.e000000000000p-2",
+          "number": 0.46875,
+          "raw_repr": "0.46875",
+          "raw_type": "float"
+        },
+        "variables": {
+          "error": "nonfinite_value",
+          "float_hex": "nan",
+          "number": null,
+          "raw_repr": "nan",
+          "raw_type": "float"
+        }
+      }
+    ],
+    "returned_options": [
+      [
+        "dual_feasibility_tolerance",
+        1e-09
+      ],
+      [
+        "mip_abs_gap",
+        0.0
+      ],
+      [
+        "mip_feasibility_tolerance",
+        1e-09
+      ],
+      [
+        "mip_rel_gap",
+        1e-08
+      ],
+      [
+        "primal_feasibility_tolerance",
+        1e-09
+      ],
+      [
+        "random_seed",
+        0
+      ],
+      [
+        "threads",
+        1
+      ],
+      [
+        "time_limit",
+        1.0
+      ]
+    ],
+    "solution_count": 1,
+    "solution_statuses": [
+      {
+        "member_name": "optimal",
+        "raw_repr": "<SolutionStatus.optimal: 'optimal'>",
+        "type_name": "pyomo.opt.results.solution.SolutionStatus"
+      }
+    ],
+    "solve_calls": 1,
+    "solver_records": [
+      [
+        {
+          "member_name": "ok",
+          "raw_repr": "<SolverStatus.ok: 'ok'>",
+          "type_name": "pyomo.opt.results.solver.SolverStatus"
+        },
+        {
+          "member_name": "optimal",
+          "raw_repr": "<TerminationCondition.optimal: 'optimal'>",
+          "type_name": "pyomo.opt.results.solver.TerminationCondition"
+        }
+      ]
+    ],
+    "solver_status": {
+      "member_name": "ok",
+      "raw_repr": "<SolverStatus.ok: 'ok'>",
+      "type_name": "pyomo.opt.results.solver.SolverStatus"
+    },
+    "specification": {
+      "expected_package_version": "1.15.1",
+      "feasibility_tolerance": 1e-09,
+      "integer_feasibility_tolerance": 1e-09,
+      "mip_relative_gap": 1e-08,
+      "name": "highs",
+      "optimality_tolerance": 1e-09,
+      "random_seed": 0,
+      "tee": false,
+      "threads": 1,
+      "time_limit_seconds": 1.0
+    },
+    "termination": {
+      "member_name": "optimal",
+      "raw_repr": "<TerminationCondition.optimal: 'optimal'>",
+      "type_name": "pyomo.opt.results.solver.TerminationCondition"
+    },
+    "upper": {
+      "error": null,
+      "float_hex": "0x1.e000000000000p-2",
+      "number": 0.46875,
+      "raw_repr": "0.46875",
+      "raw_type": "float"
+    },
+    "variables": 23,
+    "versions_after": [
+      [
+        "pyomo",
+        "6.10.1"
+      ],
+      [
+        "solver",
+        "1.15.1"
+      ]
+    ],
+    "versions_before": [
+      [
+        "pyomo",
+        "6.10.1"
+      ],
+      [
+        "solver",
+        "1.15.1"
+      ]
+    ]
+  }
+}

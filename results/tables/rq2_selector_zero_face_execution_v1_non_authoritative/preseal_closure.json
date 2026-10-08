@@ -1,0 +1,26 @@
+{
+  "episode_integrated": false,
+  "evidence_inventory_sha256": "057d9542f17a078da8052222b10363e14e44c3ce3d3bdcf5d76764ddc7b34fa1",
+  "formal_result": false,
+  "git_diff_check_passed": true,
+  "normal_sealed_members_unchanged": 150,
+  "official_verdict": null,
+  "preseal_findings_closed": true,
+  "preseal_reviewer": "/root/normal_cost_preseal",
+  "schema": "rq2_selector_zero_face_execution_preseal_closure_v1",
+  "selector_sealed_members_unchanged": 94,
+  "synthetic_job_evidence": true,
+  "tests": [
+    {
+      "command": "python -B -m pytest -q -p no:cacheprovider tests/test_rq2_selector_zero_face_execution_v1.py",
+      "passed": 52,
+      "seconds": 54.05
+    },
+    {
+      "command": "python -B -m pytest -q -p no:cacheprovider tests/test_rq2_scale_selector_store_v1.py tests/test_rq2_scale_selector_worker_v1.py tests/test_rq2_scale_selector_controller_v1.py",
+      "passed": 46,
+      "seconds": 63.0
+    }
+  ],
+  "whole_task_resources_verified": false
+}

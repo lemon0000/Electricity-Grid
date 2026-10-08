@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-30",
+  "files": {
+    "docs/model_spec/rq2_normal_h1_chunk_journal_v1.md": "cc5221a2169a8aeaf9524674bbaa539cb1f2e4816c7d2f6a04b83644017f6aa7",
+    "results/tables/rq2_normal_h1_chunk_journal_v1_non_authoritative/sample_checks.json": "fe7c1889deafba64bd330fec98a56cccc9817e168685ccc07b04851828ebae64",
+    "results/tables/rq2_normal_h1_chunk_journal_v1_non_authoritative/sample_non_authoritative/h1_chunk_journal.sqlite3": "e96df9d3088e58d74556d2cbe0087ff4c3a006bf152289c92e980eed33bd0275",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_chunk_journal.py": "586ab66d58ea5f9b477a47741a3e258f2be202699bc3ecac00d94d4cca3750aa",
+    "tests/test_rq2_normal_h1_chunk_journal_v1.py": "f9c15b7bcea1069e33e0d1b5f6fd2f7c1db756dbef7880efd3476910ac26ec36"
+  },
+  "formal_execution_ready": false,
+  "formal_resource_contract_approved": false,
+  "formal_result": false,
+  "formal_run_started": false,
+  "limitations": [
+    "Hour-local opaque byte storage only; no stage semantics, caller-intent recovery or normal/source integration.",
+    "Full prefix scans on every append/read cause quadratic repeated I/O for stage-wise use; successor needs separately validated single-pass/incremental protocol.",
+    "Logical bytes exclude SQLite pages/indexes/rollback journals/temp/safety reserves; no GB-scale or real-native run performed.",
+    "Chunk partition affects storage identity; no cross-producer canonical partition claimed.",
+    "Old one-BLOB implementation and full resource admission remain blocked."
+  ],
+  "native_execution_authenticated": false,
+  "numerical_chain_verified": false,
+  "physical_space_reserved": false,
+  "preservation": {
+    "cfe_drift_count": 0,
+    "cfe_members_checked": 587,
+    "prior_shape_drift_count": 0,
+    "prior_shape_files_checked": 11
+  },
+  "production_sealed": false,
+  "review": {
+    "findings_closed": true,
+    "independent_targeted_tests_passed": 47,
+    "independent_test_seconds": 5.79,
+    "official_verdict": null,
+    "reviewer": "/root/cfe_preallocation_official",
+    "stage": "PRE_SEAL_AUDIT"
+  },
+  "sample_kind": "synthetic_opaque_bytes",
+  "sample_payload_bytes": 3145728,
+  "sample_solver_calls": 0,
+  "schema": "h1_chunk_journal_development_checks_v1",
+  "source_authenticated": false,
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_chunk_journal_v1.py",
+      "passed": 47,
+      "scope": "final targeted",
+      "seconds": 5.6
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_chunk_journal_v1.py tests/test_rq2_normal_h1_projection_store_v1.py",
+      "passed": 52,
+      "scope": "related before final header/guard hardening, final targeted covers hardening",
+      "seconds": 35.23
+    }
+  ]
+}

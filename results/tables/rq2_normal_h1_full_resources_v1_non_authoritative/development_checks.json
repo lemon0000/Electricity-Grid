@@ -1,0 +1,83 @@
+{
+  "schema": "h1_full_normal_resource_development_checks_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "date": "2026-09-30",
+  "files": {
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_full_resource_contract.py": "38ce146a32fd1f28b7e40d6199761d6e8cdb5fa8577123ea67ef307a59da866f",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_full_attempt_anchor.py": "11a5abe756a101619e63e6f34a4a1a1f122cec0651169de908c393c122dc789b",
+    "tests/test_rq2_normal_h1_full_resource_contract_v1.py": "558d79bce31a8d8237c6f82fdd6f1e36646d7f786aa605f6193c1e7a8a6b86fc",
+    "tests/test_rq2_normal_h1_full_attempt_anchor_v1.py": "914db92e898c9f6004bc06bf45e5dc3b7d375201a29d88b1da4ab5ff44404518",
+    "docs/model_spec/rq2_normal_h1_full_resource_contract_v1.md": "e13c91eb1cbd9bb42806e0c580a5b03eacce837171488133a023c19f8b95922f",
+    "experiments/audit_rq2_normal_h1_full_inventory_v1.py": "003fd6e6357f9f54d5da019e34dc9d15efdffc151ee78b62df61793fef0c3775",
+    "results/tables/rq2_normal_h1_full_resources_v1_non_authoritative/full_inventory.json": "92cd727c346ecd1508df340b4cef91426a29ac1697be43d493ee58d33d602247"
+  },
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_full_resource_contract_v1.py tests/test_rq2_normal_h1_full_attempt_anchor_v1.py",
+      "passed": 33,
+      "seconds": 395.88,
+      "scope": "Initial draft, including all 385 anchor records and exact 236 boundary; before dependency identity expansion.",
+      "anchor_sha256": "d73d61529646d94d247bfdd86a0c236dacd401dd374c092e6c7c4189b0e2aa68",
+      "final_implementation_timing": false
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_full_resource_contract_v1.py tests/test_rq2_normal_h1_full_attempt_anchor_v1.py tests/test_rq2_normal_h1_attempt_anchor_v1.py tests/test_rq2_execution_resource_contract_v1.py tests/test_rq2_declared_task_process_v1.py -k 'not full_192_hour_anchor_inventory'",
+      "passed": 67,
+      "deselected": 1,
+      "seconds": 3.91,
+      "exit_code": 0,
+      "scope": "Final affected bindings and dependency drift; old anchor/resource/process regression. Capacity/scan algorithm unchanged; earlier full inventory loop not repeated."
+    }
+  ],
+  "review": {
+    "stage": "PRE_SEAL_AUDIT",
+    "reviewer": "/root/cfe_preallocation_official",
+    "findings_closed": true,
+    "independent_read_only": true,
+    "reviewer_reran_tests": false,
+    "reviewer_reran_runner": false,
+    "official_verdict": null
+  },
+  "inventory_artifact": "results/tables/rq2_normal_h1_full_resources_v1_non_authoritative/full_inventory.json",
+  "inventory_sha256": "92cd727c346ecd1508df340b4cef91426a29ac1697be43d493ee58d33d602247",
+  "preservation": [
+    {
+      "manifest": "configs/rq2_cfe_preallocation_v1.SHA256SUMS.json",
+      "sha256": "2ad227ff41c9e9419329568457403ec45b35a2f34114809079f6525bed5f6623",
+      "members": 587,
+      "drift_count": 0
+    },
+    {
+      "manifest": "results/tables/rq2_normal_h1_shape_v1_non_authoritative/development_checks.json",
+      "sha256": "bc7d9ad3717fa25236fe5908d04b10d96e0726ddaee21fda0d6ae78940ca26a5",
+      "members": 11,
+      "drift_count": 0
+    },
+    {
+      "manifest": "results/tables/rq2_normal_h1_scoped_inspection_v1_non_authoritative/development_checks.json",
+      "sha256": "ad62d9ee6404ec8362482ad1a90a0476a9751fc7081da3f0971c2ca1dcb4acbb",
+      "members": 9,
+      "drift_count": 0
+    },
+    {
+      "manifest": "results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/development_checks.json",
+      "sha256": "95cadc832ff7438bf254abe8c052a48b30507450db4fce83fe8979d575b6d0ab",
+      "members": 20,
+      "drift_count": 0
+    }
+  ],
+  "solver_calls": 0,
+  "production_sealed": false,
+  "formal_run_started": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "whole_task_resources_verified": false,
+  "limitations": [
+    "Resource arithmetic and endpoint shape only; no full collector/controller integration yet.",
+    "Time, overhead, commit and host/volume declarations remain absent for an actual run.",
+    "Inventory content ceilings are not measured bytes, disk reservations or minimum required disk.",
+    "Endpoint zero locks may be infeasible; no accepted future carry or numerical certificate.",
+    "Full anchor retains complete scans; no long-run I/O bound is claimed.",
+    "Full study inventory, common Rref/A publication and full-support capacity bounds remain open."
+  ]
+}

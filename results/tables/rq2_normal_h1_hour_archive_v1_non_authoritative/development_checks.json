@@ -1,0 +1,66 @@
+{
+  "actual_rts_numerical_chain_replayed": false,
+  "actual_rts_stage_declaration_checked": 232,
+  "date": "2026-09-30",
+  "files": {
+    "docs/model_spec/rq2_normal_h1_hour_archive_v1.md": "764f4f3f4d721f2b21303980b149f890e82bcb2fa1bfd4be713e4223676d07b2",
+    "results/tables/rq2_normal_h1_hour_archive_v1_non_authoritative/sample_checks.json": "2469f189640eba07c8a5e668d260edbfa666a6bf673220079aec0ad850e3bbc6",
+    "results/tables/rq2_normal_h1_hour_archive_v1_non_authoritative/sample_hour_non_authoritative/h1_chunk_journal.sqlite3": "45f5cd3e331c016f83db6a76376b0fa8bcadffdc5512823dd43b254f07ff8481",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_hour_archive.py": "c697d6939c9a9fd2b34f43863882b0d2233d82cf823955e570ed51fe040c9cd2",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_hour_replay.py": "f30832505737f692e0ed59fad316bd953e3cc5629450bc27151814fe0dddde60",
+    "tests/test_rq2_continuous_grid_normal_v1.py": "77c16bd08854c5b9bc1b9a85fe88371fb61ecfaa1b842420c9a135f3c36d90f5",
+    "tests/test_rq2_normal_h1_hour_archive_v1.py": "83cfc19b6ed6588315566839b46cd19e1d96c17c47e42a0519d6b6cf396de1e6",
+    "tests/test_rq2_normal_h1_short_solve_v1.py": "11cd62d782772f24e10a034d9c271d61df9b2939723d4a36b4210dea2aab03d7",
+    "tests/test_rq2_normal_h1_source_v1.py": "946f93d3591b3099d337f6aff7cf99cf3a211e482b5dbab510c7f224ee97aa17",
+    "tests/test_rq2_objective_provenance_run_v1.py": "5ab35b24eaae078aec2d5e75bb0005aecad2c75704b4c1367b433c2f5660e3cc"
+  },
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "formal_run_started": false,
+  "limitations": [
+    "Supplied-report archive only, not collector-owned native sink or actual source authentication.",
+    "Archive writes rescan and numerically replay prefixes; quadratic stage-wise write costs remain unadmitted.",
+    "No durable parent intent/unknown recovery or complete physical/commit/wall resource contract.",
+    "New replay size domain is not a native invocation budget; old 20-stage/32MiB gates unchanged."
+  ],
+  "native_execution_authenticated": false,
+  "old_projection_bytes_equal": true,
+  "parent_intent_verified": false,
+  "preservation": {
+    "cfe_drift_count": 0,
+    "cfe_members_checked": 587,
+    "normal_outer_anchor_unchanged": true,
+    "old_science_draft_anchor_unchanged": true,
+    "prior_chunk_files_checked": 5,
+    "prior_development_drift_count": 0,
+    "prior_shape_files_checked": 11
+  },
+  "production_sealed": false,
+  "retained_three_stage_reports_replayed": true,
+  "review": {
+    "findings_closed": true,
+    "independent_seconds": 50.44,
+    "independent_targeted_passed": 41,
+    "official_verdict": null,
+    "reviewer": "/root/cfe_preallocation_official",
+    "stage": "PRE_SEAL_AUDIT"
+  },
+  "schema": "h1_hour_archive_development_checks_v1",
+  "solver_calls": 0,
+  "source_authenticated": false,
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_hour_archive_v1.py",
+      "passed": 41,
+      "scope": "final targeted",
+      "seconds": 49.96
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_hour_archive_v1.py tests/test_rq2_normal_h1_chunk_journal_v1.py tests/test_rq2_normal_h1_model_v1.py tests/test_rq2_normal_numerical_candidate_v1.py",
+      "passed": 145,
+      "scope": "final related regression",
+      "seconds": 56.36
+    }
+  ]
+}

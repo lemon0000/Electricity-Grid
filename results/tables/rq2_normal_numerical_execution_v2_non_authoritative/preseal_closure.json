@@ -1,0 +1,52 @@
+{
+  "audit_solver_calls": 0,
+  "evidence_inventory_sha256": "13410a24b2fe877898f0f6a57f49bd8e411540a9358c84bd718ebd3f1607b019",
+  "formal_result": false,
+  "git_diff_check_passed": true,
+  "hours": 3,
+  "native_execution_authenticated": false,
+  "native_solver_calls": 1,
+  "official_verdict": null,
+  "preseal_findings_closed": true,
+  "preseal_reviewer": "/root/normal_resources_preseal_v2",
+  "prior_sealed_members_unchanged": {
+    "rq2_normal_numerical_acceptance_v1": 150,
+    "rq2_normal_numerical_execution_v1": 228,
+    "rq2_normal_numerical_source_v1": 189,
+    "rq2_selector_zero_face_episode_v1": 246,
+    "rq2_selector_zero_face_execution_v1": 132,
+    "rq2_selector_zero_face_v1": 94
+  },
+  "related_processes_absent_before_seal": true,
+  "repaired_official_findings": [
+    "restore_process_peak_working_set_acceptance_gate",
+    "enforce_full_core_evidence_payload_cap",
+    "check_outer_elapsed_covers_native_Runtime"
+  ],
+  "schema": "rq2_normal_numerical_execution_preseal_closure_v2",
+  "source_preparation_solver_calls": 0,
+  "synthetic_source": true,
+  "test_batches_overlap": true,
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -x -q -p no:cacheprovider tests/test_rq2_normal_numerical_resources_v2.py tests/test_rq2_normal_numerical_execution_v2.py tests/test_rq2_normal_numerical_controller_v2.py tests/test_rq2_normal_numerical_failure_windows_v2.py tests/test_rq2_normal_numerical_transport_identity_v2.py",
+      "passed": 74,
+      "seconds": 817.87,
+      "stage": "full_batch_collected_before_additional_live_runtime_test"
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -x -q -p no:cacheprovider tests/test_rq2_normal_numerical_resources_v2.py::test_inconsistent_native_runtime_cannot_publish_execution_receipt",
+      "passed": 1,
+      "seconds": 16.33,
+      "stage": "additional_live_runtime_case"
+    },
+    {
+      "passed": 4,
+      "scope": "post_native_and_post_serialization_receipt_refusal_offline_core_cap_live_runtime",
+      "seconds": 68.83,
+      "stage": "independent_preseal_resource_counterexamples"
+    }
+  ],
+  "units": 1,
+  "whole_task_resources_verified": false
+}

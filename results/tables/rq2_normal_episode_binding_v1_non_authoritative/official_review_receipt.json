@@ -1,0 +1,62 @@
+{
+  "bound_members_verified": 518,
+  "evidence_inventory_sha256": "91ab8d751338da12d66e3ad79de1b0122767ac51c2f165e62fff681cd31a4636",
+  "executable_resume_available": false,
+  "findings": [],
+  "formal_result": false,
+  "formal_run_authority": false,
+  "fresh_context": true,
+  "fresh_tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_episode_binding_guards_v1.py tests/test_rq2_normal_episode_binding_v1.py::test_full_normal_source_binds_existing_four_arm_inputs_without_solver tests/test_rq2_normal_episode_binding_v1.py::test_reencoded_forged_information_audit_and_policy_are_rejected tests/test_rq2_normal_episode_binding_v1.py::test_complete_plan_mismatch_refused_even_when_episode_budget_rebinds",
+      "passed": 11,
+      "seconds": 388.81
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_episode_source_inventory_v1.py tests/test_rq2_normal_episode_transport_v1.py",
+      "passed": 7,
+      "seconds": 153.87
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_episode_pipeline_v1.py::test_real_bound_execute_and_independent_audit tests/test_rq2_normal_episode_pipeline_failures_v1.py::test_member_drift_after_launch_prevents_release",
+      "passed": 2,
+      "seconds": 350.37
+    }
+  ],
+  "independent_review_gate_closed": true,
+  "inherited_member_comparison": {
+    "changed": 0,
+    "members": 412,
+    "removed": 0
+  },
+  "native_execution_authenticated": false,
+  "open_gates": [
+    "complete_scientific_service_contract",
+    "capacity_training_holdout",
+    "full_support_resources",
+    "candidate_open_activity_planner_admission"
+  ],
+  "post_test_hashes_unchanged": true,
+  "prior_sealed_members_unchanged": [
+    264,
+    228,
+    189,
+    150,
+    94,
+    132,
+    246
+  ],
+  "receipt_role": "root_record_of_independent_reviewer_verdict",
+  "recorded_by": "/root",
+  "reviewer_agent": "/root/normal_episode_official_v1",
+  "reviewer_role": "sol_reviewer",
+  "rigorous_exact_optimality_certified": false,
+  "schema": "rq2_normal_episode_binding_official_review_receipt_v1",
+  "scope": "normal_archive_to_mixed_episode_persistent_source_binding",
+  "sealed_outer": "configs/rq2_normal_episode_binding_v1.OUTER.SHA256SUMS.json",
+  "sealed_outer_sha256": "7c47018cff8267575c3cbe218cc6225969c6c5c20a25e22eefd52c9f0c1d2567",
+  "security_certified": false,
+  "snapshot_files_verified": 83,
+  "verdict": "PASS",
+  "whole_task_resources_verified": false
+}

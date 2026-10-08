@@ -1,0 +1,19 @@
+{
+  "status": "R2_DEVELOPMENT_REVIEW_CLOSED",
+  "formal_result": false,
+  "review_gate": false,
+  "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_mixed_enrollment_prefix_v1.py",
+  "result": "13 passed in 24.67s",
+  "prior_session": "82332 unavailable; no related process before rerun",
+  "reviewer": "/root/enrollment_review",
+  "review": "read-only independent review; no open substantive finding; reviewer used root fresh test result",
+  "limitations": [
+    "caller-declared partition only, not a registered service score",
+    "historical grid archives not replayed",
+    "nonzero anchor, later repayment/missed deadline partition and positive shortfall partition not separately exercised by this integration suite"
+  ],
+  "files": {
+    "experiments/summarize_rq2_mixed_enrollment_prefix_v1.py": "235c9ff40bc938637e001d2006d4cf223d1bdcf58e43a5d4785254966366576e",
+    "tests/test_rq2_mixed_enrollment_prefix_v1.py": "95056e93ff51fecd0a7f33201d81abeb0148e341e3206da4e88b302a13a0c0f6"
+  }
+}

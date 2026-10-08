@@ -1,0 +1,43 @@
+# Episode执行与审计持久控制器
+
+状态：DRAFT_NONAUTHORITATIVE。`scale_episode_controller.py`复用固定episode worker、已有Windows Job原语及独占文件写入。`supervise_episode`只接受新non-authoritative root，不支持resume、自动重试或正式结果发布。
+
+## 完整TaskEnvelope的预算分解
+
+`PipelineBudget`将同一原始episode TaskEnvelope分给execute worker、audit worker及控制器，不另建总资源上限，也不借用全局SerialResourceBudget.controller_seconds补单任务不足。创建root之前要求：
+
+- execute wall不少于已有`resources.admit`返回的完整inner phase wall/quiet加episode non-solver allowance。
+- execute wall+quiet、audit wall+quiet及controller_seconds之和不超过TaskEnvelope.max_wall_seconds。两worker可使用旧TaskProcessBudget（3600秒开发cap）或新的DeclaredTaskProcessBudget；新预算必须绑定本次原始资源合同摘要及完全相同的TaskEnvelope。
+- execute Job覆盖episode父进程追加commit与串行inner Job；execute/audit的最大Job限额不超过envelope Job限额。最外层控制器的追加commit使用SerialResourceBudget.supervisor_additional_commit_bytes，host检查同时计入；并独立采样父进程lifetime peak working set。working set不等于commit。
+- archive包含既有episode全部phase与父metadata预留，再加outer request/result、两套intent/launch/observation/receipt的10个最大payload及1-byte根锁；scratch包含既有全部phase scratch与两个worker scratch，均不回收。
+- 总条目上限至少覆盖episode内部条目上限、14个固定outer条目以及显式outer scratch内部条目预留。
+
+控制器开始即计时；运行时controller elapsed为pipeline elapsed减已记录worker lifecycle elapsed，当前已创建的worker计时也归其lifecycle。该生命周期包含创建、悬挂期间launch持久化、等待及静默处理；其覆盖成本不会因两worker提前退出而全部借给controller。每次检查限制独立controller allowance，下一phase前要求剩余wall覆盖所有剩余worker限额/quiet及剩余controller allowance。
+
+递归扫描拒绝reparse、非regular及多链接文件，分别统计outer scratch、episode内层scratch与archive；两个outer scratch分别受各自字节/共享条目预留约束。下一phase的host需求减去已测保留字节，避免重复计为未来分配；每个目录需求下限1 byte是既有host工具的保守正值约束。写入前增加待写字节及条目检查。以上仍是声明和采样，不是OS wall/disk硬quota或全pipeline commit保证。最后写入后的检查或关闭失败可能留下result文件；调用成功与结果验收必须同时具备，不能只凭文件存在认定完成。
+
+## 两阶段事务
+
+1. 固定typed输入、原始资源计划、环境摘要、实现与可执行文件身份，以及初始宿主/卷绑定；持有新pipeline root lease。
+2. 独占保存request；execute intent在进程创建前落盘，launch记录PID/creation-time在release前落盘。worker使用execute scratch。
+3. 等待整个execute Job静默，保存observation，核正常退出、资源字段/flags及exact receipt。持episode lease核实header/有序小时pins与归档一致，并保存全证据文件身份/摘要快照。
+4. 将execute pins固化到audit intent，另起audit Job及独立scratch；传给auditor的episode环境身份保持execute时定义。
+5. audit正常退出且Job静默后立即持有episode lease并比较快照，然后读取exact receipt及完整报告，从归档phase receipts核selected/unresolved计数。保持episode lease，核所有retained outer记录后独占写最终result并回查。
+
+episode根锁由lease检查身份/持有状态；Windows锁住首字节时不另开流读取它，其余证据文件继续核完整摘要。audit后episode lease保持到最终结果发布结束；即使它关闭异常，finally也尝试关闭pipeline lease。失败保留既有记录，不把缺少result、timeout或非正常退出写成数学不可行或零调用。
+
+## 证据边界
+
+`observed_window_replayed`表示声明观察窗口执行后被独立worker回放，不表示所有恢复债务清偿或完整连续服务可持续。formal_result、whole_task_resources_verified、complete_service_certified、executable_resume_available均false；资源样本显式保留hard_parent_wall_limit、hard_parent_commit_limit、hard_disk_quota=false。
+
+全研究任务清单完整性、normal原始来源/最优性、实际长预算运行能力、输入数据与机制参数、末端右删失及科学验收仍各自需要证据。controller处于最外层、只采样自身资源；它的最终写入和关闭尚无更外层硬监督。此实现不授权正式运行，也不放宽旧预算、gap或残差门。
+
+## 验证
+
+首轮锁文件读取失败已定位并修复。补独立controller allowance、条目覆盖、exact进程观察及两lease清理后，19项通过（127.97秒）。后续剩余host需求修正后4项通过（49.36秒）；audit读取锁窗口修复后，真实pipeline持锁反例与晚期close异常2项通过（87.97秒、18项未选择、exit0）。较早全组19项不表述为最终字节全组结果。限定独立pre-seal findings已闭合，git diff --check通过；所有case为短合成/tmp，没有正式运行。
+
+## 2026-09-28 显式声明的外层进程预算
+
+新增declared_task_process.py，复用旧NormalTaskChild生命周期，仅替换预算身份校验。DeclaredTaskProcessBudget包含原始资源合同SHA、完整TaskEnvelope和实际进程预算；controller重新绑定当前计划与envelope。用于复用旧字段校验的1秒预算保留完整process/job commit、sample和quiet，仅参与校验；实际child持有完整新预算，deadline不被截短。旧接口及3600秒上限不变。
+
+新身份绑定完整新预算、旧命令/环境/宿主/可执行文件身份及实现源码。只接入outer execute/audit；episode内层phase仍用旧短预算，实际长任务能力、normal数值预算和全任务资源认证仍待验证。超过3600秒的测试通过注入已用时间验证，不实际等待或启动长求解。

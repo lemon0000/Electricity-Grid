@@ -1,0 +1,72 @@
+{
+  "complete_service_certificate": false,
+  "date": "2026-09-30",
+  "files": {
+    "docs/model_spec/rq2_normal_h1_episode_v1.md": "d1fea6ec4ea4047fa4e3332247a3e3efe097df98f1cc79f32c14fae2cb0c6668",
+    "results/tables/rq2_normal_h1_episode_v1_non_authoritative/sample_checks.json": "a54c5574a77280c3ae6fb6dc5cffbe29c87b174d5c8208adf5d98b8767a51f12",
+    "results/tables/rq2_normal_h1_episode_v1_non_authoritative/sample_episode_non_authoritative/execution.lock": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "results/tables/rq2_normal_h1_episode_v1_non_authoritative/sample_episode_non_authoritative/h1_normal_episode.sqlite3": "d0f83e52655a55ebc622420ddf93f425ddc4b21daef5e9b78878ad634dbd21ec",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_episode.py": "0f44fa23bb07d204225f9a6d67cd7e84e5ba745f93ff10dead85ecb3f3a1bb07",
+    "tests/test_rq2_normal_h1_episode_v1.py": "d78035542eb4d08fd03db9487707f64c0fa7845db1d84844ebaa9789507ab1bc"
+  },
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "formal_run_started": false,
+  "limitations": [
+    "caller_declared_current_observations",
+    "normal_only",
+    "no_cross_episode_common_key_publication",
+    "failed_derived_diagnostics_summaries_not_replayed",
+    "logical_byte_capacity_not_physical_disk_reservation",
+    "no_Rref_or_A_or_full_support_capacity"
+  ],
+  "native_execution_authenticated": false,
+  "preservation": {
+    "cfe_preallocation_members": 587,
+    "drift": []
+  },
+  "production_sealed": false,
+  "review": {
+    "actual_checks": [
+      "source_test_spec_read",
+      "sha256",
+      "git_diff_check"
+    ],
+    "official_verdict": null,
+    "open_substantive_findings": 0,
+    "reviewer": "/root/cfe_preallocation_official",
+    "reviewer_ran_pytest": false,
+    "reviewer_ran_solver": false,
+    "role": "read_only_R3_pre_seal"
+  },
+  "schema": "h1_normal_episode_development_checks_v1",
+  "source_authenticated": false,
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "test_command_prefix": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider",
+  "tests": [
+    {
+      "final_bytes": false,
+      "passed": 57,
+      "scope": "episode/replay/projection_store before binary correction",
+      "seconds": 98.03
+    },
+    {
+      "final_bytes": false,
+      "passed": 27,
+      "scope": "episode after binary correction before final poison wrapper",
+      "seconds": 55.0
+    },
+    {
+      "final_bytes": false,
+      "passed": 134,
+      "scope": "episode/replay/projection_store/source/short_solve before final poison wrapper",
+      "seconds": 129.21
+    },
+    {
+      "final_bytes": true,
+      "passed": 34,
+      "scope": "test_rq2_normal_h1_episode_v1.py final",
+      "seconds": 61.58
+    }
+  ]
+}

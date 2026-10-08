@@ -1,0 +1,38 @@
+{
+  "all_rows_and_summary_unchanged_after_provenance_pin": true,
+  "current_report": {
+    "path": "results/tables/rq2_finite_enrollment_support_v1_non_authoritative/coverage_168_24_verified.json",
+    "sha256": "29ba7f5662c3dee019f183104479d8fa354f726bea0e055ee456b3dd337042c4"
+  },
+  "current_report_callable": "experiments.audit_rq2_enrollment_support_v1.run(168, 24, 24)",
+  "development_sha256": {
+    "docs/model_spec/rq2_finite_enrollment_support_v1.md": "d39ce44ed1de0abe1c03076565c2d0b8ddf792817c8d1a6788f0c519c152a5c9",
+    "experiments/audit_rq2_enrollment_support_v1.py": "ee64bc86f9610a4158e08a4b8d3f15cac683961ff7e83d6253888cf67fca5b0b",
+    "src/rq2_joint_deliverability_boundary_v1/enrollment_support_audit.py": "fb48f35dd93dcfa3823ae7a5135959f9a7452706b087b0490ae299ee4a6fb9a3",
+    "tests/test_rq2_enrollment_support_audit_v1.py": "d4eec0202739967d6435009be281f0faf535dd3dc29432c59f1d293f66f557d2"
+  },
+  "formal_result": false,
+  "schema": "rq2_finite_enrollment_support_development_v1",
+  "scientific_parameters_registered": false,
+  "solver_calls": 0,
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "superseded_draft_report": {
+    "path": "results/tables/rq2_finite_enrollment_support_v1_non_authoritative/coverage_168_24.json",
+    "role": "historical_draft_not_current",
+    "sha256": "8dbe9e00010167617b69f70e82fee791a6372a68984e9dbf8dee917e62606ebb"
+  },
+  "test_batches_overlap": true,
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_enrollment_support_audit_v1.py tests/test_rq2_source_window_v1.py tests/test_rq2_joint_deliverability_continuation_audit_v1.py",
+      "passed": 56,
+      "seconds": 3.08
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_enrollment_support_audit_v1.py",
+      "passed": 16,
+      "scope": "after_fixed_summary_sha_added",
+      "seconds": 0.48
+    }
+  ]
+}

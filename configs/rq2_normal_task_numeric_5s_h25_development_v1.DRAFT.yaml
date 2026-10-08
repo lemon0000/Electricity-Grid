@@ -1,0 +1,92 @@
+schema: rq2_numeric_streaming_normal_task_development_declaration_v1
+formal_result: false
+declaration_role: development_execution_declaration
+task_root: D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_normal_task_numeric_5s_h25_attempt1_non_authoritative
+request:
+  source:
+    normal_record_path: D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_source_pairs_v1_non_authoritative\normal_dynamic_verified_non_authoritative.json
+    expected_normal_record_sha256: 8c9b58ff3de2f37fecddcc283a1950e91c917a0dd0fc3d4c9025c29af317707d
+    pair_declaration_path: D:\CUHKSZ\Research Project\electricity-grid\configs\rq2_source_pair_training_example_v1.DRAFT.yaml
+    expected_pair_declaration_sha256: e4d78a3c4e060f493a8d238e4122a649c7a610cde8c0b2cc882fa091831e5019
+    upstream_root: D:\CUHKSZ\Research Project\electricity-grid\data\raw\rts_gmlc\v0.2.3\upstream
+    config_path: D:\CUHKSZ\Research Project\electricity-grid\configs\rq2_joint_deliverability_continuation_audit_v1.DRAFT.yaml
+    expected_config_sha256: 0cca33dbfbd934881be3c4e375c76eb668c2ec41ff9bbc7392c2eb3947de18a5
+    expected_assembly_identity: 626f7dbe49772302d35da13bb05f2ffb69f1f599e35310484177c00711b32e7a
+    expected_input_identity: d9959966c52fe618e73974fc53203ad2caed5169bd7f360fc79e0ecafd06780c
+    expected_pair_identity: d4b56260e8468f0cb7cc93b5b1416d067b9444a920a1576b0255c7eaff8b5c4f
+    expected_binding_identity: e29ff34021a20becbbd4d6f79f5f316d34d61b96ff6725c5b1c6983fe6cd5abd
+    expected_scale:
+      variables: 22275
+      constraints: 28004
+    max_normal_record_bytes: 1048576
+    max_pair_declaration_bytes: 65536
+    max_config_bytes: 65536
+  expected_source_request_identity: 0d8924e62b7e468a9ce935e06ddfb624de6c24b7418cd79613a2935dda6b3b39
+  specification:
+    name: highs
+    expected_package_version: 1.15.1
+    threads: 1
+    mip_relative_gap: 1.0e-08
+    feasibility_tolerance: 1.0e-09
+    optimality_tolerance: 1.0e-09
+    integer_feasibility_tolerance: 1.0e-09
+    random_seed: 0
+    time_limit_seconds: 5.0
+    tee: false
+  execution_budget:
+    max_seconds_per_solve: 5.0
+    max_threads: 1
+    max_horizon: 25
+    max_variables: 22275
+    max_constraints: 28004
+    max_observed_wall_seconds: 60.0
+    max_process_peak_working_set_bytes: 805306368
+    max_core_evidence_payload_bytes: 16777216
+  expected_normal_execution_identity: c60946a103d2c82a910678ddd0af25b9814910391d54144a772c0f11589e0d81
+  expected_source_execution_identity: 15814c015209f3f270724c716d5e0b3258cf227dea8c776b881896889c14e440
+  expected_declared_execution_identity: 5b78e5f2daae3229e4c32ca34a90d19db00f1d94474c75dd8dd27158352b1144
+  expected_assembly_identity: 689ac1bc2d2a527b1a0efbe75e51d4f2a44cddb27cca7a1c623b5a0a6cabbe9e
+  expected_binding_identity: a7b3acbeeac657d5429a9204873ad15c64bc08ae6deb68a3143fb24d243192fd
+  expected_source_implementation_identity: 7dc920bd3ef0bba3bf7bc59e0ebe01535045ae64c43429fa99f67aa1ff1d247c
+  expected_binding_implementation_identity: 6c2074b475f8c0c7cd93ea029cc3d784e666596b99d351477a2cda24bd657a4c
+  expected_replay_identity: f808872d77f19f01b1f0384b78e585caa6749110773792353814164f84d32410
+  max_record_bytes: 16777216
+  max_replay_bytes: 1048576
+budget:
+  execute:
+    max_elapsed_seconds: 240.0
+    sample_interval_seconds: 0.2
+    max_process_commit_bytes: 805306368
+    max_job_commit_bytes: 805306368
+    max_quiescence_seconds: 3.0
+  replay:
+    max_elapsed_seconds: 240.0
+    sample_interval_seconds: 0.2
+    max_process_commit_bytes: 805306368
+    max_job_commit_bytes: 805306368
+    max_quiescence_seconds: 3.0
+  capture:
+    max_database_bytes: 134217728
+    max_record_bytes: 16777216
+    max_elapsed_seconds: 10.0
+  max_total_elapsed_seconds: 600.0
+  parent_tail_seconds: 20.0
+  max_controller_lifetime_peak_working_set_bytes: 536870912
+  controller_additional_commit_bytes: 33554432
+  commit_reserve_bytes: 67108864
+  archive_disk_bytes: 285212672
+  scratch_bytes_per_phase: 16777216
+  disk_reserve_bytes: 67108864
+  max_tree_entries: 512
+environment:
+  SYSTEMROOT: C:\Windows
+  WINDIR: C:\Windows
+  TEMP: C:\Users\Psychobabble\AppData\Local\Temp
+  TMP: C:\Users\Psychobabble\AppData\Local\Temp
+  PATH: D:\Miniconda3\envs\compute;D:\Miniconda3\envs\compute\Library\bin;C:\Windows\System32;C:\Windows
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  NUMEXPR_NUM_THREADS: '1'
+  KMP_DUPLICATE_LIB_OK: 'True'
+expected_controller_identity: f12796048b3349f87bd540864af5c77a53ecb68fa1eb4ccbd66fb093fe216d99

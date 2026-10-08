@@ -1,0 +1,107 @@
+status: DRAFT_NONAUTHORITATIVE_DATA_ACQUISITION
+
+source:
+  dataset: Google ClusterData 2019 cell-f PDU17 full-month hourly aggregate
+  billing_project: exalted-summer-490612-m6
+  public_project: google.com:google-cluster-data
+  location: US
+  license: CC-BY-4.0
+  documentation_commit: 3f6a61d380dc4ea847416d5414c5fa499f830b9d
+  query_path: experiments/sql/google_power_workload_multiday_v1.DRAFT.sql
+  query_sha256: 5f0ddc384afe27accbd568830d70b924f850aea20527486e92f2f69e76d8a742
+  oracle_query_path: experiments/sql/google_power_workload_multiday_tiny_oracle_v1.sql
+  oracle_query_sha256: db3367e901fd2392098e488a58bfc49d8a841a59c3b00a548d09a0412bee5913
+  mapping_source_path: data/raw/google_power_2019/2019/upstream/machine_to_pdu_mapping.csv.gz
+  output_directory: data/raw/google_power_workload_2019/multiday_v1_non_authoritative/upstream
+
+parameters:
+  cell: f
+  pdu: pdu17
+  window_start_us: 600000000
+  window_end_us: 2679000000000
+  hours: 744
+  expected_machine_count: 1295
+  population: official_notebook_non_nested_usage_with_machine_aware_asof_priority
+  population_rule: alloc_collection_id_is_null_or_zero_on_usage_and_instance_events
+
+cost_gate:
+  expected_dry_run_bytes: 554760728186
+  maximum_bytes_billed: 600000000000
+  task_cumulative_billed_cap_bytes: 1099511627776
+  query_job_id: google_pdu17_multiday_v1_5f0ddc384afe27ac
+  connectivity_job_id: google_pdu17_multiday_v1_connectivity_20260912
+  connectivity_job_processed_bytes: 0
+  connectivity_job_billed_bytes: 0
+  oracle_job_id: google_pdu17_multiday_v1_oracle_db3367e901fd2392
+  oracle_job_processed_bytes: 0
+  oracle_job_billed_bytes: 0
+
+expected:
+  mapping_machine_count: 1295
+  mapping_machine_ids_sha256: cbb77c38aa5184e8b8faf87aa1ffcc707e9f682e1d82bc85332f1f8d1e44d0a3
+  hourly_rows: 10416
+  audit_rows: 1
+  priority_tiers:
+    - 1_free
+    - 2_beb
+    - 3_mid
+    - 4_production
+    - 5_monitoring
+    - ambiguous
+    - unknown
+  fields:
+    - record_type
+    - hour_index
+    - raw_interval_start_us
+    - raw_interval_end_us
+    - collection_type
+    - priority_tier
+    - observed_cpu_ncu_lower
+    - observed_cpu_ncu_upper
+    - observed_cpu_time_ncu_seconds_lower
+    - observed_cpu_time_ncu_seconds_upper
+    - observed_cpu_overlap_seconds
+    - missing_cpu_overlap_seconds
+    - cpu_conflict_overlap_seconds
+    - fragment_piece_count
+    - usage_group_count
+    - cpu_conflict_usage_group_count
+    - exact_duplicate_usage_group_count
+    - synthesized_cpu_time_ncu_seconds_lower
+    - synthesized_cpu_time_ncu_seconds_upper
+    - audit_json
+  table_snapshots:
+    powerdata_2019.machine_to_pdu_mapping:
+      etag: r5jy+cOCNLnnYnOytyXloA==
+      rows: 96616
+      bytes: 1718530
+      modified: '2024-02-21T04:25:29.143000+00:00'
+    clusterdata_2019_f.instance_usage:
+      etag: DwR9AIlEg5hmUhVtYK584Q==
+      rows: 7707808700
+      bytes: 2297003786056
+      modified: '2020-08-07T05:34:43.305000+00:00'
+    clusterdata_2019_f.instance_events:
+      etag: KslUGu5iSRhVbRl4nsi3yA==
+      rows: 1179245752
+      bytes: 211831196383
+      modified: '2020-08-07T05:30:35.327000+00:00'
+
+interpretation:
+  raw_clock_aligned_to_power: true
+  time_zero_origin_used: false
+  machine_id_in_priority_identity: true
+  future_priority_backfill_used: false
+  exact_duplicates_collapsed_and_counted: true
+  cpu_conflicts_retained_as_endpoints: true
+  empty_hour_tier_cells_are_structural_zero_not_population_completeness: true
+  population_is_complete_pdu_workload: false
+  absolute_power_mw_available: false
+  flexibility_observed: false
+  deadline_observed: false
+  recovery_parameters_observed: false
+  continuous_model_input_ready: false
+  model_parameter_changed: false
+  formal_result: false
+  paper_claim: false
+  security_certified: false

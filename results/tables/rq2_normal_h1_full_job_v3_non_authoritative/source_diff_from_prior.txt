@@ -1,0 +1,1517 @@
+--- /dev/null
++++ docs/model_spec/rq2_normal_h1_replay_performance_v3.md
+@@ -0,0 +1,36 @@
++# H1 审计性能 successor v3
++
++## 范围与不变量
++
++2026-10-02 用户要求解决 v2 单次校准超时。风险为 R3：改变实现及计算身份，保留 v2 科学规则、阈值、原模型、求解器、232-stage 顺序、5s/stage、3600s task、2GiB Job 和一次性执行边界。旧 v2 封存包、消费记录和超时结果不修改。开发、保存数据诊断、pre-seal、封存及独立审查属于本次修复；新 native 运行另需明确授权。
++
++v2 原始 native Runtime 合计7.084s，232-stage完整独立重放309.415s；task在3598.047s截止后保留232 stage_accepted，但只有预登记的terminal checkpoint。完整raw不替代terminal、fresh reopen、worker_result或job_checks。v3不恢复旧attempt。
++
++## 实现
++
++generation_projection_v3公开project_and_audit入口每次重建一个canonical H1模型。保存canonical fixed值；raw与candidate分别加载完整赋值、独立计算变量界、fixed偏差、所有约束、整数性、strict locks和chronology。legacy normal residual只在计算期间暂时deactivate新增H1 locks，并在finally恢复，等价于原normal模型约束集；其独立chronology与原错误顺序保留。调用结束重新计算stage input/lock/dependency identity；阈值在审计边界复核。模型不跨调用缓存。
++
++每次_audit_stage构建一个canonical模型，在native numeric赋值前生成独立clone交给私有candidate审计入口。运行时检查模型类型、变量对象独立性、完整变量名、fixed标志及基准hex、locks激活状态、scale和structure一致。native numeric与raw/candidate审计使用独立模型；模型构建为一次H1/底层构建加一次clone，替代v2的四次H1、六次底层构建。
++
++完整归档在同一owner内可复用已经审计的同一snapshot数值结果。每次读取仍开启新的SQLite事务并完整扫描全部raw、metadata、chunk/predecessor/hash链，再复核packet、spec、limits、来源、实现身份和冻结阈值。缓存key绑定完整physical inspection与语义身份，receipt按精确类型和canonical digest复核；仅缓存awaiting_terminal或accepted，partial/rejected不缓存。完整prefix在同一事务完成metadata与数值审计，可同时保存awaiting inspection和候选projection；awaiting inspection不发布projection。新增terminal head必须重新完整数值审计；fresh owner缓存为空，必须独立完整数值审计。任一snapshot读取或缓存异常清空缓存并毒化owner，后续操作拒绝。checkpoint、fsync和anchor顺序不变。
++
++raw、candidate、receipt字段与v2一致，科学rule_identity仍为原v2规则身份。优化实现的identity额外绑定v3 helper及直接normal依赖，stage replay、archive、collector、resource、Job和gate使用独立v3计算/包身份。底层native capture及Windows Job controller保持原实现。
++
++full_attempt_anchor_v3在每次完整scan内，对header及每条record各读取一次；同一份稳定读取同时校验retained file identity/hash与完整chain，避免旧实现先验retained再第二次读chain的两个视图。每次inspect/confirm仍完整scan；advance前scan、排他写/fsync/读回、登记retained、完整scan后返回的顺序保持。仅constructor第一次scan显式允许bootstrap；正常scan要求exact count类型、完整retained集合和每项精确identity/pin，不能通过污染owner状态恢复bootstrap权限。reopen建立retained后再做一次完整scan，保留inspection-only和独立末端pin。旧anchor实现及产物不改写。
++
++首次完整保存数据worker已完成terminal、outcome和fresh reopen，但因超过2440s性能门退出1；该轮未输出精确elapsed，不推算其精确耗时。失败观察及245文件inventory为saved_worker_budget_rejection.json；修改前v3源码和测试另存pre_anchor_source_snapshot_non_authoritative。后续diagnostic在性能判定前写入独立measurement，完整成功记录仍只在全部门通过后生成。
++
++## 冻结验收矩阵（封存前完成）
++
++1. retained v2的232份raw逐stage重算：native SHA、model stage identity、numeric SHA、lock hex、完整mapping receipt全部一致；完整projection物理units与locks一致，v3的计算/归档identity可不同。
++2. 独立旧audit oracle比较正常、负generation、strict-lock-only、变量界、fixed、整数性、功率平衡和chronology反例；raw不可变、candidate失败仍拒绝、阈值边界和目标hex规则不变。
++3. canonical fixed基准不可被先前raw赋值污染；NaN/inf/bool/missing/extra拒绝；输入或阈值在raw/candidate边界漂移拒绝；临时lock activation在异常后恢复。
++4. tiny完整collector/worker replay、独立fresh reopen、checkpoint/anchor先后、持久化不确定失败窗口、禁止retry与gate缺失/篡改/身份反例回归通过。
++   clone隔离与fixed基准污染反例、同head仍完整scan、raw/metadata损坏、数据库替换、receipt/type篡改、阈值/来源/spec/limits/实现漂移、scan及cache写入异常均须拒绝；新head和fresh owner须重新数值审计。
++5. 在独立non-authoritative目录以真实232份保存raw替换唯一capture seam、已安装solver_calls_forbidden下完成整条worker，包括terminal/outcome/fresh reopen；每次stage审计均与v2保存oracle比较。实测offline完整worker目标小于声明non_solver_seconds=2440；它不测native capture耗时、不执行Windows Job监督，不是资源充分性或native成功证据。
++6. 新旧sealed成员及原run inventory保持，source闭包包含全部v3源码、worker/prepare/diagnostic、tests与本规格；diff及process检查通过。PRE_SEAL findings闭合后封存，再由全新只读reviewer给official verdict。
++7. anchor稳态每次scan每文件恰好一次read，confirm仍新scan；文件替换、读取中替换、retained/header/chain改变、gap/extra/count、实现/lease漂移、写入及读回不确定失败均拒绝并poison。385条完整容量、新旧schema隔离、reopen不可advance和独立末端pin回归通过。
++
++## 证据边界
++
++保存raw benchmark属于开发验证。其worker_result所在根明确为saved_worker_non_authoritative，mocked capture调用数不是新的native solver次数。完整研究资源、共同Rref/A与完整支持LB/UB继续待完成；正式结果与资源/执行ready标志保持false。
+--- experiments/prepare_rq2_normal_h1_full_job_v2.py
++++ experiments/prepare_rq2_normal_h1_full_job_v3.py
+@@ -9,7 +9,7 @@
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT))
+ 
+-from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_job_v2 as api
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_job_v3 as api
+ 
+ 
+ def prepare(output):
+@@ -44,7 +44,7 @@
+         job_budget=asdict(job), source_declaration=previous['declaration'],
+         source_identity=previous['expected_source_identity'], network_identity=previous['expected_network_identity'],
+         upstream_root=previous['upstream_root'], config_path=previous['config_path'], dc_bus=previous['dc_bus'],
+-        root=str(ROOT/'results/tables/rq2_normal_h1_origin_calibration_v2_non_authoritative'))
++        root=str(ROOT/'results/tables/rq2_normal_h1_origin_calibration_v3_non_authoritative'))
+     with api.collector.base.replay.guard.solver_calls_forbidden():
+         api._validate_request(request)
+         packet = api._packet(request)
+@@ -55,7 +55,7 @@
+         raise ValueError('explicit non-authoritative output location required')
+     output.parent.mkdir(parents=True, exist_ok=True)
+     pin = api._write(output, request)
+-    record = dict(schema='h1_calibration_draft_preparation_v2', status='DRAFT_NONAUTHORITATIVE',
++    record = dict(schema='h1_calibration_draft_preparation_v3', status='DRAFT_NONAUTHORITATIVE',
+         request_sha256=pin, shape_manifest_sha256=sha256((shape_root/'development_checks.json').read_bytes()).hexdigest(),
+         preserved_shape_members=len(members), source_identity=request['source_identity'],
+         current_shape=current, resources=plan, solver_calls=0, native_calibration_started=False,
+--- experiments/run_rq2_normal_h1_full_job_worker_v2.py
++++ experiments/run_rq2_normal_h1_full_job_worker_v3.py
+@@ -5,7 +5,7 @@
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT))
+ 
+-from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_job_v2 as api
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_job_v3 as api
+ 
+ if __name__ == '__main__':
+     try:
+--- experiments/verify_rq2_normal_h1_generation_projection_v2.py
++++ experiments/verify_rq2_normal_h1_generation_projection_v3.py
+@@ -1,102 +1,170 @@
+-"""Zero-solver successor replay of the retained v1 calibration prefix."""
+-from dataclasses import asdict
++"""Offline 232-stage regression and complete worker benchmark; no native execution.
++
++The capture seam serves independently pinned v2 raw. Gate verification is mocked
++only while solver entry points are forbidden, inside this diagnostic process.
++Output is never a native calibration root, execution authority or resource proof.
++"""
+ import argparse
++from contextlib import ExitStack
++from copy import deepcopy
+ from hashlib import sha256
+ import json
++import os
++from math import isfinite
+ from pathlib import Path
+ import sqlite3
+ import sys
++from time import perf_counter
++from unittest.mock import patch
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+-sys.path.insert(0, str(ROOT))
+-from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_job_v2 as job
+-from src.rq2_joint_deliverability_boundary_v1 import normal_h1_incremental_archive_v2 as archive
++sys.path.insert(0,str(ROOT))
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_job_v3 as job
++
++OUTER_PIN = '79830ab6c1b31aaef41174544e472ef800674de1f76228793f30f6b87e4f6eba'
++INVENTORY_PIN = '281ad90c2da8bdb2ff0a1031d94379f2887dc663f235c52619a1c75e25521fb4'
++REVIEW_PIN = '9c034035f67bc8d891d966d19b5fd6e5f90ea8443c58949e19e9c93273c16cf2'
+ 
+ 
+ def main(request_path, output):
+-    base = Path(output).resolve()
++    base=Path(output).resolve()
+     if not base.name.endswith('_non_authoritative'):
+-        raise ValueError('explicit non-authoritative output directory required')
+-    base.mkdir(parents=True, exist_ok=False)
+-    old = ROOT/'results/tables/rq2_normal_h1_origin_calibration_v1_non_authoritative'
+-    manifest, _ = job._read(ROOT/'configs/rq2_normal_h1_calibration_v1.OUTER.SHA256SUMS.json',
+-        '289f9b147afa7a00b1abc4ff5dc10da09b57e0920d57be0215c352ff4648438d')
+-    inventory, _ = job._read(ROOT/'results/tables/rq2_normal_h1_full_job_v1_non_authoritative/calibration_v1.postrun_inventory.json',
+-        '37d55a780e7d92936a9e6d80082428293f703ed96714ba16a0b4809a5ff375ef')
+-    def preservation():
+-        for name, pin in manifest['members'].items():
+-            if sha256((ROOT/name).read_bytes()).hexdigest() != pin:
+-                raise ValueError('legacy sealed member drift: '+name)
+-        for name, item in inventory['files'].items():
++        raise ValueError('explicit development diagnostic root required')
++    outer,_=job._read(ROOT/'configs/rq2_normal_h1_calibration_v2.OUTER.SHA256SUMS.json',OUTER_PIN)
++    old=ROOT/'results/tables/rq2_normal_h1_origin_calibration_v2_non_authoritative'
++    inventory,_=job._read(ROOT/'results/tables/rq2_normal_h1_full_job_v2_non_authoritative/calibration_v2.postrun_inventory.json',INVENTORY_PIN)
++    review,_=job._read(ROOT/'results/tables/rq2_normal_h1_full_job_v2_non_authoritative/calibration_v2.postrun_review.json',REVIEW_PIN)
++    def preserve():
++        _exact_inventory(old,inventory['members'])
++        for name,pin in outer['members'].items():
++            if sha256((ROOT/name).read_bytes()).hexdigest()!=pin:raise ValueError('sealed drift: '+name)
++        for name,item in inventory['members'].items():
+             raw=(old/name).read_bytes()
+             if len(raw)!=item['bytes'] or sha256(raw).hexdigest()!=item['sha256']:
+-                raise ValueError('legacy run member drift: '+name)
+-    preservation()
+-    old_result, old_result_pin = job._read(old/'worker_result.json',inventory['files']['worker_result.json']['sha256'])
+-    if old_result['summary']['status']!='rejected' or old_result['summary']['stored_reports']!=26:
+-        raise ValueError('expected retained rejected prefix required')
+-    request, request_pin = job._read(request_path)
+-    work, _, _, limits, _, _ = job._validate_request(request)
+-    database = old/'collector_non_authoritative/stages_non_authoritative/h1_chunk_journal.sqlite3'
+-    database_pin = sha256(database.read_bytes()).hexdigest()
+-    output = base/'prefix_archive_non_authoritative'
+-    with archive.replay.guard.solver_calls_forbidden():
+-        packet = job._packet(request)
+-        connection = sqlite3.connect(database.as_uri()+'?mode=ro&immutable=1',uri=True)
+-        owner = None
+-        try:
+-            connection.execute('PRAGMA query_only=ON')
+-            owner = archive.DevelopmentH1IncrementalArchive(output,packet,work.specification,limits,
+-                parent_intent_head=sha256((old/'request.json').read_bytes()).hexdigest(),
+-                source_lineage_identity=request['source_identity'],create=True)
+-            pins=[]
+-            for seq, metadata, size in connection.execute('SELECT seq,metadata,payload_bytes FROM events ORDER BY seq'):
+-                metadata=json.loads(metadata)
+-                raw=b''.join(row[0] for row in connection.execute(
+-                    'SELECT payload FROM chunks WHERE event_seq=? ORDER BY chunk_index',(seq,)))
+-                pin=sha256(raw).hexdigest()
+-                if len(raw)!=size or pin!=metadata['raw_sha256']:
+-                    raise ValueError('retained raw drift')
+-                state=owner.record_report(raw,expected_head=owner.head)
+-                pins.append(pin)
+-            final=owner.inspect()
+-            if final.stored_reports!=26 or final.status!='collecting' or final.projection is not None:
+-                raise ValueError('exact incomplete 26-candidate successor prefix required')
+-            head=owner.head
+-            last=json.loads(owner._journal.event_metadata(26,expected_head=head))
+-            mapping=last['generation_mapping']
+-            if (last['kind']!='stage_accepted' or last['raw_sha256']!=pins[-1]
+-                    or mapping['candidate_accepted'] is not True or not mapping['changes']
+-                    or mapping['rule_identity']!=archive.replay.generation_projection.implementation_identity()):
+-                raise ValueError('last successor stage lacks reconstructed authorized mapping')
+-        finally:
+-            if owner is not None:owner.close()
+-            connection.close()
+-        reopened=archive.DevelopmentH1IncrementalArchive(output,packet,work.specification,limits,
+-            parent_intent_head=sha256((old/'request.json').read_bytes()).hexdigest(),
+-            source_lineage_identity=request['source_identity'],expected_head=head)
+-        try:
+-            if reopened.inspect()!=final:
+-                raise ValueError('fresh successor archive differs from retained result')
+-        finally:reopened.close()
+-    if sha256(database.read_bytes()).hexdigest()!=database_pin:
+-        raise ValueError('legacy source database changed during diagnostic')
+-    preservation()
+-    record=dict(schema='h1_generation_projection_v2_retained_prefix_diagnostic',
+-        source_database_sha256=database_pin,source_raw_sha256=pins,stored_reports=26,
+-        candidate_stage_count=26,complete_projection=False,solver_calls=0,fresh_reopen_equal=True,
+-        old_run_status=old_result['summary']['status'],old_worker_result_sha256=old_result_pin,
+-        request_sha256=request_pin,legacy_members_preserved=len(manifest['members']),
+-        legacy_run_members_preserved=len(inventory['files']),last_stage_mapping=mapping,
+-        implementation_identity=archive.base.implementation_identity(),inspection=asdict(final),
+-        script_sha256=sha256(Path(__file__).read_bytes()).hexdigest(),formal_execution_ready=False,formal_result=False)
+-    pin=job._write(base/'prefix_diagnostic.json',record)
+-    print(json.dumps(dict(sha256=pin,candidate_stage_count=26,complete_projection=False,solver_calls=0)))
++                raise ValueError('retained run drift: '+name)
++    preserve()
++    request,declared_pin=job._read(request_path)
++    job._validate_request(request)
++    # This is a separate saved-input worker, never the proposed native root.
++    native_root=Path(request['root']).resolve()
++    _separate_output(base,native_root,old)
++    base.mkdir(parents=True,exist_ok=False)
++    root=base/'saved_worker_non_authoritative'
++    root.mkdir()
++    scratch=root/'scratch_non_authoritative';scratch.mkdir()
++    request=deepcopy(request);request['root']=str(root)
++    pin=job._write(root/'request.json',request)
++    plan=job._configuration(request)[-1]
++    job._write(root/'intent.json',dict(schema=job.SCHEMA,request_sha256=pin,
++        implementation_identity=request['implementation_identity'],resource_declaration_identity=plan['declaration_identity'],formal_result=False))
++    database=old/'collector_non_authoritative/stages_non_authoritative/h1_chunk_journal.sqlite3'
++    conn=sqlite3.connect(database.as_uri()+'?mode=ro&immutable=1',uri=True)
++    conn.execute('PRAGMA query_only=ON')
++    if conn.execute('PRAGMA integrity_check').fetchone()!=('ok',):raise ValueError('source database invalid')
++    rows=conn.execute('select seq,metadata,payload_bytes from events order by seq').fetchall()
++    metas=[json.loads(row[1]) for row in rows]
++    if len(rows)!=232 or [m['index'] for m in metas]!=list(range(232)) or any(m['kind']!='stage_accepted' for m in metas):
++        raise ValueError('complete retained accepted stage inventory required')
++    served=[];audits=[0]
++    audit=job.collector.base.replay._audit_stage
++    def checked_audit(packet,spec,limits,index,locks,raw):
++        result=audit(packet,spec,limits,index,locks,raw)
++        expected=metas[index]
++        if (result['native_sha256']!=expected['raw_sha256']
++                or result['stage_identity']!=expected['stage_identity']
++                or result['numeric_sha256']!=expected['numeric_sha256']
++                or result['lock'].hex()!=expected['lock_hex']
++                or json.loads(job.source._bytes(result['generation_mapping']))!=expected['generation_mapping']):
++            raise ValueError('v3 stage differs from retained v2 oracle: '+str(index))
++        audits[0]+=1
++        return result
++    def saved_capture(*args,**kwargs):
++        index=len(served)
++        if index>=232:raise ValueError('extra capture requested')
++        seq,_,size=rows[index]
++        raw=b''.join(v[0] for v in conn.execute('select payload from chunks where event_seq=? order by chunk_index',(seq,)))
++        if len(raw)!=size or sha256(raw).hexdigest()!=metas[index]['raw_sha256']:
++            raise ValueError('retained raw mismatch')
++        served.append(metas[index]['raw_sha256'])
++        if len(served)%32==0:print('saved reports served:',len(served),flush=True)
++        return raw
++    start=perf_counter();cwd=Path.cwd()
++    try:
++        with ExitStack() as stack:
++            stack.enter_context(job.collector.base.replay.guard.solver_calls_forbidden())
++            stack.enter_context(patch.object(job.gates,'verify_consumed',lambda gate:deepcopy(request)))
++            stack.enter_context(patch.object(job.collector.base.native.capture,'solve_once',saved_capture))
++            stack.enter_context(patch.object(job.collector.base.replay,'_audit_stage',checked_audit))
++            os.chdir(scratch)
++            report=job._execute_development_worker(root/'request.json',pin,_gate={'offline_saved_raw_diagnostic':True})
++    finally:
++        os.chdir(cwd);conn.close()
++    elapsed=perf_counter()-start
++    job._validate_report(report,pin,plan)
++    if (len(served)!=232 or report['summary']['status']!='accepted' or report['summary']['stored_reports']!=232
++            or not report['fresh_reopen_equal'] or report['formal_result'] is not False):
++        raise ValueError('complete offline worker chain required')
++    preserve()
++    terminal=_terminal_gate(root,metas,review['reconstructed_candidate']['payload_sha256'])
++    # Preserve the actual timing even when the fixed performance gate rejects.
++    job._write(base/'saved_worker_measurement.json',dict(
++        schema='h1_v3_saved_worker_timing_measurement',offline_worker_wall_seconds=elapsed,
++        declared_overhead_seconds=request['resource']['envelope']['non_solver_seconds'],
++        stage_audit_comparisons=audits[0],raw_reports_served=len(served),
++        projection_payload_sha256=terminal['projection_sha256'],fresh_reopen_equal=True,
++        declared_request_sha256=declared_pin,derived_request_sha256=pin,
++        worker_result_sha256=sha256((root/'worker_result.json').read_bytes()).hexdigest(),
++        solver_calls=0,formal_result=False,formal_execution_ready=False))
++    margin=_timing_gate(elapsed,request['resource']['envelope']['non_solver_seconds'])
++    record=dict(schema='h1_v3_saved_worker_performance_diagnostic',status='development_complete',
++        source_outer_sha256=OUTER_PIN,source_inventory_sha256=INVENTORY_PIN,
++        declared_request_sha256=declared_pin,derived_request_sha256=pin,
++        source_raw_sha256=served,raw_reports_served=232,stage_audit_comparisons=audits[0],
++        every_stage_numeric_pin_lock_and_mapping_equal=True,fresh_reopen_equal=True,
++        source_postrun_review_sha256=REVIEW_PIN,projection_payload_matches_v2=True,
++        projection_payload_sha256=terminal['projection_sha256'],overhead_margin_seconds=margin,
++        offline_worker_wall_seconds=elapsed,declared_overhead_seconds=request['resource']['envelope']['non_solver_seconds'],
++        solver_calls=0,native_calibration_started=False,process_job_supervision_exercised=False,
++        native_capture_overhead_measured=False,whole_task_resources_verified=False,
++        formal_execution_ready=False,formal_result=False,
++        script_sha256=sha256(Path(__file__).read_bytes()).hexdigest(),
++        worker_result_sha256=sha256((root/'worker_result.json').read_bytes()).hexdigest(),
++        implementation_identity=job.implementation_identity())
++    result_pin=job._write(base/'saved_worker_diagnostic.json',record)
++    print(json.dumps(dict(diagnostic_sha256=result_pin,wall_seconds=elapsed,stage_audits=audits[0],solver_calls=0)),flush=True)
++
++
++def _separate_output(base,native_root,old):
++    for protected in (native_root,old):
++        if base==protected or base.is_relative_to(protected) or protected.is_relative_to(base):
++            raise ValueError('diagnostic must be separate from native and retained roots')
++
++
++def _exact_inventory(root,members):
++    current={p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file()}
++    if current!=set(members):raise ValueError('retained run file inventory changed')
++
++
++def _timing_gate(elapsed,limit):
++    if type(elapsed) not in (int,float) or not isfinite(elapsed) or not 0<elapsed<limit:
++        raise ValueError('offline worker exceeds declared non-solver budget')
++    return limit-elapsed
++
++
++def _terminal_gate(root,metas,expected_payload):
++    database=root/'collector_non_authoritative/stages_non_authoritative/h1_chunk_journal.sqlite3'
++    with sqlite3.connect(database.as_uri()+'?mode=ro&immutable=1',uri=True) as conn:
++        rows=conn.execute('select metadata from events order by seq').fetchall()
++    if len(rows)!=233:raise ValueError('complete stage and terminal inventory required')
++    terminal=json.loads(rows[-1][0])
++    if (terminal.get('kind')!='accepted_terminal' or terminal.get('stored_reports')!=232
++            or terminal.get('canonical_locks')!=[m['lock_hex'] for m in metas]
++            or terminal.get('projection_sha256')!=expected_payload):
++        raise ValueError('complete physical projection differs from v2')
++    return terminal
+ 
+ 
+ if __name__=='__main__':
+     parser=argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument('--request',required=True)
+-    parser.add_argument('--output',required=True)
+-    args=parser.parse_args()
+-    main(args.request,args.output)
++    parser.add_argument('--request',required=True);parser.add_argument('--output',required=True)
++    args=parser.parse_args();main(args.request,args.output)
+--- src/rq2_joint_deliverability_boundary_v1/normal_h1_calibration_gate_v2.py
++++ src/rq2_joint_deliverability_boundary_v1/normal_h1_calibration_gate_v3.py
+@@ -8,7 +8,7 @@
+ import os
+ from pathlib import Path
+ 
+-SCHEMA = 'h1_single_hour_calibration_sealed_package_v2'
++SCHEMA = 'h1_single_hour_calibration_sealed_package_v3'
+ LIMIT = 2 * 1024**2
+ ROOT = Path(__file__).resolve().parents[2]
+ 
+@@ -23,7 +23,7 @@
+ 
+ 
+ def _read(path, expected):
+-    from . import normal_h1_full_job_v2 as job
++    from . import normal_h1_full_job_v3 as job
+     _pin(expected)
+     path = job.process.legacy.resources.local._path(path)
+     before = job.process.legacy.resources.local._file_identity(path)
+@@ -36,7 +36,7 @@
+ 
+ 
+ def _repo_path(value):
+-    from . import normal_h1_full_job_v2 as job
++    from . import normal_h1_full_job_v3 as job
+     if type(value) is not str or not value or Path(value).is_absolute() or '..' in Path(value).parts:
+         raise ValueError('canonical repository-relative member required')
+     path = job.process.legacy.resources.local._path(ROOT/value)
+@@ -48,17 +48,19 @@
+ def required_code_members():
+     # Freeze the full local Python source closure; no dynamic import omissions.
+     members = [p.relative_to(ROOT).as_posix() for p in (ROOT/'src').rglob('*.py')]
+-    members += ['experiments/run_rq2_normal_h1_full_job_worker_v2.py',
+-        'experiments/verify_rq2_normal_h1_generation_projection_v2.py',
+-        'experiments/prepare_rq2_normal_h1_full_job_v2.py',
+-        'tests/test_rq2_normal_h1_full_job_v2.py', 'tests/test_rq2_normal_h1_full_collector_v2.py',
+-        'tests/test_rq2_normal_h1_calibration_gate_v2.py',
+-        'tests/test_rq2_normal_h1_generation_projection_v2.py']
++    members += ['experiments/run_rq2_normal_h1_full_job_worker_v3.py',
++        'experiments/verify_rq2_normal_h1_generation_projection_v3.py',
++        'experiments/prepare_rq2_normal_h1_full_job_v3.py',
++        'tests/test_rq2_normal_h1_full_job_v3.py', 'tests/test_rq2_normal_h1_full_collector_v3.py',
++        'tests/test_rq2_normal_h1_calibration_gate_v3.py',
++        'tests/test_rq2_normal_h1_generation_projection_v3.py',
++        'tests/test_rq2_normal_h1_snapshot_cache_v3.py']
++    members += ['tests/test_rq2_normal_h1_full_attempt_anchor_v3.py']
+     return tuple(sorted(members))
+ 
+ 
+ def verify_package(outer_path, outer_sha256):
+-    from . import normal_h1_full_job_v2 as job
++    from . import normal_h1_full_job_v3 as job
+     outer = _read(outer_path, outer_sha256)
+     fields = {'schema', 'state', 'request_path', 'request_sha256', 'lease_path', 'lease_sha256',
+               'claim_path', 'members', 'preseal_evidence_path', 'preseal_evidence_sha256', 'inner_path', 'inner_sha256'}
+@@ -129,7 +131,7 @@
+ 
+ 
+ def consume(gate):
+-    from . import normal_h1_full_job_v2 as job
++    from . import normal_h1_full_job_v3 as job
+     outer, request = verify_gate(gate)
+     claim = dict(schema=SCHEMA, outer_sha256=gate['outer_sha256'], request_sha256=outer['request_sha256'],
+                  root=request['root'], review_sha256=gate['review_sha256'], authority_sha256=gate['authority_sha256'])
+--- src/rq2_joint_deliverability_boundary_v1/normal_h1_full_attempt_anchor.py
++++ src/rq2_joint_deliverability_boundary_v1/normal_h1_full_attempt_anchor_v3.py
+@@ -6,7 +6,7 @@
+ from . import scale_selector_controller as files
+ from . import normal_h1_chunk_journal as chunks
+ 
+-SCHEMA='h1_full_local_attempt_anchor_development_v1'
++SCHEMA='h1_full_local_attempt_anchor_development_v3'
+ 
+ MAX_RECORD_BYTES=64*1024
+ MAX_RECORDS=385
+@@ -66,12 +66,14 @@
+         self._max_records=max_records
+         try:
+             if create:self._retained['header.json']=_write(self._lease.root/'header.json',self._header)
+-            self._scan()
++            self._scan(bootstrap=True)
+             for name in ['header.json',*[f'{i:03d}.json' for i in range(0 if self._latest is None else self._latest.sequence+1)]]:
+                 path=self._lease.root/name
+                 identity=files.local._file_identity(path)
+                 self._retained[name]=(identity,sha256(chunks.base._bytes(_read(path,identity))).hexdigest())
+             self._expected_count=0 if self._latest is None else self._latest.sequence+1
++            # Recheck the chain against the newly retained identity/hash view.
++            self._scan()
+             if expected_record_sha256 is not None:
+                 chunks._pin(expected_record_sha256)
+                 if self._latest is None or self._latest.record_sha256!=expected_record_sha256:
+@@ -80,7 +82,7 @@
+             self.close()
+             raise
+ 
+-    def _scan(self):
++    def _scan(self,*,bootstrap=False):
+         if self._closed or self._poisoned:raise ValueError('closed or unresolved anchor')
+         self._lease.check()
+         if implementation_identity()!=self._header['implementation']:raise ValueError('anchor implementation drift')
+@@ -90,15 +92,34 @@
+             raise ValueError('live anchor record count changed')
+         if len(records)>self._max_records or records!=[f'{i:03d}.json' for i in range(len(records))]:
+             raise ValueError('anchor record gap or unexpected file')
+-        for name,(identity,pin) in self._retained.items():
+-            value=_read(self._lease.root/name,identity)
+-            if sha256(chunks.base._bytes(value)).hexdigest()!=pin:raise ValueError('retained anchor changed')
+-        if _read(self._lease.root/'header.json')!=self._header:raise ValueError('anchor header mismatch')
++        expected_names={'header.json',*records}
++        if type(bootstrap) is not bool:raise ValueError('exact bootstrap selector required')
++        if bootstrap:
++            if (self._expected_count is not None
++                    or not ((not self._writable and not self._retained)
++                        or (self._writable and not records and set(self._retained)=={'header.json'}))):
++                raise ValueError('constructor-only anchor bootstrap shape required')
++        elif type(self._expected_count) is not int or set(self._retained)!=expected_names:
++            raise ValueError('retained anchor inventory mismatch')
++        def checked_read(name):
++            retained=self._retained.get(name)
++            if name in self._retained:
++                if (type(retained) is not tuple or len(retained)!=2
++                        or type(retained[0]) is not tuple or len(retained[0])!=2
++                        or any(type(v) is not int for v in retained[0])):
++                    raise ValueError('exact retained file identity required')
++                chunks._pin(retained[1])
++            value=_read(self._lease.root/name,None if retained is None else retained[0])
++            digest=sha256(chunks.base._bytes(value)).hexdigest()
++            if retained is not None and digest!=retained[1]:raise ValueError('retained anchor changed')
++            return value,digest
++        header,_=checked_read('header.json')
++        if header!=self._header:raise ValueError('anchor header mismatch')
+         previous=self.identity
+         head=None
+         latest=None
+         for index,name in enumerate(records):
+-            value=_read(self._lease.root/name)
++            value,digest=checked_read(name)
+             if (set(value)!={'schema','anchor_identity','sequence','previous_record_sha256',
+                     'previous_registry_head','registry_head','event_sha256'}
+                     or value['schema']!=SCHEMA or value['anchor_identity']!=self.identity
+@@ -107,7 +128,7 @@
+                 raise ValueError('anchor record chain mismatch')
+             chunks._pin(value['registry_head'])
+             chunks._pin(value['event_sha256'])
+-            previous=sha256(chunks.base._bytes(value)).hexdigest()
++            previous=digest
+             head=value['registry_head']
+             latest=FullAnchorReceipt(self.identity,index,head,previous)
+         self._lease.check()
+--- src/rq2_joint_deliverability_boundary_v1/normal_h1_full_collector_v2.py
++++ src/rq2_joint_deliverability_boundary_v1/normal_h1_full_collector_v3.py
+@@ -4,11 +4,11 @@
+ from hashlib import sha256
+ from pathlib import Path
+ 
+-from . import normal_h1_stage_collector_v2 as base
+-from . import normal_h1_full_resource_contract_v2 as resources
+-from . import normal_h1_full_attempt_anchor as anchor
++from . import normal_h1_stage_collector_v3 as base
++from . import normal_h1_full_resource_contract_v3 as resources
++from . import normal_h1_full_attempt_anchor_v3 as anchor
+ 
+-SCHEMA='h1_full_inventory_collector_development_v2'
++SCHEMA='h1_full_inventory_collector_development_v3'
+ 
+ 
+ def implementation_identity():
+@@ -126,7 +126,7 @@
+         raise ValueError('full inventory Job controller integration required before execution')
+ 
+     def _require_execution_gate(self, gate):
+-        from . import normal_h1_full_job_v2 as job
++        from . import normal_h1_full_job_v3 as job
+         request = job.gates.verify_consumed(gate)
+         work, resource, serial, limits, _, _ = job._configuration(request)
+         if ((self._work, self._resource, self._serial, self._limits) != (work, resource, serial, limits)
+--- src/rq2_joint_deliverability_boundary_v1/normal_h1_full_job_v2.py
++++ src/rq2_joint_deliverability_boundary_v1/normal_h1_full_job_v3.py
+@@ -11,17 +11,17 @@
+ from pathlib import Path
+ import sys
+ 
+-from . import normal_h1_full_collector_v2 as collector
++from . import normal_h1_full_collector_v3 as collector
+ from . import normal_h1_source_binding as source
+ from . import declared_task_process as process
+ from . import normal_h1_shape_process as files
+-from . import normal_h1_calibration_gate_v2 as gates
++from . import normal_h1_calibration_gate_v3 as gates
+ from . import normal_licensed_environment as licensed_environment
+ from ..solvers.rq2_solver_adapter import Rq2SolverSpec
+ 
+-SCHEMA = 'h1_full_single_hour_job_candidate_v2'
++SCHEMA = 'h1_full_single_hour_job_candidate_v3'
+ ROOT = Path(__file__).resolve().parents[2]
+-WORKER = ROOT / 'experiments/run_rq2_normal_h1_full_job_worker_v2.py'
++WORKER = ROOT / 'experiments/run_rq2_normal_h1_full_job_worker_v3.py'
+ LIMIT = 256 * 1024
+ 
+ 
+--- src/rq2_joint_deliverability_boundary_v1/normal_h1_full_resource_contract_v2.py
++++ src/rq2_joint_deliverability_boundary_v1/normal_h1_full_resource_contract_v3.py
+@@ -6,10 +6,10 @@
+ from pathlib import Path
+ 
+ from . import execution_resource_contract as serial
+-from . import normal_h1_full_attempt_anchor as anchor
+-from . import normal_h1_hour_replay_v2 as replay
++from . import normal_h1_full_attempt_anchor_v3 as anchor
++from . import normal_h1_hour_replay_v3 as replay
+ 
+-SCHEMA='h1_full_normal_resource_declaration_v2'
++SCHEMA='h1_full_normal_resource_declaration_v3'
+ 
+ 
+ @dataclass(frozen=True)
+--- src/rq2_joint_deliverability_boundary_v1/normal_h1_generation_projection_v2.py
++++ src/rq2_joint_deliverability_boundary_v1/normal_h1_generation_projection_v3.py
+@@ -3,14 +3,17 @@
+ Raw assignments remain immutable evidence. This rule supplies a candidate, not
+ native provenance or an exact mathematical certificate. No solver is called.
+ """
+-from dataclasses import asdict
++from dataclasses import asdict, fields
+ from hashlib import sha256
+ from pathlib import Path
++from math import isfinite
+ from pyomo.environ import Var, value
+ 
+ from . import normal_h1_model as model_api
++from . import continuous_grid_normal as normal
++from . import normal_h1_generation_projection_v2 as rule
+ 
+-SCHEMA = 'h1_generation_domain_projection_v2'
++SCHEMA = rule.SCHEMA
+ EPSILON = 1e-9
+ RAW_DOMAIN_ERROR = 'unit_chronology: generation_mw must be a finite nonnegative number'
+ 
+@@ -22,8 +25,9 @@
+ 
+ 
+ def implementation_identity():
+-    return model_api._digest(SCHEMA, EPSILON.hex(),
++    return model_api._digest('h1_scoped_assignment_audit_v3', rule.implementation_identity(), EPSILON.hex(),
+         sha256(Path(model_api.__file__).read_bytes()).hexdigest(),
++        sha256(Path(normal.__file__).read_bytes()).hexdigest(),
+         sha256(Path(__file__).read_bytes()).hexdigest())
+ 
+ 
+@@ -39,14 +43,23 @@
+ error rejects. In particular, clipping the active generation objective usually
+ changes its hex and is rejected; this rule is not an optimization repair.
+ """
+-    if type(EPSILON) is not float or EPSILON.hex() != float(1e-9).hex():
+-        raise ValueError('frozen generation-domain epsilon drift')
+-    raw_audit = model_api.audit_h1_assignment(request, assignment,
+-                                             expected_identity=expected_identity)
++    _frozen_thresholds()
++    if model_api.RESIDUAL_LIMIT != 1e-9 or type(model_api.RESIDUAL_LIMIT) is not float:
++        raise ValueError('H1 normal residual gate drift')
++    model = model_api.build_h1_stage_model(request, expected_identity=expected_identity)
++    return _project_and_audit_built(request, assignment, model,
++        expected_identity=expected_identity, raw_objective_hex=raw_objective_hex)
++
++
++def _project_and_audit_built(request, assignment, model, *, expected_identity, raw_objective_hex):
++    """Private canonical build/clone before any assignment load; no shared state."""
++    _frozen_thresholds()
++    variables = {v.name: v for v in model.component_data_objects(Var)}
++    fixed = {name: value(v) for name, v in variables.items() if v.fixed}
++    raw_audit = _audit_on_model(request, assignment, model, variables, fixed, expected_identity)
+     if (raw_audit.canonical_objective.hex() != raw_objective_hex
+             or any(error != RAW_DOMAIN_ERROR for error in raw_audit.errors)):
+         raise ValueError('raw objective or non-domain assignment audit rejected')
+-    model = model_api.build_h1_stage_model(request, expected_identity=expected_identity)
+     names = {variable.name for key, variable in model.generation.items()
+              if key[0] == 'normal' and key[1] == 0}
+     candidate = dict(assignment)
+@@ -58,8 +71,7 @@
+             changes.append([name, float(amount).hex(), 0.0.hex(), float(-amount).hex()])
+     if raw_audit.errors and not changes:
+         raise ValueError('raw chronology error has no authorized generation mapping')
+-    audit = model_api.audit_h1_assignment(request, candidate,
+-                                         expected_identity=expected_identity)
++    audit = _audit_on_model(request, candidate, model, variables, fixed, expected_identity)
+     for variable in model.component_data_objects(Var):
+         variable.set_value(candidate[variable.name], skip_validation=True)
+     if any(not constraint.equality for constraint in model.power_balance.values()):
+@@ -68,7 +80,10 @@
+                    for constraint in model.power_balance.values()), default=0.0)
+     accepted = (not audit.errors and audit.canonical_objective.hex() == raw_objective_hex
+                 and balance <= EPSILON and all(r <= EPSILON for r in audit.lock_residuals))
+-    receipt = dict(schema=SCHEMA, rule_identity=implementation_identity(),
++    _frozen_thresholds()
++    if model_api.h1_stage_identity(request) != expected_identity:
++        raise ValueError('H1 stage input/lock/dependency identity changed during audit')
++    receipt = dict(schema=SCHEMA, rule_identity=rule.implementation_identity(),
+         epsilon_hex=EPSILON.hex(), raw_assignment_identity=assignment_identity(assignment),
+         candidate_assignment_identity=assignment_identity(candidate), changes=changes,
+         normalization_applied=bool(changes), candidate_accepted=accepted,
+@@ -80,3 +95,74 @@
+     if not accepted:
+         raise ProjectionRejected('normalized candidate full assignment/objective audit rejected', receipt)
+     return candidate, audit, receipt
++
++
++def _audit_on_model(request, assignment, model, variables, fixed, expected_identity):
++    """Private call-local canonical model; independently evaluate both assignments.
++
++    Fixed baselines precede either assignment. Deactivating only added H1 locks
++    reproduces the original normal-model residual, then restores the same rows.
++    No model, assignment, identity or audit cache survives project_and_audit.
++    """
++    _frozen_thresholds()
++    if type(assignment) is not dict or set(assignment) != set(variables):
++        raise ValueError('complete H1 assignment required')
++    errors = []
++    legacy_errors = []
++    for name, variable in variables.items():
++        amount = assignment[name]
++        if type(amount) not in (float, int) or not isfinite(amount):
++            raise ValueError('finite built-in H1 assignment values required')
++        if name in fixed and abs(amount-fixed[name]) > model_api.RESIDUAL_LIMIT:
++            errors.append(f'fixed_variable_violation: {name}')
++        if ((variable.lb is not None and amount < value(variable.lb)-model_api.RESIDUAL_LIMIT)
++                or (variable.ub is not None and amount > value(variable.ub)+model_api.RESIDUAL_LIMIT)):
++            errors.append(f'variable_bound_violation: {name}')
++        if name in fixed and abs(amount-fixed[name]) > normal.TOLERANCE:
++            legacy_errors.append(f'fixed_variable_violation: {name}')
++        variable.set_value(amount, skip_validation=True)
++    residual = model_api._constraint_violation(model)
++    integer = model_api._integrality_violation(model)
++    if residual > model_api.RESIDUAL_LIMIT:
++        errors.append('h1_normal_constraint_violation')
++    if integer > model_api.RESIDUAL_LIMIT:
++        errors.append('h1_normal_integrality_violation')
++    expressions = model_api._expressions(model, model_api.stage_order(request.inputs))
++    locks = tuple(abs(float(value(expr))-locked)
++                  for expr, locked in zip(expressions, request.locked_values))
++    model.h1_prior_objective_locks.deactivate()
++    try:
++        legacy_residual = model_api._constraint_violation(model)
++    finally:
++        model.h1_prior_objective_locks.activate()
++    if legacy_residual > normal.TOLERANCE:
++        legacy_errors.append('canonical_normal_constraint_violation')
++    if integer > normal.TOLERANCE:
++        legacy_errors.append('commitment_integrality_violation')
++    if not legacy_errors:
++        inputs = request.inputs
++        try:
++            hours = tuple(normal.GridHour(inputs.carry.identity, source_hour, tuple(
++                normal.UnitPoint(p.uid, bool(round(model.commitment[t, p.uid].value)),
++                                 model.generation['normal', t, p.uid].value)
++                for p in inputs.carry.points)) for t, source_hour in enumerate(inputs.source_hours))
++            normal.replay_grid_chunk(inputs.carry, hours)
++        except ValueError as error:
++            legacy_errors.append(f'unit_chronology: {error}')
++    errors.extend(legacy_errors)
++    result = object.__new__(model_api.H1AssignmentAudit)
++    payload = (expected_identity, model_api._digest(assignment), float(value(model.objective)),
++               locks, residual, integer, tuple(errors), 'derived_h1_assignment_audit_no_native_optimality')
++    for field, item in zip(fields(model_api.H1AssignmentAudit), payload, strict=True):
++        object.__setattr__(result, field.name, item)
++    return result
++
++
++def _frozen_thresholds():
++    if (type(EPSILON) is not float or EPSILON.hex()!=float(1e-9).hex()
++            or type(rule.EPSILON) is not float or rule.EPSILON.hex()!=float(1e-9).hex()):
++        raise ValueError('frozen generation-domain epsilon drift')
++    if type(model_api.RESIDUAL_LIMIT) is not float or model_api.RESIDUAL_LIMIT.hex()!=float(1e-9).hex():
++        raise ValueError('H1 normal residual gate drift')
++    if type(normal.TOLERANCE) is not float or normal.TOLERANCE.hex()!=float(1e-6).hex():
++        raise ValueError('legacy normal tolerance drift')
+--- src/rq2_joint_deliverability_boundary_v1/normal_h1_hour_archive_v2.py
++++ src/rq2_joint_deliverability_boundary_v1/normal_h1_hour_archive_v3.py
+@@ -1,13 +1,13 @@
+ """Hour-local stage archive with independent replay and no native invocation."""
+ from copy import deepcopy
+-from dataclasses import asdict,dataclass
++from dataclasses import asdict,dataclass,fields
+ from hashlib import sha256
+ from pathlib import Path
+ 
+ from . import normal_h1_chunk_journal as chunks
+-from . import normal_h1_hour_replay_v2 as replay
+-
+-SCHEMA='h1_hour_stage_archive_development_v2'
++from . import normal_h1_hour_replay_v3 as replay
++
++SCHEMA='h1_hour_stage_archive_development_v3'
+ MAX_RAW=replay.native.MAX_PAYLOAD_BYTES
+ 
+ 
+@@ -56,6 +56,7 @@
+         self._binding=self._binding_identity()
+         self._guard=chunks._Exclusive()
+         self._poisoned=self._closed=False
++        self._verified_snapshots = {}
+         n=len(self._order)
+         self._journal=chunks.DevelopmentH1ChunkJournal(root,
+             chunks.ChunkContentBudget(n+1,MAX_RAW+chunks.METADATA_BYTES,n*MAX_RAW+(n+1)*chunks.METADATA_BYTES),
+@@ -84,6 +85,7 @@
+     def close(self):
+         with self._guard:
+             if not self._closed:
++                self._verified_snapshots.clear()
+                 self._journal.close()
+                 self._closed=True
+ 
+@@ -113,14 +115,22 @@
+             implementation=replay.implementation_identity())
+ 
+     def _restore(self):
+-        """One verified chunk scan plus one ordered read pass in the same snapshot."""
+-        self._check()
++        return self._read_snapshot(derive_prefix=False)
++
++    def _read_snapshot(self,*,derive_prefix):
++        """One byte-verified snapshot and ordered numerical/metadata audit."""
+         with self._journal._guard:
+             connection=None
++            snapshot_error=None
+             try:
++                self._check()
+                 connection=self._journal._connect()
+                 connection.execute('BEGIN')
+                 physical=self._journal._scan(connection)
++                if derive_prefix and physical.events!=len(self._order):
++                    raise ValueError('complete ordered stage prefix required')
++                cached=self._snapshot_get('prefix' if derive_prefix else 'restore',physical)
++                if cached is not None:return cached
+                 locks=()
+                 hashes,pins,numeric=[],[],[]
+                 assignment=projection=None
+@@ -164,9 +174,27 @@
+                 if status=='collecting' and len(locks)==len(self._order):status='awaiting_terminal'
+                 self._journal._check()
+                 self._check()
+-                return H1HourArchiveInspection(self._binding,physical.head,status,stored,locks,projection)
++                result=H1HourArchiveInspection(self._binding,physical.head,status,stored,locks,projection)
++                if status in ('awaiting_terminal','accepted'):
++                    self._snapshot_put('restore',physical,result)
++                if derive_prefix:
++                    if status!='awaiting_terminal':raise ValueError('complete accepted stage prefix required')
++                    projected=self._projection(locks,assignment,hashes,pins,numeric)
++                    self._snapshot_put('prefix',physical,projected)
++                    return projected
++                return result
++            except BaseException as error:
++                snapshot_error=error
++                self._verified_snapshots.clear()
++                self._poisoned=True
++                raise
+             finally:
+-                if connection is not None:connection.close()
++                if connection is not None:
++                    try:connection.close()
++                    except BaseException:
++                        self._verified_snapshots.clear()
++                        self._poisoned=True
++                        if snapshot_error is None:raise
+ 
+     def inspect(self):
+         with self._guard:
+@@ -226,21 +254,57 @@
+                 raise
+ 
+     def _replay_complete_prefix(self):
+-        with self._journal._guard:
+-            connection=self._journal._connect()
+-            try:
+-                connection.execute('BEGIN')
+-                physical=self._journal._scan(connection)
+-                if physical.events!=len(self._order):raise ValueError('complete ordered stage prefix required')
+-                def reports():
+-                    for seq,size in connection.execute('SELECT seq,payload_bytes FROM events ORDER BY seq'):
+-                        if not 0<size<=MAX_RAW:raise ValueError('bounded prefix stage required')
+-                        buffer=bytearray()
+-                        for (part,) in connection.execute('SELECT payload FROM chunks WHERE event_seq=? ORDER BY chunk_index',(seq,)):
+-                            buffer.extend(part)
+-                        yield bytes(buffer)
+-                result=replay.replay_stream(self._packet,self._spec,self._limits,reports(),expected_key=self._key)
+-                self._journal._check()
+-                self._check()
+-                return result
+-            finally:connection.close()
++        with replay.guard.solver_calls_forbidden():
++            return self._read_snapshot(derive_prefix=True)
++
++    def _snapshot_key(self,physical):
++        # Every lookup is inside a NEW fully scanned SQLite read snapshot.
++        # _check revalidates packet, inputs, spec, limits, dependencies and code.
++        self._check()
++        self._journal._check()
++        replay.generation_projection._frozen_thresholds()
++        if type(physical) is not chunks.ChunkInspection or physical.content_verified is not True:
++            raise ValueError('complete physical verification required before numerical reuse')
++        return chunks.base._bytes([self._binding,self._key,asdict(physical),
++            replay.implementation_identity(),replay.native.capture.implementation_identity(),
++            replay.native.capture.provenance.adapter.implementation_identity(),
++            replay.generation_projection.rule.implementation_identity(),
++            replay.generation_projection.EPSILON.hex(),
++            replay.generation_projection.model_api.RESIDUAL_LIMIT.hex(),
++            replay.generation_projection.normal.TOLERANCE.hex()])
++
++    @staticmethod
++    def _snapshot_bytes(kind,result):
++        expected=H1HourArchiveInspection if kind=='restore' else replay.H1HourReplayedProjection
++        if type(result) is not expected:raise ValueError('exact numerical snapshot type required')
++        def encode(x):
++            if type(x) is bytes:return ['bytes',x.hex()]
++            if type(x) is tuple:return ['tuple',[encode(v) for v in x]]
++            if type(x) is float:return ['float',x.hex()]
++            if x is None or type(x) in (str,int,bool):return [type(x).__name__,x]
++            if type(x) in (H1HourArchiveInspection,replay.H1HourReplayedProjection):
++                return [type(x).__name__,[[f.name,encode(getattr(x,f.name))] for f in fields(x)]]
++            raise ValueError('unsupported numerical snapshot content')
++        return chunks.base._bytes(encode(result))
++
++    def _snapshot_get(self,kind,physical):
++        try:
++            key=self._snapshot_key(physical)
++            entry=self._verified_snapshots.get(kind)
++            if entry is None:return None
++            if (type(entry) is not tuple or len(entry)!=3
++                    or sha256(self._snapshot_bytes(kind,entry[1])).hexdigest()!=entry[2]):
++                raise ValueError('audited numerical snapshot changed')
++            if key!=entry[0]:
++                self._verified_snapshots.pop(kind,None)
++                return None
++            return entry[1]
++        except BaseException:
++            self._verified_snapshots.clear()
++            self._poisoned=True
++            raise
++
++    def _snapshot_put(self,kind,physical,result):
++        key=self._snapshot_key(physical)
++        pin=sha256(self._snapshot_bytes(kind,result)).hexdigest()
++        self._verified_snapshots[kind]=(key,result,pin)
+--- src/rq2_joint_deliverability_boundary_v1/normal_h1_hour_replay_v2.py
++++ src/rq2_joint_deliverability_boundary_v1/normal_h1_hour_replay_v3.py
+@@ -2,13 +2,14 @@
+ from dataclasses import asdict, dataclass
+ from hashlib import sha256
+ from pathlib import Path
++from pyomo.environ import Var, value
+ 
+ from . import normal_h1_replay as old
+ from . import normal_h1_resource_shape as guard
+-from . import normal_h1_generation_projection_v2 as generation_projection
++from . import normal_h1_generation_projection_v3 as generation_projection
+ 
+ current,native=old.current,old.native
+-SCHEMA='h1_full_hour_streaming_replay_development_v2'
++SCHEMA='h1_full_hour_streaming_replay_development_v3'
+ 
+ 
+ @dataclass(frozen=True)
+@@ -80,7 +81,7 @@
+     req = native.model_api.H1StageRequest(packet.inputs, locks)
+     stage_pin = native.model_api.h1_stage_identity(req)
+     model = native.model_api.build_h1_stage_model(req, expected_identity=stage_pin)
+-    scale = native.capture.audit.model_scale(model)
++    audit_model, scale, structure = _clone_for_audit(model)
+     if scale.variables > limits.max_variables or scale.constraints > limits.max_constraints:
+         raise ValueError("hour replay model exceeds declared size limits")
+     try:
+@@ -90,7 +91,7 @@
+                 or type(report['variables']) is not int or report['variables'] != scale.variables
+                 or type(report['constraints']) is not int or report['constraints'] != scale.constraints
+                 or report['implementation_identity'] != runner_pin
+-                or report['model_structure_identity'] != native.capture.audit._structure(model)
++                or report['model_structure_identity'] != structure
+                 or native.capture.encode(report['solver_options']) != native.capture.encode(
+                     native.capture.audit.solver_options(specification))
+                 or any(report[k] is not False for k in ('formal_result', 'normal_accepted', 'optimality_certified'))
+@@ -106,7 +107,7 @@
+         assignment = {name: float.fromhex(value) for name, value in report['assignment']}
+         if not numeric['candidate_numeric_predicate_passed']:
+             raise ValueError('H1 archived numerical/assignment predicate rejected')
+-        assignment, audit, mapping = generation_projection.project_and_audit(req, assignment,
++        assignment, audit, mapping = generation_projection._project_and_audit_built(req, assignment, audit_model,
+             expected_identity=stage_pin, raw_objective_hex=report['provenance']['canonical_objective_hex'])
+         lock = audit.canonical_objective
+         if objective[0] == 'commitment':
+@@ -125,11 +126,11 @@
+ def _projection(packet,locks,assignment,hashes,stage_pins,numeric_pins,*,key,implementation):
+     transition=current.source.replay_feasible_boundary(packet,assignment,expected_input_identity=packet.input_identity)
+     after=transition.candidate_boundary
+-    projection_pin=current.source._digest('h1_normal_decision_projection_v2',after.network_identity,
+-        after.completed_hours,after.units,locks,generation_projection.implementation_identity())
++    projection_pin=current.source._digest('h1_normal_decision_projection_v3',after.network_identity,
++        after.completed_hours,after.units,locks,generation_projection.rule.implementation_identity())
+     payload=native.capture.encode(dict(network_identity=after.network_identity,completed_hours=after.completed_hours,
+         units=[[uid,on,float(power).hex(),age] for uid,on,power,age in after.units],
+-        canonical_locks=[v.hex() for v in locks],generation_projection_rule=generation_projection.implementation_identity()))
++        canonical_locks=[v.hex() for v in locks],generation_projection_rule=generation_projection.rule.implementation_identity()))
+     return current.source._owned(H1HourReplayedProjection,request_key=key,before_identity=transition.before_identity,
+         projection_identity=projection_pin,projection_payload=payload,canonical_locks=locks,
+         report_sha256=tuple(hashes),stage_identities=tuple(stage_pins),numeric_sha256=tuple(numeric_pins),
+@@ -166,3 +167,26 @@
+     if request_key(packet,specification,limits)!=expected_key or implementation_identity()!=own:
+         raise ValueError('full-hour replay input or implementation drift')
+     return result
++
++
++def _clone_for_audit(model):
++    """Prove independent canonical variables before numeric replay can load raw."""
++    clone=model.clone()
++    if clone is model or type(clone) is not type(model):
++        raise ValueError('independent canonical audit clone required')
++    left={v.name:v for v in model.component_data_objects(Var)}
++    right={v.name:v for v in clone.component_data_objects(Var)}
++    if (set(left)!=set(right) or not model.h1_prior_objective_locks.active
++            or not clone.h1_prior_objective_locks.active):
++        raise ValueError('audit clone variable/lock mismatch')
++    for name,v in left.items():
++        other=right[name]
++        if (v is other or v.fixed!=other.fixed
++                or (v.fixed and float(value(v)).hex()!=float(value(other)).hex())):
++            raise ValueError('audit clone aliases variables or changes canonical fixed values')
++    scale=native.capture.audit.model_scale(model)
++    structure=native.capture.audit._structure(model)
++    if (native.capture.audit.model_scale(clone)!=scale
++            or native.capture.audit._structure(clone)!=structure):
++        raise ValueError('audit clone canonical structure mismatch')
++    return clone,scale,structure
+--- src/rq2_joint_deliverability_boundary_v1/normal_h1_incremental_archive_v2.py
++++ src/rq2_joint_deliverability_boundary_v1/normal_h1_incremental_archive_v3.py
+@@ -3,10 +3,10 @@
+ from hashlib import sha256
+ from pathlib import Path
+ 
+-from . import normal_h1_hour_archive_v2 as base
++from . import normal_h1_hour_archive_v3 as base
+ 
+ chunks,replay=base.chunks,base.replay
+-SCHEMA='h1_incremental_hour_archive_development_v2'
++SCHEMA='h1_incremental_hour_archive_development_v3'
+ 
+ 
+ @dataclass(frozen=True)
+--- src/rq2_joint_deliverability_boundary_v1/normal_h1_stage_collector_v2.py
++++ src/rq2_joint_deliverability_boundary_v1/normal_h1_stage_collector_v3.py
+@@ -4,11 +4,11 @@
+ from hashlib import sha256
+ from pathlib import Path
+ 
+-from . import normal_h1_incremental_archive_v2 as sink
++from . import normal_h1_incremental_archive_v3 as sink
+ 
+ chunks,replay=sink.chunks,sink.replay
+ native=replay.native
+-SCHEMA='h1_durable_stage_collector_development_v2'
++SCHEMA='h1_durable_stage_collector_development_v3'
+ EMPTY_SHA=sha256(b'').hexdigest()
+ 
+ 
+--- tests/test_rq2_normal_h1_calibration_gate_v2.py
++++ tests/test_rq2_normal_h1_calibration_gate_v3.py
+@@ -5,8 +5,8 @@
+ 
+ import pytest
+ 
+-from src.rq2_joint_deliverability_boundary_v1 import normal_h1_calibration_gate_v2 as api
+-from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_job_v2 as job
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_calibration_gate_v3 as api
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_job_v3 as job
+ 
+ 
+ @pytest.fixture
+--- tests/test_rq2_normal_h1_full_attempt_anchor_v1.py
++++ tests/test_rq2_normal_h1_full_attempt_anchor_v3.py
+@@ -1,7 +1,11 @@
+ from hashlib import sha256
++from collections import Counter
++import json
++import os
+ import pytest
+-from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_attempt_anchor as api
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_attempt_anchor_v3 as api
+ from src.rq2_joint_deliverability_boundary_v1 import normal_h1_attempt_anchor as old
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_attempt_anchor as legacy_full
+ 
+ 
+ def pin(i):return sha256(str(i).encode()).hexdigest()
+@@ -108,3 +112,133 @@
+             with pytest.raises(ValueError):api.DevelopmentH1FullAttemptAnchor(root,'1'*64,max_records=3)
+     restored=api.DevelopmentH1FullAttemptAnchor(root,'1'*64,max_records=3)
+     restored.close()
++
++
++def filled(root):
++    owner=api.DevelopmentH1FullAttemptAnchor(root,'1'*64,max_records=3,create=True)
++    receipt=owner.advance('2'*64,'3'*64,expected_previous=None)
++    return owner,receipt
++
++
++def test_every_scan_reads_each_file_once_and_confirm_still_scans(tmp_path,monkeypatch):
++    owner,receipt=filled(tmp_path/'full_non_authoritative')
++    original=api._read;calls=Counter()
++    def counted(path,identity=None):
++        calls[path.name]+=1
++        assert identity is not None
++        return original(path,identity)
++    monkeypatch.setattr(api,'_read',counted)
++    try:
++        assert owner.inspect()==receipt
++        assert calls=={'header.json':1,'000.json':1}
++        owner.confirm(receipt)
++        assert calls=={'header.json':2,'000.json':2}
++    finally:owner.close()
++
++
++@pytest.mark.parametrize('fault',['same_bytes_replace','retained_bytes','header','extra','gap','missing','read','lease'])
++def test_live_single_view_scan_faults_poison(tmp_path,monkeypatch,fault):
++    root=tmp_path/'full_non_authoritative';owner,_=filled(root)
++    record=root/'000.json'
++    if fault=='same_bytes_replace':
++        other=tmp_path/'replacement.json';other.write_bytes(record.read_bytes());os.replace(other,record)
++    elif fault in ('retained_bytes','header'):
++        path=record if fault=='retained_bytes' else root/'header.json'
++        item=json.loads(path.read_bytes());item['schema']='changed';path.write_bytes(api.chunks.base._bytes(item))
++    elif fault=='extra':(root/'unexpected.json').write_bytes(b'{}')
++    elif fault=='gap':record.rename(root/'001.json')
++    elif fault=='missing':record.rename(tmp_path/'moved_record.json')
++    elif fault=='read':
++        def fail(*a):raise OSError('read failed')
++        monkeypatch.setattr(api,'_read',fail)
++    elif fault=='lease':
++        def fail():raise OSError('lease drift')
++        monkeypatch.setattr(owner._lease,'check',fail)
++    try:
++        with pytest.raises((ValueError,OSError)):owner.inspect()
++        assert owner._poisoned
++        with pytest.raises(ValueError):owner.inspect()
++    finally:owner.close()
++
++
++@pytest.mark.parametrize('fault',['key','sequence','previous_record_sha256','previous_registry_head','registry_head','event_sha256'])
++def test_reopen_single_view_validates_full_chain(tmp_path,fault):
++    root=tmp_path/'full_non_authoritative';owner,_=filled(root);owner.close()
++    path=root/'000.json';item=json.loads(path.read_bytes())
++    if fault=='key':item['extra']=1
++    elif fault=='sequence':item[fault]=True
++    elif fault=='previous_record_sha256':item[fault]='9'*64
++    elif fault=='previous_registry_head':item[fault]='9'*64
++    else:item[fault]='invalid'
++    path.write_bytes(api.chunks.base._bytes(item))
++    with pytest.raises(ValueError):api.DevelopmentH1FullAttemptAnchor(root,'1'*64,max_records=3)
++
++
++def test_replacement_during_read_rejected(tmp_path,monkeypatch):
++    root=tmp_path/'full_non_authoritative';owner,_=filled(root)
++    record=root/'000.json';other=tmp_path/'replacement.json';other.write_bytes(record.read_bytes())
++    original=api.files.local._file_identity;calls=[0]
++    def replacing(path):
++        if path==record:
++            calls[0]+=1
++            if calls[0]==2:os.replace(other,record)
++        return original(path)
++    monkeypatch.setattr(api.files.local,'_file_identity',replacing)
++    try:
++        with pytest.raises(ValueError):owner.inspect()
++        assert owner._poisoned
++    finally:owner.close()
++
++
++def test_fresh_scan_after_write_failure_poison_and_retains_record(tmp_path,monkeypatch):
++    root=tmp_path/'full_non_authoritative'
++    owner=api.DevelopmentH1FullAttemptAnchor(root,'1'*64,max_records=3,create=True)
++    scan=owner._scan;calls=[0]
++    def failed():
++        calls[0]+=1
++        if calls[0]==2:raise OSError('fresh scan failed')
++        return scan()
++    monkeypatch.setattr(owner,'_scan',failed)
++    try:
++        with pytest.raises(OSError):owner.advance('2'*64,'3'*64,expected_previous=None)
++        assert owner._poisoned and (root/'000.json').exists()
++    finally:owner.close()
++    with pytest.raises(ValueError):api.DevelopmentH1FullAttemptAnchor(root,'1'*64,max_records=3,expected_record_sha256='9'*64)
++    restored=api.DevelopmentH1FullAttemptAnchor(root,'1'*64,max_records=3)
++    try:assert restored.inspect().registry_head=='2'*64
++    finally:restored.close()
++
++
++@pytest.mark.parametrize('fault',['missing','none','identity','pin','bootstrap','empty_bootstrap'])
++def test_retained_metadata_cannot_disable_stable_view_check(tmp_path,fault):
++    owner,_=filled(tmp_path/'full_non_authoritative')
++    identity,digest=owner._retained['000.json']
++    if fault=='missing':owner._retained.pop('000.json')
++    elif fault=='none':owner._retained['000.json']=None
++    elif fault=='identity':owner._retained['000.json']=(None,digest)
++    elif fault=='pin':owner._retained['000.json']=(identity,'9'*64)
++    else:
++        owner._expected_count=None
++        if fault=='bootstrap':owner._retained.pop('000.json')
++        else:owner._retained.clear()
++    try:
++        with pytest.raises(ValueError):owner.inspect()
++        assert owner._poisoned
++    finally:owner.close()
++
++
++def test_full_v1_and_v3_receipts_and_roots_are_isolated(tmp_path):
++    root=tmp_path/'v3_non_authoritative';owner,receipt=filled(root)
++    foreign=legacy_full.FullAnchorReceipt(receipt.anchor_identity,receipt.sequence,receipt.registry_head,receipt.record_sha256)
++    try:
++        with pytest.raises(ValueError):owner.confirm(foreign)
++    finally:owner.close()
++    with pytest.raises(ValueError):legacy_full.DevelopmentH1FullAttemptAnchor(root,'1'*64,max_records=3)
++    root=tmp_path/'v1_non_authoritative'
++    prior=legacy_full.DevelopmentH1FullAttemptAnchor(root,'1'*64,max_records=3,create=True)
++    try:
++        receipt=prior.advance('2'*64,'3'*64,expected_previous=None)
++        foreign=api.FullAnchorReceipt(receipt.anchor_identity,receipt.sequence,receipt.registry_head,receipt.record_sha256)
++        with pytest.raises(ValueError):prior.confirm(foreign)
++    finally:prior.close()
++    with pytest.raises(ValueError):api.DevelopmentH1FullAttemptAnchor(root,'1'*64,max_records=3)
+--- tests/test_rq2_normal_h1_full_collector_v2.py
++++ tests/test_rq2_normal_h1_full_collector_v3.py
+@@ -1,7 +1,7 @@
+ from dataclasses import replace
+ import pytest
+ from tests.test_rq2_normal_h1_hour_archive_v1 import saved,no_solver,packet,spec
+-from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_collector_v2 as api
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_collector_v3 as api
+ 
+ REQUIRE_GATE = api.DevelopmentH1FullCollector._require_execution_gate
+ 
+--- tests/test_rq2_normal_h1_full_job_v2.py
++++ tests/test_rq2_normal_h1_full_job_v3.py
+@@ -7,8 +7,8 @@
+ 
+ import pytest
+ 
+-from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_job_v2 as api
+-from tests.test_rq2_normal_h1_full_collector_v2 import inputs
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_job_v3 as api
++from tests.test_rq2_normal_h1_full_collector_v3 import inputs
+ from tests.test_rq2_normal_h1_hour_archive_v1 import saved, no_solver
+ 
+ VERIFY_CONSUMED = api.gates.verify_consumed
+@@ -216,7 +216,7 @@
+     worker.write_text(
+         'import sys, os, json, datetime\nfrom pathlib import Path\n'
+         f'sys.path.insert(0, {str(api.ROOT)!r})\n'
+-        'from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_job_v2 as api\n'
++        'from src.rq2_joint_deliverability_boundary_v1 import normal_h1_full_job_v3 as api\n'
+         'from src.grid.rts_gmlc import *\nimport datetime\n'
+         'api.WORKER=Path(__file__)\n'
+         f'data={p.network.data!r}\nrow={row!r}\n'
+--- tests/test_rq2_normal_h1_generation_projection_v2.py
++++ tests/test_rq2_normal_h1_generation_projection_v3.py
+@@ -11,10 +11,10 @@
+ 
+ from tests.test_rq2_continuous_grid_normal_v1 import fixture, assignment_for
+ from tests.test_rq2_normal_h1_hour_archive_v1 import no_solver, saved, packet, spec
+-from src.rq2_joint_deliverability_boundary_v1 import normal_h1_generation_projection_v2 as api
+-from src.rq2_joint_deliverability_boundary_v1 import normal_h1_hour_replay_v2 as replay
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_generation_projection_v3 as api
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_hour_replay_v3 as replay
+ from src.rq2_joint_deliverability_boundary_v1 import normal_h1_hour_replay as legacy
+-from src.rq2_joint_deliverability_boundary_v1 import normal_h1_hour_archive_v2 as archive
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_hour_archive_v3 as archive
+ 
+ 
+ def zero_case(locks=(0.,)):
+@@ -198,3 +198,176 @@
+     receipt=error.value.receipt
+     assert receipt['maximum_power_balance_residual']>1e-9
+     assert receipt['changes'] and not receipt['candidate_accepted']
++
++
++@pytest.mark.parametrize('fault', ['none', 'lock', 'bound', 'fixed', 'integer', 'balance', 'chronology'])
++def test_shared_model_audit_exactly_matches_independent_legacy_oracle(fault):
++    from dataclasses import asdict
++    req, a = zero_case((1e-5,) if fault == 'lock' else (0.,))
++    pin = api.model_api.h1_stage_identity(req)
++    model = api.model_api.build_h1_stage_model(req, expected_identity=pin)
++    variables = {v.name:v for v in model.component_data_objects(Var)}
++    fixed = {name:value(v) for name,v in variables.items() if v.fixed}
++    if fault == 'bound': a['generation[normal,0,G1]'] = -1.
++    if fault == 'fixed': a[next(iter(fixed))] += 1e-5
++    if fault == 'integer': a['commitment[0,G1]'] = .25
++    if fault == 'balance': a['branch_flow[normal,0,AC1]'] = 1.
++    if fault == 'chronology': a['generation[normal,0,G1]'] = -1e-12
++    expected = api.model_api.audit_h1_assignment(req,a,expected_identity=pin)
++    actual = api._audit_on_model(req,a,model,variables,fixed,pin)
++    assert asdict(actual) == asdict(expected)
++    assert actual.canonical_objective.hex() == expected.canonical_objective.hex()
++    assert model.h1_prior_objective_locks.active
++    # A second assignment must still compare with canonical fixed baselines.
++    actual_again = api._audit_on_model(req,a,model,variables,fixed,pin)
++    assert actual_again == expected
++
++
++@pytest.mark.parametrize('fault', ['nan','inf','bool','missing','extra'])
++def test_malformed_complete_assignment_rejected(fault):
++    req,a = zero_case()
++    name='generation[normal,0,G1]'
++    if fault == 'nan': a[name]=float('nan')
++    if fault == 'inf': a[name]=float('inf')
++    if fault == 'bool': a[name]=False
++    if fault == 'missing': a.pop(name)
++    if fault == 'extra': a['unknown']=0.
++    with pytest.raises(ValueError):
++        api.project_and_audit(req,a,expected_identity=api.model_api.h1_stage_identity(req),raw_objective_hex='0x0.0p+0')
++
++
++def test_one_call_local_model_for_raw_and_candidate_and_identical_rule_receipt(monkeypatch):
++    from src.rq2_joint_deliverability_boundary_v1 import normal_h1_generation_projection_v2 as oracle
++    req,a=zero_case()
++    a['generation[normal,0,G1]']=-1e-12
++    pin=api.model_api.h1_stage_identity(req)
++    expected=oracle.project_and_audit(req,a,expected_identity=pin,raw_objective_hex='0x0.0p+0')
++    build=api.model_api.build_h1_stage_model
++    calls=[]
++    def counted(*args,**kwargs):
++        calls.append(1)
++        return build(*args,**kwargs)
++    monkeypatch.setattr(api.model_api,'build_h1_stage_model',counted)
++    result=api.project_and_audit(req,a,expected_identity=pin,raw_objective_hex='0x0.0p+0')
++    assert len(calls)==1 and result==expected
++    assert result[2]['rule_identity']==oracle.implementation_identity()
++
++
++def test_input_identity_rechecked_at_exit(monkeypatch):
++    req,a=zero_case()
++    pin=api.model_api.h1_stage_identity(req)
++    original=api._audit_on_model
++    def drift(*args):
++        result=original(*args)
++        monkeypatch.setattr(api.model_api,'h1_stage_identity',lambda r:'0'*64)
++        return result
++    monkeypatch.setattr(api,'_audit_on_model',drift)
++    with pytest.raises(ValueError,match='changed during audit'):
++        api.project_and_audit(req,a,expected_identity=pin,raw_objective_hex='0x0.0p+0')
++
++
++@pytest.mark.parametrize('target,field', [('model_api','RESIDUAL_LIMIT'),('normal','TOLERANCE'),('rule','EPSILON')])
++def test_threshold_drift_between_raw_and_candidate_rejected(monkeypatch,target,field):
++    req,a=zero_case();pin=api.model_api.h1_stage_identity(req)
++    original=api._audit_on_model
++    def drift(*args):
++        result=original(*args)
++        monkeypatch.setattr(getattr(api,target),field,1e-3)
++        return result
++    monkeypatch.setattr(api,'_audit_on_model',drift)
++    with pytest.raises(ValueError,match='drift'):
++        api.project_and_audit(req,a,expected_identity=pin,raw_objective_hex='0x0.0p+0')
++
++
++def test_lock_activation_restored_on_legacy_residual_exception(monkeypatch):
++    req,a=zero_case();pin=api.model_api.h1_stage_identity(req)
++    model=api.model_api.build_h1_stage_model(req,expected_identity=pin)
++    variables={v.name:v for v in model.component_data_objects(Var)}
++    fixed={name:value(v) for name,v in variables.items() if v.fixed}
++    original=api.model_api._constraint_violation
++    def fail(model):
++        if not model.h1_prior_objective_locks.active:raise RuntimeError('legacy residual interrupted')
++        return original(model)
++    monkeypatch.setattr(api.model_api,'_constraint_violation',fail)
++    with pytest.raises(RuntimeError):api._audit_on_model(req,a,model,variables,fixed,pin)
++    assert model.h1_prior_objective_locks.active
++
++
++@pytest.mark.parametrize('value',[2440.,2441.,0.,-1.,float('nan'),float('inf'),True])
++def test_offline_benchmark_refuses_overbudget_or_invalid_timings(value):
++    from experiments.verify_rq2_normal_h1_generation_projection_v3 import _timing_gate
++    with pytest.raises(ValueError):_timing_gate(value,2440)
++    assert _timing_gate(100.,2440)==2340.
++
++
++def test_offline_output_cannot_add_files_to_old_or_native_root(tmp_path):
++    from experiments.verify_rq2_normal_h1_generation_projection_v3 import _separate_output,_exact_inventory
++    old=tmp_path/'old';native=tmp_path/'new';old.mkdir()
++    for path in [old,old/'extra_non_authoritative',native,tmp_path,native/'extra_non_authoritative']:
++        with pytest.raises(ValueError):_separate_output(path,native,old)
++    _separate_output(tmp_path/'diagnostic_non_authoritative',native,old)
++    _exact_inventory(old,{})
++    (old/'unexpected').write_bytes(b'1')
++    with pytest.raises(ValueError):_exact_inventory(old,{})
++
++
++def test_complete_projection_payload_gate_rejects_missing_or_tampered_terminal(tmp_path):
++    from experiments.verify_rq2_normal_h1_generation_projection_v3 import _terminal_gate
++    db=tmp_path/'collector_non_authoritative/stages_non_authoritative/h1_chunk_journal.sqlite3'
++    db.parent.mkdir(parents=True)
++    with sqlite3.connect(db) as c:
++        c.execute('create table events(seq integer,metadata blob)')
++        c.executemany('insert into events values(?,?)',[(i,b'{}') for i in range(232)])
++    metas=[{'lock_hex':'0x0.0p+0'}]*232
++    with pytest.raises(ValueError):_terminal_gate(tmp_path,metas,'1'*64)
++    terminal=dict(kind='accepted_terminal',stored_reports=232,canonical_locks=['0x0.0p+0']*232,projection_sha256='1'*64)
++    with sqlite3.connect(db) as c:c.execute('insert into events values(232,?)',(json.dumps(terminal).encode(),))
++    assert _terminal_gate(tmp_path,metas,'1'*64)==terminal
++    with pytest.raises(ValueError):_terminal_gate(tmp_path,metas,'2'*64)
++
++
++
++def test_canonical_clone_preserves_model_but_isolates_variable_objects():
++    req,a=zero_case();pin=api.model_api.h1_stage_identity(req)
++    model=api.model_api.build_h1_stage_model(req,expected_identity=pin)
++    clone=model.clone()
++    assert replay.native.capture.audit._structure(clone)==replay.native.capture.audit._structure(model)
++    assert replay.native.capture.audit.model_scale(clone)==replay.native.capture.audit.model_scale(model)
++    assert clone.h1_prior_objective_locks.active
++    left={v.name:v for v in model.component_data_objects(Var)}
++    right={v.name:v for v in clone.component_data_objects(Var)}
++    for name,v in left.items():
++        assert v is not right[name] and v.fixed==right[name].fixed
++        before=right[name].value
++        v.set_value(999.,skip_validation=True)
++        assert right[name].value==before
++
++
++def test_stage_builds_once_and_numeric_assignment_cannot_pollute_audit_clone(saved,monkeypatch):
++    p=packet();limits=replay.H1HourReplayLimits(3,100,500)
++    from src.rq2_joint_deliverability_boundary_v1 import normal_h1_hour_replay_v2 as oracle
++    expected=oracle._audit_stage(p,spec(),oracle.H1HourReplayLimits(3,100,500),0,(),saved[1][0])
++    build=api.model_api.build_h1_stage_model;verify=replay.native.replay.verify_numerical
++    calls=[]
++    def counted(*args,**kwargs):
++        calls.append(1);return build(*args,**kwargs)
++    def poison_numeric_values(model,report):
++        result=verify(model,report)
++        for v in model.component_data_objects(Var):v.set_value(999.,skip_validation=True)
++        return result
++    monkeypatch.setattr(api.model_api,'build_h1_stage_model',counted)
++    monkeypatch.setattr(replay.native.replay,'verify_numerical',poison_numeric_values)
++    actual=replay._audit_stage(p,spec(),limits,0,(),saved[1][0])
++    assert len(calls)==1 and actual==expected
++
++
++@pytest.mark.parametrize('fault',['self','fixed','locks'])
++def test_bad_clone_rejected_before_numeric_loading(monkeypatch,fault):
++    req,_=zero_case();model=api.model_api.build_h1_stage_model(req,expected_identity=api.model_api.h1_stage_identity(req))
++    clone=model.clone()
++    if fault=='fixed':
++        fixed=next(v for v in clone.component_data_objects(Var) if v.fixed)
++        fixed.set_value(float(value(fixed))+1.,skip_validation=True)
++    elif fault=='locks':clone.h1_prior_objective_locks.deactivate()
++    monkeypatch.setattr(model,'clone',lambda: model if fault=='self' else clone)
++    with pytest.raises(ValueError):replay._clone_for_audit(model)
+--- /dev/null
++++ tests/test_rq2_normal_h1_snapshot_cache_v3.py
+@@ -0,0 +1,128 @@
++from dataclasses import replace
++import os
++import sqlite3
++import pytest
++from tests.test_rq2_normal_h1_hour_archive_v1 import saved,no_solver,packet,spec
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_hour_archive_v3 as api
++
++
++def make(root,**kw):
++    return api.DevelopmentH1HourArchive(root,packet(),spec(),api.replay.H1HourReplayLimits(3,100,500),
++        parent_intent_head='1'*64,source_lineage_identity='2'*64,**kw)
++
++
++def full(root,rows):
++    owner=make(root,create=True)
++    for raw in rows:owner.record_report(raw,expected_head=owner.head)
++    return owner
++
++
++def test_same_head_reuses_numbers_but_every_call_scans_and_new_owner_reaudits(tmp_path,saved,monkeypatch):
++    root=tmp_path/'archive_non_authoritative';owner=full(root,saved[1])
++    counts={'audit':0,'scan':0};audit=api.replay._audit_stage;scan=owner._journal._scan
++    def counted_audit(*a,**k):counts['audit']+=1;return audit(*a,**k)
++    def counted_scan(*a,**k):counts['scan']+=1;return scan(*a,**k)
++    monkeypatch.setattr(api.replay,'_audit_stage',counted_audit)
++    monkeypatch.setattr(owner._journal,'_scan',counted_scan)
++    try:
++        prior=owner.inspect();assert counts=={'audit':0,'scan':1}
++        one=owner._replay_complete_prefix();assert counts['audit']==3
++        two=owner._replay_complete_prefix();assert one==two and counts['audit']==3 and counts['scan']==3
++        final=owner.finish(expected_head=owner.head)
++        assert final.status=='accepted' and counts['audit']==6  # new terminal head is reaudited
++        assert owner.inspect()==final and counts['audit']==6
++        head=owner.head
++    finally:owner.close()
++    reopened=make(root,expected_head=head)
++    try:
++        assert counts['audit']==9  # independent owner cannot inherit memoized audit
++        assert reopened.inspect()==final and counts['audit']==9
++    finally:reopened.close()
++
++
++@pytest.mark.parametrize('fault',['raw','metadata','replace','receipt','type','threshold','spec','limits','source','implementation'])
++def test_snapshot_hit_never_bypasses_physical_or_semantic_drift(tmp_path,saved,monkeypatch,fault):
++    owner=full(tmp_path/'archive_non_authoritative',saved[1]);owner.inspect()
++    db=owner._journal._database
++    if fault in ('raw','metadata'):
++        with sqlite3.connect(db) as c:
++            if fault=='raw':c.execute('update chunks set payload=? where event_seq=1',(b'corrupt',))
++            else:c.execute('update events set metadata=? where seq=1',(b'{}',))
++    elif fault=='replace':
++        other=tmp_path/'replacement.sqlite3';other.write_bytes(db.read_bytes());os.replace(other,db)
++    elif fault=='receipt':object.__setattr__(owner._verified_snapshots['restore'][1],'formal_result',True)
++    elif fault=='type':
++        key,result,pin=owner._verified_snapshots['restore'];owner._verified_snapshots['restore']=(key,object(),pin)
++    elif fault=='threshold':monkeypatch.setattr(api.replay.generation_projection.model_api,'RESIDUAL_LIMIT',1e-6)
++    elif fault=='spec':owner._spec=replace(owner._spec,time_limit_seconds=2.)
++    elif fault=='limits':owner._limits=replace(owner._limits,max_variables=101)
++    elif fault=='source':owner._parent='9'*64
++    elif fault=='implementation':monkeypatch.setattr(api.replay,'implementation_identity',lambda:'0'*64)
++    try:
++        with pytest.raises((ValueError,RuntimeError)):owner.inspect()
++        assert owner._poisoned
++        with pytest.raises(ValueError):owner.inspect()
++    finally:owner.close()
++
++
++def test_cache_hit_propagates_scan_error_and_poison(tmp_path,saved,monkeypatch):
++    owner=full(tmp_path/'archive_non_authoritative',saved[1]);owner.inspect()
++    def failed(*a):raise OSError('fresh read failure')
++    monkeypatch.setattr(owner._journal,'_scan',failed)
++    try:
++        with pytest.raises(OSError):owner.inspect()
++        assert owner._poisoned
++    finally:owner.close()
++
++
++def test_prefix_cache_write_failure_poison_owner(tmp_path,saved,monkeypatch):
++    owner=full(tmp_path/'archive_non_authoritative',saved[1])
++    original=owner._snapshot_bytes
++    def failed(kind,result):
++        if kind=='prefix':raise OSError('snapshot encoding failure')
++        return original(kind,result)
++    monkeypatch.setattr(owner,'_snapshot_bytes',failed)
++    try:
++        with pytest.raises(OSError):owner._replay_complete_prefix()
++        assert owner._poisoned and not owner._verified_snapshots
++        with pytest.raises(ValueError):owner.inspect()
++        with pytest.raises(ValueError):_ = owner.head
++    finally:owner.close()
++
++
++@pytest.mark.parametrize('mode',['hit','put','prior_error'])
++def test_snapshot_close_failure_poison_owner(tmp_path,saved,monkeypatch,mode):
++    owner=full(tmp_path/'archive_non_authoritative',saved[1])
++    connect=owner._journal._connect
++    class BrokenClose:
++        def __init__(self):self.connection=connect()
++        def __getattr__(self,name):return getattr(self.connection,name)
++        def close(self):
++            self.connection.close()
++            raise OSError('snapshot close failure')
++    monkeypatch.setattr(owner._journal,'_connect',BrokenClose)
++    if mode=='prior_error':
++        def scan_error(*a):raise RuntimeError('original scan failure')
++        monkeypatch.setattr(owner._journal,'_scan',scan_error)
++    try:
++        error,match=(RuntimeError,'original scan failure') if mode=='prior_error' else (OSError,'snapshot close failure')
++        with pytest.raises(error,match=match):
++            if mode=='put':owner._replay_complete_prefix()
++            else:owner.inspect()
++        assert owner._poisoned and not owner._verified_snapshots
++        with pytest.raises(ValueError):owner.inspect()
++        with pytest.raises(ValueError):_ = owner.head
++    finally:owner.close()
++
++
++def test_direct_prefix_precheck_drift_poison_owner(tmp_path,saved):
++    owner=full(tmp_path/'archive_non_authoritative',saved[1])
++    original=owner._spec
++    owner._spec=replace(original,time_limit_seconds=2.)
++    try:
++        with pytest.raises(ValueError,match='drift'):owner._replay_complete_prefix()
++        assert owner._poisoned and not owner._verified_snapshots
++        owner._spec=original
++        with pytest.raises(ValueError):owner.inspect()
++        with pytest.raises(ValueError):_ = owner.head
++    finally:owner.close()

@@ -1,0 +1,164 @@
+{
+  "attempt_retried": false,
+  "call_count_complete": false,
+  "caller_metadata": {
+    "controller_identity": "934925d184803268737d5d04473e3dfc6005b4e20fe53c7977d3eedf6e020b86",
+    "declaration_sha256": "9a49cccf52e23d91a43511322a5abaf569e6cd2dfbf8d6db67b7d43d3c228aa6",
+    "formal_result": false,
+    "schema": "development_caller_metadata_v1",
+    "script_sha256": "2fa8f84dc1dbe1d95e84c1d83f25c2fa0ec852384fd2279aecd212cc1d3480da",
+    "source_request_identity": "fe1fb03fea24163d72e9ebdc93e6951082fb1a494891db9853f3751d6ebd4dad"
+  },
+  "controller_identity": "934925d184803268737d5d04473e3dfc6005b4e20fe53c7977d3eedf6e020b86",
+  "controller_observation": {
+    "accepted_record_reproduced": null,
+    "archive_pins": null,
+    "controller_identity": "934925d184803268737d5d04473e3dfc6005b4e20fe53c7977d3eedf6e020b86",
+    "controller_lifetime_peak_working_set_bytes": 139448320,
+    "elapsed_seconds": 25.56199999999808,
+    "error_type": "ValueError",
+    "formal_result": false,
+    "hard_disk_quota_enforced": false,
+    "native_execution_authenticated": false,
+    "phases": [
+      {
+        "creation_filetime": 134343826559101101,
+        "elapsed_seconds": 24.07800000000134,
+        "exit_code": 1,
+        "formal_result": false,
+        "hard_disk_quota_enforced": false,
+        "job_commit_limits_configured": true,
+        "job_peak_process_commit_bytes": 805146624,
+        "job_peak_total_commit_bytes": 806359040,
+        "last_resource_errors": [],
+        "minimum_runtime_commit_available_bytes": 1745952768,
+        "minimum_runtime_disk_available_bytes": [
+          [
+            "\\\\?\\volume{477ab2a7-3361-41fc-8d16-d46422aed580}\\",
+            110233268224
+          ]
+        ],
+        "numerical_evidence_verified": false,
+        "observation_error_type": null,
+        "pid": 44576,
+        "process_identity": "732f11bc155a2ee3764847f551b2720509d1cdc1343aa70116e4ec37e262a4f3",
+        "reason": "child_exited",
+        "runtime_samples": 87,
+        "stop_markers": [
+          "direct_child_exit_observed"
+        ],
+        "whole_job_quiescent": true,
+        "whole_task_resources_verified": false
+      }
+    ],
+    "pre_final_observation_task_logical_bytes": 10042,
+    "replay_errors": [],
+    "replay_report_sha256": null,
+    "replay_status": null,
+    "status": "unresolved_task_attempt",
+    "stopped_phase": "execute",
+    "whole_task_resources_verified": false
+  },
+  "evidence": {
+    "configs/rq2_normal_task_h25_development_v1.DRAFT.yaml": {
+      "bytes": 3938,
+      "sha256": "9a49cccf52e23d91a43511322a5abaf569e6cd2dfbf8d6db67b7d43d3c228aa6"
+    },
+    "experiments/audit_rq2_normal_task_v1.py": {
+      "bytes": 4646,
+      "sha256": "2fa8f84dc1dbe1d95e84c1d83f25c2fa0ec852384fd2279aecd212cc1d3480da"
+    },
+    "results/logs/rq2_normal_task_h25_attempt1_non_authoritative.log": {
+      "bytes": 1862,
+      "sha256": "71ad90ae4b11774bd0eff187f0efebb9e517e38dda5a8a279b4a2aa84c006c9a"
+    },
+    "results/tables/rq2_normal_task_h25_attempt1_non_authoritative/controller.intent.json": {
+      "bytes": 228,
+      "sha256": "7262404e8d9f3ba972946775b09e9632624dc1dcb5562fafdade6031922bff31"
+    },
+    "results/tables/rq2_normal_task_h25_attempt1_non_authoritative/controller.observation.json": {
+      "bytes": 1356,
+      "sha256": "4bebe7bebb878a86ad5bb764e56107584b073a975ceeb9b059fba5bd84f94ec7"
+    },
+    "results/tables/rq2_normal_task_h25_attempt1_non_authoritative/controller.request.json": {
+      "bytes": 3730,
+      "sha256": "291cbc680cd2e1b5838d772ccc04e98e1127701480b8c12e5b82034aca927f45"
+    },
+    "results/tables/rq2_normal_task_h25_attempt1_non_authoritative/execute.claim.json": {
+      "bytes": 326,
+      "sha256": "dc50188c02e3dfdfeedb98f06b013921c68e55b1b317f32654fe949994b69f74"
+    },
+    "results/tables/rq2_normal_task_h25_attempt1_non_authoritative/execute.intent.json": {
+      "bytes": 231,
+      "sha256": "6c4dff83553796a2874026e04eb6f0abbe4efae55cb4fab4d784f45869b13840"
+    },
+    "results/tables/rq2_normal_task_h25_attempt1_non_authoritative/execute.launch.json": {
+      "bytes": 478,
+      "sha256": "1dc4ccfd5af6ffd1eb2536e1e2da87fb9a8b314e3c76c2ccd287d5289a4d9220"
+    },
+    "results/tables/rq2_normal_task_h25_attempt1_non_authoritative/execute.observation.json": {
+      "bytes": 773,
+      "sha256": "ef0cab92813db608384e4460015eeb2d8fb58c8416079233bc80ccafae4aa794"
+    },
+    "results/tables/rq2_normal_task_h25_attempt1_non_authoritative/execute.request.json": {
+      "bytes": 3241,
+      "sha256": "1316337712794e8fa75f7921d163aa9ba68ef2c0e8458c44937abe6e20246430"
+    },
+    "results/tables/rq2_normal_task_h25_attempt1_non_authoritative/execute.supervision.json": {
+      "bytes": 1034,
+      "sha256": "f9190237456ad39da8d842e744b8b8307bbf960e11bc6c54116897666734c2a6"
+    },
+    "results/tables/rq2_normal_task_h25_attempt1_non_authoritative/execution.lock": {
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/normal_archive_capture.py": {
+      "bytes": 11713,
+      "sha256": "31c2415a3765631b20fe3b494bd8a13005152e8e0943c33753f8e803f976214b"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/normal_process.py": {
+      "bytes": 13559,
+      "sha256": "ffc487c05c72d00a7c2e8d7515a29f16a3d0c8ac3f0efa6cdba36bbcea34d44f"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/normal_replay.py": {
+      "bytes": 20826,
+      "sha256": "ffd7b17380ecbef1bf22ce825e6eddcf542826a9954077cb696d54f6bcda4e08"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/normal_store.py": {
+      "bytes": 14833,
+      "sha256": "a79d766c08970875e8b65e5afc30ee7288d98bcc88a5474e9b5d7f7eace754f4"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/normal_task_controller.py": {
+      "bytes": 30185,
+      "sha256": "071c4a2c6832fa6db3c50618df0d44ac5e3084aca335422abea550f4edb26ce3"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/normal_task_inputs.py": {
+      "bytes": 10131,
+      "sha256": "5397ca0510d98f15e9e126debc1da5371df4ac9ebcc8259831a179a8f2cb882c"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/normal_task_process.py": {
+      "bytes": 13959,
+      "sha256": "c7c46c08297c083338cc555a887313a94cb9e767480709caa205011b6e4d080c"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/normal_task_worker.py": {
+      "bytes": 13991,
+      "sha256": "adcb8d7be6e1aa3ccd56ea641399d0c96525c8d4a4be5b23ed46e59e99bcfad0"
+    },
+    "tests/test_audit_rq2_normal_task_v1.py": {
+      "bytes": 1808,
+      "sha256": "e51c75ade9c5d4d84350488ab898c8b1c22c4e011e786420d01d84d9b3f8d599"
+    }
+  },
+  "exact_child_exception_identified": false,
+  "formal_result": false,
+  "mathematical_infeasibility_established": false,
+  "memory_limit_cause_certified": false,
+  "native_execution_authenticated": false,
+  "normal_store_present": false,
+  "replay_started": false,
+  "schema": "rq2_normal_task_h25_development_evidence_v1",
+  "solver_calls": null,
+  "status": "unresolved_task_attempt",
+  "stopped_phase": "execute",
+  "whole_task_resources_verified": false
+}

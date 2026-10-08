@@ -1,0 +1,207 @@
+{
+  "derived": [
+    {
+      "name": "google_cpu_hourly_endpoints",
+      "value_status": "derived_with_conflict_diagnostics"
+    },
+    {
+      "name": "google_pdu17_hourly_capacity_integrals",
+      "value_status": "derived_with_unknown_capacity_preserved"
+    },
+    {
+      "name": "google_hourly_power_means",
+      "value_status": "derived_without_quality_filter"
+    },
+    {
+      "name": "alibaba_job_execution_envelopes",
+      "value_status": "derived_release_and_completion_proxies"
+    },
+    {
+      "name": "alibaba_dimensionless_workload_blocks",
+      "value_status": "derived_unclipped_marginal_blocks"
+    },
+    {
+      "name": "rts_gmlc_cfe_and_outage_blocks",
+      "value_status": "derived_benchmark_not_empirical_joint_observation"
+    }
+  ],
+  "gates": {
+    "absolute_power_mw_available": false,
+    "complete_pdu_population_observed": false,
+    "continuous_model_input_ready": false,
+    "continuous_service_protocol_registered": false,
+    "direct_job_to_power_mapping_ready": false,
+    "empirical_joint_distribution_ready": false,
+    "flexibility_contract_parameters_ready": false,
+    "formal_experiment_authorized": false,
+    "formal_result": false,
+    "full_rq2_experiment_input_ready": false,
+    "google_unfiltered_alignment_available": true,
+    "local_delivery_catalog_available": true,
+    "offline_validation_and_loading_available": true,
+    "paper_claim": false,
+    "power_quality_flag_semantics_resolved": false,
+    "security_certified": false
+  },
+  "observed": [
+    {
+      "name": "google_pdu_measured_power_ratio",
+      "source": "google_power_57_domains",
+      "value_status": "observed_normalized_value"
+    },
+    {
+      "name": "alibaba_anonymized_job_and_utilization_trace",
+      "sources": [
+        "alibaba_job_execution_envelopes",
+        "alibaba_gpu_telemetry"
+      ],
+      "value_status": "observed_source_under_derived_aggregates"
+    },
+    {
+      "name": "zeus_gpu_power_and_epoch_time",
+      "source": "zeus_four_gpu_power_performance",
+      "value_status": "observed_controlled_measurements"
+    },
+    {
+      "name": "nlr_compute_node_power_profiles",
+      "source": "nlr_genai_power_profiles_v2",
+      "value_status": "observed_source_under_catalog_statistics"
+    },
+    {
+      "name": "wattgpu_device_power_experiments",
+      "source": "wattgpu_power_reference_v1",
+      "value_status": "observed_source_under_reference_table"
+    }
+  ],
+  "protocol_choices": {
+    "censoring_estimand": {
+      "status": "unregistered",
+      "value": null
+    },
+    "cross_source_coupling": {
+      "status": "unregistered",
+      "value": null
+    },
+    "deadline_and_recovery_accounting": {
+      "status": "unregistered",
+      "value": null
+    },
+    "delivery_new_split": {
+      "note": "existing package splits are preserved but this delivery adds no split",
+      "status": "unregistered",
+      "value": null
+    },
+    "raw_workload_fraction_above_one_mapping": {
+      "note": "values above one remain unchanged",
+      "status": "unregistered",
+      "value": null
+    },
+    "tail_handling": {
+      "status": "unregistered",
+      "value": null
+    }
+  },
+  "schema": "rq2_public_data_input_status_v1",
+  "unidentified": [
+    {
+      "name": "service_deadline",
+      "reason": "no scoped local source observes the business deadline",
+      "value": null
+    },
+    {
+      "name": "recovery_deadline",
+      "reason": "no scoped local source observes a recovery due time",
+      "value": null
+    },
+    {
+      "name": "shared_flexibility_budget",
+      "reason": "no scoped local source observes the accounting budget",
+      "value": null
+    },
+    {
+      "name": "recovery_headroom",
+      "reason": "no scoped local source identifies compatible recovery power headroom",
+      "value": null
+    },
+    {
+      "name": "recovery_efficiency",
+      "reason": "no scoped local source identifies recovery efficiency",
+      "value": null
+    },
+    {
+      "name": "absolute_google_pdu_power_mw",
+      "reason": "Google PowerData is normalized and publishes no PDU capacity",
+      "value": null
+    },
+    {
+      "name": "observed_job_to_power_mapping",
+      "reason": "workload and hardware-power references do not share job identity and clock",
+      "value": null
+    },
+    {
+      "name": "flexible_fraction",
+      "reason": "low priority or completed work does not identify recoverable flexibility",
+      "value": null
+    },
+    {
+      "name": "recoverable_fraction",
+      "reason": "no scoped local source observes checkpoint-safe recoverability",
+      "value": null
+    },
+    {
+      "name": "checkpoint_state",
+      "reason": "no scoped local workload source observes checkpoint state",
+      "value": null
+    },
+    {
+      "name": "preemptibility",
+      "reason": "no scoped local workload source observes preemptibility",
+      "value": null
+    },
+    {
+      "name": "response_time_limit",
+      "reason": "public operating-window evidence does not identify a job-level response contract",
+      "value": null
+    },
+    {
+      "name": "maximum_event_duration",
+      "reason": "no scoped local paired source identifies an event-duration contract",
+      "value": null
+    },
+    {
+      "name": "minimum_rest_time",
+      "reason": "no scoped local source observes minimum rest between calls",
+      "value": null
+    },
+    {
+      "name": "event_count_limit",
+      "reason": "no scoped local source observes a call-count contract",
+      "value": null
+    },
+    {
+      "name": "energy_debt_limit",
+      "reason": "no scoped local source observes a recovery-debt limit",
+      "value": null
+    },
+    {
+      "name": "accounting_period_id",
+      "reason": "no scoped local source maps workloads to a business budget period",
+      "value": null
+    },
+    {
+      "name": "initial_recovery_debt_carry_in",
+      "reason": "no scoped local source observes initial carry-in state",
+      "value": null
+    },
+    {
+      "name": "maximum_recovery_power",
+      "reason": "no scoped local source identifies recoverable power capacity",
+      "value": null
+    },
+    {
+      "name": "call_limit",
+      "reason": "no scoped local source observes an operational call limit",
+      "value": null
+    }
+  ]
+}

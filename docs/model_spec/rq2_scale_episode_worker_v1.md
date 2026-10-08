@@ -1,0 +1,29 @@
+# Episode固定输入传输与worker
+
+状态：DRAFT_NONAUTHORITATIVE。`scale_episode_transport.py`与`scale_episode_worker.py`提供固定输入和执行/离线核验入口，复用已有episode、replay、文件写入和Job原语。持久外层接入已在`rq2_scale_episode_controller_v1.md`记录；完整任务资源认证和正式运行授权仍未获得。
+
+## 输入与权限
+
+EpisodeInputs只包含初始reference request、四臂ArmSetup、完整HourInput窗口、EpisodeBudget及原始EpisodeResourcePlan。环境变量值不进入输入文件。固定dataclass白名单、完整有序字段、canonical JSON、finite hex float和最简正分母Fraction保留精确输入；限制16 MiB、64层和500000节点。拒绝任意mapping、结果类及reference/actual后继类；共享carry类型即使嵌入ReferenceGridOrigin，仍须通过既有physical origin校验。business初始化继续由既有fairness及policy校验约束。
+
+读取绑定外部SHA、声明字节上限和单链接文件身份；decode后再次验证初态、完整窗口与原始资源计划。重建init=False owned输入是传输操作，不提供normal/prepared来源、最优性或真实观测认证。源码身份同时绑定transport自身、episode/selector依赖闭包及worker/replay实现。
+
+## 固定入口
+
+CLI使用`python -I -B <absolute scale_episode_worker.py>`。execute模式只从新episode root开始，拒绝传入prefix/resume pins；逐小时推进，owner内完成检查并保留header/intent/result摘要，关闭owner后写外置receipt。中断可能留下未获正常退出确认的receipt，文件存在不代表完成；已有未完成intent按原episode规则保留unknown，不自动重试。
+
+audit模式接受外部独立header和有序intent/result SHA，调用已有离线核验；不从root自动生成待信任的pins。审计期间封住controller、task child与native solve入口，并在finally恢复。receipt包含所核root、外部pins、报告以及输入/实现/环境摘要。audit不修改归档内容；已有本地lease仍用于合作式排他。
+
+execute与audit都从继承环境和显式episode环境目录构造被绑定的环境参数，外部环境摘要必须一致。audit自身可有不同的进程scratch；传给离线核验的episode环境目录必须对应原执行身份。输入文件、环境目录及receipt均须在episode evidence root外。离线核验要求root顶层只有execution.lock、header、连续intent/result以及准许的phase目录，不接受额外输入或临时文件。
+
+receipt沿用独占创建、fsync、文件身份与exact回读，发布前后重验源码、输入及环境。execute receipt的pins表示owner持锁时的快照；owner关闭后不保持root lease，因此receipt本身不认证随后归档未变，必须由独立audit核验。读取receipt的外层调用者还必须检查进程正常退出和整个Job静默，不能凭文件存在认定完成。
+
+## 资源边界
+
+本文件初始测试将worker放入现有normal_task_child外层Job，从而覆盖worker加载、episode子任务、关闭和receipt写入；audit另起Job。后续持久控制器及预算分解已有独立开发证据，见controller规格；初始worker测试本身不承担这些验收。TaskProcessBudget的3600秒开发cap仍保留；不把轮询deadline称OS硬wall quota，磁盘无硬quota。
+
+测试的90秒wall、1536 MiB process、2304 MiB Job仅为短合成case的有界观测设置，不是600秒episode声明的完整资源验收，更不是H25推荐预算。formal_result、whole_task_resources_verified、executable_resume_available均false。真实normal最优性、科学参数、数据与右删失门不因传输或worker成功关闭。
+
+## 验证
+
+transport初轮22项通过；补reference嵌入后继/错误contract及五类源码依赖漂移后29项通过（7.19秒）。worker初轮6项通过（58.54秒）。路径隔离与根清单修复后，外层真实execute到独立audit及相关反例组合16项通过、38项未选择（82.43秒、exit0）；归档所有文件hash在audit前后相同。限定独立pre-seal findings已闭合，git diff --check通过，无official verdict或正式运行权限。

@@ -1,0 +1,52 @@
+{
+  "stage": "PRE_SEAL_AUDIT",
+  "formal_result": false,
+  "formal_run_authority": false,
+  "approved_scope": "scheme A exact mapping and independent source packet; complete conditional training support diagnosis",
+  "tests": [
+    {
+      "stage": "initial mapping and related old source/projection regressions",
+      "passed": 67,
+      "seconds": 4.38
+    },
+    {
+      "stage": "diagnostic and mapping before threshold decomposition addition",
+      "passed": 37,
+      "seconds": 1.58
+    },
+    {
+      "stage": "related regression before threshold drift gate",
+      "passed": 115,
+      "seconds": 4.7
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_cfe_preallocation_v1.py tests/test_rq2_source_pair_preallocated_v1.py tests/test_rq2_preallocated_training_support_v1.py tests/test_rq2_source_pair_v1.py tests/test_rq2_workload_projection_v1.py tests/test_rq2_bidirectional_policy_v1.py",
+      "passed": 116,
+      "seconds": 4.66,
+      "exit_code": 0
+    }
+  ],
+  "files": {
+    "src/rq2_joint_deliverability_boundary_v1/cfe_preallocation.py": "073661762f2c050b6449a572cd0d9df0e0863c6fd9d94681c575ce4e3475b914",
+    "src/rq2_joint_deliverability_boundary_v1/source_pair_preallocated.py": "61adf4742980faaa280fe5e28e0dc1bfda7ceb0a821258aac850d98205a5492a",
+    "experiments/audit_rq2_preallocated_training_support_v1.py": "aa3b65b23cc35209bd6e3971017810b662a4dc0baf8d8e919826b57c616da4e6",
+    "tests/test_rq2_cfe_preallocation_v1.py": "ae130d6f54e3406cd6c27f649d217c70208a9529cbdf677504cebb1bfdec7c87",
+    "tests/test_rq2_source_pair_preallocated_v1.py": "61f22479175ff866c38a36e98e4281483d3762fd1eb458821eae6b90ff1fe9df",
+    "tests/test_rq2_preallocated_training_support_v1.py": "7976d9e0a31d19a90f56e31fef1fab81cfd04f840595f1c607f9e92d28615992",
+    "docs/model_spec/rq2_cfe_preallocation_v1.md": "6a4554ac4b5f21f3fe6f66eb02854cf6877d086ac4e90135545d0e6d1dc09fb3"
+  },
+  "current_report": "results/tables/rq2_cfe_preallocation_v1_non_authoritative/training_support_verified.json",
+  "current_report_sha256": "eee1ef38b744fdf63bf51fc0a659252665f3c9322ff6fdf6a0d92f0445d0feab",
+  "retained_initial_report": "training_support.json; superseded development report, preserved",
+  "group_matrices_unchanged": true,
+  "cell_count": 46,
+  "pairs_per_cell": 14644,
+  "coordinate_groups": 12,
+  "unresolved_training_projection_rows": 0,
+  "solver_calls": 0,
+  "sealed_capacity_members": 566,
+  "sealed_capacity_drift": 0,
+  "operational_adapter_implemented": false,
+  "scientific_parameters_registered": false,
+  "pending_review": "independent pre-seal review in progress"
+}

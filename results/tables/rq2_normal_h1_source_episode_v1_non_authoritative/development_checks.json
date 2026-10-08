@@ -1,0 +1,75 @@
+{
+  "date": "2026-09-30",
+  "files": {
+    "docs/model_spec/rq2_normal_h1_source_episode_v1.md": "9d888979aa8355ffc7cfdfb704aa86525742866e585c4ce499c9de0edce6161f",
+    "results/tables/rq2_normal_h1_source_episode_v1_non_authoritative/real_network_stage_budget_check.json": "02638f7f83d45a43e690d4d5dd2fdf0247bc5bea29e0549c50aaa4565a43d5e2",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_source_episode.py": "e90836d128fe9eace2b05f394f57499443b9fb0e9dc182500ad0573706bd7a04",
+    "tests/test_rq2_normal_h1_source_episode_v1.py": "0f829a4bfb07f88540d7a6e89f858775cf99bdf51807c29222f27a192f7753e0"
+  },
+  "final_test_matrix": [
+    "two_hour_native_and_zero_solver_reopen",
+    "origin_plus_completed_indices",
+    "same_source_chain_and_power_clock",
+    "source_pin_mapper_rejection_before_intent",
+    "source_drift_after_intent_and_after_native",
+    "source_intent_audit_identity_observation_tamper",
+    "commit_and_final_restore_failure_poison",
+    "implementation_drift_before_first_and_second_step",
+    "mutable_receipt_and_caller_origin_isolation",
+    "distinct_database_type_and_path_binding"
+  ],
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "formal_run_started": false,
+  "native_test_source_kind": "synthetic_fixture_with_mocked_source_verifiers_not_real_RTS_episode",
+  "preservation": {
+    "old_A_drift": [],
+    "old_A_members": 587,
+    "previous_development_artifact_drift": {
+      "rq2_normal_h1_episode_v1_non_authoritative": [],
+      "rq2_normal_h1_source_binding_v1_non_authoritative": []
+    }
+  },
+  "production_sealed": false,
+  "real_resource_check": {
+    "measured_runtime_seconds": null,
+    "naive_192_hour_stage_calls": 44544,
+    "real_episode_executed": false,
+    "short_call_limit": 20,
+    "solver_calls": 0,
+    "stages_per_hour": 232
+  },
+  "review": {
+    "kind": "read_only_R3_pre_seal",
+    "official_verdict": null,
+    "open_substantive_findings": 0,
+    "reviewer": "/root/cfe_preallocation_official",
+    "reviewer_ran_pytest": false,
+    "reviewer_ran_solver": false
+  },
+  "schema": "h1_source_bound_episode_development_checks_v1",
+  "selection_registered": false,
+  "source_authenticated": false,
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "test_command_prefix": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider",
+  "tests": [
+    {
+      "final_bytes": false,
+      "passed": 11,
+      "scope": "source_episode initial",
+      "seconds": 38.64
+    },
+    {
+      "final_bytes": false,
+      "passed": 85,
+      "scope": "source_episode/episode/source_binding",
+      "seconds": 120.09
+    },
+    {
+      "final_bytes": true,
+      "passed": 23,
+      "scope": "source_episode final",
+      "seconds": 58.29
+    }
+  ]
+}

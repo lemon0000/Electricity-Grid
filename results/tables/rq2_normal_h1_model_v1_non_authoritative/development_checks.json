@@ -1,0 +1,86 @@
+{
+  "causal_shared_key_implemented": false,
+  "development_history": [
+    {
+      "failed": 1,
+      "passed": 17,
+      "reason": "overly narrow mutation error assertion; earlier initial consistency check correctly rejected",
+      "seconds": 10.6
+    },
+    {
+      "failed": 0,
+      "passed": 100,
+      "seconds": 13.09
+    },
+    {
+      "failed": 0,
+      "passed": 106,
+      "seconds": 13.86
+    },
+    {
+      "failed": 1,
+      "passed": 109,
+      "reason": "mixed UID fixture had inconsistent initial/request inventory; corrected fixture only",
+      "seconds": 14.01
+    },
+    {
+      "failed": 0,
+      "passed": 110,
+      "seconds": 14.04
+    }
+  ],
+  "exact_mathematical_certificate": false,
+  "files": {
+    "configs/rq2_finite_mechanism_protocol_candidate_v2.DRAFT.yaml": "95eb158f0a8e6784d2af401e67164965543c98f42ff02b756c214982601e5430",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_model.py": "9e6e5497ca3091acd9e1286c000026b16f4e3f744eb83748044a54bafdff05bb",
+    "tests/test_rq2_normal_h1_model_v1.py": "12d946dbc00115edd8115f68b222212c8c0c95b5abb01835d64c37ceac8a72bd"
+  },
+  "final_tests": {
+    "exit_code": 0,
+    "failed": 0,
+    "passed": 110,
+    "seconds": 13.76,
+    "session_id": 40494
+  },
+  "formal_run": false,
+  "native_H1_chain_validated": false,
+  "official_verdict": null,
+  "preseal_review": {
+    "closed_findings": [
+      "strict expected identity type",
+      "negative zero locks",
+      "disabled bounds",
+      "mixed mode UID order coverage",
+      "controlled assignment audit construction"
+    ],
+    "independently_reran_tests": false,
+    "open_substantive_findings": [],
+    "reviewer": "/root/cfe_preallocation_official",
+    "scope": "read_only_exact_source_and_test_closure"
+  },
+  "remaining": [
+    "native stage acceptance and audited prior lock provenance",
+    "current source adapter and shared-prefix key",
+    "three chain persistence and followup",
+    "A operational integration",
+    "full support capacity certificates",
+    "resource pilot and formal run package"
+  ],
+  "schema": "rq2_h1_model_development_checks_v1",
+  "scope": [
+    "declared_normal_initial",
+    "H1_stage_model",
+    "strict_assignment_audit"
+  ],
+  "sealed_preservation": {
+    "drift": [],
+    "manifest": "configs/rq2_cfe_preallocation_v1.SHA256SUMS.json",
+    "members": 587
+  },
+  "status": "DRAFT_PRESEAL_FINDINGS_CLOSED",
+  "test_command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_model_v1.py tests/test_rq2_continuous_grid_normal_v1.py",
+  "user_authorization": {
+    "date": "2026-09-30",
+    "instruction": "批准 v2 合同并开发验证"
+  }
+}

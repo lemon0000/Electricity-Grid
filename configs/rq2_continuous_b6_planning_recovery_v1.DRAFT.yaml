@@ -1,0 +1,19 @@
+schema: rq2_continuous_b6_planning_recovery_v1
+status: DRAFT_NONAUTHORITATIVE
+rule: b6_primary_then_permanent_shared_after_planning_or_execution_rejection_v1
+arm_id: joint_b6_separate_planning_shared_execution
+primary:
+  rule: full_request_edf_known_then_unknown_fifo_v1
+  recovery_decimal_places: 12
+recovery:
+  rule: full_request_edf_known_then_unknown_fifo_v1
+  recovery_decimal_places: 12
+trigger_stages: [separate_planning, shared_execution]
+transition: same_rejected_observation_then_permanent_shared_state
+failure: unassessed_stop
+evidence_class: mechanism_assumption
+continuous_service_protocol_registered: false
+formal_experiment_authorized: false
+formal_result: false
+paper_claim: false
+security_certified: false

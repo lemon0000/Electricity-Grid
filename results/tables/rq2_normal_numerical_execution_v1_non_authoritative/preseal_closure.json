@@ -1,0 +1,52 @@
+{
+  "audit_solver_calls": 0,
+  "evidence_inventory_sha256": "a7582e24860146885aa1fb818a2cb9e3a8bc5dddc96e0f2700feba9ce3366c82",
+  "formal_result": false,
+  "git_diff_check_passed": true,
+  "hours": 3,
+  "native_execution_authenticated": false,
+  "native_solver_calls": 1,
+  "official_verdict": null,
+  "preseal_findings_closed": true,
+  "preseal_reviewer": "/root/normal_cost_preseal",
+  "prior_sealed_members_unchanged": {
+    "rq2_normal_numerical_acceptance_v1": 150,
+    "rq2_normal_numerical_source_v1": 189,
+    "rq2_selector_zero_face_episode_v1": 246,
+    "rq2_selector_zero_face_execution_v1": 132,
+    "rq2_selector_zero_face_v1": 94
+  },
+  "related_processes_absent_before_seal": true,
+  "schema": "rq2_normal_numerical_execution_preseal_closure_v1",
+  "source_preparation_solver_calls": 0,
+  "synthetic_source": true,
+  "test_batches_overlap": true,
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -x -q -p no:cacheprovider tests/test_rq2_normal_numerical_execution_v1.py tests/test_rq2_normal_numerical_controller_v1.py",
+      "passed": 57,
+      "seconds": 532.87,
+      "stage": "before_transport_dependency_binding_fix"
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -x -q -p no:cacheprovider tests/test_rq2_normal_numerical_failure_windows_v1.py",
+      "passed": 5,
+      "seconds": 118.32,
+      "stage": "before_transport_dependency_binding_fix"
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_scale_normal_worker_v1.py tests/test_rq2_scale_normal_controller_v1.py",
+      "passed": 42,
+      "seconds": 259.91,
+      "stage": "legacy_regression"
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -x -q -p no:cacheprovider tests/test_rq2_normal_numerical_transport_identity_v1.py tests/test_rq2_normal_numerical_execution_v1.py::test_worker_execute_audit_one_shot_and_legacy_isolation tests/test_rq2_normal_numerical_controller_v1.py::test_real_subprocess_pipeline_with_synthetic_source",
+      "passed": 4,
+      "seconds": 73.93,
+      "stage": "final_transport_binding_and_affected_end_to_end"
+    }
+  ],
+  "units": 1,
+  "whole_task_resources_verified": false
+}

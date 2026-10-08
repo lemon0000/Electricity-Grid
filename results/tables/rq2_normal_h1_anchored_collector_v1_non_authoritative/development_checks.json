@@ -1,0 +1,90 @@
+{
+  "schema": "h1_anchored_collector_development_checks_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "date": "2026-09-30",
+  "files": {
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_attempt_anchor.py": "e7a17c6641cc5f37fa5c2f6530f76c06d96ba7abc1405591fa18e75be947c5a4",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_anchored_collector.py": "4d7886f6b90db82568b9a90755bf46b79a7df18fa05c6a7ee3de92e594405128",
+    "tests/test_rq2_normal_h1_attempt_anchor_v1.py": "62201dc72a3666e41ab645a900cede07dd10336e50823cd78df47f46c8a77628",
+    "tests/test_rq2_normal_h1_anchored_collector_v1.py": "cfac9ee633c7e877ec218853fb30379148e941e6b4baa71c2c8ad4574f6f8abb",
+    "docs/model_spec/rq2_normal_h1_anchored_collector_v1.md": "d91f19a1a6b6ada1e9b1cf0b8ef7bb7f0884d0719c6f747d513a51c15ac6b75d",
+    "results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/tiny_native_checks.json": "7e7104c18ab6c125aa17d073fe1c3d443d060ceccc50d6bf1ed5ad11dec128a8",
+    "results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/anchor_non_authoritative/000.json": "9cb34cdf9a50431e4d2629fe0c7a622a3ed6caeb5554ef24c2ed257e81a814ad",
+    "results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/anchor_non_authoritative/001.json": "b8f254e4ee75a17e73f93c2f6277f868f3227d2d007bcc237f739e8b7e1d59ef",
+    "results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/anchor_non_authoritative/002.json": "a4e250f2d0db40fd024d481deae726fe8154c85f94c9db8f6b0e9f7d0bf48713",
+    "results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/anchor_non_authoritative/003.json": "165e06da33c878e4a625e16b4e2a38b798aa8981f81ec4d4540ec396cfd40743",
+    "results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/anchor_non_authoritative/004.json": "506336b6c8786b36bf50f2a417fda918bbd9899577d8f8de79d39bf00e7188ba",
+    "results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/anchor_non_authoritative/005.json": "ea2f49464e8b6f7b55e497f2bfb4dd96b870508079fce6405d928ad31e12b30a",
+    "results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/anchor_non_authoritative/006.json": "058ea1647a6a6aa6fb4fb048ac1c595397d9eb7afc0f6a84a0ae606b273d0c28",
+    "results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/anchor_non_authoritative/header.json": "6b695cf9ed84c4c583a13156021c580489a5b9f6a889591c1a7b0b9b66fe3d99",
+    "results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/collector_non_authoritative/h1_chunk_journal.sqlite3": "8c2193c7f6d5867986f194dca36c5bb9070e5abbdf503d79e1b7dc9a82c26a4b",
+    "results/tables/rq2_normal_h1_anchored_collector_v1_non_authoritative/collector_non_authoritative/stages_non_authoritative/h1_chunk_journal.sqlite3": "8e31309aadd9a16a99b94948e9d355447f4f2fc5f505a029d1b32caf5f7c266d",
+    "tests/test_rq2_normal_h1_source_v1.py": "946f93d3591b3099d337f6aff7cf99cf3a211e482b5dbab510c7f224ee97aa17",
+    "tests/test_rq2_normal_h1_short_solve_v1.py": "11cd62d782772f24e10a034d9c271d61df9b2939723d4a36b4210dea2aab03d7",
+    "tests/test_rq2_objective_provenance_run_v1.py": "5ab35b24eaae078aec2d5e75bb0005aecad2c75704b4c1367b433c2f5660e3cc",
+    "tests/test_rq2_continuous_grid_normal_v1.py": "77c16bd08854c5b9bc1b9a85fe88371fb61ecfaa1b842420c9a135f3c36d90f5"
+  },
+  "tests": [
+    {
+      "scope": "anchor, anchored collector, original collector regression",
+      "passed": 19,
+      "seconds": 117.4,
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_attempt_anchor_v1.py tests/test_rq2_normal_h1_anchored_collector_v1.py tests/test_rq2_normal_h1_stage_collector_v1.py"
+    },
+    {
+      "scope": "subsequently added real process exits, same source bytes",
+      "passed": 2,
+      "seconds": 18.82,
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_anchored_collector_v1.py -k process_exit"
+    },
+    {
+      "scope": "subsequently added anchor fault and wrong-pin tests, same source bytes",
+      "passed": 5,
+      "seconds": 18.88,
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_h1_anchored_collector_v1.py -k 'ambiguity or wrong_anchor'"
+    }
+  ],
+  "review": {
+    "stage": "PRE_SEAL_AUDIT",
+    "reviewer": "/root/cfe_preallocation_official",
+    "findings_closed": true,
+    "independent_tests_run": false,
+    "official_verdict": null
+  },
+  "tiny_native": {
+    "status": "accepted",
+    "solver_calls": 3,
+    "stored_reports": 3,
+    "registry_head": "fe9f89085459cca338f397af029beb0962fc0b0c2ff79e978d35afa8de2d471d",
+    "child_head": "2317ac3295cff39d5267ace165f59ba0545ec0bc1c6d22bda0fe2c586d4e3574",
+    "anchor_record_sha256": "058ea1647a6a6aa6fb4fb048ac1c595397d9eb7afc0f6a84a0ae606b273d0c28",
+    "anchor_records": 7,
+    "formal_result": false,
+    "native_execution_authenticated": false,
+    "hard_process_resources_verified": false,
+    "formal_run_started": false,
+    "canonical_locks": [
+      20.0,
+      1.0,
+      20.0
+    ],
+    "elapsed_seconds": 16.297000000005937,
+    "fresh_reopen_equal": true
+  },
+  "production_sealed": false,
+  "formal_run_started": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "preservation": {
+    "cfe_members_checked": 587,
+    "incremental_files_checked": 3,
+    "original_collector_files_checked": 3,
+    "drift_count": 0
+  },
+  "limitations": [
+    "Explicit trusted local anchor root; no hostile whole-directory rollback guarantee.",
+    "Reopen is inspection-only and never resumes native calls.",
+    "No source authentication, native history authentication, hard process resources or cross-root deduplication.",
+    "Real RTS 232-stage chain and source-normal parent publication not performed."
+  ]
+}

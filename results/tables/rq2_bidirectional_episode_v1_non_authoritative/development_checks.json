@@ -1,0 +1,41 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "formal_result": false,
+  "sealed": false,
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_episode_bidirectional_v1.py tests/test_rq2_episode_bidirectional_replay_v1.py tests/test_rq2_episode_bidirectional_transport_v1.py tests/test_rq2_episode_bidirectional_worker_v1.py tests/test_rq2_episode_bidirectional_controller_v1.py",
+      "passed": 118,
+      "seconds": 633.88,
+      "stage": "before additional preseal tests"
+    },
+    {
+      "stage": "invalid slack-budget test development attempt",
+      "passed": 2,
+      "failed": 1,
+      "seconds": 91.96,
+      "cause": "existing resource-plan equality gate already rejects excess total budget; initial review finding withdrawn"
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_episode_bidirectional_controller_v1.py tests/test_rq2_episode_bidirectional_replay_v1.py -k \"allowance_must_equal or business_rejection_persists\"",
+      "passed": 2,
+      "deselected": 44,
+      "seconds": 31.75,
+      "stage": "budget rejection and persistent business rejection tests"
+    }
+  ],
+  "preseal_review": "no remaining substantive implementation finding; documentation and mechanical diff closure pending final check",
+  "normal_bidirectional_bridge": "four modules and six tests are unvalidated draft; not sealed or execution-ready",
+  "implementation_sha256": {
+    "src/rq2_joint_deliverability_boundary_v1/scale_episode_bidirectional.py": "1de22ff3f34a24f64350120356028314a7ceb1eb7f4ad7e8de383ca249982e3c",
+    "src/rq2_joint_deliverability_boundary_v1/scale_episode_bidirectional_controller.py": "234695014872b6e321e2a7a757b4ace3214a162d360c25726cd108af41049bbe",
+    "src/rq2_joint_deliverability_boundary_v1/scale_episode_bidirectional_replay.py": "4c390243b0f0f5d77d4e00be40023ccdf4652f5c1ded675881e1d407f582ccd2",
+    "src/rq2_joint_deliverability_boundary_v1/scale_episode_bidirectional_transport.py": "4a7fb45ba824395023713406a208e80db749f8785c6ab07e24b4d4c1cb0ead95",
+    "src/rq2_joint_deliverability_boundary_v1/scale_episode_bidirectional_worker.py": "26bde52ddbe281d58e7411766070c84c43a1e8994ac98b6e16be4e0cec30b9c6",
+    "tests/test_rq2_episode_bidirectional_controller_v1.py": "4eede5d2de6789cc4d5da7332d3a15608f0ee21fb44a259b9d7dcb14d5d3d99d",
+    "tests/test_rq2_episode_bidirectional_replay_v1.py": "35d2973f08f9ff1dd3f686e477a4a20e42ce9621f4d5a90c1459689aac5166e4",
+    "tests/test_rq2_episode_bidirectional_transport_v1.py": "6c3c85e6110e25af17683756d1d3f7b167c84b04c24cff92bc7da50fc2a0118e",
+    "tests/test_rq2_episode_bidirectional_v1.py": "2f93aadf2dfa2e450922c78d8605b8653d250b0d4c26db4ef1fe4ec2b7385bf2",
+    "tests/test_rq2_episode_bidirectional_worker_v1.py": "bef6f5561363f2f88b4bf3fe7e152516f1a6602fc1f046218a1cf982148d7d48"
+  }
+}

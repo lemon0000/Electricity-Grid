@@ -1,0 +1,69 @@
+{
+  "commands": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_bidirectional_capacity_v1.py tests/test_rq2_bidirectional_native_v1.py tests/test_rq2_bidirectional_policy_v1.py tests/test_rq2_bidirectional_transaction_v1.py",
+      "result": "119 passed in 99.52s before adding six tests"
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_bidirectional_capacity_v1.py tests/test_rq2_bidirectional_native_v1.py tests/test_rq2_bidirectional_policy_v1.py tests/test_rq2_bidirectional_transaction_v1.py tests/test_rq2_continuous_planner_v1.py tests/test_rq2_continuous_planner_witness_v1.py tests/test_rq2_continuous_planner_assignment_v1.py tests/test_rq2_continuous_planner_short_solve_v1.py tests/test_rq2_continuous_planner_open_activity_v1.py tests/test_rq2_continuous_planner_open_activity_native_v1.py tests/test_rq2_continuous_capacity_policy_v1.py tests/test_rq2_hourly_zero_face_transaction_v1.py",
+      "result": "476 passed, 1 failed in 149.77s; new cross-version test missing temporary parent directory"
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_bidirectional_transaction_v1.py::test_legacy_transaction_and_policy_cannot_cross_version",
+      "result": "1 passed in 12.33s after fixture-only mkdir fix"
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B experiments/verify_rq2_bidirectional_development_v1.py --output results/tables/rq2_bidirectional_capacity_v1_non_authoritative/assignment_replay_checks.json",
+      "result": "6 saved complete assignment/witness snapshots reproduced, zero solver calls"
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B experiments/verify_rq2_bidirectional_development_v1.py --output results/tables/rq2_bidirectional_capacity_v1_non_authoritative/assignment_replay_checks_v2.json",
+      "result": "6 saved complete native assignments and 2 exact analytic witnesses reproduced, zero solver calls"
+    }
+  ],
+  "development_sha256": {
+    "configs/rq2_bidirectional_capacity_policy_v1.DRAFT.yaml": "db1ae3dedd62ac0d3f760cceb23e6d2db1e325591e7b233b9f4138b0f0df4b63",
+    "docs/model_spec/rq2_bidirectional_capacity_v1.md": "79d1ec5427b7cb2d9d33859dcbc681766b222cb7f06fe9eff9feff0b99279f61",
+    "experiments/verify_rq2_bidirectional_development_v1.py": "200688f71eeee7f71f55a87088db77a4cd668fe345bc6594ff2a9d2cfb66cf03",
+    "src/rq2_joint_deliverability_boundary_v1/capacity_policy_bidirectional.py": "4b16340254f1bf7fc45b7b6cafb8bb7e08c4732a7e08022b02940404336a13b4",
+    "src/rq2_joint_deliverability_boundary_v1/continuous_planner_bidirectional.py": "4cf24ccef67b658c3656c45f078234609cdf79c0852b4edf0d1c5cdd029aeb90",
+    "src/rq2_joint_deliverability_boundary_v1/planner_bidirectional_assignment.py": "ea5537879302e8cd0403c0157cdb8623da62bed6ff8f7b5b2fb56865cb06d917",
+    "src/rq2_joint_deliverability_boundary_v1/planner_bidirectional_short_solve.py": "6006b54aefd44e48649c4c179b09ada86c64e51defc78bc5df82fa249d03dd39",
+    "src/rq2_joint_deliverability_boundary_v1/planner_bidirectional_witness.py": "5745f2a539a1d07545b037998e5704aac1df806a34a436809fdba9340f797d40",
+    "src/rq2_joint_deliverability_boundary_v1/scale_hourly_bidirectional_transaction.py": "be052890192d5af472f52222aea7f4ce03cd394d5bead9441ae58a37b606b533",
+    "tests/test_rq2_bidirectional_capacity_v1.py": "f923abafc17a9c3edb30323294bc51628efe717f9254d59957d2693329340f99",
+    "tests/test_rq2_bidirectional_native_v1.py": "97b445b3950ec22a59f492a2aa90960a318878b48f0dfd42aa09f6ac78b0873a",
+    "tests/test_rq2_bidirectional_policy_v1.py": "9db5d2d439c680ecbcb60a9becd5f9e6a4375b9876a91d0c9d046a62af2be276",
+    "tests/test_rq2_bidirectional_transaction_v1.py": "6d96410c644640cf775036f229f67424b91bf50dd1ad6bc7e20e9346cba4214b"
+  },
+  "evidence_files": {
+    "analytic_2.json": "43f81d1c4857e0baa65d72d02798b883a8ee51c25e02b60a2765af28e6d5ac91",
+    "analytic_3.json": "63db0d581e7d7cd4d74994393b50ca6fdaf860715ef53539eab04cd341692f5f",
+    "analytic_exact_witnesses.json": "12e881f21174c3eeb7ef01d907fe15adb950d32837b25ed10a669d4668f3ecf8",
+    "assignment_replay_checks.json": "dd39d314bf694607f5b93e8f97673dce76a7f9028386a9d3a699c99a771cd787",
+    "assignment_replay_checks_v2.json": "f42ebd7d73d40304c7777e978b87e3dc14d319e54177d358fff8757f7d87f33e",
+    "four_arm_cfe_only_shared.json": "37af669e60a9d16363d51eaf36d3b3a2cbdeedd0e6027bd9a7e7458ff393e252",
+    "four_arm_joint_b6_separate_planning_shared_execution.json": "55388a31df130fdf6ba662a21887483d3a5d932e48a9bae8310eb56ffbafada4",
+    "four_arm_joint_correct_shared.json": "9c492879175664ce59a2b7288d578e2f89702c0347a25148aa0022c80f2e394d",
+    "four_arm_network_only_shared.json": "db256c07b0c92aa431328f6e9356b2b967c4d8ca7579b25f154d414c796b4b50",
+    "inventory.json": "e3d227a80d91060e606ac42475f38fd6c2bbf054c3b68a3144ffb8e15005ff99"
+  },
+  "formal_result": false,
+  "limitations": [
+    "hourly transaction only; versioned persistent episode integration pending",
+    "native analytic H3 relaxed interval .4; strict witness rejects exact allocation sum",
+    "manual exact .25+.25 recovery witness at D=.4 succeeds",
+    "finite enrollment parameters remain unapproved; general instruction to start formal experiments after repairs does not resolve their specific values or gates"
+  ],
+  "old_inner_member_count": 518,
+  "old_members_unchanged": true,
+  "old_outer_sha256": "7c47018cff8267575c3cbe218cc6225969c6c5c20a25e22eefd52c9f0c1d2567",
+  "post_test_changes": "checker and synthetic inventory extended to bind/reproduce exact witnesses; implementation and tested behavior unchanged",
+  "schema": "rq2_bidirectional_development_checks_v1",
+  "scientific_scope": "authorized physical call plus recovery capacity only",
+  "status": "PRE_SEAL_AUDIT",
+  "superseded_evidence": {
+    "assignment_replay_checks.json": "historical checker before exact-witness inventory coverage; v2 is current"
+  },
+  "unique_tests_covered": 477
+}

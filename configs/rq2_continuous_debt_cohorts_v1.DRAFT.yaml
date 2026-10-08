@@ -1,0 +1,33 @@
+schema: rq2_continuous_debt_cohorts_v1_draft
+status: DRAFT_NONAUTHORITATIVE
+scope: explicit_synthetic_deadline_accounting_only
+continuous_service_protocol_registered: false
+formal_experiment_authorized: false
+formal_result: false
+paper_claim: false
+security_certified: false
+contract:
+  time: consecutive_integer_hour_end
+  new_debt: effective_call_times_dt
+  allocation: explicit_per_cohort_effective_recovered_work_eta_times_r_times_dt
+  deadline_check: after_recovery_at_due_hour_end
+  overdue_debt: carry_balance_and_permanent_due_time_shortfall
+  missing_deadline: unidentified_even_if_repaid
+  observation_end: no_forced_recovery_or_zero_tail
+  period_reset: forbidden
+  empirical_deadline: null
+  known_deadline_evidence: mechanism_assumption_only
+  recovery_policy: not_selected_explicit_allocations_only
+synthetic_fixture:
+  trajectory_identity: synthetic-training-power-workload-chain
+  accounting_period_id: synthetic-single-period
+  first_observed_hour: 23
+  last_observed_hour: 28
+  eta: "0.8"
+  actions:
+    - {hour: 23, incurred: "0.25", due_hour: 26, allocations: []}
+    - {hour: 24, incurred: "0.25", due_hour: 27, allocations: []}
+    - {hour: 25, incurred: "0.25", due_hour: 28, allocations: []}
+    - {hour: 26, incurred: "0", due_hour: null, allocations: [[23, "0.25"]]}
+    - {hour: 27, incurred: "0", due_hour: null, allocations: [[24, "0.25"]]}
+    - {hour: 28, incurred: "0", due_hour: null, allocations: [[25, "0.25"]]}

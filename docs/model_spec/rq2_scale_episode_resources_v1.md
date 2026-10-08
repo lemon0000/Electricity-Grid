@@ -1,0 +1,27 @@
+# Episode整任务资源声明与采样约束
+
+状态：DRAFT_NONAUTHORITATIVE。`scale_episode_resources.py`复用既有`TaskEnvelope`、Windows host资源观测及进程lifetime peak working set读取；接入scale episode owner和离线核验，不修改旧短预算或数值验收阈值。
+
+## 声明与测量
+
+`DevelopmentScaleEpisode`和`audit_episode`均要求显式`EpisodeResourcePlan(normals, episodes, envelopes, serial_budget)`。创建/读取episode root之前重算完整调用者声明的资源合同，要求所选task的完整小时窗口与实际输入完全相同，envelope与实际预算一致；逐小时关联owned source audit的normal输入摘要、split、source hour、可见信息身份、UID及power源行。五role预算重新通过既有`budget_for_hour`生成并逐字段比较，累计solver调用与秒数必须恰好对应声明。header保存原始声明，离线核验由外部typed声明重新计算并核对header，不能只比较五处传来的摘要相同。
+
+外层task Job声明至少覆盖episode controller追加commit与单个串行inner Job上限之和。此算术尚未施加外层Job限制，不认证实际峰值。`SerialResourceBudget.supervisor_additional_commit_bytes`仍属于将来的外层supervisor，不能与已计入episode envelope的controller追加commit混同。
+
+完整串行计划的commit/disk reserve必须至少覆盖episode实际执行的相应reserve；不能在全局算术中少计而让局部host检查承担更高要求。允许全局保留更多余量，不将局部reserve再重复相加。
+
+episode预算显式提供TaskEnvelope、controller额外commit声明、lifetime peak working set上限及树条目上限。完整窗口按每小时五phase计算wall（含每phase quiet allowance）及父侧non-solver allowance；全部archive/scratch预留累加，不回收停止臂预算或已产生scratch。父header、每小时intent/result的最大payload及根锁文件也计入archive预留。selector线程、变量和约束上限必须落在同task envelope内。
+
+owner从构造入口计时，推进及子任务前后检查累计wall、controller lifetime peak working set、累计archive/scratch logical bytes、文件树条目及剩余host headroom。树遍历拒绝reparse和非regular single-link文件；子任务scratch单独归类。写header/intent/result前增加待写payload与条目数量再检查，避免检查后立即写穿逻辑字节上限。启动下一个Job前，剩余wall必须能容纳其完整已声明执行与静默限额。
+
+小时result保留发布前resource observation；owner连续检查和离线跨小时核验均检查exact字段、限额、标志，以及elapsed、lifetime peak、保留archive/scratch字节和树条目非递减。host可用commit是瞬时值，允许下降但必须满足预留阈值。源码闭包包含新资源检查器和复用的working-set读取器，不能在窗口中漂移。
+
+## 仍未获得的资源证明
+
+这些是声明和采样拒绝条件，不是整个父进程的强制Job wall/commit上限。working set不等于private commit；host headroom是瞬时观测，不是OS预留。小时记录未保存disk free与volume requirements快照，因此离线核验不证明历史磁盘headroom数值。logical bytes不是物理分配/硬磁盘quota。发布前观察不覆盖之后最终写入/关闭的完整成本，独立离线audit也有单独执行成本；后继须为完整执行与审计提供外层监督及全程资源证据。
+
+当前绑定证明调用者提供的完整声明与本episode投影一致；它本身不证明所有研究任务已列齐，也未从完整normal输入重新推导声明的normal小时范围、重算原始输入hash或认证normal复用/最优性。owned source audit提供现有输入身份关联，不提升为真实观测。实际数据/right-censoring及科学验收保持独立。所有hard_parent_wall_limit、hard_parent_commit_limit、hard_disk_quota与whole_task_resources_verified标志为false；采样通过不打开正式运行门。
+
+## 原始声明绑定验证
+
+完整episode执行/离线回归30项通过（291.96秒）。独立pre-seal提出global reserve应覆盖局部runtime reserve，修复后最终14项plan正反例及正向完整offline、原始plan header重hash反例共16项通过（39.30秒、12项未选择、exit0）。限定findings已闭合，不构成official verdict。git diff --check通过；旧reference_selector、actual_dispatch_selector、continuous_grid_candidate SHA256与既有记录一致。测试均为合成/tmp；未启动正式实验。

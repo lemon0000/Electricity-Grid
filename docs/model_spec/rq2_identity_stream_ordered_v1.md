@@ -1,0 +1,25 @@
+# 完整输入身份的局部键布局复用
+
+状态：DRAFT_NONAUTHORITATIVE。既有numeric probe已观测完整normal输入身份计算约4.22–4.35秒/次；kernel保留多次完整检查。本后继只优化编码，不改变字段、年度输入范围、排序规则、浮点表示或检查位置。
+
+## 编码不变量
+
+新增identity_stream_ordered.py。对exact dict、exact str/int/bool键和exact float值，在一次digest内部保存最多64个键布局，每个布局最多512键。signature含键的实际type/value及插入顺序，避免bool/int跨mapping误命中。布局只含键顺序及JSON键前缀，不含数值、完整输入身份或摘要；每次仍对所有值检查finite并读取当前float.hex。跨digest没有缓存。
+
+排序使用repr([key,None])：它保留旧完整pair repr的key部分与其后的逗号位置。exact primitive键在单个dict中没有不同编码却相同repr的碰撞；整数前缀处逗号早于后续数字，因此值无法成为tie-breaker。复杂key/value、非exact类型仍回落旧full-pair repr编码。直接拼接的float.hex为有限值ASCII，JSON引号、空格、逗号及ensure_ascii行为与旧wire一致。
+
+helper implementation identity为893387bfec4ea77cee65a36539c356142085011348c91d859ad5c21c156f0d98，绑定自身、legacy与baseline fallback源码。后续集成见rq2_normal_gurobi_ordered_v1.md。
+
+## 验证
+
+最终helper57项通过（2.00秒）；独立57项通过（1.92秒），另10000组cached-prefix随机混合键、转义/孤立surrogate、极大正负整数及边界float差分逐字节一致。反例覆盖缓存容量、bool/int、当前值改变、非有限拒绝和fallback源码漂移。
+
+2000行×158浮点映射的session-only合成比较，numeric两次0.3278154/0.3235997秒，ordered0.1901463/0.1898776秒，摘要相同。此为候选价值检查，没有独立工件索引，不作为H25或完整normal资源证据。
+
+真实输入比较runner为experiments/diagnose_rq2_identity_ordered_v1.py，机械继承已验证structure probe的runtime guard、阶段前后依赖身份和严格进程观测门；额外封锁模型builder。numeric oracle SHA固定为97afd233d5510cf12ab38f2c9cd654f2b28f822a87cf7ef2e2b17e29e18348e3，ordered helper由外部identity绑定。numeric/ordered/ordered/numeric四次完整输入身份必须等于d9959966c52fe618e73974fc53203ad2caed5169bd7f360fc79e0ecafd06780c。仅prepare，无构模或求解，expected_scale只是固定声明规模。
+
+固定Job120秒/768MiB，独占root为results/tables/rq2_identity_ordered_probe1_non_authoritative。request/launch/process/comparison/summary交叉绑定，原licensed配置、模型/source/normal/task身份及numeric encoder源码在各阶段核验。移植测试曾因旧helper属性名encoding导致1 failed/44 passed，改为新helper的legacy后通过；最终helper+probe105项通过（9.16秒）。独立probe48项通过（8.36秒），pre-seal无开放实质finding。runner SHA为cd2f9f09463ca6c6cd59d732c420561a24cd6c9b33faf33b6796b797ff35e7ac。
+
+真实输入ABBA比较已完成：numeric 3.9318396/3.9256266秒，ordered 2.1200499/2.1180045秒，四次完整年度输入摘要均为上述d995值。prepare31.5367834秒；Job48.516秒、exit0且静默、commit峰474857472 bytes，model_builds=0、solver_calls=0。声明规模22275/28004不是本次构模观测。输入使用公开电网数据，机制初态与业务功率映射仍非真实观测；局部节省不能直接换算完整normal总耗时。
+
+索引results/tables/rq2_normal_task_h25_audit_v1_non_authoritative/identity_ordered_probe1_evidence.json包含122项，SHA256 cfa9c6dbea7115b0f97bb170361ca92d71813f69f5008dfba92a9d3dc1e06782；另17个历史索引947条证据。独立只读结果审计核验上述工件、绑定与进程观测一致，无开放finding，不产生正式验收授权。

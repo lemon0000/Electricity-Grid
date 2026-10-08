@@ -830,6 +830,31 @@ internal interface gap only; it does not change
 the two certification flags above. The exact contract is documented in
 `docs/model_spec/m6_chronological_data_contract.md`.
 
+## RQ2 public-data delivery
+
+The non-authoritative local entry point is
+`data/processed/rq2_public_data_delivery_v1_non_authoritative/README.md`. It
+catalogs and byte-validates the 12 currently scoped Google, Alibaba,
+RTS-GMLC, Zeus, NLR, WattGPU, and continuation-audit packages, including field
+provenance, units, time bases, preserved missing values, and unresolved inputs.
+It does not make the data model-ready or choose a new split, cross-source
+coupling, deadline, recovery rule, or flexibility parameter.
+
+Validate the complete delivery without network access, then stream records
+without loading a large table into memory:
+
+```powershell
+D:\Miniconda3\envs\compute\python.exe -B -m experiments.prepare_rq2_public_data_delivery_v1 --verify-existing
+```
+
+```python
+from experiments.prepare_rq2_public_data_delivery_v1 import iter_records
+
+for row in iter_records("alibaba_gpu_telemetry"):
+    # Numeric CSV values remain exact strings; empty fields remain None.
+    pass
+```
+
 ## Environment
 
 ```powershell

@@ -1,0 +1,39 @@
+{
+  "checks": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_continuous_planner_open_activity_v1.py tests/test_rq2_continuous_planner_v1.py tests/test_rq2_continuous_planner_witness_v1.py tests/test_rq2_continuous_planner_assignment_v1.py",
+      "legacy_tests": 146,
+      "new_tests": 33,
+      "passed": 179,
+      "seconds": 2.13
+    }
+  ],
+  "development_sha256": {
+    "docs/model_spec/rq2_continuous_planner_open_activity_v1.md": "fdab4ca3f250ca1f3b6df7109bc38831d09d49327bdb95db7370cf47e4ddc93f",
+    "src/rq2_joint_deliverability_boundary_v1/continuous_planner_open_activity.py": "5cf1693cf9e3352f57e020aa61f30e278632564151dadefb744ac78cc5e97690",
+    "src/rq2_joint_deliverability_boundary_v1/planner_open_activity_witness.py": "9ac29f32e67d21d0cee51d2959a8199024e8714862ddabbdc511297db04ee964",
+    "tests/test_rq2_continuous_planner_open_activity_v1.py": "8634bcf235ebe48b01dd91fd8870d076c53dde6ed1a2dac919884119e83d61cc"
+  },
+  "formal_result": false,
+  "formal_run_authority": false,
+  "preservation_checks": {
+    "composite_diagnostic_dependencies_verified": 16,
+    "composite_diagnostic_files_verified": 7,
+    "public_delivery_files_verified": 7,
+    "science_candidate_sha256": "2a0e7686b9f92355dc421531c2150ecab354a8106abea54c2d2c5d25259c9051",
+    "sealed_members_verified": 518,
+    "sealed_outer": "configs/rq2_normal_episode_binding_v1.OUTER.SHA256SUMS.json",
+    "sealed_outer_sha256": "7c47018cff8267575c3cbe218cc6225969c6c5c20a25e22eefd52c9f0c1d2567"
+  },
+  "remaining": [
+    "versioned_native_assignment_and_bound_adapter",
+    "complete_finite_enrollment_contract_registration",
+    "training_capacity_to_holdout_binding",
+    "full_support_resources",
+    "sealed_independent_review"
+  ],
+  "schema": "rq2_continuous_open_activity_development_checks_v1",
+  "scope": "build_only_outer_relaxation_and_strict_effective_witness",
+  "solver_calls": 0,
+  "status": "DRAFT_NONAUTHORITATIVE"
+}

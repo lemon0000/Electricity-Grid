@@ -1,0 +1,113 @@
+{
+  "config_sha256": "0cca33dbfbd934881be3c4e375c76eb668c2ec41ff9bbc7392c2eb3947de18a5",
+  "continuous_scientific_protocol_registered": false,
+  "contract_evidence": {
+    "absolute_workload_power_present": false,
+    "accounting_period_id_observed": false,
+    "call_limit_observed": false,
+    "cfe_call_fraction_present": true,
+    "checkpoint_observed": false,
+    "debt_limit_observed": false,
+    "dispatched_grid_need_present": false,
+    "energy_budget_observed": false,
+    "flexibility_event_count_contract_observed": false,
+    "flexibility_event_duration_contract_observed": false,
+    "flexible_fraction_observed": false,
+    "maximum_recovery_power_observed": false,
+    "missing_contract_interpretation": "unbound_for_future_preregistration_not_permission_to_invent_values",
+    "recoverability_observed": false,
+    "recovery_efficiency_observed": false,
+    "service_deadline_observed": false,
+    "shared_physical_clock_mapping_present": false,
+    "track_compatible_recovery_headroom_observed": false,
+    "workload_occupancy_present": true
+  },
+  "cross_split_continuation_link_count": 0,
+  "dispatched_grid_continuation_audited": false,
+  "evidence_level": "non_authoritative_zero_solver_raw_continuation_diagnostic",
+  "formal_execution_started": false,
+  "formal_result": false,
+  "full_joint_service_continuation_ready": false,
+  "implementation_sha256": "c7f2c4678cf20a7e61c159e661774e13607f526bff6d487a97cbcd1b100f5a78",
+  "paper_claim": false,
+  "potential_marginal_pair_adjacency": {
+    "holdout": 17391,
+    "interpretation": "unregistered_cartesian_marginal_adjacency_only",
+    "training": 17754
+  },
+  "power_and_workload_share_observed_clock": false,
+  "power_chronology": {
+    "active_event_change_link_count": 864,
+    "base_load_cfe_timestamp_equal_across_seeds": true,
+    "block_boundary_links_by_split": {
+      "holdout": 527,
+      "training": 538
+    },
+    "block_count": 1071,
+    "chain_count": 6,
+    "cross_split_event_count": 3,
+    "hourly_source_and_timestamp_link_count": 25698,
+    "outage_schedule_verified_for_every_observed_row": true,
+    "row_count": 25704,
+    "same_nonempty_active_event_boundary_links_by_split": {
+      "holdout": 419,
+      "training": 439
+    }
+  },
+  "power_manifest_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+  "power_outage_trajectory_semantics": "sampled_from_published_rate_not_observed",
+  "predecessor_boundary_hashes_verified": {
+    "audit": "fb2b5398850492d3915930b4a755138f5aa7c0abfbb647d31f886f2966cb0eef",
+    "boundary": "b8c424ee8e05b819e8d59522b4ed36e84c86223b1af1e4bf357c00837d5d5c8b",
+    "config": "06052383fa461cf505112fe9ae5ba3ca725f3d65ed9f3cac4a50938739b91f57",
+    "result/SHA256SUMS.json": "dde1a98b01a65ab2899c7a7ef1c201a02ba5c890ba323fd02c2bb375d430ea6c",
+    "result/cells.json": "6f9bf70818d80872d3454da5e653c409273305b4165bef8f30f18941357a2db4",
+    "result/summary.json": "7702f71e27fedb608940f28565b03f27b78d11e0ae834f7247b3ed0a5c896080",
+    "runner": "5fada9507a007e48759963ff095a63523efe56e8a612311db674e4ff60aeaba8"
+  },
+  "raw_chronology_candidate_available": true,
+  "raw_chronology_candidate_interpretation": "within_each_frozen_margin_only_not_joint_service_readiness",
+  "runner_sha256": "dcdacf5d94426746541e53813f48ad9af4a66c6e82155833f2c060a6c5093c7e",
+  "schema": "rq2_joint_deliverability_continuation_availability_v1_non_authoritative",
+  "security_certified": false,
+  "single_margin_successor_is_sufficient_for_joint_continuation": false,
+  "solver_calls": 0,
+  "workload_chronology": {
+    "block_boundary_links_by_split": {
+      "holdout": 33,
+      "training": 33
+    },
+    "block_count": 68,
+    "chain_count": 2,
+    "hourly_source_link_count": 1630,
+    "maximum_raw_fraction_by_split": {
+      "holdout": "1.070370705271957780430251624",
+      "training": "1"
+    },
+    "normalization_identity_verified_for_every_row": true,
+    "raw_fraction_above_one_block_count_by_split": {
+      "holdout": 3,
+      "training": 0
+    },
+    "raw_fraction_above_one_hour_count_by_split": {
+      "holdout": 6,
+      "training": 0
+    },
+    "raw_fraction_above_one_requires_explicit_successor_mapping": true,
+    "raw_fraction_above_one_source_hours": {
+      "holdout": [
+        1198,
+        1206,
+        1207,
+        1208,
+        1209,
+        1267
+      ],
+      "training": []
+    },
+    "raw_fraction_was_clipped": false,
+    "row_count": 1632,
+    "training_peak_requested_gpu_occupancy": "4750.643180555555555555555556"
+  },
+  "workload_manifest_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524"
+}

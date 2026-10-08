@@ -1,0 +1,27 @@
+{
+  "scope": "independent read-only pre-seal static review only",
+  "official_verdict": null,
+  "findings": [
+    {
+      "id": "F1",
+      "finding": "late complete Job and parent evidence drift after final source replay",
+      "resolution": "bounded directory/file/hash/lock view surrounds replay, close, terminal confirmation and driver lease release",
+      "static_closed": true
+    },
+    {
+      "id": "F2",
+      "finding": "clock hour directory replacement preserving child file identities",
+      "resolution": "retain each hour directory identity and recheck after all metadata reads",
+      "static_closed": true
+    },
+    {
+      "id": "F3",
+      "finding": "nested metadata grammar and arithmetic insufficiently checked",
+      "resolution": "exact request/report/bridge grammar, false authority fields, stage arithmetic recomputed with prior account and final anchor binding",
+      "static_closed": true
+    }
+  ],
+  "root_affected_tests_exit_code": 0,
+  "root_affected_tests_passed": 3,
+  "independent_full_dynamic_validation_pending_at_record_time": true
+}

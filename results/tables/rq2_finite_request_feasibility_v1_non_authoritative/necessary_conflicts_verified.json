@@ -1,0 +1,1671 @@
+{
+  "affected_arms": [
+    "CFE-only",
+    "joint-correct",
+    "B6 CFE planning track"
+  ],
+  "arithmetic": "exact rational reconstruction of published decimal sources",
+  "candidate_cell_count": 46,
+  "capacity_recovery_and_deadline_cannot_remove_instantaneous_conflict": true,
+  "cells_with_baseline_conflict": 46,
+  "conditional_scope": "all declared training pairs must fulfill complete applicable requests",
+  "empirical_joint_distribution_claim": false,
+  "formal_arm_status": "not_assigned",
+  "formal_result": false,
+  "mapping": "q_C=max(alpha-(1-source_cfe_call_at_alpha_1),0)/alpha; no workload scaling",
+  "necessary_rule": "q_C<=baseline and q_C<=flexible_fraction*baseline",
+  "network_only_conclusion": null,
+  "schema": "finite_candidate_request_necessary_conflicts_v1",
+  "solver_calls": 0,
+  "source_sha256": {
+    "configs/rq2_continuous_science_candidate_v1.DRAFT.yaml": "2a0e7686b9f92355dc421531c2150ecab354a8106abea54c2d2c5d25259c9051",
+    "data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3/workload_blocks.csv.gz": "99da69e6a98ec45584339e57a37b3fbbf90d3d2d8f1e2c915229a1e4890faef3",
+    "data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4/power_system_blocks.csv.gz": "b8b76fcfaa4dfbf63ff8c92092f357d43a7f21ffb51e76552593bb63f6a34ff1",
+    "experiments/audit_rq2_finite_request_feasibility_v1.py": "27b823e0f2d25868ffae27b9b381d16a05a6e1b119c0c5bddf5fd9289078ce5e",
+    "results/tables/rq2_continuous_science_candidate_v1_non_authoritative/structure_audit.json": "6ba0fc07cf551a9fc1d18952849b46e8e8ffb051dca8accb8da41e9b5c4ec884",
+    "results/tables/rq2_finite_enrollment_support_v1_non_authoritative/coverage_168_24_verified.json": "29ba7f5662c3dee019f183104479d8fa354f726bea0e055ee456b3dd337042c4"
+  },
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "witness_enrollment_windows": [
+    {
+      "available_followup_hours": 24,
+      "chain_id": "power:training:outage_seed=20260822",
+      "enrollment_end_inclusive": 167,
+      "followup_source_complete": true,
+      "kind": "power",
+      "missing_followup_hours": 0,
+      "needed_end_inclusive": 191,
+      "observed_end_inclusive": 191,
+      "outage_seed": 20260822,
+      "source_start": 0,
+      "split": "training"
+    },
+    {
+      "available_followup_hours": 24,
+      "chain_id": "workload:training:single_published_trace",
+      "enrollment_end_inclusive": 167,
+      "followup_source_complete": true,
+      "kind": "workload",
+      "missing_followup_hours": 0,
+      "needed_end_inclusive": 191,
+      "observed_end_inclusive": 191,
+      "outage_seed": null,
+      "raw_above_one_enrollment_hours": [],
+      "raw_above_one_observed_followup_hours": [],
+      "source_start": 0,
+      "split": "training"
+    }
+  ],
+  "witnesses": [
+    {
+      "alpha": 0.5,
+      "arithmetic": {
+        "available_flexibility": "263122266289387148451878193/50000000000000000000000000000000",
+        "effective_cfe_request": "36137993592963/625000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "263122266289387148451878193/2500000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_00",
+      "flexible_fraction": 0.05,
+      "power_row": {
+        "active_component_type": "generator",
+        "active_component_uid": "123_CT_1",
+        "active_event_id": "seed_20260822_event_0000",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.5289103948743704",
+        "hour_offset": "6",
+        "outage_seed": "20260822",
+        "source_hour": "6",
+        "split": "training",
+        "system_load_mw": "3948.5057189999998",
+        "timestamp": "2020-01-01T06:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "6",
+        "requested_gpu_occupancy": "0.5",
+        "source_relative_hour": "6",
+        "split": "training",
+        "workload_fraction": "0.0001052489065157548593807512772"
+      }
+    },
+    {
+      "alpha": 0.5,
+      "arithmetic": {
+        "available_flexibility": "263122266289387148451878193/50000000000000000000000000000000",
+        "effective_cfe_request": "36137993592963/625000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "263122266289387148451878193/2500000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_01",
+      "flexible_fraction": 0.05,
+      "power_row": {
+        "active_component_type": "generator",
+        "active_component_uid": "123_CT_1",
+        "active_event_id": "seed_20260822_event_0000",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.5289103948743704",
+        "hour_offset": "6",
+        "outage_seed": "20260822",
+        "source_hour": "6",
+        "split": "training",
+        "system_load_mw": "3948.5057189999998",
+        "timestamp": "2020-01-01T06:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "6",
+        "requested_gpu_occupancy": "0.5",
+        "source_relative_hour": "6",
+        "split": "training",
+        "workload_fraction": "0.0001052489065157548593807512772"
+      }
+    },
+    {
+      "alpha": 0.5,
+      "arithmetic": {
+        "available_flexibility": "263122266289387148451878193/50000000000000000000000000000000",
+        "effective_cfe_request": "36137993592963/625000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "263122266289387148451878193/2500000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_02",
+      "flexible_fraction": 0.05,
+      "power_row": {
+        "active_component_type": "generator",
+        "active_component_uid": "123_CT_1",
+        "active_event_id": "seed_20260822_event_0000",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.5289103948743704",
+        "hour_offset": "6",
+        "outage_seed": "20260822",
+        "source_hour": "6",
+        "split": "training",
+        "system_load_mw": "3948.5057189999998",
+        "timestamp": "2020-01-01T06:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "6",
+        "requested_gpu_occupancy": "0.5",
+        "source_relative_hour": "6",
+        "split": "training",
+        "workload_fraction": "0.0001052489065157548593807512772"
+      }
+    },
+    {
+      "alpha": 0.5,
+      "arithmetic": {
+        "available_flexibility": "263122266289387148451878193/12500000000000000000000000000000",
+        "effective_cfe_request": "36137993592963/625000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "263122266289387148451878193/2500000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_03",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "generator",
+        "active_component_uid": "123_CT_1",
+        "active_event_id": "seed_20260822_event_0000",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.5289103948743704",
+        "hour_offset": "6",
+        "outage_seed": "20260822",
+        "source_hour": "6",
+        "split": "training",
+        "system_load_mw": "3948.5057189999998",
+        "timestamp": "2020-01-01T06:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "6",
+        "requested_gpu_occupancy": "0.5",
+        "source_relative_hour": "6",
+        "split": "training",
+        "workload_fraction": "0.0001052489065157548593807512772"
+      }
+    },
+    {
+      "alpha": 0.5,
+      "arithmetic": {
+        "available_flexibility": "263122266289387148451878193/12500000000000000000000000000000",
+        "effective_cfe_request": "36137993592963/625000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "263122266289387148451878193/2500000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_04",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "generator",
+        "active_component_uid": "123_CT_1",
+        "active_event_id": "seed_20260822_event_0000",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.5289103948743704",
+        "hour_offset": "6",
+        "outage_seed": "20260822",
+        "source_hour": "6",
+        "split": "training",
+        "system_load_mw": "3948.5057189999998",
+        "timestamp": "2020-01-01T06:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "6",
+        "requested_gpu_occupancy": "0.5",
+        "source_relative_hour": "6",
+        "split": "training",
+        "workload_fraction": "0.0001052489065157548593807512772"
+      }
+    },
+    {
+      "alpha": 0.5,
+      "arithmetic": {
+        "available_flexibility": "263122266289387148451878193/12500000000000000000000000000000",
+        "effective_cfe_request": "36137993592963/625000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "263122266289387148451878193/2500000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_05",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "generator",
+        "active_component_uid": "123_CT_1",
+        "active_event_id": "seed_20260822_event_0000",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.5289103948743704",
+        "hour_offset": "6",
+        "outage_seed": "20260822",
+        "source_hour": "6",
+        "split": "training",
+        "system_load_mw": "3948.5057189999998",
+        "timestamp": "2020-01-01T06:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "6",
+        "requested_gpu_occupancy": "0.5",
+        "source_relative_hour": "6",
+        "split": "training",
+        "workload_fraction": "0.0001052489065157548593807512772"
+      }
+    },
+    {
+      "alpha": 0.5,
+      "arithmetic": {
+        "available_flexibility": "263122266289387148451878193/5000000000000000000000000000000",
+        "effective_cfe_request": "36137993592963/625000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "263122266289387148451878193/2500000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_06",
+      "flexible_fraction": 0.5,
+      "power_row": {
+        "active_component_type": "generator",
+        "active_component_uid": "123_CT_1",
+        "active_event_id": "seed_20260822_event_0000",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.5289103948743704",
+        "hour_offset": "6",
+        "outage_seed": "20260822",
+        "source_hour": "6",
+        "split": "training",
+        "system_load_mw": "3948.5057189999998",
+        "timestamp": "2020-01-01T06:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "6",
+        "requested_gpu_occupancy": "0.5",
+        "source_relative_hour": "6",
+        "split": "training",
+        "workload_fraction": "0.0001052489065157548593807512772"
+      }
+    },
+    {
+      "alpha": 0.5,
+      "arithmetic": {
+        "available_flexibility": "263122266289387148451878193/5000000000000000000000000000000",
+        "effective_cfe_request": "36137993592963/625000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "263122266289387148451878193/2500000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_07",
+      "flexible_fraction": 0.5,
+      "power_row": {
+        "active_component_type": "generator",
+        "active_component_uid": "123_CT_1",
+        "active_event_id": "seed_20260822_event_0000",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.5289103948743704",
+        "hour_offset": "6",
+        "outage_seed": "20260822",
+        "source_hour": "6",
+        "split": "training",
+        "system_load_mw": "3948.5057189999998",
+        "timestamp": "2020-01-01T06:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "6",
+        "requested_gpu_occupancy": "0.5",
+        "source_relative_hour": "6",
+        "split": "training",
+        "workload_fraction": "0.0001052489065157548593807512772"
+      }
+    },
+    {
+      "alpha": 0.5,
+      "arithmetic": {
+        "available_flexibility": "263122266289387148451878193/5000000000000000000000000000000",
+        "effective_cfe_request": "36137993592963/625000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "263122266289387148451878193/2500000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_08",
+      "flexible_fraction": 0.5,
+      "power_row": {
+        "active_component_type": "generator",
+        "active_component_uid": "123_CT_1",
+        "active_event_id": "seed_20260822_event_0000",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.5289103948743704",
+        "hour_offset": "6",
+        "outage_seed": "20260822",
+        "source_hour": "6",
+        "split": "training",
+        "system_load_mw": "3948.5057189999998",
+        "timestamp": "2020-01-01T06:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "6",
+        "requested_gpu_occupancy": "0.5",
+        "source_relative_hour": "6",
+        "split": "training",
+        "workload_fraction": "0.0001052489065157548593807512772"
+      }
+    },
+    {
+      "alpha": 0.7,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/2000000000000000000000000000000000",
+        "effective_cfe_request": "8574993281669/1000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_09",
+      "flexible_fraction": 0.05,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.7,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/2000000000000000000000000000000000",
+        "effective_cfe_request": "8574993281669/1000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_10",
+      "flexible_fraction": 0.05,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.7,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/2000000000000000000000000000000000",
+        "effective_cfe_request": "8574993281669/1000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_11",
+      "flexible_fraction": 0.05,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.7,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "8574993281669/1000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_12",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.7,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "8574993281669/1000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_13",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.7,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "8574993281669/1000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_14",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.7,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/200000000000000000000000000000000",
+        "effective_cfe_request": "8574993281669/1000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_15",
+      "flexible_fraction": 0.5,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.7,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/200000000000000000000000000000000",
+        "effective_cfe_request": "8574993281669/1000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_16",
+      "flexible_fraction": 0.5,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.7,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/200000000000000000000000000000000",
+        "effective_cfe_request": "8574993281669/1000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_17",
+      "flexible_fraction": 0.5,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/2000000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_18",
+      "flexible_fraction": 0.05,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/2000000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_19",
+      "flexible_fraction": 0.05,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/2000000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_20",
+      "flexible_fraction": 0.05,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_21",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_22",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_23",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/200000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_24",
+      "flexible_fraction": 0.5,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/200000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_25",
+      "flexible_fraction": 0.5,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/200000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_26",
+      "flexible_fraction": 0.5,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 1.0,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/2000000000000000000000000000000000",
+        "effective_cfe_request": "3060024952971683/10000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_27",
+      "flexible_fraction": 0.05,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 1.0,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/2000000000000000000000000000000000",
+        "effective_cfe_request": "3060024952971683/10000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_28",
+      "flexible_fraction": 0.05,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 1.0,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/2000000000000000000000000000000000",
+        "effective_cfe_request": "3060024952971683/10000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_29",
+      "flexible_fraction": 0.05,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 1.0,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "3060024952971683/10000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_30",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 1.0,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "3060024952971683/10000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_31",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 1.0,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "3060024952971683/10000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_32",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 1.0,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/200000000000000000000000000000000",
+        "effective_cfe_request": "3060024952971683/10000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_33",
+      "flexible_fraction": 0.5,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 1.0,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/200000000000000000000000000000000",
+        "effective_cfe_request": "3060024952971683/10000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_34",
+      "flexible_fraction": 0.5,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 1.0,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/200000000000000000000000000000000",
+        "effective_cfe_request": "3060024952971683/10000000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_35",
+      "flexible_fraction": 0.5,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_36",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_37",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_38",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_39",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_40",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_41",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_42",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_43",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_44",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    },
+    {
+      "alpha": 0.85,
+      "arithmetic": {
+        "available_flexibility": "3733412600572748761922760581/500000000000000000000000000000000",
+        "effective_cfe_request": "1560024952971683/8500000000000000",
+        "request_exceeds_available": true,
+        "request_exceeds_baseline": true,
+        "workload_baseline": "3733412600572748761922760581/100000000000000000000000000000000"
+      },
+      "cell_id": "proposed_continuous_168h_v1_45",
+      "flexible_fraction": 0.2,
+      "power_row": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": "",
+        "block_id": "training_s20260822_0000",
+        "block_probability": "0.001848428835489833641404805915",
+        "cfe_call_fraction": "0.3060024952971683",
+        "hour_offset": "0",
+        "outage_seed": "20260822",
+        "source_hour": "0",
+        "split": "training",
+        "system_load_mw": "3337.3318842000003",
+        "timestamp": "2020-01-01T00:00:00+00:00"
+      },
+      "workload_row": {
+        "block_id": "training_0000",
+        "block_probability": "0.02941176470588235294117647059",
+        "hour_offset": "0",
+        "requested_gpu_occupancy": "0.1773611111111111111111111111",
+        "source_relative_hour": "0",
+        "split": "training",
+        "workload_fraction": "0.00003733412600572748761922760581"
+      }
+    }
+  ]
+}

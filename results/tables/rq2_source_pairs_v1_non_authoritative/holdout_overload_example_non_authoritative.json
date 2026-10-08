@@ -1,0 +1,1884 @@
+{
+  "declaration_sha256": "942ab1d86fc8a7bba8407ad37ca21c919e933032966a34fb4f70b79a60849323",
+  "exporter_sha256": "7b0d2cb35e633fd7003a7dace4ce8d03a4a987ddd339214152eacc26618831e7",
+  "pair": {
+    "boundary_implementation_sha256": "b8c424ee8e05b819e8d59522b4ed36e84c86223b1af1e4bf357c00837d5d5c8b",
+    "cfe_implementation_sha256": "e694355153978c00401b181a3084b960deece5b1cd0efa032f363fca52e5ebb4",
+    "cfe_rule": "legacy_full_target_deficit_without_workload_or_flexibility_truncation",
+    "declaration": {
+      "config_sha256": "0cca33dbfbd934881be3c4e375c76eb668c2ec41ff9bbc7392c2eb3947de18a5",
+      "decimal_places": 12,
+      "hourly_cfe_target": "0.7",
+      "hours": 25,
+      "normalized_unit_mw": "250",
+      "outage_seed": 20260822,
+      "pairing_rule": "declared_relative_offset_pairing_v1",
+      "parameter_role": "mechanism_assumption",
+      "power_raw_start": 4440,
+      "power_window_identity": "fc3e17128524619fa0638470061d03eed3b2bf30750c69d0aa06b5e5f365a17a",
+      "split": "holdout",
+      "workload_raw_start": 1190,
+      "workload_window_identity": "b4297e7405ed0f7f5510872ae1dc1031ee9205bcacd7f956e63c00d3554febc6"
+    },
+    "executable_episode_input": false,
+    "formal_result": false,
+    "grid_request_slot_role": "empty_slot_for_common_reference_not_observed_zero",
+    "hours": null,
+    "implementation_sha256": "e5e6e5e1b83a7843cde23cf6026403faa8151c49d97ee5d907d5d25c87606702",
+    "joint_probability": null,
+    "mapping": {
+      "normalized_unit_mw": "250",
+      "parameter_role": "mechanism_assumption",
+      "power_mapping": "linear_workload_power_no_idle_offset_v1",
+      "source_pairing": "declared_power_source_and_workload_pairing_mechanism_v1",
+      "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792"
+    },
+    "mapping_implementation_sha256": "8ed64e2ab2a7a6216f5c972f9f2025e96be4d9126bb10efd1e3daa5433366b02",
+    "normalization": {
+      "decimal_places": 12,
+      "normalized_unit_mw": "250",
+      "numerical_projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+      "power_rule": "linear_workload_power_no_idle_offset_v1",
+      "source_basis": {
+        "builder_config_sha256": "571b10ff6874ae2c787420b3328e4f256e1d284864851d5099b7ecf9b5d43c2c",
+        "builder_sha256": "6f2e0c91733cb30846c85b03b3cd89c07f27c042b29ad3b002b76d64f9264d4b",
+        "normalization_method": "divide_by_training_segment_peak_occupancy",
+        "package_summary_sha256": "d4207d34757dd9b02a1f52f0cf8e44b5bb22175721ffd77ca8aa9245da7c874b",
+        "source_sha256": "a53041f484144ea67c9a1777d85e2dde350c2341c94418da8072c0a94b3821d6",
+        "training_peak_requested_gpu_occupancy": "4750.643180555555555555555556"
+      },
+      "source_package_manifest_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524"
+    },
+    "pair_identity": "a3da303621f4e44717eb342e55c96b306eb6e8f1e82c784eb5a0d8a7315f928c",
+    "projection_sha256": "59bda5b0aa11b38c8e73b5092d11ce464d927ba73c01b1a017f65e59d1e25474",
+    "registered_coupling": false,
+    "rows": [
+      {
+        "cfe_request": 0.7759923374549089,
+        "cfe_request_float_hex": "0x1.8d4ede1ea1800p-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.afb73515710cdp-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.8431946362184363",
+          "hour_offset": "0",
+          "outage_seed": "20260822",
+          "source_hour": "4440",
+          "split": "holdout",
+          "system_load_mw": "4452.653807",
+          "timestamp": "2020-07-04T00:00:00+00:00"
+        },
+        "relative_offset": 0,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.7759923374549089,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4441,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.814427671547,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1191,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 203.60691788675,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "814427671547",
+            "1000000000000"
+          ],
+          "projection_error_exact": [
+            "676341302077901",
+            "2000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.8144276715466618293489610495",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.814427671547
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "9",
+          "requested_gpu_occupancy": "3869.055263888888888888888889",
+          "source_relative_hour": "1190",
+          "split": "holdout",
+          "workload_fraction": "0.8144276715466618293489610495"
+        }
+      },
+      {
+        "cfe_request": 0.8002986952998318,
+        "cfe_request_float_hex": "0x1.99c0c026b0411p-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.b86d534e482d9p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.8602090867098823",
+          "hour_offset": "1",
+          "outage_seed": "20260822",
+          "source_hour": "4441",
+          "split": "holdout",
+          "system_load_mw": "4212.72017",
+          "timestamp": "2020-07-04T01:00:00+00:00"
+        },
+        "relative_offset": 1,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.8002986952998318,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4442,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.750279515514,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1192,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 187.5698788785,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "375139757757",
+            "500000000000"
+          ],
+          "projection_error_exact": [
+            "-1872000524934767",
+            "5000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.7502795155143744001049869534",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.750279515514
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "10",
+          "requested_gpu_occupancy": "3564.310263888888888888888888",
+          "source_relative_hour": "1191",
+          "split": "holdout",
+          "workload_fraction": "0.7502795155143744001049869534"
+        }
+      },
+      {
+        "cfe_request": 0.7874462078426664,
+        "cfe_request_float_hex": "0x1.932c263c1641dp-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.b3d21ac3a92e1p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.8512123454898665",
+          "hour_offset": "2",
+          "outage_seed": "20260822",
+          "source_hour": "4442",
+          "split": "holdout",
+          "system_load_mw": "4028.560044",
+          "timestamp": "2020-07-04T02:00:00+00:00"
+        },
+        "relative_offset": 2,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.7874462078426664,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4443,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.792799778465,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1193,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 198.19994461625,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "158559955693",
+            "200000000000"
+          ],
+          "projection_error_exact": [
+            "-849718714549847",
+            "10000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.7927997784650849718714549847",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.792799778465
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "11",
+          "requested_gpu_occupancy": "3766.308861111111111111111111",
+          "source_relative_hour": "1192",
+          "split": "holdout",
+          "workload_fraction": "0.7927997784650849718714549847"
+        }
+      },
+      {
+        "cfe_request": 0.7954332726160777,
+        "cfe_request_float_hex": "0x1.974307a81296bp-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.b6aeebc273698p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.8568032908312544",
+          "hour_offset": "3",
+          "outage_seed": "20260822",
+          "source_hour": "4443",
+          "split": "holdout",
+          "system_load_mw": "3923.274517",
+          "timestamp": "2020-07-04T03:00:00+00:00"
+        },
+        "relative_offset": 3,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.7954332726160777,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4444,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.780163495347,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1194,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 195.04087383675,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "780163495347",
+            "1000000000000"
+          ],
+          "projection_error_exact": [
+            "-584007968347937",
+            "10000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.7801634953470584007968347937",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.780163495347
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "12",
+          "requested_gpu_occupancy": "3706.278388888888888888888890",
+          "source_relative_hour": "1193",
+          "split": "holdout",
+          "workload_fraction": "0.7801634953470584007968347937"
+        }
+      },
+      {
+        "cfe_request": 0.7587009045542357,
+        "cfe_request_float_hex": "0x1.847471e9031a4p-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.a984b6231bc59p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.8310906331879649",
+          "hour_offset": "4",
+          "outage_seed": "20260822",
+          "source_hour": "4444",
+          "split": "holdout",
+          "system_load_mw": "3843.481343",
+          "timestamp": "2020-07-04T04:00:00+00:00"
+        },
+        "relative_offset": 4,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.7587009045542357,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4445,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.794946081409,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1195,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 198.73652035225,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "794946081409",
+            "1000000000000"
+          ],
+          "projection_error_exact": [
+            "-1111855851074243",
+            "10000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.7949460814091111855851074243",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.794946081409
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "13",
+          "requested_gpu_occupancy": "3776.505180555555555555555554",
+          "source_relative_hour": "1194",
+          "split": "holdout",
+          "workload_fraction": "0.7949460814091111855851074243"
+        }
+      },
+      {
+        "cfe_request": 0.5798247282332831,
+        "cfe_request_float_hex": "0x1.28dec96a591bap-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.6968c030d7f9cp-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.7058773097632982",
+          "hour_offset": "5",
+          "outage_seed": "20260822",
+          "source_hour": "4445",
+          "split": "holdout",
+          "system_load_mw": "3831.7342980000003",
+          "timestamp": "2020-07-04T05:00:00+00:00"
+        },
+        "relative_offset": 5,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.5798247282332831,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4446,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.866752603958,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1196,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 216.6881509895,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "433376301979",
+            "500000000000"
+          ],
+          "projection_error_exact": [
+            "-199600005039083",
+            "2500000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.8667526039580798400020156332",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.866752603958
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "14",
+          "requested_gpu_occupancy": "4117.632347222222222222222221",
+          "source_relative_hour": "1195",
+          "split": "holdout",
+          "workload_fraction": "0.8667526039580798400020156332"
+        }
+      },
+      {
+        "cfe_request": 0.4346683211353881,
+        "cfe_request_float_hex": "0x1.bd19b13f88ed4p-2",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.356297a309864p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.6042678247947717",
+          "hour_offset": "6",
+          "outage_seed": "20260822",
+          "source_hour": "4446",
+          "split": "holdout",
+          "system_load_mw": "4147.50203",
+          "timestamp": "2020-07-04T06:00:00+00:00"
+        },
+        "relative_offset": 6,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.4346683211353881,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4447,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.962533067416,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1197,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 240.633266854,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "120316633427",
+            "125000000000"
+          ],
+          "projection_error_exact": [
+            "2659509592895503",
+            "10000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.9625330674157340490407104497",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.962533067416
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "15",
+          "requested_gpu_occupancy": "4572.651152777777777777777779",
+          "source_relative_hour": "1196",
+          "split": "holdout",
+          "workload_fraction": "0.9625330674157340490407104497"
+        }
+      },
+      {
+        "cfe_request": 0.353267904301792,
+        "cfe_request_float_hex": "0x1.69bf0fbecf84ap-2",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.1836124f956e7p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.5472875330112544",
+          "hour_offset": "7",
+          "outage_seed": "20260822",
+          "source_hour": "4447",
+          "split": "holdout",
+          "system_load_mw": "4645.553532",
+          "timestamp": "2020-07-04T07:00:00+00:00"
+        },
+        "relative_offset": 7,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.353267904301792,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4448,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.976090050426,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1198,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 244.0225126065,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "488045025213",
+            "500000000000"
+          ],
+          "projection_error_exact": [
+            "-952048665433779",
+            "2000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.9760900504264760243327168895",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.976090050426
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "16",
+          "requested_gpu_occupancy": "4637.055541666666666666666667",
+          "source_relative_hour": "1197",
+          "split": "holdout",
+          "workload_fraction": "0.9760900504264760243327168895"
+        }
+      },
+      {
+        "cfe_request": 0.31983230998285406,
+        "cfe_request_float_hex": "0x1.47821efe526cap-2",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.0c3a57a5d00c7p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.5238826169879979",
+          "hour_offset": "8",
+          "outage_seed": "20260822",
+          "source_hour": "4448",
+          "split": "holdout",
+          "system_load_mw": "5164.692758",
+          "timestamp": "2020-07-04T08:00:00+00:00"
+        },
+        "relative_offset": 8,
+        "source_hour": null,
+        "workload_projection": {
+          "dc_baseline_mw": null,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": false,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": null,
+          "projection_error_exact": null,
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "1.025632102347872433846377216",
+          "reason": "raw_fraction_above_one_requires_separate_contract",
+          "status": "unresolved",
+          "workload_occupancy": null
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "17",
+          "requested_gpu_occupancy": "4872.412152777777777777777774",
+          "source_relative_hour": "1198",
+          "split": "holdout",
+          "workload_fraction": "1.025632102347872433846377216"
+        }
+      },
+      {
+        "cfe_request": 0.2906017994541537,
+        "cfe_request_float_hex": "0x1.299384a341e29p-2",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.01c06e6c570f5p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.5034212596179076",
+          "hour_offset": "9",
+          "outage_seed": "20260822",
+          "source_hour": "4449",
+          "split": "holdout",
+          "system_load_mw": "5637.172461",
+          "timestamp": "2020-07-04T09:00:00+00:00"
+        },
+        "relative_offset": 9,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.2906017994541537,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4450,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.992139371397,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1200,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 248.03484284925,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "992139371397",
+            "1000000000000"
+          ],
+          "projection_error_exact": [
+            "-2221229260509281",
+            "10000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.9921393713972221229260509281",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.992139371397
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "18",
+          "requested_gpu_occupancy": "4713.300138888888888888888888",
+          "source_relative_hour": "1199",
+          "split": "holdout",
+          "workload_fraction": "0.9921393713972221229260509281"
+        }
+      },
+      {
+        "cfe_request": 0.2739610043719727,
+        "cfe_request_float_hex": "0x1.18893bc8a0b3cp-2",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.f7934372d6e44p-2",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.4917727030603809",
+          "hour_offset": "10",
+          "outage_seed": "20260822",
+          "source_hour": "4450",
+          "split": "holdout",
+          "system_load_mw": "6034.898201",
+          "timestamp": "2020-07-04T10:00:00+00:00"
+        },
+        "relative_offset": 10,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.2739610043719727,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4451,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.928419270269,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1201,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 232.10481756725,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "928419270269",
+            "1000000000000"
+          ],
+          "projection_error_exact": [
+            "-2761482619887",
+            "62500000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.9284192702690441837219181920",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.928419270269
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "19",
+          "requested_gpu_occupancy": "4410.588675000000000000000000",
+          "source_relative_hour": "1200",
+          "split": "holdout",
+          "workload_fraction": "0.9284192702690441837219181920"
+        }
+      },
+      {
+        "cfe_request": 0.31877669121958097,
+        "cfe_request_float_hex": "0x1.466d659e0f8e2p-2",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.0bd97d2a8571cp-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.5231436838537067",
+          "hour_offset": "11",
+          "outage_seed": "20260822",
+          "source_hour": "4451",
+          "split": "holdout",
+          "system_load_mw": "6395.008091",
+          "timestamp": "2020-07-04T11:00:00+00:00"
+        },
+        "relative_offset": 11,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.31877669121958097,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4452,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.912469176798,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1202,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 228.1172941995,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "456234588399",
+            "500000000000"
+          ],
+          "projection_error_exact": [
+            "355779047450561",
+            "5000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.9124691767979288441905098878",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.912469176798
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "20",
+          "requested_gpu_occupancy": "4334.815472222222222222222222",
+          "source_relative_hour": "1201",
+          "split": "holdout",
+          "workload_fraction": "0.9124691767979288441905098878"
+        }
+      },
+      {
+        "cfe_request": 0.376572159485333,
+        "cfe_request_float_hex": "0x1.819c21d64b5e3p-2",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.20903f0b00c76p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.5636005116397331",
+          "hour_offset": "12",
+          "outage_seed": "20260822",
+          "source_hour": "4452",
+          "split": "holdout",
+          "system_load_mw": "6643.912464",
+          "timestamp": "2020-07-04T12:00:00+00:00"
+        },
+        "relative_offset": 12,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.376572159485333,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4453,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.876541290203,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1203,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 219.13532255075,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "876541290203",
+            "1000000000000"
+          ],
+          "projection_error_exact": [
+            "497165531466093",
+            "5000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.8765412902029005668937067814",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.876541290203
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "21",
+          "requested_gpu_occupancy": "4164.134902777777777777777777",
+          "source_relative_hour": "1202",
+          "split": "holdout",
+          "workload_fraction": "0.8765412902029005668937067814"
+        }
+      },
+      {
+        "cfe_request": 0.4234611237310192,
+        "cfe_request_float_hex": "0x1.b19fcaf635636p-2",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.315e53d62c493p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.5964227866117134",
+          "hour_offset": "13",
+          "outage_seed": "20260822",
+          "source_hour": "4453",
+          "split": "holdout",
+          "system_load_mw": "6877.742122",
+          "timestamp": "2020-07-04T13:00:00+00:00"
+        },
+        "relative_offset": 13,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.4234611237310192,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4454,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.905971784657,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1204,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 226.49294616425,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "905971784657",
+            "1000000000000"
+          ],
+          "projection_error_exact": [
+            "203718067310003",
+            "1000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.9059717846567962819326899970",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.905971784657
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "22",
+          "requested_gpu_occupancy": "4303.948680555555555555555555",
+          "source_relative_hour": "1203",
+          "split": "holdout",
+          "workload_fraction": "0.9059717846567962819326899970"
+        }
+      },
+      {
+        "cfe_request": 0.464707704977316,
+        "cfe_request_float_hex": "0x1.dbdc562c4ea1bp-2",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.4026b7c2b51f0p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.6252953934841212",
+          "hour_offset": "14",
+          "outage_seed": "20260822",
+          "source_hour": "4454",
+          "split": "holdout",
+          "system_load_mw": "6992.441391",
+          "timestamp": "2020-07-04T14:00:00+00:00"
+        },
+        "relative_offset": 14,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.464707704977316,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4455,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.955514371593,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1205,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 238.87859289825,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "955514371593",
+            "1000000000000"
+          ],
+          "projection_error_exact": [
+            "-2337399334427549",
+            "5000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.9555143715934674798668855098",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.955514371593
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0015",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "23",
+          "requested_gpu_occupancy": "4539.307833333333333333333333",
+          "source_relative_hour": "1204",
+          "split": "holdout",
+          "workload_fraction": "0.9555143715934674798668855098"
+        }
+      },
+      {
+        "cfe_request": 0.5221824484046677,
+        "cfe_request_float_hex": "0x1.0b5b7f74e2f25p-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.54c00c6b6ba9ap-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.6655277138832674",
+          "hour_offset": "15",
+          "outage_seed": "20260822",
+          "source_hour": "4455",
+          "split": "holdout",
+          "system_load_mw": "6970.383188000001",
+          "timestamp": "2020-07-04T15:00:00+00:00"
+        },
+        "relative_offset": 15,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.5221824484046677,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4456,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.967841363258,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1206,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 241.9603408145,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "483920681629",
+            "500000000000"
+          ],
+          "projection_error_exact": [
+            "-532714986847",
+            "2500000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.9678413632582130859947388000",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.967841363258
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0016",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "0",
+          "requested_gpu_occupancy": "4597.868972222222222222222222",
+          "source_relative_hour": "1205",
+          "split": "holdout",
+          "workload_fraction": "0.9678413632582130859947388000"
+        }
+      },
+      {
+        "cfe_request": 0.5985960730227494,
+        "cfe_request_float_hex": "0x1.327b2f3a4b211p-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.702307759afd9p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.7190172511159246",
+          "hour_offset": "16",
+          "outage_seed": "20260822",
+          "source_hour": "4456",
+          "split": "holdout",
+          "system_load_mw": "6808.95894",
+          "timestamp": "2020-07-04T16:00:00+00:00"
+        },
+        "relative_offset": 16,
+        "source_hour": null,
+        "workload_projection": {
+          "dc_baseline_mw": null,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": false,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": null,
+          "projection_error_exact": null,
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "1.057216188232570578623024990",
+          "reason": "raw_fraction_above_one_requires_separate_contract",
+          "status": "unresolved",
+          "workload_occupancy": null
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0016",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "1",
+          "requested_gpu_occupancy": "5022.456875000000000000000005",
+          "source_relative_hour": "1206",
+          "split": "holdout",
+          "workload_fraction": "1.057216188232570578623024990"
+        }
+      },
+      {
+        "cfe_request": 0.7292407816309185,
+        "cfe_request_float_hex": "0x1.755f0c38074ecp-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.9ef5bbc0d1ea5p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.810468547141643",
+          "hour_offset": "17",
+          "outage_seed": "20260822",
+          "source_hour": "4457",
+          "split": "holdout",
+          "system_load_mw": "6593.10094",
+          "timestamp": "2020-07-04T17:00:00+00:00"
+        },
+        "relative_offset": 17,
+        "source_hour": null,
+        "workload_projection": {
+          "dc_baseline_mw": null,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": false,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": null,
+          "projection_error_exact": null,
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "1.065622128961491000915902297",
+          "reason": "raw_fraction_above_one_requires_separate_contract",
+          "status": "unresolved",
+          "workload_occupancy": null
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0016",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "2",
+          "requested_gpu_occupancy": "5062.390500000000000000000001",
+          "source_relative_hour": "1207",
+          "split": "holdout",
+          "workload_fraction": "1.065622128961491000915902297"
+        }
+      },
+      {
+        "cfe_request": 0.8125251879127395,
+        "cfe_request_float_hex": "0x1.a0034d2a85df8p-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.bccf1c6a90e94p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.8687676315389177",
+          "hour_offset": "18",
+          "outage_seed": "20260822",
+          "source_hour": "4458",
+          "split": "holdout",
+          "system_load_mw": "6310.943022",
+          "timestamp": "2020-07-04T18:00:00+00:00"
+        },
+        "relative_offset": 18,
+        "source_hour": null,
+        "workload_projection": {
+          "dc_baseline_mw": null,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": false,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": null,
+          "projection_error_exact": null,
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "1.070370705271957780430251624",
+          "reason": "raw_fraction_above_one_requires_separate_contract",
+          "status": "unresolved",
+          "workload_occupancy": null
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0016",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "3",
+          "requested_gpu_occupancy": "5084.949291666666666666666667",
+          "source_relative_hour": "1208",
+          "split": "holdout",
+          "workload_fraction": "1.070370705271957780430251624"
+        }
+      },
+      {
+        "cfe_request": 0.8271382519974768,
+        "cfe_request_float_hex": "0x1.a77eaa3b33150p-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.c20bdd8fd6f52p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.8789967763982338",
+          "hour_offset": "19",
+          "outage_seed": "20260822",
+          "source_hour": "4459",
+          "split": "holdout",
+          "system_load_mw": "6193.2234339999995",
+          "timestamp": "2020-07-04T19:00:00+00:00"
+        },
+        "relative_offset": 19,
+        "source_hour": null,
+        "workload_projection": {
+          "dc_baseline_mw": null,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": false,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": null,
+          "projection_error_exact": null,
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "1.014616368802857042377849486",
+          "reason": "raw_fraction_above_one_requires_separate_contract",
+          "status": "unresolved",
+          "workload_occupancy": null
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0016",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "4",
+          "requested_gpu_occupancy": "4820.080333333333333333333334",
+          "source_relative_hour": "1209",
+          "split": "holdout",
+          "workload_fraction": "1.014616368802857042377849486"
+        }
+      },
+      {
+        "cfe_request": 0.8389431180643283,
+        "cfe_request_float_hex": "0x1.ad89f3ce94c3ep-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.c646f77701bc5p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.8872601826450298",
+          "hour_offset": "20",
+          "outage_seed": "20260822",
+          "source_hour": "4460",
+          "split": "holdout",
+          "system_load_mw": "5957.966012",
+          "timestamp": "2020-07-04T20:00:00+00:00"
+        },
+        "relative_offset": 20,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.8389431180643283,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4461,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.892716681822,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1211,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 223.1791704555,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "446358340911",
+            "500000000000"
+          ],
+          "projection_error_exact": [
+            "-1681205161023969",
+            "10000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.8927166818221681205161023969",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.892716681822
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0016",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "5",
+          "requested_gpu_occupancy": "4240.978416666666666666666666",
+          "source_relative_hour": "1210",
+          "split": "holdout",
+          "workload_fraction": "0.8927166818221681205161023969"
+        }
+      },
+      {
+        "cfe_request": 0.8865790800700992,
+        "cfe_request_float_hex": "0x1.c5edb174700c0p-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.d75995d181a20p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.9206053560490695",
+          "hour_offset": "21",
+          "outage_seed": "20260822",
+          "source_hour": "4461",
+          "split": "holdout",
+          "system_load_mw": "5604.912093",
+          "timestamp": "2020-07-04T21:00:00+00:00"
+        },
+        "relative_offset": 21,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.8865790800700992,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4462,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.843948311689,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1212,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 210.98707792225,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "843948311689",
+            "1000000000000"
+          ],
+          "projection_error_exact": [
+            "58557874980607",
+            "5000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.8439483116889882884250038786",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.843948311689
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0016",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "6",
+          "requested_gpu_occupancy": "4009.297291666666666666666667",
+          "source_relative_hour": "1211",
+          "split": "holdout",
+          "workload_fraction": "0.8439483116889882884250038786"
+        }
+      },
+      {
+        "cfe_request": 0.8953330090178236,
+        "cfe_request_float_hex": "0x1.ca691691858afp-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.da7cc2ff77147p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.9267331063124765",
+          "hour_offset": "22",
+          "outage_seed": "20260822",
+          "source_hour": "4462",
+          "split": "holdout",
+          "system_load_mw": "5152.395318",
+          "timestamp": "2020-07-04T22:00:00+00:00"
+        },
+        "relative_offset": 22,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.8953330090178236,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4463,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.797582820869,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1213,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 199.39570521725,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "797582820869",
+            "1000000000000"
+          ],
+          "projection_error_exact": [
+            "290150892989171",
+            "2000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.7975828208688549245535054145",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.797582820869
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0016",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "7",
+          "requested_gpu_occupancy": "3789.031388888888888888888890",
+          "source_relative_hour": "1212",
+          "split": "holdout",
+          "workload_fraction": "0.7975828208688549245535054145"
+        }
+      },
+      {
+        "cfe_request": 0.7467836850550585,
+        "cfe_request_float_hex": "0x1.7e5a6e60fee4fp-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.a53f4d43e5a04p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0000",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.822748579538541",
+          "hour_offset": "23",
+          "outage_seed": "20260822",
+          "source_hour": "4463",
+          "split": "holdout",
+          "system_load_mw": "4771.753015",
+          "timestamp": "2020-07-04T23:00:00+00:00"
+        },
+        "relative_offset": 23,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.7467836850550585,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4464,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.751378843267,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1214,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 187.84471081675,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "751378843267",
+            "1000000000000"
+          ],
+          "projection_error_exact": [
+            "609754800043757",
+            "1250000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.7513788432665121961599649944",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.751378843267
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0016",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "8",
+          "requested_gpu_occupancy": "3569.532777777777777777777777",
+          "source_relative_hour": "1213",
+          "split": "holdout",
+          "workload_fraction": "0.7513788432665121961599649944"
+        }
+      },
+      {
+        "cfe_request": 0.7673413061904398,
+        "cfe_request_float_hex": "0x1.88e0f5adea6cdp-1",
+        "cfe_source_decimal_projection_error_exact": [
+          "0",
+          "1"
+        ],
+        "cfe_source_float_hex": "0x1.ac9d78c68a7f6p-1",
+        "power_source_row": {
+          "active_component_type": "generator",
+          "active_component_uid": "202_CT_2",
+          "active_event_id": "seed_20260822_event_0095",
+          "block_id": "holdout_s20260822_0001",
+          "block_probability": "0.001886792452830188679245283019",
+          "cfe_call_fraction": "0.8371389143333079",
+          "hour_offset": "0",
+          "outage_seed": "20260822",
+          "source_hour": "4464",
+          "split": "holdout",
+          "system_load_mw": "4474.979379",
+          "timestamp": "2020-07-05T00:00:00+00:00"
+        },
+        "relative_offset": 24,
+        "source_hour": {
+          "arm_id": "joint_correct_shared",
+          "cfe_request": 0.7673413061904398,
+          "grid_request": 0.0,
+          "power_outage_seed": 20260822,
+          "power_provenance_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+          "power_source_hour": 4465,
+          "power_trajectory_id": "power:holdout:outage_seed=20260822",
+          "split": "holdout",
+          "track_id": "shared",
+          "workload_normalization_sha256": "39698c2a601864e546003bdfcd276881c4368eafa926aad4189c37baf72cd792",
+          "workload_occupancy": 0.849460375262,
+          "workload_provenance_sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+          "workload_source_hour": 1215,
+          "workload_trace_id": "workload:holdout:single_published_trace"
+        },
+        "workload_projection": {
+          "dc_baseline_mw": 212.3650938155,
+          "decimal_places": 12,
+          "exact_interface_identity_verified": true,
+          "formal_result": false,
+          "maximum_rounding_error_exact": [
+            "1",
+            "2000000000000"
+          ],
+          "normalized_unit_mw": "250",
+          "observed_power_mapping": false,
+          "parameter_role": "mechanism_assumption",
+          "power_rule": "linear_workload_power_no_idle_offset_v1",
+          "projected_fraction_exact": [
+            "424730187631",
+            "500000000000"
+          ],
+          "projection_error_exact": [
+            "713400231428897",
+            "2000000000000000000000000000"
+          ],
+          "projection_rule": "exact_decimal_half_even_then_str_float_identity_v1",
+          "raw_fraction_clipped": false,
+          "raw_workload_fraction": "0.8494603752616432998842855515",
+          "reason": null,
+          "status": "projected",
+          "workload_occupancy": 0.849460375262
+        },
+        "workload_source_row": {
+          "block_id": "holdout_0016",
+          "block_probability": "0.02941176470588235294117647059",
+          "hour_offset": "9",
+          "requested_gpu_occupancy": "4035.483138888888888888888889",
+          "source_relative_hour": "1214",
+          "split": "holdout",
+          "workload_fraction": "0.8494603752616432998842855515"
+        }
+      }
+    ],
+    "shared_observed_clock": false,
+    "solver_calls": 0,
+    "source_clock_mapping": "raw_zero_based_to_business_one_based_for_each_independent_clock",
+    "source_correspondence_only": true,
+    "source_window_sha256": "9d07ca743dd3dc13e168fa7ea690216f0e9d9237124c58782c2fc44464dc8de2",
+    "status": "unresolved"
+  }
+}

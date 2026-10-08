@@ -1,0 +1,106 @@
+{
+  "schema": "rq2_normal_h1_source_development_checks_v1",
+  "date": "2026-09-30",
+  "status": "PRE_SEAL_AUDIT_CLOSED_NONAUTHORITATIVE",
+  "risk": "R3",
+  "files": {
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_source.py": "722406d4738a5e9dd0d6fc6a57d951c368a79c39acdcb65fc5eda56502b3fc51",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_current_solve.py": "2704857915e88333b2091edb691dfa6352f8324cc1ca7a8c83d28a5fa0cefef8",
+    "tests/test_rq2_normal_h1_source_v1.py": "946f93d3591b3099d337f6aff7cf99cf3a211e482b5dbab510c7f224ee97aa17",
+    "docs/model_spec/rq2_normal_h1_source_v1.md": "8001ba442e76fbc63b8561314acc218894284f23da2cafd398c33e1def1116cf"
+  },
+  "scientific_contract": "configs/rq2_finite_mechanism_protocol_candidate_v2.DRAFT.yaml",
+  "scientific_contract_sha256": "95eb158f0a8e6784d2af401e67164965543c98f42ff02b756c214982601e5430",
+  "test_command_prefix": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider",
+  "checks": [
+    {
+      "files": [
+        "tests/test_rq2_normal_h1_source_v1.py"
+      ],
+      "passed": 21,
+      "failed": 1,
+      "seconds": 8.38,
+      "phase": "initial",
+      "failure": "test used nonexistent seed keyword; corrected to random_seed"
+    },
+    {
+      "files": [
+        "tests/test_rq2_normal_h1_source_v1.py",
+        "tests/test_rq2_normal_h1_model_v1.py",
+        "tests/test_rq2_normal_h1_short_solve_v1.py",
+        "tests/test_rq2_workload_projection_v1.py"
+      ],
+      "passed": 88,
+      "failed": 1,
+      "seconds": 21.25,
+      "phase": "initial_related",
+      "failure": "test expected forbidden random_seed=1; changed to assert rejection and use valid time-limit change for identity test"
+    },
+    {
+      "files": [
+        "tests/test_rq2_normal_h1_source_v1.py",
+        "tests/test_rq2_normal_h1_model_v1.py",
+        "tests/test_rq2_normal_h1_short_solve_v1.py",
+        "tests/test_rq2_workload_projection_v1.py",
+        "tests/test_rq2_continuous_grid_normal_v1.py"
+      ],
+      "passed": 171,
+      "failed": 0,
+      "seconds": 33.7,
+      "phase": "before_boundary_audit_hardening"
+    },
+    {
+      "files": [
+        "tests/test_rq2_normal_h1_source_v1.py",
+        "tests/test_rq2_normal_h1_model_v1.py",
+        "tests/test_rq2_normal_h1_short_solve_v1.py",
+        "tests/test_rq2_workload_projection_v1.py"
+      ],
+      "passed": 112,
+      "failed": 0,
+      "seconds": 22.53,
+      "phase": "after_review_fixes_before_final_postsolve_input_retention"
+    },
+    {
+      "files": [
+        "tests/test_rq2_normal_h1_source_v1.py"
+      ],
+      "passed": 47,
+      "failed": 0,
+      "seconds": 12.87,
+      "phase": "final_code"
+    }
+  ],
+  "review": {
+    "agent": "/root/cfe_preallocation_official",
+    "kind": "read_only_preseal",
+    "open_substantive_findings": [],
+    "closed_findings": [
+      "per_mode_all_uid_boundary_validation_and_reachable_ages",
+      "immutable_projection_audit_identity_and_explicit_time_basis",
+      "exact_carry_domain_rejection_without_continuous_rounding",
+      "native_evidence_retention_on_postsolve_input_or_boundary_rejection"
+    ],
+    "independent_execution": "one zero-solver 5e-10 assignment/carry-domain check; no pytest or native rerun",
+    "final_delta_reviewed": true,
+    "documentation_sync": "added current_input_rejected sentence requested in final review"
+  },
+  "preservation": {
+    "manifest": "configs/rq2_cfe_preallocation_v1.SHA256SUMS.json",
+    "members_verified": 587,
+    "drift": [],
+    "cleanup_performed": false
+  },
+  "source_authentication_implemented": false,
+  "published": false,
+  "formal_result": false,
+  "exact_mathematical_certificate": false,
+  "native_reports_archived_in_this_directory": false,
+  "remaining": [
+    "authenticated current source and audit lineage adapter",
+    "persistent predecessor replay and same-key projection conflict rejection",
+    "atomic common N/Rref/A publication and recovery",
+    "on-demand followup",
+    "full-support LB/UB and resource/formal execution gates"
+  ]
+}

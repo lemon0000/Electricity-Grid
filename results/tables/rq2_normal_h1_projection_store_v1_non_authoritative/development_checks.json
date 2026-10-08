@@ -1,0 +1,96 @@
+{
+  "schema": "h1_replay_projection_store_development_checks_v1",
+  "date": "2026-09-30",
+  "status": "PRE_SEAL_AUDIT_CLOSED_NONAUTHORITATIVE",
+  "risk": "R3",
+  "files": {
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_replay.py": "e95ea9dd5d1b36bfa866d7096dfc20e6bc9cfeaf82fc444477f64d42adb1ab9a",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_projection_store.py": "0384bfc1a2f02057649165803c0c0be2167a45feb4e831bc4515a0497d9cd631",
+    "tests/test_rq2_normal_h1_replay_v1.py": "17333473e559ab8daace20213bc45f093b692a011ce9a11bbf230a75de721ad9",
+    "tests/test_rq2_normal_h1_projection_store_v1.py": "a7baee03890df9c645d1dfa94a7fe185e473011f086e60c597f97b4e19de4fa7",
+    "docs/model_spec/rq2_normal_h1_projection_store_v1.md": "aa3d610d5fc1449412278c30c444ec94159b11efb5ae2320ea5ab413b0bb520a"
+  },
+  "artifacts": {
+    "results/tables/rq2_normal_h1_projection_store_v1_non_authoritative/sample_archive.json": "0a8f3ddbd3dd6895dc957378e361a88d3ef27ef08c419db744c1a7d0cd335fca",
+    "results/tables/rq2_normal_h1_projection_store_v1_non_authoritative/sample_checks.json": "ecbb9a35de1dca59df45a473241565f2c453b27e1e73a18c2b192f8277ea0f23",
+    "results/tables/rq2_normal_h1_projection_store_v1_non_authoritative/sample_journal_non_authoritative/h1_projections.sqlite3": "5ac6d929f49e8bcf9c76b05a69b8088014b83e686e07923105802ef7388f551d",
+    "results/tables/rq2_normal_h1_projection_store_v1_non_authoritative/sample_journal_non_authoritative/execution.lock": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+  },
+  "fixture_support_files": {
+    "tests/test_rq2_continuous_grid_normal_v1.py": "77c16bd08854c5b9bc1b9a85fe88371fb61ecfaa1b842420c9a135f3c36d90f5",
+    "tests/test_rq2_normal_h1_source_v1.py": "946f93d3591b3099d337f6aff7cf99cf3a211e482b5dbab510c7f224ee97aa17",
+    "tests/test_rq2_normal_h1_short_solve_v1.py": "11cd62d782772f24e10a034d9c271d61df9b2939723d4a36b4210dea2aab03d7",
+    "tests/test_rq2_objective_provenance_run_v1.py": "5ab35b24eaae078aec2d5e75bb0005aecad2c75704b4c1367b433c2f5660e3cc"
+  },
+  "test_command_prefix": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider",
+  "checks": [
+    {
+      "files": [
+        "tests/test_rq2_normal_h1_replay_v1.py"
+      ],
+      "passed": 24,
+      "failed": 0,
+      "seconds": 23.29,
+      "phase": "initial_replay"
+    },
+    {
+      "files": [
+        "tests/test_rq2_normal_h1_replay_v1.py",
+        "tests/test_rq2_normal_h1_projection_store_v1.py"
+      ],
+      "passed": 34,
+      "failed": 0,
+      "seconds": 46.18,
+      "phase": "before_final_review_hardening"
+    },
+    {
+      "files": [
+        "tests/test_rq2_normal_h1_replay_v1.py",
+        "tests/test_rq2_normal_h1_projection_store_v1.py",
+        "tests/test_rq2_normal_h1_source_v1.py",
+        "tests/test_rq2_normal_h1_short_solve_v1.py"
+      ],
+      "passed": 107,
+      "failed": 0,
+      "seconds": 74.95,
+      "phase": "final"
+    }
+  ],
+  "review": {
+    "agent": "/root/cfe_preallocation_official",
+    "kind": "read_only_preseal",
+    "open_substantive_findings": [],
+    "closed_findings": [
+      "owned_authority_fields_and_all_stage_numeric_metadata",
+      "aggregate_report_budget_before_model_build",
+      "validator_output_type_authority_and_zero_call_checks",
+      "fresh_connection_commit_readback"
+    ],
+    "independent_pytest_run": false,
+    "independent_solver_run": false
+  },
+  "sample": {
+    "native_calls": 3,
+    "replay_calls": 0,
+    "solver_disabled_during_archive_and_store_replay": true,
+    "journal_reopen_equal": true,
+    "idempotent_append_verified": true
+  },
+  "preservation": {
+    "manifest": "configs/rq2_cfe_preallocation_v1.SHA256SUMS.json",
+    "verified_members": 587,
+    "drift": [],
+    "cleanup_performed": false
+  },
+  "formal_result": false,
+  "native_execution_authenticated": false,
+  "executable_boundary_restored": false,
+  "exact_mathematical_certificate": false,
+  "remaining": [
+    "authenticated source lineage",
+    "episode exact predecessor and executable state restoration",
+    "N/Rref/A common state publication",
+    "on-demand followup",
+    "full-support capacity and resource/formal execution gates"
+  ]
+}

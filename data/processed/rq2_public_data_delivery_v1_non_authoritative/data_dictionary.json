@@ -1,0 +1,2364 @@
+{
+  "evidence_class_axis": [
+    "derived_benchmark",
+    "derived_from_observed_source",
+    "observed_source_value"
+  ],
+  "fields": [
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "capacity.inactive_machine_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "capacity.known_active_machine_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "capacity.known_active_normalized_cpu_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "capacity.known_active_normalized_memory_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "capacity.mapped_machine_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "capacity.unit",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "capacity.unknown_active_machine_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "machine_seconds"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.cpu_conflict_overlap_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.hourly_endpoint_sum_lower_ncu",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "normalized_compute_units"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.hourly_endpoint_sum_upper_ncu",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "normalized_compute_units"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.missing_cpu_overlap_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.source_strata_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.collection_type",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.cpu_conflict_overlap_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.cpu_conflict_usage_group_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.exact_duplicate_usage_group_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.fragment_piece_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.missing_cpu_overlap_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.observed_cpu_ncu_lower",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.observed_cpu_ncu_upper",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.observed_cpu_overlap_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.observed_cpu_time_ncu_seconds_lower",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.observed_cpu_time_ncu_seconds_upper",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.priority_tier",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.synthesized_cpu_time_ncu_seconds_lower",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.synthesized_cpu_time_ncu_seconds_upper",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.strata.item.usage_group_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu.unit",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "hour_index",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "power.bad_flag_pair_counts.00",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "power.bad_flag_pair_counts.01",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "power.bad_flag_pair_counts.10",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "power.bad_flag_pair_counts.11",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "power.measured_power_util_mean",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "normalized_PDU_power_ratio"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "power.production_power_util_mean",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "normalized_PDU_power_ratio"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "power.quality_filter_applied",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "bool",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "power.sample_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "power.unit",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "raw_interval_end_us",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "microseconds_on_raw_trace_clock"
+    },
+    {
+      "dataset_id": "google_pdu17_744h_pair",
+      "evidence_class": "derived_from_observed_source",
+      "field": "raw_interval_start_us",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "microseconds_on_raw_trace_clock"
+    },
+    {
+      "dataset_id": "google_power_57_domains",
+      "evidence_class": "observed_source_value",
+      "field": "bad_measurement_data",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "bool",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_power_57_domains",
+      "evidence_class": "observed_source_value",
+      "field": "bad_production_power_data",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "bool",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_power_57_domains",
+      "evidence_class": "observed_source_value",
+      "field": "cell",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_power_57_domains",
+      "evidence_class": "observed_source_value",
+      "field": "measured_power_util",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "normalized_PDU_power_ratio"
+    },
+    {
+      "dataset_id": "google_power_57_domains",
+      "evidence_class": "observed_source_value",
+      "field": "pdu",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_power_57_domains",
+      "evidence_class": "derived_from_observed_source",
+      "field": "production_power_util",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "estimated_normalized_PDU_power_ratio"
+    },
+    {
+      "dataset_id": "google_power_57_domains",
+      "evidence_class": "derived_from_observed_source",
+      "field": "raw_interval_end_us",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "microseconds_on_raw_trace_clock"
+    },
+    {
+      "dataset_id": "google_power_57_domains",
+      "evidence_class": "observed_source_value",
+      "field": "raw_interval_start_us",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "microseconds_on_raw_trace_clock"
+    },
+    {
+      "dataset_id": "google_power_57_domains",
+      "evidence_class": "observed_source_value",
+      "field": "source_object",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_power_57_domains",
+      "evidence_class": "derived_from_observed_source",
+      "field": "trace_relative_start_us",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "microseconds_from_trace_start"
+    },
+    {
+      "dataset_id": "google_pdu17_capacity",
+      "evidence_class": "derived_from_observed_source",
+      "field": "hour_index",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "google_pdu17_capacity",
+      "evidence_class": "derived_from_observed_source",
+      "field": "inactive_machine_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "machine_seconds"
+    },
+    {
+      "dataset_id": "google_pdu17_capacity",
+      "evidence_class": "derived_from_observed_source",
+      "field": "known_active_machine_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "machine_seconds"
+    },
+    {
+      "dataset_id": "google_pdu17_capacity",
+      "evidence_class": "derived_from_observed_source",
+      "field": "known_active_normalized_cpu_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "normalized_CPU_resource_seconds"
+    },
+    {
+      "dataset_id": "google_pdu17_capacity",
+      "evidence_class": "derived_from_observed_source",
+      "field": "known_active_normalized_memory_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "normalized_memory_resource_seconds"
+    },
+    {
+      "dataset_id": "google_pdu17_capacity",
+      "evidence_class": "derived_from_observed_source",
+      "field": "mapped_machine_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "machine_seconds"
+    },
+    {
+      "dataset_id": "google_pdu17_capacity",
+      "evidence_class": "derived_from_observed_source",
+      "field": "raw_interval_end_us",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "microseconds_on_raw_trace_clock"
+    },
+    {
+      "dataset_id": "google_pdu17_capacity",
+      "evidence_class": "derived_from_observed_source",
+      "field": "raw_interval_start_us",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "microseconds_on_raw_trace_clock"
+    },
+    {
+      "dataset_id": "google_pdu17_capacity",
+      "evidence_class": "derived_from_observed_source",
+      "field": "unknown_active_machine_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "machine_seconds"
+    },
+    {
+      "dataset_id": "zeus_four_gpu_power_performance",
+      "evidence_class": "observed_source_value",
+      "field": "average_gpu_power_w",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "zeus_four_gpu_power_performance",
+      "evidence_class": "observed_source_value",
+      "field": "batch_size",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "zeus_four_gpu_power_performance",
+      "evidence_class": "observed_source_value",
+      "field": "dataset",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "zeus_four_gpu_power_performance",
+      "evidence_class": "derived_from_observed_source",
+      "field": "derived_energy_per_epoch_joule",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "joule_per_epoch"
+    },
+    {
+      "dataset_id": "zeus_four_gpu_power_performance",
+      "evidence_class": "derived_from_observed_source",
+      "field": "gpu",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "zeus_four_gpu_power_performance",
+      "evidence_class": "observed_source_value",
+      "field": "network",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "zeus_four_gpu_power_performance",
+      "evidence_class": "observed_source_value",
+      "field": "optimizer",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "zeus_four_gpu_power_performance",
+      "evidence_class": "observed_source_value",
+      "field": "power_limit_w",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "zeus_four_gpu_power_performance",
+      "evidence_class": "observed_source_value",
+      "field": "time_per_epoch_seconds",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "second_per_epoch"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "checkpoint_state_observed",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "deadline_observed",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "declared_cpu_cores_sum",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "declared_gpu_equivalents_sum",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "declared_gpu_time_gpu_seconds",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "GPU_second"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "declared_instance_count_sum",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "declared_memory_gb_sum",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "GB"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "observed_source_value",
+      "field": "group_tag",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "observed_source_value",
+      "field": "job_name",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "maximum_task_requested_gpu_equivalents",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "observed_completion_time_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "relative_second"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "observed_execution_span_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "second"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "observed_release_time_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "relative_second"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "power_conversion_applied",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "preemptibility_observed",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "recoverable_fraction_inferred",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "derived_from_observed_source",
+      "field": "terminated_task_count",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_job_execution_envelopes",
+      "evidence_class": "observed_source_value",
+      "field": "workload_tag",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "cpu_usage_observed_rows",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "direct_job_power_mapping_ready",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "observed_source_value",
+      "field": "gpu_type",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "gpu_work_utilization_observed_rows",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "observed_source_value",
+      "field": "group_tag",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "hardware_reference_status",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "observed_source_value",
+      "field": "job_name",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "maximum_gpu_memory_gb",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "GB"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "maximum_gpu_work_utilization_percent_units",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "maximum_main_memory_gb",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "GB"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "mean_cpu_usage_cores",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "core"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "mean_gpu_memory_gb",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "GB"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "mean_gpu_memory_observed_rows",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "mean_gpu_work_utilization_equivalents",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "normalized_equivalent"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "mean_gpu_work_utilization_percent_units",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "percent_unit"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "mean_main_memory_gb",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "GB"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "mean_main_memory_observed_rows",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "mean_network_read_bytes",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "byte"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "mean_network_write_bytes",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "byte"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "minimum_gpu_work_utilization_percent_units",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "network_read_observed_rows",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "network_write_observed_rows",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "observed_completion_time_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "relative_second"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "observed_execution_span_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "second"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "observed_release_time_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "relative_second"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "sensor_rows",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "observed_source_value",
+      "field": "workload_tag",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_gpu_telemetry",
+      "evidence_class": "derived_from_observed_source",
+      "field": "zero_gpu_work_utilization_rows",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_dimensionless_workload_blocks_v3",
+      "evidence_class": "derived_from_observed_source",
+      "field": "block_id",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_dimensionless_workload_blocks_v3",
+      "evidence_class": "derived_benchmark",
+      "field": "block_probability",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "probability"
+    },
+    {
+      "dataset_id": "alibaba_dimensionless_workload_blocks_v3",
+      "evidence_class": "derived_from_observed_source",
+      "field": "hour_offset",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_dimensionless_workload_blocks_v3",
+      "evidence_class": "derived_from_observed_source",
+      "field": "requested_gpu_occupancy",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "normalized_requested_GPU_occupancy"
+    },
+    {
+      "dataset_id": "alibaba_dimensionless_workload_blocks_v3",
+      "evidence_class": "derived_from_observed_source",
+      "field": "source_relative_hour",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_dimensionless_workload_blocks_v3",
+      "evidence_class": "derived_from_observed_source",
+      "field": "split",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "alibaba_dimensionless_workload_blocks_v3",
+      "evidence_class": "derived_from_observed_source",
+      "field": "workload_fraction",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "dimensionless_unclipped"
+    },
+    {
+      "dataset_id": "rts_gmlc_power_blocks_v4",
+      "evidence_class": "derived_benchmark",
+      "field": "active_component_type",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "rts_gmlc_power_blocks_v4",
+      "evidence_class": "derived_benchmark",
+      "field": "active_component_uid",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "rts_gmlc_power_blocks_v4",
+      "evidence_class": "derived_benchmark",
+      "field": "active_event_id",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "rts_gmlc_power_blocks_v4",
+      "evidence_class": "derived_benchmark",
+      "field": "block_id",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "rts_gmlc_power_blocks_v4",
+      "evidence_class": "derived_benchmark",
+      "field": "block_probability",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "probability"
+    },
+    {
+      "dataset_id": "rts_gmlc_power_blocks_v4",
+      "evidence_class": "derived_benchmark",
+      "field": "cfe_call_fraction",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "dimensionless"
+    },
+    {
+      "dataset_id": "rts_gmlc_power_blocks_v4",
+      "evidence_class": "derived_benchmark",
+      "field": "hour_offset",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "rts_gmlc_power_blocks_v4",
+      "evidence_class": "derived_benchmark",
+      "field": "outage_seed",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "rts_gmlc_power_blocks_v4",
+      "evidence_class": "derived_benchmark",
+      "field": "source_hour",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "hour_index"
+    },
+    {
+      "dataset_id": "rts_gmlc_power_blocks_v4",
+      "evidence_class": "derived_benchmark",
+      "field": "split",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "rts_gmlc_power_blocks_v4",
+      "evidence_class": "derived_benchmark",
+      "field": "system_load_mw",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "MW"
+    },
+    {
+      "dataset_id": "rts_gmlc_power_blocks_v4",
+      "evidence_class": "derived_benchmark",
+      "field": "timestamp",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "UTC_hour"
+    },
+    {
+      "dataset_id": "rts_gmlc_cfe_deficit_v2",
+      "evidence_class": "derived_benchmark",
+      "field": "attributed_cfe_mw",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "MW"
+    },
+    {
+      "dataset_id": "rts_gmlc_cfe_deficit_v2",
+      "evidence_class": "derived_benchmark",
+      "field": "cfe_deficit_mw",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "MW"
+    },
+    {
+      "dataset_id": "rts_gmlc_cfe_deficit_v2",
+      "evidence_class": "derived_benchmark",
+      "field": "dc_demand_mw",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "MW"
+    },
+    {
+      "dataset_id": "rts_gmlc_cfe_deficit_v2",
+      "evidence_class": "derived_benchmark",
+      "field": "green_call_fraction",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "dimensionless"
+    },
+    {
+      "dataset_id": "rts_gmlc_cfe_deficit_v2",
+      "evidence_class": "derived_benchmark",
+      "field": "green_call_mw",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "MW"
+    },
+    {
+      "dataset_id": "rts_gmlc_cfe_deficit_v2",
+      "evidence_class": "derived_benchmark",
+      "field": "hourly_cfe_target",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "dimensionless"
+    },
+    {
+      "dataset_id": "rts_gmlc_cfe_deficit_v2",
+      "evidence_class": "derived_benchmark",
+      "field": "renewable_available_mw",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "MW"
+    },
+    {
+      "dataset_id": "rts_gmlc_cfe_deficit_v2",
+      "evidence_class": "derived_benchmark",
+      "field": "renewable_share",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "dimensionless"
+    },
+    {
+      "dataset_id": "rts_gmlc_cfe_deficit_v2",
+      "evidence_class": "derived_benchmark",
+      "field": "system_load_mw",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "MW"
+    },
+    {
+      "dataset_id": "rts_gmlc_cfe_deficit_v2",
+      "evidence_class": "derived_benchmark",
+      "field": "timestamp",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_hour"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "duration_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "second"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "energy_wh",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "Wh"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "gpu_slots",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "maximum_absolute_ramp_w_per_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt_per_second"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "maximum_compute_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "mean_compute_power_per_gpu_slot_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt_per_GPU_slot"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "mean_compute_power_per_node_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt_per_node"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "mean_compute_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "median_compute_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "minimum_compute_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "model",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "node_count",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "p05_compute_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "p95_absolute_ramp_w_per_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt_per_second"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "p95_compute_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "peak_to_average_ratio",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "profile_id",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "published_measurement_resolution_supported",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "sample_count",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "sample_interval_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "second"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "sample_rate_hz",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "Hz"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "sampling_semantics",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "source_member",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "observed_source_value",
+      "field": "source_metadata_json",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "observed_source_value",
+      "field": "source_metadata_mean_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "observed_source_value",
+      "field": "source_metadata_peak_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "standard_deviation_compute_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "nlr_genai_power_profiles_v2",
+      "evidence_class": "derived_from_observed_source",
+      "field": "workload_class",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "arrival_rate_qps",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "request_per_second"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "energy_duration_mean_gpu_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "energy_mean_relative_difference",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "energy_per_generation_token_j",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "joule_per_token"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "generation_throughput_tokens_per_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "token_per_second"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "generation_tokens_total",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "gpu_architecture",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "observed_source_value",
+      "field": "gpu_energy_j",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "joule"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "gpu_memory_gb",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "GB"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "gpu_tdp_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "observed_source_value",
+      "field": "gpu_type",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "observed_source_value",
+      "field": "measurement_duration_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "second"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "median_request_latency_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "second"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "median_time_to_first_token_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "second"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "observed_source_value",
+      "field": "model",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "p95_request_latency_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "second"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "p95_time_to_first_token_s",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "second"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "prompt_generation_request_counts_match",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "observed_source_value",
+      "field": "reported_maximum_gpu_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "observed_source_value",
+      "field": "reported_mean_gpu_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "observed_source_value",
+      "field": "reported_minimum_gpu_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "observed_source_value",
+      "field": "reported_standard_deviation_gpu_power_w",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "watt"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "request_count",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "scenario",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "source_prompt_request_count",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "source_prompt_tokens_total",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "wattgpu_power_reference_v1",
+      "evidence_class": "derived_from_observed_source",
+      "field": "source_row_index",
+      "missing_value_semantics": "empty_field_loads_as_null; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "csv_string",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.block_boundary_link_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.block_boundary_links.item.predecessor_active_event_id",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.block_boundary_links.item.predecessor_block_id",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.block_boundary_links.item.predecessor_source_end",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.block_boundary_links.item.predecessor_timestamp",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.block_boundary_links.item.same_nonempty_active_event",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "bool",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.block_boundary_links.item.successor_active_event_id",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.block_boundary_links.item.successor_block_id",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.block_boundary_links.item.successor_source_start",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.block_boundary_links.item.successor_timestamp",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.block_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.block_ids.item",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.chain_id",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.outage_seed",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.row_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.source_end",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.source_start",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.split",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.timestamp_end",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.timestamp_start",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.trajectory_identity_basis.outage_seed",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.trajectory_identity_basis.package_manifest_sha256",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.unavailable_in_frozen_margin.item.end_inclusive",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.unavailable_in_frozen_margin.item.hour_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.unavailable_in_frozen_margin.item.position",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.unavailable_in_frozen_margin.item.start",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power.item.unavailable_in_frozen_margin_reason",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power_cross_split_events_and_whole_block_exclusions.item.component_type",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power_cross_split_events_and_whole_block_exclusions.item.component_uid",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power_cross_split_events_and_whole_block_exclusions.item.duration_hours",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power_cross_split_events_and_whole_block_exclusions.item.end_hour_exclusive",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power_cross_split_events_and_whole_block_exclusions.item.event_id",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power_cross_split_events_and_whole_block_exclusions.item.excluded_whole_block_end_inclusive",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power_cross_split_events_and_whole_block_exclusions.item.excluded_whole_block_hour_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power_cross_split_events_and_whole_block_exclusions.item.excluded_whole_block_start",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power_cross_split_events_and_whole_block_exclusions.item.outage_seed",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "power_cross_split_events_and_whole_block_exclusions.item.start_hour",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "schema",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "scope",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.block_boundary_link_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.block_boundary_links.item.predecessor_block_id",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.block_boundary_links.item.predecessor_source_end",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.block_boundary_links.item.successor_block_id",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.block_boundary_links.item.successor_source_start",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.block_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.block_ids.item",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.chain_id",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.row_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.row_trace_id_present",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "bool",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.source_end",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.source_start",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.split",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.trace_identity_basis.builder_config_sha256",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.trace_identity_basis.builder_sha256",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.trace_identity_basis.normalization_method",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.trace_identity_basis.package_summary_sha256",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.trace_identity_basis.source_sha256",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "identifier",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.trace_identity_basis.training_peak_requested_gpu_occupancy",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "normalized_requested_GPU_occupancy"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.unavailable_in_frozen_margin.item.end_inclusive",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.unavailable_in_frozen_margin.item.hour_count",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.unavailable_in_frozen_margin.item.position",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.unavailable_in_frozen_margin.item.start",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "value",
+      "storage_type": "int",
+      "unit": "source_defined_or_not_applicable"
+    },
+    {
+      "dataset_id": "continuation_availability_audit_v1",
+      "evidence_class": "derived_benchmark",
+      "field": "workload.item.unavailable_in_frozen_margin_reason",
+      "missing_value_semantics": "JSON_null_is_preserved; numeric_zero_is_preserved",
+      "role": "diagnostic",
+      "storage_type": "str",
+      "unit": "source_defined_or_not_applicable"
+    }
+  ],
+  "role_axis": [
+    "diagnostic",
+    "identifier",
+    "value"
+  ],
+  "schema": "rq2_public_data_dictionary_v1"
+}

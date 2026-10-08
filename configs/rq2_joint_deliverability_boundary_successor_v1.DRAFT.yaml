@@ -1,0 +1,149 @@
+schema: rq2_joint_deliverability_boundary_successor_v1_draft
+version: 1
+created_on: "2026-09-12"
+
+lifecycle:
+  status: DRAFT_NONAUTHORITATIVE
+  pre_seal_audit_complete: false
+  sealed_ready_for_independent_review: false
+  independent_review_passed: false
+  formal_execution_ready: false
+  formal_result: false
+  paper_claim: false
+  security_certified: false
+
+authority:
+  role: diagnostic_and_boundary_design_input_only
+  replaces_or_modifies_v5: false
+  may_open_any_execution_gate: false
+  sealed_v5:
+    config_path: configs/rq2_joint_deliverability_preregistration_successor_v5.yaml
+    config_sha256: 19d61a2913e346090db23d01de587b650d8599999c40a78a291f627915ec2a69
+    outer_path: configs/rq2_joint_deliverability_preregistration_successor_v5.OUTER.SHA256SUMS.json
+    outer_sha256: 92a58498e1de5f84b132067e3d4a4443ae841747846785e9df54cd9afd7efdfd
+  sealed_implementation_v2_may_be_modified: false
+  sealed_execution_v3_may_be_modified: false
+
+input_bindings:
+  power:
+    package: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4
+    manifest_path: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4/SHA256SUMS.json
+    manifest_sha256: 28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63
+    hourly_path: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4/power_system_blocks.csv.gz
+    hourly_sha256: b8b76fcfaa4dfbf63ff8c92092f357d43a7f21ffb51e76552593bb63f6a34ff1
+    summary_path: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4/summary.json
+    summary_sha256: f74d3a15520562d319cff49cf19fdca87ac04ae5687a639548f1a6dd7c36ce2a
+    training_blocks: 541
+    grid_need_present: false
+    E0_state_present: false
+  workload:
+    package: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3
+    manifest_path: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3/SHA256SUMS.json
+    manifest_sha256: 62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524
+    hourly_path: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3/workload_blocks.csv.gz
+    hourly_sha256: 99da69e6a98ec45584339e57a37b3fbbf90d3d2d8f1e2c915229a1e4890faef3
+    summary_path: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3/summary.json
+    summary_sha256: d4207d34757dd9b02a1f52f0cf8e44b5bb22175721ffd77ca8aa9245da7c874b
+    training_blocks: 34
+    deadline_observed: false
+    checkpoint_observed: false
+    recoverability_observed: false
+
+audit_contract:
+  evidence_level: non_authoritative_zero_solver_diagnostic
+  source_scope: raw_predispatch_training_marginals
+  model_scope: legacy_sealed_v5_single_24h_completed_period
+  terminal_conditions_apply_to_selected_continuous_draft: false
+  block_hours: 24
+  registered_cell_inventory_source: sealed_v5_config
+  registered_arm_ids:
+    - network_only_shared
+    - cfe_only_shared
+    - joint_correct_shared
+    - joint_b6_separate_planning_shared_execution
+  service_shortfall_tolerance: 1.0e-6
+  arithmetic_tolerance: 1.0e-12
+  necessary_condition_classes:
+    - terminal_inactivity
+    - available_flexibility
+    - energy_budget
+    - maximum_event_duration
+    - maximum_event_count_lower_bound
+    - total_recovery_energy_lower_bound
+    - causal_debt_limit
+    - causal_terminal_debt
+  cfe_projection_applies_to:
+    cfe_only_shared: shared
+    joint_correct_shared: optimistic_shared_lower_bound
+    joint_b6_separate_planning_shared_execution: cfe
+  network_only_status: unknown_grid_need_and_E0
+  finite_support_conditioning_available: false
+  full_physical_training_support_audited: false
+  absence_of_necessary_condition_means_feasible: false
+  result_contingent_parameter_change_allowed: false
+  solver_calls_allowed: false
+
+boundary_contract:
+  selected_primary_mode: continuous_multi_day_state_carry
+  user_choice_recorded: true
+  user_choice_recorded_on: "2026-09-12"
+  service_hours: 24
+  hour_23_service_retained: true
+  force_inactive_at_observation_end: false
+  force_zero_debt_at_observation_end: false
+  observation_end_is_service_deadline: false
+  observed_state_propagation_requires_service_deadline: false
+  missing_deadline_only_blocks_completion_or_on_time_recovery_claim: true
+  carried_state_exact:
+    - previous_call
+    - event_active
+    - active_duration_hours
+    - interevent_rest_hours
+    - event_count
+    - cumulative_call_energy
+    - recovery_debt
+    - has_prior_event
+    - accounting_period_id
+  continuity_identity_exact:
+    - split
+    - arm_id
+    - track_id
+    - power_trajectory_id
+    - power_outage_seed
+    - workload_trace_id
+    - workload_normalization_sha256
+    - power_provenance_sha256
+    - workload_provenance_sha256
+  source_hours_must_be_consecutive_within_each_margin: true
+  cross_split_continuation_allowed: false
+  arm_track_identity_must_match: true
+  default_tail_hours: null
+  unknown_continuation: blocked_right_censored
+  completion_claim_status_when_missing_deadline: blocked_missing_registered_completion_deadline
+  missing_deadline_does_not_block_observed_state_propagation: true
+  new_grid_and_cfe_obligations_in_continuation_must_be_observed: true
+  silent_zero_tail_obligations_allowed: false
+  debt_reset_at_boundary_allowed: false
+  accounting_period_support_in_current_component: single_explicit_nonrolling_period_only
+  accounting_period_change_or_reset_supported: false
+  future_period_change_requires_a_new_registered_contract_and_tests: true
+  finite_service_tail_alternative:
+    status: blocked_pending_service_deadline_and_continuation_contract
+    arbitrary_tail_length_allowed: false
+    future_result_may_select_tail_length: false
+
+service_mapping:
+  additive_shared_call:
+    equation: q = x_grid + x_cfe
+    role: nonfungible_service_ledger_mechanism_hypothesis
+    inherited_shared_flexibility_budget: true
+    unique_physical_truth_claimed: false
+  co_benefit_mapping:
+    status: unresolved_pending_policy_settlement_evidence_and_future_preregistration
+    implemented_in_this_draft: false
+    may_modify_sealed_v5_shared_budget: false
+
+output:
+  directory: results/tables/rq2_joint_deliverability_boundary_diagnostic_v1_non_authoritative
+  files: [summary.json, cells.json, SHA256SUMS.json]
+  overwrite_allowed: false

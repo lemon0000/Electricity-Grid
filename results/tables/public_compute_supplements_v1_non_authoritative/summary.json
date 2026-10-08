@@ -1,0 +1,280 @@
+{
+  "google": {
+    "cell_bucket_inventory": {
+      "by_table_and_format": [
+        {
+          "bytes": 270631447,
+          "format": "json.gz",
+          "objects": 1,
+          "table": "collection_events"
+        },
+        {
+          "bytes": 159366985,
+          "format": "parquet.gz",
+          "objects": 6,
+          "table": "collection_events"
+        },
+        {
+          "bytes": 44636950553,
+          "format": "json.gz",
+          "objects": 239,
+          "table": "instance_events"
+        },
+        {
+          "bytes": 14100104301,
+          "format": "parquet.gz",
+          "objects": 1180,
+          "table": "instance_events"
+        },
+        {
+          "bytes": 990791658431,
+          "format": "json.gz",
+          "objects": 1575,
+          "table": "instance_usage"
+        },
+        {
+          "bytes": 447312709954,
+          "format": "parquet.gz",
+          "objects": 12259,
+          "table": "instance_usage"
+        },
+        {
+          "bytes": 19884918,
+          "format": "json.gz",
+          "objects": 1,
+          "table": "machine_attributes"
+        },
+        {
+          "bytes": 8537961,
+          "format": "parquet.gz",
+          "objects": 1,
+          "table": "machine_attributes"
+        },
+        {
+          "bytes": 792540,
+          "format": "json.gz",
+          "objects": 1,
+          "table": "machine_events"
+        },
+        {
+          "bytes": 452862,
+          "format": "parquet.gz",
+          "objects": 1,
+          "table": "machine_events"
+        }
+      ],
+      "format_totals": {
+        "json.gz": {
+          "bytes": 1035719917889,
+          "objects": 1817
+        },
+        "parquet.gz": {
+          "bytes": 461581172063,
+          "objects": 13447
+        }
+      },
+      "objects": 15264,
+      "pages": 16
+    },
+    "downloaded_file_sha256": {
+      "collection_events.schema.json": "63e6cea700e31608b982206c375bc091fbb7ae1d6e8ab92ed499050af4c77dc3",
+      "instance_events.schema.json": "77f517bde1916cfde558e14bcb851d8ce0c1aac9c984d6e39041554c7460c52d",
+      "instance_usage-000000000000.parquet.gz": "5aa2b2909a419d38d124b35921e78cf3162688ef8edc11a8f98d5f9ec6a5c516",
+      "instance_usage.schema.json": "82c1ffb74988c2b7a7b60a134840bb234f588949950bfab762dac8863a72b559",
+      "machine_attributes.schema.json": "db53f4071d2c6cc685d64d22d1ebb9ad39f4c43b9f34d61245f4e73a0a77931e",
+      "machine_events-000000000000.json.gz": "a4fd1c97ddda3d5f8e66e8542b317f4e214f7ec4b29130b2be67c5fcfa56fcbe",
+      "machine_events-000000000000.parquet.gz": "57b62825d86600762b8b44053e54e742753c2001bfd1c3eb95bde52673635d3c",
+      "machine_events.schema.json": "49e30a5eb30ad03a46b32bbfc4c272ffc7eee29cbf0eb1bc544e73dcaeaef60f"
+    },
+    "machine_events": {
+      "capacity": {
+        "later_known_delay_seconds_max": "7.007018",
+        "later_known_delay_seconds_median": "1.8854475",
+        "later_known_delay_seconds_min": "0.547676",
+        "later_known_event_type_counts": {
+          "3": 716
+        },
+        "missing_intervals_must_remain_unknown": true,
+        "missing_rows_that_are_first_nonzero_add": 716,
+        "missing_rows_with_later_known_capacity": 716,
+        "normalized_cpu_max": "1",
+        "normalized_cpu_min": "0.38671875",
+        "normalized_memory_max": "1",
+        "normalized_memory_min": "0.166748046875",
+        "numeric_issue_counts": {},
+        "rows_missing": 716,
+        "rows_present": 48887
+      },
+      "documented_json_table_complete_for_cell_f": true,
+      "duplicate_machine_time_keys": 0,
+      "event_type_code_labels": {
+        "1": "ADD",
+        "2": "REMOVE",
+        "3": "UPDATE"
+      },
+      "event_type_counts_by_code": {
+        "1": 30380,
+        "2": 18472,
+        "3": 751
+      },
+      "machines": 12201,
+      "mapping": {
+        "cell_f_event_machines_without_mapping": 0,
+        "cell_f_machines": 12203,
+        "cell_f_mapped_machines_without_events": 2,
+        "cell_f_mapping_rows": 12203,
+        "mapping_rows_all_cells": 96616,
+        "pdu17_mapped_machines": 1295,
+        "pdu17_time_zero_normalized_cpu_sum": "1220.5",
+        "pdu17_time_zero_normalized_memory_sum": "610.25",
+        "pdu17_time_zero_snapshot_machines": 1221,
+        "snapshot_is_complete_physical_capacity": false
+      },
+      "missing_data_reason_presence": {
+        "field_absent": 49603
+      },
+      "nonzero_time_max_us": 2678987647379,
+      "nonzero_time_min_us": 709521359,
+      "rows": 49603,
+      "time_zero": {
+        "all_are_add_with_capacity": true,
+        "interpretation": "pre_trace_snapshot_special_value_not_an_ordinary_timestamp",
+        "machines": 11392,
+        "machines_with_multiple_rows": 0,
+        "rows": 11392
+      }
+    },
+    "machine_events_json_parquet_content_equivalence_verified": false,
+    "machine_events_parquet_transport_magic_valid": true,
+    "source_metadata_sha256": "bdb2ab90cb6572bfc4567bbe4f2b93d7c613d8bd8ae5eaaf1f130b4c1dcf6d8c",
+    "usage_pilot": {
+      "complete_table": false,
+      "content_schema_verified": false,
+      "continuity_verified": false,
+      "downloaded_object_bytes": 36464842,
+      "parquet_transport_magic_valid": true,
+      "reason": "No Parquet reader in the locked environments; one temporary DuckDB install attempt required a missing compiler and was stopped.",
+      "row_count_verified": false,
+      "selection_rule": "lexicographically_first_instance_usage_parquet_object",
+      "time_range_verified": false
+    }
+  },
+  "interpretation": {
+    "absolute_facility_power_mw_available": false,
+    "continuous_model_input_ready": false,
+    "deadline_observed": false,
+    "flexibility_observed": false,
+    "formal_result": false,
+    "google_machine_capacity_complete": false,
+    "google_machine_event_chronology_available": true,
+    "google_multiday_usage_complete": false,
+    "google_usage_pilot_content_verified": false,
+    "paper_claim": false,
+    "recovery_parameters_observed": false,
+    "security_certified": false,
+    "zeus_controlled_training_power_evidence_available": true,
+    "zeus_production_cluster_power_observed": false
+  },
+  "provenance": {
+    "existing_mapping_sha256": "69b88e5662348030b074fef2008a4f2c16927a68b2d218a8c7c5cf350dc0aa8d",
+    "implementation_sha256": "abd8eb341490193789ff22141d5388aa9246bf1eb3fe2cdc7904da3e717c856b",
+    "new_raw_bytes": 38044870,
+    "paid_queries": 0,
+    "solver_calls": 0
+  },
+  "schema": "public_compute_supplements_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "zeus": {
+    "alibaba_mapping_is_observed_job_power_link": false,
+    "downloaded_file_sha256": {
+      "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "README.md": "937afc836a4dd041cc75c3be274af6a2b625418d060049f2e38b26beefa4045d",
+      "run_single.py": "da15dd3edf6f2f360b3478d99583ff536014776acb54e0721e0d0d2d616e46ac",
+      "trace/README.md": "6187c70a351133f8c03c7dff7a65c5500bd859b3f48355b7997a60c81ad39ea7",
+      "trace/summary_power_a40.csv": "f4ec111fc9b06b353182faab9160ecb1236a486b2741ed93383b80497332031e",
+      "trace/summary_power_p100.csv": "158e9a6784b6e2d26710529b132cf173b227dc8688f4931c19a637bce2b7503b",
+      "trace/summary_power_rtx6000.csv": "edccecc7f8b7a6102962b03f0f37767dd9cd2f03469ebccadc9805e82901bdc4",
+      "trace/summary_power_v100.csv": "f0b066dd1a451bd78f730e001ac3a7c411979bc7f0846f12c1a9fb604aa90628",
+      "trace/summary_train.csv": "076b35615349ee624403006e5ad67fd9ebda92af690c7750f8bb0c2ab92c0cf4"
+    },
+    "power": {
+      "a40": {
+        "average_gpu_power_w_max": "276.87542810672784",
+        "average_gpu_power_w_min": "79.9314025667197",
+        "dataset_network_pairs": 6,
+        "duplicate_configuration_rows": 0,
+        "invalid_nonpositive_or_nonfinite_numeric_values": 0,
+        "measurement_repeats_per_configuration": 1,
+        "power_limit_w_max": "300",
+        "power_limit_w_min": "100",
+        "rows": 453,
+        "time_per_epoch_seconds_max": "34906.935",
+        "time_per_epoch_seconds_min": "8.116"
+      },
+      "p100": {
+        "average_gpu_power_w_max": "180.08916459828103",
+        "average_gpu_power_w_min": "33.29468595272693",
+        "dataset_network_pairs": 6,
+        "duplicate_configuration_rows": 0,
+        "invalid_nonpositive_or_nonfinite_numeric_values": 0,
+        "measurement_repeats_per_configuration": 1,
+        "power_limit_w_max": "250",
+        "power_limit_w_min": "125",
+        "rows": 270,
+        "time_per_epoch_seconds_max": "64009.14",
+        "time_per_epoch_seconds_min": "11.822999999999999"
+      },
+      "rtx6000": {
+        "average_gpu_power_w_max": "252.4700015253679",
+        "average_gpu_power_w_min": "54.69093677376089",
+        "dataset_network_pairs": 6,
+        "duplicate_configuration_rows": 0,
+        "invalid_nonpositive_or_nonfinite_numeric_values": 0,
+        "measurement_repeats_per_configuration": 1,
+        "power_limit_w_max": "260",
+        "power_limit_w_min": "100",
+        "rows": 410,
+        "time_per_epoch_seconds_max": "20305.875",
+        "time_per_epoch_seconds_min": "9.506666666666668"
+      },
+      "v100": {
+        "average_gpu_power_w_max": "228.35203177238955",
+        "average_gpu_power_w_min": "34.75158532315594",
+        "dataset_network_pairs": 6,
+        "duplicate_configuration_rows": 0,
+        "invalid_nonpositive_or_nonfinite_numeric_values": 0,
+        "measurement_repeats_per_configuration": 1,
+        "power_limit_w_max": "250",
+        "power_limit_w_min": "100",
+        "rows": 476,
+        "time_per_epoch_seconds_max": "48815.16",
+        "time_per_epoch_seconds_min": "7.018000000000001"
+      }
+    },
+    "power_measurements_are_repeated_samples": false,
+    "source_metadata_sha256": "1e2c680d924cd5f9e8ce206a5357b49ed92152b6351ca34906f8c0db038b8214",
+    "train": {
+      "configurations": 63,
+      "configurations_with_fewer_than_4_distinct_runs": 6,
+      "dataset_network_pairs": 6,
+      "distinct_run_count_distribution": {
+        "1": 2,
+        "10": 17,
+        "2": 2,
+        "3": 2,
+        "4": 5,
+        "5": 35
+      },
+      "distinct_runs_per_configuration_max": 10,
+      "distinct_runs_per_configuration_min": 1,
+      "invalid_nonpositive_or_nonfinite_core_numeric_rows": 0,
+      "rows": 3759,
+      "target_epoch_integer_rows": 2910,
+      "target_epoch_is_business_deadline": false,
+      "target_epoch_nan_interpretation_resolved": false,
+      "target_epoch_sentinel_counts": {
+        "nan": 849
+      }
+    }
+  }
+}

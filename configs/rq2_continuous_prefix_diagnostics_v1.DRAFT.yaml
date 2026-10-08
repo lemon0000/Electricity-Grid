@@ -1,0 +1,52 @@
+schema: rq2_continuous_prefix_diagnostics_v1
+status: DRAFT_NONAUTHORITATIVE
+input_evidence: mechanism_assumption
+zero_carry_in_assumption: true
+accounting_period_id: synthetic-single-period
+policy:
+  rule: full_request_edf_known_then_unknown_fifo_v1
+  recovery_decimal_places: 12
+anchor:
+  arm_id: joint_correct_shared
+  track_id: shared
+  split: holdout
+  power_source_hour: 0
+  workload_source_hour: 100
+  power_trajectory_id: synthetic-power
+  workload_trace_id: synthetic-work
+  workload_normalization_sha256: '1111111111111111111111111111111111111111111111111111111111111111'
+  power_outage_seed: 0
+  power_provenance_sha256: '2222222222222222222222222222222222222222222222222222222222222222'
+  workload_provenance_sha256: '3333333333333333333333333333333333333333333333333333333333333333'
+envelope:
+  time_step_hours: 1.0
+  recovery_efficiency: 0.8
+  maximum_event_duration_hours: 3.0
+  maximum_event_count: 2
+  normalized_energy_budget: 1.0
+  normalized_debt_limit: 1.0
+  minimum_recovery_hours: 2.0
+defaults:
+  hours: 48
+  call_hours: [23, 24, 25]
+  grid_request: 0.125
+  cfe_request: 0.0
+  workload_occupancy: 1.0
+  deadline_offset_hours: 3
+  call_limit: 0.5
+  business_recovery_headroom: 0.3125
+  cfe_compatible_surplus: 0.3125
+  maximum_recovery_power: 0.5
+  recovery_blocked_hours: []
+cases:
+  - id: normal_recovery
+  - id: insufficient_recovery
+    business_recovery_headroom: 0.0
+  - id: unknown_deadline
+    deadline_offset_hours: null
+  - id: late_recovery
+    recovery_blocked_hours: [26, 27, 28, 29]
+  - id: b6_shared_rejection
+    cfe_request: 0.125
+  - id: censored_prefix
+    hours: 25

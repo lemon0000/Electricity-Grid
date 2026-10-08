@@ -1,0 +1,227 @@
+schema: rq2_continuous_science_candidate_v1
+status: DRAFT_NONAUTHORITATIVE
+role: parameter_window_and_scoring_proposal
+complete_preregistration: false
+scientific_decisions_approved: false
+continuous_service_protocol_registered: false
+formal_execution_ready: false
+formal_result: false
+security_certified: false
+execution_authorized: false
+
+provenance:
+  operative_predecessor:
+    path: configs/rq2_joint_deliverability_preregistration_successor_v5.yaml
+    sha256: 19d61a2913e346090db23d01de587b650d8599999c40a78a291f627915ec2a69
+    role: explicit_field_comparison_only_not_inheritance_by_omission
+  public_input_status:
+    path: data/processed/rq2_public_data_delivery_v1_non_authoritative/input_status.json
+    sha256: 263643c83cf4ec60fd25fb176f50c3aae2bd7f158f8bb550fe241f3a18d88302
+    empirical_nulls_preserved: true
+  continuous_chains:
+    path: results/tables/rq2_joint_deliverability_continuation_availability_v1_non_authoritative/chains.json
+    sha256: 0f661707d4ebb6ceb6f12073e6426a03b542322324df8a4f99b6d229ced8fc48
+
+research_object:
+  primary: complete_continuous_service_minimum_flexibility
+  prefix_is_primary_replacement: false
+  complete_target_status: unbound_until_future_obligations_and_period_contract_defined
+  finite_prefix_lower_bound: conditional_not_yet_bound_to_complete_target
+  finite_prefix_incumbent: not_a_complete_service_upper_bound
+  complete_upper_bound_requires: independently_verified_continuation_under_registered_contract
+  missing_continuation: unresolved_upper_bound
+  finite_capacity_for_all_arms_promised: false
+  capacity_domain: [0.0, 1.0]
+  nonnested_arms: true
+  signs_assumed: false
+  attribution:
+    I_joint: D_J - max(D_N, D_C)
+    I_sep: D_B - max(D_N, D_C)
+    A_B6: D_J - D_B
+  joint_identity: I_joint == I_sep + A_B6
+  full_service_attribution_when_any_required_bound_missing: unresolved
+
+proposed_window_contract:
+  evidence_class: mechanism_assumption
+  hours: 168
+  stride_hours: 24
+  chunk_hours: 24
+  window_start: published_chain_block_start
+  include: all_complete_7_block_windows_within_each_published_chain
+  cross_split_or_chain_or_seed_splicing: forbidden
+  splicing_scope: within_each_margin_only_product_pairing_across_margins_is_explicit
+  normalization: preserve_existing_workload_normalization
+  marginal_weight: uniform_over_declared_windows_within_each_split
+  seed_weight: proportional_to_declared_window_count_not_equal_seed_weight
+  training_seed_weights: ['175/523', '174/523', '174/523']
+  holdout_seed_weights: ['175/512', '170/512', '167/512']
+  seed_order: [20260822, 20260823, 20260824]
+  overlapping_windows_independent_samples: false
+  each_window_initialization: independent_zero_history_and_declared_grid_initial_state
+  overlapping_window_states_identical_at_same_source_hour: not_assumed
+  primary_coupling: product_of_declared_window_marginals
+  coupling_role: benchmark_assumption_not_observed_joint_distribution
+  all_pairs_retained_before_model_outcome: true
+  raw_workload_above_one: retain_raw_and_assign_input_mapping_unresolved
+  raw_above_one_scope: the_168h_observation_window_no_192h_extension
+  holdout_mapping_affected_workload_windows: 10
+  holdout_mapping_affected_pair_weight: '10/28'
+  source_prevalidation: entire_168h_pair_before_any_policy_action
+  invalid_projection_pair: all_applicable_dimensions_unknown_without_executing_a_prefix
+  affected_weight_is_risk_unknown_lower_bound_under_this_candidate: true
+  unresolved_rows_removed_or_weights_renormalized: false
+  google_744h: descriptive_external_evidence_not_a_substitute_for_RTS_workload_support
+
+proposed_cells:
+  primary_factorial:
+    hourly_cfe_target: [0.50, 0.70, 0.85, 1.00]
+    flexible_fraction: [0.05, 0.20, 0.50]
+    normalized_recovery_headroom: [0.00, 0.10, 0.30]
+  oat_anchor:
+    hourly_cfe_target: 0.85
+    flexible_fraction: 0.20
+    normalized_recovery_headroom: 0.10
+  temporal_anchor:
+    recovery_efficiency: 0.85
+    maximum_event_duration_hours: 4
+    event_count_per_24h_reference: 2
+    normalized_energy_per_24h_reference: 0.40
+    normalized_debt_limit: 0.20
+  oat_non_anchor_levels:
+    recovery_efficiency: [0.60, 1.00]
+    maximum_event_duration_hours: [1, 8]
+    event_count_per_24h_reference: [1, 4]
+    normalized_energy_per_24h_reference: [0.10, 1.00]
+    normalized_debt_limit: [0.05, 0.50]
+  expected_unique_cells: 46
+  new_cell_id_namespace: proposed_continuous_168h_v1
+  predecessor_cell_ids_or_results_reused: false
+  same_semantics_as_old_24h_cells: false
+
+proposed_business_contract:
+  evidence_class: mechanism_assumption
+  normalized_power_unit: fraction_of_declared_D_DC
+  normalized_energy_unit: D_DC_hour
+  time_step_hours: 1.0
+  accounting_period: single_168h_nonrolling_period
+  period_id: split_chain_pair_window_start_bound_identity
+  event_budget: 7_times_event_count_per_24h_reference
+  energy_budget: 7_times_normalized_energy_per_24h_reference
+  materialized_anchor_event_budget: 14
+  materialized_anchor_energy_budget: 2.8
+  materialized_OAT_event_budgets: [7, 28]
+  materialized_OAT_energy_budgets: [0.7, 7.0]
+  budget_scaling_role: new_explicit_mechanism_proposal_not_empirical_calibration
+  daily_or_rolling_budget_constraint: absent
+  weekly_budget_may_be_concentrated_within_one_day: true
+  chunk_reset: forbidden
+  repeated_period_or_rolling_contract: not_defined_by_this_candidate
+  initial_business_state: explicit_zero_history_mechanism
+  initial_debt: 0.0
+  initial_event_active: false
+  initial_event_count: 0
+  initial_cumulative_call_energy: 0.0
+  initial_has_prior_event: false
+  holdout_uses_training_terminal_state: false
+  minimum_rest_hours: 1.0
+  minimum_event_power: 0.000001
+  response_time_hours: 1.0
+  curtailment_ramp_per_hour: 1.0
+  recovery_deadline_hours_after_birth: 24
+  debt_birth: positive_effective_actually_served_deferral_only
+  unserved_requested_work_creates_debt: false
+  recovery_hours_for_birth_h: h_plus_1_through_h_plus_24_inclusive
+  deadline_endpoint: apply_due_hour_recovery_then_record_remaining_debt_at_hour_end
+  deadline_miss_rule: exact_remaining_debt_greater_than_zero
+  service_tolerance_applied_to_deadline_balance: false
+  overdue_debt: retain_balance_and_permanent_deadline_miss_after_late_repayment
+  terminal_clearance: not_required_at_observation_end
+  call_and_recovery_same_hour: forbidden
+  additive_disjoint_obligations: mechanism_assumption
+  permanent_work_loss: 0.0
+  aggregate_recoverability: assumed_for_all_work_actually_deferred
+  job_checkpoint_or_preemptibility_observed: false
+  original_job_service_deadline: unidentified
+  available_flexibility: flexible_fraction_times_workload_occupancy
+  business_recovery_headroom: normalized_recovery_headroom_times_max_1_minus_occupancy_0
+  recovery_power_cap: 1.0
+  recovery_power_base_cap: min_business_headroom_power_cap_and_outstanding_debt_divided_by_efficiency
+  CFE_surplus_cap_applies_to: CFE_service_tracks_and_joint_shared_execution
+  network_only_recovery_requires_CFE_surplus: false
+  recovery_allocation: earliest_known_due_then_birth_unknown_due_last
+  recovery_decimal_places: 12
+  service_tolerance: 0.000001
+
+proposed_network_contract:
+  evidence_class: mechanism_assumption
+  power_projection: linear_workload_power_no_idle_offset_v1
+  normalized_unit_mw: '250'
+  physical_and_connected_capacity_mw: '250'
+  absolute_google_power_claim: false
+  initial_grid_state: explicit_all_off_zero_generation_mechanism_with_residual_dwell_validation
+  normal_scope: full_declared_window_plan_with_explicit_information_release
+  current_information: causal_current_hour_only_for_actual_policy
+  network_service: mandatory_with_selected_state_DC_validation
+  unsupported_input_or_failed_dispatch: no_committed_physical_successor
+  native_acceptance: preserve_existing_scale_normal_and_selector_gap_residual_and_version_gates
+  missing_normal_optimality: stop_dependent_dispatch
+
+proposed_common_request_contract:
+  evidence_class: mechanism_assumption
+  renewable_share_R: 1_minus_published_cfe_call_fraction_at_alpha_1
+  raw_CFE_call: max_alpha_minus_R_0_divided_by_alpha
+  raw_CFE_call_unit: fraction_of_declared_D_DC_not_fraction_of_current_baseline
+  raw_CFE_call_scaled_or_clipped_to_workload: false
+  CFE_compatible_surplus: max_R_divided_by_alpha_minus_1_0
+  network_call: accepted_common_reference_reduction_MW_divided_by_declared_D_DC_MW
+  effective_call: zero_at_or_below_service_tolerance_else_original_call
+  complete_request_above_baseline: preserve_request_and_report_missing_legal_full_response
+  missing_legal_response_is_global_infeasibility_certificate: false
+  observed_datacenter_carbon_accounting_claim: false
+
+proposed_scoring_contract:
+  event_unit: secondary_finite_window_service_and_birth_cohort_contract_at_fixed_capacity_and_policy
+  denominator: original_declared_pair_weight_sum_equal_to_one_per_split
+  dimensions: [hard_grid_delivery, CFE_delivery, deadline_recovery, joint_service]
+  dimension_applicability:
+    network_only: [hard_grid_delivery, deadline_recovery]
+    CFE_only: [CFE_delivery, deadline_recovery]
+    joint_correct: [hard_grid_delivery, CFE_delivery, deadline_recovery]
+    joint_B6_shared_execution: [hard_grid_delivery, CFE_delivery, deadline_recovery]
+  physical_grid_feasibility_required_for_all_committed_actions: true
+  inapplicable_dimension: N_A_no_risk_interval_not_success_or_unknown
+  deadline_recovery_scope: all_window_births_classified_from_observed_repayment_due_snapshot_or_right_censoring
+  finite_window_risk_replaces_complete_capacity_object: false
+  observation_limit_hours: 168
+  followup_actions_or_future_period_budget_defined: false
+  due_after_observation_end_with_remaining_debt: unknown
+  already_repaid_cohort_without_historical_miss: verified_success_for_that_cohort
+  full_continuous_service_status_without_continuation_certificate: unresolved
+  failure: independently_verified_violation_of_the_named_service_contract
+  success: all_required_obligations_of_the_named_contract_verified_including_required_recovery
+  unknown: missing_input_action_certificate_or_required_future_observation
+  preserve_failure_if_other_hours_unknown: true
+  failure_priority_scope: independently_verified_failure_of_the_same_named_dimension
+  mass_partition_for_each_applicable_dimension: W_F_plus_W_S_plus_W_U_equals_1
+  statuses_for_each_applicable_dimension: mutually_exclusive_and_exhaustive_F_S_U
+  risk_lower: sum_weights_of_definite_failures
+  risk_upper: sum_weights_of_definite_failures_and_unknowns
+  solver_timeout_is_physical_failure: false
+  rejected_candidate_is_actual_grid_failure: false
+  cohort_counts_are_window_probability_denominator: false
+  joint_failure: any_named_service_definitely_failed
+  joint_success: all_named_services_definitely_succeeded
+  joint_otherwise: unknown
+  population_probability_claimed: false
+  bootstrap_independent_overlapping_windows: forbidden
+  benchmark_weighted_interval: deterministic_finite_support_interval_under_proposed_product_weights
+  sampling_confidence_intervals_and_population_inference: not_reported
+  transport_ambiguity_sensitivity: requires_separate_registration
+
+remaining_before_complete_scientific_candidate:
+  - complete_future_obligation_and_period_contract_for_full_service_capacity
+  - explicit_training_capacity_optimization_and_full_support_acceptance
+  - exact_capacity_certificate_to_holdout_policy_binding
+  - normal_information_release_and_source_initial_state_declarations
+  - full_window_pair_cell_task_inventory_and_compute_feasibility
+  - scientific_decision_authorization_and_independent_review

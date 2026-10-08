@@ -1,0 +1,28 @@
+schema: rq2_continuous_actual_action_contract_v1
+status: DRAFT_NONAUTHORITATIVE
+contract_id: prescribed_actual_action_after_rejection_v1
+continuous_service_protocol_registered: false
+formal_experiment_authorized: false
+formal_result: false
+paper_claim: false
+security_certified: false
+causal_fallback_controller_implemented: false
+evidence_class: mechanism_assumption
+supported_origin_stages: [physical_execution, shared_execution]
+missing_or_invalid_actual_action: unassessed_stop_preserve_last_validated_state
+obligations: preserve_full_original_arm_projection
+limits: original_current_observation_only
+planning_after_transition: archived_not_resumed
+fixture:
+  source_config: configs/rq2_continuous_causal_policy_v1.DRAFT.yaml
+  rejection_hour: 26
+  end_hour: 48
+  alternatives:
+    - id: bounded_recovery
+      actions:
+        26: {recovery: 0.3125, power: 1.3125, allocations: [[23, '1/4']]}
+        27: {recovery: 0.3125, power: 1.3125, allocations: [[24, '1/4']]}
+        28: {recovery: 0.3125, power: 1.3125, allocations: [[25, '1/4']]}
+    - id: zero_recovery
+      actions: {}
+  default_idle_action: {recovery: 0.0, power: 1.0, allocations: []}

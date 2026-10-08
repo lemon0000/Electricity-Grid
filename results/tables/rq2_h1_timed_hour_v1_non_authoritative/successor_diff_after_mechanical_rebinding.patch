@@ -1,0 +1,398 @@
+--- h1_native_raw_capture_development_v1 (mechanically rebound)
++++ h1_timed_native_capture_development_v1
+@@ -16,11 +16,13 @@
+ from experiments import h1_raw_ingress_development_v1 as io
+ from experiments import h1_linear_export_guard_development_v1 as export
+ from experiments import h1_native_export_guard_development_v1 as inherited_guard
++from experiments import h1_native_call_timing_development_v1 as timing
+ from src.solvers import rq2_objective_provenance_run_v1 as old
+ from src.rq2_joint_deliverability_boundary_v1 import normal_h1_resource_shape as no_solve
+ 
+ SCHEMA = 'h1_timed_native_capture_development_v1'
+ FLAGS = MappingProxyType(dict(collector_integrated=False, native_export_coverage=False,
++    instrumentation_coverage_verified=False, observer_overhead_separated=False, component_budget_verified=False,
+     producer_coverage_proven=False, resource_admission=False, formal_execution_ready=False,
+     formal_result=False, native_execution_authorized=False, native_execution_authenticated=False,
+     scientific_acceptance=False))
+@@ -32,7 +34,7 @@
+     return io.digest(io.encode(dict(schema=SCHEMA, adapter=old.provenance.adapter.implementation_identity(),
+         old_audit=old.implementation_identity(), files={Path(m.__file__).name:
+         io.digest(Path(m.__file__).read_bytes()) for m in
+-        (io, export, inherited_guard, inherited_guard.syntax, inherited_guard.grammar, no_solve)},
++        (io, export, inherited_guard, inherited_guard.syntax, inherited_guard.grammar, no_solve, timing)},
+         own=io.digest(Path(__file__).read_bytes()))))
+ 
+ 
+@@ -109,7 +111,9 @@
+     Consumer receives fresh raw bytes, unloaded Pyomo results and the owned
+     canonical model; it receives no solver handle. Its return is not a verdict.
+     """
+-    def __init__(self, root, *, request_sha256, expected_structure, expected_implementation):
++    def __init__(self, root, *, request_sha256, expected_structure, expected_implementation, stage_index):
++        if type(stage_index) is not int or not 0 <= stage_index < 232:
++            raise ValueError('bounded timed stage index required')
+         for pin in (request_sha256, expected_structure, expected_implementation):
+             io.pin(pin)
+         if implementation_identity() != expected_implementation:
+@@ -122,11 +126,15 @@
+         self.records = {}
+         self.expected_structure = expected_structure
+         self.expected_implementation = expected_implementation
+-        self.binding = dict(schema=SCHEMA, request_sha256=request_sha256,
++        self.binding = dict(schema=SCHEMA, request_sha256=request_sha256, stage_index=stage_index,
+             expected_structure=expected_structure, implementation=expected_implementation,
+             **FLAGS)
+         self.binding_sha = io.write_metadata(self.root/'binding.json', self.binding)
+         self.raw = io.Ingress(self.root/'native_raw', request_sha256, stages=1)
++        self.measurement = timing.Measurement(self.root/'native_timing', request_sha256, stage_index)
++        self.records['native_timing/binding.json'] = self.measurement.binding_pin
++        self.timing_views = {'binding.json': io.read_stable(self.measurement.root/'binding.json', io.META_CAP)}
++        self.timing_receipt = None
+ 
+     def _check(self):
+         if self.owner != (os.getpid(), threading.get_ident()):
+@@ -137,6 +145,9 @@
+         for name, pin in self.records.items():
+             if io.digest(io.read_stable(self.root/name, io.META_CAP)[0]) != pin:
+                 raise ValueError('capture record changed: ' + name)
++        if any(io.read_stable(self.measurement.root/name, io.META_CAP) != view
++               for name, view in self.timing_views.items()):
++            raise ValueError('fixed timing view changed')
+ 
+     def run(self, builder, specification, consumer):
+         if not self.guard.acquire(blocking=False):
+@@ -162,7 +173,6 @@
+             if (type(solver) is not GurobiDirect or '_apply_solver' in vars(solver)
+                     or io.encode(options) != io.encode(declared_options)):
+                 raise ValueError('fresh exact direct adapter required')
+-            apply = solver._apply_solver
+             applied = False
+             native_raw = None
+             export_check = None
+@@ -204,7 +214,25 @@
+                 def produce():
+                     nonlocal apply_result, apply_error
+                     try:
+-                        apply_result = apply()
++                        apply_result, self.timing_receipt = self.measurement.apply(solver)
++                        if not self.measurement.closed or self.measurement.poisoned or self.measurement.owner != self.owner:
++                            raise ValueError('owned timing invocation incomplete')
++                        self._check()
++                        timing.inspect(self.measurement.root, expected_binding_sha=self.measurement.binding_pin,
++                            expected_terminal_sha=self.timing_receipt['terminal_sha256'],
++                            expected_implementation=timing.implementation_identity())
++                        import json
++                        completed = io.read_stable(self.measurement.root/'completion.json', io.META_CAP)
++                        if io.digest(completed[0]) != self.measurement.completion_pin:
++                            raise ValueError('timing completion changed after owned return')
++                        expected = {'intent.json': json.loads(completed[0])['intent_sha256'],
++                            'completion.json': self.measurement.completion_pin,
++                            'terminal.json': self.timing_receipt['terminal_sha256']}
++                        for name, pin in expected.items():
++                            view = io.read_stable(self.measurement.root/name, io.META_CAP)
++                            if io.digest(view[0]) != pin: raise ValueError('owned timing pin differs')
++                            self.timing_views[name] = view
++                            self.records['native_timing/'+name] = pin
+                     except BaseException as error:
+                         apply_error = error
+                     return _capture(native, pairs, binding=self.binding_sha, export_sha=export_sha,
+@@ -246,6 +274,8 @@
+             terminal = self.raw.finish()
+             io.write_metadata(self.root/'complete.json', dict(schema=SCHEMA,
+                 binding_sha256=self.binding_sha, raw_sha256=io.digest(native_raw),
++                timing_binding_sha256=self.measurement.binding_pin,
++                timing_terminal_sha256=self.timing_receipt['terminal_sha256'],
+                 raw_terminal_sha256=io.digest(io.read_stable(self.raw.root/'terminal.json', io.META_CAP)[0]),
+                 callback_sequence_complete=terminal['callback_sequence_complete'],
+                 **FLAGS))
+--- h1_native_raw_science_development_v1 (mechanically rebound)
++++ h1_timed_native_science_development_v1
+@@ -306,19 +306,22 @@
+     return {'numerical.bin': numerical, 'mapping.bin': mapping, 'result.bin': payload}
+ 
+ 
+-def _source_view(native_path, key, model, specification, expected_binding, expected_export):
++def _source_view(native_path, key, model, specification, expected_binding, expected_export, index,
++                 expected_timing_binding, expected_timing_terminal):
+     """Bind science request to the pending producer's actual saved source chain."""
+     if native_path.name != 'raw.bin' or native_path.parent.name != '000' or native_path.parent.parent.name != 'native_raw':
+         raise ValueError('exact single-stage capture source path required')
+     root = native_path.parent.parent.parent
+     names = ('binding.json', 'specification.json', 'export.json', 'native_raw/binding.json',
+-             'native_raw/000/intent.json', 'native_raw/000/raw_receipt.json', 'native_raw/000/outcome.json')
++             'native_raw/000/intent.json', 'native_raw/000/raw_receipt.json', 'native_raw/000/outcome.json',
++             'native_timing/binding.json', 'native_timing/intent.json',
++             'native_timing/completion.json', 'native_timing/terminal.json')
+     views = {name: io.read_stable(root/name, io.META_CAP) for name in names}
+     raw, raw_stamp = io.read_stable(native_path, io.RAW_CAP)
+     digests = {name: io.digest(data) for name, (data, _) in views.items()}
+     structure = capture.old.audit._structure(model)
+     expected = {
+-        'binding.json': dict(schema=capture.SCHEMA, request_sha256=key, expected_structure=structure,
++        'binding.json': dict(schema=capture.SCHEMA, request_sha256=key, expected_structure=structure, stage_index=index,
+             implementation=capture.implementation_identity(), **capture.FLAGS),
+         'specification.json': dict(specification=asdict(specification),
+             options=capture.old.audit.solver_options(specification), binding_sha256=expected_binding),
+@@ -336,6 +339,20 @@
+         result=dict(schema='h1_linear_export_guard_development_v1', variables=len(variables), constraints=count,
+             exact_linear_correspondence_checked=True, native_export_coverage=False,
+             native_execution_authenticated=False, resource_admission=False, formal_execution_ready=False, formal_result=False))
++    for pin in (expected_timing_binding, expected_timing_terminal): io.pin(pin)
++    if (digests['native_timing/binding.json'] != expected_timing_binding or
++            digests['native_timing/terminal.json'] != expected_timing_terminal):
++        raise ValueError('external owned timing pins differ')
++    capture.timing.inspect(root/'native_timing',
++        expected_binding_sha=expected_timing_binding,
++        expected_terminal_sha=expected_timing_terminal,
++        expected_implementation=capture.timing.implementation_identity())
++    for name in names:
++        if name.startswith('native_timing/'):
++            expected[name] = prior.old._decode(views[name][0], io.META_CAP)
++    if (expected['native_timing/binding.json']['request_sha256'] != key or
++            expected['native_timing/binding.json']['stage'] != index):
++        raise ValueError('native timing belongs to another stage/request')
+     if digests['binding.json'] != expected_binding or digests['export.json'] != expected_export:
+         raise ValueError('external producer binding/export pin differs')
+     if any(io.encode(expected[name]) != views[name][0] for name in names):
+@@ -346,7 +363,7 @@
+ 
+ 
+ def consume(root, native_path, results, model, packet, specification, limits, index, locks, *,
+-            expected_native_sha, expected_binding, expected_export):
++            expected_native_sha, expected_binding, expected_export, expected_timing_binding, expected_timing_terminal):
+     """Create-once sidecar and scientific artifacts, then fresh independent replay.
+ 
+     Intended as StageCapture's callback. It grants no run authority. Its terminal
+@@ -365,12 +382,14 @@
+         structure = capture.old.audit._structure(canonical)
+         if capture.old.audit._structure(model) != structure:
+             raise ValueError('callback model structure differs')
+-        source_pin, source_stamps = _source_view(native_path, key, canonical, specification, expected_binding, expected_export)
++        source_pin, source_stamps = _source_view(native_path, key, canonical, specification, expected_binding, expected_export, index,
++            expected_timing_binding, expected_timing_terminal)
+         decode_native(native_raw, canonical, expected_binding=expected_binding, expected_export=expected_export)
+         root.mkdir(exist_ok=False)
+         intent = dict(schema=SCHEMA, key=key, native_path=str(native_path), native_sha256=expected_native_sha,
+             binding_sha256=expected_binding, export_sha256=expected_export, model_structure=structure,
+             implementation=implementation_identity(), capture_source_sha256=source_pin)
++        intent.update(timing_binding_sha256=expected_timing_binding, timing_terminal_sha256=expected_timing_terminal)
+         intent_sha = io.write_metadata(root/'intent.json', intent)
+         post = capture_postsolve(model, results, native_sha=expected_native_sha, key=key)
+         if len(post) > POST_CAP: raise ValueError('postsolve sidecar exceeds cap')
+@@ -397,6 +416,7 @@
+                 or any(io.read_stable(path, io.META_CAP) != (data, before) for path, before, data in source_stamps)):
+             raise ValueError('native source changed during science')
+         terminal = dict(schema=SCHEMA, key=key, intent_sha256=intent_sha, receipt_sha256=receipt_sha,
++            timing_binding_sha256=expected_timing_binding, timing_terminal_sha256=expected_timing_terminal,
+             files_sha256={name: io.digest(raw) for name, raw in outputs.items()},
+             native_sha256=expected_native_sha, postsolve_sha256=io.digest(post),
+             stage_capture_completion_checked=False, **capture.FLAGS)
+@@ -423,7 +443,8 @@
+             raise ValueError('external science terminal pin differs')
+         intent = prior.old._decode(views['intent.json'][0], io.META_CAP)
+         _keys(intent, ('schema', 'key', 'native_path', 'native_sha256', 'binding_sha256',
+-                       'export_sha256', 'model_structure', 'implementation', 'capture_source_sha256'))
++                       'export_sha256', 'model_structure', 'implementation', 'capture_source_sha256',
++                       'timing_binding_sha256', 'timing_terminal_sha256'))
+         key = request_key(packet, specification, limits, index, locks)
+         if intent['schema'] != SCHEMA or intent['key'] != key or intent['implementation'] != implementation_identity():
+             raise ValueError('scientific request/implementation differs')
+@@ -437,7 +458,8 @@
+         model = prior.native.model_api.build_h1_stage_model(req,
+             expected_identity=prior.native.model_api.h1_stage_identity(req))
+         source_pin, source_stamps = _source_view(native_path, key, model, specification,
+-                                               intent['binding_sha256'], intent['export_sha256'])
++            intent['binding_sha256'], intent['export_sha256'], index,
++            intent['timing_binding_sha256'], intent['timing_terminal_sha256'])
+         if source_pin != intent['capture_source_sha256']: raise ValueError('producer source pin differs')
+         receipt = dict(schema=SCHEMA, intent_sha256=io.digest(views['intent.json'][0]),
+             postsolve_sha256=io.digest(post), postsolve_bytes=len(post), native_sha256=io.digest(native))
+@@ -450,6 +472,7 @@
+         if any(raw != views[name][0] for name, raw in outputs.items()):
+             raise ValueError('fresh scientific replay differs')
+         expected = dict(schema=SCHEMA, key=key, intent_sha256=io.digest(views['intent.json'][0]),
++            timing_binding_sha256=intent['timing_binding_sha256'], timing_terminal_sha256=intent['timing_terminal_sha256'],
+             receipt_sha256=io.digest(views['postsolve_receipt.json'][0]),
+             files_sha256={name: io.digest(raw) for name, raw in outputs.items()},
+             native_sha256=io.digest(native), postsolve_sha256=io.digest(post),
+--- h1_stage_completion_development_v1 (mechanically rebound)
++++ h1_timed_stage_development_v1
+@@ -31,6 +31,8 @@
+         ('result.bin', science.POST_CAP))},
+ }
+ _FILES = {n.removeprefix('capture/'): cap for n, cap in _FILES.items()}
++_FILES.update({'native_timing/'+name: io.META_CAP for name in
++               ('binding.json', 'intent.json', 'completion.json', 'terminal.json')})
+ 
+ 
+ def implementation_identity():
+@@ -82,6 +84,8 @@
+     expected = dict(schema=capture.SCHEMA,
+         binding_sha256=io.digest(raw['binding.json']),
+         raw_sha256=io.digest(raw['native_raw/000/raw.bin']),
++        timing_binding_sha256=io.digest(raw['native_timing/binding.json']),
++        timing_terminal_sha256=io.digest(raw['native_timing/terminal.json']),
+         raw_terminal_sha256=io.digest(raw['native_raw/terminal.json']),
+         callback_sequence_complete=True, **capture.FLAGS)
+     if raw['complete.json'] != io.encode(expected):
+@@ -91,10 +95,22 @@
+     if not ingress['callback_sequence_complete'] or ingress['errors']:
+         raise ValueError('producer ingress incomplete')
+     intent = science.prior.old._decode(raw['science/intent.json'], io.META_CAP)
++    if (intent['timing_binding_sha256'] != expected['timing_binding_sha256'] or
++            intent['timing_terminal_sha256'] != expected['timing_terminal_sha256']):
++        raise ValueError('capture/science timing pins differ')
+     if intent['native_path'] != str((root/'native_raw/000/raw.bin').resolve()):
+         raise ValueError('science references foreign producer')
+     result = science.inspect(root/'science', packet, specification, limits, index, locks,
+                              expected_terminal_sha=science_pin)
++    timing = capture.timing.inspect(root/'native_timing',
++        expected_binding_sha=expected['timing_binding_sha256'],
++        expected_terminal_sha=expected['timing_terminal_sha256'],
++        expected_implementation=capture.timing.implementation_identity())
++    timing_binding = science.prior.old._decode(raw['native_timing/binding.json'], io.META_CAP)
++    if timing_binding['stage'] != index or timing_binding['request_sha256'] != key:
++        raise ValueError('timing context differs')
++    result = dict(result, timing=dict(timing, binding_sha256=expected['timing_binding_sha256'],
++        terminal_sha256=expected['timing_terminal_sha256'], clock_domain=timing_binding['clock_domain']))
+     _unchanged(root, layout, views)
+     if (science.request_key(packet, specification, limits, index, locks) != key or
+             implementation_identity() != implementation):
+@@ -165,14 +181,16 @@
+                 expected_identity=science.prior.native.model_api.h1_stage_identity(request))
+             producer = capture.StageCapture(self.root, request_sha256=self.key,
+                 expected_structure=capture.old.audit._structure(model),
+-                expected_implementation=capture.implementation_identity())
++                expected_implementation=capture.implementation_identity(), stage_index=index)
+             callback_answer = None
+             def callback(raw, results, actual_model):
+                 nonlocal callback_answer
+                 if callback_answer is not None: raise ValueError('second science callback')
+                 callback_answer = science.consume(producer.root/'science', producer.raw.root/'000/raw.bin',
+                     results, actual_model, *self.context, expected_native_sha=io.digest(raw),
+-                    expected_binding=producer.binding_sha, expected_export=producer.records['export.json'])
++                    expected_binding=producer.binding_sha, expected_export=producer.records['export.json'],
++                    expected_timing_binding=producer.timing_receipt['binding_sha256'],
++                    expected_timing_terminal=producer.timing_receipt['terminal_sha256'])
+                 return callback_answer
+             answer = producer.run(lambda: model, specification, callback)
+             if (producer.started is not True or producer.complete is not True or producer.poisoned is not False or
+--- h1_owned_hour_development_v1 (mechanically rebound)
++++ h1_timed_hour_development_v1
+@@ -45,10 +45,13 @@
+         producer_complete_sha256=complete_pin, science_terminal_sha256=science_pin,
+         stage_identity=result['stage_identity'], lock_hex=result['lock'].hex(),
+         native_sha256=result['native_sha256'], numerical_sha256=io.digest(io.encode(result['numerical'])),
++        timing_binding_sha256=result['timing']['binding_sha256'],
++        timing_terminal_sha256=result['timing']['terminal_sha256'],
++        native_interval_ns=result['timing']['native_interval_ns'],
+         **stage.capture.FLAGS)
+ 
+ 
+-def _projection(packet, key, locks, assignment, vector_pin):
++def _projection(packet, key, locks, assignment, vector_pin, timing_vector_pin, native_total):
+     # Reuse the approved boundary transition, without constructing an old-v3
+     # replay object or claiming that capsule bytes are old native reports.
+     transition = prior.current.source.replay_feasible_boundary(packet, assignment,
+@@ -56,6 +59,7 @@
+     after = transition.candidate_boundary
+     return io.encode(dict(schema=SCHEMA, request_sha256=key, before_identity=transition.before_identity,
+         stage_vector_sha256=vector_pin, implementation=implementation_identity(),
++        timing_vector_sha256=timing_vector_pin, native_total_ns=native_total, native_intervals_complete=True,
+         value=dict(network_identity=after.network_identity, completed_hours=after.completed_hours,
+             units=[[uid, on, float(power).hex(), age] for uid, on, power, age in after.units],
+             canonical_locks=[x.hex() for x in locks],
+@@ -63,10 +67,11 @@
+         **stage.capture.FLAGS))
+ 
+ 
+-def _terminal(key, binding_pin, head, payload, count, vector_pin):
++def _terminal(key, binding_pin, head, payload, count, vector_pin, timing_vector_pin, native_total):
+     return dict(schema=SCHEMA, request_sha256=key, binding_sha256=binding_pin,
+         last_commit_sha256=head, projection_sha256=io.digest(payload), stages=count,
+         stage_vector_sha256=vector_pin,
++        timing_vector_sha256=timing_vector_pin, native_total_ns=native_total, native_intervals_complete=True,
+         projection_identity=io.digest(io.encode([SCHEMA+'_projection', io.digest(payload)])),
+         **stage.capture.FLAGS)
+ 
+@@ -115,6 +120,7 @@
+     binding_pin = head = io.digest(binding_raw)
+     locks, assignment = (), None
+     vector = []
++    timing_vector = []
+     for index in range(count):
+         path = root/'commits'/f'{index:03d}.json'
+         raw = io.read_stable(path, io.META_CAP)[0]
+@@ -128,21 +134,29 @@
+             raise ValueError('hour commit/lock chain differs')
+         head = io.digest(raw)
+         vector.append([doc['producer_complete_sha256'], doc['science_terminal_sha256'], head])
++        if result['timing']['interval_complete'] is not True: raise ValueError('native interval incomplete')
++        timing_vector.append([index, science.request_key(packet, specification, limits, index, locks),
++            result['timing']['clock_domain'], result['timing']['binding_sha256'],
++            result['timing']['terminal_sha256'], result['timing']['native_interval_ns']])
+         locks = (*locks, result['lock'])
+         assignment = result['assignment']
+     if not locks: raise ValueError('empty hour sequence')
+     vector_pin = io.digest(io.encode(vector))
+-    payload = _projection(packet, key, locks, assignment, vector_pin)
++    timing_vector_pin = io.digest(io.encode(timing_vector))
++    native_total = sum(row[-1] for row in timing_vector)
++    payload = _projection(packet, key, locks, assignment, vector_pin, timing_vector_pin, native_total)
+     if len(payload) > PROJECTION_CAP: raise ValueError('hour projection exceeds cap')
+     if terminal:
+         if io.read_stable(root/'projection.bin', PROJECTION_CAP)[0] != payload:
+             raise ValueError('hour projection differs')
+-        if io.read_stable(root/'terminal.json', io.META_CAP)[0] != io.encode(_terminal(key, binding_pin, head, payload, count, vector_pin)):
++        if io.read_stable(root/'terminal.json', io.META_CAP)[0] != io.encode(_terminal(key, binding_pin, head, payload, count, vector_pin,
++                timing_vector_pin, native_total)):
+             raise ValueError('hour terminal differs')
+     if (_snapshot(root, count, terminal) != view or request_key(packet, specification, limits) != key
+             or implementation_identity() != implementation):
+         raise ValueError('hour view/context changed during replay')
+-    return dict(key=key, binding_pin=binding_pin, head=head, payload=payload, locks=locks, vector_pin=vector_pin)
++    return dict(key=key, binding_pin=binding_pin, head=head, payload=payload, locks=locks, vector_pin=vector_pin,
++                timing_vector_pin=timing_vector_pin, native_total=native_total)
+ 
+ 
+ def inspect(root, packet, specification, limits, *, expected_terminal_sha, expected_implementation):
+@@ -159,6 +173,8 @@
+                 implementation_identity() != expected_implementation):
+             raise ValueError('hour terminal/implementation changed')
+         return dict(projection_payload=result['payload'], canonical_locks=result['locks'],
++            native_total_ns=result['native_total'], timing_vector_sha256=result['timing_vector_pin'],
++            native_intervals_complete=True,
+             full_hour_chain_recomputed=True, owned_run_return_observed=False,
+             whole_job_quiescence_checked=False, **stage.capture.FLAGS)
+ 
+@@ -170,11 +186,13 @@
+     implementation: str
+     request_sha256: str
+     projection_payload: bytes
++    native_total_ns: int
++    timing_vector_sha256: str
+     authority_flags: tuple
+ 
+-    def __init__(self, root, pin, implementation, key, payload, *, _token=None):
++    def __init__(self, root, pin, implementation, key, payload, native_total, timing_vector_pin, *, _token=None):
+         if _token is not _TOKEN: raise TypeError('owned full hour required')
+-        for name, item in zip(self.__annotations__, (str(root), pin, implementation, key, payload,
++        for name, item in zip(self.__annotations__, (str(root), pin, implementation, key, payload, native_total, timing_vector_pin,
+                                                     tuple(stage.capture.FLAGS.items()))):
+             object.__setattr__(self, name, item)
+ 
+@@ -234,12 +252,12 @@
+                 if fresh['locks'] != locks or fresh['head'] != head: raise ValueError('fresh hour differs')
+                 io.write_new(self.root/'projection.bin', fresh['payload'])
+                 pin = io.write_metadata(self.root/'terminal.json', _terminal(self.key, self.binding_pin,
+-                    head, fresh['payload'], self.count, fresh['vector_pin']))
++                    head, fresh['payload'], self.count, fresh['vector_pin'], fresh['timing_vector_pin'], fresh['native_total']))
+                 checked = inspect(self.root, *self.context, expected_terminal_sha=pin,
+                                   expected_implementation=self.implementation)
+                 self._check()
+                 receipt = HourCompletion(self.root, pin, self.implementation, self.key,
+-                    checked['projection_payload'], _token=_TOKEN)
++                    checked['projection_payload'], checked['native_total_ns'], checked['timing_vector_sha256'], _token=_TOKEN)
+             self.complete = True
+             return receipt
+         except BaseException:

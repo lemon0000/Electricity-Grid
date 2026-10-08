@@ -1,0 +1,49 @@
+status: DRAFT_NONAUTHORITATIVE_ALIGNMENT
+
+source:
+  cpu_path: data/raw/google_power_workload_2019/multiday_v1_non_authoritative/upstream/records.csv.gz
+  cpu_sha256: 3c204c39cc099fb344a663801e2977adcc063ab988de465e8069a62ccd987ca0
+  cpu_metadata_path: data/raw/google_power_workload_2019/multiday_v1_non_authoritative/upstream/SOURCE_METADATA.json
+  cpu_metadata_sha256: 557e75d553a781bb556e5b1e1a972d36302790197f3bd90a0be562a525573a57
+  power_path: results/tables/public_compute_multiday_v1_non_authoritative/google_power_57_domains_unfiltered.jsonl.gz
+  power_sha256: 61039c87c37de7d8a82c1cf96b08b3e5cf01148247477b2e9265645637c3a4b4
+  capacity_path: results/tables/public_compute_multiday_v1_non_authoritative/pdu17_hourly_normalized_capacity.jsonl.gz
+  capacity_sha256: 06d0ad33980ecd3c7644ff9c8d66e7f11e84f2b627fd54403010ae4934019f31
+  prepare_summary_path: results/tables/public_compute_multiday_v1_non_authoritative/summary.json
+  prepare_summary_sha256: d3349e6b00cbd77c5b83f98bc208b90ff62612f1c2f185e1aade847970f18562
+  output_directory: results/tables/google_power_workload_multiday_pair_v1_non_authoritative
+
+contract:
+  cell: f
+  pdu: pdu17
+  raw_window_start_us: 600000000
+  raw_window_end_us: 2679000000000
+  hours: 744
+  raw_origin_24h_blocks: 31
+  power_step_us: 300000000
+  power_samples_per_hour: 12
+  cpu_collection_types: [0, 1]
+  cpu_priority_tiers: [1_free, 2_beb, 3_mid, 4_production, 5_monitoring, ambiguous, unknown]
+  cpu_strata_per_hour: 14
+  power_decimal_places: 12
+  decimal_precision: 50
+  decimal_rounding: ROUND_HALF_EVEN
+  json_line_ending: LF
+
+interpretation:
+  unfiltered_alignment_available: true
+  power_quality_filter_applied: false
+  power_quality_flag_semantics_resolved: false
+  population_is_complete_pdu_workload: false
+  cpu_capacity_ratio_computed: false
+  absolute_power_mw_available: false
+  headroom_computed: false
+  flexibility_observed: false
+  deadline_observed: false
+  recovery_parameters_observed: false
+  natural_calendar_days_identified: false
+  continuous_model_input_ready: false
+  model_parameter_changed: false
+  formal_result: false
+  paper_claim: false
+  security_certified: false

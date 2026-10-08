@@ -1,0 +1,21 @@
+schema: rq2_continuous_recovery_controller_v1
+status: DRAFT_NONAUTHORITATIVE
+rule: primary_then_permanent_shared_recovery_v1
+primary:
+  rule: full_request_edf_known_then_unknown_fifo_v1
+  recovery_decimal_places: 12
+recovery:
+  rule: full_request_edf_known_then_unknown_fifo_v1
+  recovery_decimal_places: 12
+trigger_stages: [physical_execution, shared_execution]
+transition: same_rejected_observation_then_permanent_shared_state
+failure: unassessed_stop
+evidence_class: mechanism_assumption
+continuous_service_protocol_registered: false
+formal_experiment_authorized: false
+formal_result: false
+paper_claim: false
+security_certified: false
+fixture:
+  source_config: configs/rq2_continuous_causal_policy_v1.DRAFT.yaml
+  hours: 48

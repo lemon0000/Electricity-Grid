@@ -1,0 +1,40 @@
+{
+  "complete_service_certified": false,
+  "evidence_inventory_sha256": "343e939663873aecfb71b48dcecb6f49f378ab561dc41a2a22debd4620b6523c",
+  "formal_result": false,
+  "git_diff_check_passed": true,
+  "official_verdict": null,
+  "preseal_findings_closed": true,
+  "preseal_reviewer": "/root/normal_cost_preseal",
+  "prior_sealed_members_unchanged": {
+    "normal": 150,
+    "selector_core": 94,
+    "selector_execution": 132
+  },
+  "schema": "rq2_selector_zero_face_episode_preseal_closure_v1",
+  "synthetic_job_evidence": true,
+  "test_batches_overlap": true,
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_hourly_zero_face_transaction_v1.py",
+      "passed": 17,
+      "seconds": 93.4
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -x -q -p no:cacheprovider tests/test_rq2_episode_zero_face_v1.py tests/test_rq2_episode_zero_face_replay_v1.py",
+      "passed": 33,
+      "seconds": 423.92
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -x -q -p no:cacheprovider tests/test_rq2_episode_zero_face_transport_v1.py tests/test_rq2_episode_zero_face_worker_v1.py tests/test_rq2_episode_zero_face_controller_v1.py tests/test_rq2_episode_zero_face_v1.py::test_invalid_initial_request_rejected_before_root_io tests/test_rq2_episode_zero_face_v1.py::test_dependency_drift_after_intent_precedes_job tests/test_rq2_episode_zero_face_replay_v1.py::test_linked_process_identity_forgery_is_rejected",
+      "passed": 93,
+      "seconds": 441.45
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_scale_hourly_transaction_v1.py tests/test_rq2_scale_rejection_action_semantics_v1.py tests/test_rq2_scale_episode_transport_v1.py",
+      "passed": 44,
+      "seconds": 88.47
+    }
+  ],
+  "whole_task_resources_verified": false
+}

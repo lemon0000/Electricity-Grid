@@ -1,0 +1,38 @@
+{
+  "acceptance_matrix": "docs/model_spec/rq2_normal_episode_binding_v1.md",
+  "development_evidence": [
+    "results/tables/rq2_normal_episode_binding_v1_non_authoritative/development_checks.json",
+    "results/tables/rq2_normal_episode_binding_v1_non_authoritative/persistent_development_checks.json"
+  ],
+  "documentation_change_after_tests": "lifecycle wording now delegates sealed state to outer and receipt",
+  "evidence_inventory_sha256": "91ab8d751338da12d66e3ad79de1b0122767ac51c2f165e62fff681cd31a4636",
+  "formal_result": false,
+  "formal_run_authority": false,
+  "git_diff_check_passed": true,
+  "historical_batches_overlap": true,
+  "independent_binding_rebuilt_before_snapshot": true,
+  "inherited_sealed_outers": {
+    "configs/rq2_normal_numerical_execution_v2.OUTER.SHA256SUMS.json": "475974d853c3132486c80aeb70a56edf00dbd4b59a2816d4fb2a3168b7a9dea9",
+    "configs/rq2_selector_zero_face_episode_v1.OUTER.SHA256SUMS.json": "91f031bf1d51fac67439594842237389e669fd8772aa88a641fa39af067270be"
+  },
+  "native_execution_authenticated": false,
+  "official_verdict": null,
+  "persistent_tests_passed": 11,
+  "preseal_findings_closed": true,
+  "preseal_findings_resolved": [
+    "RTS_manifest_member_identity_and_digest_snapshot",
+    "complete_indirect_source_inventory_and_output_isolation",
+    "context_manager_test_spy_corrected_and_three_failure_cases_retested"
+  ],
+  "preseal_reviewer": "/root/normal_episode_binding_design",
+  "production_code_or_test_changes_after_final_tests": false,
+  "related_processes_absent_before_seal": true,
+  "schema": "rq2_normal_episode_preseal_closure_v1",
+  "snapshot_files": 83,
+  "snapshot_relocation_is_not_execution": true,
+  "solver_calls_during_snapshot": 0,
+  "source_preparation_mocked": true,
+  "standalone_binding_unique_tests_passed": 12,
+  "synthetic_source": true,
+  "whole_task_resources_verified": false
+}

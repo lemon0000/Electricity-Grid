@@ -1,0 +1,49 @@
+[
+  {
+    "type": "INTEGER",
+    "name": "time",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "machine_id",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "type",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "STRING",
+    "name": "switch_id",
+    "mode": "NULLABLE"
+  },
+  {
+    "fields": [
+      {
+        "type": "FLOAT",
+        "name": "cpus",
+        "mode": "NULLABLE"
+      },
+      {
+        "type": "FLOAT",
+        "name": "memory",
+        "mode": "NULLABLE"
+      }
+    ],
+    "type": "RECORD",
+    "name": "capacity",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "STRING",
+    "name": "platform_id",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "missing_data_reason",
+    "mode": "NULLABLE"
+  }
+]

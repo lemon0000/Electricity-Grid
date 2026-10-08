@@ -1,0 +1,96 @@
+[
+  {
+    "type": "INTEGER",
+    "name": "time",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "type",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "collection_id",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "scheduling_class",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "missing_type",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "collection_type",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "priority",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "alloc_collection_id",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "instance_index",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "machine_id",
+    "mode": "NULLABLE"
+  },
+  {
+    "type": "INTEGER",
+    "name": "alloc_instance_index",
+    "mode": "NULLABLE"
+  },
+  {
+    "fields": [
+      {
+        "type": "FLOAT",
+        "name": "cpus",
+        "mode": "NULLABLE"
+      },
+      {
+        "type": "FLOAT",
+        "name": "memory",
+        "mode": "NULLABLE"
+      }
+    ],
+    "type": "RECORD",
+    "name": "resource_request",
+    "mode": "NULLABLE"
+  },
+  {
+    "fields": [
+      {
+        "type": "STRING",
+        "name": "name",
+        "mode": "NULLABLE"
+      },
+      {
+        "type": "STRING",
+        "name": "value",
+        "mode": "NULLABLE"
+      },
+      {
+        "type": "INTEGER",
+        "name": "relation",
+        "mode": "NULLABLE"
+      }
+    ],
+    "type": "RECORD",
+    "name": "constraint",
+    "mode": "REPEATED"
+  }
+]

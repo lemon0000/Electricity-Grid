@@ -1,0 +1,39 @@
+{
+  "formal_result": false,
+  "git_diff_check_passed": true,
+  "h25_evidence_sha256": "eb8f51013eb4c76e8fa7641ff71aa174143fd6c42f36a8fda01413f59db1ecd9",
+  "h25_hours": 25,
+  "h25_units": 158,
+  "native_execution_authenticated": false,
+  "official_verdict": null,
+  "preliminary_artifact_preserved": "h25_projection.json",
+  "preseal_findings_closed": true,
+  "preseal_reviewer": "/root/normal_cost_preseal",
+  "prior_sealed_members_unchanged": {
+    "rq2_normal_numerical_acceptance_v1": 150,
+    "rq2_selector_zero_face_episode_v1": 246,
+    "rq2_selector_zero_face_execution_v1": 132,
+    "rq2_selector_zero_face_v1": 94
+  },
+  "related_processes_absent_before_seal": true,
+  "schema": "rq2_normal_numerical_source_preseal_closure_v1",
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -x -q -p no:cacheprovider tests/test_rq2_normal_numerical_source_v1.py",
+      "passed": 42,
+      "seconds": 195.58
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_numerical_acceptance_v1.py tests/test_rq2_scale_normal_source_v1.py tests/test_rq2_grid_information_v1.py tests/test_rq2_common_request_adapter_v1.py tests/test_rq2_continuous_grid_normal_stream_ordered_v1.py",
+      "passed": 131,
+      "seconds": 139.61
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_verify_rq2_h25_normal_projection_v1.py",
+      "passed": 2,
+      "seconds": 1.8
+    }
+  ],
+  "verifier_solver_calls": 0,
+  "whole_task_resources_verified": false
+}

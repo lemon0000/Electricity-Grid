@@ -1,0 +1,4556 @@
+[
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a050_f005_h000",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 17503,
+      "causal_debt_limit_violation_pair_count": 16762,
+      "causal_terminal_debt_violation_pair_count": 17578,
+      "energy_budget_violation_pair_count": 16456,
+      "maximum_cfe_compatible_headroom": 1.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 11968,
+      "maximum_event_duration_violation_pair_count": 15028,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 12172,
+      "terminal_positive_cfe_power_block_count": 358,
+      "total_recovery_energy_lower_bound_violation_pair_count": 17578,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 5.262445325787743e-06,
+          "effective_cfe_request": 0.05782078974874083,
+          "hour_offset": 6,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 3.3177171385469677,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 3.3177171385469677,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 3.3177171385469673,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.05,
+      "hourly_cfe_target": 0.5,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.0,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a050_f005_h010",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 17503,
+      "causal_debt_limit_violation_pair_count": 16762,
+      "causal_terminal_debt_violation_pair_count": 16654,
+      "energy_budget_violation_pair_count": 16456,
+      "maximum_cfe_compatible_headroom": 1.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 11968,
+      "maximum_event_duration_violation_pair_count": 15028,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 12172,
+      "terminal_positive_cfe_power_block_count": 358,
+      "total_recovery_energy_lower_bound_violation_pair_count": 15622,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 5.262445325787743e-06,
+          "effective_cfe_request": 0.05782078974874083,
+          "hour_offset": 6,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 3.259896348798226,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 3.259896348798226,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 2.212827665832324,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.05,
+      "hourly_cfe_target": 0.5,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a050_f005_h030",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 17503,
+      "causal_debt_limit_violation_pair_count": 16762,
+      "causal_terminal_debt_violation_pair_count": 16030,
+      "energy_budget_violation_pair_count": 16456,
+      "maximum_cfe_compatible_headroom": 1.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 11968,
+      "maximum_event_duration_violation_pair_count": 15028,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 12172,
+      "terminal_positive_cfe_power_block_count": 358,
+      "total_recovery_energy_lower_bound_violation_pair_count": 13906,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 5.262445325787743e-06,
+          "effective_cfe_request": 0.05782078974874083,
+          "hour_offset": 6,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 3.259896348798226,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 3.259896348798226,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 0.5401838313862655,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.05,
+      "hourly_cfe_target": 0.5,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.3,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a050_f020_h000",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 16987,
+      "causal_debt_limit_violation_pair_count": 16762,
+      "causal_terminal_debt_violation_pair_count": 17578,
+      "energy_budget_violation_pair_count": 16456,
+      "maximum_cfe_compatible_headroom": 1.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 11968,
+      "maximum_event_duration_violation_pair_count": 15028,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 12172,
+      "terminal_positive_cfe_power_block_count": 358,
+      "total_recovery_energy_lower_bound_violation_pair_count": 17578,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 2.1049781303150972e-05,
+          "effective_cfe_request": 0.05782078974874083,
+          "hour_offset": 6,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 3.3177171385469677,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 3.3177171385469677,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 3.3177171385469673,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.5,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.0,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a050_f020_h010",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 16987,
+      "causal_debt_limit_violation_pair_count": 16762,
+      "causal_terminal_debt_violation_pair_count": 16654,
+      "energy_budget_violation_pair_count": 16456,
+      "maximum_cfe_compatible_headroom": 1.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 11968,
+      "maximum_event_duration_violation_pair_count": 15028,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 12172,
+      "terminal_positive_cfe_power_block_count": 358,
+      "total_recovery_energy_lower_bound_violation_pair_count": 15622,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 2.1049781303150972e-05,
+          "effective_cfe_request": 0.05782078974874083,
+          "hour_offset": 6,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 3.259896348798226,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 3.259896348798226,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 2.212827665832324,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.5,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a050_f020_h030",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 16987,
+      "causal_debt_limit_violation_pair_count": 16762,
+      "causal_terminal_debt_violation_pair_count": 16030,
+      "energy_budget_violation_pair_count": 16456,
+      "maximum_cfe_compatible_headroom": 1.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 11968,
+      "maximum_event_duration_violation_pair_count": 15028,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 12172,
+      "terminal_positive_cfe_power_block_count": 358,
+      "total_recovery_energy_lower_bound_violation_pair_count": 13906,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 2.1049781303150972e-05,
+          "effective_cfe_request": 0.05782078974874083,
+          "hour_offset": 6,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 3.259896348798226,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 3.259896348798226,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 0.5401838313862655,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.5,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.3,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a050_f050_h000",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 15367,
+      "causal_debt_limit_violation_pair_count": 16762,
+      "causal_terminal_debt_violation_pair_count": 17578,
+      "energy_budget_violation_pair_count": 16456,
+      "maximum_cfe_compatible_headroom": 1.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 11968,
+      "maximum_event_duration_violation_pair_count": 15028,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 12172,
+      "terminal_positive_cfe_power_block_count": 358,
+      "total_recovery_energy_lower_bound_violation_pair_count": 17578,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 5.262445325787743e-05,
+          "effective_cfe_request": 0.05782078974874083,
+          "hour_offset": 6,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 3.3177171385469677,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 3.3177171385469677,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 3.3177171385469673,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.5,
+      "hourly_cfe_target": 0.5,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.0,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a050_f050_h010",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 15367,
+      "causal_debt_limit_violation_pair_count": 16762,
+      "causal_terminal_debt_violation_pair_count": 16654,
+      "energy_budget_violation_pair_count": 16456,
+      "maximum_cfe_compatible_headroom": 1.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 11968,
+      "maximum_event_duration_violation_pair_count": 15028,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 12172,
+      "terminal_positive_cfe_power_block_count": 358,
+      "total_recovery_energy_lower_bound_violation_pair_count": 15622,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 5.262445325787743e-05,
+          "effective_cfe_request": 0.05782078974874083,
+          "hour_offset": 6,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 3.259896348798226,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 3.259896348798226,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 2.212827665832324,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.5,
+      "hourly_cfe_target": 0.5,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a050_f050_h030",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 15367,
+      "causal_debt_limit_violation_pair_count": 16762,
+      "causal_terminal_debt_violation_pair_count": 16030,
+      "energy_budget_violation_pair_count": 16456,
+      "maximum_cfe_compatible_headroom": 1.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 11968,
+      "maximum_event_duration_violation_pair_count": 15028,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 12172,
+      "terminal_positive_cfe_power_block_count": 358,
+      "total_recovery_energy_lower_bound_violation_pair_count": 13906,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 5.262445325787743e-05,
+          "effective_cfe_request": 0.05782078974874083,
+          "hour_offset": 6,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 3.259896348798226,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 3.259896348798226,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 0.5401838313862655,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.5,
+      "hourly_cfe_target": 0.5,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.3,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a070_f005_h000",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.4285714285714286,
+      "maximum_event_count_lower_bound_violation_pair_count": 17068,
+      "maximum_event_duration_violation_pair_count": 18190,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 16252,
+      "terminal_positive_cfe_power_block_count": 478,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863743e-06,
+          "effective_cfe_request": 0.008574993281668901,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 6.526361070356852,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 6.526361070356852,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 6.526361070356853,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.05,
+      "hourly_cfe_target": 0.7,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.0,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a070_f005_h010",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.4285714285714286,
+      "maximum_event_count_lower_bound_violation_pair_count": 17068,
+      "maximum_event_duration_violation_pair_count": 18190,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 16252,
+      "terminal_positive_cfe_power_block_count": 478,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18145,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863743e-06,
+          "effective_cfe_request": 0.008574993281668901,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 6.517786077075183,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 6.517786077075183,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 6.450820210753654,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.05,
+      "hourly_cfe_target": 0.7,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a070_f005_h030",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18334,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.4285714285714286,
+      "maximum_event_count_lower_bound_violation_pair_count": 17068,
+      "maximum_event_duration_violation_pair_count": 18190,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 16252,
+      "terminal_positive_cfe_power_block_count": 478,
+      "total_recovery_energy_lower_bound_violation_pair_count": 17356,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863743e-06,
+          "effective_cfe_request": 0.008574993281668901,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 6.517786077075183,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 6.517786077075183,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 6.450820210753654,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.05,
+      "hourly_cfe_target": 0.7,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.3,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a070_f020_h000",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18292,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.4285714285714286,
+      "maximum_event_count_lower_bound_violation_pair_count": 17068,
+      "maximum_event_duration_violation_pair_count": 18190,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 16252,
+      "terminal_positive_cfe_power_block_count": 478,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.008574993281668901,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 6.526361070356852,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 6.526361070356852,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 6.526361070356853,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.7,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.0,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a070_f020_h010",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18292,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.4285714285714286,
+      "maximum_event_count_lower_bound_violation_pair_count": 17068,
+      "maximum_event_duration_violation_pair_count": 18190,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 16252,
+      "terminal_positive_cfe_power_block_count": 478,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18145,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.008574993281668901,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 6.517786077075183,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 6.517786077075183,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 6.450820210753654,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.7,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a070_f020_h030",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18292,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18334,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.4285714285714286,
+      "maximum_event_count_lower_bound_violation_pair_count": 17068,
+      "maximum_event_duration_violation_pair_count": 18190,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 16252,
+      "terminal_positive_cfe_power_block_count": 478,
+      "total_recovery_energy_lower_bound_violation_pair_count": 17356,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.008574993281668901,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 6.517786077075183,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 6.517786077075183,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 6.450820210753654,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.7,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.3,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a070_f050_h000",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 17452,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.4285714285714286,
+      "maximum_event_count_lower_bound_violation_pair_count": 17068,
+      "maximum_event_duration_violation_pair_count": 18190,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 16252,
+      "terminal_positive_cfe_power_block_count": 478,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863742e-05,
+          "effective_cfe_request": 0.008574993281668901,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 6.526361070356852,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 6.526361070356852,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 6.526361070356853,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.5,
+      "hourly_cfe_target": 0.7,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.0,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a070_f050_h010",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 17452,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.4285714285714286,
+      "maximum_event_count_lower_bound_violation_pair_count": 17068,
+      "maximum_event_duration_violation_pair_count": 18190,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 16252,
+      "terminal_positive_cfe_power_block_count": 478,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18145,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863742e-05,
+          "effective_cfe_request": 0.008574993281668901,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 6.517786077075183,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 6.517786077075183,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 6.450820210753654,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.5,
+      "hourly_cfe_target": 0.7,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a070_f050_h030",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 17452,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18334,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.4285714285714286,
+      "maximum_event_count_lower_bound_violation_pair_count": 17068,
+      "maximum_event_duration_violation_pair_count": 18190,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 16252,
+      "terminal_positive_cfe_power_block_count": 478,
+      "total_recovery_energy_lower_bound_violation_pair_count": 17356,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863742e-05,
+          "effective_cfe_request": 0.008574993281668901,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 6.517786077075183,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 6.517786077075183,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 6.450820210753654,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.5,
+      "hourly_cfe_target": 0.7,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.3,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a085_f005_h000",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863743e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.05,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.0,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a085_f005_h010",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863743e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.05,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a085_f005_h030",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863743e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.05,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.3,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a085_f020_h000",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.0,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a085_f020_h010",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a085_f020_h030",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.3,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a085_f050_h000",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18136,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863742e-05,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.5,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.0,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a085_f050_h010",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18136,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863742e-05,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.5,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a085_f050_h030",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18136,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863742e-05,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.5,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.3,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a100_f005_h000",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 18394,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863743e-06,
+          "effective_cfe_request": 0.3060024952971683,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 11.706242629576575,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.05,
+      "hourly_cfe_target": 1.0,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.0,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a100_f005_h010",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 18394,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863743e-06,
+          "effective_cfe_request": 0.3060024952971683,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 11.706242629576575,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.05,
+      "hourly_cfe_target": 1.0,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a100_f005_h030",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 18394,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863743e-06,
+          "effective_cfe_request": 0.3060024952971683,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 11.706242629576575,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.05,
+      "hourly_cfe_target": 1.0,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.3,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a100_f020_h000",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 18394,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.3060024952971683,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 11.706242629576575,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 1.0,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.0,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a100_f020_h010",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 18394,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.3060024952971683,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 11.706242629576575,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 1.0,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a100_f020_h030",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 18394,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.3060024952971683,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 11.706242629576575,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 1.0,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.3,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a100_f050_h000",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18385,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 18394,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863742e-05,
+          "effective_cfe_request": 0.3060024952971683,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 11.706242629576575,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.5,
+      "hourly_cfe_target": 1.0,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.0,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a100_f050_h010",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18385,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 18394,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863742e-05,
+          "effective_cfe_request": 0.3060024952971683,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 11.706242629576575,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.5,
+      "hourly_cfe_target": 1.0,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "primary_a100_f050_h030",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18385,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.0,
+      "maximum_event_count_lower_bound_violation_pair_count": 18394,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 1.8667063002863742e-05,
+          "effective_cfe_request": 0.3060024952971683,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 11.706242629576575,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 11.706242629576575,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "primary_factorial",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.5,
+      "hourly_cfe_target": 1.0,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.3,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "oat_recovery_efficiency_00",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "secondary_oat",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.6
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "oat_recovery_efficiency_01",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "secondary_oat",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 1.0
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "oat_maximum_event_duration_hours_00",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18394,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "secondary_oat",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 1.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "oat_maximum_event_duration_hours_01",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 14926,
+      "maximum_event_duration_violation_pair_count": 16252,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "secondary_oat",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 8.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "oat_maximum_event_count_00",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18394,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "secondary_oat",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 1,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "oat_maximum_event_count_01",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 14926,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "secondary_oat",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 4,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "oat_normalized_energy_budget_00",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "secondary_oat",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 0.1,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "oat_normalized_energy_budget_01",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.2,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "secondary_oat",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.2,
+      "normalized_energy_budget": 1.0,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "oat_normalized_debt_limit_00",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.05,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "secondary_oat",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.05,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  },
+  {
+    "arm_assessments": {
+      "cfe_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_CFE_only_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_b6_separate_planning_shared_execution": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "exact_B6_CFE_track_required_call",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "joint_correct_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": true,
+        "projection_role": "optimistic_CFE_lower_bound_grid_can_only_tighten",
+        "status": "conditional_on_finite_grid_support"
+      },
+      "network_only_shared": {
+        "formal_arm_status": "not_assigned",
+        "necessary_conflict_observed": null,
+        "status": "unknown_grid_need_and_E0"
+      }
+    },
+    "cell_id": "oat_normalized_debt_limit_01",
+    "cfe_projection": {
+      "available_flexibility_violation_pair_count": 18394,
+      "causal_debt_limit_violation_pair_count": 18394,
+      "causal_terminal_debt_violation_pair_count": 18394,
+      "energy_budget_violation_pair_count": 18394,
+      "maximum_cfe_compatible_headroom": 0.17647058823529416,
+      "maximum_event_count_lower_bound_violation_pair_count": 18292,
+      "maximum_event_duration_violation_pair_count": 18394,
+      "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+      "non_trigger_interpretation": "not_proven_infeasible_and_not_proven_feasible",
+      "raw_candidate_pair_count": 18394,
+      "scope": "CFE-only exact track and an optimistic necessary lower bound for joint-correct/shared and joint-B6/CFE; grid need and E0 are unknown",
+      "terminal_conditions_apply_to_selected_continuous_draft": false,
+      "terminal_inactivity_violation_pair_count": 18394,
+      "terminal_positive_cfe_power_block_count": 541,
+      "total_recovery_energy_lower_bound_violation_pair_count": 18394,
+      "witnesses": {
+        "available_flexibility": {
+          "available_flexibility": 7.466825201145497e-06,
+          "effective_cfe_request": 0.18353234740843324,
+          "hour_offset": 0,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "causal_debt_limit": {
+          "causal_peak_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "registered_debt_limit": 0.5,
+          "workload_block_id": "training_0000"
+        },
+        "causal_terminal_debt": {
+          "causal_terminal_debt_lower_bound": 9.536756034795971,
+          "power_block_id": "training_s20260822_0000",
+          "workload_block_id": "training_0000"
+        },
+        "energy_budget": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_count_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "maximum_event_duration": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "terminal_inactivity": {
+          "power_block_id": "training_s20260822_0000",
+          "scope": "all_raw_workload_pairs_for_this_power_block"
+        },
+        "total_recovery_energy_lower_bound": {
+          "power_block_id": "training_s20260822_0000",
+          "terminal_debt_total_energy_lower_bound": 9.536756034795971,
+          "workload_block_id": "training_0000"
+        }
+      }
+    },
+    "family": "secondary_oat",
+    "model_scope": "legacy_sealed_v5_single_24h_completed_period",
+    "parameters": {
+      "flexible_fraction": 0.2,
+      "hourly_cfe_target": 0.85,
+      "maximum_event_count": 2,
+      "maximum_event_duration_hours": 4.0,
+      "normalized_debt_limit": 0.5,
+      "normalized_energy_budget": 0.4,
+      "normalized_recovery_headroom": 0.1,
+      "recovery_efficiency": 0.85
+    },
+    "terminal_conditions_apply_to_selected_continuous_draft": false
+  }
+]

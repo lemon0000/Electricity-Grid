@@ -1,0 +1,45 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "formal_result": false,
+  "formal_run_authority": false,
+  "sealed": false,
+  "scope": "versioned fixed-window normal to bidirectional episode bridge; no change to numerical thresholds or CFE mapping",
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_bidirectional_episode_binding_v1.py tests/test_rq2_normal_bidirectional_episode_binding_guards_v1.py tests/test_rq2_normal_bidirectional_episode_transport_v1.py tests/test_rq2_normal_bidirectional_episode_source_inventory_v1.py tests/test_rq2_normal_bidirectional_episode_pipeline_v1.py tests/test_rq2_normal_bidirectional_episode_pipeline_failures_v1.py",
+      "session_id": 71288,
+      "exit_code": 0,
+      "passed": 23,
+      "seconds": 812.71
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_rq2_normal_bidirectional_episode_isolation_v1.py",
+      "exit_code": 0,
+      "passed": 5,
+      "seconds": 2.42
+    }
+  ],
+  "files": {
+    "src/rq2_joint_deliverability_boundary_v1/normal_bidirectional_episode_binding.py": "37f20df22556a12f7978d3175ab961851421eee58f2a40ae6c7e1b5de24e5c74",
+    "src/rq2_joint_deliverability_boundary_v1/normal_bidirectional_episode_controller.py": "6278484d2d2b43de97c2fd8298a7e90e84a45dc95f827b9ff67b21923869eeb1",
+    "src/rq2_joint_deliverability_boundary_v1/normal_bidirectional_episode_transport.py": "0c5036030070d49279f2b14e95016e7e6d89ceaeb0a88de8e210b816c256e35f",
+    "src/rq2_joint_deliverability_boundary_v1/normal_bidirectional_episode_worker.py": "28e47cc1a88f42d038178e3331bf11c2a5195a4f9504c9d518a953930884be28",
+    "tests/test_rq2_normal_bidirectional_episode_binding_v1.py": "2048941d522cae6bcba38267c2ad0b085411f4da61d8e32736de260d1c7112b9",
+    "tests/test_rq2_normal_bidirectional_episode_binding_guards_v1.py": "e19846d2b6e67f3bf8e54537222a8bafbc2d8a678d6cd9feb1a84cd063628355",
+    "tests/test_rq2_normal_bidirectional_episode_transport_v1.py": "ce41e32a9defb1890772c94c6913295c2d954df94754291fd56bd54f45da8b92",
+    "tests/test_rq2_normal_bidirectional_episode_source_inventory_v1.py": "4b421d4d960a85686c2f4f015beb9c5bd47f265e064feabbdd5050e445943f01",
+    "tests/test_rq2_normal_bidirectional_episode_pipeline_v1.py": "b5cc2ad32bb5ce73054f3338577d9f1f304175099101a4ee8a74fe6bbee23be6",
+    "tests/test_rq2_normal_bidirectional_episode_pipeline_failures_v1.py": "df2681fccd812d00e29ca05e41a3d630d7c7b036c1b732e22eb8709ca4702850",
+    "tests/test_rq2_normal_bidirectional_episode_isolation_v1.py": "a6cef3cff1517d4e355f5b94f08f87eca3fc546a1a3e029cc4c6a313419eef35",
+    "docs/model_spec/rq2_normal_bidirectional_episode_v1.md": "0421bf7191d5b788980fc18ca9533321aef1531a1d08bed98973e57c64251ab8"
+  },
+  "prior_record": "rq2_bidirectional_episode_v1_non_authoritative/development_checks.json accurately records earlier unvalidated state; this report supplies later validation",
+  "preseal_review": "initial read-only review found no implementation defect; version-isolation evidence and final test results now supplied; closure pending",
+  "remaining_scientific_gates": [
+    "CFE mapping decision",
+    "joint service contract",
+    "finite enrollment parameters and normal followup horizon",
+    "causal training capacity and holdout binding",
+    "specific formal protocol and run authorization"
+  ]
+}
