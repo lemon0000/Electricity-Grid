@@ -1,0 +1,29 @@
+{
+  "status": "PRE_SEAL_FINDINGS_OPEN",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "reviewed_hashes": {
+    "experiments/h1_common_owner_genesis_development_v1.py": "b84c485deb7f7f1d1ea0b8e9182a1c3b9cee49abcdc8edc4617eaa6f0fb7f86e",
+    "tests/test_h1_common_owner_genesis_development_v1.py": "9cbe489626eb7d075e544bb1d653a6e16f20dcbe09b9920092a8f298a174834c",
+    "docs/model_spec/rq2_h1_common_owner_genesis_development_v1.md": "1ef543bae1794ff9e0bba70bd5e7eb2a792d31de2bf44cb37cdab4952db3c652"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "must-fix",
+      "description": "Bind journal declaration, full header declaration, genesis, root/caps and single original binder retainer back to wrapper configuration."
+    }
+  ],
+  "independent_test": {
+    "passed": 7,
+    "deselected": 9,
+    "pytest_seconds": 36.63,
+    "wall_seconds": 38.091,
+    "exit_code": 0,
+    "files_unchanged": true,
+    "selection": "real_empty_genesis or retained_child or unknown_binder_suffix or global_change_during or complete_branch_preflight"
+  },
+  "official_verdict": false,
+  "native_calls": 0,
+  "research_jobs": 0
+}

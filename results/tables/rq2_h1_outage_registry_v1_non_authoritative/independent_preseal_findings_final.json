@@ -1,0 +1,37 @@
+{
+  "catalog": {
+    "family_entries": 2081,
+    "obligations_removed": 0,
+    "source_input_unresolved": 0,
+    "unique_entries": 1035
+  },
+  "files_sha256": {
+    "docs/model_spec/rq2_h1_outage_registry_development_v1.md": "dd724f1efb2fba3893e2f98e2bfdb2bbedfa5ca77c0f829a5f332a46a7593021",
+    "experiments/build_h1_outage_split_archive_development_v1.py": "38536afb2e9d0d98324f746a1f5b5e2d3995c5debca7bfa274740eda012eb8be",
+    "experiments/h1_outage_registry_development_v1.py": "f722611539757fd79414d5c24577a610061e62f04ed38a16d04a2e96e34ac9e9",
+    "tests/test_h1_outage_registry_development_v1.py": "a7ef24467f22f562e392f6a5b49ddaa35f09c66ec73961a385a38ef9a2cae731"
+  },
+  "independent_lossless_row_comparison": {
+    "exact_original_field_order_and_strings_equal": true,
+    "holdout": 12720,
+    "total": 25704,
+    "training": 12984
+  },
+  "native_execution_authorized": false,
+  "official_verdict": null,
+  "open_implementation_findings": [],
+  "persistent_lane_owner_implemented": false,
+  "physical_consumer_connected": false,
+  "real_native_calls": 0,
+  "reviewer": "/root/outage_origin_design_review",
+  "root_transcription_of_independent_readonly_review": true,
+  "scope": "detached_registry_and_split_archive_development_only",
+  "status": "PRE_SEAL_NONAUTHORITATIVE",
+  "synthetic_jobs": 0,
+  "tests": {
+    "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_outage_registry_development_v1.py",
+    "exit_code": 0,
+    "passed": 30,
+    "seconds": 122.87
+  }
+}

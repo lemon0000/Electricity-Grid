@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\rq2_joint_deliverability_boundary_v1\normal_worker.py", line 193, in main
+    worker(Path(sys.argv[1]), sys.argv[2], int(sys.argv[3]))
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\rq2_joint_deliverability_boundary_v1\normal_worker.py", line 180, in worker
+    _write_once(root/'worker_claim.json', journal._bytes(dict(pid=os.getpid(), request_sha256=digest,
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\rq2_joint_deliverability_boundary_v1\normal_worker.py", line 126, in _write_once
+    with path.open('xb') as stream:
+         ^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: 'C:\\Users\\Psychobabble\\AppData\\Local\\Temp\\pytest-of-Psychobabble\\pytest-2436\\test_duplicate_worker_claim_ca0\\attempt_non_authoritative\\worker_claim.json'

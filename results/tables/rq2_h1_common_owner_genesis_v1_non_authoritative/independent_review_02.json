@@ -1,0 +1,32 @@
+{
+  "status": "PRE_SEAL_SCOPED_FINDINGS_CLOSED",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "reviewed_hashes": {
+    "experiments/h1_common_owner_genesis_development_v1.py": "c3b542a5480e9c9e5116feea243bc83be3820ef6cac81ba45ac24fd3a8a9f1a9",
+    "tests/test_h1_common_owner_genesis_development_v1.py": "bf936adb1deb8b68210f4a6fe8477e013aae91e870ae14193ea5753c6d443f6e",
+    "docs/model_spec/rq2_h1_common_owner_genesis_development_v1.md": "19ae5520a6588164ea627c35a2e4bd192aed4f17ae268ec79bff81152f62a006"
+  },
+  "closed_findings": [
+    "F1"
+  ],
+  "new_must_fix": [],
+  "independent_test": {
+    "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_common_owner_genesis_development_v1.py -k \"journal_must or partial_child or wrong_receipt or real_roster or unknown_binder\"",
+    "passed": 16,
+    "deselected": 15,
+    "pytest_seconds": 172.05,
+    "wall_seconds": 173.287,
+    "exit_code": 0,
+    "files_unchanged": true
+  },
+  "limitations": [
+    "synthetic positive roster/source seam",
+    "real roster verifies incomplete-entry rejection only",
+    "no successful actual RTS group genesis established",
+    "no producer hour1+ or formal authority"
+  ],
+  "official_verdict": false,
+  "native_calls": 0,
+  "research_jobs": 0
+}

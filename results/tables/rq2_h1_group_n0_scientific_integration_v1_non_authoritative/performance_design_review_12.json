@@ -1,0 +1,35 @@
+{
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "scope": "static performance design only",
+  "official_verdict": false,
+  "hot_paths": [
+    "nested BootstrapOwner phase input checks",
+    "two phase manifest/group prepares per prepare",
+    "roster candidate reconstruction",
+    "common two-pass three-arm historical/source reconstruction"
+  ],
+  "suggestion": "Versioned operation-local immutable dependency views and pure projection; full reread at entry, before irreversible writes, after external callbacks, and at return.",
+  "must_not_cache": [
+    "historical prepare",
+    "source windows",
+    "registry prefix",
+    "exact-current",
+    "durable journal rows/heads/namespaces",
+    "Job observations",
+    "common second science pass",
+    "cross-owner or cross-operation sessions"
+  ],
+  "required_tests": [
+    "public prepare byte parity",
+    "dependency path/cap enforcement",
+    "same-byte replacement",
+    "callback drift",
+    "pre-write drift",
+    "return drift",
+    "cross-operation token refusal"
+  ],
+  "aba_limit": "Bookend checking cannot certify absence of every transient ABA; retain complete callback and write-boundary rechecks.",
+  "implementation_started": false,
+  "measured_speedup": false
+}

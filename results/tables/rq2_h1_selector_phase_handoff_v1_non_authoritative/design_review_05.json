@@ -1,0 +1,12 @@
+{
+  "status": "PRE_SEAL_FINDINGS_OPEN",
+  "reading_stopped": true,
+  "reviewer": "/root/selector_owner_design_review",
+  "findings": [
+    "nested child close dynamically reads lease aliases/closed/guards/stream; foreign close or original resource leak",
+    "common finally dynamically reads original_roster and original_operation, so replaced fields can leak actually acquired guards"
+  ],
+  "design": "closure-owned exact cleanup capsules and common guards; restore/revalidate borrowed references before takeover; poison on external capability destruction, no automatic borrowed close or reconstruction",
+  "native_execution_authorized": false,
+  "formal_result": false
+}

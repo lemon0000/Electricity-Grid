@@ -1,0 +1,25 @@
+{
+  "accepted_root_integration_verified": false,
+  "files_sha256": {
+    "docs/model_spec/rq2_h1_origin_current_information_development_v1.md": "a7c3cdf7f6f529b7a88c43b08cbd78a5f2531e6fba514768c3cfdd674288b5da",
+    "experiments/h1_origin_current_information_development_v1.py": "0c01165a3123500c382fe105f465f1dc0a03535cf1d77563d4ec38a4300f32a6",
+    "tests/test_h1_origin_current_information_development_v1.py": "f27c5a9b5de197e66e69d15d493ad6836599d2e95df71a5662cca4e4ca7d9c2e"
+  },
+  "real_native_calls": 0,
+  "root_transcription_of_terminal_results": true,
+  "synthetic_jobs": 0,
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_origin_current_information_development_v1.py",
+      "exit_code": 0,
+      "passed": 25,
+      "seconds": 14.08
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_origin_current_information_development_v1.py tests/test_h1_current_outage_information_development_v1.py tests/test_h1_origin_grid_step_development_v1.py",
+      "exit_code": 0,
+      "passed": 68,
+      "seconds": 35.38
+    }
+  ]
+}

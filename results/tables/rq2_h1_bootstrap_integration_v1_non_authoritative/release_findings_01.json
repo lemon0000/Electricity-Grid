@@ -1,0 +1,20 @@
+{
+  "status": "PRE_SEAL_RELEASE_FINDINGS_OPEN",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "read_only": true,
+  "stopped_reading": true,
+  "tests_run": false,
+  "files_sha256": {
+    "experiments/h1_bootstrap_integration_development_v1.py": "5bb097948fc775a034d2681aa34f8a32e1af35a8f65ba4ed7202c6d1713d534c",
+    "tests/test_h1_bootstrap_integration_development_v1.py": "3343c55458b083374a6d457e6d5feab1bb3bab5685a58cf6085330b501822220",
+    "docs/model_spec/rq2_h1_bootstrap_integration_development_v1.md": "9266174092c0c36577cd14cc0300dbc5c70f462d33dc785878b1ce8ba8879774"
+  },
+  "findings": {
+    "nonce_identity": "Capture entry operation nonce and compare exact identity at every release publication boundary.",
+    "foreign_journal_suffix": "Global release cross-replay must bounded-check the foreign bootstrap journal exact namespace header/lock/seq1..4; controller execution suffix allowance does not extend to protocol journal suffixes."
+  },
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

@@ -1,0 +1,71 @@
+{
+  "status": "PARTIAL_BOOTSTRAP_REGISTRY_BINDING_REVIEWED",
+  "files_sha256": {
+    "experiments/h1_bootstrap_integration_development_v1.py": "c2696b52a89edfc4bc0d6caa83e0d707ccd9f9dbce01380f456833024094ba8d",
+    "tests/test_h1_bootstrap_registry_binding_development_v1.py": "16650f22daca5e25388d98d39e1595147b65ac148915ca08b32afae8cc3053ba",
+    "docs/model_spec/rq2_h1_bootstrap_integration_development_v1.md": "ee272dcb9a822574d9ee357a5944b8b9e48fe686de172a9c5b4a4d0f67463168",
+    "tests/test_h1_bootstrap_integration_development_v1.py": "94808179e9b8cbaed9673afe2249915ee51f9b428e633262aae37ca282fb4a37",
+    "tests/test_h1_bootstrap_N0_registration_development_v1.py": "d044408c80f18ec35b2c9d0308ef86e69b11c53d38f82014b9e7c781042c1255",
+    "tests/test_h1_owned_bootstrap_controller_development_v1.py": "4949c4cc5df794cdcfc68486aee36892e584c0333826d52c07deed0d72fb0b73",
+    "tests/test_h1_bootstrap_registry_N0_binding_development_v1.py": "13bbba6ddad129a784a0c2e288699ae28d9bee15d3366454697b52a1449d58d4"
+  },
+  "root_evidence": [
+    "root_test_28.json",
+    "root_test_29.json",
+    "root_test_30.json",
+    "root_test_31.json"
+  ],
+  "root_results": [
+    "9 passed181.21s exit0",
+    "91 passed1601.03s exit0",
+    "2 passed/8 deselected97.87s exit0",
+    "1 passed129.47s exit0"
+  ],
+  "review_evidence": [
+    "independent_review_08.json",
+    "independent_review_09.json",
+    "independent_review_10.json"
+  ],
+  "review_results": [
+    "3 passed/6 deselected103.53s exit0",
+    "1 passed/9 deselected68.16s exit0",
+    "static bound-N0 protocol test review; no tests run"
+  ],
+  "retention_evidence": "predecessor_retention_08.json",
+  "design_evidence": [
+    "registry_binding_design_review_01.json",
+    "owned_selector_producer_design_review_01.json"
+  ],
+  "registry_binding_implemented": true,
+  "registry_binding_optional_for_N_only": true,
+  "full_registry_inspection_boundaries": [
+    "constructor/reopen before journals",
+    "before first attempt",
+    "after retained claim before continuation"
+  ],
+  "stable_declaration_view_checked_during_owner_operations": true,
+  "registry_identity_bound_in_study": true,
+  "fake_N0_protocol_test_is_numerical_authentication": false,
+  "paired_source_correspondence_verified": false,
+  "default_bootstrap_stops_at_genesis": true,
+  "implementation_complete": false,
+  "development_checks_created": false,
+  "official_verdict": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "real_native_calls": 0,
+  "jobs": 0,
+  "final_process_check": "No Python/Gurobi processes observed after all terminal root tests",
+  "git_diff_check_exit_code": 0,
+  "git_status_entries": 117,
+  "remaining": [
+    "typed selector execution config and complete phase Manifest with pinned numeric/resource basis",
+    "private owned Rref/A producer with raw-before-audit and audit-derived locks",
+    "hour0 retained paired attempt, registry/current source join and common Rref/A paired commit",
+    "hour1+ owner attachment/head retention",
+    "complete192/all-family coverage, lawful reuse and full same-contract LB/UB",
+    "resource admission, successor seal, fresh official review and separate concrete native authorization"
+  ]
+}

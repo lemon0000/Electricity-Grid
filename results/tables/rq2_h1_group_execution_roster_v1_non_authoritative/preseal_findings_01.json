@@ -1,0 +1,21 @@
+{
+  "status": "PRE_SEAL_FINDINGS_OPEN",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "reviewed_hashes": {
+    "experiments/h1_group_execution_roster_development_v1.py": "8efcca3c02863df2781c6ae61e93629072f981fb49e9d8095e6b4720a363a7e4",
+    "tests/test_h1_group_execution_roster_development_v1.py": "426c49b2be2cc1896c72c37309d981e0687466be3c03c3cec706a374e9dbb290",
+    "docs/model_spec/rq2_h1_group_execution_roster_development_v1.md": "dcf773edfa19f873d18988052a1cb054973708ce10f8bc9118b982fbe744a1dc"
+  },
+  "findings": [
+    "F1 owner operation nonce missing from guard",
+    "F2 cross-arm release-head uniqueness missing",
+    "F3 zero-direct branch must explicitly require unresolved B6 owner and proof-only other siblings",
+    "F4 spec canonical ordinal and failure-poison wording differ"
+  ],
+  "test_gaps": [
+    "claim-only/local-only terminal not attachable",
+    "wrong arm/slot/root references rejected"
+  ],
+  "official_verdict": false
+}

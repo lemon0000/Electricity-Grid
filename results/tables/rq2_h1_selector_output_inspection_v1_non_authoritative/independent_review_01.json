@@ -1,0 +1,37 @@
+{
+  "status": "PRE_SEAL_EVIDENCE_GAPS_OPEN",
+  "reading_stopped": true,
+  "reviewer": "/root/selector_owner_design_review",
+  "reviewed_hashes": {
+    "experiments/h1_selector_worker_output_inspection_development_v1.py": "6b7aba0db9c8c329e77e1226a7f5afe0b14fb2cf88632122aa0d81d0170ad491",
+    "tests/test_h1_selector_worker_output_inspection_development_v1.py": "bb26c82c9b02a1fcf8de9a546b8ce9d016af0f9e5cfe3e02d770c3cc782f8c61",
+    "docs/model_spec/rq2_h1_selector_worker_output_inspection_development_v1.md": "b887fd36093c5e0869d75e276ecae5a301177603a3909dfff49fb91e0dc3cc36"
+  },
+  "production_must_fix_found": false,
+  "findings": {
+    "E1": "Expand field-level transport/timing cross-pin mutations with recomputed hashes.",
+    "E2": "Add late same-byte science/timing archive replacement during second source rebuild."
+  },
+  "independent_test": {
+    "command": [
+      "D:/Miniconda3/envs/compute/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_h1_selector_worker_output_inspection_development_v1.py",
+      "-k",
+      "same_byte_archive or source_callback_drift"
+    ],
+    "passed": 4,
+    "deselected": 7,
+    "pytest_seconds": 171.14,
+    "exit_code": 0,
+    "files_unchanged": true
+  },
+  "native_calls": 0,
+  "research_jobs": 0,
+  "official_verdict": false
+}

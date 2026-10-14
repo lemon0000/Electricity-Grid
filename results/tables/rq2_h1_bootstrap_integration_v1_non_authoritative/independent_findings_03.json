@@ -1,0 +1,19 @@
+{
+  "status": "PRE_SEAL_FINDINGS_OPEN",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "read_only": true,
+  "stopped_reading": true,
+  "code_sha256": "261c25ea9fb86e32ecb21cc2334654098711edd7609426525dd372bda48a8359",
+  "test_sha256": "c8454fa717eed96a81b216b87f85423c8509b2144f7a43232f93baadd1c63627",
+  "spec_sha256": "f6ac4d1e9acc0897b6c228b1e647121c2059070caddc08742c0f678f33bcb857",
+  "test_result": "6 passed, 52 deselected in 145.24s",
+  "exit_code": 0,
+  "findings": {
+    "F1": "Subclass step override does not guard unbound base step/job calls on the retained live controller. Patched probe does not prove production authority gate.",
+    "F2": "Ready write-before failure leaves controller artifacts while replay reports profile_verified and skips controller namespace audit."
+  },
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

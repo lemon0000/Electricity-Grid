@@ -1,0 +1,1174 @@
+{
+  "scope": "read-only input-footprint diagnostic; no fast validator implemented",
+  "formal_result": false,
+  "live_owner_credential": false,
+  "fast_full_equivalence_proved": false,
+  "transaction_boundary_change": false,
+  "real_native_calls": 0,
+  "exact_read_path_coverage": {
+    "training": true,
+    "holdout": true
+  },
+  "unenumerated_reads": {
+    "training": [],
+    "holdout": []
+  },
+  "captured_read_paths": {
+    "training": [
+      "d:\\cuhksz\\research project\\electricity-grid\\configs\\rts_gmlc_public_power_system_blocks_v4.yaml",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_hourly_cfe_deficit_250mw_v2\\hourly_cfe_deficit.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_hourly_cfe_deficit_250mw_v2\\sha256sums.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_hourly_cfe_deficit_250mw_v2\\summary.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\holdout_marginal.csv.gz",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\n1_outage_events.csv.gz",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\power_system_blocks.csv.gz",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\sha256sums.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\summary.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\training_marginal.csv.gz",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\readme.md",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\branch.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\bus.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\dc_branch.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\gen.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\readme.md",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\reserves.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\simulation_objects.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\storage.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\timeseries_pointers.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\csp\\day_ahead_natural_inflow.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\hydro\\day_ahead_hydro.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\hydro\\day_ahead_hydro_inflow.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\load\\day_ahead_regional_load.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\pv\\day_ahead_pv.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\readme.md",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_flex_down.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_flex_up.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_reg_down.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_reg_up.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_spin_up_r1.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_spin_up_r2.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_spin_up_r3.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\rtpv\\day_ahead_rtpv.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\wind\\day_ahead_wind.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\sha256sums",
+      "d:\\cuhksz\\research project\\electricity-grid\\docs\\model_spec\\rq2_h1_outage_origin_repair_proposal_v1.md",
+      "d:\\cuhksz\\research project\\electricity-grid\\experiments\\audit_h1_outage_boundary_development_v1.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\experiments\\audit_h1_outage_origin_replay_development_v1.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\experiments\\build_h1_outage_split_archive_development_v1.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\experiments\\build_rts_gmlc_public_power_system_blocks.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\experiments\\h1_outage_registry_development_v1.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\experiments\\h1_outage_source_development_v1.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_origin_replay_v1_non_authoritative\\repair_cap_proposal.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\scientific_development_authority.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\split_archive\\manifest.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\split_archive\\training.json.gz",
+      "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_source_v1_non_authoritative\\boundary_coverage.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_resource_readiness_v1_non_authoritative\\resource_gap_audit_v2_final.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\src\\grid\\rts_gmlc.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuation_audit.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\event_disclosure.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\source_window.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\src\\scenarios\\rts_gmlc_n1_chronology.py"
+    ],
+    "holdout": [
+      "d:\\cuhksz\\research project\\electricity-grid\\configs\\rts_gmlc_public_power_system_blocks_v4.yaml",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_hourly_cfe_deficit_250mw_v2\\hourly_cfe_deficit.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_hourly_cfe_deficit_250mw_v2\\sha256sums.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_hourly_cfe_deficit_250mw_v2\\summary.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\holdout_marginal.csv.gz",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\n1_outage_events.csv.gz",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\power_system_blocks.csv.gz",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\sha256sums.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\summary.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\training_marginal.csv.gz",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\readme.md",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\branch.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\bus.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\dc_branch.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\gen.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\readme.md",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\reserves.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\simulation_objects.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\storage.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\timeseries_pointers.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\csp\\day_ahead_natural_inflow.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\hydro\\day_ahead_hydro.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\hydro\\day_ahead_hydro_inflow.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\load\\day_ahead_regional_load.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\pv\\day_ahead_pv.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\readme.md",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_flex_down.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_flex_up.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_reg_down.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_reg_up.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_spin_up_r1.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_spin_up_r2.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_spin_up_r3.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\rtpv\\day_ahead_rtpv.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\wind\\day_ahead_wind.csv",
+      "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\sha256sums",
+      "d:\\cuhksz\\research project\\electricity-grid\\docs\\model_spec\\rq2_h1_outage_origin_repair_proposal_v1.md",
+      "d:\\cuhksz\\research project\\electricity-grid\\experiments\\audit_h1_outage_boundary_development_v1.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\experiments\\audit_h1_outage_origin_replay_development_v1.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\experiments\\build_h1_outage_split_archive_development_v1.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\experiments\\build_rts_gmlc_public_power_system_blocks.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\experiments\\h1_outage_registry_development_v1.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\experiments\\h1_outage_source_development_v1.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_origin_replay_v1_non_authoritative\\repair_cap_proposal.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\scientific_development_authority.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\split_archive\\holdout.json.gz",
+      "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\split_archive\\manifest.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_source_v1_non_authoritative\\boundary_coverage.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_resource_readiness_v1_non_authoritative\\resource_gap_audit_v2_final.json",
+      "d:\\cuhksz\\research project\\electricity-grid\\src\\grid\\rts_gmlc.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuation_audit.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\event_disclosure.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\source_window.py",
+      "d:\\cuhksz\\research project\\electricity-grid\\src\\scenarios\\rts_gmlc_n1_chronology.py"
+    ]
+  },
+  "file_observations": {
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\scientific_development_authority.json": {
+      "sha256": "45710f18fcf98113d53c50cd74e0dfc311ad3e03cfb8ab8f75b01dc2720de0a8",
+      "identity": [
+        16204160864180129680,
+        3377699720629724,
+        888,
+        1791451875755123300,
+        1791451875754123000
+      ],
+      "bytes": 888
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\docs\\model_spec\\rq2_h1_outage_origin_repair_proposal_v1.md": {
+      "sha256": "d561919a84126e6658d59c861f17353e2e0dde5304f043e50bc8bb4cad12f707",
+      "identity": [
+        16204160864180129680,
+        4785074604147919,
+        7405,
+        1791449601438165100,
+        1791448694365510900
+      ],
+      "bytes": 7405
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_origin_replay_v1_non_authoritative\\repair_cap_proposal.json": {
+      "sha256": "6435c85b6cc99d243077bd014b1f52cc90427270a4c50cb26a67fb7e34edf031",
+      "identity": [
+        16204160864180129680,
+        5910974510996189,
+        23475,
+        1791449397429816300,
+        1791449397425166600
+      ],
+      "bytes": 23475
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\gen.csv": {
+      "sha256": "988466f29132b73739de60c9204dd4a2a9ceb0adf572e5966c086611272f4068",
+      "identity": [
+        16204160864180129680,
+        2251799814226652,
+        32451,
+        1787660248037717600,
+        1783938720828853300
+      ],
+      "bytes": 32451
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\configs\\rts_gmlc_public_power_system_blocks_v4.yaml": {
+      "sha256": "cefec120fb77990a47fe7e89a77e4df8be00bde5bf7e4cd4c5ca047d52934688",
+      "identity": [
+        16204160864180129680,
+        1688849860872118,
+        1592,
+        1787660247700775700,
+        1787660247700775700
+      ],
+      "bytes": 1592
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\sha256sums.json": {
+      "sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+      "identity": [
+        16204160864180129680,
+        1688849860872197,
+        481,
+        1787660248017814900,
+        1787660248017814900
+      ],
+      "bytes": 481
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\holdout_marginal.csv.gz": {
+      "sha256": "127f0ae8ee17986fa0e4b4f8c9833153a65846b8eff068a2c1cfed28ad0c7984",
+      "identity": [
+        16204160864180129680,
+        1688849860872198,
+        1369,
+        1787660248019370400,
+        1787660248019370400
+      ],
+      "bytes": 1369
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\n1_outage_events.csv.gz": {
+      "sha256": "6b18f27a090e1e0c71f8878dd77007957e7b898e8a5f99543a6e26fb0856092d",
+      "identity": [
+        16204160864180129680,
+        1688849860872199,
+        5570,
+        1787660248020379400,
+        1787660248019370400
+      ],
+      "bytes": 5570
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\power_system_blocks.csv.gz": {
+      "sha256": "b8b76fcfaa4dfbf63ff8c92092f357d43a7f21ffb51e76552593bb63f6a34ff1",
+      "identity": [
+        16204160864180129680,
+        1688849860872200,
+        683834,
+        1787660248022382600,
+        1787660248020379400
+      ],
+      "bytes": 683834
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\summary.json": {
+      "sha256": "f74d3a15520562d319cff49cf19fdca87ac04ae5687a639548f1a6dd7c36ce2a",
+      "identity": [
+        16204160864180129680,
+        1688849860872201,
+        1611,
+        1787660248023377300,
+        1787660248023377300
+      ],
+      "bytes": 1611
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\training_marginal.csv.gz": {
+      "sha256": "e34434955f5d6d3dde21f684dc95799fe31a799791f9a3a8ce8525ebfe528546",
+      "identity": [
+        16204160864180129680,
+        1970324837582858,
+        1399,
+        1787660248023377300,
+        1787660248023377300
+      ],
+      "bytes": 1399
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\sha256sums": {
+      "sha256": "95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914",
+      "identity": [
+        16204160864180129680,
+        2251799814226680,
+        2947,
+        1787660248068348400,
+        1783938731573048300
+      ],
+      "bytes": 2947
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\readme.md": {
+      "sha256": "9643002ac6b0d0eb85351c8477a3155ec082fd0583a17fb20b9756bc17ecba63",
+      "identity": [
+        16204160864180129680,
+        2251799814226645,
+        4778,
+        1787660248032510900,
+        1783938718848996700
+      ],
+      "bytes": 4778
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\readme.md": {
+      "sha256": "f0d8963335862faf6608144bf81aa8027241d669dd52aba0960501f374ef9ae3",
+      "identity": [
+        16204160864180129680,
+        2251799814226648,
+        16598,
+        1787660248033509900,
+        1783938719210339900
+      ],
+      "bytes": 16598
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\branch.csv": {
+      "sha256": "e92d16d13b1c5d2899f7871c0c99c3eb94605528beef157bf9e1ccbcffe5ef4e",
+      "identity": [
+        16204160864180129680,
+        2251799814226649,
+        7142,
+        1787660248034512000,
+        1783938719655178000
+      ],
+      "bytes": 7142
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\bus.csv": {
+      "sha256": "cec3f776222812d43eaeaf7ac85b577719dc565f354a04e120c12a647ddb710e",
+      "identity": [
+        16204160864180129680,
+        2251799814226650,
+        7003,
+        1787660248035629900,
+        1783938720077131800
+      ],
+      "bytes": 7003
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\dc_branch.csv": {
+      "sha256": "2b7d81cd1245294e15f0a202882a1375be34723e89c448009d3fc957ce457be8",
+      "identity": [
+        16204160864180129680,
+        2251799814226651,
+        1355,
+        1787660248036719800,
+        1783938720479864000
+      ],
+      "bytes": 1355
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\reserves.csv": {
+      "sha256": "3c0d388631b93fe37bc617dc3f9512950927ae1b0a0e878482e90137106d0a28",
+      "identity": [
+        16204160864180129680,
+        2251799814226653,
+        803,
+        1787660248038720000,
+        1783938721195710800
+      ],
+      "bytes": 803
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\simulation_objects.csv": {
+      "sha256": "596b4607da6eb7faf99e2076b20acff280e8f5b70afdcdc52ed8920f10d54452",
+      "identity": [
+        16204160864180129680,
+        2251799814226654,
+        662,
+        1787660248039725800,
+        1783938721634006200
+      ],
+      "bytes": 662
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\storage.csv": {
+      "sha256": "cc55c4b02f7595ab77399075c721e31da748f29482c7d78319c4f1530bf4b82c",
+      "identity": [
+        16204160864180129680,
+        2251799814226655,
+        1313,
+        1787660248040719600,
+        1783938721974353900
+      ],
+      "bytes": 1313
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\timeseries_pointers.csv": {
+      "sha256": "0854ba0c63d4973e8818c91c2328869e379bb0140520d4586f4ffddf387aca0d",
+      "identity": [
+        16204160864180129680,
+        2251799814226656,
+        27251,
+        1787660248041721000,
+        1783938722519354300
+      ],
+      "bytes": 27251
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\readme.md": {
+      "sha256": "9a8abae13396b0c1d3bf037152f5c5ab1a08aa0ef45367199ea592effcc26021",
+      "identity": [
+        16204160864180129680,
+        2533274790937314,
+        3275,
+        1787660248053309100,
+        1783938722952473000
+      ],
+      "bytes": 3275
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\csp\\day_ahead_natural_inflow.csv": {
+      "sha256": "0c54ae19d17dfb63edaa81df2cf006c0d1b1df759a4ab6aca692bfeffa0490ac",
+      "identity": [
+        16204160864180129680,
+        2251799814226660,
+        140855,
+        1787660248042719300,
+        1783938723323994800
+      ],
+      "bytes": 140855
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\hydro\\day_ahead_hydro.csv": {
+      "sha256": "4030660920df850138472c5561322c71e5037813c8e3232d3f9bde512a40606d",
+      "identity": [
+        16204160864180129680,
+        2251799814226662,
+        934239,
+        1787660248045231100,
+        1783938724035484700
+      ],
+      "bytes": 934239
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\hydro\\day_ahead_hydro_inflow.csv": {
+      "sha256": "4616a47eaf08be477223b6c75d4172d070d78b6b405e4270f664b0430414927a",
+      "identity": [
+        16204160864180129680,
+        2533274790937319,
+        934539,
+        1787660248047308100,
+        1783938724947788400
+      ],
+      "bytes": 934539
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\load\\day_ahead_regional_load.csv": {
+      "sha256": "7a9470d32d49068a91334cb36db54cceb2feb5cb1f702b0fa0847af8bac6cf21",
+      "identity": [
+        16204160864180129680,
+        2251799814226665,
+        423702,
+        1787660248049308500,
+        1783938725958419300
+      ],
+      "bytes": 423702
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\pv\\day_ahead_pv.csv": {
+      "sha256": "bfede6e558df5ea0f244b6326940a4ee0b95138643aa8a062897c67134c9c185",
+      "identity": [
+        16204160864180129680,
+        2251799814226667,
+        842651,
+        1787660248053309100,
+        1783938726569357300
+      ],
+      "bytes": 842651
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\rtpv\\day_ahead_rtpv.csv": {
+      "sha256": "13a6933c2e0a513e1a453143876dadef6977e6add7701a21f56fe6a753afce42",
+      "identity": [
+        16204160864180129680,
+        2251799814226669,
+        935828,
+        1787660248057825700,
+        1783938727483398100
+      ],
+      "bytes": 935828
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_flex_down.csv": {
+      "sha256": "5c6c2897325a3234865dd62e2321f5f209577c1c30819526b6de516a28e2f967",
+      "identity": [
+        16204160864180129680,
+        2251799814226671,
+        29893,
+        1787660248058829000,
+        1783938728296600600
+      ],
+      "bytes": 29893
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_flex_up.csv": {
+      "sha256": "13c03fcf529414d51d744a6c65f151a0ca67765134164114bb080887cae1aa68",
+      "identity": [
+        16204160864180129680,
+        2251799814226672,
+        30143,
+        1787660248059827100,
+        1783938728707970400
+      ],
+      "bytes": 30143
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_reg_down.csv": {
+      "sha256": "71ba9fbc26ae135342067153394ac62f09581833ae12f228da5319b2da3c8903",
+      "identity": [
+        16204160864180129680,
+        2251799814226673,
+        30140,
+        1787660248060824000,
+        1783938729060021500
+      ],
+      "bytes": 30140
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_reg_up.csv": {
+      "sha256": "3e620a031efe7bb68f5084eaeec29f2d2e112240418e06b716a36670830e229e",
+      "identity": [
+        16204160864180129680,
+        2251799814226674,
+        30121,
+        1787660248061825600,
+        1783938729410801600
+      ],
+      "bytes": 30121
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_spin_up_r1.csv": {
+      "sha256": "733f7dcb6da03c3c1e72f4dba35dea5630c39af9fee455c008060a629a3cb912",
+      "identity": [
+        16204160864180129680,
+        2251799814226675,
+        171073,
+        1787660248062825200,
+        1783938729854196700
+      ],
+      "bytes": 171073
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_spin_up_r2.csv": {
+      "sha256": "89d29e743a618ef3c485d11858878ab57d027768a6b183638d1337b912354c4c",
+      "identity": [
+        16204160864180129680,
+        2251799814226676,
+        171028,
+        1787660248063825200,
+        1783938730311718700
+      ],
+      "bytes": 171028
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_spin_up_r3.csv": {
+      "sha256": "264db0c5709794478fff4cfcda83ee696bb001d1245898066033f8a6be08aae5",
+      "identity": [
+        16204160864180129680,
+        2251799814226677,
+        171110,
+        1787660248065341500,
+        1783938730747725500
+      ],
+      "bytes": 171110
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\wind\\day_ahead_wind.csv": {
+      "sha256": "6a1a8dc7d10a518523b3b319902ecc1ca1c400223832b26c6edb3a6e69d01dbc",
+      "identity": [
+        16204160864180129680,
+        2251799814226679,
+        279519,
+        1787660248067345100,
+        1783938731318275300
+      ],
+      "bytes": 279519
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_hourly_cfe_deficit_250mw_v2\\sha256sums.json": {
+      "sha256": "cb6b941193db3a09cddb005c14f210bab754e5f9d12ba9c982f778b88409cc0a",
+      "identity": [
+        16204160864180129680,
+        1688849860872172,
+        179,
+        1787660247994008400,
+        1787660247994008400
+      ],
+      "bytes": 179
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_hourly_cfe_deficit_250mw_v2\\hourly_cfe_deficit.csv": {
+      "sha256": "f1c483fdf20ccc1ddc8e484d719b51f5b67a497bd99fd9bd7347dc57518586a5",
+      "identity": [
+        16204160864180129680,
+        1688849860872173,
+        1246201,
+        1787660247998044200,
+        1787660247994529400
+      ],
+      "bytes": 1246201
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_hourly_cfe_deficit_250mw_v2\\summary.json": {
+      "sha256": "7abec73b8665c149539d3d652fbd9e0e43187a2e9ac822ca3486870e9cf65b1d",
+      "identity": [
+        16204160864180129680,
+        1688849860872174,
+        1820,
+        1787660247999054100,
+        1787660247999054100
+      ],
+      "bytes": 1820
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\split_archive\\manifest.json": {
+      "sha256": "2bd9a14f9e54f80e860975e26fc2b44fa527f1725cfb8ce7bec592ff5fdc5bd9",
+      "identity": [
+        16204160864180129680,
+        2814749767208422,
+        1593,
+        1791451924897646100,
+        1791451924896413600
+      ],
+      "bytes": 1593
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\split_archive\\training.json.gz": {
+      "sha256": "0cad33f05f9de20206ff74ca3ae743fb3aa1161fe362341d8ee8877e043d1604",
+      "identity": [
+        16204160864180129680,
+        2814749767208419,
+        360897,
+        1791451924637683300,
+        1791451924636682100
+      ],
+      "bytes": 360897
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\split_archive\\holdout.json.gz": {
+      "sha256": "2e51800d441c23658ee6a2795f9d7aecd211fd1a3ea508afafda870bf14d00f9",
+      "identity": [
+        16204160864180129680,
+        2814749767208421,
+        354526,
+        1791451924832661000,
+        1791451924832661000
+      ],
+      "bytes": 354526
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_resource_readiness_v1_non_authoritative\\resource_gap_audit_v2_final.json": {
+      "sha256": "1a31bdd0d69b717525e1d281f4d53d21bf8f8cca929732b76847cfa332843ad1",
+      "identity": [
+        16204160864180129680,
+        5066549580900470,
+        742909,
+        1791012378675143400,
+        1791012378675143400
+      ],
+      "bytes": 742909
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_source_v1_non_authoritative\\boundary_coverage.json": {
+      "sha256": "a1d5bcafde41ed9bf9a3d3c4d46ebaf6bd0a57641837d3937e9dda18e31a3dc8",
+      "identity": [
+        16204160864180129680,
+        1970324837204471,
+        9243,
+        1791442290978838800,
+        1791442290974833900
+      ],
+      "bytes": 9243
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\h1_outage_registry_development_v1.py": {
+      "sha256": "f722611539757fd79414d5c24577a610061e62f04ed38a16d04a2e96e34ac9e9",
+      "identity": [
+        16204160864180129680,
+        3377699720629738,
+        18315,
+        1791452466913291600,
+        1791452094818499400
+      ],
+      "bytes": 18315
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\h1_outage_source_development_v1.py": {
+      "sha256": "6c4328aab1b95977d1152e75a9d46963a8e6f1f81156ea94a03ef96304f867a6",
+      "identity": [
+        16204160864180129680,
+        34339947158808831,
+        6704,
+        1791436194931837200,
+        1791436194931837200
+      ],
+      "bytes": 6704
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\source_window.py": {
+      "sha256": "9d07ca743dd3dc13e168fa7ea690216f0e9d9237124c58782c2fc44464dc8de2",
+      "identity": [
+        16204160864180129680,
+        5066549580868936,
+        4728,
+        1789887666117939000,
+        1789887666116492500
+      ],
+      "bytes": 4728
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuation_audit.py": {
+      "sha256": "c7f2c4678cf20a7e61c159e661774e13607f526bff6d487a97cbcd1b100f5a78",
+      "identity": [
+        16204160864180129680,
+        2533274790498801,
+        37383,
+        1789186164735264400,
+        1789185736505246100
+      ],
+      "bytes": 37383
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\event_disclosure.py": {
+      "sha256": "861da4ece3ef25a412ae5dbaefa56847333b0dcfd17bbb776c9c74669b49ea4b",
+      "identity": [
+        16204160864180129680,
+        3096224743895060,
+        7932,
+        1789557409934402200,
+        1789556972453147100
+      ],
+      "bytes": 7932
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\audit_h1_outage_origin_replay_development_v1.py": {
+      "sha256": "1e237871ebbce7255255b69bc861c96f3684020d95c6984515433e65a88d0f4b",
+      "identity": [
+        16204160864180129680,
+        4785074604147896,
+        7773,
+        1791449581789736400,
+        1791448087437988200
+      ],
+      "bytes": 7773
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\src\\scenarios\\rts_gmlc_n1_chronology.py": {
+      "sha256": "ebf412fd69864604c276972b6bcd0ae63559194e1e902e5f92a3357834784d64",
+      "identity": [
+        16204160864180129680,
+        1688849860872665,
+        5735,
+        1787660248285917900,
+        1787660248284766500
+      ],
+      "bytes": 5735
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\build_rts_gmlc_public_power_system_blocks.py": {
+      "sha256": "cc24a77049af50d056364b2ad6a092442af3cd4efcdf32033ab228faef989644",
+      "identity": [
+        16204160864180129680,
+        1688849860872242,
+        19995,
+        1787660248094593200,
+        1787660248094593200
+      ],
+      "bytes": 19995
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\src\\grid\\rts_gmlc.py": {
+      "sha256": "4180ab5ce86eb34a9de9e058ff9c56275ace3a6ffab06dbb464d93ef23382448",
+      "identity": [
+        16204160864180129680,
+        1970324837516026,
+        36900,
+        1784267975570585700,
+        1783938854326409900
+      ],
+      "bytes": 36900
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\build_h1_outage_split_archive_development_v1.py": {
+      "sha256": "38536afb2e9d0d98324f746a1f5b5e2d3995c5debca7bfa274740eda012eb8be",
+      "identity": [
+        16204160864180129680,
+        3096224743919071,
+        3171,
+        1791451921330431100,
+        1791451921329425900
+      ],
+      "bytes": 3171
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\audit_h1_outage_boundary_development_v1.py": {
+      "sha256": "fafd8ade2268472b33e6a60fa21cbc3d3091a0f6e0b6f8e50e159613acec48e5",
+      "identity": [
+        16204160864180129680,
+        2814749767336433,
+        3137,
+        1791442240028936500,
+        1791442238971656200
+      ],
+      "bytes": 3137
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\alibaba_dimensionless_workload_blocks_v3\\holdout_marginal.csv.gz": {
+      "sha256": "0866c8677eb7f8f327ae61d30b63048e4be18e54a9b9acd2c20d9a26380eb98c",
+      "identity": [
+        16204160864180129680,
+        1688849860872134,
+        184,
+        1787660247711932500,
+        1787660247711932500
+      ],
+      "bytes": 184
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\configs\\rq2_joint_deliverability_continuation_audit_v1.draft.yaml": {
+      "sha256": "0cca33dbfbd934881be3c4e375c76eb668c2ec41ff9bbc7392c2eb3947de18a5",
+      "identity": [
+        16204160864180129680,
+        6192449487737317,
+        5285,
+        1789185366936725300,
+        1789185366936725300
+      ],
+      "bytes": 5285
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\alibaba_dimensionless_workload_blocks_v3\\summary.json": {
+      "sha256": "d4207d34757dd9b02a1f52f0cf8e44b5bb22175721ffd77ca8aa9245da7c874b",
+      "identity": [
+        16204160864180129680,
+        1688849860872135,
+        1223,
+        1787660247711932500,
+        1787660247711932500
+      ],
+      "bytes": 1223
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\alibaba_dimensionless_workload_blocks_v3\\workload_blocks.csv.gz": {
+      "sha256": "99da69e6a98ec45584339e57a37b3fbbf90d3d2d8f1e2c915229a1e4890faef3",
+      "identity": [
+        16204160864180129680,
+        1688849860872137,
+        45729,
+        1787660247713927200,
+        1787660247712932200
+      ],
+      "bytes": 45729
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\configs\\alibaba_dimensionless_workload_blocks_v3.yaml": {
+      "sha256": "571b10ff6874ae2c787420b3328e4f256e1d284864851d5099b7ecf9b5d43c2c",
+      "identity": [
+        16204160864180129680,
+        1688849860872065,
+        1196,
+        1787660247666892500,
+        1787660247666355900
+      ],
+      "bytes": 1196
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\alibaba_dimensionless_workload_blocks_v3\\sha256sums.json": {
+      "sha256": "62f2ec5eefd0c651d8b970a16fce4fb6336ccb75ab09e3d2c67386cc26edb524",
+      "identity": [
+        16204160864180129680,
+        1688849860872133,
+        380,
+        1787660247710926200,
+        1787660247710926200
+      ],
+      "bytes": 380
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\alibaba_dimensionless_workload_blocks_v3\\training_marginal.csv.gz": {
+      "sha256": "cd813c1679d419b6c9b8610f241db10830aa0f3eea5d496926e8f6f1216b8eb2",
+      "identity": [
+        16204160864180129680,
+        1688849860872136,
+        186,
+        1787660247712932200,
+        1787660247712932200
+      ],
+      "bytes": 186
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\build_alibaba_dimensionless_workload_blocks.py": {
+      "sha256": "6f2e0c91733cb30846c85b03b3cd89c07f27c042b29ad3b002b76d64f9264d4b",
+      "identity": [
+        16204160864180129680,
+        1688849860872237,
+        13028,
+        1787660248092080300,
+        1787660248092080300
+      ],
+      "bytes": 13028
+    },
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\inspect_registry_read_footprint.py": {
+      "sha256": "b9db6797ff4f8dcd2bd01121d79c9a782409a8f95818d0d26af7bef56f07fac2",
+      "identity": [
+        16204160864180129680,
+        2251799813996175,
+        6835,
+        1791906579333355000,
+        1791906454841421500
+      ],
+      "bytes": 6835
+    }
+  },
+  "file_roles": {
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\scientific_development_authority.json": [
+      "registry authority"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\docs\\model_spec\\rq2_h1_outage_origin_repair_proposal_v1.md": [
+      "registry proposal"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_origin_replay_v1_non_authoritative\\repair_cap_proposal.json": [
+      "registry cap table"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\gen.csv": [
+      "grid member",
+      "normal/current source enumeration",
+      "registry source generators"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\configs\\rts_gmlc_public_power_system_blocks_v4.yaml": [
+      "normal/current source enumeration",
+      "registry config"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\sha256sums.json": [
+      "normal/current source enumeration",
+      "power manifest"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\holdout_marginal.csv.gz": [
+      "normal/current source enumeration",
+      "power member"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\n1_outage_events.csv.gz": [
+      "normal/current source enumeration",
+      "power member"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\power_system_blocks.csv.gz": [
+      "normal/current source enumeration",
+      "power member",
+      "registry source member"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\summary.json": [
+      "normal/current source enumeration",
+      "power member"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4\\training_marginal.csv.gz": [
+      "normal/current source enumeration",
+      "power member"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\sha256sums": [
+      "grid manifest",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\readme.md": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\readme.md": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\branch.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\bus.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\dc_branch.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\reserves.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\simulation_objects.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\storage.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\sourcedata\\timeseries_pointers.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\readme.md": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\csp\\day_ahead_natural_inflow.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\hydro\\day_ahead_hydro.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\hydro\\day_ahead_hydro_inflow.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\load\\day_ahead_regional_load.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\pv\\day_ahead_pv.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\rtpv\\day_ahead_rtpv.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_flex_down.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_flex_up.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_reg_down.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_reg_up.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_spin_up_r1.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_spin_up_r2.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\reserves\\day_ahead_regional_spin_up_r3.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\rts_data\\timeseries_data_files\\wind\\day_ahead_wind.csv": [
+      "grid member",
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_hourly_cfe_deficit_250mw_v2\\sha256sums.json": [
+      "CFE manifest"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_hourly_cfe_deficit_250mw_v2\\hourly_cfe_deficit.csv": [
+      "CFE member"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_hourly_cfe_deficit_250mw_v2\\summary.json": [
+      "CFE member"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\split_archive\\manifest.json": [
+      "registry split manifest"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\split_archive\\training.json.gz": [
+      "training split archive"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\split_archive\\holdout.json.gz": [
+      "holdout split archive"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_resource_readiness_v1_non_authoritative\\resource_gap_audit_v2_final.json": [
+      "registry catalog"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_outage_source_v1_non_authoritative\\boundary_coverage.json": [
+      "registry gaps"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\h1_outage_registry_development_v1.py": [
+      "registry implementation"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\h1_outage_source_development_v1.py": [
+      "registry implementation"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\source_window.py": [
+      "registry implementation"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuation_audit.py": [
+      "registry implementation"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\event_disclosure.py": [
+      "registry implementation"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\audit_h1_outage_origin_replay_development_v1.py": [
+      "registry implementation"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\src\\scenarios\\rts_gmlc_n1_chronology.py": [
+      "normal/current source enumeration",
+      "registry implementation"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\build_rts_gmlc_public_power_system_blocks.py": [
+      "normal/current source enumeration",
+      "registry implementation"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\src\\grid\\rts_gmlc.py": [
+      "registry implementation"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\build_h1_outage_split_archive_development_v1.py": [
+      "registry implementation"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\audit_h1_outage_boundary_development_v1.py": [
+      "registry implementation"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\alibaba_dimensionless_workload_blocks_v3\\holdout_marginal.csv.gz": [
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\configs\\rq2_joint_deliverability_continuation_audit_v1.draft.yaml": [
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\alibaba_dimensionless_workload_blocks_v3\\summary.json": [
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\alibaba_dimensionless_workload_blocks_v3\\workload_blocks.csv.gz": [
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\configs\\alibaba_dimensionless_workload_blocks_v3.yaml": [
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\alibaba_dimensionless_workload_blocks_v3\\sha256sums.json": [
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\data\\processed\\model_inputs\\alibaba_dimensionless_workload_blocks_v3\\training_marginal.csv.gz": [
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\experiments\\build_alibaba_dimensionless_workload_blocks.py": [
+      "normal/current source enumeration"
+    ],
+    "d:\\cuhksz\\research project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\inspect_registry_read_footprint.py": [
+      "diagnostic script"
+    ]
+  },
+  "directory_names": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\RTS_Data": [
+      "SourceData",
+      "timeseries_data_files"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\RTS_Data\\timeseries_data_files\\Reserves": [
+      "DAY_AHEAD_regional_Flex_Down.csv",
+      "DAY_AHEAD_regional_Flex_Up.csv",
+      "DAY_AHEAD_regional_Reg_Down.csv",
+      "DAY_AHEAD_regional_Reg_Up.csv",
+      "DAY_AHEAD_regional_Spin_Up_R1.csv",
+      "DAY_AHEAD_regional_Spin_Up_R2.csv",
+      "DAY_AHEAD_regional_Spin_Up_R3.csv"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\RTS_Data\\timeseries_data_files\\RTPV": [
+      "DAY_AHEAD_rtpv.csv"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\RTS_Data\\timeseries_data_files\\Load": [
+      "DAY_AHEAD_regional_Load.csv"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\processed\\model_inputs\\alibaba_dimensionless_workload_blocks_v3": [
+      "SHA256SUMS.json",
+      "holdout_marginal.csv.gz",
+      "summary.json",
+      "training_marginal.csv.gz",
+      "workload_blocks.csv.gz"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\RTS_Data\\timeseries_data_files": [
+      "CSP",
+      "Hydro",
+      "Load",
+      "PV",
+      "README.md",
+      "RTPV",
+      "Reserves",
+      "WIND"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\RTS_Data\\timeseries_data_files\\CSP": [
+      "DAY_AHEAD_Natural_Inflow.csv"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\RTS_Data\\timeseries_data_files\\Hydro": [
+      "DAY_AHEAD_hydro.csv",
+      "DAY_AHEAD_hydro_inflow.csv"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_public_power_system_blocks_v4": [
+      "SHA256SUMS.json",
+      "holdout_marginal.csv.gz",
+      "n1_outage_events.csv.gz",
+      "power_system_blocks.csv.gz",
+      "summary.json",
+      "training_marginal.csv.gz"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\RTS_Data\\SourceData": [
+      "README.md",
+      "branch.csv",
+      "bus.csv",
+      "dc_branch.csv",
+      "gen.csv",
+      "reserves.csv",
+      "simulation_objects.csv",
+      "storage.csv",
+      "timeseries_pointers.csv"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\split_archive": [
+      "holdout.json.gz",
+      "manifest.json",
+      "training.json.gz"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream": [
+      "README.md",
+      "RTS_Data",
+      "SHA256SUMS"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\RTS_Data\\timeseries_data_files\\WIND": [
+      "DAY_AHEAD_wind.csv"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\raw\\rts_gmlc\\v0.2.3\\upstream\\RTS_Data\\timeseries_data_files\\PV": [
+      "DAY_AHEAD_pv.csv"
+    ],
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\data\\processed\\model_inputs\\rts_gmlc_hourly_cfe_deficit_250mw_v2": [
+      "SHA256SUMS.json",
+      "hourly_cfe_deficit.csv",
+      "summary.json"
+    ]
+  },
+  "input_bytes_and_identities_unchanged": true,
+  "namespace_unchanged": true,
+  "python_version": "3.12.12",
+  "yaml_version": "6.0.3",
+  "registry_loads": [
+    {
+      "split": "training",
+      "elapsed_seconds": 0.14458770000055665,
+      "identity": "70c593f5d03d86d5567e7a3dc4b5ff7a7c68af167b3598aac42a7f507f4cbbcf",
+      "source_seed_count": 3
+    },
+    {
+      "split": "holdout",
+      "elapsed_seconds": 0.13601050000033865,
+      "identity": "70c593f5d03d86d5567e7a3dc4b5ff7a7c68af167b3598aac42a7f507f4cbbcf",
+      "source_seed_count": 3
+    }
+  ],
+  "normal_source_coverage": "static enumeration only; normal loader not executed here",
+  "transient_ABA_covered": false,
+  "containment_policy_changed": false,
+  "elapsed_seconds": 0.43851010000071255
+}

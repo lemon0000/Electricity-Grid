@@ -1,0 +1,6 @@
+{
+  "stage": "read-only final evidence current-pin crosscheck",
+  "published_checks": false,
+  "reason": "independent_tests_23.json includes an extra global_journal test pin from before its mkdir fixture correction; tested code/nested/spec are unchanged, but aggregate current-pin assertion rejects the extra stale pin",
+  "action": "preserve old report; independent rerun of its six selected tests with final current pins"
+}

@@ -1,0 +1,30 @@
+{
+  "status": "PRE_SEAL_findings_not_official",
+  "reviewer": "/root/outage_preseal_review",
+  "findings": [
+    {
+      "id": "F1",
+      "issue": "Unknown ValueError was converted to business_input_unresolved",
+      "repair": "Strict four-message allowlist, explicit reason; unknown exceptions retain bare intent"
+    },
+    {
+      "id": "F2",
+      "issue": "No independent precommit predicted heads for ambiguous commit-return",
+      "repair": "Mandatory independently acknowledged AppendTicket and exact before/after recovery"
+    },
+    {
+      "id": "F3",
+      "issue": "Copy/pickle and public concurrent operations were not guarded",
+      "repair": "Reject copy/pickle and nonreentrant operation lock"
+    },
+    {
+      "id": "F4",
+      "issue": "Journal storage bounds polluted scientific request identity",
+      "repair": "Keep bounds in audit header only"
+    }
+  ],
+  "root_test_03": "1 failed, 4 passed, 18 deselected / 165.35s; failure was reopen fixture missing retention callback; preserved original log",
+  "status_after_changes": "awaiting_static_rereview_and_root_full_tests",
+  "real_native_calls": 0,
+  "jobs": 0
+}

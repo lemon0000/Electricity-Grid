@@ -1,0 +1,26 @@
+{
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_bootstrap_integration_development_v1.py",
+    "-k",
+    "post_claim_static_profile_and_owned_empty_controller"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 50.512,
+  "stdout": ".                                                                        [100%]\n1 passed, 55 deselected in 49.55s\n",
+  "stderr": "",
+  "files_sha256": {
+    "experiments/h1_bootstrap_integration_development_v1.py": "dc7b1ff4f9f364607049cde2cc914302efa204ebbcb6bffb99f1b1a45aa44028",
+    "tests/test_h1_bootstrap_integration_development_v1.py": "bbd5a3d753a7a932ab33939f384248c951b3313af69d73aea1f38d31aeaf23eb"
+  },
+  "pins_unchanged": true,
+  "jobs": 0,
+  "real_native_calls": 0,
+  "implementation_complete": false
+}

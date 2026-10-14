@@ -1,0 +1,46 @@
+{
+  "status": "PRE_SEAL_DESIGN_ONLY",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "files_sha256": {
+    "experiments/h1_phase_owner_development_v1.py": "4c932b12e544909a37690da7178089bf498896c0981403dfa19482b42a537ef6",
+    "experiments/h1_origin_selector_replay_development_v1.py": "20fde1bade990c82e1a70ed0ae7b6f223b3f3fbaaebe99455cc4f2d940e0bb78",
+    "experiments/h1_timed_job_controller_development_v1.py": "bcb91519ab46bd245c573c731aabc4ef2f1c4c74551c461a212587bd69a33c86",
+    "experiments/h1_timed_released_worker_development_v2.py": "fc653af213a05a572b4a44159574b54974c2587e82b1d1074eeba22b7ab7308b"
+  },
+  "interfaces": [
+    "phase owner _fresh/_request/prepare_next/complete_saved/_transition",
+    "selector stage_labels/input_identity/build_development_stage/encode_development_record/replay_development_records",
+    "timed Job request/launch/child/release_intent and normal_task_child process primitives"
+  ],
+  "required_sequence": [
+    "retain exact phase attempt (bootstrap seq6 for hour0) before paired source/native",
+    "hold one exact owner/holder/PID/thread/nonce and expected heads through completion",
+    "Rref Job release only after request/launch/child/release_intent persistence",
+    "each native raw record saved/readback before audit; next lock only audit recomputed_objective",
+    "controller independently replays Rref and derives g and each business candidate",
+    "second release for active A lanes bound to audited Rref terminal and exact same source/attempt",
+    "fresh source, saved-record replay and owner/head/nonce checks before paired outcome"
+  ],
+  "not_reusable_as_live_producer": [
+    "legacy reference_selector.select_reference_hour and actual_dispatch_selector.select_actual_dispatch audit immediately and advance using raw.objective",
+    "normal N scientific Job payload/schema",
+    "public saved-record owner API as caller-controlled live producer entry"
+  ],
+  "open": [
+    "private locked integration preserving closed owner bytes and denying detached caller records",
+    "concrete typed selector execution config and executable phase Manifest",
+    "independent producer archive/Job/host/time/memory capacity bound",
+    "paired global registration and hour1+ fresh attachment"
+  ],
+  "failure_rules": [
+    "released child with missing/untrusted terminal or partial raw: indeterminate and no re-solve",
+    "complete retained raw before owner commit: solver-free reconcile only",
+    "owner outcome before outer terminal: exact-after reconcile only"
+  ],
+  "formal_result": false,
+  "native_execution_authorized": false,
+  "official_verdict": false,
+  "tests": 0,
+  "jobs": 0,
+  "reviewer_stopped_reading": true
+}

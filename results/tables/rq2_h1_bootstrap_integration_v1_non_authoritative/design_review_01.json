@@ -1,0 +1,49 @@
+{
+  "status": "READ_ONLY_DESIGN_FINDINGS_IMPLEMENTATION_OPEN",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "files_sha256": {
+    "docs/model_spec/rq2_h1_bootstrap_integration_design_v1.md": "6ce8b0c386c9845dd4e1d7459ff8806bad26f84dc78064286b225ec9a9acf6eb",
+    "experiments/h1_phase_owner_development_v1.py": "4c932b12e544909a37690da7178089bf498896c0981403dfa19482b42a537ef6",
+    "experiments/h1_phase_obligation_controller_development_v1.py": "e047f3e5b08b397362f2961be89062924e0e4769d7de0795453047e921300934",
+    "experiments/h1_job_clock_bridge_development_v1.py": "23512dc30464f6828c4edcb75377220a2c4510b1d961e2af29a86302cabcc9ab",
+    "experiments/h1_timed_job_controller_development_v1.py": "bcb91519ab46bd245c573c731aabc4ef2f1c4c74551c461a212587bd69a33c86",
+    "experiments/h1_symbolic_normal_manifest_development_v1.py": "f268d361048331fbceccda44e6e6fff36fb59e5a9816404122bc65334b39af61"
+  },
+  "scope": "bootstrap0 integrated first; private global journal plus owner, then hour1+ mutual capability",
+  "ordering": {
+    "bootstrap": [
+      "attempt",
+      "global_claim",
+      "profile_validation",
+      "controller_construction",
+      "release_intent",
+      "owned_internal_source_and_N",
+      "global_terminal",
+      "owner_paired_consume"
+    ],
+    "hour1": [
+      "holder_prepared_ticket",
+      "global_claim",
+      "owner_DB_attempt",
+      "live_capability",
+      "owned_N",
+      "global_terminal",
+      "paired_commit"
+    ]
+  },
+  "key_findings": [
+    "Owner construction requires accepted N0; implement bootstrap before hour1 live attachment.",
+    "A fixed study declaration and externally retained head must bind the registry namespace; a directory lease alone is not global uniqueness.",
+    "Only unresolved training_ub is supported by the existing controller.",
+    "Release without terminal is execution/commit indeterminate and cannot retry.",
+    "N terminal without paired commit is pending_post_N; reuse existing N evidence only."
+  ],
+  "tests_run": false,
+  "jobs": 0,
+  "native_calls": 0,
+  "implementation_complete": false,
+  "official_verdict": null,
+  "resource_admission": false,
+  "formal_execution_ready": false,
+  "formal_result": false
+}

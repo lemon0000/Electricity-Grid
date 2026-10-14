@@ -1,0 +1,48 @@
+{
+  "accepted_root_integration_verified": false,
+  "note": "Synthetic accepted N reader fixture; fresh_accepted integration test deliberately deselected. These tests do not authenticate a real accepted root or execution.",
+  "real_native_calls": 0,
+  "root_transcription_of_terminal_results": true,
+  "schema": "non_authoritative_root_test_history_v1",
+  "synthetic_jobs": 0,
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_current_outage_information_development_v1.py",
+      "exit_code": 0,
+      "passed": 17,
+      "phase": "initial",
+      "seconds": 5.38
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_current_outage_information_development_v1.py tests/test_h1_outage_source_development_v1.py tests/test_h1_current_grid_information_development_v1.py -k 'not fresh_accepted'",
+      "deselected": 1,
+      "exit_code": 0,
+      "passed": 60,
+      "phase": "before_inventory_finding",
+      "seconds": 8.49
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_outage_origin_replay_development_v1.py",
+      "exit_code": 0,
+      "passed": 5,
+      "phase": "initial_provenance",
+      "seconds": 1.86
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_current_outage_information_development_v1.py tests/test_h1_outage_source_development_v1.py tests/test_h1_current_grid_information_development_v1.py tests/test_h1_outage_origin_replay_development_v1.py -k 'not fresh_accepted'",
+      "deselected": 1,
+      "exit_code": 0,
+      "passed": 67,
+      "phase": "after_inventory_fix",
+      "seconds": 10.63
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_current_outage_information_development_v1.py -k current_legal_outage_change",
+      "deselected": 24,
+      "exit_code": 0,
+      "passed": 1,
+      "phase": "final_test_only_refinement",
+      "seconds": 2.49
+    }
+  ]
+}

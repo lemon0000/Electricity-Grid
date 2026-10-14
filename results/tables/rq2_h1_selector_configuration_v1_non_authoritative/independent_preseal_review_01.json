@@ -1,0 +1,37 @@
+{
+  "status": "PRE_SEAL_SCOPED_FINDINGS_CLOSED",
+  "reviewer": "/root/selector_owner_design_review",
+  "official_verdict": false,
+  "scope": "selector declaration and bootstrap binding only",
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_selector_configuration_development_v1.py",
+    "tests/test_h1_bootstrap_selector_configuration_development_v1.py",
+    "-k",
+    "solver_contract_remains_strict or chain_job_declaration_uses_process_ceiling or loaded_uid_mismatch or mutation_stops"
+  ],
+  "exit_code": 0,
+  "pytest_result": "17 passed, 42 deselected in 64.95s",
+  "files_sha256": {
+    "experiments/h1_selector_configuration_development_v1.py": "deea4bb7bd3505f1c240237ae3d6058bc887a0961a4f0fde32ee1ab6798510e0",
+    "experiments/h1_bootstrap_integration_development_v1.py": "c0a16c7a2276267bc2a840f47222888214f769010308213f39a3450e3361e47e",
+    "tests/test_h1_selector_configuration_development_v1.py": "ead57f64d34b5ea9283da3eee5ea0bf730acad0cd05c68a52aba2ad555c9bb97",
+    "tests/test_h1_bootstrap_selector_configuration_development_v1.py": "c173e1eff62e520db6d6c36c4aa78146dfb18c0680a797ef7cb11cb9422d568d",
+    "docs/model_spec/rq2_h1_selector_configuration_development_v1.md": "f21f26e23afba0f01eb3b7643601c5694e106e30d83ecc2f9235033833bcbb96"
+  },
+  "unchanged": true,
+  "findings_closed": [
+    "F1 actual adapter prevalidation"
+  ],
+  "reviewer_stopped_reading": true,
+  "jobs": 0,
+  "real_native_calls": 0,
+  "global_processes_quiescent": false,
+  "process_note": "Root tests were still running when reviewer stopped; reviewer did not alter them."
+}

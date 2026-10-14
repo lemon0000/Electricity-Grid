@@ -1,0 +1,31 @@
+{
+  "status": "PRE_SEAL_SCOPED_FINDINGS_CLOSED",
+  "scope": "registry binding and local/global dependency-drift retention windows",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "files_sha256": {
+    "experiments/h1_bootstrap_integration_development_v1.py": "c2696b52a89edfc4bc0d6caa83e0d707ccd9f9dbce01380f456833024094ba8d",
+    "tests/test_h1_bootstrap_registry_binding_development_v1.py": "16650f22daca5e25388d98d39e1595147b65ac148915ca08b32afae8cc3053ba",
+    "docs/model_spec/rq2_h1_bootstrap_integration_development_v1.md": "ee272dcb9a822574d9ee357a5944b8b9e48fe686de172a9c5b4a4d0f67463168"
+  },
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_bootstrap_registry_binding_development_v1.py",
+    "-k",
+    "dependency_change_after_claim and local"
+  ],
+  "result": "1 passed, 9 deselected in 68.16s",
+  "wrapper_wall_seconds": 69.106,
+  "exit_code": 0,
+  "unchanged": true,
+  "reviewer_stopped_reading": true,
+  "jobs": 0,
+  "real_native_calls": 0,
+  "official_verdict": false,
+  "formal_result": false
+}

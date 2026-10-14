@@ -161,12 +161,12 @@ CFE-only与joint arms必须接受注册目标产生的完整CFE缺口，不能�
 
 本节是task classification、model routing、delegation和review rules的唯一权威来源。根目录`AGENTS.md`仅作为Codex自动发现的仓库入口，承载上下文bootstrap、工作区与实验安全和实施约束；不得复制、覆盖或另行定义本节的风险等级、model slug/effort、委派规则或审查状态机。
 
-每项任务开始前，主代理必须根据风险、科学影响和验收标准分级，并选择能够满足验收标准的最低成本模型。模型定位上，`gpt-5.6-sol`是旗舰级`frontier capability`模型，`gpt-5.6-terra`平衡`intelligence`与`cost`，`gpt-5.6-luna`面向高吞吐和高效率。`reasoning effort`应按任务有意设置，并用本项目的代表性任务、测试或证据检查其充分性，不默认越高越好。主代理负责需求边界、任务分类、集成、证据核验和最终回答；不得以多个代理的多数意见替代对仓库证据的核对。
+按科学影响判断风险；常规任务无需展示分级过程。默认由当前主代理完成，项目默认模型为`gpt-6-astra`。下表的专用代理是可选执行路由，独立审查要求仍适用。仅在独立子任务足够大、委派有明确收益或需要独立审查时使用子代理。保留Luna的低成本只读角色、Terra的普通实现角色及Sol的领域和审查角色，不为匹配模型表而转交小任务。reasoning effort沿用有效配置，遇到实际难度或验证不足再调整，不因模型升级统一提高。主代理负责集成与证据核验。
 
-| 风险 | 默认路由 | 本项目典型任务 | 最低验证要求 |
+| 风险 | 可选专用路由 | 本项目典型任务 | 最低验证要求 |
 |---|---|---|---|
 | R0 | `luna_reader`（`gpt-5.6-luna`，`low`） | 文件inventory、日志解析、JSON/CSV提取、进度或产物清点 | 机械计数、schema、hash或直接来源证据 |
-| R1 | 只读任务可用`luna_reader`；写入任务用`terra_worker` | 格式整理、明确的机械转换、孤立测试、范围很窄的低风险修复 | 针对性测试和diff检查 |
+| R1 | 只读任务可用`luna_reader`；写入任务可用`terra_worker` | 格式整理、明确的机械转换、孤立测试、范围很窄的低风险修复 | diff或格式检查；行为变化采用有意义的针对性测试 |
 | R2 | `terra_worker`（`gpt-5.6-terra`，`medium`） | data contract、非正式实验plumbing、不改变结果语义的复现工具和普通跨模块修复 | 针对性测试、相关回归；跨模块、持久化产物或长运行行为变化时独立审查 |
 | R3 | `sol_modeler`（`gpt-5.6-sol`，`xhigh`） | 模型变量、目标和约束，AC/DC/N-1语义，非预见性，solver certificate，正式runner或冻结工件语义 | 领域不变量、解析或小型合成例、针对性测试、相关广泛回归，并由`sol_reviewer`独立审查 |
 | R4 | `sol_modeler`（`gpt-5.6-sol`，`xhigh`） | preregistration、验收阈值、正式结果解释、certification状态和paper claims | 完整证据链、manifest/hash与回归证据，`sol_reviewer`独立审查及用户明确授权 |
@@ -192,11 +192,11 @@ R3/R4 frozen candidate统一遵循以下可迭代生命周期：
 - sealed official review后，任何实现字节变化都必须进入新的versioned successor，旧sealed bytes不得修改。official `REWORK`仍最多一轮，由原writer在新successor中只修复reviewer finding；同一验收项再次失败必须`ESCALATE`。official `PASS`只关闭independent review gate，不授权preflight、consume、spawn或formal run。
 - draft/design、pre-seal audit、production seal、official review与formal run必须保持effect separation，但不要求机械地对应多条用户消息。一条语义清楚的用户指令可以显式同时授权draft/design、正常范围内的安全短时pre-seal audit、seal和official review；已授权开发范围内的测试与机械检查无需逐项再次确认。formal-run authority仍必须单独且明确，不得由前述开发、audit、seal或review授权推导；长运行、付费查询、外部数据下载和其他外部动作继续遵守本节及仓库既有明确授权规则。documentation-only授权不授权创建candidate、seal或运行。
 
-协作和审查遵循以下规则：
+协作和审查遵循以下规则（frozen candidate生命周期只适用于冻结候选，不为普通文档或R1/R2修改创建seal/receipt）：
 
 - 每项任务只能有一个写入代理；并行仅限彼此独立的只读子任务，`agents.max_depth = 1`，不得让子代理继续分叉；一个命令或很小的确定性任务不为委派而委派；
 - R3/R4 official审查必须由只读的`sol_reviewer`（`gpt-5.6-sol`，`high`）按上述生命周期审查exact sealed candidate。审查输入应包含原始请求、冻结验收标准、sealed outer、diff、相关规格以及测试和产物证据，输出必须是official `PASS`、`REWORK`或`ESCALATE`；
-- official `REWORK`最多触发一轮由原执行者在新successor中完成的聚焦修复；同一验收项再次失败时升级给`sol_modeler`或用户，不得循环返工或修改旧sealed bytes；执行者无法证明所需不变量时必须返回`ESCALATE`，不得猜测或弱化门禁；
+- 执行者无法证明所需不变量时返回`ESCALATE`，交由具备相应能力的主代理、领域代理或用户解决；不得猜测或弱化门禁。official返工次数与successor规则见上述生命周期；
 - official `PASS`只表示exact sealed工作产物满足已冻结的审查标准并关闭review gate，不授权formal run，也不授权修改科研协议、预注册阈值、认证状态或论文结论；这些科学决定与运行仍需用户对具体动作作出明确授权；
 - 审查通过后的自动推进只适用于冻结计划内、不受blocker约束且不需要新增权限的可逆开发和短验证。不得据此启动、重启、恢复或改变长时间formal run，不得发起付费查询、外部数据下载或其他需授权的外部操作，也不得绕过`docs/model_spec/blocker_register.md`中的停止条件。
 
@@ -307,9 +307,7 @@ electricity-grid/
 ## 13. 协作与沟通规则
 
 - 默认使用中文沟通，公式、变量和国际通用术语可保留英文；
-- 修改前先阅读本文件和`docs/plan`中的最新方案；
-- 先理解现有实现和数据，再修改代码；
-- 每次改动保持范围清晰，不顺手增加无关模块；
+- 上下文读取、修改范围和验证遵循`AGENTS.md`；已读取且未变化的材料无需重复加载；
 - 对重大建模选择明确说明假设、影响和验证方法；
 - 发现用户预设与科学证据冲突时，应直接指出；
 - 完成工作时报告修改内容、验证结果、剩余风险和下一步；

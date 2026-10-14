@@ -1,0 +1,35 @@
+{
+  "scope": "root transcription of independent read-only PRE_SEAL auxiliary routing review",
+  "reviewer": "/root/routing_review",
+  "unix_time": 1791904396.185966,
+  "official_verdict": false,
+  "formal_result": false,
+  "static_routing_findings": [],
+  "terminal": {
+    "path": "selector_routing_01/terminal.json",
+    "exit_code": 0,
+    "passed": 3,
+    "pinned_files": 24
+  },
+  "direct_legacy_helpers": {
+    "before": "preservation_check_01.json",
+    "after": "preservation_check_02.json",
+    "predecessor_pins": 1082,
+    "drift": [],
+    "static_tests_closure": 35,
+    "matched_predecessor_members": 28,
+    "v2_members_bound_by_terminal": 3
+  },
+  "limitations": {
+    "current_hash_only_legacy_tests": [
+      "tests/test_rq2_bidirectional_policy_v1.py",
+      "tests/test_h1_phase_owner_development_v1.py",
+      "tests/test_h1_bootstrap_N0_registration_development_v1.py",
+      "tests/test_h1_bootstrap_integration_development_v1.py"
+    ],
+    "transient_ABA_covered": false,
+    "strong_independent_acceptance": false,
+    "does_not_replace_main_chain": true
+  },
+  "review_conclusion": "Suitable auxiliary development routing diagnostic with disclosed closure limits; main chain acceptance remains pending."
+}

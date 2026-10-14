@@ -1,0 +1,20 @@
+{
+  "status": "PRE_SEAL_FINDING_OPEN",
+  "reading_stopped": true,
+  "reviewer": "/root/selector_owner_design_review",
+  "reviewed_hashes": {
+    "experiments/h1_selector_job_lifecycle_development_v1.py": "bd7713372417e0a1c4877f634cbe768d7e43cc4547fba75e416d13146c802933",
+    "tests/test_h1_selector_job_lifecycle_development_v1.py": "69d87c13f4fac13f305a8a009f08d989145a00f074ace2359f6e45a62dda12a5",
+    "docs/model_spec/rq2_h1_selector_job_lifecycle_development_v1.md": "db4f9399f3dee38e83acd7f0aa0645e871eec49f34d6eb70b042826c938833af"
+  },
+  "findings_closed_statically": [
+    "F1",
+    "F2",
+    "F3"
+  ],
+  "findings": {
+    "F4": "Callback can modify INSPECTION_SCHEMA or INSPECTION_CAP before bounded JSON validation; pin literal scope at runtime."
+  },
+  "independent_test": null,
+  "official_verdict": false
+}

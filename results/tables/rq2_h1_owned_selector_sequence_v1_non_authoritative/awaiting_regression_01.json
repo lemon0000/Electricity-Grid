@@ -1,0 +1,44 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE_AWAITING_RELATED_REGRESSION",
+  "observed_at_utc": "2026-10-11T13:42:31.315959+00:00",
+  "reviewed_hashes": {
+    "experiments/h1_owned_selector_sequence_development_v1.py": "fd3aec69756a6aa11b09ac3a0b9ba7e5203229dd0c82e34ff56cb594e46d29ad",
+    "tests/test_h1_owned_selector_sequence_development_v1.py": "ec21c50da6161ded434fbbcda6c695cddf8514b8befc31abf347305672f0b42b",
+    "docs/model_spec/rq2_h1_owned_selector_sequence_development_v1.md": "ebd7c00a46a42c6e870322752394bccded4fc35c7dba98ced0206dfce5ead791"
+  },
+  "root_test": {
+    "path": "results/tables/rq2_h1_owned_selector_sequence_v1_non_authoritative/root_test_03.json",
+    "passed": 43,
+    "pytest_seconds": 273.08,
+    "exit_code": 0
+  },
+  "independent_review": {
+    "path": "results/tables/rq2_h1_owned_selector_sequence_v1_non_authoritative/independent_review_02.json",
+    "passed": 12,
+    "deselected": 31,
+    "pytest_seconds": 95.62,
+    "exit_code": 0,
+    "reading_stopped": true
+  },
+  "related_regression": {
+    "exec_session_id": 59808,
+    "wrapper_pid": 32980,
+    "pytest_pid": 33296,
+    "observed_live": true,
+    "log_path": "results/tables/rq2_h1_owned_selector_sequence_v1_non_authoritative/root_regression_01.log",
+    "terminal_record_path": "results/tables/rq2_h1_owned_selector_sequence_v1_non_authoritative/root_regression_01.json",
+    "command": "python -B -m pytest -q -p no:cacheprovider tests/test_h1_selector_raw_science_development_v1.py tests/test_h1_selector_raw_science_inspect_development_v1.py tests/test_h1_selector_configuration_development_v1.py"
+  },
+  "predecessor_checks": "results/tables/rq2_h1_common_owner_genesis_v1_non_authoritative/development_checks.json",
+  "predecessor_checks_sha256": "0c9df634979e0b0811e4e1222bd7f18ee9173e61548f1791daddcebc8d5f9fa6",
+  "predecessor_pin_count": 1011,
+  "next_action": "poll same live regression; if terminal success verify frozen closure and append plan/blocker with final checks",
+  "development_checks_finalized": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "formal_result": false,
+  "native_execution_authorized": false,
+  "official_verdict": false,
+  "native_calls": 0,
+  "research_jobs": 0
+}

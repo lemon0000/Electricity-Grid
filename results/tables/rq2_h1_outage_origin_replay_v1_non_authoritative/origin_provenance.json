@@ -1,0 +1,124 @@
+{
+  "cfe_manifest_sha256": "cb6b941193db3a09cddb005c14f210bab754e5f9d12ba9c982f778b88409cc0a",
+  "derivation_role": "synthetic_generator_provenance_not_observed_boundary",
+  "event_rows_compared": 439,
+  "files_sha256": {
+    "configs/rts_gmlc_public_power_system_blocks_v4.yaml": "cefec120fb77990a47fe7e89a77e4df8be00bde5bf7e4cd4c5ca047d52934688",
+    "experiments/audit_h1_outage_origin_replay_development_v1.py": "bd6c056d732d0ae5b609dfbe65c4717b46f751664dd0254ca7655197c19e7eb7",
+    "experiments/build_rts_gmlc_public_power_system_blocks.py": "cc24a77049af50d056364b2ad6a092442af3cd4efcdf32033ab228faef989644",
+    "results/tables/rq2_h1_outage_source_v1_non_authoritative/boundary_coverage.json": "a1d5bcafde41ed9bf9a3d3c4d46ebaf6bd0a57641837d3937e9dda18e31a3dc8",
+    "src/scenarios/rts_gmlc_n1_chronology.py": "ebf412fd69864604c276972b6bcd0ae63559194e1e902e5f92a3357834784d64"
+  },
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "full_boundary_coverage_verified": false,
+  "full_event_table_role": "offline_oracle_only_not_boundary_derivation_input",
+  "grid_manifest_sha256": "95c1294626cdf00ee029659108bf1f30d4ec176a258192b784f097462226a914",
+  "native_execution_authorized": false,
+  "obligations_removed": 0,
+  "operational_source_authorized": false,
+  "package_manifest_sha256": "28bc2c3c1ee3ba0ef6c940aec56f66d49587b5f2895d0e6b0b83fb0b6360cc63",
+  "receipts": [
+    {
+      "existing_past_rows_compared": 4344,
+      "generated_predecessor": {
+        "active_component_type": "generator",
+        "active_component_uid": "202_CT_2",
+        "active_event_id": "seed_20260822_event_0095"
+      },
+      "generator_horizon_hours": 4440,
+      "horizon_extension_prefix_equal": true,
+      "missing_boundary_hour": 4439,
+      "operational_source_authorized": false,
+      "outage_seed": 20260822,
+      "raw_start": 4440,
+      "split": "holdout",
+      "status": "audit_only_generated_boundary"
+    },
+    {
+      "existing_past_rows_compared": 4320,
+      "generated_predecessor": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": ""
+      },
+      "generator_horizon_hours": 4560,
+      "horizon_extension_prefix_equal": true,
+      "missing_boundary_hour": 4559,
+      "operational_source_authorized": false,
+      "outage_seed": 20260823,
+      "raw_start": 4560,
+      "split": "holdout",
+      "status": "audit_only_generated_boundary"
+    },
+    {
+      "existing_past_rows_compared": 4320,
+      "generated_predecessor": {
+        "active_component_type": "",
+        "active_component_uid": "",
+        "active_event_id": ""
+      },
+      "generator_horizon_hours": 4632,
+      "horizon_extension_prefix_equal": true,
+      "missing_boundary_hour": 4631,
+      "operational_source_authorized": false,
+      "outage_seed": 20260824,
+      "raw_start": 4632,
+      "split": "holdout",
+      "status": "audit_only_generated_boundary"
+    },
+    {
+      "generated_predecessor": null,
+      "hour_zero_overlay_for_proposal_only": [
+        "",
+        "",
+        ""
+      ],
+      "missing_boundary_hour": -1,
+      "operational_source_authorized": false,
+      "outage_seed": 20260822,
+      "raw_start": 0,
+      "split": "training",
+      "status": "unresolved_no_negative_hour_in_generator"
+    },
+    {
+      "generated_predecessor": null,
+      "hour_zero_overlay_for_proposal_only": [
+        "seed_20260823_event_0000",
+        "branch",
+        "B14"
+      ],
+      "missing_boundary_hour": -1,
+      "operational_source_authorized": false,
+      "outage_seed": 20260823,
+      "raw_start": 0,
+      "split": "training",
+      "status": "unresolved_no_negative_hour_in_generator"
+    },
+    {
+      "generated_predecessor": null,
+      "hour_zero_overlay_for_proposal_only": [
+        "seed_20260824_event_0000",
+        "branch",
+        "A15"
+      ],
+      "missing_boundary_hour": -1,
+      "operational_source_authorized": false,
+      "outage_seed": 20260824,
+      "raw_start": 0,
+      "split": "training",
+      "status": "unresolved_no_negative_hour_in_generator"
+    }
+  ],
+  "reliability_components": 211,
+  "repair_cap_source_registered": false,
+  "resource_admission": false,
+  "schema": "h1_outage_origin_replay_development_v1",
+  "solver_calls": 0,
+  "source_horizon_hours": 8784,
+  "split_hour": 4392,
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "synthetic_jobs": 0,
+  "unique_operational_inputs_unresolved": 6,
+  "visible_power_rows_compared": 25704
+}

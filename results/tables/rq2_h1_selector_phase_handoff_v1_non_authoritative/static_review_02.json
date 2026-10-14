@@ -1,0 +1,36 @@
+{
+  "stage": "PRE_SEAL_findings",
+  "reading_stopped": true,
+  "reviewer": "/root/selector_owner_design_review",
+  "tests_run_by_reviewer": false,
+  "findings": [
+    {
+      "id": "R2_F1",
+      "issue": "Phase DB/root/lock identities not retained across close-reopen; same-byte replacement may be accepted"
+    },
+    {
+      "id": "R2_F2",
+      "issue": "Binding first raw readback not compared to expected bytes"
+    },
+    {
+      "id": "R2_F3",
+      "issue": "Mutable external-active flag and counters allow conditional direct callback reentry"
+    }
+  ],
+  "remaining_tests": [
+    "partial individual predecessor child close failure",
+    "mixed multi-lane",
+    "ancestry",
+    "same-byte replacement/hardlink/reparse",
+    "wrong acknowledgement",
+    "unknown suffix",
+    "exact cap"
+  ],
+  "pins": {
+    "experiments/h1_selector_phase_handoff_development_v1.py": "28e381536d44240b03f4207ec89f18875673c5bdbfe487b34cf96ce21a9da6bf",
+    "tests/test_h1_selector_phase_handoff_faults_development_v1.py": "d56acc142dd44a46030c6177d3d4b4753e00f5147b3145305c8462579f2b59ad",
+    "tests/test_h1_selector_phase_handoff_development_v1.py": "3391ed5d88ef5447181c8171df05ebd79de56bbc1dc46eefd1f41ec3aea2a6db",
+    "docs/model_spec/rq2_h1_selector_phase_handoff_development_v1.md": "23021e0901560cdb1731f2963ded64eb249887975bea81db204aba9d4afe4f51"
+  },
+  "formal_result": false
+}

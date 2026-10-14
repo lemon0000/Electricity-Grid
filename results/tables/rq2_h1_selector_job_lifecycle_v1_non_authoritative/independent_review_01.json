@@ -1,0 +1,17 @@
+{
+  "status": "PRE_SEAL_FINDINGS_OPEN",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "reviewed_hashes": {
+    "experiments/h1_selector_job_lifecycle_development_v1.py": "ba8693ab035a59c509d1e6119502505b1d4b5b9ec668ca60c2df84f71bfecbc4",
+    "tests/test_h1_selector_job_lifecycle_development_v1.py": "d800849c4d038466a1a57fe56c9276c14f5a47b36413e9de0da7d9b910477327",
+    "docs/model_spec/rq2_h1_selector_job_lifecycle_development_v1.md": "d4d0e0d81cfc848f412dd758f865c75bcebe62b1169ca3148756a22bf4c3c85e"
+  },
+  "findings": {
+    "F1": "Arbitrary inspection object returned without bounded canonical JSON detach",
+    "F2": "Per-invocation primitive sampling accepts preinstalled fabricated wait observation",
+    "F3": "Mutable authority flags may be promoted by callback"
+  },
+  "independent_test": null,
+  "official_verdict": false
+}

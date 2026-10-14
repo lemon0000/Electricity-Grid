@@ -1,0 +1,32 @@
+{
+  "status": "PRE_SEAL_SCOPED_FINDINGS_CLOSED",
+  "scope": "N0 terminal evidence preparation helper only; no terminal registration",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "files_sha256": {
+    "experiments/h1_bootstrap_integration_development_v1.py": "24a28f5368a884342ab0ba34dcca80e5d05e77a7b1f222fd209dae2118b94dba",
+    "tests/test_h1_bootstrap_N0_terminal_evidence_development_v1.py": "50f8cd506b6b7dc18117ab4ab49a1fb4af74f918664f524f60daa43c17572944",
+    "docs/model_spec/rq2_h1_bootstrap_integration_development_v1.md": "ff81782a1be85a99e9c728cd80b40f93fd8abbf3512e4bc5b3c458213a06b552"
+  },
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_bootstrap_N0_terminal_evidence_development_v1.py",
+    "-k",
+    "live_bootstrap_operation"
+  ],
+  "result": "1 passed, 1 deselected in 17.43s",
+  "wrapper_wall_seconds": 18.977,
+  "exit_code": 0,
+  "unchanged": true,
+  "reviewer_stopped_reading": true,
+  "reviewer_jobs": 0,
+  "reviewer_native_calls": 0,
+  "retained_finding": "terminal_evidence_findings_01.json",
+  "official_verdict": false,
+  "formal_result": false
+}

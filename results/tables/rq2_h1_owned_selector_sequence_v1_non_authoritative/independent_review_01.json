@@ -1,0 +1,37 @@
+{
+  "status": "PRE_SEAL_FINDINGS_OPEN",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "reviewed_hashes": {
+    "experiments/h1_owned_selector_sequence_development_v1.py": "9b1885193c87a58aebfa50c9a8659749e1d4b0de8df661a1238edce8afc3ca6d",
+    "tests/test_h1_owned_selector_sequence_development_v1.py": "cffc7273cae4802ab61720563adcfbb658d8f73573433b29c7948345d5de12b4",
+    "docs/model_spec/rq2_h1_owned_selector_sequence_development_v1.md": "6a2d49fa8297095db825508fc042c4cc39d7a06b6f12df74b810f6038ab7fbad"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "description": "Require exact configured complete stage orders before allocation"
+    },
+    {
+      "id": "F2",
+      "description": "Final live bookend after prefix replay and stage request computation, before runner release"
+    }
+  ],
+  "evidence_gaps": [
+    "second-stage failure and post-terminal failure",
+    "prior evidence drift during later stage",
+    "exact logical archive boundary",
+    "commit suffix"
+  ],
+  "fixture_failure": "disabled G2 requires mode disabled, zero row bounds, zero noncommittable age",
+  "independent_test": {
+    "passed": 18,
+    "deselected": 14,
+    "pytest_seconds": 101.78,
+    "exit_code": 0,
+    "files_unchanged": true
+  },
+  "official_verdict": false,
+  "native_calls": 0,
+  "research_jobs": 0
+}

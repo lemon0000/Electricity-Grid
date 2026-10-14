@@ -1,0 +1,44 @@
+{
+  "status": "PRE_SEAL_SCOPED_SOURCE_ADAPTER_FINDINGS_CLOSED_NOT_UNIT_CLOSURE",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "files_sha256": {
+    "experiments/h1_phase_owner_development_v1.py": "4c932b12e544909a37690da7178089bf498896c0981403dfa19482b42a537ef6",
+    "tests/test_h1_phase_owner_development_v1.py": "f4ab3c90699e460d28abc0b0cb4f0a191a3d533cf2913fdf5b1ddf44b5dc9194",
+    "docs/model_spec/rq2_h1_phase_owner_development_v1.md": "ad461b7c1759c400d91cc6bffb2df898b1098859303fc02eb0262e4e8851580f"
+  },
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_phase_owner_development_v1.py",
+    "-k",
+    "phase_attempt_boundary or attempt_precedes_next_source"
+  ],
+  "reported_exit_code": 0,
+  "reported_pytest_seconds": 29.09,
+  "reported_wrapper_seconds": 30.436,
+  "reported_passed": 4,
+  "reported_deselected": 14,
+  "reported_pins_unchanged": true,
+  "root_rechecked_pins_unchanged": true,
+  "findings": [
+    "No blocking omission found in the phase source adapter switch.",
+    "The remaining 168 limits in _SavedOwner._restore are overridden; public paths dispatch to DevelopmentOwner._restore with hour<192.",
+    "SourceBinding supplies the four pins required by phase current prepare; the header binds phase192_historical_saved_prefix."
+  ],
+  "limitations": [
+    "Owner tests explicitly patch synthetic prepare; phase historical reader is covered separately.",
+    "No end-to-end owner plus accepted real 192-hour prefix, h168 mixed roster or live controller capability is established."
+  ],
+  "jobs": 0,
+  "real_native_calls": 0,
+  "official_verdict": null,
+  "unit_closed": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "formal_result": false
+}

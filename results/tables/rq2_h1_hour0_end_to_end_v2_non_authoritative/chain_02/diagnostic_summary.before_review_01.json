@@ -1,0 +1,91 @@
+{
+  "status": "INCOMPLETE_INTERRUPTED_DIAGNOSTIC",
+  "formal_result": false,
+  "full_synthetic_hour0_chain_passed": false,
+  "three_independent_N0_completed": true,
+  "three_arm_roster_attached": true,
+  "first_full_common_returned": true,
+  "selector_executed_in_main_chain": false,
+  "paired_commit_completed": false,
+  "close_reopen_completed": false,
+  "fresh_process_replay_completed": false,
+  "elapsed_seconds": 7289.473064900001,
+  "traced_seconds": 7236.3549887,
+  "collection_and_interruption_tail_seconds": 53.11807620000127,
+  "timing": [
+    {
+      "label": "source_and_fixture_setup",
+      "elapsed_seconds": 28.0066101,
+      "interval_seconds": 28.0066101
+    },
+    {
+      "label": "arm_0_open",
+      "elapsed_seconds": 42.2486091,
+      "interval_seconds": 14.241999
+    },
+    {
+      "label": "arm_0_N0",
+      "elapsed_seconds": 315.9151986,
+      "interval_seconds": 273.6665895
+    },
+    {
+      "label": "arm_0_roster_attach",
+      "elapsed_seconds": 811.6968897,
+      "interval_seconds": 495.7816911
+    },
+    {
+      "label": "arm_0_close",
+      "elapsed_seconds": 897.1091663,
+      "interval_seconds": 85.4122766
+    },
+    {
+      "label": "arm_1_open",
+      "elapsed_seconds": 974.6803859,
+      "interval_seconds": 77.5712196
+    },
+    {
+      "label": "arm_1_N0",
+      "elapsed_seconds": 1940.771245,
+      "interval_seconds": 966.0908591
+    },
+    {
+      "label": "arm_1_roster_attach",
+      "elapsed_seconds": 2821.867307,
+      "interval_seconds": 881.096062
+    },
+    {
+      "label": "arm_1_close",
+      "elapsed_seconds": 2970.5984557,
+      "interval_seconds": 148.7311487
+    },
+    {
+      "label": "arm_2_open",
+      "elapsed_seconds": 3112.4376752,
+      "interval_seconds": 141.8392195
+    },
+    {
+      "label": "arm_2_N0",
+      "elapsed_seconds": 4864.1448062,
+      "interval_seconds": 1751.707131
+    },
+    {
+      "label": "arm_2_roster_attach",
+      "elapsed_seconds": 6123.6224825,
+      "interval_seconds": 1259.4776763
+    },
+    {
+      "label": "complete_common_scientific_replay",
+      "elapsed_seconds": 7236.3549887,
+      "interval_seconds": 1112.7325062
+    }
+  ],
+  "implementation_bytes_unchanged": true,
+  "artifact_archive": "chain_02/artifacts",
+  "artifact_inventory_sha256": "2ca3903214a7542fa632ce69c3b065c91292d6d8fe1687c0a8a9ed8905952ba0",
+  "blocking_issue": "Repeated complete common and historical reconstruction at nested freshness boundaries",
+  "resource_estimate_status": "No complete-chain wall time observed; static call-count extrapolation only",
+  "native_calibration": false,
+  "production_resource_admission": false,
+  "official_verdict": false,
+  "unix_time": 1791906172.7935007
+}

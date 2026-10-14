@@ -1,0 +1,9 @@
+{
+  "status": "TEST_INJECTION_TIMING_REPAIRED",
+  "failure_evidence": "root_test_02.json",
+  "cause": "Protocol was already read by predecessor closure, so second read injection hit initial pin validation rather than final bookend.",
+  "repair": "Arm mutation after _project returns; separately test initial protocol corruption.",
+  "code_and_spec_unchanged": true,
+  "root_revalidation": "root_test_03.json",
+  "formal_result": false
+}

@@ -1,0 +1,35 @@
+{
+  "evidence_gaps": [
+    "detached_action_and_origin_mode_not_derived_from_authenticated_owner",
+    "action_cap_source_not_authenticated",
+    "fresh_N_registry_receipt_and_persistent_heads_missing",
+    "same_key_paired_commit_192h_resource_seal_official_missing"
+  ],
+  "extra_checks": {
+    "cap_inventory_count": 93,
+    "cap_semantic_identity": "aa3a3d71749b47d543410f0c2e2561a735d5af9aaa549bf5dd6dfb7fd0b45a36",
+    "cross_clock_no_outage_generator_down_branch_down_equal_scientific_distinct_audit": true
+  },
+  "files_sha256": {
+    "docs/model_spec/rq2_h1_origin_physical_selector_development_v1.md": "d8802f9e54413f842406dac05f6b0d9a5cc249d81e0562ab8559b1e35948eac0",
+    "experiments/h1_origin_grid_step_development_v1.py": "5b1f8ee22384cafe5f86b289c53e862e55ef5f002167a50e196b22ff8357d7d6",
+    "experiments/h1_origin_selector_replay_development_v1.py": "20fde1bade990c82e1a70ed0ae7b6f223b3f3fbaaebe99455cc4f2d940e0bb78",
+    "tests/test_h1_origin_grid_step_development_v1.py": "58924a03246dd63f1ecf3b2e9990a24058bf3ba0908641e64249f500e23cd1c1",
+    "tests/test_h1_origin_selector_replay_development_v1.py": "f1a12970a3e240104308053f74efa2677339f30c347bc0b591358b3baa90d0ef"
+  },
+  "official_verdict": null,
+  "open_implementation_findings": [],
+  "real_native_calls": 0,
+  "related_processes_remaining": false,
+  "reviewer": "/root/outage_preseal_review",
+  "root_transcription_of_independent_readonly_review": true,
+  "scope": "detached_origin_aware_physical_selector_mathematics",
+  "status": "PRE_SEAL_NONAUTHORITATIVE",
+  "synthetic_jobs": 0,
+  "tests": {
+    "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_origin_grid_step_development_v1.py tests/test_h1_origin_selector_replay_development_v1.py tests/test_h1_current_grid_step_development_v1.py",
+    "exit_code": 0,
+    "passed": 59,
+    "seconds": 132.92
+  }
+}

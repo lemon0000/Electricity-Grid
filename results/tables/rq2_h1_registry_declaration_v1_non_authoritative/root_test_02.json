@@ -1,0 +1,23 @@
+{
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_outage_registry_development_v1.py",
+    "-k",
+    "holdout_reader or public_prepare or public_registry_pin or repair_table"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 2.7809999999990396,
+  "files_sha256": {
+    "tests/test_h1_outage_registry_development_v1.py": "a7ef24467f22f562e392f6a5b49ddaa35f09c66ec73961a385a38ef9a2cae731",
+    "experiments/h1_outage_registry_development_v1.py": "f722611539757fd79414d5c24577a610061e62f04ed38a16d04a2e96e34ac9e9",
+    "experiments/h1_registry_declaration_development_v1.py": "6c6162c4819a45b7b759e174cb44c18aef0a24f8ec24cc73f3d269e9746abf8a"
+  },
+  "unchanged": true,
+  "formal_result": false
+}

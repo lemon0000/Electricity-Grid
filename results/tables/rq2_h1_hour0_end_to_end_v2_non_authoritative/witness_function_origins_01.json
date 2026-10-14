@@ -1,0 +1,85 @@
+[
+  {
+    "source": "experiments\\h1_timed_worker_hour_development_v1.py",
+    "sha256": "bd2b367f452d23ef38675af1ed2bb01b1c0809085683a37b3fed2b98b3f1f3b1",
+    "function": "inspect",
+    "target": "inspect_worker",
+    "qualified_names": {
+      "implementation_identity": "worker.implementation_identity",
+      "_root": "worker._root",
+      "_read": "worker._read",
+      "clock_profile": "worker.clock_profile",
+      "_integer": "worker._integer",
+      "_intervals": "worker._intervals",
+      "analyse_intervals": "worker.analyse_intervals",
+      "_unchanged": "worker._unchanged",
+      "FLAGS": "worker.FLAGS",
+      "SCHEMA": "worker.SCHEMA"
+    },
+    "explicit_scope_calls": {
+      "hour.inspect": "scope.inspect"
+    }
+  },
+  {
+    "source": "experiments\\h1_timed_job_parent_development_v1.py",
+    "sha256": "461a4837a25c6334cd367961cdb0b6bbfc61ea5f2c1400572faf666c6c800e11",
+    "function": "inspect_job",
+    "target": "inspect_job",
+    "qualified_names": {
+      "old": "parent.old",
+      "prior": "parent.prior",
+      "replay": "parent.replay",
+      "RECORDS": "parent.RECORDS",
+      "ENTRY_SCHEMA": "parent.ENTRY_SCHEMA",
+      "FLAGS": "parent.FLAGS",
+      "implementation_identity": "parent.implementation_identity",
+      "environment": "parent.environment",
+      "observation": "parent.observation"
+    },
+    "explicit_scope_calls": {
+      "worker.inspect": "inspect_worker"
+    }
+  },
+  {
+    "source": "experiments\\h1_job_clock_bridge_development_v1.py",
+    "sha256": "23512dc30464f6828c4edcb75377220a2c4510b1d961e2af29a86302cabcc9ab",
+    "function": "inspect",
+    "target": "inspect_bridge",
+    "qualified_names": {
+      "base": "bridge.base",
+      "SCHEMA": "bridge.SCHEMA",
+      "FLAGS": "bridge.FLAGS",
+      "CAP": "bridge.CAP",
+      "implementation_identity": "bridge.implementation_identity",
+      "profile": "bridge.profile",
+      "analyse": "bridge.analyse"
+    },
+    "explicit_scope_calls": {
+      "base.parent.inspect_job": "inspect_job"
+    }
+  },
+  {
+    "source": "experiments\\h1_timed_job_parent_development_v1.py",
+    "sha256": "461a4837a25c6334cd367961cdb0b6bbfc61ea5f2c1400572faf666c6c800e11",
+    "function": "SourceParent._after",
+    "target": "after",
+    "qualified_names": {
+      "source": "parent.source",
+      "ChildInspection": "RevalidatedChildInspection",
+      "Projection": "parent.Projection"
+    },
+    "explicit_scope_calls": {}
+  },
+  {
+    "source": "experiments\\h1_timed_job_parent_development_v1.py",
+    "sha256": "461a4837a25c6334cd367961cdb0b6bbfc61ea5f2c1400572faf666c6c800e11",
+    "function": "SourceParent._outcome",
+    "target": "outcome",
+    "qualified_names": {
+      "bounded": "parent.bounded",
+      "CHILD_SCHEMA": "parent.CHILD_SCHEMA",
+      "ChildInspection": "RevalidatedChildInspection"
+    },
+    "explicit_scope_calls": {}
+  }
+]

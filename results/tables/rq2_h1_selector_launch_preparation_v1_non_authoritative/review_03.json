@@ -1,0 +1,47 @@
+{
+  "kind": "PRE_SEAL_SCOPED_FINDINGS_CLOSED",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "files_sha256": {
+    "experiments/h1_selector_launch_preparation_development_v1.py": "02685e23fa00af2f94e7e7e22cf586c8d8c6a4613e7df7fff9600b203cfd5af8",
+    "tests/test_h1_selector_launch_preparation_development_v1.py": "e38a462aa2d14a62a8d02eda62ffbc4b73715f65b6a3793a89687e61102ab811",
+    "docs/model_spec/rq2_h1_selector_launch_preparation_development_v1.md": "92e19852ea20e864ce6f1100035f8b7a71e8d8f46d1bc274067c67434a6c673e"
+  },
+  "findings_closed": [
+    "F1",
+    "F2",
+    "E1",
+    "F3",
+    "F4"
+  ],
+  "remaining_must_fix": [],
+  "independent_test": {
+    "command": [
+      "D:/Miniconda3/envs/compute/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_h1_selector_launch_preparation_development_v1.py",
+      "-k",
+      "checker_replacement or protocol_constant or helper_replacement_inside or executable_same"
+    ],
+    "passed": 15,
+    "deselected": 22,
+    "pytest_seconds": 24.3,
+    "exit_code": 0,
+    "files_unchanged": true,
+    "real_native_calls": 0,
+    "windows_jobs": 0
+  },
+  "scope": "read-only launch declaration and existing-directory process identity binding",
+  "source_tests": "synthetic_alias_declaration",
+  "canonical_worker_success_verified": false,
+  "canonical_job_success_verified": false,
+  "parent_completion_verified": false,
+  "official_verdict": false,
+  "native_execution_authorized": false,
+  "incident_excluded": "native_boundary_incident_01/incident.json"
+}

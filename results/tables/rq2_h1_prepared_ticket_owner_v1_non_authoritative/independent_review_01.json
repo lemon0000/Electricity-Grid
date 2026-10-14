@@ -1,0 +1,38 @@
+{
+  "status": "PRE_SEAL_FINDINGS_OPEN_AT_REVIEW",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "pins": {
+    "experiments/h1_prepared_ticket_owner_development_v1.py": "aac6b691937c19e17935771d62bb23cb755797b45c485530adc0adc6e63f04cd",
+    "tests/test_h1_prepared_ticket_owner_development_v1.py": "5a2424f08216c08013430c85dd669588870ffa627e3bc1b1d63574d7ff2f5660",
+    "docs/model_spec/rq2_h1_prepared_ticket_owner_development_v1.md": "1e0cfa20c5d79a0f835be6b4e02f9ed9b15d6bb9aad6016dfe1c84fb9a2e1c60"
+  },
+  "pins_unchanged": true,
+  "targeted": {
+    "passed": 13,
+    "deselected": 11,
+    "seconds": 26.1,
+    "exit_code": 0
+  },
+  "full": {
+    "passed": 24,
+    "seconds": 43.99,
+    "outer_seconds": 44.896,
+    "exit_code": 0
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "description": "Old holder repeated close removes reopened holder registry key.",
+      "probe_reproduced": true
+    },
+    {
+      "id": "F2",
+      "description": "Cross-thread close releases live holder lease.",
+      "probe_reproduced": true
+    }
+  ],
+  "git_diff_check_exit": 0,
+  "real_native_calls": 0,
+  "jobs": 0,
+  "official_verdict": false
+}

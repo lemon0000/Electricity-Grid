@@ -1,0 +1,32 @@
+{
+  "status": "PRE_SEAL_READ_ONLY_RESOURCE_FINDINGS",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "date": "2026-10-09",
+  "source_sha256": {
+    "results/tables/rq2_v2_obligation_manifest_v1_non_authoritative/obligation_manifest_v2_final.json": "befcfab8180a0124f15ad7652b085514c7aec6278e2b9d967e9885fc5a65fdd7",
+    "results/tables/rq2_h1_resource_readiness_v1_non_authoritative/resource_gap_audit_v2_final.json": "1a31bdd0d69b717525e1d281f4d53d21bf8f8cca929732b76847cfa332843ad1"
+  },
+  "identity_counts": {
+    "original": 11488806000,
+    "analytic_exclusion_affected": 8423856896,
+    "unresolved": 3064949104,
+    "are_executable_task_counts": false
+  },
+  "verified_solver_reuse_edges": [],
+  "complete_executable_task_inventory": false,
+  "findings": [
+    "No materialized causal keys or runtime task IDs establish unique executable counts. Logical proof edges do not authorize solver reuse.",
+    "One N hour has 232 stages; 192-hour arithmetic gives 44544 N slots only, excluding Rref/A and capacity proofs.",
+    "v3 single-hour wall 2744.984 seconds and peak commit 269524992 bytes do not prove complete-study resources. The 2440-second non-solver allowance remains unmeasured.",
+    "The old 774088294400-byte full-prefix reservation exceeds the 2026-10-03 volume total 294972813312 bytes. This disproves that reservation scheme only, not minimum storage or scientific feasibility.",
+    "New saved/timed archive caps omit components required for full resource admission.",
+    "Next resource deliverable must distinguish executable task inventory, proven reuse, and per-class resource envelopes. Treatment of runtime-dependent carry keys requires further design review."
+  ],
+  "tests_run": false,
+  "jobs_run": 0,
+  "native_calls": 0,
+  "official_verdict": null,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "formal_result": false
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "PRE_SEAL_FINDINGS",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "code_sha256": "570497f35c496b59df333c0f9a2bfa1aeb899b7ce736a77f48c55e10766f5959",
+  "test_sha256": "6109c4cf993f847ffd750546f932a0368ee02513f9204a5b87fbba0815578bc6",
+  "spec_sha256": "f949a356859dcbcd3fa48c3bf8075c2301da7bc88be5ea85d4d8f0a32f4b308b",
+  "findings": {
+    "F3": "Retain fixed checker and identity locally; preinstalled or callback-time global identity replacement can bypass the final dynamic check.",
+    "F4": "Pin protocol constants and inventory, including CAP/META_CAP/FLAGS/SCHEMA/PHASES; callable/file hashes alone do not cover them."
+  },
+  "prior_fixes_direction_accepted": [
+    "F1",
+    "F2",
+    "E1"
+  ],
+  "independent_test": {
+    "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_selector_launch_preparation_development_v1.py -k \"transitive or canonical_interpreter or alias or executable_same or helper_replacement_inside\"",
+    "passed": 12,
+    "deselected": 12,
+    "pytest_seconds": 44.89,
+    "exit_code": 0,
+    "real_native_calls": 0,
+    "windows_jobs": 0,
+    "hashes_unchanged": true
+  },
+  "official_verdict": false,
+  "native_execution_authorized": false
+}

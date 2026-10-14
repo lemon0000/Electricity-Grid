@@ -1,0 +1,24 @@
+{
+  "status": "PRE_SEAL_FINDINGS_REPAIRED_PENDING_FINAL_REVIEW",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "initial_files_sha256": {
+    "experiments/h1_phase_manifest_group_development_v1.py": "6c62b417951aa804993c3b68067122b14ffd794841f5d7f4e8e6e8a3964d38e3",
+    "tests/test_h1_phase_manifest_group_development_v1.py": "f4ab8321a4aa45430b9032f2b84c9f06853181bc31a7867fd53bb2b9c70e5ce9",
+    "docs/model_spec/rq2_h1_phase_manifest_group_development_v1.md": "0dfd0a6b751b5761ddd1b20b1c28d0e79dd1531b0e7f3fd91771b68ea95fb20b"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "finding": "Unconditional relative_to(ROOT) fails for external closure files.",
+      "repair": "Use existing symbolic repo-relative or external absolute as_posix rule."
+    },
+    {
+      "id": "E1",
+      "finding": "Original catalog arm order should be explicit independently of sorted siblings.",
+      "repair": "Added catalog_arm_order with four-family tests."
+    }
+  ],
+  "preserved_failure": "root_test_01.json",
+  "official_verdict": false,
+  "formal_result": false
+}

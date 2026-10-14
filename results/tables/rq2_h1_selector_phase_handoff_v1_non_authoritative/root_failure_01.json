@@ -1,0 +1,28 @@
+{
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_selector_phase_handoff_development_v1.py",
+    "-k",
+    "missing_actual"
+  ],
+  "failed": 1,
+  "deselected": 1,
+  "pytest_seconds": 64.29,
+  "exit_code": 1,
+  "exec_session": 39370,
+  "error": "TypeError: Object of type Fraction is not JSON serializable",
+  "site": "handoff._same used plain io.encode on asdict(manifest)",
+  "files_sha256": {
+    "experiments/h1_selector_phase_handoff_development_v1.py": "74386a8e04e1c7156431d2c4b3c63455a05640a16cf2615753fa593e4409531c",
+    "tests/test_h1_selector_phase_handoff_development_v1.py": "3391ed5d88ef5447181c8171df05ebd79de56bbc1dc46eefd1f41ec3aea2a6db",
+    "docs/model_spec/rq2_h1_selector_phase_handoff_development_v1.md": "51c48a40482aa338b682fd2350dd0cee35ae4ac4b1f1837e39f6596313458cf2"
+  },
+  "real_native_calls": 0,
+  "windows_jobs": 0
+}

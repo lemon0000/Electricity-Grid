@@ -1,0 +1,35 @@
+{
+  "files_sha256": {
+    "docs/model_spec/rq2_h1_origin_current_information_development_v1.md": "a7c3cdf7f6f529b7a88c43b08cbd78a5f2531e6fba514768c3cfdd674288b5da",
+    "experiments/h1_origin_current_information_development_v1.py": "9ac9ba3218b962ea5a4bccd1a7b7589a4f64bc8cd2d892477d8aafaaafa9e333",
+    "tests/test_h1_origin_current_information_development_v1.py": "416baecb0087d7f239305771961f353620e0e8fdace8d7b7484df87cabd1f72f"
+  },
+  "final_tests": {
+    "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_origin_current_information_development_v1.py",
+    "exit_code": 0,
+    "passed": 25,
+    "seconds": 11.03
+  },
+  "findings": [
+    {
+      "closed": true,
+      "finding": "redundant public chronology_origin disagrees with specification",
+      "id": "F1",
+      "resolution": "removed field and private return value; regression asserts absence",
+      "severity": "low"
+    }
+  ],
+  "initial_tests": {
+    "exit_code": 0,
+    "passed": 25,
+    "seconds": 11.27
+  },
+  "official_verdict": null,
+  "open_implementation_findings": [],
+  "real_native_calls": 0,
+  "reviewer": "/root/outage_origin_design_review",
+  "root_transcription_of_independent_readonly_review": true,
+  "sha_transcription_correction": "code SHA read directly and independently rechecked at 64 characters; earlier message extra a corrected",
+  "status": "PRE_SEAL_NONAUTHORITATIVE",
+  "synthetic_jobs": 0
+}

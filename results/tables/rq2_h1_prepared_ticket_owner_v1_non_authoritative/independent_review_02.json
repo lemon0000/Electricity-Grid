@@ -1,0 +1,27 @@
+{
+  "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_prepared_ticket_owner_development_v1.py -k \"close or regular_pair or holder_failure\"",
+  "deselected": 20,
+  "diff_check_exit_code": 0,
+  "exit_code": 0,
+  "findings_closed": [
+    "F1 repeated close must preserve reopened holder registry",
+    "F2 close must enforce creating process and thread"
+  ],
+  "jobs": 0,
+  "new_findings": [],
+  "official_verdict": false,
+  "passed": 6,
+  "pins": {
+    "docs/model_spec/rq2_h1_prepared_ticket_owner_development_v1.md": "f1c33e04d5284a29261de5ac8a5fdc0506a573999da81a701597d37101f91266",
+    "experiments/h1_prepared_ticket_owner_development_v1.py": "258b37334d7f1d2610ffcf3c20d810e13d62ad6c266fca3b43c2a2d983dd1eac",
+    "tests/test_h1_prepared_ticket_owner_development_v1.py": "f38affbeb99377f7aabd6896b3bee841904808c1e2abd054b0e937099b6f4866"
+  },
+  "pins_unchanged": true,
+  "real_native_calls": 0,
+  "related_processes_observed": [],
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "schema": "prepared_ticket_preseal_review_v1",
+  "scope": "F1/F2 closure; exact final bytes; independent read-only review",
+  "seconds": 9.41,
+  "wall_seconds": 10.29
+}

@@ -1,0 +1,74 @@
+# H1 independent N0 group roster
+
+Status: DRAFT_NONAUTHORITATIVE. Root is the only writer. This addition maps
+independent retained `pending_post_N` protocol references to direct lanes. It
+does not establish common scientific inputs, solver acceptance, a group owner
+capability, N/Rref reuse or resource admission.
+
+`GroupRoster` requires an exact live `BootstrapOwner`. Creation, inspection and
+attachment hold that owner's original nonblocking operation guard. No caller
+candidate, evidence summary, terminal SHA or arbitrary group path is accepted.
+The wrapper internally checks the current header candidate and freshly prepares
+the minimum direct sibling ordinal for nonempty rosters, or the minimum of all
+sibling ordinals for a B6-only header. The operation nonce must remain empty
+at entry and across observation, write and retention boundaries. The full canonical audit, all four sibling
+nodes/classifications, selector/archive/accounting declaration and study/global
+genesis are bound in its header. A current B6 owner cannot own a nonempty direct
+roster. Existing bootstrap bytes remain unchanged.
+
+The path is the study-local singleton
+`groups_non_authoritative/<group_identity>_non_authoritative`. The underlying
+`bootstrap._Journal` retains its storage schema/implementation identity; the
+wrapper additionally binds and freshly verifies this module's identity and
+declaration at read and write boundaries. Separate external head retention,
+exclusive lease, PID/thread checks and exact canonical record replay apply.
+Changing configuration or record capacity at the same path is a conflict.
+
+Each direct entry has at most one `attach_independent_N0` event. The wrapper
+resolves that sibling's ordinal to its own slot and obtains claim, release,
+local terminal and global terminal by full foreign bootstrap replay. References
+must match exact study, obligation, roots and terminal correspondence. A slot,
+episode, claim, release or terminal cannot serve two entries. The event preserves full
+head/body references; reopen reconstructs them from the retained global prefix.
+Missing terminal leaves the entry unregistered. No operation retries N or fills
+other entries automatically. Duplicate, conflicting, stale and unknown suffixes
+fail closed. Completion is implicit after all direct entries are registered;
+it permits no further attach and grants no execution capability.
+
+Header size is checked using the complete underlying journal encoding before
+group directory creation. Every actual event envelope is checked before its
+write. Event count is bounded by direct entry count. This is logical metadata
+capacity, not filesystem allocation or study resource admission. Writes and
+retention callbacks are bookended by fresh group/global/local correspondence.
+Attachment/write/retention failure preserves bytes and poisons the handle;
+inspection failures reject the observation without promising handle poisoning.
+Reopen needs the externally
+retained exact head and never repeats an attachment automatically.
+
+Coverage is explicitly bootstrap-addressable groups only. A B6-only unresolved
+group with zero direct lanes requires the current unresolved B6 owner and
+proof-terminal dispositions for every other sibling. It is header-only:
+`maximum_attach_events=0`; the
+underlying storage parameter `max_events=1` is padding for its minimum schema,
+not an execution allowance. Every event is invalid in this case. Fully
+proof-terminal groups have no legal BootstrapOwner and remain represented by
+the closed phase binder's complete audit and `Manifest=None`. Their absence
+from this runtime journal is not missing evidence or permission to drop them.
+`full_family_group_registry_complete` and `all_catalog_groups_enumerated` remain
+false. This unit neither enumerates the full catalog nor changes its obligations.
+
+`independent_N0_mapping_complete` reports reference mapping for nonempty direct
+rosters only. All group/producer/reuse/resource/formal flags remain false and
+`reuse_edge=None` is fixed at roster, entry and reference levels. Distinct
+controller paths and obligation ordinals are retained provenance, not fields
+that must be equal across arms. A later common-Rref check must compare complete
+canonical N input/request, carry/current decision and exogenous scientific
+projection. Independently executed N runs retain their full resource cost.
+Actual N reuse needs a separate consumer reuse terminal and verified acyclic
+registry transitions; this unit does not implement that path.
+
+Tests use real journals with explicitly fake N0 numerical evidence and disabled
+native/Job entrypoints. Cached immutable declaration observations isolate the
+protocol tests; they do not establish runtime freshness or performance. Separate
+substitution/callback/foreign-file faults exercise the mandatory reader seams.
+This draft still requires terminal tests and independent R3 PRE_SEAL review.

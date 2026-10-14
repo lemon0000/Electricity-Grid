@@ -1,0 +1,28 @@
+{
+  "controller_obligation_job_clock_integration_verified": false,
+  "files_sha256": {
+    "docs/model_spec/rq2_h1_historical_parent_prefix_development_v1.md": "527d75167caf6fe9aaf9006fc6ce5157240f85a79997f9791bb90593e73e4c73",
+    "experiments/h1_historical_parent_prefix_development_v1.py": "22dd69854c40c9a03869e4e5f7b43f8883b3d9ca28b1f56a48834e31bdff6bd9",
+    "tests/test_h1_historical_parent_prefix_development_v1.py": "81e42bae847996730064e66796c158a50b41ed9d687b37efbc6e71db1ca8f02e"
+  },
+  "real_native_calls": 0,
+  "root_transcription_of_terminal_results": true,
+  "synthetic_jobs": 0,
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_historical_parent_prefix_development_v1.py",
+      "exit_code": 0,
+      "passed": 9,
+      "seconds": 327.87,
+      "test_version": "before namespace and wrong-head test extension; production code unchanged; prior test hash not captured"
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_historical_parent_prefix_development_v1.py -k 'namespace or head or old_prefix'",
+      "deselected": 8,
+      "exit_code": 0,
+      "passed": 8,
+      "seconds": 76.1,
+      "test_version": "current frozen test bytes"
+    }
+  ]
+}

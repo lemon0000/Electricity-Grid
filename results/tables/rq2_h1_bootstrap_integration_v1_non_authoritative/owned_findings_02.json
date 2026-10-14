@@ -1,0 +1,25 @@
+{
+  "status": "PRE_SEAL_FINDINGS_PENDING_REPAIR",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "owned_code_sha256": "4426c2ca7631f5feae692161f9313f5bfe563fca173b8ef52ab31b5612137513",
+  "findings": [
+    {
+      "id": "F1",
+      "problem": "Mutable cleanup tuple is neither bound nor independently preserved for close",
+      "required": "Bind six original lease objects and close from original tuple even on drift"
+    },
+    {
+      "id": "F2",
+      "problem": "Constructor tail cleanup tuple assembly still outside exception cleanup",
+      "required": "Include every post-super lookup in cleanup try"
+    }
+  ],
+  "prior_fixes_statically_checked": [
+    "phase-aware cursor/start/intent",
+    "exact active request tuple",
+    "network object/identity/structure"
+  ],
+  "tests_run_by_reviewer": 0,
+  "reviewer_stopped_reading": true,
+  "formal_result": false
+}

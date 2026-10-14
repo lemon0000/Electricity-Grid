@@ -1,0 +1,46 @@
+{
+  "reviewer": "/root/selector_owner_design_review",
+  "source": "root transcription of independent reviewer final response",
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_selector_phase_handoff_nested_resources_development_v1.py",
+    "-k",
+    "durable_damage or delete_stream or delete_alias"
+  ],
+  "output": "......                                                                   [100%]\n6 passed, 25 deselected in 60.12s (0:01:00)\n",
+  "exit_code": 0,
+  "pytest_seconds": 60.12,
+  "before": {
+    "experiments/h1_selector_phase_handoff_development_v1.py": "e7b30fab63162cec6b722711094f23b21aa237f55a923b122951af4cc1778761",
+    "tests/test_h1_selector_phase_handoff_nested_resources_development_v1.py": "2428bafef4d7ad93a9b27b73a52fa25302754cc2a76d121149050c7c8d9f6f86",
+    "docs/model_spec/rq2_h1_selector_phase_handoff_development_v1.md": "ea48e51edc45362686b28fc1f7df37d5cb9dbb6fbfe34edcec3ea4160f1c6294",
+    "tests/test_h1_selector_phase_handoff_global_journal_development_v1.py": "5f49423899f8bea0bb163b17987d5436add5b22e23c5507c7b3d6cc779b18fca"
+  },
+  "after": {
+    "experiments/h1_selector_phase_handoff_development_v1.py": "e7b30fab63162cec6b722711094f23b21aa237f55a923b122951af4cc1778761",
+    "tests/test_h1_selector_phase_handoff_nested_resources_development_v1.py": "2428bafef4d7ad93a9b27b73a52fa25302754cc2a76d121149050c7c8d9f6f86",
+    "docs/model_spec/rq2_h1_selector_phase_handoff_development_v1.md": "ea48e51edc45362686b28fc1f7df37d5cb9dbb6fbfe34edcec3ea4160f1c6294",
+    "tests/test_h1_selector_phase_handoff_global_journal_development_v1.py": "5f49423899f8bea0bb163b17987d5436add5b22e23c5507c7b3d6cc779b18fca"
+  },
+  "root_fresh_pins": {
+    "experiments/h1_selector_phase_handoff_development_v1.py": "e7b30fab63162cec6b722711094f23b21aa237f55a923b122951af4cc1778761",
+    "tests/test_h1_selector_phase_handoff_nested_resources_development_v1.py": "2428bafef4d7ad93a9b27b73a52fa25302754cc2a76d121149050c7c8d9f6f86",
+    "docs/model_spec/rq2_h1_selector_phase_handoff_development_v1.md": "ea48e51edc45362686b28fc1f7df37d5cb9dbb6fbfe34edcec3ea4160f1c6294",
+    "tests/test_h1_selector_phase_handoff_global_journal_development_v1.py": "5f49423899f8bea0bb163b17987d5436add5b22e23c5507c7b3d6cc779b18fca"
+  },
+  "reading_stopped": true,
+  "real_native_calls": 0,
+  "windows_jobs": 0,
+  "static_findings_closed": [
+    "unconditional borrowed durable revalidation",
+    "deleted field restoration inside poison boundary"
+  ],
+  "official_verdict": false,
+  "F6_closed": false
+}

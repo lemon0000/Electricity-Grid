@@ -1,0 +1,56 @@
+{
+  "schema": "unauthorized_development_native_boundary_incident_v1",
+  "status": "EXECUTION_ENDED_EVIDENCE_PRESERVED",
+  "cause": "Root expanded regression to legacy normal_worker suite before auditing its native calls. This violated current no-new-native authority boundary.",
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_rq2_normal_resources_v1.py",
+    "tests/test_rq2_normal_worker_v1.py"
+  ],
+  "exit_code": 0,
+  "passed": 60,
+  "pytest_seconds": 35.79,
+  "solver": "HiGHS 1.15.1",
+  "declared_per_call_seconds": 1,
+  "persisted_results": [
+    {
+      "path": "pytest_artifacts/test_duplicate_worker_claim_ca0/attempt_non_authoritative/normal_non_authoritative/normal.sqlite3",
+      "solver_calls": 1,
+      "call_count_complete": true,
+      "formal_result": false
+    },
+    {
+      "path": "pytest_artifacts/test_owned_worker_tiny_native_0/attempt_non_authoritative/normal_non_authoritative/normal.sqlite3",
+      "solver_calls": 1,
+      "call_count_complete": true,
+      "formal_result": false
+    },
+    {
+      "path": "pytest_artifacts/test_worker_crash_windows_neve2/attempt_non_authoritative/normal_non_authoritative/normal.sqlite3",
+      "solver_calls": 1,
+      "call_count_complete": true,
+      "formal_result": false
+    }
+  ],
+  "confirmed_persisted_native_calls": 3,
+  "additional_unresolved_execution": {
+    "test": "test_full_record_cap_failure_keeps_intent",
+    "execution_return_observed_by_failure_path": true,
+    "durable_native_call_count": null,
+    "evidence": "pytest_artifacts/test_full_record_cap_failure_k0/attempt_non_authoritative/worker_error.json",
+    "explanation": "normal_store.execute returned from execution.run_source_normal then rejected oversized result; no result row persisted. Do not infer a durable exact total."
+  },
+  "total_native_call_count_complete": false,
+  "formal_run": false,
+  "run_authorized": false,
+  "automatic_retry": false,
+  "process_check_after_discovery": "No Python or Gurobi process; suite had already ended before a stop could be issued.",
+  "preserved_file_count": 109,
+  "corrective_action": "Read transitive test execution paths before selecting commands. Restrict this unit to exact launch preparation test and read-only resource test; native worker suite is excluded. Preserve all logs and records. No source/result or official gate changed."
+}

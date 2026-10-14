@@ -1,0 +1,40 @@
+{
+  "status": "SCOPED_ORACLE_FIX_VERIFIED_FULL_CHAIN_PENDING",
+  "failure_attempt": "chain_04",
+  "failure_exit_code": 1,
+  "failure_elapsed_seconds": 28600.970456100004,
+  "changed_previously_pinned_files": [
+    "tests\\h1_group_selector_integration_helpers_v2.py"
+  ],
+  "repair": "Rref zero-workload expected first canonical objective is negative zero; exact hex comparison retained",
+  "saved_terminal_path": "D:\\h1_chain_04_non_authoritative\\test_complete_independent_N0_r0\\parent_non_authoritative\\worker_non_authoritative\\science_sequence_non_authoritative\\terminal.json",
+  "saved_terminal_sha256": "b68dad97bedc94098ab3afbc6c53c50a666b7c0c0adb4461882041b221b2f079",
+  "saved_lock_hex": [
+    "-0x0.0p+0",
+    "0x0.0p+0",
+    "0x1.4000000000000p+4"
+  ],
+  "repaired_oracle_hex": [
+    "-0x0.0p+0",
+    "0x0.0p+0",
+    "0x1.4000000000000p+4"
+  ],
+  "saved_record_check_scope": "retained terminal compared with corrected fixture oracle; not a fresh full source replay",
+  "exact_current_files": {
+    "tests\\h1_group_selector_integration_helpers_v2.py": "2c0b1e1b41b47661b0cebf433df66e796a541c83bfb58e33660b9cdda568ce1b",
+    "tests\\test_h1_hour0_zero_workload_oracle_v2.py": "01a66bed33c5f2831a96a72669b58be44c7516168fad0ac682e1976f295c9611"
+  },
+  "red_evidence": "zero_oracle_red_01/terminal.json",
+  "green_evidence": "zero_oracle_green_01/terminal.json",
+  "archived_artifacts": 461,
+  "artifact_inventory_sha256": "24be24d33f16d862c415064452fce9b73340a8e80b2ffd8e01e06e2e3de19279",
+  "independent_review": {
+    "reviewer": "routing_review",
+    "scope": "read-only non-authoritative pre-seal contract and repair review",
+    "findings_closed": true,
+    "official_verdict": false
+  },
+  "full_chain_passed": false,
+  "formal_result": false,
+  "native_execution_authorized": false
+}

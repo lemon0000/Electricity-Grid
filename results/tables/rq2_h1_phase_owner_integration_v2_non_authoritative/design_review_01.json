@@ -1,0 +1,38 @@
+{
+  "files_sha256": {
+    "docs/model_spec/rq2_h1_phase_owner_integration_design_v1.md": "853945c6241441751a98130848193bdfff14f843a5bfb97bceabfb36f4c5673d",
+    "experiments/h1_bounded_file_parent_development_v1.py": "fcb6905f2a940cb2b5211e8994008e1144c842b1fa38548a1bc5dd9cd4c587c4",
+    "experiments/h1_exact_source_current_development_v1.py": "d0fef057f104676149b6c9b301bebe97447c703026191703ceb15d9d9fb948c4",
+    "experiments/h1_historical_controller_development_v1.py": "bcfa2f13a1fbb6dbd26409f5f9ddd69ebc510ab470ae7ca816ad35d89e98ff4e",
+    "experiments/h1_historical_parent_prefix_development_v1.py": "b859174f6b5ec22f7083114973f54741178c5f3257b013150a3a36bb7a16fe3b",
+    "experiments/h1_job_clock_bridge_development_v1.py": "23512dc30464f6828c4edcb75377220a2c4510b1d961e2af29a86302cabcc9ab",
+    "experiments/h1_origin_current_information_development_v1.py": "9ac9ba3218b962ea5a4bccd1a7b7589a4f64bc8cd2d892477d8aafaaafa9e333",
+    "experiments/h1_persistent_owner_development_v1.py": "00728eff92ad7acf47fa445cf88c856eee6e160ae8a65d7a0d39605b2c4152b3",
+    "experiments/h1_phase_obligation_binding_development_v1.py": "b1c5b9ba56b2167062c91199c746cb0cc2fe79e113bb1a2a2038e9a7d9897630",
+    "experiments/h1_prepared_ticket_owner_development_v1.py": "258b37334d7f1d2610ffcf3c20d810e13d62ad6c266fca3b43c2a2d983dd1eac",
+    "experiments/h1_timed_job_controller_development_v1.py": "bcb91519ab46bd245c573c731aabc4ef2f1c4c74551c461a212587bd69a33c86"
+  },
+  "findings": [
+    "Controller currently receives caller-supplied network and expected_source_identity; successor must internalize source access after a persisted attempt.",
+    "bridge.step performs headroom and clock intent before base step; owner gate must precede the entire bridge call.",
+    "Ready parent restore replays sources referenced by existing intents, not an unattempted next row; pending parent must be rejected before continuation.",
+    "Prepared TicketHolder whitelist is frozen to intent/outcome/witness; new attempt/terminal schema requires successor.",
+    "Old owner and historical controller have 168h restrictions; new 192h declaration and schemas must not reinterpret old roots.",
+    "Need/disposition must be derived from fresh paired replay inside the operation guard; detached assessment cannot mint authority."
+  ],
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "jobs": 0,
+  "read_only": true,
+  "real_native_calls": 0,
+  "recommended_boundaries": [
+    "one-shot bootstrap0 journal before source/network/controller construction",
+    "owner FSM and prepared holder supporting attempt/episode_terminal with branch reservation",
+    "phase controller plus 192h historical/current reader with internal source loading"
+  ],
+  "resource_admission": false,
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "schema": "h1_phase_owner_integration_design_review_v2",
+  "status": "DESIGN_ONLY_UNIMPLEMENTED",
+  "tests_run": false
+}

@@ -1,0 +1,298 @@
+# Integrated bootstrap implementation draft
+
+2026-10-09. DRAFT_NONAUTHORITATIVE; implementation remains open.
+Design: rq2_h1_bootstrap_integration_design_v1.md. Root is the sole writer.
+
+Current code implements a private bounded global journal and a per-bootstrap
+journal inside BootstrapOwner. The declaration fixes the study path, symbolic
+manifest pin, training_ub ordinal and logical journal bounds. Episode paths are
+derived from the obligation identity, not supplied as arbitrary alternative
+controller roots. Only unresolved training_ub slot0 is accepted.
+
+bootstrap persists a local attempt, then a matching global claim. The proposal
+hash excludes the eventual claim record/head, preventing a circular identity.
+The global claim references the exact local attempt head and prospective roots.
+After matching claim readback, the owner verifies source configuration bytes and
+the pinned RTS source, loads the RTS data internally, extracts only its static
+network, and compares network identity, DC bus and every canonical stage UID.
+Configuration/source/implementation are rechecked around this extraction.
+The static network has no hourly_points; none is read/copied/hashed by extraction.
+This does not claim that the upstream chronological loader avoids its own file
+reads or memory allocations. No current N row is loaded through load_pinned_current.
+
+The owner then retains profile_checked and constructs the new192 phase controller
+internally from the exact obligation-derived origin. It reconstructs and pins
+the still-empty controller's clock/obligation bindings, parent event header,
+anchor header and genesis record. Canonical serialization follows each existing
+writer: controller metadata has no final LF, while this bootstrap journal has LF.
+The local controller is closed and discarded before controller_ready publication
+or any external retain callback. No live controller is stored on the owner;
+the record explicitly carries live_controller_retained=false. Its _check always
+denies execution in this draft. Closing every lease before exposure also blocks
+unbound inherited Job methods before they can create a Job directory or child.
+controller_ready is persisted only after those bindings and exact empty directory
+namespaces are checked. Replay rejects Job or parent/clock/obligation suffixes
+before global release registration.
+The default method stops at controller_genesis_retained. The private owned and
+registered development routes below extend it; paired handoff remains open.
+The default method returns no producer permission.
+
+Both journals require externally retained heads on reopen, fixed same-process
+and same-thread leases, canonical bounded records and a continuous hash chain.
+Within a live handle, header and event file identities are checked and events
+are reread before returning. This detects ordinary drift; it is not a hostile
+ABA or crash-durability certificate. Unknown writes poison the handle and keep
+all bytes. A suffix beyond the external retained head is rejected, not adopted.
+
+An existing attempt cannot automatically call bootstrap again. A failed write
+with no artifact can reopen as new only when the exact empty head is established.
+Attempt-without-claim remains inspectable but cannot automatically resume.
+Profile-load and controller-construction exceptions retain a pre_release_stop
+with stage, exception type and unresolved status. A partial controller directory
+is preserved. Partial controller namespaces are bounded subsets of the six known
+genesis directories; existing metadata is bounded-read and all file/directory
+views are rechecked. Unexpected execution suffixes or non-plain nodes are rejected.
+A retained profile with controller artifacts but no ready record reopens as
+controller_artifacts_uncommitted, recovery_required=true. A recorded construction
+stop remains pre_release_unresolved with recovery_required=true. Neither state
+conceals existing artifacts or permits retry. Partial metadata is retained for
+recovery and does not need to be a completed canonical genesis record.
+Failures of profile/ready journal publication are not converted
+into a successful stop record: unknown writes retain the external-head mismatch.
+Reopening profile_verified or controller_genesis_retained is inspection only;
+an existing attempt can never call bootstrap automatically again.
+Duplicate episode root creation preserves the existing record. Global branch
+capacity is checked before the first attempt; logical caps do not prove physical
+allocation, full-study storage, wall time or memory admission.
+
+Every global claim is reconstructed from the pinned symbolic obligation, fixed
+manifest path, study/profile and derived episode roots, including claims for
+other episodes. Its exact proposal digest, bootstrap header/genesis and first
+attempt bytes/head must agree. Cross-referenced files are reread after global
+replay. Each unreleased claim reserves two further global records (release and
+terminal); a globally released slot reserves one terminal, including when its
+execution is indeterminate. A new attempt requires three additional records. Header-derived
+genesis is checked on every live journal operation.
+
+RunConfiguration binds canonical upstream/config paths, the frozen source config
+pin, declared network identity/DC bus, typed solver specification/replay limits/
+short Job budget, and a complete declared canonical stage order. The common
+study header includes its serialized fields. bootstrap requires this exact type
+and compares every StaticProfile field before writing its attempt. Missing or
+mismatched configuration and the previous synthetic-profile example fail here.
+Network identity and stage inventory are still declarations at this point.
+
+Profile hashing uses the existing canonical JSON encoder: dc_bus, specification,
+limits, Job budget and stage_order are hashed separately. source_config uses the
+frozen source pin; implementation uses this unit's implementation_identity;
+origin_rule uses the normal_h1_model module bytes; need_rule uses the finite
+followup assessment implementation identity. These hashes bind code and inputs;
+they do not establish a live owner need, network correspondence or admission.
+Before hour1+ claims and mutual attachment, a dedicated need-consumption
+identity (or equally strong owner identity) must also bind phase-owner's
+_assessment adapter and its prepare/FSM consumption. The current need_rule
+field covers finite-followup assessment only. The 300-second Job ceiling is
+the inherited short development limit, not a full experiment resource budget.
+
+Pre-source tests use an explicit test-only continuation stop and deny source/
+network/controller access. Post-claim tests restore the real continuation and
+controller constructor, with a synthetic static inventory and a test-only RTS
+verification/loader seam. They use the real frozen configuration bytes and
+obligation catalog, poison hourly_points, and continue to deny current N loading.
+These tests verify publication order, static extraction, exact controller genesis,
+typed unresolved failures and write windows. They do not prove a real RTS profile,
+native execution, full192 accepted prefix, runtime clock budget or source security.
+The stored profile record records a past content check; it is not a live source
+capability. Future release must freshly validate source/profile at actual use.
+
+Open within this same unit:
+
+The private _record_release persistence seam is now implemented. It requires
+the fixed owner PID/thread/operation lock and the same bootstrap operation nonce
+at entry, before writes, after each retain callback and before return;
+the default continuation still stops at genesis and does not invoke this seam.
+The test-only continuation is not a public callback or constructor option.
+Local release fixes slot, claim proposal/head, ready head and canonical ready
+body digest. Global release fixes the same slot/claim and the local release head
+and body digest, with no cyclic references. It produces no execution capability.
+
+Registry replay reconstructs each released episode's local header, attempt,
+profile, ready and release chain and checks the five fixed genesis files,
+including foreign episodes. A released bootstrap journal has exactly lock,
+header and seq1..4, optionally followed by the exact audited N0 seq5; bounded
+directory snapshots reject any other protocol suffix and are rechecked at final cross-read. This is distinct from the later
+controller execution namespace. All cross-referenced local files and genesis views
+are reread before returning. Duplicate release, release without claim, mismatched
+schema/identity and unimplemented global transitions are rejected. The N0
+terminal transition below binds and audits local seq5.
+Local release alone is release_metadata_uncommitted; a retained global release
+without an exact N terminal is execution_indeterminate. Both require recovery
+and disallow retry. An unretained write suffix remains an external-head error.
+No explicit same-attempt release reconciliation is implemented yet.
+
+Before global release, the controller namespace must remain exactly empty.
+The writer checks it before local release, after local retention, and after
+global retention. After a previously retained global release without local N0 terminal, replay
+validates only the fixed genesis paths and leaves execution suffixes unaudited.
+An exact local N0 terminal instead requires full numerical replay and exact N0
+protocol topology as described below. execution_artifacts_audited=false is explicit even if no suffix exists.
+Such a suffix is neither an accepted N terminal nor a result or retry permit.
+This metadata-only seam has no live controller leases spanning registration and
+source entry. Establishing that temporal order is still the owned producer's
+responsibility. Fresh lock bytes/single-link identity/live bindings are required
+before execution or rehydration; existing ready metadata cannot provide them.
+The current local bound reserves five remaining records at ready, preserving
+the existing eight-record draft ceiling. The eventual complete success/failure
+branch count must be established before opening the producer.
+
+- Complete unresolved-execution handling; no automatic retry or unknown suffix adoption.
+- N0 terminal to actual phase-owner paired consume and mutual attachment.
+- Full write-window tests and independent pre-seal review of the integrated path.
+
+No development closure or official receipt is generated for this partial draft.
+All formal/resource/native authority flags remain false.
+
+## Owned producer draft
+
+The private `_continue_owned_development` route constructs a fresh
+`h1_owned_bootstrap_controller_development_v1.OwnedController`; it is not the
+default continuation. Its six runtime leases remain live from before ready
+publication through local/global release registration and N0 processing.
+No controller handle is stored on BootstrapOwner or returned to the caller.
+`live_controller_retained=false` describes that absence of a retained capability;
+the private route has a local live instance during its operation. It cannot
+rehydrate execution from closed genesis metadata.
+
+The inherited base lease is permanently None after construction and inherited
+`_check` always rejects. Independent named owned methods preserve the existing
+parent, obligation, clock and Job transactions. All four nonblocking guards are
+held in their original order across ready/release callbacks and execution.
+The same PID/thread, owner operation/nonce, six original leases and lock bytes,
+configuration and release heads are rechecked at effect boundaries. Lock reads
+use each owned handle and require one regular single-link byte containing `0`.
+Each lease's original handle, root and file identities are fixed separately.
+The owner network object/identity, fixed clock/obligation roots and binding pins,
+192-hour declaration and N0 cursors are also bound. Expected cursor changes are
+made only by this transaction after its verified terminal transitions. Clock
+start and intent pins are fixed at their corresponding owned publication steps.
+All post-super constructor lookups are covered by cleanup, with leases captured
+incrementally. The cleanup tuple is checked against the six fixed lease objects;
+close identity-deduplicates independent original/runtime/root captures so a
+detected omission from either cleanup tuple still releases all original leases.
+N0 indices, horizon and clock scalars require exact integer types, including
+rejection of Python bool/numerically equal float substitutions before effects.
+Constructor-tail failure closes every captured original lease. An active Job
+request must match the exact path and digest reconstructed from its ticket,
+including at gates that precede request-file creation.
+
+The single-use N0 scope reads retained global release, observes headroom, then
+internally loads current source and derives its identity and predecessor.
+The parent independently reloads that identity. Job creation, suspended-child
+creation and child release each require the exact owned request context.
+Whole-Job exit, source/snapshot rereads, numerical replay, parent outcome and
+clock/obligation records retain their existing acceptance rules.
+Before Job-directory creation the derived scratch cwd must fit Windows
+CreateProcessW's MAX_PATH limit measured in UTF-16 code units. This explicit rejection preserves an
+indeterminate attempt; it does not shorten or relocate a declared episode.
+
+The owned-only route returns `pending_N_terminal_registration`; its four-record
+prefix remains execution_indeterminate and disallows retry. The separate
+registered route below adds local/global N0 metadata after controller closure.
+Paired handoff remains absent. The owned route
+is new R3 draft code requiring numerical synthetic checks and independent
+pre-seal review. Its existence grants no native authority or resource admission.
+
+
+## N0 terminal evidence preparation draft
+
+The private `_prepare_N0_terminal` helper accepts no caller envelope, source key,
+terminal pin or body. Under the original active BootstrapOwner operation it
+rebuilds the retained four-record release prefix, derives the obligation binding
+from controller genesis and the N0 terminal pin from its fixed file, then invokes
+the existing historical `prepare(completed_hours=1)` numerical replay. The
+returned object type alone is not a credential: the helper invokes the reader
+internally and checks its declaration, pins, implementation, decision and audit.
+
+The historical reader deliberately allows later recorded suffixes. Bootstrap
+therefore adds an exact N0 protocol topology check around that preparation:
+controller Job 000; clock 000; obligation 000 binding/job/terminal; source-parent
+hour 000; parent events 001/002; anchors 000/001/002. Existing Job/worker views
+bind the deeper prefix. The same observed file/directory identities and bytes,
+source support identities, release heads and operation nonce must survive the
+preparation. The candidate body retains a topology digest separately from the
+scientific decision identity. Historical suffix flags are not relabelled.
+
+Scratch is an opaque plain directory node with stable identity. Its contents
+remain unaudited and outside scientific evidence; an 8 MiB headroom demand is
+not a proved allocation bound. Normal temporary files need not be removed or
+interpreted to prepare a numerical candidate.
+
+This helper does not write local/global terminals and is not connected to the
+default or owned continuation. Returned evidence is fresh at return only.
+The internal evidence builder is also used by the registered route and registry
+replay below. All formal/resource/native authority flags remain false.
+
+
+## N0 local/global terminal registration draft
+
+The private `_continue_registered_development` route runs the owned N0 route,
+expires its scope and closes its leases, then retains local seq5 and the global
+N0 terminal under the same original BootstrapOwner operation nonce. Default
+bootstrap remains metadata-only. No caller supplies a terminal body or envelope.
+
+Before the first attempt, the exact local terminal schema and a maximal global
+sequence number determine record byte bounds. Every dynamic body field except
+the fixed derived controller root is an exact 64-character SHA256; the same
+body constructor is used for the bound and real records. Logical global debts
+are two records for a claim, one for a release and zero after its N0 terminal;
+a new claim still reserves three. These are logical limits, not physical resource
+admission. Unresolved N execution remains indeterminate rather than being
+rewritten as an accepted or infeasible terminal.
+
+The writer holds the expected local/global row sequences, original nonce and
+N0 observations across both retention callbacks. After local retention it
+rebuilds the numerical audit and compares the full body before global writing.
+After global retention it cross-replays the registry and rechecks observations
+and operation bindings. Global metadata binds the claim, release, exact local
+terminal head/body digest and evidence identity. A terminal never grants native
+or paired-consumption authority.
+
+Registry replay validates local seq5's canonical chain and exact numerical
+body even for foreign episodes, retains its observations, and rechecks local
+journal/genesis views and global rows after final numerical/source observations.
+Unknown seq6+ and unknown global transitions are rejected. A foreign local seq5
+without a global terminal gives no completion or reuse credit; reopening its own
+BootstrapOwner still requires that local head to have been externally retained.
+
+An externally retained local terminal without global commit is
+`local_N_terminal_uncommitted`, recovery_required=true, retry_authorized=false.
+Explicit `reconcile_N0_terminal` on a freshly reopened owner replays the same
+local terminal and appends only the missing global record. It never runs N,
+changes the local terminal or adopts a suffix beyond supplied external heads.
+A committed N0 pair of journal records is `pending_post_N`; this is pending
+business/Rref/Actual paired execution, not a paired research result.
+`N0_numerical_evidence_audited` identifies the narrow numerical scope; the broad
+`execution_artifacts_audited` remains false because scratch is opaque.
+
+Tests separate zero-Job protocol fault injection with explicitly fake numerical
+evidence from the full synthetic Windows Job/numerical registration and foreign
+replay case. These draft checks do not prove real native authentication,
+complete192/all-family support, resource admission or formal-run authority.
+# Registry declaration binding (development addition)
+
+An optional typed `RegistryBinding(path, sha256, split)` is included in the immutable
+BootstrapDeclaration and study binding, hence in local and global journal
+identities and foreign-episode replay. Constructor/reopen and the first attempt
+freshly inspect the declaration against the obligation's exact split.
+The study binding also retains the resolved global registry identity and split.
+Full inspection repeats after the retained global claim, before continuation.
+Owner checks compare the stable declaration bytes and file identity, including
+after retention callbacks. A changed declaration cannot be adopted on reopen.
+
+Absent binding retains the existing N-only development path. A present binding
+is only pre-execution metadata: `registry_declaration_bound` does not imply
+paired source correspondence, a validated current outage window or run authority.
+Future paired entry must freshly call the registry and phase source validators;
+no cached declaration view substitutes for those checks. No new native authority
+is introduced here.
+

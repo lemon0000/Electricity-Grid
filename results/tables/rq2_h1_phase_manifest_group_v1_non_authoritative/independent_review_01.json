@@ -1,0 +1,30 @@
+{
+  "status": "PRE_SEAL_IMPLEMENTATION_FINDINGS_CLOSED_TEST_REVISION_PENDING",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "files_sha256": {
+    "experiments/h1_phase_manifest_group_development_v1.py": "e03da050cdedeef5b1d1370b078aa8ef672d5bf66f1e1e41ede939c12cf804cc",
+    "tests/test_h1_phase_manifest_group_development_v1.py": "e0226037ebdf48a7474004c37e7826c4f5125c56d06fc0e933c1a9419a18f8dc",
+    "docs/model_spec/rq2_h1_phase_manifest_group_development_v1.md": "7e5ebce37ea7e693757e428970386c93067538777b8c6e3331c947efdb3bccc3"
+  },
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_phase_manifest_group_development_v1.py",
+    "-k",
+    "family_projection or external_dependency"
+  ],
+  "result": "5 passed, 8 deselected in 2.96s",
+  "wrapper_wall_seconds": 3.43,
+  "exit_code": 0,
+  "unchanged": true,
+  "reviewer_stopped_reading": true,
+  "jobs": 0,
+  "native_calls": 0,
+  "official_verdict": false,
+  "formal_result": false
+}

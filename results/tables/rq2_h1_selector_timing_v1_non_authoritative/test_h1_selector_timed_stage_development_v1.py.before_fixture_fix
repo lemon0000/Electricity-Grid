@@ -1,0 +1,230 @@
+"""Default QPC, fabricated optimize, unchanged scientific replay; zero native."""
+import ast
+from functools import lru_cache
+import inspect
+import json
+import textwrap
+from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
+
+from experiments import h1_selector_timed_stage_development_v1 as m
+from tests import test_h1_selector_raw_science_development_v1 as producer
+from tests.test_rq2_normal_h1_hour_archive_v1 import no_solver
+
+
+def test_capture_fork_changes_only_explicit_apply_call():
+    old=ast.parse(textwrap.dedent(inspect.getsource(m.capture.legacy.StageCapture.run)))
+    new=ast.parse(textwrap.dedent(inspect.getsource(m.capture.StageCapture.run)))
+    hits=0
+    for node in ast.walk(new):
+        if isinstance(node,ast.Call) and isinstance(node.func,ast.Attribute) and node.func.attr=='_timed_apply':
+            assert ast.dump(node.func.value)==ast.dump(ast.Name(id='self',ctx=ast.Load()))
+            assert [ast.dump(x) for x in node.args]==[ast.dump(ast.Name(id='solver',ctx=ast.Load()))]
+            assert not node.keywords
+            node.func=ast.Name(id='apply',ctx=ast.Load());node.args=[];hits+=1
+    assert hits==1 and ast.dump(old)==ast.dump(new)
+
+
+def test_science_fork_changes_only_capture_wiring_and_internal_return():
+    old=ast.parse(textwrap.dedent(inspect.getsource(m.bridge._run_stage)))
+    new=ast.parse(textwrap.dedent(inspect.getsource(m._science_stage)))
+    f=new.body[0];f.name='_run_stage'
+    assert f.args.kwonlyargs[-1].arg=='timing_root'
+    f.args.kwonlyargs.pop();assert f.args.kw_defaults.pop() is None
+    hits=0
+    for node in ast.walk(new):
+        if isinstance(node,ast.Call) and isinstance(node.func,ast.Attribute) and node.func.attr=='StageCapture':
+            extras={'timing_root','stage_index','stage_label','producer_implementation'}
+            assert extras<={k.arg for k in node.keywords}
+            node.keywords=[k for k in node.keywords if k.arg not in extras];hits+=1
+    assert hits==1 and isinstance(f.body[-1].value,ast.Tuple)
+    assert isinstance(f.body[-1].value.elts[1],ast.Name) and f.body[-1].value.elts[1].id=='owned'
+    f.body[-1].value=f.body[-1].value.elts[0]
+    assert ast.dump(old)==ast.dump(new)
+
+
+@pytest.fixture
+def factory(tmp_path,monkeypatch,no_solver):
+    physical=m.selector.physical.implementation_identity()
+    monkeypatch.setattr(m.selector.physical,'implementation_identity',lambda:physical)
+    monkeypatch.setattr(m.selector,'implementation_identity',lru_cache(None)(m.selector.implementation_identity))
+    for module in (m.bridge,m.stage,m.capture.legacy):
+        pin=module.implementation_identity()
+        monkeypatch.setattr(module,'implementation_identity',lambda pin=pin:pin)
+    def run(lane=producer.fixtures.R,*,index=0,records=(),fault=None):
+        root=tmp_path/(lane.role+str(index)+'_science_non_authoritative')
+        side=tmp_path/(lane.role+str(index)+'_timing_non_authoritative')
+        f,d,b,args=producer.inputs(lane)
+        instances=producer.install(monkeypatch,root,lane,fault)
+        direct=m.bridge.capture.GurobiDirect;original=direct._presolve
+        def presolve(self,*a,**kw):
+            original(self,*a,**kw)
+            self._env_options={};self._version_major=12;self._suffixes=();self._needs_updated=True
+            self.native.setParam=lambda *a:None
+            def optimize(callback):
+                assert callback is None
+                assert (root/'capture/native_raw/000/intent.json').exists()
+                assert (side/'native/intent.json').exists()
+                assert not (root/'capture/native_raw/000/raw.bin').exists()
+                self.apply_calls+=1
+                if fault=='optimize':raise RuntimeError('synthetic optimize failed')
+            self.native.optimize=optimize
+        monkeypatch.setattr(direct,'_presolve',presolve)
+        monkeypatch.setattr(m.capture,'GurobiDirect',direct)
+        monkeypatch.setattr(m.capture.timing,'GurobiDirect',direct)
+        context=(f,d,b,records)
+        key=m.request_key(*context,**args)
+        return root,side,context,args,key,instances
+    return run
+
+
+def run(c):
+    root,side,context,args,key,_=c
+    return m._run_stage(root,side,*context,expected_key=key,**args)
+
+
+def replay(c,out):
+    root,side,context,args,_,_=c
+    return m.inspect(root,side,*context,expected_terminal_sha256=out['sidecar_terminal_sha256'],**args)
+
+
+@pytest.mark.parametrize('lane',[producer.fixtures.R,producer.fixtures.A])
+def test_timed_stage_keeps_legacy_science_and_default_qpc(factory,lane):
+    c=factory(lane);out=run(c);assert replay(c,out)==out
+    root,side,context,args,_,instances=c
+    assert len(instances)==1 and instances[0].apply_calls==instances[0].close_calls==1
+    old=m.stage.inspect(root,*context,expected_terminal_sha256=out['science']['terminal_sha256'],**args)
+    assert old==out['science'] and out['legacy_wire_replay_verified']
+    assert 0<=out['native_interval_ns']<=out['apply_window_ns']<=out['stage_window_ns']
+    assert all(out[k] is False for k in (*m.FLAGS,'legacy_producer_execution_authenticated',
+        'old_owned_return_observed','live_timing_authenticated','whole_job_quiescence_checked','non_solver_allowance_verified'))
+    with pytest.raises(FileExistsError):run(c)
+    assert instances[0].apply_calls==1
+
+
+@pytest.mark.parametrize('fault',['optimize','postsolve','negative','close'])
+def test_failed_stage_preserves_raw_and_never_timed_terminal(factory,fault):
+    c=factory(fault=fault)
+    with pytest.raises((ValueError,RuntimeError)):run(c)
+    root,side,_,_,_,instances=c
+    assert (root/'capture/native_raw/000/raw.bin').exists()
+    assert not (side/'terminal.json').exists()
+    assert (side/'native/terminal.json').exists()==(fault!='optimize')
+    with pytest.raises(FileExistsError):run(c)
+    assert instances[0].apply_calls==instances[0].close_calls==1
+
+
+@pytest.mark.parametrize('fault',['sidecar_terminal','native_terminal','extra','science','pin','stage','producer','wire','window'])
+def test_joint_inspection_rejects_tampered_evidence(factory,fault):
+    c=factory();out=run(c);root,side,*_=c
+    if fault=='sidecar_terminal':(side/'terminal.json').unlink()
+    elif fault=='native_terminal':(side/'native/terminal.json').write_bytes(b'{}')
+    elif fault=='extra':(side/'extra.json').write_bytes(b'{}')
+    elif fault=='science':(root/'selector_record.json').write_bytes(b'{}')
+    elif fault=='pin':out['sidecar_terminal_sha256']='0'*64
+    elif fault=='window':
+        value=json.loads((side/'terminal.json').read_bytes());value['stage_start_ns']=value['stage_end_ns']
+        raw=m.io.encode(value);(side/'terminal.json').write_bytes(raw);out['sidecar_terminal_sha256']=m.io.digest(raw)
+    else:
+        value=json.loads((side/'binding.json').read_bytes())
+        value[{'stage':'stage_index','producer':'new_producer_implementation','wire':'legacy_wire_implementation'}[fault]]=1 if fault=='stage' else '0'*64
+        (side/'binding.json').write_bytes(m.io.encode(value))
+    with pytest.raises((ValueError,FileNotFoundError)):replay(c,out)
+
+
+def test_sidecar_from_another_stage_rejected(factory):
+    c0=factory();out0=run(c0)
+    c1=factory(index=1,records=(out0['science']['selector_record'],));out1=run(c1)
+    with pytest.raises(ValueError):
+        m.inspect(c0[0],c1[1],*c0[2],expected_terminal_sha256=out1['sidecar_terminal_sha256'],**c0[3])
+
+
+@pytest.mark.parametrize('after',[False,True])
+def test_new_terminal_write_failure_never_returns(factory,monkeypatch,after):
+    c=factory();original=m.capture.write
+    def fail(path,value):
+        if path==c[1]/'terminal.json':
+            if after:original(path,value)
+            raise OSError('timed terminal confirmation failed')
+        return original(path,value)
+    monkeypatch.setattr(m.capture,'write',fail)
+    with pytest.raises(OSError):run(c)
+    assert (c[0]/'terminal.json').exists() and (c[1]/'terminal.json').exists()==after
+    with pytest.raises(FileExistsError):run(c)
+
+
+@pytest.mark.parametrize('target',['science','timing'])
+def test_joint_read_bookend_rejects_drift(factory,monkeypatch,target):
+    c=factory();out=run(c);original=m.stage.inspect
+    def drift(*a,**kw):
+        result=original(*a,**kw)
+        path=c[0]/'observations.json' if target=='science' else c[1]/'native/intent.json'
+        path.write_bytes(path.read_bytes()+b' ')
+        return result
+    monkeypatch.setattr(m.stage,'inspect',drift)
+    with pytest.raises(ValueError):replay(c,out)
+
+
+@pytest.mark.parametrize('name',['intent.json','completion.json','terminal.json'])
+@pytest.mark.parametrize('after',[False,True])
+def test_measurement_write_failure_retains_raw_and_no_retry(factory,monkeypatch,name,after):
+    c=factory();original=m.capture.timing.io.write_metadata
+    def fail(path,value):
+        if path==c[1]/'native'/name:
+            if after:original(path,value)
+            raise OSError('synthetic measurement publication failure')
+        return original(path,value)
+    monkeypatch.setattr(m.capture.timing.io,'write_metadata',fail)
+    with pytest.raises(OSError):run(c)
+    assert (c[0]/'capture/native_raw/000/raw.bin').exists()
+    assert not (c[1]/'terminal.json').exists()
+    assert (c[1]/'native'/name).exists()==after
+    with pytest.raises(FileExistsError):run(c)
+    assert c[5][0].apply_calls==(0 if name=='intent.json' else 1)
+    assert c[5][0].close_calls==1
+
+
+def test_sidecar_same_request_different_root_rejected(factory):
+    c0=factory();run(c0)
+    c1=factory(index=1);out1=run(c1)
+    assert c0[4]==c1[4]
+    with pytest.raises(ValueError):
+        m.inspect(c0[0],c1[1],*c0[2],expected_terminal_sha256=out1['sidecar_terminal_sha256'],**c0[3])
+
+
+def test_timing_reparse_file_rejected_before_read(factory,monkeypatch):
+    c=factory();out=run(c);target=c[1]/'native/intent.json'
+    original=Path.stat
+    def flagged(path,*a,**kw):
+        value=original(path,*a,**kw)
+        if path==target and kw.get('follow_symlinks') is False:
+            return SimpleNamespace(st_mode=value.st_mode,st_nlink=value.st_nlink,st_file_attributes=1024)
+        return value
+    monkeypatch.setattr(Path,'stat',flagged)
+    with pytest.raises(ValueError,match='plain single-link'):replay(c,out)
+
+
+def test_joint_read_rejects_same_bytes_file_replacement(factory,monkeypatch):
+    c=factory();out=run(c);original=m.stage.inspect
+    target=c[1]/'native/intent.json';saved=target.read_bytes()
+    def replace(*a,**kw):
+        result=original(*a,**kw)
+        target.rename(c[1].parent/'retained_old_intent.json')
+        target.write_bytes(saved)
+        return result
+    monkeypatch.setattr(m.stage,'inspect',replace)
+    with pytest.raises(ValueError,match='view changed'):replay(c,out)
+
+
+@pytest.mark.parametrize('name',['binding.json','terminal.json','completion.json'])
+def test_malformed_native_structure_is_value_error(factory,name):
+    c=factory();out=run(c);side=c[1]
+    (side/'native'/name).write_bytes(b'{}')
+    if name=='terminal.json':
+        terminal=json.loads((side/'terminal.json').read_bytes())
+        terminal['measurement_terminal_sha256']=m.io.digest(b'{}')
+        raw=m.io.encode(terminal);(side/'terminal.json').write_bytes(raw)
+        out['sidecar_terminal_sha256']=m.io.digest(raw)
+    with pytest.raises(ValueError,match='native timing fields'):replay(c,out)

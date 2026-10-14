@@ -1,0 +1,8 @@
+{
+  "status": "PRE_SEAL_REPAIR_PENDING_TEST",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "reviewed_code_sha256": "3bf0d2492ae2d3f45455c07ceeee21295670c2b7bcc5bf86c7b3390d1e9c2ec5",
+  "finding": "N0 observer omitted canonical byte0 validation for Job and worker execution.lock; stable byte1 could be absorbed into first topology observation",
+  "repair": "Read both locks using single-link stable read cap1, require byte0 and retain in observed; numerical test injects byte1 into each before terminal publication and checks no journal changes",
+  "formal_result": false
+}

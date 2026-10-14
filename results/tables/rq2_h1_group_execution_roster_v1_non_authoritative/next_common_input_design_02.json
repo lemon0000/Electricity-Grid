@@ -1,0 +1,56 @@
+{
+  "status": "READ_ONLY_NEXT_UNIT_DESIGN_CORRECTION",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "implemented": false,
+  "tests_run": false,
+  "supersedes_fields_in": "next_common_input_design_01.json",
+  "correction": "Exact-current shortened normal audit is not the original historical audit; source_action_audit_identity is provenance, not a cross-arm scientific key.",
+  "sequence": [
+    "H1=bootstrap.historical.prepare exact retained N0 pins",
+    "E1=phase_owner._fresh exact current registry/source binding",
+    "match E1.prepared_current.decision.normal.decision_bytes to H1.decision.decision_bytes and common audit fields",
+    "H2=historical.prepare then E2=_fresh; compare each API own full bytes across bookends",
+    "fresh roster replay and retained reference/head check"
+  ],
+  "full_historical_pin_checks": [
+    "raw SHA256 audit_payload",
+    "implementation",
+    "controller_header_sha256",
+    "controller_terminal_sha256",
+    "decision_identity",
+    "historical_controller.parent_head",
+    "historical_controller.evidence_identity",
+    "normal_request_key",
+    "child_head",
+    "child_archive_identity",
+    "projection_identity",
+    "projection_payload_sha256"
+  ],
+  "shared_audit_fields": [
+    "decision_identity",
+    "parent_declaration",
+    "historical_controller",
+    "normal_before",
+    "normal_after",
+    "normal_input_identity",
+    "packet_audit_identity",
+    "source_timestamp",
+    "source_time_basis"
+  ],
+  "cross_arm_science": [
+    "N decision bytes and normal request/input/before/after/locks",
+    "current decision bytes with canonical outage decision_view",
+    "exogenous scientific payload with exact workload/CFE/rules",
+    "registry_prefix_decision_identity",
+    "same typed Manifest initial state scientific and request"
+  ],
+  "provenance_only": [
+    "source_action_audit_identity",
+    "source clocks/labels/event IDs",
+    "per-arm claim/release/root/header/audit/parent-child archive identities"
+  ],
+  "formal_result": false,
+  "native_execution_authorized": false,
+  "official_verdict": false
+}

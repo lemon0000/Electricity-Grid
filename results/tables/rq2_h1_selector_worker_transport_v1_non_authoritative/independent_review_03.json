@@ -1,0 +1,36 @@
+{
+  "status": "PRE_SEAL_SCOPED_FINDINGS_CLOSED",
+  "reading_stopped": true,
+  "reviewer": "/root/selector_owner_design_review",
+  "reviewed_hashes": {
+    "experiments/h1_selector_released_worker_development_v1.py": "e948ccaa10d28a65f101f74f711324e60339e071de8a6afe461ae3b8be25a074",
+    "tests/test_h1_selector_released_worker_development_v1.py": "40671a557e6b1e684c641263d065572b2a047d9f2f6cec565386be1053135a9b",
+    "docs/model_spec/rq2_h1_selector_released_worker_development_v1.md": "dc0da6e914bf98af28ac6e1dc5d93e1ff3095c75be3d495de84e2791299153a5"
+  },
+  "findings_closed": [
+    "F1"
+  ],
+  "review_summary": "Only the six-case result_callback_replacement test function changed. Inspector injection now occurs after third inspect return: first two belong to owner.run and validate_completion, third is worker detached inspection. Runner branch unchanged. Strict rejection and no-publication assertions retained. Coverage combination accepted: 39 unchanged cases passing full03 plus root and independent targeted reruns of all six changed cases. Preserve full03 failures; no full45 rerun required. No new must-fix findings.",
+  "independent_test": {
+    "command": [
+      "D:/Miniconda3/envs/compute/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_h1_selector_released_worker_development_v1.py",
+      "-k",
+      "result_callback_replacement"
+    ],
+    "passed": 6,
+    "deselected": 39,
+    "pytest_seconds": 196.51,
+    "exit_code": 0,
+    "files_unchanged": true
+  },
+  "native_calls": 0,
+  "research_jobs": 0,
+  "official_verdict": false
+}

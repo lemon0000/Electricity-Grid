@@ -1,0 +1,46 @@
+{
+  "files_sha256": {
+    "docs/model_spec/rq2_h1_historical_controller_design_v1.md": "70e271f25b665f1cffd0dfe179860e971c773feac1e982b9ad651e18efa7516d",
+    "experiments/h1_historical_controller_development_v1.py": "c396d62367bc4723109b4a029931d725e1d2d8cffd0f06a582cdc3a5473041c3",
+    "tests/test_h1_historical_controller_development_v1.py": "0f0f137e8dd2eb553d73feee2cff8c751edabc89ec579b3cb0c4f69c192d6f62"
+  },
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "job_observations": [
+    {
+      "exit_code": 0,
+      "relative_hour": 0,
+      "whole_job_quiescent": true
+    },
+    {
+      "exit_code": 0,
+      "relative_hour": 1,
+      "whole_job_quiescent": true
+    }
+  ],
+  "open_findings": [
+    "F1 prepare loses retained inode and namespace views between replays"
+  ],
+  "preseal_findings_closed": false,
+  "real_native_calls": 0,
+  "resource_admission": false,
+  "root_transcription": true,
+  "synthetic_jobs": 2,
+  "test_only_synthetic_source_catalog": true,
+  "tests": [
+    {
+      "deselected": 1,
+      "exit_code": 0,
+      "passed": 9,
+      "seconds": 2.4,
+      "selection": "namespace"
+    },
+    {
+      "deselected": 9,
+      "exit_code": 0,
+      "passed": 1,
+      "seconds": 510.59,
+      "selection": "two_synthetic_jobs"
+    }
+  ]
+}

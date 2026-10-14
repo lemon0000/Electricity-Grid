@@ -1,0 +1,46 @@
+{
+  "status": "PRE_SEAL_DESIGN_ONLY",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "scope": "next N0 to phase owner registry/source/manifest join",
+  "closed_modules_preserved": true,
+  "apis": {
+    "normal_history": "h1_phase_historical_controller_development_v1.prepare",
+    "registry_discovery": "h1_outage_registry_development_v1.inspect_registry_identity",
+    "fresh_join": "h1_phase_exact_source_current_development_v1.prepare",
+    "source_binding": "h1_persistent_owner_development_v1.SourceBinding",
+    "phase_owner": "h1_phase_owner_development_v1.DevelopmentOwner",
+    "holder": "h1_phase_ticket_holder_development_v1.TicketHolder"
+  },
+  "sequence": [
+    "Rebuild the retained N0 history and its parent_declaration.origin",
+    "Discover registry identity for the exact split; discovery alone authenticates no operation",
+    "Retain local phase_pair_attempt before fresh join or owner construction",
+    "Bind N0 local/global terminal references, controller root/binding/terminal, origin/split, registry identity/implementation, complete approved Manifest and external config pin, fixed owner/holder roots and current heads",
+    "Call phase_exact_source_current.prepare only with that retained registry identity",
+    "Construct SourceBinding only from retained pins, then fixed holder/owner; owner construction itself performs fresh source validation"
+  ],
+  "capacity": {
+    "local_seq6": "phase_pair_attempt",
+    "local_seq7": "N0 prospective holder intent head retention",
+    "local_seq8": "N0 prospective holder outcome head retention",
+    "additional_phase_suffix_requires_full_foreign_replay": true
+  },
+  "failure_rules": [
+    "No rediscovery/retry after retained phase attempt",
+    "Partial holder/owner artifacts preserved; no delete/recreate",
+    "Holder retainer runs before holder publication; explicit ahead/exact-before/exact-after windows required",
+    "A callback merely echoing after is not persistent head retention"
+  ],
+  "open": [
+    "Need complete approved Manifest with external config provenance; RunConfiguration does not supply it",
+    "Current phase advance/complete_saved accepts caller records; it is not owned Rref/A production",
+    "Need owned Rref/A producer/raw ingress under the same operation and exact owner/holder instances",
+    "Closed N0 controller is history only; hour1+ needs fresh leases, owner-bound one-shot capability and continuing holder-head retention"
+  ],
+  "native_authority": false,
+  "official_verdict": false,
+  "formal_result": false,
+  "tests": 0,
+  "jobs": 0,
+  "reviewer_stopped_reading": true
+}

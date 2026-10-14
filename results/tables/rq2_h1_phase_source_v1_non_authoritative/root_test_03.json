@@ -1,0 +1,27 @@
+{
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_phase_historical_controller_development_v1.py",
+    "-k",
+    "two_numerical_jobs"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 358.875,
+  "stdout": ".                                                                        [100%]\n1 passed, 10 deselected in 357.93s (0:05:57)\n",
+  "stderr": "",
+  "pins": {
+    "experiments/h1_phase_obligation_controller_development_v1.py": "e047f3e5b08b397362f2961be89062924e0e4769d7de0795453047e921300934",
+    "experiments/h1_phase_historical_controller_development_v1.py": "51b94263ea3f035fc5974250fe273c66a77c25fed393a3ef146b8bc460d541ed",
+    "experiments/h1_phase_exact_source_current_development_v1.py": "30fdb9e800183650fbf6e986e313fa95fd3b114fc2a03ff2d5f1d87fc7dde3ad",
+    "tests/test_h1_phase_historical_controller_development_v1.py": "b3ae93b52f3037659a13dfa5419d61c719630b004bf89801a052e127f222cdb2"
+  },
+  "pins_unchanged": true,
+  "real_native_calls": 0,
+  "planned_synthetic_jobs": 2
+}

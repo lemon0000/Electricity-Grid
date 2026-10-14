@@ -1,0 +1,53 @@
+# Common owner genesis binding
+
+DRAFT_NONAUTHORITATIVE. Root-only implementation; independent R3 review required.
+This wrapper binds the complete independent-arm provenance to an empty common
+phase owner and holder. It exposes inspection and closure, not selector execution.
+
+The fixed study-local binder journal uses three events:
+initialize_intent, holder_bound, initialized_terminal. The header preserves the
+initial complete common-input report, typed Manifest and canonical SourceBinding,
+all roots and capacities. These are obtained internally under live roster guards;
+caller diagnostic dictionaries are not accepted as consumption credentials.
+
+The holder's random nonce is bound by an independently retained typed genesis
+receipt before holder_bound. The owner then receives its own independently
+retained genesis receipt before initialized_terminal. The receipts are external
+retention metadata, not execution authority; every use opens the fixed child
+roots and reconstructs their exact headers, bindings and empty state.
+
+Reopen requires the external binder head and the applicable child receipts.
+Explicit reconcile only appends missing binder metadata for independently
+retained, fully verified existing child genesis. It never creates a missing
+child, retries initialization, scans for another directory or adopts a nonce
+from disk without an external receipt. Partial children and unknown suffixes
+remain unresolved. Failures preserve bytes and poison the current handle.
+
+Other groups may extend the global journal. Fresh correspondence must equal the
+stored report after removing only top-level global_head; the stored initial
+global head must be an ancestor of the current global chain. The current head
+is also bookended within each operation. The completed local roster head and
+all per-arm source/decision/manifest bindings remain exact.
+
+All journal header/event bounds are checked before binder directory creation.
+Full correspondence is retained, never truncated. Holder binding serialization
+has an explicit 4096-byte logical bound; an oversized actual binding is rejected
+before owner creation. This is metadata admission, not physical storage or full
+study resource admission. The old journal cap remains at most 1 MiB.
+
+Lock order is wrapper operation, then original roster/bootstrap guards, then
+child inspections. Retention callbacks are checked before and after. Closure
+releases only handles owned by this wrapper. Original roster/BootstrapOwner
+lifetimes remain with their caller.
+
+The binder journal also rechecks its declaration, complete header declaration,
+genesis, root, capacities and original retention callback against the wrapper's
+fixed configuration. Internal journal self-consistency alone is insufficient.
+Tests use an explicit synthetic roster/source seam with real journal, holder
+and SQLite owner persistence; a real incomplete roster is separately rejected
+before child creation. Successful real RTS group integration is not established.
+
+This unit accepts only empty genesis. Hour1+ suffix support, live producer,
+paired publication, reuse, aggregate resource admission and formal execution
+remain false. Successful initialization proves a retained genesis binding,
+not Rref/A execution or a complete 192-hour chain.

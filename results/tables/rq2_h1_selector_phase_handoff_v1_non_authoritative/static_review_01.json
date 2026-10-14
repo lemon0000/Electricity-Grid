@@ -1,0 +1,23 @@
+{
+  "type": "PRE_SEAL_STATIC_FINDINGS",
+  "reviewer": "/root/selector_owner_design_review",
+  "files_sha256": {
+    "experiments/h1_selector_phase_handoff_development_v1.py": "30831f630c0f68a072ad418abc982714a03b91f658e115f0cf7853c90926fe8a",
+    "tests/test_h1_selector_phase_handoff_development_v1.py": "3391ed5d88ef5447181c8171df05ebd79de56bbc1dc46eefd1f41ec3aea2a6db",
+    "docs/model_spec/rq2_h1_selector_phase_handoff_development_v1.md": "51c48a40482aa338b682fd2350dd0cee35ae4ac4b1f1837e39f6596313458cf2"
+  },
+  "reading_stopped": true,
+  "tests_run": false,
+  "files_modified": false,
+  "open_findings": [
+    "F1: fix called dependency functions and use captured checker immediately after external callback",
+    "F2: freeze prepared transaction contents and future events outside mutable owner fields",
+    "F3: retain original handles outside mutable owner fields and clean up only those originals",
+    "F4: accept captured global-head ancestors while requiring exact common receipts",
+    "F5: persist outer root, directory and lease-file identities in binding with bounded preflight",
+    "F6: add complete storage failure, mutation, legal unresolved, ancestor and cap coverage",
+    "F7: define logical handoff JSON envelope; do not claim physical or whole phase resource admission"
+  ],
+  "official_verdict": false,
+  "formal_result": false
+}

@@ -1,0 +1,25 @@
+{
+  "status": "PRE_SEAL_INDEPENDENT_TEST_FAILED",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "reviewed_hashes": {
+    "experiments/h1_group_n0_common_input_binding_development_v1.py": "8c49d2319689d44a174a69fe956ea148d813c548452238d31804d87ec19cf89c",
+    "tests/test_h1_group_n0_common_input_binding_development_v1.py": "83dc5369dafe389f31e081d66cb351bb85e4a31919513e7676173395c12ea83c",
+    "docs/model_spec/rq2_h1_group_n0_common_input_binding_development_v1.md": "da46ce347a94e6ab2890e202e66d6a82a77e539549c96337ff86e482f4f18740"
+  },
+  "independent_test": {
+    "selection": "real_adapter or bookends or two_rounds",
+    "failed": 1,
+    "passed": 7,
+    "deselected": 31,
+    "pytest_seconds": 67.83,
+    "wall_seconds": 69.797,
+    "exit_code": 1,
+    "shell_exit_code": 1,
+    "files_unchanged": true
+  },
+  "finding": "synthetic power and workload chains both require stable type-specific chain_id; recompute both window identities",
+  "native_calls": 0,
+  "research_jobs": 0,
+  "official_verdict": false
+}

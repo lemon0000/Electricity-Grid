@@ -1,0 +1,28 @@
+{
+  "kind": "PRE_SEAL_READ_ONLY",
+  "official_verdict": false,
+  "open_findings": [
+    {
+      "description": "Single-link invariant absent for anchor namespace and consumed prefix evidence; NTFS hardlink suffix alias independently accepted.",
+      "id": "F1",
+      "status": "fix_in_progress"
+    }
+  ],
+  "oracles": {
+    "accepted_h2_replay_h1": "passed",
+    "hardlink_suffix_alias_accepted": true
+  },
+  "real_native_calls": 0,
+  "reviewer": "/root/outage_preseal_review",
+  "reviewer_script_errors": [
+    "Noncanonical temporary Windows path rejected before implementation judgment",
+    "Second-hour reports tuple incorrectly passed; corrected unpacking passed"
+  ],
+  "root_transcription": true,
+  "synthetic_jobs": 0,
+  "tests": {
+    "exit_code": 0,
+    "passed": 16,
+    "seconds": 315.73
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "inline_smoke_after_path_fix": {
+    "completed_hours": 1,
+    "disclosure_hour": 0,
+    "exit_code": 0,
+    "physical_assignment_valid": true
+  },
+  "inline_smoke_initial": {
+    "error": "ModuleNotFoundError: test_rq2_continuous_grid_normal_v1; standalone fixture import lacked tests path",
+    "exit_code": 1
+  },
+  "real_native_calls": 0,
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "synthetic_jobs": 0,
+  "tests": {
+    "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_origin_grid_step_development_v1.py",
+    "exit_code": 1,
+    "failed": 3,
+    "findings": [
+      "initial-down fixture incorrectly requested normal on with generation below Pmin",
+      "two offset counterexamples stopped in event helper before kernel and regex differed"
+    ],
+    "passed": 15,
+    "seconds": 19.62
+  }
+}

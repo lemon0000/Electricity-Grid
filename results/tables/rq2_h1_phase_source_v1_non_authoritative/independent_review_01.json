@@ -1,0 +1,24 @@
+{
+  "status": "DRAFT_STATIC_REVIEW_WITH_FIXTURE_REPAIR_PENDING",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "passed": 40,
+  "deselected": 1,
+  "seconds": 29.83,
+  "exit_code": 0,
+  "selection": "not two_numerical_jobs",
+  "pins": {
+    "experiments/h1_phase_obligation_controller_development_v1.py": "e047f3e5b08b397362f2961be89062924e0e4769d7de0795453047e921300934",
+    "experiments/h1_phase_historical_controller_development_v1.py": "51b94263ea3f035fc5974250fe273c66a77c25fed393a3ef146b8bc460d541ed",
+    "experiments/h1_phase_exact_source_current_development_v1.py": "30fdb9e800183650fbf6e986e313fa95fd3b114fc2a03ff2d5f1d87fc7dde3ad",
+    "tests/test_h1_phase_historical_controller_development_v1.py": "0d66fd38538a4f0fe5abc371a29b6459a0cc14244ba617d223a3933a5f8b471e",
+    "tests/test_h1_phase_exact_source_current_development_v1.py": "c4745ac35dc0a63648f8378ff28ca80fcbd74be48b09d953107b98fa74ea9fe7",
+    "docs/model_spec/rq2_h1_phase_source_development_v1.md": "e0cd2bb8688dfe3dbe7dd9d671e4c593282c05ed72b4111ce9deb8e50cbec289"
+  },
+  "pins_unchanged": true,
+  "implementation_findings": [],
+  "fixture_finding": "legacy rejection context must bind open_manifest to the preloaded resolver",
+  "authority_gap": "Private _step_development is callable and native-capable; underscore is not a capability or authorization boundary; no public live owner/bootstrap gate implemented",
+  "jobs": 0,
+  "real_native_calls": 0,
+  "official_verdict": false
+}

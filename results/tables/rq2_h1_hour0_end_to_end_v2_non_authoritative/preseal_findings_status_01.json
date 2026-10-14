@@ -1,0 +1,49 @@
+{
+  "scope": "root transcript of independent read-only PRE_SEAL findings; not reviewer receipt",
+  "official_verdict": null,
+  "formal_result": false,
+  "findings": [
+    {
+      "id": "F1",
+      "finding": "In-process replay retained in-memory declarations and tickets",
+      "action": "Fresh-process script reconstructs from hashed packet and report",
+      "status": "IMPLEMENTED_UNEXECUTED"
+    },
+    {
+      "id": "F2",
+      "finding": "Independent proof reread still used legacy cap+1 reader",
+      "action": "Successor manifest uses captured bounded verifier reader",
+      "status": "TARGETED_CHECKS_PASSED_CHAIN_PENDING"
+    },
+    {
+      "id": "F3",
+      "finding": "Synthetic child command imported predecessor helper",
+      "action": "Child command imports local v2 child_main",
+      "status": "CHANGED_CHAIN_PENDING"
+    },
+    {
+      "id": "F4",
+      "finding": "Compact dependency inventory commitment needs complete preimage evidence",
+      "action": "Postcheck saves fresh complete verifier envelopes for all three ordinals and compares compact commitment",
+      "status": "IMPLEMENTED_UNEXECUTED"
+    },
+    {
+      "id": "F5",
+      "finding": "Timing labels and wall reconciliation need mechanical evidence",
+      "action": "Postcheck exact ordered labels, nonnegative contiguous intervals and subprocess residual",
+      "status": "IMPLEMENTED_UNEXECUTED"
+    },
+    {
+      "id": "C1",
+      "finding": "Bookend identity caches do not cover transient code/package ABA",
+      "action": "Test/spec explicitly disclose limitations; postcheck requires before==after and calls>0 for both root cached identities",
+      "status": "LIMITATION_RECORDED"
+    },
+    {
+      "id": "P1",
+      "finding": "Repeated complete fresh fingerprints dominate remaining wall time",
+      "action": "Read-only stack confirms bounded verifier route; no further fingerprint cache or stat shortcut introduced",
+      "status": "MEASUREMENT_PENDING_COMPLETE_CHAIN"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "status": "PARTIAL_N0_TERMINAL_REGISTRATION_REVIEWED",
+  "files_sha256": {
+    "experiments/h1_bootstrap_integration_development_v1.py": "c72c667ff4e30ef5cf299adf53fb19fb73f5ae803c70c7fed7f10854ad806ff8",
+    "tests/test_h1_bootstrap_N0_registration_development_v1.py": "d044408c80f18ec35b2c9d0308ef86e69b11c53d38f82014b9e7c781042c1255",
+    "tests/test_h1_bootstrap_N0_registration_numerical_development_v1.py": "0eb2b4eae32e81031305bb0a3483badcdd50737e2c65e8c365a2cf83cf7632c4",
+    "tests/test_h1_bootstrap_N0_registration_observation_development_v1.py": "f287a0725f04b73d3328b19b6f564a254d98d8b4514e3a9ebee871b05558df97",
+    "docs/model_spec/rq2_h1_bootstrap_integration_development_v1.md": "e8175be03776dadc739e33651d66f95f79cfdee20a1e77d70399c1884affff07",
+    "experiments/h1_owned_bootstrap_controller_development_v1.py": "c615dcbc053d5ec88c227ef468ad40b7c233ad7695254cfb8504a7d66ff76b37",
+    "tests/test_h1_bootstrap_integration_development_v1.py": "94808179e9b8cbaed9673afe2249915ee51f9b428e633262aae37ca282fb4a37",
+    "tests/test_h1_owned_bootstrap_controller_development_v1.py": "4949c4cc5df794cdcfc68486aee36892e584c0333826d52c07deed0d72fb0b73",
+    "tests/test_h1_bootstrap_N0_terminal_evidence_development_v1.py": "50f8cd506b6b7dc18117ab4ab49a1fb4af74f918664f524f60daa43c17572944"
+  },
+  "root_evidence": [
+    "root_test_24.json",
+    "root_test_25.json",
+    "root_test_26.json",
+    "root_test_27.json"
+  ],
+  "root_results": [
+    "11 passed in 553.50s, exit0",
+    "3 passed in 205.88s, exit0",
+    "1 passed in 941.56s, exit0",
+    "82 passed in 1377.72s, exit0"
+  ],
+  "root_passed": 97,
+  "review_evidence": "independent_review_07.json",
+  "review_result": "2 passed / 9 deselected in 87.34s, exit0; PRE_SEAL scoped findings closed",
+  "finding_evidence": "terminal_registration_findings_01.json",
+  "retention_evidence": "predecessor_retention_07.json",
+  "design_evidence": [
+    "phase_pair_design_review_01.json",
+    "phase_manifest_provenance_review_01.json"
+  ],
+  "real_native_calls": 0,
+  "completed_synthetic_jobs_this_turn": 2,
+  "completed_scope": [
+    "pre-attempt local/global N0 record byte reservation",
+    "internal numerical evidence local seq5/global terminal registration",
+    "retained observations and numerical replay spanning callbacks",
+    "foreign N0 terminal replay and explicit retained-local-only reconciliation",
+    "canonical Job and worker execution.lock bytes checked"
+  ],
+  "global_terminal_implemented": true,
+  "helper_connected_to_private_continuation": true,
+  "default_bootstrap_stops_at_genesis": true,
+  "pending_post_N_is_paired_result": false,
+  "scratch_contents_audited": false,
+  "filesystem_allocation_bound_proven": false,
+  "implementation_complete": false,
+  "development_checks_created": false,
+  "official_verdict": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "final_process_check": "No Python/Gurobi process observed after root_test_27 terminal exit",
+  "git_diff_check_exit_code": 0,
+  "git_status_entries": 107,
+  "remaining": [
+    "pinned phase manifest provenance and registry/source join",
+    "owned Rref/A producers and raw ingress, N0 paired consume",
+    "hour1+ fresh controller attachment and persistent holder retention",
+    "full192/all-family producer coverage, lawful reuse and full same-contract LB/UB",
+    "resource admission, successor seal, fresh official review and separate concrete native authorization"
+  ]
+}

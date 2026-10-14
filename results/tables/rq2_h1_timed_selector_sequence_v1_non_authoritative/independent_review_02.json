@@ -1,0 +1,37 @@
+{
+  "status": "PRE_SEAL_SCOPED_FINDINGS_CLOSED",
+  "reading_stopped": true,
+  "reviewer": "/root/selector_owner_design_review",
+  "reviewed_hashes": {
+    "experiments/h1_timed_selector_sequence_development_v1.py": "b65e17b41f525247963a4b4354cf25dcbe36c42f6b4c4e2c76f5ddd692087bfb",
+    "tests/test_h1_timed_selector_sequence_development_v1.py": "57ae91fdc5e9336314de480d8bc0aba4355518beaf969347d12a36a3857776fe",
+    "docs/model_spec/rq2_h1_timed_selector_sequence_development_v1.md": "180ab3d1db6c3abacab0af287c8c208d86b98eb8b56974f1e9ec6de5a000fb74"
+  },
+  "closed_findings": {
+    "F1": "Both header envelopes checked before mkdir using maximum-width directory identity; actual identity requires exact nonnegative bounded ints.",
+    "F2": "Canonical recursive snapshot fingerprints bind roots-relative paths, directory identities/stamps, caps, content hashes and full file stamps; initial pin fixed, final pin in completion and receipt bytes; saved and fresh view recomputed."
+  },
+  "new_must_fix_findings": [],
+  "independent_test": {
+    "command": [
+      "D:/Miniconda3/envs/compute/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_h1_timed_selector_sequence_development_v1.py",
+      "-k",
+      "actual_header or cannot_move_trust or snapshot_digest or bounded_representation"
+    ],
+    "passed": 7,
+    "deselected": 41,
+    "pytest_seconds": 24.12,
+    "exit_code": 0,
+    "files_unchanged": true
+  },
+  "native_calls": 0,
+  "research_jobs": 0,
+  "official_verdict": false
+}

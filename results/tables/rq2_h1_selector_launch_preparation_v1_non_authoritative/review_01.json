@@ -1,0 +1,26 @@
+{
+  "kind": "PRE_SEAL_FINDINGS",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "code_sha256": "fc2626e53cf688d2be2f31c11c868abf580d9dbafbd05c8a78f57b96608370ee",
+  "test_sha256": "09afbe5fc0bc1a739952b5c19aa1d8b0b64f8da156f9e17ff7698218045e7215",
+  "spec_sha256": "ba4a5c3d143ba28ced6e20770dede0179c37a568e34d1d2d9f2d8f306ba2a265",
+  "findings": {
+    "F1": "Fix transitive fresh-source callable closure, including projection/rebuild/build/phase/source/configuration helpers. Two identical stale projections are not freshness.",
+    "F2": "Pin import-time canonical Python path; reject sys.executable replacement before side effects.",
+    "E1": "Test same-byte executable replacement during second source rebuild, alias isolation and transitive helper replacement."
+  },
+  "independent_test": {
+    "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_selector_launch_preparation_development_v1.py -k \"preinstalled or fresh_source or isolated\"",
+    "passed": 3,
+    "deselected": 9,
+    "pytest_seconds": 16.68,
+    "exit_code": 0,
+    "real_native_calls": 0,
+    "windows_jobs": 0,
+    "hashes_unchanged": true
+  },
+  "official_verdict": false,
+  "native_execution_authorized": false,
+  "incident_acknowledged": "Legacy normal_worker regression had at least3 persisted HiGHS calls and incomplete total; excluded from this unit evidence."
+}

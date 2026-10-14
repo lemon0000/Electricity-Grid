@@ -1,0 +1,19 @@
+{
+  "status": "READ_ONLY_DESIGN_FINDINGS",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "read_draft_code": false,
+  "tests_run": false,
+  "requirements": [
+    "local release fixes slot/proposal/claim/ready and canonical ready digest; global release fixes local head/body digest without circularity",
+    "cross-episode header/attempt/profile/ready/release semantic replay and final stable reads",
+    "local-only release requires recovery; globally retained release without terminal is execution indeterminate; unknown retained-head mismatch rejects",
+    "exact empty controller before global release; after release fixed genesis validation only and explicit execution_artifacts_audited=false",
+    "fresh live leases must eventually span both release records and current source entry",
+    "remaining global liability is 2 per claimed,1 per released,0 per terminal; new claim requires three more",
+    "fixed same-owner operation and checks before writes/after retains; no public capability factory"
+  ],
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

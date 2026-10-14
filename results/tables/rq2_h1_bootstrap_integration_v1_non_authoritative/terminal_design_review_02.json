@@ -1,0 +1,51 @@
+{
+  "status": "PRE_SEAL_DESIGN_CLARIFICATION",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "issue": "Historical prepare(completed_hours=1) verifies an accepted prefix but intentionally allows later suffixes; it cannot alone prove exact N0",
+  "implementation_boundary": "Add private exact-N0 observations in the open bootstrap draft; preserve closed historical reader bytes",
+  "exact_protocol": {
+    "controller_jobs": [
+      0
+    ],
+    "clock_hours": [
+      0
+    ],
+    "obligation_files": [
+      "binding.json",
+      "000.binding.json",
+      "000.job.json",
+      "000.terminal.json"
+    ],
+    "source_parent_hours": [
+      0
+    ],
+    "parent_events": [
+      1,
+      2
+    ],
+    "parent_anchors": [
+      0,
+      1,
+      2
+    ]
+  },
+  "existing_views_reused": [
+    "_observe_prefix",
+    "job_view",
+    "worker_view"
+  ],
+  "scratch": {
+    "plain_directory_identity_retained": true,
+    "contents_audited": false,
+    "included_in_scientific_evidence": false,
+    "empty_required": false,
+    "headroom_demand_is_allocation_bound": false
+  },
+  "historical_flags_unchanged": true,
+  "future_registration_requirement": "Reuse retained observed views around historical prepare, local retain and global retain; compare audit/topology identity and exact release associations",
+  "tests": 0,
+  "jobs": 0,
+  "native_calls": 0,
+  "reviewer_stopped_reading": true,
+  "formal_result": false
+}

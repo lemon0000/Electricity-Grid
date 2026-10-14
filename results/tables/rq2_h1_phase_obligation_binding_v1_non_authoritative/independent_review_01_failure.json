@@ -1,0 +1,30 @@
+{
+  "status": "PRE_SEAL_FINDING_OPEN",
+  "reviewer": "/root/outage_preseal_review",
+  "pins": {
+    "experiments/h1_phase_obligation_binding_development_v1.py": "b1c5b9ba56b2167062c91199c746cb0cc2fe79e113bb1a2a2038e9a7d9897630",
+    "tests/test_h1_phase_obligation_binding_development_v1.py": "1a43f289f389ca205508fd5b2e53424751ba6f7563295030e54f71e64c460d67",
+    "docs/model_spec/rq2_h1_phase_obligation_binding_development_v1.md": "f647d62cb598db780ae506a361e5a13a36bf05c790b774ef3f922e932ace5c66"
+  },
+  "passed": 13,
+  "failed": 3,
+  "deselected": 19,
+  "seconds": 274.42,
+  "outer_seconds": 275.778,
+  "exit_code": 1,
+  "pins_unchanged": true,
+  "finding": {
+    "id": "F1",
+    "kind": "test_fixture_scope",
+    "description": "Tail request_key monkeypatch remains active during real parent.inspect; first parameter poisons shared parent, remaining two inherit unresolved state.",
+    "parameters": [
+      167,
+      168,
+      191
+    ]
+  },
+  "other_open_findings": [],
+  "real_native_calls": 0,
+  "jobs": 0,
+  "official_verdict": false
+}

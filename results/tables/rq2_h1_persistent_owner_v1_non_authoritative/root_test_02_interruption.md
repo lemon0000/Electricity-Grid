@@ -1,0 +1,1 @@
+Root interrupted its verified synthetic pytest PID 23624, parent 36052. Four progress dots, no terminal pytest summary. No passing suite claim. Root preserved captured output in root_test_02.json. Static review had four open findings; source identity seam was then isolated to remove repeated unrelated closure hashing. Zero real native solver and zero Job.

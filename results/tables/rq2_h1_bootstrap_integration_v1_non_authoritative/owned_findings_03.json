@@ -1,0 +1,20 @@
+{
+  "status": "PRE_SEAL_FINDINGS_PENDING_REPAIR",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "owned_code_sha256": "56133fb00798037c3a218509de3d3d8751487ac11195da3d2b435a328c637abe",
+  "findings": [
+    {
+      "id": "F1",
+      "problem": "Detected drift of original cleanup tuple can itself omit root lease during close",
+      "required": "Independent lease cleanup sources and explicit original-tuple omission counterexample"
+    }
+  ],
+  "statically_closed": [
+    "all constructor-tail lookups inside try",
+    "cursor updates preserve unchanged expected fields",
+    "exact request tuple gate"
+  ],
+  "reviewer_stopped_reading": true,
+  "tests_run_by_reviewer": 0,
+  "formal_result": false
+}

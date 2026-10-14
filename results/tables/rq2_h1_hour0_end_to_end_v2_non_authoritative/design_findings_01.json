@@ -1,0 +1,25 @@
+{
+  "scope": "independent read-only PRE_SEAL design findings",
+  "reviewer": "/root/routing_review",
+  "official_verdict": false,
+  "formal_result": false,
+  "required_static_successor_modules": 13,
+  "findings": [
+    "OwnedController has a local exact-type import of BootstrapOwner; include its successor.",
+    "Selector lifecycle imports the released worker and binds its identity; include its successor and inspection schema.",
+    "Launch preparation must update both outer import and embedded child import/path check.",
+    "Compact verifier evidence may hash the full dependency inventory, but compare complete fresh envelopes before projection and retain the complete predecessor group.",
+    "Ordinal zero fingerprints only dependency closure; actual candidates retain their own family and ordinal.",
+    "Keep all exact-type, guard, source, historical and two-pass checks; never substitute a v2 owner under v1 identity."
+  ],
+  "required_verification": [
+    "cross-generation live type refusal before writes",
+    "actual-coordinate verifier and predecessor projection equality",
+    "entry and return dependency/implementation drift refusal",
+    "v2 worker launch and runtime import closure",
+    "paired holder/owner close and reopen from retained heads with equal projection and carry",
+    "predecessor pin retention",
+    "full chain timing without phase-fingerprint monkeypatch"
+  ],
+  "implementation_review": "separate review requested after implementation; this record is design only"
+}

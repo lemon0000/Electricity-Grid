@@ -1,0 +1,66 @@
+{
+  "status": "PRE_SEAL_DESIGN_ONLY",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "scope": "successful N0 local/global numerical terminal registration",
+  "preserve_closed_history_module": true,
+  "sequence": [
+    "capture fixed root/header/obligation terminal from owned N0 while transaction is live",
+    "expire scope, release four guards and close all controller leases; close failure stays indeterminate",
+    "still under same bootstrap operation/nonce recheck exact retained release heads",
+    "internally call existing historical.prepare(completed_hours=1)",
+    "derive local seq5 body only from typed historical audit; append and retain",
+    "fresh prepare plus operation/head/readback checks after local retention",
+    "append global terminal binding seq5 head/body digest",
+    "fresh registry/history cross-read; state pending_post_N"
+  ],
+  "references": "Exact direct or transitive references: obligation terminal pins clock terminal/job link/parent anchor; job link pins full Job request/outputs; historical evidence_identity binds read path-pin mapping; prepare replays twice with stable views",
+  "minimal_body_fields": [
+    "slot/claim/release/ready associations",
+    "fixed controller root",
+    "controller binding pin",
+    "obligation terminal pin",
+    "completed_hours=1",
+    "historical implementation",
+    "decision_identity",
+    "parent_head",
+    "evidence_identity",
+    "normal_request_key",
+    "child head/archive",
+    "projection identity/payload digest",
+    "audit_payload sha256"
+  ],
+  "no_new_reader_adapter_required": true,
+  "no_caller_supplied_terminal_body": true,
+  "states": {
+    "release_without_terminal": "execution_indeterminate",
+    "local_terminal_without_global": "local_N_terminal_uncommitted",
+    "global_terminal_without_paired": "pending_post_N"
+  },
+  "foreign_replay": "exact local seq1..4 or seq1..5; seq5 requires full historical replay/inventory, unknown seq6+ rejected; final global/local/history cross-read",
+  "logical_capacity": {
+    "local_terminal_sequence": 5,
+    "local_cap": 8,
+    "local_remaining": 3,
+    "global_records_per_slot": 3,
+    "remaining_global_debts": [
+      2,
+      1,
+      0
+    ],
+    "terminal_byte_bound_still_required": true
+  },
+  "residual": [
+    "history is numerical evidence not native authentication",
+    "SourceBinding.registry_identity requires independent pinned registry join",
+    "closed N0 controller is not same-instance writable hour1",
+    "paired handoff/hour1+ remain open",
+    "full resources/seal/fresh official review/new native authority remain open"
+  ],
+  "reviewer_stopped_reading": true,
+  "tests": 0,
+  "jobs": 0,
+  "native_calls": 0,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false
+}

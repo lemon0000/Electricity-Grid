@@ -1,0 +1,35 @@
+{
+  "status": "PRE_SEAL_FINDINGS_CLOSED_FOR_GENESIS_METADATA_SCOPE_ONLY",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "read_only": true,
+  "stopped_reading": true,
+  "files_sha256": {
+    "experiments/h1_bootstrap_integration_development_v1.py": "1d63870d5aa22db70f51e8a5995e0982ad3dcac81789d2f91ef1577138e03734",
+    "tests/test_h1_bootstrap_integration_development_v1.py": "34e6c3adcdf963a7b890f6480d96f93b88b4590b26617ecf88b2acfe273f5bed",
+    "docs/model_spec/rq2_h1_bootstrap_integration_development_v1.md": "180a2b5024467f1a491310e6c14b7776044857140bb5c2f1bd2bed4f35fd76a9"
+  },
+  "pins_unchanged": true,
+  "prior_findings": "independent_findings_03.json",
+  "findings_closed": [
+    "F1 live controller exposure through unbound inherited entry",
+    "F2 omission of uncommitted controller artifacts"
+  ],
+  "test_scope": [
+    "owned_empty_controller",
+    "construction_failure",
+    "ready write windows",
+    "partial/full suffix",
+    "profile replay mutation"
+  ],
+  "test_result": "11 passed, 50 deselected in 290.68s",
+  "wrapper_wall_seconds": 291.542,
+  "exit_code": 0,
+  "jobs": 0,
+  "real_native_calls": 0,
+  "remaining_lock_boundary": "Ready replay covers five genesis metadata files and directory namespace, not execution.lock content/link count. Future release/rehydration must establish fresh lease validation of lock bytes, single-link identity and all live bindings.",
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "implementation_complete": false
+}

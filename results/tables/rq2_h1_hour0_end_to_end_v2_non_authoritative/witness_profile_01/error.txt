@@ -1,0 +1,35 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_h1_hour0_end_to_end_v2_non_authoritative\profile_saved_historical.py", line 78, in main
+    envelope = implementation.prepare(root, **args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_historical_n0_verifier_development_v1.py", line 40, in prepare
+    decision,audit=_projection(root,expected_binding_sha256=expected_binding_sha256,
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_historical_n0_verifier_development_v1.py", line 184, in _projection
+    first,captured,header=_replay_prefix(root,**args,_observed=observed)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_historical_n0_verifier_development_v1.py", line 151, in _replay_prefix
+    state=reader.inspect()
+          ^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_historical_parent_prefix_development_v1.py", line 238, in inspect
+    return HistoricalInspection(**asdict(super().inspect()))
+                                         ^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_saved_source_parent_development_v1.py", line 253, in inspect
+    return self._restore()[0]
+           ^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_bounded_file_parent_development_v1.py", line 109, in _restore
+    owner = self._child(completed,packet,head,receipt.identity,expected_head=item['child_head'])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_historical_n0_verifier_development_v1.py", line 123, in _child
+    witness.inspect_bridge(clock,hour,packet,self._spec,self._limits,scope=scope,binding_pin=header['clock_binding_sha256'],
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_historical_hour_witness_development_v1.py", line 370, in inspect_bridge
+    inspect_job(job, packet, specification, limits, pins=pins, parent_declaration=req['parent_declaration'], intent_head=req['pending_arguments']['expected_head'], lineage=intent['source_identity'], scope=scope)
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_historical_hour_witness_development_v1.py", line 312, in inspect_job
+    checked = inspect_worker(wr, packet, specification, limits, expected_binding_sha=result['worker_binding_sha256'], expected_terminal_sha=result['worker_terminal_sha256'], expected_implementation=result['worker_implementation'], scope=scope)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_historical_hour_witness_development_v1.py", line 245, in inspect_worker
+    result = scope.inspect(root / 'hour_non_authoritative', packet, specification, limits, expected_terminal_sha=terminal['hour_terminal_sha256'], expected_implementation=hour.implementation_identity())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_historical_hour_witness_development_v1.py", line 146, in inspect
+    raise ValueError('numerical witness input changed')
+ValueError: numerical witness input changed

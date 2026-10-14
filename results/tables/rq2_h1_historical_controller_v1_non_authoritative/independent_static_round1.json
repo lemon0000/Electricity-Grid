@@ -1,0 +1,21 @@
+{
+  "files_sha256": {
+    "docs/model_spec/rq2_h1_historical_controller_design_v1.md": "70e271f25b665f1cffd0dfe179860e971c773feac1e982b9ad651e18efa7516d",
+    "experiments/h1_historical_controller_development_v1.py": "c396d62367bc4723109b4a029931d725e1d2d8cffd0f06a582cdc3a5473041c3",
+    "tests/test_h1_historical_controller_development_v1.py": "0f0f137e8dd2eb553d73feee2cff8c751edabc89ec579b3cb0c4f69c192d6f62"
+  },
+  "kind": "PRE_SEAL_STATIC",
+  "missing_tests": [
+    "same-byte replacement across obligation, Job/clock, parent, source",
+    "representative chain drift faults"
+  ],
+  "official_verdict": false,
+  "open_findings": [
+    {
+      "description": "prepare loses consumed filesystem identities between replays",
+      "id": "F1"
+    }
+  ],
+  "reviewer": "/root/outage_origin_design_review",
+  "root_transcription": true
+}

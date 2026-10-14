@@ -1,0 +1,35 @@
+{
+  "stage": "PRE_SEAL_partial_independent_validation",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_selector_phase_handoff_caps_development_v1.py",
+    "tests/test_h1_selector_phase_handoff_bundle_development_v1.py",
+    "tests/test_h1_selector_phase_handoff_integrity_development_v1.py",
+    "-k",
+    "global_state_helpers or first_readback or phase_replacement or exact_full_branch or multiple_actual or roster_keys or business_unresolved_lane"
+  ],
+  "exit_code": 0,
+  "output": "..............                                                           [100%]\n14 passed, 28 deselected in 140.09s (0:02:20)\n",
+  "reviewer_reported_before_after_hashes_unchanged": true,
+  "root_fresh_pins": {
+    "experiments/h1_selector_phase_handoff_development_v1.py": "aa25309f44d4077dccfd53a55febfac6ba7667a34025c9ba0edf8703b318d796",
+    "tests/test_h1_selector_phase_handoff_development_v1.py": "4ee42d02f14fe77ca001de38066a76d845125a2d641e862b568b376b7e178632",
+    "tests/test_h1_selector_phase_handoff_faults_development_v1.py": "d8d8fb031bab842e22a36d3fda591da618805701b6eaee0ede80e2d170909e50",
+    "tests/test_h1_selector_phase_handoff_integrity_development_v1.py": "a742061e12ffcca26aab10482fc09a37da19aeee3b776e2a5fefed096518f995",
+    "tests/test_h1_selector_phase_handoff_caps_development_v1.py": "90f085f7f611a6ddae725ac6cfbbedbf1853605ff82603d4d9323e88f978e606",
+    "tests/test_h1_selector_phase_handoff_bundle_development_v1.py": "63bdc98af74e2d0491ab3b89d77f5ae953038daf33bfe12dd494f755dba9b8b0",
+    "docs/model_spec/rq2_h1_selector_phase_handoff_development_v1.md": "03ab69496009577a06fdb6521917820adda7097ff24f63835fd8f062e6ae174d"
+  },
+  "real_native": false,
+  "windows_jobs": false,
+  "formal_result": false,
+  "F6_closed": false
+}

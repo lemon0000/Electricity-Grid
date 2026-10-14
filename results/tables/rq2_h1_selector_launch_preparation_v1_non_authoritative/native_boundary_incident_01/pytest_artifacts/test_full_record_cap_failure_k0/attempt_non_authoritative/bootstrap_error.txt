@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\rq2_joint_deliverability_boundary_v1\normal_worker.py", line 193, in main
+    worker(Path(sys.argv[1]), sys.argv[2], int(sys.argv[3]))
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\rq2_joint_deliverability_boundary_v1\normal_worker.py", line 186, in worker
+    store.execute()
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\rq2_joint_deliverability_boundary_v1\normal_store.py", line 261, in execute
+    raise ValueError('complete normal result record exceeds byte budget; intent remains unresolved')
+ValueError: complete normal result record exceeds byte budget; intent remains unresolved

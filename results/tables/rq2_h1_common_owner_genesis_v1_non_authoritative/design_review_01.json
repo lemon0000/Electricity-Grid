@@ -1,0 +1,25 @@
+{
+  "status": "READ_ONLY_PRE_SEAL_DESIGN",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "fsm": [
+    "initialize_intent",
+    "holder_bound",
+    "initialized_terminal"
+  ],
+  "requirements": [
+    "internal fresh common-input tuple only",
+    "full initial report and exact typed manifest/source binding in header",
+    "header and event capacity before directory creation",
+    "separate holder and owner genesis receipts externally retained before corresponding binder append",
+    "no child creation during reconcile",
+    "unknown suffix and missing receipt unresolved",
+    "stable report excludes only top-level global_head; initial head must remain ancestor",
+    "original wrapper then roster/bootstrap guard order"
+  ],
+  "persistent_scope": "empty genesis only",
+  "continuation_ready": false,
+  "formal_result": false,
+  "native_execution_authorized": false,
+  "official_verdict": false
+}

@@ -1,0 +1,19 @@
+{
+  "stage": "PRE_SEAL_findings",
+  "reading_stopped": true,
+  "reviewer": "/root/selector_owner_design_review",
+  "tests_run_by_reviewer": false,
+  "closed": [
+    "R2_F1 phase identity",
+    "R2_F2 binding raw readback"
+  ],
+  "open": [
+    "R2_F3: module-global enter/leave lack private token; direct callback may clear closure active and reenter"
+  ],
+  "pins": {
+    "experiments/h1_selector_phase_handoff_development_v1.py": "42221288ac1adffe3d1819b24d492d72ddd27472855ee4c6e413f843a96acdc7",
+    "tests/test_h1_selector_phase_handoff_faults_development_v1.py": "48ce257ae912684222ac81b88fd8b05762c2e52390c868f89fadad9ac5208ea5",
+    "tests/test_h1_selector_phase_handoff_integrity_development_v1.py": "672147f4f0ddf61cf97dbf65d73f7864e04adf1776acd3d042d1d674d9894362"
+  },
+  "formal_result": false
+}

@@ -1,0 +1,25 @@
+{
+  "files_sha256": {
+    "docs/model_spec/rq2_h1_exact_business_development_v1.md": "a9b7c8cafdf184732b9541c0a039dacc67ea6b24a4094b5224a3d4af40550502",
+    "experiments/h1_exact_business_development_v1.py": "78605edbd312b238f5d5550b64de2ac9fab5121b9a89b949b185bb08563abda8",
+    "tests/test_h1_exact_business_development_v1.py": "5a54054de82483a5d7b67f02bf182d868543c1a28e819d29d5b00e4d63ef80a4"
+  },
+  "paired_commit_verified": false,
+  "real_native_calls": 0,
+  "root_transcription_of_terminal_results": true,
+  "synthetic_jobs": 0,
+  "tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_exact_business_development_v1.py",
+      "exit_code": 0,
+      "passed": 25,
+      "seconds": 14.19
+    },
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_exact_business_development_v1.py tests/test_rq2_bidirectional_policy_v1.py",
+      "exit_code": 0,
+      "passed": 66,
+      "seconds": 15.08
+    }
+  ]
+}

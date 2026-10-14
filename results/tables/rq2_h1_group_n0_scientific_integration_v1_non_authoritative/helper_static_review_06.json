@@ -1,0 +1,18 @@
+{
+  "reviewed_sha256": "596686e9c1fe5cc4cfb03523d3a2495c1fce7221d23d482f198d0a5ad52cbf04",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "official_verdict": false,
+  "closed_static_findings": [
+    "oracle",
+    "individually missing Actual rejection",
+    "guards and release",
+    "native deny and exact fabricated adapters",
+    "identity bookends"
+  ],
+  "open_static_findings": [
+    "complete parent packet entries and exact packet keys/schema/implementation"
+  ],
+  "suggestion": "Compare observed five retention callback pairs with plan retention tuples.",
+  "root_correction": "Plan has two four-field holder retentions, external callback observes five journal head pairs. Compare callbacks against recomputed five persisted journal records instead."
+}

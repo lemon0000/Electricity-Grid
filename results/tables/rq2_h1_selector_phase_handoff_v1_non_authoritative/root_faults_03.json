@@ -1,0 +1,27 @@
+{
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_selector_phase_handoff_faults_development_v1.py",
+    "-k",
+    "business_unresolved"
+  ],
+  "passed": 16,
+  "pytest_seconds": 126.48,
+  "exit_code": 0,
+  "exec_session": 26987,
+  "selection_note": "parameter ID business_unresolved matches all16 fault-suite cases",
+  "files_sha256": {
+    "experiments/h1_selector_phase_handoff_development_v1.py": "f4daa781bf62136324d2e07c453d79f1e6599e059e89b2b55513a13f9b8bd03b",
+    "tests/test_h1_selector_phase_handoff_faults_development_v1.py": "3e37282e321b95252c677921913ab923b9ec26fe9c1735fcd08c88bbf914c650",
+    "docs/model_spec/rq2_h1_selector_phase_handoff_development_v1.md": "23021e0901560cdb1731f2963ded64eb249887975bea81db204aba9d4afe4f51"
+  },
+  "real_native_calls": 0,
+  "windows_jobs": 0,
+  "scope": "explicit synthetic Parent/sequence proxy; real storage and numerical phase replay"
+}

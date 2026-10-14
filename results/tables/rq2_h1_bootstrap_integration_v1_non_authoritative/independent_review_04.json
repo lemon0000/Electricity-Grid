@@ -1,0 +1,45 @@
+{
+  "status": "PRE_SEAL_FINDINGS_CLOSED_FOR_RELEASE_PERSISTENCE_PREFIX_ONLY",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "read_only": true,
+  "stopped_reading": true,
+  "files_sha256": {
+    "experiments/h1_bootstrap_integration_development_v1.py": "adfa8c59b9b802832b9b6a92dc15d27266bd39bfc84e4cc3e0395f7d1ffad120",
+    "tests/test_h1_bootstrap_integration_development_v1.py": "94808179e9b8cbaed9673afe2249915ee51f9b428e633262aae37ca282fb4a37",
+    "docs/model_spec/rq2_h1_bootstrap_integration_development_v1.md": "e934a110163478f07d9d78a6fb96f44f4b33da21fcd84782830c4a5a5ddbc632"
+  },
+  "pins_unchanged": true,
+  "prior_findings": "release_findings_01.json",
+  "findings_closed": [
+    "same operation nonce identity before/after local and global retention",
+    "foreign bootstrap journal exact bounded namespace including rejection of canonical seq5"
+  ],
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_bootstrap_integration_development_v1.py",
+    "-k",
+    "release_prefix or release_two_journal or foreign_release_digest or release_retain_callback"
+  ],
+  "stdout": "9 passed, 61 deselected in 324.16s",
+  "wrapper_wall_seconds": 325.039,
+  "exit_code": 0,
+  "jobs": 0,
+  "real_native_calls": 0,
+  "execution_scope": "metadata persistence and synthetic static inventory only; no Job/native/solver child; not resource admission evidence",
+  "counterexample_notes": [
+    "Nonce callbacks first retain the exact head then replace the true nonce; both local and global boundaries reject.",
+    "Foreign seq5 is canonical with correct previous hash and is rejected while opening a different episode.",
+    "Forged global release digest is tested with a correspondingly changed external head, isolating semantic rejection."
+  ],
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "implementation_complete": false
+}

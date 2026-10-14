@@ -1,0 +1,33 @@
+{
+  "cap_below_nameplate": 12,
+  "cap_below_pmin": 0,
+  "files_sha256": {
+    "docs/model_spec/rq2_h1_current_outage_information_development_v1.md": "6916bc47bce0e132c78bafa63f02a8406017cf4012c99dd3d248bd3381266225",
+    "docs/model_spec/rq2_h1_outage_origin_repair_proposal_v1.md": "fb3f204d327230f1fffaf6d70bfce0cafbcd4a22c237ef30f3bd332428326063",
+    "experiments/audit_h1_outage_origin_replay_development_v1.py": "bd6c056d732d0ae5b609dfbe65c4717b46f751664dd0254ca7655197c19e7eb7",
+    "experiments/h1_current_outage_information_development_v1.py": "8c8d88e4bb81dfbb947e9e1355fce382afa4bfcb77c8160e76de800931545529",
+    "tests/test_h1_current_outage_information_development_v1.py": "978ed6de018b8b2d6d5d8e9fa2dd5a230981d05ab30db12da00daffbdab0bd0c",
+    "tests/test_h1_outage_origin_replay_development_v1.py": "a60eddfb3c26acf65d3eb9461fe406812cf83695e840bdd3ca02935ba7a22469"
+  },
+  "findings": [
+    "provenance_missing_config_grid_cfe_cross_links",
+    "proposal_cap_scope_must_be_Rref_actual_only",
+    "proposal_repair_up_ramp_must_match_existing_kernel_elif",
+    "proposal_explicit_raw0_first_action_raw1_first_transition"
+  ],
+  "inventory_F1_closed": true,
+  "official_verdict": null,
+  "proposal_table_independently_recomputed": true,
+  "proposal_table_rows": 93,
+  "proposal_table_sha256": "6435c85b6cc99d243077bd014b1f52cc90427270a4c50cb26a67fb7e34edf031",
+  "real_native_calls": 0,
+  "reviewer": "/root/outage_origin_design_review",
+  "root_transcription_of_independent_readonly_review": true,
+  "status": "PRE_SEAL_NONAUTHORITATIVE",
+  "synthetic_jobs": 0,
+  "tests": {
+    "exit_code": 0,
+    "passed": 30,
+    "seconds": 8.13
+  }
+}

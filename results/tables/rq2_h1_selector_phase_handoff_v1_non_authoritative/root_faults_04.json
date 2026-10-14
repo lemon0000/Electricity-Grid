@@ -1,0 +1,29 @@
+{
+  "command": [
+    "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_selector_phase_handoff_faults_development_v1.py",
+    "-k",
+    "durable_write_windows"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 81.11479425430298,
+  "output": "........                                                                 [100%]\n8 passed, 16 deselected in 80.19s (0:01:20)\n",
+  "before": {
+    "experiments/h1_selector_phase_handoff_development_v1.py": "28e381536d44240b03f4207ec89f18875673c5bdbfe487b34cf96ce21a9da6bf",
+    "tests/test_h1_selector_phase_handoff_faults_development_v1.py": "989500f30d9677015cfb2ec9426658a6533f6eb1ba19dfc6da4beb209177235b",
+    "docs/model_spec/rq2_h1_selector_phase_handoff_development_v1.md": "23021e0901560cdb1731f2963ded64eb249887975bea81db204aba9d4afe4f51"
+  },
+  "after": {
+    "experiments/h1_selector_phase_handoff_development_v1.py": "28e381536d44240b03f4207ec89f18875673c5bdbfe487b34cf96ce21a9da6bf",
+    "tests/test_h1_selector_phase_handoff_faults_development_v1.py": "989500f30d9677015cfb2ec9426658a6533f6eb1ba19dfc6da4beb209177235b",
+    "docs/model_spec/rq2_h1_selector_phase_handoff_development_v1.md": "23021e0901560cdb1731f2963ded64eb249887975bea81db204aba9d4afe4f51"
+  },
+  "real_native": false,
+  "windows_job": false
+}

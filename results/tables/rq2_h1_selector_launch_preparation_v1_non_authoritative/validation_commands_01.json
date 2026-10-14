@@ -1,0 +1,16 @@
+{
+  "schema": "development_validation_allowlist_v1",
+  "tests": [
+    {
+      "path": "tests/test_h1_selector_launch_preparation_development_v1.py",
+      "sha256": "09afbe5fc0bc1a739952b5c19aa1d8b0b64f8da156f9e17ff7698218045e7215"
+    },
+    {
+      "path": "tests/test_rq2_normal_resources_v1.py",
+      "sha256": "2cfb1ea018d30f608e5bad9fa0e542a7bd98e8bcea28fd62a5ae8670a693d4fc"
+    }
+  ],
+  "native_execution_authorized": false,
+  "formal_execution_ready": false,
+  "notes": "The launch suite uses synthetic source/fabricated adapters and clean isolated missing-request/wrong-pin probes only. normal_resources is read-only. This allowlist is documentation, not a technical sandbox. The legacy normal_worker regression must not be rerun under this authority."
+}

@@ -1,0 +1,48 @@
+{
+  "status": "PRE_SEAL_SCOPED_FINDINGS_CLOSED",
+  "scope": "private single-stage primitive only",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "official_verdict": false,
+  "closed_findings": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8"
+  ],
+  "open_scope": [
+    "cross-process inspect/reopen/reconcile",
+    "owned Job/controller and source/owner tickets",
+    "common Rref to A release and paired commit",
+    "resource admission and full192 integration"
+  ],
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_selector_raw_science_development_v1.py",
+    "-k",
+    "callback_cannot_promote_scope or scope_rebinding_rejected_before_allocation or actual_negative_and_canonical_lock"
+  ],
+  "exit_code": 0,
+  "pytest_result": "8 passed, 38 deselected in 31.14s",
+  "wall_seconds": 32.258,
+  "pins": {
+    "experiments/h1_selector_raw_science_development_v1.py": "788efd7548c240e4f1602b4d3d469c1b3a9fc4109ac7a049f0a3a77fb11b3457",
+    "tests/test_h1_selector_raw_science_development_v1.py": "f8953edea2cd6a5e62936c7407d614ec2eb297d23f137f90b111fea4a1b0d5ee",
+    "docs/model_spec/rq2_h1_selector_raw_science_development_v1.md": "1c6419b5947402ffb0ba46ca2de3f0c3da7e3bc1acaf4fee2b0fee6aab5d6775"
+  },
+  "unchanged": true,
+  "jobs": 0,
+  "real_native_calls": 0,
+  "scope_flags_count": 15,
+  "complete_scope": "selector_replay_chain_only",
+  "note": "F7 remains explicitly open integration scope, not an implemented recovery API"
+}

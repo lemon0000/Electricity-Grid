@@ -1,0 +1,24 @@
+{
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_symbolic_normal_manifest_development_v1.py"
+  ],
+  "exit_code": 1,
+  "wall_seconds": 16.14,
+  "stdout": "..........F                                                              [100%]\n================================== FAILURES ===================================\n___________________ test_build_inspect_no_loader_and_tamper ___________________\n\ntmp_path = WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2297/test_build_inspect_no_loader_a0')\nprofile = StaticProfile(network_sha256='70b1495995643957c96b933d8b6b01b2b9170e14f3569f2823cadda871aba759', dc_bus_sha256='cd5a88...fb487c0dae9d08a37b2bd9159ecee0a6', need_rule_sha256='80671d15a494a0f5a2383a7b183c231bedc2f39454fe92a3364be3d00b717003')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000202BA890080>\n\n    def test_build_inspect_no_loader_and_tamper(tmp_path,profile,monkeypatch):\n        def denied(*a,**k):raise AssertionError('source loading or proof reconstruction forbidden')\n        monkeypatch.setattr(m.proof,'build',denied)\n        monkeypatch.setattr(m.proof.exclusion,'inspect',denied)\n>       snap=m.build(profile);path=tmp_path/'symbolic_non_authoritative.json';path.write_bytes(snap.raw)\n             ^^^^^^^^^^^^^^^^\n\ntests\\test_h1_symbolic_normal_manifest_development_v1.py:141: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\nexperiments\\h1_symbolic_normal_manifest_development_v1.py:176: in build\n    implementation = io.digest(io.encode({str(p.relative_to(ROOT)):io.digest(v[0])\n                                              ^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nself = WindowsPath('D:/Miniconda3/envs/compute/Lib/site-packages/pyomo-6.10.1.dist-info/licenses/LICENSE.md')\nother = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid')\nwalk_up = False, _deprecated = (), step = 0\n\n    def relative_to(self, other, /, *_deprecated, walk_up=False):\n        \"\"\"Return the relative path to another path identified by the passed\n        arguments.  If the operation is not possible (because this is not\n        related to the other path), raise ValueError.\n    \n        The *walk_up* parameter controls whether `..` may be used to resolve\n        the path.\n        \"\"\"\n        if _deprecated:\n            msg = (\"support for supplying more than one positional argument \"\n                   \"to pathlib.PurePath.relative_to() is deprecated and \"\n                   \"scheduled for removal in Python {remove}\")\n            warnings._deprecated(\"pathlib.PurePath.relative_to(*args)\", msg,\n                                 remove=(3, 14))\n        other = self.with_segments(other, *_deprecated)\n        for step, path in enumerate([other] + list(other.parents)):\n            if self.is_relative_to(path):\n                break\n            elif not walk_up:\n>               raise ValueError(f\"{str(self)!r} is not in the subpath of {str(other)!r}\")\nE               ValueError: 'D:\\\\Miniconda3\\\\envs\\\\compute\\\\Lib\\\\site-packages\\\\pyomo-6.10.1.dist-info\\\\licenses\\\\LICENSE.md' is not in the subpath of 'D:\\\\CUHKSZ\\\\Research Project\\\\electricity-grid'\n\nD:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py:682: ValueError\n=========================== short test summary info ===========================\nFAILED tests/test_h1_symbolic_normal_manifest_development_v1.py::test_build_inspect_no_loader_and_tamper\n1 failed, 10 passed in 15.55s\n",
+  "stderr": "",
+  "files_sha256": {
+    "experiments/h1_symbolic_normal_manifest_development_v1.py": "5518dbe4779893f17dd76b42a30fc367942ae2bf82e92390b4ec4634bdbf1252",
+    "tests/test_h1_symbolic_normal_manifest_development_v1.py": "fce12df8e349751afee5542015c038ee452dacf312cd204d9bbe0f5ecee5e462",
+    "docs/model_spec/rq2_h1_symbolic_normal_manifest_development_v1.md": "df4f4d76b537c2dabb53ebaa9c8415241fb89494f45ba2f1ddaa8a304fd550d6"
+  },
+  "pins_unchanged": true,
+  "jobs": 0,
+  "real_native_calls": 0
+}

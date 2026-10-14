@@ -1,0 +1,21 @@
+{
+  "status": "PRE_SEAL_DESIGN_ONLY",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "binding": "optional exact RegistryBinding(path, sha256, split) on BootstrapDeclaration",
+  "study_identity": "binding plus resolved declaration split and registry identity shared by all foreign episodes",
+  "freshness": [
+    "constructor/reopen full inspect before any journal directory creation",
+    "first attempt full inspect before bytes",
+    "stable declaration file view across owner checks and callbacks",
+    "post-claim full inspect before continuation",
+    "future paired source must separately fresh inspect and registry.prepare"
+  ],
+  "compatibility": "New field changes header/genesis/implementation identities. Old bytes remain preserved; no silent default-field migration or old-run resumption.",
+  "none_binding": "N-only metadata compatibility; cannot imply paired-ready",
+  "capacity": "full predecessor scan at explicit boundaries, not per foreign episode or every journal check",
+  "formal_result": false,
+  "official_verdict": false,
+  "native_execution_authorized": false,
+  "tests": 0,
+  "jobs": 0
+}

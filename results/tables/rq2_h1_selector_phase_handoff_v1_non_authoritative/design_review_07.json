@@ -1,0 +1,14 @@
+{
+  "status": "PRE_SEAL_FINDING_OPEN",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "tests_run": false,
+  "pins": {
+    "experiments/h1_selector_phase_handoff_development_v1.py": "0436f7f0066fd8cfb065529bb03a4bb6dffa1623c9ddd849583c9d5d490ac7b3",
+    "docs/model_spec/rq2_h1_selector_phase_handoff_development_v1.md": "c7a146d16a9c6cc1354b0dc5db326d99761546662864855e8f00e97a8547531b",
+    "tests/test_h1_selector_phase_handoff_nested_resources_development_v1.py": "ddd62e30c6b1d61bbe142cbb34f822cae56230c5fceeb08a29a7e15003ceebee"
+  },
+  "finding": "changed detection outside poison try permits deleted lease fields or aliases to bypass restoration and poison. Include all detection/restoration in common exception boundary.",
+  "previous_durable_finding": "static closure; root_nested_18 has 29 passed plus teardown error on deliberately destroyed original stream, exit1",
+  "source": "root transcription of independent reviewer response"
+}

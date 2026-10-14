@@ -1,0 +1,37 @@
+{
+  "status": "PRE_SEAL_SCOPED_FINDINGS_CLOSED",
+  "reading_stopped": true,
+  "reviewer": "/root/selector_owner_design_review",
+  "reviewed_hashes": {
+    "experiments/h1_selector_worker_output_inspection_development_v1.py": "6b7aba0db9c8c329e77e1226a7f5afe0b14fb2cf88632122aa0d81d0170ad491",
+    "tests/test_h1_selector_worker_output_inspection_development_v1.py": "80d15420450d893fb82f41b196a44e768d7d2537130a4ec27db134a671a05351",
+    "docs/model_spec/rq2_h1_selector_worker_output_inspection_development_v1.md": "b887fd36093c5e0869d75e276ecae5a301177603a3909dfff49fb91e0dc3cc36"
+  },
+  "findings_closed": [
+    "E1",
+    "E2"
+  ],
+  "review_summary": "Thirty transport/timing field mutations recompute affected input pins and all output pins; rejection derives from exact reconstruction rather than stale hashes. Late same-byte science/timing binding replacements at third fresh call are rejected by final archive bookend after four fresh calls. No new must-fix or evidence gaps. Original tests unchanged; code/spec unchanged.",
+  "independent_test": {
+    "command": [
+      "D:/Miniconda3/envs/compute/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_h1_selector_worker_output_inspection_development_v1.py",
+      "-k",
+      "complete_transport or late_same_byte"
+    ],
+    "passed": 3,
+    "deselected": 11,
+    "pytest_seconds": 178.1,
+    "exit_code": 0,
+    "files_unchanged": true
+  },
+  "native_calls": 0,
+  "research_jobs": 0,
+  "official_verdict": false
+}

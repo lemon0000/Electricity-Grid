@@ -1,0 +1,26 @@
+{
+  "status": "PRE_SEAL_FINDING_OPEN_AT_REVIEW",
+  "reviewer": "/root/outage_preseal_review",
+  "pins": {
+    "experiments/h1_finite_followup_assessment_development_v1.py": "e790ed78399465c5bf8e47e9568810552a3c27fedbc71fdf6e9a8f1c4dd43a1f",
+    "tests/test_h1_finite_followup_assessment_development_v1.py": "6871dbbcb4e3778d1865612ed2d1f8dc2e32b6ed9d19719b0646ee3a355943fa",
+    "docs/model_spec/rq2_h1_finite_followup_assessment_development_v1.md": "3693fc360a59c9008b3394ec81c2f24050e487abfaa2b6cf7d1c069666da06d8"
+  },
+  "test": {
+    "passed": 19,
+    "seconds": 49.47,
+    "outer_seconds": 50.48,
+    "exit_code": 0,
+    "pins_unchanged": true
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "medium",
+      "description": "Failure-priority recovery fold can be F while another primary cohort is pending; all_component_observations_known must also require complete enrollment and no pending primary."
+    }
+  ],
+  "real_native_runs": 0,
+  "Jobs": 0,
+  "official_verdict": false
+}

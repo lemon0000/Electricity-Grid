@@ -1,0 +1,144 @@
+"""Real selector journals over synthetic sources/fabricated adapters; no Job/native."""
+from copy import deepcopy
+import json
+import os
+
+import pytest
+
+from experiments import h1_selector_worker_output_inspection_development_v1 as m
+from tests.test_h1_selector_released_worker_development_v1 import prepared,context,case,setup,legacy_setup,sequence_factory,no_solver
+
+
+@pytest.fixture
+def completed(prepared):
+    def make(role='reference'):
+        c=prepared(role);m.worker.execute(c.root/'request.json',c.pin)
+        c.environment=dict(os.environ)
+        c.pins={name:m.io.digest((c.root/name).read_bytes()) for name in m.INPUT_FILES}
+        c.identity=json.loads((c.root/'launch.json').read_bytes())['process_identity']
+        return c
+    return make
+
+
+def inspect(c,**changes):
+    args=dict(pins=c.pins,environment=c.environment,expected_process_identity=c.identity,
+        expected_pid=c.pid,expected_creation_filetime=c.creation)
+    args.update(changes)
+    return m.inspect(c.root,**args)
+
+
+@pytest.mark.parametrize('role',['reference','actual'])
+def test_fresh_and_retained_replay_for_both_roles(completed,role):
+    c=completed(role);before=len(c.c.s.calls)
+    fresh=inspect(c);data=fresh['data']
+    assert fresh['schema']==m.lifecycle.INSPECTION_SCHEMA and data['role']==role
+    assert set(data['pins'])==m.FILES and data['output_pins_externally_supplied'] is False
+    retained=inspect(c,expected_output_pins={k:data['pins'][k] for k in m.OUTPUT_FILES})
+    expected=deepcopy(fresh);expected['data']['output_pins_externally_supplied']=True
+    assert retained==expected and len(c.c.s.calls)>=before+8
+    assert len(m.io.encode(fresh))<=m.lifecycle.INSPECTION_CAP
+    assert all(data[k] is False for k in m.FLAGS)
+    assert data['fresh_at_return'] is True and len(data['record_sha256'])==(3 if role=='reference' else 2)
+
+
+def test_external_pin_inventory_and_process_declarations_rejected(completed):
+    c=completed();full={name:m.io.digest((c.root/name).read_bytes()) for name in m.FILES}
+    cases=[dict(pins={}),dict(pins=full),dict(pins=dict(c.pins,**{'request.json':'0'*64})),
+        dict(expected_output_pins={}),dict(expected_output_pins={k:'0'*64 for k in m.OUTPUT_FILES}),
+        dict(expected_pid=True),dict(expected_pid=c.pid+1),dict(expected_creation_filetime=c.creation+1),
+        dict(expected_process_identity='0'*64),dict(environment=dict(c.environment,OMP_NUM_THREADS='2'))]
+    for change in cases:
+        with pytest.raises(ValueError):inspect(c,**change)
+
+
+def test_result_and_phase_mutations_cannot_pass_even_with_fresh_output_pins(completed):
+    c=completed();rp=c.root/'worker_result.json';tp=c.root/'worker_timing_terminal.json'
+    rr=rp.read_bytes();tr=tp.read_bytes()
+    def alter_result(field,value):
+        result=json.loads(rr);result[field]=value;return result,json.loads(tr)
+    faults=[(field,value) for field,value in [
+        ('schema','other'),('request_sha256','0'*64),('snapshot_sha256','0'*64),('consumed_sha256','0'*64),
+        ('pid',c.pid+1),('creation_filetime',c.creation+1),('thread_id',True),
+        ('scientific_root',str(c.root)),('timing_root',str(c.root)),('sequence_request_sha256','0'*64),
+        ('scientific_terminal_sha256','0'*64),('sequence_terminal_sha256','0'*64),
+        ('archive_view_sha256','0'*64),('record_sha256',[]),('native_interval_ns',-1),('clock',{}),
+        ('formal_result',True),('extra',1)]]
+    for field,value in faults:
+        result,terminal=alter_result(field,value)
+        raw=m.io.encode(result);terminal['result_sha256']=m.io.digest(raw)
+        rp.write_bytes(raw);tp.write_bytes(m.io.encode(terminal))
+        with pytest.raises(ValueError):inspect(c)
+        rp.write_bytes(rr);tp.write_bytes(tr)
+    for fault in ('missing','name','boolean','reverse','gap','delta','run_window','thread','pin','scope','extra'):
+        terminal=json.loads(tr)
+        if fault=='missing':terminal['phases']=terminal['phases'][:-1]
+        elif fault=='name':terminal['phases'][0]['name']='wrong'
+        elif fault=='boolean':terminal['phases'][0]['start_ns']=False
+        elif fault=='reverse':terminal['phases'][0]['end_ns']=terminal['phases'][0]['start_ns']-1
+        elif fault=='gap':terminal['phases'][1]['start_ns']+=1
+        elif fault=='delta':terminal['entry_to_result_readback_ns']+=1
+        elif fault=='run_window':
+            # Preserve contiguity and entry delta, but move the prepare/run
+            # boundary to the run end so complete native stages no longer fit.
+            terminal['phases'][2]['end_ns']=terminal['phases'][3]['end_ns']
+            terminal['phases'][3]['start_ns']=terminal['phases'][3]['end_ns']
+        elif fault=='thread':terminal['thread_id']+=1
+        elif fault=='pin':terminal['result_sha256']='0'*64
+        elif fault=='scope':terminal['window_scope']='whole_lifecycle'
+        else:terminal['extra']=0
+        tp.write_bytes(m.io.encode(terminal))
+        with pytest.raises(ValueError):inspect(c)
+        tp.write_bytes(tr)
+    assert inspect(c)['data']['pins']['worker_result.json']==m.io.digest(rr)
+
+
+def test_parent_transport_tamper_with_rehashed_pins_is_rejected(completed):
+    c=completed()
+    cases=[('child.json','pid',c.pid+1),('release_intent.json','launch_sha256','0'*64),
+        ('launch.json','environment_sha256','0'*64),('initial_observation.json','observed_headroom_sufficient',False),
+        ('consumed.json','child_sha256','0'*64),('request.json','sequence_request_sha256','0'*64)]
+    for name,field,value in cases:
+        path=c.root/name;raw=path.read_bytes();doc=json.loads(raw);doc[field]=value;path.write_bytes(m.io.encode(doc))
+        pins=dict(c.pins)
+        if name in pins:pins[name]=m.io.digest(path.read_bytes())
+        with pytest.raises(ValueError):inspect(c,pins=pins)
+        path.write_bytes(raw)
+
+
+def test_same_byte_archive_replacement_is_not_same_worker_archive(completed):
+    c=completed();path=c.root/'timing_sequence_non_authoritative/stages/0000/native/intent.json'
+    raw=path.read_bytes();path.rename(c.root/'scratch_non_authoritative/retained_intent.json');path.write_bytes(raw)
+    with pytest.raises(ValueError):inspect(c)
+
+
+def test_source_changed_after_worker_is_rejected(completed):
+    c=completed();current=c.c.s.currents[0]
+    object.__setattr__(current,'source_projection_audit_payload',current.source_projection_audit_payload+b' ')
+    with pytest.raises(ValueError):inspect(c)
+
+
+def test_preinstalled_readers_or_scope_changes_fail_before_file_access(tmp_path,monkeypatch):
+    args=dict(pins={},environment={},expected_process_identity='0'*64,expected_pid=1,expected_creation_filetime=1)
+    for target,name,value in ((m.worker,'_read',lambda *a:None),(m.snapshot,'rebuild',lambda *a:None),
+        (m.sequence,'inspect',lambda *a:None),(m.sequence,'_snapshot_pin',lambda *a:None),
+        (m.worker,'CAP',2*m.worker.CAP),(m.worker,'PHASES',('changed',))):
+        with monkeypatch.context() as patch:
+            patch.setattr(target,name,value)
+            with pytest.raises(ValueError,match='import-fixed'):m.inspect(tmp_path,**args)
+
+
+@pytest.mark.parametrize('fault',['metadata','validator','namespace'])
+def test_source_callback_drift_is_bookended(completed,monkeypatch,fault):
+    c=completed();original=m.snapshot.phase._fresh;calls=[]
+    def change(*args,**kwargs):
+        current=original(*args,**kwargs);calls.append(True)
+        if len(calls)==(1 if fault=='validator' else 3):
+            if fault=='validator':monkeypatch.setattr(m,'_same',lambda *a:None)
+            elif fault=='namespace':(c.root/'unexpected.json').write_bytes(b'{}')
+            else:
+                path=c.root/'launch.json';raw=path.read_bytes()
+                path.rename(c.root/'scratch_non_authoritative/retained_launch.json');path.write_bytes(raw)
+        return current
+    monkeypatch.setattr(m.snapshot.phase,'_fresh',change)
+    with pytest.raises(ValueError):inspect(c)
+    assert len(calls)>=(1 if fault=='validator' else 3)

@@ -1,0 +1,24 @@
+{
+  "review_type": "PRE_SEAL_DESIGN_FINDINGS",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "tests_run": false,
+  "files_modified": false,
+  "scope": "live hour-0 selector parent to common phase handoff design",
+  "summary_is_paraphrase": true,
+  "requirements": [
+    "Persist each holder_head_prepared event inside its retain_head callback before acknowledging; preplanned hashes alone are not runtime retention.",
+    "Precompute complete exact tickets and holder bytes, then compare final holder and DB bytes under guards.",
+    "Exact Parent adapter: acquire sorted Actual guards then unique Rref, nonblocking; validate original issued receipts; temporarily hold reference flag and restore on every path.",
+    "Hold common and roster guards continuously while closing old genesis children and reopening exact roots and headers; no public close/open gap.",
+    "Externally retained journal stages: takeover_intent, handoff_opened, holder_head_prepared_1/2, bootstrap_consumed_terminal.",
+    "Typed lane dispositions: live paired Actual, internally recomputed business unresolved, or pending started Actual failure; never infer failure from a missing receipt.",
+    "Obtain records by fresh scientific/timed archive replay under Parent guards and compare all retained identities.",
+    "Whole branch byte and count capacity before closing genesis; retain raw records without truncation.",
+    "Unknown suffix, retained-head-without-file and intent-without-outcome stay pending; no automatic retry or speculative head selection.",
+    "Hour-0 controller terminal is not an episode terminal, full192-hour proof or formal result."
+  ],
+  "official_verdict": false,
+  "native_execution_authorized": false,
+  "formal_result": false
+}

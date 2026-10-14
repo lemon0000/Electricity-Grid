@@ -1,0 +1,34 @@
+{
+  "status": "PRE_SEAL_DESIGN_ONLY",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "files_sha256": {
+    "configs/rq2_finite_mechanism_protocol_candidate_v2.DRAFT.yaml": "95eb158f0a8e6784d2af401e67164965543c98f42ff02b756c214982601e5430",
+    "docs/model_spec/rq2_finite_mechanism_protocol_candidate_v2.md": "09ed8b1a51a27a0bf17de2c18d37a375180a6a294dd5d8714f759f272ade5dfd",
+    "results/tables/rq2_v2_obligation_manifest_v1_non_authoritative/obligation_manifest_v2_final.json": "befcfab8180a0124f15ad7652b085514c7aec6278e2b9d967e9885fc5a65fdd7",
+    "configs/rq2_joint_deliverability_continuation_audit_v1.DRAFT.yaml": "0cca33dbfbd934881be3c4e375c76eb668c2ec41ff9bbc7392c2eb3947de18a5",
+    "configs/rq2_joint_deliverability_preregistration_successor_v5.yaml": "19d61a2913e346090db23d01de587b650d8599999c40a78a291f627915ec2a69",
+    "docs/model_spec/rq2_h1_common_reference_candidate_v1.md": "fcac430456977a3129801c4e4d45eef696d2d391d9bc14f4ea212a7085ff050e",
+    "docs/model_spec/rq2_reference_selector_v1.md": "631b2144c4956d36d4c7f335f949bb24dc26f27dcd0baa16949a65c88b920833",
+    "docs/model_spec/rq2_actual_dispatch_selector_v1.md": "751d784b04be36df250d858696f5a08d98fa29536cbd7e6827c376cd7c60e6a3",
+    "docs/model_spec/rq2_h1_selector_replay_development_v1.md": "9596fbc5262c49ec986895989c87a57d8eca96396a938570e5ff8d995ec4a73e"
+  },
+  "deterministic_development_rules": [
+    "Resolve all four sibling arms at the same family/theta/alpha/power/workload/capacity; preserve all obligations and proof dispositions; executable lanes only unresolved_no_certificate siblings.",
+    "Use versioned arm_id lane identity sorted lexicographically; versioned capacity and accounting labels are audit identities, not new scientific values.",
+    "training_ub D comes from coordinate.capacity; alpha from coordinate.alpha; f/rho and policy/envelope fields from theta; unit 250 from protocol.",
+    "minimum_recovery_hours maps to minimum_rest_hours as the existing interevent-rest alias; E168/F24/due24 and remaining scientific rules preserve the protocol."
+  ],
+  "configuration_gaps": [
+    "holdout D requires frozen training certificate; payload currently frozen_training_ub=None.",
+    "Approved normal/native relative gap 1e-8 and residual/lock 1e-9 exist. Complete Rref/A selector triples including absolute_gap_mw still need an explicit pinned phase configuration; synthetic test 1e-7 is not authority.",
+    "Complete finite Rref/A solver and ReplayLimits configuration needs provenance/resource basis; v5 null time limit and N-only v3 budget cannot substitute.",
+    "Event/archive byte capacities require evidence; deterministic labels do not prove resource capacity."
+  ],
+  "next_safe_scope": "Fail-closed PhaseManifestGroup adapter using pinned protocol/catalog and external exact pinned selector/solver/replay/archive config; missing config rejects. No execution-ready positive real Manifest yet.",
+  "reviewer_stopped_reading": true,
+  "tests": 0,
+  "jobs": 0,
+  "formal_result": false,
+  "official_verdict": false,
+  "native_execution_authorized": false
+}

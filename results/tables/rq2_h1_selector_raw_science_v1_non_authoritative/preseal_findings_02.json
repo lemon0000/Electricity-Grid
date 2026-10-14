@@ -1,0 +1,28 @@
+{
+  "status": "PRE_SEAL_FINDINGS",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "official_verdict": false,
+  "reviewed_code_sha256": "b16e9a1cab2b3657601e96ca2f30e544f743edc01dd60b3bae38e914fd1bdce5",
+  "reviewed_test_sha256": "718dd387eeb9f50d4b281a2bf692b40b911df90b4c055578f9bffeaa97f0cf5b",
+  "reviewed_spec_sha256": "0c5019041303725591fb93a45474c1470b25a856d66f0d147cea36d4a85ce157",
+  "findings": [
+    {
+      "id": "F8",
+      "severity": "must_fix",
+      "issue": "mutable FLAGS permits callback rebind/mutation producing false authority claims without implementation byte drift",
+      "action": "immutable complete false scope; exact live scope check at entry/check/audit return; callback tamper tests; explicit selector_chain_complete name"
+    }
+  ],
+  "prior_findings_static_addressed": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6"
+  ],
+  "open_scope": [
+    "F7 cross-process inspect/reopen/reconcile remains future integration"
+  ],
+  "tests_run_by_reviewer": 0
+}

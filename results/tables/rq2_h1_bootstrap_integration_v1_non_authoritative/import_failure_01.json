@@ -1,0 +1,13 @@
+{
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-c",
+    "from experiments import h1_bootstrap_integration_development_v1 as m; print(m.RunConfiguration.__annotations__)"
+  ],
+  "exit_code": 1,
+  "error": "AttributeError: module 'src.solvers.rq2_gurobi_declared_normal' has no attribute 'Rq2SolverSpec'",
+  "resolution": "Import the existing Rq2SolverSpec from src.solvers.rq2_solver_adapter; do not alter src.",
+  "jobs": 0,
+  "real_native_calls": 0
+}

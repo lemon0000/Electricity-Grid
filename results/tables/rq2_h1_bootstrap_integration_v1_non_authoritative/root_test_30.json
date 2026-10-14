@@ -1,0 +1,23 @@
+{
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_bootstrap_registry_binding_development_v1.py",
+    "-k",
+    "dependency_change_after_claim"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 99.17199999999866,
+  "files_sha256": {
+    "experiments/h1_bootstrap_integration_development_v1.py": "c2696b52a89edfc4bc0d6caa83e0d707ccd9f9dbce01380f456833024094ba8d",
+    "tests/test_h1_bootstrap_registry_binding_development_v1.py": "16650f22daca5e25388d98d39e1595147b65ac148915ca08b32afae8cc3053ba",
+    "docs/model_spec/rq2_h1_bootstrap_integration_development_v1.md": "ee272dcb9a822574d9ee357a5944b8b9e48fe686de172a9c5b4a4d0f67463168"
+  },
+  "unchanged": true,
+  "formal_result": false
+}

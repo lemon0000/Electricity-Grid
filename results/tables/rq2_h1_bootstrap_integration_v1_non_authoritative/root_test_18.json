@@ -1,0 +1,26 @@
+{
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_owned_bootstrap_controller_development_v1.py",
+    "tests/test_h1_owned_bootstrap_numerical_development_v1.py",
+    "-k",
+    "cursor_network or constructor_tail or cleanup or historical_replay"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 346.03099999999904,
+  "sha256": {
+    "experiments/h1_bootstrap_integration_development_v1.py": "f9298a049e35a0b9a325e5201fcdc2a080d747da6cb20d817808635fd29e559e",
+    "experiments/h1_owned_bootstrap_controller_development_v1.py": "56133fb00798037c3a218509de3d3d8751487ac11195da3d2b435a328c637abe",
+    "tests/test_h1_owned_bootstrap_controller_development_v1.py": "b2568b4981d65520b1c3e5f9a15b038be0fce3d24c1eb4dfce33bf8cb500f3a0",
+    "tests/test_h1_owned_bootstrap_numerical_development_v1.py": "85e4cb2826f79bf0fd9701634bcd7b4c345a0a29d920a7a3d35b64ad000c6a63",
+    "docs/model_spec/rq2_h1_bootstrap_integration_development_v1.md": "f28e98dc8d7411ee326d98adbbc16ca13664f2e3e861584d3bededb7f84c5bc0"
+  },
+  "unchanged": true,
+  "formal_result": false
+}

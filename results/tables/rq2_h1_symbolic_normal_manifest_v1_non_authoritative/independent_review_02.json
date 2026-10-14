@@ -1,0 +1,40 @@
+{
+  "status": "PRE_SEAL_FINDINGS_CLOSED",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "files_sha256": {
+    "experiments/h1_symbolic_normal_manifest_development_v1.py": "f268d361048331fbceccda44e6e6fff36fb59e5a9816404122bc65334b39af61",
+    "tests/test_h1_symbolic_normal_manifest_development_v1.py": "f8a4b51ce0bdc01bfb503fa516afb4c4ce62137ebaf21489d7d4bc58c4cdb576",
+    "docs/model_spec/rq2_h1_symbolic_normal_manifest_development_v1.md": "b1f1e76bfc439c9ba20da1a8243e4b3a760396083eadd3e0144b4dc82895e4f0"
+  },
+  "reported_pins_unchanged": true,
+  "root_pins_unchanged": true,
+  "findings_closed": [
+    "F1 external absolute dependency paths",
+    "F2 conditional stage shape counts"
+  ],
+  "open_findings": [],
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_symbolic_normal_manifest_development_v1.py",
+    "-k",
+    "partition_independent or predecessor_dag or build_inspect"
+  ],
+  "exit_code": 0,
+  "passed": 3,
+  "deselected": 8,
+  "pytest_seconds": 23.11,
+  "wall_seconds": 23.56,
+  "jobs": 0,
+  "real_native_calls": 0,
+  "official_verdict": null,
+  "complete_executable_task_inventory": false,
+  "resource_admission": false,
+  "formal_execution_ready": false,
+  "formal_result": false
+}

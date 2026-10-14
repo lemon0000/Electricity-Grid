@@ -1,0 +1,17 @@
+{
+  "status": "PRE_SEAL_FINDING_OPEN",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "tests_run": false,
+  "pins": {
+    "experiments/h1_selector_phase_handoff_development_v1.py": "5954a646cb9ac9a312c85bf03f1a80bbdefdbec914ba8a9e7629bd72e6e82d77",
+    "docs/model_spec/rq2_h1_selector_phase_handoff_development_v1.md": "f3d05f17a40284042e3905c801c63f0e82dad21146adb0b865dc5d924a7e1992",
+    "tests/test_h1_selector_phase_handoff_nested_resources_development_v1.py": "bb53411bac85e089137fe0c8aec6dcb9469b9be0e4df80d446549c495c023866"
+  },
+  "finding": "abort_predecessor skips fresh borrowed durable validation when no capsule field changed. Always validate after an external callback before takeover; changed controls restoration only. Poison on integrity loss without closing, reconstruction or retry.",
+  "requested_evidence": [
+    "durable borrowed file replacement then callback exception",
+    "original captured stream.close capability destruction"
+  ],
+  "source": "root transcription of independent reviewer final response"
+}

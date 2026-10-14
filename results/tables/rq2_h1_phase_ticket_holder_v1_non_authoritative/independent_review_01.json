@@ -1,0 +1,28 @@
+{
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "status": "PRE_SEAL_FINDING_OPEN",
+  "findings": [
+    "F1 quadratic prefix body summation during complete snapshot; replace with running total"
+  ],
+  "passed": 13,
+  "seconds": 3.87,
+  "wall_seconds": 4.794,
+  "exit_code": 0,
+  "pins": {
+    "experiments/h1_phase_ticket_holder_development_v1.py": "19e25251a02b2f1cc685ae3e49193c656b19e91d3c5bcff4e8828a7fdbe64ee1",
+    "tests/test_h1_phase_ticket_holder_development_v1.py": "c150872c42d892afce3742f28d1d000d18c1ce06a2d83cbff9e824246886d78a",
+    "docs/model_spec/rq2_h1_phase_ticket_holder_development_v1.md": "dbf74b5937199dac29fca9dede8b00c48758b5dac55dfff7e364af987454fa8e"
+  },
+  "pins_unchanged": true,
+  "independent_fault_probe": {
+    "exit_code": 0,
+    "wall_seconds": 2.227,
+    "checked": [
+      "partial write poison and unknown head reopen denial",
+      "over-total forged chain reopen denial",
+      "foreign thread close denial",
+      "old repeated close preserves new registry"
+    ]
+  },
+  "official_verdict": false
+}

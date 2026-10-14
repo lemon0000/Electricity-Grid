@@ -1,0 +1,39 @@
+{
+  "status": "PRE_SEAL_FINDING_OPEN",
+  "reading_stopped": true,
+  "reviewer": "/root/selector_owner_design_review",
+  "reviewed_hashes": {
+    "experiments/h1_selector_released_worker_development_v1.py": "0b0f670195c02b41878d53408072addf3fdc8e7e4e9dc681abcf0f1eb2546ed7",
+    "tests/test_h1_selector_released_worker_development_v1.py": "eac7e8df64a0c0c9b94b3396e8faf19eece8a1bf8e74c9f10d5f2ffca9cadbfd",
+    "docs/model_spec/rq2_h1_selector_released_worker_development_v1.md": "77e9b81e0487853bc5ae47b62e0af0402d55b573e9da8c0798f92168511212f8"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "summary": "Runtime validation closure incomplete: source callback can replace _match/_projection/_check/_fingerprint/_read/_roots/_process_identity and receipt/archive helpers before dynamic invocation.",
+      "required_fix": "Capture and call original validators; check all direct validation dependencies before and after callbacks and side effects; add first/second source and runner/inspector substitutions."
+    }
+  ],
+  "independent_test": {
+    "command": [
+      "D:/Miniconda3/envs/compute/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_h1_selector_released_worker_development_v1.py",
+      "-k",
+      "consume_write or handshake_failure"
+    ],
+    "passed": 9,
+    "deselected": 20,
+    "pytest_seconds": 51.69,
+    "exit_code": 0,
+    "files_unchanged": true
+  },
+  "native_calls": 0,
+  "research_jobs": 0,
+  "official_verdict": false
+}

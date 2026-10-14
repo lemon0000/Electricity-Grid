@@ -1,0 +1,39 @@
+{
+  "status": "PRE_SEAL_SCOPED_FINDINGS_CLOSED",
+  "reading_stopped": true,
+  "reviewer": "/root/selector_owner_design_review",
+  "reviewed_hashes": {
+    "experiments/h1_selector_job_lifecycle_development_v1.py": "796af50c81f872ebc48d155a825190f7ab98af5c43e59f037fca2a4214787ae4",
+    "tests/test_h1_selector_job_lifecycle_development_v1.py": "52ba8f5b6f3261530fc3bebbdb14b37fe7da0fd44fd1d682f380a6add2926ee6",
+    "docs/model_spec/rq2_h1_selector_job_lifecycle_development_v1.md": "f8a6210ff9914a0d6b999c729bb9f0e051eec0f587c507301d0c685a87a06056"
+  },
+  "findings_closed": [
+    "F1",
+    "F2",
+    "F3",
+    "F4"
+  ],
+  "review_summary": "Canonical finite bounded JSON detaches diagnostics; import-time closed primitive chain rejects preinstalled fabricated observations; immutable authority scope and exact schema/cap literals are checked at runtime. No new must-fix findings. Lifecycle unit does not authenticate selector science or authorize native.",
+  "independent_test": {
+    "command": [
+      "D:/Miniconda3/envs/compute/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_h1_selector_job_lifecycle_development_v1.py",
+      "-k",
+      "preinstalled or callback_cannot or diagnostic"
+    ],
+    "passed": 16,
+    "deselected": 33,
+    "pytest_seconds": 16.99,
+    "exit_code": 0,
+    "files_unchanged": true
+  },
+  "stdlib_synthetic_short_jobs": true,
+  "native_calls": 0,
+  "official_verdict": false
+}

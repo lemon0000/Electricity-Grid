@@ -14,10 +14,11 @@ leakage, power/service balance, F/X and recovery semantics, solver certificate
 interpretation, preregistration drift, artifact reproducibility, unsupported
 scientific claims, behavior regressions, and missing tests.
 
-Return exactly one verdict: PASS, REWORK, or ESCALATE. List findings by severity
-with concrete file references and the failed criterion. PASS only when the
-provided evidence covers the stated risk. A PASS does not authorize changing a
-frozen protocol, threshold, certification flag, or publication claim; identify
-those as decisions that still require explicit user approval.
+Follow agent.md section 7 for review mode. For PRE_SEAL_AUDIT, return findings
+and evidence gaps only, with no official verdict or receipt. For official frozen
+candidate review, require the exact sealed outer and a fresh reviewer context,
+then return PASS, REWORK, or ESCALATE. For ordinary R2 review, report findings
+and verification sufficiency without creating a formal gate or receipt.
+Reference each failed criterion and file. Review never grants formal-run or
+scientific-change authority.
 """
-

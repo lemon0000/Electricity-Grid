@@ -1,0 +1,15 @@
+
+
+### 2026-10-08：current outage 信息绑定与来源重放开发复审闭合；新科学输入待批
+
+根代理唯一写入。新增 experiments/h1_current_outage_information_development_v1.py、对应测试及 docs/model_spec/rq2_h1_current_outage_information_development_v1.md。prepare从fresh accepted N reader及外部binding/terminal pins派生当前source坐标和已完成进度，重建当前N输入、原始power row/package及outage prefix，返回前重验。decision只含当前N和一个已揭示step；不暴露未来prefix。独立F1已修：protocol精确绑定冻结generator全部211项eligible inventory，拒绝B11/C11及多报/漏报。该入口仍受N reader的1..168限制；不认证persistent owner、共同提交或完整192小时。
+
+新增 experiments/audit_h1_outage_origin_replay_development_v1.py 及测试，只做离线synthetic provenance审计。显式核验package summary与冻结config/grid/CFE三项cross-link，并分别测试漂移拒绝。重放211 components、8784小时、439 events，与25704条可见power rows一致。三个holdout前置小时4439/4559/4631的prefix生成状态为202_CT_2/无/无，但尚未批准为operational source；training三个hour-1不存在，hour0为无/B14/A15，不能冒充前一小时。全6独立边界、12 family实例仍unresolved；obligations_removed=0。
+
+根最终合并70 passed/1 deselected/10.92s，独立定向33 passed/8.12s，均exit0。使用指定compute Python -B -m pytest -q -p no:cacheprovider；根合并current outage、old outage、current N information、origin replay四组，-k 'not fresh_accepted'。新增集成测试中的accepted N reader是synthetic seam，真实accepted-root端到端认证未验证；不推导执行可达、最优或共同提交。零native、零Job。初期测试、审查前快照、F1/cross-link findings和旧provenance全部保留。独立PRE_SEAL implementation findings闭合，非official verdict。
+
+开发检查：results/tables/rq2_h1_current_outage_information_v1_non_authoritative/development_checks.json，SHA256 905fa06385c82ae6d6d0ee3c6d3653ded319a117dd6605cbc5d35b6e321efeb1（748 pins）；results/tables/rq2_h1_outage_origin_replay_v1_non_authoritative/development_checks.json，SHA256 6fd9f927c593e7ba296e29eef83bbede97dc05eb9a8db43bc4d2cb0ad19a2746（749 pins）。origin_provenance_rechecked.json SHA256 029b686d280dcbac1155c2e435caef8999b09f2b7e4d7b081050c3e662518e1c，独立fresh重建逐字一致。前序714pins、v2/v3 outer895/1695成员及run248/251文件（20931567/20938085 bytes）重验无漂移。旧src、封存及运行字节保留。
+
+待用户科学选择的具体包：docs/model_spec/rq2_h1_outage_origin_repair_proposal_v1.md，SHA256 d561919a84126e6658d59c861f17353e2e0dde5304f043e50bc8bb4cad12f707。A：raw0直接作为chronology-origin首动作前状态，无hour-1或虚假trip/repair，raw1才是后续transition；B：三个缺行holdout采用目标同split小时的冻结prefix生成receipt，不冒充原same-chain raw row；C：仅Rref/各actual lane共用固定逐UID repair cap=min(PMax,60*原始MW/min ramp)，沿用既有repair-return专用up分支，不改N基准/key/carry/selector。93行候选表repair_cap_proposal.json SHA256 6435c85b6cc99d243077bd014b1f52cc90427270a4c50cb26a67fb7e34edf031；12项低于Pmax、0项低于Pmin只是静态关系，不证明调度可行性。独立审查确认提案足够交用户选择；A/B/C尚未批准、未接入或注册运行输入。
+
+下一步先取得上述新科学输入的明确决定，再开发versioned origin/cap registry并全catalog验收，保留全部义务。persistent lane owner/same-key registry、N→Rref→业务/A→actual→paired commit、真实raw ingress/Job/分项计时、192小时phase/producer、manifest/合法复用DAG、同合同LB/UB、资源准入、successor封存和全新official审查仍开放。accepted_root_integration_verified、detached_consumer_authenticated、persistent_lane_owner_implemented、common_publication_verified、repair_cap_source_registered、full_boundary_coverage_verified、full_192_hour_coverage_verified、resource_admission、formal_execution_ready、formal_result、native_execution_authorized均false。v3单次授权已消费；新真实native仍须具体包与门禁就绪后另行明确授权。

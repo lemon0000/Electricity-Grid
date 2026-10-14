@@ -1,0 +1,160 @@
+"""Reader races and complete pinned-inventory parity; zero solver/Job."""
+import os
+from pathlib import Path
+
+import pytest
+
+from experiments import h1_phase_dependency_verifier_development_v1 as m
+
+
+@pytest.mark.parametrize('size,cap', [(0,0),(0,32*1024**2),(1,1),(1,32*1024**2),(4096,4096)])
+def test_stable_reader_matches_predecessor(tmp_path,size,cap):
+    path=tmp_path/'input';path.write_bytes(b'x'*size)
+    assert m.read_stable(path,cap)==m.io.read_stable(path,cap)
+
+
+def test_initial_cap_and_nonregular_reject(tmp_path):
+    path=tmp_path/'input';path.write_bytes(b'xx')
+    with pytest.raises(ValueError,match='cap'):m.read_stable(path,1)
+    with pytest.raises(ValueError,match='regular'):m.read_stable(tmp_path,100)
+
+
+class Stream:
+    def __init__(self,stream,read):self.stream,self.read=stream,read
+    def fileno(self):return self.stream.fileno()
+    def __enter__(self):return self
+    def __exit__(self,*args):return self.stream.__exit__(*args)
+
+
+@pytest.mark.parametrize('timing',['before_open','before_read','after_read'])
+@pytest.mark.parametrize('contents',[b'',b'abcd',b'longer than cap'])
+def test_append_truncate_and_overcap_during_read(tmp_path,monkeypatch,timing,contents):
+    path=tmp_path/'input';path.write_bytes(b'abc');original=Path.open
+    def mutate():
+        with original(path,'wb') as stream:stream.write(contents)
+        os.utime(path,ns=(1_700_000_000_000_000_000,1_700_000_000_000_000_000))
+    def opening(p,*a,**kw):
+        if p!=path or a!=('rb',):return original(p,*a,**kw)
+        if timing=='before_open':mutate()
+        stream=original(p,*a,**kw)
+        def read(n):
+            if timing=='before_read':mutate()
+            result=stream.read(n)
+            if timing=='after_read':mutate()
+            return result
+        return Stream(stream,read)
+    monkeypatch.setattr(Path,'open',opening)
+    with pytest.raises(ValueError):m.read_stable(path,8)
+
+
+def test_small_file_allocation_and_short_read(tmp_path,monkeypatch):
+    path=tmp_path/'input';path.write_bytes(b'abc');original=Path.open;requests=[]
+    def opening(p,*a,**kw):
+        stream=original(p,*a,**kw)
+        if p!=path or a!=('rb',):return stream
+        def read(n):requests.append(n);return stream.read(n)[:-1]
+        return Stream(stream,read)
+    monkeypatch.setattr(Path,'open',opening)
+    with pytest.raises(ValueError,match='changed'):m.read_stable(path,32*1024**2)
+    assert requests==[4]
+
+
+def test_same_byte_replacement_before_open(tmp_path,monkeypatch):
+    path=tmp_path/'input';path.write_bytes(b'abc');original=Path.open;armed=True
+    def opening(p,*a,**kw):
+        nonlocal armed
+        if armed and p==path and a==('rb',):
+            armed=False;path.rename(tmp_path/'retained_original')
+            with original(path,'wb') as stream:stream.write(b'abc')
+        return original(p,*a,**kw)
+    monkeypatch.setattr(Path,'open',opening)
+    with pytest.raises(ValueError,match='replaced'):m.read_stable(path,100)
+
+
+@pytest.mark.parametrize('family,ordinal',[(f,0) for f in
+    ('training_lb','training_ub','training_b6_actual','holdout')]+[('training_ub',11832353)])
+def test_complete_projection_matches_old_entrypoint(family,ordinal):
+    old=m.prior.prepare(family,ordinal)
+    result=m.prepare_group(family,ordinal)
+    assert result['predecessor_group']==old
+    assert all(result[k] is False for k in m.FLAGS)
+    assert result['fresh_at_return_only'] and result['detached_data']
+    assert result['observed_file_count']==len(result['dependency_sha256'])
+    assert result['observed_total_bytes']<=m.TOTAL_CAP
+    assert sum(Path(p).is_absolute() for p in result['dependency_sha256'])==2
+
+
+@pytest.mark.parametrize('changed',['bytes','short_read'])
+def test_complete_exit_reread_detects_change(monkeypatch,changed):
+    target=m.prior.ROOT/m.prior.PROTOCOL
+    original=Path.open;count=0
+    def opening(p,*a,**kw):
+        nonlocal count
+        stream=original(p,*a,**kw)
+        if p!=target or a!=('rb',):return stream
+        count+=1
+        if count<2:return stream
+        def read(n):
+            raw=stream.read(n)
+            return (b'X'+raw[1:]) if changed=='bytes' else raw[:-1]
+        return Stream(stream,read)
+    monkeypatch.setattr(Path,'open',opening)
+    with pytest.raises(ValueError,match='changed'):m.prepare_group('training_ub',0)
+
+
+def test_same_byte_replacement_after_close(tmp_path,monkeypatch):
+    path=tmp_path/'input';path.write_bytes(b'abc');original=Path.open
+    class Replace(Stream):
+        def __exit__(self,*args):
+            result=super().__exit__(*args)
+            path.rename(tmp_path/'retained_original')
+            with original(path,'wb') as stream:stream.write(b'abc')
+            return result
+    def opening(p,*a,**kw):
+        stream=original(p,*a,**kw)
+        return Replace(stream,stream.read) if p==path and a==('rb',) else stream
+    monkeypatch.setattr(Path,'open',opening)
+    with pytest.raises(ValueError,match='changed'):m.read_stable(path,100)
+
+
+@pytest.mark.parametrize('name',['read_stable','_views','_scope','project','identity','digest','encode'])
+@pytest.mark.parametrize('timing',['entry','during'])
+def test_helper_substitution_rejected(monkeypatch,name,timing):
+    owner=m.prior if name=='project' else m.io if name in ('identity','digest','encode') else m
+    attribute='_project' if name=='project' else name
+    calls=[]
+    def replacement(*a,**kw):calls.append(1);raise AssertionError('replacement dispatched')
+    if timing=='entry':monkeypatch.setattr(owner,attribute,replacement)
+    else:
+        original=Path.open;armed=True
+        def opening(p,*a,**kw):
+            nonlocal armed
+            if armed:
+                armed=False;monkeypatch.setattr(owner,attribute,replacement)
+            return original(p,*a,**kw)
+        monkeypatch.setattr(Path,'open',opening)
+    with pytest.raises(ValueError,match='helper identity'):m.prepare_group('training_ub',0)
+    assert not calls
+
+
+def test_extra_false_flag_rejected(monkeypatch):
+    monkeypatch.setitem(m.FLAGS,'extra',False)
+    with pytest.raises(ValueError,match='scope'):m.prepare_group('training_ub',0)
+
+
+def test_exit_metadata_change_rejected(monkeypatch):
+    from types import SimpleNamespace
+    target=m.prior.ROOT/m.prior.PROTOCOL
+    original=Path.stat;count=0
+    def stat(p,*a,**kw):
+        nonlocal count
+        value=original(p,*a,**kw)
+        if p==target:
+            count+=1
+            if count==3:
+                fields={k:getattr(value,k) for k in dir(value) if k.startswith('st_')}
+                fields['st_mtime_ns']+=1
+                return SimpleNamespace(**fields)
+        return value
+    monkeypatch.setattr(Path,'stat',stat)
+    with pytest.raises(ValueError):m.prepare_group('training_ub',0)

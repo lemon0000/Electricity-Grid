@@ -1,0 +1,39 @@
+{
+  "status": "PRE_SEAL_SCOPED_FINDINGS_CLOSED",
+  "reviewer": "/root/selector_owner_design_review",
+  "read_only": true,
+  "reading_stopped": true,
+  "findings_closed": [
+    "F1",
+    "F2",
+    "F3",
+    "F4"
+  ],
+  "remaining_findings": [],
+  "reviewed_hashes": {
+    "experiments/h1_bootstrap_integration_development_v1.py": "39257ee2fa27f53deaa545b77b17fc7b94b0548e7d1b39e8a0b9dfc8deb899c8",
+    "docs/model_spec/rq2_h1_bootstrap_integration_development_v1.md": "386be3d023fc47ecd93971575c46ff4734e8c9237fb8dfc514e7a0cc2755486f",
+    "tests/test_h1_bootstrap_phase_manifest_binding_development_v1.py": "5117fd24e444df0fe41fe5d47099612553068fca8e25d33b1b9545b310e77869"
+  },
+  "files_unchanged": true,
+  "independent_test": {
+    "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_bootstrap_phase_manifest_binding_development_v1.py -k \"prepare_cannot_substitute_or_change_request or preflight_callback_drift or cache_and_snapshot or proposal_fingerprint_callback or returned_candidate_cannot_replace\"",
+    "passed": 9,
+    "deselected": 27,
+    "seconds": 453.91,
+    "exit_code": 0
+  },
+  "additional_independent_tests": [
+    {
+      "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_bootstrap_phase_manifest_binding_development_v1.py::test_header_claim_foreign_reopen_and_cache",
+      "passed": 1,
+      "deselected": 0,
+      "seconds": 194.18,
+      "exit_code": 0
+    }
+  ],
+  "native_calls": 0,
+  "research_jobs": 0,
+  "official_verdict": false,
+  "scope": "Bootstrap internal phase audit declaration binding only; no group execution capability"
+}

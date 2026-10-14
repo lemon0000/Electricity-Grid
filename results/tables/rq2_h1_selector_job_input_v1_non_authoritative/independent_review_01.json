@@ -1,0 +1,25 @@
+{
+  "status": "PRE_SEAL_FINDINGS_OPEN",
+  "reviewer": "/root/selector_owner_design_review",
+  "reading_stopped": true,
+  "reviewed_hashes": {
+    "experiments/h1_selector_input_snapshot_development_v1.py": "300f7a1e164b9e8e3b7bb512e761d7899c719c73c8d1128acd018bfe15770b12",
+    "tests/test_h1_selector_input_snapshot_development_v1.py": "8105dd704aa7059f6b20481dfa5aeea36894966599c529799dae33637bdfd9fa",
+    "docs/model_spec/rq2_h1_selector_input_snapshot_development_v1.md": "f4c9162da4b0ebe1772116245f82ea85e0d7ef8dd45957a426ca90af2bca6219"
+  },
+  "findings": {
+    "F1": "Full declaration audit identity missing from projection",
+    "F2": "Common provenance root lacks canonical string equality"
+  },
+  "missing_evidence": [
+    "declaration audit-only fields",
+    "live configuration mutation",
+    "non-integral exact power mapping",
+    "real business unresolved",
+    "noncanonical common root"
+  ],
+  "independent_tests_run": false,
+  "official_verdict": false,
+  "native_calls": 0,
+  "research_jobs": 0
+}

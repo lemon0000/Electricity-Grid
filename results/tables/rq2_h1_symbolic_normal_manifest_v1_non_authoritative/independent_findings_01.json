@@ -1,0 +1,22 @@
+{
+  "status": "PRE_SEAL_FINDINGS_REPAIRED_REVIEW_PENDING",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "findings": [
+    {
+      "id": "F1",
+      "issue": "Inherited pins include external Conda absolute paths; repo-relative conversion raised ValueError.",
+      "repair": "Preserve absolute posix name outside repo and relative posix name inside repo."
+    },
+    {
+      "id": "F2",
+      "issue": "232 stages cannot be an unconditional bound for an arbitrary declared StaticProfile.",
+      "repair": "Added stage_order_sha256; stage multiplier and counts explicitly conditional on exact fixed RTS N stage-order/profile validation."
+    }
+  ],
+  "test_strengthening": "Direct source_window.load_source_window deny patch.",
+  "retained_failure": "root_test_01.json",
+  "root_final": "root_test_02.json",
+  "official_verdict": null,
+  "jobs": 0,
+  "real_native_calls": 0
+}

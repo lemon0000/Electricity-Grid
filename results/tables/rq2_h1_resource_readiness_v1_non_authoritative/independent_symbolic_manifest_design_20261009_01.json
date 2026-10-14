@@ -1,0 +1,41 @@
+{
+  "status": "PRE_SEAL_DESIGN_FINDINGS_NOT_IMPLEMENTED",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "date": "2026-10-09",
+  "files_sha256": {
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_current_solve.py": "2704857915e88333b2091edb691dfa6352f8324cc1ca7a8c83d28a5fa0cefef8",
+    "src/rq2_joint_deliverability_boundary_v1/normal_h1_source.py": "722406d4738a5e9dd0d6fc6a57d951c368a79c39acdcb65fc5eda56502b3fc51",
+    "experiments/h1_phase_obligation_controller_development_v1.py": "e047f3e5b08b397362f2961be89062924e0e4769d7de0795453047e921300934",
+    "experiments/rq2_v2_normal_obligation_binding_development_v1.py": "7db8fdae8dc0dd5a6ee7b5a7d4ef43f0fea210c189d2b09f31c38bd9db92e2f7",
+    "results/tables/rq2_v2_obligation_manifest_v1_non_authoritative/obligation_manifest_v2_final.json": "befcfab8180a0124f15ad7652b085514c7aec6278e2b9d967e9885fc5a65fdd7"
+  },
+  "findings": [
+    "Future concrete request keys depend on prior accepted carry; requiring all concrete keys before execution creates a value dependency cycle. No future keys may be invented or source read ahead to satisfy it.",
+    "Use a complete finite factorized symbolic slot DAG before seal and an append-only runtime instance ledger after each predecessor terminal. Symbolic slots do not claim materialized causal keys or verified reuse.",
+    "Static slots bind role/split/full source pair/family ordinal mapping/hour/phase/predecessors/specification/limits/budget/implementation/need rule/max attempts/resource profile/proof disposition. Runtime records add actual predecessor terminal/head, source audit, before/input/request identities, process identity and outcome.",
+    "Theta, alpha, arm and D do not enter N numerical input, but identical pair/hour is only a candidate equivalence class. Full source lineage, prior carry, model/spec/limits/budget/implementation and runtime accepted projection agreement are still required.",
+    "No cross-split or cross-source-pair merging is authorized. Independent parent reuse needs global same-key agreement and publication registry; existing parents do not implement this.",
+    "Rref/business/A have their own carry/contract/action dependence. Existing combined owner request identity does not prove independently reusable Rref tasks.",
+    "LB/UB/policy search and Rref/A bounded multiplicity are undefined, so unresolved obligations times 192 is not a complete-study task bound."
+  ],
+  "candidate_N_quotient": {
+    "condition": "one canonical N producer per complete source pair, not yet proved or implemented",
+    "training_hours": 2811648,
+    "holdout_hours": 2752512,
+    "total_hours": 5564160,
+    "total_stage_slots": 1290885120,
+    "resource_discount_applied": false,
+    "reuse_verified": false
+  },
+  "next_implementation": [
+    "Factorized symbolic-manifest compiler/inspector with exact source/protocol/manifest binding; slot resolve/inverse, obligation mapping, typed causal/proof edges and coverage/topology checks; no future row loading or execution.",
+    "Owner-guarded runtime slot binding and append-only instance ledger; independently verified reuse proofs.",
+    "Define and cover all Rref/A/LB/UB multiplicities and resource envelopes before complete inventory/admission."
+  ],
+  "jobs": 0,
+  "native_calls": 0,
+  "complete_executable_task_inventory": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "formal_result": false
+}

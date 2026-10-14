@@ -1,0 +1,31 @@
+{
+  "scope": "root transcription of independent read-only PRE_SEAL call-graph findings",
+  "reviewer": "/root/routing_review",
+  "unix_time": 1791905201.1471972,
+  "formal_result": false,
+  "official_verdict": false,
+  "per_complete_common_prepare_lower_bound": {
+    "historical_prepare": 30,
+    "historical_prefix_replay": 60,
+    "dependency_verifier_prepare_group": 156
+  },
+  "remaining_common_prepare_calls_to_handoff_lower_bound": 68,
+  "total_lower_bound": {
+    "historical_prepare": 2040,
+    "historical_prefix_replay": 4080,
+    "dependency_verifier_prepare_group": 10608
+  },
+  "sources": [
+    "experiments/h1_group_n0_common_input_binding_development_v2.py",
+    "experiments/h1_group_execution_roster_development_v2.py",
+    "experiments/h1_bootstrap_integration_development_v2.py",
+    "experiments/h1_phase_historical_controller_development_v1.py",
+    "experiments/h1_common_owner_genesis_development_v2.py",
+    "experiments/h1_selector_phase_handoff_development_v2.py",
+    "tests/test_h1_hour0_end_to_end_development_v2.py",
+    "tests/h1_group_selector_integration_helpers_v2.py"
+  ],
+  "wall_time_estimate": null,
+  "implementation_change": false,
+  "status": "measuring_first_complete_common_checkpoint"
+}

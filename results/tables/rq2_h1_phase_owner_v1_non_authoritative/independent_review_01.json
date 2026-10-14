@@ -1,0 +1,26 @@
+{
+  "status": "DRAFT_PRE_SEAL_FINDINGS_OPEN",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "read_only": true,
+  "tests_run": false,
+  "findings": {
+    "F1": "Final tail replay lacks fresh DB/holder/live-binding checks",
+    "F2": "legacy168 adapter can commit unusable hour168 attempt",
+    "F3": "Witness capacity omits 2+4 continuing or 2+1 stopped full branch",
+    "F4": "create accepts non-bool"
+  },
+  "pins": {
+    "experiments/h1_phase_owner_development_v1.py": "294fa588950a8c210ababa436c7fdd6a2cc325b304ef74fd6a90c914996416c8",
+    "tests/test_h1_phase_owner_development_v1.py": "8029d97e924935c01cee9438bbb7c65e9784ca246182fb43dd004b47f05fea0d",
+    "docs/model_spec/rq2_h1_phase_owner_development_v1.md": "13d9ac7433df11128395e474cfd2fe9ec3f02756d4603742e28718b57081fa8c"
+  },
+  "pins_unchanged": true,
+  "additional_coverage_required": [
+    "reentrant tail replay change",
+    "hour168 adapter boundary",
+    "witness continuation and stopped capacity",
+    "wrong create types",
+    "terminal prepared-before/after recovery"
+  ],
+  "official_verdict": false
+}

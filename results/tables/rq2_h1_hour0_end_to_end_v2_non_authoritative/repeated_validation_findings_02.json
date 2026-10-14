@@ -1,0 +1,40 @@
+{
+  "scope": "static lower bound for current synthetic hour0 success path through paired commit, excludes final teardown",
+  "reviewer": "/root/fast_witness_design",
+  "record_basis": "root transcription of independent read-only call graph analysis",
+  "definitions": {
+    "H": "new historical verifier.prepare: 4 full hour audits and 4 byte-context revalidations",
+    "E": "legacy exact-source.prepare: 8 full hour audits",
+    "C": "complete common prepare: 30H plus 6E"
+  },
+  "common_decomposition": {
+    "first_common": 1,
+    "genesis_create_and_inspect": 17,
+    "four_snapshot_captures": 8,
+    "missing_all": 2,
+    "three_missing_one": 12,
+    "final_owner_view": 1,
+    "final_handoff": 27
+  },
+  "outside_common_exact_source": {
+    "genesis_receipts": 9,
+    "four_captures": 28,
+    "four_parent_construct_and_run": 662,
+    "four_oracles": 8,
+    "missing_all": 47,
+    "three_missing_one": 1080,
+    "final_owner_view": 2,
+    "final_consume": 2131
+  },
+  "wall_time_estimate_proved": false,
+  "formal_result": false,
+  "full_chain_passed": false,
+  "totals": {
+    "common": 68,
+    "new_verifier": 2040,
+    "legacy_exact_source": 4375,
+    "full_hour_audit_lower_bound": 43160,
+    "byte_context_revalidation_lower_bound": 8160,
+    "dependency_prepare_group_lower_bound": 10608
+  }
+}

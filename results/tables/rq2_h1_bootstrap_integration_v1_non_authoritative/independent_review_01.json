@@ -1,0 +1,38 @@
+{
+  "status": "PRE_SEAL_PRE_SOURCE_FINDINGS_CLOSED_ONLY",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "files_sha256": {
+    "experiments/h1_bootstrap_integration_development_v1.py": "d26868068aaa3f44964303e25f43f7b770874f05d370d418a31d83b04d9088ee",
+    "tests/test_h1_bootstrap_integration_development_v1.py": "40fb80dcf1996ebb0a3c26aa4c6274b2c72a19812a90db5853d527297dabc31b",
+    "docs/model_spec/rq2_h1_bootstrap_integration_design_v1.md": "66157a338421edb4d7cee6d3af873ea497ee1e656da8c073e8653189c363b6d3"
+  },
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_bootstrap_integration_development_v1.py"
+  ],
+  "exit_code": 0,
+  "pytest": "35 passed in 41.72s",
+  "wall_seconds": 42.775,
+  "files_unchanged": true,
+  "read_only": true,
+  "jobs": 0,
+  "real_native_calls": 0,
+  "findings_closed": [
+    "F1 all-episode claim schema and cross-reference",
+    "F2 all pending suffix capacity",
+    "F3 header-derived genesis",
+    "E1 retention and readback failures",
+    "E2 owner and object drift"
+  ],
+  "scope": "pre-source prefix only",
+  "implementation_complete": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false
+}

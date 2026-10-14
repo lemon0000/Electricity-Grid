@@ -1,0 +1,36 @@
+{
+  "status": "PRE_SEAL_FINDINGS_OPEN",
+  "reading_stopped": true,
+  "reviewer": "/root/selector_owner_design_review",
+  "reviewed_hashes": {
+    "experiments/h1_timed_selector_sequence_development_v1.py": "1349b80729d8d0cdb1bc967d1e4445bbc95113cb8187c2be583ed0299ae6e4a4",
+    "tests/test_h1_timed_selector_sequence_development_v1.py": "106314aa20ecd0ca0f95b6a61670dcf16f4837073728ed3fce9ee95556cb1de9",
+    "docs/model_spec/rq2_h1_timed_selector_sequence_development_v1.md": "d6dc3b0a39d59bd242c1aaa1091672397d6e9afa904b71e1386b8ae25830faff"
+  },
+  "findings": {
+    "F1": "Actual timing header cap is checked after mkdir; preflight maximum-width directory identity with identical schema before first mkdir.",
+    "F2": "Initial/final nested views need immutable canonical projections covering paths, caps, content hashes and full file/directory stamps; bind initial pin to fixed state and final pin to live receipt fingerprint."
+  },
+  "independent_test": {
+    "command": [
+      "D:/Miniconda3/envs/compute/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_h1_timed_selector_sequence_development_v1.py",
+      "-k",
+      "dual_journal or overlapping or header_same or exact_timing"
+    ],
+    "passed": 11,
+    "deselected": 30,
+    "pytest_seconds": 78.81,
+    "exit_code": 0,
+    "files_unchanged": true
+  },
+  "native_calls": 0,
+  "research_jobs": 0,
+  "official_verdict": false
+}

@@ -1,0 +1,53 @@
+{
+  "status": "PRE_SEAL_FINDINGS_PENDING_REVALIDATION",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "findings": [
+    {
+      "id": "F1",
+      "problem": "N0 clock/obligation cursor and fixed roots/pins not bound before Job effects",
+      "repair": "Fixed configuration and phase-aware expected cursor/start/intent"
+    },
+    {
+      "id": "F2",
+      "problem": "Owner network object not continuously bound",
+      "repair": "Same original object and identity plus network validation"
+    },
+    {
+      "id": "F3",
+      "problem": "Constructor tail could leak successful superclass leases",
+      "repair": "Capture six original leases and finally close after constructor tail failure"
+    },
+    {
+      "id": "R1",
+      "problem": "Lease object identity did not bind internal root/handle/file identity",
+      "repair": "Separate original lease field snapshots"
+    },
+    {
+      "id": "R2",
+      "problem": "Nullable active request could skip readback",
+      "repair": "Exact request tuple reconstructed from Job ticket"
+    }
+  ],
+  "prior_tests": "root_test_14.json: 6 passed /245.57s/exit0 before review fixes",
+  "failures": [
+    {
+      "evidence": "root_test_15.json",
+      "phase": "fixture resolver reconstruction under one-row synthetic source seam",
+      "jobs": 0,
+      "native_calls": 0
+    },
+    {
+      "evidence": "root_test_16.json",
+      "phase": "CreateProcessW WinError267 long cwd",
+      "windows_job_objects_created": 1,
+      "child_processes_created": 0,
+      "child_releases": 0,
+      "native_calls": 0,
+      "cleanup": "existing initialization exception cleanup; failure artifacts retained"
+    }
+  ],
+  "extra_repair": "Reject MAX_PATH scratch cwd before Job mkdir; synthetic fixture now declares a short session root",
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false
+}

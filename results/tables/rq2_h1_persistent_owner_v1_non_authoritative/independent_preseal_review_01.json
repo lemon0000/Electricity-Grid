@@ -1,0 +1,26 @@
+{
+  "reviewer": "/root/outage_preseal_review",
+  "status": "PRE_SEAL_findings_closed_not_official",
+  "open_findings": [],
+  "first_review_findings": [
+    "F1 unknown ValueError classification",
+    "F2 precommit ticket recovery",
+    "F3 copy and concurrent access",
+    "F4 storage bounds in scientific key"
+  ],
+  "followup_finding": "F2 residual: callback could mutate genesis after ticket creation; fixed by recomputed genesis, exact ticket equality, INSERT/readback of ticket.event",
+  "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest -q -p no:cacheprovider tests/test_h1_persistent_owner_development_v1.py -k \"recovery_requires or callback or parallel or copy_pickle or unknown_business or request_key\"",
+  "result": "10 passed, 18 deselected in 14.02s",
+  "exit_code": 0,
+  "outer_seconds": 15.034,
+  "pre_post_sha256_equal": true,
+  "files_sha256": {
+    "experiments/h1_persistent_owner_development_v1.py": "00728eff92ad7acf47fa445cf88c856eee6e160ae8a65d7a0d39605b2c4152b3",
+    "tests/test_h1_persistent_owner_development_v1.py": "e8b84a1c29c81d25e2b737a5fbe5b279cb6582c9b55132341638b1e702219d80",
+    "docs/model_spec/rq2_h1_persistent_owner_development_v1.md": "8a6b14c98c80f1afc71f79763aea1cbd27ed4a982da993b0debb139e6e1c2967"
+  },
+  "real_native_calls": 0,
+  "jobs": 0,
+  "official_verdict": null,
+  "formal_result": false
+}

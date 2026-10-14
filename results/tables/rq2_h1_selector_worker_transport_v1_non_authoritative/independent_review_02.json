@@ -1,0 +1,36 @@
+{
+  "status": "PRE_SEAL_SCOPED_FINDINGS_CLOSED",
+  "reading_stopped": true,
+  "reviewer": "/root/selector_owner_design_review",
+  "reviewed_hashes": {
+    "experiments/h1_selector_released_worker_development_v1.py": "e948ccaa10d28a65f101f74f711324e60339e071de8a6afe461ae3b8be25a074",
+    "tests/test_h1_selector_released_worker_development_v1.py": "1ada8fd0094d401bf47412c0328b9e9be5ef42847f6f61970927abadf3efd6f2",
+    "docs/model_spec/rq2_h1_selector_released_worker_development_v1.md": "dc0da6e914bf98af28ac6e1dc5d93e1ff3095c75be3d495de84e2791299153a5"
+  },
+  "findings_closed": [
+    "F1"
+  ],
+  "review_summary": "Captured originals and identity bookends cover source declaration validators, retained ticket readers and process/runtime dependencies, owner run/validation/inspection, receipt/archive helpers and result/timing publication. No additional must-fix findings. Root full suite terminal required separately.",
+  "independent_test": {
+    "command": [
+      "D:/Miniconda3/envs/compute/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_h1_selector_released_worker_development_v1.py",
+      "-k",
+      "source_replacement and (_match or _check) or result_callback_replacement and _receipt_snapshot"
+    ],
+    "passed": 6,
+    "deselected": 39,
+    "pytest_seconds": 148.7,
+    "exit_code": 0,
+    "files_unchanged": true
+  },
+  "native_calls": 0,
+  "research_jobs": 0,
+  "official_verdict": false
+}

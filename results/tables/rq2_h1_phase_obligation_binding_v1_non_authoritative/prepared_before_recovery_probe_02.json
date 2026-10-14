@@ -1,0 +1,20 @@
+{
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-s",
+    "-p",
+    "no:cacheprovider",
+    "results\\tables\\rq2_h1_phase_obligation_binding_v1_non_authoritative\\test_prepared_before_recovery_probe.py"
+  ],
+  "additional_import_path": "tests",
+  "exit_code": 0,
+  "seconds": 6.937,
+  "stdout": "{\"diagnostic_only\": true, \"supply_ticket\": true, \"prepared_ticket_kind\": \"intent\", \"pending_intent\": false, \"continuation_available\": true, \"producer_called\": false, \"successor_recovery_gate_required\": true, \"formal_result\": false}\n.{\"diagnostic_only\": true, \"supply_ticket\": false, \"prepared_ticket_kind\": \"intent\", \"pending_intent\": false, \"continuation_available\": true, \"producer_called\": false, \"successor_recovery_gate_required\": true, \"formal_result\": false}\n.\n2 passed in 5.73s\n",
+  "stderr": "",
+  "diagnostic_only": true,
+  "successor_recovery_gate_closed": false
+}

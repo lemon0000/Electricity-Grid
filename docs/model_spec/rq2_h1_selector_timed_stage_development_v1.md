@@ -1,0 +1,46 @@
+# Selector stage with external native timing
+
+DRAFT_NONAUTHORITATIVE. R3 independent pre-seal review required. Root-only writer.
+Real execution needs new explicit native authority and an enclosing owned Job.
+
+The explicit capture fork preserves the prior capture run body except for calling
+the pinned Measurement.apply at the native apply point. Measurement validates its
+Pyomo vendor/AST copy and brackets optimize with the fixed default QPC clock.
+The explicit science-stage fork retains prior model construction, raw-before-audit
+ordering, postsolve, close, physical/selector audit and scientific serialization.
+AST tests normalize only the declared timing wiring and internal return changes.
+
+Scientific records retain the legacy wire schema/implementation identity so the
+closed stage inspector remains the conditional numerical oracle. These fields
+identify the wire contract, not the executing producer. The external sidecar
+binds the new producer and capture implementations, legacy wire implementation,
+exact request/index/label, canonical scientific root and directory identity,
+capture binding, native Measurement binding and PID/thread/QPC profile.
+
+The fixed sidecar contains binding.json, native/{binding,intent,completion,terminal}.json
+and terminal.json. The last file is written only after the entire scientific stage
+terminal exists and fresh scientific replay agrees with the returned body. It
+links both scientific and Measurement terminals, capture completion/raw terminal,
+and a containing stage window. Failed native/postsolve/close/audit/publication
+keeps all evidence and grants no retry. Scientific completion alone is insufficient
+for timed-stage completion.
+
+The joint inspector reconstructs both scientific and timing views, exact metadata,
+cross-file pins, stage/request/root/owner correspondence, native containment and
+complete namespaces, then repeats both views and input/implementation checks.
+Before either legacy reader is called, the outer terminal must have its exact
+field inventory, typed flags and integer ticks; its five retained cross-pins must
+match the pre-read files. Native objects have explicit field checks before access.
+All evidence files must be regular, single-link and free of Windows reparse flags.
+Tests inject Measurement intent/completion/terminal publication failures before
+and after writing, and check raw retention, absent outer terminal and no retry.
+The returned object remains detached consistency evidence. legacy_wire_replay_verified
+does not imply legacy_producer_execution_authenticated, old_owned_return_observed,
+live timing authentication, whole-Job quiescence or non-solver allowance verification.
+
+This unit provides one timed stage, not the complete timed selector sequence or
+worker lifecycle. Stage-window end precedes terminal publication and final readback;
+it is not a full non-solver budget. The future sequence/worker must bind every stage
+to its commit and include all producer, publication, startup and exit overhead.
+Resource admission, formal readiness/results, native authority and phase consumption
+remain false. Existing frozen artifacts and failures remain unchanged.

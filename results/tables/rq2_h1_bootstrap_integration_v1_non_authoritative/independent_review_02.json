@@ -1,0 +1,40 @@
+{
+  "status": "PRE_SEAL_PURE_CONFIGURATION_SCOPE_REVIEW_COMPLETE",
+  "reviewer": "/root/prepared_ticket_preseal_review",
+  "read_only": true,
+  "reading_stopped": true,
+  "reviewed_files_sha256": {
+    "experiments/h1_bootstrap_integration_development_v1.py": "ee4c54a97fbbf1685743c5ac1bf60c5fb6f04ac980cf799c6fa72e474b2e2379",
+    "tests/test_h1_bootstrap_integration_development_v1.py": "3a6974e2b07d25e41e1d64f9c4922c7554f21f943208cd492537668cbf3b6597",
+    "docs/model_spec/rq2_h1_bootstrap_integration_development_v1.md": "5d434fa0190d1a48c42f3e440509c0ec1ecd17e78e1d8f81621d66c8e0ece696"
+  },
+  "reviewer_before_after_hashes_unchanged": true,
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_bootstrap_integration_development_v1.py"
+  ],
+  "environment": {
+    "PYTHONIOENCODING": "utf-8"
+  },
+  "exit_code": 0,
+  "pytest": "43 passed in 56.12s",
+  "wall_seconds": 57.048,
+  "new_correctness_findings": [],
+  "scope_gap": "Before hour1+ claim/mutual attachment, bind phase-owner assessment adapter and prepare/FSM need consumption with a dedicated identity or equally strong owner identity.",
+  "jobs": 0,
+  "real_native_calls": 0,
+  "implementation_complete": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "documentation_followup": {
+    "current_spec_sha256": "7cfb42686c26641a5337d16a16827b86dedb0195ddd6c46268e47ceacfd247c2",
+    "change": "Only remove completed review from open list and explicitly document reviewer scope gap and inherited short 300-second ceiling; no code/test change."
+  }
+}

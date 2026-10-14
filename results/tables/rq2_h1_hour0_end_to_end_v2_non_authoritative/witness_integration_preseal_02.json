@@ -1,0 +1,46 @@
+{
+  "status": "PRE_SEAL_FINDINGS_ONLY",
+  "writer": "root",
+  "reviewer": "/root/routing_review",
+  "record_basis": "root transcription of independent read-only reviewer messages",
+  "files_sha256": {
+    "experiments/h1_historical_hour_witness_development_v1.py": "f88e31a1c01a36817ccc2df97a3161d949d3d3d3309add9a866bfde8856144ce",
+    "experiments/h1_historical_n0_verifier_development_v1.py": "1a9577c7596670f8e313277d3692da4cffb8bf90a39a1749790cced37e104563",
+    "experiments/h1_bootstrap_integration_development_v2.py": "c03cdaa9e674faf719841efb0ec4cb2dc25d0df49a69c9a9efecdc72cade62d8",
+    "experiments/h1_group_n0_common_input_binding_development_v2.py": "0fae61747cc3460fcd271a1c3650282dcf5fd96c1c86a457397d76a2e13329a4",
+    "tests/test_h1_historical_hour_witness_development_v1.py": "7f01c5f34eca8639dd1ecfc3897abfd3d01cda80287ef0251f07b3041dbb0f43",
+    "tests/test_h1_hour0_routing_development_v2.py": "c9e22b399ab612e0474e10ac2224b4119898dd3f4e4fc26ef9cb4a465c570a73"
+  },
+  "closed_findings": [
+    "verifier dispatch included and import-time guard",
+    "owned typed construction and scope nonce",
+    "distinct scientific predecessor and verifier identities",
+    "persistent 4 full numerical replays plus 4 byte-context revalidations",
+    "direct N0 route alias entry and exit drift rejected before return/retention"
+  ],
+  "verification": {
+    "witness_tests": {
+      "attempt": "witness_clean_01",
+      "passed": 62,
+      "exit_code": 0,
+      "before_equals_after": true
+    },
+    "routing_tests": {
+      "attempt": "witness_routing_04",
+      "passed": 12,
+      "exit_code": 0,
+      "before_equals_after": true
+    },
+    "equivalence": "witness_equivalence_03.json"
+  },
+  "limitations": [
+    "arbitrary third-party reflection and unobservable ABA not covered",
+    "route exit guard does not promise malicious mid-operation alias is never invoked",
+    "verifier profile does not prove full integration or its speedup"
+  ],
+  "full_chain_passed": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "official_review": false
+}

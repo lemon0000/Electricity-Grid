@@ -1,0 +1,24 @@
+{
+  "command": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_h1_phase_obligation_binding_development_v1.py",
+    "-k",
+    "tail_binding"
+  ],
+  "pins": {
+    "experiments/h1_phase_obligation_binding_development_v1.py": "b1c5b9ba56b2167062c91199c746cb0cc2fe79e113bb1a2a2038e9a7d9897630",
+    "tests/test_h1_phase_obligation_binding_development_v1.py": "635fcca8c168add76637042c2a7c5884856f366a5b589d25ab3f2d076ea16980",
+    "docs/model_spec/rq2_h1_phase_obligation_binding_development_v1.md": "f647d62cb598db780ae506a361e5a13a36bf05c790b774ef3f922e932ace5c66"
+  },
+  "exit_code": 0,
+  "seconds": 326.359,
+  "stdout": "...                                                                      [100%]\n3 passed, 32 deselected in 325.11s (0:05:25)\n",
+  "stderr": "",
+  "pins_unchanged": true
+}

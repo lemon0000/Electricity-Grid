@@ -1,0 +1,35 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_h1_hour0_end_to_end_v2_non_authoritative\profile_saved_historical.py", line 68, in main
+    envelope = historical.prepare(root, **args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_phase_historical_controller_development_v1.py", line 248, in prepare
+    first,captured,header=_replay_prefix(root,**args,_observed=observed)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_phase_historical_controller_development_v1.py", line 156, in _replay_prefix
+    resolver=binding.open_manifest()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_phase_obligation_binding_development_v1.py", line 36, in open_manifest
+    return manifest.inspect(ROOT/MANIFEST,expected_sha256=MANIFEST_PIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\rq2_v2_obligation_manifest_development_v1.py", line 220, in inspect
+    rebuilt = build()
+              ^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\rq2_v2_obligation_manifest_development_v1.py", line 199, in build
+    report = exclusion.inspect(ROOT/REPORT,expected_sha256=REPORT_PIN)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\rq2_v2_cfe_exclusion_development_v1.py", line 203, in inspect
+    result = audit()
+             ^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\rq2_v2_cfe_exclusion_development_v1.py", line 137, in audit
+    source = source_window.load_source_window(kind, 'training', window['source_start'],168,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\tests\test_h1_hour0_end_to_end_development_v2.py", line 113, in load
+    value=original(kind,*args,**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\tests\test_h1_saved_source_parent_development_v1.py", line 19, in same_chain
+    result = original(*a, **k)
+             ^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\tests\test_rq2_normal_h1_source_binding_v1.py", line 31, in load
+    assert hours == 1
+           ^^^^^^^^^^
+AssertionError
