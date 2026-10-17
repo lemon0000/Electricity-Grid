@@ -1,0 +1,44 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "question": "Can an explicit -I interpreter with required support root and exact path dedup reduce repeated stock discovery safely?",
+  "attempts": {
+    "standard": 1,
+    "configured": 1
+  },
+  "per_attempt": {
+    "wall_seconds": 60,
+    "sampled_rss_mib": 512,
+    "storage_mib": 64
+  },
+  "task_dag": [
+    "verify original IO package and source/test/capture pins",
+    "explicit REPO/tests prepend; record effective sys.path and sys.flags",
+    "old v1 Rref final-stage raw audit",
+    "old v1 Actual final-stage raw audit",
+    "close leases and verify source/capture pins; record module origins",
+    "compare both fresh processes scientifically and by origin before any pipeline wiring"
+  ],
+  "scale": {
+    "generators": 1,
+    "Rref_prefix_stages": 2,
+    "Actual_prefix_stages": 1
+  },
+  "baseline": "standard interpreter; previous Rref11.426s/Actual7.539s scoped evidence",
+  "candidate": "-I plus explicit canonical Pygments support root before compute site-packages, exact-string dedup after test fixture imports; no install or package replacement",
+  "monitor": "normal parent interpreter keeps its existing psutil; child science needs no psutil or win32 imports",
+  "static_identity_shortcut": false,
+  "distribution_discovery_cached": false,
+  "profiling": false,
+  "script_sha256": "0fa4005a29ca457baffaa2c92b3f2a92bd0e721b3eafa2c9a2f3f0f6b0cfce0d",
+  "input_root": "D:/h1_incremental_helper_05_non_authoritative/selector_raw_v2_non_authoritative0",
+  "input_manifest": "real_identity_pair_01/request.json",
+  "stop": "owned child only on per-attempt wall/RSS/storage limit or science/source drift; no budget raise/repeat of unchanged mode",
+  "acceptance": "both terminal exit0; same140 saved input pins and same source pins/script/active route; exact projection/record and bridge identities by lane; shared module origins and file hashes same; configured paths unique, expected -I flags/support path; local measured benefit before pipeline wiring",
+  "formal_result": false,
+  "resource_admission": false,
+  "full_chain_passed": false,
+  "formal_execution_ready": false,
+  "native_execution_authorized": false,
+  "prior_attempts": "standard_entry_01 exit0; isolated_entry_01 exit1 before audits because required Pygments is in user site. Both preserved.",
+  "support_root": "C:/Users/Psychobabble/AppData/Roaming/Python/Python312/site-packages"
+}
