@@ -25,6 +25,10 @@ from tests.test_h1_timed_selector_sequence_development_v1 import m as sequence
 ZERO_WORKLOAD_REFERENCE_LOCKS=(-0.,0.,20.)
 
 
+def actual_parent_root(root,lane):
+    return handoff.parent.preparation._path(root/('actual_'+lane+'_non_authoritative'))
+
+
 def consume_zero_workload(common_owner,configuration,patch,root,trace):
     # The inherited sequence fixture caches immutable implementation identities.
     # Check full bookends and restore before returning; this is not an ABA test.
@@ -44,6 +48,7 @@ def consume_zero_workload(common_owner,configuration,patch,root,trace):
 
 
 def _consume(common_owner,configuration,patch,root,trace):
+    actual_roots={c.lane_id:actual_parent_root(root,c.lane_id) for c in common_owner._manifest.lanes}
     original_install=producer.install
     adapters=[]
     def install(mp,path,lane,fault=None):
@@ -112,12 +117,17 @@ def _consume(common_owner,configuration,patch,root,trace):
         released()
         trace('missing_all_Actual_rejected')
         for lane in lane_ids:
+            trace('Actual_snapshot_start_'+lane)
             raw=h.module.worker.snapshot.capture_actual(common_owner,configuration,max_archive_bytes=context.cap,
                 lane_id=lane,reference_root=ref.scientific_root,reference_terminal_sha256=ref.scientific_terminal_sha256,
                 reference_request_sha256=ref.scientific_request_sha256,reference_max_archive_bytes=ref.max_archive_bytes)
-            actual=stack.enter_context(h.module.Parent(root/('actual_'+lane),raw,**h.options,
+            trace('Actual_snapshot_ready_'+lane)
+            actual=stack.enter_context(h.module.Parent(actual_roots[lane],raw,**h.options,
                 reference_owner=reference,reference_completion=ref))
-            receipt=actual.run();oracle(raw,receipt,(0,20))
+            trace('Actual_parent_ready_'+lane)
+            receipt=actual.run()
+            trace('Actual_parent_returned_'+lane)
+            oracle(raw,receipt,(0,20))
             dependency=json.loads(raw)['projection']['dependency']
             assert snapshot._fraction(dependency['reference_request_exact'])==0
             assert snapshot._fraction(dependency['actual_power_exact'])==0
@@ -153,7 +163,7 @@ def _consume(common_owner,configuration,patch,root,trace):
                 'dispositions','parents','tickets','holder_records','retentions','projection','after',*consumer.FLAGS}
             assert packet['schema']==consumer.SCHEMA and packet['implementation']==owner._own
             assert packet['group_audit']==json.loads(common_owner._initial_report)
-            assert packet['common']==common_view
+            assert consumer.phase.encode(packet['common'])==consumer.phase.encode(common_view)
             assert packet['phase_file_identity']==json.loads(json.dumps(phase_identity))
             assert packet['dispositions']==[dict(lane_id=lane,kind='paired_actual') for lane in lane_ids]
             assert packet['parents']==[

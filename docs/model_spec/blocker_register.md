@@ -6,6 +6,7 @@
 
 | 问题 | 状态 | 当前处置 | 对后续工作的约束 |
 |---|---|---|---|
+| 后续实验的整体性能审查 | 用户新增启动前必需条件；逐实验包核验 | 按 `agent.md` §9保存完整路径/调用量、瓶颈与优化决策、代表性实测、版本绑定、整体预算和停止条件；匹配的既有证据可复用 | 适用于合成集成、机制、校准、正式实验及新 attempt/重启/恢复/扩规模；关键证据或实质瓶颈未闭合时不得启动新的长实验；不替代其他门禁或运行授权 |
 | F/X价值参数不足、唯一最优拆分不可识别 | resolved as set-valued rule | 不估计唯一经济最优；使用主目标最优面上的X暴露区间 | 可实现B0-B2机制比较，不得声称福利最优F/X |
 | M3成本是PWL选点后的回算值 | resolved for direct numerical QP | 原始凸二次目标由OSQP直接求解，经原约束审计和HiGHS L1线性可行性投影后再最小化调用 | 变量移动与目标偏差包络只用于数值可行性验收，不是最优间隙或误差证书；可称直接数值QP结果，无对偶最优间隙时不得称数学精确全局最优 |
 | M2有限启动选择的二次目标求解 | resolved for finite fixed-start enumeration | 完整枚举不启动及每个启动季度；各候选用OSQP直接数值求解原始凸QP并由HiGHS线性修复 | 可称完整枚举中的最佳已解析数值QP候选；无显式最优间隙证书时不得称数学精确全局最优，多工程扩展仍需可扩展方法 |
@@ -6926,3 +6927,63 @@ exit0 和稳定 pins；正负零替换仍拒绝。独立 PRE_SEAL 复核闭合�
 证据为 hour0 evidence 根的 signed_zero_repair_01.json；461 个旧失败工件已逐 hash 归档。
 该修复不改变生产合同或阈值，不将 chain_04 重标为通过；完整新链与所有 formal/resource
 出口仍 OPEN。后续完整链成功后再自动执行独立保存重放与报告生成。
+
+2026-10-14 验收接续修复：独立 PRE_SEAL 检查发现原 supervisor 在 postcheck 与 report
+之间未固定输出。新 `supervise_completion_v2.py` 固定完整 postcheck 输出和原保存树，
+报告前后核对成员及 hashes；目录冲突另存启动失败。27 项短合成回归 exit0，旧版漂移
+反例和全部旧字节保留，证据 `rq2_h1_hour0_end_to_end_v2_non_authoritative/supervision_preseal_02.json`。
+仅替换等待中的监督，chain_05 未停止或重启，完整 hour-0 出口继续 OPEN。
+同时重核旧六个 source 缺口的获批后继证据：1035 unique entries、零 source input unresolved、
+零 obligation removed；这不是新的 source 授权或 192h 执行证据。后续资源准入、封存、
+official review 与正式运行仍须各自出口；1800s saved replay 上限待真实终态验证。
+
+2026-10-14 20:05：chain_05 及其监督进程已丢失，两个工具 session 不可查询，均无 terminal；
+16:47 尚有主链活跃观测。最后 trace 为完整 common 科学重放返回，停止时间、exit code
+和原因未明。378 个工件逐 hash 保存在 `chain_05/lost_process_observation_01/`，原目录及
+代码 pins 未变。此状态不构成成功或不可行证据，当前无自动验收在运行；完整链仍 OPEN。
+
+2026-10-14 23:09 更新：保持科学合同的 exact-source/owner/preview v2 优化及接线修复
+完成，76 项回归 exit0、34 个当前代码 pins 稳定、1082 个旧依赖 pins 无漂移；独立
+只读 PRE_SEAL 证据复核未见新增 finding。三对串行计时为单环节中位 47.563 →
+39.934 秒，减少 16.04%，科学投影 exact-byte 一致；不外推全链或 native 预算。
+chain_06 已在独立 WMI 后台启动，wrapper 38752、pytest 39032、监督 36684。
+完整 hour-0、跨小时及全部 formal/resource 出口仍 OPEN，正式实验未启动。
+证据：`rq2_h1_hour0_end_to_end_v2_non_authoritative/optimization_report.md`、
+`optimization_pass_01/preseal_review_01.json`、`host_chain_06/launch_complete.json`、
+`host_chain_06_supervisor/launch_complete.json`。旧中断及失败记录均保留。
+
+2026-10-15 终态更新：chain_06 于 11:45:15 exit1，运行 45371.25 秒；Rref 和缺 Actual
+拒绝检查已完成，第一个 Actual parent 因测试目录缺少 `_non_authoritative` 后缀失败。
+测试 helper 已修复目录构造并提前验证全部 Actual roots；真实入口规则不变。短反例
+3.84 秒复现，修复后 5 项短回归 exit0、34 pins 稳定。461 个失败工件登记保留，
+监督未启动 postcheck，目前无完整链运行，未自动重启。common genesis/inspect 区间
+耗时 23734.58 秒；静态调用链显示多层有限重放，尚缺逐函数耗时归因。完整 hour-0
+出口继续 OPEN，正式实验未启动。证据位于 hour0 evidence 根 `actual_path_repair_01/`、
+`actual_path_checks_01/terminal.json`、`chain_06/terminal.json` 和 `optimization_report.md`。
+
+2026-10-15 common 双投影优化：同一 arm 的 historical/exact-source 投影共用一次有界
+校验操作，保留两个独立 prefix、source/registry 重读与末次观察。67 项针对性检查 exit0；
+保存三 arm 两轮的科学投影一致，旧 audit 仅排除新增执行元数据和 successor implementation
+identity 后一致；观测 24 full + 24 fresh、12 prefix。1082 个旧依赖未变，独立只读审查
+无新增阻断项。三 Actual 预检04完成全部 Actual、三项 missing-one 与 paired consume 后，
+因 helper 的 tuple/list 比较失败（exit1，4748.98秒）。该断言已按生产 canonical encoding
+修复；保存记录续验4.34秒通过，真实重开三 lane并得到同一状态，9把文件锁可重新获取释放，
+原记录字节未变；5项解析oracle回归通过。原04保留失败，原进程 adapter调用次数未由续验重建。
+完整链出口与里程碑2继续 OPEN。报告校验器已同步新增 Actual 计时标签，
+严格顺序和缺项/乱序拒绝保持。证据见 hour0 evidence 根 `common_bundle_repair_01/`、
+`common_bundle_checks_06/`、`common_arm_group_profile_01/`、`three_actual_preflight_04/`。
+续验证据为 `packet_comparison_repair_01/attempt_03/continuation_result.json`，回归为
+`packet_repair_checks_01/terminal.json`。正式运行授权未发生变化。
+独立复核未发现阻止合成重跑的新问题，`chain_07` 已从新根启动并接入终态监督；
+启动身份见 `host_chain_07/`、`host_chain_07_supervisor/`，修复审查见
+`packet_comparison_repair_01/preseal_review.json`。当前仅为运行中，完整出口仍 OPEN。
+
+2026-10-16 校验性能后续：独立固定字节入口通过 OS 只读句柄复用 145 code bytes 与
+8 个 locked METADATA 的 version 解析值，原数值重放和动态 source/registry/保存读取不变。
+逐 test reader 身份冲突已按整个 pytest invocation 生命周期修复，原 guard 未放宽；
+42 项保护/入口检查为 41 passed、1 权限 skip，原相关回归 62 passed。
+最终包局部确认 52.023 → 35.761 秒，科学输出/完整 audit 一致，保存文件与代码/测试
+闭包未漂移。只读 PRE_SEAL 复核无新增阻断，详见 hour0 evidence 根
+`validation_io_optimization_01/performance_report.md`；该比例未证实完整 common/genesis
+或全链收益。chain_07 已完成三 Actual 并继续原进程，完整 paired/reopen/独立保存重放
+终态仍待取得；本 blocker 与里程碑 2 继续 OPEN，不提供 official verdict、资源准入或运行授权。

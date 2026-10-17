@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 
 from experiments import h1_group_execution_roster_development_v2 as roster_api
-from experiments import h1_phase_owner_development_v1 as phase
+from experiments import h1_phase_owner_development_v2 as phase
 
 bootstrap = roster_api.bootstrap
 encode = bootstrap.encode
@@ -21,6 +21,8 @@ SHARED_NORMAL_FIELDS = ('decision_identity','parent_declaration','historical_con
     'source_timestamp','source_time_basis')
 SCIENCE_NORMAL_FIELDS = ('normal_request_key','normal_input_identity',
                         'normal_before','normal_after','canonical_locks')
+_BUNDLE_PREPARE=phase.source.prepare_common_bundle
+_BUNDLE_CODE=_BUNDLE_PREPARE.__code__
 
 
 def implementation_identity():
@@ -41,27 +43,32 @@ def _historical(reference):
             or local['fresh_byte_context_revalidations']!=value.fresh_byte_context_revalidations
             or local['recomputed_on_revalidation'] is not value.recomputed_on_revalidation):
         raise ValueError('retained historical verifier differs')
-    audit = json.loads(value.audit_payload)
+    return value,_historical_payload(reference,value.decision,value.audit_payload)
+
+
+def _historical_payload(reference,decision,payload):
+    local=reference['local_terminal']['body']
+    audit = json.loads(payload)
     direct = ('decision_identity','normal_request_key','child_head','child_archive_identity',
               'projection_identity','projection_payload_sha256')
-    if (bootstrap.historical.io.encode(audit)!=value.audit_payload
-            or sha256(value.audit_payload).hexdigest()!=local['audit_payload_sha256']
+    if (bootstrap.historical.io.encode(audit)!=payload
+            or sha256(payload).hexdigest()!=local['audit_payload_sha256']
             or audit['implementation']!=local['historical_implementation']
             or audit['implementation']!=bootstrap.historical.implementation_identity()
             or audit['controller_header_sha256']!=local['controller_binding_sha256']
             or audit['controller_terminal_sha256']!=local['controller_terminal_sha256']
             or any(audit[k]!=local[k] for k in direct)
             or any(audit['historical_controller'][k]!=local[k] for k in ('parent_head','evidence_identity'))
-            or audit['decision_identity']!=value.decision.decision_identity
-            or value.decision.relative_hour!=0
+            or audit['decision_identity']!=decision.decision_identity
+            or decision.relative_hour!=0
             or type(audit['historical_controller']['completed_hours']) is not int
             or audit['historical_controller']['completed_hours']!=1):
         raise ValueError('fresh historical N0 differs from retained terminal')
-    return value,audit
+    return audit
 
 
-def _joined(binding,reference,historical,normal_audit):
-    current = phase._fresh(binding,0,binding.genesis_terminal_sha256)
+def _joined(binding,reference,historical,normal_audit,*,current=None):
+    if current is None:current = phase._fresh(binding,0,binding.genesis_terminal_sha256)
     if type(current) is not phase.source.ExactSourceCurrent:
         raise ValueError('internally prepared exact current required')
     audit = json.loads(current.source_projection_audit_payload)
@@ -88,8 +95,38 @@ def _arm(reference,registry_identity,manifest):
     local = reference['local_terminal']['body']
     binding = phase.SourceBinding(local['controller_root'],local['controller_binding_sha256'],
                                   registry_identity,local['controller_terminal_sha256'])
-    historical,normal = _historical(reference)
-    current,exact = _joined(binding,reference,historical,normal)
+    if (phase.source.prepare_common_bundle is not _BUNDLE_PREPARE
+            or _BUNDLE_PREPARE.__code__ is not _BUNDLE_CODE):
+        raise ValueError('common source bundle route changed')
+    if type(binding) is not phase.SourceBinding:raise TypeError('exact source binding required')
+    binding.__post_init__()
+    phase.source.io.pin(binding.genesis_terminal_sha256)
+    historical=_BUNDLE_PREPARE(binding.root,expected_binding_sha256=binding.binding_sha256,
+        expected_terminal_sha256=binding.genesis_terminal_sha256,completed_hours=1,
+        expected_registry_identity=binding.registry_identity)
+    if type(historical) is not phase.source.CommonSourceBundle:
+        raise TypeError('owned common source bundle required')
+    execution=json.loads(historical.verification_execution_payload)
+    expected=dict(schema='h1_common_arm_shared_verification_v1',
+        active_implementation_identity=phase.source.implementation_identity(),
+        active_historical_verifier_identity=bootstrap.historical_verifier.verifier_identity(),
+        active_historical_verifier_schema=bootstrap.historical_verifier.VERIFIER_SCHEMA,
+        historical_projection_schema=bootstrap.historical.SCHEMA,
+        historical_projection_sha256=sha256(historical.audit_payload).hexdigest(),
+        exact_source_audit_sha256=sha256(historical.current.source_projection_audit_payload).hexdigest(),
+        full_numerical_hour_replays=4,fresh_byte_context_revalidations=4,
+        recomputed_on_revalidation=False,projection_consumers=['historical','exact_source'],
+        cross_call_reuse=False,formal_result=False)
+    if (execution!=expected or phase.source.io.encode(expected)!=historical.verification_execution_payload
+            or local['historical_verifier_identity']!=expected['active_historical_verifier_identity']
+            or local['historical_verifier_schema']!=expected['active_historical_verifier_schema']
+            or local['full_numerical_hour_replays']!=4 or local['fresh_byte_context_revalidations']!=4
+            or local['recomputed_on_revalidation'] is not False
+            or phase.source.prepare_common_bundle is not _BUNDLE_PREPARE
+            or _BUNDLE_PREPARE.__code__ is not _BUNDLE_CODE):
+        raise ValueError('shared verification execution or retained historical verifier differs')
+    normal=_historical_payload(reference,historical.decision,historical.audit_payload)
+    current,exact = _joined(binding,reference,historical,normal,current=historical.current)
     state = phase._initial(manifest,current)
     request = phase._request(manifest,state,current)
     scientific = dict(normal={k:normal[k] for k in SCIENCE_NORMAL_FIELDS},
@@ -100,6 +137,7 @@ def _arm(reference,registry_identity,manifest):
         initial_state=state.scientific,initial_request=request)
     # Full audits remain distinct per arm and are also compared across fresh rounds.
     audit = dict(reference=reference,source_binding=asdict(binding),
+        verification_execution=execution,
         historical_audit=normal,exact_current_audit=exact,
         historical_decision_payload_sha256=sha256(historical.decision.decision_bytes).hexdigest(),
         current_decision_payload_sha256=sha256(current.prepared_current.decision.decision_bytes).hexdigest(),

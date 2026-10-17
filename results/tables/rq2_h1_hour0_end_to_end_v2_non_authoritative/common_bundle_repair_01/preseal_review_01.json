@@ -1,0 +1,43 @@
+{
+  "schema": "common_bundle_preseal_review_v1",
+  "recorded_at": "2026-10-15T05:42:37.151716+00:00",
+  "recorded_by": "root",
+  "reviewer": "/root/restart_review",
+  "review_mode": "independent_read_only",
+  "scope": "current bundle bytes, targeted tests and saved-arm equivalence",
+  "conclusion": "no new blocking correctness finding in main bundle",
+  "pins": {
+    "experiments/h1_phase_exact_source_current_development_v2.py": "a7833594faf3c3fdbf9cbe4b54602e32d17ee855cf04f805e52988ab9ae9c0cd",
+    "experiments/h1_group_n0_common_input_binding_development_v2.py": "3de2765ae605cb7917190900363ca4cad3e2b8f7294cbb29b91d639e0b9e89d6",
+    "tests/test_h1_common_source_bundle_v2.py": "41a824a8731309ca987639391075213100cd694e5313c4631641176eec3c48aa",
+    "tests/test_h1_hour0_three_actual_preflight_v2.py": "fb838523ae26fa37d21185580e7f7f5d44374ab6b153a28ed57fd65ee62f54ac",
+    "tests/h1_group_selector_integration_helpers_v2.py": "0c5121fda049b56c21a51b103c8f23291d8cebafd45962c34082be4481ae99e0",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\common_bundle_checks_06\\terminal.json": "418ad65574c66fc2271df69b9eb98ac4f494f7e81865728cd0896a45b965094f",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\common_arm_group_profile_01\\terminal.json": "d0bbcd433671d7772302c841a896f983efb12cb3fd2dcf45e3a65914934b68cb",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\common_arm_group_profile_01\\audits.json": "a450444e270182db6fc4835463a6e5e5703dcab4b6013df81bac254fdf4e78c3",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\common_arm_group_profile_01\\projection.json": "e16f70617322f0304659955c0f2a3466fc329f59dae6b6ac8c11a8eb09fe7b5f",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\common_bundle_repair_01\\preservation_check.json": "3989162b04b5f1bb749367d3c3b5405911cf2b9b3504d8080cd40a195da46587"
+  },
+  "regression_passed": 67,
+  "saved_arm_rounds": 2,
+  "saved_arm_count": 3,
+  "saved_files_unchanged": 461,
+  "old_dependency_pins_unchanged": 1082,
+  "audit_comparison_exclusions": [
+    "new verification_execution",
+    "exact_current_audit.implementation_identity"
+  ],
+  "scientific_payload_canonical_equal": true,
+  "full_numerical_hour_replays": 24,
+  "fresh_byte_context_revalidations": 24,
+  "prefix_replays": 12,
+  "remaining": [
+    "uncached three-Actual preflight terminal and current pins",
+    "serial timings if a wall-time improvement is claimed",
+    "fresh complete hour-0 chain and independent saved replay"
+  ],
+  "real_native_calls": 0,
+  "formal_result": false,
+  "official_verdict": false,
+  "formal_execution_ready": false
+}

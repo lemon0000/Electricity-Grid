@@ -1,14 +1,18 @@
 # Phased Interconnection and Hourly Green-Electricity Coordination Planning for AI Data Centers under Uncertainty in Capacity Ramp-Up and Grid-Expansion Delays
 
+Updated: 2026-10-17. This introduction describes the current design and available evidence; Section 5 gives a dated progress snapshot.
+
 ## 1 Abstract
 
-Network-contingent service and hourly carbon-free-energy (CFE) matching can draw on the same deferrable and recoverable computing workload. Separate deliverability does not imply that both services can be delivered jointly through one temporal workload envelope. This paper asks how progressively stricter hourly-CFE targets change the minimum workload flexibility required when mandatory network response is retained, whether joint chronology creates an extra requirement or portfolio relief, and what signed capacity bias arises from separate accounting.
+Network-contingent service and hourly carbon-free-energy (CFE) matching may call on the same deferrable and recoverable computing workload. This project asks how stricter hourly-CFE targets change the minimum workload flexibility required under mandatory network response, whether joint chronology creates an extra requirement or portfolio relief, and what signed capacity bias results from separate accounting. This RQ2 question is the primary paper's focus. Multistage F/X interconnection, grid-expansion delays, and the planning effects of annual versus hourly CFE remain project extensions.
 
-Under identical inputs, security sets, and solution standards, the paper compares four arms: network-only, CFE-only, joint-correct, and joint-B6. All arms use the same complete 24-hour zero-carry-in window, training support, and holdout rules. The envelope jointly constrains instantaneous power, maximum duration, event counts, cumulative energy, recovery power, and recovery debt. CFE service uses the complete deficit implied by each registered target, while recovery is limited by both business headroom and same-hour CFE-compatible surplus. For every target, the design estimates minimum normalized flexibility \(D_N,D_C,D_B,D_J\) and decomposes the signed joint interaction as \(I_{joint}=D_J-\max(D_N,D_C)=I_{sep}+A_{B6}\), where \(I_{sep}=D_B-\max(D_N,D_C)\) and \(A_{B6}=D_J-D_B\). Full event envelopes do not impose a cross-arm capacity ordering; positive and negative contrasts distinguish extra requirements, portfolio relief, and B6 under- or overprovisioning. The B6 capacity is then frozen and replayed through the shared physical envelope to measure hard-grid failure, CFE shortfall, and joint service loss.
+The approved finite-v2 development contract evaluates all applicable service requests during a 168-hour enrollment interval and timely completion of deferred work born within that interval, followed by up to 24 additional hours when needed to determine enrollment outcomes. The total simulated span is at most 192 hours. Each independent episode starts from an explicit mechanism initial state; recovery debt, event budgets, and grid states carry across days. Curtailment q and recovery r share the bidirectional capacity q+r≤D. Recovery is also limited by business headroom, deadlines, and applicable same-hour CFE-compatible surplus. Follow-up requests remain in the physical accounts without expanding the enrollment scoring set; missing necessary follow-up remains unresolved or right-censored.
 
-The confirmatory design contains 36 `hourly_cfe_target × flexible_fraction × recovery_headroom` factorial cells and 10 temporal-envelope OAT cells. Pairing uncertainty between public grid/CFE and workload blocks is handled as a holdout robustness layer over a discrete transport polytope; the primary capacity evidence comes from common representatives and a complete training Cartesian-support audit. Current samples are complete 24-hour blocks, with exogenous grid infeasibility (E0), service shortfall, and solver-unresolved outcomes encoded separately. The primary paper focuses on the joint-service deliverability frontier and insufficiency attribution. Multistage F/X interconnection, grid-expansion delays, and annual versus hourly CFE remain project extensions.
+The study compares network-only, CFE-only, joint-correct, and joint-B6. Its target is the minimum normalized bidirectional capacity that admits one causal workload policy over the complete declared training support. The four objects \(D_N,D_C,D_B,D_J\) retain the signed decomposition \(I_{joint}=D_J-\max(D_N,D_C)=I_{sep}+A_{B6}\), with \(I_{sep}=D_B-\max(D_N,D_C)\) and \(A_{B6}=D_J-D_B\). B6 plans with separate accounts that each use the available workload and capacity; fixed-policy actual execution uses one shared physical envelope. Evidence is organized as valid lower bounds and complete-service upper bounds for the same contract. Missing finite certificates remain unknown, and cross-arm ordering or contrast signs are not presumed.
 
-**Keywords:** AI data center; network-contingent service; hourly CFE; workload flexibility; deliverability frontier; joint service; fixed-policy replay
+The current design combines 19 workload contracts with 100 hourly-CFE targets, from 1% to 100% in one-percentage-point steps, for 1,900 cells. It is an exploratory successor developed after observing earlier diagnostics. Its scientific parameters are approved for development, while the execution candidate remains DRAFT_NONAUTHORITATIVE. Available evidence includes synthetic planning mechanisms, scoped public selected-N-1 DC benchmarks, and component development checks. The complete continuous four-arm experiment, capacity frontier, and formal holdout results have not been published.
+
+**Keywords:** AI data center; hourly CFE; joint service; finite enrollment; bidirectional flexibility capacity; recovery debt; causal policy
 
 ## 2 Related Work
 
@@ -24,7 +28,7 @@ Data-center interconnection research covers candidate siting, capacity allocatio
 
 Wierman et al. [13] review the technical opportunities and operating constraints of data-center demand response, and Liu et al. [14] study workload control and cost under utility peak-demand response. GreenSlot [15] and Parasol and GreenSwitch [16] use batch scheduling and systems coordination to exploit on-site renewable energy. Qureshi et al. [17] route workloads across locations to use electricity-price differences, while Liu et al. [18] use geographical load balancing to follow renewable supply. Radovanović et al. [19] form hourly virtual capacity curves from regional carbon-intensity signals, establishing an operational carbon-aware-computing pathway.
 
-For resource limits, Kwag and Kim [20] show why demand response requires more than a static MW ceiling. Crozier and Liska [7] review flexibility from protection, precooling, CPU/GPU control, and job scheduling, and Williams et al. [5] provide GPU-cluster and inference-workload evidence on fast response and sustained curtailment. These studies support the technical boundaries of workload adjustability, power, duration, and recovery. The present paper organizes these established mechanisms into a complete shared within-window envelope over a 24-hour zero-carry-in block and uses the B6 counterfactual to test the consequences of separate planning.
+For resource limits, Kwag and Kim [20] show why demand response requires more than a static MW ceiling. Crozier and Liska [7] review flexibility from protection, precooling, CPU/GPU control, and job scheduling, and Williams et al. [5] provide GPU-cluster and inference-workload evidence on fast response and sustained curtailment. These studies support the technical boundaries of workload adjustability, power, duration, and recovery. The paper organizes these established mechanisms into a shared finite-enrollment envelope with on-demand follow-up, carrying recovery debt, event states, and bidirectional power capacity across days. A B6 counterfactual tests the consequences of separate planning.
 
 ### 2.4 Network-Renewable Coordination and Deliverability
 
@@ -42,77 +46,116 @@ de Chalendar and Benson [21] show why annual 100% renewable-energy claims do not
 
 ### 2.7 Joint Deliverability, Attribution, and Robustness
 
-The scientific object is the workload-flexibility requirement frontier as hourly-CFE targets increase under a fixed mandatory network response. The four arms first identify the limiting single service, then estimate the signed joint interaction, separate-envelope interaction, and B6 capacity bias. Pairing uncertainty between RTS-GMLC grid/CFE blocks and Alibaba workload blocks affects holdout aggregation only. Independent, comonotone, and countermonotone pairings remain diagnostics, while a complete discrete transport polytope supplies conditional sharp bounds. Multimetric statements require one common coupling witness. Negative results, E0, and unresolved outcomes remain part of the auditable evidence chain.
+The scientific object is the workload-flexibility requirement frontier as hourly-CFE targets increase under a fixed mandatory network response. The four arms first identify the limiting single service, then estimate the signed joint interaction, separate-envelope interaction, and B6 capacity bias. RTS-GMLC and Alibaba retain separate provenance, clocks, and training/holdout splits; their combinations are declared mechanism-benchmark couplings. Existing transport tools can support pairing robustness, while the continuous contract still requires explicit risk events, window weights, and censoring rules before conditional sharp bounds can be computed over a stated transport polytope. Multimetric statements require one common coupling witness. Negative findings, exogenous grid infeasibility (E0), service shortfall, and unresolved outcomes remain distinct.
 
 ![Figure 1. Literature landscape and project positioning](../figures/project_literature_landscape_en.svg)
 
 **Figure 1. Literature landscape and project positioning**. A structured positioning based on the 31 academic works reviewed in this paper, not an exhaustive bibliometric result; the three institutional sources establish only that the two objects exist separately and do not demonstrate real contract overlap.
 
-## 3 Paper Contributions and Project Extensions
+## 3 Intended Paper Contributions and Project Extensions
 
-### 3.1 Contribution A: A Discrete Joint Workload-Flexibility Frontier
+### 3.1 A Finite-Enrollment Joint Workload-Flexibility Frontier
 
-The paper fixes mandatory network response and estimates complete-temporal-envelope flexibility requirements across four preregistered hourly-CFE targets, three workload-flexibility fractions, and three recovery-headroom levels. Network-only, CFE-only, joint-correct, and joint-B6 use the same inputs, security standards, training support, and solver contract. The resulting curves identify where joint service requires extra flexibility and where event coalescence creates portfolio relief.
+The primary paper studies the minimum bidirectional flexibility capacity across CFE targets under fixed common-reference rules, mandatory network response, and the complete temporal envelope. The primary factorial combines three deferrable-workload fractions and three recovery-headroom levels, with ten additional temporal OAT contracts: 19 contracts, each evaluated on the same 100 CFE targets. Complete training support remains the scientific quantifier; computation may use proof-referenced whole-cell analytic exclusions and valid task reuse.
 
-### 3.2 Contribution B: Four-Arm Additive Attribution and Fixed-Policy Consequences
+Each arm's capacity object requires one causal workload policy within that cell to serve all declared training support. A valid lower bound requires a legitimate relaxation of the same complete contract. A feasible upper bound requires a named fixed policy with complete-support service witnesses and applicable actual-grid acceptance. B6 upper bounds certify its separate planning accounts; shared actual execution is evaluated separately. A failed fixed-policy probe establishes no successful witness for that policy and capacity, rather than infeasibility for every policy.
 
-The signed joint interaction is decomposed as \(I_{joint}=I_{sep}+A_{B6}\): \(I_{sep}\) is the separate-envelope interaction relative to the limiting single service, and \(A_{B6}\) is B6's signed capacity bias relative to correct joint planning. After capacities are frozen, correct and B6 policies are replayed through the same shared physical envelope, with hard-grid, CFE, and joint service failures reported separately. Public-marginal transport bounds assess the robustness of holdout consequences; E0, service shortfall, and solver-unresolved outcomes remain distinct.
+### 3.2 Signed Four-Arm Attribution and Fixed-Policy Consequences
 
-### 3.3 Project Extension: Multistage F/X, Expansion, and Annual/Hourly CFE
+The decomposition distinguishes the limiting single service, joint temporal interaction, and B6 accounting bias. Contrasts, intervals, and signs are reported only when supported by the four capacity objects. Joint-correct is an additive benchmark of disjoint service commitments, with common request g+c. B6 checks two planning accounts, while actual execution has one workload availability, capacity D, debt state, and event budget. This estimand does not represent the minimum resource across every physical co-service policy.
 
-The broader project studies nonanticipative multistage F/X release and grid-expansion decisions as data-center ramp-up and project delays are revealed, and compares the effects of annual and hourly CFE on interconnection capacity, expansion timing, and flexibility allocation. F/X semantics, project lead times, normal and selected N-1 states, and annual/hourly matching remain part of this extension beyond the primary paper.
+Before holdout, capacity and a named policy are frozen from complete training-feasibility evidence. Execution uses only revealed current inputs, and workload actions are committed together with Actual grid states. Hard-grid, CFE, and joint-service outcomes remain separate; missing sources, uncovered recovery deadlines, and solver uncertainty remain explicit unknowns. Public-marginal transport and common-coupling witnesses are supporting robustness tools whose risk definitions and interfaces must match the continuous contract.
+
+### 3.3 Design Versions and the Broader Project
+
+The earlier confirmatory design of 36 factorial and ten temporal OAT cells, totaling 46 cells, and the older 70-cell diagnostic retain their own frozen contracts and result identities. The current 1,900-cell finite-v2 design is an exploratory successor formed after observing those diagnostics. Its mapping, temporal contract, and reference mechanism differ, so new computations are reported under the new contract.
+
+The broader project studies nonanticipative multistage F/X release, expansion initiation, and commissioning as data-center demand and project progress are revealed. It also compares annual and hourly CFE effects on capacity, construction, and flexibility allocation. F denotes firm capacity within the stated security scope; X denotes capacity callable under contractual conditions. Existing B0-B5 planning and fixed-policy execution foundations support this extension.
 
 ## 4 Research Objectives and Main Contents
 
-### 4.1 Primary Objective
+### 4.1 Primary Target and Contract Parameters
 
-Characterize the workload-flexibility deliverability frontier as hourly-CFE targets increase under mandatory network response, decompose the limiting single service, signed joint interaction, and B6 capacity bias, and evaluate fixed-policy holdout consequences.
+The target is causal minimum bidirectional capacity for the complete finite-enrollment contract, together with auditable bounds. Enrollment E=168h uses a 24h start stride; enrolled work is due at birth+24h, with at most 24h follow-up. Enrollment and actual follow-up share one nonrolling accounting period of at most 192h, retaining budgets across days. Initial states, deferrable fractions, recovery efficiency, and headroom are registered mechanism assumptions.
 
-### 4.2 Main Contents
+The primary factorial uses f∈{0.05,0.20,0.50} and ρ∈{0,0.10,0.30}; ten OAT contracts vary recovery efficiency, maximum duration, event count, energy budget, and debt cap. Power is normalized by an assumed D_DC=250MW, with D∈[0,1]. The 250MW value is a simulation scale. Raw workload outside the mapping domain is retained and marked mapping unresolved.
 
-1. Build network-only, CFE-only, joint-correct, and joint-B6 arms at four registered hourly-CFE targets;
-2. Estimate \(D_N,D_C,D_B,D_J\) and verify \(I_{joint}=I_{sep}+A_{B6}\);
-3. Audit complete training support for the 36-cell primary factorial and 10 temporal OAT cells;
-4. Replay frozen current-state-only policies on holdout blocks and separate hard-grid, CFE, and joint service risks;
-5. Compute service-risk transport bounds and common-coupling witnesses on finite-grid support while reporting unconditional E0 mass separately;
-6. Publish all positive, negative, infeasible, and unresolved cells;
-7. Extend the broader project to multistage F/X, expansion timing, and annual/hourly CFE comparisons.
+### 4.2 Causal Grid and Workload Execution
 
-Figure 2. Overall research workflow.
+H1 denotes a grid mechanism using the current hour's revealed inputs at each step. States are separated into common normal N, common reference Rref, and per-arm Actual A chains. The normal baseline excludes the current outage. The reference produces a common network request under current normal commitment and revealed outages or repairs, independently of the CFE target, workload parameters, D, or response-adjusted arm states. Actual chains accept the fixed power resulting from each arm's workload action. Each chain retains its own carry.
 
-![Overall research workflow](../figures/project_workflow_en.svg)
+The hourly order is revealed input → N update → common Rref request → CFE mapping → causal workload action → Actual acceptance → paired commit. Actual curtailment creates one recovery debt; unserved requests retain separate shortfall records. Recovery follows known due times and then birth order, subject to capacity, headroom, and applicable clean surplus. Follow-up work remains in the physical accounts, while the scoring cohort remains fixed to enrollment births.
 
-Figure 3. Coordinated network structure of the AI data center and power system.
+### 4.3 Computational Design and Evaluation
 
-![Coordinated network structure](../figures/project_network_en.svg)
+1. Preserve separate-source continuous windows within each chain, seed, and split, together with complete-support inventories;
+2. Organize four-arm capacity lower bounds, named-policy upper bounds, and analytic exclusions for 19 workload contracts and 100 CFE targets;
+3. Bind reused tasks to complete input and initial-state identities, rather than a shared source-hour timestamp alone;
+4. Freeze training capacity and policy before holdout, retaining success, failure, unknown outcomes, and deadline coverage;
+5. Evaluate pairing robustness and common-coupling witnesses after risk events, window weights, and the coupling set are registered;
+6. Audit raw reports, residuals, gaps, state continuity, paired commits, and independent replay after close and reopen.
+
+The current inventory contains 523×28=14,644 training pairs and 512×28=14,336 holdout pairs per cell. These are mechanism-combination identities; overlapping windows are not independent samples. Across 1,900 cells there are 27,823,600 training cell-pair identities. Necessary solver calls depend on analytic exclusions and valid reuse DAGs and must be established by the concrete task package and full resource budget.
+
+![Figure 2. Finite-enrollment joint-service research workflow](../figures/project_workflow_en.svg)
+
+**Figure 2. Finite-enrollment joint-service research workflow.** Data, four-arm models, and evaluation dependencies in the current design; implementation acceptance status is given in Section 5.
+
+![Figure 3. Coordinated network structure](../figures/project_network_en.svg)
+
+**Figure 3. Coordinated network structure.** The fixed POI and shared workload envelope support the primary mechanism study. Staged ramp-up and grid expansion belong to the broader project blueprint.
 
 ## 5 Project Feasibility and Current Status
 
-### 5.1 Data, Model, and Reproducibility Foundations
+### 5.1 Existing Models and Named Benchmarks
 
-The project has versioned 24-hour RTS-GMLC grid/CFE blocks and 24-hour Alibaba workload blocks with strict training/holdout separation. The current main sample consists entirely of complete 24-hour zero-carry-in blocks; it has neither implemented cross-day carry-in linkage nor a currently observed right-censored block. Implementations cover E0 classification, complete-training-support audits, minimum-flexibility planning, separate B6 planning with shared physical execution, fixed-policy replay, transport bounds, common-coupling feasibility, validate-only interfaces for the enhanced four-arm baseline, and per-block-isolated formal bootstrap/controller, checkpoint, resource-journal, and manifest contracts. The new 46-cell joint-deliverability v2 protocol is sealed and awaits independent R4 review; a target-specific CFE builder, frontier-attribution payload, and formal runner still require a versioned implementation successor. Versioned configurations, solver certificates, residuals, and artifacts are audited with SHA-256 hashes. These capabilities establish inspectable code paths and closed gates only; they are not formal results, paper conclusions, or security certification.
+The project implements RTS-24 DC-OPF and joint security checks, deterministic expansion, F/X service balance, B0-B5 baselines, nonanticipativity, synthetic fixed-policy holdout, and duration, event, energy, and recovery-debt envelopes. The frozen deterministic case has access shortfalls of B0=327,600MWh and B1=B2=109,200MWh. B4 improves on B3 by 128,800MWh in the synthetic scenario tree, with deterioration on some holdout paths also retained. These findings support their respective mechanism scopes; formal empirical VMA has not been published.
 
-### 5.2 Existing Evidence and Current Execution Status
+RTS-GMLC has named six-hour and full 24-hour selected-N-1 DC SCUC/fixed-commitment ED benchmarks and a six-candidate POI comparison. The full-day benchmark audits 12 registered states per hour and has published result files and a manifest. Direct AC and zero-data-center recovery diagnostics still lack complete feasibility witnesses within the official limits, including h15/h21; security_certified remains false.
 
-The frozen 70-cell/legacy-formal-batch derived benchmark is preserved as R1=0, R2=0, R3=69, mixed=1, and unresolved=0; the original positive H2 is unsupported. These negative and boundary findings remain part of the evidence record and are not revised through post-result tuning.
+### 5.2 Public Data and Mechanism Identity
 
-The V8 nonformal two-block pilot, run in the fixed order `holdout_s20260822_0008 → holdout_s20260822_0009`, received both a pre-run independent PASS and a post-result independent PASS. That evidence closes only the corresponding gates for this nonformal pilot and does not grant formal execution authority. Formal activation V1–V4 never received execution authorization, and V4 is retained only as a historical `ESCALATE` record. No V5 activation candidate exists, and there is no independent activation PASS or user formal-run authority.
+RTS-GMLC grid data, Alibaba workloads, and Google power data retain separate provenance, versions, and clocks. Public marginals support declared mechanism windows and couplings. Absolute workload MW, actual recoverability, deadlines, recovery headroom, and same-clock outage evidence remain insufficient. The 250MW scale and workload parameters retain their mechanism_assumption identity rather than defining an observed joint distribution or empirical service probability.
 
-Accordingly, the 1,071-block grid, subsequent pairwise replay, and identification have not been run or published; the formal-result, paper-claim, and security-certification gates all remain closed. A TimeLimit, resource stop, unresolved outcome, missing incumbent, or incomplete certificate does not establish mathematical infeasibility. These statements report project execution status and are not paper results.
+The approved origin/registry successor covers the six historical outage-source left-boundary gaps. Saved checks report 1,035 unique entries, source_input_unresolved=0, and obligations_removed=0. Source coverage does not establish acceptance of a complete 192h producer execution. Terminal states, on-demand follow-up, and unknown outcomes still require evidence from the continuous chain.
+
+### 5.3 Development Snapshot on 2026-10-17
+
+Finite-v2 scientific parameters were approved for development on 2026-09-30. The concrete configuration remains DRAFT_NONAUTHORITATIVE, with complete_preregistration, formal_execution_ready, and formal_run_authority all false. The normal model, source adapters, persistent state, selectors, raw-report retention, and scoped PRE_SEAL checks have development evidence.
+
+At the 2026-10-17 14:38 Asia/Shanghai check, chain_07 was running a synthetic integration acceptance test for the first simulated hour. Retained traces had reached three independent N0 runs, common, shared Rref, three Actual runs, and each missing-Actual rejection check. There was no successful full-chain terminal covering paired commit, close/reopen, independent saved-record replay, and reporting. The test uses fabricated solver outputs to exercise real source readers and state composition; it supplies no formal capacity or risk result for the new contract.
+
+The main current computational bottleneck is repeated historical reconstruction and I/O across the validation workflow. Local optimizations have scientific-output and audit-equivalence evidence; whole-workflow gains and budgets still require representative measurement. A condition added on 2026-10-17 requires performance review before any new experiment, covering the task DAG, actual call multipliers, reusable evidence, stage time, memory and storage, heartbeats, and stop conditions. Synthetic and native timings remain separate. The 192h value describes simulated coverage; the actual wall-clock budget has not been established.
+
+### 5.4 Exits Required Before Formal Execution
+
+| Order | Required object | Current status |
+|---|---|---|
+| 1 | Complete hour-0, independent saved replay, cleanup, and timing | Under validation |
+| 2 | Cross-hour producer/phase coverage up to 192h | Incomplete |
+| 3 | Concrete task/reuse DAG, same-contract LB/UB, and resource admission | Incomplete |
+| 4 | Successor seal and fresh independent official review | Current execution package not yet through review |
+| 5 | Separate package-specific run authorization and formal-result acceptance | Not started |
+
+The old 70-cell diagnostic and V8 nonformal two-block pilot retain their historical evidence. An earlier formal grid attempt produced only nine of 1,071 historical checkpoints; no complete grid package was published. The current continuous contract has no published formal capacity frontier or holdout results.
 
 ## 6 Expected Outputs and Research Boundaries
 
 ### 6.1 Expected Outputs
 
-1. Four-arm minimum-flexibility requirement curves across registered hourly-CFE targets under mandatory network response;
-2. Signed capacity attribution through \(I_{joint}=I_{sep}+A_{B6}\) and a nonexclusive bottleneck vector;
-3. Hard-grid, CFE, and joint service consequences for frozen B6 and correct policies;
-4. A fixed-policy holdout evidence chain that preserves E0, service shortfall, and unresolved outcomes for the current complete 24-hour blocks;
-5. A multistage F/X–expansion–annual/hourly-CFE model as a broader project extension.
+1. Four-arm complete-service capacity frontiers, valid LB/UB evidence, and unresolved regions for finite enrollment;
+2. The signed decomposition I_joint=I_sep+A_B6 where supported by capacity evidence;
+3. Holdout network, CFE, and joint-service consequences of named training capacities and fixed causal policies;
+4. Raw reports, paired commits, and independent replay linking workload debt, outage states, and grid carry;
+5. Applicable coupling robustness and later multistage F/X, expansion, and annual/hourly-CFE extensions.
 
 ### 6.2 Research Boundaries
 
-The primary estimands are normalized \(D_N,D_C,D_B,D_J\) and their signed interaction decomposition; they are not interpreted as overestimation of interconnection capacity X. Public-marginal holdout bounds are conditional robustness intervals relative to the stated transport polytope, not real contract incidence, population failure probabilities, or causal effects. The selected-N-1 DC benchmark supports planning and mechanism analysis and does not constitute engineering security certification. CFE denotes clean electricity attributable within the same hour and specified region; it does not trace electrons delivered to the data center.
+The primary estimands are workload bidirectional capacities normalized by D_DC and their signed interactions. Interpreting them as conditional interconnection capacity X requires an explicit, validated mapping. Additive commitments, reference dispatch, and recovery policies retain named mechanism identities. Timely completion of the finite enrollment cohort establishes only the stated finite contract, rather than indefinite sustainability.
+
+Holdout weights and transport intervals are conditional on the declared benchmark support and coupling set. Population probabilities, real contract incidence, and causal effects require further evidence. Selected-N-1 DC results apply to their named computational scope; engineering security additionally requires complete security sets, AC, equipment, and control evidence. CFE denotes accounting and matching of attributable clean electricity within the same hour and specified region.
+
+Timeouts, local solver failures, missing incumbents, and incomplete certificates retain the relevant unresolved status. Missing necessary follow-up is reported as unknown or censored, while observed violations remain recorded. Capacity intervals, contrast signs, and service conclusions require complete supporting evidence.
 
 ## 7 References
 
@@ -183,3 +226,12 @@ The primary estimands are normalized \(D_N,D_C,D_B,D_J\) and their signed intera
 - Federal Energy Regulatory Commission (2026). 195 FERC ¶ 61,216; Docket EL26-69-000, Order Instituting Proceeding Under Section 206 of the Federal Power Act. https://www.ferc.gov/sites/default/files/2026-06/EL26-69-000.pdf
 - EnergyTag (2024). Granular Certificate Matching Standard, Version 1. https://energytag.org/wp-content/uploads/2024/03/Granular-Certificate-Matching-Standard_V1.pdf
 - Google (2021). 24/7 Carbon-Free Energy: Methodologies and Metrics. https://sustainability.google/reports/24x7-carbon-free-energy-methodologies-metrics/
+
+## 9 Repository Sources for Current Design and Status
+
+- [Research scope and primary-paper focus](../../agent.md): RQ2, the three-question blueprint, and evidence boundaries;
+- [Finite-v2 contract](../../configs/rq2_finite_mechanism_protocol_candidate_v2.DRAFT.yaml) and [model specification](../../docs/model_spec/rq2_finite_mechanism_protocol_candidate_v2.md): 168h, 24h, q+r≤D, 1,900 cells, and development authorization;
+- [Execution plan](../../docs/plan/科研项目执行步骤.md) and [blocker register](../../docs/model_spec/blocker_register.md): stage evidence, open issues, and closure conditions;
+- [H1 end-to-end milestones](../../docs/plan/H1_端到端里程碑验收_v1.md): acceptance order from complete hour-0 to formal execution;
+- [Chain_07 retained timing](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/timing.jsonl) and [source-boundary check](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/source_boundary_status_rechecked_01.json): development progress and approved source coverage;
+- [B0-B2 results](../../results/tables/rts24_b0_b2_summary.json), [B3-B5 results](../../results/tables/rts24_b3_b5_summary.json), and [24-hour DC benchmark](../../results/tables/rts_gmlc_google_day0_full24h_selected_n1_dc_scuc_v1/summary.json): the named historical evidence in Section 5.1.

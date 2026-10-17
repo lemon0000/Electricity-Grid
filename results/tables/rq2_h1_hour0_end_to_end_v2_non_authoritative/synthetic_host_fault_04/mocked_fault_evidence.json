@@ -1,0 +1,30 @@
+﻿{
+    "actual_process_created":  false,
+    "files_sha256":  {
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\check_detached_host_fault.ps1":  "847cea58d965a7e5d87fcce32045a937195c2cb84ec65d8f5f2e494b65ad7cf4",
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\synthetic_host_fault_04\\wmi_result.json":  "043bdeb321cb99791cf4bc2bba90dc75a2e611a89a1a1809fe4e855214d7dd72",
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\launch_detached.ps1":  "f700867fbbcc291cb0b1fa0def4eb5ed073bb0afdcff7e489a1dea78210ccdd2",
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\synthetic_host_fault_04\\launch_error.json":  "0182ea6c8ea05566dafeca1e259b5c1919156b17c542739257e60df0aa2596a7",
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\synthetic_host_fault_04\\launch_request.json":  "91d3e860f2201a4d27fad4b393291e35cf54081d290dbe65ae9770b22cab52a9"
+                     },
+    "fake_pid":  424242,
+    "command":  [
+                    "powershell.exe",
+                    "-NoProfile",
+                    "-File",
+                    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\check_detached_host_fault.ps1",
+                    "-Label",
+                    "synthetic_host_fault_04",
+                    "-Fault",
+                    "missing_process"
+                ],
+    "expected_failure_observed":  true,
+    "formal_result":  false,
+    "mocks":  [
+                  "New-CimInstance",
+                  "Invoke-CimMethod",
+                  "Get-CimInstance"
+              ],
+    "fault":  "missing_process",
+    "mocked":  true
+}

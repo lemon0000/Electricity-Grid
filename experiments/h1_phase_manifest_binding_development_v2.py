@@ -6,7 +6,7 @@ from pathlib import Path
 from experiments import h1_phase_manifest_group_development_v1 as group
 from experiments import h1_phase_dependency_verifier_development_v1 as verifier
 from experiments import h1_selector_configuration_development_v1 as configuration
-from experiments import h1_phase_owner_development_v1 as owner
+from experiments import h1_phase_owner_development_v2 as owner
 
 io = group.io
 SCHEMA = 'h1_phase_manifest_binding_development_v2'

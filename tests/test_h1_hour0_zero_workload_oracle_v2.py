@@ -13,6 +13,19 @@ from tests import test_h1_origin_selector_replay_development_v1 as fixtures
 from tests.test_rq2_normal_h1_hour_archive_v1 import no_solver
 
 
+def test_actual_parent_paths_satisfy_real_launch_contract_before_execution(tmp_path):
+    from experiments.h1_phase_manifest_binding_development_v2 import ARMS
+    preparation=integration.handoff.parent.preparation
+    base=tmp_path/'parents_non_authoritative'
+    roots=[integration.actual_parent_root(base,lane) for lane in sorted(set(ARMS.values()))]
+    assert len(roots)==len(set(roots))
+    assert all(preparation._path(root)==root and root.parent==base for root in roots)
+    assert not list(tmp_path.iterdir())
+    for lane in ARMS.values():
+        with pytest.raises(ValueError,match='non-authoritative parent root required'):
+            preparation._path(base/('actual_'+lane))
+
+
 def bundle(monkeypatch,lane):
     _,disclosure,prior,args=fixtures.inputs(lane)
     packet=fixtures.old.packet(raw_workload='0')

@@ -11,8 +11,9 @@ from experiments import h1_selector_phase_handoff_development_v2 as handoff
 from tests import test_h1_common_owner_genesis_development_v1 as genesis_cases
 from tests import test_h1_selector_input_snapshot_development_v1 as snapshot_cases
 from tests import test_h1_selector_phase_handoff_faults_development_v1 as fault_cases
+from tests import test_h1_phase_owner_development_v1 as phase_cases
 from tests.test_h1_selector_phase_handoff_faults_development_v1 import (
-    setup,legacy_setup,no_solver,
+    legacy_setup,no_solver,
     test_durable_write_windows_keep_exact_prefix_and_release_leases,
     test_external_retention_failure_never_retries_or_fills_missing_bytes,
     test_outer_file_failure_preserves_live_predecessor,
@@ -23,6 +24,12 @@ from tests.test_h1_selector_phase_handoff_integrity_development_v1 import (
     test_same_bytes_phase_replacement_between_close_and_reopen_rejected)
 
 pytestmark=pytest.mark.parametrize('context',['business_unresolved'],indirect=True)
+
+
+@pytest.fixture
+def setup(legacy_setup,monkeypatch):
+    monkeypatch.setattr(phase_cases,'m',genesis.phase)
+    return phase_cases.setup.__wrapped__(legacy_setup,monkeypatch)
 
 
 @pytest.fixture

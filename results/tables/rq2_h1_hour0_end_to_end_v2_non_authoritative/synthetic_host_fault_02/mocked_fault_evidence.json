@@ -1,0 +1,27 @@
+﻿{
+    "mocks":  [
+                  "New-CimInstance",
+                  "Invoke-CimMethod",
+                  "Get-CimInstance"
+              ],
+    "fake_pid":  424242,
+    "mocked":  true,
+    "expected_failure_observed":  true,
+    "actual_process_created":  false,
+    "command":  [
+                    "powershell.exe",
+                    "-NoProfile",
+                    "-File",
+                    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\check_detached_host_fault.ps1",
+                    "-Label",
+                    "synthetic_host_fault_02"
+                ],
+    "formal_result":  false,
+    "files_sha256":  {
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\check_detached_host_fault.ps1":  "2b2d26c82cef4b6771bf0080e1199a92efcb9f370390703f680bd0ac537f0919",
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\launch_detached.ps1":  "f700867fbbcc291cb0b1fa0def4eb5ed073bb0afdcff7e489a1dea78210ccdd2",
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\synthetic_host_fault_02\\wmi_result.json":  "043bdeb321cb99791cf4bc2bba90dc75a2e611a89a1a1809fe4e855214d7dd72",
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\synthetic_host_fault_02\\launch_request.json":  "8ec7afec476fdb56af0f4660ba3c35f61adcf600cd4634d50a2ad90df0cbe253",
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\synthetic_host_fault_02\\launch_error.json":  "0182ea6c8ea05566dafeca1e259b5c1919156b17c542739257e60df0aa2596a7"
+                     }
+}

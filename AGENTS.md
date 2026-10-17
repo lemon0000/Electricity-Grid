@@ -20,6 +20,7 @@ These instructions apply to the entire repository.
 - Inspect `git status` before edits. Do not assume an untracked file is disposable or reproducible.
 - Before touching an experiment runner, solver adapter, frozen config, checkpoint, manifest, or result directory, check for an active related process. Never stop, restart, resume, or alter an active formal run unless the user explicitly requests that action.
 - Do not start a long solver run, formal experiment, external-data download, or paid query unless the user explicitly requests it. Prefer unit tests, tiny synthetic cases, and existing artifacts for routine verification.
+- Before every experiment launch, apply the whole-workflow performance review required by `agent.md` section 9, including its evidence-reuse and resource-budget requirements.
 
 ## Routing Bootstrap
 

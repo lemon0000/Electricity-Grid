@@ -1,0 +1,30 @@
+﻿{
+    "actual_process_created":  false,
+    "files_sha256":  {
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\check_detached_host_fault.ps1":  "847cea58d965a7e5d87fcce32045a937195c2cb84ec65d8f5f2e494b65ad7cf4",
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\synthetic_host_fault_03\\launch_request.json":  "362d99e09e13af3fcc871e212992892ea0b03af785294d0d724e42b3c1bb27e8",
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\launch_detached.ps1":  "f700867fbbcc291cb0b1fa0def4eb5ed073bb0afdcff7e489a1dea78210ccdd2",
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\synthetic_host_fault_03\\wmi_result.json":  "043bdeb321cb99791cf4bc2bba90dc75a2e611a89a1a1809fe4e855214d7dd72",
+                         "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\synthetic_host_fault_03\\launch_error.json":  "7f22be314e674de47e00205cc83f8d013f25254ad466193ae46ad7821417feb0"
+                     },
+    "fake_pid":  424242,
+    "command":  [
+                    "powershell.exe",
+                    "-NoProfile",
+                    "-File",
+                    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\check_detached_host_fault.ps1",
+                    "-Label",
+                    "synthetic_host_fault_03",
+                    "-Fault",
+                    "wrong_parent"
+                ],
+    "expected_failure_observed":  true,
+    "formal_result":  false,
+    "mocks":  [
+                  "New-CimInstance",
+                  "Invoke-CimMethod",
+                  "Get-CimInstance"
+              ],
+    "fault":  "wrong_parent",
+    "mocked":  true
+}

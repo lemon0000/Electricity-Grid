@@ -15,7 +15,10 @@ attempt.mkdir(exist_ok=False)
 files=[Path(row['successor']) for row in json.loads((evidence/'successor_origin.json').read_bytes())]
 files+=list(Path('tests').glob('*h1*_*v2.py'))
 files += [Path('experiments')/name for name in (
-    'h1_historical_hour_witness_development_v1.py','h1_historical_n0_verifier_development_v1.py')]
+    'h1_historical_hour_witness_development_v1.py','h1_historical_n0_verifier_development_v1.py',
+    'h1_phase_exact_source_current_development_v2.py','h1_phase_owner_development_v2.py',
+    'h1_selector_phase_consumption_development_v2.py')]
+files += [Path(__file__).resolve().relative_to(root)]
 files += [Path('tests/test_h1_historical_hour_witness_development_v1.py')]
 def hashes():return {str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
 before=hashes()

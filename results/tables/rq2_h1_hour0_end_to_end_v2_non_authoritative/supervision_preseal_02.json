@@ -1,0 +1,28 @@
+{
+  "observed_utc": "2026-10-14T07:41:19.364655+00:00",
+  "reviewer": "routing_review",
+  "review_scope": "read-only non-authoritative pre-seal; root transcription",
+  "findings_closed": [
+    "postcheck output hashes and membership captured before report and rechecked after",
+    "original saved artifact hashes and membership rechecked across report",
+    "existing supervision directory refused with separate start-failure record"
+  ],
+  "validation": {
+    "path": "supervisor_v2_checks_02/terminal.json",
+    "sha256": "21fa3a723b1eb536829293cbc830a3c455fe33f45b5a3373e95175762c435435",
+    "tests_passed": 27
+  },
+  "old_failure_reproduction": {
+    "path": "supervisor_v2_regression_proof_01/result.json",
+    "sha256": "c3df0ce9ae9b716ee0cf9e1a612a66ef22393db55dd4f400ec75d63d8876058d"
+  },
+  "entry_sha256": "197ff9379fb7c744f2f6d1c9605be0695594dfd27400560b58d4fe4f99372be6",
+  "test_sha256": "46484dd3e4bef40ab441f57cba65662035c7c5998588a9fb73dc61076aa183e8",
+  "remaining_limits": [
+    "1800 second fresh saved replay budget is unmeasured until actual terminal",
+    "unwritable or nonexistent attempt root cannot guarantee a sibling durable startup failure",
+    "bookends do not prove invisible transient ABA"
+  ],
+  "official_verdict": false,
+  "formal_result": false
+}

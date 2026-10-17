@@ -1,0 +1,54 @@
+{
+  "scope": "Current synthetic hour-0 path, preserving existing science and freshness boundaries",
+  "formal_result": false,
+  "items": [
+    {
+      "area": "Phase dependency file reads",
+      "status": "implemented_previously_and_reused",
+      "implementation": "experiments/h1_phase_dependency_verifier_development_v1.py",
+      "change": "Read observed size plus one while retaining original stable-read checks",
+      "evidence": "results/tables/rq2_h1_phase_dependency_verifier_v1_non_authoritative/development_checks.json"
+    },
+    {
+      "area": "N0 numerical replay inside exact-source",
+      "status": "implemented_with_final_saved_record_equality",
+      "implementation": "experiments/h1_phase_exact_source_current_development_v2.py",
+      "change": "Two independent historical prefix scopes, each with two full replays and two fresh byte/context revalidations",
+      "evidence": "exact_source_equivalence_02.json",
+      "original_checks_retained": ["two historical observations", "two registry reads", "source load", "source validation with fresh reload", "origin join", "exact workload/CFE projection", "final source observation", "entry/exit dispatch and identity checks"]
+    },
+    {
+      "area": "Audit assembly",
+      "status": "implemented",
+      "change": "Use the verifier identity returned by the final successful context check; avoid one extra identity calculation during audit serialization"
+    },
+    {
+      "area": "Complete routing",
+      "status": "implemented_regression_passed_76_tests",
+      "evidence": "../exact_source_routing_checks_02/terminal.json",
+      "implementations": ["h1_phase_owner_development_v2.py", "h1_phase_manifest_binding_development_v2.py", "h1_group_n0_common_input_binding_development_v2.py", "h1_selector_phase_consumption_development_v2.py", "h1_selector_phase_handoff_development_v2.py"],
+      "change": "Explicit new source/owner/preview identity throughout the chain; reject unsupported later hours before any attempt write",
+      "scientific_episode_hours": 192,
+      "source_scope_completed_hours": 1
+    },
+    {
+      "area": "Lost progress after initiating shell closes",
+      "status": "short_host_probe_and_fault_checks_passed",
+      "implementation": "launch_detached.ps1",
+      "change": "WMI-hosted process, hidden window, independent parent verification, exact launch receipts, no automatic retry on uncertain launch",
+      "limits": "Short probe establishes shell-independent hosting only; whole-chain completion and descendant cleanup still require integration evidence"
+    },
+    {
+      "area": "Repeated package identity queries",
+      "status": "no_small_contract_preserving_change_identified",
+      "evidence": "historical_profile_04/profile.txt and witness_profile_04/profile.txt",
+      "reason": "A broad cache would remove dependency freshness observations. Preserving them requires fresh distribution resolution, stable metadata bytes, dispatch/shadow-distribution checks and a versioned numerical dependency stack. Existing frozen bytes remain unchanged."
+    },
+    {
+      "area": "Remaining stable reads, path and journal checks",
+      "status": "required_current_observation_boundaries_retained",
+      "reason": "These checks inspect file replacement, ancestor/reparse state, prefix membership and journal topology. They cannot be reused across leases or observation bookends under the current contract."
+    }
+  ],
+  "performance_limits": "Isolated savings are measured separately from whole-chain time. The first profiled successor was slower; preserved profiles and alternated timings must be read together. No native budget follows from these synthetic measurements."
+}

@@ -15,7 +15,7 @@ from types import FunctionType,MappingProxyType,ModuleType
 
 from experiments import h1_selector_parent_controller_development_v2 as parent
 from experiments import h1_common_owner_genesis_development_v2 as common
-from experiments import h1_selector_phase_consumption_development_v1 as preview
+from experiments import h1_selector_phase_consumption_development_v2 as preview
 
 phase,bootstrap=common.phase,common.bootstrap
 snapshot,sequence=parent.worker.snapshot,parent.worker.sequence

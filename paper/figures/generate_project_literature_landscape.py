@@ -99,7 +99,7 @@ MATRIX = OrderedDict([
     ("coordination", ("S", "S", "P", "O", "O")),
     ("tep", ("P", "O", "S", "O", "O")),
     ("cfe", ("O", "S", "P", "O", "O")),
-    ("project", ("S", "P", "P", "P", "P")),
+    ("project", ("S", "P", "P", "P", "S")),
 ])
 
 TEXT = {
@@ -125,7 +125,7 @@ TEXT = {
         "panel_b": "Bounded positioning matrix",
         "columns": (
             "Grid access\n/ expansion",
-            "24 h within-\nwindow envelope",
+            "Temporal\nenvelope",
             "Network–CFE\ncoordination",
             "Separate\nobligations",
             "Marginal-only\nidentification",
@@ -144,10 +144,10 @@ TEXT = {
         "cfe_source": "EnergyTag / Google\nhourly CFE",
         "objects_boundary": "Separate objects ≠ observed overlap",
         "hypothesis": "Falsifiable overlap hypothesis",
-        "comparison": "Shared 24 h zero-carry-in envelope\ncorrect model  vs  B6",
-        "holdout": "Frozen-policy holdout replay",
+        "comparison": "168h enrollment + ≤24h follow-up\nshared q+r≤D  vs  B6",
+        "holdout": "Causal frozen-policy holdout",
         "identification": "Conditional sharp bounds\nall-coupling sign · common witness",
-        "states": "Current complete blocks: E0 | shortfall | unresolved\nFuture incomplete windows: right-censor",
+        "states": "Separate E0 | shortfall | unresolved\nRetain deadline censoring",
     },
     "cn": {
         "stream_labels": {
@@ -171,7 +171,7 @@ TEXT = {
         "panel_b": "有界研究定位矩阵",
         "columns": (
             "接入 / 扩建",
-            "24h完整窗口内\n时序包络",
+            "业务柔性\n时序包络",
             "网络—CFE\n协同",
             "分离的\n制度义务",
             "仅有边缘时的\n部分识别",
@@ -190,10 +190,10 @@ TEXT = {
         "cfe_source": "EnergyTag / Google\n小时CFE核算",
         "objects_boundary": "对象分别存在 ≠ 已观测到现实交叠",
         "hypothesis": "可证伪的 contract-overlap hypothesis",
-        "comparison": "同一24h、zero-carry-in窗口内包络\ncorrect model  vs  B6反事实",
-        "holdout": "冻结策略的 holdout 回放",
+        "comparison": "168h登记 + ≤24h后续\n共享q+r≤D  vs  B6反事实",
+        "holdout": "冻结因果策略的 holdout 回放",
         "identification": "条件 sharp bounds\nall-coupling sign · 共同coupling见证",
-        "states": "当前完整块：E0｜服务短缺｜unresolved\n未来不完整窗口：right-censor",
+        "states": "区分E0｜服务短缺｜unresolved\n保留期限覆盖与right-censor",
     },
 }
 

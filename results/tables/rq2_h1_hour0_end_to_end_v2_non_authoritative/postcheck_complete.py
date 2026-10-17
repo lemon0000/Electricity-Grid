@@ -98,7 +98,10 @@ def main(label):
         if arm<2:expected += [f'arm_{arm}_close']
     expected += ['complete_common_scientific_replay','common_genesis_and_inspect',
         'selector_harness_and_reference_snapshot','Rref_parent_run','missing_all_Actual_rejected']
-    expected += ['Actual_'+lane for lane in lanes]
+    for lane in lanes:
+        expected += [stage+lane for stage in ('Actual_snapshot_start_',
+            'Actual_snapshot_ready_','Actual_parent_ready_',
+            'Actual_parent_returned_','Actual_')]
     expected += ['missing_Actual_rejected_'+lane for lane in lanes]
     expected += ['paired_commit_and_readback','selector_parents_and_handoff_closed','arm_2_close',
         'reopen_bootstrap_roster_common_and_close','paired_owner_reopen_replay_and_close',

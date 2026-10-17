@@ -81,6 +81,11 @@ def test_v2_worker_launch_and_runtime_closure():
     assert 'h1_selector_released_worker_development_v2' in parent.preparation._SCRIPT
     assert 'h1_selector_released_worker_development_v1' not in parent.preparation._SCRIPT
     assert parent.lifecycle.INSPECTION_SCHEMA.endswith('_v2')
+    from experiments import h1_phase_owner_development_v2 as phase
+    from experiments import h1_phase_exact_source_current_development_v2 as source
+    assert manifest.owner is handoff.common.phase is worker.snapshot.phase is phase
+    assert phase.source is source
+    assert handoff.preview.phase is phase
 
 
 def test_N0_route_rejects_replaced_historical_verifier(tmp_path,monkeypatch):

@@ -1,0 +1,8 @@
+{
+  "mode": "plain",
+  "formal_result": false,
+  "full_chain_passed": false,
+  "exit_code": 1,
+  "error": "Traceback (most recent call last):\n  File \"D:\\h1_perf_fix_01_non_authoritative\\performance\\run_arm_pair_member.py\", line 42, in <module>\n    produced=common._arm(report['arm_audits'][arm]['reference'],binding.registry_identity,manifest)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\h1_perf_fix_01_non_authoritative\\experiments\\h1_group_n0_common_input_binding_development_v2.py\", line 104, in _arm\n    historical=_BUNDLE_PREPARE(binding.root,expected_binding_sha256=binding.binding_sha256,\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\h1_perf_fix_01_non_authoritative\\experiments\\h1_phase_exact_source_current_development_v2.py\", line 252, in guarded\n    result=operation(root,expected_binding_sha256=expected_binding_sha256,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\h1_perf_fix_01_non_authoritative\\experiments\\h1_phase_exact_source_current_development_v2.py\", line 119, in _prepare\n    first,captured,header=_replay(root,**args,_observed=observed)\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\h1_perf_fix_01_non_authoritative\\experiments\\h1_historical_n0_verifier_development_v1.py\", line 119, in _replay_prefix\n    raise ValueError('historical obligation header differs')\nValueError: historical obligation header differs\n",
+  "elapsed_seconds": 8.646956899989164
+}

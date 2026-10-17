@@ -1,0 +1,43 @@
+{
+  "schema": "bounded_hour0_optimization_disposition_v1",
+  "read_only_analyst": "/root/exact_source_optimization",
+  "pins": {
+    "experiments/h1_selector_parent_controller_development_v2.py": "7e55ea71a62b9a4bf2a3dc9181052db0af531728a777c5da975038e3eb9f8392",
+    "experiments/h1_selector_input_snapshot_development_v2.py": "93c142ac43a464783ad64c416183d7983c89d7d9e9b393fc1a61e6d82ec7ec20",
+    "experiments/h1_selector_launch_preparation_development_v2.py": "2adcba2859bf20deb1bc6de092ba85d3d5222827eb6ac3ce711c73419ea230c1",
+    "experiments/h1_selector_worker_output_inspection_development_v2.py": "9e0d8337e336506ce11be8d65dbd2fc7ce47cd0ee45a776675e58b97df82c3a4",
+    "tests/h1_group_selector_integration_helpers_v2.py": "0c5121fda049b56c21a51b103c8f23291d8cebafd45962c34082be4481ae99e0"
+  },
+  "implemented": [
+    "Common per-arm dual projection from one guarded exact-source operation",
+    "Actual parent directory validation before selector harness",
+    "Stage timings and exact postcheck label synchronization"
+  ],
+  "retained": [
+    {
+      "area": "Parent._source outer prepare plus guarded bind",
+      "reason": "Deleting outer prepare removes an independently observed interval and changes fault-call position; persistent-drift detection alone does not establish equivalence."
+    },
+    {
+      "area": "snapshot capture A then detached rebuild B,C",
+      "reason": "A/B/C compare detects a reference or source change at B that recovers at C; two observations can miss that window."
+    },
+    {
+      "area": "inspection before/after source and inner rebuild observations",
+      "reason": "Numerical reuse while retaining every fresh boundary requires a new scoped numerical witness and its R3 fault matrix."
+    },
+    {
+      "area": "missing-Actual Handoff and post-failure revalidation",
+      "reason": "Parent validation, disposition calculation and release checks establish applicable Actual requirements and failure exits; early rejection changes error priority."
+    }
+  ],
+  "test_only_dependency_cache": {
+    "status": "diagnostic_interrupted_and_preserved",
+    "path": "three_actual_preflight_cached_01",
+    "production_change": false,
+    "performance_claim": false
+  },
+  "next": "Complete uncached three-Actual preflight, then fresh full synthetic chain",
+  "full_chain_passed": false,
+  "formal_result": false
+}
