@@ -1,0 +1,59 @@
+{
+  "scope": "non-authoritative path optimization, original numerical replay and mutable input reads retained",
+  "observed_at": "2026-10-17T15:28:44.736837",
+  "unit_tests": 34,
+  "unit_terminal": "monitor_unit_06/terminal.json",
+  "comparison": {
+    "reference_seconds": 64.2394243000308,
+    "candidate_seconds": 54.06457190000219,
+    "reduction_percent": 15.838953276584288,
+    "members": [
+      "pair_04_io",
+      "pair_05_io_path"
+    ],
+    "both_exit_zero": true,
+    "saved_files_unchanged": true,
+    "saved_file_count": 461,
+    "outputs": {
+      "scientific.json": {
+        "reference_sha256": "e16f70617322f0304659955c0f2a3466fc329f59dae6b6ac8c11a8eb09fe7b5f",
+        "candidate_sha256": "e16f70617322f0304659955c0f2a3466fc329f59dae6b6ac8c11a8eb09fe7b5f",
+        "equal": true
+      },
+      "audit.json": {
+        "reference_sha256": "1b87bd9d42b31add20d672cdcffa8809f4d07de2bb0382dac8cc6395577577e4",
+        "candidate_sha256": "1b87bd9d42b31add20d672cdcffa8809f4d07de2bb0382dac8cc6395577577e4",
+        "equal": true
+      }
+    },
+    "scope_limit": "single saved common arm; cannot predict full-chain or native runtime"
+  },
+  "integration_probes": [
+    {
+      "attempt": "entry_revision_01/integration_01",
+      "status": "STOPPED_BUDGET_NOT_PASS",
+      "profiler": "Python per-call counting enabled",
+      "last_stage": "reference selector raw audit"
+    },
+    {
+      "attempt": "entry_revision_02/integration_01",
+      "status": "STOPPED_BUDGET_NOT_PASS",
+      "profiler": "disabled",
+      "completed_Rref_parent_seconds": 137.41300760000013
+    }
+  ],
+  "original_chain_code_pins": 36,
+  "original_chain_code_drift": [],
+  "original_chain_pids_alive": {
+    "27888": true,
+    "43640": true,
+    "42184": true
+  },
+  "whole_workflow_performance_review_complete": false,
+  "long_chain_launch_admitted": false,
+  "full_chain_passed": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "formal_execution_ready": false,
+  "native_execution_authorized": false
+}

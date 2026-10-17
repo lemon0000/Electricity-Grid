@@ -1,0 +1,152 @@
+{
+  "scope": "successful one-hour Handoff explicit call-site lower bounds, not an observed full runtime trace",
+  "observed_at": "2026-10-17T15:20:54.134908",
+  "source_sha256": "8b965cb43fb14320207a9a7d2cc9b2ed59f3aaa790538acc3740d51aaf13df4c",
+  "correspondence_contributions": {
+    "_prepare": 1,
+    "five_journal_callbacks_each_two_prefix_checks": 10,
+    "two_holder_retentions_each_two_checks": 4,
+    "two_readbacks_each_two_checks": 4,
+    "consume_direct": 2
+  },
+  "correspondence_lower_bound": 21,
+  "direct_prepare_locked_in_prepare": 1,
+  "common_prepare_locked_lower_bound": 22,
+  "arm_bundles_per_prepare_locked": 6,
+  "full_numerical_replays_per_arm_bundle": 4,
+  "fresh_context_revalidations_per_arm_bundle": 4,
+  "numerical_replays_explicit_lower_bound": 528,
+  "excluded_from_lower_bound": [
+    "nested snapshot owner inspection",
+    "phase inspect/advance replays",
+    "Parent/Rref recursive source checks",
+    "failure attempts",
+    "close/reopen and independent postcheck"
+  ],
+  "source_call_sites": {
+    "_prepare": {
+      "_correspondence": [
+        {
+          "line": 311,
+          "call": "self._correspondence"
+        }
+      ],
+      "validate": [],
+      "append": [
+        {
+          "line": 305,
+          "call": "sizes.append"
+        },
+        {
+          "line": 273,
+          "call": "typed.append"
+        },
+        {
+          "line": 276,
+          "call": "typed.append"
+        }
+      ],
+      "_readback": []
+    },
+    "_retain_journal": {
+      "_correspondence": [
+        {
+          "line": 321,
+          "call": "self._correspondence"
+        }
+      ],
+      "validate": [
+        {
+          "line": 321,
+          "call": "self._bundle.validate"
+        }
+      ],
+      "append": [
+        {
+          "line": 330,
+          "call": "views.append"
+        }
+      ],
+      "_readback": []
+    },
+    "_retain_holder": {
+      "_correspondence": [
+        {
+          "line": 347,
+          "call": "self._correspondence"
+        },
+        {
+          "line": 352,
+          "call": "self._correspondence"
+        }
+      ],
+      "validate": [],
+      "append": [
+        {
+          "line": 351,
+          "call": "self._journal.append"
+        }
+      ],
+      "_readback": []
+    },
+    "_readback": {
+      "_correspondence": [
+        {
+          "line": 356,
+          "call": "self._correspondence"
+        },
+        {
+          "line": 367,
+          "call": "self._correspondence"
+        }
+      ],
+      "validate": [
+        {
+          "line": 367,
+          "call": "self._bundle.validate"
+        }
+      ],
+      "append": [],
+      "_readback": []
+    },
+    "consume": {
+      "_correspondence": [
+        {
+          "line": 418,
+          "call": "self._correspondence"
+        },
+        {
+          "line": 434,
+          "call": "self._correspondence"
+        }
+      ],
+      "validate": [],
+      "append": [
+        {
+          "line": 417,
+          "call": "self._journal.append"
+        },
+        {
+          "line": 435,
+          "call": "self._journal.append"
+        },
+        {
+          "line": 439,
+          "call": "self._journal.append"
+        }
+      ],
+      "_readback": [
+        {
+          "line": 438,
+          "call": "self._readback"
+        },
+        {
+          "line": 440,
+          "call": "self._readback"
+        }
+      ]
+    }
+  },
+  "formal_result": false,
+  "full_chain_passed": false
+}

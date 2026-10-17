@@ -1,0 +1,42 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "question": "Can an explicit isolated validation interpreter reduce metadata search without any discovery cache or identity memo?",
+  "attempts": {
+    "standard": 1,
+    "isolated": 1
+  },
+  "per_attempt": {
+    "wall_seconds": 60,
+    "sampled_rss_mib": 512,
+    "storage_mib": 64
+  },
+  "task_dag": [
+    "verify original IO package and source/test/capture pins",
+    "explicit REPO/tests prepend; record effective sys.path and sys.flags",
+    "old v1 Rref final-stage raw audit",
+    "old v1 Actual final-stage raw audit",
+    "close leases and verify source/capture pins; record module origins",
+    "compare both fresh processes scientifically and by origin before any pipeline wiring"
+  ],
+  "scale": {
+    "generators": 1,
+    "Rref_prefix_stages": 2,
+    "Actual_prefix_stages": 1
+  },
+  "baseline": "standard interpreter; previous Rref11.426s/Actual7.539s scoped evidence",
+  "candidate": "same executable/code/captures; child invoked with -I; selected8science packages still in compute prefix",
+  "monitor": "normal parent interpreter keeps its existing psutil; child science needs no psutil or win32 imports",
+  "static_identity_shortcut": false,
+  "distribution_discovery_cached": false,
+  "profiling": false,
+  "script_sha256": "364a8b7d6606c4f4d740a273cce67b643e379ecccc8699283c58f2ec0eeff377",
+  "input_root": "D:/h1_incremental_helper_05_non_authoritative/selector_raw_v2_non_authoritative0",
+  "input_manifest": "real_identity_pair_01/request.json",
+  "stop": "owned child only on per-attempt wall/RSS/storage limit or science/source drift; no budget raise/repeat of unchanged mode",
+  "acceptance": "both terminal exit0; exact scientific projection/selector record for both lanes; all shared scientific module origins unchanged; source/captures unchanged; saved plan and actual flags/paths agree; local measured benefit before pipeline use",
+  "formal_result": false,
+  "resource_admission": false,
+  "full_chain_passed": false,
+  "formal_execution_ready": false,
+  "native_execution_authorized": false
+}

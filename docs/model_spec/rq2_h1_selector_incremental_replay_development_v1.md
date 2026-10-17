@@ -52,3 +52,12 @@ failures, gap/lock/status/count/assignment/residual/integrality and final carry;
 numeric call counts; and drift at prefix, append and tail boundaries. Test
 success, local timing and PRE_SEAL findings grant no official review, whole-chain
 acceptance, resource admission, native execution or formal-run authority.
+
+Performance decision, 2026-10-17: do not integrate this candidate. The bounded
+real-identity v1/v2 pair completed with exact scientific projections and unchanged
+140-file captures, but Rref increased from 11.426 to 16.719 seconds and Actual
+from 7.539 to 12.691 seconds. The 127-test differential/failure suite passed;
+its test-only static identity memo is not runtime evidence. Details and source
+pins are in `results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/
+validation_selector_incremental_01/performance_report.md`. Preserve the
+candidate and failed attempts; do not infer long-chain readiness from them.

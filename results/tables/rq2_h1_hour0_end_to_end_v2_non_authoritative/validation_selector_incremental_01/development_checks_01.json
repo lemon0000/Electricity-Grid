@@ -1,0 +1,70 @@
+{
+  "observed_at_utc": "2026-10-17T08:06:00.492948+00:00",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "performance_decision": "DO_NOT_INTEGRATE_SLOWER_CANDIDATE",
+  "unit_test_count": 127,
+  "unit_terminal": "helper_checks_05/terminal.json",
+  "unit_exit_zero": true,
+  "unit_static_identity_shortcut": true,
+  "real_identity_comparison": "real_identity_pair_01/terminal.json",
+  "comparison_exit_zero": true,
+  "comparison_static_identity_shortcut": false,
+  "both_lanes_scientific_projection_equal": true,
+  "measurements": [
+    {
+      "lane": "Rref",
+      "mode": "legacy",
+      "audit_seconds": 11.425961299974006
+    },
+    {
+      "lane": "Rref",
+      "mode": "incremental",
+      "audit_seconds": 16.718546699965373
+    },
+    {
+      "lane": "A",
+      "mode": "legacy",
+      "audit_seconds": 7.538737599970773
+    },
+    {
+      "lane": "A",
+      "mode": "incremental",
+      "audit_seconds": 12.69134750001831
+    }
+  ],
+  "source_pin_count": 764,
+  "source_drift": [],
+  "saved_pin_count": 140,
+  "saved_drift": [],
+  "syntax_checked": [
+    "experiments/h1_origin_selector_incremental_replay_development_v1.py",
+    "experiments/h1_selector_raw_science_development_v2.py",
+    "tests/test_h1_origin_selector_incremental_replay_development_v1.py",
+    "tests/test_h1_selector_raw_science_development_v2.py",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_selector_incremental_01\\run_bounded.py",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_selector_incremental_01\\compare_saved_raw_audits.py"
+  ],
+  "candidate_sha256": {
+    "experiments/h1_origin_selector_incremental_replay_development_v1.py": "dc509d13f89a07441249c6778555b3e2b77d0a0294ac61b53ac6ae6891189e0c",
+    "experiments/h1_selector_raw_science_development_v2.py": "0054f9310e0ae7cdb27ed0d75ac0e91f8b5f30c29800fb350dd34d224296b0f5",
+    "tests/test_h1_origin_selector_incremental_replay_development_v1.py": "85cfe35779e51a4e675d011376977226f77d344b670da74dd11dd6b6e6985434",
+    "tests/test_h1_selector_raw_science_development_v2.py": "6ed335468a497f47acc2bb0b47b5a26d0f1a8596f653d628edd47e46a5ecc369",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_selector_incremental_01\\run_bounded.py": "7a65ee370892e655fd89da3bcda5766d00d1b501e5fcad1dfc74d4d4d4873145",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_selector_incremental_01\\compare_saved_raw_audits.py": "59aedb4fc4523aaa3291de3aa0c06a1204d82839f0418dcd2035de596ecae2a3"
+  },
+  "original_chain_pin_count": 36,
+  "original_chain_code_drift": [],
+  "original_chain_pids_alive": {
+    "27888": true,
+    "43640": true,
+    "42184": true
+  },
+  "original_chain_terminal_exists": false,
+  "whole_workflow_performance_review_complete": false,
+  "long_chain_launch_admitted": false,
+  "full_chain_passed": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "formal_execution_ready": false,
+  "native_execution_authorized": false
+}

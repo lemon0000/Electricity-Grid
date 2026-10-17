@@ -2,6 +2,13 @@
 
 本登记只回答两件事：当前代码和固定数据能够证明什么，以及还缺什么才能解除阻塞。`resolved`表示问题已由代码、测试或明确的研究口径闭环；`mechanism-only`表示结构已实现但参数仍是合成敏感性；`method-blocked`表示数据与诊断已到位，但注册的方法尚未形成后续结论所需的数值见证；`external-blocked`表示不能靠当前仓库诚实补齐；`compute-blocked`表示模型与数据入口已经存在，但当前计算资源尚未完成所声明规模的正式运行，不等于数学不可行或数据缺失。
 
+2026-10-17 H1 性能诊断：路径校验候选单保存 arm 提速 15.84%，输出/完整 audit 及保存文件不变；
+selector 增量数值重放虽通过差分和两 lane 真实身份检查，实测却更慢，未采用。
+详见 hour-0 evidence 根下 `validation_path_optimization_01/performance_report.md` 与
+`validation_selector_incremental_01/performance_report.md`。两次 tiny 集成探针均以 180 秒预算停止；
+这些局部证据不关闭完整 hour-0、192h、整体性能准入、资源准入或正式运行门禁。
+原 chain_07 保留并继续，未将任何运行中或预算停止状态改记为通过。
+
 ## 状态总表
 
 | 问题 | 状态 | 当前处置 | 对后续工作的约束 |
