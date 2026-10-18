@@ -180,9 +180,7 @@ def _build():
                 or len(bundle.held) != len(row['guards'])
                 or any(a is not b for a, b in zip(bundle.held, row['guards']))
                 or len(bundle.marked) != len(row['marks'])
-                or any(a is not b for a, b in zip(bundle.marked, row['marks']))
-                or any(not guard.locked() for guard in row['guards'])
-                or any(mark._reference_held is not True for mark in row['marks'])):
+                or any(a is not b for a, b in zip(bundle.marked, row['marks']))):
             raise ValueError('original held Parent guards, marks or pairs changed')
         parent = api.parent
         parent._CHECK()
@@ -192,6 +190,12 @@ def _build():
                     or obj._issued_bytes != issued or parent._completion_bytes(receipt) != issued
                     or obj._guard is not guard or not guard.locked()):
                 raise ValueError('exact original Parent, receipt, snapshot and guard required')
+        guards=tuple(part[4] for part in row['parents'][1:])+(row['parents'][0][4],)
+        marks=tuple(part[0] for part in row['parents'][1:])
+        if (len(row['guards'])!=len(guards) or any(a is not b for a,b in zip(row['guards'],guards))
+                or len(row['marks'])!=len(marks) or any(a is not b for a,b in zip(row['marks'],marks))
+                or any(mark._reference_held is not True for mark in marks)):
+            raise ValueError('exact original Parent guard and mark inventory required')
         if owner is not None:
             if not row['frames'] or row['frames'][-1]['owner'] is not owner:
                 raise ValueError('original current Parent validation site required')

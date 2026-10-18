@@ -34,7 +34,7 @@ def case(tmp_path,monkeypatch):
     yield from make_case(tmp_path,monkeypatch)
 
 
-def make_case(tmp_path,monkeypatch,*,exact_source=None,source_binding=None):
+def make_case(tmp_path,monkeypatch,*,exact_source=None,source_binding=None,before_attach=None):
     """Fake Parent transport, optionally retaining the actual source and its guards."""
     faults={};calls=[];fallback=[]
     tree=ast.parse(Path(original.__file__).read_bytes())
@@ -158,17 +158,19 @@ def make_case(tmp_path,monkeypatch,*,exact_source=None,source_binding=None):
             raise ValueError('outer resources remain held')
     methods=fresh._bind_handoff(api,Host,verify,operation,finalized)
     attach,validate_bundle,rebuild,finish,abort,receipt,commit,validate_pair,declaration=methods
-    attach(host,token)
     result=NS(module=fresh,host=host,token=token,attach=attach,bundle=bundle,parents=[ref,*actuals],actuals=actuals,ref=ref,
         validate_bundle=validate_bundle,rebuild=rebuild,finish=finish,abort=abort,receipt=receipt,
         commit=commit,validate_pair=validate_pair,declaration=declaration,source=source,values=values,
         faults=faults,calls=calls,fallback=fallback)
     def release():
-        for guard_ in bundle.held:
+        for guard_ in [*(owner._guard for owner in (ref,*actuals)),*bundle.held]:
             if guard_.locked():guard_.release()
         if host._guard.locked():host._guard.release()
     result.release=release
-    try:yield result
+    try:
+        if before_attach is not None:before_attach(host,bundle)
+        attach(host,token)
+        yield result
     finally:
         abort(host,RuntimeError('unit teardown'))
         release()
@@ -261,6 +263,22 @@ def test_exact_parent_source_keys_and_original_objects_admitted_before_source(ca
 def test_foreign_pair_rejected_before_original_source_io(case):
     with pytest.raises(TypeError,match='before source'):case.validate_pair(case.bundle,object(),case.ref._issued)
     assert not case.values and case.receipt(case.host)['status']=='aborted'
+
+
+@pytest.mark.parametrize('fault',['substituted_guard','duplicate_guard','missing_mark','duplicate_mark'])
+def test_attach_rejects_unrelated_guard_or_mark_inventory_before_source(tmp_path,monkeypatch,fault):
+    captured=[]
+    def before_attach(host,bundle):
+        captured.extend([host,bundle])
+        if fault=='substituted_guard':
+            guard=Lock();guard.acquire();bundle.held[0]=guard
+        elif fault=='duplicate_guard':bundle.held[0]=bundle.held[1]
+        elif fault=='missing_mark':bundle.marked.pop()
+        else:bundle.marked[0]=bundle.marked[1]
+    generator=make_case(tmp_path,monkeypatch,before_attach=before_attach)
+    with pytest.raises(ValueError,match='guard and mark inventory'):next(generator)
+    host,bundle=captured
+    assert not host._guard.locked() and all(not guard.locked() for guard in bundle.held)
 
 
 @pytest.mark.parametrize('fault',['foreign_owner','route'])
