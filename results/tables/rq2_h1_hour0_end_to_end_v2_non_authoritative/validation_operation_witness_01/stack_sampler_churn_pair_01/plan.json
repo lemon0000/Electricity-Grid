@@ -1,0 +1,24 @@
+{
+  "question": "Can C timed dumps crash the same interpreter under frame churn, and does the Python sampler complete it?",
+  "workload": "compile/execute/discard one recursive function, depth12; periodic GC; six seconds per mode",
+  "attempts_per_mode": 1,
+  "modes": [
+    "c_timer",
+    "python_sampler"
+  ],
+  "timer_interval_seconds": 0.001,
+  "per_child_wall_cap_seconds": 10,
+  "aggregate_sampled_rss_cap_bytes": 268435456,
+  "storage_cap_bytes": 16777216,
+  "worker_subprocesses_spawned": 0,
+  "package_scope": "Python standard library plus the diagnostic sampler; no project science modules",
+  "cleanup": "Popen handle kill and bounded wait on cap; children cannot spawn processes by this fixed worker source",
+  "source_sha256": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_operation_witness_01\\probe_stack_sampler_race_v1.py": "d88080a4b08ad5669fb3ea77f3c9e04d409c9233cf7138293e74a76c7a6e50d1",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\h1_gil_stack_observer_development_v1.py": "c1ba462e8716598002e7a7712b3b321c5862b6535b5471a06535c76b74520d2e",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_04\\interpreter_path_policy_v1.json": "1fc8f15125d826e5631d6c8f7504b59eac1d0e0a337a13c0ae956c5bcd9e4531"
+  },
+  "formal_result": false,
+  "resource_admission": false,
+  "interpretation": "A negative C-timer reproduction does not rule out a rare race; this pair alone does not establish full slice stability"
+}

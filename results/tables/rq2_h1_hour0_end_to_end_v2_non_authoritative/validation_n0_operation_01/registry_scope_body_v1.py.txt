@@ -1,0 +1,188 @@
+def _bind_registry_scope():
+    """Private per-owner, per-root numerical proof lifetime; no global result cache."""
+    records={};active={};binding=[None];capability=object()
+    def describe(error):
+        try:return repr(error)
+        except BaseException:return '<'+type(error).__name__+': repr failed>'
+    def snapshot(fn):
+        copy=types.FunctionType(fn.__code__,fn.__globals__,fn.__name__,fn.__defaults__,fn.__closure__)
+        copy.__kwdefaults__=dict(fn.__kwdefaults__ or {});return copy
+    close_arm=snapshot(_close_operation);poison_arm=snapshot(_poison_operation)
+    arm_receipt=snapshot(N0ValidationOperation.receipt)
+    def row(scope):
+        value=records.get(id(scope))
+        if value is None or value['scope'] is not scope:raise ValueError('original registry validation scope required')
+        return value
+    def check(scope):
+        value=row(scope);owner=value['owner'];guard=value['guard']
+        _runtime_check()
+        if (value['closed'] or value['failure'] is not None or vars(scope)
+                or active.get(id(owner)) is not value
+                or value['creator']!=(os.getpid(),threading.get_ident())
+                or owner.closed or owner.poisoned or owner._operation is not guard
+                or owner._original_operation is not guard or not guard.locked()
+                or owner._operation_nonce is not value['nonce'] or value['nonce'] is None
+                or owner.declaration is not value['declaration']):
+            raise ValueError('live registry validation lifetime changed')
+        return value
+    def poison(scope,error):
+        value=row(scope)
+        if value['failure'] is None:value['failure']=describe(error)
+        for operation in value['operations'].values():
+            try:poison_arm(operation,error)
+            except BaseException as failure:
+                value['secondary_failures'].append(describe(failure))
+                try:BaseException.add_note(error,'registry arm poison: '+describe(failure))
+                except BaseException:pass
+    def declare(scope,owner,root,arm,binding_pin,terminal_pin):
+        value=check(scope);pending=value['pending']
+        if (owner is not value['owner'] or pending is None or pending['stage']!='declared'
+                or pending['root']!=str(root) or pending['arm']!=arm
+                or pending['pins']!=(binding_pin,terminal_pin,1)):
+            raise ValueError('exact registry build declaration required')
+    def operation_check(scope,operation):
+        value=check(scope)
+        if not any(item is operation for item in value['operations'].values()):
+            raise ValueError('original registry root operation required')
+    def receipt(scope):
+        value=row(scope);arms=[arm_receipt(op) for op in value['operations'].values()]
+        full=sum(r['full_numerical_hour_replays'] for arm in arms for r in arm['prepares'])
+        fresh=sum(r['fresh_byte_context_revalidations'] for arm in arms for r in arm['prepares'])
+        contexts=sum(arm['context_observations'] for arm in arms)
+        return dict(schema=VERIFIER_SCHEMA,scope='bootstrap_registry_validation',
+            session_identity=value['session'],root_receipts=arms,builds=json.loads(value['builds']),
+            confirmed_builds=value['calls'],full_numerical_hour_replays=full,
+            fresh_byte_context_revalidations=fresh,context_observations=contexts,
+            closed=value['closed'],first_failure=value['failure'],secondary_failures=list(value['secondary_failures']),
+            complete=value['closed'] and value['failure'] is None and value['pending'] is None
+                and bool(arms) and all(item['complete'] for item in arms),
+            formal_execution_ready=False,formal_result=False,resource_admission=False,
+            native_execution_authorized=False)
+    def cleanup(scope,body_error=None):
+        value=row(scope)
+        if value['creator']!=(os.getpid(),threading.get_ident()):raise ValueError('registry cleanup requires creator')
+        if value['closed']:
+            if body_error is not None:poison(scope,body_error)
+            return
+        errors=[]
+        try:
+            check(scope)
+            if value['pending'] is not None:raise ValueError('incomplete registry build at scope close')
+        except BaseException as error:errors.append(error)
+        if body_error is not None:poison(scope,body_error)
+        for error in errors:poison(scope,error)
+        for operation in value['operations'].values():
+            try:close_arm(operation,body_error or (errors[0] if errors else None))
+            except BaseException as error:errors.append(error)
+        value['closed']=True;value['pending']=None
+        if active.get(id(value['owner'])) is value:del active[id(value['owner'])]
+        else:errors.append(ValueError('original registry owner slot changed during cleanup'))
+        if errors:
+            poison(scope,body_error or errors[0])
+            if body_error is not None:
+                for error in errors:body_error.add_note('registry validation cleanup: '+repr(error))
+            else:
+                for error in errors[1:]:errors[0].add_note('additional registry cleanup: '+repr(error))
+                raise errors[0]
+    class RegistryValidationScope(prior_witness._PrivateResult):
+        def __init__(self,owner,*,_bootstrap_capability=None):
+            _runtime_check()
+            from experiments import h1_bootstrap_integration_development_v4 as bootstrap
+            if (_bootstrap_capability is not capability or binding[0] is None
+                    or type(owner) is not binding[0][0] or type(owner) is not bootstrap.BootstrapOwner or owner.closed or owner.poisoned
+                    or owner._operation is not owner._original_operation or not owner._operation.locked()
+                    or owner._operation_nonce is None or id(owner) in active):
+                raise ValueError('private authenticated bootstrap registry entry required')
+            binding[0][1](owner)
+            records[id(self)]=dict(scope=self,owner=owner,guard=owner._original_operation,
+                nonce=owner._operation_nonce,declaration=owner.declaration,
+                creator=(os.getpid(),threading.get_ident()),session=token_hex(32),
+                closed=False,failure=None,pending=None,operations={},slots={},calls=0,builds=io.encode([]),secondary_failures=[])
+        def __enter__(self):
+            value=row(self)
+            if value['closed'] or id(value['owner']) in active:raise ValueError('single-use registry validation scope required')
+            active[id(value['owner'])]=value;check(self);return self
+        def begin_build(self,owner,root,arm,site):
+            value=check(self)
+            if (owner is not value['owner'] or value['pending'] is not None
+                    or value['calls']>=MAX_REGISTRY_ROOTS*MAX_REGISTRY_PREPARES
+                    or type(site) is not str or not site or type(arm) is not str):
+                raise ValueError('bounded nonreentrant registry build required')
+            value['pending']=dict(root=str(root),arm=arm,site=site,stage='started',pins=None,
+                operation=None,ticket=None,envelope=None)
+        def prepare(self,root,*,expected_binding_sha256,expected_terminal_sha256,completed_hours):
+            value=check(self);pending=value['pending'];pins=(expected_binding_sha256,expected_terminal_sha256,completed_hours)
+            if pending is None or pending['stage']!='started' or pending['root']!=str(root):
+                raise ValueError('current complete registry build required')
+            key=(str(root),*pins);arm=pending['arm'];old=value['slots'].get(arm)
+            if old is not None and old!=key:raise ValueError('registry slot root or pins changed')
+            if key in value['operations'] and old!=key:raise ValueError('registry root reused by foreign slot')
+            if key not in value['operations'] and len(value['operations'])>=MAX_REGISTRY_ROOTS:
+                raise ValueError('bounded registry root count exceeded')
+            pending['pins']=pins;pending['stage']='declared'
+            if key not in value['operations']:
+                operation=N0ValidationOperation(root,arm_id=arm,
+                    expected_binding_sha256=expected_binding_sha256,expected_terminal_sha256=expected_terminal_sha256,
+                    completed_hours=completed_hours,_bootstrap_owner=value['owner'],_registry_scope=self,
+                    maximum_prepares=MAX_REGISTRY_PREPARES)
+                value['operations'][key]=operation;value['slots'][arm]=key
+                operation.__enter__()
+            operation=value['operations'][key]
+            ticket=operation.begin_build(value['owner'],'build_'+str(operation._attempts+1).zfill(3))
+            pending.update(operation=operation,ticket=ticket,stage='preparing')
+            envelope=operation.prepare();pending.update(envelope=envelope,stage='prepared')
+            return envelope
+        def confirm_build(self,body):
+            value=check(self);pending=value['pending']
+            if (pending is None or pending['stage']!='prepared' or type(body) is not dict
+                    or body.get('slot_id')!=pending['arm'] or body.get('controller_root')!=pending['root']
+                    or (body.get('controller_binding_sha256'),body.get('controller_terminal_sha256'),1)!=pending['pins']):
+                raise ValueError('complete registry body/root/pins required')
+            operation=pending['operation'];operation.confirm_build(pending['ticket'],body)
+            builds=json.loads(value['builds']);envelope=pending['envelope']
+            builds.append(dict(build=value['calls']+1,slot_id=pending['arm'],controller_root=pending['root'],
+                caller_site=pending['site'],body_sha256=io.digest(io.encode(body)),
+                envelope_identity=envelope.envelope_identity,execution=json.loads(envelope.execution_receipt)))
+            value['builds']=io.encode(builds);value['calls']+=1;value['pending']=None
+        def receipt(self):return receipt(self)
+        def close(self):return cleanup(self)
+        def __exit__(self,kind,value,tb):return cleanup(self,value)
+    def guard(function,*,enter=False,closed=False):
+        def checked(self,*args,**kwargs):
+            try:
+                _runtime_check()
+                if not enter and not closed:check(self)
+                result=function(self,*args,**kwargs)
+                _runtime_check()
+                if not closed:check(self)
+                return result
+            except BaseException as error:
+                poison(self,error)
+                if enter:
+                    try:cleanup(self,error)
+                    except BaseException as failure:error.add_note('registry entry cleanup: '+repr(failure))
+                raise
+        return checked
+    for name in ('__enter__','begin_build','prepare','confirm_build','receipt'):
+        setattr(RegistryValidationScope,name,guard(getattr(RegistryValidationScope,name),
+            enter=name=='__enter__',closed=name=='receipt'))
+    def current(owner):
+        value=active.get(id(owner))
+        if value is None:return None
+        try:check(value['scope']);return value['scope']
+        except BaseException as error:poison(value['scope'],error);raise
+    def bind_bootstrap(owner_type,owner_check):
+        module=sys.modules.get('experiments.h1_bootstrap_integration_development_v4')
+        if (binding[0] is not None or module is None or vars(module).get('BootstrapOwner') is not owner_type
+                or vars(owner_type).get('_check') is not owner_check or type(owner_check) is not types.FunctionType):
+            raise ValueError('one definition-time exact bootstrap registry binding required')
+        binding[0]=(owner_type,snapshot(owner_check))
+        def open_scope(owner):return RegistryValidationScope(owner,_bootstrap_capability=capability)
+        return open_scope
+    return RegistryValidationScope,current,declare,operation_check,cleanup,poison,receipt,bind_bootstrap
+
+
+(RegistryValidationScope,registry_validation_scope,_registry_declare_operation,
+ _registry_check_operation,_close_registry_scope,_poison_registry_scope,
+ _registry_scope_receipt,_bind_registry_bootstrap)=_bind_registry_scope()
+

@@ -1,0 +1,90 @@
+{
+  "status": "SCOPED_SAMPLER_RACE_REPRODUCED_AND_SUCCESSOR_UNIT_CHECKS_COMPLETE",
+  "native_event": {
+    "id": 1000,
+    "record_id": 115290,
+    "time_utc": "2026-10-17T12:49:01.1531435Z",
+    "event_data": {
+      "ModulePath": "D:\\Miniconda3\\envs\\compute\\python312.dll",
+      "PackageFullName": "",
+      "AppPath": "D:\\Miniconda3\\envs\\compute\\python.exe",
+      "PackageRelativeAppId": "",
+      "ModuleTimeStamp": "68f7e801",
+      "AppTimeStamp": "68f7e7d0",
+      "ExceptionCode": "c0000005",
+      "ProcessCreationTime": "0x1dd5e35e069547b",
+      "FaultingOffset": "00000000002fc0a0",
+      "ModuleName": "python312.dll",
+      "ProcessId": "0xe9fc",
+      "ModuleVersion": "3.12.12150.1013",
+      "AppName": "python.exe",
+      "AppVersion": "3.12.12150.1013",
+      "IntegratorReportId": "5e3af11f-1465-4843-866d-455b9862ec2e"
+    }
+  },
+  "original_slice_fault_rva": "0x2fbfe7",
+  "reproduced_fault_rva": "0x2fc0a0",
+  "same_unwind_range": [
+    "0x2fbfc0",
+    "0x2fc4d5"
+  ],
+  "fault_inference": "Both faults are inside the same traceback-dump function range; exact native symbols/minidump unavailable. Strong support for the asynchronous C-dump race, not an exclusion of every other native fault.",
+  "root_tool_terminal_observation": {
+    "session_id": 13913,
+    "chunk_id": "768d89",
+    "exit_code": 0,
+    "source": "root transcription of the actual unified-exec write_stdin result; not inferred from comparison.json",
+    "wall_time_seconds": 8.4e-06
+  },
+  "plan_erratum": {
+    "original_field": "worker_subprocesses_spawned=0",
+    "corrected_meaning": {
+      "direct_worker_processes_spawned": 2,
+      "worker_descendants_spawned": 0
+    },
+    "original_plan_and_driver_preserved": true
+  },
+  "evidence_scope": {
+    "pair_uses_archived_pre_cleanup_fix_helper": true,
+    "archived_helper_sha256": "c1ba462e8716598002e7a7712b3b321c5862b6535b5471a06535c76b74520d2e",
+    "current_helper_sha256": "0a93822437e569227ecc3252dc817fd517e7492a6aa08d5e5d571b3791c3669d",
+    "current_helper_changes": "receipt scope narrowed; join failures sticky with one bounded retry and status recording",
+    "current_helper_tests_passed": 13,
+    "current_helper_test_exit_code": 0,
+    "fresh_pair_repeated": false,
+    "full_slice_stability_verified": false
+  },
+  "observed_direct_worker_pids_absent": true,
+  "official_review_verdict": null,
+  "full_hour0_chain_passed": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "files_sha256": {
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/postcheck_stack_sampler_pair_v1.py": "3aece061ca93356023b37af4baa32d35c9e69985a82c05d510ac172d2b295673",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/plan.json": "10413e6ae0e523b875a1fdd33e9a1aae29505a2892dfc840836845e015cfc4bc",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/comparison.json": "cd0588ca0ef6ee430fed1fd61407516334e612552f2756ccda98879a6436e34b",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/windows_crash_event.json": "beb2c1c3273b6d51e3907353519c03daaaa744ba5fd7144cf6e989798d093422",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/c_timer/terminal.json": "d563fc270b4cae7f423efdbc1056ffe0e3d49eba7f980358bfb6c819c604227b",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/c_timer/stack.log": "ea649b653a54f85ff18ac594c1e7e950491445e5e384be43dbefa9e6c8912ea2",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/c_timer/stdout.log": "9dfbb43c6fd2b8990a5d57813242de4ff313daafbe1d7b256ce23c52a5a66fcc",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/python_sampler/terminal.json": "4d5f0a2e0b5c6713405f6a26148141d62b72132f418298b1c2ebc16c948b534a",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/python_sampler/stack.jsonl": "9ed8d5fd49bb77660cdcc3ccdf2b5213f633fae8176dc7e1ad19329dd07ce14a",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/python_sampler/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/python_sampler/result.json": "428f62bf250ff8605066bda11ede9c8d94775d457544197e512518f38f19f8c0",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_observer_unit_02/request.json": "ae3a11f389cde9c1e046b9f25498c00f4d8a3e6ab6fab11cf33a1c68898b2c79",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_observer_unit_02/terminal.json": "ffa73760b350abc0560a97344399aa4ed5f37aac59e86fd99f86d3b5f30ee2ad",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_observer_unit_02/stdout.log": "cfcdb00e2a2de6cd8079b7d7e765d416d01e8ff13e6e5032e44e6b008b226f51",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_observer_unit_02/observer_non_authoritative/source_postcheck.json": "facbcc975e859ebb0057a121c7e63998ee045bec822e0308a3c7c68afd397607",
+    "tests/h1_gil_stack_observer_development_v1.py": "0a93822437e569227ecc3252dc817fd517e7492a6aa08d5e5d571b3791c3669d",
+    "tests/test_h1_gil_stack_observer_development_v1.py": "ae176a89673d6fcadd2e4110c496aa5cded7e8efd3c7556dcf822cfb4b44b19a",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/tested_bytes/h1_gil_stack_observer_development_v1.py": "c1ba462e8716598002e7a7712b3b321c5862b6535b5471a06535c76b74520d2e",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/tested_bytes/interpreter_path_policy_v1.json": "1fc8f15125d826e5631d6c8f7504b59eac1d0e0a337a13c0ae956c5bcd9e4531",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/tested_bytes/probe_stack_sampler_race_v1.py": "d88080a4b08ad5669fb3ea77f3c9e04d409c9233cf7138293e74a76c7a6e50d1",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/stack_sampler_churn_pair_01/postcheck_and_erratum_01.json": "bd3e6fa8e291e86dac091c2652763a241cd949e16bfc8b2aacaa0bcbef7469de",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/close_sampler_evidence_v1.py": "a880da4e22ddd53aba4976b1b37afeda3fa2b07547d74ddd6ba200be80719bf4"
+  },
+  "pid_creation_correspondence": true,
+  "event_creation_time_unix": 1792241338.2259827,
+  "terminal_creation_time_unix": 1792241338.2259836,
+  "absolute_creation_time_difference_seconds": 9.5367431640625e-07
+}

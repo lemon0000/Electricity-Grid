@@ -1,0 +1,35 @@
+{
+  "status": "SCOPED_PRE_SEAL_FINDINGS_CLOSED_FOR_ONE_BOUNDED_DIAGNOSTIC",
+  "reviewer": "/root/restart_review",
+  "resolved_findings": [
+    "F1 cache/late import chronology",
+    "F2 observed-PID cleanup semantics",
+    "F3 final storage",
+    "F4 exact argv/comparison scope",
+    "early preload refusal and strict9 count"
+  ],
+  "review_summary": "Final a6eba4 package has no new scoped blocking finding; actual numerical/timing slice remains to be measured",
+  "files_sha256": {
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_operation_witness_01\\common_slice_plan_03.json": "c36371fa39fd4f4fc1c6b40b5d8405a9617f3f0ff2cfbd85b0930aaf1884e592",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_05\\package_manifest_v1.json": "a6eba4f2921b51dcf105cf9dbf4373464b5acef94097a62593f906c3f83cb1cc",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_05\\launch_validation.py": "542678215f9da158d883d57d4f213b12edda1de6140f85707b7350d37fd37a3f",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\run_bounded_configured_entry_v4.py": "f35732e7e1fade7e3053fc6be02b6b69a6984f6209b5bfd4ea36fce33bf4b65e",
+    "tests\\h1_guarded_common_slice_helpers_development_v1.py": "aaf9cedbe20e41218943e082d8a47e869ccf78b6d7fd8b0a9af130ee5f004970",
+    "tests\\test_h1_guarded_common_slice_development_v1.py": "9215b1e97e750abe730c02c07450467ef1149d1cad214d4df10fd0b4417b5f39",
+    "tests\\test_h1_common_slice_monitor_development_v1.py": "738e59bb3473c18ae5935aa8ae1c0e9e3aa81370790968e61be7446063507c97",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\configured_entry_05_unit_monitor_03\\terminal.json": "e5794dd8fd670b32998382a8de6b9795e37a73db222cc9c0b6b7599a9c2cb6ec",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_05\\unit_checks_03\\terminal.json": "702e314cc4b28111b199a525117267e4dfa1b4b884ae4b1a65c4370a4c8c234d",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_operation_witness_01\\slice_monitor_unit_04\\request.json": "3dc250cdc42f2532f9adbf63d3a187000b04596d8b4f99297e517255dc535d8a",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_operation_witness_01\\slice_monitor_unit_04\\terminal.json": "1bf0fd433ca355995f1723d72952269177997f21bd5fe27aabc9c9029bbf5603"
+  },
+  "resource_scope": "one 600s synthetic diagnostic, sampled1GiB and128MiB new outputs; freshD shortroot",
+  "observed_process_scope_only": true,
+  "complete_process_tree_absence_proven": false,
+  "official_review_verdict": null,
+  "actual_common_slice_passed": false,
+  "full_chain_passed": false,
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

@@ -1,0 +1,36 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "question": "Measure four predecessor historical preparations versus four confirmed N0 proof builds; prove exact saved science and full fallback.",
+  "scope": "one fixed network-only saved arm, hour0 only",
+  "attempts": 1,
+  "predecessor_prepares": 4,
+  "candidate_prepares": 4,
+  "fallback_prepares": 1,
+  "limits": {
+    "wall_seconds": 360,
+    "sampled_tree_rss_mib": 768,
+    "output_storage_mib": 128
+  },
+  "stop": "first mismatch/failure or any resource cap; no retry without cause-specific correction",
+  "native_calls": 0,
+  "formal_result": false,
+  "resource_admission": false,
+  "full_hour0_chain_passed": false,
+  "actual_bootstrap_registration": false,
+  "predecessor_package_manifest_sha256": "ab0ad89e7efa04c57185dca779a822ea5ae70fc07c0fbb2cd92f2e03360f1925",
+  "source_sha256": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\measure_saved_n0_v1.py": "02b476668d2f49ba4d80645fd06f132ee5967e708e0767b67ebf9e0c44d1612a",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\run_unit_bounded_v1.py": "00f4ff36465ef1815c9471e4d068bef2760b73ef2de666f03ca673b0ec8b0891",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_n0_verifier_development_v2.py": "407e8056d08f3c60a955f540a9bc7155319549a4a40834501657fd54f908f6ea",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bootstrap_integration_development_v3.py": "27b3eec94f2e6f433e41a00740143b3a20929575b4304c27d7bb145ecf9f9fa2",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_owned_bootstrap_controller_development_v3.py": "f8c8784f35dbb55a09b8e9fa2be9692865bcae72887e8839b1b91aa9030d8562"
+  },
+  "expected_call_counts": {
+    "before_full": 16,
+    "before_fresh": 16,
+    "after_full": 4,
+    "after_fresh": 28,
+    "context_evaluations_each": 64
+  },
+  "known_remaining": "owner implementation identity and complete N0/bootstrap/full-chain costs are outside this saved verifier comparison"
+}

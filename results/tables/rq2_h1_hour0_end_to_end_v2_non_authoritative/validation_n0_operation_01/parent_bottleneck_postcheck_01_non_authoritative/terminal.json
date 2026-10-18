@@ -1,0 +1,226 @@
+{
+  "schema": "h1_parent_bottleneck_postcheck_development_v1",
+  "exit_code": 0,
+  "scope": "static call-DAG and incomplete bounded-prefix evidence reconciliation",
+  "runtime_optimization_implemented": false,
+  "full_hour0_chain_passed": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "call_sites": [
+    {
+      "file": "experiments/h1_selector_parent_controller_development_v2.py",
+      "owner": "Parent",
+      "function": "_source",
+      "target": "preparation.prepare",
+      "lines": [
+        165
+      ],
+      "sites": 1
+    },
+    {
+      "file": "experiments/h1_selector_parent_controller_development_v2.py",
+      "owner": "Parent",
+      "function": "_source",
+      "target": "preparation.bind",
+      "lines": [
+        167
+      ],
+      "sites": 1
+    },
+    {
+      "file": "experiments/h1_selector_launch_preparation_development_v2.py",
+      "owner": null,
+      "function": "prepare",
+      "target": "worker.request_document",
+      "lines": [
+        106,
+        136
+      ],
+      "sites": 2
+    },
+    {
+      "file": "experiments/h1_selector_launch_preparation_development_v2.py",
+      "owner": null,
+      "function": "bind",
+      "target": "prepare_fixed",
+      "lines": [
+        165,
+        177
+      ],
+      "sites": 2
+    },
+    {
+      "file": "experiments/h1_selector_released_worker_development_v2.py",
+      "owner": null,
+      "function": "request_document",
+      "target": "snapshot.rebuild",
+      "lines": [
+        85
+      ],
+      "sites": 1
+    },
+    {
+      "file": "experiments/h1_selector_worker_output_inspection_development_v2.py",
+      "owner": null,
+      "function": "_inspect",
+      "target": "_source",
+      "lines": [
+        120,
+        182
+      ],
+      "sites": 2
+    },
+    {
+      "file": "experiments/h1_selector_worker_output_inspection_development_v2.py",
+      "owner": null,
+      "function": "_source",
+      "target": "snapshot.rebuild",
+      "lines": [
+        57
+      ],
+      "sites": 1
+    },
+    {
+      "file": "experiments/h1_selector_input_snapshot_development_v2.py",
+      "owner": null,
+      "function": "rebuild",
+      "target": "_build",
+      "lines": [
+        191,
+        192
+      ],
+      "sites": 2
+    },
+    {
+      "file": "experiments/h1_selector_input_snapshot_development_v2.py",
+      "owner": null,
+      "function": "_build",
+      "target": "phase._fresh",
+      "lines": [
+        128
+      ],
+      "sites": 1
+    },
+    {
+      "file": "experiments/h1_phase_exact_source_current_development_v2.py",
+      "owner": null,
+      "function": "_prepare",
+      "target": "_replay",
+      "lines": [
+        119,
+        137
+      ],
+      "sites": 2
+    },
+    {
+      "file": "experiments/h1_phase_exact_source_current_development_v2.py",
+      "owner": null,
+      "function": "_prepare",
+      "target": "registry.prepare",
+      "lines": [
+        127,
+        149
+      ],
+      "sites": 2
+    },
+    {
+      "file": "experiments/h1_phase_historical_controller_development_v1.py",
+      "owner": null,
+      "function": "_observe_sources",
+      "target": "_source_paths",
+      "lines": [
+        55
+      ],
+      "sites": 1
+    }
+  ],
+  "successful_three_actual_handoff_retained_boundaries": 150,
+  "retained_multiplicity": {
+    "direct_bundle_validate": 52,
+    "direct_records": 8,
+    "recursive_reference": 90
+  },
+  "counts_are_static_conditional_success_path": true,
+  "full_per_retained": {
+    "snapshot_rebuilds": 8,
+    "source_prepares": 16,
+    "full_n0_hour_audits": 64,
+    "fresh_n0_hour_revalidations": 64,
+    "registry_preparations": 32,
+    "registry_loads": 64,
+    "source_window_loads": 128
+  },
+  "full_handoff_retained_subgraph": {
+    "snapshot_rebuilds": 1200,
+    "source_prepares": 2400,
+    "full_n0_hour_audits": 9600,
+    "fresh_n0_hour_revalidations": 9600,
+    "registry_preparations": 4800,
+    "registry_loads": 9600,
+    "source_window_loads": 19200
+  },
+  "excluded_paths": [
+    "four standalone records snapshot rebuilds and sequence inspections",
+    "common calls",
+    "initial producer runs",
+    "close/reopen independent replay",
+    "negative tests",
+    "other Handoff correspondence checks"
+  ],
+  "prefix_observation": {
+    "seconds": 20.007879000040703,
+    "samples": 348,
+    "inspection_source_samples": 277,
+    "phase_fresh_samples": 261,
+    "numeric_hour_inspect_samples": 96,
+    "open_events": 11626,
+    "open_paths": 317,
+    "not_wall_time_share": true,
+    "complete_dependency_closure_proven": false
+  },
+  "lock_read_erratum": {
+    "original_terminal_bytes_preserved": true,
+    "claim_requiring_correction": "externally_owned_input_locks_not_touched must not mean no read-only opens",
+    "read_only_lock_opens_observed": [
+      {
+        "path": "D:\\h1_chain_07_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\controller_non_authoritative\\job_000_non_authoritative\\worker_non_authoritative\\execution.lock",
+        "calls": 7,
+        "modes": [
+          "r"
+        ],
+        "flags": [
+          32896
+        ]
+      }
+    ],
+    "original_readers_do_not_acquire_writer_byte_range_lock": true,
+    "no_lock_write_or_acquisition_claim_scope": "static original reader paths; outer monitor acquires no input locks",
+    "unchanged_lock_access_time_not_claimed": true,
+    "incomplete_03_open_footprint_does_not_prove_no_lock_opens": true
+  },
+  "closure_assessment": {
+    "whole_parent_cache_admitted": false,
+    "historical_source_paths_alone_sufficient": false,
+    "bootstrap_970_file_phase_inventory_on_this_route": false,
+    "prefix_scope_result_reuse_across_closed_nonce_admitted": false,
+    "next_boundary": "versioned source reconstruction with explicit ordered dependency closure and active execution receipt"
+  },
+  "code_and_input_cleanup_verified": true,
+  "evidence_sha256": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\parent_inspection_footprint_plan_04.json": "ffabb440d68ba04fa58d89e2d2d8c73448581f5f73983d5d362c4cf5020323eb",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\parent_inspection_footprint_monitor_03\\terminal.json": "b8767fc3a13f77a2bdd008492ce0db1eec9b5e54ed026c3abc5941cd72ee39d8",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\parent_inspection_footprint_monitor_04\\terminal.json": "23ff04c840c5456fd1ddcaa0647896c3c34e4dbed297bd3989c5a905cc871dbf",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\parent_inspection_footprint_04_non_authoritative\\terminal.json": "bbc75959b0debee31e7b34e97ad0ee88ca038d9a42f880b01445bfb01c519d84",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\parent_inspection_footprint_04_non_authoritative\\observed_open_prefix.json": "e8c53eaa4c179e6cea4208d97027fd9d97175342fc02132315f0f43436b17efd"
+  },
+  "source_sha256": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_controller_development_v2.py": "7e55ea71a62b9a4bf2a3dc9181052db0af531728a777c5da975038e3eb9f8392",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_launch_preparation_development_v2.py": "2adcba2859bf20deb1bc6de092ba85d3d5222827eb6ac3ce711c73419ea230c1",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_released_worker_development_v2.py": "1fe4df751bb46cd1c36e0459cc8b720280fe00111712463509b7175fccf9dd74",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_worker_output_inspection_development_v2.py": "9e0d8337e336506ce11be8d65dbd2fc7ce47cd0ee45a776675e58b97df82c3a4",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_input_snapshot_development_v2.py": "93c142ac43a464783ad64c416183d7983c89d7d9e9b393fc1a61e6d82ec7ec20",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_exact_source_current_development_v2.py": "a7833594faf3c3fdbf9cbe4b54602e32d17ee855cf04f805e52988ab9ae9c0cd",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_historical_controller_development_v1.py": "51b94263ea3f035fc5974250fe273c66a77c25fed393a3ef146b8bc460d541ed"
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "status": "FAILED_NATIVE_ACCESS_VIOLATION",
+  "observed_utc": "2026-10-17T12:45:19.685254+00:00",
+  "wrapper_tool_exit_code": 1,
+  "child_exit_code": 3221225477,
+  "child_exit_code_hex": "0xc0000005",
+  "resource_stop_reason": null,
+  "outer_terminal": {
+    "exit_code": 3221225477,
+    "observed_owned_processes": [
+      {
+        "pid": 59100,
+        "creation_time": 1792240129.7659836
+      },
+      {
+        "pid": 52052,
+        "creation_time": 1792240382.516847
+      },
+      {
+        "pid": 69524,
+        "creation_time": 1792240382.5529156
+      }
+    ],
+    "observed_owned_processes_remaining": [],
+    "observed_owned_processes_absent": true,
+    "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+    "cleanup_events": [],
+    "descendant_discovery_complete": true,
+    "complete_process_tree_absence_proven": false,
+    "storage_read_errors": [],
+    "cleanup_errors": [],
+    "final_storage_observation_complete": true,
+    "elapsed_seconds": 258.85899999999674,
+    "stop_reason": null,
+    "peak_observed_process_tree_rss": 352792576,
+    "observed_storage_bytes": 20985438,
+    "memory_is_sampled": true,
+    "source_unchanged": true,
+    "source_snapshot_complete": true,
+    "peak_rss_includes_monitor": true,
+    "formal_result": false,
+    "resource_admission": false
+  },
+  "completed_stage_timings": [
+    {
+      "label": "source_and_fixture_setup",
+      "elapsed_seconds": 83.4703739,
+      "interval_seconds": 83.4703739
+    },
+    {
+      "label": "slice_arm_0_open",
+      "elapsed_seconds": 124.5842602,
+      "interval_seconds": 41.1138863
+    }
+  ],
+  "uncompleted_stage": "first N0 bootstrap; no slice_arm_0_N0 timing row",
+  "stages_not_reached": [
+    "second and third N0",
+    "CommonOwnerGenesis",
+    "live Rref",
+    "two successor common calls",
+    "Actual",
+    "paired commit",
+    "close/reopen replay"
+  ],
+  "source_files_unchanged": 788,
+  "tested_source_copies_match": true,
+  "observed_owned_processes_absent": true,
+  "complete_process_tree_absence_proven": false,
+  "short_root_files_unchanged_by_postcheck": 19,
+  "lock_paths_reacquired_and_released": [
+    "D:\\h1_cs01_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\bootstrap_non_authoritative\\execution.lock",
+    "D:\\h1_cs01_non_authoritative\\nt_non_authoritative\\global_claims_non_authoritative\\execution.lock"
+  ],
+  "inner_terminal_present": false,
+  "slice_success_report_present": false,
+  "old_chain_inputs_unchanged": 36,
+  "old_chain_process_observation": [
+    {
+      "pid": 43640,
+      "creation_time": 1792047790.4886127,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\run_validation.py",
+        "chain_07",
+        "tests/test_h1_hour0_end_to_end_development_v2.py"
+      ],
+      "status": "running",
+      "cpu_seconds": 0.234375
+    },
+    {
+      "pid": 27888,
+      "creation_time": 1792047790.668987,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-s",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "D:\\h1_chain_07_non_authoritative",
+        "tests/test_h1_hour0_end_to_end_development_v2.py"
+      ],
+      "status": "running",
+      "cpu_seconds": 189727.65625
+    },
+    {
+      "pid": 42184,
+      "creation_time": 1792047800.3142161,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\supervise_completion_v2.py",
+        "chain_07"
+      ],
+      "status": "running",
+      "cpu_seconds": 23.890625
+    }
+  ],
+  "old_chain_terminal_present": false,
+  "native_fault_evidence": {
+    "windows_wer_selected_fields": {
+      "EventType": "APPCRASH",
+      "EventTime": "134367139828814064",
+      "IsFatal": "1",
+      "Sig[0].Value": "python.exe",
+      "Sig[1].Value": "3.12.12150.1013",
+      "Sig[3].Value": "python312.dll",
+      "Sig[4].Value": "3.12.12150.1013",
+      "Sig[6].Value": "c0000005",
+      "Sig[7].Value": "00000000002fbfe7"
+    },
+    "windows_wer_sha256": "430287696c885544f600d8578042c032199da974dd5a23c5f34e92c28fbc35c0",
+    "python_dll_sha256": "3436d46bb65a87ba3d215df065f010d9fdab18c994caa275b546b8877b5205b2",
+    "fault_rva": "0x2fbfe7",
+    "nearest_exports": [
+      {
+        "name": "_PyTraceBack_Print_Indented",
+        "rva": "0x2fb990",
+        "fault_minus_export": 1623
+      },
+      {
+        "name": "PyTraceBack_Print",
+        "rva": "0x2fbb20",
+        "fault_minus_export": 1223
+      },
+      {
+        "name": "_Py_DumpDecimal",
+        "rva": "0x2fbb50",
+        "fault_minus_export": 1175
+      },
+      {
+        "name": "_Py_DumpHexadecimal",
+        "rva": "0x2fbbe0",
+        "fault_minus_export": 1031
+      },
+      {
+        "name": "_Py_DumpASCII",
+        "rva": "0x2fbc70",
+        "fault_minus_export": 887
+      },
+      {
+        "name": "_Py_DumpTraceback",
+        "rva": "0x2fc500",
+        "fault_minus_export": -1305
+      },
+      {
+        "name": "_Py_DumpTracebackThreads",
+        "rva": "0x2fc510",
+        "fault_minus_export": -1321
+      }
+    ],
+    "containing_unwind_ranges": [
+      {
+        "start_rva": "0x2fbfc0",
+        "end_rva": "0x2fc4d5",
+        "unwind_rva": "0x56ed14"
+      }
+    ],
+    "inference": "RVA lies between dump helpers; truncated fourth timed stack suggests asynchronous faulthandler dump race; exact native cause not proven without symbols or dump"
+  },
+  "unchanged_retry_authorized": false,
+  "longer_budget_justified": false,
+  "full_hour0_chain_passed": false,
+  "full_192_hour_verified": false,
+  "official_review_verdict": null,
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "files_sha256": {
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_operation_witness_01\\postcheck_common_slice_crash_v1.py": "96ef95ac6b19eb5d521a4423c7c9b6f2dde37c12aeae8e221dd1f86e119a7c29",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\configured_entry_05_common_slice_monitor_01\\request.json": "724f9dbb6ef556c4a73580f4e6a6447f76811636633d8d89f1ee7f5cbf7283b1",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\configured_entry_05_common_slice_monitor_01\\terminal.json": "e46cf228f76c91f68fc2772d7aa5225fef61c57b90d9029cd7df638fa7384ce2",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_operation_witness_01\\common_slice_crash_01\\pytest.log": "06f049aa87843adfce05fcfd5fad62661a390fdd9a58b529d804515bfab0b533",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_operation_witness_01\\common_slice_crash_01\\timing.jsonl": "58651e9ec34348ff66225d06eb63dd447d9001c3b56bdc2a9c99700d8c7ead1b",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_operation_witness_01\\common_slice_crash_01\\stack_samples.log": "197f7c6d36086a0c61b717518bee4c5810bbb2b9f0d75f7921d519a24e6c145d"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "question": "Verify actual pytest lifecycle and configured leases on existing routing tests before any full-chain launch",
+  "attempts": 1,
+  "wall_seconds": 120,
+  "sampled_process_tree_rss_mib": 512,
+  "new_artifact_storage_mib": 64,
+  "prior_artifacts_excluded_from_new_storage_budget": true,
+  "target": "tests/test_h1_hour0_routing_development_v2.py",
+  "dag": [
+    "fixed package/source/test pin verification",
+    "explicit isolated path/origin admission",
+    "whole-invocation code/parse/path leases",
+    "pytest configure and collection",
+    "each setup/call/teardown boundary admission",
+    "pytest return and settings restoration",
+    "all terminal/pin/receipt postchecks"
+  ],
+  "real_native_calls": 0,
+  "scientific_target_unchanged": true,
+  "whole_workflow_performance_review_complete": false,
+  "long_chain_launch_admitted": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "manifest_sha256": "f5a144f54c118e4c943835b4a59c2e2cd94336a9c93ac10da5801a4dbb04be7a",
+  "stop": "owned child only on cap or freshness failure; preserve exact tested bytes and terminal; no unchanged retry or cap extension"
+}

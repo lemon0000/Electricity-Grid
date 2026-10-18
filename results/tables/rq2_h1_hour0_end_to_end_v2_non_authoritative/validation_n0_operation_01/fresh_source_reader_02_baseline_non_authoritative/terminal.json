@@ -1,0 +1,14 @@
+{
+  "exit_code": 1,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "full_hour0_chain_passed": false,
+  "live_Parent_credential_issued": false,
+  "complete_Parent_validation": false,
+  "host_lease_and_activation_are_explicit_fakes": false,
+  "synthetic_jobs": 0,
+  "real_native_calls": 0,
+  "error": "Traceback (most recent call last):\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\measure_fresh_source_reader_v1.py\", line 120, in <module>\n    patch=fixture.complete_fixture(fixture.saved.synthetic_source)(Path(plan['fixture_base']))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\replay_saved_with_fixture_v1.py\", line 22, in install\n    patch=original(base)\n          ^^^^^^^^^^^^^^\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\h1_hour0_saved_replay_v2.py\", line 20, in synthetic_source\n    patch=install_child_source(base)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_saved_job_development_v1.py\", line 41, in install_child_source\n    value=supplied.__wrapped__(base,monkeypatch)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_rq2_normal_h1_source_binding_v1.py\", line 19, in supplied\n    root.mkdir()\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_saved_job_development_v1.py\", line 31, in same_mkdir\n    assert path.is_dir()\n           ^^^^^^^^^^^^^\nAssertionError\n",
+  "elapsed_seconds": 9.980261200049426
+}

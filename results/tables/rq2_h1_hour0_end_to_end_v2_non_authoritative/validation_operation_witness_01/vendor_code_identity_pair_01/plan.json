@@ -1,0 +1,27 @@
+{
+  "question": "Do seven exact immutable vendor code files reduce the observed solver identity fallback cost?",
+  "modes": [
+    "baseline",
+    "vendor7",
+    "vendor7",
+    "baseline"
+  ],
+  "attempts_per_mode": 2,
+  "targets": {
+    "adapter": 32,
+    "parent": 8,
+    "bootstrap": 1
+  },
+  "per_child_wall_seconds": 45,
+  "aggregate_sampled_rss_cap_bytes": 536870912,
+  "storage_cap_bytes": 67108864,
+  "maximum_concurrency": 1,
+  "profiled_counts": "one separate untimed call per target; timed loops have no profiler",
+  "unchanged_core": "original CodeReadLease bytes; same stock metadata parsing lease and discovery; only cache file set/root differ",
+  "stop": "first failed/capped worker stops whole pair; preserve all bytes; no retry",
+  "source_sha256": "e40e28febedb7fa53620bb239d99ac760cdc4480cc3a9f9b8b7fc4bdfe94d0b9",
+  "formal_result": false,
+  "resource_admission": false,
+  "real_native_calls": 0,
+  "full_chain_launch_admitted": false
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "h1_metadata_path_order_probe_plan_development_v1",
+  "scope": "eight fixed D SDK distribution version lookups; no repository scientific/model imports or saved-input access; only fixed diagnostic helpers compiled",
+  "question": "Does putting D site-packages before C support root reduce repeated stock distribution search cost without changing selected paths/versions?",
+  "modes": ["c_first", "d_first"],
+  "attempts_per_mode": 1,
+  "warmup_per_mode": "one stock distribution selection for each name",
+  "measured_lookups_per_mode": 4000,
+  "budget_per_mode": {"wall_seconds": 30, "sampled_rss_mib": 512, "new_artifact_mib": 64},
+  "execution": "sequential fresh -I -B processes under existing bounded unit monitor; output nested in monitored directory",
+  "stop": "budget/guard/source/METADATA/path/selection mismatch stops that mode; no unchanged retry or budget increase",
+  "distribution_discovery_cached": false,
+  "stock_version_and_distribution_functions_changed": false,
+  "scientific_outputs_executed": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "whole_workflow_performance_review_complete": false,
+  "long_chain_launch_admitted": false
+}

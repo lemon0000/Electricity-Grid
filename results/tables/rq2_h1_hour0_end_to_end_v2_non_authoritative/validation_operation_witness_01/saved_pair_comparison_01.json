@@ -1,0 +1,73 @@
+{
+  "schema": "h1_operation_historical_saved_pair_development_v1",
+  "scope": "one fixed saved arm; two historical-only prepares per fresh process; one pair",
+  "diagnostic_manifest_sha256": "5dec7d5766827cb56e3bc441c13d3205f10dd231f48fcab6ce508db298604378",
+  "summary": {
+    "full_only": {
+      "oracle_seconds": 27.599454500013962,
+      "prepare_seconds": [
+        28.54080519999843,
+        28.685692400031257
+      ],
+      "two_prepare_seconds": 57.22649760002969,
+      "full_calls": 8,
+      "context_evaluations": 32,
+      "observed_peak_rss_bytes": 221323264,
+      "observed_new_artifact_bytes": 10895803,
+      "saved_lock_files": 33
+    },
+    "operation": {
+      "oracle_seconds": 27.111594600020908,
+      "prepare_seconds": [
+        28.098218400031328,
+        19.47087580000516
+      ],
+      "two_prepare_seconds": 47.56909420003649,
+      "full_calls": 4,
+      "context_evaluations": 32,
+      "observed_peak_rss_bytes": 220909568,
+      "observed_new_artifact_bytes": 10895753,
+      "saved_lock_files": 33
+    }
+  },
+  "source_files": 783,
+  "saved_files": 461,
+  "source_and_saved_inputs_exact_equal": true,
+  "scientific_audit_exact_equal_across_modes": true,
+  "two_prepare_fraction_saved": 0.1687575477271247,
+  "sampled_limits_observed": true,
+  "observed_owned_processes_absent": true,
+  "saved_lock_inventory_reacquired": true,
+  "process_cleanup_scope": "PID plus creation time; observed owned tree only",
+  "real_native_calls": 0,
+  "second_prepare_fraction_saved": 0.3212338914997239,
+  "local_performance_gate": "positive_single_pair",
+  "effect_uncertainty": "one pair only; no full-chain runtime estimate",
+  "evidence_sha256": {
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/full_only_01/request.json": "f15c335ff62c0e979bb9d5f690e3e4b97c357f1bd1332217e20b86b1c2a07586",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/full_only_01/terminal.json": "e3a6e0c08c4c2db40058fef71cff2da6b5dd6416a332a00473904a8bc8594d68",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/full_only_01/attempt_non_authoritative/request.json": "b12b758e748fe506e567d4fbfd19cd6e8e44d704be132906ddc387911aa10e5f",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/full_only_01/attempt_non_authoritative/terminal.json": "9fd73d0be9f06dd2f75403669ecd3d726c8f86cd658c2130aeb9447007a790eb",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/full_only_01/attempt_non_authoritative/operation_receipt.json": "e3fa3538984c60a81c8c4488786b4417705916f7fa23222a4fa40c13ad7b9b52",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/full_only_01/attempt_non_authoritative/oracle_scientific.json": "b1b28177ad7a4d47240a033e8b63282daf1ba2abc35c343a4aad3eaed8da77dd",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/full_only_01/attempt_non_authoritative/oracle_audit.json": "3ac302a01b89bfdba33673f6b20ec9f64ec3f26492bf46770a6aac99e0814897",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/full_only_01/attempt_non_authoritative/prepare_1.json": "2fb62ccc5cdfe3da112a7d2f2ebaa44e10e9b171e512374f9503a612be8440f7",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/full_only_01/attempt_non_authoritative/prepare_2.json": "d7cb59e9e8b9b6ef368f3aa61b4ce9be84757de85c13d01d74eb9114a055c37d",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/operation_01/request.json": "4a2cb7e2bc63fc73bc53fb969c63717673840b4074ef27c0be4dab99f4aa0ddc",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/operation_01/terminal.json": "bbd018ffe063b666a0a9976924497d6ed2d9c586e2a1f752c7fd7addce8135e5",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/operation_01/attempt_non_authoritative/request.json": "3cda9e11294d3ed685f5e488d1bce15f3ae94893df74c1a21b8633c6d5571466",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/operation_01/attempt_non_authoritative/terminal.json": "d3d93f41622ebad538bb3821367233667eaa54ed5cc7289fa09a919d230427f5",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/operation_01/attempt_non_authoritative/operation_receipt.json": "bcb1af13f222d9d5b19e43812004cd11a7cc4472623c599edc035837a67fc08c",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/operation_01/attempt_non_authoritative/oracle_scientific.json": "b1b28177ad7a4d47240a033e8b63282daf1ba2abc35c343a4aad3eaed8da77dd",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/operation_01/attempt_non_authoritative/oracle_audit.json": "3ac302a01b89bfdba33673f6b20ec9f64ec3f26492bf46770a6aac99e0814897",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/operation_01/attempt_non_authoritative/prepare_1.json": "6eac88fbb2d64f71f0ff81fa55f437ce7dbd5c784872edaad2175499e8a89c10",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/operation_01/attempt_non_authoritative/prepare_2.json": "65446f848eef317d8db23cdb636dc02c9394ec567d3e9793a56be39d43afb1fb"
+  },
+  "production_handoff_integrated": false,
+  "whole_workflow_performance_review_complete": false,
+  "long_chain_launch_admitted": false,
+  "full_chain_passed": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

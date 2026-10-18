@@ -1,0 +1,59 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "question": "Does exact seven-file vendor code reuse reduce a saved real arm validation with identical science and audit?",
+  "package_manifest_sha256": "6f4caac53ef09d4d90e919c8ffa610869635655a5bcf0db8521d20ccd3b6a706",
+  "predecessor_package_manifest_sha256": "6c0db76dd3bbcfb8281e69d7ad70cc18caaf7adef4d120c0aebb30bbcedef03d",
+  "unchanged_code_read_lease_sha256": "813681de527a9c5c38185482af5ac583e79d9f28deb8b6186c11f22a71af80f1",
+  "repository_files": 149,
+  "test_closure_files": 614,
+  "vendor_files": 7,
+  "vendor_bytes": 128055,
+  "code_lease_root": "D:/",
+  "monitor": "run_bounded_configured_entry_v8.py",
+  "monitor_sha256": "4895ddf4a1e903c95ecdb6dd14c3141b0441a1d28217807d0612e0864bd6e93f",
+  "unit_role": [
+    "unit",
+    "parse",
+    "unit_checks_07"
+  ],
+  "unit_limits": {
+    "count": 1,
+    "wall_seconds": 120,
+    "sampled_rss_mib": 512,
+    "storage_mib": 64
+  },
+  "saved_arm_roles": [
+    {
+      "entry": "entry_revision_06",
+      "kind": "arm",
+      "mode": "parse",
+      "label": "vendor_saved_arm_01"
+    },
+    {
+      "entry": "entry_revision_07",
+      "kind": "arm",
+      "mode": "parse",
+      "label": "vendor_saved_arm_01"
+    }
+  ],
+  "saved_arm_limits": {
+    "count_per_entry": 1,
+    "wall_seconds_per_entry": 120,
+    "sampled_rss_mib": 512,
+    "storage_mib": 64,
+    "concurrency": 1
+  },
+  "stop": "first failed/capped stage; no automatic retry; all source/saved inputs must remain unchanged",
+  "original_identity_functions_unchanged": true,
+  "stock_metadata_discovery_unchanged": true,
+  "unknown_reads": "original Path.read_bytes fallback; no result/input caching",
+  "scientific_oracle": "saved original common._arm scientific payload and projected audit, plus direct two-entry differential",
+  "full_chain_speedup_measured": false,
+  "full_hour0_chain_passed": false,
+  "full_chain_launch_admitted": false,
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "preserved_failed_unit": "unit_checks_06:90 pass,2 fail,1 error,1 skip; common import loaded vendors before union lease; moved import inside lease"
+}

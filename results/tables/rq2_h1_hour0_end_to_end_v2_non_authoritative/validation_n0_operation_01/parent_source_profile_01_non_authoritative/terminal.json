@@ -1,0 +1,14 @@
+{
+  "exit_code": 1,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "full_hour0_chain_passed": false,
+  "live_Parent_credential_issued": false,
+  "complete_Parent_validation": false,
+  "host_lease_and_activation_are_explicit_fakes": false,
+  "synthetic_jobs": 0,
+  "real_native_calls": 0,
+  "error": "Traceback (most recent call last):\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\measure_parent_source_profile_v1.py\", line 66, in <module>\n    lease=stack.enter_context(bounded.BoundedStableReadLease(\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Miniconda3\\envs\\compute\\Lib\\contextlib.py\", line 526, in enter_context\n    result = _enter(cm)\n             ^^^^^^^^^^\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\bounded_stable_read_entry_v2.py\", line 289, in __enter__\n    enter_code(lease)\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_07\\code_read_lease.py\", line 140, in __enter__\n    if sha256(raw).hexdigest()!=self._expected[path]:raise ValueError('expected code bytes differ')\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: expected code bytes differ\n",
+  "elapsed_seconds": 0.35073010000633076
+}

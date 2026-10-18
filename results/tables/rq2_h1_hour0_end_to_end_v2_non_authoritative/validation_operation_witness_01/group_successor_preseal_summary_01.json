@@ -1,0 +1,29 @@
+{
+  "status": "SCOPED_PRE_SEAL_FINDINGS_CLOSED_NONAUTHORITATIVE",
+  "reviewer": "/root/restart_review",
+  "review_scope": "final four source bytes and unit/cold definition evidence only",
+  "review_summary": "B1-B10 closed in reviewed scope; no new static blocker found; real slice, numerical/performance and full-chain acceptance remain open",
+  "reviewed_sha256": {
+    "experiments/h1_common_validation_operation_development_v1.py": "26bd897ac9de691812966972691692eb94a9fa627c2b77fdf49486b539f0ea55",
+    "experiments/h1_operation_historical_witness_development_v2.py": "3bec3fe87d7a18201b5edd2095e6952f4143c71f60a73af4a305799e7a7152ef",
+    "experiments/h1_phase_exact_source_current_development_v3.py": "0ac170f443977c51b94c336ebd30251745fc503a5d3d226a636affda76e19006",
+    "experiments/h1_group_n0_common_input_binding_development_v3.py": "f1c97a388199e9424e092142780b1e53b0c6f257cc44295faa0875727110ae6e",
+    "tests/test_h1_group_operation_witness_development_v2.py": "2d9584c4e208b9ced35f4912821137b52afe0d00aa288d08f0fa382d7316a510",
+    "tests/test_h1_common_validation_operation_development_v1.py": "5f860dadfbdcf34757751e5c4101f835ee08345b1c9107411191f0598c150b1d"
+  },
+  "checks": {
+    "group_unit_06": 49,
+    "bridge_unit_08": 52,
+    "cold_route_definition_02": "actual exit0 with full definition guards"
+  },
+  "postcheck_sha256": "62ebe1ba851ca366d55fd4a28eb220e0ae711c8609d77dc7741e449d1851ad19",
+  "postcheck_actual_terminal_sha256": "acd04be5ed5f81b60a99e9503ec23161e1cbe046d9b7a12e7b9f64c916f78236",
+  "actual_common_slice": false,
+  "production_handoff_integrated": false,
+  "full_chain_passed": false,
+  "official_review_verdict": null,
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

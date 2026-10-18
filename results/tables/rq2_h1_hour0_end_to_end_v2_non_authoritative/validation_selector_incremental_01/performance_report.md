@@ -72,3 +72,31 @@ Full three-arm N0/common/Rref/Actual/paired-commit/reopen/replay acceptance,
 whole-workflow performance admission, 192-hour producer coverage, resource
 admission, seal, official review and formal execution remain open. The original
 chain_07 continues with its original code and timing records.
+
+An explicit interpreter-path successor subsequently produced a measured local
+benefit without changing stock distribution discovery. The standard and
+configured saved-capsule audits were each run once: Rref 11.463455 to 9.821175
+seconds, Actual 7.658076 to 6.800654 seconds. All scientific projections,
+selector records, bridge identities, 140 saved files and 764 source/package pins
+matched; 1,883 shared module origins and file hashes were equal. Five Pyomo
+module aliases to stdlib files were classified explicitly after baseline byte
+equality, rather than mistaken for misplaced SDK modules. The comparison is
+`configured_entry_comparison_02.json`; no audit was repeated for that postcheck.
+
+The standard-only modules were pywin32_bootstrap, win32file and win32pipe; no
+configured-only module was recorded in that pair. Bare `-I` had failed before
+audits because pytest needed user-site Pygments; that attempt remains intact.
+The configured route explicitly retains a pinned support root and removes
+exact duplicate paths. It leaves the original version/distribution functions
+and stock finder active; the existing locked-METADATA parsed-version lease
+still operates within each discovery window.
+
+The successful route is now integrated into the sibling fixed
+`validation_path_optimization_01/entry_revision_03/` package. Its final exact
+e5a789… bytes have a 77-pass/1-skip unit terminal and a 12-pass actual routing
+terminal, plus hash, lifecycle and process postchecks. See
+`validation_path_optimization_01/configured_entry_03_checks_01.json` and
+`docs/model_spec/rq2_h1_configured_validation_entry_development_v1.md`.
+The slower numerical incremental helper remains excluded. This is still
+development/PRE_SEAL evidence; full-chain performance and all formal gates
+remain open.

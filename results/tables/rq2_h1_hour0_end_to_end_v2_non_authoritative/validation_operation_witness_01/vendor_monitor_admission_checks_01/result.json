@@ -1,0 +1,103 @@
+{
+  "exit_code": 0,
+  "negative_cli_cases": [
+    {
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\run_bounded_configured_entry_v10.py",
+        "vendor_invalid_outer_0",
+        "120",
+        "512",
+        "64",
+        "--",
+        "-I",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_06\\launch_validation.py",
+        "unit",
+        "parse",
+        "unit_checks_09"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\run_bounded_configured_entry_v10.py\", line 35, in <module>\n    raise ValueError('predecessor allowed only for the fixed saved-arm comparison')\nValueError: predecessor allowed only for the fixed saved-arm comparison\n",
+      "outputs_absent": true
+    },
+    {
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\run_bounded_configured_entry_v10.py",
+        "vendor_invalid_outer_1",
+        "120",
+        "512",
+        "64",
+        "--",
+        "-I",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_07\\launch_validation.py",
+        "arm",
+        "parse",
+        "bad_role"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\run_bounded_configured_entry_v10.py\", line 38, in <module>\n    raise ValueError('exact bounded saved-arm role required')\nValueError: exact bounded saved-arm role required\n",
+      "outputs_absent": true
+    },
+    {
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\run_bounded_configured_entry_v10.py",
+        "vendor_invalid_outer_2",
+        "121",
+        "512",
+        "64",
+        "--",
+        "-I",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_07\\launch_validation.py",
+        "arm",
+        "parse",
+        "vendor_saved_arm_01"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\run_bounded_configured_entry_v10.py\", line 38, in <module>\n    raise ValueError('exact bounded saved-arm role required')\nValueError: exact bounded saved-arm role required\n",
+      "outputs_absent": true
+    },
+    {
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\run_bounded_configured_entry_v10.py",
+        "vendor_invalid_outer_3",
+        "120",
+        "512",
+        "64",
+        "--",
+        "-I",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_07\\launch_validation.py",
+        "arm",
+        "parse",
+        "vendor_saved_arm_01",
+        "tests/test_h1_guarded_common_slice_development_v2.py"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\run_bounded_configured_entry_v10.py\", line 38, in <module>\n    raise ValueError('exact bounded saved-arm role required')\nValueError: exact bounded saved-arm role required\n",
+      "outputs_absent": true
+    }
+  ],
+  "unchanged_runtime_helper_asts": [
+    "save",
+    "live",
+    "observe",
+    "finish_children",
+    "storage_observation",
+    "include_terminal_storage",
+    "emergency_parent_stop"
+  ],
+  "changed_helper": "snapshot_sources: add fixed vendor files and external snapshots",
+  "monitor_sha256": "1df608bfda15df77114ac9067bdd92026912930d4f957103e3dd7870ae170ee7",
+  "formal_result": false,
+  "full_chain_passed": false
+}

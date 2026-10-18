@@ -1,0 +1,204 @@
+"""Isolated N0 proof-lifetime tests; the science oracle is a separate saved replay."""
+from copy import deepcopy
+from pathlib import Path
+import sys
+from types import ModuleType, SimpleNamespace
+import threading
+
+import pytest
+
+from experiments import h1_historical_n0_verifier_development_v3 as original
+from experiments import h1_bootstrap_integration_development_v4 as bootstrap
+from tests.test_rq2_normal_h1_source_v1 import packet
+
+
+class Lease:
+    def __init__(self):self.closed=False
+    def check(self):
+        if self.closed:raise ValueError('closed lease')
+
+
+@pytest.fixture
+def case(tmp_path,monkeypatch):
+    calls=[];contexts=[];fault=[None];dispatch=[('unit-only-dispatch',)]
+    monkeypatch.setattr(original.prior_witness,'_dispatch_view',lambda caller=None:dispatch[0])
+    def observe(scope,*args):
+        scope._check();contexts.append(len(contexts))
+        if len(contexts)-1==fault[0]:raise OSError('injected context read failure')
+        return ('unit-only-context',)*8+({'snapshot':'unit-only'},)
+    monkeypatch.setattr(original.prior_witness._HourScope,'_context',observe)
+    raw=dict(projection_payload=b'payload',canonical_locks=(20.,1.,20.),native_total_ns=2,
+        full_hour_chain_recomputed=True)
+    def full(*args,**kwargs):calls.append('full');return deepcopy(raw)
+    monkeypatch.setattr(original.hour,'inspect',full)
+    path=Path(original.__file__);name='experiments._h1_n0_unit_'+tmp_path.name
+    fresh=ModuleType(name);fresh.__file__=str(path);fresh.__package__='experiments'
+    monkeypatch.setitem(sys.modules,name,fresh)
+    # Synthetic dependencies are fixed before the definition-time guards. This
+    # fixture exercises the public lifetime without claiming numerical evidence.
+    source=path.read_text(encoding='utf-8')
+    marker='\n_install_runtime_checks()\n';assert source.count(marker)==1
+    exec(compile(source.replace(marker,'\n'),str(path),'exec'),vars(fresh))
+    m=fresh
+    m.implementation_identity=lambda:'c'*64
+    m.verifier_identity=lambda:'d'*64
+    p=packet();boundary=m.parent.source._owned(m.parent.source.H1NormalBoundary,
+        network_identity=p.before.network_identity,completed_hours=1,
+        units=(('G1',True,20.,1),),evidence_role='numerical_lex_candidate')
+    decision=m.current._decision(p,boundary)
+    audit=m.io.encode(dict(schema=m.SCHEMA,implementation=m.implementation_identity(),
+        decision_identity=decision.decision_identity,**{key:False for key in (
+            'policy_visible','common_prefix_publication_verified','detached_consumer_authenticated',
+            'reference_or_actual_ready','formal_execution_ready','formal_result','resource_admission',
+            'native_execution_authorized')}))
+    def project(root,*,_operation,_ticket,**kwargs):
+        for index in range(2):
+            scope=m._OperationHourScope(root,tuple(Lease() for _ in range(4)),caller=m,
+                _operation=_operation,_ticket=_ticket,_prefix_index=index)
+            try:
+                for site in range(4):
+                    scope.inspect(None,None,None,None)
+                    if site in (1,3):
+                        payload=b'payload';projection=m.parent.Projection(m.io.digest(m.io.encode(
+                            [m.parent.CHILD_SCHEMA,m.io.digest(payload)])),payload)
+                        child=m.RevalidatedChildInspection('accepted','a'*64,'a'*64,3,projection,
+                            _token=m._CHILD_TOKEN,_scope=scope)
+                        scope.promote(child)
+                _operation._record_prefix(_ticket,index,scope)
+            finally:scope.close()
+        return decision,audit
+    m._projection=project;m._install_runtime_checks()
+    def create(*,reuse=True,owner=None):
+        return m.N0ValidationOperation(tmp_path,arm_id='a'*64,expected_binding_sha256='a'*64,
+            expected_terminal_sha256='b'*64,reuse_numerical_proof=reuse,maximum_prepares=4,
+            _bootstrap_owner=owner,diagnostic_only=reuse and owner is None)
+    def body(envelope):
+        return dict(controller_root=str(tmp_path),historical_verifier_schema=m.VERIFIER_SCHEMA,
+            historical_validation_contract=m.VERIFIER_SCHEMA,
+            historical_verifier_identity=envelope.verifier_identity,
+            audit_payload_sha256=m.io.digest(envelope.audit_payload))
+    def build(operation,index=None,*,confirm=True):
+        if index is None:index=operation._attempts
+        ticket=operation.begin_build(operation._bootstrap_owner,'build_'+str(index+1).zfill(3))
+        envelope=operation.prepare()
+        if confirm:operation.confirm_build(ticket,body(envelope))
+        return ticket,envelope
+    def owner():
+        value=object.__new__(bootstrap.BootstrapOwner)
+        value.closed=False;value.poisoned=False;value._operation=threading.Lock()
+        value._original_operation=value._operation;value._operation.acquire()
+        value._operation_nonce=object();value.declaration=object()
+        value.roots={'controller':str(tmp_path)};value._slot={'slot_id':'a'*64}
+        return value
+    return SimpleNamespace(m=m,create=create,build=build,body=body,owner=owner,
+        calls=calls,contexts=contexts,fault=fault,dispatch=dispatch,raw=raw)
+
+
+def build_root(case,scope,root,arm,*,site='registry'):
+    scope.begin_build(scope_owner(scope),root,arm,site)
+    envelope=case.m.prepare(root,expected_binding_sha256='a'*64,expected_terminal_sha256='b'*64,
+        completed_hours=1,registry_scope=scope)
+    body=case.body(envelope);body.update(controller_root=str(root),slot_id=arm,
+        controller_binding_sha256='a'*64,controller_terminal_sha256='b'*64)
+    scope.confirm_build(body);return envelope
+
+
+def scope_owner(scope):
+    # Inspect the original private record only in this fault-test fixture.
+    fn=scope.begin_build.__func__
+    closure=dict(zip(fn.__code__.co_freevars,(c.cell_contents for c in fn.__closure__)))
+    check=closure['check'];view=dict(zip(check.__code__.co_freevars,(c.cell_contents for c in check.__closure__)))
+    return view['row'](scope)['owner']
+
+
+def roots(case,tmp_path,count=3):
+    result=[]
+    for i in range(count):
+        path=tmp_path/('root_'+str(i));path.mkdir();result.append((path,str(i+1)*64))
+    return result
+
+
+def test_three_roots_reuse_independent_proofs_across_26_registry_rounds(case,tmp_path):
+    owner=case.owner();declared=roots(case,tmp_path)
+    try:
+        with case.m.RegistryValidationScope(owner) as scope:
+            assert case.m.registry_validation_scope(owner) is scope
+            for iteration in range(26):
+                for root,arm in declared:build_root(case,scope,root,arm)
+        receipt=scope.receipt()
+        assert receipt['complete'] and receipt['confirmed_builds']==78
+        assert receipt['full_numerical_hour_replays']==12
+        assert receipt['fresh_byte_context_revalidations']==3*(4+25*8)
+        assert receipt['context_observations']==78*16 and len(case.calls)==12
+        assert len(receipt['root_receipts'])==3 and case.m.registry_validation_scope(owner) is None
+        assert all(r['closed'] and r['proof_cleared'] and r['complete'] for r in receipt['root_receipts'])
+        assert len({r['controller_root_exact'] for r in receipt['root_receipts']})==3
+        assert not receipt['formal_result'] and not receipt['native_execution_authorized']
+    finally:owner._operation.release()
+
+
+@pytest.mark.parametrize('edge',range(96))
+def test_first_and_reused_context_edges_fail_closed_for_all_roots(case,tmp_path,edge):
+    owner=case.owner();declared=roots(case,tmp_path);case.fault[0]=edge
+    try:
+        with pytest.raises(OSError,match='context read failure'):
+            with case.m.RegistryValidationScope(owner) as scope:
+                for _ in range(2):
+                    for root,arm in declared:build_root(case,scope,root,arm)
+        receipt=scope.receipt()
+        assert not receipt['complete'] and receipt['first_failure']
+        assert all(r['closed'] and r['proof_cleared'] for r in receipt['root_receipts'])
+        assert case.m.registry_validation_scope(owner) is None and len(case.contexts)==edge+1
+    finally:owner._operation.release()
+
+
+@pytest.mark.parametrize('fault',['root','binding','terminal','arm','fourth_root','nonce','guard','declaration'])
+def test_registry_slot_binding_caps_and_owner_drift_rejected(case,tmp_path,fault):
+    owner=case.owner();guard=owner._operation;declared=roots(case,tmp_path,4)
+    try:
+        with pytest.raises(ValueError):
+            with case.m.RegistryValidationScope(owner) as scope:
+                build_root(case,scope,*declared[0])
+                if fault=='fourth_root':
+                    for root,arm in declared[1:]:build_root(case,scope,root,arm)
+                elif fault in ('nonce','guard','declaration'):
+                    if fault=='nonce':owner._operation_nonce=object()
+                    elif fault=='guard':owner._operation=threading.Lock()
+                    else:owner.declaration=object()
+                    build_root(case,scope,*declared[0])
+                else:
+                    root,arm=declared[1] if fault=='root' else declared[0]
+                    if fault=='root':arm=declared[0][1]
+                    if fault=='arm':arm='f'*64
+                    scope.begin_build(owner,root,arm,'registry')
+                    case.m.prepare(root,expected_binding_sha256=('c'*64 if fault=='binding' else 'a'*64),
+                        expected_terminal_sha256=('c'*64 if fault=='terminal' else 'b'*64),
+                        completed_hours=1,registry_scope=scope)
+        assert not scope.receipt()['complete'] and case.m.registry_validation_scope(owner) is None
+    finally:
+        if guard.locked():guard.release()
+
+
+def test_per_root_prepare_limit_is_finite_and_does_not_fall_back(case,tmp_path):
+    owner=case.owner();root,arm=roots(case,tmp_path,1)[0]
+    try:
+        with pytest.raises(ValueError,match='ordinal|bounded'):
+            with case.m.RegistryValidationScope(owner) as scope:
+                for _ in range(65):build_root(case,scope,root,arm)
+        assert len(case.calls)==4 and not scope.receipt()['complete']
+        assert case.m.registry_validation_scope(owner) is None
+    finally:owner._operation.release()
+
+
+def test_first_build_must_be_confirmed_before_another_root_can_start(case,tmp_path):
+    owner=case.owner();declared=roots(case,tmp_path,2)
+    try:
+        with pytest.raises(ValueError,match='nonreentrant'):
+            with case.m.RegistryValidationScope(owner) as scope:
+                root,arm=declared[0];scope.begin_build(owner,root,arm,'registry')
+                case.m.prepare(root,expected_binding_sha256='a'*64,expected_terminal_sha256='b'*64,
+                    completed_hours=1,registry_scope=scope)
+                scope.begin_build(owner,*declared[1],'registry')
+        assert not scope.receipt()['complete'] and case.m.registry_validation_scope(owner) is None
+    finally:owner._operation.release()
+

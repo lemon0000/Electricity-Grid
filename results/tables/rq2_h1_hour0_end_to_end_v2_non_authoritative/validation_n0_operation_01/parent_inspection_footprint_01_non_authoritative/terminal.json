@@ -1,0 +1,15 @@
+{
+  "exit_code": 1,
+  "formal_result": false,
+  "resource_admission": false,
+  "full_hour0_chain_passed": false,
+  "native_execution_authorized": false,
+  "live_Parent_credential_issued": false,
+  "numerical_proof_reuse_admitted": false,
+  "error": "Traceback (most recent call last):\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\measure_parent_inspection_footprint_v1.py\", line 127, in <module>\n    diagnostic = inspection.inspect(worker_root, pins=pins,\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_worker_output_inspection_development_v2.py\", line 207, in inspect\n    return _inspect(root,pins=pins,environment=environment,expected_process_identity=expected_process_identity,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_worker_output_inspection_development_v2.py\", line 120, in _inspect\n    item=_source(raw,root,request);check()\n         ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_worker_output_inspection_development_v2.py\", line 57, in _source\n    item=snapshot.rebuild(raw,expected_sha256=request['snapshot']['sha256'])\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_input_snapshot_development_v2.py\", line 189, in rebuild\n    raise ValueError('canonical snapshot implementation and scope required')\nValueError: canonical snapshot implementation and scope required\n",
+  "source_unchanged": true,
+  "source_drift": [],
+  "old_chain_unchanged": true,
+  "old_chain_drift": [],
+  "elapsed_seconds": 15.57253090001177
+}

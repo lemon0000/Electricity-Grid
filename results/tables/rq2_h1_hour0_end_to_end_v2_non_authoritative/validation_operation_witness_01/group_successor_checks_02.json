@@ -1,0 +1,157 @@
+{
+  "status": "SCOPED_DRAFT_CHECKS_COMPLETE_PENDING_PRESEAL_REVIEW",
+  "checks": {
+    "group_unit_06": {
+      "tests_passed": 49,
+      "terminal": {
+        "exit_code": 0,
+        "elapsed_seconds": 104.56300000002375,
+        "stop_reason": null,
+        "peak_observed_process_tree_rss": 187383808,
+        "observed_storage_bytes": 232218,
+        "memory_is_sampled": true,
+        "source_unchanged": true,
+        "formal_result": false,
+        "resource_admission": false
+      },
+      "started": {
+        "pid": 64152,
+        "creation_time": 1792238134.5204852
+      },
+      "observed_direct_pid_absent": true,
+      "process_scope": "recorded direct PID plus creation time; these unit/definition entries spawn no workers"
+    },
+    "bridge_unit_08": {
+      "tests_passed": 52,
+      "terminal": {
+        "exit_code": 0,
+        "elapsed_seconds": 5.39100000000326,
+        "stop_reason": null,
+        "peak_observed_process_tree_rss": 167129088,
+        "observed_storage_bytes": 266370,
+        "memory_is_sampled": true,
+        "source_unchanged": true,
+        "formal_result": false,
+        "resource_admission": false
+      },
+      "started": {
+        "pid": 62368,
+        "creation_time": 1792238127.7664216
+      },
+      "observed_direct_pid_absent": true,
+      "process_scope": "recorded direct PID plus creation time; these unit/definition entries spawn no workers"
+    },
+    "cold_route_definition_02": {
+      "tests_passed": null,
+      "terminal": {
+        "exit_code": 0,
+        "elapsed_seconds": 3.2810000000172295,
+        "stop_reason": null,
+        "peak_observed_process_tree_rss": 165011456,
+        "observed_storage_bytes": 234891,
+        "memory_is_sampled": true,
+        "source_unchanged": true,
+        "formal_result": false,
+        "resource_admission": false
+      },
+      "started": {
+        "pid": 49736,
+        "creation_time": 1792238266.0743115
+      },
+      "observed_direct_pid_absent": true,
+      "process_scope": "recorded direct PID plus creation time; these unit/definition entries spawn no workers"
+    }
+  },
+  "real_cold_route_definition": {
+    "status": "COLD_DEFINITION_PROBE_ONLY_NONAUTHORITATIVE",
+    "bridge_import_seconds": 2.2477361000492238,
+    "fixed_route_load_seconds": 0.2931618999573402,
+    "final_guard_seconds": 0.23166290001245216,
+    "total_seconds": 2.772560900019016,
+    "route_sources": [
+      {
+        "module": "experiments.h1_common_validation_operation_development_v1",
+        "path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_common_validation_operation_development_v1.py",
+        "sha256": "26bd897ac9de691812966972691692eb94a9fa627c2b77fdf49486b539f0ea55"
+      },
+      {
+        "module": "experiments.h1_group_n0_common_input_binding_development_v3",
+        "path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_group_n0_common_input_binding_development_v3.py",
+        "sha256": "f1c97a388199e9424e092142780b1e53b0c6f257cc44295faa0875727110ae6e"
+      },
+      {
+        "module": "experiments.h1_operation_historical_witness_development_v2",
+        "path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_operation_historical_witness_development_v2.py",
+        "sha256": "3bec3fe87d7a18201b5edd2095e6952f4143c71f60a73af4a305799e7a7152ef"
+      },
+      {
+        "module": "experiments.h1_phase_exact_source_current_development_v3",
+        "path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_exact_source_current_development_v3.py",
+        "sha256": "0ac170f443977c51b94c336ebd30251745fc503a5d3d226a636affda76e19006"
+      }
+    ],
+    "all_final_guards_passed": true,
+    "lease_issued": false,
+    "handoff_token_issued": false,
+    "historical_numerical_replay": false,
+    "actual_common_slice": false,
+    "full_chain_passed": false,
+    "formal_result": false,
+    "resource_admission": false,
+    "native_execution_authorized": false
+  },
+  "old_chain_inputs_unchanged": 36,
+  "files_sha256": {
+    "experiments/h1_group_n0_common_input_binding_development_v3.py": "f1c97a388199e9424e092142780b1e53b0c6f257cc44295faa0875727110ae6e",
+    "tests/test_h1_common_validation_operation_development_v1.py": "5f860dadfbdcf34757751e5c4101f835ee08345b1c9107411191f0598c150b1d",
+    "experiments/h1_phase_exact_source_current_development_v3.py": "0ac170f443977c51b94c336ebd30251745fc503a5d3d226a636affda76e19006",
+    "tests/test_h1_operation_historical_witness_development_v1.py": "d6a0a9413ef43ced30f647be32747147f733a5854ede8b88e332b9c09c159b32",
+    "experiments/h1_operation_historical_witness_development_v2.py": "3bec3fe87d7a18201b5edd2095e6952f4143c71f60a73af4a305799e7a7152ef",
+    "experiments/h1_common_validation_operation_development_v1.py": "26bd897ac9de691812966972691692eb94a9fa627c2b77fdf49486b539f0ea55",
+    "tests/test_h1_group_operation_witness_development_v2.py": "2d9584c4e208b9ced35f4912821137b52afe0d00aa288d08f0fa382d7316a510",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/run_group_unit_v2.py": "9be128a031ca9dead62200f154efa4e48ace542eab3fbdfd0bf3d0bd408cbe2a",
+    "experiments/h1_operation_historical_witness_development_v1.py": "8b91c8184dc934c90f324705bb05104128245594a677a7fcdf1a13daa04a7e6a",
+    "tests/test_h1_operation_exact_source_composition_development_v3.py": "49ab924ffa27689df22e627c2f80266f8e905df1741816a1e7198f46806c7850",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/run_group_unit_bounded_v3.py": "073dd4efdf062856421f9eb9c0133d234ba396c8064d7f7085a29317befff9b6",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_06/request.json": "f474d411f1f30b8fd942533d1f8f236b7dfcf791b94ba2309166ed4abfc253b5",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_06/terminal.json": "52f17358401fc2222cf25cb982c9ddb36e0e3a40f6d6d9760f04ea89a3172935",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_06/started.json": "766f21a433c519657c1778d252e1b55837375647582c0af449d695e25d5d5485",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_06/stdout.log": "a1b8b10cc411d55a90e80689c9c0e140e5de5fb69ddc486ba3c7207d46576caa",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/run_bridge_unit_v1.py": "8a8465edc95aa5e86dc8bb7927204c51b4943839a60a65aafa0f2a8404e7fc7b",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/bridge_unit_08/request.json": "acc980abc6e8df499e2ab2fb00aafed1715c5414352168dbfc3eb3bb53781719",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/bridge_unit_08/terminal.json": "d8c7d777a4bb57f94f2c485712cb2a9649b8f6fed69ec2bcc57c7200c7429edc",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/bridge_unit_08/started.json": "dca96e83c54fc6ba94657222d34ad1fdb08d296269540418c163245815e1e259",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/bridge_unit_08/stdout.log": "2d8637665cdbdd76a6b787bcadd1bb8712cf6ab3f1efc272ffcd223181e7fab3",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/run_route_load_probe_v1.py": "f9da5f15cd59106e02ceec3dafadefd478425fe58ad3d12c2b6d7ee4e3079175",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/cold_route_definition_02/request.json": "71da4ba9c0bbb3b47398243baadda7f55a3aabb134de22c435ef739dd0e3fbd5",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/cold_route_definition_02/terminal.json": "b3c29a5fcff14044b07d23e4c0692e9b9e32ea6c37eb427871c036a2dd3d1047",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/cold_route_definition_02/started.json": "1cf309c60d8ce0403977a8f82749a3d92f4ec83cc419d54bcac0aae50f88edb5",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/cold_route_definition_02/stdout.log": "cb20cebda76bcd903ec31609bff2755be9fb26600fefd8f8fc704982d3ac5672",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/cold_route_definition_02_result.json": "ab7426fabdd46b9c688dffdb0a6663453632e6f9ef762d445714ab12f06e1f0a",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/request.json": "28aac8844bc087432101cd2aa6d06458e7b3edaa7b01738bdec0ea6c011342f9",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/review_fix_checks_plan_01.json": "dd3900a5160c92fb383944daf8cb35a8f3992ea5bcd56d4effc1368e06b6979a",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/cold_route_definition_plan_01.json": "370d026731fe6a71f5dbec24de3bd10073af0c3feb7856f68f74a02c7b983dcc",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_04/request.json": "c85784df7bc3bc8e7b0ae5c7f121494538a0618ff558c603a31d00fc7a5efd45",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_04/terminal.json": "4a809543df9589b72c7c103e6369f87b483dc2e3ad78704ab7fd7a1034ebe3d2",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_04/stdout.log": "abcc69a365ea7858abf5f571bce8f2196ee40cc6784d42143064edb20dd35cff",
+    "docs/model_spec/rq2_h1_group_operation_witness_development_v2.md": "46d8d2cbaff40ffff9ed7c1fd789c8f67fdbc714eabe7db27023915cf242c9e4",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/postcheck_group_successor_v2.py": "0bea0ab308c07c57de438d1e31be7e99d24e67ef7e4efa35dbe3f224d418c806"
+  },
+  "scoped_tests_passed": 101,
+  "failed_attempt_preserved": "group_unit_04: 41 passed, 1 failure, 1 teardown error; original owner/session detection and expected-corruption fixture teardown repaired",
+  "inherited_source_composition_evidence": {
+    "label": "source_unit_02",
+    "tests_passed": 6,
+    "scope": "historical source/registry unit composition with mock witness; unchanged source v3/test; not a full dependency closure claim"
+  },
+  "actual_three_arm_common_slice": false,
+  "numerical_performance_gain_measured": false,
+  "full_hour0_chain_passed": false,
+  "full_192_hour_verified": false,
+  "full_chain_performance_review_complete": false,
+  "official_review_verdict": null,
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

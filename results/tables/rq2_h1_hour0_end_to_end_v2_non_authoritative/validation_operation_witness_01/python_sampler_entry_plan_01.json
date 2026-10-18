@@ -1,0 +1,48 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "package_manifest_sha256": "240bec2bf100ba8e365c04f31be3d39726eecc00303c769fce8b889753d2cb8c",
+  "code_files": 149,
+  "test_files": 614,
+  "purpose": "Integrate Python sampler and target-specific disabled C fatal plugin; check helpers, exact monitor roles and tiny configured sampler routing before any next slice",
+  "predecessor_failed_package_sha256": "a6eba4f2921b51dcf105cf9dbf4373464b5acef94097a62593f906c3f83cb1cc",
+  "failed_attempt_preserved": "configured_entry_05_common_slice_monitor_01 and D:/h1_cs01_non_authoritative",
+  "changes": [
+    "versioned test uses Python sampler",
+    "target-specific no:faulthandler plus configure/setup assertions",
+    "fresh short root D:/h1_cs02_non_authoritative",
+    "bounded explicit sampler-smoke role"
+  ],
+  "monitor_sha256": "e895c6e9debfa24835aaf7f56fb40536e40a2dc54ab1925da0f23c7ca13e871c",
+  "unit_role": [
+    "unit",
+    "parse",
+    "unit_checks_04"
+  ],
+  "unit_limits": {
+    "count": 1,
+    "wall_seconds": 120,
+    "sampled_rss_mib": 512,
+    "storage_mib": 64
+  },
+  "smoke_role": [
+    "pytest",
+    "parse_path",
+    "sampler_smoke_01",
+    "tests/test_h1_gil_stack_observer_development_v1.py"
+  ],
+  "smoke_limits": {
+    "count": 1,
+    "wall_seconds": 60,
+    "sampled_rss_mib": 512,
+    "storage_mib": 64
+  },
+  "fresh_slice_started": false,
+  "fresh_slice_launch_admitted": false,
+  "next_condition": "Review stable-read cost candidate before deciding the next bounded numerical diagnostic; no new long chain",
+  "full_hour0_chain_passed": false,
+  "official_review_verdict": null,
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

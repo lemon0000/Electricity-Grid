@@ -1,0 +1,703 @@
+{
+  "status": "STOPPED_BUDGET",
+  "observed_utc": "2026-10-17T13:25:25.304005+00:00",
+  "source_files_and_tested_copies_unchanged": 794,
+  "outer_terminal": {
+    "observed_owned_processes": [
+      {
+        "pid": 10600,
+        "creation_time": 1792242825.082052
+      },
+      {
+        "pid": 41624,
+        "creation_time": 1792243271.5891068
+      },
+      {
+        "pid": 61020,
+        "creation_time": 1792243282.5407596
+      }
+    ],
+    "observed_owned_processes_remaining": [],
+    "observed_owned_processes_absent": true,
+    "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+    "cleanup_events": [
+      {
+        "pid": 10600,
+        "creation_time": 1792242825.082052,
+        "action": "kill_owned"
+      }
+    ],
+    "descendant_discovery_complete": true,
+    "complete_process_tree_absence_proven": false,
+    "exit_code": 15,
+    "storage_read_errors": [],
+    "cleanup_errors": [],
+    "final_storage_observation_complete": true,
+    "elapsed_seconds": 600.655999999959,
+    "stop_reason": "wall",
+    "peak_observed_process_tree_rss": 453427200,
+    "observed_storage_bytes": 21242690,
+    "memory_is_sampled": true,
+    "source_unchanged": true,
+    "source_snapshot_complete": true,
+    "peak_rss_includes_monitor": true,
+    "formal_result": false,
+    "resource_admission": false
+  },
+  "inner_terminal_present": false,
+  "inner_exit_code": null,
+  "observed_owned_processes_absent": true,
+  "complete_process_tree_absence_proven": false,
+  "final_three_root_storage_bytes": 21242690,
+  "short_root_files_unchanged_by_postcheck": 129,
+  "lock_files_reacquired_and_released": [
+    {
+      "path": "nt_non_authoritative/episodes/7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0/bootstrap_non_authoritative/execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes_hex": "30"
+    },
+    {
+      "path": "nt_non_authoritative/episodes/7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0/controller_non_authoritative/clock_bridge_non_authoritative/execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes_hex": "30"
+    },
+    {
+      "path": "nt_non_authoritative/episodes/7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0/controller_non_authoritative/execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes_hex": "30"
+    },
+    {
+      "path": "nt_non_authoritative/episodes/7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0/controller_non_authoritative/job_000_non_authoritative/execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes_hex": "30"
+    },
+    {
+      "path": "nt_non_authoritative/episodes/7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0/controller_non_authoritative/job_000_non_authoritative/worker_non_authoritative/execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes_hex": "30"
+    },
+    {
+      "path": "nt_non_authoritative/episodes/7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0/controller_non_authoritative/obligation_non_authoritative/execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes_hex": "30"
+    },
+    {
+      "path": "nt_non_authoritative/episodes/7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0/controller_non_authoritative/source_parent_non_authoritative/execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes_hex": "30"
+    },
+    {
+      "path": "nt_non_authoritative/episodes/7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0/controller_non_authoritative/source_parent_non_authoritative/parent_anchor_non_authoritative/execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes_hex": "30"
+    },
+    {
+      "path": "nt_non_authoritative/episodes/7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0/controller_non_authoritative/source_parent_non_authoritative/parent_events_non_authoritative/execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes_hex": "30"
+    },
+    {
+      "path": "nt_non_authoritative/global_claims_non_authoritative/execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "bytes_hex": "30"
+    }
+  ],
+  "completed_stage_timings": [
+    {
+      "label": "source_and_fixture_setup",
+      "elapsed_seconds": 67.8969997,
+      "interval_seconds": 67.8969997
+    },
+    {
+      "label": "slice_arm_0_open",
+      "elapsed_seconds": 109.5822293,
+      "interval_seconds": 41.6852296
+    }
+  ],
+  "completed_N0_stage_markers": [],
+  "stack_samples": 9,
+  "stack_sample_parse_errors": [],
+  "sampled_project_frames": [
+    {
+      "elapsed_seconds": 60.0,
+      "frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "function": "read_stable",
+          "line": 47
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_registry_declaration_development_v1.py",
+          "function": "build",
+          "line": 67
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_hour0_end_to_end_development_v2.py",
+          "function": "complete_group",
+          "line": 190
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_guarded_common_slice_development_v2.py",
+          "function": "complete_group",
+          "line": 41
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\_pytest\\fixtures.py",
+          "function": "call_fixture_func",
+          "line": 908
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\_pytest\\fixtures.py",
+          "function": "pytest_fixture_setup",
+          "line": 1202
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pluggy\\_callers.py",
+          "function": "_multicall",
+          "line": 121
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pluggy\\_manager.py",
+          "function": "_hookexec",
+          "line": 120
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pluggy\\_hooks.py",
+          "function": "__call__",
+          "line": 512
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\_pytest\\fixtures.py",
+          "function": "execute",
+          "line": 1110
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "elapsed_seconds": 120.0,
+      "frames": [
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+          "function": "mtime",
+          "line": 698
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+          "function": "search",
+          "line": 693
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+          "function": "<genexpr>",
+          "line": 795
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+          "function": "from_name",
+          "line": 397
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+          "function": "distribution",
+          "line": 862
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+          "function": "version",
+          "line": 889
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\solvers\\rq2_gurobi_declared_normal.py",
+          "function": "implementation_identity",
+          "line": 19
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\solvers\\rq2_objective_provenance_run_v1.py",
+          "function": "implementation_identity",
+          "line": 20
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_short_solve.py",
+          "function": "implementation_identity",
+          "line": 26
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_replay.py",
+          "function": "implementation_identity",
+          "line": 40
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "elapsed_seconds": 180.01600000000326,
+      "frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "function": "read_stable",
+          "line": 47
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_registry_declaration_development_v1.py",
+          "function": "build",
+          "line": 67
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_registry_declaration_development_v1.py",
+          "function": "inspect",
+          "line": 79
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bootstrap_integration_development_v2.py",
+          "function": "_fresh_registry_declaration",
+          "line": 556
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bootstrap_integration_development_v2.py",
+          "function": "bootstrap",
+          "line": 1285
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_guarded_common_slice_development_v2.py",
+          "function": "test_fresh_three_arm_live_reference_two_complete_common_calls",
+          "line": 73
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\_pytest\\python.py",
+          "function": "pytest_pyfunc_call",
+          "line": 166
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pluggy\\_callers.py",
+          "function": "_multicall",
+          "line": 121
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pluggy\\_manager.py",
+          "function": "_hookexec",
+          "line": 120
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pluggy\\_hooks.py",
+          "function": "__call__",
+          "line": 512
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "elapsed_seconds": 240.01600000000326,
+      "frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "function": "read_stable",
+          "line": 47
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_guarded_ingress_development_v1.py",
+          "function": "implementation_pins",
+          "line": 16
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_attested_saved_hour_development_v1.py",
+          "function": "implementation_pins",
+          "line": 20
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_attested_source_parent_development_v1.py",
+          "function": "implementation_identity",
+          "line": 20
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_file_parent_journal_development_v1.py",
+          "function": "implementation_identity",
+          "line": 16
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bounded_file_parent_development_v1.py",
+          "function": "implementation_identity",
+          "line": 23
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_parent_snapshot_development_v1.py",
+          "function": "implementation_identity",
+          "line": 22
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_parent_prefix_development_v1.py",
+          "function": "implementation_identity",
+          "line": 16
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_historical_controller_development_v1.py",
+          "function": "implementation_identity",
+          "line": 92
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bootstrap_integration_development_v2.py",
+          "function": "implementation_identity",
+          "line": 65
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "elapsed_seconds": 300.03100000001723,
+      "frames": [
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "function": "open",
+          "line": 1013
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "function": "read_bytes",
+          "line": 1019
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_06\\code_read_lease.py",
+          "function": "read",
+          "line": 155
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\solvers\\rq2_gurobi_declared_normal.py",
+          "function": "<genexpr>",
+          "line": 23
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\solvers\\rq2_gurobi_declared_normal.py",
+          "function": "implementation_identity",
+          "line": 23
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\solvers\\rq2_objective_provenance_run_v1.py",
+          "function": "implementation_identity",
+          "line": 20
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_short_solve.py",
+          "function": "implementation_identity",
+          "line": 26
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_replay.py",
+          "function": "implementation_identity",
+          "line": 40
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_hour_replay_v3.py",
+          "function": "implementation_identity",
+          "line": 30
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_hour_archive_v3.py",
+          "function": "implementation_identity",
+          "line": 15
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "elapsed_seconds": 360.0470000000205,
+      "frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "function": "digest",
+          "line": 23
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_released_worker_development_v1.py",
+          "function": "implementation_identity",
+          "line": 25
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_job_parent_development_v1.py",
+          "function": "implementation_identity",
+          "line": 26
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_job_clock_bridge_development_v1.py",
+          "function": "implementation_identity",
+          "line": 24
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\rq2_v2_normal_obligation_controller_development_v1.py",
+          "function": "implementation_identity",
+          "line": 41
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_current_grid_information_development_v1.py",
+          "function": "implementation_identity",
+          "line": 19
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_historical_controller_development_v1.py",
+          "function": "implementation_identity",
+          "line": 93
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bootstrap_integration_development_v2.py",
+          "function": "implementation_identity",
+          "line": 65
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bootstrap_integration_development_v2.py",
+          "function": "check",
+          "line": 161
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bootstrap_integration_development_v2.py",
+          "function": "_check_phase_header",
+          "line": 468
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "elapsed_seconds": 420.0470000000205,
+      "frames": [
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "function": "open",
+          "line": 1013
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "function": "read_bytes",
+          "line": 1019
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_06\\code_read_lease.py",
+          "function": "read",
+          "line": 155
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\solvers\\rq2_gurobi_declared_normal.py",
+          "function": "<genexpr>",
+          "line": 23
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\solvers\\rq2_gurobi_declared_normal.py",
+          "function": "implementation_identity",
+          "line": 23
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\solvers\\rq2_objective_provenance_run_v1.py",
+          "function": "implementation_identity",
+          "line": 20
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_short_solve.py",
+          "function": "implementation_identity",
+          "line": 26
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_replay.py",
+          "function": "implementation_identity",
+          "line": 40
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_hour_replay_v3.py",
+          "function": "implementation_identity",
+          "line": 30
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_hour_archive_v3.py",
+          "function": "implementation_identity",
+          "line": 15
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "elapsed_seconds": 480.0470000000205,
+      "frames": [
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "function": "stat",
+          "line": 840
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "function": "exists",
+          "line": 860
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\episode_store.py",
+          "function": "_path",
+          "line": 42
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_06\\canonical_path_lease.py",
+          "function": "_path",
+          "line": 222
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_06\\canonical_path_lease.py",
+          "function": "path",
+          "line": 296
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_resources.py",
+          "function": "_directory_binding",
+          "line": 137
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_resources.py",
+          "function": "<genexpr>",
+          "line": 149
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_resources.py",
+          "function": "resource_identity",
+          "line": 149
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_resources.py",
+          "function": "observe_headroom",
+          "line": 204
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_task_process.py",
+          "function": "wait",
+          "line": 200
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "elapsed_seconds": 540.0630000000237,
+      "frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "function": "digest",
+          "line": 23
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\rq2_v2_obligation_manifest_development_v1.py",
+          "function": "identity",
+          "line": 117
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_owned_bootstrap_controller_development_v2.py",
+          "function": "_owned_check",
+          "line": 166
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_owned_bootstrap_controller_development_v2.py",
+          "function": "_owned_parent_step",
+          "line": 349
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_owned_bootstrap_controller_development_v2.py",
+          "function": "_owned_clock_step",
+          "line": 373
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_owned_bootstrap_controller_development_v2.py",
+          "function": "_owned_phase_step",
+          "line": 409
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_owned_bootstrap_controller_development_v2.py",
+          "function": "_owned_run",
+          "line": 206
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bootstrap_integration_development_v2.py",
+          "function": "_continue_owned_development",
+          "line": 933
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bootstrap_integration_development_v2.py",
+          "function": "_continue_registered_development",
+          "line": 1106
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bootstrap_integration_development_v2.py",
+          "function": "bootstrap",
+          "line": 1288
+        }
+      ],
+      "truncated": false
+    }
+  ],
+  "zero_native_synthetic_job_observations": [
+    {
+      "path": "nt_non_authoritative/episodes/7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0/controller_non_authoritative/job_000_non_authoritative/observation.json",
+      "exit_code": 0,
+      "whole_job_quiescent": true,
+      "sha256": "034f9037035a87e4b532fe7c8ad5adbe4ca65a47a949ce3f7e574c7fa240a442"
+    }
+  ],
+  "slice_success_report_present": false,
+  "report": null,
+  "old_chain_inputs_unchanged": 36,
+  "old_chain_process_observation": [
+    {
+      "pid": 43640,
+      "creation_time": 1792047790.4886127,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\run_validation.py",
+        "chain_07",
+        "tests/test_h1_hour0_end_to_end_development_v2.py"
+      ],
+      "cpu_seconds": 0.234375,
+      "rss_bytes": 188416
+    },
+    {
+      "pid": 27888,
+      "creation_time": 1792047790.668987,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-s",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "D:\\h1_chain_07_non_authoritative",
+        "tests/test_h1_hour0_end_to_end_development_v2.py"
+      ],
+      "cpu_seconds": 192078.578125,
+      "rss_bytes": 214437888
+    },
+    {
+      "pid": 42184,
+      "creation_time": 1792047800.3142161,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\supervise_completion_v2.py",
+        "chain_07"
+      ],
+      "cpu_seconds": 24.171875,
+      "rss_bytes": 2158592
+    }
+  ],
+  "old_chain_terminal_present": false,
+  "full_hour0_chain_passed": false,
+  "full_192_hour_verified": false,
+  "full_chain_performance_review_complete": false,
+  "official_review_verdict": null,
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "files_sha256": {
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/postcheck_common_slice_attempt_v3.py": "334914eac751e406d636257f055b72f08a91de55f5a41fc5cb47abbbadc58f43",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_path_optimization_01/configured_entry_06_common_slice_monitor_01/request.json": "5aa7b3a48e06146d09c75b93a70ce3b8ffb4eb37815203a20570417c19dc5fe7",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_path_optimization_01/configured_entry_06_common_slice_monitor_01/started.json": "b741b9dc74a0f9785238cd2742348e19bbb7ffcb260da676c725f889ef140625",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_path_optimization_01/configured_entry_06_common_slice_monitor_01/terminal.json": "03e8a8ca95f500d5f9bdd4c1ce7c34fe7a6fc2b7c3282b5a8db7fe9f68b13284",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/common_slice_plan_04.json": "b404b04f51ca07ebda1697e0157d2d1663d1e233122b262fccd008041b3f8a9d",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/python_sampler_entry_preseal_summary_01.json": "379ae3c98561aee0b90f3cd51c7786e1da7c7c01bd14707741fc4c4a6ecfbc2b",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/common_slice_outcome_02/timing.jsonl": "4d0ead540685efea93c1461111d23f160bd2d5fec84351321c067a2c60885308",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/common_slice_outcome_02/pytest.log": "4d0ead540685efea93c1461111d23f160bd2d5fec84351321c067a2c60885308",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/common_slice_outcome_02/stack_samples.jsonl": "2fd94fe28641cd7591f018bc5fd10035372be7bca0c0b464853a422f01ff8224"
+  }
+}

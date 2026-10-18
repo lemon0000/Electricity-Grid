@@ -1,0 +1,17 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "question": "Do fixed sibling admission, failed-load rollback, and private original-resource cleanup close B6/B7/B8?",
+  "scope": "Unit failure chronology and ownership only; no native, saved numerical replay, live Parent, or full-chain integration claim",
+  "attempts": [
+    {"label": "bridge_unit_06", "entry": "run_bridge_unit_v1.py", "wall_limit_seconds": 180},
+    {"label": "group_unit_04", "entry": "run_group_unit_v2.py", "wall_limit_seconds": 180}
+  ],
+  "maximum_concurrency": 1,
+  "sampled_process_tree_rss_cap_mib": 512,
+  "storage_cap_mib_per_attempt": 64,
+  "stop": "Observed time/RSS/storage limit; preserve output, tested bytes, failure and terminal; rerun only after diagnosed changes",
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "full_chain_performance_review_complete": false
+}

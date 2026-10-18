@@ -1,0 +1,84 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "observed_at_utc": "2026-10-17T08:29:47.430161+00:00",
+  "decision": "INTEGRATE_EXPLICIT_PATH_CONFIGURATION_IN_VERSIONED_VALIDATION_ENTRY",
+  "comparison_script_sha256": "5769d628714a99834ae91213c1b080a8509b201492cdd2543156dba7cc7b3d70",
+  "audit_route_sha256": "0fa4005a29ca457baffaa2c92b3f2a92bd0e721b3eafa2c9a2f3f0f6b0cfce0d",
+  "attempts": [
+    "standard_entry_02",
+    "configured_entry_02"
+  ],
+  "measurements": [
+    {
+      "lane": "Rref",
+      "standard_seconds": 11.46345509996172,
+      "configured_seconds": 9.821174799988512,
+      "reduction_fraction": 0.14326224385688857,
+      "exact_scientific_projection": true,
+      "selector_record_sha256": "f4e0a74850bdcc509316471d518aef528c0bbe6fe9a6fa7d90f55c4264340b3f"
+    },
+    {
+      "lane": "A",
+      "standard_seconds": 7.658076499996241,
+      "configured_seconds": 6.800654400023632,
+      "reduction_fraction": 0.11196311501628775,
+      "exact_scientific_projection": true,
+      "selector_record_sha256": "8a9855659cdd7a23fac66c88a1eb94cdff5d14c87850ba66228d34c674db4784"
+    }
+  ],
+  "shared_module_origins_and_file_hashes_equal": true,
+  "shared_module_count": 1883,
+  "top_level_compute_module_allowlist": [
+    "pyomo",
+    "highspy",
+    "numpy",
+    "scipy",
+    "pypower",
+    "yaml",
+    "osqp",
+    "gurobipy",
+    "pytest"
+  ],
+  "required_support_module": "pygments",
+  "explicit_stdlib_reexports": {
+    "pyomo.common.dependencies.ctypes": {
+      "path": "D:\\Miniconda3\\envs\\compute\\Lib\\ctypes\\__init__.py",
+      "sha256": "e0db1242e78267cba0124ee9fe5963b72d1c8a1832bb51a88abcf012a9cbce76"
+    },
+    "pyomo.common.dependencies.ctypes.util": {
+      "path": "D:\\Miniconda3\\envs\\compute\\Lib\\ctypes\\util.py",
+      "sha256": "35e5eda9cac8f82b922bcc4a7d303a8dae9216444158a7c21f8b96b7309f3bc7"
+    },
+    "pyomo.common.dependencies.pathlib": {
+      "path": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "sha256": "10ba48ae8063cfe7589436041d0d4628c05f427c7709cf8e75e486f8930cc32c"
+    },
+    "pyomo.common.dependencies.pickle": {
+      "path": "D:\\Miniconda3\\envs\\compute\\Lib\\pickle.py",
+      "sha256": "7e3447b6d993a6306a7893fd2fba916010ed79f8e09ceb56158a550fa8099a14"
+    },
+    "pyomo.common.dependencies.random": {
+      "path": "D:\\Miniconda3\\envs\\compute\\Lib\\random.py",
+      "sha256": "de48263a837339c7e01cf9f3c4d756696e0e0775f7778eb9cf81ad5b00134569"
+    }
+  },
+  "standard_only_modules": {
+    "pywin32_bootstrap": "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages\\win32\\lib\\pywin32_bootstrap.py",
+    "win32pipe": "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages\\win32\\win32pipe.pyd",
+    "win32file": "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages\\win32\\win32file.pyd"
+  },
+  "configured_only_modules": {},
+  "source_pin_count": 764,
+  "saved_file_count": 140,
+  "current_sources_and_saved_files_unchanged": true,
+  "stock_metadata_finder_unchanged": true,
+  "helper_distribution_discovery_cache": false,
+  "helper_static_identity_cache": false,
+  "full_chain_passed": false,
+  "whole_workflow_performance_review_complete": false,
+  "long_chain_launch_admitted": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "formal_execution_ready": false,
+  "native_execution_authorized": false
+}

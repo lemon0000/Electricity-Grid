@@ -1,0 +1,199 @@
+"""Short real Windows Jobs with stdlib-only children; zero native solver calls."""
+from dataclasses import replace
+import json
+from pathlib import Path
+import sys
+
+import pytest
+
+from experiments import h1_selector_job_lifecycle_development_v1 as m
+
+
+@pytest.fixture(autouse=True)
+def no_solver():
+    with m.worker.sequence.legacy.bridge.science.prior.guard.solver_calls_forbidden():yield
+
+
+@pytest.fixture
+def job(tmp_path):
+    def make(code="from pathlib import Path;Path('marker.txt').write_text('done')",seconds=20):
+        scratch=tmp_path/'scratch_non_authoritative';scratch.mkdir()
+        env=m.worker.runtime.development_environment();env.update(TEMP=str(scratch),TMP=str(scratch))
+        budget=m.process.TaskProcessBudget(seconds,.02,256*1024**2,512*1024**2,2)
+        resources=m.process.resources
+        host=resources.HostResourceBudget(budget.max_job_commit_bytes,1024**2,
+            (resources.DirectoryDemand('scratch',str(scratch),1024**2,1024**2),))
+        argv=[sys.executable,'-I','-B','-c',code]
+        kwargs=dict(cwd=scratch,environment=env,budget=budget,host_budget=host)
+        identity=m.process.task_process_identity(argv,**kwargs,expected_host_identity=resources.resource_identity(host))
+        kwargs['expected_process_identity']=identity
+        return argv,kwargs,scratch
+    return make
+
+
+def diagnostic(data):return dict(schema=m.INSPECTION_SCHEMA,data=data)
+
+
+def test_real_job_reads_only_after_successful_wait_and_context_close(job):
+    argv,kw,scratch=job();events=[]
+    def before(child,initial):
+        assert child['pid']>0 and initial['observed_headroom_sufficient'] is True
+        assert events==[];events.append('before')
+    def read(observed):
+        assert events==['before']
+        assert observed['whole_job_quiescent'] is True and observed['exit_code']==0
+        events.append('read');return diagnostic((scratch/'marker.txt').read_text())
+    out=m.run_job(argv,**kw,before_release=before,on_quiescent=read)
+    assert out['inspection']==diagnostic('done') and events==['before','read']
+    assert all(out[k] is False for k in m.FLAGS)
+    assert list(out['diagnostic_window'].values())==sorted(out['diagnostic_window'].values())
+
+
+@pytest.mark.parametrize('mode',['nonzero','timeout','before_error'])
+def test_real_job_failures_never_call_output_reader(job,mode):
+    code={'nonzero':'raise SystemExit(7)','timeout':'import time;time.sleep(20)'}.get(mode,'pass')
+    argv,kw,scratch=job(code,2 if mode=='timeout' else 20);events=[]
+    def before(*args):
+        if mode=='before_error':raise RuntimeError('synthetic before release failure')
+    with pytest.raises((ValueError,RuntimeError,OSError)):
+        m.run_job(argv,**kw,before_release=before,on_quiescent=lambda x:events.append('read'))
+    assert 'read' not in events
+    assert events==[]
+
+
+def test_real_job_descendant_is_quiescent_before_reader(job):
+    code=("import subprocess,sys;from pathlib import Path;"
+        "p=subprocess.Popen([sys.executable,'-I','-B','-c','import time;time.sleep(20)']);"
+        "Path('descendant.txt').write_text(str(p.pid))")
+    argv,kw,scratch=job(code)
+    def read(observed):
+        # The owned primitive has queried active-process count zero; direct
+        # child exit alone is not the accepted condition.
+        assert observed['reason']=='child_exited' and observed['whole_job_quiescent'] is True
+        return diagnostic(int((scratch/'descendant.txt').read_text()))
+    out=m.run_job(argv,**kw,before_release=lambda *a:None,on_quiescent=read)
+    assert out['inspection']['data']>0 and out['inspection']['data']!=out['pid']
+
+
+@pytest.mark.parametrize('where',['before','after'])
+def test_callback_validator_replacement_cannot_return_success(job,monkeypatch,where):
+    argv,kw,scratch=job('pass');events=[]
+    def change(*args):
+        events.append(where);monkeypatch.setattr(m,'_validate_observation',lambda *a:None)
+    with pytest.raises(ValueError,match='import-fixed'):
+        m.run_job(argv,**kw,before_release=change if where=='before' else lambda *a:None,
+            on_quiescent=change if where=='after' else lambda *a:events.append('read'))
+    assert events==[where]
+
+
+def test_reentrant_same_identity_rejected_before_second_acquisition(job):
+    argv,kw,scratch=job('pass');events=[]
+    def before(*args):
+        with pytest.raises(ValueError,match='already active'):
+            m.run_job(argv,**kw,before_release=lambda *a:None,on_quiescent=lambda *a:events.append('nested'))
+    def read(*args):events.append('outer');return diagnostic(None)
+    m.run_job(argv,**kw,before_release=before,on_quiescent=read)
+    assert events==['outer']
+
+
+@pytest.fixture
+def observation():
+    budget=m.process.TaskProcessBudget(20,.02,100,200,2)
+    value=m.process.TaskProcessObservation('a'*64,11,22,0,'child_exited',1.,1,1000,
+        (('volume',1000),),(),None,('direct_child_exit_observed',),50,75,True)
+    return value,budget,dict(commit_reserve_bytes=500,volume_reserves=(('volume',500),))
+
+
+@pytest.mark.parametrize('changes',[
+    {'process_identity':'b'*64},{'pid':True},{'creation_filetime':23},{'exit_code':7},
+    {'reason':'task_deadline_stop'},{'whole_job_quiescent':False},{'job_commit_limits_configured':False},
+    {'runtime_samples':0},{'runtime_samples':True},{'elapsed_seconds':float('nan')},{'elapsed_seconds':23},
+    {'last_resource_errors':('reserve',)},{'observation_error_type':'OSError'},
+    {'stop_markers':('task_deadline_stop','direct_child_exit_observed')},
+    {'job_peak_process_commit_bytes':101},{'job_peak_total_commit_bytes':201},
+    {'job_peak_process_commit_bytes':80,'job_peak_total_commit_bytes':75},
+    {'minimum_runtime_commit_available_bytes':None},{'minimum_runtime_commit_available_bytes':499},
+    {'minimum_runtime_disk_available_bytes':(('other',1000),)},
+    {'minimum_runtime_disk_available_bytes':(('volume',499),)},
+    {'minimum_runtime_disk_available_bytes':(('volume',1000),('volume',1000))},
+    {'formal_result':True},
+])
+def test_observation_value_checks_fail_closed(observation,changes):
+    value,budget,reserve=observation
+    with pytest.raises(ValueError):m._validate_observation(replace(value,**changes),'a'*64,11,22,budget,reserve)
+
+
+def test_plain_dict_is_not_live_observation(observation):
+    value,budget,reserve=observation
+    with pytest.raises(ValueError):m._validate_observation(value.__dict__,'a'*64,11,22,budget,reserve)
+
+
+@pytest.mark.parametrize('target',['acquire','release','wait','close','validator'])
+def test_preinstalled_primitive_replacement_rejected_before_child(job,monkeypatch,target):
+    argv,kw,scratch=job('pass');events=[]
+    obj,name={'acquire':(m.process,'normal_task_child'),'release':(m.process.NormalTaskChild,'release'),
+        'wait':(m.process.NormalTaskChild,'wait'),'close':(m.process.NormalTaskChild,'close'),
+        'validator':(m,'_validate_observation')}[target]
+    monkeypatch.setattr(obj,name,lambda *a,**k:events.append('replaced'))
+    with pytest.raises(ValueError,match='import-fixed'):
+        m.run_job(argv,**kw,before_release=lambda *a:events.append('before'),on_quiescent=lambda *a:events.append('read'))
+    assert events==[]
+
+
+def test_preinstalled_fabricated_valid_wait_cannot_invoke_reader(job,monkeypatch):
+    argv,kw,scratch=job('pass');events=[]
+    def fabricated(child):
+        events.append('fabricated')
+        initial=child.initial_observation
+        return m.process.TaskProcessObservation(kw['expected_process_identity'],child.pid,child.creation_filetime,
+            0,'child_exited',1.,1,initial.commit.available_bytes,
+            tuple((v,available) for v,_,_,available in initial.volume_requirements),(),None,
+            ('direct_child_exit_observed',),1,1,True)
+    monkeypatch.setattr(m.process.NormalTaskChild,'wait',fabricated)
+    with pytest.raises(ValueError,match='import-fixed'):
+        m.run_job(argv,**kw,before_release=lambda *a:events.append('before'),on_quiescent=lambda *a:events.append('read'))
+    assert events==[]
+
+
+@pytest.mark.parametrize('value',[object(),b'bytes',Path('live-like'),{'live':object()}])
+def test_diagnostic_rejects_non_json_objects(value):
+    with pytest.raises(ValueError):m._inspection(diagnostic(value))
+
+
+def test_diagnostic_rejects_cycles_and_oversize():
+    cycle={};cycle['self']=cycle
+    for value in (cycle,'x'*m.INSPECTION_CAP):
+        with pytest.raises(ValueError):m._inspection(diagnostic(value))
+
+
+def test_diagnostic_roundtrip_detaches_callback_owned_containers():
+    value=diagnostic({'items':[1]});out=m._inspection(value)
+    value['data']['items'].append(2)
+    assert out==diagnostic({'items':[1]})
+
+
+@pytest.mark.parametrize('mode',['mutate','replace'])
+def test_callback_cannot_promote_authority_flags(job,monkeypatch,mode):
+    argv,kw,scratch=job('pass');events=[]
+    def before(*args):
+        if mode=='mutate':m.FLAGS['formal_result']=True
+        else:monkeypatch.setattr(m,'FLAGS',dict(m.FLAGS,formal_result=True))
+    with pytest.raises((TypeError,ValueError)):
+        m.run_job(argv,**kw,before_release=before,on_quiescent=lambda *a:events.append('read'))
+    assert events==[]
+
+
+def test_invalid_callback_payload_cannot_return_success(job):
+    argv,kw,scratch=job('pass')
+    with pytest.raises(ValueError,match='envelope'):
+        m.run_job(argv,**kw,before_release=lambda *a:None,on_quiescent=lambda *a:object())
+
+
+@pytest.mark.parametrize('field',['INSPECTION_SCHEMA','INSPECTION_CAP'])
+def test_callback_cannot_change_diagnostic_scope(job,monkeypatch,field):
+    argv,kw,scratch=job('pass')
+    def change(*args):
+        monkeypatch.setattr(m,field,'changed_schema' if field=='INSPECTION_SCHEMA' else 2*m.INSPECTION_CAP)
+        return diagnostic('x'*(1024**2) if field=='INSPECTION_CAP' else None)
+    with pytest.raises(ValueError,match='scope changed'):
+        m.run_job(argv,**kw,before_release=lambda *a:None,on_quiescent=change)

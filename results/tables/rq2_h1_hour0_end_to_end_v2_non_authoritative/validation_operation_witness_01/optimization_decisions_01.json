@@ -1,0 +1,44 @@
+{
+  "schema": "h1_operation_historical_optimization_decisions_development_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "decisions": [
+    {
+      "candidate": "historical numerical proof reuse within one protected operation",
+      "decision": "positive historical-only single-pair diagnostic; production integration remains open",
+      "scope": "one arm, two historical prepares, sixteen unchanged context evaluations per prepare",
+      "evidence": ["unit_06/terminal.json", "diagnostic_source_manifest_v1.json", "saved_pair_comparison_01.json", "preseal_summary_01.json"],
+      "production_consumer_wiring": "OPEN"
+    },
+    {
+      "candidate": "early Actual key-domain rejection before full common preparation",
+      "decision": "do not implement for current bottleneck",
+      "reason": "current missing-one and missing-all fixtures have all required keys; only values are None, so exact-key checking does not remove their work",
+      "implementation_reference": "tests/h1_group_selector_integration_helpers_v2.py:137",
+      "current_rejection_path": [
+        "Handoff guard and single-attempt running state",
+        "existing Actual Parent guards and reference Parent validation",
+        "common/roster/bootstrap guards and predecessor capture",
+        "owner view correspondence includes one full common prepare",
+        "second explicit full common prepare",
+        "key-domain validation",
+        "Parent/phase/Rref replay and current-source/business planned bootstrap",
+        "reject a required lane whose Actual is None"
+      ],
+      "call_count_evidence": "static lower bound, not measured attribution",
+      "genuine_missing_or_extra_key_optimization": "could require a separately versioned validation-order contract; changes observed failure precedence and does not help these branches"
+    },
+    {
+      "candidate": "reject any None Actual before current-source/business replay",
+      "decision": "reject contract-changing shortcut",
+      "reason": "None is valid when internal current-source/business replay proves business_input_unresolved or business_unresolved; unconditional rejection shrinks the successful acceptance set",
+      "specification_reference": "docs/model_spec/rq2_h1_selector_phase_handoff_development_v1.md:13"
+    }
+  ],
+  "scientific_contract_changed": false,
+  "whole_workflow_performance_review_complete": false,
+  "long_chain_launch_admitted": false,
+  "full_chain_passed": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

@@ -1,0 +1,46 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "predecessor_sources_sha256": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_operation_historical_witness_development_v1.py": "8b91c8184dc934c90f324705bb05104128245594a677a7fcdf1a13daa04a7e6a",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bootstrap_integration_development_v2.py": "c03cdaa9e674faf719841efb0ec4cb2dc25d0df49a69c9a9efecdc72cade62d8",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_owned_bootstrap_controller_development_v2.py": "58d61e95eada0e1e37f189caf752d26f686e7d9c168a74f3aad62a6a209a08e4"
+  },
+  "successor_sources_sha256": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_n0_verifier_development_v2.py": "bdb86e0be2cf374a001491f9d7e0b261bd3cf11ae4a90b023a1cb968c8580cb0",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bootstrap_integration_development_v3.py": "651eed94d7ea245acc1040ccead912ce91a23d3d43ed498b29d24926f7d68fa9",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_owned_bootstrap_controller_development_v3.py": "f8c8784f35dbb55a09b8e9fa2be9692865bcae72887e8839b1b91aa9030d8562"
+  },
+  "entry": "BootstrapOwner.bootstrap -> owned v3 -> _finish_N0_terminal(create_local=True)",
+  "sites": [
+    "explicit_primary",
+    "explicit_after_local",
+    "registry_before",
+    "registry_after"
+  ],
+  "expected_counts": [
+    [
+      4,
+      4
+    ],
+    [
+      0,
+      8
+    ],
+    [
+      0,
+      8
+    ],
+    [
+      0,
+      8
+    ]
+  ],
+  "context_evaluations": 64,
+  "scientific_oracle": "legacy historical verifier on exact same saved controller/pins",
+  "old_chain_inputs_unchanged": 36,
+  "full_hour0_chain_passed": false,
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

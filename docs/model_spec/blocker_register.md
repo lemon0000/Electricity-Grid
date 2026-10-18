@@ -1,5 +1,70 @@
 # 当前问题与阶段门禁登记
 
+2026-10-18 最新终态：93项 Parent/common 回归通过；保存 source 全字段 oracle03 已通过，
+但 host/activation 显式 fake，非 genuine Parent。fresh-owned03 真实完成一个合成 N0 登记/关闭
+再做原source，outer352.297s（N0 complete295.572059s、source17.801640s），10锁/owned PID/旧36pins清理闭合。
+reader v3 的同输入单对22.423639→23.217933s未达到5%采用限，已停止并保留v2，不能称提速。
+该对科学字段、IO调用量、134文件/10锁补检及复合hash核验通过；131项 reader/monitor 检查属于开发证据。
+Parent 的2408 prepares/38528 contexts嵌套成本仍未消除；M2 genuine三arm→Rref/Actual→paired/reopen、
+整体性能/资源准入及全部正式门继续OPEN。详见hour0根`validation_n0_operation_01/performance_report.md`。
+
+2026-10-18 优先瓶颈已收敛到Parent source的嵌套恢复。独立静态复核与AST调用位置核验显示：
+成功Handoff的150个retained主体展开为2,400次source prepare、9,600full N0 hour audit、
+4,800次registry prepare及约19,200次source-window load，不含records/common/producer/reopen。
+一次保存inspection以120.391s wall cap停止；随后一次20秒可观测前缀受控停止，outer33.016s，
+348个GIL样本支持优先定位snapshot→phase._fresh，但不能当作墙钟占比或全链ETA。
+未证明完整closure前不缓存整个Parent；原registry/current-source、process/env/clock、archive/lock
+与Actual→Rref依赖仍须保持。窄Parent numerical witness及私有source路由现已接入Handoff4 draft，
+89项分范围回归通过；256full/38528context仍为静态及fake状态机计数，未通过genuine Parent/Handoff。
+真实source oracle01仅有旧35.564281s/new firstfull34.017138s的decision/audit字节一致；
+因剩余17次投影超过540s按计划停止（outer86.094s/exit1、未激活），183保存非锁/source/old36稳定且PID退出。
+该次没有full-target test-only code identity bookends；下一诊断匹配该scope并补全source字段，不能直接外推ETA。
+完整paired/reopen和全链耗时仍是当前必须关闭的出口，不能用上述回归或单source替代。
+更正：内部verifier确有worker execution.lock的7次只读open；原monitor字段不能解释为从未打开锁。
+原记录保留，证据与清理核验见hour0根 `validation_n0_operation_01/parent_bottleneck_postcheck_01_non_authoritative/terminal.json`。
+成功common五模块draft已接线，53/10/13项分范围检查及cold definition终态通过；完整v4 target仅collection。
+24full/2112context/1008cross是算法/状态机计数，尚非真实22-call完整Handoff收益；M2及全部后续门保持OPEN。
+
+2026-10-18 失败路径瓶颈更新：Handoff v3 missing-all 独立通过，拒绝8.095914s、期间common重放0、
+Actual创建0，outer110.812s；883源快照、167代码写方式重开无写、4锁、2进程和old36 pins清理闭合。
+纯repair摘要缓存的实际同路径110.812→110.547s仅0.239%，低于预登记5%采用限，已停止该分支且不接入全链。
+接下来优先解决22次common及Parent嵌套重放；完整missing-one/三Actual/paired/reopen、M2及整体性能准入仍OPEN。
+证据见hour0 evidence根`validation_n0_operation_01/performance_report.md`和
+`negative_handoff_performance_postcheck_01_non_authoritative/terminal.json`。未启动新长链或正式实验。
+
+2026-10-17 三 arm common 复用后继已形成实际 draft 接线，首个完整 common 返回后才激活 proof；
+source v3 重建两层 audit，旧 `4/4` 仅作明确标注的 compatibility metadata。独立 PRE_SEAL 审查
+要求补齐逐项 cleanup、提前退出、固定 poison、固定 sibling 路由、失败加载回滚和闭包资源记录，
+已落对应修复。当前 49 项 grouped witness、52 项 bridge 检查及真实固定三模块的 cold definition probe
+终态通过，当前字节的窄 PRE_SEAL findings 闭合；这些 unit/cold checks 不证明实际数值 common。
+合同与范围见 `rq2_h1_group_operation_witness_development_v2.md`。chain_06 不能恢复原进程内
+ParentCompletion；实际 Handoff slice 需新合成根和新 live Rref。`entry_revision_05` 的单次
+600 秒/采样 RSS 1 GiB/新工件 128 MiB诊断已在 258.859 秒异常退出 `0xC0000005`，未触发资源停止。
+仅完成准备 83.470 秒和第一个 arm 的打开 41.114 秒；第一个 N0 尚未完成，未进入 Rref 或新 common。
+788 项 source/测试副本一致，已发现的子进程消失，2 锁可重获释放，原 chain_07 的 36 pins 不变。
+短差分在仅标准库的 frame churn 中复现 C 定时 dump 崩溃，RVA 与原故障处于同一 traceback-dump
+unwind range；Python sampler 完成，后续 cleanup 修复后的 13 项检查通过。证据位于 hour0 evidence 根
+`validation_operation_witness_01/common_slice_crash_01/` 与 `stack_sampler_churn_pair_01/`。
+后继entry06已移除 C 定时 dump、限定关闭 pytest faulthandler并核对插件缺席；不能把 sampler
+短检查当成完整链稳定性或common收益。稳定读取的两个影子因观察/失败出口等价未证明，未接入。
+原源码 Handoff alias 仅属合成诊断；准备/两次 common 及完整链的耗时证据仍待闭合。
+采样修复已接入 `entry_revision_06`，当前固定包 149 code/614 test，77 项 helper pass/1 权限 skip、
+13 项实际 configured sampler 检查及 15 项 monitor CLI 检查通过，见
+`validation_operation_witness_01/python_sampler_entry_checks_01.json`。首次 smoke 的全局 IO 故障注入
+失败保留，已修为仅输出流的注入。`common_slice_plan_04.json`的一次数值诊断已在600.656秒
+按wall预算停止，9个Python样本完整、无访问违例；首个合成Job exit0/quiescent，但N0外层
+登记/校验尚未完成，没有Rref/common。`common_slice_outcome_02/postcheck.json`核对794pins/
+10锁/已观察PID清理；不按同配置重试或延长预算。
+
+当前入口后继entry07增加固定7个Pyomo代码文件，沿用原CodeReadLease，原149code/614test
+不变。unit09为93pass/1权限skip，实际configured sampler03为13pass；源码/解释器恢复/清理闭合。
+一次保存真实arm对照38.905→36.279秒（outer51.859→48.953秒），science/完整audit/metadata
+receipts raw bytes相等，461保存文件、33锁、36old pins不变，见hour0 evidence根
+`validation_operation_witness_01/vendor_saved_arm_comparison_02.json`。窄PRE_SEAL findings已闭合，
+这只是组合入口后继单对方向性收益。主要剩余为N0嵌套身份/registry历史重放，需versioned
+成功接线及freshness/失败矩阵；现有common诊断桥无paired成功凭据，新长链仍未准入。
+完整 hour-0、192h、整体性能/资源、seal/official review 和正式运行门禁继续 OPEN。
+
 本登记只回答两件事：当前代码和固定数据能够证明什么，以及还缺什么才能解除阻塞。`resolved`表示问题已由代码、测试或明确的研究口径闭环；`mechanism-only`表示结构已实现但参数仍是合成敏感性；`method-blocked`表示数据与诊断已到位，但注册的方法尚未形成后续结论所需的数值见证；`external-blocked`表示不能靠当前仓库诚实补齐；`compute-blocked`表示模型与数据入口已经存在，但当前计算资源尚未完成所声明规模的正式运行，不等于数学不可行或数据缺失。
 
 2026-10-17 H1 性能诊断：路径校验候选单保存 arm 提速 15.84%，输出/完整 audit 及保存文件不变；
@@ -8,6 +73,30 @@ selector 增量数值重放虽通过差分和两 lane 真实身份检查，实�
 `validation_selector_incremental_01/performance_report.md`。两次 tiny 集成探针均以 180 秒预算停止；
 这些局部证据不关闭完整 hour-0、192h、整体性能准入、资源准入或正式运行门禁。
 原 chain_07 保留并继续，未将任何运行中或预算停止状态改记为通过。
+
+2026-10-17 入口接线进展：显式解释器路径的保存 raw-audit 对照为 Rref 11.463→9.821 秒、
+Actual 7.658→6.801 秒，科学输出、模块来源及保存文件一致。固定入口 `entry_revision_03`
+已接入原 code/metadata-parse/path leases，最终 77 pass/1 权限 skip、12 项真实 routing
+回归及字节/生命周期/清理 postcheck 通过；PRE_SEAL scoped findings 闭合。
+合同见 `rq2_h1_configured_validation_entry_development_v1.md`，确切终态见 hour-0 evidence 根下
+`validation_path_optimization_01/configured_entry_03_checks_01.json`。该证据只闭合入口接线；
+common/Parent/handoff 的重复调用成本、完整提交/重开/重放及整体长链准入仍 OPEN。
+
+2026-10-17 重复数值检查诊断：单arm、两次historical prepare的受保护复用原型通过68项故障检查，
+固定outer helper另有3项实际进程/锁检查。一次/模式保存对照为57.2265→47.5691秒（合计减少16.8758%），
+第二次28.6857→19.4709秒（减少32.1234%），full calls 8→4、原context仍32；两模式的783项source、
+461个保存文件及科学audit一致，33锁和已观察进程清理核验通过，独立scoped PRE_SEAL无剩余finding。
+见 `rq2_h1_operation_historical_witness_development_v1.md` 及hour0 evidence根
+`validation_operation_witness_01/performance_report.md`。该原型尚未接exact-source/common/Handoff；
+必须在完整外层返回成功后激活证明，并覆盖三arm隔离和全部失败窗口，不能直接用于当前旧链。
+复用后19.47秒的剩余成本仍需定位，不能由该单对比例外推总耗时。本blocker及所有后续门继续OPEN。
+
+同日D-before-C路径配置已落入独立固定入口`entry_revision_04`，原代码/leases和stock discovery保持。
+实际raw-audit两lane合计减少2.8829%，全部1883模块集合与origin/fileSHA、764 source、140 saved和
+8 METADATA一致；77pass/1权限skip、12routing及terminal/hash/生命周期postcheck通过。
+见hour0 evidence根`validation_path_optimization_01/configured_entry_04_checks_01.json`。
+该入口不包含跨common数值复用；后者的保守真实三arm slice仍待接线和预算核验。
+22次common是旧成功路径的静态下界，不能登记为生产上限；旧chain_07字节与进程未改变。
 
 ## 状态总表
 
@@ -6985,6 +7074,26 @@ identity 后一致；观测 24 full + 24 fresh、12 prefix。1082 个旧依赖�
 启动身份见 `host_chain_07/`、`host_chain_07_supervisor/`，修复审查见
 `packet_comparison_repair_01/preseal_review.json`。当前仅为运行中，完整出口仍 OPEN。
 
+2026-10-17 后续有界诊断终态：更换Python sampler的entry06/common_slice_02在600.656秒
+按wall预算停止，无访问违例、9个完整栈样本。首个合成N0 Job exit0/quiescent，但N0外层
+登记/校验未完成，没有Rref或common。hour0 evidence根
+`validation_operation_witness_01/common_slice_outcome_02/postcheck.json`核对794pins、10锁
+及已观察PID清理；old chain07的36pins不变，未被停止/重启。此诊断不关闭里程碑2或提供
+完整链耗时，不能靠同配置重试或延长预算推进。
+
+实际热点包含solver identity中7个未列入代码lease的Pyomo文件；四个交替新进程的定向对照
+均exit0、identity/origins/discovery计数一致，bootstrap identity均值0.373477→0.305787秒。
+`vendor_code_identity_postcheck_01.json`仅支持局部约18.12%收益；不外推整链。入口后继
+entry07保留149 code/614 test及原CodeReadLease实现，另固定7项/128055bytes；93项短检查
+通过/1权限skip，修复初始化在lease前间接导入vendor的顺序，旧失败字节保留。下一验收为
+`vendor_code_entry_plan_05.json`的两配置各一次保存真实common._arm对照现已完成（各120秒/
+512MiB/64MiB上限）：38.905→36.279秒；outer51.859→48.953秒，均exit0/no cap。science及
+完整audit raw bytes相等；802/808source/tested copies、461saved、33锁、36old pins闭合。
+`vendor_saved_arm_comparison_02.json`及postcheck02实际exit0终态保存，独立窄PRE_SEAL无剩余
+finding。保留entry07作后续诊断；该组合后继单对收益不是七文件独立因果或整链估计。
+N0嵌套owner/registry重放仍需versioned成功接线，现有common诊断桥无consume credential；
+整体性能、完整paired/reopen/replay、资源/official/formal各门继续OPEN。
+
 2026-10-16 校验性能后续：独立固定字节入口通过 OS 只读句柄复用 145 code bytes 与
 8 个 locked METADATA 的 version 解析值，原数值重放和动态 source/registry/保存读取不变。
 逐 test reader 身份冲突已按整个 pytest invocation 生命周期修复，原 guard 未放宽；
@@ -6994,3 +7103,32 @@ identity 后一致；观测 24 full + 24 fresh、12 prefix。1082 个旧依赖�
 `validation_io_optimization_01/performance_report.md`；该比例未证实完整 common/genesis
 或全链收益。chain_07 已完成三 Actual 并继续原进程，完整 paired/reopen/独立保存重放
 终态仍待取得；本 blocker 与里程碑 2 继续 OPEN，不提供 official verdict、资源准入或运行授权。
+
+2026-10-18 N0 瓶颈修复：同一 saved arm 的四次校验实测 108.804 → 84.815 秒，
+完整数值重放 16 → 4，fresh 16 → 28，64 个 context observations 和科学 raw bytes 保持。
+811 snapshots、461 saved files、33 locks、旧 chain 的 36 pins 已 postcheck。该单对收益
+只代表四 build 数值段。静态审计另发现三 arm 后续 bootstrap 至少 78 次旧 slot full prepare，
+因此新增 per-root registry scope 后继（verifier v3/bootstrap v4/owned v4）；115 项精确字节
+unit/fault 检查及 scoped PRE_SEAL findings 已闭合，确定重建的 patch closure 已保存。
+首次 cold N0 诊断在 126.688 秒、Job/attempt 写入前因旧 symbolic profile 绑定而 exit1，
+两锁及进程清理完成；旧现场保留。独立新 profile 修复的窄回归通过，仅改变 implementation pin。
+真实 N0 接线、真实多 root、common/paired/reopen 和整体资源预算仍待终态，M2 继续 OPEN。
+证据：hour0 evidence 根 `validation_n0_operation_01/performance_report.md`；本项仍不提供
+official verdict、resource admission、native calibration 或正式运行权限。
+
+2026-10-18 瓶颈后续：cold02 到 600.437 秒预算停止；读取修复后的 cold03 在 513.594 秒
+exit1，N0 登记前由 verifier v3 definition-time project/source view 比较拒绝。失败现场
+保留；845 源、旧 36 pins、3 个进程清理及 10 把锁释放闭合。字节未变不能确定具体
+binding/stamp 差异，先用零 Job checkpoint keyed diff 定位，不延长预算原样重跑。
+115 个 registry 单元使用受控 dispatch seam，不能代替真实接线证据。
+
+读取缓冲及入口检查调度修复通过 78 项回归和窄 PRE_SEAL 复核。一次实际 registry
+两 split 合计 33.052→2.167 秒，bootstrap identity 均值 0.345→0.238 秒，原 bytes/
+identities 一致，hooks/handles 清理通过。但是真实 common._arm 为 39.750 秒，历史
+同输入基线 36.279 秒，尚无收益；科学输出及完整 audit 相同，851 源和 461 保存文件
+未变。先处理真实 common 重放/校验成本及具体身份拒绝。整体性能审查未闭合，不启动
+新长链，M2 和全部后续门禁仍 OPEN。详见 `validation_n0_operation_01/performance_report.md`。
+
+2026-10-18 后续定位：cold03 唯一 diff 已确认为 episode_store._REGISTRY 的合法 owner 锁成员变化；静态对象身份与操作期完整成员检查现已分开，原 numerical/source contexts 不变。126项回归和零Job真实owner六节点复验通过，closure03/rebuild03固定当前字节。cold04现已600.609s预算停止、exit1；合成Job本身61.312s/exit0，后续bootstrap返回、四build receipt与oracle未验收，真实bootstrap出口仍OPEN。863 sources/tested copies、164代码r+b无写、10锁和3观测PID的只读postcheck通过；没有inner closed receipt，不推定graceful清理。
+
+common 第一轮慢值来自 metadata snapshot/admission 顺序错误（hits0/misses7265）。顺序修复后真实原common._arm为33.794s、hits7265/misses0，相对历史正常36.279s减少6.85%；science及完整audit一致，851源/461saved/33锁/old36 pins postcheck闭合。375样本来自修复前fallback，剩余discovery占比尚未实测；暂不引入新的dependency-discovery合同。完整M2及整体性能启动审查仍OPEN，不启动新的长时完整链。证据见validation_n0_operation_01/performance_report.md。

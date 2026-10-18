@@ -1,0 +1,51 @@
+{
+  "exit_code": 0,
+  "formal_result": false,
+  "resource_admission": false,
+  "full_hour0_chain_passed": false,
+  "native_execution_authorized": false,
+  "code_paths_reopened_for_write_without_writing": 164,
+  "measurements": [
+    {
+      "mode": "predecessor_entry",
+      "split": "training",
+      "seconds": 13.138346899999306,
+      "raw_sha256": "57c4d6bfcbb5f1b25aad10f6346e0494d655ac91a35e1997bf2f66ca188bf502"
+    },
+    {
+      "mode": "predecessor_entry",
+      "split": "holdout",
+      "seconds": 14.127694299968425,
+      "raw_sha256": "3fa1209d48b4574b5fe2e6e2d855cf2465d988aa5f0a75c8d5bc08e1e3e3913d"
+    },
+    {
+      "mode": "bounded_entry",
+      "split": "training",
+      "seconds": 1.1629023000132293,
+      "raw_sha256": "57c4d6bfcbb5f1b25aad10f6346e0494d655ac91a35e1997bf2f66ca188bf502"
+    },
+    {
+      "mode": "bounded_entry",
+      "split": "holdout",
+      "seconds": 1.4007968000369146,
+      "raw_sha256": "3fa1209d48b4574b5fe2e6e2d855cf2465d988aa5f0a75c8d5bc08e1e3e3913d"
+    }
+  ],
+  "all_compatibility_bytes_equal": true,
+  "vendor_module_origins": {
+    "pyomo.solvers.plugins.solvers.GUROBI": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\solvers\\plugins\\solvers\\GUROBI.py",
+    "pyomo.solvers.plugins.solvers.gurobi_direct": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\solvers\\plugins\\solvers\\gurobi_direct.py",
+    "pyomo.solvers.plugins.solvers.direct_solver": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\solvers\\plugins\\solvers\\direct_solver.py",
+    "pyomo.solvers.plugins.solvers.direct_or_persistent_solver": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\solvers\\plugins\\solvers\\direct_or_persistent_solver.py",
+    "pyomo.opt.results.results_": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\opt\\results\\results_.py",
+    "pyomo.opt.results.solution": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\opt\\results\\solution.py",
+    "pyomo.opt.results.solver": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\opt\\results\\solver.py"
+  },
+  "synthetic_jobs": 0,
+  "real_native_calls": 0,
+  "source_unchanged": true,
+  "source_drift": [],
+  "old_chain_unchanged": true,
+  "old_chain_drift": [],
+  "elapsed_seconds": 37.84624399995664
+}

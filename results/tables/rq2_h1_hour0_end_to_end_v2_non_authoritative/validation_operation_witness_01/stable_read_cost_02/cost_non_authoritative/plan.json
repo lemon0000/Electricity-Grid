@@ -1,0 +1,33 @@
+{
+  "question": "Is avoiding repeated open/read of the seven immutable implementation-pin files worth implementing?",
+  "modes": [
+    "original_implementation_pins",
+    "shadow_fresh_open_with_locked_bytes"
+  ],
+  "windows": [
+    "original",
+    "shadow",
+    "shadow",
+    "original"
+  ],
+  "iterations_per_window": 128,
+  "exact_cap": 1048576,
+  "files": 7,
+  "code_read_lease_sha256": "813681de527a9c5c38185482af5ac583e79d9f28deb8b6186c11f22a71af80f1",
+  "files_sha256": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_guarded_ingress_development_v1.py": "3adf80e674bb2ddfff1c08b0e69ed80aface9375c0a634b9af218774c23f1f19",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_native_export_guard_development_v1.py": "7c12a7100d44225a4cf177be829e8fcf3063d8a1b465961ee16b96c926e3c063",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_report_byte_bound_development_v2.py": "310bdfa81e7f11d81d5b60c2a485251adfb4987e4d498a5907969f76052ead9e",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_report_byte_bound_development_v1.py": "68d4123b3a752b25d98af783031781baacd7423c71d82fada84f47065751690b",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py": "df59ba543655307f0aae369bebf85e46d5ed94a3525f1a7f72f718fe744b598a",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_durable_timing_development_v1.py": "3eb2b80d7111bce8a5f183c00f5045edc2e00685e459d233b03f3ab369abb1d1",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_segment_timing_development_v1.py": "31795a3663bafa6c1f1729459259418ecdaca4dad2393bc168cf9b5a2ed40d2a"
+  },
+  "shadow_scope": "original fresh Path.open plus two pathname stat and two fresh-fd fstat checks and original digest; reuse bytes only for matching immutable file identity; no dispatch admission overhead",
+  "qualification": "cost ceiling only; no original function, module binding or Path.open replacement; not a correctness or integration acceptance test",
+  "source_cache": false,
+  "numerical_cache": false,
+  "real_native_calls": 0,
+  "formal_result": false,
+  "resource_admission": false
+}

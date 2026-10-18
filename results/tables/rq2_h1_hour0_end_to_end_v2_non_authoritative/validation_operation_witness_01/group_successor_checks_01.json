@@ -1,0 +1,156 @@
+{
+  "status": "SCOPED_DRAFT_CHECKS_COMPLETE_PENDING_PRESEAL_REVIEW",
+  "checks": {
+    "group_unit_05": {
+      "tests_passed": 48,
+      "terminal": {
+        "exit_code": 0,
+        "elapsed_seconds": 99.29700000002049,
+        "stop_reason": null,
+        "peak_observed_process_tree_rss": 184303616,
+        "observed_storage_bytes": 230039,
+        "memory_is_sampled": true,
+        "source_unchanged": true,
+        "formal_result": false,
+        "resource_admission": false
+      },
+      "started": {
+        "pid": 43400,
+        "creation_time": 1792237701.9527469
+      },
+      "observed_direct_pid_absent": true,
+      "process_scope": "recorded direct PID plus creation time; these unit/definition entries spawn no workers"
+    },
+    "bridge_unit_07": {
+      "tests_passed": 50,
+      "terminal": {
+        "exit_code": 0,
+        "elapsed_seconds": 5.639999999955762,
+        "stop_reason": null,
+        "peak_observed_process_tree_rss": 167694336,
+        "observed_storage_bytes": 262917,
+        "memory_is_sampled": true,
+        "source_unchanged": true,
+        "formal_result": false,
+        "resource_admission": false
+      },
+      "started": {
+        "pid": 53104,
+        "creation_time": 1792237839.1145792
+      },
+      "observed_direct_pid_absent": true,
+      "process_scope": "recorded direct PID plus creation time; these unit/definition entries spawn no workers"
+    },
+    "cold_route_definition_01": {
+      "tests_passed": null,
+      "terminal": {
+        "exit_code": 0,
+        "elapsed_seconds": 3.3439999999827705,
+        "stop_reason": null,
+        "peak_observed_process_tree_rss": 165580800,
+        "observed_storage_bytes": 232711,
+        "memory_is_sampled": true,
+        "source_unchanged": true,
+        "formal_result": false,
+        "resource_admission": false
+      },
+      "started": {
+        "pid": 60008,
+        "creation_time": 1792237846.197921
+      },
+      "observed_direct_pid_absent": true,
+      "process_scope": "recorded direct PID plus creation time; these unit/definition entries spawn no workers"
+    }
+  },
+  "real_cold_route_definition": {
+    "status": "COLD_DEFINITION_PROBE_ONLY_NONAUTHORITATIVE",
+    "bridge_import_seconds": 2.269211600010749,
+    "fixed_route_load_seconds": 0.28821379999862984,
+    "final_guard_seconds": 0.21125340001890436,
+    "total_seconds": 2.768678800028283,
+    "route_sources": [
+      {
+        "module": "experiments.h1_common_validation_operation_development_v1",
+        "path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_common_validation_operation_development_v1.py",
+        "sha256": "7fd1ff117cd43d5fd3bf7210c34a63969cd7448b78263661e7331c52bc240815"
+      },
+      {
+        "module": "experiments.h1_group_n0_common_input_binding_development_v3",
+        "path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_group_n0_common_input_binding_development_v3.py",
+        "sha256": "f1c97a388199e9424e092142780b1e53b0c6f257cc44295faa0875727110ae6e"
+      },
+      {
+        "module": "experiments.h1_operation_historical_witness_development_v2",
+        "path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_operation_historical_witness_development_v2.py",
+        "sha256": "499a7f7b7b0a1b004f7d59852e0773b4bfe32451f77dc4f046956389f3767a33"
+      },
+      {
+        "module": "experiments.h1_phase_exact_source_current_development_v3",
+        "path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_exact_source_current_development_v3.py",
+        "sha256": "0ac170f443977c51b94c336ebd30251745fc503a5d3d226a636affda76e19006"
+      }
+    ],
+    "all_final_guards_passed": true,
+    "lease_issued": false,
+    "handoff_token_issued": false,
+    "historical_numerical_replay": false,
+    "actual_common_slice": false,
+    "full_chain_passed": false,
+    "formal_result": false,
+    "resource_admission": false,
+    "native_execution_authorized": false
+  },
+  "old_chain_inputs_unchanged": 36,
+  "files_sha256": {
+    "tests/test_h1_operation_exact_source_composition_development_v3.py": "49ab924ffa27689df22e627c2f80266f8e905df1741816a1e7198f46806c7850",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/run_group_unit_v2.py": "9be128a031ca9dead62200f154efa4e48ace542eab3fbdfd0bf3d0bd408cbe2a",
+    "tests/test_h1_common_validation_operation_development_v1.py": "5a51ef5d6d4fd36d4da0432c02279156c101a56f751657f2c306f44bb7c47534",
+    "experiments/h1_common_validation_operation_development_v1.py": "7fd1ff117cd43d5fd3bf7210c34a63969cd7448b78263661e7331c52bc240815",
+    "experiments/h1_operation_historical_witness_development_v2.py": "499a7f7b7b0a1b004f7d59852e0773b4bfe32451f77dc4f046956389f3767a33",
+    "experiments/h1_operation_historical_witness_development_v1.py": "8b91c8184dc934c90f324705bb05104128245594a677a7fcdf1a13daa04a7e6a",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/run_group_unit_bounded_v3.py": "073dd4efdf062856421f9eb9c0133d234ba396c8064d7f7085a29317befff9b6",
+    "experiments/h1_phase_exact_source_current_development_v3.py": "0ac170f443977c51b94c336ebd30251745fc503a5d3d226a636affda76e19006",
+    "experiments/h1_group_n0_common_input_binding_development_v3.py": "f1c97a388199e9424e092142780b1e53b0c6f257cc44295faa0875727110ae6e",
+    "tests/test_h1_operation_historical_witness_development_v1.py": "d6a0a9413ef43ced30f647be32747147f733a5854ede8b88e332b9c09c159b32",
+    "tests/test_h1_group_operation_witness_development_v2.py": "70331b79ca30df9069008950710212934755416777ecd4721bb3bca8553fde55",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_05/request.json": "b78fadf2e23b96a8cac36cd4eece0beb571ec459a6d5eaa39bfbe513fb301119",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_05/terminal.json": "5b94b352daab3f7f9fa4ad35b2354c4fedfc89e3095bf3f06a9472530066c7fa",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_05/started.json": "7522dbb7d87ee8a64cc0ebd9f378d35bb71ce7b6660315bad383c69712539020",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_05/stdout.log": "a6efba9b0ff9414b43dbc34562ecd47c4d453fd19dc0201f0ebac12270da3fc5",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/run_bridge_unit_v1.py": "8a8465edc95aa5e86dc8bb7927204c51b4943839a60a65aafa0f2a8404e7fc7b",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/bridge_unit_07/request.json": "174297ecad1b63f76431e63ed21bb15285758def37ea33f67e2e8b2a013b7bb5",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/bridge_unit_07/terminal.json": "008a60709f18ee61ba1ece4ea8fca0e5d3f7c7eede13e2d7700a50d3d727056c",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/bridge_unit_07/started.json": "12b2c6b98967c926d8b8d12249aeab7f59f161196dc12cd31e8c489099740450",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/bridge_unit_07/stdout.log": "3a4c9535225b5cc261704b1dfa465906aac4ba401bc5867a0992c2616353fd7b",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/run_route_load_probe_v1.py": "f9da5f15cd59106e02ceec3dafadefd478425fe58ad3d12c2b6d7ee4e3079175",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/cold_route_definition_01/request.json": "451910290b616cafa6a08cb2e6a4798d0aeba35dd239c1c6af0d3d561911e47d",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/cold_route_definition_01/terminal.json": "801fe7fb8db546834664c2a1c01bd14eb389c0010fe6c27365e94ea7fdd06450",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/cold_route_definition_01/started.json": "dfa8ccc06c570d06b7ac746a78be1ebdfdfa925003420cdc7953793e627b9d26",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/cold_route_definition_01/stdout.log": "d8c5fbaaba8f2286fb6ac326f4dc8ad21018f49597bac67e4fbc6645990df22d",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/cold_route_definition_01_result.json": "3ef4244a375f0ae82bb9cf0b3e8f5626e4e984b0b269c0895817b9166db9a5de",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/request.json": "28aac8844bc087432101cd2aa6d06458e7b3edaa7b01738bdec0ea6c011342f9",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/review_fix_checks_plan_01.json": "dd3900a5160c92fb383944daf8cb35a8f3992ea5bcd56d4effc1368e06b6979a",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/cold_route_definition_plan_01.json": "370d026731fe6a71f5dbec24de3bd10073af0c3feb7856f68f74a02c7b983dcc",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_04/request.json": "c85784df7bc3bc8e7b0ae5c7f121494538a0618ff558c603a31d00fc7a5efd45",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_04/terminal.json": "4a809543df9589b72c7c103e6369f87b483dc2e3ad78704ab7fd7a1034ebe3d2",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/group_unit_04/stdout.log": "abcc69a365ea7858abf5f571bce8f2196ee40cc6784d42143064edb20dd35cff",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_operation_witness_01/postcheck_group_successor_v1.py": "44b1718590375780fddf49c235944c1328386afdc0057e074029becd92981a4f"
+  },
+  "scoped_tests_passed": 98,
+  "failed_attempt_preserved": "group_unit_04: 41 passed, 1 failure, 1 teardown error; original owner/session detection and expected-corruption fixture teardown repaired",
+  "inherited_source_composition_evidence": {
+    "label": "source_unit_02",
+    "tests_passed": 6,
+    "scope": "historical source/registry unit composition with mock witness; unchanged source v3/test; not a full dependency closure claim"
+  },
+  "actual_three_arm_common_slice": false,
+  "numerical_performance_gain_measured": false,
+  "full_hour0_chain_passed": false,
+  "full_192_hour_verified": false,
+  "full_chain_performance_review_complete": false,
+  "official_review_verdict": null,
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}
