@@ -1,5 +1,22 @@
 # 当前问题与阶段门禁登记
 
+2026-10-18 旧chain07主体已成功结束：exit0、1 passed、259910.325371s，paired commit及全部关闭后
+重开重放在主体中通过。3个原PID退出，36项源码和tested copies一致。observer因72h期限先到而退出，
+未启动独立postcheck/report；这不构成链失败，也不需要重跑主体。独立保存复验、清理验收及完整报告
+仍待闭合，M2保持未完成；优化后继完整链及全部正式门仍OPEN。最新证据：hour0根
+`validation_n0_operation_01/chain07_terminal_status_20261018_01.json`。
+
+2026-10-18 当前瓶颈处理（下文旧attempt原样保留）：Parent source-window v2的成功Handoff
+已是50 original prepares/2408 logical requests。新的post-negative v1接线将三轮四Parent复验
+从480次原source重建降为6次，每轮10个retained主体与160个内部读取位置保留。
+这是改变source/公开guard观察时序的独立DRAFT身份，只保证所声明的首尾freshness，
+不宣称完整dynamic closure或窗口/top-level之间的瞬态ABA。136项回归与当前v4 collection通过；
+真实source单窗44.465935s，outer58.781s/exit0，typed projection SHA与独立保存oracle一致，
+134文件/10锁/907源码/135saved/旧36pins与PID清理补检通过，Parent transport仍为fake。
+四Parent构造/run/oracle仍有712次条件prepare；genuine Parent/Handoff、22common、
+paired/reopen、v4 configured entry闭包及全链预算缺口仍在。M2、整体性能/资源、seal、
+official review和所有正式门继续OPEN。完整证据见hour0根`validation_n0_operation_01/performance_report.md`首节。
+
 2026-10-18 最新终态：93项 Parent/common 回归通过；保存 source 全字段 oracle03 已通过，
 但 host/activation 显式 fake，非 genuine Parent。fresh-owned03 真实完成一个合成 N0 登记/关闭
 再做原source，outer352.297s（N0 complete295.572059s、source17.801640s），10锁/owned PID/旧36pins清理闭合。

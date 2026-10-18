@@ -1,5 +1,64 @@
 # H1 优化工作交接：2026-10-18
 
+## 旧chain07最新终态：主体通过，独立后验待补
+
+本段更新下文较早的旧链运行状态。现已核实 `chain_07/terminal.json` exit0、stdout为1 passed，
+wall259910.325371s（72小时11分50秒）。paired commit/readback、全部关闭及重开重放在主体中
+均已通过；3个原PID均已消失，36项源码和tested copies一致。结果是synthetic hour0，非正式实验。
+旧observer在72小时先到期后退出，未启动独立postcheck/report；这不是链主体失败，不要重跑主体。
+独立保存记录复验、清理验收与完整报告待补，完整M2及优化后继整链不能据此宣告通过。
+本次有界只读核验与42项stage timings见 `chain07_terminal_status_20261018_01.json`。
+
+## 当前交接补充：post-negative 瓶颈已经接线
+
+以下是本轮续作后的当前状态，优先于下文较早交接。用户最新授权是“继续做，先处理瓶颈”；
+本轮没有commit/push，也没有启动完整v4、长solver或formal/native实验。不要重跑已有终态检查。
+
+- 新文件 `experiments/h1_selector_post_negative_validation_development_v1.py` 是独立DRAFT同步窗口；
+  `tests/h1_group_selector_integration_helpers_v4.py` 三轮missing-Actual后调用它。每轮4个top-level
+  validation、Rref7/各Actual1（总10）retained、160 logical source返回保留，原prepare160→2，
+  三轮480→6。原子private registry、防重入poison、partial guards/marks、逆序清理、首错保留，
+  全部资源清除后仅返plain JSON；不跨Job/外部回调，不签发ParentCompletion。
+- 新身份明确改变public guard/source I/O/失败顺序，只声称首尾freshness；不声称top-level间或
+  bookend间瞬态ABA及完整dynamic closure。缓存入口清除不代表派生source全对象图销毁。
+- `post_negative_validation_unit_06/terminal.json`：136 passed/22.90s，outer24.312s，exit0，
+  source unchanged。覆盖真实helper loader和三轮loop AST、原公开方法体fake source160→2，
+  并发/身份/类型/失败/cleanup。`post_negative_v4_collection_01`：1 test collected/4.32s，outer5.531s/exit0；
+  完整test没有执行。unit02/03/04的fixture错误终态原样保留，unit05/06才完整通过。
+- `post_negative_source_window_plan_02.json` SHA
+  `456aab2a3b6324cb5386fd57bbd0cdf0066f9462bdb6e7159834a9add29b0601`，固定180s/768MiB/128MiB，
+  907 source、180 code、135 saved、36 old pins。outer `post_negative_source_window_monitor_02`
+  exit0/58.781s；inner `post_negative_source_window_02_non_authoritative` exit0/56.969607s，
+  单窗44.465935s、2prepare/160borrowed/10retained，原source dispatch guard保留。
+  entry/tail完整typed projection SHA=`2cf03606174d4cfba771917c3eff9557e54b472f047d88130993ba17d915eb5c`，
+  等于独立保存的完整字段oracle（含decision/audit bytes）。这是genuine source、显式fake Parent transport。
+  0Job/0native/0真Parent，完整workflow speedup=false。
+- `post_negative_source_window_postcheck_02_non_authoritative/terminal.json` exit0：134输入逐项匹配，
+  10锁均获取/释放，owned child38476已退出，907/135/36 pins未变。探针登记的私有句柄/patch恢复
+  另由inner terminal、bounded/path closed receipts及window receipt分项支持。
+  所有本轮测量均已终态，无需恢复任何session。旧未启动plan01和预启动bytes保存于
+  `post_negative_validation_baseline_01_non_authoritative/unlaunched_probe_draft_01`；baseline本身只是文件前像。
+- `/root/parent_window_review` 只读PRE_SEAL审查未发现本轮draft剩余实现级正确性缺陷；
+  不是official verdict/review receipt，不改变gate。
+
+成功Handoff已用Parent source-window v2：25窗口/2408 logical requests/50原prepare。
+下一瓶颈是四Parent构造/run/oracle的712次条件prepare（Rref94、各Actual206）；本轮相关子路径
+小计由至少1242→768=712+6+50，不含Bootstrap/common/capture_actual/其余paired/reopen/report，
+不是整链耗时估计。先拆不跨run_job/回调的安全窗口，补最小genuine Parent/Handoff；之后才重建
+完整v4 configured entry allowlist/test closure、paired/reopen和整体预算。`entry_revision_07`
+与旧configured runner不接受当前后继，不能只替换pytest目标启动长链。所有M2/resource/formal/native门仍OPEN/false。
+当前完整证据见同目录`performance_report.md`首节、`post_negative_validation_route_counts_01.json`。
+
+旧chain07最新复查：原wrapper43640、pytest27888、observer42184的creation均未变，pytest累计约71.44h，
+仍消耗CPU并大量读取，无solver child；最后事件仍是`missing_Actual_rejected_network_only_shared`
+（elapsed135486.7455612s）。新nonblocking采样已从第二次readback中的Parent复验推进到其后的
+`_correspondence`/common检查（consume440→readback367→correspondence222），表明先前那段复验已走过。
+证据在`post_negative_old_chain_observation_01_non_authoritative`。没有terminal，仍无可靠剩余ETA。旧36pins未变，
+本轮未停止/重启/改动它，未打开active数据根`D:/h1_chain_07_non_authoritative`的新share handles。
+72h supervisor上限只停止observer，不会替pytest停止。接手仍先复查PID+creation/日志/terminal。
+
+## 较早交接（保留历史）
+
 用户要求先完成实质性能优化，再跑真正三 arm → common → Rref → 业务映射 → Actual → paired commit → 全部关闭后重开重放的 hour0 集成。M2 未通过；192h、完整资源/DAG、封存、fresh official review 和正式运行随后推进。真实 native 校准和正式实验没有授权。不要再次用局部测试数量代替整链通过，也不要无预算地重跑长链。
 
 仓库 `D:/CUHKSZ/Research Project/electricity-grid`，Python `D:/Miniconda3/envs/compute/python.exe`。

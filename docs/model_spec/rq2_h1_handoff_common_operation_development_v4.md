@@ -1,5 +1,19 @@
 # H1 成功 Handoff 的 common 操作内复用草案
 
+2026-10-18 当前后继（优先于下文历史状态）：成功Handoff使用Parent source-window v2，
+25窗口/2408 logical source requests/50 original prepares；不再把2408写作当前physical prepares。
+新增 `h1_selector_post_negative_validation_development_v1.py` 已接到三轮missing-Actual后的复验：
+每轮Rref7+三Actual各1个retained主体保留，160 original prepares→2，三轮480→6。
+它独立获取/释放四Parent guards和三引用标记，registry原子占有，全部清理后仅返回plain JSON。
+公开guard调度、内部source I/O和失败顺序改变；首尾freshness与完整typed field/type检查保留，
+不宣称top-level之间/窗口内ABA或完整动态closure覆盖，不跨Job/回调，也不跨窗口复用source。
+136项回归通过；当前完整v4仅collection。独立完成输入的真实source单窗44.465935s，
+2prepare/160borrowed/10retained，outer58.781s/exit0；完整typed projection SHA与保存oracle一致，
+134输入/10锁/907源码/135保存pins/旧36pins及PID清理补检通过。Parent transport仍显式fake。
+四Parent构造/run/oracle尚有712次条件prepare；genuine Parent/Handoff、paired/reopen、
+configured entry闭包和完整预算未完成。DRAFT、M2及全部正式门状态不变。
+具体代码绑定、终态和失败历史见hour0根`validation_n0_operation_01/performance_report.md`当前首节。
+
 2026-10-18 最新证据：当前 Parent/common 回归为93 passed。保存 source 的完整字段 differential
 已在 oracle03 通过，但其 host/activation 是显式 fake；严格导入范围由 profile03 及 fresh-owned03
 后继核验。fresh-owned03 完成一个合成 N0 的真实登记/关闭及原 source，outer352.297s，

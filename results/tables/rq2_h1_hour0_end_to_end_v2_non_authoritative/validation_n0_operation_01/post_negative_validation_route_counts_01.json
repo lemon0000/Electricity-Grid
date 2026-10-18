@@ -1,0 +1,50 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "kind": "static_path_counts_with_explicit_fake_body_oracle",
+  "baseline_post_negative_rounds": 3,
+  "top_level_validations_per_round": 4,
+  "retained_bodies_per_round": {
+    "reference": 7,
+    "actuals": [
+      1,
+      1,
+      1
+    ],
+    "total": 10
+  },
+  "source_requests_per_retained_body": 16,
+  "baseline_original_source_prepares": 480,
+  "successor_original_source_prepares": 6,
+  "successor_borrowed_source_returns": 480,
+  "prepares_removed": 474,
+  "subgroup_prepare_reduction_fraction": 0.9875,
+  "unit_evidence": "post_negative_validation_unit_06/terminal.json",
+  "source_evidence": "post_negative_source_window_monitor_02/terminal.json",
+  "source_diagnostic_scope": {
+    "windows": 1,
+    "original_source_prepares": 2,
+    "borrowed_source_returns": 160,
+    "fake_Parent_transport": true,
+    "genuine_Parent_acceptance": false
+  },
+  "other_counted_stages": {
+    "reference_parent_constructor_run_oracle": 94,
+    "each_actual_parent_constructor_run_oracle": 206,
+    "all_four_parents": 712,
+    "successful_handoff_source_windows": 50
+  },
+  "counted_path_subtotal_before": 1242,
+  "counted_path_subtotal_after": 768,
+  "excludes": [
+    "Bootstrap and common",
+    "capture_actual",
+    "paired commit dependencies not counted above",
+    "close/reopen/report"
+  ],
+  "count_reduction_is_whole_workflow_wall_speedup": false,
+  "full_target_review_complete": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "other_stage_counts_basis": "static conditional expansion only; no genuine four-Parent timing or full-workflow claim"
+}

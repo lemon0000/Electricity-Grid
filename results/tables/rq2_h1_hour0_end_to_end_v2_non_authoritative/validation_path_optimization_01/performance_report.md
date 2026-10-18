@@ -1,5 +1,21 @@
 # Path validation optimization: bounded development evidence
 
+2026-10-18 current successor: Parent source-window v2 uses50 original prepares
+for2408 logical requests in a successful Handoff. The new standalone post-negative
+v1 is wired into all three missing-Actual rounds:480 original prepares become6,
+with all30 retained bodies and480 logical source returns preserved. This changes
+the public guard and source observation schedule; it claims endpoint freshness,
+not predecessor per-site IO/failure-order or transient ABA equivalence.
+The current exact draft passed136 tests; full v4 is collection-only. One real-source
+window took44.465935s, outer58.781s/exit0,2 prepares/160 returns; complete canonical
+typed projection SHA matched the independently saved oracle. Parent transport is
+explicitly fake. The134-file/10-lock/907-source/135-saved/36-old-pin/PID postcheck
+passed. See `../validation_n0_operation_01/performance_report.md` first section.
+The remaining counted Parent creation/run/oracle cost is712 prepares. Genuine
+Parent/Handoff, paired/reopen, a current configured-entry closure and the complete
+workflow budget remain open; no full-workflow speedup or formal authority follows.
+Lower sections preserve earlier evidence; reader v3 remains unadopted.
+
 2026-10-18 update: full own-root coverage was exercised by the completed single
 synthetic N0 diagnostic (`../validation_n0_operation_01/fresh_owned_source_cost_monitor_03`).
 Outer352.297s includes genuine N0 registration/close and one original source,

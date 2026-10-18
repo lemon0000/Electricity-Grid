@@ -1,5 +1,76 @@
 # N0 historical replay bottleneck
 
+## 2026-10-18 旧chain07主体终态：通过，独立后验待补
+
+旧配置主体已完成：exit0、1 passed、wall259910.325371s（72小时11分50秒）。三arm N0/common、
+Rref/Actual、paired commit/readback、全部关闭后重开重放均有主体终态证据。3个原进程已退出，
+36项启动前后源码、当前源码及tested copies一致。observer在72小时先到期，未运行独立postcheck/report，
+不是链失败；没有重跑链或启动新的长验证。42项逐阶段记录及只读核验见
+`chain07_terminal_status_20261018_01.json`。独立保存复验/清理门及完整报告待补，M2未宣告完成。
+旧版72小时不是优化后继ETA，也不是正式实验耗时；后续draft优化证据沿用下文当前后继段落。
+
+## 2026-10-18 当前后继：单窗 source 与 post-negative 复验
+
+本节优先于下文按时间保存的旧状态。当前为 `DRAFT_NONAUTHORITATIVE`；M2、整体性能审查、
+资源准入、seal、official review、native/formal execution 和正式结果均未通过。
+本轮只修改独立 draft 和测试接线，未改变 `chain_07` 的进程、配置或绑定源码。
+
+第一处新瓶颈已经接线：三个 missing-Actual 分支之后，每轮原来分别公开复验 Rref 和三个 Actual。
+每个 Actual 又两次递归复验 Rref，故每轮是10个 retained 主体、160次原 source prepare；三轮为480次。
+`h1_selector_post_negative_validation_development_v1.py` 将每轮收拢为一个同步窗口，原 source 只在
+窗口首尾各执行一次，160个内部位置借用同一完整值；三轮共6次 prepare、480次 borrowed return。
+减少474次（该子组98.75%），这是调用量减少，**不是整链墙钟提速实测**。
+
+每轮仍执行 Rref7次、各Actual1次 retained 主体，保留原 preparation/bind/inspection、
+process/environment/archive 与 Actual→原Rref 依赖检查。先按 lane 排序非阻塞获取三个 Actual guard，
+再获取 Rref guard；全部获取后才设置引用标记。私有 registry lock 原子登记操作，foreign caller
+不能覆盖或清除原操作；同线程 caught reentry 会 poison 原操作。所有退出尝试逆序清理，首错保留，
+仅在全部已获取 guards/marks 与 registry 清除后返回 plain JSON，未签发 ParentCompletion 或执行权限。
+
+这是新的校验观察身份：四个公开调用合成一个四Parent同时持锁的窗口。每个内部 source 的 I/O、
+原失败顺序、原公开 guard 调度不等价；不声称覆盖 top-level 调用间或首尾之间的瞬态 ABA，
+不声称完整动态依赖闭包。窗口只清除缓存入口；旧消费者派生输出仍按原生命周期存活。
+不跨 Parent.run、run_job、before_release、on_quiescent、capture_actual 或 common 回调复用。
+
+| 当前证据 | 终态 | 覆盖范围 |
+|---|---|---|
+| `post_negative_validation_unit_06` | 136 passed/22.90s；outer24.312s/exit0 | 新窗口、原公开方法体160→2对照、并发/失败/清理、真实helper loader和三轮接线 AST；Parent transport/source arithmetic为显式fake |
+| `post_negative_v4_collection_01` | 1 test collected/4.32s；outer5.531s/exit0 | 当前完整v4文件只完成collection，没有执行完整test |
+| `post_negative_source_window_monitor_02` | outer58.781s/exit0；inner56.969607s/exit0 | 真实原source及其guard，单窗44.465935s、2prepare/160borrowed/10retained；Parent transport显式fake，0Job/0native/0真Parent |
+| `post_negative_source_window_postcheck_02_non_authoritative` | exit0 | 原134文件、10个canonical锁逐一获取/释放、907源码/135保存输入/旧36pins及owned PID退出 |
+
+真实source验证方式是 entry/tail 的完整 canonical typed projection SHA256 与独立保存的
+`source_complete_fields.json` SHA256相等（`2cf03606174d4cfba771917c3eff9557e54b472f047d88130993ba17d915eb5c`），
+其中包含 decision/audit bytes；未重新跑160次原source作墙钟基线。外层采样RSS峰值206163968 bytes，
+新增工件13570063 bytes，低于预先固定的180s/768MiB/128MiB上限；child38476已退出。
+探针登记的私有句柄/patch恢复分别由inner terminal、`bounded_closed_receipt.json`、
+`path_closed_receipt.json`及`window_receipt.json`支持。
+最终plan02 SHA为`456aab2a3b6324cb5386fd57bbd0cdf0066f9462bdb6e7159834a9add29b0601`。
+未运行的旧plan01及其预启动脚本保存在`post_negative_validation_baseline_01_non_authoritative/unlaunched_probe_draft_01`；
+该baseline目录只保存文件前像，不是实验性能基线。unit02/03/04的exit1保留：显式fake原方法体
+oracle依次暴露closure、canonical wrapper及未替换fake source的问题，修复fixture后unit05/06才得到完整绿色终态。
+只读PRE_SEAL审查未发现本轮draft剩余实现级正确性缺陷，记录在
+`post_negative_validation_preseal_findings_01.json`，不是official verdict/review receipt。
+`post_negative_validation_closeout_01.json`再次核对当前tested bytes、全部终态与旧36pins；
+8个相关Python文件AST及whitespace、`git diff --check`通过，未为收尾重新启动任何测量。
+实际pytest/诊断命令和限额保存在各attempt的`request.json`及最终plan02中。
+
+成功Handoff已使用 `h1_selector_parent_validation_operation_development_v2.py`：13 bundle、8 pair、4 records
+共25个窗口，2408次是logical source请求，原source prepare为50次；完整成功状态机已由既有unit03/05
+及本轮相关回归覆盖，早先单个真实source窗口为41.012528s（fake Parent transport）。下文的
+256 full/38528 context及2408 physical prepares属于早期v1后继，不是当前v2执行量。
+
+尚未消除的已计数部分是四个Parent构造/run/oracle：Rref94次、每Actual206次，共712次原source。
+加上成功Handoff50与本轮post-negative6，相关子路径静态小计由至少1242降到768；不含Bootstrap、
+common、capture_actual及其余paired/reopen/report成本。详见`post_negative_validation_route_counts_01.json`。
+下一步先拆分这712次中不跨Job/外部回调的安全窗口，并补最小genuine Parent/Handoff证据；之后才重建
+完整v4 configured entry的allowlist/test closure和整体预算。`entry_revision_07`仍未接纳这些新后继，
+旧configured runner不能通过替换pytest目标直接启动完整v4。reader v3仍维持STOP_BRANCH_RETAIN_V2。
+
+旧chain07最新nonblocking采样位于consume440→第二次readback367→correspondence222/common检查，
+相较此前同一readback中的Parent复验已有内部推进；累计约71.44h仍无terminal，不能给出剩余ETA。
+该观察保存在`post_negative_old_chain_observation_01_non_authoritative`，未改动旧进程或active数据根。
+
 ## 2026-10-18 最新终态与采用决定
 
 本段更新下文早期 attempt 的状态；旧失败记录原样保留。M2、整体性能审查、资源准入、

@@ -82,6 +82,7 @@ def identity_bookends(patch,root):
         'experiments.h1_selector_phase_handoff_development_v2',
         'experiments.h1_selector_phase_handoff_development_v3',
         'experiments.h1_selector_phase_handoff_development_v4',
+        'experiments.h1_selector_post_negative_validation_development_v1',
         'experiments.h1_common_validation_operation_development_v2',
         'experiments.h1_operation_historical_witness_development_v3',
         'experiments.h1_phase_exact_source_current_development_v4',
@@ -233,6 +234,7 @@ def complete_group(numerical,environment,synthetic_reports,tmp_path,monkeypatch)
                 scope='synthetic_hour0',selector_handoff_contract='h1_selector_phase_handoff_development_v4',
                 formal_result=False,real_native_calls=0,
                 synthetic_N0_jobs=3,canonical_selector_jobs=0,paired_replay=replay,
+                post_negative_validation_receipts=final['handoff']['post_negative_validation_receipts'],
                 N0_records=final['records'],common_report=final['report'])))
             trace('integration_report_saved')
     trace('identity_bookends_restored')

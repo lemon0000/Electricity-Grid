@@ -81,6 +81,7 @@ def _consume(common_owner,configuration,patch,root,trace):
     assert all(name not in sys.modules and name.rsplit('.',1)[1] not in vars(experiments) for name in (
         'experiments.h1_common_validation_operation_development_v2',
         'experiments.h1_selector_phase_handoff_development_v4',
+        'experiments.h1_selector_post_negative_validation_development_v1',
         'experiments.h1_operation_historical_witness_development_v3',
         'experiments.h1_phase_exact_source_current_development_v4',
         'experiments.h1_group_n0_common_input_binding_development_v4'))
@@ -93,6 +94,11 @@ def _consume(common_owner,configuration,patch,root,trace):
         {'h1_selector_parent_controller_development_v2':h.module,
          'h1_common_validation_operation_development_v2':bridge})
     patch.setattr(experiments,'h1_selector_phase_handoff_development_v4',consumer,raising=False)
+    post_negative=load(str(directory/'h1_selector_post_negative_validation_development_v1.py'),
+        'experiments.h1_selector_post_negative_validation_development_v1',patch,
+        {'h1_selector_parent_controller_development_v2':h.module,
+         'h1_selector_parent_validation_operation_development_v2':consumer.parent_validation})
+    patch.setattr(experiments,'h1_selector_post_negative_validation_development_v1',post_negative,raising=False)
     retained=[]
     actuals={}
     def retain(path,before,after):
@@ -151,14 +157,45 @@ def _consume(common_owner,configuration,patch,root,trace):
             actuals[lane]=(actual,receipt)
             trace('Actual_'+lane)
         assert len({id(v[0]) for v in actuals.values()})==len(lane_ids)==3
+        post_negative_receipts=[]
         for missing in lane_ids:
             partial=dict(actuals);partial[missing]=None
             with consumer.Handoff(common_owner,(reference,ref),partial,**options) as absent:
                 with pytest.raises(ValueError,match='Actual execution missing or failed'):absent.consume()
                 assert not absent.root.exists() and not retained
             released()
-            reference.validate_completion(ref)
-            for p,receipt in actuals.values():p.validate_completion(receipt)
+            revalidation=post_negative.validate_completed_bundle((reference,ref),actuals)
+            assert revalidation['complete'] and revalidation['closed'] and revalidation['outer_cleanup_complete']
+            assert revalidation['all_owned_guards_released'] and revalidation['all_reference_marks_cleared']
+            assert revalidation['operation_registry_cleared'] and revalidation['source_window_cache_cleared']
+            assert revalidation['implementation']==post_negative.implementation_identity()
+            assert revalidation['declaration']['helper_identity']==revalidation['implementation']
+            assert tuple(revalidation[k] for k in ('top_level_validations','parent_validations',
+                'source_prepares','borrowed_source_returns'))==(4,10,2,160)
+            expected_pairs=[(None,(reference,ref)),*sorted(actuals.items())]
+            binding=json.loads(reference._raw)['declaration']['source_binding']
+            assert revalidation['parent_sites']==[dict(root=str(parent.root),role=issued.role,lane_id=lane,
+                retained_bodies=7 if lane is None else 1,snapshot_sha256=snapshot.io.digest(parent._raw),
+                issued_completion_sha256=snapshot.io.digest(h.module._completion_bytes(issued)),source_binding=binding)
+                for lane,(parent,issued) in expected_pairs]
+            assert len(revalidation['source_windows'])==1
+            window=revalidation['source_windows'][0]
+            assert window['window_cache_entry_cleared'] and window['source_binding']==binding
+            assert window['nested_source_requests']==160 and window['original_source_prepares']==2
+            assert window['full_numerical_hour_replays']==8 and window['fresh_context_observations']==32
+            signature=window['complete_source_signature_sha256']
+            assert type(signature) is str and len(signature)==64 and all(c in '0123456789abcdef' for c in signature)
+            assert all(old['source_windows'][0]['complete_source_signature_sha256']==signature
+                for old in post_negative_receipts)
+            post_negative_receipts.append(revalidation)
+            assert all(revalidation['declaration'][k] is False for k in (
+                'same_public_parent_guard_schedule','between_top_level_parent_validations_ABA_covered',
+                'same_predecessor_per_nested_source_io_schedule','same_predecessor_failure_order',
+                'cross_window_source_reuse','complete_dynamic_input_closure_proved',
+                'unobserved_between_bookends_ABA_covered'))
+            assert all(revalidation[k] is False for k in (
+                'formal_result','resource_admission','native_execution_authorized'))
+            released()
             assert common_owner.inspect()['stage']==3
             trace('missing_Actual_rejected_'+missing)
         common_owner._enter()
@@ -251,6 +288,7 @@ def _consume(common_owner,configuration,patch,root,trace):
                 after=snapshot.io.digest(raw);expected.append((head,after));head=after
             assert retained==expected
             outcome=dict(root=str(owner.root),result=result,retained_heads=retained,
+                post_negative_validation_receipts=post_negative_receipts,
                 synthetic_selector_parents=1+len(actuals),canonical_selector_jobs=0,
                 real_native_calls=0,formal_result=False,
                 replay_inputs=dict(manifest=common_owner._manifest,binding=common_owner._binding,

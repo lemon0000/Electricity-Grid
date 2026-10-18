@@ -1,0 +1,255 @@
+{
+  "checked_at_utc": "2026-10-18T08:13:18.917418+00:00",
+  "status": "SYNTHETIC_CHAIN_BODY_PASSED_POSTCHECK_PENDING",
+  "exit_code": 0,
+  "elapsed_seconds": 259910.3253707,
+  "simulated_hours": 1,
+  "paired_lanes": 3,
+  "close_reopen_replay_in_body_passed": true,
+  "pinned_source_and_tested_copies_equal": true,
+  "pinned_source_files": 36,
+  "original_processes": [
+    {
+      "pid": 43640,
+      "creation_time": 1792047790.4886127,
+      "absent": true
+    },
+    {
+      "pid": 27888,
+      "creation_time": 1792047790.668987,
+      "absent": true
+    },
+    {
+      "pid": 42184,
+      "creation_time": 1792047800.3142161,
+      "absent": true
+    }
+  ],
+  "independent_postcheck_started": false,
+  "observer_status": "deadline_before_chain_terminal",
+  "chain_restarted": false,
+  "full_m2_acceptance": false,
+  "optimized_successor_full_chain_passed": false,
+  "formal_result": false,
+  "native_execution_authorized": false,
+  "evidence_sha256": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\terminal.json": "5da14d3218d963751ef103cc06d3d63364f7559f7f5783e332dc1ab7d9c9ab5b",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\stdout.log": "3f399aed8e68852492cc190f2e253e929ed21d16c6a00139d8746f785269d9d7",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\timing.jsonl": "8a3e0827fe203e0fe5f1c5e3c4e7a1e0d18aec835397ca465a4ace6b4d6a72f2",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\completion_supervision_02\\terminal.json": "f3e7a17935984a84cb10359f214b49b145a56611feb78e4a7c9e6b54b39a361b",
+    "D:\\h1_chain_07_non_authoritative\\test_complete_independent_N0_r0\\complete_integration_report.json": "750c316ec5c755c0b286b5d58a1d560a361a4948b652b476bb93e50114449eb4"
+  },
+  "stage_timing": [
+    {
+      "label": "source_and_fixture_setup",
+      "elapsed_seconds": 49.2403016,
+      "interval_seconds": 49.2403016
+    },
+    {
+      "label": "arm_0_open",
+      "elapsed_seconds": 71.5063901,
+      "interval_seconds": 22.2660885
+    },
+    {
+      "label": "arm_0_N0",
+      "elapsed_seconds": 435.4984657,
+      "interval_seconds": 363.9920756
+    },
+    {
+      "label": "arm_0_roster_attach",
+      "elapsed_seconds": 1048.7224636,
+      "interval_seconds": 613.2239979
+    },
+    {
+      "label": "arm_0_close",
+      "elapsed_seconds": 1154.8764106,
+      "interval_seconds": 106.153947
+    },
+    {
+      "label": "arm_1_open",
+      "elapsed_seconds": 1248.1597597,
+      "interval_seconds": 93.2833491
+    },
+    {
+      "label": "arm_1_N0",
+      "elapsed_seconds": 2415.2133939,
+      "interval_seconds": 1167.0536342
+    },
+    {
+      "label": "arm_1_roster_attach",
+      "elapsed_seconds": 3457.4471004,
+      "interval_seconds": 1042.2337065
+    },
+    {
+      "label": "arm_1_close",
+      "elapsed_seconds": 3635.8661121,
+      "interval_seconds": 178.4190117
+    },
+    {
+      "label": "arm_2_open",
+      "elapsed_seconds": 3806.2166359,
+      "interval_seconds": 170.3505238
+    },
+    {
+      "label": "arm_2_N0",
+      "elapsed_seconds": 5790.3687796,
+      "interval_seconds": 1984.1521437
+    },
+    {
+      "label": "arm_2_roster_attach",
+      "elapsed_seconds": 7265.6165909,
+      "interval_seconds": 1475.2478113
+    },
+    {
+      "label": "complete_common_scientific_replay",
+      "elapsed_seconds": 8469.8270463,
+      "interval_seconds": 1204.2104554
+    },
+    {
+      "label": "common_genesis_and_inspect",
+      "elapsed_seconds": 32639.1271504,
+      "interval_seconds": 24169.3001041
+    },
+    {
+      "label": "selector_harness_and_reference_snapshot",
+      "elapsed_seconds": 35491.4448621,
+      "interval_seconds": 2852.3177117
+    },
+    {
+      "label": "Rref_parent_run",
+      "elapsed_seconds": 39016.1314501,
+      "interval_seconds": 3524.686588
+    },
+    {
+      "label": "missing_all_Actual_rejected",
+      "elapsed_seconds": 43469.0324406,
+      "interval_seconds": 4452.9009905
+    },
+    {
+      "label": "Actual_snapshot_start_cfe_only_shared",
+      "elapsed_seconds": 43469.0329269,
+      "interval_seconds": 0.0004863
+    },
+    {
+      "label": "Actual_snapshot_ready_cfe_only_shared",
+      "elapsed_seconds": 46228.3970957,
+      "interval_seconds": 2759.3641688
+    },
+    {
+      "label": "Actual_parent_ready_cfe_only_shared",
+      "elapsed_seconds": 47689.0830726,
+      "interval_seconds": 1460.6859769
+    },
+    {
+      "label": "Actual_parent_returned_cfe_only_shared",
+      "elapsed_seconds": 53783.7467754,
+      "interval_seconds": 6094.6637028
+    },
+    {
+      "label": "Actual_cfe_only_shared",
+      "elapsed_seconds": 53854.0134582,
+      "interval_seconds": 70.2666828
+    },
+    {
+      "label": "Actual_snapshot_start_joint_correct_shared",
+      "elapsed_seconds": 53854.0139751,
+      "interval_seconds": 0.0005169
+    },
+    {
+      "label": "Actual_snapshot_ready_joint_correct_shared",
+      "elapsed_seconds": 56621.1745583,
+      "interval_seconds": 2767.1605832
+    },
+    {
+      "label": "Actual_parent_ready_joint_correct_shared",
+      "elapsed_seconds": 58080.2917838,
+      "interval_seconds": 1459.1172255
+    },
+    {
+      "label": "Actual_parent_returned_joint_correct_shared",
+      "elapsed_seconds": 64163.1208844,
+      "interval_seconds": 6082.8291006
+    },
+    {
+      "label": "Actual_joint_correct_shared",
+      "elapsed_seconds": 64233.1243383,
+      "interval_seconds": 70.0034539
+    },
+    {
+      "label": "Actual_snapshot_start_network_only_shared",
+      "elapsed_seconds": 64233.1247899,
+      "interval_seconds": 0.0004516
+    },
+    {
+      "label": "Actual_snapshot_ready_network_only_shared",
+      "elapsed_seconds": 66988.5842512,
+      "interval_seconds": 2755.4594613
+    },
+    {
+      "label": "Actual_parent_ready_network_only_shared",
+      "elapsed_seconds": 68446.0519845,
+      "interval_seconds": 1457.4677333
+    },
+    {
+      "label": "Actual_parent_returned_network_only_shared",
+      "elapsed_seconds": 74666.185714,
+      "interval_seconds": 6220.1337295
+    },
+    {
+      "label": "Actual_network_only_shared",
+      "elapsed_seconds": 74743.198474,
+      "interval_seconds": 77.01276
+    },
+    {
+      "label": "missing_Actual_rejected_cfe_only_shared",
+      "elapsed_seconds": 91186.5148863,
+      "interval_seconds": 16443.3164123
+    },
+    {
+      "label": "missing_Actual_rejected_joint_correct_shared",
+      "elapsed_seconds": 115002.6131666,
+      "interval_seconds": 23816.0982803
+    },
+    {
+      "label": "missing_Actual_rejected_network_only_shared",
+      "elapsed_seconds": 135486.7455612,
+      "interval_seconds": 20484.1323946
+    },
+    {
+      "label": "paired_commit_and_readback",
+      "elapsed_seconds": 257410.164173,
+      "interval_seconds": 121923.4186118
+    },
+    {
+      "label": "selector_parents_and_handoff_closed",
+      "elapsed_seconds": 257410.1654005,
+      "interval_seconds": 0.0012275
+    },
+    {
+      "label": "arm_2_close",
+      "elapsed_seconds": 257410.3745708,
+      "interval_seconds": 0.2091703
+    },
+    {
+      "label": "reopen_bootstrap_roster_common_and_close",
+      "elapsed_seconds": 259635.048368,
+      "interval_seconds": 2224.6737972
+    },
+    {
+      "label": "paired_owner_reopen_replay_and_close",
+      "elapsed_seconds": 259905.5435663,
+      "interval_seconds": 270.4951983
+    },
+    {
+      "label": "integration_report_saved",
+      "elapsed_seconds": 259905.5505397,
+      "interval_seconds": 0.0069734
+    },
+    {
+      "label": "identity_bookends_restored",
+      "elapsed_seconds": 259906.1114584,
+      "interval_seconds": 0.5609187
+    }
+  ]
+}
