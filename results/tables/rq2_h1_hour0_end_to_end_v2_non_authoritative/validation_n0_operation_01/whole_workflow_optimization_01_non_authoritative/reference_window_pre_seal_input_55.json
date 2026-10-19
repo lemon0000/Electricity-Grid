@@ -1,0 +1,33 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "scope": "targeted closure/guard cleanup fixes to input50; no official verdict",
+  "risk": "R3 validation observation contract",
+  "files": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_reference_sequence_window_development_v1.py": "277bdfe8152ab7c6061bce7a3ea8aa93127f72d8761fafc3f6a1405e9e96803d",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_source_window_development_v2.py": "d79fcceccdd1932e319ffb402086c88272ecb442f67d861808c35ef58f63c94f",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_controller_development_v4.py": "e6bf67997ee21a84d855b82e74fd0f598be5bddea380161574e56eb044897f0d",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\h1_reference_window_test_helpers_v1.py": "b8568f069842911127e544d6ecb767de0df19188149b3a0267738984d0efad17",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_selector_source_window_development_v2.py": "ac9b41de111b2c860a98860b6f30fd94e48eeddc402c5c00a21eeb9ba42079c7",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_reference_sequence_window_development_v1.py": "9bbef14627852dc17620de5644f143fd8b1c5eb7e0b1b642c7fce045428ddb9e",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_parent_guard_cleanup_development_v1.py": "207a93a505307577d6f8ee50de36731ac6be17b17931ce0ee0114b6a87025831",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\h1_hour0_synthetic_harness_v4.py": "7dd3abfaa695009333732e138f93ab5ed404c205595069389417c7d64626774d",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_selector_parent_controller_development_v4.py": "73b18734c39f0d32766dc981f36b79ffc0fb57b8c81b9aee2c9773922b178d5b",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\reference_window_safety_units_55\\terminal.json": "3074af2e97a73708321fcaaa4f819b8265c0aec683472005f4300d8df61e54da",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\reference_window_safety_units_55\\stdout.log": "c987aef3b19023f1df6b09231e1cd1e9140156a6f72295ce67ec7567917e99ce"
+  },
+  "checks": {
+    "tests": 143,
+    "pytest_seconds": 18.22,
+    "outer_exit_code": 0,
+    "outer_seconds": 21.062
+  },
+  "findings_to_recheck": [
+    "Source2 exact function/defaults/kwdefaults/globals/closure state and absent builtin/global shadow rows; captured original runtime; legitimate arm transition frozen after binding",
+    "reference engine own runtime present/absent bindings and property/static/class accessors",
+    "Parent4 capture original guards, independent reverse releases, bounded recovery, original primary with cleanup notes, no clean run completion after cleanup error"
+  ],
+  "canonical_saved_probe_51_scope": "pre-fix engine; real saved numerical bytes compatible, explicit probe anchors only",
+  "real_Parent4_lifecycle_completed": false,
+  "whole_workflow_accepted": false,
+  "formal_result": false
+}

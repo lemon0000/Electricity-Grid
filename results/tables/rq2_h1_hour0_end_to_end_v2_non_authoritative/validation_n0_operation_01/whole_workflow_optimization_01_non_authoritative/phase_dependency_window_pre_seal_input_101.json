@@ -1,0 +1,62 @@
+{
+  "status": "PRE_SEAL_FOLLOWUP_INPUT_NONAUTHORITATIVE",
+  "at_utc": "2026-10-19T05:31:27.461285+00:00",
+  "root_sole_writer": true,
+  "prior_input_sha256": "9c65b2446e62c594ddb8c3998d52a30fed0d861b41e5c9f2fb23f7034794e20b",
+  "scope": "Follow up findings99: complete source identity, per-file minimum caps, GC abandonment and retained close failures. No official review or owner credential.",
+  "changes": [
+    "Source identity binds eight semantic dependency source SHA values plus explicit Windows ABI recipe and pointer size",
+    "Minimum canonical per-file byte caps preserved in inventory acquisition, recheck and exit; depth64 and4096 aggregate handles",
+    "Owner-independent weakref finalization, retained orphan callbacks, bounded retry and atexit fallback",
+    "Persistent errors are descriptions only, avoiding owner retention by saved tracebacks; original immediate primary exception still propagates",
+    "New runtime_v2 differs from v1 only by deleting sender frame before generator yield; old source not modified; both versions run existing runtime fault tests"
+  ],
+  "failure100": {
+    "failed": "GC success test found runtime generator retained caller frame;1 failed,17 passed,1 teardown error",
+    "preserved": true
+  },
+  "current_unit101": {
+    "passed": 98,
+    "pytest_seconds": 18.58,
+    "outer_seconds": 21.51600000000326,
+    "source_unchanged": true,
+    "observed_PID_absent": true,
+    "cleanup_errors": []
+  },
+  "requested_review": [
+    "Check findings99 closure and new GC resource routing, independent source identity coverage and original file caps",
+    "Check runtime_v2 transport and callable seal equivalence; no unbound owner/frame retention",
+    "Check readiness only for fixed bounded unprofiled cost comparison; no whole-chain runtime claim"
+  ],
+  "files_sha256": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_canonical_path_lease_development_v1.py": "f4fd83cb189ed5a05b20ecbaf72d5a29e7dc6f9746dc777d18f140bbd4aeab2d",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_dependency_validation_operation_development_v1.py": "7f8d896e13aa8b345cc1c7131fa77a14bf948d1425fc9e3a5c61c7330013ce99",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_dependency_verifier_development_v1.py": "7e8187c4a062c58778f916200d129351459f2ae026c7ca1142918bb9b94f564a",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_manifest_group_development_v1.py": "e03da050cdedeef5b1d1370b078aa8ef672d5bf66f1e1e41ede939c12cf804cc",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py": "df59ba543655307f0aae369bebf85e46d5ed94a3525f1a7f72f718fe744b598a",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_symbolic_normal_manifest_development_v1.py": "f268d361048331fbceccda44e6e6fff36fb59e5a9816404122bc65334b39af61",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_validation_runtime_closure_development_v1.py": "3ca9d75a9dfc683f044235c882a265b81eac5a16431974fb3eb0fa36d1bfc743",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_validation_runtime_closure_development_v2.py": "bf67c76732db363f0dc7f3cb462cf28afe7be7f8114d09b0ce4ff2060619cb60",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\rq2_v2_obligation_manifest_development_v1.py": "14f69f691d9f4e863e393be7bedca01f8bad60656d94e72d80013a62b217ff23",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_100\\request.json": "0deee3fd71a2a2efa5702837fc27bf5a59dba8f69fa60aea1f65031e24237775",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_100\\started.json": "671ce6f21fe4d561a91c57d86d7d5bb09ef01840982c8332327de04264bf3730",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_100\\stdout.log": "0e7b8851b3de41ee3a825913e371d17a52de4df48ed1846ff66e945aa8b04e94",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_100\\terminal.json": "d7fcd06c1b22ec1bce4bac63c61428b95f9afb2e865ed99d3e881a7eed0b8da4",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_101\\request.json": "352c60f6711550d8f416c3dff1d9f073f42c5244f8e610f7d9c1cdd4ad26d6c2",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_101\\started.json": "dedfc462706cf924cdffc783f6a37990871757c159b763d1b8e2fafad16c045e",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_101\\stdout.log": "f165b27a3a3ef1ab60c8ec9d554bca3294dbc704f3d27fda32d83781ab600289",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_101\\terminal.json": "f8b5da8e6acd29a2b772f8d02dcda7626da5d04e6b4d4ab24d4775f6259d1e60",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\run_unit_bounded_v15.py": "8b6dd486c1d44a5c655ca108add45766bc1e312fbb79ac75e3337037e8a7b92c",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\run_unit_entry_v3.py": "e0a3fe55a8f0bef6f14d5112e13dade0f635b94ad6718a040b52bf71d5ee8440",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_phase_dependency_cost_comparison_development_v1.py": "6624e995ebf80cc039a83a66cedbf25561cc22b9464b7ac236208e35c1ff5ff0",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_phase_dependency_validation_operation_development_v1.py": "d197276d0a2bfcb2e2d1002d8598519979f901bbe2f733c9d3b324fe7a89b233",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_phase_dependency_window_faults_development_v1.py": "d7ce38fa2a0e65ee6efba99271215c66bb103776ede85ac5ca1bbade280b52e6",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_validation_runtime_closure_development_v1.py": "7021a3e182d80501cdcd527e889fbea80c1e997e7da911c24aa8c8f832bd57c6",
+    "D:\\h1_phase_dep_window_101_non_authoritative\\test_immutable_phase_window_ma0\\phase_window_observation.json": "4da9811ffa40cb1e898a3c8163cb1d245cc38058c47c6ccdf3a214d369cca6b6",
+    "D:\\h1_phase_dep_window_101_non_authoritative\\unit_code_read_lease_closed.json": "64c905bacb02e9fd8ddfa240c6618078cdec74fdae4c06fd6a0a4f993b5a981f"
+  },
+  "official_review": false,
+  "production_seal": false,
+  "formal_result": false,
+  "resource_admission": false
+}

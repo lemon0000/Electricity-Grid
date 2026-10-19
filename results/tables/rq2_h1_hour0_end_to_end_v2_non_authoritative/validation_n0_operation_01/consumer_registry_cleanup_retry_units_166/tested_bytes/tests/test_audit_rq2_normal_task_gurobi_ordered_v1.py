@@ -1,0 +1,111 @@
+"""Read-only pinned declaration gates; no Job or solver execution."""
+from hashlib import sha256
+from pathlib import Path
+
+import pytest
+import yaml
+
+from experiments import audit_rq2_normal_task_gurobi_ordered_v1 as api
+
+
+DECLARATION = Path('configs/rq2_normal_task_gurobi_ordered_h25_development_v1.DRAFT.yaml')
+PIN = '688c2090f8e26c08b744fea7f61dfef38726d29ed69163727efa23575ccca03d'
+
+
+def test_fixed_h25_declaration_decodes_without_prepare_or_process(monkeypatch):
+    def forbidden(*a, **k): raise AssertionError('inspection must not prepare/spawn/solve')
+    monkeypatch.setattr(api.controller.worker.inputs, 'prepare_task_inputs', forbidden)
+    monkeypatch.setattr(api.controller.process, 'normal_task_child', forbidden)
+    root, request, budget, _, pin = api.read_declaration(DECLARATION, PIN)
+    assert request.source.expected_scale == api.controller.worker.kernel.Rq2ModelScale(22275, 28004)
+    assert budget.max_total_elapsed_seconds == 600 and len(pin) == 64
+    assert root.name == 'rq2_normal_task_gurobi_ordered_h25_attempt1_non_authoritative'
+
+
+def test_successor_preserves_source_tolerances_and_resource_budgets():
+    old = yaml.safe_load(Path('configs/rq2_normal_task_gurobi_licensed_h25_development_v1.DRAFT.yaml').read_bytes())
+    new = yaml.safe_load(DECLARATION.read_bytes())
+    assert new['budget'] == old['budget']
+    assert new['environment'] == old['environment']
+    assert old['request']['specification']['time_limit_seconds'] == 5.
+    old['request']['specification']['time_limit_seconds'] = 15.
+    old['request']['execution_budget']['max_seconds_per_solve'] = 15.
+    derived = {'expected_normal_execution_identity', 'expected_source_execution_identity',
+        'expected_declared_execution_identity', 'expected_replay_identity'}
+    assert {k:v for k,v in new['request'].items() if k not in derived} == {
+        k:v for k,v in old['request'].items() if k not in derived}
+    assert all(new['request'][k] != old['request'][k] for k in derived)
+
+
+@pytest.mark.parametrize('fault', ['hash', 'duplicate', 'authority', 'extra', 'controller_pin', 'solver_scope'])
+def test_bad_declaration_refused(tmp_path, fault):
+    body = yaml.safe_load(DECLARATION.read_bytes())
+    if fault == 'authority': body['formal_result'] = True
+    if fault == 'extra': body['resume'] = True
+    if fault == 'controller_pin': body['expected_controller_identity'] = '0'*64
+    if fault == 'solver_scope': body['request']['specification']['threads'] = 2
+    raw = yaml.safe_dump(body).encode()
+    if fault == 'duplicate': raw += b'formal_result: false\n'
+    path = tmp_path/'declaration.yaml'
+    path.write_bytes(raw)
+    with pytest.raises((ValueError, TypeError)):
+        api.read_declaration(path, '0'*64 if fault == 'hash' else sha256(raw).hexdigest())
+
+
+@pytest.mark.parametrize('section,field,value', [
+    ('specification','time_limit_seconds',10.), ('specification','threads',2),
+    ('specification','mip_relative_gap',1e-4), ('specification','random_seed',1),
+    ('specification','feasibility_tolerance',1e-6),
+    ('execution_budget','max_seconds_per_solve',10.),
+    ('execution_budget','max_observed_wall_seconds',61.),
+    ('execution_budget','max_process_peak_working_set_bytes',2**30),
+    ('source','expected_input_identity','0'*64)])
+def test_rehashed_declaration_cannot_expand_fixed_scope(tmp_path, section, field, value):
+    body = yaml.safe_load(DECLARATION.read_bytes())
+    body['request'][section][field] = value
+    raw = yaml.safe_dump(body).encode()
+    path = tmp_path/'scope.yaml'
+    path.write_bytes(raw)
+    with pytest.raises(ValueError, match='preserve pinned model and acceptance scope'):
+        api.read_declaration(path, sha256(raw).hexdigest())
+
+
+def test_source_and_downstream_pins_recomputed_from_fifteen_second_contract():
+    _, request, _, _, _ = api.read_declaration(DECLARATION, PIN)
+    worker = api.controller.worker
+    declaration = worker.inputs.source.PairDeclaration(**yaml.safe_load(
+        Path(request.source.pair_declaration_path).read_bytes()))
+    assert request.expected_source_execution_identity == worker.journal.execution.source.source_execution_identity(
+        request.expected_binding_identity, request.expected_normal_execution_identity, declaration,
+        expected_assembly_identity=request.expected_assembly_identity,
+        expected_pair_identity=request.source.expected_pair_identity,
+        expected_source_implementation_identity=request.expected_source_implementation_identity,
+        expected_binding_implementation_identity=request.expected_binding_implementation_identity)
+    assert len(worker.task_identity(request)) == 64
+
+
+@pytest.mark.parametrize('start', ['source', 'declared'])
+def test_coherently_rehashed_downstream_chain_rejected(tmp_path, start):
+    from dataclasses import asdict, replace
+    root, request, budget, env, _ = api.read_declaration(DECLARATION, PIN)
+    worker = api.controller.worker
+    if start == 'source':
+        request = replace(request, expected_source_execution_identity='0'*64)
+        declared = worker.journal.execution.declared_execution_identity(request.source,
+            expected_request_identity=request.expected_source_request_identity,
+            expected_source_execution_identity=request.expected_source_execution_identity)
+    else:
+        declared = '0'*64
+    request = replace(request, expected_declared_execution_identity=declared,
+        expected_replay_identity=worker.replay.replay_identity(declared,
+            request.specification, request.execution_budget))
+    body = yaml.safe_load(DECLARATION.read_bytes())
+    body['request'] = asdict(request)
+    # The source forgery also passes the old compact identity check.
+    if start == 'source':
+        body['expected_controller_identity'] = api.controller.controller_identity(root, request, budget, env)
+    raw = yaml.safe_dump(body).encode()
+    path = tmp_path/'forged.yaml'
+    path.write_bytes(raw)
+    with pytest.raises(ValueError, match='derived normal/source/declared/replay identity chain mismatch'):
+        api.read_declaration(path, sha256(raw).hexdigest())

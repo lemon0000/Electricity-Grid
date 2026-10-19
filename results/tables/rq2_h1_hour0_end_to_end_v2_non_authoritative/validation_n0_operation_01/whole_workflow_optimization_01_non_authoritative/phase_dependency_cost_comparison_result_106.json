@@ -1,0 +1,92 @@
+{
+  "status": "BOUNDED_COST_COMPARISON_COMPLETE_NONAUTHORITATIVE",
+  "at_utc": "2026-10-19T05:44:37.150210+00:00",
+  "plan_sha256": "edd893415c7871edb88881881122edbe35bda473603ea8b79308e1e657fc57f9",
+  "exit_code": 0,
+  "pytest": "1 passed55.70s",
+  "outer_seconds": 58.375,
+  "comparisons": [
+    {
+      "requests": 6,
+      "canonical_seconds": [
+        4.195755799999461,
+        4.543503299995791
+      ],
+      "window_seconds": [
+        3.0744988000078592,
+        3.106917600001907
+      ],
+      "mean_canonical_seconds": 4.369629549997626,
+      "mean_window_seconds": 3.090708200004883,
+      "mean_window_over_canonical": 0.7073158409976796,
+      "measured_total_reduction_fraction": 0.29268415900232037
+    },
+    {
+      "requests": 16,
+      "canonical_seconds": [
+        12.053987899998901,
+        11.844597000002977
+      ],
+      "window_seconds": [
+        6.845810999991954,
+        7.066669799998635
+      ],
+      "mean_canonical_seconds": 11.94929245000094,
+      "mean_window_seconds": 6.956240399995295,
+      "mean_window_over_canonical": 0.5821466358030888,
+      "measured_total_reduction_fraction": 0.4178533641969112
+    }
+  ],
+  "scientific_reference_sha256": "b6f4514ebfb2223d094317e5bf6ce31742907d9a18243a47b4bf9cd71e92961d",
+  "independently_compared_scientific_fields": true,
+  "windows": 4,
+  "held_group_projections": 44,
+  "canonical_group_calls": 45,
+  "each_window": {
+    "inventory_paths": 974,
+    "controlled_physical_read_attempts": 2926,
+    "controlled_physical_bytes_read": 137187000,
+    "counter_scope": "inventory reads only; implementation source hashing separate; metadata/handle checkpoints counted separately",
+    "all_handles_closed": true,
+    "bytes_cleared": true,
+    "original_guard_released": true,
+    "active_and_orphan_counts_zero": true
+  },
+  "observed_owned_processes": [
+    {
+      "pid": 7300,
+      "creation_time": 1792388542.9170945
+    }
+  ],
+  "observed_owned_processes_absent": true,
+  "complete_process_tree_absence_proven": false,
+  "peak_observed_process_tree_rss": 292384768,
+  "memory_is_sampled": true,
+  "observed_storage_bytes": 14887533,
+  "cleanup_errors": [],
+  "source_unchanged": true,
+  "plan_input_pin_count": 1153,
+  "plan_input_pin_drift": [],
+  "files_sha256": {
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_dependency_cost_comparison_plan_106.json": "edd893415c7871edb88881881122edbe35bda473603ea8b79308e1e657fc57f9",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_dependency_window_pre_seal_input_105.json": "8394ca171fc709748769d531cf854c851037b6110709f4327bd3ef6b0e00943c",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_dependency_window_findings_105.json": "ec31e25afdcbe31eea691f7255158d6cb4612a88f77835a336ab02464c9148a2",
+    "D:\\h1_phase_dep_comparison_106_non_authoritative\\test_six_and_sixteen_requests_0\\phase_dependency_unprofiled_comparison.json": "54219bc1dcb6cc0385e72cae1c859f1968debe669029499c25a6f1cb947e6597",
+    "D:\\h1_phase_dep_comparison_106_non_authoritative\\unit_code_read_lease_closed.json": "ab4e7451d878408fc610a471177780d212b62c685af88c0ea724a5e83736cb8c",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_cost_comparison_106\\request.json": "847f527330831c7ed13aacff64954b4676737418249c9273845e19359095bcee",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_cost_comparison_106\\started.json": "07f003a1315093297494ff62ac547d821b8c9157a0588b76946041d7e72ddc4a",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_cost_comparison_106\\terminal.json": "03ee820c0f5571cd5f6e2704bffa5e93612f7ca27e6e8f0ad8f816e022c3a46b",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_cost_comparison_106\\stdout.log": "eaa6fb1e9803d9a0f7f0a626ab447bcc976041faa78a73e6760801c5a04d1841"
+  },
+  "interpretation": "Positive local ROI at6/16 requests in one shared ordinary entry and process, C-W-W-C order; acquisition/exit/cleanup included. Two batches each, no confidence interval or whole-chain extrapolation.",
+  "decision": "Proceed to versioned phase-binding3/Bootstrap5/Owned5/Roster4 public lifecycle integration; no data-only receipt consumed as credential",
+  "whole_workflow_performance_review_complete": false,
+  "full_optimized_workflow_accepted": false,
+  "genuine_consumer_graph_accepted": false,
+  "production_seal": false,
+  "official_review": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

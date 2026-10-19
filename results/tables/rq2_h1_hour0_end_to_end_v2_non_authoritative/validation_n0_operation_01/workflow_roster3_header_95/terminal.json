@@ -1,0 +1,37 @@
+{
+  "observed_owned_processes": [
+    {
+      "pid": 35684,
+      "creation_time": 1792385066.8041291
+    }
+  ],
+  "observed_owned_processes_remaining": [],
+  "observed_owned_processes_absent": true,
+  "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+  "cleanup_events": [
+    {
+      "pid": 35684,
+      "creation_time": 1792385066.8041291,
+      "action": "kill_owned"
+    }
+  ],
+  "descendant_discovery_complete": true,
+  "complete_process_tree_absence_proven": false,
+  "exit_code": 15,
+  "storage_read_errors": [],
+  "cleanup_errors": [],
+  "final_storage_observation_complete": true,
+  "elapsed_seconds": 300.32800000000134,
+  "stop_reason": "wall",
+  "peak_observed_process_tree_rss": 366661632,
+  "observed_storage_bytes": 29742410,
+  "memory_is_sampled": true,
+  "source_unchanged": true,
+  "source_snapshot_complete": true,
+  "peak_rss_includes_monitor": true,
+  "formal_result": false,
+  "resource_admission": false,
+  "request_sha256": "f4a9e788cd8fa55b43c3484952151c4e04e60804a006be854be815eb5493899e",
+  "started_sha256": "a86829a2ac2ac539b7269ec888e87a66615ed7aa07ff1316e31b9e18f817e316",
+  "runner_sha256": "22248a76639a4031dac0818cffb6c88324a695c4289206ba8a4128db4d69cef3"
+}

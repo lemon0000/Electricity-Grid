@@ -1,0 +1,212 @@
+{
+  "schema": "h1_bounded_ordinary_four_parent_distribution_plan_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "observed_at_utc": "2026-10-18T19:18:24.817071+00:00",
+  "purpose": "measure locked distribution-path discovery successor over the same four-Parent paired/close/reopen ordinary fixture",
+  "evidence_sha256": {
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\package_manifest_v1.json": "8d72c03f4b8e95c84deffe5a0281f05d6baf932aa62ac1fd6a4d46ee5f24f034",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\validation_entry.py": "7409cfd3e22857cf5ba5d46c16ddd762e4e5db974ad1642fd520d498e4a8ba82",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\launch_validation.py": "416ea74d1560e24bdcdf17532d9c6848d44c30dfd384e304b14b6413fc9ee5d8",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\pinned_distribution_resolver_v1.py": "dc154392771996c9fa811f759b916865adf607f32d65a84d695c9a2db60e91bb",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\code_allowlist_v3.json": "93eef2e8a4f71c3fe359ce417985d96169530449d45b39f77effd11efee90142",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\test_closure_v1.json": "5484c3d6a39ef339572f2001b379423413ee0054dfc2c44ab72c32339bcab9bc",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\metadata_allowlist_v1.json": "90fc679a8e71971e1f0bdb97575ed83d9a620826c7670ce5a308566b7b710302",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\scientific_input_allowlist_v1.json": "25fba63a8858987a9cdec778d5c93b5c71cf6ddd88262a5b2c48ad7da55a52de",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\run_workflow_entry_bounded_v5.py": "ed0f283c0edb607314262521de5463f590ce5e4fcd74319dbfd51bd4b8eb73d5",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_distribution_units_40\\terminal.json": "63fd6f39a8d5b541d0389a12f7f2706b466c7f7cef8ddf4f0caa8b08518bea83",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\distribution_units_40\\terminal.json": "443ad4b82c8f2ce90077055efcba50eb7cf0c0f387f3b54e198398ba5bb35cd6",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\distribution_units_40\\distribution_resolver_unit_evidence.json": "7f2c6d02acfdd32e7344daefb95f3a6d72a8e749dd318fd2a50a0fe4e8127c4c",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_static_paired_28\\terminal.json": "408fc5b3cf74b137558293f2852fde46d7a5c1f98b2ecdf937c7b7584ae8da9e",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_static_digest_paired_36\\terminal.json": "a1f6f88e510e9eb38ebe6f225689c048e985a9547a93a163166feb1cc389411d",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\static_digest_full_parent_comparison_36.json": "a0d5a3d1993b325efaa14746b691c91f8452f6bbff8f9d1c8ee03df9c966814c",
+    "tests\\test_h1_genesis_consumer_operation_development_v1.py": "05e2845452de51c929b5957ab5c4905b28f091c27d926393a18955d3cdcb5354",
+    "tests\\test_h1_selector_phase_handoff_development_v5.py": "a053268682839b43554b35b528fc0f407a74e5c98c75aad759b7e44546293771"
+  },
+  "target": "tests/test_h1_genesis_consumer_operation_development_v1.py::test_three_actual_parents_commit_close_and_reopen_saved_phase",
+  "instance": {
+    "simulated_hours": 1,
+    "reference_parents": 1,
+    "actual_parents": 3,
+    "paired_lanes": 3,
+    "source_logical_requests": 2408,
+    "source_preparations": 28,
+    "bundle_windows": 13,
+    "record_bundle_windows": 1,
+    "retains": 5,
+    "explicit_fake_N0_source_native_and_Job": true,
+    "real_native_calls": 0,
+    "real_Job_launches": 0
+  },
+  "stages": [
+    "pinned entry and immutable input/metadata acquisition",
+    "fake producer setup then adapter/consumer cold imports",
+    "Genesis create/inspect/capture",
+    "Rref construct/run",
+    "three Actual snapshot/construct/run",
+    "Handoff consume and parent validation",
+    "paired commits and retain callbacks",
+    "close all original owners",
+    "fresh phase and holder reopen, saved replay, heads/carry/projection/tickets equality",
+    "entry and discovery oracles, read/parser/path/normalizer cleanup",
+    "reports and terminal"
+  ],
+  "dependency_order": "entry11 derives entry09; unchanged v1 normalization; one byte owner -> path lease -> metadata parser -> distribution resolver -> normalizer; reverse exit",
+  "reuse": {
+    "legacy_chain_and_postcheck": "closed artifacts reused; no body restart",
+    "code_files": 257,
+    "scientific_input_files": 2,
+    "locked_METADATA_files": 8,
+    "discovery": "selected path strings only; fresh PathDistribution and Path each eligible call",
+    "eligibility": "exact Distribution and eight names, sys.path and actual distribution finders, explicit stock discovery descriptor/global inventory",
+    "invalidations": "changed discovery graph calls original; captured original function mutation is sticky failure; outer held parser/constructor changes are sticky",
+    "entry_exit_oracles": "original from_name and unique complete discover for all eight names; selected paths/stat/versions/pins equal",
+    "per_call_discovery_preserved": false,
+    "failure_timing_preserved": false,
+    "transient_ABA_covered": false,
+    "numerical_or_solver_or_saved_record_cache": false,
+    "outer_parser_cleanup": "separate outer owner exit; resolver owns no handles"
+  },
+  "optimization_decisions": {
+    "metadata_discovery": "new isolated branch, local2000 call comparison plus explicit negative/oracle proof; whole-path effect to measure",
+    "digest_branch": "entry10 not composed after previous full-path comparison showed no gain",
+    "reference_sequence_inspection": "at least81 calls through three Actual capture+construction; remains fresh; reuse would require a separate dependency/freshness proof",
+    "parallel_Actuals": "current exact reference owner locks and callbacks serialize; no new parallel execution"
+  },
+  "prior_measured": {
+    "attempt28_wall_seconds": 600.391,
+    "attempt28_prefix_seconds": [
+      45.773096,
+      215.422925,
+      362.356436,
+      508.624727,
+      508.736941
+    ],
+    "attempt36_wall_seconds": 600.328,
+    "attempt36_prefix_seconds": [
+      47.6789355,
+      208.4410269,
+      374.0859181,
+      521.1472141,
+      521.2657768
+    ],
+    "prior_paired_reopen_terminal": false,
+    "unit40": {
+      "exit_code": 0,
+      "observed_owned_processes": [
+        {
+          "pid": 34536,
+          "creation_time": 1792350926.811679
+        },
+        {
+          "pid": 6880,
+          "creation_time": 1792350939.3242543
+        },
+        {
+          "pid": 12016,
+          "creation_time": 1792350939.5096264
+        },
+        {
+          "pid": 25936,
+          "creation_time": 1792350939.7869453
+        },
+        {
+          "pid": 10148,
+          "creation_time": 1792350939.8846424
+        }
+      ],
+      "observed_owned_processes_remaining": [],
+      "observed_owned_processes_absent": true,
+      "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+      "cleanup_events": [],
+      "descendant_discovery_complete": true,
+      "complete_process_tree_absence_proven": false,
+      "storage_read_errors": [],
+      "cleanup_errors": [],
+      "final_storage_observation_complete": true,
+      "elapsed_seconds": 25.860000000000582,
+      "stop_reason": null,
+      "peak_observed_process_tree_rss": 294506496,
+      "observed_storage_bytes": 28130693,
+      "memory_is_sampled": true,
+      "source_unchanged": true,
+      "source_snapshot_complete": true,
+      "peak_rss_includes_monitor": true,
+      "formal_result": false,
+      "resource_admission": false
+    },
+    "local_metadata_comparison": {
+      "calls": 2000,
+      "parse_lease_with_original_discovery_seconds": 1.533004400000209,
+      "pinned_discovery_with_entry_exit_and_outer_lease_seconds": 0.8297477999985858,
+      "includes_all_successor_boundaries": true,
+      "identical_version_values": true,
+      "scope": "local metadata path only; whole-workflow speedup unproved",
+      "formal_result": false
+    }
+  },
+  "costs": {
+    "whole_workflow_review_complete": false,
+    "complete_optimized_workflow_runtime_estimate": null,
+    "whole_workflow_speedup_established": false,
+    "per_stage_runtime": "prefix measured; remaining paired/reopen is unknown; fixed diagnostic budget only",
+    "metadata_route_calls": "to be observed; no whole-path call-count extrapolation from local benchmark"
+  },
+  "limits": {
+    "wall_seconds": 600,
+    "sampled_process_tree_plus_monitor_rss_bytes": 1073741824,
+    "new_storage_bytes": 134217728,
+    "concurrency": 1,
+    "python_stack_sample_interval_seconds": 30,
+    "max_stack_samples": 24,
+    "attempts": 1,
+    "stop_on_wall_rss_storage_or_observation_error": true,
+    "no_progress": "stage and bounded stack observation; never extend fixed wall cap",
+    "cleanup": "owned direct child handle plus repeatedly observed PID and creation-time descendants; preserve artifacts",
+    "resource_limits_are_observed_not_reserved": true
+  },
+  "acceptance": [
+    "exit0 after complete entry exit",
+    "three paired lanes and five retains",
+    "saved heads/carry/projection/tickets equal after close/reopen",
+    "original source request/preparation/window count assertions",
+    "source/package pins unchanged",
+    "clean byte/path/normalization/parser outer cleanup and closed resolver receipt",
+    "resolver eight selected rows and exactly one entry/exit oracle; calls=fast+fallback; fresh objects=fast>0",
+    "observed owned PIDs with creation times absent; no cleanup or observation errors"
+  ],
+  "pre_seal_scope": "named Python bindings/descriptors/function states and direct globals; no arbitrary-memory security claim",
+  "pre_seal_candidate": {
+    "status": "awaiting_scoped_read_only_recheck_of_unit40",
+    "official_review": false,
+    "production_seal": false
+  },
+  "launch_prerequisites": [
+    "scoped closure P1 resolved by independent read-only audit",
+    "current evidence/member pins reverified",
+    "no related active experiment; this is a new ordinary bounded diagnostic"
+  ],
+  "remaining": [
+    "genuine Bootstrap4 complete registry/scope/receipt/oracle",
+    "typed successor graph and connected three independent N0",
+    "genuine source/numerical output equality",
+    "complete optimized workflow performance/resource acceptance",
+    "formal gates"
+  ],
+  "environment": {
+    "python": "3.12.12 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 20:05:38) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "attempt": {
+    "outer": "workflow_genesis_distribution_paired_41",
+    "child": "genesis_distribution_paired_41",
+    "entry": "entry_revision_11_non_authoritative",
+    "main_chain07_restarted": false
+  },
+  "ordinary_unit_launch_not_formal_experiment": true,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "production_seal": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

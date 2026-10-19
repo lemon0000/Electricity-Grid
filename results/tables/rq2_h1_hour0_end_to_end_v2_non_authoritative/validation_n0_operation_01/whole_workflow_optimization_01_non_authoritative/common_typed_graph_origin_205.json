@@ -1,0 +1,305 @@
+{
+  "schema": "h1_common_typed_graph_origin_205",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "root_sole_writer": true,
+  "scope": "Twenty explicit source/schema/import successors; Common registry entry remains denied.",
+  "files": [
+    {
+      "source": "experiments\\h1_group_n0_common_input_binding_development_v2.py",
+      "target": "experiments\\h1_group_n0_common_input_binding_development_v11.py",
+      "before_sha256": "3de2765ae605cb7917190900363ca4cad3e2b8f7294cbb29b91d639e0b9e89d6",
+      "namespace_schema_substitutions": {
+        "h1_group_n0_common_input_binding_development_v2": "h1_group_n0_common_input_binding_development_v11",
+        "h1_group_execution_roster_development_v2": "h1_group_execution_roster_development_v5"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "e1ada7fc1cee57302208770985a89564f9455f8b8f17abfb644ef4c148c6be8b",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_common_owner_genesis_development_v2.py",
+      "target": "experiments\\h1_common_owner_genesis_development_v3.py",
+      "before_sha256": "064284829f5cf4ef8c770b700e6a8fad126764cad370afc3815cd3ad3d9b7aee",
+      "namespace_schema_substitutions": {
+        "h1_common_owner_genesis_development_v2": "h1_common_owner_genesis_development_v3",
+        "h1_group_n0_common_input_binding_development_v2": "h1_group_n0_common_input_binding_development_v11"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "959ced4d972dce264cc20f2a537c0cc2fc3ace8e7cea9af6027dcba17850f9b4",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_selector_input_snapshot_development_v2.py",
+      "target": "experiments\\h1_selector_input_snapshot_development_v3.py",
+      "before_sha256": "93c142ac43a464783ad64c416183d7983c89d7d9e9b393fc1a61e6d82ec7ec20",
+      "namespace_schema_substitutions": {
+        "h1_selector_input_snapshot_development_v2": "h1_selector_input_snapshot_development_v3",
+        "h1_common_owner_genesis_development_v2": "h1_common_owner_genesis_development_v3"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "f69e23ef2703a13cf619255236147a6712db266c8daad3b9dab19347c58c8379",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_selector_released_worker_development_v2.py",
+      "target": "experiments\\h1_selector_released_worker_development_v3.py",
+      "before_sha256": "1fe4df751bb46cd1c36e0459cc8b720280fe00111712463509b7175fccf9dd74",
+      "namespace_schema_substitutions": {
+        "h1_selector_released_worker_development_v2": "h1_selector_released_worker_development_v3",
+        "h1_selector_input_snapshot_development_v2": "h1_selector_input_snapshot_development_v3"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "ce68f90fed9c326cb9947a68a20f00daa933fb9b06b175f91a94886753f4f3b8",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_selector_launch_preparation_development_v2.py",
+      "target": "experiments\\h1_selector_launch_preparation_development_v3.py",
+      "before_sha256": "2adcba2859bf20deb1bc6de092ba85d3d5222827eb6ac3ce711c73419ea230c1",
+      "namespace_schema_substitutions": {
+        "h1_selector_launch_preparation_development_v2": "h1_selector_launch_preparation_development_v3",
+        "h1_selector_released_worker_development_v2": "h1_selector_released_worker_development_v3"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "fab95bd681e418d1ddb0ff5fe56390486abc9a80e8d56d0d31caebf7382f4f5c",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_selector_job_lifecycle_development_v2.py",
+      "target": "experiments\\h1_selector_job_lifecycle_development_v3.py",
+      "before_sha256": "0ea702e7171e3bd4756f08b8d3cf8e60abdd013396e96d874b0f49679f95333b",
+      "namespace_schema_substitutions": {
+        "h1_selector_job_lifecycle_development_v2": "h1_selector_job_lifecycle_development_v3",
+        "h1_selector_released_worker_development_v2": "h1_selector_released_worker_development_v3",
+        "h1_selector_job_inspection_diagnostic_v2": "h1_selector_job_inspection_diagnostic_v3"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "6ad79c2d4763913fabd457d6a4201cc5c8471675cefc515b1c5efbc180a5442a",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_selector_worker_output_inspection_development_v2.py",
+      "target": "experiments\\h1_selector_worker_output_inspection_development_v3.py",
+      "before_sha256": "9e0d8337e336506ce11be8d65dbd2fc7ce47cd0ee45a776675e58b97df82c3a4",
+      "namespace_schema_substitutions": {
+        "h1_selector_worker_output_inspection_development_v2": "h1_selector_worker_output_inspection_development_v3",
+        "h1_selector_released_worker_development_v2": "h1_selector_released_worker_development_v3",
+        "h1_selector_job_lifecycle_development_v2": "h1_selector_job_lifecycle_development_v3"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "62dda9174da830549ffe8f1181dcd0fd29a7bc2c46aa3547b6f48f0985e46282",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_selector_parent_controller_development_v4.py",
+      "target": "experiments\\h1_selector_parent_controller_development_v5.py",
+      "before_sha256": "443d7d03e2be29081da2b94eba0b958707417aadc33bd5d4fa212a98cc6597a4",
+      "namespace_schema_substitutions": {
+        "h1_selector_parent_controller_development_v4": "h1_selector_parent_controller_development_v5",
+        "h1_selector_launch_preparation_development_v2": "h1_selector_launch_preparation_development_v3",
+        "h1_selector_job_lifecycle_development_v2": "h1_selector_job_lifecycle_development_v3",
+        "h1_selector_worker_output_inspection_development_v2": "h1_selector_worker_output_inspection_development_v3",
+        "Parent4": "Parent5"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "81e8964f32cb9ae3e6ae5026cfd46b3ba52edefdc26202ec611f44dd459e09cc",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_selector_parent_validation_operation_development_v4.py",
+      "target": "experiments\\h1_selector_parent_validation_operation_development_v5.py",
+      "before_sha256": "c0ceb65f3fb5862f72d339a6b2cab946744ecbc44f8e309f04524b555a15e1f7",
+      "namespace_schema_substitutions": {
+        "h1_selector_parent_validation_operation_development_v4": "h1_selector_parent_validation_operation_development_v5",
+        "h1_selector_phase_handoff_development_v6": "h1_selector_phase_handoff_development_v7"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "393c49c2eeffb0a3a02328816bcd0983cd0f345b0dea3b54b3bba66a53abf0be",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_selector_post_negative_validation_development_v3.py",
+      "target": "experiments\\h1_selector_post_negative_validation_development_v4.py",
+      "before_sha256": "976e54eeeccedaeebe11cb28976461d067e2f66ec338d779cbe7b2988b10d99f",
+      "namespace_schema_substitutions": {
+        "h1_selector_post_negative_validation_development_v3": "h1_selector_post_negative_validation_development_v4",
+        "h1_selector_parent_controller_development_v4": "h1_selector_parent_controller_development_v5",
+        "h1_selector_parent_validation_operation_development_v4": "h1_selector_parent_validation_operation_development_v5"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "11ba66d04626766719ccbd1167734ad84f3904dc79e1f255747c87b71e27773c",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_selector_phase_handoff_development_v6.py",
+      "target": "experiments\\h1_selector_phase_handoff_development_v7.py",
+      "before_sha256": "8c2246b14120f7d3dd8db7d0140bccf7acd283f9de5fd52f99845609277aa2b2",
+      "namespace_schema_substitutions": {
+        "h1_selector_phase_handoff_development_v6": "h1_selector_phase_handoff_development_v7",
+        "h1_selector_parent_controller_development_v4": "h1_selector_parent_controller_development_v5",
+        "h1_common_owner_genesis_development_v2": "h1_common_owner_genesis_development_v3",
+        "h1_common_validation_operation_development_v4": "h1_common_validation_operation_development_v5",
+        "h1_selector_parent_validation_operation_development_v4": "h1_selector_parent_validation_operation_development_v5",
+        "_development_genesis_external_finalize_v2": "_development_genesis_external_finalize_v3"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "ade80fe1e03fa1d4fba64f6253d4d44db08156c126d223131d714f462334a860",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_common_genesis_validation_operation_development_v2.py",
+      "target": "experiments\\h1_common_genesis_validation_operation_development_v3.py",
+      "before_sha256": "5c95c67dfd674c29a1c023b82a3276dc2705be5e497ef8264e42ec266628e826",
+      "namespace_schema_substitutions": {
+        "h1_common_genesis_validation_operation_development_v2": "h1_common_genesis_validation_operation_development_v3",
+        "h1_common_genesis_validation_routes_development_v2": "h1_common_genesis_validation_routes_development_v3",
+        "h1_selector_input_snapshot_development_v2": "h1_selector_input_snapshot_development_v3",
+        "h1_selector_phase_handoff_development_v6": "h1_selector_phase_handoff_development_v7",
+        "h1_common_owner_genesis_development_v2": "h1_common_owner_genesis_development_v3",
+        "Gen2": "Gen3",
+        "_development_genesis_external_finalize_v2": "_development_genesis_external_finalize_v3"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "4b4ff6bccd1226e9b5b9950d24440cd4255cc7d9f187769bbaf561a828c42960",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_common_genesis_validation_routes_development_v2.py",
+      "target": "experiments\\h1_common_genesis_validation_routes_development_v3.py",
+      "before_sha256": "9c980e357d234e5b0b72fc9666124532f5502f37c0948f53e54a5205c56f3dec",
+      "namespace_schema_substitutions": {
+        "h1_common_genesis_validation_routes_development_v2": "h1_common_genesis_validation_routes_development_v3",
+        "h1_operation_historical_witness_development_v7": "h1_operation_historical_witness_development_v8",
+        "h1_phase_exact_source_current_development_v8": "h1_phase_exact_source_current_development_v9",
+        "h1_group_n0_common_input_binding_development_v7": "h1_group_n0_common_input_binding_development_v9"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": false,
+      "after_sha256": "b1b101f3aaa148947670abe6a44ce3731aa73fbca9b4b30e01be9022d452ac5d",
+      "additional_literal_route_pin_refresh": true,
+      "scientific_bodies_namespace_substitution_only": true
+    },
+    {
+      "source": "experiments\\h1_common_validation_operation_development_v4.py",
+      "target": "experiments\\h1_common_validation_operation_development_v5.py",
+      "before_sha256": "26c4f20bbd28509c16abf36df5d91bcff9e56f57336a058bf26fc24f42b797c7",
+      "namespace_schema_substitutions": {
+        "h1_common_validation_operation_development_v4": "h1_common_validation_operation_development_v5",
+        "h1_selector_phase_handoff_development_v6": "h1_selector_phase_handoff_development_v7",
+        "h1_operation_historical_witness_development_v6": "h1_operation_historical_witness_development_v9",
+        "h1_phase_exact_source_current_development_v7": "h1_phase_exact_source_current_development_v10",
+        "h1_group_n0_common_input_binding_development_v8": "h1_group_n0_common_input_binding_development_v10"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": false,
+      "after_sha256": "26f93b33efb34e3a5f51c36ef3e0351eee62cb6b01b2f294cb23f7ec9704bf42",
+      "additional_literal_route_pin_refresh": true,
+      "scientific_bodies_namespace_substitution_only": true
+    },
+    {
+      "source": "experiments\\h1_operation_historical_witness_development_v7.py",
+      "target": "experiments\\h1_operation_historical_witness_development_v8.py",
+      "before_sha256": "b171107803eec410ebac53be4f26e8834a7b719c919146bc654e24d38358b2d7",
+      "namespace_schema_substitutions": {
+        "h1_operation_historical_witness_development_v7": "h1_operation_historical_witness_development_v8",
+        "h1_common_genesis_validation_operation_development_v2": "h1_common_genesis_validation_operation_development_v3"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "d95c869f3e108e6112ae01949b56a4449d0282e1d5289a930232ab276e927f6d",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_operation_historical_witness_development_v6.py",
+      "target": "experiments\\h1_operation_historical_witness_development_v9.py",
+      "before_sha256": "af530275527695cff419386ccf83d208b6751ca1d04b567e651de4c4a609bc82",
+      "namespace_schema_substitutions": {
+        "h1_operation_historical_witness_development_v6": "h1_operation_historical_witness_development_v9",
+        "h1_common_validation_operation_development_v4": "h1_common_validation_operation_development_v5"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "491d1b7822c871883c0cbcb185a1298db2f73ea7f322389c17cdc7f42463ae2e",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_phase_exact_source_current_development_v8.py",
+      "target": "experiments\\h1_phase_exact_source_current_development_v9.py",
+      "before_sha256": "57b4e99e8d20879bde3c308689438c89d414b1e554d5183117b366677147d74c",
+      "namespace_schema_substitutions": {
+        "h1_phase_exact_source_current_development_v8": "h1_phase_exact_source_current_development_v9",
+        "h1_operation_historical_witness_development_v7": "h1_operation_historical_witness_development_v8"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "903c24181499157df9da10c2ecd8f95d47eb365b2b8aac4ad90a4862b9affa2e",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_phase_exact_source_current_development_v7.py",
+      "target": "experiments\\h1_phase_exact_source_current_development_v10.py",
+      "before_sha256": "4695ede31cf5c2fd5f497e3175c79e044fcd82797c78c605b3aefa1839ad8196",
+      "namespace_schema_substitutions": {
+        "h1_phase_exact_source_current_development_v7": "h1_phase_exact_source_current_development_v10",
+        "h1_operation_historical_witness_development_v6": "h1_operation_historical_witness_development_v9"
+      },
+      "original_path_modified": false,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "1eac0a7e63459a076152876c763b3b5201db0d6d02bbd58f9a1d686687238d97",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_group_n0_common_input_binding_development_v9.py",
+      "target": "experiments\\h1_group_n0_common_input_binding_development_v9.py",
+      "before_sha256": "a08f0f7101fab3ff6ffd96a632d0ace29cb7075a539e042743277994ff9f0179",
+      "namespace_schema_substitutions": {
+        "h1_phase_exact_source_current_development_v8": "h1_phase_exact_source_current_development_v9",
+        "h1_operation_historical_witness_development_v7": "h1_operation_historical_witness_development_v8"
+      },
+      "original_path_modified": true,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "171d76b9f6c792ac5c46a0d3d8f54d36069c911ea5224532155516802f7f0edb",
+      "additional_literal_route_pin_refresh": false
+    },
+    {
+      "source": "experiments\\h1_group_n0_common_input_binding_development_v10.py",
+      "target": "experiments\\h1_group_n0_common_input_binding_development_v10.py",
+      "before_sha256": "b419c1a3ea4b1f12dffa50304c0318322a0512258ffeffe606190a404d7f8d28",
+      "namespace_schema_substitutions": {
+        "h1_phase_exact_source_current_development_v7": "h1_phase_exact_source_current_development_v10",
+        "h1_operation_historical_witness_development_v6": "h1_operation_historical_witness_development_v9"
+      },
+      "original_path_modified": true,
+      "mechanical_ast_projection_equal": true,
+      "after_sha256": "ed92b52836af1fdc78ec3f00f7918b5386cf48f344e1b2d7838b25fc10d85a99",
+      "additional_literal_route_pin_refresh": false
+    }
+  ],
+  "new_files": 18,
+  "existing_provisional_drafts_updated": 2,
+  "common_authorized": false,
+  "loader_integration_tested": false,
+  "numerical_Roster_verified": false,
+  "new_N0_Jobs": 0,
+  "real_native_calls": 0,
+  "production_seal": false,
+  "official_review": false,
+  "full_optimized_workflow_accepted": false,
+  "whole_workflow_performance_review_complete": false,
+  "formal_execution_ready": false,
+  "formal_run_authority": false,
+  "formal_result": false,
+  "resource_admission": false
+}

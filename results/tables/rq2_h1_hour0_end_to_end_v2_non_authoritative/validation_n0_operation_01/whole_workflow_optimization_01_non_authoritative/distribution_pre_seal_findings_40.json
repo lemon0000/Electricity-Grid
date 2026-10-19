@@ -1,0 +1,41 @@
+{
+  "schema": "h1_pre_seal_findings_summary_non_authoritative_v1",
+  "observed_at_utc": "2026-10-18T19:18:53.273402+00:00",
+  "reviewer": "/root/postcheck_resume_review",
+  "recorded_by": "root sole writer",
+  "status": "named_scoped_findings_closed_no_remaining_substantive_P1",
+  "candidate_sha256": {
+    "pinned_distribution_resolver_v1.py": "dc154392771996c9fa811f759b916865adf607f32d65a84d695c9a2db60e91bb",
+    "test_pinned_distribution_resolver_v1.py": "d83800fc8da30d2f6e28ad56e28d9eaba758d478e03008372528b10d31cb9a7e",
+    "validation_entry.py": "7409cfd3e22857cf5ba5d46c16ddd762e4e5db974ad1642fd520d498e4a8ba82",
+    "package_manifest_v1.json": "8d72c03f4b8e95c84deffe5a0281f05d6baf932aa62ac1fd6a4d46ee5f24f034"
+  },
+  "unit_evidence_sha256": "7f2c6d02acfdd32e7344daefb95f3a6d72a8e749dd318fd2a50a0fe4e8127c4c",
+  "closed_findings": [
+    "discovery closure descriptor/direct global/module attribute inventory and builtin-shadow presence",
+    "original from_name code/default/global mutation sticky refusal",
+    "exact held raw inventory and values subset",
+    "explicit eight selected names, oracle and call/fresh-instance conservation entry exit gates"
+  ],
+  "tests": {
+    "total": 141,
+    "skipped": 1,
+    "failures": 0,
+    "errors": 0,
+    "outer_exit": 0,
+    "outer_wall_seconds": 25.86,
+    "closure_negative_cases": 10
+  },
+  "limitations": [
+    "named function/binding/descriptor fault model; no arbitrary memory sandbox",
+    "transient discovery ABA unproved",
+    "existing stateful custom distribution finder internals are outside current canonical graph scope; future support needs a new contract",
+    "resolver owns no OS handles; outer parser cleanup remains separate"
+  ],
+  "official_verdict": false,
+  "review_receipt": false,
+  "production_seal": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "run_authority": false
+}

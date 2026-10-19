@@ -1,0 +1,82 @@
+{
+  "status": "STATIC_PRE_SEAL_FINDINGS_NONAUTHORITATIVE",
+  "assumption": "Common9/10 mechanically retain Common7/8 five replay control flow; no genuine graph executed",
+  "independent_read_only_reviewer": "/root/parent_window_review",
+  "scope": "source-wrapper plus foreign retained registry only",
+  "excluded": [
+    "producer bootstrap",
+    "Roster create",
+    "Roster attach",
+    "Roster inspect",
+    "Roster reopen"
+  ],
+  "cases": [
+    {
+      "common_calls": 47,
+      "sessions": 7,
+      "completed_releases": 3,
+      "registry_traversals": 484,
+      "foreign_N0_prepares": 1452,
+      "foreign_full": 5808,
+      "foreign_within": 5808,
+      "foreign_contexts": 23232,
+      "source_full": 168,
+      "source_within": 168,
+      "source_reuse": 1920,
+      "source_contexts": 4512,
+      "combined_full": 5976,
+      "combined_within": 5976,
+      "combined_reuse": 1920,
+      "combined_contexts": 27744,
+      "proposed_scope_registry_full": 648,
+      "proposed_scope_registry_within": 648,
+      "proposed_scope_registry_reuse": 10320,
+      "proposed_scope_combined_full": 816,
+      "proposed_scope_combined_within": 816,
+      "proposed_scope_combined_reuse": 12240
+    },
+    {
+      "common_calls": 53,
+      "sessions": 10,
+      "completed_releases": 3,
+      "registry_traversals": 550,
+      "foreign_N0_prepares": 1650,
+      "foreign_full": 6600,
+      "foreign_within": 6600,
+      "foreign_contexts": 26400,
+      "source_full": 240,
+      "source_within": 240,
+      "source_reuse": 2064,
+      "source_contexts": 5088,
+      "combined_full": 6840,
+      "combined_within": 6840,
+      "combined_reuse": 2064,
+      "combined_contexts": 31488,
+      "proposed_scope_registry_full": 756,
+      "proposed_scope_registry_within": 756,
+      "proposed_scope_registry_reuse": 11688,
+      "proposed_scope_combined_full": 996,
+      "proposed_scope_combined_within": 996,
+      "proposed_scope_combined_reuse": 13752
+    }
+  ],
+  "measured_runtime": false,
+  "whole_workflow_performance_review_complete": false,
+  "scope_optimization_implemented": false,
+  "files_sha256": {
+    "experiments/h1_group_n0_common_input_binding_development_v7.py": "c3b8110a26c6f4608b7fff5addf75f7e95d277c815cf435016b76b42990e94aa",
+    "experiments/h1_group_n0_common_input_binding_development_v8.py": "7d9cee82fe447323d88aebcf65f5b0294e0b1a8046cc67818d3d22ea89ca5a57",
+    "experiments/h1_group_execution_roster_development_v3.py": "3d8601e01c0f5664efbbe96beedf9cd3bd45767154906088edd2c08dbdc48b3d",
+    "experiments/h1_bootstrap_integration_development_v4.py": "7355ecdfb029b61f7dbb46f288e2cf5d6146c24f50ee286a4045216b6995dd30",
+    "experiments/h1_historical_n0_verifier_development_v3.py": "ec02ed18b2094ab33b39a7c673c892790ac8b379e62215f73111578520b87cce",
+    "experiments/h1_common_genesis_validation_operation_development_v2.py": "5c95c67dfd674c29a1c023b82a3276dc2705be5e497ef8264e42ec266628e826",
+    "experiments/h1_common_validation_operation_development_v4.py": "26c4f20bbd28509c16abf36df5d91bcff9e56f57336a058bf26fc24f42b797c7"
+  },
+  "addendum": {
+    "path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\retained_registry_multiplier_audit_01.md",
+    "sha256": "d5dd7570455c30bfea70ad58f1de1d93b033b196a853a3f899c4ff78caa438ff"
+  },
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

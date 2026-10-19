@@ -1,0 +1,261 @@
+"""Explicit timed selector stage; legacy science plus separate producer sidecar.
+
+Real calls require new native authorization and owned Job supervision. No CLI,
+retry, phase consumption, or whole-Job/non-solver budget certificate is supplied.
+"""
+import json
+import stat
+from pathlib import Path
+
+from experiments import h1_selector_raw_science_development_v1 as bridge
+from experiments import h1_owned_selector_sequence_development_v1 as sequence
+from experiments import h1_selector_timed_capture_development_v1 as capture
+
+stage=sequence.stage
+io,science,selector=bridge.io,bridge.science,bridge.selector
+SCHEMA,FLAGS=bridge.SCHEMA,bridge.FLAGS
+TIMED_SCHEMA='h1_selector_timed_stage_development_v1'
+_scope,_prefix,_admit_model,_observe=bridge._scope,bridge._prefix,bridge._admit_model,bridge._observe
+_audit_stage,request_key=bridge._audit_stage,bridge.request_key
+
+
+def implementation_identity():
+    return io.digest(io.encode([TIMED_SCHEMA,stage.implementation_identity(),capture.implementation_identity(),
+                                io.digest(Path(__file__).read_bytes())]))
+
+
+def _view(root,side,limits,terminal=True):
+    spaces={root:{'capture','postsolve.json','observations.json','selector_record.json','terminal.json'},
+        root/'capture':{'binding.json','specification.json','export.json','complete.json','native_raw'},
+        root/'capture/native_raw':{'binding.json','terminal.json','000'},
+        root/'capture/native_raw/000':{'intent.json','raw.bin','raw_receipt.json','outcome.json'},
+        side:{'binding.json','native'}|({'terminal.json'} if terminal else set()),
+        side/'native':{'binding.json','intent.json','completion.json','terminal.json'}}
+    directories={p:stage._directory(p,names) for p,names in spaces.items()}
+    caps={root/name:cap for name,cap in sequence._stage_caps(limits).items()}
+    caps[side/'binding.json']=capture.CAP
+    if terminal:caps[side/'terminal.json']=capture.CAP
+    caps.update({side/'native'/name:io.META_CAP for name in spaces[side/'native']})
+    views={}
+    for p,cap in caps.items():
+        status=p.stat(follow_symlinks=False)
+        if (not stat.S_ISREG(status.st_mode) or status.st_nlink!=1
+                or getattr(status,'st_file_attributes',0)&1024):
+            raise ValueError('plain single-link timed evidence required')
+        views[p]=(cap,io.read_stable(p,cap))
+    return directories,views
+
+
+def _doc(path,views):
+    raw=views[path][1][0]
+    value=json.loads(raw)
+    if type(value) is not dict or io.encode(value)!=raw:raise ValueError('canonical timing object required')
+    return value
+
+
+def _terminal(binding_pin,measurement_pin,science_pin,complete_pin,raw_pin,start,end):
+    return dict(schema=TIMED_SCHEMA,binding_sha256=binding_pin,measurement_terminal_sha256=measurement_pin,
+        scientific_terminal_sha256=science_pin,capture_complete_sha256=complete_pin,
+        raw_terminal_sha256=raw_pin,stage_start_ns=start,stage_end_ns=end,
+        legacy_producer_execution_authenticated=False,old_owned_return_observed=False,
+        whole_job_quiescence_checked=False,non_solver_allowance_verified=False,**FLAGS)
+
+
+def inspect(root,timing_root,frame,disclosure,before,records,*,expected_terminal_sha256,**args):
+    """Joint conditional replay, never a live producer/clock/Job capability."""
+    with science.prior.guard.solver_calls_forbidden():
+        root=capture.root(root);side=capture.root(timing_root);io.pin(expected_terminal_sha256)
+        own=implementation_identity();profile=capture.clock_profile()
+        view=_view(root,side,args['limits'])
+        _,views=view
+        terminal_raw=views[side/'terminal.json'][1][0]
+        if io.digest(terminal_raw)!=expected_terminal_sha256:raise ValueError('external timed terminal differs')
+        binding=_doc(side/'binding.json',views);terminal=_doc(side/'terminal.json',views)
+        pins={'binding_sha256':side/'binding.json',
+            'measurement_terminal_sha256':side/'native/terminal.json',
+            'scientific_terminal_sha256':root/'terminal.json',
+            'capture_complete_sha256':root/'capture/complete.json',
+            'raw_terminal_sha256':root/'capture/native_raw/terminal.json'}
+        template=_terminal(*(['0'*64]*5),0,0)
+        if set(terminal)!=set(template):raise ValueError('timed terminal fields differ')
+        for name,value in template.items():
+            if name not in pins and name not in ('stage_start_ns','stage_end_ns'):
+                if type(terminal[name]) is not type(value) or terminal[name]!=value:
+                    raise ValueError('timed terminal schema or flags differ')
+        start,end=(capture.timing.integer(terminal[k]) for k in ('stage_start_ns','stage_end_ns'))
+        for name,path in pins.items():
+            io.pin(terminal[name])
+            if terminal[name]!=io.digest(views[path][1][0]):
+                raise ValueError('retained timed cross-pin differs: '+name)
+        native_binding=_doc(side/'native/binding.json',views)
+        native_terminal=_doc(side/'native/terminal.json',views)
+        native_completion=_doc(side/'native/completion.json',views)
+        for doc,fields in ((native_binding,{'schema','request_sha256','stage','clock_domain','pid','thread_id','implementation'}|set(capture.timing.FLAGS)),
+                (native_terminal,{'schema','binding_sha256','completion_sha256','apply_start_ns','apply_end_ns'}|set(capture.timing.FLAGS)),
+                (native_completion,{'schema','binding_sha256','intent_sha256','native_start_ns','native_end_ns','state'})):
+            if set(doc)!=fields:raise ValueError('native timing fields differ')
+        for name in ('apply_start_ns','apply_end_ns'):capture.timing.integer(native_terminal[name])
+        for name in ('native_start_ns','native_end_ns'):capture.timing.integer(native_completion[name])
+        nb=io.digest(views[side/'native/binding.json'][1][0])
+        nt=terminal['measurement_terminal_sha256']
+        key=request_key(frame,disclosure,before,records,**args)
+        index=len(records);label=selector.stage_labels(frame,args['lane'])[index]
+        expected=dict(schema=capture.PRODUCER_SCHEMA,new_producer_implementation=own,
+            capture_implementation=capture.implementation_identity(),legacy_wire_implementation=bridge.capture.implementation_identity(),
+            scientific_root=str(root),scientific_directory_identity=capture.directory(root),timing_root=str(side),
+            request_sha256=key,stage_index=index,stage_label=label,
+            capture_binding_sha256=io.digest(views[root/'capture/binding.json'][1][0]),
+            measurement_binding_sha256=nb,pid=native_binding['pid'],thread_id=native_binding['thread_id'],clock=profile,
+            legacy_producer_execution_authenticated=False,old_owned_return_observed=False,**capture.FLAGS)
+        if io.encode(binding)!=io.encode(expected):raise ValueError('timed producer/wire binding differs')
+        if native_binding['request_sha256']!=key or native_binding['stage']!=index:
+            raise ValueError('native timing selector context differs')
+        checked=stage.inspect(root,frame,disclosure,before,records,
+            expected_terminal_sha256=terminal['scientific_terminal_sha256'],**args)
+        interval=capture.timing.inspect(side/'native',expected_binding_sha=nb,expected_terminal_sha=nt,
+            expected_implementation=capture.timing.implementation_identity())
+        if not start<=native_terminal['apply_start_ns']<=native_terminal['apply_end_ns']<=end:
+            raise ValueError('native apply outside selector stage window')
+        reconstructed=_terminal(io.digest(views[side/'binding.json'][1][0]),nt,checked['terminal_sha256'],
+            io.digest(views[root/'capture/complete.json'][1][0]),
+            io.digest(views[root/'capture/native_raw/terminal.json'][1][0]),start,end)
+        if io.encode(reconstructed)!=terminal_raw:raise ValueError('timed producer terminal differs')
+        if (_view(root,side,args['limits'])!=view or implementation_identity()!=own
+                or request_key(frame,disclosure,before,records,**args)!=key or capture.clock_profile()!=profile):
+            raise ValueError('joint timing/science view changed')
+        return dict(science=checked,native_interval_ns=interval['native_interval_ns'],
+            apply_window_ns=interval['apply_window_ns'],stage_window_ns=end-start,
+            sidecar_binding_sha256=io.digest(views[side/'binding.json'][1][0]),
+            sidecar_terminal_sha256=expected_terminal_sha256,legacy_wire_replay_verified=True,
+            legacy_producer_execution_authenticated=False,old_owned_return_observed=False,
+            live_timing_authenticated=False,whole_job_quiescence_checked=False,
+            non_solver_allowance_verified=False,**FLAGS)
+
+
+def _run_stage(root,timing_root,frame,disclosure,before,records,*,expected_key,**args):
+    root=capture.root(root);side=capture.root(timing_root)
+    if root.exists() or side.exists():raise FileExistsError('fresh science and timing roots required')
+    if side==root or root in side.parents or side in root.parents:
+        raise ValueError('external non-nested timing sidecar required')
+    own=implementation_identity();capture.clock_profile()
+    start=capture.timing.integer(capture._CLOCK())
+    result,owned=_science_stage(root,frame,disclosure,before,records,
+        expected_key=expected_key,timing_root=side,**args)
+    owned._check()
+    view=_view(root,side,args['limits'],False)
+    checked=stage.inspect(root,frame,disclosure,before,records,
+        expected_terminal_sha256=result['bridge_terminal_sha256'],**args)
+    if result!=sequence._returned_body(root,checked):raise ValueError('timed stage returned body differs from replay')
+    if (_view(root,side,args['limits'],False)!=view or implementation_identity()!=own
+            or request_key(frame,disclosure,before,records,**args)!=expected_key):
+        raise ValueError('timed stage changed before terminal')
+    owned._check()
+    end=capture.timing.integer(capture._CLOCK())
+    raw=_terminal(owned.side_binding_pin,owned.timing_receipt['terminal_sha256'],checked['terminal_sha256'],
+        io.digest(view[1][root/'capture/complete.json'][1][0]),
+        io.digest(view[1][root/'capture/native_raw/terminal.json'][1][0]),start,end)
+    pin=capture.write(side/'terminal.json',raw)
+    return inspect(root,side,frame,disclosure,before,records,expected_terminal_sha256=pin,**args)
+
+
+def _science_stage(root,frame,disclosure,before,records,*,expected_key,timing_root,**args):
+    """Future owned-producer primitive; no CLI, authority, retry or owner commit.
+
+    Tests substitute the exact direct adapter. Calling this with a real adapter
+    requires separate native authority and an enclosing owned Job integration.
+    """
+    _scope()
+    spec=args['specification']
+    if spec.name!='gurobi':raise ValueError('selector capture requires Gurobi direct')
+    key,identity,locks=_prefix(frame,disclosure,before,records,args)
+    if key!=expected_key:raise ValueError('selector capsule request differs')
+    model=selector.build_development_stage(frame,disclosure,before,lane=args['lane'],
+        power=args.get('power'),index=len(records),frozen=locks,expected_identity=identity)
+    observations=[_observe(model,spec)]
+    # Check the inherited fixed caps before allocating any capture or solver.
+    _admit_model(model,args['limits'])
+    root=Path(root).resolve();root.mkdir(exist_ok=False)
+    owned=capture.StageCapture(root/'capture',request_sha256=key,
+        expected_structure=observations[0]['structure'],
+        expected_implementation=capture.implementation_identity(),timing_root=timing_root,
+        stage_index=len(records),stage_label=selector.stage_labels(frame,args['lane'])[len(records)],
+        producer_implementation=implementation_identity())
+    views={};listings={}
+    def retain(path,cap):
+        path=Path(path)
+        view=io.read_stable(path,cap)
+        if path in views and views[path]!=(cap,view):raise ValueError('selector retained view changed')
+        views[path]=(cap,view)
+        return view[0]
+    def check():
+        _scope()
+        owned._check()
+        if request_key(frame,disclosure,before,records,**args)!=key:
+            raise ValueError('selector request changed')
+        for path,(cap,view) in tuple(views.items()):
+            if io.read_stable(path,cap)!=view:raise ValueError('selector retained view changed')
+        for path,names in listings.items():
+            if {p.name for p in path.iterdir()}!=names:raise ValueError('selector namespace changed')
+    def provisional(native,results,owned_model):
+        if owned_model is not model:raise ValueError('selector model owner differs')
+        raw=retain(owned.raw.root/'000/raw.bin',io.RAW_CAP)
+        if raw!=native:raise ValueError('selector raw differs')
+        post=science.capture_postsolve(model,results,native_sha=io.digest(raw),key=key)
+        io.write_new(root/'postsolve.json',post)
+        retain(root/'postsolve.json',science.POST_CAP)
+        observations.append(_observe(model,spec))
+        check()
+        # No audit, saved record or successor lock exists at this boundary.
+    owned.run(lambda:model,spec,provisional)
+    if not owned.complete or owned.poisoned or len(observations)!=2:
+        raise ValueError('selector capture did not complete')
+    observations.append(_observe(model,spec))
+    if any(o!=observations[0] for o in observations[1:]):
+        raise ValueError('selector observed metadata drift')
+    native=retain(owned.raw.root/'000/raw.bin',io.RAW_CAP)
+    post=retain(root/'postsolve.json',science.POST_CAP)
+    complete=retain(owned.root/'complete.json',io.META_CAP)
+    terminal=retain(owned.raw.root/'terminal.json',io.META_CAP)
+    for name in ('binding.json','specification.json','export.json'):
+        retain(owned.root/name,io.META_CAP)
+    raw_binding=retain(owned.raw.root/'binding.json',io.META_CAP)
+    for name in ('intent.json','raw_receipt.json','outcome.json'):
+        retain(owned.raw.root/'000'/name,io.META_CAP)
+    expected=dict(schema=capture.SCHEMA,binding_sha256=owned.binding_sha,
+        raw_sha256=io.digest(native),raw_terminal_sha256=io.digest(terminal),
+        callback_sequence_complete=True,**capture.FLAGS)
+    if complete!=io.encode(expected):raise ValueError('selector capture completion differs')
+    inspected=io.inspect(owned.raw.root,expected_request=key,expected_binding_sha256=io.digest(raw_binding))
+    if not inspected['callback_sequence_complete'] or inspected['errors']:
+        raise ValueError('selector raw chain incomplete')
+    listings.update({root:{'capture','postsolve.json'},
+        owned.root:{'binding.json','specification.json','export.json','complete.json','native_raw'},
+        owned.raw.root:{'binding.json','terminal.json','000'},
+        owned.raw.root/'000':{'intent.json','raw.bin','raw_receipt.json','outcome.json'}})
+    check()
+    result=_audit_stage(native,post,frame,disclosure,before,records,expected_key=key,
+        expected_binding=owned.binding_sha,expected_export=owned.records['export.json'],
+        observations=observations,**args)
+    observation_raw=io.encode(dict(schema=SCHEMA+'_observations',observations=observations,
+        option_basis='declared options checked by completed StageCapture before apply',
+        call_basis='one intercepted apply in completed StageCapture',
+        evidence_role='reconstructed_selector_view',capture_complete_sha256=io.digest(complete)))
+    io.write_new(root/'observations.json',observation_raw)
+    listings[root].add('observations.json')
+    retain(root/'observations.json',io.RAW_CAP)
+    check()
+    io.write_new(root/'selector_record.json',result['selector_record'])
+    listings[root].add('selector_record.json')
+    retain(root/'selector_record.json',args['limits'].max_record_bytes)
+    check()
+    receipt={k:v for k,v in result.items() if k!='selector_record'}
+    receipt.update(schema=SCHEMA,request_key=key,evidence_role='reconstructed_selector_view',
+        capture_complete_sha256=io.digest(complete),binding_sha256=owned.binding_sha,
+        export_sha256=owned.records['export.json'],observations_sha256=io.digest(observation_raw),
+        selector_record_sha256=io.digest(result['selector_record']))
+    terminal_raw=io.encode(receipt)
+    io.write_new(root/'terminal.json',terminal_raw)
+    listings[root].add('terminal.json')
+    retain(root/'terminal.json',io.RAW_CAP)
+    check()
+    return dict(result,bridge_terminal_sha256=io.digest(terminal_raw)),owned

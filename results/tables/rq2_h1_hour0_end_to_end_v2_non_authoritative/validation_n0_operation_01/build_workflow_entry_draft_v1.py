@@ -68,6 +68,9 @@ allowed=(
     'tests/test_h1_common_validation_operation_development_v3.py',
     'tests/test_h1_selector_phase_handoff_development_v5.py',
     'tests/test_h1_repair_cap_normalization_operation_development_v1.py',
+    'tests/test_h1_common_genesis_validation_operation_development_v1.py',
+    'tests/test_h1_genesis_consumer_operation_development_v1.py',
+    'tests/test_h1_genesis_consumer_operation_development_v1.py::test_three_actual_parents_commit_close_and_reopen_saved_phase',
 )
 begin=entry.index('    allowed={',entry.index('def pytest_tests():'))
 end=entry.index('    if not targets',begin)
@@ -108,6 +111,17 @@ entry=entry.replace("        save('call_counts.json',",
 # The ordinary lifecycle smoke is a zero-Job, zero-native unit test. Retain
 # the original whole-invocation read, path, metadata and interpreter policies.
 (NEW/'validation_entry.py').write_text(entry,encoding='utf-8')
+failure_tests=(OLD/'test_validation_entry.py').read_text(encoding='utf-8')
+failure_tests=failure_tests.replace('tests/test_h1_hour0_routing_development_v2.py',
+    'tests/test_h1_selector_source_window_development_v1.py')
+failure_tests=failure_tests.replace('            before=(sys.pycache_prefix',
+    '            import_environment=(list(sys.meta_path),list(sys.path_hooks),dict(sys.path_importer_cache))\n'
+    '            before=(sys.pycache_prefix')
+failure_tests=failure_tests.replace('                sys.modules.update(modules)',
+    '                sys.modules.update(modules)\n'
+    '                sys.meta_path[:]=import_environment[0];sys.path_hooks[:]=import_environment[1]\n'
+    '                sys.path_importer_cache.clear();sys.path_importer_cache.update(import_environment[2])')
+(NEW/'test_validation_entry.py').write_text(failure_tests,encoding='utf-8')
 members={path.name:pin(path) for path in sorted(NEW.iterdir())
     if path.is_file() and path.name not in ('launch_validation.py','package_manifest_v1.json')}
 save(NEW/'package_manifest_v1.json',dict(schema='h1_configured_workflow_entry_draft_v1',

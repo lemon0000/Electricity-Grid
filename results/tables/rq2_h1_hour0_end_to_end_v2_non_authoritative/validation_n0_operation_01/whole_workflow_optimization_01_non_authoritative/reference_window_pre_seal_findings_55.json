@@ -1,0 +1,36 @@
+{
+  "status": "PRE_SEAL_FINDINGS_NONAUTHORITATIVE",
+  "input50_sha256": "dbdbb7f80651bf33bf7796b30b5c446593b0421bd12eb8c8be990ec88f4a996b",
+  "input55_sha256": "97f143dd7f976d7c1be30b1b4f6992f300148964d46015f9b6624494619ce33d",
+  "reviewer": "postcheck_resume_review",
+  "root_is_sole_writer": true,
+  "named_scope_only": true,
+  "findings": [
+    {
+      "id": "source2_closure_runtime",
+      "status": "covered_in_55_static_and_targeted_tests"
+    },
+    {
+      "id": "reference_engine_runtime_property_closure",
+      "status": "covered_in_55_static_and_actual_canonical_property_inventory_tests"
+    },
+    {
+      "id": "Parent4_guard_cleanup_body",
+      "status": "body_after_acquisition_covered_19_cases; entry_failure_still_open"
+    },
+    {
+      "id": "Parent4_enter_check_and_release_failure",
+      "status": "open",
+      "required": "capture exact acquired guard in _enter, original check primary retained and bounded release recovery; actual/reference times run/validate negatives"
+    }
+  ],
+  "evidence_boundary": {
+    "probe51": "saved numerical compatibility with pre-fix engine and explicit fake Parent anchors only",
+    "units55": "143 ordinary tests; cleanup tests use exact AST method bodies and explicit seams",
+    "probe56": "running; cannot close entry-failure invariant"
+  },
+  "official_verdict": null,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

@@ -14,6 +14,8 @@ ROUTES=(
 
 
 def _state(fn):
+    if isinstance(fn,(staticmethod,classmethod)):return ('descriptor',_state(fn.__func__))
+    if isinstance(fn,property):return ('property',id(fn),*(_state(v) for v in (fn.fget,fn.fset,fn.fdel)))
     return (fn.__code__,repr(fn.__defaults__),repr(fn.__kwdefaults__),
         tuple(id(c.cell_contents) for c in fn.__closure__ or ())) if type(fn) is FunctionType else None
 

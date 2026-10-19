@@ -1,0 +1,255 @@
+{
+  "schema": "h1_bootstrap5_n0_bounded_result_137",
+  "status": "INCOMPLETE_WALL_CAP_NONAUTHORITATIVE",
+  "plan": {
+    "path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\bootstrap5_n0_bounded_plan_137.json",
+    "sha256": "19be5e3683df1c7b6dceafac4c190af13525b8b5929b49e1eb104f7c79562ca7"
+  },
+  "request": {
+    "path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\bootstrap5_n0_registration_137\\request.json",
+    "sha256": "8b7d855be3a015be78f8d36e7367249ceb7f72a082840669c5812840c5415c2f"
+  },
+  "terminal_artifact": {
+    "path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\bootstrap5_n0_registration_137\\terminal.json",
+    "sha256": "5d62ebae80bff65c21f7e191b6ea4f204630f1bc20d809697b957213922b75bc"
+  },
+  "invocation_artifact": {
+    "path": "D:\\h1_bootstrap5_n0_137_non_authoritative\\test_cold_bootstrap5_registere0\\n0_invocation.json",
+    "sha256": "80bfc9fd79080f2cc46c5a3ca27fec504d3bbe20b814e6651e25fbbe21c04303"
+  },
+  "invocation": {
+    "public_call": "BootstrapOwner.bootstrap",
+    "kwargs": {
+      "registered_development": true
+    },
+    "bootstrap_module": "experiments.h1_bootstrap_integration_development_v5",
+    "pytest_nodeid": "tests/test_h1_registry_validation_fresh_n0_development_v2.py::test_cold_bootstrap5_registered_development_true_n0_registration_and_close",
+    "entry_argv": [
+      "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_n0_operation_01/run_unit_entry_v4.py",
+      "-s",
+      "-p",
+      "no:faulthandler",
+      "--basetemp",
+      "D:/h1_bootstrap5_n0_137_non_authoritative",
+      "--junitxml",
+      "D:/h1_bootstrap5_n0_137_non_authoritative/registered_development_true.xml",
+      "-o",
+      "junit_family=legacy",
+      "tests/test_h1_registry_validation_fresh_n0_development_v2.py::test_cold_bootstrap5_registered_development_true_n0_registration_and_close"
+    ],
+    "diagnostic": true,
+    "formal_result": false,
+    "resource_admission": false
+  },
+  "junit": {
+    "present": false,
+    "successful_target_testcase": false
+  },
+  "terminal": {
+    "observed_owned_processes": [
+      {
+        "pid": 9432,
+        "creation_time": 1792397238.3163693
+      },
+      {
+        "pid": 33796,
+        "creation_time": 1792397393.8947823
+      },
+      {
+        "pid": 23524,
+        "creation_time": 1792397401.1555903
+      }
+    ],
+    "observed_owned_processes_remaining": [],
+    "observed_owned_processes_absent": true,
+    "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+    "cleanup_events": [
+      {
+        "pid": 9432,
+        "creation_time": 1792397238.3163693,
+        "action": "kill_owned"
+      }
+    ],
+    "descendant_discovery_complete": true,
+    "complete_process_tree_absence_proven": false,
+    "exit_code": 15,
+    "storage_read_errors": [],
+    "cleanup_errors": [],
+    "final_storage_observation_complete": true,
+    "elapsed_seconds": 300.45299999999406,
+    "stop_reason": "wall",
+    "peak_observed_process_tree_rss": 488800256,
+    "observed_storage_bytes": 15418197,
+    "storage_observation_contract": "observed_entries_nonfollow_with_directory_rechecks",
+    "storage_path_ABA_covered": false,
+    "memory_is_sampled": true,
+    "source_unchanged": true,
+    "source_snapshot_complete": true,
+    "peak_rss_includes_monitor": true,
+    "formal_result": false,
+    "resource_admission": false,
+    "request_sha256": "8b7d855be3a015be78f8d36e7367249ceb7f72a082840669c5812840c5415c2f",
+    "started_sha256": "fc0012ba0aa3f49b1d1a91a93aba59b5960930476106dd7bdaf0cd83f4d82d27",
+    "runner_sha256": "90b6962409aac977e93805c32d82c701eb782a6b1f3d64de4df935028b0f9740",
+    "unit_entry_sha256": "922016a4cf793ba31e379c0349b679a0cacd06528e22a6cd4479a6d06a2d295a"
+  },
+  "planned_pins": 1355,
+  "pin_drift": [],
+  "stages": [
+    {
+      "label": "source_and_fixture_setup",
+      "elapsed_seconds": 35.3532991,
+      "interval_seconds": 35.3532991
+    },
+    {
+      "stage": "static_successor_imported",
+      "seconds": 0.3115667000092799
+    },
+    {
+      "stage": "owner_open",
+      "seconds": 40.54192050000711
+    },
+    {
+      "stage": "retention_1_bootstrap_non_authoritative",
+      "seconds": 62.29190950001066
+    },
+    {
+      "stage": "retention_2_global_claims_non_authoritative",
+      "seconds": 64.65200900001219
+    },
+    {
+      "stage": "retention_3_bootstrap_non_authoritative",
+      "seconds": 79.07611890000408
+    },
+    {
+      "stage": "retention_4_bootstrap_non_authoritative",
+      "seconds": 83.94191480000154
+    },
+    {
+      "stage": "retention_5_bootstrap_non_authoritative",
+      "seconds": 88.72775309999997
+    },
+    {
+      "stage": "retention_6_global_claims_non_authoritative",
+      "seconds": 91.38616910000565
+    },
+    {
+      "stage": "retention_7_bootstrap_non_authoritative",
+      "seconds": 221.6841798000096
+    },
+    {
+      "stage": "retention_8_global_claims_non_authoritative",
+      "seconds": 236.89104000000225
+    }
+  ],
+  "job_observations": [
+    {
+      "artifact": {
+        "path": "D:\\h1_bootstrap5_n0_137_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\controller_non_authoritative\\job_000_non_authoritative\\observation.json",
+        "sha256": "7bf2873dd159d873de8d7330f5a49ad4f5a74c8eb5826ec479908b1045070780"
+      },
+      "observation": {
+        "creation_filetime": 134368709938947824,
+        "elapsed_seconds": 51.125,
+        "exit_code": 0,
+        "formal_result": false,
+        "hard_disk_quota_enforced": false,
+        "job_commit_limits_configured": true,
+        "job_peak_process_commit_bytes": 153104384,
+        "job_peak_total_commit_bytes": 154324992,
+        "last_resource_errors": [],
+        "minimum_runtime_commit_available_bytes": 9908023296,
+        "minimum_runtime_disk_available_bytes": [
+          [
+            "\\\\?\\volume{477ab2a7-3361-41fc-8d16-d46422aed580}\\",
+            101066190848
+          ]
+        ],
+        "numerical_evidence_verified": false,
+        "observation_error_type": null,
+        "pid": 33796,
+        "process_identity": "30eb5fb4f3f453ad6ac1a7c22ebb3f3605b79176b1b36d1e66da2a6e821a6cef",
+        "reason": "child_exited",
+        "runtime_samples": 347,
+        "stop_markers": [
+          "direct_child_exit_observed"
+        ],
+        "whole_job_quiescent": true,
+        "whole_task_resources_verified": false
+      }
+    }
+  ],
+  "post_call_artifacts": {
+    "n0_registry_execution_receipt.json": [],
+    "n0_retained_heads.json": [],
+    "n0_registration_report.json": [],
+    "n0_phase_segments_closed.json": [],
+    "unit_code_read_lease_closed.json": []
+  },
+  "saved_lock_probes": [
+    {
+      "path": "D:\\h1_bootstrap5_n0_137_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\bootstrap_non_authoritative\\execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "reacquired_and_released": true
+    },
+    {
+      "path": "D:\\h1_bootstrap5_n0_137_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\controller_non_authoritative\\clock_bridge_non_authoritative\\execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "reacquired_and_released": true
+    },
+    {
+      "path": "D:\\h1_bootstrap5_n0_137_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\controller_non_authoritative\\execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "reacquired_and_released": true
+    },
+    {
+      "path": "D:\\h1_bootstrap5_n0_137_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\controller_non_authoritative\\job_000_non_authoritative\\execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "reacquired_and_released": true
+    },
+    {
+      "path": "D:\\h1_bootstrap5_n0_137_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\controller_non_authoritative\\job_000_non_authoritative\\worker_non_authoritative\\execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "reacquired_and_released": true
+    },
+    {
+      "path": "D:\\h1_bootstrap5_n0_137_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\controller_non_authoritative\\obligation_non_authoritative\\execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "reacquired_and_released": true
+    },
+    {
+      "path": "D:\\h1_bootstrap5_n0_137_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\controller_non_authoritative\\source_parent_non_authoritative\\execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "reacquired_and_released": true
+    },
+    {
+      "path": "D:\\h1_bootstrap5_n0_137_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\controller_non_authoritative\\source_parent_non_authoritative\\parent_anchor_non_authoritative\\execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "reacquired_and_released": true
+    },
+    {
+      "path": "D:\\h1_bootstrap5_n0_137_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\controller_non_authoritative\\source_parent_non_authoritative\\parent_events_non_authoritative\\execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "reacquired_and_released": true
+    },
+    {
+      "path": "D:\\h1_bootstrap5_n0_137_non_authoritative\\nt_non_authoritative\\global_claims_non_authoritative\\execution.lock",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "reacquired_and_released": true
+    }
+  ],
+  "public_registered_N0_return_observed": false,
+  "numerical_oracle_equality_observed": false,
+  "internal_graceful_cleanup_proven": false,
+  "externally_persisted_retained_heads_available": false,
+  "saved_journal_suffix_adopted": false,
+  "controller_candidate_archive_available": true,
+  "interpretation": "One synthetic Windows Job exited0/whole Job quiet51.125s;8 retention heartbeats observed. No successful public return, registry receipt, retained heads, numerical oracle, JUnit or phase-close artifacts. Journal suffix bytes are candidates only and are not externally authenticated owner heads. OS process/lock cleanup does not prove internal cache/alias restoration.",
+  "next_question": "Use a zero-execution or saved-candidate diagnostic to profile the remaining validation/entry cost; reuse completed Job candidate bytes for independent numerical inspection where possible. Do not extend300s or repeat the unchanged prefix; do not resume an owner without externally retained heads.",
+  "full_optimized_workflow_accepted": false,
+  "whole_workflow_performance_review_complete": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

@@ -5,7 +5,7 @@ from pathlib import Path
 import sys
 
 HERE=Path(__file__).resolve().parent
-MANIFEST_SHA='74a85452491e5c13c0d3968ccfc8ecee13b352cfd8971a6dbd317e00516621ba'
+MANIFEST_SHA='44a27648c0b31ce7237a218c5514f089d6585a072b3b1fae128068d0a808731a'
 raw=(HERE/'package_manifest_v1.json').read_bytes()
 if sha256(raw).hexdigest()!=MANIFEST_SHA:raise ValueError('fixed package manifest differs')
 manifest=json.loads(raw);sources={}

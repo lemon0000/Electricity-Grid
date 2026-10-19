@@ -1,0 +1,644 @@
+{
+  "status": "BOUNDED_PHASE_COST_RESULT_NONAUTHORITATIVE",
+  "observations": [
+    {
+      "observation": 1,
+      "elapsed_seconds": 0.9931692999962252,
+      "output_sha256": "b6f4514ebfb2223d094317e5bf6ce31742907d9a18243a47b4bf9cd71e92961d",
+      "observed_file_count": 973,
+      "observed_total_bytes": 42587617,
+      "io_read_operations": 4739,
+      "io_read_bytes": 94670077,
+      "profile_total_calls": 595985,
+      "profile_primitive_calls": 574206,
+      "focus": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_dependency_verifier_development_v1.py",
+          "line": 53,
+          "function": "read_stable",
+          "primitive_calls": 1960,
+          "calls": 1960,
+          "self_seconds": 0.016270700000000003,
+          "cumulative_seconds": 0.6082996
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_dependency_verifier_development_v1.py",
+          "line": 93,
+          "function": "_views",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0081276,
+          "cumulative_seconds": 0.37903790000000004
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "line": 29,
+          "function": "identity",
+          "primitive_calls": 3920,
+          "calls": 3920,
+          "self_seconds": 0.0060093,
+          "cumulative_seconds": 0.30110040000000005
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_manifest_group_development_v1.py",
+          "line": 22,
+          "function": "_project",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.010733300000000001,
+          "cumulative_seconds": 0.144064
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\__init__.py",
+          "line": 299,
+          "function": "loads",
+          "primitive_calls": 38,
+          "calls": 38,
+          "self_seconds": 6.85e-05,
+          "cumulative_seconds": 0.096196
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\rq2_v2_obligation_manifest_development_v1.py",
+          "line": 174,
+          "function": "_resolver",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.000706,
+          "cumulative_seconds": 0.08019190000000001
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "line": 23,
+          "function": "digest",
+          "primitive_calls": 1977,
+          "calls": 1977,
+          "self_seconds": 0.0014713,
+          "cumulative_seconds": 0.055787100000000006
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "line": 19,
+          "function": "encode",
+          "primitive_calls": 4737,
+          "calls": 4737,
+          "self_seconds": 0.0021208,
+          "cumulative_seconds": 0.031717800000000004
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\encoder.py",
+          "line": 183,
+          "function": "encode",
+          "primitive_calls": 4737,
+          "calls": 4737,
+          "self_seconds": 0.0029039,
+          "cumulative_seconds": 0.022756600000000002
+        }
+      ],
+      "top_cumulative": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_dependency_verifier_development_v1.py",
+          "line": 125,
+          "function": "prepare_group",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0228047,
+          "cumulative_seconds": 0.9893861
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_dependency_verifier_development_v1.py",
+          "line": 53,
+          "function": "read_stable",
+          "primitive_calls": 1960,
+          "calls": 1960,
+          "self_seconds": 0.016270700000000003,
+          "cumulative_seconds": 0.6082996
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_dependency_verifier_development_v1.py",
+          "line": 93,
+          "function": "_views",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0081276,
+          "cumulative_seconds": 0.37903790000000004
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "line": 29,
+          "function": "identity",
+          "primitive_calls": 3920,
+          "calls": 3920,
+          "self_seconds": 0.0060093,
+          "cumulative_seconds": 0.30110040000000005
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 835,
+          "function": "stat",
+          "primitive_calls": 3920,
+          "calls": 3920,
+          "self_seconds": 0.0020719000000000002,
+          "cumulative_seconds": 0.2939513
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method nt.stat>",
+          "primitive_calls": 3920,
+          "calls": 3920,
+          "self_seconds": 0.26363200000000003,
+          "cumulative_seconds": 0.2918794
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 1005,
+          "function": "open",
+          "primitive_calls": 1960,
+          "calls": 1960,
+          "self_seconds": 0.0018733,
+          "cumulative_seconds": 0.1607199
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method _io.open>",
+          "primitive_calls": 1960,
+          "calls": 1960,
+          "self_seconds": 0.1571228,
+          "cumulative_seconds": 0.1588466
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_manifest_group_development_v1.py",
+          "line": 22,
+          "function": "_project",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.010733300000000001,
+          "cumulative_seconds": 0.144064
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\__init__.py",
+          "line": 299,
+          "function": "loads",
+          "primitive_calls": 38,
+          "calls": 38,
+          "self_seconds": 6.85e-05,
+          "cumulative_seconds": 0.096196
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\decoder.py",
+          "line": 333,
+          "function": "decode",
+          "primitive_calls": 38,
+          "calls": 38,
+          "self_seconds": 6.25e-05,
+          "cumulative_seconds": 0.0923047
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\decoder.py",
+          "line": 344,
+          "function": "raw_decode",
+          "primitive_calls": 38,
+          "calls": 38,
+          "self_seconds": 0.09215720000000001,
+          "cumulative_seconds": 0.09215720000000001
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 690,
+          "function": "is_relative_to",
+          "primitive_calls": 1944,
+          "calls": 1944,
+          "self_seconds": 0.0030013,
+          "cumulative_seconds": 0.0889118
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\rq2_v2_obligation_manifest_development_v1.py",
+          "line": 174,
+          "function": "_resolver",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.000706,
+          "cumulative_seconds": 0.08019190000000001
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 663,
+          "function": "relative_to",
+          "primitive_calls": 971,
+          "calls": 971,
+          "self_seconds": 0.0043186000000000006,
+          "cumulative_seconds": 0.07711380000000001
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'read' of '_io.BufferedReader' objects>",
+          "primitive_calls": 1960,
+          "calls": 1960,
+          "self_seconds": 0.071272,
+          "cumulative_seconds": 0.071272
+        },
+        {
+          "file": "<frozen _collections_abc>",
+          "line": 1032,
+          "function": "__contains__",
+          "primitive_calls": 1944,
+          "calls": 1944,
+          "self_seconds": 0.004332900000000001,
+          "cumulative_seconds": 0.060274
+        },
+        {
+          "file": "<frozen _collections_abc>",
+          "line": 1022,
+          "function": "__iter__",
+          "primitive_calls": 13318,
+          "calls": 13318,
+          "self_seconds": 0.00385,
+          "cumulative_seconds": 0.056721200000000006
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 437,
+          "function": "__str__",
+          "primitive_calls": 17273,
+          "calls": 17273,
+          "self_seconds": 0.007852900000000001,
+          "cumulative_seconds": 0.056188300000000004
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "line": 23,
+          "function": "digest",
+          "primitive_calls": 1977,
+          "calls": 1977,
+          "self_seconds": 0.0014713,
+          "cumulative_seconds": 0.055787100000000006
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 277,
+          "function": "__getitem__",
+          "primitive_calls": 11376,
+          "calls": 11376,
+          "self_seconds": 0.0082518,
+          "cumulative_seconds": 0.0528712
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method _hashlib.openssl_sha256>",
+          "primitive_calls": 1977,
+          "calls": 1977,
+          "self_seconds": 0.05118,
+          "cumulative_seconds": 0.05118
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 551,
+          "function": "drive",
+          "primitive_calls": 6812,
+          "calls": 6812,
+          "self_seconds": 0.0047475,
+          "cumulative_seconds": 0.049175
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 407,
+          "function": "_load_parts",
+          "primitive_calls": 4868,
+          "calls": 4868,
+          "self_seconds": 0.0051155,
+          "cumulative_seconds": 0.0444275
+        }
+      ]
+    },
+    {
+      "observation": 2,
+      "elapsed_seconds": 1.0038281999950414,
+      "output_sha256": "b6f4514ebfb2223d094317e5bf6ce31742907d9a18243a47b4bf9cd71e92961d",
+      "observed_file_count": 973,
+      "observed_total_bytes": 42587617,
+      "io_read_operations": 4739,
+      "io_read_bytes": 94670077,
+      "profile_total_calls": 595795,
+      "profile_primitive_calls": 574016,
+      "focus": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_dependency_verifier_development_v1.py",
+          "line": 53,
+          "function": "read_stable",
+          "primitive_calls": 1960,
+          "calls": 1960,
+          "self_seconds": 0.0158375,
+          "cumulative_seconds": 0.5900176
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_dependency_verifier_development_v1.py",
+          "line": 93,
+          "function": "_views",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.007906,
+          "cumulative_seconds": 0.3915079
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "line": 29,
+          "function": "identity",
+          "primitive_calls": 3920,
+          "calls": 3920,
+          "self_seconds": 0.005916,
+          "cumulative_seconds": 0.292712
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_manifest_group_development_v1.py",
+          "line": 22,
+          "function": "_project",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0107387,
+          "cumulative_seconds": 0.1390768
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\__init__.py",
+          "line": 299,
+          "function": "loads",
+          "primitive_calls": 38,
+          "calls": 38,
+          "self_seconds": 6.29e-05,
+          "cumulative_seconds": 0.09172490000000001
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\rq2_v2_obligation_manifest_development_v1.py",
+          "line": 174,
+          "function": "_resolver",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0006901,
+          "cumulative_seconds": 0.07849460000000001
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "line": 23,
+          "function": "digest",
+          "primitive_calls": 1977,
+          "calls": 1977,
+          "self_seconds": 0.0014809,
+          "cumulative_seconds": 0.0575717
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "line": 19,
+          "function": "encode",
+          "primitive_calls": 4737,
+          "calls": 4737,
+          "self_seconds": 0.001986,
+          "cumulative_seconds": 0.0311921
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\encoder.py",
+          "line": 183,
+          "function": "encode",
+          "primitive_calls": 4737,
+          "calls": 4737,
+          "self_seconds": 0.0028398,
+          "cumulative_seconds": 0.0225618
+        }
+      ],
+      "top_cumulative": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_dependency_verifier_development_v1.py",
+          "line": 125,
+          "function": "prepare_group",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.023661900000000003,
+          "cumulative_seconds": 1.0001947
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_dependency_verifier_development_v1.py",
+          "line": 53,
+          "function": "read_stable",
+          "primitive_calls": 1960,
+          "calls": 1960,
+          "self_seconds": 0.0158375,
+          "cumulative_seconds": 0.5900176
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_dependency_verifier_development_v1.py",
+          "line": 93,
+          "function": "_views",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.007906,
+          "cumulative_seconds": 0.3915079
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "line": 29,
+          "function": "identity",
+          "primitive_calls": 3920,
+          "calls": 3920,
+          "self_seconds": 0.005916,
+          "cumulative_seconds": 0.292712
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 835,
+          "function": "stat",
+          "primitive_calls": 3920,
+          "calls": 3920,
+          "self_seconds": 0.0020552,
+          "cumulative_seconds": 0.2856928
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method nt.stat>",
+          "primitive_calls": 3920,
+          "calls": 3920,
+          "self_seconds": 0.2564032,
+          "cumulative_seconds": 0.28363760000000005
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 1005,
+          "function": "open",
+          "primitive_calls": 1960,
+          "calls": 1960,
+          "self_seconds": 0.0018284000000000002,
+          "cumulative_seconds": 0.15728440000000002
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method _io.open>",
+          "primitive_calls": 1960,
+          "calls": 1960,
+          "self_seconds": 0.15384430000000002,
+          "cumulative_seconds": 0.155456
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_manifest_group_development_v1.py",
+          "line": 22,
+          "function": "_project",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0107387,
+          "cumulative_seconds": 0.1390768
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 690,
+          "function": "is_relative_to",
+          "primitive_calls": 1944,
+          "calls": 1944,
+          "self_seconds": 0.0031301000000000002,
+          "cumulative_seconds": 0.0963795
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\__init__.py",
+          "line": 299,
+          "function": "loads",
+          "primitive_calls": 38,
+          "calls": 38,
+          "self_seconds": 6.29e-05,
+          "cumulative_seconds": 0.09172490000000001
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\decoder.py",
+          "line": 333,
+          "function": "decode",
+          "primitive_calls": 38,
+          "calls": 38,
+          "self_seconds": 6.36e-05,
+          "cumulative_seconds": 0.0879439
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\decoder.py",
+          "line": 344,
+          "function": "raw_decode",
+          "primitive_calls": 38,
+          "calls": 38,
+          "self_seconds": 0.0877941,
+          "cumulative_seconds": 0.0877941
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 663,
+          "function": "relative_to",
+          "primitive_calls": 971,
+          "calls": 971,
+          "self_seconds": 0.0047365,
+          "cumulative_seconds": 0.0844049
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\rq2_v2_obligation_manifest_development_v1.py",
+          "line": 174,
+          "function": "_resolver",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.0006901,
+          "cumulative_seconds": 0.07849460000000001
+        },
+        {
+          "file": "<frozen _collections_abc>",
+          "line": 1032,
+          "function": "__contains__",
+          "primitive_calls": 1944,
+          "calls": 1944,
+          "self_seconds": 0.0046873,
+          "cumulative_seconds": 0.0652263
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'read' of '_io.BufferedReader' objects>",
+          "primitive_calls": 1960,
+          "calls": 1960,
+          "self_seconds": 0.0647182,
+          "cumulative_seconds": 0.0647182
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 380,
+          "function": "with_segments",
+          "primitive_calls": 15263,
+          "calls": 15263,
+          "self_seconds": 0.0100395,
+          "cumulative_seconds": 0.0625731
+        },
+        {
+          "file": "<frozen _collections_abc>",
+          "line": 1022,
+          "function": "__iter__",
+          "primitive_calls": 13318,
+          "calls": 13318,
+          "self_seconds": 0.0041548,
+          "cumulative_seconds": 0.062005000000000005
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 437,
+          "function": "__str__",
+          "primitive_calls": 17265,
+          "calls": 17265,
+          "self_seconds": 0.0082026,
+          "cumulative_seconds": 0.0581655
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 277,
+          "function": "__getitem__",
+          "primitive_calls": 11376,
+          "calls": 11376,
+          "self_seconds": 0.0089963,
+          "cumulative_seconds": 0.057850200000000004
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "line": 23,
+          "function": "digest",
+          "primitive_calls": 1977,
+          "calls": 1977,
+          "self_seconds": 0.0014809,
+          "cumulative_seconds": 0.0575717
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method _hashlib.openssl_sha256>",
+          "primitive_calls": 1977,
+          "calls": 1977,
+          "self_seconds": 0.052808100000000004,
+          "cumulative_seconds": 0.052808100000000004
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 551,
+          "function": "drive",
+          "primitive_calls": 6804,
+          "calls": 6804,
+          "self_seconds": 0.0051947,
+          "cumulative_seconds": 0.051052700000000006
+        }
+      ]
+    }
+  ],
+  "canonical_outputs_equal": true,
+  "interpretation": "profiled full validation about1s; read_stable0.59-0.61s and project0.139-0.144s overlap with lower functions, not additive; profiler overhead prevents direct speed ratio versus unprofiled window97",
+  "plan_pins_unchanged": true,
+  "files_sha256": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_dependency_cost_probe_plan_96.json": "dbe20694ef037fb8023189ca9656e6506384ab6c1ccdc7fd9fe300e68af65e52",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_cost_profile_96\\request.json": "72183e8fb840aed7ed93c982fa4c7717d1d17b815919570a6e21fe739242c9e6",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_cost_profile_96\\started.json": "f941e6575b040cbfb6a89cb3691c130a3a82e81e4a230f8c7e8dee7f36640edb",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_cost_profile_96\\terminal.json": "0416d10bfb37b8fb3a4ab91e6ac972c5380a0b790281d6dcbac1e4919f172882",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_cost_profile_96\\stdout.log": "dc6c1bc0e360002380d5898af3146589164a3abe273eab855d26e82035c454fc",
+    "D:\\h1_phase_dep_profile_96_non_authoritative\\test_two_identical_detached_ph0\\phase_dependency_cost_profile.json": "afb1d6acc20033a18883b050a79f6738ac25f8c1d77492bb2e1ab491f1f590fe",
+    "D:\\h1_phase_dep_profile_96_non_authoritative\\unit_code_read_lease_closed.json": "14ece0876faea0dd9309ac480f0a229a27952fd1eb13b6670a9881d9de6cff37"
+  },
+  "whole_workflow_performance_review_complete": false,
+  "formal_result": false,
+  "resource_admission": false
+}

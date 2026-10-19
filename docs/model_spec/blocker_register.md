@@ -1,5 +1,243 @@
 # 当前问题与阶段门禁登记
 
+2026-10-19 19:58 当前续作：旧chain07主体及独立后验04已闭合，不重跑；当前199/200/201观察PID均退出。
+181已归档实际Core6单N0/原oracle/真实数值只读重开定向复核；174计划遗留module/header例外原样保留。
+Core7/Owned7/Verifier6/Roster5与phase-kernel2/binding4/operation2为DRAFT后继，未替换Core6或174保存字节。
+199当前36项通过54.38s/outer57.094s；200真实空头创建/检查/关闭/重开通过124.27s/outer129.093s，8phase窗+10空registry scope；
+201七项真实phase字节等价/失败段回归通过32.83s/outer35.687s。各source pins相符、观察PID退出、cleanup/storage错误0、原句柄关闭，0newN0/Job/native。
+202独立定向findings闭合caller/frame clone、callback-active阻断、共享16槽/退休重试和空头生命周期；18源码快照已保存。
+数值Roster与Common仍OPEN；Common binder当前显式拒绝。204设计要求预置source pins/blueprint、弱footer登记、loader独立activation、
+Genesis/Handoff两类一次性provisional initial replay及Common五个固定父帧/CALLsite，结束清强引用；拟每次Common共享一个无callback静态phase窗，数值scope逐replay独立关闭。
+205已创建20文件显式typed后继图（18新文件+2原有Common draft），旧路径保留，下一步静态/导入验证及桥路由实现；不先消耗新N0 Job。
+三臂/Common/Genesis/四Parent/Handoff/paired/Post/reopen、整体预算和正式实验仍未验收。
+matrix23 SHA6b194fbf6cba16243e84d0ef3480f9d83c3762764132e41c2b6ab6f7ae830839；所有formal/native/resource门false。
+
+2026-10-19 18:41 当前续作：已观察174/176/177/180进程均退出；旧chain07主体/后验04闭合，不重跑。
+174实际Bootstrap6单N0 public return/原执行receipt/owner close通过，1passed351.02s/outer356.813s；Job exit0/quiescent50.453s。
+8retention/4full28fresh64contexts/17phase段/constructor读窗均关闭，pending0/1380pins无漂移/10locks重取释放。
+175保留plan两处遗留：invocation.module=v5、current_header指旧136；actual test/JUnit/import/public return均v6，exact计划参数/来源匹配仍false。
+176原oracle保存补验通过80.01s/outer86.578s；177真实数值只读重开/inspect/close通过170.90s/outer175.718s。
+177两独立method scopes各4full12fresh32contexts，总8full24fresh64contexts，2phase窗关闭；两项各1542pins及154保存文件名/字节不变，0newJob/native。
+173实现定向findings已闭合；181实际run/postcheck/metadata例外复核待返回。future test5的secondary repr/add_note保护经180五项0.40s/outer2.719s验证，未再跑N0；
+179的5逻辑pass但entry因未创建base而非零，旧v4和该失败原件保留。
+171局部DAG固定顺序65.7726→56.3763s（少14.3%）不外推整链；152旧调用return/cleanup仍false。
+下一瓶颈是Roster/Common持原owner guard且nonce=None的foreign消费者；Core6仅有constructor/inspect固定读入口，不能借producer nonce或detached receipt。
+先设计定义期绑定的后继消费者路线，保持已验Core6/174源码不改，再接Roster/三臂/Common/Genesis/Parent/Handoff/paired/Post/reopen与完整预算。
+matrix22 SHAd2500969046d80a25bd4afd2b2d8aad6a9b99d0b56836c65198ee6112ae153a8；优化整链和正式实验未验收，所有formal/native/resource门false。
+
+2026-10-19 18:34 运行更新：174实际Bootstrap6单N0 public return/receipt/owner close已通过，exit0/1passed351.02s/outer356.813s。
+原Job exit0/quiescent50.453s，8retention/4full28fresh64contexts/17phase段关闭，pending0/1380pins无漂移/10locks可重取。
+175明确保留plan中的旧v5 module与旧136 header引用，exact_planned_invocation_metadata_matched=false；原plan/result不改、不重跑Job。
+176保存174数据的原数值oracle通过80.01s/outer86.578s，1542pins及154保存文件名/bytes不变，新增Job/native=0。
+177真实Bootstrap6数值consumer只读重开正在运行，观察PID34612，固定240s预算；尚无reopen终态。
+v4测试failure-secondary repr保护仍有限，成功174未走该分支；后继test修复待做。Roster5/完整优化整链和正式实验未验收。
+
+2026-10-19 18:21 运行更新：173独立定向PRE_SEAL findings已闭合（非official verdict/receipt）。
+174新版本单N0合成诊断正在运行：观察PID34384、monitor PID22540，固定400s/RSS1GiB/存储128MiB。
+仅1模拟小时/最多1合成Job/0native；当前尚无public return或完整关闭终态，不能当作成功。
+源码/测试/入口保持运行字节，retention在callback确认前落盘；终态后补保存数据oracle/reopen，不重复Job。
+旧152原public return/cleanup仍false，优化整链及正式实验仍未验收。见active_bootstrap6_diagnostic_status_174.json。
+
+2026-10-19 18:18 开发状态：169/170/171均有exit0终态，已观察PID退出；旧chain07主体/后验04闭合，不重跑主体。
+Bootstrap6/Owned6/Verifier5消费者registry读窗已实现，仍为DRAFT_NONAUTHORITATIVE。每个constructor/inspect用原guard与fresh nonce，
+只在同一方法内复用confirmed proof，返回前close/取只读receipt/retire；16个全局live或pending槽与owner.close重试保留失败清理入口。
+169共150项通过46.04s/outer49.172s，覆盖真实partial retire、producer/consumer retry、上限、foreign active、GC与constructor primary组合。
+170当前源码真实空header创建/inspect/关闭/重开/inspect/关闭通过85.36s/outer90.078s，4个空读窗及phase窗完整关闭，0N0/Job/native。
+171保存152数据的单次固定顺序无profiler对照：原DAG65.7726s→两段consumer-sized operation56.3763s，局部少14.3%；
+16full/16fresh/64contexts→8full/24fresh/64contexts，八份audit/decision bytes一致，原oracle SHA2648f795…；1521pins及143保存文件名/字节无漂移。
+该诊断未测真实数值public consumer或整链耗时；152原public返回/原进程graceful cleanup仍false，153/154保存记录补验不改写该终态。
+173独立定向PRE_SEAL复核结论待返回；下一步174新版本单合成N0的public return/receipt/close诊断，固定400s预算已登记，尚未启动。
+Roster5/三臂/Common/Genesis/Parent/Handoff/paired/Post/reopen与完整优化整链、正式实验均未验收。
+matrix21 SHA1aca85a6d448dee36574d044553c89c575ab4c8fadc811b55fa21195569d6b7a；所有formal/native/resource门保持false。
+
+2026-10-19 17:33 开发状态：当前已观察的诊断进程均退出；旧chain07主体与独立后验04已闭合，主体不重跑。
+136当前Bootstrap5/Roster4 header完整通过；135身份/线程/首次entry故障的定向findings已闭合。
+145夹具metadata扩展无收益，已停止采用；148原CanonicalPathLease局部诊断outer153.984→134.75s，
+仅单次固定顺序cProfile对照，不能外推整链。150入口失败/CLI十项通过，151定向findings闭合。
+152单N0诊断在300.25s停止：Job exit0/quiet49.281s，8份外部heads在callback确认前落盘；
+原public bootstrap返回、完整执行receipt和原进程graceful cleanup仍未验证，不能改写成成功。
+153保存候选原数值oracle哈希一致，outer90.032s；154用外部heads只读重开当前Bootstrap5，
+inspect确认pending_post_N并关闭，outer176.594s；2个phase窗完整关闭、1512pins及143保存文件无漂移，
+新增Job/native=0。该新owner的成功关闭不替代152原调用终态。当前完整优化整链/正式实验均未验收。
+下一瓶颈为消费者registry重复full-only校验；design155固定新版本与同一方法内复用边界，尚未实现。
+matrix20 SHA64f80e1b8f145b43164dbc06bae9696e02de65a39fe7060615b8fe1b27402514；所有formal/native/resource门保持false，见whole_workflow_optimization_01_non_authoritative。
+
+2026-10-19 15:59 开发状态：当前无后台实验。旧chain07主体和独立后验04已闭合，主体不重跑。
+共享phase scope与Bootstrap5/Owned5/Roster4草稿已实现。125定位公共implementation identity递归DAG重复；
+131真实公共header创建/检查/关闭/重开完成，outer exit0/105.766s，6窗完整清理、12次raw覆盖1304次段内请求，
+1352 pins无漂移、观察PID35788退出/cleanup0；0N0/Job/native且保留9个predefinition execution-denial限制。
+这不是与119的同条件提速比较，也不覆盖N0或整链。后续独立审查发现合法多线程memo单栈冲突，已改私有
+(pid,thread_id)分栈，补barrier/同一body primary/首次raw entry异常；134当前116项通过22.96s/outer26.125s。
+三层owner registry现用id/weakref/token并固定hash/eq实际MRO；漂移时真实资源仍可清理。
+bootstrap默认metadata路线不变；显式registered_development=True选既有N0 development continuation，exactbool
+在phase handles前验证。135绑定当前字节，独立定向PRE_SEAL复核待结论；131是之前字节，不能充当当前完整closure。
+下一步补当前图真实N0数值注册/关闭重开，再接三臂、Common/Genesis/Parent/Handoff/paired/Post/reopen及完整预算。
+implementation观察明确为segment_entry_exit，per-call freshness/ABA=false；全部formal/native/resource门仍false。
+matrix19 SHA865736de0fdd103f366875d146b90ca0179d4238afe9921ae13d322fe0af3428；证据位于validation_n0_operation_01/whole_workflow_optimization_01_non_authoritative。
+
+2026-10-19 14:07：109 standalone binding3及组合故障65项通过、定向findings109闭合108四项问题；
+证据限定为与旧binding2共享helper的科学投影回归，独立科学算法验证仍false。当前无后台实验。
+matrix18保存范围；共享callback-free scope与Bootstrap5/Owned5/Roster4公共生命周期尚未实现，genuine图仍OPEN。
+106局部29.27%/41.79%耗时减少不外推整链；旧chain07/后验04闭合，整体资源及所有正式门保持OPEN。
+
+2026-10-19 13:52：phase读窗源码/实际ABI、cap、GC/orphan和资源上界定向findings105闭合，未打开official门。
+106同条件无profiler局部对照通过：6请求4.370→3.091s、16请求11.949→6.956s，含完整创建/退出/清理，
+科学字段独立编码相等、4窗完整关闭、1153 pins不变、观察PID退出；只支持局部ROI，非整链预算或正式结果。
+路线改为phase-binding3→Bootstrap5→Owned5→Roster4以覆盖public create/reopen；108新binding3 detached
+投影6项通过，稳定audit/动态receipt分离，定向PRE_SEAL和共享scope待完成。当前无后台实验。
+旧chain07/后验04仍闭合；新root/N0 receipt/oracle、genuine typed链、完整性能/资源及所有正式门保持OPEN。
+
+2026-10-19 12:55：89 projector执行envelope156项与92额外6项通过，独立局部PRE_SEAL findings已闭合；
+genuine caller实际projector绑定仍缺。94 entry14入口145项/1skip通过。95空registry real header诊断按300s停止，
+完成首轮create/inspect/guard/close与Bootstrap4重开，Roster重开/最终counter JSON未到；当前无后台实验。
+1029 pins不变、观察PID退出、3 locks可probe，但未证明内部graceful cleanup或完整header验收。
+补审旧预算遗漏foreign registry N0层：47/7/3图额外1452 prepares/5808 full，仍需新增consumer-bound读窗复用。
+先定位空header的phase静态依赖/投影瓶颈，保存reader组合设计与matrix15；不重复相同昂贵前缀或延长预算。
+旧chain07主体/补验04已闭合，genuine完整N0 receipt/oracle、优化整链、整体资源及所有正式门保持OPEN。
+
+2026-10-19 12:17：83已按600s上限停止（outer600.532s），4 Parent完成、Handoff登记成功进入，
+但未到paired/Post/reopen；1027结束时pins未漂移，已观察进程退出。当前无相关实验进程。
+85 registry/marks断言短回归51项通过。新Roster3 exact Bootstrap4与terminal data correspondence的
+87共82项通过且独立定向PRE_SEAL无局部新实现问题；live Roster3 create/attach/inspect/reopen仍OPEN。
+88 bytes-only scientific projector111项通过，独立复核待结论，尚未接Common9/10 own report/receipt。
+matrix14与typed_successor_graph_design_02保存范围；genuine N0完整receipt/oracle、typed完整链、
+整体性能/资源及所有正式门继续OPEN。旧chain07主体和补验04闭合，不重跑主体。
+
+2026-10-19 11:37：79四Parent前缀完成后因Handoff合法_OWNERS登记被误判常量漂移而失败，
+paired/Post/reopen未执行。修复明确私有登记表角色后，80普通167项和独立定向PRE_SEAL、
+81真实登记Handoff进入/退出、82 entry13入口145项（1 skip）通过；均无official gate效力。
+83现按固定600s/1GiB采样/128MiB诊断四Parent→paired→三Post→close/reopen，0真N0/native，终态待取。
+其fake source/numerical/common-validation bridge仍是范围限制；genuine N0/typed图/Common4完整链、
+整体性能/资源与全部正式门仍OPEN。旧chain07主体和后验补验04已闭合，不重跑主体。
+
+2026-10-19 10:49：66保存Rref共享48→2及独立typed payload核验通过，183文件不变、4 probe locks释放，
+outer0/162.234s；probe Parent anchors未发live credentials。65两项P1（runtime closure和Bundle rollback）
+修复后71普通150项通过32.57s/outer35.610s、source unchanged/PID absent/cleanup0；input71绑定32文件及
+request/started/runner15/entry3，定向独立复核待结论。70按固定180s停、非全套通过；当前72仅GenesisOp2回归。
+实际Handoff6、完整新图、entry13和full4Parent/paired/reopen仍OPEN。旧chain07主体与后验04已闭合；
+全部正式门保持OPEN。
+
+2026-10-19 05:53：shared reference engine/routes、ParentVal4/post3/Handoff6/Common4及GenesisOp2后继图
+已写入，65普通78项通过（outer0/22.781s、source unchanged/PID absent/cleanup0）；显式夹具证明14窗
+reference726→28而source2408/28、150body保持。input65冻结23文件，scoped PRE_SEAL待findings，无official。
+当前66 PID6292/session61871固定300s，0真Job/native，871源码/183保存文件绑定；canonical shared48→2
+及独立typed payload终态待取，Parent anchors为probe classes，运行时源码不改。matrix12已保存。
+完整新图广泛回归/end_to_end6、entry13、full4Parent/paired/reopen仍OPEN；旧chain07主体及补验已闭合。
+genuine N0/typed图、完整性能/资源及所有正式门保持OPEN。
+
+2026-10-19 05:23：当前无Python实验进程。56 real Parent4单Rref→Actual→validate/close普通用例通过，
+outer0/258.468s（显式synthetic source/native/transport）；source unchanged/PID18136 absent/cleanup0。
+最终_enter入口修复后57普通151项通过、outer0/21.203s，独立定向复核named scoped PRE_SEAL无剩余
+实质缺口，非official。56绑定最后入口delta前字节，57入口故障为AST方法体+seams；当前完整live四Parent、
+paired/reopen与全链性能仍未验收。matrix11记录证据；下一步独立四Parent reference共享helper及
+Parent-validation4/post-negative3/Handoff6/Common/Genesis后继，726→28仍仅静态设计。旧chain07主体及
+补验已闭合；genuine N0/typed图、完整优化链、资源及全部正式门保持OPEN。
+
+2026-10-19 05:18：51真实saved-Rref probe outer0/160.172s（16logical/2original、typed payload匹配，
+183保存文件无漂移，Parent anchors为probe）；55 closure修复143项普通回归通过、outer0/21.062s。
+独立复核两项closure P1已覆盖，Parent4 `_enter`检查失败+首关release-before-effect仍OPEN，待56终态后
+修复并补actual/ref×run/validate入口故障。56 PID18136/session83151按300s运行real Parent4普通生命周期，
+Rref60.121s完成，终态待取，0真Job/native；运行时source/tests/entry/runner/plan不改。
+matrix10及summary55保存当前边界；Handoff共享reference窗口仅设计（726→28静态，未实现）。
+旧chain07主体与补验已闭合；genuine N0/typed图、完整优化链/paired/reopen、资源及正式门仍OPEN。
+
+2026-10-19 05:05：reference-window1/source2/Parent4 draft普通50合并回归110 passed/11.98s，outer0/
+14.266s，source unchanged/PID12564+creation absent/cleanup0；当前待scoped PRE_SEAL，无official。
+51 canonical saved-Rref probe正运行，PID8872，固定240s/1GiB采样/128MiB、0新Job/native，绑定
+849源码/183保存文件；只验证一个16逻辑/2完整重放窗口，Parent/locks为probe对象，终态待取。
+当前实现只接Parent4自己的已持锁Actual run/validate；Handoff私有克隆路径等仍待后继接线。
+旧chain07独立补验已闭合；完整优化链/paired/reopen、genuine N0/typed图、资源与正式门仍OPEN。
+
+2026-10-19 04:34：48按600.484s停止，source unchanged、observed PID32708+creation退出、cleanup0，
+当前无Python实验进程。三Actual/Handoff550.643s，比41慢51.951s；paired/reopen仍无终态，entry12
+不作为整链提速采用，168项普通回归/scoped PRE_SEAL只闭合局部。matrix09绑定59条证据。
+下一步reference窗口设计仅覆盖已持锁Actual run/validate（静态68+16V→8+2V），构造4/20、capture/
+Actual output仍fresh；设计未实现测试。genuine N0完整receipt/oracle、typed图、全链和正式门OPEN。
+
+2026-10-19 04:21：47控制authority P1定向scoped PRE_SEAL已闭合（非official）。fail-fast核验58条
+plan48证据及全部closure后，当前唯一48普通四Parent诊断PID32708，固定600s/1GiB采样/128MiB；
+终态待取，禁止延预算或改绑定字节。完整paired/reopen与组合出口尚未验收，genuine N0/typed图、
+完整优化链和全部正式门仍OPEN。旧chain07主体及已补完独立后验检查继续复用。
+
+2026-10-19 04:20：46审查的可变bound控制authority P1，经readonly generator阶段协议和实际伪造/
+关闭故障负例修复；47普通168项通过（1skip，outer0/25.687s），当前待此P1独立定向复核，无实验
+进程。尚无新整段终态，局部128次0.5510994→0.1816392s不是整链证据。下一步fail-fast新plan48及
+一次600s普通四Parent；genuine N0登记/receipt/oracle、typed图、优化全链与正式门保持OPEN。
+
+2026-10-19 04:08：entry12的Path.open bounded fresh-read与唯一byte owner组合，46普通166项回归
+通过（1skip，outer0/23.532s），源码不变、observed PIDs退出、cleanup0；当前待静止字节统一scoped
+PRE_SEAL，无official verdict。partial-enter/exit首关失败有界retry-before-restore及stream故障等已测。
+局部128次0.4884752→0.1457667s不构成整链收益；尚未启动下一四Parent，当前无实验进程。
+41仍无paired/reopen终态；genuine N0完整登记/receipt/oracle、typed图、全链与正式门保持OPEN。
+
+2026-10-19 03:30：41 wall600.312s停止，三Actual/Handoff完成构造但paired/reopen无终态，源码未变、
+PID3604+creation退出、cleanup0；当前无Python实验进程。metadata40普通141项及scoped PRE_SEAL仅
+闭合局部合同，不能替代整链。矩阵08/对照41已绑定49条证据，下一步接两阶段Path.open bounded-size
+overlay以保留fresh reads并复用唯一byte owner；尚未实现测试。genuine N0/typed图、全链与正式门OPEN。
+
+2026-10-19 续作：metadata discovery closure P1 经 descriptor/direct-global/builtin-shadow 和original
+函数漂移检查修复，40普通141项回归通过（1skip，outer0/25.860s），scoped PRE_SEAL未见剩余named
+实质P1，无official verdict。41现按600s/1GiB采样/128MiB诊断四Parent paired/close/reopen，PID3604，
+终态尚待取；局部2000次1.533004→0.829748s不等于整链收益。genuine N0完整receipt/oracle、typed图、
+完整性能与资源/正式门仍OPEN。旧chain07主体不重跑，独立补验已闭合；binding附加核验的字段错误
+与启动后pin匹配时序已保存在41的binding verification记录，原计划未回写。
+
+2026-10-19 03:08：entry11固定metadata路径后继38普通137项回归通过（1skip），8versions等价、
+新实例/故障/回退已验证，但discovery transitive graph仍待scoped PRE_SEAL审查，无official verdict。
+局部1.807102→0.671809s不能代替整链；未启动entry11四Parent或新N0。矩阵07仍记录最近36的
+600.328s停止和无整段收益，优化整链、typed图、资源及正式门OPEN；当前无Python实验进程。
+
+2026-10-19 02:47：36 wall600.328s/exit15，source unchanged、observed PID absent、cleanup0；
+三Actual/Handoff构造后未完成paired/reopen，整体前缀无提速收益。摘要v2保留149项普通回归及
+scoped PRE_SEAL proof，当前不采用为整链性能方案。矩阵07记录下一个metadata/raw replay瓶颈。
+N0_04虽保存local/global terminal及5/3 rows，后2registry builds/scope/receipt/oracle尚缺；完整N0
+登记验收、typed图、整体性能/资源及正式门仍OPEN。当前无Python实验进程，旧chain07不重跑。
+
+2026-10-19 02:38：entry10摘要能力后继35普通149项回归通过（1skip），private issuer closure只读
+view和固定writer/lookup修复最后named P1；scoped PRE_SEAL未见剩余P1，非official verdict。
+当前36仅600s/1GiB采样/128MiB的fake N0/source/native/Job四Parent paired/reopen诊断，终态待取。
+完整优化链、genuine typed N0图、资源与正式门仍OPEN；矩阵06、计划36及当前字节保留。
+
+2026-10-19 02:32：entry10摘要能力后继33的147项普通回归通过（1skip，outer0/24.188s），源码不变、
+已观察PID退出。此前joint dict alias/同步改写P1已补immutable issuer bytes与负例，待当前scoped
+PRE_SEAL复核；无official verdict。真实digest/profile对照通过，局部耗时不能代替整链验收。
+28仍是最近四Parent整段终态：600.391s wall stop，paired/reopen未完成。下一段有界诊断后再
+接typed N0图。旧chain07补验已闭合，优化整链、资源与全部正式门仍OPEN。
+
+2026-10-19 02:15：28诊断已wall stop/600.391s，当前未发现Python实验进程。Rref和三Actual完成，
+paired/reopen未通过；observed PID absent、source unchanged、cleanup无错误。静态输入I/O局部
+优化证据保留；重复SHA/repair digest仍是瓶颈。entry10能力借用/normalizer v2未测试草稿尚有
+canonical闭包、sticky failure、冻结closed receipt及唯一session/joint匹配PRE_SEAL缺项。
+不重跑旧chain07主体，旧补验已闭合；M2优化整链、typed N0图、资源和正式门继续OPEN。
+
+2026-10-19 01:49：entry09静态科学输入I/O后继已通过120项普通回归（1skip），typed/science链
+仍未验收。分层检查及所有named故障后的真实handle cleanup已核验，PRE_SEAL scoped review未见
+新P1；无official verdict。22因helper捕获sys.modules整表被Genesis拒绝，现修正且保留检查。
+当前28仍为600s有界fake N0/source/native/Job四Parent单测，Rref45.773s后进入Actual a，等待
+paired/关闭重开及收尾终态。矩阵04记录静态输入缓存边界与未完成门，完整优化链/正式门不变。
+
+2026-10-19 01:31：entry08诊断18已按600.360s wall预算停止，源码不变、已观察PID退出；不是
+整链通过/不可行证据。重复JSON读取瓶颈已形成entry09静态科学输入byte lease草稿，112项普通
+回归（1skip）及training/holdout identity、repair digest对照通过；局部I/O成本降低，整链收益
+未知。当前22仅600s/1GiB采样/128MiB的fake N0/source/native/Job普通四Parent/保存重放诊断。
+entry09仍有旧分支支持及capsule函数变异PRE_SEAL缺项；优化整链、typed图、资源和正式门不变。
+
+2026-10-19 01时续作：旧chain07独立补验已完成。Genesis scoped PRE_SEAL实现缺项由39项当前字节
+回归13/exit0及只读复核闭合；实际原stream关闭与registry key不可归属边界已验证。4Parent普通
+单测14虽完成三Actual，paired未在600s内终态；当前改用完整entry08的有界普通诊断18，仍为
+fake N0/source/native/Job。不能据此关闭整链、科学等价、资源或正式门。最小typed后继图尚未实现，
+最新矩阵在hour0 `validation_n0_operation_01/whole_workflow_optimization_01_non_authoritative/acceptance_matrix_03.json`。
+
+2026-10-18 23时续作：旧 `chain_07` 独立后验、清理补验及完整报告已完成，主体没有重跑。
+新 outer `postcheck_supplement_monitor_02` exit0/419.187s；独立保存重放243.176918s，
+一次正向及五次引用合同拒绝检查154.601544s。三份sidecar各973依赖摘要重新匹配；654个保存文件、
+旧36项源码及中断现场保持，38把锁逐一无写获取/释放，观察器已关闭，已观察PID+creation均退出。
+当前完成凭据为hour0根 `chain_07/postcheck_supplement_completion_04.json`，报告为同目录
+`complete_integration_report_supplement_04.md`。这闭合旧版synthetic hour0的独立后验缺项，
+不关闭优化后继M2、完整性能/资源准入或任何正式门。下文“后验待补”为较早观察记录。
+当前优化仍有Genesis lifecycle/caller绑定的PRE_SEAL findings、混合partial路径、N0后继图接线及完整
+paired/reopen测量缺项；见 `validation_n0_operation_01/whole_workflow_optimization_01_non_authoritative/acceptance_matrix_02.json`。
+
 2026-10-18 旧chain07主体已成功结束：exit0、1 passed、259910.325371s，paired commit及全部关闭后
 重开重放在主体中通过。3个原PID退出，36项源码和tested copies一致。observer因72h期限先到而退出，
 未启动独立postcheck/report；这不构成链失败，也不需要重跑主体。独立保存复验、清理验收及完整报告

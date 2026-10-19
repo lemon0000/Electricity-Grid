@@ -1,0 +1,218 @@
+"""Actual process identity/default QPC, synthetic source and fabricated native."""
+from dataclasses import asdict
+import json
+import os
+from pathlib import Path
+import sys
+from types import SimpleNamespace
+
+import pytest
+
+from experiments import h1_selector_released_worker_development_v1 as m
+from tests.test_h1_selector_input_snapshot_development_v1 import context,case,setup,legacy_setup,reference,archive
+from tests.test_h1_timed_selector_sequence_development_v1 import factory as sequence_factory,no_solver,producer
+
+
+@pytest.fixture
+def prepared(context,sequence_factory,tmp_path,monkeypatch):
+    def make(role='reference',change=None):
+        c=context
+        if role=='actual':
+            ref=archive(c,monkeypatch,tmp_path)
+            raw=m.snapshot.capture_actual(c.owner,c.config,max_archive_bytes=c.cap,lane_id='joint',**ref)
+            lane=producer.fixtures.A
+        else:raw=reference(c);lane=producer.fixtures.R
+        installed=sequence_factory(lane)
+        root=tmp_path/'released_selector_non_authoritative';root.mkdir()
+        scratch=root/'scratch_non_authoritative';scratch.mkdir()
+        request=m.request_document(root,raw,max_timing_archive_bytes=2**28)
+        if change:change(request)
+        m.io.write_new(root/'selector_snapshot.json',raw)
+        pin=m.write(root/'request.json',request)
+        environment=m.runtime.development_environment();environment.update(TEMP=str(scratch),TMP=str(scratch))
+        monkeypatch.setattr(os,'environ',dict(sorted(environment.items())))
+        monkeypatch.chdir(scratch)
+        budget=m.process.TaskProcessBudget(**request['budget']);resources=m.process.resources
+        host=resources.HostResourceBudget(budget.max_job_commit_bytes,32*1024**2,(
+            resources.DirectoryDemand('selector',str(root),m.content_bound(request),32*1024**2),
+            resources.DirectoryDemand('scratch',str(scratch),8*1024**2,32*1024**2)))
+        identity=m.process.task_process_identity(sys.orig_argv,cwd=scratch,environment=dict(os.environ),
+            budget=budget,host_budget=host,expected_host_identity=resources.resource_identity(host))
+        launch=dict(request_sha256=pin,process_identity=identity,argv=sys.orig_argv,cwd=str(scratch),
+            environment_sha256=m.io.digest(m.io.encode(dict(os.environ))),budget=asdict(budget),host=asdict(host))
+        launch_pin=m.write(root/'launch.json',launch)
+        observation=resources.observe_headroom(host,expected_request_identity=resources.resource_identity(host))
+        initial=json.loads(m.io.encode(asdict(observation)));m._validate_initial(initial,host)
+        initial_pin=m.write(root/'initial_observation.json',initial)
+        pid,creation=m._current_process()
+        child_pin=m.write(root/'child.json',dict(pid=pid,creation_filetime=creation,process_identity=identity,
+            request_sha256=pin,initial_observation_sha256=initial_pin))
+        m.write(root/'release_intent.json',dict(request_sha256=pin,launch_sha256=launch_pin,child_sha256=child_pin))
+        return SimpleNamespace(root=root,pin=pin,request=request,raw=raw,c=c,calls=installed[4],pid=pid,creation=creation)
+    return make
+
+
+def execute(c):return m.execute(c.root/'request.json',c.pin)
+
+
+@pytest.mark.parametrize('role',['reference','actual'])
+def test_released_worker_rebuilds_both_roles_and_publishes_ordered_phases(prepared,role):
+    c=prepared(role);before=len(c.c.s.calls);out=execute(c)
+    result=json.loads((c.root/'worker_result.json').read_bytes())
+    timing=json.loads((c.root/'worker_timing_terminal.json').read_bytes())
+    consumed=json.loads((c.root/'consumed.json').read_bytes())
+    assert result['pid']==c.pid==os.getpid() and result['creation_filetime']==c.creation
+    assert consumed['release_sha256']==m.io.digest((c.root/'release_intent.json').read_bytes())
+    assert timing['result_sha256']==out['result_sha256']==m.io.digest((c.root/'worker_result.json').read_bytes())
+    assert out['timing_terminal_sha256']==m.io.digest((c.root/'worker_timing_terminal.json').read_bytes())
+    assert [p['name'] for p in timing['phases']]==list(m.PHASES)
+    assert all(p['start_ns']<=p['end_ns'] for p in timing['phases'])
+    assert all(a['end_ns']==b['start_ns'] for a,b in zip(timing['phases'],timing['phases'][1:]))
+    assert result['native_interval_ns']<=timing['entry_to_result_readback_ns']
+    assert all(result[k] is False and timing[k] is False and out[k] is False for k in m.FLAGS)
+    assert 'timing_terminal_sha256' not in result and len(c.c.s.calls)>=before+4
+    assert len(c.calls)==(3 if role=='reference' else 2)
+    with pytest.raises(FileExistsError):execute(c)
+
+
+@pytest.mark.parametrize('fault',['role','lane','configuration_pin','sequence_pin','archive_cap','timing_cap','budget','allowance'])
+def test_rebuilt_declaration_mismatch_cannot_start_sequence(prepared,fault):
+    def change(r):
+        if fault=='role':r['role']='actual'
+        elif fault=='lane':r['lane']['role']='A'
+        elif fault=='configuration_pin':r['run_configuration_sha256']='0'*64
+        elif fault=='sequence_pin':r['sequence_request_sha256']='0'*64
+        elif fault=='archive_cap':r['max_archive_bytes']+=1
+        elif fault=='timing_cap':r['max_timing_archive_bytes']+=1
+        elif fault=='budget':r['budget']['max_elapsed_seconds']+=1
+        else:r['non_solver_seconds']+=1
+    c=prepared(change=change)
+    with pytest.raises(ValueError):execute(c)
+    assert (c.root/'consumed.json').exists() and not c.calls
+    assert not (c.root/'science_sequence_non_authoritative').exists()
+    with pytest.raises(FileExistsError):execute(c)
+
+
+@pytest.mark.parametrize('fault',['snapshot','launch','child','release','initial','suffix','pid'])
+def test_handshake_failure_never_rebuilds_source(prepared,monkeypatch,fault):
+    c=prepared();before=len(c.c.s.calls)
+    paths={'snapshot':'selector_snapshot.json','launch':'launch.json','child':'child.json',
+        'release':'release_intent.json','initial':'initial_observation.json','suffix':'extra.json'}
+    if fault=='pid':monkeypatch.setattr(m,'_current_process',lambda:(c.pid,c.creation+1))
+    else:(c.root/paths[fault]).write_bytes(b'{}')
+    with pytest.raises(ValueError):execute(c)
+    assert len(c.c.s.calls)==before and not c.calls and not (c.root/'consumed.json').exists()
+    with pytest.raises(FileExistsError):execute(c)
+
+
+@pytest.mark.parametrize('after',[False,True])
+def test_consume_write_failure_never_rebuilds_or_retries(prepared,monkeypatch,after):
+    c=prepared();before=len(c.c.s.calls);original=m.write
+    def fail(path,value):
+        if path.name=='consumed.json':
+            if after:original(path,value)
+            raise OSError('synthetic consume write failure')
+        return original(path,value)
+    monkeypatch.setattr(m,'write',fail)
+    with pytest.raises(OSError):execute(c)
+    assert (c.root/'consumed.json').exists()==after and len(c.c.s.calls)==before and not c.calls
+    with pytest.raises(FileExistsError):execute(c)
+
+
+@pytest.mark.parametrize('phase',['before','after'])
+def test_source_drift_rejected_before_publication(prepared,monkeypatch,phase):
+    c=prepared();original=m.snapshot.rebuild;calls=[]
+    def change(*a,**kw):
+        calls.append(True)
+        if len(calls)==(1 if phase=='before' else 2):
+            current=c.c.s.currents[0]
+            object.__setattr__(current,'source_projection_audit_payload',current.source_projection_audit_payload+b' ')
+        return original(*a,**kw)
+    monkeypatch.setattr(m.snapshot,'rebuild',change)
+    with pytest.raises(ValueError):execute(c)
+    assert not (c.root/'worker_result.json').exists()
+    assert len(c.calls)==(0 if phase=='before' else 3)
+    with pytest.raises(FileExistsError):execute(c)
+
+
+@pytest.mark.parametrize('fault',['environment','callback','request'])
+def test_first_source_callback_bookend_stops_producer(prepared,monkeypatch,fault):
+    c=prepared();original=m.snapshot.rebuild
+    def change(*a,**kw):
+        result=original(*a,**kw)
+        if fault=='environment':os.environ['OMP_NUM_THREADS']='2'
+        elif fault=='callback':monkeypatch.setattr(m.sequence,'inspect',lambda *a,**kw:{})
+        else:(c.root/'request.json').write_bytes(b'{}')
+        return result
+    monkeypatch.setattr(m.snapshot,'rebuild',change)
+    with pytest.raises(ValueError):execute(c)
+    assert not c.calls and not (c.root/'science_sequence_non_authoritative').exists()
+
+
+@pytest.mark.parametrize('name',['worker_result.json','worker_timing_terminal.json'])
+@pytest.mark.parametrize('after',[False,True])
+def test_publication_failure_keeps_archive_and_forbids_retry(prepared,monkeypatch,name,after):
+    c=prepared();original=m.write
+    def fail(path,value):
+        if path.name==name:
+            if after:original(path,value)
+            raise OSError('synthetic final publication failure')
+        return original(path,value)
+    monkeypatch.setattr(m,'write',fail)
+    with pytest.raises(OSError):execute(c)
+    assert (c.root/name).exists()==after
+    assert (c.root/'science_sequence_non_authoritative/terminal.json').exists()
+    assert (c.root/'timing_sequence_non_authoritative/terminal.json').exists() and len(c.calls)==3
+    with pytest.raises(FileExistsError):execute(c)
+
+
+def test_same_byte_archive_replacement_after_source_rebuild_rejected(prepared,monkeypatch):
+    c=prepared();original=m.snapshot.rebuild;calls=[]
+    def change(*a,**kw):
+        result=original(*a,**kw);calls.append(True)
+        if len(calls)==2:
+            path=c.root/'timing_sequence_non_authoritative/stages/0000/native/intent.json';raw=path.read_bytes()
+            path.rename(c.root/'scratch_non_authoritative/retained_intent.json');path.write_bytes(raw)
+        return result
+    monkeypatch.setattr(m.snapshot,'rebuild',change)
+    with pytest.raises(ValueError,match='output changed'):execute(c)
+    assert not (c.root/'worker_result.json').exists() and len(c.calls)==3
+
+
+@pytest.mark.parametrize('phase',[1,2])
+@pytest.mark.parametrize('helper',['_match','_projection','_check','_read','_fingerprint'])
+def test_source_replacement_of_validation_helper_fails_closed(prepared,monkeypatch,phase,helper):
+    c=prepared();original=m.snapshot.rebuild;calls=[]
+    def change(*args,**kwargs):
+        item=original(*args,**kwargs);calls.append(True)
+        if len(calls)==phase:monkeypatch.setattr(m,helper,lambda *a,**kw:None)
+        return item
+    monkeypatch.setattr(m.snapshot,'rebuild',change)
+    with pytest.raises(ValueError,match='callback changed'):execute(c)
+    assert not (c.root/'worker_result.json').exists()
+    assert not (c.root/'worker_timing_terminal.json').exists()
+    assert len(c.calls)==(0 if phase==1 else 3)
+    assert (c.root/'science_sequence_non_authoritative').exists()==(phase==2)
+
+
+@pytest.mark.parametrize('phase',['runner','inspector'])
+@pytest.mark.parametrize('helper',['_receipt_snapshot','_snapshot','_snapshot_pin'])
+def test_result_callback_replacement_of_archive_helpers_fails_closed(prepared,monkeypatch,phase,helper):
+    c=prepared()
+    target=m.sequence.OwnedTimedSelectorSequence if helper=='_receipt_snapshot' else m.sequence
+    source=m.sequence.OwnedTimedSelectorSequence if phase=='runner' else m.sequence
+    name='run' if phase=='runner' else 'inspect';original=getattr(source,name)
+    calls=[]
+    def change(*args,**kwargs):
+        result=original(*args,**kwargs);calls.append(True)
+        # The first two inspections belong to owner.run and validate_completion.
+        # Inject at the worker's separate fresh inspection, after both succeed.
+        if phase=='runner' or len(calls)==3:
+            monkeypatch.setattr(target,helper,lambda *a,**kw:None)
+        return result
+    monkeypatch.setattr(source,name,change)
+    with pytest.raises(ValueError,match='callback changed'):execute(c)
+    assert not (c.root/'worker_result.json').exists()
+    assert not (c.root/'worker_timing_terminal.json').exists()
+    assert len(c.calls)==3
+    assert len(calls)==(1 if phase=='runner' else 3)

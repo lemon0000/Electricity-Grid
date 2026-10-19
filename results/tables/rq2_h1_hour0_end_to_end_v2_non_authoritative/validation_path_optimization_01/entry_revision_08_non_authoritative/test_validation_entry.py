@@ -24,6 +24,7 @@ class EntryFailureTests(unittest.TestCase):
                 'vendor_code_policy.py','vendor_code_allowlist_v1.json','code_allowlist_v3.json','metadata_allowlist_v1.json','test_closure_v1.json','pytest_lease_plugin.py')
             sources={key:(HERE/key).read_bytes() for key in names};sources[name]=raw
             for key,value in sources.items():(folder/key).write_bytes(value)
+            import_environment=(list(sys.meta_path),list(sys.path_hooks),dict(sys.path_importer_cache))
             before=(sys.pycache_prefix,sys.dont_write_bytecode,list(sys.path),list(sys.argv))
             policy=json.loads(sources['interpreter_path_policy_v1.json'])
             sys.path[:]=policy['isolated_base_paths']
@@ -46,6 +47,8 @@ class EntryFailureTests(unittest.TestCase):
                 for key in tuple(sys.modules):
                     if key=='performance' or key.startswith('performance.'):sys.modules.pop(key)
                 sys.modules.update(modules)
+                sys.meta_path[:]=import_environment[0];sys.path_hooks[:]=import_environment[1]
+                sys.path_importer_cache.clear();sys.path_importer_cache.update(import_environment[2])
 
     def test_candidate_compile_failure_restores_and_records(self):
         result=self.check_fault('code_read_lease.py',b'def broken !!!\n')
@@ -94,7 +97,7 @@ class EntryFailureTests(unittest.TestCase):
         module=ModuleType('pytest');vars(module).update(vars(sys.modules['pytest']));vars(module).update(vars(fake))
         with patch.dict(sys.modules,pytest=module):
             result=self.check_fault('test_closure_v1.json',b'{"files_sha256":{}}',
-                kind='pytest',mode='parse',targets=('tests/test_h1_hour0_routing_development_v2.py',))
+                kind='pytest',mode='parse',targets=('tests/test_h1_selector_source_window_development_v1.py',))
         self.assertIs(Path.read_bytes,reader);self.assertIs(metadata.Distribution.version,getter)
         self.assertIn('pytest invocation failure',result['error'])
 

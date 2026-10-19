@@ -1,0 +1,72 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "observed_at_utc": "2026-10-18T16:30:32.809197+00:00",
+  "sole_writer": "root",
+  "independent_read_only_pre_seal_audit": true,
+  "official_review": false,
+  "production_seal": false,
+  "findings": [
+    {
+      "item": "external failure cleanup authority",
+      "implementation_fix": "retain failed pending row until original resources and guards are actually closed; scope fallback; non-vacuous cleanup receipt",
+      "targeted_faults": [
+        "close_before",
+        "close_middle",
+        "guard_release",
+        "body",
+        "validation_commit"
+      ],
+      "terminal_verification": "pending_current_safety_11"
+    },
+    {
+      "item": "first-bind guarded Handoff wrapper",
+      "implementation_fix": "source-compiled entry and verify code, defaults and exact closure pins",
+      "targeted_faults": [
+        "wrapper_replacement",
+        "wrapper_code"
+      ],
+      "terminal_verification": "pending_current_safety_11"
+    },
+    {
+      "item": "pre-operation canonical sequence state",
+      "implementation_fix": "bidirectional authored source function/descriptor inventory and full module spec",
+      "targeted_faults": [
+        "code",
+        "delete",
+        "none",
+        "spec_loader",
+        "spec_name"
+      ],
+      "terminal_verification": "in_progress_current_safety_11"
+    }
+  ],
+  "current_test": "genesis_current_safety_11",
+  "source_pins": [
+    {
+      "path": "experiments/h1_common_genesis_validation_operation_development_v1.py",
+      "sha256": "8932602ef93f4b21454e3bea129a39bbd4ffdae01eaf9a84173fab9debccd14b"
+    },
+    {
+      "path": "tests/test_h1_common_genesis_validation_operation_development_v1.py",
+      "sha256": "3a6ec20d19c3f2603322c80830e59036481a0677a75c706882b0b9106dcdce89"
+    },
+    {
+      "path": "tests/test_h1_genesis_consumer_operation_development_v1.py",
+      "sha256": "302ce68d206004ffac060448e91e4f666ba5f7de11f7938e26ab8040ef3ca643"
+    },
+    {
+      "path": "tests/test_h1_timed_selector_sequence_development_v1.py",
+      "sha256": "fcc7852bcde8500fc777d9e131dfa0f525229fc781b548d3e6d2e6ab859949f2"
+    },
+    {
+      "path": "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_n0_operation_01/run_unit_entry_v3.py",
+      "sha256": "e0a3fe55a8f0bef6f14d5112e13dade0f635b94ad6718a040b52bf71d5ee8440"
+    },
+    {
+      "path": "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_n0_operation_01/run_unit_bounded_v14.py",
+      "sha256": "70b37d030883c2f51f604d9caf26bff5031d0e23796e5be72dd102390a875254"
+    }
+  ],
+  "complete_workflow_observed": false,
+  "formal_result": false
+}

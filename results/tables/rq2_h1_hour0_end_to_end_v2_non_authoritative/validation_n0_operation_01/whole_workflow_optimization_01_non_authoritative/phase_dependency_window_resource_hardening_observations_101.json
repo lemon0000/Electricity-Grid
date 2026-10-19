@@ -1,0 +1,145 @@
+{
+  "status": "DRAFT_RESOURCE_HARDENING_OBSERVATIONS_NONAUTHORITATIVE",
+  "at_utc": "2026-10-19T05:35:02.503301+00:00",
+  "tests101": "98 passed in18.58s; outer21.516s",
+  "attempts": [
+    {
+      "attempt": 99,
+      "terminal": {
+        "exit_code": 0,
+        "observed_owned_processes": [
+          {
+            "pid": 5864,
+            "creation_time": 1792386926.74869
+          }
+        ],
+        "observed_owned_processes_remaining": [],
+        "observed_owned_processes_absent": true,
+        "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+        "cleanup_events": [],
+        "descendant_discovery_complete": true,
+        "complete_process_tree_absence_proven": false,
+        "storage_read_errors": [],
+        "cleanup_errors": [],
+        "final_storage_observation_complete": true,
+        "elapsed_seconds": 18.531000000002678,
+        "stop_reason": null,
+        "peak_observed_process_tree_rss": 292741120,
+        "observed_storage_bytes": 14845239,
+        "memory_is_sampled": true,
+        "source_unchanged": true,
+        "source_snapshot_complete": true,
+        "peak_rss_includes_monitor": true,
+        "formal_result": false,
+        "resource_admission": false,
+        "request_sha256": "a5bb055612e756e69c066f6b6ace4f9f74b1b6d0cd471ad48354a5fecfc4181b",
+        "started_sha256": "0d87f2a3fc78c89cbf97272e721c5d166aaff4b2ed9064da5df17b60f01103d9",
+        "runner_sha256": "8b6dd486c1d44a5c655ca108add45766bc1e312fbb79ac75e3337037e8a7b92c",
+        "unit_entry_sha256": "e0a3fe55a8f0bef6f14d5112e13dade0f635b94ad6718a040b52bf71d5ee8440"
+      },
+      "files_sha256": {
+        "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_99\\request.json": "a5bb055612e756e69c066f6b6ace4f9f74b1b6d0cd471ad48354a5fecfc4181b",
+        "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_99\\started.json": "0d87f2a3fc78c89cbf97272e721c5d166aaff4b2ed9064da5df17b60f01103d9",
+        "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_99\\stdout.log": "d311009b228369a977d864ac578af926b165c6ecedec947e2c11425e5c646a7e",
+        "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_99\\terminal.json": "2a767b2a491a87a7eeb45c464527eef27a1f134390846971a4f4670c67d3e460"
+      }
+    },
+    {
+      "attempt": 100,
+      "terminal": {
+        "exit_code": 1,
+        "observed_owned_processes": [
+          {
+            "pid": 628,
+            "creation_time": 1792387741.6280975
+          }
+        ],
+        "observed_owned_processes_remaining": [],
+        "observed_owned_processes_absent": true,
+        "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+        "cleanup_events": [],
+        "descendant_discovery_complete": true,
+        "complete_process_tree_absence_proven": false,
+        "storage_read_errors": [],
+        "cleanup_errors": [],
+        "final_storage_observation_complete": true,
+        "elapsed_seconds": 18.5,
+        "stop_reason": null,
+        "peak_observed_process_tree_rss": 292601856,
+        "observed_storage_bytes": 14859170,
+        "memory_is_sampled": true,
+        "source_unchanged": true,
+        "source_snapshot_complete": true,
+        "peak_rss_includes_monitor": true,
+        "formal_result": false,
+        "resource_admission": false,
+        "request_sha256": "0deee3fd71a2a2efa5702837fc27bf5a59dba8f69fa60aea1f65031e24237775",
+        "started_sha256": "671ce6f21fe4d561a91c57d86d7d5bb09ef01840982c8332327de04264bf3730",
+        "runner_sha256": "8b6dd486c1d44a5c655ca108add45766bc1e312fbb79ac75e3337037e8a7b92c",
+        "unit_entry_sha256": "e0a3fe55a8f0bef6f14d5112e13dade0f635b94ad6718a040b52bf71d5ee8440"
+      },
+      "files_sha256": {
+        "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_100\\request.json": "0deee3fd71a2a2efa5702837fc27bf5a59dba8f69fa60aea1f65031e24237775",
+        "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_100\\started.json": "671ce6f21fe4d561a91c57d86d7d5bb09ef01840982c8332327de04264bf3730",
+        "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_100\\stdout.log": "0e7b8851b3de41ee3a825913e371d17a52de4df48ed1846ff66e945aa8b04e94",
+        "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_100\\terminal.json": "d7fcd06c1b22ec1bce4bac63c61428b95f9afb2e865ed99d3e881a7eed0b8da4"
+      }
+    },
+    {
+      "attempt": 101,
+      "terminal": {
+        "exit_code": 0,
+        "observed_owned_processes": [
+          {
+            "pid": 24340,
+            "creation_time": 1792387827.5061977
+          }
+        ],
+        "observed_owned_processes_remaining": [],
+        "observed_owned_processes_absent": true,
+        "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+        "cleanup_events": [],
+        "descendant_discovery_complete": true,
+        "complete_process_tree_absence_proven": false,
+        "storage_read_errors": [],
+        "cleanup_errors": [],
+        "final_storage_observation_complete": true,
+        "elapsed_seconds": 21.51600000000326,
+        "stop_reason": null,
+        "peak_observed_process_tree_rss": 292290560,
+        "observed_storage_bytes": 19197363,
+        "memory_is_sampled": true,
+        "source_unchanged": true,
+        "source_snapshot_complete": true,
+        "peak_rss_includes_monitor": true,
+        "formal_result": false,
+        "resource_admission": false,
+        "request_sha256": "352c60f6711550d8f416c3dff1d9f073f42c5244f8e610f7d9c1cdd4ad26d6c2",
+        "started_sha256": "dedfc462706cf924cdffc783f6a37990871757c159b763d1b8e2fafad16c045e",
+        "runner_sha256": "8b6dd486c1d44a5c655ca108add45766bc1e312fbb79ac75e3337037e8a7b92c",
+        "unit_entry_sha256": "e0a3fe55a8f0bef6f14d5112e13dade0f635b94ad6718a040b52bf71d5ee8440"
+      },
+      "files_sha256": {
+        "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_101\\request.json": "352c60f6711550d8f416c3dff1d9f073f42c5244f8e610f7d9c1cdd4ad26d6c2",
+        "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_101\\started.json": "dedfc462706cf924cdffc783f6a37990871757c159b763d1b8e2fafad16c045e",
+        "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_101\\stdout.log": "f165b27a3a3ef1ab60c8ec9d554bca3294dbc704f3d27fda32d83781ab600289",
+        "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_101\\terminal.json": "f8b5da8e6acd29a2b772f8d02dcda7626da5d04e6b4d4ab24d4775f6259d1e60"
+      }
+    }
+  ],
+  "failure100": "GC assertion found runtime1 generator retaining sender frame;17 prior tests passed; teardown reported open handles; process exit0 was NOT observed. OS process cleanup terminal exists. No internal successful-close claim.",
+  "repair101": "New runtime2 drops sender immediately after original transport caller validation; old runtime1 unchanged. Orphan callbacks retain no public owner and retain failed handles for retry. Persistent errors are descriptions only.",
+  "observation_files_sha256": {
+    "D:\\h1_phase_dep_window_101_non_authoritative\\test_immutable_phase_window_ma0\\phase_window_observation.json": "4da9811ffa40cb1e898a3c8163cb1d245cc38058c47c6ccdf3a214d369cca6b6",
+    "D:\\h1_phase_dep_window_101_non_authoritative\\unit_code_read_lease_closed.json": "64c905bacb02e9fd8ddfa240c6618078cdec74fdae4c06fd6a0a4f993b5a981f"
+  },
+  "independent_followup_pending": true,
+  "speed_comparison_pending": true,
+  "genuine_consumer_graph_accepted": false,
+  "whole_workflow_performance_review_complete": false,
+  "full_optimized_workflow_accepted": false,
+  "production_seal": false,
+  "official_review": false,
+  "formal_result": false,
+  "resource_admission": false
+}

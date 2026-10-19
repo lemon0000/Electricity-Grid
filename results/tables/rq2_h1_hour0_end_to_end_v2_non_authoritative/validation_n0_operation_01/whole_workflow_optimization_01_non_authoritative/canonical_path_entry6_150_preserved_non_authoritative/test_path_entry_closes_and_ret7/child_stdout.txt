@@ -1,0 +1,34 @@
+F
+================================== FAILURES ===================================
+__________________________________ test_flow __________________________________
+
+prepared = True
+tmp_path = WindowsPath('D:/h1_path_entry6_faults_150_non_authoritative/test_path_entry_closes_and_ret7/child_non_authoritative/test_flow0')
+
+    def test_flow(prepared,tmp_path):
+        assert prepared
+        assert metadata.Distribution.from_name.__func__ is not ORIGINAL
+        assert metadata.version('numpy')
+        path=tmp_path/'fresh.json';path.write_bytes(b'first')
+        assert store._path(path).read_bytes()==b'first'
+        path.write_bytes(b'second')
+        assert store._path(path).read_bytes()==b'second'
+        if 'cleanup_false'=='extra_root':
+            outside=Path('D:\\h1_path_entry6_faults_150_non_authoritative\\test_path_entry_closes_and_ret7\\extra_non_authoritative\\fresh.json');outside.write_bytes(b'outside')
+            assert store._path(outside).read_bytes()==b'outside'
+            outside.write_bytes(b'outside changed')
+            assert store._path(outside).read_bytes()==b'outside changed'
+        if 'cleanup_false'=='body_and_reader_error':
+            def refused():raise ValueError('expected receipt runtime failure')
+            resolver._RUNTIME=refused
+>       if 'cleanup_false' not in ('normal','extra_root'):raise RuntimeError('expected original body primary')
+                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       RuntimeError: expected original body primary
+E       metadata resolver cleanup: ValueError('metadata resolver poisoned')
+
+D:\h1_path_entry6_faults_150_non_authoritative\test_path_entry_closes_and_ret7\test_probe.py:30: RuntimeError
+=========================== short test summary info ===========================
+FAILED ..\..\..\h1_path_entry6_faults_150_non_authoritative\test_path_entry_closes_and_ret7\test_probe.py::test_flow
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 1 warning in 0.43s
+{"ordinary_unit_immutable_code_files": 289, "code_read_hits": 1, "all_code_handles_closed": true, "original_read_alias_restored": true, "all_metadata_handles_closed": true, "original_metadata_version_alias_restored": true, "distribution_fast_calls": 1, "distribution_fallback_calls": 0, "metadata_parse_hits": 9, "metadata_parse_misses": 1, "per_call_distribution_discovery_preserved": false, "formal_result": false}

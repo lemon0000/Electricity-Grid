@@ -1,0 +1,31 @@
+{
+  "status": "PRE_SEAL_FINDINGS_NONAUTHORITATIVE",
+  "input_sha256": "7a859dac7d2c2a9cf32df19a894161ac20e7e15d0f7f8a7f1809d60de4196338",
+  "official_review": false,
+  "findings": [
+    {
+      "id": "runtime_closure",
+      "status": "remained open at71",
+      "details": [
+        "active dict-to-None accepted without caller restriction",
+        "foreign binding pre-set could be blessed when original bind observed it"
+      ]
+    },
+    {
+      "id": "bundle_entry_rollback",
+      "status": "named scope closed at71; exact AST body and seams"
+    },
+    {
+      "id": "command_evidence_binding",
+      "status": "closed at71; hashes verified"
+    }
+  ],
+  "withdrawn_finding": "Handoff original_check self-reference: local check uses the same rebound cell; not a defect",
+  "current_fix": "original transition begin/commit token handshake; dedicated active clear; independent caller transport checks",
+  "failed_live_anchor_attempts_preserved": [
+    74,
+    75
+  ],
+  "actual_descriptor_fix": "pin raw versus resolved attribute mode at arm; supports builtin descriptors",
+  "formal_result": false
+}

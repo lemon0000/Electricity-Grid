@@ -1,0 +1,185 @@
+{
+  "schema": "h1_bounded_four_parent_distribution_comparison_non_authoritative_v1",
+  "observed_at_utc": "2026-10-18T19:29:50.525617+00:00",
+  "evidence": [
+    {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_distribution_paired_41\\terminal.json",
+      "sha256": "26964f3dd633b9c5c440e2ddae0914954b2befb4354bfd1c6daaece6c62ccd18"
+    },
+    {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\genesis_distribution_paired_41\\pytest.log",
+      "sha256": "c407f4e203b48a6146e4715982bd1caa0d21f43466e8593f68809d0d9542abc2"
+    },
+    {
+      "path": "D:\\h1_wf11_genesis_distribution_paired_41_non_authoritative\\test_three_actual_parents_comm0\\genesis_python_stacks.jsonl",
+      "sha256": "4293e221bcfe7872233d1f5f13b53a31fdd26abde01911d5652dd4ce9d58a59d"
+    },
+    {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\distribution_bounded_full_path_plan_41.json",
+      "sha256": "04b2431fc1aa602bab684c0560b7e3577006de1aeddc1807e188c9f90de1a7b9"
+    },
+    {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\distribution_binding_verification_41.json",
+      "sha256": "032dbb0e839488238e2f55fa597fa09dd63661a7dce8815cbdf8a4bc1f4c2f9d"
+    },
+    {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\distribution_pre_seal_findings_40.json",
+      "sha256": "4a3fefc2051e0ac337bbd1663731fddb5a9ab0cd3ddb91b31b3328e64035d30e"
+    }
+  ],
+  "terminal": {
+    "observed_owned_processes": [
+      {
+        "pid": 3604,
+        "creation_time": 1792351136.4398997
+      }
+    ],
+    "observed_owned_processes_remaining": [],
+    "observed_owned_processes_absent": true,
+    "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+    "cleanup_events": [
+      {
+        "pid": 3604,
+        "creation_time": 1792351136.4398997,
+        "action": "kill_owned"
+      }
+    ],
+    "descendant_discovery_complete": true,
+    "complete_process_tree_absence_proven": false,
+    "exit_code": 15,
+    "storage_read_errors": [],
+    "cleanup_errors": [],
+    "final_storage_observation_complete": true,
+    "elapsed_seconds": 600.3120000000017,
+    "stop_reason": "wall",
+    "peak_observed_process_tree_rss": 493449216,
+    "observed_storage_bytes": 28552028,
+    "memory_is_sampled": true,
+    "source_unchanged": true,
+    "source_snapshot_complete": true,
+    "peak_rss_includes_monitor": true,
+    "formal_result": false,
+    "resource_admission": false
+  },
+  "stages": [
+    {
+      "stage": "reference_completed",
+      "elapsed_seconds": 46.41028179999921
+    },
+    {
+      "stage": "actual_a_snapshot_start",
+      "elapsed_seconds": 46.410495100000844
+    },
+    {
+      "stage": "actual_a_construct_start",
+      "elapsed_seconds": 50.89769610000076
+    },
+    {
+      "stage": "actual_a_run_start",
+      "elapsed_seconds": 84.2919284999989
+    },
+    {
+      "stage": "actual_a_completed",
+      "elapsed_seconds": 200.72423310000158
+    },
+    {
+      "stage": "actual_b_snapshot_start",
+      "elapsed_seconds": 200.72434970000177
+    },
+    {
+      "stage": "actual_b_construct_start",
+      "elapsed_seconds": 204.40768310000203
+    },
+    {
+      "stage": "actual_b_run_start",
+      "elapsed_seconds": 232.48355119999906
+    },
+    {
+      "stage": "actual_b_completed",
+      "elapsed_seconds": 349.7541201000022
+    },
+    {
+      "stage": "actual_c_snapshot_start",
+      "elapsed_seconds": 349.7542175000017
+    },
+    {
+      "stage": "actual_c_construct_start",
+      "elapsed_seconds": 353.3120162000014
+    },
+    {
+      "stage": "actual_c_run_start",
+      "elapsed_seconds": 381.71768879999945
+    },
+    {
+      "stage": "actual_c_completed",
+      "elapsed_seconds": 498.55391670000245
+    },
+    {
+      "stage": "handoff_construct_start",
+      "elapsed_seconds": 498.5539592000023
+    },
+    {
+      "stage": "handoff_constructed",
+      "elapsed_seconds": 498.6919400000006
+    }
+  ],
+  "prior28_prefix_seconds": [
+    45.773096,
+    215.422925,
+    362.356436,
+    508.624727,
+    508.736941
+  ],
+  "prior36_prefix_seconds": [
+    47.6789355,
+    208.4410269,
+    374.0859181,
+    521.1472141,
+    521.2657768
+  ],
+  "current_prefix_seconds": [
+    46.4102818,
+    200.7242331,
+    349.7541201,
+    498.5539167,
+    498.69194
+  ],
+  "stack_samples": 19,
+  "top_frames": [
+    {
+      "file": "h1_outage_registry_development_v1.py",
+      "function": "_pin",
+      "samples": 7
+    },
+    {
+      "file": "pathlib.py",
+      "function": "stat",
+      "samples": 6
+    },
+    {
+      "file": "h1_raw_ingress_development_v1.py",
+      "function": "read_stable",
+      "samples": 3
+    },
+    {
+      "file": "h1_raw_ingress_development_v1.py",
+      "function": "digest",
+      "samples": 2
+    },
+    {
+      "file": "h1_selector_raw_science_inspect_development_v1.py",
+      "function": "_directory",
+      "samples": 1
+    }
+  ],
+  "reference_sequence_inspection_samples": 14,
+  "stack_counts_are_not_wall_shares": true,
+  "paired_reopen_terminal_obtained": false,
+  "graceful_combined_lease_close_receipt_obtained": false,
+  "whole_workflow_speedup_established": false,
+  "status": "fixed_wall_terminated_after_three_Actuals_before_paired_reopen_terminal",
+  "conclusion": "about10s prefix difference from entry09; no complete-path acceptance; preserve local contract proof but do not extrapolate",
+  "next": "compose existing fresh bounded-size Path.open read overlay with the unique static byte owner; no numerical/source/saved-result reuse in that overlay",
+  "formal_result": false,
+  "resource_admission": false
+}

@@ -511,6 +511,7 @@ class Handoff:
         parent_guards = ()
         parent_marks = ()
         common_guards = ()
+        genesis_finalize = getattr(common, '_development_genesis_external_finalize_v1', None)
         cleanup = Handoff._close_handles
         begin, end, record_handle, record_view, seal, record_bundle = (_BEGIN, _END, _RECORD_HANDLE, _RECORD_VIEW, _SEAL, _RECORD_BUNDLE)
         record_predecessor, close_predecessor = (_RECORD_PREDECESSOR, _CLOSE_PREDECESSOR)
@@ -643,8 +644,10 @@ class Handoff:
             if token is not None:
                 attempt(end, self, token)
             attempt(guard.release)
+            if common_held and genesis_finalize is not None:
+                attempt(genesis_finalize, 'released', g, self, common_guards, body_error, tuple(errors))
             if errors:
-                primary = body_error or errors[0]
+                primary = body_error if body_error is not None else errors[0]
                 if attempted:
                     attempt(parent_abort, self, primary)
                     attempt(validation_abort, self, primary)
@@ -659,8 +662,15 @@ class Handoff:
             result['validation_receipt'] = validation_commit(self)
             result['parent_validation_receipt'] = parent_commit(self) if parent_optimized else None
             self._state = 'complete'
+            if common_held and genesis_finalize is not None:
+                genesis_finalize('committed', g, self, common_guards, None, ())
             return result
         except BaseException as error:
+            if common_held and genesis_finalize is not None:
+                try:
+                    genesis_finalize('failed', g, self, common_guards, error, ())
+                except BaseException as failure:
+                    error.add_note('Genesis commit finalization: ' + repr(failure))
             try:
                 parent_abort(self, error)
             except BaseException as failure:

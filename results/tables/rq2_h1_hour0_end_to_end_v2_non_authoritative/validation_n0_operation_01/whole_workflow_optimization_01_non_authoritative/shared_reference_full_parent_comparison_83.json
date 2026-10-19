@@ -1,0 +1,887 @@
+{
+  "status": "DRAFT_DIAGNOSTIC_WALL_CAP_PRESERVED",
+  "stages": [
+    {
+      "stage": "reference_completed",
+      "elapsed_seconds": 46.52533560000302
+    },
+    {
+      "stage": "actual_a_snapshot_start",
+      "elapsed_seconds": 46.52552129999822
+    },
+    {
+      "stage": "actual_a_construct_start",
+      "elapsed_seconds": 52.13511010000366
+    },
+    {
+      "stage": "actual_a_run_start",
+      "elapsed_seconds": 89.7557553000006
+    },
+    {
+      "stage": "actual_a_completed",
+      "elapsed_seconds": 165.59755279999808
+    },
+    {
+      "stage": "actual_b_snapshot_start",
+      "elapsed_seconds": 165.59765869999683
+    },
+    {
+      "stage": "actual_b_construct_start",
+      "elapsed_seconds": 169.3300995000027
+    },
+    {
+      "stage": "actual_b_run_start",
+      "elapsed_seconds": 199.27681740000116
+    },
+    {
+      "stage": "actual_b_completed",
+      "elapsed_seconds": 268.23055739999836
+    },
+    {
+      "stage": "actual_c_snapshot_start",
+      "elapsed_seconds": 268.23063510000065
+    },
+    {
+      "stage": "actual_c_construct_start",
+      "elapsed_seconds": 271.74152029999823
+    },
+    {
+      "stage": "actual_c_run_start",
+      "elapsed_seconds": 300.96420059999946
+    },
+    {
+      "stage": "actual_c_completed",
+      "elapsed_seconds": 368.59100359999866
+    },
+    {
+      "stage": "handoff_construct_start",
+      "elapsed_seconds": 368.5910468000002
+    },
+    {
+      "stage": "handoff_constructed",
+      "elapsed_seconds": 368.7682784999997
+    }
+  ],
+  "monitor_terminal": {
+    "observed_owned_processes": [
+      {
+        "pid": 4332,
+        "creation_time": 1792380970.763687
+      }
+    ],
+    "observed_owned_processes_remaining": [],
+    "observed_owned_processes_absent": true,
+    "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+    "cleanup_events": [
+      {
+        "pid": 4332,
+        "creation_time": 1792380970.763687,
+        "action": "kill_owned"
+      }
+    ],
+    "descendant_discovery_complete": true,
+    "complete_process_tree_absence_proven": false,
+    "exit_code": 15,
+    "storage_read_errors": [],
+    "cleanup_errors": [],
+    "final_storage_observation_complete": true,
+    "elapsed_seconds": 600.5319999999992,
+    "stop_reason": "wall",
+    "peak_observed_process_tree_rss": 513294336,
+    "observed_storage_bytes": 30377366,
+    "memory_is_sampled": true,
+    "source_unchanged": true,
+    "source_snapshot_complete": true,
+    "peak_rss_includes_monitor": true,
+    "formal_result": false,
+    "resource_admission": false,
+    "request_sha256": "1e71dd38363bad3c78a73621ba545eb48af539f959df7daa47f62ed609b3672f",
+    "started_sha256": "da662332a86b60fcfaec048d1b3450ac4d6750fa08a3d2b94d74213c62d3100c",
+    "runner_sha256": "dfc268301e26ff19916364f16a0ef1d98541f336d287feb75f6e00e8d1b2a0d1"
+  },
+  "pinned_files_checked": 1027,
+  "pin_drift": [],
+  "source_unchanged": true,
+  "plan_sha256": "ac3f2bf0bc34741123edadf9e7af1c38082746ebfd1b81c37cb002e6425970a3",
+  "evidence": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\shared_reference_full_parent_probe_plan_83.json": "ac3f2bf0bc34741123edadf9e7af1c38082746ebfd1b81c37cb002e6425970a3",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_13_non_authoritative\\registry_reference_paired_83\\pytest.log": "5de5dccf1a419b8ddf2c22c0e741e93f9d148c0c3aa7c4520185771341f482ee",
+    "D:\\h1_wf13_registry_reference_paired_83_non_authoritative\\test_three_actual_parents_comm0\\genesis_python_stacks.jsonl": "cf09f2c3e155344964f5a7e58014aee5eaf74c481ff9958ff6fa1e283c7b5b39",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_registry_reference_paired_83\\request.json": "1e71dd38363bad3c78a73621ba545eb48af539f959df7daa47f62ed609b3672f",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_registry_reference_paired_83\\started.json": "da662332a86b60fcfaec048d1b3450ac4d6750fa08a3d2b94d74213c62d3100c",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_registry_reference_paired_83\\terminal.json": "58bed7c030224480926dbd652fad3f13ea83e4c026ba2fbe8f996c6f22de6025",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_13_non_authoritative\\registry_reference_paired_83\\request.json": "7399236aa6528218c7d728d744fed84d2bc7f02dcc2b2cb85083c9d129a4504c"
+  },
+  "samples": [
+    {
+      "elapsed_seconds": 30.014999999999418,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "function": "read_stable",
+          "line": 47
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_owned_selector_sequence_development_v1.py",
+          "function": "_snapshot",
+          "line": 117
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_owned_selector_sequence_development_v1.py",
+          "function": "_replay",
+          "line": 157
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_selector_sequence_development_v1.py",
+          "function": "_prefix",
+          "line": 146
+        }
+      ],
+      "handoff_frames": []
+    },
+    {
+      "elapsed_seconds": 60.0309999999954,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_outage_registry_development_v1.py",
+          "function": "_pin",
+          "line": 33
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "read",
+          "line": 69
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "route",
+          "line": 107
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_origin_grid_step_development_v1.py",
+          "function": "development_step_identity",
+          "line": 267
+        }
+      ],
+      "handoff_frames": []
+    },
+    {
+      "elapsed_seconds": 90.04699999999866,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_launch_preparation_development_v2.py",
+          "function": "_executable",
+          "line": 76
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_launch_preparation_development_v2.py",
+          "function": "prepare",
+          "line": 139
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_launch_preparation_development_v2.py",
+          "function": "bind",
+          "line": 165
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_controller_development_v4.py",
+          "function": "_source",
+          "line": 202
+        }
+      ],
+      "handoff_frames": []
+    },
+    {
+      "elapsed_seconds": 120.06199999999808,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "function": "read_stable",
+          "line": 47
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_timed_stage_development_v1.py",
+          "function": "_view",
+          "line": 45
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_timed_stage_development_v1.py",
+          "function": "_run_stage",
+          "line": 149
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_timed_selector_sequence_development_v1.py",
+          "function": "run",
+          "line": 66
+        }
+      ],
+      "handoff_frames": []
+    },
+    {
+      "elapsed_seconds": 150.07800000000134,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_outage_registry_development_v1.py",
+          "function": "_pin",
+          "line": 33
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "read",
+          "line": 69
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "route",
+          "line": 107
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_origin_grid_step_development_v1.py",
+          "function": "development_step_identity",
+          "line": 267
+        }
+      ],
+      "handoff_frames": []
+    },
+    {
+      "elapsed_seconds": 180.09300000000076,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "function": "digest",
+          "line": 23
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_owned_selector_sequence_development_v1.py",
+          "function": "implementation_identity",
+          "line": 30
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_input_snapshot_development_v2.py",
+          "function": "implementation_identity",
+          "line": 30
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_released_worker_development_v2.py",
+          "function": "implementation_identity",
+          "line": 40
+        }
+      ],
+      "handoff_frames": []
+    },
+    {
+      "elapsed_seconds": 210.10899999999674,
+      "top_frames": [
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "function": "stat",
+          "line": 840
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_13_non_authoritative\\metadata_parse_lease.py",
+          "function": "get",
+          "line": 86
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+          "function": "version",
+          "line": 889
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\grid_evidence_replay.py",
+          "function": "_replay",
+          "line": 175
+        }
+      ],
+      "handoff_frames": []
+    },
+    {
+      "elapsed_seconds": 240.13999999999942,
+      "top_frames": [
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dis.py",
+          "function": "_deoptop",
+          "line": 195
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dis.py",
+          "function": "findlabels",
+          "line": 656
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dis.py",
+          "function": "_get_instructions_bytes",
+          "line": 449
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_reference_sequence_window_development_v1.py",
+          "function": "names",
+          "line": 49
+        }
+      ],
+      "handoff_frames": []
+    },
+    {
+      "elapsed_seconds": 270.1559999999954,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_outage_registry_development_v1.py",
+          "function": "_pin",
+          "line": 33
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "read",
+          "line": 69
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "route",
+          "line": 107
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_origin_selector_replay_development_v1.py",
+          "function": "policy_identity",
+          "line": 71
+        }
+      ],
+      "handoff_frames": []
+    },
+    {
+      "elapsed_seconds": 300.17199999999866,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_outage_registry_development_v1.py",
+          "function": "_pin",
+          "line": 33
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "read",
+          "line": 69
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "route",
+          "line": 107
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_origin_grid_step_development_v1.py",
+          "function": "development_step_identity",
+          "line": 267
+        }
+      ],
+      "handoff_frames": []
+    },
+    {
+      "elapsed_seconds": 330.1869999999981,
+      "top_frames": [
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "function": "stat",
+          "line": 840
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_13_non_authoritative\\metadata_parse_lease.py",
+          "function": "get",
+          "line": 86
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+          "function": "version",
+          "line": 889
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_raw_science_development_v1.py",
+          "function": "_observe",
+          "line": 140
+        }
+      ],
+      "handoff_frames": []
+    },
+    {
+      "elapsed_seconds": 360.1869999999981,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "function": "digest",
+          "line": 23
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_selector_sequence_development_v1.py",
+          "function": "<genexpr>",
+          "line": 112
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_selector_sequence_development_v1.py",
+          "function": "_snapshot_pin",
+          "line": 112
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_worker_output_inspection_development_v2.py",
+          "function": "_inspect",
+          "line": 184
+        }
+      ],
+      "handoff_frames": []
+    },
+    {
+      "elapsed_seconds": 390.20300000000134,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_launch_preparation_development_v2.py",
+          "function": "_executable",
+          "line": 75
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_launch_preparation_development_v2.py",
+          "function": "prepare",
+          "line": 139
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_launch_preparation_development_v2.py",
+          "function": "bind",
+          "line": 165
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_controller_development_v4.py",
+          "function": "_source",
+          "line": 202
+        }
+      ],
+      "handoff_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate",
+          "line": 324
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "reference",
+          "line": 358
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate",
+          "line": 338
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate_bundle",
+          "line": 411
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "validate",
+          "line": 212
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "enter",
+          "line": 195
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "consume",
+          "line": 592
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "entry",
+          "line": 1212
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 420.20300000000134,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_common_owner_genesis_development_v2.py",
+          "function": "implementation_identity",
+          "line": 53
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_common_genesis_validation_operation_development_v2.py",
+          "function": "identity",
+          "line": 420
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_input_snapshot_development_v2.py",
+          "function": "implementation_identity",
+          "line": 30
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_released_worker_development_v2.py",
+          "function": "implementation_identity",
+          "line": 40
+        }
+      ],
+      "handoff_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate",
+          "line": 331
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "reference",
+          "line": 358
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate",
+          "line": 338
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate_bundle",
+          "line": 411
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "validate",
+          "line": 212
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "enter",
+          "line": 195
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "consume",
+          "line": 592
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "entry",
+          "line": 1212
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 450.21800000000076,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_outage_registry_development_v1.py",
+          "function": "_pin",
+          "line": 33
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "read",
+          "line": 69
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "route",
+          "line": 107
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_origin_grid_step_development_v1.py",
+          "function": "development_step_identity",
+          "line": 267
+        }
+      ],
+      "handoff_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate",
+          "line": 331
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "reference",
+          "line": 358
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate",
+          "line": 338
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate_pair",
+          "line": 461
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "records",
+          "line": 224
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "_prepare",
+          "line": 448
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "consume",
+          "line": 602
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "entry",
+          "line": 1212
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 480.23399999999674,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_outage_registry_development_v1.py",
+          "function": "_pin",
+          "line": 33
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "read",
+          "line": 69
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "route",
+          "line": 107
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_origin_grid_step_development_v1.py",
+          "function": "development_step_identity",
+          "line": 267
+        }
+      ],
+      "handoff_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "records",
+          "line": 233
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "_prepare",
+          "line": 448
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "consume",
+          "line": 602
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "entry",
+          "line": 1212
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 510.25,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_launch_preparation_development_v2.py",
+          "function": "_executable",
+          "line": 75
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_launch_preparation_development_v2.py",
+          "function": "prepare",
+          "line": 111
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_controller_development_v4.py",
+          "function": "_source",
+          "line": 200
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate",
+          "line": 324
+        }
+      ],
+      "handoff_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate",
+          "line": 324
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate_pair",
+          "line": 461
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "records",
+          "line": 241
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "_prepare",
+          "line": 448
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "consume",
+          "line": 602
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "entry",
+          "line": 1212
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 540.25,
+      "top_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_outage_registry_development_v1.py",
+          "function": "_pin",
+          "line": 33
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "read",
+          "line": 69
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_repair_cap_normalization_operation_development_v1.py",
+          "function": "route",
+          "line": 107
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_origin_grid_step_development_v1.py",
+          "function": "development_step_identity",
+          "line": 267
+        }
+      ],
+      "handoff_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate",
+          "line": 331
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate_bundle",
+          "line": 411
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "validate",
+          "line": 212
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "prefix",
+          "line": 489
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "_retain_journal",
+          "line": 510
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "consume",
+          "line": 632
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "entry",
+          "line": 1212
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 570.2649999999994,
+      "top_frames": [
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "function": "stat",
+          "line": 840
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_owned_selector_sequence_development_v1.py",
+          "function": "_snapshot",
+          "line": 114
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_selector_sequence_development_v1.py",
+          "function": "_snapshot",
+          "line": 79
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_selector_sequence_development_v1.py",
+          "function": "_prefix",
+          "line": 135
+        }
+      ],
+      "handoff_frames": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate",
+          "line": 331
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "reference",
+          "line": 358
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate",
+          "line": 338
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_validation_operation_development_v4.py",
+          "function": "validate_bundle",
+          "line": 411
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "validate",
+          "line": 212
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "prefix",
+          "line": 489
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "_retain_journal",
+          "line": 510
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "consume",
+          "line": 632
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v6.py",
+          "function": "entry",
+          "line": 1212
+        }
+      ]
+    }
+  ],
+  "last_named_stage": {
+    "stage": "handoff_constructed",
+    "elapsed_seconds": 368.7682784999997
+  },
+  "handoff_seconds_observed_after_construct_to_cap": 231.76372149999952,
+  "paired_completed": false,
+  "post_negative_completed": false,
+  "reopen_completed": false,
+  "graceful_inner_cleanup_observed": false,
+  "entry_child_terminal_present": false,
+  "scope": "4 actual Parent4 owners with explicit fake N0/source/numerical/common bridge; zero real N0 Jobs/native. Hard wall stop is not mathematical infeasibility or a dead-loop proof.",
+  "coverage_gaps": [
+    "exact Handoff _OWNERS row lifecycle direct assertions missing",
+    "per-Post direct original guard/mark assertions missing; no Post ran in83",
+    "full genuine Roster3/Common routes still unimplemented"
+  ],
+  "whole_workflow_accepted": false,
+  "formal_result": false,
+  "resource_admission": false
+}

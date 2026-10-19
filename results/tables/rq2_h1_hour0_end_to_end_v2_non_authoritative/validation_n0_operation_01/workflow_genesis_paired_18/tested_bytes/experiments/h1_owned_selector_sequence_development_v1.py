@@ -1,0 +1,333 @@
+"""One-shot complete selector sequence, development only.
+
+run() requires separate native authority and enclosing Job supervision when a
+real adapter is used. Tests replace that adapter; this module provides no CLI,
+resume, formal authority or persistent phase-owner consumption capability.
+"""
+from dataclasses import asdict, dataclass
+import json
+import os
+from pathlib import Path
+from threading import Lock, get_ident
+from types import MappingProxyType
+from uuid import uuid4
+
+from experiments import h1_selector_raw_science_inspect_development_v1 as stage
+from experiments import h1_selector_configuration_development_v1 as configuration_api
+
+bridge,io=stage.bridge,stage.io
+selection=bridge.selector
+SCHEMA='h1_owned_selector_sequence_development_v1'
+META_CAP=1024**2
+FLAGS=MappingProxyType(dict(bridge.FLAGS,whole_job_quiescence_checked=False,
+    owner_consumption_authorized=False,continuation_ready=False))
+_TOKEN=object()
+
+
+def implementation_identity():
+    if SCHEMA!='h1_owned_selector_sequence_development_v1' or any(v is not False for v in FLAGS.values()):
+        raise ValueError('selector sequence development scope changed')
+    return io.digest(io.encode([SCHEMA,io.digest(Path(__file__).read_bytes()),stage.implementation_identity(),configuration_api.implementation_identity()]))
+
+
+def _configuration(frame,disclosure,before,args,max_archive_bytes,run_configuration):
+    if set(args) not in ({'lane','selector','specification','limits'},
+                         {'lane','selector','specification','limits','power'}):
+        raise ValueError('exact selector sequence arguments required')
+    if type(max_archive_bytes) is not int or not 1<=max_archive_bytes<=2**63-1:
+        raise ValueError('explicit positive logical archive bound required')
+    if type(run_configuration) is not configuration_api.SelectorRunConfiguration:
+        raise ValueError('exact typed selector run configuration required')
+    run_configuration.__post_init__()
+    role='reference' if args['lane'].role=='Rref' else 'actual'
+    if (frame.normal_network_identity!=run_configuration.network_sha256
+            or tuple(g.uid for g in frame.info.network.units)!=run_configuration.generation_uids
+            or args['selector']!=getattr(run_configuration,role+'_selector')
+            or args['specification']!=run_configuration.specification or args['limits']!=run_configuration.limits):
+        raise ValueError('selector configuration network inventory or scientific input differs')
+    labels=selection.stage_labels(frame,args['lane'])
+    if labels!=run_configuration.stage_orders[role]:
+        raise ValueError('complete configured selector stage order required')
+    first=bridge.request_key(frame,disclosure,before,(),**args)
+    limits=args['limits']
+    if args['specification'].name!='gurobi':raise ValueError('Gurobi selector sequence required')
+    if len(labels)*limits.max_record_bytes>limits.max_total_bytes:
+        raise ValueError('complete selector record envelope exceeds total byte bound')
+    caps=_stage_caps(limits)
+    required=2*META_CAP+len(labels)*(META_CAP+sum(caps.values()))
+    if required>max_archive_bytes:raise ValueError('complete selector archive envelope exceeds byte bound')
+    return dict(initial_stage_request=first,labels=labels,run_configuration=run_configuration.binding(),
+        before_identity=before.identity,before_policy=before.policy_identity,configuration={k:asdict(v) if v is not None else None
+        for k,v in args.items()},max_archive_bytes=max_archive_bytes,required_archive_bytes=required,
+        implementation=implementation_identity(),stage_implementation=stage.implementation_identity())
+
+
+def _stage_caps(limits):
+    caps={'postsolve.json':bridge.science.POST_CAP,'observations.json':io.RAW_CAP,
+          'selector_record.json':limits.max_record_bytes,'terminal.json':io.RAW_CAP,
+          'capture/native_raw/000/raw.bin':io.RAW_CAP}
+    for name in ('binding.json','specification.json','export.json','complete.json'):
+        caps['capture/'+name]=io.META_CAP
+    for name in ('binding.json','terminal.json'):
+        caps['capture/native_raw/'+name]=io.META_CAP
+    for name in ('intent.json','raw_receipt.json','outcome.json'):
+        caps['capture/native_raw/000/'+name]=io.META_CAP
+    return caps
+
+
+def _root(value):
+    root=Path(value)
+    if not root.is_absolute() or root!=root.resolve() or not any('non_authoritative' in p for p in root.parts):
+        raise ValueError('canonical absolute non-authoritative sequence root required')
+    return root
+
+
+def _header(root,configuration,nonce):
+    if type(nonce) is not str or len(nonce)!=32 or any(c not in '0123456789abcdef' for c in nonce):
+        raise ValueError('exact sequence nonce required')
+    return io.encode(dict(schema=SCHEMA,root=str(root),nonce=nonce,**configuration,**FLAGS))
+
+
+def _write(path,value):
+    raw=io.encode(value)
+    if len(raw)>META_CAP:raise ValueError('sequence metadata byte cap')
+    io.write_new(path,raw)
+    return io.digest(raw)
+
+
+def _snapshot(root,count,limits,terminal,pending=False):
+    namespaces={root:{'binding.json','stages','commits'}|({'terminal.json'} if terminal else set()),
+        root/'stages':{f'{i:04d}' for i in range(count+int(pending))},root/'commits':{f'{i:04d}.json' for i in range(count)}}
+    caps={root/'binding.json':META_CAP}
+    if terminal:caps[root/'terminal.json']=META_CAP
+    for i in range(count+int(pending)):
+        child=root/'stages'/f'{i:04d}'
+        namespaces.update({child:{'capture','postsolve.json','observations.json','selector_record.json','terminal.json'},
+            child/'capture':{'binding.json','specification.json','export.json','complete.json','native_raw'},
+            child/'capture/native_raw':{'binding.json','terminal.json','000'},
+            child/'capture/native_raw/000':{'intent.json','raw.bin','raw_receipt.json','outcome.json'}})
+        caps.update({child/name:cap for name,cap in _stage_caps(limits).items()})
+        if i<count:caps[root/'commits'/f'{i:04d}.json']=META_CAP
+    dirs={str(p.relative_to(root)):stage._directory(p,names) for p,names in namespaces.items()}
+    files={}
+    for path,cap in caps.items():
+        info=path.stat(follow_symlinks=False)
+        if info.st_nlink!=1 or getattr(info,'st_file_attributes',0)&1024:
+            raise ValueError('plain sequence file required')
+        raw,stamp=io.read_stable(path,cap)
+        files[str(path.relative_to(root))]=(io.digest(raw),stamp,cap)
+    return dirs,files
+
+
+def _commit(key,head,index,label,result,records):
+    return dict(schema=SCHEMA,request_sha256=key,previous_sha256=head,index=index,label=label,
+        prefix_record_sha256=tuple(io.digest(r) for r in records),
+        stage_terminal_sha256=result['terminal_sha256'],stage_request_key=result['request_key'],
+        selector_record_sha256=result['selector_record_sha256'],canonical_lock_hex=result['canonical_lock_hex'],
+        selector_chain_complete=result['selector_chain_complete'],**FLAGS)
+
+
+def _scientific(frame,disclosure,before,records,args):
+    return selection.replay_development_records(frame,disclosure,before,records,**args,
+        expected_identity=selection.input_identity(frame,disclosure,before,lane=args['lane'],power=args.get('power')),
+        expected_policy_identity=before.policy_identity,expected_report_sha256=tuple(io.digest(r) for r in records))
+
+
+def _terminal(key,binding,head,replay):
+    return dict(schema=SCHEMA,request_sha256=key,binding_sha256=binding,last_commit_sha256=head,
+        record_sha256=replay.report_sha256,canonical_lock_hex=replay.canonical_lock_hex,
+        candidate_identity=replay.next_candidate.identity,carry_identity=replay.next_candidate.physical_carry.identity,
+        candidate_request_exact=replay.candidate_request_exact,
+        completion_scope='full_selector_saved_numerical_chain',**FLAGS)
+
+
+def _returned_body(root,checked):
+    raw=io.read_stable(root/'terminal.json',io.RAW_CAP)[0]
+    if io.digest(raw)!=checked['terminal_sha256']:raise ValueError('stage terminal changed after inspection')
+    body=json.loads(raw)
+    for field in ('schema','request_key','evidence_role','capture_complete_sha256','binding_sha256',
+                  'export_sha256','observations_sha256','selector_record_sha256'):
+        body.pop(field)
+    return dict(body,selector_record=checked['selector_record'],bridge_terminal_sha256=checked['terminal_sha256'])
+
+
+def _replay(root,frame,disclosure,before,args,archive_bytes,run_configuration,*,count,terminal,binding_pin=None):
+    configuration=_configuration(frame,disclosure,before,args,archive_bytes,run_configuration)
+    if type(count) is not int or not 0<=count<=len(configuration['labels']):raise ValueError('bounded prefix count required')
+    view=_snapshot(root,count,args['limits'],terminal)
+    raw=io.read_stable(root/'binding.json',META_CAP)[0]
+    header=json.loads(raw)
+    if raw!=_header(root,configuration,header['nonce']):raise ValueError('sequence binding differs')
+    binding=io.digest(raw)
+    if binding_pin is not None and binding!=binding_pin:raise ValueError('retained sequence binding differs')
+    key=io.digest(io.encode(configuration));head=binding;records=()
+    for i in range(count):
+        path=root/'commits'/f'{i:04d}.json';saved=io.read_stable(path,META_CAP)[0];doc=json.loads(saved)
+        result=stage.inspect(root/'stages'/f'{i:04d}',frame,disclosure,before,records,
+            expected_terminal_sha256=doc['stage_terminal_sha256'],**args)
+        if saved!=io.encode(_commit(key,head,i,configuration['labels'][i],result,records)):
+            raise ValueError('selector stage commit differs from fresh replay')
+        records+=(result['selector_record'],);head=io.digest(saved)
+    replay=_scientific(frame,disclosure,before,records,args)
+    expected_errors=() if count==len(configuration['labels']) else ('incomplete_stage_chain',)
+    if replay.verified_stages!=count or replay.errors!=expected_errors:
+        raise ValueError('selector sequence prefix failed scientific replay')
+    if terminal:
+        if replay.next_candidate is None:raise ValueError('incomplete selector cannot have terminal')
+        if io.read_stable(root/'terminal.json',META_CAP)[0]!=io.encode(_terminal(key,binding,head,replay)):
+            raise ValueError('selector sequence terminal reconstruction differs')
+    if (_snapshot(root,count,args['limits'],terminal)!=view
+            or _configuration(frame,disclosure,before,args,archive_bytes,run_configuration)!=configuration):
+        raise ValueError('selector sequence changed during replay')
+    return dict(key=key,binding=binding,head=head,records=records,replay=replay,view=view)
+
+
+def inspect(root,frame,disclosure,before,*,expected_terminal_sha256,max_archive_bytes,run_configuration,**args):
+    """Detached zero-solver inspection; never recreates owned completion."""
+    with bridge.science.prior.guard.solver_calls_forbidden():
+        root=_root(root);io.pin(expected_terminal_sha256)
+        terminal=io.read_stable(root/'terminal.json',META_CAP)
+        if io.digest(terminal[0])!=expected_terminal_sha256:raise ValueError('external sequence terminal pin differs')
+        count=len(selection.stage_labels(frame,args['lane']))
+        result=_replay(root,frame,disclosure,before,args,max_archive_bytes,run_configuration,count=count,terminal=True)
+        if io.read_stable(root/'terminal.json',META_CAP)!=terminal:raise ValueError('sequence terminal changed')
+        return dict(schema=SCHEMA,records=result['records'],replay=result['replay'],
+            terminal_sha256=expected_terminal_sha256,request_sha256=result['key'],fresh_at_return=True,
+            owned_run_return_observed=False,**FLAGS)
+
+
+@dataclass(frozen=True,init=False)
+class SequenceCompletion:
+    root: str
+    terminal_sha256: str
+    request_sha256: str
+    records: tuple
+    authority_flags: tuple
+
+    def __init__(self,root,pin,key,records,*,_token=None):
+        if _token is not _TOKEN:raise TypeError('live owned selector completion required')
+        for name,value in zip(self.__annotations__,(str(root),pin,key,records,tuple(FLAGS.items()))):
+            object.__setattr__(self,name,value)
+
+
+class OwnedSelectorSequence:
+    def __init__(self,root,frame,disclosure,before,*,max_archive_bytes,run_configuration,**args):
+        self.root=_root(root);self.context=(frame,disclosure,before);self.args=dict(args)
+        self.archive_bytes=max_archive_bytes;self.run_configuration=run_configuration
+        self._runner=self._original_runner=bridge._run_stage
+        self._reader=self._original_reader=stage.inspect
+        configuration=_configuration(*self.context,self.args,self.archive_bytes,self.run_configuration)
+        self._configuration=io.encode(configuration);self.key=io.digest(self._configuration)
+        self._implementation=implementation_identity();self.count=len(configuration['labels'])
+        self._header=_header(self.root,configuration,uuid4().hex)
+        if len(self._header)>META_CAP:raise ValueError('sequence binding exceeds byte cap')
+        self._fixed=(self.root,self.archive_bytes,self.count,self.key,self._header,self._configuration)
+        self._pid,self._thread=os.getpid(),get_ident();self._self=self
+        self._operation=self._original_operation=Lock()
+        self._nonce=None;self._receipt=None;self._receipt_bytes=None;self._issued_nonce=None
+        self.started=self.poisoned=self.complete=False
+        self.root.mkdir(exist_ok=False)
+        (self.root/'stages').mkdir();(self.root/'commits').mkdir()
+        io.write_new(self.root/'binding.json',self._header)
+        self._binding_pin=io.digest(self._header)
+        self._initial_view=_snapshot(self.root,0,self.args['limits'],False)
+
+    def _check(self):
+        if (self._self is not self or (os.getpid(),get_ident())!=(self._pid,self._thread)
+                or self.poisoned or self._operation is not self._original_operation
+                or self._runner is not self._original_runner or self._reader is not self._original_reader
+                or bridge._run_stage is not self._runner or stage.inspect is not self._reader
+                or not self._original_operation.locked() or implementation_identity()!=self._implementation
+                or (self.root,self.archive_bytes,self.count,self.key,self._header,self._configuration)!=self._fixed
+                or io.encode(_configuration(*self.context,self.args,self.archive_bytes,self.run_configuration))!=self._configuration
+                or io.read_stable(self.root/'binding.json',META_CAP)!=
+                    (self._header,self._initial_view[1]['binding.json'][1])):
+            raise ValueError('owned selector identity or input changed')
+        for name in ('.','stages','commits'):
+            info=(self.root/name).stat(follow_symlinks=False)
+            if (info.st_dev,info.st_ino)!=self._initial_view[0][name][:2]:
+                raise ValueError('sequence directory identity changed')
+
+    def run(self):
+        if self._operation is not self._original_operation:raise ValueError('selector operation guard changed')
+        if not self._original_operation.acquire(False):raise ValueError('selector sequence active')
+        try:
+            self._check()
+            if self.started or self.complete or self._nonce is not None:raise ValueError('selector sequence already consumed')
+            self.started=True;nonce=self._nonce=object();records=();head=self._binding_pin
+            for i in range(self.count):
+                self._check()
+                with bridge.science.prior.guard.solver_calls_forbidden():
+                    prefix=_replay(self.root,*self.context,self.args,self.archive_bytes,self.run_configuration,count=i,terminal=False,
+                        binding_pin=self._binding_pin)
+                if prefix['records']!=records or prefix['head']!=head or self._nonce is not nonce:raise ValueError('retained selector prefix changed')
+                path=self.root/'stages'/f'{i:04d}'
+                key=bridge.request_key(*self.context,records,**self.args)
+                if _snapshot(self.root,i,self.args['limits'],False)!=prefix['view']:
+                    raise ValueError('selector prefix changed before stage release')
+                self._check()
+                if self._nonce is not nonce:raise ValueError('selector nonce changed before stage release')
+                returned=self._runner(path,*self.context,records,expected_key=key,**self.args)
+                self._check()
+                if self._nonce is not nonce:raise ValueError('selector operation nonce changed')
+                with bridge.science.prior.guard.solver_calls_forbidden():
+                    checked=self._reader(path,*self.context,records,
+                        expected_terminal_sha256=returned['bridge_terminal_sha256'],**self.args)
+                    if (type(returned) is not dict or returned!=_returned_body(path,checked)
+                            or returned['selector_record']!=checked['selector_record']
+                            or returned['lock_hex']!=checked['canonical_lock_hex']
+                            or returned['selector_chain_complete']!=checked['selector_chain_complete']
+                            or checked['request_key']!=key
+                            or checked['selector_chain_complete'] is not (i==self.count-1)):
+                        raise ValueError('producer return differs from fresh stage inspection')
+                    self._check()
+                    pending=_snapshot(self.root,i,self.args['limits'],False,pending=True)
+                    if (any(pending[1].get(k)!=v for k,v in prefix['view'][1].items())
+                            or any(pending[0][k][:2]!=v[:2] or
+                                   (k not in ('.','stages','commits') and pending[0][k]!=v)
+                                   for k,v in prefix['view'][0].items())):
+                        raise ValueError('prior selector evidence changed during stage')
+                    head=_write(self.root/'commits'/f'{i:04d}.json',_commit(self.key,prefix['head'],i,
+                        selection.stage_labels(self.context[0],self.args['lane'])[i],checked,records))
+                    records+=(checked['selector_record'],)
+            with bridge.science.prior.guard.solver_calls_forbidden():
+                fresh=_replay(self.root,*self.context,self.args,self.archive_bytes,self.run_configuration,count=self.count,terminal=False,
+                    binding_pin=self._binding_pin)
+                if fresh['records']!=records or fresh['head']!=head or self._nonce is not nonce:raise ValueError('final selector prefix changed')
+                self._check()
+                pin=_write(self.root/'terminal.json',_terminal(self.key,fresh['binding'],fresh['head'],fresh['replay']))
+                result=inspect(self.root,*self.context,expected_terminal_sha256=pin,max_archive_bytes=self.archive_bytes,run_configuration=self.run_configuration,**self.args)
+                self._check()
+                if self._nonce is not nonce:raise ValueError('final selector operation nonce changed')
+                self._receipt=SequenceCompletion(self.root,pin,self.key,result['records'],_token=_TOKEN)
+                self._receipt_bytes=self._receipt_snapshot(self._receipt);self._issued_nonce=nonce
+                self.complete=True
+                return self._receipt
+        except BaseException:self.poisoned=True;raise
+        finally:self._original_operation.release()
+
+    def validate_completion(self,receipt):
+        if not self._original_operation.acquire(False):raise ValueError('selector sequence active')
+        try:
+            self._check()
+            if (not self.complete or not self.started or self._nonce is None or type(receipt) is not SequenceCompletion
+                    or self._nonce is not self._issued_nonce or self._receipt_snapshot(receipt)!=self._receipt_bytes
+                    or receipt is not self._receipt or receipt.root!=str(self.root)
+                    or receipt.request_sha256!=self.key or receipt.authority_flags!=tuple(FLAGS.items())):
+                raise ValueError('exact live selector completion required')
+            result=inspect(self.root,*self.context,expected_terminal_sha256=receipt.terminal_sha256,
+                max_archive_bytes=self.archive_bytes,run_configuration=self.run_configuration,**self.args)
+            self._check()
+            if (result['records']!=receipt.records or self._receipt_snapshot(receipt)!=self._receipt_bytes
+                    or self._nonce is not self._issued_nonce):raise ValueError('owned completion records changed')
+            return result
+        except BaseException:self.poisoned=True;raise
+        finally:self._original_operation.release()
+
+    @staticmethod
+    def _receipt_snapshot(receipt):
+        return io.encode([receipt.root,receipt.terminal_sha256,receipt.request_sha256,
+            [io.digest(r) for r in receipt.records],receipt.authority_flags])
+
+    def _no_copy(self,*args):raise TypeError('live selector sequence cannot be copied')
+    __copy__=__deepcopy__=__reduce_ex__=_no_copy

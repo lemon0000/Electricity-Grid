@@ -1,0 +1,307 @@
+{
+  "schema": "h1_whole_workflow_acceptance_matrix_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "observed_at_utc": "2026-10-19T07:58:41.176207+00:00",
+  "root_is_sole_writer": true,
+  "objective": "finish missing experiment checks, then complete workflow bottleneck optimization",
+  "predecessor_matrix": {
+    "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\acceptance_matrix_18.json",
+    "sha256": "f5ab29d9eabc447cc91d247e1ba094dc33b6ae748b2d8d7165273f300bf641b8"
+  },
+  "acceptance": [
+    {
+      "requirement": "legacy chain07 body N0 to paired and reopen",
+      "status": "verified_legacy_synthetic_body",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\terminal.json",
+          "sha256": "5da14d3218d963751ef103cc06d3d63364f7559f7f5783e332dc1ab7d9c9ab5b"
+        }
+      ],
+      "scope": "1 simulated hour,3 synthetic N0 Jobs,0 native; legacy wall259910.3253707s, not optimized ETA"
+    },
+    {
+      "requirement": "independent postcheck, cleanup and complete report",
+      "status": "verified_legacy_synthetic_postcheck_and_report",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\postcheck_supplement_completion_04.json",
+          "sha256": "c580bf0131bd7e7851d619122c69b7336247aee6d4264d3a7d944694f2de1d0b"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\postcheck_supplement_preservation_04.json",
+          "sha256": "51a4e9ffa6414953c4918af952b2997c9d6a664feb84882af8adb09f3d7f0439"
+        }
+      ],
+      "remaining": []
+    },
+    {
+      "requirement": "Parent lifecycle source windows",
+      "status": "current_four_Parent_prefix_observed_then_Handoff_wall_cap",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\shared_reference_full_parent_comparison_83.json",
+          "sha256": "8fda248ffc9e41f75481dde87105d7b9dd4e75084f12ada51c21248fd94e6c7a"
+        }
+      ],
+      "scope": "four actual Parent4 owners with explicit fake N0/source/numerical/common bridge; prefix368.591s; not complete chain"
+    },
+    {
+      "requirement": "successful Handoff record-bundle and missing Actual verification",
+      "status": "Handoff6_registration_fixed_but_current_paired_Post_reopen_not_completed",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\shared_reference_full_parent_comparison_79.json",
+          "sha256": "00ad8318f6f97e7345f7e8316e7f28f8aa9812f77cd82bb98162743ef3a95e19"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\shared_reference_full_parent_comparison_83.json",
+          "sha256": "8fda248ffc9e41f75481dde87105d7b9dd4e75084f12ada51c21248fd94e6c7a"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\handoff_registry_marks_units_85\\terminal.json",
+          "sha256": "af1361c75b2e8afcad549d6b000e89e3101506b170df6fef1e543f8ac7c62f70"
+        }
+      ],
+      "remaining": [
+        "full path with added exact _OWNERS lifecycle and per-Post original guards/marks assertions",
+        "paired commit, all close, saved reopen and combined receipts on current graph"
+      ]
+    },
+    {
+      "requirement": "three-arm common witness and Genesis create/inspect/reopen reuse",
+      "status": "projector_own_execution_contract_data_tests_verified_genuine_Common9_10_open",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_successor_units_72\\terminal.json",
+          "sha256": "bd85ef89af9b75ee4309805e626f9753a4f77b46ea8156fc01e14bdfe522ef3c"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\scientific_projection_pre_seal_findings_89.json",
+          "sha256": "e53e1477fc799d6e9271388d99deb8e3f9c2d850e4c21d75531791c6973017d1"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\scientific_projection_Handoff_negatives_92\\terminal.json",
+          "sha256": "83598d6ff56240d5b802a0d199699559fa9a1133a7a57ca34211c5593cdf2277"
+        }
+      ],
+      "remaining": [
+        "new GenesisOp3 with exact Gen2 class and Roster3 proxy",
+        "own Common9 report/projection binding create/inspect/capture/reopen",
+        "genuine Common9/Common10 numerical comparison"
+      ],
+      "scope": "156 cases89 plus6 cases92; genuine owner actual-projector binding and Common9/10 integration open"
+    },
+    {
+      "requirement": "N0 Bootstrap and roster growing-history cost",
+      "status": "historical_genuine_header131_complete_current_source_units134_pass_positive_N0_route_open",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\roster4_header_probe_result_131.json",
+          "sha256": "703be14be4f36a4851767c1e540e279d120851a2bb0274cfb311eca1724cb50d"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\public_phase_fix_input_135.json",
+          "sha256": "fb1a70311c5821cb1b49dcae39fbc95be79d22a9aa5cce4a7e93b43f429a12e8"
+        }
+      ],
+      "remaining": [
+        "135 independent scoped review",
+        "current-source genuine header and explicit registered_development=True synthetic N0 with numerical oracle/cleanup",
+        "three independent N0 arms and Roster attach/reopen; foreign numerical registry reuse",
+        "full typed Common/Genesis/Parent/Handoff/paired/Post/reopen graph and budget"
+      ],
+      "scope": "131 real Bootstrap5/Roster4 create/inspect/close/reopen,6 complete phase windows/12 raw identities/1304 memo hits,0N0/Job/native. Subsequent thread-map and explicit opt-in source changes require current lifecycle evidence."
+    },
+    {
+      "requirement": "complete optimized workflow scientific and runtime acceptance",
+      "status": "not_achieved",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\typed_successor_graph_design_02.md",
+          "sha256": "80d9e84fa998867246772f323afb52508acd99a5eb032cdbea6cb9861315766e"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\scientific_projection_pre_seal_input_88.json",
+          "sha256": "275ee78439cf2d736e7dcdcf9deb343be825c6aa62c0e6bc890c3798bbe04d6f"
+        }
+      ],
+      "remaining": [
+        "projector independent PRE_SEAL findings and genuine report positive",
+        "Common9/Common10 routes and own execution report/projection bindings",
+        "connected three-N0 through paired/close/reopen",
+        "whole workflow performance/resource review"
+      ]
+    },
+    {
+      "requirement": "formal experiment acceptance",
+      "status": "not_achieved_no_launch",
+      "scope": "formal launch and native execution not authorized or started"
+    },
+    {
+      "requirement": "reference sequence replay windows",
+      "status": "scoped_reference_helpers_verified_current_connected_Handoff_incomplete",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\shared_saved_reference_window_result_66.json",
+          "sha256": "8e4684ccfcb7c0f7aae171da8c3230998abf75cabc557885a7742cfddf343980"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\shared_reference_pre_seal_findings_80.json",
+          "sha256": "ac2c436fc964ccee80adbc72d62cbaefac028786a95a7419acbd21731e6ab2a5"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\handoff_registry_marks_units_85\\terminal.json",
+          "sha256": "af1361c75b2e8afcad549d6b000e89e3101506b170df6fef1e543f8ac7c62f70"
+        }
+      ],
+      "scope": "unit counts and saved-reference48-to2 are local evidence;726-to28 live full Handoff still unaccepted"
+    },
+    {
+      "requirement": "phase dependency detached held-byte window resource and observation semantics",
+      "status": "scoped_findings_closed_and_positive_local_ROI_verified_not_consumer",
+      "scope": "105 targeted PRE_SEAL closed ABI and bounds findings;106 local6/16 batch cost reductions29.27%/41.79%; neither consumer credential nor whole-workflow acceptance",
+      "acceptance_criteria": [
+        "canonical reference SHA agrees across6 same-key requests, four sibling ordinals and another family",
+        "public execution flags describe held entry/exit observation with canonical_equivalence_verified false",
+        "fixed immutable plan and definition-time route seal reject drift; foreign thread cannot poison owner",
+        "actual Windows handles close on partial acquisition, info/body/exit failure, GC abandonment and retry; sticky failure persists",
+        "original per-file cap minima and explicit depth/handle bounds; complete semantic source identity and Windows ABI recipe"
+      ],
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_dependency_cost_probe_result_96.json",
+          "sha256": "875781f75c955506c5585e2abf4b4f4d79f522d24aa6236621eb927c9c5c8353"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_100\\terminal.json",
+          "sha256": "d7fcd06c1b22ec1bce4bac63c61428b95f9afb2e865ed99d3e881a7eed0b8da4"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\phase_dependency_window_faults_101\\terminal.json",
+          "sha256": "f8b5da8e6acd29a2b772f8d02dcda7626da5d04e6b4d4ab24d4775f6259d1e60"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_dependency_window_pre_seal_input_101.json",
+          "sha256": "52d72ec6f8aa3cc1e02446770d0b1c22786d703cdc803268d194c55f771f9fa7"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_dependency_window_pre_seal_input_105.json",
+          "sha256": "8394ca171fc709748769d531cf854c851037b6110709f4327bd3ef6b0e00943c"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_dependency_window_findings_105.json",
+          "sha256": "ec31e25afdcbe31eea691f7255158d6cb4612a88f77835a336ab02464c9148a2"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_dependency_cost_comparison_plan_106.json",
+          "sha256": "edd893415c7871edb88881881122edbe35bda473603ea8b79308e1e657fc57f9"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_dependency_cost_comparison_result_106.json",
+          "sha256": "2fda25cb83429e530d985b376adb90408d296b1cfcc3b547a10805e530ca02fe"
+        }
+      ],
+      "remaining": [
+        "Shared callback-free phase binding scope with proof of journal/input disjointness",
+        "Bootstrap5/Owned5/Roster4 public lifecycle; fresh synthetic N0/typed consumer/full-chain acceptance"
+      ]
+    },
+    {
+      "requirement": "phase-binding3 stable science and separate execution",
+      "status": "predecessor_projection_regression_and_standalone_faults_verified_scoped_findings_closed",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_binding3_pre_seal_input_108.json",
+          "sha256": "14659f647ccc70747196eaf9beb1dc15f1f86ba94c617ba479fbd5982c410b59"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_binding3_findings_108.json",
+          "sha256": "b698e866df32201c54f6ca7aa3784bc088dad8fcb41ea5fff8aa4d94a7274c0c"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_binding3_pre_seal_input_109.json",
+          "sha256": "06d6e650726c8f8b774e8489656ab701e4e5ff228bfc48eed704ea9d6379ebcf"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_binding3_findings_109.json",
+          "sha256": "5ea75fd9fd3a21ae9fbc41e279b6a15192441526dbd37fbc76e0f8ab597cb696"
+        }
+      ],
+      "remaining": [
+        "Shared callback-free phase validation window; seed-plan and projection/check conservation",
+        "Bootstrap5/Owned5/Roster4 lifecycle, journal path disjointness and callback/Job boundaries",
+        "Old-type/header refusal and fresh N0/typed graph/paired/reopen evidence"
+      ],
+      "scope": "65 checks109 include predecessor-helper regression at0/101/11832352 and actual-handle composition faults; independent scientific algorithm verification false; no shared/public owner scope"
+    },
+    {
+      "requirement": "public phase segment identity and failure semantics",
+      "status": "targeted116_cases_verified_135_independent_scoped_review_pending",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\public_phase_fix_input_135.json",
+          "sha256": "fb1a70311c5821cb1b49dcae39fbc95be79d22a9aa5cce4a7e93b43f429a12e8"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\public_implementation_identity_cost_result_125.json",
+          "sha256": "6adb1835f7ae56e1c0c3e32824343f3cd654c6291e1423deadc155277cdb9b88"
+        }
+      ],
+      "scope": "Private weak identity maps prevent hash/eq aliases; per-creator-thread implementation LIFO with full raw entry/exit; Runtime remains per call; callback/Job gaps and foreign thread raw.",
+      "limitations": [
+        "No per-call implementation freshness or transient ABA.",
+        "Current-source genuine execution integration and whole-workflow performance acceptance remain open."
+      ]
+    }
+  ],
+  "current_related_experiment_processes": [],
+  "complete_process_tree_absence_proven": false,
+  "current_unit_evidence": {
+    "label": "phase_public_final_regression_134",
+    "bodies": 116,
+    "test_seconds": 22.96,
+    "outer_seconds": 26.125,
+    "exit_code": 0,
+    "source_unchanged": true,
+    "observed_PIDs_absent": true,
+    "cleanup_errors": 0
+  },
+  "entry13_status": "Historical package82 passed145 tests/1skip;83 wall cap. Current test closure and new Roster3/projector files are outside its pins; do not relaunch as a current accepted package.",
+  "next_typed_substep": "Close135 scoped findings; current source public header/positive explicit synthetic N0 route; then three-arm and genuine typed whole chain.",
+  "performance_decisions": [
+    "Do not extend83 wall budget or rerun legacy07",
+    "Do not adopt negative whole-path read overlay12",
+    "No dynamic transport lease without ROI evidence;83 stacks primarily source/sequence/identity",
+    "Current incomplete total is not an optimized runtime estimate",
+    "foreign registry counts separate from source-wrapper counts; total budget not closed",
+    "privatev3 diagnostic kernel needs separate consumer capability and receipt",
+    "empty-registry95 exceeds300s; inspect repeated phase dependency work before new connected run"
+  ],
+  "whole_workflow_performance_review_complete": false,
+  "whole_workflow_accepted": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "official_review": false,
+  "production_seal": false,
+  "entry14_status": "package4ba5f5430fccd4008c4fe54d5e22aa849488e1f46293c0953fc3e6f62d90e5d5:145 cases/1skip94 passed; header95 wall cap300.328; do not repeat unchanged prefix or extend cap",
+  "new_designs": [
+    {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\retained_registry_multiplier_audit_01.md",
+      "sha256": "d5dd7570455c30bfea70ad58f1de1d93b033b196a853a3f899c4ff78caa438ff"
+    },
+    {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\retained_registry_reader_composition_design_01.md",
+      "sha256": "87d141160f3b1e20415980ec4ed414035f522430dab7f3c860bc37cefd52c9bf"
+    }
+  ],
+  "implementation_route": "binding3 -> shared immutable phase segments -> Bootstrap5/Owned5/Roster4; private creator-thread implementation bookends",
+  "full_optimized_workflow_accepted": false,
+  "diagnostic_entry4_status": "124/131 per-test original metadata resolver fast path exercised;289 code handles and all aliases restored; not a formal sealed entry",
+  "current_pre_seal_review": {
+    "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\public_phase_fix_input_135.json",
+    "sha256": "fb1a70311c5821cb1b49dcae39fbc95be79d22a9aa5cce4a7e93b43f429a12e8"
+  }
+}

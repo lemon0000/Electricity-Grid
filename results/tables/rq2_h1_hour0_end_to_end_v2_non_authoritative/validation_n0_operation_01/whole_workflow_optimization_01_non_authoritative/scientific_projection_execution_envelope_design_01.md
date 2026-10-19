@@ -1,0 +1,17 @@
+# 完整执行报告与共享科学投影的绑定
+
+状态：DRAFT_NONAUTHORITATIVE。补充typed_successor_graph_design_02，旧文件及88前字节快照保留。此处是后继实现合同，不表示Common9/10或整链已经运行。
+
+88的projector只接旧Common式共享字段，不能容纳design02要求的真实执行字段。89修为完整flat science字段与 `execution` envelope：先验证每role完整keyset，再明确提取固定SCIENCE_FIELDS。Genesis和Handoff各自不同的execution keyset、session、call/limit、full/within/reuse、context/registry、proof/cleanup字段必须保留并验证。
+
+project()和bind_execution()均只处理bytes。bind_execution先对science计算projection，再绑定projector schema/identity与shared projection SHA，最后验证完整报告。它不认证真实的执行receipt，不签发Owned对象或authority。真正的Common owner必须先固定实际projector implementation_identity和所有依赖，并使其真实session execution receipt绑定完整active report SHA。不得用“contract和报告里同一个错误身份”作为source身份核验。
+
+执行envelope是每次Common返回时的活动状态。首call为24 full、24 within、0 reuse；后续为0/0/48；每call96 contexts与12 registry preparations。proof_cache_cleared和observation_closed在这些活动报告中为false。清理后的true状态属于独立关闭receipt，必须与同一session及逐call完整报告SHA相连。Genesis limit允许create15/reopen3/inspect2/capture2；Handoff固定22。
+
+完整报告会随session/call/count变化。GenesisOp3不能沿用Op2的“整份validation_report_payload逐字不变”条件；应每call验证own report、own receipt、完整manifest/binding及共享science，并记录逐call报告/receipt SHA。Gen2 functional body仍要求稳定的 `_initial_report`：create时持久化首份真正Common9报告，后续调用在验证当前Common9投影等于持久化报告投影后，向functional body返回该持久化报告。reopen先从由当前已验证group/root导出的header读取并验证持久化报告，再与新会话报告比较。它不是把当前报告伪装成旧metadata，也不丢弃当前报告的执行证据。
+
+CommonValidation5同样逐call保留Common10报告及其真实执行receipt，比较其共享投影与持久化Common9投影，然后把持久化Common9报告交给Handoff functional body。22个报告可以不同，科学字段必须完整一致；第1、中间和第22次漂移、跨session错配、计数/cleanup错误、projector身份同步伪造都需拒绝。
+
+共享science当前保留global_head与fresh-at-return/reuse-edge合同；任何跨阶段global prefix变化都必须拒绝，不能为了复用而删掉。底层Gen2 class和storage protocol可按typed-compatible方案保留，但新声明必须绑定Op3 active identity、Roster3以及新Common报告。N0 producer的Bootstrap4 terminal身份不能被旧functional storage schema替代。
+
+89的156项data-only测试和独立定向PRE_SEAL已闭合原P1/P2；仍缺genuine own-root报告与真实owner dependency closure。补充Handoff role-field负例、实际projector identity数据正例和真实Bootstrap4/Roster3头部生命周期正在91短回归中；即使成功也不覆盖N0 attach、数值重放或整链性能。

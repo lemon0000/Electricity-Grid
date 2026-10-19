@@ -1,0 +1,133 @@
+{
+  "schema": "h1_whole_workflow_acceptance_matrix_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "observed_at_utc": "2026-10-18T15:45:33.739409+00:00",
+  "root_is_sole_writer": true,
+  "objective": "finish missing experiment checks, then complete workflow bottleneck optimization",
+  "acceptance": [
+    {
+      "requirement": "legacy chain07 body N0 to paired and reopen",
+      "status": "verified_legacy_synthetic_body",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\terminal.json",
+          "sha256": "5da14d3218d963751ef103cc06d3d63364f7559f7f5783e332dc1ab7d9c9ab5b"
+        }
+      ],
+      "scope": "1 simulated hour,3 synthetic N0 Jobs,0 real native; wall259910.3253707s; not optimized runtime"
+    },
+    {
+      "requirement": "independent postcheck, cleanup and complete report",
+      "status": "verified_legacy_synthetic_postcheck_and_report",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\postcheck_supplement_completion_04.json",
+          "sha256": "c580bf0131bd7e7851d619122c69b7336247aee6d4264d3a7d944694f2de1d0b"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\postcheck_supplement_preservation_04.json",
+          "sha256": "51a4e9ffa6414953c4918af952b2997c9d6a664feb84882af8adb09f3d7f0439"
+        }
+      ],
+      "remaining": []
+    },
+    {
+      "requirement": "Parent lifecycle source windows",
+      "status": "draft_bounded_prior_smoke_passed",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\parent3_configured_smoke_01\\terminal.json",
+          "sha256": "160c6aeb9084feaf2fc47d7d1410af98aa625d48f9e43845006f37198745ec22"
+        }
+      ],
+      "remaining": [
+        "current configured entry with faulthandler disabled regression",
+        "all three Actual paths in connected chain"
+      ]
+    },
+    {
+      "requirement": "successful Handoff record-bundle and missing Actual verification",
+      "status": "draft_unit_evidence_partial",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_successors_units_03\\terminal.json",
+          "sha256": "80f29bb439730cfc7467d57650d3c5cadd0f2f43e32e3939bad8eb1d24a0a1a5"
+        }
+      ],
+      "remaining": [
+        "current partial mixed positive and7 fault cases",
+        "mixed fresh-owner close/reopen replay",
+        "connected full paired persistence+close/reopen"
+      ]
+    },
+    {
+      "requirement": "three-arm common witness and Genesis create/inspect/reopen reuse",
+      "status": "draft_lifecycle_positive_passed_adversarial_review_and_integration_open",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_operation_units_01\\terminal.json",
+          "sha256": "82cf2909160a07b3b442a5d4cb8f5cf2a2b5f023e5b5016ac97d5a1254ae51f4"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_operation_units_06\\terminal.json",
+          "sha256": "8f55ba23a274f45bf2995a3b76e72e69552e0fe42a3c5af96033d0e7b4dd9007"
+        }
+      ],
+      "remaining": [
+        "latest lifecycle and adversarial tests",
+        "read-only pre-seal findings closure",
+        "cold genuine route load/cleanup",
+        "representative genuine numerical/source output comparison",
+        "configured entry wiring"
+      ],
+      "prior_findings_latest_fixes_unaccepted": [
+        "Handoff two-phase external finalization",
+        "canonical consumer provenance and private function globals",
+        "ordinary/slotted project instance captures",
+        "non-vacuous observed receipt scope",
+        "begin registration exception transaction and primary error",
+        "descriptor getters callable state",
+        "stable operation closure state and canonical dynamic lease registry"
+      ]
+    },
+    {
+      "requirement": "N0 Bootstrap and roster growing-history cost",
+      "status": "successor_graph_not_connected",
+      "remaining": [
+        "Bootstrap4 genuine single-N0 bounded evidence",
+        "typed and metadata-contract correspondence through roster/common",
+        "connected 3independent N0"
+      ]
+    },
+    {
+      "requirement": "complete optimized workflow scientific and runtime acceptance",
+      "status": "not_achieved",
+      "remaining": [
+        "full DAG fixed call counts and valid reuse edges",
+        "bounded representative 3arm chain incl success,expensive failure,callbacks,commit,cleanup,reopen,saved replay,report",
+        "science/output/hash comparison",
+        "stage wall/RSS/storage observation and defensible whole-workflow budget",
+        "independent audit of changed observation identities"
+      ]
+    },
+    {
+      "requirement": "formal experiment acceptance",
+      "status": "not_achieved_no_launch",
+      "remaining": [
+        "source/predecessor scientific gates",
+        "whole-workflow performance and resource admission",
+        "sealed candidate and independent official review when authorized",
+        "separate explicit formal-run authority"
+      ],
+      "objective_scope": "tracked project gate; formal launch requires its own authority and is not authorized by optimization task"
+    }
+  ],
+  "prior_175_unit_package_current_byte_differences": [
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v5.py"
+  ],
+  "broad_unit_count_is_not_whole_workflow_acceptance": true,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

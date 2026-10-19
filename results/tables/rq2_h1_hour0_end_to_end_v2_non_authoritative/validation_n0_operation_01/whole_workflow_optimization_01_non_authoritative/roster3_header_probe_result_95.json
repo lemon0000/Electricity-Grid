@@ -1,0 +1,100 @@
+{
+  "status": "BOUNDED_DIAGNOSTIC_CAP_REACHED_NONAUTHORITATIVE",
+  "at_utc": "2026-10-19T04:50:14.653640+00:00",
+  "outer_exit_code": 1,
+  "child_exit_code": 15,
+  "elapsed_seconds": 300.32800000000134,
+  "stop_reason": "wall",
+  "peak_sampled_rss_bytes": 366661632,
+  "observed_storage_bytes": 29742410,
+  "stages": [
+    {
+      "stage": "declaration_prepared",
+      "elapsed_seconds": 11.758735099996557
+    },
+    {
+      "stage": "Bootstrap4_owner_created",
+      "elapsed_seconds": 39.90770530000009
+    },
+    {
+      "stage": "Roster3_header_created",
+      "elapsed_seconds": 120.68624299999647
+    },
+    {
+      "stage": "Roster3_inspected",
+      "elapsed_seconds": 168.58794119999948
+    },
+    {
+      "stage": "guard_competition_checks_completed",
+      "elapsed_seconds": 168.66826549999678
+    },
+    {
+      "stage": "original_headers_closed",
+      "elapsed_seconds": 168.66858019999927
+    },
+    {
+      "stage": "Bootstrap4_owner_reopened",
+      "elapsed_seconds": 190.50753849999455
+    }
+  ],
+  "header_create_inspect_guard_close_body_reached": true,
+  "bootstrap4_reopen_reached": true,
+  "roster3_reopen_and_final_close_accepted": false,
+  "body_observation_json_available": false,
+  "child_terminal_available": false,
+  "final_nine_execution_denial_counters_available": false,
+  "inner_graceful_cleanup_observed": false,
+  "lock_probes": [
+    {
+      "path": "D:\\h1_wf14_roster3_header_95_non_authoritative\\test_exact_live_bootstrap4_ros0\\study_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\bootstrap_non_authoritative\\execution.lock",
+      "bytes_hex": "30",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "exclusive_probe_passed": true
+    },
+    {
+      "path": "D:\\h1_wf14_roster3_header_95_non_authoritative\\test_exact_live_bootstrap4_ros0\\study_non_authoritative\\global_claims_non_authoritative\\execution.lock",
+      "bytes_hex": "30",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "exclusive_probe_passed": true
+    },
+    {
+      "path": "D:\\h1_wf14_roster3_header_95_non_authoritative\\test_exact_live_bootstrap4_ros0\\study_non_authoritative\\groups_non_authoritative\\832eca33537d21d5cadf5015e38584b4eb01150e0ce2229cb8df394236bd43cf_non_authoritative\\execution.lock",
+      "bytes_hex": "30",
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "exclusive_probe_passed": true
+    }
+  ],
+  "lock_probe_scope": "post-termination exclusive lock availability only; no live resource/alias proof",
+  "source_unchanged": true,
+  "plan_file_pins_checked": 1029,
+  "pin_mismatches": [],
+  "observed_owned_processes_absent": true,
+  "cleanup_errors": [],
+  "performance": "empty-registry k=0 cost alone exceeded300s; 2 independent live samples show increasing CPU and read activity, not a dead-loop proof; do not repeat unchanged prefix or extend cap",
+  "files_sha256": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\roster3_header_probe_plan_95.json": "65674e08f0a53618402277cb8944893bc61704f14efe88196e22f16a70d645d3",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\roster3_header_prelaunch_findings_95.json": "a7899af9d9f170a6607eacf43029b40b89d598038558a6bfe8c6a0c95c41548c",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\roster3_header_live_observations_95.jsonl": "52ad7a40dac6c860c1a7861558e88af2ed2929dfbbae4a1ee8d0f4067c3b6349",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_roster3_header_95\\request.json": "f4a9e788cd8fa55b43c3484952151c4e04e60804a006be854be815eb5493899e",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_roster3_header_95\\started.json": "a86829a2ac2ac539b7269ec888e87a66615ed7aa07ff1316e31b9e18f817e316",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_roster3_header_95\\terminal.json": "1f6d7b0d5fe4487ee57c8a7d1b64db0afba324e9e29ebf40a90c2ebc0177398b",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_roster3_header_95\\stdout.log": "ac6afa62ce7b403c2ebd61ce4401dd71307c5f566195360fa83df55c73d719fa",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_14_non_authoritative\\roster3_header_95\\request.json": "b427da69f9ecc22e6c8a4ff9d5a8c741cfc0547d83f4dc8783da8d2dbc16eb9a",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_14_non_authoritative\\roster3_header_95\\pytest.log": "5abf92f6b366ed0fa46867d7d1e7d9876a69a60ec7793c0cba9deafbd63d7f1b"
+  },
+  "saved_root_files_sha256": {
+    "D:\\h1_wf14_roster3_header_95_non_authoritative\\synthetic_bootstrap_config0\\synthetic_profile.json": "312c4fbeeb8e76204df2a939b0bb3801c89b03ac3dfed8ab42f00789c2c99e86",
+    "D:\\h1_wf14_roster3_header_95_non_authoritative\\test_exact_live_bootstrap4_ros0\\bootstrap4_profile.json": "ec1672a7204a439f63ccfa2e807c7e73fa12c6e8024af3b7bbf7f524184ab292",
+    "D:\\h1_wf14_roster3_header_95_non_authoritative\\test_exact_live_bootstrap4_ros0\\study_non_authoritative\\global_claims_non_authoritative\\execution.lock": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "D:\\h1_wf14_roster3_header_95_non_authoritative\\test_exact_live_bootstrap4_ros0\\study_non_authoritative\\global_claims_non_authoritative\\header.json": "e43ed8d997196f507553bd5b253de3beb02e5f39d5807528ee6fb0a2f15f09b8",
+    "D:\\h1_wf14_roster3_header_95_non_authoritative\\test_exact_live_bootstrap4_ros0\\study_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\bootstrap_non_authoritative\\execution.lock": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "D:\\h1_wf14_roster3_header_95_non_authoritative\\test_exact_live_bootstrap4_ros0\\study_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\bootstrap_non_authoritative\\header.json": "ee9587800694ddc78814e55f2ec909da70c54994a723cbf0f8fb5acf6afa688f",
+    "D:\\h1_wf14_roster3_header_95_non_authoritative\\test_exact_live_bootstrap4_ros0\\study_non_authoritative\\groups_non_authoritative\\832eca33537d21d5cadf5015e38584b4eb01150e0ce2229cb8df394236bd43cf_non_authoritative\\execution.lock": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "D:\\h1_wf14_roster3_header_95_non_authoritative\\test_exact_live_bootstrap4_ros0\\study_non_authoritative\\groups_non_authoritative\\832eca33537d21d5cadf5015e38584b4eb01150e0ce2229cb8df394236bd43cf_non_authoritative\\header.json": "bdf1c0ee710013e12c83e0d03cc12e1f584c75d1e010bde9e84ab4137f910867"
+  },
+  "whole_workflow_performance_review_complete": false,
+  "full_optimized_workflow_accepted": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

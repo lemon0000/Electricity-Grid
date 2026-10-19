@@ -1,0 +1,72 @@
+{
+  "schema": "h1_roster4_header_probe_result_119",
+  "status": "INCOMPLETE_BOUNDED_DIAGNOSTIC",
+  "plan_sha256": "ece1bd0931042947922f4a248154ccc225110517dc87ddbeda7a3c1db6ccacd6",
+  "terminal_sha256": "8efd9bb74a5a5a69d96df99027f2566a279c1c004a6df662b42c220bcc70fe59",
+  "stages": [
+    {
+      "stage": "declaration_prepared",
+      "elapsed_seconds": 9.887717400008114
+    },
+    {
+      "stage": "Bootstrap5_created",
+      "elapsed_seconds": 39.4285094000079
+    }
+  ],
+  "terminal": {
+    "observed_owned_processes": [
+      {
+        "pid": 4100,
+        "creation_time": 1792393256.871448
+      }
+    ],
+    "observed_owned_processes_remaining": [],
+    "observed_owned_processes_absent": true,
+    "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+    "cleanup_events": [
+      {
+        "pid": 4100,
+        "creation_time": 1792393256.871448,
+        "action": "kill_owned"
+      }
+    ],
+    "descendant_discovery_complete": true,
+    "complete_process_tree_absence_proven": false,
+    "exit_code": 15,
+    "storage_read_errors": [],
+    "cleanup_errors": [],
+    "final_storage_observation_complete": true,
+    "elapsed_seconds": 120.28099999998813,
+    "stop_reason": "wall",
+    "peak_observed_process_tree_rss": 356102144,
+    "observed_storage_bytes": 15199701,
+    "storage_observation_contract": "observed_entries_nonfollow_with_directory_rechecks",
+    "storage_path_ABA_covered": false,
+    "memory_is_sampled": true,
+    "source_unchanged": true,
+    "source_snapshot_complete": true,
+    "peak_rss_includes_monitor": true,
+    "formal_result": false,
+    "resource_admission": false,
+    "request_sha256": "fa394ece6500918e345a5e5d7da4a12ee4fcd1a32165729fcdf93b4b0037a991",
+    "started_sha256": "0bd19b18ea6e27335012fe4facbe41677d81c25c1e4bbe08c36de34b8ae333ee",
+    "runner_sha256": "b772e867c6d36bf2602feb9c66dec19b57cbad174fb1bab3ed3a526c2ec1ae71",
+    "unit_entry_sha256": "e0a3fe55a8f0bef6f14d5112e13dade0f635b94ad6718a040b52bf71d5ee8440"
+  },
+  "planned_pins": 1341,
+  "pin_drift": [],
+  "Bootstrap5_create_interval_seconds": 29.540791999999783,
+  "Roster4_create_returned": false,
+  "complete_header_lifecycle": false,
+  "closed_internal_receipts_observed": false,
+  "internal_graceful_cleanup_proven": false,
+  "OS_owned_process_cleanup_observed": true,
+  "scope": "Header only with predefinition execution denials;0 completed N0/Job/native. Missing final counters are not a passed zero-execution oracle.",
+  "interpretation": "No completion or mathematical infeasibility claim. Do not extend or repeat this unchanged expensive prefix; profile runtime-seal/check composition with0 owners.",
+  "full_optimized_workflow_accepted": false,
+  "whole_workflow_performance_review_complete": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

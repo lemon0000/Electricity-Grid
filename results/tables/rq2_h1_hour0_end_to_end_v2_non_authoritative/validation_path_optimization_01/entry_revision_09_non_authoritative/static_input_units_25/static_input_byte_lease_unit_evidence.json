@@ -1,0 +1,45 @@
+{
+  "genuine_scientific_equivalence": {
+    "observations": {
+      "implementation": "747ad9b5e86d5d78bc08a483396b6c8c5cdae30c136519aa3cdd7fd66fd4ef8d",
+      "splits": {
+        "training": {
+          "identity": "70c593f5d03d86d5567e7a3dc4b5ff7a7c68af167b3598aac42a7f507f4cbbcf",
+          "cap_table": "6435c85b6cc99d243077bd014b1f52cc90427270a4c50cb26a67fb7e34edf031",
+          "caps": "c2a15badc472c75d3261036b298e3736dfad164c83f58429327bdfd110c98ef2"
+        },
+        "holdout": {
+          "identity": "70c593f5d03d86d5567e7a3dc4b5ff7a7c68af167b3598aac42a7f507f4cbbcf",
+          "cap_table": "6435c85b6cc99d243077bd014b1f52cc90427270a4c50cb26a67fb7e34edf031",
+          "caps": "c2a15badc472c75d3261036b298e3736dfad164c83f58429327bdfd110c98ef2"
+        }
+      },
+      "repair_digest": "aa3a3d71749b47d543410f0c2e2561a735d5af9aaa549bf5dd6dfb7fd0b45a36"
+    },
+    "plain_equals_held_equals_after": true,
+    "static_input_hits": 6,
+    "exit_proof": true,
+    "formal_result": false
+  },
+  "mixed_code_and_pin_microbenchmark": {
+    "code_reads": 10000,
+    "original_pin_reads": 2000,
+    "predecessor_code_lease_seconds": 0.4099145000000135,
+    "successor_seconds": 0.20286620000115363,
+    "measured_runtime_guard_overhead_included": true,
+    "formal_result": false,
+    "full_workflow_speedup_established": false
+  },
+  "original_pin_microbenchmark": {
+    "calls": 2000,
+    "plain_seconds": 0.2862692999988212,
+    "entry_seconds": 0.00306060000002617,
+    "held_pin_seconds": 0.09874829999898793,
+    "exit_seconds": 0.0020464999979594722,
+    "total_held_seconds": 0.10385539999697357,
+    "sha_checked_every_call": true,
+    "numerical_or_source_rows_cached": false,
+    "full_workflow_speedup_established": false,
+    "formal_result": false
+  }
+}

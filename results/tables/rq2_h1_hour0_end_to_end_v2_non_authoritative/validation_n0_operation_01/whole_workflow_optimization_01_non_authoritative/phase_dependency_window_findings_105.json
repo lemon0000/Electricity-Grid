@@ -1,0 +1,26 @@
+{
+  "status": "PRE_SEAL_TARGETED_FINDINGS_NONAUTHORITATIVE",
+  "at_utc": "2026-10-19T05:42:08.505064+00:00",
+  "reviewer": "/root/postcheck_resume_review",
+  "input": {
+    "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_dependency_window_pre_seal_input_105.json",
+    "sha256": "8394ca171fc709748769d531cf854c851037b6110709f4327bd3ef6b0e00943c"
+  },
+  "open_findings": [],
+  "closed_findings": [
+    {
+      "original": "101 P1 actual C ABI binding",
+      "resolution": "Captured exact result/argument types; actual signature checked before clone; identity includes type module/name/size; five wintypes attributes bound; seven zero-open mutation negatives"
+    },
+    {
+      "original": "101 P2 resource upper-bound negative coverage",
+      "resolution": "Actual depth>64 and>4096 aggregate file/ancestor fixtures rejected before open; guard released, no active record or handles;104 two and105 whole fault file passed"
+    }
+  ],
+  "cost_evidence": "Independent canonical seven-field byte encoding and active/orphan==0 assertions added",
+  "allowed_evidence_scope": "Fixed90s,0owner,0N0,6/16 requests C-W-W-C unprofiled local cost observation; no consumer, genuine graph, whole-chain performance or gate claim",
+  "official_review": false,
+  "production_seal": false,
+  "formal_result": false,
+  "resource_admission": false
+}

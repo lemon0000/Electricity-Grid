@@ -27,6 +27,16 @@ def static_identity_test_seam(monkeypatch):
     from experiments import h1_origin_selector_replay_development_v1 as selector
     targets=((selector.physical,'implementation_identity'),(selector.native,'_identity'),
         (selector,'implementation_identity'),(selector.physical,'repair_mechanism_identity'))
+    normalizations=tuple(sys.modules.get(name) for name in (
+        'experiments.h1_repair_cap_normalization_operation_development_v1',
+        'experiments.h1_repair_cap_normalization_operation_development_v2'))
+    repair=selector.physical.repair_mechanism_identity
+    if any(normalization is not None and getattr(repair,'__globals__',None) is vars(normalization)
+            and repair.__name__=='route' and repair.__code__.co_filename==normalization.__file__
+            for normalization in normalizations):
+        # The configured entry owns this live, pin-checked normalization route.
+        # Exercise it directly; its entry/exit oracles own its bookends.
+        targets=targets[:-1]
     originals=[(obj,name,getattr(obj,name)) for obj,name in targets];values={};arguments={}
     def cached(index):
         original=originals[index][2]
@@ -73,7 +83,8 @@ def context(case,setup,monkeypatch,no_solver,request):
             yield c
 
 
-def explicit_fake_common_bridge(common):
+def explicit_fake_common_bridge(common, faults=None):
+    faults={} if faults is None else faults
     bridge=ModuleType('explicit_fake_common_validation_for_partial_test')
     bridge.__file__=__file__
     def bind(api,kind,verify,operation,finalized):
@@ -88,22 +99,27 @@ def explicit_fake_common_bridge(common):
         def abort(owner,error):pass
         def receipt(owner):
             return dict(explicit_fake_common_source=True,complete=False,formal_result=False)
-        return attach,prepare,declaration,finish,abort,receipt,receipt
+        def commit(owner):
+            if faults.get('validation_commit'):raise RuntimeError('synthetic validation commit failure')
+            return receipt(owner)
+        return attach,prepare,declaration,finish,abort,receipt,commit
     bridge._bind_handoff=bind
     return bridge
 
 
-def load_handoff(h,monkeypatch):
+def load_handoff(h,monkeypatch,*,genesis=None,validation_faults=None):
     p=h.module
     from experiments import h1_common_owner_genesis_development_v2 as common
+    if genesis is not None:common=genesis
     root=Path(p.__file__).parent
     helper=load(str(root/'h1_selector_parent_validation_operation_development_v3.py'),
         'experiments.h1_selector_parent_validation_operation_development_v3',monkeypatch)
     monkeypatch.setattr(experiments,'h1_selector_parent_validation_operation_development_v3',helper,raising=False)
-    bridge=explicit_fake_common_bridge(common)
+    bridge=explicit_fake_common_bridge(common,validation_faults)
     consumer=load(str(root/'h1_selector_phase_handoff_development_v5.py'),
         'experiments.h1_selector_phase_handoff_development_v5',monkeypatch,{
             'h1_selector_parent_controller_development_v3':p,
+            'h1_common_owner_genesis_development_v2':common,
             'h1_common_validation_operation_development_v3':bridge,
             'h1_selector_parent_validation_operation_development_v3':helper})
     monkeypatch.setattr(experiments,'h1_selector_phase_handoff_development_v5',consumer,raising=False)

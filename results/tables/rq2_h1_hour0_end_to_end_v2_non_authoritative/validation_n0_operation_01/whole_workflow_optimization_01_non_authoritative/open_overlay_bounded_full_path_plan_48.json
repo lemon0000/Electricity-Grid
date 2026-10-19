@@ -1,0 +1,668 @@
+{
+  "schema": "h1_bounded_ordinary_four_parent_open_overlay_plan_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "observed_at_utc": "2026-10-18T20:20:36.418464+00:00",
+  "purpose": "measure fresh bounded read-size mapping composed with the sole held static byte owner",
+  "evidence_sha256": {
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\open_overlay_pre_seal_findings_47.json": "8d6aef5cd8009d4a94ec79b99fc26a59250158be86aea7dfc99361417f53a752",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_open_overlay_units_47\\terminal.json": "135354df164ba861522cd2c7dcd9f95777d4d65869268f90c37f61bfaf5836bb",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\distribution_bounded_full_path_plan_41.json": "04b2431fc1aa602bab684c0560b7e3577006de1aeddc1807e188c9f90de1a7b9",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_distribution_paired_41\\terminal.json": "26964f3dd633b9c5c440e2ddae0914954b2befb4354bfd1c6daaece6c62ccd18",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\distribution_full_parent_comparison_41.json": "9effd5fb4b32725e0b9cf1fdb78e6bbfa758aecf5b653484de26d334abf7cfa5",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\acceptance_matrix_08.json": "814faa29d135ad56d346a893667c81a6474c79c7387afe86176b6173b6058c41",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\prepare_open_overlay_probe_v1.py": "78db69d15ec62d92943e0809895b05cf26a729e7ef6c35224369fe917c438575",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\run_workflow_entry_bounded_v6.py": "fdf1183ae8d4af91f5d6acd0cc55bb028fb03285f73fe2e810e51b0cc2781fe3",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\build_open_overlay_entry_draft_v1.py": "be54cc929a7c1cdde8ec91732f0ea2b4ab5edacbb98f81a23da2f25be3f4fac7",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\launch_validation.py": "c50311a474bfb405d9ea86941d166faac98689746294f1e61f82a326e78a5103",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\package_manifest_v1.json": "798c51f2aa4c372c72721971e13cba4a3848cf71e70f8f806c7f8292a7c33192",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\validation_entry.py": "93784e1dec06ea88922ef37e1ef1a79424669f8f793777cf169278e5b476ab0b",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\open_overlay_units_47\\terminal.json": "a160d8892db8f8853158f054b0d3fbc027859d6549cea411f892eadb28568911",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\open_overlay_units_47\\bounded_open_overlay_unit_evidence.json": "3072b4df93837893e2dad86e525341c530e4f4facc71124127893fefdeaff197",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\bounded_stable_read_overlay_v1.py": "fb0f853e92e510ef6509723e29e767e0836550a58d32283508384405cc8ff882",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\canonical_path_lease.py": "f4fd83cb189ed5a05b20ecbaf72d5a29e7dc6f9746dc777d18f140bbd4aeab2d",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\code_allowlist_v3.json": "93eef2e8a4f71c3fe359ce417985d96169530449d45b39f77effd11efee90142",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\code_read_lease.py": "813681de527a9c5c38185482af5ac583e79d9f28deb8b6186c11f22a71af80f1",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\configured_predecessor_package_manifest.json": "e5a7893d2b88812e46c8000463f8e03ba4195ac6ac189b41e68d3af43922d139",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\entry04_predecessor_package_manifest.json": "d13a08fe6db35e9c5c70b8204e3fb4d0091e43a3ef483e3951a561eac0667e43",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\entry05_predecessor_package_manifest.json": "a6eba4f2921b51dcf105cf9dbf4373464b5acef94097a62593f906c3f83cb1cc",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\entry06_pre_io_fixture_fix_package_manifest.json": "240bec2bf100ba8e365c04f31be3d39726eecc00303c769fce8b889753d2cb8c",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\entry06_predecessor_package_manifest.json": "6c0db76dd3bbcfb8281e69d7ad70cc18caaf7adef4d120c0aebb30bbcedef03d",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\entry07_package_manifest.json": "ab0ad89e7efa04c57185dca779a822ea5ae70fc07c0fbb2cd92f2e03360f1925",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\entry07_pre_bookends_fix_manifest.json": "022e62133ac4b070f7232346a6d41b6608e8fc98c4bfac1a269b76e643a9cd4a",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\entry07_pre_lease_import_fix_manifest.json": "091d096e61670b7f09cfd757aa7a47fc74e25a0e91278a41c571f6b98a3297b5",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\entry07_pre_metadata_timing_fix_manifest.json": "6f4caac53ef09d4d90e919c8ffa610869635655a5bcf0db8521d20ccd3b6a706",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\entry08_package_manifest.json": "44a27648c0b31ce7237a218c5514f089d6585a072b3b1fae128068d0a808731a",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\entry09_package_manifest.json": "52f9e9d2a5da87fe1cc6f8c070a1e0028c276c8e9be088c23bd6cb901088a4b1",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\entry11_package_manifest.json": "8d72c03f4b8e95c84deffe5a0281f05d6baf932aa62ac1fd6a4d46ee5f24f034",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\interpreter_path_policy.py": "43f7dec243dbb9abad20cc51c276bcc1481034bb1f87c9081d0212e0555feec3",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\interpreter_path_policy_v1.json": "1fc8f15125d826e5631d6c8f7504b59eac1d0e0a337a13c0ae956c5bcd9e4531",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\metadata_allowlist_v1.json": "90fc679a8e71971e1f0bdb97575ed83d9a620826c7670ce5a308566b7b710302",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\metadata_parse_lease.py": "96b345284a863c79629db982a4061218d344b4506924c899df08bf51c8a62c23",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\package_manifest_before_call_counter.json": "52bd535bc8a9b07fdbfdd09ae2655c152870983a866ed62e0c10215998167bc6",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\path_predecessor_package_manifest.json": "6592f996e4a02b6e4ee3f510d9f7c24db1061a1ffcd56ba476d2d5f8b8f9fb10",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\pinned_distribution_resolver_v1.py": "dc154392771996c9fa811f759b916865adf607f32d65a84d695c9a2db60e91bb",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\predecessor_package_manifest.json": "0cd4511072ee11cc89a942b3eb76a3a91de4390ca1af5febe0981c216976a59a",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\pytest_admission_plugin.py": "1e438209ede34db6cb93bdc7fd5ee048e567f5bc5baf197642018d73b185893b",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\pytest_lease_plugin.py": "f193dd08775dcc7ecac807d191e508c568967e23602566786a40de3dc6db6c97",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\scientific_input_allowlist_v1.json": "25fba63a8858987a9cdec778d5c93b5c71cf6ddd88262a5b2c48ad7da55a52de",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\slice_pre_review_package_manifest.json": "7df0fb6e71e60ce300b3a0980973ad032d25657778010b81a617cb2658e395f9",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\slice_review_round2_package_manifest.json": "994dd1abf1d8b703286ce627f3f0eeaacd20972bc11f2ea6b29dd1c5d17345bb",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\static_scientific_input_read_lease_v2.py": "5c3aa3455dc8a837715b4a0f26ddb0bd1ffbfc9190d4da2eb0d24c9747909fb4",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\test_bounded_stable_read_overlay_v1.py": "6122648cf117a111c1decc0c50d534dd37c0529415fd41fbc84918aa1a0ccb2c",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\test_closure_v1.json": "5484c3d6a39ef339572f2001b379423413ee0054dfc2c44ab72c32339bcab9bc",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\test_code_read_lease.py": "436409dc06c085811b64deff30aec1848685490075be90d4e81151d053d9a4ca",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\test_interpreter_path_policy.py": "275daf4b307d01120f475c13dee198b299f0eeec37aee95fdd5f527240037197",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\test_metadata_parse_lease.py": "fb4f0636c0e7ac2039165cb8f2db71137038ea6055499b4ec1628545f4c95e45",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\test_pinned_distribution_resolver_v1.py": "d83800fc8da30d2f6e28ad56e28d9eaba758d478e03008372528b10d31cb9a7e",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\test_pytest_admission_plugin.py": "a6b709e4c03da9c859997bf98a9190f94b78628b86d3fd5c0a0048037e84f699",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\test_pytest_lease_plugin.py": "93bf889d01938966453efb93ef96f4bc964a35e8e7808140d280426e95523685",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\test_static_scientific_input_read_lease_v2.py": "a3a907c19a26dc94abfc4efe024cc700e813db55e379a44c2c7a3b261232add3",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\test_validation_entry.py": "cb78373722106fa249e2dc4190401a70f45d43687feb2abed4ccea981f3107db",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\test_vendor_code_policy.py": "abc845b996a71c87c89e8432ef1f4bf12da4139cdc9a4699ba48299e362eeadf",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\vendor_code_allowlist_v1.json": "ba371022398b68104c9a0ee2a2b87f4c2355da2d37a960412b40e04d6641f3f7",
+    "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\vendor_code_policy.py": "79ebf9dcdfca43c2a1ec296dbf3285eeca38757660c94b9c8646fc1998a04ec1",
+    "tests\\test_h1_genesis_consumer_operation_development_v1.py": "05e2845452de51c929b5957ab5c4905b28f091c27d926393a18955d3cdcb5354"
+  },
+  "target": "tests/test_h1_genesis_consumer_operation_development_v1.py::test_three_actual_parents_commit_close_and_reopen_saved_phase",
+  "instance": {
+    "simulated_hours": 1,
+    "reference_parents": 1,
+    "actual_parents": 3,
+    "paired_lanes": 3,
+    "source_logical_requests": 2408,
+    "source_preparations": 28,
+    "bundle_windows": 13,
+    "record_bundle_windows": 1,
+    "retains": 5,
+    "explicit_fake_N0_source_native_and_Job": true,
+    "real_native_calls": 0,
+    "real_Job_launches": 0
+  },
+  "stages": [
+    "pinned entry and immutable input/metadata acquisition",
+    "fake producer setup then adapter/consumer cold imports",
+    "Genesis create/inspect/capture",
+    "Rref construct/run",
+    "three Actual snapshot/construct/run",
+    "Handoff consume and parent validation",
+    "paired commits and retain callbacks",
+    "close all original owners",
+    "fresh phase and holder reopen, saved replay, heads/carry/projection/tickets equality",
+    "entry and discovery oracles, read/parser/path/normalizer cleanup",
+    "reports and terminal"
+  ],
+  "dependency_order": "configure isolated interpreter policy and preload canonical raw -> install Path.open -> load static byte module -> construct/adopt sole byte owner -> byte enter -> overlay bind -> path lease -> metadata parser -> distribution resolver -> normalizer -> test DAG -> reverse exits -> overlay quiesce -> byte close or once-only cleanup retry -> restore Path.open -> detached reports",
+  "invocation": {
+    "outer": "workflow_genesis_open_overlay_paired_48",
+    "child": "genesis_open_overlay_paired_48",
+    "entry": "entry_revision_12_non_authoritative",
+    "kind": "pytest",
+    "mode": "parse_path"
+  },
+  "reuse": {
+    "previous_plan_sha256": "04b2431fc1aa602bab684c0560b7e3577006de1aeddc1807e188c9f90de1a7b9",
+    "prior_terminal": {
+      "observed_owned_processes": [
+        {
+          "pid": 3604,
+          "creation_time": 1792351136.4398997
+        }
+      ],
+      "observed_owned_processes_remaining": [],
+      "observed_owned_processes_absent": true,
+      "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+      "cleanup_events": [
+        {
+          "pid": 3604,
+          "creation_time": 1792351136.4398997,
+          "action": "kill_owned"
+        }
+      ],
+      "descendant_discovery_complete": true,
+      "complete_process_tree_absence_proven": false,
+      "exit_code": 15,
+      "storage_read_errors": [],
+      "cleanup_errors": [],
+      "final_storage_observation_complete": true,
+      "elapsed_seconds": 600.3120000000017,
+      "stop_reason": "wall",
+      "peak_observed_process_tree_rss": 493449216,
+      "observed_storage_bytes": 28552028,
+      "memory_is_sampled": true,
+      "source_unchanged": true,
+      "source_snapshot_complete": true,
+      "peak_rss_includes_monitor": true,
+      "formal_result": false,
+      "resource_admission": false
+    },
+    "legacy_chain_body_restarted": false,
+    "legacy_independent_postcheck": "closed artifact reused",
+    "static_byte_files": 257,
+    "locked_METADATA_files": 8,
+    "scientific_input_files": 2,
+    "unchanged_code_and_test_closure": {
+      "code_allowlist_v3.json": 250,
+      "vendor_code_allowlist_v1.json": 7,
+      "test_closure_v1.json": 660,
+      "metadata_allowlist_v1.json": 8
+    },
+    "entry11_distribution_path_reuse": "unchanged",
+    "digest_entry10_composed": false,
+    "raw_archive_or_numerical_or_saved_record_cache": false
+  },
+  "read_contract": {
+    "caller": "exact canonical raw source/code/globals/registry/loader and creating thread",
+    "mapping": "normal int cap+1 to observed-before size+1; otherwise original open/read fallback",
+    "fresh_stat_open_fstat_read_fstat_and_final_path_check": true,
+    "mutation_tests": [
+      "growth",
+      "shrink",
+      "replacement",
+      "empty/exact/excess cap"
+    ],
+    "scientific_thresholds_and_original_raw_body_unchanged": true,
+    "sole_persistent_byte_owner": true,
+    "overlay_owns_transient_streams": true,
+    "invalidation": "sticky named binding/control/function drift; no clean receipt after recovery",
+    "bounded_cleanup": "one byte-owner cleanup retry while original wrapper remains installed",
+    "audit_hook_transparency_proven": false,
+    "per_site_IO_failure_order_preserved": false,
+    "transient_dependency_ABA_covered": false,
+    "arbitrary_memory_security_sandbox": false
+  },
+  "optimization_decisions": {
+    "read_size": "local composed test establishes bytes/stamps and failure checks; full-path effect remains to measure",
+    "source_replay": "at least81 reference inspections through capture/construction remain fresh; separate proof needed for reuse",
+    "cache": "only existing held immutable code/static byte and metadata path reuse; no new scientific result reuse",
+    "parallelism": "one process; reference ownership/commit callbacks serialize current DAG",
+    "unmeasured_tail": "paired/reopen and combined cleanup must reach terminal; timeout remains incomplete"
+  },
+  "representative_evidence": {
+    "unit47": {
+      "exit_code": 0,
+      "observed_owned_processes": [
+        {
+          "pid": 7776,
+          "creation_time": 1792354679.3840027
+        },
+        {
+          "pid": 12376,
+          "creation_time": 1792354691.8741016
+        },
+        {
+          "pid": 35116,
+          "creation_time": 1792354691.9674006
+        },
+        {
+          "pid": 10696,
+          "creation_time": 1792354692.0666745
+        },
+        {
+          "pid": 17452,
+          "creation_time": 1792354692.3442059
+        }
+      ],
+      "observed_owned_processes_remaining": [],
+      "observed_owned_processes_absent": true,
+      "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+      "cleanup_events": [],
+      "descendant_discovery_complete": true,
+      "complete_process_tree_absence_proven": false,
+      "storage_read_errors": [],
+      "cleanup_errors": [],
+      "final_storage_observation_complete": true,
+      "elapsed_seconds": 25.687000000005355,
+      "stop_reason": null,
+      "peak_observed_process_tree_rss": 243159040,
+      "observed_storage_bytes": 28351945,
+      "memory_is_sampled": true,
+      "source_unchanged": true,
+      "source_snapshot_complete": true,
+      "peak_rss_includes_monitor": true,
+      "formal_result": false,
+      "resource_admission": false
+    },
+    "local_read_comparison": {
+      "calls": 128,
+      "original_seconds": 0.5510993999996572,
+      "overlay_with_static_reload_bind_byte_entry_exit_seconds": 0.1816391999964253,
+      "excludes_first_overlay_and_raw_import": true,
+      "identical_bytes_and_stamps": true,
+      "receipt": {
+        "audit_hook_transparency_proven": false,
+        "bounded_read_calls": 128,
+        "bounded_requested_bytes": 2432,
+        "byte_cleanup_retry_attempted": false,
+        "byte_owner_closed_receipt": {
+          "all_handles_closed": true,
+          "cached_bytes_immutable_under_held_handles": true,
+          "caller_hash_execution_proven_by_this_helper": false,
+          "cleanup_errors": [],
+          "closed_handle_count": 12,
+          "code_file_count": 1,
+          "code_read_hits": 0,
+          "distribution_discovery_cached": false,
+          "entry_observations": {
+            "D:\\": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                1407374883553285
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null
+            },
+            "D:\\CUHKSZ": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                22236523160146021
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null
+            },
+            "D:\\CUHKSZ\\Research Project": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                15199648742547565
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                5910974511013282
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                1407374884066347
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py": {
+              "directory": false,
+              "identity": [
+                16204160864180129680,
+                7036874417875146
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "sha256": "df59ba543655307f0aae369bebf85e46d5ed94a3525f1a7f72f718fe744b598a",
+              "size_bytes": 11765
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                1407374884066356
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                1407374884066361
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_outage_origin_replay_v1_non_authoritative": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                4785074604147922
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_outage_origin_replay_v1_non_authoritative\\repair_cap_proposal.json": {
+              "directory": false,
+              "identity": [
+                16204160864180129680,
+                5910974510996189
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "sha256": "6435c85b6cc99d243077bd014b1f52cc90427270a4c50cb26a67fb7e34edf031",
+              "size_bytes": 23475
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                11540474045238737
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\scientific_development_authority.json": {
+              "directory": false,
+              "identity": [
+                16204160864180129680,
+                3377699720629724
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "sha256": "45710f18fcf98113d53c50cd74e0dfc311ad3e03cfb8ab8f75b01dc2720de0a8",
+              "size_bytes": 888
+            }
+          },
+          "exit_files_and_ancestors_verified": true,
+          "exit_observations": {
+            "D:\\": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                1407374883553285
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null,
+              "verified": true
+            },
+            "D:\\CUHKSZ": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                22236523160146021
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null,
+              "verified": true
+            },
+            "D:\\CUHKSZ\\Research Project": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                15199648742547565
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null,
+              "verified": true
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                5910974511013282
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null,
+              "verified": true
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                1407374884066347
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null,
+              "verified": true
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py": {
+              "directory": false,
+              "identity": [
+                16204160864180129680,
+                7036874417875146
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "sha256": "df59ba543655307f0aae369bebf85e46d5ed94a3525f1a7f72f718fe744b598a",
+              "size_bytes": 11765,
+              "verified": true
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                1407374884066356
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null,
+              "verified": true
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                1407374884066361
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null,
+              "verified": true
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_outage_origin_replay_v1_non_authoritative": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                4785074604147922
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null,
+              "verified": true
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_outage_origin_replay_v1_non_authoritative\\repair_cap_proposal.json": {
+              "directory": false,
+              "identity": [
+                16204160864180129680,
+                5910974510996189
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "sha256": "6435c85b6cc99d243077bd014b1f52cc90427270a4c50cb26a67fb7e34edf031",
+              "size_bytes": 23475,
+              "verified": true
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative": {
+              "directory": true,
+              "identity": [
+                16204160864180129680,
+                11540474045238737
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "size_bytes": null,
+              "verified": true
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\scientific_development_authority.json": {
+              "directory": false,
+              "identity": [
+                16204160864180129680,
+                3377699720629724
+              ],
+              "nlink": 1,
+              "reparse": false,
+              "sha256": "45710f18fcf98113d53c50cd74e0dfc311ad3e03cfb8ab8f75b01dc2720de0a8",
+              "size_bytes": 888,
+              "verified": true
+            }
+          },
+          "fallback_dispatch_checks": "original v1 hook checks and control identity; original fresh OS read",
+          "fallback_reads": 0,
+          "file_count": 3,
+          "files_sha256": {
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py": "df59ba543655307f0aae369bebf85e46d5ed94a3525f1a7f72f718fe744b598a",
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_outage_origin_replay_v1_non_authoritative\\repair_cap_proposal.json": "6435c85b6cc99d243077bd014b1f52cc90427270a4c50cb26a67fb7e34edf031",
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\scientific_development_authority.json": "45710f18fcf98113d53c50cd74e0dfc311ad3e03cfb8ab8f75b01dc2720de0a8"
+          },
+          "first_failure": null,
+          "foreign_alias_preserved": false,
+          "formal_execution_ready": false,
+          "formal_result": false,
+          "full_checkpoint_checks": 3,
+          "full_scientific_checks": 0,
+          "held_handles": 0,
+          "hits_by_path": {},
+          "hook_installed": true,
+          "light_code_checks": 0,
+          "native_execution_authorized": false,
+          "numerical_result_cache": false,
+          "opened_handle_count": 12,
+          "original_alias_restored": true,
+          "per_call_os_open": false,
+          "production_seal": false,
+          "raw_archive_or_source_rows_cached": false,
+          "registry_objects_cached": false,
+          "repair_cap_table_bytes_cached": true,
+          "resource_admission": false,
+          "runtime_validation_schedule": "light_on_code_hit; full_on_scientific_hit_and_lifecycle_checkpoint",
+          "saved_record_cache": false,
+          "schema": "h1_static_scientific_input_read_lease_draft_v2",
+          "scientific_input_read_hits": 0,
+          "scientific_inputs": {
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_outage_origin_replay_v1_non_authoritative\\repair_cap_proposal.json": {
+              "sha256": "6435c85b6cc99d243077bd014b1f52cc90427270a4c50cb26a67fb7e34edf031",
+              "size_bytes": 23475
+            },
+            "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_outage_registry_v1_non_authoritative\\scientific_development_authority.json": {
+              "sha256": "45710f18fcf98113d53c50cd74e0dfc311ad3e03cfb8ab8f75b01dc2720de0a8",
+              "size_bytes": 888
+            }
+          },
+          "solver_result_cache": false,
+          "state": "closed",
+          "static_scientific_input_bytes_cached": true,
+          "status": "DRAFT_NONAUTHORITATIVE",
+          "this_code_lease_caches_package_versions": false
+        },
+        "canonical_IO_dependencies": true,
+        "cleanup_errors": [],
+        "closed_streams": 128,
+        "eligible_for_canonical_entry_clean": true,
+        "fallback_opens": 4,
+        "first_failure": null,
+        "formal_result": false,
+        "implementation": "fb0f853e92e510ef6509723e29e767e0836550a58d32283508384405cc8ff882",
+        "numerical_result_cache": false,
+        "original_open_restored": true,
+        "original_read_bytes_restored": true,
+        "original_read_calls": 128,
+        "original_requested_bytes": 4294967424,
+        "owns_byte_lease_OS_handles": false,
+        "owns_read_stream_lifetimes": true,
+        "per_site_IO_failure_order_preserved": false,
+        "raw_fallback_opens": 0,
+        "raw_module_name": "experiments.h1_raw_ingress_development_v1",
+        "raw_source_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+        "raw_source_sha256": "df59ba543655307f0aae369bebf85e46d5ed94a3525f1a7f72f718fe744b598a",
+        "remaining_streams": 0,
+        "resource_admission": false,
+        "saved_record_cache": false,
+        "schema": "h1_bounded_stable_read_overlay_draft_v1",
+        "source_or_result_cache": false,
+        "transient_dependency_ABA_covered": false
+      },
+      "whole_workflow_speedup_established": false
+    },
+    "prior28_wall_seconds": 600.391,
+    "prior36_wall_seconds": 600.328,
+    "prior41_wall_seconds": 600.312,
+    "prior41_prefix_seconds": [
+      46.4102818,
+      200.7242331,
+      349.7541201,
+      498.5539167,
+      498.69194
+    ],
+    "source_logical_requests": 2408,
+    "source_preparations": 28,
+    "bundle_windows": 13,
+    "record_bundle_windows": 1,
+    "retains": 5,
+    "three_paired_lanes": 3,
+    "simulated_hours": 1,
+    "whole_workflow_speedup_established": false
+  },
+  "costs": {
+    "whole_workflow_review_complete": false,
+    "complete_runtime_estimate_seconds": null,
+    "basis": "fixed-budget representative diagnostic under section9; no extrapolation from local speedup",
+    "cold_entry_and_prefix": "measured by prior attempts; changed read route measured locally",
+    "paired_reopen_and_cleanup": "not yet measured to complete optimized terminal",
+    "total_call_count": "exact original fixture asserts 2408 source requests/28 preparations/14 bundle windows; read count observed"
+  },
+  "limits": {
+    "wall_seconds": 600,
+    "sampled_process_tree_plus_monitor_rss_bytes": 1073741824,
+    "new_storage_bytes": 134217728,
+    "concurrency": 1,
+    "python_stack_sample_interval_seconds": 30,
+    "max_stack_samples": 24,
+    "attempts": 1,
+    "stop_on_wall_rss_storage_or_observation_error": true,
+    "no_progress": "stage and bounded stack observation; never extend fixed wall cap",
+    "cleanup": "owned direct child handle plus repeatedly observed PID and creation-time descendants; preserve artifacts",
+    "resource_limits_are_observed_not_reserved": true
+  },
+  "acceptance": [
+    "exit0 after complete entry exit",
+    "three paired lanes and five retains",
+    "saved heads/carry/projection/tickets equal after close/reopen",
+    "original source request/preparation/window count assertions",
+    "source/package pins unchanged",
+    "clean byte/path/normalization/parser outer cleanup and closed resolver receipt",
+    "resolver eight selected rows and exactly one entry/exit oracle; calls=fast+fallback; fresh objects=fast>0",
+    "observed owned PIDs with creation times absent; no cleanup or observation errors",
+    "closed overlay receipt binds helper/raw pins and canonical IO dependencies",
+    "eligible read calls equal bounded reads; zero remaining transient streams; original hooks restored",
+    "original sole byte owner closes with exit file/ancestor verification and no first error/history",
+    "actual bounded-read counters and original/bounded byte requests saved"
+  ],
+  "remaining": [
+    "genuine Bootstrap4 complete registry/scope/receipt/oracle",
+    "typed successor graph and connected three independent N0",
+    "genuine source/numerical output equality",
+    "complete optimized workflow performance/resource acceptance",
+    "formal gates"
+  ],
+  "pre_seal_scope": "named canonical Python bindings and failure paths",
+  "pre_seal_candidate": {
+    "status": "scoped_findings_closed",
+    "official_review": false,
+    "production_seal": false
+  },
+  "launch_prerequisites": [
+    "all recorded pins verified before this plan is written",
+    "no related active process, checked immediately before launch",
+    "new empty artifact root; fixed cap; no retry/extension of this attempt"
+  ],
+  "environment": {
+    "python": "3.12.12 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 20:05:38) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "ordinary_unit_launch_not_formal_experiment": true,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "production_seal": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

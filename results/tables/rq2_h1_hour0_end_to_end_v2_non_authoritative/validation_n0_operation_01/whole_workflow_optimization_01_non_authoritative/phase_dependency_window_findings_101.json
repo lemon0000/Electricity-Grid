@@ -1,0 +1,35 @@
+{
+  "status": "PRE_SEAL_FINDINGS_NONAUTHORITATIVE",
+  "at_utc": "2026-10-19T05:40:12.403495+00:00",
+  "reviewer": "/root/postcheck_resume_review",
+  "input": {
+    "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\phase_dependency_window_pre_seal_input_101.json",
+    "sha256": "52d72ec6f8aa3cc1e02446770d0b1c22786d703cdc803268d194c55f771f9fa7"
+  },
+  "open_findings": [
+    {
+      "priority": "P1",
+      "finding": "Actual Windows C ABI types/signatures were not compared to captured recipe; wintypes mutation after arm could produce an altered ABI without a changed active identity",
+      "required_fix": "Capture expected signatures, compare actual C argtypes/restype before clone, bind wintypes attributes and actual signature identity; preconstruction negatives"
+    },
+    {
+      "priority": "P2",
+      "finding": "Depth64 and aggregate4096 bounds exist but negative-bound tests were absent",
+      "required_fix": "Targeted refusal with no handle opened or leaked"
+    }
+  ],
+  "original99": {
+    "source_dependency_identity": "Eight source hashes closed; actual ABI remained open",
+    "per_path_caps": "Minimum caps implemented and tested; resource-bound implementation closed, negative coverage open",
+    "GC_abandonment": "Closed: private finalizer, strong orphan callbacks, retry/atexit; traceback-free persistent errors; runtime2 del sender"
+  },
+  "cost_evidence_suggestions": [
+    "Compare all seven science fields to independent canonical encoding",
+    "After each window assert active_operations=0 and abandoned_pending_operations=0"
+  ],
+  "scope": "Read-only targeted PRE_SEAL followup. Earlier provisional no-P1 statement superseded by final ABI P1. Fixes after101 belong to later input.",
+  "official_review": false,
+  "production_seal": false,
+  "formal_result": false,
+  "resource_admission": false
+}

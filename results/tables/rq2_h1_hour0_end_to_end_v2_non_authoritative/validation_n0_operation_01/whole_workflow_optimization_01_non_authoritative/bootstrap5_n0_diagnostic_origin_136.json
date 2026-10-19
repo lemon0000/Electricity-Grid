@@ -1,0 +1,46 @@
+{
+  "source": "tests\\test_h1_registry_validation_fresh_n0_development_v1.py",
+  "source_sha256": "fc142da5cf6dc32780df1abe23551f6ba60b4b8bd85b65b0bb001380ae54b064",
+  "target": "tests\\test_h1_registry_validation_fresh_n0_development_v2.py",
+  "target_sha256": "eabf2fceffc6f3d2d7e5af0d3e322a6daf384224d470ea283ac8d02909d5a7ca",
+  "replacements": [
+    {
+      "old": "Cold static successor: one real synthetic Job through N0 registration only.",
+      "new": "Cold Bootstrap5: one synthetic Job, numerical N0 registration and close.",
+      "count": 1
+    },
+    {
+      "old": "h1_historical_n0_verifier_development_v3",
+      "new": "h1_historical_n0_verifier_development_v4",
+      "count": 1
+    },
+    {
+      "old": "h1_bootstrap_integration_development_v4",
+      "new": "h1_bootstrap_integration_development_v5",
+      "count": 2
+    },
+    {
+      "old": "h1_owned_bootstrap_controller_development_v4",
+      "new": "h1_owned_bootstrap_controller_development_v5",
+      "count": 1
+    },
+    {
+      "old": "    monkeypatch.setattr(m.BootstrapOwner,'_continue_bootstrap',m.BootstrapOwner._continue_registered_development)\n",
+      "new": "",
+      "count": 1
+    },
+    {
+      "old": "retain_global_head=s.retain,retain_bootstrap_head=s.retain)",
+      "new": "retain_global_head=retain,retain_bootstrap_head=retain)",
+      "count": 1
+    },
+    {
+      "old": "        result=owner.bootstrap();trace('N0_registered')",
+      "new": "        result=owner.bootstrap(registered_development=True);trace('N0_registered')",
+      "count": 1
+    }
+  ],
+  "additional_assertions": "retain callbacks have no phase handles; complete phase closure and diagnostic receipt after owner close",
+  "formal_result": false,
+  "resource_admission": false
+}

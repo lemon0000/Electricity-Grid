@@ -1,0 +1,330 @@
+{
+  "schema": "h1_whole_workflow_acceptance_matrix_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "observed_at_utc": "2026-10-18T18:22:39.979149+00:00",
+  "root_is_sole_writer": true,
+  "objective": "finish missing experiment checks, then complete workflow bottleneck optimization",
+  "acceptance": [
+    {
+      "requirement": "legacy chain07 body N0 to paired and reopen",
+      "status": "verified_legacy_synthetic_body",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\terminal.json",
+          "sha256": "5da14d3218d963751ef103cc06d3d63364f7559f7f5783e332dc1ab7d9c9ab5b"
+        }
+      ],
+      "scope": "1 simulated hour,3 synthetic N0 Jobs,0 real native; wall259910.3253707s; not optimized runtime"
+    },
+    {
+      "requirement": "independent postcheck, cleanup and complete report",
+      "status": "verified_legacy_synthetic_postcheck_and_report",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\postcheck_supplement_completion_04.json",
+          "sha256": "c580bf0131bd7e7851d619122c69b7336247aee6d4264d3a7d944694f2de1d0b"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\postcheck_supplement_preservation_04.json",
+          "sha256": "51a4e9ffa6414953c4918af952b2997c9d6a664feb84882af8adb09f3d7f0439"
+        }
+      ],
+      "remaining": []
+    },
+    {
+      "requirement": "Parent lifecycle source windows",
+      "status": "draft_bounded_prior_smoke_passed",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\parent3_configured_smoke_01\\terminal.json",
+          "sha256": "160c6aeb9084feaf2fc47d7d1410af98aa625d48f9e43845006f37198745ec22"
+        }
+      ],
+      "remaining": [
+        "current configured entry with faulthandler disabled regression",
+        "all three Actual paths in connected chain"
+      ]
+    },
+    {
+      "requirement": "successful Handoff record-bundle and missing Actual verification",
+      "status": "draft_partial_failure_cleanup_verified_full_paired_runtime_open",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_successors_units_03\\terminal.json",
+          "sha256": "80f29bb439730cfc7467d57650d3c5cadd0f2f43e32e3939bad8eb1d24a0a1a5"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_failure_cleanup_12\\terminal.json",
+          "sha256": "1150a6472016bf572aeadb8d6b6434c15ed48b18fd2dbeae1f335bfccaff1d9f"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_three_actual_saved_replay_14\\terminal.json",
+          "sha256": "3d967d0e505b5534d08e0b80c3fd3de67744482a16d22c71320da228451d5b6e"
+        }
+      ],
+      "remaining": [
+        "current partial mixed positive and7 fault cases",
+        "mixed fresh-owner close/reopen replay",
+        "connected full paired persistence+close/reopen"
+      ],
+      "scope_note": "cleanup12 tested predecessor before final CAS delta; current CAS all39 units verified13; full3 ordinary unit14 completed Rref/3Actual then wall600 stopped before paired terminal"
+    },
+    {
+      "requirement": "three-arm common witness and Genesis create/inspect/reopen reuse",
+      "status": "draft_lifecycle_and_scoped_pre_seal_findings_closed_genuine_route_and_full_chain_open",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_operation_units_01\\terminal.json",
+          "sha256": "82cf2909160a07b3b442a5d4cb8f5cf2a2b5f023e5b5016ac97d5a1254ae51f4"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_operation_units_06\\terminal.json",
+          "sha256": "8f55ba23a274f45bf2995a3b76e72e69552e0fe42a3c5af96033d0e7b4dd9007"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_raw_cas_units_13\\terminal.json",
+          "sha256": "7ef2d5529d4f92c476c7154d0db6277c43d7b3a7223f366d21e985c3321348cd"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_failure_cleanup_12\\terminal.json",
+          "sha256": "1150a6472016bf572aeadb8d6b6434c15ed48b18fd2dbeae1f335bfccaff1d9f"
+        }
+      ],
+      "remaining": [
+        "representative genuine numerical/source output comparison",
+        "canonical Gen2 producer setup/cold-import sequencing",
+        "full paired close/reopen on configured entry",
+        "parent_commit and remaining finalizer fault coverage",
+        "new typed Bootstrap4/Roster3 neutral science successor graph"
+      ],
+      "prior_findings_latest_fixes_unaccepted": [
+        "scoped implementation findings closed by read-only PRE_SEAL audit plus39current units; not official review or science equivalence"
+      ]
+    },
+    {
+      "requirement": "N0 Bootstrap and roster growing-history cost",
+      "status": "successor_graph_not_connected",
+      "remaining": [
+        "Bootstrap4 genuine single-N0 bounded evidence",
+        "typed and metadata-contract correspondence through roster/common",
+        "connected 3independent N0"
+      ],
+      "design_evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\typed_successor_graph_design_01.md",
+          "sha256": "53e1c3294b19c0ec4c3decc8ddbd85ab4f3a02620d88feeff2bc0b31e8275bc0"
+        }
+      ]
+    },
+    {
+      "requirement": "complete optimized workflow scientific and runtime acceptance",
+      "status": "not_achieved",
+      "remaining": [
+        "full DAG fixed call counts and valid reuse edges",
+        "bounded representative 3arm chain incl success,expensive failure,callbacks,commit,cleanup,reopen,saved replay,report",
+        "science/output/hash comparison",
+        "stage wall/RSS/storage observation and defensible whole-workflow budget",
+        "independent audit of changed observation identities"
+      ],
+      "entry_units_evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_entry_units_17\\terminal.json",
+          "sha256": "d3d723957ee62d45cadb378260060d695d08e727cf081c712b659a0975f78026"
+        }
+      ],
+      "current_short_diagnostic": {
+        "status": "terminated_at_fixed_wall_cap_before_paired_reopen",
+        "outer": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_static_paired_28",
+        "child": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_09_non_authoritative\\genesis_static_paired_28",
+        "plan": {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\static_input_bounded_full_path_plan_28.json",
+          "sha256": "f1606790f1ce03958a66d092687186dbdba2dd531db44e4291e6324095a679de"
+        },
+        "limits": {
+          "wall_seconds": 600,
+          "sampled_rss_bytes": 1073741824,
+          "storage_bytes": 134217728
+        },
+        "formal_result": false,
+        "full_optimized_acceptance": false,
+        "evidence": {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_static_paired_28\\terminal.json",
+          "sha256": "408fc5b3cf74b137558293f2852fde46d7a5c1f98b2ecdf937c7b7584ae8da9e"
+        },
+        "measured": {
+          "wall_seconds": 600.391,
+          "Rref_completed_seconds": 45.773096,
+          "Actual_completed_seconds": [
+            215.422925,
+            362.356436,
+            508.624727
+          ],
+          "handoff_constructed_seconds": 508.736941
+        },
+        "source_unchanged": true,
+        "observed_owned_processes_absent": true
+      },
+      "failed_diagnostics": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_paired_18\\terminal.json",
+          "sha256": "20f21be9d426e05449f563ccebf3d7bc03ea8e6615119cfb0b9d585e9d759329"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_static_paired_22\\terminal.json",
+          "sha256": "982f205aa540577f57fd179ae45730e617ccf8d6ab6c8a8d0dffcd640e2612c8"
+        }
+      ]
+    },
+    {
+      "requirement": "formal experiment acceptance",
+      "status": "not_achieved_no_launch",
+      "remaining": [
+        "source/predecessor scientific gates",
+        "whole-workflow performance and resource admission",
+        "sealed candidate and independent official review when authorized",
+        "separate explicit formal-run authority"
+      ],
+      "objective_scope": "tracked project gate; formal launch requires its own authority and is not authorized by optimization task"
+    }
+  ],
+  "prior_175_unit_package_current_byte_differences": [
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v5.py"
+  ],
+  "broad_unit_count_is_not_whole_workflow_acceptance": true,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "source_and_scope_notes": [
+    "legacy chain07 supplement completed; do not rerun",
+    "all statuses are draft non-authoritative; no formal authority",
+    "unattributed registry set key is preserved; old raw handle closure does not imply global registry empty",
+    "unit14 wall stop is operational budget evidence, not infeasibility",
+    "entry15 old fake target mismatch preserved; entry16 all94 tests passed but exit policy failed on leaked import hooks; entry17 restores nested test import environment and exited0"
+  ],
+  "predecessor_matrix": {
+    "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\acceptance_matrix_04.json",
+    "sha256": "f8f29ddb84cf238d44a19554780708e92d34cfc68fe8d84b5453ae5b4edb5d72"
+  },
+  "static_scientific_input_transport": {
+    "status": "draft_unit_fault_and_local_scientific_equivalence_verified",
+    "named_scientific_inputs": [
+      "scientific_development_authority.json",
+      "repair_cap_proposal.json"
+    ],
+    "scientific_input_bytes_cached": true,
+    "repair_cap_table_bytes_cached": true,
+    "raw_archive_or_source_rows_cached": false,
+    "numerical_or_saved_result_cache": false,
+    "runtime_validation_schedule": "light_on_code_hit; full_on_scientific_hit_and_lifecycle_checkpoint",
+    "evidence": [
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_27\\terminal.json",
+        "sha256": "912e4b572651fb95c10c93b1c8c804fa5e72a4586502691ceeac7d210aa6cdb7"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_09_non_authoritative\\static_input_units_27\\static_input_byte_lease_unit_evidence.json",
+        "sha256": "151a0f8977d4104b0b194eb5bb8b52bcf7927699f758a7ad696d9a3e1087735d"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_09_non_authoritative\\static_input_units_27\\tested_bytes\\static_scientific_input_read_lease_v2.py",
+        "sha256": "5c3aa3455dc8a837715b4a0f26ddb0bd1ffbfc9190d4da2eb0d24c9747909fb4"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_09_non_authoritative\\static_input_units_27\\tested_bytes\\package_manifest_v1.json",
+        "sha256": "52f9e9d2a5da87fe1cc6f8c070a1e0028c276c8e9be088c23bd6cb901088a4b1"
+      }
+    ],
+    "units": {
+      "tests": 120,
+      "skipped": 1,
+      "outer_exit": 0,
+      "outer_seconds": 21.953,
+      "source_unchanged": true,
+      "observed_owned_processes_absent": true
+    },
+    "review": "read-only PRE_SEAL named-fault audit; no current named P1 found, not official review or science chain acceptance",
+    "limitations": [
+      "dedicated non-authoritative process only",
+      "named binding/function-code/ownership fault model; no arbitrary Python memory security claim",
+      "normalizer caller execution sidecar reports minimum counts, not full per-call attribution",
+      "whole optimized graph and native science/runtime acceptance remain open"
+    ],
+    "failed_attempts": [
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_19\\terminal.json",
+        "sha256": "224ea795beb15a2faf3f7c6457d3b44442de50be6f1499262d4afdaed1269d96"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_25\\terminal.json",
+        "sha256": "37e94e8458ac6d2dc268cb39eb462e801d8c1a9da0a9013fdb6ea4d5690a3010"
+      }
+    ],
+    "closed_predecessor_regressions": [
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_20\\terminal.json",
+        "sha256": "ebfc38571009a73baccd6f61a3750c16641b1e6ddea0e3a6090b488f03444b57"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_21\\terminal.json",
+        "sha256": "abf29ec25d9706088ddf0f7d8e37fd84dc7ce5664dc42509c5115128b0a76519"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_23\\terminal.json",
+        "sha256": "d8f1e8de93f4a0dfcae73ca9e2b33cec55b6867b0da96796978fd94fc0ed65b6"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_24\\terminal.json",
+        "sha256": "0e1becad73cc4efc905a855d63cd76573d3ce544feebe3f34b800e316608cf76"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_26\\terminal.json",
+        "sha256": "189db9bbf6a9c4313202487b3663db913e3d53a4695d8d9de3a7f128ef333e26"
+      }
+    ]
+  },
+  "next_typed_substep": {
+    "status": "design_only_not_implemented",
+    "next": "Roster3 exact Bootstrap4 owner and canonical local/global N0 terminal correspondence",
+    "reusable_baseline": "genuine Bootstrap4 owner-only dispatch probe, no completed N0",
+    "completed_Bootstrap4_N0_artifact_exists": false,
+    "genuine_N0_cost_known": {
+      "synthetic_jobs": 1,
+      "native_calls": 0,
+      "builds": 4,
+      "full_hour_replays": 4,
+      "fresh_revalidations": 28,
+      "contexts": 64
+    },
+    "genuine_N0_wall_upper_bound_established": false
+  },
+  "inherited_evidence_verified_files": 28,
+  "static_repair_digest_successor": {
+    "status": "draft_unit_iteration_not_accepted",
+    "entry": "entry_revision_10_non_authoritative",
+    "observation_contract": "original pin/SHA/JSON/Fraction/digest at entry/exit oracles; per-route live borrow/dependency checks",
+    "per_call_pin_sha_digest_preserved": false,
+    "failure_timing_preserved": false,
+    "repair_identity_digest_cached": true,
+    "numerical_or_solver_or_saved_result_cache": false,
+    "current_unit_attempt": "workflow_static_digest_units_31",
+    "previous_failed_units": [
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_digest_units_29\\terminal.json",
+        "sha256": "8880b2165bab9c00eef00c5f315cc1b41472a78e5bf44d55deee144270019571"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_digest_units_30\\terminal.json",
+        "sha256": "4d7a3c1a4daf9623b236661b04b6aad9c79c4aad321b930cddab842a43938c4c"
+      }
+    ],
+    "remaining": [
+      "canonical/transitive closure proof and targeted faults",
+      "sticky borrow lifetime and frozen detached receipt tests",
+      "unique session and joint proof tests",
+      "profiled genuine digest equivalence and local overhead",
+      "read-only PRE_SEAL audit",
+      "bounded full paired/reopen diagnostic"
+    ]
+  }
+}

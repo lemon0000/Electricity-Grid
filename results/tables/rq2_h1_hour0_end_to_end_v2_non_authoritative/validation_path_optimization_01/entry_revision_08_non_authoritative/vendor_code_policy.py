@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 from types import ModuleType
 
-REPOSITORY_ALLOWLIST_SHA='6fc6243bc36330d330ae9a5b2b7f28a40698589a7ccaf4bd6c7d00e75f5db5be'
+REPOSITORY_ALLOWLIST_SHA='f97aa570ce2dcbb8e1714ac724f8dc59d2572bea94aa6ac121eeb7161bca4c9b'
 VENDOR_ROOT=Path('D:/Miniconda3/envs/compute/Lib/site-packages/pyomo')
 VENDOR_PINS={'D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\solvers\\plugins\\solvers\\GUROBI.py': '745c0712aec2e2ccbb38faa8e977df009e2e5f7b68a45cf09278cb8c51ed3da8', 'D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\solvers\\plugins\\solvers\\gurobi_direct.py': 'cef4ef2bc51d819a83ad4a3ce467fb6cbde6594b201c8ee34e9649953cf451e6', 'D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\solvers\\plugins\\solvers\\direct_solver.py': 'a89da088e10445b71ce4feb48e612aa585f6a83069f732bacac835f51526f2d5', 'D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\solvers\\plugins\\solvers\\direct_or_persistent_solver.py': '9fbf3cfd5f33d320891fc557a03d286fe66678eace0553941bd51ae25b9132a7', 'D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\opt\\results\\results_.py': '9d7b37d99bda53d5645f50a44af05adb5a9f618856fc897da5aed21239039b1a', 'D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\opt\\results\\solution.py': '20313703115e77b215b1848403142be29e0bfd8958af925ae25a2bdd9cec3097', 'D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo\\opt\\results\\solver.py': 'e45a0d14a7f5ca1b4e4ddb3c196b5dfa90abb18aba9b108040ddd5fb25898aae'}
 MODULE_PATHS={

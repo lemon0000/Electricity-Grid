@@ -1,0 +1,190 @@
+{
+  "schema": "h1_whole_workflow_acceptance_matrix_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "observed_at_utc": "2026-10-19T04:17:09.083601+00:00",
+  "root_is_sole_writer": true,
+  "objective": "finish missing experiment checks, then complete workflow bottleneck optimization",
+  "predecessor_matrix": {
+    "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\acceptance_matrix_13.json",
+    "sha256": "9548246536b8bae67f3bca570be9f6c7c558a647a6ba555fa45608406778ef41"
+  },
+  "acceptance": [
+    {
+      "requirement": "legacy chain07 body N0 to paired and reopen",
+      "status": "verified_legacy_synthetic_body",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\terminal.json",
+          "sha256": "5da14d3218d963751ef103cc06d3d63364f7559f7f5783e332dc1ab7d9c9ab5b"
+        }
+      ],
+      "scope": "1 simulated hour,3 synthetic N0 Jobs,0 native; legacy wall259910.3253707s, not optimized ETA"
+    },
+    {
+      "requirement": "independent postcheck, cleanup and complete report",
+      "status": "verified_legacy_synthetic_postcheck_and_report",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\postcheck_supplement_completion_04.json",
+          "sha256": "c580bf0131bd7e7851d619122c69b7336247aee6d4264d3a7d944694f2de1d0b"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\postcheck_supplement_preservation_04.json",
+          "sha256": "51a4e9ffa6414953c4918af952b2997c9d6a664feb84882af8adb09f3d7f0439"
+        }
+      ],
+      "remaining": []
+    },
+    {
+      "requirement": "Parent lifecycle source windows",
+      "status": "current_four_Parent_prefix_observed_then_Handoff_wall_cap",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\shared_reference_full_parent_comparison_83.json",
+          "sha256": "8fda248ffc9e41f75481dde87105d7b9dd4e75084f12ada51c21248fd94e6c7a"
+        }
+      ],
+      "scope": "four actual Parent4 owners with explicit fake N0/source/numerical/common bridge; prefix368.591s; not complete chain"
+    },
+    {
+      "requirement": "successful Handoff record-bundle and missing Actual verification",
+      "status": "Handoff6_registration_fixed_but_current_paired_Post_reopen_not_completed",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\shared_reference_full_parent_comparison_79.json",
+          "sha256": "00ad8318f6f97e7345f7e8316e7f28f8aa9812f77cd82bb98162743ef3a95e19"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\shared_reference_full_parent_comparison_83.json",
+          "sha256": "8fda248ffc9e41f75481dde87105d7b9dd4e75084f12ada51c21248fd94e6c7a"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\handoff_registry_marks_units_85\\terminal.json",
+          "sha256": "af1361c75b2e8afcad549d6b000e89e3101506b170df6fef1e543f8ac7c62f70"
+        }
+      ],
+      "remaining": [
+        "full path with added exact _OWNERS lifecycle and per-Post original guards/marks assertions",
+        "paired commit, all close, saved reopen and combined receipts on current graph"
+      ]
+    },
+    {
+      "requirement": "three-arm common witness and Genesis create/inspect/reopen reuse",
+      "status": "GenesisOp2_targeted_regression_passed_genuine_graph_open",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_successor_units_72\\terminal.json",
+          "sha256": "bd85ef89af9b75ee4309805e626f9753a4f77b46ea8156fc01e14bdfe522ef3c"
+        }
+      ],
+      "remaining": [
+        "new GenesisOp3 with exact Gen2 class and Roster3 proxy",
+        "own Common9 report/projection binding create/inspect/capture/reopen",
+        "genuine Common9/Common10 numerical comparison"
+      ]
+    },
+    {
+      "requirement": "N0 Bootstrap and roster growing-history cost",
+      "status": "Roster3_data_correspondence_cut_passed_live_positive_and_N0_producer_open",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\roster3_pre_seal_input_87.json",
+          "sha256": "c9fac01ece2e543ed570a02989fb43d99518918dd3c308b8b7287a6fa47d2ade"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\roster3_pre_seal_findings_87.json",
+          "sha256": "8e15531e85871e8a6b81374515ae26c21f6a9ce2b320a8d978125f5aaf34beac"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\fresh_n0_cap_postcheck_04_non_authoritative\\terminal.json",
+          "sha256": "31d3320fd63a5fe4205141508f35ea8616048a8022a4766509fb22c0d62e628b"
+        }
+      ],
+      "remaining": [
+        "genuine complete N0 producer receipt and oracle",
+        "live Bootstrap4/Roster3 create/attach/inspect/reopen",
+        "three independent N0 terminals and growing-history cost"
+      ]
+    },
+    {
+      "requirement": "complete optimized workflow scientific and runtime acceptance",
+      "status": "not_achieved",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\typed_successor_graph_design_02.md",
+          "sha256": "80d9e84fa998867246772f323afb52508acd99a5eb032cdbea6cb9861315766e"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\scientific_projection_pre_seal_input_88.json",
+          "sha256": "275ee78439cf2d736e7dcdcf9deb343be825c6aa62c0e6bc890c3798bbe04d6f"
+        }
+      ],
+      "remaining": [
+        "projector independent PRE_SEAL findings and genuine report positive",
+        "Common9/Common10 routes and own execution report/projection bindings",
+        "connected three-N0 through paired/close/reopen",
+        "whole workflow performance/resource review"
+      ]
+    },
+    {
+      "requirement": "formal experiment acceptance",
+      "status": "not_achieved_no_launch",
+      "scope": "formal launch and native execution not authorized or started"
+    },
+    {
+      "requirement": "reference sequence replay windows",
+      "status": "scoped_reference_helpers_verified_current_connected_Handoff_incomplete",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\shared_saved_reference_window_result_66.json",
+          "sha256": "8e4684ccfcb7c0f7aae171da8c3230998abf75cabc557885a7742cfddf343980"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\shared_reference_pre_seal_findings_80.json",
+          "sha256": "ac2c436fc964ccee80adbc72d62cbaefac028786a95a7419acbd21731e6ab2a5"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\handoff_registry_marks_units_85\\terminal.json",
+          "sha256": "af1361c75b2e8afcad549d6b000e89e3101506b170df6fef1e543f8ac7c62f70"
+        }
+      ],
+      "scope": "unit counts and saved-reference48-to2 are local evidence;726-to28 live full Handoff still unaccepted"
+    }
+  ],
+  "current_related_experiment_processes": [],
+  "complete_process_tree_absence_proven": false,
+  "current_unit_evidence": {
+    "entry82": {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_registry_entry_units_82\\terminal.json",
+      "sha256": "d55439482874919e77fad5751ef0d868819f165a9f7ccd0e5fa3d830788bbf43"
+    },
+    "registry_marks85": {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\handoff_registry_marks_units_85\\terminal.json",
+      "sha256": "af1361c75b2e8afcad549d6b000e89e3101506b170df6fef1e543f8ac7c62f70"
+    },
+    "Roster87": {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\roster3_correspondence_units_87\\terminal.json",
+      "sha256": "11363435cd9424e25409fcc66862b5854baf6310e16a2841e4c2d9b453354382"
+    },
+    "projection88": {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\scientific_projection_units_88\\terminal.json",
+      "sha256": "52cf999fa4942902ecfc1699aed6979eceff5e0580535cf4d8dfffb9ca5dbae3"
+    }
+  },
+  "entry13_status": "Historical package82 passed145 tests/1skip;83 wall cap. Current test closure and new Roster3/projector files are outside its pins; do not relaunch as a current accepted package.",
+  "next_typed_substep": "independent projector audit -> own Common9/10 active-report/projection/execution bindings -> exact-type Genesis/Handoff successor graph; avoid unchanged full-prefix reruns",
+  "performance_decisions": [
+    "Do not extend83 wall budget or rerun legacy07",
+    "Do not adopt negative whole-path read overlay12",
+    "No dynamic transport lease without ROI evidence;83 stacks primarily source/sequence/identity",
+    "Current incomplete total is not an optimized runtime estimate"
+  ],
+  "whole_workflow_performance_review_complete": false,
+  "whole_workflow_accepted": false,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "official_review": false,
+  "production_seal": false
+}

@@ -1,0 +1,38 @@
+{
+  "status": "PRE_SEAL_COMPLETION_AND_REWORK_NONAUTHORITATIVE",
+  "unit93": {
+    "cases": 145,
+    "skipped": 1,
+    "failures": 0,
+    "elapsed_seconds": 28.406000000002678,
+    "observed_processes_absent": true,
+    "source_unchanged": true
+  },
+  "review_findings": [
+    "blocking acquire can hide lock leak",
+    "zero-execution constants require observed denial counters",
+    "completion must bind final request/started/terminal/log"
+  ],
+  "changes": {
+    "test": "tests/test_h1_roster3_live_header_development_v1.py",
+    "before_sha256": "fa468f4a55b21cbee7923f87725eceb9d135e176b6bbe144c5483aaa167999f2",
+    "after_sha256": "a5140a9da7c8ecbbe434b41a7ce600b594b44e40a367063d81989a8a37d1c096",
+    "entry_package_before_sha256": "0406defecfb3e4df96d1e206324b5a1097a053f915314115d4bb631bf1ee33da",
+    "entry_package_after_sha256": "4ba5f5430fccd4008c4fe54d5e22aa849488e1f46293c0953fc3e6f62d90e5d5",
+    "source_changes": 0
+  },
+  "files_sha256": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_typed_header_entry_units_93\\request.json": "3ac56d4c244f3cd9b452f96158a03a6569d482e594ab417595dcabe553d7dfb8",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_typed_header_entry_units_93\\started.json": "f7c84cf431500d4dc8741cd5457bf1215c876e420013e383578a49095bb3d68f",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_typed_header_entry_units_93\\terminal.json": "ae20ab3837b29d29d364bd4d777f7b619640df36daaf9dfc45b3c99ccc32e40a",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_14_non_authoritative\\typed_header_entry_units_93\\request.json": "8d7b7f37df06fba869742aab53791a11a6b31e37751d865910a51770e9f9fb5e",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_14_non_authoritative\\typed_header_entry_units_93\\terminal.json": "d5bb66d564b6b58e98c139e529a0809fd99c3846d2e69275fa2bb96ace4e5629",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_14_non_authoritative\\typed_header_entry_units_93\\unittest.log": "528b0d47c844f6610121d1f90eee9689a14afba88b5d436b3cebeecd936facfb",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\run_workflow_entry_bounded_v8.py": "22248a76639a4031dac0818cffb6c88324a695c4289206ba8a4128db4d69cef3",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\typed_header_pre_denial_assertions_snapshot_93.json": "a877f8d05cd3163732379e89faed8d4454ad58b015a7495061b4c00b9db31dc2"
+  },
+  "formal_result": false,
+  "resource_admission": false,
+  "production_seal": false,
+  "official_review": false
+}

@@ -1,0 +1,259 @@
+{
+  "schema": "h1_callable_provenance_evidence_219",
+  "observed_at_utc": "2026-10-19T12:46:56.126150+00:00",
+  "scope": "Standalone draft checks only; synthetic canonical temporary modules, no real bridge activation.",
+  "cases": [
+    {
+      "label": "common_registry_provenance_units_215",
+      "terminal": {
+        "exit_code": 0,
+        "observed_owned_processes": [
+          {
+            "pid": 39496,
+            "creation_time": 1792412975.2463503
+          }
+        ],
+        "observed_owned_processes_remaining": [],
+        "observed_owned_processes_absent": true,
+        "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+        "cleanup_events": [],
+        "descendant_discovery_complete": true,
+        "complete_process_tree_absence_proven": false,
+        "storage_read_errors": [],
+        "cleanup_errors": [],
+        "final_storage_observation_complete": true,
+        "elapsed_seconds": 4.311999999990803,
+        "stop_reason": null,
+        "peak_observed_process_tree_rss": 82038784,
+        "observed_storage_bytes": 16659175,
+        "storage_observation_contract": "observed_entries_nonfollow_with_directory_rechecks",
+        "storage_path_ABA_covered": false,
+        "memory_is_sampled": true,
+        "source_unchanged": true,
+        "source_snapshot_complete": true,
+        "peak_rss_includes_monitor": true,
+        "formal_result": false,
+        "resource_admission": false,
+        "request_sha256": "5112a5fa003d4676e4bb2445d91013586c32bc7940000e532f2b1662c75d8e2b",
+        "started_sha256": "6a8300283e711581646d640d4405c38bad81176a24f07879ebb23be600f1858d",
+        "runner_sha256": "b772e867c6d36bf2602feb9c66dec19b57cbad174fb1bab3ed3a526c2ec1ae71",
+        "unit_entry_sha256": "e0a3fe55a8f0bef6f14d5112e13dade0f635b94ad6718a040b52bf71d5ee8440"
+      },
+      "pytest_cases": 16,
+      "pytest_seconds": 0.64,
+      "overall_pass": true,
+      "failed_entry_preserved": false,
+      "archive_files": [
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\common_registry_provenance_units_215\\request.json",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\215\\request.json",
+          "sha256": "5112a5fa003d4676e4bb2445d91013586c32bc7940000e532f2b1662c75d8e2b"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\common_registry_provenance_units_215\\started.json",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\215\\started.json",
+          "sha256": "6a8300283e711581646d640d4405c38bad81176a24f07879ebb23be600f1858d"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\common_registry_provenance_units_215\\terminal.json",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\215\\terminal.json",
+          "sha256": "ee737dcde948e3c8f38b002744b7ccd274d4863e48964e15d43485b888626cf1"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\common_registry_provenance_units_215\\stdout.log",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\215\\stdout.log",
+          "sha256": "0a44fcec3a8ffd5589c65a6aff4fc751020f1c8efea01d82a9b72471dbacea67"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\common_registry_provenance_units_215\\tested_bytes\\experiments\\h1_common_registry_provenance_development_v1.py",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\215\\h1_common_registry_provenance_development_v1.py",
+          "sha256": "8c18e3e398b8ef4ba3927faaad64c8cb37902a179068a159e35a695a38f125fe"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\common_registry_provenance_units_215\\tested_bytes\\tests\\test_h1_common_registry_provenance_development_v1.py",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\215\\test_h1_common_registry_provenance_development_v1.py",
+          "sha256": "8100396dc726f12faed0fa2dbc4ede9b918a723cdb506e9b34ef1a721ef7fbcb"
+        },
+        {
+          "source": "D:\\h1_common_registry_provenance_215_non_authoritative\\unit_code_read_lease_closed.json",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\215\\unit_code_read_lease_closed.json",
+          "sha256": "e0ca9e5137c36eb1275c6492df56212ba4348d65aba86b8542089540f213de94"
+        }
+      ]
+    },
+    {
+      "label": "callable_state_units_216",
+      "terminal": {
+        "exit_code": 1,
+        "observed_owned_processes": [
+          {
+            "pid": 44472,
+            "creation_time": 1792413570.2602904
+          }
+        ],
+        "observed_owned_processes_remaining": [],
+        "observed_owned_processes_absent": true,
+        "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+        "cleanup_events": [],
+        "descendant_discovery_complete": true,
+        "complete_process_tree_absence_proven": false,
+        "storage_read_errors": [
+          {
+            "path": "D:\\h1_callable_state_216_non_authoritative",
+            "error": "FileNotFoundError(2, '\u7cfb\u7edf\u627e\u4e0d\u5230\u6307\u5b9a\u7684\u6587\u4ef6\u3002')"
+          }
+        ],
+        "cleanup_errors": [
+          {
+            "path": "D:\\h1_callable_state_216_non_authoritative",
+            "error": "FileNotFoundError(2, '\u7cfb\u7edf\u627e\u4e0d\u5230\u6307\u5b9a\u7684\u6587\u4ef6\u3002')"
+          }
+        ],
+        "final_storage_observation_complete": false,
+        "elapsed_seconds": 10.125,
+        "stop_reason": "storage_read_error",
+        "peak_observed_process_tree_rss": 80498688,
+        "observed_storage_bytes": 16581138,
+        "storage_observation_contract": "observed_entries_nonfollow_with_directory_rechecks",
+        "storage_path_ABA_covered": false,
+        "memory_is_sampled": true,
+        "source_unchanged": true,
+        "source_snapshot_complete": true,
+        "peak_rss_includes_monitor": true,
+        "formal_result": false,
+        "resource_admission": false,
+        "request_sha256": "405d38659c4b8b35d90be08df3ba403fec90c0d074da03cfe8ee1fed363d2d11",
+        "started_sha256": "19a382ef819da6f8b0ccdad8fbf8e6a0d0e6cf95606ce6978468b332305be9d3",
+        "runner_sha256": "b772e867c6d36bf2602feb9c66dec19b57cbad174fb1bab3ed3a526c2ec1ae71",
+        "unit_entry_sha256": "e0a3fe55a8f0bef6f14d5112e13dade0f635b94ad6718a040b52bf71d5ee8440"
+      },
+      "pytest_cases": 10,
+      "pytest_seconds": 1.36,
+      "overall_pass": false,
+      "failed_entry_preserved": true,
+      "archive_files": [
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\callable_state_units_216\\request.json",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\216\\request.json",
+          "sha256": "405d38659c4b8b35d90be08df3ba403fec90c0d074da03cfe8ee1fed363d2d11"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\callable_state_units_216\\started.json",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\216\\started.json",
+          "sha256": "19a382ef819da6f8b0ccdad8fbf8e6a0d0e6cf95606ce6978468b332305be9d3"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\callable_state_units_216\\terminal.json",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\216\\terminal.json",
+          "sha256": "5a977b8ba9e3b48d0779d8ce5a92d6f407eedb03b72cddfd14923add9ac16095"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\callable_state_units_216\\stdout.log",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\216\\stdout.log",
+          "sha256": "e9d058d4a17c7e309100f641d0fcea46cc8dcd97cf45536f1ef191a3ebdd41a3"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\callable_state_units_216\\tested_bytes\\experiments\\h1_validation_callable_state_development_v1.py",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\216\\h1_validation_callable_state_development_v1.py",
+          "sha256": "1ad539f29de52412726c8c64e0dddd222a275354052d370565f16eeb61513687"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\callable_state_units_216\\tested_bytes\\tests\\test_h1_validation_callable_state_development_v1.py",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\216\\test_h1_validation_callable_state_development_v1.py",
+          "sha256": "a731768147ccab31f49bdaed52a1e235139b4b36445813a121c496377aebb564"
+        }
+      ]
+    },
+    {
+      "label": "callable_state_units_217",
+      "terminal": {
+        "exit_code": 0,
+        "observed_owned_processes": [
+          {
+            "pid": 10860,
+            "creation_time": 1792413916.6306503
+          }
+        ],
+        "observed_owned_processes_remaining": [],
+        "observed_owned_processes_absent": true,
+        "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+        "cleanup_events": [],
+        "descendant_discovery_complete": true,
+        "complete_process_tree_absence_proven": false,
+        "storage_read_errors": [],
+        "cleanup_errors": [],
+        "final_storage_observation_complete": true,
+        "elapsed_seconds": 5.2810000000026776,
+        "stop_reason": null,
+        "peak_observed_process_tree_rss": 80580608,
+        "observed_storage_bytes": 16637762,
+        "storage_observation_contract": "observed_entries_nonfollow_with_directory_rechecks",
+        "storage_path_ABA_covered": false,
+        "memory_is_sampled": true,
+        "source_unchanged": true,
+        "source_snapshot_complete": true,
+        "peak_rss_includes_monitor": true,
+        "formal_result": false,
+        "resource_admission": false,
+        "request_sha256": "0064189e36185ec467edd2f7b89d1713a93da943a5422794d8212034a0889ee5",
+        "started_sha256": "e0a4766223bcb9b0a9d1a8c4a196ce98c4057a3a470ce299d1a559a3ec1bdb38",
+        "runner_sha256": "b772e867c6d36bf2602feb9c66dec19b57cbad174fb1bab3ed3a526c2ec1ae71",
+        "unit_entry_sha256": "e0a3fe55a8f0bef6f14d5112e13dade0f635b94ad6718a040b52bf71d5ee8440"
+      },
+      "pytest_cases": 10,
+      "pytest_seconds": 0.57,
+      "overall_pass": true,
+      "failed_entry_preserved": false,
+      "archive_files": [
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\callable_state_units_217\\request.json",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\217\\request.json",
+          "sha256": "0064189e36185ec467edd2f7b89d1713a93da943a5422794d8212034a0889ee5"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\callable_state_units_217\\started.json",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\217\\started.json",
+          "sha256": "e0a4766223bcb9b0a9d1a8c4a196ce98c4057a3a470ce299d1a559a3ec1bdb38"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\callable_state_units_217\\terminal.json",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\217\\terminal.json",
+          "sha256": "45dcaea37966016d76ec6d41f2e62c1fa5032833cf8fbeba5c7f9690128e32cb"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\callable_state_units_217\\stdout.log",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\217\\stdout.log",
+          "sha256": "77429f5c93a8d8b5288a813ffbb63423586d51f0e80840a70c6f74726342228b"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\callable_state_units_217\\tested_bytes\\experiments\\h1_validation_callable_state_development_v1.py",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\217\\h1_validation_callable_state_development_v1.py",
+          "sha256": "1ad539f29de52412726c8c64e0dddd222a275354052d370565f16eeb61513687"
+        },
+        {
+          "source": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\callable_state_units_217\\tested_bytes\\tests\\test_h1_validation_callable_state_development_v1.py",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\217\\test_h1_validation_callable_state_development_v1.py",
+          "sha256": "83b22c1eb1892b278e31c6ace07f85579b1567ca2fad07cedc400ce61609719a"
+        },
+        {
+          "source": "D:\\h1_callable_state_217_non_authoritative\\unit_code_read_lease_closed.json",
+          "saved": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\callable_provenance_219_preserved_non_authoritative\\217\\unit_code_read_lease_closed.json",
+          "sha256": "3fbb2d849259b8509d262ddacde2ce1af96132b4eb6227ff4dfc78ab598f8577"
+        }
+      ]
+    }
+  ],
+  "source_factory_provenance_complete": false,
+  "bootstrap_integration_complete": false,
+  "common_authorized": false,
+  "new_N0_Jobs": 0,
+  "real_native_calls": 0,
+  "production_seal": false,
+  "official_review": false,
+  "full_optimized_workflow_accepted": false,
+  "whole_workflow_performance_review_complete": false,
+  "formal_execution_ready": false,
+  "formal_run_authority": false,
+  "formal_result": false,
+  "resource_admission": false
+}

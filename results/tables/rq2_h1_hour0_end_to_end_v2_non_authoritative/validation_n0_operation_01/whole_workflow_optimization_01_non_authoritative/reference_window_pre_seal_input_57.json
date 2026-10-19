@@ -1,0 +1,44 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "scope": "only final Parent4 _enter check/release failure gap plus regression of current window closure",
+  "files": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_reference_sequence_window_development_v1.py": "277bdfe8152ab7c6061bce7a3ea8aa93127f72d8761fafc3f6a1405e9e96803d",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_source_window_development_v2.py": "d79fcceccdd1932e319ffb402086c88272ecb442f67d861808c35ef58f63c94f",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_parent_controller_development_v4.py": "443d7d03e2be29081da2b94eba0b958707417aadc33bd5d4fa212a98cc6597a4",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\h1_reference_window_test_helpers_v1.py": "b8568f069842911127e544d6ecb767de0df19188149b3a0267738984d0efad17",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_selector_source_window_development_v2.py": "ac9b41de111b2c860a98860b6f30fd94e48eeddc402c5c00a21eeb9ba42079c7",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_reference_sequence_window_development_v1.py": "9bbef14627852dc17620de5644f143fd8b1c5eb7e0b1b642c7fce045428ddb9e",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_parent_guard_cleanup_development_v1.py": "58170bbd04d3c93c15d94088190fa549696e7eea5edb4182c3dc42680e8d5994",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\h1_hour0_synthetic_harness_v4.py": "7dd3abfaa695009333732e138f93ab5ed404c205595069389417c7d64626774d",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests\\test_h1_selector_parent_controller_development_v4.py": "73b18734c39f0d32766dc981f36b79ffc0fb57b8c81b9aee2c9773922b178d5b",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\reference_window_safety_units_57\\terminal.json": "77431e4739036f81bb08013e785dade30c4b75dc9b328b9dd37825cd3710c35c",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\reference_window_safety_units_57\\stdout.log": "718ec75640f285b32f8add04ad6358e362b462c9e4e41f989a89a603672ab7ba",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\parent4_lifecycle_probe_56\\terminal.json": "f70b6da408be9d52d3cae97d9814a06d504f5fd15e6e622e61ec2787bec34995",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\parent4_lifecycle_probe_56\\stdout.log": "951ced82867e257f2b37d9a983ad5a6d8976344cf1591a8fbb9db6d385ac81d2",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\reference_window_pre_seal_input_55.json": "97f143dd7f976d7c1be30b1b4f6992f300148964d46015f9b6624494619ce33d",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\reference_window_pre_seal_findings_55.json": "8db7c433f8c5b04c3bf2f8824e0704b4b0cbc116745a35493be3eb2804538c03",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\parent4_lifecycle_probe_plan_56.json": "2cea1aa5de8f6999e48d021e5b311b73fdedab8670e67261ce7f3898060e5f91"
+  },
+  "checks": {
+    "tests57": 151,
+    "pytest_seconds57": 18.49,
+    "outer_seconds57": 21.203,
+    "exit_code57": 0
+  },
+  "fix": "Parent4._enter returns exact acquired guard; entry _check failure uses captured guard and bounded helper, retains original exception; run/validate retain returned handles; 8 actual/ref times run/validate times replacement entry failures",
+  "prior_positive56": {
+    "outer_exit_code": 0,
+    "outer_seconds": 258.468,
+    "pytest_seconds": 255.96,
+    "reference_complete_seconds": 60.1214782,
+    "actual_prepared_seconds": 120.2819054,
+    "actual_complete_seconds": 227.6030612,
+    "all_closed_seconds": 247.8379623,
+    "scope": "real Parent4 wrapper/method Rref plus one Actual lifecycle, before final _enter cleanup delta; explicit synthetic source/native/in-process transport",
+    "full_four_Parent_paired_reopen": false
+  },
+  "official_verdict": null,
+  "formal_result": false,
+  "resource_admission": false,
+  "whole_workflow_accepted": false
+}

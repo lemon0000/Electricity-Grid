@@ -1,0 +1,641 @@
+{
+  "schema": "h1_whole_workflow_acceptance_matrix_v1",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "observed_at_utc": "2026-10-18T21:23:29.876911+00:00",
+  "root_is_sole_writer": true,
+  "objective": "finish missing experiment checks, then complete workflow bottleneck optimization",
+  "acceptance": [
+    {
+      "requirement": "legacy chain07 body N0 to paired and reopen",
+      "status": "verified_legacy_synthetic_body",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\terminal.json",
+          "sha256": "5da14d3218d963751ef103cc06d3d63364f7559f7f5783e332dc1ab7d9c9ab5b"
+        }
+      ],
+      "scope": "1 simulated hour,3 synthetic N0 Jobs,0 real native; wall259910.3253707s; not optimized runtime"
+    },
+    {
+      "requirement": "independent postcheck, cleanup and complete report",
+      "status": "verified_legacy_synthetic_postcheck_and_report",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\postcheck_supplement_completion_04.json",
+          "sha256": "c580bf0131bd7e7851d619122c69b7336247aee6d4264d3a7d944694f2de1d0b"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\chain_07\\postcheck_supplement_preservation_04.json",
+          "sha256": "51a4e9ffa6414953c4918af952b2997c9d6a664feb84882af8adb09f3d7f0439"
+        }
+      ],
+      "remaining": []
+    },
+    {
+      "requirement": "Parent lifecycle source windows",
+      "status": "draft_bounded_prior_smoke_passed",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\parent3_configured_smoke_01\\terminal.json",
+          "sha256": "160c6aeb9084feaf2fc47d7d1410af98aa625d48f9e43845006f37198745ec22"
+        }
+      ],
+      "remaining": [
+        "current configured entry with faulthandler disabled regression",
+        "all three Actual paths in connected chain"
+      ]
+    },
+    {
+      "requirement": "successful Handoff record-bundle and missing Actual verification",
+      "status": "draft_partial_failure_cleanup_verified_full_paired_runtime_open",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_successors_units_03\\terminal.json",
+          "sha256": "80f29bb439730cfc7467d57650d3c5cadd0f2f43e32e3939bad8eb1d24a0a1a5"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_failure_cleanup_12\\terminal.json",
+          "sha256": "1150a6472016bf572aeadb8d6b6434c15ed48b18fd2dbeae1f335bfccaff1d9f"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_three_actual_saved_replay_14\\terminal.json",
+          "sha256": "3d967d0e505b5534d08e0b80c3fd3de67744482a16d22c71320da228451d5b6e"
+        }
+      ],
+      "remaining": [
+        "current partial mixed positive and7 fault cases",
+        "mixed fresh-owner close/reopen replay",
+        "connected full paired persistence+close/reopen"
+      ],
+      "scope_note": "cleanup12 tested predecessor before final CAS delta; current CAS all39 units verified13; full3 ordinary unit14 completed Rref/3Actual then wall600 stopped before paired terminal"
+    },
+    {
+      "requirement": "three-arm common witness and Genesis create/inspect/reopen reuse",
+      "status": "draft_lifecycle_and_scoped_pre_seal_findings_closed_genuine_route_and_full_chain_open",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_operation_units_01\\terminal.json",
+          "sha256": "82cf2909160a07b3b442a5d4cb8f5cf2a2b5f023e5b5016ac97d5a1254ae51f4"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_operation_units_06\\terminal.json",
+          "sha256": "8f55ba23a274f45bf2995a3b76e72e69552e0fe42a3c5af96033d0e7b4dd9007"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_raw_cas_units_13\\terminal.json",
+          "sha256": "7ef2d5529d4f92c476c7154d0db6277c43d7b3a7223f366d21e985c3321348cd"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\genesis_failure_cleanup_12\\terminal.json",
+          "sha256": "1150a6472016bf572aeadb8d6b6434c15ed48b18fd2dbeae1f335bfccaff1d9f"
+        }
+      ],
+      "remaining": [
+        "representative genuine numerical/source output comparison",
+        "canonical Gen2 producer setup/cold-import sequencing",
+        "full paired close/reopen on configured entry",
+        "parent_commit and remaining finalizer fault coverage",
+        "new typed Bootstrap4/Roster3 neutral science successor graph"
+      ],
+      "prior_findings_latest_fixes_unaccepted": [
+        "scoped implementation findings closed by read-only PRE_SEAL audit plus39current units; not official review or science equivalence"
+      ]
+    },
+    {
+      "requirement": "N0 Bootstrap and roster growing-history cost",
+      "status": "successor_graph_not_connected",
+      "remaining": [
+        "Bootstrap4 genuine single-N0 bounded evidence",
+        "typed and metadata-contract correspondence through roster/common",
+        "connected 3independent N0"
+      ],
+      "design_evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\typed_successor_graph_design_01.md",
+          "sha256": "53e1c3294b19c0ec4c3decc8ddbd85ab4f3a02620d88feeff2bc0b31e8275bc0"
+        }
+      ]
+    },
+    {
+      "requirement": "complete optimized workflow scientific and runtime acceptance",
+      "status": "not_achieved",
+      "remaining": [
+        "connected genuine N0 and typed successor graph",
+        "reference replay successor proof and exact-version integration",
+        "complete optimized paired/close/reopen terminal and combined receipts",
+        "complete performance/resource and formal gates"
+      ],
+      "entry_units_evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_entry_units_17\\terminal.json",
+          "sha256": "d3d723957ee62d45cadb378260060d695d08e727cf081c712b659a0975f78026"
+        }
+      ],
+      "current_short_diagnostic": {
+        "status": "wall_terminated_before_paired_reopen",
+        "outer": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_distribution_paired_41",
+        "child": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\genesis_distribution_paired_41",
+        "plan": {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\distribution_bounded_full_path_plan_41.json",
+          "sha256": "04b2431fc1aa602bab684c0560b7e3577006de1aeddc1807e188c9f90de1a7b9"
+        },
+        "binding_verification": {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\distribution_binding_verification_41.json",
+          "sha256": "032dbb0e839488238e2f55fa597fa09dd63661a7dce8815cbdf8a4bc1f4c2f9d"
+        },
+        "terminal": {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_distribution_paired_41\\terminal.json",
+          "sha256": "26964f3dd633b9c5c440e2ddae0914954b2befb4354bfd1c6daaece6c62ccd18"
+        },
+        "comparison": {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\distribution_full_parent_comparison_41.json",
+          "sha256": "9effd5fb4b32725e0b9cf1fdb78e6bbfa758aecf5b653484de26d334abf7cfa5"
+        },
+        "limits": {
+          "wall_seconds": 600,
+          "sampled_rss_bytes": 1073741824,
+          "storage_bytes": 134217728
+        },
+        "source_unchanged": true,
+        "observed_owned_processes_absent": true,
+        "formal_result": false,
+        "full_optimized_acceptance": false
+      },
+      "failed_diagnostics": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_paired_18\\terminal.json",
+          "sha256": "20f21be9d426e05449f563ccebf3d7bc03ea8e6615119cfb0b9d585e9d759329"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_static_paired_22\\terminal.json",
+          "sha256": "982f205aa540577f57fd179ae45730e617ccf8d6ab6c8a8d0dffcd640e2612c8"
+        }
+      ],
+      "previous_short_diagnostic": {
+        "status": "terminated_at_fixed_wall_cap_before_paired_reopen",
+        "outer": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_static_paired_28",
+        "child": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_09_non_authoritative\\genesis_static_paired_28",
+        "plan": {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\static_input_bounded_full_path_plan_28.json",
+          "sha256": "f1606790f1ce03958a66d092687186dbdba2dd531db44e4291e6324095a679de"
+        },
+        "limits": {
+          "wall_seconds": 600,
+          "sampled_rss_bytes": 1073741824,
+          "storage_bytes": 134217728
+        },
+        "formal_result": false,
+        "full_optimized_acceptance": false,
+        "evidence": {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_static_paired_28\\terminal.json",
+          "sha256": "408fc5b3cf74b137558293f2852fde46d7a5c1f98b2ecdf937c7b7584ae8da9e"
+        },
+        "measured": {
+          "wall_seconds": 600.391,
+          "Rref_completed_seconds": 45.773096,
+          "Actual_completed_seconds": [
+            215.422925,
+            362.356436,
+            508.624727
+          ],
+          "handoff_constructed_seconds": 508.736941
+        },
+        "source_unchanged": true,
+        "observed_owned_processes_absent": true
+      },
+      "earlier_digest_diagnostic": {
+        "status": "wall_terminated_before_paired_reopen",
+        "outer": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_static_digest_paired_36",
+        "child": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_10_non_authoritative\\genesis_static_digest_paired_36",
+        "plan": {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\static_digest_bounded_full_path_plan_36.json",
+          "sha256": "5c7a1e770f2e42612480a2c3245772c979090a416a3f103f15a42a4ff0a27fca"
+        },
+        "limits": {
+          "wall_seconds": 600,
+          "sampled_rss_bytes": 1073741824,
+          "storage_bytes": 134217728
+        },
+        "formal_result": false,
+        "full_optimized_acceptance": false,
+        "terminal": {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_static_digest_paired_36\\terminal.json",
+          "sha256": "a1f6f88e510e9eb38ebe6f225689c048e985a9547a93a163166feb1cc389411d"
+        },
+        "comparison": {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\static_digest_full_parent_comparison_36.json",
+          "sha256": "a0d5a3d1993b325efaa14746b691c91f8452f6bbff8f9d1c8ee03df9c966814c"
+        },
+        "source_unchanged": true,
+        "observed_owned_processes_absent": true
+      },
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\open_overlay_full_parent_comparison_48.json",
+          "sha256": "e7560fd745c8776dcbc1ef21a3977507ff37950086b03f501089287939d1b742"
+        }
+      ]
+    },
+    {
+      "requirement": "formal experiment acceptance",
+      "status": "not_achieved_no_launch",
+      "remaining": [
+        "source/predecessor scientific gates",
+        "whole-workflow performance and resource admission",
+        "sealed candidate and independent official review when authorized",
+        "separate explicit formal-run authority"
+      ],
+      "objective_scope": "tracked project gate; formal launch requires its own authority and is not authorized by optimization task"
+    },
+    {
+      "requirement": "reference sequence replay windows",
+      "status": "draft_named_scoped_findings_covered_current151_units_prior_live_Parent4_positive_full_chain_open",
+      "evidence": [
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\reference_window_development_evidence_55.json",
+          "sha256": "035914b903dc64c61fe612db70290a9aa736ab76c2b5dd4ef9506c1c40dcecb6"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\reference_window_pre_seal_findings_57.json",
+          "sha256": "cdafafd2e4bd99b3c7118698d67a51d8aa6bc2c08a518aeb40f9a84e2c5c8d01"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\reference_window_pre_seal_input_57.json",
+          "sha256": "68b05a73b1244dd4428a624687a068166e0198e109d119882b9ff63e2743cab0"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\reference_window_safety_units_57\\terminal.json",
+          "sha256": "77431e4739036f81bb08013e785dade30c4b75dc9b328b9dd37825cd3710c35c"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\reference_window_safety_units_57\\stdout.log",
+          "sha256": "718ec75640f285b32f8add04ad6358e362b462c9e4e41f989a89a603672ab7ba"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\parent4_lifecycle_probe_56\\terminal.json",
+          "sha256": "f70b6da408be9d52d3cae97d9814a06d504f5fd15e6e622e61ec2787bec34995"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\parent4_lifecycle_probe_56\\stdout.log",
+          "sha256": "951ced82867e257f2b37d9a983ad5a6d8976344cf1591a8fbb9db6d385ac81d2"
+        },
+        {
+          "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\reference_prior_matrix_binding_verification_10.json",
+          "sha256": "c0a05622913cb3a5812559dbf81789799c3f4da9e9989d8994e0602ea23542dc"
+        }
+      ],
+      "remaining": [
+        "new shared-reference Handoff parent-validation/post-negative/Common/Genesis route successors",
+        "current exact full4-Parent/paired/close/reopen timing and combined graceful exit receipt",
+        "genuine N0/typed graph/scientific integration and remaining formal gates"
+      ],
+      "scope": "Parent4 own run/validate prototype; cached typed payload only; Actual outputs and construct remain fresh; static shared726to28 not implemented"
+    }
+  ],
+  "prior_175_unit_package_current_byte_differences": [
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_selector_phase_handoff_development_v5.py"
+  ],
+  "broad_unit_count_is_not_whole_workflow_acceptance": true,
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "source_and_scope_notes": [
+    "legacy chain07 supplement completed; do not rerun",
+    "all statuses are draft non-authoritative; no formal authority",
+    "unattributed registry set key is preserved; old raw handle closure does not imply global registry empty",
+    "unit14 wall stop is operational budget evidence, not infeasibility",
+    "entry15 old fake target mismatch preserved; entry16 all94 tests passed but exit policy failed on leaked import hooks; entry17 restores nested test import environment and exited0",
+    "entry12 local read benchmark did not translate to four-Parent speedup; attempt48 preserved and no longer running"
+  ],
+  "predecessor_matrix": {
+    "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\acceptance_matrix_08.json",
+    "sha256": "814faa29d135ad56d346a893667c81a6474c79c7387afe86176b6173b6058c41"
+  },
+  "static_scientific_input_transport": {
+    "status": "draft_unit_fault_and_local_scientific_equivalence_verified",
+    "named_scientific_inputs": [
+      "scientific_development_authority.json",
+      "repair_cap_proposal.json"
+    ],
+    "scientific_input_bytes_cached": true,
+    "repair_cap_table_bytes_cached": true,
+    "raw_archive_or_source_rows_cached": false,
+    "numerical_or_saved_result_cache": false,
+    "runtime_validation_schedule": "light_on_code_hit; full_on_scientific_hit_and_lifecycle_checkpoint",
+    "evidence": [
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_27\\terminal.json",
+        "sha256": "912e4b572651fb95c10c93b1c8c804fa5e72a4586502691ceeac7d210aa6cdb7"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_09_non_authoritative\\static_input_units_27\\static_input_byte_lease_unit_evidence.json",
+        "sha256": "151a0f8977d4104b0b194eb5bb8b52bcf7927699f758a7ad696d9a3e1087735d"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_09_non_authoritative\\static_input_units_27\\tested_bytes\\static_scientific_input_read_lease_v2.py",
+        "sha256": "5c3aa3455dc8a837715b4a0f26ddb0bd1ffbfc9190d4da2eb0d24c9747909fb4"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_09_non_authoritative\\static_input_units_27\\tested_bytes\\package_manifest_v1.json",
+        "sha256": "52f9e9d2a5da87fe1cc6f8c070a1e0028c276c8e9be088c23bd6cb901088a4b1"
+      }
+    ],
+    "units": {
+      "tests": 120,
+      "skipped": 1,
+      "outer_exit": 0,
+      "outer_seconds": 21.953,
+      "source_unchanged": true,
+      "observed_owned_processes_absent": true
+    },
+    "review": "read-only PRE_SEAL named-fault audit; no current named P1 found, not official review or science chain acceptance",
+    "limitations": [
+      "dedicated non-authoritative process only",
+      "named binding/function-code/ownership fault model; no arbitrary Python memory security claim",
+      "normalizer caller execution sidecar reports minimum counts, not full per-call attribution",
+      "whole optimized graph and native science/runtime acceptance remain open"
+    ],
+    "failed_attempts": [
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_19\\terminal.json",
+        "sha256": "224ea795beb15a2faf3f7c6457d3b44442de50be6f1499262d4afdaed1269d96"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_25\\terminal.json",
+        "sha256": "37e94e8458ac6d2dc268cb39eb462e801d8c1a9da0a9013fdb6ea4d5690a3010"
+      }
+    ],
+    "closed_predecessor_regressions": [
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_20\\terminal.json",
+        "sha256": "ebfc38571009a73baccd6f61a3750c16641b1e6ddea0e3a6090b488f03444b57"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_21\\terminal.json",
+        "sha256": "abf29ec25d9706088ddf0f7d8e37fd84dc7ce5664dc42509c5115128b0a76519"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_23\\terminal.json",
+        "sha256": "d8f1e8de93f4a0dfcae73ca9e2b33cec55b6867b0da96796978fd94fc0ed65b6"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_24\\terminal.json",
+        "sha256": "0e1becad73cc4efc905a855d63cd76573d3ce544feebe3f34b800e316608cf76"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_input_units_26\\terminal.json",
+        "sha256": "189db9bbf6a9c4313202487b3663db913e3d53a4695d8d9de3a7f128ef333e26"
+      }
+    ]
+  },
+  "next_typed_substep": {
+    "status": "design_only_not_implemented",
+    "next": "Roster3 exact Bootstrap4 owner and canonical local/global N0 terminal correspondence",
+    "reusable_baseline": "genuine Bootstrap4 owner-only dispatch probe, no completed N0",
+    "completed_Bootstrap4_N0_artifact_exists": false,
+    "genuine_N0_cost_known": {
+      "synthetic_jobs": 1,
+      "native_calls": 0,
+      "builds": 4,
+      "full_hour_replays": 4,
+      "fresh_revalidations": 28,
+      "contexts": 64
+    },
+    "genuine_N0_wall_upper_bound_established": false,
+    "persisted_Bootstrap4_local_global_terminal_present": true,
+    "local_global_terminal_is_complete_registry_receipt": false,
+    "confirmed_explicit_prepares": 2,
+    "remaining_registry_prepares": 2,
+    "registry_scope_close_and_execution_receipt_missing": true,
+    "predecessor_oracle_missing": true,
+    "partial_terminal_evidence": {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\fresh_n0_cap_postcheck_04_non_authoritative\\terminal.json",
+      "sha256": "31d3320fd63a5fe4205141508f35ea8616048a8022a4766509fb22c0d62e628b"
+    },
+    "genuine_minimal_new_scope": {
+      "synthetic_Windows_Jobs": 1,
+      "real_native_calls": 0
+    },
+    "entry10_is_direct_stable_reader_replacement": false,
+    "limitations": "04 current-byte saved local/global terminal and5/3 journal rows exist; no complete owner registry receipt/oracle acceptance. Preserve existing stable Path.open optimization in a new entry; do not nest a second read_bytes owner or reuse same attempt root."
+  },
+  "inherited_evidence_verified_files": 31,
+  "static_repair_digest_successor": {
+    "status": "draft_local_contract_verified_full_path_did_not_improve_not_adopted",
+    "entry": "entry_revision_10_non_authoritative",
+    "observation_contract": "original pin/SHA/JSON/Fraction/digest at entry/exit; each route checks exact live borrow and canonical transitive dependencies",
+    "per_call_pin_sha_digest_preserved": false,
+    "failure_timing_preserved": false,
+    "repair_identity_digest_cached": true,
+    "numerical_or_solver_or_saved_record_cache": false,
+    "units": {
+      "tests": 149,
+      "skipped": 1,
+      "failures": 0,
+      "errors": 0,
+      "outer_exit": 0,
+      "outer_seconds": 24.437,
+      "source_unchanged": true,
+      "observed_owned_processes_absent": true
+    },
+    "evidence": [
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_static_digest_units_35\\terminal.json",
+        "sha256": "2774b13df52137d06059c205beaa617134e87d879f19bb6e05d92945fe45edf2"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_10_non_authoritative\\static_digest_units_35\\terminal.json",
+        "sha256": "b02b4d3c9ac6cc40be1481123ced771bc75dbcb7b9f4dae0ad49e53a2ac70d83"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_10_non_authoritative\\static_digest_units_35\\static_repair_identity_unit_evidence.json",
+        "sha256": "916c177bda5e0cf2a2c084c828ebb37f2f76911d79c8979adbb86c37a01eda80"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_10_non_authoritative\\static_digest_units_35\\tested_bytes\\package_manifest_v1.json",
+        "sha256": "f29eb2daf8316c656f12b0d448a68a0c474007346b732e57f961ae61ef2c1157"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_10_non_authoritative\\static_digest_units_35\\tested_bytes\\static_input_capability_v1.py",
+        "sha256": "f7eff4e698059f2e2bc9efe3e37c4ec7b9841730ca96d588811ff364fba6cd4f"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_10_non_authoritative\\static_digest_units_35\\tested_bytes\\repository_code\\experiments\\h1_repair_cap_normalization_operation_development_v2.py",
+        "sha256": "13630442e3d0fbd3b87ed6168dab1adf85ea3e53a17a127e71ff01b114872059"
+      }
+    ],
+    "review": "read-only PRE_SEAL scoped named-fault closure; no remaining named P1; not official review or run authority",
+    "genuine_digest": "aa3a3d71749b47d543410f0c2e2561a735d5af9aaa549bf5dd6dfb7fd0b45a36",
+    "profile": {
+      "routed_calls": 7,
+      "borrow_views": 18,
+      "original_repair": 2,
+      "pin": 4,
+      "digest": 2
+    },
+    "microbenchmark": {
+      "calls": 200,
+      "plain_seconds": 0.23258570000325562,
+      "successor_with_all_boundaries_seconds": 0.1777700000020559,
+      "whole_workflow_speedup_established": false
+    },
+    "issuer_evidence": "closure-owned process-local immutable byte records; read-only public view; creator and once-only frozen-owner writer; canonical-copy and two nested SHA checks",
+    "remaining": [
+      "profile calls and independent oracle remain local proof only",
+      "paired/reopen requires a materially different successor",
+      "complete genuine typed source/numerical chain and budget"
+    ],
+    "full_path_comparison": {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\static_digest_full_parent_comparison_36.json",
+      "sha256": "a0d5a3d1993b325efaa14746b691c91f8452f6bbff8f9d1c8ee03df9c966814c"
+    }
+  },
+  "metadata_discovery_successor": {
+    "status": "draft_local_contract_verified_full_path_stopped_before_paired_reopen",
+    "entry": "entry_revision_11_non_authoritative",
+    "evidence": [
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_distribution_units_40\\terminal.json",
+        "sha256": "63fd6f39a8d5b541d0389a12f7f2706b466c7f7cef8ddf4f0caa8b08518bea83"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\distribution_units_40\\terminal.json",
+        "sha256": "443ad4b82c8f2ce90077055efcba50eb7cf0c0f387f3b54e198398ba5bb35cd6"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\distribution_units_40\\distribution_resolver_unit_evidence.json",
+        "sha256": "7f2c6d02acfdd32e7344daefb95f3a6d72a8e749dd318fd2a50a0fe4e8127c4c"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\distribution_units_40\\tested_bytes\\package_manifest_v1.json",
+        "sha256": "8d72c03f4b8e95c84deffe5a0281f05d6baf932aa62ac1fd6a4d46ee5f24f034"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_11_non_authoritative\\distribution_units_40\\tested_bytes\\pinned_distribution_resolver_v1.py",
+        "sha256": "dc154392771996c9fa811f759b916865adf607f32d65a84d695c9a2db60e91bb"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\distribution_pre_seal_findings_40.json",
+        "sha256": "4a3fefc2051e0ac337bbd1663731fddb5a9ab0cd3ddb91b31b3328e64035d30e"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\distribution_binding_verification_41.json",
+        "sha256": "032dbb0e839488238e2f55fa597fa09dd63661a7dce8815cbdf8a4bc1f4c2f9d"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\distribution_full_parent_comparison_41.json",
+        "sha256": "9effd5fb4b32725e0b9cf1fdb78e6bbfa758aecf5b653484de26d334abf7cfa5"
+      }
+    ],
+    "units": {
+      "total": 141,
+      "skipped": 1,
+      "failures": 0,
+      "errors": 0,
+      "outer_exit": 0,
+      "outer_wall_seconds": 25.86,
+      "source_unchanged": true,
+      "observed_owned_processes_absent": true
+    },
+    "review": "read-only scoped PRE_SEAL no remaining substantive named P1; not official verdict or run authority",
+    "microbenchmark": {
+      "calls": 2000,
+      "parse_lease_with_original_discovery_seconds": 1.533004400000209,
+      "pinned_discovery_with_entry_exit_and_outer_lease_seconds": 0.8297477999985858,
+      "includes_all_successor_boundaries": true,
+      "identical_version_values": true,
+      "scope": "local metadata path only; whole-workflow speedup unproved",
+      "formal_result": false
+    },
+    "distribution_instances_cached": false,
+    "numerical_or_solver_or_saved_record_cache": false,
+    "per_call_discovery_preserved": false,
+    "transient_discovery_ABA_covered": false,
+    "whole_path_accepted": false,
+    "failed_unit_attempt": {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_distribution_units_39\\terminal.json",
+      "sha256": "b19e4ee2d9d2f14fb2888e1d21e719d15976df8aa1bdf09fbebac67c4f40987b"
+    }
+  },
+  "bound_evidence_verified_unique_files": 59,
+  "bounded_fresh_read_overlay": {
+    "status": "draft_local_contract_and_scoped_pre_seal_closed_full_path_no_gain_not_adopted",
+    "entry": "entry_revision_12_non_authoritative",
+    "evidence": [
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_open_overlay_units_47\\terminal.json",
+        "sha256": "135354df164ba861522cd2c7dcd9f95777d4d65869268f90c37f61bfaf5836bb"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\open_overlay_units_47\\terminal.json",
+        "sha256": "a160d8892db8f8853158f054b0d3fbc027859d6549cea411f892eadb28568911"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\open_overlay_units_47\\bounded_open_overlay_unit_evidence.json",
+        "sha256": "3072b4df93837893e2dad86e525341c530e4f4facc71124127893fefdeaff197"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\open_overlay_units_47\\tested_bytes\\package_manifest_v1.json",
+        "sha256": "798c51f2aa4c372c72721971e13cba4a3848cf71e70f8f806c7f8292a7c33192"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\open_overlay_units_47\\tested_bytes\\bounded_stable_read_overlay_v1.py",
+        "sha256": "fb0f853e92e510ef6509723e29e767e0836550a58d32283508384405cc8ff882"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\open_overlay_units_47\\tested_bytes\\test_bounded_stable_read_overlay_v1.py",
+        "sha256": "6122648cf117a111c1decc0c50d534dd37c0529415fd41fbc84918aa1a0ccb2c"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\open_overlay_pre_seal_findings_47.json",
+        "sha256": "8d6aef5cd8009d4a94ec79b99fc26a59250158be86aea7dfc99361417f53a752"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\open_overlay_bounded_full_path_plan_48.json",
+        "sha256": "da22bf2d1f49303fee49cd14091dfa1290ac774739c5506600c51def83a62a3f"
+      },
+      {
+        "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\open_overlay_full_parent_comparison_48.json",
+        "sha256": "e7560fd745c8776dcbc1ef21a3977507ff37950086b03f501089287939d1b742"
+      }
+    ],
+    "units": {
+      "total": 168,
+      "skipped": 1,
+      "failures": 0,
+      "errors": 0,
+      "outer_exit": 0,
+      "outer_seconds": 25.687,
+      "source_unchanged": true,
+      "observed_owned_processes_absent": true
+    },
+    "microbenchmark": {
+      "calls": 128,
+      "original_seconds": 0.5510993999996572,
+      "overlay_with_static_reload_bind_byte_entry_exit_seconds": 0.1816391999964253,
+      "excludes_first_overlay_and_raw_import": true,
+      "identical_bytes_and_stamps": true,
+      "whole_workflow_speedup_established": false
+    },
+    "whole_path_accepted": false,
+    "formal_result": false
+  },
+  "reference_replay_successor_design": {
+    "status": "draft_lifecycle_prototype_implemented_scoped_findings_covered_shared_validation_extension_design_only",
+    "lifecycle_engine": "experiments/h1_reference_sequence_window_development_v1.py",
+    "source_window": "experiments/h1_selector_source_window_development_v2.py",
+    "parent": "experiments/h1_selector_parent_controller_development_v4.py",
+    "current_unit_tests": 151,
+    "positive_parent_lifecycle56_predates_final_entry_cleanup_delta": true,
+    "shared_validation_logical": 726,
+    "shared_validation_target_original": 28,
+    "shared_validation_implemented": false,
+    "extension_design": {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\reference_validation_window_extension_design_02.md",
+      "sha256": "ad718c021acd0656d04201c3b37fe10c212e3f21c1e3571e850bbf0a95587ef7"
+    }
+  },
+  "previous_matrix_sha256": "c75be2d6d9af422c499b7a20bbb82c2026ce9b8cf44e0004f08c25309eb6a647",
+  "current_python_experiment_processes": []
+}

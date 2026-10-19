@@ -1,0 +1,837 @@
+{
+  "schema": "h1_saved174_postcheck_result_176",
+  "status": "VERIFIED_SCOPED_SAVED_DATA_OBSERVATION",
+  "plan_sha256": "373b57d9adb8a223c329571538f6ef86500a38fd2d4fe1b74e25f2be1e4b05b1",
+  "terminal": {
+    "exit_code": 0,
+    "observed_owned_processes": [
+      {
+        "pid": 4300,
+        "creation_time": 1792405848.6468382
+      }
+    ],
+    "observed_owned_processes_remaining": [],
+    "observed_owned_processes_absent": true,
+    "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+    "cleanup_events": [],
+    "descendant_discovery_complete": true,
+    "complete_process_tree_absence_proven": false,
+    "storage_read_errors": [],
+    "cleanup_errors": [],
+    "final_storage_observation_complete": true,
+    "elapsed_seconds": 86.57800000000861,
+    "stop_reason": null,
+    "peak_observed_process_tree_rss": 316219392,
+    "observed_storage_bytes": 15893227,
+    "storage_observation_contract": "observed_entries_nonfollow_with_directory_rechecks",
+    "storage_path_ABA_covered": false,
+    "memory_is_sampled": true,
+    "source_unchanged": true,
+    "source_snapshot_complete": true,
+    "peak_rss_includes_monitor": true,
+    "formal_result": false,
+    "resource_admission": false,
+    "request_sha256": "e974914b58f478223ff66195a86ef6a76b12c368991b1f6b74e11b52281bb914",
+    "started_sha256": "c4e2b83dc14bc608133cef3dd81e28f124a971f5e0be2c07bca2d7af47feda1b",
+    "runner_sha256": "42625808bc3f49173317dec808fc7dd62bfefb7847d90abebb0907daa865d0df",
+    "unit_entry_sha256": "a6d7a301495bdee7a1a10fd106bda90c8dffd5972e2d68f3e3bf149f09907327"
+  },
+  "pytest_cases": 1,
+  "pytest_seconds": 80.01,
+  "planned_pins": 1542,
+  "pin_drift": [],
+  "producer_result_sha256": "4068fd99c0fce79a9a2c061917ca3690985fbf82a164fbb92a747d038bee177e",
+  "producer_plan_metadata_exception_sha256": "cc7902c76e5e98456cca6099f8ce2820e6085a898b9b340c757ca05ac6c56baf",
+  "producer_actual_public_return_and_close_previously_verified": true,
+  "producer_exact_planned_invocation_metadata_matched": false,
+  "producer_plan_provenance_fields_all_current": false,
+  "saved_file_names_and_bytes_unchanged": 154,
+  "scratch_enumerated": false,
+  "empty_directory_namespace_equality_proven": false,
+  "observations": {
+    "saved174_candidate_oracle_profile.json": {
+      "schema": "h1_saved174_numerical_candidate_profile_v1",
+      "local_candidate_path": "D:\\h1_bootstrap6_retained_174_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\bootstrap_non_authoritative\\00000000000000000005.json",
+      "local_candidate_sha256": "81f43c186998ad5dbf8e2b4c8a5ba2d4ea8249b83a0d177a019afa66bbc713da",
+      "controller_root": "D:\\h1_bootstrap6_retained_174_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\controller_non_authoritative",
+      "oracle_seconds": 24.76553899999999,
+      "top_cumulative": [
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_n0_verifier_development_v1.py",
+          "line": 253,
+          "function": "guarded",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 5.4e-06,
+          "cumulative_seconds": 24.7649699
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_n0_verifier_development_v1.py",
+          "line": 67,
+          "function": "prepare",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 5.5100000000000004e-05,
+          "cumulative_seconds": 24.7648972
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_n0_verifier_development_v1.py",
+          "line": 207,
+          "function": "_projection",
+          "primitive_calls": 1,
+          "calls": 1,
+          "self_seconds": 0.00016130000000000002,
+          "cumulative_seconds": 24.164832
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_n0_verifier_development_v1.py",
+          "line": 75,
+          "function": "_replay_prefix",
+          "primitive_calls": 2,
+          "calls": 2,
+          "self_seconds": 0.0005872000000000001,
+          "cumulative_seconds": 23.9284378
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_parent_prefix_development_v1.py",
+          "line": 237,
+          "function": "inspect",
+          "primitive_calls": 4,
+          "calls": 4,
+          "self_seconds": 4.3e-05,
+          "cumulative_seconds": 22.458668900000003
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_saved_source_parent_development_v1.py",
+          "line": 250,
+          "function": "inspect",
+          "primitive_calls": 4,
+          "calls": 4,
+          "self_seconds": 8.560000000000001e-05,
+          "cumulative_seconds": 22.4584748
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_bounded_file_parent_development_v1.py",
+          "line": 82,
+          "function": "_restore",
+          "primitive_calls": 4,
+          "calls": 4,
+          "self_seconds": 0.0005754,
+          "cumulative_seconds": 22.457892700000002
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_hour_witness_development_v1.py",
+          "line": 349,
+          "function": "inspect_job",
+          "primitive_calls": 8,
+          "calls": 8,
+          "self_seconds": 0.0035593,
+          "cumulative_seconds": 17.8059654
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_parent_prefix_development_v1.py",
+          "line": 179,
+          "function": "__init__",
+          "primitive_calls": 2,
+          "calls": 2,
+          "self_seconds": 0.0003912,
+          "cumulative_seconds": 16.6949149
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_hour_witness_development_v1.py",
+          "line": 316,
+          "function": "inspect_worker",
+          "primitive_calls": 8,
+          "calls": 8,
+          "self_seconds": 0.0016688,
+          "cumulative_seconds": 15.2457782
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_hour_witness_development_v1.py",
+          "line": 223,
+          "function": "inspect",
+          "primitive_calls": 8,
+          "calls": 8,
+          "self_seconds": 0.0111456,
+          "cumulative_seconds": 13.439845400000001
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_hour_witness_development_v1.py",
+          "line": 227,
+          "function": "_inspect",
+          "primitive_calls": 8,
+          "calls": 8,
+          "self_seconds": 0.040064300000000004,
+          "cumulative_seconds": 13.4274325
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_hour_development_v1.py",
+          "line": 162,
+          "function": "inspect",
+          "primitive_calls": 4,
+          "calls": 4,
+          "self_seconds": 0.00043700000000000005,
+          "cumulative_seconds": 10.063656
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_hour_development_v1.py",
+          "line": 112,
+          "function": "_replay",
+          "primitive_calls": 4,
+          "calls": 4,
+          "self_seconds": 0.0013703,
+          "cumulative_seconds": 9.961796000000001
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_n0_verifier_development_v1.py",
+          "line": 140,
+          "function": "_child",
+          "primitive_calls": 4,
+          "calls": 4,
+          "self_seconds": 0.0004731,
+          "cumulative_seconds": 9.6118787
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_hour_witness_development_v1.py",
+          "line": 415,
+          "function": "inspect_bridge",
+          "primitive_calls": 4,
+          "calls": 4,
+          "self_seconds": 0.0014715000000000002,
+          "cumulative_seconds": 9.597182700000001
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_hour_witness_development_v1.py",
+          "line": 294,
+          "function": "inspect",
+          "primitive_calls": 4,
+          "calls": 4,
+          "self_seconds": 0.0006442,
+          "cumulative_seconds": 8.985767000000001
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+          "line": 882,
+          "function": "version",
+          "primitive_calls": 6081,
+          "calls": 6081,
+          "self_seconds": 0.0243161,
+          "cumulative_seconds": 8.652735100000001
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_stage_development_v1.py",
+          "line": 121,
+          "function": "inspect",
+          "primitive_calls": 12,
+          "calls": 12,
+          "self_seconds": 0.0027331,
+          "cumulative_seconds": 7.195619300000001
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_stage_development_v1.py",
+          "line": 75,
+          "function": "_records",
+          "primitive_calls": 12,
+          "calls": 12,
+          "self_seconds": 0.004632600000000001,
+          "cumulative_seconds": 6.8872306000000005
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+          "line": 856,
+          "function": "distribution",
+          "primitive_calls": 6081,
+          "calls": 6081,
+          "self_seconds": 0.0124127,
+          "cumulative_seconds": 5.771175
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_14_non_authoritative\\pinned_distribution_resolver_v1.py",
+          "line": 257,
+          "function": "route",
+          "primitive_calls": 6081,
+          "calls": 6081,
+          "self_seconds": 0.07703850000000001,
+          "cumulative_seconds": 5.758762300000001
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\solvers\\rq2_gurobi_declared_normal.py",
+          "line": 18,
+          "function": "implementation_identity",
+          "primitive_calls": 1714,
+          "calls": 1714,
+          "self_seconds": 0.0224652,
+          "cumulative_seconds": 5.639101200000001
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuous_grid_normal.py",
+          "line": 96,
+          "function": "normal_input_identity",
+          "primitive_calls": 379,
+          "calls": 379,
+          "self_seconds": 0.0036011000000000003,
+          "cumulative_seconds": 5.2975914
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+          "line": 36,
+          "function": "read_stable",
+          "primitive_calls": 11014,
+          "calls": 11014,
+          "self_seconds": 0.1160839,
+          "cumulative_seconds": 5.1361049
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_native_science_development_v1.py",
+          "line": 429,
+          "function": "inspect",
+          "primitive_calls": 12,
+          "calls": 12,
+          "self_seconds": 0.004749000000000001,
+          "cumulative_seconds": 4.9892512
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\solvers\\rq2_objective_provenance_run_v1.py",
+          "line": 15,
+          "function": "implementation_identity",
+          "primitive_calls": 1305,
+          "calls": 1305,
+          "self_seconds": 0.036231700000000006,
+          "cumulative_seconds": 4.7510965
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuous_grid_normal.py",
+          "line": 71,
+          "function": "_dependencies",
+          "primitive_calls": 379,
+          "calls": 379,
+          "self_seconds": 0.0120993,
+          "cumulative_seconds": 4.680094700000001
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_native_science_development_v1.py",
+          "line": 25,
+          "function": "implementation_identity",
+          "primitive_calls": 373,
+          "calls": 373,
+          "self_seconds": 0.008497900000000001,
+          "cumulative_seconds": 4.4096183
+        },
+        {
+          "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+          "line": 835,
+          "function": "stat",
+          "primitive_calls": 45237,
+          "calls": 45237,
+          "self_seconds": 0.0258804,
+          "cumulative_seconds": 4.4003158
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method nt.stat>",
+          "primitive_calls": 45397,
+          "calls": 45397,
+          "self_seconds": 3.7920809,
+          "cumulative_seconds": 4.392511
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_hour_replay_v3.py",
+          "line": 29,
+          "function": "implementation_identity",
+          "primitive_calls": 920,
+          "calls": 920,
+          "self_seconds": 0.009346100000000001,
+          "cumulative_seconds": 4.0770451
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_attested_source_parent_development_v1.py",
+          "line": 18,
+          "function": "implementation_identity",
+          "primitive_calls": 384,
+          "calls": 384,
+          "self_seconds": 0.0047523,
+          "cumulative_seconds": 3.8485768
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_native_science_development_v1.py",
+          "line": 143,
+          "function": "request_key",
+          "primitive_calls": 84,
+          "calls": 84,
+          "self_seconds": 0.0015268,
+          "cumulative_seconds": 3.804205
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_replay.py",
+          "line": 39,
+          "function": "implementation_identity",
+          "primitive_calls": 920,
+          "calls": 920,
+          "self_seconds": 0.0077524000000000004,
+          "cumulative_seconds": 3.7728772000000004
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuous_grid_normal.py",
+          "line": 75,
+          "function": "<genexpr>",
+          "primitive_calls": 3032,
+          "calls": 3032,
+          "self_seconds": 0.0042564000000000005,
+          "cumulative_seconds": 3.7412768
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_short_solve.py",
+          "line": 25,
+          "function": "implementation_identity",
+          "primitive_calls": 920,
+          "calls": 920,
+          "self_seconds": 0.007845300000000001,
+          "cumulative_seconds": 3.6275645
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_hour_development_v1.py",
+          "line": 93,
+          "function": "_snapshot",
+          "primitive_calls": 68,
+          "calls": 68,
+          "self_seconds": 0.0745978,
+          "cumulative_seconds": 3.4850470000000002
+        },
+        {
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_hour_witness_development_v1.py",
+          "line": 199,
+          "function": "_context",
+          "primitive_calls": 16,
+          "calls": 16,
+          "self_seconds": 0.0356317,
+          "cumulative_seconds": 3.3223486
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.any>",
+          "primitive_calls": 86866,
+          "calls": 87034,
+          "self_seconds": 0.20553000000000002,
+          "cumulative_seconds": 3.0763407000000003
+        }
+      ],
+      "predecessor_audit_sha256": "06e231025e03596842832967512a2162271b9a25f4a84392dde0bbc93c5be7bf",
+      "numerical_candidate_equal_to_local_record": true,
+      "candidate_data_only": true,
+      "externally_retained_owner_heads_verified": false,
+      "public_bootstrap_return_verified": false,
+      "registered_N0_owner_authenticated": false,
+      "new_N0_Jobs": 0,
+      "real_native_calls": 0,
+      "full_optimized_workflow_accepted": false,
+      "profiler_enabled": true,
+      "matched_unprofiled_runtime_comparison": false,
+      "formal_result": false,
+      "resource_admission": false
+    },
+    "saved174_numerical_audit.json": {
+      "canonical_locks": [
+        "0x1.4000000000000p+4",
+        "0x1.0000000000000p+0",
+        "0x1.4000000000000p+4"
+      ],
+      "child_archive_identity": "928c3860524a7d0fac7efd0a6aad4b63811f037fd5192c3af92cab6f83031e2d",
+      "child_head": "928c3860524a7d0fac7efd0a6aad4b63811f037fd5192c3af92cab6f83031e2d",
+      "common_prefix_publication_verified": false,
+      "completed_stages": 3,
+      "controller_header_sha256": "c3f5df71eb50718614bdcc2f67bc869f50abfc4244a995c8d23098b1e821b493",
+      "controller_terminal_sha256": "1991d5b70d99aa08fae31cf008722a680b31678bec232e3848e172238a7b4f90",
+      "decision_identity": "1515773f780ef17aa85a27c0eab18eaf11a2c61c53964fbfc974bbba5b79ef85",
+      "detached_consumer_authenticated": false,
+      "formal_execution_ready": false,
+      "formal_result": false,
+      "historical_controller": {
+        "bookkeeping_labels_are_policy_inputs": false,
+        "common_prefix_publication_verified": false,
+        "complete_executable_task_inventory": false,
+        "completed_hours": 1,
+        "current_latest_obligation_verified": false,
+        "current_latest_parent_verified": false,
+        "detached_consumer_authenticated": false,
+        "episode_terminal_verified": false,
+        "evidence_identity": "50f30d54e7a27602e2395f60fc3ff0e3df598265415d37e20be059ec52315844",
+        "followup_need_authenticated": false,
+        "formal_execution_ready": false,
+        "formal_result": false,
+        "historical_job_clock_prefix_verified": true,
+        "historical_obligation_prefix_verified": true,
+        "historical_parent_prefix_verified": true,
+        "live_handoff_authenticated": false,
+        "live_parent_state_at_use_verified": false,
+        "live_release_authenticated": false,
+        "native_execution_authorized": false,
+        "paired_owner_guard_authenticated": false,
+        "parent_head": "9795f24c361968511da254a060a63474942f3093aac70bd0fd173f04701657c0",
+        "persistent_lane_owner_implemented": false,
+        "reference_or_actual_ready": false,
+        "resource_admission": false,
+        "solver_reuse_verified": false,
+        "suffix_chain_verified": false,
+        "training_UB_proven": false,
+        "worker_obligation_authenticated": false,
+        "writer_lease_authenticated": false,
+        "writer_lock_authenticated": false
+      },
+      "implementation": "894b70cd104f4478e46ceb7586d955447cac2706a0582aa947829ef7fd6edb59",
+      "native_execution_authorized": false,
+      "normal_after": {
+        "completed_hours": 1,
+        "evidence_role": "numerical_lex_candidate",
+        "network_identity": "24b8e31fb52b46cb6a65a74816df861dbf55e3c853ec167f585992ffad241f3e",
+        "units": [
+          [
+            "G1",
+            true,
+            20.0,
+            1
+          ]
+        ]
+      },
+      "normal_before": {
+        "completed_hours": 0,
+        "evidence_role": "declared_mechanism_initial",
+        "network_identity": "24b8e31fb52b46cb6a65a74816df861dbf55e3c853ec167f585992ffad241f3e",
+        "units": [
+          [
+            "G1",
+            false,
+            0.0,
+            3
+          ]
+        ]
+      },
+      "normal_input_identity": "afc1959eb5c1c360165e0f1e3d56aa14822e6c8e7e8939693d65f95d1db79749",
+      "normal_request_key": "2bbdaf6a71c98d4a08be11ef4ffa308ace30a70c1894cf40910ad4d1a759f572",
+      "packet_audit_identity": "130c5dd3dc968a1e784fb0178f7a230369009cebcab1d8b4901c82643154b057",
+      "parent_declaration": {
+        "child_protocol": "h1_timed_job_child_reference_development_v1",
+        "config_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\configs\\rq2_joint_deliverability_continuation_audit_v1.DRAFT.yaml",
+        "dc_bus": 1,
+        "declared_stage_slots": 576,
+        "hours": 192,
+        "implementation_identity": "b04f6824ad2e96a859c37769053e7f8e07f7a4f8611fa2e0ff54222eaa5b8f41",
+        "limits": {
+          "max_constraints": 500,
+          "max_stages": 3,
+          "max_variables": 100
+        },
+        "network_identity": "24b8e31fb52b46cb6a65a74816df861dbf55e3c853ec167f585992ffad241f3e",
+        "origin": {
+          "config_sha256": "0cca33dbfbd934881be3c4e375c76eb668c2ec41ff9bbc7392c2eb3947de18a5",
+          "outage_seed": 20260822,
+          "power_raw_hour": 0,
+          "split": "training",
+          "workload_raw_hour": 0
+        },
+        "parent_journal_protocol": "h1_file_parent_journal_development_v1",
+        "root": "D:\\h1_bootstrap6_retained_174_non_authoritative\\nt_non_authoritative\\episodes\\7a0d0342f8a7e04acef488419216de1285731917099deb7de83026e7b664bbb0\\controller_non_authoritative\\source_parent_non_authoritative",
+        "schema": "h1_timed_job_parent_development_v1",
+        "specification": {
+          "expected_package_version": "13.0.2",
+          "feasibility_tolerance": 1e-09,
+          "integer_feasibility_tolerance": 1e-09,
+          "mip_relative_gap": 1e-08,
+          "name": "gurobi",
+          "optimality_tolerance": 1e-09,
+          "random_seed": 0,
+          "tee": false,
+          "threads": 1,
+          "time_limit_seconds": 5.0
+        },
+        "upstream_root": "D:\\h1_bootstrap6_retained_174_non_authoritative\\test_cold_bootstrap6_retained_0\\upstream"
+      },
+      "policy_visible": false,
+      "projection_identity": "f6f40ac4d393e5c5a9207f613800d38919ebe4e2b6a757717169a97bd035f4f8",
+      "projection_payload_sha256": "a3f42612ed5fbb61f76d3c3ecfcf88ef0f05b36f93a88777e9c56f3a0a25ebea",
+      "reference_or_actual_ready": false,
+      "resource_admission": false,
+      "schema": "h1_phase_historical_controller_development_v1",
+      "source_time_basis": "naive_source_labelled_utc",
+      "source_timestamp": "2020-01-01T00:00:00"
+    }
+  },
+  "archive_files": [
+    {
+      "source": "D:\\h1_saved174_numerical_oracle_176_non_authoritative\\unit_code_read_lease_closed.json",
+      "saved": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\saved174_postcheck_176_preserved_non_authoritative\\unit_code_read_lease_closed.json",
+      "sha256": "54985b1480c278312b1139033efd4a8373a7a4d089b4c79fabe68610a0d67bfc"
+    },
+    {
+      "source": "D:\\h1_saved174_numerical_oracle_176_non_authoritative\\test_saved174_candidate_numeri0\\saved174_candidate_oracle_profile.json",
+      "saved": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\saved174_postcheck_176_preserved_non_authoritative\\saved174_candidate_oracle_profile.json",
+      "sha256": "93a7fb919996671cfea40210ac39bde4e630b5c924b2019f0f4b14190c1ef7b3"
+    },
+    {
+      "source": "D:\\h1_saved174_numerical_oracle_176_non_authoritative\\test_saved174_candidate_numeri0\\saved174_numerical_audit.json",
+      "saved": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\saved174_postcheck_176_preserved_non_authoritative\\saved174_numerical_audit.json",
+      "sha256": "06e231025e03596842832967512a2162271b9a25f4a84392dde0bbc93c5be7bf"
+    },
+    {
+      "source": "D:\\h1_saved174_numerical_oracle_176_non_authoritative\\test_saved174_candidate_numeri0\\saved174_numerical_oracle.prof",
+      "saved": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\saved174_postcheck_176_preserved_non_authoritative\\saved174_numerical_oracle.prof",
+      "sha256": "9e0a3f27aa2836c71a6a30c008978b99fc131b2ca99425571c636398037472fe"
+    }
+  ],
+  "entry_closed": {
+    "schema": "synthetic_code_read_lease_v1",
+    "file_count": 292,
+    "code_read_hits": 76145,
+    "fallback_reads": 68,
+    "held_handles": 322,
+    "source_or_result_cache": false,
+    "numerical_result_cache": false,
+    "distribution_discovery_cached": false,
+    "this_code_lease_caches_package_versions": false,
+    "formal_result": false,
+    "all_code_handles_closed": true,
+    "original_read_alias_restored": true,
+    "metadata_parse_receipt": {
+      "schema": "synthetic_metadata_parse_lease_v1",
+      "hits": 6189,
+      "misses": 272,
+      "discovery_windows": 1,
+      "files_sha256": {
+        "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo-6.10.1.dist-info\\METADATA": "6512597c6d4e24057b116d8a1d9e839a4a75e8bb9b0806bea884c4accc5ade1e",
+        "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\highspy-1.15.1.dist-info\\METADATA": "cc09b9d5bf93d8cd79be21bede4e72b686d79cdc75f6524e0e0a1af3e9487a8d",
+        "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\numpy-1.26.4.dist-info\\METADATA": "5a27a0e272b1f6e597acbbf58e8da39ae350b2318db8df4cf49d72518e62eebc",
+        "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\scipy-1.17.0.dist-info\\METADATA": "8749b8cd8e6c4944025fb8ffb8baf0f657a6f1e2f2a21a46add28feda7717d82",
+        "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pypower-5.1.19.dist-info\\METADATA": "603a312c08b1bf1a860017b0fae58c5322496d78b2027e7a95c5fb4eca43adf4",
+        "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyyaml-6.0.3.dist-info\\METADATA": "847a701020334386852b6e07bad1053cb0ce3da9ee1846e7e9d02b24e8bb3f8d",
+        "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\osqp-1.0.5.dist-info\\METADATA": "95add7e311d6dfbfb9489e207bc0ee2b8656eae4264f1525bddcbacff844caf1",
+        "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\gurobipy-13.0.2.dist-info\\METADATA": "b1cdd298b5d2bc2affe8cce657a1eaa4ee4a84dbacd23c56e90bc854b8470eb7"
+      },
+      "selected_locked_metadata_version_value_cached": true,
+      "native_version_function_unchanged": true,
+      "distribution_discovery_cached": false,
+      "sys_path_changes_fall_back": true,
+      "custom_distribution_falls_back": true,
+      "formal_result": false
+    },
+    "all_metadata_handles_closed": true,
+    "original_metadata_version_alias_restored": true,
+    "distribution_resolver_receipts": [
+      {
+        "nodeid": "tests/test_h1_saved_bootstrap6_n0_candidate_profile_development_v1.py::test_saved174_candidate_numerical_oracle_and_cost",
+        "receipt": {
+          "all_resolver_cached_paths_cleared": true,
+          "cleanup_errors": [],
+          "declared_metadata_sha256": {
+            "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\gurobipy-13.0.2.dist-info\\METADATA": "b1cdd298b5d2bc2affe8cce657a1eaa4ee4a84dbacd23c56e90bc854b8470eb7",
+            "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\highspy-1.15.1.dist-info\\METADATA": "cc09b9d5bf93d8cd79be21bede4e72b686d79cdc75f6524e0e0a1af3e9487a8d",
+            "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\numpy-1.26.4.dist-info\\METADATA": "5a27a0e272b1f6e597acbbf58e8da39ae350b2318db8df4cf49d72518e62eebc",
+            "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\osqp-1.0.5.dist-info\\METADATA": "95add7e311d6dfbfb9489e207bc0ee2b8656eae4264f1525bddcbacff844caf1",
+            "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo-6.10.1.dist-info\\METADATA": "6512597c6d4e24057b116d8a1d9e839a4a75e8bb9b0806bea884c4accc5ade1e",
+            "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pypower-5.1.19.dist-info\\METADATA": "603a312c08b1bf1a860017b0fae58c5322496d78b2027e7a95c5fb4eca43adf4",
+            "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyyaml-6.0.3.dist-info\\METADATA": "847a701020334386852b6e07bad1053cb0ce3da9ee1846e7e9d02b24e8bb3f8d",
+            "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\scipy-1.17.0.dist-info\\METADATA": "8749b8cd8e6c4944025fb8ffb8baf0f657a6f1e2f2a21a46add28feda7717d82"
+          },
+          "distribution_discovery_cached": true,
+          "distribution_instances_cached": false,
+          "failure_timing_preserved": false,
+          "fallback_calls": 0,
+          "fast_path_calls": 6081,
+          "first_failure": null,
+          "formal_result": false,
+          "fresh_PathDistribution_instances": 6081,
+          "from_name_calls": 6081,
+          "implementation": "dc154392771996c9fa811f759b916865adf607f32d65a84d695c9a2db60e91bb",
+          "import_only_finders_ignored_as_in_native_discovery": true,
+          "metadata_paths_cached": true,
+          "native_execution_authorized": false,
+          "native_version_function_unchanged": true,
+          "numerical_result_cache": false,
+          "original_alias_restored": true,
+          "original_discovery_oracles": {
+            "entry": 1,
+            "exit": 1
+          },
+          "outer_MetadataParseLease_cleanup_proven": false,
+          "owns_OS_handles": false,
+          "per_call_discovery_preserved": false,
+          "resource_admission": false,
+          "saved_record_cache": false,
+          "schema": "h1_pinned_distribution_resolver_draft_v1",
+          "selected": {
+            "PYPOWER": {
+              "identity": [
+                16204160864180129680,
+                562949954193942
+              ],
+              "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pypower-5.1.19.dist-info",
+              "sha256": "603a312c08b1bf1a860017b0fae58c5322496d78b2027e7a95c5fb4eca43adf4",
+              "version": "5.1.19"
+            },
+            "PyYAML": {
+              "identity": [
+                16204160864180129680,
+                562949954148050
+              ],
+              "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyyaml-6.0.3.dist-info",
+              "sha256": "847a701020334386852b6e07bad1053cb0ce3da9ee1846e7e9d02b24e8bb3f8d",
+              "version": "6.0.3"
+            },
+            "Pyomo": {
+              "identity": [
+                16204160864180129680,
+                562949954162484
+              ],
+              "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pyomo-6.10.1.dist-info",
+              "sha256": "6512597c6d4e24057b116d8a1d9e839a4a75e8bb9b0806bea884c4accc5ade1e",
+              "version": "6.10.1"
+            },
+            "gurobipy": {
+              "identity": [
+                16204160864180129680,
+                562949954167209
+              ],
+              "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\gurobipy-13.0.2.dist-info",
+              "sha256": "b1cdd298b5d2bc2affe8cce657a1eaa4ee4a84dbacd23c56e90bc854b8470eb7",
+              "version": "13.0.2"
+            },
+            "highspy": {
+              "identity": [
+                16204160864180129680,
+                562949954219901
+              ],
+              "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\highspy-1.15.1.dist-info",
+              "sha256": "cc09b9d5bf93d8cd79be21bede4e72b686d79cdc75f6524e0e0a1af3e9487a8d",
+              "version": "1.15.1"
+            },
+            "numpy": {
+              "identity": [
+                16204160864180129680,
+                562949954196656
+              ],
+              "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\numpy-1.26.4.dist-info",
+              "sha256": "5a27a0e272b1f6e597acbbf58e8da39ae350b2318db8df4cf49d72518e62eebc",
+              "version": "1.26.4"
+            },
+            "osqp": {
+              "identity": [
+                16204160864180129680,
+                562949954200686
+              ],
+              "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\osqp-1.0.5.dist-info",
+              "sha256": "95add7e311d6dfbfb9489e207bc0ee2b8656eae4264f1525bddcbacff844caf1",
+              "version": "1.0.5"
+            },
+            "scipy": {
+              "identity": [
+                16204160864180129680,
+                562949954207634
+              ],
+              "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\scipy-1.17.0.dist-info",
+              "sha256": "8749b8cd8e6c4944025fb8ffb8baf0f657a6f1e2f2a21a46add28feda7717d82",
+              "version": "1.17.0"
+            }
+          },
+          "solver_result_cache": false,
+          "transient_discovery_ABA_covered": false
+        },
+        "reader_error": null
+      }
+    ],
+    "discovery_context": {
+      "entry_sys_path": [
+        "D:\\CUHKSZ\\Research Project\\electricity-grid",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01",
+        "D:\\Miniconda3\\envs\\compute\\python312.zip",
+        "D:\\Miniconda3\\envs\\compute\\DLLs",
+        "D:\\Miniconda3\\envs\\compute\\Lib",
+        "D:\\Miniconda3\\envs\\compute",
+        "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages",
+        "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages\\win32",
+        "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages\\win32\\lib",
+        "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages\\Pythonwin",
+        "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages"
+      ],
+      "test_sys_path": [
+        [
+          "D:\\CUHKSZ\\Research Project\\electricity-grid",
+          "D:\\CUHKSZ\\Research Project\\electricity-grid",
+          "D:\\CUHKSZ\\Research Project\\electricity-grid",
+          "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests",
+          "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01",
+          "D:\\Miniconda3\\envs\\compute\\python312.zip",
+          "D:\\Miniconda3\\envs\\compute\\DLLs",
+          "D:\\Miniconda3\\envs\\compute\\Lib",
+          "D:\\Miniconda3\\envs\\compute",
+          "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages",
+          "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages\\win32",
+          "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages\\win32\\lib",
+          "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages\\Pythonwin",
+          "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages"
+        ]
+      ],
+      "exit_sys_path": [
+        "D:\\CUHKSZ\\Research Project\\electricity-grid",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\tests",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01",
+        "D:\\Miniconda3\\envs\\compute\\python312.zip",
+        "D:\\Miniconda3\\envs\\compute\\DLLs",
+        "D:\\Miniconda3\\envs\\compute\\Lib",
+        "D:\\Miniconda3\\envs\\compute",
+        "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages",
+        "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages\\win32",
+        "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages\\win32\\lib",
+        "C:\\Users\\Psychobabble\\AppData\\Roaming\\Python\\Python312\\site-packages\\Pythonwin",
+        "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages"
+      ]
+    },
+    "diagnostic_validation_errors": [],
+    "canonical_path_receipt": {
+      "schema": "h1_canonical_path_lease_development_v1",
+      "hits": 3449,
+      "fallback_calls": 43,
+      "directory_handles": 25,
+      "canonical_paths": 43,
+      "ancestor_write_delete_sharing": false,
+      "leaf_lstat_fresh": true,
+      "ancestor_reparse_and_case_flags_fresh": true,
+      "file_bytes_cached": false,
+      "numerical_results_cached": false,
+      "formal_result": false,
+      "formal_execution_ready": false
+    },
+    "canonical_path_alias_restored": true,
+    "all_path_handles_closed": true,
+    "canonical_path_state": "closed",
+    "canonical_paths_cleared": true,
+    "canonical_path_roots": [
+      "D:\\CUHKSZ\\Research Project\\electricity-grid",
+      "D:\\h1_saved174_numerical_oracle_176_non_authoritative",
+      "D:\\h1_bootstrap6_retained_174_non_authoritative"
+    ],
+    "entry_error": null,
+    "path_cleanup_retry": [],
+    "pending_path_handles": 0,
+    "diagnostic_state_observations": true,
+    "resource_admission": false
+  },
+  "original_numerical_oracle_verified": true,
+  "genuine_numerical_public_consumer_reopen_verified": false,
+  "independent_observation": true,
+  "independent_scientific_algorithm": false,
+  "new_N0_Jobs": 0,
+  "real_native_calls": 0,
+  "production_seal": false,
+  "official_review": false,
+  "review_receipt": false,
+  "full_optimized_workflow_accepted": false,
+  "whole_workflow_performance_review_complete": false,
+  "formal_execution_ready": false,
+  "formal_run_authority": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "native_execution_authorized": false
+}

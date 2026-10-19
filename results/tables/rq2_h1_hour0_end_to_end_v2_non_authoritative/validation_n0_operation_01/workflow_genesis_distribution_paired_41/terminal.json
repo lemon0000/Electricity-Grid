@@ -1,0 +1,34 @@
+{
+  "observed_owned_processes": [
+    {
+      "pid": 3604,
+      "creation_time": 1792351136.4398997
+    }
+  ],
+  "observed_owned_processes_remaining": [],
+  "observed_owned_processes_absent": true,
+  "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+  "cleanup_events": [
+    {
+      "pid": 3604,
+      "creation_time": 1792351136.4398997,
+      "action": "kill_owned"
+    }
+  ],
+  "descendant_discovery_complete": true,
+  "complete_process_tree_absence_proven": false,
+  "exit_code": 15,
+  "storage_read_errors": [],
+  "cleanup_errors": [],
+  "final_storage_observation_complete": true,
+  "elapsed_seconds": 600.3120000000017,
+  "stop_reason": "wall",
+  "peak_observed_process_tree_rss": 493449216,
+  "observed_storage_bytes": 28552028,
+  "memory_is_sampled": true,
+  "source_unchanged": true,
+  "source_snapshot_complete": true,
+  "peak_rss_includes_monitor": true,
+  "formal_result": false,
+  "resource_admission": false
+}

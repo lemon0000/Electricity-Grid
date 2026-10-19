@@ -1,0 +1,118 @@
+{
+  "schema": "h1_shared_phase_scope_pre_seal_input_114",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "predecessor_input_sha256": "03ece7761ee2074fdfcf97f1ea7e5c9f92b76a39ad7c41b8dfe9da73ec630feb",
+  "root_is_sole_writer": true,
+  "files_sha256": {
+    "experiments/h1_phase_manifest_validation_operation_development_v1.py": "9cc3ae17a942f62a7e1e096aa3ca8f1494e71a6f0993fa51ab5a4d8ae40898d6",
+    "experiments/h1_phase_manifest_binding_development_v3.py": "0b855b17d25bf3a366cbcc67064238ec95eae8a3ff70d85958f64ba5a5cebdd5",
+    "experiments/h1_phase_dependency_validation_operation_development_v1.py": "bc132362e44ef3bf9658cd84c08364c8454d69c7d35ab6c15b545231cda4e4a0",
+    "experiments/h1_validation_runtime_closure_development_v2.py": "bf67c76732db363f0dc7f3cb462cf28afe7be7f8114d09b0ce4ff2060619cb60",
+    "tests/test_h1_phase_manifest_validation_operation_development_v1.py": "62f6ea0827625aa66e06bd07b3a16daf68d8f988ed3ea6ba2bdbb8d862003e94",
+    "tests/test_h1_phase_manifest_segment_faults_development_v1.py": "e435211e07d7f23553d27084ce467ee81e5a88eccfd024a78a5df292640b7604",
+    "tests/test_h1_phase_dependency_window_faults_development_v1.py": "7e065bae4df3226647694d0ed4f20aa0de23f074a2ce8b5332c22d723be21866",
+    "tests/test_h1_unit_storage_observer_development_v16.py": "390c9e9765aef26f4cb48d03cee9a61790235b8cea464a17e79ebe766de8d75d",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_n0_operation_01/run_unit_bounded_v15.py": "8b6dd486c1d44a5c655ca108add45766bc1e312fbb79ac75e3337037e8a7b92c",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_n0_operation_01/run_unit_bounded_v16.py": "74e41e7d675d2dd8b7fb966f6728d2db4e0eeb2eafa0fcfe56934c8186ae6b61",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_n0_operation_01/shared_phase_scope_review_fixes_114/request.json": "30d6c14eba03502acde03d8c9575c331e1ff76567c22f3106541a9306c64c6bc",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_n0_operation_01/shared_phase_scope_review_fixes_114/started.json": "d25739eac87ed509b47e4653d377842acce49f564b738a4bb4af9a865b46d5d5",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_n0_operation_01/shared_phase_scope_review_fixes_114/terminal.json": "f682d4397ccb478961b189b07f164518b05d0b69a8bba78e29b69f029ec46b8d",
+    "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_n0_operation_01/shared_phase_scope_review_fixes_114/stdout.log": "c922de62cb2fe1fea437feb36a8976de73807e36e4155493173a1a14104e0949"
+  },
+  "acceptance": [
+    "One immutable seed can project its authenticated siblings; multiple seed groups share an identical complete dependency fingerprint.",
+    "Canonical standalone binding3 Manifest and audit bytes match shared results; this reuses the same pure science helpers and is not an independent scientific algorithm.",
+    "Exact request/config/archive types, fixed immutable kernel plan, bounded projections/checks, original creator thread, guards and private kernel are required.",
+    "Held static file inventory is disjoint from every declared dynamic namespace at entry and exit, including actual root junction rejection; no dynamic directory lease or ABA coverage is claimed.",
+    "Journal creation and writes in a disjoint root work while held static handles are active; dynamic journal/registry/N0 facts are never cached.",
+    "Source descriptors, module registry/spec/loader, helpers and class aliases are definition-bound before handle acquisition.",
+    "Body/project/read/CloseHandle/check-bound/alias failures preserve primary error; close failure retains state for retry; original captured kernel exit clears actual OS handles after method alias drift.",
+    "Abandonment reaches the kernel finalizer; failure descriptions do not retain owner tracebacks; no public clean receipt is issued after runtime retirement.",
+    "All detached/consumer-bound/canonical-freshness and authority flags remain honest; this is not a public Bootstrap/Roster/Job or complete-workflow acceptance."
+  ],
+  "independent_pre_seal_findings_only": true,
+  "fixes": [
+    {
+      "id": "112-P1-dangling-route",
+      "finding": "exists follows dangling junctions and may hide existing reparse entries",
+      "change": "Call the original non-following _plain for root and every parent; skip only FileNotFoundError with errno ENOENT",
+      "tests": "entry/exit by root/parent: four actual dangling-junction negatives"
+    },
+    {
+      "id": "112-P1-path-descriptors",
+      "finding": "Path structural descriptors were not definition-bound",
+      "change": "Pin actual MRO owner descriptors for division, parents, absolute test, anchor, parts, relative test, equality and hashing",
+      "tests": "eight independent pre-acquisition descriptor identity negatives"
+    },
+    {
+      "id": "112-P2-outer-orphan",
+      "finding": "outer abandonment with first CloseHandle failure not composed",
+      "change": "Add outer GC, one retained kernel orphan, exact one-handle bounded retry and zero actual handles test",
+      "tests": "outer owner weak reference clears; active0/pending1; retry closes exactly one and pending0"
+    }
+  ],
+  "monitor_successor": {
+    "from_version": 15,
+    "to_version": 16,
+    "diff": "--- runner15\n+++ runner16\n@@ -4,6 +4,7 @@\n import os\n from pathlib import Path\n import subprocess\n+import stat\n import sys\n import time\n import traceback\n@@ -125,12 +126,19 @@\n     for root in storage_roots:\n         try:\n             root.stat()\n-            def failed(error):failures.append(dict(path=error.filename,error=repr(error)))\n-            for directory,_,names in os.walk(root,onerror=failed,followlinks=False):\n-                for name in names:\n-                    path=Path(directory)/name\n-                    try:total+=path.stat(follow_symlinks=False).st_size\n-                    except OSError as error:failures.append(dict(path=str(path),error=repr(error)))\n+            pending=[root]\n+            while pending:\n+                directory=pending.pop()\n+                try:\n+                    with os.scandir(directory) as entries:\n+                        for entry in entries:\n+                            try:\n+                                info=entry.stat(follow_symlinks=False)\n+                                if stat.S_ISDIR(info.st_mode) and not getattr(info,'st_file_attributes',0)&0x400:\n+                                    pending.append(Path(entry.path))\n+                                else:total+=info.st_size\n+                            except OSError as error:failures.append(dict(path=entry.path,error=repr(error)))\n+                except OSError as error:failures.append(dict(path=str(directory),error=repr(error)))\n         except FileNotFoundError:continue\n         except OSError as error:failures.append(dict(path=str(root),error=repr(error)))\n     return total,failures\n@@ -214,6 +222,7 @@\n         result.update(exit_code=1, source_drift=drift)\n     result.update(elapsed_seconds=time.monotonic() - start, stop_reason=reason,\n         peak_observed_process_tree_rss=peak, observed_storage_bytes=storage,\n+        storage_observation_contract='no_follow_reparse_entries',\n         memory_is_sampled=True, source_unchanged=not drift and source_snapshot_complete,\n         source_snapshot_complete=source_snapshot_complete,\n         peak_rss_includes_monitor=True,\n",
+    "reason": "Windows os.walk follows junction directory entries despite followlinks=False; cycles/broken targets stopped111/113",
+    "policy": "Scandir and stat each entry without following; enqueue only ordinary non-reparse directories; preserve real observation failures",
+    "tests": "actual cycle/broken/external-target junctions plus nested ordinary files; visit only two owned directories; permission errors remain failures"
+  },
+  "failed_attempts_preserved": [
+    "shared_phase_scope_hardening_111",
+    "shared_phase_scope_findings_113"
+  ],
+  "terminal": {
+    "exit_code": 0,
+    "observed_owned_processes": [
+      {
+        "pid": 34536,
+        "creation_time": 1792392084.8091357
+      },
+      {
+        "pid": 6344,
+        "creation_time": 1792392115.1003752
+      }
+    ],
+    "observed_owned_processes_remaining": [],
+    "observed_owned_processes_absent": true,
+    "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+    "cleanup_events": [],
+    "descendant_discovery_complete": true,
+    "complete_process_tree_absence_proven": false,
+    "storage_read_errors": [],
+    "cleanup_errors": [],
+    "final_storage_observation_complete": true,
+    "elapsed_seconds": 32.25,
+    "stop_reason": null,
+    "peak_observed_process_tree_rss": 298270720,
+    "observed_storage_bytes": 15180307,
+    "storage_observation_contract": "no_follow_reparse_entries",
+    "memory_is_sampled": true,
+    "source_unchanged": true,
+    "source_snapshot_complete": true,
+    "peak_rss_includes_monitor": true,
+    "formal_result": false,
+    "resource_admission": false,
+    "request_sha256": "30d6c14eba03502acde03d8c9575c331e1ff76567c22f3106541a9306c64c6bc",
+    "started_sha256": "d25739eac87ed509b47e4653d377842acce49f564b738a4bb4af9a865b46d5d5",
+    "runner_sha256": "74e41e7d675d2dd8b7fb966f6728d2db4e0eeb2eafa0fcfe56934c8186ae6b61",
+    "unit_entry_sha256": "e0a3fe55a8f0bef6f14d5112e13dade0f635b94ad6718a040b52bf71d5ee8440"
+  },
+  "unit_bodies": "39 passed in 29.79s",
+  "remaining_open": [
+    "Bootstrap5/Owned5/Roster4 public integration",
+    "retain callback/Job pause and resume",
+    "fresh synthetic N0 complete oracle and close/reopen",
+    "new typed Common/Genesis/Handoff/paired/reopen graph",
+    "whole-workflow measured budget",
+    "all formal gates"
+  ],
+  "formal_result": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "official_review": false,
+  "formal_run_authorized": false
+}

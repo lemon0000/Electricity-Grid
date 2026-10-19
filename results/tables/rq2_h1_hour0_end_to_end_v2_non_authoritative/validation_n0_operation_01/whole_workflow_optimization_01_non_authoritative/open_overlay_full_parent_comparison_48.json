@@ -1,0 +1,200 @@
+{
+  "schema": "h1_bounded_four_parent_open_overlay_comparison_non_authoritative_v1",
+  "observed_at_utc": "2026-10-18T20:32:22.536243+00:00",
+  "evidence": [
+    {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_open_overlay_paired_48\\terminal.json",
+      "sha256": "d83b361f691ece56e3c45506ad220623b3622541bfcc2ea8204940916efff2f7"
+    },
+    {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\workflow_genesis_open_overlay_paired_48\\request.json",
+      "sha256": "424f6aa19635b814f6803b46b0a2bdb616f869df969a35e6355917eb56ebc3ed"
+    },
+    {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_path_optimization_01\\entry_revision_12_non_authoritative\\genesis_open_overlay_paired_48\\pytest.log",
+      "sha256": "99e1a7ce89f191309ae14c3457dfcdff5a61b415f4f48f4afa82568ed0d024eb"
+    },
+    {
+      "path": "D:\\h1_wf12_genesis_open_overlay_paired_48_non_authoritative\\test_three_actual_parents_comm0\\genesis_python_stacks.jsonl",
+      "sha256": "da80f6a1d83c42c7fafd9bbfda7879fd72d75ecdefd1ee10da77fd761c3cd84b"
+    },
+    {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\open_overlay_bounded_full_path_plan_48.json",
+      "sha256": "da22bf2d1f49303fee49cd14091dfa1290ac774739c5506600c51def83a62a3f"
+    },
+    {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\open_overlay_pre_seal_findings_47.json",
+      "sha256": "8d6aef5cd8009d4a94ec79b99fc26a59250158be86aea7dfc99361417f53a752"
+    },
+    {
+      "path": "results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\reference_sequence_window_design_01.md",
+      "sha256": "2bdcf3d270863fb52baa779ad63ced2a4ea16a27afe342198739c4869dc06f34"
+    }
+  ],
+  "terminal": {
+    "observed_owned_processes": [
+      {
+        "pid": 32708,
+        "creation_time": 1792354853.083989
+      }
+    ],
+    "observed_owned_processes_remaining": [],
+    "observed_owned_processes_absent": true,
+    "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+    "cleanup_events": [
+      {
+        "pid": 32708,
+        "creation_time": 1792354853.083989,
+        "action": "kill_owned"
+      }
+    ],
+    "descendant_discovery_complete": true,
+    "complete_process_tree_absence_proven": false,
+    "exit_code": 15,
+    "storage_read_errors": [],
+    "cleanup_errors": [],
+    "final_storage_observation_complete": true,
+    "elapsed_seconds": 600.484000000004,
+    "stop_reason": "wall",
+    "peak_observed_process_tree_rss": 496504832,
+    "observed_storage_bytes": 28711776,
+    "memory_is_sampled": true,
+    "source_unchanged": true,
+    "source_snapshot_complete": true,
+    "peak_rss_includes_monitor": true,
+    "formal_result": false,
+    "resource_admission": false
+  },
+  "stages": [
+    {
+      "stage": "reference_completed",
+      "elapsed_seconds": 53.41565840000112
+    },
+    {
+      "stage": "actual_a_snapshot_start",
+      "elapsed_seconds": 53.41584220000368
+    },
+    {
+      "stage": "actual_a_construct_start",
+      "elapsed_seconds": 58.31673550000414
+    },
+    {
+      "stage": "actual_a_run_start",
+      "elapsed_seconds": 92.81828910000331
+    },
+    {
+      "stage": "actual_a_completed",
+      "elapsed_seconds": 223.94143520000216
+    },
+    {
+      "stage": "actual_b_snapshot_start",
+      "elapsed_seconds": 223.9415347000031
+    },
+    {
+      "stage": "actual_b_construct_start",
+      "elapsed_seconds": 227.8293068999992
+    },
+    {
+      "stage": "actual_b_run_start",
+      "elapsed_seconds": 258.42407169999933
+    },
+    {
+      "stage": "actual_b_completed",
+      "elapsed_seconds": 387.8000308000046
+    },
+    {
+      "stage": "actual_c_snapshot_start",
+      "elapsed_seconds": 387.80010450000555
+    },
+    {
+      "stage": "actual_c_construct_start",
+      "elapsed_seconds": 391.5807350000032
+    },
+    {
+      "stage": "actual_c_run_start",
+      "elapsed_seconds": 422.1278900000034
+    },
+    {
+      "stage": "actual_c_completed",
+      "elapsed_seconds": 550.5278854999997
+    },
+    {
+      "stage": "handoff_construct_start",
+      "elapsed_seconds": 550.5279284999997
+    },
+    {
+      "stage": "handoff_constructed",
+      "elapsed_seconds": 550.6431599999996
+    }
+  ],
+  "prefix_comparison": [
+    {
+      "stage": "reference_completed",
+      "entry11_seconds": 46.41028179999921,
+      "entry12_seconds": 53.41565840000112,
+      "difference_seconds": 7.0053766000019095
+    },
+    {
+      "stage": "actual_a_completed",
+      "entry11_seconds": 200.72423310000158,
+      "entry12_seconds": 223.94143520000216,
+      "difference_seconds": 23.217202100000577
+    },
+    {
+      "stage": "actual_b_completed",
+      "entry11_seconds": 349.7541201000022,
+      "entry12_seconds": 387.8000308000046,
+      "difference_seconds": 38.04591070000242
+    },
+    {
+      "stage": "actual_c_completed",
+      "entry11_seconds": 498.55391670000245,
+      "entry12_seconds": 550.5278854999997,
+      "difference_seconds": 51.97396879999724
+    },
+    {
+      "stage": "handoff_constructed",
+      "entry11_seconds": 498.6919400000006,
+      "entry12_seconds": 550.6431599999996,
+      "difference_seconds": 51.95121999999901
+    }
+  ],
+  "stack_samples": 19,
+  "top_frames": [
+    {
+      "file": "h1_outage_registry_development_v1.py",
+      "function": "_pin",
+      "samples": 13
+    },
+    {
+      "file": "pathlib.py",
+      "function": "stat",
+      "samples": 3
+    },
+    {
+      "file": "bounded_stable_read_overlay_v1.py",
+      "function": "__exit__",
+      "samples": 1
+    },
+    {
+      "file": "h1_raw_ingress_development_v1.py",
+      "function": "digest",
+      "samples": 1
+    },
+    {
+      "file": "pathlib.py",
+      "function": "open",
+      "samples": 1
+    }
+  ],
+  "reference_sequence_inspection_samples": 13,
+  "stack_counts_are_not_wall_shares": true,
+  "paired_reopen_terminal_obtained": false,
+  "graceful_combined_lease_close_receipt_obtained": false,
+  "whole_workflow_speedup_established": false,
+  "status": "fixed_wall_terminated_after_three_Actuals_before_paired_reopen_terminal",
+  "conclusion": "entry12 prefix to Handoff is about52s slower than entry11; do not adopt as whole-workflow speed optimization; local byte/fault proof retained",
+  "next": "prototype versioned reference-window reuse only in already-held Actual run/validate scopes; construction and Actual output observations stay fresh",
+  "formal_result": false,
+  "resource_admission": false
+}

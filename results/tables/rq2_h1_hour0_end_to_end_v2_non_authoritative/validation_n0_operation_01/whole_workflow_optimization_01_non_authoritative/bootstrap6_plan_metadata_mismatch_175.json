@@ -1,0 +1,65 @@
+{
+  "schema": "h1_bootstrap6_plan_metadata_mismatch_175",
+  "status": "NONAUTHORITATIVE_ACTUAL_INVOCATION_EXCEPTION_RECORD",
+  "at_utc": "2026-10-19T10:28:25.310823+00:00",
+  "plan_sha256": "64e1479cde9516179690b280b4b113bd159be70093943fbb12bb24e2ce85c3f6",
+  "result_sha256": "4068fd99c0fce79a9a2c061917ca3690985fbf82a164fbb92a747d038bee177e",
+  "source": "Independent reviewer174 finding and sole-writer verification; preserve both original files.",
+  "mismatches": [
+    {
+      "field": "invocation.module",
+      "declared": "experiments.h1_bootstrap_integration_development_v5",
+      "actual": "experiments.h1_bootstrap_integration_development_v6"
+    },
+    {
+      "field": "current_header_result_sha256",
+      "declared": "063c23cca738183a6096f4c3d1e922fde363643c5690b1cac9ed0582eac260ae",
+      "declared_reference": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_hour0_end_to_end_v2_non_authoritative\\validation_n0_operation_01\\whole_workflow_optimization_01_non_authoritative\\roster4_header_probe_result_136.json",
+      "declared_reference_graph": "Bootstrap5/Roster4",
+      "actual_current_header_sha256": "860cc7c310427c36b7c31ffc43f1b1fa85a1b1c4b9db4b4ccc6e33728346aed6",
+      "actual_current_header_graph": "Bootstrap6"
+    }
+  ],
+  "exact_planned_invocation_metadata_matched": false,
+  "all_plan_provenance_fields_current": false,
+  "actual_invocation": {
+    "public_call": "BootstrapOwner.bootstrap",
+    "kwargs": {
+      "registered_development": true
+    },
+    "bootstrap_module": "experiments.h1_bootstrap_integration_development_v6",
+    "pytest_nodeid": "tests/test_h1_registry_validation_retained_n0_development_v4.py::test_cold_bootstrap6_retained_n0_registration_and_close",
+    "entry_argv": [
+      "results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/validation_n0_operation_01/run_unit_entry_v6.py",
+      "-s",
+      "-p",
+      "no:faulthandler",
+      "--basetemp",
+      "D:/h1_bootstrap6_retained_174_non_authoritative",
+      "--junitxml",
+      "D:/h1_bootstrap6_retained_174_non_authoritative/registered_development_true.xml",
+      "-o",
+      "junit_family=legacy",
+      "tests/test_h1_registry_validation_retained_n0_development_v4.py::test_cold_bootstrap6_retained_n0_registration_and_close"
+    ],
+    "diagnostic": true,
+    "formal_result": false,
+    "resource_admission": false
+  },
+  "actual_JUnit_module": "experiments.h1_bootstrap_integration_development_v6",
+  "actual_JUnit_registered_development": "True",
+  "actual_source_command_and_public_return_verified": true,
+  "actual_public_Bootstrap6_return_and_close_verified": true,
+  "plan_pin_bytes_unchanged": true,
+  "resource_budget_command_matched": true,
+  "original_plan_and_result_preserved": true,
+  "resolution": "Record stale inherited metadata separately. Reuse actual saved current-version data for numerical/reopen checks; no Job rerun and no retrospective rewrite of the launch plan.",
+  "future_plan_rule": "Build explicit current invocation and header references; do not carry scalar module/header fields from an old plan.",
+  "formal_run_authority": false,
+  "production_seal": false,
+  "official_review": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "full_optimized_workflow_accepted": false,
+  "whole_workflow_performance_review_complete": false
+}

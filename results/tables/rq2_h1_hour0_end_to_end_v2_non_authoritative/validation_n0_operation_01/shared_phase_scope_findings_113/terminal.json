@@ -1,0 +1,64 @@
+{
+  "observed_owned_processes": [
+    {
+      "pid": 4940,
+      "creation_time": 1792391956.6381679
+    },
+    {
+      "pid": 27036,
+      "creation_time": 1792391985.1593597
+    }
+  ],
+  "observed_owned_processes_remaining": [],
+  "observed_owned_processes_absent": true,
+  "process_cleanup_scope": "PID plus creation time; repeated observed-descendant discovery",
+  "cleanup_events": [
+    {
+      "pid": 4940,
+      "creation_time": 1792391956.6381679,
+      "action": "kill_owned"
+    }
+  ],
+  "descendant_discovery_complete": true,
+  "complete_process_tree_absence_proven": false,
+  "exit_code": 1,
+  "storage_read_errors": [
+    {
+      "path": "D:\\h1_shared_phase_scope_113_non_authoritative\\test_dangling_root_or_parent_j0\\dangling_alias_non_authoritative",
+      "error": "FileNotFoundError(2, '\u7cfb\u7edf\u627e\u4e0d\u5230\u6307\u5b9a\u7684\u8def\u5f84\u3002')"
+    },
+    {
+      "path": "D:\\h1_shared_phase_scope_113_non_authoritative\\test_dangling_root_or_parent_j1\\dangling_alias_non_authoritative",
+      "error": "FileNotFoundError(2, '\u7cfb\u7edf\u627e\u4e0d\u5230\u6307\u5b9a\u7684\u8def\u5f84\u3002')"
+    }
+  ],
+  "cleanup_errors": [
+    {
+      "path": "D:\\h1_shared_phase_scope_113_non_authoritative\\test_dangling_root_or_parent_j0\\dangling_alias_non_authoritative",
+      "error": "FileNotFoundError(2, '\u7cfb\u7edf\u627e\u4e0d\u5230\u6307\u5b9a\u7684\u8def\u5f84\u3002')"
+    },
+    {
+      "path": "D:\\h1_shared_phase_scope_113_non_authoritative\\test_dangling_root_or_parent_j0\\dangling_alias_non_authoritative",
+      "error": "FileNotFoundError(2, '\u7cfb\u7edf\u627e\u4e0d\u5230\u6307\u5b9a\u7684\u8def\u5f84\u3002')"
+    },
+    {
+      "path": "D:\\h1_shared_phase_scope_113_non_authoritative\\test_dangling_root_or_parent_j1\\dangling_alias_non_authoritative",
+      "error": "FileNotFoundError(2, '\u7cfb\u7edf\u627e\u4e0d\u5230\u6307\u5b9a\u7684\u8def\u5f84\u3002')"
+    }
+  ],
+  "final_storage_observation_complete": false,
+  "elapsed_seconds": 30.312999999994645,
+  "stop_reason": "storage_read_error",
+  "peak_observed_process_tree_rss": 306356224,
+  "observed_storage_bytes": 15107235,
+  "memory_is_sampled": true,
+  "source_unchanged": true,
+  "source_snapshot_complete": true,
+  "peak_rss_includes_monitor": true,
+  "formal_result": false,
+  "resource_admission": false,
+  "request_sha256": "b98028ecfe7c510578101b4c9410326671b495b723e136e4b8983939a3130538",
+  "started_sha256": "a62e4396b109b96aa1c9f935b2cfd2fff2dd03c5ad5eb6b2bd8d5e1b108f239d",
+  "runner_sha256": "8b6dd486c1d44a5c655ca108add45766bc1e312fbb79ac75e3337037e8a7b92c",
+  "unit_entry_sha256": "e0a3fe55a8f0bef6f14d5112e13dade0f635b94ad6718a040b52bf71d5ee8440"
+}

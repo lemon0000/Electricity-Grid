@@ -39,7 +39,7 @@ def load(file,name,patch,dependencies=None):
 
 
 @pytest.fixture
-def harness(context,sequence_factory,monkeypatch,tmp_path):
+def harness(context,sequence_factory,monkeypatch,tmp_path,prepare_only=False):
     w=canonical.worker;timed=w.sequence.timed
     sequence_factory(producer.fixtures.R);reference_run=timed._run_stage
     sequence_factory(producer.fixtures.A);actual_run=timed._run_stage
@@ -100,16 +100,18 @@ def harness(context,sequence_factory,monkeypatch,tmp_path):
         probe('job_return')
         return out
     proxy.run_job=run_job
-    prep=load(canonical.preparation.__file__,'selector_parent_preparation_test_alias',monkeypatch)
     original_uuid=uuid.uuid4
     monkeypatch.setattr(uuid,'uuid4',lambda:SimpleNamespace(hex=faults['nonce']) if 'nonce' in faults else original_uuid())
-    module=load(canonical.__file__,'selector_parent_controller_test_alias',monkeypatch,dict(
-        h1_selector_launch_preparation_development_v2=prep,h1_selector_job_lifecycle_development_v2=proxy))
     options=dict(max_timing_archive_bytes=2**28,scratch_bytes=8*1024**2,parent_extra_commit_bytes=64*1024**2,
         commit_reserve_bytes=32*1024**2,disk_reserve_bytes=32*1024**2)
-    raw=reference(context)
-    return SimpleNamespace(module=module,context=context,raw=raw,options=options,root=tmp_path/'parent_non_authoritative',
-        calls=calls,faults=faults,proxy=proxy,writes=writes)
+    def finish(context):
+        prep=load(canonical.preparation.__file__,'selector_parent_preparation_test_alias',monkeypatch)
+        module=load(canonical.__file__,'selector_parent_controller_test_alias',monkeypatch,dict(
+            h1_selector_launch_preparation_development_v2=prep,h1_selector_job_lifecycle_development_v2=proxy))
+        raw=reference(context)
+        return SimpleNamespace(module=module,context=context,raw=raw,options=options,root=tmp_path/'parent_non_authoritative',
+            calls=calls,faults=faults,proxy=proxy,writes=writes)
+    return finish if prepare_only else finish(context)
 
 
 

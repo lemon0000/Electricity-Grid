@@ -18,7 +18,9 @@ def factory(tmp_path,monkeypatch,no_solver):
     physical=m.selection.physical.implementation_identity()
     monkeypatch.setattr(m.selection.physical,'implementation_identity',lambda:physical)
     monkeypatch.setattr(m.selection,'implementation_identity',lru_cache(None)(m.selection.implementation_identity))
+    original_identities={}
     for module in (m.legacy.stage,m.legacy.bridge,m.legacy.configuration_api,m.timed.capture.legacy,m.legacy,m.timed,m.timed.capture):
+        original_identities[module]=module.implementation_identity
         pin=module.implementation_identity()
         monkeypatch.setattr(module,'implementation_identity',lambda pin=pin:pin)
     real=m.timed._run_stage;calls=[]
@@ -68,6 +70,7 @@ def factory(tmp_path,monkeypatch,no_solver):
         monkeypatch.setattr(m.timed,'_run_stage',run)
         kw=dict(max_archive_bytes=2**30,max_timing_archive_bytes=2**28,run_configuration=config,**args)
         return root,side,(f,d,b),kw,calls
+    build.original_identity_functions=original_identities
     return build
 
 

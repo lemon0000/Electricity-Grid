@@ -66,7 +66,7 @@ def initialize():
             stock_metadata_finder_unchanged=True,
             repository_code_manifest_sha256=sha256(sources['code_allowlist_v3.json']).hexdigest(),
             vendor_code_manifest_sha256=sha256(sources['vendor_code_allowlist_v1.json']).hexdigest(),
-            repository_code_files=244,vendor_code_files=7,code_lease_files=251,
+            repository_code_files=249,vendor_code_files=7,code_lease_files=256,
             code_lease_root='D:/',vendor_origin_manifest=sources['vendor_code_allowlist_v1.json'].decode() ),
         imported_candidate_bytes='compiled from verified tested_bytes, no pyc import',
         pycache_prefix=str(prefix),pycache_prefix_initially_empty=not any(prefix.iterdir()),
@@ -81,8 +81,8 @@ def initialize():
     vendor_policy=load_module('performance.vendor_code_policy','vendor_code_policy.py')
     vendor_policy.assert_unloaded(sys.modules)
     vendor_expected=vendor_policy.vendor_files(sources['code_allowlist_v3.json'],sources['vendor_code_allowlist_v1.json'])
-    if len(expected)!=244 or len(vendor_expected)!=7 or expected.keys()&vendor_expected.keys():
-        raise ValueError('244 repository plus seven disjoint vendor code files required')
+    if len(expected)!=249 or len(vendor_expected)!=7 or expected.keys()&vendor_expected.keys():
+        raise ValueError('249 repository plus seven disjoint vendor code files required')
     for path,pin in expected.items():
         raw=path.read_bytes()
         if sha256(raw).hexdigest()!=pin:raise ValueError('repository source pin differs: '+str(path))
@@ -126,7 +126,7 @@ def lease_context(stack):
     if mode=='parse_path':
         CanonicalPathLease=load_module('experiments.h1_canonical_path_lease_development_v1','canonical_path_lease.py').CanonicalPathLease
         from src.rq2_joint_deliverability_boundary_v1 import episode_store
-        path_lease=stack.enter_context(CanonicalPathLease(episode_store,[REPO]))
+        path_lease=stack.enter_context(CanonicalPathLease(episode_store,[REPO,Path('D:/h1_wf08_'+label+'_non_authoritative')]))
     parsed=stack.enter_context(MetadataParseLease(metadata_expected)) if mode in ('parse','parse_path') else None
     from experiments import h1_origin_grid_step_development_v1 as physical
     from experiments import h1_repair_cap_normalization_operation_development_v1 as normalization
@@ -147,7 +147,7 @@ def receipts(code,parsed,name='',nodeid=None):
     if code:
         receipt=code.receipt()
         if receipt['files_sha256']!={str(path):pin for path,pin in expected.items()}:
-            raise ValueError('exact 251-file code lease receipt required')
+            raise ValueError('exact 256-file code lease receipt required')
         receipt['vendor_module_origins']=vendor_policy.origins(sys.modules,required=kind in ('arm','phase'))
         save(name+'lease_receipt.json',dict(receipt,test_nodeid=nodeid))
     if parsed:save(name+'metadata_receipt.json',dict(parsed.receipt(),test_nodeid=nodeid))
@@ -216,7 +216,7 @@ def unit_tests():
 
 
 def pytest_tests():
-    allowed=('tests/test_h1_selector_parent_controller_development_v3.py::test_actual_lifecycle_clears_each_external_boundary_and_binds_plain_receipts', 'tests/test_h1_selector_parent_controller_development_v3.py', 'tests/test_h1_selector_source_window_development_v1.py', 'tests/test_h1_selector_parent_validation_operation_development_v3.py', 'tests/test_h1_selector_post_negative_validation_development_v2.py', 'tests/test_h1_common_validation_operation_development_v3.py', 'tests/test_h1_selector_phase_handoff_development_v5.py', 'tests/test_h1_repair_cap_normalization_operation_development_v1.py')
+    allowed=('tests/test_h1_selector_parent_controller_development_v3.py::test_actual_lifecycle_clears_each_external_boundary_and_binds_plain_receipts', 'tests/test_h1_selector_parent_controller_development_v3.py', 'tests/test_h1_selector_source_window_development_v1.py', 'tests/test_h1_selector_parent_validation_operation_development_v3.py', 'tests/test_h1_selector_post_negative_validation_development_v2.py', 'tests/test_h1_common_validation_operation_development_v3.py', 'tests/test_h1_selector_phase_handoff_development_v5.py', 'tests/test_h1_repair_cap_normalization_operation_development_v1.py', 'tests/test_h1_common_genesis_validation_operation_development_v1.py', 'tests/test_h1_genesis_consumer_operation_development_v1.py', 'tests/test_h1_genesis_consumer_operation_development_v1.py::test_three_actual_parents_commit_close_and_reopen_saved_phase')
     if not targets or any(t not in allowed for t in targets):
         raise ValueError('explicit zero-native synthetic test allowlist required')
     basetemp=Path('D:/h1_wf08_'+label+'_non_authoritative')
