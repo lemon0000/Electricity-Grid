@@ -1,0 +1,168 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "attempt": "connected_01",
+  "terminal": {
+    "exit_code": 0,
+    "reason": null,
+    "outer_seconds": 509.51600000000326,
+    "peak_sampled_tree_rss_bytes": 397242368,
+    "peak_logical_bytes": 21538126,
+    "observed_cpu_seconds": 540.9375,
+    "max_observed_handles": {
+      "46700": 763,
+      "21176": 95,
+      "40564": 325,
+      "18332": 98,
+      "47320": 323,
+      "468": 98
+    },
+    "source_unchanged": true,
+    "observed_processes": {
+      "46700": 1792469695.494829,
+      "21176": 1792469695.5148218,
+      "40564": 1792469759.8638875,
+      "18332": 1792469760.2360306,
+      "47320": 1792469937.2982783,
+      "468": 1792469939.390324
+    },
+    "observed_processes_remaining": [],
+    "observed_processes_absent": true,
+    "complete_process_tree_absence_proven": false,
+    "cleanup_events": [],
+    "monitor_errors": [],
+    "retained_root": "D:\\h1_batch_connected_01_non_authoritative",
+    "all_artifacts_retained": true,
+    "formal_result": false
+  },
+  "bindings": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_batch_v2_non_authoritative\\postcheck_connected_v1.py": "a0a6b98520b323d3935f702bbea3a07a586984e71ceb13875393a22bed3deeb3",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_batch_v2_non_authoritative\\connected_01\\request.json": "aa7550fc9c423c32d3cb369a922e9e3a8ea2cc30b2166e7ddec4e58d99450e9f",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_batch_v2_non_authoritative\\connected_01\\terminal.json": "99eed7afbdc69d8fefdbd5ff1392dc77ee539400de3656ffb3ab364d87e575b8",
+    "D:\\h1_batch_connected_01_non_authoritative\\test_two_hour_three_lane_batch0\\cross_hour_result.json": "a7d933225e94cfe70130bf6f30bcbd7b65bb7d8264decb302838a594c1906157",
+    "D:\\h1_batch_connected_01_non_authoritative\\test_two_hour_three_lane_batch0\\owner_non_authoritative\\owner.sqlite": "bcdb8bcba7fc7990a94850714913981429c2ae083480e866df9a593e992f2d2f",
+    "D:\\h1_cross_connected_06_non_authoritative\\test_two_hour_three_lane_conne0\\owner_non_authoritative\\owner.sqlite": "4aa3f58a719474d89ed1164212ebb7d4d73545253707772d478db1d83fe9cd9d",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_batch_v2_non_authoritative\\units_02\\junit.xml": "550a2f42fab701daa4fb3baa4ae9fa9838bad8257ad245c1891998727d1a3646",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_batch_v2_non_authoritative\\units_03\\junit.xml": "cde97ff7fe673ff106b6d27960d1793d29ee9f80dc100109d3fd51787a84728b",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_batch_v2_non_authoritative\\units_02\\request.json": "62c452067ccd62ec0737b7346599f72e699f483aeafe53c59822422d88d8c134",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_batch_v2_non_authoritative\\units_03\\request.json": "49838d5c6044573ec05212302b88b2098b112d04055b0bad1d3835ad490a8252",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_batch_v2_non_authoritative\\units_03\\tested_bytes\\tests\\test_h1_cross_hour_batch_development_v2.py": "c953b0e8465cf335b4469a49e0123d106a0fba0abfb160e4f58c65a44193854a",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_batch_v2_non_authoritative\\saved_probe_02\\terminal.json": "a0f0ecd3cad9362406dbbb1ea34d56f56cd574780efe7de4655f815d1143145b"
+  },
+  "saved_file_count": 212,
+  "all_saved_bytes_match": true,
+  "baseline_saved_bytes_unchanged": true,
+  "paired_lane_hours": 6,
+  "oracle": [
+    {
+      "lane": "cfe",
+      "q": [
+        "1/50",
+        "0"
+      ],
+      "r": [
+        "0",
+        "5882352941/250000000000"
+      ],
+      "remaining_debt": "3/5000000000000",
+      "actual_power_mw": [
+        "20",
+        "30882352941/1000000000"
+      ]
+    },
+    {
+      "lane": "joint",
+      "q": [
+        "1/50",
+        "0"
+      ],
+      "r": [
+        "0",
+        "5882352941/250000000000"
+      ],
+      "remaining_debt": "3/5000000000000",
+      "actual_power_mw": [
+        "20",
+        "30882352941/1000000000"
+      ]
+    },
+    {
+      "lane": "network",
+      "q": [
+        "0",
+        "0"
+      ],
+      "r": [
+        "0",
+        "0"
+      ],
+      "remaining_debt": "0",
+      "actual_power_mw": [
+        "25",
+        "25"
+      ]
+    }
+  ],
+  "scientific_projections_equal_to_v1": true,
+  "scientific_projection_sha256": [
+    "a0009f1b4cc54198208ca040d262e9045e0051644907a8fcd62874b8cd80ed6c",
+    "6de5907de6e38d76e2392f3a029686090c2b9ff716651c90794441288eca5c20"
+  ],
+  "request_namespace_changed": true,
+  "final_scientific_state_equal_to_v1": true,
+  "preserved_predecessor_code_sha256": {
+    "experiments/h1_phase_owner_development_v1.py": "4c932b12e544909a37690da7178089bf498896c0981403dfa19482b42a537ef6",
+    "experiments/h1_phase_obligation_controller_development_v1.py": "e047f3e5b08b397362f2961be89062924e0e4769d7de0795453047e921300934",
+    "experiments/h1_phase_exact_source_current_development_v1.py": "30fdb9e800183650fbf6e986e313fa95fd3b114fc2a03ff2d5f1d87fc7dde3ad",
+    "experiments/h1_exact_business_development_v1.py": "78605edbd312b238f5d5550b64de2ac9fab5121b9a89b949b185bb08563abda8",
+    "experiments/h1_cross_hour_owner_development_v1.py": "edb4a57e319ca9a17484eb898d4cb14c19d64faffcadec3fbe1e78ff50fb015e",
+    "tests/test_h1_cross_hour_owner_development_v1.py": "d514a15fe740455ef2cfea5746c9fab3e516a81ea2190954fc078269a1cb5ebc"
+  },
+  "inherited_v1_guard_passes": 36,
+  "current_v2_boundary_passes": 23,
+  "reused_unit_source_and_test_snapshot_sha_bound": true,
+  "unit03_selected_module_ast_unchanged": true,
+  "unit02_failed_new_test_retained": true,
+  "unit03_fixed_records_packing_test": true,
+  "historical_api_calls": 20,
+  "historical_api_prefix_hour_weight": 28,
+  "parent_inspect_traversals": 40,
+  "parent_inspect_prefix_hour_weight": 56,
+  "excludes_independent_historical_snapshot_anchor_traversals": true,
+  "max_selected_frame_bytes": 35967,
+  "nonoverlapping_trace_seconds": {
+    "N0_terminal": 65.40869749998092,
+    "hour0_paired": 78.96271990000969,
+    "hour1_paired": 246.30616959999315,
+    "closed_before_reopen": 0.09900970000308007,
+    "reopen_verified": 54.634382799995365
+  },
+  "nested_owner_stage_seconds": {
+    "batch_source:1:1": 91.74667680001585,
+    "ready_replay": 31.45135359998676,
+    "fresh_current": 45.744380200019805,
+    "selector:Rref:None": 1.1393405000271741,
+    "selector:A:cfe_only_shared": 0.7708168999815825,
+    "selector:A:joint_correct_shared": 0.8010296000284143,
+    "selector:A:network_only_shared": 0.7973657000111416,
+    "intent_and_ticket": 0.39582889998564497,
+    "scientific_transition_replay": 1.162470699986443,
+    "fresh_before_paired": 45.99578530000872,
+    "outcome_and_ticket": 0.4459756000142079,
+    "source_selectors_paired": 98.03511040000012,
+    "final_full_replay": 48.65008160000434,
+    "normal": 130.9114327999996,
+    "batch_source:2:1": 61.442033700004686,
+    "batch_source:2:2": 31.222105099994224
+  },
+  "baseline_outer_seconds": 604.2659999999887,
+  "outer_seconds": 509.51600000000326,
+  "single_observed_wall_ratio": 0.8431981941727861,
+  "wall_ratio_is_not_production_or_causal_estimate": true,
+  "production_overhead_measured": false,
+  "observed_processes_still_remaining": [],
+  "complete_process_tree_absence_proven": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "formal_result": false,
+  "native_execution_authorized": false
+}

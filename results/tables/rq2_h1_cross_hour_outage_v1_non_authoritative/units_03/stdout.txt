@@ -1,0 +1,78 @@
+...F
+================================== FAILURES ===================================
+__________ test_three_hour_analytic_outage_repair_and_timeout_oracle __________
+
+tmp_path = WindowsPath('D:/h1_outage_units_03_non_authoritative/test_three_hour_analytic_outag0')
+outage_environment = (WindowsPath('D:/h1_outage_units_03_non_authoritative/test_three_hour_analytic_outag0/upstream'), WindowsPath('D:/h1_o..., 'G2': 40.0}, spin_up_requirement_by_area_mw={1: 0.0}))), 'power_change': {}, 'workload': '0', 'workload_change': {}})
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029D8AA819A0>
+static_code_identities = None
+
+    def test_three_hour_analytic_outage_repair_and_timeout_oracle(tmp_path,outage_environment,monkeypatch,static_code_identities):
+        began=time.perf_counter()
+        selection,physical,business=m.saved.selection,m.saved.source.physical,m.saved.business
+        packets=case.packets(outage_environment)
+        frames=[physical._frame(p,after) for p,after in packets]
+        origin=outage_environment[2]
+        prefix=m.saved.source.registry.prepare(split='training',raw_start=0,hours=3,outage_seed=origin.outage_seed,
+            expected_registry_identity='c'*64)
+        views=[m.saved.source.registry.decision_view(a) for a in prefix.actions]
+        assert views[0]['active']==views[1]['active']=={'kind':'generator','uid':'G1'}
+        assert prefix.origin.active.observed_start_hour is None
+        assert views[1]['started'] is views[1]['ended'] is None
+        assert views[0]['repair_cap_exact'] is views[1]['repair_cap_exact'] is None
+        assert views[2]['active'] is views[2]['started'] is None
+        assert views[2]['ended']=={'kind':'generator','uid':'G1'} and views[2]['repair_cap_exact']==['24','1']
+        assert all(dict(frame.info.current.generator_available)=={'G1':True,'G2':True} for frame in frames)
+        assert all(frame.info.normal.generation_mw==(('G1',30.),('G2',15.)) for frame in frames)
+        cfg=prior.manifest()
+        selected={};carries={};halted=set();quantities=[]
+        lanes=[('reference',m.saved.RREF)]+[(c.lane_id,c.lane) for c in cfg.lanes]
+        for key,lane in lanes:
+            chosen=cfg.reference_selector if lane.role=='Rref' else cfg.actual_selector
+            selected[key]=selection.initialize_development_selection(frames[0],prefix.origin,lane=lane,
+                selector=chosen,specification=cfg.solver_specification,limits=cfg.replay_limits,chronology_origin=True)
+        for config in cfg.lanes:
+            carries[config.lane_id]=prior.biz.origin(config.lane.arm,mechanism=config.mechanism)
+        calls=case.install_selectors(monkeypatch)
+        repair_before=None
+        for hour,(frame,action) in enumerate(zip(frames,prefix.actions,strict=True)):
+            if hour==2:repair_before=selected['reference'].physical_carry
+            ref,_=_capture(frame,action,selected['reference'],m.saved.RREF,None)
+            assert ref.next_candidate is not None,(hour,ref.errors)
+            assert Q(*map(int,ref.candidate_request_exact))==(Q(5) if hour<2 else Q(0))
+            selected['reference']=ref.next_candidate
+            for config in cfg.lanes:
+                key=config.lane_id
+                if key in halted:continue
+                item=business.current(relative_hour=hour,mechanism=config.mechanism,workload=Q(1,10),
+                    source_cfe_at_alpha_one=Q(3,5) if hour<2 else Q(1,5),grid_request_mw=Q(5) if hour<2 else Q(0))
+                candidate=business.prepare_development(carries[key],item,expected_current_identity=item.identity)
+                assert candidate.next_candidate is not None
+                power=physical.RelativeDcPower(hour,str(candidate.actual_power_mw.numerator),
+                    str(candidate.actual_power_mw.denominator),'mechanism_assumption')
+                actual,records=_capture(frame,action,selected[key],config.lane,power)
+                if key=='cfe' and hour==1:
+                    assert actual.next_candidate is None and len(records)==1
+                    raw=json.loads(records[0])['raw']
+                    termination=case.TerminationCondition.maxTimeLimit
+                    assert raw['solver_records'][0][1]==[type(termination).__module__+'.'+type(termination).__name__,repr(termination)]
+                    assert not raw['optimal'] and raw['solution_count']==1
+                    halted.add(key)
+                else:
+                    assert actual.next_candidate is not None
+                    carries[key]=candidate.next_candidate;selected[key]=actual.next_candidate
+                    a=carries[key].cursor.records[-1].response.action
+>                   assert a.grid_served+a.cfe_served+a.recovery<=Q(1,20)
+E                   AssertionError: assert ((Fraction(0, 1) + Fraction(0, 1)) + Fraction(3, 50)) <= Fraction(1, 20)
+E                    +  where Fraction(0, 1) = DeclaredAggregateResponse(grid_served=Fraction(0, 1), cfe_served=Fraction(0, 1), recovery=Fraction(3, 50), actual_serv...er=Fraction(4, 25), allocations=((1, Fraction(1, 25)), (2, Fraction(11, 1000))), evidence_class='mechanism_assumption').grid_served
+E                    +  and   Fraction(0, 1) = DeclaredAggregateResponse(grid_served=Fraction(0, 1), cfe_served=Fraction(0, 1), recovery=Fraction(3, 50), actual_serv...er=Fraction(4, 25), allocations=((1, Fraction(1, 25)), (2, Fraction(11, 1000))), evidence_class='mechanism_assumption').cfe_served
+E                    +  and   Fraction(3, 50) = DeclaredAggregateResponse(grid_served=Fraction(0, 1), cfe_served=Fraction(0, 1), recovery=Fraction(3, 50), actual_serv...er=Fraction(4, 25), allocations=((1, Fraction(1, 25)), (2, Fraction(11, 1000))), evidence_class='mechanism_assumption').recovery
+E                    +  and   Fraction(1, 20) = Q(1, 20)
+E                   metadata resolver cleanup: ValueError('metadata resolver poisoned')
+
+tests\test_h1_cross_hour_outage_chain_development_v1.py:122: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_h1_cross_hour_outage_chain_development_v1.py::test_three_hour_analytic_outage_repair_and_timeout_oracle
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 3 passed, 1 deselected, 1 warning in 9.28s
+{"ordinary_unit_immutable_code_files": 326, "code_read_hits": 7654, "all_code_handles_closed": true, "original_read_alias_restored": true, "all_metadata_handles_closed": true, "original_metadata_version_alias_restored": true, "distribution_fast_calls": 1148, "distribution_fallback_calls": 0, "metadata_parse_hits": 1276, "metadata_parse_misses": 0, "per_call_distribution_discovery_preserved": false, "formal_result": false}

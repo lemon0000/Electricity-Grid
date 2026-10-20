@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="242.533" timestamp="2026-10-20T13:08:32.938373+08:00" hostname="LAPTOP-FT6J5Q9J"><testcase classname="tests.test_h1_cross_hour_outage_chain_development_v1" name="test_three_hour_connected_outage_repair_lane_stop_and_missing_source" time="239.208"><failure message="ValueError: aggregate phase selector budget exceeded&#10;metadata resolver cleanup: ValueError('metadata resolver poisoned')">tmp_path = WindowsPath('D:/h1_outage_connected_01_non_authoritative/test_three_hour_connected_outa0')
+outage_environment = (WindowsPath('D:/h1_outage_connected_01_non_authoritative/test_three_hour_connected_outa0/upstream'), WindowsPath('D:/..., 'G2': 40.0}, spin_up_requirement_by_area_mw={1: 0.0}))), 'power_change': {}, 'workload': '0', 'workload_change': {}})
+real = (Resolver(_catalog_node='cbdc8a06f2171513203317cea1234434e81092897f60f64061590255bc47df93', _overlay_node='fe27c839cb4...826f93b7712e2', _protocol='95eb158f0a8e6784d2af401e67164965543c98f42ff02b756c214982601e5430', _alpha_count=100), 97364)
+synthetic_reports = [b'{"assignment":[["angle_degrees[normal,0,1]","0x0.0p+0"],["angle_degrees[normal,0,2]","0x1.6eb167b830193p+2"],["bran...Tol":1e-09,"MIPGap":1e-08,"MIPGapAbs":0.0,"OptimalityTol":1e-09,"Seed":0,"Threads":1,"TimeLimit":5.0},"variables":12}']
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002C9029EE930&gt;
+static_code_identities = None
+
+    def test_three_hour_connected_outage_repair_lane_stop_and_missing_source(
+            tmp_path,outage_environment,real,synthetic_reports,monkeypatch,static_code_identities):
+        trace=lambda label,**kw:prior.trace(tmp_path,label,**kw)
+        trace('start',synthetic_hours=3,lanes=3,formal_result=False)
+        packets=case.packets(outage_environment)
+        normal=case.controller(tmp_path/'normal_non_authoritative',outage_environment,real,monkeypatch)
+        holder=owner=None
+        try:
+            case.install_launcher(monkeypatch,tmp_path,case.normal_reports(packets[0][0],synthetic_reports),0)
+            assert normal.bootstrap_development().completed_hours==1
+            trace('N0_terminal')
+            first=normal.last_obligation_observation
+            cfg=replace(prior.manifest(),accounting_period_id='synthetic-three-hour-outage-single-episode')
+            binding=m.saved.SourceBinding(str(normal._lease.root),first.header_sha256,'c'*64,first.terminal_sha256)
+            owner_root=tmp_path/'owner_non_authoritative';holder_root=tmp_path/'holder_non_authoritative'
+            holder_args=dict(owner_root=owner_root,max_tickets=cfg.max_events,max_ticket_bytes=cfg.max_event_bytes,
+                max_total_ticket_bytes=cfg.max_archive_bytes,retain_head=lambda *a:a[2])
+            holder=m.saved.tickets.TicketHolder(holder_root,create=True,**holder_args)
+            owner=m.DevelopmentOwner(owner_root,cfg,binding,holder=holder,create=True,controller=normal)
+            calls=case.install_selectors(monkeypatch)
+            producer=m.PhaseSelectorProducer(prior.producer_budget())
+            states=[]
+            for hour in range(3):
+                if hour:case.install_launcher(monkeypatch,tmp_path,case.normal_reports(packets[hour][0],synthetic_reports),hour)
+&gt;               report=owner.run_next_development(expected_heads=owner.heads,selector_producer=producer)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_cross_hour_outage_chain_development_v1.py:191: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_phase_owner_development_v1.py:243: in guarded
+    try:return method(self,*args,**kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\h1_cross_hour_owner_development_v2.py:713: in run_next_development
+    self._paired_locked(rows, state, terminal, selector_producer, self._phase_capability)
+experiments\h1_cross_hour_owner_development_v2.py:636: in _paired_locked
+    reference, actual = _PHASE_PRODUCE(producer, self, cap, state, current)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;experiments.h1_cross_hour_owner_development_v2.PhaseSelectorProducer object at 0x000002C902166E40&gt;
+owner = &lt;experiments.h1_cross_hour_owner_development_v2.DevelopmentOwner object at 0x000002D6E7CEAA50&gt;
+cap = None
+state = _State(hour=0, reference=SelectionCandidate(physical_carry=PhysicalCandidateCarry(protocol='h1_origin_aware_fixed_powe...n_identity=None, selection_identity=None, previous_audit_identity=None), halted=False, reason=None, completed=False))))
+current = ExactSourceCurrent(prepared_current=PreparedCurrent(decision=CurrentDecision(normal=H1CurrentInformation(contract='h1_...w_fraction_clipped":false,"raw_workload_fraction":"0.1","reason":null,"status":"projected","workload_occupancy":0.1}}')
+
+    def produce(self, owner, cap, state, current):
+        self._check()
+        owner._selector_scope_check(cap, state, current)
+        manifest = owner.manifest
+        frame, action = current.prepared_current.frame, current.prepared_current.source_action
+        selection = saved.selection
+        roster = [(saved.RREF, manifest.reference_selector)]+[
+            (config.lane, manifest.actual_selector) for config, (_, before) in
+            zip(manifest.lanes, state.lanes, strict=True) if not before.halted and not before.completed]
+        counts = [len(selection.stage_labels(frame, lane)) for lane, _ in roster]
+        specification = manifest.solver_specification
+        if (sum(counts) &gt; self.budget.max_solver_calls or specification.time_limit_seconds is None
+                or sum(counts)*specification.time_limit_seconds &gt; self.budget.max_total_solver_seconds):
+&gt;           raise ValueError('aggregate phase selector budget exceeded')
+E           ValueError: aggregate phase selector budget exceeded
+E           metadata resolver cleanup: ValueError('metadata resolver poisoned')
+
+experiments\h1_cross_hour_owner_development_v2.py:313: ValueError</failure></testcase></testsuite></testsuites>

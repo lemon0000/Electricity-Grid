@@ -1,6 +1,6 @@
-# Phased Interconnection and Hourly Green-Electricity Coordination Planning for AI Data Centers under Uncertainty in Capacity Ramp-Up and Grid-Expansion Delays
+# Deliverability of AI Data Center Workload Flexibility for Grid Response and Carbon-Free Energy Matching
 
-Updated: 2026-10-17. This introduction describes the current design and available evidence; Section 5 gives a dated progress snapshot.
+Updated: 2026-10-20. This introduction describes the current design and available evidence; Section 5 gives a dated progress snapshot.
 
 ## 1 Abstract
 
@@ -97,13 +97,13 @@ The hourly order is revealed input → N update → common Rref request → CFE 
 
 The current inventory contains 523×28=14,644 training pairs and 512×28=14,336 holdout pairs per cell. These are mechanism-combination identities; overlapping windows are not independent samples. Across 1,900 cells there are 27,823,600 training cell-pair identities. Necessary solver calls depend on analytic exclusions and valid reuse DAGs and must be established by the concrete task package and full resource budget.
 
-![Figure 2. Finite-enrollment joint-service research workflow](../figures/project_workflow_en.svg)
+![Figure 2. AI data center flexibility deliverability workflow](../figures/project_workflow_en.svg)
 
-**Figure 2. Finite-enrollment joint-service research workflow.** Data, four-arm models, and evaluation dependencies in the current design; implementation acceptance status is given in Section 5.
+**Figure 2. AI data center flexibility deliverability workflow.** Data, four-arm models, and evaluation dependencies under the finite-enrollment contract. The figure shows the complete research design; Section 5 distinguishes accepted synthetic development cases from continuous execution still awaiting acceptance.
 
-![Figure 3. Coordinated network structure](../figures/project_network_en.svg)
+![Figure 3. AI data center grid response and CFE matching framework](../figures/project_network_en.svg)
 
-**Figure 3. Coordinated network structure.** The fixed POI and shared workload envelope support the primary mechanism study. Staged ramp-up and grid expansion belong to the broader project blueprint.
+**Figure 3. AI data center grid response and CFE matching framework.** The fixed POI, hourly CFE matching, and shared workload envelope support the primary mechanism study. Staged ramp-up and grid expansion belong to the broader project blueprint.
 
 ## 5 Project Feasibility and Current Status
 
@@ -119,20 +119,24 @@ RTS-GMLC grid data, Alibaba workloads, and Google power data retain separate pro
 
 The approved origin/registry successor covers the six historical outage-source left-boundary gaps. Saved checks report 1,035 unique entries, source_input_unresolved=0, and obligations_removed=0. Source coverage does not establish acceptance of a complete 192h producer execution. Terminal states, on-demand follow-up, and unknown outcomes still require evidence from the continuous chain.
 
-### 5.3 Development Snapshot on 2026-10-17
+### 5.3 Development Snapshot on 2026-10-20
 
 Finite-v2 scientific parameters were approved for development on 2026-09-30. The concrete configuration remains DRAFT_NONAUTHORITATIVE, with complete_preregistration, formal_execution_ready, and formal_run_authority all false. The normal model, source adapters, persistent state, selectors, raw-report retention, and scoped PRE_SEAL checks have development evidence.
 
-At the 2026-10-17 14:38 Asia/Shanghai check, chain_07 was running a synthetic integration acceptance test for the first simulated hour. Retained traces had reached three independent N0 runs, common, shared Rref, three Actual runs, and each missing-Actual rejection check. There was no successful full-chain terminal covering paired commit, close/reopen, independent saved-record replay, and reporting. The test uses fabricated solver outputs to exercise real source readers and state composition; it supplies no formal capacity or risk result for the new contract.
+The complete chain_07 synthetic first-hour case and independent-process saved-record replay have finished. Three independent N0 runs proceed through common, shared Rref, and three Actual lanes to paired commit. Heads, projections, and carries agree after close and reopen; independent postcheck supplement 04 closes the case's replay, cleanup, and timing evidence. The original chain took 259,910.325 seconds of wall time, followed by 401.168 seconds for independent-process replay and reference-field checks. These timings describe the legacy synthetic validation path and do not establish a native or production execution budget.
 
-The main current computational bottleneck is repeated historical reconstruction and I/O across the validation workflow. Local optimizations have scientific-output and audit-equivalence evidence; whole-workflow gains and budgets still require representative measurement. A condition added on 2026-10-17 requires performance review before any new experiment, covering the task DAG, actual call multipliers, reusable evidence, stage time, memory and storage, heartbeats, and stop conditions. Synthetic and native timings remain separate. The 192h value describes simulated coverage; the actual wall-clock budget has not been established.
+A cross-hour successor has completed a two-hour, three-lane successful prefix and full replay after close and reopen. The batch historical-replay version commits two outcomes covering six paired lane-hours in 509.516 seconds of outer wall time. Workload projections and final scientific states agree with the earlier case at the same scale, and the names and SHA hashes of 212 saved files remain unchanged.
+
+A three-hour outage-continuation, repair, and single-lane stopping case has also finished: three outcomes cover seven paired lane-hours in 1,314.969 seconds of outer wall time. It checks positive network requests, outage continuation, and the generation cap in the first repair hour. A CFE Actual timeout with a feasible incumbent remains actual_unresolved: neither workload nor Actual state advances on that lane, while the others continue. An external pre-close checkpoint supports same-process read-only reopen after all owners close; 444 saved file names and SHA hashes agree. Missing next-hour input occurs during enrollment, leaving a pending attempt and an unterminated episode. This case does not establish formal follow-up censoring metrics.
+
+These cases use synthetic sources or fabricated solver outputs, with zero real native calls, and remain DRAFT/PRE_SEAL development evidence. The full 168h enrollment through up to 24h of on-demand follow-up, phase boundaries, episode termination, and honest right-censoring still require connected acceptance. Work now focuses on valid reuse of dynamic prefix replay and a complete resource budget. The two- and three-hour cases differ in coverage and failure paths, so their wall-time ratio does not estimate optimization gains or 192h costs. Every new experiment requires review of the full task DAG, call multipliers, evidence reuse, stage time, memory, storage, heartbeats, and stop conditions. The 192h value is the maximum simulated span; the production wall-clock budget remains unestablished.
 
 ### 5.4 Exits Required Before Formal Execution
 
 | Order | Required object | Current status |
 |---|---|---|
-| 1 | Complete hour-0, independent saved replay, cleanup, and timing | Under validation |
-| 2 | Cross-hour producer/phase coverage up to 192h | Incomplete |
+| 1 | Complete hour-0, independent saved replay, cleanup, and timing | chain_07 synthetic case and independent supplement 04 complete |
+| 2 | Cross-hour producer/phase coverage up to 192h | Two- and three-hour synthetic cases complete; full 168h plus up to 24h pending |
 | 3 | Concrete task/reuse DAG, same-contract LB/UB, and resource admission | Incomplete |
 | 4 | Successor seal and fresh independent official review | Current execution package not yet through review |
 | 5 | Separate package-specific run authorization and formal-result acceptance | Not started |
@@ -234,4 +238,7 @@ Timeouts, local solver failures, missing incumbents, and incomplete certificates
 - [Execution plan](../../docs/plan/科研项目执行步骤.md) and [blocker register](../../docs/model_spec/blocker_register.md): stage evidence, open issues, and closure conditions;
 - [H1 end-to-end milestones](../../docs/plan/H1_端到端里程碑验收_v1.md): acceptance order from complete hour-0 to formal execution;
 - [Chain_07 retained timing](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/timing.jsonl) and [source-boundary check](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/source_boundary_status_rechecked_01.json): development progress and approved source coverage;
+- [Complete hour-0 report](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/complete_integration_report_supplement_04.md) and [independent supplement 04](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/postcheck_supplement_completion_04.json): the synthetic first-hour chain and independent-process saved replay;
+- [Two-hour batch-replay acceptance](../../results/tables/rq2_h1_cross_hour_batch_v2_non_authoritative/acceptance_report.md) and [machine-readable postcheck](../../results/tables/rq2_h1_cross_hour_batch_v2_non_authoritative/connected_01_postcheck.json): six paired lane-hours and saved-state comparisons;
+- [Three-hour outage and repair acceptance](../../results/tables/rq2_h1_cross_hour_outage_v1_non_authoritative/acceptance_report.md) and [machine-readable postcheck](../../results/tables/rq2_h1_cross_hour_outage_v1_non_authoritative/connected_03_postcheck.json): seven paired lane-hours, lane stopping, missing input, and same-process read-only reopen;
 - [B0-B2 results](../../results/tables/rts24_b0_b2_summary.json), [B3-B5 results](../../results/tables/rts24_b3_b5_summary.json), and [24-hour DC benchmark](../../results/tables/rts_gmlc_google_day0_full24h_selected_n1_dc_scuc_v1/summary.json): the named historical evidence in Section 5.1.

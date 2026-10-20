@@ -1,0 +1,208 @@
+"""Owned selector Job lifecycle boundary; no scientific adoption or run authority.
+
+The selector-specific controller must fix argv, persist its release records and
+audit source/results in the supplied callbacks. This function launches a process;
+real native use still requires a concrete admitted package and explicit authority.
+"""
+from copy import deepcopy
+from dataclasses import asdict
+from math import isfinite
+import json
+import os
+from pathlib import Path
+import sys
+from threading import Lock,get_ident
+from types import MappingProxyType,FunctionType
+
+from experiments import h1_selector_released_worker_development_v2 as worker
+
+process=worker.process
+io=worker.io
+SCHEMA='h1_selector_job_lifecycle_development_v2'
+FLAGS=MappingProxyType(dict(worker.FLAGS,whole_job_observation_adopted=False,
+    non_solver_allowance_verified=False,selector_parent_connected=False))
+_FLAGS=FLAGS
+_FLAG_KEYS=frozenset(FLAGS)
+INSPECTION_SCHEMA='h1_selector_job_inspection_diagnostic_v2'
+INSPECTION_CAP=1024**2
+_ACTIVE=set()
+_GUARD=Lock()
+
+
+def _scope():
+    if (SCHEMA!='h1_selector_job_lifecycle_development_v2'
+            or INSPECTION_SCHEMA!='h1_selector_job_inspection_diagnostic_v2'
+            or type(INSPECTION_CAP) is not int or INSPECTION_CAP!=1024**2
+            or FLAGS is not _FLAGS or frozenset(FLAGS)!=_FLAG_KEYS or any(v is not False for v in FLAGS.values())):
+        raise ValueError('selector Job lifecycle scope changed')
+
+
+def implementation_identity():
+    _scope()
+    return io.digest(io.encode([SCHEMA,io.digest(Path(__file__).read_bytes()),worker.implementation_identity()]))
+
+
+def _integer(value,positive=False):
+    if type(value) is not int or value<(1 if positive else 0):raise ValueError('exact nonnegative integer required')
+    return value
+
+
+def _inspection(value):
+    _scope()
+    if type(value) is not dict or set(value)!={'schema','data'} or value['schema']!=INSPECTION_SCHEMA:
+        raise ValueError('exact diagnostic inspection envelope required')
+    try:raw=json.dumps(value,ensure_ascii=True,sort_keys=True,allow_nan=False,separators=(',',':')).encode('ascii')
+    except (TypeError,ValueError,RecursionError) as error:raise ValueError('JSON diagnostic required') from error
+    if len(raw)>INSPECTION_CAP:raise ValueError('bounded diagnostic inspection required')
+    return json.loads(raw)
+
+
+def _validate_observation(observed,identity,pid,creation,budget,initial):
+    """Value validation only. A caller-constructed observation is not authority."""
+    if type(observed) is not process.TaskProcessObservation:raise ValueError('exact Job observation required')
+    for value in (observed.pid,observed.creation_filetime,observed.runtime_samples,
+                  observed.job_peak_process_commit_bytes,observed.job_peak_total_commit_bytes):_integer(value,True)
+    _integer(observed.exit_code)
+    if (observed.process_identity!=identity or (observed.pid,observed.creation_filetime)!=(pid,creation)
+            or observed.exit_code!=0 or observed.reason!='child_exited'
+            or observed.whole_job_quiescent is not True or observed.job_commit_limits_configured is not True
+            or type(observed.last_resource_errors) is not tuple or observed.last_resource_errors
+            or observed.observation_error_type is not None
+            or type(observed.stop_markers) is not tuple or observed.stop_markers!=('direct_child_exit_observed',)
+            or type(observed.elapsed_seconds) not in (int,float) or not isfinite(observed.elapsed_seconds)
+            or not 0<=observed.elapsed_seconds<=budget.max_elapsed_seconds+budget.max_quiescence_seconds
+            or observed.job_peak_process_commit_bytes>budget.max_process_commit_bytes
+            or observed.job_peak_total_commit_bytes>budget.max_job_commit_bytes
+            or observed.job_peak_process_commit_bytes>observed.job_peak_total_commit_bytes
+            or any(getattr(observed,k) is not False for k in ('hard_disk_quota_enforced',
+                'whole_task_resources_verified','numerical_evidence_verified','formal_result'))):
+        raise ValueError('selector Job unresolved; output inspection forbidden')
+    _integer(observed.minimum_runtime_commit_available_bytes)
+    if observed.minimum_runtime_commit_available_bytes<initial['commit_reserve_bytes']:
+        raise ValueError('selector Job runtime commit reserve breached')
+    disks=observed.minimum_runtime_disk_available_bytes
+    if (type(disks) is not tuple or any(type(row) is not tuple or len(row)!=2
+            or type(row[0]) is not str for row in disks)):
+        raise ValueError('exact runtime disk vector required')
+    for _,available in disks:_integer(available)
+    expected=initial['volume_reserves']
+    if (tuple(name for name,_ in disks)!=tuple(name for name,_ in expected)
+            or any(available<reserve for (_,available),(_,reserve) in zip(disks,expected,strict=True))):
+        raise ValueError('selector Job runtime disk inventory or reserve differs')
+
+
+def _run_job(argv,*,cwd,environment,budget,host_budget,expected_process_identity,
+            before_release,on_quiescent):
+    """Acquire/release/wait once; call output reader only after verified quiescence.
+
+    Callbacks are trusted controller code, not request-selected entry points.
+    Returned diagnostics cannot be used as a live Rref credential for Actual.
+    No retry is performed. The enclosing controller owns create-once records.
+    """
+    _verify_fixed()
+    if not callable(before_release) or not callable(on_quiescent):raise ValueError('controller callbacks required')
+    argv,environment,budget,host_budget=deepcopy((argv,environment,budget,host_budget))
+    cwd=Path(cwd).resolve()
+    if type(budget) is not process.TaskProcessBudget:raise ValueError('exact selector Job budget required')
+    budget.__post_init__();worker.runtime._environment(environment)
+    own=implementation_identity();owner=(os.getpid(),get_ident())
+    host_identity=process.resources.resource_identity(host_budget)
+    arguments=dict(cwd=cwd,environment=environment,budget=budget,host_budget=host_budget,
+        expected_host_identity=host_identity)
+    request=io.encode([argv,str(cwd),environment,asdict(budget),asdict(host_budget),expected_process_identity])
+    module=sys.modules[__name__]
+    dependencies=((module,('implementation_identity','_integer','_validate_observation','_inspection')),
+        (process,('normal_task_child','task_process_identity','TaskProcessObservation','TaskProcessBudget')),
+        (process.NormalTaskChild,('_initialize','release','wait','close','_identity_check')),
+        (worker,('_validate_initial',)),(worker.runtime,('_environment',)),
+        (process.resources,('resource_identity','observe_headroom')),
+        (worker.sequence.timed.capture,('_CLOCK','clock_profile')))
+    originals=tuple((obj,name,getattr(obj,name)) for obj,names in dependencies for name in names)
+    acquire=process.normal_task_child;identity=process.task_process_identity
+    validate=_validate_observation;validate_initial=worker._validate_initial
+    release=process.NormalTaskChild.release;wait=process.NormalTaskChild.wait
+    clock=worker.sequence.timed.capture._CLOCK;profile=worker.sequence.timed.capture.clock_profile
+    clock_profile=profile();start=clock()
+    def check():
+        _verify_fixed()
+        if (any(getattr(obj,name) is not original for obj,name,original in originals)
+                or owner!=(os.getpid(),get_ident()) or implementation_identity()!=own or profile()!=clock_profile
+                or io.encode([argv,str(cwd),environment,asdict(budget),asdict(host_budget),expected_process_identity])!=request
+                or identity(argv,**arguments)!=expected_process_identity):
+            raise ValueError('selector Job lifecycle callback/request/owner changed')
+    check()
+    with acquire(argv,**arguments,expected_process_identity=expected_process_identity) as child:
+        check()
+        if type(child) is not process.NormalTaskChild:raise ValueError('owned task child required')
+        pid,creation=_integer(child.pid,True),_integer(child.creation_filetime,True)
+        initial=worker._doc(io.encode(asdict(child.initial_observation)))
+        validate_initial(initial,host_budget);check()
+        initial_pin=io.digest(io.encode(initial))
+        before_release(dict(pid=pid,creation_filetime=creation,process_identity=expected_process_identity),deepcopy(initial))
+        check()
+        if (child.pid,child.creation_filetime)!=(pid,creation) or io.digest(io.encode(asdict(child.initial_observation)))!=initial_pin:
+            raise ValueError('child or initial observation changed before release')
+        released=clock();release(child);check()
+        observed=wait(child);quiet=clock();check()
+        reserve=dict(commit_reserve_bytes=host_budget.commit_reserve_bytes,
+            volume_reserves=tuple((v,reserve) for v,_demand,reserve,_available in initial['volume_requirements']))
+        validate(observed,expected_process_identity,pid,creation,budget,reserve);check()
+        observed_bytes=io.encode(asdict(observed))
+    # Context cleanup also completes before the first output callback.
+    check()
+    if io.encode(asdict(observed))!=observed_bytes:raise ValueError('Job observation changed during cleanup')
+    inspected=on_quiescent(deepcopy(asdict(observed)))
+    check()
+    inspected=_inspection(inspected);check()
+    if io.encode(asdict(observed))!=observed_bytes:raise ValueError('Job observation changed during inspection')
+    end=clock()
+    if any(type(t) is not int for t in (start,released,quiet,end)) or not start<=released<=quiet<=end:
+        raise ValueError('selector parent diagnostic clock order differs')
+    return dict(schema=SCHEMA,implementation=own,process_identity=expected_process_identity,
+        pid=pid,creation_filetime=creation,observation=worker._doc(observed_bytes),inspection=inspected,
+        clock=clock_profile,diagnostic_window=dict(start_ns=start,release_ns=released,quiescent_ns=quiet,end_ns=end),
+        **FLAGS)
+
+
+def run_job(argv,*,cwd,environment,budget,host_budget,expected_process_identity,before_release,on_quiescent):
+    """One active invocation per process identity; durable retry policy is external."""
+    _verify_fixed()
+    io.pin(expected_process_identity)
+    key=(os.getpid(),expected_process_identity)
+    registry,guard=_ACTIVE,_GUARD
+    with guard:
+        if key in registry:raise ValueError('selector Job lifecycle already active')
+        registry.add(key)
+    try:
+        return _run_job(argv,cwd=cwd,environment=environment,budget=budget,host_budget=host_budget,
+            expected_process_identity=expected_process_identity,before_release=before_release,on_quiescent=on_quiescent)
+    finally:
+        with guard:registry.remove(key)
+
+
+def _verify_fixed():
+    if any(getattr(obj,name) is not original for obj,name,original in _FIXED):
+        raise ValueError('import-fixed selector Job dependency changed')
+
+
+def _closed_bindings():
+    # Capture before callers can install per-run wrappers. Include closed
+    # primitive private methods and lower-level Job/resource/store functions.
+    bindings=[]
+    for module in (sys.modules[__name__],process,process.process,process.resources,process.resources.local):
+        for name,value in tuple(vars(module).items()):
+            if isinstance(value,(FunctionType,type)) and getattr(value,'__module__',None)==module.__name__:
+                bindings.append((module,name,value))
+                if isinstance(value,type):
+                    for field,member in tuple(vars(value).items()):
+                        if isinstance(member,(FunctionType,staticmethod,classmethod)):
+                            bindings.append((value,field,getattr(value,field)))
+    bindings.extend(((worker,'_validate_initial',worker._validate_initial),
+        (worker.runtime,'_environment',worker.runtime._environment),
+        (process.time,'monotonic',process.time.monotonic),
+        (worker.sequence.timed.capture,'_CLOCK',worker.sequence.timed.capture._CLOCK),
+        (worker.sequence.timed.capture,'clock_profile',worker.sequence.timed.capture.clock_profile)))
+    return tuple(bindings)
+
+
+_FIXED=_closed_bindings()

@@ -1,0 +1,132 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "attempt": "connected_06",
+  "terminal": {
+    "exit_code": 0,
+    "reason": null,
+    "outer_seconds": 604.2659999999887,
+    "peak_sampled_tree_rss_bytes": 396300288,
+    "peak_logical_bytes": 21434401,
+    "observed_cpu_seconds": 636.65625,
+    "max_observed_handles": {
+      "44128": 760,
+      "15180": 95,
+      "10640": 323,
+      "42444": 98,
+      "33732": 323,
+      "47608": 98
+    },
+    "source_unchanged": true,
+    "observed_processes": {
+      "44128": 1792429632.4777536,
+      "15180": 1792429632.489833,
+      "10640": 1792429694.823274,
+      "42444": 1792429695.2346065,
+      "33732": 1792429917.30644,
+      "47608": 1792429919.634258
+    },
+    "observed_processes_remaining": [],
+    "observed_processes_absent": true,
+    "complete_process_tree_absence_proven": false,
+    "cleanup_events": [],
+    "monitor_errors": [],
+    "retained_root": "D:\\h1_cross_connected_06_non_authoritative",
+    "all_artifacts_retained": true,
+    "formal_result": false
+  },
+  "result_sha256": "c72b634a37471be88ed13e65a32b7ac066bba8abfc1d76b542b5ecec9169bb6f",
+  "saved_file_count": 212,
+  "all_saved_bytes_match": true,
+  "paired_lane_hours": 6,
+  "oracle": [
+    {
+      "lane": "cfe",
+      "hour0_call_normalized": "1/50",
+      "hour1_recovery_normalized": "5882352941/250000000000",
+      "hour1_debt_normalized": "3/5000000000000",
+      "actual_power_mw": [
+        "20",
+        "30882352941/1000000000"
+      ]
+    },
+    {
+      "lane": "joint",
+      "hour0_call_normalized": "1/50",
+      "hour1_recovery_normalized": "5882352941/250000000000",
+      "hour1_debt_normalized": "3/5000000000000",
+      "actual_power_mw": [
+        "20",
+        "30882352941/1000000000"
+      ]
+    },
+    {
+      "lane": "network",
+      "hour0_call_normalized": "0",
+      "hour1_recovery_normalized": "0",
+      "hour1_debt_normalized": "0",
+      "actual_power_mw": [
+        "25",
+        "25"
+      ]
+    }
+  ],
+  "phase_fresh_hours": {
+    "0": 12,
+    "1": 4
+  },
+  "static_identity_calls": 59448,
+  "static_identity_original_computations": 15,
+  "all_static_original_bookends_match": true,
+  "owner_stage_seconds": {
+    "ready_replay": 50.20528270000068,
+    "fresh_current": 49.241180599987274,
+    "selector:Rref:None": 1.2710925999999745,
+    "selector:A:cfe_only_shared": 0.8594281999976374,
+    "selector:A:joint_correct_shared": 0.8744494000129635,
+    "selector:A:network_only_shared": 0.8950570000015432,
+    "intent_and_ticket": 0.41057000000728294,
+    "scientific_transition_replay": 1.223085200006608,
+    "fresh_before_paired": 48.265889300004346,
+    "outcome_and_ticket": 0.46268149999377783,
+    "source_selectors_paired": 104.34531840001,
+    "final_full_replay": 90.49831409999751,
+    "normal": 142.64731600000232
+  },
+  "owner_stage_counts": {
+    "ready_replay": 2,
+    "fresh_current": 2,
+    "selector:Rref:None": 2,
+    "selector:A:cfe_only_shared": 2,
+    "selector:A:joint_correct_shared": 2,
+    "selector:A:network_only_shared": 2,
+    "intent_and_ticket": 2,
+    "scientific_transition_replay": 2,
+    "fresh_before_paired": 2,
+    "outcome_and_ticket": 2,
+    "source_selectors_paired": 2,
+    "final_full_replay": 2,
+    "normal": 1
+  },
+  "end_to_end_stage_seconds": {
+    "N0_terminal": 69.38790050000534,
+    "hour0_paired": 100.62388620000274,
+    "hour1_paired": 304.57023050000134,
+    "closed_before_reopen": 0.09574779999093153,
+    "reopen_verified": 69.17858419999538
+  },
+  "source_snapshots_match_current": true,
+  "read_only_predecessor_carry_links_match": true,
+  "baseline04_hour0_projection_sha256": "5dcdf16e74a5777672d8305faa09c06085229d45f0aeb4f7ac14795910fac619",
+  "current_hour0_projection_sha256": "5dcdf16e74a5777672d8305faa09c06085229d45f0aeb4f7ac14795910fac619",
+  "baseline04_hour0_scientific_projection_equal": true,
+  "baseline05_two_hour_scientific_projection_equal": true,
+  "baseline05_two_hour_projection_sha256": [
+    "5dcdf16e74a5777672d8305faa09c06085229d45f0aeb4f7ac14795910fac619",
+    "fd931b8a8cfcc88a914d0d0c3e959705c2ef442417b76d027d88026a7c066ce6"
+  ],
+  "full_192_hour_execution_verified": false,
+  "formal_result": false,
+  "production_overhead_measured": false,
+  "complete_process_tree_absence_proven": false,
+  "persisted_atomic_live_join_authenticated": false
+}

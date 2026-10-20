@@ -1,5 +1,47 @@
 # 当前问题与阶段门禁登记
 
+2026-10-20 最新跨小时进度：3h事故延续/修复/单lane停止完整合成链已完成（outage v1 connected_03，exit0/1passed1307.07s，outer1314.969s），独立保存/日志/Fraction补验通过。
+3个normal fake Jobs/15 stages、34次fake selector、3个outcome/7个paired lane-hour；h0/h1正Rref request5MW，h2修复首小时cap24MW binding。CFE带incumbent timeout仍actual_unresolved，两carry保持h0，其余lane继续；0 real native。
+缺h3输入按原窗口边界拒绝，保留pending attempt且无第4个Job/clock/obligation/selector；这发生于enrollment，不提供正式follow-up右删失指标。外部live preclose checkpoint留存关键heads/科学对照，全部关闭后同进程fresh重开/public inspect/独立historical/snapshot通过，444个owned文件名称/SHA全程相同。
+实测owner源层API32/prefix-hour64、parent inspect64/weight128（排除独立historical/snapshot/anchor）；采样RSS384.47MiB、logical22.15MiB，原1500s/120s活动/1GiB/128MiB预算未顺延。1299启动pins未变、1279继承pins及36+23 guard证据复用；旧失败/中断和detached补验保留各自范围。
+下一步聚焦真实168h enrollment→至多24h follow-up边界、episode终结及诚实右删失：先闭合动态prefix重放的复用合同与whole-workflow预算，再连接验证；完整192h仍OPEN，不能以三小时结果关闭或外推生产成本。
+正式实验/真实RTS/native、生产整体预算、writer冷重建、持久atomic-live认证、seal/official review仍OPEN；本包仅DRAFT/PRE_SEAL，formal/native/resource各门false。旧hour0/两小时结果及Common/source-factory findings继续保留。
+证据：`results/tables/rq2_h1_cross_hour_outage_v1_non_authoritative/{acceptance_report.md,connected_03_postcheck.json,workflow_performance_review_readable.md,preseal_findings.md,phase_boundary_next_step_v1.md}`。以下先前记录保留为历史。
+
+2026-10-20 最新跨小时进度：批量历史重放后继通过2h/3lane合成成功前缀及全部close/reopen完整重放（batch v2 connected_01，exit0/1passed503.18s，outer509.516s）。
+2个outcome覆盖6个lane-hour，精确恢复与6e-13剩余debt保留；新旧科学projection与最终state相同（新request命名空间单列），212保存文件名称/SHA一致，0 real native。
+owner源层历史API实测20次/prefix-hour权重28（前驱32/40）；对应parent inspect40次/权重56，不含独立historical/snapshot/anchor。旧同规模outer604.266s，本次单次观测少15.68%，生产和192h成本仍未知。
+固定source/reader入口、逐小时新audit身份与异常清理已补验；23项当前差异边界及保存oracle通过，未变v1的36 guard按同字节复用。units_02失败原件保留。
+下一步补正Rref、事故延续/修复、分支停止/缺输入右删失的有界整链与预算；完整168h enrollment+至多24h follow-up、phase边界/episode终结和生产整体预算仍OPEN，WINDOW保持原合同。
+正式实验、真实RTS、writer重建、持久atomic-live认证、资源准入与official review未闭合，formal/native/resource门仍false；旧chain07/旧06复用，Common/source-factory遗留findings保留。
+证据：`results/tables/rq2_h1_cross_hour_batch_v2_non_authoritative/{acceptance_report.md,connected_01_postcheck.json,connected_01_dependency_bindings.json,preseal_findings.md}`。以下先前记录保留为历史。
+
+
+2026-10-20 当前跨小时缺口更新：2h/3lane合成成功前缀与全部close/reopen已通过（connected_06，exit0/outer604.266s），2个outcome覆盖6个lane-hour；212个保存文件名称/SHA与科学carry一致，精确debt保留，36项相关回归通过。
+完整168+至多24小时、enrollment/followup边界、正网络调用/事故修复、分支停止/缺输入右删失与episode终结的整链验收仍OPEN；不由2h结果关闭192h里程碑。
+整体性能审查发现owner fresh为T²+5T+2的条件性调用增长；当前test-only static memo未解决动态prefix重放。先在跨小时路径内建立可证明复用/增量校验合同及生产预算，不线性外推或直接扩跑。
+全部formal/native/resource门保持false；真实RTS整链、normal writer进程退出后的可写恢复、持久atomic-live认证和official独立审查未闭合。旧Common/source-factory findings仍OPEN，旧chain07及独立后验04复用。
+证据：`results/tables/rq2_h1_cross_hour_v1_non_authoritative/{acceptance_report.md,connected_06_postcheck.json,scaling_review.md}`。以下00:17及更早内容保留为历史。
+
+2026-10-20 00:17 +08 当前工作优先级：跨小时完整链→正式科研实验所需门禁；旧chain07 hour-0及独立后验04复用，不重跑。
+跨小时实现/整链性能仍OPEN。新增独立DRAFT `h1_cross_hour_owner_development_v1`，合并单次操作重复replay并保留独立fresh；正在有界2h/3lane synthetic诊断connected_01，尚无完成结论。
+该诊断不改变源输入/数值/业务合同，不提供完整168+24、native、正式结果或资源准入。旧Common/source-factory PRE_SEAL findings保留OPEN，暂不进入本包调用路径。
+本后继明确尚无normal writer进程退出后的可写恢复、持久atomic-live join receipt、完整生产预算及official独立审查；正式门禁保持false。
+具体DAG/调用量/优化/资源停止条件见`results/tables/rq2_h1_cross_hour_v1_non_authoritative/performance_review.md`。
+
+2026-10-19 22:23:12 +08 暂停交接：原goal已paused，尚未完成；本次只保存状态，无新实验。
+旧chain07主体及独立后验04已完成，不重跑；实时Python/pytest/求解器进程快照见pause_handoff_state_222.json。
+Core6实际N0/oracle/数值重开181与Core7/Roster5命名范围202保留；数值Roster/Common/整链仍OPEN。
+207已验证20文件typed图AST、canonical import及拒绝路径rollback；215独立provenance16项通过，但未绑定B7。
+216断言通过而entry缺base失败，218归档断言失败均保留；219正确归档，未把216计作成功。
+220最新callable/source-factory小层40passed4.31s/outer12.063s/exit0、source unchanged、观察PID退出、句柄关闭；221九份精确归档。
+当前4份helper/test与221一致，但独立复核未闭合；真实Bridge/footer/activation/Common phase scope均未接入，B7 binder仍拒绝。
+208逐次phase ID写入stable validation report的要求有冲突：需另设phase_execution_receipt，由Witness同时绑定两者，尚未实现。
+下一步先审当前helpers，再接独立固定source factory/三种真实读入口和静态phase复用；不先消耗新N0或长链。
+详细交接：continuation_handoff_20261019_pause.md；matrix24 SHAaa9a1c1b321dee151d5ae6438feb994f99d3aa08d94f830a1cd58d191a53346b。
+优化整链、整体性能预算和正式实验仍未验收；formal/native/resource各门false。
+
+
 2026-10-19 19:58 当前续作：旧chain07主体及独立后验04已闭合，不重跑；当前199/200/201观察PID均退出。
 181已归档实际Core6单N0/原oracle/真实数值只读重开定向复核；174计划遗留module/header例外原样保留。
 Core7/Owned7/Verifier6/Roster5与phase-kernel2/binding4/operation2为DRAFT后继，未替换Core6或174保存字节。

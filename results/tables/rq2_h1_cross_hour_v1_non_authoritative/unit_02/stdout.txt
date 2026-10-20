@@ -1,0 +1,40 @@
+................F
+================================== FAILURES ===================================
+_________ test_aggregate_budget_rejects_before_any_capture[changes0] __________
+
+saved_setup = namespace(manifest=Manifest(lanes=(LaneConfig(lane_id='joint', policy=BidirectionalPolicy(arm_id='joint_correct_shared..._budget_rejects_0/owner_non_authoritative'), tickets=[], retain=<function setup.<locals>.retain at 0x0000028C620BB4C0>)
+changes = {'max_solver_calls': 8}
+
+    @pytest.mark.parametrize('changes', [dict(max_solver_calls=8), dict(max_total_solver_seconds=8.)])
+    def test_aggregate_budget_rejects_before_any_capture(saved_setup, changes):
+>       cfg = manifest()
+              ^^^^^^^^^^
+
+tests\test_h1_cross_hour_owner_development_v1.py:355: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_h1_cross_hour_owner_development_v1.py:174: in manifest
+    return m.saved.Manifest(tuple(configs), selectors.REF, selectors.ACT, selectors.SPEC,
+<string>:12: in __init__
+    ???
+experiments\h1_persistent_owner_development_v1.py:87: in __post_init__
+    selection._configuration(lane,selector,self.solver_specification,self.replay_limits,0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+lane = Lane(role='Rref', arm=None)
+selector = ReferenceSelectorSpec(rule='request_l1_normal_deviation_generation_uid_order', absolute_gap_mw=1e-07, relative_gap=1e-08, lock_tolerance_mw=1e-09, evidence_role='mechanism_assumption')
+spec = Rq2SolverSpec(name='highs', expected_package_version='1.15.1', threads=1, mip_relative_gap=1e-08, feasibility_toleranc...-09, optimality_tolerance=1e-09, integer_feasibility_tolerance=1e-09, random_seed=0, time_limit_seconds=1.0, tee=False)
+limits = ReplayLimits(max_stages=300, max_variables=1000, max_constraints=2000, max_record_bytes=1048576, max_total_bytes=16777216, max_seconds_per_solve=1, max_threads=1, max_solver_calls=300, max_total_solver_seconds=300)
+count = 0
+
+    def _configuration(lane,selector,spec,limits,count):
+        if type(lane) is not physical.Lane or type(limits) is not ReplayLimits:
+>           raise ValueError('typed lane and replay limits required')
+E           ValueError: typed lane and replay limits required
+E           metadata resolver cleanup: ValueError('metadata resolver poisoned')
+
+experiments\h1_origin_selector_replay_development_v1.py:45: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_h1_cross_hour_owner_development_v1.py::test_aggregate_budget_rejects_before_any_capture[changes0]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 16 passed, 1 deselected, 1 warning in 80.23s (0:01:20)
+{"ordinary_unit_immutable_code_files": 323, "code_read_hits": 24685, "all_code_handles_closed": true, "original_read_alias_restored": true, "all_metadata_handles_closed": true, "original_metadata_version_alias_restored": true, "distribution_fast_calls": 116, "distribution_fallback_calls": 0, "metadata_parse_hits": 2726, "metadata_parse_misses": 106, "per_call_distribution_discovery_preserved": false, "formal_result": false}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="17" time="80.228" timestamp="2026-10-20T00:23:08.763982+08:00" hostname="LAPTOP-FT6J5Q9J"><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_need_requires_producer_before_attempt_or_next_source" time="4.403" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_no_need_with_no_producer_and_terminal_failure_freezes[False]" time="4.567" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_no_need_with_no_producer_and_terminal_failure_freezes[True]" time="3.864" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_pre_normal_drift_rejects_before_job[_clock_index]" time="5.205" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_pre_normal_drift_rejects_before_job[_clock_previous]" time="4.998" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_pre_normal_drift_rejects_before_job[_obligation_previous]" time="4.798" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_pre_normal_drift_rejects_before_job[_clock_last]" time="5.005" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_pre_normal_drift_rejects_before_job[parent_head]" time="4.880" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_pre_normal_drift_rejects_before_job[nonce]" time="4.770" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_wrong_parent_intent_anchor_rejects_before_job" time="4.534" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_post_normal_drift_rejects[_clock_last]" time="4.215" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_post_normal_drift_rejects[_clock_pending]" time="4.516" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_post_normal_drift_rejects[_active_request]" time="5.074" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_post_normal_drift_rejects[_phase_scope]" time="5.375" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_post_normal_drift_rejects[_phase_job_intent]" time="5.191" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_post_normal_drift_rejects[equal_observation]" time="5.113" /><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_aggregate_budget_rejects_before_any_capture[changes0]" time="0.378"><failure message="ValueError: typed lane and replay limits required&#10;metadata resolver cleanup: ValueError('metadata resolver poisoned')">saved_setup = namespace(manifest=Manifest(lanes=(LaneConfig(lane_id='joint', policy=BidirectionalPolicy(arm_id='joint_correct_shared..._budget_rejects_0/owner_non_authoritative'), tickets=[], retain=&lt;function setup.&lt;locals&gt;.retain at 0x0000028C620BB4C0&gt;)
+changes = {'max_solver_calls': 8}
+
+    @pytest.mark.parametrize('changes', [dict(max_solver_calls=8), dict(max_total_solver_seconds=8.)])
+    def test_aggregate_budget_rejects_before_any_capture(saved_setup, changes):
+&gt;       cfg = manifest()
+              ^^^^^^^^^^
+
+tests\test_h1_cross_hour_owner_development_v1.py:355: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_h1_cross_hour_owner_development_v1.py:174: in manifest
+    return m.saved.Manifest(tuple(configs), selectors.REF, selectors.ACT, selectors.SPEC,
+&lt;string&gt;:12: in __init__
+    ???
+experiments\h1_persistent_owner_development_v1.py:87: in __post_init__
+    selection._configuration(lane,selector,self.solver_specification,self.replay_limits,0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+lane = Lane(role='Rref', arm=None)
+selector = ReferenceSelectorSpec(rule='request_l1_normal_deviation_generation_uid_order', absolute_gap_mw=1e-07, relative_gap=1e-08, lock_tolerance_mw=1e-09, evidence_role='mechanism_assumption')
+spec = Rq2SolverSpec(name='highs', expected_package_version='1.15.1', threads=1, mip_relative_gap=1e-08, feasibility_toleranc...-09, optimality_tolerance=1e-09, integer_feasibility_tolerance=1e-09, random_seed=0, time_limit_seconds=1.0, tee=False)
+limits = ReplayLimits(max_stages=300, max_variables=1000, max_constraints=2000, max_record_bytes=1048576, max_total_bytes=16777216, max_seconds_per_solve=1, max_threads=1, max_solver_calls=300, max_total_solver_seconds=300)
+count = 0
+
+    def _configuration(lane,selector,spec,limits,count):
+        if type(lane) is not physical.Lane or type(limits) is not ReplayLimits:
+&gt;           raise ValueError('typed lane and replay limits required')
+E           ValueError: typed lane and replay limits required
+E           metadata resolver cleanup: ValueError('metadata resolver poisoned')
+
+experiments\h1_origin_selector_replay_development_v1.py:45: ValueError</failure></testcase></testsuite></testsuites>

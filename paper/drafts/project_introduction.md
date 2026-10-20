@@ -1,6 +1,6 @@
-# 达产与扩建延期不确定性下智算中心分阶段接入与小时级绿电协同规划
+# 电网响应与绿电匹配下智算中心业务柔性的可交付性研究
 
-更新日期：2026-10-17。本文介绍当前研究设计及已有证据；实验进度以第5节的日期快照为准。
+更新日期：2026-10-20。本文介绍当前研究设计及已有证据；实验进度以第5节的日期快照为准。
 
 ## 1 摘要
 
@@ -99,13 +99,13 @@ H1表示每步使用当前小时已揭示输入的网侧机制。状态分为共
 
 支持清单当前包含每cell 523×28=14,644个training pair及512×28=14,336个holdout pair；这些是机制组合身份，重叠窗口不作为独立样本。1,900个cell对应27,823,600个training cell-pair身份，实际solver调用量取决于解析排除和合法复用DAG，须由具体任务包和完整预算确定。
 
-![图2 有限登记联合服务的研究流程](../figures/project_workflow_cn.svg)
+![图2 智算中心业务柔性可交付性研究流程](../figures/project_workflow_cn.svg)
 
-**图2 有限登记联合服务的研究流程。**展示当前设计中的数据、四臂模型与评价依赖；实现验收进度见第5节。
+**图2 智算中心业务柔性可交付性研究流程。**展示有限登记合同下的数据、四臂模型与评价依赖。图中为完整研究设计；已验收的合成开发用例及待完成的连续执行范围见第5节。
 
-![图3 智算中心与电网协同网络结构](../figures/project_network_cn.svg)
+![图3 智算中心电网响应与绿电匹配框架](../figures/project_network_cn.svg)
 
-**图3 智算中心与电网协同网络结构。**固定POI与共享业务柔性构成首篇机制基础；图中的分阶段达产及电网扩建属于长期项目蓝图。
+**图3 智算中心电网响应与绿电匹配框架。**固定POI、小时级CFE匹配与共享业务柔性构成首篇机制基础；图中的分阶段达产及电网扩建属于长期项目蓝图。
 
 ## 5 项目可行性与当前状态
 
@@ -121,20 +121,24 @@ RTS-GMLC网侧、Alibaba业务及Google功率资料均保留各自来源、版�
 
 获批origin/registry后继已覆盖旧事故源的六个左边界缺口，保存检查记录为1,035个unique entries、source_input_unresolved=0且obligations_removed=0。这项来源覆盖不等于完整192h producer执行已验收。末端状态、按需follow-up和未知结局仍须由连续链实际证明。
 
-### 5.3 2026-10-17开发进度快照
+### 5.3 2026-10-20开发进度快照
 
 finite-v2科学参数于2026-09-30获批开发；具体配置仍为DRAFT_NONAUTHORITATIVE，complete_preregistration、formal_execution_ready和formal_run_authority均为false。normal模型、来源适配、持久状态、选择器、原始报告保留及限定范围PRE_SEAL已有开发证据。
 
-截至2026-10-17 14:38（Asia/Shanghai）核查，正在运行的chain_07是首个模拟小时的合成集成验收。保存trace已到达三个独立N0、common、共同Rref、三个Actual和逐项缺Actual拒绝检查；完整成对提交、关闭重开、独立保存记录重放及报告尚无整链成功终态。它使用模拟求解器输出验证实际执行的来源读取与状态组合路径，输入及来源替换点保持合成测试身份，不能作为新合同的正式容量或风险结果。
+首个模拟小时的chain_07完整合成链及独立进程保存记录重放已完成。三个独立N0经common、共同Rref、三个Actual到达成对提交，关闭后重开，保存记录中的heads、projection及carry一致；独立后验补充04闭合了该用例的重放、清理与计时证据。原主链墙钟耗时259,910.325秒，独立进程重放及引用字段检查耗时401.168秒。这些计时属于旧版合成校验路径，不能作为native或生产执行预算。
 
-当前主要计算瓶颈是完整校验路径中的重复历史重建与I/O。局部优化已有科学输出及audit等价证据，整体收益和预算仍须完整路径实测。2026-10-17新增的启动条件要求任何新实验先审查任务DAG、真实调用倍数、可复用证据、分阶段时间/内存/存储、心跳与停止条件；合成和native耗时分别登记。192h描述模拟跨度，实际墙钟预算尚未核定。
+跨小时后继已完成两小时、三分支成功前缀及关闭重开后的完整重放。批量历史重放版本的2个outcome覆盖6个成对lane-hour，外层墙钟耗时509.516秒；业务投影与最终科学状态和旧版同规模用例一致，212个保存文件名称及SHA保持不变。
+
+三小时事故延续、修复与单分支停止用例也已完成：3个outcome覆盖7个成对lane-hour，外层墙钟耗时1,314.969秒。它验证了正网侧请求、事故延续与修复首小时出力限额；CFE分支在带可行incumbent的timeout后保留actual_unresolved，业务与Actual状态不推进，其余分支继续。关闭前保存到外部路径的checkpoint支持全部关闭后的同进程只读重开，444个保存文件名称及SHA一致。缺失下一小时输入发生在登记期，保留pending attempt，episode尚未终结；该用例没有提供正式follow-up右删失指标。
+
+上述用例使用合成来源或fabricated solver输出，真实native调用为0，属于DRAFT/PRE_SEAL开发证据。完整168h登记至按需最多24h后续、phase边界、episode终结及诚实右删失仍待整链验收。当前重点是动态prefix重放的合法复用与整体资源预算；两小时和三小时用例的覆盖及故障路径不同，不按耗时比例外推优化收益或192h成本。新实验前须审查完整任务DAG、调用倍数、证据复用、分阶段时间/内存/存储、心跳与停止条件。192h是最大模拟跨度，生产墙钟预算尚未核定。
 
 ### 5.4 进入正式实验前的出口
 
 | 顺序 | 必须完成的对象 | 当前状态 |
 |---|---|---|
-| 1 | 完整hour-0及独立保存重放、清理和计时 | 验证中 |
-| 2 | 跨小时及最长192h的producer/phase覆盖 | 未完成 |
+| 1 | 完整hour-0及独立保存重放、清理和计时 | chain_07合成用例及独立后验04完成 |
+| 2 | 跨小时及最长192h的producer/phase覆盖 | 两小时及三小时合成用例完成；完整168h+至多24h仍待验收 |
 | 3 | 具体任务/复用DAG、同合同LB/UB与资源准入 | 未完成 |
 | 4 | successor封存及全新独立official review | 尚未完成本轮执行包审查 |
 | 5 | 对具体包单独取得运行授权并验收正式结果 | 尚未启动 |
@@ -236,4 +240,7 @@ timeout、局部求解失败、缺少incumbent或不完整证书保留为相应�
 - [执行计划](../../docs/plan/科研项目执行步骤.md)与[blocker register](../../docs/model_spec/blocker_register.md)：阶段证据、开放问题和解除条件；
 - [H1端到端里程碑](../../docs/plan/H1_端到端里程碑验收_v1.md)：完整hour-0至正式运行的验收顺序；
 - [chain_07保存计时](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/timing.jsonl)与[来源边界检查](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/source_boundary_status_rechecked_01.json)：开发进度与获批来源覆盖；
+- [hour-0完整报告](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/complete_integration_report_supplement_04.md)及[独立后验04](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/postcheck_supplement_completion_04.json)：首小时合成链和独立进程保存重放；
+- [两小时批量重放验收](../../results/tables/rq2_h1_cross_hour_batch_v2_non_authoritative/acceptance_report.md)及[机器补验](../../results/tables/rq2_h1_cross_hour_batch_v2_non_authoritative/connected_01_postcheck.json)：6个成对lane-hour及保存状态对照；
+- [三小时事故与修复验收](../../results/tables/rq2_h1_cross_hour_outage_v1_non_authoritative/acceptance_report.md)及[机器补验](../../results/tables/rq2_h1_cross_hour_outage_v1_non_authoritative/connected_03_postcheck.json)：7个成对lane-hour、分支停止、缺输入与同进程只读重开；
 - [B0-B2结果](../../results/tables/rts24_b0_b2_summary.json)、[B3-B5结果](../../results/tables/rts24_b3_b5_summary.json)及[24小时DC benchmark](../../results/tables/rts_gmlc_google_day0_full24h_selected_n1_dc_scuc_v1/summary.json)：第5.1节的具名历史证据。

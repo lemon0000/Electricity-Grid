@@ -1,30 +1,39 @@
 """Bounded callable observations that never invoke object representations."""
-from types import FunctionType,ModuleType
+from hashlib import sha256
+from struct import pack
+from types import FunctionType
 from weakref import ref
 
 
 def literal(value):
-    remaining=[8192];active=set()
+    remaining=[8192,1024*1024];active=set()
+    def scalar(kind,item,raw):
+        remaining[1]-=len(raw)
+        if remaining[1]<0:raise ValueError('bounded aggregate callable scalar bytes required')
+        return (kind.__name__,id(item),len(raw),sha256(raw).digest())
     def visit(item,depth):
         remaining[0]-=1
         if depth>32 or remaining[0]<0:raise ValueError('bounded literal callable declaration required')
         kind=type(item)
-        if kind in (type(None),bool,int):return (kind.__name__,item)
-        if kind is float:return ('float',float.hex(item))
+        if kind is type(None):return ('NoneType',)
+        if kind is bool:return ('bool',int(item))
+        if kind is int:
+            if item.bit_length()>4096:raise ValueError('bounded callable integer required')
+            return scalar(kind,item,item.to_bytes((item.bit_length()+8)//8,'big',signed=True))
+        if kind is float:return scalar(kind,item,pack('!d',item))
         if kind in (str,bytes):
             if len(item)>65536:raise ValueError('bounded literal callable scalar required')
-            return (kind.__name__,item)
+            return scalar(kind,item,item.encode('utf-8','surrogatepass') if kind is str else item)
         if kind not in (tuple,list,dict,set,frozenset):
             raise ValueError('exact builtin literal callable declaration required')
         if id(item) in active:raise ValueError('acyclic callable declaration required')
         active.add(id(item))
         try:
             if kind is dict:
-                payload=frozenset((visit(key,depth+1),visit(part,depth+1)) for key,part in item.items())
+                payload=tuple((visit(key,depth+1),visit(part,depth+1)) for key,part in item.items())
             else:
                 payload=tuple(visit(part,depth+1) for part in item)
-                if kind in (set,frozenset):payload=frozenset(payload)
-            return (kind.__name__,payload)
+            return (kind.__name__,id(item),payload)
         finally:active.remove(id(item))
     return visit(value,0)
 
@@ -38,11 +47,14 @@ def signature(function):
 
 
 def weak_observation(function):
-    """Keep no function, module, namespace, closure cell or default object alive.
+    """Keep no original function, namespace, closure cell or default leaf alive.
 
     Private mutable state containers retain their identity. Their contents are
-    authenticated by the original source checker. Unobserved identity ABA for
-    values that cannot be weak-referenced is outside this observation contract.
+    authenticated by the original source checker. Defaults preserve observed
+    order, identity and aliases with bounded scalar digests, not owned leaves.
+    Code, wrapped objects and closure contents use weakrefs when possible.
+    Unobserved ABA for non-weakrefable default containers/leaves, cells and
+    wrapped/closure values remains outside this observation contract.
     """
     before=signature(function);contents=[]
     for cell in function.__closure__ or ():
@@ -50,13 +62,19 @@ def weak_observation(function):
         try:reference=ref(value)
         except TypeError:reference=None
         contents.append((reference,id(value)))
-    return ref(function),before,tuple(contents)
+    wrapped=getattr(function,'__wrapped__',None)
+    try:wrapped_reference=ref(wrapped)
+    except TypeError:wrapped_reference=None
+    return ref(function),before,tuple(contents),ref(function.__code__),wrapped_reference
 
 
 def check_weak(observation,function):
-    reference,before,contents=observation
+    reference,before,contents,code_reference,wrapped_reference=observation
     if reference() is not function or signature(function)!=before:
         raise ValueError('original callable code/default/global/closure changed')
+    if (code_reference() is not function.__code__ or wrapped_reference is not None
+            and wrapped_reference() is not getattr(function,'__wrapped__',None)):
+        raise ValueError('original callable code/wrapped alias changed')
     for cell,(observed,identity) in zip(function.__closure__ or (),contents):
         value=cell.cell_contents
         if id(value)!=identity or observed is not None and observed() is not value:

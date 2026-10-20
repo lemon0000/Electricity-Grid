@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="551.215" timestamp="2026-10-20T00:46:56.673788+08:00" hostname="LAPTOP-FT6J5Q9J"><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_two_hour_three_lane_connected_chain" time="547.920"><failure message="PermissionError: [Errno 13] Permission denied&#10;metadata resolver cleanup: ValueError('metadata resolver poisoned')">tmp_path = WindowsPath('D:/h1_cross_connected_05_non_authoritative/test_two_hour_three_lane_conne0')
+environment = (WindowsPath('D:/h1_cross_connected_05_non_authoritative/test_two_hour_three_lane_conne0/upstream'), WindowsPath('D:/h...{'G1': 100.0}, spin_up_requirement_by_area_mw={1: 0.0}))), 'power_change': {}, 'workload': '0', 'workload_change': {}})
+real = (Resolver(_catalog_node='cbdc8a06f2171513203317cea1234434e81092897f60f64061590255bc47df93', _overlay_node='fe27c839cb4...826f93b7712e2', _protocol='95eb158f0a8e6784d2af401e67164965543c98f42ff02b756c214982601e5430', _alpha_count=100), 97364)
+synthetic_reports = [b'{"assignment":[["angle_degrees[normal,0,1]","0x0.0p+0"],["angle_degrees[normal,0,2]","0x1.6eb167b830193p+2"],["bran...Tol":1e-09,"MIPGap":1e-08,"MIPGapAbs":0.0,"OptimalityTol":1e-09,"Seed":0,"Threads":1,"TimeLimit":5.0},"variables":12}']
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002A96F3618B0&gt;
+static_code_identities = None
+
+    def test_two_hour_three_lane_connected_chain(tmp_path, environment, real, synthetic_reports, monkeypatch, static_code_identities):
+        trace(tmp_path, 'start', synthetic_hours=2, lanes=3, formal_result=False)
+        load = install_rows(monkeypatch)
+        install_registry(monkeypatch, environment, load)
+        historical = m.saved.source.historical
+        monkeypatch.setattr(historical, '_source_paths', lambda d: (
+            {Path(d['config_path']), Path(d['upstream_root'])/'SHA256SUMS'}, {Path(d['upstream_root'])}))
+        normal = controller(tmp_path/'normal_non_authoritative', environment, real, monkeypatch)
+        holder = owner = None
+        original_fresh = m.saved._fresh
+        source_calls = []
+        def fresh(binding, hour, terminal):
+            source_calls.append(hour)
+            if hour == 1:
+                import sqlite3
+                if owner is not None and owner._live_controller is not None:
+                    assert owner._operation.locked()
+                with closing(sqlite3.connect(owner_root/'owner.sqlite')) as db:
+                    attempts = db.execute("SELECT body FROM events WHERE kind='attempt'").fetchall()
+                assert any(json.loads(raw)['hour'] == 1 for (raw,) in attempts)
+            return original_fresh(binding, hour, terminal)
+        monkeypatch.setattr(m.saved, '_fresh', fresh)
+        try:
+            install_launcher(monkeypatch, tmp_path, normal_reports(synthetic_reports, 0), 0)
+            assert normal.bootstrap_development().completed_hours == 1
+            trace(tmp_path, 'N0_terminal')
+            first = normal.last_obligation_observation
+            cfg = manifest()
+            binding = m.saved.SourceBinding(str(normal._lease.root), first.header_sha256, 'c'*64, first.terminal_sha256)
+            owner_root = tmp_path/'owner_non_authoritative'
+            holder_root = tmp_path/'holder_non_authoritative'
+            retained_heads = []
+            holder_args = dict(owner_root=owner_root, max_tickets=cfg.max_events, max_ticket_bytes=cfg.max_event_bytes,
+                               max_total_ticket_bytes=cfg.max_archive_bytes, retain_head=lambda *a: retained_heads.append(a[2]) or a[2])
+            holder = m.saved.tickets.TicketHolder(holder_root, create=True, **holder_args)
+            owner = m.DevelopmentOwner(owner_root, cfg, binding, holder=holder, create=True, controller=normal)
+            calls = install_selectors(monkeypatch)
+            producer = m.PhaseSelectorProducer(producer_budget())
+            one = owner.run_next_development(expected_heads=owner.heads, selector_producer=producer)
+            assert one.completed_hours == 1 and all(status == 'active' for _, status in one.lane_status)
+            first_state = owner.last_candidate_state
+            assert first_state.reference.physical_carry.completed_hours == 1
+            trace(tmp_path, 'hour0_paired')
+            with pytest.raises(ValueError, match='retained owner heads'):
+                owner.run_next_development(expected_heads=('a'*64, 'b'*64), selector_producer=producer)
+            assert normal._clock_index == 1
+            install_launcher(monkeypatch, tmp_path, normal_reports(synthetic_reports, 1), 1)
+            two = owner.run_next_development(expected_heads=owner.heads, selector_producer=producer)
+            assert two.completed_hours == 2 and two.continuation_available
+            assert not two.pending_attempt and not two.pending_intent
+            assert all(status == 'active' for _, status in two.lane_status)
+            final_state = owner.last_candidate_state
+            with closing(owner._connect()) as db:
+                rows = owner._rows(db)
+            assert [row[2] for row in rows] == ['intent', 'outcome', 'attempt', 'intent', 'outcome']
+            assert normal._clock_index == final_state.hour == 2
+            assert len(calls) == 18 and sum(v['reference'] for v in calls) == 6
+            trace(tmp_path, 'hour1_paired', owner_timings=owner.stage_timings, source_calls=source_calls)
+            # An independent exact ledger check; no replacement of business code.
+            lanes0, lanes1 = dict(first_state.lanes), dict(final_state.lanes)
+            expected_recovery = Q((Q(1, 50)/Q(85, 100)*10**12).__floor__(), 10**12)
+            for key in ('cfe', 'joint'):
+                assert lanes0[key].business.identity != lanes1[key].business.identity
+                records = lanes1[key].business.cursor.records
+                a0, a1 = (r.response.action for r in records)
+                q0, q1 = a0.grid_served+a0.cfe_served, a1.grid_served+a1.cfe_served
+                assert q0 == Q(1, 50) and a0.recovery == 0 and q1 == 0 and a1.recovery == expected_recovery
+                assert q0+a0.recovery &lt;= Q(1, 2) and q1+a1.recovery &lt;= Q(1, 2)
+                ledger = lanes1[key].business.cursor.execution.tracks[0][1].ledger
+                assert ledger.debt == q0-Q(85, 100)*a1.recovery
+            for key in lanes1:
+                for record in lanes1[key].business.cursor.records:
+                    action = record.response.action
+                    assert action.grid_served+action.cfe_served+action.recovery &lt;= min(Q(1, 2), Q(1, 20))
+            assert lanes1['network'].actual.identity != lanes1['cfe'].actual.identity
+            assert final_state.reference.identity not in (lane.actual.identity for _, lane in final_state.lanes)
+            heads, holder_head = owner.heads, holder.head
+            scientific = final_state.scientific
+            owner_timings = list(owner.stage_timings)
+            last_terminal = normal.last_obligation_observation.terminal_sha256
+            declaration = normal._parent._declaration
+            parent_identity = normal._parent.identity
+            anchor = normal._parent._anchor.inspect().record_sha256
+            jobs = []
+            for hour in range(2):
+                job_root = normal._lease.root/f'job_{hour:03d}_non_authoritative'
+                observed = json.loads((job_root/'observation.json').read_bytes())
+                assert observed['exit_code'] == 0 and observed['whole_job_quiescent']
+                jobs.append(observed)
+            assert len({record['pid'] for record in jobs}) == 2
+            leases = (normal._lease, normal._clock_lease, normal._obligation_lease,
+                normal._parent._root_lease, normal._parent._journal._lease, normal._parent._anchor._lease,
+                owner._lease_object, holder._lease_object)
+            streams = tuple(lease.stream for lease in leases)
+            def saved_bytes():
+                roots = [Path(binding.root), owner_root, holder_root]
+                return {str(path): sha256(path.read_bytes()).hexdigest() for root in roots
+                        for path in root.rglob('*') if path.is_file()}
+&gt;           before_reopen = saved_bytes()
+                            ^^^^^^^^^^^^^
+
+tests\test_h1_cross_hour_owner_development_v1.py:665: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_h1_cross_hour_owner_development_v1.py:663: in saved_bytes
+    return {str(path): sha256(path.read_bytes()).hexdigest() for root in roots
+                              ^^^^^^^^^^^^^^^^^
+results\tables\rq2_h1_hour0_end_to_end_v2_non_authoritative\validation_path_optimization_01\entry_revision_07\code_read_lease.py:155: in read
+    return original(path)
+           ^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/h1_cross_connected_05_non_authoritative/test_two_hour_three_lane_conne0/normal_non_authoritative/execution.lock')
+
+    def read_bytes(self):
+        """
+        Open the file in bytes mode, read it, and close the file.
+        """
+        with self.open(mode='rb') as f:
+&gt;           return f.read()
+                   ^^^^^^^^
+E           PermissionError: [Errno 13] Permission denied
+E           metadata resolver cleanup: ValueError('metadata resolver poisoned')
+
+D:\Miniconda3\envs\compute\Lib\pathlib.py:1020: PermissionError</failure></testcase></testsuite></testsuites>

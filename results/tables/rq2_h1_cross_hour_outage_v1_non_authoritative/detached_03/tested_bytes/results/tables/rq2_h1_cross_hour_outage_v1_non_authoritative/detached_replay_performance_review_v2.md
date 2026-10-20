@@ -1,0 +1,9 @@
+# 只读诊断活动监测后继
+
+问题、冻结462文件、一次prepare_many/纯transition/no Job/no owner-holder构造器和全部科学验收沿用detached_replay_performance_review.md。detached_01与02停止记录保留；02在无文件输出阶段累计观察119.016s CPU，outer121.766s，exit15/no_progress，全部观察PID退出，原文件不变。此结果只说明旧“文件变化即进展”判据不适用于当前CPU只读阶段，不能宣称原补验或重开通过。
+
+新run_saved_replay_v2固定一次新detached_03：总wall仍240s、120s无活动、1GiB采样树RSS、128MiB逻辑文件。活动定义为base文件signature实际改变，或采样自有pytest/child树累计user+system CPU自上次标记增加至少0.25s。监测器本身CPU不计入；每条monitor保留累计CPU、files_changed与cpu_activity。CPU活动不被解释为算法进展或科研验收；忙循环最终仍被固定240s wall停止。没有运行中调参、定时touch或替旧attempt续期。
+
+成本优化：从原real fixture调用同一__wrapped__纯resolver配方，但放在function body、toy source安装前，并由已经启用的15个pure static identity memo覆盖；源、历史、状态、数值和输入都不缓存。每个实际使用的pure函数在退出时由恢复全部别名后的原函数bookend复核。原module-scope real fixture先于该memo、在02已耗>120s；当前旧完整用例resolver成本约60s，可安全复用既有static memo合同降低该重复身份开销。resolver/coordinate/node仍来自同一实际函数，不构造伪resolver或增添live权限。
+
+预期一次batch约50–65s，加resolver/输入核验/bookend，预计100–190s；成本未知区间由240s wall覆盖。actual code/config/plan、closed snapshot、原request/terminal及环境全部由新request和tested_bytes固定。与01/02一样，前后462 SHA必须相同。若预算或任何断言失败则停止保留，不扩wall。该包只支持detached saved-prefix replay；原authenticated reopen、独立heads、原RAM/hash/bookend缺口不被关闭。

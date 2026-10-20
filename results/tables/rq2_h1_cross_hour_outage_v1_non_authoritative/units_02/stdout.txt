@@ -1,0 +1,46 @@
+...F
+================================== FAILURES ===================================
+__________ test_three_hour_analytic_outage_repair_and_timeout_oracle __________
+
+tmp_path = WindowsPath('D:/h1_outage_units_02_non_authoritative/test_three_hour_analytic_outag0')
+outage_environment = (WindowsPath('D:/h1_outage_units_02_non_authoritative/test_three_hour_analytic_outag0/upstream'), WindowsPath('D:/h1_o..., 'G2': 40.0}, spin_up_requirement_by_area_mw={1: 0.0}))), 'power_change': {}, 'workload': '0', 'workload_change': {}})
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002164EF2DEE0>
+static_code_identities = None
+
+    def test_three_hour_analytic_outage_repair_and_timeout_oracle(tmp_path,outage_environment,monkeypatch,static_code_identities):
+        began=time.perf_counter()
+        selection,physical,business=m.saved.selection,m.saved.source.physical,m.saved.business
+        packets=case.packets(outage_environment)
+        frames=[physical._frame(p,after) for p,after in packets]
+        origin=outage_environment[2]
+        prefix=m.saved.source.registry.prepare(split='training',raw_start=0,hours=3,outage_seed=origin.outage_seed,
+            expected_registry_identity='c'*64)
+        views=[m.saved.source.registry.decision_view(a) for a in prefix.actions]
+        assert views[0]['active']==views[1]['active']=={'kind':'generator','uid':'G1'}
+        assert views[1]['started'] is views[1]['ended'] is None
+        assert views[2]['ended']=={'kind':'generator','uid':'G1'} and views[2]['repair_cap_exact']==['24','1']
+        cfg=prior.manifest()
+        selected={};carries={};halted=set();quantities=[]
+        lanes=[('reference',m.saved.RREF)]+[(c.lane_id,c.lane) for c in cfg.lanes]
+        for key,lane in lanes:
+            chosen=cfg.reference_selector if lane.role=='Rref' else cfg.actual_selector
+            selected[key]=selection.initialize_development_selection(frames[0],prefix.origin,lane=lane,
+                selector=chosen,specification=cfg.solver_specification,limits=cfg.replay_limits,chronology_origin=True)
+        for config in cfg.lanes:
+            carries[config.lane_id]=prior.biz.origin(config.lane.arm,mechanism=config.mechanism)
+        calls=case.install_selectors(monkeypatch)
+        repair_before=None
+        for hour,(frame,action) in enumerate(zip(frames,prefix.actions,strict=True)):
+            if hour==2:repair_before=selected['reference'].physical_carry
+            ref,_=_capture(frame,action,selected['reference'],m.saved.RREF,None)
+>           assert ref.next_candidate is not None
+E           AssertionError: assert None is not None
+E            +  where None = ReplayResult(input_identity='f254594f239bcd57c52942ccf92e1126b10be922fc52ce5f5d0ad1ab9f84a709', policy_identity='8f6af...ecurity_certified=False, exact_lexicographic_certificate=None, infeasibility_certificate=None, causal_certificate=None).next_candidate
+E           metadata resolver cleanup: ValueError('metadata resolver poisoned')
+
+tests\test_h1_cross_hour_outage_chain_development_v1.py:93: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_h1_cross_hour_outage_chain_development_v1.py::test_three_hour_analytic_outage_repair_and_timeout_oracle
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 3 passed, 1 deselected, 1 warning in 8.55s
+{"ordinary_unit_immutable_code_files": 326, "code_read_hits": 7654, "all_code_handles_closed": true, "original_read_alias_restored": true, "all_metadata_handles_closed": true, "original_metadata_version_alias_restored": true, "distribution_fast_calls": 1112, "distribution_fallback_calls": 0, "metadata_parse_hits": 1240, "metadata_parse_misses": 0, "per_call_distribution_discovery_preserved": false, "formal_result": false}

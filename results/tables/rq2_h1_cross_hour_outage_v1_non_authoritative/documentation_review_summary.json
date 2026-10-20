@@ -1,0 +1,49 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "stage": "PRE_SEAL_AUDIT",
+  "recorded_utc": "2026-10-20T06:48:16.168529+00:00",
+  "reviewer": "/root/source_factory_preseal_audit",
+  "role": "sol_reviewer",
+  "read_only": true,
+  "official_verdict_issued": false,
+  "receipt_issued": false,
+  "gates_changed": false,
+  "remaining_specific_findings_in_current_three_hour_synthetic_scope": [],
+  "closed_documentation_findings": [
+    {
+      "issue": "Reader observation mislabeled as complete batch",
+      "correction": "single Reader maximum33.282640299992636s; complete batch_source maximum65.2550475000171s",
+      "original_bytes_snapshot": "documentation_review_01_before_update/workflow_performance_review_readable.md"
+    },
+    {
+      "issue": "prior report snapshot paths and hashes missing from verification record",
+      "correction": "final_verification_03.json explicitly binds both retained prior report snapshots; 01 and 02 retained"
+    }
+  ],
+  "verified_scope": [
+    "444 owned SHA equals live preclose checkpoint and result",
+    "3 hours,7 paired lane-hours,3 fake Jobs,15 normal stages,34 captures",
+    "repair cap24MW and lane-local unresolved timeout with feasible incumbent",
+    "missing h3 retains pending attempt without new Job/selector",
+    "critical heads retained externally before clean close; same-process readonly reopen",
+    "1299 request pins and1279 inherited pins",
+    "32/64 source API statistics;64/128 parent inspect statistics",
+    "old164 and462 failed attempt files preserved",
+    "current and prior reports plus three canonical docs hash matched"
+  ],
+  "remaining_evidence_gaps": [
+    "full168h enrollment and up to24h followup",
+    "episode termination and formal followup right censoring",
+    "real RTS and native execution",
+    "complete unobserved process-tree absence proof",
+    "whole production resource budget",
+    "writer rehydration",
+    "persisted atomic-live join",
+    "crash durability certification",
+    "seal and fresh official review"
+  ],
+  "bindings": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_outage_v1_non_authoritative\\final_verification_03.json": "809d611a4ebfc9518d92d202862cf084fb9a0733ed60472c34de7fff1b3f40a4"
+  },
+  "formal_result": false
+}

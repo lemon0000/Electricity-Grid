@@ -1,0 +1,106 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "bindings": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_outage_v1_non_authoritative\\postcheck_detached_v1.py": "3b45dcb2145a09aee92b0f4eaf8eaab643cfc08578004beb0f5fca12d93d45d1",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_outage_v1_non_authoritative\\detached_03\\request.json": "a16c76d8d4ce43a98128d05a53685cbbd41128df5d1788c52ec4b460be674d36",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_outage_v1_non_authoritative\\detached_03\\terminal.json": "fee17df6370af2bf29292ae2638472f9733bade650c2c4ae7fe643a67f1a8e40",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_outage_v1_non_authoritative\\detached_03\\junit.xml": "8fb254c9a7f26c99528d2f5181d8fd164ac6cd63702ae45c19a36beb3ef76a72",
+    "D:\\h1_outage_detached_03_non_authoritative\\test_frozen_three_hour_prefix_0\\detached_saved_replay.json": "9f240539178e5fd97a07c8d1804300c2a99232ba00b86cbdff9815b2c2f47ed1",
+    "D:\\h1_outage_detached_03_non_authoritative\\test_frozen_three_hour_prefix_0\\static_identity_bookends.json": "8d426bf18dbe9356462819e400e6666c8f4bd4da6dc09b83e6f637d0a874ece3",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_outage_v1_non_authoritative\\connected_02_closed_snapshot.json": "900d312ca387569a73d9cbff393cee0b00b4d6d5392847db8bff705384b1d8c6",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_outage_v1_non_authoritative\\connected_02\\request.json": "0c77851157e51015247c5056c5cc86fbc3cadbbfeb5453a40199d145352c13cd",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_cross_hour_outage_v1_non_authoritative\\connected_02\\terminal.json": "f1f7f7a79df7757b3459ec44a00cf0f497b401fc0dc4a7d68dd1d0e6770e2960",
+    "D:\\h1_outage_units_06_non_authoritative\\test_three_hour_analytic_outag0\\outage_kernel_oracle.json": "46b7f60b0cdbce4faa44c5fa2e18f3bf4cd11a1751668a3d4b2b58a95422c862"
+  },
+  "outer_seconds": 163.9529999999795,
+  "saved_files_preserved": 462,
+  "independent_arithmetic_matches_unit06": true,
+  "quantities": [
+    {
+      "hour": 0,
+      "lane": "cfe",
+      "q": "1/50",
+      "r": "0",
+      "power_mw": "20"
+    },
+    {
+      "hour": 0,
+      "lane": "joint",
+      "q": "1/25",
+      "r": "0",
+      "power_mw": "15"
+    },
+    {
+      "hour": 1,
+      "lane": "joint",
+      "q": "1/25",
+      "r": "0",
+      "power_mw": "15"
+    },
+    {
+      "hour": 2,
+      "lane": "joint",
+      "q": "0",
+      "r": "3/50",
+      "power_mw": "40"
+    },
+    {
+      "hour": 0,
+      "lane": "network",
+      "q": "1/50",
+      "r": "0",
+      "power_mw": "20"
+    },
+    {
+      "hour": 1,
+      "lane": "network",
+      "q": "1/50",
+      "r": "0",
+      "power_mw": "20"
+    },
+    {
+      "hour": 2,
+      "lane": "network",
+      "q": "0",
+      "r": "47058823529/1000000000000",
+      "power_mw": "147058823529/4000000000"
+    }
+  ],
+  "debts": {
+    "cfe": "1/50",
+    "joint": "29/1000",
+    "network": "7/20000000000000"
+  },
+  "detached_projection_bytes_equal": true,
+  "paired_lane_hours": 7,
+  "saved_selector_records": 34,
+  "active_static_identity_targets_bookended": [
+    "experiments.h1_phase_exact_source_current_development_v1.implementation_identity",
+    "experiments.h1_phase_historical_controller_development_v1.implementation_identity",
+    "experiments.h1_phase_obligation_controller_development_v1.implementation_identity",
+    "experiments.h1_origin_current_information_development_v1.implementation_identity",
+    "experiments.h1_current_grid_information_development_v1.implementation_identity",
+    "experiments.h1_origin_selector_replay_development_v1.implementation_identity",
+    "src.rq2_joint_deliverability_boundary_v1.grid_evidence_replay._identity",
+    "experiments.h1_origin_grid_step_development_v1.implementation_identity",
+    "experiments.h1_exact_business_development_v1.implementation_identity",
+    "experiments.h1_finite_followup_assessment_development_v1.implementation_identity",
+    "experiments.h1_finite_followup_assessment_development_v1.contract_identity",
+    "experiments.h1_phase_ticket_holder_development_v1.implementation_identity",
+    "experiments.h1_timed_job_parent_development_v1.implementation_identity",
+    "src.solvers.rq2_gurobi_declared_normal.implementation_identity"
+  ],
+  "new_normal_jobs": 0,
+  "new_selector_calls": 0,
+  "real_native_calls": 0,
+  "original_attempt_exit_code": 15,
+  "original_attempt_reason": "no_progress",
+  "original_authenticated_reopen": false,
+  "independent_retained_heads": false,
+  "original_RAM_scientific_equality_verified": false,
+  "original_reopen_before_after_equality_verified": false,
+  "original_static_bookend_verified": false,
+  "formal_execution_ready": false,
+  "resource_admission": false,
+  "formal_result": false
+}

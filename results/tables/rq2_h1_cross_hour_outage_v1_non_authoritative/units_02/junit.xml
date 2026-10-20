@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="4" time="8.553" timestamp="2026-10-20T12:57:19.139222+08:00" hostname="LAPTOP-FT6J5Q9J"><testcase classname="tests.test_h1_cross_hour_outage_chain_development_v1" name="test_two_unit_normal_candidates_match_every_canonical_stage[0]" time="0.492" /><testcase classname="tests.test_h1_cross_hour_outage_chain_development_v1" name="test_two_unit_normal_candidates_match_every_canonical_stage[1]" time="0.562" /><testcase classname="tests.test_h1_cross_hour_outage_chain_development_v1" name="test_two_unit_normal_candidates_match_every_canonical_stage[2]" time="0.531" /><testcase classname="tests.test_h1_cross_hour_outage_chain_development_v1" name="test_three_hour_analytic_outage_repair_and_timeout_oracle" time="3.580"><failure message="AssertionError: assert None is not None&#10; +  where None = ReplayResult(input_identity='f254594f239bcd57c52942ccf92e1126b10be922fc52ce5f5d0ad1ab9f84a709', policy_identity='8f6af...ecurity_certified=False, exact_lexicographic_certificate=None, infeasibility_certificate=None, causal_certificate=None).next_candidate&#10;metadata resolver cleanup: ValueError('metadata resolver poisoned')">tmp_path = WindowsPath('D:/h1_outage_units_02_non_authoritative/test_three_hour_analytic_outag0')
+outage_environment = (WindowsPath('D:/h1_outage_units_02_non_authoritative/test_three_hour_analytic_outag0/upstream'), WindowsPath('D:/h1_o..., 'G2': 40.0}, spin_up_requirement_by_area_mw={1: 0.0}))), 'power_change': {}, 'workload': '0', 'workload_change': {}})
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002164EF2DEE0&gt;
+static_code_identities = None
+
+    def test_three_hour_analytic_outage_repair_and_timeout_oracle(tmp_path,outage_environment,monkeypatch,static_code_identities):
+        began=time.perf_counter()
+        selection,physical,business=m.saved.selection,m.saved.source.physical,m.saved.business
+        packets=case.packets(outage_environment)
+        frames=[physical._frame(p,after) for p,after in packets]
+        origin=outage_environment[2]
+        prefix=m.saved.source.registry.prepare(split='training',raw_start=0,hours=3,outage_seed=origin.outage_seed,
+            expected_registry_identity='c'*64)
+        views=[m.saved.source.registry.decision_view(a) for a in prefix.actions]
+        assert views[0]['active']==views[1]['active']=={'kind':'generator','uid':'G1'}
+        assert views[1]['started'] is views[1]['ended'] is None
+        assert views[2]['ended']=={'kind':'generator','uid':'G1'} and views[2]['repair_cap_exact']==['24','1']
+        cfg=prior.manifest()
+        selected={};carries={};halted=set();quantities=[]
+        lanes=[('reference',m.saved.RREF)]+[(c.lane_id,c.lane) for c in cfg.lanes]
+        for key,lane in lanes:
+            chosen=cfg.reference_selector if lane.role=='Rref' else cfg.actual_selector
+            selected[key]=selection.initialize_development_selection(frames[0],prefix.origin,lane=lane,
+                selector=chosen,specification=cfg.solver_specification,limits=cfg.replay_limits,chronology_origin=True)
+        for config in cfg.lanes:
+            carries[config.lane_id]=prior.biz.origin(config.lane.arm,mechanism=config.mechanism)
+        calls=case.install_selectors(monkeypatch)
+        repair_before=None
+        for hour,(frame,action) in enumerate(zip(frames,prefix.actions,strict=True)):
+            if hour==2:repair_before=selected['reference'].physical_carry
+            ref,_=_capture(frame,action,selected['reference'],m.saved.RREF,None)
+&gt;           assert ref.next_candidate is not None
+E           AssertionError: assert None is not None
+E            +  where None = ReplayResult(input_identity='f254594f239bcd57c52942ccf92e1126b10be922fc52ce5f5d0ad1ab9f84a709', policy_identity='8f6af...ecurity_certified=False, exact_lexicographic_certificate=None, infeasibility_certificate=None, causal_certificate=None).next_candidate
+E           metadata resolver cleanup: ValueError('metadata resolver poisoned')
+
+tests\test_h1_cross_hour_outage_chain_development_v1.py:93: AssertionError</failure></testcase></testsuite></testsuites>

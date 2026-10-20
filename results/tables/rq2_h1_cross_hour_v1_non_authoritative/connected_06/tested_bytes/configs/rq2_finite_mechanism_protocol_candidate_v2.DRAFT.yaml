@@ -1,0 +1,134 @@
+schema: rq2_finite_mechanism_protocol_proposal_v2
+status: DRAFT_NONAUTHORITATIVE
+role: scientific_review_input_not_runner_config
+scientific_parameters_approved: true
+development_authorization:
+  date: '2026-09-30'
+  user_instruction: '批准 v2 合同并开发验证'
+  scope: independent_implementation_short_synthetic_validation_and_review
+  formal_run_included: false
+complete_preregistration: false
+formal_execution_ready: false
+formal_run_authority: false
+specification: docs/model_spec/rq2_finite_mechanism_protocol_candidate_v2.md
+evidence_class: mechanism_assumption
+design_provenance: exploratory_successor_after_old_candidate_counterexamples
+primary_object: full_training_support_causal_minimum_bidirectional_capacity
+capacity_domain: ['0', '1']
+physical_capacity_rule: q_plus_r_le_D
+clean_allocation: action_independent_current_baseline_R_times_w
+joint_service: additive_disjoint_service_commitment_benchmark
+effective_component_sum_mismatch: reject_without_state_advance_and_unresolved
+fixed_actual_policy:
+  semantics: bidirectional_grid_first_maximum_legal_call_else_12_place_floor_edf_recovery
+  b6_planning_actions_merged_into_actual: false
+  unserved_requests_create_debt: false
+  cohort_order: known_due_then_birth_unknown_due_last
+  operational_preallocation_successor_required: true
+b6_planning:
+  tracks: [grid, cfe]
+  capacity_per_track: q_plus_r_le_D
+  availability_per_track: f_times_w
+  common_sum_availability_constraint: false
+  actual_execution: one_shared_capacity_availability_debt_and_budget
+window:
+  enrollment_hours: 168
+  stride_hours: 24
+  maximum_followup_hours: 24
+  due_hours_after_birth: 24
+  due_endpoint: recover_then_check_remaining_debt
+  accounting: one_nonrolling_episode_without_followup_reset_or_budget_increment
+  primary_births: enrollment_only
+  retain_followup_births_and_all_debt: true
+  missing_needed_followup: unresolved
+  enrollment_input_validation: whole_enrollment_window
+  followup_input_validation: next_hour_only_when_needed_for_enrollment_outcome
+business_anchor:
+  time_step_hours: '1'
+  call_limit: '1'
+  flexible_fraction: '0.20'
+  recovery_headroom_coefficient: '0.10'
+  recovery_efficiency: '0.85'
+  maximum_event_duration_hours: 4
+  minimum_rest_hours: 1
+  response_time_hours: '1'
+  episode_event_cap: 14
+  episode_call_energy_cap: '2.8'
+  normalized_debt_cap: '0.20'
+  maximum_recovery_power: '1'
+  curtailment_up_ramp_per_hour: '1'
+  minimum_event_power: '0.000001'
+  service_tolerance: '0.000001'
+  recovery_decimal_places: 12
+  initial_business_state: explicit_zero_history
+source_mapping:
+  normalized_power_unit_mw: '250'
+  workload_projection_decimal_places: 12
+  workload_projection_rounding: half_even
+  power_rule: linear_without_idle_offset
+  raw_above_one: retain_and_mapping_unresolved
+  empirical_parameters_filled: false
+  registered_joint_observation_claim: false
+design:
+  mathematical_alpha_domain: '(0,1]'
+  alpha_numerators: {first: 1, last: 100, step: 1}
+  alpha_denominator: 100
+  primary_factorial:
+    flexible_fraction: ['0.05', '0.20', '0.50']
+    recovery_headroom_coefficient: ['0', '0.10', '0.30']
+  oat_non_anchor:
+    recovery_efficiency: ['0.60', '1.00']
+    maximum_event_duration_hours: [1, 8]
+    episode_event_cap: [7, 28]
+    episode_call_energy_cap: ['0.7', '7.0']
+    normalized_debt_cap: ['0.05', '0.50']
+  oat_uses_all_alpha_levels: true
+  expected_theta_count: 19
+  expected_cell_count: 1900
+  training_pairs_per_cell: 14644
+  holdout_pairs_per_cell: 14336
+  expected_training_cell_pair_count: 27823600
+  full_support_retained: true
+  weights: product_of_uniform_declared_marginal_window_weights
+  result_driven_grid_refinement: false
+  full_temporal_feasibility_monotonicity_assumed: false
+reference_proposal:
+  horizon_hours: 1
+  information: current_revealed_inputs_and_separate_normal_reference_carries
+  state_chains: [common_normal_N, common_reference_Rref, per_arm_actual_A]
+  cross_chain_state_writeback: false
+  normal_uses: base_conditions_without_current_outage
+  reference_uses: current_normal_commitment_and_revealed_outage_repair
+  reference_selector: request_l1_normal_deviation_generation_uid_order
+  independent_of: [alpha, all_theta_coordinates, D, arm, actual_response_grid_carry]
+  hidden_pair_identity_may_change_action: false
+  normal_initial_state: committable_off_zero_generation_elapsed_ceil_minimum_down_others_dispatch_mode_validated
+  objective_boundary_and_tie_proposal: docs/model_spec/rq2_h1_common_reference_candidate_v1.md
+  normal_selector_proposal: operating_cost_then_uid_commitment_then_uid_generation
+  normal_prior_objective_lock: equality_with_original_normal_1e_minus_9_residual_gate
+  objective_boundary_and_tie_rule_approved: true
+  implemented_and_validated: false
+capacity_evidence:
+  policy_class: per_cell_all_causal_business_policies_satisfying_named_information_action_contract
+  dispatch_and_reference_are_fixed_environment: true
+  hidden_source_pair_split_identifiers_visible_to_policy: false
+  b6_capacity_certificate_scope: separate_causal_planning_tracks_only
+  b6_actual_shared_execution_is_separate_evaluation: true
+  offline_lower_bound_requires_feasible_set_superset_proof: true
+  n_c_j_upper_bound_requires_complete_training_and_actual_grid_witness: true
+  b6_upper_bound_requires_complete_separate_causal_track_witnesses: true
+  capacity_probe_numerators: {first: 0, last: 100, step: 1}
+  capacity_probe_denominator: 100
+  unsuccessful_fixed_policy_is_global_infeasibility: false
+  exact_mathematical_certification_from_numeric_gap: false
+  holdout_capacity: frozen_training_feasible_upper_bound_with_named_policy
+  no_training_witness: no_substitute_exogenous_capacity
+  solver_budgets: null
+  computation_feasibility_verified: false
+remaining_gates:
+  - h1_common_reference_independent_implementation_validation
+  - preallocation_operational_adapter_and_exact_conversion_audit
+  - enrollment_followup_and_same_contract_capacity_proofs
+  - task_inventory_compute_pilot_and_resource_registration
+  - independent_review_of_exact_sealed_execution_candidate
+  - specific_formal_run_authority

@@ -1,0 +1,41 @@
+...............................................F
+================================== FAILURES ===================================
+__________________ test_successor_uses_own_request_contract ___________________
+
+saved_setup = namespace(manifest=Manifest(lanes=(LaneConfig(lane_id='joint', policy=BidirectionalPolicy(arm_id='joint_correct_shared..._uses_own_reques0/owner_non_authoritative'), tickets=[], retain=<function setup.<locals>.retain at 0x000001854DE2B600>)
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001854DC4C350>
+
+    def test_successor_uses_own_request_contract(saved_setup, monkeypatch):
+        s = saved_setup
+        current = s.currents[0]
+        initial = m.saved._initial(s.manifest, current)
+        assert m._request(s.manifest, initial, current) != m.saved._request(s.manifest, initial, current)
+        records = saved_records(monkeypatch, s, initial, 0)
+>       _, projection = m._transition(s.manifest, initial, current, records)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_cross_hour_batch_development_v2.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_cross_hour_owner_development_v2.py:130: in _transition
+    after,raw=saved._transition(manifest,state,current,records)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+manifest = Manifest(lanes=(LaneConfig(lane_id='joint', policy=BidirectionalPolicy(arm_id='joint_correct_shared', committed_capaci..._seconds=300), max_events=800, max_event_bytes=8388608, max_archive_bytes=67108864, accounting_period_id='test-period')
+state = _State(hour=0, reference=SelectionCandidate(physical_carry=PhysicalCandidateCarry(protocol='h1_origin_aware_fixed_powe..._identity=None, selection_identity=None, previous_audit_identity=None), halted=False, reason=None, completed=False)),))
+current = ExactSourceCurrent(prepared_current=namespace(frame=NormalFrame(info=H1CurrentInformation(contract='h1_current_grid_in...ntity":"28885e2311d5d9f448cb14ffbc9b0fd13a30904940837b0b89e001dd4fda1df3"},"synthetic_source_controller_seam":true}\n')
+records = ((b'{"action_audit_identity":"d66ef2af6714f2fcba8eaf89833c535b3519a28ce1fde0348da8d7c58f95cb4a","canonical_objective_h...rance":1e-09,"random_seed":0,"tee":false,"threads":1,"time_limit_seconds":1.0},"status":"DRAFT_NONAUTHORITATIVE"}\n')})
+
+    def _transition(manifest,state,current,records):
+        """Only a complete common reference can produce one complete outer outcome."""
+>       reference=_replay_selection(manifest,current,state.reference,RREF,records['reference'])
+                                                                          ^^^^^^^^^^^^^^^^^^^^
+E       TypeError: tuple indices must be integers or slices, not str
+E       metadata resolver cleanup: ValueError('metadata resolver poisoned')
+
+experiments\h1_phase_owner_development_v1.py:142: TypeError
+=========================== short test summary info ===========================
+FAILED tests/test_h1_cross_hour_batch_development_v2.py::test_successor_uses_own_request_contract
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 47 passed, 2 deselected, 1 warning in 87.88s (0:01:27)
+{"ordinary_unit_immutable_code_files": 326, "code_read_hits": 35941, "all_code_handles_closed": true, "original_read_alias_restored": true, "all_metadata_handles_closed": true, "original_metadata_version_alias_restored": true, "distribution_fast_calls": 539, "distribution_fallback_calls": 0, "metadata_parse_hits": 4493, "metadata_parse_misses": 106, "per_call_distribution_discovery_preserved": false, "formal_result": false}

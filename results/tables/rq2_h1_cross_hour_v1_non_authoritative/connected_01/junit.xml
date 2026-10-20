@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="82.276" timestamp="2026-10-20T00:17:15.910641+08:00" hostname="LAPTOP-FT6J5Q9J"><testcase classname="tests.test_h1_cross_hour_owner_development_v1" name="test_two_hour_three_lane_connected_chain" time="78.298"><failure message="ValueError: saved Job unresolved; no retry or parent outcome&#10;metadata resolver cleanup: ValueError('metadata resolver poisoned')">tmp_path = WindowsPath('D:/h1_cross_connected_01_non_authoritative/test_two_hour_three_lane_conne0')
+environment = (WindowsPath('D:/h1_cross_connected_01_non_authoritative/test_two_hour_three_lane_conne0/upstream'), WindowsPath('D:/h...{'G1': 100.0}, spin_up_requirement_by_area_mw={1: 0.0}))), 'power_change': {}, 'workload': '0', 'workload_change': {}})
+real = (Resolver(_catalog_node='cbdc8a06f2171513203317cea1234434e81092897f60f64061590255bc47df93', _overlay_node='fe27c839cb4...746ce6bef1353ab254f7b3a140ea975757b98"}', identity='291c328a29d79630a0d3f428f379d2736e3db92c0acd81bacd3ac8744eee89a3'))
+synthetic_reports = [b'{"assignment":[["angle_degrees[normal,0,1]","0x0.0p+0"],["angle_degrees[normal,0,2]","0x1.6eb167b830193p+2"],["bran...Tol":1e-09,"MIPGap":1e-08,"MIPGapAbs":0.0,"OptimalityTol":1e-09,"Seed":0,"Threads":1,"TimeLimit":5.0},"variables":12}']
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x00000258CD5F2660&gt;
+
+    def test_two_hour_three_lane_connected_chain(tmp_path, environment, real, synthetic_reports, monkeypatch):
+        trace(tmp_path, 'start', synthetic_hours=2, lanes=3, formal_result=False)
+        load = install_rows(monkeypatch)
+        install_registry(monkeypatch, environment, load)
+        historical = m.saved.source.historical
+        monkeypatch.setattr(historical, '_source_paths', lambda d: (
+            {Path(d['config_path']), Path(d['upstream_root'])/'SHA256SUMS'}, {Path(d['upstream_root'])}))
+        normal = controller(tmp_path/'normal_non_authoritative', environment, real, monkeypatch)
+        holder = owner = None
+        original_fresh = m.saved._fresh
+        source_calls = []
+        def fresh(binding, hour, terminal):
+            source_calls.append(hour)
+            if hour == 1:
+                import sqlite3
+                if owner is not None and owner._live_controller is not None:
+                    assert owner._operation.locked()
+                with closing(sqlite3.connect(owner_root/'owner.sqlite')) as db:
+                    attempts = db.execute("SELECT body FROM events WHERE kind='attempt'").fetchall()
+                assert any(json.loads(raw)['hour'] == 1 for (raw,) in attempts)
+            return original_fresh(binding, hour, terminal)
+        monkeypatch.setattr(m.saved, '_fresh', fresh)
+        try:
+            install_launcher(monkeypatch, tmp_path, normal_reports(synthetic_reports, 0), 0)
+&gt;           assert normal.bootstrap_development().completed_hours == 1
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_cross_hour_owner_development_v1.py:241: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_cross_hour_owner_development_v1.py:118: in bootstrap_development
+    return self._produce()
+           ^^^^^^^^^^^^^^^
+experiments\h1_cross_hour_owner_development_v1.py:164: in _produce
+    return normal.Controller._step_development(self, expected_source_identity=receipt.identity,
+experiments\h1_phase_obligation_controller_development_v1.py:174: in _step_development
+    result = super().step(expected_source_identity=expected_source_identity,expected_head=expected_head)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\h1_job_clock_bridge_development_v1.py:260: in step
+    result = super().step(expected_source_identity=expected_source_identity,expected_head=expected_head)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\h1_timed_job_controller_development_v1.py:84: in step
+    pins = self._job(hour,item,pending,anchor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\h1_cross_hour_owner_development_v1.py:104: in _job
+    return super()._job(index, item, pending, anchor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\h1_phase_obligation_controller_development_v1.py:156: in _job
+    pins = super()._job(index,item,pending,anchor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\h1_job_clock_bridge_development_v1.py:229: in _job
+    pins = super()._job(index,item,pending,anchor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\h1_timed_job_controller_development_v1.py:153: in _job
+    old._validate_observation(observed,identity,pid,creation,self._budget)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+observed = TaskProcessObservation(process_identity='e4a56db1df3650b7c2120340073c684142c77d06e6d5a834ae8cba6fab49f176', pid=44908,...disk_quota_enforced=False, whole_task_resources_verified=False, numerical_evidence_verified=False, formal_result=False)
+identity = 'e4a56db1df3650b7c2120340073c684142c77d06e6d5a834ae8cba6fab49f176'
+pid = 44908, creation = 134369003120870052
+budget = TaskProcessBudget(max_elapsed_seconds=180.0, sample_interval_seconds=0.05, max_process_commit_bytes=536870912, max_job_commit_bytes=805306368, max_quiescence_seconds=2.0)
+
+    def _validate_observation(observed,identity,pid,creation,budget):
+        if (type(observed) is not process.TaskProcessObservation or observed.process_identity!=identity
+                or type(observed.pid) is not int or observed.pid!=pid
+                or type(observed.creation_filetime) is not int or observed.creation_filetime!=creation
+                or type(observed.exit_code) is not int or observed.exit_code!=0 or observed.reason!='child_exited'
+                or observed.whole_job_quiescent is not True or observed.job_commit_limits_configured is not True
+                or type(observed.last_resource_errors) is not tuple or observed.last_resource_errors
+                or observed.observation_error_type is not None
+                or type(observed.runtime_samples) is not int or observed.runtime_samples&lt;0
+                or type(observed.elapsed_seconds) not in (int,float) or not isfinite(observed.elapsed_seconds)
+                or not 0&lt;=observed.elapsed_seconds&lt;=budget.max_elapsed_seconds+budget.max_quiescence_seconds
+                or type(observed.job_peak_process_commit_bytes) is not int
+                or not 0&lt;observed.job_peak_process_commit_bytes&lt;=budget.max_process_commit_bytes
+                or type(observed.job_peak_total_commit_bytes) is not int
+                or not 0&lt;observed.job_peak_total_commit_bytes&lt;=budget.max_job_commit_bytes
+                or any(getattr(observed,k) is not False for k in ('hard_disk_quota_enforced',
+                    'whole_task_resources_verified','numerical_evidence_verified','formal_result'))):
+&gt;           raise ValueError('saved Job unresolved; no retry or parent outcome')
+E           ValueError: saved Job unresolved; no retry or parent outcome
+E           metadata resolver cleanup: ValueError('metadata resolver poisoned')
+
+experiments\h1_saved_job_development_v1.py:248: ValueError</failure></testcase></testsuite></testsuites>

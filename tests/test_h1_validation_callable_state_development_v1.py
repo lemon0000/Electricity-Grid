@@ -1,5 +1,7 @@
 """Safe defaults, closure drift, bounded literals and non-owning observations."""
 import gc
+from struct import unpack
+import sys
 from types import FunctionType,ModuleType
 from weakref import ref
 
@@ -75,3 +77,45 @@ def test_raising_repr_and_note_override_cannot_replace_primary():
     m.note(primary,'cleanup: '+m.describe(secondary))
     assert primary.args==('primary',) and primary.__notes__==['cleanup: BaseException: cleanup']
     assert not calls
+
+
+@pytest.mark.parametrize('change',['dict_order','nested_alias','nan_payload'])
+def test_defaults_order_alias_and_nan_payload_changes_are_refused(change):
+    shared=[1];value={'first':shared,'last':shared}
+    def function(argument=value):return argument
+    if change=='nan_payload':
+        value['first']=unpack('!d',bytes.fromhex('7ff8000000000001'))[0]
+    observation=m.weak_observation(function)
+    if change=='dict_order':value['first']=value.pop('first')
+    elif change=='nested_alias':value['first']=list(shared)
+    else:value['first']=unpack('!d',bytes.fromhex('7ff8000000000002'))[0]
+    with pytest.raises(ValueError,match='original callable'):m.check_weak(observation,function)
+
+
+def test_multiple_nan_keys_are_not_folded_and_scalar_snapshot_is_non_owning():
+    first=float('nan');second=float('nan');keys={first:1,second:1}
+    assert len(keys)==2
+    def function(argument=keys):return argument
+    observation=m.weak_observation(function);keys.pop(first)
+    with pytest.raises(ValueError,match='original callable'):m.check_weak(observation,function)
+    leaf=''.join(['non_owning_default_', 'x'*60000])
+    function.__defaults__=(leaf,);before=sys.getrefcount(leaf)
+    observation=m.weak_observation(function)
+    assert sys.getrefcount(leaf)==before
+    m.check_weak(observation,function)
+
+
+@pytest.mark.parametrize('value',[[b'x'*65536]*17,1<<4097])
+def test_total_scalar_bytes_and_integer_bits_are_bounded(value):
+    with pytest.raises(ValueError,match='bounded'):m.literal(value)
+
+
+def test_code_and_wrapped_observations_do_not_keep_old_objects_alive():
+    namespace={};exec(compile('def function():return None','<temporary_non_authoritative>','exec'),namespace)
+    function=namespace.pop('function')
+    def wrapped():return None
+    function.__wrapped__=wrapped;code_reference=ref(function.__code__);wrapped_reference=ref(wrapped)
+    observation=m.weak_observation(function)
+    function.__code__=(lambda:None).__code__;del function.__wrapped__,wrapped;gc.collect()
+    assert code_reference() is None and wrapped_reference() is None
+    with pytest.raises(ValueError,match='original callable'):m.check_weak(observation,function)
