@@ -1,167 +1,105 @@
 # Deliverability of AI Data Center Workload Flexibility for Grid Response and Carbon-Free Energy Matching
 
-Updated: 2026-10-20. This introduction describes the current design and available evidence; Section 5 gives a dated progress snapshot.
+Updated: 2026-10-21. This introduction explains the current thesis question, approach, and progress.
 
-## 1 Abstract
+## 1 Project purpose
 
-Network-contingent service and hourly carbon-free-energy (CFE) matching may call on the same deferrable and recoverable computing workload. This project asks how stricter hourly-CFE targets change the minimum workload flexibility required under mandatory network response, whether joint chronology creates an extra requirement or portfolio relief, and what signed capacity bias results from separate accounting. This RQ2 question is the primary paper's focus. Multistage F/X interconnection, grid-expansion delays, and the planning effects of annual versus hourly CFE remain project extensions.
+This project asks how much workload adjustment capacity an AI data center needs to meet both grid response obligations and hourly carbon-free energy (CFE) matching requirements. Workload flexibility means moving eligible computing tasks to later hours while meeting their deadlines. Postponed computation remains unfinished work: reducing demand now creates a need to complete that work, and consume electricity, later.
 
-The approved finite-v2 development contract evaluates all applicable service requests during a 168-hour enrollment interval and timely completion of deferred work born within that interval, followed by up to 24 additional hours when needed to determine enrollment outcomes. The total simulated span is at most 192 hours. Each independent episode starts from an explicit mechanism initial state; recovery debt, event budgets, and grid states carry across days. Curtailment q and recovery r share the bidirectional capacity q+r≤D. Recovery is also limited by business headroom, deadlines, and applicable same-hour CFE-compatible surplus. Follow-up requests remain in the physical accounts without expanding the enrollment scoring set; missing necessary follow-up remains unresolved or right-censored.
+For example, an eligible task could pause during a constrained grid hour and resume later. If the recovery hours also lack attributable clean electricity, or the task deadline is too close, the promised adjustment may fail. This hypothetical example shows why current demand reduction and later task completion must be assessed on the same timeline.
 
-The study compares network-only, CFE-only, joint-correct, and joint-B6. Its target is the minimum normalized bidirectional capacity that admits one causal workload policy over the complete declared training support. The four objects \(D_N,D_C,D_B,D_J\) retain the signed decomposition \(I_{joint}=D_J-\max(D_N,D_C)=I_{sep}+A_{B6}\), with \(I_{sep}=D_B-\max(D_N,D_C)\) and \(A_{B6}=D_J-D_B\). B6 plans with separate accounts that each use the available workload and capacity; fixed-policy actual execution uses one shared physical envelope. Evidence is organized as valid lower bounds and complete-service upper bounds for the same contract. Missing finite certificates remain unknown, and cross-arm ordering or contrast signs are not presumed.
+Both obligations may draw on the same tasks. The grid may require demand reductions during constrained hours, while insufficient attributable CFE may motivate shifting computation to other hours. Separate plans may each allocate the full flexible resource, although their combined execution can encounter insufficient deferrable work, recovery space, or time. Their timing may also relieve existing constraints. The study therefore measures joint capacity requirements and the direction and magnitude of these interactions. The present thesis fixes the grid connection point and concentrates on delivery over time, including recovery.
 
-The current design combines 19 workload contracts with 100 hourly-CFE targets, from 1% to 100% in one-percentage-point steps, for 1,900 cells. It is an exploratory successor developed after observing earlier diagnostics. Its scientific parameters are approved for development, while the execution candidate remains DRAFT_NONAUTHORITATIVE. Available evidence includes synthetic planning mechanisms, scoped public selected-N-1 DC benchmarks, and component development checks. The complete continuous four-arm experiment, capacity frontier, and formal holdout results have not been published.
+## 2 Basic concepts
 
-**Keywords:** AI data center; hourly CFE; joint service; finite enrollment; bidirectional flexibility capacity; recovery debt; causal policy
+| Concept | Meaning in this study |
+|---|---|
+| Workload flexibility | Adjusting when eligible computation runs while completing it by its deadline. |
+| Grid response | Reducing data center demand as required under stated grid constraints, with checks on the resulting grid state. |
+| Hourly CFE matching | Matching a target share of each hour's electricity consumption with attributable carbon-free generation in the same hour and applicable region. |
+| Recovery and recovery debt | Recovery completes postponed computation; recovery debt records unfinished work and its deadlines. |
+| Deliverability | Meeting defined calls, grid checks, and task deadlines under the stated model and information constraints. |
 
-## 2 Related Work
+CFE is broader than renewable electricity alone; eligible sources depend on the accounting boundary. Matching concerns electricity attribution rather than tracing physical electrons. For illustration, consuming 100 MWh in an hour with an 80% target requires 80 MWh of attributable CFE within the relevant hour and region. This is illustrative arithmetic, not a study result. Workload shifting must also leave enough time, computing headroom, and, where applicable, CFE-compatible electricity for recovery.
 
-### 2.1 Separate Institutional Objects and the Contract-Overlap Hypothesis
 
-FERC 195 FERC ¶ 61,216 and the PJM precedent it cites show that large loads willing and able to limit withdrawal may receive network-side service up to a specified MW contract level enforced through control or protection measures. The EnergyTag Granular Certificate Matching Standard and Google's 24/7 CFE methodology support ex-post hourly CFE accounting and matching within specified temporal, geographic, and metering boundaries. These evidence chains separately support network-contingent service arrangements and hourly-CFE accounting and matching. Direct evidence linking both obligations to the same contract, meter, and internal workload resource remains necessary. The paper therefore states their potential mapping to one temporal workload envelope as a falsifiable contract-overlap hypothesis.
+![Figure 1. One workload resource for two electricity requirements](../figures/project_network_en.svg)
 
-### 2.2 Flexible Interconnection and Grid-Capacity Planning
+**Figure 1. One workload resource for two electricity requirements.** Grid conditions and the modeled hourly CFE allowance both affect task scheduling. The resulting commitments are checked against the same tasks, power capacity, and deadlines.
 
-Data-center interconnection research covers candidate siting, capacity allocation, and interconnection expansion. Kim, Dong, and Xie [1] incorporate firm, pause, and shift envelopes into planner-initiated siting with hourly and single-contingency screening, showing that flexibility changes candidate-point evaluation. Chen and Zheng [2] compare workload deferral, temporal shifting, and cross-node migration in an investment-and-hourly-operation model of interconnection expansion. Li, Fang, and Chen [3] combine robust firm capacity, CVaR flexible capacity, and locational attributes in static transmission-capacity allocation, while Mytton et al. [6] explain the practical grid-capacity and governance constraints surrounding large data-center connections. These studies establish the flexible-interconnection and grid-capacity-planning baseline. The primary paper focuses on the common workload resource behind separate obligations; multistage F/X release, project lead times, and delays at a fixed point of interconnection remain project extensions.
+## 3 Three research questions
 
-### 2.3 Demand Response, Carbon-Aware Computing, and Workload Envelopes
+The current thesis organizes the joint deliverability problem into three questions.
 
-Wierman et al. [13] review the technical opportunities and operating constraints of data-center demand response, and Liu et al. [14] study workload control and cost under utility peak-demand response. GreenSlot [15] and Parasol and GreenSwitch [16] use batch scheduling and systems coordination to exploit on-site renewable energy. Qureshi et al. [17] route workloads across locations to use electricity-price differences, while Liu et al. [18] use geographical load balancing to follow renewable supply. Radovanović et al. [19] form hourly virtual capacity curves from regional carbon-intensity signals, establishing an operational carbon-aware-computing pathway.
+First, how does the minimum required workload flexibility change as the hourly CFE target increases under fixed grid response requirements? The study seeks a frontier that distinguishes demonstrated delivery, bounded capacity requirements, and unresolved regions, and examines how deferrable workload and spare capacity for recovery alter it.
 
-For resource limits, Kwag and Kim [20] show why demand response requires more than a static MW ceiling. Crozier and Liska [7] review flexibility from protection, precooling, CPU/GPU control, and job scheduling, and Williams et al. [5] provide GPU-cluster and inference-workload evidence on fast response and sustained curtailment. These studies support the technical boundaries of workload adjustability, power, duration, and recovery. The paper organizes these established mechanisms into a shared finite-enrollment envelope with on-demand follow-up, carrying recovery debt, event states, and bidirectional power capacity across days. A B6 counterfactual tests the consequences of separate planning.
+Second, how much additional capacity requirement or relief arises from serving both obligations, relative to the more demanding individual service? What signed capacity difference arises when separate planning is compared with a model that shares physical resources correctly? Neither the ordering of capacities nor the direction of the accounting bias is assumed.
 
-### 2.4 Network-Renewable Coordination and Deliverability
+Third, can the capacity and policy selected during training deliver in unseen scenarios? Evaluation distinguishes grid response shortfalls, CFE shortfalls, joint service outcomes, and unfinished computation, establishing the conditions under which the planning conclusions remain useful.
 
-Wan and Li [4] incorporate data-center spatiotemporal load flexibility into security-constrained unit commitment, using a unified dispatch variable to relieve congestion and improve renewable utilization. Wan, Fang, and Li [26], posted as arXiv:2511.08759 v1 in 2025 and updated as v2 in 2026, analyze congestion, renewable curtailment, and cost through one spatial-redispatch variable. Ma et al. [27] induce spatiotemporal shifting through endogenous locational prices; Lin and Chien [28] allocate multisite load-decoupling resources for carbon benefits; and Zhang et al. [29] characterize how transmission constraints reduce the availability of flexible resources. Together, these works establish the direct benchmark of network-renewable coordination under unified physical dispatch.
+## 4 Methods and comparison schemes
 
-Fan and Zhao [30] jointly optimize workload distribution and regulation-capacity commitment, using chance constraints and queue-VaR constraints for instantaneous and cumulative deliverability. Khanal et al. [31] model firm, flexible, and interruptible tiers in capacity expansion for PJM and Korea, including depth, duration, ramping, minimum recovery, annual energy, and hourly limits. Capacity commitment, deliverability, event shape, and recovery therefore have clear priority boundaries. The paper focuses on the complete-temporal deliverability frontier as hourly-CFE targets increase under fixed mandatory network response, using a signed four-arm decomposition to separate single-service bottlenecks, joint interaction, and B6 capacity bias.
+### 4.1 A continuous hourly model
 
-### 2.5 Multistage Transmission Expansion and Robust Planning
+The model connects grid operation, service calls, task postponement, and recovery. Its primary quantity is bidirectional workload adjustment capacity D. Curtailment power q and recovery power r share the constraint q+r≤D. Separate restrictions cover deferrable workload availability, deadlines, event duration and frequency, cumulative budgets, and recovery headroom. Recovery also requires spare computing capacity and, where applicable, sufficient CFE-compatible electricity in the recovery hour. An isolated MW limit therefore cannot establish complete delivery.
 
-Han, Kim, and Lee [8] use a scenario tree for long-term multistage transmission expansion under demand uncertainty. Webster [9] develops a wide-area multistage stochastic transmission-expansion algorithm, and Akhavizadegan, Wang, and McCalley [10] study scenario selection for iterative stochastic expansion. Jabr [11] treats robust transmission expansion with uncertain renewable generation and load, while Li et al. [12] add multiple uncertainties and active load. These studies provide the foundations for scenario trees, nonanticipativity, robustness, and expansion decisions. The project extension applies these foundations to fixed-point data-center ramp-up, F/X release, and project delays; multistage or robust optimization is not positioned as a contribution of the primary paper.
+Each evaluation enrolls applicable requests and resulting postponed work over 168 consecutive hours. Up to 24 additional hours are observed when needed to determine enrolled outcomes, giving at most 192 simulated hours. Tasks are due 24 hours after creation. Debt and budgets persist across days. New work during follow-up continues to consume physical resources without recursively enlarging the enrolled scoring set. Missing necessary follow-up leaves the corresponding outcome unknown or right-censored; observed violations remain recorded.
 
-### 2.6 Annual Matching, Hourly CFE, and Clean Computing
+Decisions use only information already revealed. Within each scheme and parameter cell, a capacity claim requires one scheduling rule using only currently known information that delivers across all declared training scenarios. Selecting separate actions after learning each scenario's future would not satisfy this requirement.
 
-de Chalendar and Benson [21] show why annual 100% renewable-energy claims do not fully represent consumption timing or power-system decarbonization. Miller, Novan, and Jenn [22] quantify differences between hourly accounting and annual or monthly aggregation. Riepin and Brown [23] compare the cost and system effects of annual and 24/7 CFE procurement, and Riepin, Jenkins, Swezey, and Brown [24] examine how 24/7 matching affects the deployment of advanced clean technologies. Riepin, Brown, and Zavala [25] then jointly optimize spatiotemporal computing-load shifts to align computing activity with clean electricity across time and location. These studies form the direct accounting, procurement, and clean-computing baseline. The present paper asks whether a separate network-contingent obligation and hourly-CFE obligation draw on the same workload envelope.
+### 4.2 Four comparison schemes
 
-### 2.7 Joint Deliverability, Attribution, and Robustness
+| Scheme | Role and treatment |
+|---|---|
+| Grid response only (network-only) | Serves grid response alone to identify its workload flexibility requirement. |
+| Hourly matching only (CFE-only) | Serves hourly CFE matching alone to identify its requirement. |
+| Joint commitments with shared resources (joint-correct) | Adds two separate service commitments and delivers them within one shared workload availability, capacity, debt, and timing budget. |
+| Separate-account planning (joint-B6) | Plans the services in separate accounts, each using full capacity and availability, regenerates actual actions from common service requests and one current workload state, using one shared physical resource. |
 
-The scientific object is the workload-flexibility requirement frontier as hourly-CFE targets increase under a fixed mandatory network response. The four arms first identify the limiting single service, then estimate the signed joint interaction, separate-envelope interaction, and B6 capacity bias. RTS-GMLC and Alibaba retain separate provenance, clocks, and training/holdout splits; their combinations are declared mechanism-benchmark couplings. Existing transport tools can support pairing robustness, while the continuous contract still requires explicit risk events, window weights, and censoring rules before conditional sharp bounds can be computed over a stated transport polytope. Multimetric statements require one common coupling witness. Negative findings, exogenous grid infeasibility (E0), service shortfall, and unresolved outcomes remain distinct.
+The joint comparison adopts a specific additive commitment assumption: separately promised service quantities must both be delivered. This is a benchmark for separate obligations, rather than a universal rule for physical co-service or a resource optimum across all possible arrangements. The separate-account scheme measures the consequences of planning each obligation independently. Its actual actions are regenerated from common requests and one current workload state. Planning feasibility and successful shared execution are evaluated separately.
 
-![Figure 1. Literature landscape and project positioning](../figures/project_literature_landscape_en.svg)
+### 4.3 Scenarios and evaluation
 
-**Figure 1. Literature landscape and project positioning**. A structured positioning based on the 31 academic works reviewed in this paper, not an exhaustive bibliometric result; the three institutional sources establish only that the two objects exist separately and do not demonstrate real contract overlap.
+The target-versus-capacity curve places the hourly CFE target on the horizontal axis and required workload adjustment capacity on the vertical axis. Comparing curves across workload limits will help explain whether current curtailment or later recovery is the main bottleneck.
 
-## 3 Intended Paper Contributions and Project Extensions
+The study uses RTS-GMLC grid data, Alibaba workload data, and Google power data through explicit modeling assumptions. These are modeled pairings, not observations of a joint distribution at one location and time. The 250 MW workload mapping is a simulation scale; business parameters are also stated as mechanism assumptions.
 
-### 3.1 A Finite-Enrollment Joint Workload-Flexibility Frontier
+The current exploratory design comprises nine combinations of deferrable fraction and recovery headroom, plus ten changes to individual parameters. Each of these 19 parameter sets uses 100 hourly CFE targets from 1% to 100%, producing 1,900 cells. Computation distinguishes valid lower bounds under the same complete contract, upper bounds witnessed by a complete delivering policy, and unresolved cases. Failure of one algorithm or fixed policy does not establish universal infeasibility.
 
-The primary paper studies the minimum bidirectional flexibility capacity across CFE targets under fixed common-reference rules, mandatory network response, and the complete temporal envelope. The primary factorial combines three deferrable-workload fractions and three recovery-headroom levels, with ten additional temporal OAT contracts: 19 contracts, each evaluated on the same 100 CFE targets. Complete training support remains the scientific quantifier; computation may use proof-referenced whole-cell analytic exclusions and valid task reuse.
+Training and holdout scenarios remain separate. Capacity and policy are frozen after training evidence is established, then evaluated on holdout scenarios. Reports distinguish grid, CFE, and joint service shortfalls and unfinished work. Interpretation remains conditional on the declared support and mechanism assumptions.
 
-Each arm's capacity object requires one causal workload policy within that cell to serve all declared training support. A valid lower bound requires a legitimate relaxation of the same complete contract. A feasible upper bound requires a named fixed policy with complete-support service witnesses and applicable actual-grid acceptance. B6 upper bounds certify its separate planning accounts; shared actual execution is evaluated separately. A failed fixed-policy probe establishes no successful witness for that policy and capacity, rather than infeasibility for every policy.
 
-### 3.2 Signed Four-Arm Attribution and Fixed-Policy Consequences
+![Figure 2. Research plan for joint workload flexibility](../figures/project_workflow_en.svg)
 
-The decomposition distinguishes the limiting single service, joint temporal interaction, and B6 accounting bias. Contrasts, intervals, and signs are reported only when supported by the four capacity objects. Joint-correct is an additive benchmark of disjoint service commitments, with common request g+c. B6 checks two planning accounts, while actual execution has one workload availability, capacity D, debt state, and event budget. This estimand does not represent the minimum resource across every physical co-service policy.
+**Figure 2. Research plan for joint workload flexibility.** The four schemes use the same external scenarios and applicable workload rules. After comparing capacity requirements, the selected plans are evaluated in new scenarios for grid response, clean-electricity matching, and task completion.
 
-Before holdout, capacity and a named policy are frozen from complete training-feasibility evidence. Execution uses only revealed current inputs, and workload actions are committed together with Actual grid states. Hard-grid, CFE, and joint-service outcomes remain separate; missing sources, uncovered recovery deadlines, and solver uncertainty remain explicit unknowns. Public-marginal transport and common-coupling witnesses are supporting robustness tools whose risk definitions and interfaces must match the continuous contract.
+## 5 Relation to existing research
 
-### 3.3 Design Versions and the Broader Project
+Three established research areas provide the immediate foundations. Data center demand response, batch scheduling, and carbon-aware computing show how computation can be rescheduled and how power, duration, and recovery limits affect flexibility [5,7,13–20]. Flexible interconnection and capacity planning examine how conditional demand adjustment changes connection locations, capacity, and expansion choices [1–3,6]. Annual and hourly clean-electricity studies examine how the accounting interval changes procurement and workload scheduling [21–25].
 
-The earlier confirmatory design of 36 factorial and ten temporal OAT cells, totaling 46 cells, and the older 70-cell diagnostic retain their own frozen contracts and result identities. The current 1,900-cell finite-v2 design is an exploratory successor formed after observing those diagnostics. Its mapping, temporal contract, and reference mechanism differ, so new computations are reported under the new contract.
+The closest work also covers joint congestion relief and renewable utilization, service commitments, and deliverability [4,26–31]. Fan and Zhao [30] link workload allocation to grid-service capacity commitments. Khanal et al. [31] represent duration, recovery, and annual limits in flexible capacity expansion. Building on these foundations, this study asks a specific question: under fixed grid-response rules, how does the required workload flexibility change as hourly CFE targets rise? It separates the limiting individual service, joint timing effects, and separate-account bias, then evaluates whether a selected plan delivers in new scenarios.
 
-The broader project studies nonanticipative multistage F/X release, expansion initiation, and commissioning as data-center demand and project progress are revealed. It also compares annual and hourly CFE effects on capacity, construction, and flexibility allocation. F denotes firm capacity within the stated security scope; X denotes capacity callable under contractual conditions. Existing B0-B5 planning and fixed-policy execution foundations support this extension.
+FERC network-service documents and the hourly accounting methods of EnergyTag and Google separately support the two institutional requirements. Direct evidence is still needed to establish their overlap within a real shared contract, metering boundary, and workload. This project therefore studies stated mechanism rules and retains that condition when interpreting results. Transmission expansion and robust planning [8–12] provide related grid planning methods.
 
-## 4 Research Objectives and Main Contents
+![Figure 3. Related research and the project's question](../figures/project_literature_landscape_en.svg)
 
-### 4.1 Primary Target and Contract Parameters
+**Figure 3. Related research and the project's question.** The upper panel groups the 31 reviewed academic works; the lower panels show the themes and how this study connects the two service requirements. Grouping explains research relationships. Schematic band widths do not represent publication counts or evidence strength.
 
-The target is causal minimum bidirectional capacity for the complete finite-enrollment contract, together with auditable bounds. Enrollment E=168h uses a 24h start stride; enrolled work is due at birth+24h, with at most 24h follow-up. Enrollment and actual follow-up share one nonrolling accounting period of at most 192h, retaining budgets across days. Initial states, deferrable fractions, recovery efficiency, and headroom are registered mechanism assumptions.
+## 6 Current progress
 
-The primary factorial uses f∈{0.05,0.20,0.50} and ρ∈{0,0.10,0.30}; ten OAT contracts vary recovery efficiency, maximum duration, event count, energy budget, and debt cap. Power is normalized by an assumed D_DC=250MW, with D∈[0,1]. The 250MW value is a simulation scale. Raw workload outside the mapping domain is retained and marked mapping unresolved.
+As of 21 October 2026, planning and workload shifting model components exist, alongside DC grid benchmarks for a specified set of selected N-1 contingencies. Connected synthetic examples cover the initial hour and two-hour and three-hour sequences, including selected outage, repair, recovery debt, and unresolved branch cases. Saved results have also been reopened and replayed for verification. These cases check that the workflow follows its intended rules. They constitute synthetic development evidence and do not establish formal capacity or service-risk findings.
 
-### 4.2 Causal Grid and Workload Execution
+The complete continuous 168-hour enrollment with up to 24 hours of follow-up, the production resource budget, formal capacity frontiers, and fixed-policy holdout results remain incomplete. Current work profiles repeated source checks and historical replay to support workflow optimization. There is no measured full 192-hour execution time or formal capacity or service risk result.
 
-H1 denotes a grid mechanism using the current hour's revealed inputs at each step. States are separated into common normal N, common reference Rref, and per-arm Actual A chains. The normal baseline excludes the current outage. The reference produces a common network request under current normal commitment and revealed outages or repairs, independently of the CFE target, workload parameters, D, or response-adjusted arm states. Actual chains accept the fixed power resulting from each arm's workload action. Each chain retains its own carry.
+## 7 Expected outputs and scope
 
-The hourly order is revealed input → N update → common Rref request → CFE mapping → causal workload action → Actual acceptance → paired commit. Actual curtailment creates one recovery debt; unserved requests retain separate shortfall records. Recovery follows known due times and then birth order, subject to capacity, headroom, and applicable clean surplus. Follow-up work remains in the physical accounts, while the scoring cohort remains fixed to enrollment births.
+Expected outputs are target-versus-capacity frontiers, signed attribution across the four schemes, fixed-policy delivery outcomes in new scenarios, and records that trace inputs, carried states, and recovery outcomes. Together they should identify when workload flexibility can support both obligations and which workload or timing constraints limit delivery.
 
-### 4.3 Computational Design and Evaluation
+The next steps proceed in order. First, verify the computational workflow and safe reuse of repeated checks, and establish the total resource budget. On that basis, complete the connected week-long simulation and subsequent task recovery, checking cross-day state and missing-data handling. Then calculate capacity requirements and defensible ranges under the current parameter design. Finally, fix the plan selected during training and evaluate both services and task completion in new scenarios.
 
-1. Preserve separate-source continuous windows within each chain, seed, and split, together with complete-support inventories;
-2. Organize four-arm capacity lower bounds, named-policy upper bounds, and analytic exclusions for 19 workload contracts and 100 CFE targets;
-3. Bind reused tasks to complete input and initial-state identities, rather than a shared source-hour timestamp alone;
-4. Freeze training capacity and policy before holdout, retaining success, failure, unknown outcomes, and deadline coverage;
-5. Evaluate pairing robustness and common-coupling witnesses after risk events, window weights, and the coupling set are registered;
-6. Audit raw reports, residuals, gaps, state continuity, paired commits, and independent replay after close and reopen.
+Conclusions apply to the stated task rules, data scenarios, and grid-check scope. A capacity range is reported when only a range is established; missing evidence remains unknown. Deliverability means fulfilling the defined obligations under those conditions. Engineering security additionally requires full contingency coverage, AC analysis, and equipment and control checks.
 
-The current inventory contains 523×28=14,644 training pairs and 512×28=14,336 holdout pairs per cell. These are mechanism-combination identities; overlapping windows are not independent samples. Across 1,900 cells there are 27,823,600 training cell-pair identities. Necessary solver calls depend on analytic exclusions and valid reuse DAGs and must be established by the concrete task package and full resource budget.
-
-![Figure 2. AI data center flexibility deliverability workflow](../figures/project_workflow_en.svg)
-
-**Figure 2. AI data center flexibility deliverability workflow.** Data, four-arm models, and evaluation dependencies under the finite-enrollment contract. The figure shows the complete research design; Section 5 distinguishes accepted synthetic development cases from continuous execution still awaiting acceptance.
-
-![Figure 3. AI data center grid response and CFE matching framework](../figures/project_network_en.svg)
-
-**Figure 3. AI data center grid response and CFE matching framework.** The fixed POI, hourly CFE matching, and shared workload envelope support the primary mechanism study. Staged ramp-up and grid expansion belong to the broader project blueprint.
-
-## 5 Project Feasibility and Current Status
-
-### 5.1 Existing Models and Named Benchmarks
-
-The project implements RTS-24 DC-OPF and joint security checks, deterministic expansion, F/X service balance, B0-B5 baselines, nonanticipativity, synthetic fixed-policy holdout, and duration, event, energy, and recovery-debt envelopes. The frozen deterministic case has access shortfalls of B0=327,600MWh and B1=B2=109,200MWh. B4 improves on B3 by 128,800MWh in the synthetic scenario tree, with deterioration on some holdout paths also retained. These findings support their respective mechanism scopes; formal empirical VMA has not been published.
-
-RTS-GMLC has named six-hour and full 24-hour selected-N-1 DC SCUC/fixed-commitment ED benchmarks and a six-candidate POI comparison. The full-day benchmark audits 12 registered states per hour and has published result files and a manifest. Direct AC and zero-data-center recovery diagnostics still lack complete feasibility witnesses within the official limits, including h15/h21; security_certified remains false.
-
-### 5.2 Public Data and Mechanism Identity
-
-RTS-GMLC grid data, Alibaba workloads, and Google power data retain separate provenance, versions, and clocks. Public marginals support declared mechanism windows and couplings. Absolute workload MW, actual recoverability, deadlines, recovery headroom, and same-clock outage evidence remain insufficient. The 250MW scale and workload parameters retain their mechanism_assumption identity rather than defining an observed joint distribution or empirical service probability.
-
-The approved origin/registry successor covers the six historical outage-source left-boundary gaps. Saved checks report 1,035 unique entries, source_input_unresolved=0, and obligations_removed=0. Source coverage does not establish acceptance of a complete 192h producer execution. Terminal states, on-demand follow-up, and unknown outcomes still require evidence from the continuous chain.
-
-### 5.3 Development Snapshot on 2026-10-20
-
-Finite-v2 scientific parameters were approved for development on 2026-09-30. The concrete configuration remains DRAFT_NONAUTHORITATIVE, with complete_preregistration, formal_execution_ready, and formal_run_authority all false. The normal model, source adapters, persistent state, selectors, raw-report retention, and scoped PRE_SEAL checks have development evidence.
-
-The complete chain_07 synthetic first-hour case and independent-process saved-record replay have finished. Three independent N0 runs proceed through common, shared Rref, and three Actual lanes to paired commit. Heads, projections, and carries agree after close and reopen; independent postcheck supplement 04 closes the case's replay, cleanup, and timing evidence. The original chain took 259,910.325 seconds of wall time, followed by 401.168 seconds for independent-process replay and reference-field checks. These timings describe the legacy synthetic validation path and do not establish a native or production execution budget.
-
-A cross-hour successor has completed a two-hour, three-lane successful prefix and full replay after close and reopen. The batch historical-replay version commits two outcomes covering six paired lane-hours in 509.516 seconds of outer wall time. Workload projections and final scientific states agree with the earlier case at the same scale, and the names and SHA hashes of 212 saved files remain unchanged.
-
-A three-hour outage-continuation, repair, and single-lane stopping case has also finished: three outcomes cover seven paired lane-hours in 1,314.969 seconds of outer wall time. It checks positive network requests, outage continuation, and the generation cap in the first repair hour. A CFE Actual timeout with a feasible incumbent remains actual_unresolved: neither workload nor Actual state advances on that lane, while the others continue. An external pre-close checkpoint supports same-process read-only reopen after all owners close; 444 saved file names and SHA hashes agree. Missing next-hour input occurs during enrollment, leaving a pending attempt and an unterminated episode. This case does not establish formal follow-up censoring metrics.
-
-These cases use synthetic sources or fabricated solver outputs, with zero real native calls, and remain DRAFT/PRE_SEAL development evidence. The full 168h enrollment through up to 24h of on-demand follow-up, phase boundaries, episode termination, and honest right-censoring still require connected acceptance. Work now focuses on valid reuse of dynamic prefix replay and a complete resource budget. The two- and three-hour cases differ in coverage and failure paths, so their wall-time ratio does not estimate optimization gains or 192h costs. Every new experiment requires review of the full task DAG, call multipliers, evidence reuse, stage time, memory, storage, heartbeats, and stop conditions. The 192h value is the maximum simulated span; the production wall-clock budget remains unestablished.
-
-### 5.4 Exits Required Before Formal Execution
-
-| Order | Required object | Current status |
-|---|---|---|
-| 1 | Complete hour-0, independent saved replay, cleanup, and timing | chain_07 synthetic case and independent supplement 04 complete |
-| 2 | Cross-hour producer/phase coverage up to 192h | Two- and three-hour synthetic cases complete; full 168h plus up to 24h pending |
-| 3 | Concrete task/reuse DAG, same-contract LB/UB, and resource admission | Incomplete |
-| 4 | Successor seal and fresh independent official review | Current execution package not yet through review |
-| 5 | Separate package-specific run authorization and formal-result acceptance | Not started |
-
-The old 70-cell diagnostic and V8 nonformal two-block pilot retain their historical evidence. An earlier formal grid attempt produced only nine of 1,071 historical checkpoints; no complete grid package was published. The current continuous contract has no published formal capacity frontier or holdout results.
-
-## 6 Expected Outputs and Research Boundaries
-
-### 6.1 Expected Outputs
-
-1. Four-arm complete-service capacity frontiers, valid LB/UB evidence, and unresolved regions for finite enrollment;
-2. The signed decomposition I_joint=I_sep+A_B6 where supported by capacity evidence;
-3. Holdout network, CFE, and joint-service consequences of named training capacities and fixed causal policies;
-4. Raw reports, paired commits, and independent replay linking workload debt, outage states, and grid carry;
-5. Applicable coupling robustness and later multistage F/X, expansion, and annual/hourly-CFE extensions.
-
-### 6.2 Research Boundaries
-
-The primary estimands are workload bidirectional capacities normalized by D_DC and their signed interactions. Interpreting them as conditional interconnection capacity X requires an explicit, validated mapping. Additive commitments, reference dispatch, and recovery policies retain named mechanism identities. Timely completion of the finite enrollment cohort establishes only the stated finite contract, rather than indefinite sustainability.
-
-Holdout weights and transport intervals are conditional on the declared benchmark support and coupling set. Population probabilities, real contract incidence, and causal effects require further evidence. Selected-N-1 DC results apply to their named computational scope; engineering security additionally requires complete security sets, AC, equipment, and control evidence. CFE denotes accounting and matching of attributable clean electricity within the same hour and specified region.
-
-Timeouts, local solver failures, missing incumbents, and incomplete certificates retain the relevant unresolved status. Missing necessary follow-up is reported as unknown or censored, while observed violations remain recorded. Capacity intervals, contrast signs, and service conclusions require complete supporting evidence.
-
-## 7 References
+## 8 References
 
 [1] Kim, D., Dong, L. and Xie, L. (2026). “Flexibility-aware framework for efficient planner-initiated siting of data center.” Nature Communications. https://doi.org/10.1038/s41467-026-72324-9
 
@@ -225,15 +163,15 @@ Timeouts, local solver failures, missing incumbents, and incomplete certificates
 
 [31] Khanal, S., Roh, G., Yao, B. et al. (2026). “Shift or curtail? How much data-center flexibility is worth depends on the host power grid.” arXiv preprint arXiv:2608.19622. https://arxiv.org/html/2608.19622
 
-## 8 Institutional and Standards Sources
+## 9 Institutional and Standards Sources
 
 - Federal Energy Regulatory Commission (2026). 195 FERC ¶ 61,216; Docket EL26-69-000, Order Instituting Proceeding Under Section 206 of the Federal Power Act. https://www.ferc.gov/sites/default/files/2026-06/EL26-69-000.pdf
 - EnergyTag (2024). Granular Certificate Matching Standard, Version 1. https://energytag.org/wp-content/uploads/2024/03/Granular-Certificate-Matching-Standard_V1.pdf
 - Google (2021). 24/7 Carbon-Free Energy: Methodologies and Metrics. https://sustainability.google/reports/24x7-carbon-free-energy-methodologies-metrics/
 
-## 9 Repository Sources for Current Design and Status
+## 10 Sources for Design and Progress
 
-- [Research scope and primary-paper focus](../../agent.md): RQ2, the three-question blueprint, and evidence boundaries;
+- [Research scope and primary-paper focus](../../agent.md): the current research scope and evidence boundaries;
 - [Finite-v2 contract](../../configs/rq2_finite_mechanism_protocol_candidate_v2.DRAFT.yaml) and [model specification](../../docs/model_spec/rq2_finite_mechanism_protocol_candidate_v2.md): 168h, 24h, q+r≤D, 1,900 cells, and development authorization;
 - [Execution plan](../../docs/plan/科研项目执行步骤.md) and [blocker register](../../docs/model_spec/blocker_register.md): stage evidence, open issues, and closure conditions;
 - [H1 end-to-end milestones](../../docs/plan/H1_端到端里程碑验收_v1.md): acceptance order from complete hour-0 to formal execution;
@@ -241,4 +179,11 @@ Timeouts, local solver failures, missing incumbents, and incomplete certificates
 - [Complete hour-0 report](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/complete_integration_report_supplement_04.md) and [independent supplement 04](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/postcheck_supplement_completion_04.json): the synthetic first-hour chain and independent-process saved replay;
 - [Two-hour batch-replay acceptance](../../results/tables/rq2_h1_cross_hour_batch_v2_non_authoritative/acceptance_report.md) and [machine-readable postcheck](../../results/tables/rq2_h1_cross_hour_batch_v2_non_authoritative/connected_01_postcheck.json): six paired lane-hours and saved-state comparisons;
 - [Three-hour outage and repair acceptance](../../results/tables/rq2_h1_cross_hour_outage_v1_non_authoritative/acceptance_report.md) and [machine-readable postcheck](../../results/tables/rq2_h1_cross_hour_outage_v1_non_authoritative/connected_03_postcheck.json): seven paired lane-hours, lane stopping, missing input, and same-process read-only reopen;
-- [B0-B2 results](../../results/tables/rts24_b0_b2_summary.json), [B3-B5 results](../../results/tables/rts24_b3_b5_summary.json), and [24-hour DC benchmark](../../results/tables/rts_gmlc_google_day0_full24h_selected_n1_dc_scuc_v1/summary.json): the named historical evidence in Section 5.1.
+- [B0-B2 results](../../results/tables/rts24_b0_b2_summary.json), [B3-B5 results](../../results/tables/rts24_b3_b5_summary.json), and [24-hour DC benchmark](../../results/tables/rts_gmlc_google_day0_full24h_selected_n1_dc_scuc_v1/summary.json): original evidence for the existing grid and planning calculations.
+
+
+### Supplementary explanation of capacity measures
+
+The four capacities are D_N for grid-only, D_C for CFE-only, D_J for shared joint commitments, and D_B for separate-account planning. The larger individual-service requirement is the comparison baseline. The decomposition is \(I_{joint}=D_J-\max(D_N,D_C)=I_{sep}+A_{B6}\), where \(I_{sep}=D_B-\max(D_N,D_C)\) and \(A_{B6}=D_J-D_B\). Capacity evidence determines the signs.
+
+The current design contains 19 workload parameter sets and 100 hourly CFE targets, totaling 1,900 cells. The linked sources retain the precise parameters, data support, and original computational records.

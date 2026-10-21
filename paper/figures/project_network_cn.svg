@@ -9,40 +9,40 @@
     </style>
   </defs>
   <rect width="1600" height="860" fill="#FFFFFF"/>
-  <text x="800" y="42" text-anchor="middle" class="title">智算中心电网响应与绿电匹配框架</text>
+  <text x="800" y="42" text-anchor="middle" class="title">同一份业务柔性支持两类用电要求</text>
 
   <rect x="60" y="260" width="440" height="340" rx="18" fill="#EAF2FA" stroke="#2166AC" class="box"/>
-  <text x="280" y="305" text-anchor="middle" class="head">电力系统与扩建</text>
-  <text x="280" y="342" text-anchor="middle" class="body">发电与新能源供给</text>
-  <text x="280" y="378" text-anchor="middle" class="body">输电网络与安全约束</text>
-  <text x="280" y="414" text-anchor="middle" class="body">变电站 / 线路扩建</text>
-  <text x="280" y="450" text-anchor="middle" class="body">工期与延期不确定性</text>
+  <text x="280" y="305" text-anchor="middle" class="head">电网运行条件</text>
+  <text x="280" y="342" text-anchor="middle" class="body">正常运行与设备故障</text>
+  <text x="280" y="378" text-anchor="middle" class="body">可用供电与线路约束</text>
+  <text x="280" y="414" text-anchor="middle" class="body">需要时提出降负荷要求</text>
+  <text x="280" y="450" text-anchor="middle" class="body">按小时检查响应结果</text>
   <circle cx="150" cy="520" r="17" fill="#2166AC"/><circle cx="280" cy="520" r="17" fill="#2166AC"/><circle cx="410" cy="520" r="17" fill="#2166AC"/>
   <path d="M167 520 H263 M297 520 H393" fill="none" stroke="#2166AC" stroke-width="5"/>
-  <text x="280" y="565" text-anchor="middle" class="small">正常状态与关键 N-1 校核</text>
+  <text x="280" y="565" text-anchor="middle" class="small">当前研究采用固定接入点</text>
 
   <rect x="60" y="100" width="440" height="105" rx="18" fill="#E8F3EC" stroke="#1B7837" class="box"/>
-  <text x="280" y="145" text-anchor="middle" class="head">清洁电力资源</text><text x="280" y="178" text-anchor="middle" class="body">可归属的小时级 CFE 供给</text>
+  <text x="280" y="145" text-anchor="middle" class="head">CFE目标与分配规则</text><text x="280" y="178" text-anchor="middle" class="body">按设定计算小时级清洁额度</text>
 
   <rect x="565" y="395" width="175" height="100" rx="16" fill="#FFF3E1" stroke="#F1A340" class="box"/>
-  <text x="652" y="437" text-anchor="middle" class="head">固定接入点</text><text x="652" y="470" text-anchor="middle" class="body">POI</text>
+  <text x="652" y="437" text-anchor="middle" class="head">固定位置</text><text x="652" y="470" text-anchor="middle" class="body">电网接入点</text>
 
   <rect x="805" y="290" width="430" height="310" rx="18" fill="#F1EAF5" stroke="#762A83" class="box"/>
-  <text x="1020" y="335" text-anchor="middle" class="head">大型智算中心</text>
-  <text x="1020" y="380" text-anchor="middle" class="body">分阶段达产与计算任务</text>
-  <text x="1020" y="425" text-anchor="middle" class="body">业务调度与功率响应</text>
+  <text x="1020" y="335" text-anchor="middle" class="head">智算中心任务调度</text>
+  <text x="1020" y="380" text-anchor="middle" class="body">可延期任务与固定任务</text>
+  <text x="1020" y="425" text-anchor="middle" class="body">减少当期用电，之后补做任务</text>
   <rect x="865" y="465" width="310" height="90" rx="12" fill="#FFFFFF" stroke="#762A83" stroke-width="2"/>
-  <text x="1020" y="503" text-anchor="middle" class="head">共享业务柔性时序包络</text><text x="1020" y="532" text-anchor="middle" class="small">q + r ≤ D · 期限 · 恢复债务</text>
+  <text x="1020" y="503" text-anchor="middle" class="head">共同的任务与功率限制</text><text x="1020" y="532" text-anchor="middle" class="small">可调功率 · 期限 · 补做能力</text>
 
   <rect x="1280" y="130" width="260" height="105" rx="18" fill="#F8E9EB" stroke="#B2182B" class="box"/>
-  <text x="1410" y="175" text-anchor="middle" class="head">网络条件服务</text><text x="1410" y="208" text-anchor="middle" class="body">条件削减与容量义务</text>
+  <text x="1410" y="175" text-anchor="middle" class="head">电网响应要求</text><text x="1410" y="208" text-anchor="middle" class="body">按要求暂时降低用电</text>
   <rect x="1280" y="330" width="260" height="105" rx="18" fill="#E8F3EC" stroke="#1B7837" class="box"/>
-  <text x="1410" y="375" text-anchor="middle" class="head">小时级 CFE 服务</text><text x="1410" y="408" text-anchor="middle" class="body">逐小时清洁电力匹配</text>
+  <text x="1410" y="375" text-anchor="middle" class="head">小时级绿电匹配</text><text x="1410" y="408" text-anchor="middle" class="body">达到每小时清洁电量比例</text>
   <rect x="1280" y="550" width="260" height="105" rx="18" fill="#F7F7F7" stroke="#666666" class="box"/>
-  <text x="1410" y="595" text-anchor="middle" class="head">评估指标</text><text x="1410" y="628" text-anchor="middle" class="body">短缺 · 违约 · 恢复债务</text>
+  <text x="1410" y="595" text-anchor="middle" class="head">检查能否兑现</text><text x="1410" y="628" text-anchor="middle" class="body">响应达标 · 任务按时完成</text>
 
   <path d="M500 430 H565" fill="none" stroke="#2166AC" stroke-width="4" marker-end="url(#blue)"/><path d="M740 445 H805" fill="none" stroke="#2166AC" stroke-width="4" marker-end="url(#blue)"/>
-  <path d="M280 205 V260" fill="none" stroke="#1B7837" stroke-width="3" stroke-dasharray="8 7" marker-end="url(#green)"/>
+  <path d="M500 152 H1020 V290" fill="none" stroke="#1B7837" stroke-width="3" stroke-dasharray="8 7" marker-end="url(#green)"/>
   <path d="M1235 380 C1260 330 1260 205 1280 190" fill="none" stroke="#B2182B" stroke-width="3" marker-end="url(#red)"/>
   <path d="M1235 445 H1280" fill="none" stroke="#1B7837" stroke-width="3" marker-end="url(#green)"/>
   <path d="M1235 535 C1260 570 1260 600 1280 600" fill="none" stroke="#762A83" stroke-width="3" marker-end="url(#purple)"/>

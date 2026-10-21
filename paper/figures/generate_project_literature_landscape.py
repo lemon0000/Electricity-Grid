@@ -45,6 +45,7 @@ BLACK       = "#222222"
 mpl.rcParams.update({
     "pdf.fonttype": 42,         # TrueType font embedding
     "svg.fonttype": "none",     # editable text in SVG
+    "svg.hashsalt": "electricity-grid-project-literature",
     "savefig.bbox": "tight",    # trim whitespace
     "savefig.dpi": 300,
 })
@@ -122,13 +123,13 @@ TEXT = {
         "a_note": "n = 31 reviewed academic works · equal-width schematic bands, not bibliometric weights",
         "foundation": "Established\nbuilding blocks\nacross the reviewed set",
         "foundation_note": "All [1–31], once each",
-        "panel_b": "Bounded positioning matrix",
+        "panel_b": "Research themes in the reviewed work",
         "columns": (
             "Grid access\n/ expansion",
-            "Temporal\nenvelope",
+            "Task deferral\nand recovery",
             "Network–CFE\ncoordination",
             "Separate\nobligations",
-            "Marginal-only\nidentification",
+            "Pairing\nuncertainty",
         ),
         "row_labels": {
             "interconnection": "Flexible interconnection",
@@ -139,15 +140,15 @@ TEXT = {
             "project": "This project",
         },
         "matrix_note": "P primary   S supporting   ○ outside primary scope (not evidence of absence)",
-        "panel_c": "Evidence and identification chain",
+        "panel_c": "How the research question is studied",
         "ferc": "FERC\nnetwork service",
         "cfe_source": "EnergyTag / Google\nhourly CFE",
-        "objects_boundary": "Separate objects ≠ observed overlap",
-        "hypothesis": "Falsifiable overlap hypothesis",
-        "comparison": "168h enrollment + ≤24h follow-up\nshared q+r≤D  vs  B6",
-        "holdout": "Causal frozen-policy holdout",
-        "identification": "Conditional sharp bounds\nall-coupling sign · common witness",
-        "states": "Separate E0 | shortfall | unresolved\nRetain deadline censoring",
+        "objects_boundary": "Real contract overlap needs evidence",
+        "hypothesis": "Can both duties use the same workload?",
+        "comparison": "Compare four service plans\nOne shared actual execution",
+        "holdout": "Vary targets and compute capacity",
+        "identification": "Fix plans and test new scenarios\nMeasure service and task outcomes",
+        "states": "Track service and task completion\nKeep missing outcomes unknown",
     },
     "cn": {
         "stream_labels": {
@@ -168,13 +169,13 @@ TEXT = {
         "a_note": "n = 31篇审阅学术文献 · 等宽示意带不表示文献计量权重",
         "foundation": "审阅集合中已有的\n基础构件",
         "foundation_note": "[1–31]各出现一次",
-        "panel_b": "有界研究定位矩阵",
+        "panel_b": "审阅文献的主要研究主题",
         "columns": (
             "接入 / 扩建",
-            "业务柔性\n时序包络",
+            "任务延期\n与恢复",
             "网络—CFE\n协同",
             "分离的\n制度义务",
-            "仅有边缘时的\n部分识别",
+            "分源数据\n与配对不确定性",
         ),
         "row_labels": {
             "interconnection": "灵活接入",
@@ -185,15 +186,15 @@ TEXT = {
             "project": "本项目",
         },
         "matrix_note": "P 主要范围   S 支撑范围   ○ 非主要范围（不表示不存在）",
-        "panel_c": "证据与识别链",
+        "panel_c": "本项目如何研究这个问题",
         "ferc": "FERC\n网络条件服务",
         "cfe_source": "EnergyTag / Google\n小时CFE核算",
         "objects_boundary": "对象分别存在 ≠ 已观测到现实交叠",
-        "hypothesis": "可证伪的 contract-overlap hypothesis",
-        "comparison": "168h登记 + ≤24h后续\n共享q+r≤D  vs  B6反事实",
-        "holdout": "冻结因果策略的 holdout 回放",
-        "identification": "条件 sharp bounds\nall-coupling sign · 共同coupling见证",
-        "states": "区分E0｜服务短缺｜unresolved\n保留期限覆盖与right-censor",
+        "hypothesis": "两项服务是否使用同一份任务调节能力",
+        "comparison": "比较四种服务方案\n实际执行共用任务与补做资源",
+        "holdout": "提高小时级目标，比较容量需求",
+        "identification": "确定计划后，用新场景评价\n检查响应、匹配与任务完成",
+        "states": "检查响应、匹配与任务完成\n缺少必要信息时保留未知",
     },
 }
 
@@ -595,7 +596,7 @@ def export_figure(fig, language, output_dir):
 
     exact_bbox = Bbox.from_bounds(0, 0, WIDTH_MM * MM_TO_INCH, HEIGHT_MM * MM_TO_INCH)
     common = {"bbox_inches": exact_bbox, "pad_inches": 0, "facecolor": "white", "edgecolor": "none"}
-    title = f"RQ2 literature landscape and identification chain ({language})"
+    title = f"RQ2 literature landscape and research approach ({language})"
     description = (
         "Conceptual evidence map generated from the 31-work review inventory; "
         "schematic bands are not bibliometric weights. Source script: "
@@ -604,7 +605,7 @@ def export_figure(fig, language, output_dir):
     fig.savefig(
         svg_path,
         format="svg",
-        metadata={"Title": title, "Description": description},
+        metadata={"Title": title, "Description": description, "Date": None},
         **common,
     )
     fig.savefig(
@@ -615,12 +616,21 @@ def export_figure(fig, language, output_dir):
             "Title": title,
             "Author": "Electricity-grid research project",
             "Subject": description,
-            "Keywords": "literature landscape, partial identification, RQ2",
+            "Keywords": "literature landscape, joint deliverability, RQ2",
+            "CreationDate": None,
+            "ModDate": None,
         },
         **common,
     )
     fig.savefig(png_path, format="png", dpi=300, **common)
     plt.close(fig)
+
+    # Keep the editable SVG clean without changing any text or geometry.
+    svg_path.write_text(
+        "\n".join(line.rstrip() for line in svg_path.read_text(encoding="utf-8").splitlines()) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
 
     with Image.open(png_path) as image:
         rgb = image.convert("RGB")
@@ -647,7 +657,7 @@ def main():
     args = parse_args()
     languages = ("cn", "en") if args.lang == "all" else (args.lang,)
     print("Validation: n=31 reviewed academic works; references 1..31 appear once across five streams.")
-    print("Grouping source: project introductions section 2; institutional sources are separate.")
+    print("Grouping source: project introductions section 5; institutional sources are separate.")
     print("Statistics: no sampling, tests, effect estimates, or error bars; this is not bibliometrics.")
     for language in languages:
         outputs = export_figure(build_figure(language), language, args.output_dir)

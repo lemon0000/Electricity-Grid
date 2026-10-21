@@ -11,34 +11,34 @@
     </style>
   </defs>
   <rect width="1600" height="760" fill="#FFFFFF"/>
-  <text x="800" y="40" text-anchor="middle" class="title">智算中心业务柔性可交付性研究流程</text>
-  <text x="235" y="82" text-anchor="middle" class="lane">来源与有限登记</text>
-  <text x="800" y="82" text-anchor="middle" class="lane">四臂时序模型</text>
-  <text x="1365" y="82" text-anchor="middle" class="lane">评估与输出</text>
+  <text x="800" y="40" text-anchor="middle" class="title">从任务调节到两类服务的研究思路</text>
+  <text x="235" y="82" text-anchor="middle" class="lane">输入与任务限制</text>
+  <text x="800" y="82" text-anchor="middle" class="lane">比较的用电方案</text>
+  <text x="1365" y="82" text-anchor="middle" class="lane">需要回答的问题</text>
 
   <g class="card">
     <rect x="60" y="110" width="350" height="125" rx="14" fill="#EAF2FA" stroke="#2166AC"/>
-    <text x="235" y="150" text-anchor="middle" class="head">公开边际数据</text><text x="235" y="185" text-anchor="middle" class="body">电网 / CFE与工作负荷分源保留</text>
+    <text x="235" y="150" text-anchor="middle" class="head">电网情景与CFE设定</text><text x="235" y="185" text-anchor="middle" class="body">电网条件、目标与清洁额度</text>
     <rect x="60" y="300" width="350" height="125" rx="14" fill="#FFF3E1" stroke="#F1A340"/>
-    <text x="235" y="340" text-anchor="middle" class="head">有限登记合同</text><text x="235" y="375" text-anchor="middle" class="body">168h登记 + 最多24h后续</text>
+    <text x="235" y="340" text-anchor="middle" class="head">计算任务限制</text><text x="235" y="375" text-anchor="middle" class="body">延期比例、期限与补做能力</text>
     <rect x="60" y="490" width="350" height="125" rx="14" fill="#F1EAF5" stroke="#762A83"/>
-    <text x="235" y="530" text-anchor="middle" class="head">训练与留出划分</text><text x="235" y="565" text-anchor="middle" class="body">chain、seed与因果信息边界</text>
+    <text x="235" y="530" text-anchor="middle" class="head">连续时段与新场景</text><text x="235" y="565" text-anchor="middle" class="body">跨日任务与独立评价数据</text>
   </g>
   <g class="card">
     <rect x="625" y="110" width="350" height="125" rx="14" fill="#FFF3E1" stroke="#F1A340"/>
-    <text x="800" y="150" text-anchor="middle" class="head">四个服务臂</text><text x="800" y="185" text-anchor="middle" class="body">N / C / joint-correct / B6</text>
+    <text x="800" y="150" text-anchor="middle" class="head">单项服务</text><text x="800" y="185" text-anchor="middle" class="body">只考虑电网 / 只考虑绿电</text>
     <rect x="625" y="300" width="350" height="125" rx="14" fill="#F1EAF5" stroke="#762A83"/>
-    <text x="800" y="340" text-anchor="middle" class="head">共享业务柔性包络</text><text x="800" y="375" text-anchor="middle" class="body">q + r ≤ D、期限与恢复债务</text>
+    <text x="800" y="340" text-anchor="middle" class="head">联合考虑两项承诺</text><text x="800" y="375" text-anchor="middle" class="body">共享任务、功率与补做限制</text>
     <rect x="625" y="490" width="350" height="125" rx="14" fill="#EAF2FA" stroke="#2166AC"/>
-    <text x="800" y="530" text-anchor="middle" class="head">H1独立状态链</text><text x="800" y="565" text-anchor="middle" class="body">N → Rref → 各臂Actual</text>
+    <text x="800" y="530" text-anchor="middle" class="head">分开计算后执行</text><text x="800" y="565" text-anchor="middle" class="body">共同请求在单一状态中重新执行</text>
   </g>
   <g class="card">
     <rect x="1190" y="110" width="350" height="125" rx="14" fill="#E8F3EC" stroke="#1B7837"/>
-    <text x="1365" y="150" text-anchor="middle" class="head">同合同容量界</text><text x="1365" y="185" text-anchor="middle" class="body">完整训练支持上的LB / UB</text>
+    <text x="1365" y="150" text-anchor="middle" class="head">需要多大调节能力</text><text x="1365" y="185" text-anchor="middle" class="body">不同绿电目标对应的容量需求</text>
     <rect x="1190" y="300" width="350" height="125" rx="14" fill="#E8F3EC" stroke="#1B7837"/>
-    <text x="1365" y="340" text-anchor="middle" class="head">场景外时序回放</text><text x="1365" y="375" text-anchor="middle" class="body">冻结容量与因果策略后执行</text>
+    <text x="1365" y="340" text-anchor="middle" class="head">计划能否兑现</text><text x="1365" y="375" text-anchor="middle" class="body">响应达标、匹配比例、按期完成</text>
     <rect x="1190" y="490" width="350" height="125" rx="14" fill="#F8E9EB" stroke="#B2182B"/>
-    <text x="1365" y="530" text-anchor="middle" class="head">性能与运行准入</text><text x="1365" y="565" text-anchor="middle" class="body">独立重放、预算与封存审查</text>
+    <text x="1365" y="530" text-anchor="middle" class="head">分开估算有何偏差</text><text x="1365" y="565" text-anchor="middle" class="body">比较高估、低估与未决范围</text>
   </g>
   <path d="M410 172 H625" class="arrow"/><path d="M410 362 H625" class="arrow"/><path d="M410 552 H625" class="arrow"/>
   <path d="M975 172 H1190" class="arrow"/><path d="M975 362 H1190" class="arrow"/><path d="M975 552 H1190" class="arrow"/>
