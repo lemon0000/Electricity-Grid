@@ -1,0 +1,54 @@
+schema: rq2_novelty_mechanism_audit_development_v1
+status: DRAFT_NONAUTHORITATIVE
+purpose: audit_retained_exclusions_and_construct_small_recovery_timing_examples
+formal_result: false
+formal_execution_ready: false
+native_execution_authorized: false
+source_audit:
+  exclusion_report: results/tables/rq2_v2_cfe_exclusion_v1_non_authoritative/cell_exclusion_audit_v2_final.json
+  exclusion_sha256: 2e8c9f07db03426c02f3c38f5f938231cb6ca47f30537ad0d740ed9e22341e7c
+  protocol: configs/rq2_finite_mechanism_protocol_candidate_v2.DRAFT.yaml
+  protocol_sha256: 95eb158f0a8e6784d2af401e67164965543c98f42ff02b756c214982601e5430
+  coverage: results/tables/rq2_finite_enrollment_support_v1_non_authoritative/coverage_168_24_verified.json
+  coverage_sha256: 29ba7f5662c3dee019f183104479d8fa354f726bea0e055ee456b3dd337042c4
+  catalog_sha256: 1a31bdd0d69b717525e1d281f4d53d21bf8f8cca929732b76847cfa332843ad1
+  power_rows: data/processed/model_inputs/rts_gmlc_public_power_system_blocks_v4/power_system_blocks.csv.gz
+  workload_rows: data/processed/model_inputs/alibaba_dimensionless_workload_blocks_v3/workload_blocks.csv.gz
+toy:
+  role: constructed_diagnostic_not_a_finite_v2_cell_or_empirical_sample
+  hours: 6
+  baseline: 1/5
+  cfe_target: 1/2
+  flexible_fraction: 1/2
+  recovery_headroom_coefficient: 3/10
+  grid_requests: [1/10, '0', '0', '0', '0', '0']
+  ordinary_clean_share: 1/2
+  deficit_hour: 1
+  deficit_clean_share: 1/4
+  recovery_candidate_hours: [2, 3, 4, 5]
+  clean_slots_per_profile: 2
+  clean_share_at_recovery_slots: '1'
+  deadline_lags: [2, 3, 4]
+  efficiencies: ['1', 17/20]
+  debt_initial: '0'
+  recovery_release: strictly_after_birth
+  deadline_check: after_recovery_at_due_hour
+  capacity_rule: q_plus_r_le_D
+  minimum_capacity_domain: ['0', '1']
+  controls: [remove_clean_recovery_limit, wait_until_deadline_policy]
+  construction_link: compare_installed_capacity_3_over_10_and_2_over_5
+resource_plan:
+  solver_calls: 0
+  network_calls: 0
+  concurrency: 1
+  source_cells: 1900
+  arithmetic_groups: 300
+  toy_profiles: 6
+  toy_cases: 36
+  maximum_jobs_per_case: 2
+  maximum_subset_checks_per_case: 3
+  maximum_output_bytes: 4194304
+  maximum_input_file_bytes: 16777216
+  maximum_peak_rss_bytes: 536870912
+  wall_limit_seconds: 45
+  output_directory_policy: create_once_preserve_attempts

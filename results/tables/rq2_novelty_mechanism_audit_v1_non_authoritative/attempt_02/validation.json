@@ -1,0 +1,41 @@
+{
+  "status": "non_authoritative_local_validation",
+  "formal_result": false,
+  "source_sha256": {
+    "experiments/rq2_novelty_mechanism_audit_development_v1.py": "35965232b5d5cd3a2aa9f808e4b36046ca2736e3ad74c1970eaf92c09a111ec9",
+    "configs/rq2_novelty_mechanism_audit_v1.DRAFT.yaml": "38d5f5348df637dd628da8a75f37640bf48c76226b80afdd53d6c54a1b8c4dce",
+    "tests/test_rq2_novelty_mechanism_audit_development_v1.py": "627d8fa1f8e2285d6c89d32d92dca8a1c869dfecb978b69c13766401e412fa15"
+  },
+  "source_before_after_equal": true,
+  "commands": [
+    {
+      "argv": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_rq2_novelty_mechanism_audit_development_v1.py"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 2.320039900005213,
+      "stdout": ".....................................................                    [100%]\n53 passed in 1.86s\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "experiments/rq2_novelty_mechanism_audit_development_v1.py",
+        "--output",
+        "results/tables/rq2_novelty_mechanism_audit_v1_non_authoritative/attempt_02"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.45046360000560526,
+      "stdout": "{\"excluded\": 1856, \"unknown\": 44, \"toy_cases\": 36, \"wall_seconds\": 0.3224095000041416, \"output\": \"D:\\\\CUHKSZ\\\\Research Project\\\\electricity-grid\\\\results\\\\tables\\\\rq2_novelty_mechanism_audit_v1_non_authoritative\\\\attempt_02\"}\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "record_type": "non_authoritative_documentation_validation",
+  "formal_result": false,
+  "commands": [
+    {
+      "argv": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_literature_evidence_contract.py"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.9468249999990803,
+      "stdout": "...                                                                      [100%]\n3 passed in 0.34s\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "docs/literature",
+        "docs/plan/RQ2_论文路线图.md"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.13541700000496348,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "diagnostic_tests": {
+    "count": 53,
+    "source": "attempt_02/validation.json"
+  },
+  "literature_tests": {
+    "count": 3,
+    "exit_code": 0
+  },
+  "pdf": {
+    "pages": 8,
+    "https_uris": 11,
+    "file_uris": 0,
+    "final_png_pages_visually_reviewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "render_structural_errors": []
+  },
+  "library": {
+    "unique_entries": 42,
+    "construction_evidence_entries": 9,
+    "new_entries": 9
+  },
+  "local_links_resolved": true,
+  "source_before_after_equal": true,
+  "ast_parse": true,
+  "credential_pattern_scan_no_hits": true,
+  "earlier_documentation_test_attempts": [
+    {
+      "command": "compute Python -B -m pytest -q -p no:cacheprovider tests/test_rq2_novelty_mechanism_audit_development_v1.py tests/test_literature_evidence_contract.py",
+      "exit_code": 1,
+      "observed": "55 passed, 1 failed: legacy gap wording lacked canonical original-positive-H2 phrase"
+    },
+    {
+      "command": "compute Python -B -m pytest -q -p no:cacheprovider tests/test_literature_evidence_contract.py",
+      "exit_code": 1,
+      "observed": "2 passed, 1 failed: existing roadmap lacked canonical LB/UB notation; equivalent boundary wording then aligned"
+    }
+  ],
+  "source_sha256": {
+    "configs/rq2_novelty_mechanism_audit_v1.DRAFT.yaml": "38d5f5348df637dd628da8a75f37640bf48c76226b80afdd53d6c54a1b8c4dce",
+    "experiments/rq2_novelty_mechanism_audit_development_v1.py": "35965232b5d5cd3a2aa9f808e4b36046ca2736e3ad74c1970eaf92c09a111ec9",
+    "tests/test_rq2_novelty_mechanism_audit_development_v1.py": "627d8fa1f8e2285d6c89d32d92dca8a1c869dfecb978b69c13766401e412fa15",
+    "docs/model_spec/rq2_novelty_mechanism_audit_development_v1.md": "9c720681401e386e61c5e10b7cf374dc939d292c8af4040c66e594d98ba392d8",
+    "docs/plan/RQ2_创新性核查与研究判断_20261021.md": "e4c4961bee0e96ed1a7a1d109cb35035d577133bf356fd8acc730d236b12b965",
+    "docs/plan/RQ2_论文路线图.md": "a23ff53e6dd79bf765eb3a68be63ba1a2ecb75a1bba8f61ace1bd50b399534c4",
+    "paper/drafts/README.md": "d2449632f9ea9e82cce8cfd3fde098f8928e021b56af1d5bf8d481213f9e1419",
+    "paper/drafts/project_introduction_phased_planning.md": "9800d0abfd26d3762baac7623a8add5dbf5213a39b6ba4177960791ac2159b3d",
+    "paper/drafts/project_introduction_phased_planning.pdf": "2e1c6e419ca3dd8dc89b179ef5ac9c3d9b22c595a63bb401fb3fad99e2d4607a",
+    "paper/figures/phased_planning_framework_cn.svg": "a6164539c91b0b70e8e68ea25be20d13067c1dd9c6b2a978d9c5d9e8d44505f9",
+    "docs/literature/literature_matrix.csv": "973a9b7fb1ba5e634b4cd6c26c7adb77901da09d5367fafc4ad816cf5985c55d",
+    "docs/literature/search_protocol.md": "27c85c9ca390f5566d543447aa0297ea3578bed07ed12198b759b496dccc7bfc",
+    "docs/literature/research_gap.md": "464fe66a2b0bd35c5467770b0b2f1f5d2053210258cfee60f74c296b48cff3b5",
+    "docs/literature/construction_evidence_20261021.csv": "b8d8527ef0400c3342d8b69b7034c106aaf021fc708b7151f1886ae312b6599d",
+    "docs/literature/construction_metadata_20261021.json": "07cf5c6ab8a920bbe484d457ae6b91051fc6e8a23ad5845b8fb2159b9520789f",
+    "results/tables/rq2_novelty_mechanism_audit_v1_non_authoritative/attempt_01/analysis.json": "51eb240567daa0a6be3fdc7662243d7fb5f5ea3dbf35ba4548c820504136250f",
+    "results/tables/rq2_novelty_mechanism_audit_v1_non_authoritative/attempt_01/cell_causes.csv": "08bc4875d2ac680e6e9673d7b8055889bc1346cb02819528b8dfe5220bdeb8bb",
+    "results/tables/rq2_novelty_mechanism_audit_v1_non_authoritative/attempt_01/terminal.json": "2fad026a0b7ece31473777834d07b0cb3cc3980042f2129c68488fa5385a8cfd",
+    "results/tables/rq2_novelty_mechanism_audit_v1_non_authoritative/attempt_02/analysis.json": "84051d1043c46808ff98f7c37ba76c209343fa8ef5291edfe2cbe850732d1d91",
+    "results/tables/rq2_novelty_mechanism_audit_v1_non_authoritative/attempt_02/cell_causes.csv": "058f91de4621a4a3f7a365786f845a2288b9092d6b00815b5fb8333b3ca8d2d5",
+    "results/tables/rq2_novelty_mechanism_audit_v1_non_authoritative/attempt_02/terminal.json": "856e1a5fc58d25fbb049d0b7aabb1e78b2cd74ca209d3f166e55d1222c4cca2a",
+    "results/tables/rq2_novelty_mechanism_audit_v1_non_authoritative/attempt_02/validation.json": "b3eecd492f2e98af79ae84c2dc3027f0b82835e90bfa7e172a39b7315bafd75f",
+    "results/tables/rq2_novelty_mechanism_audit_v1_non_authoritative/preseal_findings_20261021.json": "50e508fed5e945e7f3ad4ef9ed265abf5d669da9924783eb40bca67856b5c506"
+  }
+}

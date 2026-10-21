@@ -1,6 +1,6 @@
 # RQ2 论文路线图与导航页
 
-创建日期：2026-08-20；更新日期：2026-09-03
+创建日期：2026-08-20；历史状态更新：2026-09-03；文献导航增补：2026-10-21
 适用范围：毕业论文/期刊投稿主线 = RQ2（网络安全与小时级CFE共同约束下的业务柔性可交付前沿与不足归因）。
 本页是导航与状态映射，不重述已冻结的科学契约。权威来源仍是 `agent.md`（范围/路由/审查；§4 已将 RQ2 定为首篇主创新、RQ1 降为后续扩展）、`docs/model_spec/formulation.md`（数学规格）、`docs/model_spec/blocker_register.md`（阻塞状态）与 `docs/literature/`（文献与缺口）。
 
@@ -15,6 +15,12 @@
 > `network-only / CFE-only / joint-correct / joint-B6`四臂用于分解
 > `I_joint = D_J - max(D_N,D_C) = I_sep + A_B6`。确认性46-cell协议见
 > `RQ2_联合服务可交付前沿确认性方案_v2.md`；旧v6和四臂v1保持为不可覆盖前序。
+
+## 2026-10-21 文献与项目介绍增补
+
+新增建设专题DC16–DC23及原介绍所引CFE05，见[核心文献矩阵](../literature/literature_matrix.csv)和[专题证据表](../literature/construction_evidence_20261021.csv)。[分期投产与电网扩建完整介绍](../../paper/drafts/project_introduction_phased_planning.md)描述拟议建设方案；[现有证据与小模型核查](RQ2_创新性核查与研究判断_20261021.md)区分瞬时份额限制、恢复时序及特定策略失败。该增补不替代首篇RQ2协议或提升任何正式门禁。以下实施状态保留其原日期，当前进度以[科研项目执行步骤](科研项目执行步骤.md)和[blocker register](../model_spec/blocker_register.md)为准。
+
+既有有符号边界保持同一解释：`LB_Δ>0`才支持允许coupling集合中的稳健正偏差；`LB_Δ<=0<UB_Δ`表示符号部分识别且稳健正主张未建立；`UB_Δ<=0`排除该集合内的严格正偏差。这个对齐不产生新的容量或经验结果。
 
 ## 0. 当前执行状态
 

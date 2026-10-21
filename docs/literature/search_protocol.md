@@ -1,6 +1,18 @@
 # 文献检索与编码协议
 
-更新日期：2026-08-25
+更新日期：2026-10-21
+
+## 2026-10-21 建设与达产专题增补
+
+本轮围绕数据中心模块投装、物理电网扩建、工程工期、序贯投资、任务期限与恢复，以及小时清洁匹配，核查与拟议建设方案最接近的工作。复用已有DC14/DC15，新增DC16–DC23；另补CFE05，对齐原项目介绍中已使用的清洁计算文献。核心矩阵现有42条记录，包含学术工作和机构报告；这个总数不等于某份介绍的参考文献数量。
+
+专题范围与结论来源保存于[construction_evidence_20261021.csv](construction_evidence_20261021.csv)。每行记录原文URL、实际读取位置、已有内容、差异边界和待核事项；这9篇专题近邻构成范围性核查，不声称穷尽。来源优先arXiv官方全文、出版方页面及作者公开版本。
+
+DC18、DC20和DC21的部分依据来自出版方摘要或索引模型章节，尚未独立读取完整PDF，按A级并注明部分章节处理。HTTP 429或重定向不可达是访问失败，不能升级全文或元数据核验等级。[construction_metadata_20261021.json](construction_metadata_20261021.json)保留Crossref成功返回和失败状态；DC18/DC21的书目信息分别另据出版方条目及作者机构库，不能把Crossref失败写成核验成功。
+
+Shao等的期刊题名、作者、卷号和文章号已由Crossref核对；本轮模型判断取自arXiv:2510.25118v1，尚未独立比较期刊方程。预印本与期刊合并为DC17，同一工作不重复计数。后续正式投稿前重查版本与对应关系。
+
+新增查询簇包括`data center construction sequence expansion planning`、`data center modules grid construction lead time uncertainty`、`investment staging workload recovery hourly CFE`。停止条件为足以识别最近邻模型与当前主张边界；本轮没有将未检出的机制写成全球不存在。
 
 ## 当前状态
 
