@@ -1,0 +1,7 @@
+2026-10-23 documentation-only second check, exit_code=1.
+methods_document_check.py preserved() failed with FileNotFoundError for:
+results/tables/staged_rts24_append_cost_v1_non_authoritative/checkpoint.json
+The saved cost checkpoint actually resides in execution_observations_01/checkpoint.json and uses result_files/all_direct_pins, unlike the later business/evaluation checkpoint schema.
+No document_checks_01.json was written by this failed invocation.
+Root inspected the existing checkpoint keys and paths, then updated only the .git helper to use the actual saved locations/schema.
+No research implementation, frozen input, result or gate changed.

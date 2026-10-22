@@ -1,0 +1,7 @@
+2026-10-23 documentation-only first check, exit_code=1.
+methods_document_check.py main() failed the local-link existence assertion:
+('docs/plan/continuation_handoff_20261023_methods.md',
+ '../../results/tables/staged_deliverability_methods_v1_non_authoritative/document_checks_01.json')
+The linked record is the checker own output and did not yet exist. No document_checks_01.json was written by this failed invocation.
+Root updated only the .git helper: permit its one explicit pending output while checking all other links, then repeat full link existence checks after exclusive output creation.
+No research implementation, frozen input, result or gate changed.
