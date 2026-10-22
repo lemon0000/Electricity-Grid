@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-23数值接口检查点：见[最新交接](continuation_handoff_20261023_numeric.md)。新增无solver的LP/QP导出及完整snapshot导入，经原经济/child/primal审计输出既有证据；66项新检查与158项相关旧检查合计224 passed/30.91s，旧绑定及531/138核心保持。静态核算677输入得到CAS57/49467B、root17504B，并将保存物化二次与writer重复读取可能三次分开，见[成本审查](staged_deliverability_c_retained_cost_review_v1.md)。[公共数值包计划](staged_deliverability_c_public_numeric_package_plan_v1.md)列P1/P2及完整范围31/319/1431/4273请求上限；没有native适配器/受控runner、实测或新运行授权，公共数值与C/D/E资源仍OPEN。以下记录保留各自时点含义。
+
 2026-10-23最新开发检查点：以[保存证据交接](continuation_handoff_20261023_journal.md)的journal_v2继续。v1三方法五小时/3 fresh的一次测量保留（500/1324、outer75.1158s、531核心）；最终领域审查F14及v2草稿F15由完整CAS/root集合、链与最终依赖核验修复。新后继仅复用旧前两小时+1 fresh+3失败分支，37/121、outer27.9132s、采样tree RSS418926592B、138核心286322B，0旧full compiler/solver/native；见[新报告](../../results/tables/staged_rts24_journal_v2_non_authoritative/closure_probe_01/validation_report.md)。共382项不同普通检查通过；旧B1–B3/C/build/causal及v1绑定字节一致。公共RTS-24方向保留，公共数值点/g、139节点完整合同层、反事实F/X时序、长cohort/真实失败与IO/前缀增长仍待测，C整体性能和D/E点数/资源仍OPEN；native包须先登记并另获授权。以下段落保留各自时点含义。
 
 2026-10-22，`DRAFT_NONAUTHORITATIVE`。接续[B3/C顺序](staged_deliverability_b3_c_next_steps_v1.md)、[B3规格](../model_spec/staged_termination_development_v1.md)及[有界诊断合同](staged_deliverability_b3_development_contract_v1.md)。本页安排C的交付，不登记或启动主实验，不改变旧实验权限。

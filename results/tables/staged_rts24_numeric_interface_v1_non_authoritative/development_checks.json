@@ -1,0 +1,112 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "checks": {
+    "command": "D:/Miniconda3/envs/compute/python.exe -B -m pytest tests/test_staged_rts24_development_v1.py tests/test_staged_rts24_child_optimality_v1.py tests/test_staged_rts24_causal_v1.py tests/test_staged_rts24_reference_queries_v1.py tests/test_staged_rts24_numeric_interface_v1.py -q -p no:cacheprovider",
+    "elapsed_seconds": 30.91,
+    "exit_code": 0,
+    "final_selected_total": 224,
+    "new_distinct": 66,
+    "related_existing": 158
+  },
+  "development_history": [
+    {
+      "failed": 0,
+      "passed": 41
+    },
+    {
+      "failed": 0,
+      "passed": 49
+    },
+    {
+      "failed": 0,
+      "passed": 55
+    },
+    {
+      "failed": 7,
+      "passed": 53,
+      "reason": "new full reduced-cost check exposed Pyomo balance orientation in analytic valid cases"
+    },
+    {
+      "failed": 0,
+      "passed": 60
+    },
+    {
+      "failed": 0,
+      "passed": 65
+    },
+    {
+      "failed": 0,
+      "includes_new66": true,
+      "passed": 224
+    }
+  ],
+  "head_before": "c0773969c9ef850fb8bfbc63ad730aaa329f1e5c",
+  "native_optimization_calls": 0,
+  "overall_performance_review_complete": false,
+  "preseal": {
+    "all_closed": true,
+    "findings": [
+      "NI-F1 full free-column reduced-cost check",
+      "NI-F2 layered retained-growth correction",
+      "NI-F3 dual-valid payload consistency"
+    ],
+    "official_verdict": null,
+    "receipt": null,
+    "reviewer_role": "sol_reviewer",
+    "seal": null
+  },
+  "preserved": {
+    "B1_B3_bound_bytes_unchanged": true,
+    "v1_core_bytes": 558007,
+    "v1_core_files": 531,
+    "v1_postcheck_exit": 0,
+    "v2_core_bytes": 286322,
+    "v2_core_files": 138,
+    "v2_postcheck_exit": 0
+  },
+  "public_numeric_results": false,
+  "resource_admission": false,
+  "scope": "ordinary_development_checks_and_saved_static_accounting",
+  "solver_calls": 0,
+  "source_pins": {
+    "docs/plan/continuation_handoff_20261023_numeric.md": {
+      "bytes": 3836,
+      "sha256": "9389bb24ec049d17059623aac2f18e3ece1e75e92fd05d30c63f26cce0fe44e4"
+    },
+    "docs/plan/staged_deliverability_c_numeric_interface_contract_v1.md": {
+      "bytes": 4152,
+      "sha256": "f89e8acb0b7dc35035ba14213a9348684fb15b7c351184210a73b112541add5e"
+    },
+    "docs/plan/staged_deliverability_c_public_numeric_package_plan_v1.md": {
+      "bytes": 4772,
+      "sha256": "5e936113b75ec10815b9d23476d5874c3994d23ba01cfa6e772c80e632c8ae3f"
+    },
+    "docs/plan/staged_deliverability_c_retained_cost_review_v1.md": {
+      "bytes": 4675,
+      "sha256": "39ad9bacc469dd7843b610e59bea72ca3e71d8b167e4490ae09eac71cc37c287"
+    },
+    "experiments/staged_rts24_saved_size_audit_v1.py": {
+      "bytes": 9140,
+      "sha256": "c2996ad8e1434c17d579567ba2c7a76ff9efbb969535a464ceb5cbc83f6268ae"
+    },
+    "results/tables/staged_rts24_saved_cost_v1_non_authoritative/audit_01/report.json": {
+      "bytes": 4442,
+      "sha256": "eba95e4c99f9d4afaca89a1ed8d7df7015f819c69d9d341102d1ac096295bd1e"
+    },
+    "src/staged_rts24_numeric_interface_v1.py": {
+      "bytes": 14093,
+      "sha256": "570cd1e52f5c78c1ee37f589fb28b646f4173dede32600ba3bff8ceeb447ec31"
+    },
+    "tests/test_staged_rts24_numeric_interface_v1.py": {
+      "bytes": 18752,
+      "sha256": "9a48ba612d5cbddf16438a9e714da1cefaffcd6c0229c9af087a627225345aba"
+    }
+  },
+  "static_audit": {
+    "exit_code": 0,
+    "input_files": 677,
+    "new_numeric_points": 0,
+    "successful_logical_read_bytes": 2108064,
+    "successful_logical_reads": 1354
+  }
+}

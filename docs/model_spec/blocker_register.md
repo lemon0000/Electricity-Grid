@@ -4,6 +4,8 @@
 
 ### 2026-10-23 C保存与重放后继
 
+最新纯数值接口与成本核算见[交接](../plan/continuation_handoff_20261023_numeric.md)：无solver导出/导入、规范化balance方向、完整rc及必要dual审计通过66新+158相关检查；旧B1–B3及531/138核心不变。静态保存核算确认累计key/state物化可二次、writer重复读/解析可三次，旧笼统O(T²)由[新成本页](../plan/staged_deliverability_c_retained_cost_review_v1.md)补正。下一步为受控native适配/runner的无solver开发和保存成本后继；[公共包计划](../plan/staged_deliverability_c_public_numeric_package_plan_v1.md)31/319等均为未执行上限，不是资源准入或专项native授权。公共点/g、完整139/F-X时序和C/D/E仍OPEN。
+
 最新API为journal_v2：领域审查F14与草稿F15已通过CAS/root全集、链与最终runtime检查修复；24项新普通检查及唯一两小时复用/1 fresh/3失败探针exit0，37/121会计闭合、outer27.9132s、核心138文件286322B。新旧完整state/summary/audit一致，删除旧对象不采用且fresh拒绝，unknown完整闭包可确认一条。旧v1测量和已绑定字节保留，通用v1 writer不继续使用；见[交接最新段](../plan/continuation_handoff_20261023_journal.md)与[后继报告](../../results/tables/staged_rts24_journal_v2_non_authoritative/closure_probe_01/validation_report.md)。合计382项不同普通检查，公共/D-E门仍按下段OPEN；以下v1部分按历史测量理解。
 
 actual子集编译、typed CAS去重、可信head/count/state/failure绑定、hour/attempt/terminal及只读fresh重放已完成解析开发检查点；见[交接](../plan/continuation_handoff_20261023_journal.md)。一次三方法各5小时/3 fresh/5失败分支诊断exit0，500/1324会计闭合，outer75.1158s、采样tree RSS417968128B；358项不同普通检查通过。旧B1–B3及C/build/causal绑定未变，未启动solver/native或长实验。
