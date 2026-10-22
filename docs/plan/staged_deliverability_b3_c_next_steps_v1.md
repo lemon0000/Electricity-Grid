@@ -4,6 +4,8 @@
 
 ## 接下来按依赖推进
 
+同日B3开发实现及有界诊断已完成，见[保存验证报告](../../results/tables/staged_deliverability_b3_v1_non_authoritative/attempt_01/validation_report.md)与[B3交接](continuation_handoff_20261022_b3.md)。下表保留依赖顺序；当前开始按[C范围与成本计划](staged_deliverability_c_scope_and_budget_plan_v1.md)准备主实验范围和预算，C尚未闭合。
+
 | 顺序 | 具体工作与交付 | 进入下一步的条件 |
 |---|---|---|
 | B3 | 给完整路径增加显式终结原因：正常观察结束、缺必要后续输入、准入拒绝、数值未决、保存失败；保存可追溯的任务右删失、未提交提案及最后已提交状态。补保存/关闭/重开失败窗口的开发验证 | 不把缺输入写成零需求或零债务；不因失败重复提交；旧失败及绑定证据保留 |

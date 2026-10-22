@@ -1,0 +1,5765 @@
+{
+  "before_reopen": {
+    "aggregate_contract_release": false,
+    "all_arrived_tasks": [
+      {
+        "balance_scope": "scalar_policy_execution",
+        "birth": -2,
+        "deadline_miss": "0",
+        "due": -2,
+        "immediate": "1/2",
+        "original": "1/2",
+        "recovered": "0",
+        "remaining": "0",
+        "status": "completed_on_arrival"
+      },
+      {
+        "balance_scope": "scalar_policy_execution",
+        "birth": -1,
+        "deadline_miss": "0",
+        "due": -1,
+        "immediate": "1/2",
+        "original": "1/2",
+        "recovered": "0",
+        "remaining": "0",
+        "status": "completed_on_arrival"
+      },
+      {
+        "balance_scope": "scalar_policy_execution",
+        "birth": 0,
+        "deadline_miss": "0",
+        "due": 2,
+        "immediate": "1/2",
+        "original": "1/2",
+        "recovered": "0",
+        "remaining": "0",
+        "status": "completed_on_arrival"
+      },
+      {
+        "balance_scope": "scalar_policy_execution",
+        "birth": 1,
+        "deadline_miss": null,
+        "due": 3,
+        "immediate": "3/10",
+        "original": "1/2",
+        "recovered": "0",
+        "remaining": "1/5",
+        "status": "right_censored_before_deadline"
+      }
+    ],
+    "attempted_hour": 2,
+    "audit_validity": "passed",
+    "business_prefix_assessment": {
+      "coverage_complete": false,
+      "fx_contract_status": "not_assessed_scalar_stub",
+      "method": "full_temporal",
+      "method_conditions_satisfied": null,
+      "observed_primary_deadline_miss": "0",
+      "observed_through": 1,
+      "physical_replay_violations": [],
+      "primary_right_censored": true,
+      "remaining_debt": "1/5",
+      "scope": "scalar_fixed_policy",
+      "stopped": false
+    },
+    "declared_observation_last_hour": 7,
+    "declared_registration_end": 4,
+    "future_arrivals_unobserved": true,
+    "genesis_sha": "a94037f1be4087700ac0943eaec5bd8ebc18b074f9cff3db1e644f79cb9b0698",
+    "head_sha": "185661bd60a0189a5d8878828d9853fa8a4e9dbcd1673e3e32a1dc386c4162ae",
+    "io_error": {
+      "error": "B3 declared readback fault",
+      "expected_sha": "a1ebc818ab896248791334132210089d722f0148da95e1f2c1cbbb9417f26032",
+      "may_have_published": true,
+      "operation": "step",
+      "phase": "readback",
+      "planned_reason": null,
+      "target": "step_0004.json"
+    },
+    "last_accepted_hour": null,
+    "last_verified_accepted_hour": 1,
+    "last_verified_state": {
+      "business": {
+        "call_energy": "1/5",
+        "duration": 1,
+        "events": 1,
+        "first_hour": -2,
+        "ledger": {
+          "accounting_period_id": "continuous_case",
+          "cohorts": [
+            {
+              "created_hour": 4,
+              "deadline_evidence": "mechanism_assumption",
+              "due_hour": 6,
+              "incurred": "1/5",
+              "missed_at_deadline": null,
+              "remaining": "1/5"
+            }
+          ],
+          "last_hour": 4,
+          "trajectory_identity": "save_after_publish:B3"
+        },
+        "method": "full_temporal",
+        "parameters": {
+          "alpha": "4/5",
+          "auxiliary_mw": "1/40",
+          "beta": "1",
+          "call_ramp": "1/5",
+          "capacity": "1/5",
+          "eta": "1",
+          "facility_factor": "5/4",
+          "fixed_headroom": "1/5",
+          "max_call_energy": "2/5",
+          "max_debt": "2/5",
+          "max_duration": 1,
+          "max_events": 2,
+          "max_recovery": "1/5",
+          "minimum_rest": 0
+        },
+        "previous_call": "1/5",
+        "records": [
+          {
+            "activity": "1/2",
+            "allocations": [],
+            "attributed_clean_mwh": "3/5",
+            "cfe_call_shortfall_mw": "0",
+            "cfe_request_mw": "0",
+            "cfe_served": "0",
+            "cfe_shortfall_mwh": "0",
+            "grid_request_mw": "0",
+            "grid_served": "0",
+            "grid_shortfall_mw": "0",
+            "ledger_applied": true,
+            "observation": {
+              "clean_mwh": "3/5",
+              "compute_capacity": "4/5",
+              "due": -2,
+              "equipment_online": [
+                "first_batch"
+              ],
+              "flexible_fraction": "2/5",
+              "grid_online": false,
+              "hour": -2,
+              "idle_mw": "2/25",
+              "supply_mw": "4/5",
+              "workload": "1/2"
+            },
+            "power_mw": "3/4",
+            "recovery": "0",
+            "reference_mw": "3/4",
+            "violations": []
+          },
+          {
+            "activity": "1/2",
+            "allocations": [],
+            "attributed_clean_mwh": "3/5",
+            "cfe_call_shortfall_mw": "0",
+            "cfe_request_mw": "0",
+            "cfe_served": "0",
+            "cfe_shortfall_mwh": "0",
+            "grid_request_mw": "0",
+            "grid_served": "0",
+            "grid_shortfall_mw": "0",
+            "ledger_applied": true,
+            "observation": {
+              "clean_mwh": "3/5",
+              "compute_capacity": "4/5",
+              "due": -1,
+              "equipment_online": [
+                "first_batch"
+              ],
+              "flexible_fraction": "2/5",
+              "grid_online": false,
+              "hour": -1,
+              "idle_mw": "2/25",
+              "supply_mw": "4/5",
+              "workload": "1/2"
+            },
+            "power_mw": "3/4",
+            "recovery": "0",
+            "reference_mw": "3/4",
+            "violations": []
+          },
+          {
+            "activity": "1/2",
+            "allocations": [],
+            "attributed_clean_mwh": "3/5",
+            "cfe_call_shortfall_mw": "0",
+            "cfe_request_mw": "0",
+            "cfe_served": "0",
+            "cfe_shortfall_mwh": "0",
+            "grid_request_mw": "0",
+            "grid_served": "0",
+            "grid_shortfall_mw": "0",
+            "ledger_applied": true,
+            "observation": {
+              "clean_mwh": "3/5",
+              "compute_capacity": "4/5",
+              "due": 2,
+              "equipment_online": [
+                "first_batch"
+              ],
+              "flexible_fraction": "2/5",
+              "grid_online": false,
+              "hour": 0,
+              "idle_mw": "2/25",
+              "supply_mw": "4/5",
+              "workload": "1/2"
+            },
+            "power_mw": "3/4",
+            "recovery": "0",
+            "reference_mw": "3/4",
+            "violations": []
+          },
+          {
+            "activity": "3/10",
+            "allocations": [],
+            "attributed_clean_mwh": "1/2",
+            "cfe_call_shortfall_mw": "0",
+            "cfe_request_mw": "1/8",
+            "cfe_served": "1/10",
+            "cfe_shortfall_mwh": "0",
+            "grid_request_mw": "1/8",
+            "grid_served": "1/10",
+            "grid_shortfall_mw": "0",
+            "ledger_applied": true,
+            "observation": {
+              "clean_mwh": "1/2",
+              "compute_capacity": "4/5",
+              "due": 3,
+              "equipment_online": [
+                "first_batch"
+              ],
+              "flexible_fraction": "2/5",
+              "grid_online": false,
+              "hour": 1,
+              "idle_mw": "2/25",
+              "supply_mw": "5/8",
+              "workload": "1/2"
+            },
+            "power_mw": "1/2",
+            "recovery": "0",
+            "reference_mw": "3/4",
+            "violations": []
+          }
+        ],
+        "rest": 0,
+        "stopped": false,
+        "trajectory_id": "save_after_publish:B3"
+      },
+      "config": {
+        "actual_outages": [
+          [
+            1,
+            0
+          ]
+        ],
+        "after": {
+          "base_mva": 100.0,
+          "branches": [
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 0,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 1.0,
+              "rate_b_mw": 1.0,
+              "rate_c_mw": 1.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 2
+            },
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 1,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 1.0,
+              "rate_b_mw": 1.0,
+              "rate_c_mw": 1.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 2
+            }
+          ],
+          "buses": [
+            {
+              "demand_mw": 0.0,
+              "index": 1
+            },
+            {
+              "demand_mw": 0.1,
+              "index": 2
+            }
+          ],
+          "generators": [
+            {
+              "bus": 1,
+              "cost_constant": 0.0,
+              "cost_linear": 0.0,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 0,
+              "p_max_mw": 2.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            }
+          ],
+          "reference_bus": 1,
+          "source_package": "synthetic_two_line_B2",
+          "source_version": "development_v1"
+        },
+        "angle_limit": "1/10",
+        "before": {
+          "base_mva": 100.0,
+          "branches": [
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 0,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 0.725,
+              "rate_b_mw": 0.725,
+              "rate_c_mw": 0.725,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 2
+            },
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 1,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 0.725,
+              "rate_b_mw": 0.725,
+              "rate_c_mw": 0.725,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 2
+            }
+          ],
+          "buses": [
+            {
+              "demand_mw": 0.0,
+              "index": 1
+            },
+            {
+              "demand_mw": 0.1,
+              "index": 2
+            }
+          ],
+          "generators": [
+            {
+              "bus": 1,
+              "cost_constant": 0.0,
+              "cost_linear": 0.0,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 0,
+              "p_max_mw": 2.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            }
+          ],
+          "reference_bus": 1,
+          "source_package": "synthetic_two_line_B2",
+          "source_version": "development_v1"
+        },
+        "business_fixture": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "business_sha256": "5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5",
+        "delays": [
+          [
+            "delayed",
+            2
+          ],
+          [
+            "on_time",
+            0
+          ]
+        ],
+        "hourly_ramp": "2",
+        "max_x_call": "1/2",
+        "max_x_duration": 1,
+        "max_x_energy": "1/2",
+        "max_x_events": 2,
+        "max_x_ramp": "1/2",
+        "poi_bus": 2,
+        "project_lead": 2,
+        "project_start": 0,
+        "rights_after": [
+          "4/5",
+          "1/2"
+        ],
+        "rights_before": [
+          "3/5",
+          "1/5"
+        ],
+        "selected_outages": [
+          0,
+          1
+        ],
+        "x_minimum_rest": 0
+      },
+      "plan": "on_time",
+      "previous_generation": "3/5",
+      "records": [
+        {
+          "active_x_mw": "3/20",
+          "actual_point": {
+            "angles_rad": [
+              0.0,
+              -0.00042500000000000003
+            ],
+            "branch_flows_mw": [
+              0.42500000000000004,
+              0.42500000000000004
+            ],
+            "generation_mw": 0.85,
+            "load": "3/4",
+            "numerical_conditions_satisfied": true,
+            "outages": [],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 1.1102230246251565e-16,
+              "flow_equation_mw": 0.0,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.0
+            }
+          },
+          "commissioned": false,
+          "committed": true,
+          "conditional": "1/5",
+          "connection_shortfall_mw": "0",
+          "contract": {
+            "aggregate_contract_release": false,
+            "business_necessary": true,
+            "conditional": "1/5",
+            "enrolled_X_backing_necessary": true,
+            "firm": "3/5",
+            "joint_temporal_support": "unresolved",
+            "network_conditions_satisfied": true,
+            "normal": {
+              "angles_rad": [
+                0.0,
+                -0.00045000000000000004
+              ],
+              "branch_flows_mw": [
+                0.45000000000000007,
+                0.45000000000000007
+              ],
+              "generation_mw": 0.9,
+              "load": "4/5",
+              "numerical_conditions_satisfied": true,
+              "outages": [],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 1.1102230246251565e-16,
+                "flow_equation_mw": 0.0,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.0
+              }
+            },
+            "scenarios": [
+              {
+                "business_necessary": true,
+                "counterfactual_cfe_mw": "1/20",
+                "counterfactual_workload": "27/50",
+                "firm_point": null,
+                "network_conditions_satisfied": true,
+                "outages": [],
+                "physical_cap": "27/20",
+                "post_call_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.00045000000000000004
+                  ],
+                  "branch_flows_mw": [
+                    0.45000000000000007,
+                    0.45000000000000007
+                  ],
+                  "generation_mw": 0.9,
+                  "load": "4/5",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 1.1102230246251565e-16,
+                    "flow_equation_mw": 0.0,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "required_grid_mw": "0",
+                "response_necessary": true,
+                "shared_requirement": "1/25"
+              },
+              {
+                "business_necessary": true,
+                "counterfactual_cfe_mw": "1/20",
+                "counterfactual_workload": "27/50",
+                "firm_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.0006999999999999999
+                  ],
+                  "branch_flows_mw": [
+                    0.0,
+                    0.7
+                  ],
+                  "generation_mw": 0.7,
+                  "load": "3/5",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    0
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 1.1102230246251565e-16,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "network_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "physical_cap": "5/8",
+                "post_call_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.000725
+                  ],
+                  "branch_flows_mw": [
+                    0.0,
+                    0.725
+                  ],
+                  "generation_mw": 0.725,
+                  "load": "5/8",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    0
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 0.0,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "required_grid_mw": "7/40",
+                "response_necessary": true,
+                "shared_requirement": "9/50"
+              },
+              {
+                "business_necessary": true,
+                "counterfactual_cfe_mw": "1/20",
+                "counterfactual_workload": "27/50",
+                "firm_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.0006999999999999999
+                  ],
+                  "branch_flows_mw": [
+                    0.7,
+                    0.0
+                  ],
+                  "generation_mw": 0.7,
+                  "load": "3/5",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    1
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 1.1102230246251565e-16,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "network_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "physical_cap": "5/8",
+                "post_call_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.000725
+                  ],
+                  "branch_flows_mw": [
+                    0.725,
+                    0.0
+                  ],
+                  "generation_mw": 0.725,
+                  "load": "5/8",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    1
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 0.0,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "required_grid_mw": "7/40",
+                "response_necessary": true,
+                "shared_requirement": "9/50"
+              }
+            ],
+            "status": "evaluated",
+            "total": "4/5"
+          },
+          "failure_stage": null,
+          "firm": "3/5",
+          "hour": -2,
+          "input": {
+            "clean_mwh": "3/5",
+            "compute_capacity": "4/5",
+            "due": -2,
+            "equipment_online": [
+              "first_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": false,
+            "hour": -2,
+            "idle_mw": "2/25",
+            "supply_mw": "4/5",
+            "workload": "1/2"
+          },
+          "legal_grid_cap_mw": "3/20",
+          "outages": [],
+          "physical_cap": "27/20",
+          "proposal": {
+            "activity": "1/2",
+            "allocations": [],
+            "attributed_clean_mwh": "3/5",
+            "cfe_call_shortfall_mw": "0",
+            "cfe_request_mw": "0",
+            "cfe_served": "0",
+            "cfe_shortfall_mwh": "0",
+            "grid_request_mw": "0",
+            "grid_served": "0",
+            "grid_shortfall_mw": "0",
+            "ledger_applied": true,
+            "observation": {
+              "clean_mwh": "3/5",
+              "compute_capacity": "4/5",
+              "due": -2,
+              "equipment_online": [
+                "first_batch"
+              ],
+              "flexible_fraction": "2/5",
+              "grid_online": false,
+              "hour": -2,
+              "idle_mw": "2/25",
+              "supply_mw": "4/5",
+              "workload": "1/2"
+            },
+            "power_mw": "3/4",
+            "recovery": "0",
+            "reference_mw": "3/4",
+            "violations": []
+          },
+          "raw_grid_mw": "0",
+          "reference_mw": "3/4",
+          "reference_point": {
+            "angles_rad": [
+              0.0,
+              -0.00042500000000000003
+            ],
+            "branch_flows_mw": [
+              0.42500000000000004,
+              0.42500000000000004
+            ],
+            "generation_mw": 0.85,
+            "load": "3/4",
+            "numerical_conditions_satisfied": true,
+            "outages": [],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 1.1102230246251565e-16,
+              "flow_equation_mw": 0.0,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.0
+            }
+          },
+          "response_conditions_satisfied": true,
+          "status": "conditional_operating_point_committed",
+          "x_call_mw": "0"
+        },
+        {
+          "active_x_mw": "3/20",
+          "actual_point": {
+            "angles_rad": [
+              0.0,
+              -0.00042500000000000003
+            ],
+            "branch_flows_mw": [
+              0.42500000000000004,
+              0.42500000000000004
+            ],
+            "generation_mw": 0.85,
+            "load": "3/4",
+            "numerical_conditions_satisfied": true,
+            "outages": [],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 1.1102230246251565e-16,
+              "flow_equation_mw": 0.0,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.0
+            }
+          },
+          "commissioned": false,
+          "committed": true,
+          "conditional": "1/5",
+          "connection_shortfall_mw": "0",
+          "contract": {
+            "aggregate_contract_release": false,
+            "business_necessary": true,
+            "conditional": "1/5",
+            "enrolled_X_backing_necessary": true,
+            "firm": "3/5",
+            "joint_temporal_support": "unresolved",
+            "network_conditions_satisfied": true,
+            "normal": {
+              "angles_rad": [
+                0.0,
+                -0.00045000000000000004
+              ],
+              "branch_flows_mw": [
+                0.45000000000000007,
+                0.45000000000000007
+              ],
+              "generation_mw": 0.9,
+              "load": "4/5",
+              "numerical_conditions_satisfied": true,
+              "outages": [],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 1.1102230246251565e-16,
+                "flow_equation_mw": 0.0,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.0
+              }
+            },
+            "scenarios": [
+              {
+                "business_necessary": true,
+                "counterfactual_cfe_mw": "1/20",
+                "counterfactual_workload": "27/50",
+                "firm_point": null,
+                "network_conditions_satisfied": true,
+                "outages": [],
+                "physical_cap": "27/20",
+                "post_call_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.00045000000000000004
+                  ],
+                  "branch_flows_mw": [
+                    0.45000000000000007,
+                    0.45000000000000007
+                  ],
+                  "generation_mw": 0.9,
+                  "load": "4/5",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 1.1102230246251565e-16,
+                    "flow_equation_mw": 0.0,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "required_grid_mw": "0",
+                "response_necessary": true,
+                "shared_requirement": "1/25"
+              },
+              {
+                "business_necessary": true,
+                "counterfactual_cfe_mw": "1/20",
+                "counterfactual_workload": "27/50",
+                "firm_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.0006999999999999999
+                  ],
+                  "branch_flows_mw": [
+                    0.0,
+                    0.7
+                  ],
+                  "generation_mw": 0.7,
+                  "load": "3/5",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    0
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 1.1102230246251565e-16,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "network_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "physical_cap": "5/8",
+                "post_call_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.000725
+                  ],
+                  "branch_flows_mw": [
+                    0.0,
+                    0.725
+                  ],
+                  "generation_mw": 0.725,
+                  "load": "5/8",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    0
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 0.0,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "required_grid_mw": "7/40",
+                "response_necessary": true,
+                "shared_requirement": "9/50"
+              },
+              {
+                "business_necessary": true,
+                "counterfactual_cfe_mw": "1/20",
+                "counterfactual_workload": "27/50",
+                "firm_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.0006999999999999999
+                  ],
+                  "branch_flows_mw": [
+                    0.7,
+                    0.0
+                  ],
+                  "generation_mw": 0.7,
+                  "load": "3/5",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    1
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 1.1102230246251565e-16,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "network_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "physical_cap": "5/8",
+                "post_call_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.000725
+                  ],
+                  "branch_flows_mw": [
+                    0.725,
+                    0.0
+                  ],
+                  "generation_mw": 0.725,
+                  "load": "5/8",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    1
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 0.0,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "required_grid_mw": "7/40",
+                "response_necessary": true,
+                "shared_requirement": "9/50"
+              }
+            ],
+            "status": "evaluated",
+            "total": "4/5"
+          },
+          "failure_stage": null,
+          "firm": "3/5",
+          "hour": -1,
+          "input": {
+            "clean_mwh": "3/5",
+            "compute_capacity": "4/5",
+            "due": -1,
+            "equipment_online": [
+              "first_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": false,
+            "hour": -1,
+            "idle_mw": "2/25",
+            "supply_mw": "4/5",
+            "workload": "1/2"
+          },
+          "legal_grid_cap_mw": "3/20",
+          "outages": [],
+          "physical_cap": "27/20",
+          "proposal": {
+            "activity": "1/2",
+            "allocations": [],
+            "attributed_clean_mwh": "3/5",
+            "cfe_call_shortfall_mw": "0",
+            "cfe_request_mw": "0",
+            "cfe_served": "0",
+            "cfe_shortfall_mwh": "0",
+            "grid_request_mw": "0",
+            "grid_served": "0",
+            "grid_shortfall_mw": "0",
+            "ledger_applied": true,
+            "observation": {
+              "clean_mwh": "3/5",
+              "compute_capacity": "4/5",
+              "due": -1,
+              "equipment_online": [
+                "first_batch"
+              ],
+              "flexible_fraction": "2/5",
+              "grid_online": false,
+              "hour": -1,
+              "idle_mw": "2/25",
+              "supply_mw": "4/5",
+              "workload": "1/2"
+            },
+            "power_mw": "3/4",
+            "recovery": "0",
+            "reference_mw": "3/4",
+            "violations": []
+          },
+          "raw_grid_mw": "0",
+          "reference_mw": "3/4",
+          "reference_point": {
+            "angles_rad": [
+              0.0,
+              -0.00042500000000000003
+            ],
+            "branch_flows_mw": [
+              0.42500000000000004,
+              0.42500000000000004
+            ],
+            "generation_mw": 0.85,
+            "load": "3/4",
+            "numerical_conditions_satisfied": true,
+            "outages": [],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 1.1102230246251565e-16,
+              "flow_equation_mw": 0.0,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.0
+            }
+          },
+          "response_conditions_satisfied": true,
+          "status": "conditional_operating_point_committed",
+          "x_call_mw": "0"
+        },
+        {
+          "active_x_mw": "3/20",
+          "actual_point": {
+            "angles_rad": [
+              0.0,
+              -0.00042500000000000003
+            ],
+            "branch_flows_mw": [
+              0.42500000000000004,
+              0.42500000000000004
+            ],
+            "generation_mw": 0.85,
+            "load": "3/4",
+            "numerical_conditions_satisfied": true,
+            "outages": [],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 1.1102230246251565e-16,
+              "flow_equation_mw": 0.0,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.0
+            }
+          },
+          "commissioned": false,
+          "committed": true,
+          "conditional": "1/5",
+          "connection_shortfall_mw": "0",
+          "contract": {
+            "aggregate_contract_release": false,
+            "business_necessary": true,
+            "conditional": "1/5",
+            "enrolled_X_backing_necessary": true,
+            "firm": "3/5",
+            "joint_temporal_support": "unresolved",
+            "network_conditions_satisfied": true,
+            "normal": {
+              "angles_rad": [
+                0.0,
+                -0.00045000000000000004
+              ],
+              "branch_flows_mw": [
+                0.45000000000000007,
+                0.45000000000000007
+              ],
+              "generation_mw": 0.9,
+              "load": "4/5",
+              "numerical_conditions_satisfied": true,
+              "outages": [],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 1.1102230246251565e-16,
+                "flow_equation_mw": 0.0,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.0
+              }
+            },
+            "scenarios": [
+              {
+                "business_necessary": true,
+                "counterfactual_cfe_mw": "1/20",
+                "counterfactual_workload": "27/50",
+                "firm_point": null,
+                "network_conditions_satisfied": true,
+                "outages": [],
+                "physical_cap": "27/20",
+                "post_call_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.00045000000000000004
+                  ],
+                  "branch_flows_mw": [
+                    0.45000000000000007,
+                    0.45000000000000007
+                  ],
+                  "generation_mw": 0.9,
+                  "load": "4/5",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 1.1102230246251565e-16,
+                    "flow_equation_mw": 0.0,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "required_grid_mw": "0",
+                "response_necessary": true,
+                "shared_requirement": "1/25"
+              },
+              {
+                "business_necessary": true,
+                "counterfactual_cfe_mw": "1/20",
+                "counterfactual_workload": "27/50",
+                "firm_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.0006999999999999999
+                  ],
+                  "branch_flows_mw": [
+                    0.0,
+                    0.7
+                  ],
+                  "generation_mw": 0.7,
+                  "load": "3/5",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    0
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 1.1102230246251565e-16,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "network_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "physical_cap": "5/8",
+                "post_call_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.000725
+                  ],
+                  "branch_flows_mw": [
+                    0.0,
+                    0.725
+                  ],
+                  "generation_mw": 0.725,
+                  "load": "5/8",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    0
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 0.0,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "required_grid_mw": "7/40",
+                "response_necessary": true,
+                "shared_requirement": "9/50"
+              },
+              {
+                "business_necessary": true,
+                "counterfactual_cfe_mw": "1/20",
+                "counterfactual_workload": "27/50",
+                "firm_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.0006999999999999999
+                  ],
+                  "branch_flows_mw": [
+                    0.7,
+                    0.0
+                  ],
+                  "generation_mw": 0.7,
+                  "load": "3/5",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    1
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 1.1102230246251565e-16,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "network_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "physical_cap": "5/8",
+                "post_call_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.000725
+                  ],
+                  "branch_flows_mw": [
+                    0.725,
+                    0.0
+                  ],
+                  "generation_mw": 0.725,
+                  "load": "5/8",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    1
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 0.0,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "required_grid_mw": "7/40",
+                "response_necessary": true,
+                "shared_requirement": "9/50"
+              }
+            ],
+            "status": "evaluated",
+            "total": "4/5"
+          },
+          "failure_stage": null,
+          "firm": "3/5",
+          "hour": 0,
+          "input": {
+            "clean_mwh": "3/5",
+            "compute_capacity": "4/5",
+            "due": 2,
+            "equipment_online": [
+              "first_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": false,
+            "hour": 0,
+            "idle_mw": "2/25",
+            "supply_mw": "4/5",
+            "workload": "1/2"
+          },
+          "legal_grid_cap_mw": "3/20",
+          "outages": [],
+          "physical_cap": "27/20",
+          "proposal": {
+            "activity": "1/2",
+            "allocations": [],
+            "attributed_clean_mwh": "3/5",
+            "cfe_call_shortfall_mw": "0",
+            "cfe_request_mw": "0",
+            "cfe_served": "0",
+            "cfe_shortfall_mwh": "0",
+            "grid_request_mw": "0",
+            "grid_served": "0",
+            "grid_shortfall_mw": "0",
+            "ledger_applied": true,
+            "observation": {
+              "clean_mwh": "3/5",
+              "compute_capacity": "4/5",
+              "due": 2,
+              "equipment_online": [
+                "first_batch"
+              ],
+              "flexible_fraction": "2/5",
+              "grid_online": false,
+              "hour": 0,
+              "idle_mw": "2/25",
+              "supply_mw": "4/5",
+              "workload": "1/2"
+            },
+            "power_mw": "3/4",
+            "recovery": "0",
+            "reference_mw": "3/4",
+            "violations": []
+          },
+          "raw_grid_mw": "0",
+          "reference_mw": "3/4",
+          "reference_point": {
+            "angles_rad": [
+              0.0,
+              -0.00042500000000000003
+            ],
+            "branch_flows_mw": [
+              0.42500000000000004,
+              0.42500000000000004
+            ],
+            "generation_mw": 0.85,
+            "load": "3/4",
+            "numerical_conditions_satisfied": true,
+            "outages": [],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 1.1102230246251565e-16,
+              "flow_equation_mw": 0.0,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.0
+            }
+          },
+          "response_conditions_satisfied": true,
+          "status": "conditional_operating_point_committed",
+          "x_call_mw": "0"
+        },
+        {
+          "active_x_mw": "3/20",
+          "actual_point": {
+            "angles_rad": [
+              0.0,
+              -0.0006000000000000001
+            ],
+            "branch_flows_mw": [
+              0.0,
+              0.6
+            ],
+            "generation_mw": 0.6,
+            "load": "1/2",
+            "numerical_conditions_satisfied": true,
+            "outages": [
+              0
+            ],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 0.0,
+              "flow_equation_mw": 1.1102230246251565e-16,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.0
+            }
+          },
+          "commissioned": false,
+          "committed": true,
+          "conditional": "1/5",
+          "connection_shortfall_mw": "0",
+          "contract": {
+            "aggregate_contract_release": false,
+            "business_necessary": false,
+            "conditional": "1/5",
+            "enrolled_X_backing_necessary": true,
+            "firm": "3/5",
+            "joint_temporal_support": "necessary_condition_failed",
+            "network_conditions_satisfied": true,
+            "normal": {
+              "angles_rad": [
+                0.0,
+                -0.00045000000000000004
+              ],
+              "branch_flows_mw": [
+                0.45000000000000007,
+                0.45000000000000007
+              ],
+              "generation_mw": 0.9,
+              "load": "4/5",
+              "numerical_conditions_satisfied": true,
+              "outages": [],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 1.1102230246251565e-16,
+                "flow_equation_mw": 0.0,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.0
+              }
+            },
+            "scenarios": [
+              {
+                "business_necessary": true,
+                "counterfactual_cfe_mw": "7/40",
+                "counterfactual_workload": "27/50",
+                "firm_point": null,
+                "network_conditions_satisfied": true,
+                "outages": [],
+                "physical_cap": "27/20",
+                "post_call_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.00045000000000000004
+                  ],
+                  "branch_flows_mw": [
+                    0.45000000000000007,
+                    0.45000000000000007
+                  ],
+                  "generation_mw": 0.9,
+                  "load": "4/5",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 1.1102230246251565e-16,
+                    "flow_equation_mw": 0.0,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "required_grid_mw": "0",
+                "response_necessary": true,
+                "shared_requirement": "7/50"
+              },
+              {
+                "business_necessary": false,
+                "counterfactual_cfe_mw": "7/40",
+                "counterfactual_workload": "27/50",
+                "firm_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.0006999999999999999
+                  ],
+                  "branch_flows_mw": [
+                    0.0,
+                    0.7
+                  ],
+                  "generation_mw": 0.7,
+                  "load": "3/5",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    0
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 1.1102230246251565e-16,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "network_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "physical_cap": "5/8",
+                "post_call_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.000725
+                  ],
+                  "branch_flows_mw": [
+                    0.0,
+                    0.725
+                  ],
+                  "generation_mw": 0.725,
+                  "load": "5/8",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    0
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 0.0,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "required_grid_mw": "7/40",
+                "response_necessary": true,
+                "shared_requirement": "7/25"
+              },
+              {
+                "business_necessary": false,
+                "counterfactual_cfe_mw": "7/40",
+                "counterfactual_workload": "27/50",
+                "firm_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.0006999999999999999
+                  ],
+                  "branch_flows_mw": [
+                    0.7,
+                    0.0
+                  ],
+                  "generation_mw": 0.7,
+                  "load": "3/5",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    1
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 1.1102230246251565e-16,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "network_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "physical_cap": "5/8",
+                "post_call_point": {
+                  "angles_rad": [
+                    0.0,
+                    -0.000725
+                  ],
+                  "branch_flows_mw": [
+                    0.725,
+                    0.0
+                  ],
+                  "generation_mw": 0.725,
+                  "load": "5/8",
+                  "numerical_conditions_satisfied": true,
+                  "outages": [
+                    1
+                  ],
+                  "residuals": {
+                    "angle_rad": 0.0,
+                    "balance_mw": 0.0,
+                    "flow_equation_mw": 0.0,
+                    "generation_mw": 0.0,
+                    "outage_flow_mw": 0.0,
+                    "thermal_mw": 0.0
+                  }
+                },
+                "required_grid_mw": "7/40",
+                "response_necessary": true,
+                "shared_requirement": "7/25"
+              }
+            ],
+            "status": "evaluated",
+            "total": "4/5"
+          },
+          "failure_stage": null,
+          "firm": "3/5",
+          "hour": 1,
+          "input": {
+            "clean_mwh": "1/2",
+            "compute_capacity": "4/5",
+            "due": 3,
+            "equipment_online": [
+              "first_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": false,
+            "hour": 1,
+            "idle_mw": "2/25",
+            "supply_mw": "5/8",
+            "workload": "1/2"
+          },
+          "legal_grid_cap_mw": "3/20",
+          "outages": [
+            0
+          ],
+          "physical_cap": "5/8",
+          "proposal": {
+            "activity": "3/10",
+            "allocations": [],
+            "attributed_clean_mwh": "1/2",
+            "cfe_call_shortfall_mw": "0",
+            "cfe_request_mw": "1/8",
+            "cfe_served": "1/10",
+            "cfe_shortfall_mwh": "0",
+            "grid_request_mw": "1/8",
+            "grid_served": "1/10",
+            "grid_shortfall_mw": "0",
+            "ledger_applied": true,
+            "observation": {
+              "clean_mwh": "1/2",
+              "compute_capacity": "4/5",
+              "due": 3,
+              "equipment_online": [
+                "first_batch"
+              ],
+              "flexible_fraction": "2/5",
+              "grid_online": false,
+              "hour": 1,
+              "idle_mw": "2/25",
+              "supply_mw": "5/8",
+              "workload": "1/2"
+            },
+            "power_mw": "1/2",
+            "recovery": "0",
+            "reference_mw": "3/4",
+            "violations": []
+          },
+          "raw_grid_mw": "1/8",
+          "reference_mw": "3/4",
+          "reference_point": {
+            "angles_rad": [
+              0.0,
+              -0.0008500000000000001
+            ],
+            "branch_flows_mw": [
+              0.0,
+              0.8500000000000001
+            ],
+            "generation_mw": 0.85,
+            "load": "3/4",
+            "numerical_conditions_satisfied": false,
+            "outages": [
+              0
+            ],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 1.1102230246251565e-16,
+              "flow_equation_mw": 0.0,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.1250000000000001
+            }
+          },
+          "response_conditions_satisfied": true,
+          "status": "conditional_operating_point_committed",
+          "x_call_mw": "1/8"
+        }
+      ],
+      "stopped": false,
+      "x_duration": 1,
+      "x_energy": "1/8",
+      "x_events": 1,
+      "x_previous": "1/8",
+      "x_rest": 0
+    },
+    "next_required_hour": 2,
+    "observation_end_reached": false,
+    "pending": {
+      "adoption": "unknown",
+      "b2_candidate_record": {
+        "active_x_mw": "0",
+        "actual_point": {
+          "angles_rad": [
+            0.0,
+            -0.0005750000000000001
+          ],
+          "branch_flows_mw": [
+            0.5750000000000001,
+            0.5750000000000001
+          ],
+          "generation_mw": 1.1500000000000001,
+          "load": "21/20",
+          "numerical_conditions_satisfied": true,
+          "outages": [],
+          "residuals": {
+            "angle_rad": 0.0,
+            "balance_mw": 0.0,
+            "flow_equation_mw": 0.0,
+            "generation_mw": 0.0,
+            "outage_flow_mw": 0.0,
+            "thermal_mw": 0.0
+          }
+        },
+        "commissioned": true,
+        "committed": true,
+        "conditional": "1/2",
+        "connection_shortfall_mw": "0",
+        "contract": {
+          "aggregate_contract_release": false,
+          "business_necessary": false,
+          "conditional": "1/2",
+          "enrolled_X_backing_necessary": false,
+          "firm": "4/5",
+          "joint_temporal_support": "necessary_condition_failed",
+          "network_conditions_satisfied": true,
+          "normal": {
+            "angles_rad": [
+              0.0,
+              -0.0007000000000000001
+            ],
+            "branch_flows_mw": [
+              0.7000000000000001,
+              0.7000000000000001
+            ],
+            "generation_mw": 1.4000000000000001,
+            "load": "13/10",
+            "numerical_conditions_satisfied": true,
+            "outages": [],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 0.0,
+              "flow_equation_mw": 0.0,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.0
+            }
+          },
+          "scenarios": [
+            {
+              "business_necessary": true,
+              "counterfactual_cfe_mw": "1/4",
+              "counterfactual_workload": "9/10",
+              "firm_point": null,
+              "network_conditions_satisfied": true,
+              "outages": [],
+              "physical_cap": "19/10",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0007000000000000001
+                ],
+                "branch_flows_mw": [
+                  0.7000000000000001,
+                  0.7000000000000001
+                ],
+                "generation_mw": 1.4000000000000001,
+                "load": "13/10",
+                "numerical_conditions_satisfied": true,
+                "outages": [],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "0",
+              "response_necessary": true,
+              "shared_requirement": "1/5"
+            },
+            {
+              "business_necessary": false,
+              "counterfactual_cfe_mw": "1/4",
+              "counterfactual_workload": "9/10",
+              "firm_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0009000000000000001
+                ],
+                "branch_flows_mw": [
+                  0.0,
+                  0.9000000000000001
+                ],
+                "generation_mw": 0.9,
+                "load": "4/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 1.1102230246251565e-16,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "network_conditions_satisfied": true,
+              "outages": [
+                0
+              ],
+              "physical_cap": "9/10",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.001
+                ],
+                "branch_flows_mw": [
+                  0.0,
+                  1.0
+                ],
+                "generation_mw": 1.0,
+                "load": "9/10",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "2/5",
+              "response_necessary": true,
+              "shared_requirement": "13/25"
+            },
+            {
+              "business_necessary": false,
+              "counterfactual_cfe_mw": "1/4",
+              "counterfactual_workload": "9/10",
+              "firm_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0009000000000000001
+                ],
+                "branch_flows_mw": [
+                  0.9000000000000001,
+                  0.0
+                ],
+                "generation_mw": 0.9,
+                "load": "4/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 1.1102230246251565e-16,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "network_conditions_satisfied": true,
+              "outages": [
+                1
+              ],
+              "physical_cap": "9/10",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.001
+                ],
+                "branch_flows_mw": [
+                  1.0,
+                  0.0
+                ],
+                "generation_mw": 1.0,
+                "load": "9/10",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "2/5",
+              "response_necessary": true,
+              "shared_requirement": "13/25"
+            }
+          ],
+          "status": "evaluated",
+          "total": "13/10"
+        },
+        "failure_stage": null,
+        "firm": "4/5",
+        "hour": 2,
+        "input": {
+          "clean_mwh": "21/25",
+          "compute_capacity": "6/5",
+          "due": 4,
+          "equipment_online": [
+            "first_batch",
+            "second_batch"
+          ],
+          "flexible_fraction": "2/5",
+          "grid_online": true,
+          "hour": 2,
+          "idle_mw": "3/25",
+          "supply_mw": "13/10",
+          "workload": "1/2"
+        },
+        "legal_grid_cap_mw": "0",
+        "outages": [],
+        "physical_cap": "19/10",
+        "proposal": {
+          "activity": "7/10",
+          "allocations": [
+            [
+              1,
+              "1/5"
+            ]
+          ],
+          "attributed_clean_mwh": "21/25",
+          "cfe_call_shortfall_mw": "0",
+          "cfe_request_mw": "0",
+          "cfe_served": "0",
+          "cfe_shortfall_mwh": "0",
+          "grid_request_mw": "0",
+          "grid_served": "0",
+          "grid_shortfall_mw": "0",
+          "ledger_applied": true,
+          "observation": {
+            "clean_mwh": "21/25",
+            "compute_capacity": "6/5",
+            "due": 4,
+            "equipment_online": [
+              "first_batch",
+              "second_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": true,
+            "hour": 2,
+            "idle_mw": "3/25",
+            "supply_mw": "13/10",
+            "workload": "1/2"
+          },
+          "power_mw": "21/20",
+          "recovery": "1/5",
+          "reference_mw": "4/5",
+          "violations": []
+        },
+        "raw_grid_mw": "0",
+        "reference_mw": "4/5",
+        "reference_point": {
+          "angles_rad": [
+            0.0,
+            -0.00045000000000000004
+          ],
+          "branch_flows_mw": [
+            0.45000000000000007,
+            0.45000000000000007
+          ],
+          "generation_mw": 0.9,
+          "load": "4/5",
+          "numerical_conditions_satisfied": true,
+          "outages": [],
+          "residuals": {
+            "angle_rad": 0.0,
+            "balance_mw": 1.1102230246251565e-16,
+            "flow_equation_mw": 0.0,
+            "generation_mw": 0.0,
+            "outage_flow_mw": 0.0,
+            "thermal_mw": 0.0
+          }
+        },
+        "response_conditions_satisfied": true,
+        "status": "conditional_operating_point_committed",
+        "x_call_mw": "0"
+      },
+      "b2_candidate_state": {
+        "business": {
+          "call_energy": "1/5",
+          "duration": 0,
+          "events": 1,
+          "first_hour": -2,
+          "ledger": {
+            "accounting_period_id": "continuous_case",
+            "cohorts": [
+              {
+                "created_hour": 4,
+                "deadline_evidence": "mechanism_assumption",
+                "due_hour": 6,
+                "incurred": "1/5",
+                "missed_at_deadline": null,
+                "remaining": "0"
+              }
+            ],
+            "last_hour": 5,
+            "trajectory_identity": "save_after_publish:B3"
+          },
+          "method": "full_temporal",
+          "parameters": {
+            "alpha": "4/5",
+            "auxiliary_mw": "1/40",
+            "beta": "1",
+            "call_ramp": "1/5",
+            "capacity": "1/5",
+            "eta": "1",
+            "facility_factor": "5/4",
+            "fixed_headroom": "1/5",
+            "max_call_energy": "2/5",
+            "max_debt": "2/5",
+            "max_duration": 1,
+            "max_events": 2,
+            "max_recovery": "1/5",
+            "minimum_rest": 0
+          },
+          "previous_call": "0",
+          "records": [
+            {
+              "activity": "1/2",
+              "allocations": [],
+              "attributed_clean_mwh": "3/5",
+              "cfe_call_shortfall_mw": "0",
+              "cfe_request_mw": "0",
+              "cfe_served": "0",
+              "cfe_shortfall_mwh": "0",
+              "grid_request_mw": "0",
+              "grid_served": "0",
+              "grid_shortfall_mw": "0",
+              "ledger_applied": true,
+              "observation": {
+                "clean_mwh": "3/5",
+                "compute_capacity": "4/5",
+                "due": -2,
+                "equipment_online": [
+                  "first_batch"
+                ],
+                "flexible_fraction": "2/5",
+                "grid_online": false,
+                "hour": -2,
+                "idle_mw": "2/25",
+                "supply_mw": "4/5",
+                "workload": "1/2"
+              },
+              "power_mw": "3/4",
+              "recovery": "0",
+              "reference_mw": "3/4",
+              "violations": []
+            },
+            {
+              "activity": "1/2",
+              "allocations": [],
+              "attributed_clean_mwh": "3/5",
+              "cfe_call_shortfall_mw": "0",
+              "cfe_request_mw": "0",
+              "cfe_served": "0",
+              "cfe_shortfall_mwh": "0",
+              "grid_request_mw": "0",
+              "grid_served": "0",
+              "grid_shortfall_mw": "0",
+              "ledger_applied": true,
+              "observation": {
+                "clean_mwh": "3/5",
+                "compute_capacity": "4/5",
+                "due": -1,
+                "equipment_online": [
+                  "first_batch"
+                ],
+                "flexible_fraction": "2/5",
+                "grid_online": false,
+                "hour": -1,
+                "idle_mw": "2/25",
+                "supply_mw": "4/5",
+                "workload": "1/2"
+              },
+              "power_mw": "3/4",
+              "recovery": "0",
+              "reference_mw": "3/4",
+              "violations": []
+            },
+            {
+              "activity": "1/2",
+              "allocations": [],
+              "attributed_clean_mwh": "3/5",
+              "cfe_call_shortfall_mw": "0",
+              "cfe_request_mw": "0",
+              "cfe_served": "0",
+              "cfe_shortfall_mwh": "0",
+              "grid_request_mw": "0",
+              "grid_served": "0",
+              "grid_shortfall_mw": "0",
+              "ledger_applied": true,
+              "observation": {
+                "clean_mwh": "3/5",
+                "compute_capacity": "4/5",
+                "due": 2,
+                "equipment_online": [
+                  "first_batch"
+                ],
+                "flexible_fraction": "2/5",
+                "grid_online": false,
+                "hour": 0,
+                "idle_mw": "2/25",
+                "supply_mw": "4/5",
+                "workload": "1/2"
+              },
+              "power_mw": "3/4",
+              "recovery": "0",
+              "reference_mw": "3/4",
+              "violations": []
+            },
+            {
+              "activity": "3/10",
+              "allocations": [],
+              "attributed_clean_mwh": "1/2",
+              "cfe_call_shortfall_mw": "0",
+              "cfe_request_mw": "1/8",
+              "cfe_served": "1/10",
+              "cfe_shortfall_mwh": "0",
+              "grid_request_mw": "1/8",
+              "grid_served": "1/10",
+              "grid_shortfall_mw": "0",
+              "ledger_applied": true,
+              "observation": {
+                "clean_mwh": "1/2",
+                "compute_capacity": "4/5",
+                "due": 3,
+                "equipment_online": [
+                  "first_batch"
+                ],
+                "flexible_fraction": "2/5",
+                "grid_online": false,
+                "hour": 1,
+                "idle_mw": "2/25",
+                "supply_mw": "5/8",
+                "workload": "1/2"
+              },
+              "power_mw": "1/2",
+              "recovery": "0",
+              "reference_mw": "3/4",
+              "violations": []
+            },
+            {
+              "activity": "7/10",
+              "allocations": [
+                [
+                  1,
+                  "1/5"
+                ]
+              ],
+              "attributed_clean_mwh": "21/25",
+              "cfe_call_shortfall_mw": "0",
+              "cfe_request_mw": "0",
+              "cfe_served": "0",
+              "cfe_shortfall_mwh": "0",
+              "grid_request_mw": "0",
+              "grid_served": "0",
+              "grid_shortfall_mw": "0",
+              "ledger_applied": true,
+              "observation": {
+                "clean_mwh": "21/25",
+                "compute_capacity": "6/5",
+                "due": 4,
+                "equipment_online": [
+                  "first_batch",
+                  "second_batch"
+                ],
+                "flexible_fraction": "2/5",
+                "grid_online": true,
+                "hour": 2,
+                "idle_mw": "3/25",
+                "supply_mw": "13/10",
+                "workload": "1/2"
+              },
+              "power_mw": "21/20",
+              "recovery": "1/5",
+              "reference_mw": "4/5",
+              "violations": []
+            }
+          ],
+          "rest": 1,
+          "stopped": false,
+          "trajectory_id": "save_after_publish:B3"
+        },
+        "config": {
+          "actual_outages": [
+            [
+              1,
+              0
+            ]
+          ],
+          "after": {
+            "base_mva": 100.0,
+            "branches": [
+              {
+                "from_bus": 1,
+                "in_service": true,
+                "index": 0,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 1.0,
+                "rate_b_mw": 1.0,
+                "rate_c_mw": 1.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 2
+              },
+              {
+                "from_bus": 1,
+                "in_service": true,
+                "index": 1,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 1.0,
+                "rate_b_mw": 1.0,
+                "rate_c_mw": 1.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 2
+              }
+            ],
+            "buses": [
+              {
+                "demand_mw": 0.0,
+                "index": 1
+              },
+              {
+                "demand_mw": 0.1,
+                "index": 2
+              }
+            ],
+            "generators": [
+              {
+                "bus": 1,
+                "cost_constant": 0.0,
+                "cost_linear": 0.0,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 0,
+                "p_max_mw": 2.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              }
+            ],
+            "reference_bus": 1,
+            "source_package": "synthetic_two_line_B2",
+            "source_version": "development_v1"
+          },
+          "angle_limit": "1/10",
+          "before": {
+            "base_mva": 100.0,
+            "branches": [
+              {
+                "from_bus": 1,
+                "in_service": true,
+                "index": 0,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 0.725,
+                "rate_b_mw": 0.725,
+                "rate_c_mw": 0.725,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 2
+              },
+              {
+                "from_bus": 1,
+                "in_service": true,
+                "index": 1,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 0.725,
+                "rate_b_mw": 0.725,
+                "rate_c_mw": 0.725,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 2
+              }
+            ],
+            "buses": [
+              {
+                "demand_mw": 0.0,
+                "index": 1
+              },
+              {
+                "demand_mw": 0.1,
+                "index": 2
+              }
+            ],
+            "generators": [
+              {
+                "bus": 1,
+                "cost_constant": 0.0,
+                "cost_linear": 0.0,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 0,
+                "p_max_mw": 2.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              }
+            ],
+            "reference_bus": 1,
+            "source_package": "synthetic_two_line_B2",
+            "source_version": "development_v1"
+          },
+          "business_fixture": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+          "business_sha256": "5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5",
+          "delays": [
+            [
+              "delayed",
+              2
+            ],
+            [
+              "on_time",
+              0
+            ]
+          ],
+          "hourly_ramp": "2",
+          "max_x_call": "1/2",
+          "max_x_duration": 1,
+          "max_x_energy": "1/2",
+          "max_x_events": 2,
+          "max_x_ramp": "1/2",
+          "poi_bus": 2,
+          "project_lead": 2,
+          "project_start": 0,
+          "rights_after": [
+            "4/5",
+            "1/2"
+          ],
+          "rights_before": [
+            "3/5",
+            "1/5"
+          ],
+          "selected_outages": [
+            0,
+            1
+          ],
+          "x_minimum_rest": 0
+        },
+        "plan": "on_time",
+        "previous_generation": "23/20",
+        "records": [
+          {
+            "active_x_mw": "3/20",
+            "actual_point": {
+              "angles_rad": [
+                0.0,
+                -0.00042500000000000003
+              ],
+              "branch_flows_mw": [
+                0.42500000000000004,
+                0.42500000000000004
+              ],
+              "generation_mw": 0.85,
+              "load": "3/4",
+              "numerical_conditions_satisfied": true,
+              "outages": [],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 1.1102230246251565e-16,
+                "flow_equation_mw": 0.0,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.0
+              }
+            },
+            "commissioned": false,
+            "committed": true,
+            "conditional": "1/5",
+            "connection_shortfall_mw": "0",
+            "contract": {
+              "aggregate_contract_release": false,
+              "business_necessary": true,
+              "conditional": "1/5",
+              "enrolled_X_backing_necessary": true,
+              "firm": "3/5",
+              "joint_temporal_support": "unresolved",
+              "network_conditions_satisfied": true,
+              "normal": {
+                "angles_rad": [
+                  0.0,
+                  -0.00045000000000000004
+                ],
+                "branch_flows_mw": [
+                  0.45000000000000007,
+                  0.45000000000000007
+                ],
+                "generation_mw": 0.9,
+                "load": "4/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 1.1102230246251565e-16,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "scenarios": [
+                {
+                  "business_necessary": true,
+                  "counterfactual_cfe_mw": "1/20",
+                  "counterfactual_workload": "27/50",
+                  "firm_point": null,
+                  "network_conditions_satisfied": true,
+                  "outages": [],
+                  "physical_cap": "27/20",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.00045000000000000004
+                    ],
+                    "branch_flows_mw": [
+                      0.45000000000000007,
+                      0.45000000000000007
+                    ],
+                    "generation_mw": 0.9,
+                    "load": "4/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 1.1102230246251565e-16,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "0",
+                  "response_necessary": true,
+                  "shared_requirement": "1/25"
+                },
+                {
+                  "business_necessary": true,
+                  "counterfactual_cfe_mw": "1/20",
+                  "counterfactual_workload": "27/50",
+                  "firm_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.0006999999999999999
+                    ],
+                    "branch_flows_mw": [
+                      0.0,
+                      0.7
+                    ],
+                    "generation_mw": 0.7,
+                    "load": "3/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      0
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 1.1102230246251565e-16,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "network_conditions_satisfied": true,
+                  "outages": [
+                    0
+                  ],
+                  "physical_cap": "5/8",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.000725
+                    ],
+                    "branch_flows_mw": [
+                      0.0,
+                      0.725
+                    ],
+                    "generation_mw": 0.725,
+                    "load": "5/8",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      0
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "7/40",
+                  "response_necessary": true,
+                  "shared_requirement": "9/50"
+                },
+                {
+                  "business_necessary": true,
+                  "counterfactual_cfe_mw": "1/20",
+                  "counterfactual_workload": "27/50",
+                  "firm_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.0006999999999999999
+                    ],
+                    "branch_flows_mw": [
+                      0.7,
+                      0.0
+                    ],
+                    "generation_mw": 0.7,
+                    "load": "3/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      1
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 1.1102230246251565e-16,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "network_conditions_satisfied": true,
+                  "outages": [
+                    1
+                  ],
+                  "physical_cap": "5/8",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.000725
+                    ],
+                    "branch_flows_mw": [
+                      0.725,
+                      0.0
+                    ],
+                    "generation_mw": 0.725,
+                    "load": "5/8",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      1
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "7/40",
+                  "response_necessary": true,
+                  "shared_requirement": "9/50"
+                }
+              ],
+              "status": "evaluated",
+              "total": "4/5"
+            },
+            "failure_stage": null,
+            "firm": "3/5",
+            "hour": -2,
+            "input": {
+              "clean_mwh": "3/5",
+              "compute_capacity": "4/5",
+              "due": -2,
+              "equipment_online": [
+                "first_batch"
+              ],
+              "flexible_fraction": "2/5",
+              "grid_online": false,
+              "hour": -2,
+              "idle_mw": "2/25",
+              "supply_mw": "4/5",
+              "workload": "1/2"
+            },
+            "legal_grid_cap_mw": "3/20",
+            "outages": [],
+            "physical_cap": "27/20",
+            "proposal": {
+              "activity": "1/2",
+              "allocations": [],
+              "attributed_clean_mwh": "3/5",
+              "cfe_call_shortfall_mw": "0",
+              "cfe_request_mw": "0",
+              "cfe_served": "0",
+              "cfe_shortfall_mwh": "0",
+              "grid_request_mw": "0",
+              "grid_served": "0",
+              "grid_shortfall_mw": "0",
+              "ledger_applied": true,
+              "observation": {
+                "clean_mwh": "3/5",
+                "compute_capacity": "4/5",
+                "due": -2,
+                "equipment_online": [
+                  "first_batch"
+                ],
+                "flexible_fraction": "2/5",
+                "grid_online": false,
+                "hour": -2,
+                "idle_mw": "2/25",
+                "supply_mw": "4/5",
+                "workload": "1/2"
+              },
+              "power_mw": "3/4",
+              "recovery": "0",
+              "reference_mw": "3/4",
+              "violations": []
+            },
+            "raw_grid_mw": "0",
+            "reference_mw": "3/4",
+            "reference_point": {
+              "angles_rad": [
+                0.0,
+                -0.00042500000000000003
+              ],
+              "branch_flows_mw": [
+                0.42500000000000004,
+                0.42500000000000004
+              ],
+              "generation_mw": 0.85,
+              "load": "3/4",
+              "numerical_conditions_satisfied": true,
+              "outages": [],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 1.1102230246251565e-16,
+                "flow_equation_mw": 0.0,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.0
+              }
+            },
+            "response_conditions_satisfied": true,
+            "status": "conditional_operating_point_committed",
+            "x_call_mw": "0"
+          },
+          {
+            "active_x_mw": "3/20",
+            "actual_point": {
+              "angles_rad": [
+                0.0,
+                -0.00042500000000000003
+              ],
+              "branch_flows_mw": [
+                0.42500000000000004,
+                0.42500000000000004
+              ],
+              "generation_mw": 0.85,
+              "load": "3/4",
+              "numerical_conditions_satisfied": true,
+              "outages": [],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 1.1102230246251565e-16,
+                "flow_equation_mw": 0.0,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.0
+              }
+            },
+            "commissioned": false,
+            "committed": true,
+            "conditional": "1/5",
+            "connection_shortfall_mw": "0",
+            "contract": {
+              "aggregate_contract_release": false,
+              "business_necessary": true,
+              "conditional": "1/5",
+              "enrolled_X_backing_necessary": true,
+              "firm": "3/5",
+              "joint_temporal_support": "unresolved",
+              "network_conditions_satisfied": true,
+              "normal": {
+                "angles_rad": [
+                  0.0,
+                  -0.00045000000000000004
+                ],
+                "branch_flows_mw": [
+                  0.45000000000000007,
+                  0.45000000000000007
+                ],
+                "generation_mw": 0.9,
+                "load": "4/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 1.1102230246251565e-16,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "scenarios": [
+                {
+                  "business_necessary": true,
+                  "counterfactual_cfe_mw": "1/20",
+                  "counterfactual_workload": "27/50",
+                  "firm_point": null,
+                  "network_conditions_satisfied": true,
+                  "outages": [],
+                  "physical_cap": "27/20",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.00045000000000000004
+                    ],
+                    "branch_flows_mw": [
+                      0.45000000000000007,
+                      0.45000000000000007
+                    ],
+                    "generation_mw": 0.9,
+                    "load": "4/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 1.1102230246251565e-16,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "0",
+                  "response_necessary": true,
+                  "shared_requirement": "1/25"
+                },
+                {
+                  "business_necessary": true,
+                  "counterfactual_cfe_mw": "1/20",
+                  "counterfactual_workload": "27/50",
+                  "firm_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.0006999999999999999
+                    ],
+                    "branch_flows_mw": [
+                      0.0,
+                      0.7
+                    ],
+                    "generation_mw": 0.7,
+                    "load": "3/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      0
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 1.1102230246251565e-16,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "network_conditions_satisfied": true,
+                  "outages": [
+                    0
+                  ],
+                  "physical_cap": "5/8",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.000725
+                    ],
+                    "branch_flows_mw": [
+                      0.0,
+                      0.725
+                    ],
+                    "generation_mw": 0.725,
+                    "load": "5/8",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      0
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "7/40",
+                  "response_necessary": true,
+                  "shared_requirement": "9/50"
+                },
+                {
+                  "business_necessary": true,
+                  "counterfactual_cfe_mw": "1/20",
+                  "counterfactual_workload": "27/50",
+                  "firm_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.0006999999999999999
+                    ],
+                    "branch_flows_mw": [
+                      0.7,
+                      0.0
+                    ],
+                    "generation_mw": 0.7,
+                    "load": "3/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      1
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 1.1102230246251565e-16,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "network_conditions_satisfied": true,
+                  "outages": [
+                    1
+                  ],
+                  "physical_cap": "5/8",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.000725
+                    ],
+                    "branch_flows_mw": [
+                      0.725,
+                      0.0
+                    ],
+                    "generation_mw": 0.725,
+                    "load": "5/8",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      1
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "7/40",
+                  "response_necessary": true,
+                  "shared_requirement": "9/50"
+                }
+              ],
+              "status": "evaluated",
+              "total": "4/5"
+            },
+            "failure_stage": null,
+            "firm": "3/5",
+            "hour": -1,
+            "input": {
+              "clean_mwh": "3/5",
+              "compute_capacity": "4/5",
+              "due": -1,
+              "equipment_online": [
+                "first_batch"
+              ],
+              "flexible_fraction": "2/5",
+              "grid_online": false,
+              "hour": -1,
+              "idle_mw": "2/25",
+              "supply_mw": "4/5",
+              "workload": "1/2"
+            },
+            "legal_grid_cap_mw": "3/20",
+            "outages": [],
+            "physical_cap": "27/20",
+            "proposal": {
+              "activity": "1/2",
+              "allocations": [],
+              "attributed_clean_mwh": "3/5",
+              "cfe_call_shortfall_mw": "0",
+              "cfe_request_mw": "0",
+              "cfe_served": "0",
+              "cfe_shortfall_mwh": "0",
+              "grid_request_mw": "0",
+              "grid_served": "0",
+              "grid_shortfall_mw": "0",
+              "ledger_applied": true,
+              "observation": {
+                "clean_mwh": "3/5",
+                "compute_capacity": "4/5",
+                "due": -1,
+                "equipment_online": [
+                  "first_batch"
+                ],
+                "flexible_fraction": "2/5",
+                "grid_online": false,
+                "hour": -1,
+                "idle_mw": "2/25",
+                "supply_mw": "4/5",
+                "workload": "1/2"
+              },
+              "power_mw": "3/4",
+              "recovery": "0",
+              "reference_mw": "3/4",
+              "violations": []
+            },
+            "raw_grid_mw": "0",
+            "reference_mw": "3/4",
+            "reference_point": {
+              "angles_rad": [
+                0.0,
+                -0.00042500000000000003
+              ],
+              "branch_flows_mw": [
+                0.42500000000000004,
+                0.42500000000000004
+              ],
+              "generation_mw": 0.85,
+              "load": "3/4",
+              "numerical_conditions_satisfied": true,
+              "outages": [],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 1.1102230246251565e-16,
+                "flow_equation_mw": 0.0,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.0
+              }
+            },
+            "response_conditions_satisfied": true,
+            "status": "conditional_operating_point_committed",
+            "x_call_mw": "0"
+          },
+          {
+            "active_x_mw": "3/20",
+            "actual_point": {
+              "angles_rad": [
+                0.0,
+                -0.00042500000000000003
+              ],
+              "branch_flows_mw": [
+                0.42500000000000004,
+                0.42500000000000004
+              ],
+              "generation_mw": 0.85,
+              "load": "3/4",
+              "numerical_conditions_satisfied": true,
+              "outages": [],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 1.1102230246251565e-16,
+                "flow_equation_mw": 0.0,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.0
+              }
+            },
+            "commissioned": false,
+            "committed": true,
+            "conditional": "1/5",
+            "connection_shortfall_mw": "0",
+            "contract": {
+              "aggregate_contract_release": false,
+              "business_necessary": true,
+              "conditional": "1/5",
+              "enrolled_X_backing_necessary": true,
+              "firm": "3/5",
+              "joint_temporal_support": "unresolved",
+              "network_conditions_satisfied": true,
+              "normal": {
+                "angles_rad": [
+                  0.0,
+                  -0.00045000000000000004
+                ],
+                "branch_flows_mw": [
+                  0.45000000000000007,
+                  0.45000000000000007
+                ],
+                "generation_mw": 0.9,
+                "load": "4/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 1.1102230246251565e-16,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "scenarios": [
+                {
+                  "business_necessary": true,
+                  "counterfactual_cfe_mw": "1/20",
+                  "counterfactual_workload": "27/50",
+                  "firm_point": null,
+                  "network_conditions_satisfied": true,
+                  "outages": [],
+                  "physical_cap": "27/20",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.00045000000000000004
+                    ],
+                    "branch_flows_mw": [
+                      0.45000000000000007,
+                      0.45000000000000007
+                    ],
+                    "generation_mw": 0.9,
+                    "load": "4/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 1.1102230246251565e-16,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "0",
+                  "response_necessary": true,
+                  "shared_requirement": "1/25"
+                },
+                {
+                  "business_necessary": true,
+                  "counterfactual_cfe_mw": "1/20",
+                  "counterfactual_workload": "27/50",
+                  "firm_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.0006999999999999999
+                    ],
+                    "branch_flows_mw": [
+                      0.0,
+                      0.7
+                    ],
+                    "generation_mw": 0.7,
+                    "load": "3/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      0
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 1.1102230246251565e-16,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "network_conditions_satisfied": true,
+                  "outages": [
+                    0
+                  ],
+                  "physical_cap": "5/8",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.000725
+                    ],
+                    "branch_flows_mw": [
+                      0.0,
+                      0.725
+                    ],
+                    "generation_mw": 0.725,
+                    "load": "5/8",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      0
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "7/40",
+                  "response_necessary": true,
+                  "shared_requirement": "9/50"
+                },
+                {
+                  "business_necessary": true,
+                  "counterfactual_cfe_mw": "1/20",
+                  "counterfactual_workload": "27/50",
+                  "firm_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.0006999999999999999
+                    ],
+                    "branch_flows_mw": [
+                      0.7,
+                      0.0
+                    ],
+                    "generation_mw": 0.7,
+                    "load": "3/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      1
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 1.1102230246251565e-16,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "network_conditions_satisfied": true,
+                  "outages": [
+                    1
+                  ],
+                  "physical_cap": "5/8",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.000725
+                    ],
+                    "branch_flows_mw": [
+                      0.725,
+                      0.0
+                    ],
+                    "generation_mw": 0.725,
+                    "load": "5/8",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      1
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "7/40",
+                  "response_necessary": true,
+                  "shared_requirement": "9/50"
+                }
+              ],
+              "status": "evaluated",
+              "total": "4/5"
+            },
+            "failure_stage": null,
+            "firm": "3/5",
+            "hour": 0,
+            "input": {
+              "clean_mwh": "3/5",
+              "compute_capacity": "4/5",
+              "due": 2,
+              "equipment_online": [
+                "first_batch"
+              ],
+              "flexible_fraction": "2/5",
+              "grid_online": false,
+              "hour": 0,
+              "idle_mw": "2/25",
+              "supply_mw": "4/5",
+              "workload": "1/2"
+            },
+            "legal_grid_cap_mw": "3/20",
+            "outages": [],
+            "physical_cap": "27/20",
+            "proposal": {
+              "activity": "1/2",
+              "allocations": [],
+              "attributed_clean_mwh": "3/5",
+              "cfe_call_shortfall_mw": "0",
+              "cfe_request_mw": "0",
+              "cfe_served": "0",
+              "cfe_shortfall_mwh": "0",
+              "grid_request_mw": "0",
+              "grid_served": "0",
+              "grid_shortfall_mw": "0",
+              "ledger_applied": true,
+              "observation": {
+                "clean_mwh": "3/5",
+                "compute_capacity": "4/5",
+                "due": 2,
+                "equipment_online": [
+                  "first_batch"
+                ],
+                "flexible_fraction": "2/5",
+                "grid_online": false,
+                "hour": 0,
+                "idle_mw": "2/25",
+                "supply_mw": "4/5",
+                "workload": "1/2"
+              },
+              "power_mw": "3/4",
+              "recovery": "0",
+              "reference_mw": "3/4",
+              "violations": []
+            },
+            "raw_grid_mw": "0",
+            "reference_mw": "3/4",
+            "reference_point": {
+              "angles_rad": [
+                0.0,
+                -0.00042500000000000003
+              ],
+              "branch_flows_mw": [
+                0.42500000000000004,
+                0.42500000000000004
+              ],
+              "generation_mw": 0.85,
+              "load": "3/4",
+              "numerical_conditions_satisfied": true,
+              "outages": [],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 1.1102230246251565e-16,
+                "flow_equation_mw": 0.0,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.0
+              }
+            },
+            "response_conditions_satisfied": true,
+            "status": "conditional_operating_point_committed",
+            "x_call_mw": "0"
+          },
+          {
+            "active_x_mw": "3/20",
+            "actual_point": {
+              "angles_rad": [
+                0.0,
+                -0.0006000000000000001
+              ],
+              "branch_flows_mw": [
+                0.0,
+                0.6
+              ],
+              "generation_mw": 0.6,
+              "load": "1/2",
+              "numerical_conditions_satisfied": true,
+              "outages": [
+                0
+              ],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 0.0,
+                "flow_equation_mw": 1.1102230246251565e-16,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.0
+              }
+            },
+            "commissioned": false,
+            "committed": true,
+            "conditional": "1/5",
+            "connection_shortfall_mw": "0",
+            "contract": {
+              "aggregate_contract_release": false,
+              "business_necessary": false,
+              "conditional": "1/5",
+              "enrolled_X_backing_necessary": true,
+              "firm": "3/5",
+              "joint_temporal_support": "necessary_condition_failed",
+              "network_conditions_satisfied": true,
+              "normal": {
+                "angles_rad": [
+                  0.0,
+                  -0.00045000000000000004
+                ],
+                "branch_flows_mw": [
+                  0.45000000000000007,
+                  0.45000000000000007
+                ],
+                "generation_mw": 0.9,
+                "load": "4/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 1.1102230246251565e-16,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "scenarios": [
+                {
+                  "business_necessary": true,
+                  "counterfactual_cfe_mw": "7/40",
+                  "counterfactual_workload": "27/50",
+                  "firm_point": null,
+                  "network_conditions_satisfied": true,
+                  "outages": [],
+                  "physical_cap": "27/20",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.00045000000000000004
+                    ],
+                    "branch_flows_mw": [
+                      0.45000000000000007,
+                      0.45000000000000007
+                    ],
+                    "generation_mw": 0.9,
+                    "load": "4/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 1.1102230246251565e-16,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "0",
+                  "response_necessary": true,
+                  "shared_requirement": "7/50"
+                },
+                {
+                  "business_necessary": false,
+                  "counterfactual_cfe_mw": "7/40",
+                  "counterfactual_workload": "27/50",
+                  "firm_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.0006999999999999999
+                    ],
+                    "branch_flows_mw": [
+                      0.0,
+                      0.7
+                    ],
+                    "generation_mw": 0.7,
+                    "load": "3/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      0
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 1.1102230246251565e-16,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "network_conditions_satisfied": true,
+                  "outages": [
+                    0
+                  ],
+                  "physical_cap": "5/8",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.000725
+                    ],
+                    "branch_flows_mw": [
+                      0.0,
+                      0.725
+                    ],
+                    "generation_mw": 0.725,
+                    "load": "5/8",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      0
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "7/40",
+                  "response_necessary": true,
+                  "shared_requirement": "7/25"
+                },
+                {
+                  "business_necessary": false,
+                  "counterfactual_cfe_mw": "7/40",
+                  "counterfactual_workload": "27/50",
+                  "firm_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.0006999999999999999
+                    ],
+                    "branch_flows_mw": [
+                      0.7,
+                      0.0
+                    ],
+                    "generation_mw": 0.7,
+                    "load": "3/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      1
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 1.1102230246251565e-16,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "network_conditions_satisfied": true,
+                  "outages": [
+                    1
+                  ],
+                  "physical_cap": "5/8",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.000725
+                    ],
+                    "branch_flows_mw": [
+                      0.725,
+                      0.0
+                    ],
+                    "generation_mw": 0.725,
+                    "load": "5/8",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      1
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "7/40",
+                  "response_necessary": true,
+                  "shared_requirement": "7/25"
+                }
+              ],
+              "status": "evaluated",
+              "total": "4/5"
+            },
+            "failure_stage": null,
+            "firm": "3/5",
+            "hour": 1,
+            "input": {
+              "clean_mwh": "1/2",
+              "compute_capacity": "4/5",
+              "due": 3,
+              "equipment_online": [
+                "first_batch"
+              ],
+              "flexible_fraction": "2/5",
+              "grid_online": false,
+              "hour": 1,
+              "idle_mw": "2/25",
+              "supply_mw": "5/8",
+              "workload": "1/2"
+            },
+            "legal_grid_cap_mw": "3/20",
+            "outages": [
+              0
+            ],
+            "physical_cap": "5/8",
+            "proposal": {
+              "activity": "3/10",
+              "allocations": [],
+              "attributed_clean_mwh": "1/2",
+              "cfe_call_shortfall_mw": "0",
+              "cfe_request_mw": "1/8",
+              "cfe_served": "1/10",
+              "cfe_shortfall_mwh": "0",
+              "grid_request_mw": "1/8",
+              "grid_served": "1/10",
+              "grid_shortfall_mw": "0",
+              "ledger_applied": true,
+              "observation": {
+                "clean_mwh": "1/2",
+                "compute_capacity": "4/5",
+                "due": 3,
+                "equipment_online": [
+                  "first_batch"
+                ],
+                "flexible_fraction": "2/5",
+                "grid_online": false,
+                "hour": 1,
+                "idle_mw": "2/25",
+                "supply_mw": "5/8",
+                "workload": "1/2"
+              },
+              "power_mw": "1/2",
+              "recovery": "0",
+              "reference_mw": "3/4",
+              "violations": []
+            },
+            "raw_grid_mw": "1/8",
+            "reference_mw": "3/4",
+            "reference_point": {
+              "angles_rad": [
+                0.0,
+                -0.0008500000000000001
+              ],
+              "branch_flows_mw": [
+                0.0,
+                0.8500000000000001
+              ],
+              "generation_mw": 0.85,
+              "load": "3/4",
+              "numerical_conditions_satisfied": false,
+              "outages": [
+                0
+              ],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 1.1102230246251565e-16,
+                "flow_equation_mw": 0.0,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.1250000000000001
+              }
+            },
+            "response_conditions_satisfied": true,
+            "status": "conditional_operating_point_committed",
+            "x_call_mw": "1/8"
+          },
+          {
+            "active_x_mw": "0",
+            "actual_point": {
+              "angles_rad": [
+                0.0,
+                -0.0005750000000000001
+              ],
+              "branch_flows_mw": [
+                0.5750000000000001,
+                0.5750000000000001
+              ],
+              "generation_mw": 1.1500000000000001,
+              "load": "21/20",
+              "numerical_conditions_satisfied": true,
+              "outages": [],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 0.0,
+                "flow_equation_mw": 0.0,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.0
+              }
+            },
+            "commissioned": true,
+            "committed": true,
+            "conditional": "1/2",
+            "connection_shortfall_mw": "0",
+            "contract": {
+              "aggregate_contract_release": false,
+              "business_necessary": false,
+              "conditional": "1/2",
+              "enrolled_X_backing_necessary": false,
+              "firm": "4/5",
+              "joint_temporal_support": "necessary_condition_failed",
+              "network_conditions_satisfied": true,
+              "normal": {
+                "angles_rad": [
+                  0.0,
+                  -0.0007000000000000001
+                ],
+                "branch_flows_mw": [
+                  0.7000000000000001,
+                  0.7000000000000001
+                ],
+                "generation_mw": 1.4000000000000001,
+                "load": "13/10",
+                "numerical_conditions_satisfied": true,
+                "outages": [],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "scenarios": [
+                {
+                  "business_necessary": true,
+                  "counterfactual_cfe_mw": "1/4",
+                  "counterfactual_workload": "9/10",
+                  "firm_point": null,
+                  "network_conditions_satisfied": true,
+                  "outages": [],
+                  "physical_cap": "19/10",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.0007000000000000001
+                    ],
+                    "branch_flows_mw": [
+                      0.7000000000000001,
+                      0.7000000000000001
+                    ],
+                    "generation_mw": 1.4000000000000001,
+                    "load": "13/10",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "0",
+                  "response_necessary": true,
+                  "shared_requirement": "1/5"
+                },
+                {
+                  "business_necessary": false,
+                  "counterfactual_cfe_mw": "1/4",
+                  "counterfactual_workload": "9/10",
+                  "firm_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.0009000000000000001
+                    ],
+                    "branch_flows_mw": [
+                      0.0,
+                      0.9000000000000001
+                    ],
+                    "generation_mw": 0.9,
+                    "load": "4/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      0
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 1.1102230246251565e-16,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "network_conditions_satisfied": true,
+                  "outages": [
+                    0
+                  ],
+                  "physical_cap": "9/10",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.001
+                    ],
+                    "branch_flows_mw": [
+                      0.0,
+                      1.0
+                    ],
+                    "generation_mw": 1.0,
+                    "load": "9/10",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      0
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "2/5",
+                  "response_necessary": true,
+                  "shared_requirement": "13/25"
+                },
+                {
+                  "business_necessary": false,
+                  "counterfactual_cfe_mw": "1/4",
+                  "counterfactual_workload": "9/10",
+                  "firm_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.0009000000000000001
+                    ],
+                    "branch_flows_mw": [
+                      0.9000000000000001,
+                      0.0
+                    ],
+                    "generation_mw": 0.9,
+                    "load": "4/5",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      1
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 1.1102230246251565e-16,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "network_conditions_satisfied": true,
+                  "outages": [
+                    1
+                  ],
+                  "physical_cap": "9/10",
+                  "post_call_point": {
+                    "angles_rad": [
+                      0.0,
+                      -0.001
+                    ],
+                    "branch_flows_mw": [
+                      1.0,
+                      0.0
+                    ],
+                    "generation_mw": 1.0,
+                    "load": "9/10",
+                    "numerical_conditions_satisfied": true,
+                    "outages": [
+                      1
+                    ],
+                    "residuals": {
+                      "angle_rad": 0.0,
+                      "balance_mw": 0.0,
+                      "flow_equation_mw": 0.0,
+                      "generation_mw": 0.0,
+                      "outage_flow_mw": 0.0,
+                      "thermal_mw": 0.0
+                    }
+                  },
+                  "required_grid_mw": "2/5",
+                  "response_necessary": true,
+                  "shared_requirement": "13/25"
+                }
+              ],
+              "status": "evaluated",
+              "total": "13/10"
+            },
+            "failure_stage": null,
+            "firm": "4/5",
+            "hour": 2,
+            "input": {
+              "clean_mwh": "21/25",
+              "compute_capacity": "6/5",
+              "due": 4,
+              "equipment_online": [
+                "first_batch",
+                "second_batch"
+              ],
+              "flexible_fraction": "2/5",
+              "grid_online": true,
+              "hour": 2,
+              "idle_mw": "3/25",
+              "supply_mw": "13/10",
+              "workload": "1/2"
+            },
+            "legal_grid_cap_mw": "0",
+            "outages": [],
+            "physical_cap": "19/10",
+            "proposal": {
+              "activity": "7/10",
+              "allocations": [
+                [
+                  1,
+                  "1/5"
+                ]
+              ],
+              "attributed_clean_mwh": "21/25",
+              "cfe_call_shortfall_mw": "0",
+              "cfe_request_mw": "0",
+              "cfe_served": "0",
+              "cfe_shortfall_mwh": "0",
+              "grid_request_mw": "0",
+              "grid_served": "0",
+              "grid_shortfall_mw": "0",
+              "ledger_applied": true,
+              "observation": {
+                "clean_mwh": "21/25",
+                "compute_capacity": "6/5",
+                "due": 4,
+                "equipment_online": [
+                  "first_batch",
+                  "second_batch"
+                ],
+                "flexible_fraction": "2/5",
+                "grid_online": true,
+                "hour": 2,
+                "idle_mw": "3/25",
+                "supply_mw": "13/10",
+                "workload": "1/2"
+              },
+              "power_mw": "21/20",
+              "recovery": "1/5",
+              "reference_mw": "4/5",
+              "violations": []
+            },
+            "raw_grid_mw": "0",
+            "reference_mw": "4/5",
+            "reference_point": {
+              "angles_rad": [
+                0.0,
+                -0.00045000000000000004
+              ],
+              "branch_flows_mw": [
+                0.45000000000000007,
+                0.45000000000000007
+              ],
+              "generation_mw": 0.9,
+              "load": "4/5",
+              "numerical_conditions_satisfied": true,
+              "outages": [],
+              "residuals": {
+                "angle_rad": 0.0,
+                "balance_mw": 1.1102230246251565e-16,
+                "flow_equation_mw": 0.0,
+                "generation_mw": 0.0,
+                "outage_flow_mw": 0.0,
+                "thermal_mw": 0.0
+              }
+            },
+            "response_conditions_satisfied": true,
+            "status": "conditional_operating_point_committed",
+            "x_call_mw": "0"
+          }
+        ],
+        "stopped": false,
+        "x_duration": 0,
+        "x_energy": "1/8",
+        "x_events": 1,
+        "x_previous": "0",
+        "x_rest": 1
+      },
+      "role": "step"
+    },
+    "pending_arrival": {
+      "observation": {
+        "clean_mwh": "21/25",
+        "compute_capacity": "6/5",
+        "due": 4,
+        "equipment_online": [
+          "first_batch",
+          "second_batch"
+        ],
+        "flexible_fraction": "2/5",
+        "grid_online": true,
+        "hour": 2,
+        "idle_mw": "3/25",
+        "supply_mw": "13/10",
+        "workload": "1/2"
+      },
+      "status": "observed_pending_unaccepted"
+    },
+    "policy_outcome": "unresolved",
+    "primary_remaining_debt": "1/5",
+    "publication_outcome": "unresolved",
+    "resume_permitted": false,
+    "schema": 1,
+    "scope": "B3 filesystem_visible_simulation_only",
+    "state_certainty": "unresolved",
+    "state_sha": "eb20604429cb156a7be1bc53ad60458c99950a661e49530e7e078564b52dcf3a",
+    "status": "DRAFT_NONAUTHORITATIVE",
+    "termination_reason": "commit_outcome_unknown"
+  },
+  "recovered_audit": {
+    "accepted_business_hours": 5,
+    "audited_network_hours": 5,
+    "audited_pypower_points": 35,
+    "business_audit": {
+      "balances": {
+        "1": {
+          "due": 3,
+          "incurred": "1/5",
+          "remaining": "0"
+        }
+      },
+      "calls": [
+        {
+          "birth": 1,
+          "due": 3,
+          "work": "1/5"
+        }
+      ],
+      "deadline_misses": {},
+      "debt_before_full_contract_rejection": "0",
+      "envelope": {
+        "call_energy": "1/5",
+        "duration": 0,
+        "events": 1,
+        "previous_call": "0",
+        "rest": 1
+      },
+      "first_full_contract_rejection": null
+    },
+    "scope": "B2 fixed_balance_DC_only",
+    "stopped": false,
+    "x_energy": "1/8",
+    "x_events": 1
+  },
+  "reopened_reason": null,
+  "reopened_state": {
+    "business": {
+      "call_energy": "1/5",
+      "duration": 0,
+      "events": 1,
+      "first_hour": -2,
+      "ledger": {
+        "accounting_period_id": "continuous_case",
+        "cohorts": [
+          {
+            "created_hour": 4,
+            "deadline_evidence": "mechanism_assumption",
+            "due_hour": 6,
+            "incurred": "1/5",
+            "missed_at_deadline": null,
+            "remaining": "0"
+          }
+        ],
+        "last_hour": 5,
+        "trajectory_identity": "save_after_publish:B3"
+      },
+      "method": "full_temporal",
+      "parameters": {
+        "alpha": "4/5",
+        "auxiliary_mw": "1/40",
+        "beta": "1",
+        "call_ramp": "1/5",
+        "capacity": "1/5",
+        "eta": "1",
+        "facility_factor": "5/4",
+        "fixed_headroom": "1/5",
+        "max_call_energy": "2/5",
+        "max_debt": "2/5",
+        "max_duration": 1,
+        "max_events": 2,
+        "max_recovery": "1/5",
+        "minimum_rest": 0
+      },
+      "previous_call": "0",
+      "records": [
+        {
+          "activity": "1/2",
+          "allocations": [],
+          "attributed_clean_mwh": "3/5",
+          "cfe_call_shortfall_mw": "0",
+          "cfe_request_mw": "0",
+          "cfe_served": "0",
+          "cfe_shortfall_mwh": "0",
+          "grid_request_mw": "0",
+          "grid_served": "0",
+          "grid_shortfall_mw": "0",
+          "ledger_applied": true,
+          "observation": {
+            "clean_mwh": "3/5",
+            "compute_capacity": "4/5",
+            "due": -2,
+            "equipment_online": [
+              "first_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": false,
+            "hour": -2,
+            "idle_mw": "2/25",
+            "supply_mw": "4/5",
+            "workload": "1/2"
+          },
+          "power_mw": "3/4",
+          "recovery": "0",
+          "reference_mw": "3/4",
+          "violations": []
+        },
+        {
+          "activity": "1/2",
+          "allocations": [],
+          "attributed_clean_mwh": "3/5",
+          "cfe_call_shortfall_mw": "0",
+          "cfe_request_mw": "0",
+          "cfe_served": "0",
+          "cfe_shortfall_mwh": "0",
+          "grid_request_mw": "0",
+          "grid_served": "0",
+          "grid_shortfall_mw": "0",
+          "ledger_applied": true,
+          "observation": {
+            "clean_mwh": "3/5",
+            "compute_capacity": "4/5",
+            "due": -1,
+            "equipment_online": [
+              "first_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": false,
+            "hour": -1,
+            "idle_mw": "2/25",
+            "supply_mw": "4/5",
+            "workload": "1/2"
+          },
+          "power_mw": "3/4",
+          "recovery": "0",
+          "reference_mw": "3/4",
+          "violations": []
+        },
+        {
+          "activity": "1/2",
+          "allocations": [],
+          "attributed_clean_mwh": "3/5",
+          "cfe_call_shortfall_mw": "0",
+          "cfe_request_mw": "0",
+          "cfe_served": "0",
+          "cfe_shortfall_mwh": "0",
+          "grid_request_mw": "0",
+          "grid_served": "0",
+          "grid_shortfall_mw": "0",
+          "ledger_applied": true,
+          "observation": {
+            "clean_mwh": "3/5",
+            "compute_capacity": "4/5",
+            "due": 2,
+            "equipment_online": [
+              "first_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": false,
+            "hour": 0,
+            "idle_mw": "2/25",
+            "supply_mw": "4/5",
+            "workload": "1/2"
+          },
+          "power_mw": "3/4",
+          "recovery": "0",
+          "reference_mw": "3/4",
+          "violations": []
+        },
+        {
+          "activity": "3/10",
+          "allocations": [],
+          "attributed_clean_mwh": "1/2",
+          "cfe_call_shortfall_mw": "0",
+          "cfe_request_mw": "1/8",
+          "cfe_served": "1/10",
+          "cfe_shortfall_mwh": "0",
+          "grid_request_mw": "1/8",
+          "grid_served": "1/10",
+          "grid_shortfall_mw": "0",
+          "ledger_applied": true,
+          "observation": {
+            "clean_mwh": "1/2",
+            "compute_capacity": "4/5",
+            "due": 3,
+            "equipment_online": [
+              "first_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": false,
+            "hour": 1,
+            "idle_mw": "2/25",
+            "supply_mw": "5/8",
+            "workload": "1/2"
+          },
+          "power_mw": "1/2",
+          "recovery": "0",
+          "reference_mw": "3/4",
+          "violations": []
+        },
+        {
+          "activity": "7/10",
+          "allocations": [
+            [
+              1,
+              "1/5"
+            ]
+          ],
+          "attributed_clean_mwh": "21/25",
+          "cfe_call_shortfall_mw": "0",
+          "cfe_request_mw": "0",
+          "cfe_served": "0",
+          "cfe_shortfall_mwh": "0",
+          "grid_request_mw": "0",
+          "grid_served": "0",
+          "grid_shortfall_mw": "0",
+          "ledger_applied": true,
+          "observation": {
+            "clean_mwh": "21/25",
+            "compute_capacity": "6/5",
+            "due": 4,
+            "equipment_online": [
+              "first_batch",
+              "second_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": true,
+            "hour": 2,
+            "idle_mw": "3/25",
+            "supply_mw": "13/10",
+            "workload": "1/2"
+          },
+          "power_mw": "21/20",
+          "recovery": "1/5",
+          "reference_mw": "4/5",
+          "violations": []
+        }
+      ],
+      "rest": 1,
+      "stopped": false,
+      "trajectory_id": "save_after_publish:B3"
+    },
+    "config": {
+      "actual_outages": [
+        [
+          1,
+          0
+        ]
+      ],
+      "after": {
+        "base_mva": 100.0,
+        "branches": [
+          {
+            "from_bus": 1,
+            "in_service": true,
+            "index": 0,
+            "phase_shift_rad": 0.0,
+            "rate_a_mw": 1.0,
+            "rate_b_mw": 1.0,
+            "rate_c_mw": 1.0,
+            "reactance_pu": 0.1,
+            "tap_ratio": 1.0,
+            "to_bus": 2
+          },
+          {
+            "from_bus": 1,
+            "in_service": true,
+            "index": 1,
+            "phase_shift_rad": 0.0,
+            "rate_a_mw": 1.0,
+            "rate_b_mw": 1.0,
+            "rate_c_mw": 1.0,
+            "reactance_pu": 0.1,
+            "tap_ratio": 1.0,
+            "to_bus": 2
+          }
+        ],
+        "buses": [
+          {
+            "demand_mw": 0.0,
+            "index": 1
+          },
+          {
+            "demand_mw": 0.1,
+            "index": 2
+          }
+        ],
+        "generators": [
+          {
+            "bus": 1,
+            "cost_constant": 0.0,
+            "cost_linear": 0.0,
+            "cost_quadratic": 0.0,
+            "in_service": true,
+            "index": 0,
+            "p_max_mw": 2.0,
+            "p_min_mw": 0.0,
+            "ramp_10_mw": null,
+            "ramp_30_mw": null
+          }
+        ],
+        "reference_bus": 1,
+        "source_package": "synthetic_two_line_B2",
+        "source_version": "development_v1"
+      },
+      "angle_limit": "1/10",
+      "before": {
+        "base_mva": 100.0,
+        "branches": [
+          {
+            "from_bus": 1,
+            "in_service": true,
+            "index": 0,
+            "phase_shift_rad": 0.0,
+            "rate_a_mw": 0.725,
+            "rate_b_mw": 0.725,
+            "rate_c_mw": 0.725,
+            "reactance_pu": 0.1,
+            "tap_ratio": 1.0,
+            "to_bus": 2
+          },
+          {
+            "from_bus": 1,
+            "in_service": true,
+            "index": 1,
+            "phase_shift_rad": 0.0,
+            "rate_a_mw": 0.725,
+            "rate_b_mw": 0.725,
+            "rate_c_mw": 0.725,
+            "reactance_pu": 0.1,
+            "tap_ratio": 1.0,
+            "to_bus": 2
+          }
+        ],
+        "buses": [
+          {
+            "demand_mw": 0.0,
+            "index": 1
+          },
+          {
+            "demand_mw": 0.1,
+            "index": 2
+          }
+        ],
+        "generators": [
+          {
+            "bus": 1,
+            "cost_constant": 0.0,
+            "cost_linear": 0.0,
+            "cost_quadratic": 0.0,
+            "in_service": true,
+            "index": 0,
+            "p_max_mw": 2.0,
+            "p_min_mw": 0.0,
+            "ramp_10_mw": null,
+            "ramp_30_mw": null
+          }
+        ],
+        "reference_bus": 1,
+        "source_package": "synthetic_two_line_B2",
+        "source_version": "development_v1"
+      },
+      "business_fixture": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+      "business_sha256": "5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5",
+      "delays": [
+        [
+          "delayed",
+          2
+        ],
+        [
+          "on_time",
+          0
+        ]
+      ],
+      "hourly_ramp": "2",
+      "max_x_call": "1/2",
+      "max_x_duration": 1,
+      "max_x_energy": "1/2",
+      "max_x_events": 2,
+      "max_x_ramp": "1/2",
+      "poi_bus": 2,
+      "project_lead": 2,
+      "project_start": 0,
+      "rights_after": [
+        "4/5",
+        "1/2"
+      ],
+      "rights_before": [
+        "3/5",
+        "1/5"
+      ],
+      "selected_outages": [
+        0,
+        1
+      ],
+      "x_minimum_rest": 0
+    },
+    "plan": "on_time",
+    "previous_generation": "23/20",
+    "records": [
+      {
+        "active_x_mw": "3/20",
+        "actual_point": {
+          "angles_rad": [
+            0.0,
+            -0.00042500000000000003
+          ],
+          "branch_flows_mw": [
+            0.42500000000000004,
+            0.42500000000000004
+          ],
+          "generation_mw": 0.85,
+          "load": "3/4",
+          "numerical_conditions_satisfied": true,
+          "outages": [],
+          "residuals": {
+            "angle_rad": 0.0,
+            "balance_mw": 1.1102230246251565e-16,
+            "flow_equation_mw": 0.0,
+            "generation_mw": 0.0,
+            "outage_flow_mw": 0.0,
+            "thermal_mw": 0.0
+          }
+        },
+        "commissioned": false,
+        "committed": true,
+        "conditional": "1/5",
+        "connection_shortfall_mw": "0",
+        "contract": {
+          "aggregate_contract_release": false,
+          "business_necessary": true,
+          "conditional": "1/5",
+          "enrolled_X_backing_necessary": true,
+          "firm": "3/5",
+          "joint_temporal_support": "unresolved",
+          "network_conditions_satisfied": true,
+          "normal": {
+            "angles_rad": [
+              0.0,
+              -0.00045000000000000004
+            ],
+            "branch_flows_mw": [
+              0.45000000000000007,
+              0.45000000000000007
+            ],
+            "generation_mw": 0.9,
+            "load": "4/5",
+            "numerical_conditions_satisfied": true,
+            "outages": [],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 1.1102230246251565e-16,
+              "flow_equation_mw": 0.0,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.0
+            }
+          },
+          "scenarios": [
+            {
+              "business_necessary": true,
+              "counterfactual_cfe_mw": "1/20",
+              "counterfactual_workload": "27/50",
+              "firm_point": null,
+              "network_conditions_satisfied": true,
+              "outages": [],
+              "physical_cap": "27/20",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.00045000000000000004
+                ],
+                "branch_flows_mw": [
+                  0.45000000000000007,
+                  0.45000000000000007
+                ],
+                "generation_mw": 0.9,
+                "load": "4/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 1.1102230246251565e-16,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "0",
+              "response_necessary": true,
+              "shared_requirement": "1/25"
+            },
+            {
+              "business_necessary": true,
+              "counterfactual_cfe_mw": "1/20",
+              "counterfactual_workload": "27/50",
+              "firm_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0006999999999999999
+                ],
+                "branch_flows_mw": [
+                  0.0,
+                  0.7
+                ],
+                "generation_mw": 0.7,
+                "load": "3/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 1.1102230246251565e-16,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "network_conditions_satisfied": true,
+              "outages": [
+                0
+              ],
+              "physical_cap": "5/8",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.000725
+                ],
+                "branch_flows_mw": [
+                  0.0,
+                  0.725
+                ],
+                "generation_mw": 0.725,
+                "load": "5/8",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "7/40",
+              "response_necessary": true,
+              "shared_requirement": "9/50"
+            },
+            {
+              "business_necessary": true,
+              "counterfactual_cfe_mw": "1/20",
+              "counterfactual_workload": "27/50",
+              "firm_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0006999999999999999
+                ],
+                "branch_flows_mw": [
+                  0.7,
+                  0.0
+                ],
+                "generation_mw": 0.7,
+                "load": "3/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 1.1102230246251565e-16,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "network_conditions_satisfied": true,
+              "outages": [
+                1
+              ],
+              "physical_cap": "5/8",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.000725
+                ],
+                "branch_flows_mw": [
+                  0.725,
+                  0.0
+                ],
+                "generation_mw": 0.725,
+                "load": "5/8",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "7/40",
+              "response_necessary": true,
+              "shared_requirement": "9/50"
+            }
+          ],
+          "status": "evaluated",
+          "total": "4/5"
+        },
+        "failure_stage": null,
+        "firm": "3/5",
+        "hour": -2,
+        "input": {
+          "clean_mwh": "3/5",
+          "compute_capacity": "4/5",
+          "due": -2,
+          "equipment_online": [
+            "first_batch"
+          ],
+          "flexible_fraction": "2/5",
+          "grid_online": false,
+          "hour": -2,
+          "idle_mw": "2/25",
+          "supply_mw": "4/5",
+          "workload": "1/2"
+        },
+        "legal_grid_cap_mw": "3/20",
+        "outages": [],
+        "physical_cap": "27/20",
+        "proposal": {
+          "activity": "1/2",
+          "allocations": [],
+          "attributed_clean_mwh": "3/5",
+          "cfe_call_shortfall_mw": "0",
+          "cfe_request_mw": "0",
+          "cfe_served": "0",
+          "cfe_shortfall_mwh": "0",
+          "grid_request_mw": "0",
+          "grid_served": "0",
+          "grid_shortfall_mw": "0",
+          "ledger_applied": true,
+          "observation": {
+            "clean_mwh": "3/5",
+            "compute_capacity": "4/5",
+            "due": -2,
+            "equipment_online": [
+              "first_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": false,
+            "hour": -2,
+            "idle_mw": "2/25",
+            "supply_mw": "4/5",
+            "workload": "1/2"
+          },
+          "power_mw": "3/4",
+          "recovery": "0",
+          "reference_mw": "3/4",
+          "violations": []
+        },
+        "raw_grid_mw": "0",
+        "reference_mw": "3/4",
+        "reference_point": {
+          "angles_rad": [
+            0.0,
+            -0.00042500000000000003
+          ],
+          "branch_flows_mw": [
+            0.42500000000000004,
+            0.42500000000000004
+          ],
+          "generation_mw": 0.85,
+          "load": "3/4",
+          "numerical_conditions_satisfied": true,
+          "outages": [],
+          "residuals": {
+            "angle_rad": 0.0,
+            "balance_mw": 1.1102230246251565e-16,
+            "flow_equation_mw": 0.0,
+            "generation_mw": 0.0,
+            "outage_flow_mw": 0.0,
+            "thermal_mw": 0.0
+          }
+        },
+        "response_conditions_satisfied": true,
+        "status": "conditional_operating_point_committed",
+        "x_call_mw": "0"
+      },
+      {
+        "active_x_mw": "3/20",
+        "actual_point": {
+          "angles_rad": [
+            0.0,
+            -0.00042500000000000003
+          ],
+          "branch_flows_mw": [
+            0.42500000000000004,
+            0.42500000000000004
+          ],
+          "generation_mw": 0.85,
+          "load": "3/4",
+          "numerical_conditions_satisfied": true,
+          "outages": [],
+          "residuals": {
+            "angle_rad": 0.0,
+            "balance_mw": 1.1102230246251565e-16,
+            "flow_equation_mw": 0.0,
+            "generation_mw": 0.0,
+            "outage_flow_mw": 0.0,
+            "thermal_mw": 0.0
+          }
+        },
+        "commissioned": false,
+        "committed": true,
+        "conditional": "1/5",
+        "connection_shortfall_mw": "0",
+        "contract": {
+          "aggregate_contract_release": false,
+          "business_necessary": true,
+          "conditional": "1/5",
+          "enrolled_X_backing_necessary": true,
+          "firm": "3/5",
+          "joint_temporal_support": "unresolved",
+          "network_conditions_satisfied": true,
+          "normal": {
+            "angles_rad": [
+              0.0,
+              -0.00045000000000000004
+            ],
+            "branch_flows_mw": [
+              0.45000000000000007,
+              0.45000000000000007
+            ],
+            "generation_mw": 0.9,
+            "load": "4/5",
+            "numerical_conditions_satisfied": true,
+            "outages": [],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 1.1102230246251565e-16,
+              "flow_equation_mw": 0.0,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.0
+            }
+          },
+          "scenarios": [
+            {
+              "business_necessary": true,
+              "counterfactual_cfe_mw": "1/20",
+              "counterfactual_workload": "27/50",
+              "firm_point": null,
+              "network_conditions_satisfied": true,
+              "outages": [],
+              "physical_cap": "27/20",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.00045000000000000004
+                ],
+                "branch_flows_mw": [
+                  0.45000000000000007,
+                  0.45000000000000007
+                ],
+                "generation_mw": 0.9,
+                "load": "4/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 1.1102230246251565e-16,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "0",
+              "response_necessary": true,
+              "shared_requirement": "1/25"
+            },
+            {
+              "business_necessary": true,
+              "counterfactual_cfe_mw": "1/20",
+              "counterfactual_workload": "27/50",
+              "firm_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0006999999999999999
+                ],
+                "branch_flows_mw": [
+                  0.0,
+                  0.7
+                ],
+                "generation_mw": 0.7,
+                "load": "3/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 1.1102230246251565e-16,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "network_conditions_satisfied": true,
+              "outages": [
+                0
+              ],
+              "physical_cap": "5/8",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.000725
+                ],
+                "branch_flows_mw": [
+                  0.0,
+                  0.725
+                ],
+                "generation_mw": 0.725,
+                "load": "5/8",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "7/40",
+              "response_necessary": true,
+              "shared_requirement": "9/50"
+            },
+            {
+              "business_necessary": true,
+              "counterfactual_cfe_mw": "1/20",
+              "counterfactual_workload": "27/50",
+              "firm_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0006999999999999999
+                ],
+                "branch_flows_mw": [
+                  0.7,
+                  0.0
+                ],
+                "generation_mw": 0.7,
+                "load": "3/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 1.1102230246251565e-16,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "network_conditions_satisfied": true,
+              "outages": [
+                1
+              ],
+              "physical_cap": "5/8",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.000725
+                ],
+                "branch_flows_mw": [
+                  0.725,
+                  0.0
+                ],
+                "generation_mw": 0.725,
+                "load": "5/8",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "7/40",
+              "response_necessary": true,
+              "shared_requirement": "9/50"
+            }
+          ],
+          "status": "evaluated",
+          "total": "4/5"
+        },
+        "failure_stage": null,
+        "firm": "3/5",
+        "hour": -1,
+        "input": {
+          "clean_mwh": "3/5",
+          "compute_capacity": "4/5",
+          "due": -1,
+          "equipment_online": [
+            "first_batch"
+          ],
+          "flexible_fraction": "2/5",
+          "grid_online": false,
+          "hour": -1,
+          "idle_mw": "2/25",
+          "supply_mw": "4/5",
+          "workload": "1/2"
+        },
+        "legal_grid_cap_mw": "3/20",
+        "outages": [],
+        "physical_cap": "27/20",
+        "proposal": {
+          "activity": "1/2",
+          "allocations": [],
+          "attributed_clean_mwh": "3/5",
+          "cfe_call_shortfall_mw": "0",
+          "cfe_request_mw": "0",
+          "cfe_served": "0",
+          "cfe_shortfall_mwh": "0",
+          "grid_request_mw": "0",
+          "grid_served": "0",
+          "grid_shortfall_mw": "0",
+          "ledger_applied": true,
+          "observation": {
+            "clean_mwh": "3/5",
+            "compute_capacity": "4/5",
+            "due": -1,
+            "equipment_online": [
+              "first_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": false,
+            "hour": -1,
+            "idle_mw": "2/25",
+            "supply_mw": "4/5",
+            "workload": "1/2"
+          },
+          "power_mw": "3/4",
+          "recovery": "0",
+          "reference_mw": "3/4",
+          "violations": []
+        },
+        "raw_grid_mw": "0",
+        "reference_mw": "3/4",
+        "reference_point": {
+          "angles_rad": [
+            0.0,
+            -0.00042500000000000003
+          ],
+          "branch_flows_mw": [
+            0.42500000000000004,
+            0.42500000000000004
+          ],
+          "generation_mw": 0.85,
+          "load": "3/4",
+          "numerical_conditions_satisfied": true,
+          "outages": [],
+          "residuals": {
+            "angle_rad": 0.0,
+            "balance_mw": 1.1102230246251565e-16,
+            "flow_equation_mw": 0.0,
+            "generation_mw": 0.0,
+            "outage_flow_mw": 0.0,
+            "thermal_mw": 0.0
+          }
+        },
+        "response_conditions_satisfied": true,
+        "status": "conditional_operating_point_committed",
+        "x_call_mw": "0"
+      },
+      {
+        "active_x_mw": "3/20",
+        "actual_point": {
+          "angles_rad": [
+            0.0,
+            -0.00042500000000000003
+          ],
+          "branch_flows_mw": [
+            0.42500000000000004,
+            0.42500000000000004
+          ],
+          "generation_mw": 0.85,
+          "load": "3/4",
+          "numerical_conditions_satisfied": true,
+          "outages": [],
+          "residuals": {
+            "angle_rad": 0.0,
+            "balance_mw": 1.1102230246251565e-16,
+            "flow_equation_mw": 0.0,
+            "generation_mw": 0.0,
+            "outage_flow_mw": 0.0,
+            "thermal_mw": 0.0
+          }
+        },
+        "commissioned": false,
+        "committed": true,
+        "conditional": "1/5",
+        "connection_shortfall_mw": "0",
+        "contract": {
+          "aggregate_contract_release": false,
+          "business_necessary": true,
+          "conditional": "1/5",
+          "enrolled_X_backing_necessary": true,
+          "firm": "3/5",
+          "joint_temporal_support": "unresolved",
+          "network_conditions_satisfied": true,
+          "normal": {
+            "angles_rad": [
+              0.0,
+              -0.00045000000000000004
+            ],
+            "branch_flows_mw": [
+              0.45000000000000007,
+              0.45000000000000007
+            ],
+            "generation_mw": 0.9,
+            "load": "4/5",
+            "numerical_conditions_satisfied": true,
+            "outages": [],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 1.1102230246251565e-16,
+              "flow_equation_mw": 0.0,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.0
+            }
+          },
+          "scenarios": [
+            {
+              "business_necessary": true,
+              "counterfactual_cfe_mw": "1/20",
+              "counterfactual_workload": "27/50",
+              "firm_point": null,
+              "network_conditions_satisfied": true,
+              "outages": [],
+              "physical_cap": "27/20",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.00045000000000000004
+                ],
+                "branch_flows_mw": [
+                  0.45000000000000007,
+                  0.45000000000000007
+                ],
+                "generation_mw": 0.9,
+                "load": "4/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 1.1102230246251565e-16,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "0",
+              "response_necessary": true,
+              "shared_requirement": "1/25"
+            },
+            {
+              "business_necessary": true,
+              "counterfactual_cfe_mw": "1/20",
+              "counterfactual_workload": "27/50",
+              "firm_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0006999999999999999
+                ],
+                "branch_flows_mw": [
+                  0.0,
+                  0.7
+                ],
+                "generation_mw": 0.7,
+                "load": "3/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 1.1102230246251565e-16,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "network_conditions_satisfied": true,
+              "outages": [
+                0
+              ],
+              "physical_cap": "5/8",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.000725
+                ],
+                "branch_flows_mw": [
+                  0.0,
+                  0.725
+                ],
+                "generation_mw": 0.725,
+                "load": "5/8",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "7/40",
+              "response_necessary": true,
+              "shared_requirement": "9/50"
+            },
+            {
+              "business_necessary": true,
+              "counterfactual_cfe_mw": "1/20",
+              "counterfactual_workload": "27/50",
+              "firm_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0006999999999999999
+                ],
+                "branch_flows_mw": [
+                  0.7,
+                  0.0
+                ],
+                "generation_mw": 0.7,
+                "load": "3/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 1.1102230246251565e-16,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "network_conditions_satisfied": true,
+              "outages": [
+                1
+              ],
+              "physical_cap": "5/8",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.000725
+                ],
+                "branch_flows_mw": [
+                  0.725,
+                  0.0
+                ],
+                "generation_mw": 0.725,
+                "load": "5/8",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "7/40",
+              "response_necessary": true,
+              "shared_requirement": "9/50"
+            }
+          ],
+          "status": "evaluated",
+          "total": "4/5"
+        },
+        "failure_stage": null,
+        "firm": "3/5",
+        "hour": 0,
+        "input": {
+          "clean_mwh": "3/5",
+          "compute_capacity": "4/5",
+          "due": 2,
+          "equipment_online": [
+            "first_batch"
+          ],
+          "flexible_fraction": "2/5",
+          "grid_online": false,
+          "hour": 0,
+          "idle_mw": "2/25",
+          "supply_mw": "4/5",
+          "workload": "1/2"
+        },
+        "legal_grid_cap_mw": "3/20",
+        "outages": [],
+        "physical_cap": "27/20",
+        "proposal": {
+          "activity": "1/2",
+          "allocations": [],
+          "attributed_clean_mwh": "3/5",
+          "cfe_call_shortfall_mw": "0",
+          "cfe_request_mw": "0",
+          "cfe_served": "0",
+          "cfe_shortfall_mwh": "0",
+          "grid_request_mw": "0",
+          "grid_served": "0",
+          "grid_shortfall_mw": "0",
+          "ledger_applied": true,
+          "observation": {
+            "clean_mwh": "3/5",
+            "compute_capacity": "4/5",
+            "due": 2,
+            "equipment_online": [
+              "first_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": false,
+            "hour": 0,
+            "idle_mw": "2/25",
+            "supply_mw": "4/5",
+            "workload": "1/2"
+          },
+          "power_mw": "3/4",
+          "recovery": "0",
+          "reference_mw": "3/4",
+          "violations": []
+        },
+        "raw_grid_mw": "0",
+        "reference_mw": "3/4",
+        "reference_point": {
+          "angles_rad": [
+            0.0,
+            -0.00042500000000000003
+          ],
+          "branch_flows_mw": [
+            0.42500000000000004,
+            0.42500000000000004
+          ],
+          "generation_mw": 0.85,
+          "load": "3/4",
+          "numerical_conditions_satisfied": true,
+          "outages": [],
+          "residuals": {
+            "angle_rad": 0.0,
+            "balance_mw": 1.1102230246251565e-16,
+            "flow_equation_mw": 0.0,
+            "generation_mw": 0.0,
+            "outage_flow_mw": 0.0,
+            "thermal_mw": 0.0
+          }
+        },
+        "response_conditions_satisfied": true,
+        "status": "conditional_operating_point_committed",
+        "x_call_mw": "0"
+      },
+      {
+        "active_x_mw": "3/20",
+        "actual_point": {
+          "angles_rad": [
+            0.0,
+            -0.0006000000000000001
+          ],
+          "branch_flows_mw": [
+            0.0,
+            0.6
+          ],
+          "generation_mw": 0.6,
+          "load": "1/2",
+          "numerical_conditions_satisfied": true,
+          "outages": [
+            0
+          ],
+          "residuals": {
+            "angle_rad": 0.0,
+            "balance_mw": 0.0,
+            "flow_equation_mw": 1.1102230246251565e-16,
+            "generation_mw": 0.0,
+            "outage_flow_mw": 0.0,
+            "thermal_mw": 0.0
+          }
+        },
+        "commissioned": false,
+        "committed": true,
+        "conditional": "1/5",
+        "connection_shortfall_mw": "0",
+        "contract": {
+          "aggregate_contract_release": false,
+          "business_necessary": false,
+          "conditional": "1/5",
+          "enrolled_X_backing_necessary": true,
+          "firm": "3/5",
+          "joint_temporal_support": "necessary_condition_failed",
+          "network_conditions_satisfied": true,
+          "normal": {
+            "angles_rad": [
+              0.0,
+              -0.00045000000000000004
+            ],
+            "branch_flows_mw": [
+              0.45000000000000007,
+              0.45000000000000007
+            ],
+            "generation_mw": 0.9,
+            "load": "4/5",
+            "numerical_conditions_satisfied": true,
+            "outages": [],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 1.1102230246251565e-16,
+              "flow_equation_mw": 0.0,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.0
+            }
+          },
+          "scenarios": [
+            {
+              "business_necessary": true,
+              "counterfactual_cfe_mw": "7/40",
+              "counterfactual_workload": "27/50",
+              "firm_point": null,
+              "network_conditions_satisfied": true,
+              "outages": [],
+              "physical_cap": "27/20",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.00045000000000000004
+                ],
+                "branch_flows_mw": [
+                  0.45000000000000007,
+                  0.45000000000000007
+                ],
+                "generation_mw": 0.9,
+                "load": "4/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 1.1102230246251565e-16,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "0",
+              "response_necessary": true,
+              "shared_requirement": "7/50"
+            },
+            {
+              "business_necessary": false,
+              "counterfactual_cfe_mw": "7/40",
+              "counterfactual_workload": "27/50",
+              "firm_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0006999999999999999
+                ],
+                "branch_flows_mw": [
+                  0.0,
+                  0.7
+                ],
+                "generation_mw": 0.7,
+                "load": "3/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 1.1102230246251565e-16,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "network_conditions_satisfied": true,
+              "outages": [
+                0
+              ],
+              "physical_cap": "5/8",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.000725
+                ],
+                "branch_flows_mw": [
+                  0.0,
+                  0.725
+                ],
+                "generation_mw": 0.725,
+                "load": "5/8",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "7/40",
+              "response_necessary": true,
+              "shared_requirement": "7/25"
+            },
+            {
+              "business_necessary": false,
+              "counterfactual_cfe_mw": "7/40",
+              "counterfactual_workload": "27/50",
+              "firm_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0006999999999999999
+                ],
+                "branch_flows_mw": [
+                  0.7,
+                  0.0
+                ],
+                "generation_mw": 0.7,
+                "load": "3/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 1.1102230246251565e-16,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "network_conditions_satisfied": true,
+              "outages": [
+                1
+              ],
+              "physical_cap": "5/8",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.000725
+                ],
+                "branch_flows_mw": [
+                  0.725,
+                  0.0
+                ],
+                "generation_mw": 0.725,
+                "load": "5/8",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "7/40",
+              "response_necessary": true,
+              "shared_requirement": "7/25"
+            }
+          ],
+          "status": "evaluated",
+          "total": "4/5"
+        },
+        "failure_stage": null,
+        "firm": "3/5",
+        "hour": 1,
+        "input": {
+          "clean_mwh": "1/2",
+          "compute_capacity": "4/5",
+          "due": 3,
+          "equipment_online": [
+            "first_batch"
+          ],
+          "flexible_fraction": "2/5",
+          "grid_online": false,
+          "hour": 1,
+          "idle_mw": "2/25",
+          "supply_mw": "5/8",
+          "workload": "1/2"
+        },
+        "legal_grid_cap_mw": "3/20",
+        "outages": [
+          0
+        ],
+        "physical_cap": "5/8",
+        "proposal": {
+          "activity": "3/10",
+          "allocations": [],
+          "attributed_clean_mwh": "1/2",
+          "cfe_call_shortfall_mw": "0",
+          "cfe_request_mw": "1/8",
+          "cfe_served": "1/10",
+          "cfe_shortfall_mwh": "0",
+          "grid_request_mw": "1/8",
+          "grid_served": "1/10",
+          "grid_shortfall_mw": "0",
+          "ledger_applied": true,
+          "observation": {
+            "clean_mwh": "1/2",
+            "compute_capacity": "4/5",
+            "due": 3,
+            "equipment_online": [
+              "first_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": false,
+            "hour": 1,
+            "idle_mw": "2/25",
+            "supply_mw": "5/8",
+            "workload": "1/2"
+          },
+          "power_mw": "1/2",
+          "recovery": "0",
+          "reference_mw": "3/4",
+          "violations": []
+        },
+        "raw_grid_mw": "1/8",
+        "reference_mw": "3/4",
+        "reference_point": {
+          "angles_rad": [
+            0.0,
+            -0.0008500000000000001
+          ],
+          "branch_flows_mw": [
+            0.0,
+            0.8500000000000001
+          ],
+          "generation_mw": 0.85,
+          "load": "3/4",
+          "numerical_conditions_satisfied": false,
+          "outages": [
+            0
+          ],
+          "residuals": {
+            "angle_rad": 0.0,
+            "balance_mw": 1.1102230246251565e-16,
+            "flow_equation_mw": 0.0,
+            "generation_mw": 0.0,
+            "outage_flow_mw": 0.0,
+            "thermal_mw": 0.1250000000000001
+          }
+        },
+        "response_conditions_satisfied": true,
+        "status": "conditional_operating_point_committed",
+        "x_call_mw": "1/8"
+      },
+      {
+        "active_x_mw": "0",
+        "actual_point": {
+          "angles_rad": [
+            0.0,
+            -0.0005750000000000001
+          ],
+          "branch_flows_mw": [
+            0.5750000000000001,
+            0.5750000000000001
+          ],
+          "generation_mw": 1.1500000000000001,
+          "load": "21/20",
+          "numerical_conditions_satisfied": true,
+          "outages": [],
+          "residuals": {
+            "angle_rad": 0.0,
+            "balance_mw": 0.0,
+            "flow_equation_mw": 0.0,
+            "generation_mw": 0.0,
+            "outage_flow_mw": 0.0,
+            "thermal_mw": 0.0
+          }
+        },
+        "commissioned": true,
+        "committed": true,
+        "conditional": "1/2",
+        "connection_shortfall_mw": "0",
+        "contract": {
+          "aggregate_contract_release": false,
+          "business_necessary": false,
+          "conditional": "1/2",
+          "enrolled_X_backing_necessary": false,
+          "firm": "4/5",
+          "joint_temporal_support": "necessary_condition_failed",
+          "network_conditions_satisfied": true,
+          "normal": {
+            "angles_rad": [
+              0.0,
+              -0.0007000000000000001
+            ],
+            "branch_flows_mw": [
+              0.7000000000000001,
+              0.7000000000000001
+            ],
+            "generation_mw": 1.4000000000000001,
+            "load": "13/10",
+            "numerical_conditions_satisfied": true,
+            "outages": [],
+            "residuals": {
+              "angle_rad": 0.0,
+              "balance_mw": 0.0,
+              "flow_equation_mw": 0.0,
+              "generation_mw": 0.0,
+              "outage_flow_mw": 0.0,
+              "thermal_mw": 0.0
+            }
+          },
+          "scenarios": [
+            {
+              "business_necessary": true,
+              "counterfactual_cfe_mw": "1/4",
+              "counterfactual_workload": "9/10",
+              "firm_point": null,
+              "network_conditions_satisfied": true,
+              "outages": [],
+              "physical_cap": "19/10",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0007000000000000001
+                ],
+                "branch_flows_mw": [
+                  0.7000000000000001,
+                  0.7000000000000001
+                ],
+                "generation_mw": 1.4000000000000001,
+                "load": "13/10",
+                "numerical_conditions_satisfied": true,
+                "outages": [],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "0",
+              "response_necessary": true,
+              "shared_requirement": "1/5"
+            },
+            {
+              "business_necessary": false,
+              "counterfactual_cfe_mw": "1/4",
+              "counterfactual_workload": "9/10",
+              "firm_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0009000000000000001
+                ],
+                "branch_flows_mw": [
+                  0.0,
+                  0.9000000000000001
+                ],
+                "generation_mw": 0.9,
+                "load": "4/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 1.1102230246251565e-16,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "network_conditions_satisfied": true,
+              "outages": [
+                0
+              ],
+              "physical_cap": "9/10",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.001
+                ],
+                "branch_flows_mw": [
+                  0.0,
+                  1.0
+                ],
+                "generation_mw": 1.0,
+                "load": "9/10",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  0
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "2/5",
+              "response_necessary": true,
+              "shared_requirement": "13/25"
+            },
+            {
+              "business_necessary": false,
+              "counterfactual_cfe_mw": "1/4",
+              "counterfactual_workload": "9/10",
+              "firm_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.0009000000000000001
+                ],
+                "branch_flows_mw": [
+                  0.9000000000000001,
+                  0.0
+                ],
+                "generation_mw": 0.9,
+                "load": "4/5",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 1.1102230246251565e-16,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "network_conditions_satisfied": true,
+              "outages": [
+                1
+              ],
+              "physical_cap": "9/10",
+              "post_call_point": {
+                "angles_rad": [
+                  0.0,
+                  -0.001
+                ],
+                "branch_flows_mw": [
+                  1.0,
+                  0.0
+                ],
+                "generation_mw": 1.0,
+                "load": "9/10",
+                "numerical_conditions_satisfied": true,
+                "outages": [
+                  1
+                ],
+                "residuals": {
+                  "angle_rad": 0.0,
+                  "balance_mw": 0.0,
+                  "flow_equation_mw": 0.0,
+                  "generation_mw": 0.0,
+                  "outage_flow_mw": 0.0,
+                  "thermal_mw": 0.0
+                }
+              },
+              "required_grid_mw": "2/5",
+              "response_necessary": true,
+              "shared_requirement": "13/25"
+            }
+          ],
+          "status": "evaluated",
+          "total": "13/10"
+        },
+        "failure_stage": null,
+        "firm": "4/5",
+        "hour": 2,
+        "input": {
+          "clean_mwh": "21/25",
+          "compute_capacity": "6/5",
+          "due": 4,
+          "equipment_online": [
+            "first_batch",
+            "second_batch"
+          ],
+          "flexible_fraction": "2/5",
+          "grid_online": true,
+          "hour": 2,
+          "idle_mw": "3/25",
+          "supply_mw": "13/10",
+          "workload": "1/2"
+        },
+        "legal_grid_cap_mw": "0",
+        "outages": [],
+        "physical_cap": "19/10",
+        "proposal": {
+          "activity": "7/10",
+          "allocations": [
+            [
+              1,
+              "1/5"
+            ]
+          ],
+          "attributed_clean_mwh": "21/25",
+          "cfe_call_shortfall_mw": "0",
+          "cfe_request_mw": "0",
+          "cfe_served": "0",
+          "cfe_shortfall_mwh": "0",
+          "grid_request_mw": "0",
+          "grid_served": "0",
+          "grid_shortfall_mw": "0",
+          "ledger_applied": true,
+          "observation": {
+            "clean_mwh": "21/25",
+            "compute_capacity": "6/5",
+            "due": 4,
+            "equipment_online": [
+              "first_batch",
+              "second_batch"
+            ],
+            "flexible_fraction": "2/5",
+            "grid_online": true,
+            "hour": 2,
+            "idle_mw": "3/25",
+            "supply_mw": "13/10",
+            "workload": "1/2"
+          },
+          "power_mw": "21/20",
+          "recovery": "1/5",
+          "reference_mw": "4/5",
+          "violations": []
+        },
+        "raw_grid_mw": "0",
+        "reference_mw": "4/5",
+        "reference_point": {
+          "angles_rad": [
+            0.0,
+            -0.00045000000000000004
+          ],
+          "branch_flows_mw": [
+            0.45000000000000007,
+            0.45000000000000007
+          ],
+          "generation_mw": 0.9,
+          "load": "4/5",
+          "numerical_conditions_satisfied": true,
+          "outages": [],
+          "residuals": {
+            "angle_rad": 0.0,
+            "balance_mw": 1.1102230246251565e-16,
+            "flow_equation_mw": 0.0,
+            "generation_mw": 0.0,
+            "outage_flow_mw": 0.0,
+            "thermal_mw": 0.0
+          }
+        },
+        "response_conditions_satisfied": true,
+        "status": "conditional_operating_point_committed",
+        "x_call_mw": "0"
+      }
+    ],
+    "stopped": false,
+    "x_duration": 0,
+    "x_energy": "1/8",
+    "x_events": 1,
+    "x_previous": "0",
+    "x_rest": 1
+  },
+  "reopened_summary": null,
+  "scope": "B3 filesystem_visible_simulation_only",
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "witness": {
+    "expected_sha": "a1ebc818ab896248791334132210089d722f0148da95e1f2c1cbbb9417f26032",
+    "may_have_published": true,
+    "observation": {
+      "clean_mwh": "21/25",
+      "compute_capacity": "6/5",
+      "due": 4,
+      "equipment_online": [
+        "first_batch",
+        "second_batch"
+      ],
+      "flexible_fraction": "2/5",
+      "grid_online": true,
+      "hour": 2,
+      "idle_mw": "3/25",
+      "supply_mw": "13/10",
+      "workload": "1/2"
+    },
+    "operation": "step",
+    "planned_reason": null,
+    "target": "step_0004.json"
+  }
+}

@@ -2,19 +2,19 @@
 
 2026-10-22范围入口：当前论文工作顺序和交付标准见`agent.md`第2–6及14节；以下各实验的原有门禁仍适用于对应包。
 
-### 2026-10-22 工作包B2开发后的阶段评价缺口
+### 2026-10-22 工作包B3开发后的阶段评价缺口
 
-设计依据：[最小阶段评价规格](staged_deliverability_minimum_spec_v1.md)、[小案例计划](../plan/staged_deliverability_small_case_plan_v1.md)及[B2网络规格](staged_deliverability_network_development_v1.md)；B1与B2分别见[标量机制报告](../../results/tables/staged_deliverability_b1_v1_non_authoritative/attempt_01/validation_report.md)、[网络开发报告](../../results/tables/staged_deliverability_b2_v1_non_authoritative/attempt_01/validation_report.md)。独立加总、调用/补做互斥、含待机映射与逐批期限均属声明机制合同，以下现实依据、B3终结及完整主实验成本缺口保持OPEN。
+设计依据：[最小阶段评价规格](staged_deliverability_minimum_spec_v1.md)、[小案例计划](../plan/staged_deliverability_small_case_plan_v1.md)及[B2网络规格](staged_deliverability_network_development_v1.md)；B1/B2/B3分别见[标量机制报告](../../results/tables/staged_deliverability_b1_v1_non_authoritative/attempt_01/validation_report.md)、[网络开发报告](../../results/tables/staged_deliverability_b2_v1_non_authoritative/attempt_01/validation_report.md)、[终结与重开报告](../../results/tables/staged_deliverability_b3_v1_non_authoritative/attempt_01/validation_report.md)。独立加总、调用/补做互斥、含待机映射与逐批期限均属声明机制合同；当前小例的B3接口已补齐，现实依据、推广与完整主实验成本缺口仍OPEN。
 
 | 缺口 | 已核内容与影响 | 解除条件/后续动作 |
 |---|---|---|
 | STAGE-01 服务合同与清洁归属 | 已定位旧加总规则及网侧/CFE物理共益和独立记账的区别；缺具体项目合同、响应/预算与Y归属依据。阻塞现实合同适用性及正式F/X释放解释 | 提供或核验合同、共同计量窗口、活跃X与清洁额度边界；按统一规则固定各计划，不能逐方案换合同。B1可按明确机制假设实施 |
 | STAGE-02 设备、任务及阶段参数 | 新规格明确MW_c、K、w、q、r、D至P的映射；首例的功耗、期限及压缩投运路径是机制假设，非实测 | 核验设备功率/待机/配套边界、任务期限和实际进度来源；来源不足时保留机制范围，不作场址或经济建议 |
-| STAGE-03 连续连接与独立验证 | B1保留三方法与账本独立审计。B2新增受限两母线DC、正常完整C/声明退出F及X、实际P、X/source包络与事务检查；三例新进程state/audit一致。按期早/晚分别完成/永久逾期；延期参考准入拒绝保留债务右删失。旧business_grid与Y=Rw均未重释 | 按[B3/C计划](../plan/staged_deliverability_b3_c_next_steps_v1.md)补缺必要后续输入、保存/关闭/重开失败窗口与显式终结；一般网络或完整F/X时序背书按所声明主张另设后继，未决不得推进依赖物理状态 |
-| STAGE-04 完整路径预算与主实验规模 | B1九pin仍匹配；B2已实测52网络小时/50业务步/362潮流、3个fresh子进程，script12.327s/RSS255.76MiB/机器工件786700B。解释器启动前outer、昂贵I/O失败收尾及主实验规模仍未实测；毕业日期未提供 | 只复用当前绑定规模内的证据；补B3/昂贵失败及所选规模成本，按agent.md第9节闭合主实验预算后核定有限比较规模；不得外推192h或把讨论周数当工期承诺 |
+| STAGE-03 连续连接与独立验证 | B1账本/三方法与B2两母线DC分层检查保留。B3补显式终结、未接受输入、保存失败/未知提交和前缀重开；三例fresh state/audit一致，四个同进程探针裁决正确，永久逾期/右删失保留，298测试通过/1权限skip。旧business_grid与Y=Rw未重释 | 当前机制接口已开发验证；一般网络或完整F/X时序背书按所声明主张另设后继。真实掉电/坏盘与阻塞收尾仍未验证，未决不得推进依赖物理状态 |
+| STAGE-04 完整路径预算与主实验规模 | B1九pin不变；B2为362潮流开发对照。B3含599点计算/84业务步/86网络尝试、3 fresh child及4重开探针，script15.321s、解释器启动至退出15.639s、采样RSS270778368B、76机器工件2229793B。保存注入失败不代表真实I/O故障；毕业日期未提供 | 按[C范围与成本计划](../plan/staged_deliverability_c_scope_and_budget_plan_v1.md)固定最终网络/主张、DAG、复用边界及缺口测量，再核定有限比较点数。昂贵真实失败、推广与主实验预算仍未闭合；不外推192h或承诺工期 |
 | STAGE-05 完整F/X业务背书 | B2固定网络完整合同有数值见证，但post声明故障最小调用0.4 MW>aD0.25 MW、登记X0.5 MW亦超瞬时背书；t=1完整合同加CFE也失败。aggregate_contract_release=false；实际低负荷路径成功不改变该反例 | 保留失败配置与结果；后续比较范围在看目标结果前按来源/解析条件登记。若只评价给定负荷则明确条件范围；若主张完整合同交付，另定义反事实任务/事件时序及恢复期限，不以一小时必要条件代替完整背书 |
 
-这些开发证据不关闭下列历史H1、192小时、native校准、主实验resource或formal门禁。本轮为B1/B2开发、普通测试与有界诊断，未创建冻结候选或授予正式运行权限。
+这些开发证据不关闭下列历史H1、192小时、native校准、主实验resource或formal门禁。本轮为B1/B2/B3开发、普通测试与有界诊断，未创建冻结候选或授予正式运行权限。
 
 历史活文案依赖：`tests/test_rq2_joint_deliverability_preregistration_v1.py::test_live_scope_and_status_documents_reference_the_successor`要求主介绍保留旧46-cell文案与公式，而当前介绍已转为给定阶段计划评价。该测试被`configs/rq2_joint_deliverability_preregistration_v1.SHA256SUMS.json`绑定，本轮保留其原字节及全部冻结工件，不加回旧介绍以满足文案断言。这是历史文案导航与当前介绍的依赖漂移，不等于冻结YAML、claim gate或科学实现失败；当前规则清理与该历史测试无依赖。若继续使用此冻结包，须在对应历史快照核查或按`agent.md`第7节建立版本化后继解决动态文案依赖；不得将其报告为当前工作区的回归全通过，也不据此恢复旧46-cell为当前必做范围。
 
