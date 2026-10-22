@@ -2,6 +2,10 @@
 
 2026-10-22范围入口：当前论文工作顺序和交付标准见`agent.md`第2–6及14节；以下各实验的原有门禁仍适用于对应包。
 
+### 2026-10-23 C保存输入的成本观察
+
+[最新交接](../plan/continuation_handoff_20261023_append_cost.md)与[报告](../../results/tables/staged_rts24_append_cost_v1_non_authoritative/execution_observations_01/validation_report.md)记录一次无native诊断：六成功/六失败/十二fresh、198 selective calls/548描述，外部测量156.945949s，完整state/CAS/失败及旧绑定通过保存后核验。parent/fresh分组分别70.605554/54.884973s，目录/保留核验/依赖身份有实测成本；inclusive时间嵌套不可相加或作优势比例。固定三母线h0/h1和单次顺序不能关闭公共数值/g、完整139/F-X反事实时序、长cohort/真实IO失败、C/D/E资源准入。P1十三源及注册保持、p1_01不存在，仍待专项授权；新cost五源随request冻结，后续优化或修复走独立successor。
+
 ### 2026-10-23 C同append保存成本后继
 
 [journal_v3交接](../plan/continuation_handoff_20261023_batch.md)记录同append去重、完整retained bookend与隔离副本：74新/188旧普通检查通过，三方法完整state/CAS字节及fresh等价，字段重绑反例闭合。hour库存扫描10→6、finish8→4属于结构调用减少，复制/比较/runtime成本及公共整链wall/RSS/storage收益未测，增长阶数保持。旧绑定及P1注册13源未改；本后继未接P1，公共网络范围确认不授予native。保存成本代表测量需先固定自身DAG/预算；P1专项授权、公共点/g、完整139/F-X时序、C/D/E资源继续OPEN。

@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-23保存输入成本实测：见[最新交接](continuation_handoff_20261023_append_cost.md)及[报告](../../results/tables/staged_rts24_append_cost_v1_non_authoritative/execution_observations_01/validation_report.md)。仅复用三母线保存h0/h1，三方法v2→v3、六成功/六失败、十二fresh的一次诊断exit0；准备12/34、measurement186/514、合计198/548，0构模/native/solver，完整state/CAS字节/audit一致。外部测量156.945949s，owned Job130.984s、quiet后处理23.037932s；采样tree RSS298913792B，完整测量树579文件1660401B。46个不同普通检查与两轮独立保存后核验通过，旧绑定/P1十三源保持。固定顺序绝对观测不推导提速优势，累计编码和核验增长仍待后继；公共点/g、139/F-X时序、C整体与D/E资源保持OPEN，P1仍待专项授权。以下保留各时点检查点。
+
 2026-10-23同append保存成本后继：见[最新交接](continuation_handoff_20261023_batch.md)与[开发合同](staged_deliverability_c_append_batch_contract_v1.md)。journal_v3保留完整科学审计和entry前后CAS/root/目录/依赖核验，将成功hour的inventory10→6、pack4→2，finish为8→4、4→2；新74项及旧188项普通检查通过，三方法state/CAS字节/replay等价。Session字段重绑审查发现已由整体隔离及动态比较修复。旧B1–B3、codec/v1/v2及P1的13源保持；未测整链wall/RSS/storage收益，未接入或启动P1。公共RTS-24方向保持，公共数值/完整139/F-X时序、C整体性能与D/E点数/资源仍OPEN。以下保留既有检查点。
 
 2026-10-23受控原生接口开发检查点：最新见[交接](continuation_handoff_20261023_native.md)与[P1合同](staged_deliverability_c_native_p1_contract_v1.md)。已实现highspy LP/QP数组传输、raw/必要dual重审、串行point/fresh runner与外部Job watchdog；普通检查使用fake API、解析证据与微型Python进程，未创建Highs实例或启动公共数值attempt。31个native槽之外，成功满包有124次模型编译；观察器分别记录重编译、生命周期、保存与replay，缺观测为unknown。OS失败反例促成保留成员HANDLE及TotalProcesses历史闭包，漏掉短命成员不得quiet。注册文件保持native_authorized=false，须另获P1专项授权；没有完整139/F-X时序、C/D/E资源准入或正式结果。以下保留既有检查点。
