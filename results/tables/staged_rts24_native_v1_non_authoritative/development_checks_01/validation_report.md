@@ -1,0 +1,27 @@
+# C原生P1受控接口开发核验
+
+2026-10-23，`DRAFT_NONAUTHORITATIVE / PRE_SEAL`。本检查点实现后端与受控runner，普通检查使用显式fake API、解析点、微型Python进程；没有真实Highs实例、solver call或P1 attempt。完整上下文见[交接](../../../../docs/plan/continuation_handoff_20261023_native.md)及[P1合同](../../../../docs/plan/staged_deliverability_c_native_p1_contract_v1.md)。
+
+## 已核内容
+
+最终新84项普通检查通过75.87秒；相关旧289项通过166.87秒，共373项不同检查。复跑和失败迭代不重复计入该数。旧journal两个只读postcheck均exit0，531文件558007B与138文件286322B保持，B1–B3保存118/仓库pin42/选定外部7及C/build/causal、旧numeric绑定一致。它们是开发验证耗时，不是P1性能或公共结果。
+
+PRE_SEAL由只读sol_reviewer复核，修复了transport与numeric分流、失败raw/log与run flags、fresh余量、getter完整性与枚举name/value、动态actual槽位metadata、注册schema和授权字段、观测发布失败、历史JSON及受控环境的旧字节核验。没有official verdict/receipt/seal。
+
+OS检查暴露Job active=0时孙进程HANDLE尚未signaled，原先测试先以PID存在性失败，再以保留HANDLE直接失败。新guard持有成员身份并核TotalProcesses历史闭包；未观测短命成员必须unknown。guard_04/05保存fast入口的inventory unknown，最终测试覆盖total>retained时拒绝；readback保存留出观察窗口后的exit0/2/7，均total2/retained2并闭合。真实nested Job与显式漏成员反例也覆盖。全部失败日志保留。
+
+运行前静态注册还发现历史numeric检查文件是pretty JSON，不能用新canonical parser重写；现先核原SHA再解析。旧import式preserve在禁用user-site时缺psutil，已改新后继直接核旧字节/固定源/角色/版本，仅扫描历史psutil metadata、不导入包。与旧核验prior/两core/numeric逐字段一致，额外元数据受新注册绑定。开发中另修复测试的unaccepted字段名、b1_b3_files整数断言及非法actual objective在schema层先被拒绝的测试构造；这些均不涉及科学阈值或旧数据改动。
+
+## 具体待校准包
+
+注册文件为[registration_v1.json](../registration_v1.json)，SHA256 `23577e5d79d3284a260decbfe2258a3103252617953452565a9feeffafbd94e2`。已用exact compute Python及禁用user-site的解释器核验，13个源、31个请求槽、16QP/15LP；native_authorized=false，p1_01不存在。注册仅为开发绑定，不是运行授权。
+
+P1覆盖五小时实际前缀-2..2及两帧代表合同；观察末端仍8，不把缺后续输入变为完成。成功31点会有124次构模/62次import。停止帽为native5秒、point10秒、worker300秒/无进展30秒、fresh20秒、采样RSS1GiB、process commit1GiB/Job commit2GiB、64MiB/5000文件、1024历史HANDLE，零重试。各帽独立，31×10>300，不构成ETA；launcher只读准备成本另列。
+
+## 覆盖限制与后续
+
+观察器是selected inclusive calls，不能加总为wall，且排除自身写入和末manifest/completion。Python流和HiGHS log_file之外的CRT/Win32直写、崩溃dump与OS诊断不在覆盖内；缺诊断按transport未知处理。采样RSS不保证捕捉尖峰，依赖绑定不是全stdlib/OS封印，真实阻塞盘/掉电尚未验证。
+
+下一P1必须由用户对该exact包单独明确授权。真实LP/QP dual、原生日志、公共数值/g和保存整链成本未测；完整139、F/X反事实时序、C整体性能、D/E规模与资源及正式门禁保持OPEN。可先推进独立保存成本后继。机器字段、命令、源/工件SHA见[development_checks.json](development_checks.json)，[postcheck.py](postcheck.py)只读核对记录与注册，禁止数值factory。
+
+开发record首次postcheck因Windows PowerShell Tee日志为UTF-16而默认GBK读取失败；现仅按BOM识别日志编码，原始日志字节保持。修复前的检查脚本/说明/机器记录以`.attempt_01`原字节快照保留，失败输出在`postcheck_attempt_01.log`；这些都是同一未seal草稿的开发迭代，不是运行attempt。最终postcheck结果见verification.json。

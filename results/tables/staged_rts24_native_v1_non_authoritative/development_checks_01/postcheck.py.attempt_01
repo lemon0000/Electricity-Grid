@@ -1,0 +1,52 @@
+"""Read-only development-record check; never an experiment or run authority."""
+import json
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(ROOT))
+calls = []
+
+
+def denied(*a, **kw):
+    calls.append("numerical_factory")
+    raise AssertionError("numerical factory forbidden in saved-record check")
+
+
+import highspy
+import pyomo.environ as pyo
+highspy.Highs = pyo.SolverFactory = denied
+from experiments import staged_rts24_native_probe_v1 as p
+from src import staged_rts24_highs_backend_v1 as backend
+
+
+def read(path): return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
+def main():
+    here = Path(__file__).resolve().parent
+    record = read(here/"development_checks.json")
+    assert record["authority"] == "DRAFT_NONAUTHORITATIVE"
+    assert record["native_highs_constructions"] == record["solver_calls"] == 0
+    registered = p.verify_registration(record["registration_sha"])
+    assert registered["native_authorized"] is False
+    assert registered["preserved"] == p.preserve() == record["preserved_after"]
+    old = read(here/"preservation_before.json")
+    assert all(old[k] == registered["preserved"][k] for k in ("prior", "cores", "numeric_interface_checks"))
+    assert all(p.stamp(ROOT/path) == pin for path, pin in record["source_pins"].items())
+    assert all(p.stamp(here/path) == pin for path, pin in record["artifacts"].items())
+    metadata = read(here/"class_metadata.json")
+    assert metadata["model_status"] == backend.MODEL_STATUS
+    assert set(metadata["info_fields"]) == set(backend.INFO_FIELDS)
+    assert len(registered["schedule"]) == 31 and len(registered["pins"]["sources"]) == 13
+    assert all(row["bound_query_sha"] is None for row in registered["schedule"])
+    assert "84 passed" in (here/"pytest_native_10.log").read_text()
+    assert "289 passed" in (here/"pytest_related_01.log").read_text()
+    assert not p.OUTPUT.exists() and calls == []
+    print(json.dumps(dict(scope="read_only_saved_development_check", native_highs_constructions=0,
+        solver_calls=0, p1_attempt_exists=False, registration_sha=record["registration_sha"],
+        source_pins=len(record["source_pins"]), artifacts=len(record["artifacts"]),
+        b1_b3_files=registered["preserved"]["prior"]["b1_b3_files"], all_preserved=True), sort_keys=True))
+
+
+if __name__ == "__main__": main()

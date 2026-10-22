@@ -2,6 +2,12 @@
 
 2026-10-22范围入口：当前论文工作顺序和交付标准见`agent.md`第2–6及14节；以下各实验的原有门禁仍适用于对应包。
 
+### 2026-10-23 C原生接口与P1受控执行开发
+
+最新见[交接](../plan/continuation_handoff_20261023_native.md)及[P1合同](../plan/staged_deliverability_c_native_p1_contract_v1.md)。新backend/point/worker/fresh、原生raw与log_file绑定、父子独立import、31次reserve不返还、分层停止帽及Job HANDLE/生命周期闭包已做普通开发检查。registration只固定待校准DAG/输入/环境/预算，native_authorized=false；Python流及HiGHS log_file外的CRT/OS诊断不在覆盖内。旧核验直接读字节，不导入缺失的user-site psutil；旧B1–B3、C/build/causal、531/138核心与numeric绑定保留。
+
+真实Highs对象/LP-QP dual/原生日志和公共保存成本尚未实测；P1一次专项授权、公共点/g、完整139、F/X反事实时序、长cohort/保存增长及C/D/E资源均OPEN。31/319/1431/4273是分层请求上限；31成功点的124次模型编译也不是wall估计。普通检查和PRE_SEAL不赋予native、formal、seal或official权限。以下各段保持原时点含义。
+
 ### 2026-10-23 C保存与重放后继
 
 最新纯数值接口与成本核算见[交接](../plan/continuation_handoff_20261023_numeric.md)：无solver导出/导入、规范化balance方向、完整rc及必要dual审计通过66新+158相关检查；旧B1–B3及531/138核心不变。静态保存核算确认累计key/state物化可二次、writer重复读/解析可三次，旧笼统O(T²)由[新成本页](../plan/staged_deliverability_c_retained_cost_review_v1.md)补正。下一步为受控native适配/runner的无solver开发和保存成本后继；[公共包计划](../plan/staged_deliverability_c_public_numeric_package_plan_v1.md)31/319等均为未执行上限，不是资源准入或专项native授权。公共点/g、完整139/F-X时序和C/D/E仍OPEN。

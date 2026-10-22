@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-23受控原生接口开发检查点：最新见[交接](continuation_handoff_20261023_native.md)与[P1合同](staged_deliverability_c_native_p1_contract_v1.md)。已实现highspy LP/QP数组传输、raw/必要dual重审、串行point/fresh runner与外部Job watchdog；普通检查使用fake API、解析证据与微型Python进程，未创建Highs实例或启动公共数值attempt。31个native槽之外，成功满包有124次模型编译；观察器分别记录重编译、生命周期、保存与replay，缺观测为unknown。OS失败反例促成保留成员HANDLE及TotalProcesses历史闭包，漏掉短命成员不得quiet。注册文件保持native_authorized=false，须另获P1专项授权；没有完整139/F-X时序、C/D/E资源准入或正式结果。以下保留既有检查点。
+
 2026-10-23数值接口检查点：见[最新交接](continuation_handoff_20261023_numeric.md)。新增无solver的LP/QP导出及完整snapshot导入，经原经济/child/primal审计输出既有证据；66项新检查与158项相关旧检查合计224 passed/30.91s，旧绑定及531/138核心保持。静态核算677输入得到CAS57/49467B、root17504B，并将保存物化二次与writer重复读取可能三次分开，见[成本审查](staged_deliverability_c_retained_cost_review_v1.md)。[公共数值包计划](staged_deliverability_c_public_numeric_package_plan_v1.md)列P1/P2及完整范围31/319/1431/4273请求上限；没有native适配器/受控runner、实测或新运行授权，公共数值与C/D/E资源仍OPEN。以下记录保留各自时点含义。
 
 2026-10-23最新开发检查点：以[保存证据交接](continuation_handoff_20261023_journal.md)的journal_v2继续。v1三方法五小时/3 fresh的一次测量保留（500/1324、outer75.1158s、531核心）；最终领域审查F14及v2草稿F15由完整CAS/root集合、链与最终依赖核验修复。新后继仅复用旧前两小时+1 fresh+3失败分支，37/121、outer27.9132s、采样tree RSS418926592B、138核心286322B，0旧full compiler/solver/native；见[新报告](../../results/tables/staged_rts24_journal_v2_non_authoritative/closure_probe_01/validation_report.md)。共382项不同普通检查通过；旧B1–B3/C/build/causal及v1绑定字节一致。公共RTS-24方向保留，公共数值点/g、139节点完整合同层、反事实F/X时序、长cohort/真实失败与IO/前缀增长仍待测，C整体性能和D/E点数/资源仍OPEN；native包须先登记并另获授权。以下段落保留各自时点含义。
