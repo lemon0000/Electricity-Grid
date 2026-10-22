@@ -2,6 +2,10 @@
 
 2026-10-22范围入口：当前论文工作顺序和交付标准见`agent.md`第2–6及14节；以下各实验的原有门禁仍适用于对应包。
 
+### 2026-10-23 既有策略有限追溯与下一依赖
+
+[交接](../plan/continuation_handoff_20261023_policy.md)和[策略表](../literature/staged_rts24_policy_sources_20261023.md)补齐12项明示规则的来源/有效实现/资格映射，静态17源/21 symbol、4常量及两过滤集合核对通过；没有新策略、数值、执行或D/E freeze。有限清单不穷尽全部非YAML消费。下一实质步骤依赖P1一次专项授权及D/E来源/科学输入决定：业务快慢与设备/工程数值、D/选择与平局/敏感性/时域、留出来源与揭示尚未定义；不得以新框架填补。STAGE-01/02现实校准、STAGE-03/04公共证据/资源、STAGE-05完整时序及正式门保持OPEN，原注册native_authorized=false、p1_01不存在。此前用户范围选择不是运行许可。
+
 ### 2026-10-23 当前三份YAML逐字段来源登记
 
 [最新交接](../plan/continuation_handoff_20261023_provenance.md)及[来源说明](../literature/staged_rts24_parameter_provenance_v1.md)登记132配置叶字段/37精确缩放、13引用SHA/选定AST及公共case五组来源，128普通检查与只读CLI通过；原YAML/实现和旧绑定保持。关闭范围仅为当前三份YAML逐字段可追溯性，非YAML策略、全部辅助消费及经验校准仍未完成。STAGE-01/02现实业务/设备/合同来源、STAGE-03/04公共证据及资源、STAGE-05完整时序、D/E数值计划/选择/留出与P1专项授权继续OPEN；没有科学构模/solver/native或运行许可变化。以下旧缺口段落按各自时点解释。

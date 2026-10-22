@@ -26,3 +26,7 @@
 以上为发现时的缺口记录，保留其时点含义。[来源sidecar](staged_rts24_parameter_provenance_v1.json)及[说明](staged_rts24_parameter_provenance_v1.md)现覆盖132个配置叶字段、37项精确缩放、13个实现/规则引用SHA及公共case五组字面量来源；128项普通检查和一次只读静态CLI通过，见[报告](../../results/tables/staged_rts24_parameter_provenance_v1_non_authoritative/validation_report.md)。原三份YAML和运行实现字节未改。
 
 该完成状态限于当前配置字段追溯，不穷尽公共数组单元、非YAML策略选择或全部辅助审计消费。原文引用及许可只是固定本机case源码声明，本轮未外查。机制参数、SLA、权益与清洁归属、延期/事故概率仍未经验校准；公共整链成本、D/E数值计划/选择/留出及P1专项授权继续开放。
+
+## 后续完成状态：12项既有策略规则
+
+[有限策略来源表](staged_rts24_policy_sources_20261023.md)补充上表EDF、互斥、网侧优先和独立加总等明示义务，并追溯有效实现路由、方法/完整回放判断和选定数值接受门；[观察与审阅](../../results/tables/staged_rts24_policy_source_audit_v1_non_authoritative/review_and_validation.md)绑定17份原源码/规格/配置输入及表字节。其范围只有所列12项，未执行策略或声称全代码来源闭包；现实校准、未登记选择、D/E数值及原资源/授权缺口仍保留。
