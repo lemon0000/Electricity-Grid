@@ -39,12 +39,12 @@ B2调用计数阅读时并看[运行后澄清](staged_deliverability_b2_count_cl
 
 - [中文正文](../../paper/drafts/project_introduction.md)及[中文PDF](../../paper/drafts/project_introduction.pdf)，PDF共8页。
 - [英文正文](../../paper/drafts/project_introduction_en.md)及[英文PDF](../../paper/drafts/project_introduction_en.pdf)，PDF共9页。
-- 当前介绍使用四组中英文矢量图：`paper/figures/project_rampup_{cn,en}.svg`、`project_recovery_{cn,en}.svg`、`project_network_{cn,en}.svg`与`project_workflow_{cn,en}.svg`，分别解释共同时间轴上的进度错位、延期与期限内恢复、同一接入点的联合约束、三方法比较与独立留出。每张图提供同名PDF和PNG，正文图注说明阅读顺序及概念边界。[绘图说明与核查](../../paper/figures/project_schematics.json)记录各图信息、依据、导出与检查；[生成脚本](../../paper/figures/draw_project_schematics.py)保留可编辑文字与稳定元素ID。
+- 当前介绍使用四组科研卡通：进度错位、任务延期与补做、供电与CFE账本、三种评价与独立留出。原始图为`paper/figures/project_{rampup,recovery,network,workflow}_cartoon_v2.png`；对应`project_{主题}_{cn,en}.svg`嵌入原图并加上中英文短标签，同名PDF与PNG用于导出和预览。图注说明同一中心、同一任务批次、可能结局、归属核算及独立路径的含义。[绘图说明](../../paper/figures/project_schematics.json)保留生成提示词、图像哈希及检查；[组装脚本](../../paper/figures/assemble_project_cartoons.py)可重建含可编辑标签的图版。
 
 - [论文路线图](RQ2_论文路线图.md)、[研究缺口](../literature/research_gap.md)和[既有证据报告](RQ2_创新性核查与研究判断_20261021.md)已增加当前范围说明。
 - [文献库](../literature/literature_matrix.csv)共42条；[当前引用映射](../literature/introduction_reference_map_20261022.csv)将26条正文参考文献与库内ID逐项对应；[来源核对记录](../literature/introduction_source_checks_20261022.json)区分摘要、部分章节及既有全文依据；[建设专题证据表](../literature/construction_evidence_20261021.csv)保留原核验范围。
 
-同日图解重绘核查：使用已安装的`nature-figure`矢量示意图流程，用户确认四图结构后绘制。8张SVG的字号、构造检查及对应PDF的文字、碰撞检查全部通过，自动碰撞发现为0；SVG可按源码逐字节重建。51个本地链接可解析，两份PDF仍为8/9页，各有26个唯一HTTPS文献链接；叙述正文及26条书目与重绘前相同。全页及重点图文预览已核对。该记录是文档核查，具体图示为概念与研究设计说明。本机详细记录位于`.git/intro_schematics_20261022/`；可移植依据保存在上述绘图说明和源码。并行B3开发文件在本轮期间有外部变化，本次写入及同步限定于图文范围。
+同日科研卡通核查：使用`imagegen`生成四幅场景插画，`nature-figure`用于概念边界与图版核查；原始PNG保留，标签单独组装。8张中英文图版的字号与对应PDF文字、碰撞检查通过，自动碰撞发现为0；固定PNG后可逐字节重建SVG。两份PDF仍为8/9页，各保留26个唯一HTTPS文献链接；叙述正文及26条书目与重绘前相同。全页与重点图文预览已核对，只读卡通审阅的标签和图注建议已落实。本机记录位于`.git/intro_pictorial_20261022/`，图像来源、提示词与可移植说明见绘图说明。该轮为介绍材料的概念插画与排版工作。
 
 同日介绍修订：面向导师的综述按“已有研究做到了什么、仍需回答什么、本项目因此做什么”组织柔性接入、任务恢复、分期建设与小时清洁匹配四组文献。正文集中说明当前研究设计与预期成果，开发进度由研究执行记录维护。只补全FLEX02与FLEX03题名，其余文献科学编码和阅读等级保留。
 

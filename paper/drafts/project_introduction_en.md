@@ -12,7 +12,7 @@ These paths may become misaligned. Equipment and business may be ready while a g
 
 ![Figure 1 Misaligned business equipment and grid progress on one time axis](../figures/project_rampup_en.svg)
 
-**Figure 1 How three progress paths create access pressure (conceptual illustration).** Read time from left to right and business, equipment, and grid states from top to bottom. In the pale orange window, tasks have grown and additional equipment is commissioned while grid reinforcement remains under construction. The study asks whether a given access plan can deliver through this mismatch. Spacing and icon counts illustrate states rather than measured durations or quantities; grid completion alone does not establish full delivery.
+**Figure 1 Misaligned business, equipment, and grid progress (conceptual cartoon).** Three scenes show the same center during early operation, when work and equipment are ready but reinforcement is still being built, and after grid completion. The orange spotlight marks the mismatch to assess. Only commissioned assets provide current capability. Counts and spacing are illustrative; grid completion alone does not establish full delivery.
 
 Ramp-up changes both the source and the limits of flexibility. Early operation may offer spare equipment for recovery but too little eligible work to defer. Later demand growth may increase deferrable work while reducing recovery headroom. Timely equipment additions may ease that pressure. Which stage is more deliverable therefore depends on the relative progress of business, equipment, and the grid.
 
@@ -68,7 +68,7 @@ For example, an hour with 100 MWh consumption and an 80% target needs 80 MWh of 
 
 ![Figure 2 Recovery conditions and alternative outcomes for deferred tasks](../figures/project_recovery_en.svg)
 
-**Figure 2 Why a reduction now still requires recovery before deadlines (conceptual illustration).** Deferral q creates unfinished work tracked by cohort. Subsequent recovery r requires commissioned equipment, network power headroom, and attributable CFE in the recovery hours, subject to the action budget, recovery efficiency, and original deadlines. The right branches show alternative outcomes: on-time completion when conditions permit, or shortfall or overdue work when resources are insufficient or late. The timeline emphasizes continuous debt accounting; late recovery retains an observed deadline violation.
+**Figure 2 How deferred tasks are recovered (conceptual cartoon).** Orange starred folders represent one deferred cohort: waiting on the left, seeking commissioned equipment, power headroom, and hourly CFE in the middle, and reaching alternative on-time or shortfall/overdue outcomes on the right. Recovery remains subject to the action budget, efficiency, and original deadlines. Late recovery retains an observed violation. Clock faces symbolize time and deadlines.
 
 ## 4 Research questions
 
@@ -88,7 +88,7 @@ Normal-state network checks cover the full F+X allowance. The declared contingen
 
 ![Figure 3 Computing metered power network and hourly CFE at one connection point](../figures/project_network_en.svg)
 
-**Figure 3 How resources and constraints connect at one center (assessment framework).** The built grid supplies the center through a fixed connection point, where P denotes metered power. On the right, Y and y denote the hourly attributable CFE limit and allocation; this arrow represents attribute accounting. Equipment, tasks, deferral, and recovery determine P, including idle and supporting loads. The lower band shows the main computing, network, and clean-matching checks; debt and budgets carry across hours. K, w, q, r, and D use MW_c; P uses MW; y and Y use MWh, with Δt in hours. Network conclusions remain within the declared DC model and contingency set.
+**Figure 3 Checking resources and electricity at one center (conceptual cartoon).** The thick blue cable supplies one center through a fixed-point meter. Racks and cooling equipment illustrate that metered power P includes idle, execution, recovery, and support loads. The ledger, certificates, and thin dotted links represent hourly CFE attribution; the small check sheet combines consumption records with attributable resources. Lower scenes denote computing, network-power, and clean-matching checks. Bars and clocks are symbolic. Network assessment remains within the declared DC model and contingency set.
 
 ### 5.2 Link execution, deferral, recovery, and metered power
 
@@ -130,7 +130,7 @@ The data design uses traceable public network and workload sources and identifie
 
 ![Figure 4 Matched assessment comparisons and independent holdout checks](../figures/project_workflow_en.svg)
 
-**Figure 4 Which comparisons answer the research question (study design).** Step 1 fixes given plans and comparable inputs, deadlines, and service rules. Step 2 compares instantaneous-MW, fixed-recovery-headroom, and full temporal assessments. Step 3 explains the stages and constraints behind judgment differences, retaining null and failure regions. Step 4 freezes plans and operating policies before causal execution on independent holdout paths. The dashed divider separates selection from holdout evaluation. The lower band lists intended outputs; specific judgments require subsequent computational evidence.
+**Figure 4 Comparing assessments, then testing applicability (study-design cartoon).** Three researchers inspect common task, equipment, and grid inputs. A camera, ruler, and filmstrip represent instantaneous-MW, fixed-recovery-headroom, and full temporal assessments. The given plan and operating policy are then sealed for causal execution on independent holdout scenarios at the same fixed connection point. The winding path symbolizes a new chronology. Comparisons retain null and failure regions; judgments require computational evidence.
 
 ## 7 Intended contributions and deliverables
 

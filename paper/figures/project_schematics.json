@@ -1,9 +1,19 @@
 {
   "date": "2026-10-22",
-  "role": "Bilingual conceptual figures for the project research introduction",
-  "status": "Conceptual study design and assessment framework",
-  "drawing": "Original hand-built editable SVG; deterministic Python standard-library source",
-  "source": "draw_project_schematics.py",
+  "version": 2,
+  "role": "Pictorial scientific cartoons for the bilingual thesis project introduction",
+  "status": "Conceptual illustration and study design",
+  "intended_use": "Project introduction for academic discussion",
+  "journal_submission_eligibility": "Unverified",
+  "artwork_generation": {
+    "tool": "image_gen.imagegen",
+    "provider_route": "built-in image generation",
+    "model_version": "not exposed by tool",
+    "calls": {
+      "new_images": 4,
+      "targeted_edit": 1
+    }
+  },
   "skill": {
     "repository": "https://github.com/Yuan1z0825/nature-skills",
     "commit": "c6ae86c742705fd968b13c79db1a8518a84089d4",
@@ -15,17 +25,17 @@
     ],
     "git_blob_verification": true
   },
-  "canvas_width_mm": 183,
-  "font_family": "Arial with Microsoft YaHei for Chinese",
-  "figure_text_pt": [
-    7.6,
-    11
-  ],
-  "svg_audit_bounds_pt": [
-    7.5,
-    11.1
-  ],
-  "introduction_note": "Typography is sized for an A4 project introduction; no journal submission contract is asserted.",
+  "assembly": {
+    "source": "assemble_project_cartoons.py",
+    "artwork_pixels": "preserved verbatim in embedded PNG data",
+    "localized_labels": "editable SVG text",
+    "canvas_width_mm": 183,
+    "font_family": "Arial with Microsoft YaHei for Chinese",
+    "text_pt": [
+      7.6,
+      11
+    ]
+  },
   "export": {
     "formats": [
       "svg",
@@ -33,42 +43,50 @@
       "png"
     ],
     "pdf_renderer": "Chromium headless print",
-    "png_renderer": "PyMuPDF from the exported PDF",
-    "png_dpi": 240
+    "preview_renderer": "PyMuPDF from exported PDF",
+    "preview_dpi": 240
   },
   "evidence": [
     "../drafts/project_introduction.md",
     "../drafts/project_introduction_en.md",
     "../../docs/model_spec/staged_deliverability_minimum_spec_v1.md"
   ],
-  "assumptions": [
-    "The example timeline illustrates states and is not drawn to scale; icon counts are not measurements.",
-    "Only commissioned equipment and completed grid reinforcement provide current capability.",
-    "Task cohorts keep their original deadlines; late recovery preserves an observed violation.",
-    "Hourly CFE is energy-attribute accounting in the eligible hour and region.",
-    "Plans and policies are frozen before independent holdout execution; outputs are intended study outputs."
+  "interpretation": [
+    "Scenes in the progress illustration show the same center at illustrative times, not measured durations or capacities.",
+    "The starred orange folder is one deferred cohort; success and shortfall branches are alternative outcomes.",
+    "Clock faces and bars are pictorial symbols, not numerical observations.",
+    "The thick cable represents physical power; certificates and the ledger represent hourly CFE attribute accounting.",
+    "Three researchers assess common inputs; the independent holdout scene remains at the same fixed connection point."
   ],
   "figures": [
     {
       "number": 1,
-      "topic": "三条进度如何形成接入压力",
-      "role": "问题与状态",
-      "message": "A shared timeline exposes a mismatch between business/equipment readiness and grid reinforcement.",
-      "assets": [
+      "topic": "rampup",
+      "artwork": {
+        "path": "project_rampup_cartoon_v2.png",
+        "sha256": "aa24a914709e6965491c77e4356bfd2a98b5c6a2090df101aac360bd36a5d2ce",
+        "pixels": [
+          1942,
+          809
+        ],
+        "native_dpi_at_183mm": 269.55
+      },
+      "generation_prompt": "Create a highly pictorial scientific EDUCATIONAL CARTOON for an AI data-center thesis project introduction read by an academic supervisor. This is conceptual explanatory artwork, not measured data or a journal submission candidate. Style: engaging hand-drawn 2D editorial cartoon, rounded illustrated objects, clean dark-blue ink outlines, gentle limited shading, readable expressive miniature engineers, attractive muted blue, teal and warm orange colors on a pure white background. Objects must be recognizable and the story clear from pictures. Use large objects, visual metaphors and generous separation, with very little clutter. This should feel like an excellent illustrated science textbook, with tangible racks, job folders, electrical infrastructure, construction workers and clocks. Avoid a box-and-arrow slide layout, abstract geometric blocks, text-heavy infographics, glossy photorealism or decorative scenery. Wide landscape around 2.4:1, high resolution; reserve a clean unoccupied white band in the top 13 percent for a title to be overlaid later, and clear white gutters between major scenes for short labels. Keep every object comfortably inside the canvas, including on the left and right edges. All future label spaces are empty. NO words, letters, numbers, equations, watermark, logos or branded symbols. Simple check marks and a lock symbol are allowed where explicitly called for. The same blue tasks and orange deferred-task folders, teal server racks and navy engineering linework are used across the series.\nPURPOSE AND MESSAGE: business work, installed computing equipment and grid reinforcement can progress at different speeds; work and racks may be ready before reinforcement. COMPOSITION: three clearly separated small scenes of THE SAME data center at three illustrative times, read left to right, each with the same recognizably shaped data-center building, an existing working electricity connection, and job folders. LEFT: early operation, one operating server rack visible through a cutaway wall, few blue task folders arriving, spare floor space; a small reinforcement worksite is just being prepared off to the side. CENTER, the visually dominant scene: more blue job folders have arrived and another installed operating rack is visible. At the adjacent reinforcement site a friendly construction engineer, a crane and safety barrier show that an additional transformer and its new feeder are STILL being built. The new line visibly stops at a construction barrier, while the separate existing line still powers the data center. A small orange queue of deferrable work beside the live racks makes the mismatch concrete. Use a soft pale-orange ground spotlight under this center scene, not a filled rectangular card. RIGHT: the same site after the extra transformer and feeder are fully commissioned, with the construction barrier removed and the installed reinforcement connected; the computing equipment and job stream remain. Do not show a victory tick, a trophy, an unlimited power source, or guaranteed full delivery. No onsite generation, solar farms or battery additions. Do not imply that unfinished assets supply electricity or that the sole supply is disconnected. The three scenes have a simple subtle horizontal time arrow on the ground below them; no quantitative scale. Pictures and task counts are illustrative, not measured quantities. Aim for a charming, very clear visual narrative rather than a technical chart.",
+      "localized_assets": [
         {
           "language": "cn",
           "files": {
             "svg": {
               "path": "project_rampup_cn.svg",
-              "sha256": "cd3dc18174501b9548c61f41c965ca0575efe10ccd7cc2344e818898ed836bb5"
+              "sha256": "5bc1f1b4eeb45ef6b27c7aae0e66e9213ecb86efd32ca2f509a68862d4ac6df4"
             },
             "pdf": {
               "path": "project_rampup_cn.pdf",
-              "sha256": "37c11816cb574bee8aed983da45e1cfc8d0da269ca35a6f232ba74564b1de7e9"
+              "sha256": "e25e1fd49dc86b383185c04352b5865ce74462570a8e5bae03216af405c68846"
             },
             "png": {
               "path": "project_rampup_cn.png",
-              "sha256": "abc0c59a2df153762f59c40e5ccec206f34b476338448fc73a13b157bfc81e95"
+              "sha256": "0d1703a17edaa19d54b9c977b378f236451bf6a84798ea09e5d99b3223ae87a0"
             }
           }
         },
@@ -77,15 +95,15 @@
           "files": {
             "svg": {
               "path": "project_rampup_en.svg",
-              "sha256": "0c0a093d9b2677d1f0e57bbc6055157b52e7e0066fcf8dc3e5ba2bcf0194b37b"
+              "sha256": "98831d38e455b19985e6489ac28e2d59370e75cd807bafbbcbd8f4b08baa7956"
             },
             "pdf": {
               "path": "project_rampup_en.pdf",
-              "sha256": "8be60f9f97e4d538f6290e82ce0593fbac9600a7c358a05ef76863d56d359d4b"
+              "sha256": "bf00bf51091b33333f7b855262b89ea622a1b5cd4a348f81d4082c20b54a6c88"
             },
             "png": {
               "path": "project_rampup_en.png",
-              "sha256": "17107f4cf8cfe4a33ead1405b1a6f727b9422b3becccfb9d02bdbafe39bf0d47"
+              "sha256": "bce5c86439d280663019e2ca497edb47afe7f21b1e47b5bf354fec1f771513fc"
             }
           }
         }
@@ -93,24 +111,32 @@
     },
     {
       "number": 2,
-      "topic": "当前削减为何仍需期限内恢复",
-      "role": "机制与条件",
-      "message": "The same deferred cohort requires feasible recovery; on-time completion and shortfall are alternatives.",
-      "assets": [
+      "topic": "recovery",
+      "artwork": {
+        "path": "project_recovery_cartoon_v2.png",
+        "sha256": "f1544d9e492c4e6cc671d646484904ae30762c98c2e8c72fa0491cf2b9f23ce2",
+        "pixels": [
+          1942,
+          809
+        ],
+        "native_dpi_at_183mm": 269.55
+      },
+      "generation_prompt": "Create a highly pictorial scientific EDUCATIONAL CARTOON for an AI data-center thesis project introduction read by an academic supervisor. This is conceptual explanatory artwork, not measured data or a journal submission candidate. Style: engaging hand-drawn 2D editorial cartoon, rounded illustrated objects, clean dark-blue ink outlines, gentle limited shading, readable expressive miniature engineers, attractive muted blue, teal and warm orange colors on a pure white background. Objects must be recognizable and the story clear from pictures. Use large objects, visual metaphors and generous separation, with very little clutter. This should feel like an excellent illustrated science textbook, with tangible racks, job folders, electrical infrastructure, construction workers and clocks. Avoid a box-and-arrow slide layout, abstract geometric blocks, text-heavy infographics, glossy photorealism or decorative scenery. Wide landscape around 2.4:1, high resolution; reserve a clean unoccupied white band in the top 13 percent for a title to be overlaid later, and clear white gutters between major scenes for short labels. Keep every object comfortably inside the canvas, including on the left and right edges. All future label spaces are empty. NO words, letters, numbers, equations, watermark, logos or branded symbols. Simple check marks and a lock symbol are allowed where explicitly called for. The same blue tasks and orange deferred-task folders, teal server racks and navy engineering linework are used across the series.\nPURPOSE AND MESSAGE: postponing one computing task cohort now creates unfinished work that can finish only if recovery resources arrive before its original deadline; missing the deadline remains a failure even if work finishes later. COMPOSITION: a vivid left-to-right story in three loose open scenes on white, without enclosing panels. LEFT: an operating server rack handles blue current-work folders while ONE large orange folder with a small star emblem is carefully placed in a waiting tray. A clock suggests time begins; the rack continues working. CENTER: later recovery is pictured as a short passage to a spare operating server rack. Above this passage stand three large, clearly identifiable prerequisite illustrations: an already commissioned rack with visibly empty processing slots; a blue electricity plug with spare headroom; an energy-attribute paper certificate with a leaf and small hour clock. Thin connecting arrows show that all three are relevant to the passage. The certificate is a paper accounting instrument, not physical green electricity, not a battery and not a generator. Beneath the passage, an hourglass and a fixed deadline gate make the timing constraint visible. RIGHT: two alternative outcomes separated by ample whitespace, never depicted as simultaneous work multiplication. Upper alternative: the SAME single orange star folder emerges completed just BEFORE a small deadline gate, with a small teal check. Lower alternative: the SAME orange star folder remains in a waiting tray beside a deadline clock with an orange/red overdue accent; a short missing prerequisite connection makes failure intelligible. A clear fork from the recovery passage points to these alternatives. Each pictured state contains exactly one orange star folder; do not duplicate it within a state, dissolve it, throw it away or turn it into a larger amount of work. Deferral and recovery occur in different time scenes. Keep the positive outcome conditional and the failure branch equally visible. Simple clean, friendly science cartoon, with strong object storytelling.",
+      "localized_assets": [
         {
           "language": "cn",
           "files": {
             "svg": {
               "path": "project_recovery_cn.svg",
-              "sha256": "df0f67c6ea44dbad968b34247dfe4cf5114d15699f4b5369645881de937beca8"
+              "sha256": "7d18b13e4912f7a9bf8e6dd43280c2958297a88baf608f33898eacb8084557e3"
             },
             "pdf": {
               "path": "project_recovery_cn.pdf",
-              "sha256": "cfe7ea66a913f6f61bb2c2cf8972db254026346edab3350abc7e9405b7e38cc9"
+              "sha256": "97ecab6e95e5078713655ddfcb2ed7f80ac666f7a15071cdee2674c604118273"
             },
             "png": {
               "path": "project_recovery_cn.png",
-              "sha256": "de63ccb202e7deb884977ca404de64fed7b78caa5f3754c4cd7cf564077b99af"
+              "sha256": "e0893a494f007d851f8327a7eacecde3e7ba589f43493b0282973acb4046d661"
             }
           }
         },
@@ -119,15 +145,15 @@
           "files": {
             "svg": {
               "path": "project_recovery_en.svg",
-              "sha256": "d8c92dc68ac23396fe3906444c030090b3b67fc9a5bb6b489bf1619593a57f76"
+              "sha256": "c4376f2f50549b8af6d8a5092836f9ddb58df5467906deb98dc39a8864e637fa"
             },
             "pdf": {
               "path": "project_recovery_en.pdf",
-              "sha256": "39e0fd3bbb0059d1cb0ded01e47c3e6635cea4a0ccc83f4e41a395f18796863c"
+              "sha256": "f2feefb6677601f6af5784ab81662c02dcbeabc1e524783f27384d54b29646b5"
             },
             "png": {
               "path": "project_recovery_en.png",
-              "sha256": "8f1948abf37729fe7c6363406accd169ced498ee8ad64d744d22fe4ee21b27d8"
+              "sha256": "fb2aef9afbc39e3d22c44f42520ba0c07b7cde106395b7cd9b5f61a1ab518383"
             }
           }
         }
@@ -135,24 +161,32 @@
     },
     {
       "number": 3,
-      "topic": "计算、实际取电、网络与CFE如何连接",
-      "role": "评价框架",
-      "message": "Computing occupancy maps to metered power; network checks and hourly attribute accounting are distinct obligations.",
-      "assets": [
+      "topic": "network",
+      "artwork": {
+        "path": "project_network_cartoon_v2.png",
+        "sha256": "887d88bff9f4087285f189acba904d477f2d27f9eb4f4dd61a9d998b5d3be013",
+        "pixels": [
+          1942,
+          809
+        ],
+        "native_dpi_at_183mm": 269.55
+      },
+      "generation_prompt": "Create a highly pictorial scientific EDUCATIONAL CARTOON for an AI data-center thesis project introduction read by an academic supervisor. This is conceptual explanatory artwork, not measured data or a journal submission candidate. Style: engaging hand-drawn 2D editorial cartoon, rounded illustrated objects, clean dark-blue ink outlines, gentle limited shading, readable expressive miniature engineers, attractive muted blue, teal and warm orange colors on a pure white background. Objects must be recognizable and the story clear from pictures. Use large objects, visual metaphors and generous separation, with very little clutter. This should feel like an excellent illustrated science textbook, with tangible racks, job folders, electrical infrastructure, construction workers and clocks. Avoid a box-and-arrow slide layout, abstract geometric blocks, text-heavy infographics, glossy photorealism or decorative scenery. Wide landscape around 2.4:1, high resolution; reserve a clean unoccupied white band in the top 13 percent for a title to be overlaid later, and clear white gutters between major scenes for short labels. Keep every object comfortably inside the canvas, including on the left and right edges. All future label spaces are empty. NO words, letters, numbers, equations, watermark, logos or branded symbols. Simple check marks and a lock symbol are allowed where explicitly called for. The same blue tasks and orange deferred-task folders, teal server racks and navy engineering linework are used across the series.\nPURPOSE AND MESSAGE: one fixed-point AI data center has coupled computing, real electricity and hourly clean-energy accounting obligations. COMPOSITION: a single large cutaway cartoon data center dominates the middle, with two already commissioned operating server racks, blue current-work folders, and one orange deferred-work tray. One cute engineer observes rather than operates magic controls. LEFT: a compact existing power grid, represented by two recognizable electricity pylons and a substation, supplies the data center through ONE clearly visible electrical meter at a fixed connection point. Draw a thick navy/blue electrical cable continuously from grid through meter to the building, with a small physical flow arrow. The building's cooling fan and lit racks show that support and idle power are included, not just active jobs. RIGHT: a clearly different PAPER accounting scene: a modest desk holding an open energy-attribute ledger, one leaf-stamped certificate and a little hour clock. A thin teal dotted association arrow leads from the certificate desk toward a clean-energy check sheet beside the meter. This is explicitly symbolic energy-attribute allocation for the hour, never a second physical power cable and never electrons traced from a green plant. BOTTOM: below the central building, three small distinct pictorial checks on the same baseline show a server-capacity check, a network/power-meter check and a certificate/clock check. These are assessment requirements; do not mark them all as passed. Put no letters on the meter, certificate, ledger or rack. No solar farm, battery, diesel generator, additional data center or claimed engineering safety guarantee. Leave enough whitespace around the grid, building and accounting desk for three short localized labels to be added later. Emphasize the actual illustrated physical scene; avoid generic flowchart boxes.",
+      "localized_assets": [
         {
           "language": "cn",
           "files": {
             "svg": {
               "path": "project_network_cn.svg",
-              "sha256": "c41ffaca4987a1a253ba59eb496e151a7111e061e8f7ddb68b8cbf8ffae9fcd2"
+              "sha256": "bec1246958957cc9f36134af2c02ea03eaf20ad50a09d17e0023a5fb0a674631"
             },
             "pdf": {
               "path": "project_network_cn.pdf",
-              "sha256": "0f0b82189093784f491ca16168c7ad1df6fe0994ebe8c8dd1ce4709ec1295a0b"
+              "sha256": "17908590138ff2a23575a9014bd897e9534b361ccc24e4a748f00923fe3996f3"
             },
             "png": {
               "path": "project_network_cn.png",
-              "sha256": "1e5227065033748abf4cdbbd5ecd88012e7eb642ed3d793c21c9bde3014e5747"
+              "sha256": "64e5d5d0d040374988f84b6a0dcbb2513199f2aa9e8b60296464157b75247226"
             }
           }
         },
@@ -161,40 +195,52 @@
           "files": {
             "svg": {
               "path": "project_network_en.svg",
-              "sha256": "fe3b250728257bb97830ffdc5a59550acf4ef9694c0912549c5fd652da975c83"
+              "sha256": "acec368b8eb2190859f793cca1198bb7a67d788f5452f7fc395a175cba44ffc3"
             },
             "pdf": {
               "path": "project_network_en.pdf",
-              "sha256": "0234d95fd275ec1ef877cbc198c1e4d8a6a31ecdbd6938c49436442c31ade918"
+              "sha256": "a162d6a49d0644f21f830de9a26765e656f96eb09e028f0d752e8124c9400222"
             },
             "png": {
               "path": "project_network_en.png",
-              "sha256": "93a2c18f2471fb1803f72e4b6be0852b37ac1dbb815120bd4e96aa03e89dd030"
+              "sha256": "fe2ea908b11ef25558de7ef2f94cb9d8fbb733e10284e0bcb473cf31a7ec928b"
             }
           }
         }
-      ]
+      ],
+      "edit_log": {
+        "prompt": "Edit the attached scientific educational cartoon. Preserve its overall composition, white background, palette, illustrated engineer, data-center building, electricity pylons, physical blue cable and meter, leaf-certificate desk, hourglass, thin teal accounting association, and the three bottom inspection scenes. Make just this scientific-clarity correction: in the bottom-left inspection speech bubble, replace the two small green check marks beside server slots with neutral empty navy outline circles matching the existing third empty circle. Also replace the tiny teal check marks on the small floating paper between the main data-center building and certificate desk with neutral short blue horizontal lines. Those inspection icons denote requirements to be assessed, not known successful results. Keep the white check symbols on the blue current-work folders inside the main building, which represent completed ordinary tasks. Keep all other geometry and scene details unchanged. Add no words, letters, numbers, logos or extra marks.",
+        "correction": "neutral inspection symbols"
+      }
     },
     {
       "number": 4,
-      "topic": "用什么比较回答研究问题",
-      "role": "比较与验证",
-      "message": "Matched three-method comparisons explain stage bottlenecks before frozen-policy independent holdout execution.",
-      "assets": [
+      "topic": "workflow",
+      "artwork": {
+        "path": "project_workflow_cartoon_v2.png",
+        "sha256": "f57f748c1b8d64b13891d3241a2118befa47da79d23995f85802b652ce911228",
+        "pixels": [
+          1942,
+          809
+        ],
+        "native_dpi_at_183mm": 269.55
+      },
+      "generation_prompt": "Create a highly pictorial scientific EDUCATIONAL CARTOON for an AI data-center thesis project introduction read by an academic supervisor. This is conceptual explanatory artwork, not measured data or a journal submission candidate. Style: engaging hand-drawn 2D editorial cartoon, rounded illustrated objects, clean dark-blue ink outlines, gentle limited shading, readable expressive miniature engineers, attractive muted blue, teal and warm orange colors on a pure white background. Objects must be recognizable and the story clear from pictures. Use large objects, visual metaphors and generous separation, with very little clutter. This should feel like an excellent illustrated science textbook, with tangible racks, job folders, electrical infrastructure, construction workers and clocks. Avoid a box-and-arrow slide layout, abstract geometric blocks, text-heavy infographics, glossy photorealism or decorative scenery. Wide landscape around 2.4:1, high resolution; reserve a clean unoccupied white band in the top 13 percent for a title to be overlaid later, and clear white gutters between major scenes for short labels. Keep every object comfortably inside the canvas, including on the left and right edges. All future label spaces are empty. NO words, letters, numbers, equations, watermark, logos or branded symbols. Simple check marks and a lock symbol are allowed where explicitly called for. The same blue tasks and orange deferred-task folders, teal server racks and navy engineering linework are used across the series.\nPURPOSE AND MESSAGE: compare three assessment methods on common given inputs, then freeze the plan and policy and test on separate new paths; no method is assumed to win. COMPOSITION: a charming pictorial research workshop, read left to right with two main open scenes, no boxed workflow. LEFT and CENTER occupy about two thirds of the width: one shared blueprint/table with identical job folders and the same small equipment-and-grid model is examined by THREE friendly miniature scientist-engineers side by side. Each has one distinctive tool: the first has a camera taking ONE instantaneous photo of a power dial; the second holds a rigid ruler over a fixed spare-capacity gauge; the third unrolls a long filmstrip that shows a task folder, later rack availability and a deadline clock in temporal order. The three work at the SAME shared input table, at equal visual prominence, not as three sequential stages and with no trophy, ranking or all-green success signs. The filmstrip shows time, not numerical result plots. RIGHT, separated by a generous white gutter: the shared plan becomes a closed blueprint folder and a small operating-policy card together in a sealed envelope with one lock symbol. A one-way arrow hands the sealed plan to a separate second testing desk with a different observer, a fresh winding scenario path and a small clock. The independent tester observes the path with a magnifying glass and records findings on a clipboard that has no green pass stamp. No return arrow from independent testing to the choice of method or plan. Keep the third method's filmstrip large enough to read pictorially, and the lock and independent-testing desk very clear. White background, appealing editorial cartoon, recognizable research actions rather than labels.",
+      "localized_assets": [
         {
           "language": "cn",
           "files": {
             "svg": {
               "path": "project_workflow_cn.svg",
-              "sha256": "6f6d71042b1fec82ff179346a52bad5ea48450b4ef789b1a92731619aba61362"
+              "sha256": "909c18482c8a11ba696af81a53d6faef1e672c80a2d9eed999dd792c406df22f"
             },
             "pdf": {
               "path": "project_workflow_cn.pdf",
-              "sha256": "3b46425ab8b4ce6d7a2829e9fda416d8c7468f9f49c16eaf6d4f166089fdd6e7"
+              "sha256": "594e30f70bea89545c45e9fbd3f0504cdc2bad8e7a2484c5295067a2aff0127c"
             },
             "png": {
               "path": "project_workflow_cn.png",
-              "sha256": "97cbf3d39955e237d08722a6cfbcde89bb83bd6b32d8c9570ff514d3e8d44f37"
+              "sha256": "f25ed695d65803e498aa3990a489e6e7f12ecbb111510ac947ee767bf51100ef"
             }
           }
         },
@@ -203,15 +249,15 @@
           "files": {
             "svg": {
               "path": "project_workflow_en.svg",
-              "sha256": "a5b28e922239fd2203c44bc9bb561006140d2ebf842c5d2717877c1114daece7"
+              "sha256": "b9a3ce3982c6595fa137997abb5c89494ab87b0b14792752997fdedc5087d7fd"
             },
             "pdf": {
               "path": "project_workflow_en.pdf",
-              "sha256": "b6bff4c6ddc64a7efd1b8ed0f6e533bde2ec3ac3042ade2e7a4e7016bed21b37"
+              "sha256": "5d33dc787a26bf1be8ddf992b70d685a83709ce78fa5f6c3bea3c6ced25f974d"
             },
             "png": {
               "path": "project_workflow_en.png",
-              "sha256": "09dc74e0e00242d584008571fbf481d396c8dd906dbdef0b01168a9e0c5d7f28"
+              "sha256": "93db9bd43454d517d4776889aa3002dffc66c96d3c279ff15154f90651dc365d"
             }
           }
         }
@@ -223,8 +269,10 @@
     "all_8_pdf_glyph_audits": "PASS",
     "all_8_pdf_collision_audits": "PASS",
     "automated_collision_findings": 0,
-    "visual_review": "All eight figure previews, all 17 introduction pages, and focused figure pages inspected.",
-    "source_rebuild": "All eight SVGs reproduce byte-for-byte",
+    "embedded_artwork_byte_matches": true,
+    "svg_rebuild_byte_identical": true,
+    "visual_review": "Eight figure previews and all introduction pages checked at final layout.",
+    "readonly_semantic_review": "Pictorial metaphors reviewed; clock, cohort, attribution and fixed-site clarifications applied.",
     "introduction_pdfs": {
       "cn": {
         "pages": 8,
@@ -235,7 +283,7 @@
           "4": 7
         },
         "unique_https_links": 26,
-        "sha256": "50aaad7e8f14d59d9a453755e1295b505be3f158d287d71902303914b7ee960b",
+        "sha256": "3cafa9387ef88a648fd07fe7dee21ccc87d4c51a661adea6a06c5028b73f9a64",
         "narrative_and_26_references_unchanged": true
       },
       "en": {
@@ -243,11 +291,11 @@
         "figure_pages": {
           "1": 1,
           "2": 4,
-          "3": 6,
-          "4": 8
+          "3": 5,
+          "4": 7
         },
         "unique_https_links": 26,
-        "sha256": "8cfd8f24a3dace1fb5114b4c6802c04f7cb8426d075f5b45843e8d7b483848f4",
+        "sha256": "2ab4ef808391a285216d3ce7e75a09ba375ee891ab27b004e0922550c6d99db7",
         "narrative_and_26_references_unchanged": true
       }
     }
