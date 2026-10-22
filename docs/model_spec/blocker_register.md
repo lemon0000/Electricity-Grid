@@ -2,6 +2,12 @@
 
 2026-10-22范围入口：当前论文工作顺序和交付标准见`agent.md`第2–6及14节；以下各实验的原有门禁仍适用于对应包。
 
+### 2026-10-22 C范围与预算续作
+
+用户确认公共网络方向；本轮确定RTS-24为最小公共网络后继，两母线继续机制回归。见[C结构审查](../plan/staged_deliverability_c_dag_and_cost_review_v1.md)、[一次只读核验报告](../../results/tables/staged_deliverability_c_v1_non_authoritative/saved_audit_01/validation_report.md)及[C交接](../plan/continuation_handoff_20261022_c.md)。118个B1–B3旧文件/42仓库pin/7选定外部与RTS-24静态源SHA一致；599/84/86从保存角色重算闭合，0新flow/solver/child。该检查点完成范围方向、实际DAG和结构会计，不关闭STAGE-04。
+
+STAGE-03/04当前前置缺口已细化：RTS-24的POI、工程、F/X、事故集和业务/设备/P缩放输入表尚待固定；网络三评价及公共网独立audit尚未接通；B3仅支持最多10小时，完整state/目录扫描与cohort增长、公共网查询、长时域/失败收尾的代表成本均未测。旧69事故配置每query的70次solver调用只说明旧接口，不能以599×70或旧15.639s估计新图。D/E方案点数/总资源、完整F/X时序背书及历史H1等门仍OPEN；新真实native包另登记并取得具体授权。用户确认的公共网络方向不构成该运行授权。
+
 ### 2026-10-22 工作包B3开发后的阶段评价缺口
 
 设计依据：[最小阶段评价规格](staged_deliverability_minimum_spec_v1.md)、[小案例计划](../plan/staged_deliverability_small_case_plan_v1.md)及[B2网络规格](staged_deliverability_network_development_v1.md)；B1/B2/B3分别见[标量机制报告](../../results/tables/staged_deliverability_b1_v1_non_authoritative/attempt_01/validation_report.md)、[网络开发报告](../../results/tables/staged_deliverability_b2_v1_non_authoritative/attempt_01/validation_report.md)、[终结与重开报告](../../results/tables/staged_deliverability_b3_v1_non_authoritative/attempt_01/validation_report.md)。独立加总、调用/补做互斥、含待机映射与逐批期限均属声明机制合同；当前小例的B3接口已补齐，现实依据、推广与完整主实验成本缺口仍OPEN。

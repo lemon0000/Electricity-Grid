@@ -2,6 +2,8 @@
 
 2026-10-22，`DRAFT_NONAUTHORITATIVE`。接续[B3/C顺序](staged_deliverability_b3_c_next_steps_v1.md)、[B3规格](../model_spec/staged_termination_development_v1.md)及[有界诊断合同](staged_deliverability_b3_development_contract_v1.md)。本页安排C的交付，不登记或启动主实验，不改变旧实验权限。
 
+同日C续作已形成[网络方向、完整DAG与结构预算审查](staged_deliverability_c_dag_and_cost_review_v1.md)。用户随后确认保留公共网络方向，本轮选择RTS-24作为最小公共网络后继，两母线保持机制回归；当前网络只接full_temporal且B3最多10小时。保存记录只读核验及本轮出口见[C交接](continuation_handoff_20261022_c.md)。已绑定审查页保留用户回复前的候选措辞，当前选择以本段和C交接为准。未选定的公共网络输入、三评价网络接线、代表测量及D/E总资源仍是前置缺口，下面四步的整体完成条件不变。
+
 ## 四步交付
 
 1. **固定D/E采用的范围。** 先确定最终采用合成两母线机制还是具名公共主网络，以及声明的正常/故障集合、已知计划退出与实际事件路径。当前小例保留为机制回归；若论文保留公共网络来源，应在选定的公共网络后继上测量，不能用两母线成本替代。网络推广与完整F/X任务时序背书分别审查。

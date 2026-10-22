@@ -1,0 +1,51 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "review_kind": "ordinary_read_only_R2_development_review",
+  "reviewer": "sol_reviewer",
+  "official_verdict_or_receipt": false,
+  "scope": "saved evidence integrity, structural work accounting, bounded resources and claims",
+  "closed_findings": [
+    {
+      "topic": "structural dimensions and runtime support",
+      "resolution": "Renamed the boolean to within_existing_horizon_and_outage_limits; all extrapolated wall_seconds remain null."
+    },
+    {
+      "topic": "local document links",
+      "resolution": "Removed line suffixes from repository Markdown link targets; the postrun report is delivered separately."
+    },
+    {
+      "topic": "per-probe recovery and candidate adoption",
+      "resolution": "Check reason, role, adoption, candidate-state presence and exact accepted-state relationship per probe; negative tests preserve counts while corrupting disposition."
+    },
+    {
+      "topic": "pytest import age and active resource limits",
+      "resolution": "Resource guard is active only during the CLI audit; test an aged import with inactive helper checks and an active wall-limit refusal."
+    }
+  ],
+  "terminal_evidence_reviewed": [
+    "start.json",
+    "audit.json",
+    "launcher.json"
+  ],
+  "terminal_observations": {
+    "exit_code": 0,
+    "failure_marker_present": false,
+    "derived_point_computations": 599,
+    "derived_network_attempts": 86,
+    "derived_business_steps": 84,
+    "old_saved_files": 118,
+    "repository_pins": 42,
+    "selected_external_pins": 7,
+    "new_pypower_calls": 0,
+    "new_solver_calls": 0,
+    "new_children": 0,
+    "main_experiment_performance_review_complete": false
+  },
+  "remaining_high_or_medium_findings": 0,
+  "limitations": [
+    "No official review, resource admission, seal or run authority.",
+    "Public-network adapter, three network-coupled methods and longer-horizon resource estimates remain open.",
+    "Observable hash bookends do not prevent ABA and selected dependencies are not a complete production closure.",
+    "Ten targeted tests were executed by the root; the reviewer did not repeat solver or simulation work."
+  ]
+}
