@@ -26,7 +26,7 @@
 - [D/E保存报告投影](../../results/tables/staged_deliverability_evaluation_records_v1_non_authoritative/projection_01/projection.json)的20个三母线保存视图不是20个独立样本；12个业务快慢×工程时点×方法只是未绑定分类槽，不是12个数值计划或已预算运行。公共部分只有40行必要条件，其他三层仍未评价。
 - 当前有效公共实际路径的摘要保留 full_contract_requests_materialized=false 与 fx_contract_status=not_evaluated_by_actual_path_step；完整静态和反事实跨时证据仍需相应请求与独立核验。完整F/X时序尚未由局部条件推导出来。
 - P1注册的 native_authorized=false，p1_01不存在。公共代表成本及总资源准入仍开放；保存报告的读取用时不能估计公共求解成本。无新的公共轨迹、D/E数值比较、容量选择或holdout访问。
-- 当前已在组级明确公共静态网络与业务、设备、接入权益、期限、清洁和响应机制假设的边界；逐配置字段的来源类别、直接来源、缩放链和经验资格尚缺统一登记，见[具体缺口](../../docs/literature/staged_parameter_source_gap_20261023.md)。当前机制设定不是同址观测的公共工作负荷，情景等权不解释为现实延期率或经验违约概率。
+- [逐配置字段来源登记](../../docs/literature/staged_rts24_parameter_provenance_v1.md)现覆盖三份原YAML的132个叶字段与37项精确缩放；公共case仍按五组字面量登记来源，未逐个分类数组单元。来源类别、直接来源、采用方式、缩放链和经验资格分列，13个引用SHA及选定AST见证固定实现边界。非YAML策略及现实校准仍有[来源缺口](../../docs/literature/staged_parameter_source_gap_20261023.md)；当前机制设定不是同址观测的公共工作负荷，情景等权不解释为现实延期率或经验违约概率。
 
 ## 3 文档交付与核对
 

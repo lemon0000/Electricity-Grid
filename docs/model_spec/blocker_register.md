@@ -2,6 +2,10 @@
 
 2026-10-22范围入口：当前论文工作顺序和交付标准见`agent.md`第2–6及14节；以下各实验的原有门禁仍适用于对应包。
 
+### 2026-10-23 当前三份YAML逐字段来源登记
+
+[最新交接](../plan/continuation_handoff_20261023_provenance.md)及[来源说明](../literature/staged_rts24_parameter_provenance_v1.md)登记132配置叶字段/37精确缩放、13引用SHA/选定AST及公共case五组来源，128普通检查与只读CLI通过；原YAML/实现和旧绑定保持。关闭范围仅为当前三份YAML逐字段可追溯性，非YAML策略、全部辅助消费及经验校准仍未完成。STAGE-01/02现实业务/设备/合同来源、STAGE-03/04公共证据及资源、STAGE-05完整时序、D/E数值计划/选择/留出与P1专项授权继续OPEN；没有科学构模/solver/native或运行许可变化。以下旧缺口段落按各自时点解释。
+
 ### 2026-10-23 方法章阅读版与来源分类精度
 
 [交接](../plan/continuation_handoff_20261023_methods_pdf.md)登记8页PDF的公式/中文顺序、页面和视觉核对，原方法正文及旧绑定保持；文档排版不提供公共数值、资源或正式结果。只读审查确认现有参数仅有组级来源边界，逐字段pointer/来源/缩放/经验资格尚缺，见[具体缺口](../literature/staged_parameter_source_gap_20261023.md)，方法来源页已收紧表述。可先做纯静态sidecar登记；STAGE-01/02现实校准、STAGE-03/04公共证据与资源、STAGE-05完整时序及P1专项授权继续OPEN。

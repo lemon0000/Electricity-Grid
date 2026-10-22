@@ -1,0 +1,3566 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "auxiliary_use_scope": "selected_source_consistency_guards_not_exhaustive_auxiliary_numeric_consumption",
+  "config_pins": {
+    "business": {
+      "bytes": 962,
+      "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+      "scalar_leaves": 60,
+      "sha256": "5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5"
+    },
+    "public": {
+      "bytes": 1531,
+      "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+      "scalar_leaves": 40,
+      "sha256": "6897979b6394a20b406031e9bcc8fadf5751c7815c996dc177956535679b7791"
+    },
+    "rights": {
+      "bytes": 915,
+      "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+      "scalar_leaves": 32,
+      "sha256": "c6bb0cc30a330fed07a9d0b7f22dea7ce5096f20f1f58a8dc79dddc58059686b"
+    }
+  },
+  "empirical_calibration": false,
+  "formal_result": false,
+  "implementation_boundaries": [
+    "public_bus_demand_is_PD_plus_GS_times_four_fifths_not_business_scale_200",
+    "raw_branch_rating_columns_are_MVA_labelled_numeric_values_used_as_MW_limits_in_declared_DC_model",
+    "public_loader_uses_reference_bus_from_bus_type_and_zero_based_gen_branch_enumeration",
+    "tap_zero_becomes_one_and_phase_shift_degrees_becomes_radians",
+    "rate_B_C_and_generator_ramp_attributes_may_be_retained_but_current_query_uses_RATE_A_and_half_Pmax",
+    "prehistory_f_is_zero_and_Y_uses_prehistory_clean_not_clean_path_array",
+    "runtime_actual_g_and_electrical_feasibility_not_evaluated_by_provenance",
+    "non_YAML_policy_choices_are_not_exhaustively_classified_by_this_leaf_inventory"
+  ],
+  "native_authorized": false,
+  "official_verdict": null,
+  "public_source": {
+    "citation_status": "references_declared_in_pinned_case_docstring_not_reverified_online",
+    "components": [
+      {
+        "claim_limit": "pinned_static_benchmark_not_site_observation_or_ac_dynamic_security",
+        "component": "baseMVA",
+        "literal_sha256": "43b87f618caab482ebe4976c92bcd6ad308b48055f1c27b4c574f3e31d7683e0",
+        "literal_value": 100.0,
+        "origin_class": "public_static_benchmark_data",
+        "shape": [],
+        "source_ref": "PYPOWER/pypower/case24_ieee_rts.py"
+      },
+      {
+        "claim_limit": "pinned_static_benchmark_not_site_observation_or_ac_dynamic_security",
+        "component": "bus",
+        "literal_sha256": "f2296cbee0a244b9a79fbe6d8ce95a677a8d5d2e70b85cddd78181380fd830b4",
+        "origin_class": "public_static_benchmark_data",
+        "shape": [
+          24,
+          13
+        ],
+        "source_ref": "PYPOWER/pypower/case24_ieee_rts.py"
+      },
+      {
+        "claim_limit": "pinned_static_benchmark_not_site_observation_or_ac_dynamic_security",
+        "component": "gen",
+        "literal_sha256": "8c6cf152d8d7b50953a3b7581917da1b9cd0272327cf1f00f31dc46647a826f3",
+        "origin_class": "public_static_benchmark_data",
+        "shape": [
+          33,
+          21
+        ],
+        "source_ref": "PYPOWER/pypower/case24_ieee_rts.py"
+      },
+      {
+        "claim_limit": "pinned_static_benchmark_not_site_observation_or_ac_dynamic_security",
+        "component": "branch",
+        "literal_sha256": "63b52460c0a9c354c4d233693a8bbb8d97b94306a0a23b3f1fbc81f0b45ecff4",
+        "origin_class": "public_static_benchmark_data",
+        "shape": [
+          38,
+          13
+        ],
+        "source_ref": "PYPOWER/pypower/case24_ieee_rts.py"
+      },
+      {
+        "claim_limit": "pinned_static_benchmark_not_site_observation_or_ac_dynamic_security",
+        "component": "gencost",
+        "literal_sha256": "3e702e679d6f4c4dd143ffbc05fbb8d46de89b7b71ce3a774e682c9c98f5763a",
+        "origin_class": "public_static_benchmark_data",
+        "shape": [
+          33,
+          7
+        ],
+        "source_ref": "PYPOWER/pypower/case24_ieee_rts.py"
+      }
+    ],
+    "license_status": "local_source_declares_BSD_style_not_a_new_license_or_online_review",
+    "package": "PYPOWER",
+    "source_sha256": "f61d986bf6f611e40d0a55b013616a40d059fd9700408eb81fcf41e3bbd0e3a6",
+    "version": "5.1.19"
+  },
+  "receipt": null,
+  "reference_pins": {
+    "docs/model_spec/staged_deliverability_minimum_spec_v1.md": {
+      "bytes": 18225,
+      "sha256": "024841d9a13116651d353d1e1f81e1b4bc68de512208e2cb80137e8ca7b77045"
+    },
+    "src/grid/rts24.py": {
+      "bytes": 6109,
+      "sha256": "8c876b13fdc318ca98ab22309bae1aff0b8e56a12894f9aae98c84ed951eb8b5"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/debt_cohorts.py": {
+      "bytes": 6483,
+      "sha256": "d10497c1e6ab5ff573dec8d938b5407a7e28277551b37a1e0d7f79b4241adaab"
+    },
+    "src/staged_deliverability_development_v1.py": {
+      "bytes": 19642,
+      "sha256": "91bbc6aaaac458c8fcb23c11d830a98af99e1d50d42b3c0489246ec1922109e0"
+    },
+    "src/staged_rts24_audit_v1.py": {
+      "bytes": 13053,
+      "sha256": "ac29e1fe38831b7f37fbd56ab7ceafc8d87a619c5c1ba929004f907e21aab911"
+    },
+    "src/staged_rts24_business_necessary_audit_v1.py": {
+      "bytes": 5840,
+      "sha256": "8d8d6d1bb1c3ab94991168f3a02e714f1baa4743fea5cd4c9ef9b819fe197b8c"
+    },
+    "src/staged_rts24_business_necessary_v1.py": {
+      "bytes": 8960,
+      "sha256": "d03377034ab0063cbe39cf744461e99af6336ebf323748bd98cd4c93e07bded6"
+    },
+    "src/staged_rts24_causal_audit_v2.py": {
+      "bytes": 13435,
+      "sha256": "3344d346efc62b1bef8cbeab470eb3696a9818c4f452465394ab33806baf28d3"
+    },
+    "src/staged_rts24_causal_v1.py": {
+      "bytes": 19309,
+      "sha256": "12950e9f0ac321e7297b66aba42efb9e486e477869d767e40cd841665a7b0ead"
+    },
+    "src/staged_rts24_causal_v2.py": {
+      "bytes": 11081,
+      "sha256": "7d22dba435d3e89bd3062a1bd687a6584bb7ddc29c88b6bd723fa357932d1859"
+    },
+    "src/staged_rts24_child_optimality_v1.py": {
+      "bytes": 8256,
+      "sha256": "27071de638bceee8f6e0631ab44d8a9c3cebdba0c169ccd702c9c3392fcde543"
+    },
+    "src/staged_rts24_development_v1.py": {
+      "bytes": 26764,
+      "sha256": "d0c61bda61bfe4d275d2230533f2ecd74fa4fbf480f358c819f8cb86e1ba7add"
+    },
+    "src/staged_rts24_reference_queries_v1.py": {
+      "bytes": 2618,
+      "sha256": "be02760eec2a0d010ec1a2187322edcca14af4774e7e6d0cbf4859a9375adb1a"
+    }
+  },
+  "resource_admission": false,
+  "rows": [
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/early/0"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": ".60",
+      "pointer": "/clean_paths/early/0",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "120"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/early/1"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": ".50",
+      "pointer": "/clean_paths/early/1",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "100"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/early/2"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": ".84",
+      "pointer": "/clean_paths/early/2",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "168"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/early/3"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": ".84",
+      "pointer": "/clean_paths/early/3",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "168"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/early/4"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": ".84",
+      "pointer": "/clean_paths/early/4",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "168"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/early/5"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1.04",
+      "pointer": "/clean_paths/early/5",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "208"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/early/6"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": ".84",
+      "pointer": "/clean_paths/early/6",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "168"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/early/7"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": ".84",
+      "pointer": "/clean_paths/early/7",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "168"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/late/0"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": ".60",
+      "pointer": "/clean_paths/late/0",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "120"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/late/1"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": ".50",
+      "pointer": "/clean_paths/late/1",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "100"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/late/2"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": ".64",
+      "pointer": "/clean_paths/late/2",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "128"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/late/3"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": ".84",
+      "pointer": "/clean_paths/late/3",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "168"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/late/4"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1.04",
+      "pointer": "/clean_paths/late/4",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "208"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/late/5"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1.04",
+      "pointer": "/clean_paths/late/5",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "208"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/late/6"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": ".84",
+      "pointer": "/clean_paths/late/6",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "168"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "development_clean_timing_not_business_pace_holdout_or_empirical_cfe"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/clean_paths/late/7"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": ".84",
+      "pointer": "/clean_paths/late/7",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "168"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "two_hour_deadline_not_empirical_task_sla"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/deadline_lag"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": 2,
+      "pointer": "/deadline_lag",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 2
+      },
+      "semantic_role": "PublicObservation.due_equals_hour_plus_lag",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_nameplate_or_measured_power"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/equipment/0/capacity"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "4/5",
+      "pointer": "/equipment/0/capacity",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW_c",
+        "value": "160"
+      },
+      "semantic_role": "PublicObservation.equipment_online_compute_capacity_and_idle",
+      "unit": "MW_c",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "compressed_stage_time_not_observed_equipment_schedule"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/equipment/0/delay"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": 0,
+      "pointer": "/equipment/0/delay",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 0
+      },
+      "semantic_role": "PublicObservation.equipment_online_compute_capacity_and_idle",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/equipment/0/id"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": "first_batch",
+      "pointer": "/equipment/0/id",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "module_label",
+        "value": "first_batch"
+      },
+      "semantic_role": "PublicObservation.equipment_online_compute_capacity_and_idle",
+      "unit": "module_label",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_nameplate_or_measured_power"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/equipment/0/idle_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "2/25",
+      "pointer": "/equipment/0/idle_mw",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW",
+        "value": "16"
+      },
+      "semantic_role": "PublicObservation.equipment_online_compute_capacity_and_idle",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "compressed_stage_time_not_observed_equipment_schedule"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/equipment/0/lead"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": 0,
+      "pointer": "/equipment/0/lead",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 0
+      },
+      "semantic_role": "PublicObservation.equipment_online_compute_capacity_and_idle",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "compressed_stage_time_not_observed_equipment_schedule"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/equipment/0/start"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": -2,
+      "pointer": "/equipment/0/start",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": -2
+      },
+      "semantic_role": "PublicObservation.equipment_online_compute_capacity_and_idle",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_nameplate_or_measured_power"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/equipment/1/capacity"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "2/5",
+      "pointer": "/equipment/1/capacity",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW_c",
+        "value": "80"
+      },
+      "semantic_role": "PublicObservation.equipment_online_compute_capacity_and_idle",
+      "unit": "MW_c",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "compressed_stage_time_not_observed_equipment_schedule"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/equipment/1/delay"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": 0,
+      "pointer": "/equipment/1/delay",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 0
+      },
+      "semantic_role": "PublicObservation.equipment_online_compute_capacity_and_idle",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/equipment/1/id"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": "second_batch",
+      "pointer": "/equipment/1/id",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "module_label",
+        "value": "second_batch"
+      },
+      "semantic_role": "PublicObservation.equipment_online_compute_capacity_and_idle",
+      "unit": "module_label",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_nameplate_or_measured_power"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/equipment/1/idle_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1/25",
+      "pointer": "/equipment/1/idle_mw",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW",
+        "value": "8"
+      },
+      "semantic_role": "PublicObservation.equipment_online_compute_capacity_and_idle",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "compressed_stage_time_not_observed_equipment_schedule"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/equipment/1/lead"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": 2,
+      "pointer": "/equipment/1/lead",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 2
+      },
+      "semantic_role": "PublicObservation.equipment_online_compute_capacity_and_idle",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "compressed_stage_time_not_observed_equipment_schedule"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/equipment/1/start"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": 0,
+      "pointer": "/equipment/1/start",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 0
+      },
+      "semantic_role": "PublicObservation.equipment_online_compute_capacity_and_idle",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "runtime_window_comes_from_public_config"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/first_hour"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "analysis_design",
+      "original_value": -2,
+      "pointer": "/first_hour",
+      "public_runtime_use": "cross_source_guard",
+      "public_value_record": null,
+      "semantic_role": "window_start_equality_guard",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "implementation_overrides_fraction_to_zero_before_hour_zero"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/flexible_fraction"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": "2/5",
+      "pointer": "/flexible_fraction",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "ratio",
+        "value": "2/5"
+      },
+      "semantic_role": "PublicObservation.flexible_fraction_except_zero_prehistory",
+      "unit": "ratio",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [
+        "saved_business_necessary_audit_checks_scaled_value_equals_firm_plus_conditional"
+      ],
+      "claim_limits": [
+        "legacy_scalar_supply_not_public_network_capacity"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/grid/after"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": "13/10",
+      "pointer": "/grid/after",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [
+        "saved_business_necessary_audit_checks_scaled_value_equals_firm_plus_conditional"
+      ],
+      "claim_limits": [
+        "legacy_scalar_supply_not_public_network_capacity"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/grid/before"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": "4/5",
+      "pointer": "/grid/before",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "commissioning_uses_public_project_fields_not_legacy_scalar_network"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/grid/delays/delayed"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "mechanism_assumption",
+      "original_value": 2,
+      "pointer": "/grid/delays/delayed",
+      "public_runtime_use": "cross_source_guard",
+      "public_value_record": null,
+      "semantic_role": "load_fixture_equality_guard_against_public_project_timing",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "commissioning_uses_public_project_fields_not_legacy_scalar_network"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/grid/delays/on_time"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "mechanism_assumption",
+      "original_value": 0,
+      "pointer": "/grid/delays/on_time",
+      "public_runtime_use": "cross_source_guard",
+      "public_value_record": null,
+      "semantic_role": "load_fixture_equality_guard_against_public_project_timing",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "commissioning_uses_public_project_fields_not_legacy_scalar_network"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/grid/lead"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "mechanism_assumption",
+      "original_value": 2,
+      "pointer": "/grid/lead",
+      "public_runtime_use": "cross_source_guard",
+      "public_value_record": null,
+      "semantic_role": "load_fixture_equality_guard_against_public_project_timing",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "commissioning_uses_public_project_fields_not_legacy_scalar_network"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/grid/start"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "mechanism_assumption",
+      "original_value": 0,
+      "pointer": "/grid/start",
+      "public_runtime_use": "cross_source_guard",
+      "public_value_record": null,
+      "semantic_role": "load_fixture_equality_guard_against_public_project_timing",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_scalar_event_not_public_actual_outage"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/grid/temporary_hour"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": 1,
+      "pointer": "/grid/temporary_hour",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_scalar_supply_not_public_network_capacity"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/grid/temporary_limit"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": "5/8",
+      "pointer": "/grid/temporary_limit",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "runtime_window_comes_from_public_config"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/last_hour"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "analysis_design",
+      "original_value": 7,
+      "pointer": "/last_hour",
+      "public_runtime_use": "cross_source_guard",
+      "public_value_record": null,
+      "semantic_role": "observation_end_minus_one_equality_guard",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_equipment_measurement_or_service_contract"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/alpha"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": "4/5",
+      "pointer": "/parameters/alpha",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "ratio",
+        "value": "4/5"
+      },
+      "semantic_role": "Fixture.parameters.alpha",
+      "unit": "ratio",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "exact_scaling_does_not_upgrade_source_class"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/auxiliary_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1/40",
+      "pointer": "/parameters/auxiliary_mw",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW",
+        "value": "5"
+      },
+      "semantic_role": "Fixture.parameters.auxiliary_mw",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_equipment_measurement_or_service_contract"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/beta"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1",
+      "pointer": "/parameters/beta",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "MW_per_MW_c",
+        "value": "1"
+      },
+      "semantic_role": "Fixture.parameters.beta",
+      "unit": "MW_per_MW_c",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "exact_scaling_does_not_upgrade_source_class"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/call_ramp"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1/5",
+      "pointer": "/parameters/call_ramp",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW_c_per_hour",
+        "value": "40"
+      },
+      "semantic_role": "Fixture.parameters.call_ramp",
+      "unit": "MW_c_per_hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "exact_scaling_does_not_upgrade_source_class"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/capacity"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1/5",
+      "pointer": "/parameters/capacity",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW_c",
+        "value": "40"
+      },
+      "semantic_role": "Fixture.parameters.capacity_D",
+      "unit": "MW_c",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_equipment_measurement_or_service_contract"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/eta"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1",
+      "pointer": "/parameters/eta",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "work_completion_ratio",
+        "value": "1"
+      },
+      "semantic_role": "Fixture.parameters.eta",
+      "unit": "work_completion_ratio",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_equipment_measurement_or_service_contract"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/facility_factor"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": "5/4",
+      "pointer": "/parameters/facility_factor",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "ratio",
+        "value": "5/4"
+      },
+      "semantic_role": "Fixture.parameters.facility_factor",
+      "unit": "ratio",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "exact_scaling_does_not_upgrade_source_class"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/fixed_headroom"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1/5",
+      "pointer": "/parameters/fixed_headroom",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW_c",
+        "value": "40"
+      },
+      "semantic_role": "Fixture.parameters.fixed_headroom",
+      "unit": "MW_c",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "exact_scaling_does_not_upgrade_source_class"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/max_call_energy"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "2/5",
+      "pointer": "/parameters/max_call_energy",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh_c",
+        "value": "80"
+      },
+      "semantic_role": "Fixture.parameters.max_call_energy",
+      "unit": "MWh_c",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "exact_scaling_does_not_upgrade_source_class"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/max_debt"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "2/5",
+      "pointer": "/parameters/max_debt",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh_c",
+        "value": "80"
+      },
+      "semantic_role": "Fixture.parameters.max_debt",
+      "unit": "MWh_c",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_equipment_measurement_or_service_contract"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/max_duration"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": 1,
+      "pointer": "/parameters/max_duration",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 1
+      },
+      "semantic_role": "Fixture.parameters.max_duration",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_equipment_measurement_or_service_contract"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/max_events"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": 2,
+      "pointer": "/parameters/max_events",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "event_count",
+        "value": 2
+      },
+      "semantic_role": "Fixture.parameters.max_events",
+      "unit": "event_count",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "exact_scaling_does_not_upgrade_source_class"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/max_recovery"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1/5",
+      "pointer": "/parameters/max_recovery",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW_c",
+        "value": "40"
+      },
+      "semantic_role": "Fixture.parameters.max_recovery",
+      "unit": "MW_c",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_equipment_measurement_or_service_contract"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/parameters/minimum_rest"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": 0,
+      "pointer": "/parameters/minimum_rest",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 0
+      },
+      "semantic_role": "Fixture.parameters.minimum_rest",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "prehistory_only_not_clean_path_indexing"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/prehistory_clean"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "3/5",
+      "pointer": "/prehistory_clean",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "120"
+      },
+      "semantic_role": "PublicObservation.external_clean_mwh_by_declared_hour",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "scope_label_not_scientific_or_empirical_value"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/source_class"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "scope_metadata",
+      "original_value": "mechanism_assumption",
+      "pointer": "/source_class",
+      "public_runtime_use": "bound_only",
+      "public_value_record": null,
+      "semantic_role": "raw_source_binding_only",
+      "unit": "declaration",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [
+        "saved_business_necessary_audit_development_status_guard"
+      ],
+      "claim_limits": [
+        "scope_label_not_scientific_or_empirical_value"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/status"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "scope_metadata",
+      "original_value": "DRAFT_NONAUTHORITATIVE",
+      "pointer": "/status",
+      "public_runtime_use": "bound_only",
+      "public_value_record": null,
+      "semantic_role": "raw_source_binding_only",
+      "unit": "declaration",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "one_development_workload_shape_not_fast_slow_business_paths"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/workload/after"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "7/10",
+      "pointer": "/workload/after",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW_c",
+        "value": "140"
+      },
+      "semantic_role": "PublicObservation.workload_or_change_hour",
+      "unit": "MW_c",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "one_development_workload_shape_not_fast_slow_business_paths"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/workload/before"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1/2",
+      "pointer": "/workload/before",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW_c",
+        "value": "100"
+      },
+      "semantic_role": "PublicObservation.workload_or_change_hour",
+      "unit": "MW_c",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "compressed_business_change_not_observed_ramp"
+      ],
+      "config": "business",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+        "pointer": "/workload/change_hour"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": 3,
+      "pointer": "/workload/change_hour",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 3
+      },
+      "semantic_role": "PublicObservation.workload_or_change_hour",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "synthetic_actual_path_not_observed_outage_or_frequency"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/actual_event/duration_hours"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "synthetic_event",
+      "original_value": 1,
+      "pointer": "/actual_event/duration_hours",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 1
+      },
+      "semantic_role": "public_config.actual_event.duration_hours",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "synthetic_actual_path_not_observed_outage_or_frequency"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/actual_event/hour"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "synthetic_event",
+      "original_value": 1,
+      "pointer": "/actual_event/hour",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 1
+      },
+      "semantic_role": "public_config.actual_event.hour",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "synthetic_actual_path_not_observed_outage_or_frequency",
+        "guarded_label_runtime_uses_selected_zero_without_interpreting_string"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/actual_event/rule"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "synthetic_event",
+      "original_value": "lowest_selected_branch_index",
+      "pointer": "/actual_event/rule",
+      "public_runtime_use": "fixed_implementation_guard",
+      "public_value_record": null,
+      "semantic_role": "public_config.actual_event.rule",
+      "unit": "selection_rule",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "exact_scaling_does_not_upgrade_source_class"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/business/dimensional_scale"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_scaling_choice",
+      "original_value": "200",
+      "pointer": "/business/dimensional_scale",
+      "public_runtime_use": "transform_control",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "ratio",
+        "value": "200"
+      },
+      "semantic_role": "public_config.business.dimensional_scale",
+      "unit": "ratio",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "source_pin_not_site_observation_or_numeric_calibration"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/business/fixture"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "binding_metadata",
+      "original_value": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+      "pointer": "/business/fixture",
+      "public_runtime_use": "source_binding",
+      "public_value_record": null,
+      "semantic_role": "public_config.business.fixture",
+      "unit": "source_reference",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "source_pin_not_site_observation_or_numeric_calibration"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/business/sha256"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "binding_metadata",
+      "original_value": "5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5",
+      "pointer": "/business/sha256",
+      "public_runtime_use": "source_binding",
+      "public_value_record": null,
+      "semantic_role": "public_config.business.sha256",
+      "unit": "source_reference",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "source_pin_not_site_observation_or_numeric_calibration"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/case/name"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "binding_metadata",
+      "original_value": "case24_ieee_rts",
+      "pointer": "/case/name",
+      "public_runtime_use": "source_binding",
+      "public_value_record": null,
+      "semantic_role": "public_config.case.name",
+      "unit": "source_reference",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "source_pin_not_site_observation_or_numeric_calibration"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/case/package"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "binding_metadata",
+      "original_value": "PYPOWER",
+      "pointer": "/case/package",
+      "public_runtime_use": "source_binding",
+      "public_value_record": null,
+      "semantic_role": "public_config.case.package",
+      "unit": "source_reference",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "source_pin_not_site_observation_or_numeric_calibration"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/case/sha256"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "binding_metadata",
+      "original_value": "f61d986bf6f611e40d0a55b013616a40d059fd9700408eb81fcf41e3bbd0e3a6",
+      "pointer": "/case/sha256",
+      "public_runtime_use": "source_binding",
+      "public_value_record": null,
+      "semantic_role": "public_config.case.sha256",
+      "unit": "source_reference",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "source_pin_not_site_observation_or_numeric_calibration"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/case/version"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "binding_metadata",
+      "original_value": "5.1.19",
+      "pointer": "/case/version",
+      "public_runtime_use": "source_binding",
+      "public_value_record": null,
+      "semantic_role": "public_config.case.version",
+      "unit": "source_reference",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "declared_case_subset_not_full_n_minus_1_or_event_probability"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/contingencies/branches"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "topology_selection_rule",
+      "original_value": "all_non_islanding_in_service",
+      "pointer": "/contingencies/branches",
+      "public_runtime_use": "adopted_selection_rule",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "selection_rule",
+        "value": "all_non_islanding_in_service"
+      },
+      "semantic_role": "public_config.contingencies.branches",
+      "unit": "selection_rule",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "static_provenance_does_not_recompute_topology_or_solve"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/contingencies/expected_excluded_branches/0"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "derived_topology_identity",
+      "original_value": 10,
+      "pointer": "/contingencies/expected_excluded_branches/0",
+      "public_runtime_use": "derived_identity_guard",
+      "public_value_record": null,
+      "semantic_role": "public_config.contingencies.expected_excluded_branches.0",
+      "unit": "branch_index",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "static_provenance_does_not_recompute_topology_or_solve"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/contingencies/expected_excluded_generators/0"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "derived_topology_identity",
+      "original_value": 14,
+      "pointer": "/contingencies/expected_excluded_generators/0",
+      "public_runtime_use": "derived_identity_guard",
+      "public_value_record": null,
+      "semantic_role": "public_config.contingencies.expected_excluded_generators.0",
+      "unit": "generator_index",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "declared_case_subset_not_full_n_minus_1_or_event_probability"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/contingencies/generators"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "topology_selection_rule",
+      "original_value": "all_in_service_positive_pmax",
+      "pointer": "/contingencies/generators",
+      "public_runtime_use": "adopted_selection_rule",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "selection_rule",
+        "value": "all_in_service_positive_pmax"
+      },
+      "semantic_role": "public_config.contingencies.generators",
+      "unit": "selection_rule",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "method_declaration_not_executed_result"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/methods/0"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "method_or_policy_assumption",
+      "original_value": "instantaneous",
+      "pointer": "/methods/0",
+      "public_runtime_use": "method_set_guard",
+      "public_value_record": null,
+      "semantic_role": "public_config.methods.0",
+      "unit": "method_label",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "method_declaration_not_executed_result"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/methods/1"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "method_or_policy_assumption",
+      "original_value": "fixed_headroom",
+      "pointer": "/methods/1",
+      "public_runtime_use": "method_set_guard",
+      "public_value_record": null,
+      "semantic_role": "public_config.methods.1",
+      "unit": "method_label",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "method_declaration_not_executed_result"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/methods/2"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "method_or_policy_assumption",
+      "original_value": "full_temporal",
+      "pointer": "/methods/2",
+      "public_runtime_use": "method_set_guard",
+      "public_value_record": null,
+      "semantic_role": "public_config.methods.2",
+      "unit": "method_label",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "only_public_background_PD_plus_GS_is_multiplied_not_generation_or_ratings"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/network/background_load_multiplier"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": "4/5",
+      "pointer": "/network/background_load_multiplier",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "ratio",
+        "value": "4/5"
+      },
+      "semantic_role": "public_config.network.background_load_multiplier",
+      "unit": "ratio",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "static_dc_policy_not_dynamic_response_certification"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/network/dispatch_policy"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "method_or_policy_assumption",
+      "original_value": "independent_hourly_regularized_economic_base_with_bounded_same_hour_corrective",
+      "pointer": "/network/dispatch_policy",
+      "public_runtime_use": "fixed_implementation_guard",
+      "public_value_record": null,
+      "semantic_role": "public_config.network.dispatch_policy",
+      "unit": "enum",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "declared_regularized_objective_not_strict_lexicographic_original_cost"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/network/economic_regularization_quadratic"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "method_or_policy_assumption",
+      "original_value": "1/100000000",
+      "pointer": "/network/economic_regularization_quadratic",
+      "public_runtime_use": "guard_matches_fixed_query_constant",
+      "public_value_record": null,
+      "semantic_role": "public_config.network.economic_regularization_quadratic",
+      "unit": "objective_unit_per_MW_squared",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_public_case_native_data_center_location"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/network/poi_bus"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "synthetic_site_or_project_selection",
+      "original_value": 8,
+      "pointer": "/network/poi_bus",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "bus_id",
+        "value": 8
+      },
+      "semantic_role": "public_config.network.poi_bus",
+      "unit": "bus_id",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "same_hour_corrective_not_interhour_ramp_or_unit_commitment"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/network/redispatch_fraction_of_pmax"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "method_or_policy_assumption",
+      "original_value": "1/2",
+      "pointer": "/network/redispatch_fraction_of_pmax",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "ratio",
+        "value": "1/2"
+      },
+      "semantic_role": "public_config.network.redispatch_fraction_of_pmax",
+      "unit": "ratio",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "static_same_hour_not_dynamic_or_service_certification"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/network/response_model"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "method_or_policy_assumption",
+      "original_value": "static_hourly_declared_branch_or_generator_outage_same_hour_redispatch",
+      "pointer": "/network/response_model",
+      "public_runtime_use": "effective_response_label",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "enum",
+        "value": "static_hourly_declared_branch_or_generator_outage_same_hour_redispatch"
+      },
+      "semantic_role": "public_config.network.response_model",
+      "unit": "enum",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "static_dc_policy_not_dynamic_response_certification"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/network/sustained_rating"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "method_or_policy_assumption",
+      "original_value": "rate_a",
+      "pointer": "/network/sustained_rating",
+      "public_runtime_use": "fixed_implementation_guard",
+      "public_value_record": null,
+      "semantic_role": "public_config.network.sustained_rating",
+      "unit": "enum",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_observed_candidate_project"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/project/branches/0"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "synthetic_site_or_project_selection",
+      "original_value": 11,
+      "pointer": "/project/branches/0",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "branch_index",
+        "value": 11
+      },
+      "semantic_role": "public_config.project.branches.0",
+      "unit": "branch_index",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "not_observed_candidate_project"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/project/branches/1"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "synthetic_site_or_project_selection",
+      "original_value": 12,
+      "pointer": "/project/branches/1",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "branch_index",
+        "value": 12
+      },
+      "semantic_role": "public_config.project.branches.1",
+      "unit": "branch_index",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "compressed_stage_time_not_real_construction_or_delay_probability"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/project/delays/delayed"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "synthetic_site_or_project_selection",
+      "original_value": 2,
+      "pointer": "/project/delays/delayed",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 2
+      },
+      "semantic_role": "public_config.project.delays.delayed",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "compressed_stage_time_not_real_construction_or_delay_probability"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/project/delays/on_time"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "synthetic_site_or_project_selection",
+      "original_value": 0,
+      "pointer": "/project/delays/on_time",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 0
+      },
+      "semantic_role": "public_config.project.delays.on_time",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "compressed_stage_time_not_real_construction_or_delay_probability"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/project/lead_hours"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "synthetic_site_or_project_selection",
+      "original_value": 2,
+      "pointer": "/project/lead_hours",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 2
+      },
+      "semantic_role": "public_config.project.lead_hours",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "direct_increment_not_multiplied_by_200"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/project/rate_a_increase_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "synthetic_site_or_project_selection",
+      "original_value": "100",
+      "pointer": "/project/rate_a_increase_mw",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "MW_DC_limit_increment",
+        "value": "100"
+      },
+      "semantic_role": "public_config.project.rate_a_increase_mw",
+      "unit": "MW_DC_limit_increment",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "rate_c_changes_network_identity_but_active_dc_constraint_uses_rate_a"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/project/rate_c_increase_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "synthetic_site_or_project_selection",
+      "original_value": "100",
+      "pointer": "/project/rate_c_increase_mw",
+      "public_runtime_use": "retained_network_attribute_not_active_limit",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "MW_labelled_attribute_increment",
+        "value": "100"
+      },
+      "semantic_role": "public_config.project.rate_c_increase_mw",
+      "unit": "MW_labelled_attribute_increment",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "compressed_stage_time_not_real_construction_or_delay_probability"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/project/start_hour"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "synthetic_site_or_project_selection",
+      "original_value": 0,
+      "pointer": "/project/start_hour",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 0
+      },
+      "semantic_role": "public_config.project.start_hour",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "source_pin_not_site_observation_or_numeric_calibration"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/rights/fixture"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "binding_metadata",
+      "original_value": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+      "pointer": "/rights/fixture",
+      "public_runtime_use": "source_binding",
+      "public_value_record": null,
+      "semantic_role": "public_config.rights.fixture",
+      "unit": "source_reference",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "source_pin_not_site_observation_or_numeric_calibration"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/rights/sha256"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "binding_metadata",
+      "original_value": "c6bb0cc30a330fed07a9d0b7f22dea7ce5096f20f1f58a8dc79dddc58059686b",
+      "pointer": "/rights/sha256",
+      "public_runtime_use": "source_binding",
+      "public_value_record": null,
+      "semantic_role": "public_config.rights.sha256",
+      "unit": "source_reference",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "scope_label_not_scientific_or_empirical_value"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/source_class"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "scope_metadata",
+      "original_value": "public_static_dc_with_synthetic_stage_and_business_assumptions",
+      "pointer": "/source_class",
+      "public_runtime_use": "scope_guard",
+      "public_value_record": null,
+      "semantic_role": "public_config.source_class",
+      "unit": "declaration",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [
+        "saved_business_necessary_audit_development_status_guard"
+      ],
+      "claim_limits": [
+        "scope_label_not_scientific_or_empirical_value"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/status"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "scope_metadata",
+      "original_value": "DRAFT_NONAUTHORITATIVE",
+      "pointer": "/status",
+      "public_runtime_use": "scope_guard",
+      "public_value_record": null,
+      "semantic_role": "public_config.status",
+      "unit": "declaration",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "arrival_plus_uncalibrated_source_lag_without_observation_clipping"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/time/deadline_rule"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "method_or_policy_assumption",
+      "original_value": "arrival_plus_source_lag_without_observation_clipping",
+      "pointer": "/time/deadline_rule",
+      "public_runtime_use": "fixed_implementation_guard",
+      "public_value_record": null,
+      "semantic_role": "public_config.time.deadline_rule",
+      "unit": "enum",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "finite_observation_does_not_clip_task_deadlines"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/time/first_hour"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "analysis_design",
+      "original_value": -2,
+      "pointer": "/time/first_hour",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": -2
+      },
+      "semantic_role": "public_config.time.first_hour",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "finite_observation_does_not_clip_task_deadlines"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/time/observation_end"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "analysis_design",
+      "original_value": 8,
+      "pointer": "/time/observation_end",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 8
+      },
+      "semantic_role": "public_config.time.observation_end",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "finite_observation_does_not_clip_task_deadlines"
+      ],
+      "config": "public",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+        "pointer": "/time/registration_end"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "analysis_design",
+      "original_value": 4,
+      "pointer": "/time/registration_end",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 4
+      },
+      "semantic_role": "public_config.time.registration_end",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [
+        "saved_business_necessary_audit_business_path_equality_guard"
+      ],
+      "claim_limits": [
+        "path_not_dereferenced_by_public_loader"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/business_fixture"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "binding_metadata",
+      "original_value": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+      "pointer": "/business_fixture",
+      "public_runtime_use": "bound_only",
+      "public_value_record": null,
+      "semantic_role": "raw_source_binding_only",
+      "unit": "source_path",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "matches_public_business_source_digest_not_numeric_evidence"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/business_sha256"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "binding_metadata",
+      "original_value": "5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5",
+      "pointer": "/business_sha256",
+      "public_runtime_use": "cross_source_guard",
+      "public_value_record": null,
+      "semantic_role": "source_section_business_sha256_equality_guard",
+      "unit": "source_digest",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/actual_outages/1"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": 0,
+      "pointer": "/network/actual_outages/1",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "branch_index",
+      "yaml_leaf_key_kind": "int"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/angle_limit_rad"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": "1/10",
+      "pointer": "/network/angle_limit_rad",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "radian",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/background_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": "1/10",
+      "pointer": "/network/background_mw",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/base_mva"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": "100",
+      "pointer": "/network/base_mva",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "MVA",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [
+        "saved_business_necessary_audit_three_source_project_timing_guard"
+      ],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/delays/delayed"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": 2,
+      "pointer": "/network/delays/delayed",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [
+        "saved_business_necessary_audit_three_source_project_timing_guard"
+      ],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/delays/on_time"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": 0,
+      "pointer": "/network/delays/on_time",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/generator_max_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": "2",
+      "pointer": "/network/generator_max_mw",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/hourly_generator_ramp_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": "2",
+      "pointer": "/network/hourly_generator_ramp_mw",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "MW_per_hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/line_rating_after_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": "1",
+      "pointer": "/network/line_rating_after_mw",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/line_rating_before_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": "29/40",
+      "pointer": "/network/line_rating_before_mw",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/poi_bus"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": 2,
+      "pointer": "/network/poi_bus",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "bus_id",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [
+        "saved_business_necessary_audit_three_source_project_timing_guard"
+      ],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/project_lead"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": 2,
+      "pointer": "/network/project_lead",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [
+        "saved_business_necessary_audit_three_source_project_timing_guard"
+      ],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/project_start"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": 0,
+      "pointer": "/network/project_start",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/reactance_pu"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": "1/10",
+      "pointer": "/network/reactance_pu",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "per_unit",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/selected_outages/0"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": 0,
+      "pointer": "/network/selected_outages/0",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "branch_index",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/selected_outages/1"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": 1,
+      "pointer": "/network/selected_outages/1",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "branch_index",
+      "yaml_leaf_key_kind": "index"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "legacy_two_bus_field_not_used_in_public_successor"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/network/source_bus"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": 1,
+      "pointer": "/network/source_bus",
+      "public_runtime_use": "not_adopted",
+      "public_value_record": null,
+      "semantic_role": "no_runtime_value_from_this_field",
+      "unit": "bus_id",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "access_rights_not_public_network_derived_or_project_contract"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/rights/conditional_after_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1/2",
+      "pointer": "/rights/conditional_after_mw",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW",
+        "value": "100"
+      },
+      "semantic_role": "Fixture.rights_before_or_after",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "access_rights_not_public_network_derived_or_project_contract"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/rights/conditional_before_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1/5",
+      "pointer": "/rights/conditional_before_mw",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW",
+        "value": "40"
+      },
+      "semantic_role": "Fixture.rights_before_or_after",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "access_rights_not_public_network_derived_or_project_contract"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/rights/firm_after_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "4/5",
+      "pointer": "/rights/firm_after_mw",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW",
+        "value": "160"
+      },
+      "semantic_role": "Fixture.rights_before_or_after",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "access_rights_not_public_network_derived_or_project_contract"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/rights/firm_before_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "3/5",
+      "pointer": "/rights/firm_before_mw",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW",
+        "value": "120"
+      },
+      "semantic_role": "Fixture.rights_before_or_after",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "scope_label_not_scientific_or_empirical_value"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/source_class"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "scope_metadata",
+      "original_value": "mechanism_assumption",
+      "pointer": "/source_class",
+      "public_runtime_use": "bound_only",
+      "public_value_record": null,
+      "semantic_role": "raw_source_binding_only",
+      "unit": "declaration",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [
+        "saved_business_necessary_audit_development_status_guard"
+      ],
+      "claim_limits": [
+        "scope_label_not_scientific_or_empirical_value"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/status"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "scope_metadata",
+      "original_value": "DRAFT_NONAUTHORITATIVE",
+      "pointer": "/status",
+      "public_runtime_use": "bound_only",
+      "public_value_record": null,
+      "semantic_role": "raw_source_binding_only",
+      "unit": "declaration",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "scaled_envelope_not_dynamic_response_or_service_certification"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/x_envelope/max_call_mw"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1/2",
+      "pointer": "/x_envelope/max_call_mw",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW",
+        "value": "100"
+      },
+      "semantic_role": "Fixture.x_envelope_json.max_call_mw",
+      "unit": "MW",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "scaled_envelope_not_dynamic_response_or_service_certification"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/x_envelope/max_duration_hours"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": 1,
+      "pointer": "/x_envelope/max_duration_hours",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 1
+      },
+      "semantic_role": "Fixture.x_envelope_json.max_duration_hours",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "scaled_envelope_not_dynamic_response_or_service_certification"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/x_envelope/max_energy_mwh"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1/2",
+      "pointer": "/x_envelope/max_energy_mwh",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MWh",
+        "value": "100"
+      },
+      "semantic_role": "Fixture.x_envelope_json.max_energy_mwh",
+      "unit": "MWh",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "scaled_envelope_not_dynamic_response_or_service_certification"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/x_envelope/max_events"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": 2,
+      "pointer": "/x_envelope/max_events",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "event_count",
+        "value": 2
+      },
+      "semantic_role": "Fixture.x_envelope_json.max_events",
+      "unit": "event_count",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "scaled_envelope_not_dynamic_response_or_service_certification"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/x_envelope/max_ramp_mw_per_hour"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "multiply_scale",
+      "origin_class": "mechanism_assumption",
+      "original_value": "1/2",
+      "pointer": "/x_envelope/max_ramp_mw_per_hour",
+      "public_runtime_use": "adopted_scaled_value",
+      "public_value_record": {
+        "factor": {
+          "config": "public",
+          "pointer": "/business/dimensional_scale"
+        },
+        "kind": "exact_scaled_derivation",
+        "unit": "MW_per_hour",
+        "value": "100"
+      },
+      "semantic_role": "Fixture.x_envelope_json.max_ramp_mw_per_hour",
+      "unit": "MW_per_hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "mechanism_value_not_empirical_calibration",
+        "scaled_envelope_not_dynamic_response_or_service_certification"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/x_envelope/minimum_rest_hours"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "identity",
+      "origin_class": "mechanism_assumption",
+      "original_value": 0,
+      "pointer": "/x_envelope/minimum_rest_hours",
+      "public_runtime_use": "adopted_value",
+      "public_value_record": {
+        "kind": "unchanged_input",
+        "unit": "hour",
+        "value": 0
+      },
+      "semantic_role": "Fixture.x_envelope_json.minimum_rest_hours",
+      "unit": "hour",
+      "yaml_leaf_key_kind": "str"
+    },
+    {
+      "auxiliary_uses": [],
+      "claim_limits": [
+        "retained_as_source_response_model_overridden_by_public_effective_response_model"
+      ],
+      "config": "rights",
+      "direct_source_ref": {
+        "path": "configs/staged_deliverability_network_v1.DRAFT.yaml",
+        "pointer": "/x_envelope/response_model"
+      },
+      "empirical_status": "not_an_empirical_calibration",
+      "operation": "none",
+      "origin_class": "legacy_mechanism_assumption",
+      "original_value": "preventive_hourly_declared_line_outage",
+      "pointer": "/x_envelope/response_model",
+      "public_runtime_use": "source_label_only",
+      "public_value_record": null,
+      "semantic_role": "legacy_label_retained_as_source_response_model",
+      "unit": "enum",
+      "yaml_leaf_key_kind": "str"
+    }
+  ],
+  "schema": "staged_rts24_parameter_provenance_v1",
+  "scope": "three_frozen_yaml_leaf_fields_and_five_public_literal_groups",
+  "seal": null,
+  "selected_consumer_coverage": {
+    "checked_selected_import_links": 5,
+    "independent_audit_parameter_reads": [
+      "alpha",
+      "auxiliary_mw",
+      "beta",
+      "call_ramp",
+      "capacity",
+      "eta",
+      "facility_factor",
+      "fixed_headroom",
+      "max_call_energy",
+      "max_debt",
+      "max_duration",
+      "max_events",
+      "max_recovery",
+      "minimum_rest"
+    ],
+    "limits": "selected_lexical_witnesses_not_execution_dataflow_or_full_environment_closure",
+    "methods": [
+      "instantaneous",
+      "fixed_headroom",
+      "full_temporal"
+    ],
+    "parameters_fields": [
+      "alpha",
+      "auxiliary_mw",
+      "beta",
+      "call_ramp",
+      "capacity",
+      "eta",
+      "facility_factor",
+      "fixed_headroom",
+      "max_call_energy",
+      "max_debt",
+      "max_duration",
+      "max_events",
+      "max_recovery",
+      "minimum_rest"
+    ],
+    "policy_parameter_reads": {
+      "src/staged_deliverability_development_v1.py": [
+        "auxiliary_mw",
+        "beta",
+        "facility_factor",
+        "minimum_rest"
+      ],
+      "src/staged_rts24_causal_v1.py": [
+        "alpha",
+        "call_ramp",
+        "capacity",
+        "eta",
+        "fixed_headroom",
+        "max_call_energy",
+        "max_debt",
+        "max_duration",
+        "max_events",
+        "max_recovery",
+        "minimum_rest"
+      ],
+      "src/staged_rts24_reference_queries_v1.py": [
+        "auxiliary_mw",
+        "beta",
+        "facility_factor"
+      ]
+    },
+    "x_envelope_reads": {
+      "src/staged_rts24_causal_audit_v2.py": [
+        "max_call_mw",
+        "max_duration_hours",
+        "max_energy_mwh",
+        "max_events",
+        "max_ramp_mw_per_hour",
+        "minimum_rest_hours"
+      ],
+      "src/staged_rts24_causal_v2.py": [
+        "max_call_mw",
+        "max_duration_hours",
+        "max_energy_mwh",
+        "max_events",
+        "max_ramp_mw_per_hour",
+        "minimum_rest_hours"
+      ]
+    }
+  }
+}

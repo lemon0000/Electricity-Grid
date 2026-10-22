@@ -20,3 +20,9 @@
 可复用[合同证据表](contract_evidence_matrix.csv)、[文献矩阵](literature_matrix.csv)及[建设证据表](construction_evidence_20261021.csv)的既有概念支持，但须与数值来源分列。上述表按各自核验时点保留，本轮未重查外部页面，不重新认证其现时有效性。
 
 该登记可先做纯静态覆盖与绑定检查，不需要native或新外部下载。它只能关闭“来源分类是否逐字段可追溯”的缺口；真实业务快慢路径、设备/任务校准、合同、清洁归属、延期率及同址联合观测仍需相应证据。公共代表成本、C/D/E预算和P1专项授权保持开放。
+
+## 后续完成状态：当前三份YAML逐字段登记
+
+以上为发现时的缺口记录，保留其时点含义。[来源sidecar](staged_rts24_parameter_provenance_v1.json)及[说明](staged_rts24_parameter_provenance_v1.md)现覆盖132个配置叶字段、37项精确缩放、13个实现/规则引用SHA及公共case五组字面量来源；128项普通检查和一次只读静态CLI通过，见[报告](../../results/tables/staged_rts24_parameter_provenance_v1_non_authoritative/validation_report.md)。原三份YAML和运行实现字节未改。
+
+该完成状态限于当前配置字段追溯，不穷尽公共数组单元、非YAML策略选择或全部辅助审计消费。原文引用及许可只是固定本机case源码声明，本轮未外查。机制参数、SLA、权益与清洁归属、延期/事故概率仍未经验校准；公共整链成本、D/E数值计划/选择/留出及P1专项授权继续开放。
