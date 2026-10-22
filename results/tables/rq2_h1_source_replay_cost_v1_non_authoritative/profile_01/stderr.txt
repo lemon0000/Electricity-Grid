@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_h1_source_replay_cost_v1_non_authoritative\profile_saved_v1.py", line 177, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_h1_source_replay_cost_v1_non_authoritative\profile_saved_v1.py", line 142, in main
+    stats = pstats.Stats(profiler)
+            ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\pstats.py", line 115, in __init__
+    self.init(arg)
+  File "D:\Miniconda3\envs\compute\Lib\pstats.py", line 129, in init
+    self.load_stats(arg)
+  File "D:\Miniconda3\envs\compute\Lib\pstats.py", line 155, in load_stats
+    raise TypeError("Cannot create or construct a %r object from %r"
+TypeError: Cannot create or construct a <class 'pstats.Stats'> object from <cProfile.Profile object at 0x00000178504C6510>

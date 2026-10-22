@@ -1,0 +1,169 @@
+{
+  "exit_code": 0,
+  "worker": {
+    "injection_reached": true,
+    "injection_count": 1,
+    "injection_position": {
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_historical_batch_development_v3.py",
+      "function": "_validate_all_packets",
+      "line": 109,
+      "lasti": 0,
+      "event": "one registered trace landmark"
+    },
+    "instrumentation_errors": [],
+    "exception_chain": [
+      {
+        "type": "ValueError",
+        "text": "H1 current input drift",
+        "notes": []
+      }
+    ],
+    "primary_error_type": "ValueError",
+    "rejection_trace": [
+      {
+        "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_saved_reader_failure_v1_non_authoritative\\fault_worker_v1.py",
+        "function": "main",
+        "line": 321
+      },
+      {
+        "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_historical_batch_development_v3.py",
+        "function": "replay_prefixes",
+        "line": 345
+      },
+      {
+        "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_historical_batch_development_v3.py",
+        "function": "_validate_all_packets",
+        "line": 113
+      },
+      {
+        "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\normal_h1_source.py",
+        "function": "validate_current",
+        "line": 231
+      }
+    ],
+    "primary_error_filename": "None",
+    "primary_error_text": "H1 current input drift",
+    "same_injected_primary_object": null,
+    "primary_errno": null,
+    "primary_winerror": null,
+    "native_sharing_conflict_code": null,
+    "actual_Reader_retained": true,
+    "Reader_closed": true,
+    "Reader_owner_fields_cleared": true,
+    "constructor_capture_cleared": true,
+    "captured_cleared": true,
+    "all_packets_cleared": true,
+    "seen_hours_cleared": true,
+    "outer_ReadViews_closed": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "actual_inner_states": {
+      "_journal": {
+        "type": "experiments.h1_historical_parent_prefix_development_v1.PrefixJournal",
+        "closed": true,
+        "nested_ReadView_closed": true
+      },
+      "_anchor": {
+        "type": "experiments.h1_historical_parent_prefix_development_v1.PrefixAnchor",
+        "closed": true,
+        "nested_ReadView_closed": true
+      },
+      "_root_lease": {
+        "type": "experiments.h1_parent_snapshot_development_v1.ReadView",
+        "closed": true
+      }
+    },
+    "close_calls": [
+      "frozen_parent",
+      "_journal",
+      "_anchor",
+      "_root_lease",
+      "outer_3",
+      "outer_2",
+      "outer_1",
+      "outer_0"
+    ],
+    "observed_replay_call_counts": {
+      "job_inspections": 4,
+      "stage_inspections": 20,
+      "normal_after_returns": 2
+    },
+    "inner_object_ids": {
+      "_journal": 1798366222320,
+      "_anchor": 1798391849680,
+      "_root_lease": 1798391850448
+    },
+    "outer_object_ids": [
+      1798388037440,
+      1798388036480,
+      1798388037920,
+      1798388036192
+    ],
+    "packet_digests_before_after": [
+      "331a7516d5bfc37cc66aa9d66ab026b3bc4606f7689355de663e2f02de35e8bb",
+      "a712df46ab11ef70a533ece82db11d5c93572cd2945cbd8774462d2cb99055d1"
+    ],
+    "packet_fault_is_in_memory_reflection": true,
+    "all_packet_keys_before_revalidation": [
+      0,
+      1
+    ],
+    "namespace_observations_reached": 2,
+    "ReadView_is_identity_observation_not_OS_writer_lease": true,
+    "real_filesystem_content_changed": false,
+    "namespace_fault_is_read_result_seam": false,
+    "namespace_seam_reads": 0,
+    "retained_frame_objects": false,
+    "only_explicitly_cleared_containers_checked": [
+      "captured",
+      "all_packets",
+      "seen_hours"
+    ],
+    "completed_prefix_hours_requested": 2,
+    "selected_hours": [
+      1
+    ],
+    "guard_usable_after_fault_restored": true,
+    "status": "DRAFT_NONAUTHORITATIVE",
+    "case": "unselected_packet_drift",
+    "exit_code": 0,
+    "elapsed_seconds": 77.50377200000003,
+    "saved_case_files": 465,
+    "saved_case_sha256_equal": true,
+    "activity": {
+      "case_read_opens": 7506,
+      "rejected_mutations": 0
+    },
+    "trace_profile_overhead_included": true,
+    "cleanup_errors": [],
+    "non_solver_Win32_file_API_used": false,
+    "native_solver_execution": false,
+    "prior_trace_and_profile_restored": true,
+    "constructor_or_file_failure_matrix_exhaustive": false,
+    "arbitrary_reflection_or_ABA_covered": false,
+    "source_successor_adopted": false,
+    "resource_admission": false,
+    "formal_execution_ready": false,
+    "new_normal_jobs": 0,
+    "real_native_solver_calls": 0,
+    "real_native_calls": 0,
+    "real_native_calls_scope": "solver/native scientific adapter only",
+    "formal_result": false
+  },
+  "worker_accepted": true,
+  "case": "unselected_packet_drift",
+  "reason": null,
+  "case_outer_seconds": 81.84299999999712,
+  "peak_sampled_tree_rss_bytes": 197337088,
+  "peak_output_logical_bytes": 1437834,
+  "observed_processes": {
+    "22496": 1792572813.003513,
+    "17704": 1792572813.0136635
+  },
+  "observed_processes_remaining": [],
+  "cleanup_events": [],
+  "accepted": true
+}

@@ -1,0 +1,156 @@
+{
+  "injection_reached": true,
+  "injection_count": 1,
+  "injection_position": {
+    "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_historical_batch_development_v3.py",
+    "function": "_validate_all_packets",
+    "line": 112,
+    "lasti": 310,
+    "event": "one registered trace landmark"
+  },
+  "instrumentation_errors": [],
+  "exception_chain": [
+    {
+      "type": "PermissionError",
+      "text": "[Errno 13] Permission denied: 'D:\\\\h1_outage_connected_03_non_authoritative\\\\test_three_hour_connected_outa0\\\\normal_non_authoritative\\\\obligation_non_authoritative\\\\000.terminal.json'",
+      "notes": []
+    }
+  ],
+  "primary_error_type": "PermissionError",
+  "rejection_trace": [
+    {
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_saved_reader_failure_v1_non_authoritative\\fault_worker_v1.py",
+      "function": "main",
+      "line": 321
+    },
+    {
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_historical_batch_development_v3.py",
+      "function": "replay_prefixes",
+      "line": 351
+    },
+    {
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_released_worker_development_v2.py",
+      "function": "unchanged",
+      "line": 46
+    },
+    {
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_raw_ingress_development_v1.py",
+      "function": "read_stable",
+      "line": 40
+    },
+    {
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "open",
+      "line": 1013
+    }
+  ],
+  "primary_error_filename": "D:\\h1_outage_connected_03_non_authoritative\\test_three_hour_connected_outa0\\normal_non_authoritative\\obligation_non_authoritative\\000.terminal.json",
+  "primary_error_text": "[Errno 13] Permission denied: 'D:\\\\h1_outage_connected_03_non_authoritative\\\\test_three_hour_connected_outa0\\\\normal_non_authoritative\\\\obligation_non_authoritative\\\\000.terminal.json'",
+  "same_injected_primary_object": null,
+  "primary_errno": 13,
+  "primary_winerror": null,
+  "native_sharing_conflict_code": 32,
+  "actual_Reader_retained": true,
+  "Reader_closed": true,
+  "Reader_owner_fields_cleared": true,
+  "constructor_capture_cleared": true,
+  "captured_cleared": true,
+  "all_packets_cleared": true,
+  "seen_hours_cleared": true,
+  "outer_ReadViews_closed": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "actual_inner_states": {
+    "_journal": {
+      "type": "experiments.h1_historical_parent_prefix_development_v1.PrefixJournal",
+      "closed": true,
+      "nested_ReadView_closed": true
+    },
+    "_anchor": {
+      "type": "experiments.h1_historical_parent_prefix_development_v1.PrefixAnchor",
+      "closed": true,
+      "nested_ReadView_closed": true
+    },
+    "_root_lease": {
+      "type": "experiments.h1_parent_snapshot_development_v1.ReadView",
+      "closed": true
+    }
+  },
+  "close_calls": [
+    "frozen_parent",
+    "_journal",
+    "_anchor",
+    "_root_lease",
+    "outer_3",
+    "outer_2",
+    "outer_1",
+    "outer_0"
+  ],
+  "observed_replay_call_counts": {
+    "job_inspections": 2,
+    "stage_inspections": 10,
+    "normal_after_returns": 1
+  },
+  "inner_object_ids": {
+    "_journal": 2298879059936,
+    "_anchor": 2298879056576,
+    "_root_lease": 2298879057344
+  },
+  "outer_object_ids": [
+    2298875591712,
+    2298875589984,
+    2298875591280,
+    2298875591520
+  ],
+  "packet_digests_before_after": null,
+  "packet_fault_is_in_memory_reflection": false,
+  "all_packet_keys_before_revalidation": [
+    0
+  ],
+  "namespace_observations_reached": 2,
+  "ReadView_is_identity_observation_not_OS_writer_lease": true,
+  "real_filesystem_content_changed": false,
+  "namespace_fault_is_read_result_seam": false,
+  "namespace_seam_reads": 0,
+  "retained_frame_objects": false,
+  "only_explicitly_cleared_containers_checked": [
+    "captured",
+    "all_packets",
+    "seen_hours"
+  ],
+  "completed_prefix_hours_requested": 1,
+  "selected_hours": [
+    0
+  ],
+  "guard_usable_after_fault_restored": true,
+  "read_only_sharing_handle_closed": true,
+  "sharing_target_identity_before_after_equal": true,
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "case": "final_read_sharing_error",
+  "exit_code": 0,
+  "elapsed_seconds": 41.324004800000694,
+  "saved_case_files": 465,
+  "saved_case_sha256_equal": true,
+  "activity": {
+    "case_read_opens": 3906,
+    "rejected_mutations": 0
+  },
+  "trace_profile_overhead_included": true,
+  "cleanup_errors": [],
+  "non_solver_Win32_file_API_used": true,
+  "native_solver_execution": false,
+  "prior_trace_and_profile_restored": true,
+  "constructor_or_file_failure_matrix_exhaustive": false,
+  "arbitrary_reflection_or_ABA_covered": false,
+  "source_successor_adopted": false,
+  "resource_admission": false,
+  "formal_execution_ready": false,
+  "new_normal_jobs": 0,
+  "real_native_solver_calls": 0,
+  "real_native_calls": 0,
+  "real_native_calls_scope": "solver/native scientific adapter only",
+  "formal_result": false
+}

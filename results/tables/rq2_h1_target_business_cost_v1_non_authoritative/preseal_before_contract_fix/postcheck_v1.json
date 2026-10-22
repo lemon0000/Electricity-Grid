@@ -1,0 +1,156 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "source_pins": 1306,
+  "all_current_source_pins_match": true,
+  "tested_snapshots": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\configs\\rq2_bidirectional_capacity_policy_v1.DRAFT.yaml": "db1ae3dedd62ac0d3f760cceb23e6d2db1e325591e7b233b9f4138b0f0df4b63",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\configs\\rq2_continuous_causal_policy_v1.DRAFT.yaml": "03d2fe940088bd4d8a067d70c1e2604362535c45b332da98630523fbe275ace7",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\configs\\rq2_finite_mechanism_protocol_candidate_v2.DRAFT.yaml": "95eb158f0a8e6784d2af401e67164965543c98f42ff02b756c214982601e5430",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\experiments\\h1_exact_business_development_v1.py": "78605edbd312b238f5d5550b64de2ac9fab5121b9a89b949b185bb08563abda8",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\experiments\\h1_phase_obligation_controller_development_v1.py": "e047f3e5b08b397362f2961be89062924e0e4769d7de0795453047e921300934",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\tests\\test_h1_exact_business_development_v1.py": "5a54054de82483a5d7b67f02bf182d868543c1a28e819d29d5b00e4d63ef80a4",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\tests\\test_rq2_bidirectional_policy_v1.py": "9db5d2d439c680ecbcb60a9becd5f9e6a4375b9876a91d0c9d046a62af2be276",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\tests\\test_rq2_continuous_recovery_controller_v1.py": "06392f6b05c6e178edfd11e48723cc8f6cbd08174c61f3886647243193ea9749",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\tests\\test_rq2_normal_h1_hour_archive_v1.py": "83cfc19b6ed6588315566839b46cd19e1d96c17c47e42a0519d6b6cf396de1e6",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\results\\tables\\rq2_h1_constructor_window_fault_v1_non_authoritative\\final_verification.json": "925f9370ad00f72d8cb0a3af7abdca26dcb8eb168f346ba9ac24b763232fcb20",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\design_and_budget.md": "5e0845d3e63015566dae4fc3a7171c51beaf2b1fd5435443fed45b18a2abc0bd",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\run_cost_v1.py": "e83344039b9de8b782d77f4f381f1bcf80d34e315f7af7e9a834e7ce3ff3c33d",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\workload_v1.py": "6c10425a73ce5e8e8ac29625d79d8ac6fcec2f05013c5eafe8b05881bb7fe2e4",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\tested_bytes\\results\\tables\\rq2_h1_phase_boundary_v1_non_authoritative\\unit_04\\facts\\exact_due_192.json": "482ef4cbb986dad4818ed4bc3e7d90ee9b7cee56cbe94df4d59f0ca58e3c6c0d"
+  },
+  "retained_base_json_count": 6,
+  "actual_encoded_anchor_parameters_verified": true,
+  "actual_parameters": {
+    "168": {
+      "actual_policy": {
+        "arm_id": "joint_correct_shared",
+        "capacity_declaration_id": "synthetic_capacity_half",
+        "committed_capacity": 0.5,
+        "curtailment_ramp_per_hour": 1.0,
+        "evidence_class": "mechanism_assumption",
+        "maximum_recovery_power": 1.0,
+        "minimum_event_power": 1e-06,
+        "recovery_decimal_places": 12,
+        "response_time_hours": 1.0,
+        "rule": "fixed_bidirectional_grid_cfe_recovery_open_boundary_v1"
+      },
+      "actual_envelope": {
+        "maximum_event_count": 14,
+        "maximum_event_duration_hours": 4.0,
+        "minimum_recovery_hours": 1.0,
+        "normalized_debt_limit": 0.2,
+        "normalized_energy_budget": 2.8,
+        "recovery_efficiency": 0.85,
+        "time_step_hours": 1.0
+      },
+      "actual_mechanism": {
+        "alpha": {
+          "denominator": "2",
+          "numerator": "1"
+        },
+        "flexible_fraction": {
+          "denominator": "5",
+          "numerator": "1"
+        },
+        "normalized_unit_mw": {
+          "denominator": "1",
+          "numerator": "250"
+        },
+        "recovery_headroom_fraction": {
+          "denominator": "10",
+          "numerator": "1"
+        }
+      },
+      "scientific_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\base_artifacts\\test_target_history_cost0\\h168_scientific.json",
+      "full_carry_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\base_artifacts\\test_target_history_cost0\\h168_full_carry_audit.json",
+      "exact_service_balance_and_shared_budget_checked": true,
+      "cohort": {
+        "created_hour": 168,
+        "deadline_evidence": "mechanism_assumption",
+        "due_hour": 192,
+        "incurred": {
+          "denominator": "1000",
+          "numerator": "17"
+        },
+        "missed_at_deadline": null,
+        "remaining": {
+          "denominator": "1000",
+          "numerator": "17"
+        }
+      }
+    },
+    "192": {
+      "actual_policy": {
+        "arm_id": "joint_correct_shared",
+        "capacity_declaration_id": "synthetic_capacity_half",
+        "committed_capacity": 0.5,
+        "curtailment_ramp_per_hour": 1.0,
+        "evidence_class": "mechanism_assumption",
+        "maximum_recovery_power": 1.0,
+        "minimum_event_power": 1e-06,
+        "recovery_decimal_places": 12,
+        "response_time_hours": 1.0,
+        "rule": "fixed_bidirectional_grid_cfe_recovery_open_boundary_v1"
+      },
+      "actual_envelope": {
+        "maximum_event_count": 14,
+        "maximum_event_duration_hours": 4.0,
+        "minimum_recovery_hours": 1.0,
+        "normalized_debt_limit": 0.2,
+        "normalized_energy_budget": 2.8,
+        "recovery_efficiency": 0.85,
+        "time_step_hours": 1.0
+      },
+      "actual_mechanism": {
+        "alpha": {
+          "denominator": "2",
+          "numerator": "1"
+        },
+        "flexible_fraction": {
+          "denominator": "5",
+          "numerator": "1"
+        },
+        "normalized_unit_mw": {
+          "denominator": "1",
+          "numerator": "250"
+        },
+        "recovery_headroom_fraction": {
+          "denominator": "10",
+          "numerator": "1"
+        }
+      },
+      "scientific_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\base_artifacts\\test_target_history_cost0\\h192_scientific.json",
+      "full_carry_path": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\base_artifacts\\test_target_history_cost0\\h192_full_carry_audit.json",
+      "exact_service_balance_and_shared_budget_checked": true,
+      "cohort": {
+        "created_hour": 168,
+        "deadline_evidence": "mechanism_assumption",
+        "due_hour": 192,
+        "incurred": {
+          "denominator": "1000",
+          "numerator": "17"
+        },
+        "missed_at_deadline": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "remaining": {
+          "denominator": "1",
+          "numerator": "0"
+        }
+      }
+    }
+  },
+  "old_constructor_core_bindings": 207,
+  "old_constructor_final_bindings": 208,
+  "old_constructor_bindings_current_match": true,
+  "saved_case_files": 465,
+  "saved_owned_files": 444,
+  "saved_case_and_owned_sha256_unchanged": true,
+  "owned_observed_processes_remaining": [],
+  "one_history_one_cohort_observation_only": true,
+  "complete_owner_event_or_chain_bound": false,
+  "overall_performance_review_complete": false,
+  "resource_admission": false,
+  "formal_result": false
+}

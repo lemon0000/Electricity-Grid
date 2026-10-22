@@ -1,0 +1,48 @@
+{
+  "command": [
+    "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "-u",
+    "-B",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_saved_reader_failure_v1_non_authoritative\\fault_worker_v1.py",
+    "final_namespace_read_result",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_saved_reader_failure_v1_non_authoritative\\suite_01\\09_final_namespace_read_result"
+  ],
+  "case": {
+    "case": "final_namespace_read_result",
+    "completed_prefix_hours": 1,
+    "selected_hours": [
+      0
+    ],
+    "expected_completed_numeric_hours": 1,
+    "expected_runtime_counts": {
+      "job_inspections": 2,
+      "stage_inspections": 10,
+      "normal_after_returns": 1
+    },
+    "injection_phase": "third namespace round, first root; root inventory ordinal7",
+    "expected_inner_objects": 3,
+    "expected_outer_ReadViews": 4,
+    "inner_close_order": [
+      "_journal",
+      "_anchor",
+      "_root_lease"
+    ],
+    "outer_close_order": [
+      3,
+      2,
+      1,
+      0
+    ],
+    "private_containers_checked": [
+      "captured",
+      "all_packets",
+      "seen_hours"
+    ],
+    "namespace_round_expected": 3,
+    "physical_content_mutation": false,
+    "in_memory_reflection": false,
+    "namespace_read_result_seam": true,
+    "temporary_read_only_sharing_handle": false
+  },
+  "plan_sha256": "1b941461b314ab10fa52c550529936251ef79bd7da9e680ce4cebe11cdb176bd"
+}

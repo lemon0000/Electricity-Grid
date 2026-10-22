@@ -1,0 +1,134 @@
+"""One bounded, zero-Job phase/body unit invocation; retains all artifacts."""
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+import psutil
+
+HERE = Path(__file__).resolve().parent
+REPO = HERE.parents[2]
+label = sys.argv[1]
+if not label.replace('_', '').isalnum():
+    raise ValueError('fresh unit label required')
+out = HERE / label
+base = Path('D:/') / f'h1_phase_boundary_{label}_non_authoritative'
+if out.exists() or base.exists():
+    raise ValueError('unit roots must be fresh')
+out.mkdir()
+command = [sys.executable, '-u', '-B', '-m', 'pytest', '-q',
+           '-p', 'no:cacheprovider', '-p', 'no:faulthandler',
+           '--basetemp', str(base), '--junitxml', str(out / 'junit.xml'),
+           'tests/test_h1_phase_boundary_budget_development_v1.py']
+prior = REPO / 'results/tables/rq2_h1_cross_hour_outage_v1_non_authoritative/connected_03/request.json'
+pins = json.loads(prior.read_bytes())['sources_sha256']
+new = [Path(__file__), HERE / 'design_and_budget.md', HERE / 'budget_audit_v1.json',
+       REPO / 'experiments/h1_phase_boundary_budget_development_v1.py',
+       REPO / 'tests/test_h1_phase_boundary_budget_development_v1.py']
+for path in new:
+    raw = path.read_bytes()
+    pins[str(path)] = sha256(raw).hexdigest()
+    target = out / 'tested_bytes' / path.relative_to(REPO)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(raw)
+
+
+def save(name, value):
+    with (out / name).open('x', encoding='utf-8') as stream:
+        json.dump(value, stream, indent=2)
+        stream.write('\n')
+
+
+save('request.json', dict(command=command, wall_cap_seconds=180,
+    sampled_tree_rss_cap_bytes=1024 ** 3, logical_storage_cap_bytes=128 * 1024 ** 2,
+    sample_seconds=2, base=str(base), sources_sha256=pins,
+    reused_source_map_sha256=sha256(prior.read_bytes()).hexdigest(),
+    source_map_reuse_does_not_rerun_prior_tests=True,
+    scope='detached_business_histories_and_original_phase_bodies',
+    native_authorized=False, new_normal_jobs_authorized=False, formal_result=False))
+started = time.monotonic()
+owned = {}
+peak_rss = peak_disk = 0
+reason = None
+cleanup = []
+process = None
+result = {}
+
+
+def live():
+    found = []
+    for pid, created in tuple(owned.items()):
+        try:
+            item = psutil.Process(pid)
+            if item.create_time() == created and item.is_running():
+                found.append(item)
+        except psutil.NoSuchProcess:
+            pass
+    return found
+
+
+def logical_bytes(root):
+    return sum(p.stat().st_size for p in root.rglob('*') if p.is_file()) if root.exists() else 0
+
+
+try:
+    with (out / 'stdout.txt').open('wb') as stdout, (out / 'stderr.txt').open('wb') as stderr:
+        process = subprocess.Popen(command, cwd=REPO, stdout=stdout, stderr=stderr,
+            env=dict(os.environ, PYTHONUTF8='1', PYTHONDONTWRITEBYTECODE='1'),
+            creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0)
+        owned[process.pid] = psutil.Process(process.pid).create_time()
+        while True:
+            for item in live():
+                for child in item.children(recursive=True):
+                    owned[child.pid] = child.create_time()
+            rss = 0
+            for item in live():
+                try:
+                    rss += item.memory_info().rss
+                except psutil.NoSuchProcess:
+                    pass
+            disk = logical_bytes(out) + logical_bytes(base)
+            elapsed = time.monotonic() - started
+            peak_rss, peak_disk = max(peak_rss, rss), max(peak_disk, disk)
+            row = dict(elapsed=elapsed, rss_bytes=rss, logical_bytes=disk)
+            with (out / 'monitor.jsonl').open('a', encoding='utf-8') as monitor:
+                monitor.write(json.dumps(row) + '\n')
+            if process.poll() is not None:
+                break
+            reason = ('wall_limit' if elapsed > 180 else 'rss_limit' if rss > 1024 ** 3 else
+                      'storage_limit' if disk > 128 * 1024 ** 2 else
+                      'unexpected_child_process' if len(owned) > 1 else None)
+            if reason:
+                break
+            time.sleep(2)
+        if reason:
+            for item in reversed(live()):
+                item.kill()
+                cleanup.append(dict(pid=item.pid, action='kill_owned', reason=reason))
+        process.wait(timeout=10)
+        result['exit_code'] = process.returncode
+except BaseException as error:
+    result['error'] = repr(error)
+finally:
+    for item in reversed(live()):
+        try:
+            item.kill()
+            cleanup.append(dict(pid=item.pid, action='kill_owned_tail'))
+        except psutil.NoSuchProcess:
+            pass
+    psutil.wait_procs(live(), timeout=5)
+    changed = [name for name, expected in pins.items()
+               if sha256(Path(name).read_bytes()).hexdigest() != expected]
+    result.update(reason=reason, outer_seconds=time.monotonic() - started,
+        peak_sampled_tree_rss_bytes=peak_rss, peak_logical_bytes=peak_disk,
+        changed_sources=changed, source_pins=len(pins), observed_processes=owned,
+        observed_processes_remaining=[p.pid for p in live()], cleanup_events=cleanup,
+        complete_unobserved_process_tree_proof=False,
+        new_normal_jobs=0, real_native_calls=0, formal_result=False)
+    save('terminal.json', result)
+    print(json.dumps(result), flush=True)
+sys.exit(0 if result.get('exit_code') == 0 and reason is None
+         and not result.get('error') and not changed and not result['observed_processes_remaining'] else 1)

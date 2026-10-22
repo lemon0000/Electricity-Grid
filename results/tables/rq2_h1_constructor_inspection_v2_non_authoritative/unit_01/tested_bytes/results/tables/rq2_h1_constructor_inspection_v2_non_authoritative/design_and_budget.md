@@ -1,0 +1,13 @@
+# 一次constructor inspection后继开发
+
+2026-10-21，DRAFT_NONAUTHORITATIVE，R3，根代理唯一writer。持续目标是完成finite-v2正式实验前全部准备；当前仅推进source性能瓶颈，不改变科学合同、原路径、旧证据或正式门。
+
+实现独立ConstructorInspectionCapture：只在原父类构造期间接受唯一一次inspect，按pid/thread保存原返回对象，构造完成后仅能取一次并清空；拒绝重入、重复inspect/取用、foreign线程、复制与序列化；异常和close清空。historical batch v2用此mix-in保留constructor完整科学重放，省去caller紧接的第二次inspect；旧views/inventory/prefix/source/implementation bookends和cleanup保持。新增borrowed helper/MRO alias/code/default/closure与class布局观察；这不是完整适用runtime闭包、反射或未观察ABA证明。
+
+source batch v2仍在materialization前后调用两个独立Reader，metric固定每个一次constructor遍历，使用新schema/implementation。旧source/historical/cross-hour owner字节不变；旧owner继续要求其原类型/两次traversal，未接入新合同。没有跨operation cache或writer capability。
+
+先固定32个窄单元，180s、sampled tree RSS1GiB、logical128MiB，2s采样/30s心跳、0Job/native，超限仅终止owned PID/create-time树并留全部原件。包含fake parent生命周期、reentry/失败/清理、函数/默认值/class漂移、保留post-bookend AST、source双Reader结构、非法map早拒绝；唯一fact明确fake parent且actual_source_or_owner_exercised=false。该包不关闭source逐类文件窗口故障、同字节非确定性或真实数值/性能验收。
+
+后续保存3h原件对照须另固定调用数和预算：先复用已验证原profile/saved normal audit，再对后继执行全部科学输出与明确provenance差异的oracle；最后对完整双Reader batch做总wall/RSS/storage对照。任何删除遍历带来的失效检测缺口必须先证明或修复，再进入接线。原候选矩阵在上一source-cost目录，仍是验收依据；本轮不以fake tests替代它。
+
+正式准备的全局门同时包括finite-v2显式successor preregistration（1900cells，不借旧46-cell outer）、目标任务/复用DAG与资源预算、168h/≤24h真实连接和typed右删失、terminal/checkpoint/close/reopen与writer/crash恢复、同合同LB/UB/完整training witness，以及seal后fresh official review与具体native/formal授权。当前均保持未完成；本目标不因局部成功缩小。

@@ -1,0 +1,44 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "exit_code": 0,
+  "checks": [
+    {
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-O",
+        "-B",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\packet_worker_v2.py"
+      ],
+      "exit_code": 1,
+      "expected_refusal": true
+    },
+    {
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-O",
+        "-B",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\run_packet_v2.py"
+      ],
+      "exit_code": 1,
+      "expected_refusal": true
+    }
+  ],
+  "checks_passed": 2,
+  "source_before": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\check_optimization_guard_v2.py": "5d8f070f733d2554b1c105ff0a8911b082247cafe9da788d1baefc31f262573c",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\packet_worker_v2.py": "7fc0a12c7c22eca70759f3c80ea8da41ef52b2eac6a94c94977264e847179e82",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\run_packet_v2.py": "7876491be83cdc73fc4b087b1acccc4f24174094b2f88c733fba6f3bca9993c9"
+  },
+  "source_after": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\check_optimization_guard_v2.py": "5d8f070f733d2554b1c105ff0a8911b082247cafe9da788d1baefc31f262573c",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\packet_worker_v2.py": "7fc0a12c7c22eca70759f3c80ea8da41ef52b2eac6a94c94977264e847179e82",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\run_packet_v2.py": "7876491be83cdc73fc4b087b1acccc4f24174094b2f88c733fba6f3bca9993c9"
+  },
+  "elapsed_seconds": 0.48627380000107223,
+  "project_source_loader_invocations": 0,
+  "Reader_invocations": 0,
+  "model_builds": 0,
+  "new_normal_jobs": 0,
+  "real_native_solver_calls": 0,
+  "formal_result": false
+}

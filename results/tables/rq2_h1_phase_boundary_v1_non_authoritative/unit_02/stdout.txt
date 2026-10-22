@@ -1,0 +1,409 @@
+....FFFFFFFFF.                                                           [100%]
+================================== FAILURES ===================================
+_ test_original_phase_bodies_consume_complete_business_histories[no_requests-167-True-enrollment-U] _
+
+histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+tmp_path = WindowsPath('D:/h1_phase_boundary_unit_02_non_authoritative/test_original_phase_bodies_con0')
+label = 'no_requests', hour = 167, need = True, next_phase = 'enrollment'
+recovery = 'U'
+
+    @pytest.mark.parametrize('label,hour,need,next_phase,recovery', [
+        ('no_requests', 167, True, 'enrollment', 'U'),
+        ('no_requests', 168, False, None, 'S'),
+        ('pending', 168, True, 'followup', 'U'),
+        ('pending', 169, True, 'followup', 'U'),
+        ('recover_primary', 170, False, None, 'S'),
+        ('late_recovery', 170, True, 'followup', 'F'),
+        ('pending', 191, True, 'followup', 'U'),
+        ('pending', 192, False, None, 'F'),
+    ])
+    def test_original_phase_bodies_consume_complete_business_histories(
+            histories, tmp_path, label, hour, need, next_phase, recovery):
+        carry = histories[label][hour]
+        before = state(carry)
+        assessment = phase._assessment(before)
+        fact = assessment.lanes[0].business
+        assert assessment.needs_next_hour is need
+        assert fact.next_phase == next_phase and fact.primary_recovery_status == recovery
+        assert not assessment.owner_replay_authenticated and not assessment.actual_paired_commit_verified
+        assert not assessment.producer_admitted and not assessment.formal_result
+>       host = body_host()
+               ^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_h1_phase_boundary_budget_development_v1.py:37: in body_host
+    return SimpleNamespace(binding=phase.SourceBinding(
+<string>:7: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = SourceBinding(root='synthetic_metadata_only_non_authoritative', binding_sha256='11111111111111111111111111111111111111...2222222222222222222222222', genesis_terminal_sha256='3333333333333333333333333333333333333333333333333333333333333333')
+
+    def __post_init__(self):
+        if type(self.root) is not str or str(Path(self.root).absolute())!=self.root:
+>           raise ValueError('absolute source controller root required')
+E           ValueError: absolute source controller root required
+
+experiments\h1_persistent_owner_development_v1.py:108: ValueError
+_ test_original_phase_bodies_consume_complete_business_histories[no_requests-168-False-None-S] _
+
+histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+tmp_path = WindowsPath('D:/h1_phase_boundary_unit_02_non_authoritative/test_original_phase_bodies_con1')
+label = 'no_requests', hour = 168, need = False, next_phase = None
+recovery = 'S'
+
+    @pytest.mark.parametrize('label,hour,need,next_phase,recovery', [
+        ('no_requests', 167, True, 'enrollment', 'U'),
+        ('no_requests', 168, False, None, 'S'),
+        ('pending', 168, True, 'followup', 'U'),
+        ('pending', 169, True, 'followup', 'U'),
+        ('recover_primary', 170, False, None, 'S'),
+        ('late_recovery', 170, True, 'followup', 'F'),
+        ('pending', 191, True, 'followup', 'U'),
+        ('pending', 192, False, None, 'F'),
+    ])
+    def test_original_phase_bodies_consume_complete_business_histories(
+            histories, tmp_path, label, hour, need, next_phase, recovery):
+        carry = histories[label][hour]
+        before = state(carry)
+        assessment = phase._assessment(before)
+        fact = assessment.lanes[0].business
+        assert assessment.needs_next_hour is need
+        assert fact.next_phase == next_phase and fact.primary_recovery_status == recovery
+        assert not assessment.owner_replay_authenticated and not assessment.actual_paired_commit_verified
+        assert not assessment.producer_admitted and not assessment.formal_result
+>       host = body_host()
+               ^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_h1_phase_boundary_budget_development_v1.py:37: in body_host
+    return SimpleNamespace(binding=phase.SourceBinding(
+<string>:7: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = SourceBinding(root='synthetic_metadata_only_non_authoritative', binding_sha256='11111111111111111111111111111111111111...2222222222222222222222222', genesis_terminal_sha256='3333333333333333333333333333333333333333333333333333333333333333')
+
+    def __post_init__(self):
+        if type(self.root) is not str or str(Path(self.root).absolute())!=self.root:
+>           raise ValueError('absolute source controller root required')
+E           ValueError: absolute source controller root required
+
+experiments\h1_persistent_owner_development_v1.py:108: ValueError
+_ test_original_phase_bodies_consume_complete_business_histories[pending-168-True-followup-U] _
+
+histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+tmp_path = WindowsPath('D:/h1_phase_boundary_unit_02_non_authoritative/test_original_phase_bodies_con2')
+label = 'pending', hour = 168, need = True, next_phase = 'followup'
+recovery = 'U'
+
+    @pytest.mark.parametrize('label,hour,need,next_phase,recovery', [
+        ('no_requests', 167, True, 'enrollment', 'U'),
+        ('no_requests', 168, False, None, 'S'),
+        ('pending', 168, True, 'followup', 'U'),
+        ('pending', 169, True, 'followup', 'U'),
+        ('recover_primary', 170, False, None, 'S'),
+        ('late_recovery', 170, True, 'followup', 'F'),
+        ('pending', 191, True, 'followup', 'U'),
+        ('pending', 192, False, None, 'F'),
+    ])
+    def test_original_phase_bodies_consume_complete_business_histories(
+            histories, tmp_path, label, hour, need, next_phase, recovery):
+        carry = histories[label][hour]
+        before = state(carry)
+        assessment = phase._assessment(before)
+        fact = assessment.lanes[0].business
+        assert assessment.needs_next_hour is need
+        assert fact.next_phase == next_phase and fact.primary_recovery_status == recovery
+        assert not assessment.owner_replay_authenticated and not assessment.actual_paired_commit_verified
+        assert not assessment.producer_admitted and not assessment.formal_result
+>       host = body_host()
+               ^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_h1_phase_boundary_budget_development_v1.py:37: in body_host
+    return SimpleNamespace(binding=phase.SourceBinding(
+<string>:7: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = SourceBinding(root='synthetic_metadata_only_non_authoritative', binding_sha256='11111111111111111111111111111111111111...2222222222222222222222222', genesis_terminal_sha256='3333333333333333333333333333333333333333333333333333333333333333')
+
+    def __post_init__(self):
+        if type(self.root) is not str or str(Path(self.root).absolute())!=self.root:
+>           raise ValueError('absolute source controller root required')
+E           ValueError: absolute source controller root required
+
+experiments\h1_persistent_owner_development_v1.py:108: ValueError
+_ test_original_phase_bodies_consume_complete_business_histories[pending-169-True-followup-U] _
+
+histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+tmp_path = WindowsPath('D:/h1_phase_boundary_unit_02_non_authoritative/test_original_phase_bodies_con3')
+label = 'pending', hour = 169, need = True, next_phase = 'followup'
+recovery = 'U'
+
+    @pytest.mark.parametrize('label,hour,need,next_phase,recovery', [
+        ('no_requests', 167, True, 'enrollment', 'U'),
+        ('no_requests', 168, False, None, 'S'),
+        ('pending', 168, True, 'followup', 'U'),
+        ('pending', 169, True, 'followup', 'U'),
+        ('recover_primary', 170, False, None, 'S'),
+        ('late_recovery', 170, True, 'followup', 'F'),
+        ('pending', 191, True, 'followup', 'U'),
+        ('pending', 192, False, None, 'F'),
+    ])
+    def test_original_phase_bodies_consume_complete_business_histories(
+            histories, tmp_path, label, hour, need, next_phase, recovery):
+        carry = histories[label][hour]
+        before = state(carry)
+        assessment = phase._assessment(before)
+        fact = assessment.lanes[0].business
+        assert assessment.needs_next_hour is need
+        assert fact.next_phase == next_phase and fact.primary_recovery_status == recovery
+        assert not assessment.owner_replay_authenticated and not assessment.actual_paired_commit_verified
+        assert not assessment.producer_admitted and not assessment.formal_result
+>       host = body_host()
+               ^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_h1_phase_boundary_budget_development_v1.py:37: in body_host
+    return SimpleNamespace(binding=phase.SourceBinding(
+<string>:7: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = SourceBinding(root='synthetic_metadata_only_non_authoritative', binding_sha256='11111111111111111111111111111111111111...2222222222222222222222222', genesis_terminal_sha256='3333333333333333333333333333333333333333333333333333333333333333')
+
+    def __post_init__(self):
+        if type(self.root) is not str or str(Path(self.root).absolute())!=self.root:
+>           raise ValueError('absolute source controller root required')
+E           ValueError: absolute source controller root required
+
+experiments\h1_persistent_owner_development_v1.py:108: ValueError
+_ test_original_phase_bodies_consume_complete_business_histories[recover_primary-170-False-None-S] _
+
+histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+tmp_path = WindowsPath('D:/h1_phase_boundary_unit_02_non_authoritative/test_original_phase_bodies_con4')
+label = 'recover_primary', hour = 170, need = False, next_phase = None
+recovery = 'S'
+
+    @pytest.mark.parametrize('label,hour,need,next_phase,recovery', [
+        ('no_requests', 167, True, 'enrollment', 'U'),
+        ('no_requests', 168, False, None, 'S'),
+        ('pending', 168, True, 'followup', 'U'),
+        ('pending', 169, True, 'followup', 'U'),
+        ('recover_primary', 170, False, None, 'S'),
+        ('late_recovery', 170, True, 'followup', 'F'),
+        ('pending', 191, True, 'followup', 'U'),
+        ('pending', 192, False, None, 'F'),
+    ])
+    def test_original_phase_bodies_consume_complete_business_histories(
+            histories, tmp_path, label, hour, need, next_phase, recovery):
+        carry = histories[label][hour]
+        before = state(carry)
+        assessment = phase._assessment(before)
+        fact = assessment.lanes[0].business
+        assert assessment.needs_next_hour is need
+        assert fact.next_phase == next_phase and fact.primary_recovery_status == recovery
+        assert not assessment.owner_replay_authenticated and not assessment.actual_paired_commit_verified
+        assert not assessment.producer_admitted and not assessment.formal_result
+>       host = body_host()
+               ^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_h1_phase_boundary_budget_development_v1.py:37: in body_host
+    return SimpleNamespace(binding=phase.SourceBinding(
+<string>:7: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = SourceBinding(root='synthetic_metadata_only_non_authoritative', binding_sha256='11111111111111111111111111111111111111...2222222222222222222222222', genesis_terminal_sha256='3333333333333333333333333333333333333333333333333333333333333333')
+
+    def __post_init__(self):
+        if type(self.root) is not str or str(Path(self.root).absolute())!=self.root:
+>           raise ValueError('absolute source controller root required')
+E           ValueError: absolute source controller root required
+
+experiments\h1_persistent_owner_development_v1.py:108: ValueError
+_ test_original_phase_bodies_consume_complete_business_histories[late_recovery-170-True-followup-F] _
+
+histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+tmp_path = WindowsPath('D:/h1_phase_boundary_unit_02_non_authoritative/test_original_phase_bodies_con5')
+label = 'late_recovery', hour = 170, need = True, next_phase = 'followup'
+recovery = 'F'
+
+    @pytest.mark.parametrize('label,hour,need,next_phase,recovery', [
+        ('no_requests', 167, True, 'enrollment', 'U'),
+        ('no_requests', 168, False, None, 'S'),
+        ('pending', 168, True, 'followup', 'U'),
+        ('pending', 169, True, 'followup', 'U'),
+        ('recover_primary', 170, False, None, 'S'),
+        ('late_recovery', 170, True, 'followup', 'F'),
+        ('pending', 191, True, 'followup', 'U'),
+        ('pending', 192, False, None, 'F'),
+    ])
+    def test_original_phase_bodies_consume_complete_business_histories(
+            histories, tmp_path, label, hour, need, next_phase, recovery):
+        carry = histories[label][hour]
+        before = state(carry)
+        assessment = phase._assessment(before)
+        fact = assessment.lanes[0].business
+        assert assessment.needs_next_hour is need
+        assert fact.next_phase == next_phase and fact.primary_recovery_status == recovery
+        assert not assessment.owner_replay_authenticated and not assessment.actual_paired_commit_verified
+        assert not assessment.producer_admitted and not assessment.formal_result
+>       host = body_host()
+               ^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_h1_phase_boundary_budget_development_v1.py:37: in body_host
+    return SimpleNamespace(binding=phase.SourceBinding(
+<string>:7: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = SourceBinding(root='synthetic_metadata_only_non_authoritative', binding_sha256='11111111111111111111111111111111111111...2222222222222222222222222', genesis_terminal_sha256='3333333333333333333333333333333333333333333333333333333333333333')
+
+    def __post_init__(self):
+        if type(self.root) is not str or str(Path(self.root).absolute())!=self.root:
+>           raise ValueError('absolute source controller root required')
+E           ValueError: absolute source controller root required
+
+experiments\h1_persistent_owner_development_v1.py:108: ValueError
+_ test_original_phase_bodies_consume_complete_business_histories[pending-191-True-followup-U] _
+
+histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+tmp_path = WindowsPath('D:/h1_phase_boundary_unit_02_non_authoritative/test_original_phase_bodies_con6')
+label = 'pending', hour = 191, need = True, next_phase = 'followup'
+recovery = 'U'
+
+    @pytest.mark.parametrize('label,hour,need,next_phase,recovery', [
+        ('no_requests', 167, True, 'enrollment', 'U'),
+        ('no_requests', 168, False, None, 'S'),
+        ('pending', 168, True, 'followup', 'U'),
+        ('pending', 169, True, 'followup', 'U'),
+        ('recover_primary', 170, False, None, 'S'),
+        ('late_recovery', 170, True, 'followup', 'F'),
+        ('pending', 191, True, 'followup', 'U'),
+        ('pending', 192, False, None, 'F'),
+    ])
+    def test_original_phase_bodies_consume_complete_business_histories(
+            histories, tmp_path, label, hour, need, next_phase, recovery):
+        carry = histories[label][hour]
+        before = state(carry)
+        assessment = phase._assessment(before)
+        fact = assessment.lanes[0].business
+        assert assessment.needs_next_hour is need
+        assert fact.next_phase == next_phase and fact.primary_recovery_status == recovery
+        assert not assessment.owner_replay_authenticated and not assessment.actual_paired_commit_verified
+        assert not assessment.producer_admitted and not assessment.formal_result
+>       host = body_host()
+               ^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_h1_phase_boundary_budget_development_v1.py:37: in body_host
+    return SimpleNamespace(binding=phase.SourceBinding(
+<string>:7: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = SourceBinding(root='synthetic_metadata_only_non_authoritative', binding_sha256='11111111111111111111111111111111111111...2222222222222222222222222', genesis_terminal_sha256='3333333333333333333333333333333333333333333333333333333333333333')
+
+    def __post_init__(self):
+        if type(self.root) is not str or str(Path(self.root).absolute())!=self.root:
+>           raise ValueError('absolute source controller root required')
+E           ValueError: absolute source controller root required
+
+experiments\h1_persistent_owner_development_v1.py:108: ValueError
+_ test_original_phase_bodies_consume_complete_business_histories[pending-192-False-None-F] _
+
+histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+tmp_path = WindowsPath('D:/h1_phase_boundary_unit_02_non_authoritative/test_original_phase_bodies_con7')
+label = 'pending', hour = 192, need = False, next_phase = None, recovery = 'F'
+
+    @pytest.mark.parametrize('label,hour,need,next_phase,recovery', [
+        ('no_requests', 167, True, 'enrollment', 'U'),
+        ('no_requests', 168, False, None, 'S'),
+        ('pending', 168, True, 'followup', 'U'),
+        ('pending', 169, True, 'followup', 'U'),
+        ('recover_primary', 170, False, None, 'S'),
+        ('late_recovery', 170, True, 'followup', 'F'),
+        ('pending', 191, True, 'followup', 'U'),
+        ('pending', 192, False, None, 'F'),
+    ])
+    def test_original_phase_bodies_consume_complete_business_histories(
+            histories, tmp_path, label, hour, need, next_phase, recovery):
+        carry = histories[label][hour]
+        before = state(carry)
+        assessment = phase._assessment(before)
+        fact = assessment.lanes[0].business
+        assert assessment.needs_next_hour is need
+        assert fact.next_phase == next_phase and fact.primary_recovery_status == recovery
+        assert not assessment.owner_replay_authenticated and not assessment.actual_paired_commit_verified
+        assert not assessment.producer_admitted and not assessment.formal_result
+>       host = body_host()
+               ^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_h1_phase_boundary_budget_development_v1.py:37: in body_host
+    return SimpleNamespace(binding=phase.SourceBinding(
+<string>:7: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = SourceBinding(root='synthetic_metadata_only_non_authoritative', binding_sha256='11111111111111111111111111111111111111...2222222222222222222222222', genesis_terminal_sha256='3333333333333333333333333333333333333333333333333333333333333333')
+
+    def __post_init__(self):
+        if type(self.root) is not str or str(Path(self.root).absolute())!=self.root:
+>           raise ValueError('absolute source controller root required')
+E           ValueError: absolute source controller root required
+
+experiments\h1_persistent_owner_development_v1.py:108: ValueError
+_____________ test_terminal_with_halted_unknown_is_not_a_success ______________
+
+histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+
+    def test_terminal_with_halted_unknown_is_not_a_success(histories):
+        before = state(histories['pending'][168], disposition='halted_unresolved', outer=169)
+        assessment = phase._assessment(before)
+        assert not assessment.needs_next_hour
+        assert assessment.lanes[0].business.primary_recovery_status == 'U'
+        assert assessment.lanes[0].business.complete_contract_status is None
+>       body = phase.DevelopmentOwner._terminal_body(body_host(), before, ())
+                                                     ^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_h1_phase_boundary_budget_development_v1.py:37: in body_host
+    return SimpleNamespace(binding=phase.SourceBinding(
+<string>:7: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = SourceBinding(root='synthetic_metadata_only_non_authoritative', binding_sha256='11111111111111111111111111111111111111...2222222222222222222222222', genesis_terminal_sha256='3333333333333333333333333333333333333333333333333333333333333333')
+
+    def __post_init__(self):
+        if type(self.root) is not str or str(Path(self.root).absolute())!=self.root:
+>           raise ValueError('absolute source controller root required')
+E           ValueError: absolute source controller root required
+
+experiments\h1_persistent_owner_development_v1.py:108: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_h1_phase_boundary_budget_development_v1.py::test_original_phase_bodies_consume_complete_business_histories[no_requests-167-True-enrollment-U]
+FAILED tests/test_h1_phase_boundary_budget_development_v1.py::test_original_phase_bodies_consume_complete_business_histories[no_requests-168-False-None-S]
+FAILED tests/test_h1_phase_boundary_budget_development_v1.py::test_original_phase_bodies_consume_complete_business_histories[pending-168-True-followup-U]
+FAILED tests/test_h1_phase_boundary_budget_development_v1.py::test_original_phase_bodies_consume_complete_business_histories[pending-169-True-followup-U]
+FAILED tests/test_h1_phase_boundary_budget_development_v1.py::test_original_phase_bodies_consume_complete_business_histories[recover_primary-170-False-None-S]
+FAILED tests/test_h1_phase_boundary_budget_development_v1.py::test_original_phase_bodies_consume_complete_business_histories[late_recovery-170-True-followup-F]
+FAILED tests/test_h1_phase_boundary_budget_development_v1.py::test_original_phase_bodies_consume_complete_business_histories[pending-191-True-followup-U]
+FAILED tests/test_h1_phase_boundary_budget_development_v1.py::test_original_phase_bodies_consume_complete_business_histories[pending-192-False-None-F]
+FAILED tests/test_h1_phase_boundary_budget_development_v1.py::test_terminal_with_halted_unknown_is_not_a_success
+9 failed, 5 passed in 92.87s (0:01:32)

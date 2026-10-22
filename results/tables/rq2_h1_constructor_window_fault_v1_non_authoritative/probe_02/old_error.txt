@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_h1_constructor_window_fault_v1_non_authoritative\probe_saved_v1.py", line 154, in main
+    proofs,frames,header,metric=module.replay_prefixes(root,**args)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_phase_historical_batch_development_v1.py", line 287, in replay_prefixes
+    state=reader.inspect()
+          ^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_phase_historical_batch_development_v1.py", line 240, in inspect
+    return super().inspect()
+           ^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_historical_parent_prefix_development_v1.py", line 238, in inspect
+    return HistoricalInspection(**asdict(super().inspect()))
+                                         ^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_saved_source_parent_development_v1.py", line 253, in inspect
+    return self._restore()[0]
+           ^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_bounded_file_parent_development_v1.py", line 101, in _restore
+    raise ValueError('parent intent differs from pinned source')
+ValueError: parent intent differs from pinned source

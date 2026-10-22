@@ -1,0 +1,13 @@
+# 时点化的对象会计观察
+
+packet_01完整保留，exit1、main含before/after hash外层15.032s，spawn区间采样supervisor+child RSS235765760B，2919源pins前后匹配，40个审计输入文件SHA未变，观测PID尾部为空。失败在原_validate_all_packets返回、九field walks完成之后的探针额外相等断言；没有两个具体测量值，也没有执行source revalidation或记录hooks恢复，所以不得补称旧attempt完整freshness成功。
+
+source v3原函数只在_remember_packet时测一次并累计，_validate_all_packets要求科学identity/digest/validate_current，不要求sys.getsizeof跨调用恒定。原实现与128MiB阈值不变。新的worker_v2/runner_v2只修测量合同：记录remember返回值及validation前、后、field后、source revalidation后的原retained_size数值与同一可达对象的dataclass __dict__布局；任意跨时点相等或增减均作为数据保留，不作为新接受条件。原domain checks仍须通过，finally记录五个solver hooks恢复。
+
+零项目输入的微型dataclass复现中，创建40个其他实例使原对象__dict__从296B变96B，字段不变。它只证明机制可能，不独自证明旧packet_01因果。observer检查用原retained_size交叉比较微型同对象变化及共享容器/Fraction别名计数。首个支持测试的手写node总数9错误、实际8，日志及tested bytes保留；修正为显式预期对象identity集合后再验，不改observer或生产visitor。
+
+只补一次改进观察器的真实row0诊断：每次60s/no activity30s/768MiB spawn区间RSS/64MiB输出/2s采样，原attempt不续时、不复写；新旧计划合计source load上限4（旧实际只到首次load，未到终检）。不构建模型或Reader，不产生selected frame/ChildInspection/after/future carry/native。原失败及初始plan_v1/v2、旧code、优化模式拒绝与支持测试均归档。
+
+新增原retained_size调用14次（4时点+9fields+1 all_packets），4次只读layout walk，source终检后新增1次完整packet digest复核。输出的all_packets容器量是在field walks后/source终检前测的，不能与其他时点混作同一状态。row0会计单位×168/170/192仍只是条件算术，不是上下界或预测，未证明其他row≤row0。
+
+需要保留资源缺口：source v3在capture计费，all-H再验证后没有复测。若后续表示增大，旧combined计数可能低估晚期拓扑；单row0即使只见下降，也不证明H192不会增长或完整128MiB cap成立。source/M232/H192适用性、selected-frame/net-cost、writer/terminal/reopen、整体资源门保持OPEN。

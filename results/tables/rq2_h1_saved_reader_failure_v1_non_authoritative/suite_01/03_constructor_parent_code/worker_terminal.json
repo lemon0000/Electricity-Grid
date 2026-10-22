@@ -1,0 +1,167 @@
+{
+  "injection_reached": true,
+  "injection_count": 1,
+  "injection_position": {
+    "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_parent_prefix_development_v1.py",
+    "function": "__init__",
+    "line": 214,
+    "lasti": 2846,
+    "event": "one registered trace landmark"
+  },
+  "instrumentation_errors": [],
+  "exception_chain": [
+    {
+      "type": "ValueError",
+      "text": "historical successor callable changed",
+      "notes": []
+    }
+  ],
+  "primary_error_type": "ValueError",
+  "rejection_trace": [
+    {
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_saved_reader_failure_v1_non_authoritative\\fault_worker_v1.py",
+      "function": "main",
+      "line": 321
+    },
+    {
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_historical_batch_development_v3.py",
+      "function": "replay_prefixes",
+      "line": 323
+    },
+    {
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_constructor_inspection_capture_development_v1.py",
+      "function": "__init__",
+      "line": 53
+    },
+    {
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_parent_prefix_development_v1.py",
+      "function": "__init__",
+      "line": 214
+    },
+    {
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_saved_reader_failure_v1_non_authoritative\\fault_worker_v1.py",
+      "function": "trace",
+      "line": 137
+    },
+    {
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_saved_reader_failure_v1_non_authoritative\\fault_worker_v1.py",
+      "function": "_trace",
+      "line": 151
+    },
+    {
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_saved_reader_failure_v1_non_authoritative\\fault_worker_v1.py",
+      "function": "inject_constructor",
+      "line": 129
+    },
+    {
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_historical_batch_development_v3.py",
+      "function": "_check_dependencies",
+      "line": 131
+    }
+  ],
+  "primary_error_filename": "None",
+  "primary_error_text": "historical successor callable changed",
+  "same_injected_primary_object": true,
+  "primary_errno": null,
+  "primary_winerror": null,
+  "native_sharing_conflict_code": null,
+  "actual_Reader_retained": true,
+  "Reader_closed": true,
+  "Reader_owner_fields_cleared": true,
+  "constructor_capture_cleared": true,
+  "captured_cleared": true,
+  "all_packets_cleared": true,
+  "seen_hours_cleared": true,
+  "outer_ReadViews_closed": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "actual_inner_states": {
+    "_journal": {
+      "type": "experiments.h1_historical_parent_prefix_development_v1.PrefixJournal",
+      "closed": true,
+      "nested_ReadView_closed": true
+    },
+    "_anchor": {
+      "type": "experiments.h1_historical_parent_prefix_development_v1.PrefixAnchor",
+      "closed": true,
+      "nested_ReadView_closed": true
+    },
+    "_root_lease": {
+      "type": "experiments.h1_parent_snapshot_development_v1.ReadView",
+      "closed": true
+    }
+  },
+  "close_calls": [
+    "frozen_parent",
+    "_journal",
+    "_anchor",
+    "_root_lease",
+    "outer_3",
+    "outer_2",
+    "outer_1",
+    "outer_0"
+  ],
+  "observed_replay_call_counts": {
+    "job_inspections": 0,
+    "stage_inspections": 0,
+    "normal_after_returns": 0
+  },
+  "inner_object_ids": {
+    "_journal": 1764435633856,
+    "_anchor": 1764435630160,
+    "_root_lease": 1764435630928
+  },
+  "outer_object_ids": [
+    1764431803600,
+    1764431805616,
+    1764431805808,
+    1764431806096
+  ],
+  "packet_digests_before_after": null,
+  "packet_fault_is_in_memory_reflection": false,
+  "all_packet_keys_before_revalidation": [],
+  "namespace_observations_reached": 1,
+  "ReadView_is_identity_observation_not_OS_writer_lease": true,
+  "real_filesystem_content_changed": false,
+  "namespace_fault_is_read_result_seam": false,
+  "namespace_seam_reads": 0,
+  "retained_frame_objects": false,
+  "only_explicitly_cleared_containers_checked": [
+    "captured",
+    "all_packets",
+    "seen_hours"
+  ],
+  "completed_prefix_hours_requested": 1,
+  "selected_hours": [
+    0
+  ],
+  "guard_usable_after_fault_restored": true,
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "case": "constructor_parent_code",
+  "exit_code": 0,
+  "elapsed_seconds": 3.1389811000008194,
+  "saved_case_files": 465,
+  "saved_case_sha256_equal": true,
+  "activity": {
+    "case_read_opens": 653,
+    "rejected_mutations": 0
+  },
+  "trace_profile_overhead_included": true,
+  "cleanup_errors": [],
+  "non_solver_Win32_file_API_used": false,
+  "native_solver_execution": false,
+  "prior_trace_and_profile_restored": true,
+  "constructor_or_file_failure_matrix_exhaustive": false,
+  "arbitrary_reflection_or_ABA_covered": false,
+  "source_successor_adopted": false,
+  "resource_admission": false,
+  "formal_execution_ready": false,
+  "new_normal_jobs": 0,
+  "real_native_solver_calls": 0,
+  "real_native_calls": 0,
+  "real_native_calls_scope": "solver/native scientific adapter only",
+  "formal_result": false
+}

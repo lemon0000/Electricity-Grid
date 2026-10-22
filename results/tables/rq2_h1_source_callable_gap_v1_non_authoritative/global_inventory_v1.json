@@ -1,0 +1,1107 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "root_functions": [
+    "_number",
+    "_encode",
+    "_digest",
+    "_validate",
+    "_dependencies",
+    "normal_input_identity",
+    "_validate_request"
+  ],
+  "function_limit": 128,
+  "edge_limit": 4096,
+  "visited_functions": 12,
+  "global_references": 123,
+  "enumeration_truncated": false,
+  "includes_nested_code_global_loads": true,
+  "recursively_resolves_only_plain_project_function_globals": true,
+  "module_attribute_and_instance_dispatch_expanded": false,
+  "class_descriptor_and_mutable_value_closure_proved": false,
+  "full_dynamic_dependency_closure_proved": false,
+  "rows": [
+    {
+      "function": "src.rq2_joint_deliverability_boundary_v1.continuous_grid_normal._number",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuous_grid_normal.py",
+      "line": 42,
+      "references": [
+        {
+          "name": "ValueError",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "float",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "int",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "isfinite",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "builtin_function_or_method",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "type",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        }
+      ]
+    },
+    {
+      "function": "src.rq2_joint_deliverability_boundary_v1.continuous_grid_normal._encode",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuous_grid_normal.py",
+      "line": 48,
+      "references": [
+        {
+          "name": "ValueError",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "_encode",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": true
+        },
+        {
+          "name": "_number",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": true
+        },
+        {
+          "name": "bool",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "datetime",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "type",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "dict",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "fields",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "float",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "frozenset",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "getattr",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "int",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "is_dataclass",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "isinstance",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "list",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "repr",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "set",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "sorted",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "str",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "tuple",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "type",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        }
+      ]
+    },
+    {
+      "function": "src.rq2_joint_deliverability_boundary_v1.continuous_grid_normal._digest",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuous_grid_normal.py",
+      "line": 67,
+      "references": [
+        {
+          "name": "_encode",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": true
+        },
+        {
+          "name": "json",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "module",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "sha256",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "builtin_function_or_method",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": false
+        }
+      ]
+    },
+    {
+      "function": "src.rq2_joint_deliverability_boundary_v1.continuous_grid_normal._validate",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuous_grid_normal.py",
+      "line": 101,
+      "references": [
+        {
+          "name": "ChronologicalFlexibilityTrace",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "type",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "ContinuousNormalInputs",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "type",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "GridCarry",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "type",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "TOLERANCE",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "float",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "UnitLimits",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "type",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "UnitPoint",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "type",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "ValueError",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "_number",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": true
+        },
+        {
+          "name": "_validate_request",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": true
+        },
+        {
+          "name": "any",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "bool",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "dict",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "enumerate",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "evaluate_chronological_flexibility",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "fields",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "getattr",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "int",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "len",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "range",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "scuc",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "module",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "set",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "sorted",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "str",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "timezone",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "type",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "tuple",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "type",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        }
+      ]
+    },
+    {
+      "function": "src.rq2_joint_deliverability_boundary_v1.continuous_grid_normal._dependencies",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuous_grid_normal.py",
+      "line": 71,
+      "references": [
+        {
+          "name": "Path",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "type",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "RUNTIME_DISTRIBUTIONS",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "tuple",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "SOURCE_DEPENDENCIES",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "tuple",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "__file__",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "str",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "platform",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "module",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "sha256",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "builtin_function_or_method",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "tuple",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "version",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": true
+        }
+      ]
+    },
+    {
+      "function": "src.rq2_joint_deliverability_boundary_v1.continuous_grid_normal.normal_input_identity",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuous_grid_normal.py",
+      "line": 96,
+      "references": [
+        {
+          "name": "CONTRACT",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "str",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "_dependencies",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": true
+        },
+        {
+          "name": "_digest",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": true
+        },
+        {
+          "name": "_validate",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": true,
+          "explicit_callable_state_guard": true
+        }
+      ]
+    },
+    {
+      "function": "src.grid.chronological_dispatch._validate_request",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\grid\\chronological_dispatch.py",
+      "line": 239,
+      "references": [
+        {
+          "name": "ValueError",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "_finite",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "any",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "bool",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "enumerate",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "int",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "isinstance",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "len",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "min",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "set",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "sorted",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "str",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "timedelta",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "type",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "tuple",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "zip",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        }
+      ]
+    },
+    {
+      "function": "src.evaluation.flexibility_envelope.evaluate_chronological_flexibility",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\evaluation\\flexibility_envelope.py",
+      "line": 105,
+      "references": [
+        {
+          "name": "ChronologicalFlexibilityResult",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "type",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "Integral",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "ABCMeta",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "TypeError",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "ValueError",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "_finite_number",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "_positive_number",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "_validate_period_mapping",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "abs",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "any",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "bool",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "dict",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "enumerate",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "frozenset",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "int",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "isinstance",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "len",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "list",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "max",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "min",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "range",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "set",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "sorted",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "str",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "tuple",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "zip",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        }
+      ]
+    },
+    {
+      "function": "src.grid.chronological_dispatch._finite",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\grid\\chronological_dispatch.py",
+      "line": 226,
+      "references": [
+        {
+          "name": "TypeError",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "ValueError",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "bool",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "float",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "isfinite",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "builtin_function_or_method",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "isinstance",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        }
+      ]
+    },
+    {
+      "function": "src.evaluation.flexibility_envelope._finite_number",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\evaluation\\flexibility_envelope.py",
+      "line": 74,
+      "references": [
+        {
+          "name": "Real",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "ABCMeta",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "ValueError",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "bool",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "float",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "isfinite",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "builtin_function_or_method",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "isinstance",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        }
+      ]
+    },
+    {
+      "function": "src.evaluation.flexibility_envelope._positive_number",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\evaluation\\flexibility_envelope.py",
+      "line": 83,
+      "references": [
+        {
+          "name": "ValueError",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "_finite_number",
+          "from_function_globals": true,
+          "otherwise_builtin_resolution": false,
+          "value_type": "function",
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        }
+      ]
+    },
+    {
+      "function": "src.evaluation.flexibility_envelope._validate_period_mapping",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\evaluation\\flexibility_envelope.py",
+      "line": 90,
+      "references": [
+        {
+          "name": "ValueError",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "set",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        },
+        {
+          "name": "sorted",
+          "from_function_globals": false,
+          "otherwise_builtin_resolution": true,
+          "value_type": null,
+          "explicit_alias_slot_guard": false,
+          "explicit_callable_state_guard": false
+        }
+      ]
+    }
+  ],
+  "bindings": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_source_callable_gap_v1_non_authoritative\\inventory_globals_v1.py": "9b01d578b4faa5b9e03f80afc455df8bd51ee554498bf2691fe393e9e014d326",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuous_grid_normal.py": "44a1249f1b172c07ac71b458ba79fc3817d2ae11bb9c22004e55b22b0e6ef313",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\grid\\chronological_dispatch.py": "71d6c1da0e72942512810c651619c5cd73e915c3ac6d0d52684476d6133658ec",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\evaluation\\flexibility_envelope.py": "db007a9ac1fdd94779b734c6d39e841302f01a1ef49a121d2c00e0d0a996cd40",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_historical_batch_development_v2.py": "d78a15cf86b9634623483e7838248532a1b1e9103a84b8aa138d8745d1ada191",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_source_callable_gap_v1_non_authoritative\\design_and_budget.md": "f015aa8e9b4d2e259194bd1bd385fa5168ee32c5638a7cb935fb1c9a53961d2b",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_source_callable_gap_v1_non_authoritative\\preseal_repair_plan.md": "be82e2c14b22e1a9871abace734e8db1df96e2e5e158482afdec16c56b810182"
+  },
+  "source_successor_adopted": false,
+  "new_normal_jobs": 0,
+  "real_native_calls": 0,
+  "resource_admission": false,
+  "formal_execution_ready": false,
+  "formal_result": false
+}

@@ -1,0 +1,35 @@
+........................................................................ [ 25%]
+......F................................................................. [ 51%]
+........................................................................ [ 77%]
+................................................................         [100%]
+================================== FAILURES ===================================
+______ test_required_solver_forbidden_window_keeps_runtime_guard_usable _______
+
+    def test_required_solver_forbidden_window_keeps_runtime_guard_usable():
+        with history.history.replay.guard.solver_calls_forbidden():
+>           history._check_dependencies()
+
+tests\test_h1_source_post_validation_development_v3.py:169: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_phase_historical_batch_development_v3.py:143: in _check_dependencies
+    _RUNTIME_CHECK(_RUNTIME)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <experiments.h1_constructor_runtime_guard_development_v1.NamedRuntimeSnapshot object at 0x000002A801DB7510>
+
+    def check(self):
+        for namespace, name, expected, label in self.slots:
+            if namespace.get(name, _MISSING) is not expected:
+                raise ValueError('named runtime slot changed: ' + label)
+        for function, before, label in self.functions:
+            if not same_function(function, before):
+                raise ValueError('named runtime callable changed: ' + label)
+        for kind, names, bases, mro, label in self.classes:
+            if tuple(vars(kind)) != names or kind.__bases__ is not bases or kind.__mro__ is not mro:
+>               raise ValueError('named runtime class changed: ' + label)
+E               ValueError: named runtime class changed: src.rq2_joint_deliverability_boundary_v1.continuous_grid_normal.normal_input_identity._validate.RtsGmlcInitialState
+
+experiments\h1_constructor_runtime_guard_development_v1.py:150: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_h1_source_post_validation_development_v3.py::test_required_solver_forbidden_window_keeps_runtime_guard_usable
+1 failed, 279 passed in 7.56s

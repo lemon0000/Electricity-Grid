@@ -1,0 +1,65 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "harness_source": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_window_fault_v1_non_authoritative\\probe_saved_v1.py",
+  "harness_source_sha256": "88e4f926834abb7c7d32999b72e0e1bf5e3b7fd1bc4d0a509121257d0af2fe1b",
+  "harness_target": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_window_fault_v1_non_authoritative\\probe_runtime_saved_v1.py",
+  "harness_target_sha256": "064d569382dc93e6c9093377e365b02965448e8171ca94d5530993ae4ddf338f",
+  "runner_source": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_window_fault_v1_non_authoritative\\run_probe_v1.py",
+  "runner_source_sha256": "85ff5e22319c3296630837294bd7887d96a008048a0f58f42050405daf81587e",
+  "runner_target": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_window_fault_v1_non_authoritative\\run_runtime_probe_v1.py",
+  "runner_target_sha256": "57b7ca71e5223211373eb3d4389f0b47ca9a0577062f8e8063cb5fbb6a2bb5bb",
+  "newline_policy": "preserve original CRLF or LF bytes outside declared replacements",
+  "harness_substitutions": [
+    {
+      "before": "import importlib.util",
+      "after": "import importlib.util\nimport importlib.metadata as metadata\nfrom types import SimpleNamespace",
+      "count": 1
+    },
+    {
+      "before": "        original=model._dependencies",
+      "after": "        original=metadata.distribution\n        original_model_dependencies=model._dependencies",
+      "count": 1
+    },
+    {
+      "before": "            def changed_dependencies():\n                state['dependency_calls_after_injection']+=1\n                sources,runtime=original()\n                return sources,runtime+(('development_constructor_window_probe','changed'),)",
+      "after": "            def changed_distribution(distribution_name):\n                state['dependency_calls_after_injection']+=1\n                item=original(distribution_name)\n                if distribution_name=='numpy':\n                    state['changed_numpy_version_observations']=state.get('changed_numpy_version_observations',0)+1\n                    return SimpleNamespace(version=item.version+'.development_constructor_window_probe')\n                return item",
+      "count": 1
+    },
+    {
+      "before": "                    model._dependencies=changed_dependencies",
+      "after": "                    state['normal_model_dependency_alias_unchanged_at_injection']=model._dependencies is original_model_dependencies\n                    metadata.distribution=changed_distribution",
+      "count": 1
+    },
+    {
+      "before": "                model._dependencies=original",
+      "after": "                metadata.distribution=original",
+      "count": 1
+    },
+    {
+      "before": "                model_dependency_alias_restored=model._dependencies is original,",
+      "after": "                runtime_distribution_function_restored=metadata.distribution is original,\n                normal_model_dependency_alias_unchanged=model._dependencies is original_model_dependencies,",
+      "count": 1
+    },
+    {
+      "before": "            assert row['model_dependency_alias_restored'] and sys.getprofile() is None",
+      "after": "            assert row['runtime_distribution_function_restored'] and row['normal_model_dependency_alias_unchanged'] and sys.getprofile() is None\n            assert state['normal_model_dependency_alias_unchanged_at_injection']\n            assert state.get('changed_numpy_version_observations',0)>0",
+      "count": 1
+    },
+    {
+      "before": "        real_manifest_sources_reaudited=False,Jobs=0,native=0,formal_result=False))",
+      "after": "        real_manifest_sources_reaudited=False,\n        fault='external_importlib_metadata_distribution_numpy_version',\n        normal_model_dependency_alias_changed=False,physical_files_changed=False,\n        Jobs=0,native=0,formal_result=False))",
+      "count": 1
+    },
+    {
+      "before": "        named_dependency_fault_rejected_by_both=",
+      "after": "        named_runtime_distribution_fault_rejected_by_both=",
+      "count": 1
+    }
+  ],
+  "runner_substitutions": [
+    "worker path twice",
+    "scope label once"
+  ],
+  "actual_implementation_changes": false,
+  "formal_result": false
+}

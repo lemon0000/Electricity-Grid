@@ -1,0 +1,62 @@
+...F.................................................................... [ 36%]
+........................................................................ [ 72%]
+......................................................                   [100%]
+================================== FAILURES ===================================
+_ test_model_json_global_changes_same_typed_input_identity_after_bookends_pass _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000239D627BA40>
+
+    def test_model_json_global_changes_same_typed_input_identity_after_bookends_pass(monkeypatch):
+        current=packet()
+        before=candidate._model_dependency_snapshot()
+        original=candidate.model.json
+        shim=SimpleNamespace(dumps=lambda *args,**kwargs:json.dumps(*args,**kwargs)+' ')
+        with monkeypatch.context() as patch:
+            patch.setattr(candidate.model,'json',shim)
+            candidate._check_dependencies()
+            candidate._model_dependencies_unchanged(before)
+            assert candidate.model.normal_input_identity(current.inputs)!=current.input_identity
+            with pytest.raises(ValueError,match='H1 current input drift'):
+>               normal_h1_source.validate_current(current)
+
+tests\test_h1_source_callable_gap_development_v1.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\rq2_joint_deliverability_boundary_v1\normal_h1_source.py:225: in validate_current
+    data = _network(packet.network)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+network = H1StaticNetwork(data=RtsGmlcChronologicalData(base_mva=100.0, reference_bus=1, buses=(RtsGmlcBus(uid=1, name='a', base... 40.0, 70.0, 100.0)),), hourly_points=()), identity='24b8e31fb52b46cb6a65a74816df861dbf55e3c853ec167f585992ffad241f3e')
+
+    def _network(network):
+        if (type(network) is not H1StaticNetwork or network.data.hourly_points != ()
+                or _digest(CONTRACT, network.data) != network.identity):
+>           raise ValueError('H1 static network drift or wrong type')
+E           ValueError: H1 static network drift or wrong type
+
+src\rq2_joint_deliverability_boundary_v1\normal_h1_source.py:95: ValueError
+
+During handling of the above exception, another exception occurred:
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000239D627BA40>
+
+    def test_model_json_global_changes_same_typed_input_identity_after_bookends_pass(monkeypatch):
+        current=packet()
+        before=candidate._model_dependency_snapshot()
+        original=candidate.model.json
+        shim=SimpleNamespace(dumps=lambda *args,**kwargs:json.dumps(*args,**kwargs)+' ')
+        with monkeypatch.context() as patch:
+            patch.setattr(candidate.model,'json',shim)
+            candidate._check_dependencies()
+            candidate._model_dependencies_unchanged(before)
+            assert candidate.model.normal_input_identity(current.inputs)!=current.input_identity
+>           with pytest.raises(ValueError,match='H1 current input drift'):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: Regex pattern did not match.
+E             Expected regex: 'H1 current input drift'
+E             Actual message: 'H1 static network drift or wrong type'
+
+tests\test_h1_source_callable_gap_development_v1.py:67: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_h1_source_callable_gap_development_v1.py::test_model_json_global_changes_same_typed_input_identity_after_bookends_pass
+1 failed, 197 passed in 4.97s

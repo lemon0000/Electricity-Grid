@@ -1,0 +1,19 @@
+.F                                                                       [100%]
+================================== FAILURES ===================================
+__________ test_container_aliases_and_fraction_match_actual_visitor ___________
+
+    def test_container_aliases_and_fraction_match_actual_visitor():
+        shared={'same':(Fraction(3,7),b'payload')}
+        pair=(shared,shared)
+        observed=worker.observe_accounting(api,pair)
+        assert observed['original_measure_equals_layout_walk']
+        assert observed['observed_recursive_bytes']==retained_size(pair)
+        assert observed['instance_dict_bytes']==0
+>       assert len(observed['reachable_object_types_and_sizes'])==9
+E       AssertionError: assert 8 == 9
+E        +  where 8 = len({'140709738211832': ('builtins.int', 28), '140709738211960': ('builtins.int', 28), '2585617293152': ('fractions.Fraction', 48), '2585617438848': ('builtins.dict', 184), ...})
+
+results\tables\rq2_h1_M232_retention_v1_non_authoritative\test_accounting_observer_v1.py:41: AssertionError
+=========================== short test summary info ===========================
+FAILED results/tables/rq2_h1_M232_retention_v1_non_authoritative/test_accounting_observer_v1.py::test_container_aliases_and_fraction_match_actual_visitor
+1 failed, 1 passed in 2.46s

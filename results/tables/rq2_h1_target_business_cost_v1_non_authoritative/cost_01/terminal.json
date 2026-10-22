@@ -1,0 +1,166 @@
+{
+  "exit_code": 0,
+  "junit": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "accepted": true
+  },
+  "fact": {
+    "status": "DRAFT_NONAUTHORITATIVE",
+    "scope": "target_length_original_business_validator_and_encoding_observation",
+    "frozen_v2_anchor_parameters": {
+      "time_step_hours": "1",
+      "call_limit": "1",
+      "flexible_fraction": "0.20",
+      "recovery_headroom_coefficient": "0.10",
+      "recovery_efficiency": "0.85",
+      "maximum_event_duration_hours": 4,
+      "minimum_rest_hours": 1,
+      "response_time_hours": "1",
+      "episode_event_cap": 14,
+      "episode_call_energy_cap": "2.8",
+      "normalized_debt_cap": "0.20",
+      "maximum_recovery_power": "1",
+      "curtailment_up_ramp_per_hour": "1",
+      "minimum_event_power": "0.000001",
+      "service_tolerance": "0.000001",
+      "recovery_decimal_places": 12,
+      "initial_business_state": "explicit_zero_history"
+    },
+    "benchmark_alpha": "1/2",
+    "benchmark_D": "1/2",
+    "build_business_hours": 192,
+    "build_seconds": 9.773252000002685,
+    "build_prepare_calls_by_fixed_code": 192,
+    "build_validate_history_length_sum_by_fixed_code": 18336,
+    "internal_record_or_callback_calls_instrumented": false,
+    "rows": [
+      {
+        "hours": 168,
+        "original_validator_seconds": 0.07993849999911617,
+        "scientific_encoding_seconds": 0.05950229999871226,
+        "full_carry_encoding_seconds": 0.050522400000772905,
+        "scientific_bytes": 201670,
+        "scientific_sha256": "22966636ec0b0bb63af46e9de8f7cde00ce8b4f26d85712a3883d053fc76df56",
+        "full_carry_bytes": 1836367,
+        "full_carry_sha256": "54aa7106a35fb112b3d3a87d9f370a96d759220af3b9ef638574d8600abc4c98",
+        "history_length": 168,
+        "records": 168,
+        "debt": "17/1000",
+        "scientific_payload_unchanged": true
+      },
+      {
+        "hours": 192,
+        "original_validator_seconds": 0.09130910000021686,
+        "scientific_encoding_seconds": 0.005549199999222765,
+        "full_carry_encoding_seconds": 0.060321299999486655,
+        "scientific_bytes": 230230,
+        "scientific_sha256": "0f2296a800c564ea4abc3ca13aa541cb5a505c17c596c6bb6ac8867fa4b6c6b7",
+        "full_carry_bytes": 2118971,
+        "full_carry_sha256": "076ad4a61280ee747d48ce836dee81945f11af3bd31f8da5061060b5e1ac1fb0",
+        "history_length": 192,
+        "records": 192,
+        "debt": "0",
+        "scientific_payload_unchanged": true
+      }
+    ],
+    "primary_birth_hour": 168,
+    "due_hour": 192,
+    "final_recovery": "1/50",
+    "final_debt": "0",
+    "deadline_snapshot": "0",
+    "repetitions_per_target": 1,
+    "runtime_record_cache": false,
+    "component_wall_or_storage_upper_bound_established": false,
+    "complete_owner_event_size_measured": false,
+    "complete_owner_chain_measured": false,
+    "source_prefix_authenticated": false,
+    "paired_owner_authenticated": false,
+    "phase_events_written": 0,
+    "overall_performance_review_complete": false,
+    "resource_admission": false,
+    "full_192_hour_execution_verified": false,
+    "new_normal_jobs": 0,
+    "real_native_calls": 0,
+    "formal_result": false
+  },
+  "retained_base_json": {
+    "D:\\h1_target_business_cost_cost_01_non_authoritative\\test_target_history_cost0\\fact.json": {
+      "copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\base_artifacts\\test_target_history_cost0\\fact.json",
+      "sha256": "7d46b33038ebb65e6f9298267edf778c8ebaf80d3ee52b34ef95634c723076f8"
+    },
+    "D:\\h1_target_business_cost_cost_01_non_authoritative\\test_target_history_cost0\\h168_full_carry_audit.json": {
+      "copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\base_artifacts\\test_target_history_cost0\\h168_full_carry_audit.json",
+      "sha256": "54aa7106a35fb112b3d3a87d9f370a96d759220af3b9ef638574d8600abc4c98"
+    },
+    "D:\\h1_target_business_cost_cost_01_non_authoritative\\test_target_history_cost0\\h168_scientific.json": {
+      "copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\base_artifacts\\test_target_history_cost0\\h168_scientific.json",
+      "sha256": "22966636ec0b0bb63af46e9de8f7cde00ce8b4f26d85712a3883d053fc76df56"
+    },
+    "D:\\h1_target_business_cost_cost_01_non_authoritative\\test_target_history_cost0\\h192_full_carry_audit.json": {
+      "copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\base_artifacts\\test_target_history_cost0\\h192_full_carry_audit.json",
+      "sha256": "076ad4a61280ee747d48ce836dee81945f11af3bd31f8da5061060b5e1ac1fb0"
+    },
+    "D:\\h1_target_business_cost_cost_01_non_authoritative\\test_target_history_cost0\\h192_scientific.json": {
+      "copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\base_artifacts\\test_target_history_cost0\\h192_scientific.json",
+      "sha256": "0f2296a800c564ea4abc3ca13aa541cb5a505c17c596c6bb6ac8867fa4b6c6b7"
+    },
+    "D:\\h1_target_business_cost_cost_01_non_authoritative\\test_target_history_cost0\\progress.json": {
+      "copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\base_artifacts\\test_target_history_cost0\\progress.json",
+      "sha256": "fe8f78e8dc46f4a42bae8d60af8a4e503cdce5ef84441a7d2fe33727fac72d49"
+    }
+  },
+  "reason": null,
+  "outer_seconds": 14.514999999999418,
+  "peak_sampled_tree_rss_bytes": 173473792,
+  "peak_logical_bytes": 9202164,
+  "final_logical_bytes": 9202164,
+  "source_pins": 1306,
+  "changed_sources": [],
+  "observed_processes": {
+    "3648": 1792562519.668258,
+    "31900": 1792562519.677168
+  },
+  "observed_images": {
+    "3648": {
+      "executable": "D:\\Miniconda3\\envs\\compute\\python.exe",
+      "parent_pid": 32712,
+      "create_time": 1792562519.668258,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-u",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-s",
+        "-p",
+        "no:cacheprovider",
+        "-p",
+        "no:faulthandler",
+        "--basetemp",
+        "D:\\h1_target_business_cost_cost_01_non_authoritative",
+        "--junitxml",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\cost_01\\junit.xml",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_target_business_cost_v1_non_authoritative\\workload_v1.py"
+      ]
+    },
+    "31900": {
+      "executable": "C:\\Windows\\System32\\conhost.exe",
+      "parent_pid": 3648,
+      "create_time": 1792562519.677168,
+      "command": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ]
+    }
+  },
+  "observed_processes_remaining": [],
+  "cleanup_events": [],
+  "complete_unobserved_process_tree_proof": false,
+  "new_normal_jobs": 0,
+  "real_native_calls": 0,
+  "formal_result": false
+}

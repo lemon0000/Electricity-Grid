@@ -1,0 +1,293 @@
+..............................................FFFFFF.................... [ 25%]
+........................................................................ [ 51%]
+........................................................................ [ 77%]
+...............................................................          [100%]
+================================== FAILURES ===================================
+_ test_all_hour_revalidation_rejects_packet_drift_even_if_hour_is_not_selected[input_identity] _
+
+field = 'input_identity'
+
+    @pytest.mark.parametrize('field', ['input_identity','audit_identity','source_timestamp','workload_projection_payload'])
+    def test_all_hour_revalidation_rejects_packet_drift_even_if_hour_is_not_selected(field):
+        value=packet();packets={}
+>       assert history._remember_packet(packets,value,1)>0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_source_post_validation_development_v3.py:98: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_phase_historical_batch_development_v3.py:86: in _remember_packet
+    pin=(packet.input_identity,packet.audit_identity,packet_source._digest(packet))
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:68: in _digest
+    return sha256(json.dumps(_encode(items), ensure_ascii=True, allow_nan=False).encode()).hexdigest()
+                             ^^^^^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:56: in _encode
+    return [type(x).__name__, [_encode(v) for v in x]]
+                               ^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:50: in _encode
+    return [type(x).__name__, [[f.name, _encode(getattr(x, f.name))] for f in fields(x)]]
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+x = b'{"dc_baseline_mw":0.0,"decimal_places":12,"exact_interface_identity_verified":true,"formal_result":false,"maximum_ro...,"raw_fraction_clipped":false,"raw_workload_fraction":"0","reason":null,"status":"projected","workload_occupancy":0.0}'
+
+    def _encode(x):
+        if is_dataclass(x):
+            return [type(x).__name__, [[f.name, _encode(getattr(x, f.name))] for f in fields(x)]]
+        if isinstance(x, datetime):
+            return ['datetime', x.isoformat()]
+        if isinstance(x, dict):
+            return ['mapping', sorted([[_encode(k), _encode(v)] for k, v in x.items()], key=repr)]
+        if isinstance(x, (tuple, list)):
+            return [type(x).__name__, [_encode(v) for v in x]]
+        if isinstance(x, (set, frozenset)):
+            return ['set', sorted([_encode(v) for v in x], key=repr)]
+        if type(x) is float:
+            _number(x, 'identity')
+            return ['float', x.hex()]
+        if x is None or type(x) in (str, int, bool):
+            return x
+>       raise ValueError(f'unsupported input identity type: {type(x).__name__}')
+E       ValueError: unsupported input identity type: bytes
+
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:64: ValueError
+_ test_all_hour_revalidation_rejects_packet_drift_even_if_hour_is_not_selected[audit_identity] _
+
+field = 'audit_identity'
+
+    @pytest.mark.parametrize('field', ['input_identity','audit_identity','source_timestamp','workload_projection_payload'])
+    def test_all_hour_revalidation_rejects_packet_drift_even_if_hour_is_not_selected(field):
+        value=packet();packets={}
+>       assert history._remember_packet(packets,value,1)>0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_source_post_validation_development_v3.py:98: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_phase_historical_batch_development_v3.py:86: in _remember_packet
+    pin=(packet.input_identity,packet.audit_identity,packet_source._digest(packet))
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:68: in _digest
+    return sha256(json.dumps(_encode(items), ensure_ascii=True, allow_nan=False).encode()).hexdigest()
+                             ^^^^^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:56: in _encode
+    return [type(x).__name__, [_encode(v) for v in x]]
+                               ^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:50: in _encode
+    return [type(x).__name__, [[f.name, _encode(getattr(x, f.name))] for f in fields(x)]]
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+x = b'{"dc_baseline_mw":0.0,"decimal_places":12,"exact_interface_identity_verified":true,"formal_result":false,"maximum_ro...,"raw_fraction_clipped":false,"raw_workload_fraction":"0","reason":null,"status":"projected","workload_occupancy":0.0}'
+
+    def _encode(x):
+        if is_dataclass(x):
+            return [type(x).__name__, [[f.name, _encode(getattr(x, f.name))] for f in fields(x)]]
+        if isinstance(x, datetime):
+            return ['datetime', x.isoformat()]
+        if isinstance(x, dict):
+            return ['mapping', sorted([[_encode(k), _encode(v)] for k, v in x.items()], key=repr)]
+        if isinstance(x, (tuple, list)):
+            return [type(x).__name__, [_encode(v) for v in x]]
+        if isinstance(x, (set, frozenset)):
+            return ['set', sorted([_encode(v) for v in x], key=repr)]
+        if type(x) is float:
+            _number(x, 'identity')
+            return ['float', x.hex()]
+        if x is None or type(x) in (str, int, bool):
+            return x
+>       raise ValueError(f'unsupported input identity type: {type(x).__name__}')
+E       ValueError: unsupported input identity type: bytes
+
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:64: ValueError
+_ test_all_hour_revalidation_rejects_packet_drift_even_if_hour_is_not_selected[source_timestamp] _
+
+field = 'source_timestamp'
+
+    @pytest.mark.parametrize('field', ['input_identity','audit_identity','source_timestamp','workload_projection_payload'])
+    def test_all_hour_revalidation_rejects_packet_drift_even_if_hour_is_not_selected(field):
+        value=packet();packets={}
+>       assert history._remember_packet(packets,value,1)>0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_source_post_validation_development_v3.py:98: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_phase_historical_batch_development_v3.py:86: in _remember_packet
+    pin=(packet.input_identity,packet.audit_identity,packet_source._digest(packet))
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:68: in _digest
+    return sha256(json.dumps(_encode(items), ensure_ascii=True, allow_nan=False).encode()).hexdigest()
+                             ^^^^^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:56: in _encode
+    return [type(x).__name__, [_encode(v) for v in x]]
+                               ^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:50: in _encode
+    return [type(x).__name__, [[f.name, _encode(getattr(x, f.name))] for f in fields(x)]]
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+x = b'{"dc_baseline_mw":0.0,"decimal_places":12,"exact_interface_identity_verified":true,"formal_result":false,"maximum_ro...,"raw_fraction_clipped":false,"raw_workload_fraction":"0","reason":null,"status":"projected","workload_occupancy":0.0}'
+
+    def _encode(x):
+        if is_dataclass(x):
+            return [type(x).__name__, [[f.name, _encode(getattr(x, f.name))] for f in fields(x)]]
+        if isinstance(x, datetime):
+            return ['datetime', x.isoformat()]
+        if isinstance(x, dict):
+            return ['mapping', sorted([[_encode(k), _encode(v)] for k, v in x.items()], key=repr)]
+        if isinstance(x, (tuple, list)):
+            return [type(x).__name__, [_encode(v) for v in x]]
+        if isinstance(x, (set, frozenset)):
+            return ['set', sorted([_encode(v) for v in x], key=repr)]
+        if type(x) is float:
+            _number(x, 'identity')
+            return ['float', x.hex()]
+        if x is None or type(x) in (str, int, bool):
+            return x
+>       raise ValueError(f'unsupported input identity type: {type(x).__name__}')
+E       ValueError: unsupported input identity type: bytes
+
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:64: ValueError
+_ test_all_hour_revalidation_rejects_packet_drift_even_if_hour_is_not_selected[workload_projection_payload] _
+
+field = 'workload_projection_payload'
+
+    @pytest.mark.parametrize('field', ['input_identity','audit_identity','source_timestamp','workload_projection_payload'])
+    def test_all_hour_revalidation_rejects_packet_drift_even_if_hour_is_not_selected(field):
+        value=packet();packets={}
+>       assert history._remember_packet(packets,value,1)>0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_source_post_validation_development_v3.py:98: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_phase_historical_batch_development_v3.py:86: in _remember_packet
+    pin=(packet.input_identity,packet.audit_identity,packet_source._digest(packet))
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:68: in _digest
+    return sha256(json.dumps(_encode(items), ensure_ascii=True, allow_nan=False).encode()).hexdigest()
+                             ^^^^^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:56: in _encode
+    return [type(x).__name__, [_encode(v) for v in x]]
+                               ^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:50: in _encode
+    return [type(x).__name__, [[f.name, _encode(getattr(x, f.name))] for f in fields(x)]]
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+x = b'{"dc_baseline_mw":0.0,"decimal_places":12,"exact_interface_identity_verified":true,"formal_result":false,"maximum_ro...,"raw_fraction_clipped":false,"raw_workload_fraction":"0","reason":null,"status":"projected","workload_occupancy":0.0}'
+
+    def _encode(x):
+        if is_dataclass(x):
+            return [type(x).__name__, [[f.name, _encode(getattr(x, f.name))] for f in fields(x)]]
+        if isinstance(x, datetime):
+            return ['datetime', x.isoformat()]
+        if isinstance(x, dict):
+            return ['mapping', sorted([[_encode(k), _encode(v)] for k, v in x.items()], key=repr)]
+        if isinstance(x, (tuple, list)):
+            return [type(x).__name__, [_encode(v) for v in x]]
+        if isinstance(x, (set, frozenset)):
+            return ['set', sorted([_encode(v) for v in x], key=repr)]
+        if type(x) is float:
+            _number(x, 'identity')
+            return ['float', x.hex()]
+        if x is None or type(x) in (str, int, bool):
+            return x
+>       raise ValueError(f'unsupported input identity type: {type(x).__name__}')
+E       ValueError: unsupported input identity type: bytes
+
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:64: ValueError
+_ test_all_hour_full_digest_preserves_original_even_for_internally_valid_new_packet _
+
+    def test_all_hour_full_digest_preserves_original_even_for_internally_valid_new_packet():
+>       value=packet();packets={};history._remember_packet(packets,value,1)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_source_post_validation_development_v3.py:106: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_phase_historical_batch_development_v3.py:86: in _remember_packet
+    pin=(packet.input_identity,packet.audit_identity,packet_source._digest(packet))
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:68: in _digest
+    return sha256(json.dumps(_encode(items), ensure_ascii=True, allow_nan=False).encode()).hexdigest()
+                             ^^^^^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:56: in _encode
+    return [type(x).__name__, [_encode(v) for v in x]]
+                               ^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:50: in _encode
+    return [type(x).__name__, [[f.name, _encode(getattr(x, f.name))] for f in fields(x)]]
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+x = b'{"dc_baseline_mw":0.0,"decimal_places":12,"exact_interface_identity_verified":true,"formal_result":false,"maximum_ro...,"raw_fraction_clipped":false,"raw_workload_fraction":"0","reason":null,"status":"projected","workload_occupancy":0.0}'
+
+    def _encode(x):
+        if is_dataclass(x):
+            return [type(x).__name__, [[f.name, _encode(getattr(x, f.name))] for f in fields(x)]]
+        if isinstance(x, datetime):
+            return ['datetime', x.isoformat()]
+        if isinstance(x, dict):
+            return ['mapping', sorted([[_encode(k), _encode(v)] for k, v in x.items()], key=repr)]
+        if isinstance(x, (tuple, list)):
+            return [type(x).__name__, [_encode(v) for v in x]]
+        if isinstance(x, (set, frozenset)):
+            return ['set', sorted([_encode(v) for v in x], key=repr)]
+        if type(x) is float:
+            _number(x, 'identity')
+            return ['float', x.hex()]
+        if x is None or type(x) in (str, int, bool):
+            return x
+>       raise ValueError(f'unsupported input identity type: {type(x).__name__}')
+E       ValueError: unsupported input identity type: bytes
+
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:64: ValueError
+_______ test_packet_inventory_rejects_overwrite_missing_and_wrong_type ________
+
+    def test_packet_inventory_rejects_overwrite_missing_and_wrong_type():
+>       packets={};value=packet();history._remember_packet(packets,value,2)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_source_post_validation_development_v3.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_phase_historical_batch_development_v3.py:86: in _remember_packet
+    pin=(packet.input_identity,packet.audit_identity,packet_source._digest(packet))
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:68: in _digest
+    return sha256(json.dumps(_encode(items), ensure_ascii=True, allow_nan=False).encode()).hexdigest()
+                             ^^^^^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:56: in _encode
+    return [type(x).__name__, [_encode(v) for v in x]]
+                               ^^^^^^^^^^
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:50: in _encode
+    return [type(x).__name__, [[f.name, _encode(getattr(x, f.name))] for f in fields(x)]]
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+x = b'{"dc_baseline_mw":0.0,"decimal_places":12,"exact_interface_identity_verified":true,"formal_result":false,"maximum_ro...,"raw_fraction_clipped":false,"raw_workload_fraction":"0","reason":null,"status":"projected","workload_occupancy":0.0}'
+
+    def _encode(x):
+        if is_dataclass(x):
+            return [type(x).__name__, [[f.name, _encode(getattr(x, f.name))] for f in fields(x)]]
+        if isinstance(x, datetime):
+            return ['datetime', x.isoformat()]
+        if isinstance(x, dict):
+            return ['mapping', sorted([[_encode(k), _encode(v)] for k, v in x.items()], key=repr)]
+        if isinstance(x, (tuple, list)):
+            return [type(x).__name__, [_encode(v) for v in x]]
+        if isinstance(x, (set, frozenset)):
+            return ['set', sorted([_encode(v) for v in x], key=repr)]
+        if type(x) is float:
+            _number(x, 'identity')
+            return ['float', x.hex()]
+        if x is None or type(x) in (str, int, bool):
+            return x
+>       raise ValueError(f'unsupported input identity type: {type(x).__name__}')
+E       ValueError: unsupported input identity type: bytes
+
+src\rq2_joint_deliverability_boundary_v1\continuous_grid_normal.py:64: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_h1_source_post_validation_development_v3.py::test_all_hour_revalidation_rejects_packet_drift_even_if_hour_is_not_selected[input_identity]
+FAILED tests/test_h1_source_post_validation_development_v3.py::test_all_hour_revalidation_rejects_packet_drift_even_if_hour_is_not_selected[audit_identity]
+FAILED tests/test_h1_source_post_validation_development_v3.py::test_all_hour_revalidation_rejects_packet_drift_even_if_hour_is_not_selected[source_timestamp]
+FAILED tests/test_h1_source_post_validation_development_v3.py::test_all_hour_revalidation_rejects_packet_drift_even_if_hour_is_not_selected[workload_projection_payload]
+FAILED tests/test_h1_source_post_validation_development_v3.py::test_all_hour_full_digest_preserves_original_even_for_internally_valid_new_packet
+FAILED tests/test_h1_source_post_validation_development_v3.py::test_packet_inventory_rejects_overwrite_missing_and_wrong_type
+6 failed, 273 passed in 6.36s

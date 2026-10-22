@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="15" time="129.574" timestamp="2026-10-20T21:31:23.855484+08:00" hostname="LAPTOP-FT6J5Q9J"><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_count_recurrence_matches_saved_three_hour_observations" time="0.006" /><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_business_visit_lower_bound_from_independent_event_enumeration[168]" time="0.003" /><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_business_visit_lower_bound_from_independent_event_enumeration[192]" time="0.003" /><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_original_branch_gate_rejects_small_event_budget_before_next_hour" time="0.001" /><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_original_phase_bodies_consume_complete_business_histories[no_requests-167-True-enrollment-U]" time="81.045"><failure message="KeyError: 'alternate'">histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+tmp_path = WindowsPath('D:/h1_phase_boundary_unit_03_non_authoritative/test_original_phase_bodies_con0')
+label = 'no_requests', hour = 167, need = True, next_phase = 'enrollment'
+recovery = 'U'
+
+    @pytest.mark.parametrize('label,hour,need,next_phase,recovery', [
+        ('no_requests', 167, True, 'enrollment', 'U'),
+        ('no_requests', 168, False, None, 'S'),
+        ('pending', 168, True, 'followup', 'U'),
+        ('pending', 169, True, 'followup', 'U'),
+        ('recover_primary', 170, False, None, 'S'),
+        ('late_recovery', 170, True, 'followup', 'F'),
+        ('pending', 191, True, 'followup', 'U'),
+        ('pending', 192, False, None, 'F'),
+    ])
+    def test_original_phase_bodies_consume_complete_business_histories(
+            histories, tmp_path, label, hour, need, next_phase, recovery):
+        carry = histories[label][hour]
+        before = state(carry)
+        assessment = phase._assessment(before)
+        fact = assessment.lanes[0].business
+        assert assessment.needs_next_hour is need
+        assert fact.next_phase == next_phase and fact.primary_recovery_status == recovery
+        assert not assessment.owner_replay_authenticated and not assessment.actual_paired_commit_verified
+        assert not assessment.producer_admitted and not assessment.formal_result
+        host = body_host()
+        rows = [(1, '', 'intent', phase.encode(dict(terminal='3' * 64)), '')]
+        if need:
+            with pytest.raises(ValueError, match='episode still needs'):
+                phase.DevelopmentOwner._terminal_body(host, before, rows)
+&gt;           body = phase.DevelopmentOwner._attempt_body(host, before, rows)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:110: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_phase_owner_development_v1.py:587: in _attempt_body
+    previous=next(json.loads(r[3])['terminal'] for r in reversed(rows)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+.0 = &lt;list_reverseiterator object at 0x0000025E7E152D70&gt;
+
+    previous=next(json.loads(r[3])['terminal'] for r in reversed(rows)
+&gt;       if r[2]=='intent' and not json.loads(r[3])['alternate'])
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'alternate'
+
+experiments\h1_phase_owner_development_v1.py:588: KeyError</failure></testcase><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_original_phase_bodies_consume_complete_business_histories[no_requests-168-False-None-S]" time="0.900" /><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_original_phase_bodies_consume_complete_business_histories[pending-168-True-followup-U]" time="0.910"><failure message="KeyError: 'alternate'">histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+tmp_path = WindowsPath('D:/h1_phase_boundary_unit_03_non_authoritative/test_original_phase_bodies_con2')
+label = 'pending', hour = 168, need = True, next_phase = 'followup'
+recovery = 'U'
+
+    @pytest.mark.parametrize('label,hour,need,next_phase,recovery', [
+        ('no_requests', 167, True, 'enrollment', 'U'),
+        ('no_requests', 168, False, None, 'S'),
+        ('pending', 168, True, 'followup', 'U'),
+        ('pending', 169, True, 'followup', 'U'),
+        ('recover_primary', 170, False, None, 'S'),
+        ('late_recovery', 170, True, 'followup', 'F'),
+        ('pending', 191, True, 'followup', 'U'),
+        ('pending', 192, False, None, 'F'),
+    ])
+    def test_original_phase_bodies_consume_complete_business_histories(
+            histories, tmp_path, label, hour, need, next_phase, recovery):
+        carry = histories[label][hour]
+        before = state(carry)
+        assessment = phase._assessment(before)
+        fact = assessment.lanes[0].business
+        assert assessment.needs_next_hour is need
+        assert fact.next_phase == next_phase and fact.primary_recovery_status == recovery
+        assert not assessment.owner_replay_authenticated and not assessment.actual_paired_commit_verified
+        assert not assessment.producer_admitted and not assessment.formal_result
+        host = body_host()
+        rows = [(1, '', 'intent', phase.encode(dict(terminal='3' * 64)), '')]
+        if need:
+            with pytest.raises(ValueError, match='episode still needs'):
+                phase.DevelopmentOwner._terminal_body(host, before, rows)
+&gt;           body = phase.DevelopmentOwner._attempt_body(host, before, rows)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:110: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_phase_owner_development_v1.py:587: in _attempt_body
+    previous=next(json.loads(r[3])['terminal'] for r in reversed(rows)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+.0 = &lt;list_reverseiterator object at 0x0000025E7E1D5210&gt;
+
+    previous=next(json.loads(r[3])['terminal'] for r in reversed(rows)
+&gt;       if r[2]=='intent' and not json.loads(r[3])['alternate'])
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'alternate'
+
+experiments\h1_phase_owner_development_v1.py:588: KeyError</failure></testcase><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_original_phase_bodies_consume_complete_business_histories[pending-169-True-followup-U]" time="0.869"><failure message="KeyError: 'alternate'">histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+tmp_path = WindowsPath('D:/h1_phase_boundary_unit_03_non_authoritative/test_original_phase_bodies_con3')
+label = 'pending', hour = 169, need = True, next_phase = 'followup'
+recovery = 'U'
+
+    @pytest.mark.parametrize('label,hour,need,next_phase,recovery', [
+        ('no_requests', 167, True, 'enrollment', 'U'),
+        ('no_requests', 168, False, None, 'S'),
+        ('pending', 168, True, 'followup', 'U'),
+        ('pending', 169, True, 'followup', 'U'),
+        ('recover_primary', 170, False, None, 'S'),
+        ('late_recovery', 170, True, 'followup', 'F'),
+        ('pending', 191, True, 'followup', 'U'),
+        ('pending', 192, False, None, 'F'),
+    ])
+    def test_original_phase_bodies_consume_complete_business_histories(
+            histories, tmp_path, label, hour, need, next_phase, recovery):
+        carry = histories[label][hour]
+        before = state(carry)
+        assessment = phase._assessment(before)
+        fact = assessment.lanes[0].business
+        assert assessment.needs_next_hour is need
+        assert fact.next_phase == next_phase and fact.primary_recovery_status == recovery
+        assert not assessment.owner_replay_authenticated and not assessment.actual_paired_commit_verified
+        assert not assessment.producer_admitted and not assessment.formal_result
+        host = body_host()
+        rows = [(1, '', 'intent', phase.encode(dict(terminal='3' * 64)), '')]
+        if need:
+            with pytest.raises(ValueError, match='episode still needs'):
+                phase.DevelopmentOwner._terminal_body(host, before, rows)
+&gt;           body = phase.DevelopmentOwner._attempt_body(host, before, rows)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:110: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_phase_owner_development_v1.py:587: in _attempt_body
+    previous=next(json.loads(r[3])['terminal'] for r in reversed(rows)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+.0 = &lt;list_reverseiterator object at 0x0000025E7E4197E0&gt;
+
+    previous=next(json.loads(r[3])['terminal'] for r in reversed(rows)
+&gt;       if r[2]=='intent' and not json.loads(r[3])['alternate'])
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'alternate'
+
+experiments\h1_phase_owner_development_v1.py:588: KeyError</failure></testcase><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_original_phase_bodies_consume_complete_business_histories[recover_primary-170-False-None-S]" time="0.971" /><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_original_phase_bodies_consume_complete_business_histories[late_recovery-170-True-followup-F]" time="0.967"><failure message="KeyError: 'alternate'">histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+tmp_path = WindowsPath('D:/h1_phase_boundary_unit_03_non_authoritative/test_original_phase_bodies_con5')
+label = 'late_recovery', hour = 170, need = True, next_phase = 'followup'
+recovery = 'F'
+
+    @pytest.mark.parametrize('label,hour,need,next_phase,recovery', [
+        ('no_requests', 167, True, 'enrollment', 'U'),
+        ('no_requests', 168, False, None, 'S'),
+        ('pending', 168, True, 'followup', 'U'),
+        ('pending', 169, True, 'followup', 'U'),
+        ('recover_primary', 170, False, None, 'S'),
+        ('late_recovery', 170, True, 'followup', 'F'),
+        ('pending', 191, True, 'followup', 'U'),
+        ('pending', 192, False, None, 'F'),
+    ])
+    def test_original_phase_bodies_consume_complete_business_histories(
+            histories, tmp_path, label, hour, need, next_phase, recovery):
+        carry = histories[label][hour]
+        before = state(carry)
+        assessment = phase._assessment(before)
+        fact = assessment.lanes[0].business
+        assert assessment.needs_next_hour is need
+        assert fact.next_phase == next_phase and fact.primary_recovery_status == recovery
+        assert not assessment.owner_replay_authenticated and not assessment.actual_paired_commit_verified
+        assert not assessment.producer_admitted and not assessment.formal_result
+        host = body_host()
+        rows = [(1, '', 'intent', phase.encode(dict(terminal='3' * 64)), '')]
+        if need:
+            with pytest.raises(ValueError, match='episode still needs'):
+                phase.DevelopmentOwner._terminal_body(host, before, rows)
+&gt;           body = phase.DevelopmentOwner._attempt_body(host, before, rows)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:110: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_phase_owner_development_v1.py:587: in _attempt_body
+    previous=next(json.loads(r[3])['terminal'] for r in reversed(rows)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+.0 = &lt;list_reverseiterator object at 0x0000025E7E4DB7F0&gt;
+
+    previous=next(json.loads(r[3])['terminal'] for r in reversed(rows)
+&gt;       if r[2]=='intent' and not json.loads(r[3])['alternate'])
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'alternate'
+
+experiments\h1_phase_owner_development_v1.py:588: KeyError</failure></testcase><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_original_phase_bodies_consume_complete_business_histories[pending-191-True-followup-U]" time="1.036"><failure message="KeyError: 'alternate'">histories = {'late_recovery': {0: BusinessCarry(implementation='943d8c7d7769c94eca05c42ab31f69969b7846eee986cfcc8d9f7e589c3ce981',...us=Fraction(0, 1), rule='baseline_proportional_preaction_clean_allowance_v1'), grid_request_mw=Fraction(0, 1)))), ...}}
+tmp_path = WindowsPath('D:/h1_phase_boundary_unit_03_non_authoritative/test_original_phase_bodies_con6')
+label = 'pending', hour = 191, need = True, next_phase = 'followup'
+recovery = 'U'
+
+    @pytest.mark.parametrize('label,hour,need,next_phase,recovery', [
+        ('no_requests', 167, True, 'enrollment', 'U'),
+        ('no_requests', 168, False, None, 'S'),
+        ('pending', 168, True, 'followup', 'U'),
+        ('pending', 169, True, 'followup', 'U'),
+        ('recover_primary', 170, False, None, 'S'),
+        ('late_recovery', 170, True, 'followup', 'F'),
+        ('pending', 191, True, 'followup', 'U'),
+        ('pending', 192, False, None, 'F'),
+    ])
+    def test_original_phase_bodies_consume_complete_business_histories(
+            histories, tmp_path, label, hour, need, next_phase, recovery):
+        carry = histories[label][hour]
+        before = state(carry)
+        assessment = phase._assessment(before)
+        fact = assessment.lanes[0].business
+        assert assessment.needs_next_hour is need
+        assert fact.next_phase == next_phase and fact.primary_recovery_status == recovery
+        assert not assessment.owner_replay_authenticated and not assessment.actual_paired_commit_verified
+        assert not assessment.producer_admitted and not assessment.formal_result
+        host = body_host()
+        rows = [(1, '', 'intent', phase.encode(dict(terminal='3' * 64)), '')]
+        if need:
+            with pytest.raises(ValueError, match='episode still needs'):
+                phase.DevelopmentOwner._terminal_body(host, before, rows)
+&gt;           body = phase.DevelopmentOwner._attempt_body(host, before, rows)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h1_phase_boundary_budget_development_v1.py:110: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_phase_owner_development_v1.py:587: in _attempt_body
+    previous=next(json.loads(r[3])['terminal'] for r in reversed(rows)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+.0 = &lt;list_reverseiterator object at 0x0000025E7E1388B0&gt;
+
+    previous=next(json.loads(r[3])['terminal'] for r in reversed(rows)
+&gt;       if r[2]=='intent' and not json.loads(r[3])['alternate'])
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'alternate'
+
+experiments\h1_phase_owner_development_v1.py:588: KeyError</failure></testcase><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_original_phase_bodies_consume_complete_business_histories[pending-192-False-None-F]" time="1.071" /><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_terminal_with_halted_unknown_is_not_a_success" time="0.666" /><testcase classname="tests.test_h1_phase_boundary_budget_development_v1" name="test_missing_needed_followup_is_not_a_business_or_terminal_success" time="0.299" /><testcase classname="tests.test_h1_phase_boundary_due_endpoint_development_v1" name="test_deadline_hour_recovers_before_snapshot_without_requesting_hour_193" time="17.298" /></testsuite></testsuites>

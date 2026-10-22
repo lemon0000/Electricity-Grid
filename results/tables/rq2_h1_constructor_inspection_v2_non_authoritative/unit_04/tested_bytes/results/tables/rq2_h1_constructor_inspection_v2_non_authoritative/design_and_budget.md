@@ -1,0 +1,25 @@
+# 一次constructor inspection后继开发
+
+2026-10-21，DRAFT_NONAUTHORITATIVE，R3，根代理唯一writer。持续目标是完成finite-v2正式实验前全部准备；当前仅推进source性能瓶颈，不改变科学合同、原路径、旧证据或正式门。
+
+实现独立ConstructorInspectionCapture：只在原父类构造期间接受唯一一次inspect，按pid/thread保存原返回对象，构造完成后仅能取一次并清空；拒绝重入、重复inspect/取用、foreign线程、复制与序列化；异常和close清空。historical batch v2用此mix-in保留constructor完整科学重放，省去caller紧接的第二次inspect；旧views/inventory/prefix/source/implementation bookends和cleanup保持。新增borrowed helper/MRO alias/code/default/closure与class布局观察；这不是完整适用runtime闭包、反射或未观察ABA证明。
+
+source batch v2仍在materialization前后调用两个独立Reader，metric固定每个一次constructor遍历，使用新schema/implementation。旧source/historical/cross-hour owner字节不变；旧owner继续要求其原类型/两次traversal，未接入新合同。没有跨operation cache或writer capability。
+
+unit_01固定32个窄单元，180s、sampled tree RSS1GiB、logical128MiB，2s采样/30s心跳、0Job/native，已终态通过，原tested_bytes保留。后继unit_02固定96项，沿用相同上限；补capture closure内固定sentinel/creator/guard、局部MRO alias、source入口code/defaults/kwdefaults/global bindings及constructor前/取值前故障；失败后清理使用固定creator/sentinel以保持可关闭。唯一fact明确fake parent且actual_source_or_owner_exercised=false。该包不关闭source逐类文件窗口故障、同字节非确定性或真实数值/性能验收。
+
+清理测试使用actual HistoricalSnapshot所继承的close方法、等价constructor异常窗口及stand-in owners。journal/anchor关闭失败时按原有顺序保留外层owner以便重试，root close失败仍抛错；不把slot清除、关闭尝试或所有属性清空称为真实资源释放证明。原post-bookend AST比较仅是静态证据。
+
+unit_02已96passed/outer4.265s；下一unit_03固定106项，补自身schema/identity、materialize函数体与close descriptor/code故障。historical cleanup保存原capture close程序的独立FunctionType副本；在这些列明的单fault下调用原程序，仍尊重parent顺序与异常，不声称任意运行时/反射故障的资源释放证明。detached validator仅随unit包pin入，106项不执行它；其数据拒绝在保存原件诊断中另测，完整科学oracle由逐字段/bytes对照承担。
+
+comparison_01为一次有界保存原件诊断：固定H=3、toy M=5、按old/new/new/old执行4次完整batch（8个独立Reader，old共8次parent遍历/new共4次），不新开N、selector、Job或native。使用原saved synthetic source/catalog/manifest-pin seam；不安装static identity memo，双方计入真实identity函数开销，避免共享memo warm-cache偏差。读取及验证465个case/444个owned文件并加写入拒绝audit hook；新旧完整scientific payload、normal/current decision bytes、frame/origin/action和Fraction一致，audit只允许六个精确列明provenance路径不同且各自identity重算。旧owner须拒新类型；辅助validator固定21个数据/合同拒绝案例。真实source逐类constructor窗口故障不由此包关闭。
+
+该诊断完整路径为pins/原件SHA→装saved synthetic source seam→导入后继→四次双Reader+原后置观察/materialize/registry/source fresh→科学oracle/validator负例→每次progress→恢复fixture→再核case SHA→terminal/进程/源码pins。失败保留trace和已完成calls，不追加重试。wall360s、progress无新增120s、sampled tree RSS1GiB、输出logical128MiB、2s采样/30s心跳；仅固定PID/create-time owned树可超限终止，原case只读不计入新增storage。没有生产时长外推；超限也是有用负证据，不延长预算或扩大调用数。
+
+comparison_01已因120s无完整batch progress停止：outer120.328s、child exit15、0 completed calls，无comparison_terminal，因此无科学/性能结论。review指出no-progress只在call返回计进展与healthy长call不相容，360s也不是有证据的可完成上界；该诊断设计finding保留。独立after-postcheck已确认465case/444owned SHA及1307pins未变，不能冒称worker自身finally完成。后续改为一次保存3h successor科学oracle与小prefix净路径分别登记，不现场扩预算。
+
+unit_04固定110项，沿原180s/1GiB/128MiB边界：补两个实际cleanup helper的code/default漂移早拒绝，close code测试使用实际no-op body。只证明列明观察点的检测与原capture close单fault的清理；不主张实际cleanup helper自身遭运行中改写时仍能保证资源释放，完整动态闭包/ABA继续OPEN。
+
+后续保存3h原件对照须另固定调用数和预算：先复用已验证原profile/saved normal audit，再对后继执行全部科学输出与明确provenance差异的oracle；最后对完整双Reader batch做总wall/RSS/storage对照。任何删除遍历带来的失效检测缺口必须先证明或修复，再进入接线。原候选矩阵在上一source-cost目录，仍是验收依据；本轮不以fake tests替代它。
+
+正式准备的全局门同时包括finite-v2显式successor preregistration（1900cells，不借旧46-cell outer）、目标任务/复用DAG与资源预算、168h/≤24h真实连接和typed右删失、terminal/checkpoint/close/reopen与writer/crash恢复、同合同LB/UB/完整training witness，以及seal后fresh official review与具体native/formal授权。当前均保持未完成；本目标不因局部成功缩小。

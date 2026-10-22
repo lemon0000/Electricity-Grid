@@ -1,0 +1,172 @@
+{
+  "exit_code": 0,
+  "worker_terminal": "comparison_terminal.json",
+  "worker": {
+    "new_implementation_identity": "7641e9c06a7d082136ed6362e7e75d4eeb7d6fb3dee4c0d749024c9929633bf8",
+    "status": "DRAFT_NONAUTHORITATIVE",
+    "exit_code": 0,
+    "error": null,
+    "elapsed_seconds": 87.6861018999989,
+    "calls": [
+      {
+        "ordinal": 0,
+        "implementation": "old",
+        "elapsed_seconds": 56.96979029999784,
+        "observations": [
+          {
+            "completed_hours": 1,
+            "selected_hours": [
+              0
+            ],
+            "parent_inspect_traversals": 2,
+            "observation_token": "ac532ebab9ba4579b32e5fe5b8a0be06",
+            "selected_frame_bytes": 21955,
+            "seconds": 29.29183919999923
+          },
+          {
+            "completed_hours": 1,
+            "selected_hours": [
+              0
+            ],
+            "parent_inspect_traversals": 2,
+            "observation_token": "fdfbc4f5b29243ee90c3a428fcbb9ace",
+            "selected_frame_bytes": 21643,
+            "seconds": 25.46451789999992
+          }
+        ],
+        "scientific_summaries": {
+          "0": {
+            "scientific_sha256": "577e62978cd565583fb746f854d2ef68fc7d673611a4b18c19ea6b1881ab4e1c",
+            "decision_sha256": "83ba0f8e77a2de0e94b4b2a2547243a66d0c94127139499fb060ace9c7da837b",
+            "frame": "fb63bb47aa415532bae21e2b408755df3b267ae2d4a3d7a2a8c0a1cfd394a902",
+            "origin": "d86b084ca950ab76e2eefda2b8d60bfc3314110c9d1e902c96a4c4765693649a",
+            "action": "5c7b0d027e6e7f13dd10e15ba70e211bd256337dfbdd6e7db67e7c13e4060c1f",
+            "workload_exact": [
+              "1",
+              "10"
+            ],
+            "cfe_exact": [
+              "3",
+              "5"
+            ],
+            "normalized_audit_sha256": "c8f50e13753658d3813b60f721f7b737e1d6f437b2107e9e21baad6bd24481e5"
+          }
+        },
+        "equal_to_old_oracle": true
+      },
+      {
+        "ordinal": 1,
+        "implementation": "new",
+        "elapsed_seconds": 28.378481799998553,
+        "observations": [
+          {
+            "completed_hours": 1,
+            "selected_hours": [
+              0
+            ],
+            "parent_inspect_traversals": 1,
+            "constructor_inspection_reused": true,
+            "normal_model_dependency_bookends_verified": true,
+            "observation_token": "5b8165bc828a44d0a758d6e33db8720c",
+            "selected_frame_bytes": 21579,
+            "seconds": 12.916761899999983
+          },
+          {
+            "completed_hours": 1,
+            "selected_hours": [
+              0
+            ],
+            "parent_inspect_traversals": 1,
+            "constructor_inspection_reused": true,
+            "normal_model_dependency_bookends_verified": true,
+            "observation_token": "557d810fc9504499bd3a9ce801560d94",
+            "selected_frame_bytes": 21491,
+            "seconds": 13.374215499999991
+          }
+        ],
+        "scientific_summaries": {
+          "0": {
+            "scientific_sha256": "577e62978cd565583fb746f854d2ef68fc7d673611a4b18c19ea6b1881ab4e1c",
+            "decision_sha256": "83ba0f8e77a2de0e94b4b2a2547243a66d0c94127139499fb060ace9c7da837b",
+            "frame": "fb63bb47aa415532bae21e2b408755df3b267ae2d4a3d7a2a8c0a1cfd394a902",
+            "origin": "d86b084ca950ab76e2eefda2b8d60bfc3314110c9d1e902c96a4c4765693649a",
+            "action": "5c7b0d027e6e7f13dd10e15ba70e211bd256337dfbdd6e7db67e7c13e4060c1f",
+            "workload_exact": [
+              "1",
+              "10"
+            ],
+            "cfe_exact": [
+              "3",
+              "5"
+            ],
+            "normalized_audit_sha256": "c8f50e13753658d3813b60f721f7b737e1d6f437b2107e9e21baad6bd24481e5"
+          }
+        },
+        "equal_to_old_oracle": true
+      }
+    ],
+    "data_validator_fault_checks": [],
+    "malformed_evidence_reused_from": "oracle_01/oracle_terminal.json",
+    "saved_case_files": 465,
+    "saved_owned_files": 444,
+    "saved_case_bytes_unchanged": true,
+    "audit": {
+      "old_case_read_opens": 20423,
+      "rejected_mutations": 0
+    },
+    "fixed_old_then_new_order": true,
+    "repetitions_per_implementation": 1,
+    "production_speedup_established": false,
+    "complete_dynamic_closure_proved": false,
+    "unobserved_ABA_covered": false,
+    "constructor_window_real_file_faults_complete": false,
+    "owner_integrated": false,
+    "full_192_hour_execution_verified": false,
+    "overall_performance_review_complete": false,
+    "resource_admission": false,
+    "formal_execution_ready": false,
+    "Jobs": 0,
+    "real_native_calls": 0,
+    "formal_result": false
+  },
+  "worker_accepted": true,
+  "reason": null,
+  "outer_seconds": 91.93800000000192,
+  "peak_sampled_tree_rss_bytes": 199139328,
+  "peak_logical_bytes": 393194,
+  "changed_sources": [],
+  "source_pins": 1311,
+  "observed_processes": {
+    "8908": 1792561026.9405584,
+    "33092": 1792561026.9636846
+  },
+  "observed_images": {
+    "8908": {
+      "executable": "D:\\Miniconda3\\envs\\compute\\python.exe",
+      "parent_pid": 32892,
+      "create_time": 1792561026.9405584,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-u",
+        "-B",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_window_fault_v1_non_authoritative\\compare_short_saved_v2.py",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_window_fault_v1_non_authoritative\\short_comparison_01"
+      ]
+    },
+    "33092": {
+      "executable": "C:\\Windows\\System32\\conhost.exe",
+      "parent_pid": 8908,
+      "create_time": 1792561026.9636846,
+      "command": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ]
+    }
+  },
+  "observed_processes_remaining": [],
+  "cleanup_events": [],
+  "complete_unobserved_process_tree_proof": false,
+  "new_normal_jobs": 0,
+  "real_native_calls": 0,
+  "formal_result": false
+}

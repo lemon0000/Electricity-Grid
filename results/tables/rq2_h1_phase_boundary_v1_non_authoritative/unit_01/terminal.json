@@ -1,0 +1,30 @@
+{
+  "exit_code": 15,
+  "reason": "unexpected_child_process",
+  "outer_seconds": 0.8910000000032596,
+  "peak_sampled_tree_rss_bytes": 9306112,
+  "peak_logical_bytes": 275539,
+  "changed_sources": [],
+  "source_pins": 1304,
+  "observed_processes": {
+    "55948": 1792502720.272547,
+    "28176": 1792502720.2930663
+  },
+  "observed_processes_remaining": [],
+  "cleanup_events": [
+    {
+      "pid": 28176,
+      "action": "kill_owned",
+      "reason": "unexpected_child_process"
+    },
+    {
+      "pid": 55948,
+      "action": "kill_owned",
+      "reason": "unexpected_child_process"
+    }
+  ],
+  "complete_unobserved_process_tree_proof": false,
+  "new_normal_jobs": 0,
+  "real_native_calls": 0,
+  "formal_result": false
+}

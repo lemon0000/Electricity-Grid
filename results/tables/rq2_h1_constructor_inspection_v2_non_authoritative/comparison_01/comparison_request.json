@@ -1,0 +1,54 @@
+{
+  "root": "D:\\h1_outage_connected_03_non_authoritative\\test_three_hour_connected_outa0\\normal_non_authoritative",
+  "arguments": {
+    "expected_binding_sha256": "1b5264bb1fdfaf16d080a8a42dd662d4b475c8c3dc9b905c810b434f07a11560",
+    "expected_terminals": {
+      "0": "1398f51373c3bffdd190a383f9e9203ff38befe6f76bbb40281abb1f5a7a982b",
+      "1": "6e4fcf61d0575eb28c801632bda8d511bee203ae926b5cece12aac50b2a2ca7d",
+      "2": "2705714bb898ac90b3a6a00eff8530f85383d3020ddfeaac333500cbfdd881d5"
+    },
+    "selected_hours": [
+      0,
+      1,
+      2
+    ],
+    "expected_registry_identity": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "order": [
+    "old",
+    "new",
+    "new",
+    "old"
+  ],
+  "full_source_batches": 4,
+  "independent_readers": 8,
+  "permitted_provenance_paths": [
+    [
+      "schema"
+    ],
+    [
+      "implementation_identity"
+    ],
+    [
+      "replay_contract"
+    ],
+    [
+      "normal_audit_identity"
+    ],
+    [
+      "historical_controller",
+      "replay_contract"
+    ],
+    [
+      "normal_audit_payload",
+      "historical_controller",
+      "replay_contract"
+    ]
+  ],
+  "synthetic_saved_fixture": true,
+  "manifest_pin_reused_without_real_source_reaudit": true,
+  "identity_fixture_targets": 0,
+  "dynamic_source_or_history_cached": false,
+  "owner_integrated": false,
+  "formal_result": false
+}

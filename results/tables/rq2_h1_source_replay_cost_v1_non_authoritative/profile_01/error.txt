@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_h1_source_replay_cost_v1_non_authoritative\profile_saved_v1.py", line 120, in main
+    install_saved_fixture(patch)
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\rq2_h1_source_replay_cost_v1_non_authoritative\profile_saved_v1.py", line 63, in install_saved_fixture
+    resolver = historical.binding.open_manifest()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\h1_phase_obligation_binding_development_v1.py", line 36, in open_manifest
+    return manifest.inspect(ROOT/MANIFEST,expected_sha256=MANIFEST_PIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\rq2_v2_obligation_manifest_development_v1.py", line 220, in inspect
+    rebuilt = build()
+              ^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\rq2_v2_obligation_manifest_development_v1.py", line 199, in build
+    report = exclusion.inspect(ROOT/REPORT,expected_sha256=REPORT_PIN)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\rq2_v2_cfe_exclusion_development_v1.py", line 203, in inspect
+    result = audit()
+             ^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\rq2_v2_cfe_exclusion_development_v1.py", line 137, in audit
+    source = source_window.load_source_window(kind, 'training', window['source_start'],168,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\tests\h1_cross_hour_outage_fixture_v1.py", line 46, in load
+    raise ValueError('window not contained in one verified same-split source chain')
+ValueError: window not contained in one verified same-split source chain

@@ -1,0 +1,63 @@
+{
+  "exit_code": 2,
+  "junit": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 1,
+    "skipped": 0,
+    "accepted": false
+  },
+  "facts": {},
+  "expected_fact_count": 1,
+  "all_expected_facts_retained": false,
+  "reason": null,
+  "outer_seconds": 4.375,
+  "peak_sampled_tree_rss_bytes": 136527872,
+  "peak_logical_bytes": 285711,
+  "changed_sources": [],
+  "source_pins": 1305,
+  "observed_processes": {
+    "52592": 1792505734.3118415,
+    "54656": 1792505734.3229885
+  },
+  "observed_images": {
+    "52592": {
+      "executable": "D:\\Miniconda3\\envs\\compute\\python.exe",
+      "parent_pid": 52212,
+      "create_time": 1792505734.3118415,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-u",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-s",
+        "-p",
+        "no:cacheprovider",
+        "-p",
+        "no:faulthandler",
+        "--basetemp",
+        "D:\\h1_business_record_profile_01_non_authoritative",
+        "--junitxml",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_business_record_replay_v1_non_authoritative\\profile_01\\junit.xml",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_business_record_replay_v1_non_authoritative\\profile_workload_v1.py"
+      ]
+    },
+    "54656": {
+      "executable": "C:\\Windows\\System32\\conhost.exe",
+      "parent_pid": 52592,
+      "create_time": 1792505734.3229885,
+      "command": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ]
+    }
+  },
+  "observed_processes_remaining": [],
+  "cleanup_events": [],
+  "complete_unobserved_process_tree_proof": false,
+  "new_normal_jobs": 0,
+  "real_native_calls": 0,
+  "formal_result": false
+}

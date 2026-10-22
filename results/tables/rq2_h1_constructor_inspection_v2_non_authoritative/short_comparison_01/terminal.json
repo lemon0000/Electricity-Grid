@@ -1,0 +1,169 @@
+{
+  "exit_code": 0,
+  "comparison": {
+    "new_implementation_identity": "a8cb5ae5972a577965f5e7895f2bcb2be3d03fafd74b9f369c072f479a46f471",
+    "status": "DRAFT_NONAUTHORITATIVE",
+    "exit_code": 0,
+    "error": null,
+    "elapsed_seconds": 87.40850749999845,
+    "calls": [
+      {
+        "ordinal": 0,
+        "implementation": "old",
+        "elapsed_seconds": 57.13109549999899,
+        "observations": [
+          {
+            "completed_hours": 1,
+            "selected_hours": [
+              0
+            ],
+            "parent_inspect_traversals": 2,
+            "observation_token": "bd55ab8a581f42c2a470c797fa514dde",
+            "selected_frame_bytes": 21955,
+            "seconds": 29.506434700000682
+          },
+          {
+            "completed_hours": 1,
+            "selected_hours": [
+              0
+            ],
+            "parent_inspect_traversals": 2,
+            "observation_token": "e5869e9de75540cf919e50aa1d1648d2",
+            "selected_frame_bytes": 21643,
+            "seconds": 25.4282390999997
+          }
+        ],
+        "scientific_summaries": {
+          "0": {
+            "scientific_sha256": "577e62978cd565583fb746f854d2ef68fc7d673611a4b18c19ea6b1881ab4e1c",
+            "decision_sha256": "83ba0f8e77a2de0e94b4b2a2547243a66d0c94127139499fb060ace9c7da837b",
+            "frame": "fb63bb47aa415532bae21e2b408755df3b267ae2d4a3d7a2a8c0a1cfd394a902",
+            "origin": "d86b084ca950ab76e2eefda2b8d60bfc3314110c9d1e902c96a4c4765693649a",
+            "action": "5c7b0d027e6e7f13dd10e15ba70e211bd256337dfbdd6e7db67e7c13e4060c1f",
+            "workload_exact": [
+              "1",
+              "10"
+            ],
+            "cfe_exact": [
+              "3",
+              "5"
+            ],
+            "normalized_audit_sha256": "c8f50e13753658d3813b60f721f7b737e1d6f437b2107e9e21baad6bd24481e5"
+          }
+        },
+        "equal_to_old_oracle": true
+      },
+      {
+        "ordinal": 1,
+        "implementation": "new",
+        "elapsed_seconds": 27.81538659999933,
+        "observations": [
+          {
+            "completed_hours": 1,
+            "selected_hours": [
+              0
+            ],
+            "parent_inspect_traversals": 1,
+            "constructor_inspection_reused": true,
+            "observation_token": "f0979c8ed6144ea6a036bcc95eaf8702",
+            "selected_frame_bytes": 21579,
+            "seconds": 12.815189900000405
+          },
+          {
+            "completed_hours": 1,
+            "selected_hours": [
+              0
+            ],
+            "parent_inspect_traversals": 1,
+            "constructor_inspection_reused": true,
+            "observation_token": "f0a4e5e4766d48afaecd0126a5adeafe",
+            "selected_frame_bytes": 21491,
+            "seconds": 12.90802690000055
+          }
+        ],
+        "scientific_summaries": {
+          "0": {
+            "scientific_sha256": "577e62978cd565583fb746f854d2ef68fc7d673611a4b18c19ea6b1881ab4e1c",
+            "decision_sha256": "83ba0f8e77a2de0e94b4b2a2547243a66d0c94127139499fb060ace9c7da837b",
+            "frame": "fb63bb47aa415532bae21e2b408755df3b267ae2d4a3d7a2a8c0a1cfd394a902",
+            "origin": "d86b084ca950ab76e2eefda2b8d60bfc3314110c9d1e902c96a4c4765693649a",
+            "action": "5c7b0d027e6e7f13dd10e15ba70e211bd256337dfbdd6e7db67e7c13e4060c1f",
+            "workload_exact": [
+              "1",
+              "10"
+            ],
+            "cfe_exact": [
+              "3",
+              "5"
+            ],
+            "normalized_audit_sha256": "c8f50e13753658d3813b60f721f7b737e1d6f437b2107e9e21baad6bd24481e5"
+          }
+        },
+        "equal_to_old_oracle": true
+      }
+    ],
+    "data_validator_fault_checks": [],
+    "malformed_evidence_reused_from": "oracle_01/oracle_terminal.json",
+    "saved_case_files": 465,
+    "saved_owned_files": 444,
+    "saved_case_bytes_unchanged": true,
+    "audit": {
+      "old_case_read_opens": 20423,
+      "rejected_mutations": 0
+    },
+    "fixed_old_then_new_order": true,
+    "repetitions_per_implementation": 1,
+    "production_speedup_established": false,
+    "complete_dynamic_closure_proved": false,
+    "unobserved_ABA_covered": false,
+    "constructor_window_real_file_faults_complete": false,
+    "owner_integrated": false,
+    "full_192_hour_execution_verified": false,
+    "overall_performance_review_complete": false,
+    "resource_admission": false,
+    "formal_execution_ready": false,
+    "Jobs": 0,
+    "real_native_calls": 0,
+    "formal_result": false
+  },
+  "comparison_accepted": true,
+  "reason": null,
+  "outer_seconds": 92.125,
+  "peak_sampled_tree_rss_bytes": 193683456,
+  "peak_logical_bytes": 359437,
+  "changed_sources": [],
+  "source_pins": 1308,
+  "observed_processes": {
+    "5700": 1792558481.5251856,
+    "2524": 1792558481.5480337
+  },
+  "observed_images": {
+    "5700": {
+      "executable": "D:\\Miniconda3\\envs\\compute\\python.exe",
+      "parent_pid": 10164,
+      "create_time": 1792558481.5251856,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-u",
+        "-B",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_inspection_v2_non_authoritative\\compare_short_saved_v1.py",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_inspection_v2_non_authoritative\\short_comparison_01"
+      ]
+    },
+    "2524": {
+      "executable": "C:\\Windows\\System32\\conhost.exe",
+      "parent_pid": 5700,
+      "create_time": 1792558481.5480337,
+      "command": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ]
+    }
+  },
+  "observed_processes_remaining": [],
+  "cleanup_events": [],
+  "complete_unobserved_process_tree_proof": false,
+  "new_normal_jobs": 0,
+  "real_native_calls": 0,
+  "formal_result": false
+}

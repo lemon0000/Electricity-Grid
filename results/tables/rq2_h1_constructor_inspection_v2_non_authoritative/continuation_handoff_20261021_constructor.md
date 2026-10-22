@@ -1,0 +1,19 @@
+# Constructor 后继与全目标准备交接
+
+持续goal为“把正式实验前的准备都做完，准备开始正式实验”，仍active，未完成；不缩小为单一性能候选。优先仍为整链预算→真实168h/≤24h phase/episode terminal验证。当前只做R3 DRAFT/PRE_SEAL，根代理唯一writer，旧failed/frozen/dirty原件保留。正式/native运行另需具体授权。
+
+先核Git/PID、当前development_acceptance及final_verification的exact bindings，再读acceptance_report.md、whole_workflow_budget_status_v3.md和formal_preparation_state_v3.json。agent.md第7/9/10节及计划/blocker适用；现有sol_reviewer可继续只读PRE_SEAL，未来official review须全新实例。
+
+当前新源码为capture helper、historical batch v2、exact source batch v2、detached validator；原owner未改，继续拒新合同。capture固定一次constructor返回对象，take/close清空；双独立Reader和原后置检查保留。局部aliases/callable/MRO/sentinel/creator故障检查已补，close程序独立副本保留原parent顺序。unit_04为110passed3.03s/outer6.390s；只支持列明生命周期/依赖早拒绝及stand-in cleanup，不是实际source逐类窗口故障或完整closure证明。
+
+oracle_01已exit0：保存H3/M5新完整batch93.285154s、worker94.431699s、outer97.985s，两个Reader各一次parent遍历；465case/444owned SHA一致，1308pins未变，0Job/native。必须连同oracle_01_interpretation.json理解：原输出old_saved_science_bytes_equal字段实际是原join/projection重构bytes与新bytes相同且SHA匹配旧保存identity；未直接读旧raw science，也非独立科学实现。单packet projection字段是stand-in。无static identity memo，保留saved manifest resolver，未重验真实manifest源。
+
+short_comparison_01已exit0：同保存root的H1prefix，old→new各一次完整双Reader，57.131095s→27.815387s；本次约51.3%差值，不外推192h。完整科学/normalized audit一致；outer92.125s、RSS193683456B、logical359437B、1308pins未变、观察PID退出，0Job/native。21辅助malformed按oracle SHA复用。原comparison_01在首old call返回前120s no-progress触限，child exit15，0完整call；worker无terminal/after，独立failed_postcheck确认旧原件不变。失败全部保留，不扩预算重跑旧四调用。
+
+整链计数仍按当前旧owner：T192含terminal/reopen时1546Reader、149380prefix-hour、3092parent、597520源Job replay；M5 stage2987600、条件M232 stage138624640，均非native次数。业务ready/post历史长度下界28311936；journal至少576events对旧toy cap32，科学eventcap14另算。目标wall/RSS/storage仍null，长连接不得启动。candidate采用需先闭合实际constructor→bookend的文件/metadata/source/运行时/非确定性/异常等价；也允许拒绝该候选后以baseline/其他合法方案闭合预算。
+
+formal_preparation_state_v3是16项当前对账草稿，不是完整权威验收协议。保留1900cells/27823600training cell-pair；1856个cell相关规划臂解析反例、44unknown及全部1900network-only unknown，共2032未知planning arm-cells。8020-node manifest全为logical proof，runtime/causal/solver IDs均null，不打solver/resource折扣。source_semantics已进入后继依赖，整链预算依赖中性source_path_performance_and_freshness；authority ancestry覆盖全部16项。solver/license/真实规模/盲pilot/gap/residual/certificate、operational conversion、正式runner/publication、同合同LB/完整training UB/holdout绑定、writer/crash、seal/fresh official和具体授权继续OPEN。旧agent第4节46-cell入口与finite-v2 successor权威同步尚待具体候选。
+
+postcheck_v1.json把7个attempt全部source map解析到live或原tested_bytes，复核旧source-cost core56/final59 bindings、465case/444owned SHA及两canonical文档插入前完整bytes。preparation v1/v2对应builder快照和旧canonical_before保留，v3为当前。下一步不要重跑旧hour0/2h/3h主体或把保存root接写到168h；先解决source适用故障闭包与路径选择，再完成整链代表性预算和事件/holder登记，之后真实phase/terminal→checkpoint→close/fresh-process replay及typed必要followup缺源终结。
+
+当前无production seal、official verdict或formal/native/resource/full192 authority。最终以final_verification的Git/PID状态为准；尚未commit/push。

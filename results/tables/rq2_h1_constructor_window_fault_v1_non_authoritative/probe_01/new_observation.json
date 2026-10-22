@@ -1,0 +1,126 @@
+{
+  "outcome": "returned",
+  "proofs": {
+    "0": {
+      "completed_hours": 1,
+      "parent_head": "292ca37303bbf917a9f11eed4ac1a06406c1e1864722abac7481cb9c92c138ab",
+      "evidence_identity": "d3cea1ebe8bf8f48974e1e4edc665a5a0cc3904d4361c7b39ccbf9360b8cceb9",
+      "historical_parent_prefix_verified": true,
+      "historical_obligation_prefix_verified": true,
+      "historical_job_clock_prefix_verified": true,
+      "suffix_chain_verified": false,
+      "current_latest_parent_verified": false,
+      "current_latest_obligation_verified": false,
+      "live_release_authenticated": false,
+      "live_handoff_authenticated": false,
+      "writer_lock_authenticated": false,
+      "persistent_lane_owner_implemented": false,
+      "detached_consumer_authenticated": false,
+      "common_prefix_publication_verified": false,
+      "reference_or_actual_ready": false,
+      "replay_contract": "h1_phase_historical_batch_development_v2",
+      "formal_result": false,
+      "formal_execution_ready": false,
+      "resource_admission": false,
+      "native_execution_authorized": false,
+      "solver_reuse_verified": false,
+      "complete_executable_task_inventory": false,
+      "live_parent_state_at_use_verified": false,
+      "writer_lease_authenticated": false,
+      "bookkeeping_labels_are_policy_inputs": false,
+      "training_UB_proven": false,
+      "followup_need_authenticated": false,
+      "paired_owner_guard_authenticated": false,
+      "episode_terminal_verified": false,
+      "worker_obligation_authenticated": false
+    }
+  },
+  "metric": {
+    "completed_hours": 1,
+    "selected_hours": [
+      0
+    ],
+    "parent_inspect_traversals": 1,
+    "constructor_inspection_reused": true,
+    "observation_token": "a704908ee0f84c31b656bcb53638e5b0",
+    "selected_frame_bytes": 21883,
+    "seconds": 30.996710499999608
+  },
+  "returned_hours": [
+    0
+  ],
+  "implementation": "new",
+  "seconds": 31.590800099998887,
+  "window": {
+    "injected": true,
+    "injection_count": 1,
+    "constructor_returns": 1,
+    "dependency_calls_after_injection": 0,
+    "parent_inspect_calls": 1,
+    "inspect_job_calls": 2,
+    "stage_inspect_calls": 10,
+    "effective_parent_close_calls": 1,
+    "normal_return_offset": 2988,
+    "reader_mro": [
+      "experiments.h1_phase_historical_batch_development_v2.replay_prefixes.<locals>.Reader",
+      "experiments.h1_constructor_inspection_capture_development_v1._build_capture.<locals>.ConstructorInspectionCapture",
+      "experiments.h1_phase_historical_batch_development_v1.HistoricalTimedSnapshot",
+      "experiments.h1_historical_parent_prefix_development_v1.HistoricalSnapshot",
+      "experiments.h1_timed_job_parent_development_v1.SourceParent",
+      "experiments.h1_bounded_file_parent_development_v1.SavedSourceParent",
+      "experiments.h1_attested_source_parent_development_v1.SavedSourceParent",
+      "experiments.h1_saved_source_parent_development_v1.SavedSourceParent",
+      "builtins.object"
+    ],
+    "effective_parent_close": {
+      "module": "experiments.h1_timed_job_parent_development_v1",
+      "qualname": "SourceParent.close",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_job_parent_development_v1.py",
+      "line": 222
+    },
+    "constructor_accepted_state": {
+      "completed_hours": 1,
+      "attempted_hours": 1,
+      "status": "ready",
+      "head": "292ca37303bbf917a9f11eed4ac1a06406c1e1864722abac7481cb9c92c138ab"
+    }
+  },
+  "model_dependency_alias_restored": true,
+  "observed_readers": 1,
+  "observed_read_views": 11,
+  "observed_read_view_closed_flags": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "all_observed_read_views_closed": true,
+  "reader_cleanup_states": [
+    {
+      "reader_closed": true,
+      "fields": {
+        "_journal": {
+          "is_none": true,
+          "closed": null
+        },
+        "_anchor": {
+          "is_none": true,
+          "closed": null
+        },
+        "_root_lease": {
+          "is_none": true,
+          "closed": null
+        }
+      }
+    }
+  ],
+  "all_reader_owner_fields_cleared": true,
+  "new_capture_slot_cleared": true
+}

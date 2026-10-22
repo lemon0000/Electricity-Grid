@@ -1,0 +1,76 @@
+{
+  "outcome": "rejected",
+  "error_type": "ValueError",
+  "error": "parent intent differs from pinned source",
+  "implementation": "old",
+  "seconds": 33.12734780000028,
+  "window": {
+    "injected": true,
+    "injection_count": 1,
+    "constructor_returns": 1,
+    "dependency_calls_after_injection": 3,
+    "parent_inspect_calls": 2,
+    "inspect_job_calls": 2,
+    "stage_inspect_calls": 10,
+    "effective_parent_close_calls": 1,
+    "normal_return_offset": 2988,
+    "reader_mro": [
+      "experiments.h1_phase_historical_batch_development_v1.replay_prefixes.<locals>.Reader",
+      "experiments.h1_phase_historical_batch_development_v1.HistoricalTimedSnapshot",
+      "experiments.h1_historical_parent_prefix_development_v1.HistoricalSnapshot",
+      "experiments.h1_timed_job_parent_development_v1.SourceParent",
+      "experiments.h1_bounded_file_parent_development_v1.SavedSourceParent",
+      "experiments.h1_attested_source_parent_development_v1.SavedSourceParent",
+      "experiments.h1_saved_source_parent_development_v1.SavedSourceParent",
+      "builtins.object"
+    ],
+    "effective_parent_close": {
+      "module": "experiments.h1_timed_job_parent_development_v1",
+      "qualname": "SourceParent.close",
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_job_parent_development_v1.py",
+      "line": 222
+    },
+    "constructor_accepted_state": {
+      "completed_hours": 1,
+      "attempted_hours": 1,
+      "status": "ready",
+      "head": "292ca37303bbf917a9f11eed4ac1a06406c1e1864722abac7481cb9c92c138ab"
+    }
+  },
+  "model_dependency_alias_restored": true,
+  "observed_readers": 1,
+  "observed_read_views": 9,
+  "observed_read_view_closed_flags": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "all_observed_read_views_closed": true,
+  "reader_cleanup_states": [
+    {
+      "reader_closed": true,
+      "fields": {
+        "_journal": {
+          "is_none": true,
+          "closed": null
+        },
+        "_anchor": {
+          "is_none": true,
+          "closed": null
+        },
+        "_root_lease": {
+          "is_none": true,
+          "closed": null
+        }
+      }
+    }
+  ],
+  "all_reader_owner_fields_cleared": true,
+  "new_capture_slot_cleared": null
+}

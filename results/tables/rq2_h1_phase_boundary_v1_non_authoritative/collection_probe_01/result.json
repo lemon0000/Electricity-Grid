@@ -1,0 +1,51 @@
+{
+  "command": [
+    "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "--collect-only",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "no:faulthandler",
+    "tests/test_h1_phase_boundary_budget_development_v1.py"
+  ],
+  "wall_cap_seconds": 30,
+  "exit_code": 0,
+  "seconds": 22.578999999997905,
+  "reason": null,
+  "observed_processes": {
+    "53972": {
+      "cmdline": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "--collect-only",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-p",
+        "no:faulthandler",
+        "tests/test_h1_phase_boundary_budget_development_v1.py"
+      ],
+      "create_time": 1792502792.6296368,
+      "exe": "D:\\Miniconda3\\envs\\compute\\python.exe",
+      "pid": 53972,
+      "ppid": 53652
+    },
+    "56408": {
+      "cmdline": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ],
+      "create_time": 1792502792.643767,
+      "exe": "C:\\Windows\\System32\\conhost.exe",
+      "pid": 56408,
+      "ppid": 53972
+    }
+  },
+  "scope": "pytest collection only, no test bodies or fixtures"
+}

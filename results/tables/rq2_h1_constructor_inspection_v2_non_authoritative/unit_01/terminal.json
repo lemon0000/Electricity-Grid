@@ -1,0 +1,67 @@
+{
+  "exit_code": 0,
+  "junit": {
+    "tests": 32,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "accepted": true
+  },
+  "facts": {
+    "D:\\h1_constructor_capture_unit_01_non_authoritative\\test_constructor_capture_is_ex0\\constructor_capture_fact.json": {
+      "retained_copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_inspection_v2_non_authoritative\\unit_01\\facts\\constructor_capture.json",
+      "sha256": "de6c9054b88111c75f28a826e4f846f4b62086b7309e1ae0083465b0cfd0f641"
+    }
+  },
+  "expected_fact_count": 1,
+  "all_expected_facts_retained": true,
+  "reason": null,
+  "outer_seconds": 9.32799999999952,
+  "peak_sampled_tree_rss_bytes": 173146112,
+  "peak_logical_bytes": 289993,
+  "changed_sources": [],
+  "source_pins": 1305,
+  "observed_processes": {
+    "3632": 1792556690.409899,
+    "8936": 1792556690.4215622
+  },
+  "observed_images": {
+    "3632": {
+      "executable": "D:\\Miniconda3\\envs\\compute\\python.exe",
+      "parent_pid": 6052,
+      "create_time": 1792556690.409899,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-u",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-p",
+        "no:faulthandler",
+        "--basetemp",
+        "D:\\h1_constructor_capture_unit_01_non_authoritative",
+        "--junitxml",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_inspection_v2_non_authoritative\\unit_01\\junit.xml",
+        "tests/test_h1_constructor_inspection_capture_development_v1.py"
+      ]
+    },
+    "8936": {
+      "executable": "C:\\Windows\\System32\\conhost.exe",
+      "parent_pid": 3632,
+      "create_time": 1792556690.4215622,
+      "command": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ]
+    }
+  },
+  "observed_processes_remaining": [],
+  "cleanup_events": [],
+  "complete_unobserved_process_tree_proof": false,
+  "new_normal_jobs": 0,
+  "real_native_calls": 0,
+  "formal_result": false
+}

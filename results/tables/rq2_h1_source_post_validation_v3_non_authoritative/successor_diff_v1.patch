@@ -1,0 +1,468 @@
+--- experiments/h1_phase_historical_batch_development_v2.py
++++ experiments/h1_phase_historical_batch_development_v3.py
+@@ -3,18 +3,22 @@
+ DRAFT_NONAUTHORITATIVE. The predecessor and its two-traversal caller remain
+ unchanged. All predecessor post-observation checks and cleanup are retained.
+ """
+-from dataclasses import asdict
++from dataclasses import asdict, fields
+ from pathlib import Path
+ import sys
+ import time
+ from types import FunctionType
+ from uuid import uuid4
+ 
++from experiments import h1_constructor_rejection_support_development_v1 as support
++from experiments import h1_constructor_runtime_guard_development_v1 as runtime
++from src.rq2_joint_deliverability_boundary_v1 import normal_h1_source as packet_source
++
+ from experiments import h1_phase_historical_batch_development_v1 as prior
+ from experiments import h1_constructor_inspection_capture_development_v1 as capture
+ from src.rq2_joint_deliverability_boundary_v1 import continuous_grid_normal as model
+ 
+-SCHEMA = 'h1_phase_historical_batch_development_v2'
++SCHEMA = 'h1_phase_historical_batch_development_v3'
+ io, binding, bridge, base = prior.io, prior.binding, prior.bridge, prior.base
+ old, history, current, predecessor = prior.old, prior.history, prior.current, prior.predecessor
+ HistoricalTimedSnapshot = prior.HistoricalTimedSnapshot
+@@ -23,23 +27,28 @@
+ retained_size, prefix_evidence = prior.retained_size, prior.prefix_evidence
+ _observe, _observe_sources, _observe_prefix = prior._observe, prior._observe_sources, prior._observe_prefix
+ _obligation_inventory = prior._obligation_inventory
+-# Keep a private copy of the original close program so a class descriptor or
+-# in-place close-code fault cannot turn error cleanup into a silent no-op.
+-_close_method = ConstructorInspectionCapture.close
+-_CONSTRUCTOR_CLOSE = FunctionType(_close_method.__code__, _close_method.__globals__,
+-    _close_method.__name__, _close_method.__defaults__, _close_method.__closure__)
+-
+-
+-def _close_replay(reader, leases, captured, completed, primary):
+-    class Teardown:
+-        def close(self):
+-            return _CONSTRUCTOR_CLOSE(reader)
+-    return prior._close_replay(None if reader is None else Teardown(), leases, captured, completed, primary)
++# A private closure retains an independent copy even after an exported helper
++# alias, code, defaults, closure cell, or its private function graph changes.
++_SAFE_CLOSE = runtime.frozen_teardown(support.close_replay)
++_RUNTIME = runtime.NamedRuntimeSnapshot(runtime.runtime_roots(model, packet_source, support))
++_RUNTIME_CHECK = runtime.NamedRuntimeSnapshot.check
++_RUNTIME_SEAL = (_RUNTIME.functions,_RUNTIME.slots,_RUNTIME.classes,_RUNTIME.objects,
++                 _RUNTIME.summary,tuple(sorted(_RUNTIME.summary.items())))
++
++
++def _make_close_replay(safe_close):
++    def close_replay(reader, leases, captured, completed, primary):
++        return safe_close(reader, leases, captured, completed, primary)
++    return close_replay
++
++
++_close_replay = _make_close_replay(_SAFE_CLOSE)
+ 
+ 
+ def implementation_identity():
+     return io.digest(io.encode([SCHEMA, prior.implementation_identity(),
+-        io.digest(Path(__file__).read_bytes()), io.digest(Path(capture.__file__).read_bytes())]))
++        io.digest(Path(__file__).read_bytes()), io.digest(Path(capture.__file__).read_bytes()),
++        io.digest(Path(support.__file__).read_bytes()), io.digest(Path(runtime.__file__).read_bytes())]))
+ 
+ 
+ def _function_state(value):
+@@ -51,9 +60,9 @@
+ 
+ 
+ def _model_dependency_snapshot():
+-    _check_dependencies()
++    _CHECK_DEPENDENCIES()
+     value = model._dependencies()
+-    _check_dependencies()
++    _CHECK_DEPENDENCIES()
+     if (type(value) is not tuple or len(value) != 2
+             or any(type(group) is not tuple for group in value)
+             or any(type(pair) is not tuple or len(pair) != 2
+@@ -69,6 +78,42 @@
+ def _model_dependencies_unchanged(before):
+     if _model_dependency_snapshot() != before:
+         raise ValueError('normal model dependencies changed during historical replay')
++
++
++def _packet_digest(packet):
++    names=('network','before','relative_hour','inputs','input_identity','source_timestamp',
++           'source_time_basis','workload_projection_payload','audit_identity')
++    if (type(packet) is not packet_source.H1CurrentNormal or tuple(f.name for f in fields(packet))!=names
++            or type(packet.workload_projection_payload) is not bytes):
++        raise ValueError('exact full-packet digest schema required')
++    # The original numerical encoder deliberately excludes bytes. Tag and hex
++    # this one exact bytes field; every other declared packet field is retained.
++    return packet_source._digest(SCHEMA+'/full_packet_hex_v1',packet.network,packet.before,
++        packet.relative_hour,packet.inputs,packet.input_identity,packet.source_timestamp,
++        packet.source_time_basis,('bytes.hex',packet.workload_projection_payload.hex()),packet.audit_identity)
++
++
++def _remember_packet(packets, packet, completed_hours):
++    if type(packet) is not packet_source.H1CurrentNormal:
++        raise ValueError('one exact all-hour packet per chronological N hour required')
++    hour=packet.relative_hour
++    if (type(hour) is not int
++            or hour!=len(packets) or not 0<=hour<completed_hours or hour in packets):
++        raise ValueError('one exact all-hour packet per chronological N hour required')
++    pin=(packet.input_identity,packet.audit_identity,_packet_digest(packet))
++    size=retained_size((packet,pin))
++    packets[hour]=(packet,pin)
++    return size
++
++
++def _validate_all_packets(packets, completed_hours):
++    if tuple(packets)!=tuple(range(completed_hours)):
++        raise ValueError('complete chronological all-hour packet inventory required')
++    for hour,(packet,pin) in packets.items():
++        packet_source.validate_current(packet)
++        if ((packet.input_identity,packet.audit_identity,_packet_digest(packet))!=pin
++                or packet.relative_hour!=hour):
++            raise ValueError('all-hour packet identity changed during historical replay')
+ 
+ 
+ def _check_dependencies():
+@@ -89,7 +134,14 @@
+             raise ValueError('historical successor class layout changed')
+     if any(vars(kind).get(name) is not value for kind, name, value in _CLASS_VALUES):
+         raise ValueError('historical successor class descriptor changed')
+-
++    after=(_RUNTIME.functions,_RUNTIME.slots,_RUNTIME.classes,_RUNTIME.objects,_RUNTIME.summary)
++    if (any(value is not before for value,before in zip(after,_RUNTIME_SEAL))
++            or type(_RUNTIME.summary) is not dict or tuple(sorted(_RUNTIME.summary.items()))!=_RUNTIME_SEAL[5]):
++        raise ValueError('named runtime observation structure changed')
++    _RUNTIME_CHECK(_RUNTIME)
++
++
++_CHECK_DEPENDENCIES=FunctionType(_check_dependencies.__code__,globals(),'frozen_named_dependency_check')
+ 
+ _DEPENDENCIES = tuple((prior, name, getattr(prior, name), _function_state(getattr(prior, name)))
+     for name in ('retained_size', 'prefix_evidence', '_observe', '_observe_sources', '_observe_prefix',
+@@ -103,9 +155,11 @@
+     for kind, _, _, _ in _CLASS_SHAPES for name, value in vars(kind).items()
+     if type(value) is FunctionType)
+ _DEPENDENCIES += ((capture, '_check_definition', capture._check_definition, _function_state(capture._check_definition)),)
++_DEPENDENCIES += ((runtime.NamedRuntimeSnapshot, 'check', _RUNTIME_CHECK, _function_state(_RUNTIME_CHECK)),)
+ _DEPENDENCIES += tuple((sys.modules[__name__], name, globals()[name], _function_state(globals()[name]))
+-    for name in ('implementation_identity', '_CONSTRUCTOR_CLOSE', '_close_replay',
+-                 '_model_dependency_snapshot', '_model_dependencies_unchanged'))
++    for name in ('implementation_identity', '_SAFE_CLOSE', '_close_replay', '_check_dependencies', '_CHECK_DEPENDENCIES',
++                 '_model_dependency_snapshot', '_model_dependencies_unchanged',
++                 '_packet_digest', '_remember_packet', '_validate_all_packets'))
+ _DEPENDENCIES += tuple((model, name, getattr(model, name), _function_state(getattr(model, name)))
+     for name in ('_dependencies', 'normal_input_identity', '_validate', '_number', '_digest', '_encode',
+                  '_validate_request', 'version', 'Path', '__file__', 'sha256', 'platform',
+@@ -114,15 +168,19 @@
+     for name in ('python_version', 'python_implementation'))
+ _LOCAL_NAMESPACE = globals()
+ _LOCAL_BINDINGS = tuple((name, _LOCAL_NAMESPACE[name]) for name in (
+-    'prior', 'capture', 'io', 'binding', 'bridge', 'base', 'old', 'history', 'current', 'predecessor',
++    'asdict', 'fields', 'Path', 'sys', 'time', 'FunctionType', 'uuid4',
++    'prior', 'capture', 'support', 'runtime', 'packet_source', '_RUNTIME', '_RUNTIME_CHECK', '_RUNTIME_SEAL', 'io', 'binding', 'bridge', 'base', 'old', 'history', 'current', 'predecessor',
+     'HistoricalTimedSnapshot', 'ConstructorInspectionCapture', 'MAX_RETAINED_BYTES', 'retained_size',
+     'prefix_evidence', '_observe', '_observe_sources', '_observe_prefix', '_obligation_inventory',
+-    '_close_replay', '_function_state', '_check_dependencies', 'SCHEMA', 'implementation_identity',
+-    '_CONSTRUCTOR_CLOSE', 'model', '_model_dependency_snapshot', '_model_dependencies_unchanged'))
++    '_close_replay', '_function_state', '_check_dependencies', '_CHECK_DEPENDENCIES', 'SCHEMA', 'implementation_identity',
++    '_SAFE_CLOSE', 'model', '_model_dependency_snapshot', '_model_dependencies_unchanged',
++    '_packet_digest', '_remember_packet', '_validate_all_packets'))
+ 
+ 
+ def replay_prefixes(root,*,expected_binding_sha256,expected_terminal_sha256,completed_hours,expected_terminals,selected_hours,_observed=None):
+-    _check_dependencies()
++    close_reader=_close_replay
++    check_dependencies=_CHECK_DEPENDENCIES
++    check_dependencies()
+     old.additional_content_bound(completed_hours)
+     if (type(expected_terminals) is not dict or not expected_terminals
+             or any(type(h) is not int or not 0 <= h < completed_hours for h in expected_terminals)
+@@ -140,7 +198,9 @@
+     observed={} if _observed is None else _observed
+     leases=[];views=observed.setdefault('views',{});topology=observed.setdefault('topology',{})
+     obligation_names=observed.setdefault('obligation_names',{});identities=observed.setdefault('identities',{})
+-    captured={};evidence={};seen_hours=[];retained_bytes=0
++    parent_names=observed.setdefault('parent_names',{})
++    captured={};evidence={};seen_hours=[];retained_bytes=0;packet_bytes=0;all_packets={};metrics={}
++    stage_seconds={}
+     began=time.perf_counter();observation_token=uuid4().hex;traversals=0
+     def read(path,pin):
+         before=history.chunks.base.local._file_identity(path)
+@@ -196,6 +256,13 @@
+         if next_pin!=expected_binding_sha256:raise ValueError('historical obligation genesis differs')
+ 
+         class Reader(ConstructorInspectionCapture, HistoricalTimedSnapshot):
++            def __new__(cls,*args,**kwargs):
++                nonlocal reader
++                # Retain the instance before any inherited constructor can
++                # acquire owners and fail before the assignment below returns.
++                reader=object.__new__(cls)
++                return reader
++
+             def inspect(self):
+                 nonlocal traversals
+                 traversals+=1
+@@ -218,7 +285,7 @@
+                 return super()._child(hour,packet,intent_head,lineage,expected_head=expected_head,create=create)
+ 
+             def _after(self,packet,result):
+-                nonlocal retained_bytes
++                nonlocal retained_bytes,packet_bytes
+                 if type(result) is not current.parent.ChildInspection or result.status!='accepted':
+                     raise ValueError('accepted timed child required')
+                 count=len(binding.replay.native.model_api.stage_order(packet.inputs))
+@@ -229,11 +296,14 @@
+                 hour=packet.relative_hour
+                 if type(hour) is not int or hour!=len(seen_hours) or not 0<=hour<completed_hours:
+                     raise ValueError('one captured frame per chronological N hour required')
++                packet_bytes+=_remember_packet(all_packets,packet,completed_hours)
++                if packet_bytes+retained_bytes>MAX_RETAINED_BYTES:
++                    raise ValueError('combined batch retained data byte cap exceeded')
+                 seen_hours.append(hour)
+                 if hour in selected_hours:
+                     value=dict(packet=packet,result=result,after=after,count=count)
+                     retained_bytes+=retained_size(value)
+-                    if retained_bytes>MAX_RETAINED_BYTES:raise ValueError('batch retained data byte cap exceeded')
++                    if packet_bytes+retained_bytes>MAX_RETAINED_BYTES:raise ValueError('combined batch retained data byte cap exceeded')
+                     captured[hour]=value
+ 
+                 return after
+@@ -244,22 +314,50 @@
+             stages=first_request['input_receipt']['stage_slots']
+             if type(stages) is not int or not 1<=stages<=232:raise ValueError('bounded stage count required')
+             _observe_prefix(identities,root,completed_hours,stages)
++            support.observe_parent_names(Path(declaration['root']),completed_hours=completed_hours,
++                declared_hours=declaration['hours'],retained=parent_names)
++            check_dependencies()
+             model_before=_model_dependency_snapshot()
++            stage_seconds['pre_constructor']=time.perf_counter()-began
++            stage_began=time.perf_counter()
+             reader=Reader(declaration,completed_hours=completed_hours,expected_parent_identity=header['parent_identity'],
+                 expected_parent_head=terminal['parent_head'],expected_anchor_record=terminal['parent_anchor_sha256'])
+-            _check_dependencies()
++            stage_seconds['constructor']=time.perf_counter()-stage_began
++            stage_began=time.perf_counter()
++            check_dependencies()
+             state=reader._take_constructor_inspection()
+             if traversals!=1:raise ValueError('one constructor traversal required')
+             if (state.completed_hours!=completed_hours or state.status!=('complete' if completed_hours==192 else 'ready')
+                     or state.head!=terminal['parent_head'] or seen_hours!=list(range(completed_hours))
+-                    or set(captured)!=set(selected_hours)):
++                    or set(captured)!=set(selected_hours) or tuple(all_packets)!=tuple(range(completed_hours))):
+                 raise ValueError('historical accepted controller prefix differs')
+             base.entry.unchanged(views);inventory()
+             _observe_prefix(identities,root,completed_hours,stages)
+             _observe_sources(identities,declaration)
+             if implementation_identity()!=own:raise ValueError('historical controller implementation drift')
+-            _check_dependencies()
++            check_dependencies()
+             _model_dependencies_unchanged(model_before)
++            support.observe_parent_names(Path(declaration['root']),completed_hours=completed_hours,
++                declared_hours=declaration['hours'],retained=parent_names)
++            check_dependencies()
++            stage_seconds['first_post_constructor_bookends']=time.perf_counter()-stage_began
++            stage_began=time.perf_counter()
++            _validate_all_packets(all_packets,completed_hours)
++            stage_seconds['all_hour_packet_revalidation']=time.perf_counter()-stage_began
++            stage_began=time.perf_counter()
++            check_dependencies()
++            # The long all-H loop has its own final filesystem/namespace and
++            # runtime bookends. None of the success flags precedes these.
++            base.entry.unchanged(views);inventory()
++            _observe_prefix(identities,root,completed_hours,stages)
++            _observe_sources(identities,declaration)
++            support.observe_parent_names(Path(declaration['root']),completed_hours=completed_hours,
++                declared_hours=declaration['hours'],retained=parent_names)
++            if implementation_identity()!=own:raise ValueError('historical controller implementation drift')
++            _model_dependencies_unchanged(model_before)
++            check_dependencies()
++            stage_seconds['final_bookends']=time.perf_counter()-stage_began
++            stage_began=time.perf_counter()
+             proofs={}
+             for hour in selected_hours:
+                 selected=prefix_evidence(evidence,hour)
+@@ -272,11 +370,25 @@
+                     common_prefix_publication_verified=False,reference_or_actual_ready=False,
+                     replay_contract=SCHEMA,**old.FLAGS)
+             completed=True
++            stage_seconds['proof_encoding']=time.perf_counter()-stage_began
+             metrics=dict(completed_hours=completed_hours,selected_hours=list(selected_hours),
+                 parent_inspect_traversals=traversals,constructor_inspection_reused=True,
+                 normal_model_dependency_bookends_verified=True,observation_token=observation_token,
+-                selected_frame_bytes=retained_bytes,seconds=time.perf_counter()-began)
++                all_hour_packet_revalidation_verified=True,all_hour_packet_count=len(all_packets),
++                all_hour_packet_bytes=packet_bytes,combined_retained_bytes=packet_bytes+retained_bytes,
++                retained_cap_bytes=MAX_RETAINED_BYTES,parent_namespace_bookends_verified=True,
++                parent_namespace_observations=3,final_post_revalidation_bookends_verified=True,
++                named_runtime_bookends_verified=True,named_runtime_inventory=dict(_RUNTIME.summary),
++                complete_dynamic_input_closure_proved=False,unobserved_between_bookends_ABA_covered=False,
++                selected_frame_bytes=retained_bytes,stage_seconds=stage_seconds,seconds=time.perf_counter()-began)
+             return proofs,captured,header,metrics
+     finally:
+-        _close_replay(reader,leases,captured,completed,sys.exception())
+-
++        cleanup_began=time.perf_counter()
++        try:
++            close_reader(reader,leases,captured,completed,sys.exception())
++        finally:
++            all_packets.clear()
++            seen_hours.clear()
++            stage_seconds['cleanup']=time.perf_counter()-cleanup_began
++            if metrics:metrics['seconds_including_cleanup']=time.perf_counter()-began
++
+--- experiments/h1_phase_exact_source_batch_development_v2.py
++++ experiments/h1_phase_exact_source_batch_development_v3.py
+@@ -7,11 +7,12 @@
+ from dataclasses import dataclass
+ import json
+ import sys
++from types import FunctionType
+ 
+ from experiments import h1_phase_exact_source_current_development_v1 as prior
+-from experiments import h1_phase_historical_batch_development_v2 as historical
+-
+-SCHEMA = 'h1_phase_exact_source_batch_development_v2'
++from experiments import h1_phase_historical_batch_development_v3 as historical
++
++SCHEMA = 'h1_phase_exact_source_batch_development_v3'
+ MAX_CURRENT_BYTES = 64*1024**2
+ io, source, registry, physical = prior.io, prior.source, prior.registry, prior.physical
+ _REPLAY_PREFIXES = historical.replay_prefixes
+@@ -37,7 +38,7 @@
+                 or any(after[i] != before[i] for i in (3, 5))
+                 or any(a is not b for a, b in zip(after[7], before[7]))):
+             raise ValueError('single-traversal batch historical callable changed')
+-    historical._check_dependencies()
++    historical._CHECK_DEPENDENCIES()
+ 
+ 
+ def implementation_identity():
+@@ -45,13 +46,40 @@
+                                 io.digest(Path(__file__).read_bytes())]))
+ 
+ 
+-def _validate_reader_metrics(first, second):
+-    for metric in (first, second):
+-        if (type(metric) is not dict or type(metric.get('parent_inspect_traversals')) is not int
++def _validate_reader_metric(metric, completed_hours):
++    inventory=dict(historical._RUNTIME_SEAL[5])
++    if (type(metric) is not dict or type(metric.get('parent_inspect_traversals')) is not int
+                 or metric['parent_inspect_traversals'] != 1
+                 or metric.get('constructor_inspection_reused') is not True
+-                or metric.get('normal_model_dependency_bookends_verified') is not True):
+-            raise ValueError('single constructor traversal and normal model dependency bookends required')
++                or metric.get('normal_model_dependency_bookends_verified') is not True
++                or type(metric.get('completed_hours')) is not int or metric['completed_hours'] != completed_hours
++                or type(metric.get('all_hour_packet_count')) is not int or metric['all_hour_packet_count'] != completed_hours
++                or any(metric.get(name) is not True for name in (
++                    'all_hour_packet_revalidation_verified','parent_namespace_bookends_verified',
++                    'final_post_revalidation_bookends_verified','named_runtime_bookends_verified'))
++                or metric.get('complete_dynamic_input_closure_proved') is not False
++                or metric.get('unobserved_between_bookends_ABA_covered') is not False
++                or type(metric.get('parent_namespace_observations')) is not int
++                or metric['parent_namespace_observations'] != 3
++                or type(metric.get('retained_cap_bytes')) is not int
++                or metric['retained_cap_bytes'] != historical.MAX_RETAINED_BYTES
++                or any(type(metric.get(name)) is not int or metric[name] < 0 for name in (
++                    'selected_frame_bytes','all_hour_packet_bytes','combined_retained_bytes'))
++                or metric['selected_frame_bytes'] + metric['all_hour_packet_bytes'] != metric['combined_retained_bytes']
++                or metric['combined_retained_bytes'] > metric['retained_cap_bytes']
++                or type(metric.get('named_runtime_inventory')) is not dict
++                or metric['named_runtime_inventory'] != inventory
++                or any(type(metric['named_runtime_inventory'][name]) is not type(value)
++                       for name,value in inventory.items())):
++        raise ValueError('single constructor traversal, all-hour revalidation and final bookends required')
++
++
++def _validate_reader_metrics(first, second, completed_hours):
++    for metric in (first, second):
++        _validate_reader_metric(metric, completed_hours)
++    tokens = tuple(metric.get('observation_token') for metric in (first, second))
++    if (any(type(token) is not str or len(token) != 32 for token in tokens) or tokens[0] == tokens[1]):
++        raise ValueError('distinct independent Reader observations required')
+ 
+ 
+ def _materialize(header, captured, proof, *, hour, terminal, binding, registry_pin, own):
+@@ -101,7 +129,8 @@
+ 
+ def prepare_many(root, *, expected_binding_sha256, expected_terminals, expected_registry_identity, selected_hours=None):
+     """Read externally pinned history twice, returning current-only projections."""
+-    _check_reader_entry()
++    check_entry=_CHECK_READER_ENTRY
++    check_entry()
+     if (type(expected_terminals) is not dict or not expected_terminals
+             or any(type(h) is not int or not 0 <= h < 192 for h in expected_terminals)):
+         raise ValueError('bounded exact selected terminal map required')
+@@ -121,7 +150,8 @@
+     captured, fresh, values = {}, {}, {}
+     try:
+         first, captured, header, first_metrics = _REPLAY_PREFIXES(root, **args, _observed=observed)
+-        _check_reader_entry()
++        check_entry()
++        _validate_reader_metric(first_metrics, latest+1)
+         values = {}
+         retained = 0
+         for hour in selected:
+@@ -131,9 +161,10 @@
+             if retained > MAX_CURRENT_BYTES:
+                 raise ValueError('batch current retained data byte cap exceeded')
+             values[hour] = row
+-        _check_reader_entry()
++        check_entry()
+         second, fresh, fresh_header, second_metrics = _REPLAY_PREFIXES(root, **args, _observed=observed)
+-        _check_reader_entry()
++        check_entry()
++        _validate_reader_metrics(first_metrics, second_metrics, latest+1)
+         if first != second or header != fresh_header:
+             raise ValueError('N batch prefix changed during preparation')
+         for hour, (value, envelope, prefix, observation, declaration, registry_args) in values.items():
+@@ -145,10 +176,10 @@
+                     or registry.prepare(**registry_args) != prefix or implementation_identity() != own):
+                 raise ValueError('historical N, source, registry or implementation changed during exact batch join')
+         historical._observe_sources(observed['identities'], header['parent_declaration'])
+-        _check_reader_entry()
++        check_entry()
+         if implementation_identity() != own:
+             raise ValueError('implementation changed after final batch source observation')
+-        _validate_reader_metrics(first_metrics, second_metrics)
++        _validate_reader_metrics(first_metrics, second_metrics, latest+1)
+         return CurrentBatch({h:row[0] for h,row in values.items()}, (first_metrics,second_metrics))
+     finally:
+         captured.clear()
+@@ -157,11 +188,14 @@
+         observed.clear()
+ 
+ 
++_CHECK_READER_ENTRY=FunctionType(_check_reader_entry.__code__,globals(),'frozen_source_reader_entry_check')
+ _LOCAL_NAMESPACE = globals()
+ _LOCAL_BINDINGS = tuple((name, _LOCAL_NAMESPACE[name]) for name in (
+     'prior', 'historical', 'io', 'source', 'registry', 'physical', '_REPLAY_PREFIXES', '_materialize',
+-    'MAX_CURRENT_BYTES', 'implementation_identity', '_check_reader_entry', 'SCHEMA', '_validate_reader_metrics'))
++    'MAX_CURRENT_BYTES', 'implementation_identity', '_check_reader_entry', 'SCHEMA', '_validate_reader_metrics',
++    '_validate_reader_metric', '_CHECK_READER_ENTRY', 'FunctionType'))
+ _ENTRY_FUNCTIONS = tuple((historical, name, getattr(historical, name), historical._function_state(getattr(historical, name)))
+-    for name in ('replay_prefixes', '_check_dependencies', '_function_state'))
++    for name in ('replay_prefixes', '_check_dependencies', '_CHECK_DEPENDENCIES', '_function_state'))
+ _ENTRY_FUNCTIONS += tuple((sys.modules[__name__], name, globals()[name], historical._function_state(globals()[name]))
+-    for name in ('_materialize', 'implementation_identity', '_validate_reader_metrics'))
++    for name in ('_materialize', 'implementation_identity', '_validate_reader_metrics', '_validate_reader_metric',
++                 '_check_reader_entry', '_CHECK_READER_ENTRY'))
+--- experiments/h1_constructor_source_batch_validation_development_v1.py
++++ experiments/h1_constructor_source_batch_validation_development_v2.py
+@@ -1,7 +1,7 @@
+-"""Detached source-batch v2 data audit; never an owner or live receipt."""
++"""Detached source-batch v3 data audit; never an owner or live receipt."""
+ from fractions import Fraction as Q
+ import json
+-from experiments import h1_phase_exact_source_batch_development_v2 as batch_source
++from experiments import h1_phase_exact_source_batch_development_v3 as batch_source
+ from experiments import h1_phase_obligation_controller_development_v1 as normal
+ 
+ def validate_detached_batch(result,binding,terminals,selected,source_identity):
+@@ -12,6 +12,7 @@
+         raise ValueError('exact batch current keyset/type required')
+     if type(result.observations) is not tuple or len(result.observations)!=2:
+         raise ValueError('two independent batch observations required')
++    batch_source._validate_reader_metrics(*result.observations,max(terminals)+1)
+     tokens=[]
+     for metric in result.observations:
+         if (type(metric) is not dict or metric.get('completed_hours')!=max(terminals)+1

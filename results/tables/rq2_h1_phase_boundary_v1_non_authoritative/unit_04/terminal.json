@@ -1,0 +1,100 @@
+{
+  "exit_code": 0,
+  "junit": {
+    "tests": 15,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "accepted": true
+  },
+  "facts": {
+    "D:\\h1_phase_boundary_unit_04_non_authoritative\\test_deadline_hour_recovers_be0\\due_endpoint_fact.json": {
+      "retained_copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_phase_boundary_v1_non_authoritative\\unit_04\\facts\\exact_due_192.json",
+      "sha256": "482ef4cbb986dad4818ed4bc3e7d90ee9b7cee56cbe94df4d59f0ca58e3c6c0d"
+    },
+    "D:\\h1_phase_boundary_unit_04_non_authoritative\\test_original_phase_bodies_con0\\boundary_fact.json": {
+      "retained_copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_phase_boundary_v1_non_authoritative\\unit_04\\facts\\no_requests_167.json",
+      "sha256": "a5329e1503613999fa76b749bfbfc523da7f55ef40e6175ff0be4b837214110c"
+    },
+    "D:\\h1_phase_boundary_unit_04_non_authoritative\\test_original_phase_bodies_con1\\boundary_fact.json": {
+      "retained_copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_phase_boundary_v1_non_authoritative\\unit_04\\facts\\no_requests_168.json",
+      "sha256": "2d199f581ea718a14f804216b7f73c9ef4e2d58526404a494ef120e4a627de0a"
+    },
+    "D:\\h1_phase_boundary_unit_04_non_authoritative\\test_original_phase_bodies_con2\\boundary_fact.json": {
+      "retained_copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_phase_boundary_v1_non_authoritative\\unit_04\\facts\\pending_168.json",
+      "sha256": "6a5f97b22aae40808d701c7c2461e7d0f0d7562ae151d30b0af8306a184d1ea9"
+    },
+    "D:\\h1_phase_boundary_unit_04_non_authoritative\\test_original_phase_bodies_con3\\boundary_fact.json": {
+      "retained_copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_phase_boundary_v1_non_authoritative\\unit_04\\facts\\pending_169.json",
+      "sha256": "644ca25f7dceb8b79a4bab856ccf35b8feac3183231cf51df104ef8090e85f9e"
+    },
+    "D:\\h1_phase_boundary_unit_04_non_authoritative\\test_original_phase_bodies_con4\\boundary_fact.json": {
+      "retained_copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_phase_boundary_v1_non_authoritative\\unit_04\\facts\\recover_primary_170.json",
+      "sha256": "4168ef398ad8d90958fddbce8acd73edfe7d0be8d3e0bb4b298c77d369e6a262"
+    },
+    "D:\\h1_phase_boundary_unit_04_non_authoritative\\test_original_phase_bodies_con5\\boundary_fact.json": {
+      "retained_copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_phase_boundary_v1_non_authoritative\\unit_04\\facts\\late_recovery_170.json",
+      "sha256": "060e02bcd7933c18cefe52493d1b5416e5d1af6dbb02201f9b7746fc144162ae"
+    },
+    "D:\\h1_phase_boundary_unit_04_non_authoritative\\test_original_phase_bodies_con6\\boundary_fact.json": {
+      "retained_copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_phase_boundary_v1_non_authoritative\\unit_04\\facts\\pending_191.json",
+      "sha256": "7d1a9da3e5bee412eafdcf78acdcd3c965f4a95ab2e4f2be836845b9b644c690"
+    },
+    "D:\\h1_phase_boundary_unit_04_non_authoritative\\test_original_phase_bodies_con7\\boundary_fact.json": {
+      "retained_copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_phase_boundary_v1_non_authoritative\\unit_04\\facts\\pending_192.json",
+      "sha256": "c762fb37ac6ae9297a9a824bc0c6e99a2cd6528c23b9b2a3e5931e1cb5cede67"
+    }
+  },
+  "expected_fact_count": 9,
+  "all_expected_facts_retained": true,
+  "reason": null,
+  "outer_seconds": 87.65599999998813,
+  "peak_sampled_tree_rss_bytes": 180867072,
+  "peak_logical_bytes": 309574,
+  "changed_sources": [],
+  "source_pins": 1305,
+  "observed_processes": {
+    "53336": 1792503321.2326484,
+    "37628": 1792503321.2440095
+  },
+  "observed_images": {
+    "53336": {
+      "executable": "D:\\Miniconda3\\envs\\compute\\python.exe",
+      "parent_pid": 45004,
+      "create_time": 1792503321.2326484,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-u",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-p",
+        "no:faulthandler",
+        "--basetemp",
+        "D:\\h1_phase_boundary_unit_04_non_authoritative",
+        "--junitxml",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_phase_boundary_v1_non_authoritative\\unit_04\\junit.xml",
+        "tests/test_h1_phase_boundary_budget_development_v1.py",
+        "tests/test_h1_phase_boundary_due_endpoint_development_v1.py"
+      ]
+    },
+    "37628": {
+      "executable": "C:\\Windows\\System32\\conhost.exe",
+      "parent_pid": 53336,
+      "create_time": 1792503321.2440095,
+      "command": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ]
+    }
+  },
+  "observed_processes_remaining": [],
+  "cleanup_events": [],
+  "complete_unobserved_process_tree_proof": false,
+  "new_normal_jobs": 0,
+  "real_native_calls": 0,
+  "formal_result": false
+}

@@ -1,0 +1,190 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "exit_code": 0,
+  "error": null,
+  "diagnostic_complete": true,
+  "observations": [
+    {
+      "outcome": "rejected",
+      "error_type": "ValueError",
+      "error": "parent intent differs from pinned source",
+      "implementation": "old",
+      "seconds": 35.43988449999961,
+      "window": {
+        "injected": true,
+        "injection_count": 1,
+        "constructor_returns": 1,
+        "dependency_calls_after_injection": 3,
+        "parent_inspect_calls": 2,
+        "inspect_job_calls": 2,
+        "stage_inspect_calls": 10,
+        "effective_parent_close_calls": 1,
+        "instrumentation_errors": [],
+        "normal_return_offset": 2988,
+        "reader_mro": [
+          "experiments.h1_phase_historical_batch_development_v1.replay_prefixes.<locals>.Reader",
+          "experiments.h1_phase_historical_batch_development_v1.HistoricalTimedSnapshot",
+          "experiments.h1_historical_parent_prefix_development_v1.HistoricalSnapshot",
+          "experiments.h1_timed_job_parent_development_v1.SourceParent",
+          "experiments.h1_bounded_file_parent_development_v1.SavedSourceParent",
+          "experiments.h1_attested_source_parent_development_v1.SavedSourceParent",
+          "experiments.h1_saved_source_parent_development_v1.SavedSourceParent",
+          "builtins.object"
+        ],
+        "effective_parent_close": {
+          "module": "experiments.h1_timed_job_parent_development_v1",
+          "qualname": "SourceParent.close",
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_job_parent_development_v1.py",
+          "line": 222
+        },
+        "constructor_accepted_state": {
+          "completed_hours": 1,
+          "attempted_hours": 1,
+          "status": "ready",
+          "head": "292ca37303bbf917a9f11eed4ac1a06406c1e1864722abac7481cb9c92c138ab"
+        }
+      },
+      "model_dependency_alias_restored": true,
+      "observed_readers": 1,
+      "observed_read_views": 9,
+      "observed_read_view_closed_flags": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "all_observed_read_views_closed": true,
+      "reader_cleanup_states": [
+        {
+          "reader_closed": true,
+          "fields": {
+            "_journal": {
+              "is_none": true,
+              "closed": null
+            },
+            "_anchor": {
+              "is_none": true,
+              "closed": null
+            },
+            "_root_lease": {
+              "is_none": true,
+              "closed": null
+            }
+          }
+        }
+      ],
+      "all_reader_owner_fields_cleared": true,
+      "new_capture_taken_after_call": null,
+      "new_capture_slot_cleared": null
+    },
+    {
+      "outcome": "rejected",
+      "error_type": "ValueError",
+      "error": "historical successor dependency alias changed",
+      "implementation": "new",
+      "seconds": 31.93483230000129,
+      "window": {
+        "injected": true,
+        "injection_count": 1,
+        "constructor_returns": 1,
+        "dependency_calls_after_injection": 0,
+        "parent_inspect_calls": 1,
+        "inspect_job_calls": 2,
+        "stage_inspect_calls": 10,
+        "effective_parent_close_calls": 1,
+        "instrumentation_errors": [],
+        "normal_return_offset": 2988,
+        "reader_mro": [
+          "experiments.h1_phase_historical_batch_development_v2.replay_prefixes.<locals>.Reader",
+          "experiments.h1_constructor_inspection_capture_development_v1._build_capture.<locals>.ConstructorInspectionCapture",
+          "experiments.h1_phase_historical_batch_development_v1.HistoricalTimedSnapshot",
+          "experiments.h1_historical_parent_prefix_development_v1.HistoricalSnapshot",
+          "experiments.h1_timed_job_parent_development_v1.SourceParent",
+          "experiments.h1_bounded_file_parent_development_v1.SavedSourceParent",
+          "experiments.h1_attested_source_parent_development_v1.SavedSourceParent",
+          "experiments.h1_saved_source_parent_development_v1.SavedSourceParent",
+          "builtins.object"
+        ],
+        "effective_parent_close": {
+          "module": "experiments.h1_timed_job_parent_development_v1",
+          "qualname": "SourceParent.close",
+          "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_job_parent_development_v1.py",
+          "line": 222
+        },
+        "constructor_accepted_state": {
+          "completed_hours": 1,
+          "attempted_hours": 1,
+          "status": "ready",
+          "head": "292ca37303bbf917a9f11eed4ac1a06406c1e1864722abac7481cb9c92c138ab"
+        }
+      },
+      "model_dependency_alias_restored": true,
+      "observed_readers": 1,
+      "observed_read_views": 9,
+      "observed_read_view_closed_flags": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "all_observed_read_views_closed": true,
+      "reader_cleanup_states": [
+        {
+          "reader_closed": true,
+          "fields": {
+            "_journal": {
+              "is_none": true,
+              "closed": null
+            },
+            "_anchor": {
+              "is_none": true,
+              "closed": null
+            },
+            "_root_lease": {
+              "is_none": true,
+              "closed": null
+            }
+          }
+        }
+      ],
+      "all_reader_owner_fields_cleared": true,
+      "new_capture_taken_after_call": false,
+      "new_capture_slot_cleared": true
+    }
+  ],
+  "elapsed_seconds": 67.81353769999987,
+  "historical_window_old_reject_new_return": false,
+  "named_dependency_fault_rejected_by_both": true,
+  "full_source_batch_executed": false,
+  "full_source_batch_acceptance_proved": false,
+  "scientific_output_drift_proved": false,
+  "source_successor_adopted": false,
+  "saved_case_files": 465,
+  "saved_owned_files": 444,
+  "saved_case_sha256_unchanged": true,
+  "saved_owned_sha256_unchanged": true,
+  "source_activity": {
+    "read_opens": 7625,
+    "rejected_mutations": 0
+  },
+  "complete_dynamic_closure_proved": false,
+  "unobserved_ABA_covered": false,
+  "overall_performance_review_complete": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "formal_execution_ready": false,
+  "formal_result": false,
+  "full_192_hour_execution_verified": false,
+  "Jobs": 0,
+  "real_native_calls": 0
+}

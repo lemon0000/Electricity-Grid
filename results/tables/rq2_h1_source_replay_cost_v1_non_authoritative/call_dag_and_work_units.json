@@ -1,0 +1,135 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "scope": "source_layer_saved_scientific_replay_call_counts",
+  "dag": [
+    "prepare_many: two independent replay_prefixes around materialization",
+    "each Reader: constructor self.inspect plus caller explicit inspect",
+    "each traversal/hour: clock bridge inspect_job plus ChildReference inspect_job",
+    "each inspect_job: one worker/hour replay and M timed stage inspections"
+  ],
+  "single_reader_formula": {
+    "parent_inspects": 2,
+    "inspect_job": "4*H",
+    "timed_stage_inspect": "4*H*M"
+  },
+  "observed_single_reader": {
+    "hours": 3,
+    "M": 5,
+    "inspect_job": 12,
+    "timed_stage_inspect": 60,
+    "source": "profile_02",
+    "cprofile_overhead_included": true,
+    "fine_grained_focus": [
+      {
+        "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuous_grid_normal.py",
+        "line": 96,
+        "function": "normal_input_identity",
+        "primitive_calls": 1560,
+        "calls": 1560,
+        "self_seconds": 0.0106783,
+        "cumulative_seconds": 38.7093713
+      },
+      {
+        "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\continuous_grid_normal.py",
+        "line": 71,
+        "function": "_dependencies",
+        "primitive_calls": 1560,
+        "calls": 1560,
+        "self_seconds": 0.057096600000000004,
+        "cumulative_seconds": 36.3932889
+      },
+      {
+        "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+        "line": 882,
+        "function": "version",
+        "primitive_calls": 10922,
+        "calls": 10922,
+        "self_seconds": 0.011581800000000001,
+        "cumulative_seconds": 26.7012235
+      }
+    ]
+  },
+  "target_work_units": {
+    "168": {
+      "condition": "complete successful normal prefixes, fixed M stages per hour; no additional independent historical/snapshot probes",
+      "reader_observations": 1354,
+      "reader_prefix_hour_weight": 114580,
+      "current_parent_inspect_traversals": 2708,
+      "current_parent_prefix_hour_weight": 229160,
+      "current_bridge_inspect_calls": 229160,
+      "current_child_reference_inspect_calls": 229160,
+      "current_inspect_job_calls": 458320,
+      "current_stage_inspect_calls_formula": "4*M*reader_prefix_hour_weight",
+      "current_toy_M5_stage_inspect_calls": 2291600,
+      "conditional_constructor_reuse": {
+        "implemented": false,
+        "independently_validated": false,
+        "reader_observations": 1354,
+        "parent_inspect_traversals": 1354,
+        "parent_prefix_hour_weight": 114580,
+        "inspect_job_calls": 229160,
+        "toy_M5_stage_inspect_calls": 1145800
+      },
+      "native_calls_implied_by_these_replay_counts": 0,
+      "wall_prediction_seconds": null,
+      "total_wall_admission_seconds": null
+    },
+    "192": {
+      "condition": "complete successful normal prefixes, fixed M stages per hour; no additional independent historical/snapshot probes",
+      "reader_observations": 1546,
+      "reader_prefix_hour_weight": 149380,
+      "current_parent_inspect_traversals": 3092,
+      "current_parent_prefix_hour_weight": 298760,
+      "current_bridge_inspect_calls": 298760,
+      "current_child_reference_inspect_calls": 298760,
+      "current_inspect_job_calls": 597520,
+      "current_stage_inspect_calls_formula": "4*M*reader_prefix_hour_weight",
+      "current_toy_M5_stage_inspect_calls": 2987600,
+      "conditional_constructor_reuse": {
+        "implemented": false,
+        "independently_validated": false,
+        "reader_observations": 1546,
+        "parent_inspect_traversals": 1546,
+        "parent_prefix_hour_weight": 149380,
+        "inspect_job_calls": 298760,
+        "toy_M5_stage_inspect_calls": 1493800
+      },
+      "native_calls_implied_by_these_replay_counts": 0,
+      "wall_prediction_seconds": null,
+      "total_wall_admission_seconds": null
+    }
+  },
+  "unknowns": [
+    "net whole-path effect of constructor reuse",
+    "applicable runtime/freshness equivalence under removed traversal",
+    "target-scale normal/source/history/serialization/failure/terminal wall RSS and storage"
+  ],
+  "existing_toy_event_cap_remains": 32,
+  "minimum_events_at_192": 576,
+  "optimization_implemented": false,
+  "overall_performance_review_complete": false,
+  "long_connected_launch_admitted": false,
+  "resource_admission": false,
+  "native_execution_authorized": false,
+  "formal_execution_ready": false,
+  "full_192_hour_execution_verified": false,
+  "real_native_calls": 0,
+  "new_normal_jobs": 0,
+  "formal_result": false,
+  "bindings": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_cross_hour_owner_development_v2.py": "92a9174ba706ab18d00e3d6ab9a56e8baad3abe1a76befac7c4f83da5022fdac",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_exact_source_batch_development_v1.py": "b03080f38cc9a4e9151eee3d479e045da0a586ff3ad98ce2bf9d060959600636",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_phase_historical_batch_development_v1.py": "4843a1031b0998f84516995073bfc038d52373e4a4390ead025a7a2f64760335",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_historical_parent_prefix_development_v1.py": "b859174f6b5ec22f7083114973f54741178c5f3257b013150a3a36bb7a16fe3b",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_job_clock_bridge_development_v1.py": "23512dc30464f6828c4edcb75377220a2c4510b1d961e2af29a86302cabcc9ab",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_job_parent_development_v1.py": "461a4837a25c6334cd367961cdb0b6bbfc61ea5f2c1400572faf666c6c800e11",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_worker_hour_development_v1.py": "bd2b367f452d23ef38675af1ed2bb01b1c0809085683a37b3fed2b98b3f1f3b1",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_hour_development_v1.py": "80f652031e73f8b82a66ae3a034064653cfe7fb8ce106955941d38d5bbfdfd75",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\h1_timed_stage_development_v1.py": "7b3175108193c120bf16b9b02d6851240d49379707b093bae400b7d341a504f5",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_phase_boundary_v1_non_authoritative\\budget_audit_v1.json": "aab289b757930b051ed6a514df8be8fd2a39e6ee41807ee937fd32eae2ee382a",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_source_replay_cost_v1_non_authoritative\\profile_02\\reader_terminal.json": "45ff1576d669b77eff1dba36f03231eade7ff9b6a7a8be9220ab73e61e8d8c46",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_source_replay_cost_v1_non_authoritative\\profile_02\\profile_call_edges.json": "9fd8c629cc43a3eb0424cf925fedd59e30acc1ca43ac7f08d49c0a19a72578f7",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_source_replay_cost_v1_non_authoritative\\profile_02\\profile_functions.json": "bd6ef4655c93d491814b78a739793ce90ba829c0492670f96e6763d949efbd16",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_source_replay_cost_v1_non_authoritative\\build_work_units_v1.py": "49d6daefc2b25832f7ceaff6451ea7cca5c4e17533ee88018e2fdaf1c1ce7f14"
+  }
+}

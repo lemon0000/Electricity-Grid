@@ -1,0 +1,48 @@
+{
+  "command": [
+    "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "-u",
+    "-B",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_saved_reader_failure_v1_non_authoritative\\fault_worker_v1.py",
+    "unselected_packet_drift",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_saved_reader_failure_v1_non_authoritative\\suite_01\\08_unselected_packet_drift"
+  ],
+  "case": {
+    "case": "unselected_packet_drift",
+    "completed_prefix_hours": 2,
+    "selected_hours": [
+      1
+    ],
+    "expected_completed_numeric_hours": 2,
+    "expected_runtime_counts": {
+      "job_inspections": 4,
+      "stage_inspections": 20,
+      "normal_after_returns": 2
+    },
+    "injection_phase": "all-H entry before validation of unselected hour0",
+    "expected_inner_objects": 3,
+    "expected_outer_ReadViews": 4,
+    "inner_close_order": [
+      "_journal",
+      "_anchor",
+      "_root_lease"
+    ],
+    "outer_close_order": [
+      3,
+      2,
+      1,
+      0
+    ],
+    "private_containers_checked": [
+      "captured",
+      "all_packets",
+      "seen_hours"
+    ],
+    "namespace_round_expected": 2,
+    "physical_content_mutation": false,
+    "in_memory_reflection": true,
+    "namespace_read_result_seam": false,
+    "temporary_read_only_sharing_handle": false
+  },
+  "plan_sha256": "1b941461b314ab10fa52c550529936251ef79bd7da9e680ce4cebe11cdb176bd"
+}

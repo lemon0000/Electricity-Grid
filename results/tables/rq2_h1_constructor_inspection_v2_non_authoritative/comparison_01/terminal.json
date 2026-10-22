@@ -1,0 +1,54 @@
+{
+  "exit_code": 15,
+  "error": "FileNotFoundError(2, 'No such file or directory')",
+  "reason": "no_progress_limit",
+  "outer_seconds": 120.32799999999952,
+  "peak_sampled_tree_rss_bytes": 195780608,
+  "peak_logical_bytes": 328174,
+  "changed_sources": [],
+  "source_pins": 1307,
+  "observed_processes": {
+    "3580": 1792557811.1604376,
+    "7644": 1792557811.18128
+  },
+  "observed_images": {
+    "3580": {
+      "executable": "D:\\Miniconda3\\envs\\compute\\python.exe",
+      "parent_pid": 4828,
+      "create_time": 1792557811.1604376,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-u",
+        "-B",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_inspection_v2_non_authoritative\\compare_saved_v1.py",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_inspection_v2_non_authoritative\\comparison_01"
+      ]
+    },
+    "7644": {
+      "executable": "C:\\Windows\\System32\\conhost.exe",
+      "parent_pid": 3580,
+      "create_time": 1792557811.18128,
+      "command": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ]
+    }
+  },
+  "observed_processes_remaining": [],
+  "cleanup_events": [
+    {
+      "pid": 7644,
+      "action": "kill_owned",
+      "reason": "no_progress_limit"
+    },
+    {
+      "pid": 3580,
+      "action": "kill_owned",
+      "reason": "no_progress_limit"
+    }
+  ],
+  "complete_unobserved_process_tree_proof": false,
+  "new_normal_jobs": 0,
+  "real_native_calls": 0,
+  "formal_result": false
+}

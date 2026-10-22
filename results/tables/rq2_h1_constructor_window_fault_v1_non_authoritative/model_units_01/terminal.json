@@ -1,0 +1,67 @@
+{
+  "exit_code": 0,
+  "junit": {
+    "tests": 152,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "accepted": true
+  },
+  "facts": {
+    "D:\\h1_constructor_model_model_units_01_non_authoritative\\test_constructor_capture_is_ex0\\constructor_capture_fact.json": {
+      "retained_copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_window_fault_v1_non_authoritative\\model_units_01\\facts\\constructor_capture.json",
+      "sha256": "de6c9054b88111c75f28a826e4f846f4b62086b7309e1ae0083465b0cfd0f641"
+    }
+  },
+  "expected_fact_count": 1,
+  "all_expected_facts_retained": true,
+  "reason": null,
+  "outer_seconds": 4.282000000002881,
+  "peak_sampled_tree_rss_bytes": 127545344,
+  "peak_logical_bytes": 343931,
+  "changed_sources": [],
+  "source_pins": 1306,
+  "observed_processes": {
+    "15208": 1792560489.4679313,
+    "1052": 1792560489.4854658
+  },
+  "observed_images": {
+    "15208": {
+      "executable": "D:\\Miniconda3\\envs\\compute\\python.exe",
+      "parent_pid": 30932,
+      "create_time": 1792560489.4679313,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-u",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-p",
+        "no:faulthandler",
+        "--basetemp",
+        "D:\\h1_constructor_model_model_units_01_non_authoritative",
+        "--junitxml",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_constructor_window_fault_v1_non_authoritative\\model_units_01\\junit.xml",
+        "tests/test_h1_constructor_inspection_capture_development_v1.py"
+      ]
+    },
+    "1052": {
+      "executable": "C:\\Windows\\System32\\conhost.exe",
+      "parent_pid": 15208,
+      "create_time": 1792560489.4854658,
+      "command": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ]
+    }
+  },
+  "observed_processes_remaining": [],
+  "cleanup_events": [],
+  "complete_unobserved_process_tree_proof": false,
+  "new_normal_jobs": 0,
+  "real_native_calls": 0,
+  "formal_result": false
+}

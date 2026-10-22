@@ -1,0 +1,59 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "parameter_scope": "finite_v2_business_anchor_parameter_overlay_on_synthetic_training_fixture",
+  "service_tolerance": 1e-06,
+  "tolerance_evidence": "single literal in exact request-bound boundary source plus two named direct consumers: cfe_preallocation and capacity_policy_bidirectional",
+  "historical_runtime_tolerance_value_separately_captured": false,
+  "initial_zero_business_state_verified": true,
+  "actual_initial_business_state": {
+    "accounting_period_id": "single_nonrolling_enrollment_and_followup_192h",
+    "active_duration_hours": 0.0,
+    "arm_id": "joint_correct_shared",
+    "cumulative_call_energy": 0.0,
+    "event_active": false,
+    "event_count": 0,
+    "has_prior_event": false,
+    "interevent_rest_hours": null,
+    "observed_violations": [],
+    "previous_call": 0.0,
+    "recovery_debt": 0.0,
+    "track_id": "shared"
+  },
+  "actual_initial_ledger": {
+    "accounting_period_id": "single_nonrolling_enrollment_and_followup_192h",
+    "cohorts": [],
+    "last_hour": 0,
+    "trajectory_identity": "32e64d56bb70ed6e4ea28e11f65dc7e36bc6516887262a4263f3e85a3babc477"
+  },
+  "actual_call_limit_checked_in_all_192_encoded_observations": true,
+  "actual_boundary_anchor": {
+    "arm_id": "joint_correct_shared",
+    "power_outage_seed": 7,
+    "power_provenance_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "power_source_hour": 0,
+    "power_trajectory_id": "power-0",
+    "split": "training",
+    "track_id": "shared",
+    "workload_normalization_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+    "workload_provenance_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+    "workload_source_hour": 0,
+    "workload_trace_id": "workload-0"
+  },
+  "source_authenticated_boundary_anchor": false,
+  "h192_input_source_cfe_at_alpha_one": "0",
+  "h192_renewable_share": "1",
+  "h192_compatible_surplus": "1/2",
+  "h192_effective_cfe_request": "0",
+  "fresh_live_source_pins": 1306,
+  "explicit_tested_byte_snapshots": 14,
+  "owned_tree_rss_is_two_second_sample": true,
+  "logical_bytes_include_base_and_retained_copies": true,
+  "owner_event_size_or_complete_resource_bound": false,
+  "bindings": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\boundary.py": "b8c424ee8e05b819e8d59522b4ed36e84c86223b1af1e4bf357c00837d5d5c8b",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\configs\\rq2_finite_mechanism_protocol_candidate_v2.DRAFT.yaml": "95eb158f0a8e6784d2af401e67164965543c98f42ff02b756c214982601e5430",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\cfe_preallocation.py": "073661762f2c050b6449a572cd0d9df0e0863c6fd9d94681c575ce4e3475b914",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\rq2_joint_deliverability_boundary_v1\\capacity_policy_bidirectional.py": "4b16340254f1bf7fc45b7b6cafb8bb7e08c4732a7e08022b02940404336a13b4"
+  },
+  "formal_result": false
+}

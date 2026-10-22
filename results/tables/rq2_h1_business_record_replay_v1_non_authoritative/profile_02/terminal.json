@@ -1,0 +1,68 @@
+{
+  "exit_code": 0,
+  "junit": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "accepted": true
+  },
+  "facts": {
+    "D:\\h1_business_record_profile_02_non_authoritative\\test_fixed_total_validator_pro0\\profile_fact.json": {
+      "retained_copy": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_business_record_replay_v1_non_authoritative\\profile_02\\facts\\profile_32.json",
+      "sha256": "7cd44c7f6825f402047d49fc853810bb9aae4562672de631943e8f9e90f21f32"
+    }
+  },
+  "expected_fact_count": 1,
+  "all_expected_facts_retained": true,
+  "reason": null,
+  "outer_seconds": 23.09399999998277,
+  "peak_sampled_tree_rss_bytes": 174002176,
+  "peak_logical_bytes": 303878,
+  "changed_sources": [],
+  "source_pins": 1305,
+  "observed_processes": {
+    "49740": 1792505764.272482,
+    "55928": 1792505764.2826464
+  },
+  "observed_images": {
+    "49740": {
+      "executable": "D:\\Miniconda3\\envs\\compute\\python.exe",
+      "parent_pid": 58492,
+      "create_time": 1792505764.272482,
+      "command": [
+        "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "-u",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-s",
+        "-p",
+        "no:cacheprovider",
+        "-p",
+        "no:faulthandler",
+        "--basetemp",
+        "D:\\h1_business_record_profile_02_non_authoritative",
+        "--junitxml",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_business_record_replay_v1_non_authoritative\\profile_02\\junit.xml",
+        "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_business_record_replay_v1_non_authoritative\\profile_workload_v1.py"
+      ]
+    },
+    "55928": {
+      "executable": "C:\\Windows\\System32\\conhost.exe",
+      "parent_pid": 49740,
+      "create_time": 1792505764.2826464,
+      "command": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ]
+    }
+  },
+  "observed_processes_remaining": [],
+  "cleanup_events": [],
+  "complete_unobserved_process_tree_proof": false,
+  "new_normal_jobs": 0,
+  "real_native_calls": 0,
+  "formal_result": false
+}

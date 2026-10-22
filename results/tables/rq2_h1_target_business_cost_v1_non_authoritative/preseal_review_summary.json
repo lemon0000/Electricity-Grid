@@ -1,0 +1,49 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "record_kind": "root_consolidation_of_read_only_preseal_findings",
+  "reviewer_instance": "/root/phase_budget_review",
+  "independent_official_review": false,
+  "official_verdict": null,
+  "opens_any_gate": false,
+  "addressed": [
+    {
+      "finding": "Initial postcheck imposed q+r<=f*w and report treated it as the contract",
+      "resolution": "Restore the existing separate rules q<=f*w and q+r<=D in the checker/report; preserve the initial bound draft and recheck stored actions without rerunning the worker",
+      "evidence": ["postcheck_v1.py", "preseal_before_contract_fix/snapshot_bindings.json", "acceptance_report.md"]
+    },
+    {
+      "finding": "Explicit zero initial business state was not mechanically checked",
+      "resolution": "Check identical h168/h192 initial cursor, first-record before state, zero numeric state/false event flags/None rest and empty ledger at hour0",
+      "evidence": "parameter_overlay_verification_v1.json"
+    },
+    {
+      "finding": "Protocol service_tolerance is a dependency constant rather than an encoded carry parameter",
+      "resolution": "Check the single literal and two named direct consumers cfe_preallocation/capacity_policy_bidirectional in exact request-bound sources; record historical runtime value was not separately captured",
+      "evidence": "parameter_overlay_verification_v1.json"
+    },
+    {
+      "finding": "Business parameter overlay must not imply a source-authenticated BoundaryAnchor",
+      "resolution": "Preserve and expose actual synthetic training BoundaryAnchor and distinguish parameter overlay in report",
+      "evidence": "parameter_overlay_verification_v1.json"
+    },
+    {
+      "finding": "source_cfe_at_alpha_one=0 must retain its renewable-share/surplus meaning",
+      "resolution": "Verify final allocation renewable_share=1, compatible_surplus=1/2 and effective CFE request=0",
+      "evidence": "parameter_overlay_verification_v1.json"
+    },
+    {
+      "finding": "Pins, snapshots, build time and logical bytes need separate scopes",
+      "resolution": "Report 1306 live pins versus 14 explicit snapshots; build includes prepare/advance and progress; 2s RSS samples and base/out copies are observations rather than resource bounds",
+      "evidence": "acceptance_report.md"
+    }
+  ],
+  "retained_checker_failures": ["postcheck_failure_01.json", "parameter_overlay_failure_01.json"],
+  "remaining_open": [
+    "Representative costs across additional mechanisms, cohorts, lanes and success/failure paths",
+    "Complete owner event/database/holder/archives and workflow wall/RSS/storage bounds",
+    "Source candidate path choice and actual file/runtime closure",
+    "Genuine 168h/at-most-24h N/Rref/Actual/paired terminal checkpoint close fresh-process replay",
+    "All 16 preparation gates and formal/native/resource/seal/fresh official authority"
+  ],
+  "formal_result": false
+}

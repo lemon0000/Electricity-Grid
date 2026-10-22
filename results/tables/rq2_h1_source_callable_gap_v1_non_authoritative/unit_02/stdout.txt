@@ -1,0 +1,517 @@
+...FFFFFFFFFFFFFF.......                                                 [100%]
+================================== FAILURES ===================================
+_ test_current_v2_rejects_parent_close_drift_but_dynamic_cleanup_leaves_owners[alias] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000274A9AF25A0>
+drift = 'alias'
+
+    @pytest.mark.parametrize('drift',['alias','code'])
+    def test_current_v2_rejects_parent_close_drift_but_dynamic_cleanup_leaves_owners(monkeypatch,drift):
+        reader,owners,calls,Owner=reader_with_owners()
+        outer=Owner('outer');frames={0:object()};primary=ValueError('primary fault')
+        parent=candidate.binding.snapshot.parent.SourceParent
+        with monkeypatch.context() as patch:
+            if drift=='alias':patch.setattr(parent,'close',lambda self:None)
+            else:patch.setattr(parent.close,'__code__',(lambda self:None).__code__)
+            with pytest.raises(ValueError,match='successor'):candidate._check_dependencies()
+            candidate._close_replay(reader,[outer],frames,False,primary)
+            assert calls==['outer'] and not any(owner.closed for owner in owners)
+            assert not reader._closed and all(getattr(reader,field) is owner
+                for field,owner in zip(('_journal','_anchor','_root_lease'),owners))
+        # The detached successor closes the original retained owners after restore.
+>       support.close_replay(reader,[],{},False,primary)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9AF1BE0>
+leases = [], captured = {}, completed = False
+primary = ValueError('primary fault')
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+_ test_current_v2_rejects_parent_close_drift_but_dynamic_cleanup_leaves_owners[code] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000274A9B02AB0>
+drift = 'code'
+
+    @pytest.mark.parametrize('drift',['alias','code'])
+    def test_current_v2_rejects_parent_close_drift_but_dynamic_cleanup_leaves_owners(monkeypatch,drift):
+        reader,owners,calls,Owner=reader_with_owners()
+        outer=Owner('outer');frames={0:object()};primary=ValueError('primary fault')
+        parent=candidate.binding.snapshot.parent.SourceParent
+        with monkeypatch.context() as patch:
+            if drift=='alias':patch.setattr(parent,'close',lambda self:None)
+            else:patch.setattr(parent.close,'__code__',(lambda self:None).__code__)
+            with pytest.raises(ValueError,match='successor'):candidate._check_dependencies()
+            candidate._close_replay(reader,[outer],frames,False,primary)
+            assert calls==['outer'] and not any(owner.closed for owner in owners)
+            assert not reader._closed and all(getattr(reader,field) is owner
+                for field,owner in zip(('_journal','_anchor','_root_lease'),owners))
+        # The detached successor closes the original retained owners after restore.
+>       support.close_replay(reader,[],{},False,primary)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9B02F00>
+leases = [], captured = {}, completed = False
+primary = ValueError('primary fault')
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+_ test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[None-alias] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000274A9B007A0>
+drift = 'alias', failure = None
+
+    @pytest.mark.parametrize('drift',['alias','code'])
+    @pytest.mark.parametrize('failure',[None,'_journal','_anchor','_root_lease','outer_b'])
+    def test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault(monkeypatch,drift,failure):
+        reader,owners,calls,Owner=reader_with_owners(failure)
+        outer_a,outer_b=Owner('outer_a'),Owner('outer_b')
+        primary=ValueError('primary validation failure');frames={0:object()}
+        parent=candidate.binding.snapshot.parent.SourceParent
+        with monkeypatch.context() as patch:
+            if drift=='alias':patch.setattr(parent,'close',lambda self:None)
+            else:patch.setattr(parent.close,'__code__',(lambda self:None).__code__)
+            with pytest.raises(ValueError,match='successor'):candidate._check_dependencies()
+>           support.close_replay(reader,[outer_a,outer_b],frames,False,primary)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9B008C0>
+leases = [<test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9B005F0>, <test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9B00830>]
+captured = {0: <object object at 0x00000274A9CD2980>}, completed = False
+primary = ValueError('primary validation failure')
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+_ test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[None-code] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000274A9B01790>
+drift = 'code', failure = None
+
+    @pytest.mark.parametrize('drift',['alias','code'])
+    @pytest.mark.parametrize('failure',[None,'_journal','_anchor','_root_lease','outer_b'])
+    def test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault(monkeypatch,drift,failure):
+        reader,owners,calls,Owner=reader_with_owners(failure)
+        outer_a,outer_b=Owner('outer_a'),Owner('outer_b')
+        primary=ValueError('primary validation failure');frames={0:object()}
+        parent=candidate.binding.snapshot.parent.SourceParent
+        with monkeypatch.context() as patch:
+            if drift=='alias':patch.setattr(parent,'close',lambda self:None)
+            else:patch.setattr(parent.close,'__code__',(lambda self:None).__code__)
+            with pytest.raises(ValueError,match='successor'):candidate._check_dependencies()
+>           support.close_replay(reader,[outer_a,outer_b],frames,False,primary)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9B01A30>
+leases = [<test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9B01820>, <test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9B01910>]
+captured = {0: <object object at 0x00000274A9CD1140>}, completed = False
+primary = ValueError('primary validation failure')
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+_ test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[_journal-alias] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000274A9B03E30>
+drift = 'alias', failure = '_journal'
+
+    @pytest.mark.parametrize('drift',['alias','code'])
+    @pytest.mark.parametrize('failure',[None,'_journal','_anchor','_root_lease','outer_b'])
+    def test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault(monkeypatch,drift,failure):
+        reader,owners,calls,Owner=reader_with_owners(failure)
+        outer_a,outer_b=Owner('outer_a'),Owner('outer_b')
+        primary=ValueError('primary validation failure');frames={0:object()}
+        parent=candidate.binding.snapshot.parent.SourceParent
+        with monkeypatch.context() as patch:
+            if drift=='alias':patch.setattr(parent,'close',lambda self:None)
+            else:patch.setattr(parent.close,'__code__',(lambda self:None).__code__)
+            with pytest.raises(ValueError,match='successor'):candidate._check_dependencies()
+>           support.close_replay(reader,[outer_a,outer_b],frames,False,primary)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9B03FE0>
+leases = [<test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9B03E60>, <test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9B03F20>]
+captured = {0: <object object at 0x00000274A9CD2580>}, completed = False
+primary = ValueError('primary validation failure')
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+_ test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[_journal-code] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000274A9B01BE0>
+drift = 'code', failure = '_journal'
+
+    @pytest.mark.parametrize('drift',['alias','code'])
+    @pytest.mark.parametrize('failure',[None,'_journal','_anchor','_root_lease','outer_b'])
+    def test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault(monkeypatch,drift,failure):
+        reader,owners,calls,Owner=reader_with_owners(failure)
+        outer_a,outer_b=Owner('outer_a'),Owner('outer_b')
+        primary=ValueError('primary validation failure');frames={0:object()}
+        parent=candidate.binding.snapshot.parent.SourceParent
+        with monkeypatch.context() as patch:
+            if drift=='alias':patch.setattr(parent,'close',lambda self:None)
+            else:patch.setattr(parent.close,'__code__',(lambda self:None).__code__)
+            with pytest.raises(ValueError,match='successor'):candidate._check_dependencies()
+>           support.close_replay(reader,[outer_a,outer_b],frames,False,primary)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9B02B10>
+leases = [<test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9B01EE0>, <test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9B02960>]
+captured = {0: <object object at 0x00000274A9CD37F0>}, completed = False
+primary = ValueError('primary validation failure')
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+_ test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[_anchor-alias] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000274A9B00080>
+drift = 'alias', failure = '_anchor'
+
+    @pytest.mark.parametrize('drift',['alias','code'])
+    @pytest.mark.parametrize('failure',[None,'_journal','_anchor','_root_lease','outer_b'])
+    def test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault(monkeypatch,drift,failure):
+        reader,owners,calls,Owner=reader_with_owners(failure)
+        outer_a,outer_b=Owner('outer_a'),Owner('outer_b')
+        primary=ValueError('primary validation failure');frames={0:object()}
+        parent=candidate.binding.snapshot.parent.SourceParent
+        with monkeypatch.context() as patch:
+            if drift=='alias':patch.setattr(parent,'close',lambda self:None)
+            else:patch.setattr(parent.close,'__code__',(lambda self:None).__code__)
+            with pytest.raises(ValueError,match='successor'):candidate._check_dependencies()
+>           support.close_replay(reader,[outer_a,outer_b],frames,False,primary)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9B00590>
+leases = [<test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9B00200>, <test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9B02CF0>]
+captured = {0: <object object at 0x00000274A9CD0D10>}, completed = False
+primary = ValueError('primary validation failure')
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+_ test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[_anchor-code] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000274A9DA23F0>
+drift = 'code', failure = '_anchor'
+
+    @pytest.mark.parametrize('drift',['alias','code'])
+    @pytest.mark.parametrize('failure',[None,'_journal','_anchor','_root_lease','outer_b'])
+    def test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault(monkeypatch,drift,failure):
+        reader,owners,calls,Owner=reader_with_owners(failure)
+        outer_a,outer_b=Owner('outer_a'),Owner('outer_b')
+        primary=ValueError('primary validation failure');frames={0:object()}
+        parent=candidate.binding.snapshot.parent.SourceParent
+        with monkeypatch.context() as patch:
+            if drift=='alias':patch.setattr(parent,'close',lambda self:None)
+            else:patch.setattr(parent.close,'__code__',(lambda self:None).__code__)
+            with pytest.raises(ValueError,match='successor'):candidate._check_dependencies()
+>           support.close_replay(reader,[outer_a,outer_b],frames,False,primary)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9DA3890>
+leases = [<test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9DA1190>, <test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9DA2C00>]
+captured = {0: <object object at 0x00000274A9CD2140>}, completed = False
+primary = ValueError('primary validation failure')
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+_ test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[_root_lease-alias] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000274A9DA2810>
+drift = 'alias', failure = '_root_lease'
+
+    @pytest.mark.parametrize('drift',['alias','code'])
+    @pytest.mark.parametrize('failure',[None,'_journal','_anchor','_root_lease','outer_b'])
+    def test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault(monkeypatch,drift,failure):
+        reader,owners,calls,Owner=reader_with_owners(failure)
+        outer_a,outer_b=Owner('outer_a'),Owner('outer_b')
+        primary=ValueError('primary validation failure');frames={0:object()}
+        parent=candidate.binding.snapshot.parent.SourceParent
+        with monkeypatch.context() as patch:
+            if drift=='alias':patch.setattr(parent,'close',lambda self:None)
+            else:patch.setattr(parent.close,'__code__',(lambda self:None).__code__)
+            with pytest.raises(ValueError,match='successor'):candidate._check_dependencies()
+>           support.close_replay(reader,[outer_a,outer_b],frames,False,primary)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9DA0350>
+leases = [<test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9DA06E0>, <test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9DA3EF0>]
+captured = {0: <object object at 0x00000274A9CD34B0>}, completed = False
+primary = ValueError('primary validation failure')
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+_ test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[_root_lease-code] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000274A9B029F0>
+drift = 'code', failure = '_root_lease'
+
+    @pytest.mark.parametrize('drift',['alias','code'])
+    @pytest.mark.parametrize('failure',[None,'_journal','_anchor','_root_lease','outer_b'])
+    def test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault(monkeypatch,drift,failure):
+        reader,owners,calls,Owner=reader_with_owners(failure)
+        outer_a,outer_b=Owner('outer_a'),Owner('outer_b')
+        primary=ValueError('primary validation failure');frames={0:object()}
+        parent=candidate.binding.snapshot.parent.SourceParent
+        with monkeypatch.context() as patch:
+            if drift=='alias':patch.setattr(parent,'close',lambda self:None)
+            else:patch.setattr(parent.close,'__code__',(lambda self:None).__code__)
+            with pytest.raises(ValueError,match='successor'):candidate._check_dependencies()
+>           support.close_replay(reader,[outer_a,outer_b],frames,False,primary)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9B02CF0>
+leases = [<test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9B02AB0>, <test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9B03530>]
+captured = {0: <object object at 0x00000274A9CD0990>}, completed = False
+primary = ValueError('primary validation failure')
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+_ test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[outer_b-alias] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000274A9DA20C0>
+drift = 'alias', failure = 'outer_b'
+
+    @pytest.mark.parametrize('drift',['alias','code'])
+    @pytest.mark.parametrize('failure',[None,'_journal','_anchor','_root_lease','outer_b'])
+    def test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault(monkeypatch,drift,failure):
+        reader,owners,calls,Owner=reader_with_owners(failure)
+        outer_a,outer_b=Owner('outer_a'),Owner('outer_b')
+        primary=ValueError('primary validation failure');frames={0:object()}
+        parent=candidate.binding.snapshot.parent.SourceParent
+        with monkeypatch.context() as patch:
+            if drift=='alias':patch.setattr(parent,'close',lambda self:None)
+            else:patch.setattr(parent.close,'__code__',(lambda self:None).__code__)
+            with pytest.raises(ValueError,match='successor'):candidate._check_dependencies()
+>           support.close_replay(reader,[outer_a,outer_b],frames,False,primary)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9DA3F20>
+leases = [<test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9DA1C10>, <test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9DA3E60>]
+captured = {0: <object object at 0x00000274A9CD1BA0>}, completed = False
+primary = ValueError('primary validation failure')
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+_ test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[outer_b-code] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000274A9DA0EC0>
+drift = 'code', failure = 'outer_b'
+
+    @pytest.mark.parametrize('drift',['alias','code'])
+    @pytest.mark.parametrize('failure',[None,'_journal','_anchor','_root_lease','outer_b'])
+    def test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault(monkeypatch,drift,failure):
+        reader,owners,calls,Owner=reader_with_owners(failure)
+        outer_a,outer_b=Owner('outer_a'),Owner('outer_b')
+        primary=ValueError('primary validation failure');frames={0:object()}
+        parent=candidate.binding.snapshot.parent.SourceParent
+        with monkeypatch.context() as patch:
+            if drift=='alias':patch.setattr(parent,'close',lambda self:None)
+            else:patch.setattr(parent.close,'__code__',(lambda self:None).__code__)
+            with pytest.raises(ValueError,match='successor'):candidate._check_dependencies()
+>           support.close_replay(reader,[outer_a,outer_b],frames,False,primary)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9DA2300>
+leases = [<test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A83177D0>, <test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9DA0AD0>]
+captured = {0: <object object at 0x00000274A9CD2F80>}, completed = False
+primary = ValueError('primary validation failure')
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+_ test_frozen_teardown_preserves_original_first_cleanup_error_without_primary _
+
+    def test_frozen_teardown_preserves_original_first_cleanup_error_without_primary():
+        reader,owners,calls,Owner=reader_with_owners('_journal');outer=Owner('outer')
+        frames={0:object()}
+        with pytest.raises(RuntimeError,match='named owner close failure'):
+>           support.close_replay(reader,[outer],frames,True,None)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9DA2BD0>
+leases = [<test_h1_constructor_rejection_support_development_v1.reader_with_owners.<locals>.Owner object at 0x00000274A9DA2660>]
+captured = {0: <object object at 0x00000274A9CD05D0>}, completed = True
+primary = None
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+__ test_frozen_teardown_does_not_clear_success_frames_and_is_safe_to_repeat ___
+
+    def test_frozen_teardown_does_not_clear_success_frames_and_is_safe_to_repeat():
+        reader,owners,calls,Owner=reader_with_owners();frames={0:object()}
+>       support.close_replay(reader,[],frames,True,None)
+
+tests\test_h1_constructor_rejection_support_development_v1.py:76: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\h1_constructor_rejection_support_development_v1.py:43: in close_replay
+    return frozen_driver(None if reader is None else Teardown(),leases,captured,completed,primary)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reader = <experiments.h1_constructor_rejection_support_development_v1._build_teardown.<locals>.close_replay.<locals>.Teardown object at 0x00000274A9DA0E90>
+leases = [], captured = {0: <object object at 0x00000274A9CD1730>}
+completed = True, primary = None
+
+    def _close_replay(reader, leases, captured, completed, primary):
+        errors=[]
+>       for item in ([reader] if reader is not None else [])+list(reversed(leases)):
+                                                             ^^^^
+E       NameError: name 'list' is not defined
+
+experiments\h1_phase_historical_batch_development_v1.py:147: NameError
+=========================== short test summary info ===========================
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_current_v2_rejects_parent_close_drift_but_dynamic_cleanup_leaves_owners[alias]
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_current_v2_rejects_parent_close_drift_but_dynamic_cleanup_leaves_owners[code]
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[None-alias]
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[None-code]
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[_journal-alias]
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[_journal-code]
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[_anchor-alias]
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[_anchor-code]
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[_root_lease-alias]
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[_root_lease-code]
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[outer_b-alias]
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_frozen_real_parent_program_closes_all_owners_after_descriptor_or_code_fault[outer_b-code]
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_frozen_teardown_preserves_original_first_cleanup_error_without_primary
+FAILED tests/test_h1_constructor_rejection_support_development_v1.py::test_frozen_teardown_does_not_clear_success_frames_and_is_safe_to_repeat
+14 failed, 10 passed in 4.46s

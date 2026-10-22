@@ -1,0 +1,133 @@
+{
+  "status": "DRAFT_NONAUTHORITATIVE",
+  "raw_packet_evidence_accepted": true,
+  "layout_decomposition_evidence_accepted": true,
+  "layout_decomposition_acceptance_is_separate_from_outer_exit": true,
+  "original_packet01_accepted": false,
+  "original_packet01_missing_values_reconstructed": false,
+  "original_packet01_full_source_freshness_proved": false,
+  "source_pins_verified": 2961,
+  "opened_input_pins_verified": 40,
+  "v3_packet_accounting_bytes_at_remember": 655354,
+  "all_packets_container_recursive_bytes_after_fields_before_source_revalidation": 655570,
+  "checkpoints": {
+    "before_all_packet_validation": {
+      "observed_recursive_bytes": 655354,
+      "ordinary_reachable_object_bytes": 267162,
+      "instance_dict_bytes": 388192,
+      "layout_walk_sum": 655354,
+      "original_measure_equals_layout_walk": true
+    },
+    "after_all_packet_validation": {
+      "observed_recursive_bytes": 655346,
+      "ordinary_reachable_object_bytes": 267162,
+      "instance_dict_bytes": 388184,
+      "layout_walk_sum": 655346,
+      "original_measure_equals_layout_walk": true
+    },
+    "after_field_walks": {
+      "observed_recursive_bytes": 655346,
+      "ordinary_reachable_object_bytes": 267162,
+      "instance_dict_bytes": 388184,
+      "layout_walk_sum": 655346,
+      "original_measure_equals_layout_walk": true
+    },
+    "after_source_revalidation": {
+      "observed_recursive_bytes": 655322,
+      "ordinary_reachable_object_bytes": 267162,
+      "instance_dict_bytes": 388160,
+      "layout_walk_sum": 655322,
+      "original_measure_equals_layout_walk": true
+    }
+  },
+  "checkpoint_deltas": [
+    {
+      "before": "before_all_packet_validation",
+      "after": "after_all_packet_validation",
+      "recursive_delta": -8,
+      "instance_dict_delta": -8,
+      "ordinary_object_map_equal": true,
+      "dataclass_object_sets_equal": true,
+      "changed_dataclass_instance_dicts": [
+        {
+          "object_id": "2065876273968",
+          "type": "src.grid.rts_gmlc.RtsGmlcChronologicalData",
+          "before": 272,
+          "after": 264
+        }
+      ],
+      "delta_explained_by_observed_instance_dict_sizes": true
+    },
+    {
+      "before": "after_all_packet_validation",
+      "after": "after_field_walks",
+      "recursive_delta": 0,
+      "instance_dict_delta": 0,
+      "ordinary_object_map_equal": true,
+      "dataclass_object_sets_equal": true,
+      "changed_dataclass_instance_dicts": [],
+      "delta_explained_by_observed_instance_dict_sizes": true
+    },
+    {
+      "before": "after_field_walks",
+      "after": "after_source_revalidation",
+      "recursive_delta": -24,
+      "instance_dict_delta": -24,
+      "ordinary_object_map_equal": true,
+      "dataclass_object_sets_equal": true,
+      "changed_dataclass_instance_dicts": [
+        {
+          "object_id": "2064020585552",
+          "type": "src.rq2_joint_deliverability_boundary_v1.normal_h1_source.H1StaticNetwork",
+          "before": 296,
+          "after": 288
+        },
+        {
+          "object_id": "2065876273968",
+          "type": "src.grid.rts_gmlc.RtsGmlcChronologicalData",
+          "before": 264,
+          "after": 248
+        }
+      ],
+      "delta_explained_by_observed_instance_dict_sizes": true
+    }
+  ],
+  "conditional_equal_footprint_products": {
+    "168": 110099472,
+    "170": 111410180,
+    "192": 125827968
+  },
+  "products_are_bounds_or_predictions": false,
+  "v3_late_remeasurement_or_H192_cap_proved": false,
+  "stage_seconds": {
+    "load_pinned_current": 1.5108124999969732,
+    "assemble_current_normal": 0.06665089999660267,
+    "remember_one_actual_packet": 0.033891099999891594,
+    "validate_one_actual_packet": 0.10709309999947436,
+    "nine_field_size_diagnostics": 0.019275599999673432,
+    "source_revalidation": 1.4479613000003155
+  },
+  "worker_seconds": 7.178577099999529,
+  "runner_main_seconds": 9.5,
+  "peak_sampled_supervisor_and_child_RSS_bytes": 236150784,
+  "RSS_sampling_scope": "spawn-monitor interval only; not pre/post SHA stages or instantaneous whole-main bound",
+  "output_logical_sample_peak_bytes": 4203395,
+  "selected_frame_or_M232_Reader_cost_proved": false,
+  "original_source_or_128MiB_contract_changed": false,
+  "bindings": {
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\postcheck_v1.py": "529b4d2755d663b4dc996a4a9e1ce2f8c2efe84c78920a18a688ae7d11a64e25",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\packet_02\\terminal.json": "079227fef4f3009eb5dc13c4fa2aa81fcafd863af09cc0442ebae63622394a2a",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\packet_02\\worker_terminal.json": "c0a3ff7242fd22e014d4fdd300af4178c0d4488faf47e380e7b1ffe65a0198fa",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\packet_02\\request.json": "a4b417e27d2588f76afbcf625f7c4f690792f400ce84f323e5e9898cedb7778a",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\packet_01\\terminal.json": "29eeb51e5018c8ec5694fae7d1b8385ae060a79219bcb3fc900c6fb128f94dc5",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\plan_v4.json": "d5af6f00ba1d57a0ae157d2519ac7bd85f63a7358ab6cb495fed3d4a4804c6d8",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\packet_worker_v2.py": "7fc0a12c7c22eca70759f3c80ea8da41ef52b2eac6a94c94977264e847179e82",
+    "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\rq2_h1_M232_retention_v1_non_authoritative\\run_packet_v2.py": "7876491be83cdc73fc4b087b1acccc4f24174094b2f88c733fba6f3bca9993c9"
+  },
+  "source_successor_adopted": false,
+  "resource_admission": false,
+  "formal_execution_ready": false,
+  "full_192_hour_execution_verified": false,
+  "real_native_solver_calls": 0,
+  "formal_result": false
+}
