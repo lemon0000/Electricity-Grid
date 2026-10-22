@@ -2,6 +2,10 @@
 
 2026-10-22范围入口：当前论文工作顺序和交付标准见`agent.md`第2–6及14节；以下各实验的原有门禁仍适用于对应包。
 
+### 2026-10-23 C同append保存成本后继
+
+[journal_v3交接](../plan/continuation_handoff_20261023_batch.md)记录同append去重、完整retained bookend与隔离副本：74新/188旧普通检查通过，三方法完整state/CAS字节及fresh等价，字段重绑反例闭合。hour库存扫描10→6、finish8→4属于结构调用减少，复制/比较/runtime成本及公共整链wall/RSS/storage收益未测，增长阶数保持。旧绑定及P1注册13源未改；本后继未接P1，公共网络范围确认不授予native。保存成本代表测量需先固定自身DAG/预算；P1专项授权、公共点/g、完整139/F-X时序、C/D/E资源继续OPEN。
+
 ### 2026-10-23 C原生接口与P1受控执行开发
 
 最新见[交接](../plan/continuation_handoff_20261023_native.md)及[P1合同](../plan/staged_deliverability_c_native_p1_contract_v1.md)。新backend/point/worker/fresh、原生raw与log_file绑定、父子独立import、31次reserve不返还、分层停止帽及Job HANDLE/生命周期闭包已做普通开发检查。registration只固定待校准DAG/输入/环境/预算，native_authorized=false；Python流及HiGHS log_file外的CRT/OS诊断不在覆盖内。旧核验直接读字节，不导入缺失的user-site psutil；旧B1–B3、C/build/causal、531/138核心与numeric绑定保留。
