@@ -2,7 +2,7 @@
 
 2026-10-22，`DRAFT_NONAUTHORITATIVE`。接续[B3/C顺序](staged_deliverability_b3_c_next_steps_v1.md)、[B3规格](../model_spec/staged_termination_development_v1.md)及[有界诊断合同](staged_deliverability_b3_development_contract_v1.md)。本页安排C的交付，不登记或启动主实验，不改变旧实验权限。
 
-同日C续作已形成[网络方向、完整DAG与结构预算审查](staged_deliverability_c_dag_and_cost_review_v1.md)。用户随后确认保留公共网络方向，本轮选择RTS-24作为最小公共网络后继，两母线保持机制回归；当前网络只接full_temporal且B3最多10小时。保存记录只读核验及本轮出口见[C交接](continuation_handoff_20261022_c.md)。已绑定审查页保留用户回复前的候选措辞，当前选择以本段和C交接为准。未选定的公共网络输入、三评价网络接线、代表测量及D/E总资源仍是前置缺口，下面四步的整体完成条件不变。
+同日C续作已形成[网络方向、完整DAG与结构预算审查](staged_deliverability_c_dag_and_cost_review_v1.md)。用户随后确认保留公共网络方向，RTS-24作为最小公共网络后继，两母线保持机制回归。B1–B3保存核验见[C交接](continuation_handoff_20261022_c.md)；新增输入表、请求/构模与独立点/KKT组件的一次有界检查见[RTS-24交接](continuation_handoff_20261022_rts24.md)。12离散模板生成1699请求描述、12actual预留槽，8模型构建，0求解器请求；公共连续策略、完整点、journal/reopen与整链实测仍未接通。已绑定DAG页保留原字节，当前选择与状态以本页及新交接为准。下面四步的整体完成条件不变，不能用构建时间关闭C。
 
 ## 四步交付
 

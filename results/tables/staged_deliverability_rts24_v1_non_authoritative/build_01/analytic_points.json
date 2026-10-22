@@ -1,0 +1,2288 @@
+[
+  {
+    "audit": {
+      "minimum_established": false,
+      "point_constraints_satisfied": true,
+      "residuals": {
+        "balance_mw": 0.0,
+        "connection_mw": 0.0,
+        "curtailment_bounds_mw": -0.0,
+        "flow_equation_mw": 0.0,
+        "generation_mw": 0.0,
+        "meter_bounds_mw": 0.0,
+        "outage_flow_mw": 0.0,
+        "outage_generation_mw": 0.0,
+        "redispatch_mw": 0.0,
+        "reference_angle_rad": 0.0,
+        "thermal_mw": 0.0
+      },
+      "scope": "declared_static_dc_point_only"
+    },
+    "economic": {
+      "economic_kkt_satisfied": true,
+      "kkt_residuals": {
+        "angle_stationarity": 0.0,
+        "complementarity": 0.0,
+        "dual_sign": 0.0,
+        "flow_stationarity": 0.0,
+        "generation_stationarity": 0.0
+      },
+      "objective_policy": "fixed_regularized_economic_base",
+      "primal_audit": {
+        "minimum_established": false,
+        "point_constraints_satisfied": true,
+        "residuals": {
+          "balance_mw": 0.0,
+          "connection_mw": 0.0,
+          "curtailment_bounds_mw": -0.0,
+          "flow_equation_mw": 0.0,
+          "generation_mw": 0.0,
+          "meter_bounds_mw": 0.0,
+          "outage_flow_mw": 0.0,
+          "outage_generation_mw": 0.0,
+          "redispatch_mw": 0.0,
+          "reference_angle_rad": 0.0,
+          "thermal_mw": 0.0
+        },
+        "scope": "declared_static_dc_point_only"
+      },
+      "scope": "convex_regularized_fixed_load_economic_dc_KKT_with_declared_numeric_tolerances",
+      "tolerance": 1e-06
+    },
+    "point": {
+      "angles_rad": [
+        [
+          1,
+          0.0
+        ],
+        [
+          2,
+          -0.03
+        ],
+        [
+          3,
+          -0.09
+        ]
+      ],
+      "curtailment_mw": 0.0,
+      "flows_mw": [
+        [
+          0,
+          30.0
+        ],
+        [
+          1,
+          60.0
+        ],
+        [
+          2,
+          90.0
+        ]
+      ],
+      "generation_mw": [
+        [
+          0,
+          120.0
+        ],
+        [
+          1,
+          30.0
+        ],
+        [
+          2,
+          0.0
+        ]
+      ],
+      "meter_load_mw": 150.0,
+      "query_sha": "dfd21b54a314db9d414b447d7b483571d3c8d2b396e0b5070dd62bbaba175713"
+    },
+    "query": {
+      "base_economic": null,
+      "base_point": null,
+      "base_query": null,
+      "request": {
+        "anchor_id": null,
+        "clean_path": "analytic",
+        "connection_capacity": "150",
+        "curtailment_max": "0",
+        "data": {
+          "base_mva": 100.0,
+          "branches": [
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 0,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 2
+            },
+            {
+              "from_bus": 2,
+              "in_service": true,
+              "index": 1,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 3
+            },
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 2,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 3
+            }
+          ],
+          "buses": [
+            {
+              "demand_mw": 0.0,
+              "index": 1
+            },
+            {
+              "demand_mw": 0.0,
+              "index": 2
+            },
+            {
+              "demand_mw": 0.0,
+              "index": 3
+            }
+          ],
+          "generators": [
+            {
+              "bus": 1,
+              "cost_constant": 0.0,
+              "cost_linear": 0.9999976,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 0,
+              "p_max_mw": 400.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            },
+            {
+              "bus": 2,
+              "cost_constant": 0.0,
+              "cost_linear": 0.9999994,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 1,
+              "p_max_mw": 100.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            },
+            {
+              "bus": 3,
+              "cost_constant": 0.0,
+              "cost_linear": 1.0,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 2,
+              "p_max_mw": 100.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            }
+          ],
+          "reference_bus": 1,
+          "source_package": "explicit_analytic_three_bus",
+          "source_version": "v1"
+        },
+        "economic_regularization_quadratic": "1/100000000",
+        "fixture_identity": "analytic_three_bus",
+        "hour": 0,
+        "meter_max": "150",
+        "meter_min": "150",
+        "method": "full_temporal",
+        "objective": "economic",
+        "outages": {
+          "branches": [],
+          "generators": [],
+          "name": "normal"
+        },
+        "plan": "fixed",
+        "poi_bus": 3,
+        "redispatch_fraction": "1/2",
+        "rights": [
+          "50",
+          "100"
+        ],
+        "role": "normal_contract_C"
+      }
+    },
+    "role": "base",
+    "transformer": false
+  },
+  {
+    "audit": {
+      "minimum_established": false,
+      "point_constraints_satisfied": true,
+      "residuals": {
+        "balance_mw": 0.0,
+        "connection_mw": 0.0,
+        "curtailment_bounds_mw": 0.0,
+        "flow_equation_mw": 0.0,
+        "generation_mw": 0.0,
+        "meter_bounds_mw": 0.0,
+        "outage_flow_mw": 0.0,
+        "outage_generation_mw": 0.0,
+        "redispatch_mw": 0.0,
+        "reference_angle_rad": 0.0,
+        "thermal_mw": 0.0
+      },
+      "scope": "declared_static_dc_point_only"
+    },
+    "economic": null,
+    "point": {
+      "angles_rad": [
+        [
+          1,
+          0.0
+        ],
+        [
+          2,
+          -0.03
+        ],
+        [
+          3,
+          -0.09
+        ]
+      ],
+      "curtailment_mw": 90.0,
+      "flows_mw": [
+        [
+          0,
+          30.0
+        ],
+        [
+          1,
+          60.0
+        ],
+        [
+          2,
+          0.0
+        ]
+      ],
+      "generation_mw": [
+        [
+          0,
+          30.0
+        ],
+        [
+          1,
+          30.0
+        ],
+        [
+          2,
+          0.0
+        ]
+      ],
+      "meter_load_mw": 150.0,
+      "query_sha": "d252566c828f4e7ca50d8b2d11442ca957206149ed79610dedc71fc215766eb7"
+    },
+    "query": {
+      "base_economic": {
+        "balance_duals": [
+          [
+            1,
+            -1.0
+          ],
+          [
+            2,
+            -1.0
+          ],
+          [
+            3,
+            -1.0
+          ]
+        ],
+        "flow_equation_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "flow_lower_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "flow_upper_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "generation_lower_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "generation_upper_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "point_sha": "afc04c13edb9bd07d63deace6dc28d5059d41461c2e3677099cc38c6da925285",
+        "query_sha": "dfd21b54a314db9d414b447d7b483571d3c8d2b396e0b5070dd62bbaba175713"
+      },
+      "base_point": {
+        "angles_rad": [
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            -0.03
+          ],
+          [
+            3,
+            -0.09
+          ]
+        ],
+        "curtailment_mw": 0.0,
+        "flows_mw": [
+          [
+            0,
+            30.0
+          ],
+          [
+            1,
+            60.0
+          ],
+          [
+            2,
+            90.0
+          ]
+        ],
+        "generation_mw": [
+          [
+            0,
+            120.0
+          ],
+          [
+            1,
+            30.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "meter_load_mw": 150.0,
+        "query_sha": "dfd21b54a314db9d414b447d7b483571d3c8d2b396e0b5070dd62bbaba175713"
+      },
+      "base_query": {
+        "base_economic": null,
+        "base_point": null,
+        "base_query": null,
+        "request": {
+          "anchor_id": null,
+          "clean_path": "analytic",
+          "connection_capacity": "150",
+          "curtailment_max": "0",
+          "data": {
+            "base_mva": 100.0,
+            "branches": [
+              {
+                "from_bus": 1,
+                "in_service": true,
+                "index": 0,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 200.0,
+                "rate_b_mw": 200.0,
+                "rate_c_mw": 200.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 2
+              },
+              {
+                "from_bus": 2,
+                "in_service": true,
+                "index": 1,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 200.0,
+                "rate_b_mw": 200.0,
+                "rate_c_mw": 200.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 3
+              },
+              {
+                "from_bus": 1,
+                "in_service": true,
+                "index": 2,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 200.0,
+                "rate_b_mw": 200.0,
+                "rate_c_mw": 200.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 3
+              }
+            ],
+            "buses": [
+              {
+                "demand_mw": 0.0,
+                "index": 1
+              },
+              {
+                "demand_mw": 0.0,
+                "index": 2
+              },
+              {
+                "demand_mw": 0.0,
+                "index": 3
+              }
+            ],
+            "generators": [
+              {
+                "bus": 1,
+                "cost_constant": 0.0,
+                "cost_linear": 0.9999976,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 0,
+                "p_max_mw": 400.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              },
+              {
+                "bus": 2,
+                "cost_constant": 0.0,
+                "cost_linear": 0.9999994,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 1,
+                "p_max_mw": 100.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              },
+              {
+                "bus": 3,
+                "cost_constant": 0.0,
+                "cost_linear": 1.0,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 2,
+                "p_max_mw": 100.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              }
+            ],
+            "reference_bus": 1,
+            "source_package": "explicit_analytic_three_bus",
+            "source_version": "v1"
+          },
+          "economic_regularization_quadratic": "1/100000000",
+          "fixture_identity": "analytic_three_bus",
+          "hour": 0,
+          "meter_max": "150",
+          "meter_min": "150",
+          "method": "full_temporal",
+          "objective": "economic",
+          "outages": {
+            "branches": [],
+            "generators": [],
+            "name": "normal"
+          },
+          "plan": "fixed",
+          "poi_bus": 3,
+          "redispatch_fraction": "1/2",
+          "rights": [
+            "50",
+            "100"
+          ],
+          "role": "normal_contract_C"
+        }
+      },
+      "request": {
+        "anchor_id": "6c62586476686bdc59e2ea65a6826468b8c8ce4c781efda8cc489603809dc78a",
+        "clean_path": "analytic",
+        "connection_capacity": "150",
+        "curtailment_max": "150",
+        "data": {
+          "base_mva": 100.0,
+          "branches": [
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 0,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 2
+            },
+            {
+              "from_bus": 2,
+              "in_service": true,
+              "index": 1,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 3
+            },
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 2,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 3
+            }
+          ],
+          "buses": [
+            {
+              "demand_mw": 0.0,
+              "index": 1
+            },
+            {
+              "demand_mw": 0.0,
+              "index": 2
+            },
+            {
+              "demand_mw": 0.0,
+              "index": 3
+            }
+          ],
+          "generators": [
+            {
+              "bus": 1,
+              "cost_constant": 0.0,
+              "cost_linear": 0.9999976,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 0,
+              "p_max_mw": 400.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            },
+            {
+              "bus": 2,
+              "cost_constant": 0.0,
+              "cost_linear": 0.9999994,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 1,
+              "p_max_mw": 100.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            },
+            {
+              "bus": 3,
+              "cost_constant": 0.0,
+              "cost_linear": 1.0,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 2,
+              "p_max_mw": 100.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            }
+          ],
+          "reference_bus": 1,
+          "source_package": "explicit_analytic_three_bus",
+          "source_version": "v1"
+        },
+        "economic_regularization_quadratic": "1/100000000",
+        "fixture_identity": "analytic_three_bus",
+        "hour": 0,
+        "meter_max": "150",
+        "meter_min": "150",
+        "method": "full_temporal",
+        "objective": "min_curtailment",
+        "outages": {
+          "branches": [
+            2
+          ],
+          "generators": [],
+          "name": "branch_2"
+        },
+        "plan": "fixed",
+        "poi_bus": 3,
+        "redispatch_fraction": "1/2",
+        "rights": [
+          "50",
+          "100"
+        ],
+        "role": "fault_raw_need"
+      }
+    },
+    "role": "raw",
+    "transformer": false
+  },
+  {
+    "audit": {
+      "minimum_established": false,
+      "point_constraints_satisfied": true,
+      "residuals": {
+        "balance_mw": 0.0,
+        "connection_mw": 0.0,
+        "curtailment_bounds_mw": -0.0,
+        "flow_equation_mw": 0.0,
+        "generation_mw": 0.0,
+        "meter_bounds_mw": 0.0,
+        "outage_flow_mw": 0.0,
+        "outage_generation_mw": 0.0,
+        "redispatch_mw": 0.0,
+        "reference_angle_rad": 0.0,
+        "thermal_mw": 0.0
+      },
+      "scope": "declared_static_dc_point_only"
+    },
+    "economic": null,
+    "point": {
+      "angles_rad": [
+        [
+          1,
+          0.0
+        ],
+        [
+          2,
+          -0.03
+        ],
+        [
+          3,
+          -0.09
+        ]
+      ],
+      "curtailment_mw": 0.0,
+      "flows_mw": [
+        [
+          0,
+          30.0
+        ],
+        [
+          1,
+          60.0
+        ],
+        [
+          2,
+          0.0
+        ]
+      ],
+      "generation_mw": [
+        [
+          0,
+          30.0
+        ],
+        [
+          1,
+          30.0
+        ],
+        [
+          2,
+          0.0
+        ]
+      ],
+      "meter_load_mw": 60.0,
+      "query_sha": "51cc7996d822195ba7b72491cb0b8c6858cdb6f6ca1cdd73a1b0b32488557fba"
+    },
+    "query": {
+      "base_economic": {
+        "balance_duals": [
+          [
+            1,
+            -1.0
+          ],
+          [
+            2,
+            -1.0
+          ],
+          [
+            3,
+            -1.0
+          ]
+        ],
+        "flow_equation_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "flow_lower_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "flow_upper_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "generation_lower_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "generation_upper_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "point_sha": "3756253c51fc44bd2a082f9dc987f632dff3714fd22ab6fd66882aedc943aa76",
+        "query_sha": "36fc70d1af3cac921f37f0e9263ce6ac503407145066f546f260881d96f4dea8"
+      },
+      "base_point": {
+        "angles_rad": [
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            -0.03
+          ],
+          [
+            3,
+            -0.09
+          ]
+        ],
+        "curtailment_mw": 0.0,
+        "flows_mw": [
+          [
+            0,
+            30.0
+          ],
+          [
+            1,
+            60.0
+          ],
+          [
+            2,
+            90.0
+          ]
+        ],
+        "generation_mw": [
+          [
+            0,
+            120.0
+          ],
+          [
+            1,
+            30.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "meter_load_mw": 150.0,
+        "query_sha": "36fc70d1af3cac921f37f0e9263ce6ac503407145066f546f260881d96f4dea8"
+      },
+      "base_query": {
+        "base_economic": null,
+        "base_point": null,
+        "base_query": null,
+        "request": {
+          "anchor_id": null,
+          "clean_path": "analytic",
+          "connection_capacity": "150",
+          "curtailment_max": "0",
+          "data": {
+            "base_mva": 100.0,
+            "branches": [
+              {
+                "from_bus": 1,
+                "in_service": true,
+                "index": 0,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 200.0,
+                "rate_b_mw": 200.0,
+                "rate_c_mw": 200.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 2
+              },
+              {
+                "from_bus": 2,
+                "in_service": true,
+                "index": 1,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 200.0,
+                "rate_b_mw": 200.0,
+                "rate_c_mw": 200.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 3
+              },
+              {
+                "from_bus": 1,
+                "in_service": true,
+                "index": 2,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 200.0,
+                "rate_b_mw": 200.0,
+                "rate_c_mw": 200.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 3
+              }
+            ],
+            "buses": [
+              {
+                "demand_mw": 0.0,
+                "index": 1
+              },
+              {
+                "demand_mw": 0.0,
+                "index": 2
+              },
+              {
+                "demand_mw": 0.0,
+                "index": 3
+              }
+            ],
+            "generators": [
+              {
+                "bus": 1,
+                "cost_constant": 0.0,
+                "cost_linear": 0.9999976,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 0,
+                "p_max_mw": 400.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              },
+              {
+                "bus": 2,
+                "cost_constant": 0.0,
+                "cost_linear": 0.9999994,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 1,
+                "p_max_mw": 100.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              },
+              {
+                "bus": 3,
+                "cost_constant": 0.0,
+                "cost_linear": 1.0,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 2,
+                "p_max_mw": 100.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              }
+            ],
+            "reference_bus": 1,
+            "source_package": "explicit_analytic_three_bus",
+            "source_version": "v1"
+          },
+          "economic_regularization_quadratic": "1/100000000",
+          "fixture_identity": "analytic_three_bus",
+          "hour": 0,
+          "meter_max": "150",
+          "meter_min": "150",
+          "method": "full_temporal",
+          "objective": "economic",
+          "outages": {
+            "branches": [],
+            "generators": [],
+            "name": "normal"
+          },
+          "plan": "fixed",
+          "poi_bus": 3,
+          "redispatch_fraction": "1/2",
+          "rights": [
+            "50",
+            "100"
+          ],
+          "role": "reference_base_P0"
+        }
+      },
+      "request": {
+        "anchor_id": "0683acdc93aabe5fc842fadf5f878aabe507b01086fca27e3bd0b0f914314865",
+        "clean_path": "analytic",
+        "connection_capacity": "150",
+        "curtailment_max": "0",
+        "data": {
+          "base_mva": 100.0,
+          "branches": [
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 0,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 2
+            },
+            {
+              "from_bus": 2,
+              "in_service": true,
+              "index": 1,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 3
+            },
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 2,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 3
+            }
+          ],
+          "buses": [
+            {
+              "demand_mw": 0.0,
+              "index": 1
+            },
+            {
+              "demand_mw": 0.0,
+              "index": 2
+            },
+            {
+              "demand_mw": 0.0,
+              "index": 3
+            }
+          ],
+          "generators": [
+            {
+              "bus": 1,
+              "cost_constant": 0.0,
+              "cost_linear": 0.9999976,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 0,
+              "p_max_mw": 400.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            },
+            {
+              "bus": 2,
+              "cost_constant": 0.0,
+              "cost_linear": 0.9999994,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 1,
+              "p_max_mw": 100.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            },
+            {
+              "bus": 3,
+              "cost_constant": 0.0,
+              "cost_linear": 1.0,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 2,
+              "p_max_mw": 100.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            }
+          ],
+          "reference_bus": 1,
+          "source_package": "explicit_analytic_three_bus",
+          "source_version": "v1"
+        },
+        "economic_regularization_quadratic": "1/100000000",
+        "fixture_identity": "analytic_three_bus",
+        "hour": 0,
+        "meter_max": "60",
+        "meter_min": "60",
+        "method": "full_temporal",
+        "objective": "economic",
+        "outages": {
+          "branches": [
+            2
+          ],
+          "generators": [],
+          "name": "branch_2"
+        },
+        "plan": "fixed",
+        "poi_bus": 3,
+        "redispatch_fraction": "1/2",
+        "rights": [
+          "50",
+          "100"
+        ],
+        "role": "actual_P"
+      }
+    },
+    "role": "actual",
+    "transformer": false
+  },
+  {
+    "audit": {
+      "minimum_established": false,
+      "point_constraints_satisfied": true,
+      "residuals": {
+        "balance_mw": 0.0,
+        "connection_mw": 0.0,
+        "curtailment_bounds_mw": -0.0,
+        "flow_equation_mw": 3.552713678800501e-15,
+        "generation_mw": 0.0,
+        "meter_bounds_mw": 0.0,
+        "outage_flow_mw": 0.0,
+        "outage_generation_mw": 0.0,
+        "redispatch_mw": 0.0,
+        "reference_angle_rad": 0.0,
+        "thermal_mw": 0.0
+      },
+      "scope": "declared_static_dc_point_only"
+    },
+    "economic": {
+      "economic_kkt_satisfied": true,
+      "kkt_residuals": {
+        "angle_stationarity": 0.0,
+        "complementarity": 0.0,
+        "dual_sign": 0.0,
+        "flow_stationarity": 0.0,
+        "generation_stationarity": 0.0
+      },
+      "objective_policy": "fixed_regularized_economic_base",
+      "primal_audit": {
+        "minimum_established": false,
+        "point_constraints_satisfied": true,
+        "residuals": {
+          "balance_mw": 0.0,
+          "connection_mw": 0.0,
+          "curtailment_bounds_mw": -0.0,
+          "flow_equation_mw": 3.552713678800501e-15,
+          "generation_mw": 0.0,
+          "meter_bounds_mw": 0.0,
+          "outage_flow_mw": 0.0,
+          "outage_generation_mw": 0.0,
+          "redispatch_mw": 0.0,
+          "reference_angle_rad": 0.0,
+          "thermal_mw": 0.0
+        },
+        "scope": "declared_static_dc_point_only"
+      },
+      "scope": "convex_regularized_fixed_load_economic_dc_KKT_with_declared_numeric_tolerances",
+      "tolerance": 1e-06
+    },
+    "point": {
+      "angles_rad": [
+        [
+          1,
+          0.0
+        ],
+        [
+          2,
+          -0.07
+        ],
+        [
+          3,
+          -0.13
+        ]
+      ],
+      "curtailment_mw": 0.0,
+      "flows_mw": [
+        [
+          0,
+          30.0
+        ],
+        [
+          1,
+          60.0
+        ],
+        [
+          2,
+          130.0
+        ]
+      ],
+      "generation_mw": [
+        [
+          0,
+          160.0
+        ],
+        [
+          1,
+          30.0
+        ],
+        [
+          2,
+          0.0
+        ]
+      ],
+      "meter_load_mw": 190.0,
+      "query_sha": "60fcede4819b4f0b9697ba37bf7a9f52db53b2eeb8645188e0935fdf65554c96"
+    },
+    "query": {
+      "base_economic": null,
+      "base_point": null,
+      "base_query": null,
+      "request": {
+        "anchor_id": null,
+        "clean_path": "analytic",
+        "connection_capacity": "190",
+        "curtailment_max": "0",
+        "data": {
+          "base_mva": 100.0,
+          "branches": [
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 0,
+              "phase_shift_rad": 0.01,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 2.0,
+              "to_bus": 2
+            },
+            {
+              "from_bus": 2,
+              "in_service": true,
+              "index": 1,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 3
+            },
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 2,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 3
+            }
+          ],
+          "buses": [
+            {
+              "demand_mw": 0.0,
+              "index": 1
+            },
+            {
+              "demand_mw": 0.0,
+              "index": 2
+            },
+            {
+              "demand_mw": 0.0,
+              "index": 3
+            }
+          ],
+          "generators": [
+            {
+              "bus": 1,
+              "cost_constant": 0.0,
+              "cost_linear": 0.9999968,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 0,
+              "p_max_mw": 400.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            },
+            {
+              "bus": 2,
+              "cost_constant": 0.0,
+              "cost_linear": 0.9999994,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 1,
+              "p_max_mw": 100.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            },
+            {
+              "bus": 3,
+              "cost_constant": 0.0,
+              "cost_linear": 1.0,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 2,
+              "p_max_mw": 100.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            }
+          ],
+          "reference_bus": 1,
+          "source_package": "explicit_analytic_three_bus",
+          "source_version": "v1"
+        },
+        "economic_regularization_quadratic": "1/100000000",
+        "fixture_identity": "analytic_three_bus",
+        "hour": 0,
+        "meter_max": "190",
+        "meter_min": "190",
+        "method": "full_temporal",
+        "objective": "economic",
+        "outages": {
+          "branches": [],
+          "generators": [],
+          "name": "normal"
+        },
+        "plan": "fixed",
+        "poi_bus": 3,
+        "redispatch_fraction": "1/2",
+        "rights": [
+          "50",
+          "140"
+        ],
+        "role": "normal_contract_C"
+      }
+    },
+    "role": "base",
+    "transformer": true
+  },
+  {
+    "audit": {
+      "minimum_established": false,
+      "point_constraints_satisfied": true,
+      "residuals": {
+        "balance_mw": 0.0,
+        "connection_mw": 0.0,
+        "curtailment_bounds_mw": 0.0,
+        "flow_equation_mw": 3.552713678800501e-15,
+        "generation_mw": 0.0,
+        "meter_bounds_mw": 0.0,
+        "outage_flow_mw": 0.0,
+        "outage_generation_mw": 0.0,
+        "redispatch_mw": 0.0,
+        "reference_angle_rad": 0.0,
+        "thermal_mw": 0.0
+      },
+      "scope": "declared_static_dc_point_only"
+    },
+    "economic": null,
+    "point": {
+      "angles_rad": [
+        [
+          1,
+          0.0
+        ],
+        [
+          2,
+          -0.07
+        ],
+        [
+          3,
+          -0.13
+        ]
+      ],
+      "curtailment_mw": 130.0,
+      "flows_mw": [
+        [
+          0,
+          30.0
+        ],
+        [
+          1,
+          60.0
+        ],
+        [
+          2,
+          0.0
+        ]
+      ],
+      "generation_mw": [
+        [
+          0,
+          30.0
+        ],
+        [
+          1,
+          30.0
+        ],
+        [
+          2,
+          0.0
+        ]
+      ],
+      "meter_load_mw": 190.0,
+      "query_sha": "51ff2768ef50ce512dd424e15ff0a4ebd13ca6aa0de1b17d974840e2368f7ada"
+    },
+    "query": {
+      "base_economic": {
+        "balance_duals": [
+          [
+            1,
+            -1.0
+          ],
+          [
+            2,
+            -1.0
+          ],
+          [
+            3,
+            -1.0
+          ]
+        ],
+        "flow_equation_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "flow_lower_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "flow_upper_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "generation_lower_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "generation_upper_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "point_sha": "ea7aa30b3aa33005a4528adebcc8dbe3b5d96ac07166e7b417122a23d6369384",
+        "query_sha": "60fcede4819b4f0b9697ba37bf7a9f52db53b2eeb8645188e0935fdf65554c96"
+      },
+      "base_point": {
+        "angles_rad": [
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            -0.07
+          ],
+          [
+            3,
+            -0.13
+          ]
+        ],
+        "curtailment_mw": 0.0,
+        "flows_mw": [
+          [
+            0,
+            30.0
+          ],
+          [
+            1,
+            60.0
+          ],
+          [
+            2,
+            130.0
+          ]
+        ],
+        "generation_mw": [
+          [
+            0,
+            160.0
+          ],
+          [
+            1,
+            30.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "meter_load_mw": 190.0,
+        "query_sha": "60fcede4819b4f0b9697ba37bf7a9f52db53b2eeb8645188e0935fdf65554c96"
+      },
+      "base_query": {
+        "base_economic": null,
+        "base_point": null,
+        "base_query": null,
+        "request": {
+          "anchor_id": null,
+          "clean_path": "analytic",
+          "connection_capacity": "190",
+          "curtailment_max": "0",
+          "data": {
+            "base_mva": 100.0,
+            "branches": [
+              {
+                "from_bus": 1,
+                "in_service": true,
+                "index": 0,
+                "phase_shift_rad": 0.01,
+                "rate_a_mw": 200.0,
+                "rate_b_mw": 200.0,
+                "rate_c_mw": 200.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 2.0,
+                "to_bus": 2
+              },
+              {
+                "from_bus": 2,
+                "in_service": true,
+                "index": 1,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 200.0,
+                "rate_b_mw": 200.0,
+                "rate_c_mw": 200.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 3
+              },
+              {
+                "from_bus": 1,
+                "in_service": true,
+                "index": 2,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 200.0,
+                "rate_b_mw": 200.0,
+                "rate_c_mw": 200.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 3
+              }
+            ],
+            "buses": [
+              {
+                "demand_mw": 0.0,
+                "index": 1
+              },
+              {
+                "demand_mw": 0.0,
+                "index": 2
+              },
+              {
+                "demand_mw": 0.0,
+                "index": 3
+              }
+            ],
+            "generators": [
+              {
+                "bus": 1,
+                "cost_constant": 0.0,
+                "cost_linear": 0.9999968,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 0,
+                "p_max_mw": 400.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              },
+              {
+                "bus": 2,
+                "cost_constant": 0.0,
+                "cost_linear": 0.9999994,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 1,
+                "p_max_mw": 100.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              },
+              {
+                "bus": 3,
+                "cost_constant": 0.0,
+                "cost_linear": 1.0,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 2,
+                "p_max_mw": 100.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              }
+            ],
+            "reference_bus": 1,
+            "source_package": "explicit_analytic_three_bus",
+            "source_version": "v1"
+          },
+          "economic_regularization_quadratic": "1/100000000",
+          "fixture_identity": "analytic_three_bus",
+          "hour": 0,
+          "meter_max": "190",
+          "meter_min": "190",
+          "method": "full_temporal",
+          "objective": "economic",
+          "outages": {
+            "branches": [],
+            "generators": [],
+            "name": "normal"
+          },
+          "plan": "fixed",
+          "poi_bus": 3,
+          "redispatch_fraction": "1/2",
+          "rights": [
+            "50",
+            "140"
+          ],
+          "role": "normal_contract_C"
+        }
+      },
+      "request": {
+        "anchor_id": "f46bb3298dd82786339c7cb8d6a2ab49442c7987ce16e256f1604af9ed6a0bee",
+        "clean_path": "analytic",
+        "connection_capacity": "190",
+        "curtailment_max": "190",
+        "data": {
+          "base_mva": 100.0,
+          "branches": [
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 0,
+              "phase_shift_rad": 0.01,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 2.0,
+              "to_bus": 2
+            },
+            {
+              "from_bus": 2,
+              "in_service": true,
+              "index": 1,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 3
+            },
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 2,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 3
+            }
+          ],
+          "buses": [
+            {
+              "demand_mw": 0.0,
+              "index": 1
+            },
+            {
+              "demand_mw": 0.0,
+              "index": 2
+            },
+            {
+              "demand_mw": 0.0,
+              "index": 3
+            }
+          ],
+          "generators": [
+            {
+              "bus": 1,
+              "cost_constant": 0.0,
+              "cost_linear": 0.9999968,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 0,
+              "p_max_mw": 400.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            },
+            {
+              "bus": 2,
+              "cost_constant": 0.0,
+              "cost_linear": 0.9999994,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 1,
+              "p_max_mw": 100.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            },
+            {
+              "bus": 3,
+              "cost_constant": 0.0,
+              "cost_linear": 1.0,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 2,
+              "p_max_mw": 100.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            }
+          ],
+          "reference_bus": 1,
+          "source_package": "explicit_analytic_three_bus",
+          "source_version": "v1"
+        },
+        "economic_regularization_quadratic": "1/100000000",
+        "fixture_identity": "analytic_three_bus",
+        "hour": 0,
+        "meter_max": "190",
+        "meter_min": "190",
+        "method": "full_temporal",
+        "objective": "min_curtailment",
+        "outages": {
+          "branches": [
+            2
+          ],
+          "generators": [],
+          "name": "branch_2"
+        },
+        "plan": "fixed",
+        "poi_bus": 3,
+        "redispatch_fraction": "1/2",
+        "rights": [
+          "50",
+          "140"
+        ],
+        "role": "fault_raw_need"
+      }
+    },
+    "role": "raw",
+    "transformer": true
+  },
+  {
+    "audit": {
+      "minimum_established": false,
+      "point_constraints_satisfied": true,
+      "residuals": {
+        "balance_mw": 0.0,
+        "connection_mw": 0.0,
+        "curtailment_bounds_mw": -0.0,
+        "flow_equation_mw": 3.552713678800501e-15,
+        "generation_mw": 0.0,
+        "meter_bounds_mw": 0.0,
+        "outage_flow_mw": 0.0,
+        "outage_generation_mw": 0.0,
+        "redispatch_mw": 0.0,
+        "reference_angle_rad": 0.0,
+        "thermal_mw": 0.0
+      },
+      "scope": "declared_static_dc_point_only"
+    },
+    "economic": null,
+    "point": {
+      "angles_rad": [
+        [
+          1,
+          0.0
+        ],
+        [
+          2,
+          -0.07
+        ],
+        [
+          3,
+          -0.13
+        ]
+      ],
+      "curtailment_mw": 0.0,
+      "flows_mw": [
+        [
+          0,
+          30.0
+        ],
+        [
+          1,
+          60.0
+        ],
+        [
+          2,
+          0.0
+        ]
+      ],
+      "generation_mw": [
+        [
+          0,
+          30.0
+        ],
+        [
+          1,
+          30.0
+        ],
+        [
+          2,
+          0.0
+        ]
+      ],
+      "meter_load_mw": 60.0,
+      "query_sha": "e99c808b9267ae444be37b355ba2887e4ff8ef23aef6b7237009e2cb7333bf36"
+    },
+    "query": {
+      "base_economic": {
+        "balance_duals": [
+          [
+            1,
+            -1.0
+          ],
+          [
+            2,
+            -1.0
+          ],
+          [
+            3,
+            -1.0
+          ]
+        ],
+        "flow_equation_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "flow_lower_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "flow_upper_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "generation_lower_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "generation_upper_duals": [
+          [
+            0,
+            0.0
+          ],
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "point_sha": "7ce52e17107b84fb8b26bfdf0de32cfff2fb0b5bf3e7c706109b8ff1358e812a",
+        "query_sha": "d82c63a033ec148fb2911932843a9e86e53360d96b9143f37bef2124123d9685"
+      },
+      "base_point": {
+        "angles_rad": [
+          [
+            1,
+            0.0
+          ],
+          [
+            2,
+            -0.07
+          ],
+          [
+            3,
+            -0.13
+          ]
+        ],
+        "curtailment_mw": 0.0,
+        "flows_mw": [
+          [
+            0,
+            30.0
+          ],
+          [
+            1,
+            60.0
+          ],
+          [
+            2,
+            130.0
+          ]
+        ],
+        "generation_mw": [
+          [
+            0,
+            160.0
+          ],
+          [
+            1,
+            30.0
+          ],
+          [
+            2,
+            0.0
+          ]
+        ],
+        "meter_load_mw": 190.0,
+        "query_sha": "d82c63a033ec148fb2911932843a9e86e53360d96b9143f37bef2124123d9685"
+      },
+      "base_query": {
+        "base_economic": null,
+        "base_point": null,
+        "base_query": null,
+        "request": {
+          "anchor_id": null,
+          "clean_path": "analytic",
+          "connection_capacity": "190",
+          "curtailment_max": "0",
+          "data": {
+            "base_mva": 100.0,
+            "branches": [
+              {
+                "from_bus": 1,
+                "in_service": true,
+                "index": 0,
+                "phase_shift_rad": 0.01,
+                "rate_a_mw": 200.0,
+                "rate_b_mw": 200.0,
+                "rate_c_mw": 200.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 2.0,
+                "to_bus": 2
+              },
+              {
+                "from_bus": 2,
+                "in_service": true,
+                "index": 1,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 200.0,
+                "rate_b_mw": 200.0,
+                "rate_c_mw": 200.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 3
+              },
+              {
+                "from_bus": 1,
+                "in_service": true,
+                "index": 2,
+                "phase_shift_rad": 0.0,
+                "rate_a_mw": 200.0,
+                "rate_b_mw": 200.0,
+                "rate_c_mw": 200.0,
+                "reactance_pu": 0.1,
+                "tap_ratio": 1.0,
+                "to_bus": 3
+              }
+            ],
+            "buses": [
+              {
+                "demand_mw": 0.0,
+                "index": 1
+              },
+              {
+                "demand_mw": 0.0,
+                "index": 2
+              },
+              {
+                "demand_mw": 0.0,
+                "index": 3
+              }
+            ],
+            "generators": [
+              {
+                "bus": 1,
+                "cost_constant": 0.0,
+                "cost_linear": 0.9999968,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 0,
+                "p_max_mw": 400.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              },
+              {
+                "bus": 2,
+                "cost_constant": 0.0,
+                "cost_linear": 0.9999994,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 1,
+                "p_max_mw": 100.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              },
+              {
+                "bus": 3,
+                "cost_constant": 0.0,
+                "cost_linear": 1.0,
+                "cost_quadratic": 0.0,
+                "in_service": true,
+                "index": 2,
+                "p_max_mw": 100.0,
+                "p_min_mw": 0.0,
+                "ramp_10_mw": null,
+                "ramp_30_mw": null
+              }
+            ],
+            "reference_bus": 1,
+            "source_package": "explicit_analytic_three_bus",
+            "source_version": "v1"
+          },
+          "economic_regularization_quadratic": "1/100000000",
+          "fixture_identity": "analytic_three_bus",
+          "hour": 0,
+          "meter_max": "190",
+          "meter_min": "190",
+          "method": "full_temporal",
+          "objective": "economic",
+          "outages": {
+            "branches": [],
+            "generators": [],
+            "name": "normal"
+          },
+          "plan": "fixed",
+          "poi_bus": 3,
+          "redispatch_fraction": "1/2",
+          "rights": [
+            "50",
+            "140"
+          ],
+          "role": "reference_base_P0"
+        }
+      },
+      "request": {
+        "anchor_id": "51ab0fd5714e0fc0c493da3fcc17e52a32420c8b358c9d3b38d420553b1f418c",
+        "clean_path": "analytic",
+        "connection_capacity": "190",
+        "curtailment_max": "0",
+        "data": {
+          "base_mva": 100.0,
+          "branches": [
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 0,
+              "phase_shift_rad": 0.01,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 2.0,
+              "to_bus": 2
+            },
+            {
+              "from_bus": 2,
+              "in_service": true,
+              "index": 1,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 3
+            },
+            {
+              "from_bus": 1,
+              "in_service": true,
+              "index": 2,
+              "phase_shift_rad": 0.0,
+              "rate_a_mw": 200.0,
+              "rate_b_mw": 200.0,
+              "rate_c_mw": 200.0,
+              "reactance_pu": 0.1,
+              "tap_ratio": 1.0,
+              "to_bus": 3
+            }
+          ],
+          "buses": [
+            {
+              "demand_mw": 0.0,
+              "index": 1
+            },
+            {
+              "demand_mw": 0.0,
+              "index": 2
+            },
+            {
+              "demand_mw": 0.0,
+              "index": 3
+            }
+          ],
+          "generators": [
+            {
+              "bus": 1,
+              "cost_constant": 0.0,
+              "cost_linear": 0.9999968,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 0,
+              "p_max_mw": 400.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            },
+            {
+              "bus": 2,
+              "cost_constant": 0.0,
+              "cost_linear": 0.9999994,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 1,
+              "p_max_mw": 100.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            },
+            {
+              "bus": 3,
+              "cost_constant": 0.0,
+              "cost_linear": 1.0,
+              "cost_quadratic": 0.0,
+              "in_service": true,
+              "index": 2,
+              "p_max_mw": 100.0,
+              "p_min_mw": 0.0,
+              "ramp_10_mw": null,
+              "ramp_30_mw": null
+            }
+          ],
+          "reference_bus": 1,
+          "source_package": "explicit_analytic_three_bus",
+          "source_version": "v1"
+        },
+        "economic_regularization_quadratic": "1/100000000",
+        "fixture_identity": "analytic_three_bus",
+        "hour": 0,
+        "meter_max": "60",
+        "meter_min": "60",
+        "method": "full_temporal",
+        "objective": "economic",
+        "outages": {
+          "branches": [
+            2
+          ],
+          "generators": [],
+          "name": "branch_2"
+        },
+        "plan": "fixed",
+        "poi_bus": 3,
+        "redispatch_fraction": "1/2",
+        "rights": [
+          "50",
+          "140"
+        ],
+        "role": "actual_P"
+      }
+    },
+    "role": "actual",
+    "transformer": true
+  }
+]

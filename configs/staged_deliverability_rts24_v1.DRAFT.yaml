@@ -1,0 +1,44 @@
+status: DRAFT_NONAUTHORITATIVE
+source_class: public_static_dc_with_synthetic_stage_and_business_assumptions
+case:
+  package: PYPOWER
+  version: 5.1.19
+  name: case24_ieee_rts
+  sha256: f61d986bf6f611e40d0a55b013616a40d059fd9700408eb81fcf41e3bbd0e3a6
+business:
+  fixture: configs/staged_deliverability_small_case_v1.DRAFT.yaml
+  sha256: 5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5
+  dimensional_scale: '200'
+rights:
+  fixture: configs/staged_deliverability_network_v1.DRAFT.yaml
+  sha256: c6bb0cc30a330fed07a9d0b7f22dea7ce5096f20f1f58a8dc79dddc58059686b
+network:
+  poi_bus: 8
+  background_load_multiplier: '4/5'
+  sustained_rating: rate_a
+  redispatch_fraction_of_pmax: '1/2'
+  economic_regularization_quadratic: '1/100000000'
+  dispatch_policy: independent_hourly_regularized_economic_base_with_bounded_same_hour_corrective
+  response_model: static_hourly_declared_branch_or_generator_outage_same_hour_redispatch
+project:
+  branches: [11, 12]
+  rate_a_increase_mw: '100'
+  rate_c_increase_mw: '100'
+  start_hour: 0
+  lead_hours: 2
+  delays: {on_time: 0, delayed: 2}
+contingencies:
+  branches: all_non_islanding_in_service
+  generators: all_in_service_positive_pmax
+  expected_excluded_branches: [10]
+  expected_excluded_generators: [14]
+actual_event:
+  rule: lowest_selected_branch_index
+  hour: 1
+  duration_hours: 1
+time:
+  first_hour: -2
+  registration_end: 4
+  observation_end: 8
+  deadline_rule: arrival_plus_source_lag_without_observation_clipping
+methods: [instantaneous, fixed_headroom, full_temporal]

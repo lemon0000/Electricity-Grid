@@ -2,6 +2,12 @@
 
 2026-10-22范围入口：当前论文工作顺序和交付标准见`agent.md`第2–6及14节；以下各实验的原有门禁仍适用于对应包。
 
+### 2026-10-22 C公共网络构建检查点
+
+RTS-24输入/工程/缩放/F-X/37+32事故已在独立DRAFT固定；query/构模与独立完整点/KKT接口经一次无solver构建诊断验证。12离散模板、1699描述/12actual槽、8构模；6解析点/2显式顶层KKT记录通过，旧118保存/42仓库pin/7外部未变。见[RTS-24交接](../plan/continuation_handoff_20261022_rts24.md)及[报告](../../results/tables/staged_deliverability_rts24_v1_non_authoritative/build_01/validation_report.md)。这只缩小STAGE-03/04的输入和模型接口缺口。
+
+公共网络normal C/P0经济父点/KKT、corrective与恢复端点最优性、连续三方法/actual功率闭环、journal/关闭/fresh replay、长cohort与失败收尾成本仍缺；1711是描述图上界，不是已执行solve或主实验资源预算。C整体性能、D/E准入和完整F/X时序仍OPEN。真实native代表包仍需具体登记和专项授权；本次没有新增运行权或现实合同/工程认证依据。以下上一个C检查点保留原时点含义。
+
 ### 2026-10-22 C范围与预算续作
 
 用户确认公共网络方向；本轮确定RTS-24为最小公共网络后继，两母线继续机制回归。见[C结构审查](../plan/staged_deliverability_c_dag_and_cost_review_v1.md)、[一次只读核验报告](../../results/tables/staged_deliverability_c_v1_non_authoritative/saved_audit_01/validation_report.md)及[C交接](../plan/continuation_handoff_20261022_c.md)。118个B1–B3旧文件/42仓库pin/7选定外部与RTS-24静态源SHA一致；599/84/86从保存角色重算闭合，0新flow/solver/child。该检查点完成范围方向、实际DAG和结构会计，不关闭STAGE-04。
