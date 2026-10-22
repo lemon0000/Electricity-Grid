@@ -37,14 +37,14 @@ B2调用计数阅读时并看[运行后澄清](staged_deliverability_b2_count_cl
 
 介绍入口：[paper/drafts/README.md](../../paper/drafts/README.md)。
 
-- [中文正文](../../paper/drafts/project_introduction.md)及[中文PDF](../../paper/drafts/project_introduction.pdf)，PDF共9页。
-- [英文正文](../../paper/drafts/project_introduction_en.md)及[英文PDF](../../paper/drafts/project_introduction_en.pdf)，PDF共10页。
+- [中文正文](../../paper/drafts/project_introduction.md)及[中文PDF](../../paper/drafts/project_introduction.pdf)，PDF共10页。
+- [英文正文](../../paper/drafts/project_introduction_en.md)及[英文PDF](../../paper/drafts/project_introduction_en.pdf)，PDF共12页。
 - 当前介绍以[整体研究框架](../../paper/figures/project_framework_cn.svg)为图1，连接三条给定进度与共同规则、三种并列评价、阶段判断及冻结后的独立留出；图2—4分别展开任务恢复、进度错位、网络与小时CFE核查。总图原始PNG为`project_framework_cartoon_v3_{cn,en}.png`，三张局部图保留`project_{recovery,rampup,network}_cartoon_v2.png`。各图的中英文SVG嵌入原图，以可编辑文字和连线明确资源约束、总取电及检查关系，同名PDF与PNG用于导出和预览。两份介绍均在第2页横向展示总框架。[绘图说明](../../paper/figures/project_schematics.json)保留生成提示词、图像哈希及检查；[组装脚本](../../paper/figures/assemble_project_cartoons.py)可重建图版。
 
 - [论文路线图](RQ2_论文路线图.md)、[研究缺口](../literature/research_gap.md)和[既有证据报告](RQ2_创新性核查与研究判断_20261021.md)已增加当前范围说明。
 - [文献库](../literature/literature_matrix.csv)共42条；[当前引用映射](../literature/introduction_reference_map_20261022.csv)将26条正文参考文献与库内ID逐项对应；[来源核对记录](../literature/introduction_source_checks_20261022.json)区分摘要、部分章节及既有全文依据；[建设专题证据表](../literature/construction_evidence_20261021.csv)保留原核验范围。
 
-同日框架与卡通核查：使用`imagegen`生成并局部修订中英文总框架，`nature-figure`用于概念边界与图版核查。8张活动图版的原生SVG/PDF文字与碰撞检查通过，自动碰撞发现为0；栅格文字与图内关系另外目视核对。固定PNG后可逐字节重建SVG，嵌入的PNG与原始字节一致。两份PDF为9/10页，各保留26个唯一HTTPS文献链接；新增框架导读和图注，其余叙述与26条书目保持一致。全页与重点图文预览已核对，只读审阅提出的电网输入连线、总取电范围和英文间距建议已落实。可移植的来源、提示词、哈希、检查范围见绘图说明；本机历史记录位于`.git/intro_pictorial_20261022/`。该轮为介绍材料的概念插画与排版工作。
+同日卡通标注核查：三张局部图增加物件引线、上方读图顺序、下方编号解释及核心判断，中英文同步；总框架和全部原始PNG保持原字节。恢复图明确同批债务、补做所需三项资源、原任务期限与到期结局；进度图标明w、K、施工与投运、阶段重算和状态延续；网络图标明总取电、外部Y、用电记录及F/X另核。8张活动图版的原生SVG/PDF文字与碰撞检查通过，自动碰撞发现为0；六张修订局部图的对象指向、先后、结局、中英文对应与拥挤情况经只读复核，无剩余发现。固定PNG后可逐字节重建SVG，嵌入PNG与原始字节一致。两份PDF为10/12页，各保留26个唯一HTTPS文献链接；本轮仅改图注、图内标注与排版，叙述正文及26条书目保持一致。全页与重点图文预览已核对。可移植的来源、原始生成提示词、哈希、标注方式与检查范围见绘图说明；本机记录分别位于`.git/intro_pictorial_20261022/`、`.git/intro_framework_20261022/`和`.git/intro_annotations_20261022/`。该轮为介绍材料的概念插画与排版工作。
 
 同日介绍修订：面向导师的综述按“已有研究做到了什么、仍需回答什么、本项目因此做什么”组织柔性接入、任务恢复、分期建设与小时清洁匹配四组文献。正文集中说明当前研究设计与预期成果，开发进度由研究执行记录维护。只补全FLEX02与FLEX03题名，其余文献科学编码和阅读等级保留。
 

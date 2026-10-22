@@ -70,7 +70,7 @@ For example, an hour with 100 MWh consumption and an 80% target needs 80 MWh of 
 
 ![Figure 2 Recovery conditions and alternative outcomes for deferred tasks](../figures/project_recovery_en.svg)
 
-**Figure 2 How deferred tasks are recovered (expanded framework operation).** Orange starred folders represent one deferred cohort: waiting on the left, seeking commissioned equipment, power headroom, and hourly CFE in the middle, and reaching alternative on-time or shortfall/overdue outcomes on the right. Recovery remains subject to the action budget, efficiency, and original deadlines. Late recovery retains an observed violation. Clock faces symbolize time and deadlines.
+**Figure 2 How deferred tasks are recovered (expanded framework operation).** Follow 1 deferral now, 2 recovery in later hours, and 3 the original deadline check. Leaders identify the same orange cohort, spare equipment, power headroom, hourly CFE, and the original deadline; teal arrows connect task states. All three resources must be available in the recovery hour, with action budgets and recovery efficiency also respected. The upper outcome is on-time completion; the lower outcome records debt remaining at the deadline as overdue. Late recovery retains that violation; unobserved outcomes remain unresolved. Clocks and folder counts are illustrative.
 
 ## 4 Research questions
 
@@ -90,7 +90,7 @@ Normal-state network checks cover the full F+X allowance. The declared contingen
 
 ![Figure 3 How progress mismatch changes operating and recovery conditions](../figures/project_rampup_en.svg)
 
-**Figure 3 How the three progress paths change constraints (expanded framework inputs).** Three scenes show the same center during early operation, when work and equipment are ready but reinforcement is still being built, and after grid completion. Task arrivals define current work; commissioned equipment defines available K and idle consumption; the built grid defines calls and recovery supply. The orange spotlight marks the mismatch to assess. Full delivery is reassessed after commissioning. Counts and spacing are illustrative.
+**Figure 3 How the three progress paths change constraints (expanded framework inputs).** Follow one center through early operation, pending reinforcement, and actual commissioning. Leaders identify current work w, commissioned K, unfinished reinforcement, possible deferral q, and the commissioned grid asset. Three steps below explain current-work limits, supply on the built network, and reassessment of calls and recovery supply after commissioning. Debt and budgets carry across stages; response, recovery, and deadline checks still determine stage judgments. Counts and spacing are illustrative.
 
 ### 5.2 Link execution, deferral, recovery, and metered power
 
@@ -110,7 +110,7 @@ The main comparison specifies independent reduction commitments: reductions sepa
 
 ![Figure 4 How metered power enters network and hourly CFE checks](../figures/project_network_en.svg)
 
-**Figure 4 From computing tasks to power and two checks (expanded framework constraints).** The thick blue cable supplies one center through a fixed-point meter. P includes idle, execution, recovery, and support loads. Network checks use actual power; hourly CFE accounting matches consumption records with attributable resources for that hour. The ledger and thin dotted links denote attribution. Lower scenes assess computing resources, network power, and clean matching. Symbols are illustrative; network judgments remain within the declared DC model and contingency set.
+**Figure 4 From computing tasks to power and two checks (expanded framework constraints).** Read the leaders around the center, fixed-point meter, and external attribution ledger, then follow 1 computing resources, 2 total metered P, and 3 network/CFE checks. P includes idle, execution, recovery, and support loads. Consumption records and the external hourly limit Y enter clean accounting. Normal-state and contingency F/X access allowances receive their separate contractual checks. The thick blue cable is physical supply; dotted links denote records and attribution. Symbols are illustrative; network judgments remain within the declared DC model and contingency set.
 
 ### 5.4 Preserve chronology and information
 
