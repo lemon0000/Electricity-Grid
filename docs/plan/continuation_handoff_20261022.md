@@ -4,7 +4,9 @@
 
 同日规范同步：`AGENTS.md`维护简短入口、工作区与实施规则；`agent.md`已将当前目标、顺序和完成标准对齐本交接，第7节与第9节的整体性能审查原文保留。具体工作以当前规则及实时状态为准。
 
-同日后续入口：工作包A的[最小阶段评价规格](../model_spec/staged_deliverability_minimum_spec_v1.md)与[工作包B实施计划](staged_deliverability_small_case_plan_v1.md)已衔接B1开发；B1的9条机制轨迹、独立核验与新进程重开见[开发验证报告](../../results/tables/staged_deliverability_b1_v1_non_authoritative/attempt_01/validation_report.md)。下一步B2实际网络与F/X，再闭合C主实验成本。当前进度和未决条件分别维护于[科研执行步骤](科研项目执行步骤.md)与[blocker登记](../model_spec/blocker_register.md)顶部。以下“尚未实施A–F”等描述保留本交接原整理时点的含义，不提升B1的非权威机制证据范围。
+同日后续入口：工作包A的[最小阶段评价规格](../model_spec/staged_deliverability_minimum_spec_v1.md)与[工作包B实施计划](staged_deliverability_small_case_plan_v1.md)已衔接B1开发；B1九条机制轨迹见[标量机制报告](../../results/tables/staged_deliverability_b1_v1_non_authoritative/attempt_01/validation_report.md)。B2现已连接两母线固定DC走廊、F/X分层检查及三例新进程重开，见[网络开发报告](../../results/tables/staged_deliverability_b2_v1_non_authoritative/attempt_01/validation_report.md)；post完整合同业务必要条件失败，未授予完整容量释放。下一步按[B3/C及有限比较计划](staged_deliverability_b3_c_next_steps_v1.md)补连续终结与失败窗口、闭合所选规模成本，再确定D/E比较与留出。当前进度和未决条件分别维护于[科研执行步骤](科研项目执行步骤.md)与[blocker登记](../model_spec/blocker_register.md)顶部。以下“尚未实施A–F”等描述保留本交接原整理时点的含义，不提升B1/B2的非权威开发证据范围；最新Git号仍以实时读回为准。
+
+B2调用计数阅读时并看[运行后澄清](staged_deliverability_b2_count_clarification_20261022.md)：362是181次父参考+181次子重放的求值/审计次数，含重复，不是独立样本量；被原attempt绑定的执行合同v1保留原字节，其“唯一点”措辞由该澄清更正。
 
 ## 1 当前目标与用户要求
 

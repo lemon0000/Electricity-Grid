@@ -1,0 +1,73 @@
+{
+  "actual_diagnostic_counts": {
+    "audited_pypower_points": 362,
+    "business_audit_hours": 50,
+    "business_steps": 50,
+    "child_processes": 3,
+    "input_loads": 6,
+    "network_attempts": 52,
+    "network_audit_hours": 52,
+    "pypower_flows": 362
+  },
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "completion_sha256": "7eb8481b3c3e743584f4350c5e4af29f72833805cb126c518799b978f54bd8e4",
+  "core_artifacts_before_completion": 15,
+  "core_inventory_matches": true,
+  "core_machine_bytes": 786700,
+  "core_machine_files_including_completion": 16,
+  "count_interpretation": {
+    "bound_contract_bytes_preserved": true,
+    "clarification": "docs/plan/staged_deliverability_b2_count_clarification_20261022.md",
+    "fresh_child_point_evaluations": 181,
+    "includes_replay_repetition": true,
+    "not_an_independent_sample_size": true,
+    "parent_point_evaluations": 181,
+    "total_evaluations": 362
+  },
+  "credential_pattern_scan": "no private-key or selected token patterns found in scoped code/config/result files",
+  "development_check_notes": [
+    "Initial regression command named nonexistent test paths; no tests collected, corrected final command passed.",
+    "Reviewer temporary scripts stopped twice on supplemental-file timing and an audit branch-angle assumption; corrected read-only Fraction audit passed. No saved attempt was overwritten or rerun."
+  ],
+  "document_checks": {
+    "files": 27,
+    "local_links": 57,
+    "utf8_ast_whitespace": true
+  },
+  "external_selected_pins_matched": 7,
+  "limits": {
+    "aggregate_contract_release": false,
+    "expensive_io_failure_cleanup_measured": false,
+    "full_fx_temporal_backing": false,
+    "full_launcher_outer_wall_measured": false,
+    "general_network_or_ac": false,
+    "main_experiment_performance_review_complete": false
+  },
+  "reference_terminal_pairs_equal": 3,
+  "repository_pins_matched": 32,
+  "reused_b1_source_pins_matched": 9,
+  "review_scope": "read-only non-authoritative pre-seal findings and saved Fraction re-audit; no official verdict or receipt",
+  "runtime_versions_matched": true,
+  "saved_cases_fraction_reaudited": 3,
+  "status": "postrun_mechanical_verification",
+  "supplemental_files": [
+    "validation_report.md",
+    "verification.json"
+  ],
+  "tests": {
+    "files": [
+      "tests/test_staged_network_development_v1.py",
+      "tests/test_staged_network_runner_v1.py",
+      "tests/test_staged_deliverability_development_v1.py",
+      "tests/test_rq2_continuous_debt_cohorts_v1.py",
+      "tests/test_rq2_bidirectional_policy_v1.py",
+      "tests/test_rq2_bidirectional_capacity_v1.py"
+    ],
+    "passed": 198,
+    "pytest_seconds": 15.24,
+    "skip_reason": "Windows symlink privilege unavailable",
+    "skipped": 1,
+    "warnings": 1605
+  },
+  "verified_at_utc": "2026-10-22T11:20:59.770720+00:00"
+}

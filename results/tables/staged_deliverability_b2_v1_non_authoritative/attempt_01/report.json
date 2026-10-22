@@ -1,0 +1,506 @@
+{
+  "aggregate_contract_release": false,
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "child_returncodes": [
+    {
+      "case": "on_time_early",
+      "pid": 24800,
+      "returncode": 0
+    },
+    {
+      "case": "on_time_late",
+      "pid": 9864,
+      "returncode": 0
+    },
+    {
+      "case": "delayed_early",
+      "pid": 25088,
+      "returncode": 0
+    }
+  ],
+  "counts": {
+    "audited_pypower_points": 362,
+    "business_audit_hours": 50,
+    "business_steps": 50,
+    "child_processes": 3,
+    "input_loads": 6,
+    "network_attempts": 52,
+    "network_audit_hours": 52,
+    "pypower_flows": 362
+  },
+  "elapsed_before_report_write": 12.27597919999971,
+  "fingerprints": {
+    "executable": "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "external_selected": {
+      "pypower.dcpf": {
+        "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pypower\\dcpf.py",
+        "sha256": "aa936258831f37d4ad927f89b243616bd0eca57a056f265e43c9d2e3bcc38358"
+      },
+      "pypower.idx_brch": {
+        "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pypower\\idx_brch.py",
+        "sha256": "237e1cf946e92beb6f1e71b780bb7d0aaff5195d6deb53bc29ab80cbb43bfd22"
+      },
+      "pypower.idx_bus": {
+        "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pypower\\idx_bus.py",
+        "sha256": "e16c110fd757f080c07ab013053eea3ff05e8c7b08225781c33d8a7a21ef28a7"
+      },
+      "pypower.makeBdc": {
+        "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pypower\\makeBdc.py",
+        "sha256": "80aa357c0e5df778230b9643b356085420f89afdfcd491420fd047c5248dcd59"
+      },
+      "pypower.pplinsolve": {
+        "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\pypower\\pplinsolve.py",
+        "sha256": "1389d1a88af362c89730ad20fc962526019521208a6e4493d60f7bd3b67bbc2e"
+      },
+      "scipy.sparse.linalg._dsolve._superlu": {
+        "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\scipy\\sparse\\linalg\\_dsolve\\_superlu.cp312-win_amd64.pyd",
+        "sha256": "3939a92b4c8621a5ccd72a6bd77733774f065556ca16137d24e6324d11d85951"
+      },
+      "scipy.sparse.linalg._dsolve.linsolve": {
+        "path": "D:\\Miniconda3\\envs\\compute\\Lib\\site-packages\\scipy\\sparse\\linalg\\_dsolve\\linsolve.py",
+        "sha256": "622ade8857958ba1181126b57b87e197f8ba72493dfbe780e8eb2741b9f24f5d"
+      }
+    },
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.12 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 20:05:38) [MSC v.1929 64 bit (AMD64)]",
+    "repository_sha256": {
+      "configs/staged_deliverability_network_v1.DRAFT.yaml": "c6bb0cc30a330fed07a9d0b7f22dea7ce5096f20f1f58a8dc79dddc58059686b",
+      "configs/staged_deliverability_small_case_v1.DRAFT.yaml": "5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5",
+      "docs/model_spec/staged_deliverability_minimum_spec_v1.md": "024841d9a13116651d353d1e1f81e1b4bc68de512208e2cb80137e8ca7b77045",
+      "docs/model_spec/staged_deliverability_network_development_v1.md": "2ebc49850224bf513568c945b51abaf6dc1d6c23b80c7251ab185208b118fdbb",
+      "docs/plan/staged_deliverability_b1_development_contract_v1.md": "553907026878f25e567e7a723e5983524e80f43cd037bf24ad6c137d6fdf0c0d",
+      "docs/plan/staged_deliverability_b2_development_contract_v1.md": "bfd98540d246d4c4a569885537be25c0980a93cd1758fe86302a0f36660fd844",
+      "docs/plan/staged_deliverability_small_case_plan_v1.md": "9fb409cc7b7eac6c92d1e70a89d3842f68d1399f2abdf42062e06e7d02f78de5",
+      "experiments/staged_deliverability_b1_development_v1.py": "3872c5f307713d8ab5223a217a5c9b2f6670e5e27818e492580872842e6a9f00",
+      "experiments/staged_network_b2_development_v1.py": "c97457caa14405d24809a9708048bd8e97fa57b0c39c8d63e403ef49bf2cc04b",
+      "results/tables/staged_deliverability_b1_v1_non_authoritative/attempt_01/report.json": "5382e5b3208d51c32c74823b379ff16637686252ae4d540875b72ed65db86c7b",
+      "src/__init__.py": "ad4caa31a8bd5d534f5c65b38b67a393b740a5efd947988f47e1b55642c4cfc0",
+      "src/grid/__init__.py": "b2490e8dfc9a5727c475cdca757eeb7606bb1318993dd3d8b14240dbe94467ef",
+      "src/grid/ac_case.py": "d0c8c8b8d37480a87edc17a3af54b62663dec6e8b9d56ee03e235bae6bb2bb91",
+      "src/grid/ac_restoration.py": "59ba8af7047048e739f96c094373258bdb2548a6c2003a24939f2f3dfb5e0b74",
+      "src/grid/ac_validation.py": "7e3488f966c979e103e436971b10996281c77e8c3a505e9103118baf3caf8a71",
+      "src/grid/chronological_dispatch.py": "71d6c1da0e72942512810c651619c5cd73e915c3ac6d0d52684476d6133658ec",
+      "src/grid/contingency.py": "7a08c582fe7113b8a43355ff4ab888dd6a334fb2c0e79d5da8cb7f03acfd03fb",
+      "src/grid/dc_opf.py": "9e118d7e8c59e269274749a144654ea5a400e35c6b1cb371870329ff2601e827",
+      "src/grid/network_grid_need.py": "ca4ae719c8e1c96d398af6912994937272e31f4a29f7d485c74e0836d2199170",
+      "src/grid/rts24.py": "8c876b13fdc318ca98ab22309bae1aff0b8e56a12894f9aae98c84ed951eb8b5",
+      "src/grid/rts_gmlc.py": "4180ab5ce86eb34a9de9e058ff9c56275ace3a6ffab06dbb464d93ef23382448",
+      "src/grid/rts_gmlc_scuc.py": "1101b21cbdab0cdacd6755578208ce7d28cd3e6e04f932d397119a4dde2b6cfe",
+      "src/grid/scopf.py": "cdd456ace5f704f31a80fab1c95dba272810cc815ffb6a4c71516e079982eb84",
+      "src/rq2_joint_deliverability_boundary_v1/__init__.py": "23dcf6e6cc99671101ae4e4c05602f5345aae114aa011b89511839c208a33856",
+      "src/rq2_joint_deliverability_boundary_v1/debt_cohorts.py": "d10497c1e6ab5ff573dec8d938b5407a7e28277551b37a1e0d7f79b4241adaab",
+      "src/staged_deliverability_audit_v1.py": "e9e5e001d7f1510c5690c605b8ad87993456da973d454e8cb1e82453045b0612",
+      "src/staged_deliverability_development_v1.py": "91bbc6aaaac458c8fcb23c11d830a98af99e1d50d42b3c0489246ec1922109e0",
+      "src/staged_network_audit_v1.py": "680c722d93d200db38b490afcd85daa1eddd8bf8bfa6b4ce00dfd60035e6dca0",
+      "src/staged_network_development_v1.py": "73980e2be76bd6f9b944282578248e51ceab1a8530849eeb676f338cd7cf0144",
+      "tests/test_staged_deliverability_development_v1.py": "b3aa593e19c562a0af391920cd37453bdaeef7e234f1e995d4c8da9dadc646b9",
+      "tests/test_staged_network_development_v1.py": "f4fe9fc659d8a4314d98e47db4cbfce3844b9e5806db7e3f973ae32f56afae9f",
+      "tests/test_staged_network_runner_v1.py": "4ac1797d53d487f91af642d6be57a585aca0cc6c523ef10057b88e3620453cd1"
+    },
+    "reused_b1_source_sha256": {
+      "configs\\staged_deliverability_small_case_v1.DRAFT.yaml": "5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5",
+      "docs\\model_spec\\staged_deliverability_minimum_spec_v1.md": "024841d9a13116651d353d1e1f81e1b4bc68de512208e2cb80137e8ca7b77045",
+      "docs\\plan\\staged_deliverability_b1_development_contract_v1.md": "553907026878f25e567e7a723e5983524e80f43cd037bf24ad6c137d6fdf0c0d",
+      "docs\\plan\\staged_deliverability_small_case_plan_v1.md": "9fb409cc7b7eac6c92d1e70a89d3842f68d1399f2abdf42062e06e7d02f78de5",
+      "experiments\\staged_deliverability_b1_development_v1.py": "3872c5f307713d8ab5223a217a5c9b2f6670e5e27818e492580872842e6a9f00",
+      "src\\rq2_joint_deliverability_boundary_v1\\debt_cohorts.py": "d10497c1e6ab5ff573dec8d938b5407a7e28277551b37a1e0d7f79b4241adaab",
+      "src\\staged_deliverability_audit_v1.py": "e9e5e001d7f1510c5690c605b8ad87993456da973d454e8cb1e82453045b0612",
+      "src\\staged_deliverability_development_v1.py": "91bbc6aaaac458c8fcb23c11d830a98af99e1d50d42b3c0489246ec1922109e0",
+      "tests\\test_staged_deliverability_development_v1.py": "b3aa593e19c562a0af391920cd37453bdaeef7e234f1e995d4c8da9dadc646b9"
+    },
+    "versions": {
+      "PYPOWER": "5.1.19",
+      "PyYAML": "6.0.3",
+      "numpy": "1.26.4",
+      "psutil": "5.9.8",
+      "scipy": "1.17.0"
+    }
+  },
+  "main_experiment_performance_review_complete": false,
+  "sampled_process_tree_peak_rss_bytes": 268181504,
+  "scope": "B2 fixed_balance_DC_only",
+  "stage_wall_seconds": {
+    "checkpoint_save": 0.017053700001270045,
+    "configuration_load": 0.0032296999997925013,
+    "continuous_execution": 0.5290996000003361,
+    "fresh_process_reopen_audit": 8.583160999998654,
+    "input_load": 0.014660700002423255,
+    "parent_independent_audit": 0.04465630000049714,
+    "reference_save": 0.06607770000118762,
+    "source_hash_after": 0.7649658999980602,
+    "source_hash_before": 0.539125300001615,
+    "terminal_read": 0.02393859999938286
+  },
+  "status": "development_diagnostic_evaluated",
+  "summaries": [
+    {
+      "accepted_hours": 10,
+      "business_prefix_assessment": {
+        "coverage_complete": true,
+        "fx_contract_status": "not_assessed_scalar_stub",
+        "method": "full_temporal",
+        "method_conditions_satisfied": true,
+        "observed_primary_deadline_miss": "0",
+        "observed_through": 7,
+        "physical_replay_violations": [],
+        "primary_right_censored": false,
+        "remaining_debt": "0",
+        "scope": "scalar_fixed_policy",
+        "stopped": false
+      },
+      "child_stage_wall_seconds": {
+        "checkpoint_read_and_prefix_replay": 0.02268969999931869,
+        "configuration_load": 0.0025156000010611024,
+        "independent_audit": 0.011228400002437411,
+        "input_load": 0.002846200000931276,
+        "source_hash_after": 0.6693021000028239,
+        "suffix_execution": 0.02803470000071684
+      },
+      "clean": "early",
+      "full_contract_release": false,
+      "last_hour": 7,
+      "plan": "on_time",
+      "tasks": [
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": -2,
+          "deadline_miss": "0",
+          "due": -2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": -1,
+          "deadline_miss": "0",
+          "due": -1,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 0,
+          "deadline_miss": "0",
+          "due": 2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 1,
+          "deadline_miss": "0",
+          "due": 3,
+          "immediate": "3/10",
+          "original": "1/2",
+          "recovered": "1/5",
+          "remaining": "0",
+          "status": "recovered_by_deadline"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 2,
+          "deadline_miss": "0",
+          "due": 4,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 3,
+          "deadline_miss": "0",
+          "due": 5,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 4,
+          "deadline_miss": "0",
+          "due": 6,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 5,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 6,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 7,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        }
+      ],
+      "terminal_status": "conditional_operating_point_committed"
+    },
+    {
+      "accepted_hours": 10,
+      "business_prefix_assessment": {
+        "coverage_complete": true,
+        "fx_contract_status": "not_assessed_scalar_stub",
+        "method": "full_temporal",
+        "method_conditions_satisfied": false,
+        "observed_primary_deadline_miss": "1/5",
+        "observed_through": 7,
+        "physical_replay_violations": [],
+        "primary_right_censored": false,
+        "remaining_debt": "0",
+        "scope": "scalar_fixed_policy",
+        "stopped": false
+      },
+      "child_stage_wall_seconds": {
+        "checkpoint_read_and_prefix_replay": 0.022034500001609558,
+        "configuration_load": 0.00262999999904423,
+        "independent_audit": 0.011601700000028359,
+        "input_load": 0.003073600000789156,
+        "source_hash_after": 0.4841421999990416,
+        "suffix_execution": 0.02795680000053835
+      },
+      "clean": "late",
+      "full_contract_release": false,
+      "last_hour": 7,
+      "plan": "on_time",
+      "tasks": [
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": -2,
+          "deadline_miss": "0",
+          "due": -2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": -1,
+          "deadline_miss": "0",
+          "due": -1,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 0,
+          "deadline_miss": "0",
+          "due": 2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 1,
+          "deadline_miss": "1/5",
+          "due": 3,
+          "immediate": "3/10",
+          "original": "1/2",
+          "recovered": "1/5",
+          "remaining": "0",
+          "status": "deadline_missed"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 2,
+          "deadline_miss": "0",
+          "due": 4,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 3,
+          "deadline_miss": "0",
+          "due": 5,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 4,
+          "deadline_miss": "0",
+          "due": 6,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 5,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 6,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 7,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        }
+      ],
+      "terminal_status": "conditional_operating_point_committed"
+    },
+    {
+      "accepted_hours": 5,
+      "business_prefix_assessment": {
+        "coverage_complete": false,
+        "fx_contract_status": "not_assessed_scalar_stub",
+        "method": "full_temporal",
+        "method_conditions_satisfied": null,
+        "observed_primary_deadline_miss": "0",
+        "observed_through": 2,
+        "physical_replay_violations": [],
+        "primary_right_censored": true,
+        "remaining_debt": "1/5",
+        "scope": "scalar_fixed_policy",
+        "stopped": false
+      },
+      "child_stage_wall_seconds": {
+        "checkpoint_read_and_prefix_replay": 0.027592100002948428,
+        "configuration_load": 0.0028751999998348765,
+        "independent_audit": 0.00807379999969271,
+        "input_load": 0.003391300000657793,
+        "source_hash_after": 0.5274472999990394,
+        "suffix_execution": 0.01702329999898211
+      },
+      "clean": "early",
+      "full_contract_release": false,
+      "last_hour": 3,
+      "plan": "delayed",
+      "tasks": [
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": -2,
+          "deadline_miss": "0",
+          "due": -2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": -1,
+          "deadline_miss": "0",
+          "due": -1,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 0,
+          "deadline_miss": "0",
+          "due": 2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 1,
+          "deadline_miss": null,
+          "due": 3,
+          "immediate": "3/10",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "1/5",
+          "status": "right_censored_before_deadline"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 2,
+          "deadline_miss": "0",
+          "due": 4,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        }
+      ],
+      "terminal_status": "reference_connection_shortfall"
+    }
+  ],
+  "unknown": "general network/SCED/AC; temporal full-C backing; expensive I/O failure cleanup; main experiment budget"
+}
