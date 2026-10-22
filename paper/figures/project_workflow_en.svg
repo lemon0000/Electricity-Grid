@@ -1,27 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760">
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#666666"/></marker>
-    <style>
-      .title{font:700 30px Arial,Helvetica,sans-serif;fill:#222222}.lane{font:700 22px Arial,Helvetica,sans-serif;fill:#222222}.head{font:700 19px Arial,Helvetica,sans-serif;fill:#222222}.body{font:400 17px Arial,Helvetica,sans-serif;fill:#333333}.arrow{fill:none;stroke:#666666;stroke-width:2.5;marker-end:url(#arrow)}
-    </style>
-  </defs>
-  <rect width="1600" height="760" fill="#FFFFFF"/>
-  <text x="800" y="40" text-anchor="middle" class="title">Research Plan for Joint Workload Flexibility</text>
-  <text x="235" y="82" text-anchor="middle" class="lane">Inputs and task limits</text><text x="800" y="82" text-anchor="middle" class="lane">Service plans to compare</text><text x="1365" y="82" text-anchor="middle" class="lane">Questions to answer</text>
-  <g>
-    <rect x="60" y="110" width="350" height="125" rx="14" fill="#EAF2FA" stroke="#2166AC" stroke-width="2"/><text x="235" y="150" text-anchor="middle" class="head">Grid scenarios and CFE settings</text><text x="235" y="185" text-anchor="middle" class="body">Grid conditions and modeled CFE</text>
-    <rect x="60" y="300" width="350" height="125" rx="14" fill="#FFF3E1" stroke="#F1A340" stroke-width="2"/><text x="235" y="340" text-anchor="middle" class="head">Computing task limits</text><text x="235" y="375" text-anchor="middle" class="body">Deferral, deadlines and recovery</text>
-    <rect x="60" y="490" width="350" height="125" rx="14" fill="#F1EAF5" stroke="#762A83" stroke-width="2"/><text x="235" y="530" text-anchor="middle" class="head">Continuous and new scenarios</text><text x="235" y="565" text-anchor="middle" class="body">Cross-day tasks and held-out data</text>
-  </g>
-  <g>
-    <rect x="625" y="110" width="350" height="125" rx="14" fill="#FFF3E1" stroke="#F1A340" stroke-width="2"/><text x="800" y="150" text-anchor="middle" class="head">Individual services</text><text x="800" y="185" text-anchor="middle" class="body">Grid-only or clean-energy-only</text>
-    <rect x="625" y="300" width="350" height="125" rx="14" fill="#F1EAF5" stroke="#762A83" stroke-width="2"/><text x="800" y="340" text-anchor="middle" class="head">Joint planning</text><text x="800" y="375" text-anchor="middle" class="body">Both duties, one shared resource</text>
-    <rect x="625" y="490" width="350" height="125" rx="14" fill="#EAF2FA" stroke="#2166AC" stroke-width="2"/><text x="800" y="530" text-anchor="middle" class="head">Separate planning</text><text x="800" y="565" text-anchor="middle" class="body">Reschedule common requests</text>
-  </g>
-  <g>
-    <rect x="1190" y="110" width="350" height="125" rx="14" fill="#E8F3EC" stroke="#1B7837" stroke-width="2"/><text x="1365" y="150" text-anchor="middle" class="head">How much flexibility?</text><text x="1365" y="185" text-anchor="middle" class="body">Capacity needed by target level</text>
-    <rect x="1190" y="300" width="350" height="125" rx="14" fill="#E8F3EC" stroke="#1B7837" stroke-width="2"/><text x="1365" y="340" text-anchor="middle" class="head">Can the plan be delivered?</text><text x="1365" y="375" text-anchor="middle" class="body">Grid, clean-energy and task outcomes</text>
-    <rect x="1190" y="490" width="350" height="125" rx="14" fill="#F8E9EB" stroke="#B2182B" stroke-width="2"/><text x="1365" y="530" text-anchor="middle" class="head">How biased is separate planning?</text><text x="1365" y="565" text-anchor="middle" class="body">Overestimate, underestimate, unknown</text>
-  </g>
-  <path d="M410 172 H625" class="arrow"/><path d="M410 362 H625" class="arrow"/><path d="M410 552 H625" class="arrow"/><path d="M975 172 H1190" class="arrow"/><path d="M975 362 H1190" class="arrow"/><path d="M975 552 H1190" class="arrow"/><path d="M235 235 V300" class="arrow"/><path d="M235 425 V490" class="arrow"/><path d="M800 235 V300" class="arrow"/><path d="M800 425 V490" class="arrow"/><path d="M1365 235 V300" class="arrow"/><path d="M1365 425 V490" class="arrow"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="530" viewBox="0 0 1200 530" role="img" aria-labelledby="title desc">
+<title id="title">From stage paths to interconnection plan assessment</title><desc id="desc">From stage paths to interconnection plan assessment</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#526a7d"/></marker>
+<style>text{font-family:Arial,"Microsoft YaHei",sans-serif;fill:#203649}.title{font-size:30px;font-weight:700}.head{font-size:23px;font-weight:700}.body{font-size:23px}.small{font-size:21px;fill:#40586b}.link{fill:none;stroke:#526a7d;stroke-width:2.5;marker-end:url(#arrow)}</style></defs>
+<rect width="1200" height="530" fill="white"/>
+<text x="600" y="44" text-anchor="middle" class="title">From stage paths to interconnection plan assessment</text>
+<rect x="20" y="90" width="260" height="200" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
+<text x="150.0" y="128" text-anchor="middle" class="head">1 Fix paths and rules</text>
+<text x="150.0" y="167" text-anchor="middle" class="body">Paths and access plans</text>
+<text x="150.0" y="201" text-anchor="middle" class="body">Same external demand</text>
+<text x="150.0" y="235" text-anchor="middle" class="body">Fixed service rules</text>
+<path class="link" d="M280 190 H311"/>
+<rect x="320" y="90" width="260" height="200" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
+<text x="450.0" y="128" text-anchor="middle" class="head">2 Check a small case</text>
+<text x="450.0" y="167" text-anchor="middle" class="body">Response and recovery</text>
+<text x="450.0" y="201" text-anchor="middle" class="body">Hourly CFE and debt</text>
+<text x="450.0" y="235" text-anchor="middle" class="body">Complete-path cost</text>
+<path class="link" d="M580 190 H611"/>
+<rect x="620" y="90" width="260" height="200" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
+<text x="750.0" y="128" text-anchor="middle" class="head">3 Compare plans</text>
+<text x="750.0" y="167" text-anchor="middle" class="body">MW vs temporal limits</text>
+<text x="750.0" y="201" text-anchor="middle" class="body">Limited sensitivity</text>
+<text x="750.0" y="235" text-anchor="middle" class="body">Stage bottlenecks</text>
+<path class="link" d="M880 190 H911"/>
+<rect x="920" y="90" width="260" height="200" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
+<text x="1050.0" y="128" text-anchor="middle" class="head">4 Test new paths</text>
+<text x="1050.0" y="167" text-anchor="middle" class="body">Fixed plan and policy</text>
+<text x="1050.0" y="201" text-anchor="middle" class="body">Observed information</text>
+<text x="1050.0" y="235" text-anchor="middle" class="body">Shortfalls and unknowns</text>
+<path class="link" d="M1050 290 V330 H600 V360"/>
+<rect x="110" y="360" width="980" height="130" rx="12" fill="#edf5ef" stroke="#89a99a" stroke-width="1.7"/>
+<text x="600.0" y="398" text-anchor="middle" class="head">Research outputs</text>
+<text x="600.0" y="437" text-anchor="middle" class="body">Delivery by stage · source of limits · applicability of given plans</text>
+<text x="600.0" y="471" text-anchor="middle" class="body">Models, validation records, figures, and the complete thesis</text>
 </svg>

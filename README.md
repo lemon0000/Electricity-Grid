@@ -1,8 +1,10 @@
 # Electricity-Grid
 
-*Last updated: 2026-09-02*
+*Last updated: 2026-10-22*
 
 Research code for staged data-center interconnection and grid expansion.
+
+当前给导师阅读的[中英文项目介绍与PDF](paper/drafts/README.md)已于2026-10-22更新，说明达产与建设进度错位下给定分阶段接入方案的柔性履约研究设计、现有基础及待完成工作。
 
 Current machine responsibilities, evidence status and the next gated action are
 summarized in

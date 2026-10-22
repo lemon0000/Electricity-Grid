@@ -1,48 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760">
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#666666"/></marker>
-    <style>
-      .title{font:700 30px Arial,'Microsoft YaHei',sans-serif;fill:#222222}
-      .lane{font:700 22px Arial,'Microsoft YaHei',sans-serif;fill:#222222}
-      .head{font:700 21px Arial,'Microsoft YaHei',sans-serif;fill:#222222}
-      .body{font:400 19px Arial,'Microsoft YaHei',sans-serif;fill:#333333}
-      .card{stroke-width:2}
-      .arrow{fill:none;stroke:#666666;stroke-width:2.5;marker-end:url(#arrow)}
-    </style>
-  </defs>
-  <rect width="1600" height="760" fill="#FFFFFF"/>
-  <text x="800" y="40" text-anchor="middle" class="title">从任务调节到两类服务的研究思路</text>
-  <text x="235" y="82" text-anchor="middle" class="lane">输入与任务限制</text>
-  <text x="800" y="82" text-anchor="middle" class="lane">比较的用电方案</text>
-  <text x="1365" y="82" text-anchor="middle" class="lane">需要回答的问题</text>
-
-  <g class="card">
-    <rect x="60" y="110" width="350" height="125" rx="14" fill="#EAF2FA" stroke="#2166AC"/>
-    <text x="235" y="150" text-anchor="middle" class="head">电网情景与CFE设定</text><text x="235" y="185" text-anchor="middle" class="body">电网条件、目标与清洁额度</text>
-    <rect x="60" y="300" width="350" height="125" rx="14" fill="#FFF3E1" stroke="#F1A340"/>
-    <text x="235" y="340" text-anchor="middle" class="head">计算任务限制</text><text x="235" y="375" text-anchor="middle" class="body">延期比例、期限与补做能力</text>
-    <rect x="60" y="490" width="350" height="125" rx="14" fill="#F1EAF5" stroke="#762A83"/>
-    <text x="235" y="530" text-anchor="middle" class="head">连续时段与新场景</text><text x="235" y="565" text-anchor="middle" class="body">跨日任务与独立评价数据</text>
-  </g>
-  <g class="card">
-    <rect x="625" y="110" width="350" height="125" rx="14" fill="#FFF3E1" stroke="#F1A340"/>
-    <text x="800" y="150" text-anchor="middle" class="head">单项服务</text><text x="800" y="185" text-anchor="middle" class="body">只考虑电网 / 只考虑绿电</text>
-    <rect x="625" y="300" width="350" height="125" rx="14" fill="#F1EAF5" stroke="#762A83"/>
-    <text x="800" y="340" text-anchor="middle" class="head">联合考虑两项承诺</text><text x="800" y="375" text-anchor="middle" class="body">共享任务、功率与补做限制</text>
-    <rect x="625" y="490" width="350" height="125" rx="14" fill="#EAF2FA" stroke="#2166AC"/>
-    <text x="800" y="530" text-anchor="middle" class="head">分开计算后执行</text><text x="800" y="565" text-anchor="middle" class="body">共同请求在单一状态中重新执行</text>
-  </g>
-  <g class="card">
-    <rect x="1190" y="110" width="350" height="125" rx="14" fill="#E8F3EC" stroke="#1B7837"/>
-    <text x="1365" y="150" text-anchor="middle" class="head">需要多大调节能力</text><text x="1365" y="185" text-anchor="middle" class="body">不同绿电目标对应的容量需求</text>
-    <rect x="1190" y="300" width="350" height="125" rx="14" fill="#E8F3EC" stroke="#1B7837"/>
-    <text x="1365" y="340" text-anchor="middle" class="head">计划能否兑现</text><text x="1365" y="375" text-anchor="middle" class="body">响应达标、匹配比例、按期完成</text>
-    <rect x="1190" y="490" width="350" height="125" rx="14" fill="#F8E9EB" stroke="#B2182B"/>
-    <text x="1365" y="530" text-anchor="middle" class="head">分开估算有何偏差</text><text x="1365" y="565" text-anchor="middle" class="body">比较高估、低估与未决范围</text>
-  </g>
-  <path d="M410 172 H625" class="arrow"/><path d="M410 362 H625" class="arrow"/><path d="M410 552 H625" class="arrow"/>
-  <path d="M975 172 H1190" class="arrow"/><path d="M975 362 H1190" class="arrow"/><path d="M975 552 H1190" class="arrow"/>
-  <path d="M235 235 V300" class="arrow"/><path d="M235 425 V490" class="arrow"/>
-  <path d="M800 235 V300" class="arrow"/><path d="M800 425 V490" class="arrow"/>
-  <path d="M1365 235 V300" class="arrow"/><path d="M1365 425 V490" class="arrow"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="530" viewBox="0 0 1200 530" role="img" aria-labelledby="title desc">
+<title id="title">从阶段路径到接入方案评价</title><desc id="desc">从阶段路径到接入方案评价</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#526a7d"/></marker>
+<style>text{font-family:Arial,"Microsoft YaHei",sans-serif;fill:#203649}.title{font-size:30px;font-weight:700}.head{font-size:25px;font-weight:700}.body{font-size:23px}.small{font-size:21px;fill:#40586b}.link{fill:none;stroke:#526a7d;stroke-width:2.5;marker-end:url(#arrow)}</style></defs>
+<rect width="1200" height="530" fill="white"/>
+<text x="600" y="44" text-anchor="middle" class="title">从阶段路径到接入方案评价</text>
+<rect x="20" y="90" width="260" height="200" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
+<text x="150.0" y="128" text-anchor="middle" class="head">1 固定路径与规则</text>
+<text x="150.0" y="167" text-anchor="middle" class="body">三种进度与接入计划</text>
+<text x="150.0" y="201" text-anchor="middle" class="body">同一外生业务目标</text>
+<text x="150.0" y="235" text-anchor="middle" class="body">固定服务与清洁归属</text>
+<path class="link" d="M280 190 H311"/>
+<rect x="320" y="90" width="260" height="200" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
+<text x="450.0" y="128" text-anchor="middle" class="head">2 核验完整小例</text>
+<text x="450.0" y="167" text-anchor="middle" class="body">响应、恢复与CFE</text>
+<text x="450.0" y="201" text-anchor="middle" class="body">债务及时间连续</text>
+<text x="450.0" y="235" text-anchor="middle" class="body">测量完整计算成本</text>
+<path class="link" d="M580 190 H611"/>
+<rect x="620" y="90" width="260" height="200" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
+<text x="750.0" y="128" text-anchor="middle" class="head">3 比较阶段方案</text>
+<text x="750.0" y="167" text-anchor="middle" class="body">瞬时MW与完整时序</text>
+<text x="750.0" y="201" text-anchor="middle" class="body">少量必要参数对照</text>
+<text x="750.0" y="235" text-anchor="middle" class="body">解释阶段性瓶颈</text>
+<path class="link" d="M880 190 H911"/>
+<rect x="920" y="90" width="260" height="200" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
+<text x="1050.0" y="128" text-anchor="middle" class="head">4 检验新路径</text>
+<text x="1050.0" y="167" text-anchor="middle" class="body">固定计划与运行策略</text>
+<text x="1050.0" y="201" text-anchor="middle" class="body">使用当时可见信息</text>
+<text x="1050.0" y="235" text-anchor="middle" class="body">记录成功、缺口与未知</text>
+<path class="link" d="M1050 290 V330 H600 V360"/>
+<rect x="110" y="360" width="980" height="130" rx="12" fill="#edf5ef" stroke="#89a99a" stroke-width="1.7"/>
+<text x="600.0" y="398" text-anchor="middle" class="head">研究交付</text>
+<text x="600.0" y="437" text-anchor="middle" class="body">各阶段履约状态 · 限制来自哪里 · 给定方案的适用边界</text>
+<text x="600.0" y="471" text-anchor="middle" class="body">配套模型、验证记录、图表与完整论文</text>
 </svg>

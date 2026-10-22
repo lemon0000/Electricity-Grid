@@ -1,189 +1,136 @@
-# Deliverability of AI Data Center Workload Flexibility for Grid Response and Carbon-Free Energy Matching
+# Deliverability of Workload Flexibility for Staged AI Data Center Interconnection During Ramp-Up
 
-Updated: 2026-10-21. This introduction explains the current thesis question, approach, and progress.
+Updated: 2026-10-22. Research design and current progress.
 
 ## 1 Project purpose
 
-This project asks how much workload adjustment capacity an AI data center needs to meet both grid response obligations and hourly carbon-free energy (CFE) matching requirements. Workload flexibility means moving eligible computing tasks to later hours while meeting their deadlines. Postponed computation remains unfinished work: reducing demand now creates a need to complete that work, and consume electricity, later.
+This project studies an AI data center whose business demand grows toward full operation while computing equipment and grid infrastructure are commissioned on different schedules. It asks whether workload flexibility can support a given staged interconnection plan, and how task recovery and hourly carbon-free energy (CFE) requirements limit delivery.
 
-For example, an eligible task could pause during a constrained grid hour and resume later. If the recovery hours also lack attributable clean electricity, or the task deadline is too close, the promised adjustment may fail. This hypothetical example shows why current demand reduction and later task completion must be assessed on the same timeline.
+Business growth, equipment commissioning, and grid expansion follow three distinct trajectories. Computing equipment and customer demand may arrive before a supporting line or transformer is ready. Alternatively, grid capacity may be available before the center reaches its intended operating scale. The study represents these trajectories separately and compares plans against the same business service requirements.
 
-Both obligations may draw on the same tasks. The grid may require demand reductions during constrained hours, while insufficient attributable CFE may motivate shifting computation to other hours. Separate plans may each allocate the full flexible resource, although their combined execution can encounter insufficient deferrable work, recovery space, or time. Their timing may also relieve existing constraints. The study therefore measures joint capacity requirements and the direction and magnitude of these interactions. The present thesis fixes the grid connection point and concentrates on delivery over time, including recovery.
+Workload flexibility postpones eligible computation within its deadline. For example, the center may defer tasks during a constrained grid hour and complete them later. This reduces immediate electricity demand but creates unfinished work. Recovery requires computing headroom, available power, and sufficient attributable clean electricity before the deadline.
+
+A staged plan therefore depends on both immediate demand reduction and later task completion. Recovery headroom may shrink when business grows faster than equipment capacity, but additional equipment can offset this effect. An early operating stage is not inherently more flexible: demand and commissioned equipment must be considered separately.
+
+The study fixes the connection point and evaluates a small set of given construction and interconnection plans. Its outputs identify which stages meet the stated obligations, where shortfalls occur, and which constraints explain them.
 
 ## 2 Basic concepts
 
 | Concept | Meaning in this study |
 |---|---|
-| Workload flexibility | Adjusting when eligible computation runs while completing it by its deadline. |
-| Grid response | Reducing data center demand as required under stated grid constraints, with checks on the resulting grid state. |
-| Hourly CFE matching | Matching a target share of each hour's electricity consumption with attributable carbon-free generation in the same hour and applicable region. |
-| Recovery and recovery debt | Recovery completes postponed computation; recovery debt records unfinished work and its deadlines. |
-| Deliverability | Meeting defined calls, grid checks, and task deadlines under the stated model and information constraints. |
+| Business ramp-up | External task demand increases toward the target operating scale. Demand cannot be reduced to make a plan appear feasible. |
+| Equipment commissioning | Installed and tested modules become executable capacity K. Uncommissioned equipment provides no recovery capacity. |
+| Staged interconnection | Access is released as equipment and grid infrastructure become available. A given plan may specify firm capacity F and conditional capacity X. |
+| Workload flexibility | Postponing eligible computation and completing it by its original deadline. |
+| Recovery debt | Unfinished deferred work, tracked by arrival time and deadline. |
+| Hourly CFE matching | Matching a target share of each hour's consumption with attributable carbon-free generation in the same hour and applicable region. |
+| Deliverability | Meeting response, clean-energy accounting, and task completion requirements within the stated network, service, and information boundaries. |
 
-CFE is broader than renewable electricity alone; eligible sources depend on the accounting boundary. Matching concerns electricity attribution rather than tracing physical electrons. For illustration, consuming 100 MWh in an hour with an 80% target requires 80 MWh of attributable CFE within the relevant hour and region. This is illustrative arithmetic, not a study result. Workload shifting must also leave enough time, computing headroom, and, where applicable, CFE-compatible electricity for recovery.
+CFE eligibility follows the chosen accounting rules. Matching attributes electricity; it does not trace physical electrons. For example, consumption of 100 MWh with an 80% target requires 80 MWh of eligible attributable generation in that hour. Recovery consumption also counts.
 
+![Figure 1 Ramp-up, equipment, and grid progress determine stage resources](../figures/project_network_en.svg)
 
-![Figure 1. One workload resource for two electricity requirements](../figures/project_network_en.svg)
+**Figure 1 Ramp-up, equipment, and grid progress determine stage resources.** Construction and access trajectories are inputs. Hourly checks connect immediate reductions with later recovery and evaluate the given plan.
 
-**Figure 1. One workload resource for two electricity requirements.** Grid conditions and the modeled hourly CFE allowance both affect task scheduling. The resulting commitments are checked against the same tasks, power capacity, and deadlines.
+## 3 Research questions
 
-## 3 Three research questions
+First, at which stages do different combinations of business ramp-up, equipment commissioning, and on-time or delayed grid expansion constrain a given interconnection plan? The evaluation distinguishes unrealized demand, insufficient equipment, restricted grid supply, and inadequate recovery resources.
 
-The current thesis organizes the joint deliverability problem into three questions.
+Second, does the same instantaneous MW flexibility imply the same deliverability at different stages? The study identifies whether the binding constraint is currently deferrable work or equipment, power, and clean-energy resources before task deadlines. It also examines how the hourly CFE target moves these boundaries.
 
-First, how does the minimum required workload flexibility change as the hourly CFE target increases under fixed grid response requirements? The study seeks a frontier that distinguishes demonstrated delivery, bounded capacity requirements, and unresolved regions, and examines how deferrable workload and spare capacity for recovery alter it.
+Third, can an instantaneous-MW assessment or a fixed recovery-headroom assumption change the judgment about a staged plan? Matched comparisons with a full temporal assessment test whether stage acceptance or the comparison between plans changes.
 
-Second, how much additional capacity requirement or relief arises from serving both obligations, relative to the more demanding individual service? What signed capacity difference arises when separate planning is compared with a model that shares physical resources correctly? Neither the ordering of capacities nor the direction of the accounting bias is assumed.
+## 4 Research approach
 
-Third, can the capacity and policy selected during training deliver in unseen scenarios? Evaluation distinguishes grid response shortfalls, CFE shortfalls, joint service outcomes, and unfinished computation, establishing the conditions under which the planning conclusions remain useful.
+### 4.1 Three given progress trajectories
 
-## 4 Methods and comparison schemes
+The slow timescale describes business demand, equipment commissioning, and grid project status. The initial scope uses two or three equipment stages, one candidate grid project, and a small number of fixed access plans. Fast and slow ramp-up are crossed with on-time and delayed grid completion. Equipment trajectories are specified separately and must maintain consistent installation and availability states.
 
-### 4.1 A continuous hourly model
+The built network constrains the access that can be released and delivered; commissioned equipment K constrains task execution and recovery. Unfinished projects provide no additional capacity, and later commissioning cannot erase earlier service shortfalls. Existing F/X semantics apply: the normal state checks F+X, while the declared contingency states check F and permitted conditional calls on X. Workload capacity D and access capacity X are reported separately; relationships among equipment, work, and access require explicit mappings and network checks.
 
-The model connects grid operation, service calls, task postponement, and recovery. Its primary quantity is bidirectional workload adjustment capacity D. Curtailment power q and recovery power r share the constraint q+r≤D. Separate restrictions cover deferrable workload availability, deadlines, event duration and frequency, cumulative budgets, and recovery headroom. Recovery also requires spare computing capacity and, where applicable, sufficient CFE-compatible electricity in the recovery hour. An isolated MW limit therefore cannot establish complete delivery.
+### 4.2 Hourly execution, deferral, and recovery
 
-Each evaluation enrolls applicable requests and resulting postponed work over 168 consecutive hours. Up to 24 additional hours are observed when needed to determine enrolled outcomes, giving at most 192 simulated hours. Tasks are due 24 hours after creation. Debt and budgets persist across days. New work during follow-up continues to consume physical resources without recursively enlarging the enrolled scoring set. Missing necessary follow-up leaves the corresponding outcome unknown or right-censored; observed violations remain recorded.
+The operating layer tracks task arrivals, execution, deferral, and recovery. Let q denote deferred power-equivalent work and r the power consumed for recovery. They share a bidirectional adjustment capacity D:
 
-Decisions use only information already revealed. Within each scheme and parameter cell, a capacity claim requires one scheduling rule using only currently known information that delivers across all declared training scenarios. Selecting separate actions after learning each scenario's future would not satisfy this requirement.
+**q+r≤D.**
 
-### 4.2 Four comparison schemes
+Deferral is limited by eligible current work. Recovery is limited by commissioned equipment headroom, task compatibility, efficiency, and power supply. With baseline occupancy w in a common power-equivalent convention, current execution plus recovery must satisfy w-q+r≤K. Headroom released by q is counted once. Recovery debt is reduced using the declared efficiency, and late completion does not erase a missed deadline.
 
-| Scheme | Role and treatment |
+The K constraint uses power-equivalent computing resources; K is distinct from total meter-side electricity consumption P. The equipment-to-work-to-power mapping must be established before the main experiments. The main model will include commissioned-equipment idle power, task execution, and supporting loads in its actual power balance, so additional K can also increase electricity demand. This mapping remains an integration task; normalized examples are not calibrated equipment models.
+
+### 4.3 Network and hourly clean-energy checks
+
+For each construction state, the model recalculates available network capability, required reductions, and the power available for recovery. Response rules remain consistent, but requests can change with the actual network and load. Different construction plans cannot all inherit an unchanged request trace without justification.
+
+The main experiments will account for actual electricity consumption, including recovery and idle power in P; this will be verified with the equipment mapping. Plans use the same external clean-resource trajectory and attribution rules. Any allocation must conserve attributes and avoid double attribution; a plan cannot create clean resources through its own demand reduction. For target share α, consumption P, and attributable clean electricity Y, the check is αP≤Y.
+
+The service accounting rule must also be fixed. The existing operating study uses a specific contract in which independently promised grid and CFE reductions must both be delivered using one set of tasks, adjustment capacity, and recovery resources. The initial evaluation retains this named rule. Applying it to a particular project requires contract and metering evidence. Whether one reduction can count toward both services changes the obligation and cannot silently vary between plans.
+
+### 4.4 Information and time continuity
+
+Construction plans are specified before evaluation. Operating decisions use only information observed at that time. Paths with the same observed history must receive the same actions; future clean-energy peaks or delays cannot be used retrospectively to choose favorable recovery schedules.
+
+Adjacent hours carry debt, budgets, and operating states forward. Widely separated stage windows need explicit prior states and enough follow-up to assess task deadlines. Debt cannot be carried across unmodeled gaps or cleared automatically. Continuous operation across a stage boundary must use physically adjacent hours.
+
+## 5 Experimental comparisons
+
+Plans are compared using the same external task demand, deadlines, clean resources, and evaluation standards. Differences in equipment and grid commissioning are retained as differences between plans. A small end-to-end case and measurements of the complete computation path precede selection of the main experiment size.
+
+| Comparison | Question |
 |---|---|
-| Grid response only (network-only) | Serves grid response alone to identify its workload flexibility requirement. |
-| Hourly matching only (CFE-only) | Serves hourly CFE matching alone to identify its requirement. |
-| Joint commitments with shared resources (joint-correct) | Adds two separate service commitments and delivers them within one shared workload availability, capacity, debt, and timing budget. |
-| Separate-account planning (joint-B6) | Plans the services in separate accounts, each using full capacity and availability, regenerates actual actions from common service requests and one current workload state, using one shared physical resource. |
+| Fast/slow ramp-up × on-time/delayed grid completion | At which stage does a progress mismatch bind, given the equipment trajectory? |
+| Instantaneous MW, fixed recovery headroom, and full temporal assessment | Does omitting recovery space or deadlines change the assessment of the same plan? |
+| Limited changes in deferrable share, deadlines, and hourly CFE target | Where do judgments change, and does the proposed explanation persist? |
+| Fixed construction plans and policies on independent held-out paths | Does the selected plan continue to meet response, CFE, and task completion requirements? |
 
-The joint comparison adopts a specific additive commitment assumption: separately promised service quantities must both be delivered. This is a benchmark for separate obligations, rather than a universal rule for physical co-service or a resource optimum across all possible arrangements. The separate-account scheme measures the consequences of planning each obligation independently. Its actual actions are regenerated from common requests and one current workload state. Planning feasibility and successful shared execution are evaluated separately.
+Network-only, CFE-only, joint shared-resource, and separate-accounting diagnostics remain available to explain the two services. Stage combinations and parameter points will be specified after the small case is validated. The existing 1,900 parameter cells and their evidence retain their original definitions.
 
-### 4.3 Scenarios and evaluation
+Held-out paths do not participate in plan selection. Evaluation does not reoptimize the given construction plan; it executes the frozen operating policy using information observed at the time. Outputs include access allocations, commissioned capacity, business occupancy, recovery headroom, network and CFE shortfalls, overdue tasks, and unfinished work at each stage. A successful policy establishes performance only over its verified cases; an algorithmic failure does not prove that every policy fails. Minimum flexibility is reported as a point only when sufficient bound evidence exists, otherwise as an interval or unresolved status.
 
-The target-versus-capacity curve places the hourly CFE target on the horizontal axis and required workload adjustment capacity on the vertical axis. Comparing curves across workload limits will help explain whether current curtailment or later recovery is the main bottleneck.
+Existing public foundations include RTS-GMLC network data, Alibaba workloads, and Google power data. These are paired under stated assumptions rather than treated as observations from the same site and time. Stage paths, equipment power, task deadlines, and attribution are labeled by source or mechanism assumption. Equal-weight synthetic cases are not empirical ramp-up, delay, or default probabilities.
 
-The study uses RTS-GMLC grid data, Alibaba workload data, and Google power data through explicit modeling assumptions. These are modeled pairings, not observations of a joint distribution at one location and time. The 250 MW workload mapping is a simulation scale; business parameters are also stated as mechanism assumptions.
+![Figure 2 Evaluation from given stage paths to plan judgments](../figures/project_workflow_en.svg)
 
-The current exploratory design comprises nine combinations of deferrable fraction and recovery headroom, plus ten changes to individual parameters. Each of these 19 parameter sets uses 100 hourly CFE targets from 1% to 100%, producing 1,900 cells. Computation distinguishes valid lower bounds under the same complete contract, upper bounds witnessed by a complete delivering policy, and unresolved cases. Failure of one algorithm or fixed policy does not establish universal infeasibility.
+**Figure 2 Evaluation from given stage paths to plan judgments.** Comparable inputs and service definitions precede continuous operating checks. Stage bottlenecks and plan differences are interpreted after the complete computation cost is measured.
 
-Training and holdout scenarios remain separate. Capacity and policy are frozen after training evidence is established, then evaluated on holdout scenarios. Reports distinguish grid, CFE, and joint service shortfalls and unfinished work. Interpretation remains conditional on the declared support and mechanism assumptions.
+## 6 Existing foundations and remaining work
 
+The project has specifications for staged F/X, candidate grid projects, and nonanticipativity; selected-contingency DC operating benchmarks; and code for task deferral, recovery debt, and hourly CFE. Coupled one-to-three-hour synthetic cases and saved-state replay have been checked. These are development validations, not formal interconnection-capacity or service-risk results.
 
-![Figure 2. Research plan for joint workload flexibility](../figures/project_workflow_en.svg)
+An exactly checked six-hour example illustrates recovery timing. Two deferred jobs of 0.1 each require minimum bidirectional capacity of either 0.1 or 0.2 when the timing of clean recovery resources changes but their total and peak remain fixed. An additional example holds baseline occupancy at 0.2: increasing commissioned K from 0.3 to 0.4 permits a case that previously lacked recovery headroom. These normalized examples omit idle power, construction lead times, and investment optimization; they do not establish real project recommendations.
 
-**Figure 2. Research plan for joint workload flexibility.** The four schemes use the same external scenarios and applicable workload rules. After comparing capacity requirements, the selected plans are evaluated in new scenarios for grid response, clean-electricity matching, and task completion.
+In the earlier operating study, 1,856 of 1,900 CFE-related parameter cells are excluded by a local necessary condition at one hour because too little work can be deferred. This is a local arithmetic check; it has not established that the paired inputs can reach the corresponding network and reference operating states. It is neither 1,856 realized operating failures nor an experiment on the current staged plans. The other 44 cells are merely not excluded by that condition; network-only remains unresolved. Resource and workload mappings must be clarified before interpreting recovery effects, while preserving the earlier negative evidence.
 
-## 5 Relation to existing research
+Remaining work connects the three progress trajectories to operation, specifies the equipment-work-power mapping, validates a small case independently, and performs bounded stage comparisons. The existing 168-hour enrollment and up-to-24-hour follow-up chain still lacks a closed resource budget and full operating acceptance. New stage experiments require their own explicit design and budget. No full formal capacity frontier, empirical default probability, or engineering safety certification is available.
 
-Three established research areas provide the immediate foundations. Data center demand response, batch scheduling, and carbon-aware computing show how computation can be rescheduled and how power, duration, and recovery limits affect flexibility [5,7,13–20]. Flexible interconnection and capacity planning examine how conditional demand adjustment changes connection locations, capacity, and expansion choices [1–3,6]. Annual and hourly clean-electricity studies examine how the accounting interval changes procurement and workload scheduling [21–25].
+## 7 Prior work and intended contribution
 
-The closest work also covers joint congestion relief and renewable utilization, service commitments, and deliverability [4,26–31]. Fan and Zhao [30] link workload allocation to grid-service capacity commitments. Khanal et al. [31] represent duration, recovery, and annual limits in flexible capacity expansion. Building on these foundations, this study asks a specific question: under fixed grid-response rules, how does the required workload flexibility change as hourly CFE targets rise? It separates the limiting individual service, joint timing effects, and separate-account bias, then evaluates whether a selected plan delivers in new scenarios.
+Task shifting, recovery, hourly clean-energy matching, and construction planning all have direct precedents. Fan and Zhao connect workload queues with grid-service capacity commitment [DC14]; Khanal et al. include make-up and event constraints in capacity expansion [DC15]; Riepin et al. study shifting for clean computing [CFE05]. Shao et al. jointly plan long-term power-system and data-center investment [DC17]; Zhu et al. combine transmission construction with spatial migration [DC19]; Butt et al. link onsite resources, task deadlines, and minimum interconnection capacity [DC22].
 
-FERC network-service documents and the hourly accounting methods of EnergyTag and Google separately support the two institutional requirements. Direct evidence is still needed to establish their overlap within a real shared contract, metering boundary, and workload. This project therefore studies stated mechanism rules and retains that condition when interpreting results. Transmission expansion and robust planning [8–12] provide related grid planning methods.
+The specific question is whether a mismatch between business ramp-up and equipment/grid commissioning shifts the bottleneck from immediate reduction to recovery resources before deadlines, and changes the assessment of given staged plans at one connection point. Intended contributions are an explicit connection between stage resources and deliverability; matched plan judgments that differ despite equal instantaneous MW capability; and applicability boundaries for frozen plans on independent held-out paths.
 
-![Figure 3. Related research and the project's question](../figures/project_literature_landscape_en.svg)
+These are hypotheses to be tested. If full recovery constraints do not change plan judgments, the scope of their effect must be reported accordingly. If differences arise only from larger immediate requests, they cannot be attributed to recovery timing. Combining established components is not itself a priority claim; the contribution depends on controlled comparisons and reproducible explanations.
 
-**Figure 3. Related research and the project's question.** The upper panel groups the 31 reviewed academic works; the lower panels show the themes and how this study connects the two service requirements. Grouping explains research relationships. Schematic band widths do not represent publication counts or evidence strength.
+## 8 Execution and deliverables
 
-## 6 Current progress
+The sequence begins with service definitions and data mappings, followed by one complete small case containing stage changes, response, recovery, and CFE checks, with measured computation costs. A bounded set of stage plans and contrasts then forms the main experiment. Policies are subsequently frozen and evaluated on new paths before the figures and thesis are completed.
 
-As of 21 October 2026, planning and workload shifting model components exist, alongside DC grid benchmarks for a specified set of selected N-1 contingencies. Connected synthetic examples cover the initial hour and two-hour and three-hour sequences, including selected outage, repair, recovery debt, and unresolved branch cases. Saved results have also been reopened and replayed for verification. These cases check that the workflow follows its intended rules. They constitute synthetic development evidence and do not establish formal capacity or service-risk findings.
+Deliverables are an evaluation method for given staged interconnection plans, stage bottlenecks and applicability boundaries, traceable computation records, and a complete thesis. Construction progress enters as an input; joint optimization of future investment starts is a further research direction. Network conclusions are limited to the declared DC model and contingency set; engineering use requires the corresponding complete safety checks.
 
-The complete continuous 168-hour enrollment with up to 24 hours of follow-up, the production resource budget, formal capacity frontiers, and fixed-policy holdout results remain incomplete. Current work profiles repeated source checks and historical replay to support workflow optimization. There is no measured full 192-hour execution time or formal capacity or service risk result.
+## References
 
-## 7 Expected outputs and scope
+[DC14] Fan, Y.; Zhao, J. (2026). Harnessing Flexible Spatial and Temporal Data Center Workloads for Grid Regulation Services. arXiv:2602.01508. https://arxiv.org/html/2602.01508
 
-Expected outputs are target-versus-capacity frontiers, signed attribution across the four schemes, fixed-policy delivery outcomes in new scenarios, and records that trace inputs, carried states, and recovery outcomes. Together they should identify when workload flexibility can support both obligations and which workload or timing constraints limit delivery.
+[DC15] Khanal, S.; Roh, G.; Yao, B.; et al. (2026). Shift or curtail? How much data-center flexibility is worth depends on the host power grid. arXiv:2608.19622v1. https://arxiv.org/html/2608.19622
 
-The next steps proceed in order. First, verify the computational workflow and safe reuse of repeated checks, and establish the total resource budget. On that basis, complete the connected week-long simulation and subsequent task recovery, checking cross-day state and missing-data handling. Then calculate capacity requirements and defensible ranges under the current parameter design. Finally, fix the plan selected during training and evaluate both services and task completion in new scenarios.
+[CFE05] Riepin, I.; Brown, T.; Zavala, V. M. (2025). Spatio-temporal load shifting for truly clean computing. Advances in Applied Energy, 17, 100202. https://doi.org/10.1016/j.adapen.2024.100202
 
-Conclusions apply to the stated task rules, data scenarios, and grid-check scope. A capacity range is reported when only a range is established; missing evidence remains unknown. Deliverability means fulfilling the defined obligations under those conditions. Engineering security additionally requires full contingency coverage, AC analysis, and equipment and control checks.
+[DC17] Shao, Z.; Yu, N.; Wong, D. (2025). Stochastic Long-Term Joint Decarbonization Planning for Power Systems and Data Centers: A Case Study in PJM. International Journal of Electrical Power & Energy Systems, 173, 111377. https://doi.org/10.1016/j.ijepes.2025.111377
 
-## 8 References
+Model comparison uses arXiv:2510.25118v1. https://arxiv.org/html/2510.25118v1
 
-[1] Kim, D., Dong, L. and Xie, L. (2026). “Flexibility-aware framework for efficient planner-initiated siting of data center.” Nature Communications. https://doi.org/10.1038/s41467-026-72324-9
+[DC19] Zhu, M.; Kai, Q.; Liu, Y.; Yan, Y.; Zhao, H. (2026). Virtual Transmission Lines from Data Center Workload Migration: Coordinated Multi-Year Transmission Expansion Planning. arXiv:2610.13032v1. https://arxiv.org/html/2610.13032v1
 
-[2] Chen, Y. and Zheng, X. (2026). “To Defer or To Shift? The Role of AI Data Center Flexibility on Grid Interconnection.” ACM Sustainability Week. https://doi.org/10.1145/3765611.3815593; https://arxiv.org/abs/2604.05376
+[DC22] Butt, H. Z.; Fatima, R.; Li, X. (2026). Minimizing Grid Interconnection Capacity Requirements for AI Data Centers: A Developer-Side Planning Framework with Onsite Resources and Workload Flexibility. arXiv:2608.29359v1. https://arxiv.org/abs/2608.29359
 
-[3] Li, S., Fang, B. and Chen, C. (2026). “Risk-Aware Allocation of Transmission Capacity for AI Data Centers.” arXiv preprint arXiv:2604.08854. https://arxiv.org/abs/2604.08854
-
-[4] Wan, H. and Li, X. (2026). “Data Center Spatio-Temporal Load Flexibility in Security-Constrained Unit Commitment for Enhanced Grid Efficiency and Reliability.” arXiv preprint arXiv:2605.18517. https://arxiv.org/abs/2605.18517
-
-[5] Williams, C., Colangelo, P., Coskun, A. et al. (2026). “Power-Flexible AI Data Centers: A New Paradigm for Grid-Responsive Compute.” arXiv preprint arXiv:2606.25098. https://arxiv.org/abs/2606.25098
-
-[6] Mytton, D., Ashtine, M., Wheeler, S. and Wallom, D. (2023). “Stretched grid? Managing data center energy demand and grid capacity.” Oxford Open Energy. https://doi.org/10.1093/ooenergy/oiad014
-
-[7] Crozier, C. and Liska, M. (2025). “The Potential of Data Center Energy Demand To Provide Grid Flexibility.” Current Sustainable/Renewable Energy Reports. https://doi.org/10.1007/s40518-025-00258-9
-
-[8] Han, S., Kim, H.-J. and Lee, D. (2020). “A Long-Term Evaluation on Transmission Line Expansion Planning with Multistage Stochastic Programming.” Energies. https://doi.org/10.3390/en13081899
-
-[9] Webster, M. (2022). “A Multistage Stochastic Transmission Expansion Algorithm for Wide-Area Planning under Uncertainty.” Technical report. https://doi.org/10.2172/1737833
-
-[10] Akhavizadegan, F., Wang, L. and McCalley, J. (2020). “Scenario Selection for Iterative Stochastic Transmission Expansion Planning.” Energies. https://doi.org/10.3390/en13051203
-
-[11] Jabr, R. A. (2013). “Robust Transmission Network Expansion Planning With Uncertain Renewable Generation and Loads.” IEEE Transactions on Power Systems. https://doi.org/10.1109/TPWRS.2013.2267058
-
-[12] Li, W., Zhao, L., Bo, Y. et al. (2021). “Robust transmission expansion planning model considering multiple uncertainties and active load.” Global Energy Interconnection. https://doi.org/10.1016/j.gloei.2021.11.009
-
-[13] Wierman, A., Liu, Z., Liu, I. and Mohsenian-Rad, H. (2014). “Opportunities and Challenges for Data Center Demand Response.” 2014 International Green Computing Conference, pp. 1–10. https://doi.org/10.1109/IGCC.2014.7039172
-
-[14] Liu, Z., Wierman, A., Chen, Y. et al. (2013). “Data center demand response.” ACM SIGMETRICS. https://doi.org/10.1145/2465529.2465740
-
-[15] Goiri, I., Le, K., Haque, M. E. et al. (2011). “GreenSlot.” SC Conference. https://doi.org/10.1145/2063384.2063411
-
-[16] Goiri, I., Katsak, W., Le, K. et al. (2013). “Parasol and GreenSwitch.” ASPLOS. https://doi.org/10.1145/2451116.2451123
-
-[17] Qureshi, A., Weber, R., Balakrishnan, H. et al. (2009). “Cutting the electric bill for internet-scale systems.” ACM SIGCOMM. https://doi.org/10.1145/1592568.1592584
-
-[18] Liu, Z., Lin, M., Wierman, A. et al. (2011). “Geographical load balancing with renewables.” ACM SIGMETRICS Performance Evaluation Review. https://doi.org/10.1145/2160803.2160862
-
-[19] Radovanović, A., Koningstein, R., Schneider, I. et al. (2023). “Carbon-Aware Computing for Datacenters.” IEEE Transactions on Power Systems. https://doi.org/10.1109/TPWRS.2022.3173250; https://arxiv.org/abs/2106.11750
-
-[20] Kwag, H.-G. and Kim, J.-O. (2012). “Optimal combined scheduling of generation and demand response with demand resource constraints.” Applied Energy. https://doi.org/10.1016/j.apenergy.2011.12.075
-
-[21] de Chalendar, J. A. and Benson, S. M. (2019). “Why 100% Renewable Energy Is Not Enough.” Joule. https://doi.org/10.1016/j.joule.2019.05.002
-
-[22] Miller, G. J., Novan, K. and Jenn, A. (2022). “Hourly accounting of carbon emissions from electricity consumption.” Environmental Research Letters. https://doi.org/10.1088/1748-9326/ac6147
-
-[23] Riepin, I. and Brown, T. (2024). “On the means, costs, and system-level impacts of 24/7 carbon-free energy procurement.” Energy Strategy Reviews. https://doi.org/10.1016/j.esr.2024.101488; https://arxiv.org/abs/2403.07876
-
-[24] Riepin, I., Jenkins, J. D., Swezey, D. and Brown, T. (2025). “24/7 carbon-free electricity matching accelerates adoption of advanced clean energy technologies.” Joule. https://doi.org/10.1016/j.joule.2024.101808
-
-[25] Riepin, I., Brown, T. and Zavala, V. M. (2025). “Spatio-temporal load shifting for truly clean computing.” Advances in Applied Energy, 17, 100202. https://doi.org/10.1016/j.adapen.2024.100202; https://arxiv.org/abs/2405.00036
-
-[26] Wan, H., Fang, L. and Li, X. (2025/2026). “Grid Operational Benefit Analysis of Data Center Spatial Flexibility: Congestion Relief, Renewable Energy Curtailment Reduction, and Cost Saving.” arXiv preprint arXiv:2511.08759, v1 2025-11-11, v2 2026-03-27. https://arxiv.org/abs/2511.08759
-
-[27] Ma, D., Ye, Y., Wu, Y. et al. (2025). “Bi-Level Optimisation Model for Harvesting Spatial-Temporal Load Shifting Flexibility of Data Centres Using Endogenously Formed Locational Price Signal.” IET Smart Grid, 8(1), e70020. https://doi.org/10.1049/stg2.70020
-
-[28] Lin, L. and Chien, A. A. (2025). “Distribution and Management of Datacenter Load Decoupling.” arXiv preprint arXiv:2511.08936. https://arxiv.org/abs/2511.08936
-
-[29] Zhang, W., Fang, L., Zhao, F. et al. (2025). “Operational risk assessment of power system considering transmission limitation on flexible resources and its application to SCUC.” AIP Advances, 15, 115016. https://doi.org/10.1063/5.0302342
-
-[30] Fan, Y. and Zhao, J. (2026). “Harnessing Flexible Spatial and Temporal Data Center Workloads for Grid Regulation Services.” arXiv preprint arXiv:2602.01508. https://arxiv.org/html/2602.01508
-
-[31] Khanal, S., Roh, G., Yao, B. et al. (2026). “Shift or curtail? How much data-center flexibility is worth depends on the host power grid.” arXiv preprint arXiv:2608.19622. https://arxiv.org/html/2608.19622
-
-## 9 Institutional and Standards Sources
-
-- Federal Energy Regulatory Commission (2026). 195 FERC ¶ 61,216; Docket EL26-69-000, Order Instituting Proceeding Under Section 206 of the Federal Power Act. https://www.ferc.gov/sites/default/files/2026-06/EL26-69-000.pdf
-- EnergyTag (2024). Granular Certificate Matching Standard, Version 1. https://energytag.org/wp-content/uploads/2024/03/Granular-Certificate-Matching-Standard_V1.pdf
-- Google (2021). 24/7 Carbon-Free Energy: Methodologies and Metrics. https://sustainability.google/reports/24x7-carbon-free-energy-methodologies-metrics/
-
-## 10 Sources for Design and Progress
-
-- [Research scope and primary-paper focus](../../agent.md): the current research scope and evidence boundaries;
-- [Finite-v2 contract](../../configs/rq2_finite_mechanism_protocol_candidate_v2.DRAFT.yaml) and [model specification](../../docs/model_spec/rq2_finite_mechanism_protocol_candidate_v2.md): 168h, 24h, q+r≤D, 1,900 cells, and development authorization;
-- [Execution plan](../../docs/plan/科研项目执行步骤.md) and [blocker register](../../docs/model_spec/blocker_register.md): stage evidence, open issues, and closure conditions;
-- [H1 end-to-end milestones](../../docs/plan/H1_端到端里程碑验收_v1.md): acceptance order from complete hour-0 to formal execution;
-- [Chain_07 retained timing](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/timing.jsonl) and [source-boundary check](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/source_boundary_status_rechecked_01.json): development progress and approved source coverage;
-- [Complete hour-0 report](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/complete_integration_report_supplement_04.md) and [independent supplement 04](../../results/tables/rq2_h1_hour0_end_to_end_v2_non_authoritative/chain_07/postcheck_supplement_completion_04.json): the synthetic first-hour chain and independent-process saved replay;
-- [Two-hour batch-replay acceptance](../../results/tables/rq2_h1_cross_hour_batch_v2_non_authoritative/acceptance_report.md) and [machine-readable postcheck](../../results/tables/rq2_h1_cross_hour_batch_v2_non_authoritative/connected_01_postcheck.json): six paired lane-hours and saved-state comparisons;
-- [Three-hour outage and repair acceptance](../../results/tables/rq2_h1_cross_hour_outage_v1_non_authoritative/acceptance_report.md) and [machine-readable postcheck](../../results/tables/rq2_h1_cross_hour_outage_v1_non_authoritative/connected_03_postcheck.json): seven paired lane-hours, lane stopping, missing input, and same-process read-only reopen;
-- [B0-B2 results](../../results/tables/rts24_b0_b2_summary.json), [B3-B5 results](../../results/tables/rts24_b3_b5_summary.json), and [24-hour DC benchmark](../../results/tables/rts_gmlc_google_day0_full24h_selected_n1_dc_scuc_v1/summary.json): original evidence for the existing grid and planning calculations.
-
-
-### Supplementary explanation of capacity measures
-
-The four capacities are D_N for grid-only, D_C for CFE-only, D_J for shared joint commitments, and D_B for separate-account planning. The larger individual-service requirement is the comparison baseline. The decomposition is \(I_{joint}=D_J-\max(D_N,D_C)=I_{sep}+A_{B6}\), where \(I_{sep}=D_B-\max(D_N,D_C)\) and \(A_{B6}=D_J-D_B\). Capacity evidence determines the signs.
-
-The current design contains 19 workload parameter sets and 100 hourly CFE targets, totaling 1,900 cells. The linked sources retain the precise parameters, data support, and original computational records.
+Project evidence: [literature library](../../docs/literature/literature_matrix.csv), [construction evidence table](../../docs/literature/construction_evidence_20261021.csv), and [existing evidence and small examples](../../docs/plan/RQ2_创新性核查与研究判断_20261021.md).
