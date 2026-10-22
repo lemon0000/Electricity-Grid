@@ -1,0 +1,37 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "reviewer_role": "sol_reviewer",
+  "review_kind": "independent_read_only_R3_PRE_SEAL",
+  "status": "no_remaining_substantive_development_findings",
+  "official_verdict": null,
+  "receipt_or_seal_created": false,
+  "closed_by_versioned_successor": [
+    {"id": "F14", "issue": "retained CAS closure was not checked before writer adoption", "resolution": "Session and headers bind exact cumulative CAS keys, pure pack computes expected old plus new closure before publication, final inventory must match"},
+    {"id": "F15", "issue": "old root entries could disappear while the next entry was published", "resolution": "exact root inventories, previous SHA chain, prepublication old-root and final old-plus-new root checks"},
+    {"id": "FRESHNESS", "issue": "directory or runtime could change during later bookends", "resolution": "retain original directory identity and perform final runtime check after CAS/root/directory observations"}
+  ],
+  "open_findings": [],
+  "ordinary_checks": {"v2_unique": 24, "runs": [{"passed": 19, "seconds": 58.51}, {"passed": 5, "deselected": 19, "seconds": 7.08}], "prior_unique": 358, "combined_unique": 382},
+  "post_run_independent_observations": {
+    "new_core_files": 138,
+    "new_core_bytes": 286322,
+    "old_core_files_preserved": 531,
+    "old_core_bytes_preserved": 558007,
+    "new_direct_sources": 6,
+    "old_direct_sources": 13,
+    "runtime_repository_sources": 28,
+    "external_entries": 10,
+    "reference_calls": 37,
+    "reference_descriptions": 121,
+    "role_P0_raw_min_max": [37, 10, 37, 37],
+    "old_full_compiler_and_solver_requests": 0,
+    "success_CAS_keys": 57,
+    "fresh_full_metrics_match_old_prefix": true,
+    "two_deletion_cases_not_adopted_and_reader_rejected": true,
+    "intact_unknown_confirmed_one_row_without_terminal_or_resume": true,
+    "watchdog_exit_code": 0,
+    "sampled_tree_RSS_bytes": 418926592,
+    "read_only_postcheck_exit_code": 0
+  },
+  "limits": ["two-hour analytic prefix only", "local filesystem bookends, not a concurrent transaction or durability guarantee", "full key and prefix metadata still grows", "public numeric, complete FX temporal, C/D/E resource, native and formal remain open"]
+}

@@ -1,0 +1,48 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "review_kind": "independent_read_only_PRE_SEAL_development_findings",
+  "reviewer_role": "independent_read_only_reviewer",
+  "status": "versioned_successor_required",
+  "official_verdict": null,
+  "receipt_or_seal_created": false,
+  "closed_findings": [
+    {"id": "S1", "issue": "noncanonical typed image and loose dataclass types", "resolution": "strict registry fields and pure canonical repack SHA"},
+    {"id": "S2", "issue": "late complexity and publication budgets", "resolution": "JSON pre-scan, bounded directory iteration, pure full-closure budget before publication"},
+    {"id": "S3", "issue": "CAS final/pending conflict could masquerade as dedup", "resolution": "reject conflict and refuse pending during ordinary put"},
+    {"id": "S4", "issue": "directory replacement and memo freshness", "resolution": "directory identity bookends and per-operation used-byte/inventory rechecks"},
+    {"id": "J1", "issue": "genesis alone did not detect a removed suffix", "resolution": "mandatory external head/count/state/closed binding"},
+    {"id": "J2", "issue": "failure witness presence/bytes/outcomes were not trusted", "resolution": "external failure SHA and exact schema/context/outcome checks"},
+    {"id": "J3", "issue": "pending terminal checkpoint could be called an unaccepted arrival", "resolution": "separate pending terminal checkpoint field"},
+    {"id": "L1", "issue": "watchdog scan/exit races and exceptional cleanup", "resolution": "single-stat rename handling, finally-owned-tree cleanup, wait and terminal record"},
+    {"id": "L2", "issue": "direct old build helper absent from the probe source list", "resolution": "13 direct source inputs and corresponding bookends"},
+    {"id": "L3", "issue": "attempt closed-head could be reported as terminal entry", "resolution": "separate closed-entry and actual-terminal flags"},
+    {"id": "L4", "issue": "aggregate counts could conceal equal-offset stage/role errors", "resolution": "exact per-stage, per-fresh and per-role assertions"},
+    {"id": "L5", "issue": "last report/completion could escape watchdog limits", "resolution": "stable terminal scan, wall/storage checks and reserved launcher bytes/file"},
+    {"id": "L6", "issue": "raw process arguments could expose unrelated private values", "resolution": "PID/name/argv SHA/repository boolean only with fake-token test"}
+  ],
+  "open_findings": [
+    {"id": "F14", "reviewer_role": "sol_reviewer", "issue": "writer does not bind the complete retained CAS closure before adopting a candidate", "evidence": "deleting genesis fixture CAS still allowed the next hour; fresh replay then rejected missing evidence", "disposition": "v1 API remains historical; corrected and independently checked in journal_v2", "successor_evidence": "../../staged_rts24_journal_v2_non_authoritative/closure_probe_01"}
+  ],
+  "post_run_independent_observations": {
+    "core_files_sha_and_bytes_matched": 531,
+    "core_bytes": 558007,
+    "reference_compiler_calls": 500,
+    "reference_descriptions": 1324,
+    "external_provider_calls": 15,
+    "external_provider_descriptions": 83,
+    "fresh_children_exit_zero": 3,
+    "failure_and_missing_input_cases_verified": 5,
+    "source_bindings_and_old_preservation_matched": true,
+    "watchdog_exit_code": 0,
+    "max_observed_event_interval_seconds_approx": 6.4485,
+    "sampled_tree_rss_bytes": 417968128
+  },
+  "remaining_limits": [
+    "analytic five-hour three-bus evidence only",
+    "selected dependency closure, not a production environment seal",
+    "sampled RSS rather than an exact continuous peak",
+    "public numeric points and full FX temporal backing remain open",
+    "long-horizon and real native failure costs unmeasured",
+    "no native, main-experiment, formal or resource authority"
+  ]
+}

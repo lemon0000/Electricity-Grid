@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-23最新开发检查点：以[保存证据交接](continuation_handoff_20261023_journal.md)的journal_v2继续。v1三方法五小时/3 fresh的一次测量保留（500/1324、outer75.1158s、531核心）；最终领域审查F14及v2草稿F15由完整CAS/root集合、链与最终依赖核验修复。新后继仅复用旧前两小时+1 fresh+3失败分支，37/121、outer27.9132s、采样tree RSS418926592B、138核心286322B，0旧full compiler/solver/native；见[新报告](../../results/tables/staged_rts24_journal_v2_non_authoritative/closure_probe_01/validation_report.md)。共382项不同普通检查通过；旧B1–B3/C/build/causal及v1绑定字节一致。公共RTS-24方向保留，公共数值点/g、139节点完整合同层、反事实F/X时序、长cohort/真实失败与IO/前缀增长仍待测，C整体性能和D/E点数/资源仍OPEN；native包须先登记并另获授权。以下段落保留各自时点含义。
+
 2026-10-22，`DRAFT_NONAUTHORITATIVE`。接续[B3/C顺序](staged_deliverability_b3_c_next_steps_v1.md)、[B3规格](../model_spec/staged_termination_development_v1.md)及[有界诊断合同](staged_deliverability_b3_development_contract_v1.md)。本页安排C的交付，不登记或启动主实验，不改变旧实验权限。
 
 同日新增[连续业务后继](continuation_handoff_20261022_causal.md)：child raw/min/max的数值最优性消费、三方法独立连续账本、actual零额外削减闭环和独立策略/余额审计已通过269项开发检查。证据限解析测试，公共normal/P0数值点与g仍未知；journal/关闭/fresh保存重放未实现。当前prefix重审和state摘要按Σt增长，需先做无损去重及完整新路径有界实测；C整链和D/E预算仍OPEN，不以测试wall准入。
