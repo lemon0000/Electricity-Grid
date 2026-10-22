@@ -35,15 +35,19 @@ B2调用计数阅读时并看[运行后澄清](staged_deliverability_b2_count_cl
 
 介绍入口：[paper/drafts/README.md](../../paper/drafts/README.md)。
 
-- [中文正文](../../paper/drafts/project_introduction.md)及[中文PDF](../../paper/drafts/project_introduction.pdf)，PDF共6页。
-- [英文正文](../../paper/drafts/project_introduction_en.md)及[英文PDF](../../paper/drafts/project_introduction_en.pdf)，PDF共7页。
+- [中文正文](../../paper/drafts/project_introduction.md)及[中文PDF](../../paper/drafts/project_introduction.pdf)，PDF共7页。
+- [英文正文](../../paper/drafts/project_introduction_en.md)及[英文PDF](../../paper/drafts/project_introduction_en.pdf)，PDF共8页。
 - 当前介绍使用的框架与流程图：`paper/figures/project_network_{cn,en}.svg`、`paper/figures/project_workflow_{cn,en}.svg`。
 - [论文路线图](RQ2_论文路线图.md)、[研究缺口](../literature/research_gap.md)和[既有证据报告](RQ2_创新性核查与研究判断_20261021.md)已增加当前范围说明。
-- [文献库](../literature/literature_matrix.csv)共42条；[当前引用映射](../literature/introduction_reference_map_20261022.csv)对应DC14、DC15、CFE05、DC17、DC19、DC22六篇；[建设专题证据表](../literature/construction_evidence_20261021.csv)保留具体核验范围。
+- [文献库](../literature/literature_matrix.csv)共42条；[当前引用映射](../literature/introduction_reference_map_20261022.csv)将26条正文参考文献与库内ID逐项对应；[来源核对记录](../literature/introduction_source_checks_20261022.json)区分摘要、部分章节及既有全文依据；[建设专题证据表](../literature/construction_evidence_20261021.csv)保留原核验范围。
+
+同日介绍修订：面向导师的综述按“已有研究做到了什么、仍需回答什么、本项目因此做什么”组织柔性接入、任务恢复、分期建设与小时清洁匹配四组文献。正文集中说明当前研究设计与预期成果，开发进度由研究执行记录维护。只补全FLEX02与FLEX03题名，其余文献科学编码和阅读等级保留。
 
 重复的建设主题介绍、重复框架图、未使用的旧文献图及其单用途生成脚本已删除。活动文档入口均指向上述主介绍；历史结果中的原始哈希与状态快照保留。
 
-10月22日完成的验证：中英文范围与数值一致；52个现有本地链接可解析；六篇引用可回查文献库；四个SVG可解析；两份PDF的标题和中文文本为有效Unicode、无替换字符，各有7个HTTPS文献链接且无本地文件链接；全页预览及重点图文页未见裁切、重叠或缺字；`git diff --check`通过。只读文档审查最终无High或Medium发现，属于非正式文档核查，不是正式研究审查凭据。本轮没有修改`src/`、`configs/`、`experiments/`、`tests/`或`results/`。
+本次26条引用介绍的核查：中英文书目逐字一致，所有引用均在正文使用并可回查42条文献库；四个SVG可解析；所检查的22个本地链接均可解析；两份PDF分别7页和8页，各有26个唯一HTTPS文献链接，无本地文件URI与替换字符。全页预览及重点图表、公式页未见裁切或重叠；只读文本与来源审查无剩余High、Medium或Low发现。本轮为介绍、文献映射及配图修订，未修改模型、配置、实验、测试或结果；不形成正式研究审查凭据。当前本机文档核查记录位于`.git/intro_references_20261022/`。
+
+前次六篇引用介绍的验证记录（历史）：中英文范围与数值一致；52个当时的本地链接可解析；六篇引用可回查文献库；四个SVG可解析；两份PDF的标题和中文文本为有效Unicode、无替换字符，各有7个HTTPS文献链接且无本地文件链接；全页预览及重点图文页未见裁切、重叠或缺字；`git diff --check`通过。该次只读文档审查无High或Medium发现，属于非正式文档核查，不是正式研究审查凭据。那次介绍修订没有修改`src/`、`configs/`、`experiments/`、`tests/`或`results/`。
 
 本机核查与发布记录位于`.git/intro_sync_20261022_b614/`，仅本机保留，不随克隆传输；可移植的研究说明与依据是已跟踪的正文、文献表、规格和既有结果。生成本轮介绍的临时目录已清理。
 
