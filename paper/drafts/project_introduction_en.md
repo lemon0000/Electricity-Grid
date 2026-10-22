@@ -10,13 +10,15 @@ Growing AI demand places pressure on electricity supply and grid access. The IEA
 
 These paths may become misaligned. Equipment and business may be ready while a grid reinforcement is still under construction, requiring lower electricity withdrawal during some hours. Eligible tasks can be deferred and completed later. Recovery, however, requires spare computing equipment, power headroom, and electricity that meets the clean-matching requirement before the original deadlines. Reducing demand now does not by itself guarantee later task completion.
 
-![Figure 1 Misaligned business equipment and grid progress on one time axis](../figures/project_rampup_en.svg)
-
-**Figure 1 Misaligned business, equipment, and grid progress (conceptual cartoon).** Three scenes show the same center during early operation, when work and equipment are ready but reinforcement is still being built, and after grid completion. The orange spotlight marks the mismatch to assess. Only commissioned assets provide current capability. Counts and spacing are illustrative; grid completion alone does not establish full delivery.
-
 Ramp-up changes both the source and the limits of flexibility. Early operation may offer spare equipment for recovery but too little eligible work to defer. Later demand growth may increase deferrable work while reducing recovery headroom. Timely equipment additions may ease that pressure. Which stage is more deliverable therefore depends on the relative progress of business, equipment, and the grid.
 
 At one fixed point of interconnection, the project develops an hourly assessment of a small set of given construction and access plans. It identifies the stages in which each plan can deliver, the shortfalls that arise, and whether immediate response or recovery before deadlines is responsible.
+
+Figure 1 connects the whole study: three given progress paths and common service rules feed three assessments. The full temporal assessment links deferral, debt, recovery, and metered power. Stage judgments are compared before the plan, capacity, and policy are frozen for execution on independent paths. Figures 2–4 expand recovery, progress mismatch, and network/CFE checks.
+
+![Figure 1 Overall project research framework](../figures/project_framework_en.svg)
+
+**Figure 1 From given progress paths to stage judgments and independent testing (overall framework).** Read downward through common inputs, three parallel assessments, stage judgments, and frozen-policy holdout. Blue folders are tasks; orange folders are deferred debt. Recovery needs equipment, power, hourly CFE, and compliance with original deadlines; debt and budgets persist across hours. Metered power P enters network and CFE checks. The frozen plan and an independent new path jointly feed holdout execution to identify applicability and failure regions. The figure depicts study design.
 
 ## 2 Related research, remaining questions, and project focus
 
@@ -68,7 +70,7 @@ For example, an hour with 100 MWh consumption and an 80% target needs 80 MWh of 
 
 ![Figure 2 Recovery conditions and alternative outcomes for deferred tasks](../figures/project_recovery_en.svg)
 
-**Figure 2 How deferred tasks are recovered (conceptual cartoon).** Orange starred folders represent one deferred cohort: waiting on the left, seeking commissioned equipment, power headroom, and hourly CFE in the middle, and reaching alternative on-time or shortfall/overdue outcomes on the right. Recovery remains subject to the action budget, efficiency, and original deadlines. Late recovery retains an observed violation. Clock faces symbolize time and deadlines.
+**Figure 2 How deferred tasks are recovered (expanded framework operation).** Orange starred folders represent one deferred cohort: waiting on the left, seeking commissioned equipment, power headroom, and hourly CFE in the middle, and reaching alternative on-time or shortfall/overdue outcomes on the right. Recovery remains subject to the action budget, efficiency, and original deadlines. Late recovery retains an observed violation. Clock faces symbolize time and deadlines.
 
 ## 4 Research questions
 
@@ -86,9 +88,9 @@ The model uses two or three equipment stages, one candidate grid project, and a 
 
 Normal-state network checks cover the full F+X allowance. The declared contingency set checks F and the contractually permitted calls on X. The built network determines required reductions and power headroom during recovery, recalculated for each plan. Workload adjustment capacity D and access allowance X are distinct, linked through tasks, electricity consumption, and network checks.
 
-![Figure 3 Computing metered power network and hourly CFE at one connection point](../figures/project_network_en.svg)
+![Figure 3 How progress mismatch changes operating and recovery conditions](../figures/project_rampup_en.svg)
 
-**Figure 3 Checking resources and electricity at one center (conceptual cartoon).** The thick blue cable supplies one center through a fixed-point meter. Racks and cooling equipment illustrate that metered power P includes idle, execution, recovery, and support loads. The ledger, certificates, and thin dotted links represent hourly CFE attribution; the small check sheet combines consumption records with attributable resources. Lower scenes denote computing, network-power, and clean-matching checks. Bars and clocks are symbolic. Network assessment remains within the declared DC model and contingency set.
+**Figure 3 How the three progress paths change constraints (expanded framework inputs).** Three scenes show the same center during early operation, when work and equipment are ready but reinforcement is still being built, and after grid completion. Task arrivals define current work; commissioned equipment defines available K and idle consumption; the built grid defines calls and recovery supply. The orange spotlight marks the mismatch to assess. Full delivery is reassessed after commissioning. Counts and spacing are illustrative.
 
 ### 5.2 Link execution, deferral, recovery, and metered power
 
@@ -105,6 +107,10 @@ Metered power P includes the idle consumption of commissioned equipment, task ex
 The model derives the full grid call from the current network and pre-response baseline power, then checks whether physical response covers it. Clean matching requires αPΔt≤y≤Y in each interval: α is the target share, Δt the interval duration, y the allocated energy, and Y the externally specified attributable limit. Power P includes idle and recovery consumption. Plans share the same external clean resources and allocation rules.
 
 The main comparison specifies independent reduction commitments: reductions separately promised to the grid and CFE services must be delivered using the same equipment, tasks, and recovery resources. Each unit of deferred work is allocated to one promise, and actual power is counted once. This is an explicit service-scenario assumption, consistently applied across comparisons; applicability to a particular project depends on its contract and metering arrangements.
+
+![Figure 4 How metered power enters network and hourly CFE checks](../figures/project_network_en.svg)
+
+**Figure 4 From computing tasks to power and two checks (expanded framework constraints).** The thick blue cable supplies one center through a fixed-point meter. P includes idle, execution, recovery, and support loads. Network checks use actual power; hourly CFE accounting matches consumption records with attributable resources for that hour. The ledger and thin dotted links denote attribution. Lower scenes assess computing resources, network power, and clean matching. Symbols are illustrative; network judgments remain within the declared DC model and contingency set.
 
 ### 5.4 Preserve chronology and information
 
@@ -127,10 +133,6 @@ The main experiment compares a small number of given plans under the same extern
 Results report access allowances, commissioned capacity, workload occupancy, deferral and recovery trajectories, grid and CFE shortfalls, overdue tasks, and unfinished work by stage. Full contract and task delivery are assessed before attributing a bottleneck. Matched-call cases serve as mechanism diagnostics; actual plan comparisons retain calls that change with the network. Minimum capacity is reported as a point only with adequate bound evidence; otherwise the result remains an interval or unresolved.
 
 The data design uses traceable public network and workload sources and identifies the origins of equipment-power, deadline, stage-progress, and clean-allocation parameters separately. Cross-source records paired through stated assumptions support mechanism scenarios. Equal-weight comparisons of such scenarios do not estimate real ramp-up, construction-delay, or violation probabilities.
-
-![Figure 4 Matched assessment comparisons and independent holdout checks](../figures/project_workflow_en.svg)
-
-**Figure 4 Comparing assessments, then testing applicability (study-design cartoon).** Three researchers inspect common task, equipment, and grid inputs. A camera, ruler, and filmstrip represent instantaneous-MW, fixed-recovery-headroom, and full temporal assessments. The given plan and operating policy are then sealed for causal execution on independent holdout scenarios at the same fixed connection point. The winding path symbolizes a new chronology. Comparisons retain null and failure regions; judgments require computational evidence.
 
 ## 7 Intended contributions and deliverables
 
