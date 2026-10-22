@@ -103,25 +103,18 @@ reviewer isolated V4 连续两次失败，且 exact argv/stdout/journal/state/re
 `e2138fd2038a6d330149e05e01507618f646bd5a9c5f4d60e026507242f16111`。该证据不建立失败根因，也不是
 V8 finding；V4 保持 sealed/superseded。V7/V8 fast probes 与全部 66 个 V8 tests 仍在 current-state broad 中保留。
 
-## 论文主线聚焦（RQ2）
+## 当前毕业论文与既有研究基础
 
-毕业论文/期刊投稿的主线聚焦 **RQ2：网络安全与小时级CFE共同约束下的业务柔性
-可交付前沿与不足归因**。确认性设计比较
-`network-only / CFE-only / joint-correct / joint-B6`，以
-`I_joint = D_J - max(D_N,D_C)`为主容量指标，并分解
-`I_joint = I_sep + A_B6`。B6用于量化分离时序记账相对correct造成的有符号容量
-偏差，并在共享物理包络中评估冻结策略后果。科学协议见
+当前论文面向业务达产、设备投运与电网扩建进度错位，在固定接入点评价少量给定分阶段建设与接入计划，解释即时削减、期限内恢复及小时CFE对履约判断的影响。范围、工作顺序和完成标准见`agent.md`第2–6及14节，介绍与PDF见[材料入口](paper/drafts/README.md)。
+
+既有RQ2四臂协议保留`network-only / CFE-only / joint-correct / joint-B6`及
+`I_joint = D_J - max(D_N,D_C)`、`I_joint = I_sep + A_B6`的原定义。协议见
 [联合服务可交付前沿确认性方案v2](docs/plan/RQ2_联合服务可交付前沿确认性方案_v2.md)；
 [v1科学基础](docs/plan/RQ2_联合服务可交付前沿确认性方案_v1.md)保持不可变。
 
-本 README 其余部分描述的是**更广的项目全景与共享基础设施**（L0-M6、B0-B5 基线、
-RTS-GMLC 选择性 N-1 基准、AC 复算与 repair 认证链）。这些不是需要删除的"旧目标"：
-RQ2 的 B6 错误基线与共享预算复用 `deterministic_fx` / 随机基线脚手架，B2-B5 也是 RQ2
-叙事的对照基线，RQ1 多阶段自适应作为后续扩展保留其脚手架。论文只是从全景中**收窄主线**，
-而非替换代码树。范围与创新定位的权威来源仍是 `agent.md`（§4 已将 RQ2 定为首篇主创新），
-数学规格见 `docs/model_spec/formulation.md`。
+本README后续的L0-M6、B0-B5、网络基准、AC与repair记录按各自日期和绑定合同解释。它们提供可复用基础及历史证据，当前阶段设计另行核定规格、参数和计算预算；范围更新不修改既有冻结文件或解除执行门禁。
 
-Current scope includes the reproducible grid-security foundation, deterministic
+Existing project foundations include the reproducible grid-security foundation, deterministic
 quarterly fixed-POI expansion, B0-B5 synthetic planning mechanisms and
 fixed-policy holdout, the F1-F3 duration/recovery mechanism gate, and the M6
 chronological input/dispatch interface. Named six-hour and full-day native

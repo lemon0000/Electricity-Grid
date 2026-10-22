@@ -2,9 +2,9 @@
 
 创建日期：2026-08-20；历史状态更新：2026-09-03；介绍与文献导航增补：2026-10-22
 适用范围：RQ2研究导航、历史协议与当前毕业论文方案的衔接。2026-10-22讨论确定的毕业论文设计见下节。
-本页是导航与状态映射，不重述已冻结的科学契约。权威来源仍是 `agent.md`（范围/路由/审查；§4 已将 RQ2 定为首篇主创新、RQ1 降为后续扩展）、`docs/model_spec/formulation.md`（数学规格）、`docs/model_spec/blocker_register.md`（阻塞状态）与 `docs/literature/`（文献与缺口）。
+本页是导航与状态映射。当前毕业论文目标、范围与工作顺序见`agent.md`第2–6及14节；路由与审查见其第7节。各实验仍由相应数学规格、冻结配置和结果证据约束，阻塞状态见`docs/model_spec/blocker_register.md`，文献与缺口见`docs/literature/`。
 
-> 定位约束（来自 `agent.md` 与 project_memory）：RQ2 不改写冻结的 B3/B4/B5 基线与 repair-010 认证链；本机只做代码+单测，正式长求解与预注册留给执行机 + 用户授权。
+> 历史RQ2协议与分工：冻结B3/B4/B5、repair认证链及其开发/执行边界保持原定义。当前阶段研究按上方范围与`agent.md`第7、9节推进，范围更新不构成正式运行授权。
 >
 > 2026-08-25 scope amendment：本页保留早期显式X研究蓝图。当前公开边缘
 > v6 successor的直接estimand是`normalized minimum flexibility

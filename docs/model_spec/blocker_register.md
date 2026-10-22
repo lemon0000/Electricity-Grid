@@ -1,5 +1,11 @@
 # 当前问题与阶段门禁登记
 
+2026-10-22范围入口：当前论文工作顺序和交付标准见`agent.md`第2–6及14节；以下各实验的原有门禁仍适用于对应包。
+
+历史活文案依赖：`tests/test_rq2_joint_deliverability_preregistration_v1.py::test_live_scope_and_status_documents_reference_the_successor`要求主介绍保留旧46-cell文案与公式，而当前介绍已转为给定阶段计划评价。该测试被`configs/rq2_joint_deliverability_preregistration_v1.SHA256SUMS.json`绑定，本轮保留其原字节及全部冻结工件，不加回旧介绍以满足文案断言。这是历史文案导航与当前介绍的依赖漂移，不等于冻结YAML、claim gate或科学实现失败；当前规则清理与该历史测试无依赖。若继续使用此冻结包，须在对应历史快照核查或按`agent.md`第7节建立版本化后继解决动态文案依赖；不得将其报告为当前工作区的回归全通过，也不据此恢复旧46-cell为当前必做范围。
+
+同日只读诊断：该测试文件15项通过、1项失败，失败仅为上述文案断言；逐项核对本轮前后缺少的两段文案完全相同，原manifest绑定的5个文件SHA全部匹配，零solver调用。第7节及第9节整体性能审查子节原字节保留，本次未创建候选或改变门禁。
+
 2026-10-21 constructor窗口依赖修复：实际H1 Reader故障注入曾出现旧实现拒绝、候选返回，已补normal模型依赖及source SHA/runtime版本的前后检查，并由source/辅助validator强制bookend metric。171项窄回归通过2.61s（outer4.297s）；alias窗口复验两边均拒绝，外部metadata.distribution模拟numpy版本变化也均拒绝，后者实际由候选post snapshot拒绝。两类故障仅关闭指定窗口，未覆盖完整文件/runtime闭包或同值ABA；所观察Reader/ReadView均正常关闭，不能推广到任意失败。
 修复后H3/M5双Reader完整batch83.976012s（outer89.781s），3小时保存科学身份绑定重构与21项辅助拒绝通过；H1固定old→new各一次完整batch56.969790s→28.378482s，科学摘要一致。新增model metric负例来自171项unit；H3/H1为正例。全部attempt运行时/after pins未变，465case/444owned SHA未变，0新Job/native；后续设计文字由tested snapshots解析。H3仍复用原join/projection、saved manifest resolver及单字段stand-in，非独立科学oracle，也未直接读取旧raw science。
 整链预算仍未闭合：旧owner未采纳候选，T192源层仍597520次Job重放；候选条件值298760仍属算术，另增加每Reader两次模型依赖snapshot，不能据局部时间外推192h。至少576个operational events、业务历史校验长度下界28311936及完整wall/RSS/storage/失败收尾资源仍待处理。正式准备16门全部OPEN，真实168h/≤24h phase/episode terminal→checkpoint→close→fresh-process replay未验收；formal/native/resource/full192/seal/official继续false。证据：`results/tables/rq2_h1_constructor_window_fault_v1_non_authoritative/{acceptance_report.md,whole_workflow_budget_v4.json,formal_preparation_state_v4.json,development_acceptance_v1.json}`。以下先前记录保留。
