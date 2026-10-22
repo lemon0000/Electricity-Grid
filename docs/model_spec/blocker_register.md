@@ -2,6 +2,10 @@
 
 2026-10-22范围入口：当前论文工作顺序和交付标准见`agent.md`第2–6及14节；以下各实验的原有门禁仍适用于对应包。
 
+### 2026-10-23 C公共整链结构会计与四层义务
+
+[最新交接](../plan/continuation_handoff_20261023_budget.md)记录纯元数据核算：677输入匹配、24不同普通检查及独立后核验通过，本轮0科学编译/native。P1条件满成功含原准备185/583 selective、8/1140 full、124构模、52audit/135row、131fingerprints；这些是静态工作量，公共wall和嵌套数值/保存成本仍未知。保存156.945949s只支持原三母线两小时形状，不能替换冻结P1 v2成本。139静态网络覆盖与完整F/X跨时背书分别约束正面主张；条件actual比较可保持aggregate release=false，最终仍须报告四层及旧失败。STAGE-03/04公共数值/资源、STAGE-05正面完整合同门继续OPEN；D/E业务快慢×按期延期×三方法与独立留出目标不缩减。P1专项授权未答复、目录不存在，旧绑定保持。
+
 ### 2026-10-23 C保存输入的成本观察
 
 [最新交接](../plan/continuation_handoff_20261023_append_cost.md)与[报告](../../results/tables/staged_rts24_append_cost_v1_non_authoritative/execution_observations_01/validation_report.md)记录一次无native诊断：六成功/六失败/十二fresh、198 selective calls/548描述，外部测量156.945949s，完整state/CAS/失败及旧绑定通过保存后核验。parent/fresh分组分别70.605554/54.884973s，目录/保留核验/依赖身份有实测成本；inclusive时间嵌套不可相加或作优势比例。固定三母线h0/h1和单次顺序不能关闭公共数值/g、完整139/F-X反事实时序、长cohort/真实IO失败、C/D/E资源准入。P1十三源及注册保持、p1_01不存在，仍待专项授权；新cost五源随request冻结，后续优化或修复走独立successor。
