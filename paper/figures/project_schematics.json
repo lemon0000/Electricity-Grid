@@ -1,0 +1,255 @@
+{
+  "date": "2026-10-22",
+  "role": "Bilingual conceptual figures for the project research introduction",
+  "status": "Conceptual study design and assessment framework",
+  "drawing": "Original hand-built editable SVG; deterministic Python standard-library source",
+  "source": "draw_project_schematics.py",
+  "skill": {
+    "repository": "https://github.com/Yuan1z0825/nature-skills",
+    "commit": "c6ae86c742705fd968b13c79db1a8518a84089d4",
+    "verified_files": 151,
+    "verified_bytes": 35280541,
+    "skills": [
+      "nature-figure",
+      "nature-shared"
+    ],
+    "git_blob_verification": true
+  },
+  "canvas_width_mm": 183,
+  "font_family": "Arial with Microsoft YaHei for Chinese",
+  "figure_text_pt": [
+    7.6,
+    11
+  ],
+  "svg_audit_bounds_pt": [
+    7.5,
+    11.1
+  ],
+  "introduction_note": "Typography is sized for an A4 project introduction; no journal submission contract is asserted.",
+  "export": {
+    "formats": [
+      "svg",
+      "pdf",
+      "png"
+    ],
+    "pdf_renderer": "Chromium headless print",
+    "png_renderer": "PyMuPDF from the exported PDF",
+    "png_dpi": 240
+  },
+  "evidence": [
+    "../drafts/project_introduction.md",
+    "../drafts/project_introduction_en.md",
+    "../../docs/model_spec/staged_deliverability_minimum_spec_v1.md"
+  ],
+  "assumptions": [
+    "The example timeline illustrates states and is not drawn to scale; icon counts are not measurements.",
+    "Only commissioned equipment and completed grid reinforcement provide current capability.",
+    "Task cohorts keep their original deadlines; late recovery preserves an observed violation.",
+    "Hourly CFE is energy-attribute accounting in the eligible hour and region.",
+    "Plans and policies are frozen before independent holdout execution; outputs are intended study outputs."
+  ],
+  "figures": [
+    {
+      "number": 1,
+      "topic": "三条进度如何形成接入压力",
+      "role": "问题与状态",
+      "message": "A shared timeline exposes a mismatch between business/equipment readiness and grid reinforcement.",
+      "assets": [
+        {
+          "language": "cn",
+          "files": {
+            "svg": {
+              "path": "project_rampup_cn.svg",
+              "sha256": "cd3dc18174501b9548c61f41c965ca0575efe10ccd7cc2344e818898ed836bb5"
+            },
+            "pdf": {
+              "path": "project_rampup_cn.pdf",
+              "sha256": "37c11816cb574bee8aed983da45e1cfc8d0da269ca35a6f232ba74564b1de7e9"
+            },
+            "png": {
+              "path": "project_rampup_cn.png",
+              "sha256": "abc0c59a2df153762f59c40e5ccec206f34b476338448fc73a13b157bfc81e95"
+            }
+          }
+        },
+        {
+          "language": "en",
+          "files": {
+            "svg": {
+              "path": "project_rampup_en.svg",
+              "sha256": "0c0a093d9b2677d1f0e57bbc6055157b52e7e0066fcf8dc3e5ba2bcf0194b37b"
+            },
+            "pdf": {
+              "path": "project_rampup_en.pdf",
+              "sha256": "8be60f9f97e4d538f6290e82ce0593fbac9600a7c358a05ef76863d56d359d4b"
+            },
+            "png": {
+              "path": "project_rampup_en.png",
+              "sha256": "17107f4cf8cfe4a33ead1405b1a6f727b9422b3becccfb9d02bdbafe39bf0d47"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "topic": "当前削减为何仍需期限内恢复",
+      "role": "机制与条件",
+      "message": "The same deferred cohort requires feasible recovery; on-time completion and shortfall are alternatives.",
+      "assets": [
+        {
+          "language": "cn",
+          "files": {
+            "svg": {
+              "path": "project_recovery_cn.svg",
+              "sha256": "df0f67c6ea44dbad968b34247dfe4cf5114d15699f4b5369645881de937beca8"
+            },
+            "pdf": {
+              "path": "project_recovery_cn.pdf",
+              "sha256": "cfe7ea66a913f6f61bb2c2cf8972db254026346edab3350abc7e9405b7e38cc9"
+            },
+            "png": {
+              "path": "project_recovery_cn.png",
+              "sha256": "de63ccb202e7deb884977ca404de64fed7b78caa5f3754c4cd7cf564077b99af"
+            }
+          }
+        },
+        {
+          "language": "en",
+          "files": {
+            "svg": {
+              "path": "project_recovery_en.svg",
+              "sha256": "d8c92dc68ac23396fe3906444c030090b3b67fc9a5bb6b489bf1619593a57f76"
+            },
+            "pdf": {
+              "path": "project_recovery_en.pdf",
+              "sha256": "39e0fd3bbb0059d1cb0ded01e47c3e6635cea4a0ccc83f4e41a395f18796863c"
+            },
+            "png": {
+              "path": "project_recovery_en.png",
+              "sha256": "8f1948abf37729fe7c6363406accd169ced498ee8ad64d744d22fe4ee21b27d8"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "topic": "计算、实际取电、网络与CFE如何连接",
+      "role": "评价框架",
+      "message": "Computing occupancy maps to metered power; network checks and hourly attribute accounting are distinct obligations.",
+      "assets": [
+        {
+          "language": "cn",
+          "files": {
+            "svg": {
+              "path": "project_network_cn.svg",
+              "sha256": "c41ffaca4987a1a253ba59eb496e151a7111e061e8f7ddb68b8cbf8ffae9fcd2"
+            },
+            "pdf": {
+              "path": "project_network_cn.pdf",
+              "sha256": "0f0b82189093784f491ca16168c7ad1df6fe0994ebe8c8dd1ce4709ec1295a0b"
+            },
+            "png": {
+              "path": "project_network_cn.png",
+              "sha256": "1e5227065033748abf4cdbbd5ecd88012e7eb642ed3d793c21c9bde3014e5747"
+            }
+          }
+        },
+        {
+          "language": "en",
+          "files": {
+            "svg": {
+              "path": "project_network_en.svg",
+              "sha256": "fe3b250728257bb97830ffdc5a59550acf4ef9694c0912549c5fd652da975c83"
+            },
+            "pdf": {
+              "path": "project_network_en.pdf",
+              "sha256": "0234d95fd275ec1ef877cbc198c1e4d8a6a31ecdbd6938c49436442c31ade918"
+            },
+            "png": {
+              "path": "project_network_en.png",
+              "sha256": "93a2c18f2471fb1803f72e4b6be0852b37ac1dbb815120bd4e96aa03e89dd030"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "topic": "用什么比较回答研究问题",
+      "role": "比较与验证",
+      "message": "Matched three-method comparisons explain stage bottlenecks before frozen-policy independent holdout execution.",
+      "assets": [
+        {
+          "language": "cn",
+          "files": {
+            "svg": {
+              "path": "project_workflow_cn.svg",
+              "sha256": "6f6d71042b1fec82ff179346a52bad5ea48450b4ef789b1a92731619aba61362"
+            },
+            "pdf": {
+              "path": "project_workflow_cn.pdf",
+              "sha256": "3b46425ab8b4ce6d7a2829e9fda416d8c7468f9f49c16eaf6d4f166089fdd6e7"
+            },
+            "png": {
+              "path": "project_workflow_cn.png",
+              "sha256": "97cbf3d39955e237d08722a6cfbcde89bb83bd6b32d8c9570ff514d3e8d44f37"
+            }
+          }
+        },
+        {
+          "language": "en",
+          "files": {
+            "svg": {
+              "path": "project_workflow_en.svg",
+              "sha256": "a5b28e922239fd2203c44bc9bb561006140d2ebf842c5d2717877c1114daece7"
+            },
+            "pdf": {
+              "path": "project_workflow_en.pdf",
+              "sha256": "b6bff4c6ddc64a7efd1b8ed0f6e533bde2ec3ac3042ade2e7a4e7016bed21b37"
+            },
+            "png": {
+              "path": "project_workflow_en.png",
+              "sha256": "09dc74e0e00242d584008571fbf481d396c8dd906dbdef0b01168a9e0c5d7f28"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "all_8_svg_audits": "PASS",
+    "all_8_pdf_glyph_audits": "PASS",
+    "all_8_pdf_collision_audits": "PASS",
+    "automated_collision_findings": 0,
+    "visual_review": "All eight figure previews, all 17 introduction pages, and focused figure pages inspected.",
+    "source_rebuild": "All eight SVGs reproduce byte-for-byte",
+    "introduction_pdfs": {
+      "cn": {
+        "pages": 8,
+        "figure_pages": {
+          "1": 1,
+          "2": 4,
+          "3": 5,
+          "4": 7
+        },
+        "unique_https_links": 26,
+        "sha256": "50aaad7e8f14d59d9a453755e1295b505be3f158d287d71902303914b7ee960b",
+        "narrative_and_26_references_unchanged": true
+      },
+      "en": {
+        "pages": 9,
+        "figure_pages": {
+          "1": 1,
+          "2": 4,
+          "3": 6,
+          "4": 8
+        },
+        "unique_https_links": 26,
+        "sha256": "8cfd8f24a3dace1fb5114b4c6802c04f7cb8426d075f5b45843e8d7b483848f4",
+        "narrative_and_26_references_unchanged": true
+      }
+    }
+  }
+}

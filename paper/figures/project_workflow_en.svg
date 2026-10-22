@@ -1,36 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="530" viewBox="0 0 1200 530" role="img" aria-labelledby="title desc">
-<title id="title">From stage paths to interconnection plan assessment</title><desc id="desc">From stage paths to interconnection plan assessment</desc>
-<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#526a7d"/></marker>
-<style>text{font-family:Arial,"Microsoft YaHei",sans-serif;fill:#203649}.title{font-size:30px;font-weight:700}.head{font-size:23px;font-weight:700}.body{font-size:23px}.small{font-size:21px;fill:#40586b}.link{fill:none;stroke:#526a7d;stroke-width:2.5;marker-end:url(#arrow)}</style></defs>
-<rect width="1200" height="530" fill="white"/>
-<text x="600" y="44" text-anchor="middle" class="title">From stage paths to interconnection plan assessment</text>
-<rect x="20" y="90" width="260" height="200" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
-<text x="150.0" y="128" text-anchor="middle" class="head">1 Fix paths and rules</text>
-<text x="150.0" y="167" text-anchor="middle" class="body">Paths and access plans</text>
-<text x="150.0" y="201" text-anchor="middle" class="body">Same external demand</text>
-<text x="150.0" y="235" text-anchor="middle" class="body">Fixed service rules</text>
-<text x="150.0" y="269" text-anchor="middle" class="body">Fixed CFE allocation</text>
-<path class="link" d="M280 190 H311"/>
-<rect x="320" y="90" width="260" height="200" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
-<text x="450.0" y="128" text-anchor="middle" class="head">2 Build stage model</text>
-<text x="450.0" y="167" text-anchor="middle" class="body">Response and recovery</text>
-<text x="450.0" y="201" text-anchor="middle" class="body">Hourly CFE and debt</text>
-<text x="450.0" y="235" text-anchor="middle" class="body">Debt and deadlines</text>
-<path class="link" d="M580 190 H611"/>
-<rect x="620" y="90" width="260" height="200" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
-<text x="750.0" y="128" text-anchor="middle" class="head">3 Compare plans</text>
-<text x="750.0" y="167" text-anchor="middle" class="body">Three assessments</text>
-<text x="750.0" y="201" text-anchor="middle" class="body">Limited sensitivity</text>
-<text x="750.0" y="235" text-anchor="middle" class="body">Stage bottlenecks</text>
-<path class="link" d="M880 190 H911"/>
-<rect x="920" y="90" width="260" height="200" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
-<text x="1050.0" y="128" text-anchor="middle" class="head">4 Test new paths</text>
-<text x="1050.0" y="167" text-anchor="middle" class="body">Fixed plan and policy</text>
-<text x="1050.0" y="201" text-anchor="middle" class="body">Observed information</text>
-<text x="1050.0" y="235" text-anchor="middle" class="body">Shortfalls and unknowns</text>
-<path class="link" d="M1050 290 V330 H600 V360"/>
-<rect x="110" y="360" width="980" height="130" rx="12" fill="#edf5ef" stroke="#89a99a" stroke-width="1.7"/>
-<text x="600.0" y="398" text-anchor="middle" class="head">Research outputs</text>
-<text x="600.0" y="437" text-anchor="middle" class="body">Delivery by stage · source of limits · applicability of given plans</text>
-<text x="600.0" y="471" text-anchor="middle" class="body">Assessment model, traceable records, figures, and the complete thesis</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="183mm" height="93.087mm" viewBox="0 0 519 264" role="img" aria-labelledby="title desc">
+<title id="title">Comparisons and independent holdout checks</title>
+<desc id="desc">Given plans are compared using three assessments under common inputs, then frozen with a policy before causal holdout execution.</desc>
+<defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 Z" fill="#23364A"/></marker></defs>
+<rect x="0" y="0" width="519" height="264" fill="white"/>
+<text x="18" y="22" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" font-weight="700" text-anchor="start" fill="#23364A">Explain assessment differences, then test new paths</text>
+<text x="18" y="38.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">Study design and intended outputs · judgments require computed evidence</text>
+<g id="n:step-1">
+<circle cx="28" cy="68" r="10" fill="#EDF3F8" stroke="#496F91" stroke-width="1"/>
+<text x="28" y="71.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle" fill="#23364A">1</text>
+<text x="18" y="95.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="start" fill="#23364A">Fix common conditions</text>
+<rect x="18" y="106" width="114" height="89" rx="4" fill="#F2F5F7" stroke="#CAD4DC" stroke-width="0.8"/>
+<text x="27" y="125.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">Given construction</text>
+<text x="27" y="142.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">and access plans</text>
+<text x="27" y="159.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">Same tasks + CFE</text>
+<text x="27" y="176.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">Same deadlines + rules</text>
+<path d="M132 151 L140 151" fill="none" stroke="#23364A" stroke-width="1.2" marker-end="url(#arrow)"/>
+</g>
+<g id="n:step-2">
+<circle cx="151" cy="68" r="10" fill="#EDF3F8" stroke="#496F91" stroke-width="1"/>
+<text x="151" y="71.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle" fill="#23364A">2</text>
+<text x="141" y="95.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="start" fill="#23364A">Compare assessments</text>
+<rect x="141" y="106" width="114" height="89" rx="4" fill="#EAF4F1" stroke="#CAD4DC" stroke-width="0.8"/>
+<path d="M150 123 L158 123" fill="none" stroke="#496F91" stroke-width="2"/>
+<text x="163" y="126.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">Instantaneous MW</text>
+<path d="M150 148 L158 148" fill="none" stroke="#496F91" stroke-width="2"/>
+<text x="163" y="151.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">Fixed recovery headroom</text>
+<path d="M150 173 L158 173" fill="none" stroke="#287F80" stroke-width="2"/>
+<text x="163" y="176.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">Full temporal assessment</text>
+<path d="M255 151 L263 151" fill="none" stroke="#23364A" stroke-width="1.2" marker-end="url(#arrow)"/>
+</g>
+<g id="n:step-3">
+<circle cx="274" cy="68" r="10" fill="#EDF3F8" stroke="#496F91" stroke-width="1"/>
+<text x="274" y="71.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle" fill="#23364A">3</text>
+<text x="264" y="95.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="start" fill="#23364A">Explain bottlenecks</text>
+<rect x="264" y="106" width="114" height="89" rx="4" fill="#F2F5F7" stroke="#CAD4DC" stroke-width="0.8"/>
+<text x="273" y="125.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">When do judgments differ?</text>
+<text x="273" y="149.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">Response or recovery?</text>
+<text x="273" y="173.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">Retain null + failure regions</text>
+<path d="M378 151 L386 151" fill="none" stroke="#23364A" stroke-width="1.2" marker-end="url(#arrow)"/>
+</g>
+<g id="n:step-4">
+<circle cx="397" cy="68" r="10" fill="#EDF3F8" stroke="#496F91" stroke-width="1"/>
+<text x="397" y="71.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle" fill="#23364A">4</text>
+<text x="387" y="95.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="start" fill="#23364A">Freeze, then test</text>
+<rect x="387" y="106" width="114" height="89" rx="4" fill="#F2F5F7" stroke="#CAD4DC" stroke-width="0.8"/>
+<text x="396" y="125.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">Freeze plan + policy</text>
+<text x="396" y="149.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">Independent holdout paths</text>
+<text x="396" y="173.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">Causal execution</text>
+</g>
+<path d="M381 87 L381 202" fill="none" stroke="#496F91" stroke-width="0.9" stroke-dasharray="3 3"/>
+<text x="442" y="213.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Holdout excluded from selection</text>
+<rect x="18" y="229" width="483" height="24" rx="4" fill="#EDF3F8" stroke="#EDF3F8" stroke-width="0.8"/>
+<text x="259.5" y="245.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle" fill="#23364A">Intended outputs: stage bottlenecks, decision boundaries, applicability</text>
 </svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="183mm" height="95.908mm" viewBox="0 0 519 272" role="img" aria-labelledby="title desc">
+<title id="title">延期与期限内恢复</title>
+<desc id="desc">The same task cohort moves from deferral to recovery; completion and shortfall are alternative outcomes.</desc>
+<defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 Z" fill="#23364A"/></marker></defs>
+<rect x="0" y="0" width="519" height="272" fill="white"/>
+<text x="18" y="22" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" font-weight="700" text-anchor="start" fill="#23364A">当前能够削减，仍需检查任务能否按期补做</text>
+<text x="18" y="38.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">同一批延期任务 · 恢复资源必须在原始截止时间前足够可用</text>
+<g id="n:deferred-cohort">
+<rect x="18" y="62" width="112" height="128" rx="4" fill="#FBF2E6" stroke="#E9D3B4" stroke-width="0.8"/>
+<text x="74" y="80.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle" fill="#23364A">当前：延期 q</text>
+<rect x="51" y="94" width="46" height="35" rx="2" fill="#F5DAB4" stroke="#BD8238" stroke-width="0.8"/>
+<path d="M59 105 L88 105" fill="none" stroke="#BD8238" stroke-width="1.5"/>
+<path d="M59 114 L83 114" fill="none" stroke="#BD8238" stroke-width="1.5"/>
+<text x="74" y="147" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8" font-weight="400" text-anchor="middle" fill="#23364A">形成未完成工作</text>
+<text x="74" y="163.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">按任务批次保留</text>
+</g>
+<path d="M133 124 L156 124" fill="none" stroke="#23364A" stroke-width="1.3" marker-end="url(#arrow)"/>
+<g id="c:recovery-conditions">
+<rect x="160" y="62" width="204" height="128" rx="4" fill="#EDF3F8" stroke="#CAD4DC" stroke-width="0.8"/>
+<text x="262" y="80.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle" fill="#23364A">之后：寻找可行补做 r</text>
+<circle cx="175" cy="97" r="3" fill="#EAF4F1" stroke="#287F80" stroke-width="1"/>
+<text x="186" y="100" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8" font-weight="400" text-anchor="start" fill="#23364A">已投运设备的空闲能力</text>
+<circle cx="175" cy="118" r="3" fill="#EAF4F1" stroke="#287F80" stroke-width="1"/>
+<text x="186" y="121" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8" font-weight="400" text-anchor="start" fill="#23364A">补做时段的网络供电余量</text>
+<circle cx="175" cy="139" r="3" fill="#EAF4F1" stroke="#287F80" stroke-width="1"/>
+<text x="186" y="142" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8" font-weight="400" text-anchor="start" fill="#23364A">同小时可归属的CFE电量</text>
+<path d="M172 153 L352 153" fill="none" stroke="#CAD4DC" stroke-width="0.8"/>
+<text x="262" y="168.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">同时满足动作预算、恢复效率与期限</text>
+</g>
+<g id="e:alternative-outcomes">
+<path d="M367 124 L383 124 L383 92 L402 92" fill="none" stroke="#23364A" stroke-width="1" marker-end="url(#arrow)"/>
+<path d="M383 124 L383 162 L402 162" fill="none" stroke="#23364A" stroke-width="1" marker-end="url(#arrow)"/>
+<circle cx="383" cy="124" r="1.5" fill="#23364A" stroke="#23364A" stroke-width="1"/>
+<rect x="406" y="62" width="95" height="60" rx="4" fill="#EAF4F1" stroke="#ADD2CA" stroke-width="0.8"/>
+<text x="453.5" y="80.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">资源与期限满足</text>
+<text x="453.5" y="99.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle" fill="#23364A">按期完成</text>
+<rect x="406" y="132" width="95" height="58" rx="4" fill="#FBEEEA" stroke="#DEBDB8" stroke-width="0.8"/>
+<text x="453.5" y="150.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">不足或来得太晚</text>
+<text x="453.5" y="169.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle" fill="#23364A">缺口或逾期</text>
+</g>
+<g id="n:continuous-ledger">
+<path d="M29 218 L492 218" fill="none" stroke="#23364A" stroke-width="1" marker-end="url(#arrow)"/>
+<path d="M75 212 L75 224" fill="none" stroke="#23364A" stroke-width="0.8"/>
+<text x="75" y="238.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">延期发生</text>
+<path d="M262 212 L262 224" fill="none" stroke="#23364A" stroke-width="0.8"/>
+<text x="262" y="238.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">债务随时间延续并按补做核减</text>
+<path d="M454 212 L454 224" fill="none" stroke="#23364A" stroke-width="0.8"/>
+<text x="454" y="238.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">原始截止时间</text>
+<text x="259.5" y="259" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8" font-weight="400" text-anchor="middle" fill="#23364A">补做来得太晚，不能消除已经发生的逾期。</text>
+</g>
+</svg>

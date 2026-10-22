@@ -1,41 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="710" viewBox="0 0 1200 710" role="img" aria-labelledby="title desc">
-<title id="title">Three progress paths shape staged deliverability</title><desc id="desc">Given business, equipment, and grid paths determine available stage resources. Hourly deferral, recovery, and CFE checks evaluate each stage.</desc>
-<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#526a7d"/></marker>
-<style>text{font-family:Arial,"Microsoft YaHei",sans-serif;fill:#203649}.title{font-size:30px;font-weight:700}.head{font-size:25px;font-weight:700}.body{font-size:23px}.small{font-size:21px;fill:#40586b}.link{fill:none;stroke:#526a7d;stroke-width:2.5;marker-end:url(#arrow)}</style></defs>
-<rect width="1200" height="710" fill="white"/>
-<text x="600" y="44" text-anchor="middle" class="title">Three progress paths shape staged deliverability</text>
-<rect x="25" y="80" width="350" height="155" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
-<text x="200.0" y="118" text-anchor="middle" class="head">Business ramp-up</text>
-<text x="200.0" y="157" text-anchor="middle" class="body">Task arrivals over time</text>
-<text x="200.0" y="191" text-anchor="middle" class="body">Fast or slow demand growth</text>
-<path class="link" d="M200 235 V265 H600 V295"/>
-<rect x="425" y="80" width="350" height="155" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
-<text x="600.0" y="118" text-anchor="middle" class="head">Equipment commissioning</text>
-<text x="600.0" y="157" text-anchor="middle" class="body">Modules become available</text>
-<text x="600.0" y="191" text-anchor="middle" class="body">Commissioned capacity K</text>
-<path class="link" d="M600 235 V265 H600 V295"/>
-<rect x="825" y="80" width="350" height="155" rx="12" fill="#edf3f8" stroke="#9aafc1" stroke-width="1.7"/>
-<text x="1000.0" y="118" text-anchor="middle" class="head">Grid construction</text>
-<text x="1000.0" y="157" text-anchor="middle" class="body">On-time or delayed completion</text>
-<text x="1000.0" y="191" text-anchor="middle" class="body">Built assets provide capacity</text>
-<path class="link" d="M1000 235 V265 H600 V295"/>
-<rect x="150" y="295" width="900" height="115" rx="12" fill="#edf5ef" stroke="#89a99a" stroke-width="1.7"/>
-<text x="600.0" y="333" text-anchor="middle" class="head">Available resources and the given access plan</text>
-<text x="600.0" y="372" text-anchor="middle" class="body">Equipment capacity · task occupancy · network state · clean resources</text>
-<path class="link" d="M600 410 V440 H200 V470"/>
-<path class="link" d="M600 410 V440 H600 V470"/>
-<path class="link" d="M600 410 V440 H1000 V470"/>
-<rect x="25" y="470" width="350" height="155" rx="12" fill="#fff7e8" stroke="#bca578" stroke-width="1.7"/>
-<text x="200.0" y="508" text-anchor="middle" class="head">Reduce demand now</text>
-<text x="200.0" y="547" text-anchor="middle" class="body">Eligible tasks and requests</text>
-<text x="200.0" y="581" text-anchor="middle" class="body">Shared adjustment q+r≤D</text>
-<rect x="425" y="470" width="350" height="155" rx="12" fill="#fff7e8" stroke="#bca578" stroke-width="1.7"/>
-<text x="600.0" y="508" text-anchor="middle" class="head">Recover before deadlines</text>
-<text x="600.0" y="547" text-anchor="middle" class="body">Equipment and power headroom</text>
-<text x="600.0" y="581" text-anchor="middle" class="body">Clean windows and deadlines</text>
-<rect x="825" y="470" width="350" height="155" rx="12" fill="#fff7e8" stroke="#bca578" stroke-width="1.7"/>
-<text x="1000.0" y="508" text-anchor="middle" class="head">Meet both requirements</text>
-<text x="1000.0" y="547" text-anchor="middle" class="body">Network and hourly CFE</text>
-<text x="1000.0" y="581" text-anchor="middle" class="body">Task completion and debt</text>
-<text x="600" y="672" text-anchor="middle" class="small">Output: stage bottlenecks and delivery status under the stated checks</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="183mm" height="107.896mm" viewBox="0 0 519 306" role="img" aria-labelledby="title desc">
+<title id="title">Joint assessment at one connection point</title>
+<desc id="desc">Metered electricity and clean-energy attribution are distinct flows. Computing capacity, grid conditions, and hourly CFE are checked together.</desc>
+<defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 Z" fill="#23364A"/></marker></defs>
+<rect x="0" y="0" width="519" height="306" fill="white"/>
+<text x="18" y="22" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" font-weight="700" text-anchor="start" fill="#23364A">One center: computing, grid and hourly CFE checks</text>
+<text x="18" y="38.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="start" fill="#23364A">Given construction and access plans · hourly checks on commissioned assets</text>
+<g id="n:built-network">
+<rect x="18" y="61" width="126" height="134" rx="4" fill="#F2F5F7" stroke="#CAD4DC" stroke-width="0.8"/>
+<text x="81" y="79" font-family="Arial, Microsoft YaHei, sans-serif" font-size="9" font-weight="700" text-anchor="middle" fill="#23364A">Built network</text>
+<circle cx="43" cy="110" r="5" fill="white" stroke="#496F91" stroke-width="1"/>
+<circle cx="116" cy="110" r="5" fill="white" stroke="#496F91" stroke-width="1"/>
+<circle cx="79" cy="135" r="5" fill="white" stroke="#496F91" stroke-width="1"/>
+<path d="M48 110 L111 110" fill="none" stroke="#496F91" stroke-width="1.1"/>
+<path d="M47 113 L75 132" fill="none" stroke="#496F91" stroke-width="1.1"/>
+<path d="M111 113 L83 132" fill="none" stroke="#496F91" stroke-width="1.1"/>
+<text x="81" y="157.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Normal state: full F+X</text>
+<text x="81" y="172.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Declared faults: F + X calls</text>
+</g>
+<g id="e:metered-power">
+<path d="M147 120 L165 120" fill="none" stroke="#23364A" stroke-width="1.5"/>
+<path d="M187 120 L204 120" fill="none" stroke="#23364A" stroke-width="1.5" marker-end="url(#arrow)"/>
+<circle cx="176" cy="120" r="10" fill="white" stroke="#496F91" stroke-width="1"/>
+<text x="176" y="123.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle" fill="#23364A">P</text>
+<text x="176" y="97.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Metered power</text>
+<text x="176" y="145.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Fixed connection</text>
+</g>
+<g id="n:data-center">
+<rect x="210" y="61" width="152" height="134" rx="4" fill="#EDF3F8" stroke="#AFC5D6" stroke-width="0.8"/>
+<text x="286" y="79" font-family="Arial, Microsoft YaHei, sans-serif" font-size="9" font-weight="700" text-anchor="middle" fill="#23364A">AI data center</text>
+<rect x="223" y="92" width="15" height="26" rx="1.2" fill="#EAF4F1" stroke="#287F80" stroke-width="0.8"/>
+<path d="M226 97 L235 97" fill="none" stroke="#287F80" stroke-width="1.3"/>
+<path d="M226 103 L235 103" fill="none" stroke="#287F80" stroke-width="1.3"/>
+<path d="M226 109 L235 109" fill="none" stroke="#287F80" stroke-width="1.3"/>
+<rect x="243" y="92" width="15" height="26" rx="1.2" fill="#EAF4F1" stroke="#287F80" stroke-width="0.8"/>
+<path d="M246 97 L255 97" fill="none" stroke="#287F80" stroke-width="1.3"/>
+<path d="M246 103 L255 103" fill="none" stroke="#287F80" stroke-width="1.3"/>
+<path d="M246 109 L255 109" fill="none" stroke="#287F80" stroke-width="1.3"/>
+<text x="270" y="102" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8" font-weight="400" text-anchor="start" fill="#23364A">Commissioned K</text>
+<text x="270" y="117" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8" font-weight="400" text-anchor="start" fill="#23364A">External tasks w</text>
+<path d="M222 130 L350 130" fill="none" stroke="#CAD4DC" stroke-width="0.8"/>
+<text x="286" y="146.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Defer q now · recover r later</text>
+<text x="286" y="163.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Equipment mapping to power P</text>
+<text x="286" y="179.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Idle, execution, recovery, support</text>
+</g>
+<g id="n:cfe-attribution">
+<rect x="399" y="61" width="102" height="134" rx="4" fill="white" stroke="#CAD4DC" stroke-width="0.8"/>
+<text x="450" y="79.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle" fill="#23364A">Hourly CFE</text>
+<rect x="429" y="92" width="38" height="32" rx="2" fill="#EAF4F1" stroke="#287F80" stroke-width="0.8"/>
+<text x="448" y="112" font-family="Arial, Microsoft YaHei, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#23364A">Y</text>
+<text x="450" y="143.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Same hour + region</text>
+<text x="450" y="159.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Attributable limit</text>
+<text x="450" y="175.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Attribute accounting</text>
+<path d="M396 111 L366 111" fill="none" stroke="#23364A" stroke-width="1" marker-end="url(#arrow)"/>
+<text x="381" y="96" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8" font-weight="400" text-anchor="middle" fill="#23364A">y</text>
+</g>
+<g id="c:hourly-checks">
+<path d="M286 198 L286 215" fill="none" stroke="#23364A" stroke-width="1.2" marker-end="url(#arrow)"/>
+<rect x="18" y="220" width="483" height="69" rx="4" fill="#EAF4F1" stroke="#B7D4CC" stroke-width="0.8"/>
+<text x="259.5" y="237.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle" fill="#23364A">Joint hourly checks; debt and budgets carry between hours</text>
+<path d="M178 247 L178 280" fill="none" stroke="#BAD1CA" stroke-width="0.8"/>
+<path d="M340 247 L340 280" fill="none" stroke="#BAD1CA" stroke-width="0.8"/>
+<text x="98" y="258.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Computing + adjustment</text>
+<text x="98" y="275.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">0 ≤ w − q + r ≤ K;  q + r ≤ D</text>
+<text x="259" y="258.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Metered power + grid</text>
+<text x="259" y="275.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">F/X, balances and declared limits</text>
+<text x="420" y="258.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">Hourly clean matching</text>
+<text x="420" y="275.0" font-family="Arial, Microsoft YaHei, sans-serif" font-size="7.6" font-weight="400" text-anchor="middle" fill="#23364A">αPΔt ≤ y ≤ Y</text>
+</g>
 </svg>
