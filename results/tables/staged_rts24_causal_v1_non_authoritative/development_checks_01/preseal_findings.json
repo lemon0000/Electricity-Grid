@@ -1,0 +1,107 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "checks": {
+    "command": [
+      "D:/Miniconda3/envs/compute/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_staged_rts24_child_optimality_v1.py",
+      "tests/test_staged_rts24_causal_v1.py",
+      "tests/test_staged_rts24_development_v1.py",
+      "tests/test_staged_deliverability_development_v1.py",
+      "tests/test_rq2_continuous_debt_cohorts_v1.py",
+      "tests/test_rq2_bidirectional_policy_v1.py",
+      "tests/test_rq2_bidirectional_capacity_v1.py",
+      "tests/test_rts24_dc_opf.py::test_rts24_source_shape_and_demand",
+      "tests/test_rts24_dc_opf.py::test_scale_rts24_demand_returns_scaled_copy",
+      "tests/test_rts24_dc_opf.py::test_scale_rts24_demand_rejects_invalid_multiplier"
+    ],
+    "new_checks": 75,
+    "new_tests_guard_pyomo_dc_need_scopf_solver_factories": true,
+    "prior_public_checks": 35,
+    "public_solver_tests_selected": false,
+    "pytest_seconds": 12.65,
+    "related_checks": 159,
+    "reviewer_new_passed": 75,
+    "reviewer_pytest_seconds": 7.46,
+    "total_passed": 269
+  },
+  "closed_findings": [
+    {
+      "cause": "given-state SHA did not prove plan/clean/method/ledger provenance",
+      "fix": "horizon-bound trajectory and independent complete prefix/policy/carry audit",
+      "id": "trajectory_splicing"
+    },
+    {
+      "cause": "caller supplied bare registration/observation boundaries",
+      "fix": "summary consumes same bound fixture and verifies state horizon",
+      "id": "summary_horizon_relabel"
+    },
+    {
+      "cause": "summary omitted stopped attempted observation and violation positions",
+      "fix": "attempted/accepted prefix, raw task and request, terminal and per-hour violations retained",
+      "id": "summary_lost_rejected_input"
+    },
+    {
+      "cause": "standalone audit result did not label hypothetical debt",
+      "fix": "return method and accepted or hypothetical ledger scope",
+      "id": "audit_ledger_scope"
+    },
+    {
+      "cause": "negative min(-meter) objective described using lower endpoint wording",
+      "fix": "use witness positive meter as numeric upper endpoint, not rigorous bound",
+      "id": "max_endpoint_wording"
+    }
+  ],
+  "evidence_scope": "analytic_three_bus_ordinary_tests_only",
+  "remaining_substantive_findings": [],
+  "remaining_work": [
+    "public_normal_C_and_P0_primal_economic_evidence",
+    "public_corrective_and_endpoint_results",
+    "journal_and_fresh_saved_evidence_replay",
+    "failure_unresolved_unknown_publication_and_terminal_persistence",
+    "lossless_frame_parent_dedup_and_prefix_cost",
+    "full_contract_139_node_layer_and_FX_temporal_backing",
+    "C_whole_workflow_budget_and_D_E_admission"
+  ],
+  "review_kind": "pre_seal_development_audit",
+  "reviewed_source_fingerprints": {
+    "docs/model_spec/staged_rts24_causal_development_v1.md": {
+      "bytes": 7210,
+      "sha256": "336d3d2f4f56fbd95cdae8e41ba8ee674685a279cde59969dfec153296bd504b"
+    },
+    "docs/plan/staged_deliverability_c_causal_implementation_contract_v1.md": {
+      "bytes": 2881,
+      "sha256": "14e5cc3b7b47346972c05648bf29320cba6daa0fa6572432a20f84a303f66833"
+    },
+    "experiments/staged_rts24_causal_examples_v1.py": {
+      "bytes": 4813,
+      "sha256": "1305fcc36801dedffd60bcde52e24fdf51b478d4b7f3b4e1524935ea2a9bdaf2"
+    },
+    "src/staged_rts24_causal_audit_v1.py": {
+      "bytes": 13361,
+      "sha256": "01ff4fc5acdadfb81fb1197df5a103422f7fd65421d64a7d00e05005d581f821"
+    },
+    "src/staged_rts24_causal_v1.py": {
+      "bytes": 19309,
+      "sha256": "12950e9f0ac321e7297b66aba42efb9e486e477869d767e40cd841665a7b0ead"
+    },
+    "src/staged_rts24_child_optimality_v1.py": {
+      "bytes": 8256,
+      "sha256": "27071de638bceee8f6e0631ab44d8a9c3cebdba0c169ccd702c9c3392fcde543"
+    },
+    "tests/test_staged_rts24_causal_v1.py": {
+      "bytes": 13880,
+      "sha256": "0940159866cec7d9c9940794f33e03186546e7877daf5f046e2c85a13634556a"
+    },
+    "tests/test_staged_rts24_child_optimality_v1.py": {
+      "bytes": 9580,
+      "sha256": "74296986ac7a0e689624f5ada347e2597d51e778ceeb97fdf205362ad4dafe83"
+    }
+  },
+  "reviewer": "/root/c_review"
+}

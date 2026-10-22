@@ -2,6 +2,8 @@
 
 2026-10-22，`DRAFT_NONAUTHORITATIVE`。接续[B3/C顺序](staged_deliverability_b3_c_next_steps_v1.md)、[B3规格](../model_spec/staged_termination_development_v1.md)及[有界诊断合同](staged_deliverability_b3_development_contract_v1.md)。本页安排C的交付，不登记或启动主实验，不改变旧实验权限。
 
+同日新增[连续业务后继](continuation_handoff_20261022_causal.md)：child raw/min/max的数值最优性消费、三方法独立连续账本、actual零额外削减闭环和独立策略/余额审计已通过269项开发检查。证据限解析测试，公共normal/P0数值点与g仍未知；journal/关闭/fresh保存重放未实现。当前prefix重审和state摘要按Σt增长，需先做无损去重及完整新路径有界实测；C整链和D/E预算仍OPEN，不以测试wall准入。
+
 同日C续作已形成[网络方向、完整DAG与结构预算审查](staged_deliverability_c_dag_and_cost_review_v1.md)。用户随后确认保留公共网络方向，RTS-24作为最小公共网络后继，两母线保持机制回归。B1–B3保存核验见[C交接](continuation_handoff_20261022_c.md)；新增输入表、请求/构模与独立点/KKT组件的一次有界检查见[RTS-24交接](continuation_handoff_20261022_rts24.md)。12离散模板生成1699请求描述、12actual预留槽，8模型构建，0求解器请求；公共连续策略、完整点、journal/reopen与整链实测仍未接通。已绑定DAG页保留原字节，当前选择与状态以本页及新交接为准。下面四步的整体完成条件不变，不能用构建时间关闭C。
 
 ## 四步交付

@@ -2,6 +2,12 @@
 
 2026-10-22范围入口：当前论文工作顺序和交付标准见`agent.md`第2–6及14节；以下各实验的原有门禁仍适用于对应包。
 
+### 2026-10-22 C连续业务后继
+
+child LP最优性数值审计、连续三方法/actual功率闭环及独立策略/工作/功率/期限/carry审计已在新后继完成开发检查，269 passed/12.65s；见[交接](../plan/continuation_handoff_20261022_causal.md)。STAGE-03的业务与公共证据接口缺口缩小；解析三母线例和普通测试不代表公共网络结果，numeric KKT不是rigorous bound。
+
+公共normal C/P0及child/actual完整数值点仍缺；journal/关闭/fresh保存重放、未决/发布未知持久化、完整合同139节点层、反事实F/X时序及代表性失败收尾均未接通。prepare/accept/summary的前缀重审与state digest按Σt增长，存储去重/合法复用和C整链资源未测，D/E仍不准入；具体native包须先登记并获专项授权。旧B1–B3及build_01绑定字节保留。以下上一检查点按原时点理解。
+
 ### 2026-10-22 C公共网络构建检查点
 
 RTS-24输入/工程/缩放/F-X/37+32事故已在独立DRAFT固定；query/构模与独立完整点/KKT接口经一次无solver构建诊断验证。12离散模板、1699描述/12actual槽、8构模；6解析点/2显式顶层KKT记录通过，旧118保存/42仓库pin/7外部未变。见[RTS-24交接](../plan/continuation_handoff_20261022_rts24.md)及[报告](../../results/tables/staged_deliverability_rts24_v1_non_authoritative/build_01/validation_report.md)。这只缩小STAGE-03/04的输入和模型接口缺口。
