@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-23公共业务必要条件检查点：见[最新交接](continuation_handoff_20261023_business.md)与[报告](../../results/tables/staged_rts24_business_necessary_v1_non_authoritative/validation_report.md)。唯一40行精确算术audit与独立oracle/保存后核验通过，登记16行whole-X三条件、假设normal-g0及joint-gX各12/15/8 pass；前史/随访分开。h1的32+28=60>D40及on_time/late/h2的g上界−50保留，没有推断实际raw g或网络点。50新+95旧普通检查通过，PRE_SEAL三主题修复闭合、B1–B3/cost/P1绑定保持。算术CLI0科学构模/native，0.145502s只是audit-body，不作公共成本；C/D/E资源、139/完整时序与P1专项授权继续OPEN，原D/E范围保持。下面历史检查点保留。
+
 2026-10-23公共整链会计检查点：见[最新交接](continuation_handoff_20261023_budget.md)和[预算/四层义务](staged_deliverability_c_workflow_budget_reconciliation_v1.md)。一次纯元数据核算exit0，677输入首尾匹配、24不同普通检查及独立后核验通过，0科学compiler/native。条件满成功P1含原注册准备为selective185/583、full8/1140、124构模、52audit/135row、131fingerprints；未来命令去掉原准备后180/567及6/855。已存两小时保存成本单列，不外推公共wall；103/319/1431/4273仍是不同范围请求上限，D/E资源未知。四层状态须并列，条件actual比较不要求aggregate release先转true；完整合同正面主张仍需对应网络及反事实时序。原D/E快慢×按期延期×三方法目标、旧失败/绑定及P1专项授权边界保持。以下保留历史检查点。
 
 2026-10-23保存输入成本实测：见[最新交接](continuation_handoff_20261023_append_cost.md)及[报告](../../results/tables/staged_rts24_append_cost_v1_non_authoritative/execution_observations_01/validation_report.md)。仅复用三母线保存h0/h1，三方法v2→v3、六成功/六失败、十二fresh的一次诊断exit0；准备12/34、measurement186/514、合计198/548，0构模/native/solver，完整state/CAS字节/audit一致。外部测量156.945949s，owned Job130.984s、quiet后处理23.037932s；采样tree RSS298913792B，完整测量树579文件1660401B。46个不同普通检查与两轮独立保存后核验通过，旧绑定/P1十三源保持。固定顺序绝对观测不推导提速优势，累计编码和核验增长仍待后继；公共点/g、139/F-X时序、C整体与D/E资源保持OPEN，P1仍待专项授权。以下保留各时点检查点。
