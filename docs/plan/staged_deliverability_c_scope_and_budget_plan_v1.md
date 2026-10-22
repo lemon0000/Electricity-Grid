@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-23方法阅读版检查点：见[交接](continuation_handoff_20261023_methods_pdf.md)。8页独立PDF完成公式/正文顺序与视觉核对，原方法MD/旧绑定保持；这是文档排版，无科学solver/native或公共成本观测。来源目前为组级分类，下一步逐配置字段登记直接来源/缩放/经验资格，不改原输入或缩减D/E目标。C完整性能、D/E总预算和P1专项授权仍OPEN，以下旧检查点保留。
+
 2026-10-23同步方法写作检查点：见[交接](continuation_handoff_20261023_methods.md)。新增方法章及来源核对，将三进度、三方法、四层与终结按既有定义写明；修订每小时聚合批次、共同grid优先及必要条件未排除口径。文档检查与只读领域审阅不增加数值点或改变协议，B1—B3及既有绑定保持；公共代表成本、139/反事实时序、C/D/E规模资源与P1专项授权仍OPEN。以下旧检查点保留。
 
 2026-10-23 D/E开发字段检查点：见[最新交接](continuation_handoff_20261023_evaluation.md)及[报告](../../results/tables/staged_deliverability_evaluation_records_v1_non_authoritative/validation_report.md)。一次纯保存report投影/独立pointer核验通过，20三母线视图、公共40必要条件和12未绑定D分类槽分开；complete/零尾债不擦miss40，简化method true不替代full replay false，unknown writer不被fresh known覆写。49新+74相关普通检查通过、PRE_SEAL两主题修复闭合，旧绑定保持。24 Reader+1bootstrap、body0.0350415s只属元数据工具，0科学构模/native/reopen。没有D/E数值方案、选择/冻结/留出或资源准入；原快慢×工程×三方法/敏感性范围与P1专项授权边界保持。以下旧检查点保留。
