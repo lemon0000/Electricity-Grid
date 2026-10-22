@@ -1,0 +1,1282 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "counts": {
+    "audit_steps": 180,
+    "child_processes": 9,
+    "offline_oracles": 2,
+    "policy_steps": 180
+  },
+  "elapsed_seconds": 2.9931063999974867,
+  "known_unmeasured": "cost of I/O failure cleanup; actual network; native/solver",
+  "offline_oracles": [
+    {
+      "clean": "early",
+      "result": {
+        "feasible": true,
+        "flow": "1/5",
+        "recovery_slots": {
+          "-1": "0",
+          "-2": "0",
+          "0": "0",
+          "1": "0",
+          "2": "1/5",
+          "3": "0",
+          "4": "0",
+          "5": "1/5",
+          "6": "0",
+          "7": "0"
+        },
+        "required": "1/5",
+        "status": "offline_fixed_debt_recovery_only",
+        "subset_deficit": "0"
+      }
+    },
+    {
+      "clean": "late",
+      "result": {
+        "feasible": false,
+        "flow": "0",
+        "recovery_slots": {
+          "-1": "0",
+          "-2": "0",
+          "0": "0",
+          "1": "0",
+          "2": "0",
+          "3": "0",
+          "4": "1/5",
+          "5": "1/5",
+          "6": "0",
+          "7": "0"
+        },
+        "required": "1/5",
+        "status": "offline_fixed_debt_recovery_only",
+        "subset_deficit": "1/5"
+      }
+    }
+  ],
+  "sampled_process_tree_peak_rss_bytes": 62099456,
+  "scope": "B1 scalar mechanism only; B2 and full main-experiment budget unknown",
+  "source_sha256": {
+    "configs\\staged_deliverability_small_case_v1.DRAFT.yaml": "5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5",
+    "docs\\model_spec\\staged_deliverability_minimum_spec_v1.md": "024841d9a13116651d353d1e1f81e1b4bc68de512208e2cb80137e8ca7b77045",
+    "docs\\plan\\staged_deliverability_b1_development_contract_v1.md": "553907026878f25e567e7a723e5983524e80f43cd037bf24ad6c137d6fdf0c0d",
+    "docs\\plan\\staged_deliverability_small_case_plan_v1.md": "9fb409cc7b7eac6c92d1e70a89d3842f68d1399f2abdf42062e06e7d02f78de5",
+    "experiments\\staged_deliverability_b1_development_v1.py": "3872c5f307713d8ab5223a217a5c9b2f6670e5e27818e492580872842e6a9f00",
+    "src\\rq2_joint_deliverability_boundary_v1\\debt_cohorts.py": "d10497c1e6ab5ff573dec8d938b5407a7e28277551b37a1e0d7f79b4241adaab",
+    "src\\staged_deliverability_audit_v1.py": "e9e5e001d7f1510c5690c605b8ad87993456da973d454e8cb1e82453045b0612",
+    "src\\staged_deliverability_development_v1.py": "91bbc6aaaac458c8fcb23c11d830a98af99e1d50d42b3c0489246ec1922109e0",
+    "tests\\test_staged_deliverability_development_v1.py": "b3aa593e19c562a0af391920cd37453bdaeef7e234f1e995d4c8da9dadc646b9"
+  },
+  "stage_wall_seconds": {
+    "checkpoint_save": 0.009418100002221763,
+    "continuous_policy": 0.7664543999999296,
+    "fresh_process_reopen_audit": 1.710304599997471,
+    "input_load": 0.008837900000798982,
+    "offline_oracle": 0.0013077000039629638,
+    "parent_audit": 0.011153500006912509,
+    "source_hash_after": 0.0053360999991127755,
+    "source_hash_before": 0.003992899997683708
+  },
+  "status": "development_diagnostic_completed",
+  "summaries": [
+    {
+      "assessment": {
+        "coverage_complete": true,
+        "fx_contract_status": "not_assessed_scalar_stub",
+        "method": "instantaneous",
+        "method_conditions_satisfied": true,
+        "observed_primary_deadline_miss": "1/5",
+        "observed_through": 7,
+        "physical_replay_violations": [],
+        "primary_right_censored": false,
+        "remaining_debt": "1/5",
+        "scope": "instantaneous_conditions_only",
+        "stopped": false
+      },
+      "clean": "early",
+      "debt_before_rejection": "0",
+      "first_full_contract_rejection": null,
+      "plan": "on_time",
+      "tasks": [
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": -2,
+          "deadline_miss": "0",
+          "due": -2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": -1,
+          "deadline_miss": "0",
+          "due": -1,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 0,
+          "deadline_miss": "0",
+          "due": 2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 1,
+          "deadline_miss": "1/5",
+          "due": 3,
+          "immediate": "3/10",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "1/5",
+          "status": "deadline_missed"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 2,
+          "deadline_miss": "0",
+          "due": 4,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 3,
+          "deadline_miss": "0",
+          "due": 5,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 4,
+          "deadline_miss": "0",
+          "due": 6,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 5,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 6,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 7,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        }
+      ]
+    },
+    {
+      "assessment": {
+        "coverage_complete": true,
+        "fx_contract_status": "not_assessed_scalar_stub",
+        "method": "fixed_headroom",
+        "method_conditions_satisfied": true,
+        "observed_primary_deadline_miss": "0",
+        "observed_through": 7,
+        "physical_replay_violations": [],
+        "primary_right_censored": false,
+        "remaining_debt": "0",
+        "scope": "constant_headroom_approximation",
+        "stopped": false
+      },
+      "clean": "early",
+      "debt_before_rejection": "0",
+      "first_full_contract_rejection": null,
+      "plan": "on_time",
+      "tasks": [
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": -2,
+          "deadline_miss": "0",
+          "due": -2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": -1,
+          "deadline_miss": "0",
+          "due": -1,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 0,
+          "deadline_miss": "0",
+          "due": 2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 1,
+          "deadline_miss": "0",
+          "due": 3,
+          "immediate": "3/10",
+          "original": "1/2",
+          "recovered": "1/5",
+          "remaining": "0",
+          "status": "recovered_by_deadline"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 2,
+          "deadline_miss": "0",
+          "due": 4,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 3,
+          "deadline_miss": "0",
+          "due": 5,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 4,
+          "deadline_miss": "0",
+          "due": 6,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 5,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 6,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 7,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        }
+      ]
+    },
+    {
+      "assessment": {
+        "coverage_complete": true,
+        "fx_contract_status": "not_assessed_scalar_stub",
+        "method": "full_temporal",
+        "method_conditions_satisfied": true,
+        "observed_primary_deadline_miss": "0",
+        "observed_through": 7,
+        "physical_replay_violations": [],
+        "primary_right_censored": false,
+        "remaining_debt": "0",
+        "scope": "scalar_fixed_policy",
+        "stopped": false
+      },
+      "clean": "early",
+      "debt_before_rejection": "0",
+      "first_full_contract_rejection": null,
+      "plan": "on_time",
+      "tasks": [
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": -2,
+          "deadline_miss": "0",
+          "due": -2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": -1,
+          "deadline_miss": "0",
+          "due": -1,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 0,
+          "deadline_miss": "0",
+          "due": 2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 1,
+          "deadline_miss": "0",
+          "due": 3,
+          "immediate": "3/10",
+          "original": "1/2",
+          "recovered": "1/5",
+          "remaining": "0",
+          "status": "recovered_by_deadline"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 2,
+          "deadline_miss": "0",
+          "due": 4,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 3,
+          "deadline_miss": "0",
+          "due": 5,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 4,
+          "deadline_miss": "0",
+          "due": 6,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 5,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 6,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 7,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        }
+      ]
+    },
+    {
+      "assessment": {
+        "coverage_complete": true,
+        "fx_contract_status": "not_assessed_scalar_stub",
+        "method": "instantaneous",
+        "method_conditions_satisfied": true,
+        "observed_primary_deadline_miss": "1/5",
+        "observed_through": 7,
+        "physical_replay_violations": [],
+        "primary_right_censored": false,
+        "remaining_debt": "1/5",
+        "scope": "instantaneous_conditions_only",
+        "stopped": false
+      },
+      "clean": "late",
+      "debt_before_rejection": "0",
+      "first_full_contract_rejection": null,
+      "plan": "on_time",
+      "tasks": [
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": -2,
+          "deadline_miss": "0",
+          "due": -2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": -1,
+          "deadline_miss": "0",
+          "due": -1,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 0,
+          "deadline_miss": "0",
+          "due": 2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 1,
+          "deadline_miss": "1/5",
+          "due": 3,
+          "immediate": "3/10",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "1/5",
+          "status": "deadline_missed"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 2,
+          "deadline_miss": "0",
+          "due": 4,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 3,
+          "deadline_miss": "0",
+          "due": 5,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 4,
+          "deadline_miss": "0",
+          "due": 6,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 5,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 6,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 7,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        }
+      ]
+    },
+    {
+      "assessment": {
+        "coverage_complete": true,
+        "fx_contract_status": "not_assessed_scalar_stub",
+        "method": "fixed_headroom",
+        "method_conditions_satisfied": true,
+        "observed_primary_deadline_miss": "0",
+        "observed_through": 7,
+        "physical_replay_violations": [
+          [
+            2,
+            [
+              "hourly_cfe"
+            ]
+          ]
+        ],
+        "primary_right_censored": false,
+        "remaining_debt": "0",
+        "scope": "constant_headroom_approximation",
+        "stopped": false
+      },
+      "clean": "late",
+      "debt_before_rejection": "1/5",
+      "first_full_contract_rejection": 2,
+      "plan": "on_time",
+      "tasks": [
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": -2,
+          "deadline_miss": "0",
+          "due": -2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": -1,
+          "deadline_miss": "0",
+          "due": -1,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 0,
+          "deadline_miss": "0",
+          "due": 2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 1,
+          "deadline_miss": "0",
+          "due": 3,
+          "immediate": "3/10",
+          "original": "1/2",
+          "recovered": "1/5",
+          "remaining": "0",
+          "status": "recovered_by_deadline"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 2,
+          "deadline_miss": "0",
+          "due": 4,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 3,
+          "deadline_miss": "0",
+          "due": 5,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 4,
+          "deadline_miss": "0",
+          "due": 6,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 5,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 6,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 7,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        }
+      ]
+    },
+    {
+      "assessment": {
+        "coverage_complete": true,
+        "fx_contract_status": "not_assessed_scalar_stub",
+        "method": "full_temporal",
+        "method_conditions_satisfied": false,
+        "observed_primary_deadline_miss": "1/5",
+        "observed_through": 7,
+        "physical_replay_violations": [],
+        "primary_right_censored": false,
+        "remaining_debt": "0",
+        "scope": "scalar_fixed_policy",
+        "stopped": false
+      },
+      "clean": "late",
+      "debt_before_rejection": "0",
+      "first_full_contract_rejection": null,
+      "plan": "on_time",
+      "tasks": [
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": -2,
+          "deadline_miss": "0",
+          "due": -2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": -1,
+          "deadline_miss": "0",
+          "due": -1,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 0,
+          "deadline_miss": "0",
+          "due": 2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 1,
+          "deadline_miss": "1/5",
+          "due": 3,
+          "immediate": "3/10",
+          "original": "1/2",
+          "recovered": "1/5",
+          "remaining": "0",
+          "status": "deadline_missed"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 2,
+          "deadline_miss": "0",
+          "due": 4,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 3,
+          "deadline_miss": "0",
+          "due": 5,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 4,
+          "deadline_miss": "0",
+          "due": 6,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 5,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 6,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 7,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        }
+      ]
+    },
+    {
+      "assessment": {
+        "coverage_complete": true,
+        "fx_contract_status": "not_assessed_scalar_stub",
+        "method": "instantaneous",
+        "method_conditions_satisfied": true,
+        "observed_primary_deadline_miss": "2/5",
+        "observed_through": 7,
+        "physical_replay_violations": [],
+        "primary_right_censored": false,
+        "remaining_debt": "2/5",
+        "scope": "instantaneous_conditions_only",
+        "stopped": false
+      },
+      "clean": "early",
+      "debt_before_rejection": "0",
+      "first_full_contract_rejection": null,
+      "plan": "delayed",
+      "tasks": [
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": -2,
+          "deadline_miss": "0",
+          "due": -2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": -1,
+          "deadline_miss": "0",
+          "due": -1,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 0,
+          "deadline_miss": "0",
+          "due": 2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 1,
+          "deadline_miss": "1/5",
+          "due": 3,
+          "immediate": "3/10",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "1/5",
+          "status": "deadline_missed"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 2,
+          "deadline_miss": "0",
+          "due": 4,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 3,
+          "deadline_miss": "1/5",
+          "due": 5,
+          "immediate": "1/2",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "1/5",
+          "status": "deadline_missed"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 4,
+          "deadline_miss": "0",
+          "due": 6,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 5,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 6,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 7,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        }
+      ]
+    },
+    {
+      "assessment": {
+        "coverage_complete": true,
+        "fx_contract_status": "not_assessed_scalar_stub",
+        "method": "fixed_headroom",
+        "method_conditions_satisfied": true,
+        "observed_primary_deadline_miss": "0",
+        "observed_through": 7,
+        "physical_replay_violations": [
+          [
+            2,
+            [
+              "scalar_supply"
+            ]
+          ],
+          [
+            4,
+            [
+              "hourly_cfe"
+            ]
+          ]
+        ],
+        "primary_right_censored": false,
+        "remaining_debt": "0",
+        "scope": "constant_headroom_approximation",
+        "stopped": false
+      },
+      "clean": "early",
+      "debt_before_rejection": "1/5",
+      "first_full_contract_rejection": 2,
+      "plan": "delayed",
+      "tasks": [
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": -2,
+          "deadline_miss": "0",
+          "due": -2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": -1,
+          "deadline_miss": "0",
+          "due": -1,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 0,
+          "deadline_miss": "0",
+          "due": 2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 1,
+          "deadline_miss": "0",
+          "due": 3,
+          "immediate": "3/10",
+          "original": "1/2",
+          "recovered": "1/5",
+          "remaining": "0",
+          "status": "recovered_by_deadline"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 2,
+          "deadline_miss": "0",
+          "due": 4,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 3,
+          "deadline_miss": "0",
+          "due": 5,
+          "immediate": "1/2",
+          "original": "7/10",
+          "recovered": "1/5",
+          "remaining": "0",
+          "status": "recovered_by_deadline"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 4,
+          "deadline_miss": "0",
+          "due": 6,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 5,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 6,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "hypothetical_approximation",
+          "birth": 7,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        }
+      ]
+    },
+    {
+      "assessment": {
+        "coverage_complete": true,
+        "fx_contract_status": "not_assessed_scalar_stub",
+        "method": "full_temporal",
+        "method_conditions_satisfied": false,
+        "observed_primary_deadline_miss": "2/5",
+        "observed_through": 7,
+        "physical_replay_violations": [],
+        "primary_right_censored": false,
+        "remaining_debt": "1/5",
+        "scope": "scalar_fixed_policy",
+        "stopped": false
+      },
+      "clean": "early",
+      "debt_before_rejection": "0",
+      "first_full_contract_rejection": null,
+      "plan": "delayed",
+      "tasks": [
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": -2,
+          "deadline_miss": "0",
+          "due": -2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": -1,
+          "deadline_miss": "0",
+          "due": -1,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 0,
+          "deadline_miss": "0",
+          "due": 2,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 1,
+          "deadline_miss": "1/5",
+          "due": 3,
+          "immediate": "3/10",
+          "original": "1/2",
+          "recovered": "1/5",
+          "remaining": "0",
+          "status": "deadline_missed"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 2,
+          "deadline_miss": "0",
+          "due": 4,
+          "immediate": "1/2",
+          "original": "1/2",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 3,
+          "deadline_miss": "1/5",
+          "due": 5,
+          "immediate": "1/2",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "1/5",
+          "status": "deadline_missed"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 4,
+          "deadline_miss": "0",
+          "due": 6,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 5,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 6,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        },
+        {
+          "balance_scope": "scalar_policy_execution",
+          "birth": 7,
+          "deadline_miss": "0",
+          "due": 7,
+          "immediate": "7/10",
+          "original": "7/10",
+          "recovered": "0",
+          "remaining": "0",
+          "status": "completed_on_arrival"
+        }
+      ]
+    }
+  ]
+}

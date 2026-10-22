@@ -1,0 +1,246 @@
+{
+  "observations": [
+    {
+      "clean_mwh": "3/5",
+      "compute_capacity": "4/5",
+      "due": -2,
+      "equipment_online": [
+        "first_batch"
+      ],
+      "flexible_fraction": "2/5",
+      "grid_online": false,
+      "hour": -2,
+      "idle_mw": "2/25",
+      "supply_mw": "4/5",
+      "workload": "1/2"
+    },
+    {
+      "clean_mwh": "3/5",
+      "compute_capacity": "4/5",
+      "due": -1,
+      "equipment_online": [
+        "first_batch"
+      ],
+      "flexible_fraction": "2/5",
+      "grid_online": false,
+      "hour": -1,
+      "idle_mw": "2/25",
+      "supply_mw": "4/5",
+      "workload": "1/2"
+    },
+    {
+      "clean_mwh": "3/5",
+      "compute_capacity": "4/5",
+      "due": 2,
+      "equipment_online": [
+        "first_batch"
+      ],
+      "flexible_fraction": "2/5",
+      "grid_online": false,
+      "hour": 0,
+      "idle_mw": "2/25",
+      "supply_mw": "4/5",
+      "workload": "1/2"
+    },
+    {
+      "clean_mwh": "1/2",
+      "compute_capacity": "4/5",
+      "due": 3,
+      "equipment_online": [
+        "first_batch"
+      ],
+      "flexible_fraction": "2/5",
+      "grid_online": false,
+      "hour": 1,
+      "idle_mw": "2/25",
+      "supply_mw": "5/8",
+      "workload": "1/2"
+    }
+  ],
+  "parameters": {
+    "alpha": "4/5",
+    "auxiliary_mw": "1/40",
+    "beta": "1",
+    "call_ramp": "1/5",
+    "capacity": "1/5",
+    "eta": "1",
+    "facility_factor": "5/4",
+    "fixed_headroom": "1/5",
+    "max_call_energy": "2/5",
+    "max_debt": "2/5",
+    "max_duration": 1,
+    "max_events": 2,
+    "max_recovery": "1/5",
+    "minimum_rest": 0
+  },
+  "schema": "staged_mechanism_checkpoint_v1",
+  "state": {
+    "call_energy": "1/5",
+    "duration": 1,
+    "events": 1,
+    "first_hour": -2,
+    "ledger": {
+      "accounting_period_id": "continuous_case",
+      "cohorts": [
+        {
+          "created_hour": 4,
+          "deadline_evidence": "mechanism_assumption",
+          "due_hour": 6,
+          "incurred": "1/5",
+          "missed_at_deadline": null,
+          "remaining": "1/5"
+        }
+      ],
+      "last_hour": 4,
+      "trajectory_identity": "on_time:late:full_temporal"
+    },
+    "method": "full_temporal",
+    "parameters": {
+      "alpha": "4/5",
+      "auxiliary_mw": "1/40",
+      "beta": "1",
+      "call_ramp": "1/5",
+      "capacity": "1/5",
+      "eta": "1",
+      "facility_factor": "5/4",
+      "fixed_headroom": "1/5",
+      "max_call_energy": "2/5",
+      "max_debt": "2/5",
+      "max_duration": 1,
+      "max_events": 2,
+      "max_recovery": "1/5",
+      "minimum_rest": 0
+    },
+    "previous_call": "1/5",
+    "records": [
+      {
+        "activity": "1/2",
+        "allocations": [],
+        "attributed_clean_mwh": "3/5",
+        "cfe_call_shortfall_mw": "0",
+        "cfe_request_mw": "0",
+        "cfe_served": "0",
+        "cfe_shortfall_mwh": "0",
+        "grid_request_mw": "0",
+        "grid_served": "0",
+        "grid_shortfall_mw": "0",
+        "ledger_applied": true,
+        "observation": {
+          "clean_mwh": "3/5",
+          "compute_capacity": "4/5",
+          "due": -2,
+          "equipment_online": [
+            "first_batch"
+          ],
+          "flexible_fraction": "2/5",
+          "grid_online": false,
+          "hour": -2,
+          "idle_mw": "2/25",
+          "supply_mw": "4/5",
+          "workload": "1/2"
+        },
+        "power_mw": "3/4",
+        "recovery": "0",
+        "reference_mw": "3/4",
+        "violations": []
+      },
+      {
+        "activity": "1/2",
+        "allocations": [],
+        "attributed_clean_mwh": "3/5",
+        "cfe_call_shortfall_mw": "0",
+        "cfe_request_mw": "0",
+        "cfe_served": "0",
+        "cfe_shortfall_mwh": "0",
+        "grid_request_mw": "0",
+        "grid_served": "0",
+        "grid_shortfall_mw": "0",
+        "ledger_applied": true,
+        "observation": {
+          "clean_mwh": "3/5",
+          "compute_capacity": "4/5",
+          "due": -1,
+          "equipment_online": [
+            "first_batch"
+          ],
+          "flexible_fraction": "2/5",
+          "grid_online": false,
+          "hour": -1,
+          "idle_mw": "2/25",
+          "supply_mw": "4/5",
+          "workload": "1/2"
+        },
+        "power_mw": "3/4",
+        "recovery": "0",
+        "reference_mw": "3/4",
+        "violations": []
+      },
+      {
+        "activity": "1/2",
+        "allocations": [],
+        "attributed_clean_mwh": "3/5",
+        "cfe_call_shortfall_mw": "0",
+        "cfe_request_mw": "0",
+        "cfe_served": "0",
+        "cfe_shortfall_mwh": "0",
+        "grid_request_mw": "0",
+        "grid_served": "0",
+        "grid_shortfall_mw": "0",
+        "ledger_applied": true,
+        "observation": {
+          "clean_mwh": "3/5",
+          "compute_capacity": "4/5",
+          "due": 2,
+          "equipment_online": [
+            "first_batch"
+          ],
+          "flexible_fraction": "2/5",
+          "grid_online": false,
+          "hour": 0,
+          "idle_mw": "2/25",
+          "supply_mw": "4/5",
+          "workload": "1/2"
+        },
+        "power_mw": "3/4",
+        "recovery": "0",
+        "reference_mw": "3/4",
+        "violations": []
+      },
+      {
+        "activity": "3/10",
+        "allocations": [],
+        "attributed_clean_mwh": "1/2",
+        "cfe_call_shortfall_mw": "0",
+        "cfe_request_mw": "1/8",
+        "cfe_served": "1/10",
+        "cfe_shortfall_mwh": "0",
+        "grid_request_mw": "1/8",
+        "grid_served": "1/10",
+        "grid_shortfall_mw": "0",
+        "ledger_applied": true,
+        "observation": {
+          "clean_mwh": "1/2",
+          "compute_capacity": "4/5",
+          "due": 3,
+          "equipment_online": [
+            "first_batch"
+          ],
+          "flexible_fraction": "2/5",
+          "grid_online": false,
+          "hour": 1,
+          "idle_mw": "2/25",
+          "supply_mw": "5/8",
+          "workload": "1/2"
+        },
+        "power_mw": "1/2",
+        "recovery": "0",
+        "reference_mw": "3/4",
+        "violations": []
+      }
+    ],
+    "rest": 0,
+    "stopped": false,
+    "trajectory_id": "on_time:late:full_temporal"
+  },
+  "status": "DRAFT_NONAUTHORITATIVE"
+}

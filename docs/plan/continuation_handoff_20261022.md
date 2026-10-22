@@ -4,7 +4,7 @@
 
 同日规范同步：`AGENTS.md`维护简短入口、工作区与实施规则；`agent.md`已将当前目标、顺序和完成标准对齐本交接，第7节与第9节的整体性能审查原文保留。具体工作以当前规则及实时状态为准。
 
-同日后续入口：工作包A的[最小阶段评价规格](../model_spec/staged_deliverability_minimum_spec_v1.md)及[工作包B实施计划](staged_deliverability_small_case_plan_v1.md)已单列为非权威设计文档；后续按这两份文件衔接。当前进度和未决条件分别维护于[科研执行步骤](科研项目执行步骤.md)与[blocker登记](../model_spec/blocker_register.md)顶部。以下“尚未实施A–F”等描述保留本交接整理时点的含义，不代表新接口已经实施。
+同日后续入口：工作包A的[最小阶段评价规格](../model_spec/staged_deliverability_minimum_spec_v1.md)与[工作包B实施计划](staged_deliverability_small_case_plan_v1.md)已衔接B1开发；B1的9条机制轨迹、独立核验与新进程重开见[开发验证报告](../../results/tables/staged_deliverability_b1_v1_non_authoritative/attempt_01/validation_report.md)。下一步B2实际网络与F/X，再闭合C主实验成本。当前进度和未决条件分别维护于[科研执行步骤](科研项目执行步骤.md)与[blocker登记](../model_spec/blocker_register.md)顶部。以下“尚未实施A–F”等描述保留本交接原整理时点的含义，不提升B1的非权威机制证据范围。
 
 ## 1 当前目标与用户要求
 
