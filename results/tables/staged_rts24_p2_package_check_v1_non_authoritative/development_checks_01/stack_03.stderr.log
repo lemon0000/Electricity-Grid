@@ -1,0 +1,60 @@
+ORDINARY STACK SNAPSHOT
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_package_check_v1_non_authoritative\development_checks_01\inspect_saved_fixture.py", line 27, in <module>
+    result=d.inspect_package(raw,d.pin(raw)['sha256'],json.loads((worker/'launcher.json').read_bytes()),json.loads(raw)['startup'])
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 549, in inspect_package
+    try:before=inventory(worker)
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_package_check_v1_non_authoritative\development_checks_01\inspect_saved_fixture.py", line 23, in inventory
+    start=time.perf_counter();print('inventory_start',flush=True);value=original(path)
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 177, in inventory
+    raw={n:bounded_file_bytes(root/n,files[n]) for n in sorted(files)}
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 155, in bounded_file_bytes
+    require(codec.directory_identity(path.parent)==directories,'directory changed during read')
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_evidence_store_v1.py", line 103, in directory_identity
+    info = ordinary(parent, directory=True)
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_evidence_store_v1.py", line 86, in ordinary
+    info = os.lstat(path)
+ORDINARY STACK SNAPSHOT
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_package_check_v1_non_authoritative\development_checks_01\inspect_saved_fixture.py", line 27, in <module>
+    result=d.inspect_package(raw,d.pin(raw)['sha256'],json.loads((worker/'launcher.json').read_bytes()),json.loads(raw)['startup'])
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 549, in inspect_package
+    try:before=inventory(worker)
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_package_check_v1_non_authoritative\development_checks_01\inspect_saved_fixture.py", line 23, in inventory
+    start=time.perf_counter();print('inventory_start',flush=True);value=original(path)
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 177, in inventory
+    raw={n:bounded_file_bytes(root/n,files[n]) for n in sorted(files)}
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 155, in bounded_file_bytes
+    require(codec.directory_identity(path.parent)==directories,'directory changed during read')
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_evidence_store_v1.py", line 103, in directory_identity
+    info = ordinary(parent, directory=True)
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_evidence_store_v1.py", line 86, in ordinary
+    info = os.lstat(path)
+ORDINARY STACK SNAPSHOT
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_package_check_v1_non_authoritative\development_checks_01\inspect_saved_fixture.py", line 27, in <module>
+    result=d.inspect_package(raw,d.pin(raw)['sha256'],json.loads((worker/'launcher.json').read_bytes()),json.loads(raw)['startup'])
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 556, in inspect_package
+    details=protocol(before,context,reg,packet,record,diagnostic and not terminal_rejection,terminal_rejection)
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 482, in protocol
+    states,state,hour_events,committed=journal_references(raw,packet['schedule'],report,reg,packet,terminal_rejection)
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 306, in journal_references
+    and candidate['stopped'] is rejected and same(candidate['records'][:-1],state['records']),'committed state row differs')
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 45, in same
+    def same(a,b):return digest(a)==digest(b)
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 40, in digest
+    for part in json.JSONEncoder(ensure_ascii=True,sort_keys=True,separators=(',',':'),allow_nan=False).iterencode(value):
+  File "D:\Miniconda3\envs\compute\Lib\json\encoder.py", line 430, in _iterencode
+    yield from _iterencode_list(o, _current_indent_level)
+  File "D:\Miniconda3\envs\compute\Lib\json\encoder.py", line 326, in _iterencode_list
+    yield from chunks
+  File "D:\Miniconda3\envs\compute\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "D:\Miniconda3\envs\compute\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "D:\Miniconda3\envs\compute\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 3 more times]
+  File "D:\Miniconda3\envs\compute\Lib\json\encoder.py", line 326, in _iterencode_list
+    yield from chunks
+  File "D:\Miniconda3\envs\compute\Lib\json\encoder.py", line 398, in _iterencode_dict
+    yield _floatstr(value)
+  File "D:\Miniconda3\envs\compute\Lib\json\encoder.py", line 224, in floatstr
+    def floatstr(o, allow_nan=self.allow_nan,

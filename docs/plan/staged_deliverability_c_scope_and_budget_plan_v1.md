@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-23 P2机械包检查检查点：见[最新交接](continuation_handoff_20261023_p2_package_check.md)与[调用量/收尾预算](staged_deliverability_c_p2_package_check_cost_review_v1.md)。新只读层完成context/注册/55＋7＋6来源、quiet后全库存书挡、319点/138行/10接受state及内部Job/residual核验；129新/72相关普通检查终态通过，包含真实文件系统完整包和late319诊断。P1全403根与合成协议7582个digest入口的新旧规范bytes相同；440旧发布路径及B1–B3/P1保持。原P1 outer66−已知inner64的两个residual不归因；条件642成员数组至少31459B，固定16KiB reserve尚不能保证边界余量。无实际P2/native；下一步版本化收尾预算、实际outer与独立科学采用、昂贵失败/全wall/RAM/storage准入。139/F-X、C整体及D/E继续OPEN；以下保留历史检查点。
+
 2026-10-23 P2失败与父端观察保存检查点：见[最新交接](continuation_handoff_20261023_p2_failure_outer.md)。固定晚期numeric/transport、begin/commit/terminal、fresh/父metrics及quiet后发布失败矩阵；新增父观察保存组件，核完整Job/owner/quiet、固定16KiB reserve、闭合机械claims与pending/readback未决。73新/35相关普通检查通过，初轮fixture失败和120s组合超时保留；400旧发布路径与B1–B3/P1保持。319/318/137与319/319/138仅为替代件控制回归，无新公共P2/native。完整outer绑定/库存/引用与独立科学采用、尾部成本和总预算仍待闭合，139/F-X、C整体与D/E继续OPEN。以下保留历史检查点。
 
 2026-10-23 P2整链会计检查点：见[最新交接](continuation_handoff_20261023_p2_accounting.md)。暂缓缓存并保持1281原指纹，补齐十小时成功条件图：journal runtime101（并入指纹1382）、69 root/126 journal CAS及2552 point CAS扫描、753分来源root读取、97 audit/495历史row、575 selective/1796描述与4 full/570描述。原P1五小时130 CAS的wire闭包与33份observer独立交叉核对，76 scans投影5376对象实例/17465962B逻辑读取，不能外推十小时。一次纯元数据CLI exit0，264输入首尾同；40新/41相关普通检查及独立保存后核验闭合，351旧发布路径与B1–B3/P1保持。下一步昂贵失败矩阵、outer/quiet采用与完整成本，C/139/F-X及D/E继续OPEN。以下保留历史检查点。

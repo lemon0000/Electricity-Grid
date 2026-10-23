@@ -1,0 +1,16 @@
+.......................................................F
+================================== FAILURES ===================================
+_______ test_point_reference_and_internal_job_corruption_rejected[log] ________
+tests\test_staged_rts24_p2_package_check_v1.py:459: in test_point_reference_and_internal_job_corruption_rejected
+    with pytest.raises((ValueError,KeyError,TypeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (<class 'ValueError'>, <class 'KeyError'>, <class 'TypeError'>)
+=================================== PASSES ====================================
+============================= slowest 5 durations =============================
+6.91s setup    tests/test_staged_rts24_p2_package_check_v1.py::test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success[1-0]
+4.52s call     tests/test_staged_rts24_p2_package_check_v1.py::test_point_reference_and_internal_job_corruption_rejected[log]
+1.82s call     tests/test_staged_rts24_p2_package_check_v1.py::test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success[5-0]
+1.75s call     tests/test_staged_rts24_p2_package_check_v1.py::test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success[4-0]
+1.71s call     tests/test_staged_rts24_p2_package_check_v1.py::test_known_rejection_keeps_committed_hour_separate_from_accepted_actual[4]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 55 passed, 49 deselected in 27.00s

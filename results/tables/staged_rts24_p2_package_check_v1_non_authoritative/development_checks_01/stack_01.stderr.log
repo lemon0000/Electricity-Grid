@@ -1,0 +1,30 @@
+ORDINARY STACK SNAPSHOT
+  File "<string>", line 12, in <module>
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 534, in inspect_package
+    try:before=inventory(worker)
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 162, in inventory
+    raw={n:codec.read_bytes(root/n) for n in sorted(files)}
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_evidence_store_v1.py", line 110, in read_bytes
+    directories = directory_identity(path.parent)
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_evidence_store_v1.py", line 103, in directory_identity
+    info = ordinary(parent, directory=True)
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_evidence_store_v1.py", line 86, in ordinary
+    info = os.lstat(path)
+ORDINARY STACK SNAPSHOT
+  File "<string>", line 12, in <module>
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 534, in inspect_package
+    try:before=inventory(worker)
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 162, in inventory
+    raw={n:codec.read_bytes(root/n) for n in sorted(files)}
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_evidence_store_v1.py", line 116, in read_bytes
+    data = stream.read(MAX_BLOB+1)
+ORDINARY STACK SNAPSHOT
+  File "<string>", line 12, in <module>
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 534, in inspect_package
+    try:before=inventory(worker)
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_p2_package_check_v1.py", line 162, in inventory
+    raw={n:codec.read_bytes(root/n) for n in sorted(files)}
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_evidence_store_v1.py", line 111, in read_bytes
+    before = ordinary(path, allow_links=allow_links)
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_evidence_store_v1.py", line 86, in ordinary
+    info = os.lstat(path)

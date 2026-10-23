@@ -1,5 +1,7 @@
 # 当前问题与阶段门禁登记
 
+2026-10-23 P2机械检查与收尾空间缺口：见[最新交接](../plan/continuation_handoff_20261023_p2_package_check.md)及[会计审查](../plan/staged_deliverability_c_p2_package_check_cost_review_v1.md)。129新/72相关普通检查已完成，只读包层能闭合合成319/138元数据与真实库存；不核实科学数值、实际argv、进程亲缘或完整runtime。保存P1为outer66/inner64/两个residual；条件P2历史642成员的18位FILETIME数组至少31459B，超固定16384B reserve 15075B，故边界保证仍OPEN，不能据此推断实际P2必超限。解除需版本化parent收尾预算/guard会计与失败窗口，再补真实outer、独立科学采用及代表成本。fresh60s＋5s收束对65s无进展仍无父端余量。原七输入/packet/P1/B1–B3保持；无新公共P2或native权限，139/F-X、C整体与D/E输入/选择/留出/资源继续OPEN。
+
 ### 2026-10-23 P2失败控制与父端观察保存已开发，完整outer仍OPEN
 
 [交接](../plan/continuation_handoff_20261023_p2_failure_outer.md)记录昂贵失败矩阵及quiet后父记录保存组件：完整Job成员/owner/HANDLE、固定16KiB＋1文件reserve、闭合机械claims及原codec pending/fsync/rename/readback，科学采用与独立139固定false。73新/35相关普通检查通过，5个初轮fixture失败与120s组合超时原样保留；400旧发布路径和B1–B3/P1保持。晚期319/318/137及319/319/138使用预置actual、重复branch标签和journal/audit/fresh替代，仅为控制证据。完整outer注册/来源/exe绑定、全库存/319引用/138行与独立raw/KKT/journal采用尚未实现；尾部/失败/十小时CAS成本及65s余量、总预算仍缺，无P2/native授权，139/F-X、C整体与D/E继续OPEN。

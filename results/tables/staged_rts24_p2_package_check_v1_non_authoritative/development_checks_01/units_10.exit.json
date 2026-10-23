@@ -1,0 +1,42 @@
+{
+  "argv": [
+    "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/test_staged_rts24_p2_package_check_v1.py",
+    "-k",
+    "full_saved_protocol",
+    "-x",
+    "-q",
+    "-rP",
+    "--tb=short",
+    "--durations=5",
+    "-p",
+    "no:cacheprovider",
+    "-o",
+    "tmp_path_retention_count=100000",
+    "-o",
+    "tmp_path_retention_policy=all"
+  ],
+  "exit_code": 0,
+  "scope": "ordinary synthetic saved-metadata tests; no native/scientific execution",
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_p2_package_check_contract_v1.md": {
+      "bytes": 6891,
+      "sha256": "22ddfd5bf86628d5bd56744ab18c321f20e975ed13e0e82a03fc1ba65cb4c5bc"
+    },
+    "src/staged_rts24_p2_package_check_v1.py": {
+      "bytes": 50876,
+      "sha256": "5794f8a35814cb5ad64fb38de2d8591e2e23e3bdb57921f0c84c853627466eb2"
+    },
+    "tests/test_staged_rts24_p2_package_check_v1.py": {
+      "bytes": 48809,
+      "sha256": "0cb13b67391dd32c13488bda9f2ad7ca65635987dc61d9cb24225114a694ac65"
+    }
+  },
+  "source_pins_unchanged": true,
+  "timed_out": false,
+  "timeout_seconds": 120,
+  "wall_seconds": 59.579977399999734
+}

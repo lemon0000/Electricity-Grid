@@ -1,0 +1,1420 @@
+EFFEEEEEEEEFEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE...........               [100%]
+=================================== ERRORS ====================================
+_ ERROR at setup of test_full_saved_protocol_closes_with_negative_X_and_scientific_flags_false _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_unknown_ownership_never_reads_inputs_or_worker[quiet] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_unknown_ownership_never_reads_inputs_or_worker[owner] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_unknown_ownership_never_reads_inputs_or_worker[handles] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_unknown_ownership_never_reads_inputs_or_worker[cleanup] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_unknown_ownership_never_reads_inputs_or_worker[incomplete] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_failed_exit_with_success_appearance_captures_inventory_only[exit3] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_failed_exit_with_success_appearance_captures_inventory_only[monitor] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_failed_exit_with_success_appearance_captures_inventory_only[wall] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_input_byte_drift_prevents_worker_read[registration] __
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+____ ERROR at setup of test_input_byte_drift_prevents_worker_read[packet] _____
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_input_byte_drift_prevents_worker_read[prepared_source] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_input_byte_drift_prevents_worker_read[kernel_source] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_input_byte_drift_prevents_worker_read[outer_source] __
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+______ ERROR at setup of test_input_byte_drift_prevents_worker_read[exe] ______
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_context_and_parent_startup_are_closed_and_held[argv] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_context_and_parent_startup_are_closed_and_held[cwd] __
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_context_and_parent_startup_are_closed_and_held[root] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_context_and_parent_startup_are_closed_and_held[limits] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_context_and_parent_startup_are_closed_and_held[authority] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_context_and_parent_startup_are_closed_and_held[context_sha] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+__ ERROR at setup of test_completion_recomputes_exact_root_exclusions[extra] __
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_completion_recomputes_exact_root_exclusions[missing] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_completion_recomputes_exact_root_exclusions[nested_exclusion] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+___ ERROR at setup of test_completion_recomputes_exact_root_exclusions[pin] ___
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+__ ERROR at setup of test_completion_recomputes_exact_root_exclusions[count] __
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_completion_recomputes_exact_root_exclusions[bool_count] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+__ ERROR at setup of test_completion_recomputes_exact_root_exclusions[bytes] __
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_point_reference_and_internal_job_corruption_rejected[ordinal] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_point_reference_and_internal_job_corruption_rejected[binding] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_point_reference_and_internal_job_corruption_rejected[parent] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_point_reference_and_internal_job_corruption_rejected[state] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_point_reference_and_internal_job_corruption_rejected[raw] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_point_reference_and_internal_job_corruption_rejected[log] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_point_reference_and_internal_job_corruption_rejected[cas] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_point_reference_and_internal_job_corruption_rejected[witness] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_contract_reference_failures_do_not_change_negative_X[missing] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_contract_reference_failures_do_not_change_negative_X[order] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_contract_reference_failures_do_not_change_negative_X[duplicate] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_contract_reference_failures_do_not_change_negative_X[point_sha] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_______ ERROR at setup of test_events_require_serial_protocol[sequence] _______
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+______ ERROR at setup of test_events_require_serial_protocol[nonfinite] _______
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+________ ERROR at setup of test_events_require_serial_protocol[order] _________
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ ERROR at setup of test_inventory_bookend_drift_never_returns_a_verified_package _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x000001D6171C5C10>, _basetemp=Wi...sers/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope='module')
+>   def full(inputs,tmp_path_factory):return build(inputs,tmp_path_factory.mktemp('full_protocol'))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+================================== FAILURES ===================================
+_ test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success[1-0] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path = WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/test_numeric_diagnostic_uses_o0')
+count = 1, rows = 0
+
+    @pytest.mark.parametrize('count,rows',[(1,0),(319,137)])
+    def test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success(inputs,tmp_path,count,rows):
+>       case=build(inputs,tmp_path,count,numeric=True);result=inspect(case)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:192: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+_ test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success[319-137] _
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path = WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/test_numeric_diagnostic_uses_o1')
+count = 319, rows = 137
+
+    @pytest.mark.parametrize('count,rows',[(1,0),(319,137)])
+    def test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success(inputs,tmp_path,count,rows):
+>       case=build(inputs,tmp_path,count,numeric=True);result=inspect(case)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:192: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+__ test_partial_failed_inventory_needs_no_completion_report_or_failure_file ___
+
+inputs = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/package_inputs...eedac3989f83fae418420', redispatch_fraction=Fraction(1, 2), economic_regularization_quadratic=Fraction(1, 100000000))})
+tmp_path = WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2677/test_partial_failed_inventory_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D65B9849B0>
+
+    def test_partial_failed_inventory_needs_no_completion_report_or_failure_file(inputs,tmp_path,monkeypatch):
+>       case=build(inputs,tmp_path,1,numeric=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_package_check_v1.py:226: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_staged_rts24_p2_package_check_v1.py:161: in build
+    balance(case);case.context=d.context_bytes(inputs.repo,worker,par,registration,inputs.packet,inputs.exe);case.sha=d.pin(case.context)['sha256'];case.startup=json.loads(case.context)['startup']
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_package_check_v1.py:122: in context_bytes
+    expected=codec.parse(codec.read_bytes(packet/'context.json'))['source_pins']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_evidence_store_v1.py:81: in parse
+    require(canonical(value) == data, "noncanonical JSON")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'noncanonical JSON'
+
+    def require(condition, message):
+>       if not condition: raise ValueError(message)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical JSON
+
+src\staged_rts24_evidence_store_v1.py:47: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_p2_package_check_v1.py::test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success[1-0]
+FAILED tests/test_staged_rts24_p2_package_check_v1.py::test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success[319-137]
+FAILED tests/test_staged_rts24_p2_package_check_v1.py::test_partial_failed_inventory_needs_no_completion_report_or_failure_file
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_full_saved_protocol_closes_with_negative_X_and_scientific_flags_false
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_unknown_ownership_never_reads_inputs_or_worker[quiet]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_unknown_ownership_never_reads_inputs_or_worker[owner]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_unknown_ownership_never_reads_inputs_or_worker[handles]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_unknown_ownership_never_reads_inputs_or_worker[cleanup]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_unknown_ownership_never_reads_inputs_or_worker[incomplete]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_failed_exit_with_success_appearance_captures_inventory_only[exit3]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_failed_exit_with_success_appearance_captures_inventory_only[monitor]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_failed_exit_with_success_appearance_captures_inventory_only[wall]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_input_byte_drift_prevents_worker_read[registration]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_input_byte_drift_prevents_worker_read[packet]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_input_byte_drift_prevents_worker_read[prepared_source]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_input_byte_drift_prevents_worker_read[kernel_source]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_input_byte_drift_prevents_worker_read[outer_source]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_input_byte_drift_prevents_worker_read[exe]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_context_and_parent_startup_are_closed_and_held[argv]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_context_and_parent_startup_are_closed_and_held[cwd]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_context_and_parent_startup_are_closed_and_held[root]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_context_and_parent_startup_are_closed_and_held[limits]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_context_and_parent_startup_are_closed_and_held[authority]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_context_and_parent_startup_are_closed_and_held[context_sha]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_completion_recomputes_exact_root_exclusions[extra]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_completion_recomputes_exact_root_exclusions[missing]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_completion_recomputes_exact_root_exclusions[nested_exclusion]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_completion_recomputes_exact_root_exclusions[pin]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_completion_recomputes_exact_root_exclusions[count]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_completion_recomputes_exact_root_exclusions[bool_count]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_completion_recomputes_exact_root_exclusions[bytes]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_point_reference_and_internal_job_corruption_rejected[ordinal]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_point_reference_and_internal_job_corruption_rejected[binding]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_point_reference_and_internal_job_corruption_rejected[parent]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_point_reference_and_internal_job_corruption_rejected[state]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_point_reference_and_internal_job_corruption_rejected[raw]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_point_reference_and_internal_job_corruption_rejected[log]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_point_reference_and_internal_job_corruption_rejected[cas]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_point_reference_and_internal_job_corruption_rejected[witness]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_contract_reference_failures_do_not_change_negative_X[missing]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_contract_reference_failures_do_not_change_negative_X[order]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_contract_reference_failures_do_not_change_negative_X[duplicate]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_contract_reference_failures_do_not_change_negative_X[point_sha]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_events_require_serial_protocol[sequence]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_events_require_serial_protocol[nonfinite]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_events_require_serial_protocol[order]
+ERROR tests/test_staged_rts24_p2_package_check_v1.py::test_inventory_bookend_drift_never_returns_a_verified_package
+3 failed, 11 passed, 44 errors in 78.67s (0:01:18)

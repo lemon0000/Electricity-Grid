@@ -1,0 +1,12 @@
+..............................................                           [100%]
+=================================== PASSES ====================================
+______ test_saved_P1_all_wire_roots_match_old_streaming_canonical_image _______
+---------------------------- Captured stdout call -----------------------------
+{"oracle": "all_saved_P1_wire_roots", "roots": 403, "bytes": 9790308}
+============================= slowest 5 durations =============================
+1.57s call     tests/test_staged_rts24_p2_package_check_v1.py::test_saved_P1_all_wire_roots_match_old_streaming_canonical_image
+0.04s call     tests/test_staged_rts24_p2_package_check_v1.py::test_canonical_image_exact_limit_and_local_cache_invalidation
+0.02s setup    tests/test_staged_rts24_p2_package_check_v1.py::test_bounded_reader_retains_bytes_and_requests_observed_size_plus_one[0]
+0.02s call     tests/test_staged_rts24_p2_package_check_v1.py::test_bounded_reader_identity_and_length_failure_windows[over_limit]
+0.01s call     tests/test_staged_rts24_p2_package_check_v1.py::test_bounded_reader_retains_bytes_and_requests_observed_size_plus_one[8388608]
+46 passed, 83 deselected in 3.38s

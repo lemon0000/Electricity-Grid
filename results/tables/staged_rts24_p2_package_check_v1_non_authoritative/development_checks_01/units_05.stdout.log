@@ -1,0 +1,32 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.12, pytest-9.0.2, pluggy-1.6.0 -- D:\Miniconda3\envs\compute\python.exe
+rootdir: D:\CUHKSZ\Research Project\electricity-grid
+plugins: anyio-4.13.0
+collecting ... collected 79 items
+
+tests/test_staged_rts24_p2_package_check_v1.py::test_full_saved_protocol_closes_with_negative_X_and_scientific_flags_false PASSED [  1%]
+tests/test_staged_rts24_p2_package_check_v1.py::test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success[1-0] FAILED [  2%]
+
+================================== FAILURES ===================================
+_ test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success[1-0] _
+tests\test_staged_rts24_p2_package_check_v1.py:274: in test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success
+    assert result['inspection_status']=='numeric_diagnostic_closed',result['protocol_error']
+E   AssertionError: {'message': 'failure/pending cannot close protocol', 'type': 'ValueError'}
+E   assert 'failure_inventory_captured' == 'numeric_diagnostic_closed'
+E     
+E     - numeric_diagnostic_closed
+E     + failure_inventory_captured
+============================= slowest 5 durations =============================
+89.81s call     tests/test_staged_rts24_p2_package_check_v1.py::test_full_saved_protocol_closes_with_negative_X_and_scientific_flags_false
+14.02s setup    tests/test_staged_rts24_p2_package_check_v1.py::test_full_saved_protocol_closes_with_negative_X_and_scientific_flags_false
+1.59s call     tests/test_staged_rts24_p2_package_check_v1.py::test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success[1-0]
+0.00s setup    tests/test_staged_rts24_p2_package_check_v1.py::test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success[1-0]
+0.00s teardown tests/test_staged_rts24_p2_package_check_v1.py::test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success[1-0]
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_p2_package_check_v1.py::test_numeric_diagnostic_uses_observed_prefix_and_never_upgrades_success[1-0] - AssertionError: {'message': 'failure/pending cannot close protocol', 'type': 'ValueError'}
+assert 'failure_inventory_captured' == 'numeric_diagnostic_closed'
+  
+  - numeric_diagnostic_closed
+  + failure_inventory_captured
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+=================== 1 failed, 1 passed in 109.75s (0:01:49) ===================

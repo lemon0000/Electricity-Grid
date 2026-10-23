@@ -1,0 +1,13 @@
+F
+================================== FAILURES ===================================
+_____ test_full_319_protocol_digest_entrances_match_old_streaming_oracle ______
+tests\test_staged_rts24_p2_package_check_v1.py:630: in test_full_319_protocol_digest_entrances_match_old_streaming_oracle
+    result=d.protocol(full.snapshot,json.loads(full.context),full.reg,json.loads((full.inputs.packet/'packet.json').read_bytes()),full.process)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: protocol() missing 1 required positional argument: 'numeric'
+============================= slowest 5 durations =============================
+10.72s setup    tests/test_staged_rts24_p2_package_check_v1.py::test_full_319_protocol_digest_entrances_match_old_streaming_oracle
+
+(2 durations < 0.005s hidden.  Use -vv to show these durations.)
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 124 deselected in 13.75s

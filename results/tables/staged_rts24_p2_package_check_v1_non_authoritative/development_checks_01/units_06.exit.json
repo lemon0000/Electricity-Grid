@@ -1,0 +1,39 @@
+{
+  "argv": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/test_staged_rts24_p2_package_check_v1.py::test_full_saved_protocol_closes_with_negative_X_and_scientific_flags_false",
+    "-x",
+    "-q",
+    "--tb=short",
+    "--durations=3",
+    "-p",
+    "no:cacheprovider",
+    "-o",
+    "tmp_path_retention_count=100000",
+    "-o",
+    "tmp_path_retention_policy=all"
+  ],
+  "exit_code": null,
+  "scope": "ordinary complete synthetic metadata suite split into disjoint groups; native/science/process launch trapped; no actual P2",
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_p2_package_check_contract_v1.md": {
+      "bytes": 5076,
+      "sha256": "d77321d916a7aad92b5ddb2b4d0d4e86b89fd510cde52b6e26f74f69ea33db9e"
+    },
+    "src/staged_rts24_p2_package_check_v1.py": {
+      "bytes": 47803,
+      "sha256": "2768b50b94ce9f5f470e32ab637cad0d95653bfe61762840d81153a54476bc78"
+    },
+    "tests/test_staged_rts24_p2_package_check_v1.py": {
+      "bytes": 40862,
+      "sha256": "4d1d95f0b7378dbb657301d090c31f218035a5538aaf1ca1c1abdb9460df0e96"
+    }
+  },
+  "source_pins_unchanged": true,
+  "timed_out": true,
+  "timeout_seconds": 120,
+  "wall_seconds": 120.45989150000969
+}

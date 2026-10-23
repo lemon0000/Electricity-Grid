@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-s",
+    "-c",
+    "import sys,threading,time,traceback,json\nfrom pathlib import Path\nfrom src import staged_rts24_p2_package_check_v1 as d\nmain=threading.get_ident()\ndef observe():\n for delay in (15,15,15):\n  time.sleep(delay);print('ORDINARY STACK SNAPSHOT',file=sys.stderr,flush=True);traceback.print_stack(sys._current_frames()[main],file=sys.stderr)\nthreading.Thread(target=observe,daemon=True).start()\nroot=Path.cwd();fixture=Path('C:\\\\Users\\\\PSYCHO~1\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-Psychobabble\\\\pytest-2682\\\\full_protocol0')\nregistration=fixture/'registration.json';reg=json.loads(registration.read_bytes());worker=Path(reg['output']);parent=fixture/'parent'\nraw=d.context_bytes(root,worker,parent,registration,root/'results/tables/staged_rts24_p2_packet_v1_non_authoritative/packet_01',reg['pins']['legacy_scientific_and_P1_runtime']['executable'])\nresult=d.inspect_package(raw,d.pin(raw)['sha256'],json.loads((worker/'launcher.json').read_bytes()),json.loads(raw)['startup'])\nprint(json.dumps(dict(status=result['inspection_status'],error=result['protocol_error'])))\n"
+  ],
+  "exit_code": null,
+  "scope": "ordinary saved synthetic unit-fixture stack diagnosis only; no resource or scientific experiment",
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_p2_package_check_contract_v1.md": {
+      "bytes": 5558,
+      "sha256": "cd861c49d87e0f6cd72e50a8556212124c9aef720c1f3eaae4899bc22650d25b"
+    },
+    "src/staged_rts24_p2_package_check_v1.py": {
+      "bytes": 48410,
+      "sha256": "cf5637db2001e21c8b163d84815ee9c930583ef341413a4a5660ce2fb5f9a059"
+    },
+    "tests/test_staged_rts24_p2_package_check_v1.py": {
+      "bytes": 40862,
+      "sha256": "4d1d95f0b7378dbb657301d090c31f218035a5538aaf1ca1c1abdb9460df0e96"
+    }
+  },
+  "timed_out": true,
+  "timeout_seconds": 50,
+  "wall_seconds": 50.304723499997635
+}

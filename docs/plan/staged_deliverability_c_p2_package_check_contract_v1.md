@@ -1,0 +1,29 @@
+# C：P2父端机械包检查开发合同
+
+2026-10-23，DRAFT_NONAUTHORITATIVE。接续[失败控制交接](continuation_handoff_20261023_p2_failure_outer.md)。root唯一writer，领域/审查只读不分叉。原P2七输入、prepared packet、父观察保存组件及B1–B3/P1/历史工件保持字节；本轮无公共注册、production manifest/lease、native/实验attempt或长实验。
+
+## 目标与层次
+
+开发独立纯读取的P2包检查模块。预持有canonical context及SHA绑定实际kernel注册、三packet、55准备来源＋7 kernel来源＋本层outer来源、executable、预期worker argv/cwd、worker/parent root与固定proposal帽。context仅是开发期输入快照，不构成生产outer或执行权限；注册继续native_authorized=false，闭合schema不加键。selected source bytes与exe首尾相同不证明完整runtime/native/OS闭包或实际进程曾以该argv启动。
+
+完整所有权quiet是安全读取条件，成功退出且proposal帽满足是成功协议条件，两者分开。quiet未知时不检查worker文件；quiet已知的失败包可在独立硬读取界内捕获稳定库存。完整包核context输入、全worker目录库存、completion core和精确根目录六项排除：completion.json、launcher.json、launcher.stdout.log、launcher.stderr.log、worker.stdout.log、worker.stderr.log；六项全部必需且仍进入父全库存/书挡。嵌套同名文件不能借排除逃过manifest。扫描拒绝链接/reparse/硬链接、路径歧义、目录替换、文件/总字节/条目/深度越界；pending/failure在失败库存中保留，阻止升级成功协议。末尾重复库存和输入pins形成书挡。
+
+完整包元数据条件包括319个连续point目录与请求/返回/raw/log/CAS引用、schedule/parent/accepted-state边、138个唯一hour/outage合同行与point/KKT引用、十小时journal/prefix/state引用、fresh process及fresh/report metrics一致。319个point process和1个fresh process逐个复核闭合schema、完整Job/owner/HANDLE quiet、exit/stop/error与各自帽/reserve；成员身份必须包含于外层完整历史成员。不同失败包保留其真实文件，不补齐、不推断不可行、不重试或改写writer terminal。
+
+输出分为success_protocol_closed、numeric_diagnostic_closed、terminal_diagnostic_closed、failure_inventory_captured、inspection_prohibited。numeric按观测点数和首失败槽核协议，不强求319/138；known_rejection可提交最后hour但actual不接受，分别记录committed_hour_entries与actual_state_reference_count，不将prefix数当接受数。actual numeric必须是closed attempt而非terminal，payload与metrics.unaccepted_attempt精确相同且不采用当前actual。内部Job成员两两不交、owner不同并与外层完整历史集合闭合；非零正常退出要求原guard固定child_exit_nonzero。失败库存不要求completion/report/failure文件必须成功保存，也不能由成功外观升级。输出采用独立闭合schema，mechanical/外层process/内部process/completion/全库存/引用链各自列明；worker package_complete/full_139只保留在unverified_worker_claims。实际spawn argv、完整runtime与科学采用均不因此变真。
+
+机械比较的范围是保存原字节、SHA、CAS引用结构及worker报告之间的一致性；不调用compiler、solver、native、import_snapshot、KKT/合法X数值审计或journal.reopen。选定codec类定义仅用于wire字段名，投影Q/float/class/ref为plain后核digest和特殊BoundQuery.identity，不构造typed值，typed_values_validated=false。冻结packet保持原缩进JSON字节，先核固定pin再作重复键/有限值解析；CAS和执行记录按原canonical协议。科学采用、独立139/F-X、resource/formal均false。raw→snapshot/KKT/point/合法X与journal政策/余额独立重放、真实argv证明、完整launcher/lease和整体预算仍是后继层，不能由机械检查成功替代。
+
+完整外层历史分为已知且两两不交的内部Job集合和精确residual集合；要求outer owner在residual，保存所有identity与分区计数，不把residual限定为一个成员或替其命名。原P1保存outer66、31 point各2、fresh2，余下两成员已反证“仅root owner”的假设。residual来源、实际父子边或额外调用不能由pid/creation/quiet推出，process_tree_attribution_independently_verified=false，资源和科学门仍关闭。
+
+worker库存采用本层有界reader：保持原codec的ordinary、全祖先目录identity、读取前后fstat、关闭后path identity和精确长度核验，只将单次read请求从固定8MiB+1改为已观测size+1；读取前还须匹配本次metadata枚举identity。空文件仍请求1B；增长、截断或short read不能通过长度与identity条件。两个完整库存及输入书挡仍保留；不声称解决原文件系统检查无法观测的ABA窗口，不修改冻结codec。
+
+本层摘要先对exact dict/list/tuple/str/int/float/bool/None及exact string key域计算规范JSON的精确展开长度，再在8MiB以内生成原ensure_ascii/sort_keys规范bytes并SHA；长度不参与identity。容器长度memo仅限单次调用，持有强引用，active cycle先于cache检查，alias每次出现均重复计入。字符串转义直接使用本机stdlib encoder，有限float使用其repr；最终长度必须等于估计。相比原逐token流式摘要，临时str及bytes合计最多约16MiB，另有输入与局部cache；不减少任何digest或来源核验调用。非字符串键/类型子类属于收紧的域外，不泛称任意旧JSON输入等价；以原P1全部wire根及合成319协议全部实际digest入口逐字节对照旧iterencode，另核循环、域外、Unicode、浮点和上限窗口。
+
+## 实施与验证
+
+新版本模块/测试/本合同独立绑定。普通测试仅pytest tmp，用解析/合成保存数据覆盖输入漂移、闭合schema和标量、quiet前禁止读取、完整库存/排除、319/138引用不符和末尾漂移。合成metadata可互相一致但不提供数值证据；必须显式保留该界限。原P1只读文件若用于机械fixture/oracle，按原五小时范围处理，不套十小时完整标准。
+
+运行最小针对性与相关回归，保存失败与终态退出、输入首尾pins、独立PRE_SEAL findings；stdlib后核验旧绑定和本轮结果，再精确范围commit/push、远端hash和porcelain读回。普通测试耗时不作性能预算；若测试组合触及wrapper上限，停止、保存未决，不用进度点计通过，先缩小到受影响行为。
+
+后续仍需完整outer与独立科学采用、失败及收尾代表成本、十小时CAS/摘要增长和65s无进展余量。C整体、139/F-X时序及D/E现实输入/选择/留出/总预算OPEN；原P1一次native授权已用，新native须另登记和专项授权。
