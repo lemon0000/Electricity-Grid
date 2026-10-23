@@ -1,0 +1,1456 @@
+{
+  "function_count": 308,
+  "profiled_wall_seconds": 0.6391263999976218,
+  "scope": "one profiled original call; inclusive times overlap; warm imports and instrumentation",
+  "target": {
+    "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\staged_rts24_p2_native_probe_v1.py",
+    "line": 42,
+    "name": "fingerprints"
+  },
+  "target_calls": 1,
+  "target_primitive_calls": 1,
+  "top_cumulative": [
+    {
+      "calls": 1,
+      "cumulative_seconds": 0.6390555,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\staged_rts24_p2_native_probe_v1.py",
+      "function": "fingerprints",
+      "line": 42,
+      "primitive_calls": 1,
+      "self_seconds": 0.00046760000000000004
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 0.6024139000000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\staged_rts24_native_probe_v1.py",
+      "function": "fingerprints",
+      "line": 63,
+      "primitive_calls": 1,
+      "self_seconds": 0.0048219000000000005
+    },
+    {
+      "calls": 3,
+      "cumulative_seconds": 0.4113948,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "files",
+      "line": 473,
+      "primitive_calls": 3,
+      "self_seconds": 2.1700000000000002e-05
+    },
+    {
+      "calls": 6,
+      "cumulative_seconds": 0.4047004,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\_functools.py",
+      "function": "wrapper",
+      "line": 99,
+      "primitive_calls": 6,
+      "self_seconds": 1.08e-05
+    },
+    {
+      "calls": 3,
+      "cumulative_seconds": 0.40466490000000005,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "skip_missing_files",
+      "line": 496,
+      "primitive_calls": 3,
+      "self_seconds": 0.0076416
+    },
+    {
+      "calls": 4068,
+      "cumulative_seconds": 0.37833740000000005,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "<lambda>",
+      "line": 498,
+      "primitive_calls": 4068,
+      "self_seconds": 0.0042537
+    },
+    {
+      "calls": 4430,
+      "cumulative_seconds": 0.2986973,
+      "file": "~",
+      "function": "<built-in method nt.stat>",
+      "line": 0,
+      "primitive_calls": 4430,
+      "self_seconds": 0.23887190000000003
+    },
+    {
+      "calls": 4330,
+      "cumulative_seconds": 0.2956337,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "stat",
+      "line": 835,
+      "primitive_calls": 4330,
+      "self_seconds": 0.0014007000000000002
+    },
+    {
+      "calls": 4068,
+      "cumulative_seconds": 0.28130320000000003,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "exists",
+      "line": 852,
+      "primitive_calls": 4068,
+      "self_seconds": 0.0023873
+    },
+    {
+      "calls": 129,
+      "cumulative_seconds": 0.1159903,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\staged_rts24_native_probe_v1.py",
+      "function": "stamp",
+      "line": 54,
+      "primitive_calls": 129,
+      "self_seconds": 0.0036619
+    },
+    {
+      "calls": 13744,
+      "cumulative_seconds": 0.1059625,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__str__",
+      "line": 437,
+      "primitive_calls": 13744,
+      "self_seconds": 0.0163697
+    },
+    {
+      "calls": 4068,
+      "cumulative_seconds": 0.0927805,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "locate",
+      "line": 333,
+      "primitive_calls": 4068,
+      "self_seconds": 0.0011086000000000002
+    },
+    {
+      "calls": 4105,
+      "cumulative_seconds": 0.09247920000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "locate_file",
+      "line": 823,
+      "primitive_calls": 4105,
+      "self_seconds": 0.0030731
+    },
+    {
+      "calls": 12811,
+      "cumulative_seconds": 0.08308560000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "drive",
+      "line": 551,
+      "primitive_calls": 12811,
+      "self_seconds": 0.007634
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 0.07887440000000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_journal_v2.py",
+      "function": "runtime_identity",
+      "line": 45,
+      "primitive_calls": 1,
+      "self_seconds": 0.0013980000000000002
+    },
+    {
+      "calls": 351,
+      "cumulative_seconds": 0.07724800000000001,
+      "file": "~",
+      "function": "<method 'read' of '_io.BufferedReader' objects>",
+      "line": 0,
+      "primitive_calls": 351,
+      "self_seconds": 0.07724800000000001
+    },
+    {
+      "calls": 8844,
+      "cumulative_seconds": 0.07700760000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "with_segments",
+      "line": 380,
+      "primitive_calls": 8844,
+      "self_seconds": 0.0061507
+    },
+    {
+      "calls": 8460,
+      "cumulative_seconds": 0.07545160000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "_load_parts",
+      "line": 407,
+      "primitive_calls": 8460,
+      "self_seconds": 0.007880100000000001
+    },
+    {
+      "calls": 13392,
+      "cumulative_seconds": 0.06912900000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__init__",
+      "line": 358,
+      "primitive_calls": 13392,
+      "self_seconds": 0.0132431
+    },
+    {
+      "calls": 9324,
+      "cumulative_seconds": 0.0686127,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__init__",
+      "line": 1157,
+      "primitive_calls": 9324,
+      "self_seconds": 0.0066557000000000005
+    },
+    {
+      "calls": 4216,
+      "cumulative_seconds": 0.06596010000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__truediv__",
+      "line": 719,
+      "primitive_calls": 4216,
+      "self_seconds": 0.0011234
+    },
+    {
+      "calls": 4226,
+      "cumulative_seconds": 0.0649152,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "joinpath",
+      "line": 711,
+      "primitive_calls": 4226,
+      "self_seconds": 0.0028418000000000002
+    },
+    {
+      "calls": 5094,
+      "cumulative_seconds": 0.0620662,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__fspath__",
+      "line": 447,
+      "primitive_calls": 5094,
+      "self_seconds": 0.002109
+    },
+    {
+      "calls": 39,
+      "cumulative_seconds": 0.06167570000000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "read_bytes",
+      "line": 108,
+      "primitive_calls": 39,
+      "self_seconds": 0.0005867
+    },
+    {
+      "calls": 8460,
+      "cumulative_seconds": 0.049661000000000004,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "_parse_path",
+      "line": 387,
+      "primitive_calls": 8460,
+      "self_seconds": 0.024174300000000003
+    },
+    {
+      "calls": 4105,
+      "cumulative_seconds": 0.049195600000000006,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "as_posix",
+      "line": 450,
+      "primitive_calls": 4105,
+      "self_seconds": 0.0028186
+    },
+    {
+      "calls": 189,
+      "cumulative_seconds": 0.029039400000000003,
+      "file": "~",
+      "function": "<built-in method _io.open>",
+      "line": 0,
+      "primitive_calls": 189,
+      "self_seconds": 0.028646
+    },
+    {
+      "calls": 179,
+      "cumulative_seconds": 0.028714000000000003,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "open",
+      "line": 1005,
+      "primitive_calls": 179,
+      "self_seconds": 0.0001667
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.026828900000000003,
+      "file": "~",
+      "function": "<method 'update' of '_hashlib.HASH' objects>",
+      "line": 0,
+      "primitive_calls": 182,
+      "self_seconds": 0.026828900000000003
+    },
+    {
+      "calls": 4187,
+      "cumulative_seconds": 0.0256557,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "parent",
+      "line": 731,
+      "primitive_calls": 4187,
+      "self_seconds": 0.004139100000000001
+    },
+    {
+      "calls": 540,
+      "cumulative_seconds": 0.0211507,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "ordinary",
+      "line": 85,
+      "primitive_calls": 540,
+      "self_seconds": 0.0008267000000000001
+    },
+    {
+      "calls": 7,
+      "cumulative_seconds": 0.020959400000000003,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "version",
+      "line": 882,
+      "primitive_calls": 7,
+      "self_seconds": 9e-06
+    },
+    {
+      "calls": 4571,
+      "cumulative_seconds": 0.0209407,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "_from_parsed_parts",
+      "line": 420,
+      "primitive_calls": 4571,
+      "self_seconds": 0.003082
+    },
+    {
+      "calls": 78,
+      "cumulative_seconds": 0.020694800000000003,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "directory_identity",
+      "line": 99,
+      "primitive_calls": 78,
+      "self_seconds": 0.0009549000000000001
+    },
+    {
+      "calls": 540,
+      "cumulative_seconds": 0.0200362,
+      "file": "~",
+      "function": "<built-in method nt.lstat>",
+      "line": 0,
+      "primitive_calls": 540,
+      "self_seconds": 0.019344700000000003
+    },
+    {
+      "calls": 4068,
+      "cumulative_seconds": 0.018685900000000002,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "make_file",
+      "line": 485,
+      "primitive_calls": 4068,
+      "self_seconds": 0.0071386
+    },
+    {
+      "calls": 4233,
+      "cumulative_seconds": 0.0164848,
+      "file": "<frozen ntpath>",
+      "function": "join",
+      "line": 108,
+      "primitive_calls": 4233,
+      "self_seconds": 0.0068390000000000005
+    },
+    {
+      "calls": 12888,
+      "cumulative_seconds": 0.0130825,
+      "file": "<frozen ntpath>",
+      "function": "splitroot",
+      "line": 180,
+      "primitive_calls": 12888,
+      "self_seconds": 0.00854
+    },
+    {
+      "calls": 44,
+      "cumulative_seconds": 0.0126181,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "resolve",
+      "line": 1228,
+      "primitive_calls": 44,
+      "self_seconds": 0.0001132
+    },
+    {
+      "calls": 61976,
+      "cumulative_seconds": 0.0122086,
+      "file": "~",
+      "function": "<built-in method sys.intern>",
+      "line": 0,
+      "primitive_calls": 61976,
+      "self_seconds": 0.0122086
+    },
+    {
+      "calls": 7,
+      "cumulative_seconds": 0.012184,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "version",
+      "line": 464,
+      "primitive_calls": 7,
+      "self_seconds": 1.7100000000000002e-05
+    },
+    {
+      "calls": 44,
+      "cumulative_seconds": 0.0121484,
+      "file": "<frozen ntpath>",
+      "function": "realpath",
+      "line": 708,
+      "primitive_calls": 44,
+      "self_seconds": 0.0002661
+    },
+    {
+      "calls": 7,
+      "cumulative_seconds": 0.012133600000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "metadata",
+      "line": 436,
+      "primitive_calls": 7,
+      "self_seconds": 4.35e-05
+    },
+    {
+      "calls": 133,
+      "cumulative_seconds": 0.0116641,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "is_file",
+      "line": 886,
+      "primitive_calls": 133,
+      "self_seconds": 0.00016700000000000002
+    },
+    {
+      "calls": 10,
+      "cumulative_seconds": 0.0114543,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "distribution",
+      "line": 856,
+      "primitive_calls": 10,
+      "self_seconds": 1.55e-05
+    },
+    {
+      "calls": 10,
+      "cumulative_seconds": 0.0114388,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "from_name",
+      "line": 383,
+      "primitive_calls": 10,
+      "self_seconds": 5.64e-05
+    },
+    {
+      "calls": 10,
+      "cumulative_seconds": 0.0112495,
+      "file": "~",
+      "function": "<built-in method builtins.next>",
+      "line": 0,
+      "primitive_calls": 10,
+      "self_seconds": 7.99e-05
+    },
+    {
+      "calls": 110,
+      "cumulative_seconds": 0.0104062,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "<genexpr>",
+      "line": 794,
+      "primitive_calls": 110,
+      "self_seconds": 0.0001349
+    },
+    {
+      "calls": 100,
+      "cumulative_seconds": 0.0102503,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "search",
+      "line": 692,
+      "primitive_calls": 100,
+      "self_seconds": 0.0001309
+    },
+    {
+      "calls": 88,
+      "cumulative_seconds": 0.0101685,
+      "file": "~",
+      "function": "<built-in method nt._getfinalpathname>",
+      "line": 0,
+      "primitive_calls": 88,
+      "self_seconds": 0.0101685
+    },
+    {
+      "calls": 13024,
+      "cumulative_seconds": 0.010095600000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "_format_parsed_parts",
+      "line": 429,
+      "primitive_calls": 13024,
+      "self_seconds": 0.0057175
+    },
+    {
+      "calls": 10,
+      "cumulative_seconds": 0.0092945,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "read_text",
+      "line": 811,
+      "primitive_calls": 10,
+      "self_seconds": 8.92e-05
+    },
+    {
+      "calls": 10,
+      "cumulative_seconds": 0.0091236,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "read_text",
+      "line": 1022,
+      "primitive_calls": 10,
+      "self_seconds": 4.44e-05
+    },
+    {
+      "calls": 3,
+      "cumulative_seconds": 0.0066274,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "_read_files_distinfo",
+      "line": 508,
+      "primitive_calls": 3,
+      "self_seconds": 7.7e-06
+    },
+    {
+      "calls": 7,
+      "cumulative_seconds": 0.0057783,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\email\\__init__.py",
+      "function": "message_from_string",
+      "line": 31,
+      "primitive_calls": 7,
+      "self_seconds": 3.9200000000000004e-05
+    },
+    {
+      "calls": 7,
+      "cumulative_seconds": 0.0057352,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\email\\parser.py",
+      "function": "parsestr",
+      "line": 56,
+      "primitive_calls": 7,
+      "self_seconds": 7.05e-05
+    },
+    {
+      "calls": 7,
+      "cumulative_seconds": 0.0056647,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\email\\parser.py",
+      "function": "parse",
+      "line": 41,
+      "primitive_calls": 7,
+      "self_seconds": 3.77e-05
+    },
+    {
+      "calls": 129,
+      "cumulative_seconds": 0.005453400000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "is_symlink",
+      "line": 909,
+      "primitive_calls": 129,
+      "self_seconds": 0.00011070000000000001
+    },
+    {
+      "calls": 23,
+      "cumulative_seconds": 0.0053263,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\email\\feedparser.py",
+      "function": "feed",
+      "line": 171,
+      "primitive_calls": 23,
+      "self_seconds": 2.15e-05
+    },
+    {
+      "calls": 129,
+      "cumulative_seconds": 0.005318600000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "lstat",
+      "line": 842,
+      "primitive_calls": 129,
+      "self_seconds": 5.64e-05
+    },
+    {
+      "calls": 49229,
+      "cumulative_seconds": 0.0050321,
+      "file": "~",
+      "function": "<built-in method builtins.isinstance>",
+      "line": 0,
+      "primitive_calls": 49229,
+      "self_seconds": 0.0049844
+    },
+    {
+      "calls": 25779,
+      "cumulative_seconds": 0.0049541,
+      "file": "~",
+      "function": "<method 'replace' of 'str' objects>",
+      "line": 0,
+      "primitive_calls": 25779,
+      "self_seconds": 0.0049541
+    },
+    {
+      "calls": 30,
+      "cumulative_seconds": 0.0049002,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\email\\feedparser.py",
+      "function": "_call_parse",
+      "line": 176,
+      "primitive_calls": 30,
+      "self_seconds": 4.5400000000000006e-05
+    },
+    {
+      "calls": 30,
+      "cumulative_seconds": 0.0048548,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\email\\feedparser.py",
+      "function": "_parsegen",
+      "line": 216,
+      "primitive_calls": 30,
+      "self_seconds": 0.0009925000000000001
+    },
+    {
+      "calls": 16,
+      "cumulative_seconds": 0.0048352000000000004,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "lookup",
+      "line": 701,
+      "primitive_calls": 16,
+      "self_seconds": 2e-05
+    },
+    {
+      "calls": 16,
+      "cumulative_seconds": 0.0048152,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "__init__",
+      "line": 707,
+      "primitive_calls": 16,
+      "self_seconds": 0.0005689
+    },
+    {
+      "calls": 100,
+      "cumulative_seconds": 0.0047512000000000006,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "mtime",
+      "line": 695,
+      "primitive_calls": 100,
+      "self_seconds": 0.0002413
+    },
+    {
+      "calls": 8791,
+      "cumulative_seconds": 0.0037582,
+      "file": "~",
+      "function": "<method 'split' of 'str' objects>",
+      "line": 0,
+      "primitive_calls": 8791,
+      "self_seconds": 0.0037582
+    },
+    {
+      "calls": 179,
+      "cumulative_seconds": 0.0037151000000000003,
+      "file": "~",
+      "function": "<method '__exit__' of '_io._IOBase' objects>",
+      "line": 0,
+      "primitive_calls": 179,
+      "self_seconds": 0.0037151000000000003
+    },
+    {
+      "calls": 7,
+      "cumulative_seconds": 0.0036537,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\_functools.py",
+      "function": "wrapper",
+      "line": 75,
+      "primitive_calls": 7,
+      "self_seconds": 1.87e-05
+    },
+    {
+      "calls": 9324,
+      "cumulative_seconds": 0.0033350000000000003,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__new__",
+      "line": 1164,
+      "primitive_calls": 9324,
+      "self_seconds": 0.0018734000000000001
+    },
+    {
+      "calls": 7,
+      "cumulative_seconds": 0.0032025,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\_adapters.py",
+      "function": "__init__",
+      "line": 46,
+      "primitive_calls": 7,
+      "self_seconds": 8.6e-06
+    },
+    {
+      "calls": 7,
+      "cumulative_seconds": 0.0031939000000000004,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\_adapters.py",
+      "function": "_repair_headers",
+      "line": 63,
+      "primitive_calls": 7,
+      "self_seconds": 6.85e-05
+    },
+    {
+      "calls": 13342,
+      "cumulative_seconds": 0.0030545000000000004,
+      "file": "~",
+      "function": "<method 'join' of 'str' objects>",
+      "line": 0,
+      "primitive_calls": 13342,
+      "self_seconds": 0.0030545000000000004
+    },
+    {
+      "calls": 310,
+      "cumulative_seconds": 0.0029992,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\_adapters.py",
+      "function": "redent",
+      "line": 64,
+      "primitive_calls": 310,
+      "self_seconds": 3.9e-05
+    },
+    {
+      "calls": 2,
+      "cumulative_seconds": 0.0029602,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\textwrap.py",
+      "function": "dedent",
+      "line": 419,
+      "primitive_calls": 2,
+      "self_seconds": 0.0001618
+    },
+    {
+      "calls": 13416,
+      "cumulative_seconds": 0.002791,
+      "file": "~",
+      "function": "<built-in method __new__ of type object at 0x00007FFF14189D90>",
+      "line": 0,
+      "primitive_calls": 13416,
+      "self_seconds": 0.002791
+    },
+    {
+      "calls": 4068,
+      "cumulative_seconds": 0.0027673000000000003,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__new__",
+      "line": 343,
+      "primitive_calls": 4068,
+      "self_seconds": 0.0014477000000000001
+    },
+    {
+      "calls": 4068,
+      "cumulative_seconds": 0.0027222,
+      "file": "<frozen posixpath>",
+      "function": "splitroot",
+      "line": 138,
+      "primitive_calls": 4068,
+      "self_seconds": 0.0020779
+    },
+    {
+      "calls": 16,
+      "cumulative_seconds": 0.0027087,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "children",
+      "line": 678,
+      "primitive_calls": 16,
+      "self_seconds": 8.71e-05
+    }
+  ],
+  "top_self": [
+    {
+      "calls": 4430,
+      "cumulative_seconds": 0.2986973,
+      "file": "~",
+      "function": "<built-in method nt.stat>",
+      "line": 0,
+      "primitive_calls": 4430,
+      "self_seconds": 0.23887190000000003
+    },
+    {
+      "calls": 351,
+      "cumulative_seconds": 0.07724800000000001,
+      "file": "~",
+      "function": "<method 'read' of '_io.BufferedReader' objects>",
+      "line": 0,
+      "primitive_calls": 351,
+      "self_seconds": 0.07724800000000001
+    },
+    {
+      "calls": 189,
+      "cumulative_seconds": 0.029039400000000003,
+      "file": "~",
+      "function": "<built-in method _io.open>",
+      "line": 0,
+      "primitive_calls": 189,
+      "self_seconds": 0.028646
+    },
+    {
+      "calls": 182,
+      "cumulative_seconds": 0.026828900000000003,
+      "file": "~",
+      "function": "<method 'update' of '_hashlib.HASH' objects>",
+      "line": 0,
+      "primitive_calls": 182,
+      "self_seconds": 0.026828900000000003
+    },
+    {
+      "calls": 8460,
+      "cumulative_seconds": 0.049661000000000004,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "_parse_path",
+      "line": 387,
+      "primitive_calls": 8460,
+      "self_seconds": 0.024174300000000003
+    },
+    {
+      "calls": 540,
+      "cumulative_seconds": 0.0200362,
+      "file": "~",
+      "function": "<built-in method nt.lstat>",
+      "line": 0,
+      "primitive_calls": 540,
+      "self_seconds": 0.019344700000000003
+    },
+    {
+      "calls": 13744,
+      "cumulative_seconds": 0.1059625,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__str__",
+      "line": 437,
+      "primitive_calls": 13744,
+      "self_seconds": 0.0163697
+    },
+    {
+      "calls": 13392,
+      "cumulative_seconds": 0.06912900000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__init__",
+      "line": 358,
+      "primitive_calls": 13392,
+      "self_seconds": 0.0132431
+    },
+    {
+      "calls": 61976,
+      "cumulative_seconds": 0.0122086,
+      "file": "~",
+      "function": "<built-in method sys.intern>",
+      "line": 0,
+      "primitive_calls": 61976,
+      "self_seconds": 0.0122086
+    },
+    {
+      "calls": 88,
+      "cumulative_seconds": 0.0101685,
+      "file": "~",
+      "function": "<built-in method nt._getfinalpathname>",
+      "line": 0,
+      "primitive_calls": 88,
+      "self_seconds": 0.0101685
+    },
+    {
+      "calls": 12888,
+      "cumulative_seconds": 0.0130825,
+      "file": "<frozen ntpath>",
+      "function": "splitroot",
+      "line": 180,
+      "primitive_calls": 12888,
+      "self_seconds": 0.00854
+    },
+    {
+      "calls": 8460,
+      "cumulative_seconds": 0.07545160000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "_load_parts",
+      "line": 407,
+      "primitive_calls": 8460,
+      "self_seconds": 0.007880100000000001
+    },
+    {
+      "calls": 3,
+      "cumulative_seconds": 0.40466490000000005,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "skip_missing_files",
+      "line": 496,
+      "primitive_calls": 3,
+      "self_seconds": 0.0076416
+    },
+    {
+      "calls": 12811,
+      "cumulative_seconds": 0.08308560000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "drive",
+      "line": 551,
+      "primitive_calls": 12811,
+      "self_seconds": 0.007634
+    },
+    {
+      "calls": 4068,
+      "cumulative_seconds": 0.018685900000000002,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "make_file",
+      "line": 485,
+      "primitive_calls": 4068,
+      "self_seconds": 0.0071386
+    },
+    {
+      "calls": 4233,
+      "cumulative_seconds": 0.0164848,
+      "file": "<frozen ntpath>",
+      "function": "join",
+      "line": 108,
+      "primitive_calls": 4233,
+      "self_seconds": 0.0068390000000000005
+    },
+    {
+      "calls": 9324,
+      "cumulative_seconds": 0.0686127,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__init__",
+      "line": 1157,
+      "primitive_calls": 9324,
+      "self_seconds": 0.0066557000000000005
+    },
+    {
+      "calls": 8844,
+      "cumulative_seconds": 0.07700760000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "with_segments",
+      "line": 380,
+      "primitive_calls": 8844,
+      "self_seconds": 0.0061507
+    },
+    {
+      "calls": 13024,
+      "cumulative_seconds": 0.010095600000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "_format_parsed_parts",
+      "line": 429,
+      "primitive_calls": 13024,
+      "self_seconds": 0.0057175
+    },
+    {
+      "calls": 49229,
+      "cumulative_seconds": 0.0050321,
+      "file": "~",
+      "function": "<built-in method builtins.isinstance>",
+      "line": 0,
+      "primitive_calls": 49229,
+      "self_seconds": 0.0049844
+    },
+    {
+      "calls": 25779,
+      "cumulative_seconds": 0.0049541,
+      "file": "~",
+      "function": "<method 'replace' of 'str' objects>",
+      "line": 0,
+      "primitive_calls": 25779,
+      "self_seconds": 0.0049541
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 0.6024139000000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\staged_rts24_native_probe_v1.py",
+      "function": "fingerprints",
+      "line": 63,
+      "primitive_calls": 1,
+      "self_seconds": 0.0048219000000000005
+    },
+    {
+      "calls": 4068,
+      "cumulative_seconds": 0.37833740000000005,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "<lambda>",
+      "line": 498,
+      "primitive_calls": 4068,
+      "self_seconds": 0.0042537
+    },
+    {
+      "calls": 4187,
+      "cumulative_seconds": 0.0256557,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "parent",
+      "line": 731,
+      "primitive_calls": 4187,
+      "self_seconds": 0.004139100000000001
+    },
+    {
+      "calls": 8791,
+      "cumulative_seconds": 0.0037582,
+      "file": "~",
+      "function": "<method 'split' of 'str' objects>",
+      "line": 0,
+      "primitive_calls": 8791,
+      "self_seconds": 0.0037582
+    },
+    {
+      "calls": 179,
+      "cumulative_seconds": 0.0037151000000000003,
+      "file": "~",
+      "function": "<method '__exit__' of '_io._IOBase' objects>",
+      "line": 0,
+      "primitive_calls": 179,
+      "self_seconds": 0.0037151000000000003
+    },
+    {
+      "calls": 129,
+      "cumulative_seconds": 0.1159903,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\staged_rts24_native_probe_v1.py",
+      "function": "stamp",
+      "line": 54,
+      "primitive_calls": 129,
+      "self_seconds": 0.0036619
+    },
+    {
+      "calls": 4571,
+      "cumulative_seconds": 0.0209407,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "_from_parsed_parts",
+      "line": 420,
+      "primitive_calls": 4571,
+      "self_seconds": 0.003082
+    },
+    {
+      "calls": 4105,
+      "cumulative_seconds": 0.09247920000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "locate_file",
+      "line": 823,
+      "primitive_calls": 4105,
+      "self_seconds": 0.0030731
+    },
+    {
+      "calls": 13342,
+      "cumulative_seconds": 0.0030545000000000004,
+      "file": "~",
+      "function": "<method 'join' of 'str' objects>",
+      "line": 0,
+      "primitive_calls": 13342,
+      "self_seconds": 0.0030545000000000004
+    },
+    {
+      "calls": 4226,
+      "cumulative_seconds": 0.0649152,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "joinpath",
+      "line": 711,
+      "primitive_calls": 4226,
+      "self_seconds": 0.0028418000000000002
+    },
+    {
+      "calls": 4105,
+      "cumulative_seconds": 0.049195600000000006,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "as_posix",
+      "line": 450,
+      "primitive_calls": 4105,
+      "self_seconds": 0.0028186
+    },
+    {
+      "calls": 13416,
+      "cumulative_seconds": 0.002791,
+      "file": "~",
+      "function": "<built-in method __new__ of type object at 0x00007FFF14189D90>",
+      "line": 0,
+      "primitive_calls": 13416,
+      "self_seconds": 0.002791
+    },
+    {
+      "calls": 19441,
+      "cumulative_seconds": 0.0025781000000000003,
+      "file": "~",
+      "function": "<method 'append' of 'list' objects>",
+      "line": 0,
+      "primitive_calls": 19441,
+      "self_seconds": 0.0025781000000000003
+    },
+    {
+      "calls": 34584,
+      "cumulative_seconds": 0.0025341,
+      "file": "~",
+      "function": "<built-in method nt.fspath>",
+      "line": 0,
+      "primitive_calls": 34584,
+      "self_seconds": 0.0025341
+    },
+    {
+      "calls": 4068,
+      "cumulative_seconds": 0.28130320000000003,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "exists",
+      "line": 852,
+      "primitive_calls": 4068,
+      "self_seconds": 0.0023873
+    },
+    {
+      "calls": 6135,
+      "cumulative_seconds": 0.0022054,
+      "file": "~",
+      "function": "<method 'startswith' of 'str' objects>",
+      "line": 0,
+      "primitive_calls": 6135,
+      "self_seconds": 0.0022054
+    },
+    {
+      "calls": 5094,
+      "cumulative_seconds": 0.0620662,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__fspath__",
+      "line": 447,
+      "primitive_calls": 5094,
+      "self_seconds": 0.002109
+    },
+    {
+      "calls": 4068,
+      "cumulative_seconds": 0.0027222,
+      "file": "<frozen posixpath>",
+      "function": "splitroot",
+      "line": 138,
+      "primitive_calls": 4068,
+      "self_seconds": 0.0020779
+    },
+    {
+      "calls": 17,
+      "cumulative_seconds": 0.002,
+      "file": "~",
+      "function": "<built-in method nt.listdir>",
+      "line": 0,
+      "primitive_calls": 17,
+      "self_seconds": 0.0019986
+    },
+    {
+      "calls": 9324,
+      "cumulative_seconds": 0.0033350000000000003,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__new__",
+      "line": 1164,
+      "primitive_calls": 9324,
+      "self_seconds": 0.0018734000000000001
+    },
+    {
+      "calls": 188,
+      "cumulative_seconds": 0.0017779,
+      "file": "~",
+      "function": "<method 'sub' of 're.Pattern' objects>",
+      "line": 0,
+      "primitive_calls": 188,
+      "self_seconds": 0.0017779
+    },
+    {
+      "calls": 18998,
+      "cumulative_seconds": 0.0018294000000000001,
+      "file": "~",
+      "function": "<built-in method builtins.len>",
+      "line": 0,
+      "primitive_calls": 18150,
+      "self_seconds": 0.0017244
+    },
+    {
+      "calls": 4068,
+      "cumulative_seconds": 0.0027673000000000003,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__new__",
+      "line": 343,
+      "primitive_calls": 4068,
+      "self_seconds": 0.0014477000000000001
+    },
+    {
+      "calls": 4330,
+      "cumulative_seconds": 0.2956337,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "stat",
+      "line": 835,
+      "primitive_calls": 4330,
+      "self_seconds": 0.0014007000000000002
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 0.07887440000000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_journal_v2.py",
+      "function": "runtime_identity",
+      "line": 45,
+      "primitive_calls": 1,
+      "self_seconds": 0.0013980000000000002
+    },
+    {
+      "calls": 12811,
+      "cumulative_seconds": 0.0012373,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "root",
+      "line": 560,
+      "primitive_calls": 12811,
+      "self_seconds": 0.0012373
+    },
+    {
+      "calls": 12724,
+      "cumulative_seconds": 0.0011281000000000002,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "_tail",
+      "line": 569,
+      "primitive_calls": 12724,
+      "self_seconds": 0.0011281000000000002
+    },
+    {
+      "calls": 4216,
+      "cumulative_seconds": 0.06596010000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__truediv__",
+      "line": 719,
+      "primitive_calls": 4216,
+      "self_seconds": 0.0011234
+    },
+    {
+      "calls": 4068,
+      "cumulative_seconds": 0.0927805,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "locate",
+      "line": 333,
+      "primitive_calls": 4068,
+      "self_seconds": 0.0011086000000000002
+    },
+    {
+      "calls": 4068,
+      "cumulative_seconds": 0.0013877000000000002,
+      "file": "<frozen posixpath>",
+      "function": "splitdrive",
+      "line": 131,
+      "primitive_calls": 4068,
+      "self_seconds": 0.0010442000000000001
+    },
+    {
+      "calls": 30,
+      "cumulative_seconds": 0.0048548,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\email\\feedparser.py",
+      "function": "_parsegen",
+      "line": 216,
+      "primitive_calls": 30,
+      "self_seconds": 0.0009925000000000001
+    },
+    {
+      "calls": 6690,
+      "cumulative_seconds": 0.0009782,
+      "file": "~",
+      "function": "<method 'endswith' of 'str' objects>",
+      "line": 0,
+      "primitive_calls": 6690,
+      "self_seconds": 0.0009782
+    },
+    {
+      "calls": 78,
+      "cumulative_seconds": 0.020694800000000003,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "directory_identity",
+      "line": 99,
+      "primitive_calls": 78,
+      "self_seconds": 0.0009549000000000001
+    },
+    {
+      "calls": 2,
+      "cumulative_seconds": 0.0009524000000000001,
+      "file": "~",
+      "function": "<method 'findall' of 're.Pattern' objects>",
+      "line": 0,
+      "primitive_calls": 2,
+      "self_seconds": 0.0009524000000000001
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 0.0009213,
+      "file": "~",
+      "function": "<built-in method sys.getwindowsversion>",
+      "line": 0,
+      "primitive_calls": 1,
+      "self_seconds": 0.0009213
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 0.0008444,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\decoder.py",
+      "function": "raw_decode",
+      "line": 344,
+      "primitive_calls": 1,
+      "self_seconds": 0.0008444
+    },
+    {
+      "calls": 2263,
+      "cumulative_seconds": 0.001608,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "__init__",
+      "line": 339,
+      "primitive_calls": 2263,
+      "self_seconds": 0.0008324000000000001
+    },
+    {
+      "calls": 540,
+      "cumulative_seconds": 0.0211507,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "ordinary",
+      "line": 85,
+      "primitive_calls": 540,
+      "self_seconds": 0.0008267000000000001
+    },
+    {
+      "calls": 3324,
+      "cumulative_seconds": 0.0010478,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\email\\feedparser.py",
+      "function": "readline",
+      "line": 77,
+      "primitive_calls": 3324,
+      "self_seconds": 0.0008237
+    },
+    {
+      "calls": 78,
+      "cumulative_seconds": 0.0008177000000000001,
+      "file": "~",
+      "function": "<built-in method nt.fstat>",
+      "line": 0,
+      "primitive_calls": 78,
+      "self_seconds": 0.0008177000000000001
+    },
+    {
+      "calls": 2437,
+      "cumulative_seconds": 0.0008038,
+      "file": "~",
+      "function": "<method 'partition' of 'str' objects>",
+      "line": 0,
+      "primitive_calls": 2437,
+      "self_seconds": 0.0008038
+    },
+    {
+      "calls": 4508,
+      "cumulative_seconds": 0.0007377000000000001,
+      "file": "~",
+      "function": "<method 'extend' of 'list' objects>",
+      "line": 0,
+      "primitive_calls": 4508,
+      "self_seconds": 0.0007377000000000001
+    },
+    {
+      "calls": 169,
+      "cumulative_seconds": 0.0007354000000000001,
+      "file": "~",
+      "function": "<built-in method _hashlib.openssl_sha256>",
+      "line": 0,
+      "primitive_calls": 169,
+      "self_seconds": 0.0007354000000000001
+    },
+    {
+      "calls": 10,
+      "cumulative_seconds": 0.0007563,
+      "file": "~",
+      "function": "<method 'read' of '_io.TextIOWrapper' objects>",
+      "line": 0,
+      "primitive_calls": 10,
+      "self_seconds": 0.0006489
+    },
+    {
+      "calls": 39,
+      "cumulative_seconds": 0.06167570000000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "read_bytes",
+      "line": 108,
+      "primitive_calls": 39,
+      "self_seconds": 0.0005867
+    },
+    {
+      "calls": 16,
+      "cumulative_seconds": 0.0048152,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "__init__",
+      "line": 707,
+      "primitive_calls": 16,
+      "self_seconds": 0.0005689
+    },
+    {
+      "calls": 7,
+      "cumulative_seconds": 0.0012818,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\email\\feedparser.py",
+      "function": "_parse_headers",
+      "line": 469,
+      "primitive_calls": 7,
+      "self_seconds": 0.0005421
+    },
+    {
+      "calls": 169,
+      "cumulative_seconds": 0.0005336000000000001,
+      "file": "~",
+      "function": "<method 'hexdigest' of '_hashlib.HASH' objects>",
+      "line": 0,
+      "primitive_calls": 169,
+      "self_seconds": 0.0005336000000000001
+    },
+    {
+      "calls": 2208,
+      "cumulative_seconds": 0.0004947,
+      "file": "~",
+      "function": "<method 'match' of 're.Pattern' objects>",
+      "line": 0,
+      "primitive_calls": 2208,
+      "self_seconds": 0.0004947
+    },
+    {
+      "calls": 3324,
+      "cumulative_seconds": 0.0015329,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\email\\feedparser.py",
+      "function": "__next__",
+      "line": 127,
+      "primitive_calls": 3324,
+      "self_seconds": 0.00048510000000000003
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 0.6390555,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\staged_rts24_p2_native_probe_v1.py",
+      "function": "fingerprints",
+      "line": 42,
+      "primitive_calls": 1,
+      "self_seconds": 0.00046760000000000004
+    },
+    {
+      "calls": 3,
+      "cumulative_seconds": 0.0004064,
+      "file": "~",
+      "function": "<method 'splitlines' of 'str' objects>",
+      "line": 0,
+      "primitive_calls": 3,
+      "self_seconds": 0.0004064
+    },
+    {
+      "calls": 2052,
+      "cumulative_seconds": 0.000369,
+      "file": "~",
+      "function": "<built-in method builtins.getattr>",
+      "line": 0,
+      "primitive_calls": 2052,
+      "self_seconds": 0.000369
+    },
+    {
+      "calls": 462,
+      "cumulative_seconds": 0.0019123,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__getitem__",
+      "line": 277,
+      "primitive_calls": 462,
+      "self_seconds": 0.0003445
+    },
+    {
+      "calls": 30,
+      "cumulative_seconds": 0.0003264,
+      "file": "~",
+      "function": "<method 'readlines' of '_io._IOBase' objects>",
+      "line": 0,
+      "primitive_calls": 30,
+      "self_seconds": 0.0003264
+    },
+    {
+      "calls": 3155,
+      "cumulative_seconds": 0.0003076,
+      "file": "~",
+      "function": "<method 'lower' of 'str' objects>",
+      "line": 0,
+      "primitive_calls": 3155,
+      "self_seconds": 0.0003076
+    },
+    {
+      "calls": 44,
+      "cumulative_seconds": 0.0121484,
+      "file": "<frozen ntpath>",
+      "function": "realpath",
+      "line": 708,
+      "primitive_calls": 44,
+      "self_seconds": 0.0002661
+    },
+    {
+      "calls": 100,
+      "cumulative_seconds": 0.0047512000000000006,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\importlib\\metadata\\__init__.py",
+      "function": "mtime",
+      "line": 695,
+      "primitive_calls": 100,
+      "self_seconds": 0.0002413
+    },
+    {
+      "calls": 310,
+      "cumulative_seconds": 0.00041880000000000004,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\email\\_policybase.py",
+      "function": "header_source_parse",
+      "line": 301,
+      "primitive_calls": 310,
+      "self_seconds": 0.00023840000000000002
+    }
+  ]
+}

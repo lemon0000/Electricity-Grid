@@ -1,0 +1,58 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "classification": "bounded solver-free development diagnostic",
+  "review_stage": "PRE_SEAL_AUDIT",
+  "official_verdict": null,
+  "review_receipt": null,
+  "seal": null,
+  "reviewer": "/root/c_final_domain_review",
+  "findings_closed": [
+    "event sequence and module inventory adoption",
+    "built-in _lsprof executable binding",
+    "pypower delayed import prewarm"
+  ],
+  "remaining_high_medium": [],
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_p2_input_cost_contract_v1.md": {
+      "bytes": 4426,
+      "sha256": "657836b4cbbad1d6c3f61009e73a1f55209bcdc5c14ee3990e7bac0102dbd6bc"
+    },
+    "experiments/staged_rts24_p2_input_cost_v1.py": {
+      "bytes": 22200,
+      "sha256": "2c8674e8d03f005d297bd0d68f87a63f6a9ae1d5aae517989957c907a458b8f4"
+    },
+    "tests/test_staged_rts24_p2_input_cost_v1.py": {
+      "bytes": 10558,
+      "sha256": "441d58257fa232edc373d5d0342c6d3215b7600cacea98759e5a4605e311faa9"
+    }
+  },
+  "targeted_exit": {
+    "bytes": 928,
+    "sha256": "229bfb272dc4c44f5d84972f27bdede0ba494be8fd70a825d36d9ca2d250af98"
+  },
+  "related_exit": {
+    "bytes": 1023,
+    "sha256": "62cf6b7f3dd13d5f05701ec01c360704c391db8f874ca373859b5e97d28f2206"
+  },
+  "targeted_passed": 33,
+  "related_passed": 68,
+  "one_attempt": "measure_01",
+  "fixed_calls": {
+    "fingerprints": 1,
+    "packet": 1,
+    "preserve": 1
+  },
+  "limits": {
+    "wall_seconds": 60,
+    "no_progress_seconds": 30,
+    "rss_bytes": 536870912,
+    "output_bytes": 16777216,
+    "files": 64
+  },
+  "native_authorized": false,
+  "P2_authorized": false,
+  "formal_result": false,
+  "resource_admission": false,
+  "scope": "agent section 9 bounded input-check diagnostic only; user continuation does not grant P2/native authority",
+  "registered_utc": "2026-10-23T11:08:11.788800+00:00"
+}

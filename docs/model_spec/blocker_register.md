@@ -1,5 +1,9 @@
 # 当前问题与阶段门禁登记
 
+### 2026-10-23 P2输入成本已诊断，复用与整链预算待证明
+
+[交接](../plan/continuation_handoff_20261023_p2_input_cost.md)记录唯一无solver三函数诊断exit0：profile wall0.6391264/0.0027545/1.4016708s，命令7.1231711s/Job4.640s、RSS151965696B，2/2成员quiet。66源/1929module/38禁止项零、三返回与raw profiles、输出采用闭合；33新/68相关普通检查及独立保存核验完成，原P1/B1–B3/685路径和294旧发布路径保持。旧文件枚举/历史stamp为后继优先对象，尚未实现优化。下一步版本化复用、失效及漂移窗口证明，之后补outer/注册开发、65s与fresh60s+收束余量、journal/prefix/昂贵失败和完整成本。无新P2/native权限，十小时/139/F-X、C整体与D/E现实输入/选择/留出/预算继续OPEN；单次warm cProfile不是提速或准入依据。
+
 ### 2026-10-23 P2内部接线已开发，成本与outer仍未准入
 
 [交接](../plan/continuation_handoff_20261023_p2_runner.md)记录P2 Cursor、actual/69事故合同循环、point/fresh/内部worker与monitor v2无原生开发；50针对性/110相关普通检查通过，来源闭包、接受state、证据族/父point、永久失败和raw KKT行内见证闭合。原P1/B1–B3/685路径和259旧发布路径保持。内部条件成功图load_packet960/fingerprints1281，准备工件逻辑读取2345752302B为静态会计，未作P2实测；下一步来源/packet无solver诊断、合法复用/漂移证明及outer launcher/quiet采用。没有新执行注册、公共P2或native；十小时writer/完整合同/昂贵失败及全DAG成本、65s与fresh60s+收束余量、C整体和D/E资源继续OPEN，139数值/F-X时序与现实输入/选择/留出缺口不变。

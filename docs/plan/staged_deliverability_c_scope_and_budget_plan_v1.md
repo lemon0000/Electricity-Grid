@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-23 P2输入核验成本检查点：见[最新交接](continuation_handoff_20261023_p2_input_cost.md)。一次无solver诊断完成，原fingerprints/load_packet(False)/preserve各一次，profile wall0.6391264/0.0027545/1.4016708s；命令exit0/7.1231711s、Job4.640s、RSS151965696B，2/2成员quiet，0 native/构模/replay。66源、runtime/module、三返回值、raw profile与quiet后采用闭合；33新/68相关普通检查及独立保存后核验完成，原P1/B1–B3/685路径与294旧发布路径保持。热点为旧Distribution.files/存在性枚举与历史stamp；下一步版本化复用/失效/漂移窗口证明，再补outer、全DAG与昂贵失败成本。单次warm仪器观察不支持提速或P2预算；C/139/F-X及D/E继续OPEN。以下保留历史检查点。
+
 2026-10-23 P2内部执行器开发检查点：见[最新交接](continuation_handoff_20261023_p2_runner.md)。Cursor/actual/69事故合同循环、P2 point/fresh/内部worker及monitor v2完成无原生开发；50针对性与110相关普通检查通过。槽/父点/接受state/证据族与永久失败门、raw KKT及行内point SHA、终态失败诊断和55准备来源核验闭合。原P1/B1–B3/685路径及259旧发布路径保持。没有outer launcher、新执行注册、公共P2/native或139数值；源码会计load_packet960/fingerprints1281、三工件逻辑读取2345752302B暴露下一来源/packet核验诊断对象，不能当实际成本或完整预算。下一步无solver诊断与合法复用证明、outer/quiet后采用及全链/昂贵失败审查；C/D/E及F-X仍OPEN。以下保留历史检查点。
 
 2026-10-23 P2元数据准备检查点：见[最新交接](continuation_handoff_20261023_p2_preparation.md)。原栈319槽完整DAG已保存：41 actual+278 contract、160QP/159LP，309静态SHA/10动态空值与全部未来数值身份空值保留；h=-2..7、注册4/观察8。一次准备exit0/外wall6.760574s，仅三文件505285B，55源/40模块/74函数/211 stdlib首尾闭合，0科学构模/native/replay。38针对性检查通过；相关冻结回归60pass/1历史生命周期断言失败，独立诊断保持原字节断言，失败保留。独立后核验确认原P1/B1–B3/685旧路径及196前次发布路径保持。真正candidate-only需类型/codec/journal身份后继，先保留plain_v2候选并准备原栈P2；尚无P2 controller、资源准入或专项native授权，3600s等只是拟议停止帽。下一步具体无原生runner及全链/昂贵失败审查；139数值/F-X与C/D/E仍OPEN。以下保留既有检查点。

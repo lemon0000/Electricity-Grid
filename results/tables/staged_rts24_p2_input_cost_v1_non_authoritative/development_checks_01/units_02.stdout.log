@@ -1,0 +1,22 @@
+............................F....                                        [100%]
+================================== FAILURES ===================================
+________ test_real_fresh_setup_and_guard_bookends_without_target_calls ________
+
+    def test_real_fresh_setup_and_guard_bookends_without_target_calls():
+        code="from experiments import staged_rts24_p2_input_cost_v1 as d; d.warm_imports(); d.forbidden_labels(); before,refs=d.runtime_snapshot(); modules=dict(d.sys.modules); guard=d.Deny(); guard.install(); guard.check(); guard.restore(); d.runtime_unchanged(before,refs,modules); print('setup_and_guard_bookends_only')"
+        result=subprocess.run([sys.executable,'-B','-s','-c',code],cwd=d.ROOT,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=30)
+>       assert result.returncode==0,result.stderr.decode(errors='replace')
+E       AssertionError: Traceback (most recent call last):
+E           File "<string>", line 1, in <module>
+E           File "D:\CUHKSZ\Research Project\electricity-grid\experiments\staged_rts24_p2_input_cost_v1.py", line 105, in runtime_snapshot
+E             std={n:stamp(Path(sys.modules[n].__file__)) for n in ('cProfile','pstats','profile','_lsprof','json','email.parser','email.feedparser')}
+E                               ^^^^^^^^^^^^^^^^^^^^^^^
+E         AttributeError: module '_lsprof' has no attribute '__file__'. Did you mean: '__name__'?
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['D:\\Miniconda3\\envs\\compute\\python.exe', '-B', '-s', '-c', "from experiments import staged_...^^^^^^^^^^^^^^^^\r\nAttributeError: module \'_lsprof\' has no attribute \'__file__\'. Did you mean: \'__name__\'?\r\n').returncode
+
+tests\test_staged_rts24_p2_input_cost_v1.py:149: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_p2_input_cost_v1.py::test_real_fresh_setup_and_guard_bookends_without_target_calls
+1 failed, 32 passed in 6.24s
