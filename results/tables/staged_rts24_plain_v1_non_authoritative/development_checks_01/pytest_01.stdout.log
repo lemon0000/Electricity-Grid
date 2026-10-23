@@ -1,0 +1,46 @@
+.................F...............                                        [100%]
+================================== FAILURES ===================================
+__ test_unknown_behavior_is_only_observed_in_whole_root_fallback[metaclass] ___
+
+shape = 'metaclass'
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000023AB2189190>
+
+    @pytest.mark.parametrize('shape',['dataclass','dict_key','dict_subclass','list_subclass','fraction_subclass','metaclass'])
+    def test_unknown_behavior_is_only_observed_in_whole_root_fallback(shape,monkeypatch):
+        events=[]
+        class Spy:
+            def __deepcopy__(self,memo):events.append('deepcopy');return Q(1,3)
+            def __str__(self):events.append('str');return 'spy'
+        @dataclass
+        class Unknown:item:object
+        class Mapping(dict):
+            def items(self):events.append('items');return super().items()
+        class Sequence(list):
+            def __iter__(self):events.append('iter');return super().__iter__()
+        class FractionChild(Q):
+            def __str__(self):events.append('fraction_str');return super().__str__()
+        class Meta(type):
+            def __hash__(self):events.append('meta_hash');return super().__hash__()
+            def __eq__(self,other):events.append('meta_eq');return super().__eq__(other)
+        class UnknownType(metaclass=Meta):pass
+        roots={'dataclass':Unknown(Spy()),'dict_key':{Spy():1},'dict_subclass':Mapping(a=1),
+               'list_subclass':Sequence([1]),'fraction_subclass':FractionChild(1,3),'metaclass':UnknownType()}
+        root=roots[shape];events.clear();expected=legacy.plain(root);expected_events=list(events);events.clear()
+        calls=[]
+        def fallback(value):calls.append(value);events.append('fallback');return legacy.plain(value)
+        monkeypatch.setattr(candidate,'_legacy_plain',fallback)
+        actual=candidate.plain(root)
+        assert calls==[root] and actual==expected
+>       assert events==['fallback']+expected_events
+E       AssertionError: assert ['fallback', 'meta_eq'] == ['fallback', ..., 'meta_hash']
+E         
+E         At index 1 diff: 'meta_eq' != 'meta_hash'
+E         Right contains 4 more items, first extra item: 'meta_hash'
+E         Use -v to get more diff
+
+tests\test_staged_rts24_plain_v1.py:77: AssertionError
+=================================== PASSES ====================================
+________ test_every_saved_P1_CAS_root_and_JSON_mapping_has_exact_bytes ________
+---------------------------- Captured stdout call -----------------------------
+{"known_classes_seen": 20, "serializer_equivalence_counts": {"JSON_mapping_roots": 581, "typed_CAS_roots": 403}}
+1 failed, 32 passed in 15.98s

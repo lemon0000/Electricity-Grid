@@ -1,5 +1,9 @@
 # 当前问题与阶段门禁登记
 
+### 2026-10-23 严格域摘要原型保存等价，实际调用域待覆盖
+
+[交接](../plan/continuation_handoff_20261023_plain.md)记录独立未接线helper：403 typed CAS根、581 JSON mapping根和20注册类的legacy plain/digest规范bytes/SHA相等，原683个P1文件保持；36新+35相关普通检查通过，PRE_SEAL/领域只读审查闭合。该编码身份不是CAS pack/blob SHA；完整实际plain/digest调用域、接线失败窗口和性能未验证。后继先做版本化只读shadow并绑定新源码、registry和fallback，不全局替换冻结模块或接writer/native。C规模/昂贵失败/139/F-X、现实输入和D/E选择/留出继续OPEN，原P1一次授权已用，资源/正式标志保持false。
+
 ### 2026-10-23 保存P1剖析完成，C资源仍未准入
 
 [交接](../plan/continuation_handoff_20261023_profile.md)记录一次无求解器保存诊断：exit0，命令27.732813s、Job27.218s、采样RSS155959296B，2/2成员归零；原683个P1文件/完整科学metrics、B1–B3与685旧路径保持。21项普通检查及独立保存后核验通过。分发文件全清单exists和重放plain/asdict/digest为已定位热点；RECORD提前过滤会改变未选路径PermissionError语义，候选搁置，后继先做严格域摘要的独立等价原型。仪器时间不支持提速、P2预算或整链准入。STAGE-01/02现实输入、STAGE-03/04完整139/昂贵失败/规模资源、STAGE-05完整时序及D/E输入/选择/留出仍OPEN；原P1专项授权已使用，formal/resource标志保持false。

@@ -1,0 +1,376 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "candidate_source_sha": "6faa051de75732c6ff07ce84f11fcc6b0255da389abe7bfcb0a7f96812f975d6",
+  "canonical_options": {
+    "allow_nan": false,
+    "encoding": "utf-8",
+    "ensure_ascii": true,
+    "separators": [
+      ",",
+      ":"
+    ],
+    "sort_keys": true
+  },
+  "codec_source_sha": "54a23ba142d12abe0a394437cb6967b0029ed573eddff1b6efb7adbaca7883c6",
+  "formal_result": false,
+  "legacy_fallback": {
+    "module": "src.staged_rts24_development_v1",
+    "qualname": "plain",
+    "source_sha": "d0c61bda61bfe4d275d2230533f2ecd74fa4fbf480f358c819f8cb86e1ba7add"
+  },
+  "registry_classes": [
+    {
+      "fields": [
+        "index",
+        "demand_mw"
+      ],
+      "module": "src.grid.rts24",
+      "qualname": "Bus",
+      "source_path": "src/grid/rts24.py",
+      "source_sha": "8c876b13fdc318ca98ab22309bae1aff0b8e56a12894f9aae98c84ed951eb8b5"
+    },
+    {
+      "fields": [
+        "index",
+        "bus",
+        "p_min_mw",
+        "p_max_mw",
+        "cost_quadratic",
+        "cost_linear",
+        "cost_constant",
+        "ramp_10_mw",
+        "ramp_30_mw",
+        "in_service"
+      ],
+      "module": "src.grid.rts24",
+      "qualname": "Generator",
+      "source_path": "src/grid/rts24.py",
+      "source_sha": "8c876b13fdc318ca98ab22309bae1aff0b8e56a12894f9aae98c84ed951eb8b5"
+    },
+    {
+      "fields": [
+        "index",
+        "from_bus",
+        "to_bus",
+        "reactance_pu",
+        "rate_a_mw",
+        "rate_b_mw",
+        "rate_c_mw",
+        "tap_ratio",
+        "phase_shift_rad",
+        "in_service"
+      ],
+      "module": "src.grid.rts24",
+      "qualname": "Branch",
+      "source_path": "src/grid/rts24.py",
+      "source_sha": "8c876b13fdc318ca98ab22309bae1aff0b8e56a12894f9aae98c84ed951eb8b5"
+    },
+    {
+      "fields": [
+        "base_mva",
+        "buses",
+        "generators",
+        "branches",
+        "reference_bus",
+        "source_package",
+        "source_version"
+      ],
+      "module": "src.grid.rts24",
+      "qualname": "Rts24Data",
+      "source_path": "src/grid/rts24.py",
+      "source_sha": "8c876b13fdc318ca98ab22309bae1aff0b8e56a12894f9aae98c84ed951eb8b5"
+    },
+    {
+      "fields": [
+        "capacity",
+        "alpha",
+        "eta",
+        "beta",
+        "facility_factor",
+        "auxiliary_mw",
+        "fixed_headroom",
+        "max_recovery",
+        "max_debt",
+        "max_call_energy",
+        "call_ramp",
+        "max_events",
+        "max_duration",
+        "minimum_rest"
+      ],
+      "module": "src.staged_deliverability_development_v1",
+      "qualname": "Parameters",
+      "source_path": "src/staged_deliverability_development_v1.py",
+      "source_sha": "91bbc6aaaac458c8fcb23c11d830a98af99e1d50d42b3c0489246ec1922109e0"
+    },
+    {
+      "fields": [
+        "created_hour",
+        "due_hour",
+        "deadline_evidence",
+        "incurred",
+        "remaining",
+        "missed_at_deadline"
+      ],
+      "module": "src.rq2_joint_deliverability_boundary_v1.debt_cohorts",
+      "qualname": "DebtCohort",
+      "source_path": "src/rq2_joint_deliverability_boundary_v1/debt_cohorts.py",
+      "source_sha": "d10497c1e6ab5ff573dec8d938b5407a7e28277551b37a1e0d7f79b4241adaab"
+    },
+    {
+      "fields": [
+        "trajectory_identity",
+        "accounting_period_id",
+        "last_hour",
+        "cohorts"
+      ],
+      "module": "src.rq2_joint_deliverability_boundary_v1.debt_cohorts",
+      "qualname": "DebtLedger",
+      "source_path": "src/rq2_joint_deliverability_boundary_v1/debt_cohorts.py",
+      "source_sha": "d10497c1e6ab5ff573dec8d938b5407a7e28277551b37a1e0d7f79b4241adaab"
+    },
+    {
+      "fields": [
+        "name",
+        "branches",
+        "generators"
+      ],
+      "module": "src.staged_rts24_development_v1",
+      "qualname": "Outage",
+      "source_path": "src/staged_rts24_development_v1.py",
+      "source_sha": "d0c61bda61bfe4d275d2230533f2ecd74fa4fbf480f358c819f8cb86e1ba7add"
+    },
+    {
+      "fields": [
+        "hour",
+        "due",
+        "workload",
+        "flexible_fraction",
+        "compute_capacity",
+        "idle_mw",
+        "clean_mwh",
+        "equipment_online",
+        "commissioned"
+      ],
+      "module": "src.staged_rts24_development_v1",
+      "qualname": "PublicObservation",
+      "source_path": "src/staged_rts24_development_v1.py",
+      "source_sha": "d0c61bda61bfe4d275d2230533f2ecd74fa4fbf480f358c819f8cb86e1ba7add"
+    },
+    {
+      "fields": [
+        "before",
+        "after",
+        "poi_bus",
+        "parameters",
+        "scale",
+        "business_json",
+        "rights_before",
+        "rights_after",
+        "x_envelope_json",
+        "selected",
+        "project_start",
+        "project_lead",
+        "delays",
+        "actual_hour",
+        "actual_duration",
+        "first_hour",
+        "registration_end",
+        "observation_end",
+        "redispatch_fraction",
+        "source_identity"
+      ],
+      "module": "src.staged_rts24_development_v1",
+      "qualname": "Fixture",
+      "source_path": "src/staged_rts24_development_v1.py",
+      "source_sha": "d0c61bda61bfe4d275d2230533f2ecd74fa4fbf480f358c819f8cb86e1ba7add"
+    },
+    {
+      "fields": [
+        "data",
+        "fixture_identity",
+        "plan",
+        "clean_path",
+        "hour",
+        "method",
+        "role",
+        "poi_bus",
+        "meter_min",
+        "meter_max",
+        "curtailment_max",
+        "connection_capacity",
+        "rights",
+        "outages",
+        "objective",
+        "anchor_id",
+        "redispatch_fraction",
+        "economic_regularization_quadratic"
+      ],
+      "module": "src.staged_rts24_development_v1",
+      "qualname": "PointRequest",
+      "source_path": "src/staged_rts24_development_v1.py",
+      "source_sha": "d0c61bda61bfe4d275d2230533f2ecd74fa4fbf480f358c819f8cb86e1ba7add"
+    },
+    {
+      "fields": [
+        "query_sha",
+        "meter_load_mw",
+        "curtailment_mw",
+        "generation_mw",
+        "angles_rad",
+        "flows_mw"
+      ],
+      "module": "src.staged_rts24_development_v1",
+      "qualname": "PointWitness",
+      "source_path": "src/staged_rts24_development_v1.py",
+      "source_sha": "d0c61bda61bfe4d275d2230533f2ecd74fa4fbf480f358c819f8cb86e1ba7add"
+    },
+    {
+      "fields": [
+        "query_sha",
+        "point_sha",
+        "balance_duals",
+        "flow_equation_duals",
+        "generation_lower_duals",
+        "generation_upper_duals",
+        "flow_lower_duals",
+        "flow_upper_duals"
+      ],
+      "module": "src.staged_rts24_development_v1",
+      "qualname": "EconomicEvidence",
+      "source_path": "src/staged_rts24_development_v1.py",
+      "source_sha": "d0c61bda61bfe4d275d2230533f2ecd74fa4fbf480f358c819f8cb86e1ba7add"
+    },
+    {
+      "fields": [
+        "request",
+        "base_query",
+        "base_point",
+        "base_economic"
+      ],
+      "module": "src.staged_rts24_development_v1",
+      "qualname": "BoundQuery",
+      "source_path": "src/staged_rts24_development_v1.py",
+      "source_sha": "d0c61bda61bfe4d275d2230533f2ecd74fa4fbf480f358c819f8cb86e1ba7add"
+    },
+    {
+      "fields": [
+        "query_sha",
+        "point_sha",
+        "reduction_sha",
+        "balance_duals",
+        "flow_equation_duals",
+        "generation_lower_duals",
+        "generation_upper_duals",
+        "flow_lower_duals",
+        "flow_upper_duals",
+        "meter_lower_dual",
+        "meter_upper_dual",
+        "curtailment_lower_dual",
+        "curtailment_upper_dual",
+        "connection_dual",
+        "curtailment_le_meter_dual"
+      ],
+      "module": "src.staged_rts24_child_optimality_v1",
+      "qualname": "ChildLpEvidence",
+      "source_path": "src/staged_rts24_child_optimality_v1.py",
+      "source_sha": "27071de638bceee8f6e0631ab44d8a9c3cebdba0c169ccd702c9c3392fcde543"
+    },
+    {
+      "fields": [
+        "query",
+        "point",
+        "economic",
+        "child_lp"
+      ],
+      "module": "src.staged_rts24_causal_v1",
+      "qualname": "PointEvidence",
+      "source_path": "src/staged_rts24_causal_v1.py",
+      "source_sha": "12950e9f0ac321e7297b66aba42efb9e486e477869d767e40cd841665a7b0ead"
+    },
+    {
+      "fields": [
+        "reference",
+        "raw",
+        "lower",
+        "upper"
+      ],
+      "module": "src.staged_rts24_causal_v1",
+      "qualname": "HourEvidence",
+      "source_path": "src/staged_rts24_causal_v1.py",
+      "source_sha": "12950e9f0ac321e7297b66aba42efb9e486e477869d767e40cd841665a7b0ead"
+    },
+    {
+      "fields": [
+        "fixture_identity",
+        "plan",
+        "clean_path",
+        "method",
+        "parameters",
+        "first_hour",
+        "registration_end",
+        "observation_end",
+        "trajectory_identity",
+        "ledger",
+        "records",
+        "call_energy",
+        "previous_call",
+        "events",
+        "duration",
+        "rest",
+        "x_previous",
+        "x_energy",
+        "x_events",
+        "x_duration",
+        "x_rest",
+        "stopped"
+      ],
+      "module": "src.staged_rts24_causal_v1",
+      "qualname": "ExecutionState",
+      "source_path": "src/staged_rts24_causal_v1.py",
+      "source_sha": "12950e9f0ac321e7297b66aba42efb9e486e477869d767e40cd841665a7b0ead"
+    },
+    {
+      "fields": [
+        "state_sha",
+        "observation",
+        "evidence",
+        "reference_mw",
+        "grid_request_mw",
+        "firm",
+        "conditional",
+        "legal_x_mw",
+        "lower_meter_mw",
+        "upper_meter_mw",
+        "actual_outage",
+        "x_envelope_json"
+      ],
+      "module": "src.staged_rts24_causal_v1",
+      "qualname": "PreparedHour",
+      "source_path": "src/staged_rts24_causal_v1.py",
+      "source_sha": "12950e9f0ac321e7297b66aba42efb9e486e477869d767e40cd841665a7b0ead"
+    },
+    {
+      "fields": [
+        "state_sha",
+        "prepared_sha",
+        "grid_deferred",
+        "cfe_deferred",
+        "recovery",
+        "allocations",
+        "activity",
+        "power_mw",
+        "cfe_request_mw",
+        "grid_shortfall_mw",
+        "cfe_call_shortfall_mw",
+        "cfe_shortfall_mwh",
+        "attributed_clean_mwh",
+        "violations"
+      ],
+      "module": "src.staged_rts24_causal_v1",
+      "qualname": "Proposal",
+      "source_path": "src/staged_rts24_causal_v1.py",
+      "source_sha": "12950e9f0ac321e7297b66aba42efb9e486e477869d767e40cd841665a7b0ead"
+    }
+  ],
+  "scope": "observed_schema_only_no_shadow_or_runtime_registration_authority"
+}
