@@ -1,0 +1,93 @@
+{
+  "attempts": 1,
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "expected_digest_pairs": 2547,
+  "expected_direct_alias_pairs": 118,
+  "expected_json_returns": 4861,
+  "expected_other_pairs": 2429,
+  "failed_checks_preserved": [
+    "units_02",
+    "units_03",
+    "units_07"
+  ],
+  "fixed_DAG": "parent metadata and P1 -> one owned fresh worker -> original reopen with per-code old JSON/SHA shadow -> worker identity/P1/source bookends -> all Job handles signaled -> parent actual runtime and P1/source/output bookends",
+  "formal_result": false,
+  "head": "bd473c907f0d3d8c8bf2a1abd1a91d88eb8dc614",
+  "limits": {
+    "Job_wall_seconds": 60,
+    "files": 64,
+    "no_progress_seconds": 30,
+    "output_bytes": 16777216,
+    "tree_RSS_bytes": 536870912
+  },
+  "metadata_observation": {
+    "path": "results\\tables\\staged_rts24_shadow_replay_v1_non_authoritative\\development_checks_01\\preparation_observation_02.json",
+    "pin": {
+      "bytes": 138574,
+      "sha256": "300e23bcc67224ac62290c86ae0af902ab628e4d548ae9c6160390aa97b46518"
+    }
+  },
+  "new_native_authority": false,
+  "no_active_research_runner_observed": true,
+  "official_receipt": false,
+  "process_snapshot": [
+    {
+      "CommandLine": "D:\\Miniconda3\\python.exe D:\\Miniconda3\\Scripts\\conda-script.py shell.powershell hook",
+      "Name": "python.exe",
+      "ParentProcessId": 11788,
+      "ProcessId": 10732
+    }
+  ],
+  "related_checks": {
+    "passed": 57,
+    "path": "results\\tables\\staged_rts24_shadow_replay_v1_non_authoritative\\development_checks_01\\related_01.exit.json",
+    "pin": {
+      "bytes": 717,
+      "sha256": "ff864253369e1c2741c6042dd2766f7250b3ceed050a9eba0946b02a27f58df7"
+    }
+  },
+  "resource_admission": false,
+  "retry_permitted": false,
+  "review_findings": {
+    "application_module_path": "closed by exact 35 module/package identity mapping and five negative cases",
+    "exception_wording": "limited to comparison callbacks",
+    "parent_quiet_runtime": "closed by actual parent snapshot and fault plus real tiny Job test",
+    "remaining_High": 0,
+    "remaining_Medium": 0
+  },
+  "review_kind": "PRE_SEAL_findings_only",
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_shadow_replay_contract_v1.md": {
+      "bytes": 5752,
+      "sha256": "4fe74b88edc379e03f26e95e4e4c2356568d45d90fa11bae1d58f4cdf88b0522"
+    },
+    "experiments/staged_rts24_shadow_replay_v1.py": {
+      "bytes": 10981,
+      "sha256": "de1587d45a59da415df886836b13d6a3dc62ba953286030282c0a90ab60f4093"
+    },
+    "src/staged_rts24_shadow_monitor_v1.py": {
+      "bytes": 8668,
+      "sha256": "827af48fb18b8ca42827971a8bcab985fe1035015fd5745777bf87fa3fb31f34"
+    },
+    "src/staged_rts24_shadow_runtime_v1.py": {
+      "bytes": 14824,
+      "sha256": "426ab88dfaaec2d9b8145e449300753d4aa911740306c423c45d85ffbba06e07"
+    },
+    "tests/test_staged_rts24_shadow_monitor_v1.py": {
+      "bytes": 7764,
+      "sha256": "c7eebc1dde09c0649490e76926665a357831581703788eec366ea1c1e2d6219a"
+    },
+    "tests/test_staged_rts24_shadow_replay_v1.py": {
+      "bytes": 8784,
+      "sha256": "13c99d1f7a8a862facd5e02be954be5741c3f4653bffc4cc6d1cf2a879e97963"
+    }
+  },
+  "targeted_checks": {
+    "passed": 52,
+    "path": "results\\tables\\staged_rts24_shadow_replay_v1_non_authoritative\\development_checks_01\\units_08.exit.json",
+    "pin": {
+      "bytes": 1107,
+      "sha256": "c4c99cb5709c1fb95bf7b33f6d9aca7b87b410cbcf0554c042950b092a21d5e9"
+    }
+  }
+}

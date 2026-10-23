@@ -1,5 +1,9 @@
 # 当前问题与阶段门禁登记
 
+### 2026-10-23 完整shadow暴露严格输入域缺口
+
+[交接](../plan/continuation_handoff_20261023_shadow.md)记录唯一保存P1只读shadow：strict_unsupported使2547次全严格等价命题未建立，命令17.095632s、Job14.313s、RSS151719936B，2/2 HANDLE quiet；未超帽、未重试。已验证保存child reduction整数键是确定域缺口，公开helper根级fallback保持旧bytes；不能把该例补写为运行首caller或unsupported总数。52绑定普通检查、57相关回归、1保存域回归及stdlib-only后核验完成；原P1683/B1–B3118/685旧路径和前两轮68路径保持。没有最终counter、metrics或runtime采用结果，后继先定义版本化strict/fallback及失败记录义务。C整体性能/规模/昂贵失败/139/F-X、D/E现实输入/选择/留出继续OPEN；原P1 native授权已用，formal/resource标志不变。
+
 ### 2026-10-23 严格域摘要原型保存等价，实际调用域待覆盖
 
 [交接](../plan/continuation_handoff_20261023_plain.md)记录独立未接线helper：403 typed CAS根、581 JSON mapping根和20注册类的legacy plain/digest规范bytes/SHA相等，原683个P1文件保持；36新+35相关普通检查通过，PRE_SEAL/领域只读审查闭合。该编码身份不是CAS pack/blob SHA；完整实际plain/digest调用域、接线失败窗口和性能未验证。后继先做版本化只读shadow并绑定新源码、registry和fallback，不全局替换冻结模块或接writer/native。C规模/昂贵失败/139/F-X、现实输入和D/E选择/留出继续OPEN，原P1一次授权已用，资源/正式标志保持false。

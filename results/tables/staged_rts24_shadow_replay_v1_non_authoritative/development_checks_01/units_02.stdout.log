@@ -1,0 +1,25 @@
+........................F.................                               [100%]
+================================== FAILURES ===================================
+___________ test_runtime_source_code_schema_and_bookend_are_stable ____________
+
+    def test_runtime_source_code_schema_and_bookend_are_stable():
+>       before,refs=runtime.snapshot()
+                    ^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_shadow_replay_v1.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\staged_rts24_shadow_runtime_v1.py:155: in snapshot
+    require(source in allowed,'noncanonical stdlib module path: '+name)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+value = False, message = 'noncanonical stdlib module path: _decimal'
+
+    def require(value,message):
+>       if not value:raise ValueError(message)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: noncanonical stdlib module path: _decimal
+
+src\staged_rts24_shadow_runtime_v1.py:26: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_shadow_replay_v1.py::test_runtime_source_code_schema_and_bookend_are_stable
+1 failed, 41 passed in 3.24s

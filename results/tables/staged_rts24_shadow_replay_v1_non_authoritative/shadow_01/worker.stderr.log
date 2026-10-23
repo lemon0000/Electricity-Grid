@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\staged_rts24_shadow_replay_v1.py", line 185, in <module>
+    try:code=worker(args.start_sha)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\staged_rts24_shadow_replay_v1.py", line 143, in worker
+    with mon:result=runtime.journal.reopen(P1/'journal',fixture,'on_time','early','full_temporal',trusted)
+         ^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_shadow_monitor_v1.py", line 147, in __exit__
+    if kind is None:self.require_complete()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_shadow_monitor_v1.py", line 153, in require_complete
+    raise ShadowIncomplete('shadow comparison incomplete: '+str(self.first_error))
+src.staged_rts24_shadow_monitor_v1.ShadowIncomplete: shadow comparison incomplete: {'reason': 'strict_unsupported', 'function': 'dumps'}
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\staged_rts24_shadow_replay_v1.py", line 185, in <module>
+    try:code=worker(args.start_sha)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\experiments\staged_rts24_shadow_replay_v1.py", line 143, in worker
+    with mon:result=runtime.journal.reopen(P1/'journal',fixture,'on_time','early','full_temporal',trusted)
+         ^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_shadow_monitor_v1.py", line 147, in __exit__
+    if kind is None:self.require_complete()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_shadow_monitor_v1.py", line 153, in require_complete
+    raise ShadowIncomplete('shadow comparison incomplete: '+str(self.first_error))
+src.staged_rts24_shadow_monitor_v1.ShadowIncomplete: shadow comparison incomplete: {'reason': 'strict_unsupported', 'function': 'dumps'}

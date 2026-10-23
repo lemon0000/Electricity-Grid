@@ -1,0 +1,19 @@
+...........................F........................                     [100%]
+================================== FAILURES ===================================
+____________ test_normal_job_quiet_preserves_parent_loaded_runtime ____________
+
+tmp_path = WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2642/test_normal_job_quiet_preserve0')
+
+    def test_normal_job_quiet_preserves_parent_loaded_runtime(tmp_path):
+        from src.staged_rts24_process_guard_v1 import supervise
+        before,refs=runtime.snapshot()
+        record=supervise([sys.executable,'-B','-s','-c','pass'],cwd=runtime.ROOT,output=tmp_path,
+            progress=tmp_path/'events.jsonl',limits=dict(wall_seconds=5,no_progress_seconds=5,
+                rss_bytes=512*1024**2,output_bytes=1024**2,files=8))
+>       assert record['exit_code']==0 and record['stop_reason'] is None and record['job_quiet_confirmed']
+E       AssertionError: assert (0 == 0 and 'cleanup_unknown' is None)
+
+tests\test_staged_rts24_shadow_replay_v1.py:38: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_shadow_replay_v1.py::test_normal_job_quiet_preserves_parent_loaded_runtime
+1 failed, 51 passed in 9.12s
