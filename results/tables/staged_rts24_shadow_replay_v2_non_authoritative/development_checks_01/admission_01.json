@@ -1,0 +1,104 @@
+{
+  "attempts": 1,
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "expected_digest_pairs": 2547,
+  "expected_direct_alias_pairs": 118,
+  "expected_json_returns": 4861,
+  "expected_other_pairs": 2429,
+  "fixed_DAG": "P1/source/runtime -> owned fresh worker -> one original reopen with v2 strict per-code comparison -> worker summary/metrics/P1/runtime/source bookends -> all Job member HANDLEs quiet -> parent actual runtime/P1/source/output adoption",
+  "formal_result": false,
+  "head": "90e2bd6ef2ddc535f39701963b3ec6c278ea4296",
+  "limits": {
+    "Job_wall_seconds": 60,
+    "files": 64,
+    "no_progress_seconds": 30,
+    "output_bytes": 16777216,
+    "tree_RSS_bytes": 536870912
+  },
+  "metadata_observation": {
+    "path": "results\\tables\\staged_rts24_shadow_replay_v2_non_authoritative\\development_checks_01\\preparation_observation_03.json",
+    "pin": {
+      "bytes": 146720,
+      "sha256": "6ba01518ccb2f10b9e18d4770c9a2ea235e1451c80206231b890b9eb921f1d23"
+    }
+  },
+  "new_native_authority": false,
+  "no_active_research_runner_observed": true,
+  "official_receipt": false,
+  "plain_checks": {
+    "passed": 48,
+    "path": "results\\tables\\staged_rts24_shadow_replay_v2_non_authoritative\\development_checks_01\\plain_01.exit.json",
+    "pin": {
+      "bytes": 402,
+      "sha256": "5b9bbceab697c384c90738243bb91c68091fa70c36ce44e5dcd790fee198d8ea"
+    }
+  },
+  "previous_v1_attempt_preserved": true,
+  "process_snapshot": [],
+  "public_fallback_not_in_shadow_path": true,
+  "related_checks": {
+    "passed": 74,
+    "path": "results\\tables\\staged_rts24_shadow_replay_v2_non_authoritative\\development_checks_01\\related_01.exit.json",
+    "pin": {
+      "bytes": 1585,
+      "sha256": "df3d6653751a21d650efbe2a27416544deb7ffbb1e45296f5b9a7794760c658a"
+    }
+  },
+  "resource_admission": false,
+  "retry_permitted": false,
+  "review_findings": {
+    "diagnostic_exception_preservation": "closed by 12 success/summary/write/preexisting fault cases",
+    "remaining_High": 0,
+    "remaining_Medium": 0,
+    "runtime_functions": "closed by pinning routes/snapshot/unchanged and mutation faults",
+    "runtime_global_aliases_and_fixed_set": "closed by identity/value gates and seven faults",
+    "v2_contract_binding": "closed by direct source test"
+  },
+  "review_kind": "PRE_SEAL_findings_only",
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_shadow_replay_contract_v2.md": {
+      "bytes": 5393,
+      "sha256": "01216d1c98daa1bda9890acd4858b92f4ecaf857f560805974d8e9a2bd4911ba"
+    },
+    "experiments/staged_rts24_shadow_replay_v2.py": {
+      "bytes": 11476,
+      "sha256": "74311d302ce09e84b1dc5d4bbc61dc8cf154e81955eb433774f0c4273d3f481c"
+    },
+    "src/staged_rts24_plain_v2.py": {
+      "bytes": 2085,
+      "sha256": "25d7498e60a89b64c2e1cfc1e6ca492c4e586a0517906f5fa7b5fe117ca5f47d"
+    },
+    "src/staged_rts24_shadow_monitor_v2.py": {
+      "bytes": 4276,
+      "sha256": "c2b6ac87c6af3f032a4107e23bf2909a1d1c63202aee67c986e43643a2cf8ea5"
+    },
+    "src/staged_rts24_shadow_runtime_v2.py": {
+      "bytes": 4168,
+      "sha256": "dea75a9a9e9ed0c892268d875bc9fd8192054298d9935a9d9290df01cd7b60db"
+    },
+    "tests/test_staged_rts24_plain_v2.py": {
+      "bytes": 12807,
+      "sha256": "c98b8494555a0150865a3a98bbe6ef0e32246c6d555207b006018f80d248bd16"
+    },
+    "tests/test_staged_rts24_shadow_monitor_v2.py": {
+      "bytes": 9590,
+      "sha256": "26fe7bdb9abc87319d66048cd3bd545848a1385385e8dbc3d740f1c0300e3add"
+    },
+    "tests/test_staged_rts24_shadow_replay_v2.py": {
+      "bytes": 13303,
+      "sha256": "53f92c0bff570975c10d1bc95b2003ab818fb79dd7b972be9815c9df22fe0f86"
+    }
+  },
+  "strict_key_domain": [
+    "exact_str",
+    "exact_int"
+  ],
+  "targeted_checks": {
+    "passed": 82,
+    "path": "results\\tables\\staged_rts24_shadow_replay_v2_non_authoritative\\development_checks_01\\units_04.exit.json",
+    "pin": {
+      "bytes": 1455,
+      "sha256": "07374224029b8b8305d8e78d9ce3cb3f5c28611fe401efcea53a4d256c5c8fd1"
+    }
+  }
+}

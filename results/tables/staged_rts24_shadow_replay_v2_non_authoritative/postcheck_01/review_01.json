@@ -1,0 +1,108 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "claim_scope": "one original saved five-hour P1 prefix reopen strict semantic JSON bytes and SHA equivalence; candidate observational only",
+  "document_pins": {
+    "docs/model_spec/blocker_register.md": {
+      "bytes": 994350,
+      "sha256": "3aae9a9a824714264a96c7b8381404d21f4fd6f82815850e394342a5c4c9f6b8"
+    },
+    "docs/plan/continuation_handoff_20261023_shadow_v2.md": {
+      "bytes": 3755,
+      "sha256": "8b1b0d440023fe7666dc2a9ce98d6c037a4b1c1ec9166e2f23da6a94d6ab3dd1"
+    },
+    "docs/plan/staged_deliverability_c_scope_and_budget_plan_v1.md": {
+      "bytes": 17054,
+      "sha256": "4a77b737ae2efe4ee2eac0ab0f43bb65dba8a593f7e620a7cb24588cda6be308"
+    },
+    "docs/plan/staged_deliverability_c_shadow_replay_contract_v2.md": {
+      "bytes": 5393,
+      "sha256": "01216d1c98daa1bda9890acd4858b92f4ecaf857f560805974d8e9a2bd4911ba"
+    },
+    "docs/plan/\u79d1\u7814\u9879\u76ee\u6267\u884c\u6b65\u9aa4.md": {
+      "bytes": 863432,
+      "sha256": "21acbe4c2e2532b5d6123344f1db51096b564aa6f3f897ec83c3b36d53082688"
+    },
+    "results/tables/staged_rts24_shadow_replay_v2_non_authoritative/validation_report.md": {
+      "bytes": 5503,
+      "sha256": "77c86aa65580381000415dbc710716a01e73447b36f9e60e3e9f7d755fc33ea5"
+    }
+  },
+  "findings_closed": [
+    "runtime routes/snapshot/unchanged code and object identity",
+    "v2 contract in attempt source binding",
+    "diagnostic summary/write/preexisting failures preserve original exception",
+    "new globals aliases and exact 38-module scope"
+  ],
+  "kind": "independent_read_only_PRE_SEAL_and_terminal_package_findings",
+  "new_run_authority": false,
+  "not_established": [
+    "candidate-only execution",
+    "speedup",
+    "CAS blob encoding replacement",
+    "full139",
+    "FX temporal backing",
+    "C overall performance",
+    "DE resource admission",
+    "new native authority"
+  ],
+  "official_verdict": null,
+  "postcheck_script": {
+    "bytes": 9595,
+    "sha256": "336cc61b1777c751eaee4a4aaedbd79dcb8b00eabdd45ca2c9bf2035754a9d0a"
+  },
+  "postcheck_stdout": {
+    "bytes": 2885,
+    "sha256": "7e0be14411c20c8999a195a4b5301ac067c7d67c5b4e12183582aa9e3ad5c791"
+  },
+  "previous_v1_attempt_preserved": true,
+  "receipt": null,
+  "remaining_High": 0,
+  "remaining_Medium": 0,
+  "seal": null,
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_shadow_replay_contract_v2.md": {
+      "bytes": 5393,
+      "sha256": "01216d1c98daa1bda9890acd4858b92f4ecaf857f560805974d8e9a2bd4911ba"
+    },
+    "experiments/staged_rts24_shadow_replay_v2.py": {
+      "bytes": 11476,
+      "sha256": "74311d302ce09e84b1dc5d4bbc61dc8cf154e81955eb433774f0c4273d3f481c"
+    },
+    "src/staged_rts24_plain_v2.py": {
+      "bytes": 2085,
+      "sha256": "25d7498e60a89b64c2e1cfc1e6ca492c4e586a0517906f5fa7b5fe117ca5f47d"
+    },
+    "src/staged_rts24_shadow_monitor_v2.py": {
+      "bytes": 4276,
+      "sha256": "c2b6ac87c6af3f032a4107e23bf2909a1d1c63202aee67c986e43643a2cf8ea5"
+    },
+    "src/staged_rts24_shadow_runtime_v2.py": {
+      "bytes": 4168,
+      "sha256": "dea75a9a9e9ed0c892268d875bc9fd8192054298d9935a9d9290df01cd7b60db"
+    },
+    "tests/test_staged_rts24_plain_v2.py": {
+      "bytes": 12807,
+      "sha256": "c98b8494555a0150865a3a98bbe6ef0e32246c6d555207b006018f80d248bd16"
+    },
+    "tests/test_staged_rts24_shadow_monitor_v2.py": {
+      "bytes": 9590,
+      "sha256": "26fe7bdb9abc87319d66048cd3bd545848a1385385e8dbc3d740f1c0300e3add"
+    },
+    "tests/test_staged_rts24_shadow_replay_v2.py": {
+      "bytes": 13303,
+      "sha256": "53f92c0bff570975c10d1bc95b2003ab818fb79dd7b972be9815c9df22fe0f86"
+    }
+  },
+  "terminal_review": {
+    "child_alias": 118,
+    "equivalent_legacy_calls": 2547,
+    "exit_code": 0,
+    "first_error": null,
+    "json_returns": 4861,
+    "metrics_equal": true,
+    "monitor_cleaned": true,
+    "other": 2429,
+    "pending": 0,
+    "quiet_members": 2
+  }
+}

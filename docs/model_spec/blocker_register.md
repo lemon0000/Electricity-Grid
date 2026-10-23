@@ -1,5 +1,9 @@
 # 当前问题与阶段门禁登记
 
+### 2026-10-23 v2完整保存编码域闭合，实际候选接线待做
+
+[交接](../plan/continuation_handoff_20261023_shadow_v2.md)记录一次固定P1五小时前缀的完整原reopen：2547实际legacy digest的旧JSON bytes/v2 strict bytes/旧SHA逐调用相同，child118+other2429、JSON4861、8stage、原metrics、runtime及父端quiet后采用闭合。命令18.388875s、Job15.125s、RSS155459584B，2/2 HANDLE退出；48+82新检查和74旧回归、独立stdlib-only末核完成，原P1683/B1–B3118/685路径及前序135发布路径保持。v1失败包原字节不改。候选尚未驱动科研路径，后继须明确candidate-only只读接线/身份/失败语义及有界资源测量；该shadow不证明提速、CAS blob替换或新native权限。C整体规模/昂贵失败/139/F-X及D/E现实输入/选择/留出仍OPEN；原P1 native一次授权已用，formal/resource标志不变。
+
 ### 2026-10-23 完整shadow暴露严格输入域缺口
 
 [交接](../plan/continuation_handoff_20261023_shadow.md)记录唯一保存P1只读shadow：strict_unsupported使2547次全严格等价命题未建立，命令17.095632s、Job14.313s、RSS151719936B，2/2 HANDLE quiet；未超帽、未重试。已验证保存child reduction整数键是确定域缺口，公开helper根级fallback保持旧bytes；不能把该例补写为运行首caller或unsupported总数。52绑定普通检查、57相关回归、1保存域回归及stdlib-only后核验完成；原P1683/B1–B3118/685旧路径和前两轮68路径保持。没有最终counter、metrics或runtime采用结果，后继先定义版本化strict/fallback及失败记录义务。C整体性能/规模/昂贵失败/139/F-X、D/E现实输入/选择/留出继续OPEN；原P1 native授权已用，formal/resource标志不变。

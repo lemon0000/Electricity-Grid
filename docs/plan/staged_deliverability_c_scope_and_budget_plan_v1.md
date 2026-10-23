@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-23整数键shadow后继检查点：见[最新交接](continuation_handoff_20261023_shadow_v2.md)。一次固定原P1完整保存reopen中2547次实际legacy digest的旧JSON bytes、v2 strict bytes及SHA全部相同，含child别名118/其他2429，JSON4861、8stage及旧metrics保持；runtime首尾和父端quiet后采用闭合。命令18.388875s、Job15.125s、RSS155459584B，2/2 HANDLE归零。48编码+82监控/控制器+74相关普通检查及独立后核验完成；原P1/B1–B3/前序135路径保持。结论限固定五小时前缀编码等价，候选尚未驱动执行，不支持提速、139/F-X或C资源准入；后继先确定candidate-only只读接线图和身份/预算。C整体与D/E仍OPEN。以下保留既有检查点。
+
 2026-10-23逐调用shadow检查点：见[最新交接](continuation_handoff_20261023_shadow.md)。唯一保存诊断因strict_unsupported拒绝全2547次严格等价；命令17.095632s、Job14.313s、RSS151719936B，2/2 HANDLE退出，未超预算且未重试。已用原point_0002证明child reduction整数键超出strict域、公开helper根级fallback保持旧bytes；该例不是本次首caller的直接观测。52绑定检查、57相关回归、1保存域回归及独立末端字节核验完成；原P1683/B1–B3118/685前序路径和此前68路径保持。未保存最终counter/metrics采用结果，不支持提速或C资源准入。后继先定义strict/fallback域与失败诊断义务；C整体/139/F-X和D/E仍OPEN。以下保留既有检查点。
 
 2026-10-23独立摘要原型检查点：见[最新交接](continuation_handoff_20261023_plain.md)。新helper尚未接线；全部403 typed CAS根/581 JSON mapping根/20注册类的legacy plain/digest规范bytes和SHA相等，683个P1文件保持；36新+35相关普通检查通过，两路只读审阅闭合。CAS blob身份与上述编码身份分开，没有新性能attempt或提速结论。下一步版本化只读逐调用shadow，须绑定新源码/registry/fallback且不全局替换旧c.digest；C/D/E资源、139/F-X仍OPEN。
