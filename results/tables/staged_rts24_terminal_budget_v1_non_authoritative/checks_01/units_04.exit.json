@@ -1,0 +1,49 @@
+{
+  "argv": [
+    "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/test_staged_rts24_process_guard_v3.py",
+    "tests/test_staged_rts24_p2_outer_observation_v2.py",
+    "-x",
+    "-q",
+    "-rP",
+    "--tb=short",
+    "--durations=5",
+    "-p",
+    "no:cacheprovider",
+    "-o",
+    "tmp_path_retention_count=100000",
+    "-o",
+    "tmp_path_retention_policy=all"
+  ],
+  "exit_code": 0,
+  "scope": "ordinary bounded unit checks; no solver/native/scientific execution",
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_p2_terminal_budget_contract_v1.md": {
+      "bytes": 5586,
+      "sha256": "991c2d2da19035a5870fc5d7af5b5729d2976485443a73e1da4d75a8104d87c0"
+    },
+    "src/staged_rts24_p2_outer_observation_v2.py": {
+      "bytes": 12097,
+      "sha256": "77f5eb4b44b3ed4c950075cbc0f5fc35f57dac9f2b15930f89a0dbcb7aa95ed8"
+    },
+    "src/staged_rts24_process_guard_v3.py": {
+      "bytes": 5980,
+      "sha256": "74d246d8801dbd3d1e53dcb5f005bf01c5a93e3217eac9783ca92d9bd1603634"
+    },
+    "tests/test_staged_rts24_p2_outer_observation_v2.py": {
+      "bytes": 18972,
+      "sha256": "226f0f1779c7303c5665d5e7daf6855377d14af338013ffbeefbebc5f501e7cc"
+    },
+    "tests/test_staged_rts24_process_guard_v3.py": {
+      "bytes": 5284,
+      "sha256": "af4c56772f59e9bc170402eebc2fcd57f70f4644592e58b3d652afbc78277032"
+    }
+  },
+  "source_pins_unchanged": true,
+  "timed_out": false,
+  "timeout_seconds": 90,
+  "wall_seconds": 6.777137499999299
+}

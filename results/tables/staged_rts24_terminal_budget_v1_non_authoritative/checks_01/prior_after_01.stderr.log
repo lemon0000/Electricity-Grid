@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_package_check_v1_non_authoritative\postcheck_01\postcheck.py", line 88, in <module>
+    if __name__=='__main__':print(json.dumps(main(),sort_keys=True,indent=2,allow_nan=False))
+                                             ^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_package_check_v1_non_authoritative\postcheck_01\postcheck.py", line 61, in main
+    require(all(pin(ROOT/n)==v for n,v in {**docs['document_pins'],**docs['AST_pins']}.items()),'document or AST drift')
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_package_check_v1_non_authoritative\postcheck_01\postcheck.py", line 15, in require
+    if not value:raise ValueError(message)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: document or AST drift

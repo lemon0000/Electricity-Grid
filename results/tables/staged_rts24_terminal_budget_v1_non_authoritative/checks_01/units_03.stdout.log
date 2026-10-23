@@ -1,0 +1,13 @@
+........................................................................ [ 72%]
+...........................                                              [100%]
+=================================== PASSES ====================================
+_____ test_maximal_record_and_parent_encoding_fit_independent_upper_bound _____
+---------------------------- Captured stdout call -----------------------------
+{"oracle": "bounded_maximal_canonical_records", "members": 1024, "member_array_bytes": 61441, "process_bytes": 92020, "parent_bytes": 101055, "process_conservative_bound": 92308, "parent_conservative_bound": 101343}
+============================= slowest 5 durations =============================
+0.41s call     tests/test_staged_rts24_process_guard_v3.py::test_real_short_child_keeps_complete_historical_handles_and_final_accounting
+0.21s call     tests/test_staged_rts24_process_guard_v3.py::test_two_file_slots_reserved[0]
+0.20s call     tests/test_staged_rts24_process_guard_v3.py::test_both_record_reservations_count_at_every_scan[running-0]
+0.20s call     tests/test_staged_rts24_process_guard_v3.py::test_failed_observations_preserve_diagnostics_and_quiet[cleanup]
+0.20s call     tests/test_staged_rts24_process_guard_v3.py::test_failed_observations_preserve_diagnostics_and_quiet[close]
+99 passed in 5.77s

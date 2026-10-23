@@ -1,0 +1,29 @@
+.......................................................................F [ 72%]
+
+================================== FAILURES ===================================
+_ test_existing_parent_target_or_pending_rejected_before_inspection[parent_observation.json] _
+tests\test_staged_rts24_p2_outer_observation_v2.py:159: in test_existing_parent_target_or_pending_rejected_before_inspection
+    d.save_observation(case.parent,case.raw,case.sha,case.record,lambda root:pytest.fail('existing attempt inspected'))
+src\staged_rts24_p2_outer_observation_v2.py:116: in save_observation
+    require(not list(parent.iterdir()), 'dedicated parent directory must be empty')
+src\staged_rts24_p2_outer_observation_v1.py:21: in require
+    if not value:raise ValueError(message)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: dedicated parent directory must be empty
+
+During handling of the above exception, another exception occurred:
+tests\test_staged_rts24_p2_outer_observation_v2.py:158: in test_existing_parent_target_or_pending_rejected_before_inspection
+    with pytest.raises(ValueError,match='already exists'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'already exists'
+E     Actual message: 'dedicated parent directory must be empty'
+=================================== PASSES ====================================
+============================= slowest 5 durations =============================
+0.41s call     tests/test_staged_rts24_process_guard_v3.py::test_real_short_child_keeps_complete_historical_handles_and_final_accounting
+0.21s call     tests/test_staged_rts24_process_guard_v3.py::test_two_file_slots_reserved[0]
+0.20s call     tests/test_staged_rts24_process_guard_v3.py::test_both_record_reservations_count_at_every_scan[running-0]
+0.20s call     tests/test_staged_rts24_process_guard_v3.py::test_failed_observations_preserve_diagnostics_and_quiet[close]
+0.20s call     tests/test_staged_rts24_process_guard_v3.py::test_failed_observations_preserve_diagnostics_and_quiet[cleanup]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 71 passed in 5.42s

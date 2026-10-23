@@ -1,5 +1,7 @@
 # 当前问题与阶段门禁登记
 
+2026-10-24 收尾空间候选已开发，真实outer及时间预算仍OPEN：见[最新交接](../plan/continuation_handoff_20261024_terminal_budget.md)与[合同](../plan/staged_deliverability_c_p2_terminal_budget_contract_v1.md)。guard v3与parent v2分别限定launcher/父记录128KiB/一个文件，合计262144B/两槽计入原64MiB/8192帽；1024是含owner的历史identity上界。122新/91相关检查、独立长度oracle和PRE_SEAL findings闭合，上界92033/101080B。文件HANDLE/metadata/目录书挡及发布失败诊断已验证，遍历或书挡失败为会计unknown。547旧文件及三导航旧正文、原P2七输入/B1–B3/P1保持；原P2仍用guard v2，没有公共P2/native/完整outer。解除后续阻塞仍需新来源/真实启动绑定、独立raw/KKT/合法X/journal采用、昂贵失败与十小时/全wall/RAM/storage；fresh60s+5s对65s无进展仍无父端余量。139/F-X、C整体及D/E现实输入/选择/留出/资源门禁保持OPEN/false。
+
 2026-10-23 P2机械检查与收尾空间缺口：见[最新交接](../plan/continuation_handoff_20261023_p2_package_check.md)及[会计审查](../plan/staged_deliverability_c_p2_package_check_cost_review_v1.md)。129新/72相关普通检查已完成，只读包层能闭合合成319/138元数据与真实库存；不核实科学数值、实际argv、进程亲缘或完整runtime。保存P1为outer66/inner64/两个residual；条件P2历史642成员的18位FILETIME数组至少31459B，超固定16384B reserve 15075B，故边界保证仍OPEN，不能据此推断实际P2必超限。解除需版本化parent收尾预算/guard会计与失败窗口，再补真实outer、独立科学采用及代表成本。fresh60s＋5s收束对65s无进展仍无父端余量。原七输入/packet/P1/B1–B3保持；无新公共P2或native权限，139/F-X、C整体与D/E输入/选择/留出/资源继续OPEN。
 
 ### 2026-10-23 P2失败控制与父端观察保存已开发，完整outer仍OPEN

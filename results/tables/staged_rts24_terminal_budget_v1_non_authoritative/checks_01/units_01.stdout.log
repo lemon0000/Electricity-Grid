@@ -1,0 +1,16 @@
+..............F
+================================== FAILURES ===================================
+_ test_real_short_child_keeps_complete_historical_handles_and_final_accounting _
+tests\test_staged_rts24_process_guard_v3.py:74: in test_real_short_child_keeps_complete_historical_handles_and_final_accounting
+    assert w['total_processes'] == w['observed_unique_member_handles'] == len(w['member_identities']) == 1
+E   AssertionError: assert 2 == 1
+E    +  where 2 = len([{'creation_filetime': 134372486881177790, 'pid': 19892}, {'creation_filetime': 134372486881264894, 'pid': 36748}])
+=================================== PASSES ====================================
+============================= slowest 5 durations =============================
+0.41s call     tests/test_staged_rts24_process_guard_v3.py::test_real_short_child_keeps_complete_historical_handles_and_final_accounting
+0.21s call     tests/test_staged_rts24_process_guard_v3.py::test_two_file_slots_reserved[0]
+0.20s call     tests/test_staged_rts24_process_guard_v3.py::test_both_record_reservations_count_at_every_scan[running-0]
+0.20s call     tests/test_staged_rts24_process_guard_v3.py::test_failed_observations_preserve_diagnostics_and_quiet[close]
+0.20s call     tests/test_staged_rts24_process_guard_v3.py::test_failed_observations_preserve_diagnostics_and_quiet[cleanup]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 14 passed in 5.20s
