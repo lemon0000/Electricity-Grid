@@ -1,0 +1,43 @@
+{
+  "argv": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/test_staged_rts24_process_guard_v2.py",
+    "tests/test_staged_rts24_journal_v2.py::test_trusted_keyset_and_unknown_publication_bind_complete_closure",
+    "tests/test_staged_rts24_journal_v2.py::test_v2_unresolved_attempt_binds_complete_objects_and_remains_unapplied",
+    "tests/test_staged_rts24_journal_v2.py::test_v2_terminal_pending_and_unknown_keep_state_without_arrival",
+    "tests/test_staged_rts24_journal_v2.py::test_v2_known_actual_rejection_closes_with_unchanged_ledger",
+    "tests/test_staged_rts24_p2_native_probe_v1.py",
+    "-k",
+    "not preparation_source_drift",
+    "-q",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "exit_code": 0,
+  "scope": "ordinary tmp/FakeApi/control substitutes and tiny Python child only; no public P2/native experiment",
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_p2_failure_and_outer_contract_v1.md": {
+      "bytes": 6848,
+      "sha256": "082a46b82d797c0f6f1f11b7a857f8941de1937b1811e265d48769cf1cfe64f9"
+    },
+    "src/staged_rts24_p2_outer_observation_v1.py": {
+      "bytes": 10412,
+      "sha256": "8d80e035c2570d279360d67cf6bb93b125970fae81e5c638a396351f8dd78b91"
+    },
+    "tests/test_staged_rts24_p2_failure_v1.py": {
+      "bytes": 9916,
+      "sha256": "b4c6b7ec5d49c74c4f94f17ed93a4726fb33def1818aea1bd26d1397cc1f27c8"
+    },
+    "tests/test_staged_rts24_p2_outer_observation_v1.py": {
+      "bytes": 10351,
+      "sha256": "eafc74acfe043a04793afba83317e4ca5e4636ac454edcd2fff0291d9a60345e"
+    }
+  },
+  "source_pins_unchanged": true,
+  "timed_out": false,
+  "timeout_seconds": 90,
+  "wall_seconds": 84.67150219999894
+}

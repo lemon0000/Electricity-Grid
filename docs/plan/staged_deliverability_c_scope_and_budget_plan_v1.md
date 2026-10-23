@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-23 P2失败与父端观察保存检查点：见[最新交接](continuation_handoff_20261023_p2_failure_outer.md)。固定晚期numeric/transport、begin/commit/terminal、fresh/父metrics及quiet后发布失败矩阵；新增父观察保存组件，核完整Job/owner/quiet、固定16KiB reserve、闭合机械claims与pending/readback未决。73新/35相关普通检查通过，初轮fixture失败和120s组合超时保留；400旧发布路径与B1–B3/P1保持。319/318/137与319/319/138仅为替代件控制回归，无新公共P2/native。完整outer绑定/库存/引用与独立科学采用、尾部成本和总预算仍待闭合，139/F-X、C整体与D/E继续OPEN。以下保留历史检查点。
+
 2026-10-23 P2整链会计检查点：见[最新交接](continuation_handoff_20261023_p2_accounting.md)。暂缓缓存并保持1281原指纹，补齐十小时成功条件图：journal runtime101（并入指纹1382）、69 root/126 journal CAS及2552 point CAS扫描、753分来源root读取、97 audit/495历史row、575 selective/1796描述与4 full/570描述。原P1五小时130 CAS的wire闭包与33份observer独立交叉核对，76 scans投影5376对象实例/17465962B逻辑读取，不能外推十小时。一次纯元数据CLI exit0，264输入首尾同；40新/41相关普通检查及独立保存后核验闭合，351旧发布路径与B1–B3/P1保持。下一步昂贵失败矩阵、outer/quiet采用与完整成本，C/139/F-X及D/E继续OPEN。以下保留历史检查点。
 
 2026-10-23 P2输入核验成本检查点：见[最新交接](continuation_handoff_20261023_p2_input_cost.md)。一次无solver诊断完成，原fingerprints/load_packet(False)/preserve各一次，profile wall0.6391264/0.0027545/1.4016708s；命令exit0/7.1231711s、Job4.640s、RSS151965696B，2/2成员quiet，0 native/构模/replay。66源、runtime/module、三返回值、raw profile与quiet后采用闭合；33新/68相关普通检查及独立保存后核验完成，原P1/B1–B3/685路径与294旧发布路径保持。热点为旧Distribution.files/存在性枚举与历史stamp；下一步版本化复用/失效/漂移窗口证明，再补outer、全DAG与昂贵失败成本。单次warm仪器观察不支持提速或P2预算；C/139/F-X及D/E继续OPEN。以下保留历史检查点。

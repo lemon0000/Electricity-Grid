@@ -1,0 +1,35 @@
+{
+  "argv": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/test_staged_rts24_p2_outer_observation_v1.py",
+    "tests/test_staged_rts24_p2_failure_v1.py",
+    "-q",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 9.248706700003822,
+  "source_pins": {
+    "src/staged_rts24_p2_outer_observation_v1.py": {
+      "bytes": 10412,
+      "sha256": "8d80e035c2570d279360d67cf6bb93b125970fae81e5c638a396351f8dd78b91"
+    },
+    "tests/test_staged_rts24_p2_outer_observation_v1.py": {
+      "bytes": 10351,
+      "sha256": "eafc74acfe043a04793afba83317e4ca5e4636ac454edcd2fff0291d9a60345e"
+    },
+    "tests/test_staged_rts24_p2_failure_v1.py": {
+      "bytes": 9916,
+      "sha256": "b4c6b7ec5d49c74c4f94f17ed93a4726fb33def1818aea1bd26d1397cc1f27c8"
+    },
+    "docs/plan/staged_deliverability_c_p2_failure_and_outer_contract_v1.md": {
+      "bytes": 6744,
+      "sha256": "54042460da7f4d96f5b319d33360f87e21dd90a669e29e6e9429f482fb71a4a9"
+    }
+  },
+  "source_pins_unchanged": true,
+  "scope": "ordinary tmp/FakeApi/explicit control substitutes; no public P2/native experiment"
+}

@@ -1,0 +1,252 @@
+...........................................F.FFFF.                       [100%]
+================================== FAILURES ===================================
+_ test_last_contract_numeric_failure_preserves_137_rows_and_completes_diagnostic _
+
+worker_control = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2671/test_last_contract_numeric_fai0/worker'), trace=['finish'], fault={'kind': 'late_numeric'})
+
+    def test_last_contract_numeric_failure_preserves_137_rows_and_completes_diagnostic(worker_control):
+        case=worker_control;case.fault['kind']='late_numeric'
+>       assert d.worker(case.root,'ordinary')==2
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_failure_v1.py:125: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2671/test_last_contract_numeric_fai0/worker')
+registration_sha = 'ordinary'
+
+    def worker(root,registration_sha):
+        from src import staged_rts24_journal_v2 as journal
+        from src.staged_rts24_process_guard_v2 import supervise
+        c,_=modules()
+        c.require(Path(root).resolve()==OUTPUT.resolve(),'registered P2 output required')
+        launcher=load(root/'launcher_start.json')
+        c.require(launcher['limits']==LIMITS and launcher['package']=='staged_rts24_P2_v1'
+            and launcher['registration_sha']==registration_sha,'P2 launcher scope differs')
+        pins,old=fingerprints(),preserve();registered=load(REGISTRATION)
+        c.require(registered['pins']==pins and registered['preserved']==old,'P2 initial bytes differ')
+        packet=load_packet(validate=True)
+        c.require(packet['schedule_sha']==registered['schedule_sha'],'P2 schedule differs')
+        write(root/'start.json',dict(authority='DRAFT_NONAUTHORITATIVE',pins=pins,preserved=old,
+            packet_pin=PACKET_PINS['packet.json'],max_point_attempts=MAX_CALLS,registration_sha=registration_sha,
+            native_user_authority='external_explicit_user_instruction_not_inferred_from_files'))
+        events=Events(root);events('start')
+        fixture=c.load_fixture();transport=PointTransport(root,pins,events,registration_sha=registration_sha)
+        point=control.Cursor(packet['schedule'],transport)
+        session,failure=control.actual_prefix(fixture,root/'journal',point,events)
+        contracts=[]
+        if failure is None and not session.state.stopped:
+            try:control.full_contracts(fixture,point,events,contracts)
+            except NumericUnresolved as exc:failure=dict(stage='contract_numeric',type=type(exc).__name__,message=str(exc))
+        if fingerprints()!=pins or preserve()!=old:raise TransportUnresolved('P2 dependency or prior drift before finish')
+        if not session.closed:
+            session=journal.finish(session)
+>           if not session.closed or session.publication_outcome!='committed' or session.scientific_outcome not in (
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'known_rejection','missing_input','right_censored','complete'):
+E                   AttributeError: 'types.SimpleNamespace' object has no attribute 'publication_outcome'
+
+experiments\staged_rts24_p2_native_probe_v1.py:243: AttributeError
+_ test_fresh_or_parent_failure_retains_terminal_marker_and_does_not_claim_report[fresh_exit] _
+
+worker_control = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2671/test_fresh_or_parent_failure_r0/worker'), trace=['finish'], fault={'kind': 'fresh_exit'})
+fault = 'fresh_exit'
+
+    @pytest.mark.parametrize('fault',['fresh_exit','fresh_timeout','quiet','metrics'])
+    def test_fresh_or_parent_failure_retains_terminal_marker_and_does_not_claim_report(worker_control,fault):
+        case=worker_control;case.fault['kind']=fault
+>       with pytest.raises(ValueError,match='fresh'):d.worker(case.root,'ordinary')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_failure_v1.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2671/test_fresh_or_parent_failure_r0/worker')
+registration_sha = 'ordinary'
+
+    def worker(root,registration_sha):
+        from src import staged_rts24_journal_v2 as journal
+        from src.staged_rts24_process_guard_v2 import supervise
+        c,_=modules()
+        c.require(Path(root).resolve()==OUTPUT.resolve(),'registered P2 output required')
+        launcher=load(root/'launcher_start.json')
+        c.require(launcher['limits']==LIMITS and launcher['package']=='staged_rts24_P2_v1'
+            and launcher['registration_sha']==registration_sha,'P2 launcher scope differs')
+        pins,old=fingerprints(),preserve();registered=load(REGISTRATION)
+        c.require(registered['pins']==pins and registered['preserved']==old,'P2 initial bytes differ')
+        packet=load_packet(validate=True)
+        c.require(packet['schedule_sha']==registered['schedule_sha'],'P2 schedule differs')
+        write(root/'start.json',dict(authority='DRAFT_NONAUTHORITATIVE',pins=pins,preserved=old,
+            packet_pin=PACKET_PINS['packet.json'],max_point_attempts=MAX_CALLS,registration_sha=registration_sha,
+            native_user_authority='external_explicit_user_instruction_not_inferred_from_files'))
+        events=Events(root);events('start')
+        fixture=c.load_fixture();transport=PointTransport(root,pins,events,registration_sha=registration_sha)
+        point=control.Cursor(packet['schedule'],transport)
+        session,failure=control.actual_prefix(fixture,root/'journal',point,events)
+        contracts=[]
+        if failure is None and not session.state.stopped:
+            try:control.full_contracts(fixture,point,events,contracts)
+            except NumericUnresolved as exc:failure=dict(stage='contract_numeric',type=type(exc).__name__,message=str(exc))
+        if fingerprints()!=pins or preserve()!=old:raise TransportUnresolved('P2 dependency or prior drift before finish')
+        if not session.closed:
+            session=journal.finish(session)
+>           if not session.closed or session.publication_outcome!='committed' or session.scientific_outcome not in (
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'known_rejection','missing_input','right_censored','complete'):
+E                   AttributeError: 'types.SimpleNamespace' object has no attribute 'publication_outcome'
+
+experiments\staged_rts24_p2_native_probe_v1.py:243: AttributeError
+_ test_fresh_or_parent_failure_retains_terminal_marker_and_does_not_claim_report[fresh_timeout] _
+
+worker_control = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2671/test_fresh_or_parent_failure_r1/worker'), trace=['finish'], fault={'kind': 'fresh_timeout'})
+fault = 'fresh_timeout'
+
+    @pytest.mark.parametrize('fault',['fresh_exit','fresh_timeout','quiet','metrics'])
+    def test_fresh_or_parent_failure_retains_terminal_marker_and_does_not_claim_report(worker_control,fault):
+        case=worker_control;case.fault['kind']=fault
+>       with pytest.raises(ValueError,match='fresh'):d.worker(case.root,'ordinary')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_failure_v1.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2671/test_fresh_or_parent_failure_r1/worker')
+registration_sha = 'ordinary'
+
+    def worker(root,registration_sha):
+        from src import staged_rts24_journal_v2 as journal
+        from src.staged_rts24_process_guard_v2 import supervise
+        c,_=modules()
+        c.require(Path(root).resolve()==OUTPUT.resolve(),'registered P2 output required')
+        launcher=load(root/'launcher_start.json')
+        c.require(launcher['limits']==LIMITS and launcher['package']=='staged_rts24_P2_v1'
+            and launcher['registration_sha']==registration_sha,'P2 launcher scope differs')
+        pins,old=fingerprints(),preserve();registered=load(REGISTRATION)
+        c.require(registered['pins']==pins and registered['preserved']==old,'P2 initial bytes differ')
+        packet=load_packet(validate=True)
+        c.require(packet['schedule_sha']==registered['schedule_sha'],'P2 schedule differs')
+        write(root/'start.json',dict(authority='DRAFT_NONAUTHORITATIVE',pins=pins,preserved=old,
+            packet_pin=PACKET_PINS['packet.json'],max_point_attempts=MAX_CALLS,registration_sha=registration_sha,
+            native_user_authority='external_explicit_user_instruction_not_inferred_from_files'))
+        events=Events(root);events('start')
+        fixture=c.load_fixture();transport=PointTransport(root,pins,events,registration_sha=registration_sha)
+        point=control.Cursor(packet['schedule'],transport)
+        session,failure=control.actual_prefix(fixture,root/'journal',point,events)
+        contracts=[]
+        if failure is None and not session.state.stopped:
+            try:control.full_contracts(fixture,point,events,contracts)
+            except NumericUnresolved as exc:failure=dict(stage='contract_numeric',type=type(exc).__name__,message=str(exc))
+        if fingerprints()!=pins or preserve()!=old:raise TransportUnresolved('P2 dependency or prior drift before finish')
+        if not session.closed:
+            session=journal.finish(session)
+>           if not session.closed or session.publication_outcome!='committed' or session.scientific_outcome not in (
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'known_rejection','missing_input','right_censored','complete'):
+E                   AttributeError: 'types.SimpleNamespace' object has no attribute 'publication_outcome'
+
+experiments\staged_rts24_p2_native_probe_v1.py:243: AttributeError
+_ test_fresh_or_parent_failure_retains_terminal_marker_and_does_not_claim_report[quiet] _
+
+worker_control = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2671/test_fresh_or_parent_failure_r2/worker'), trace=['finish'], fault={'kind': 'quiet'})
+fault = 'quiet'
+
+    @pytest.mark.parametrize('fault',['fresh_exit','fresh_timeout','quiet','metrics'])
+    def test_fresh_or_parent_failure_retains_terminal_marker_and_does_not_claim_report(worker_control,fault):
+        case=worker_control;case.fault['kind']=fault
+>       with pytest.raises(ValueError,match='fresh'):d.worker(case.root,'ordinary')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_failure_v1.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2671/test_fresh_or_parent_failure_r2/worker')
+registration_sha = 'ordinary'
+
+    def worker(root,registration_sha):
+        from src import staged_rts24_journal_v2 as journal
+        from src.staged_rts24_process_guard_v2 import supervise
+        c,_=modules()
+        c.require(Path(root).resolve()==OUTPUT.resolve(),'registered P2 output required')
+        launcher=load(root/'launcher_start.json')
+        c.require(launcher['limits']==LIMITS and launcher['package']=='staged_rts24_P2_v1'
+            and launcher['registration_sha']==registration_sha,'P2 launcher scope differs')
+        pins,old=fingerprints(),preserve();registered=load(REGISTRATION)
+        c.require(registered['pins']==pins and registered['preserved']==old,'P2 initial bytes differ')
+        packet=load_packet(validate=True)
+        c.require(packet['schedule_sha']==registered['schedule_sha'],'P2 schedule differs')
+        write(root/'start.json',dict(authority='DRAFT_NONAUTHORITATIVE',pins=pins,preserved=old,
+            packet_pin=PACKET_PINS['packet.json'],max_point_attempts=MAX_CALLS,registration_sha=registration_sha,
+            native_user_authority='external_explicit_user_instruction_not_inferred_from_files'))
+        events=Events(root);events('start')
+        fixture=c.load_fixture();transport=PointTransport(root,pins,events,registration_sha=registration_sha)
+        point=control.Cursor(packet['schedule'],transport)
+        session,failure=control.actual_prefix(fixture,root/'journal',point,events)
+        contracts=[]
+        if failure is None and not session.state.stopped:
+            try:control.full_contracts(fixture,point,events,contracts)
+            except NumericUnresolved as exc:failure=dict(stage='contract_numeric',type=type(exc).__name__,message=str(exc))
+        if fingerprints()!=pins or preserve()!=old:raise TransportUnresolved('P2 dependency or prior drift before finish')
+        if not session.closed:
+            session=journal.finish(session)
+>           if not session.closed or session.publication_outcome!='committed' or session.scientific_outcome not in (
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'known_rejection','missing_input','right_censored','complete'):
+E                   AttributeError: 'types.SimpleNamespace' object has no attribute 'publication_outcome'
+
+experiments\staged_rts24_p2_native_probe_v1.py:243: AttributeError
+_ test_fresh_or_parent_failure_retains_terminal_marker_and_does_not_claim_report[metrics] _
+
+worker_control = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2671/test_fresh_or_parent_failure_r3/worker'), trace=['finish'], fault={'kind': 'metrics'})
+fault = 'metrics'
+
+    @pytest.mark.parametrize('fault',['fresh_exit','fresh_timeout','quiet','metrics'])
+    def test_fresh_or_parent_failure_retains_terminal_marker_and_does_not_claim_report(worker_control,fault):
+        case=worker_control;case.fault['kind']=fault
+>       with pytest.raises(ValueError,match='fresh'):d.worker(case.root,'ordinary')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_failure_v1.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2671/test_fresh_or_parent_failure_r3/worker')
+registration_sha = 'ordinary'
+
+    def worker(root,registration_sha):
+        from src import staged_rts24_journal_v2 as journal
+        from src.staged_rts24_process_guard_v2 import supervise
+        c,_=modules()
+        c.require(Path(root).resolve()==OUTPUT.resolve(),'registered P2 output required')
+        launcher=load(root/'launcher_start.json')
+        c.require(launcher['limits']==LIMITS and launcher['package']=='staged_rts24_P2_v1'
+            and launcher['registration_sha']==registration_sha,'P2 launcher scope differs')
+        pins,old=fingerprints(),preserve();registered=load(REGISTRATION)
+        c.require(registered['pins']==pins and registered['preserved']==old,'P2 initial bytes differ')
+        packet=load_packet(validate=True)
+        c.require(packet['schedule_sha']==registered['schedule_sha'],'P2 schedule differs')
+        write(root/'start.json',dict(authority='DRAFT_NONAUTHORITATIVE',pins=pins,preserved=old,
+            packet_pin=PACKET_PINS['packet.json'],max_point_attempts=MAX_CALLS,registration_sha=registration_sha,
+            native_user_authority='external_explicit_user_instruction_not_inferred_from_files'))
+        events=Events(root);events('start')
+        fixture=c.load_fixture();transport=PointTransport(root,pins,events,registration_sha=registration_sha)
+        point=control.Cursor(packet['schedule'],transport)
+        session,failure=control.actual_prefix(fixture,root/'journal',point,events)
+        contracts=[]
+        if failure is None and not session.state.stopped:
+            try:control.full_contracts(fixture,point,events,contracts)
+            except NumericUnresolved as exc:failure=dict(stage='contract_numeric',type=type(exc).__name__,message=str(exc))
+        if fingerprints()!=pins or preserve()!=old:raise TransportUnresolved('P2 dependency or prior drift before finish')
+        if not session.closed:
+            session=journal.finish(session)
+>           if not session.closed or session.publication_outcome!='committed' or session.scientific_outcome not in (
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'known_rejection','missing_input','right_censored','complete'):
+E                   AttributeError: 'types.SimpleNamespace' object has no attribute 'publication_outcome'
+
+experiments\staged_rts24_p2_native_probe_v1.py:243: AttributeError
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_p2_failure_v1.py::test_last_contract_numeric_failure_preserves_137_rows_and_completes_diagnostic
+FAILED tests/test_staged_rts24_p2_failure_v1.py::test_fresh_or_parent_failure_retains_terminal_marker_and_does_not_claim_report[fresh_exit]
+FAILED tests/test_staged_rts24_p2_failure_v1.py::test_fresh_or_parent_failure_retains_terminal_marker_and_does_not_claim_report[fresh_timeout]
+FAILED tests/test_staged_rts24_p2_failure_v1.py::test_fresh_or_parent_failure_retains_terminal_marker_and_does_not_claim_report[quiet]
+FAILED tests/test_staged_rts24_p2_failure_v1.py::test_fresh_or_parent_failure_retains_terminal_marker_and_does_not_claim_report[metrics]
+5 failed, 45 passed in 14.12s

@@ -1,5 +1,9 @@
 # 当前问题与阶段门禁登记
 
+### 2026-10-23 P2失败控制与父端观察保存已开发，完整outer仍OPEN
+
+[交接](../plan/continuation_handoff_20261023_p2_failure_outer.md)记录昂贵失败矩阵及quiet后父记录保存组件：完整Job成员/owner/HANDLE、固定16KiB＋1文件reserve、闭合机械claims及原codec pending/fsync/rename/readback，科学采用与独立139固定false。73新/35相关普通检查通过，5个初轮fixture失败与120s组合超时原样保留；400旧发布路径和B1–B3/P1保持。晚期319/318/137及319/319/138使用预置actual、重复branch标签和journal/audit/fresh替代，仅为控制证据。完整outer注册/来源/exe绑定、全库存/319引用/138行与独立raw/KKT/journal采用尚未实现；尾部/失败/十小时CAS成本及65s余量、总预算仍缺，无P2/native授权，139/F-X、C整体与D/E继续OPEN。
+
 ### 2026-10-23 P2成功图增长会计已扩展，失败与outer成本待闭合
 
 [交接](../plan/continuation_handoff_20261023_p2_accounting.md)记录原1281指纹不变、缓存暂缓；十小时条件成功图另有101 journal runtime、126 journal/2552 point CAS inventory、753 root读取、495 audit历史row及575/1796 selective会计。原P1五小时130 CAS/381174B的wire闭包和33份observer交叉验证，76扫描投影17465962B逻辑读取，未产生十小时实测或ETA。一次元数据CLI exit0/264输入、40新/41相关检查、独立stdlib后核验通过；351旧发布路径及P1/B1–B3/685保持。尚需昂贵失败矩阵、outer/注册/quiet后采用、fresh60s+5s与outer65s余量、十小时CAS/摘要及完整成本。无新P2/native权限，139/F-X、C整体与D/E现实输入/选择/留出/资源继续OPEN。
