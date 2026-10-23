@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-23保存P1性能剖析检查点：见[最新交接](continuation_handoff_20261023_profile.md)与[报告](../../results/tables/staged_rts24_saved_profile_v1_non_authoritative/validation_report.md)。一次无求解器诊断exit0，命令27.732813s、Job27.218s、采样RSS155959296B，2/2 HANDLE归零；原683个P1文件与完整科学metrics保持，21普通检查及独立保存核验通过。热点为分发文件存在性枚举与重放摘要重复遍历，尚未实现优化；仪器时间不构成速度比较或P2预算。C整体/139/F-X时序和D/E仍OPEN，原P1唯一native授权已经使用。以下历史检查点按各自时点解释。
+
 2026-10-23 P1实测检查点：见[最新交接](continuation_handoff_20261023_p1.md)。本轮用户专项授权的唯一P1原生校准exit0：31点/124构模/62import、五小时actual和四代表合同row、fresh同科学metrics且66成员归零。命令213.514s、Job206.281s，采样RSS300490752B；原P1最终683文件2950863B。独立字节/绑定/transport后核验通过，原注册/源/config、B1–B3及685旧路径保持。h1仅CFE延期20、h2恢复，actual g均0；终态missing_input/coveragefalse、双判断null。公共代表成本缺口已有该固定样本，C整体/昂贵失败/更长prefix、139/完整F-X时序及D/E资源仍OPEN，P1一次授权已用。以下历史未运行/未授权段落保留其时点含义。
 
 2026-10-23既有策略来源检查点：见[交接](continuation_handoff_20261023_policy.md)。12项已声明规则完成定义—有效实现—资格追溯，17份原输入/9 AST/21 symbol与4常量、两过滤集合静态核对通过，1项Medium解释歧义修复并复读闭合。未运行策略/模型/native或新普通测试，原源码/配置与绑定保持。有限来源追溯不补D/E数值；下一依赖为P1专项授权及业务/计划/选择/留出的来源与科学决定，公共成本、139/完整F-X时序及C/D/E资源仍OPEN。以下旧检查点保留。

@@ -1,0 +1,23 @@
+# C：保存P1的无求解器剖析
+
+2026-10-23，DRAFT_NONAUTHORITATIVE / PRE_SEAL_AUDIT。接续[P1交接](continuation_handoff_20261023_p1.md)。P1原生31点及213.514s命令wall已经保存；本诊断定位剩余身份/文件核对与完整重放成本，为原C优化审查提供依据。原P1、注册、运行源码和B1–B3绑定保持。
+
+本包只有一次新的无求解器诊断：固定读取P1的五小时已接受前缀及终态，以原指纹函数和原journal_v2.reopen完成核验，不调用request_schedule、point worker、native后端或任何新的科学构模。适用agent第9节有界性能诊断规则；它不启动P2、D/E、正式实验或新的原生校准。
+
+## 固定路径和计数
+
+[单一诊断脚本](../../experiments/staged_rts24_saved_profile_v1.py)固定postcheck_03.stdout.json SHA `c6a25cd96c8a4a2cf293d41fe51bc7905db63fbc35253076f97e9239a4f22473`，该输入列出683个P1文件/2950863B。父进程核输入SHA与受控环境，独占创建results/tables/staged_rts24_saved_profile_v1_non_authoritative/profile_01；原Job guard启动一个无子级数值进程的worker。源码/本合同SHA由父传入，worker核首尾一致。
+
+worker先核完整P1清单和字节，导入原实现并install_observers(allow_native=False)。分别对一次fingerprints和一次完整reopen安装cProfile；当前fixture与trusted binding只取原固定路径，五小时科学state/head/summary/audit必须等于P1原fresh.metrics。之后再核一次fingerprints和完整683文件字节。Highs工厂及备用SolverFactory由原观察器禁止，累计native工厂/调用、科学构模、numeric compile必须为0；replay范围CAS写入/publication也必须为0。控制器在Job确认quiet后再核原输入SHA、P1全量字节、脚本/合同SHA及终态report/observations的绑定和零计数，才采用成功；退出前窗口的漂移也须拒绝。
+
+两个profile会扰动时间，只用于分解函数调用与self/cumulative成本，不用其wall宣称比原12.781s fresh快或慢；cumulative时间存在嵌套。模块导入、fixture装载、首尾绑定检查及保存/report位于两个profile之外，仍在外部Job wall内。worker安装观察器前仅导入已绑定定义，setup不会调用科学模型或求解器。
+
+## 停止和保存
+
+串行一个worker，外部Job wall60s、无进展30s、采样tree RSS512MiB、输出16MiB/64文件；沿用原所有权原语的每进程1GiB/Job2GiB commit保护及5秒归零截止。父端启动前准备及quiet后的全量核验另计，不宣称整个命令有硬60秒截止。各阶段开始/返回更新固定events；超限或异常停止并保留已有文件，不覆盖或重试profile_01。原guard的成员HANDLE/历史TotalProcesses闭合仍必需；失败的source/environment/IO或缺诊断不能写成成功。输入全目录树与输出父链拒绝symlink/junction/reparse；输出父目录及独占新子目录创建前后验证仍在预期仓库。
+
+只在新profile目录保存两份create-only marshal cProfile数据、各80行self/cumulative JSON摘要、观察器、结果、事件及launcher/日志；不从外部加载profile数据。quiet后采用时要求worker固定10文件集合均为普通独立文件，profile非空，stats的schema/有限非负时间/行形状及与report时间一致；前后库存相同并将全10文件SHA保存在postquiet，再追加postquiet和launcher。输出必须绑定实际脚本/合同/原输入，报告完整Job时间、采样RSS、计数与静态/仪器范围；不将单组件profile当成C整链资源准入。未覆盖的进程启动、全部31点transport、昂贵真实失败或更长前缀仍为未知。
+
+## 核验与复用
+
+执行前做源语法/路径/预算/只读范围核对及独立非权威审阅；不修改已审科学逻辑或原Job guard，复用其既有测试。新控制器的窄普通测试覆盖quiet前后输入漂移、BASE/输入目录reparse、缺report/observations、终态权限/计数/清单/非有限时间篡改及成功后拒绝重用。控制器采用完整report固定键和值，观测沿原fresh顶层schema及计数/计时允许键集合，禁止路径attempts/returned/raised均须为零；不采用未知计数。实际诊断只执行一次，返回后独立核新文件、原P1全量SHA、native/构模零计数、同一完整科学metrics、Job归零及source/contract SHA。再按profile证据选择有实质收益且能保持freshness/失败检测的独立后继；不为预设提速省略身份检查或完整科学审计。

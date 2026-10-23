@@ -1,0 +1,1449 @@
+{
+  "function_count": 411,
+  "profiled_wall_seconds": 21.434041200001957,
+  "scope": "one profiled call; cumulative times overlap; instrumentation changes timing",
+  "top_cumulative": [
+    {
+      "calls": 1,
+      "cumulative_seconds": 21.4339884,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\staged_rts24_saved_profile_v1.py",
+      "function": "<lambda>",
+      "line": 173,
+      "primitive_calls": 1,
+      "self_seconds": 6e-06
+    },
+    {
+      "calls": 3436,
+      "cumulative_seconds": 21.4339641,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\staged_rts24_native_probe_v1.py",
+      "function": "wrapped",
+      "line": 221,
+      "primitive_calls": 1,
+      "self_seconds": 0.037018
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 21.429563100000003,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_journal_v2.py",
+      "function": "reopen",
+      "line": 331,
+      "primitive_calls": 1,
+      "self_seconds": 0.0006975000000000001
+    },
+    {
+      "calls": 6,
+      "cumulative_seconds": 17.869302400000002,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_journal_v2.py",
+      "function": "replay_entry",
+      "line": 389,
+      "primitive_calls": 6,
+      "self_seconds": 0.0006850000000000001
+    },
+    {
+      "calls": 2547,
+      "cumulative_seconds": 14.6030124,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_development_v1.py",
+      "function": "digest",
+      "line": 34,
+      "primitive_calls": 2547,
+      "self_seconds": 0.036058
+    },
+    {
+      "calls": 4111147,
+      "cumulative_seconds": 13.597209500000002,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_development_v1.py",
+      "function": "plain",
+      "line": 26,
+      "primitive_calls": 2547,
+      "self_seconds": 3.7076708000000003
+    },
+    {
+      "calls": 17,
+      "cumulative_seconds": 9.281096100000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_causal_audit_v2.py",
+      "function": "audit_execution",
+      "line": 13,
+      "primitive_calls": 17,
+      "self_seconds": 0.0092157
+    },
+    {
+      "calls": 10,
+      "cumulative_seconds": 5.6644169,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_causal_v2.py",
+      "function": "prepare_hour",
+      "line": 27,
+      "primitive_calls": 10,
+      "self_seconds": 0.00043620000000000003
+    },
+    {
+      "calls": 11,
+      "cumulative_seconds": 4.966399200000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_causal_v2.py",
+      "function": "audit_execution_context",
+      "line": 15,
+      "primitive_calls": 11,
+      "self_seconds": 0.00013010000000000002
+    },
+    {
+      "calls": 2610,
+      "cumulative_seconds": 4.5376127,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "asdict",
+      "line": 1308,
+      "primitive_calls": 2610,
+      "self_seconds": 0.002353
+    },
+    {
+      "calls": 4192169,
+      "cumulative_seconds": 4.5341372,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "_asdict_inner",
+      "line": 1332,
+      "primitive_calls": 2610,
+      "self_seconds": 2.4682387
+    },
+    {
+      "calls": 20911741,
+      "cumulative_seconds": 4.3073388,
+      "file": "~",
+      "function": "<built-in method builtins.isinstance>",
+      "line": 0,
+      "primitive_calls": 20911741,
+      "self_seconds": 2.7445022000000003
+    },
+    {
+      "calls": 2479054,
+      "cumulative_seconds": 4.3019641,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "<genexpr>",
+      "line": 1373,
+      "primitive_calls": 397981,
+      "self_seconds": 0.5318723000000001
+    },
+    {
+      "calls": 1354,
+      "cumulative_seconds": 4.2741987,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_development_v1.py",
+      "function": "identity",
+      "line": 280,
+      "primitive_calls": 1354,
+      "self_seconds": 0.0013118000000000001
+    },
+    {
+      "calls": 732,
+      "cumulative_seconds": 4.111225800000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_development_v1.py",
+      "function": "identity",
+      "line": 319,
+      "primitive_calls": 732,
+      "self_seconds": 0.0020666
+    },
+    {
+      "calls": 5,
+      "cumulative_seconds": 4.0981763,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_causal_v2.py",
+      "function": "accept_hour",
+      "line": 61,
+      "primitive_calls": 5,
+      "self_seconds": 0.00032940000000000004
+    },
+    {
+      "calls": 391,
+      "cumulative_seconds": 4.038989900000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "audit_point",
+      "line": 34,
+      "primitive_calls": 223,
+      "self_seconds": 0.0873183
+    },
+    {
+      "calls": 118,
+      "cumulative_seconds": 3.9978427,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_child_optimality_v1.py",
+      "function": "audit_child_lp",
+      "line": 57,
+      "primitive_calls": 118,
+      "self_seconds": 0.0216199
+    },
+    {
+      "calls": 879,
+      "cumulative_seconds": 2.6506803000000003,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "read_bytes",
+      "line": 108,
+      "primitive_calls": 879,
+      "self_seconds": 0.022727400000000002
+    },
+    {
+      "calls": 4,
+      "cumulative_seconds": 2.3519635,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "inventory",
+      "line": 175,
+      "primitive_calls": 4,
+      "self_seconds": 0.0402198
+    },
+    {
+      "calls": 27,
+      "cumulative_seconds": 2.3198577,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "pack",
+      "line": 310,
+      "primitive_calls": 27,
+      "self_seconds": 9.17e-05
+    },
+    {
+      "calls": 1316,
+      "cumulative_seconds": 2.319766,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "write",
+      "line": 341,
+      "primitive_calls": 27,
+      "self_seconds": 0.01166
+    },
+    {
+      "calls": 216876,
+      "cumulative_seconds": 2.3176916000000003,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "encode",
+      "line": 313,
+      "primitive_calls": 27,
+      "self_seconds": 0.36070670000000005
+    },
+    {
+      "calls": 4620,
+      "cumulative_seconds": 2.2693759,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "<genexpr>",
+      "line": 1382,
+      "primitive_calls": 1815,
+      "self_seconds": 0.0024823000000000002
+    },
+    {
+      "calls": 10,
+      "cumulative_seconds": 2.2166529,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_causal_v1.py",
+      "function": "propose_hour",
+      "line": 183,
+      "primitive_calls": 10,
+      "self_seconds": 0.0007149000000000001
+    },
+    {
+      "calls": 4189263,
+      "cumulative_seconds": 2.0412500000000002,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "is_dataclass",
+      "line": 1301,
+      "primitive_calls": 4189263,
+      "self_seconds": 1.3314975
+    },
+    {
+      "calls": 225674,
+      "cumulative_seconds": 1.9126021000000002,
+      "file": "~",
+      "function": "<built-in method builtins.all>",
+      "line": 0,
+      "primitive_calls": 34364,
+      "self_seconds": 0.177595
+    },
+    {
+      "calls": 223,
+      "cumulative_seconds": 1.8510981000000002,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "audit_economic_base",
+      "line": 129,
+      "primitive_calls": 223,
+      "self_seconds": 0.0313405
+    },
+    {
+      "calls": 61036,
+      "cumulative_seconds": 1.7219913,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "<genexpr>",
+      "line": 331,
+      "primitive_calls": 61036,
+      "self_seconds": 0.028990500000000002
+    },
+    {
+      "calls": 590033,
+      "cumulative_seconds": 1.6842295,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "_matches",
+      "line": 300,
+      "primitive_calls": 54164,
+      "self_seconds": 0.5081652
+    },
+    {
+      "calls": 14,
+      "cumulative_seconds": 1.6233754,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "get",
+      "line": 287,
+      "primitive_calls": 14,
+      "self_seconds": 5.0600000000000003e-05
+    },
+    {
+      "calls": 14,
+      "cumulative_seconds": 1.6233232000000002,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "_get",
+      "line": 216,
+      "primitive_calls": 14,
+      "self_seconds": 0.0002145
+    },
+    {
+      "calls": 4100917,
+      "cumulative_seconds": 1.5628366,
+      "file": "<frozen abc>",
+      "function": "__instancecheck__",
+      "line": 117,
+      "primitive_calls": 4100917,
+      "self_seconds": 0.868418
+    },
+    {
+      "calls": 199144,
+      "cumulative_seconds": 1.5007344,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "<genexpr>",
+      "line": 305,
+      "primitive_calls": 199144,
+      "self_seconds": 0.068819
+    },
+    {
+      "calls": 1798,
+      "cumulative_seconds": 1.2610607,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "directory_identity",
+      "line": 99,
+      "primitive_calls": 1798,
+      "self_seconds": 0.05389070000000001
+    },
+    {
+      "calls": 19126,
+      "cumulative_seconds": 1.2072983000000002,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "ordinary",
+      "line": 85,
+      "primitive_calls": 19126,
+      "self_seconds": 0.0453329
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 1.1667641,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_causal_v2.py",
+      "function": "execution_summary",
+      "line": 104,
+      "primitive_calls": 1,
+      "self_seconds": 5.41e-05
+    },
+    {
+      "calls": 19126,
+      "cumulative_seconds": 1.1475052000000001,
+      "file": "~",
+      "function": "<built-in method nt.lstat>",
+      "line": 0,
+      "primitive_calls": 19126,
+      "self_seconds": 1.116613
+    },
+    {
+      "calls": 4861,
+      "cumulative_seconds": 1.0651852000000002,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\__init__.py",
+      "function": "dumps",
+      "line": 183,
+      "primitive_calls": 4861,
+      "self_seconds": 0.015417900000000002
+    },
+    {
+      "calls": 4861,
+      "cumulative_seconds": 1.0454269,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\encoder.py",
+      "function": "encode",
+      "line": 183,
+      "primitive_calls": 4861,
+      "self_seconds": 0.0111135
+    },
+    {
+      "calls": 879,
+      "cumulative_seconds": 1.0343318000000001,
+      "file": "~",
+      "function": "<method 'read' of '_io.BufferedReader' objects>",
+      "line": 0,
+      "primitive_calls": 879,
+      "self_seconds": 1.0343318000000001
+    },
+    {
+      "calls": 4861,
+      "cumulative_seconds": 1.0300222,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\encoder.py",
+      "function": "iterencode",
+      "line": 205,
+      "primitive_calls": 4861,
+      "self_seconds": 1.0300222
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 0.9682111000000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "bookend",
+      "line": 291,
+      "primitive_calls": 1,
+      "self_seconds": 0.0056137
+    },
+    {
+      "calls": 290647,
+      "cumulative_seconds": 0.8149487000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "fields",
+      "line": 1278,
+      "primitive_calls": 290647,
+      "self_seconds": 0.5010405
+    },
+    {
+      "calls": 501024,
+      "cumulative_seconds": 0.7785934000000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "<genexpr>",
+      "line": 306,
+      "primitive_calls": 501024,
+      "self_seconds": 0.12540010000000001
+    },
+    {
+      "calls": 22,
+      "cumulative_seconds": 0.7614576000000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_causal_v1.py",
+      "function": "_child",
+      "line": 140,
+      "primitive_calls": 22,
+      "self_seconds": 0.0002918
+    },
+    {
+      "calls": 657,
+      "cumulative_seconds": 0.7127067,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "parse",
+      "line": 66,
+      "primitive_calls": 657,
+      "self_seconds": 0.5177900000000001
+    },
+    {
+      "calls": 4100917,
+      "cumulative_seconds": 0.6944186,
+      "file": "~",
+      "function": "<built-in method _abc._abc_instancecheck>",
+      "line": 0,
+      "primitive_calls": 4100917,
+      "self_seconds": 0.6942377000000001
+    },
+    {
+      "calls": 246,
+      "cumulative_seconds": 0.5478237,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "load",
+      "line": 254,
+      "primitive_calls": 14,
+      "self_seconds": 0.0023913000000000003
+    },
+    {
+      "calls": 1,
+      "cumulative_seconds": 0.5034138,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "__init__",
+      "line": 282,
+      "primitive_calls": 1,
+      "self_seconds": 4.6e-05
+    },
+    {
+      "calls": 20143,
+      "cumulative_seconds": 0.49524900000000005,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "decode",
+      "line": 219,
+      "primitive_calls": 13,
+      "self_seconds": 0.036318500000000004
+    },
+    {
+      "calls": 5661096,
+      "cumulative_seconds": 0.47213910000000003,
+      "file": "~",
+      "function": "<built-in method builtins.hasattr>",
+      "line": 0,
+      "primitive_calls": 5661096,
+      "self_seconds": 0.47213910000000003
+    },
+    {
+      "calls": 55,
+      "cumulative_seconds": 0.464374,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_reference_queries_v1.py",
+      "function": "reference_requests",
+      "line": 7,
+      "primitive_calls": 55,
+      "self_seconds": 0.008081300000000001
+    },
+    {
+      "calls": 590033,
+      "cumulative_seconds": 0.41958670000000003,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\typing.py",
+      "function": "get_args",
+      "line": 2374,
+      "primitive_calls": 590033,
+      "self_seconds": 0.23735340000000002
+    },
+    {
+      "calls": 590033,
+      "cumulative_seconds": 0.3935041,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\typing.py",
+      "function": "get_origin",
+      "line": 2344,
+      "primitive_calls": 590033,
+      "self_seconds": 0.2133539
+    },
+    {
+      "calls": 341,
+      "cumulative_seconds": 0.2864646,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "point_sha",
+      "line": 13,
+      "primitive_calls": 341,
+      "self_seconds": 0.0019061000000000002
+    },
+    {
+      "calls": 2713840,
+      "cumulative_seconds": 0.2724916,
+      "file": "~",
+      "function": "<built-in method builtins.getattr>",
+      "line": 0,
+      "primitive_calls": 2713840,
+      "self_seconds": 0.2724916
+    },
+    {
+      "calls": 894276,
+      "cumulative_seconds": 0.270397,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "_is_dataclass_instance",
+      "line": 1296,
+      "primitive_calls": 894276,
+      "self_seconds": 0.1923291
+    },
+    {
+      "calls": 99913,
+      "cumulative_seconds": 0.2531723,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "plain",
+      "line": 14,
+      "primitive_calls": 341,
+      "self_seconds": 0.06972070000000001
+    },
+    {
+      "calls": 2611255,
+      "cumulative_seconds": 0.24467580000000003,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "<genexpr>",
+      "line": 1293,
+      "primitive_calls": 2611255,
+      "self_seconds": 0.24467580000000003
+    },
+    {
+      "calls": 2,
+      "cumulative_seconds": 0.2402178,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_journal_v2.py",
+      "function": "runtime_identity",
+      "line": 45,
+      "primitive_calls": 2,
+      "self_seconds": 0.0039359
+    },
+    {
+      "calls": 391,
+      "cumulative_seconds": 0.1787188,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_development_v1.py",
+      "function": "anchor_sha",
+      "line": 316,
+      "primitive_calls": 391,
+      "self_seconds": 0.00032
+    },
+    {
+      "calls": 2432984,
+      "cumulative_seconds": 0.129603,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "require",
+      "line": 46,
+      "primitive_calls": 2432984,
+      "self_seconds": 0.129603
+    },
+    {
+      "calls": 17368,
+      "cumulative_seconds": 0.12210530000000001,
+      "file": "<frozen _collections_abc>",
+      "function": "__iter__",
+      "line": 1022,
+      "primitive_calls": 17368,
+      "self_seconds": 0.0085237
+    },
+    {
+      "calls": 1973,
+      "cumulative_seconds": 0.12054340000000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "canonical",
+      "line": 50,
+      "primitive_calls": 1973,
+      "self_seconds": 0.0039113
+    },
+    {
+      "calls": 17368,
+      "cumulative_seconds": 0.1135816,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__getitem__",
+      "line": 277,
+      "primitive_calls": 17368,
+      "self_seconds": 0.019914400000000002
+    },
+    {
+      "calls": 17321,
+      "cumulative_seconds": 0.0935518,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "_from_parsed_parts",
+      "line": 420,
+      "primitive_calls": 17321,
+      "self_seconds": 0.0127276
+    },
+    {
+      "calls": 891,
+      "cumulative_seconds": 0.0893792,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "open",
+      "line": 1005,
+      "primitive_calls": 891,
+      "self_seconds": 0.0011917000000000002
+    },
+    {
+      "calls": 903,
+      "cumulative_seconds": 0.0889057,
+      "file": "~",
+      "function": "<built-in method _io.open>",
+      "line": 0,
+      "primitive_calls": 903,
+      "self_seconds": 0.0877406
+    },
+    {
+      "calls": 10,
+      "cumulative_seconds": 0.0879307,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_causal_v1.py",
+      "function": "_root",
+      "line": 132,
+      "primitive_calls": 10,
+      "self_seconds": 7.94e-05
+    },
+    {
+      "calls": 32330,
+      "cumulative_seconds": 0.08640980000000001,
+      "file": "~",
+      "function": "<built-in method builtins.sum>",
+      "line": 0,
+      "primitive_calls": 32330,
+      "self_seconds": 0.0205332
+    },
+    {
+      "calls": 3219,
+      "cumulative_seconds": 0.0770077,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "indexed",
+      "line": 26,
+      "primitive_calls": 3219,
+      "self_seconds": 0.014600400000000001
+    },
+    {
+      "calls": 244,
+      "cumulative_seconds": 0.0754311,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_development_v1.py",
+      "function": "__post_init__",
+      "line": 241,
+      "primitive_calls": 244,
+      "self_seconds": 0.0071622000000000005
+    },
+    {
+      "calls": 18196,
+      "cumulative_seconds": 0.0735312,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "with_segments",
+      "line": 380,
+      "primitive_calls": 18196,
+      "self_seconds": 0.018029100000000003
+    },
+    {
+      "calls": 629462,
+      "cumulative_seconds": 0.0648861,
+      "file": "~",
+      "function": "<built-in method builtins.len>",
+      "line": 0,
+      "primitive_calls": 596531,
+      "self_seconds": 0.059249100000000006
+    },
+    {
+      "calls": 28669,
+      "cumulative_seconds": 0.0639441,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\copy.py",
+      "function": "deepcopy",
+      "line": 118,
+      "primitive_calls": 28669,
+      "self_seconds": 0.0373965
+    },
+    {
+      "calls": 8644,
+      "cumulative_seconds": 0.0557457,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "drive",
+      "line": 551,
+      "primitive_calls": 8644,
+      "self_seconds": 0.010812500000000001
+    },
+    {
+      "calls": 173,
+      "cumulative_seconds": 0.055658000000000006,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_reference_queries_v1.py",
+      "function": "request",
+      "line": 16,
+      "primitive_calls": 173,
+      "self_seconds": 0.0003955
+    },
+    {
+      "calls": 796,
+      "cumulative_seconds": 0.0529917,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\__init__.py",
+      "function": "loads",
+      "line": 299,
+      "primitive_calls": 796,
+      "self_seconds": 0.005719500000000001
+    },
+    {
+      "calls": 5473,
+      "cumulative_seconds": 0.0524676,
+      "file": "~",
+      "function": "<built-in method _hashlib.openssl_sha256>",
+      "line": 0,
+      "primitive_calls": 5473,
+      "self_seconds": 0.0524676
+    }
+  ],
+  "top_self": [
+    {
+      "calls": 4111147,
+      "cumulative_seconds": 13.597209500000002,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_development_v1.py",
+      "function": "plain",
+      "line": 26,
+      "primitive_calls": 2547,
+      "self_seconds": 3.7076708000000003
+    },
+    {
+      "calls": 20911741,
+      "cumulative_seconds": 4.3073388,
+      "file": "~",
+      "function": "<built-in method builtins.isinstance>",
+      "line": 0,
+      "primitive_calls": 20911741,
+      "self_seconds": 2.7445022000000003
+    },
+    {
+      "calls": 4192169,
+      "cumulative_seconds": 4.5341372,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "_asdict_inner",
+      "line": 1332,
+      "primitive_calls": 2610,
+      "self_seconds": 2.4682387
+    },
+    {
+      "calls": 4189263,
+      "cumulative_seconds": 2.0412500000000002,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "is_dataclass",
+      "line": 1301,
+      "primitive_calls": 4189263,
+      "self_seconds": 1.3314975
+    },
+    {
+      "calls": 19126,
+      "cumulative_seconds": 1.1475052000000001,
+      "file": "~",
+      "function": "<built-in method nt.lstat>",
+      "line": 0,
+      "primitive_calls": 19126,
+      "self_seconds": 1.116613
+    },
+    {
+      "calls": 879,
+      "cumulative_seconds": 1.0343318000000001,
+      "file": "~",
+      "function": "<method 'read' of '_io.BufferedReader' objects>",
+      "line": 0,
+      "primitive_calls": 879,
+      "self_seconds": 1.0343318000000001
+    },
+    {
+      "calls": 4861,
+      "cumulative_seconds": 1.0300222,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\encoder.py",
+      "function": "iterencode",
+      "line": 205,
+      "primitive_calls": 4861,
+      "self_seconds": 1.0300222
+    },
+    {
+      "calls": 4100917,
+      "cumulative_seconds": 1.5628366,
+      "file": "<frozen abc>",
+      "function": "__instancecheck__",
+      "line": 117,
+      "primitive_calls": 4100917,
+      "self_seconds": 0.868418
+    },
+    {
+      "calls": 4100917,
+      "cumulative_seconds": 0.6944186,
+      "file": "~",
+      "function": "<built-in method _abc._abc_instancecheck>",
+      "line": 0,
+      "primitive_calls": 4100917,
+      "self_seconds": 0.6942377000000001
+    },
+    {
+      "calls": 2479054,
+      "cumulative_seconds": 4.3019641,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "<genexpr>",
+      "line": 1373,
+      "primitive_calls": 397981,
+      "self_seconds": 0.5318723000000001
+    },
+    {
+      "calls": 657,
+      "cumulative_seconds": 0.7127067,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "parse",
+      "line": 66,
+      "primitive_calls": 657,
+      "self_seconds": 0.5177900000000001
+    },
+    {
+      "calls": 590033,
+      "cumulative_seconds": 1.6842295,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "_matches",
+      "line": 300,
+      "primitive_calls": 54164,
+      "self_seconds": 0.5081652
+    },
+    {
+      "calls": 290647,
+      "cumulative_seconds": 0.8149487000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "fields",
+      "line": 1278,
+      "primitive_calls": 290647,
+      "self_seconds": 0.5010405
+    },
+    {
+      "calls": 5661096,
+      "cumulative_seconds": 0.47213910000000003,
+      "file": "~",
+      "function": "<built-in method builtins.hasattr>",
+      "line": 0,
+      "primitive_calls": 5661096,
+      "self_seconds": 0.47213910000000003
+    },
+    {
+      "calls": 216876,
+      "cumulative_seconds": 2.3176916000000003,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "encode",
+      "line": 313,
+      "primitive_calls": 27,
+      "self_seconds": 0.36070670000000005
+    },
+    {
+      "calls": 2713840,
+      "cumulative_seconds": 0.2724916,
+      "file": "~",
+      "function": "<built-in method builtins.getattr>",
+      "line": 0,
+      "primitive_calls": 2713840,
+      "self_seconds": 0.2724916
+    },
+    {
+      "calls": 2611255,
+      "cumulative_seconds": 0.24467580000000003,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "<genexpr>",
+      "line": 1293,
+      "primitive_calls": 2611255,
+      "self_seconds": 0.24467580000000003
+    },
+    {
+      "calls": 590033,
+      "cumulative_seconds": 0.41958670000000003,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\typing.py",
+      "function": "get_args",
+      "line": 2374,
+      "primitive_calls": 590033,
+      "self_seconds": 0.23735340000000002
+    },
+    {
+      "calls": 590033,
+      "cumulative_seconds": 0.3935041,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\typing.py",
+      "function": "get_origin",
+      "line": 2344,
+      "primitive_calls": 590033,
+      "self_seconds": 0.2133539
+    },
+    {
+      "calls": 894276,
+      "cumulative_seconds": 0.270397,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\dataclasses.py",
+      "function": "_is_dataclass_instance",
+      "line": 1296,
+      "primitive_calls": 894276,
+      "self_seconds": 0.1923291
+    },
+    {
+      "calls": 225674,
+      "cumulative_seconds": 1.9126021000000002,
+      "file": "~",
+      "function": "<built-in method builtins.all>",
+      "line": 0,
+      "primitive_calls": 34364,
+      "self_seconds": 0.177595
+    },
+    {
+      "calls": 2432984,
+      "cumulative_seconds": 0.129603,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "require",
+      "line": 46,
+      "primitive_calls": 2432984,
+      "self_seconds": 0.129603
+    },
+    {
+      "calls": 501024,
+      "cumulative_seconds": 0.7785934000000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "<genexpr>",
+      "line": 306,
+      "primitive_calls": 501024,
+      "self_seconds": 0.12540010000000001
+    },
+    {
+      "calls": 903,
+      "cumulative_seconds": 0.0889057,
+      "file": "~",
+      "function": "<built-in method _io.open>",
+      "line": 0,
+      "primitive_calls": 903,
+      "self_seconds": 0.0877406
+    },
+    {
+      "calls": 391,
+      "cumulative_seconds": 4.038989900000001,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "audit_point",
+      "line": 34,
+      "primitive_calls": 223,
+      "self_seconds": 0.0873183
+    },
+    {
+      "calls": 99913,
+      "cumulative_seconds": 0.2531723,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "plain",
+      "line": 14,
+      "primitive_calls": 341,
+      "self_seconds": 0.06972070000000001
+    },
+    {
+      "calls": 199144,
+      "cumulative_seconds": 1.5007344,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "<genexpr>",
+      "line": 305,
+      "primitive_calls": 199144,
+      "self_seconds": 0.068819
+    },
+    {
+      "calls": 629462,
+      "cumulative_seconds": 0.0648861,
+      "file": "~",
+      "function": "<built-in method builtins.len>",
+      "line": 0,
+      "primitive_calls": 596531,
+      "self_seconds": 0.059249100000000006
+    },
+    {
+      "calls": 1798,
+      "cumulative_seconds": 1.2610607,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "directory_identity",
+      "line": 99,
+      "primitive_calls": 1798,
+      "self_seconds": 0.05389070000000001
+    },
+    {
+      "calls": 5473,
+      "cumulative_seconds": 0.0524676,
+      "file": "~",
+      "function": "<built-in method _hashlib.openssl_sha256>",
+      "line": 0,
+      "primitive_calls": 5473,
+      "self_seconds": 0.0524676
+    },
+    {
+      "calls": 19126,
+      "cumulative_seconds": 1.2072983000000002,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "ordinary",
+      "line": 85,
+      "primitive_calls": 19126,
+      "self_seconds": 0.0453329
+    },
+    {
+      "calls": 295624,
+      "cumulative_seconds": 0.0439827,
+      "file": "~",
+      "function": "<method 'items' of 'dict' objects>",
+      "line": 0,
+      "primitive_calls": 295624,
+      "self_seconds": 0.0439827
+    },
+    {
+      "calls": 109928,
+      "cumulative_seconds": 0.050252700000000004,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "<genexpr>",
+      "line": 27,
+      "primitive_calls": 109928,
+      "self_seconds": 0.0429008
+    },
+    {
+      "calls": 293061,
+      "cumulative_seconds": 0.041364200000000004,
+      "file": "~",
+      "function": "<method 'values' of 'dict' objects>",
+      "line": 0,
+      "primitive_calls": 293061,
+      "self_seconds": 0.041364200000000004
+    },
+    {
+      "calls": 4,
+      "cumulative_seconds": 2.3519635,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "inventory",
+      "line": 175,
+      "primitive_calls": 4,
+      "self_seconds": 0.0402198
+    },
+    {
+      "calls": 28669,
+      "cumulative_seconds": 0.0639441,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\copy.py",
+      "function": "deepcopy",
+      "line": 118,
+      "primitive_calls": 28669,
+      "self_seconds": 0.0373965
+    },
+    {
+      "calls": 3436,
+      "cumulative_seconds": 21.4339641,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\experiments\\staged_rts24_native_probe_v1.py",
+      "function": "wrapped",
+      "line": 221,
+      "primitive_calls": 1,
+      "self_seconds": 0.037018
+    },
+    {
+      "calls": 20143,
+      "cumulative_seconds": 0.49524900000000005,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "decode",
+      "line": 219,
+      "primitive_calls": 13,
+      "self_seconds": 0.036318500000000004
+    },
+    {
+      "calls": 2547,
+      "cumulative_seconds": 14.6030124,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_development_v1.py",
+      "function": "digest",
+      "line": 34,
+      "primitive_calls": 2547,
+      "self_seconds": 0.036058
+    },
+    {
+      "calls": 223,
+      "cumulative_seconds": 1.8510981000000002,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "audit_economic_base",
+      "line": 129,
+      "primitive_calls": 223,
+      "self_seconds": 0.0313405
+    },
+    {
+      "calls": 395871,
+      "cumulative_seconds": 0.029993500000000003,
+      "file": "~",
+      "function": "<built-in method math.isfinite>",
+      "line": 0,
+      "primitive_calls": 395871,
+      "self_seconds": 0.029993500000000003
+    },
+    {
+      "calls": 1758,
+      "cumulative_seconds": 0.029058300000000002,
+      "file": "~",
+      "function": "<built-in method nt.fstat>",
+      "line": 0,
+      "primitive_calls": 1758,
+      "self_seconds": 0.029058300000000002
+    },
+    {
+      "calls": 61036,
+      "cumulative_seconds": 1.7219913,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "<genexpr>",
+      "line": 331,
+      "primitive_calls": 61036,
+      "self_seconds": 0.028990500000000002
+    },
+    {
+      "calls": 78827,
+      "cumulative_seconds": 0.028581000000000002,
+      "file": "~",
+      "function": "<method 'hex' of 'float' objects>",
+      "line": 0,
+      "primitive_calls": 78827,
+      "self_seconds": 0.028581000000000002
+    },
+    {
+      "calls": 796,
+      "cumulative_seconds": 0.032036,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\decoder.py",
+      "function": "raw_decode",
+      "line": 344,
+      "primitive_calls": 796,
+      "self_seconds": 0.028517900000000002
+    },
+    {
+      "calls": 229166,
+      "cumulative_seconds": 0.0255749,
+      "file": "~",
+      "function": "<built-in method builtins.id>",
+      "line": 0,
+      "primitive_calls": 229166,
+      "self_seconds": 0.0255749
+    },
+    {
+      "calls": 112053,
+      "cumulative_seconds": 0.0261065,
+      "file": "~",
+      "function": "<built-in method builtins.max>",
+      "line": 0,
+      "primitive_calls": 112053,
+      "self_seconds": 0.0244616
+    },
+    {
+      "calls": 173986,
+      "cumulative_seconds": 0.0241343,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\typing.py",
+      "function": "_should_unflatten_callable_args",
+      "line": 213,
+      "primitive_calls": 173986,
+      "self_seconds": 0.0241343
+    },
+    {
+      "calls": 891,
+      "cumulative_seconds": 0.0241028,
+      "file": "~",
+      "function": "<method '__exit__' of '_io._IOBase' objects>",
+      "line": 0,
+      "primitive_calls": 891,
+      "self_seconds": 0.0241028
+    },
+    {
+      "calls": 879,
+      "cumulative_seconds": 2.6506803000000003,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "read_bytes",
+      "line": 108,
+      "primitive_calls": 879,
+      "self_seconds": 0.022727400000000002
+    },
+    {
+      "calls": 118,
+      "cumulative_seconds": 3.9978427,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_child_optimality_v1.py",
+      "function": "audit_child_lp",
+      "line": 57,
+      "primitive_calls": 118,
+      "self_seconds": 0.0216199
+    },
+    {
+      "calls": 20902,
+      "cumulative_seconds": 0.034133300000000005,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__init__",
+      "line": 358,
+      "primitive_calls": 20902,
+      "self_seconds": 0.0211357
+    },
+    {
+      "calls": 32330,
+      "cumulative_seconds": 0.08640980000000001,
+      "file": "~",
+      "function": "<built-in method builtins.sum>",
+      "line": 0,
+      "primitive_calls": 32330,
+      "self_seconds": 0.0205332
+    },
+    {
+      "calls": 17368,
+      "cumulative_seconds": 0.1135816,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__getitem__",
+      "line": 277,
+      "primitive_calls": 17368,
+      "self_seconds": 0.019914400000000002
+    },
+    {
+      "calls": 24242,
+      "cumulative_seconds": 0.0184865,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "<genexpr>",
+      "line": 105,
+      "primitive_calls": 24242,
+      "self_seconds": 0.0184865
+    },
+    {
+      "calls": 24242,
+      "cumulative_seconds": 0.0182297,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "<genexpr>",
+      "line": 104,
+      "primitive_calls": 24242,
+      "self_seconds": 0.0182297
+    },
+    {
+      "calls": 20902,
+      "cumulative_seconds": 0.052166500000000005,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__init__",
+      "line": 1157,
+      "primitive_calls": 20902,
+      "self_seconds": 0.018033200000000003
+    },
+    {
+      "calls": 18196,
+      "cumulative_seconds": 0.0735312,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "with_segments",
+      "line": 380,
+      "primitive_calls": 18196,
+      "self_seconds": 0.018029100000000003
+    },
+    {
+      "calls": 37883,
+      "cumulative_seconds": 0.0227686,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__str__",
+      "line": 437,
+      "primitive_calls": 37883,
+      "self_seconds": 0.0171998
+    },
+    {
+      "calls": 104676,
+      "cumulative_seconds": 0.016736400000000002,
+      "file": "~",
+      "function": "<method 'add' of 'set' objects>",
+      "line": 0,
+      "primitive_calls": 104676,
+      "self_seconds": 0.016736400000000002
+    },
+    {
+      "calls": 22287,
+      "cumulative_seconds": 0.0163078,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "<genexpr>",
+      "line": 102,
+      "primitive_calls": 22287,
+      "self_seconds": 0.0163078
+    },
+    {
+      "calls": 4861,
+      "cumulative_seconds": 1.0651852000000002,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\__init__.py",
+      "function": "dumps",
+      "line": 183,
+      "primitive_calls": 4861,
+      "self_seconds": 0.015417900000000002
+    },
+    {
+      "calls": 2718,
+      "cumulative_seconds": 0.0346389,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "_parse_path",
+      "line": 387,
+      "primitive_calls": 2718,
+      "self_seconds": 0.0151421
+    },
+    {
+      "calls": 3219,
+      "cumulative_seconds": 0.0770077,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "indexed",
+      "line": 26,
+      "primitive_calls": 3219,
+      "self_seconds": 0.014600400000000001
+    },
+    {
+      "calls": 28669,
+      "cumulative_seconds": 0.013667400000000001,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\fractions.py",
+      "function": "__str__",
+      "line": 410,
+      "primitive_calls": 28669,
+      "self_seconds": 0.013667400000000001
+    },
+    {
+      "calls": 17321,
+      "cumulative_seconds": 0.0935518,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "_from_parsed_parts",
+      "line": 420,
+      "primitive_calls": 17321,
+      "self_seconds": 0.0127276
+    },
+    {
+      "calls": 65621,
+      "cumulative_seconds": 0.0122644,
+      "file": "~",
+      "function": "<method 'remove' of 'set' objects>",
+      "line": 0,
+      "primitive_calls": 65621,
+      "self_seconds": 0.0122644
+    },
+    {
+      "calls": 20039,
+      "cumulative_seconds": 0.019060300000000002,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "_format_parsed_parts",
+      "line": 429,
+      "primitive_calls": 20039,
+      "self_seconds": 0.011818400000000001
+    },
+    {
+      "calls": 1316,
+      "cumulative_seconds": 2.319766,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_evidence_store_v1.py",
+      "function": "write",
+      "line": 341,
+      "primitive_calls": 27,
+      "self_seconds": 0.01166
+    },
+    {
+      "calls": 64248,
+      "cumulative_seconds": 0.011359800000000001,
+      "file": "~",
+      "function": "<method 'get' of 'dict' objects>",
+      "line": 0,
+      "primitive_calls": 64248,
+      "self_seconds": 0.011359800000000001
+    },
+    {
+      "calls": 4861,
+      "cumulative_seconds": 1.0454269,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\json\\encoder.py",
+      "function": "encode",
+      "line": 183,
+      "primitive_calls": 4861,
+      "self_seconds": 0.0111135
+    },
+    {
+      "calls": 20023,
+      "cumulative_seconds": 0.0320427,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "__fspath__",
+      "line": 447,
+      "primitive_calls": 20023,
+      "self_seconds": 0.011052000000000001
+    },
+    {
+      "calls": 8644,
+      "cumulative_seconds": 0.0557457,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\pathlib.py",
+      "function": "drive",
+      "line": 551,
+      "primitive_calls": 8644,
+      "self_seconds": 0.010812500000000001
+    },
+    {
+      "calls": 19087,
+      "cumulative_seconds": 0.013671,
+      "file": "D:\\Miniconda3\\envs\\compute\\Lib\\numbers.py",
+      "function": "__float__",
+      "line": 308,
+      "primitive_calls": 19087,
+      "self_seconds": 0.0108067
+    },
+    {
+      "calls": 126521,
+      "cumulative_seconds": 0.010844900000000001,
+      "file": "~",
+      "function": "<built-in method builtins.abs>",
+      "line": 0,
+      "primitive_calls": 126411,
+      "self_seconds": 0.010711100000000001
+    },
+    {
+      "calls": 49380,
+      "cumulative_seconds": 0.010671700000000001,
+      "file": "~",
+      "function": "<method 'append' of 'list' objects>",
+      "line": 0,
+      "primitive_calls": 49380,
+      "self_seconds": 0.010671700000000001
+    },
+    {
+      "calls": 74290,
+      "cumulative_seconds": 0.0140987,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_audit_v1.py",
+      "function": "<genexpr>",
+      "line": 54,
+      "primitive_calls": 74290,
+      "self_seconds": 0.0099834
+    },
+    {
+      "calls": 4885,
+      "cumulative_seconds": 0.0099507,
+      "file": "~",
+      "function": "<method 'encode' of 'str' objects>",
+      "line": 0,
+      "primitive_calls": 4885,
+      "self_seconds": 0.0099507
+    },
+    {
+      "calls": 24252,
+      "cumulative_seconds": 0.0096138,
+      "file": "~",
+      "function": "<built-in method sys.intern>",
+      "line": 0,
+      "primitive_calls": 24252,
+      "self_seconds": 0.0096138
+    },
+    {
+      "calls": 118,
+      "cumulative_seconds": 0.0160448,
+      "file": "D:\\CUHKSZ\\Research Project\\electricity-grid\\src\\staged_rts24_child_optimality_v1.py",
+      "function": "reduction",
+      "line": 30,
+      "primitive_calls": 118,
+      "self_seconds": 0.009394300000000001
+    }
+  ]
+}
