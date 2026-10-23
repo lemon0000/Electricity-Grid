@@ -1,6 +1,6 @@
 # Staged Interconnection and Flexibility Deliverability During AI Data Center Ramp-Up
 
-Updated: 2026-10-22. Project research introduction.
+Updated: 2026-10-23. Project research introduction.
 
 ## 1 Background and project objective
 
@@ -20,41 +20,57 @@ Figure 1 connects the whole study: three given progress paths and common service
 
 **Figure 1 From given progress paths to stage judgments and independent testing (overall framework).** Read downward through common inputs, three parallel assessments, stage judgments, and frozen-policy holdout. Blue folders are tasks; orange folders are deferred debt. Recovery needs equipment, power, hourly CFE, and compliance with original deadlines; debt and budgets persist across hours. Metered power P enters network and CFE checks. The frozen plan and an independent new path jointly feed holdout execution to identify applicability and failure regions. The figure depicts study design.
 
-## 2 Related research, remaining questions, and project focus
+## 2 Related research
 
-### 2.1 Flexibility can support access, with benefits shaped by network and operating conditions
+### 2.1 Data-center flexibility and grid interconnection
 
 Kim et al. incorporate workload flexibility into planner-initiated data-center siting [3]. Chen and Zheng compare temporal deferral and spatial shifting for grid interconnection [4]. Wan and Li embed spatial and temporal load adjustments in security-constrained unit commitment to study congestion and operation [5]. Williams et al. demonstrate power-flexibility control by coordinating computing equipment with grid signals [6]. Together, these studies establish the value of flexibility through planning, scheduling, and practical control.
 
-For an individual center during ramp-up, access conditions must also be linked to the equipment and tasks actually available at each stage. Siting benefits, operation in a target year, or a control demonstration do not directly establish delivery throughout a ramp-up path. This project therefore recalculates response and recovery conditions on the network actually built at each stage and assesses given staged access allowances at a fixed connection point.
-
-### 2.2 Task deferral and recovery are established; their resources must be placed within ramp-up
+### 2.2 Task deferral, recovery, and service deliverability
 
 Wierman et al. review opportunities and practical constraints for data-center demand response [7]. Liu et al. examine workload shifting together with local generation for reducing peak withdrawal [8]. GreenSlot schedules batch jobs within their deadlines to use renewable energy [9]. Radovanović et al. develop carbon-aware scheduling for temporally flexible data-center workloads [10]. These studies link deferral to service requirements and subsequent execution capability.
 
-Closer work addresses deliverability directly. Fan and Zhao jointly model workload queues and regulation-capacity commitments, checking instantaneous response and sustainability under cumulative calls [11]. Khanal et al. include workload make-up, event shape, and recovery restrictions in capacity expansion and compare flexibility across host grids [12]. Butt et al. connect task deadlines to minimum interconnection capacity under onsite PV, storage, and an investment budget [13]. Queues, make-up, and deadlines thus already have direct precedents.
+For flexibility commitments and service deliverability, Fan and Zhao jointly model workload queues and regulation-capacity commitments, checking instantaneous response and sustainability under cumulative calls [11]. Khanal et al. include workload make-up, event shape, and recovery restrictions in capacity expansion and compare flexibility across host grids [12]. Butt et al. connect task deadlines to minimum interconnection capacity under onsite PV, storage, and an investment budget [13].
 
-This project asks how those recovery conditions change during ramp-up. Commissioned computing capacity, current business occupancy, the built grid, and clean resources available before deadlines must be represented in one chronology. The assessment tests whether identical instantaneous flexible MW imply identical delivery at different stages. Matched comparisons between instantaneous-MW, fixed-recovery-headroom, and full temporal assessments distinguish insufficient deferrable work now from insufficient recovery resources later.
+These studies connect flexible demand to workload queues, make-up capability, deadlines, and resource allocation, extending assessment from immediate reductions to later task completion and service commitments.
 
-### 2.3 Staged construction and joint planning are established; given plans need stage-specific delivery assessment
+### 2.3 Staged construction and infrastructure planning
 
 Multistage transmission-expansion methods already represent demand growth and staged investment [14]. Vafamehr et al. study uncertain expansion of data-center modules and data networks [15]. Shao et al. jointly plan long-term data-center and power-system development [16]. Zhao et al. explicitly consider cluster load growth, construction sequence, and staged energy-resource additions [17]. Zhu et al. co-optimize transmission construction with lead times and geographic workload migration [18]. Wang et al. propagate uncertain large-model growth into supporting power-infrastructure expansion [19]. Ghosh et al. propose a phased engineering architecture addressing equipment procurement and interconnection lead times [20].
 
-These studies already cover modular expansion, construction sequencing, transmission lead times, and long-term joint investment. The present project addresses a specific operating question: at one connection point, can a given access plan maintain delivery before task deadlines when business, computing-equipment, and grid progress are misaligned? The three progress paths are inputs to the assessment. Their effects on current response and later recovery are traced while construction and access plans remain fixed for evaluation.
+This research covers modular expansion, construction sequencing, transmission lead times, and long-term joint investment. It represents the relationship between growing demand and infrastructure development and incorporates construction progress into planning or engineering configurations.
 
-### 2.4 Hourly clean matching is established; recovery must be checked in its available hours
+### 2.4 Hourly clean-electricity matching
 
 De Chalendar and Benson discuss limitations of annual renewable-procurement metrics [21]. Miller et al. study hourly accounting of emissions from electricity consumption [22]. Riepin and Brown analyze procurement strategies, costs, and system effects of 24/7 carbon-free energy [23]. Riepin et al. discuss how round-the-clock matching can encourage advanced clean technologies [24] and investigate spatial and temporal workload shifting for clean computing [25]. Guo et al. coordinate wind, solar, storage, grid exchange, and hourly supply deliverability for private-wire data centers [26].
 
-For tasks with deadlines, total clean energy alone is insufficient to describe recovery opportunities. Even with the same total and peak attributable clean energy, different arrival times may change which tasks can be recovered. Spare equipment hours may also lack power headroom or clean-matching resources. This project therefore treats clean matching as an hourly delivery requirement, accounts for idle, current-work, and recovery consumption together, and checks its interaction with equipment commissioning, workload occupancy, and grid conditions.
+Across accounting, procurement, scheduling, and supply planning, these studies connect the timing of clean-electricity availability with consumption and distinguish annual energy balances from matching requirements at finer time scales.
 
-### 2.5 The specific question addressed here
+### 2.5 Remaining gaps in the existing research
 
-The literature establishes methods for flexible access, workload recovery, staged construction, and hourly clean matching. This project examines their connection during ramp-up: **when demand growth and commissioning on both sides are misaligned, does the binding limit move from currently deferrable work to equipment, power, or clean recovery resources before deadlines, changing the assessment of a given staged access plan?**
+The literature establishes methods for flexible access, workload recovery, staged construction, and hourly clean matching. For the continuous ramp-up of an individual AI data center, these findings need to be linked more explicitly in three respects.
 
-The intended contribution is an explanation of these stage-specific bottlenecks and decision boundaries. Evidence must come from matched comparisons with the same external tasks and clean resources, showing when a difference appears, which constraint causes it, and whether it persists on new paths. Where full temporal assessment leaves plan judgments unchanged, the study also identifies the conditions under which a simpler assessment is adequate.
+First, **construction progress and operational delivery.** Models of modular expansion, lead times, and demand growth provide a basis for stage assessment. Assessing a given access plan also requires an hourly account of how misaligned business, equipment, and grid progress changes deferrable work and recovery resources, so that delivery can be checked throughout ramp-up.
 
-## 3 Research object and key concepts
+Second, **immediate response and recovery before deadlines.** Queues, make-up, and deadlines already have explicit models. During ramp-up, it remains necessary to distinguish insufficient deferrable work now from insufficient recovery resources later, and to test whether the timing of equipment, power, and clean-resource availability changes plan judgments under the same instantaneous flexible MW and comparable total clean resources.
+
+Third, **assessment judgments and their applicability.** Findings on flexibility, construction, and clean matching need to inform judgments about given staged plans through comparisons with common service objectives. This requires identifying when simplified and full temporal assessments agree or differ, and where a selected plan remains applicable on independent new paths.
+
+### 2.6 Focus of this study
+
+The study addresses these gaps at one fixed point of interconnection. Business ramp-up, equipment commissioning, and grid construction are separate given paths. A small set of staged access plans is assessed under the same external tasks, deadlines, and clean resources. The focus is: **when does progress mismatch shift the binding limit from currently deferrable work to equipment, power, or clean recovery resources before deadlines, thereby changing the judgment of a given plan?** Matched comparisons of three assessments and independent holdout execution of frozen policies are used to explain these stage-specific bottlenecks and their applicability boundaries.
+
+## 3 Contributions
+
+The study aims to make the following three contributions. Specific conclusions will depend on the subsequent comparisons and holdout results.
+
+1. **A staged interconnection assessment framework for ramp-up.** Business growth, computing-equipment commissioning, and grid construction are represented separately. Tasks, commissioned computing capacity, and the built network at each stage are mapped to immediate response and recovery conditions before deadlines, supporting continuous delivery assessment of given construction and access plans at one connection point.
+
+2. **An account of stage-specific bottlenecks and decision boundaries under progress mismatch.** With the same external tasks, deadlines, and clean resources, the assessment separates limits from currently deferrable work, equipment capacity, network supply, and clean recovery resources. Mechanism comparisons with matched immediate calls seek to identify when recovery timing changes plan judgments under the same instantaneous MW and how the hourly CFE target affects that boundary.
+
+3. **Applicability boundaries for simplified assessments and selected plans.** Instantaneous-MW, fixed-recovery-headroom, and full temporal assessments are compared for the same given plan to determine whether recovery and deadline constraints explain different judgments. The plan, capacity, and operating policy are then frozen for execution on independent paths. Reporting includes agreement between assessments, conditions under which simpler assessments suffice, and delivery failures.
+
+## 4 Research object and key concepts
 
 | Concept | Meaning in this study |
 |---|---|
@@ -71,14 +87,6 @@ For example, an hour with 100 MWh consumption and an 80% target needs 80 MWh of 
 ![Figure 2 Recovery conditions and alternative outcomes for deferred tasks](../figures/project_recovery_en.svg)
 
 **Figure 2 How deferred tasks are recovered (expanded framework operation).** Follow 1 deferral now, 2 recovery in later hours, and 3 the original deadline check. Leaders identify the same orange cohort, spare equipment, power headroom, hourly CFE, and the original deadline; teal arrows connect task states. All three resources must be available in the recovery hour, with action budgets and recovery efficiency also respected. The upper outcome is on-time completion; the lower outcome records debt remaining at the deadline as overdue. Late recovery retains that violation; unobserved outcomes remain unresolved. Clocks and folder counts are illustrative.
-
-## 4 Research questions
-
-First, which stages of a given plan become constrained under fast or slow business growth, phased equipment commissioning, and on-time or delayed grid completion? The assessment separates tasks not yet arrived, equipment shortages, network supply limits, and recovery limits before deadlines.
-
-Second, do the same instantaneous flexible MW represent the same delivery capability at different ramp-up stages? The study distinguishes currently deferrable work from equipment, power, and clean resources before deadlines and examines how the hourly CFE target moves that boundary.
-
-Third, do instantaneous-MW, fixed-recovery-headroom, and full temporal assessments reach different judgments about the same given plan? What is the range of applicability when the frozen plan and operating policy are executed on independent new paths?
 
 ## 5 Method
 
@@ -134,9 +142,7 @@ Results report access allowances, commissioned capacity, workload occupancy, def
 
 The data design uses traceable public network and workload sources and identifies the origins of equipment-power, deadline, stage-progress, and clean-allocation parameters separately. Cross-source records paired through stated assumptions support mechanism scenarios. Equal-weight comparisons of such scenarios do not estimate real ramp-up, construction-delay, or violation probabilities.
 
-## 7 Intended contributions and deliverables
-
-The study seeks three results: an explicit link from business, equipment, and grid stage states to access deliverability; identification of when recovery resources before deadlines change a plan judgment despite the same immediate MW capability; and the applicability of frozen plans on independent paths, including conditions under which instantaneous or fixed-headroom assessments suffice.
+## 7 Expected outputs and deliverables
 
 Deliverables comprise an assessment model for given staged interconnection plans, figures explaining stage-specific bottlenecks and decision boundaries, traceable inputs and computational records, and the complete thesis. Conclusions follow the comparisons, including unchanged judgments and failure regions. Network conclusions are limited to the declared DC model and contingency set; engineering application requires the corresponding safety studies.
 

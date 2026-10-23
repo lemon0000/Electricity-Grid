@@ -2,7 +2,7 @@
 
 更新日期：2026-10-23。
 
-- **给老师阅读的中文项目介绍**：[PDF](project_introduction.pdf) · [可编辑正文](project_introduction.md)。从达产背景出发，按照“已有研究做到了什么、仍需回答什么、本项目因此做什么”的逻辑，介绍研究问题、方法、比较设计与预期贡献。
+- **给老师阅读的中文项目介绍**：[PDF](project_introduction.pdf) · [可编辑正文](project_introduction.md)。第2节先综述现有工作，再集中总结不足并引出本研究；第3节为本文拟作的三项贡献，第4节解释研究对象与概念，随后展开方法、比较设计及预期交付。
 - **英文项目介绍**：[PDF](project_introduction_en.pdf) · [可编辑正文](project_introduction_en.md)。与中文采用相同的研究范围、方法和26条参考文献。
 - **方法章草稿**：[PDF阅读版](staged_deliverability_methods.pdf) · [可编辑正文](staged_deliverability_methods.md) · [来源与适用范围核对](staged_deliverability_methods_sources.md)。整理三条进度、任务与功耗、三种评价、网络四层及连续终结；8页阅读版含23个编号公式，数值比较与留出仍待实施。
 - **科研卡通图解**：[整体研究框架](../figures/project_framework_cn.svg) · [任务延期与补做](../figures/project_recovery_cn.svg) · [进度错位](../figures/project_rampup_cn.svg) · [实际取电与CFE核查](../figures/project_network_cn.svg)。整体框架连接给定输入、三种评价、阶段判断与独立留出，三张局部图以物件引线标注、箭头含义和编号步骤，分别解释延期与补做、进度错位、实际取电与两类核查；图下逐步说明条件与结局。各图有中英文SVG、PDF及PNG预览；介绍PDF为整体框架单设横向页面。[绘图说明与生成提示词](../figures/project_schematics.json) · [图版组装脚本](../figures/assemble_project_cartoons.py)。
