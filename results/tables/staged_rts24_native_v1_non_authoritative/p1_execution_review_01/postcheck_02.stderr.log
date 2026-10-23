@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_native_v1_non_authoritative\p1_execution_review_01\postcheck.py", line 186, in <module>
+    print(json.dumps(main(),sort_keys=True,separators=(',',':'),allow_nan=False))
+                     ^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_native_v1_non_authoritative\p1_execution_review_01\postcheck.py", line 166, in main
+    for n,v in c[field].items():
+               ~^^^^^^^
+KeyError: 'input_pins'

@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_native_v1_non_authoritative\p1_execution_review_01\postcheck.py", line 186, in <module>
+    print(json.dumps(main(),sort_keys=True,separators=(',',':'),allow_nan=False))
+                     ^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_native_v1_non_authoritative\p1_execution_review_01\postcheck.py", line 131, in main
+    point_cas+=cas_check(directory/'cas')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_native_v1_non_authoritative\p1_execution_review_01\postcheck.py", line 54, in cas_check
+    require(all(p.is_file() and p.suffix=='.json' and sha256(p.read_bytes()).hexdigest()==p.stem for p in paths),'CAS byte/key mismatch')
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_native_v1_non_authoritative\p1_execution_review_01\postcheck.py", line 20, in require
+    if not value: raise ValueError(message)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: CAS byte/key mismatch

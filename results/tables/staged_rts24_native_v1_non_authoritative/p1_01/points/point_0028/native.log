@@ -1,0 +1,20 @@
+Running HiGHS 1.15.1 (git hash: 04024d7): Copyright (c) 2026 under MIT licence terms
+Includes third-party software components, see THIRD_PARTY_NOTICES.md for full details
+QP has 61 rows; 92 cols; 214 matrix nonzeros; 92 Hessian nonzeros
+Coefficient ranges:
+  Matrix  [1e+00, 7e+03]
+  Cost    [1e-03, 1e+02]
+  Hessian [2e-08, 7e-01]
+  Bound   [2e+00, 5e+02]
+  RHS     [6e+01, 3e+02]
+WARNING: Problem has some excessively small Hessian values
+WARNING: No semi-integer/integer variables in model with non-empty integrality
+  Iteration        Objective     NullspaceDim
+          0        72849.666                0      0.00s
+         59        50343.902                4      0.00s
+Model status        : Optimal
+Simplex   iterations: 35
+QP ASM    iterations: 59
+Objective value     :  5.0343902330e+04
+P-D objective error :  4.3357099961e-16
+HiGHS run time      :          0.00

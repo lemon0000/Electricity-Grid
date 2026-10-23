@@ -2,6 +2,10 @@
 
 2026-10-22范围入口：当前论文工作顺序和交付标准见`agent.md`第2–6及14节；以下各实验的原有门禁仍适用于对应包。
 
+### 2026-10-23 P1一次专项授权已执行
+
+[最新交接](../plan/continuation_handoff_20261023_p1.md)及[保存验证](../../results/tables/staged_rts24_native_v1_non_authoritative/p1_execution_review_01/validation_report.md)记录本轮用户授权的唯一P1：31点/5模拟小时/4代表合同row完成、fresh一致、exit0/quiet。公共代表样本成本已取得（命令213.514s、Job206.281s），完整683文件/2950863B经独立核验；原注册与运行输入字节保持。此前P1未授权/目录不存在为历史状态，当前一次授权已使用。该样本g均0、h1为CFE延期且h2恢复，科学终态仍missing_input、覆盖不完整/双判断null。STAGE-03/04公共完整139/时序、昂贵失败和规模资源、STAGE-01/02现实输入及D/E选择/留出继续OPEN，formal/resource flags未改；新的native包需原规则下的具体登记与授权。
+
 ### 2026-10-23 既有策略有限追溯与下一依赖
 
 [交接](../plan/continuation_handoff_20261023_policy.md)和[策略表](../literature/staged_rts24_policy_sources_20261023.md)补齐12项明示规则的来源/有效实现/资格映射，静态17源/21 symbol、4常量及两过滤集合核对通过；没有新策略、数值、执行或D/E freeze。有限清单不穷尽全部非YAML消费。下一实质步骤依赖P1一次专项授权及D/E来源/科学输入决定：业务快慢与设备/工程数值、D/选择与平局/敏感性/时域、留出来源与揭示尚未定义；不得以新框架填补。STAGE-01/02现实校准、STAGE-03/04公共证据/资源、STAGE-05完整时序及正式门保持OPEN，原注册native_authorized=false、p1_01不存在。此前用户范围选择不是运行许可。

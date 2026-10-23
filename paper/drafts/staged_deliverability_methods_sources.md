@@ -25,7 +25,7 @@
 - [公共业务必要条件观察](../../results/tables/staged_rts24_business_necessary_v1_non_authoritative/audit_01/audit.json)覆盖40行局部算术。它没有构建网络、实际轨迹、139节点或反事实任务时序；其通过/失败仅解释为相应必要条件。
 - [D/E保存报告投影](../../results/tables/staged_deliverability_evaluation_records_v1_non_authoritative/projection_01/projection.json)的20个三母线保存视图不是20个独立样本；12个业务快慢×工程时点×方法只是未绑定分类槽，不是12个数值计划或已预算运行。公共部分只有40行必要条件，其他三层仍未评价。
 - 当前有效公共实际路径的摘要保留 full_contract_requests_materialized=false 与 fx_contract_status=not_evaluated_by_actual_path_step；完整静态和反事实跨时证据仍需相应请求与独立核验。完整F/X时序尚未由局部条件推导出来。
-- P1注册的 native_authorized=false，p1_01不存在。公共代表成本及总资源准入仍开放；保存报告的读取用时不能估计公共求解成本。无新的公共轨迹、D/E数值比较、容量选择或holdout访问。
+- [P1代表校准](../../results/tables/staged_rts24_native_v1_non_authoritative/p1_execution_review_01/validation_report.md)经本轮用户专项授权执行一次，31点、h=-2..2的五小时actual与四代表合同row完成，命令wall约213.514s，fresh一致且全Job归零。原注册native_authorized=false保持历史字节，权限来自用户新回复。h1为CFE延期20MW_c、h2恢复，所有实际g为0；终态missing_input、coverage=false、两个汇总判断null。该实测不关闭139/完整F-X时序、C整体或D/E资源；主比较、容量选择及holdout尚未执行。
 - [逐配置字段来源登记](../../docs/literature/staged_rts24_parameter_provenance_v1.md)现覆盖三份原YAML的132个叶字段与37项精确缩放；公共case仍按五组字面量登记来源，未逐个分类数组单元。来源类别、直接来源、采用方式、缩放链和经验资格分列，13个引用SHA及选定AST见证固定实现边界。非YAML策略及现实校准仍有[来源缺口](../../docs/literature/staged_parameter_source_gap_20261023.md)；当前机制设定不是同址观测的公共工作负荷，情景等权不解释为现实延期率或经验违约概率。
 - [既有策略来源表](../../docs/literature/staged_rts24_policy_sources_20261023.md)补充12项选定规则的逐项追溯，包括有效v2路由、网侧优先/EDF、双父点、物理接受与方法/完整回放过滤，以及四个选定数值门。该范围不是全部非YAML选择或完整执行闭包；方法假设、数值协议与经验事实分别标明，D/E数值和运行权限保持原状态。
 
