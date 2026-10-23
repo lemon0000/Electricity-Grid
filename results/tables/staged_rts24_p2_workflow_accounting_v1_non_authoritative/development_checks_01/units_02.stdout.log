@@ -1,0 +1,22 @@
+..................F..................                                    [100%]
+================================== FAILURES ===================================
+______ test_both_budget_modules_only_import_stdlib_and_the_frozen_reader ______
+
+    def test_both_budget_modules_only_import_stdlib_and_the_frozen_reader():
+        for path in (Path(d.__file__),d.ROOT/d.READER):
+            tree=ast.parse(path.read_text(encoding='utf-8'))
+            for n in ast.walk(tree):
+                if isinstance(n,ast.Import):assert all(x.name.split('.')[0] in d.sys.stdlib_module_names for x in n.names)
+>               elif isinstance(n,ast.ImportFrom):assert n.module=='experiments.staged_c_workflow_budget_v1' or n.module.split('.')[0] in d.sys.stdlib_module_names
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError: assert ('experiments' == 'experiments....low_budget_v1'
+E                 
+E                 - experiments.staged_c_workflow_budget_v1
+E                 + experiments or 'experiments' in frozenset({'__future__', '_abc', '_aix_support', '_ast', '_asyncio', '_bisect', ...}))
+E                +  where frozenset({'__future__', '_abc', '_aix_support', '_ast', '_asyncio', '_bisect', ...}) = <module 'sys' (built-in)>.stdlib_module_names
+E                +    where <module 'sys' (built-in)> = d.sys
+
+tests\test_staged_rts24_p2_workflow_accounting_v1.py:135: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_p2_workflow_accounting_v1.py::test_both_budget_modules_only_import_stdlib_and_the_frozen_reader
+1 failed, 36 passed in 1.67s

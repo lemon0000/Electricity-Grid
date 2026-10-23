@@ -1,5 +1,9 @@
 # 当前问题与阶段门禁登记
 
+### 2026-10-23 P2成功图增长会计已扩展，失败与outer成本待闭合
+
+[交接](../plan/continuation_handoff_20261023_p2_accounting.md)记录原1281指纹不变、缓存暂缓；十小时条件成功图另有101 journal runtime、126 journal/2552 point CAS inventory、753 root读取、495 audit历史row及575/1796 selective会计。原P1五小时130 CAS/381174B的wire闭包和33份observer交叉验证，76扫描投影17465962B逻辑读取，未产生十小时实测或ETA。一次元数据CLI exit0/264输入、40新/41相关检查、独立stdlib后核验通过；351旧发布路径及P1/B1–B3/685保持。尚需昂贵失败矩阵、outer/注册/quiet后采用、fresh60s+5s与outer65s余量、十小时CAS/摘要及完整成本。无新P2/native权限，139/F-X、C整体与D/E现实输入/选择/留出/资源继续OPEN。
+
 ### 2026-10-23 P2输入成本已诊断，复用与整链预算待证明
 
 [交接](../plan/continuation_handoff_20261023_p2_input_cost.md)记录唯一无solver三函数诊断exit0：profile wall0.6391264/0.0027545/1.4016708s，命令7.1231711s/Job4.640s、RSS151965696B，2/2成员quiet。66源/1929module/38禁止项零、三返回与raw profiles、输出采用闭合；33新/68相关普通检查及独立保存核验完成，原P1/B1–B3/685路径和294旧发布路径保持。旧文件枚举/历史stamp为后继优先对象，尚未实现优化。下一步版本化复用、失效及漂移窗口证明，之后补outer/注册开发、65s与fresh60s+收束余量、journal/prefix/昂贵失败和完整成本。无新P2/native权限，十小时/139/F-X、C整体与D/E现实输入/选择/留出/预算继续OPEN；单次warm cProfile不是提速或准入依据。

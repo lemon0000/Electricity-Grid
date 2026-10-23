@@ -1,0 +1,80 @@
+{
+  "C_overall_performance_review_complete": false,
+  "audit_output": {
+    "bytes": 70247,
+    "sha256": "d6397a1b8ef0d01a218aa86fe412e6e1a69cb05e4e6905c3ddf46e9512347226"
+  },
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "closed_findings": [
+    "frozen Reader/package/source-code identity",
+    "bootstrap and bounded Reader IO ledger separation",
+    "root-read and compiler-source decomposition",
+    "typed wire grammar and independent P1 topology oracle",
+    "saved P1 observer crosscheck",
+    "shortwrite and postclose export identity/readback"
+  ],
+  "document_pins": {
+    "docs/model_spec/blocker_register.md": {
+      "bytes": 997975,
+      "sha256": "13eeceb6fb6a6b11fb41545468c482c6620ad880f3926da7b97b50803a5c5f82"
+    },
+    "docs/plan/continuation_handoff_20261023_p2_accounting.md": {
+      "bytes": 3774,
+      "sha256": "53de69c0a7d17a1edd3078d1e46fad59324a9aa1f4fb557395d0f3d355796710"
+    },
+    "docs/plan/staged_deliverability_c_p2_workflow_accounting_contract_v1.md": {
+      "bytes": 5896,
+      "sha256": "469f32d95720e62bfef628b2230344990524374b22a51eeb8bddc5bea7e3b158"
+    },
+    "docs/plan/staged_deliverability_c_scope_and_budget_plan_v1.md": {
+      "bytes": 20409,
+      "sha256": "fc42a82fefb12fd222672441c7375616c73115efaca3b71ee3032c30d2e066e2"
+    },
+    "docs/plan/\u79d1\u7814\u9879\u76ee\u6267\u884c\u6b65\u9aa4.md": {
+      "bytes": 866140,
+      "sha256": "1463841d3a149c69a0f395ffbbb1717ad65e9209f6b821f7ada8e3af835f70a6"
+    },
+    "results/tables/staged_rts24_p2_workflow_accounting_v1_non_authoritative/validation_report.md": {
+      "bytes": 7404,
+      "sha256": "41c67c7e7a37934eec884a8dab44daf370cd6a49ad13533723c610defc9334fc"
+    }
+  },
+  "formal_result": false,
+  "independent_postcheck": {
+    "exit": {
+      "bytes": 259,
+      "sha256": "0422842ab65e3a75a3177b6e5aba30b297b6ef5653adb2b1fef16b10096cc280"
+    },
+    "script": {
+      "bytes": 9169,
+      "sha256": "4712a4a5628d06ac46da759061b5a8c8e2c7cb63de0669f764ec6c424272bae5"
+    },
+    "stdout": {
+      "bytes": 1096,
+      "sha256": "354baaab33ec77a1f3b5b9c485b52c3d017dfab12cf7415cfaaf7c960c760066"
+    }
+  },
+  "official_verdict": null,
+  "receipt": null,
+  "recorded_utc": "2026-10-23T11:40:56.721675+00:00",
+  "remaining_high_medium": [],
+  "resource_admission": false,
+  "review_stage": "PRE_SEAL_AUDIT",
+  "reviewer": "/root/c_final_domain_review",
+  "scope": "conditional internal P2 accounting and saved five-hour P1 topology only; no caching or performance/run authority",
+  "seal": null,
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_p2_workflow_accounting_contract_v1.md": {
+      "bytes": 5896,
+      "sha256": "469f32d95720e62bfef628b2230344990524374b22a51eeb8bddc5bea7e3b158"
+    },
+    "experiments/staged_rts24_p2_workflow_accounting_v1.py": {
+      "bytes": 25059,
+      "sha256": "807d05c27a9d46363b07ca610d8d0c5bdd46e43c18d7b15928fde861afdd4c64"
+    },
+    "tests/test_staged_rts24_p2_workflow_accounting_v1.py": {
+      "bytes": 13578,
+      "sha256": "96df90bb0b373e1cf27d61692b295944932812cd14633b959d59fad3469ea42d"
+    }
+  }
+}
