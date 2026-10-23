@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-23 P2元数据准备检查点：见[最新交接](continuation_handoff_20261023_p2_preparation.md)。原栈319槽完整DAG已保存：41 actual+278 contract、160QP/159LP，309静态SHA/10动态空值与全部未来数值身份空值保留；h=-2..7、注册4/观察8。一次准备exit0/外wall6.760574s，仅三文件505285B，55源/40模块/74函数/211 stdlib首尾闭合，0科学构模/native/replay。38针对性检查通过；相关冻结回归60pass/1历史生命周期断言失败，独立诊断保持原字节断言，失败保留。独立后核验确认原P1/B1–B3/685旧路径及196前次发布路径保持。真正candidate-only需类型/codec/journal身份后继，先保留plain_v2候选并准备原栈P2；尚无P2 controller、资源准入或专项native授权，3600s等只是拟议停止帽。下一步具体无原生runner及全链/昂贵失败审查；139数值/F-X与C/D/E仍OPEN。以下保留既有检查点。
+
 2026-10-23整数键shadow后继检查点：见[最新交接](continuation_handoff_20261023_shadow_v2.md)。一次固定原P1完整保存reopen中2547次实际legacy digest的旧JSON bytes、v2 strict bytes及SHA全部相同，含child别名118/其他2429，JSON4861、8stage及旧metrics保持；runtime首尾和父端quiet后采用闭合。命令18.388875s、Job15.125s、RSS155459584B，2/2 HANDLE归零。48编码+82监控/控制器+74相关普通检查及独立后核验完成；原P1/B1–B3/前序135路径保持。结论限固定五小时前缀编码等价，候选尚未驱动执行，不支持提速、139/F-X或C资源准入；后继先确定candidate-only只读接线图和身份/预算。C整体与D/E仍OPEN。以下保留既有检查点。
 
 2026-10-23逐调用shadow检查点：见[最新交接](continuation_handoff_20261023_shadow.md)。唯一保存诊断因strict_unsupported拒绝全2547次严格等价；命令17.095632s、Job14.313s、RSS151719936B，2/2 HANDLE退出，未超预算且未重试。已用原point_0002证明child reduction整数键超出strict域、公开helper根级fallback保持旧bytes；该例不是本次首caller的直接观测。52绑定检查、57相关回归、1保存域回归及独立末端字节核验完成；原P1683/B1–B3118/685前序路径和此前68路径保持。未保存最终counter/metrics采用结果，不支持提速或C资源准入。后继先定义strict/fallback域与失败诊断义务；C整体/139/F-X和D/E仍OPEN。以下保留既有检查点。

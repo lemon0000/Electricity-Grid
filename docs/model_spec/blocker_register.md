@@ -1,5 +1,9 @@
 # 当前问题与阶段门禁登记
 
+### 2026-10-23 P2请求图已准备，执行与成本准入待完成
+
+[交接](../plan/continuation_handoff_20261023_p2_preparation.md)记录一次solver-free元数据准备：319槽=41 actual+278 contract，309静态SHA/10动态空值、未来BoundQuery/父point/KKT空，注册4/观察8。三文件505285B、exit0/外wall6.760574s，55源/40模块/74函数/211 stdlib首尾核对；38针对性检查通过，相关60pass/1冻结历史“P1不存在”断言失败保留，独立诊断三组preservation相等。stdlib后核验确认原P1683/B1–B3118/685路径及196旧发布路径保持。plain_v2继续是保存域等价候选，真实candidate-only接线牵动类型/codec/journal身份，暂先准备原栈P2。仍缺具体P2 controller/provider/point-worker/fresh、全DAG/昂贵失败/十小时保存增长成本、资源审查及新的专项native授权；3600s等为拟议停止帽，未准入。元数据不执行139数值，也不关闭F/X时序或D/E现实输入/选择/留出，C整体和formal/resource标志保持原状态。
+
 ### 2026-10-23 v2完整保存编码域闭合，实际候选接线待做
 
 [交接](../plan/continuation_handoff_20261023_shadow_v2.md)记录一次固定P1五小时前缀的完整原reopen：2547实际legacy digest的旧JSON bytes/v2 strict bytes/旧SHA逐调用相同，child118+other2429、JSON4861、8stage、原metrics、runtime及父端quiet后采用闭合。命令18.388875s、Job15.125s、RSS155459584B，2/2 HANDLE退出；48+82新检查和74旧回归、独立stdlib-only末核完成，原P1683/B1–B3118/685路径及前序135发布路径保持。v1失败包原字节不改。候选尚未驱动科研路径，后继须明确candidate-only只读接线/身份/失败语义及有界资源测量；该shadow不证明提速、CAS blob替换或新native权限。C整体规模/昂贵失败/139/F-X及D/E现实输入/选择/留出仍OPEN；原P1 native一次授权已用，formal/resource标志不变。

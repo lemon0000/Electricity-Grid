@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_packet_v1_non_authoritative\postcheck_01\postcheck.py", line 172, in <module>
+    if __name__=='__main__':print(json.dumps(main(),sort_keys=True,indent=2,allow_nan=False))
+                                             ^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_packet_v1_non_authoritative\postcheck_01\postcheck.py", line 145, in main
+    require(all(stamp(Path(v['path']))['sha256']==v['source_sha'] for v in runtime['functions'].values()),'function source binding differs')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_packet_v1_non_authoritative\postcheck_01\postcheck.py", line 145, in <genexpr>
+    require(all(stamp(Path(v['path']))['sha256']==v['source_sha'] for v in runtime['functions'].values()),'function source binding differs')
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_packet_v1_non_authoritative\postcheck_01\postcheck.py", line 44, in stamp
+    require(stat.S_ISREG(info.st_mode) and not stat.S_ISLNK(info.st_mode)
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_packet_v1_non_authoritative\postcheck_01\postcheck.py", line 30, in require
+    if not value:raise ValueError(message)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: nonordinary file

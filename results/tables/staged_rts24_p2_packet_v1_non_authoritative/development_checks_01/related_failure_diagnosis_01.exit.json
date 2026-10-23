@@ -1,0 +1,12 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 1.9944982000015443,
+  "scope": "solver-free diagnosis of historical absent-P1 assertion; frozen test unchanged",
+  "argv": [
+    "D:/Miniconda3/envs/compute/python.exe",
+    "-B",
+    "-s",
+    "-c",
+    "import json,sys; from experiments import staged_rts24_native_probe_v1 as p; old=p.load(p.OUTPUT.parent/'development_checks_01/preservation_before.json'); new=p.preserve(); matches={k:new[k]==old[k] for k in ('prior','cores','numeric_interface_checks')}; assert all(matches.values()) and 'psutil' not in sys.modules and p.OUTPUT.is_dir(); print(json.dumps(dict(matches=matches,psutil_loaded='psutil' in sys.modules,P1_output_exists=p.OUTPUT.is_dir(),historical_test_failed_assertion='not p.OUTPUT.exists()',scope='current P1 already exists; preservation byte checks remain true')) )"
+  ]
+}

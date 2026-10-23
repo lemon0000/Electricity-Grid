@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_packet_v1_non_authoritative\postcheck_01\postcheck.py", line 170, in <module>
+    if __name__=='__main__':print(json.dumps(main(),sort_keys=True,indent=2,allow_nan=False))
+                                             ^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_packet_v1_non_authoritative\postcheck_01\postcheck.py", line 121, in main
+    verify_rows(p['schedule'])
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_packet_v1_non_authoritative\postcheck_01\postcheck.py", line 72, in verify_rows
+    require(firm['role']=='fault_firm_F' and raw['role']=='fault_raw_need'
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_p2_packet_v1_non_authoritative\postcheck_01\postcheck.py", line 30, in require
+    if not value:raise ValueError(message)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: contingency pair differs

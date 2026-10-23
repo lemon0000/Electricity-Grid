@@ -1,0 +1,23 @@
+.....................................F.......................            [100%]
+================================== FAILURES ===================================
+_ test_clean_interpreter_preservation_matches_legacy_without_importing_psutil _
+
+    def test_clean_interpreter_preservation_matches_legacy_without_importing_psutil():
+        code = ("import json,sys; from experiments import staged_rts24_native_probe_v1 as p; "
+            "old=p.load(p.OUTPUT.parent/'development_checks_01/preservation_before.json'); new=p.preserve(); "
+            "assert all(new[k]==old[k] for k in ('prior','cores','numeric_interface_checks')); "
+            "assert 'psutil' not in sys.modules; assert not p.OUTPUT.exists(); print('clean_preservation_equal')")
+        result = subprocess.run([sys.executable, "-B", "-s", "-c", code], cwd=probe.ROOT,
+            capture_output=True, timeout=15)
+>       assert result.returncode == 0, result.stderr.decode(errors="replace")
+E       AssertionError: Traceback (most recent call last):
+E           File "<string>", line 1, in <module>
+E         AssertionError
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['D:\\Miniconda3\\envs\\compute\\python.exe', '-B', '-s', '-c', "import json,sys; from experimen...dout=b'', stderr=b'Traceback (most recent call last):\r\n  File "<string>", line 1, in <module>\r\nAssertionError\r\n').returncode
+
+tests\test_staged_rts24_native_probe_v1.py:425: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_native_probe_v1.py::test_clean_interpreter_preservation_matches_legacy_without_importing_psutil
+1 failed, 60 passed in 60.16s (0:01:00)

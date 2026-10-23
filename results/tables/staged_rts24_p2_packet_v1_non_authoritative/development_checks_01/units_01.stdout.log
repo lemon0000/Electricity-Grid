@@ -1,0 +1,302 @@
+FFFFFFFFFFFF..........                                                   [100%]
+================================== FAILURES ===================================
+______________ test_complete_public_schedule_and_future_bindings ______________
+
+fixture = Fixture(before=Rts24Data(base_mva=100.0, buses=(Bus(index=1, demand_mw=86.4), Bus(index=2, demand_mw=77.60000000000001...redispatch_fraction=Fraction(1, 2), source_identity='e2462f5403bc2ef87ee2a6c7f17c0971c61efc6ac83ac322ebf38cd1808fc40f')
+
+    def test_complete_public_schedule_and_future_bindings(fixture):
+>       value=prep.packet(fixture);rows=value['schedule']
+              ^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_packet_v1.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\staged_rts24_p2_packet_v1.py:114: in packet
+    schedule=build_schedule(fixture)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_p2_packet_v1.py:26: in build_schedule
+    c.require((fixture.first_hour,fixture.registration_end,fixture.observation_end)==(-2,8,8),'fixed P2 horizon differs')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'fixed P2 horizon differs'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: fixed P2 horizon differs
+
+src\staged_rts24_development_v1.py:23: ValueError
+____________ test_all_original_P1_requests_preserved_as_P2_subset _____________
+
+fixture = Fixture(before=Rts24Data(base_mva=100.0, buses=(Bus(index=1, demand_mw=86.4), Bus(index=2, demand_mw=77.60000000000001...redispatch_fraction=Fraction(1, 2), source_identity='e2462f5403bc2ef87ee2a6c7f17c0971c61efc6ac83ac322ebf38cd1808fc40f')
+
+    def test_all_original_P1_requests_preserved_as_P2_subset(fixture):
+>       old=p1.request_schedule(fixture);new=prep.build_schedule(fixture)
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_packet_v1.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\staged_rts24_p2_packet_v1.py:26: in build_schedule
+    c.require((fixture.first_hour,fixture.registration_end,fixture.observation_end)==(-2,8,8),'fixed P2 horizon differs')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'fixed P2 horizon differs'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: fixed P2 horizon differs
+
+src\staged_rts24_development_v1.py:23: ValueError
+___________ test_schedule_serialization_is_deterministic_and_valid ____________
+
+fixture = Fixture(before=Rts24Data(base_mva=100.0, buses=(Bus(index=1, demand_mw=86.4), Bus(index=2, demand_mw=77.60000000000001...redispatch_fraction=Fraction(1, 2), source_identity='e2462f5403bc2ef87ee2a6c7f17c0971c61efc6ac83ac322ebf38cd1808fc40f')
+
+    def test_schedule_serialization_is_deterministic_and_valid(fixture):
+        import json
+>       rows=prep.build_schedule(fixture)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_packet_v1.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\staged_rts24_p2_packet_v1.py:26: in build_schedule
+    c.require((fixture.first_hour,fixture.registration_end,fixture.observation_end)==(-2,8,8),'fixed P2 horizon differs')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'fixed P2 horizon differs'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: fixed P2 horizon differs
+
+src\staged_rts24_development_v1.py:23: ValueError
+__ test_invalid_packet_edges_or_invented_future_results_are_refused[missing] __
+
+fixture = Fixture(before=Rts24Data(base_mva=100.0, buses=(Bus(index=1, demand_mw=86.4), Bus(index=2, demand_mw=77.60000000000001...redispatch_fraction=Fraction(1, 2), source_identity='e2462f5403bc2ef87ee2a6c7f17c0971c61efc6ac83ac322ebf38cd1808fc40f')
+fault = 'missing'
+
+    @pytest.mark.parametrize('fault',['missing','cycle','parent_request','carry','contingency','future_bound','actual_request','objective','reference_dependency'])
+    def test_invalid_packet_edges_or_invented_future_results_are_refused(fixture,fault):
+>       rows=deepcopy(prep.build_schedule(fixture))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_packet_v1.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\staged_rts24_p2_packet_v1.py:26: in build_schedule
+    c.require((fixture.first_hour,fixture.registration_end,fixture.observation_end)==(-2,8,8),'fixed P2 horizon differs')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'fixed P2 horizon differs'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: fixed P2 horizon differs
+
+src\staged_rts24_development_v1.py:23: ValueError
+___ test_invalid_packet_edges_or_invented_future_results_are_refused[cycle] ___
+
+fixture = Fixture(before=Rts24Data(base_mva=100.0, buses=(Bus(index=1, demand_mw=86.4), Bus(index=2, demand_mw=77.60000000000001...redispatch_fraction=Fraction(1, 2), source_identity='e2462f5403bc2ef87ee2a6c7f17c0971c61efc6ac83ac322ebf38cd1808fc40f')
+fault = 'cycle'
+
+    @pytest.mark.parametrize('fault',['missing','cycle','parent_request','carry','contingency','future_bound','actual_request','objective','reference_dependency'])
+    def test_invalid_packet_edges_or_invented_future_results_are_refused(fixture,fault):
+>       rows=deepcopy(prep.build_schedule(fixture))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_packet_v1.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\staged_rts24_p2_packet_v1.py:26: in build_schedule
+    c.require((fixture.first_hour,fixture.registration_end,fixture.observation_end)==(-2,8,8),'fixed P2 horizon differs')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'fixed P2 horizon differs'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: fixed P2 horizon differs
+
+src\staged_rts24_development_v1.py:23: ValueError
+_ test_invalid_packet_edges_or_invented_future_results_are_refused[parent_request] _
+
+fixture = Fixture(before=Rts24Data(base_mva=100.0, buses=(Bus(index=1, demand_mw=86.4), Bus(index=2, demand_mw=77.60000000000001...redispatch_fraction=Fraction(1, 2), source_identity='e2462f5403bc2ef87ee2a6c7f17c0971c61efc6ac83ac322ebf38cd1808fc40f')
+fault = 'parent_request'
+
+    @pytest.mark.parametrize('fault',['missing','cycle','parent_request','carry','contingency','future_bound','actual_request','objective','reference_dependency'])
+    def test_invalid_packet_edges_or_invented_future_results_are_refused(fixture,fault):
+>       rows=deepcopy(prep.build_schedule(fixture))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_packet_v1.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\staged_rts24_p2_packet_v1.py:26: in build_schedule
+    c.require((fixture.first_hour,fixture.registration_end,fixture.observation_end)==(-2,8,8),'fixed P2 horizon differs')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'fixed P2 horizon differs'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: fixed P2 horizon differs
+
+src\staged_rts24_development_v1.py:23: ValueError
+___ test_invalid_packet_edges_or_invented_future_results_are_refused[carry] ___
+
+fixture = Fixture(before=Rts24Data(base_mva=100.0, buses=(Bus(index=1, demand_mw=86.4), Bus(index=2, demand_mw=77.60000000000001...redispatch_fraction=Fraction(1, 2), source_identity='e2462f5403bc2ef87ee2a6c7f17c0971c61efc6ac83ac322ebf38cd1808fc40f')
+fault = 'carry'
+
+    @pytest.mark.parametrize('fault',['missing','cycle','parent_request','carry','contingency','future_bound','actual_request','objective','reference_dependency'])
+    def test_invalid_packet_edges_or_invented_future_results_are_refused(fixture,fault):
+>       rows=deepcopy(prep.build_schedule(fixture))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_packet_v1.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\staged_rts24_p2_packet_v1.py:26: in build_schedule
+    c.require((fixture.first_hour,fixture.registration_end,fixture.observation_end)==(-2,8,8),'fixed P2 horizon differs')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'fixed P2 horizon differs'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: fixed P2 horizon differs
+
+src\staged_rts24_development_v1.py:23: ValueError
+_ test_invalid_packet_edges_or_invented_future_results_are_refused[contingency] _
+
+fixture = Fixture(before=Rts24Data(base_mva=100.0, buses=(Bus(index=1, demand_mw=86.4), Bus(index=2, demand_mw=77.60000000000001...redispatch_fraction=Fraction(1, 2), source_identity='e2462f5403bc2ef87ee2a6c7f17c0971c61efc6ac83ac322ebf38cd1808fc40f')
+fault = 'contingency'
+
+    @pytest.mark.parametrize('fault',['missing','cycle','parent_request','carry','contingency','future_bound','actual_request','objective','reference_dependency'])
+    def test_invalid_packet_edges_or_invented_future_results_are_refused(fixture,fault):
+>       rows=deepcopy(prep.build_schedule(fixture))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_packet_v1.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\staged_rts24_p2_packet_v1.py:26: in build_schedule
+    c.require((fixture.first_hour,fixture.registration_end,fixture.observation_end)==(-2,8,8),'fixed P2 horizon differs')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'fixed P2 horizon differs'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: fixed P2 horizon differs
+
+src\staged_rts24_development_v1.py:23: ValueError
+_ test_invalid_packet_edges_or_invented_future_results_are_refused[future_bound] _
+
+fixture = Fixture(before=Rts24Data(base_mva=100.0, buses=(Bus(index=1, demand_mw=86.4), Bus(index=2, demand_mw=77.60000000000001...redispatch_fraction=Fraction(1, 2), source_identity='e2462f5403bc2ef87ee2a6c7f17c0971c61efc6ac83ac322ebf38cd1808fc40f')
+fault = 'future_bound'
+
+    @pytest.mark.parametrize('fault',['missing','cycle','parent_request','carry','contingency','future_bound','actual_request','objective','reference_dependency'])
+    def test_invalid_packet_edges_or_invented_future_results_are_refused(fixture,fault):
+>       rows=deepcopy(prep.build_schedule(fixture))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_packet_v1.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\staged_rts24_p2_packet_v1.py:26: in build_schedule
+    c.require((fixture.first_hour,fixture.registration_end,fixture.observation_end)==(-2,8,8),'fixed P2 horizon differs')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'fixed P2 horizon differs'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: fixed P2 horizon differs
+
+src\staged_rts24_development_v1.py:23: ValueError
+_ test_invalid_packet_edges_or_invented_future_results_are_refused[actual_request] _
+
+fixture = Fixture(before=Rts24Data(base_mva=100.0, buses=(Bus(index=1, demand_mw=86.4), Bus(index=2, demand_mw=77.60000000000001...redispatch_fraction=Fraction(1, 2), source_identity='e2462f5403bc2ef87ee2a6c7f17c0971c61efc6ac83ac322ebf38cd1808fc40f')
+fault = 'actual_request'
+
+    @pytest.mark.parametrize('fault',['missing','cycle','parent_request','carry','contingency','future_bound','actual_request','objective','reference_dependency'])
+    def test_invalid_packet_edges_or_invented_future_results_are_refused(fixture,fault):
+>       rows=deepcopy(prep.build_schedule(fixture))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_packet_v1.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\staged_rts24_p2_packet_v1.py:26: in build_schedule
+    c.require((fixture.first_hour,fixture.registration_end,fixture.observation_end)==(-2,8,8),'fixed P2 horizon differs')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'fixed P2 horizon differs'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: fixed P2 horizon differs
+
+src\staged_rts24_development_v1.py:23: ValueError
+_ test_invalid_packet_edges_or_invented_future_results_are_refused[objective] _
+
+fixture = Fixture(before=Rts24Data(base_mva=100.0, buses=(Bus(index=1, demand_mw=86.4), Bus(index=2, demand_mw=77.60000000000001...redispatch_fraction=Fraction(1, 2), source_identity='e2462f5403bc2ef87ee2a6c7f17c0971c61efc6ac83ac322ebf38cd1808fc40f')
+fault = 'objective'
+
+    @pytest.mark.parametrize('fault',['missing','cycle','parent_request','carry','contingency','future_bound','actual_request','objective','reference_dependency'])
+    def test_invalid_packet_edges_or_invented_future_results_are_refused(fixture,fault):
+>       rows=deepcopy(prep.build_schedule(fixture))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_packet_v1.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\staged_rts24_p2_packet_v1.py:26: in build_schedule
+    c.require((fixture.first_hour,fixture.registration_end,fixture.observation_end)==(-2,8,8),'fixed P2 horizon differs')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'fixed P2 horizon differs'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: fixed P2 horizon differs
+
+src\staged_rts24_development_v1.py:23: ValueError
+_ test_invalid_packet_edges_or_invented_future_results_are_refused[reference_dependency] _
+
+fixture = Fixture(before=Rts24Data(base_mva=100.0, buses=(Bus(index=1, demand_mw=86.4), Bus(index=2, demand_mw=77.60000000000001...redispatch_fraction=Fraction(1, 2), source_identity='e2462f5403bc2ef87ee2a6c7f17c0971c61efc6ac83ac322ebf38cd1808fc40f')
+fault = 'reference_dependency'
+
+    @pytest.mark.parametrize('fault',['missing','cycle','parent_request','carry','contingency','future_bound','actual_request','objective','reference_dependency'])
+    def test_invalid_packet_edges_or_invented_future_results_are_refused(fixture,fault):
+>       rows=deepcopy(prep.build_schedule(fixture))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_p2_packet_v1.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\staged_rts24_p2_packet_v1.py:26: in build_schedule
+    c.require((fixture.first_hour,fixture.registration_end,fixture.observation_end)==(-2,8,8),'fixed P2 horizon differs')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'fixed P2 horizon differs'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: fixed P2 horizon differs
+
+src\staged_rts24_development_v1.py:23: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_p2_packet_v1.py::test_complete_public_schedule_and_future_bindings
+FAILED tests/test_staged_rts24_p2_packet_v1.py::test_all_original_P1_requests_preserved_as_P2_subset
+FAILED tests/test_staged_rts24_p2_packet_v1.py::test_schedule_serialization_is_deterministic_and_valid
+FAILED tests/test_staged_rts24_p2_packet_v1.py::test_invalid_packet_edges_or_invented_future_results_are_refused[missing]
+FAILED tests/test_staged_rts24_p2_packet_v1.py::test_invalid_packet_edges_or_invented_future_results_are_refused[cycle]
+FAILED tests/test_staged_rts24_p2_packet_v1.py::test_invalid_packet_edges_or_invented_future_results_are_refused[parent_request]
+FAILED tests/test_staged_rts24_p2_packet_v1.py::test_invalid_packet_edges_or_invented_future_results_are_refused[carry]
+FAILED tests/test_staged_rts24_p2_packet_v1.py::test_invalid_packet_edges_or_invented_future_results_are_refused[contingency]
+FAILED tests/test_staged_rts24_p2_packet_v1.py::test_invalid_packet_edges_or_invented_future_results_are_refused[future_bound]
+FAILED tests/test_staged_rts24_p2_packet_v1.py::test_invalid_packet_edges_or_invented_future_results_are_refused[actual_request]
+FAILED tests/test_staged_rts24_p2_packet_v1.py::test_invalid_packet_edges_or_invented_future_results_are_refused[objective]
+FAILED tests/test_staged_rts24_p2_packet_v1.py::test_invalid_packet_edges_or_invented_future_results_are_refused[reference_dependency]
+12 failed, 10 passed in 4.53s
