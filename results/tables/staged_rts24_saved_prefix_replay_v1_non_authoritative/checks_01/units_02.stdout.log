@@ -1,0 +1,17 @@
+......F
+================================== FAILURES ===================================
+______ test_policy_rejection_keeps_accepted_prefix_and_avoids_next_hour _______
+tests\test_staged_rts24_saved_prefix_replay_v1.py:130: in test_policy_rejection_keeps_accepted_prefix_and_avoids_next_hour
+    assert case.final_state.stopped
+E   AssertionError: assert False
+E    +  where False = ExecutionState(fixture_identity='6d30f3371bcd87b9f117e383be98cc4d8f7790d700fb8aceedf677d2c61e6b13', plan='on_time', cl...tion=0, rest=1, x_previous=Fraction(0, 1), x_energy=Fraction(40, 1), x_events=1, x_duration=0, x_rest=1, stopped=False).stopped
+E    +    where ExecutionState(fixture_identity='6d30f3371bcd87b9f117e383be98cc4d8f7790d700fb8aceedf677d2c61e6b13', plan='on_time', cl...tion=0, rest=1, x_previous=Fraction(0, 1), x_energy=Fraction(40, 1), x_events=1, x_duration=0, x_rest=1, stopped=False) = namespace(root=WindowsPath('C:/Users/Psychobabble/AppData/Local/Temp/pytest-of-Psychobabble/pytest-2728/test_policy_re...ion=0, rest=1, x_previous=Fraction(0, 1), x_energy=Fraction(40, 1), x_events=1, x_duration=0, x_rest=1, stopped=False)).final_state
+=================================== PASSES ====================================
+============================= slowest 5 durations =============================
+0.54s call     tests/test_staged_rts24_saved_prefix_replay_v1.py::test_policy_rejection_keeps_accepted_prefix_and_avoids_next_hour
+0.53s call     tests/test_staged_rts24_saved_prefix_replay_v1.py::test_numeric_stops_without_filling_actual_or_future_state[8-actual_numeric]
+0.46s call     tests/test_staged_rts24_saved_prefix_replay_v1.py::test_numeric_stops_without_filling_actual_or_future_state[5-reference_numeric]
+0.43s call     tests/test_staged_rts24_saved_prefix_replay_v1.py::test_numeric_stops_without_filling_actual_or_future_state[4-actual_numeric]
+0.42s call     tests/test_staged_rts24_saved_prefix_replay_v1.py::test_numeric_stops_without_filling_actual_or_future_state[2-reference_numeric]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 6 passed, 1 deselected in 5.44s

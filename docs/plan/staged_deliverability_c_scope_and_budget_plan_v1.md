@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-24 保存前缀检查点：见[新交接](continuation_handoff_20261024_saved_prefix_replay.md)及[合同](staged_deliverability_c_saved_prefix_replay_contract_v1.md)。B→C→B已用原P1五模拟小时/21保存点连接：独立政策物化actual query、双compile/raw/KKT/typed SHA、接受后state推进，五个state SHA相同。39新/126旧普通检查通过，compile42/import21、execution audit16/历史row40、source1912/point2152读已观察；测试wall不作整链准入。732旧路径/三导航旧正文/P1全部683文件保持，无新native/P2/journal写入。下一步D代表F/X，再E trusted reopen和F父采用；全319/139/F-X、十小时增长/昂贵失败/full wall/RAM/storage、65s父端余量与C/D/E门禁仍OPEN。
+
 2026-10-24 单点科学重建检查点：见[新交接](continuation_handoff_20261024_saved_point_replay.md)、[科学采用DAG](staged_deliverability_c_scientific_adoption_dag_v1.md)与[合同](staged_deliverability_c_saved_point_replay_contract_v1.md)。新增只读C组件闭合外部query/frame/pins→typed CAS→双compile/raw snapshot/import→独立代数audit→exact证据SHA及库存/source书挡；47新/170旧检查和PRE_SEAL findings闭合。P1前三经济/恢复点原evidence SHA及683文件保持；672旧发布路径与三导航旧正文保持。每点source86读、CAS为6M+16读已观察，不能据此准入资源。B动态actual来源、D legal-X、E journal和F整包采用仍待连接；无新native/P2，65s父端余量、C整体/139/F-X/D/E仍OPEN。
 
 2026-10-24 outer启动绑定检查点：见[新交接](continuation_handoff_20261024_outer_binding.md)与[合同](staged_deliverability_c_p2_outer_binding_contract_v1.md)。独立9来源组、release前两worker事实文件、同父端/owner连续性、guard v3外层→checker v2→parent v2保存/会计及发布后未决已接入开发路径；48新/213旧普通检查及PRE_SEAL findings闭合。真实短Python capture与完整319/138/10合成元数据分开，原七输入/旧发布621路径及三导航旧正文保持。没有公共P2/native或独立科学采用；接下来先列raw/KKT/合法X/journal科学采用DAG与完整成本，65s父端余量、C/139/F-X/D/E资源仍OPEN。

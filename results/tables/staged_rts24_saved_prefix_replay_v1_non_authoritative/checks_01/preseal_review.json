@@ -1,0 +1,53 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "closed_findings": [
+    {
+      "finding": "terminal numeric/rejection could contradict held successful state or future slots",
+      "resolution": "all terminal visited slots close against held slots/files; all current and later failure state anchors null",
+      "severity": "High",
+      "tests": "numeric current/future state and future slot; rejection future state/slot"
+    },
+    {
+      "finding": "rejection audit dropped and generic summary hid terminal attempt",
+      "resolution": "accepted_prefix_summary separated from attempted_state/SHA/audit/summary",
+      "severity": "Medium",
+      "tests": "rejected stopped/terminal violations/unapplied attempts and independent audit returned"
+    },
+    {
+      "finding": "pins-only final inventory allowed identical bytes with replaced file/directory identity",
+      "resolution": "pre-C and final full pins/files/directories plus points_root and all ancestor identities",
+      "severity": "Medium",
+      "tests": "same-byte root/point-directory/point-file replacement"
+    }
+  ],
+  "closed_packaging_findings": [
+    {
+      "finding": "navigation size typo 399",
+      "resolution": "restored frozen full-P2 size 319 in current head paragraph; historical body preserved",
+      "severity": "Low"
+    }
+  ],
+  "formal_result": false,
+  "kind": "read_only_PRE_SEAL_findings",
+  "official_verdict": null,
+  "receipt": null,
+  "remaining_findings": [],
+  "resource_admission": false,
+  "reviewed_call_accounting": "42 compile; 21 import; 16 execution audits; 40 historical rows; 1912 source reads; 8M+32 point reads",
+  "reviewer": "sol_reviewer; root/terminal_budget_audit; read only, no subdelegation/native/trajectory rerun",
+  "seal": null,
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_saved_prefix_replay_contract_v1.md": {
+      "bytes": 5933,
+      "sha256": "4b91dd0cf74cdc9a2dab6c9b013d42eff43d9a0133fa6b6b3886cb384d722c57"
+    },
+    "src/staged_rts24_saved_prefix_replay_v1.py": {
+      "bytes": 11867,
+      "sha256": "22bee015d89d818b8e76a5f2f44cf3b2618fffe7641e73461e4481bd80738a4c"
+    },
+    "tests/test_staged_rts24_saved_prefix_replay_v1.py": {
+      "bytes": 21479,
+      "sha256": "f5a629ea776c9c5063aa398eea0315266ea8cb82be4f49f974e08d7e21b2eddf"
+    }
+  }
+}

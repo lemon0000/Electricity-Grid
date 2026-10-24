@@ -1,0 +1,21 @@
+F
+================================== FAILURES ===================================
+_______ test_analytic_two_hour_actuals_alone_advance_independent_state ________
+tests\test_staged_rts24_saved_prefix_replay_v1.py:84: in test_analytic_two_hour_actuals_alone_advance_independent_state
+    case = analytic_case(tmp_path, monkeypatch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_staged_rts24_saved_prefix_replay_v1.py:48: in analytic_case
+    prepared = d.causal.prepare_hour(fixture, state, evidence)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_causal_v2.py:28: in prepare_hour
+    c.require(not state.stopped, "stopped execution")
+src\staged_rts24_development_v1.py:23: in require
+    raise ValueError(message)
+E   ValueError: stopped execution
+============================= slowest 5 durations =============================
+0.02s call     tests/test_staged_rts24_saved_prefix_replay_v1.py::test_analytic_two_hour_actuals_alone_advance_independent_state
+0.01s setup    tests/test_staged_rts24_saved_prefix_replay_v1.py::test_analytic_two_hour_actuals_alone_advance_independent_state
+
+(1 durations < 0.005s hidden.  Use -vv to show these durations.)
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 1 deselected in 2.25s

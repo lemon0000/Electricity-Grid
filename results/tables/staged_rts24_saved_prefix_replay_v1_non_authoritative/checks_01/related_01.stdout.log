@@ -1,0 +1,19 @@
+........................................................................ [ 57%]
+......................................................                   [100%]
+=================================== PASSES ====================================
+__ test_saved_P1_first_three_points_use_independently_built_queries_and_raw ___
+---------------------------- Captured stdout call -----------------------------
+{"saved_P1_points_replayed_once": [{"ordinal": 1, "family": "economic_kkt", "evidence_ref": "e67ee091c92823fb5cbc1988e0747af9b43500901ad968546716ebe683443de6"}, {"ordinal": 2, "family": "child_lp_kkt", "evidence_ref": "58bb3280db6f6478bab73eccfbe5850a2bf7a1f86231bfa81adeb59c446f9194"}, {"ordinal": 3, "family": "child_lp_kkt", "evidence_ref": "e18a3addd9387dc3367c34ce3c0b6345d0560f0bd4541e0c0b50c0094a98bea5"}], "new_native_calls": 0, "P1_683_files_unchanged": true}
+________ test_full_logical_read_and_pack_accounting_is_observed[None] _________
+---------------------------- Captured stdout call -----------------------------
+{"oracle": "single_point_logical_reads", "numeric_failure": null, "cas_objects": 6, "source": 86, "point": 52, "pack": 5}
+_______ test_full_logical_read_and_pack_accounting_is_observed[warning] _______
+---------------------------- Captured stdout call -----------------------------
+{"oracle": "single_point_logical_reads", "numeric_failure": "warning", "cas_objects": 3, "source": 86, "point": 34, "pack": 3}
+============================= slowest 5 durations =============================
+1.79s call     tests/test_staged_rts24_saved_point_replay_v1.py::test_saved_P1_first_three_points_use_independently_built_queries_and_raw
+1.16s call     tests/test_staged_rts24_reference_queries_v1.py::test_multistep_state_policy_audits_and_cross_version_continuation[fixed_headroom-late-delayed-True]
+1.04s call     tests/test_staged_rts24_reference_queries_v1.py::test_multistep_state_policy_audits_and_cross_version_continuation[full_temporal-late-on_time-False]
+1.04s call     tests/test_staged_rts24_causal_v1.py::test_three_methods_have_separate_continuous_ledgers_and_actual_acceptance
+1.04s call     tests/test_staged_rts24_reference_queries_v1.py::test_multistep_state_policy_audits_and_cross_version_continuation[full_temporal-late-on_time-True]
+126 passed in 47.48s
