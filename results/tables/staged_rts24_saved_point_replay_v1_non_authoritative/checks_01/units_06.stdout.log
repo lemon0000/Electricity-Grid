@@ -1,0 +1,12 @@
+...........................................                              [100%]
+=================================== PASSES ====================================
+__ test_saved_P1_first_three_points_use_independently_built_queries_and_raw ___
+---------------------------- Captured stdout call -----------------------------
+{"saved_P1_points_replayed_once": [{"ordinal": 1, "family": "economic_kkt", "evidence_ref": "e67ee091c92823fb5cbc1988e0747af9b43500901ad968546716ebe683443de6"}, {"ordinal": 2, "family": "child_lp_kkt", "evidence_ref": "58bb3280db6f6478bab73eccfbe5850a2bf7a1f86231bfa81adeb59c446f9194"}, {"ordinal": 3, "family": "child_lp_kkt", "evidence_ref": "e18a3addd9387dc3367c34ce3c0b6345d0560f0bd4541e0c0b50c0094a98bea5"}], "new_native_calls": 0, "P1_683_files_unchanged": true}
+============================= slowest 5 durations =============================
+1.18s call     tests/test_staged_rts24_saved_point_replay_v1.py::test_saved_P1_first_three_points_use_independently_built_queries_and_raw
+0.50s call     tests/test_staged_rts24_saved_point_replay_v1.py::test_all_evidence_families_rebuild_without_backend[True-child]
+0.43s call     tests/test_staged_rts24_saved_point_replay_v1.py::test_all_evidence_families_rebuild_without_backend[True-primal]
+0.41s call     tests/test_staged_rts24_saved_point_replay_v1.py::test_all_evidence_families_rebuild_without_backend[False-child]
+0.39s call     tests/test_staged_rts24_saved_point_replay_v1.py::test_primal_only_does_not_promote_invalid_native_dual_arrays
+43 passed in 12.38s

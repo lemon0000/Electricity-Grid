@@ -1,0 +1,47 @@
+{
+  "argv": [
+    "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/test_staged_rts24_numeric_interface_v1.py",
+    "tests/test_staged_rts24_highs_backend_v1.py",
+    "tests/test_staged_rts24_child_optimality_v1.py",
+    "tests/test_staged_rts24_development_v1.py",
+    "-x",
+    "-q",
+    "-rP",
+    "--tb=short",
+    "--durations=5",
+    "-p",
+    "no:cacheprovider",
+    "-o",
+    "tmp_path_retention_count=100000",
+    "-o",
+    "tmp_path_retention_policy=all"
+  ],
+  "exit_code": 0,
+  "scope": "ordinary bounded unit checks; no solver/native/scientific execution",
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_saved_point_replay_contract_v1.md": {
+      "bytes": 4514,
+      "sha256": "e812bb03355a94187a12837293ec8fce6eab191fe836e9c8c60d63e16d512333"
+    },
+    "docs/plan/staged_deliverability_c_scientific_adoption_dag_v1.md": {
+      "bytes": 4832,
+      "sha256": "9320416682b58a30a09407a33d7e800b29e2476d6e36df6f4d4c558fe2651c2d"
+    },
+    "src/staged_rts24_saved_point_replay_v1.py": {
+      "bytes": 16793,
+      "sha256": "f9f723e89bb6513b4ba25c61b427f363652f2be78707d132511f6929f3df95ad"
+    },
+    "tests/test_staged_rts24_saved_point_replay_v1.py": {
+      "bytes": 18769,
+      "sha256": "9d0b97cb9f46d7ab28de4c692680567ecd169c382d273bd08aab9d515d991f42"
+    }
+  },
+  "source_pins_unchanged": true,
+  "timed_out": false,
+  "timeout_seconds": 90,
+  "wall_seconds": 5.480383400001301
+}

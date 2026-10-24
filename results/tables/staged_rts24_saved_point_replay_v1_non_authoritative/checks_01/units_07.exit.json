@@ -1,0 +1,44 @@
+{
+  "argv": [
+    "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/test_staged_rts24_saved_point_replay_v1.py",
+    "-x",
+    "-q",
+    "-rP",
+    "--tb=short",
+    "--durations=5",
+    "-p",
+    "no:cacheprovider",
+    "-o",
+    "tmp_path_retention_count=100000",
+    "-o",
+    "tmp_path_retention_policy=all"
+  ],
+  "exit_code": 0,
+  "scope": "ordinary bounded unit checks; no solver/native/scientific execution",
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_saved_point_replay_contract_v1.md": {
+      "bytes": 4514,
+      "sha256": "e812bb03355a94187a12837293ec8fce6eab191fe836e9c8c60d63e16d512333"
+    },
+    "docs/plan/staged_deliverability_c_scientific_adoption_dag_v1.md": {
+      "bytes": 5719,
+      "sha256": "a55856ae0ca9b201ca7fe3c6ddafa842dc047a0ce9732495d66eea5b38495d16"
+    },
+    "src/staged_rts24_saved_point_replay_v1.py": {
+      "bytes": 16793,
+      "sha256": "f9f723e89bb6513b4ba25c61b427f363652f2be78707d132511f6929f3df95ad"
+    },
+    "tests/test_staged_rts24_saved_point_replay_v1.py": {
+      "bytes": 19634,
+      "sha256": "0c8ca9db64cfb257c444a72b0632c61ca7ef57fb5f2528fc46ffd4d80bad43ec"
+    }
+  },
+  "source_pins_unchanged": true,
+  "timed_out": false,
+  "timeout_seconds": 90,
+  "wall_seconds": 13.519501999999193
+}

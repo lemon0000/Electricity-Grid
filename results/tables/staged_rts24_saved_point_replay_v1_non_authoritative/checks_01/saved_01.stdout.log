@@ -1,0 +1,20 @@
+F
+================================== FAILURES ===================================
+__ test_saved_P1_first_three_points_use_independently_built_queries_and_raw ___
+tests\test_staged_rts24_saved_point_replay_v1.py:226: in test_saved_P1_first_three_points_use_independently_built_queries_and_raw
+    replay=d.replay_point(p1/prefix,query,frame_expected,held,outer,source)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\staged_rts24_saved_point_replay_v1.py:81: in replay_point
+    _query_budget(expected_query)
+src\staged_rts24_saved_point_replay_v1.py:72: in _query_budget
+    require(type(data.buses) is type(data.generators) is type(data.branches) is tuple
+src\staged_rts24_evidence_store_v1.py:47: in require
+    if not condition: raise ValueError(message)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: network exceeds bounded replay shape
+============================= slowest 5 durations =============================
+1.77s call     tests/test_staged_rts24_saved_point_replay_v1.py::test_saved_P1_first_three_points_use_independently_built_queries_and_raw
+
+(2 durations < 0.005s hidden.  Use -vv to show these durations.)
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 25 deselected in 3.91s
