@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_roles_v1_non_authoritative\checks_01\saved_checks.py", line 163, in <module>
+    if __name__ == '__main__': print(json.dumps(verify(), sort_keys=True, indent=2))
+                                                ^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_roles_v1_non_authoritative\checks_01\saved_checks.py", line 65, in verify
+    assert sum(n.startswith('results/tables/staged_rts24_native_v1_non_authoritative/p1_01/') for n in preserved) == 683
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

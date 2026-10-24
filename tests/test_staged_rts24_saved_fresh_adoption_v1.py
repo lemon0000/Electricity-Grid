@@ -878,3 +878,290 @@ def test_stage_real_nested_jobs_require_complete_retained_member_inventory(leave
     assert result['job_quiet_confirmed'] is True
     assert result['stage_process_observed_successfully'] is (not leave_alive)
     assert result['primary_stop_reason'] == ('root_exited_with_descendants' if leave_alive else None)
+
+
+@pytest.fixture
+def role_store(tmp_path):
+    raw = cli.make_role_probe_context(tmp_path/'output')
+    return cli.prepare_role_probe_output(raw, sha256(raw).hexdigest())
+
+
+def _role_store_as(store, role):
+    return cli.RoleStore(store.raw, store.sha, cli.digest(store.tree), role)
+
+
+def _capture_role_graph(scenario, result):
+    root = Path(result['output_root']); files = {}
+    for name in cli.TARGETS:
+        path = root/name
+        if path.exists():
+            raw = path.read_bytes()
+            files[name] = dict(pin=cli.pin(raw), hex=raw.hex()) if name != 'context.json' else dict(pin=cli.pin(raw))
+    context = json.loads((root/'context.json').read_bytes())
+    environment = context.pop('environment')
+    context['environment_sha'] = cli.digest(environment)
+    print('ROLE_GRAPH '+cli.canonical(dict(scenario=scenario, result=result, files=files,
+        context_projection=context, context_projection_omits=['environment'],
+        projection_scope='ordinary fixture and hashes; original context remains in pytest output')).decode('ascii'))
+
+
+def test_role_target_reservations_cover_all_writers_and_failure(role_store):
+    caps = cli.role_target_caps(); owners = [name for role in ('external', 'controller', 'parent', 'fresh') for name in cli.role_targets(role)]
+    assert len(owners) == len(set(owners)) == 17 and set(owners) == set(cli.TARGETS)
+    assert sum(caps.values()) == 5537792 < cli.CAPS['output_bytes']
+    assert sum(caps[name] for name in cli.RECORDS) == 524288
+    result = role_store.accounting()
+    assert result['bytes']+result['all_targets_reserved_bytes'] == 5537792
+    assert result['files']+result['all_targets_reserved_files'] == 17
+    assert caps['diagnostics/failure.json'] == 131072
+
+
+@pytest.mark.parametrize('fault', ['target', 'pending', 'wrong_writer', 'extra', 'oversized', 'hardlink'])
+def test_role_publication_rejects_conflict_scope_and_alias(role_store, fault):
+    import os
+    target = role_store.root/'worker/parent_startup.json'
+    if fault == 'target': target.write_bytes(b'{}')
+    elif fault == 'pending': target.with_name(target.name+'.pending').write_bytes(b'{}')
+    elif fault == 'extra': (role_store.root/'unexpected').write_bytes(b'')
+    elif fault == 'hardlink':
+        target.write_bytes(b'{}'); os.link(target, role_store.root/'worker/launcher.json')
+    data = {'padding': 'x'*16384} if fault == 'oversized' else {}
+    with pytest.raises((ValueError, cli.RolePublicationUnresolved)):
+        role_store.publish('fresh' if fault == 'wrong_writer' else 'controller', 'worker/parent_startup.json', data)
+
+
+@pytest.mark.parametrize('phase', ['before_open', 'after_write', 'after_fsync', 'after_pending_readback',
+    'before_rename', 'after_rename', 'after_final_readback'])
+def test_role_publication_window_retains_expected_bytes_and_disallows_retry(role_store, phase):
+    raw = cli.canonical({'value': 7})
+    def fault(stage, target):
+        if stage == phase: raise OSError('fixed publication window')
+    with pytest.raises(cli.RolePublicationUnresolved) as found:
+        cli._publish_role_target(role_store, 'controller', 'worker/parent_startup.json', raw, hook=fault)
+    error = found.value
+    assert error.expected_sha == sha256(raw).hexdigest() and error.phase == phase
+    assert error.may_have_published is (phase in ('after_rename', 'after_final_readback'))
+    image = cli._stage_error(error)
+    assert image['phase'] == phase and image['expected_sha'] == error.expected_sha and image['primary']['message'] == 'fixed publication window'
+    if phase != 'before_open':
+        target = role_store.root/'worker/parent_startup.json'
+        existing = target if error.may_have_published else target.with_name(target.name+'.pending')
+        assert existing.read_bytes() == raw
+    with pytest.raises(ValueError, match='single role target attempt'):
+        role_store.publish('controller', 'worker/parent_startup.json', {'value': 7})
+
+
+def test_role_store_rejects_context_same_bytes_replacement_and_frozen_state(role_store):
+    from dataclasses import FrozenInstanceError
+    target = role_store.root/'context.json'; saved = target.with_name('original_context')
+    target.rename(saved); target.write_bytes(role_store.raw)
+    with pytest.raises(ValueError, match='bookend differs'): role_store.check()
+    with pytest.raises(FrozenInstanceError): role_store.writer = 'fresh'
+
+
+def test_role_source_context_cannot_adopt_F_or_expand_fixture(role_store):
+    value = cli.parse(role_store.raw)
+    for key, changed in (('F_launch_admitted', True), ('fixture', {'left': 2, 'right': 3, 'expected': 6}), ('case', 'arbitrary')):
+        current = dict(value); current[key] = changed; raw = cli.canonical(current)
+        with pytest.raises(ValueError): cli.check_role_probe_context(raw, sha256(raw).hexdigest())
+    with pytest.raises(ValueError): cli.check_context(role_store.raw, role_store.sha)
+
+
+def test_role_child_reservation_is_consumed_once_including_constructor_failure(role_store, monkeypatch):
+    calls = []
+    def fail(*args, **kwargs): calls.append(kwargs.get('started')); raise ValueError('fixed pre-constructor failure')
+    monkeypatch.setattr(cli, '_construct_stage_owner', fail)
+    with pytest.raises(ValueError, match='pre-constructor'): cli._create_role_owner('parent', role_store)
+    assert role_store.child_consumed is True and calls == [role_store.child_reservation[1]]
+    with pytest.raises(ValueError, match='single nested role reservation'): cli._create_role_owner('parent', role_store)
+    assert len(calls) == 1
+
+
+def _role_relay_endpoints():
+    channel = cli.StageChannel.create('a'*64, cli.ordinary_stage_descriptor('parent', 'nested'))
+    owner = _StageUnitOwner(); channel.bind_owner(owner)
+    writer = cli.StageChannel.attach(channel.name, channel.nonce, channel.context_sha, channel.descriptor)
+    writer.enter('parent'); writer.enter('fresh')
+    return channel, writer
+
+
+@pytest.mark.parametrize('fault', [None, 'quiesce', 'close', 'relay'])
+def test_role_relay_tracks_actual_cleanup_and_preserves_failure_layers(fault, monkeypatch):
+    held, child_writer = _unit_stage(None if fault == 'relay' else fault)
+    _write_unit_frames(child_writer); child_writer.close()
+    channel, relay = _role_relay_endpoints()
+    if fault == 'relay':
+        original = relay.enter
+        def fail(phase):
+            if phase == 'inner_quiesce': raise OSError('fixed relay failure')
+            return original(phase)
+        monkeypatch.setattr(relay, 'enter', fail)
+    try:
+        result = cli._watch_stage(held, relay=relay)
+        phases = [frame['phase'] for frame in channel.read_available()]
+        assert phases == (['parent', 'fresh', 'inner_quiesce', 'inner_terminal'] if fault is None else
+            ['parent', 'fresh'] if fault == 'relay' else ['parent', 'fresh', 'inner_quiesce'])
+        assert result['stage_process_observed_successfully'] is result['job_quiet_confirmed'] is False
+        if fault == 'relay':
+            assert result['relay_error']['message'] == 'fixed relay failure'
+            assert held.owner.calls.index('kill') < held.owner.calls.index('quiesce')
+    finally: relay.close(); channel.close()
+
+
+def test_role_json_or_fake_owner_cannot_grant_worker_read(role_store, monkeypatch):
+    parent = _role_store_as(role_store, 'parent')
+    target = role_store.root/'worker/fresh/metrics.json'; target.write_bytes(b'{}')
+    original = cli.read
+    def guard(path, **kwargs):
+        if Path(path) == target: pytest.fail('forbidden worker content read')
+        return original(path, **kwargs)
+    monkeypatch.setattr(cli, 'read', guard)
+    with pytest.raises(ValueError, match='direct retained owner'): parent.read_after_quiet('worker/fresh/metrics.json', {'job_quiet_confirmed': True})
+    held, writer = _unit_stage(); _write_unit_frames(writer); writer.close(); cli.watch_probe_stage(held)
+    with pytest.raises(ValueError): parent.read_after_quiet('worker/fresh/metrics.json', held)
+
+
+def test_role_actual_witness_and_full_record_are_checked_before_content(role_store, monkeypatch):
+    parent = _role_store_as(role_store, 'parent'); held = cli._create_role_owner('fresh', parent)
+    parent.publish('parent', 'worker/fresh/startup.json', cli.parse(held.startup))
+    result = cli.watch_probe_stage(held); assert result['stage_process_observed_successfully'] is True
+    target = parent.root/'worker/fresh/metrics.json'; original_read = cli.read
+    def guard(path, **kwargs):
+        if Path(path) == target: pytest.fail('worker content read before complete permission')
+        return original_read(path, **kwargs)
+    monkeypatch.setattr(cli, 'read', guard)
+    witness = held.owner.quiescence_witness
+    try:
+        held.owner.quiescence_witness = deepcopy(witness); held.owner.quiescence_witness['complete_inventory'] = False
+        with pytest.raises(ValueError, match='closed retained owner quiet'): parent.read_after_quiet('worker/fresh/metrics.json', held)
+        held.owner.quiescence_witness = witness
+        current, raw = held.last_observation, held.last_image
+        changed = deepcopy(current); changed['clock']['resolution'] = 1.
+        object.__setattr__(held, 'last_observation', changed); object.__setattr__(held, 'last_image', cli.canonical(changed))
+        with pytest.raises(ValueError, match='terminal observation changed'): parent.read_after_quiet('worker/fresh/metrics.json', held)
+        object.__setattr__(held, 'observation_commit', (len(held.last_image), sha256(held.last_image).hexdigest()))
+        with pytest.raises(ValueError, match='monitor contract differs'): parent.read_after_quiet('worker/fresh/metrics.json', held)
+    finally:
+        held.owner.quiescence_witness = witness
+        object.__setattr__(held, 'last_observation', current); object.__setattr__(held, 'last_image', raw)
+        object.__setattr__(held, 'observation_commit', (len(raw), sha256(raw).hexdigest()))
+        held.close()
+
+
+@pytest.mark.parametrize('case', cli.ROLE_PROBE_CASES)
+def test_role_real_parent_fresh_graph_and_all_bookend_failures(tmp_path, case):
+    result = cli.run_ordinary_role_graph(tmp_path/'output', case)
+    _capture_role_graph(case, result)
+    assert result['ordinary_graph_completed'] is (case == 'normal')
+    assert result['saved_P1_fresh_process_verified'] is result['saved_P1_parent_adoption_verified'] is result['F_launch_admitted'] is False
+    assert all(result[name] is False for name in cli.GATES)
+    root = Path(result['output_root'])
+    if case == 'normal':
+        assert set(result['output_inventory']) == set(cli.TARGETS)-{'diagnostics/failure.json'}
+        assert [item['stage'] for item in result['input_bookends']] == ['G0', 'G2', 'G3']
+        candidate = json.loads((root/'worker/comparison_candidate.json').read_bytes())
+        assert candidate['G1']['stage'] == 'G1'
+        outer = json.loads((root/'worker/launcher.json').read_bytes()); inner = json.loads((root/'worker/fresh/launcher.json').read_bytes())
+        assert outer['quiescence_witness']['total_processes'] >= 4 and inner['quiescence_witness']['total_processes'] >= 2
+        phases = outer['transcript_frames']
+        assert [f['phase'] for f in phases] == ['parent', 'fresh', 'inner_quiesce', 'inner_terminal', 'parent_compare', 'terminal']
+        assert phases[2]['stamp'] <= inner['quiesce_started_at'] and inner['close_attempts_finished_at'] <= phases[3]['stamp']
+        observation = json.loads((root/'parent/parent_observation.json').read_bytes())
+        assert [m['stage'] for m in observation['input_bookends_before_publication']] == ['G0', 'G2']
+        assert 'G3' not in observation and observation['saved_P1_parent_adoption_verified'] is False
+    else:
+        assert (root/'diagnostics/failure.json').exists()
+        assert (root/'parent/parent_observation.json').exists() is (case == 'g3_error')
+
+
+def test_role_outer_launcher_corruption_is_rejected_against_live_image(tmp_path, monkeypatch):
+    import os
+    original = cli._publish_role_target
+    def corrupt(store, role, name, raw, **kwargs):
+        result = original(store, role, name, raw, **kwargs)
+        if name == 'worker/launcher.json':
+            path = store.root/name; before = path.stat(); value = cli.parse(raw); value['exit_code'] = 9
+            changed = cli.canonical(value); assert len(changed) == len(raw)
+            path.write_bytes(changed); os.utime(path, ns=(before.st_atime_ns, before.st_mtime_ns))
+        return result
+    monkeypatch.setattr(cli, '_publish_role_target', corrupt)
+    result = cli.run_ordinary_role_graph(tmp_path/'output')
+    assert result['ordinary_graph_completed'] is False and result['error']['message'] == 'saved outer process differs from live owner'
+    _capture_role_graph('outer_launcher_corruption', result)
+
+
+def test_role_late_payload_drift_preserves_published_observation_but_refuses_return(tmp_path, monkeypatch):
+    original = cli._role_input_bookend
+    def drift(store, stage, held=None):
+        result = original(store, stage, held)
+        if stage == 'G3':
+            target = store.root/'worker/fresh/metrics.json'; value = cli.parse(target.read_bytes()); value['result'] = 999
+            target.write_bytes(cli.canonical(value))
+        return result
+    monkeypatch.setattr(cli, '_role_input_bookend', drift)
+    result = cli.run_ordinary_role_graph(tmp_path/'output')
+    assert result['ordinary_graph_completed'] is False and result['observation_pin'] is not None
+    assert result['error']['message'] == 'validated role core changed after final publication'
+    _capture_role_graph('late_payload_drift', result)
+
+
+def test_role_constructor_and_publication_cleanup_layers_remain_available(role_store, monkeypatch):
+    import pickle
+    owner = _StageUnitOwner()
+    primary = cli.StageConstructionUnresolved(owner, ValueError('constructor original'),
+        [dict(layer='quiesce', type='OSError', message='quiesce secondary')])
+    def fail(*args, **kwargs): raise primary
+    monkeypatch.setattr(cli, '_construct_stage_owner', fail)
+    with pytest.raises(cli.RoleExecutionUnresolved) as found: cli._run_role_controller(role_store)
+    assert found.value.primary is primary and found.value.primary.owner is owner
+    image = json.loads((role_store.root/'diagnostics/failure.json').read_bytes())['error']
+    assert image['construction_primary']['message'] == 'constructor original'
+    assert image['cleanup_errors'][0]['message'] == 'quiesce secondary'
+    assert role_store.child_consumed is True
+    with pytest.raises(TypeError, match='cannot be serialized'): pickle.dumps(found.value)
+
+
+def _role_fake_open_stage():
+    from types import SimpleNamespace
+    value = dict(stage_process_observed_successfully=False, job_quiet_confirmed=False)
+    stage = SimpleNamespace(owner=SimpleNamespace(_job=None, _process=None, _thread=None,
+        _members={(7, 9): 123}, _info=SimpleNamespace(process=None, thread=None)),
+        channel=SimpleNamespace(_map=None, _mutex=None, _view=None), startup=b'{"unit":true}',
+        last_observation=value, last_image=cli.canonical(value))
+    return stage
+
+
+def test_role_controller_retains_descendant_only_handle_capability(role_store, monkeypatch):
+    stage = _role_fake_open_stage()
+    monkeypatch.setattr(cli, '_create_role_owner', lambda *args, **kwargs: stage)
+    monkeypatch.setattr(cli, '_watch_stage', lambda *args, **kwargs: stage.last_observation)
+    with pytest.raises(cli.RoleExecutionUnresolved) as found: cli._run_role_controller(role_store)
+    assert found.value.stage is stage and found.value.stage.owner._members == {(7, 9): 123}
+    assert found.value.primary.args == ('parent role unsuccessful or unknown',)
+    stage.owner._members.clear(); assert cli._role_stage_still_open(stage) is False
+    stage.owner._info.thread = 345; assert cli._role_stage_still_open(stage) is True
+    stage.owner._info.thread = None
+
+
+@pytest.mark.parametrize('role', ['controller', 'parent'])
+def test_role_wrapper_keeps_watch_primary_and_stage_close_secondary(role_store, monkeypatch, role):
+    stage = _role_fake_open_stage()
+    def close(): raise OSError('stage close secondary')
+    stage.close = close
+    def watch(*args, **kwargs): raise ValueError('watch primary')
+    monkeypatch.setattr(cli, '_create_role_owner', lambda *args, **kwargs: stage)
+    monkeypatch.setattr(cli, '_watch_stage', watch)
+    if role == 'parent':
+        from types import SimpleNamespace
+        parent = _role_store_as(role_store, 'parent')
+        monkeypatch.setattr(cli, '_role_reconstruct', lambda *args: (b'{"unit":true}', None))
+        run = lambda: cli._run_parent_role(parent, SimpleNamespace(enter=lambda phase: None))
+    else: run = lambda: cli._run_role_controller(role_store)
+    with pytest.raises(cli.RoleExecutionUnresolved) as found: run()
+    current = found.value.primary if isinstance(found.value.primary, cli.RoleExecutionUnresolved) else found.value
+    assert current.primary.args == ('watch primary',) and current.stage is stage
+    assert current.cleanup_errors[0][1].args == ('stage close secondary',)
+    normalized = cli._stage_error(current)
+    assert normalized['role_primary']['message'] == 'watch primary'
+    assert normalized['cleanup_errors'][0]['message'] == 'stage close secondary'
+    stage.owner._members.clear()
