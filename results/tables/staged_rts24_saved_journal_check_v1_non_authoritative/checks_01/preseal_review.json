@@ -1,0 +1,59 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "closed_findings": [
+    {
+      "finding": "journal get normalization added 13 uncounted typed packs",
+      "origin": "self_observed_counter_failure",
+      "resolution": "E27 includes explicit14 and normalization13; B105+E27+join23=155",
+      "severity": "Low",
+      "tests": "chain_04 exact typed_pack counters; chain_01 failure retained"
+    },
+    {
+      "finding": "trusted-binding matrix omitted failure_sha and closed",
+      "origin": "independent_review",
+      "resolution": "all nine fields tested, including internally consistent wrong failure tuple and closed=False",
+      "severity": "Medium",
+      "tests": "bindings_02 nine trusted-field cases"
+    },
+    {
+      "finding": "external anchor, full pin map and fixture not in final caller bookend",
+      "origin": "independent_review",
+      "resolution": "freeze source/files/fixture/anchor raw pin and metadata expectations; reread anchor after E; shared image rejects late drift",
+      "severity": "Medium",
+      "tests": "six caller-bookend seam cases including same-byte replacement plus changed identity expectation"
+    },
+    {
+      "finding": "24 related tests reached near 90-second cap",
+      "origin": "independent_review",
+      "resolution": "fixed collected nodeids split into disjoint groups12+12 with original90 caps; old near-cap pass preserved",
+      "severity": "Low",
+      "tests": "related_02a/b union exactly24"
+    }
+  ],
+  "closed_packaging_findings": [
+    {
+      "finding": "raw whitespace exception manifest lacked its own bound pin",
+      "resolution": "exception manifest included in support_pins, checked before using its three literal-path pins",
+      "severity": "Low"
+    }
+  ],
+  "formal_result": false,
+  "kind": "read_only_PRE_SEAL_findings",
+  "official_verdict": null,
+  "receipt": null,
+  "remaining_findings": [],
+  "resource_admission": false,
+  "reviewed_call_accounting": "compile42/import21; audit33/history85; pack155; selected source2080/P1 content4319/external anchor1",
+  "reviewer": "sol_reviewer; root/terminal_budget_audit; read only, no subdelegation/native/trajectory rerun",
+  "seal": null,
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_saved_journal_check_contract_v1.md": {
+      "bytes": 6068,
+      "sha256": "55beecb99cb591354cd2bf97fb92a23cdac09a122256559cc0d0c79b9b16c356"
+    },
+    "tests/test_staged_rts24_saved_journal_check_v1.py": {
+      "bytes": 12790,
+      "sha256": "6703ec2312a5e0ae8c24e8d1bdbf9922f62e72ae2f3b21430c9d08175abbfcd3"
+    }
+  }
+}

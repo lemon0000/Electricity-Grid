@@ -1,0 +1,47 @@
+{
+  "argv": [
+    "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/test_staged_rts24_journal_v2.py::test_two_hour_scientific_state_unchanged_and_fresh_keyset_matches[instantaneous]",
+    "tests/test_staged_rts24_journal_v2.py::test_two_hour_scientific_state_unchanged_and_fresh_keyset_matches[fixed_headroom]",
+    "tests/test_staged_rts24_journal_v2.py::test_two_hour_scientific_state_unchanged_and_fresh_keyset_matches[full_temporal]",
+    "tests/test_staged_rts24_journal_v2.py::test_deleted_genesis_fixture_closes_before_planning",
+    "tests/test_staged_rts24_journal_v2.py::test_deleted_prior_hour_payload_or_state_cannot_be_adopted_over[payload_ref]",
+    "tests/test_staged_rts24_journal_v2.py::test_deleted_prior_hour_payload_or_state_cannot_be_adopted_over[state_ref]",
+    "tests/test_staged_rts24_journal_v2.py::test_old_object_deleted_during_append_never_adopts_candidate[cas]",
+    "tests/test_staged_rts24_journal_v2.py::test_old_object_deleted_during_append_never_adopts_candidate[entry]",
+    "tests/test_staged_rts24_journal_v2.py::test_forged_session_inventory_cannot_hide_a_deleted_object",
+    "tests/test_staged_rts24_journal_v2.py::test_trusted_keyset_and_unknown_publication_bind_complete_closure",
+    "tests/test_staged_rts24_journal_v2.py::test_object_deleted_during_prepare_closes_without_returning_a_plan",
+    "tests/test_staged_rts24_journal_v2.py::test_prior_root_deleted_during_append_never_adopts[cas-genesis.json]",
+    "-x",
+    "-q",
+    "-rP",
+    "--tb=short",
+    "--durations=5",
+    "-p",
+    "no:cacheprovider",
+    "-o",
+    "tmp_path_retention_count=100000",
+    "-o",
+    "tmp_path_retention_policy=all"
+  ],
+  "exit_code": 0,
+  "scope": "ordinary bounded unit checks; no solver/native/scientific execution",
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_saved_journal_check_contract_v1.md": {
+      "bytes": 6068,
+      "sha256": "55beecb99cb591354cd2bf97fb92a23cdac09a122256559cc0d0c79b9b16c356"
+    },
+    "tests/test_staged_rts24_saved_journal_check_v1.py": {
+      "bytes": 12790,
+      "sha256": "6703ec2312a5e0ae8c24e8d1bdbf9922f62e72ae2f3b21430c9d08175abbfcd3"
+    }
+  },
+  "source_pins_unchanged": true,
+  "timed_out": false,
+  "timeout_seconds": 90,
+  "wall_seconds": 45.05715649999911
+}

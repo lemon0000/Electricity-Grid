@@ -1,0 +1,38 @@
+{
+  "argv": [
+    "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/test_staged_rts24_saved_journal_check_v1.py",
+    "-k",
+    "exact_chain",
+    "-x",
+    "-q",
+    "-rP",
+    "--tb=short",
+    "--durations=5",
+    "-p",
+    "no:cacheprovider",
+    "-o",
+    "tmp_path_retention_count=100000",
+    "-o",
+    "tmp_path_retention_policy=all"
+  ],
+  "exit_code": 1,
+  "scope": "ordinary bounded unit checks; no solver/native/scientific execution",
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_saved_journal_check_contract_v1.md": {
+      "bytes": 5217,
+      "sha256": "298f4a03448e6f5c610ae766db0351544619b7100f807b402d7ad42aaf3d5389"
+    },
+    "tests/test_staged_rts24_saved_journal_check_v1.py": {
+      "bytes": 9866,
+      "sha256": "227fc3debf1a0ea04f164e02bfe1cb295647a2606dc9a36c482f1d426b4fe78a"
+    }
+  },
+  "source_pins_unchanged": true,
+  "timed_out": false,
+  "timeout_seconds": 90,
+  "wall_seconds": 32.07954720000089
+}

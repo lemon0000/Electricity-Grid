@@ -1,0 +1,17 @@
+F
+================================== FAILURES ===================================
+__ test_saved_P1_raw_prefix_and_trusted_journal_reopen_form_one_exact_chain ___
+tests\test_staged_rts24_saved_journal_check_v1.py:117: in test_saved_P1_raw_prefix_and_trusted_journal_reopen_form_one_exact_chain
+    assert packs=={'B':105,'E':14,'join':23}
+E   AssertionError: assert {'B': 105, 'E...7, 'join': 23} == {'B': 105, 'E...4, 'join': 23}
+E     
+E     Omitting 2 identical items, use -vv to show
+E     Differing items:
+E     {'E': 27} != {'E': 14}
+E     Use -v to get more diff
+============================= slowest 5 durations =============================
+26.67s call     tests/test_staged_rts24_saved_journal_check_v1.py::test_saved_P1_raw_prefix_and_trusted_journal_reopen_form_one_exact_chain
+
+(2 durations < 0.005s hidden.  Use -vv to show these durations.)
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 7 deselected in 30.68s
