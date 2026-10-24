@@ -1,0 +1,321 @@
+{
+  "F_launch_admitted": false,
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "closed_findings": [
+    {
+      "finding": "context omitted external caller metadata/identity image",
+      "id": "F01",
+      "resolution": "capture/hold and complete external caller core/SHA; same-byte identity cases",
+      "severity": "High"
+    },
+    {
+      "finding": "output/deadline scope could be rehashed to a different value",
+      "id": "F02",
+      "resolution": "fixed F output or isolated pytest mode; frozen output parent; started+180",
+      "severity": "High"
+    },
+    {
+      "finding": "argv could use paths from contextA and SHA fromB",
+      "id": "F03",
+      "resolution": "raw context/SHA only; actual entry/full argv checks",
+      "severity": "High"
+    },
+    {
+      "finding": "bootstrap imported project environment helper and omitted actual ENTRY",
+      "id": "F04",
+      "resolution": "stdlib environment parity and isolated import probe; actual main/source binding",
+      "severity": "Medium"
+    },
+    {
+      "finding": "metadata safety counts lacked explicit unknown/non-adoption status",
+      "id": "F05",
+      "resolution": "safety_only/content_readFalse/accounting unknown",
+      "severity": "Medium"
+    },
+    {
+      "finding": "global output naming could be used at inner/outer layer roots",
+      "id": "F06",
+      "resolution": "fixed globalO in held context; wrong-layer counterexamples",
+      "severity": "Medium"
+    },
+    {
+      "finding": "pure byte comparison could imply process/adoption verification",
+      "id": "F07",
+      "resolution": "payload_byte_equality_verified; both local process/adoption fields false",
+      "severity": "Medium"
+    },
+    {
+      "finding": "pytest context could propagate to production roles",
+      "id": "F08",
+      "resolution": "execution_context rejects test mode even with matching actual argv",
+      "severity": "Medium"
+    },
+    {
+      "finding": "mutable context and root could redirect safety monitoring",
+      "id": "F09",
+      "resolution": "immutable creating-PID/thread validated token plus fixed directory identity",
+      "severity": "Medium"
+    },
+    {
+      "finding": "both payloads could share semantic corruption and a correct caller label",
+      "id": "F10",
+      "resolution": "exact metrics/21refs/6prefix/trusted domain binding to external frozen caller image",
+      "severity": "High"
+    },
+    {
+      "finding": "failure exits lacked final complete input/source bookend",
+      "id": "F11",
+      "resolution": "final bookend on primary failure; preserve primary and bookend errors separately",
+      "severity": "Medium"
+    }
+  ],
+  "closed_packaging_findings": [
+    {
+      "finding": "24-node group hit90s cap",
+      "resolution": "retain timeout; predeclare disjoint12+12 with same90 cap and original total budget"
+    },
+    {
+      "finding": "archived test filenames could be collected by repository-wide pytest",
+      "resolution": "six source byte copies use .py.snapshot; first/final snapshot mappings retain exact hashes"
+    },
+    {
+      "finding": "pre-split process observation not independently archived",
+      "resolution": "report labels CIM as operator-only observation and makes no reproducible ownership/resource claim"
+    }
+  ],
+  "formal_result": false,
+  "kind": "independent_read_only_PRE_SEAL_component_findings",
+  "limitations": [
+    "stage-aware retained-owner timing unimplemented",
+    "nested owner/Job/quiet unimplemented",
+    "parent/fresh role orchestration and publication unimplemented",
+    "external trusted invocation and total supervisor/I-O controls unimplemented",
+    "no whole-workflow call or resource measurement"
+  ],
+  "new_F_workflow_executed": false,
+  "new_native_calls": 0,
+  "official_verdict": null,
+  "receipt": null,
+  "remaining_findings": [],
+  "resource_admission": false,
+  "reviewer": "sol_reviewer /root/f_scope_preseal",
+  "reviewer_source_pins": {
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py": {
+      "bytes": 18251,
+      "sha256": "70f2579f8eb7aa805938794b012d5e8ec8b898ab3e64799f6a663239a1779e9f"
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py": {
+      "bytes": 17247,
+      "sha256": "26b919e385f9d7042587db490dab694fc5bf1643665ab4bf94a1c9bac8087396"
+    },
+    "tests/test_staged_rts24_saved_fresh_adoption_v1.py": {
+      "bytes": 18436,
+      "sha256": "e710f05e2533db35546537052d1d630da7caf91a397d35bbb4bf50550c086a3a"
+    }
+  },
+  "scientific_evidence_adopted": false,
+  "seal": null,
+  "support_pins": {
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/adapter_01.exit.json": {
+      "bytes": 8569,
+      "sha256": "025dd09d038b21287c0ad00dd843c7ffc2e37c1399079a21ddf1ca59ff62903e"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/adapter_01.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/adapter_01.stdout.log": {
+      "bytes": 1288,
+      "sha256": "10b4169a590d56752b497ccc435ed11f66ec7003d37c914d61dd518093cf489b"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/baseline_snapshot.json": {
+      "bytes": 200,
+      "sha256": "f711e1fb26caaaf097ccd4a69dd2cfd21b5ae4774c77328b5d21c99beaa8cf2d"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/chain_bindings_03.exit.json": {
+      "bytes": 14699,
+      "sha256": "87c7d6c5ff1e1b197b8758e26e1cdd348217bdc77d3e1910d0ff4b6c21e0a368"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/chain_bindings_03.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/chain_bindings_03.stdout.log": {
+      "bytes": 23,
+      "sha256": "c75bbdfbbfd3ec4436b2111bf5804164f661e8a7de450c3eddfb4bd41eb57ed5"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/chain_bindings_04a.exit.json": {
+      "bytes": 11427,
+      "sha256": "ad469c9c9d77af6c89e271b85e7455dd3fb9e0370c760c3113a5538eadfde5b0"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/chain_bindings_04a.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/chain_bindings_04a.stdout.log": {
+      "bytes": 966,
+      "sha256": "9809b850402342d116a6ff71e3dc4a05d569bead903d14046d86d2cc593cf74f"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/chain_bindings_04b.exit.json": {
+      "bytes": 11813,
+      "sha256": "c367acc71c8214f23d5f6a5aedf6d7a59d7515def6c4560fd61b978d6d47e1cc"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/chain_bindings_04b.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/chain_bindings_04b.stdout.log": {
+      "bytes": 1047,
+      "sha256": "aafeaf5737de5626ab995f84511389ae988a60903dc6cc1dfbda65dcece243d5"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/collection_01.exit.json": {
+      "bytes": 8862,
+      "sha256": "d826326b5054e7e441c12df670b97fe93495e6986122314953dbb4eb4fcbcfa7"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/collection_01.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/collection_01.stdout.log": {
+      "bytes": 8165,
+      "sha256": "3227d73a3a015bb579b4ce6794ba5efc5ce54cf8bb3f0af721a7241365735f12"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/collection_02.exit.json": {
+      "bytes": 13319,
+      "sha256": "8fe95418e24cc196ffca313b271ea021670083101a447cf56304377a57e6c169"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/collection_02.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/collection_02.stdout.log": {
+      "bytes": 12024,
+      "sha256": "12162d24ec5241b9451f8ec4bfbc42b9217fa0aeabf4d040ee24613e25c72eee"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/component_source_pins.json": {
+      "bytes": 7502,
+      "sha256": "029d489f23e0c98ed7ca3533f0340fd18d4b14d3f7a4e3928aab2f7a776d71d2"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/disabled_entry_01.exit.json": {
+      "bytes": 671,
+      "sha256": "1102e5d30080dd2f53ce8052764775ac3bb4a3b3f07db03cc7c8b1c080e11418"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/disabled_entry_01.stderr.log": {
+      "bytes": 126,
+      "sha256": "6800d3dc4b942ad1410a6350d2a1f5c3969c2e1129e682e1964b6f0ba600f5e7"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/disabled_entry_01.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/document_checks.json": {
+      "bytes": 4365,
+      "sha256": "4304e96d5be3d329d45c5dd4a3cd1b7c4391beb70492805184df9c5d03750a18"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/draft_01_before_preseal_fixes/experiments/staged_rts24_saved_fresh_adoption_v1.py.snapshot": {
+      "bytes": 13353,
+      "sha256": "b1247a58b1893957a48b9bce13560cc9434dc1ea7938fc74c41bee4f5e2a2b9b"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/draft_01_before_preseal_fixes/src/staged_rts24_saved_fresh_adoption_v1.py.snapshot": {
+      "bytes": 14302,
+      "sha256": "ff2ebe07622a27a5b98f805b7bc248c3bdfb6c57f43d3a3077f09cf55d93a77c"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/draft_01_before_preseal_fixes/tests/test_staged_rts24_saved_fresh_adoption_v1.py.snapshot": {
+      "bytes": 10784,
+      "sha256": "256b7ab115194101792d6f645ce1166b9c1de6497ed8abc03d75323dfa890915"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/final_draft_snapshot/experiments/staged_rts24_saved_fresh_adoption_v1.py.snapshot": {
+      "bytes": 18251,
+      "sha256": "70f2579f8eb7aa805938794b012d5e8ec8b898ab3e64799f6a663239a1779e9f"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/final_draft_snapshot/src/staged_rts24_saved_fresh_adoption_v1.py.snapshot": {
+      "bytes": 17247,
+      "sha256": "26b919e385f9d7042587db490dab694fc5bf1643665ab4bf94a1c9bac8087396"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/final_draft_snapshot/tests/test_staged_rts24_saved_fresh_adoption_v1.py.snapshot": {
+      "bytes": 18436,
+      "sha256": "e710f05e2533db35546537052d1d630da7caf91a397d35bbb4bf50550c086a3a"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/historical_draft_snapshot_01.json": {
+      "bytes": 1282,
+      "sha256": "f77047d117303060b3274ef0fe7fd3d1e9ad3da9c65fac382a354fb733ef1794"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/navigation_before.json": {
+      "bytes": 1160,
+      "sha256": "8efa6c07cb0d3f713111022db16258d700dc06bbd00e072dcf46feeede3f5456"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/ordinary_check_summary.json": {
+      "bytes": 23528,
+      "sha256": "864970b9347653e7c5fb9bbee5d150e439316f83db5c62d1f8cf42853e399cb0"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/preservation_inventory.json": {
+      "bytes": 192098,
+      "sha256": "ea57a446ea2e9d02ce00f4eede27837a768d045c76f05ba8b99bb4ca33289a25"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/protocol_02.exit.json": {
+      "bytes": 8577,
+      "sha256": "4bc0991c1d49df42ab63033a3c621d67bc1b6229ae8aec8960efc5c3534b13ee"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/protocol_02.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/protocol_02.stdout.log": {
+      "bytes": 1044,
+      "sha256": "a1e96ce85bd15a70d6a419e50344b28a2e4c04fd79ce5a85d9444012e652ea22"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/protocol_03.exit.json": {
+      "bytes": 27513,
+      "sha256": "347d1f0eb802101560d8b60ee2be69543318a080cdcbff0d71f4ea5c78346ad2"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/protocol_03.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/protocol_03.stdout.log": {
+      "bytes": 990,
+      "sha256": "9e1a26ef64855d72c10b5cbfbe8b3ef657a0ecc5db83a3f0d36811b5ab2f4b63"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/raw_log_whitespace_exceptions.json": {
+      "bytes": 5136,
+      "sha256": "b45101975f6dd5a29d86cc4205576cb49a5c83cf85836b2f846e1421f6cdf570"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/saved_checks.py": {
+      "bytes": 5483,
+      "sha256": "31396a7a7ded47bdbf49c8762b2de94c7b2b8356700422edd38c0d1e936d6d07"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/saved_integrity_01.exit.json": {
+      "bytes": 690,
+      "sha256": "7d783e5cbc83a512d7f5b2e35b1fd2958d02083a16748f009b4213018c76760f"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/saved_integrity_01.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/saved_integrity_01.stdout.log": {
+      "bytes": 939,
+      "sha256": "dfe2c7e31fbb9e312fe8a9176e735f73099b3d13e6e1919082a92ad76d10213a"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/split_admission_04.json": {
+      "bytes": 11690,
+      "sha256": "b949dfa325c9d38c5b4d2142545dd72fd3b4223dcd72c556de31745761f17bb2"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/tested_draft_snapshot.json": {
+      "bytes": 1256,
+      "sha256": "ab86f2a2bbf1f848649f804e734d42818c7a69923de24475ecfc20275027dbd6"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/verify_01.exit.json": {
+      "bytes": 821,
+      "sha256": "1a81ba0e2d997dd72ebb8d657f1b201dc09faa4a8d422c21336c496e39fb3281"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/verify_01.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/tables/staged_rts24_saved_fresh_adapter_v1_non_authoritative/checks_01/verify_01.stdout.log": {
+      "bytes": 806,
+      "sha256": "5daf798d543ecbaa44c4d8ea5dc6a865037cac70a5c20acb5f931e943f77677a"
+    }
+  },
+  "writer": "root only"
+}

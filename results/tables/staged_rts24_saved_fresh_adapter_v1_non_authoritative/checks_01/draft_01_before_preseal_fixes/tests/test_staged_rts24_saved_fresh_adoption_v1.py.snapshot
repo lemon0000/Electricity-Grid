@@ -1,0 +1,205 @@
+"""Saved F adapter/protocol checks; no new five-hour fresh execution."""
+from copy import deepcopy
+from hashlib import sha256
+import json
+from pathlib import Path
+import sys
+import time
+
+import pytest
+
+from src import staged_rts24_saved_fresh_adoption_v1 as f
+from experiments import staged_rts24_saved_fresh_adoption_v1 as cli
+
+
+@pytest.fixture
+def deny_scientific_effects(monkeypatch):
+    import highspy
+    import pyomo.environ as pyo
+    import subprocess
+    def denied(*args, **kwargs): pytest.fail('saved adapter requested native/spawn/journal/publication')
+    for module, name in ((pyo, 'SolverFactory'), (highspy, 'Highs'), (subprocess, 'Popen'),
+            (f.prefix.point.backend, 'make_model'), (f.prefix.point.backend, 'call_highs'),
+            (f.codec.EvidenceStore, 'put'), (f.codec, 'publish'), (f.journal, 'publish')):
+        monkeypatch.setattr(module, name, denied)
+    for name in ('create_session', 'begin_step', 'commit_step', 'finish'):
+        monkeypatch.setattr(f.journal, name, denied)
+
+
+@pytest.fixture
+def payload():
+    prior = f.ROOT/'results/tables/staged_rts24_saved_journal_check_v1_non_authoritative/checks_01'
+    observed = json.loads((prior/'saved_journal_observation.json').read_bytes())
+    value = dict(schema=f.SCHEMA, authority='DRAFT_NONAUTHORITATIVE', scope=f.SCOPE,
+        context_sha='a'*64, caller_sha='b'*64, source_sha='c'*64, input_pins_sha='d'*64,
+        metrics=json.loads((f.P1/'fresh.json').read_bytes())['metrics'], evidence_refs=observed['evidence_refs'],
+        prefix_bindings=[json.loads((f.P1/f'trusted_prefixes/prefix_{n:06d}.json').read_bytes()) for n in range(6)],
+        trusted_binding=json.loads((f.P1/'trusted_binding.json').read_bytes()), **f.GATES)
+    f.validate_payload(value)
+    return value
+
+
+def compare(left, right):
+    return f.compare_payloads(f.codec.canonical(left), f.codec.canonical(right),
+        context_sha='a'*64, source_sha='c'*64, input_pins_sha='d'*64)
+
+
+def test_complete_metrics_comparison_retains_missing_input_and_closed_gates(payload):
+    result = compare(payload, deepcopy(payload))
+    assert result['comparison_verified'] is True and result['point_references'] == 21
+    assert all(result[k] is False for k in f.GATES)
+    assert payload['metrics']['summary']['coverage_complete'] is False
+    assert payload['metrics']['summary']['method_conditions_satisfied'] is None
+    assert set(payload['metrics']) == set(f.METRIC_FIELDS) and len(f.METRIC_FIELDS) == 19
+
+
+@pytest.mark.parametrize('field', f.METRIC_FIELDS)
+def test_any_complete_metric_drift_blocks_comparison(payload, field):
+    changed = deepcopy(payload)
+    original = changed['metrics'][field]
+    if original is None: changed['metrics'][field] = 'changed'
+    elif type(original) is bool: changed['metrics'][field] = not original
+    elif type(original) is int: changed['metrics'][field] = original+1
+    elif type(original) is list: changed['metrics'][field] = ['changed']
+    elif type(original) is dict: changed['metrics'][field]['changed'] = True
+    else: changed['metrics'][field] = '0'*64
+    with pytest.raises(ValueError): compare(payload, changed)
+
+
+@pytest.mark.parametrize('field', ['context_sha', 'source_sha', 'input_pins_sha', 'caller_sha', 'evidence_refs', 'prefix_bindings', 'trusted_binding'])
+def test_common_payload_binding_and_evidence_drift_blocks_comparison(payload, field):
+    changed = deepcopy(payload)
+    if field == 'evidence_refs': changed[field][20]['evidence_ref'] = '0'*64
+    elif field == 'prefix_bindings': changed[field][5]['known_state_sha'] = '0'*64
+    elif field == 'trusted_binding': changed[field]['closed'] = False
+    else: changed[field] = '0'*64
+    with pytest.raises(ValueError): compare(payload, changed)
+
+
+@pytest.mark.parametrize('fault', ['extra', 'missing', 'duplicate', 'nonfinite', 'pretty'])
+def test_payload_parsing_requires_closed_canonical_json(payload, fault):
+    value = deepcopy(payload)
+    if fault == 'extra': value['extra'] = True
+    elif fault == 'missing': del value['metrics']['independent_audit']
+    if fault == 'duplicate': raw = b'{"x":1,"x":2}'
+    elif fault == 'nonfinite': raw = b'{"x":NaN}'
+    elif fault == 'pretty': raw = json.dumps(value, indent=2).encode()
+    else: raw = f.codec.canonical(value)
+    with pytest.raises(ValueError): f.compare_payloads(raw, raw, context_sha='a'*64, source_sha='c'*64, input_pins_sha='d'*64)
+
+
+def test_bootstrap_parser_matches_original_codec_for_saved_payload(payload):
+    raw = f.codec.canonical(payload)
+    assert cli.parse(raw) == f.codec.parse(raw) == payload
+    assert cli.canonical(payload) == raw
+
+
+@pytest.mark.parametrize('raw', [b'{"x":1,"x":2}', b'{"x":NaN}', b'{}\n', b'['*257+b']'*257])
+def test_bootstrap_parser_rejects_invalid_images_before_scientific_imports(raw):
+    with pytest.raises(ValueError): cli.parse(raw)
+
+
+def test_frozen_source_inventory_and_planned_set_are_exact():
+    assert cli.source_names() == f.SOURCES and len(f.E_SOURCES) == 45 and len(f.SOURCES) == 49
+    assert len(cli.TARGETS) == 17 and len(set(cli.TARGETS)) == 17
+    assert len(cli.RECORDS) == 4 and 4*cli.CAPS['record_bytes'] == 524288
+    assert sum(cli.STAGE_SECONDS.values()) == cli.CAPS['wall_seconds'] == 180
+
+
+def test_source_inventory_is_independently_pinned(tmp_path, monkeypatch):
+    changed = tmp_path/'inherited.json'
+    data = json.loads(cli.INHERITED.read_bytes())
+    old = next(iter(data)); data['src/forged.py'] = data.pop(old)
+    changed.write_bytes(json.dumps(data).encode())
+    monkeypatch.setattr(cli, 'INHERITED', changed)
+    with pytest.raises(ValueError, match='frozen inherited'): cli.source_names()
+
+
+@pytest.fixture
+def context(tmp_path):
+    raw = cli.make_context(tmp_path/'output', started=time.monotonic())
+    return cli.parse(raw)
+
+
+def test_context_binds_actual_compute_executable_inputs_sources_and_budget(context):
+    raw = cli.canonical(context)
+    assert cli.check_context(raw, sha256(raw).hexdigest()) == context
+    assert context['executable']['path'] == str(Path(sys.executable).absolute())
+    assert context['input_files'] == json.loads(cli.read(f.ANCHOR))['p1_files']
+    assert all(context[k] is False for k in cli.GATES)
+    for role in ('supervise', 'parent', 'fresh'):
+        argv = cli.argv_for(role, context, sha256(raw).hexdigest())
+        assert argv[:4] == [str(cli.EXE), '-B', '-s', str(cli.ROOT/cli.NEW_SOURCES[1])]
+        assert '--'+role in argv
+    assert cli.argv_for('fresh', context, 'a'*64)[-1] == str(Path(context['output_root'])/'worker/fresh')
+
+
+@pytest.mark.parametrize('fault', ['source', 'exe', 'environment', 'input_map', 'budget', 'expired', 'extra', 'overlap'])
+def test_context_drift_or_wrong_binding_is_rejected(context, fault):
+    value = deepcopy(context)
+    if fault == 'source': value['source_pins'][cli.NEW_SOURCES[0]]['sha256'] = '0'*64
+    elif fault == 'exe': value['executable']['pin']['sha256'] = '0'*64
+    elif fault == 'environment': value['environment']['PYTHONHASHSEED'] = 'changed'
+    elif fault == 'input_map': value['input_files']['fresh.json']['sha256'] = '0'*64
+    elif fault == 'budget': value['limits']['wall_seconds'] = 181
+    elif fault == 'expired': value['deadline'] = 1.0
+    elif fault == 'extra': value['grant'] = True
+    else: value['output_root'] = str(cli.P1/'output')
+    raw = cli.canonical(value)
+    with pytest.raises(ValueError): cli.check_context(raw, sha256(raw).hexdigest())
+
+
+def test_unknown_quiet_safety_accounting_reads_metadata_only(tmp_path, monkeypatch):
+    target = tmp_path/'worker/fresh/stdout.log'; target.parent.mkdir(parents=True); target.write_bytes(b'log')
+    monkeypatch.setattr(cli, 'read', lambda *a, **k: pytest.fail('safety accounting read artifact content'))
+    result = cli.safety_accounting(tmp_path)
+    assert result['bytes'] == 3 and result['files'] == 1
+    assert result['remaining_reserved_bytes'] == 524288 and result['remaining_reserved_files'] == 4
+
+
+@pytest.mark.parametrize('fault', ['extra', 'extra_dir', 'oversized_record', 'record_conflict', 'hardlink', 'storage'])
+def test_safety_accounting_rejects_unbounded_or_unexpected_outputs(tmp_path, fault):
+    if fault == 'extra': (tmp_path/'extra').write_bytes(b'x')
+    elif fault == 'extra_dir': (tmp_path/'extra').mkdir()
+    elif fault == 'hardlink':
+        import os
+        first = tmp_path/'worker/parent.stdout.log'; first.parent.mkdir(); first.write_bytes(b'x')
+        os.link(first, first.with_name('parent.stderr.log'))
+    else:
+        target = tmp_path/'worker/launcher.json'; target.parent.mkdir()
+        if fault == 'record_conflict':
+            target.write_bytes(b'{}'); target.with_name(target.name+'.pending').write_bytes(b'{}')
+        elif fault == 'oversized_record': target.write_bytes(b'x'*131073)
+        else: target.with_name('parent.stdout.log').write_bytes(b'x'*(cli.CAPS['output_bytes']-524288+1))
+    with pytest.raises(ValueError): cli.safety_accounting(tmp_path)
+
+
+def test_record_pending_consumes_one_slot_without_double_charging(tmp_path):
+    target = tmp_path/'worker/fresh_parent/parent_observation.json.pending'
+    target.parent.mkdir(parents=True); target.write_bytes(b'x'*100)
+    result = cli.safety_accounting(tmp_path)
+    assert result['remaining_reserved_bytes'] == 524188 and result['remaining_reserved_files'] == 3
+    assert result['bytes']+result['remaining_reserved_bytes'] == 524288
+
+
+def test_one_saved_parent_adapter_matches_all_original_metrics_without_effects(deny_scientific_effects):
+    sources = cli.source_pins()
+    held = f.hold(sources)
+    before = {name: f.mechanical.pin((f.P1/name).read_bytes()) for name in held.files}
+    result = f.replay(held, 'a'*64)
+    assert result['metrics'] == json.loads((f.P1/'fresh.json').read_bytes())['metrics']
+    assert len(result['evidence_refs']) == 21 and len(result['prefix_bindings']) == 6
+    assert all(result[k] is False for k in f.GATES)
+    assert before == {name: f.mechanical.pin((f.P1/name).read_bytes()) for name in held.files}
+
+
+@pytest.mark.parametrize('field', ['files', 'source', 'fixture', 'anchor_identity', 'expectations', 'trusted'])
+def test_adapter_caller_image_rejects_late_expectation_mutation(deny_scientific_effects, field):
+    held = f.hold(cli.source_pins())
+    if field == 'files': held.files[next(iter(held.files))]['sha256'] = '0'*64
+    elif field == 'source': held.source[next(iter(held.source))]['sha256'] = '0'*64
+    elif field == 'fixture': object.__setattr__(held.fixture, 'source_identity', '0'*64)
+    elif field == 'anchor_identity': object.__setattr__(held, 'anchor_identity', (0, 0, 0, 0))
+    elif field == 'expectations': held.expectations['registration_sha'] = '0'*64
+    else: held.trusted['known_state_sha'] = '0'*64
+    with pytest.raises(ValueError, match='caller expectation'): f.bookend(held, inventory=False)

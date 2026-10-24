@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-25 F只读组件开发检查点：见[交接](continuation_handoff_20261025_saved_fresh_adapter.md)及[合同](staged_deliverability_c_saved_fresh_adapter_development_contract_v1.md)。原B/C/E parent五小时21点与完整19 metrics/21 refs/六prefix/trusted精确绑定，历史fresh额外对照；85新/9旧回归最终70＋12＋12终态通过。原24组合90s超时及早期draft日志保留，split预算预先核对，不放宽90帽；测试wall不作F资源准入。926旧路径/三导航旧body/P1全683保持，原source/输入无改。新3文件仍未seal draft，ENTRY非零禁用；完整F还需stage-aware owner、nested quiet、角色发布、trusted invocation和实际调用/整体资源，F_launch_admitted=false。全319/139/F-X、整包科学采用、原65s余量、C整体与D/E/resource/formal保持OPEN/false。
+
 2026-10-25 F范围与事前预算设计：见[交接](continuation_handoff_20261025_saved_fresh_scope_budget.md)及[设计](staged_deliverability_c_saved_fresh_adoption_scope_budget_v1.md)。只在保存P1五小时/21点和trusted journal范围设计新增fresh与最终父采用，D四代表行科学证据另列。parent/fresh各一次，单次180s、整个验证批次570s，新输出8MiB/64及两层四收尾记录512KiB；均为待实现上限。当前仅文档/标准库保存核验，911旧路径/三导航原正文/P1全683保持，没有真实F/native/P2。F_launch_admitted=false；exact source/exe/argv/owner、nested quiet、父端可执行deadline、合计资源及失败/发布成本待验证。原65s余量、全319/139/F-X/整包科学采用、C整体与D/E/resource/formal仍OPEN/false。
 
 2026-10-24 保存journal连接检查点：见[交接](continuation_handoff_20261024_saved_journal_check.md)和[合同](staged_deliverability_c_saved_journal_check_contract_v1.md)。局部E将原B/C五小时21点的原始数值重建与trusted reopen逐点typed SHA/最终state根连接，原missing_input/coveragefalse/双null保持。16新/24原回归，构模42/import21、audit33/历史row85、pack155、source2080/P1内容4319/外锚末读1已核，source/runtime与库内外完整书挡覆盖。836旧路径/三导航旧正文/P1全部683保持，无原src变化或新native/P2/长实验。下一步F真实fresh与父采用/失败发布；全319/139/F-X/科学采用、十小时/昂贵失败/full wall/RAM/storage、65s余量与C整体/D/E门禁仍OPEN。
