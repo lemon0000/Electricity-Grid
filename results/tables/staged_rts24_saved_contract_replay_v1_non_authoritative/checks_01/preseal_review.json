@@ -1,0 +1,52 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "closed_findings": [
+    {
+      "finding": "held row-size checked only after bounded content read",
+      "resolution": "existing codec 8MiB cap retained; actual stat size equals held bytes before size+1 bounded reader",
+      "severity": "Medium",
+      "tests": "size mismatch and actual >8MiB forbid row content reader calls"
+    },
+    {
+      "finding": "failed-firm stand-in semantics broader than original C",
+      "resolution": "original numeric import and D both reject invalid firm; legal-X false stand-in keeps firm valid and raw explicitly nonoptimal without KKT claim",
+      "severity": "Medium",
+      "tests": "original numeric invalid firm rejection; D stops before raw; original legal-X negative predicate only"
+    },
+    {
+      "finding": "inherited direct typed pack omitted from D cost table",
+      "resolution": "recorded and counted 5 per C success, 50 total",
+      "severity": "Low",
+      "tests": "saved_02 typed_pack counter"
+    },
+    {
+      "finding": "row file parent-directory identity lacked direct fault test",
+      "resolution": "isolated row_records parent and same-byte directory replacement tested",
+      "severity": "Low",
+      "tests": "row_directory replacement"
+    }
+  ],
+  "formal_result": false,
+  "kind": "read_only_PRE_SEAL_findings",
+  "official_verdict": null,
+  "receipt": null,
+  "remaining_findings": [],
+  "resource_admission": false,
+  "reviewed_call_accounting": "20 compile; 10 import; 2 hour_requests; 4 independent firm audits; 4 legal-X; 50 pack; 954 source, 1024 point and 2 row reads",
+  "reviewer": "sol_reviewer; root/terminal_budget_audit; read only, no subdelegation or trajectory/native rerun",
+  "seal": null,
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_saved_contract_replay_contract_v1.md": {
+      "bytes": 5501,
+      "sha256": "0605d0d424852d7850b7dff219c361f28610717a8cde645aa9caaca3bd5c6e12"
+    },
+    "src/staged_rts24_saved_contract_replay_v1.py": {
+      "bytes": 9931,
+      "sha256": "a5e8780aa5e4e0a86f1572925e5a85f4bbc009c75e779c54ba01ea1d6d865c69"
+    },
+    "tests/test_staged_rts24_saved_contract_replay_v1.py": {
+      "bytes": 20905,
+      "sha256": "7e0214a5edf1d500b774b990a5fa831d913e8ffcea52d533e24640322a4bfc8c"
+    }
+  }
+}
