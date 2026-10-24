@@ -1,0 +1,136 @@
+{
+  "F_launch_admitted": false,
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "checks_rerun_by_reviewer": false,
+  "closed_findings": [
+    {
+      "finding": "inner parent observation overlaps fresh worker",
+      "id": "F1",
+      "resolution": "worker/fresh_parent is physically independent and separately bookended",
+      "severity": "High",
+      "verified_by": "independent read-only design reinspection; no runtime test"
+    },
+    {
+      "finding": "top supervisor observer, logs, resources and tail boundary unspecified",
+      "id": "F2",
+      "resolution": "TrustedController plus external trusted invocation; self logs are out-of-band; exact return/publication limits explicit; launch remains false",
+      "severity": "High",
+      "verified_by": "independent read-only design reinspection; external owner not implemented"
+    },
+    {
+      "finding": "original single wall guard cannot enforce active40 plus cleanup5 plus terminal5",
+      "id": "F3",
+      "resolution": "independent P1 stage-aware retained-owner successor required; legacy guard unchanged; enforcement remains admission prerequisite",
+      "severity": "High",
+      "verified_by": "independent read-only design reinspection; stage-aware enforcement not implemented"
+    },
+    {
+      "finding": "unknown quiet zero-output-read wording conflicts with metadata safety scanning",
+      "id": "F4",
+      "resolution": "bounded metadata safety accounting allowed, artifact contents/full SHA inventory/science forbidden; separate future counters required",
+      "severity": "Medium",
+      "verified_by": "independent read-only design reinspection; no new fault test"
+    }
+  ],
+  "closed_packaging_findings": [
+    {
+      "finding": "one report sentence retained 19 targets",
+      "resolution": "report corrected to17 and final report SHA read back by reviewer",
+      "severity": "Low"
+    },
+    {
+      "finding": "generated JSON used Windows CRLF in strict diff check",
+      "resolution": "new generated JSON normalized to LF; four captured raw streams kept exact; literal-path format manifest binds their bytes",
+      "severity": "Low"
+    }
+  ],
+  "formal_result": false,
+  "implementation_admission_gaps": [
+    "three proposed implementation files absent",
+    "external trusted invocation and controller resource/exit/deadline ownership",
+    "nested Job complete member retention and quiet",
+    "40/50/180 stage-aware actual stop behavior",
+    "failure and publication windows",
+    "four record length oracles",
+    "actual full wall/RAM/storage",
+    "one new real F validation"
+  ],
+  "kind": "independent_read_only_PRE_SEAL_design_findings",
+  "new_F_fresh_process_executed": false,
+  "new_native_calls": 0,
+  "no_subdelegation": true,
+  "official_verdict": null,
+  "receipt": null,
+  "remaining_findings": [],
+  "request": "F fresh and final parent adoption; first fix scope and budget; package science, resource and formal gates remain closed",
+  "resource_admission": false,
+  "reviewer": "sol_reviewer /root/f_scope_preseal",
+  "reviewer_verified_pins": {
+    "docs/plan/continuation_handoff_20261025_saved_fresh_scope_budget.md": {
+      "bytes": 3938,
+      "sha256": "8b69ffc8084ac2ac31ac9ad91d6fd68568ac8fcf1729cc6f5861ae0cf2e9ac88"
+    },
+    "docs/plan/staged_deliverability_c_saved_fresh_adoption_scope_budget_v1.md": {
+      "bytes": 23924,
+      "sha256": "a1aa2abdcfdbd15958f703088fa94ed79a17cd830b9f6d5a1571a5f75e6a4a98"
+    },
+    "results/tables/staged_rts24_saved_fresh_adoption_plan_v1_non_authoritative/checks_01/document_checks.json": {
+      "bytes": 8469,
+      "sha256": "248a64cbcf32f407ea604ceb4c2cfc4226fab74d1fc037289d9c9e8902dd19ac"
+    },
+    "results/tables/staged_rts24_saved_fresh_adoption_plan_v1_non_authoritative/validation_report.md": {
+      "bytes": 3125,
+      "sha256": "a17d13380be5ed16f392f4388d325ff7ec2fbc6e9269027e89c9dfc70386b888"
+    }
+  },
+  "scientific_evidence_adopted": false,
+  "scientific_replay_executed": false,
+  "seal": null,
+  "support_pins": {
+    "results/tables/staged_rts24_saved_fresh_adoption_plan_v1_non_authoritative/checks_01/baseline_snapshot.json": {
+      "bytes": 399,
+      "sha256": "c18e0f7f533347135d91df8967d922dc78629a47da6282f320ade602eb89807c"
+    },
+    "results/tables/staged_rts24_saved_fresh_adoption_plan_v1_non_authoritative/checks_01/compute_python_01.exit.json": {
+      "bytes": 882,
+      "sha256": "0e13f4dc56b6048662390e1109700e7913e7b9b9d0286271ab8f3276d03bba20"
+    },
+    "results/tables/staged_rts24_saved_fresh_adoption_plan_v1_non_authoritative/checks_01/compute_python_01.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/tables/staged_rts24_saved_fresh_adoption_plan_v1_non_authoritative/checks_01/compute_python_01.stdout.log": {
+      "bytes": 939,
+      "sha256": "dfe2c7e31fbb9e312fe8a9176e735f73099b3d13e6e1919082a92ad76d10213a"
+    },
+    "results/tables/staged_rts24_saved_fresh_adoption_plan_v1_non_authoritative/checks_01/default_python_01.exit.json": {
+      "bytes": 866,
+      "sha256": "8d53342a22d3ec9a91426a9d05c6dffd53f2da5c24a7092eccdcd0b16637e049"
+    },
+    "results/tables/staged_rts24_saved_fresh_adoption_plan_v1_non_authoritative/checks_01/default_python_01.stderr.log": {
+      "bytes": 720,
+      "sha256": "82446723ea92efdca2323c8676d34be1d1fa095486f912e97f6b001898be4ccb"
+    },
+    "results/tables/staged_rts24_saved_fresh_adoption_plan_v1_non_authoritative/checks_01/default_python_01.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/tables/staged_rts24_saved_fresh_adoption_plan_v1_non_authoritative/checks_01/document_checks.json": {
+      "bytes": 8469,
+      "sha256": "248a64cbcf32f407ea604ceb4c2cfc4226fab74d1fc037289d9c9e8902dd19ac"
+    },
+    "results/tables/staged_rts24_saved_fresh_adoption_plan_v1_non_authoritative/checks_01/navigation_before.json": {
+      "bytes": 1160,
+      "sha256": "54551872c55f05217617aaea9352aabdd7729ba277bf6cea2ab2480ad6ff543c"
+    },
+    "results/tables/staged_rts24_saved_fresh_adoption_plan_v1_non_authoritative/checks_01/preservation_inventory.json": {
+      "bytes": 188861,
+      "sha256": "f7f35720f3b2bccb909408edd6f4c9b8c20d0b123470144e7b2f8fcb1b7c0211"
+    },
+    "results/tables/staged_rts24_saved_fresh_adoption_plan_v1_non_authoritative/checks_01/raw_log_format.json": {
+      "bytes": 1225,
+      "sha256": "e044cd2af1aae674d9a3dc965fe745e89fd008c4b333c7db7b48754d3ff70adb"
+    }
+  },
+  "writer": "root only"
+}

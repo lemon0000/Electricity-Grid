@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_journal_check_v1_non_authoritative\checks_01\saved_checks.py", line 137, in <module>
+    else:print(json.dumps(verify(),sort_keys=True,indent=2))
+                          ~~~~~~^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_journal_check_v1_non_authoritative\checks_01\saved_checks.py", line 122, in verify
+    assert prior.returncode==0 and prior.stderr==b'' and prior.stdout==(OUT/'prior_01.stdout.json').read_bytes()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
