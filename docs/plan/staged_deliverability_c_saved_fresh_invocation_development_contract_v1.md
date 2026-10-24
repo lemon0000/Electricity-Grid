@@ -1,0 +1,37 @@
+# C：F 外部调用方能力开发合同
+
+2026-10-25，DRAFT_NONAUTHORITATIVE。接续[角色交接](continuation_handoff_20261025_saved_fresh_roles.md)和[原F范围/预算](staged_deliverability_c_saved_fresh_adoption_scope_budget_v1.md)。root唯一writer，独立只读PRE_SEAL；原三个draft可迭代，已测snapshot/失败/历史全部保持。SF49不扩展，原science adapter、B/C/E、P1和guard不改。本轮不启动真实saved F、native或formal run。
+
+## 外部能力与协议
+
+外部host先arm一个真实broker OwnedChild/Job，并通过固定RAM确认ready；此时没有context或F输出。ready后standby仅1.5s，broker自行过期退出；caller有显式close/context manager，consume一次且失败不退款。ready接受后重新kernel采样并冻结PID、creation及image path，invoke前严格复核同一集合：broker外最多一个由GetSystemDirectoryW定位的conhost.exe，拒绝其他成员。arming是外部能力建立，费用/实际耗时另存，不宣称其自身构造阻塞已受它的监控。只有真实ready capability可invoke；不可用字典、文件或自报ready替代。invoke绝对时钟必须早于context创建，不能由worker重置。外部host active循环只做Kernel查询和固定RAM，不读源码/目录/输出、不构造下一actor。
+
+broker在该Job中准备context并独占发布O/context。它把exact canonical raw context和输出初始identity放入固定有界mailbox；host依据事先持有的request/source/exe/environment/fixture纯内存核对并ack同一context SHA。broker仅在该ack后构造controller，因而caller先持有context原字节/SHA，再发生controller构造与release。controller自己的Job包含parent/fresh；broker Job包含所有后代，其构造、native wait、同步发布阻塞都能由host的broker Job终止。arming前的外部base不能被偷称为本次F硬停止能力。
+
+mailbox用Windows create-only/Open-only pagefile mapping及mutex：header/request/ready/start/context/ack/controller binding/constructor probe/controller return/broker return十个固定slot，单slot唯一writer、commit-last、closed schema、SHA及creator PID/creation/nonce绑定。constructor probe仅在固定普通故障的构造函数内、native wait前写4096B slot，独立方向/nonce，不能当startup或success。context raw cap2MiB，metadata另有固定余量；两个return各128KiB，其余header/控制包固定小cap。ACK同时绑定request、offer、exact context、publication receipt、root/ancestor identities、host/broker identities与nonce；controller descriptor及实际argv绑定ACK SHA。broker exact CreateProcess输入在release前与最终quiet后双核。
+
+host/request→start→ack、broker/ready→context→binding、controller return、broker_terminal及constructor probe各有独立direction nonce/严格序列。broker_terminal复用broker return物理slot、序列固定0，payload区分success/failure并绑定实际progress连续前缀的逐slot pin及transcript SHA；failure仅允许ready、ready/context、ready/context/binding，缺失尾部逐slot必须全零，success必须完整三项并有controller return。被外部kill的阻塞允许没有terminal；不能补造。每slot只写一次；observer零等待busy/全零不计进展；writer及一次性actor bootstrap/bookend对依赖只允许固定100ms mutex等待，busy不能解释为缺失/损坏，也不重试actor或延长阶段。在取得mutex后看到非零但commit/length/SHA不完整的slot即永久未决，不当合法写中。abandoned/已接受slot变化永久未决。partial constructor/close保留实际view/HANDLE及原错。
+
+controller return必须在controller完整quiet/close后由broker读；broker return必须在broker完整quiet/close后由host读。外部返回需同时绑定held request、host已确认context、controller capture、两级实际process facts、返回SHA及caps；任何层失败均不产生verified。传输数据不替代kernel能力。协议记录属于external诊断，不新增F的17个targets或自证observer/采用记录。
+
+pre-START context空值和pre-ACK binding空值均须实际取得mutex，busy不能证明不存在：前者有界观察未决即不发START，后者本次poll不发ACK、等待下一次既有监控循环。quiet/close后、构造result前只读复核constructor probe，包括未被active poll接受的slot；constructor_wait须接受合法marker，其他case须证明全零，不得发ACK或推进context/binding。外部kill可使持锁actor留下abandoned mutex；保持不可序列化的实际capability和原始process observation，拒绝返回消费，不能转换成普通成功或伪造terminal。
+
+ordinary role_graph/invocation的root exit可能先于其系统console helper收尾：只在real_owner、两次最终sample PID并集除root外恰好最多1个PID、已有唯一retained PID/creation HANDLE，且kernel image精确匹配GetSystemDirectoryW/conhost.exe时，单列terminal_system_helpers及判断时刻并继续原完整quiet/close。任何额外/未知/非精确path或查询失败仍先kill并判root_exited_with_descendants；RSS/commit照计，不把helper分类当作app、quiet或采用成功。其他preset及production descriptor行为保持；历史stage合同/证据保留，本开发合同仅增加此ordinary OS-helper清理语义。START提交前重核standby，broker接受ACK及进入controller构造前重核prepare3s；诊断marker缺失不得覆盖更早的资源/monitor错误。
+
+外部active monitor错误以不可序列化armed capability强持原异常对象；_watch_stage完成原stage-channel清理及final bookend返回后，立即以该原错进入外部清理，不再消费InvocationMailbox、constructor marker、broker terminal或进行InvocationMailbox bookend。close错误作为secondary保留，不能覆盖先发资源/监测异常。普通phase_limit与没有monitor异常的故障仍按实际quiet和协议书挡分别记录，不能把close成功当作任何content消费许可。
+
+此处state commit绑定异常对象identity，声明限于同一对象被强持；不冻结异常.args或自定义属性内容。先发bounded error image另封在OwnedStage.last_image/observation_commit中。异常内容不授予内容读取、再调用或采用许可；同进程主动改写对象不属于身份认证保证。
+
+## 阶段、资源与仍开放边界
+
+controller接原ordinary parent/fresh driver，自己的prepare/final_check/final_publish进度覆盖真实G0、构造/启动、读取/比较/G2、最终发布/G3/末次库存。parent/fresh继续原relay。broker只在已ack context的typed bridge下把controller阶段转入自己的request-bound上游channel；不代写child channel，不允许任意callback或跨context替换。总截止与首阶段截止不因controller启动而续期。
+
+host只采样broker Job一次，不把嵌套Job加总；另查host自身working set及OS peak pagefile，保留采样总RSS及保守总commit上界。最后protocol bookend及mailbox关闭、完整payload试编码后，资源专用函数再次观测host；该步骤不能接受context、发ACK或推进协议。最终envelope编码/保存计入末次deadline检查；这段host分配的瞬时RAM/硬中断、arming和Kernel调用硬实时仍OPEN，采样不证明所有瞬时RSS。invoke期间host不做文件系统存在性检查；create-only由START后的broker执行。原F40＋5＋5/180s、一次parent/一次fresh、零native/重试、G0–G3与四记录cap保持；actual saved入口、全链计数/最大合法编码和完整准入仍需独立验收。本轮各F/science/resource/formal字段均false。
+
+## 普通开发检查预算
+
+新的独立successor普通验证预算300s：pytest实际累计≤240s、静态/collection/保存核验≤60s；单组≤90s，必要affected修正先登记剩余预算且单组≤30s，无自动重试。先固定collection/nodeids/组界，source前后书挡，每次原始stdout/stderr及三draft snapshot保存。
+
+仅固定ordinary fixture及pytest专用输出根；broker/controller普通descriptor总额15.3s（外部envelope≤20s），prepare3s、parent1.2s、fresh1.4s、inner quiesce1s/terminal0.5s、parent compare1.2s、outer quiesce1s/terminal0.5s、final check/publish各2s，再预留quiesce1s/terminal0.5s；ordinary context仍从host START起8s，controller不得续期prepare截止。arming ready观察≤2s；普通broker Job进程commit≤256MiB/Job≤512MiB，合并host后采样RSS≤1GiB、保守commit≤2GiB。预设native wait只用于准备/构造/最终发布故障，20s等待须被更早阶段/总截止停止。源码/读取/写入scope与原角色路径相同，context仍是ordinary schema，不读P1科学轨迹。
+
+覆盖normal完整图、context先持有再构造、拒绝错误ACK/nonce/producer/原字节漂移、任意callback/生产schema拒绝、prepare/constructor/native-wait/发布阻塞停止、host资源合并、后代完整quiet、quiet未知不消费return、partial HANDLE及错误分层。读回保存核验和独立findings只作开发证据，不打开门禁。若arming中断、whole180或真实saved分支未证明，报告对应OPEN，不能以本轮小caps替代。

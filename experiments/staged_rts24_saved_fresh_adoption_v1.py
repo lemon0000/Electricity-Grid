@@ -368,12 +368,14 @@ def _stage_spec_value(role, preset):
         total, cleanup, terminal = dict(fresh=(50., 5., 5.), parent=(125., 5., 10.), controller=(180., 5., 5.))[role]
         mode, rss, commit = 'production_descriptor_only', 1024**3, 1024**3
     else:
-        require(preset in ('steady', 'deadline', 'nested', 'role_graph'), 'fixed ordinary owner preset required')
+        require(preset in ('steady', 'deadline', 'nested', 'role_graph', 'invocation'), 'fixed ordinary owner preset required')
         require(preset != 'nested' or role == 'parent', 'nested preset requires parent role')
         require(preset != 'role_graph' or role in ('parent', 'fresh'), 'role graph preset requires bounded child role')
-        cap = (1.2 if role == 'parent' else 1.4) if preset == 'role_graph' else dict(steady=1., deadline=.2, nested=.8)[preset]
+        require(preset != 'invocation' or role == 'controller', 'invocation preset requires controller role')
+        cap = (1.2 if role == 'parent' else 1.4) if preset == 'role_graph' else dict(steady=1., deadline=.2, nested=.8, invocation=1.)[preset]
         if role == 'controller': cap = min(cap, .5)
         caps = (cap,)*len(phases)
+        if preset == 'invocation': caps = (3., 1.2, 1.4, 1., .5, 1.2, 1., .5, 2., 2.)
         cleanup, terminal = 1., .5
         total = sum(caps)+cleanup+terminal
         mode, rss, commit = 'ordinary_owner_probe', 256*1024**2, 256*1024**2
@@ -392,9 +394,15 @@ def ordinary_stage_descriptor(role='fresh', preset='steady'): return canonical(_
 
 def checked_stage_descriptor(raw):
     value = parse(raw)
-    require(type(value) is dict and value == _stage_spec_value(value.get('role'), value.get('preset')),
+    expected = _stage_spec_value(value.get('role'), value.get('preset')) if type(value) is dict else None
+    if type(value) is dict and 'invocation_ack_sha' in value:
+        ack = value['invocation_ack_sha']
+        require(value.get('role') == 'controller' and value.get('preset') == 'invocation'
+            and type(ack) is str and len(ack) == 64 and all(c in '0123456789abcdef' for c in ack), 'invocation ACK descriptor domain')
+        expected['invocation_ack_sha'] = ack
+    require(type(value) is dict and value == expected,
         'owner-stage descriptor differs')
-    require(canonical(value) == canonical(_stage_spec_value(value['role'], value['preset'])), 'owner-stage scalar domains differ')
+    require(canonical(value) == canonical(expected), 'owner-stage scalar domains differ')
     return value
 
 
@@ -906,7 +914,7 @@ def watch_probe_stage(held, *, absolute_deadline=None):
     return _watch_stage(held, absolute_deadline=absolute_deadline)
 
 
-def _watch_stage(held, *, absolute_deadline=None, relay=None):
+def _watch_stage(held, *, absolute_deadline=None, relay=None, invocation=None, initial_phase_deadline=None):
     """Active loop: kernel queries and fixed RAM only; no artifact/source I/O."""
     require(type(held) is OwnedStage, 'actual creating-thread probe owner required')
     held._entry(); require(not held._attempted, 'stage observation already attempted')
@@ -915,7 +923,10 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None):
     spec = channel.spec
     require(spec['mode'] == 'ordinary_owner_probe', 'production stage observation remains disabled')
     relay_phases = None
-    if relay is not None:
+    invocation_bridge = type(relay) is globals().get('InvocationRelay')
+    if invocation_bridge:
+        relay.check(held)
+    elif relay is not None:
         require(type(relay) is StageChannel, 'actual stage writer relay required')
         relay._live()
         pair = spec['role'], relay.spec['role']
@@ -923,7 +934,13 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None):
             and relay.spec['mode'] == spec['mode'] and pair in (('fresh', 'parent'), ('parent', 'controller')),
             'fixed same-context role relay required')
         relay_phases = ('inner_quiesce', 'inner_terminal') if pair[0] == 'fresh' else ('outer_quiesce', 'outer_terminal')
-    total_deadline = held.created_at+spec['total_seconds']
+    accounting_start = held.created_at
+    if invocation is not None:
+        require(type(invocation) is ArmedInvocation, 'actual armed external invocation required')
+        invocation.check(active=True)
+        require(invocation.stage is held, 'armed owner differs')
+        accounting_start = invocation.started
+    total_deadline = accounting_start+spec['total_seconds']
     if absolute_deadline is not None:
         require(type(absolute_deadline) is float and math.isfinite(absolute_deadline), 'finite earlier stage deadline required')
         total_deadline = min(total_deadline, absolute_deadline)
@@ -933,6 +950,10 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None):
     poll_interval = .01
     start = time.monotonic(); phase_entered = start; phase_index = 0; seen = 0
     phase_deadline = min(start+caps[0], active_deadline)
+    if initial_phase_deadline is not None:
+        require(type(initial_phase_deadline) is float and math.isfinite(initial_phase_deadline), 'finite earlier initial phase deadline required')
+        phase_deadline = min(phase_deadline, initial_phase_deadline)
+    if invocation is not None: phase_deadline = min(phase_deadline, invocation.started+caps[0])
     primary = monitor_error = termination_error = quiesce_error = close_error = channel_error = channel_close_error = final_bookend_error = relay_error = None
     exit_code = None; terminal = False; released = False; kill_requested = False; kill_succeeded = False
     samples = peak_rss = peak_commit = 0
@@ -941,7 +962,7 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None):
     terminal_exit_limiting_deadline = None
     root_exit_observed_at = termination_requested_at = quiesce_completed_at = None
     phase_entries = [dict(phase=phases[0], observer_entered=start)]
-    frames = []
+    frames = []; terminal_system_helpers = []
 
     def termination(reason):
         nonlocal primary, termination_error, kill_requested, kill_succeeded, termination_requested_at
@@ -959,16 +980,19 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None):
             samples += 1; peak_rss = max(peak_rss, data['rss_bytes'])
         else: terminal_rss = data['rss_bytes']
         peak_commit = max(peak_commit, data['peak_job_commit_bytes'])
+        if invocation is not None:
+            _invocation_poll(invocation, data)
         if data['rss_bytes'] > spec['rss_bytes']: termination('rss_limit' if exit_code is None else 'terminal_rss_limit')
         elif peak_commit > spec['job_commit_bytes']: termination('commit_limit')
         return data
 
     try:
         owner._live_owner()
-        require(not owner._released, 'unreleased owner required for phase clock')
+        require(owner._released is (invocation is not None), 'unreleased owner or actual armed invocation required for phase clock')
         if start >= active_deadline: termination('construction_or_total_budget')
         else:
-            released = True; owner.release()
+            released = True
+            if invocation is None: owner.release()
             while primary is None:
                 now = time.monotonic()
                 if terminal_exit_deadline is not None and now >= terminal_exit_deadline: termination('terminal_exit_limit'); break
@@ -1007,19 +1031,26 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None):
                 if exit_code is not None:
                     # A root exit never substitutes for a final descendant sample.
                     last = sample()
-                    if any(pid != owner.pid for pid in set(data['pids'])|set(last['pids'])): termination('root_exited_with_descendants')
+                    remaining_pids = (set(data['pids'])|set(last['pids']))-{owner.pid}
+                    helpers = None
+                    if remaining_pids and held.real_owner and spec['preset'] in ('role_graph', 'invocation'):
+                        helpers = _terminal_console_helpers(owner, remaining_pids)
+                    if remaining_pids and helpers is None: termination('root_exited_with_descendants')
                     elif exit_code != 0: termination('child_exit_nonzero')
                     elif not terminal or seen != len(phases)+1 or channel.pending_data: termination('incomplete_terminal')
+                    elif helpers is not None: terminal_system_helpers = helpers
                     break
                 remaining = min(active_deadline, phase_deadline)-time.monotonic()
                 if terminal_exit_deadline is not None: remaining = min(remaining, terminal_exit_deadline-time.monotonic())
                 if remaining > 0: time.sleep(min(poll_interval, remaining))
     except BaseException as error:
+        if invocation is not None and invocation.active_error is None:
+            object.__setattr__(invocation, 'active_error', error); invocation._commit()
         monitor_error = _stage_error(error)
         if isinstance(error, StageChannelError): channel_error = _stage_error(error)
         termination('monitor_or_channel_error')
     finally:
-        if relay is not None:
+        if relay is not None and not invocation_bridge:
             try: relay.enter(relay_phases[0])
             except BaseException as error:
                 relay_error = relay_error or _stage_error(error); termination('relay_unknown')
@@ -1055,7 +1086,7 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None):
         except BaseException as error:
             channel_close_error = _stage_error(error); primary = primary or 'channel_close_unknown'
         close_completed_at = time.monotonic()
-        if (relay is not None and relay_error is None and quiet
+        if (relay is not None and not invocation_bridge and relay_error is None and quiet
                 and all(error is None for error in (quiesce_error, close_error, channel_error, final_bookend_error, channel_close_error))):
             try: relay.enter(relay_phases[1])
             except BaseException as error:
@@ -1080,7 +1111,8 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None):
         transcript_frames=[parse(_stage_decode(slot, STAGE_COMMIT)) for slot in channel._history],
         samples=samples, sampled_tree_peak_rss_bytes=peak_rss if samples else None, terminal_tree_rss_bytes=terminal_rss,
         peak_job_commit_bytes=peak_commit, release_attempted=released,
-        construction_seconds=start-held.created_at, observation_seconds=closed_at-start,
+        terminal_system_helpers=terminal_system_helpers,
+        construction_seconds=start-accounting_start, observation_seconds=closed_at-start,
         remaining_total_seconds=max(0., total_deadline-closed_at), total_deadline=total_deadline,
         terminal_accepted=terminal_accepted, terminal_exit_deadline=terminal_exit_deadline,
         terminal_exit_cap_seconds=spec['terminal_seconds'], terminal_exit_limiting_deadline=terminal_exit_limiting_deadline,
@@ -1136,11 +1168,12 @@ def _role_tree(root):
         ('context_file_identity', identity(ordinary(root/'context.json'))),)
 
 
-def make_role_probe_context(output, case='normal'):
+def make_role_probe_context(output, case='normal', *, started=None):
     output = Path(output).absolute()
     require(output_mode(output) == 'ordinary_pytest_fixture' and not os.path.lexists(output), 'fresh dedicated ordinary output required')
     require(case in ROLE_PROBE_CASES, 'closed ordinary role fixture required')
-    started = time.monotonic()
+    if started is None: started = time.monotonic()
+    require(type(started) is float and math.isfinite(started) and 0 < started <= time.monotonic(), 'host invocation start required')
     value = dict(schema=ROLE_PROBE_SCHEMA, authority='DRAFT_NONAUTHORITATIVE', scope=ROLE_PROBE_SCOPE,
         repo_root=str(ROOT), output_root=str(output), output_parent_directories=directories(output.parent), source_pins=source_pins(),
         executable=dict(path=str(EXE), pin=pin(read(EXE, allow_links=True)), python=sys.version), environment=environment(),
@@ -1378,7 +1411,7 @@ def _checked_role_process_record(store, value, role):
         'final_bookend_error channel_close_error quiet_witness_consistent relay_error job_quiet_confirmed quiescence_witness '
         'stage_process_observed_successfully logic_path_completed stage_transcript_complete frames_observed phases_observed '
         'transcript_sha stage_header transcript_frames samples sampled_tree_peak_rss_bytes terminal_tree_rss_bytes peak_job_commit_bytes '
-        'release_attempted construction_seconds observation_seconds remaining_total_seconds total_deadline terminal_accepted '
+        'release_attempted terminal_system_helpers construction_seconds observation_seconds remaining_total_seconds total_deadline terminal_accepted '
         'terminal_exit_deadline terminal_exit_cap_seconds terminal_exit_limiting_deadline root_exit_observed_at termination_requested_at '
         'quiesce_started_at quiesce_completed_at close_attempts_finished_at observation_finished_at active_io_scope artifact_contents_read '
         'external_constructor_and_monitor_interrupt_bound_proved terminal_publication_bound_proved clock poll_interval_seconds '
@@ -1458,6 +1491,14 @@ def _checked_role_process_record(store, value, role):
     require(type(value['construction_seconds']) is float and 0 <= value['construction_seconds'] <= spec['total_seconds']
         and type(value['observation_seconds']) is float and 0 <= value['observation_seconds'] <= spec['total_seconds']
         and value['termination_requested_at'] is None, 'role duration or success termination differs')
+    helpers = value['terminal_system_helpers']
+    require(type(helpers) is list and len(helpers) <= 1, 'bounded terminal OS helper record required')
+    for helper in helpers:
+        keys(helper, 'pid creation_filetime image_path observed_at')
+        require((helper['pid'], helper['creation_filetime']) in {(m['pid'], m['creation_filetime']) for m in value['quiescence_witness']['member_identities']}
+            and helper['pid'] != value['startup']['owner_pid'] and helper['image_path'].lower() == _system_console_path()
+            and type(helper['observed_at']) is float and value['root_exit_observed_at'] <= helper['observed_at'] <= value['quiesce_started_at'],
+            'terminal OS helper identity/time differs')
     return value
 
 
@@ -1745,20 +1786,22 @@ def run_ordinary_role_graph(output, case='normal'):
     return _run_role_controller(store)
 
 
-def _run_role_controller(store):
+def _run_role_controller(store, writer=None, *, invocation_case='normal'):
     held_input = None; marks = []; outer = None; observation_pin = None
     try:
         held_input, g0 = _role_input_bookend(store, 'G0'); marks.append(g0)
+        if writer is not None: writer.enter('parent')
         outer = _create_role_owner('parent', store)
         try:
             store.publish('controller', 'worker/parent_startup.json', parse(outer.startup))
-            process = _watch_stage(outer, absolute_deadline=parse(store.raw)['deadline'])
+            process = _watch_stage(outer, absolute_deadline=parse(store.raw)['deadline'], relay=writer)
         except BaseException as primary:
             try: outer.close()
             except BaseException as cleanup: raise RoleExecutionUnresolved(primary, outer, cleanup_errors=(('outer_stage_close', cleanup),)) from primary
             raise
         store.publish('controller', 'worker/launcher.json', process)
         require(process['stage_process_observed_successfully'], 'parent role unsuccessful or unknown')
+        if writer is not None: writer.enter('final_check')
         candidate_raw = store.read_after_quiet('worker/comparison_candidate.json', outer)
         parent_raw = store.read_after_quiet('worker/parent_metrics.json', outer)
         fresh_raw = store.read_after_quiet('worker/fresh/metrics.json', outer)
@@ -1773,7 +1816,11 @@ def _run_role_controller(store):
             inner_observation_pin=pin(inner_observation_raw), core_output_inventory_sha=digest(core_inventory),
             input_bookends_before_publication=marks,
             F_launch_admitted=False, saved_P1_fresh_process_verified=False, saved_P1_parent_adoption_verified=False, **GATES)
-        observation_pin = store.publish('controller', 'parent/parent_observation.json', observation)
+        if writer is not None: writer.enter('final_publish')
+        if invocation_case == 'publication_wait':
+            observation_pin = _publish_role_target(store, 'controller', 'parent/parent_observation.json',
+                canonical(observation), hook=_invocation_publication_wait)
+        else: observation_pin = store.publish('controller', 'parent/parent_observation.json', observation)
         _, g3 = _role_input_bookend(store, 'G3', held_input); marks.append(g3)
         output_inventory = _role_content_inventory(store, outer)
         require(all(output_inventory.get(name) == expected for name, expected in core_inventory.items()), 'validated role core changed after final publication')
@@ -1807,6 +1854,943 @@ def _run_role_controller(store):
         if _role_error_holds_capability(error) or _role_stage_still_open(outer):
             raise RoleExecutionUnresolved(error, outer, dict(diagnostic, failure_pin=failure_pin)) from error
         return dict(diagnostic, ordinary_graph_completed=False, failure_pin=failure_pin, output_root=str(store.root))
+
+
+INVOCATION_SCHEMA = 'staged_saved_F_ordinary_external_invocation_v1'
+INVOCATION_PREFIX = 'Local\\electricity_grid_saved_invocation_'
+INVOCATION_CASES = ('normal', 'prepare_wait', 'constructor_wait', 'publication_wait')
+INVOCATION_SLOTS = (('header', 4096), ('request', 32768), ('ready', 4096), ('start', 4096),
+    ('context', 2*1024**2+16384+44), ('ack', 4096), ('binding', 32768),
+    ('constructor_probe', 4096),
+    ('controller_return', 131072+44), ('broker_return', 131072+44))
+INVOCATION_DIRECTIONS = dict(host=('request', 'start', 'ack'), broker=('ready', 'context', 'binding'),
+    controller=('controller_return',), broker_terminal=('broker_return',), broker_probe=('constructor_probe',))
+
+
+def _hex64(value):
+    return type(value) is str and len(value) == 64 and all(c in '0123456789abcdef' for c in value)
+
+
+def _invocation_request(output, case):
+    output = Path(output).absolute()
+    require(case in INVOCATION_CASES and output_mode(output) == 'ordinary_pytest_fixture'
+        and not os.path.lexists(output), 'closed ordinary external invocation required')
+    require(Path(sys.executable).absolute() == EXE and Path.cwd().absolute() == ROOT, 'bound invocation runtime required')
+    return canonical(dict(schema=INVOCATION_SCHEMA, authority='DRAFT_NONAUTHORITATIVE', case=case,
+        scope=ROLE_PROBE_SCOPE, repo_root=str(ROOT), output_root=str(output),
+        output_parent_directories=directories(output.parent), source_pins=source_pins(),
+        executable=dict(path=str(EXE), pin=pin(read(EXE, allow_links=True)), python=sys.version), environment=environment(),
+        fixture=dict(left=2, right=3, expected=5), nonce=secrets.token_hex(32),
+        ready_seconds=2., standby_seconds=1.5, invocation_descriptor=parse(ordinary_stage_descriptor('controller', 'invocation')),
+        combined_sampled_rss_bytes=1024**3, combined_conservative_commit_bytes=2*1024**3,
+        F_launch_admitted=False, saved_P1_fresh_process_verified=False, saved_P1_parent_adoption_verified=False, **GATES))
+
+
+def _check_invocation_request(raw):
+    value = parse(raw)
+    keys(value, 'schema authority case scope repo_root output_root output_parent_directories source_pins executable environment '
+        'fixture nonce ready_seconds standby_seconds invocation_descriptor combined_sampled_rss_bytes '
+        'combined_conservative_commit_bytes F_launch_admitted saved_P1_fresh_process_verified saved_P1_parent_adoption_verified '+' '.join(GATES))
+    require(len(raw) < 30000 and value['schema'] == INVOCATION_SCHEMA and value['authority'] == 'DRAFT_NONAUTHORITATIVE'
+        and value['scope'] == ROLE_PROBE_SCOPE and value['case'] in INVOCATION_CASES and _hex64(value['nonce'])
+        and all(value[name] is False for name in (*GATES, 'F_launch_admitted', 'saved_P1_fresh_process_verified', 'saved_P1_parent_adoption_verified')),
+        'ordinary invocation request domain')
+    require(value['ready_seconds'] == 2. and value['standby_seconds'] == 1.5
+        and canonical(value['invocation_descriptor']) == ordinary_stage_descriptor('controller', 'invocation')
+        and value['combined_sampled_rss_bytes'] == 1024**3 and value['combined_conservative_commit_bytes'] == 2*1024**3,
+        'fixed ordinary invocation budget differs')
+    output = Path(value['output_root'])
+    require(output_mode(output) == 'ordinary_pytest_fixture' and not os.path.lexists(output)
+        and str(output.absolute()) == str(output) and '..' not in output.parts
+        and value['output_parent_directories'] == [list(row) for row in directories(output.parent)], 'invocation output changed')
+    require(value['repo_root'] == str(ROOT) and value['source_pins'] == source_pins() and value['environment'] == environment()
+        and value['executable'] == dict(path=str(EXE), pin=pin(read(EXE, allow_links=True)), python=sys.version)
+        and value['fixture'] == dict(left=2, right=3, expected=5)
+        and canonical(value['fixture']) == b'{"expected":5,"left":2,"right":3}', 'independent invocation input differs')
+    return value
+
+
+def _invocation_slot(raw, size):
+    require(type(raw) is bytes and 0 < len(raw) <= size-44, 'invocation slot cap')
+    return struct.pack('<I', len(raw))+raw+b'\0'*(size-44-len(raw))+sha256(raw).digest()+STAGE_COMMIT
+
+
+def _invocation_decode(slot):
+    if slot[-8:] != STAGE_COMMIT: return None
+    length = struct.unpack('<I', slot[:4])[0]
+    if not 0 < length <= len(slot)-44: return None
+    raw = slot[4:4+length]
+    if slot[4+length:-40] != b'\0'*(len(slot)-44-length) or sha256(raw).digest() != slot[-40:-8]: return None
+    return raw
+
+
+class InvocationMailbox:
+    """One fixed slot per transfer; actual process identities bound before release."""
+    _locked = StageChannel._locked
+    close = StageChannel.close
+
+    def __init__(self): raise TypeError('use create or attach')
+
+    @classmethod
+    def _open(cls, name, request_sha, create, endpoint):
+        require(type(name) is str and name.startswith(INVOCATION_PREFIX) and _hex64(name[len(INVOCATION_PREFIX):])
+            and _hex64(request_sha) and endpoint in INVOCATION_DIRECTIONS, 'closed invocation mailbox name/domain')
+        obj = object.__new__(cls)
+        obj._api = _stage_api(); obj._map = obj._mutex = obj._view = None
+        obj._creator = os.getpid(), get_ident(); obj._in_lock = False; obj._poison = None
+        obj.name, obj.request_sha, obj.endpoint = name, request_sha, endpoint
+        obj._inputs = name, request_sha, endpoint
+        obj._header = None; obj._accepted = {}; obj._controller_identity = None
+        obj._read_busy = False
+        obj._layout = {}; position = 0
+        for kind, size in INVOCATION_SLOTS:
+            obj._layout[kind] = (position, size); position += size
+        obj._size = position
+        try:
+            if create:
+                C.set_last_error(0)
+                obj._map = _native(obj._api.CreateFileMappingW(C.c_void_p(-1), None, 4, 0, position, name))
+                require(C.get_last_error() != 183, 'invocation mapping collision')
+                C.set_last_error(0)
+                obj._mutex = _native(obj._api.CreateMutexW(None, False, name+'_mutex'))
+                require(C.get_last_error() != 183, 'invocation mutex collision')
+            else:
+                obj._map = _native(obj._api.OpenFileMappingW(6, False, name))
+                obj._mutex = _native(obj._api.OpenMutexW(0x100001, False, name+'_mutex'))
+            for handle in (obj._map, obj._mutex):
+                flags = W.DWORD(); _native(obj._api.GetHandleInformation(handle, C.byref(flags)))
+                require(not flags.value&1, 'invocation handles must not be inherited')
+            obj._view = _native(obj._api.MapViewOfFile(obj._map, 6, 0, 0, position))
+            if create: require(C.string_at(obj._view, position) == b'\0'*position, 'invocation mapping not new')
+            return obj
+        except BaseException as primary:
+            try: obj.close()
+            except BaseException as cleanup: raise StageChannelConstructionUnresolved(obj, primary, cleanup, 'invocation_map_cleanup') from primary
+            raise
+
+    @classmethod
+    def create(cls, request_sha, *, name=None):
+        return cls._open(name or INVOCATION_PREFIX+secrets.token_hex(32), request_sha, True, 'host')
+
+    @classmethod
+    def attach(cls, name, request_sha, endpoint):
+        require(endpoint in ('broker', 'controller'), 'fixed invocation child endpoint required')
+        obj = cls._open(name, request_sha, False, endpoint)
+        try:
+            with obj._locked(100) as acquired:
+                require(acquired, 'invocation attach busy')
+                obj._header = C.string_at(obj._view, obj._layout['header'][1])
+            header = parse(_invocation_decode(obj._header))
+            obj._check_header(header)
+            if endpoint == 'broker': expected = tuple(header['broker_identity'])
+            else:
+                binding = obj.read_packet('binding', bookend=True, _wait=100)
+                require(binding is not None, 'controller binding unavailable')
+                expected = binding['startup']['owner_pid'], binding['startup']['owner_creation_filetime']
+                obj._controller_identity = expected
+            require(expected == _own_process_identity(obj._api), 'wrong invocation endpoint process')
+            return obj
+        except BaseException as primary:
+            try: obj.close()
+            except BaseException as cleanup: raise StageChannelConstructionUnresolved(obj, primary, cleanup, 'invocation_attach_cleanup') from primary
+            raise
+
+    def _live(self, *, poisoned=False):
+        require(self._creator == (os.getpid(), get_ident()) and (self.name, self.request_sha, self.endpoint) == self._inputs,
+            'creating invocation endpoint required')
+        require(all(getattr(self, name) is not None for name in ('_view', '_map', '_mutex')), 'closed invocation mailbox')
+        if self._poison is not None and not poisoned: raise StageChannelError(self._poison, 'invocation mailbox remains unresolved')
+
+    def _check_header(self, header):
+        keys(header, 'schema name request_sha host_identity broker_identity direction_nonces layout_sha')
+        require(header['schema'] == INVOCATION_SCHEMA and header['name'] == self.name and header['request_sha'] == self.request_sha
+            and header['layout_sha'] == digest(INVOCATION_SLOTS) and set(header['direction_nonces']) == set(INVOCATION_DIRECTIONS)
+            and all(_hex64(v) for v in header['direction_nonces'].values()), 'invocation header binding differs')
+        for name in ('host_identity', 'broker_identity'):
+            value = header[name]
+            require(type(value) is list and len(value) == 2 and all(type(v) is int and v > 0 for v in value)
+                and value[0] < 2**32 and value[1] < 2**64, 'invocation process identity domain')
+
+    def bind(self, stage, request):
+        self._live(); stage._entry()
+        require(self.endpoint == 'host' and self._header is None and not stage.owner._released
+            and stage.real_owner and sha256(request).hexdigest() == self.request_sha, 'new suspended invocation broker required')
+        value = dict(schema=INVOCATION_SCHEMA, name=self.name, request_sha=self.request_sha,
+            host_identity=_own_process_identity(self._api), broker_identity=(stage.owner.pid, stage.owner.creation_filetime),
+            direction_nonces={key: secrets.token_hex(32) for key in INVOCATION_DIRECTIONS}, layout_sha=digest(INVOCATION_SLOTS))
+        self._check_header(parse(canonical(value)))
+        header = _invocation_slot(canonical(value), self._layout['header'][1])
+        with self._locked(0) as acquired:
+            require(acquired and C.string_at(self._view, self._size) == b'\0'*self._size, 'invocation map changed before bind')
+            C.memmove(self._view, header[:-8], len(header)-8); C.memmove(self._view+len(header)-8, STAGE_COMMIT, 8)
+        self._header = header
+        self.write_packet('request', parse(request))
+
+    def _direction(self, kind):
+        return next(key for key, names in INVOCATION_DIRECTIONS.items() if kind in names)
+
+    def _packet_binding(self, kind):
+        header = parse(_invocation_decode(self._header)); direction = self._direction(kind)
+        names = INVOCATION_DIRECTIONS[direction]; index = names.index(kind)
+        previous = '0'*64
+        for prior in names[:index]:
+            raw = self._accepted.get(prior)
+            require(raw is not None, 'prior invocation transfer unavailable')
+            previous = sha256(_invocation_decode(raw)).hexdigest()
+        if direction == 'controller':
+            require(self._controller_identity is not None, 'actual controller binding required')
+            producer = self._controller_identity
+        else: producer = tuple(header[('broker' if direction in ('broker_terminal', 'broker_probe') else direction)+'_identity'])
+        return dict(kind=kind, sequence=index, previous_sha=previous, producer_identity=list(producer),
+            direction_nonce=header['direction_nonces'][direction], binding_sha=sha256(self._header).hexdigest())
+
+    def read_packet(self, kind, *, bookend=False, _wait=0):
+        require(type(_wait) is int and _wait in (0, 100), 'fixed invocation mutex observation bound')
+        self._read_busy = False
+        try: return self._read_packet(kind, bookend=bookend, _wait=_wait)
+        except BaseException:
+            if self._poison is None: self._poison = 'invocation_protocol'
+            raise
+
+    def _read_packet(self, kind, *, bookend=False, _wait=0):
+        require(kind in self._layout and kind != 'header', 'closed invocation transfer required')
+        direction = self._direction(kind)
+        for prior in INVOCATION_DIRECTIONS[direction][:INVOCATION_DIRECTIONS[direction].index(kind)]:
+            if self.read_packet(prior, bookend=bookend, _wait=_wait) is None: return None
+        progress = self._progress_snapshot(_wait=_wait) if kind == 'broker_return' else None
+        if kind == 'broker_return' and progress is None: return None
+        if kind == 'controller_return' and self._controller_identity is None:
+            binding = self.read_packet('binding', bookend=bookend, _wait=_wait)
+            if binding is None: return None
+            self._controller_identity = binding['startup']['owner_pid'], binding['startup']['owner_creation_filetime']
+        with self._locked(_wait) as acquired:
+            if not acquired:
+                self._read_busy = True; return None
+            require(C.string_at(self._view, len(self._header)) == self._header, 'invocation header changed')
+            offset, size = self._layout[kind]
+            marker = C.string_at(self._view+offset+size-8, 8)
+            if kind in self._accepted and not bookend:
+                require(marker == STAGE_COMMIT, 'accepted invocation commit changed')
+                slot = self._accepted[kind]
+            else:
+                slot = C.string_at(self._view+offset, size)
+                require(slot == C.string_at(self._view+offset, size), 'invocation transfer changed under mutex')
+                if kind in self._accepted: require(slot == self._accepted[kind], 'accepted invocation transfer changed')
+            raw = _invocation_decode(slot)
+            if raw is None:
+                require(slot == b'\0'*size, 'incomplete or corrupt invocation slot under acquired mutex')
+                return None
+            value = parse(raw); keys(value, 'kind sequence previous_sha producer_identity direction_nonce binding_sha payload')
+            require({k: v for k, v in value.items() if k != 'payload'} == self._packet_binding(kind), 'invocation transfer binding differs')
+            if kind == 'request': require(digest(value['payload']) == self.request_sha, 'invocation request SHA differs')
+            self._accepted[kind] = slot
+            if kind == 'broker_return':
+                terminal = value['payload']; keys(terminal, 'status progress value')
+                expected_status = 'failure' if terminal['value'].get('kind') == 'failure' else 'success'
+                require(terminal['status'] == expected_status and terminal['progress'] == progress
+                    and (expected_status != 'success' or len(progress['prefix']) == 3), 'broker terminal progress binding differs')
+                return terminal['value']
+            return value['payload']
+
+    def write_packet(self, kind, payload):
+        try: return self._write_packet(kind, payload)
+        except BaseException:
+            if self._poison is None: self._poison = 'invocation_protocol'
+            raise
+
+    def _write_packet(self, kind, payload):
+        self._live(); require(kind in INVOCATION_DIRECTIONS[self.endpoint]
+            or self.endpoint == 'broker' and kind in ('broker_return', 'constructor_probe'), 'wrong invocation transfer writer')
+        direction = self._direction(kind)
+        for prior in INVOCATION_DIRECTIONS[direction][:INVOCATION_DIRECTIONS[direction].index(kind)]:
+            require(self.read_packet(prior, bookend=True, _wait=100) is not None, 'writer prior transfer unavailable')
+        existing = self.read_packet(kind, bookend=True, _wait=100)
+        require(not self._read_busy and existing is None, 'invocation slot already consumed or writer observation busy')
+        require(tuple(self._packet_binding(kind)['producer_identity']) == _own_process_identity(self._api), 'actual invocation writer required')
+        if kind == 'broker_return':
+            progress = self._progress_snapshot(_wait=100); status = 'failure' if payload.get('kind') == 'failure' else 'success'
+            require(progress is not None and 1 <= len(progress['prefix']) <= 3
+                and (status != 'success' or len(progress['prefix']) == 3), 'terminal broker progress unavailable')
+            payload = dict(status=status, progress=progress, value=payload)
+        raw = canonical(dict(self._packet_binding(kind), payload=payload)); offset, size = self._layout[kind]
+        slot = _invocation_slot(raw, size)
+        with self._locked(100) as acquired:
+            require(acquired and C.string_at(self._view, len(self._header)) == self._header, 'invocation write/header unavailable')
+            require(C.string_at(self._view+offset, size) == b'\0'*size, 'invocation slot already used or partial')
+            C.memmove(self._view+offset, slot[:-8], size-8); C.memmove(self._view+offset+size-8, STAGE_COMMIT, 8)
+        self._accepted[kind] = slot
+        return pin(raw)
+
+    def _progress_snapshot(self, *, _wait=0):
+        prefix = []; transcript = []; tail = False
+        for kind in INVOCATION_DIRECTIONS['broker']:
+            value = self.read_packet(kind, bookend=True, _wait=_wait)
+            if self._read_busy: return None
+            if value is None: tail = True
+            if tail:
+                offset, size = self._layout[kind]
+                with self._locked(_wait) as acquired:
+                    if not acquired:
+                        self._read_busy = True; return None
+                    require(C.string_at(self._view+offset, size) == b'\0'*size, 'noncontiguous or partial terminal broker progress')
+            else:
+                slot = self._accepted[kind]; transcript.append(slot)
+                prefix.append(dict(kind=kind, pin=pin(_invocation_decode(slot))))
+        return dict(prefix=prefix, transcript_sha=sha256(b''.join(transcript)).hexdigest())
+
+    def bookend(self, *, _wait=0):
+        for kind in tuple(self._accepted):
+            require(self.read_packet(kind, bookend=True, _wait=_wait) is not None, 'invocation final bookend unavailable')
+
+    def __reduce__(self): raise TypeError('live invocation mailbox cannot be serialized')
+
+
+class InvocationUnresolved(RuntimeError):
+    def __init__(self, capability, primary, cleanup=()):
+        self.capability, self.primary, self.cleanup_errors = capability, primary, tuple(cleanup)
+        super().__init__('ordinary external invocation unresolved: '+str(_stage_error(primary)))
+
+    def __reduce__(self): raise TypeError('live invocation cleanup capability cannot be serialized')
+
+
+@dataclass(frozen=True, init=False)
+class ArmedInvocation:
+    def __init__(self, request, mailbox, stage, armed_at, ready_at, standby_deadline, members):
+        values = dict(request=request, mailbox=mailbox, stage=stage, armed_at=armed_at, ready_at=ready_at,
+            standby_deadline=standby_deadline, ready_members=members, creator=(os.getpid(), get_ident()),
+            consumed=False, started=None, held_context=None, ack_raw=None, controller_binding=None,
+            construction_probe=None,
+            active_error=None,
+            resource_samples=0, sampled_combined_peak_rss_bytes=0, conservative_combined_peak_commit_bytes=0,
+            host_peak_pagefile_bytes=0, result_raw=None)
+        values['binding'] = sha256(request).hexdigest(), id(mailbox), id(stage), armed_at, ready_at, standby_deadline, members
+        for name, value in values.items(): object.__setattr__(self, name, value)
+        self._commit()
+
+    def _state_sha(self):
+        return digest([self.consumed, self.started, self.held_context, self.ack_raw,
+            self.controller_binding, self.construction_probe, id(self.active_error), self.resource_samples, self.sampled_combined_peak_rss_bytes,
+            self.conservative_combined_peak_commit_bytes, self.host_peak_pagefile_bytes, self.result_raw])
+
+    def _commit(self): object.__setattr__(self, 'state_sha', self._state_sha())
+
+    def check(self, *, active=False):
+        require(self.creator == (os.getpid(), get_ident()) and (sha256(self.request).hexdigest(), id(self.mailbox), id(self.stage),
+            self.armed_at, self.ready_at, self.standby_deadline, self.ready_members) == self.binding, 'creating armed invocation required')
+        require(self._state_sha() == self.state_sha, 'held invocation state changed')
+        self.stage._entry()
+        require(type(self.consumed) is bool and (not active or self.consumed and type(self.started) is float), 'active one-shot invocation required')
+
+    def close(self):
+        self.check(); errors = []
+        owner = self.stage.owner
+        if getattr(owner, '_job', None) is not None:
+            try: _stop_owned_job(owner)
+            except BaseException as error: errors.append(('termination', error))
+            try: owner.quiesce(max_seconds=1.)
+            except BaseException as error: errors.append(('quiesce', error))
+        try: self.stage.close()
+        except BaseException as error: errors.append(('stage_close', error))
+        try: self.mailbox.close()
+        except BaseException as error: errors.append(('mailbox_close', error))
+        if errors: raise InvocationUnresolved(self, errors[0][1], errors[1:])
+
+    def __enter__(self): self.check(); return self
+    def __exit__(self, *unused): self.close()
+    def __reduce__(self): raise TypeError('armed invocation cannot be serialized')
+
+
+def _invocation_broker_argv(mailbox, channel):
+    code = ('from experiments import staged_rts24_saved_fresh_adoption_v1 as e; '
+        f'e._ordinary_invocation_broker({mailbox.name!r},{mailbox.request_sha!r},{channel.name!r},{channel.nonce!r})')
+    return [str(EXE), '-B', '-s', '-c', code]
+
+
+def _check_broker_capture(request, mailbox, stage):
+    stage._entry(); startup = parse(stage.startup); header = parse(_invocation_decode(mailbox._header))
+    keys(startup, 'schema authority scope probe_id creator_pid argv command_line cwd environment_sha context_sha descriptor_sha '
+        'channel_name owner_pid owner_creation_filetime actual_os_commandline_independently_verified')
+    require(startup['schema'] == 'staged_saved_F_probe_CreateProcess_inputs_v1'
+        and startup['authority'] == 'DRAFT_NONAUTHORITATIVE' and startup['scope'] == 'ordinary_owner_probe_only'
+        and startup['probe_id'] == 'invocation_broker' and startup['creator_pid'] == header['host_identity'][0]
+        and startup['argv'] == _invocation_broker_argv(mailbox, stage.channel)
+        and startup['command_line'] == subprocess.list2cmdline(startup['argv']) and startup['cwd'] == request['repo_root']
+        and startup['environment_sha'] == digest(request['environment']) and startup['context_sha'] == mailbox.request_sha
+        and stage.channel.context_sha == mailbox.request_sha and stage.channel.descriptor == ordinary_stage_descriptor('controller', 'invocation')
+        and startup['descriptor_sha'] == sha256(stage.channel.descriptor).hexdigest() and startup['channel_name'] == stage.channel.name
+        and (startup['owner_pid'], startup['owner_creation_filetime']) == (stage.owner.pid, stage.owner.creation_filetime)
+        == tuple(header['broker_identity']) and startup['actual_os_commandline_independently_verified'] is False,
+        'exact broker capture binding differs')
+
+
+def _invocation_ready_members(owner, request):
+    """Bind retained identities; the owner's hidden console may have one conhost."""
+    sample = owner.sample(); members = tuple(sorted(key for key in owner._members if key[0] in sample['pids']))
+    require(len(members) == len(sample['pids']) and (owner.pid, owner.creation_filetime) in members and 1 <= len(members) <= 2,
+        'broker ready membership differs')
+    api = owner._k
+    api.QueryFullProcessImageNameW.argtypes = [W.HANDLE, W.DWORD, W.LPWSTR, C.POINTER(W.DWORD)]
+    api.QueryFullProcessImageNameW.restype = W.BOOL
+    console = _system_console_path(api); captured = []
+    for member in members:
+        buffer = C.create_unicode_buffer(32768); count = W.DWORD(len(buffer))
+        _native(api.QueryFullProcessImageNameW(owner._members[member], 0, buffer, C.byref(count)))
+        expected = str(EXE).lower() if member == (owner.pid, owner.creation_filetime) else console
+        require(buffer.value.lower() == expected, 'unexpected broker descendant before START')
+        captured.append((*member, buffer.value))
+    require(set(owner.job_pids()) == {row[0] for row in members}, 'ready membership changed during capture')
+    return tuple(captured)
+
+
+def _system_console_path(api=None):
+    api = api or _stage_api()
+    api.GetSystemDirectoryW.argtypes = [W.LPWSTR, W.UINT]; api.GetSystemDirectoryW.restype = W.UINT
+    buffer = C.create_unicode_buffer(32768); count = api.GetSystemDirectoryW(buffer, len(buffer))
+    require(0 < count < len(buffer), 'kernel system directory unavailable')
+    return str(Path(buffer.value)/'conhost.exe').lower()
+
+
+def _terminal_console_helpers(owner, pids):
+    """Ordinary graph only; this classification never substitutes for quiet."""
+    if len(pids) != 1: return None
+    try:
+        pid = next(iter(pids)); matches = [(key, handle) for key, handle in owner._members.items() if key[0] == pid]
+        if len(matches) != 1: return None
+        (member_pid, creation), handle = matches[0]; api = owner._k
+        api.QueryFullProcessImageNameW.argtypes = [W.HANDLE, W.DWORD, W.LPWSTR, C.POINTER(W.DWORD)]
+        api.QueryFullProcessImageNameW.restype = W.BOOL
+        buffer = C.create_unicode_buffer(32768); count = W.DWORD(len(buffer))
+        _native(api.QueryFullProcessImageNameW(handle, 0, buffer, C.byref(count)))
+        if buffer.value.lower() != _system_console_path(api): return None
+        return [dict(pid=member_pid, creation_filetime=creation, image_path=buffer.value, observed_at=time.monotonic())]
+    except Exception: return None
+
+
+def arm_ordinary_invocation(output, case='normal'):
+    request = _invocation_request(output, case); value = _check_invocation_request(request)
+    mailbox = channel = stage = None; started = time.monotonic()
+    try:
+        mailbox = InvocationMailbox.create(sha256(request).hexdigest())
+        channel = StageChannel.create(mailbox.request_sha, ordinary_stage_descriptor('controller', 'invocation'))
+        stage = _construct_stage_owner(_invocation_broker_argv(mailbox, channel), channel, 'invocation_broker', started=started)
+        mailbox.bind(stage, request); _check_broker_capture(value, mailbox, stage); stage.owner.release()
+        deadline = time.monotonic()+value['ready_seconds']
+        while time.monotonic() < deadline:
+            require(stage.owner.poll() is None, 'broker exited before ready')
+            sample = stage.owner.sample()
+            require(sample['rss_bytes'] <= channel.spec['rss_bytes'] and sample['peak_job_commit_bytes'] <= channel.spec['job_commit_bytes'], 'arming resource limit')
+            ready = mailbox.read_packet('ready')
+            if ready is not None:
+                keys(ready, 'request_sha ready_at standby_deadline context_created')
+                require(ready['request_sha'] == mailbox.request_sha and ready['context_created'] is False
+                    and type(ready['ready_at']) is float and type(ready['standby_deadline']) is float
+                    and math.isfinite(ready['ready_at']) and started <= ready['ready_at'] <= time.monotonic()
+                    and ready['standby_deadline'] == ready['ready_at']+value['standby_seconds']
+                    and time.monotonic() < ready['standby_deadline'], 'bounded broker ready differs')
+                require(channel.read_available() == [] and not os.path.lexists(output), 'broker created context or progressed before START')
+                members = _invocation_ready_members(stage.owner, value)
+                return ArmedInvocation(request, mailbox, stage, started, time.monotonic(), ready['standby_deadline'], members)
+            time.sleep(.005)
+        raise TimeoutError('ordinary broker ready limit')
+    except BaseException as primary:
+        errors = []
+        owner = stage.owner if stage is not None else getattr(primary, 'owner', None)
+        if owner is not None and getattr(owner, '_job', None) is not None:
+            try: _stop_owned_job(owner); owner.quiesce(max_seconds=1.)
+            except BaseException as error: errors.append(('arming_quiesce', error))
+        for label, item in (('stage', stage), ('channel', channel if stage is None else None), ('mailbox', mailbox)):
+            if item is not None:
+                try: item.close()
+                except BaseException as error: errors.append((label, error))
+        if owner is not None and stage is None:
+            try: owner.close()
+            except BaseException as error: errors.append(('partial_owner', error))
+        raise InvocationUnresolved((stage, channel, mailbox, primary), primary, errors) from primary
+
+
+def _host_memory(api):
+    from src.staged_rts24_process_guard_v1 import _Memory
+    api.K32GetProcessMemoryInfo.argtypes = [W.HANDLE, C.c_void_p, W.DWORD]
+    api.K32GetProcessMemoryInfo.restype = W.BOOL
+    memory = _Memory(); memory.cb = C.sizeof(memory)
+    _native(api.K32GetProcessMemoryInfo(api.GetCurrentProcess(), C.byref(memory), C.sizeof(memory)))
+    return dict(rss_bytes=memory.working_set, peak_pagefile_bytes=memory.peak_pagefile)
+
+
+def _held_context_offer(request, started, offer, broker_identity):
+    """Pure RAM comparison against independently held inputs, before ACK/spawn."""
+    keys(offer, 'context context_sha context_receipt root_directories broker_identity')
+    context = offer['context']; raw = canonical(context)
+    require(len(raw) <= 2*1024**2 and sha256(raw).hexdigest() == offer['context_sha'], 'offered context raw SHA/cap differs')
+    expected = dict(schema=ROLE_PROBE_SCHEMA, authority='DRAFT_NONAUTHORITATIVE', scope=ROLE_PROBE_SCOPE,
+        repo_root=request['repo_root'], output_root=request['output_root'], output_parent_directories=request['output_parent_directories'],
+        source_pins=request['source_pins'], executable=request['executable'], environment=request['environment'], fixture=request['fixture'],
+        case='normal', started=started, deadline=started+8., nonce=context.get('nonce'),
+        F_launch_admitted=False, saved_P1_fresh_process_verified=False, saved_P1_parent_adoption_verified=False, **GATES)
+    require(_hex64(context.get('nonce')) and canonical(context) == canonical(expected), 'offered context differs from independent held request')
+    receipt = offer['context_receipt']; keys(receipt, 'bytes sha256 identity')
+    require({key: receipt[key] for key in ('bytes', 'sha256')} == pin(raw)
+        and type(receipt['identity']) is list and len(receipt['identity']) == 4
+        and all(type(v) is int and v >= 0 for v in receipt['identity']) and receipt['identity'][2] == len(raw), 'offered context publication receipt differs')
+    rows = offer['root_directories']
+    require(type(rows) is list and rows[:-1] == request['output_parent_directories'] and len(rows[-1]) == 3
+        and rows[-1][0] == request['output_root'] and all(type(v) is int and v > 0 for v in rows[-1][1:])
+        and offer['broker_identity'] == list(broker_identity), 'offered output/broker identity differs')
+    return raw
+
+
+def _invocation_ack(mailbox, offer, started):
+    header = parse(_invocation_decode(mailbox._header))
+    return dict(schema=INVOCATION_SCHEMA, request_sha=mailbox.request_sha, offer_sha=digest(offer), context_sha=offer['context_sha'],
+        receipt_sha=digest(offer['context_receipt']), root_directories_sha=digest(offer['root_directories']),
+        broker_identity=header['broker_identity'], host_identity=header['host_identity'], started=started,
+        nonce=header['direction_nonces']['host'])
+
+
+def _invocation_descriptor(ack_sha):
+    value = parse(ordinary_stage_descriptor('controller', 'invocation')); value['invocation_ack_sha'] = ack_sha
+    return canonical(value)
+
+
+def _invocation_controller_argv(mailbox, context_sha, ack_sha, channel):
+    code = ('from experiments import staged_rts24_saved_fresh_adoption_v1 as e; '
+        f'e._ordinary_invocation_controller({mailbox.name!r},{mailbox.request_sha!r},{context_sha!r},{ack_sha!r},{channel.name!r},{channel.nonce!r})')
+    return [str(EXE), '-B', '-s', '-c', code]
+
+
+def _check_controller_binding(mailbox, context_sha, ack_sha, binding):
+    keys(binding, 'request_sha context_sha ack_sha startup stage_nonce')
+    startup = binding['startup']
+    require(binding['request_sha'] == mailbox.request_sha and binding['context_sha'] == context_sha and binding['ack_sha'] == ack_sha
+        and _hex64(binding['stage_nonce']) and startup['context_sha'] == context_sha
+        and startup['descriptor_sha'] == sha256(_invocation_descriptor(ack_sha)).hexdigest()
+        and startup['probe_id'] == 'invocation_controller'
+        and startup['creator_pid'] == parse(_invocation_decode(mailbox._header))['broker_identity'][0], 'controller capture binding differs')
+    class ChannelInputs:
+        name, nonce = startup['channel_name'], binding['stage_nonce']
+    require(startup['argv'] == _invocation_controller_argv(mailbox, context_sha, ack_sha, ChannelInputs)
+        and startup['command_line'] == subprocess.list2cmdline(startup['argv']) and startup['cwd'] == str(ROOT)
+        and startup['environment_sha'] == digest(_held_mailbox_request(mailbox)['environment'])
+        and type(startup['owner_pid']) is int and 0 < startup['owner_pid'] < 2**32
+        and type(startup['owner_creation_filetime']) is int and startup['owner_creation_filetime'] > 0,
+        'controller exact startup inputs differ')
+    return binding
+
+
+def _held_mailbox_request(mailbox):
+    raw = mailbox._accepted.get('request')
+    require(raw is not None, 'already validated held mailbox request required')
+    value = parse(_invocation_decode(raw))['payload']
+    require(digest(value) == mailbox.request_sha, 'held mailbox request changed')
+    return value
+
+
+def _invocation_resources(armed, job_sample):
+    armed.check(active=True); request = parse(armed.request); mailbox = armed.mailbox
+    host = _host_memory(mailbox._api)
+    rss = host['rss_bytes']+job_sample['rss_bytes']; commit = host['peak_pagefile_bytes']+job_sample['peak_job_commit_bytes']
+    for name, value in dict(resource_samples=armed.resource_samples+1,
+            sampled_combined_peak_rss_bytes=max(armed.sampled_combined_peak_rss_bytes, rss),
+            conservative_combined_peak_commit_bytes=max(armed.conservative_combined_peak_commit_bytes, commit),
+            host_peak_pagefile_bytes=max(armed.host_peak_pagefile_bytes, host['peak_pagefile_bytes'])).items(): object.__setattr__(armed, name, value)
+    armed._commit()
+    require(rss <= request['combined_sampled_rss_bytes'] and commit <= request['combined_conservative_commit_bytes'], 'combined host and owned Job resource limit')
+    return dict(host=host, combined_rss_bytes=rss, conservative_combined_commit_bytes=commit, observed_at=time.monotonic())
+
+
+def _invocation_poll(armed, job_sample):
+    _invocation_resources(armed, job_sample)
+    request = parse(armed.request); mailbox = armed.mailbox
+    if armed.ack_raw is None:
+        offer = mailbox.read_packet('context')
+        if offer is not None:
+            header = parse(_invocation_decode(mailbox._header))
+            raw = _held_context_offer(request, armed.started, offer, header['broker_identity'])
+            before_ack = mailbox.read_packet('binding')
+            if mailbox._read_busy: return
+            require(before_ack is None, 'controller constructed before host ACK')
+            ack = _invocation_ack(mailbox, offer, armed.started); ack_raw = canonical(ack)
+            object.__setattr__(armed, 'held_context', raw.hex()); object.__setattr__(armed, 'ack_raw', ack_raw.hex()); armed._commit()
+            mailbox.write_packet('ack', ack)
+    if armed.ack_raw is not None:
+        probe = mailbox.read_packet('constructor_probe')
+        if probe is not None:
+            _accept_constructor_probe(armed, probe)
+        binding = mailbox.read_packet('binding')
+        if binding is not None:
+            context_sha = sha256(bytes.fromhex(armed.held_context)).hexdigest(); ack_sha = sha256(bytes.fromhex(armed.ack_raw)).hexdigest()
+            _check_controller_binding(mailbox, context_sha, ack_sha, binding)
+            if armed.controller_binding is not None: require(canonical(binding) == bytes.fromhex(armed.controller_binding), 'held controller capture changed')
+            object.__setattr__(armed, 'controller_binding', canonical(binding).hex()); armed._commit()
+
+
+def _constructor_probe_value(request, request_sha, context_sha, ack_sha, started, probe):
+    keys(probe, 'request_sha context_sha ack_sha phase stamp')
+    require(request['case'] == 'constructor_wait' and probe['request_sha'] == request_sha
+        and probe['context_sha'] == context_sha and probe['ack_sha'] == ack_sha
+        and probe['phase'] == 'controller_constructor_native_wait'
+        and type(probe['stamp']) is float and math.isfinite(probe['stamp']) and started <= probe['stamp'] <= time.monotonic(),
+        'closed constructor native wait marker differs')
+    return canonical(probe)
+
+
+def _accept_constructor_probe(armed, probe):
+    require(armed.held_context is not None and armed.ack_raw is not None, 'host context/ACK required before constructor marker')
+    raw = _constructor_probe_value(parse(armed.request), armed.mailbox.request_sha,
+        sha256(bytes.fromhex(armed.held_context)).hexdigest(), sha256(bytes.fromhex(armed.ack_raw)).hexdigest(), armed.started, probe)
+    require(armed.construction_probe is None or bytes.fromhex(armed.construction_probe) == raw, 'held constructor marker changed')
+    object.__setattr__(armed, 'construction_probe', raw.hex()); armed._commit()
+
+
+def _final_constructor_probe(armed):
+    # Caller has already established complete all-Job quiet and closed owners.
+    _closed_invocation_stage(armed.stage, successful=False)
+    probe = armed.mailbox.read_packet('constructor_probe', bookend=True, _wait=100)
+    require(not armed.mailbox._read_busy, 'final constructor marker observation busy')
+    if probe is not None: _accept_constructor_probe(armed, probe)
+    elif (parse(armed.request)['case'] == 'constructor_wait' and armed.stage.last_observation['primary_stop_reason'] == 'phase_limit'
+            and armed.held_context is not None and armed.ack_raw is not None):
+        require(False, 'constructor wait marker absent after quiet')
+
+
+def _closed_invocation_stage(stage, *, successful):
+    require(type(stage) is OwnedStage, 'actual retained invocation stage required'); stage._entry()
+    require(stage.real_owner and stage._attempted and type(stage.last_image) is bytes and not _role_stage_still_open(stage)
+        and canonical(stage.last_observation) == stage.last_image, 'closed invocation process observation required')
+    value = parse(stage.last_image)
+    require(value['job_quiet_confirmed'] is True and value['owner_evidence'] == 'direct_owned_child'
+        and _stage_complete_witness(stage.owner.quiescence_witness, stage.owner.pid, stage.owner.creation_filetime)
+        and canonical(value['quiescence_witness']) == canonical(stage.owner.quiescence_witness), 'actual invocation all-Job quiet required')
+    if successful: require(value['stage_process_observed_successfully'] is True and value['exit_code'] == 0, 'successful actual invocation process required')
+    return value
+
+
+def invoke_ordinary(armed):
+    require(type(armed) is ArmedInvocation, 'actual armed invocation capability required')
+    armed.check(); require(not armed.consumed, 'ordinary external invocation already consumed')
+    object.__setattr__(armed, 'consumed', True); armed._commit()
+    try:
+        require(time.monotonic() < armed.standby_deadline and armed.stage.owner.poll() is None, 'armed broker standby expired')
+        context_before_start = armed.mailbox.read_packet('context', bookend=True, _wait=100)
+        require(not armed.mailbox._read_busy and context_before_start is None, 'pre-START context absence unknown')
+        require(_invocation_ready_members(armed.stage.owner, parse(armed.request)) == armed.ready_members
+            and armed.stage.channel.read_available() == [], 'armed broker progressed before invocation')
+        started = time.monotonic(); object.__setattr__(armed, 'started', started); armed._commit()
+        require(started < armed.standby_deadline, 'armed broker standby expired during preflight')
+        armed.mailbox.write_packet('start', dict(request_sha=armed.mailbox.request_sha, started=started, context_deadline=started+8.))
+        process = _watch_stage(armed.stage, absolute_deadline=started+15.3, invocation=armed)
+        # A known active monitor failure owns the primary exception. Do not read
+        # protocol state or issue late ACKs after the Job has been stopped.
+        if armed.active_error is not None: raise armed.active_error
+        _closed_invocation_stage(armed.stage, successful=False)
+        _check_broker_capture(parse(armed.request), armed.mailbox, armed.stage)
+        _final_constructor_probe(armed)
+        value = None
+        diagnostic = None
+        if process['stage_process_observed_successfully']:
+            require(armed.held_context is not None and armed.ack_raw is not None and armed.controller_binding is not None, 'host held context/ACK/capture missing')
+            armed.mailbox.bookend()
+            value = armed.mailbox.read_packet('broker_return', bookend=True)
+            require(value is not None, 'broker return unavailable after actual quiet')
+            _check_invocation_return(armed, value)
+        elif process['primary_stop_reason'] in ('child_reported_error', 'child_exit_nonzero'):
+            failure = armed.mailbox.read_packet('broker_return', bookend=True)
+            if failure is not None:
+                if failure.get('kind') == 'failure':
+                    keys(failure, 'schema kind request_sha case phase primary cleanup F_launch_admitted '+' '.join(GATES))
+                    require(failure['schema'] == INVOCATION_SCHEMA and failure['request_sha'] == armed.mailbox.request_sha
+                        and failure['case'] == parse(armed.request)['case'] and failure['F_launch_admitted'] is False
+                        and all(failure[k] is False for k in GATES), 'external broker diagnostic binding differs')
+                    diagnostic = failure
+                else: diagnostic = dict(kind='unconsumed_success_return', pin=pin(canonical(failure)))
+        result = dict(schema=INVOCATION_SCHEMA, authority='DRAFT_NONAUTHORITATIVE', scope=ROLE_PROBE_SCOPE,
+            ordinary_external_invocation_completed=value is not None, request_sha=armed.mailbox.request_sha,
+            held_context_pin=pin(bytes.fromhex(armed.held_context)) if armed.held_context is not None else None,
+            ack_sha=sha256(bytes.fromhex(armed.ack_raw)).hexdigest() if armed.ack_raw is not None else None,
+            controller_binding_pin=pin(bytes.fromhex(armed.controller_binding)) if armed.controller_binding is not None else None,
+            constructor_probe=parse(bytes.fromhex(armed.construction_probe)) if armed.construction_probe is not None else None,
+            broker_process=process, broker_return=value, broker_diagnostic=diagnostic, armed_seconds=armed.ready_at-armed.armed_at,
+            standby_seconds=started-armed.ready_at, invocation_started=started,
+            resource_samples=armed.resource_samples, sampled_combined_peak_rss_bytes=armed.sampled_combined_peak_rss_bytes,
+            conservative_combined_peak_commit_bytes=armed.conservative_combined_peak_commit_bytes,
+            host_lifetime_peak_pagefile_bytes=armed.host_peak_pagefile_bytes, broker_job_counted_once=True,
+            host_hard_resource_enforcement_proved=False, arming_interrupt_bound_proved=False, whole_F_180_seconds_proved=False,
+            F_launch_admitted=False, saved_P1_fresh_process_verified=False, saved_P1_parent_adoption_verified=False, **GATES)
+        armed.mailbox.bookend()
+        armed.mailbox.close()
+        # Encode the complete payload before the resource-only final observation.
+        require(len(canonical(result)) <= 131072, 'external invocation result cap')
+        final_resource = _invocation_resources(armed, dict(rss_bytes=0, peak_job_commit_bytes=process['peak_job_commit_bytes']))
+        result.update(resource_samples=armed.resource_samples, sampled_combined_peak_rss_bytes=armed.sampled_combined_peak_rss_bytes,
+            conservative_combined_peak_commit_bytes=armed.conservative_combined_peak_commit_bytes,
+            host_lifetime_peak_pagefile_bytes=armed.host_peak_pagefile_bytes,
+            final_host_observation=dict(final_resource, after_payload_encoding=True, after_mailbox_close=True,
+                protocol_progress_permitted=False, final_envelope_allocation_interrupt_bound_proved=False))
+        require(len(canonical(result)) <= 131072, 'external invocation result cap')
+        object.__setattr__(armed, 'result_raw', canonical(result).hex()); armed._commit()
+        # The final envelope's encoding/storage is included in the deadline check;
+        # its hard interrupt/instantaneous-memory bound remains explicitly open.
+        require(time.monotonic() <= started+15.3, 'external final processing deadline')
+        return result
+    except BaseException as primary:
+        try: armed.close()
+        except BaseException as cleanup: raise InvocationUnresolved(armed, primary, (('external_close', cleanup),)) from primary
+        raise InvocationUnresolved(armed, primary) from primary
+
+
+def run_ordinary_invocation(output, case='normal'):
+    return invoke_ordinary(arm_ordinary_invocation(output, case))
+
+
+@dataclass(frozen=True, init=False)
+class InvocationRelay:
+    """Closed bridge between host-ACKed context and the external request channel."""
+    def __init__(self, stage, upstream, mailbox, ack_sha):
+        values = dict(stage=stage, upstream=upstream, mailbox=mailbox, ack_sha=ack_sha, creator=(os.getpid(), get_ident()))
+        values['binding'] = id(stage), id(upstream), id(mailbox), ack_sha, stage.channel._binding_inputs, upstream._binding_inputs
+        for name, value in values.items(): object.__setattr__(self, name, value)
+        self.check(stage)
+
+    def check(self, stage):
+        require(self.creator == (os.getpid(), get_ident()) and self.stage is stage
+            and (id(stage), id(self.upstream), id(self.mailbox), self.ack_sha, stage.channel._binding_inputs,
+                self.upstream._binding_inputs) == self.binding, 'creating invocation bridge required')
+        stage._entry(); self.upstream._live(); self.mailbox._live()
+        ack = self.mailbox.read_packet('ack', bookend=True, _wait=100); binding = self.mailbox.read_packet('binding', bookend=True, _wait=100)
+        require(ack is not None and digest(ack) == self.ack_sha and binding is not None
+            and stage.channel.descriptor == _invocation_descriptor(self.ack_sha)
+            and self.upstream.descriptor == ordinary_stage_descriptor('controller', 'invocation')
+            and self.upstream.context_sha == self.mailbox.request_sha and not self.upstream._reader
+            and stage.channel.context_sha == ack['context_sha'] and canonical(binding['startup']) == stage.startup,
+            'host ACK and actual controller bridge binding differs')
+
+    def enter(self, phase):
+        require(phase in STAGE_PHASES['controller'][1:], 'closed invocation bridge phase required')
+        self.upstream.enter(phase)
+
+    def __reduce__(self): raise TypeError('live invocation relay cannot be serialized')
+
+
+def _ordinary_native_wait():
+    api = _stage_api(); api.Sleep.argtypes = [W.DWORD]; api.Sleep.restype = None
+    api.Sleep(20000)
+
+
+def _invocation_publication_wait(phase, target):
+    require(Path(target).name == 'parent_observation.json', 'fixed invocation publication fault target')
+    if phase == 'after_write': _ordinary_native_wait()
+
+
+def _ordinary_invocation_broker(name, request_sha, stage_name, stage_nonce):
+    mailbox = writer = controller = channel = None
+    phase = 'bootstrap'
+    try:
+        mailbox = InvocationMailbox.attach(name, request_sha, 'broker')
+        request = mailbox.read_packet('request', bookend=True, _wait=100); require(request is not None, 'held invocation request unavailable')
+        request_raw = canonical(request); _check_invocation_request(request_raw)
+        writer = StageChannel.attach(stage_name, stage_nonce, request_sha, ordinary_stage_descriptor('controller', 'invocation'))
+        ready_at = time.monotonic(); standby = ready_at+request['standby_seconds']
+        mailbox.write_packet('ready', dict(request_sha=request_sha, ready_at=ready_at, standby_deadline=standby, context_created=False))
+        phase = 'ready'
+        start = None
+        while time.monotonic() < standby:
+            start = mailbox.read_packet('start')
+            if start is not None: break
+            time.sleep(.005)
+        require(start is not None, 'broker standby expired without START')
+        keys(start, 'request_sha started context_deadline')
+        started = start['started']
+        require(start['request_sha'] == request_sha and type(started) is float and math.isfinite(started)
+            and ready_at <= started <= time.monotonic() < standby and start['context_deadline'] == started+8., 'host absolute invocation start differs')
+        writer.enter('prepare')
+        phase = 'prepare'
+        if request['case'] == 'prepare_wait': _ordinary_native_wait()
+        _check_invocation_request(request_raw)
+        raw = make_role_probe_context(request['output_root'], started=started); context_sha = sha256(raw).hexdigest()
+        root = Path(request['output_root']); root.mkdir()
+        root_directories = directories(root); receipt = _publish_role_file(root/'context.json', raw)
+        phase = 'context'
+        require(directories(root) == root_directories and set(root.iterdir()) == {root/'context.json'}, 'external broker context-only publication differs')
+        offer = dict(context=parse(raw), context_sha=context_sha, context_receipt=receipt, root_directories=root_directories,
+            broker_identity=_own_process_identity(mailbox._api))
+        # The host performs this comparison independently using its own request bytes.
+        _held_context_offer(request, started, parse(canonical(offer)), _own_process_identity(mailbox._api))
+        mailbox.write_packet('context', offer)
+        phase = 'ack'
+        ack = None
+        while time.monotonic() < started+3.:
+            ack = mailbox.read_packet('ack')
+            if ack is not None: break
+            time.sleep(.005)
+        require(time.monotonic() < started+3., 'host context ACK exceeded prepare deadline')
+        require(ack is not None and canonical(ack) == canonical(_invocation_ack(mailbox, offer, started)), 'host exact context ACK missing or differs')
+        ack_sha = digest(ack)
+        phase = 'controller_constructor'
+        # Construction, capture, and release all follow the committed host ACK.
+        channel = StageChannel.create(context_sha, _invocation_descriptor(ack_sha))
+        factory = None
+        if request['case'] == 'constructor_wait':
+            from src.staged_rts24_process_guard_v1 import OwnedChild
+            class WaitingConstructor(OwnedChild):
+                def __init__(self, *args, **kwargs):
+                    mailbox.write_packet('constructor_probe', dict(request_sha=request_sha, context_sha=context_sha,
+                        ack_sha=ack_sha, phase='controller_constructor_native_wait', stamp=time.monotonic()))
+                    _ordinary_native_wait(); super().__init__(*args, **kwargs)
+            factory = WaitingConstructor
+        require(time.monotonic() < started+3., 'controller construction exceeded prepare deadline')
+        controller = _construct_stage_owner(_invocation_controller_argv(mailbox, context_sha, ack_sha, channel),
+            channel, 'invocation_controller', owner_factory=factory)
+        binding = dict(request_sha=request_sha, context_sha=context_sha, ack_sha=ack_sha, startup=parse(controller.startup), stage_nonce=channel.nonce)
+        mailbox.write_packet('binding', binding)
+        relay = InvocationRelay(controller, writer, mailbox, ack_sha)
+        phase = 'controller_watch'
+        process = _watch_stage(controller, absolute_deadline=started+8., relay=relay, initial_phase_deadline=started+3.)
+        _closed_invocation_stage(controller, successful=True)
+        returned = mailbox.read_packet('controller_return', bookend=True, _wait=100)
+        phase = 'controller_return'
+        require(returned is not None, 'controller return unavailable after actual quiet')
+        _check_controller_return(mailbox, returned, binding)
+        mailbox.bookend(_wait=100)
+        mailbox.write_packet('broker_return', dict(schema=INVOCATION_SCHEMA, request_sha=request_sha,
+            context_sha=context_sha, ack_sha=ack_sha, binding_sha=digest(binding), controller_process=process, controller_return=returned))
+        writer.enter('terminal')
+        mailbox.close(); writer.close()
+    except BaseException as primary:
+        errors = []
+        if controller is not None and _role_stage_still_open(controller):
+            if getattr(controller.owner, '_job', None) is not None:
+                try: _stop_owned_job(controller.owner); controller.owner.quiesce(max_seconds=1.)
+                except BaseException as error: errors.append(('controller_quiesce', error))
+            try: controller.close()
+            except BaseException as error: errors.append(('controller_close', error))
+        if channel is not None and controller is None:
+            try: channel.close()
+            except BaseException as error: errors.append(('controller_channel', error))
+        if mailbox is not None and mailbox._view is not None and mailbox._poison is None and 'request' in locals():
+            try:
+                mailbox.write_packet('broker_return', dict(schema=INVOCATION_SCHEMA, kind='failure', request_sha=request_sha,
+                    case=request['case'], phase=phase, primary=_stage_error(primary),
+                    cleanup=[dict(layer=label, error=_stage_error(error)) for label, error in errors[:4]], F_launch_admitted=False, **GATES))
+            except BaseException as error: errors.append(('broker_diagnostic', error))
+        if writer is not None:
+            if not writer._terminal:
+                try: writer.fail('external_broker_failed')
+                except BaseException as error: errors.append(('broker_signal', error))
+            try: writer.close()
+            except BaseException as error: errors.append(('broker_writer', error))
+        if mailbox is not None:
+            try: mailbox.close()
+            except BaseException as error: errors.append(('broker_mailbox', error))
+        raise InvocationUnresolved((mailbox, writer, controller, channel, primary), primary, errors) from primary
+
+
+def _ordinary_invocation_controller(name, request_sha, context_sha, ack_sha, stage_name, stage_nonce):
+    mailbox = writer = None
+    try:
+        mailbox = InvocationMailbox.attach(name, request_sha, 'controller')
+        binding = mailbox.read_packet('binding', bookend=True, _wait=100)
+        request = mailbox.read_packet('request', bookend=True, _wait=100)
+        _check_controller_binding(mailbox, context_sha, ack_sha, binding)
+        writer = StageChannel.attach(stage_name, stage_nonce, context_sha, _invocation_descriptor(ack_sha))
+        writer.enter('prepare')
+        offer = mailbox.read_packet('context', bookend=True, _wait=100)
+        start = mailbox.read_packet('start', bookend=True, _wait=100); ack = mailbox.read_packet('ack', bookend=True, _wait=100)
+        require(all(value is not None for value in (request, offer, start, ack)) and digest(ack) == ack_sha
+            and canonical(ack) == canonical(_invocation_ack(mailbox, offer, start['started'])), 'controller host ACK differs')
+        raw = _held_context_offer(request, start['started'], offer, parse(_invocation_decode(mailbox._header))['broker_identity'])
+        require(sha256(raw).hexdigest() == context_sha, 'controller held context differs')
+        context = check_role_probe_context(raw, context_sha); root = Path(context['output_root'])
+        require(read(root/'context.json') == raw and list(identity(ordinary(root/'context.json'))) == offer['context_receipt']['identity']
+            and [list(row) for row in directories(root)] == offer['root_directories']
+            and set(root.iterdir()) == {root/'context.json'}, 'controller external context publication identity differs')
+        for target in ('worker', 'worker/fresh', 'worker/fresh_parent', 'parent', 'diagnostics'): (root/target).mkdir()
+        store = RoleStore(raw, context_sha, digest(_role_tree(root)), 'controller')
+        result = _run_role_controller(store, writer, invocation_case=request['case'])
+        require(result['ordinary_graph_completed'] is True, 'controller ordinary graph failed')
+        mailbox.write_packet('controller_return', dict(schema=INVOCATION_SCHEMA, request_sha=request_sha, context_sha=context_sha,
+            ack_sha=ack_sha, binding_sha=digest(binding), result=result))
+        writer.enter('terminal'); mailbox.close(); writer.close()
+    except BaseException as primary:
+        errors = []
+        if writer is not None:
+            if not writer._terminal:
+                try: writer.fail('external_controller_failed')
+                except BaseException as error: errors.append(('controller_signal', error))
+            try: writer.close()
+            except BaseException as error: errors.append(('controller_writer', error))
+        if mailbox is not None:
+            try: mailbox.close()
+            except BaseException as error: errors.append(('controller_mailbox', error))
+        raise InvocationUnresolved((mailbox, writer, primary), primary, errors) from primary
+
+
+def _check_controller_return(mailbox, value, binding):
+    keys(value, 'schema request_sha context_sha ack_sha binding_sha result')
+    require(value['schema'] == INVOCATION_SCHEMA and value['request_sha'] == mailbox.request_sha
+        and all(value[name] == binding[name] for name in ('context_sha', 'ack_sha')) and value['binding_sha'] == digest(binding),
+        'controller return capture differs')
+    result = value['result']; keys(result, 'authority scope ordinary_graph_completed observation_pin input_bookends output_inventory output_root '
+        'F_launch_admitted saved_P1_fresh_process_verified saved_P1_parent_adoption_verified '+' '.join(GATES))
+    request = _held_mailbox_request(mailbox)
+    require(result['authority'] == 'DRAFT_NONAUTHORITATIVE' and result['scope'] == ROLE_PROBE_SCOPE
+        and result['ordinary_graph_completed'] is True and result['output_root'] == request['output_root']
+        and all(result[name] is False for name in (*GATES, 'F_launch_admitted', 'saved_P1_fresh_process_verified', 'saved_P1_parent_adoption_verified'))
+        and set(result['output_inventory']) == set(TARGETS)-{'diagnostics/failure.json'}
+        and [row['stage'] for row in result['input_bookends']] == ['G0', 'G2', 'G3']
+        and all(row['context_sha'] == binding['context_sha'] and row['source_sha'] == digest(request['source_pins']) for row in result['input_bookends']),
+        'controller complete ordinary return differs')
+    require(result['observation_pin'] == result['output_inventory']['parent/parent_observation.json']['pin'], 'controller final observation pin differs')
+    return value
+
+
+def _check_invocation_return(armed, value):
+    keys(value, 'schema request_sha context_sha ack_sha binding_sha controller_process controller_return')
+    binding = parse(bytes.fromhex(armed.controller_binding)); context_sha = sha256(bytes.fromhex(armed.held_context)).hexdigest()
+    ack_sha = sha256(bytes.fromhex(armed.ack_raw)).hexdigest()
+    _check_controller_binding(armed.mailbox, context_sha, ack_sha, binding)
+    require(value['schema'] == INVOCATION_SCHEMA and value['request_sha'] == armed.mailbox.request_sha
+        and value['context_sha'] == context_sha and value['ack_sha'] == ack_sha and value['binding_sha'] == digest(binding), 'broker return context/capture differs')
+    _check_controller_return(armed.mailbox, value['controller_return'], binding)
+    direct = armed.mailbox.read_packet('controller_return', bookend=True)
+    require(direct is not None and canonical(direct) == canonical(value['controller_return']), 'broker copied controller return differs')
+    record = value['controller_process']; outer = _closed_invocation_stage(armed.stage, successful=True)
+    require(set(record) == set(outer) and canonical(record['startup']) == canonical(binding['startup'])
+        and canonical(record['descriptor']) == _invocation_descriptor(ack_sha)
+        and all(record[name] is True for name in ('job_quiet_confirmed', 'stage_process_observed_successfully', 'logic_path_completed',
+            'quiet_witness_consistent', 'stage_transcript_complete', 'release_attempted')) and record['exit_code'] == 0
+        and all(record[name] is None for name in ('primary_stop_reason', 'monitor_error', 'termination_error', 'quiesce_error',
+            'close_error', 'channel_error', 'final_bookend_error', 'channel_close_error', 'relay_error')),
+        'successful controller observation differs')
+    startup = binding['startup']; witness = record['quiescence_witness']
+    require(_stage_complete_witness(witness, startup['owner_pid'], startup['owner_creation_filetime']), 'complete controller witness required')
+    identities = lambda w: {(row['pid'], row['creation_filetime']) for row in w['member_identities']}
+    require(identities(witness) <= identities(outer['quiescence_witness']), 'controller members absent from external all-Job witness')
+    header = record['stage_header']; expected_header = dict(schema='staged_saved_F_memory_header_v1', context_sha=context_sha,
+        nonce=binding['stage_nonce'], descriptor=parse(_invocation_descriptor(ack_sha)), owner_pid=startup['owner_pid'],
+        owner_creation_filetime=startup['owner_creation_filetime'], slots=STAGE_SLOTS, slot_bytes=STAGE_SLOT_BYTES)
+    require(canonical(header) == canonical(expected_header), 'controller transcript header differs')
+    frames = record['transcript_frames']; phases = [*STAGE_PHASES['controller'], 'terminal']; history = []
+    require(type(frames) is list and len(frames) == record['frames_observed'] == len(phases), 'controller transcript count differs')
+    for index, (frame, phase) in enumerate(zip(frames, phases)):
+        keys(frame, 'schema sequence phase binding_sha previous_sha producer_pid producer_creation_filetime stamp error_code')
+        require(frame['schema'] == 'staged_saved_F_memory_frame_v1' and type(frame['sequence']) is int and frame['sequence'] == index
+            and frame['phase'] == phase and frame['error_code'] is None
+            and frame['binding_sha'] == sha256(_stage_slot(canonical(header), STAGE_HEADER_COMMIT)).hexdigest()
+            and frame['previous_sha'] == (sha256(canonical(frames[index-1])).hexdigest() if index else '0'*64)
+            and (frame['producer_pid'], frame['producer_creation_filetime']) == (startup['owner_pid'], startup['owner_creation_filetime'])
+            and type(frame['stamp']) is float and math.isfinite(frame['stamp']) and armed.started <= frame['stamp'] <= armed.started+8.,
+            'controller transcript binding differs')
+        history.append(_stage_slot(canonical(frame), STAGE_COMMIT))
+    require(record['transcript_sha'] == sha256(b''.join(history)).hexdigest()
+        and type(record['samples']) is int and record['samples'] > 0
+        and record['sampled_tree_peak_rss_bytes'] <= record['descriptor']['rss_bytes']
+        and record['peak_job_commit_bytes'] <= record['descriptor']['job_commit_bytes']
+        and record['total_deadline'] <= armed.started+8. and record['observation_finished_at'] <= record['total_deadline']
+        and record['active_io_scope'] == 'kernel_and_fixed_shared_memory_only' and record['artifact_contents_read'] is False
+        and all(record[name] is False for name in (*GATES, 'F_launch_admitted', 'saved_P1_fresh_process_verified',
+            'saved_P1_parent_adoption_verified', 'external_constructor_and_monitor_interrupt_bound_proved', 'terminal_publication_bound_proved')),
+        'controller resource/time/authority record differs')
+    return value
 
 
 if __name__ == '__main__':

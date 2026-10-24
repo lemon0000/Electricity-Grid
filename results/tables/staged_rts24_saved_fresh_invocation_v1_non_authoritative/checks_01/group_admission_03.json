@@ -1,0 +1,51 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "automatic_retries": 0,
+  "caps": {
+    "invocation_edges_06": 20,
+    "invocation_graph_05": 30,
+    "invocation_units_04": 30
+  },
+  "groups": {
+    "invocation_edges_06": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_ready_expires_and_cannot_be_reused_or_serialized",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_host_resource_failure_never_reads_return",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_unknown_actual_quiet_blocks_return_consumption"
+    ],
+    "invocation_graph_05": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_real_external_host_holds_context_and_observes_complete_graph",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_native_wait_in_constructor_or_publication_is_stopped_by_external_job[prepare_wait]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_native_wait_in_constructor_or_publication_is_stopped_by_external_job[constructor_wait]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_native_wait_in_constructor_or_publication_is_stopped_by_external_job[publication_wait]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_wrong_host_ack_is_diagnosed_before_controller_construct[nonce]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_wrong_host_ack_is_diagnosed_before_controller_construct[receipt_sha]"
+    ],
+    "invocation_units_04": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_mailbox_rejects_replay_producer_and_accepted_drift[nonce]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_mailbox_rejects_replay_producer_and_accepted_drift[producer]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_mailbox_rejects_replay_producer_and_accepted_drift[sequence]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_mailbox_rejects_replay_producer_and_accepted_drift[previous]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_mailbox_rejects_replay_producer_and_accepted_drift[accepted_bytes]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_mailbox_rejects_replay_producer_and_accepted_drift[partial]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_mailbox_is_create_only_single_writer_and_single_use",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_context_offer_is_compared_to_independent_host_inputs[fixture]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_context_offer_is_compared_to_independent_host_inputs[source]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_context_offer_is_compared_to_independent_host_inputs[environment]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_context_offer_is_compared_to_independent_host_inputs[deadline]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_context_offer_is_compared_to_independent_host_inputs[gate]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_context_offer_is_compared_to_independent_host_inputs[receipt]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_context_offer_is_compared_to_independent_host_inputs[root]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_context_offer_is_compared_to_independent_host_inputs[broker]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_public_entry_rejects_unarmed_or_arbitrary_requests",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_terminal_failure_binds_only_contiguous_progress[1]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_terminal_failure_binds_only_contiguous_progress[2]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_terminal_failure_binds_only_contiguous_progress[3]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_terminal_failure_binds_only_contiguous_progress[hole]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_busy_poll_is_not_missing_prior_or_protocol_corruption",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_partial_mapping_cleanup_retains_actual_handle"
+    ]
+  },
+  "previous_pytest_seconds": 33.109999999993306,
+  "remaining_pytest_seconds": 206.8900000000067,
+  "scope": "fixed bounded writer lock, continuous terminal prefix, kernel ready identities, actual constructor wait marker"
+}

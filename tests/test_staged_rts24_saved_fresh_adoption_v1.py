@@ -1165,3 +1165,349 @@ def test_role_wrapper_keeps_watch_primary_and_stage_close_secondary(role_store, 
     assert normalized['role_primary']['message'] == 'watch primary'
     assert normalized['cleanup_errors'][0]['message'] == 'stage close secondary'
     stage.owner._members.clear()
+
+
+@pytest.fixture
+def invocation_mailbox():
+    import time
+    request = cli.canonical({'unit_protocol_only': True})
+    mailbox = cli.InvocationMailbox.create(sha256(request).hexdigest())
+    channel = cli.StageChannel.create(mailbox.request_sha, cli.ordinary_stage_descriptor('controller', 'invocation'))
+    owner = _StageUnitOwner(); channel.bind_owner(owner)
+    # Same-process endpoints exercise only the wire protocol, never process proof.
+    stage = cli.OwnedStage(owner, channel, b'{}', time.monotonic(), True)
+    mailbox.bind(stage, request)
+    broker = cli.InvocationMailbox.attach(mailbox.name, mailbox.request_sha, 'broker')
+    try: yield mailbox, broker
+    finally: broker.close(); mailbox.close(); channel.close()
+
+
+@pytest.mark.parametrize('fault', ['nonce', 'producer', 'sequence', 'previous', 'accepted_bytes', 'partial', 'sha', 'length'])
+def test_invocation_mailbox_rejects_replay_producer_and_accepted_drift(invocation_mailbox, fault):
+    mailbox, broker = invocation_mailbox
+    broker.write_packet('ready', {'ready': True})
+    offset, size = mailbox._layout['ready']; slot = cli.C.string_at(mailbox._view+offset, size)
+    if fault == 'accepted_bytes': assert mailbox.read_packet('ready') == {'ready': True}
+    value = cli.parse(cli._invocation_decode(slot))
+    if fault == 'nonce': value['direction_nonce'] = 'f'*64
+    elif fault == 'producer': value['producer_identity'][0] += 1
+    elif fault == 'sequence': value['sequence'] += 1
+    elif fault == 'previous': value['previous_sha'] = 'f'*64
+    elif fault == 'accepted_bytes': value['payload']['ready'] = False
+    changed = cli._invocation_slot(cli.canonical(value), size)
+    if fault == 'partial': changed = changed[:-8]+b'\0'*8
+    elif fault == 'sha': changed = changed[:-40]+b'x'*32+changed[-8:]
+    elif fault == 'length': changed = b'\xff'*4+changed[4:]
+    cli.C.memmove(mailbox._view+offset, changed, size)
+    with pytest.raises(ValueError): mailbox.read_packet('ready', bookend=True)
+    cli.C.memmove(mailbox._view+offset, slot, size)
+    with pytest.raises(cli.StageChannelError, match='remains unresolved'): mailbox.read_packet('ready')
+
+
+def test_invocation_mailbox_is_create_only_single_writer_and_single_use(invocation_mailbox):
+    mailbox, broker = invocation_mailbox
+    with pytest.raises(ValueError, match='collision'): cli.InvocationMailbox.create(mailbox.request_sha, name=mailbox.name)
+    broker.write_packet('ready', {'ready': True})
+    with pytest.raises(ValueError, match='already consumed'): broker.write_packet('ready', {'ready': True})
+    with pytest.raises(ValueError, match='wrong invocation transfer writer'): mailbox.write_packet('context', {})
+    with pytest.raises(ValueError): cli.InvocationMailbox.attach(mailbox.name, mailbox.request_sha, 'controller')
+
+
+@pytest.mark.parametrize('fault', ['fixture', 'source', 'environment', 'deadline', 'gate', 'receipt', 'root', 'broker'])
+def test_invocation_context_offer_is_compared_to_independent_host_inputs(tmp_path, monkeypatch, fault):
+    import time
+    request = cli.parse(cli._invocation_request(tmp_path/'output', 'normal')); started = time.monotonic()
+    raw = cli.make_role_probe_context(tmp_path/'output', started=started); root = tmp_path/'output'; root.mkdir()
+    receipt = cli._publish_role_file(root/'context.json', raw); broker = cli._own_process_identity(cli._stage_api())
+    offer = cli.parse(cli.canonical(dict(context=cli.parse(raw), context_sha=sha256(raw).hexdigest(),
+        context_receipt=receipt, root_directories=cli.directories(root), broker_identity=broker)))
+    if fault == 'fixture': offer['context']['fixture']['expected'] = 6
+    elif fault == 'source': offer['context']['source_pins'][cli.NEW_SOURCES[1]]['sha256'] = 'f'*64
+    elif fault == 'environment': offer['context']['environment']['PYTHONHASHSEED'] = '1'
+    elif fault == 'deadline': offer['context']['deadline'] += 1.
+    elif fault == 'gate': offer['context']['F_launch_admitted'] = True
+    elif fault == 'receipt': offer['context_receipt']['identity'][2] += 1
+    elif fault == 'root': offer['root_directories'][-1][0] += '_other'
+    elif fault == 'broker': offer['broker_identity'][0] += 1
+    if fault in ('fixture', 'source', 'environment', 'deadline', 'gate'):
+        changed = cli.canonical(offer['context']); offer['context_sha'] = sha256(changed).hexdigest()
+        offer['context_receipt'].update(cli.pin(changed)); offer['context_receipt']['identity'][2] = len(changed)
+    def forbidden(*args, **kwargs): pytest.fail('host offer validation performed filesystem I/O')
+    monkeypatch.setattr(cli, 'read', forbidden); monkeypatch.setattr(cli, 'directories', forbidden)
+    with pytest.raises(ValueError): cli._held_context_offer(request, started, offer, broker)
+
+
+def _capture_invocation(case, result, root):
+    files = {}
+    for name in cli.TARGETS:
+        for suffix in ('', '.pending'):
+            path = root/(name+suffix)
+            if path.exists():
+                raw = path.read_bytes()
+                files[name+suffix] = dict(pin=cli.pin(raw), hex=raw.hex()) if name != 'context.json' else dict(pin=cli.pin(raw))
+    projection = None
+    if (root/'context.json').exists():
+        projection = cli.parse((root/'context.json').read_bytes()); env = projection.pop('environment')
+        projection['environment_sha'] = cli.digest(env)
+    print('INVOCATION_GRAPH '+cli.canonical(dict(case=case, result=result, files=files, context_projection=projection,
+        context_projection_omits=['environment'], projection_is_original_context=False)).decode())
+
+
+def test_invocation_real_external_host_holds_context_and_observes_complete_graph(tmp_path, monkeypatch):
+    armed = cli.arm_ordinary_invocation(tmp_path/'output')
+    assert armed.held_context is None and armed.stage.owner._released and not (tmp_path/'output').exists()
+    original_read, original_write = armed.mailbox.read_packet, armed.mailbox.write_packet
+    ack_observation = dict(busy_seen=False, absence_confirmed=False, ack_written=False)
+    def read_packet(kind, **kwargs):
+        if kind == 'binding' and armed.ack_raw is None and not ack_observation['busy_seen']:
+            armed.mailbox._read_busy = True; ack_observation['busy_seen'] = True; return None
+        value = original_read(kind, **kwargs)
+        if kind == 'binding' and armed.ack_raw is None and not armed.mailbox._read_busy:
+            ack_observation['absence_confirmed'] = True
+        return value
+    def write_packet(kind, payload):
+        if kind == 'ack':
+            assert ack_observation['busy_seen'] and ack_observation['absence_confirmed']
+            ack_observation['ack_written'] = True
+        return original_write(kind, payload)
+    monkeypatch.setattr(armed.mailbox, 'read_packet', read_packet); monkeypatch.setattr(armed.mailbox, 'write_packet', write_packet)
+    def forbidden(*args, **kwargs): pytest.fail('external host active path performed artifact/source I/O or constructed actor')
+    with monkeypatch.context() as patch:
+        for name in ('read', 'directories', 'source_pins', '_construct_stage_owner'): patch.setattr(cli, name, forbidden)
+        patch.setattr(cli.os.path, 'lexists', forbidden)
+        try: result = cli.invoke_ordinary(armed)
+        except cli.InvocationUnresolved as error:
+            print('INVOCATION_NORMAL_UNRESOLVED '+cli.canonical(dict(primary=cli._stage_error(error.primary),
+                process=armed.stage.last_observation)).decode())
+            raise
+    _capture_invocation('normal', result, tmp_path/'output')
+    assert all(ack_observation.values())
+    assert result['ordinary_external_invocation_completed'] is True
+    _closed_stage_gates(result['broker_process'])
+    controller = result['broker_return']['controller_process']; _closed_stage_gates(controller)
+    parent = cli.parse((tmp_path/'output/worker/launcher.json').read_bytes())
+    fresh = cli.parse((tmp_path/'output/worker/fresh/launcher.json').read_bytes())
+    witnesses = [result['broker_process'], controller, parent, fresh]
+    member_sets = [{(m['pid'], m['creation_filetime']) for m in r['quiescence_witness']['member_identities']} for r in witnesses]
+    assert member_sets[3] < member_sets[2] < member_sets[1] < member_sets[0]
+    assert len(member_sets[0]) >= 8
+    assert result['broker_job_counted_once'] is True and result['resource_samples'] > 1
+    assert result['final_host_observation']['after_payload_encoding'] is result['final_host_observation']['after_mailbox_close'] is True
+    assert result['final_host_observation']['protocol_progress_permitted'] is False
+    assert result['sampled_combined_peak_rss_bytes'] >= result['broker_process']['sampled_tree_peak_rss_bytes']
+    assert result['conservative_combined_peak_commit_bytes'] >= result['host_lifetime_peak_pagefile_bytes']+result['broker_process']['peak_job_commit_bytes']
+    ack = cli.parse(bytes.fromhex(armed.ack_raw)); binding = cli.parse(bytes.fromhex(armed.controller_binding))
+    assert ack['context_sha'] == result['held_context_pin']['sha256'] == binding['context_sha']
+    assert controller['stage_header']['descriptor']['invocation_ack_sha'] == result['ack_sha']
+    context = cli.parse(bytes.fromhex(armed.held_context))
+    assert context['started'] == result['invocation_started'] and context['deadline'] == context['started']+8.
+    assert [f['phase'] for f in controller['transcript_frames']] == [*cli.STAGE_PHASES['controller'], 'terminal']
+    assert set(result['broker_return']['controller_return']['result']['output_inventory']) == set(cli.TARGETS)-{'diagnostics/failure.json'}
+    assert all(result[name] is False for name in (*cli.GATES, 'F_launch_admitted', 'saved_P1_fresh_process_verified', 'saved_P1_parent_adoption_verified',
+        'host_hard_resource_enforcement_proved', 'arming_interrupt_bound_proved', 'whole_F_180_seconds_proved'))
+    with pytest.raises(ValueError, match='already consumed'): cli.invoke_ordinary(armed)
+
+
+@pytest.mark.parametrize('case', ['prepare_wait', 'constructor_wait', 'publication_wait'])
+def test_invocation_native_wait_in_constructor_or_publication_is_stopped_by_external_job(tmp_path, monkeypatch, case):
+    import time
+    started = time.monotonic(); armed = cli.arm_ordinary_invocation(tmp_path/'output', case)
+    if case == 'constructor_wait':
+        original = armed.mailbox.read_packet
+        def delayed_marker(kind, **kwargs):
+            if kind == 'constructor_probe' and kwargs.get('_wait', 0) == 0 and not kwargs.get('bookend', False):
+                armed.mailbox._read_busy = True; return None
+            return original(kind, **kwargs)
+        monkeypatch.setattr(armed.mailbox, 'read_packet', delayed_marker)
+    try: result = cli.invoke_ordinary(armed)
+    except cli.InvocationUnresolved as error:
+        # Killing an actor while it holds the mailbox mutex preserves an
+        # unresolved protocol capability; physical all-Job quiet is separate.
+        assert case == 'publication_wait' and error.capability is armed
+        assert isinstance(error.primary, cli.StageChannelError) and error.primary.kind == 'abandoned'
+        result = dict(result_kind='retained_unresolved_capability', primary=cli._stage_error(error.primary),
+            ordinary_external_invocation_completed=False, broker_return=None, broker_process=armed.stage.last_observation,
+            held_context_pin=cli.pin(bytes.fromhex(armed.held_context)), ack_sha=sha256(bytes.fromhex(armed.ack_raw)).hexdigest(),
+            controller_binding_pin=cli.pin(bytes.fromhex(armed.controller_binding)), constructor_probe=None,
+            F_launch_admitted=False, saved_P1_fresh_process_verified=False, saved_P1_parent_adoption_verified=False, **cli.GATES)
+    _capture_invocation(case, result, tmp_path/'output')
+    assert time.monotonic()-started < 12.
+    record = result['broker_process']
+    assert result['ordinary_external_invocation_completed'] is False and result['broker_return'] is None
+    assert record['termination_requested'] is record['termination_call_succeeded'] is record['job_quiet_confirmed'] is True
+    assert record['stage_process_observed_successfully'] is False and record['quiescence_witness']['complete_inventory'] is True
+    assert record['primary_stop_reason'] == 'phase_limit'
+    if case == 'prepare_wait': assert not (tmp_path/'output').exists()
+    elif case == 'constructor_wait':
+        assert result['held_context_pin'] is not None and result['ack_sha'] is not None
+        assert result['constructor_probe']['phase'] == 'controller_constructor_native_wait' and result['controller_binding_pin'] is None
+        assert 2.9 <= record['observation_seconds'] <= 4.5 and record['frames_observed'] == 1
+        assert set((tmp_path/'output').iterdir()) == {tmp_path/'output/context.json'}
+    else:
+        assert (tmp_path/'output/parent/parent_observation.json.pending').exists()
+        assert not (tmp_path/'output/parent/parent_observation.json').exists()
+
+
+def test_invocation_ready_expires_and_cannot_be_reused_or_serialized(tmp_path):
+    import pickle,time
+    armed = cli.arm_ordinary_invocation(tmp_path/'output')
+    with pytest.raises(TypeError): pickle.dumps(armed)
+    time.sleep(max(0., armed.standby_deadline-time.monotonic())+.05)
+    with pytest.raises(cli.InvocationUnresolved) as found: cli.invoke_ordinary(armed)
+    assert found.value.capability is armed and found.value.primary.args == ('armed broker standby expired',)
+    assert armed.consumed and not (tmp_path/'output').exists()
+    assert cli._stage_complete_witness(armed.stage.owner.quiescence_witness, armed.stage.owner.pid, armed.stage.owner.creation_filetime)
+    with pytest.raises(ValueError, match='already consumed'): cli.invoke_ordinary(armed)
+
+
+@pytest.mark.parametrize('case', ['normal', 'constructor_wait'])
+def test_invocation_host_resource_failure_never_reads_return(tmp_path, monkeypatch, case):
+    armed = cli.arm_ordinary_invocation(tmp_path/'output', case); reads = []
+    original = armed.mailbox.read_packet
+    def read_packet(kind, **kwargs): reads.append(kind); return original(kind, **kwargs)
+    monkeypatch.setattr(armed.mailbox, 'read_packet', read_packet)
+    monkeypatch.setattr(cli, '_host_memory', lambda api: dict(rss_bytes=1024**3+1, peak_pagefile_bytes=0))
+    with pytest.raises(cli.InvocationUnresolved) as found: cli.invoke_ordinary(armed)
+    print('INVOCATION_RESOURCE_FAILURE '+cli.canonical(dict(primary=cli._stage_error(found.value.primary),
+        process=armed.stage.last_observation)).decode())
+    assert found.value.capability is armed and 'broker_return' not in reads
+    assert armed.sampled_combined_peak_rss_bytes > 1024**3
+    assert armed.stage.last_observation['stage_process_observed_successfully'] is False
+    assert armed.stage.last_observation['job_quiet_confirmed'] is True
+    assert armed.stage.last_observation['monitor_error']['message'] == 'combined host and owned Job resource limit'
+    assert cli._stage_error(found.value.primary)['message'] == 'combined host and owned Job resource limit'
+
+
+def test_invocation_unknown_actual_quiet_blocks_return_consumption(tmp_path, monkeypatch):
+    armed = cli.arm_ordinary_invocation(tmp_path/'output'); reads = []
+    original = armed.mailbox.read_packet
+    def read_packet(kind, **kwargs): reads.append(kind); return original(kind, **kwargs)
+    monkeypatch.setattr(armed.mailbox, 'read_packet', read_packet)
+    original_quiesce = armed.stage.owner.quiesce
+    def unknown(*, max_seconds):
+        original_quiesce(max_seconds=max_seconds); raise OSError('injected final quiet unknown')
+    monkeypatch.setattr(armed.stage.owner, 'quiesce', unknown)
+    with pytest.raises(cli.InvocationUnresolved) as found: cli.invoke_ordinary(armed)
+    print('INVOCATION_QUIET_UNKNOWN '+cli.canonical(dict(primary=cli._stage_error(found.value.primary),
+        process=armed.stage.last_observation)).decode())
+    assert found.value.capability is armed and 'broker_return' not in reads
+    assert armed.stage.last_observation['job_quiet_confirmed'] is False
+    assert armed.stage.last_observation['quiesce_error']['message'] == 'injected final quiet unknown'
+
+
+def test_invocation_public_entry_rejects_unarmed_or_arbitrary_requests(tmp_path):
+    with pytest.raises(ValueError): cli.invoke_ordinary({'ready': True})
+    with pytest.raises(ValueError): cli.arm_ordinary_invocation(tmp_path/'output', 'arbitrary')
+    with pytest.raises(ValueError): cli.arm_ordinary_invocation(cli.OUTPUT)
+    with pytest.raises(ValueError): cli.checked_stage_descriptor(cli.canonical(dict(cli.parse(cli.stage_descriptor('controller')), invocation_ack_sha='a'*64)))
+
+
+@pytest.mark.parametrize('prefix', [1, 2, 3, 'hole'])
+def test_invocation_terminal_failure_binds_only_contiguous_progress(invocation_mailbox, prefix):
+    mailbox, broker = invocation_mailbox
+    broker.write_packet('ready', {'unit': 'ready'})
+    if prefix in (2, 3): broker.write_packet('context', {'unit': 'context'})
+    if prefix == 3: broker.write_packet('binding', {'unit': 'binding'})
+    if prefix == 'hole':
+        offset, size = mailbox._layout['binding']; slot = cli._invocation_slot(b'{"unit":"hole"}', size)
+        cli.C.memmove(mailbox._view+offset, slot, size)
+        with pytest.raises(ValueError, match='noncontiguous'): broker.write_packet('broker_return', {'kind': 'failure'})
+    else:
+        broker.write_packet('broker_return', {'kind': 'failure', 'unit': True})
+        assert mailbox.read_packet('broker_return', bookend=True) == {'kind': 'failure', 'unit': True}
+        packet = cli.parse(cli._invocation_decode(mailbox._accepted['broker_return']))
+        assert packet['sequence'] == 0 and packet['previous_sha'] == '0'*64
+        assert len(packet['payload']['progress']['prefix']) == prefix and packet['payload']['status'] == 'failure'
+
+
+def test_invocation_busy_poll_is_not_missing_prior_or_protocol_corruption(invocation_mailbox):
+    import threading,time
+    mailbox, broker = invocation_mailbox; broker.write_packet('ready', {'unit': True})
+    acquired = threading.Event()
+    def hold_mutex():
+        assert mailbox._api.WaitForSingleObject(mailbox._mutex, 100) == 0
+        acquired.set(); time.sleep(.04); cli._native(mailbox._api.ReleaseMutex(mailbox._mutex))
+    thread = threading.Thread(target=hold_mutex); thread.start(); assert acquired.wait(1.)
+    try:
+        assert mailbox.read_packet('ready') is None and mailbox._read_busy and mailbox._poison is None
+        mailbox.write_packet('start', {'unit': 'one START'})
+    finally: thread.join(1.)
+    assert not thread.is_alive() and broker.read_packet('start', bookend=True) == {'unit': 'one START'}
+    assert mailbox._poison is None
+
+
+def test_invocation_partial_mapping_cleanup_retains_actual_handle(monkeypatch):
+    import pickle
+    original = cli._stage_api(); partial = None
+    class Api:
+        def __getattr__(self, name): return getattr(original, name)
+        def CreateMutexW(self, *args): cli.C.set_last_error(5); return 0
+        def CloseHandle(self, handle): return False
+    monkeypatch.setattr(cli, '_stage_api', lambda: Api())
+    try:
+        with pytest.raises(cli.StageChannelConstructionUnresolved) as found: cli.InvocationMailbox.create('a'*64)
+        partial = found.value.channel
+        assert type(partial) is cli.InvocationMailbox and partial._map is not None and partial._mutex is partial._view is None
+        assert found.value.primary['type'] == 'PermissionError' and found.value.cleanup_error['kind'] == 'close'
+        with pytest.raises(TypeError): pickle.dumps(found.value)
+    finally:
+        if partial is not None: partial._api = original; partial.close()
+
+
+@pytest.mark.parametrize('field', ['nonce', 'receipt_sha'])
+def test_invocation_wrong_host_ack_is_diagnosed_before_controller_construct(tmp_path, monkeypatch, field):
+    original = cli._invocation_ack
+    def bad(*args):
+        value = original(*args); value[field] = 'f'*64; return value
+    monkeypatch.setattr(cli, '_invocation_ack', bad)
+    result = cli.run_ordinary_invocation(tmp_path/'output')
+    _capture_invocation('wrong_ack_'+field, result, tmp_path/'output')
+    assert result['ordinary_external_invocation_completed'] is False and result['broker_return'] is None
+    assert result['held_context_pin'] is not None and result['controller_binding_pin'] is None
+    diagnostic = result['broker_diagnostic']
+    assert diagnostic['phase'] == 'ack' and diagnostic['primary']['message'] == 'host exact context ACK missing or differs'
+    assert result['broker_process']['job_quiet_confirmed'] is True
+    assert set((tmp_path/'output').iterdir()) == {tmp_path/'output/context.json'}
+
+
+def test_invocation_busy_prestart_cannot_write_start(tmp_path, monkeypatch):
+    armed = cli.arm_ordinary_invocation(tmp_path/'output'); original = armed.mailbox.read_packet; writes = []
+    helper_pids = {row[0] for row in armed.ready_members}-{armed.stage.owner.pid}
+    if helper_pids:
+        helpers = cli._terminal_console_helpers(armed.stage.owner, helper_pids)
+        assert len(helpers) == 1 and helpers[0]['image_path'].lower() == cli._system_console_path()
+        with monkeypatch.context() as patch:
+            patch.setattr(cli, '_system_console_path', lambda *args: 'C:\\wrong\\conhost.exe')
+            assert cli._terminal_console_helpers(armed.stage.owner, helper_pids) is None
+    assert cli._terminal_console_helpers(armed.stage.owner, {armed.stage.owner.pid}) is None
+    assert cli._terminal_console_helpers(armed.stage.owner, {1, 2}) is None
+    def busy(kind, **kwargs):
+        if kind == 'context': armed.mailbox._read_busy = True; return None
+        return original(kind, **kwargs)
+    monkeypatch.setattr(armed.mailbox, 'read_packet', busy)
+    monkeypatch.setattr(armed.mailbox, 'write_packet', lambda kind, payload: writes.append(kind))
+    with pytest.raises(cli.InvocationUnresolved) as found: cli.invoke_ordinary(armed)
+    assert found.value.primary.args == ('pre-START context absence unknown',) and writes == []
+    assert found.value.capability is armed and armed.stage.last_observation is None
+
+
+def test_invocation_expiry_during_preflight_prevents_start(tmp_path, monkeypatch):
+    armed = cli.arm_ordinary_invocation(tmp_path/'output'); original_members = cli._invocation_ready_members
+    original_clock = cli.time.monotonic; crossed = [False]; writes = []
+    def members(*args):
+        value = original_members(*args); crossed[0] = True; return value
+    monkeypatch.setattr(cli, '_invocation_ready_members', members)
+    monkeypatch.setattr(cli.time, 'monotonic', lambda: original_clock()+(2. if crossed[0] else 0.))
+    monkeypatch.setattr(armed.mailbox, 'write_packet', lambda kind, payload: writes.append(kind))
+    with pytest.raises(cli.InvocationUnresolved) as found: cli.invoke_ordinary(armed)
+    assert found.value.primary.args == ('armed broker standby expired during preflight',) and writes == []
+    assert found.value.capability is armed
+
+
+@pytest.mark.parametrize('case', ['normal', 'prepare_wait', 'publication_wait'])
+def test_invocation_constructor_probe_rejects_wrong_case(case):
+    import time
+    started = time.monotonic(); probe = dict(request_sha='a'*64, context_sha='b'*64, ack_sha='c'*64,
+        phase='controller_constructor_native_wait', stamp=time.monotonic())
+    with pytest.raises(ValueError, match='native wait marker differs'):
+        cli._constructor_probe_value({'case': case}, 'a'*64, 'b'*64, 'c'*64, started, probe)

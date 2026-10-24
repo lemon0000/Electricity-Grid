@@ -1,0 +1,823 @@
+{
+  "resource": [
+    {
+      "line": 1,
+      "pin": {
+        "bytes": 5618,
+        "sha256": "aaf4a00b020e8ae33212deb059674d0d13479cd9a160fac7951e11d7a645a0e2"
+      },
+      "value": {
+        "primary": {
+          "message": "combined host and owned Job resource limit",
+          "type": "ValueError"
+        },
+        "process": {
+          "F_launch_admitted": false,
+          "active_io_scope": "kernel_and_fixed_shared_memory_only",
+          "artifact_contents_read": false,
+          "authority": "DRAFT_NONAUTHORITATIVE",
+          "channel_close_error": null,
+          "channel_error": null,
+          "clock": {
+            "implementation": "GetTickCount64()",
+            "resolution": 0.015625
+          },
+          "close_attempts_finished_at": 54061.078,
+          "close_error": null,
+          "construction_seconds": 0.0,
+          "descriptor": {
+            "authority": "DRAFT_NONAUTHORITATIVE",
+            "job_commit_bytes": 536870912,
+            "member_handles": 1024,
+            "mode": "ordinary_owner_probe",
+            "phase_seconds": [
+              3.0,
+              1.2,
+              1.4,
+              1.0,
+              0.5,
+              1.2,
+              1.0,
+              0.5,
+              2.0,
+              2.0
+            ],
+            "phases": [
+              "prepare",
+              "parent",
+              "fresh",
+              "inner_quiesce",
+              "inner_terminal",
+              "parent_compare",
+              "outer_quiesce",
+              "outer_terminal",
+              "final_check",
+              "final_publish"
+            ],
+            "preset": "invocation",
+            "process_commit_bytes": 268435456,
+            "quiesce_seconds": 1.0,
+            "role": "controller",
+            "rss_bytes": 268435456,
+            "schema": "staged_saved_F_owner_descriptor_v1",
+            "terminal_seconds": 0.5,
+            "total_seconds": 15.3
+          },
+          "exit_code": 57585,
+          "external_constructor_and_monitor_interrupt_bound_proved": false,
+          "final_bookend_error": null,
+          "formal_result": false,
+          "frames_observed": 0,
+          "job_quiet_confirmed": true,
+          "logic_path_completed": false,
+          "monitor_error": {
+            "message": "combined host and owned Job resource limit",
+            "type": "ValueError"
+          },
+          "native_authorized": false,
+          "observation_finished_at": 54061.078,
+          "observation_seconds": 0.01600000000325963,
+          "owner_evidence": "direct_owned_child",
+          "peak_job_commit_bytes": 26578944,
+          "phases_observed": [
+            {
+              "observer_entered": 54061.062,
+              "phase": "prepare"
+            }
+          ],
+          "poll_interval_seconds": 0.01,
+          "primary_stop_reason": "monitor_or_channel_error",
+          "public_P2_execution_enabled": false,
+          "quiesce_completed_at": 54061.078,
+          "quiesce_error": null,
+          "quiesce_started_at": 54061.062,
+          "quiescence_witness": {
+            "active_processes": 0,
+            "all_handles_signaled": true,
+            "complete_inventory": true,
+            "final_pids": [],
+            "member_identities": [
+              {
+                "creation_filetime": 134373552821743853,
+                "pid": 768
+              },
+              {
+                "creation_filetime": 134373552821867160,
+                "pid": 23016
+              }
+            ],
+            "observed_unique_member_handles": 2,
+            "total_processes": 2
+          },
+          "quiet_witness_consistent": true,
+          "relay_error": null,
+          "release_attempted": true,
+          "remaining_total_seconds": 15.28399999999965,
+          "resource_admission": false,
+          "root_exit_observed_at": 54061.078,
+          "sampled_tree_peak_rss_bytes": 34148352,
+          "samples": 1,
+          "saved_P1_fresh_process_verified": false,
+          "saved_P1_parent_adoption_verified": false,
+          "scientific_evidence_adopted": false,
+          "scope": "ordinary_retained_owner_stage_process_only",
+          "stage_header": {
+            "context_sha": "7ebd9396e60fe3ed4bcc8b0d8012f61488632cdc5c5516cb833fe0f6e2a54abf",
+            "descriptor": {
+              "authority": "DRAFT_NONAUTHORITATIVE",
+              "job_commit_bytes": 536870912,
+              "member_handles": 1024,
+              "mode": "ordinary_owner_probe",
+              "phase_seconds": [
+                3.0,
+                1.2,
+                1.4,
+                1.0,
+                0.5,
+                1.2,
+                1.0,
+                0.5,
+                2.0,
+                2.0
+              ],
+              "phases": [
+                "prepare",
+                "parent",
+                "fresh",
+                "inner_quiesce",
+                "inner_terminal",
+                "parent_compare",
+                "outer_quiesce",
+                "outer_terminal",
+                "final_check",
+                "final_publish"
+              ],
+              "preset": "invocation",
+              "process_commit_bytes": 268435456,
+              "quiesce_seconds": 1.0,
+              "role": "controller",
+              "rss_bytes": 268435456,
+              "schema": "staged_saved_F_owner_descriptor_v1",
+              "terminal_seconds": 0.5,
+              "total_seconds": 15.3
+            },
+            "nonce": "f6a1e13a11ed47fe60dd5f5d446680d3136133c3c23015d126951fce27917f0b",
+            "owner_creation_filetime": 134373552821743853,
+            "owner_pid": 768,
+            "schema": "staged_saved_F_memory_header_v1",
+            "slot_bytes": 4096,
+            "slots": 16
+          },
+          "stage_process_observed_successfully": false,
+          "stage_transcript_complete": false,
+          "startup": {
+            "actual_os_commandline_independently_verified": false,
+            "argv": [
+              "D:\\Miniconda3\\envs\\compute\\python.exe",
+              "-B",
+              "-s",
+              "-c",
+              "from experiments import staged_rts24_saved_fresh_adoption_v1 as e; e._ordinary_invocation_broker('Local\\\\electricity_grid_saved_invocation_41fb2160e93862b26208ae8a9ab96e5bc7f7afa033adfe06fd18c123d9b428f6','7ebd9396e60fe3ed4bcc8b0d8012f61488632cdc5c5516cb833fe0f6e2a54abf','Local\\\\electricity_grid_saved_F_5b638b2f3cf33302376198c301552d39ee9f46f481f704686ff4c49a59caa514','f6a1e13a11ed47fe60dd5f5d446680d3136133c3c23015d126951fce27917f0b')"
+            ],
+            "authority": "DRAFT_NONAUTHORITATIVE",
+            "channel_name": "Local\\electricity_grid_saved_F_5b638b2f3cf33302376198c301552d39ee9f46f481f704686ff4c49a59caa514",
+            "command_line": "D:\\Miniconda3\\envs\\compute\\python.exe -B -s -c \"from experiments import staged_rts24_saved_fresh_adoption_v1 as e; e._ordinary_invocation_broker('Local\\\\electricity_grid_saved_invocation_41fb2160e93862b26208ae8a9ab96e5bc7f7afa033adfe06fd18c123d9b428f6','7ebd9396e60fe3ed4bcc8b0d8012f61488632cdc5c5516cb833fe0f6e2a54abf','Local\\\\electricity_grid_saved_F_5b638b2f3cf33302376198c301552d39ee9f46f481f704686ff4c49a59caa514','f6a1e13a11ed47fe60dd5f5d446680d3136133c3c23015d126951fce27917f0b')\"",
+            "context_sha": "7ebd9396e60fe3ed4bcc8b0d8012f61488632cdc5c5516cb833fe0f6e2a54abf",
+            "creator_pid": 42232,
+            "cwd": "D:\\CUHKSZ\\Research Project\\electricity-grid",
+            "descriptor_sha": "3bc31d3037d6b26f42af91b5f38e0b5923e939f126c60244b94de3b2e6f58df4",
+            "environment_sha": "6c0e0a26962d23335acd1f9f4491ac351faa46d6605b52983375118e6083ca03",
+            "owner_creation_filetime": 134373552821743853,
+            "owner_pid": 768,
+            "probe_id": "invocation_broker",
+            "schema": "staged_saved_F_probe_CreateProcess_inputs_v1",
+            "scope": "ordinary_owner_probe_only"
+          },
+          "terminal_accepted": null,
+          "terminal_exit_cap_seconds": 0.5,
+          "terminal_exit_deadline": null,
+          "terminal_exit_limiting_deadline": null,
+          "terminal_publication_bound_proved": false,
+          "terminal_system_helpers": [],
+          "terminal_tree_rss_bytes": null,
+          "termination_call_succeeded": true,
+          "termination_error": null,
+          "termination_requested": true,
+          "termination_requested_at": 54061.062,
+          "total_deadline": 54076.362,
+          "transcript_frames": [],
+          "transcript_sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "line": 2,
+      "pin": {
+        "bytes": 5613,
+        "sha256": "538195da46b54894cbc7f3c2ea2d395d13f0a0ca3afc708d7a17b79ff43e801c"
+      },
+      "value": {
+        "primary": {
+          "message": "combined host and owned Job resource limit",
+          "type": "ValueError"
+        },
+        "process": {
+          "F_launch_admitted": false,
+          "active_io_scope": "kernel_and_fixed_shared_memory_only",
+          "artifact_contents_read": false,
+          "authority": "DRAFT_NONAUTHORITATIVE",
+          "channel_close_error": null,
+          "channel_error": null,
+          "clock": {
+            "implementation": "GetTickCount64()",
+            "resolution": 0.015625
+          },
+          "close_attempts_finished_at": 54061.5,
+          "close_error": null,
+          "construction_seconds": 0.0,
+          "descriptor": {
+            "authority": "DRAFT_NONAUTHORITATIVE",
+            "job_commit_bytes": 536870912,
+            "member_handles": 1024,
+            "mode": "ordinary_owner_probe",
+            "phase_seconds": [
+              3.0,
+              1.2,
+              1.4,
+              1.0,
+              0.5,
+              1.2,
+              1.0,
+              0.5,
+              2.0,
+              2.0
+            ],
+            "phases": [
+              "prepare",
+              "parent",
+              "fresh",
+              "inner_quiesce",
+              "inner_terminal",
+              "parent_compare",
+              "outer_quiesce",
+              "outer_terminal",
+              "final_check",
+              "final_publish"
+            ],
+            "preset": "invocation",
+            "process_commit_bytes": 268435456,
+            "quiesce_seconds": 1.0,
+            "role": "controller",
+            "rss_bytes": 268435456,
+            "schema": "staged_saved_F_owner_descriptor_v1",
+            "terminal_seconds": 0.5,
+            "total_seconds": 15.3
+          },
+          "exit_code": 57585,
+          "external_constructor_and_monitor_interrupt_bound_proved": false,
+          "final_bookend_error": null,
+          "formal_result": false,
+          "frames_observed": 0,
+          "job_quiet_confirmed": true,
+          "logic_path_completed": false,
+          "monitor_error": {
+            "message": "combined host and owned Job resource limit",
+            "type": "ValueError"
+          },
+          "native_authorized": false,
+          "observation_finished_at": 54061.5,
+          "observation_seconds": 0.01600000000325963,
+          "owner_evidence": "direct_owned_child",
+          "peak_job_commit_bytes": 26570752,
+          "phases_observed": [
+            {
+              "observer_entered": 54061.484,
+              "phase": "prepare"
+            }
+          ],
+          "poll_interval_seconds": 0.01,
+          "primary_stop_reason": "monitor_or_channel_error",
+          "public_P2_execution_enabled": false,
+          "quiesce_completed_at": 54061.5,
+          "quiesce_error": null,
+          "quiesce_started_at": 54061.484,
+          "quiescence_witness": {
+            "active_processes": 0,
+            "all_handles_signaled": true,
+            "complete_inventory": true,
+            "final_pids": [],
+            "member_identities": [
+              {
+                "creation_filetime": 134373552826068518,
+                "pid": 6108
+              },
+              {
+                "creation_filetime": 134373552826191244,
+                "pid": 44784
+              }
+            ],
+            "observed_unique_member_handles": 2,
+            "total_processes": 2
+          },
+          "quiet_witness_consistent": true,
+          "relay_error": null,
+          "release_attempted": true,
+          "remaining_total_seconds": 15.28399999999965,
+          "resource_admission": false,
+          "root_exit_observed_at": 54061.5,
+          "sampled_tree_peak_rss_bytes": 34242560,
+          "samples": 1,
+          "saved_P1_fresh_process_verified": false,
+          "saved_P1_parent_adoption_verified": false,
+          "scientific_evidence_adopted": false,
+          "scope": "ordinary_retained_owner_stage_process_only",
+          "stage_header": {
+            "context_sha": "584626dc32ffb3d7f0d3ffd1d8bcf28dc6af9a02e15b335e591e8f24d63324b0",
+            "descriptor": {
+              "authority": "DRAFT_NONAUTHORITATIVE",
+              "job_commit_bytes": 536870912,
+              "member_handles": 1024,
+              "mode": "ordinary_owner_probe",
+              "phase_seconds": [
+                3.0,
+                1.2,
+                1.4,
+                1.0,
+                0.5,
+                1.2,
+                1.0,
+                0.5,
+                2.0,
+                2.0
+              ],
+              "phases": [
+                "prepare",
+                "parent",
+                "fresh",
+                "inner_quiesce",
+                "inner_terminal",
+                "parent_compare",
+                "outer_quiesce",
+                "outer_terminal",
+                "final_check",
+                "final_publish"
+              ],
+              "preset": "invocation",
+              "process_commit_bytes": 268435456,
+              "quiesce_seconds": 1.0,
+              "role": "controller",
+              "rss_bytes": 268435456,
+              "schema": "staged_saved_F_owner_descriptor_v1",
+              "terminal_seconds": 0.5,
+              "total_seconds": 15.3
+            },
+            "nonce": "fd1fedb273d722efb1e6d386ad3c838449de1c9d06be298769e2327f9c77a816",
+            "owner_creation_filetime": 134373552826068518,
+            "owner_pid": 6108,
+            "schema": "staged_saved_F_memory_header_v1",
+            "slot_bytes": 4096,
+            "slots": 16
+          },
+          "stage_process_observed_successfully": false,
+          "stage_transcript_complete": false,
+          "startup": {
+            "actual_os_commandline_independently_verified": false,
+            "argv": [
+              "D:\\Miniconda3\\envs\\compute\\python.exe",
+              "-B",
+              "-s",
+              "-c",
+              "from experiments import staged_rts24_saved_fresh_adoption_v1 as e; e._ordinary_invocation_broker('Local\\\\electricity_grid_saved_invocation_bd28f4f75fffc8958d94f9bea11047661e745c0781c08d143c34c2d2f1b6d36f','584626dc32ffb3d7f0d3ffd1d8bcf28dc6af9a02e15b335e591e8f24d63324b0','Local\\\\electricity_grid_saved_F_a50a01a5d657e9164c5f37acb739ce21a23ec3529ad6d3506ea77a535a0c3e40','fd1fedb273d722efb1e6d386ad3c838449de1c9d06be298769e2327f9c77a816')"
+            ],
+            "authority": "DRAFT_NONAUTHORITATIVE",
+            "channel_name": "Local\\electricity_grid_saved_F_a50a01a5d657e9164c5f37acb739ce21a23ec3529ad6d3506ea77a535a0c3e40",
+            "command_line": "D:\\Miniconda3\\envs\\compute\\python.exe -B -s -c \"from experiments import staged_rts24_saved_fresh_adoption_v1 as e; e._ordinary_invocation_broker('Local\\\\electricity_grid_saved_invocation_bd28f4f75fffc8958d94f9bea11047661e745c0781c08d143c34c2d2f1b6d36f','584626dc32ffb3d7f0d3ffd1d8bcf28dc6af9a02e15b335e591e8f24d63324b0','Local\\\\electricity_grid_saved_F_a50a01a5d657e9164c5f37acb739ce21a23ec3529ad6d3506ea77a535a0c3e40','fd1fedb273d722efb1e6d386ad3c838449de1c9d06be298769e2327f9c77a816')\"",
+            "context_sha": "584626dc32ffb3d7f0d3ffd1d8bcf28dc6af9a02e15b335e591e8f24d63324b0",
+            "creator_pid": 42232,
+            "cwd": "D:\\CUHKSZ\\Research Project\\electricity-grid",
+            "descriptor_sha": "3bc31d3037d6b26f42af91b5f38e0b5923e939f126c60244b94de3b2e6f58df4",
+            "environment_sha": "6c0e0a26962d23335acd1f9f4491ac351faa46d6605b52983375118e6083ca03",
+            "owner_creation_filetime": 134373552826068518,
+            "owner_pid": 6108,
+            "probe_id": "invocation_broker",
+            "schema": "staged_saved_F_probe_CreateProcess_inputs_v1",
+            "scope": "ordinary_owner_probe_only"
+          },
+          "terminal_accepted": null,
+          "terminal_exit_cap_seconds": 0.5,
+          "terminal_exit_deadline": null,
+          "terminal_exit_limiting_deadline": null,
+          "terminal_publication_bound_proved": false,
+          "terminal_system_helpers": [],
+          "terminal_tree_rss_bytes": null,
+          "termination_call_succeeded": true,
+          "termination_error": null,
+          "termination_requested": true,
+          "termination_requested_at": 54061.484,
+          "total_deadline": 54076.784,
+          "transcript_frames": [],
+          "transcript_sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    }
+  ],
+  "source_log": "invocation_edges_22.stdout.log",
+  "source_log_pin": {
+    "bytes": 22628,
+    "sha256": "5311c303148ca392d10072b7b0223238d2cbcbd3fa312c407877d86c541dfaa4"
+  },
+  "unknown_quiet": [
+    {
+      "line": 3,
+      "pin": {
+        "bytes": 10221,
+        "sha256": "2d323e6406e68b860625791f8ae3ebc5e65f84a61ede65a1297d60662321b785"
+      },
+      "value": {
+        "primary": {
+          "message": "actual invocation all-Job quiet required",
+          "type": "ValueError"
+        },
+        "process": {
+          "F_launch_admitted": false,
+          "active_io_scope": "kernel_and_fixed_shared_memory_only",
+          "artifact_contents_read": false,
+          "authority": "DRAFT_NONAUTHORITATIVE",
+          "channel_close_error": null,
+          "channel_error": null,
+          "clock": {
+            "implementation": "GetTickCount64()",
+            "resolution": 0.015625
+          },
+          "close_attempts_finished_at": 54065.078,
+          "close_error": null,
+          "construction_seconds": 0.0,
+          "descriptor": {
+            "authority": "DRAFT_NONAUTHORITATIVE",
+            "job_commit_bytes": 536870912,
+            "member_handles": 1024,
+            "mode": "ordinary_owner_probe",
+            "phase_seconds": [
+              3.0,
+              1.2,
+              1.4,
+              1.0,
+              0.5,
+              1.2,
+              1.0,
+              0.5,
+              2.0,
+              2.0
+            ],
+            "phases": [
+              "prepare",
+              "parent",
+              "fresh",
+              "inner_quiesce",
+              "inner_terminal",
+              "parent_compare",
+              "outer_quiesce",
+              "outer_terminal",
+              "final_check",
+              "final_publish"
+            ],
+            "preset": "invocation",
+            "process_commit_bytes": 268435456,
+            "quiesce_seconds": 1.0,
+            "role": "controller",
+            "rss_bytes": 268435456,
+            "schema": "staged_saved_F_owner_descriptor_v1",
+            "terminal_seconds": 0.5,
+            "total_seconds": 15.3
+          },
+          "exit_code": 0,
+          "external_constructor_and_monitor_interrupt_bound_proved": false,
+          "final_bookend_error": null,
+          "formal_result": false,
+          "frames_observed": 11,
+          "job_quiet_confirmed": false,
+          "logic_path_completed": false,
+          "monitor_error": null,
+          "native_authorized": false,
+          "observation_finished_at": 54065.078,
+          "observation_seconds": 3.1569999999992433,
+          "owner_evidence": "direct_owned_child",
+          "peak_job_commit_bytes": 83767296,
+          "phases_observed": [
+            {
+              "observer_entered": 54061.921,
+              "phase": "prepare"
+            },
+            {
+              "observer_entered": 54062.609,
+              "phase": "parent"
+            },
+            {
+              "observer_entered": 54063.125,
+              "phase": "fresh"
+            },
+            {
+              "observer_entered": 54063.593,
+              "phase": "inner_quiesce"
+            },
+            {
+              "observer_entered": 54063.593,
+              "phase": "inner_terminal"
+            },
+            {
+              "observer_entered": 54063.734,
+              "phase": "parent_compare"
+            },
+            {
+              "observer_entered": 54063.921,
+              "phase": "outer_quiesce"
+            },
+            {
+              "observer_entered": 54063.921,
+              "phase": "outer_terminal"
+            },
+            {
+              "observer_entered": 54063.968,
+              "phase": "final_check"
+            },
+            {
+              "observer_entered": 54064.593,
+              "phase": "final_publish"
+            }
+          ],
+          "poll_interval_seconds": 0.01,
+          "primary_stop_reason": "quiesce_unknown",
+          "public_P2_execution_enabled": false,
+          "quiesce_completed_at": null,
+          "quiesce_error": {
+            "message": "injected final quiet unknown",
+            "type": "OSError"
+          },
+          "quiesce_started_at": 54065.078,
+          "quiescence_witness": {
+            "active_processes": 0,
+            "all_handles_signaled": true,
+            "complete_inventory": true,
+            "final_pids": [],
+            "member_identities": [
+              {
+                "creation_filetime": 134373552830345237,
+                "pid": 42872
+              },
+              {
+                "creation_filetime": 134373552830467855,
+                "pid": 39868
+              },
+              {
+                "creation_filetime": 134373552834895977,
+                "pid": 11620
+              },
+              {
+                "creation_filetime": 134373552835247074,
+                "pid": 25580
+              },
+              {
+                "creation_filetime": 134373552840328817,
+                "pid": 31292
+              },
+              {
+                "creation_filetime": 134373552840992575,
+                "pid": 744
+              },
+              {
+                "creation_filetime": 134373552845143698,
+                "pid": 2640
+              },
+              {
+                "creation_filetime": 134373552845777935,
+                "pid": 33700
+              }
+            ],
+            "observed_unique_member_handles": 8,
+            "total_processes": 8
+          },
+          "quiet_witness_consistent": false,
+          "relay_error": null,
+          "release_attempted": true,
+          "remaining_total_seconds": 12.143000000003667,
+          "resource_admission": false,
+          "root_exit_observed_at": 54065.062,
+          "sampled_tree_peak_rss_bytes": 156471296,
+          "samples": 130,
+          "saved_P1_fresh_process_verified": false,
+          "saved_P1_parent_adoption_verified": false,
+          "scientific_evidence_adopted": false,
+          "scope": "ordinary_retained_owner_stage_process_only",
+          "stage_header": {
+            "context_sha": "71845ec3a8089142abb9231e039cafd37d90be07d409d3f16f2e139985cfa4d4",
+            "descriptor": {
+              "authority": "DRAFT_NONAUTHORITATIVE",
+              "job_commit_bytes": 536870912,
+              "member_handles": 1024,
+              "mode": "ordinary_owner_probe",
+              "phase_seconds": [
+                3.0,
+                1.2,
+                1.4,
+                1.0,
+                0.5,
+                1.2,
+                1.0,
+                0.5,
+                2.0,
+                2.0
+              ],
+              "phases": [
+                "prepare",
+                "parent",
+                "fresh",
+                "inner_quiesce",
+                "inner_terminal",
+                "parent_compare",
+                "outer_quiesce",
+                "outer_terminal",
+                "final_check",
+                "final_publish"
+              ],
+              "preset": "invocation",
+              "process_commit_bytes": 268435456,
+              "quiesce_seconds": 1.0,
+              "role": "controller",
+              "rss_bytes": 268435456,
+              "schema": "staged_saved_F_owner_descriptor_v1",
+              "terminal_seconds": 0.5,
+              "total_seconds": 15.3
+            },
+            "nonce": "51deb2e26ebb3708e63a098ac266c7a002bff1ce6d5db623ceebb6e988e6de1d",
+            "owner_creation_filetime": 134373552830345237,
+            "owner_pid": 42872,
+            "schema": "staged_saved_F_memory_header_v1",
+            "slot_bytes": 4096,
+            "slots": 16
+          },
+          "stage_process_observed_successfully": false,
+          "stage_transcript_complete": true,
+          "startup": {
+            "actual_os_commandline_independently_verified": false,
+            "argv": [
+              "D:\\Miniconda3\\envs\\compute\\python.exe",
+              "-B",
+              "-s",
+              "-c",
+              "from experiments import staged_rts24_saved_fresh_adoption_v1 as e; e._ordinary_invocation_broker('Local\\\\electricity_grid_saved_invocation_77bc100d4f365b7e879fb4a726954f113535b306294958cb3627cf5c02412c80','71845ec3a8089142abb9231e039cafd37d90be07d409d3f16f2e139985cfa4d4','Local\\\\electricity_grid_saved_F_a00426e68b9f19407ac1f6072bdd17b722d3b85243897a5b547e6e14b63bb4b1','51deb2e26ebb3708e63a098ac266c7a002bff1ce6d5db623ceebb6e988e6de1d')"
+            ],
+            "authority": "DRAFT_NONAUTHORITATIVE",
+            "channel_name": "Local\\electricity_grid_saved_F_a00426e68b9f19407ac1f6072bdd17b722d3b85243897a5b547e6e14b63bb4b1",
+            "command_line": "D:\\Miniconda3\\envs\\compute\\python.exe -B -s -c \"from experiments import staged_rts24_saved_fresh_adoption_v1 as e; e._ordinary_invocation_broker('Local\\\\electricity_grid_saved_invocation_77bc100d4f365b7e879fb4a726954f113535b306294958cb3627cf5c02412c80','71845ec3a8089142abb9231e039cafd37d90be07d409d3f16f2e139985cfa4d4','Local\\\\electricity_grid_saved_F_a00426e68b9f19407ac1f6072bdd17b722d3b85243897a5b547e6e14b63bb4b1','51deb2e26ebb3708e63a098ac266c7a002bff1ce6d5db623ceebb6e988e6de1d')\"",
+            "context_sha": "71845ec3a8089142abb9231e039cafd37d90be07d409d3f16f2e139985cfa4d4",
+            "creator_pid": 42232,
+            "cwd": "D:\\CUHKSZ\\Research Project\\electricity-grid",
+            "descriptor_sha": "3bc31d3037d6b26f42af91b5f38e0b5923e939f126c60244b94de3b2e6f58df4",
+            "environment_sha": "6c0e0a26962d23335acd1f9f4491ac351faa46d6605b52983375118e6083ca03",
+            "owner_creation_filetime": 134373552830345237,
+            "owner_pid": 42872,
+            "probe_id": "invocation_broker",
+            "schema": "staged_saved_F_probe_CreateProcess_inputs_v1",
+            "scope": "ordinary_owner_probe_only"
+          },
+          "terminal_accepted": 54065.046,
+          "terminal_exit_cap_seconds": 0.5,
+          "terminal_exit_deadline": 54065.546,
+          "terminal_exit_limiting_deadline": "exit_cap",
+          "terminal_publication_bound_proved": false,
+          "terminal_system_helpers": [],
+          "terminal_tree_rss_bytes": 0,
+          "termination_call_succeeded": false,
+          "termination_error": null,
+          "termination_requested": false,
+          "termination_requested_at": null,
+          "total_deadline": 54077.221000000005,
+          "transcript_frames": [
+            {
+              "binding_sha": "84d654ba1b2418557393338d56c36c73f54153b0d9a19c147f0eaef92c63523d",
+              "error_code": null,
+              "phase": "prepare",
+              "previous_sha": "0000000000000000000000000000000000000000000000000000000000000000",
+              "producer_creation_filetime": 134373552830345237,
+              "producer_pid": 42872,
+              "schema": "staged_saved_F_memory_frame_v1",
+              "sequence": 0,
+              "stamp": 54061.921
+            },
+            {
+              "binding_sha": "84d654ba1b2418557393338d56c36c73f54153b0d9a19c147f0eaef92c63523d",
+              "error_code": null,
+              "phase": "parent",
+              "previous_sha": "d035a441f4aa3b4b81844ca332499a110516b65ec5cc318014cb27301622347b",
+              "producer_creation_filetime": 134373552830345237,
+              "producer_pid": 42872,
+              "schema": "staged_saved_F_memory_frame_v1",
+              "sequence": 1,
+              "stamp": 54062.593
+            },
+            {
+              "binding_sha": "84d654ba1b2418557393338d56c36c73f54153b0d9a19c147f0eaef92c63523d",
+              "error_code": null,
+              "phase": "fresh",
+              "previous_sha": "d06d6371f910ad1c14e1231c3a45475689d93ed14609faacd7a5169022c3b6af",
+              "producer_creation_filetime": 134373552830345237,
+              "producer_pid": 42872,
+              "schema": "staged_saved_F_memory_frame_v1",
+              "sequence": 2,
+              "stamp": 54063.093
+            },
+            {
+              "binding_sha": "84d654ba1b2418557393338d56c36c73f54153b0d9a19c147f0eaef92c63523d",
+              "error_code": null,
+              "phase": "inner_quiesce",
+              "previous_sha": "9f6102518a7e6583068a592a2645686871fc5f0ad342c6dfe8a819758dbd7b08",
+              "producer_creation_filetime": 134373552830345237,
+              "producer_pid": 42872,
+              "schema": "staged_saved_F_memory_frame_v1",
+              "sequence": 3,
+              "stamp": 54063.578
+            },
+            {
+              "binding_sha": "84d654ba1b2418557393338d56c36c73f54153b0d9a19c147f0eaef92c63523d",
+              "error_code": null,
+              "phase": "inner_terminal",
+              "previous_sha": "f05da65149bf63afce8af4bd416f8c780fae2c2b9ebfbbacd2334a36f9f58bb3",
+              "producer_creation_filetime": 134373552830345237,
+              "producer_pid": 42872,
+              "schema": "staged_saved_F_memory_frame_v1",
+              "sequence": 4,
+              "stamp": 54063.578
+            },
+            {
+              "binding_sha": "84d654ba1b2418557393338d56c36c73f54153b0d9a19c147f0eaef92c63523d",
+              "error_code": null,
+              "phase": "parent_compare",
+              "previous_sha": "f5829637eb6a1ad7f912a0b657db5e8e1273362fcb83e905c0e92838d27384b6",
+              "producer_creation_filetime": 134373552830345237,
+              "producer_pid": 42872,
+              "schema": "staged_saved_F_memory_frame_v1",
+              "sequence": 5,
+              "stamp": 54063.734
+            },
+            {
+              "binding_sha": "84d654ba1b2418557393338d56c36c73f54153b0d9a19c147f0eaef92c63523d",
+              "error_code": null,
+              "phase": "outer_quiesce",
+              "previous_sha": "a2c0791f776fc4aae9fb9e1541101552be42b142b7de44ec91b2dc1a78501bd0",
+              "producer_creation_filetime": 134373552830345237,
+              "producer_pid": 42872,
+              "schema": "staged_saved_F_memory_frame_v1",
+              "sequence": 6,
+              "stamp": 54063.906
+            },
+            {
+              "binding_sha": "84d654ba1b2418557393338d56c36c73f54153b0d9a19c147f0eaef92c63523d",
+              "error_code": null,
+              "phase": "outer_terminal",
+              "previous_sha": "80190f9378cc9addee0312ae6554b5ab0de9795976356be35b4bde352f733506",
+              "producer_creation_filetime": 134373552830345237,
+              "producer_pid": 42872,
+              "schema": "staged_saved_F_memory_frame_v1",
+              "sequence": 7,
+              "stamp": 54063.906
+            },
+            {
+              "binding_sha": "84d654ba1b2418557393338d56c36c73f54153b0d9a19c147f0eaef92c63523d",
+              "error_code": null,
+              "phase": "final_check",
+              "previous_sha": "ba103f785d715ff97ba900f0c0f249044d04ffeab95ea8775cf8b73d5de2a97e",
+              "producer_creation_filetime": 134373552830345237,
+              "producer_pid": 42872,
+              "schema": "staged_saved_F_memory_frame_v1",
+              "sequence": 8,
+              "stamp": 54063.953
+            },
+            {
+              "binding_sha": "84d654ba1b2418557393338d56c36c73f54153b0d9a19c147f0eaef92c63523d",
+              "error_code": null,
+              "phase": "final_publish",
+              "previous_sha": "b75824bc94a87675659aa6728780accf5f10651a3020a52fa26a8d4754e39051",
+              "producer_creation_filetime": 134373552830345237,
+              "producer_pid": 42872,
+              "schema": "staged_saved_F_memory_frame_v1",
+              "sequence": 9,
+              "stamp": 54064.578
+            },
+            {
+              "binding_sha": "84d654ba1b2418557393338d56c36c73f54153b0d9a19c147f0eaef92c63523d",
+              "error_code": null,
+              "phase": "terminal",
+              "previous_sha": "1f91f3363bc7ad16b00e3b2e4d9d6b762afd477624a510862244ee9b1316c494",
+              "producer_creation_filetime": 134373552830345237,
+              "producer_pid": 42872,
+              "schema": "staged_saved_F_memory_frame_v1",
+              "sequence": 10,
+              "stamp": 54065.031
+            }
+          ],
+          "transcript_sha": "0af8ae8734ed5958fbc33ec3fb3b4c1457f754e7be51b9f5148e739feed721d7"
+        }
+      }
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-25 F外部调用开发检查点：见[最新交接](continuation_handoff_20261025_saved_fresh_invocation.md)、[开发合同](staged_deliverability_c_saved_fresh_invocation_development_contract_v1.md)。ordinary外部Job、context独立持有/ACK、controller及parent/fresh连接、quiet后消费和阻塞/错误优先已通过最终epoch127项检查；pytest所有attempt累计220.750s＜240s，早epoch、31图原始档案和冻结复用另列。原SF49、17目标/四record cap、40＋5＋5/180s及科学边界保持；小帽观测未完成真实F、最大编码/完整调用、arming/host硬中断、整体资源或科学采用。下一步接通actual saved owner/entry前先核这些缺口；F_launch_admitted、局部saved verified、science/resource/formal全false。
+
 2026-10-25 F角色连接：见[交接](continuation_handoff_20261025_saved_fresh_roles.md)、[合同](staged_deliverability_c_saved_fresh_roles_development_contract_v1.md)。ordinary双进程与两层Job/relay/quiet/创建式发布/15→16库存已连接；140项以10/26/87/17分组终态通过，六次pytest含失败与30s timeout累计180.093s，collection7.281s，successor普通总帽仍300s。17 targets独立预留5,537,792B含四记录512KiB及failure128KiB；这是受控输出设计与小例，不是F/C整体资源准入。source adapter未改，旧科学重放仅复用未变域；actual saved owner与external deadline/合计资源/最终同步I/O仍待接通，原40＋5＋5/180s和全部整包/资源/正式门禁保持false/OPEN。
 
 2026-10-25 F阶段监督组件：见[交接](continuation_handoff_20261025_saved_fresh_stage_owner.md)、[合同](staged_deliverability_c_saved_fresh_stage_owner_contract_v1.md)。固定RAM进度、闭集普通probe、阶段停止/完整quiet、冻结owner和保存transcript复验已落地；当前87项16.422s通过，未变adapter域复用此前snapshot，全部失败保留。11个真实短probe最大采样RSS51,720,192B/Job commit21,475,328B，只适用于普通探针。四组实耗104.311s＋collection11.422s，必要affected组预登记30s，开发总帽仍300s；F仍为40＋5＋5/整链180s、8MiB/64文件/四份128KiB。完整角色及外部trusted invocation/阻塞I/O/合计资源未闭合；F未执行、整包science/resource/formal/C预算继续false/OPEN，980旧路径与P1全683保持。
