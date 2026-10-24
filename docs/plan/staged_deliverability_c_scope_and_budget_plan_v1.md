@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-24 outer启动绑定检查点：见[新交接](continuation_handoff_20261024_outer_binding.md)与[合同](staged_deliverability_c_p2_outer_binding_contract_v1.md)。独立9来源组、release前两worker事实文件、同父端/owner连续性、guard v3外层→checker v2→parent v2保存/会计及发布后未决已接入开发路径；48新/213旧普通检查及PRE_SEAL findings闭合。真实短Python capture与完整319/138/10合成元数据分开，原七输入/旧发布621路径及三导航旧正文保持。没有公共P2/native或独立科学采用；接下来先列raw/KKT/合法X/journal科学采用DAG与完整成本，65s父端余量、C/139/F-X/D/E资源仍OPEN。
+
 2026-10-24 双收尾记录预算检查点：见[新交接](continuation_handoff_20261024_terminal_budget.md)与[开发合同](staged_deliverability_c_p2_terminal_budget_contract_v1.md)。独立guard v3/parent observation v2为launcher与父记录各固定128KiB/一个文件，合计262144B/两文件纳入原64MiB/8192帽；1024历史identity包含owner。122新/91相关普通检查及PRE_SEAL复审闭合，独立编码上界92033/101080B。547旧发布文件与三导航旧正文保持；原P2七输入未切换v3，无公共P2/native。下一步真实outer新来源/启动绑定及独立科学采用，fresh60s+5s对65s余量和全wall/RAM/storage仍OPEN；C/139/F-X/D/E门禁不变。
 
 2026-10-23 P2机械包检查检查点：见[最新交接](continuation_handoff_20261023_p2_package_check.md)与[调用量/收尾预算](staged_deliverability_c_p2_package_check_cost_review_v1.md)。新只读层完成context/注册/55＋7＋6来源、quiet后全库存书挡、319点/138行/10接受state及内部Job/residual核验；129新/72相关普通检查终态通过，包含真实文件系统完整包和late319诊断。P1全403根与合成协议7582个digest入口的新旧规范bytes相同；440旧发布路径及B1–B3/P1保持。原P1 outer66−已知inner64的两个residual不归因；条件642成员数组至少31459B，固定16KiB reserve尚不能保证边界余量。无实际P2/native；下一步版本化收尾预算、实际outer与独立科学采用、昂贵失败/全wall/RAM/storage准入。139/F-X、C整体及D/E继续OPEN；以下保留历史检查点。

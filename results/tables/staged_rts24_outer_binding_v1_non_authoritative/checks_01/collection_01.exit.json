@@ -1,0 +1,47 @@
+{
+  "argv": [
+    "D:\\Miniconda3\\envs\\compute\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/test_staged_rts24_p2_outer_observation_v1.py",
+    "tests/test_staged_rts24_p2_outer_observation_v2.py",
+    "tests/test_staged_rts24_p2_outer_v1.py",
+    "tests/test_staged_rts24_process_guard_v1.py",
+    "tests/test_staged_rts24_process_guard_v2.py",
+    "tests/test_staged_rts24_process_guard_v3.py",
+    "--collect-only",
+    "-q",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "exit_code": 0,
+  "new_full_nodes": [
+    "tests/test_staged_rts24_p2_outer_v1.py::test_full_319_metadata_with_two_startup_files"
+  ],
+  "new_node_count": 48,
+  "node_count": 261,
+  "source_pins": {
+    "docs/plan/staged_deliverability_c_p2_outer_binding_contract_v1.md": {
+      "bytes": 5767,
+      "sha256": "1c87c3f51005fbae1e06ccf7efc1030966dfe02fd3672bed2cb0abc18497cc3d"
+    },
+    "src/staged_rts24_p2_outer_v1.py": {
+      "bytes": 15789,
+      "sha256": "3cf4e360aec6931e5e1d4c98b07be854ba8194c663149340ccdd9592962b8c8a"
+    },
+    "src/staged_rts24_p2_package_check_v2.py": {
+      "bytes": 14261,
+      "sha256": "82de7971157145062b7a6db3ddf362589807f0c703e7e47aafba36b258971000"
+    },
+    "tests/test_staged_rts24_p2_outer_v1.py": {
+      "bytes": 21538,
+      "sha256": "fec70f1f7de3262af4506c9b2b6385cb6db21f09d6a9b5667f5a198a4e5a28e7"
+    }
+  },
+  "stdout": {
+    "bytes": 32511,
+    "sha256": "886b210a2f6c6f82c802230edaec05b382f2f7b1c5f0c2fd66dd4ec9c00aa1dd"
+  },
+  "wall_seconds": 4.102893300000233
+}
