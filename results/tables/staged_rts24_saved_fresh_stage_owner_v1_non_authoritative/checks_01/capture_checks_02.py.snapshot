@@ -1,0 +1,100 @@
+"""Bounded ordinary-test capture; no F invocation or scientific run authority."""
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+ROOT = Path(__file__).resolve().parents[4]
+OUT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
+from experiments import staged_rts24_saved_fresh_adoption_v1 as entry
+
+TARGET = 'tests/test_staged_rts24_saved_fresh_adoption_v1.py'
+GUARD = 'tests/test_staged_rts24_process_guard_v1.py'
+
+
+def save(name, value):
+    (OUT/name).write_bytes((json.dumps(value, sort_keys=True, indent=2)+'\n').encode('utf-8'))
+
+
+def capture(label, args, limit, nodes=None):
+    assert not (OUT/(label+'.exit.json')).exists(), 'capture cannot overwrite an attempt'
+    selected = entry.source_pins()
+    snapshots = {}
+    directory = OUT/(label+'_snapshot')
+    directory.mkdir()
+    for name in entry.NEW_SOURCES[:3]:
+        target = directory/(Path(name).parent.name+'_'+Path(name).name+'.snapshot')
+        raw = (ROOT/name).read_bytes(); target.write_bytes(raw)
+        snapshots[name] = dict(snapshot=target.relative_to(ROOT).as_posix(), pin=entry.pin(raw))
+    save(label+'.snapshot.json', dict(sources=snapshots))
+    started = time.monotonic()
+    # pytest uses the same installed dependencies as prior checks; actual owned
+    # probe children independently retain -s and the closed entry.environment().
+    test_environment = dict(os.environ, PYTHONDONTWRITEBYTECODE='1')
+    try:
+        run = subprocess.run([str(entry.EXE), '-B', '-m', 'pytest', *args,
+            '-p', 'no:cacheprovider', '-o', 'tmp_path_retention_count=100000', '-o', 'tmp_path_retention_policy=all'],
+            cwd=ROOT, env=test_environment, capture_output=True, timeout=limit)
+        stdout, stderr, code, timed_out = run.stdout, run.stderr, run.returncode, False
+    except subprocess.TimeoutExpired as error:
+        stdout, stderr, code, timed_out = error.stdout or b'', error.stderr or b'', None, True
+    elapsed = time.monotonic()-started
+    (OUT/(label+'.stdout.log')).write_bytes(stdout)
+    (OUT/(label+'.stderr.log')).write_bytes(stderr)
+    result = dict(authority='DRAFT_NONAUTHORITATIVE', scope='ordinary_component_checks',
+        argv=[str(entry.EXE), '-B', '-m', 'pytest', *args,
+            '-p', 'no:cacheprovider', '-o', 'tmp_path_retention_count=100000', '-o', 'tmp_path_retention_policy=all'],
+        pytest_environment='inherited_with_bytecode_disabled; probe children use closed environment and -s', timeout_seconds=limit,
+        wall_seconds=elapsed, exit_code=code, timed_out=timed_out, nodes=nodes,
+        source_pins=selected, source_pins_unchanged=entry.source_pins() == selected,
+        snapshot_manifest=label+'.snapshot.json', F_launch_admitted=False)
+    save(label+'.exit.json', result)
+    return result, stdout
+
+
+def collect():
+    result, stdout = capture('collection_02', ['--collect-only', '-q', TARGET, GUARD], 15)
+    assert result['exit_code'] == 0 and not result['timed_out']
+    nodes = [line for line in stdout.decode('utf-8').splitlines() if line.startswith('tests/') and '::test_' in line]
+    assert len(nodes) == len(set(nodes))
+    selected = {
+        'test_one_saved_parent_adapter_matches_all_original_metrics_without_effects',
+        'test_complete_metrics_comparison_retains_missing_input_and_closed_gates',
+        'test_common_payload_binding_and_evidence_drift_blocks_comparison',
+        'test_same_corruption_on_both_sides_cannot_keep_the_original_caller_label',
+        'test_bootstrap_parser_matches_original_codec_for_saved_payload',
+        'test_bootstrap_parser_rejects_invalid_images_before_scientific_imports',
+        'test_frozen_source_inventory_and_planned_set_are_exact',
+        'test_source_inventory_is_independently_pinned',
+        'test_context_binds_actual_compute_executable_inputs_sources_and_budget',
+        'test_bootstrap_environment_matches_the_bound_original_without_importing_it',
+        'test_actual_entry_and_expanded_arguments_are_bound',
+        'test_actual_test_argv_cannot_enter_F_execution_or_adoption',
+        'test_entry_import_bootstrap_does_not_load_project_or_scientific_modules',
+        'test_scientific_failure_always_checks_final_inputs_and_preserves_both_errors',
+    }
+    groups = dict(stage_01=[n for n in nodes if n.startswith(TARGET+'::test_stage_')],
+        adapter_01=[n for n in nodes if n.startswith(TARGET+'::') and n.split('::')[1].split('[')[0] in selected],
+        guard_01=[n for n in nodes if n.startswith(GUARD+'::')])
+    flat = [n for group in groups.values() for n in group]
+    assert len(flat) == len(set(flat)) and all(groups.values())
+    save('group_admission_01.json', dict(authority='DRAFT_NONAUTHORITATIVE', groups=groups,
+        per_group_seconds=90, maximum_groups=3, total_development_seconds=300,
+        collection_limit_included_in_static_seconds=30, automatic_retries=0,
+        all_collected_nodes=nodes, selected_unique_nodes=len(flat),
+        scope='ordinary_stage_probes_and_narrow_relevant_regressions', F_launch_admitted=False))
+    print(json.dumps(dict(groups={name: len(items) for name, items in groups.items()})))
+
+
+if __name__ == '__main__':
+    if sys.argv[1:] == ['collect']: collect()
+    else:
+        label = sys.argv[1]; admission = json.loads((OUT/'group_admission_01.json').read_bytes())
+        nodes = admission['groups'][label]
+        result, _ = capture(label, ['-q', '--durations=10', *nodes], 90, nodes)
+        print(json.dumps({k: result[k] for k in ('exit_code', 'timed_out', 'wall_seconds', 'source_pins_unchanged')}))
+        raise SystemExit(0 if result['exit_code'] == 0 and result['source_pins_unchanged'] else 1)

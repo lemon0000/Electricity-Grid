@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-25 F阶段监督组件：见[交接](continuation_handoff_20261025_saved_fresh_stage_owner.md)、[合同](staged_deliverability_c_saved_fresh_stage_owner_contract_v1.md)。固定RAM进度、闭集普通probe、阶段停止/完整quiet、冻结owner和保存transcript复验已落地；当前87项16.422s通过，未变adapter域复用此前snapshot，全部失败保留。11个真实短probe最大采样RSS51,720,192B/Job commit21,475,328B，只适用于普通探针。四组实耗104.311s＋collection11.422s，必要affected组预登记30s，开发总帽仍300s；F仍为40＋5＋5/整链180s、8MiB/64文件/四份128KiB。完整角色及外部trusted invocation/阻塞I/O/合计资源未闭合；F未执行、整包science/resource/formal/C预算继续false/OPEN，980旧路径与P1全683保持。
+
 2026-10-25 F只读组件开发检查点：见[交接](continuation_handoff_20261025_saved_fresh_adapter.md)及[合同](staged_deliverability_c_saved_fresh_adapter_development_contract_v1.md)。原B/C/E parent五小时21点与完整19 metrics/21 refs/六prefix/trusted精确绑定，历史fresh额外对照；85新/9旧回归最终70＋12＋12终态通过。原24组合90s超时及早期draft日志保留，split预算预先核对，不放宽90帽；测试wall不作F资源准入。926旧路径/三导航旧body/P1全683保持，原source/输入无改。新3文件仍未seal draft，ENTRY非零禁用；完整F还需stage-aware owner、nested quiet、角色发布、trusted invocation和实际调用/整体资源，F_launch_admitted=false。全319/139/F-X、整包科学采用、原65s余量、C整体与D/E/resource/formal保持OPEN/false。
 
 2026-10-25 F范围与事前预算设计：见[交接](continuation_handoff_20261025_saved_fresh_scope_budget.md)及[设计](staged_deliverability_c_saved_fresh_adoption_scope_budget_v1.md)。只在保存P1五小时/21点和trusted journal范围设计新增fresh与最终父采用，D四代表行科学证据另列。parent/fresh各一次，单次180s、整个验证批次570s，新输出8MiB/64及两层四收尾记录512KiB；均为待实现上限。当前仅文档/标准库保存核验，911旧路径/三导航原正文/P1全683保持，没有真实F/native/P2。F_launch_admitted=false；exact source/exe/argv/owner、nested quiet、父端可执行deadline、合计资源及失败/发布成本待验证。原65s余量、全319/139/F-X/整包科学采用、C整体与D/E/resource/formal仍OPEN/false。

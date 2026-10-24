@@ -1,0 +1,136 @@
+.............F.......F....F.............F......FF                        [100%]
+================================== FAILURES ===================================
+____ test_stage_valid_checksum_does_not_hide_invalid_binding[previous_sha] ____
+
+field = 'previous_sha'
+
+    @pytest.mark.parametrize('field', ['sequence', 'binding_sha', 'previous_sha', 'producer_pid', 'stamp'])
+    def test_stage_valid_checksum_does_not_hide_invalid_binding(field):
+        held, writer = _unit_stage(); channel = held.channel
+        try:
+            writer.enter('fresh')
+            value = cli.parse(cli._stage_decode(writer._history[0], cli.STAGE_COMMIT))
+            value[field] = '0'*64 if field.endswith('_sha') else (True if field == 'sequence' else 0)
+            slot = cli._stage_slot(cli.canonical(value), cli.STAGE_COMMIT)
+            cli.C.memmove(channel._view+cli.STAGE_SLOT_BYTES, slot, len(slot))
+>           with pytest.raises(ValueError, match='binding differs'): channel.read_available()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:514: Failed
+_______ test_stage_busy_mutex_is_no_progress_and_abandonment_is_sticky ________
+
+    def test_stage_busy_mutex_is_no_progress_and_abandonment_is_sticky():
+        import threading
+        held, writer = _unit_stage(); channel = held.channel
+        writer.close()
+        ready, release = threading.Event(), threading.Event()
+        def own_then_abandon():
+            api = cli._stage_api()
+            assert api.WaitForSingleObject(channel._mutex, 0) == 0
+            ready.set(); assert release.wait(2)
+            # Thread exit abandons ownership; the creating observer retains the HANDLE.
+        thread = threading.Thread(target=own_then_abandon)
+        thread.start()
+        try:
+            assert ready.wait(2)
+            assert channel.read_available() is None and channel._history == []
+            release.set(); thread.join(2); assert not thread.is_alive()
+>           with pytest.raises(cli.StageChannelError, match='abandoned'): channel.read_available()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE <class 'experiments.staged_rts24_saved_fresh_adoption_v1.StageChannelError'>
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:557: Failed
+_________ test_stage_fault_layers_do_not_adopt_or_infer_quiet[sample] _________
+
+fault = 'sample'
+
+    @pytest.mark.parametrize('fault', [None, 'fast', 'release', 'sample', 'rss', 'commit', 'quiesce', 'inventory', 'close', 'layers'])
+    def test_stage_fault_layers_do_not_adopt_or_infer_quiet(fault):
+        held, writer = _unit_stage(fault)
+        _write_unit_frames(writer); writer.close()
+        result = cli.watch_probe_stage(held)
+        _closed_stage_gates(result)
+        assert result['owner_evidence'] == 'injected_unit_owner'
+        assert result['stage_process_observed_successfully'] is (fault is None)
+>       assert result['job_quiet_confirmed'] is (fault not in ('quiesce', 'inventory', 'close', 'layers'))
+E       AssertionError: assert False is ('sample' not in ('quiesce', 'inventory', 'close', 'layers'))
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:590: AssertionError
+_______ test_stage_real_exit_uses_observer_clock_without_artifact_reads _______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001CC43096030>
+
+    def test_stage_real_exit_uses_observer_clock_without_artifact_reads(monkeypatch):
+        channel = cli.StageChannel.create('a'*64, cli.ordinary_stage_descriptor())
+        held = cli.create_probe_owner(_probe_args(channel, "w.enter('fresh'); time.sleep(.15); w.enter('terminal'); w.close()"), channel)
+        def denied(*args, **kwargs): pytest.fail('active stage observer requested filesystem contents')
+        monkeypatch.setattr(cli, 'read', denied); monkeypatch.setattr(cli.os, 'scandir', denied)
+        result = cli.watch_probe_stage(held)
+        _closed_stage_gates(result)
+        assert result['stage_process_observed_successfully'] is True and result['owner_evidence'] == 'direct_owned_child'
+>       assert result['quiescence_witness']['total_processes'] == result['quiescence_witness']['observed_unique_member_handles'] == 1
+E       assert 2 == 1
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:696: AssertionError
+_ test_stage_real_nested_jobs_require_complete_retained_member_inventory[False] _
+
+leave_alive = False
+
+    @pytest.mark.parametrize('leave_alive', [False, True])
+    def test_stage_real_nested_jobs_require_complete_retained_member_inventory(leave_alive):
+        nested = ("from src.staged_rts24_process_guard_v1 import OwnedChild; "
+            "w.enter('parent'); "
+            "child=OwnedChild([str(d.EXE),'-B','-s','-c','import time; time.sleep(20)'],cwd=d.ROOT,"
+            "max_process_commit_bytes=128*1024**2,max_job_commit_bytes=256*1024**2,environment=d.environment()); "
+            "child.release(); w.enter('fresh'); time.sleep(.3); ")
+        if not leave_alive: nested += "w.enter('inner_quiesce'); child.quiesce(max_seconds=1); w.enter('inner_terminal'); child.close(); "
+        else: nested += "w.enter('inner_quiesce'); w.enter('inner_terminal'); "
+        nested += "w.enter('parent_compare'); w.enter('terminal'); "
+        nested += 'os._exit(0)' if leave_alive else 'w.close()'
+        result = _real_stage(nested, role='parent', preset='nested')
+        _closed_stage_gates(result)
+>       assert result['quiescence_witness']['total_processes'] == result['quiescence_witness']['observed_unique_member_handles'] == 2
+E       assert 4 == 2
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:737: AssertionError
+_ test_stage_real_nested_jobs_require_complete_retained_member_inventory[True] _
+
+leave_alive = True
+
+    @pytest.mark.parametrize('leave_alive', [False, True])
+    def test_stage_real_nested_jobs_require_complete_retained_member_inventory(leave_alive):
+        nested = ("from src.staged_rts24_process_guard_v1 import OwnedChild; "
+            "w.enter('parent'); "
+            "child=OwnedChild([str(d.EXE),'-B','-s','-c','import time; time.sleep(20)'],cwd=d.ROOT,"
+            "max_process_commit_bytes=128*1024**2,max_job_commit_bytes=256*1024**2,environment=d.environment()); "
+            "child.release(); w.enter('fresh'); time.sleep(.3); ")
+        if not leave_alive: nested += "w.enter('inner_quiesce'); child.quiesce(max_seconds=1); w.enter('inner_terminal'); child.close(); "
+        else: nested += "w.enter('inner_quiesce'); w.enter('inner_terminal'); "
+        nested += "w.enter('parent_compare'); w.enter('terminal'); "
+        nested += 'os._exit(0)' if leave_alive else 'w.close()'
+        result = _real_stage(nested, role='parent', preset='nested')
+        _closed_stage_gates(result)
+>       assert result['quiescence_witness']['total_processes'] == result['quiescence_witness']['observed_unique_member_handles'] == 2
+E       assert 4 == 2
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:737: AssertionError
+============================ slowest 10 durations =============================
+0.44s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_real_nested_jobs_require_complete_retained_member_inventory[False]
+0.43s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_real_nested_jobs_require_complete_retained_member_inventory[True]
+0.28s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_real_exit_uses_observer_clock_without_artifact_reads
+0.23s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_real_terminal_is_independent_of_exit_and_quiet[w.enter('fresh'); time.sleep(.1); w.close()-incomplete_terminal]
+0.21s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_real_terminal_is_independent_of_exit_and_quiet[w.enter('fresh'); time.sleep(.1); w.enter('terminal'); os._exit(7)-child_exit_nonzero]
+0.21s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_real_deadline_requests_kill_before_quiesce[w.enter('fresh'); time.sleep(20)]
+0.21s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_real_terminal_is_independent_of_exit_and_quiet[w.enter('fresh'); time.sleep(.1); w.fail('probe_error'); w.close()-child_reported_error]
+0.20s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_real_deadline_requests_kill_before_quiesce[w.enter('fresh'); w.enter('terminal'); time.sleep(20)]
+0.19s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_real_deadline_requests_kill_before_quiesce[time.sleep(20)]
+0.02s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_maximum_complete_witness_fits_without_dropping_members
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_valid_checksum_does_not_hide_invalid_binding[previous_sha]
+FAILED tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_busy_mutex_is_no_progress_and_abandonment_is_sticky
+FAILED tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_fault_layers_do_not_adopt_or_infer_quiet[sample]
+FAILED tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_real_exit_uses_observer_clock_without_artifact_reads
+FAILED tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_real_nested_jobs_require_complete_retained_member_inventory[False]
+FAILED tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_stage_real_nested_jobs_require_complete_retained_member_inventory[True]
+6 failed, 43 passed in 8.26s

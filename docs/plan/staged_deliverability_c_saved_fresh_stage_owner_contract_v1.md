@@ -1,0 +1,48 @@
+# C：F 阶段监督与内存进度通道开发合同
+
+2026-10-25，DRAFT_NONAUTHORITATIVE。接续[adapter交接](continuation_handoff_20261025_saved_fresh_adapter.md)及[原范围/预算](staged_deliverability_c_saved_fresh_adoption_scope_budget_v1.md)。继续实现完整F所需的retained-owner监督；原B/C/E、P1、模型/容差、guard/outer和全局门禁保持。root唯一writer，按agent.md §7独立只读PRE_SEAL。本次普通短Python探针不执行五小时F、native或公共P2。
+
+## 范围与实际能力
+
+在原provisional ENTRY及对应测试内增加固定内存阶段通道、真实suspended OwnedChild启动事实和阶段监督。SF49不扩展；前三个draft按既有生命周期可迭代，旧测试snapshot原字节保存。完整parent/fresh角色、科学候选发布和外部trusted invocation继续按原F完成条件验收。
+
+原guard在监督循环读取磁盘目录，原OwnedChild.quiesce先capture_members后TerminateJob。本后继不改其字节：active循环只做Kernel process/Job查询与固定共享内存读取；到阶段/总截止或确认协议失败先直接请求TerminateJobObject，再调用原quiesce核完整历史HANDLE/signaled/Job累计total，最后close。不能把请求终止本身当作quiet。
+
+本组件首阶段从release前的监督者单调时钟计时；构造耗时计入观测总额，构造/capture本身和监督者Kernel调用可能阻塞的中断能力仍须外部trusted owner补齐。终态文件扫描/发布不在active循环中，后续必须置于受外层阶段监督的进程内。本组件不宣称已闭合完整40/50/180s、全流程资源或F准入。
+
+## 固定内存协议
+
+- Windows `Local\` 随机256-bit名；使用CreateFileMapping/CreateMutex create-only并立即检查ERROR_ALREADY_EXISTS。attach仅OpenFileMapping/OpenMutex，不能自动新建。全部HANDLE非继承，监督者持有至终态。
+- 页面文件映射固定17×4096=69632B：一个4096B header和16个4096B slot。slot总长包含长度、canonical payload、SHA/prev链及commit，不以payload另加开销。没有共享可变frame-count、slot复用或无界heartbeat。
+- child仍suspended时，监督者在mutex内冻结context SHA、role、nonce、实际PID/creation FILETIME、固定phase descriptor和容量；然后才release。header在后续操作中逐次原字节书挡。
+- 单writer、单创建PID/thread；writer先在锁外生成有界canonical frame，再锁内核header/历史slot/next slot全零，写body和commit-last。reader只零等待取mutex；锁内复制固定映射并作双读/旧slot书挡，锁外解析JSON/SHA。mutex忙只算无新progress，不重置任何deadline。
+- WAIT_ABANDONED虽授予mutex所有权，仍须finally释放并永久锁存channel未决，不能恢复接受。未commit或SHA未完整的next slot不构成progress；完整合法提交后的nonce/owner/seq/prev/phase错误立即失败。quiet后再作最后header/历史slot书挡。
+- 身份字段只检测误接线/陈旧/损坏，不作同用户敌手认证。阶段terminal不是exit、quiet、科学采用、文件发布或持久性证明。
+
+共享内存按[微软同步规则](https://learn.microsoft.com/en-us/windows/win32/memory/sharing-files-and-memory)协调访问，采用[页面文件支持的命名映射](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingw)。不使用mmap.flush作发布证据，也不假设编译器intrinsic必有可直接调用的DLL导出。
+
+## 阶段与停止语义
+
+生产descriptor固定：fresh为`fresh(40)`，另留quiesce5/terminal5，总50；parent为`parent45→fresh40→inner_quiesce5→inner_terminal5→parent_compare15`，另留outer quiesce5/terminal10，总125；controller按原十个正常阶段，另保留终止/失败余量，总180。各自normal frame数含terminal为2/6/11，最多再一个错误terminal，均小于16。
+
+首阶段截止从release开始；后续仅在监督者接受严格下一阶段时以自己的时钟更新，使用`min(phase_entry+cap, absolute_deadline-reserved_tail)`，禁止跳跃/倒退/重复、terminal后续写入或terminal后挂起；producer时间仅作诊断。poll/时钟分辨率与实际停止时刻必须记录，不称硬实时证明。
+
+成功进程观察须同时有exit0、完整合法transcript、原完整quiet witness和close成功；fast exit缺terminal、terminal后不退出、非零退出、root退出仍有后代、漏历史成员、cleanup/close或channel最后书挡异常分别保留。primary stop、立即kill、quiesce、close、channel错误分层保存，不用尾部错误覆盖原始原因。quiet未知不读取worker工件内容，只能保存监督者进程诊断。任何结果都保持两个局部F/process/adoption及全局science/resource/formal false。
+
+probe launcher仅接受闭集probe_id及与之精确相配的ordinary-owner-probe descriptor；程序正文与argv由源码内固定模板生成，不接受调用者代码、脚本路径或argv。单元注入只走私有helper，`logic_path_completed`/`quiet_witness_consistent`与真实`stage_process_observed_successfully`/`job_quiet_confirmed`分开；fake owner的后两字段始终false。完整production入口继续禁用；固定40/50/180参数不能被任意caller limits替换。
+
+终态接受后另设`min(accepted+exit_cap,phase_deadline,active_deadline)`退出截止，不因terminal延长时限；exit_cap数值取descriptor的terminal_seconds，但只作为active内部上界，保留的terminal tail仍用于观察/文件发布，不能让child额外使用。已接受terminal后的超时单列terminal_exit_limit及实际limiting deadline。记录区分该上界与remaining total，并保留root exit observed、kill request、quiesce start/complete、close attempts finished单调时刻。启动环境仅冻结一次，同一映射用于SHA和实际constructor；root退出的两次最终sample使用PID并集。各层错误首错锁存，final bookend另列，mutex primary及普通constructor cause/context保留有界链；直接kill最多请求一次，后续旧quiesce的清理结果另存。
+
+OwnedStage为frozen dataclass，书挡绑定owner/channel对象、startup SHA、起始时钟、real/injected标记、PID/creation及channel binding；release前拒绝一侧漂移。内部attempt/观察状态由实现维护，不能将fake owner改标为真实进程证据。
+
+进程记录保存冻结header与全部已接受frame闭字段，使mapping关闭后仍可重建canonical payload/完整slot及binding、prev和transcript SHA。记录仍受128KiB硬帽；超帽保留原始观察在live capability并拒绝成功，不删成员或frame。通道create/attach的primary和cleanup同时失败时，异常不可序列化并强持partial channel，实际未关闭的view/HANDLE可由创建线程继续清理。
+
+## 普通检查与预算
+
+最多三组普通pytest，各90s硬帽、零自动重试；collection各15s，标准库/格式核验合计30s，当前开发验证预算300s。真实探针每个Job进程commit≤256MiB、Job≤512MiB、采样tree RSS≤256MiB；每个短probe总额≤8s且quiesce≤1s，固定≤16帧/69632B映射。只有标准库/现有owner代码，不求解、不访问P1科学数据。
+
+PRE_SEAL末轮修正预算：前三组已经终态，实际wall为9.140＋13.671＋65.078＝87.889s，第三组105项通过；其snapshot与前两次失败均保存。独立复核随后发现普通constructor内部cleanup的context链、停止时刻记录及OwnedStage可变字段遗漏，故在原300s总帽内登记一次额外affected-only组，硬帽30s，覆盖当前stage与原guard；不重跑不受影响的adapter域。此前实耗＋该30s＋原静态30s小于300s；总预算、单probe caps及F门禁均不扩大。该组非自动重试，也不能借前三组证明修正后的stage字节。
+
+覆盖正常顺序、无首帧、阶段/总截止、合法SHA下错phase/owner/nonce、半写slot/锁忙/abandoned、header/历史漂移、terminal缺失或挂起、真实nested Job/后代残留、fast-exit采样未知，以及kill/quiesce/close/channel双错和partial构造。相关adapter/bootstrap窄回归及原guard/parent回归只复用适用范围；不得把小probe时间外推五小时F或十小时/319/139。
+
+先固定collection和组界，所有失败和源码snapshot保留；若分组触帽，不延长90s，重审剩余验证和预算。独立只读PRE_SEAL、旧不可变路径/三导航body、SF49及P1全部683保持、Git/进程检查后保存开发检查点。没有official verdict/receipt/seal，不开放整包科学采用、资源或正式门禁。
