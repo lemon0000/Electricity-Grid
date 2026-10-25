@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_upstream_contract_v1_non_authoritative\final_package_01\terminal_checks.py", line 175, in <module>
+    print(json.dumps(verify(require_current_sources=True, require_current_navigation=True), sort_keys=True))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_upstream_contract_v1_non_authoritative\final_package_01\terminal_checks.py", line 142, in verify
+    prior = previous.verify(require_current_sources=require_current_sources)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_successor_direct_entry_v1_non_authoritative\final_package_01\saved_checks.py", line 178, in verify
+    assert separator and header.decode()==item['header'] and pin(body[-item['body']['bytes']:])==item['body']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

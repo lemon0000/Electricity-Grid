@@ -1,4 +1,8 @@
 # 项目介绍与论文草稿
+2026-10-25 successor三角色上游数据合同（DRAFT_NONAUTHORITATIVE）。
+
+执行状态见[最新交接](../../docs/plan/continuation_handoff_20261025_saved_fresh_upstream_contract.md)与[范围预算](../../docs/plan/staged_deliverability_c_saved_fresh_upstream_contract_scope_budget_v1.md)。固定10域/59节点及三角色argv，静态预算≤6次/90s；生产validator、真实bootstrap/actual F及科学、资源、正式门禁仍OPEN。正文贡献与科学结论保持原口径。
+
 
 更新日期：2026-10-23。
 

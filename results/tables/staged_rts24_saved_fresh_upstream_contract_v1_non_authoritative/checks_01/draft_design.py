@@ -1,0 +1,229 @@
+"""Generate a NONAUTHORITATIVE design; no runtime packet acceptance or launch."""
+from hashlib import sha256
+import importlib.util
+import json
+from pathlib import Path
+import sys
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[3]
+PRIOR = ROOT / 'results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01'
+ROLES = {'controller': 'broker', 'parent': 'controller', 'fresh': 'parent'}
+
+def raw(value):
+    return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('ascii')
+
+def pin(value):
+    return {'bytes': len(value), 'sha256': sha256(value).hexdigest()}
+
+def save(name, value):
+    path = HERE / name
+    archive = json.loads((HERE/'design_attempt_01.snapshot.json').read_bytes())['files']
+    if path.exists():
+        assert pin(path.read_bytes()) == {k: archive[name][k] for k in ('bytes','sha256')}
+    with path.open('wb') as stream:
+        stream.write(raw(value))
+    return pin(path.read_bytes())
+
+def fields(names, kind='sha256'):
+    return dict.fromkeys(names.split(), kind)
+
+def main():
+    baseline = json.loads((HERE / 'baseline.json').read_bytes())
+    revision = json.loads((HERE/'draft_revision_02.json').read_bytes())
+    assert revision['baseline_pin'] == pin((HERE/'baseline.json').read_bytes())
+    baseline['helpers'] = revision['helpers_after']
+    fixed = {name: baseline['inputs'][str((PRIOR / name).relative_to(ROOT)).replace('\\', '/')]
+             for name in ('successor_context_spec_v3.json', 'request_contract_v2.json',
+                          'runtime_binding_contract_v2.json', 'deadline_contract_v2.json', 'capability_edges_v3.json')}
+    templates = {
+        'authority': 'DRAFT_NONAUTHORITATIVE', 'implemented': False,
+        'canonical': 'ASCII sorted-key compact JSON; finite exact primitive types; duplicate keys rejected',
+        'descriptor_template': {'version': 1, 'packet_sha_added_after_packet_freeze': True,
+                                'role_literals': {r: 'saved_successor_' + r + '_stage_v1' for r in ROLES}},
+        'entry_transport': {'version': 1, 'create_only': True, 'commit_last': True, 'tail_zero': True,
+                            'binding_value_cap': 4096, 'binding_raw_cap': 4608,
+                            'binding_physical_cap': 4652,
+                            'packet_value_cap': 32768, 'packet_raw_cap': 36864,
+                            'packet_physical_cap': 36908,
+                            'frame_extra_bound': 363, 'physical_extra': 44,
+                            'instance_header_schema': 'OPEN_NOT_IMPLEMENTED',
+                            'single_constructor_attempt_consumed_before_first_allocation': True,
+                            'retry_with_new_nonce': False, 'kernel_producer_authentication': False},
+        'deadlines': {'controller': [155, 165], 'parent': [110, 125], 'fresh': [80, 90]},
+        'hash_inputs': {},
+    }
+    phases = dict(fresh=['fresh'], parent=['parent','fresh','inner_quiesce','inner_terminal','parent_compare'],
+                  controller=['prepare','parent','fresh','inner_quiesce','inner_terminal','parent_compare',
+                              'outer_quiesce','outer_terminal','final_check','final_publish'])
+    seconds = dict(prepare=10,parent=45,fresh=40,inner_quiesce=5,inner_terminal=5,parent_compare=15,
+                   outer_quiesce=5,outer_terminal=10,final_check=15,final_publish=15)
+    templates['production_descriptor_values'] = {}
+    for role in ROLES:
+        total, quiesce, terminal = dict(controller=(180.,5.,5.),parent=(125.,5.,10.),fresh=(50.,5.,5.))[role]
+        templates['production_descriptor_values'][role] = dict(authority='DRAFT_NONAUTHORITATIVE', mode='production_descriptor_only',
+            role=role, preset=None, phases=phases[role], phase_seconds=[float(seconds[p]) for p in phases[role]],
+            total_seconds=total, quiesce_seconds=quiesce, terminal_seconds=terminal, rss_bytes=1024**3,
+            process_commit_bytes=1024**3, job_commit_bytes=2*1024**3, member_handles=1024)
+    template_pin = save('fixed_templates.json', templates)
+    types = {
+        'sha256': {'domain': 'exact str matching [0-9a-f]{64}', 'encoded_max': 66},
+        'identity': {'domain': 'exact list [uint32_positive PID, uint64_positive creation]; bool rejected',
+                     'encoded_max': len(raw([2**32-1, 2**64-1]))},
+        'time': {'domain': 'exact finite float, 0 < value < 1e12; bool/int rejected', 'encoded_max': 32},
+        'path': {'domain': 'absolute Windows path; canonical JSON value bytes <= 4096', 'encoded_max': 4096},
+        'name': {'domain': 'Local\\ prefix plus [A-Za-z0-9_.-]+, <=192 ASCII characters', 'encoded_max': 386},
+        'pin': {'domain': 'exact {bytes: positive int <=8388608, sha256: lowercase hex64}',
+                'encoded_max': len(raw({'bytes': 8388608, 'sha256': 'f'*64}))},
+        'receipt': {'domain': 'exact {bytes: positive int <=2097152, sha256: hex64, identity: four uint64}; bool rejected',
+                    'encoded_max': len(raw({'bytes': 2097152, 'sha256': 'f'*64, 'identity': [2**64-1]*4}))},
+        'true': {'domain': 'exact bool True; data marker only', 'encoded_max': 4},
+    }
+    domains = {}
+    def domain(name, role, producer, consumer, f, cap, transport, local_cap, node):
+        schema = 'staged_saved_F_successor_' + name + '_data_v1'
+        domains[name] = dict(schema_literal=schema, role_literal=role, producer=producer, consumer=consumer,
+                             fields={'schema': {'literal': schema}, 'data_only': 'true', **f},
+                             encoded_value_cap=cap, transport=transport,
+                             emission_capability_required={'producer_role': producer, 'exact_type': local_cap},
+                             consumer_receives_capability=False, field_equalities={}, emit_node=node,
+                             consume_node='broker_ACK_verified' if name == 'ACK' else role+'_bootstrap',
+                             edge_kind='binding_data', implemented=False,
+                             role_bootstrap=False, run_authority=False, resource_admission=False,
+                             scientific_evidence_adopted=False, formal_result=False)
+    domain('ACK', 'controller', 'host', 'broker', {
+        **fields('request_sha context_sha offer_sha context_receipt_sha root_directories_sha mailbox_header_sha host_direction_nonce runtime_binding_contract_sha deadline_profile_sha'),
+        'host_identity': 'identity', 'broker_identity': 'identity',
+        'original_invocation_started': 'time', 'original_invocation_deadline': 'time',
+    }, 3072, 'successor_mailbox.ack:raw4096+physical44', '_BrokerAckVerified', 'ACK')
+    upstream = {
+        'controller': 'ACK_sha mailbox_header_sha broker_ACK_verified_projection_sha',
+        'parent': 'controller_permit_binding_sha controller_bootstrap_projection_sha controller_G0_projection_sha controller_store_projection_sha controller_issuer_projection_sha',
+        'fresh': 'parent_permit_binding_sha parent_bootstrap_projection_sha parent_hold_projection_sha parent_store_projection_sha parent_issuer_projection_sha',
+    }
+    for role, producer in ROLES.items():
+        attempt_fields = ('controller_attempt_nonce attempt_commit_sha' if role == 'controller' else 'reservation_commit_sha reservation_nonce')
+        attempt_times = ('attempt_started attempt_deadline' if role == 'controller' else 'reservation_started reservation_deadline')
+        common = {**fields('request_sha context_sha context_receipt_sha role_tree_sha deadline_profile_sha permit_nonce'), **fields(attempt_fields),
+                  'producer_identity': 'identity',
+                  **fields('original_invocation_started original_invocation_deadline active_deadline closed_deadline '+attempt_times, 'time')}
+        domain(role+'_permit_binding', role, producer, role, {**common, **fields(upstream[role])},
+               4096, 'successor_entry.binding:raw4608+physical44', '_'+role.title()+'LaunchPermit', role+'_permit_binding')
+        packet = {**fields('request_sha context_sha root_directories_sha role_tree_sha permit_binding_sha source_sha environment_sha entry_transport_nonce entry_transport_contract_sha stage_nonce descriptor_template_sha runtime_binding_contract_sha deadline_profile_sha '+attempt_fields),
+                  'context_path': 'path', 'context_receipt': 'receipt', 'executable_pin': 'pin', 'ENTRY_pin': 'pin',
+                  'entry_transport_name': 'name', 'stage_name': 'name',
+                  **fields('original_invocation_started original_invocation_deadline active_deadline closed_deadline '+attempt_times, 'time'),
+                  **fields(upstream[role])}
+        domain(role+'_entry_packet', role, producer, role, packet, 32768,
+               'successor_entry.packet:raw36864+physical44', '_'+role.title()+'LaunchPermit', role+'_packet')
+        domain(role+'_stage_descriptor', role, producer, role, {
+            **{k: {'literal': v} for k,v in templates['production_descriptor_values'][role].items()},
+            **fields('packet_sha permit_binding_sha deadline_profile_sha'),
+        }, 3072, 'StageChannel.header.descriptor:slot4096_including44',
+               '_'+role.title()+'LaunchPermit', role+'_descriptor')
+    for domain_value in domains.values():
+        for field, filename in (('runtime_binding_contract_sha','runtime_binding_contract_v2.json'),
+                                 ('deadline_profile_sha','deadline_contract_v2.json')):
+            if field in domain_value['fields']:
+                domain_value['field_equalities'][field] = {'literal': fixed[filename]['sha256'], 'artifact': filename}
+        for field in ('descriptor_template_sha','entry_transport_contract_sha'):
+            if field in domain_value['fields']:
+                domain_value['field_equalities'][field] = {'literal': template_pin['sha256'], 'artifact': 'fixed_templates.json'}
+    grammar_base = ['EXE', '-B', '-s', 'ENTRY']
+    grammars = {}
+    for role in ROLES:
+        tokens = grammar_base + ['--saved-successor-'+role,
+            '--entry-name', '{entry_transport_name}', '--entry-nonce', '{entry_transport_nonce}',
+            '--packet-sha', '{packet_sha}', '--context-sha', '{context_sha}',
+            '--stage-name', '{stage_name}', '--stage-nonce', '{stage_nonce}',
+            '--descriptor-sha', '{descriptor_sha}']
+        if role == 'controller':
+            tokens += ['--mailbox-name', '{mailbox_name}', '--request-sha', '{request_sha}', '--ack-sha', '{ACK_sha}']
+        grammars[role] = {'tokens': tokens, 'exact_count': len(tokens), 'implemented': False,
+                          'full_argv_sources': 'independent held input, frozen packet and derived descriptor',
+                          'expected_os_command_line': 'exact Windows list2cmdline of held argv; checked with raw kernel command line'}
+    registry = {'authority': 'DRAFT_NONAUTHORITATIVE', 'schema_count': 10, 'schemas': domains, 'types': types,
+                'fixed_inputs': fixed, 'template_pin': template_pin, 'argv_grammars': grammars,
+                'cross_field_obligations_implemented': False, 'production_data_validator_implemented': False,
+                'cross_field_obligations': [
+                    'All context/request/runtime/deadline pins from independently held raw; never packet self-report.',
+                    'ACK from independent offer/receipt/root chain/header, post-context with original invocation clock.',
+                    'Permit projection from exact local upstream cap/issuer; controller has broker-local attempt, parent/fresh original RoleStore reservation.',
+                    'Receipt/path/tree/source/EXE/env/ENTRY match independent held publication and source pins.',
+                    'Packet producer fields match externally held owner/transcript, including coherently forged packet/header.',
+                    'Deadline=min(original role offset, original episode deadline, original reservation deadline/cap).',
+                    'Fresh references parent hold; parent references controller G0. Fresh never receives an issuer.',
+                    'Descriptor derived after packet; full argv independently rebuilt; child self matches bound header.',
+                    'One original reservation/attempt, sticky consumed before allocation, no silent retry.',
+                ],
+                'open_domains': ['successor mailbox header/READY/START/offer', 'entry transport instance header and failure projection',
+                                 'exact local cap projections and reservation commitment', 'post-create startup record'],
+                'implemented': False}
+    registry_pin = save('protocol_domains.json', registry)
+    macro = json.loads((PRIOR/'capability_edges_v3.json').read_bytes())
+    order, owners, expansions = [], dict(macro['node_roles']), {}
+    replaced, extra_edges = {}, []
+    for role, producer in ROLES.items():
+        before = [role+'_'+suffix for suffix in ('permit_binding', 'packet', 'descriptor', 'argv', 'allocation_attempt')]
+        after = [role+'_header_bound', role+'_release']
+        expansions[role] = [role+'_permit', *before, role+'_owner_constructed', *after, role+'_bootstrap']
+        replaced[(role+'_permit', role+'_owner_constructed')] = [role+'_permit', *before, role+'_owner_constructed']
+        replaced[(role+'_owner_constructed', role+'_bootstrap')] = [role+'_owner_constructed', *after, role+'_bootstrap']
+        for node in (*before, *after):
+            owners[node] = producer
+        for suffix in ('permit_binding', 'packet', 'descriptor'):
+            extra_edges.append([role+'_'+suffix, role+'_bootstrap'])
+    edges = []
+    for a, b in macro['data_order_edges']:
+        sequence = replaced.get((a, b), [a, b])
+        edges.extend([x, y] for x, y in zip(sequence, sequence[1:]))
+    for node in macro['topological_order']:
+        order.append(node)
+        for role in ROLES:
+            if node == role+'_permit': order.extend(expansions[role][1:6])
+            if node == role+'_owner_constructed': order.extend(expansions[role][7:9])
+    caps = list(macro['same_process_capability_edges'])
+    for role in ROLES:
+        caps.extend([[role+'_permit', role+'_allocation_attempt'], [role+'_owner_constructed', role+'_header_bound'],
+                     [role+'_header_bound', role+'_release']])
+    dag = {'authority': 'DRAFT_NONAUTHORITATIVE', 'implemented': False, 'macro_pin': fixed['capability_edges_v3.json'],
+           'registry_pin': registry_pin, 'topological_order': order, 'node_roles': owners,
+           'data_order_edges': edges + extra_edges, 'same_process_capability_edges': caps,
+           'entry_expansions': expansions,
+           'transport_names_selected_before_packet': True,
+           'static_hash_order': ['fixed_external_inputs', 'fixed_templates.json', 'protocol_domains.json', 'protocol_dag.json', 'verification_matrix.json'],
+           'static_hash_edges': [['fixed_external_inputs', 'protocol_domains.json'], ['fixed_external_inputs', 'protocol_dag.json'],
+                                 ['fixed_templates.json', 'protocol_domains.json'], ['protocol_domains.json', 'protocol_dag.json'],
+                                 ['protocol_domains.json', 'verification_matrix.json'], ['protocol_dag.json', 'verification_matrix.json']],
+           'channel_allocation_consumes_original_attempt': True,
+           'producer_kernel_authentication_by_child': False}
+    dag_pin = save('protocol_dag.json', dag)
+    faults = [
+        'three role packet/schema exchange', 'controller ACK from another mailbox', 'ACK before context',
+        'G0 and parent-hold projection exchange', 'coherent forged producer in packet and header',
+        'original reservation replay or duplicate constructor', 'reservation start reset', 'absolute deadline reset or extension',
+        'packet raw SHA drift', 'derived descriptor drift', 'publication receipt drift', 'source/EXE/environment drift',
+        'child identity differs from bound stage header', 'argv extra/missing/reordered tokens', 'generic role flag',
+        'partial commit', 'nonzero slot tail', 'create-only collision', 'abandoned mutex', 'primary plus cleanup failure',
+        'data-only result passed to constructor', 'legacy RoleStore/FileBootstrap/OwnerInputs accepts successor',
+        'failure after sticky consume then nonce retry', 'full G0/parent/fresh hold absent',
+        'runtime closure substitution', 'read before quiet or failed owner release',
+    ]
+    matrix = {'authority': 'DRAFT_NONAUTHORITATIVE', 'implemented': False, 'registry_pin': registry_pin, 'dag_pin': dag_pin,
+              'runtime_fault_matrix': [{'case': case, 'status': 'UNRUN'} for case in faults],
+              'actual_F': False, 'scientific_evidence_adopted': False, 'resource_admission': False, 'formal_result': False}
+    save('verification_matrix.json', matrix)
+    checker = HERE/'design_oracle.py'
+    assert pin(checker.read_bytes()) == baseline['helpers'][checker.relative_to(ROOT).as_posix()]
+    loader = importlib.util.spec_from_file_location('independent_upstream_design', checker)
+    module = importlib.util.module_from_spec(loader); loader.loader.exec_module(module)
+    print(json.dumps(module.verify(), sort_keys=True))
+
+if __name__ == '__main__':
+    def guard(event, args):
+        if event in ('subprocess.Popen', 'os.system', 'os.posix_spawn', 'os.spawn'):
+            raise AssertionError('design generator cannot launch a process')
+        if event == 'import' and args and str(args[0]).split('.')[0] in ('src','experiments','numpy','scipy','pyomo','highspy'):
+            raise AssertionError('design generator cannot import scientific/project code')
+    sys.addaudithook(guard)
+    main()

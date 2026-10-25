@@ -1,0 +1,23 @@
+2026-10-25最终终态：**design_03静态设计通过；saved_05与terminal_06均exit1，保存验收未闭合**。六次静态动作全部用完，合计charge27.9873943/90s，无剩余attempt。详情与原记录pins见[checkpoint_status.json](../../results/tables/staged_rts24_saved_fresh_upstream_contract_v1_non_authoritative/checkpoint_status.json)。末次仍失败于前序oracle的`partition(b'\n\n')`：迁移只按单LF处理，标题后缺少空行。原main31文件、failed package14文件和所有失败字节保持；本段是末次之后的文档状态更新，不是新的执行或保存通过证据。下一步先给独立mechanical successor固定范围/预算，正确保留标题段双LF及body suffix，再做完整archive重放；本轮不补跑第七次。actual fresh/最终父端采用与科学、资源、正式门禁继续关闭。
+
+2026-10-25 保存机械修复尝试：saved_05 保留 exit1；原因是导航首行标题兼容性。按[机械补充](staged_deliverability_c_saved_fresh_upstream_mechanical_supplement_v1.md)尝试迁移，恢复命令指向 `D:\Miniconda3\envs\compute\python.exe -B results/tables/staged_rts24_saved_fresh_upstream_contract_v1_non_authoritative/final_package_01/terminal_checks.py`；该尝试现已终态失败，保留作历史诊断。
+
+以下为 finalizer_04 冻结的预执行交接；保存复核表述及旧恢复命令保留作历史诊断，终态以本页顶部和 checkpoint_status.json 为准。
+
+# C：三角色上游数据域、无环构造与预算交接
+
+2026-10-25，DRAFT_NONAUTHORITATIVE，接续[冷入口/父端独立比较](continuation_handoff_20261025_saved_fresh_successor_direct_entry.md)。本轮起始 HEAD/origin `f3b4717973557b04e558485267431cc32556b5b5`，最终 commit/remote 以 Git 读回为准。恢复先核 Git/研究进程，再读[范围预算合同](staged_deliverability_c_saved_fresh_upstream_contract_scope_budget_v1.md)和[报告](../../results/tables/staged_rts24_saved_fresh_upstream_contract_v1_non_authoritative/validation_report.md)。root 唯一 writer，既有独立 reviewer 仅 PRE_SEAL；没有 seal/official receipt/run authority。
+
+先固定了10个 exact 数据域：ACK；controller/parent/fresh 各 permit-binding、entry-packet、descriptor。机器规格在[registry](../../results/tables/staged_rts24_saved_fresh_upstream_contract_v1_non_authoritative/checks_01/protocol_domains.json)，SHA `d5e467a761ea5d50c939f9b76fd702775381341996c3a0aaf5e563025a62520b`；[59节点展开图](../../results/tables/staged_rts24_saved_fresh_upstream_contract_v1_non_authoritative/checks_01/protocol_dag.json) SHA `63c3702360cc5d91045b5aaa7f81a13ae7eb63b253c4babe35ee7800e9d851d1`。旧38节点保存不动。runtime DAG与规格文件hash DAG分开核；固定模板不反向pin registry，四类固定合同SHA有field_equalities。
+
+构造顺序固定为 local permit → binding → packet/SHA → descriptor/SHA → exact argv → 一次allocation attempt → suspended owner → 原StageChannel.bind_owner header → release → bootstrap。transport name/nonce提前选定，packet不引用未来PID、argv、descriptor/header实例SHA。controller使用broker-local attempt；parent/fresh使用原RoleStore reservation。descriptor保留完整production阶段/时钟/资源字段。首次allocation前sticky消费原permit/attempt，失败不换nonce重试。producer保留emission capability，consumer_receives_capability=false；child将来核self/packet/header/argv一致，producer来源仍需外层exact local issuer/permit/retained owner/transcript证明。fresh引用parent hold摘要且不发行issuer；parent引用controller G0摘要。
+
+当前revision_02的design_03独立stdlib oracle完成10域/59节点/编码上界检查，21项RAM设计破坏均被拒绝。ACK最大合法canonical编码上界1081B；permit-binding1431/1668/1649B，packet7356/7593/7574B，descriptor847/743/662B（依次controller/parent/fresh）；旧stage header含最大3072B descriptor时上界3385B，再加44B≤4096。路径按单值canonical编码≤4096B，Unicode escaping已计入。binding/packet逐域value+363≤raw，raw+44=physical也已核，缩帽负例拒绝；frame363B仍来自条件性proposal，new header/failure/READY/START/offer未闭合，不能据此称整个wire已验证。26个真实bootstrap故障窗口全部UNRUN；没有生产data validator或cross-field/role能力实现。
+
+本轮预算是最多6个ordinary stdlib目标，各capture charge≤12s、target timeout≤11s、累计≤90s；原失败余量已用于修订。exact六条为baseline_01/design_02/design_03/finalizer_04/saved_05/terminal_06，不再有reserve attempt。capture计pre/post pin，最初Python启动不在窗口，0.25s尾部reserve单列且未实测；编辑/审查/Git不在账中，完整workflow wall/RSS gate仍false。前三条合计10.748621s；后续finalizer/saved/terminal以两目录原exit累计。execution≤32files/2MiB，mechanical≤16files/1MiB，新合同/交接/报告另≤4files/1MiB。原F8MiB/64files/17targets及6500/180s不改，也未获准入。
+
+首轮15项结构结果不算当前语义闭合。旧4JSON与原合同以exact base64保存于design_attempt_01.snapshot.json，old4/new4 helpers逐snapshot pin核；revision manifest只允许本轮helper/合同变化。旧archive是恢复材料，execution_binding_proved=false，不能归因design_02认证；design_03及以后record显式pin当前4JSON。所有PRE_SEAL修正与首轮原记录均保存。
+
+ENTRY/tests和SF49保持前序epoch `00ef897eb83d55f79491804cc49ee5302d766dd533ee3d8615ffff84b6a1e83a`。4058前序路径/P1全683保全；复用冻结282 pytest节点和8普通cold probes，本轮新增pytest/probe/模拟小时均0。静态生成器和oracle只读标准库，不import当前ENTRY；前序archive oracle先核exact保存SHA再装载。execution freeze之后只写独立机械包；terminal自身尚未写出的exit由最终Git逐blob承接。
+
+恢复命令：`D:\Miniconda3\envs\compute\python.exe -B results/tables/staged_rts24_saved_fresh_upstream_contract_v1_non_authoritative/final_package_01/saved_checks.py`。CLI要求当前Source/nav匹配；未来`.verify()` archive只保留冻结证据，漂移不能继承current节点。下一步先补独立raw inputs的三种exact data-only validator及successor mailbox/entry header/failure/local projection/startup域，再接真正role bootstrap；不得把本轮registry或设计oracle当作permit/owner输入。实际fresh与最终父端采用、full input/runtime/G0/parent/fresh hold、33根传递闭包、生产NumPy policy、deadline enforcement、quiet/真实timeout、整包科学采用、资源/正式门禁仍OPEN且false，宽目标继续active。

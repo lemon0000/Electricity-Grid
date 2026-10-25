@@ -1,0 +1,94 @@
+"""Read-only saved design oracle. Current scientific ENTRY is never imported."""
+from hashlib import sha256
+import importlib.util
+import json
+from pathlib import Path
+import sys
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[3]
+MAIN = HERE.parent/'checks_01'
+PREVIOUS = ROOT/'results/tables/staged_rts24_saved_fresh_successor_direct_entry_v1_non_authoritative/final_package_01/saved_checks.py'
+
+def raw(value):
+    return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('ascii')
+
+def pin(data):
+    return dict(bytes=len(data), sha256=sha256(data).hexdigest())
+
+def read(path):
+    return json.loads(path.read_bytes())
+
+def loaded(path, expected, label):
+    data = path.read_bytes(); assert pin(data) == expected
+    loader = importlib.util.spec_from_file_location(label, path)
+    module = importlib.util.module_from_spec(loader); loader.loader.exec_module(module)
+    assert pin(path.read_bytes()) == expected
+    return module
+
+def verify(require_current_sources=False, require_current_navigation=False):
+    freeze = read(HERE/'execution_freeze.json')
+    actual = {p.relative_to(ROOT).as_posix(): pin(p.read_bytes()) for p in MAIN.rglob('*') if p.is_file()}
+    assert actual == freeze['files'] and len(actual) == freeze['count'] <= 32
+    assert sum(p['bytes'] for p in actual.values()) == freeze['bytes'] <= 2*1024**2
+    assert pin(raw(actual)) == freeze['root']
+    baseline = read(MAIN/'baseline.json')
+    for n, expected in {**baseline['preserved'], **baseline['inputs'], **baseline['helpers']}.items():
+        assert pin((ROOT/n).read_bytes()) == expected, n
+    current_sources = all(pin((ROOT/n).read_bytes()) == p for n, p in baseline['sources'].items())
+    if require_current_sources: assert current_sources
+    docs = read(MAIN/'document_checks.json')
+    current_navigation = all(pin((ROOT/n).read_bytes()) == p for n, p in docs['document_pins'].items())
+    if require_current_navigation: assert current_navigation
+    else:
+        for n, expected in docs['document_pins'].items():
+            if n not in baseline['navigation_before']: assert pin((ROOT/n).read_bytes()) == expected, n
+    support = read(HERE/'support_pins.json'); support_pin = pin((HERE/'support_pins.json').read_bytes())
+    assert set(support) == {(HERE/n).relative_to(ROOT).as_posix() for n in ('execution_freeze.json','saved_checks.py')}
+    for n, expected in support.items(): assert pin((ROOT/n).read_bytes()) == expected
+    records = {p.relative_to(ROOT).as_posix(): read(p) for directory in (MAIN,HERE) for p in directory.glob('*.exit.json')}
+    assert 3 <= len(records) <= 6
+    total = 0.
+    for n, value in records.items():
+        path = ROOT/n; stem = path.name.removesuffix('.exit.json')
+        assert value['returncode'] == 0 and value['accepted'] and value['error'] is None
+        assert value['fixed_before'] == value['fixed_after']
+        assert value['baseline_pin'] == pin((MAIN/'baseline.json').read_bytes())
+        assert value['stdout_pin'] == pin((path.parent/(stem+'.stdout.log')).read_bytes())
+        assert value['stderr_pin'] == pin(b'') == pin((path.parent/(stem+'.stderr.log')).read_bytes())
+        assert value['script_pin'] == pin(Path(value['argv'][2]).read_bytes())
+        assert value['tail_reserve_seconds'] == .25
+        assert value['charged_seconds'] == value['observed_capture_seconds']+.25 <= 12
+        assert value['previous_charged_seconds'] == sum(records[k]['charged_seconds'] for k in value['prior_records'])
+        assert all(k in records and pin((ROOT/k).read_bytes()) == p for k,p in value['prior_records'].items())
+        if path.parent == HERE: assert value['support_pin'] == support_pin
+        total += value['charged_seconds']
+    assert total <= 90
+    design = loaded(MAIN/'design_oracle.py', baseline['helpers'][(MAIN/'design_oracle.py').relative_to(ROOT).as_posix()], 'frozen_upstream_design_oracle').verify()
+    previous = loaded(PREVIOUS, baseline['preserved'][PREVIOUS.relative_to(ROOT).as_posix()], 'frozen_direct_entry_archive')
+    prior = previous.verify(require_current_sources=require_current_sources)
+    assert prior['frozen_epoch_test_nodes'] == 282 and prior['ordinary_cold_process_probes'] == 8
+    assert prior['P1_unchanged_files'] == 683 and prior['scientific_ENTRY_imported_by_oracle'] is False
+    assert not (ROOT/'results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative').exists()
+    package = [p for p in HERE.rglob('*') if p.is_file()]
+    assert len(package) <= 16 and sum(p.stat().st_size for p in package) <= 1024**2
+    return dict(authority='DRAFT_NONAUTHORITATIVE', **{k:v for k,v in design.items() if k != 'authority'},
+                preserved_paths=len(baseline['preserved']), P1_unchanged_files=683,
+                reused_frozen_epoch_test_nodes=282, current_epoch_test_nodes=282 if current_sources else 0,
+                reused_ordinary_cold_process_probes=8, new_pytest_nodes=0, new_cold_process_probes=0, new_simulated_hours=0,
+                source_epoch=baseline['source_epoch'], current_sources_match=current_sources, current_navigation_match=current_navigation,
+                completed_capture_records=len(records), completed_charged_static_seconds=total,
+                current_capture_not_counted_until_external_exit=True, whole_workflow_wall_budget_verified=False,
+                execution_files=freeze['count'], execution_bytes=freeze['bytes'], package_files=len(package),
+                package_bytes=sum(p.stat().st_size for p in package))
+
+def guard(event, args):
+    if event in ('subprocess.Popen','os.system','os.posix_spawn','os.spawn'):
+        raise AssertionError('saved oracle cannot launch a subprocess')
+    if event == 'import' and args and str(args[0]).split('.')[0] in ('src','experiments','numpy','scipy','pyomo','highspy'):
+        raise AssertionError('saved oracle cannot import scientific/project implementation')
+
+if __name__ == '__main__':
+    assert not sys.argv[1:]
+    sys.addaudithook(guard)
+    print(json.dumps(verify(require_current_sources=True, require_current_navigation=True), sort_keys=True))
