@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-25 saved supervisor事前设计：见[最新交接](continuation_handoff_20261025_saved_fresh_supervisor_budget.md)。源码不变的条件账本显示P1读12736/13419超过12500、source/exe/anchor下界6513超过6500、完整名义stage至少185s超过180s；须先做依赖复用/失效证明和逐边deadline。wire component oracle已核新slot提案，guard/最大四record和实际actor未证明；真实F/科学采用/资源/正式门禁保持关闭。
+
 2026-10-25 saved owner相关绑定补验完成：见[最新交接](continuation_handoff_20261025_saved_fresh_owner_completion.md)。源码不变的18节点30.625s终态通过，与前143同SF49/三源snapshot、互斥合计161；两批预算225.639/240s与30.625/45s分别保存，原失败/超时不计通过。实际saved F/issuer/supervise/public CLI以及科学采用、资源和正式门禁仍未开放。
 
 2026-10-25 saved owner/watcher草稿：见[交接](continuation_handoff_20261025_saved_fresh_owner.md)。当前epoch143唯一节点终态通过（56 owner/68 stage/19 guard），pytest 225.639s/240s；18相关binding到帽无终态，另固定源码不变的45s/15s补验。固定unit stub无Native，issuer/public saved CLI/实际F及科学/资源/正式门禁仍关闭。旧77仅属于冻结snapshot，未全量继承到新源码。

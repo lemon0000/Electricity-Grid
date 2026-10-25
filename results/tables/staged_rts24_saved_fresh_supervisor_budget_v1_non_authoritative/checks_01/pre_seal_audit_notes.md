@@ -1,0 +1,13 @@
+# Saved supervisor 事前设计只读复核记录
+
+2026-10-25，DRAFT_NONAUTHORITATIVE。root整理既有独立只读reviewer `/root/f_scope_preseal` 的反馈；reviewer未写文件、未执行或轮询脚本/测试/probe、未分叉。当前设计范围未见剩余必修finding，不构成official verdict、receipt、seal或运行授权。
+
+首次依赖审阅识别saved supervisor/issuer/driver/两层reader尚未接通，ordinary权限不能直接扩大；broker/controller两个128KiB return须区分payload与packet envelope，并避免重复嵌套。host必须独立持有caller image，不能从broker offer反推expected。
+
+条件账本由root与reviewer分别核对：hold内嵌capture，host+broker初次capture及三次hold使capture body共5；success共10次完整库存，P1读12736，host末次再full为13419。当前helper模型修正为33 context checks，加至少一个loaded adapter duplicate后source/exe/anchor下界6513。原E base来自冻结chain_04，未新跑科学链。12736/13419、6513和185s都是设计条件算术，不是actual F实测。
+
+PRE_SEAL进一步要求deadline传播到fresh、同一50s episode不重授publication尾部、wire与filesystem失败可交付性分开、原异常不跨进程、Unicode证据准确限定。v2现固定parent active110/fresh close90/active80；12 failure窗区分none、mailbox terminal与stage error frame，包含controller/parent/fresh bookend/replay/compare/publication/readback及may_have_published。所有diagnostic guaranteed均false，failure15s不追加。BMP65536穷举、astral仅四个代表值。旧v1及两次oracle失败原样保留。
+
+最终设计复核确认：component-cap算术及10-slot提案闭合；没有把它称为field-level最大合法context/return、四record、RSS或OS allocation证明。guards、issuer、actual driver、episode handoff和host最终硬中断仍未实现。全部科学/资源/正式/F gate仍false。
+
+reviewer同时要求刷新最终helper/support pins并重新保存重开：早saved_reopen_09仅属于旧helper。当前helper新增EXE bytes/identity/Python和E原始baseline provenance核验；最终采用后续finalize_10及saved_reopen_11的原始终态。canonical三源码和SF49没有变化，本包不新增pytest节点或模拟小时。

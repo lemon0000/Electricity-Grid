@@ -1,0 +1,72 @@
+{
+  "E_observed_baseline": {
+    "B": 2152,
+    "E": 801,
+    "files_per_inventory": 683,
+    "inventories": 2,
+    "per_side_P1": 4319
+  },
+  "F_launch_admitted": false,
+  "actual_saved_F_calls": 0,
+  "adapter_source_passes": 17,
+  "assumed_current_helper_full_context_checks": {
+    "G0_G1_G2_G3_role_context_and_execution": 8,
+    "broker_make_context": 1,
+    "final_role_context": 1,
+    "parent_after_fresh_quiet_reader": 1,
+    "parent_and_controller_compare": 2,
+    "two_child_inputs_constructor_and_prewatch": 12,
+    "two_saved_child_bootstrap_and_stores": 6,
+    "two_scientific_execution_entries": 2
+  },
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "capture_bodies": {
+    "G0_hold": 1,
+    "broker_make_context": 1,
+    "fresh_hold": 1,
+    "host_initial": 1,
+    "parent_hold": 1
+  },
+  "explicit_full_G_bookends": 3,
+  "failure_core_read_upper_bound_proved": false,
+  "failure_inventory_note": "replay exception handler adds a full bookend attempt; core failure reads remain unknown",
+  "failure_rows": [
+    {
+      "known_wrapper_inventory_attempts": 2,
+      "window": "context before ACK"
+    },
+    {
+      "known_wrapper_inventory_attempts": 5,
+      "window": "parent replay fails before success final bookend"
+    },
+    {
+      "known_wrapper_inventory_attempts": 8,
+      "window": "fresh final bookend then exception bookend both attempted"
+    },
+    {
+      "known_wrapper_inventory_attempts": 11,
+      "window": "all successful plus host final bookend"
+    }
+  ],
+  "full_inventory_calls": 10,
+  "guaranteed_loaded_src_duplicates_per_pass": 1,
+  "hard_P1_read_cap": 12500,
+  "hard_source_executable_anchor_cap": 6500,
+  "model_status": "conditional_design_not_executable",
+  "nested_hold_captures": 3,
+  "omitted_source_categories": [
+    "other loaded src duplicate reads",
+    "catalog",
+    "fixture",
+    "extra executable/anchor",
+    "new saved supervisor/bookends"
+  ],
+  "over_cap_success": 236,
+  "over_cap_with_host_final": 919,
+  "replay_calls": 2,
+  "selected_src_file_count": 36,
+  "source_read_conditional_lower_bound": 6513,
+  "success_P1_reads": 12736,
+  "success_with_host_final_full_inventory_reads": 13419,
+  "top_level_captures": 2
+}

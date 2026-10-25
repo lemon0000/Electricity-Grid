@@ -1,0 +1,451 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "caveat": "AST occurrence counts are not runtime call counts; branch/multiplicity assumptions are in workflow_ledger.json",
+  "functions": {
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::RoleStore.__init__": {
+      "ast_sha": "c0926799f0eb28d18d31f5f1421049c94be0f2c05a576b956a14b777f0098a3a",
+      "end_line": 1362,
+      "line": 1348,
+      "required_edges": {
+        "_role_context": 1
+      },
+      "structural_calls": {
+        "Path": 1,
+        "_DIRECT_BOOTSTRAP.check": 1,
+        "_held_saved_bootstrap": 1,
+        "_role_context": 1,
+        "_role_tree": 1,
+        "dict": 1,
+        "digest": 4,
+        "get_ident": 1,
+        "object.__setattr__": 1,
+        "os.getpid": 1,
+        "read": 1,
+        "require": 3,
+        "str": 1,
+        "values.items": 1,
+        "values.update": 2
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::RoleStore.consume_child": {
+      "ast_sha": "0ca3e70bd366edc8281e5e1bb4496df8baab212995ee292e1ca1e2cf5fb02de3",
+      "end_line": 1412,
+      "line": 1406,
+      "required_edges": {
+        "_saved_owner_store": 1
+      },
+      "structural_calls": {
+        "_saved_owner_store": 1,
+        "digest": 1,
+        "object.__setattr__": 2,
+        "require": 1,
+        "self.check": 1
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::SavedOwnerInputs._unbound_bookend": {
+      "ast_sha": "ca1e427eb86bdbe332176993f1902228e455764865c413d39c9291a2f4aac56e",
+      "end_line": 3348,
+      "line": 3343,
+      "required_edges": {
+        "_saved_owner_store": 1
+      },
+      "structural_calls": {
+        "_saved_owner_endpoint": 1,
+        "_saved_owner_image": 1,
+        "_saved_owner_store": 1,
+        "canonical": 1,
+        "parse": 1,
+        "require": 1
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::SavedStageBinding.prewatch": {
+      "ast_sha": "a85a8409f9b9702ca4880263bab54c3288463a1ee54a55e40a6b8a36f2259a3a",
+      "end_line": 3717,
+      "line": 3709,
+      "required_edges": {
+        "_saved_constructor_bookend": 1
+      },
+      "structural_calls": {
+        "_saved_constructor_bookend": 1,
+        "parse": 1,
+        "require": 2,
+        "self.entry": 1,
+        "self.upstream._live": 1,
+        "stage_descriptor": 1
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_bind_saved_main": {
+      "ast_sha": "f5a82ae192da7fcc8da331b22eee734d631f0e4e153b2c2187a79ca4ade35f58",
+      "end_line": 3272,
+      "line": 3241,
+      "required_edges": {
+        "argv_for": 1,
+        "check_context": 1
+      },
+      "structural_calls": {
+        "Path": 1,
+        "SavedFileBootstrap": 1,
+        "_checked_entry_paths": 2,
+        "_direct_main_shape": 1,
+        "_ordinary_preimports": 1,
+        "_saved_transport": 1,
+        "all": 1,
+        "any": 1,
+        "argv_for": 1,
+        "canonical": 1,
+        "check_context": 1,
+        "dict": 1,
+        "digest": 4,
+        "directories": 2,
+        "identity": 2,
+        "items": 1,
+        "len": 1,
+        "list": 3,
+        "ordinary": 2,
+        "os.environ.get": 1,
+        "pin": 1,
+        "read": 1,
+        "require": 8,
+        "str": 3,
+        "sys.modules.get": 1,
+        "tuple": 1
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_construct_saved_stage": {
+      "ast_sha": "28337d5f9327417ab01c14af5bfceaf9d18ffe4df1e67b6a7cb7f180346d26fa",
+      "end_line": 3761,
+      "line": 3722,
+      "required_edges": {
+        "_saved_constructor_bookend": 2,
+        "inputs._unbound_bookend": 1
+      },
+      "structural_calls": {
+        "OwnedStage": 1,
+        "SavedStageBinding": 1,
+        "SavedStageUnresolved": 1,
+        "_cleanup_saved_owner": 1,
+        "_commit_saved_attempt": 1,
+        "_saved_constructor_bookend": 2,
+        "_saved_launch_issuer": 1,
+        "_saved_startup_image": 1,
+        "canonical": 2,
+        "channel.bind_owner": 1,
+        "dict": 1,
+        "factory.__init__": 1,
+        "inputs._unbound_bookend": 1,
+        "inputs.immutable_entry": 1,
+        "issuer.check": 1,
+        "len": 2,
+        "list": 1,
+        "object.__new__": 1,
+        "parse": 1,
+        "permit._binding_entry": 1,
+        "require": 8,
+        "startup.update": 1,
+        "type": 3,
+        "unit.entry": 2
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_role_compare": {
+      "ast_sha": "abc7ebbe94d30597fbc1a7dd6b28cb01cf8e409c0f005eb18ed9b6288fe80a5c",
+      "end_line": 1666,
+      "line": 1656,
+      "required_edges": {
+        "execution_context": 1
+      },
+      "structural_calls": {
+        "_role_fixture_payload": 1,
+        "adapter.compare_payloads": 1,
+        "canonical": 2,
+        "dict": 2,
+        "digest": 2,
+        "execution_context": 1,
+        "hexdigest": 1,
+        "parse": 1,
+        "require": 1,
+        "sha256": 1,
+        "store.check": 1
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_role_input_bookend": {
+      "ast_sha": "76cc748d420d1b9554d210319e90d08531765ab81704c1713cd8f457fcb5ff72",
+      "end_line": 1653,
+      "line": 1642,
+      "required_edges": {
+        "_role_context": 1,
+        "execution_context": 1
+      },
+      "structural_calls": {
+        "ValueError": 1,
+        "_role_context": 1,
+        "adapter.bookend": 1,
+        "adapter.hold": 1,
+        "canonical": 1,
+        "dict": 1,
+        "digest": 1,
+        "execution_context": 1,
+        "require": 1,
+        "stage.lower": 1,
+        "store.check": 1,
+        "time.monotonic": 1
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_role_reconstruct": {
+      "ast_sha": "71bb31e65052d06df163394577af916a49c5ff1f163aa7de06d4dfefa847e713",
+      "end_line": 1639,
+      "line": 1630,
+      "required_edges": {
+        "execution_context": 1
+      },
+      "structural_calls": {
+        "ValueError": 1,
+        "_disable_saved_effects": 1,
+        "_role_fixture_payload": 1,
+        "adapter.hold": 1,
+        "adapter.replay": 1,
+        "canonical": 3,
+        "execution_context": 1,
+        "parse": 1,
+        "store.check": 1
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_saved_constructor_bookend": {
+      "ast_sha": "b280e4d64c62ab4c2728112f67a99e1437b3c5026b0d278ff48e576a9fb1741b",
+      "end_line": 3612,
+      "line": 3598,
+      "required_edges": {
+        "_saved_owner_store": 1
+      },
+      "structural_calls": {
+        "_saved_owner_image": 1,
+        "_saved_owner_store": 1,
+        "_stage_decode": 1,
+        "canonical": 1,
+        "channel._live": 1,
+        "inputs.immutable_entry": 1,
+        "min": 1,
+        "parse": 1,
+        "require": 5,
+        "stage_descriptor": 1,
+        "time.monotonic": 1,
+        "type": 1
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_saved_owner_store": {
+      "ast_sha": "1f8f66aabeb86957498ff3161f1ad9e4499589798edab17ddd81f78934555331",
+      "end_line": 3375,
+      "line": 3363,
+      "required_edges": {
+        "check_context": 1
+      },
+      "structural_calls": {
+        "_hex64": 1,
+        "_saved_environment_bookend": 1,
+        "check_context": 1,
+        "items": 1,
+        "len": 1,
+        "math.isfinite": 1,
+        "require": 2,
+        "sorted": 1,
+        "store.check": 1,
+        "time.monotonic": 1,
+        "tuple": 1,
+        "type": 3
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::argv_for": {
+      "ast_sha": "afb4a2fc092f5db255630772c57a24b4ad6f33aaebc338762d844e8b3c119131",
+      "end_line": 252,
+      "line": 248,
+      "required_edges": {
+        "check_context": 1
+      },
+      "structural_calls": {
+        "Path": 1,
+        "_saved_file_tokens": 1,
+        "check_context": 1,
+        "require": 1,
+        "str": 1
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::make_context": {
+      "ast_sha": "396f6a7a8ca850f50c7f9a1d914770e315ff00b4ed53ee4703a11800088fd65e",
+      "end_line": 245,
+      "line": 220,
+      "required_edges": {
+        "adapter.capture": 1,
+        "check_context": 1
+      },
+      "structural_calls": {
+        "Path": 2,
+        "absolute": 2,
+        "adapter.capture": 1,
+        "canonical": 1,
+        "check_context": 1,
+        "dict": 4,
+        "digest": 1,
+        "directories": 1,
+        "environment": 1,
+        "hexdigest": 2,
+        "identity": 1,
+        "json.loads": 1,
+        "list": 2,
+        "math.isfinite": 1,
+        "ordinary": 1,
+        "os.path.lexists": 1,
+        "output_mode": 1,
+        "parse": 1,
+        "pin": 3,
+        "read": 4,
+        "require": 5,
+        "sha256": 2,
+        "source_pins": 1,
+        "str": 4,
+        "time.monotonic": 1,
+        "type": 1,
+        "validate_context": 1
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::read_saved_after_quiet": {
+      "ast_sha": "77232b8d311eab90b485c972afe785605a8430ffffb904dc764b69e3a7eac71d",
+      "end_line": 3837,
+      "line": 3823,
+      "required_edges": {
+        "_saved_owner_store": 1
+      },
+      "structural_calls": {
+        "_saved_owner_store": 1,
+        "_stage_complete_witness": 1,
+        "canonical": 2,
+        "len": 1,
+        "name.startswith": 1,
+        "read": 1,
+        "require": 3,
+        "role_target_caps": 1,
+        "saved_stage_process_record": 1,
+        "store.accounting": 2
+      }
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::saved_owner_inputs": {
+      "ast_sha": "346161dc017ffc6fdd28cb1260e2602c1f3fb9c2951c9495869c357f69af496d",
+      "end_line": 3399,
+      "line": 3391,
+      "required_edges": {
+        "_saved_owner_store": 1,
+        "store.consume_child": 1
+      },
+      "structural_calls": {
+        "SavedOwnerInputs": 1,
+        "_saved_owner_endpoint": 1,
+        "_saved_owner_image": 1,
+        "_saved_owner_store": 1,
+        "canonical": 1,
+        "len": 1,
+        "require": 1,
+        "store.consume_child": 1
+      }
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::_replay": {
+      "ast_sha": "366076caa607aec8a33e7359cd68d63ede19b758b51db89850c789011a2b6f7a",
+      "end_line": 238,
+      "line": 198,
+      "required_edges": {
+        "bookend": 2,
+        "journal.reopen": 1,
+        "prefix.replay_prefix": 1
+      },
+      "structural_calls": {
+        "bind_payload": 1,
+        "bookend": 2,
+        "codec.pack": 3,
+        "codec.parse": 1,
+        "core.plain": 2,
+        "dict": 2,
+        "digest": 2,
+        "enumerate": 1,
+        "evidence_refs.append": 1,
+        "hexdigest": 1,
+        "journal.reopen": 1,
+        "len": 2,
+        "mechanical.pin": 1,
+        "mechanical.sha": 1,
+        "nodes.extend": 1,
+        "prefix.replay_prefix": 1,
+        "project_metrics": 1,
+        "require": 7,
+        "set": 2,
+        "sha256": 1,
+        "validate_payload": 1,
+        "zip": 1
+      }
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::capture": {
+      "ast_sha": "d21deabf1275d044b223ee5b6f9ef42fe4b17d4c524151cf801a4eb814925783",
+      "end_line": 125,
+      "line": 90,
+      "required_edges": {
+        "bookend": 1,
+        "mechanical.inventory": 1,
+        "sources": 1
+      },
+      "structural_calls": {
+        "HeldInput": 1,
+        "bookend": 1,
+        "caller_image": 1,
+        "codec.directory_identity": 2,
+        "codec.parse": 8,
+        "codec.read_bytes": 1,
+        "core.digest": 2,
+        "core.load_fixture": 1,
+        "dict": 2,
+        "files.items": 1,
+        "files.values": 1,
+        "hexdigest": 1,
+        "json.loads": 1,
+        "len": 2,
+        "mechanical.inventory": 1,
+        "n.startswith": 1,
+        "object.__setattr__": 1,
+        "prefix.point._outer": 1,
+        "range": 3,
+        "require": 3,
+        "sha256": 1,
+        "sources": 1,
+        "stamp": 1,
+        "str": 1,
+        "sum": 1,
+        "tuple": 3,
+        "type": 1,
+        "validate_metrics": 1
+      }
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::hold": {
+      "ast_sha": "d08320ffaeafc56c4faf38da6d953c48030949c795bfc92cf29208ac6c7377dd",
+      "end_line": 133,
+      "line": 128,
+      "required_edges": {
+        "capture": 1
+      },
+      "structural_calls": {
+        "capture": 1,
+        "codec.parse": 1,
+        "require": 2,
+        "type": 1
+      }
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::replay": {
+      "ast_sha": "a40a8e435d44ecff003e0e3a9695359134f451591149b066f4552cc64f37ac8a",
+      "end_line": 195,
+      "line": 188,
+      "required_edges": {
+        "_replay": 1,
+        "bookend": 1
+      },
+      "structural_calls": {
+        "ReplayUnresolved": 1,
+        "_replay": 1,
+        "bookend": 1
+      }
+    }
+  }
+}

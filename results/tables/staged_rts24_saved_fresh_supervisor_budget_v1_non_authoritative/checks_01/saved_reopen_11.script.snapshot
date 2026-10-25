@@ -1,0 +1,123 @@
+"""Reopen the frozen design arithmetic and unchanged predecessor evidence."""
+import ast
+from hashlib import sha256
+import importlib.util
+import json
+from pathlib import Path
+import sys
+from capture_static import ROOT, OUT, PRIOR, pin
+
+MUTABLE = {'experiments/staged_rts24_saved_fresh_adoption_v1.py', 'tests/test_staged_rts24_saved_fresh_adoption_v1.py'}
+
+
+def read(name): return json.loads((OUT/name).read_bytes())
+
+
+def verify():
+    selected = read('admission.json')['source_pins']; current = True
+    assert len(selected) == 49
+    for name, expected in selected.items():
+        match = pin((ROOT/name).read_bytes()) == expected
+        if name not in MUTABLE: assert match, name
+        current &= match
+    for name, expected in read('preservation_inventory.json').items(): assert pin((ROOT/name).read_bytes()) == expected, name
+    seconds = 0.
+    for path in OUT.glob('*.exit.json'):
+        value = json.loads(path.read_bytes()); seconds += value['capture_seconds']
+        assert value['source_pins_unchanged'] and value['source_pins'] == selected
+        assert pin((ROOT/value['script_snapshot']).read_bytes()) == value['script_pin']
+        for name, item in read(value['source_snapshot'])['sources'].items():
+            assert pin((ROOT/item['snapshot']).read_bytes()) == item['pin'] == selected[name]
+    assert seconds <= 90
+    assert read('oracle_03.exit.json')['exit_code'] == read('oracle_04.exit.json')['exit_code'] == 1
+    for label in ('baseline_01', 'prepare_02', 'oracle_07'):
+        value = read(label+'.exit.json')
+        assert value['exit_code'] == 0 and not value['timed_out'] and value['capture_seconds'] <= value['timeout_seconds']
+        assert (OUT/(label+'.stderr.log')).read_bytes() == b''
+
+    e_folder = ROOT/'results/tables/staged_rts24_saved_journal_check_v1_non_authoritative/checks_01'
+    observed = [json.loads(line) for line in (e_folder/'chain_04.stdout.log').read_text(encoding='utf-8').splitlines()
+        if line.startswith('{')][0]
+    assert json.loads((e_folder/'chain_04.exit.json').read_bytes())['exit_code'] == 0
+    assert observed['new_native_calls'] == 0 and observed['P1_683_files_unchanged'] is True
+    assert all(selected[n] == expected for n, expected in observed['source_pins'].items())
+    for name, expected in read('E_observed_baseline.json')['provenance_pins'].items():
+        assert pin((ROOT/name).read_bytes()) == expected, name
+    executable = read('runtime_pin.json')['executable']; exe = Path(executable['path']); info = exe.stat()
+    assert Path(sys.executable).absolute() == exe and sys.version == executable['python']
+    assert pin(exe.read_bytes()) == executable['pin']
+    assert [info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns] == executable['identity']
+    io = observed['io']; assert io['B:P1'] == 2152 and io['E:P1'] == 801
+    assert io['inventory_before:P1'] == io['inventory_after:P1'] == 683
+    ledger = read('workflow_ledger.json')
+    captures = sum(ledger['capture_bodies'].values()); assert captures == 5
+    inventories = captures+ledger['replay_calls']+ledger['explicit_full_G_bookends']; assert inventories == 10
+    p1 = 2*(io['B:P1']+io['E:P1'])+inventories*683
+    assert p1 == ledger['success_P1_reads'] == 12736 > ledger['hard_P1_read_cap'] == 12500
+    assert p1+683 == ledger['success_with_host_final_full_inventory_reads'] == 13419
+    context_checks = sum(ledger['assumed_current_helper_full_context_checks'].values()); assert context_checks == 33
+    source_lower = 2*(io['B:source']+io['E:source'])+17*(49+1)+context_checks*51
+    assert source_lower == ledger['source_read_conditional_lower_bound'] == 6513 > 6500
+    assert ledger['failure_core_read_upper_bound_proved'] is False and ledger['actual_saved_F_calls'] == 0
+
+    snapshots = read('oracle_07.snapshot.json')['sources']; definitions = {}
+    for name, item in snapshots.items():
+        tree = ast.parse((ROOT/item['snapshot']).read_bytes()); functions = {}
+        for node in tree.body:
+            if isinstance(node, ast.FunctionDef): functions[node.name] = node
+            elif isinstance(node, ast.ClassDef):
+                functions.update({node.name+'.'+part.name:part for part in node.body if isinstance(part, ast.FunctionDef)})
+        definitions[name] = functions
+    for qualified, expected in read('function_dependency_census.json')['functions'].items():
+        name, function = qualified.split('::'); node = definitions[name][function]
+        assert sha256(ast.dump(node, include_attributes=False).encode()).hexdigest() == expected['ast_sha']
+        assert (node.lineno, node.end_lineno) == (expected['line'], expected['end_line'])
+
+    deadlines = read('deadline_ledger_v2.json'); offsets = deadlines['proposed_absolute_offsets']
+    assert sum(deadlines['nominal_serial_caps'].values()) == deadlines['nominal_total_seconds'] == 185 > 180
+    assert offsets == dict(host_done=180, broker_closed=177, broker_active=167, controller_closed=165,
+        controller_active=155, parent_closed=125, parent_active=110, fresh_closed=90, fresh_active=80)
+    assert deadlines['current_episode_handoff_implemented'] is deadlines['host_final_hard_interrupt_proved'] is False
+    windows = read('failure_availability_v2.json')
+    assert windows['extra_failure_seconds'] == 0 and windows['missing_return_implies_absent_publication'] is False
+    assert windows['raw_child_exception_transferred_to_parent'] is False
+    assert {row['wire_transport'] for row in windows['windows']} == {
+        'none', 'invocation_mailbox_terminal', 'stage_channel_error_frame'}
+    for row in windows['windows']:
+        assert row['wire_failure_guaranteed'] is row['filesystem_failure_guaranteed'] is False
+        assert row['original_object_retained_in_observer_process'] == (row['observer_process'] == row['error_origin_process'])
+        assert row['wire_failure_may_be_available'] == (row['wire_transport'] != 'none')
+
+    wire = read('wire_capacity_oracle.json')
+    assert wire['independent_unicode_BMP_cases'] == 65536 and wire['astral_extra_cases'] == 4
+    assert wire['compact_error_max_character_encoding_bytes'] == 3864
+    assert wire['four_cleanup_failure_value_bytes'] == 19956 <= 32768
+    assert wire['old_single_component_at_cap_packet_bytes'] == 131435 > 131072
+    assert wire['old_broker_two_components_at_caps_packet_lower_bound'] == 263034 > 131072
+    assert sum(row['physical'] for row in wire['proposed_slots']) == wire['proposed_physical_mapping_bytes'] == 2392504
+    for row in wire['proposed_slots']:
+        assert row['physical'] == row['raw']+44 and row['value']+row['proven_packet_extra_bound'] <= row['raw']
+    assert wire['proposed_guards_implemented'] is wire['maximum_legal_four_records_proved'] is False
+    for name, before in read('navigation_before.json').items():
+        raw = (ROOT/name).read_bytes()
+        assert raw.partition(b'\n\n')[0].decode() == before['header']
+        assert pin(raw[-before['body']['bytes']:]) == before['body']
+    for name, expected in read('document_checks.json')['document_pins'].items(): assert pin((ROOT/name).read_bytes()) == expected, name
+    for name, expected in read('support_pins.json').items(): assert pin((ROOT/name).read_bytes()) == expected, name
+    spec = importlib.util.spec_from_file_location('previous_saved_owner', PRIOR/'saved_checks.py')
+    prior = importlib.util.module_from_spec(spec); spec.loader.exec_module(prior); old = prior.verify()
+    assert old['frozen_owner_related_unit_nodes'] == 161 and old['P1_unchanged_files'] == 683
+    assert not (ROOT/'results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative').exists()
+    files = [p for p in OUT.rglob('*') if p.is_file()]
+    assert len(files) <= 128 and sum(p.stat().st_size for p in files) <= 8*1024**2
+    return dict(authority='DRAFT_NONAUTHORITATIVE', current_canonical_matches_frozen_epoch=bool(current),
+        predecessor_current_unit_nodes=161 if current else 0, conditional_P1_success_reads=p1,
+        conditional_P1_with_host_final_reads=p1+683, conditional_source_lower=source_lower,
+        nominal_serial_seconds=185, wire_component_composition_verified=True,
+        maximum_legal_four_records_proved=False, call_volume_admission_complete=False,
+        observed_static_seconds=seconds, static_cap_seconds=90, P1_unchanged_files=683,
+        actual_saved_owner_constructed=False, actual_saved_F_execution=False,
+        F_launch_admitted=False, scientific_evidence_adopted=False, resource_admission=False, formal_result=False)
+
+
+if __name__ == '__main__': sys.stdout.buffer.write((json.dumps(verify(), sort_keys=True, indent=2)+'\n').encode())

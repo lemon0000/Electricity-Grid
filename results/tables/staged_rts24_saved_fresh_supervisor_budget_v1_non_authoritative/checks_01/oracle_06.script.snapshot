@@ -1,0 +1,235 @@
+"""Independent byte arithmetic and conditional DAG census; no actor/science imports."""
+import ast
+from hashlib import sha256
+import json
+import math
+from pathlib import Path
+from capture_static import ROOT, OUT, pin, save as first_save
+
+
+def save(name, value):
+    # A failed byte-oracle attempt may already have saved identical ledger bytes.
+    raw = (json.dumps(value, sort_keys=True, indent=2)+'\n').encode()
+    path = OUT/name
+    if path.exists(): assert path.read_bytes() == raw, name
+    else: first_save(name, value)
+
+
+def canonical(value):
+    return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('ascii')
+
+
+def json_size(value):
+    """Count JSON tokens/escapes independently of json.dumps string encoding."""
+    if value is None: return 4
+    if type(value) is bool: return 4 if value else 5
+    if type(value) is int: return len(str(value))
+    if type(value) is float:
+        assert math.isfinite(value)
+        return len(repr(value))
+    if type(value) is str:
+        total = 2
+        for char in value:
+            code = ord(char)
+            if char in ('"', '\\', '\b', '\f', '\n', '\r', '\t'): total += 2
+            elif code < 32 or 127 <= code <= 65535: total += 6
+            elif code > 65535: total += 12
+            else: total += 1
+        return total
+    if type(value) is list or type(value) is tuple:
+        return 2+sum(map(json_size, value))+max(0, len(value)-1)
+    assert type(value) is dict and all(type(key) is str for key in value)
+    return 2+sum(json_size(key)+1+json_size(item) for key, item in value.items())+max(0, len(value)-1)
+
+
+def size(value):
+    observed = len(canonical(value)); assert json_size(value) == observed
+    return observed
+
+
+admission = json.loads((OUT/'admission.json').read_bytes())
+selected = admission['source_pins']
+assert all(pin((ROOT/n).read_bytes()) == expected for n, expected in selected.items())
+entry_name = 'experiments/staged_rts24_saved_fresh_adoption_v1.py'
+adapter_name = 'src/staged_rts24_saved_fresh_adoption_v1.py'
+trees = {name:ast.parse((ROOT/name).read_bytes()) for name in (entry_name, adapter_name)}
+
+
+def functions(name):
+    result = {}
+    for node in trees[name].body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)): result[node.name] = node
+        elif isinstance(node, ast.ClassDef):
+            result.update({node.name+'.'+item.name:item for item in node.body if isinstance(item, ast.FunctionDef)})
+    return result
+
+
+def call_name(call):
+    node = call.func; parts = []
+    while isinstance(node, ast.Attribute): parts.append(node.attr); node = node.value
+    if isinstance(node, ast.Name): parts.append(node.id)
+    return '.'.join(reversed(parts))
+
+
+requirements = {
+    adapter_name: {'capture':{'sources':1, 'mechanical.inventory':1, 'bookend':1},
+        'hold':{'capture':1}, '_replay':{'bookend':2, 'prefix.replay_prefix':1, 'journal.reopen':1},
+        'replay':{'_replay':1, 'bookend':1}},
+    entry_name: {'make_context':{'adapter.capture':1, 'check_context':1},
+        '_bind_saved_main':{'check_context':1, 'argv_for':1}, 'argv_for':{'check_context':1},
+        'RoleStore.__init__':{'_role_context':1}, '_saved_owner_store':{'check_context':1},
+        'saved_owner_inputs':{'_saved_owner_store':1, 'store.consume_child':1},
+        'RoleStore.consume_child':{'_saved_owner_store':1},
+        'SavedOwnerInputs._unbound_bookend':{'_saved_owner_store':1},
+        '_saved_constructor_bookend':{'_saved_owner_store':1},
+        'SavedStageBinding.prewatch':{'_saved_constructor_bookend':1},
+        '_construct_saved_stage':{'inputs._unbound_bookend':1, '_saved_constructor_bookend':2},
+        '_role_input_bookend':{'_role_context':1, 'execution_context':1},
+        '_role_compare':{'execution_context':1},
+        '_role_reconstruct':{'execution_context':1}, 'read_saved_after_quiet':{'_saved_owner_store':1}}}
+census = {}
+for name, needed in requirements.items():
+    source_functions = functions(name)
+    for function, expected in needed.items():
+        node = source_functions[function]; calls = {}
+        for call in ast.walk(node):
+            if isinstance(call, ast.Call):
+                key = call_name(call); calls[key] = calls.get(key, 0)+1
+        assert all(calls.get(key) == count for key, count in expected.items()), (function, calls)
+        census[name+'::'+function] = dict(line=node.lineno, end_line=node.end_lineno,
+            structural_calls=calls, required_edges=expected,
+            ast_sha=sha256(ast.dump(node, include_attributes=False).encode()).hexdigest())
+save('function_dependency_census.json', dict(authority='DRAFT_NONAUTHORITATIVE', functions=census,
+    caveat='AST occurrence counts are not runtime call counts; branch/multiplicity assumptions are in workflow_ledger.json'))
+
+# Original E accounting: exactly 1366 inventory + 2152 B + 801 E = 4319 per side.
+p1_files = 683; core_per_side = 2152+801
+captures = dict(host_initial=1, broker_make_context=1, G0_hold=1, parent_hold=1, fresh_hold=1)
+full = sum(captures.values())+2+3
+success_reads = 2*core_per_side+full*p1_files
+host_final_reads = success_reads+p1_files
+assert full == 10 and success_reads == 12736 and host_final_reads == 13419
+checks = dict(broker_make_context=1, two_saved_child_bootstrap_and_stores=6,
+    two_child_inputs_constructor_and_prewatch=12, two_scientific_execution_entries=2,
+    G0_G1_G2_G3_role_context_and_execution=8, parent_and_controller_compare=2,
+    parent_after_fresh_quiet_reader=1, final_role_context=1)
+assert sum(checks.values()) == 33
+source_passes = 2*sum(captures.values())+2*2+3
+# This adapter is necessarily loaded whenever its own sources() runs.
+source_lower = 2*(1912+78)+source_passes*(49+1)+sum(checks.values())*(49+1+1)
+selected_src = sum(n.startswith('src/') and n.endswith('.py') for n in selected)
+assert source_passes == 17 and source_lower == 6513
+save('workflow_ledger.json', dict(authority='DRAFT_NONAUTHORITATIVE', model_status='conditional_design_not_executable',
+    E_observed_baseline=dict(per_side_P1=4319, B=2152, E=801, inventories=2, files_per_inventory=683),
+    top_level_captures=2, nested_hold_captures=3, capture_bodies=captures, replay_calls=2,
+    explicit_full_G_bookends=3, full_inventory_calls=10, success_P1_reads=success_reads,
+    success_with_host_final_full_inventory_reads=host_final_reads, hard_P1_read_cap=12500,
+    over_cap_success=success_reads-12500, over_cap_with_host_final=host_final_reads-12500,
+    assumed_current_helper_full_context_checks=checks, adapter_source_passes=source_passes,
+    selected_src_file_count=selected_src, guaranteed_loaded_src_duplicates_per_pass=1,
+    source_read_conditional_lower_bound=source_lower,
+    hard_source_executable_anchor_cap=6500, omitted_source_categories=['other loaded src duplicate reads', 'catalog',
+        'fixture', 'extra executable/anchor', 'new saved supervisor/bookends'],
+    failure_inventory_note='replay exception handler adds a full bookend attempt; core failure reads remain unknown',
+    failure_rows=[dict(window='context before ACK', known_wrapper_inventory_attempts=2),
+        dict(window='parent replay fails before success final bookend', known_wrapper_inventory_attempts=5),
+        dict(window='fresh final bookend then exception bookend both attempted', known_wrapper_inventory_attempts=8),
+        dict(window='all successful plus host final bookend', known_wrapper_inventory_attempts=11)],
+    failure_core_read_upper_bound_proved=False, actual_saved_F_calls=0, F_launch_admitted=False))
+
+nominal = dict(shared_prepare=10, parent_retained_total=125, controller_final_check_publish=30,
+    controller_quiet_terminal=10, broker_quiet_terminal=10)
+assert sum(nominal.values()) == 185
+D = 180; R_b = 2; R_h = 3
+deadlines = dict(host_done=D, broker_closed=D-R_h, broker_active=D-R_h-10,
+    controller_closed=D-R_h-10-R_b, controller_active=D-R_h-10-R_b-10,
+    parent_closed=D-R_h-10-R_b-10-30)
+deadlines['parent_active'] = deadlines['parent_closed']-15
+deadlines['fresh_closed'] = deadlines['parent_active']-5-15
+deadlines['fresh_active'] = deadlines['fresh_closed']-10
+assert deadlines == dict(host_done=180, broker_closed=177, broker_active=167,
+    controller_closed=165, controller_active=155, parent_closed=125, parent_active=110, fresh_closed=90, fresh_active=80)
+save('deadline_ledger_v2.json', dict(authority='DRAFT_NONAUTHORITATIVE', nominal_serial_caps=nominal,
+    nominal_total_seconds=185, whole_cap_seconds=180, broker_return_reserve_seconds=R_b,
+    host_final_reserve_seconds=R_h, proposed_absolute_offsets=deadlines,
+    parent_available_if_started_at_10=115, fresh_available_if_started_at_55=35,
+    fresh_original_episode_cap_seconds=50, fresh_post_watch_publication_charged_to_same_episode=True,
+    current_episode_handoff_implemented=False, all_nominal_caps_simultaneous_success=False,
+    actual_wall_measured=False, host_final_hard_interrupt_proved=False, F_launch_admitted=False))
+
+failure_windows = [
+    ('host_capture_or_arming', 'host', 'host', False, False),
+    ('broker_before_ready', 'host', 'broker', False, False),
+    ('context_publication_after_ready_before_ACK', 'host', 'broker', True, False),
+    ('ACK_after_before_controller_binding', 'broker', 'broker', True, False),
+    ('parent_or_fresh_partial_constructor', 'creating_parent', 'creating_parent', True, True),
+    ('child_application_replay', 'owning_parent', 'child', True, True),
+    ('local_monitor_relay_quiet_close', 'owning_observer', 'owning_observer', True, True),
+    ('controller_return_before_broker_terminal', 'broker', 'broker', True, False),
+    ('broker_terminal_before_whole_job_quiet', 'host', 'host', False, False),
+    ('host_final_read_encode', 'host', 'host', False, False)]
+save('failure_availability_v1.json', dict(authority='DRAFT_NONAUTHORITATIVE', extra_failure_seconds=0,
+    remaining_deadline_rule='min(local remaining, earlier absolute deadline minus now); no extra 15 seconds',
+    windows=[dict(window=window, observer_process=observer, error_origin_process=origin,
+        wire_failure_may_be_available=wire, filesystem_failure_may_be_available=filesystem,
+        wire_failure_guaranteed=False, filesystem_failure_guaranteed=False,
+        original_object_retained_in_observer_process=(observer == origin),
+        wire_conditions='producer alive, committed required prefix, unspent terminal slot, usable mutex, remaining deadline' if wire else None,
+        filesystem_conditions='authorized writer, stable independent target/root/receipt, metadata/reservations, remaining deadline; child content requires actual quiet' if filesystem else None,
+        original_object_note='same observer-local error only; application errors in another process are serialized observations')
+        for window, observer, origin, wire, filesystem in failure_windows],
+    raw_child_exception_transferred_to_parent=False, failure_publication_deliverability_proved=False))
+
+# Canonical-string boundary includes all controls, BMP, astral and lonely surrogate code points.
+examples = [None, True, False, 0, 2**64-1, -2**63, 1.0, -0.0, 1e-7, 1.7976931348623157e308,
+    '', '\\"\n\r\t\b\f\x00\x1f', '\u4e2d\U0001f600\ud800',
+    dict(z=[1, False, None], a={'\u4e2d':'\U0001f600'})]
+for value in examples: size(value)
+for code in range(0, 65536):
+    value = chr(code); assert json_size(value) == len(canonical(value)), (code, json_size(value), canonical(value))
+for code in (65536, 128512, 1048576, 1114111): size(chr(code))
+hex64 = 'f'*64; identity = [2**32-1, 2**64-1]
+binding = dict(kind='controller_return', sequence=2**32-1, previous_sha=hex64,
+    producer_identity=identity, direction_nonce=hex64, binding_sha=hex64)
+packet_extra = size(dict(binding, payload=None))-4
+progress = dict(prefix=[dict(kind=kind, pin=dict(bytes=2**64-1, sha256=hex64))
+    for kind in ('ready', 'context', 'binding')], transcript_sha=hex64)
+broker_extra = size(dict(binding, kind='broker_return', payload=dict(status='success', progress=progress, value=None)))-4
+assert 0 < packet_extra < 4096 and broker_extra < 8192
+astral = '\U0010ffff'
+compact_error = dict(type=astral*64, message=astral*256)
+error_bytes = size(compact_error)
+assert error_bytes <= 4096
+failure_value = dict(schema='staged_saved_external_failure_development_v1', request_sha=hex64, context_sha=hex64,
+    ack_sha=hex64, phase='x'*64, primary=compact_error,
+    cleanup=[dict(layer='x'*32, error=compact_error) for _ in range(4)], F_launch_admitted=False)
+failure_bytes = size(failure_value)
+assert failure_bytes <= 32768
+
+slots = [dict(kind='header', value=4096, raw=4096), dict(kind='request', value=32768, raw=36864)]
+slots += [dict(kind=k, value=3072, raw=4096) for k in ('ready', 'start', 'ack', 'constructor_probe')]
+slots += [dict(kind='context', value=2*1024**2+8192, raw=2*1024**2+16384),
+    dict(kind='binding', value=32768, raw=36864), dict(kind='controller_return', value=32768, raw=36864),
+    dict(kind='broker_return', value=131072+8192, raw=147456)]
+for row in slots:
+    row['physical'] = row['raw']+44
+    extra = 0 if row['kind'] == 'header' else broker_extra if row['kind'] == 'broker_return' else packet_extra
+    assert row['value']+extra <= row['raw']
+    row['proven_packet_extra_bound'] = extra
+assert max(packet_extra, broker_extra) > 0
+save('wire_capacity_oracle.json', dict(authority='DRAFT_NONAUTHORITATIVE', proof_kind='component_cap_composition_only',
+    independent_unicode_BMP_cases=65536, scalar_examples=len(examples), astral_extra_cases=4,
+    compact_error_max_character_encoding_bytes=error_bytes, four_cleanup_failure_value_bytes=failure_bytes,
+    packet_extra_bytes=packet_extra, broker_packet_progress_extra_bytes=broker_extra,
+    current_raw_return_cap=131072, old_single_component_at_cap_packet_bytes=131072+packet_extra,
+    old_broker_two_components_at_caps_packet_lower_bound=2*131072+broker_extra,
+    old_cap_composition_guaranteed=False, proposed_slots=slots,
+    proposed_physical_mapping_bytes=sum(row['physical'] for row in slots),
+    controller_return_pin_only_in_broker=True, proposed_guards_implemented=False,
+    valid_scientific_record_counterexample_claimed=False, maximum_legal_four_records_proved=False,
+    actual_context_or_saved_actor_created=False, actual_RSS_admission=False, F_launch_admitted=False))
+assert all(pin((ROOT/n).read_bytes()) == expected for n, expected in selected.items())
+print(json.dumps(dict(P1_success_conditional=success_reads, P1_with_host_final_conditional=host_final_reads,
+    source_conditional_lower=source_lower, nominal_seconds=185, compact_error_bytes=error_bytes,
+    failure_value_bytes=failure_bytes, packet_extra=packet_extra, broker_extra=broker_extra,
+    proposed_mapping_bytes=sum(row['physical'] for row in slots), F_launch_admitted=False)))
