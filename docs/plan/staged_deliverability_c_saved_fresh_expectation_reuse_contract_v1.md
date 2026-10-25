@@ -1,0 +1,33 @@
+# C：外部 caller expectation 投影与 context 复用开发合同
+
+2026-10-25，DRAFT_NONAUTHORITATIVE，接续[事前账本交接](continuation_handoff_20261025_saved_fresh_supervisor_budget.md)，起始HEAD `41ed32c08519ccacbb932bddc2b16babb3132cb3`。root唯一writer，独立只读PRE_SEAL。仅迭代原ENTRY/tests，保留所有前序snapshot、失败和冻结记录；scientific src、原F scope-budget、guard/outer、P1与SF49集合不改。不执行actual saved actor、solver或B/C/E科学replay。
+
+## 优化对象与科学不变量
+
+H0 host和B0 broker原先各用完整adapter.capture来生成caller expectation；真正科学权限仍由后续G0、parent、fresh的独立hold、原replay与G1/G2/G3和host末次书挡决定。本轮新增expectation-only数据投影：各自从原独立外部锚取得683 expected pins，完整扫描两次P1 metadata，读取并逐pin/identity绑定53份必要JSON：launcher/trusted/start/schedule/fresh五份、六prefix、21 request与21 result。其canonical caller image须与原完整capture逐字一致。
+
+未读CAS内容不宣称已核验。返回新SavedCallerExpectation，只持canonical数据、creator/commit及明确`full_P1_content_verified=false`；不暴露fixture/live evidence或HeldInput的files/outer/inventory属性，不提供hold/replay/spawn/lease/采用权限，不得代替G0或任何科学input验证。投影与full capture的image相同只用于数据等价，不能把expected pins称为observed pins。host和broker各自重新读取53份内容和完整metadata，不传P1 raw缓存、CAS缓存或live PointEvidence。期望pins来自独立外部锚，不从本次计算/候选反推。
+
+新context使用完整successor schema及caller_expectation_core/sha字段，literal full_P1_content_verified=false；绝无caller_core兼容别名。它不发布、不启动、不发permit；旧context validator/RoleStore/argv/bootstrap/CLI全部继续拒绝。旧make_context和所有科学/ordinary/owner入口行为保持。actual OUTPUT/父目录不存在时不能借此创建它们；public saved CLI和issuer继续关闭。
+
+本轮只有私有本地VerifiedSavedInput probe，没有生产G0/H3发行端。probe仅接受ordinary expectation context，恒real_verified=false；强持的HeldInput私有，entry只验证并返回自身，不公开返回可供replay的HeldInput。它不接收callback，检查十个直接callable的code、globals字典身份及defaults；这不证明传递global binding闭包，完整依赖认证保持OPEN。当前不对该probe声明生产“固定原adapter能力”或完整runtime closure。
+
+本地G0/H3用途分离：G0同一exact adapter.HeldInput可经原bookend延续G2/G3，H3重新hold全683，不能进入G2/G3。每次前后核expectation/context/runtime/source/creator/stage、同一held identity和完整image/内部raw pins；bookend在委派前一次claim，异常或中断后不可重试，primary/final context双错保留。未来parent issuer须拒绝real_verified=false prototype，只能强持生产trusted supervisor/ACK及真实G0同对象cap，结构性接通仍OPEN；本轮不把关闭的issuer/driver说成已完成。
+
+## 依赖与失效窗
+
+source49先核后import；actual loaded selected source、锚原字节/identity/祖先、P1根/所有目录和683文件metadata首尾保持。53闭集及frozen adapter pin、capture/caller_image依赖固定，不从schedule动态扩缩；原load_fixture、_outer、validate_metrics语义检查保留。53读取必须绑定metadata pass中的同一file identity与锚pin，禁止链接/硬链、case alias、extra/missing文件、超深/超量、读中替换。数据投影后G0/P/F全内容读取仍逐字比较同一外部caller image，原B/C/E point/KKT/政策/journal审计和四个命名库存完全保留。
+
+unread CAS变化可尚未被expectation内容验证发现；其状态始终false，后续原全库存/hold必须拒绝。没有“expectation相等即P1已验证”的路径。对象raw/creator/commit、source/anchor/metadata或时钟漂移均拒绝；双错保留同进程原primary与bookend错误，不把跨进程摘要称作原异常。
+
+## 验收与预算
+
+独立普通开发预算200s：全部pytest attempt累计≤160s，collection/静态/保存核验≤40s；单组≤40s，先固定nodeids/组帽并核剩余。失败/超时保存原stdout/stderr、exit及三源snapshot，不重试actor，不追加真实实验。只用pytest tmp或明确non-authoritative结果目录，禁止写P1和actual OUTPUT树。输出目录为 `results/tables/staged_rts24_saved_fresh_expectation_v1_non_authoritative/checks_01`。
+
+必须验证：53集合闭合；完整683 metadata与原inventory相同；exact expectation image与原capture相同但语义分域；successor context拒绝旧消费者；实际读取计数53与683差异；无numeric.compile_problem/import_snapshot、B/C/E replay、native solver或journal写入；source/anchor/metadata/read/creator/raw漂移负例；同inode/size/mtime的未选内容可不被投影发现，但后续本地full hold必须拒绝；probe G0/H3及G2/G3同对象、mutable内部字段、十个直接callable替换、context前后双错负例；已有context/binding相关回归。完整transitive global binding、生产G0/H3、issuer/driver仍属后续阻断项，不由这些局部测试关闭。原未变函数/类AST和47个依赖逐字保持，旧证据不自动计为新source epoch通过。
+
+若等价证明成立，成功条件账本为 `13419−2×683+2×53=12159`（含host末次full），无host末次为11476；这仍不是实际F整链计数或资源准入。source6500、180s/逐边deadline、episode handoff、完整最大编码/失败/外部硬停止仍OPEN；不能用本优化放宽原12500/6500或少做G0–G3。完成后再固定实际driver的计数和source验证复用，不直接启动F。
+
+本包保持fresh/parent局部verified、F_launch_admitted、科学采用、resource/formal全false；不生成manifest/lease/official verdict/receipt/seal或run authority，不增加模拟小时。
+
+补充只读费用诊断先登记：普通测试终态后，同一独立标准库捕获器内至多一次原full capture与一次新expectation projection，固定P1/49来源；单次外部帽8s，计入原40s静态预算，不重试。仅观测这两次数据准备的分阶段wall/CPU、P1/selected-source/catalog/anchor/其他文件读取及所见字节、stat/fstat/scandir调用。import/诊断setup在操作计时外，但计入外部8s；无G0/H3、科学replay/compile/native或写journal。该单次顺序观察不是速度保证、OS物理I/O、整体F成本或资源准入；无论更快或更慢均保存原观察。源码不随此诊断改变。

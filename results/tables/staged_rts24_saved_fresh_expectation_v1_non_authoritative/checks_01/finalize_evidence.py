@@ -1,0 +1,76 @@
+"""Package the ordinary projection epoch; preserve every predecessor byte."""
+import json
+from pathlib import Path
+import re
+from capture_checks import ROOT, OUT, entry
+
+
+def read(name):
+    return json.loads((OUT/name).read_bytes())
+
+
+def save(name, value):
+    raw = (json.dumps(value, sort_keys=True, indent=2)+'\n').encode()
+    path = OUT/name
+    if path.exists() and name != 'support_pins.json':
+        assert path.read_bytes() == raw, name
+    path.write_bytes(raw)
+
+
+plan = read('group_admission_02.json')
+selected = entry.source_pins()
+nodes = []
+for label, group in plan['groups'].items():
+    record = read(label+'.exit.json')
+    assert record['exit_code'] == 0 and not record['timed_out']
+    assert record['source_pins_unchanged'] and record['source_pins'] == selected
+    assert record['nodes'] == group
+    nodes.extend(group)
+assert len(nodes) == len(set(nodes)) == 53
+assert sum('::test_saved_expectation_' in node for node in nodes) == 35
+save('frozen_epoch.json', dict(authority='DRAFT_NONAUTHORITATIVE', source_pins=selected,
+    source_epoch=record['source_epoch'], groups=plan['groups'], nodes=sorted(nodes),
+    current_epoch_nodes=53, new_expectation_nodes=35, binding_regression_nodes=18,
+    prior_smoke_04_is_current_epoch=False, production_input_gateway_open=False,
+    transitive_global_binding_closed=False, actual_saved_F_execution=False,
+    F_launch_admitted=False, scientific_evidence_adopted=False, resource_admission=False, formal_result=False))
+
+handoff = 'continuation_handoff_20261025_saved_fresh_expectation.md'
+before = read('navigation_before.json')
+navigation_after = {}
+for name, expected in before.items():
+    path = ROOT/name
+    raw = path.read_bytes()
+    assert entry.pin(raw[-expected['body']['bytes']:]) == expected['body']
+    target = handoff if Path(name).parent.as_posix() == 'docs/plan' else '../plan/'+handoff
+    prefix = ('2026-10-25 caller expectation投影开发：见[最新交接]('+target+')。'
+        '当前源码35新增+18绑定回归共53节点终态通过；53份JSON与完整metadata生成相同caller image，'
+        'full_P1_content_verified=false，私有G0/H3 prototype恒real_verified=false。'
+        '单次P1内容683→53，但selected-source174→233；成功12159仅条件算术。'
+        '传递依赖认证、trusted role/真实G0、driver、source6500和180s仍OPEN；'
+        '实际F/科学采用/资源/正式门禁保持关闭。\n\n').encode()
+    header, separator, body = raw.partition(b'\n\n')
+    assert header.decode() == expected['header']
+    if prefix not in raw:
+        path.write_bytes(header+separator+prefix+body)
+    after = path.read_bytes()
+    after_header, after_separator, after_body = after.partition(b'\n\n')
+    assert after_separator and after_header == header
+    navigation_after[name] = dict(full=entry.pin(after), header=header.decode(), body=entry.pin(after_body))
+save('navigation_after.json', dict(authority='DRAFT_NONAUTHORITATIVE', documents=navigation_after,
+    future_prepend_only=True))
+
+documents = [ROOT/'docs/plan'/handoff,
+    ROOT/'docs/plan/staged_deliverability_c_saved_fresh_expectation_reuse_contract_v1.md',
+    OUT.parent/'validation_report.md']
+for path in documents:
+    for target in re.findall(r'\]\(([^)]+)\)', path.read_text(encoding='utf-8')):
+        if '://' not in target:
+            assert (path.parent/target.split('#')[0]).resolve().exists(), (path, target)
+save('document_checks.json', dict(authority='DRAFT_NONAUTHORITATIVE', links_resolve=True,
+    document_pins={p.relative_to(ROOT).as_posix():entry.pin(p.read_bytes()) for p in documents}))
+save('support_pins.json', {p.relative_to(ROOT).as_posix():entry.pin(p.read_bytes())
+    for p in OUT.rglob('*') if p.is_file() and p.name != 'support_pins.json'})
+assert not entry.OUTPUT.parent.exists()
+print(json.dumps(dict(document_links_resolve=True, frozen_current_epoch_nodes=53,
+    actual_saved_F_execution=False, F_launch_admitted=False)))

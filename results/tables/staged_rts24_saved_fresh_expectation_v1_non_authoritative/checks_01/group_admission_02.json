@@ -1,0 +1,80 @@
+{
+  "F_launch_admitted": false,
+  "actual_saved_F_execution": false,
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "caps": {
+    "binding_regression_07": 40,
+    "expectation_rest_05": 35,
+    "expectation_rest_06": 35,
+    "expectation_smoke_09": 25
+  },
+  "groups": {
+    "binding_regression_07": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_inputs_are_data_and_production_constructor_stays_closed",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[descriptor]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[reader]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[creator]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[writer_pair]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[equal_copy]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[tree]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_current_bookend_rejects_before_reservation_consumption[expired]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_current_bookend_rejects_before_reservation_consumption[exe]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_inputs_expire_after_creation_without_resetting_start",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[role]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[context]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[header]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[data]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[foreign_reservation]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[wrong_channel]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_current_bookend_rejects_before_reservation_consumption[source]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_current_bookend_rejects_before_reservation_consumption[environment]"
+    ],
+    "expectation_rest_05": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_successor_context_is_rejected_by_all_legacy_entry_points",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_immutable_projection_rejects_drift[image]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[schema]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[caller_core]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[expectation_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[executable_extra]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_double_error_preserves_original_objects",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_unread_same_metadata_content_requires_full_verification[H3]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_gateway_rejects_untyped_or_wrong_phase[held]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_gateway_rejects_untyped_or_wrong_phase[bad_stage]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_input_rejects_mutable_or_identity_drift[raw_snapshot]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_bookend_failure_is_sticky",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_fixed_dependency_rejects_callable_drift[hold_code]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_metadata_rejects_extra_and_hardlinked_files",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_rejects_dependency_and_final_metadata_drift[anchor]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_probe_bookend_keeps_primary_and_final_context_error",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_probe_hold_always_checks_final_context_before_capability[False]"
+    ],
+    "expectation_rest_06": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_immutable_projection_rejects_drift[raw]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_immutable_projection_rejects_drift[creator]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[full_P1_content_verified]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[caller_expectation_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[deadline]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_selected_content_mismatch_is_rejected",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_unread_same_metadata_content_requires_full_verification[G0]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_gateway_rejects_untyped_or_wrong_phase[expectation]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_gateway_rejects_untyped_or_wrong_phase[dict]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_input_rejects_mutable_or_identity_drift[held_identity]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_input_rejects_mutable_or_identity_drift[creator]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_fixed_dependency_rejects_callable_drift[hold_function]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_fixed_dependency_rejects_callable_drift[bookend_default]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_rejects_dependency_and_final_metadata_drift[source]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_rejects_dependency_and_final_metadata_drift[metadata_after]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_probe_hold_always_checks_final_context_before_capability[True]"
+    ],
+    "expectation_smoke_09": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_projection_has_equal_image_and_distinct_semantics",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_G0_G2_G3_and_H3_use_full_exact_local_inputs"
+    ]
+  },
+  "previous_pytest_seconds": 13.046999999991385,
+  "production_input_gateway_open": false,
+  "pytest_cap_seconds": 160,
+  "static_cap_seconds": 40,
+  "total_cap_seconds": 200,
+  "transitive_global_binding_closed": false
+}

@@ -1,0 +1,14 @@
+EXPECTATION_READ_PROOF {"F_launch_admitted":false,"actual_saved_F_execution":false,"expectation_image_sha":"aaffd03d7a9fd4f03afa18d34ab119b10408b82d5e4ab3f8fc83d9a950600031","full_P1_content_verified":false,"full_content_reads":683,"metadata_passes":2,"selected_content_reads":53}
+................
+============================ slowest 10 durations =============================
+3.48s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_unread_same_metadata_content_requires_full_verification[G0]
+2.85s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_input_rejects_mutable_or_identity_drift[creator]
+2.77s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_input_rejects_mutable_or_identity_drift[held_identity]
+2.60s setup    tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_immutable_projection_rejects_drift[raw]
+2.27s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_probe_hold_always_checks_final_context_before_capability[True]
+0.91s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_rejects_dependency_and_final_metadata_drift[metadata_after]
+0.72s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_selected_content_mismatch_is_rejected
+0.53s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[caller_expectation_sha]
+0.52s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[full_P1_content_verified]
+0.52s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[deadline]
+16 passed in 20.29s

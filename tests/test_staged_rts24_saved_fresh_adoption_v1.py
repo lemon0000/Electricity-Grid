@@ -2495,3 +2495,260 @@ def test_saved_owner_oversized_terminal_encoding_retains_original_after_cleanup(
     assert held.last_observation['record_encoding_error'] and held.last_image is None
     assert c.calls.count('close') == 1 and c.child._view is None
     with pytest.raises(ValueError): cli.saved_stage_process_record(held)
+
+
+@pytest.fixture(scope='module')
+def saved_expectation_base():
+    from types import SimpleNamespace
+    import highspy
+    import pyomo.environ as pyo
+    with pytest.MonkeyPatch.context() as patch:
+        def denied(*args, **kwargs): pytest.fail('expectation preparation entered scientific/native/write execution')
+        for module, name in ((pyo,'SolverFactory'), (highspy,'Highs'),
+                (f.prefix.point.backend,'make_model'), (f.prefix.point.backend,'call_highs'),
+                (f.prefix.point.backend,'snapshot_from_raw'), (f.prefix.point.numeric,'compile_problem'),
+                (f.prefix.point.numeric,'import_snapshot'), (f.prefix,'replay_prefix'), (f,'replay'),
+                (f.journal,'reopen'), (f.codec.EvidenceStore,'put'), (f.codec,'publish'), (f.journal,'publish')):
+            patch.setattr(module,name,denied)
+        for name in ('create_session','begin_step','commit_step','finish'): patch.setattr(f.journal,name,denied)
+        source = cli.source_pins(); original_open = Path.open; reads = []
+        def tracking(path, *args, **kwargs):
+            if Path(path).is_relative_to(cli.P1): reads.append(Path(path).relative_to(cli.P1).as_posix())
+            return original_open(path,*args,**kwargs)
+        with pytest.MonkeyPatch.context() as counter:
+            counter.setattr(Path,'open',tracking); gold = f.capture(source)
+        assert len(reads) == 683; reads.clear()
+        with pytest.MonkeyPatch.context() as counter:
+            counter.setattr(Path,'open',tracking); expectation = cli.capture_saved_expectation(source)
+        assert len(reads) == 53 and set(reads) == set(cli.EXPECTATION_FILES)
+        assert expectation.image == gold.image
+        print('EXPECTATION_READ_PROOF '+cli.canonical(dict(full_content_reads=683,selected_content_reads=53,
+            metadata_passes=2,expectation_image_sha=sha256(expectation.image).hexdigest(),
+            full_P1_content_verified=False,actual_saved_F_execution=False,F_launch_admitted=False)).decode())
+        yield SimpleNamespace(source=source,gold=gold,expectation=expectation)
+
+
+def _expectation_context(base, tmp_path):
+    raw = cli.context_from_saved_expectation(base.expectation,tmp_path/'output',started=time.monotonic())
+    return raw,sha256(raw).hexdigest()
+
+
+def _corrupt_read(monkeypatch, name):
+    original = Path.open; target = cli.P1/name
+    class ChangedRead:
+        def __init__(self,stream): self.stream=stream
+        def __enter__(self): return self
+        def __exit__(self,*args): return self.stream.__exit__(*args)
+        def fileno(self): return self.stream.fileno()
+        def read(self,*args):
+            raw=self.stream.read(*args)
+            return bytes([raw[0]^1])+raw[1:] if raw else raw
+    def opened(path,*args,**kwargs):
+        stream=original(path,*args,**kwargs)
+        return ChangedRead(stream) if Path(path)==target else stream
+    monkeypatch.setattr(Path,'open',opened)
+
+
+def test_saved_expectation_projection_has_equal_image_and_distinct_semantics(saved_expectation_base):
+    b=saved_expectation_base; value=cli.parse(b.expectation.raw)
+    assert len(cli.EXPECTATION_FILES)==len(set(cli.EXPECTATION_FILES))==53
+    assert b.expectation.image==b.gold.image and type(b.expectation) is not f.HeldInput
+    assert value['full_P1_content_verified'] is value['F_launch_admitted'] is False
+    assert not any(hasattr(b.expectation,n) for n in ('files','fixture','outer','inventory','replay','spawn','consume'))
+    import pickle
+    with pytest.raises(TypeError): pickle.dumps(b.expectation)
+
+
+def test_saved_expectation_successor_context_is_rejected_by_all_legacy_entry_points(saved_expectation_base,tmp_path):
+    raw,sha=_expectation_context(saved_expectation_base,tmp_path); value=cli.check_expectation_context(raw,sha)
+    assert value['schema']==cli.EXPECTATION_CONTEXT_SCHEMA and value['full_P1_content_verified'] is False
+    assert 'caller_core' not in value and 'caller_sha' not in value
+    assert value['caller_expectation_sha']==sha256(saved_expectation_base.expectation.image).hexdigest()
+    for call in (lambda:cli.validate_context(value),lambda:cli.check_context(raw,sha),
+            lambda:cli.RoleStore(raw,sha,'0'*64),lambda:cli.execution_context('parent',raw,sha),
+            lambda:cli.argv_for('parent',raw,sha,tree_sha='0'*64,channel_name=cli.STAGE_PREFIX+'a'*64,channel_nonce='b'*64)):
+        with pytest.raises(ValueError): call()
+    assert not (tmp_path/'output').exists() and not cli.OUTPUT.parent.exists()
+
+
+@pytest.mark.parametrize('field',['raw','image','creator'])
+def test_saved_expectation_immutable_projection_rejects_drift(saved_expectation_base,field):
+    original=saved_expectation_base.expectation; changed=object.__new__(cli.SavedCallerExpectation)
+    for name in ('raw','image','creator','commit'): object.__setattr__(changed,name,getattr(original,name))
+    object.__setattr__(changed,field,(0,0) if field=='creator' else getattr(changed,field)+b' ')
+    with pytest.raises(ValueError): changed.entry()
+
+
+@pytest.mark.parametrize('field',['schema','full_P1_content_verified','caller_core','caller_expectation_sha','expectation_sha','deadline','executable_extra'])
+def test_saved_expectation_context_closed_schema_rejects_drift(saved_expectation_base,tmp_path,field):
+    raw,_=_expectation_context(saved_expectation_base,tmp_path); value=cli.parse(raw)
+    if field=='caller_core': value[field]=value['caller_expectation_core']
+    elif field=='full_P1_content_verified': value[field]=True
+    elif field=='schema': value[field]=cli.SCHEMA
+    elif field=='deadline': value[field]+=1.
+    elif field=='executable_extra': value['executable']['extra']='unexpected'
+    else: value[field]='not-a-sha'
+    raw=cli.canonical(value)
+    with pytest.raises(ValueError): cli.check_expectation_context(raw,sha256(raw).hexdigest())
+
+
+def test_saved_expectation_selected_content_mismatch_is_rejected(saved_expectation_base,monkeypatch):
+    _corrupt_read(monkeypatch,'points/point_0001/request.json')
+    with pytest.raises(ValueError,match='pin changed'): cli.capture_saved_expectation(saved_expectation_base.source)
+
+
+def test_saved_expectation_double_error_preserves_original_objects(saved_expectation_base,monkeypatch):
+    _corrupt_read(monkeypatch,'points/point_0001/request.json')
+    original=cli._expectation_metadata; secondary=OSError('metadata secondary'); calls=[]
+    def metadata(*args):
+        calls.append(1)
+        if len(calls)==2: raise secondary
+        return original(*args)
+    monkeypatch.setattr(cli,'_expectation_metadata',metadata)
+    with pytest.raises(cli.SavedExpectationUnresolved) as error: cli.capture_saved_expectation(saved_expectation_base.source)
+    assert isinstance(error.value.primary,ValueError) and error.value.bookend_errors==( ('metadata',secondary), )
+
+
+@pytest.mark.parametrize('stage',['G0','H3'])
+def test_saved_expectation_unread_same_metadata_content_requires_full_verification(saved_expectation_base,tmp_path,monkeypatch,stage):
+    b=saved_expectation_base; name=next(n for n in sorted(b.gold.files) if n not in cli.EXPECTATION_FILES)
+    _corrupt_read(monkeypatch,name)
+    expectation=cli.capture_saved_expectation(b.source)
+    assert expectation.image==b.expectation.image and cli.parse(expectation.raw)['full_P1_content_verified'] is False
+    raw=cli.context_from_saved_expectation(expectation,tmp_path/'output',started=time.monotonic())
+    constructed=[]; monkeypatch.setattr(cli,'construct_saved_stage',lambda *a:constructed.append(True))
+    with pytest.raises(ValueError): cli._probe_saved_expectation_input(expectation,raw,sha256(raw).hexdigest(),stage=stage)
+    assert constructed==[] and not (tmp_path/'output').exists()
+
+
+def test_saved_expectation_G0_G2_G3_and_H3_use_full_exact_local_inputs(saved_expectation_base,tmp_path,monkeypatch):
+    b=saved_expectation_base; raw,sha=_expectation_context(b,tmp_path)
+    original=Path.open; reads=[]
+    def tracking(path,*args,**kwargs):
+        if Path(path).is_relative_to(cli.P1): reads.append(Path(path))
+        return original(path,*args,**kwargs)
+    monkeypatch.setattr(Path,'open',tracking)
+    cap=cli._probe_saved_expectation_input(b.expectation,raw,sha,stage='G0'); held=cap._held
+    assert len(reads)==683 and type(held) is f.HeldInput and held is not b.gold
+    assert cap.entry() is cap and cap.real_verified is False and not hasattr(cap,'held')
+    assert not hasattr(cli,'verify_saved_expectation_input') and not hasattr(cli,'bookend_verified_saved_input')
+    for stage in ('G2','G3'):
+        reads.clear(); observed=cli._probe_bookend_saved_input(cap,stage)
+        assert len(reads)==683 and cap._held is held and observed['local_full_input_bookend'] is True
+        assert observed['actual_saved_F_execution'] is observed['F_launch_admitted'] is False
+    reads.clear(); final=cli._probe_saved_expectation_input(b.expectation,raw,sha,stage='H3')
+    assert len(reads)==683 and final._held is not held and final._held.image==held.image
+    with pytest.raises(ValueError): cli._probe_bookend_saved_input(final,'G2')
+    assert cli.parse(raw)['full_P1_content_verified'] is False
+    import pickle
+    with pytest.raises(TypeError): pickle.dumps(cap)
+
+
+@pytest.mark.parametrize('misuse',['expectation','held','dict','bad_stage'])
+def test_saved_expectation_verified_gateway_rejects_untyped_or_wrong_phase(saved_expectation_base,misuse):
+    b=saved_expectation_base
+    argument={'expectation':b.expectation,'held':b.gold,'dict':{},'bad_stage':b.expectation}[misuse]
+    with pytest.raises(ValueError): cli._probe_bookend_saved_input(argument,'G2')
+    with pytest.raises(ValueError): cli._probe_saved_expectation_input(argument,b'{}','0'*64,stage='parent')
+    with pytest.raises(ValueError): cli._construct_saved_stage_for_test(argument)
+
+
+@pytest.mark.parametrize('drift',['held_identity','raw_snapshot','creator'])
+def test_saved_expectation_verified_input_rejects_mutable_or_identity_drift(saved_expectation_base,tmp_path,drift):
+    b=saved_expectation_base; raw,sha=_expectation_context(b,tmp_path)
+    cap=cli._probe_saved_expectation_input(b.expectation,raw,sha,stage='G0')
+    if drift=='held_identity': object.__setattr__(cap,'_held',b.gold)
+    elif drift=='creator': object.__setattr__(cap,'creator',(0,0))
+    else:
+        name=next(iter(cap._held.inventory['raw'])); cap._held.inventory['raw'][name]=b'changed'
+    with pytest.raises(ValueError): cli._probe_bookend_saved_input(cap,'G2')
+
+
+def test_saved_expectation_verified_bookend_failure_is_sticky(saved_expectation_base,tmp_path,monkeypatch):
+    b=saved_expectation_base; raw,sha=_expectation_context(b,tmp_path)
+    cap=cli._probe_saved_expectation_input(b.expectation,raw,sha,stage='G0')
+    name=next(n for n in sorted(b.gold.files) if n not in cli.EXPECTATION_FILES)
+    with monkeypatch.context() as changed:
+        _corrupt_read(changed,name)
+        with pytest.raises(ValueError) as error: cli._probe_bookend_saved_input(cap,'G2')
+    assert cap._state[2] is error.value
+    with pytest.raises(ValueError,match='unresolved'): cli._probe_bookend_saved_input(cap,'G2')
+
+
+@pytest.mark.parametrize('drift',['hold_function','hold_code','bookend_default'])
+def test_saved_expectation_fixed_dependency_rejects_callable_drift(saved_expectation_base,monkeypatch,drift):
+    calls=[]
+    def foreign(*args,**kwargs): calls.append(True)
+    if drift=='hold_function': monkeypatch.setattr(f,'hold',foreign)
+    elif drift=='hold_code':
+        def foreign_code(*args,**kwargs): raise AssertionError('foreign hold code executed')
+        monkeypatch.setattr(f.hold,'__code__',foreign_code.__code__)
+    else: monkeypatch.setitem(f.bookend.__kwdefaults__,'inventory',False)
+    with pytest.raises(ValueError): cli.capture_saved_expectation(saved_expectation_base.source)
+    assert calls==[]
+
+
+def test_saved_expectation_metadata_rejects_extra_and_hardlinked_files(tmp_path):
+    first=tmp_path/'a.json';first.write_bytes(b'{}'); expected={'a.json':cli.pin(b'{}')}
+    before=cli._expectation_metadata(tmp_path,expected)
+    assert before['files']['a.json']==cli.identity(first.stat())
+    extra=tmp_path/'extra.json';extra.write_bytes(b'{}')
+    with pytest.raises(ValueError,match='unexpected'): cli._expectation_metadata(tmp_path,expected)
+    import os
+    linked=tmp_path/'linked';linked.mkdir();os.link(first,linked/'a.json')
+    with pytest.raises(ValueError,match='nonordinary'): cli._expectation_metadata(linked,expected)
+
+
+@pytest.mark.parametrize('drift',['source','anchor','metadata_after'])
+def test_saved_expectation_rejects_dependency_and_final_metadata_drift(saved_expectation_base,monkeypatch,drift):
+    b=saved_expectation_base; expected=deepcopy(b.source)
+    if drift=='source': expected[cli.NEW_SOURCES[0]]['sha256']='0'*64
+    elif drift=='anchor':
+        original=cli.read; anchor=cli.P1.parent/'p1_execution_review_01/postcheck_03.stdout.json'
+        monkeypatch.setattr(cli,'read',lambda path,**kw:b'changed anchor' if Path(path)==anchor else original(path,**kw))
+    else:
+        original=cli._expectation_metadata; calls=[]
+        def metadata(*args):
+            value=original(*args);calls.append(1)
+            if len(calls)==2:
+                value=deepcopy(value);name=next(iter(value['files']));row=list(value['files'][name]);row[1]+=1;value['files'][name]=tuple(row)
+            return value
+        monkeypatch.setattr(cli,'_expectation_metadata',metadata)
+    with pytest.raises(ValueError): cli.capture_saved_expectation(expected)
+
+
+def test_saved_expectation_probe_bookend_keeps_primary_and_final_context_error(saved_expectation_base,tmp_path,monkeypatch):
+    b=saved_expectation_base;raw,sha=_expectation_context(b,tmp_path)
+    cap=cli._probe_saved_expectation_input(b.expectation,raw,sha,stage='G0')
+    original=cli.check_expectation_context;calls=[];secondary=OSError('final context secondary')
+    def context(*args):
+        calls.append(1)
+        if len(calls)==2: raise secondary
+        return original(*args)
+    monkeypatch.setattr(cli,'check_expectation_context',context)
+    name=next(n for n in sorted(b.gold.files) if n not in cli.EXPECTATION_FILES)
+    _corrupt_read(monkeypatch,name)
+    with pytest.raises(cli.SavedExpectationUnresolved) as error: cli._probe_bookend_saved_input(cap,'G2')
+    assert isinstance(error.value.primary,ValueError) and error.value.bookend_errors==( ('context_final',secondary), )
+    assert cap._state[2] is error.value
+
+
+@pytest.mark.parametrize('hold_fails',[True,False])
+def test_saved_expectation_probe_hold_always_checks_final_context_before_capability(saved_expectation_base,tmp_path,monkeypatch,hold_fails):
+    from types import SimpleNamespace
+    b=saved_expectation_base;raw,sha=_expectation_context(b,tmp_path)
+    original=cli.check_expectation_context;calls=[];secondary=OSError('hold final context secondary');constructed=[]
+    def context(*args):
+        calls.append(1)
+        if len(calls)==2: raise secondary
+        return original(*args)
+    monkeypatch.setattr(cli,'check_expectation_context',context)
+    def no_construction(*args): constructed.append(True); pytest.fail('capability allocated after final error')
+    monkeypatch.setattr(cli,'object',SimpleNamespace(__new__=no_construction),raising=False)
+    if hold_fails:
+        name=next(n for n in sorted(b.gold.files) if n not in cli.EXPECTATION_FILES)
+        _corrupt_read(monkeypatch,name)
+    with pytest.raises(cli.SavedExpectationUnresolved) as error:
+        cli._probe_saved_expectation_input(b.expectation,raw,sha,stage='G0')
+    assert (isinstance(error.value.primary,ValueError) if hold_fails else error.value.primary is None)
+    assert error.value.bookend_errors==( ('context_final',secondary), ) and constructed==[] and len(calls)==2

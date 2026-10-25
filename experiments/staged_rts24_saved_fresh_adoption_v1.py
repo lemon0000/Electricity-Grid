@@ -17,6 +17,7 @@ import tempfile
 from threading import get_ident
 import time
 from types import ModuleType
+from types import CodeType, FunctionType, SimpleNamespace
 
 ROOT = Path(__file__).absolute().parents[1]
 P1 = ROOT/'results/tables/staged_rts24_native_v1_non_authoritative/p1_01'
@@ -3835,6 +3836,355 @@ def read_saved_after_quiet(store, name, held):
     store.accounting(); raw = read(store.root/name)
     require(len(raw) <= role_target_caps()[name], 'saved child target cap')
     store.accounting(); return raw
+
+
+EXPECTATION_SCHEMA = 'staged_saved_P1_caller_expectation_development_v1'
+EXPECTATION_CONTEXT_SCHEMA = 'staged_saved_P1_expectation_context_development_v1'
+EXPECTATION_ADAPTER_PIN = dict(bytes=17247, sha256='26b919e385f9d7042587db490dab694fc5bf1643665ab4bf94a1c9bac8087396')
+EXPECTATION_FILES = tuple(sorted(('launcher.json', 'trusted_binding.json', 'start.json', 'request_schedule.json', 'fresh.json',
+    *(f'trusted_prefixes/prefix_{n:06d}.json' for n in range(6)),
+    *(f'points/point_{n:04d}/{leaf}.json' for n in range(1, 22) for leaf in ('request', 'result')))))
+
+
+def _expectation_binding_entry(binding):
+    adapter, functions = binding
+    require(sys.modules.get('src.staged_rts24_saved_fresh_adoption_v1') is adapter
+        and Path(adapter.__file__).absolute() == ROOT/NEW_SOURCES[0], 'canonical expectation adapter required')
+    for module, name, function, code, defaults, kwdefaults in functions:
+        require(getattr(module, name) is function and type(function) is FunctionType
+            and function.__globals__ is vars(module) and function.__code__ is code
+            and function.__defaults__ == defaults and canonical(function.__kwdefaults__) == kwdefaults
+            and function.__closure__ is None, 'fixed expectation callable changed')
+    return adapter
+
+
+def _expectation_adapter(expected):
+    require(type(expected) is dict and expected.get(NEW_SOURCES[0]) == EXPECTATION_ADAPTER_PIN,
+        'frozen expectation projection dependency required')
+    require(source_pins() == expected and Path(sys.executable).absolute() == EXE,
+        'expectation source/runtime differs')
+    from src import staged_rts24_saved_fresh_adoption_v1 as adapter
+    dependencies = [(adapter, n) for n in ('hold', 'capture', 'bookend', 'caller_image', 'sources', 'validate_metrics')]
+    dependencies += [(adapter.core, 'load_fixture'), (adapter.mechanical, 'inventory'),
+        (adapter.codec, 'read_bytes'), (adapter.prefix.point, '_outer')]
+    compiled = {}; functions = []
+    for module, name in dependencies:
+        path = Path(module.__file__).absolute(); relative = path.relative_to(ROOT).as_posix()
+        raw = read(path); require(relative in expected and pin(raw) == expected[relative], 'expectation callable source differs')
+        if relative not in compiled:
+            unit = compile(raw, str(path), 'exec', dont_inherit=True, optimize=sys.flags.optimize)
+            compiled[relative] = {c.co_name:c for c in unit.co_consts if type(c) is CodeType}
+        function = getattr(module, name)
+        require(type(function) is FunctionType and function.__globals__ is vars(module)
+            and function.__code__ == compiled[relative][name] and function.__closure__ is None,
+            'original fixed expectation callable required')
+        if module is adapter and name == 'bookend':
+            require(function.__defaults__ is None and function.__kwdefaults__ == {'inventory':True}, 'full bookend default required')
+        elif module is adapter:
+            require(function.__defaults__ is function.__kwdefaults__ is None, 'fixed adapter defaults required')
+        functions.append((module, name, function, function.__code__, function.__defaults__, canonical(function.__kwdefaults__)))
+    binding = adapter, tuple(functions)
+    require(_expectation_binding_entry(binding) is adapter and adapter.P1 == P1 and adapter.SCOPE == SCOPE,
+        'fixed expectation input scope required')
+    adapter.sources(expected)
+    return binding
+
+
+def _expectation_metadata(root, expected_files):
+    root = Path(root).absolute(); root_chain = directories(root)
+    files = {}; folders = {}; aliases = set(); entries = total = 0
+    def walk(path, depth):
+        nonlocal entries, total
+        require(depth <= 12, 'expectation metadata depth cap')
+        info = ordinary(path, directory=True); folders[path.relative_to(root).as_posix()] = info.st_dev, info.st_ino
+        with os.scandir(path) as stream:
+            for item in stream:
+                entries += 1; require(entries <= 16384, 'expectation metadata entry cap')
+                child = Path(item.path); name = child.relative_to(root).as_posix(); folded = name.casefold()
+                require(folded not in aliases, 'expectation metadata case alias'); aliases.add(folded)
+                if item.is_dir(follow_symlinks=False): walk(child, depth+1)
+                else:
+                    info = ordinary(child); require(name in expected_files, 'unexpected expectation input file')
+                    require(info.st_size == expected_files[name]['bytes'] and info.st_size <= 8*1024**2,
+                        'expectation file size differs')
+                    files[name] = identity(info); total += info.st_size
+                    require(len(files) <= 683 and total <= 2950863, 'expectation input metadata cap')
+    walk(root, 0)
+    require(set(files) == set(expected_files) and directories(root) == root_chain, 'expectation metadata set/root differs')
+    return dict(files=files, directories=folders)
+
+
+def _expectation_read(root, name, expected_pin, expected_identity):
+    path = Path(root)/name; parent = directories(path.parent); before = identity(ordinary(path))
+    require(before == expected_identity and before[2] <= 8*1024**2, 'expectation file changed before read')
+    with path.open('rb') as stream:
+        require(identity(os.fstat(stream.fileno())) == before, 'expectation handle changed before read')
+        raw = stream.read(before[2]+1)
+        require(identity(os.fstat(stream.fileno())) == before, 'expectation handle changed during read')
+    require(identity(ordinary(path)) == before and directories(path.parent) == parent and pin(raw) == expected_pin,
+        'expectation file/parent/pin changed after read')
+    return raw
+
+
+class SavedExpectationUnresolved(ValueError):
+    def __init__(self, primary, bookend_errors):
+        self.primary, self.bookend_errors = primary, tuple(bookend_errors)
+        super().__init__('saved expectation projection/bookend unresolved')
+    def __reduce__(self): raise TypeError('local expectation errors cannot be serialized')
+
+
+@dataclass(frozen=True, init=False, eq=False)
+class SavedCallerExpectation:
+    raw: bytes
+    image: bytes
+    creator: tuple
+    commit: str
+    def __new__(cls, *args, **kwargs): raise TypeError('capture a caller expectation explicitly')
+
+    def _image(self): return pin(self.raw), pin(self.image), self.creator
+
+    def entry(self):
+        require(type(self) is SavedCallerExpectation and self.creator == (os.getpid(), get_ident())
+            and self.commit == digest(self._image()), 'creating immutable caller expectation required')
+        return self
+
+    def __reduce__(self): raise TypeError('caller expectation has no transferable authority')
+
+
+def capture_saved_expectation(expected_sources):
+    """Expected data only: 53 pinned reads and metadata, never a full-content witness."""
+    require(type(expected_sources) is dict, 'closed expected source data required')
+    source = parse(canonical(expected_sources)); binding = _expectation_adapter(source)
+    adapter = _expectation_binding_entry(binding); anchor = P1.parent/'p1_execution_review_01/postcheck_03.stdout.json'
+    anchor_id = identity(ordinary(anchor)); anchor_dirs = directories(anchor.parent); root_dirs = directories(P1)
+    anchor_raw = read(anchor); require(sha256(anchor_raw).hexdigest() == ANCHOR_SHA, 'expectation external anchor differs')
+    files = json.loads(anchor_raw)['p1_files']
+    require(type(files) is dict and len(files) == 683 and sum(p['bytes'] for p in files.values()) == 2950863,
+        'closed expected P1 catalog required')
+    require(len(EXPECTATION_FILES) == 53 and set(EXPECTATION_FILES) <= set(files), 'fixed expectation read set differs')
+    before = _expectation_metadata(P1, files)
+    def bookends():
+        errors = []
+        try:
+            require(read(anchor) == anchor_raw and identity(ordinary(anchor)) == anchor_id
+                and directories(anchor.parent) == anchor_dirs, 'expectation anchor bookend differs')
+        except BaseException as error: errors.append(('anchor', error))
+        try:
+            require(directories(P1) == root_dirs and _expectation_metadata(P1, files) == before,
+                'expectation metadata bookend differs')
+        except BaseException as error: errors.append(('metadata', error))
+        try: _expectation_binding_entry(binding); adapter.sources(source)
+        except BaseException as error: errors.append(('source', error))
+        return errors
+    try:
+        raw = {n:_expectation_read(P1, n, files[n], before['files'][n]) for n in EXPECTATION_FILES}
+        fixture = adapter.core.load_fixture(); outer = parse(raw['launcher.json']); trusted = parse(raw['trusted_binding.json'])
+        adapter.prefix.point._outer(outer); start = parse(raw['start.json'])
+        bindings = tuple(parse(raw[f'trusted_prefixes/prefix_{n:06d}.json']) for n in range(6))
+        expected = dict(fixture_sha=adapter.core.digest(fixture), initial_state_sha=bindings[0]['known_state_sha'],
+            after_state_shas=tuple(row['known_state_sha'] for row in bindings[1:]), pins_sha=adapter.core.digest(start['pins']),
+            registration_sha=start['registration_sha'], slots=tuple(parse(raw['request_schedule.json'])[:21]),
+            point_files={str(i):{n[len(f'points/point_{i:04d}/'):]:p for n,p in files.items()
+                if n.startswith(f'points/point_{i:04d}/')} for i in range(1,22)})
+        metrics = parse(raw['fresh.json'])['metrics']; adapter.validate_metrics(metrics)
+        refs = [dict(ordinal=i, role=expected['slots'][i-1]['role'],
+            query_sha=parse(raw[f'points/point_{i:04d}/request.json'])['query_sha'],
+            evidence_ref=parse(raw[f'points/point_{i:04d}/result.json'])['evidence_ref']) for i in range(1,22)]
+        projection = SimpleNamespace(files=files, fixture=fixture, outer=outer, trusted=trusted, expectations=expected,
+            bindings=bindings, source=source, anchor_raw=anchor_raw, anchor_identity=anchor_id,
+            anchor_directories=anchor_dirs, root_directories=root_dirs,
+            inventory=dict(pins=files, **before), historical_metrics=metrics, expected_evidence_refs=refs)
+        image = adapter.caller_image(projection)
+    except BaseException as primary:
+        errors = bookends()
+        if errors: raise SavedExpectationUnresolved(primary, errors) from primary
+        raise
+    errors = bookends()
+    if errors: raise SavedExpectationUnresolved(None, errors)
+    value = dict(schema=EXPECTATION_SCHEMA, authority='DRAFT_NONAUTHORITATIVE', scope=SCOPE,
+        caller_expectation_core=parse(image), caller_expectation_sha=sha256(image).hexdigest(),
+        source_sha=digest(source), input_pins_sha=digest(files), content_read_files=list(EXPECTATION_FILES),
+        metadata_passes=2, full_P1_content_verified=False, F_launch_admitted=False, **GATES)
+    encoded = canonical(value); require(len(encoded) <= 2*1024**2 and len(image) <= 2*1024**2, 'expectation data byte cap')
+    result = object.__new__(SavedCallerExpectation)
+    for name, item in dict(raw=encoded, image=image, creator=(os.getpid(),get_ident())).items(): object.__setattr__(result,name,item)
+    object.__setattr__(result,'commit',digest(result._image()))
+    return result.entry()
+
+
+def validate_expectation_context(value):
+    keys(value, 'schema authority scope repo_root input_root output_root output_mode output_parent_directories source_pins '
+        'executable environment anchor_sha input_files invocation_started deadline stage_seconds limits inherited_sources_pin '
+        'caller_expectation_core caller_expectation_sha expectation_sha full_P1_content_verified '+' '.join(GATES))
+    require(value['schema'] == EXPECTATION_CONTEXT_SCHEMA and value['authority'] == 'DRAFT_NONAUTHORITATIVE'
+        and value['scope'] == SCOPE and value['full_P1_content_verified'] is False
+        and all(value[n] is False for n in GATES), 'expectation context domain differs')
+    require(value['repo_root'] == str(ROOT) and value['input_root'] == str(P1), 'expectation fixed roots differ')
+    output = Path(value['output_root']); mode = output_mode(output)
+    require(output.is_absolute() and str(output.absolute()) == str(output) and '..' not in output.parts
+        and not output.is_relative_to(P1) and not P1.is_relative_to(output)
+        and value['output_mode'] == {'saved_P1_F_validation':'saved_P1_expectation_only',
+            'ordinary_pytest_fixture':'ordinary_expectation_fixture'}[mode], 'expectation output mode differs')
+    require(value['output_parent_directories'] == [list(row) for row in directories(output.parent)], 'expectation output parent differs')
+    require(value['stage_seconds'] == STAGE_SECONDS and value['limits'] == CAPS, 'expectation budget differs')
+    require(type(value['invocation_started']) is float and math.isfinite(value['invocation_started'])
+        and 0 < value['invocation_started'] <= time.monotonic() and type(value['deadline']) is float
+        and value['deadline'] == value['invocation_started']+180, 'expectation absolute clock differs')
+    core = value['caller_expectation_core']
+    keys(core,'files fixture_sha outer trusted expectations bindings source anchor_path anchor_pin anchor_identity '
+        'anchor_directories root_directories historical_metrics expected_evidence_refs inventory')
+    keys(core['inventory'],'pins files directories')
+    require(type(value['source_pins']) is dict and type(value['input_files']) is dict
+        and value['caller_expectation_sha'] == digest(core)
+        and core['files'] == value['input_files'] and core['source'] == value['source_pins']
+        and value['anchor_sha'] == ANCHOR_SHA and _hex64(value['expectation_sha']), 'expectation core binding differs')
+    require(set(value['source_pins']) == set(source_names()) and len(value['input_files']) == 683, 'expectation source/input set differs')
+    for item in tuple(value['source_pins'].values())+tuple(value['input_files'].values())+(value['inherited_sources_pin'],):
+        keys(item,'bytes sha256')
+        require(type(item['bytes']) is int and 0 <= item['bytes'] <= 8*1024**2 and _hex64(item['sha256']), 'expectation pin shape differs')
+    keys(value['executable'],'path pin identity python'); keys(value['executable']['pin'],'bytes sha256')
+    require(value['executable']['path'] == str(EXE) and value['executable']['python'] == sys.version
+        and type(value['executable']['pin']['bytes']) is int and 0 < value['executable']['pin']['bytes'] <= 8*1024**2
+        and _hex64(value['executable']['pin']['sha256']) and type(value['executable']['identity']) is list
+        and len(value['executable']['identity']) == 4 and all(type(n) is int and n >= 0 for n in value['executable']['identity'])
+        and type(value['environment']) is dict and all(type(k) is type(v) is str for k,v in value['environment'].items()),
+        'expectation executable/environment differs')
+    require(len(canonical(value)) <= 2*1024**2, 'expectation context byte cap')
+    return value
+
+
+def check_expectation_context(raw, expected_sha):
+    require(type(raw) is bytes and _hex64(expected_sha) and sha256(raw).hexdigest() == expected_sha, 'expectation context SHA differs')
+    value = validate_expectation_context(parse(raw))
+    require(Path.cwd().absolute() == ROOT and Path(sys.executable).absolute() == EXE
+        and source_pins() == value['source_pins'] and environment() == value['environment'], 'expectation live source/runtime differs')
+    require(pin(read(INHERITED)) == value['inherited_sources_pin'], 'expectation inherited source catalog differs')
+    anchor = read(P1.parent/'p1_execution_review_01/postcheck_03.stdout.json')
+    require(sha256(anchor).hexdigest() == ANCHOR_SHA and json.loads(anchor)['p1_files'] == value['input_files'], 'expectation anchor map differs')
+    require(pin(read(EXE, allow_links=True)) == value['executable']['pin']
+        and list(identity(ordinary(EXE, allow_links=True))) == value['executable']['identity'], 'expectation executable changed')
+    require(time.monotonic() <= value['deadline'], 'expectation context expired')
+    return value
+
+
+def context_from_saved_expectation(expectation, output_root, *, started):
+    require(type(expectation) is SavedCallerExpectation, 'exact expectation data required')
+    expectation.entry(); core = parse(expectation.image); source = source_pins()
+    require(core['source'] == source and type(started) is float and math.isfinite(started)
+        and 0 < started <= time.monotonic(), 'current expectation/start required')
+    output = Path(output_root).absolute(); mode = output_mode(output)
+    require(not os.path.lexists(output), 'dedicated expectation output already exists')
+    value = dict(schema=EXPECTATION_CONTEXT_SCHEMA, authority='DRAFT_NONAUTHORITATIVE', scope=SCOPE,
+        repo_root=str(ROOT), input_root=str(P1), output_root=str(output),
+        output_mode={'saved_P1_F_validation':'saved_P1_expectation_only', 'ordinary_pytest_fixture':'ordinary_expectation_fixture'}[mode],
+        output_parent_directories=[list(row) for row in directories(output.parent)], source_pins=source,
+        executable=dict(path=str(EXE), pin=pin(read(EXE,allow_links=True)),
+            identity=list(identity(ordinary(EXE,allow_links=True))), python=sys.version), environment=environment(),
+        anchor_sha=ANCHOR_SHA, input_files=core['files'], invocation_started=started, deadline=started+180,
+        stage_seconds=dict(STAGE_SECONDS), limits=dict(CAPS), inherited_sources_pin=pin(read(INHERITED)),
+        caller_expectation_core=core, caller_expectation_sha=sha256(expectation.image).hexdigest(),
+        expectation_sha=sha256(expectation.raw).hexdigest(), full_P1_content_verified=False, **GATES)
+    raw = canonical(validate_expectation_context(value)); check_expectation_context(raw,sha256(raw).hexdigest())
+    expectation.entry(); return raw
+
+
+@dataclass(frozen=True, init=False, eq=False, repr=False)
+class VerifiedSavedInput:
+    expectation: SavedCallerExpectation
+    context_raw: bytes
+    context_sha: str
+    _held: object
+    held_image_sha: str
+    stage: str
+    creator: tuple
+    binding: tuple
+    commit: str
+    _state: tuple
+    real_verified: bool
+    def __new__(cls, *args, **kwargs): raise TypeError('verify local saved input explicitly')
+
+    def _image(self):
+        return (id(self.expectation), pin(self.expectation.raw), pin(self.context_raw), self.context_sha,
+            id(self._held), self.held_image_sha, self.stage, self.creator, id(self.binding), self.real_verified)
+
+    def _identity_entry(self):
+        require(type(self) is VerifiedSavedInput and self.creator == (os.getpid(),get_ident())
+            and self.commit == digest(self._image()) and self.real_verified is False, 'creating local input probe required')
+        self.expectation.entry(); adapter = _expectation_binding_entry(self.binding)
+        require(type(self._held) is adapter.HeldInput and self._held.image == self.expectation.image
+            and sha256(self._held.image).hexdigest() == self.held_image_sha
+            and adapter.caller_image(self._held) == self._held.image, 'exact immutable probe HeldInput required')
+        require(set(self._held.inventory['raw']) == set(self._held.files)
+            and all(pin(raw) == self._held.files[n] for n,raw in self._held.inventory['raw'].items()), 'probe raw snapshot changed')
+        return self
+
+    def entry(self):
+        self._identity_entry()
+        require(self._state[1] == digest((self._state[0], id(self._state[2])))
+            and self._state[2] is None, 'verified input bookend is unresolved')
+        return self
+
+    def __reduce__(self): raise TypeError('verified local input cannot be serialized')
+
+
+def _probe_saved_expectation_input(expectation, context_raw, context_sha, *, stage):
+    """Ordinary local probe only; production G0/H3 awaits trusted-role/global closure."""
+    require(type(expectation) is SavedCallerExpectation and type(stage) is str and stage in ('G0','H3'), 'expectation and closed input verification stage required')
+    expectation.entry(); context = check_expectation_context(context_raw,context_sha)
+    require(context['output_mode'] == 'ordinary_expectation_fixture'
+        and context['expectation_sha'] == sha256(expectation.raw).hexdigest()
+        and canonical(context['caller_expectation_core']) == expectation.image, 'verification expectation/context differs')
+    binding = _expectation_adapter(context['source_pins']); adapter = _expectation_binding_entry(binding)
+    held = None; primary = None; final_errors = []
+    try:
+        held = adapter.hold(context['source_pins'], expectation.image)
+        require(type(held) is adapter.HeldInput and held.image == expectation.image, 'full original local probe required')
+    except BaseException as error: primary = error
+    try: _expectation_binding_entry(binding)
+    except BaseException as error: final_errors.append(('binding_final',error))
+    try: expectation.entry()
+    except BaseException as error: final_errors.append(('expectation_final',error))
+    try: check_expectation_context(context_raw,context_sha)
+    except BaseException as error: final_errors.append(('context_final',error))
+    if final_errors: raise SavedExpectationUnresolved(primary,final_errors) from primary
+    if primary is not None: raise primary
+    result = object.__new__(VerifiedSavedInput)
+    for name,value in dict(expectation=expectation, context_raw=context_raw,context_sha=context_sha,_held=held,
+            held_image_sha=sha256(held.image).hexdigest(),stage=stage,creator=(os.getpid(),get_ident()),binding=binding,
+            real_verified=False).items():
+        object.__setattr__(result,name,value)
+    object.__setattr__(result,'commit',digest(result._image()))
+    object.__setattr__(result,'_state',((),digest(((),id(None))),None))
+    result.entry(); return result
+
+
+def _probe_bookend_saved_input(verified, stage):
+    require(type(verified) is VerifiedSavedInput and verified.stage == 'G0' and type(stage) is str and stage in ('G2','G3'), 'G0 verified input required for G2/G3')
+    verified.entry(); held = verified._held; progress = verified._state[0]
+    context_raw, context_sha = verified.context_raw, verified.context_sha
+    require(progress == (() if stage == 'G2' else ('G2',)), 'single ordered same-input bookends required')
+    adapter = _expectation_binding_entry(verified.binding)
+    marker = object()
+    object.__setattr__(verified,'_state',(progress,digest((progress,id(marker))),marker))
+    primary = None; final_errors = []
+    try:
+        check_expectation_context(context_raw,context_sha)
+        adapter.bookend(held)
+        require(verified._identity_entry() is verified and verified._held is held, 'same G0 probe input required after bookend')
+    except BaseException as error: primary = error
+    try: verified._identity_entry()
+    except BaseException as error: final_errors.append(('input_final',error))
+    try: check_expectation_context(context_raw,context_sha)
+    except BaseException as error: final_errors.append(('context_final',error))
+    if primary is not None or final_errors:
+        error = SavedExpectationUnresolved(primary,final_errors) if final_errors else primary
+        object.__setattr__(verified,'_state',(progress,digest((progress,id(error))),error))
+        if final_errors: raise error from primary
+        raise error
+    updated = progress+(stage,)
+    object.__setattr__(verified,'_state',(updated,digest((updated,id(None))),None))
+    return dict(stage=stage,context_sha=verified.context_sha,caller_expectation_sha=verified.held_image_sha,
+        local_full_input_bookend=True,real_verified=False, actual_saved_F_execution=False,F_launch_admitted=False,**GATES)
 
 
 if __name__ == '__main__':
