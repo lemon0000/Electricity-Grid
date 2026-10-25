@@ -1,0 +1,118 @@
+"""Bind observed ordinary results, exact navigation, and the continuation."""
+import json
+from pathlib import Path
+import re
+from capture_checks import ROOT,OUT,PRIOR,entry,read
+
+
+def save(name,value):
+    (OUT/name).write_bytes((json.dumps(value,sort_keys=True,indent=2)+'\n').encode())
+
+
+plan=read('group_admission_02.json');selected=entry.source_pins();nodes=[];groups=[]
+for label,group in plan['groups'].items():
+    record=read(label+'.exit.json')
+    assert record['exit_code']==0 and not record['timed_out'] and record['source_pins']==selected
+    assert record['source_pins_unchanged'] and record['helper_pins_unchanged'] and record['nodes']==group
+    nodes.extend(group);groups.append((label,len(group),record['wall_seconds'],record['timeout_seconds']))
+assert len(nodes)==len(set(nodes))==63
+raw_bytes=sum(p['bytes'] for p in selected.values())
+save('frozen_epoch.json',dict(authority='DRAFT_NONAUTHORITATIVE',source_pins=selected,
+    source_epoch=record['source_epoch'],source_raw_bytes=raw_bytes,groups=plan['groups'],nodes=sorted(nodes),
+    current_epoch_nodes=63,actual_saved_F_execution=False,F_launch_admitted=False))
+profile=read('projection_profile.json');full,projection=profile['observations'];loaded=len(profile['loaded_selected_sources'])
+full_source=full['content_reads']['selected_source']['read_calls'];new_source=projection['content_reads']['selected_source']['read_calls']
+records=[read(p.name) for p in OUT.glob('*.exit.json')]
+pytest_seconds=sum(r['wall_seconds'] for r in records if r['kind']=='pytest')
+static_seconds=sum(r['wall_seconds'] for r in records if r['kind']=='static')
+current_seconds=sum(r[2] for r in groups)
+preserved=len(read('preservation_inventory.json'))
+table='\n'.join(f'| {label} | {count} | {cap:g} | {wall:.3f} | exit 0 |' for label,count,wall,cap in groups)
+memory_table='\n'.join(f"| {r['label']} | {r['python_traced_bytes']['before']} | {r['python_traced_bytes']['after']} | {r['python_traced_bytes']['peak']} | {r['wall_seconds']:.6f} |" for r in (full,projection))
+handoff='continuation_handoff_20261025_saved_fresh_source_bytes_reuse.md'
+report=f'''# C：expectation 操作内源码字节复用验证
+
+2026-10-25，`DRAFT_NONAUTHORITATIVE`，起始HEAD `5c3e885cb3b6dd50479ad685593590d5bd0ade86`。范围见[合同](../../../docs/plan/staged_deliverability_c_saved_fresh_source_bytes_reuse_contract_v1.md)，接续[前序报告](../staged_rts24_saved_fresh_expectation_v1_non_authoritative/validation_report.md)。实际F、native owner、solver、B/C/E科学replay调用为零，无新增模拟小时；fresh/parent局部verified、整包科学采用、资源和正式门禁均未开放。
+
+## 实现与失效窗口
+
+原ENTRY仅修改`_expectation_adapter`一个既有函数，新增raw cap常量；tests新增10节点。initial snapshot仍读取和核全部49 source，先核exact集合和expected总bytes；每份原字节逐pin通过后才进入函数局部字典。code比较复用该字典，保留原filename、compile参数、function/code/defaults和globals字典身份检查。两次独立调用重新读取；成功返回binding不持raw，无跨调用/进程cache。
+
+snapshot失败仍独立调用source_pins final；adapter取得后无论compile/code检查成功或失败均运行原adapter.sources final。projection后续原source bookend也保留。只有primary时原对象重抛；primary与final双错由不可序列化SavedExpectationUnresolved强持。2MiB仅约束已核字典raw，当前精确49份为{raw_bytes}B；当前读取缓冲、compiled code、对象开销及失败traceback均另计。失败可强持raw和缓冲，未宣称已释放或总RAM≤2MiB。
+
+## 当前epoch终态
+
+三源epoch `{record['source_epoch']}`；ENTRY SHA `{selected[entry.NEW_SOURCES[1]]['sha256']}`；tests SHA `{selected[entry.NEW_SOURCES[2]]['sha256']}`。scientific adapter及其余47路径逐字不变。除上述单函数外，全部旧顶层函数/类AST保持。
+
+| 组 | 节点 | 外部帽s | wall s | 终态 |
+| --- | ---: | ---: | ---: | --- |
+{table}
+
+当前精确并集63=10新增+35 expectation回归+18 binding回归，无重复，累计{current_seconds:.3f}s。首轮source_bytes_and_smoke_04有1 failed/11 passed：测试漏算原adapter.sources对已加载adapter源码的再次读取，正常final应为初读1+selected1+loaded1=3；仅修正测试断言，原source guard保留。其raw、exit、旧epoch测试和helper snapshot均保存，旧11通过不计为本epoch节点。全部pytest attempt累计{pytest_seconds:.3f}/160s。历史53/161节点不自动计入当前源码。
+
+新增节点实测单次adapter解析读数为49+49+loaded，两个调用各自重读49，十个code比较没有额外disk read；当前pytest loaded集合36，单次134。负例覆盖错误pin先于compile拒绝、初读后同metadata内容损坏由原final full guard拒绝、initial read/compile primary与final secondary、仅primary保留原对象、raw总帽和boolean/negative size前置拒绝。所有故障使用只读代理/注入，磁盘source/P1未改。三源及执行helper/script在每次检查前后pin一致，并保存对应字节snapshot。
+
+## 单次费用和Python分配观察
+
+见[原始profile](checks_01/projection_profile.json)。补充profile_12固定full capture→projection各一次，tracemalloc在操作内计数；import/setup在操作计时外、仍计外部12s。该profile loaded集合{loaded}，full selected-source {full_source}次，projection {new_source}次，后者符合49+2×(49+loaded)+fixture4；逐文件原计数也相符。前序233与当前{new_source}相差10；这里只解释十次code磁盘读取复用，source6500整链帽尚未证明。
+
+首个profile_11在保存数据之前因observer公式漏算fixture4次而exit1，外部6.140s，操作内数值没有落盘，不能作为观测结果。源码load_fixture读取3份配置及自身compiler SHA，解释该漏项；先保存旧合同和失败helper/source/raw，再在原预算内明确登记补充一次profile_12，外部6.219/12s终态exit0。补充观察先落盘逐文件raw再核公式，没有删减source freshness检查。除此未追加诊断；两次费用均计入40s静态预算。
+
+P1仍为683次/2950863B及53次/94323B；同一当前SF49下caller image逐字相同，image SHA `{profile['image_sha']['sha256']}`。full_P1_content_verified仍false，未读CAS仍由后续原full hold核验。
+
+| 操作 | Python traced before B | after B | peak B | wall s |
+| --- | ---: | ---: | ---: | ---: |
+{memory_table}
+
+tracemalloc只覆盖启用后Python allocator分配并包含探针开销，不覆盖已存在对象/native分配，也不是RSS。两行不能相减当作新增raw dict的隔离内存效应。固定顺序可能受缓存预热影响，探针配置也不同于前序profile；不报告稳定速度比、whole-F节省或整链内存上界。本轮profile及捕获helper有执行前后pin与snapshot，强度限于这些脚本和canonical SF49，不等于传递runtime闭包。
+
+## 保存与下一步
+
+前序{preserved}个保存路径与P1全683文件逐字核验；三份导航既保留旧body，又绑定本轮完整after-body/current whole pins，未来仅准在前面追加。保存层复核指出首个saved_14依赖可变当前ENTRY，不能支持未来reopen的长期保全强度。旧checker/report/support及执行snapshot保留；当前checker改用本地标准库pin/canonical、三源/两mutable及OUTPUT parent字面值，完全不导入当前ENTRY，也不递归运行旧checker。先核{preserved}路径原字节，再解析前序saved_14的冻结exit/stdout/snapshot/source绑定；旧53仅代表其原epoch，旧profile helper execution-time pin仍false，未由本轮反向升级。当前P1 expected pins取自固定SHA外锚，独立核683 exact-set、普通文件/handle/read pin及前后metadata/root/祖先身份。目录书挡仅支持本次扫描期间的身份保持，不证明历史目录身份；这些是保存层完整性证据，不升级G0/H3或full_P1_content_verified。开发预算200s，pytest160/static40；本次包装前静态累计{static_seconds:.3f}s（嵌套collection记录保守累计），最终包装/checker自身另以终态exit累计。保存核验输出明确排除尚未生成外部exit的当前checker耗时。
+
+保存oracle首轮saved_16因局部循环变量pin遮蔽本地hash函数而在开始读current sources时exit1（0.078s）；改名source_pin后重新核验，旧helper/exit/stderr全部保存。这是保存工具修正，canonical ENTRY/tests及63节点epoch未改变，未重跑已完成pytest。失败耗时仍计原40s预算。
+
+本轮保留全部原49 source观察窗口、G0–G3、parent/fresh独立hold、原B/C/E审计、四个命名库存和host末次full。私有prototype恒real_verified=false；生产transitive global binding、真实G0/H3、trusted role/ACK、issuer/driver、source6500、完整失败读数、180s逐边deadline/episode handoff、最大合法wire、external arming/quiet与host I/O硬停止仍OPEN。P1成功12159仍只是条件算术。
+
+下一步先枚举生产adapter实际传递global依赖与角色能力边，固定可验证闭包和失败窗口，完成真实G0与trusted supervisor/ACK的结构性合同；再接driver及完整调用/资源证明，之后才可提出具体actual F申请。不再把已经完成的十次code重读当作尚未完成项；也不删除当前保留的freshness边。
+
+保存核验：`D:\\Miniconda3\\envs\\compute\\python.exe -B results/tables/staged_rts24_saved_fresh_source_bytes_reuse_v1_non_authoritative/checks_01/saved_checks.py`。见[交接](../../../docs/plan/{handoff})；未生成production manifest/lease、official verdict/receipt/seal或run authority。
+'''
+(OUT.parent/'validation_report.md').write_bytes(report.encode())
+text=f'''# C：操作内 source 字节复用交接
+
+2026-10-25，DRAFT_NONAUTHORITATIVE，接续[投影交接](continuation_handoff_20261025_saved_fresh_expectation.md)，起始HEAD `5c3e885cb3b6dd50479ad685593590d5bd0ade86`，最终hash以远端读回为准。root唯一writer、独立只读PRE_SEAL；[合同](staged_deliverability_c_saved_fresh_source_bytes_reuse_contract_v1.md)固定200=160pytest+40static。实际F和整包科学/资源/正式门禁保持关闭。
+
+原_adapt仅将initial49已核字节保留在局部字典供十个code比较使用；原adapter.sources及projection末次source guard均保持完整。initial read/compile/code失败也独立做source final，保留raw primary/secondary。当前49 raw精确{raw_bytes}B，2MiB仅为已核字典逻辑上限，读取缓冲、编译和失败traceback另计；成功binding不持raw，不跨调用缓存。
+
+当前epoch `{record['source_epoch']}`下63节点（10+35+18）全部终态通过，当前{current_seconds:.3f}s，含保留失败首轮的全部pytest {pytest_seconds:.3f}/160s。旧失败为测试漏算loaded源码重读，修正断言后原guard不变；旧11通过及历史53/161不作为当前节点。除原_adapt外旧函数/类AST不变，scientific src、其他47依赖、前序{preserved}路径及P1保持。
+
+补充profile loaded={loaded}：projection selected-source {new_source}次，按49+2×(49+loaded)+fixture4核对，比前序233减少10；full为{full_source}次。P1仍683/53，当前caller image相同、full_P1_content_verified=false。首个profile因公式漏算fixture4次而失败、未保存操作内数据；保留原失败及旧合同，在原预算内登记一次补充，先保存逐文件raw后核公式，终态通过。Python traced峰值见[报告](../../results/tables/staged_rts24_saved_fresh_source_bytes_reuse_v1_non_authoritative/validation_report.md)，不是RSS或增量内存因果估计，也不与前序非traced wall比较。本轮执行helper/script前后pins及snapshot已保存。
+
+下一步枚举生产adapter传递global依赖及角色能力，固定验证闭包/失效窗并接真实G0与trusted supervisor/ACK。prototype仍real_verified=false；生产G0/H3、issuer/driver、source6500、失败成本、180s逐边deadline、合法最大wire和host外部硬停止尚待完成。原G0–G3、parent/fresh hold、原科学审计、四库存和host末次full全部保持；actual F结果树及父目录不存在，无新模拟小时或native/solver调用。
+
+恢复先核Git/进程，再做保存核验：`D:\\Miniconda3\\envs\\compute\\python.exe -B results/tables/staged_rts24_saved_fresh_source_bytes_reuse_v1_non_authoritative/checks_01/saved_checks.py`。当前保存checker使用固定本地标准库oracle，不导入可变ENTRY或递归旧checker；先核前序原字节及冻结receipt，再独立核固定外锚的P1全683。旧profile helper绑定仍false，目录身份仅限本次扫描书挡；保存层核验不升级生产权限。首轮saved14和修正前helper/report/support均保留。不要重复已完成的十次code读取复用；先推进生产闭包与trusted-role/G0合同，完成整体费用证明后再申请实际F。
+'''
+(ROOT/'docs/plan'/handoff).write_bytes(text.encode())
+after={}
+for name,item in read('navigation_before.json').items():
+    path=ROOT/name;raw=path.read_bytes();header,separator,body=raw.partition(b'\n\n')
+    assert header.decode()==item['header'] and entry.pin(body[-item['body']['bytes']:])==item['body']
+    target=handoff if Path(name).parent.as_posix()=='docs/plan' else '../plan/'+handoff
+    prefix=(f'2026-10-25 操作内source字节复用：见[最新交接]({target})。当前63节点终态通过，'
+        f'十次code重读已消除；profile loaded={loaded}时source233→{new_source}，P1仍683/53。'
+        '2MiB仅为已核raw逻辑帽；生产依赖闭包、trusted role/真实G0、driver、source6500及180s仍OPEN，'
+        '实际F/科学采用/资源/正式门禁关闭。\n\n').encode()
+    if prefix not in raw: path.write_bytes(header+separator+prefix+body)
+    raw=path.read_bytes();after[name]=dict(header=header.decode(),body=entry.pin(raw.partition(b'\n\n')[2]),full=entry.pin(raw))
+save('navigation_after.json',after)
+documents=[OUT.parent/'validation_report.md',ROOT/'docs/plan'/handoff,
+    ROOT/'docs/plan/staged_deliverability_c_saved_fresh_source_bytes_reuse_contract_v1.md']
+for path in documents:
+    for target in re.findall(r'\]\(([^)]+)\)',path.read_text(encoding='utf-8')):
+        if '://' not in target: assert (path.parent/target.split('#')[0]).resolve().exists(),(path,target)
+save('document_checks.json',dict(links_resolve=True,document_pins={p.relative_to(ROOT).as_posix():entry.pin(p.read_bytes()) for p in documents}))
+save('support_pins.json',{p.relative_to(ROOT).as_posix():entry.pin(p.read_bytes()) for p in OUT.rglob('*')
+    if p.is_file() and p.name!='support_pins.json'})
+assert not entry.OUTPUT.parent.exists()
+print(json.dumps(dict(frozen_current_nodes=63,source_raw_bytes=raw_bytes,links_resolve=True,actual_saved_F_execution=False)))

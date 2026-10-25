@@ -3841,6 +3841,7 @@ def read_saved_after_quiet(store, name, held):
 EXPECTATION_SCHEMA = 'staged_saved_P1_caller_expectation_development_v1'
 EXPECTATION_CONTEXT_SCHEMA = 'staged_saved_P1_expectation_context_development_v1'
 EXPECTATION_ADAPTER_PIN = dict(bytes=17247, sha256='26b919e385f9d7042587db490dab694fc5bf1643665ab4bf94a1c9bac8087396')
+EXPECTATION_SOURCE_RAW_CAP = 2*1024**2
 EXPECTATION_FILES = tuple(sorted(('launcher.json', 'trusted_binding.json', 'start.json', 'request_schedule.json', 'fresh.json',
     *(f'trusted_prefixes/prefix_{n:06d}.json' for n in range(6)),
     *(f'points/point_{n:04d}/{leaf}.json' for n in range(1, 22) for leaf in ('request', 'result')))))
@@ -3861,32 +3862,60 @@ def _expectation_binding_entry(binding):
 def _expectation_adapter(expected):
     require(type(expected) is dict and expected.get(NEW_SOURCES[0]) == EXPECTATION_ADAPTER_PIN,
         'frozen expectation projection dependency required')
-    require(source_pins() == expected and Path(sys.executable).absolute() == EXE,
-        'expectation source/runtime differs')
-    from src import staged_rts24_saved_fresh_adoption_v1 as adapter
-    dependencies = [(adapter, n) for n in ('hold', 'capture', 'bookend', 'caller_image', 'sources', 'validate_metrics')]
-    dependencies += [(adapter.core, 'load_fixture'), (adapter.mechanical, 'inventory'),
-        (adapter.codec, 'read_bytes'), (adapter.prefix.point, '_outer')]
-    compiled = {}; functions = []
-    for module, name in dependencies:
-        path = Path(module.__file__).absolute(); relative = path.relative_to(ROOT).as_posix()
-        raw = read(path); require(relative in expected and pin(raw) == expected[relative], 'expectation callable source differs')
-        if relative not in compiled:
-            unit = compile(raw, str(path), 'exec', dont_inherit=True, optimize=sys.flags.optimize)
-            compiled[relative] = {c.co_name:c for c in unit.co_consts if type(c) is CodeType}
-        function = getattr(module, name)
-        require(type(function) is FunctionType and function.__globals__ is vars(module)
-            and function.__code__ == compiled[relative][name] and function.__closure__ is None,
-            'original fixed expectation callable required')
-        if module is adapter and name == 'bookend':
-            require(function.__defaults__ is None and function.__kwdefaults__ == {'inventory':True}, 'full bookend default required')
-        elif module is adapter:
-            require(function.__defaults__ is function.__kwdefaults__ is None, 'fixed adapter defaults required')
-        functions.append((module, name, function, function.__code__, function.__defaults__, canonical(function.__kwdefaults__)))
-    binding = adapter, tuple(functions)
-    require(_expectation_binding_entry(binding) is adapter and adapter.P1 == P1 and adapter.SCOPE == SCOPE,
-        'fixed expectation input scope required')
-    adapter.sources(expected)
+    adapter = binding = primary = None
+    try:
+        names = source_names()
+        require(len(names) == 49 and set(names) == set(expected), 'closed expectation source set required')
+        for value in expected.values():
+            keys(value, 'bytes sha256')
+            require(type(value['bytes']) is int and 0 <= value['bytes'] <= 8*1024**2,
+                'expectation source size differs')
+        require(sum(value['bytes'] for value in expected.values()) <= EXPECTATION_SOURCE_RAW_CAP,
+            'expectation source raw byte cap')
+        source_bytes = {}
+        for name in names:
+            raw = read(ROOT/name)
+            require(pin(raw) == expected[name], 'expectation initial source differs')
+            source_bytes[name] = raw
+        require({name:pin(raw) for name,raw in source_bytes.items()} == expected
+            and Path(sys.executable).absolute() == EXE, 'expectation source/runtime differs')
+        from src import staged_rts24_saved_fresh_adoption_v1 as adapter
+        dependencies = [(adapter, n) for n in ('hold', 'capture', 'bookend', 'caller_image', 'sources', 'validate_metrics')]
+        dependencies += [(adapter.core, 'load_fixture'), (adapter.mechanical, 'inventory'),
+            (adapter.codec, 'read_bytes'), (adapter.prefix.point, '_outer')]
+        compiled = {}; functions = []
+        for module, name in dependencies:
+            path = Path(module.__file__).absolute(); relative = path.relative_to(ROOT).as_posix()
+            require(relative in source_bytes, 'expectation callable source path differs')
+            raw = source_bytes[relative]
+            require(pin(raw) == expected[relative], 'expectation callable source differs')
+            if relative not in compiled:
+                unit = compile(raw, str(path), 'exec', dont_inherit=True, optimize=sys.flags.optimize)
+                compiled[relative] = {c.co_name:c for c in unit.co_consts if type(c) is CodeType}
+            function = getattr(module, name)
+            require(type(function) is FunctionType and function.__globals__ is vars(module)
+                and function.__code__ == compiled[relative][name] and function.__closure__ is None,
+                'original fixed expectation callable required')
+            if module is adapter and name == 'bookend':
+                require(function.__defaults__ is None and function.__kwdefaults__ == {'inventory':True}, 'full bookend default required')
+            elif module is adapter:
+                require(function.__defaults__ is function.__kwdefaults__ is None, 'fixed adapter defaults required')
+            functions.append((module, name, function, function.__code__, function.__defaults__, canonical(function.__kwdefaults__)))
+        binding = adapter, tuple(functions)
+        require(_expectation_binding_entry(binding) is adapter and adapter.P1 == P1 and adapter.SCOPE == SCOPE,
+            'fixed expectation input scope required')
+    except BaseException as error:
+        primary = error
+    errors = []
+    try:
+        if adapter is None:
+            require(source_pins() == expected, 'expectation source final differs')
+        else:
+            adapter.sources(expected)
+    except BaseException as error:
+        errors.append(('source_final',error))
+    if errors: raise SavedExpectationUnresolved(primary,errors) from primary
+    if primary is not None: raise primary
     return binding
 
 

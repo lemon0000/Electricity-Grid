@@ -1,0 +1,47 @@
+EXPECTATION_READ_PROOF {"F_launch_admitted":false,"actual_saved_F_execution":false,"expectation_image_sha":"bbb2b43368a416c4a087f856dcfaba883c0811d4486d67b8b43f960c4194d2e1","full_P1_content_verified":false,"full_content_reads":683,"metadata_passes":2,"selected_content_reads":53}
+SOURCE_RAW_REUSE {"actual_saved_F_execution":false,"duplicate_code_reads":0,"each_call_selected_source_reads":134,"independent_calls":2,"loaded_sources":36,"raw_cap_bytes":2097152,"selected_sources":49,"source_raw_bytes":1156732}
+.....F......
+================================== FAILURES ===================================
+_ test_saved_source_bytes_compile_keeps_primary_and_original_final_guard[False] _
+
+saved_expectation_base = namespace(source={'configs/staged_deliverability_network_v1.DRAFT.yaml': {'bytes': 915, 'sha256': 'c6bb0cc30a330fed07a..."missing_input"}}', creator=(36196, 45760), commit='48ada15d31e7f865873d0a9fbb5b65091196c304a145d7c89d2f400fa64559b5'))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000019064CBFD40>
+final_fails = False
+
+    @pytest.mark.parametrize('final_fails',[False,True])
+    def test_saved_source_bytes_compile_keeps_primary_and_original_final_guard(saved_expectation_base,monkeypatch,final_fails):
+        original=Path.open; target=cli.ROOT/cli.NEW_SOURCES[0]; calls=[]
+        primary=OSError('code comparison compile'); secondary=OSError('resolved source final')
+        def opened(path,*args,**kwargs):
+            if Path(path)==target:
+                calls.append(1)
+                if len(calls)==2 and final_fails: raise secondary
+            return original(path,*args,**kwargs)
+        def compiler(*args,**kwargs): raise primary
+        monkeypatch.setattr(Path,'open',opened); monkeypatch.setattr(cli,'compile',compiler,raising=False)
+        with pytest.raises(cli.SavedExpectationUnresolved if final_fails else OSError) as error:
+            cli._expectation_adapter(saved_expectation_base.source)
+        if final_fails:
+            assert error.value.primary is primary and error.value.bookend_errors==( ('source_final',secondary), )
+        else: assert error.value is primary
+>       assert calls==[1,1]
+E       assert [1, 1, 1] == [1, 1]
+E         
+E         Left contains one more item: 1
+E         Use -v to get more diff
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:2854: AssertionError
+============================ slowest 10 durations =============================
+8.40s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_G0_G2_G3_and_H3_use_full_exact_local_inputs
+2.54s setup    tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_are_read_once_for_compile_and_freshly_per_call
+0.57s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_are_read_once_for_compile_and_freshly_per_call
+0.25s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_compile_keeps_primary_and_original_final_guard[False]
+0.21s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_late_same_metadata_content_needs_full_final_guard
+0.17s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_compile_keeps_primary_and_original_final_guard[True]
+0.11s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_wrong_pin_stops_before_compile
+0.09s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_initial_read_keeps_primary_and_independent_final[False]
+0.07s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_projection_has_equal_image_and_distinct_semantics
+0.01s setup    tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_G0_G2_G3_and_H3_use_full_exact_local_inputs
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_compile_keeps_primary_and_original_final_guard[False]
+1 failed, 11 passed in 15.70s

@@ -1,0 +1,30 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "sources": {
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py": {
+      "changed_definitions": [
+        "_expectation_adapter"
+      ],
+      "new_definitions": [],
+      "previous_definitions": 181
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py": {
+      "changed_definitions": [],
+      "new_definitions": [],
+      "previous_definitions": 16
+    },
+    "tests/test_staged_rts24_saved_fresh_adoption_v1.py": {
+      "changed_definitions": [],
+      "new_definitions": [
+        "test_saved_source_bytes_are_read_once_for_compile_and_freshly_per_call",
+        "test_saved_source_bytes_compile_keeps_primary_and_original_final_guard",
+        "test_saved_source_bytes_initial_read_keeps_primary_and_independent_final",
+        "test_saved_source_bytes_late_same_metadata_content_needs_full_final_guard",
+        "test_saved_source_bytes_raw_budget_rejects_before_retaining_files",
+        "test_saved_source_bytes_wrong_pin_stops_before_compile"
+      ],
+      "previous_definitions": 191
+    }
+  },
+  "unchanged_dependency_paths": 47
+}

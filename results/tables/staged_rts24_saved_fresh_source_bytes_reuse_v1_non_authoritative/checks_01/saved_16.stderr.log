@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_source_bytes_reuse_v1_non_authoritative\checks_01\saved_checks.py", line 208, in <module>
+    sys.stdout.buffer.write((json.dumps(verify(require_current_navigation=True),sort_keys=True,indent=2)+'\n').encode())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_source_bytes_reuse_v1_non_authoritative\checks_01\saved_checks.py", line 97, in verify
+    match=pin((ROOT/name).read_bytes())==expected
+          ^^^
+UnboundLocalError: cannot access local variable 'pin' where it is not associated with a value

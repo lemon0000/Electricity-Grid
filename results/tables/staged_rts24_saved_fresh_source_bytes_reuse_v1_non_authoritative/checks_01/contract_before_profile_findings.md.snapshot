@@ -1,0 +1,27 @@
+# C：expectation 操作内源码字节复用合同
+
+2026-10-25，`DRAFT_NONAUTHORITATIVE`。接续[投影交接](continuation_handoff_20261025_saved_fresh_expectation.md)，起始HEAD `5c3e885cb3b6dd50479ad685593590d5bd0ade86`。root唯一writer，复用独立只读PRE_SEAL；仅改原ENTRY的`_expectation_adapter`及必要测试，scientific src、原F合同、SF49集合、guard/outer及P1不变。实际saved actor、native owner、solver、B/C/E replay、production G0/H3、issuer/driver及整包科学/资源/正式门禁均不开放。
+
+## 问题、复用边与失效窗口
+
+上一epoch的单次projection读取selected-source233次：initial snapshot 49、十个直接callable逐次重读10、adapter解析/code检查后的原adapter.sources 87、projection末次原adapter.sources 87。另有一次source catalog读取。87是该次已加载模块集合下的49 selected加38 loaded-source读取，不是通用常数；adapter在调用前可能已加载。
+
+本轮只消除十个code比较所需的重复磁盘读取。initial source snapshot仍由原source_names读取并核外部catalog，先核exact49路径集合；原read逐份读取49个source、绑定父路径及file/handle首尾identity并比较全部expected pins。将此次已核原字节保留为单次函数局部字典，code compile从该字典取真实module.__file__对应的relative path及原filename，保留原pin、直接function/code/defaults/globals字典身份检查。返回binding只含adapter及原function/code/defaults引用，不带source字典；不跨调用或进程复用，不增加cache对象或调用者可传入的raw参数。
+
+adapter解析和code检查之后，原adapter.sources(expected)仍完整执行；projection成功或失败后的末次source bookend仍独立完整执行。第一次49与后两次guard的观察窗口不同，本轮保留它们。磁盘在初次read后变化时，不能仅凭缓存字节或metadata相同认定当前source有效；原后置内容guard必须拒绝。pin错误在adapter解析/compile之前拒绝；missing source、read异常、code/default/loaded path漂移拒绝。
+
+source操作作用域从initial snapshot开始：即使snapshot/read、adapter解析、compile或code/default检查失败，也独立尝试final source guard。尚未取得adapter时以原source_pins()重新读取49并比较expected；取得adapter后以原adapter.sources(expected)核全部selected/loaded。primary及final错误由现有不可序列化SavedExpectationUnresolved强持，不互相覆盖；只有primary时原对象重抛，只有final错误也阻止返回binding。type/frozen-adapter-pin前置数据拒绝不进入该操作作用域。
+
+新增内存成本：只将逐份核pin通过的raw放入局部字典，其总量固定上限2MiB；原单文件8MiB cap仍在，当前读取缓冲不计入该字典帽。expected中49个bytes之和必须先过总帽；初始epoch49份精确合计1,148,754B，变更后每个冻结epoch另记录精确总bytes。raw字典会与compiled code临时共存，读取缓冲、Python对象/编译器额外峰值不是2MiB逻辑字节帽。成功返回不持raw；失败异常traceback可在同进程强持有界字典、未通过pin的当前读取缓冲及final guard失败缓冲，须如实计入失败留存，不能称作已释放或声称2MiB总RAM。诊断观察Python allocator峰值而不推断RSS或整链资源准入。
+
+这不证明传递global内容闭包。full_P1_content_verified=false及prototype real_verified=false保持；不改变expected/observed分域、G0–G3、parent/fresh独立hold、replay末次库存和host末次full。
+
+## 验收与预算
+
+独立普通开发预算200s：所有pytest attempt累计≤160s，baseline/collection/静态/保存核验及一次data-only费用诊断累计≤40s；每次外部帽≤40s，先固定nodeids和分组，失败/超时保留原raw、exit和源码snapshot。当前helper及实际执行script也保存执行前后pin与snapshot，不沿用上一epoch缺helper execution-time pin的强度。
+
+至少验证：同一次initial snapshot只读49份原字节；十个direct code比较不追加source read；两次原adapter.sources guard均保留；两次独立调用重新读取；成功返回binding/全局不持源码raw；初次source pin错误先拒绝；初次read后同metadata错误内容仍由后置full guard拒绝；snapshot/read或compile primary及source final secondary保留；raw总帽先拒绝；当前35 expectation节点和18绑定回归重新按本epoch核验。除本轮明确修改的函数和新增测试外，旧顶层函数/类AST保持；其余47依赖和所有前序证据逐字保存。旧53/161节点不自动计为新epoch通过。
+
+一次data-only诊断先固定：同一独立捕获器中先原full capture、后当前projection各一次，最多一次attempt，外部12s计入40s（加入tracemalloc后替代未执行的8s提案）。原始P1仍683/53内容读取，caller image须在同一当前SF49下逐字相同；预计projection selected-source233→223，仅在相同loaded集合时核对该计数。记录P1/source/catalog/anchor/其他读取、wall/CPU、metadata调用及Python allocator的操作前/后/峰值，明确非RSS和未覆盖native分配；import/setup仅在外部帽内计时。禁止scientific compile_problem/import_snapshot、科学replay、solver、journal写入和任何actual F。固定顺序、缓存预热与探针开销使该局部wall不可解释为稳定速度比、whole-F节省、OS物理I/O或RSS。
+
+结果目录：`results/tables/staged_rts24_saved_fresh_source_bytes_reuse_v1_non_authoritative/checks_01`。保存所有失败和旧epoch，不放宽12500/6500/180s，不声称完整失败成本、生产依赖认证或资源准入。先完成此具体复用边和负例，再继续生产transitive binding与trusted-role/G0门禁及driver整链审查。

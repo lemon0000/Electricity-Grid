@@ -2752,3 +2752,118 @@ def test_saved_expectation_probe_hold_always_checks_final_context_before_capabil
         cli._probe_saved_expectation_input(b.expectation,raw,sha,stage='G0')
     assert (isinstance(error.value.primary,ValueError) if hold_fails else error.value.primary is None)
     assert error.value.bookend_errors==( ('context_final',secondary), ) and constructed==[] and len(calls)==2
+
+
+def test_saved_source_bytes_are_read_once_for_compile_and_freshly_per_call(saved_expectation_base,monkeypatch):
+    import sys
+    from collections import Counter
+    b=saved_expectation_base; original=Path.open; reads=[]
+    selected={cli.ROOT/name:name for name in b.source}
+    def opened(path,*args,**kwargs):
+        if Path(path) in selected: reads.append(selected[Path(path)])
+        return original(path,*args,**kwargs)
+    monkeypatch.setattr(Path,'open',opened)
+    loaded={name for name in b.source if name.startswith('src/') and name.endswith('.py')
+        and sys.modules.get(name[:-3].replace('/','.').removesuffix('.__init__')) is not None}
+    expected=Counter({name:2+int(name in loaded) for name in b.source})
+    first=cli._expectation_adapter(b.source)
+    assert Counter(reads)==expected and first[0] is f and len(first[1])==10
+    reads.clear(); second=cli._expectation_adapter(b.source)
+    assert Counter(reads)==expected and second is not first
+    assert 'source_bytes' not in vars(cli)
+    for row in (*first[1],*second[1]):
+        assert len(row)==6 and callable(row[2]) and row[3] is row[2].__code__ and type(row[5]) is bytes
+    print('SOURCE_RAW_REUSE '+cli.canonical(dict(selected_sources=49,loaded_sources=len(loaded),
+        each_call_selected_source_reads=sum(expected.values()),duplicate_code_reads=0,
+        source_raw_bytes=sum(p['bytes'] for p in b.source.values()),raw_cap_bytes=cli.EXPECTATION_SOURCE_RAW_CAP,
+        independent_calls=2,actual_saved_F_execution=False)).decode())
+
+
+def test_saved_source_bytes_wrong_pin_stops_before_compile(saved_expectation_base,monkeypatch):
+    expected=deepcopy(saved_expectation_base.source); expected[cli.NEW_SOURCES[1]]['sha256']='0'*64
+    compiled=[]
+    def compile_forbidden(*args,**kwargs): compiled.append(True); pytest.fail('unbound source was compiled')
+    monkeypatch.setattr(cli,'compile',compile_forbidden,raising=False)
+    with pytest.raises(cli.SavedExpectationUnresolved) as error: cli._expectation_adapter(expected)
+    assert isinstance(error.value.primary,ValueError) and 'initial source' in str(error.value.primary)
+    assert error.value.bookend_errors[0][0]=='source_final' and compiled==[]
+
+
+def test_saved_source_bytes_late_same_metadata_content_needs_full_final_guard(saved_expectation_base,monkeypatch):
+    target=cli.ROOT/next(n for n in sorted(saved_expectation_base.source) if n.startswith('configs/'))
+    original=Path.open; calls=[]; before=cli.identity(target.stat())
+    class ChangedRead:
+        def __init__(self,stream): self.stream=stream
+        def __enter__(self): return self
+        def __exit__(self,*args): return self.stream.__exit__(*args)
+        def fileno(self): return self.stream.fileno()
+        def read(self,*args):
+            raw=self.stream.read(*args)
+            return bytes([raw[0]^1])+raw[1:]
+    def opened(path,*args,**kwargs):
+        stream=original(path,*args,**kwargs)
+        if Path(path)==target:
+            calls.append(1)
+            if len(calls)==2: return ChangedRead(stream)
+        return stream
+    monkeypatch.setattr(Path,'open',opened)
+    with pytest.raises(cli.SavedExpectationUnresolved) as error: cli._expectation_adapter(saved_expectation_base.source)
+    assert error.value.primary is None and len(error.value.bookend_errors)==1
+    assert error.value.bookend_errors[0][0]=='source_final'
+    assert 'saved fresh source changed' in str(error.value.bookend_errors[0][1])
+    assert calls==[1,1] and cli.identity(target.stat())==before
+
+
+@pytest.mark.parametrize('final_fails',[False,True])
+def test_saved_source_bytes_initial_read_keeps_primary_and_independent_final(saved_expectation_base,monkeypatch,final_fails):
+    target=cli.ROOT/sorted(saved_expectation_base.source)[0]
+    original=cli.read; primary=OSError('initial source read'); secondary=OSError('independent source final'); calls=[]
+    def read(path,**kwargs):
+        if Path(path)==target:
+            calls.append(1)
+            if len(calls)==1: raise primary
+            if final_fails: raise secondary
+        return original(path,**kwargs)
+    monkeypatch.setattr(cli,'read',read)
+    with pytest.raises(cli.SavedExpectationUnresolved if final_fails else OSError) as error:
+        cli._expectation_adapter(saved_expectation_base.source)
+    if final_fails:
+        assert error.value.primary is primary and error.value.bookend_errors==( ('source_final',secondary), )
+        import pickle
+        with pytest.raises(TypeError): pickle.dumps(error.value)
+    else: assert error.value is primary
+    assert calls==[1,1]
+
+
+@pytest.mark.parametrize('final_fails',[False,True])
+def test_saved_source_bytes_compile_keeps_primary_and_original_final_guard(saved_expectation_base,monkeypatch,final_fails):
+    original=Path.open; target=cli.ROOT/cli.NEW_SOURCES[0]; calls=[]
+    primary=OSError('code comparison compile'); secondary=OSError('resolved source final')
+    def opened(path,*args,**kwargs):
+        if Path(path)==target:
+            calls.append(1)
+            if len(calls)==2 and final_fails: raise secondary
+        return original(path,*args,**kwargs)
+    def compiler(*args,**kwargs): raise primary
+    monkeypatch.setattr(Path,'open',opened); monkeypatch.setattr(cli,'compile',compiler,raising=False)
+    with pytest.raises(cli.SavedExpectationUnresolved if final_fails else OSError) as error:
+        cli._expectation_adapter(saved_expectation_base.source)
+    if final_fails:
+        assert error.value.primary is primary and error.value.bookend_errors==( ('source_final',secondary), )
+    else: assert error.value is primary
+    assert calls==([1,1] if final_fails else [1,1,1])
+
+
+@pytest.mark.parametrize('invalid',['aggregate','boolean','negative'])
+def test_saved_source_bytes_raw_budget_rejects_before_retaining_files(saved_expectation_base,monkeypatch,invalid):
+    expected=deepcopy(saved_expectation_base.source); name=cli.NEW_SOURCES[1]
+    expected[name]['bytes']={'aggregate':cli.EXPECTATION_SOURCE_RAW_CAP+1,'boolean':True,'negative':-1}[invalid]
+    original=cli.read; reads=[]; finals=[]
+    def read(path,**kwargs):
+        if Path(path).relative_to(cli.ROOT).as_posix() in expected: reads.append(Path(path))
+        return original(path,**kwargs)
+    def final_source(): finals.append(True); return expected
+    monkeypatch.setattr(cli,'read',read); monkeypatch.setattr(cli,'source_pins',final_source)
+    with pytest.raises(ValueError,match='raw byte cap' if invalid=='aggregate' else 'source size'):
+        cli._expectation_adapter(expected)
+    assert reads==[] and finals==[True]

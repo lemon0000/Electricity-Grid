@@ -1,0 +1,209 @@
+"""Reopen this ordinary epoch while preserving predecessor helper boundaries."""
+import ast
+from hashlib import sha256
+import json
+from pathlib import Path
+import re
+import os
+import stat
+import sys
+
+ROOT=Path(__file__).resolve().parents[4]
+OUT=Path(__file__).resolve().parent
+PRIOR=ROOT/'results/tables/staged_rts24_saved_fresh_expectation_v1_non_authoritative/checks_01'
+SOURCE_PATHS=('src/staged_rts24_saved_fresh_adoption_v1.py',
+    'experiments/staged_rts24_saved_fresh_adoption_v1.py',
+    'tests/test_staged_rts24_saved_fresh_adoption_v1.py')
+MUTABLE=set(SOURCE_PATHS[1:])
+OUTPUT_PARENT=ROOT/'results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+P1=ROOT/'results/tables/staged_rts24_native_v1_non_authoritative/p1_01'
+ANCHOR=P1.parent/'p1_execution_review_01/postcheck_03.stdout.json'
+ANCHOR_SHA='c6a25cd96c8a4a2cf293d41fe51bc7905db63fbc35253076f97e9239a4f22473'
+
+
+def pin(raw): return dict(bytes=len(raw),sha256=sha256(raw).hexdigest())
+def canonical(value): return json.dumps(value,ensure_ascii=True,sort_keys=True,separators=(',',':'),allow_nan=False).encode('ascii')
+
+
+def read(name): return json.loads((OUT/name).read_bytes())
+
+
+def ordinary(path,directory=False):
+    info=os.lstat(path)
+    assert not stat.S_ISLNK(info.st_mode) and not getattr(info,'st_file_attributes',0)&0x400
+    assert stat.S_ISDIR(info.st_mode) if directory else stat.S_ISREG(info.st_mode) and info.st_nlink==1
+    return info
+
+
+def identity(info): return info.st_dev,info.st_ino,info.st_size,info.st_mtime_ns
+
+
+def directories(path):
+    return tuple((str(p),s.st_dev,s.st_ino) for p in reversed((path,*path.parents))
+        for s in (ordinary(p,True),))
+
+
+def bounded_read(path):
+    parent=directories(path.parent);before=identity(ordinary(path));assert before[2]<=8*1024**2
+    with path.open('rb') as stream:
+        assert identity(os.fstat(stream.fileno()))==before
+        raw=stream.read(before[2]+1)
+        assert identity(os.fstat(stream.fileno()))==before
+    assert len(raw)==before[2] and identity(ordinary(path))==before and directories(path.parent)==parent
+    return raw
+
+
+def metadata(root):
+    files={};folders={};seen=set();count=0
+    def walk(path,depth):
+        nonlocal count
+        assert depth<=12
+        info=ordinary(path,True);folders[path.relative_to(root).as_posix()]=(info.st_dev,info.st_ino)
+        with os.scandir(path) as stream:
+            for item in stream:
+                count+=1;assert count<=16384
+                child=Path(item.path);name=child.relative_to(root).as_posix()
+                assert name.casefold() not in seen;seen.add(name.casefold())
+                if item.is_dir(follow_symlinks=False): walk(child,depth+1)
+                else:
+                    files[name]=identity(ordinary(child));assert len(files)<=683
+    walk(root,0)
+    return dict(files=files,directories=folders)
+
+
+def verify_P1():
+    anchor_dirs=directories(ANCHOR.parent);root_dirs=directories(P1);anchor_id=identity(ordinary(ANCHOR))
+    raw=bounded_read(ANCHOR);assert sha256(raw).hexdigest()==ANCHOR_SHA
+    expected=json.loads(raw)['p1_files']
+    assert type(expected) is dict and len(expected)==683 and sum(v['bytes'] for v in expected.values())==2950863
+    before=metadata(P1);assert set(before['files'])==set(expected)
+    for name,value in expected.items():
+        path=P1/name
+        assert not Path(name).is_absolute() and '..' not in Path(name).parts
+        assert path.relative_to(P1).as_posix()==name
+        assert identity(ordinary(path))==before['files'][name]
+        assert pin(bounded_read(path))==value
+        assert identity(ordinary(path))==before['files'][name]
+    assert metadata(P1)==before and directories(P1)==root_dirs
+    assert bounded_read(ANCHOR)==raw and identity(ordinary(ANCHOR))==anchor_id and directories(ANCHOR.parent)==anchor_dirs
+    return 683
+
+
+def verify(require_current_navigation=False):
+    frozen=read('frozen_epoch.json');selected=frozen['source_pins'];baseline=read('baseline_sources.json')
+    assert set(selected)==set(baseline) and len(selected)==49 and set(SOURCE_PATHS)<=set(selected)
+    mutable=MUTABLE;current=True
+    for name,expected in selected.items():
+        match=pin((ROOT/name).read_bytes())==expected
+        if name not in mutable: assert match and expected==baseline[name],name
+        current &= match
+    raw_bytes=sum(p['bytes'] for p in selected.values())
+    assert raw_bytes==frozen['source_raw_bytes']<=2*1024**2
+    preserved=read('preservation_inventory.json')
+    for name,expected in preserved.items(): assert pin((ROOT/name).read_bytes())==expected,name
+    records={};seconds=dict(pytest=0.,static=0.)
+    for path in OUT.glob('*.exit.json'):
+        record=read(path.name);label=path.name.removesuffix('.exit.json');records[label]=record
+        seconds[record['kind']]+=record['wall_seconds']
+        assert not record['timed_out'] and record['wall_seconds']<=record['timeout_seconds']<=40
+        assert record['source_pins_unchanged'] and record['helper_pins_unchanged']
+        assert record['actual_saved_F_execution'] is record['F_launch_admitted'] is False
+        assert set(record['source_pins'])==set(selected)
+        for name,source_pin in record['source_pins'].items():
+            if name not in mutable: assert source_pin==selected[name]
+        manifest=read(record['snapshot_manifest'])
+        assert set(manifest)=={'sources','helpers'}
+        assert set(manifest['sources'])==set(SOURCE_PATHS[:3])
+        assert set(manifest['helpers'])==set(record['helper_pins']) and record['helper_pins']
+        for kind,items in manifest.items():
+            assert kind in ('sources','helpers')
+            for name,item in items.items():
+                expected=(record['source_pins'] if kind=='sources' else record['helper_pins'])[name]
+                assert pin((ROOT/item['snapshot']).read_bytes())==item['pin']==expected
+        assert sha256(canonical({n:record['source_pins'][n] for n in SOURCE_PATHS[:3]})).hexdigest()==record['source_epoch']
+        stderr=(OUT/(label+'.stderr.log')).read_bytes()
+        assert not stderr or label in ('profile_11','saved_16')
+        if label=='profile_11': assert b'read_calls' in stderr and b'AssertionError' in stderr
+        if label=='saved_16': assert b'UnboundLocalError' in stderr and b"local variable 'pin'" in stderr
+        assert record['exit_code']==(1 if label in ('source_bytes_and_smoke_04','profile_11','saved_16') else 0)
+    assert seconds['pytest']<=160 and seconds['static']<=40 and sum(seconds.values())<=200
+    failed=records['source_bytes_and_smoke_04']
+    assert failed['source_epoch']!=frozen['source_epoch']
+    assert '1 failed, 11 passed' in (OUT/'source_bytes_and_smoke_04.stdout.log').read_text(encoding='utf-8')
+    nodes=[];current_wall=0.
+    for label,group in frozen['groups'].items():
+        record=records[label]
+        assert record['nodes']==group and record['source_pins']==selected and record['source_epoch']==frozen['source_epoch']
+        assert record['timeout_seconds']==read('group_admission_02.json')['caps'][label]
+        assert re.search(r'\b'+str(len(group))+r' passed\b',(OUT/(label+'.stdout.log')).read_text(encoding='utf-8'))
+        nodes.extend(group);current_wall+=record['wall_seconds']
+    assert len(nodes)==len(set(nodes))==63 and sorted(nodes)==frozen['nodes']
+    assert sum('::test_saved_source_bytes_' in n for n in nodes)==10
+    assert sum('::test_saved_expectation_' in n for n in nodes)==35
+    before=read('baseline_01.snapshot.json')['sources'];after=read('source_bytes_and_smoke_09.snapshot.json')['sources']
+    for name,item in before.items():
+        def definitions(raw):
+            return {n.name:ast.dump(n,include_attributes=False) for n in ast.parse(raw).body if isinstance(n,(ast.FunctionDef,ast.ClassDef))}
+        old=definitions((ROOT/item['snapshot']).read_bytes());new=definitions((ROOT/after[name]['snapshot']).read_bytes())
+        changed=sorted(n for n in old if old[n]!=new.get(n))
+        assert changed==(['_expectation_adapter'] if name==SOURCE_PATHS[1] else [])
+    profile=read('projection_profile.json');full,projection=profile['observations']
+    assert profile['source_pins']==selected and records['profile_12']['source_pins']==selected
+    assert profile['same_caller_image_bytes'] is True and profile['forbidden_scientific_effect_calls']==0
+    for key in ('actual_saved_F_execution','F_launch_admitted','resource_admission','formal_result','full_workflow_cost_measured'):
+        assert profile[key] is False
+    assert full['content_reads']['P1']['read_calls']==683 and projection['content_reads']['P1']['read_calls']==53
+    assert full['content_reads']['P1']['binary_bytes']==2950863 and projection['content_reads']['P1']['binary_bytes']==94323
+    loaded=len(profile['loaded_selected_sources'])
+    fixture_paths=set(profile['fixture_source_paths']);assert len(fixture_paths)==4
+    assert projection['content_reads']['selected_source']['read_calls']==49+2*(49+loaded)+4
+    for row,base in ((full,2),(projection,3)):
+        assert row['source_file_reads']=={n:base+2*int(n in profile['loaded_selected_sources'])+int(n in fixture_paths) for n in selected}
+    assert profile['duplicate_code_reads_avoided']==10 and profile['source_raw_bytes']==raw_bytes
+    for row in (full,projection):
+        memory=row['python_traced_bytes']
+        assert 0<=memory['before']<=memory['peak'] and 0<=memory['after']<=memory['peak']
+        assert memory['RSS_measured'] is memory['native_allocations_covered'] is False
+    nav_current=True
+    for name,item in read('navigation_after.json').items():
+        raw=(ROOT/name).read_bytes();header,separator,body=raw.partition(b'\n\n')
+        assert separator and header.decode()==item['header']
+        assert pin(body[-item['body']['bytes']:])==item['body']
+        before=read('navigation_before.json')[name]
+        assert pin(raw[-before['body']['bytes']:])==before['body']
+        nav_current &= pin(raw)==item['full']
+    if require_current_navigation: assert nav_current
+    docs=read('document_checks.json');assert docs['links_resolve'] is True
+    for pins in (docs['document_pins'],read('support_pins.json')):
+        for name,expected in pins.items(): assert pin((ROOT/name).read_bytes())==expected,name
+    # Recheck immutable predecessor receipts and P1 directly; never import a current runner.
+    old=json.loads((PRIOR/'saved_14.stdout.log').read_bytes())
+    old_exit=json.loads((PRIOR/'saved_14.exit.json').read_bytes())
+    old_frozen=json.loads((PRIOR/'frozen_epoch.json').read_bytes())
+    assert old_exit['exit_code']==0 and not old_exit['timed_out']
+    assert old_exit['source_pins']==old_frozen['source_pins'] and old_exit['source_pins_unchanged']
+    assert old_exit['source_epoch']==old_frozen['source_epoch']
+    assert old['profile_execution_time_helper_pin_bound'] is False
+    old_snapshot=json.loads((PRIOR/old_exit['snapshot_manifest']).read_bytes())['sources']
+    for name,item in old_snapshot.items():
+        assert pin((ROOT/item['snapshot']).read_bytes())==item['pin']==old_exit['source_pins'][name]
+    assert old['P1_unchanged_files']==683 and old['frozen_current_epoch_nodes']==53
+    assert old['actual_saved_F_execution'] is old['F_launch_admitted'] is False
+    assert verify_P1()==683
+    assert not OUTPUT_PARENT.exists()
+    return dict(authority='DRAFT_NONAUTHORITATIVE',frozen_current_epoch_nodes=63,current_epoch_nodes=63 if current else 0,
+        current_canonical_matches_frozen_epoch=bool(current),new_source_reuse_nodes=10,expectation_regression_nodes=35,
+        binding_regression_nodes=18,prior_failed_epoch_nodes_inherited=False,prior_53_inherited_as_current=False,
+        current_pytest_seconds=current_wall,all_pytest_seconds=seconds['pytest'],completed_static_seconds=seconds['static'],
+        current_process_time_excluded_until_external_exit_record=True,total_cap_seconds=200,
+        preservation_paths=len(preserved),P1_unchanged_files=683,source_raw_bytes=raw_bytes,source_raw_cap_bytes=2*1024**2,
+        selected_source_projection_reads=projection['content_reads']['selected_source']['read_calls'],
+        loaded_selected_sources=loaded,code_disk_reads_avoided=10,profile_execution_helper_pins_bound=True,frozen_oracle_uses_current_ENTRY=False,
+        predecessor_semantic_reexecution=False,predecessor_frozen_receipt_verified=True,
+        navigation_current_whole_pins_match=bool(nav_current),full_P1_content_verified=False,
+        transitive_global_binding_closed=False,production_input_gateway_open=False,actual_saved_F_execution=False,
+        F_launch_admitted=False,scientific_evidence_adopted=False,resource_admission=False,formal_result=False)
+
+
+if __name__=='__main__':
+    sys.stdout.buffer.write((json.dumps(verify(require_current_navigation=True),sort_keys=True,indent=2)+'\n').encode())

@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-25 操作内source字节复用：见[最新交接](continuation_handoff_20261025_saved_fresh_source_bytes_reuse.md)。当前63节点终态通过，十次code重读已消除；profile loaded=36时source233→223，P1仍683/53。2MiB仅为已核raw逻辑帽；生产依赖闭包、trusted role/真实G0、driver、source6500及180s仍OPEN，实际F/科学采用/资源/正式门禁关闭。
+
 2026-10-25 caller expectation投影开发：见[最新交接](continuation_handoff_20261025_saved_fresh_expectation.md)。当前源码35新增+18绑定回归共53节点终态通过；53份JSON与完整metadata生成相同caller image，full_P1_content_verified=false，私有G0/H3 prototype恒real_verified=false。单次P1内容683→53，但selected-source174→233；成功12159仅条件算术。传递依赖认证、trusted role/真实G0、driver、source6500和180s仍OPEN；实际F/科学采用/资源/正式门禁保持关闭。
 
 2026-10-25 saved supervisor事前设计：见[最新交接](continuation_handoff_20261025_saved_fresh_supervisor_budget.md)。源码不变的条件账本显示P1读12736/13419超过12500、source/exe/anchor下界6513超过6500、完整名义stage至少185s超过180s；须先做依赖复用/失效证明和逐边deadline。wire component oracle已核新slot提案，guard/最大四record和实际actor未证明；真实F/科学采用/资源/正式门禁保持关闭。
