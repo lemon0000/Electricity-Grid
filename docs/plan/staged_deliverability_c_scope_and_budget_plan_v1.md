@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-25 冻结saved绑定检查补齐：见[交接](continuation_handoff_20261025_saved_fresh_binding_completion.md)与[合同](staged_deliverability_c_saved_fresh_binding_completion_contract_v1.md)。三源码未改，新49节点分22/16/11组终态通过，pytest39.266s/80s，静态另20s；与旧28同SF49/snapshot精确union77。77仅属冻结cc384f65/16a0d2c0源码的单位接口，不是实际saved进程或owner；未来改源码时保存checker将current匹配标false。下一步独立constructor/watcher及无issuer的closed launch permit；supervise/public入口、真实F、完整预算/资源和科学/正式门禁仍false/OPEN。
+
 2026-10-25 F saved子角色绑定接口：见[新交接](continuation_handoff_20261025_saved_fresh_binding.md)与[合同](staged_deliverability_c_saved_fresh_binding_development_contract_v1.md)。独立saved grammar/bootstrap已绑定context/role/tree/Open-only writer、source/EXE identity和完整受控环境；构造输入从held store/原reservation派生，末次书挡后一次消费、保留原start。当前59节点终态通过（28新单位/12关键回归/4接口/15完整ordinary角色矩阵），pytest全attempt238.315s＜240s。完整77新单位未在最终epoch全跑，早组/30s超时保留且不计当前。实际saved入口/constructor/watcher/supervise仍关闭，actual OUTPUT及父目录未建，单位正例含明确logical注入；完整调用/最大编码/180s/硬中断/资源及整包science/formal保持OPEN/false。
 
 2026-10-25 F普通actor文件入口开发：见[新交接](continuation_handoff_20261025_saved_fresh_entry.md)及[合同](staged_deliverability_c_saved_fresh_entry_development_contract_v1.md)。controller/parent/fresh已接固定直接文件入口、main/argv/path/source自检与原Job/quiet；当前同源码72节点终态通过，全部pytest attempt236.781s＜240s。早epoch54/26仅作冻结事实，generic stage/guard87在未变域复用，均不计72。role_graph_07失败及role_graph_14的45s整组超时保留，后者不能记通过；isolated late payload已通过。1,724旧路径/三导航旧body/P1全683保持。真实root-exit残留helper窗口、terminal image冲突直接分支及完整role组终态仍OPEN；实际saved owner、完整调用/最大合法编码/整链180s/硬中断/整体资源未闭合，局部F与整包science/resource/formal全false。

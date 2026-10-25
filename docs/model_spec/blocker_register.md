@@ -1,5 +1,7 @@
 # 当前问题与阶段门禁登记
 
+2026-10-25 冻结saved绑定77单位节点已补齐：见[交接](../plan/continuation_handoff_20261025_saved_fresh_binding_completion.md)。新49与原28的SF49及三源snapshot一致，3组39.266s终态通过；仅关闭该冻结epoch的单位覆盖缺口。实际OUTPUT/父目录、saved进程/owner/watcher/issuer/supervise仍未建立，logical夹具不是物理证据。后续源码修改不继承77“当前通过”；完整计数/最大编码/硬中断/整链资源、真实F与科学/正式门禁继续OPEN/false。
+
 2026-10-25 F saved绑定接口：见[新交接](../plan/continuation_handoff_20261025_saved_fresh_binding.md)。context/role/tree/Open-only writer、source/EXE identity、完整环境键集合与消费前deadline书挡已编码，PRE_SEAL静态必修finding闭合；构造数据无owner/run authority。当前59节点终态通过，15 ordinary角色矩阵完整终态；原失败/超时保留。完整77新单位未最终全跑，剩余49及真实root-exit helper窗口继续OPEN。actual输出父目录尚不存在，单位夹具logical identity不是真实context物理证据；实际saved constructor/watcher/trusted supervise/public入口、完整调用/最大context四record/180s/arming和最终I/O硬中断、整体资源仍未闭合。局部verified、F_launch_admitted、整包science/resource/formal/public P2全false。
 
 2026-10-25 F普通文件入口开发：见[新交接](../plan/continuation_handoff_20261025_saved_fresh_entry.md)。ordinary controller/parent/fresh的固定ENTRY/main/argv/orig_argv/sys.path/source自检已落地；current epoch72节点终态通过，旧失败与45s角色整组超时保持非通过。只读PRE_SEAL未发现必须修复的代码缺陷；真实root-exit后conhost残留的完整watch成功窗口、terminal image冲突后sticky unresolved直接分支、当前完整role组终态继续OPEN。kernel image/SystemDirectory查询次数有界不等于可强制wall-time。actual saved入口/owner、完整调用/最大合法context与四record、180s/arming/host最终分配及同步发布硬中断、整体wall/RAM/storage仍待闭合。1,724旧路径/原P1全683保持；F_launch_admitted、局部saved verified、整包science/resource/formal/public P2全false。
