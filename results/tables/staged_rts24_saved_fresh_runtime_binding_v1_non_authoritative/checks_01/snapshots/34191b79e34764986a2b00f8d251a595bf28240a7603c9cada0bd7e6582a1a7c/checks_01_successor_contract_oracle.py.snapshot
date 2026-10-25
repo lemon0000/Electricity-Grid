@@ -1,0 +1,203 @@
+"""Data-only context and capability DAG oracle; no production validator/cap."""
+from collections import deque
+import ast
+from pathlib import Path
+from common import ROOT,OUT,EXE,SOURCE_PATHS,canonical,pin,read,selected,save
+
+source=selected()
+fields=('schema authority scope repo_root input_root output_root output_mode output_parent_directories source_pins '
+    'executable environment anchor_sha input_files invocation_started deadline stage_seconds limits inherited_sources_pin '
+    'caller_expectation_core caller_expectation_sha expectation_sha full_P1_content_verified request_sha broker_identity '
+    'runtime_binding_contract_sha deadline_profile_sha native_authorized resource_admission formal_result '
+    'scientific_evidence_adopted public_P2_execution_enabled').split()
+spec=dict(authority='DRAFT_NONAUTHORITATIVE',schema_literal='staged_saved_F_successor_context_development_v1',
+    output_mode='saved_P1_successor_draft',scope='saved_P1_actual_21_and_journal_5h',fields=sorted(fields),
+    broker_identity_fields=['creation_filetime','pid'],full_P1_content_verified=False,
+    first_and_only_context_publication_uses_this_schema=True,ACK_is_post_context=True,
+    G0_state_is_process_local_capability=True,production_validator_implemented=False,
+    arbitrary_native_process_import_policy_decided=False,source_group_size=len(source),
+    original_limits_unchanged=True,scientific_evidence_adopted=False,resource_admission=False,formal_result=False)
+role={'host_expectation':'host','request':'host','broker_owner_armed':'host','broker_ready':'broker','START':'host',
+    'context':'broker','offer':'broker','ACK':'host','broker_ACK_verified':'broker','controller_permit':'broker',
+    'controller_owner_constructed':'broker','controller_bootstrap':'controller',
+    'G0':'controller','controller_store':'controller','parent_permit':'controller','parent_bootstrap':'parent',
+    'parent_hold':'parent','parent_store':'parent','parent_issuer':'parent','fresh_permit':'parent',
+    'fresh_bootstrap':'fresh','fresh_hold':'fresh','fresh_result':'fresh','fresh_quiet':'parent',
+    'G1_compare':'parent','parent_quiet':'controller','G2':'controller','final_observation':'controller',
+    'G3':'controller','controller_return':'controller','controller_quiet':'broker','broker_return':'broker',
+    'broker_quiet':'host','H3':'host','host_final':'host'}
+order=list(role);edges=list(zip(order,order[1:]))
+cap_edges=[('controller_bootstrap','G0'),('G0','controller_store'),('G0','parent_permit'),
+    ('parent_bootstrap','parent_hold'),('parent_hold','parent_store'),('parent_hold','parent_issuer'),
+    ('parent_issuer','fresh_permit'),('fresh_bootstrap','fresh_hold'),('G0','G2'),('G0','G3'),('H3','host_final'),
+    ('broker_owner_armed','START'),('broker_owner_armed','broker_quiet'),
+    ('broker_ACK_verified','controller_permit'),('controller_permit','controller_owner_constructed'),
+    ('controller_owner_constructed','controller_quiet')]
+
+
+def canonical_artifact(name,value):
+    path=OUT/name;assert not path.exists();raw=canonical(value);path.write_bytes(raw)
+    return dict(path=path.relative_to(ROOT).as_posix(),pin=pin(raw))
+
+
+runtime_contract=canonical_artifact('runtime_binding_contract_v1.json',dict(
+    schema='staged_saved_F_runtime_binding_contract_development_v1',authority='DRAFT_NONAUTHORITATIVE',
+    root_catalog=dict(path=(OUT/'root_contracts_v2.json').relative_to(ROOT).as_posix(),pin=pin((OUT/'root_contracts_v2.json').read_bytes())),
+    source_names=sorted(source),required_bindings=['module/path','function/code/default/closure','class/method/constructor',
+        'constant/container','builtins','external/native','single_process_owner','allowed_import_mutation'],
+    external_import_probe_policy='UNDECIDED_BLOCKING',actual_runtime_verification_implemented=False,
+    admissible_for_production_execution=False))
+deadline_path=ROOT/'results/tables/staged_rts24_saved_fresh_supervisor_budget_v1_non_authoritative/checks_01/deadline_ledger_v2.json'
+deadline_data=__import__('json').loads(deadline_path.read_bytes())
+deadline_contract=canonical_artifact('deadline_contract_v1.json',dict(
+    schema='staged_saved_F_earlier_deadline_contract_development_v1',authority='DRAFT_NONAUTHORITATIVE',
+    basis=dict(path=deadline_path.relative_to(ROOT).as_posix(),pin=pin(deadline_path.read_bytes())),
+    absolute_offsets=deadline_data['proposed_absolute_offsets'],context_seconds=180,
+    permit_deadline_rule='min(context_start+role_offset, original_episode_deadline, remaining_local_cap)',
+    fresh_episode_includes_inner_records=True,no_extra_failure_seconds=True,actual_enforcement_implemented=False))
+request_fields=('schema authority scope nonce host_identity repo_root input_root output_root source_sha executable_pin '
+    'environment_sha input_pins_sha caller_expectation_sha expectation_sha anchor_sha invocation_started deadline '
+    'runtime_binding_contract_sha deadline_profile_sha limits').split()
+request_rules={name:dict(type='string',format='SHA256 lowercase hex64') for name in
+    ('source_sha','environment_sha','input_pins_sha','caller_expectation_sha','expectation_sha','runtime_binding_contract_sha','deadline_profile_sha')}
+request_rules.update(schema=dict(type='string',exact='staged_saved_F_successor_request_development_v1'),
+    authority=dict(type='string',exact='DRAFT_NONAUTHORITATIVE'),scope=dict(type='string',exact=spec['scope']),
+    nonce=dict(type='string',format='hex64, unique host invocation nonce'),
+    host_identity=dict(type='object',exact_keys=['pid','creation_filetime'],pid='exact int 1..2^32-1',creation_filetime='exact int 1..2^64-1'),
+    repo_root=dict(type='string',exact=str(ROOT)),
+    input_root=dict(type='string',exact=str(ROOT/'results/tables/staged_rts24_native_v1_non_authoritative/p1_01')),
+    output_root=dict(type='string',exact=str(ROOT/'results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative/draft_01')),
+    executable_pin=dict(type='object',exact_keys=['bytes','sha256'],bytes='exact int 1..8388608',sha256='hex64'),
+    anchor_sha=dict(type='string',exact='c6a25cd96c8a4a2cf293d41bc7905db63fbc35253076f97e9239a4f22473'),
+    invocation_started=dict(type='float',finite=True,positive=True),deadline=dict(type='float',equals='invocation_started+180'),
+    limits=dict(type='object',exact_frozen_ENTRY_constant='CAPS'))
+# Keep the long fixed anchor literal identical to the context rule below.
+request_rules['anchor_sha']['exact']='c6a25cd96c8a4a2cf293d41fe51bc7905db63fbc35253076f97e9239a4f22473'
+assert set(request_rules)==set(request_fields)
+request_contract=canonical_artifact('request_contract_v1.json',dict(
+    schema_literal='staged_saved_F_successor_request_development_v1',authority='DRAFT_NONAUTHORITATIVE',
+    fields=sorted(request_fields),field_rules=request_rules,canonical_raw_cap=32768,encoding='ASCII canonical JSON',
+    nonce='64 lowercase hex; host once per invocation',host_identity='exact pid,creation_filetime; positive kernel-bound integers',
+    source='host independent expectation before broker arming; never from broker offer',
+    digest_fields='source/environment/input maps and caller expectation/expectation envelope canonical SHA256',
+    executable_pin='exact independently held EXE pin',invocation_started='finite positive exact float before host expectation',
+    deadline='invocation_started+180',limits='exact original F CAPS',
+    forbidden_future_fields=['broker_identity','context_sha','ack_sha','permit','G0_verified']))
+
+
+def rule(kind,constraint,provenance):return dict(type=kind,constraint=constraint,provenance=provenance)
+literal_values=dict(schema=spec['schema_literal'],authority='DRAFT_NONAUTHORITATIVE',scope=spec['scope'],
+    repo_root=str(ROOT),input_root=str(ROOT/'results/tables/staged_rts24_native_v1_non_authoritative/p1_01'),
+    output_root=str(ROOT/'results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative/draft_01'),
+    output_mode=spec['output_mode'],full_P1_content_verified=False,native_authorized=False,resource_admission=False,
+    formal_result=False,scientific_evidence_adopted=False,public_P2_execution_enabled=False)
+rules={name:rule(type(value).__name__,dict(exact=value),'fixed contract literal; cannot confer authority') for name,value in literal_values.items()}
+rules.update(
+    output_parent_directories=rule('array',dict(min_items=1,max_items=16,item='[absolute_path,device,inode]',
+        device='exact int 0..2^64-1',inode='exact int 1..2^128-1',exact_order='all ancestors of output.parent'),
+        'broker real directory handles/metadata before publication; controller bootstrap rechecks'),
+    source_pins=rule('object',dict(exact_keys=sorted(source),value='Pin',sum_bytes_cap=2097152),
+        'pre-fixed 49-source group; hash current bytes, compare host request source_sha and runtime binding contract'),
+    executable=rule('object',dict(exact_keys=['path','pin','identity','python'],path=str(EXE),pin='Pin',
+        identity='[device,inode,size,mtime_ns] exact nonnegative ints; size=pin.bytes',python=read('runtime_pin_v2.json')['python']),
+        'host independently pinned EXE; broker/controller compare current executable bytes and kernel identity'),
+    environment=rule('object',dict(keys='case-unique allowed environment whitelist below',value='string <=32768 code points',
+        canonical_bytes_cap=131072,exact_values='host-held environment; six fixed worker values below'),
+        'host actual allowed environment before request, broker and each role verify actual environment'),
+    anchor_sha=rule('string',dict(exact='c6a25cd96c8a4a2cf293d41fe51bc7905db63fbc35253076f97e9239a4f22473'),
+        'fixed external p1_execution_review_01/postcheck_03.stdout.json SHA, never generated from current P1'),
+    input_files=rule('object',dict(exact_entries=683,value='Pin',total_bytes=2950863,paths='canonical relative, case unique, no dotdot/absolute'),
+        'exact p1_files from SHA-fixed external anchor; host and broker independently compare'),
+    invocation_started=rule('float',dict(exact_type='float, finite, >0',order='host before expectation/arming; same value in request'),
+        'host monotonic start; no reset in broker/roles'),
+    deadline=rule('float',dict(exact_type='float, finite',equals='invocation_started+180'),
+        'request start plus original180, additionally constrained by fixed deadline profile'),
+    stage_seconds=rule('object',dict(exact_frozen_ENTRY_constant='STAGE_SECONDS'),
+        'original F stage caps, no extension'),
+    limits=rule('object',dict(exact_frozen_ENTRY_constant='CAPS'),'original F hard limits, no extension'),
+    inherited_sources_pin=rule('object',dict(type='Pin',sha256='697573785464aa37bb4d71df1956d9de1b4888dd2d26ad4a61748eff6ced3c2c'),
+        'original saved_journal_check/checks_01/component_source_pins.json exact bytes'),
+    caller_expectation_core=rule('object',dict(exact_keys=('files fixture_sha outer trusted expectations bindings source '
+        'anchor_path anchor_pin anchor_identity anchor_directories root_directories historical_metrics expected_evidence_refs inventory').split(),
+        all_subtrees='byte-for-byte canonical equality to independently held host expectation image E',
+        inventory_exact_keys=['pins','files','directories'],files='same input_files',source='same source_pins'),
+        'host independently captured E before broker context; broker independently rebuilds same E; full remains false'),
+    caller_expectation_sha=rule('string',dict(format='SHA256',equals='sha256(canonical(E))'),'host request and independent E, not self-attestation'),
+    expectation_sha=rule('string',dict(format='SHA256',equals='sha256(host SavedCallerExpectation.raw canonical envelope)'),
+        'host independently retained envelope; broker independently rebuilds and compares'),
+    request_sha=rule('string',dict(format='SHA256',artifact=request_contract,equals='sha256(canonical(request))'),
+        'exact request object received from host-owned START/request transport; no future context/ACK fields'),
+    broker_identity=rule('object',dict(exact_keys=['pid','creation_filetime'],pid='exact int 1..2^32-1',
+        creation_filetime='exact int 1..2^64-1'),
+        'host held real broker owner; broker ready/START binding; controller bootstrap verifies actual kernel PID/creation'),
+    runtime_binding_contract_sha=rule('string',dict(format='SHA256',artifact=runtime_contract),
+        'SHA of fixed canonical contract bytes; current DRAFT profile blocks production, does not prove runtime closure'),
+    deadline_profile_sha=rule('string',dict(format='SHA256',artifact=deadline_contract),
+        'SHA of fixed canonical earlier-deadline contract bytes before context creation'))
+entry_tree=ast.parse((ROOT/SOURCE_PATHS[1]).read_bytes())
+def integer(node):
+    if isinstance(node,ast.Constant) and type(node.value) is int:return node.value
+    if isinstance(node,ast.BinOp) and isinstance(node.op,(ast.Add,ast.Mult,ast.Pow)):
+        a,b=integer(node.left),integer(node.right)
+        return a+b if isinstance(node.op,ast.Add) else a*b if isinstance(node.op,ast.Mult) else a**b
+    raise ValueError('unsupported literal arithmetic')
+constants={}
+for node in entry_tree.body:
+    if isinstance(node,ast.Assign) and isinstance(node.value,ast.Call) and isinstance(node.value.func,ast.Name) and node.value.func.id=='dict':
+        for target in node.targets:
+            if isinstance(target,ast.Name) and target.id in ('CAPS','STAGE_SECONDS'):
+                constants[target.id]={k.arg:integer(k.value) for k in node.value.keywords}
+environment=next(n for n in entry_tree.body if isinstance(n,ast.FunctionDef) and n.name=='environment')
+allowed=next(n.value for n in environment.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='allowed' for t in n.targets))
+spec.update(field_rules=rules,canonical=dict(encoding='ASCII',ensure_ascii=True,sort_keys=True,separators=[',',':'],
+    allow_nan=False,raw_bytes_cap=2097152,max_depth=256,max_nodes=1000000,duplicate_keys_allowed=False),
+    pin_type=dict(exact_keys=['bytes','sha256'],bytes='exact int 0..8388608',sha256='64 lowercase hex'),
+    environment_allowed_keys=sorted(set(ast.literal_eval(allowed))|{'PYTHONDONTWRITEBYTECODE','PYTHONNOUSERSITE',
+        'PYTHONHASHSEED','OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS'}),
+    environment_fixed_values=dict(PYTHONDONTWRITEBYTECODE='1',PYTHONNOUSERSITE='1',PYTHONHASHSEED='0',
+        OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='1'),
+    exact_stage_seconds=constants['STAGE_SECONDS'],exact_limits=constants['CAPS'],
+    nested_data_rule='All E subtrees have exact expected keys and values by external canonical-byte equality, not unconstrained JSON',
+    runtime_binding_contract=runtime_contract,deadline_contract=deadline_contract,request_contract=request_contract,
+    schema_contract_complete=True,production_validator_implemented=False)
+assert set(rules)==set(fields) and all(set(r)=={'type','constraint','provenance'} for r in rules.values())
+
+
+def topological(nodes,arcs):
+    pending={n:0 for n in nodes};children={n:[] for n in nodes}
+    for left,right in arcs:
+        assert left in pending and right in pending
+        children[left].append(right);pending[right]+=1
+    ready=deque(n for n in nodes if pending[n]==0);out=[]
+    while ready:
+        node=ready.popleft();out.append(node)
+        for child in children[node]:
+            pending[child]-=1
+            if pending[child]==0:ready.append(child)
+    if len(out)!=len(nodes):raise ValueError('capability/context dependency cycle')
+    return out
+
+
+assert len(fields)==len(set(fields)) and len(fields)==31
+assert not set(fields)&{'context_sha','ack_sha','ACK_sha','G0_verified','permit','run_authority','caller_core','caller_sha'}
+assert topological(order,edges+cap_edges)==order
+cycle_rejected=False
+try:topological(order,edges+[('ACK','context')])
+except ValueError:cycle_rejected=True
+assert cycle_rejected
+assert all(role[a]==role[b] for a,b in cap_edges)
+cross_process_G0_rejected=role['G0']!=role['parent_issuer']
+assert cross_process_G0_rejected and role['fresh_permit']=='parent'
+assert not any(n.endswith('issuer') and r=='fresh' for n,r in role.items())
+save('successor_context_spec_v2.json',spec)
+save('capability_edges_v2.json',dict(authority='DRAFT_NONAUTHORITATIVE',node_roles=role,
+    data_order_edges=[list(e) for e in edges],same_process_capability_edges=[list(e) for e in cap_edges],
+    topological_order=order,cross_process_packets_are_binding_data_only=True,implemented=False))
+save('schema_cut_oracle_v2.json',dict(authority='DRAFT_NONAUTHORITATIVE',design_oracle_only=True,
+    context_fields=len(fields),nodes=len(role),data_order_edges=len(edges),capability_edges=len(cap_edges),
+    acyclic=True,context_field_rules_complete=True,broker_ACK_owner_chain_explicit=True,
+    ACK_back_edge_rejected=cycle_rejected,cross_process_G0_capability_rejected=cross_process_G0_rejected,
+    fresh_issuer_allowed=False,production_validator_implemented=False,actual_saved_F_execution=False,
+    F_launch_admitted=False,scientific_evidence_adopted=False,resource_admission=False,formal_result=False))
+print(__import__('json').dumps(dict(context_fields=len(fields),DAG_nodes=len(role),
+    ACK_cycle_rejected=cycle_rejected,cross_process_G0_rejected=cross_process_G0_rejected,actual_saved_F_execution=False)))

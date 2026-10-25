@@ -1,0 +1,6110 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "import_targets_resolved": false,
+  "imports": [
+    {
+      "imported": [
+        {
+          "binding": "sha256",
+          "name": "sha256"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "hashlib",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "dataclasses",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "contextmanager",
+          "name": "contextmanager"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 4,
+      "module": "contextlib",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "C",
+      "kind": "import",
+      "line": 5,
+      "module": "ctypes",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "W",
+          "name": "wintypes"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "ctypes",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 7,
+      "module": "json",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "math",
+      "kind": "import",
+      "line": 8,
+      "module": "math",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "os",
+      "kind": "import",
+      "line": 9,
+      "module": "os",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "pathlib",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "secrets",
+      "kind": "import",
+      "line": 11,
+      "module": "secrets",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "stat",
+      "kind": "import",
+      "line": 12,
+      "module": "stat",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "struct",
+      "kind": "import",
+      "line": 13,
+      "module": "struct",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "subprocess",
+      "kind": "import",
+      "line": 14,
+      "module": "subprocess",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "sys",
+      "kind": "import",
+      "line": 15,
+      "module": "sys",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "tempfile",
+      "kind": "import",
+      "line": 16,
+      "module": "tempfile",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "get_ident",
+          "name": "get_ident"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 17,
+      "module": "threading",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "time",
+      "kind": "import",
+      "line": 18,
+      "module": "time",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ModuleType",
+          "name": "ModuleType"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 19,
+      "module": "types",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "CodeType",
+          "name": "CodeType"
+        },
+        {
+          "binding": "FunctionType",
+          "name": "FunctionType"
+        },
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 20,
+      "module": "types",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "adapter",
+          "name": "staged_rts24_saved_fresh_adoption_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 234,
+      "module": "src",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "OwnedChild",
+          "name": "OwnedChild"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 875,
+      "module": "src.staged_rts24_process_guard_v1",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "highspy",
+      "kind": "import",
+      "line": 1621,
+      "module": "highspy",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pyo",
+      "kind": "import",
+      "line": 1622,
+      "module": "pyomo.environ",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "adapter",
+          "name": "staged_rts24_saved_fresh_adoption_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 1637,
+      "module": "src",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "adapter",
+          "name": "staged_rts24_saved_fresh_adoption_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 1664,
+      "module": "src",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "_Memory",
+          "name": "_Memory"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2455,
+      "module": "src.staged_rts24_process_guard_v1",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "adapter",
+          "name": "staged_rts24_saved_fresh_adoption_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 1650,
+      "module": "src",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "adapter",
+          "name": "staged_rts24_saved_fresh_adoption_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3882,
+      "module": "src",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "OwnedChild",
+          "name": "OwnedChild"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2776,
+      "module": "src.staged_rts24_process_guard_v1",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "OwnedChild",
+          "name": "OwnedChild"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3745,
+      "module": "src.staged_rts24_process_guard_v1",
+      "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "AcValidationResult",
+          "name": "AcValidationResult"
+        },
+        {
+          "binding": "validate_ac_power_flow",
+          "name": "validate_ac_power_flow"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 3,
+      "module": "ac_validation",
+      "source": "src/grid/__init__.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "AcRestorationResult",
+          "name": "AcRestorationResult"
+        },
+        {
+          "binding": "restore_ac_feasibility",
+          "name": "restore_ac_feasibility"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 4,
+      "module": "ac_restoration",
+      "source": "src/grid/__init__.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ContingencyOutcome",
+          "name": "ContingencyOutcome"
+        },
+        {
+          "binding": "GeneratorContingencyOutcome",
+          "name": "GeneratorContingencyOutcome"
+        },
+        {
+          "binding": "screen_generator_n_minus_one",
+          "name": "screen_generator_n_minus_one"
+        },
+        {
+          "binding": "screen_n_minus_one",
+          "name": "screen_n_minus_one"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 5,
+      "module": "contingency",
+      "source": "src/grid/__init__.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ChronologicalDispatchRequest",
+          "name": "ChronologicalDispatchRequest"
+        },
+        {
+          "binding": "ChronologicalDispatchResult",
+          "name": "ChronologicalDispatchResult"
+        },
+        {
+          "binding": "ChronologicalDispatchSolver",
+          "name": "ChronologicalDispatchSolver"
+        },
+        {
+          "binding": "build_chronological_dispatch_request",
+          "name": "build_chronological_dispatch_request"
+        },
+        {
+          "binding": "dispatch_result_to_flexibility_trace",
+          "name": "dispatch_result_to_flexibility_trace"
+        },
+        {
+          "binding": "validate_chronological_dispatch",
+          "name": "validate_chronological_dispatch"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 11,
+      "module": "chronological_dispatch",
+      "source": "src/grid/__init__.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "DcOpfResult",
+          "name": "DcOpfResult"
+        },
+        {
+          "binding": "solve_dc_opf",
+          "name": "solve_dc_opf"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 19,
+      "module": "dc_opf",
+      "source": "src/grid/__init__.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "METHOD_MINIMUM_CURTAILMENT",
+          "name": "METHOD_MINIMUM_CURTAILMENT"
+        },
+        {
+          "binding": "METHOD_OVERLOAD_SENSITIVITY",
+          "name": "METHOD_OVERLOAD_SENSITIVITY"
+        },
+        {
+          "binding": "NETWORK_GRID_NEED_AUDIT_TOLERANCE_MW",
+          "name": "NETWORK_GRID_NEED_AUDIT_TOLERANCE_MW"
+        },
+        {
+          "binding": "NETWORK_GRID_NEED_METHODS",
+          "name": "NETWORK_GRID_NEED_METHODS"
+        },
+        {
+          "binding": "NETWORK_GRID_NEED_SCOPE",
+          "name": "NETWORK_GRID_NEED_SCOPE"
+        },
+        {
+          "binding": "NetworkGridNeedInputs",
+          "name": "NetworkGridNeedInputs"
+        },
+        {
+          "binding": "NetworkGridNeedResult",
+          "name": "NetworkGridNeedResult"
+        },
+        {
+          "binding": "NetworkGridNeedStateResult",
+          "name": "NetworkGridNeedStateResult"
+        },
+        {
+          "binding": "derive_network_grid_need",
+          "name": "derive_network_grid_need"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 20,
+      "module": "network_grid_need",
+      "source": "src/grid/__init__.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Branch",
+          "name": "Branch"
+        },
+        {
+          "binding": "Bus",
+          "name": "Bus"
+        },
+        {
+          "binding": "Generator",
+          "name": "Generator"
+        },
+        {
+          "binding": "Rts24Data",
+          "name": "Rts24Data"
+        },
+        {
+          "binding": "load_rts24",
+          "name": "load_rts24"
+        },
+        {
+          "binding": "scale_rts24_demand",
+          "name": "scale_rts24_demand"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 31,
+      "module": "rts24",
+      "source": "src/grid/__init__.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "HourlyLoadPoint",
+          "name": "HourlyLoadPoint"
+        },
+        {
+          "binding": "RTS_GMLC_COMMIT",
+          "name": "RTS_GMLC_COMMIT"
+        },
+        {
+          "binding": "RTS_GMLC_MANIFEST_SHA256",
+          "name": "RTS_GMLC_MANIFEST_SHA256"
+        },
+        {
+          "binding": "RTS_GMLC_RELEASE",
+          "name": "RTS_GMLC_RELEASE"
+        },
+        {
+          "binding": "RTS_GMLC_REPOSITORY",
+          "name": "RTS_GMLC_REPOSITORY"
+        },
+        {
+          "binding": "RtsGmlcBranch",
+          "name": "RtsGmlcBranch"
+        },
+        {
+          "binding": "RtsGmlcBus",
+          "name": "RtsGmlcBus"
+        },
+        {
+          "binding": "RtsGmlcChronologicalData",
+          "name": "RtsGmlcChronologicalData"
+        },
+        {
+          "binding": "RtsGmlcChronologicalGenerator",
+          "name": "RtsGmlcChronologicalGenerator"
+        },
+        {
+          "binding": "RtsGmlcDcBranch",
+          "name": "RtsGmlcDcBranch"
+        },
+        {
+          "binding": "RtsGmlcGenerator",
+          "name": "RtsGmlcGenerator"
+        },
+        {
+          "binding": "RtsGmlcHourlyPoint",
+          "name": "RtsGmlcHourlyPoint"
+        },
+        {
+          "binding": "RtsGmlcSummary",
+          "name": "RtsGmlcSummary"
+        },
+        {
+          "binding": "load_day_ahead_regional_load",
+          "name": "load_day_ahead_regional_load"
+        },
+        {
+          "binding": "load_rts24_area1_load_multipliers",
+          "name": "load_rts24_area1_load_multipliers"
+        },
+        {
+          "binding": "load_rts_gmlc_chronological_data",
+          "name": "load_rts_gmlc_chronological_data"
+        },
+        {
+          "binding": "load_rts_gmlc_generators",
+          "name": "load_rts_gmlc_generators"
+        },
+        {
+          "binding": "summarize_rts_gmlc",
+          "name": "summarize_rts_gmlc"
+        },
+        {
+          "binding": "validate_rts_gmlc_source_identity",
+          "name": "validate_rts_gmlc_source_identity"
+        },
+        {
+          "binding": "verify_sha256_manifest",
+          "name": "verify_sha256_manifest"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 39,
+      "module": "rts_gmlc",
+      "source": "src/grid/__init__.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "RtsGmlcContingencyPrescreen",
+          "name": "RtsGmlcContingencyPrescreen"
+        },
+        {
+          "binding": "RtsGmlcConstraintGenerationAudit",
+          "name": "RtsGmlcConstraintGenerationAudit"
+        },
+        {
+          "binding": "RtsGmlcConstraintGenerationIterationAudit",
+          "name": "RtsGmlcConstraintGenerationIterationAudit"
+        },
+        {
+          "binding": "RtsGmlcCriticalSelection",
+          "name": "RtsGmlcCriticalSelection"
+        },
+        {
+          "binding": "RtsGmlcInitialState",
+          "name": "RtsGmlcInitialState"
+        },
+        {
+          "binding": "RtsGmlcResidualAudit",
+          "name": "RtsGmlcResidualAudit"
+        },
+        {
+          "binding": "RtsGmlcScucResult",
+          "name": "RtsGmlcScucResult"
+        },
+        {
+          "binding": "RtsGmlcSecurityState",
+          "name": "RtsGmlcSecurityState"
+        },
+        {
+          "binding": "RtsGmlcSolverAudit",
+          "name": "RtsGmlcSolverAudit"
+        },
+        {
+          "binding": "build_rts_gmlc_pre_registered_contingencies",
+          "name": "build_rts_gmlc_pre_registered_contingencies"
+        },
+        {
+          "binding": "prescreen_rts_gmlc_critical_contingencies",
+          "name": "prescreen_rts_gmlc_critical_contingencies"
+        },
+        {
+          "binding": "select_rts_gmlc_critical_contingencies",
+          "name": "select_rts_gmlc_critical_contingencies"
+        },
+        {
+          "binding": "solve_rts_gmlc_scuc",
+          "name": "solve_rts_gmlc_scuc"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 61,
+      "module": "rts_gmlc_scuc",
+      "source": "src/grid/__init__.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SecurityConstrainedResult",
+          "name": "SecurityConstrainedResult"
+        },
+        {
+          "binding": "SecurityState",
+          "name": "SecurityState"
+        },
+        {
+          "binding": "build_security_states",
+          "name": "build_security_states"
+        },
+        {
+          "binding": "non_islanding_branch_indices",
+          "name": "non_islanding_branch_indices"
+        },
+        {
+          "binding": "solve_security_constrained_dc_opf",
+          "name": "solve_security_constrained_dc_opf"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 76,
+      "module": "scopf",
+      "source": "src/grid/__init__.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "annotations",
+          "name": "annotations"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "__future__",
+      "source": "src/grid/ac_case.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Iterable",
+          "name": "Iterable"
+        },
+        {
+          "binding": "Mapping",
+          "name": "Mapping"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "typing",
+      "source": "src/grid/ac_case.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "BUS_I",
+          "name": "BUS_I"
+        },
+        {
+          "binding": "BUS_TYPE",
+          "name": "BUS_TYPE"
+        },
+        {
+          "binding": "GS",
+          "name": "GS"
+        },
+        {
+          "binding": "NONE",
+          "name": "NONE"
+        },
+        {
+          "binding": "PD",
+          "name": "PD"
+        },
+        {
+          "binding": "PQ",
+          "name": "PQ"
+        },
+        {
+          "binding": "PV",
+          "name": "PV"
+        },
+        {
+          "binding": "QD",
+          "name": "QD"
+        },
+        {
+          "binding": "REF",
+          "name": "REF"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "pypower.idx_bus",
+      "source": "src/grid/ac_case.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "GEN_BUS",
+          "name": "GEN_BUS"
+        },
+        {
+          "binding": "GEN_STATUS",
+          "name": "GEN_STATUS"
+        },
+        {
+          "binding": "PG",
+          "name": "PG"
+        },
+        {
+          "binding": "PMAX",
+          "name": "PMAX"
+        },
+        {
+          "binding": "PMIN",
+          "name": "PMIN"
+        },
+        {
+          "binding": "QG",
+          "name": "QG"
+        },
+        {
+          "binding": "QMAX",
+          "name": "QMAX"
+        },
+        {
+          "binding": "QMIN",
+          "name": "QMIN"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "pypower.idx_gen",
+      "source": "src/grid/ac_case.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Rts24Data",
+          "name": "Rts24Data"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 19,
+      "module": "rts24",
+      "source": "src/grid/ac_case.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "annotations",
+          "name": "annotations"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "__future__",
+      "source": "src/grid/ac_restoration.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "deepcopy",
+          "name": "deepcopy"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "copy",
+      "source": "src/grid/ac_restoration.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        },
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "dataclasses",
+      "source": "src/grid/ac_restoration.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Iterable",
+          "name": "Iterable"
+        },
+        {
+          "binding": "Mapping",
+          "name": "Mapping"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "typing",
+      "source": "src/grid/ac_restoration.py"
+    },
+    {
+      "binding": "np",
+      "kind": "import",
+      "line": 9,
+      "module": "numpy",
+      "source": "src/grid/ac_restoration.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "case24_ieee_rts",
+          "name": "case24_ieee_rts"
+        },
+        {
+          "binding": "ppoption",
+          "name": "ppoption"
+        },
+        {
+          "binding": "runopf",
+          "name": "runopf"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "pypower.api",
+      "source": "src/grid/ac_restoration.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "BR_STATUS",
+          "name": "BR_STATUS"
+        },
+        {
+          "binding": "F_BUS",
+          "name": "F_BUS"
+        },
+        {
+          "binding": "PF",
+          "name": "PF"
+        },
+        {
+          "binding": "PT",
+          "name": "PT"
+        },
+        {
+          "binding": "QF",
+          "name": "QF"
+        },
+        {
+          "binding": "QT",
+          "name": "QT"
+        },
+        {
+          "binding": "RATE_A",
+          "name": "RATE_A"
+        },
+        {
+          "binding": "RATE_B",
+          "name": "RATE_B"
+        },
+        {
+          "binding": "RATE_C",
+          "name": "RATE_C"
+        },
+        {
+          "binding": "T_BUS",
+          "name": "T_BUS"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 11,
+      "module": "pypower.idx_brch",
+      "source": "src/grid/ac_restoration.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "BS",
+          "name": "BS"
+        },
+        {
+          "binding": "BUS_I",
+          "name": "BUS_I"
+        },
+        {
+          "binding": "BUS_TYPE",
+          "name": "BUS_TYPE"
+        },
+        {
+          "binding": "NONE",
+          "name": "NONE"
+        },
+        {
+          "binding": "PD",
+          "name": "PD"
+        },
+        {
+          "binding": "QD",
+          "name": "QD"
+        },
+        {
+          "binding": "VA",
+          "name": "VA"
+        },
+        {
+          "binding": "VM",
+          "name": "VM"
+        },
+        {
+          "binding": "VMAX",
+          "name": "VMAX"
+        },
+        {
+          "binding": "VMIN",
+          "name": "VMIN"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 23,
+      "module": "pypower.idx_bus",
+      "source": "src/grid/ac_restoration.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "COST",
+          "name": "COST"
+        },
+        {
+          "binding": "MODEL",
+          "name": "MODEL"
+        },
+        {
+          "binding": "NCOST",
+          "name": "NCOST"
+        },
+        {
+          "binding": "POLYNOMIAL",
+          "name": "POLYNOMIAL"
+        },
+        {
+          "binding": "SHUTDOWN",
+          "name": "SHUTDOWN"
+        },
+        {
+          "binding": "STARTUP",
+          "name": "STARTUP"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 24,
+      "module": "pypower.idx_cost",
+      "source": "src/grid/ac_restoration.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "GEN_BUS",
+          "name": "GEN_BUS"
+        },
+        {
+          "binding": "GEN_STATUS",
+          "name": "GEN_STATUS"
+        },
+        {
+          "binding": "PG",
+          "name": "PG"
+        },
+        {
+          "binding": "PMAX",
+          "name": "PMAX"
+        },
+        {
+          "binding": "PMIN",
+          "name": "PMIN"
+        },
+        {
+          "binding": "QG",
+          "name": "QG"
+        },
+        {
+          "binding": "QMAX",
+          "name": "QMAX"
+        },
+        {
+          "binding": "QMIN",
+          "name": "QMIN"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 25,
+      "module": "pypower.idx_gen",
+      "source": "src/grid/ac_restoration.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "configure_rts24_ac_case",
+          "name": "configure_rts24_ac_case"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 27,
+      "module": "ac_case",
+      "source": "src/grid/ac_restoration.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "DcOpfResult",
+          "name": "DcOpfResult"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 28,
+      "module": "dc_opf",
+      "source": "src/grid/ac_restoration.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Rts24Data",
+          "name": "Rts24Data"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 29,
+      "module": "rts24",
+      "source": "src/grid/ac_restoration.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "annotations",
+          "name": "annotations"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "__future__",
+      "source": "src/grid/ac_validation.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        },
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "dataclasses",
+      "source": "src/grid/ac_validation.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Mapping",
+          "name": "Mapping"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "typing",
+      "source": "src/grid/ac_validation.py"
+    },
+    {
+      "binding": "np",
+      "kind": "import",
+      "line": 8,
+      "module": "numpy",
+      "source": "src/grid/ac_validation.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "case24_ieee_rts",
+          "name": "case24_ieee_rts"
+        },
+        {
+          "binding": "ppoption",
+          "name": "ppoption"
+        },
+        {
+          "binding": "runpf",
+          "name": "runpf"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "pypower.api",
+      "source": "src/grid/ac_validation.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "BR_STATUS",
+          "name": "BR_STATUS"
+        },
+        {
+          "binding": "PF",
+          "name": "PF"
+        },
+        {
+          "binding": "PT",
+          "name": "PT"
+        },
+        {
+          "binding": "QF",
+          "name": "QF"
+        },
+        {
+          "binding": "QT",
+          "name": "QT"
+        },
+        {
+          "binding": "RATE_A",
+          "name": "RATE_A"
+        },
+        {
+          "binding": "RATE_B",
+          "name": "RATE_B"
+        },
+        {
+          "binding": "RATE_C",
+          "name": "RATE_C"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "pypower.idx_brch",
+      "source": "src/grid/ac_validation.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "VM",
+          "name": "VM"
+        },
+        {
+          "binding": "VMAX",
+          "name": "VMAX"
+        },
+        {
+          "binding": "VMIN",
+          "name": "VMIN"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 20,
+      "module": "pypower.idx_bus",
+      "source": "src/grid/ac_validation.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "GEN_STATUS",
+          "name": "GEN_STATUS"
+        },
+        {
+          "binding": "PG",
+          "name": "PG"
+        },
+        {
+          "binding": "PMAX",
+          "name": "PMAX"
+        },
+        {
+          "binding": "PMIN",
+          "name": "PMIN"
+        },
+        {
+          "binding": "QG",
+          "name": "QG"
+        },
+        {
+          "binding": "QMAX",
+          "name": "QMAX"
+        },
+        {
+          "binding": "QMIN",
+          "name": "QMIN"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 21,
+      "module": "pypower.idx_gen",
+      "source": "src/grid/ac_validation.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "configure_rts24_ac_case",
+          "name": "configure_rts24_ac_case"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 23,
+      "module": "ac_case",
+      "source": "src/grid/ac_validation.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "DcOpfResult",
+          "name": "DcOpfResult"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 24,
+      "module": "dc_opf",
+      "source": "src/grid/ac_validation.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Rts24Data",
+          "name": "Rts24Data"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 25,
+      "module": "rts24",
+      "source": "src/grid/ac_validation.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "annotations",
+          "name": "annotations"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "__future__",
+      "source": "src/grid/chronological_dispatch.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "dataclasses",
+      "source": "src/grid/chronological_dispatch.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "datetime",
+          "name": "datetime"
+        },
+        {
+          "binding": "timedelta",
+          "name": "timedelta"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "datetime",
+      "source": "src/grid/chronological_dispatch.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "isfinite",
+          "name": "isfinite"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "math",
+      "source": "src/grid/chronological_dispatch.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "TYPE_CHECKING",
+          "name": "TYPE_CHECKING"
+        },
+        {
+          "binding": "Mapping",
+          "name": "Mapping"
+        },
+        {
+          "binding": "Protocol",
+          "name": "Protocol"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "typing",
+      "source": "src/grid/chronological_dispatch.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "BusinessChronology",
+          "name": "BusinessChronology"
+        },
+        {
+          "binding": "GridIncident",
+          "name": "GridIncident"
+        },
+        {
+          "binding": "IncidentChronology",
+          "name": "IncidentChronology"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 11,
+      "module": "src.evaluation.chronology_inputs",
+      "source": "src/grid/chronological_dispatch.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ChronologicalFlexibilityEnvelope",
+          "name": "ChronologicalFlexibilityEnvelope"
+        },
+        {
+          "binding": "ChronologicalFlexibilityTrace",
+          "name": "ChronologicalFlexibilityTrace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 16,
+      "module": "src.evaluation.flexibility_envelope",
+      "source": "src/grid/chronological_dispatch.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "validate_incidents_against_business_timeline",
+          "name": "validate_incidents_against_business_timeline"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 108,
+      "module": "src.evaluation.chronology_inputs",
+      "source": "src/grid/chronological_dispatch.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ChronologicalFlexibilityTrace",
+          "name": "ChronologicalFlexibilityTrace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 199,
+      "module": "src.evaluation.flexibility_envelope",
+      "source": "src/grid/chronological_dispatch.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "evaluate_chronological_flexibility",
+          "name": "evaluate_chronological_flexibility"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 524,
+      "module": "src.evaluation.flexibility_envelope",
+      "source": "src/grid/chronological_dispatch.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "annotations",
+          "name": "annotations"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "__future__",
+      "source": "src/grid/contingency.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "dataclasses",
+      "source": "src/grid/contingency.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Iterable",
+          "name": "Iterable"
+        },
+        {
+          "binding": "Mapping",
+          "name": "Mapping"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "typing",
+      "source": "src/grid/contingency.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "DcOpfResult",
+          "name": "DcOpfResult"
+        },
+        {
+          "binding": "solve_dc_opf",
+          "name": "solve_dc_opf"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 8,
+      "module": "dc_opf",
+      "source": "src/grid/contingency.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Rts24Data",
+          "name": "Rts24Data"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 9,
+      "module": "rts24",
+      "source": "src/grid/contingency.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "annotations",
+          "name": "annotations"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "__future__",
+      "source": "src/grid/dc_opf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "dataclasses",
+      "source": "src/grid/dc_opf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "radians",
+          "name": "radians"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "math",
+      "source": "src/grid/dc_opf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Iterable",
+          "name": "Iterable"
+        },
+        {
+          "binding": "Mapping",
+          "name": "Mapping"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "typing",
+      "source": "src/grid/dc_opf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ConcreteModel",
+          "name": "ConcreteModel"
+        },
+        {
+          "binding": "Constraint",
+          "name": "Constraint"
+        },
+        {
+          "binding": "Expression",
+          "name": "Expression"
+        },
+        {
+          "binding": "Objective",
+          "name": "Objective"
+        },
+        {
+          "binding": "Set",
+          "name": "Set"
+        },
+        {
+          "binding": "SolverFactory",
+          "name": "SolverFactory"
+        },
+        {
+          "binding": "Var",
+          "name": "Var"
+        },
+        {
+          "binding": "minimize",
+          "name": "minimize"
+        },
+        {
+          "binding": "value",
+          "name": "value"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "pyomo.environ",
+      "source": "src/grid/dc_opf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "TerminationCondition",
+          "name": "TerminationCondition"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 20,
+      "module": "pyomo.opt",
+      "source": "src/grid/dc_opf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Rts24Data",
+          "name": "Rts24Data"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 22,
+      "module": "rts24",
+      "source": "src/grid/dc_opf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "annotations",
+          "name": "annotations"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 22,
+      "module": "__future__",
+      "source": "src/grid/network_grid_need.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Mapping",
+          "name": "Mapping"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 24,
+      "module": "collections.abc",
+      "source": "src/grid/network_grid_need.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        },
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 25,
+      "module": "dataclasses",
+      "source": "src/grid/network_grid_need.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "copysign",
+          "name": "copysign"
+        },
+        {
+          "binding": "isfinite",
+          "name": "isfinite"
+        },
+        {
+          "binding": "radians",
+          "name": "radians"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 26,
+      "module": "math",
+      "source": "src/grid/network_grid_need.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Real",
+          "name": "Real"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 27,
+      "module": "numbers",
+      "source": "src/grid/network_grid_need.py"
+    },
+    {
+      "binding": "np",
+      "kind": "import",
+      "line": 29,
+      "module": "numpy",
+      "source": "src/grid/network_grid_need.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ConcreteModel",
+          "name": "ConcreteModel"
+        },
+        {
+          "binding": "Constraint",
+          "name": "Constraint"
+        },
+        {
+          "binding": "ConstraintList",
+          "name": "ConstraintList"
+        },
+        {
+          "binding": "NonNegativeReals",
+          "name": "NonNegativeReals"
+        },
+        {
+          "binding": "Objective",
+          "name": "Objective"
+        },
+        {
+          "binding": "Set",
+          "name": "Set"
+        },
+        {
+          "binding": "SolverFactory",
+          "name": "SolverFactory"
+        },
+        {
+          "binding": "Var",
+          "name": "Var"
+        },
+        {
+          "binding": "minimize",
+          "name": "minimize"
+        },
+        {
+          "binding": "value",
+          "name": "value"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 30,
+      "module": "pyomo.environ",
+      "source": "src/grid/network_grid_need.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "TerminationCondition",
+          "name": "TerminationCondition"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 42,
+      "module": "pyomo.opt",
+      "source": "src/grid/network_grid_need.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "solve_dc_opf",
+          "name": "solve_dc_opf"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 44,
+      "module": "dc_opf",
+      "source": "src/grid/network_grid_need.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Rts24Data",
+          "name": "Rts24Data"
+        },
+        {
+          "binding": "scale_rts24_demand",
+          "name": "scale_rts24_demand"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 45,
+      "module": "rts24",
+      "source": "src/grid/network_grid_need.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SecurityState",
+          "name": "SecurityState"
+        },
+        {
+          "binding": "non_islanding_branch_indices",
+          "name": "non_islanding_branch_indices"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 46,
+      "module": "scopf",
+      "source": "src/grid/network_grid_need.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "annotations",
+          "name": "annotations"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "__future__",
+      "source": "src/grid/rts24.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        },
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "dataclasses",
+      "source": "src/grid/rts24.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "version",
+          "name": "version"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "importlib.metadata",
+      "source": "src/grid/rts24.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "isfinite",
+          "name": "isfinite"
+        },
+        {
+          "binding": "radians",
+          "name": "radians"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "math",
+      "source": "src/grid/rts24.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "case24_ieee_rts",
+          "name": "case24_ieee_rts"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "pypower.api",
+      "source": "src/grid/rts24.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "BR_STATUS",
+          "name": "BR_STATUS"
+        },
+        {
+          "binding": "BR_X",
+          "name": "BR_X"
+        },
+        {
+          "binding": "F_BUS",
+          "name": "F_BUS"
+        },
+        {
+          "binding": "RATE_A",
+          "name": "RATE_A"
+        },
+        {
+          "binding": "RATE_B",
+          "name": "RATE_B"
+        },
+        {
+          "binding": "RATE_C",
+          "name": "RATE_C"
+        },
+        {
+          "binding": "SHIFT",
+          "name": "SHIFT"
+        },
+        {
+          "binding": "TAP",
+          "name": "TAP"
+        },
+        {
+          "binding": "T_BUS",
+          "name": "T_BUS"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "pypower.idx_brch",
+      "source": "src/grid/rts24.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "BUS_I",
+          "name": "BUS_I"
+        },
+        {
+          "binding": "BUS_TYPE",
+          "name": "BUS_TYPE"
+        },
+        {
+          "binding": "GS",
+          "name": "GS"
+        },
+        {
+          "binding": "PD",
+          "name": "PD"
+        },
+        {
+          "binding": "REF",
+          "name": "REF"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 21,
+      "module": "pypower.idx_bus",
+      "source": "src/grid/rts24.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "COST",
+          "name": "COST"
+        },
+        {
+          "binding": "MODEL",
+          "name": "MODEL"
+        },
+        {
+          "binding": "NCOST",
+          "name": "NCOST"
+        },
+        {
+          "binding": "POLYNOMIAL",
+          "name": "POLYNOMIAL"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 22,
+      "module": "pypower.idx_cost",
+      "source": "src/grid/rts24.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "GEN_BUS",
+          "name": "GEN_BUS"
+        },
+        {
+          "binding": "GEN_STATUS",
+          "name": "GEN_STATUS"
+        },
+        {
+          "binding": "PMAX",
+          "name": "PMAX"
+        },
+        {
+          "binding": "PMIN",
+          "name": "PMIN"
+        },
+        {
+          "binding": "RAMP_10",
+          "name": "RAMP_10"
+        },
+        {
+          "binding": "RAMP_30",
+          "name": "RAMP_30"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 23,
+      "module": "pypower.idx_gen",
+      "source": "src/grid/rts24.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "annotations",
+          "name": "annotations"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "__future__",
+      "source": "src/grid/rts_gmlc.py"
+    },
+    {
+      "binding": "csv",
+      "kind": "import",
+      "line": 5,
+      "module": "csv",
+      "source": "src/grid/rts_gmlc.py"
+    },
+    {
+      "binding": "hashlib",
+      "kind": "import",
+      "line": 6,
+      "module": "hashlib",
+      "source": "src/grid/rts_gmlc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Mapping",
+          "name": "Mapping"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "collections.abc",
+      "source": "src/grid/rts_gmlc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "dataclasses",
+      "source": "src/grid/rts_gmlc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "datetime",
+          "name": "datetime"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "datetime",
+      "source": "src/grid/rts_gmlc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "fsum",
+          "name": "fsum"
+        },
+        {
+          "binding": "isclose",
+          "name": "isclose"
+        },
+        {
+          "binding": "isfinite",
+          "name": "isfinite"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "math",
+      "source": "src/grid/rts_gmlc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 11,
+      "module": "pathlib",
+      "source": "src/grid/rts_gmlc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Literal",
+          "name": "Literal"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 12,
+      "module": "typing",
+      "source": "src/grid/rts_gmlc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "annotations",
+          "name": "annotations"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "__future__",
+      "source": "src/grid/rts_gmlc_scuc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        },
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 12,
+      "module": "dataclasses",
+      "source": "src/grid/rts_gmlc_scuc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ceil",
+          "name": "ceil"
+        },
+        {
+          "binding": "inf",
+          "name": "inf"
+        },
+        {
+          "binding": "isfinite",
+          "name": "isfinite"
+        },
+        {
+          "binding": "radians",
+          "name": "radians"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 13,
+      "module": "math",
+      "source": "src/grid/rts_gmlc_scuc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Any",
+          "name": "Any"
+        },
+        {
+          "binding": "Mapping",
+          "name": "Mapping"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 14,
+      "module": "typing",
+      "source": "src/grid/rts_gmlc_scuc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Highs",
+          "name": "Highs"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 16,
+      "module": "highspy",
+      "source": "src/grid/rts_gmlc_scuc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Binary",
+          "name": "Binary"
+        },
+        {
+          "binding": "ConcreteModel",
+          "name": "ConcreteModel"
+        },
+        {
+          "binding": "Constraint",
+          "name": "Constraint"
+        },
+        {
+          "binding": "ConstraintList",
+          "name": "ConstraintList"
+        },
+        {
+          "binding": "Expression",
+          "name": "Expression"
+        },
+        {
+          "binding": "NonNegativeReals",
+          "name": "NonNegativeReals"
+        },
+        {
+          "binding": "Objective",
+          "name": "Objective"
+        },
+        {
+          "binding": "RangeSet",
+          "name": "RangeSet"
+        },
+        {
+          "binding": "Set",
+          "name": "Set"
+        },
+        {
+          "binding": "SolverFactory",
+          "name": "SolverFactory"
+        },
+        {
+          "binding": "UnitInterval",
+          "name": "UnitInterval"
+        },
+        {
+          "binding": "Var",
+          "name": "Var"
+        },
+        {
+          "binding": "minimize",
+          "name": "minimize"
+        },
+        {
+          "binding": "value",
+          "name": "value"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 17,
+      "module": "pyomo.environ",
+      "source": "src/grid/rts_gmlc_scuc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "TerminationCondition",
+          "name": "TerminationCondition"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 33,
+      "module": "pyomo.opt",
+      "source": "src/grid/rts_gmlc_scuc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ChronologicalDispatchRequest",
+          "name": "ChronologicalDispatchRequest"
+        },
+        {
+          "binding": "ChronologicalDispatchResult",
+          "name": "ChronologicalDispatchResult"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 35,
+      "module": "chronological_dispatch",
+      "source": "src/grid/rts_gmlc_scuc.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "annotations",
+          "name": "annotations"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "__future__",
+      "source": "src/grid/scopf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "dataclasses",
+      "source": "src/grid/scopf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "radians",
+          "name": "radians"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "math",
+      "source": "src/grid/scopf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Iterable",
+          "name": "Iterable"
+        },
+        {
+          "binding": "Mapping",
+          "name": "Mapping"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "typing",
+      "source": "src/grid/scopf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Binary",
+          "name": "Binary"
+        },
+        {
+          "binding": "ConcreteModel",
+          "name": "ConcreteModel"
+        },
+        {
+          "binding": "Constraint",
+          "name": "Constraint"
+        },
+        {
+          "binding": "ConstraintList",
+          "name": "ConstraintList"
+        },
+        {
+          "binding": "Objective",
+          "name": "Objective"
+        },
+        {
+          "binding": "Set",
+          "name": "Set"
+        },
+        {
+          "binding": "SolverFactory",
+          "name": "SolverFactory"
+        },
+        {
+          "binding": "Var",
+          "name": "Var"
+        },
+        {
+          "binding": "minimize",
+          "name": "minimize"
+        },
+        {
+          "binding": "value",
+          "name": "value"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "pyomo.environ",
+      "source": "src/grid/scopf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "TerminationCondition",
+          "name": "TerminationCondition"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 21,
+      "module": "pyomo.opt",
+      "source": "src/grid/scopf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "DcOpfResult",
+          "name": "DcOpfResult"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 23,
+      "module": "dc_opf",
+      "source": "src/grid/scopf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Rts24Data",
+          "name": "Rts24Data"
+        }
+      ],
+      "kind": "from",
+      "level": 1,
+      "line": 24,
+      "module": "rts24",
+      "source": "src/grid/scopf.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        },
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "dataclasses",
+      "source": "src/rq2_joint_deliverability_boundary_v1/debt_cohorts.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Fraction",
+          "name": "Fraction"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "fractions",
+      "source": "src/rq2_joint_deliverability_boundary_v1/debt_cohorts.py"
+    },
+    {
+      "binding": "c",
+      "kind": "import",
+      "line": 6,
+      "module": "ctypes",
+      "source": "src/rq2_joint_deliverability_boundary_v1/normal_process.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "w",
+          "name": "wintypes"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "ctypes",
+      "source": "src/rq2_joint_deliverability_boundary_v1/normal_process.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "dataclasses",
+      "source": "src/rq2_joint_deliverability_boundary_v1/normal_process.py"
+    },
+    {
+      "binding": "math",
+      "kind": "import",
+      "line": 9,
+      "module": "math",
+      "source": "src/rq2_joint_deliverability_boundary_v1/normal_process.py"
+    },
+    {
+      "binding": "os",
+      "kind": "import",
+      "line": 10,
+      "module": "os",
+      "source": "src/rq2_joint_deliverability_boundary_v1/normal_process.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 11,
+      "module": "pathlib",
+      "source": "src/rq2_joint_deliverability_boundary_v1/normal_process.py"
+    },
+    {
+      "binding": "subprocess",
+      "kind": "import",
+      "line": 12,
+      "module": "subprocess",
+      "source": "src/rq2_joint_deliverability_boundary_v1/normal_process.py"
+    },
+    {
+      "binding": "time",
+      "kind": "import",
+      "line": 13,
+      "module": "time",
+      "source": "src/rq2_joint_deliverability_boundary_v1/normal_process.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "get_ident",
+          "name": "get_ident"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 14,
+      "module": "threading",
+      "source": "src/rq2_joint_deliverability_boundary_v1/normal_process.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "asdict",
+          "name": "asdict"
+        },
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        },
+        {
+          "binding": "is_dataclass",
+          "name": "is_dataclass"
+        },
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "dataclasses",
+      "source": "src/staged_deliverability_development_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Q",
+          "name": "Fraction"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "fractions",
+      "source": "src/staged_deliverability_development_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 8,
+      "module": "json",
+      "source": "src/staged_deliverability_development_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "pathlib",
+      "source": "src/staged_deliverability_development_v1.py"
+    },
+    {
+      "binding": "yaml",
+      "kind": "import",
+      "line": 11,
+      "module": "yaml",
+      "source": "src/staged_deliverability_development_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "DebtLedger",
+          "name": "DebtLedger"
+        },
+        {
+          "binding": "advance_debt_ledger",
+          "name": "advance_debt_ledger"
+        },
+        {
+          "binding": "assess_debt_cohorts",
+          "name": "assess_debt_cohorts"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 13,
+      "module": "src.rq2_joint_deliverability_boundary_v1.debt_cohorts",
+      "source": "src/staged_deliverability_development_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Q",
+          "name": "Fraction"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "fractions",
+      "source": "src/staged_rts24_audit_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "isfinite",
+          "name": "isfinite"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "math",
+      "source": "src/staged_rts24_audit_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "asdict",
+          "name": "asdict"
+        },
+        {
+          "binding": "is_dataclass",
+          "name": "is_dataclass"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 4,
+      "module": "dataclasses",
+      "source": "src/staged_rts24_audit_v1.py"
+    },
+    {
+      "binding": "hashlib",
+      "kind": "import",
+      "line": 5,
+      "module": "hashlib",
+      "source": "src/staged_rts24_audit_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 6,
+      "module": "json",
+      "source": "src/staged_rts24_audit_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "dataclasses",
+      "source": "src/staged_rts24_causal_audit_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Q",
+          "name": "Fraction"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "fractions",
+      "source": "src/staged_rts24_causal_audit_v2.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 4,
+      "module": "json",
+      "source": "src/staged_rts24_causal_audit_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "DebtLedger",
+          "name": "DebtLedger"
+        },
+        {
+          "binding": "DebtCohort",
+          "name": "DebtCohort"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "src.rq2_joint_deliverability_boundary_v1.debt_cohorts",
+      "source": "src/staged_rts24_causal_audit_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "audit_point",
+          "name": "audit_point"
+        },
+        {
+          "binding": "audit_economic_base",
+          "name": "audit_economic_base"
+        },
+        {
+          "binding": "check",
+          "name": "check"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "src.staged_rts24_audit_v1",
+      "source": "src/staged_rts24_causal_audit_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "audit_child_lp",
+          "name": "audit_child_lp"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "src.staged_rts24_child_optimality_v1",
+      "source": "src/staged_rts24_causal_audit_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "c",
+          "name": "staged_rts24_development_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "src",
+      "source": "src/staged_rts24_causal_audit_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "reference_requests",
+          "name": "reference_requests"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "src.staged_rts24_reference_queries_v1",
+      "source": "src/staged_rts24_causal_audit_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        },
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "dataclasses",
+      "source": "src/staged_rts24_causal_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Q",
+          "name": "Fraction"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "fractions",
+      "source": "src/staged_rts24_causal_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 4,
+      "module": "json",
+      "source": "src/staged_rts24_causal_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "isfinite",
+          "name": "isfinite"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "math",
+      "source": "src/staged_rts24_causal_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "initialize",
+          "name": "initialize"
+        },
+        {
+          "binding": "power_mapping",
+          "name": "power_mapping"
+        },
+        {
+          "binding": "Parameters",
+          "name": "Parameters"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "src.staged_deliverability_development_v1",
+      "source": "src/staged_rts24_causal_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "advance_debt_ledger",
+          "name": "advance_debt_ledger"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "src.rq2_joint_deliverability_boundary_v1.debt_cohorts",
+      "source": "src/staged_rts24_causal_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "assess_debt_cohorts",
+          "name": "assess_debt_cohorts"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "src.rq2_joint_deliverability_boundary_v1.debt_cohorts",
+      "source": "src/staged_rts24_causal_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "c",
+          "name": "staged_rts24_development_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "src",
+      "source": "src/staged_rts24_causal_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "audit_point",
+          "name": "audit_point"
+        },
+        {
+          "binding": "audit_economic_base",
+          "name": "audit_economic_base"
+        },
+        {
+          "binding": "TOL_MW",
+          "name": "TOL_MW"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 11,
+      "module": "src.staged_rts24_audit_v1",
+      "source": "src/staged_rts24_causal_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "audit_child_lp",
+          "name": "audit_child_lp"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 12,
+      "module": "src.staged_rts24_child_optimality_v1",
+      "source": "src/staged_rts24_causal_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "audit_execution",
+          "name": "audit_execution"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 122,
+      "module": "src.staged_rts24_causal_audit_v1",
+      "source": "src/staged_rts24_causal_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "dataclasses",
+      "source": "src/staged_rts24_causal_v2.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 3,
+      "module": "json",
+      "source": "src/staged_rts24_causal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "c",
+          "name": "staged_rts24_development_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "src",
+      "source": "src/staged_rts24_causal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "advance_debt_ledger",
+          "name": "advance_debt_ledger"
+        },
+        {
+          "binding": "assess_debt_cohorts",
+          "name": "assess_debt_cohorts"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "src.rq2_joint_deliverability_boundary_v1.debt_cohorts",
+      "source": "src/staged_rts24_causal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "audit_point",
+          "name": "audit_point"
+        },
+        {
+          "binding": "TOL_MW",
+          "name": "TOL_MW"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "src.staged_rts24_audit_v1",
+      "source": "src/staged_rts24_causal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "reference_requests",
+          "name": "reference_requests"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "src.staged_rts24_reference_queries_v1",
+      "source": "src/staged_rts24_causal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "PointEvidence",
+          "name": "PointEvidence"
+        },
+        {
+          "binding": "HourEvidence",
+          "name": "HourEvidence"
+        },
+        {
+          "binding": "ExecutionState",
+          "name": "ExecutionState"
+        },
+        {
+          "binding": "PreparedHour",
+          "name": "PreparedHour"
+        },
+        {
+          "binding": "Proposal",
+          "name": "Proposal"
+        },
+        {
+          "binding": "ZERO",
+          "name": "ZERO"
+        },
+        {
+          "binding": "initialize_execution",
+          "name": "initialize_execution"
+        },
+        {
+          "binding": "propose_hour",
+          "name": "propose_hour"
+        },
+        {
+          "binding": "reported_quantity",
+          "name": "reported_quantity"
+        },
+        {
+          "binding": "_root",
+          "name": "_root"
+        },
+        {
+          "binding": "_child",
+          "name": "_child"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "src.staged_rts24_causal_v1",
+      "source": "src/staged_rts24_causal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "audit_execution",
+          "name": "audit_execution"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 23,
+      "module": "src.staged_rts24_causal_audit_v2",
+      "source": "src/staged_rts24_causal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "dataclasses",
+      "source": "src/staged_rts24_child_optimality_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "isfinite",
+          "name": "isfinite"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "math",
+      "source": "src/staged_rts24_child_optimality_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "digest",
+          "name": "digest"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "src.staged_rts24_development_v1",
+      "source": "src/staged_rts24_child_optimality_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "audit_point",
+          "name": "audit_point"
+        },
+        {
+          "binding": "indexed",
+          "name": "indexed"
+        },
+        {
+          "binding": "point_sha",
+          "name": "point_sha"
+        },
+        {
+          "binding": "check",
+          "name": "check"
+        },
+        {
+          "binding": "TOL_KKT",
+          "name": "TOL_KKT"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "src.staged_rts24_audit_v1",
+      "source": "src/staged_rts24_child_optimality_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "asdict",
+          "name": "asdict"
+        },
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        },
+        {
+          "binding": "is_dataclass",
+          "name": "is_dataclass"
+        },
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "dataclasses",
+      "source": "src/staged_rts24_development_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Q",
+          "name": "Fraction"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "fractions",
+      "source": "src/staged_rts24_development_v1.py"
+    },
+    {
+      "binding": "hashlib",
+      "kind": "import",
+      "line": 4,
+      "module": "hashlib",
+      "source": "src/staged_rts24_development_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "distribution",
+          "name": "distribution"
+        },
+        {
+          "binding": "version",
+          "name": "version"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "importlib.metadata",
+      "source": "src/staged_rts24_development_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 6,
+      "module": "json",
+      "source": "src/staged_rts24_development_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "isfinite",
+          "name": "isfinite"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "math",
+      "source": "src/staged_rts24_development_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "pathlib",
+      "source": "src/staged_rts24_development_v1.py"
+    },
+    {
+      "binding": "yaml",
+      "kind": "import",
+      "line": 10,
+      "module": "yaml",
+      "source": "src/staged_rts24_development_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Parameters",
+          "name": "Parameters"
+        },
+        {
+          "binding": "METHODS",
+          "name": "METHODS"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 12,
+      "module": "src.staged_deliverability_development_v1",
+      "source": "src/staged_rts24_development_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "load_rts24",
+          "name": "load_rts24"
+        },
+        {
+          "binding": "scale_rts24_demand",
+          "name": "scale_rts24_demand"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 154,
+      "module": "src.grid.rts24",
+      "source": "src/staged_rts24_development_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "audit_economic_base",
+          "name": "audit_economic_base"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 339,
+      "module": "src.staged_rts24_audit_v1",
+      "source": "src/staged_rts24_development_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ConcreteModel",
+          "name": "ConcreteModel"
+        },
+        {
+          "binding": "Constraint",
+          "name": "Constraint"
+        },
+        {
+          "binding": "Objective",
+          "name": "Objective"
+        },
+        {
+          "binding": "Set",
+          "name": "Set"
+        },
+        {
+          "binding": "Var",
+          "name": "Var"
+        },
+        {
+          "binding": "minimize",
+          "name": "minimize"
+        },
+        {
+          "binding": "maximize",
+          "name": "maximize"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 401,
+      "module": "pyomo.environ",
+      "source": "src/staged_rts24_development_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "fields",
+          "name": "fields"
+        },
+        {
+          "binding": "is_dataclass",
+          "name": "is_dataclass"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "dataclasses",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Fraction",
+          "name": "Fraction"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "fractions",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "binding": "hashlib",
+      "kind": "import",
+      "line": 4,
+      "module": "hashlib",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 5,
+      "module": "json",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "binding": "math",
+      "kind": "import",
+      "line": 6,
+      "module": "math",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "binding": "os",
+      "kind": "import",
+      "line": 7,
+      "module": "os",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "pathlib",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "binding": "re",
+      "kind": "import",
+      "line": 9,
+      "module": "re",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "binding": "stat",
+      "kind": "import",
+      "line": 10,
+      "module": "stat",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "binding": "types",
+      "kind": "import",
+      "line": 11,
+      "module": "types",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "get_args",
+          "name": "get_args"
+        },
+        {
+          "binding": "get_origin",
+          "name": "get_origin"
+        },
+        {
+          "binding": "get_type_hints",
+          "name": "get_type_hints"
+        },
+        {
+          "binding": "Union",
+          "name": "Union"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 12,
+      "module": "typing",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Bus",
+          "name": "Bus"
+        },
+        {
+          "binding": "Generator",
+          "name": "Generator"
+        },
+        {
+          "binding": "Branch",
+          "name": "Branch"
+        },
+        {
+          "binding": "Rts24Data",
+          "name": "Rts24Data"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 14,
+      "module": "src.grid.rts24",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Parameters",
+          "name": "Parameters"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 15,
+      "module": "src.staged_deliverability_development_v1",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "DebtCohort",
+          "name": "DebtCohort"
+        },
+        {
+          "binding": "DebtLedger",
+          "name": "DebtLedger"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 16,
+      "module": "src.rq2_joint_deliverability_boundary_v1.debt_cohorts",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Outage",
+          "name": "Outage"
+        },
+        {
+          "binding": "PublicObservation",
+          "name": "PublicObservation"
+        },
+        {
+          "binding": "Fixture",
+          "name": "Fixture"
+        },
+        {
+          "binding": "PointRequest",
+          "name": "PointRequest"
+        },
+        {
+          "binding": "PointWitness",
+          "name": "PointWitness"
+        },
+        {
+          "binding": "EconomicEvidence",
+          "name": "EconomicEvidence"
+        },
+        {
+          "binding": "BoundQuery",
+          "name": "BoundQuery"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 17,
+      "module": "src.staged_rts24_development_v1",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ChildLpEvidence",
+          "name": "ChildLpEvidence"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 20,
+      "module": "src.staged_rts24_child_optimality_v1",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "PointEvidence",
+          "name": "PointEvidence"
+        },
+        {
+          "binding": "HourEvidence",
+          "name": "HourEvidence"
+        },
+        {
+          "binding": "ExecutionState",
+          "name": "ExecutionState"
+        },
+        {
+          "binding": "PreparedHour",
+          "name": "PreparedHour"
+        },
+        {
+          "binding": "Proposal",
+          "name": "Proposal"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 21,
+      "module": "src.staged_rts24_causal_v1",
+      "source": "src/staged_rts24_evidence_store_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "asdict",
+          "name": "asdict"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "dataclasses",
+      "source": "src/staged_rts24_highs_backend_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "isfinite",
+          "name": "isfinite"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "math",
+      "source": "src/staged_rts24_highs_backend_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 4,
+      "module": "pathlib",
+      "source": "src/staged_rts24_highs_backend_v1.py"
+    },
+    {
+      "binding": "hashlib",
+      "kind": "import",
+      "line": 5,
+      "module": "hashlib",
+      "source": "src/staged_rts24_highs_backend_v1.py"
+    },
+    {
+      "binding": "stat",
+      "kind": "import",
+      "line": 6,
+      "module": "stat",
+      "source": "src/staged_rts24_highs_backend_v1.py"
+    },
+    {
+      "binding": "time",
+      "kind": "import",
+      "line": 7,
+      "module": "time",
+      "source": "src/staged_rts24_highs_backend_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "c",
+          "name": "staged_rts24_development_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "src",
+      "source": "src/staged_rts24_highs_backend_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "NumericProblem",
+          "name": "NumericProblem"
+        },
+        {
+          "binding": "NumericSnapshot",
+          "name": "NumericSnapshot"
+        },
+        {
+          "binding": "SCHEMA",
+          "name": "SCHEMA"
+        },
+        {
+          "binding": "SNAPSHOT_SCHEMA",
+          "name": "SNAPSHOT_SCHEMA"
+        },
+        {
+          "binding": "UnresolvedNumeric",
+          "name": "UnresolvedNumeric"
+        },
+        {
+          "binding": "hessian_columns",
+          "name": "hessian_columns"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "src.staged_rts24_numeric_interface_v1",
+      "source": "src/staged_rts24_highs_backend_v1.py"
+    },
+    {
+      "binding": "api",
+      "kind": "import",
+      "line": 100,
+      "module": "highspy",
+      "source": "src/staged_rts24_highs_backend_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        },
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "dataclasses",
+      "source": "src/staged_rts24_journal_v2.py"
+    },
+    {
+      "binding": "importlib",
+      "kind": "import",
+      "line": 6,
+      "module": "importlib",
+      "source": "src/staged_rts24_journal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "version",
+          "name": "version"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "importlib.metadata",
+      "source": "src/staged_rts24_journal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "pathlib",
+      "source": "src/staged_rts24_journal_v2.py"
+    },
+    {
+      "binding": "re",
+      "kind": "import",
+      "line": 9,
+      "module": "re",
+      "source": "src/staged_rts24_journal_v2.py"
+    },
+    {
+      "binding": "sys",
+      "kind": "import",
+      "line": 10,
+      "module": "sys",
+      "source": "src/staged_rts24_journal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "policy",
+          "name": "staged_rts24_causal_v2"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 12,
+      "module": "src",
+      "source": "src/staged_rts24_journal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "c",
+          "name": "staged_rts24_development_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 13,
+      "module": "src",
+      "source": "src/staged_rts24_journal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "audit_execution",
+          "name": "audit_execution"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 14,
+      "module": "src.staged_rts24_causal_audit_v2",
+      "source": "src/staged_rts24_journal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "reference_requests",
+          "name": "reference_requests"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 15,
+      "module": "src.staged_rts24_reference_queries_v1",
+      "source": "src/staged_rts24_journal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "EvidenceStore",
+          "name": "EvidenceStore"
+        },
+        {
+          "binding": "EvidenceReadView",
+          "name": "EvidenceReadView"
+        },
+        {
+          "binding": "PublicationError",
+          "name": "PublicationError"
+        },
+        {
+          "binding": "CODEC",
+          "name": "SCHEMA"
+        },
+        {
+          "binding": "canonical",
+          "name": "canonical"
+        },
+        {
+          "binding": "sha",
+          "name": "sha"
+        },
+        {
+          "binding": "parse",
+          "name": "parse"
+        },
+        {
+          "binding": "read_bytes",
+          "name": "read_bytes"
+        },
+        {
+          "binding": "pack",
+          "name": "pack"
+        },
+        {
+          "binding": "publish",
+          "name": "publish"
+        },
+        {
+          "binding": "require",
+          "name": "require"
+        },
+        {
+          "binding": "directory_chain",
+          "name": "directory_chain"
+        },
+        {
+          "binding": "directory_identity",
+          "name": "directory_identity"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 16,
+      "module": "src.staged_rts24_evidence_store_v1",
+      "source": "src/staged_rts24_journal_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "dataclasses",
+      "source": "src/staged_rts24_numeric_interface_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "isfinite",
+          "name": "isfinite"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "math",
+      "source": "src/staged_rts24_numeric_interface_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Constraint",
+          "name": "Constraint"
+        },
+        {
+          "binding": "Var",
+          "name": "Var"
+        },
+        {
+          "binding": "value",
+          "name": "value"
+        },
+        {
+          "binding": "maximize",
+          "name": "maximize"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "pyomo.environ",
+      "source": "src/staged_rts24_numeric_interface_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "generate_standard_repn",
+          "name": "generate_standard_repn"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "pyomo.repn",
+      "source": "src/staged_rts24_numeric_interface_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "c",
+          "name": "staged_rts24_development_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "src",
+      "source": "src/staged_rts24_numeric_interface_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "audit_economic_base",
+          "name": "audit_economic_base"
+        },
+        {
+          "binding": "audit_point",
+          "name": "audit_point"
+        },
+        {
+          "binding": "TOL_KKT",
+          "name": "TOL_KKT"
+        },
+        {
+          "binding": "TOL_MW",
+          "name": "TOL_MW"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "src.staged_rts24_audit_v1",
+      "source": "src/staged_rts24_numeric_interface_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ChildLpEvidence",
+          "name": "ChildLpEvidence"
+        },
+        {
+          "binding": "audit_child_lp",
+          "name": "audit_child_lp"
+        },
+        {
+          "binding": "reduction",
+          "name": "reduction"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "src.staged_rts24_child_optimality_v1",
+      "source": "src/staged_rts24_numeric_interface_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "PointEvidence",
+          "name": "PointEvidence"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 11,
+      "module": "src.staged_rts24_causal_v1",
+      "source": "src/staged_rts24_numeric_interface_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "sha256",
+          "name": "sha256"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "hashlib",
+      "source": "src/staged_rts24_p2_outer_observation_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 3,
+      "module": "json",
+      "source": "src/staged_rts24_p2_outer_observation_v1.py"
+    },
+    {
+      "binding": "math",
+      "kind": "import",
+      "line": 4,
+      "module": "math",
+      "source": "src/staged_rts24_p2_outer_observation_v1.py"
+    },
+    {
+      "binding": "os",
+      "kind": "import",
+      "line": 5,
+      "module": "os",
+      "source": "src/staged_rts24_p2_outer_observation_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "pathlib",
+      "source": "src/staged_rts24_p2_outer_observation_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "codec",
+          "name": "staged_rts24_evidence_store_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "src",
+      "source": "src/staged_rts24_p2_outer_observation_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "sha256",
+          "name": "sha256"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "hashlib",
+      "source": "src/staged_rts24_p2_outer_observation_v2.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 3,
+      "module": "json",
+      "source": "src/staged_rts24_p2_outer_observation_v2.py"
+    },
+    {
+      "binding": "math",
+      "kind": "import",
+      "line": 4,
+      "module": "math",
+      "source": "src/staged_rts24_p2_outer_observation_v2.py"
+    },
+    {
+      "binding": "os",
+      "kind": "import",
+      "line": 5,
+      "module": "os",
+      "source": "src/staged_rts24_p2_outer_observation_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "pathlib",
+      "source": "src/staged_rts24_p2_outer_observation_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "codec",
+          "name": "staged_rts24_evidence_store_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "src",
+      "source": "src/staged_rts24_p2_outer_observation_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "old",
+          "name": "staged_rts24_p2_outer_observation_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "src",
+      "source": "src/staged_rts24_p2_outer_observation_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "MAX_MEMBER_HANDLES",
+          "name": "MAX_MEMBER_HANDLES"
+        },
+        {
+          "binding": "TERMINAL_RECORD_BYTES",
+          "name": "TERMINAL_RECORD_BYTES"
+        },
+        {
+          "binding": "PARENT_RECORD_BYTES",
+          "name": "PARENT_RECORD_BYTES"
+        },
+        {
+          "binding": "RESERVED_BYTES",
+          "name": "RESERVED_BYTES"
+        },
+        {
+          "binding": "RESERVED_FILES",
+          "name": "RESERVED_FILES"
+        },
+        {
+          "binding": "record_image",
+          "name": "record_image"
+        },
+        {
+          "binding": "error_details",
+          "name": "error_details"
+        },
+        {
+          "binding": "bounded_error",
+          "name": "bounded_error"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "src.staged_rts24_process_guard_v3",
+      "source": "src/staged_rts24_p2_outer_observation_v2.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "fields",
+          "name": "fields"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "dataclasses",
+      "source": "src/staged_rts24_p2_package_check_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Fraction",
+          "name": "Fraction"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "fractions",
+      "source": "src/staged_rts24_p2_package_check_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "sha256",
+          "name": "sha256"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 4,
+      "module": "hashlib",
+      "source": "src/staged_rts24_p2_package_check_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 5,
+      "module": "json",
+      "source": "src/staged_rts24_p2_package_check_v1.py"
+    },
+    {
+      "binding": "math",
+      "kind": "import",
+      "line": 6,
+      "module": "math",
+      "source": "src/staged_rts24_p2_package_check_v1.py"
+    },
+    {
+      "binding": "os",
+      "kind": "import",
+      "line": 7,
+      "module": "os",
+      "source": "src/staged_rts24_p2_package_check_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        },
+        {
+          "binding": "PurePosixPath",
+          "name": "PurePosixPath"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "pathlib",
+      "source": "src/staged_rts24_p2_package_check_v1.py"
+    },
+    {
+      "binding": "re",
+      "kind": "import",
+      "line": 9,
+      "module": "re",
+      "source": "src/staged_rts24_p2_package_check_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "parent",
+          "name": "staged_rts24_p2_outer_observation_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 11,
+      "module": "src",
+      "source": "src/staged_rts24_p2_package_check_v1.py"
+    },
+    {
+      "binding": "C",
+      "kind": "import",
+      "line": 2,
+      "module": "ctypes",
+      "source": "src/staged_rts24_process_guard_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "W",
+          "name": "wintypes"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "ctypes",
+      "source": "src/staged_rts24_process_guard_v1.py"
+    },
+    {
+      "binding": "os",
+      "kind": "import",
+      "line": 4,
+      "module": "os",
+      "source": "src/staged_rts24_process_guard_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "pathlib",
+      "source": "src/staged_rts24_process_guard_v1.py"
+    },
+    {
+      "binding": "stat",
+      "kind": "import",
+      "line": 6,
+      "module": "stat",
+      "source": "src/staged_rts24_process_guard_v1.py"
+    },
+    {
+      "binding": "time",
+      "kind": "import",
+      "line": 7,
+      "module": "time",
+      "source": "src/staged_rts24_process_guard_v1.py"
+    },
+    {
+      "binding": "math",
+      "kind": "import",
+      "line": 8,
+      "module": "math",
+      "source": "src/staged_rts24_process_guard_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "DevelopmentNormalChild",
+          "name": "DevelopmentNormalChild"
+        },
+        {
+          "binding": "_check",
+          "name": "_check"
+        },
+        {
+          "binding": "_Limits",
+          "name": "_Limits"
+        },
+        {
+          "binding": "_Accounting",
+          "name": "_Accounting"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "src.rq2_joint_deliverability_boundary_v1.normal_process",
+      "source": "src/staged_rts24_process_guard_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 2,
+      "module": "json",
+      "source": "src/staged_rts24_process_guard_v3.py"
+    },
+    {
+      "binding": "math",
+      "kind": "import",
+      "line": 3,
+      "module": "math",
+      "source": "src/staged_rts24_process_guard_v3.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 4,
+      "module": "pathlib",
+      "source": "src/staged_rts24_process_guard_v3.py"
+    },
+    {
+      "binding": "time",
+      "kind": "import",
+      "line": 5,
+      "module": "time",
+      "source": "src/staged_rts24_process_guard_v3.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "OwnedChild",
+          "name": "OwnedChild"
+        },
+        {
+          "binding": "controlled_environment",
+          "name": "controlled_environment"
+        },
+        {
+          "binding": "scan_output",
+          "name": "scan_output"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "src.staged_rts24_process_guard_v1",
+      "source": "src/staged_rts24_process_guard_v3.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Q",
+          "name": "Fraction"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "fractions",
+      "source": "src/staged_rts24_reference_queries_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "c",
+          "name": "staged_rts24_development_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 4,
+      "module": "src",
+      "source": "src/staged_rts24_reference_queries_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "dataclass",
+          "name": "dataclass"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "dataclasses",
+      "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "sha256",
+          "name": "sha256"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "hashlib",
+      "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 4,
+      "module": "pathlib",
+      "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "sys",
+      "kind": "import",
+      "line": 5,
+      "module": "sys",
+      "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "prefix",
+          "name": "staged_rts24_saved_prefix_replay_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "src",
+      "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "journal",
+          "name": "staged_rts24_journal_v2"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "src",
+      "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 99,
+      "module": "json",
+      "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "error_details",
+          "name": "error_details"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 181,
+      "module": "src.staged_rts24_process_guard_v3",
+      "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "sha256",
+          "name": "sha256"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "hashlib",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 3,
+      "module": "json",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "isfinite",
+          "name": "isfinite"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 4,
+      "module": "math",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "pathlib",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "binding": "sys",
+      "kind": "import",
+      "line": 6,
+      "module": "sys",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "core",
+          "name": "staged_rts24_development_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "src",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "codec",
+          "name": "staged_rts24_evidence_store_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "src",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "numeric",
+          "name": "staged_rts24_numeric_interface_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "src",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "backend",
+          "name": "staged_rts24_highs_backend_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 11,
+      "module": "src",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "audit",
+          "name": "staged_rts24_audit_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 12,
+      "module": "src",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "child",
+          "name": "staged_rts24_child_optimality_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 13,
+      "module": "src",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "mechanical",
+          "name": "staged_rts24_p2_package_check_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 14,
+      "module": "src",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "parent",
+          "name": "staged_rts24_p2_outer_observation_v2"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 15,
+      "module": "src",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "PointEvidence",
+          "name": "PointEvidence"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 16,
+      "module": "src.staged_rts24_causal_v1",
+      "source": "src/staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "asdict",
+          "name": "asdict"
+        },
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "dataclasses",
+      "source": "src/staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "pathlib",
+      "source": "src/staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "binding": "sys",
+      "kind": "import",
+      "line": 4,
+      "module": "sys",
+      "source": "src/staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "point",
+          "name": "staged_rts24_saved_point_replay_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "src",
+      "source": "src/staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "causal",
+          "name": "staged_rts24_causal_v2"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "src",
+      "source": "src/staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "policy_audit",
+          "name": "staged_rts24_causal_audit_v2"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 8,
+      "module": "src",
+      "source": "src/staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "reference_requests",
+          "name": "reference_requests"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 9,
+      "module": "src.staged_rts24_reference_queries_v1",
+      "source": "src/staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "deepcopy",
+          "name": "deepcopy"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "copy",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "sha256",
+          "name": "sha256"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "hashlib",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "lru_cache",
+          "name": "lru_cache"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 4,
+      "module": "functools",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 5,
+      "module": "json",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "pathlib",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "sys",
+      "kind": "import",
+      "line": 7,
+      "module": "sys",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "time",
+      "kind": "import",
+      "line": 8,
+      "module": "time",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pytest",
+      "kind": "import",
+      "line": 10,
+      "module": "pytest",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "f",
+          "name": "staged_rts24_saved_fresh_adoption_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 12,
+      "module": "src",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "cli",
+          "name": "staged_rts24_saved_fresh_adoption_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 13,
+      "module": "experiments",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "highspy",
+      "kind": "import",
+      "line": 18,
+      "module": "highspy",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pyo",
+      "kind": "import",
+      "line": 19,
+      "module": "pyomo.environ",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "subprocess",
+      "kind": "import",
+      "line": 20,
+      "module": "subprocess",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "controlled_environment",
+          "name": "controlled_environment"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 280,
+      "module": "src.staged_rts24_process_guard_v1",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "subprocess",
+      "kind": "import",
+      "line": 325,
+      "module": "subprocess",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 334,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "struct",
+      "kind": "import",
+      "line": 431,
+      "module": "struct",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pickle",
+      "kind": "import",
+      "line": 488,
+      "module": "pickle",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "threading",
+      "kind": "import",
+      "line": 583,
+      "module": "threading",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "OwnedChild",
+          "name": "OwnedChild"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 685,
+      "module": "src.staged_rts24_process_guard_v1",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "FrozenInstanceError",
+          "name": "FrozenInstanceError"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 748,
+      "module": "dataclasses",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pickle",
+      "kind": "import",
+      "line": 763,
+      "module": "pickle",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "os",
+      "kind": "import",
+      "line": 924,
+      "module": "os",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "FrozenInstanceError",
+          "name": "FrozenInstanceError"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 958,
+      "module": "dataclasses",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "os",
+      "kind": "import",
+      "line": 1087,
+      "module": "os",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pickle",
+      "kind": "import",
+      "line": 1118,
+      "module": "pickle",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 1134,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "time",
+      "kind": "import",
+      "line": 1181,
+      "module": "time",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "time",
+      "kind": "import",
+      "line": 1227,
+      "module": "time",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "time",
+      "kind": "import",
+      "line": 1336,
+      "module": "time",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pickle",
+      "kind": "import",
+      "line": 1375,
+      "module": "pickle",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "time",
+      "kind": "import",
+      "line": 1375,
+      "module": "time",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "threading",
+      "kind": "import",
+      "line": 1447,
+      "module": "threading",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "time",
+      "kind": "import",
+      "line": 1447,
+      "module": "time",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pickle",
+      "kind": "import",
+      "line": 1463,
+      "module": "pickle",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "time",
+      "kind": "import",
+      "line": 1532,
+      "module": "time",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "subprocess",
+      "kind": "import",
+      "line": 1591,
+      "module": "subprocess",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ModuleType",
+          "name": "ModuleType"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 1643,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 1654,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "time",
+      "kind": "import",
+      "line": 1695,
+      "module": "time",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 1708,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "os",
+      "kind": "import",
+      "line": 1791,
+      "module": "os",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "get_ident",
+          "name": "get_ident"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 1792,
+      "module": "threading",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "ModuleType",
+          "name": "ModuleType"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 1806,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pickle",
+      "kind": "import",
+      "line": 1892,
+      "module": "pickle",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pickle",
+      "kind": "import",
+      "line": 1964,
+      "module": "pickle",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "subprocess",
+      "kind": "import",
+      "line": 2015,
+      "module": "subprocess",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2079,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2097,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2121,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2143,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "os",
+      "kind": "import",
+      "line": 2187,
+      "module": "os",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "get_ident",
+          "name": "get_ident"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2188,
+      "module": "threading",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "OwnedChild",
+          "name": "OwnedChild"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2222,
+      "module": "src.staged_rts24_process_guard_v1",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2268,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pickle",
+      "kind": "import",
+      "line": 2290,
+      "module": "pickle",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2410,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "sys",
+      "kind": "import",
+      "line": 2452,
+      "module": "sys",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2469,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2502,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "highspy",
+      "kind": "import",
+      "line": 2503,
+      "module": "highspy",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pyo",
+      "kind": "import",
+      "line": 2504,
+      "module": "pyomo.environ",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pickle",
+      "kind": "import",
+      "line": 2558,
+      "module": "pickle",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pickle",
+      "kind": "import",
+      "line": 2643,
+      "module": "pickle",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "os",
+      "kind": "import",
+      "line": 2697,
+      "module": "os",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2738,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "sys",
+      "kind": "import",
+      "line": 2758,
+      "module": "sys",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Counter",
+          "name": "Counter"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2759,
+      "module": "collections",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 358,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 1164,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "pickle",
+      "kind": "import",
+      "line": 2832,
+      "module": "pickle",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "binding": "os",
+      "kind": "import",
+      "line": 190,
+      "module": "os",
+      "source": "tests/test_staged_rts24_saved_fresh_adoption_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "deepcopy",
+          "name": "deepcopy"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "copy",
+      "source": "tests/test_staged_rts24_saved_journal_check_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "sha256",
+          "name": "sha256"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "hashlib",
+      "source": "tests/test_staged_rts24_saved_journal_check_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 4,
+      "module": "json",
+      "source": "tests/test_staged_rts24_saved_journal_check_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "pathlib",
+      "source": "tests/test_staged_rts24_saved_journal_check_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_journal_check_v1.py"
+    },
+    {
+      "binding": "pytest",
+      "kind": "import",
+      "line": 8,
+      "module": "pytest",
+      "source": "tests/test_staged_rts24_saved_journal_check_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "b",
+          "name": "staged_rts24_saved_prefix_replay_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "src",
+      "source": "tests/test_staged_rts24_saved_journal_check_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "journal",
+          "name": "staged_rts24_journal_v2"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 11,
+      "module": "src",
+      "source": "tests/test_staged_rts24_saved_journal_check_v1.py"
+    },
+    {
+      "binding": "highspy",
+      "kind": "import",
+      "line": 21,
+      "module": "highspy",
+      "source": "tests/test_staged_rts24_saved_journal_check_v1.py"
+    },
+    {
+      "binding": "subprocess",
+      "kind": "import",
+      "line": 22,
+      "module": "subprocess",
+      "source": "tests/test_staged_rts24_saved_journal_check_v1.py"
+    },
+    {
+      "binding": "pyo",
+      "kind": "import",
+      "line": 23,
+      "module": "pyomo.environ",
+      "source": "tests/test_staged_rts24_saved_journal_check_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "analytic_fixture",
+          "name": "analytic_fixture"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 165,
+      "module": "experiments.staged_rts24_causal_examples_v1",
+      "source": "tests/test_staged_rts24_saved_journal_check_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "asdict",
+          "name": "asdict"
+        },
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "dataclasses",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "sha256",
+          "name": "sha256"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "hashlib",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 4,
+      "module": "json",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 5,
+      "module": "pathlib",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "binding": "pytest",
+      "kind": "import",
+      "line": 8,
+      "module": "pytest",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "d",
+          "name": "staged_rts24_saved_point_replay_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 10,
+      "module": "src",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "PointEvidence",
+          "name": "PointEvidence"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 11,
+      "module": "src.staged_rts24_causal_v1",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "frame",
+          "name": "frame"
+        },
+        {
+          "binding": "raw_snapshot",
+          "name": "raw_snapshot"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 12,
+      "module": "test_staged_rts24_numeric_interface_v1",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "outer_process",
+          "name": "process"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 13,
+      "module": "test_staged_rts24_p2_outer_observation_v2",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "point_process",
+          "name": "process"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 14,
+      "module": "test_staged_rts24_p2_package_check_v1",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "binding": "subprocess",
+      "kind": "import",
+      "line": 19,
+      "module": "subprocess",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "binding": "pyo",
+      "kind": "import",
+      "line": 20,
+      "module": "pyomo.environ",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "reference_requests",
+          "name": "reference_requests"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 215,
+      "module": "src.staged_rts24_reference_queries_v1",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "binding": "sys",
+      "kind": "import",
+      "line": 271,
+      "module": "sys",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "analytic_point",
+          "name": "analytic_point"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 47,
+      "module": "experiments.staged_rts24_causal_examples_v1",
+      "source": "tests/test_staged_rts24_saved_point_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "asdict",
+          "name": "asdict"
+        },
+        {
+          "binding": "replace",
+          "name": "replace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 2,
+      "module": "dataclasses",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "sha256",
+          "name": "sha256"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 3,
+      "module": "hashlib",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Q",
+          "name": "Fraction"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 4,
+      "module": "fractions",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "binding": "json",
+      "kind": "import",
+      "line": 5,
+      "module": "json",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "Path",
+          "name": "Path"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 6,
+      "module": "pathlib",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "SimpleNamespace",
+          "name": "SimpleNamespace"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 7,
+      "module": "types",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "binding": "pytest",
+      "kind": "import",
+      "line": 9,
+      "module": "pytest",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "analytic_fixture",
+          "name": "analytic_fixture"
+        },
+        {
+          "binding": "analytic_hour",
+          "name": "analytic_hour"
+        },
+        {
+          "binding": "analytic_actual",
+          "name": "analytic_actual"
+        },
+        {
+          "binding": "analytic_point",
+          "name": "analytic_point"
+        },
+        {
+          "binding": "analytic_economic",
+          "name": "analytic_economic"
+        },
+        {
+          "binding": "analytic_child",
+          "name": "analytic_child"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 11,
+      "module": "experiments.staged_rts24_causal_examples_v1",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "d",
+          "name": "staged_rts24_saved_prefix_replay_v1"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 14,
+      "module": "src",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "PointEvidence",
+          "name": "PointEvidence"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 15,
+      "module": "src.staged_rts24_causal_v1",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "outer_process",
+          "name": "process"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 16,
+      "module": "test_staged_rts24_p2_outer_observation_v2",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "binding": "subprocess",
+      "kind": "import",
+      "line": 21,
+      "module": "subprocess",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "binding": "pyo",
+      "kind": "import",
+      "line": 22,
+      "module": "pyomo.environ",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "imported": [
+        {
+          "binding": "journal",
+          "name": "staged_rts24_journal_v2"
+        }
+      ],
+      "kind": "from",
+      "level": 0,
+      "line": 23,
+      "module": "src",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "binding": "shutil",
+      "kind": "import",
+      "line": 252,
+      "module": "shutil",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    },
+    {
+      "binding": "sys",
+      "kind": "import",
+      "line": 272,
+      "module": "sys",
+      "source": "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+    }
+  ],
+  "includes_local_and_unreachable_imports": true
+}

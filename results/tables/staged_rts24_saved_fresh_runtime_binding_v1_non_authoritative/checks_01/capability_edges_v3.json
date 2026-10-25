@@ -1,0 +1,329 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "cross_process_packets_are_binding_data_only": true,
+  "data_order_edges": [
+    [
+      "host_expectation",
+      "request"
+    ],
+    [
+      "request",
+      "broker_owner_armed"
+    ],
+    [
+      "broker_owner_armed",
+      "broker_ready"
+    ],
+    [
+      "broker_ready",
+      "START"
+    ],
+    [
+      "START",
+      "context"
+    ],
+    [
+      "context",
+      "offer"
+    ],
+    [
+      "offer",
+      "ACK"
+    ],
+    [
+      "ACK",
+      "broker_ACK_verified"
+    ],
+    [
+      "broker_ACK_verified",
+      "controller_permit"
+    ],
+    [
+      "controller_permit",
+      "controller_owner_constructed"
+    ],
+    [
+      "controller_owner_constructed",
+      "controller_bootstrap"
+    ],
+    [
+      "controller_bootstrap",
+      "G0"
+    ],
+    [
+      "G0",
+      "controller_store"
+    ],
+    [
+      "controller_store",
+      "controller_issuer"
+    ],
+    [
+      "controller_issuer",
+      "parent_permit"
+    ],
+    [
+      "parent_permit",
+      "parent_owner_constructed"
+    ],
+    [
+      "parent_owner_constructed",
+      "parent_bootstrap"
+    ],
+    [
+      "parent_bootstrap",
+      "parent_hold"
+    ],
+    [
+      "parent_hold",
+      "parent_store"
+    ],
+    [
+      "parent_store",
+      "parent_issuer"
+    ],
+    [
+      "parent_issuer",
+      "fresh_permit"
+    ],
+    [
+      "fresh_permit",
+      "fresh_owner_constructed"
+    ],
+    [
+      "fresh_owner_constructed",
+      "fresh_bootstrap"
+    ],
+    [
+      "fresh_bootstrap",
+      "fresh_hold"
+    ],
+    [
+      "fresh_hold",
+      "fresh_result"
+    ],
+    [
+      "fresh_result",
+      "fresh_quiet"
+    ],
+    [
+      "fresh_quiet",
+      "G1_compare"
+    ],
+    [
+      "G1_compare",
+      "parent_quiet"
+    ],
+    [
+      "parent_quiet",
+      "G2"
+    ],
+    [
+      "G2",
+      "final_observation"
+    ],
+    [
+      "final_observation",
+      "G3"
+    ],
+    [
+      "G3",
+      "controller_return"
+    ],
+    [
+      "controller_return",
+      "controller_quiet"
+    ],
+    [
+      "controller_quiet",
+      "broker_return"
+    ],
+    [
+      "broker_return",
+      "broker_quiet"
+    ],
+    [
+      "broker_quiet",
+      "H3"
+    ],
+    [
+      "H3",
+      "host_final"
+    ]
+  ],
+  "implemented": false,
+  "node_roles": {
+    "ACK": "host",
+    "G0": "controller",
+    "G1_compare": "parent",
+    "G2": "controller",
+    "G3": "controller",
+    "H3": "host",
+    "START": "host",
+    "broker_ACK_verified": "broker",
+    "broker_owner_armed": "host",
+    "broker_quiet": "host",
+    "broker_ready": "broker",
+    "broker_return": "broker",
+    "context": "broker",
+    "controller_bootstrap": "controller",
+    "controller_issuer": "controller",
+    "controller_owner_constructed": "broker",
+    "controller_permit": "broker",
+    "controller_quiet": "broker",
+    "controller_return": "controller",
+    "controller_store": "controller",
+    "final_observation": "controller",
+    "fresh_bootstrap": "fresh",
+    "fresh_hold": "fresh",
+    "fresh_owner_constructed": "parent",
+    "fresh_permit": "parent",
+    "fresh_quiet": "parent",
+    "fresh_result": "fresh",
+    "host_expectation": "host",
+    "host_final": "host",
+    "offer": "broker",
+    "parent_bootstrap": "parent",
+    "parent_hold": "parent",
+    "parent_issuer": "parent",
+    "parent_owner_constructed": "controller",
+    "parent_permit": "controller",
+    "parent_quiet": "controller",
+    "parent_store": "parent",
+    "request": "host"
+  },
+  "same_process_capability_edges": [
+    [
+      "controller_bootstrap",
+      "G0"
+    ],
+    [
+      "G0",
+      "controller_store"
+    ],
+    [
+      "G0",
+      "controller_issuer"
+    ],
+    [
+      "controller_bootstrap",
+      "controller_issuer"
+    ],
+    [
+      "controller_issuer",
+      "parent_permit"
+    ],
+    [
+      "parent_permit",
+      "parent_owner_constructed"
+    ],
+    [
+      "parent_owner_constructed",
+      "parent_quiet"
+    ],
+    [
+      "parent_bootstrap",
+      "parent_hold"
+    ],
+    [
+      "parent_hold",
+      "parent_store"
+    ],
+    [
+      "parent_hold",
+      "parent_issuer"
+    ],
+    [
+      "parent_bootstrap",
+      "parent_issuer"
+    ],
+    [
+      "parent_issuer",
+      "fresh_permit"
+    ],
+    [
+      "fresh_permit",
+      "fresh_owner_constructed"
+    ],
+    [
+      "fresh_owner_constructed",
+      "fresh_quiet"
+    ],
+    [
+      "fresh_bootstrap",
+      "fresh_hold"
+    ],
+    [
+      "G0",
+      "G2"
+    ],
+    [
+      "G0",
+      "G3"
+    ],
+    [
+      "H3",
+      "host_final"
+    ],
+    [
+      "broker_owner_armed",
+      "START"
+    ],
+    [
+      "broker_owner_armed",
+      "broker_quiet"
+    ],
+    [
+      "broker_ACK_verified",
+      "controller_permit"
+    ],
+    [
+      "controller_permit",
+      "controller_owner_constructed"
+    ],
+    [
+      "controller_owner_constructed",
+      "controller_quiet"
+    ]
+  ],
+  "topological_order": [
+    "host_expectation",
+    "request",
+    "broker_owner_armed",
+    "broker_ready",
+    "START",
+    "context",
+    "offer",
+    "ACK",
+    "broker_ACK_verified",
+    "controller_permit",
+    "controller_owner_constructed",
+    "controller_bootstrap",
+    "G0",
+    "controller_store",
+    "controller_issuer",
+    "parent_permit",
+    "parent_owner_constructed",
+    "parent_bootstrap",
+    "parent_hold",
+    "parent_store",
+    "parent_issuer",
+    "fresh_permit",
+    "fresh_owner_constructed",
+    "fresh_bootstrap",
+    "fresh_hold",
+    "fresh_result",
+    "fresh_quiet",
+    "G1_compare",
+    "parent_quiet",
+    "G2",
+    "final_observation",
+    "G3",
+    "controller_return",
+    "controller_quiet",
+    "broker_return",
+    "broker_quiet",
+    "H3",
+    "host_final"
+  ]
+}

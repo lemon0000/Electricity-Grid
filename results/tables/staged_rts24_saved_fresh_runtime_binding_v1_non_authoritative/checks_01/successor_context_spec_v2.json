@@ -1,0 +1,503 @@
+{
+  "ACK_is_post_context": true,
+  "G0_state_is_process_local_capability": true,
+  "arbitrary_native_process_import_policy_decided": false,
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "broker_identity_fields": [
+    "creation_filetime",
+    "pid"
+  ],
+  "canonical": {
+    "allow_nan": false,
+    "duplicate_keys_allowed": false,
+    "encoding": "ASCII",
+    "ensure_ascii": true,
+    "max_depth": 256,
+    "max_nodes": 1000000,
+    "raw_bytes_cap": 2097152,
+    "separators": [
+      ",",
+      ":"
+    ],
+    "sort_keys": true
+  },
+  "deadline_contract": {
+    "path": "results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01/deadline_contract_v1.json",
+    "pin": {
+      "bytes": 776,
+      "sha256": "ecffb262d87b6595e4d66451768ada7780c73e6e2ea0fc0e5b88834aadb32343"
+    }
+  },
+  "environment_allowed_keys": [
+    "APPDATA",
+    "COMMONPROGRAMFILES",
+    "COMSPEC",
+    "CONDA_DEFAULT_ENV",
+    "CONDA_PREFIX",
+    "LOCALAPPDATA",
+    "MKL_NUM_THREADS",
+    "NUMBER_OF_PROCESSORS",
+    "OMP_NUM_THREADS",
+    "OPENBLAS_NUM_THREADS",
+    "PATH",
+    "PATHEXT",
+    "PROCESSOR_ARCHITECTURE",
+    "PROGRAMFILES",
+    "PROGRAMFILES(X86)",
+    "PYTHONDONTWRITEBYTECODE",
+    "PYTHONHASHSEED",
+    "PYTHONNOUSERSITE",
+    "SYSTEMROOT",
+    "TEMP",
+    "TMP",
+    "USERPROFILE",
+    "WINDIR"
+  ],
+  "environment_fixed_values": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "exact_limits": {
+    "files": 64,
+    "job_commit_bytes": 2147483648,
+    "member_handles": 1024,
+    "no_progress_seconds": 65,
+    "output_bytes": 8388608,
+    "process_commit_bytes": 1073741824,
+    "record_bytes": 131072,
+    "rss_bytes": 1073741824,
+    "wall_seconds": 180
+  },
+  "exact_stage_seconds": {
+    "failure": 15,
+    "final_check": 15,
+    "final_publish": 15,
+    "fresh": 40,
+    "inner_quiesce": 5,
+    "inner_terminal": 5,
+    "outer_quiesce": 5,
+    "outer_terminal": 10,
+    "parent": 45,
+    "parent_compare": 15,
+    "prepare": 10
+  },
+  "field_rules": {
+    "anchor_sha": {
+      "constraint": {
+        "exact": "c6a25cd96c8a4a2cf293d41fe51bc7905db63fbc35253076f97e9239a4f22473"
+      },
+      "provenance": "fixed external p1_execution_review_01/postcheck_03.stdout.json SHA, never generated from current P1",
+      "type": "string"
+    },
+    "authority": {
+      "constraint": {
+        "exact": "DRAFT_NONAUTHORITATIVE"
+      },
+      "provenance": "fixed contract literal; cannot confer authority",
+      "type": "str"
+    },
+    "broker_identity": {
+      "constraint": {
+        "creation_filetime": "exact int 1..2^64-1",
+        "exact_keys": [
+          "pid",
+          "creation_filetime"
+        ],
+        "pid": "exact int 1..2^32-1"
+      },
+      "provenance": "host held real broker owner; broker ready/START binding; controller bootstrap verifies actual kernel PID/creation",
+      "type": "object"
+    },
+    "caller_expectation_core": {
+      "constraint": {
+        "all_subtrees": "byte-for-byte canonical equality to independently held host expectation image E",
+        "exact_keys": [
+          "files",
+          "fixture_sha",
+          "outer",
+          "trusted",
+          "expectations",
+          "bindings",
+          "source",
+          "anchor_path",
+          "anchor_pin",
+          "anchor_identity",
+          "anchor_directories",
+          "root_directories",
+          "historical_metrics",
+          "expected_evidence_refs",
+          "inventory"
+        ],
+        "files": "same input_files",
+        "inventory_exact_keys": [
+          "pins",
+          "files",
+          "directories"
+        ],
+        "source": "same source_pins"
+      },
+      "provenance": "host independently captured E before broker context; broker independently rebuilds same E; full remains false",
+      "type": "object"
+    },
+    "caller_expectation_sha": {
+      "constraint": {
+        "equals": "sha256(canonical(E))",
+        "format": "SHA256"
+      },
+      "provenance": "host request and independent E, not self-attestation",
+      "type": "string"
+    },
+    "deadline": {
+      "constraint": {
+        "equals": "invocation_started+180",
+        "exact_type": "float, finite"
+      },
+      "provenance": "request start plus original180, additionally constrained by fixed deadline profile",
+      "type": "float"
+    },
+    "deadline_profile_sha": {
+      "constraint": {
+        "artifact": {
+          "path": "results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01/deadline_contract_v1.json",
+          "pin": {
+            "bytes": 776,
+            "sha256": "ecffb262d87b6595e4d66451768ada7780c73e6e2ea0fc0e5b88834aadb32343"
+          }
+        },
+        "format": "SHA256"
+      },
+      "provenance": "SHA of fixed canonical earlier-deadline contract bytes before context creation",
+      "type": "string"
+    },
+    "environment": {
+      "constraint": {
+        "canonical_bytes_cap": 131072,
+        "exact_values": "host-held environment; six fixed worker values below",
+        "keys": "case-unique allowed environment whitelist below",
+        "value": "string <=32768 code points"
+      },
+      "provenance": "host actual allowed environment before request, broker and each role verify actual environment",
+      "type": "object"
+    },
+    "executable": {
+      "constraint": {
+        "exact_keys": [
+          "path",
+          "pin",
+          "identity",
+          "python"
+        ],
+        "identity": "[device,inode,size,mtime_ns] exact nonnegative ints; size=pin.bytes",
+        "path": "D:\\Miniconda3\\envs\\compute\\python.exe",
+        "pin": "Pin",
+        "python": "3.12.12 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 20:05:38) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "provenance": "host independently pinned EXE; broker/controller compare current executable bytes and kernel identity",
+      "type": "object"
+    },
+    "expectation_sha": {
+      "constraint": {
+        "equals": "sha256(host SavedCallerExpectation.raw canonical envelope)",
+        "format": "SHA256"
+      },
+      "provenance": "host independently retained envelope; broker independently rebuilds and compares",
+      "type": "string"
+    },
+    "formal_result": {
+      "constraint": {
+        "exact": false
+      },
+      "provenance": "fixed contract literal; cannot confer authority",
+      "type": "bool"
+    },
+    "full_P1_content_verified": {
+      "constraint": {
+        "exact": false
+      },
+      "provenance": "fixed contract literal; cannot confer authority",
+      "type": "bool"
+    },
+    "inherited_sources_pin": {
+      "constraint": {
+        "sha256": "697573785464aa37bb4d71df1956d9de1b4888dd2d26ad4a61748eff6ced3c2c",
+        "type": "Pin"
+      },
+      "provenance": "original saved_journal_check/checks_01/component_source_pins.json exact bytes",
+      "type": "object"
+    },
+    "input_files": {
+      "constraint": {
+        "exact_entries": 683,
+        "paths": "canonical relative, case unique, no dotdot/absolute",
+        "total_bytes": 2950863,
+        "value": "Pin"
+      },
+      "provenance": "exact p1_files from SHA-fixed external anchor; host and broker independently compare",
+      "type": "object"
+    },
+    "input_root": {
+      "constraint": {
+        "exact": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_native_v1_non_authoritative\\p1_01"
+      },
+      "provenance": "fixed contract literal; cannot confer authority",
+      "type": "str"
+    },
+    "invocation_started": {
+      "constraint": {
+        "exact_type": "float, finite, >0",
+        "order": "host before expectation/arming; same value in request"
+      },
+      "provenance": "host monotonic start; no reset in broker/roles",
+      "type": "float"
+    },
+    "limits": {
+      "constraint": {
+        "exact_frozen_ENTRY_constant": "CAPS"
+      },
+      "provenance": "original F hard limits, no extension",
+      "type": "object"
+    },
+    "native_authorized": {
+      "constraint": {
+        "exact": false
+      },
+      "provenance": "fixed contract literal; cannot confer authority",
+      "type": "bool"
+    },
+    "output_mode": {
+      "constraint": {
+        "exact": "saved_P1_successor_draft"
+      },
+      "provenance": "fixed contract literal; cannot confer authority",
+      "type": "str"
+    },
+    "output_parent_directories": {
+      "constraint": {
+        "device": "exact int 0..2^64-1",
+        "exact_order": "all ancestors of output.parent",
+        "inode": "exact int 1..2^128-1",
+        "item": "[absolute_path,device,inode]",
+        "max_items": 16,
+        "min_items": 1
+      },
+      "provenance": "broker real directory handles/metadata before publication; controller bootstrap rechecks",
+      "type": "array"
+    },
+    "output_root": {
+      "constraint": {
+        "exact": "D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative\\draft_01"
+      },
+      "provenance": "fixed contract literal; cannot confer authority",
+      "type": "str"
+    },
+    "public_P2_execution_enabled": {
+      "constraint": {
+        "exact": false
+      },
+      "provenance": "fixed contract literal; cannot confer authority",
+      "type": "bool"
+    },
+    "repo_root": {
+      "constraint": {
+        "exact": "D:\\CUHKSZ\\Research Project\\electricity-grid"
+      },
+      "provenance": "fixed contract literal; cannot confer authority",
+      "type": "str"
+    },
+    "request_sha": {
+      "constraint": {
+        "artifact": {
+          "path": "results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01/request_contract_v1.json",
+          "pin": {
+            "bytes": 2888,
+            "sha256": "cbe60f08d322149ec2953022e47ac1ebb2e9769f612ca41566a70d5dc73d4690"
+          }
+        },
+        "equals": "sha256(canonical(request))",
+        "format": "SHA256"
+      },
+      "provenance": "exact request object received from host-owned START/request transport; no future context/ACK fields",
+      "type": "string"
+    },
+    "resource_admission": {
+      "constraint": {
+        "exact": false
+      },
+      "provenance": "fixed contract literal; cannot confer authority",
+      "type": "bool"
+    },
+    "runtime_binding_contract_sha": {
+      "constraint": {
+        "artifact": {
+          "path": "results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01/runtime_binding_contract_v1.json",
+          "pin": {
+            "bytes": 2777,
+            "sha256": "767b0119ee6de14f720099897eafb158803433b4291529a786a4e3e281ed148d"
+          }
+        },
+        "format": "SHA256"
+      },
+      "provenance": "SHA of fixed canonical contract bytes; current DRAFT profile blocks production, does not prove runtime closure",
+      "type": "string"
+    },
+    "schema": {
+      "constraint": {
+        "exact": "staged_saved_F_successor_context_development_v1"
+      },
+      "provenance": "fixed contract literal; cannot confer authority",
+      "type": "str"
+    },
+    "scientific_evidence_adopted": {
+      "constraint": {
+        "exact": false
+      },
+      "provenance": "fixed contract literal; cannot confer authority",
+      "type": "bool"
+    },
+    "scope": {
+      "constraint": {
+        "exact": "saved_P1_actual_21_and_journal_5h"
+      },
+      "provenance": "fixed contract literal; cannot confer authority",
+      "type": "str"
+    },
+    "source_pins": {
+      "constraint": {
+        "exact_keys": [
+          "configs/staged_deliverability_network_v1.DRAFT.yaml",
+          "configs/staged_deliverability_rts24_v1.DRAFT.yaml",
+          "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+          "docs/plan/staged_deliverability_c_saved_fresh_adoption_scope_budget_v1.md",
+          "docs/plan/staged_deliverability_c_saved_journal_check_contract_v1.md",
+          "docs/plan/staged_deliverability_c_saved_point_replay_contract_v1.md",
+          "docs/plan/staged_deliverability_c_saved_prefix_replay_contract_v1.md",
+          "docs/plan/staged_deliverability_c_scientific_adoption_dag_v1.md",
+          "experiments/staged_rts24_saved_fresh_adoption_v1.py",
+          "src/__init__.py",
+          "src/grid/__init__.py",
+          "src/grid/ac_case.py",
+          "src/grid/ac_restoration.py",
+          "src/grid/ac_validation.py",
+          "src/grid/chronological_dispatch.py",
+          "src/grid/contingency.py",
+          "src/grid/dc_opf.py",
+          "src/grid/network_grid_need.py",
+          "src/grid/rts24.py",
+          "src/grid/rts_gmlc.py",
+          "src/grid/rts_gmlc_scuc.py",
+          "src/grid/scopf.py",
+          "src/rq2_joint_deliverability_boundary_v1/__init__.py",
+          "src/rq2_joint_deliverability_boundary_v1/debt_cohorts.py",
+          "src/rq2_joint_deliverability_boundary_v1/normal_process.py",
+          "src/staged_deliverability_development_v1.py",
+          "src/staged_rts24_audit_v1.py",
+          "src/staged_rts24_causal_audit_v2.py",
+          "src/staged_rts24_causal_v1.py",
+          "src/staged_rts24_causal_v2.py",
+          "src/staged_rts24_child_optimality_v1.py",
+          "src/staged_rts24_development_v1.py",
+          "src/staged_rts24_evidence_store_v1.py",
+          "src/staged_rts24_highs_backend_v1.py",
+          "src/staged_rts24_journal_v2.py",
+          "src/staged_rts24_numeric_interface_v1.py",
+          "src/staged_rts24_p2_outer_observation_v1.py",
+          "src/staged_rts24_p2_outer_observation_v2.py",
+          "src/staged_rts24_p2_package_check_v1.py",
+          "src/staged_rts24_process_guard_v1.py",
+          "src/staged_rts24_process_guard_v3.py",
+          "src/staged_rts24_reference_queries_v1.py",
+          "src/staged_rts24_saved_fresh_adoption_v1.py",
+          "src/staged_rts24_saved_point_replay_v1.py",
+          "src/staged_rts24_saved_prefix_replay_v1.py",
+          "tests/test_staged_rts24_saved_fresh_adoption_v1.py",
+          "tests/test_staged_rts24_saved_journal_check_v1.py",
+          "tests/test_staged_rts24_saved_point_replay_v1.py",
+          "tests/test_staged_rts24_saved_prefix_replay_v1.py"
+        ],
+        "sum_bytes_cap": 2097152,
+        "value": "Pin"
+      },
+      "provenance": "pre-fixed 49-source group; hash current bytes, compare host request source_sha and runtime binding contract",
+      "type": "object"
+    },
+    "stage_seconds": {
+      "constraint": {
+        "exact_frozen_ENTRY_constant": "STAGE_SECONDS"
+      },
+      "provenance": "original F stage caps, no extension",
+      "type": "object"
+    }
+  },
+  "fields": [
+    "anchor_sha",
+    "authority",
+    "broker_identity",
+    "caller_expectation_core",
+    "caller_expectation_sha",
+    "deadline",
+    "deadline_profile_sha",
+    "environment",
+    "executable",
+    "expectation_sha",
+    "formal_result",
+    "full_P1_content_verified",
+    "inherited_sources_pin",
+    "input_files",
+    "input_root",
+    "invocation_started",
+    "limits",
+    "native_authorized",
+    "output_mode",
+    "output_parent_directories",
+    "output_root",
+    "public_P2_execution_enabled",
+    "repo_root",
+    "request_sha",
+    "resource_admission",
+    "runtime_binding_contract_sha",
+    "schema",
+    "scientific_evidence_adopted",
+    "scope",
+    "source_pins",
+    "stage_seconds"
+  ],
+  "first_and_only_context_publication_uses_this_schema": true,
+  "formal_result": false,
+  "full_P1_content_verified": false,
+  "nested_data_rule": "All E subtrees have exact expected keys and values by external canonical-byte equality, not unconstrained JSON",
+  "original_limits_unchanged": true,
+  "output_mode": "saved_P1_successor_draft",
+  "pin_type": {
+    "bytes": "exact int 0..8388608",
+    "exact_keys": [
+      "bytes",
+      "sha256"
+    ],
+    "sha256": "64 lowercase hex"
+  },
+  "production_validator_implemented": false,
+  "request_contract": {
+    "path": "results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01/request_contract_v1.json",
+    "pin": {
+      "bytes": 2888,
+      "sha256": "cbe60f08d322149ec2953022e47ac1ebb2e9769f612ca41566a70d5dc73d4690"
+    }
+  },
+  "resource_admission": false,
+  "runtime_binding_contract": {
+    "path": "results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01/runtime_binding_contract_v1.json",
+    "pin": {
+      "bytes": 2777,
+      "sha256": "767b0119ee6de14f720099897eafb158803433b4291529a786a4e3e281ed148d"
+    }
+  },
+  "schema_contract_complete": true,
+  "schema_literal": "staged_saved_F_successor_context_development_v1",
+  "scientific_evidence_adopted": false,
+  "scope": "saved_P1_actual_21_and_journal_5h",
+  "source_group_size": 49
+}

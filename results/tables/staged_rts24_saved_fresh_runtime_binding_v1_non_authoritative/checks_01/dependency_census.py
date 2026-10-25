@@ -1,0 +1,146 @@
+"""Stdlib-only conservative code/import inventory; compile metadata, never exec."""
+import ast
+import builtins
+import dis
+from hashlib import sha256
+import sys
+from types import CodeType
+from common import ROOT,OUT,EXE,SOURCE_PATHS,FROZEN_EPOCH,pin,canonical,selected,save
+
+assert not any(n=='src' or n.startswith(('src.','experiments.')) for n in sys.modules)
+assert sys.executable and EXE==__import__('pathlib').Path(sys.executable).absolute()
+source=selected();records=[];imports=[];definitions={};trees={};memo={}
+
+
+def constant(value):
+    kind=type(value)
+    if kind is CodeType: return ['code',code_sha(value)]
+    if value is None: return ['none']
+    if value is Ellipsis: return ['ellipsis']
+    if kind is bool: return ['bool',value]
+    if kind is int: return ['int',str(value)]
+    if kind is float: return ['float',value.hex()]
+    if kind is complex: return ['complex',value.real.hex(),value.imag.hex()]
+    if kind is str: return ['str',value]
+    if kind is bytes: return ['bytes',value.hex()]
+    if kind is tuple: return ['tuple',[constant(v) for v in value]]
+    if kind is frozenset: return ['frozenset',sorted((constant(v) for v in value),key=canonical)]
+    raise TypeError(kind.__name__)
+
+
+def code_sha(code):
+    if id(code) not in memo:
+        value=dict(name=code.co_name,qualname=code.co_qualname,filename=code.co_filename,
+            firstline=code.co_firstlineno,flags=code.co_flags,args=code.co_argcount,
+            posonly=code.co_posonlyargcount,kwonly=code.co_kwonlyargcount,locals=code.co_nlocals,
+            stack=code.co_stacksize,bytecode=code.co_code.hex(),line_table=code.co_linetable.hex(),
+            exception_table=code.co_exceptiontable.hex(),names=code.co_names,varnames=code.co_varnames,
+            freevars=code.co_freevars,cellvars=code.co_cellvars,constants=[constant(v) for v in code.co_consts])
+        memo[id(code)]=sha256(canonical(value)).hexdigest()
+    return memo[id(code)]
+
+
+def walk_code(code,name,location='unit'):
+    instructions=list(dis.get_instructions(code))
+    global_names=sorted({i.argval for i in instructions if i.opname in ('LOAD_GLOBAL','LOAD_NAME') and type(i.argval) is str})
+    records.append(dict(source=name,code_path=location,qualname=code.co_qualname,firstline=code.co_firstlineno,
+        code_sha=code_sha(code),global_names=global_names,
+        builtin_candidates=sorted(set(global_names)&set(dir(builtins))),
+        attributes=sorted({i.argval for i in instructions if i.opname in ('LOAD_ATTR','LOAD_METHOD') and type(i.argval) is str}),
+        imports=sorted({i.argval for i in instructions if i.opname=='IMPORT_NAME' and type(i.argval) is str}),
+        global_writes=sorted({i.argval for i in instructions if i.opname in ('STORE_GLOBAL','DELETE_GLOBAL')}),
+        dynamic_name_operators=sorted(set(global_names)&{'getattr','setattr','delattr','eval','exec','globals','locals','__import__'}),
+        freevars=list(code.co_freevars),cellvars=list(code.co_cellvars),
+        production_candidate=name.startswith('src/') or name==SOURCE_PATHS[1]))
+    for index,value in enumerate(code.co_consts):
+        if type(value) is CodeType: walk_code(value,name,location+'.'+str(index))
+
+
+def ast_definitions(tree,name):
+    result={}
+    def visit(node,scope):
+        if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef,ast.ClassDef)):
+            scope=scope+[node.name];qualified='.'.join(scope)
+            result[qualified]=dict(line=node.lineno,end_line=node.end_lineno,kind=type(node).__name__,
+                ast_sha=sha256(ast.dump(node,include_attributes=False).encode()).hexdigest(),
+                decorators=[ast.unparse(v) for v in node.decorator_list])
+        for child in ast.iter_child_nodes(node): visit(child,scope)
+    visit(tree,[])
+    return result
+
+
+python=[name for name in source if name.endswith('.py')]
+for name in python:
+    # Code objects from older units may be collected and their ids reused.
+    memo.clear()
+    raw=(ROOT/name).read_bytes();assert pin(raw)==source[name]
+    tree=ast.parse(raw,filename=str(ROOT/name));trees[name]=tree;definitions[name]=ast_definitions(tree,name)
+    unit=compile(raw,str(ROOT/name),'exec',dont_inherit=True,optimize=sys.flags.optimize)
+    walk_code(unit,name)
+    for node in ast.walk(tree):
+        if isinstance(node,ast.Import):
+            imports.extend(dict(source=name,line=node.lineno,kind='import',module=a.name,binding=a.asname or a.name.split('.')[0]) for a in node.names)
+        elif isinstance(node,ast.ImportFrom):
+            imports.append(dict(source=name,line=node.lineno,kind='from',module=node.module,level=node.level,
+                imported=[dict(name=a.name,binding=a.asname or a.name) for a in node.names]))
+production=[name for name in python if name.startswith('src/') or name==SOURCE_PATHS[1]]
+roots={SOURCE_PATHS[0]:('hold','capture','bookend','caller_image','sources','replay','_replay','project_metrics',
+    'validate_metrics','validate_payload','bind_payload','compare_payloads'),
+    SOURCE_PATHS[1]:('_expectation_adapter','_expectation_binding_entry','validate_expectation_context',
+    '_role_context','RoleStore.__init__','SavedFileBootstrap.check','SavedOwnerInputs.immutable_entry',
+    '_saved_owner_store','_saved_owner_endpoint','_open_saved_role_inputs','_bind_saved_main',
+    '_SavedLaunchIssuer.__new__','_SavedLaunchIssuer.check','_saved_launch_issuer','construct_saved_stage',
+    '_role_reconstruct','_role_compare','_role_input_bookend','read_saved_after_quiet',
+    '_probe_saved_expectation_input','_probe_bookend_saved_input')}
+root_records={}
+for name,names in roots.items():
+    for qualified in names:
+        assert qualified in definitions[name],(name,qualified)
+        matches=[r for r in records if r['source']==name and r['qualname']==qualified]
+        assert len(matches)==1,(name,qualified)
+        root_records[name+'::'+qualified]=dict(definitions[name][qualified],code=matches[0])
+
+entry_tree=trees[SOURCE_PATHS[1]]
+top={node.name:node for node in entry_tree.body if isinstance(node,(ast.FunctionDef,ast.ClassDef))}
+adapter_node=top['_expectation_adapter'];direct=[]
+for node in ast.walk(adapter_node):
+    if isinstance(node,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='dependencies' for t in node.targets):
+        assert isinstance(node.value,ast.ListComp)
+        direct.extend('adapter.'+ast.literal_eval(v) for v in node.value.generators[0].iter.elts)
+    if isinstance(node,ast.AugAssign) and isinstance(node.target,ast.Name) and node.target.id=='dependencies':
+        direct.extend(ast.unparse(v.elts[0])+'.'+ast.literal_eval(v.elts[1]) for v in node.value.elts)
+assert len(direct)==len(set(direct))==10
+literal={t.id:node.value.value for node in entry_tree.body if isinstance(node,ast.Assign)
+    and isinstance(node.value,ast.Constant) for t in node.targets if isinstance(t,ast.Name)}
+assert literal['SCHEMA']!=literal['EXPECTATION_CONTEXT_SCHEMA'] and literal['_SAVED_LAUNCH_ISSUER'] is None
+for method in top['_SavedLaunchIssuer'].body:
+    if isinstance(method,ast.FunctionDef) and method.name in ('__new__','check'): assert isinstance(method.body[0],ast.Raise)
+assert 'SavedSupervisorBootstrap' not in top
+assert 'SCHEMA' in {n.id for n in ast.walk(top['_saved_owner_store']) if isinstance(n,ast.Name)}
+assert 'EXPECTATION_CONTEXT_SCHEMA' not in {n.id for n in ast.walk(top['_role_context']) if isinstance(n,ast.Name)}
+assert any(isinstance(n,ast.Constant) and n.value=='ordinary_expectation_fixture' for n in ast.walk(top['_probe_saved_expectation_input']))
+assert any(isinstance(n,ast.keyword) and n.arg=='real_verified' and isinstance(n.value,ast.Constant)
+    and n.value.value is False for n in ast.walk(top['_probe_saved_expectation_input']))
+assert any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='startswith'
+    and n.args and isinstance(n.args[0],ast.Constant) and n.args[0].value=='worker/fresh/' for n in ast.walk(top['read_saved_after_quiet']))
+save('python_census_v2.json',dict(authority='DRAFT_NONAUTHORITATIVE',source_epoch=FROZEN_EPOCH,source_pins=source,
+    python_files=python,production_candidate_files=production,definitions=definitions,code_objects=records,
+    complete_reachable_call_graph=False,runtime_binding_verified=False))
+save('module_imports_v2.json',dict(authority='DRAFT_NONAUTHORITATIVE',imports=imports,
+    includes_local_and_unreachable_imports=True,import_targets_resolved=False))
+save('root_contracts_v2.json',dict(authority='DRAFT_NONAUTHORITATIVE',roots=root_records,direct_preparation_targets=sorted(direct)))
+save('role_cut_report_v2.json',dict(authority='DRAFT_NONAUTHORITATIVE',legacy_schema=literal['SCHEMA'],
+    expectation_schema=literal['EXPECTATION_CONTEXT_SCHEMA'],direct_preparation_targets=len(direct),
+    explicit_supervisor_bootstrap_class_present=False,issuer_constructor_and_check_raise=True,
+    issuer_global_initially_none=True,owner_store_requires_legacy_schema=True,
+    role_context_mentions_expectation_schema=False,probe_requires_ordinary_expectation=True,
+    probe_real_verified=False,quiet_reader_uses_prefix_predicate=True,
+    schema_and_role_integration_complete=False,transitive_global_binding_closed=False,
+    actual_saved_F_execution=False,F_launch_admitted=False,scientific_evidence_adopted=False,resource_admission=False,formal_result=False))
+save('runtime_pin_v2.json',dict(executable=str(EXE),pin=pin(EXE.read_bytes()),python=sys.version,memo_lifetime='one_compiled_unit',
+    optimize=sys.flags.optimize,compile_dont_inherit=True,original_filenames=True,
+    repository_imported=False,compiled_code_executed=False))
+assert selected()==source and not any(n=='src' or n.startswith(('src.','experiments.')) for n in sys.modules)
+print(__import__('json').dumps(dict(selected_paths=49,python_files=len(python),production_candidate_files=len(production),
+    code_objects=len(records),import_sites=len(imports),explicit_roots=len(root_records),direct_preparation_targets=10,
+    runtime_binding_verified=False,actual_saved_F_execution=False)))

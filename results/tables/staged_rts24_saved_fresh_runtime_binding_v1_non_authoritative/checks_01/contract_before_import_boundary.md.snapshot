@@ -1,0 +1,41 @@
+# C：生产依赖绑定与角色连接的准入范围
+
+2026-10-25，`DRAFT_NONAUTHORITATIVE`。接续[source复用交接](continuation_handoff_20261025_saved_fresh_source_bytes_reuse.md)，起始HEAD `860864eb8a6ae3926dda6b70781b9dac3aa4e058`。root唯一writer，独立只读PRE_SEAL。本轮保存实际源码依赖证据、角色连接合同及受控反例；canonical ENTRY/tests/scientific src、SF49、原F合同、guard/outer、P1及全部历史记录均不改。63普通节点只在原source epoch匹配时沿用为历史开发证据，不重跑科学操作。
+
+## 本轮交付与预算
+
+检查总预算90s，各attempt实耗保守累计；baseline≤6s、普通静态census≤15s、五反例诊断≤12s、最终保存核验≤12s，其余单次≤15s。失败/超时保留原stdout/stderr、exit、source与helper执行前后pin及snapshot，不重启任何actor。所有检查仅写`results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01`，合计≤8MiB/128文件；本合同、报告、交接及三个导航前缀另属文档交付，旧导航正文逐字保持。仅启动短时检查脚本，不建立actual OUTPUT及父目录。
+
+静态census只用标准库和冻结SF49字节，不导入任何仓库模块。覆盖完整49路径分类；对其中所有Python源码解析AST，以固定compute EXE/version、原filename、dont_inherit=True和当前明确记录的optimize值编译，递归枚举全部嵌套CodeType并反汇编metadata，不exec。分别保存全部Python code对象的global/import/attribute/write引用、生产src+ENTRY的保守superset、显式根的source/AST/code位置。它是候选依赖inventory，不是完整可达调用图、静态完备性证明或运行时绑定证明。动态attribute、实例dispatch、decorator/default、local imports、第三方/stdlib/native边界逐项保留，不能将未解析边称作已关闭。
+
+另用一个独立短进程完成五个RAM反例：预注册五项预期均为“现有direct binding接受替换，替代对象零调用，恢复后原对象/相关global字典身份及全部source pin一致”。任何拒绝、替代对象执行、恢复失败或非预期异常都使该项未建立，不能事后改称guard已覆盖。依次替换`codec.parse`、adapter `_replay`、`core.digest`、adapter `HeldInput`及`METRIC_FIELDS`；只调用当前`_expectation_adapter`建立data-only binding，随后精确恢复。
+
+该短进程先只加载标准库，并在任何仓库import之前安装整个窗口的audit/open/process拒绝计数及声明的科学/owner API调用观察；再导入既有ENTRY/adapter。通过import hook在外部solver包完成import后、返回调用者之前安装factory拒绝器；仓库模块对象取得后安装其科学/native操作拒绝器。分别保存repository-import、post-import和每个case的计数；零结论只覆盖这些明确列出的API和P1 open guard，不扩成通用内存/副作用闭包证明。禁止capture/hold/bookend/replay、P1读取、模型构造、scientific compile_problem/import_snapshot、journal写入、native owner/solver和实际角色启动。保存恢复后的source/hash/global对象绑定，任何恢复失败使该诊断未决。接受反例仅说明当前preparation binding没有覆盖该symbol，不声称生产入口已被绕过或科学结果已改变。
+
+## 生产闭包必须覆盖的对象
+
+1. 科学根为原adapter的hold/capture/bookend、replay/_replay、metrics/payload/bind/compare；不能把目前preparation的十个callable当作全部科学执行根。
+2. 每条global/module attribute边须绑定真实module和路径、原函数code/defaults/closure、class及其方法/constructor、常量容器内容、builtins/外部包与native边界。模块globals字典身份和磁盘hash不能单独证明字典内值。递归/cycle要保留同对象关系，不能用repr或不受控getter求指纹。
+3. 角色bootstrap必须在允许的import之前确立scope/argv/environment/main alias、source/exe/runtime和外部ACK绑定；可信执行模型及允许的import期间变化必须写明。调用前后观察不能证明任意并发RAM改写或ABA从未发生，禁止将bookend宣称为不可变内存沙箱。
+4. 同进程原异常、partial owner、capability和失败状态强持；跨进程仅接收有界摘要，不伪造原异常或已获得issuer能力。source6500、失败留存RAM和完整earlier deadlines另需原整链审查。
+
+## 角色和schema连接合同
+
+| 边 | 实际所需输入与同对象能力 | 当前状态及下一实现义务 |
+| --- | --- | --- |
+| host→broker | host独立expectation、外部owned broker、request/ready/START、nonce/identity | expectation是数据，full_P1_content_verified=false；saved arming未接通 |
+| host ACK→controller | host核完整offer后ACK；broker强持ACK-bound controller owner | 独立SavedSupervisorBootstrap及schema/argv未实现，不能复用parent/fresh bootstrap扩大角色 |
+| controller bootstrap→G0 | 同一request/ACK/context/tree/channel、PID/thread、source闭包、earlier deadline | G0须原full hold683并保留真实同对象输入；本地prototype real_verified=false不得发行生产能力 |
+| G0→controller issuer→parent | 同一可信supervisor、ACK及G0 cap、一次reservation/permit | 现issuer构造/check永久关闭；未来只允许controller→parent，不能由JSON布尔值发行 |
+| parent→fresh | parent合法bootstrap、同context/ACK链、原reservation start、一次attempt | 现SavedOwnerInputs仅旧SCHEMA及两条边；fresh无issuer，失败不退款/重试 |
+| fresh quiet→parent读取/比较 | 真实owner/quiet witness、exact fresh role targets、完整原payload绑定 | 当前prefix reader宽于role_targets；生产接通前须收紧，不能读启动/owner信息后省略核心payload |
+| parent quiet→controller G2/G3 | 真实两层owner、同一G0输入、四库存、create-only发布/readback | saved reader/record validators未接通；G2/G3不重跑第三次科学replay |
+| broker quiet→host H3 | host强持真实owned broker、两return pins、独立full input核验 | 最终I/O/编码和外部硬停止仍OPEN，不能由上层JSON或先前quiet代替 |
+
+schema必须作为显式连接项审查：新expectation context使用`caller_expectation_core/sha`及full=false；现RoleStore、SavedOwnerInputs、saved bootstrap与科学execution入口仍要求旧SCHEMA/caller_core。新数据不能改名或变mode后直接混入旧入口。下一实现先选择并固定完整saved successor schema，实际saved broker首次且唯一创建context.json时即写入完整successor schema，保留caller_expectation_core/sha与full=false；不能先发布prototype context再于G0后转换。逐个列出bootstrap/store/owner/driver/reader的accept/reject域和双SHA/provenance映射，保留ordinary拒绝域；G0核验状态由同对象能力/permit表达，不能改写原context声称full=true，也不能替换create-only context文件。该schema决定须先于发行真实G0/permit，不能只打开global issuer。
+
+## 验收与停止点
+
+静态oracle检查上述实际schema cut、两条owner角色边、issuer关闭和probe-only G0/H3的源码定位；所有symbol/AST/code定位必须来自本次exact SF49。五反例须报告每次替换对象、guard结果、零调用及恢复结果；当前63节点/source epoch、P1全683及前序保存记录逐字核验。只有本轮机械/负例证据完成；生产closure、角色连接、actual F、F局部verified、科学采用、资源和正式门禁均false/OPEN。
+
+下一步依据实际census及schema连接矩阵制定一个完整saved successor context/role合同，再实现与ACK/G0同对象绑定的验证边；已有十次source重读优化不重复，保留所有source freshness边、原B/C/E审计及G0–G3/parent/fresh/host full库存。全链费用、停止和角色合同闭合后才可讨论具体actual F专项授权。

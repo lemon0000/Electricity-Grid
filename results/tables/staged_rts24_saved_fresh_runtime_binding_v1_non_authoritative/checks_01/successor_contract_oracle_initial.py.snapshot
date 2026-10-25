@@ -1,0 +1,67 @@
+"""Data-only context and capability DAG oracle; no production validator/cap."""
+from collections import deque
+from common import selected,save
+
+source=selected()
+fields=('schema authority scope repo_root input_root output_root output_mode output_parent_directories source_pins '
+    'executable environment anchor_sha input_files invocation_started deadline stage_seconds limits inherited_sources_pin '
+    'caller_expectation_core caller_expectation_sha expectation_sha full_P1_content_verified request_sha broker_identity '
+    'runtime_binding_contract_sha deadline_profile_sha native_authorized resource_admission formal_result '
+    'scientific_evidence_adopted public_P2_execution_enabled').split()
+spec=dict(authority='DRAFT_NONAUTHORITATIVE',schema_literal='staged_saved_F_successor_context_development_v1',
+    output_mode='saved_P1_successor_draft',scope='saved_P1_actual_21_and_journal_5h',fields=sorted(fields),
+    broker_identity_fields=['creation_filetime','pid'],full_P1_content_verified=False,
+    first_and_only_context_publication_uses_this_schema=True,ACK_is_post_context=True,
+    G0_state_is_process_local_capability=True,production_validator_implemented=False,
+    arbitrary_native_process_import_policy_decided=False,source_group_size=len(source),
+    original_limits_unchanged=True,scientific_evidence_adopted=False,resource_admission=False,formal_result=False)
+role={'request':'host','context':'broker','offer':'broker','ACK':'host','controller_bootstrap':'controller',
+    'G0':'controller','controller_store':'controller','parent_permit':'controller','parent_bootstrap':'parent',
+    'parent_hold':'parent','parent_store':'parent','parent_issuer':'parent','fresh_permit':'parent',
+    'fresh_bootstrap':'fresh','fresh_hold':'fresh','fresh_result':'fresh','fresh_quiet':'parent',
+    'G1_compare':'parent','parent_quiet':'controller','G2':'controller','final_observation':'controller',
+    'G3':'controller','controller_return':'controller','controller_quiet':'broker','broker_return':'broker',
+    'broker_quiet':'host','H3':'host','host_final':'host'}
+order=list(role);edges=list(zip(order,order[1:]))
+cap_edges=[('controller_bootstrap','G0'),('G0','controller_store'),('G0','parent_permit'),
+    ('parent_bootstrap','parent_hold'),('parent_hold','parent_store'),('parent_hold','parent_issuer'),
+    ('parent_issuer','fresh_permit'),('fresh_bootstrap','fresh_hold'),('G0','G2'),('G0','G3'),('H3','host_final')]
+
+
+def topological(nodes,arcs):
+    pending={n:0 for n in nodes};children={n:[] for n in nodes}
+    for left,right in arcs:
+        assert left in pending and right in pending
+        children[left].append(right);pending[right]+=1
+    ready=deque(n for n in nodes if pending[n]==0);out=[]
+    while ready:
+        node=ready.popleft();out.append(node)
+        for child in children[node]:
+            pending[child]-=1
+            if pending[child]==0:ready.append(child)
+    if len(out)!=len(nodes):raise ValueError('capability/context dependency cycle')
+    return out
+
+
+assert len(fields)==len(set(fields)) and len(fields)==31
+assert not set(fields)&{'context_sha','ack_sha','ACK_sha','G0_verified','permit','run_authority','caller_core','caller_sha'}
+assert topological(order,edges+cap_edges)==order
+cycle_rejected=False
+try:topological(order,edges+[('ACK','context')])
+except ValueError:cycle_rejected=True
+assert cycle_rejected
+assert all(role[a]==role[b] for a,b in cap_edges)
+cross_process_G0_rejected=role['G0']!=role['parent_issuer']
+assert cross_process_G0_rejected and role['fresh_permit']=='parent'
+assert not any(n.endswith('issuer') and r=='fresh' for n,r in role.items())
+save('successor_context_spec.json',spec)
+save('capability_edges.json',dict(authority='DRAFT_NONAUTHORITATIVE',node_roles=role,
+    data_order_edges=[list(e) for e in edges],same_process_capability_edges=[list(e) for e in cap_edges],
+    topological_order=order,cross_process_packets_are_binding_data_only=True,implemented=False))
+save('schema_cut_oracle.json',dict(authority='DRAFT_NONAUTHORITATIVE',design_oracle_only=True,
+    context_fields=len(fields),nodes=len(role),data_order_edges=len(edges),capability_edges=len(cap_edges),
+    acyclic=True,ACK_back_edge_rejected=cycle_rejected,cross_process_G0_capability_rejected=cross_process_G0_rejected,
+    fresh_issuer_allowed=False,production_validator_implemented=False,actual_saved_F_execution=False,
+    F_launch_admitted=False,scientific_evidence_adopted=False,resource_admission=False,formal_result=False))
+print(__import__('json').dumps(dict(context_fields=len(fields),DAG_nodes=len(role),
+    ACK_cycle_rejected=cycle_rejected,cross_process_G0_rejected=cross_process_G0_rejected,actual_saved_F_execution=False)))

@@ -1,0 +1,110 @@
+"""Save actual census/witness findings and the concrete successor contract."""
+import json
+from pathlib import Path
+import re
+from common import ROOT,OUT,OUTPUT_PARENT,FROZEN_EPOCH,pin,selected,read
+
+
+def save(name,value):
+    (OUT/name).write_bytes((json.dumps(value,sort_keys=True,indent=2)+'\n').encode())
+
+
+source=selected();census=read('python_census_v2.json');witness=read('global_binding_witness_v2.json')
+spec=read('successor_context_spec_v2.json');dag=read('capability_edges_v2.json');cross=read('mechanical_crosscheck.json')
+assert witness['all_preregistered_acceptances_established'] and len(witness['cases'])==5
+assert len(spec['fields'])==len(spec['field_rules'])==31 and len(dag['node_roles'])==35
+preserved=len(read('preservation_inventory.json'))
+seconds=sum(read(p.name)['wall_seconds'] for p in OUT.glob('*.exit.json'))
+contracts='\n'.join(f"| {key} | {spec[key]['path']} | {spec[key]['pin']['sha256']} |"
+    for key in ('runtime_binding_contract','deadline_contract','request_contract'))
+cases='\n'.join(f"| {r['symbol']} | 接受 | 0 | 原对象及globals字典身份保持 |" for r in witness['cases'])
+handoff='continuation_handoff_20261025_saved_fresh_runtime_binding.md'
+report=f'''# C：生产依赖与角色连接准入证据
+
+2026-10-25，DRAFT_NONAUTHORITATIVE，起始HEAD `860864eb8a6ae3926dda6b70781b9dac3aa4e058`。范围见[合同](../../../docs/plan/staged_deliverability_c_saved_fresh_runtime_binding_scope_budget_v1.md)，接续[source复用报告](../staged_rts24_saved_fresh_source_bytes_reuse_v1_non_authoritative/validation_report.md)。root唯一writer、独立只读PRE_SEAL；canonical ENTRY/tests/scientific src及49-source集合全部不改。source epoch仍`{FROZEN_EPOCH}`，63普通节点仍属于同一已验证epoch，本轮没有新增pytest、科学replay或模拟小时。
+
+## 实际依赖清单
+
+[census v2](checks_01/python_census_v2.json)覆盖49路径，其中41 Python文件、37生产candidate文件（src+ENTRY），递归1844 code对象、429 import sites、33显式根；当前preparation binding仅10个direct targets。所有metadata由冻结源码在固定EXE/version、原filename、dont_inherit=True/已记录optimize下compile和dis产生，未exec这些code，也没有仓库import。
+
+这个inventory保守包含未使用/不可达code和local imports；它不是完整可达调用图、import target解析或运行时闭包。globals/module attribute、class/constructor、常量容器、builtins/第三方/native和动态dispatch仍须真实绑定。初版census_03 exit0但其跨unit id(code) memo可能复用已释放对象ID；限制为每compiled unit后，census_04同源码metadata/keys一致而code SHA有{cross['v1_code_sha_differences']}项差异。初版JSON/helper/raw完整保留；只采用v2 fingerprints，启动终态不自证metadata正确。
+
+## 五项受控RAM反例
+
+首轮witness_05在五项之前终止：仓库导入经src.grid→PYPOWER→SciPy→NumPy testing触发check_support_sve的subprocess.run('lscpu')，Python audit在Popen事件拒绝（0.656s/12、exit1）。它不贡献任何反例数。失败原栈、script snapshot和source pins保留。
+
+补充witness_06已事前登记一次≤12s，实际5.047s、exit0。在repository_import阶段，仅参数(None,'lscpu',None,None)、固定NumPy源码check_support_sve/module调用与固定subprocess.py审计点全部匹配时，继续阻断创建，但抛专用OSError走库原False回退；第二次或其他进程调用一律拒绝。NumPy/subprocess/compute EXE的实际pin和原字节snapshot已保存。生产import策略仍UNDECIDED_BLOCKING；这项插桩不变成生产政策。
+
+| 替换symbol | 当前preparation guard | 替代对象调用 | 恢复 |
+| --- | --- | ---: | --- |
+{cases}
+
+这五项均按预注册预期建立：[raw结果](checks_01/global_binding_witness_v2.json)。它们只证明当前10-direct preparation binding未覆盖这些symbol，不是生产旁路或科学结果改变。baseline+五case仅调用6次_expectation_adapter，未创建科学input capability/issuer/owner。
+
+整个仓库import前已安装audit/open/process及声明API观察，import完成前通过hook阻断solver factory，随后安装具体科学操作拒绝器。分phase计数为：声明Python audit P1 open-attempt=0；Popen attempt=1、blocked fallback=1；声明科学/solver/native-owner API与替代对象调用=0。不能把它扩成任意native文件读取/进程创建或所有副作用均为零。numpy_sve_support_forced_false_by_instrumentation=true，结论限于该受控状态。replacement/import/profile原对象恢复；audit hook不可移除，finally惰化，仍留至短进程退出。保存层baseline/最终oracle另会读P1全683验证保全，不属于上述witness窗口。
+
+## 可实现的successor数据合同
+
+初版31字段清单/28节点DAG仅为proposal，漏了broker本地ACK/owner链并缺类型细则，原文件/helper全部保留。当前[spec v2](checks_01/successor_context_spec_v2.json)为31字段逐项type/constraint/provenance合同；原expectation的27字段与source AST精确匹配，新增仅4个。它尚无生产validator，也没有生成context实例。
+
+canonical ASCII raw≤2MiB，拒绝duplicate/nonfinite，depth≤256/nodes≤1000000；Pin、49-source/683-input、executable、environment、原stage/limits均有固定规则。caller core exact15键/库存exact3键，所有嵌套子树必须逐字等于host独立持有的E；不会把incoming context自算hash当独立期望，更不把E/full=false升级为全内容验证。broker_identity的pid/creation_filetime exact有界正整数必须由真实owner/ready/START及controller bootstrap kernel核验支撑。
+
+| 字段合同 | 固定artifact路径 | exact raw SHA256 |
+| --- | --- | --- |
+{contracts}
+
+request canonical域由20字段合同固定，≤32KiB，在H0后/arming前由host独立构造，start在H0前确定；不含未来context/ACK。两个profile SHA引用固定canonical文件：runtime profile明确当前不能用于production；deadline profile保留原earlier offsets，actual enforcement仍false。
+
+[35节点DAG](checks_01/capability_edges_v2.json)从host expectation/request、broker owner arming/ready/START开始。host ACK只是跨进程数据，broker须本地ACK_verified→controller_permit→真实controller_owner_constructed，才到controller bootstrap。controller issuer强持本地G0，parent issuer强持parent独立hold；跨进程只能传绑定数据，fresh无issuer，H3为host独立hold。设计oracle确认无环，并拒绝ACK→context反向边和跨进程G0能力。该成功协议DAG不代替所有import/失败/清理/资源调用图。
+
+实际saved broker首次且唯一create-only context.json必须使用完整successor，保留caller_expectation_core/sha与full=false；G0后不换文件、不改full标志。ACK/context SHA、G0和permit由外部协议/同进程能力绑定。新schema不能穿入旧RoleStore/SavedOwnerInputs/bootstrap/ordinary入口；下一实现需成套successor validators/store/owner/driver，而非改mode、别名或global issuer。
+
+## 保存、预算与剩余工作
+
+前序{preserved}路径、P1全683与导航旧正文逐字保全；当前source49完全匹配原63-node epoch。检查预算90s，包装前已记录{seconds:.3f}s，所有失败及初版均计入；包装/最终checker另由外部终态exit计时。本轮结果目录≤8MiB/128文件。自包含stdlib保存oracle不导入当前ENTRY；前序oracle在逐字核其原文件后调用，保留其frozen/current分离及无ENTRY执行边界。
+
+下一实现先按31字段完整数据合同添加successor静态validator和角色专用bootstrap/store接口，保持旧域拒绝；同时把本轮发现的NumPy import probe明确纳入生产import策略与whole-process预算。随后实现33科学/角色根的真实传递绑定与ACK/G0同对象连接，不能以五反例或35节点设计oracle代替。生产global闭包、G0/H3、issuer/driver、source6500、失败成本、180s逐边硬停止、最大合法wire及host外部I/O仍OPEN。实际F、F局部verified、科学采用、资源及正式门禁均false；没有production manifest/lease、official verdict/receipt/seal或run authority。
+
+保存核验：`D:\\Miniconda3\\envs\\compute\\python.exe -B results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01/saved_checks.py`。见[交接](../../../docs/plan/{handoff})。
+'''
+(OUT.parent/'validation_report.md').write_bytes(report.encode())
+text=f'''# C：生产runtime绑定与successor角色合同交接
+
+2026-10-25，DRAFT_NONAUTHORITATIVE，接续[source复用交接](continuation_handoff_20261025_saved_fresh_source_bytes_reuse.md)，起始HEAD `860864eb8a6ae3926dda6b70781b9dac3aa4e058`；最终hash以远端读回为准。[本轮合同](staged_deliverability_c_saved_fresh_runtime_binding_scope_budget_v1.md)固定90s静态/受控反例预算，root唯一writer、独立只读PRE_SEAL。canonical ENTRY/tests/scientific src/SF49不改；epoch仍`{FROZEN_EPOCH}`，原63节点仍匹配，没有新增pytest或科学操作。
+
+实际产物：全49路径、41 Python/37 production candidate、1844 code对象、429 imports、33显式根的v2候选inventory；不是可达图或runtime闭包。初版跨unit id缓存导致946 fingerprint差异，原版保留，只用v2。五项受控RAM替换被当前10-direct preparation binding接受，替代对象未执行并恢复，不能称生产旁路。
+
+先前witness05在case前因NumPy testing尝试lscpu被audit拒绝。补充witness06只对固定库pin/stack/phase/参数的唯一Popen抛专用OSError，仍阻断创建，走库False fallback；记录attempt1/blocked1和forced_SVE_false=true。声明audit P1 open=0及指定API=0不证明任意native读取/副作用为零。audit hook仅惰化、留至进程退出；其他插桩原对象恢复。生产外部probe政策仍UNDECIDED_BLOCKING，不能把诊断fallback直接用于actual F。
+
+当前31字段spec v2已逐项固定type/约束/provenance、nested exact E匹配、大小及固定profile路径/SHA；20字段request不含未来ACK/context。35节点成功协议DAG包括host broker arming/ready/START和broker_ACK_verified→controller_permit→真实controller owner；ACK只传数据。controller issuer持本地G0，parent issuer持parent独立hold，不传G0对象；fresh无issuer，H3独立。context首次唯一create-only即successor，保留expectation/full=false，不能G0后换文件或加ACK造成循环。仍未实现生产validator/role接口。
+
+详见[报告](../../results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/validation_report.md)。前序{preserved}路径/P1全683/旧导航保全，actual F结果树及父目录不存在，无新模拟小时或solver/native-owner调用。
+
+下一步实现完整successor静态validator与配套role bootstrap/store/owner接口，保持旧域拒绝；固定生产NumPy import-probe策略及whole-process预算，再推进33根传递绑定和ACK/G0能力。source6500、180s、失败成本/wire最大值、H3外部硬停止及实际F授权仍OPEN；科学采用、资源、正式及actual F门禁保持关闭，不重复已完成的十次source重读优化。
+
+恢复先核Git/进程及保存oracle：`D:\\Miniconda3\\envs\\compute\\python.exe -B results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01/saved_checks.py`。不得以当前census/反例/spec打开生产权限。
+'''
+(ROOT/'docs/plan'/handoff).write_bytes(text.encode())
+after={}
+for name,before in read('navigation_before.json').items():
+    path=ROOT/name;raw=path.read_bytes();header,separator,body=raw.partition(b'\n\n')
+    assert header.decode()==before['header'] and pin(body[-before['body']['bytes']:])==before['body']
+    target=handoff if Path(name).parent.as_posix()=='docs/plan' else '../plan/'+handoff
+    prefix=(f'2026-10-25 runtime绑定/角色合同：见[最新交接]({target})。SF49/63-node epoch不改；'
+        '候选census1844 code/33根、五受控反例与31字段/35节点successor合同已保存。'
+        'NumPy import曾尝试lscpu，诊断只阻断并走固定OSError fallback；生产政策未定。'
+        '生产传递绑定/角色接口、source6500/180s及实际F/科学采用/资源/正式门禁仍关闭。\n\n').encode()
+    if prefix not in raw:path.write_bytes(header+separator+prefix+body)
+    raw=path.read_bytes();after[name]=dict(header=header.decode(),body=pin(raw.partition(b'\n\n')[2]),full=pin(raw))
+save('navigation_after.json',after)
+documents=[ROOT/'docs/plan'/handoff,OUT.parent/'validation_report.md',
+    ROOT/'docs/plan/staged_deliverability_c_saved_fresh_runtime_binding_scope_budget_v1.md']
+for path in documents:
+    for target in re.findall(r'\]\(([^)]+)\)',path.read_text(encoding='utf-8')):
+        if '://' not in target:assert (path.parent/target.split('#')[0]).resolve().exists(),(path,target)
+save('document_checks.json',dict(links_resolve=True,document_pins={p.relative_to(ROOT).as_posix():pin(p.read_bytes()) for p in documents}))
+save('support_pins.json',{p.relative_to(ROOT).as_posix():pin(p.read_bytes()) for p in OUT.rglob('*')
+    if p.is_file() and p.name!='support_pins.json'})
+assert not OUTPUT_PARENT.exists()
+print(json.dumps(dict(document_links_resolve=True,source_epoch_unchanged=True,controlled_counterexamples=5,
+    successor_fields=31,capability_nodes=35,actual_saved_F_execution=False)))

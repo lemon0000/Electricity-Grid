@@ -1,0 +1,1685 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "direct_preparation_targets": [
+    "adapter.bookend",
+    "adapter.caller_image",
+    "adapter.capture",
+    "adapter.codec.read_bytes",
+    "adapter.core.load_fixture",
+    "adapter.hold",
+    "adapter.mechanical.inventory",
+    "adapter.prefix.point._outer",
+    "adapter.sources",
+    "adapter.validate_metrics"
+  ],
+  "roots": {
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::RoleStore.__init__": {
+      "ast_sha": "c0926799f0eb28d18d31f5f1421049c94be0f2c05a576b956a14b777f0098a3a",
+      "code": {
+        "attributes": [
+          "__setattr__",
+          "check",
+          "getpid",
+          "items",
+          "update"
+        ],
+        "builtin_candidates": [
+          "dict",
+          "object",
+          "str"
+        ],
+        "cellvars": [],
+        "code_path": "unit.135.16",
+        "code_sha": "6416b96da7c5bdb5f9042302893d4c8f9faae0d60f308d239fb83a8e3cc28d83",
+        "dynamic_name_operators": [],
+        "firstline": 1349,
+        "freevars": [],
+        "global_names": [
+          "Path",
+          "SCHEMA",
+          "_DIRECT_BOOTSTRAP",
+          "_SAVED_BOOTSTRAP",
+          "_held_saved_bootstrap",
+          "_role_context",
+          "_role_tree",
+          "dict",
+          "digest",
+          "get_ident",
+          "object",
+          "os",
+          "read",
+          "require",
+          "str"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "RoleStore.__init__",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 1363,
+      "kind": "FunctionDef",
+      "line": 1349
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::SavedFileBootstrap.check": {
+      "ast_sha": "aa9912a3b9bb11899c1511bb8e3c5d71277875a26574a8eeda389bc9f7b9816f",
+      "code": {
+        "attributes": [
+          "_header",
+          "_image",
+          "_live",
+          "_reader",
+          "argv",
+          "channel",
+          "commit",
+          "context_sha",
+          "creator",
+          "descriptor",
+          "environment",
+          "get",
+          "getpid",
+          "hexdigest",
+          "main",
+          "modules",
+          "name",
+          "nonce",
+          "parent",
+          "path",
+          "paths",
+          "proof_raw",
+          "raw",
+          "sha",
+          "transport"
+        ],
+        "builtin_candidates": [
+          "bytes",
+          "list",
+          "tuple",
+          "type"
+        ],
+        "cellvars": [],
+        "code_path": "unit.233.18",
+        "code_sha": "dd5b7fbb1972172295f32f19fe4a218a43172ac7ce4a3f2e3d4c760a36222a73",
+        "dynamic_name_operators": [],
+        "firstline": 3191,
+        "freevars": [],
+        "global_names": [
+          "ENTRY_MODULE_NAME",
+          "NEW_SOURCES",
+          "ROOT",
+          "StageChannel",
+          "_DIRECT_BOOTSTRAP",
+          "_direct_main_shape",
+          "_saved_environment_bookend",
+          "bytes",
+          "digest",
+          "directories",
+          "get_ident",
+          "identity",
+          "list",
+          "ordinary",
+          "os",
+          "parse",
+          "require",
+          "sha256",
+          "sys",
+          "tuple",
+          "type"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "SavedFileBootstrap.check",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 3212,
+      "kind": "FunctionDef",
+      "line": 3191
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::SavedOwnerInputs.immutable_entry": {
+      "ast_sha": "e00e5e487e621e5a6c62139bc8fc942bbfaea52ede092acc44ac68c1818978ce",
+      "code": {
+        "attributes": [
+          "_image",
+          "binding",
+          "child_consumed",
+          "child_reservation",
+          "commit",
+          "creator",
+          "getpid",
+          "hexdigest",
+          "raw",
+          "reservation",
+          "reservation_commit",
+          "root",
+          "schema",
+          "sha",
+          "store",
+          "tree",
+          "writer"
+        ],
+        "builtin_candidates": [
+          "list",
+          "str",
+          "type"
+        ],
+        "cellvars": [],
+        "code_path": "unit.240.13",
+        "code_sha": "cbc1086dbc6d8e9646e7e1798708b54c981590460be7440ad730e640e46fa3aa",
+        "dynamic_name_operators": [],
+        "firstline": 3324,
+        "freevars": [],
+        "global_names": [
+          "RoleStore",
+          "SCHEMA",
+          "canonical",
+          "digest",
+          "get_ident",
+          "list",
+          "os",
+          "parse",
+          "require",
+          "sha256",
+          "str",
+          "type"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "SavedOwnerInputs.immutable_entry",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 3337,
+      "kind": "FunctionDef",
+      "line": 3324
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_SavedLaunchIssuer.__new__": {
+      "ast_sha": "0e3ec2a6820bf2c65dd08788ced09655747feaec8b4cb2f4ab54349a774ed7f6",
+      "code": {
+        "attributes": [],
+        "builtin_candidates": [
+          "TypeError"
+        ],
+        "cellvars": [],
+        "code_path": "unit.246.1",
+        "code_sha": "941d1b31805482a6bdaecabdb3f7785a5e670eae0a1af27ad06ffc738293bb18",
+        "dynamic_name_operators": [],
+        "firstline": 3407,
+        "freevars": [],
+        "global_names": [
+          "TypeError"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "_SavedLaunchIssuer.__new__",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 3407,
+      "kind": "FunctionDef",
+      "line": 3407
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_SavedLaunchIssuer.check": {
+      "ast_sha": "257a8e3254272aa8b401de1c6079c331ae35818d7b06fee936f97f2250aec988",
+      "code": {
+        "attributes": [],
+        "builtin_candidates": [
+          "ValueError"
+        ],
+        "cellvars": [],
+        "code_path": "unit.246.2",
+        "code_sha": "72047462887b548959c3ee18a2392ea856db136c4ed054c3201ea9d8edd82b5f",
+        "dynamic_name_operators": [],
+        "firstline": 3408,
+        "freevars": [],
+        "global_names": [
+          "ValueError"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "_SavedLaunchIssuer.check",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 3408,
+      "kind": "FunctionDef",
+      "line": 3408
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_bind_saved_main": {
+      "ast_sha": "f5a82ae192da7fcc8da331b22eee734d631f0e4e153b2c2187a79ca4ade35f58",
+      "code": {
+        "attributes": [
+          "__file__",
+          "get",
+          "items",
+          "modules",
+          "orig_argv",
+          "parent",
+          "path"
+        ],
+        "builtin_candidates": [
+          "all",
+          "any",
+          "dict",
+          "len",
+          "list",
+          "str",
+          "tuple"
+        ],
+        "cellvars": [],
+        "code_path": "unit.238",
+        "code_sha": "dde80ae493b0a0f41008e4e2db14d55b9f6d092c454b07821c47f711ae835225",
+        "dynamic_name_operators": [],
+        "firstline": 3242,
+        "freevars": [],
+        "global_names": [
+          "ENTRY_MODULE_NAME",
+          "GATES",
+          "NEW_SOURCES",
+          "OUTPUT",
+          "Path",
+          "ROOT",
+          "SavedFileBootstrap",
+          "_DIRECT_BOOTSTRAP",
+          "_SAVED_BOOTSTRAP",
+          "_checked_entry_paths",
+          "_direct_main_shape",
+          "_ordinary_preimports",
+          "_saved_transport",
+          "all",
+          "any",
+          "argv_for",
+          "canonical",
+          "check_context",
+          "dict",
+          "digest",
+          "directories",
+          "identity",
+          "len",
+          "list",
+          "ordinary",
+          "pin",
+          "read",
+          "require",
+          "str",
+          "sys",
+          "tuple"
+        ],
+        "global_writes": [
+          "_SAVED_BOOTSTRAP"
+        ],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "_bind_saved_main",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 3273,
+      "kind": "FunctionDef",
+      "line": 3242
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_expectation_adapter": {
+      "ast_sha": "2b129cfa78b353b5eae5b2841e9258cb26c17ffcdb3ab6bab7925b06fb921760",
+      "code": {
+        "attributes": [
+          "P1",
+          "SCOPE",
+          "__closure__",
+          "__code__",
+          "__defaults__",
+          "__file__",
+          "__globals__",
+          "__kwdefaults__",
+          "absolute",
+          "append",
+          "as_posix",
+          "co_consts",
+          "co_name",
+          "codec",
+          "core",
+          "executable",
+          "flags",
+          "get",
+          "items",
+          "mechanical",
+          "optimize",
+          "point",
+          "prefix",
+          "relative_to",
+          "sources",
+          "values"
+        ],
+        "builtin_candidates": [
+          "BaseException",
+          "compile",
+          "dict",
+          "getattr",
+          "int",
+          "len",
+          "set",
+          "str",
+          "sum",
+          "tuple",
+          "type",
+          "vars"
+        ],
+        "cellvars": [],
+        "code_path": "unit.298",
+        "code_sha": "242f953fbad6d5bacf5ecaf15199f875b9a045d0660dce550026d398e227395e",
+        "dynamic_name_operators": [
+          "getattr"
+        ],
+        "firstline": 3862,
+        "freevars": [],
+        "global_names": [
+          "BaseException",
+          "CodeType",
+          "EXE",
+          "EXPECTATION_ADAPTER_PIN",
+          "EXPECTATION_SOURCE_RAW_CAP",
+          "FunctionType",
+          "NEW_SOURCES",
+          "P1",
+          "Path",
+          "ROOT",
+          "SCOPE",
+          "SavedExpectationUnresolved",
+          "_expectation_binding_entry",
+          "canonical",
+          "compile",
+          "dict",
+          "getattr",
+          "int",
+          "keys",
+          "len",
+          "pin",
+          "read",
+          "require",
+          "set",
+          "source_names",
+          "source_pins",
+          "str",
+          "sum",
+          "sys",
+          "tuple",
+          "type",
+          "vars"
+        ],
+        "global_writes": [],
+        "imports": [
+          "src"
+        ],
+        "production_candidate": true,
+        "qualname": "_expectation_adapter",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 3919,
+      "kind": "FunctionDef",
+      "line": 3862
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_expectation_binding_entry": {
+      "ast_sha": "19b9a58b4ea9547fe9485d9392f4bde6b3ab59b69d8231874a2f3294ebd9c5a7",
+      "code": {
+        "attributes": [
+          "__closure__",
+          "__code__",
+          "__defaults__",
+          "__file__",
+          "__globals__",
+          "__kwdefaults__",
+          "absolute",
+          "get",
+          "modules"
+        ],
+        "builtin_candidates": [
+          "getattr",
+          "type",
+          "vars"
+        ],
+        "cellvars": [],
+        "code_path": "unit.297",
+        "code_sha": "4d2f894032b6f703e3193be7e8127f60dc7831770bdbd8ef05d2b3d273c84acf",
+        "dynamic_name_operators": [
+          "getattr"
+        ],
+        "firstline": 3850,
+        "freevars": [],
+        "global_names": [
+          "FunctionType",
+          "NEW_SOURCES",
+          "Path",
+          "ROOT",
+          "canonical",
+          "getattr",
+          "require",
+          "sys",
+          "type",
+          "vars"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "_expectation_binding_entry",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 3859,
+      "kind": "FunctionDef",
+      "line": 3850
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_open_saved_role_inputs": {
+      "ast_sha": "9e7ba1dbe8f4c50ee69278767ce7dd234f2e877a9a23b12e5fce1c3f4dd77c68",
+      "code": {
+        "attributes": [
+          "attach",
+          "bind_channel",
+          "check",
+          "close"
+        ],
+        "builtin_candidates": [
+          "BaseException",
+          "str"
+        ],
+        "cellvars": [],
+        "code_path": "unit.239",
+        "code_sha": "89bb53e779288d7f15275c122b2c996df6a96e28b26e3335fe9a45c5b01d5ac4",
+        "dynamic_name_operators": [],
+        "firstline": 3276,
+        "freevars": [],
+        "global_names": [
+          "BaseException",
+          "OUTPUT",
+          "Path",
+          "RoleStore",
+          "StageChannel",
+          "StageChannelConstructionUnresolved",
+          "_bind_saved_main",
+          "parse",
+          "read",
+          "require",
+          "saved_file_arguments",
+          "stage_descriptor",
+          "str"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "_open_saved_role_inputs",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 3294,
+      "kind": "FunctionDef",
+      "line": 3276
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_probe_bookend_saved_input": {
+      "ast_sha": "7c5bba4345dad90e134db1de6031fc70c4eec1272bf66577d983ee74af26486f",
+      "code": {
+        "attributes": [
+          "__setattr__",
+          "_held",
+          "_identity_entry",
+          "_state",
+          "append",
+          "binding",
+          "bookend",
+          "context_raw",
+          "context_sha",
+          "entry",
+          "held_image_sha",
+          "stage"
+        ],
+        "builtin_candidates": [
+          "BaseException",
+          "dict",
+          "id",
+          "object",
+          "str",
+          "type"
+        ],
+        "cellvars": [],
+        "code_path": "unit.314",
+        "code_sha": "e92a634c332b4ec78b3752a0235b58b8086bc647d37af5018e202fc3f54a4971",
+        "dynamic_name_operators": [],
+        "firstline": 4190,
+        "freevars": [],
+        "global_names": [
+          "BaseException",
+          "GATES",
+          "SavedExpectationUnresolved",
+          "VerifiedSavedInput",
+          "_expectation_binding_entry",
+          "check_expectation_context",
+          "dict",
+          "digest",
+          "id",
+          "object",
+          "require",
+          "str",
+          "type"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "_probe_bookend_saved_input",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 4216,
+      "kind": "FunctionDef",
+      "line": 4190
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_probe_saved_expectation_input": {
+      "ast_sha": "7f20b6860a3654d41765faaf51587ed1d9d579fc7df44cf708a3b5f26470172f",
+      "code": {
+        "attributes": [
+          "HeldInput",
+          "__new__",
+          "__setattr__",
+          "_image",
+          "append",
+          "entry",
+          "getpid",
+          "hexdigest",
+          "hold",
+          "image",
+          "items",
+          "raw"
+        ],
+        "builtin_candidates": [
+          "BaseException",
+          "dict",
+          "id",
+          "object",
+          "str",
+          "type"
+        ],
+        "cellvars": [],
+        "code_path": "unit.313",
+        "code_sha": "c65f849d389240c04057dcba03d25ddea540f7af23d166a106051c6ffcc658e8",
+        "dynamic_name_operators": [],
+        "firstline": 4159,
+        "freevars": [],
+        "global_names": [
+          "BaseException",
+          "SavedCallerExpectation",
+          "SavedExpectationUnresolved",
+          "VerifiedSavedInput",
+          "_expectation_adapter",
+          "_expectation_binding_entry",
+          "canonical",
+          "check_expectation_context",
+          "dict",
+          "digest",
+          "get_ident",
+          "id",
+          "object",
+          "os",
+          "require",
+          "sha256",
+          "str",
+          "type"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "_probe_saved_expectation_input",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 4187,
+      "kind": "FunctionDef",
+      "line": 4159
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_role_compare": {
+      "ast_sha": "abc7ebbe94d30597fbc1a7dd6b28cb01cf8e409c0f005eb18ed9b6288fe80a5c",
+      "code": {
+        "attributes": [
+          "check",
+          "compare_payloads",
+          "hexdigest",
+          "raw",
+          "sha",
+          "writer"
+        ],
+        "builtin_candidates": [
+          "dict"
+        ],
+        "cellvars": [],
+        "code_path": "unit.147",
+        "code_sha": "2616eba93d3d1a7df506207e5c07681a41170fc6e2c476bfad26af3974c121df",
+        "dynamic_name_operators": [],
+        "firstline": 1657,
+        "freevars": [],
+        "global_names": [
+          "ROLE_PROBE_SCHEMA",
+          "_role_fixture_payload",
+          "canonical",
+          "dict",
+          "digest",
+          "execution_context",
+          "parse",
+          "require",
+          "sha256"
+        ],
+        "global_writes": [],
+        "imports": [
+          "src"
+        ],
+        "production_candidate": true,
+        "qualname": "_role_compare",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 1667,
+      "kind": "FunctionDef",
+      "line": 1657
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_role_context": {
+      "ast_sha": "25f93733976b8ee9be3878d553dc6fac0829a2524ece7d2c3439beddb736777f",
+      "code": {
+        "attributes": [
+          "get"
+        ],
+        "builtin_candidates": [],
+        "cellvars": [],
+        "code_path": "unit.126",
+        "code_sha": "ff7f4c99cfb267008bdfa90dec34d314ce23e6937832f02f4fd25abddc95c921",
+        "dynamic_name_operators": [],
+        "firstline": 1258,
+        "freevars": [],
+        "global_names": [
+          "ROLE_PROBE_SCHEMA",
+          "check_context",
+          "check_role_probe_context",
+          "parse"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "_role_context",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 1260,
+      "kind": "FunctionDef",
+      "line": 1258
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_role_input_bookend": {
+      "ast_sha": "76cc748d420d1b9554d210319e90d08531765ab81704c1713cd8f457fcb5ff72",
+      "code": {
+        "attributes": [
+          "bookend",
+          "check",
+          "hold",
+          "lower",
+          "monotonic",
+          "raw",
+          "sha",
+          "writer"
+        ],
+        "builtin_candidates": [
+          "ValueError",
+          "dict"
+        ],
+        "cellvars": [],
+        "code_path": "unit.146",
+        "code_sha": "59bf5059f823338301163871682d971e1f9bf70342e236d29336379c5b3018fa",
+        "dynamic_name_operators": [],
+        "firstline": 1643,
+        "freevars": [],
+        "global_names": [
+          "ROLE_PROBE_SCHEMA",
+          "ValueError",
+          "_role_context",
+          "canonical",
+          "dict",
+          "digest",
+          "execution_context",
+          "require",
+          "time"
+        ],
+        "global_writes": [],
+        "imports": [
+          "src"
+        ],
+        "production_candidate": true,
+        "qualname": "_role_input_bookend",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 1654,
+      "kind": "FunctionDef",
+      "line": 1643
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_role_reconstruct": {
+      "ast_sha": "71bb31e65052d06df163394577af916a49c5ff1f163aa7de06d4dfefa847e713",
+      "code": {
+        "attributes": [
+          "check",
+          "hold",
+          "raw",
+          "replay",
+          "sha"
+        ],
+        "builtin_candidates": [
+          "ValueError"
+        ],
+        "cellvars": [],
+        "code_path": "unit.145",
+        "code_sha": "adcc4b3d75f2d3b56922e8989ad9d2f689fa5715f3ad1a9a08a05ba55dce32ab",
+        "dynamic_name_operators": [],
+        "firstline": 1631,
+        "freevars": [],
+        "global_names": [
+          "ROLE_PROBE_SCHEMA",
+          "ValueError",
+          "_disable_saved_effects",
+          "_role_fixture_payload",
+          "canonical",
+          "execution_context",
+          "parse"
+        ],
+        "global_writes": [],
+        "imports": [
+          "src"
+        ],
+        "production_candidate": true,
+        "qualname": "_role_reconstruct",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 1640,
+      "kind": "FunctionDef",
+      "line": 1631
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_saved_launch_issuer": {
+      "ast_sha": "0d5a6590b1deac1341ad2252d57f4518ede7b360aba170e52d43ead2f4426d49",
+      "code": {
+        "attributes": [],
+        "builtin_candidates": [
+          "type"
+        ],
+        "cellvars": [],
+        "code_path": "unit.250",
+        "code_sha": "fdc36999097808cd17212188686e3bb630091da67671ca0aff829ee03d7f6aad",
+        "dynamic_name_operators": [],
+        "firstline": 3442,
+        "freevars": [],
+        "global_names": [
+          "_SAVED_LAUNCH_ISSUER",
+          "_SavedLaunchIssuer",
+          "require",
+          "type"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "_saved_launch_issuer",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 3444,
+      "kind": "FunctionDef",
+      "line": 3442
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_saved_owner_endpoint": {
+      "ast_sha": "c61d41a7d27e81d2774e0666aad280643e70cb5d5bb5abda812a64688c272b01",
+      "code": {
+        "attributes": [
+          "_header",
+          "_live",
+          "_reader",
+          "context_sha",
+          "descriptor"
+        ],
+        "builtin_candidates": [
+          "type"
+        ],
+        "cellvars": [],
+        "code_path": "unit.242",
+        "code_sha": "944c8ff55dfbb063c713c611f3329154ead3f6d857c256a370c38b828d680f6a",
+        "dynamic_name_operators": [],
+        "firstline": 3357,
+        "freevars": [],
+        "global_names": [
+          "StageChannel",
+          "require",
+          "stage_descriptor",
+          "type"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "_saved_owner_endpoint",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 3361,
+      "kind": "FunctionDef",
+      "line": 3357
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::_saved_owner_store": {
+      "ast_sha": "1f8f66aabeb86957498ff3161f1ad9e4499589798edab17ddd81f78934555331",
+      "code": {
+        "attributes": [
+          "check",
+          "child_consumed",
+          "child_reservation",
+          "creator",
+          "isfinite",
+          "items",
+          "monotonic",
+          "raw",
+          "sha",
+          "writer"
+        ],
+        "builtin_candidates": [
+          "float",
+          "len",
+          "sorted",
+          "tuple",
+          "type"
+        ],
+        "cellvars": [],
+        "code_path": "unit.243",
+        "code_sha": "f5a9b58c64b041a43b01c25a5b45961817e3dfd324dc648ccb74caca03dbfb83",
+        "dynamic_name_operators": [],
+        "firstline": 3364,
+        "freevars": [],
+        "global_names": [
+          "RoleStore",
+          "SCHEMA",
+          "_hex64",
+          "_saved_environment_bookend",
+          "check_context",
+          "float",
+          "len",
+          "math",
+          "require",
+          "sorted",
+          "time",
+          "tuple",
+          "type"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "_saved_owner_store",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 3376,
+      "kind": "FunctionDef",
+      "line": 3364
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::construct_saved_stage": {
+      "ast_sha": "1d399445582bcd3c25fbe20c5020f7cf102f6be83a73002c0934c97f669c70fd",
+      "code": {
+        "attributes": [],
+        "builtin_candidates": [
+          "type"
+        ],
+        "cellvars": [],
+        "code_path": "unit.251",
+        "code_sha": "88df957c5c7c116f74888d4a7fef381a6a98a4b0fd5acaa8abd8170d522a2f28",
+        "dynamic_name_operators": [],
+        "firstline": 3447,
+        "freevars": [],
+        "global_names": [
+          "SavedChildLaunchPermit",
+          "SavedOwnerInputs",
+          "_construct_saved_stage",
+          "_saved_launch_issuer",
+          "require",
+          "type"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "construct_saved_stage",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 3451,
+      "kind": "FunctionDef",
+      "line": 3447
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::read_saved_after_quiet": {
+      "ast_sha": "77232b8d311eab90b485c972afe785605a8430ffffb904dc764b69e3a7eac71d",
+      "code": {
+        "attributes": [
+          "_job",
+          "_map",
+          "_members",
+          "_mutex",
+          "_process",
+          "_thread",
+          "_view",
+          "accounting",
+          "channel",
+          "creation_filetime",
+          "inputs",
+          "launch_binding",
+          "owner",
+          "pid",
+          "quiescence_witness",
+          "real_owner",
+          "reservation",
+          "root",
+          "startswith",
+          "store",
+          "writer"
+        ],
+        "builtin_candidates": [
+          "len"
+        ],
+        "cellvars": [],
+        "code_path": "unit.281",
+        "code_sha": "8f6e1a7e7ed580ce9d3e15008a50122272b27553c3bab766f22ba43145fddff2",
+        "dynamic_name_operators": [],
+        "firstline": 3824,
+        "freevars": [],
+        "global_names": [
+          "TARGETS",
+          "_saved_owner_store",
+          "_stage_complete_witness",
+          "canonical",
+          "len",
+          "read",
+          "require",
+          "role_target_caps",
+          "saved_stage_process_record"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "read_saved_after_quiet",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 3838,
+      "kind": "FunctionDef",
+      "line": 3824
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py::validate_expectation_context": {
+      "ast_sha": "b4d1530b06030d617459487ae5062bacea2e91991156747d11655d497cc6d584",
+      "code": {
+        "attributes": [
+          "absolute",
+          "is_absolute",
+          "is_relative_to",
+          "isfinite",
+          "items",
+          "join",
+          "monotonic",
+          "parent",
+          "parts",
+          "values",
+          "version"
+        ],
+        "builtin_candidates": [
+          "all",
+          "dict",
+          "float",
+          "int",
+          "len",
+          "list",
+          "set",
+          "str",
+          "tuple",
+          "type"
+        ],
+        "cellvars": [
+          "value"
+        ],
+        "code_path": "unit.307",
+        "code_sha": "35f7ce05d062189e54929c636c4376a28237d5c0df212ed271437566cfebd356",
+        "dynamic_name_operators": [],
+        "firstline": 4044,
+        "freevars": [],
+        "global_names": [
+          "ANCHOR_SHA",
+          "CAPS",
+          "EXE",
+          "EXPECTATION_CONTEXT_SCHEMA",
+          "GATES",
+          "P1",
+          "Path",
+          "ROOT",
+          "SCOPE",
+          "STAGE_SECONDS",
+          "_hex64",
+          "all",
+          "canonical",
+          "dict",
+          "digest",
+          "directories",
+          "float",
+          "int",
+          "keys",
+          "len",
+          "list",
+          "math",
+          "output_mode",
+          "require",
+          "set",
+          "source_names",
+          "str",
+          "sys",
+          "time",
+          "tuple",
+          "type"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "validate_expectation_context",
+        "source": "experiments/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 4082,
+      "kind": "FunctionDef",
+      "line": 4044
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::_replay": {
+      "ast_sha": "366076caa607aec8a33e7359cd68d63ede19b758b51db89850c789011a2b6f7a",
+      "code": {
+        "attributes": [
+          "CLEAN",
+          "METHOD",
+          "PLAN",
+          "SOURCES",
+          "append",
+          "bindings",
+          "evidence",
+          "expectations",
+          "extend",
+          "files",
+          "fixture",
+          "hexdigest",
+          "identity",
+          "image",
+          "inventory",
+          "lower",
+          "next_hour",
+          "outer",
+          "pack",
+          "parse",
+          "pin",
+          "plain",
+          "query",
+          "raw",
+          "records",
+          "reference",
+          "reopen",
+          "replay_prefix",
+          "request",
+          "role",
+          "sha",
+          "source",
+          "trusted",
+          "upper"
+        ],
+        "builtin_candidates": [
+          "dict",
+          "enumerate",
+          "len",
+          "set",
+          "zip"
+        ],
+        "cellvars": [],
+        "code_path": "unit.36",
+        "code_sha": "b73a84cf155af8a3325fd4ec5078dcd35e1f72766c9cda8e001dd52ff16e02ca",
+        "dynamic_name_operators": [],
+        "firstline": 198,
+        "freevars": [],
+        "global_names": [
+          "GATES",
+          "P1",
+          "SCHEMA",
+          "SCOPE",
+          "STATE_CAS_SHA",
+          "bind_payload",
+          "bookend",
+          "codec",
+          "core",
+          "dict",
+          "digest",
+          "enumerate",
+          "journal",
+          "len",
+          "mechanical",
+          "prefix",
+          "project_metrics",
+          "require",
+          "set",
+          "sha256",
+          "validate_payload",
+          "zip"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "_replay",
+        "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 238,
+      "kind": "FunctionDef",
+      "line": 198
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::bind_payload": {
+      "ast_sha": "50070eddf60ab5aed57e848afb0f39badcfcdd362e80a4981acfde68792cbb20",
+      "code": {
+        "attributes": [
+          "canonical",
+          "hexdigest",
+          "parse"
+        ],
+        "builtin_candidates": [],
+        "cellvars": [],
+        "code_path": "unit.38",
+        "code_sha": "9d0638dd38ab20f689022740a88b048aaca632c616a2c4f357767dc751ad5ce5",
+        "dynamic_name_operators": [],
+        "firstline": 270,
+        "freevars": [],
+        "global_names": [
+          "codec",
+          "digest",
+          "require",
+          "sha256"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "bind_payload",
+        "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 279,
+      "kind": "FunctionDef",
+      "line": 270
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::bookend": {
+      "ast_sha": "b21aaff3bd4ec9c92668b93b3d645d8852437e75220a49a62b5c0f08c062ae08",
+      "code": {
+        "attributes": [
+          "anchor_directories",
+          "anchor_identity",
+          "anchor_raw",
+          "directory_identity",
+          "image",
+          "inventory",
+          "parent",
+          "read_bytes",
+          "root_directories",
+          "source"
+        ],
+        "builtin_candidates": [
+          "all"
+        ],
+        "cellvars": [
+          "held",
+          "after"
+        ],
+        "code_path": "unit.30",
+        "code_sha": "d51f0b510d3aea2f0921477ef002b4855fe4b5c1f59b3bdc00569bb1da28147b",
+        "dynamic_name_operators": [],
+        "firstline": 136,
+        "freevars": [],
+        "global_names": [
+          "ANCHOR",
+          "P1",
+          "all",
+          "caller_image",
+          "codec",
+          "mechanical",
+          "require",
+          "sources",
+          "stamp"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "bookend",
+        "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 144,
+      "kind": "FunctionDef",
+      "line": 136
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::caller_image": {
+      "ast_sha": "abec942dc7c75ab950dac005239c8d362d03e6c03c8b412a9522d9823bc3a601",
+      "code": {
+        "attributes": [
+          "anchor_directories",
+          "anchor_identity",
+          "anchor_raw",
+          "bindings",
+          "canonical",
+          "digest",
+          "expectations",
+          "expected_evidence_refs",
+          "files",
+          "fixture",
+          "historical_metrics",
+          "inventory",
+          "outer",
+          "pin",
+          "root_directories",
+          "source",
+          "trusted"
+        ],
+        "builtin_candidates": [
+          "dict",
+          "str"
+        ],
+        "cellvars": [],
+        "code_path": "unit.26",
+        "code_sha": "3dacc0b665f7b0e6898f7fe5d9c92e99d2fadcd93fec8a410ae15c83e51ced9a",
+        "dynamic_name_operators": [],
+        "firstline": 81,
+        "freevars": [],
+        "global_names": [
+          "ANCHOR",
+          "codec",
+          "core",
+          "dict",
+          "mechanical",
+          "str"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "caller_image",
+        "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 87,
+      "kind": "FunctionDef",
+      "line": 81
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::capture": {
+      "ast_sha": "d21deabf1275d044b223ee5b6f9ef42fe4b17d4c524151cf801a4eb814925783",
+      "code": {
+        "attributes": [
+          "__setattr__",
+          "_outer",
+          "digest",
+          "directory_identity",
+          "hexdigest",
+          "inventory",
+          "items",
+          "load_fixture",
+          "loads",
+          "parent",
+          "parse",
+          "point",
+          "read_bytes",
+          "startswith",
+          "values"
+        ],
+        "builtin_candidates": [
+          "dict",
+          "len",
+          "object",
+          "range",
+          "str",
+          "sum",
+          "tuple",
+          "type"
+        ],
+        "cellvars": [
+          "data"
+        ],
+        "code_path": "unit.27",
+        "code_sha": "675a2551e7a399188e36a9a10b856c1a020e5c0a18744368f4150145691c84af",
+        "dynamic_name_operators": [],
+        "firstline": 90,
+        "freevars": [],
+        "global_names": [
+          "ANCHOR",
+          "ANCHOR_SHA",
+          "HeldInput",
+          "P1",
+          "bookend",
+          "caller_image",
+          "codec",
+          "core",
+          "dict",
+          "len",
+          "mechanical",
+          "object",
+          "prefix",
+          "range",
+          "require",
+          "sha256",
+          "sources",
+          "stamp",
+          "str",
+          "sum",
+          "tuple",
+          "type",
+          "validate_metrics"
+        ],
+        "global_writes": [],
+        "imports": [
+          "json"
+        ],
+        "production_candidate": true,
+        "qualname": "capture",
+        "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 125,
+      "kind": "FunctionDef",
+      "line": 90
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::compare_payloads": {
+      "ast_sha": "b52a25e1f5634960cc1e96b9dbddcebd810a38223a330ebf20820b81d06eb3af",
+      "code": {
+        "attributes": [
+          "hexdigest",
+          "parse"
+        ],
+        "builtin_candidates": [
+          "dict"
+        ],
+        "cellvars": [],
+        "code_path": "unit.39",
+        "code_sha": "2833804443140f82d0684d1d3a320942559df4ac65b63e69c989a3e428fad8ff",
+        "dynamic_name_operators": [],
+        "firstline": 282,
+        "freevars": [],
+        "global_names": [
+          "GATES",
+          "SCOPE",
+          "bind_payload",
+          "codec",
+          "dict",
+          "digest",
+          "require",
+          "sha256",
+          "validate_payload"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "compare_payloads",
+        "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 294,
+      "kind": "FunctionDef",
+      "line": 282
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::hold": {
+      "ast_sha": "d08320ffaeafc56c4faf38da6d953c48030949c795bfc92cf29208ac6c7377dd",
+      "code": {
+        "attributes": [
+          "image",
+          "parse"
+        ],
+        "builtin_candidates": [
+          "bytes",
+          "type"
+        ],
+        "cellvars": [],
+        "code_path": "unit.28",
+        "code_sha": "72b5233af4613c8efceebabe29f78c91c55b6f02dbda83a37a356bf60a1ca7c1",
+        "dynamic_name_operators": [],
+        "firstline": 128,
+        "freevars": [],
+        "global_names": [
+          "bytes",
+          "capture",
+          "codec",
+          "require",
+          "type"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "hold",
+        "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 133,
+      "kind": "FunctionDef",
+      "line": 128
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::project_metrics": {
+      "ast_sha": "2ed8eedeca295f233f203abd77f8e4dd05a82dd2b7694aaa1f074e7f8ca10747",
+      "code": {
+        "attributes": [
+          "digest",
+          "plain",
+          "update"
+        ],
+        "builtin_candidates": [
+          "dict",
+          "set"
+        ],
+        "cellvars": [],
+        "code_path": "unit.31",
+        "code_sha": "5044a3125a5638e18f3186f22d5aa4248a8d3d3e313d17ee4a42a9f50e06bad5",
+        "dynamic_name_operators": [],
+        "firstline": 147,
+        "freevars": [],
+        "global_names": [
+          "METRIC_FIELDS",
+          "core",
+          "dict",
+          "require",
+          "set",
+          "validate_metrics"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "project_metrics",
+        "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 154,
+      "kind": "FunctionDef",
+      "line": 147
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::replay": {
+      "ast_sha": "a40a8e435d44ecff003e0e3a9695359134f451591149b066f4552cc64f37ac8a",
+      "code": {
+        "attributes": [],
+        "builtin_candidates": [
+          "BaseException"
+        ],
+        "cellvars": [],
+        "code_path": "unit.35",
+        "code_sha": "eb60da90848a23ba28edf726c9e4775ec841c79ccaa76ce36824714fc12ec113",
+        "dynamic_name_operators": [],
+        "firstline": 188,
+        "freevars": [],
+        "global_names": [
+          "BaseException",
+          "ReplayUnresolved",
+          "_replay",
+          "bookend"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "replay",
+        "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 195,
+      "kind": "FunctionDef",
+      "line": 188
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::sources": {
+      "ast_sha": "b306bef74dc11a5ad445b77032d3f3103fef3c6b0a12ef24dabe8800c429a6cf",
+      "code": {
+        "attributes": [
+          "__file__",
+          "absolute",
+          "canonical",
+          "checked_pin",
+          "endswith",
+          "get",
+          "modules",
+          "pin",
+          "read_bytes",
+          "removesuffix",
+          "replace",
+          "startswith",
+          "values"
+        ],
+        "builtin_candidates": [
+          "dict",
+          "getattr",
+          "set",
+          "str",
+          "type"
+        ],
+        "cellvars": [],
+        "code_path": "unit.20",
+        "code_sha": "ce6614db861d288692b4a9e4c9b15f5b7cca1417d375dda9c89bdf1758f20cdb",
+        "dynamic_name_operators": [
+          "getattr"
+        ],
+        "firstline": 39,
+        "freevars": [],
+        "global_names": [
+          "Path",
+          "ROOT",
+          "SOURCES",
+          "codec",
+          "dict",
+          "getattr",
+          "mechanical",
+          "require",
+          "set",
+          "str",
+          "sys",
+          "type"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "sources",
+        "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 54,
+      "kind": "FunctionDef",
+      "line": 39
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::validate_metrics": {
+      "ast_sha": "0fcc8706e4773e2f8d74842fc18626e3b52a5b74522b2be465d990d7ba5c5e59",
+      "code": {
+        "attributes": [
+          "canonical",
+          "join",
+          "keys",
+          "sha"
+        ],
+        "builtin_candidates": [
+          "all",
+          "dict",
+          "int",
+          "str",
+          "type"
+        ],
+        "cellvars": [
+          "value"
+        ],
+        "code_path": "unit.32",
+        "code_sha": "26a85811441396be61cde8225a01e14dd9dbd0153321916860a697133f629589",
+        "dynamic_name_operators": [],
+        "firstline": 157,
+        "freevars": [],
+        "global_names": [
+          "METRIC_FIELDS",
+          "STATE_CAS_SHA",
+          "all",
+          "codec",
+          "dict",
+          "int",
+          "mechanical",
+          "require",
+          "str",
+          "type"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "validate_metrics",
+        "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 176,
+      "kind": "FunctionDef",
+      "line": 157
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py::validate_payload": {
+      "ast_sha": "4df179b2192d153f766d1cb452e6579c1b83ff909de1cb1521be69b733e4a818",
+      "code": {
+        "attributes": [
+          "canonical",
+          "join",
+          "keys",
+          "sha"
+        ],
+        "builtin_candidates": [
+          "all",
+          "enumerate",
+          "int",
+          "len",
+          "list",
+          "str",
+          "type"
+        ],
+        "cellvars": [
+          "value"
+        ],
+        "code_path": "unit.37",
+        "code_sha": "b7254f6e0bbacb182af56b8dc8caaf0beec8f6a466856ce738449d83f60ac7c0",
+        "dynamic_name_operators": [],
+        "firstline": 241,
+        "freevars": [],
+        "global_names": [
+          "GATES",
+          "SCHEMA",
+          "SCOPE",
+          "all",
+          "codec",
+          "enumerate",
+          "int",
+          "len",
+          "list",
+          "mechanical",
+          "require",
+          "str",
+          "type",
+          "validate_metrics"
+        ],
+        "global_writes": [],
+        "imports": [],
+        "production_candidate": true,
+        "qualname": "validate_payload",
+        "source": "src/staged_rts24_saved_fresh_adoption_v1.py"
+      },
+      "decorators": [],
+      "end_line": 267,
+      "kind": "FunctionDef",
+      "line": 241
+    }
+  }
+}

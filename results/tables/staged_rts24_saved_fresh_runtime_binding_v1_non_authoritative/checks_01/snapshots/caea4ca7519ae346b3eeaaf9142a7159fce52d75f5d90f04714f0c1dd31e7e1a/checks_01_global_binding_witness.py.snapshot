@@ -1,0 +1,128 @@
+"""Five preregistered RAM counterexamples, with guards before repository import."""
+import builtins
+import json
+import os
+from pathlib import Path
+import sys
+from common import ROOT,OUT,OUTPUT_PARENT,canonical,selected,save
+
+assert not any(n=='src' or n.startswith(('src.','experiments.')) for n in sys.modules)
+assert sys.getprofile() is None
+P1=ROOT/'results/tables/staged_rts24_native_v1_non_authoritative/p1_01'
+phase='repository_import';counts={};changes=[];changed=set();source=selected()
+fields=('P1_open_attempts','process_launch_attempts','scientific_API_attempts','solver_factory_attempts',
+    'native_owner_attempts','mutator_calls','unexpected_repository_writes')
+
+
+def bucket(): return counts.setdefault(phase,dict.fromkeys(fields,0))
+def denied(kind):
+    bucket()[kind]+=1
+    raise AssertionError('witness attempted '+kind)
+
+
+def normalized(path): return os.path.normcase(os.path.abspath(os.fspath(path)))
+root_prefix=normalized(ROOT)+os.sep;p1_prefix=normalized(P1)+os.sep;out_prefix=normalized(OUT)+os.sep
+
+
+def audit(event,args):
+    if event=='open' and isinstance(args[0],(str,bytes,os.PathLike)):
+        path=normalized(os.fsdecode(args[0]))
+        if path==p1_prefix[:-1] or path.startswith(p1_prefix): denied('P1_open_attempts')
+        mode=args[1];flags=args[2]
+        write=(type(mode) is str and any(c in mode for c in 'wax+')) or (type(flags) is int and bool(flags&(os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND)))
+        if write and path.startswith(root_prefix) and not path.startswith(out_prefix): denied('unexpected_repository_writes')
+    if event=='subprocess.Popen' or event=='os.system' or event.startswith('os.spawn'): denied('process_launch_attempts')
+
+
+scientific_names={'compile_problem','import_snapshot','make_model','call_highs','snapshot_from_raw',
+    'capture','hold','bookend','replay','_replay','replay_prefix','replay_point','reopen',
+    'create_session','begin_step','commit_step','finish','put','publish'}
+
+
+def profile(frame,event,arg):
+    if event!='call': return
+    filename=frame.f_code.co_filename.casefold()
+    if filename.startswith(str(ROOT).casefold()):
+        if frame.f_code.co_name in scientific_names: denied('scientific_API_attempts')
+        if frame.f_code.co_qualname.endswith('OwnedChild.__init__'): denied('native_owner_attempts')
+
+
+def replace(module,name,value):
+    key=(id(module),name)
+    if key not in changed:
+        changes.append((module,name,getattr(module,name)));changed.add(key)
+    setattr(module,name,value)
+
+
+def solver_denied(*args,**kwargs): denied('solver_factory_attempts')
+original_import=builtins.__import__
+
+
+def guarded_import(*args,**kwargs):
+    result=original_import(*args,**kwargs)
+    for name,attribute in (('highspy','Highs'),('pyomo.environ','SolverFactory')):
+        module=sys.modules.get(name)
+        if module is not None and not getattr(getattr(module,'__spec__',None),'_initializing',False) and hasattr(module,attribute):
+            replace(module,attribute,solver_denied)
+    return result
+
+
+rows=[];restored=False;bucket()
+sys.addaudithook(audit);sys.setprofile(profile);builtins.__import__=guarded_import
+try:
+    sys.path.insert(0,str(ROOT))
+    from experiments import staged_rts24_saved_fresh_adoption_v1 as entry
+    from src import staged_rts24_saved_fresh_adoption_v1 as adapter
+    phase='post_import';bucket()
+    def scientific_denied(*args,**kwargs): denied('scientific_API_attempts')
+    for module,name in ((adapter,'replay'),(adapter.prefix,'replay_prefix'),(adapter.journal,'reopen'),
+        (adapter.prefix.point.numeric,'compile_problem'),(adapter.prefix.point.numeric,'import_snapshot'),
+        (adapter.prefix.point.backend,'make_model'),(adapter.prefix.point.backend,'call_highs'),
+        (adapter.prefix.point.backend,'snapshot_from_raw'),(adapter.codec.EvidenceStore,'put'),
+        (adapter.codec,'publish'),(adapter.journal,'publish')):
+        replace(module,name,scientific_denied)
+    for name in ('create_session','begin_step','commit_step','finish'): replace(adapter.journal,name,scientific_denied)
+    baseline=entry._expectation_adapter(source)
+    assert len(baseline[1])==10
+    cases=[('codec.parse',adapter.codec,'parse'),('adapter._replay',adapter,'_replay'),
+        ('core.digest',adapter.core,'digest'),('adapter.HeldInput',adapter,'HeldInput'),
+        ('adapter.METRIC_FIELDS',adapter,'METRIC_FIELDS')]
+    for label,module,name in cases:
+        phase=label;bucket();original=getattr(module,name);namespace=vars(module)
+        def mutation(*args,**kwargs): denied('mutator_calls')
+        if name=='HeldInput':
+            class ForeignHeldInput:
+                def __new__(cls,*args,**kwargs): denied('mutator_calls')
+            replacement=ForeignHeldInput
+        elif name=='METRIC_FIELDS': replacement=original+('witness_only_field',)
+        else: replacement=mutation
+        accepted=False
+        try:
+            setattr(module,name,replacement)
+            binding=entry._expectation_adapter(source)
+            assert getattr(module,name) is replacement and vars(module) is namespace
+            assert binding[0] is adapter and len(binding[1])==10
+            accepted=True
+        finally:
+            setattr(module,name,original)
+        assert accepted and getattr(module,name) is original and vars(module) is namespace
+        assert not any(bucket().values())
+        rows.append(dict(symbol=label,expected='preparation_binding_accepts',accepted=True,
+            replacement_called=False,original_object_restored=True,module_globals_identity_unchanged=True))
+    phase='restoration';bucket()
+finally:
+    for module,name,original in reversed(changes): setattr(module,name,original)
+    builtins.__import__=original_import;sys.setprofile(None)
+    restored=all(getattr(module,name) is original for module,name,original in changes)
+assert restored and builtins.__import__ is original_import and sys.getprofile() is None
+assert len(rows)==5 and not any(value for row in counts.values() for value in row.values())
+assert selected()==source and not OUTPUT_PARENT.exists()
+save('global_binding_witness.json',dict(authority='DRAFT_NONAUTHORITATIVE',source_pins=source,cases=rows,
+    phase_counts=counts,import_guards_installed_before_repository_import=True,
+    declared_scientific_API_names=sorted(scientific_names),instrumentation_originals_restored=True,
+    counters_cover_declared_APIs_not_arbitrary_native_effects=True,P1_content_reads=0,
+    full_runtime_closure_proved=False,production_guard_bypassed=False,actual_saved_F_execution=False,
+    F_launch_admitted=False,scientific_evidence_adopted=False,resource_admission=False,formal_result=False))
+print(json.dumps(dict(cases=len(rows),all_preregistered_acceptances_established=True,
+    all_declared_effect_counters_zero=True,original_objects_restored=restored,P1_content_reads=0,
+    actual_saved_F_execution=False)))

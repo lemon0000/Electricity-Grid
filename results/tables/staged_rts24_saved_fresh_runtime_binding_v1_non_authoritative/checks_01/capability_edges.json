@@ -1,0 +1,221 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "cross_process_packets_are_binding_data_only": true,
+  "data_order_edges": [
+    [
+      "request",
+      "context"
+    ],
+    [
+      "context",
+      "offer"
+    ],
+    [
+      "offer",
+      "ACK"
+    ],
+    [
+      "ACK",
+      "controller_bootstrap"
+    ],
+    [
+      "controller_bootstrap",
+      "G0"
+    ],
+    [
+      "G0",
+      "controller_store"
+    ],
+    [
+      "controller_store",
+      "parent_permit"
+    ],
+    [
+      "parent_permit",
+      "parent_bootstrap"
+    ],
+    [
+      "parent_bootstrap",
+      "parent_hold"
+    ],
+    [
+      "parent_hold",
+      "parent_store"
+    ],
+    [
+      "parent_store",
+      "parent_issuer"
+    ],
+    [
+      "parent_issuer",
+      "fresh_permit"
+    ],
+    [
+      "fresh_permit",
+      "fresh_bootstrap"
+    ],
+    [
+      "fresh_bootstrap",
+      "fresh_hold"
+    ],
+    [
+      "fresh_hold",
+      "fresh_result"
+    ],
+    [
+      "fresh_result",
+      "fresh_quiet"
+    ],
+    [
+      "fresh_quiet",
+      "G1_compare"
+    ],
+    [
+      "G1_compare",
+      "parent_quiet"
+    ],
+    [
+      "parent_quiet",
+      "G2"
+    ],
+    [
+      "G2",
+      "final_observation"
+    ],
+    [
+      "final_observation",
+      "G3"
+    ],
+    [
+      "G3",
+      "controller_return"
+    ],
+    [
+      "controller_return",
+      "controller_quiet"
+    ],
+    [
+      "controller_quiet",
+      "broker_return"
+    ],
+    [
+      "broker_return",
+      "broker_quiet"
+    ],
+    [
+      "broker_quiet",
+      "H3"
+    ],
+    [
+      "H3",
+      "host_final"
+    ]
+  ],
+  "implemented": false,
+  "node_roles": {
+    "ACK": "host",
+    "G0": "controller",
+    "G1_compare": "parent",
+    "G2": "controller",
+    "G3": "controller",
+    "H3": "host",
+    "broker_quiet": "host",
+    "broker_return": "broker",
+    "context": "broker",
+    "controller_bootstrap": "controller",
+    "controller_quiet": "broker",
+    "controller_return": "controller",
+    "controller_store": "controller",
+    "final_observation": "controller",
+    "fresh_bootstrap": "fresh",
+    "fresh_hold": "fresh",
+    "fresh_permit": "parent",
+    "fresh_quiet": "parent",
+    "fresh_result": "fresh",
+    "host_final": "host",
+    "offer": "broker",
+    "parent_bootstrap": "parent",
+    "parent_hold": "parent",
+    "parent_issuer": "parent",
+    "parent_permit": "controller",
+    "parent_quiet": "controller",
+    "parent_store": "parent",
+    "request": "host"
+  },
+  "same_process_capability_edges": [
+    [
+      "controller_bootstrap",
+      "G0"
+    ],
+    [
+      "G0",
+      "controller_store"
+    ],
+    [
+      "G0",
+      "parent_permit"
+    ],
+    [
+      "parent_bootstrap",
+      "parent_hold"
+    ],
+    [
+      "parent_hold",
+      "parent_store"
+    ],
+    [
+      "parent_hold",
+      "parent_issuer"
+    ],
+    [
+      "parent_issuer",
+      "fresh_permit"
+    ],
+    [
+      "fresh_bootstrap",
+      "fresh_hold"
+    ],
+    [
+      "G0",
+      "G2"
+    ],
+    [
+      "G0",
+      "G3"
+    ],
+    [
+      "H3",
+      "host_final"
+    ]
+  ],
+  "topological_order": [
+    "request",
+    "context",
+    "offer",
+    "ACK",
+    "controller_bootstrap",
+    "G0",
+    "controller_store",
+    "parent_permit",
+    "parent_bootstrap",
+    "parent_hold",
+    "parent_store",
+    "parent_issuer",
+    "fresh_permit",
+    "fresh_bootstrap",
+    "fresh_hold",
+    "fresh_result",
+    "fresh_quiet",
+    "G1_compare",
+    "parent_quiet",
+    "G2",
+    "final_observation",
+    "G3",
+    "controller_return",
+    "controller_quiet",
+    "broker_return",
+    "broker_quiet",
+    "H3",
+    "host_final"
+  ]
+}

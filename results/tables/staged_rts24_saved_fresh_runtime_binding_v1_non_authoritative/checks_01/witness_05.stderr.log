@@ -1,0 +1,106 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 75, in <module>
+    from src import staged_rts24_saved_fresh_adoption_v1 as adapter
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_saved_fresh_adoption_v1.py", line 7, in <module>
+    from src import staged_rts24_saved_prefix_replay_v1 as prefix
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_saved_prefix_replay_v1.py", line 6, in <module>
+    from src import staged_rts24_saved_point_replay_v1 as point
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_saved_point_replay_v1.py", line 9, in <module>
+    from src import staged_rts24_evidence_store_v1 as codec
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\staged_rts24_evidence_store_v1.py", line 14, in <module>
+    from src.grid.rts24 import Bus, Generator, Branch, Rts24Data
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\grid\__init__.py", line 3, in <module>
+    from .ac_validation import AcValidationResult, validate_ac_power_flow
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\src\grid\ac_validation.py", line 9, in <module>
+    from pypower.api import case24_ieee_rts, ppoption, runpf
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\site-packages\pypower\api.py", line 16, in <module>
+    from .bustypes import bustypes
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\site-packages\pypower\bustypes.py", line 10, in <module>
+    from scipy.sparse import csr_matrix as sparse
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\site-packages\scipy\sparse\__init__.py", line 307, in <module>
+    from ._base import *
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\site-packages\scipy\sparse\_base.py", line 8, in <module>
+    from ._sputils import (asmatrix, check_reshape_kwargs, check_shape,
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\site-packages\scipy\sparse\_sputils.py", line 10, in <module>
+    from scipy._lib._util import np_long, np_ulong
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\site-packages\scipy\_lib\_util.py", line 17, in <module>
+    from scipy._lib._array_api import (Array, array_namespace, is_lazy_array, is_numpy,
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\site-packages\scipy\_lib\_array_api.py", line 24, in <module>
+    from scipy._lib.array_api_compat import (
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\site-packages\scipy\_lib\array_api_compat\numpy\__init__.py", line 9, in <module>
+    __all__ = clone_module("numpy", globals())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\site-packages\scipy\_lib\array_api_compat\_internal.py", line 67, in clone_module
+    if not n.startswith("_") and hasattr(mod, n):
+                                 ^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\site-packages\numpy\__init__.py", line 341, in __getattr__
+    import numpy.testing as testing
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\site-packages\numpy\testing\__init__.py", line 11, in <module>
+    from ._private.utils import *
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 62, in guarded_import
+    result=original_import(*args,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\site-packages\numpy\testing\_private\utils.py", line 1253, in <module>
+    _SUPPORTS_SVE = check_support_sve()
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\site-packages\numpy\testing\_private\utils.py", line 1247, in check_support_sve
+    output = subprocess.run(cmd, capture_output=True, text=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "D:\Miniconda3\envs\compute\Lib\subprocess.py", line 1534, in _execute_child
+    sys.audit("subprocess.Popen", executable, args, cwd, env)
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 34, in audit
+    if event=='subprocess.Popen' or event=='os.system' or event.startswith('os.spawn'): denied('process_launch_attempts')
+                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative\checks_01\global_binding_witness.py", line 20, in denied
+    raise AssertionError('witness attempted '+kind)
+AssertionError: witness attempted process_launch_attempts
