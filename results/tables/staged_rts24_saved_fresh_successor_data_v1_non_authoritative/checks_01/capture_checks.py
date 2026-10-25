@@ -1,0 +1,44 @@
+"""240s ordinary-only checks; retain failures and executed helper/source bytes."""
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+from common import ROOT,OUT,EXE,SOURCE_PATHS,pin,selected,epoch,read,save,snapshot
+
+kind,label,argument,cap=sys.argv[1:];cap=float(cap)
+assert kind in ('static','pytest') and 0<cap<=40 and not (OUT/(label+'.exit.json')).exists()
+spent=sum(read(p.name)['wall_seconds'] for p in OUT.glob('*.exit.json') if read(p.name)['kind']==kind)
+assert spent+cap<=(40 if kind=='static' else 200)
+source=selected();helpers={OUT/'common.py',Path(__file__).resolve()}
+if kind=='static':
+    target=OUT/'pytest_harness.py' if argument=='--collect-only' else Path(argument).absolute()
+    argv=[str(EXE),'-B',str(target)]+(['--collect-only',label] if argument=='--collect-only' else [])
+    helpers.add(target);nodes=None
+else:
+    plan=read(argument);nodes=plan['groups'][label];assert cap==plan['caps'][label]
+    argv=[str(EXE),'-B',str(OUT/'pytest_harness.py'),argument,label]
+    helpers.update((OUT/'pytest_harness.py',OUT/'fixture_builder.py'))
+for helper in ('pytest_harness.py','fixture_builder.py'):
+    if (OUT/helper).exists():helpers.add(OUT/helper)
+images={p.relative_to(ROOT).as_posix():snapshot(p) for p in helpers}
+save(label+'.snapshot.json',dict(sources={n:snapshot(ROOT/n) for n in SOURCE_PATHS},helpers=images))
+start=time.monotonic()
+try:
+    result=subprocess.run(argv,cwd=ROOT,capture_output=True,timeout=cap,
+        env=dict(os.environ,PYTHONDONTWRITEBYTECODE='1',PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'))
+    stdout,stderr,code,timed_out=result.stdout,result.stderr,result.returncode,False
+except subprocess.TimeoutExpired as error:
+    stdout,stderr,code,timed_out=error.stdout or b'',error.stderr or b'',None,True
+elapsed=time.monotonic()-start
+for suffix,raw in [('stdout.log',stdout),('stderr.log',stderr)]: (OUT/(label+'.'+suffix)).write_bytes(raw)
+value=dict(authority='DRAFT_NONAUTHORITATIVE',kind=kind,exit_code=code,timed_out=timed_out,wall_seconds=elapsed,
+    timeout_seconds=cap,source_pins=source,source_epoch=epoch(source),source_pins_unchanged=selected()==source,
+    helper_pins={n:i['pin'] for n,i in images.items()},helper_pins_unchanged=all(pin((ROOT/n).read_bytes())==i['pin'] for n,i in images.items()),
+    snapshot_manifest=label+'.snapshot.json',argv=argv,nodes=nodes,actual_saved_F_execution=False,F_launch_admitted=False)
+save(label+'.exit.json',value)
+print(json.dumps({k:value[k] for k in ('exit_code','timed_out','wall_seconds','source_pins_unchanged','helper_pins_unchanged')}))
+files=[p for p in OUT.rglob('*') if p.is_file()]
+assert len(files)<=192 and sum(p.stat().st_size for p in files)<=12*1024**2
+assert code==0 and not timed_out and value['source_pins_unchanged'] and value['helper_pins_unchanged']

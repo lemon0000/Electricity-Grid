@@ -4216,6 +4216,235 @@ def _probe_bookend_saved_input(verified, stage):
         local_full_input_bookend=True,real_verified=False, actual_saved_F_execution=False,F_launch_admitted=False,**GATES)
 
 
+SUCCESSOR_SCHEMA = 'staged_saved_F_successor_context_development_v1'
+SUCCESSOR_REQUEST_SCHEMA = 'staged_saved_F_successor_request_development_v1'
+SUCCESSOR_PYTHON_VERSION = '3.12.12 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 20:05:38) [MSC v.1929 64 bit (AMD64)]'
+SUCCESSOR_SPEC_PIN = (18167, 'b151876e286f24dca3571134e4506e55978f0fe1dee949b76005f3e3c24b2f90')
+SUCCESSOR_CONTRACT_PINS = ((2777, '767b0119ee6de14f720099897eafb158803433b4291529a786a4e3e281ed148d'),
+    (776, 'ecffb262d87b6595e4d66451768ada7780c73e6e2ea0fc0e5b88834aadb32343'),
+    (3301, 'fbb536393e7246487f3b91af0b691da317f1dbb238f5fdd40f770c286ce3dc1e'))
+
+
+def _successor_integer(value, low, high):
+    require(type(value) is int and low <= value <= high, 'successor integer domain differs')
+
+
+def _successor_pin(value):
+    keys(value, 'bytes sha256'); _successor_integer(value['bytes'], 0, 8*1024**2)
+    require(_hex64(value['sha256']), 'successor pin SHA differs')
+
+
+def _successor_pin_map(value, count, total=None):
+    require(type(value) is dict and len(value) == count, 'successor pin set differs')
+    folded = set()
+    for name, item in value.items():
+        require(type(name) is str and name and name != '.' and '\\' not in name and ':' not in name
+            and '\x00' not in name and not Path(name).is_absolute() and '..' not in Path(name).parts
+            and Path(name).as_posix() == name and name.casefold() not in folded, 'successor relative path differs')
+        folded.add(name.casefold()); _successor_pin(item)
+    size = sum(item['bytes'] for item in value.values())
+    require(size == total if total is not None else size <= 2*1024**2, 'successor aggregate bytes differ')
+
+
+def _successor_identity(value):
+    keys(value, 'pid creation_filetime')
+    _successor_integer(value['pid'], 1, 2**32-1); _successor_integer(value['creation_filetime'], 1, 2**64-1)
+
+
+def _successor_directories(value, path):
+    paths = [str(p) for p in reversed((path, *path.parents))]
+    require(type(value) is list and 1 <= len(value) <= 16 and len(value) == len(paths), 'successor directory chain differs')
+    for row, expected in zip(value, paths):
+        require(type(row) is list and len(row) == 3 and row[0] == expected, 'successor directory path differs')
+        _successor_integer(row[1], 0, 2**64-1); _successor_integer(row[2], 1, 2**128-1)
+
+
+def _successor_executable(value):
+    keys(value, 'path pin identity python'); _successor_pin(value['pin'])
+    require(value['path'] == str(EXE) and value['python'] == SUCCESSOR_PYTHON_VERSION and value['pin']['bytes'] > 0,
+        'successor executable declaration differs')
+    row = value['identity']; require(type(row) is list and len(row) == 4, 'successor executable identity differs')
+    for item in row: _successor_integer(item, 0, 2**128-1)
+    require(row[2] == value['pin']['bytes'], 'successor executable size differs')
+
+
+def _successor_environment(value):
+    allowed = {'APPDATA','COMMONPROGRAMFILES','COMSPEC','CONDA_DEFAULT_ENV','CONDA_PREFIX','LOCALAPPDATA',
+        'NUMBER_OF_PROCESSORS','PATH','PATHEXT','PROCESSOR_ARCHITECTURE','PROGRAMFILES','PROGRAMFILES(X86)',
+        'SYSTEMROOT','TEMP','TMP','USERPROFILE','WINDIR','PYTHONDONTWRITEBYTECODE','PYTHONNOUSERSITE',
+        'PYTHONHASHSEED','OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS'}
+    require(type(value) is dict and len({k.upper() for k in value}) == len(value), 'successor environment key alias')
+    require(all(type(k) is type(v) is str and k.upper() in allowed and len(v) <= 32768 for k,v in value.items())
+        and len(canonical(value)) <= 131072, 'successor environment shape differs')
+    for name in ('PYTHONDONTWRITEBYTECODE','PYTHONNOUSERSITE','OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS'):
+        require(value.get(name) == '1', 'successor fixed environment differs')
+    require(value.get('PYTHONHASHSEED') == '0', 'successor hash seed differs')
+
+
+@dataclass(frozen=True, init=False, eq=False, repr=False)
+class SavedSuccessorDataCheck:
+    _raw: bytes
+    _request_raw: bytes
+    _expectation_raw: bytes
+    basis_sha: str
+    anchor_sha: str
+    contract_shas: tuple
+    spec_pin: tuple
+    declared_now: float
+    commit: str
+    def __new__(cls, *args, **kwargs): raise TypeError('validate successor data explicitly')
+
+    def _image(self):
+        return (pin(self._raw),pin(self._request_raw),pin(self._expectation_raw),self.basis_sha,
+            self.anchor_sha,self.contract_shas,self.spec_pin,self.declared_now)
+
+    def entry(self):
+        require(type(self) is SavedSuccessorDataCheck and self.spec_pin == SUCCESSOR_SPEC_PIN
+            and self.contract_shas == tuple(p[1] for p in SUCCESSOR_CONTRACT_PINS)
+            and self.anchor_sha == ANCHOR_SHA and self.commit == digest(self._image()), 'successor data result changed')
+        return self
+
+    @property
+    def raw(self): self.entry(); return self._raw
+    @property
+    def request_raw(self): self.entry(); return self._request_raw
+    @property
+    def expectation_raw(self): self.entry(); return self._expectation_raw
+    @property
+    def context_sha(self): self.entry(); return sha256(self._raw).hexdigest()
+    @property
+    def request_sha(self): self.entry(); return sha256(self._request_raw).hexdigest()
+    @property
+    def expectation_sha(self): self.entry(); return sha256(self._expectation_raw).hexdigest()
+    @property
+    def status_raw(self):
+        self.entry()
+        return canonical(dict(schema='staged_saved_F_successor_static_data_check_v1',data_only=True,
+            declared_time_consistent=True,actual_sources_verified=False,actual_kernel_identity_verified=False,
+            actual_clock_verified=False,actual_executable_verified=False,actual_environment_verified=False,
+            actual_filesystem_identity_verified=False,deadline_enforced=False,full_P1_content_verified=False,
+            run_authority=False,F_launch_admitted=False,native_authorized=False,resource_admission=False,
+            formal_result=False,scientific_evidence_adopted=False,public_P2_execution_enabled=False))
+
+    def __reduce__(self): raise TypeError('static data result is not transferable authority')
+
+
+def validate_saved_successor_data(context_raw, request_raw, *, expectation_raw, host_basis_raw, anchor_raw,
+        runtime_contract_raw, deadline_contract_raw, request_contract_raw, now):
+    """Pure data relationships only; no filesystem, clock, kernel or role authority."""
+    for raw, cap in ((context_raw,2*1024**2),(request_raw,32768),(expectation_raw,2*1024**2),
+            (host_basis_raw,2*1024**2),(anchor_raw,8*1024**2),(runtime_contract_raw,65536),
+            (deadline_contract_raw,65536),(request_contract_raw,65536)):
+        require(type(raw) is bytes and len(raw) <= cap, 'successor raw byte cap')
+    profiles = (runtime_contract_raw,deadline_contract_raw,request_contract_raw)
+    for raw, (size, sha) in zip(profiles,SUCCESSOR_CONTRACT_PINS):
+        require(pin(raw) == dict(bytes=size,sha256=sha), 'successor fixed contract differs'); parse(raw)
+    runtime = parse(runtime_contract_raw)
+    context, request, expectation, basis = map(parse,(context_raw,request_raw,expectation_raw,host_basis_raw))
+    keys(context, 'schema authority scope repo_root input_root output_root output_mode output_parent_directories '
+        'source_pins executable environment anchor_sha input_files invocation_started deadline stage_seconds limits '
+        'inherited_sources_pin caller_expectation_core caller_expectation_sha expectation_sha full_P1_content_verified '
+        'request_sha broker_identity runtime_binding_contract_sha deadline_profile_sha '+' '.join(GATES))
+    keys(request, 'schema authority scope nonce host_identity repo_root input_root output_root source_sha executable_pin '
+        'environment_sha input_pins_sha caller_expectation_sha expectation_sha anchor_sha invocation_started deadline '
+        'runtime_binding_contract_sha deadline_profile_sha limits')
+    keys(basis,'source_pins executable environment host_identity broker_identity output_parent_directories')
+    keys(expectation, 'schema authority scope caller_expectation_core caller_expectation_sha source_sha input_pins_sha '
+        'content_read_files metadata_passes full_P1_content_verified F_launch_admitted '+' '.join(GATES))
+    require(context['schema'] == SUCCESSOR_SCHEMA and request['schema'] == SUCCESSOR_REQUEST_SCHEMA
+        and expectation['schema'] == EXPECTATION_SCHEMA, 'successor schema differs')
+    for value in (context,request,expectation):
+        require(value['authority'] == 'DRAFT_NONAUTHORITATIVE' and value['scope'] == SCOPE, 'successor authority/scope differs')
+    require(context['output_mode'] == 'saved_P1_successor_draft', 'successor output mode differs')
+    for value in (context,expectation):
+        require(value['full_P1_content_verified'] is False and all(value[n] is False for n in GATES), 'successor gate differs')
+    require(expectation['F_launch_admitted'] is False and type(expectation['metadata_passes']) is int
+        and expectation['metadata_passes'] == 2 and expectation['content_read_files'] == list(EXPECTATION_FILES),
+        'successor expectation envelope differs')
+    for value in (context,request):
+        require(value['repo_root'] == str(ROOT) and value['input_root'] == str(P1) and value['output_root'] == str(OUTPUT)
+            and canonical(value['limits']) == canonical(CAPS), 'successor roots/limits differ')
+    require(canonical(context['stage_seconds']) == canonical(STAGE_SECONDS), 'successor stage caps differ')
+    for name in ('limits','stage_seconds'):
+        for item in context[name].values(): _successor_integer(item,0,2**64-1)
+    for item in request['limits'].values(): _successor_integer(item,0,2**64-1)
+    _successor_pin_map(basis['source_pins'],49)
+    require(set(basis['source_pins']) == set(runtime['source_names']), 'successor source closure differs')
+    _successor_executable(basis['executable']); _successor_environment(basis['environment'])
+    _successor_identity(basis['host_identity']); _successor_identity(basis['broker_identity'])
+    _successor_directories(basis['output_parent_directories'],OUTPUT.parent)
+    for name in ('source_pins','executable','environment','broker_identity','output_parent_directories'):
+        require(canonical(context[name]) == canonical(basis[name]), 'successor independent basis differs')
+    require(_hex64(request['nonce']) and canonical(request['host_identity']) == canonical(basis['host_identity'])
+        and canonical(request['executable_pin']) == canonical(basis['executable']['pin']), 'successor host request differs')
+    require(sha256(anchor_raw).hexdigest() == ANCHOR_SHA, 'successor external anchor differs')
+    files = json.loads(anchor_raw)['p1_files']; _successor_pin_map(files,683,2950863)
+    require(context['anchor_sha'] == request['anchor_sha'] == ANCHOR_SHA
+        and canonical(context['input_files']) == canonical(files), 'successor external input pins differ')
+    _successor_pin(context['inherited_sources_pin'])
+    require(context['inherited_sources_pin'] == dict(bytes=7011,sha256=INHERITED_SHA), 'successor inherited source pin differs')
+    core = expectation['caller_expectation_core']
+    keys(core, 'files fixture_sha outer trusted expectations bindings source anchor_path anchor_pin anchor_identity '
+        'anchor_directories root_directories historical_metrics expected_evidence_refs inventory')
+    keys(core['inventory'],'pins files directories')
+    require(_hex64(core['fixture_sha']) and type(core['outer']) is type(core['trusted']) is type(core['expectations']) is type(core['historical_metrics']) is dict
+        and type(core['bindings']) is list and len(core['bindings']) == 6
+        and type(core['expected_evidence_refs']) is list and len(core['expected_evidence_refs']) == 21,
+        'successor expected core shape differs')
+    require(core['files'] == core['inventory']['pins'] == files and core['source'] == basis['source_pins']
+        and core['anchor_path'] == str(P1.parent/'p1_execution_review_01/postcheck_03.stdout.json')
+        and core['anchor_pin'] == pin(anchor_raw), 'successor expected core bindings differ')
+    _successor_directories(core['anchor_directories'],P1.parent/'p1_execution_review_01')
+    _successor_directories(core['root_directories'],P1)
+    anchor_row = core['anchor_identity']
+    require(type(anchor_row) is list and len(anchor_row) == 4 and anchor_row[2] == len(anchor_raw), 'successor anchor identity differs')
+    for item in anchor_row: _successor_integer(item,0,2**128-1)
+    require(type(core['inventory']['files']) is dict and set(core['inventory']['files']) == set(files)
+        and type(core['inventory']['directories']) is dict, 'successor metadata inventory differs')
+    file_ids = set()
+    for name,row in core['inventory']['files'].items():
+        require(type(row) is list and len(row) == 4 and row[2] == files[name]['bytes'], 'successor metadata file differs')
+        for item in row: _successor_integer(item,0,2**128-1)
+        require(row[1] > 0 and tuple(row[:2]) not in file_ids, 'successor metadata file alias')
+        file_ids.add(tuple(row[:2]))
+    folders = core['inventory']['directories']; require(1 <= len(folders) <= 16384 and '.' in folders, 'successor directory metadata count')
+    aliases = set(); file_names_folded = {n.casefold() for n in files}
+    for name,row in folders.items():
+        require(type(name) is str and name and '\\' not in name and ':' not in name and '\x00' not in name
+            and not Path(name).is_absolute() and '..' not in Path(name).parts and Path(name).as_posix() == name
+            and name.casefold() not in aliases and name.casefold() not in file_names_folded,
+            'successor directory metadata path')
+        aliases.add(name.casefold()); require(type(row) is list and len(row) == 2, 'successor directory metadata row')
+        _successor_integer(row[0],0,2**64-1); _successor_integer(row[1],1,2**128-1)
+    for name in files:
+        require(all(parent.as_posix() in folders for parent in Path(name).parents), 'successor metadata parent missing')
+    require(canonical(context['caller_expectation_core']) == canonical(core)
+        and context['caller_expectation_sha'] == expectation['caller_expectation_sha'] == digest(core)
+        and context['expectation_sha'] == sha256(expectation_raw).hexdigest()
+        and expectation['source_sha'] == digest(basis['source_pins']) and expectation['input_pins_sha'] == digest(files),
+        'successor independent expectation differs')
+    for name, value in (('source_sha',basis['source_pins']),('environment_sha',basis['environment']),
+            ('input_pins_sha',files),('caller_expectation_sha',core)):
+        require(request[name] == digest(value), 'successor request digest differs')
+    require(request['expectation_sha'] == context['expectation_sha']
+        and context['request_sha'] == sha256(request_raw).hexdigest(), 'successor request binding differs')
+    for name, sha in (('runtime_binding_contract_sha',SUCCESSOR_CONTRACT_PINS[0][1]),
+            ('deadline_profile_sha',SUCCESSOR_CONTRACT_PINS[1][1])):
+        require(context[name] == request[name] == sha, 'successor profile digest differs')
+    start, deadline = context['invocation_started'],context['deadline']
+    require(type(start) is type(deadline) is type(now) is float and all(math.isfinite(v) for v in (start,deadline,now))
+        and 0 < start <= now <= deadline and deadline == start+180
+        and type(request['invocation_started']) is type(request['deadline']) is float
+        and request['invocation_started'] == start and request['deadline'] == deadline, 'successor declared time differs')
+    result = object.__new__(SavedSuccessorDataCheck)
+    for name,value in dict(_raw=context_raw,_request_raw=request_raw,_expectation_raw=expectation_raw,
+            basis_sha=sha256(host_basis_raw).hexdigest(),anchor_sha=ANCHOR_SHA,
+            contract_shas=tuple(p[1] for p in SUCCESSOR_CONTRACT_PINS),spec_pin=SUCCESSOR_SPEC_PIN,declared_now=now).items():
+        object.__setattr__(result,name,value)
+    object.__setattr__(result,'commit',digest(result._image()))
+    return result.entry()
+
+
 if __name__ == '__main__':
     if sys.argv[1:2] == ['--ordinary-entry']: _ordinary_file_dispatch(sys.argv[1:])
     else: raise SystemExit('Saved F role execution and trusted invocation remain draft. F launch remains disabled.')

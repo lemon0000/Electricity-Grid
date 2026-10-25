@@ -1,0 +1,53 @@
+# C：successor 静态数据校验开发证据
+
+2026-10-25，DRAFT_NONAUTHORITATIVE。本轮按[合同](../../../docs/plan/staged_deliverability_c_saved_fresh_successor_data_validation_contract_v1.md)实现原ENTRY中的纯数据接口，接续[runtime合同](../staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/validation_report.md)。起始HEAD `eb9c1a3de1d736a37b6c5ecb8ca96428e81e11f6`。root唯一writer，独立只读PRE_SEAL提供组件findings并完成两处测试补强；本轮不形成seal、official verdict/receipt或运行权限。
+
+## 实现和声明范围
+
+`validate_saved_successor_data`接受context/request raw、独立expectation envelope、独立六键host basis、外锚和三合同raw及声明now。它执行31/20字段闭集、canonical/byte cap、精确类型（含bool/int区分）、路径/metadata声明、49 source/683 input pin域、完整独立E canonical匹配、12项cross-field和五数据摘要/两个固定profile SHA等式。raw cap为context/E/basis各2MiB、request32768B、三合同各65536B、外锚8MiB。source总raw逻辑帽2MiB；未声明RSS峰值。
+
+固定spec v3为18167B/SHA `b151876e286f24dca3571134e4506e55978f0fe1dee949b76005f3e3c24b2f90`，三合同分别2777/776/3301B，SHA与该spec一致；Python版本literal也取冻结spec。spec与profile不随live sys.version或caller输入漂移。host basis、kernel身份和时间仍是数据声明，不由该函数访问实际系统来建立。
+
+结果`SavedSuccessorDataCheck`保存三份不可变canonical raw、对应SHA、独立basis/外锚/profile SHA、声明时间和commit。raw/request_raw/expectation_raw/context_sha/request_sha/expectation_sha/status_raw全部先entry重核commit；不返回可变解析树。普通构造与pickle拒绝；旧context、RoleStore、argv和saved stage构造域拒绝successor数据结果。九项内部状态逐项tamper后，七个公开getter/status均拒绝。
+
+status仅`data_only`和`declared_time_consistent`为true。actual source/kernel/EXE/environment/filesystem/clock、deadline enforcement、full_P1_content_verified、run_authority、F_launch_admitted及五科学/资源/正式gates为literal false。声明start≤now≤deadline=start+180只表明提供的数据一致。函数内的无I/O测试局部拒绝列明的Path/cli.os metadata和content API、clock与旧source/helper；这不构成整个Python进程或任意native代码没有I/O/副作用的证明。E内部科学审计仍由既有full hold/replay承担，本接口不替代它。
+
+## 当前源码和测试终态
+
+| 项 | 当前pin或结果 |
+| --- | --- |
+| epoch | `b83a01b94ae1c4f1d7dcecc26b3bcd6460dd60f19d74c7545059c68967c559a5` |
+| ENTRY | 288396B / `4507c9e5ab4e6198131d84fdaf19e966d0b7670010de336d76a02d57bff169ad` |
+| tests | 181962B / `23f2946dbfc932c39c6f65aa2e84a1a7c4a4b1515709ddba5d75636a4a9b4a88` |
+| scientific adapter | 17247B / `26b919e385f9d7042587db490dab694fc5bf1643665ab4bf94a1c9bac8087396`，未改 |
+| 当前唯一节点 | 121新增+63相关回归=184，全部exit0且终态passed |
+
+| 当前分组 | 节点 | wrapper wall / cap (s) |
+| --- | ---: | ---: |
+| successor_smoke_12 | 3 | 5.016 / 12 |
+| successor_a_13 | 59 | 15.031 / 25 |
+| successor_b_07 | 59 | 15.313 / 25 |
+| source_expectation_08 | 12 | 17.875 / 23 |
+| expectation_a_09 | 17 | 28.125 / 32 |
+| expectation_b_10 | 16 | 22.875 / 26 |
+| binding_11 | 18 | 32.016 / 35 |
+
+当前184的wrapper累计136.251s。首次smoke05/字段a06在测试补强前已通过3+58节点，用18.922s；只保留旧epoch记录，不计当前通过。首轮后补两项tamper参数和metadata拒绝器，仅两个新测试定义变化；refine_admission独立AST检查、显式增加两个nodeid，重新固定184完整集合。重新计划帽178+已花18.922=196.922≤200。所有pytest attempt共155.173/200s，无失败或超时被抹除。
+
+静态类总帽40s（总240s、单次≤40s），包括baseline、prepare、collection、两次admission、finalizer及保存检查；完整终态以`checks_01/*.exit.json`累加。保存oracle的stdout只累加调用前已有exit，wrapper在退出后补本次exit，因此恢复者应区分观察中值与外部终态。collection03为7.844/8s，早期全局profile开销显著，首个pytest前已换成预装import hook：固定process_guard_v1完成import且返回caller前拒绝OwnedChild.__init__，保留真实class并在finally恢复。collection的原harness快照保留，不冒充当前harness。
+
+finalizer14在4s帽超时（wrapper4.031s），无stdout/stderr、exit_code=null。它已create-only写出navigation_after/document_checks，但未写support pins；这些partial文件和当时三文档snapshot完整保留。v2 successor finalizer17只核这些原partial image、当前184及导航，生成新document_checks_v2与缺失support；不重复3518库存读取，库存核验保留在独立saved oracle。此时静态已花15.546s，固定剩余动作帽2+12+10=24s≤24.454s余量，未扩原总帽。保存checker明确接受14这一历史timeout并要求17成功，失败成本不从账中剔除。
+
+每项执行保存源码3文件和实际helper/script原字节，且首尾复核SF49/执行helper。独立stdlib fixture builder不import validator或其canonical/摘要helper；读取冻结spec/profiles/外锚及少量已固定SHA的P1 JSON、metadata，并从journal genesis取原fixture SHA。host/broker/output metadata和时间显式合成。测试包含31/20字段遗漏、12cross-field、23类型/域、6时间、8raw caps、9canonical/provenance、9结果状态tamper及3核心节点。
+
+## import策略、保全和保存oracle
+
+每个pytest进程从任何仓库import前安装标准库guard。固定NumPy utils.py pin `15a67bea0d5acd4f22d345e44d065512b06d1456639de5c2d100a25276a67b8c`、subprocess.py pin `85d29b2bf0249f5436838298c9a60ee93508b1102e9ac43b001f8a7e7ae8f375`，只对原check_support_sve:1247/module:1253/_execute_child:1534和`(None,'lscpu',None,None)`第一次audit事件抛专用OSError，实际创建被阻断，走库False fallback。每组optional attempt1/blocked1、forced_SVE_false=true，其他声明process/native-owner/P1/actual写事件为0；guard在finally恢复原import/constructor，audit仅惰化留至进程退出。不宣称任意native effects为零；生产probe政策保持UNDECIDED_BLOCKING。
+
+原函数/类AST保持：ENTRY181、tests197、scientific adapter16；ENTRY追加229行、tests追加175行。SF49闭集不变、另外47路径逐字未变。3518历史路径及P1全部683文件原字节保持，外锚SHA仍`c6a25cd96c8a4a2cf293d41fe51bc7905db63fbc35253076f97e9239a4f22473`。原guard/outer/F8MiB/64files/17targets不变；本普通证据包另帽12MiB/192files。三导航仅前插本轮状态，旧完整正文suffix逐字保全。
+
+[saved_checks.py](checks_01/saved_checks.py)自包含stdlib，验证冻结source/helper snapshots、三个互异epoch/组终态、全attempt预算、固定spec/profile、literal false状态、全部保全pins和导航/文档；只调用已hash固定且不import当前ENTRY的前序保存oracle。冻结184始终与它们实际执行的源码绑定。CLI在本轮末次校验强制当前源码和导航相同，漂移即失败；未来存档`verify()`默认允许两mutable/导航前插变化，源码漂移时报告当前匹配false/当前通过0，其余47漂移仍直接失败。旧61也由终态record node数机械断言。该oracle不是生产validator或科学replay，也不将当前ENTRY执行结果作为冻结真值。
+
+## 未完成边界和下一步
+
+原P1仍为21点/5模拟小时；没有新增模拟小时、actual F、solver或native owner。本轮仅实现静态数据接口。38节点角色协议的bootstrap/store/owner、ACK/permit及真实G0/H3、33根传递runtime绑定、NumPy生产probe政策、source6500/180s、失败/wire/host硬停止预算仍OPEN。下一轮先固定角色实现范围和普通验证预算，再逐项接通真实同进程能力；实际F及整包科学采用、资源、正式门禁仍false。恢复入口为[本轮交接](../../../docs/plan/continuation_handoff_20261025_saved_fresh_successor_data.md)。

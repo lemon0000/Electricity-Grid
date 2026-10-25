@@ -2867,3 +2867,178 @@ def test_saved_source_bytes_raw_budget_rejects_before_retaining_files(saved_expe
     with pytest.raises(ValueError,match='raw byte cap' if invalid=='aggregate' else 'source size'):
         cli._expectation_adapter(expected)
     assert reads==[] and finals==[True]
+
+
+@pytest.fixture(scope='module')
+def saved_successor_case():
+    import importlib.util
+    path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_successor_data_v1_non_authoritative/checks_01/fixture_builder.py'
+    spec=importlib.util.spec_from_file_location('independent_successor_fixture',path)
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    return module.build()
+
+
+def _successor_json(value):
+    return json.dumps(value,ensure_ascii=True,sort_keys=True,separators=(',',':'),allow_nan=False).encode('ascii')
+
+
+def _successor_call(case):
+    args=dict(case);context=args.pop('context_raw');request=args.pop('request_raw')
+    return cli.validate_saved_successor_data(context,request,**args)
+
+
+def test_saved_successor_positive_is_immutable_data_with_declared_time(saved_successor_case):
+    c=saved_successor_case;result=_successor_call(c)
+    assert type(result) is cli.SavedSuccessorDataCheck and result.entry() is result
+    assert result.raw==c['context_raw'] and result.request_raw==c['request_raw'] and result.expectation_raw==c['expectation_raw']
+    for name,raw in [('context_sha',c['context_raw']),('request_sha',c['request_raw']),('expectation_sha',c['expectation_raw'])]:
+        assert getattr(result,name)==sha256(raw).hexdigest()
+    status=json.loads(result.status_raw)
+    assert status['data_only'] is status['declared_time_consistent'] is True
+    assert all(value is False for name,value in status.items() if name not in ('schema','data_only','declared_time_consistent'))
+    assert not hasattr(result,'context') and not any(type(v) in (dict,list) for v in vars(result).values())
+    assert result.spec_pin==(18167,'b151876e286f24dca3571134e4506e55978f0fe1dee949b76005f3e3c24b2f90')
+    import pickle
+    with pytest.raises(TypeError):pickle.dumps(result)
+    with pytest.raises(TypeError):cli.SavedSuccessorDataCheck()
+
+
+_SUCCESSOR_FIELDS=json.loads((cli.ROOT/'results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01/successor_context_spec_v3.json').read_bytes())['fields']
+_SUCCESSOR_REQUEST_FIELDS=json.loads((cli.ROOT/'results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01/request_contract_v2.json').read_bytes())['fields']
+
+
+@pytest.mark.parametrize('field',_SUCCESSOR_FIELDS)
+def test_saved_successor_requires_each_context_field(saved_successor_case,field):
+    c=dict(saved_successor_case);value=json.loads(c['context_raw']);del value[field];c['context_raw']=_successor_json(value)
+    with pytest.raises(ValueError):_successor_call(c)
+
+
+@pytest.mark.parametrize('field',_SUCCESSOR_REQUEST_FIELDS)
+def test_saved_successor_requires_each_request_field(saved_successor_case,field):
+    c=dict(saved_successor_case);request=json.loads(c['request_raw']);del request[field];c['request_raw']=_successor_json(request)
+    context=json.loads(c['context_raw']);context['request_sha']=sha256(c['request_raw']).hexdigest();c['context_raw']=_successor_json(context)
+    with pytest.raises(ValueError):_successor_call(c)
+
+
+@pytest.mark.parametrize('edge',['source','environment','input','executable','core','caller_sha','expectation_sha',
+    'request_sha','runtime_profile','deadline_profile','start_deadline','broker_kernel'])
+def test_saved_successor_independent_cross_field_constraints(saved_successor_case,edge):
+    c=dict(saved_successor_case);context=json.loads(c['context_raw']);request=json.loads(c['request_raw'])
+    if edge=='source':
+        context['source_pins'][cli.NEW_SOURCES[1]]['sha256']='0'*64;request['source_sha']=sha256(_successor_json(context['source_pins'])).hexdigest()
+    elif edge=='environment':
+        context['environment']['PATH']='different';request['environment_sha']=sha256(_successor_json(context['environment'])).hexdigest()
+    elif edge=='input':
+        context['input_files'][next(iter(context['input_files']))]['sha256']='0'*64;request['input_pins_sha']=sha256(_successor_json(context['input_files'])).hexdigest()
+    elif edge=='executable':
+        context['executable']['pin']['sha256']='0'*64;request['executable_pin']=context['executable']['pin']
+    elif edge=='core':
+        context['caller_expectation_core']['historical_metrics']['summary']['remaining_debt']='different'
+        context['caller_expectation_sha']=sha256(_successor_json(context['caller_expectation_core'])).hexdigest();request['caller_expectation_sha']=context['caller_expectation_sha']
+    elif edge in ('caller_sha','expectation_sha'):
+        name='caller_expectation_sha' if edge=='caller_sha' else edge;context[name]=request[name]='0'*64
+    elif edge=='request_sha':context['request_sha']='0'*64
+    elif edge in ('runtime_profile','deadline_profile'):
+        name='runtime_binding_contract_sha' if edge=='runtime_profile' else 'deadline_profile_sha';context[name]=request[name]='0'*64
+    elif edge=='start_deadline':context['invocation_started']+=1.;context['deadline']+=1.
+    else:context['broker_identity']['pid']+=1
+    c['request_raw']=_successor_json(request)
+    if edge!='request_sha':context['request_sha']=sha256(c['request_raw']).hexdigest()
+    c['context_raw']=_successor_json(context)
+    with pytest.raises(ValueError):_successor_call(c)
+
+
+@pytest.mark.parametrize('fault',['ctx_extra','req_extra','basis_extra','schema','mode','full_true','gate_true','limit_bool',
+    'stage_change','source_bool','source_total','broker_bool','host_zero','exe_extra','exe_python','env_alias','env_value',
+    'parent_identity','input_alias','inherited','nonce','expectation_extra','expectation_passes'])
+def test_saved_successor_closed_types_and_domains(saved_successor_case,fault):
+    c=dict(saved_successor_case);v=json.loads(c['context_raw']);r=json.loads(c['request_raw']);b=json.loads(c['host_basis_raw']);e=json.loads(c['expectation_raw'])
+    if fault=='ctx_extra':v['ack_sha']='0'*64
+    elif fault=='req_extra':r['context_sha']='0'*64
+    elif fault=='basis_extra':b['authority']=True
+    elif fault=='schema':v['schema']=cli.EXPECTATION_CONTEXT_SCHEMA
+    elif fault=='mode':v['output_mode']='saved_P1_F_validation'
+    elif fault=='full_true':v['full_P1_content_verified']=True
+    elif fault=='gate_true':v['formal_result']=True
+    elif fault=='limit_bool':v['limits']['files']=True
+    elif fault=='stage_change':v['stage_seconds']['fresh']=41
+    elif fault=='source_bool':b['source_pins'][cli.NEW_SOURCES[1]]['bytes']=True
+    elif fault=='source_total':b['source_pins'][cli.NEW_SOURCES[1]]['bytes']=2097153
+    elif fault=='broker_bool':b['broker_identity']['pid']=True
+    elif fault=='host_zero':b['host_identity']['creation_filetime']=0
+    elif fault=='exe_extra':b['executable']['extra']=True
+    elif fault=='exe_python':b['executable']['python']='other runtime'
+    elif fault=='env_alias':b['environment']['Path']='aliased'
+    elif fault=='env_value':b['environment']['PYTHONHASHSEED']='random'
+    elif fault=='parent_identity':b['output_parent_directories'][-1][2]=False
+    elif fault=='input_alias':v['input_files']['../elsewhere']=v['input_files'].pop(next(iter(v['input_files'])))
+    elif fault=='inherited':v['inherited_sources_pin']['bytes']+=1
+    elif fault=='nonce':r['nonce']='not hex'
+    elif fault=='expectation_extra':e['caller_core']=e['caller_expectation_core']
+    else:e['metadata_passes']=True
+    c.update(host_basis_raw=_successor_json(b),expectation_raw=_successor_json(e),request_raw=_successor_json(r))
+    v['request_sha']=sha256(c['request_raw']).hexdigest();c['context_raw']=_successor_json(v)
+    with pytest.raises(ValueError):_successor_call(c)
+
+
+@pytest.mark.parametrize('now',[1000,True,999.0,1180.01,float('nan'),float('inf')])
+def test_saved_successor_only_checks_declared_time_domain(saved_successor_case,now):
+    c=dict(saved_successor_case,now=now)
+    with pytest.raises(ValueError):_successor_call(c)
+
+
+@pytest.mark.parametrize('field,cap',[('context_raw',2097152),('request_raw',32768),('expectation_raw',2097152),
+    ('host_basis_raw',2097152),('anchor_raw',8388608),('runtime_contract_raw',65536),('deadline_contract_raw',65536),('request_contract_raw',65536)])
+def test_saved_successor_caps_raw_before_decoding(saved_successor_case,field,cap):
+    c=dict(saved_successor_case);c[field]=b' '*(cap+1)
+    with pytest.raises(ValueError):_successor_call(c)
+
+
+@pytest.mark.parametrize('kind',['duplicate','whitespace','depth','nonfinite','not_bytes','anchor','runtime_contract','deadline_contract','request_contract'])
+def test_saved_successor_canonical_and_fixed_provenance(saved_successor_case,kind):
+    c=dict(saved_successor_case)
+    if kind=='duplicate':c['context_raw']=b'{"schema":"x",'+c['context_raw'][1:]
+    elif kind=='whitespace':c['context_raw']+=b'\n'
+    elif kind=='depth':c['context_raw']=b'['*257+b'0'+b']'*257
+    elif kind=='nonfinite':c['context_raw']=b'{"x":NaN}'
+    elif kind=='not_bytes':c['context_raw']=bytearray(c['context_raw'])
+    else:
+        field='anchor_raw' if kind=='anchor' else kind+'_raw';c[field]=c[field]+b' '
+    with pytest.raises(ValueError):_successor_call(c)
+
+
+@pytest.mark.parametrize('field',['_raw','_request_raw','_expectation_raw','basis_sha','anchor_sha','spec_pin','contract_shas','declared_now','commit'])
+def test_saved_successor_result_all_accessors_recheck_commit(saved_successor_case,field):
+    result=_successor_call(saved_successor_case)
+    value=getattr(result,field)
+    changed=value+b' ' if type(value) is bytes else ('changed' if type(value) is str else value+1 if type(value) is float else ())
+    object.__setattr__(result,field,changed)
+    for name in ('raw','request_raw','expectation_raw','context_sha','request_sha','expectation_sha','status_raw'):
+        with pytest.raises(ValueError):getattr(result,name)
+
+
+def test_saved_successor_version_is_frozen_and_io_is_not_observed(saved_successor_case,monkeypatch):
+    from types import SimpleNamespace
+    def denied(*args,**kwargs):raise AssertionError('static successor validator accessed live state')
+    with monkeypatch.context() as scoped:
+        scoped.setattr(cli,'sys',SimpleNamespace(version='changed live runtime'))
+        scoped.setattr(cli,'time',SimpleNamespace(monotonic=denied))
+        scoped.setattr(cli,'os',SimpleNamespace(stat=denied,lstat=denied,scandir=denied,open=denied))
+        for name in ('read','directories','source_names','source_pins','_expectation_adapter'):scoped.setattr(cli,name,denied)
+        for name in ('open','stat','lstat','resolve','exists','is_file','is_dir','read_bytes','read_text'):scoped.setattr(Path,name,denied)
+        result=_successor_call(saved_successor_case)
+    assert json.loads(result.status_raw)['actual_clock_verified'] is False
+    c=dict(saved_successor_case);v=json.loads(c['context_raw']);b=json.loads(c['host_basis_raw'])
+    v['executable']['python']=b['executable']['python']='changed live runtime'
+    c.update(context_raw=_successor_json(v),host_basis_raw=_successor_json(b))
+    with pytest.raises(ValueError):_successor_call(c)
+
+
+def test_saved_successor_static_result_has_no_legacy_role_or_launch_domain(saved_successor_case):
+    result=_successor_call(saved_successor_case);raw=result.raw;sha=sha256(raw).hexdigest();v=json.loads(raw)
+    for operation in (lambda:cli.validate_context(v),lambda:cli.validate_expectation_context(v),
+        lambda:cli.RoleStore(raw,sha,'0'*64),lambda:cli.argv_for('parent',raw,sha,tree_sha='0'*64,
+            channel_name=cli.STAGE_PREFIX+'a'*64,channel_nonce='b'*64),
+        lambda:cli.construct_saved_stage(result,None),lambda:cli._construct_saved_stage_for_test(result)):
+        with pytest.raises((ValueError,TypeError)):operation()
+    assert not cli.OUTPUT.parent.exists()

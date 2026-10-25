@@ -1,0 +1,15 @@
+# C：successor 静态数据接口交接
+
+2026-10-25，DRAFT_NONAUTHORITATIVE，接续[runtime角色合同交接](continuation_handoff_20261025_saved_fresh_runtime_binding.md)。起始HEAD/origin `eb9c1a3de1d736a37b6c5ecb8ca96428e81e11f6`；本轮最终提交以远端读回为准。按[范围与预算](staged_deliverability_c_saved_fresh_successor_data_validation_contract_v1.md)完成31字段context/20字段request的静态数据validator；root唯一writer，独立只读PRE_SEAL，未seal或启动official review。
+
+`validate_saved_successor_data`接收独立expectation、host basis、固定外锚和三份合同raw；闭合canonical、大小、精确类型、12项cross-field及摘要等式。返回`SavedSuccessorDataCheck`仅持不可变raw/SHA与commit，每次公开raw/SHA/status访问重核commit，普通构造/序列化拒绝。它仅证明输入数据自洽，真实source/kernel/EXE/environment/filesystem/clock、deadline enforcement、full_P1_content_verified和全部运行/科学/资源/正式flags恒false。独立basis是caller数据，合成kernel身份及声明now不构成实际观察；旧role/store/launch域继续拒绝该结果。固定spec v3为18167B / `b151876e286f24dca3571134e4506e55978f0fe1dee949b76005f3e3c24b2f90`，版本literal从冻结spec固定。
+
+当前epoch `b83a01b94ae1c4f1d7dcecc26b3bcd6460dd60f19d74c7545059c68967c559a5`，184唯一节点全部终态通过：121新增+63相关回归。旧epoch已通过61节点保留，未计入当前184。所有pytest attempt累计155.173/200s；baseline/collection/静态/保存共用另40s，单次≤40s，总240s不扩张。每项stdout/stderr/exit、实际helper及三源码原字节snapshot保留；完整静态终态耗时从[checks_01](../../results/tables/staged_rts24_saved_fresh_successor_data_v1_non_authoritative/checks_01)的exit记录累加，oracle不会把自身未退出阶段算终态。[报告](../../results/tables/staged_rts24_saved_fresh_successor_data_v1_non_authoritative/validation_report.md)列出分组、边界及恢复检查。
+
+ENTRY只追加229行、tests只追加175行，原顶层181/197定义AST及scientific src的16定义保持；SF49路径集合不变、其余47路径逐字不变。3518前序路径与P1全683文件保全，原P1仍21点/5模拟小时，没有新增模拟小时或actual F/solver/native owner。测试从进程import前使用固定NumPy/subprocess source pin/stack/args，阻断唯一lscpu Popen并抛OSError走False fallback；每组1attempt/1blocked，其他声明process/native-owner/P1或actual写事件为0，不证明任意native副作用不存在。该测试策略不解决生产政策。
+
+首个finalizer14在4s帽超时，wrapper4.031s；保留部分navigation/document索引、当时三文档image及全部raw/exit/snapshot。后继v2 finalizer使用新label17，仅补缺失support与当前v2文档索引；不覆盖旧partial。所有失败成本计入原静态40s，完整3518保全由保存oracle独立核查。恢复时以finalizer17和saved/terminal的实际exit判断保存链，不能用14部分产物推导完成。
+
+恢复时先核Git/相关进程，再运行：`D:\Miniconda3\envs\compute\python.exe -B results/tables/staged_rts24_saved_fresh_successor_data_v1_non_authoritative/checks_01/saved_checks.py`。该保存oracle自包含stdlib，只读冻结快照/保存证据，核3518路径及前序oracle，不import当前ENTRY/validator/helpers；CLI严格要求当前源码与导航匹配，漂移即拒绝。未来存档调用`verify()`默认不要求当前两mutable/导航全pin相同，但仍核冻结184，源码漂移时报告当前匹配false/当前节点0，不能继承通过。
+
+下一步先固定successor角色实现范围与普通验证预算，再补host/broker/controller/parent/fresh专用bootstrap/store/owner和同进程能力，沿38节点协议实现ACK→permit→真实owner及G0/H3。仍需决定NumPy生产probe政策、闭合33根传递runtime绑定、source6500/180s及失败/wire/host硬停止预算。实际F、整包科学采用、资源准入、正式门禁仍未开放；静态结果不能用作issuer/permit或真实身份/时钟证明。保留全部历史和失败产物，勿重复已完成的十次source重读优化。
