@@ -1,0 +1,94 @@
+{
+  "F_launch_admitted": false,
+  "actual_saved_F_execution": false,
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "automatic_actor_retries": 0,
+  "caps": {
+    "owner_bounded_01": 30,
+    "owner_bounded_02": 30,
+    "owner_bounded_03": 30,
+    "owner_bounded_04": 30,
+    "owner_bounded_05": 30,
+    "owner_bounded_06": 30
+  },
+  "deferred_regressions": [
+    "stage_regression_01",
+    "guard_regression_01",
+    "binding_regression_01",
+    "binding_regression_02"
+  ],
+  "groups": {
+    "owner_bounded_01": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_normal_unit_transport_never_grants_physical_or_content_permission",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_public_issuer_stays_closed_before_claim_or_allocation[object]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_permit_and_input_state_commit_together_without_issuance[none]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_permit_and_input_state_commit_together_without_issuance[system_exit]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_partial_constructor_retains_original_objects_and_cleans_once[init_job]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_partial_constructor_retains_original_objects_and_cleans_once[source]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_partial_constructor_preserves_all_cleanup_errors",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[sample]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[fast]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[descendant]"
+    ],
+    "owner_bounded_02": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[close]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_relay_failure_preserves_cleanup[inner_quiesce]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_clock_initialization_error_still_cleans_once",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_ordinary_saved_wrappers_reject_other_domain",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_fixed_unit_rejects_changed_code_before_claim[sample]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_fixed_unit_post_bind_method_drift_retains_without_calling_foreign[kernel]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_all_entry_drift_paths_retain_without_foreign_cleanup[unit]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_interrupt_after_state_commit_leaves_both_ledgers_spent[keyboard]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_oversized_terminal_encoding_retains_original_after_cleanup",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_public_issuer_stays_closed_before_claim_or_allocation[none]"
+    ],
+    "owner_bounded_03": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_public_issuer_stays_closed_before_claim_or_allocation[unissued]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_permit_and_input_state_commit_together_without_issuance[before_commit]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_constructor_claim_replay_does_not_close_existing_stage",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_partial_constructor_retains_original_objects_and_cleans_once[bind]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_partial_constructor_retains_original_objects_and_cleans_once[released]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[release]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[rss]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[nonzero]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[quiesce]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[bookend]"
+    ],
+    "owner_bounded_04": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_relay_failure_preserves_cleanup[inner_terminal]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_core_active_path_performs_no_source_or_artifact_reads",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_fixed_unit_rejects_changed_code_before_claim[__init__]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_fixed_unit_post_bind_method_drift_retains_without_calling_foreign[release]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_all_entry_drift_paths_retain_without_foreign_cleanup[domain]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_all_entry_drift_paths_retain_without_foreign_cleanup[late_method]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_interrupt_after_state_commit_leaves_both_ledgers_spent[system]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_public_issuer_stays_closed_before_claim_or_allocation[dict]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_core_rejects_native_factory_and_foreign_unit_token",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_permit_and_input_state_commit_together_without_issuance[keyboard_interrupt]"
+    ],
+    "owner_bounded_05": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_partial_constructor_retains_original_objects_and_cleans_once[init_early]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_partial_constructor_retains_original_objects_and_cleans_once[startup]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_partial_constructor_retains_original_objects_and_cleans_once[deadline]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[poll]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[commit]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[no_terminal]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[inventory]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_watch_failures_never_grant_success[channel_close]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_entry_drift_retains_stage_without_foreign_cleanup",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_active_error_keeps_object_and_first_image"
+    ],
+    "owner_bounded_06": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_fixed_unit_rejects_changed_code_before_claim[release]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_fixed_unit_post_bind_method_drift_retains_without_calling_foreign[sample]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_all_entry_drift_paths_retain_without_foreign_cleanup[binding]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_all_entry_drift_paths_retain_without_foreign_cleanup[late_unit]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_active_deadline_uses_original_reservation_before_release",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_fixed_unit_post_bind_method_drift_retains_without_calling_foreign[kernel_job_none]"
+    ]
+  },
+  "previous_pytest_seconds": 47.15600000000268,
+  "pytest_total_seconds": 240,
+  "static_total_seconds": 60,
+  "whole_development_seconds": 300
+}

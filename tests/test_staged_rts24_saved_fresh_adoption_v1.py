@@ -2136,3 +2136,362 @@ def test_saved_binding_commit_bookend_rejects_drift_after_first_check(saved_bind
     monkeypatch.setattr(cli, '_saved_owner_endpoint', endpoint)
     with pytest.raises(ValueError): cli.saved_owner_inputs('fresh', store, reservation, channel=channel)
     assert store.child_consumed is False
+
+
+@pytest.fixture
+def saved_owner_case(saved_binding_context, monkeypatch):
+    from types import SimpleNamespace
+    raw, sha = saved_binding_context; cleanup = []
+    parent = cli.StageChannel.create(sha, cli.stage_descriptor('parent'), name=cli.STAGE_PREFIX+'a'*64, nonce='b'*64)
+    cleanup.append(parent.close)
+    pid, creation = cli._own_process_identity(cli._stage_api())
+    parent.bind_owner(SimpleNamespace(pid=pid, creation_filetime=creation, _live_owner=lambda: None, _released=False))
+    upstream = cli.StageChannel.attach(parent.name, parent.nonce, sha, parent.descriptor); cleanup.append(upstream.close)
+    child = cli.StageChannel.create(sha, cli.stage_descriptor('fresh')); cleanup.append(child.close)
+    tree = (('unit_output_tree', ()),); tree_sha = cli.digest(tree)
+    _saved_unit_main(monkeypatch, (raw, sha), role='parent', tree_sha=tree_sha)
+    bootstrap = cli._bind_saved_main('parent', raw, sha, tree_sha, upstream.name, upstream.nonce)
+    bootstrap.bind_channel(upstream)
+    original = cli.read
+    monkeypatch.setattr(cli, '_role_tree', lambda root: tree)
+    monkeypatch.setattr(cli, 'read', lambda path, **kw: raw if Path(path) == cli.OUTPUT/'context.json' else original(path, **kw))
+    store = cli.RoleStore(raw, sha, tree_sha, 'parent')
+    upstream.enter('parent'); upstream.enter('fresh')
+    inputs = cli.saved_owner_inputs('fresh', store, store.reserve_child('fresh'), channel=child)
+    case = SimpleNamespace(inputs=inputs, store=store, child=child, upstream=upstream, parent=parent,
+        calls=[], cleanup=cleanup, primary=ValueError('saved unit primary'),
+        secondary={n:OSError(n+' secondary') for n in ('termination', 'quiesce', 'owner_close', 'channel_close')})
+    try: yield case
+    finally:
+        for close in reversed(cleanup):
+            try: close()
+            except Exception: pass
+
+
+def _construct_saved_unit(case, script='normal'):
+    try:
+        held = cli._construct_saved_stage_for_test(case.inputs, script=script)
+        owner = held.owner
+    except cli.SavedStageUnresolved as error:
+        owner = error.owner
+        if owner is not None:
+            case.owner, case.calls = owner, owner.calls
+            case.primary, case.secondary = owner._primary, owner._secondary
+        raise
+    case.owner, case.calls = owner, owner.calls
+    case.primary, case.secondary = owner._primary, owner._secondary
+    return held
+
+
+def _unissued_saved_permit(inputs):
+    import os
+    from threading import get_ident
+    permit = object.__new__(cli.SavedChildLaunchPermit)
+    permit.inputs = inputs; permit.input_pin = cli.pin(inputs.raw); permit.issuer = None
+    permit.creator = os.getpid(), get_ident()
+    permit.binding_commit = cli.digest(permit._image())
+    return permit
+
+
+def test_saved_owner_normal_unit_transport_never_grants_physical_or_content_permission(saved_owner_case, monkeypatch):
+    c = saved_owner_case; held = _construct_saved_unit(c)
+    assert c.inputs.constructor_claimed and held.domain == 'saved' and held.real_owner is False
+    assert held.created_at == c.inputs.reservation[1] and held.owner.kwargs['max_process_commit_bytes'] == 1024**3
+    record = cli.watch_saved_stage(held)
+    assert record['logic_path_completed'] is True
+    assert record['stage_process_observed_successfully'] is record['job_quiet_confirmed'] is False
+    assert record['owner_evidence'] == 'injected_unit_owner' and record['scope'] == 'saved_retained_child_stage_development_only'
+    assert cli.saved_stage_process_record(held) == record
+    monkeypatch.setattr(cli, 'read', lambda *a, **k: pytest.fail('unit owner read child content'))
+    with pytest.raises(ValueError): cli.read_saved_after_quiet(c.store, 'worker/fresh/metrics.json', held)
+    assert [cli.parse(cli._stage_decode(s, cli.STAGE_COMMIT))['phase'] for s in c.upstream._history] == [
+        'parent', 'fresh', 'inner_quiesce', 'inner_terminal']
+    print('SAVED_OWNER_UNIT '+cli.canonical(dict(record=record, physical_success_claimed=False,
+        actual_saved_F_execution=False, F_launch_admitted=False)).decode())
+
+
+@pytest.mark.parametrize('kind', ['none', 'dict', 'object', 'unissued'])
+def test_saved_owner_public_issuer_stays_closed_before_claim_or_allocation(saved_owner_case, kind):
+    c = saved_owner_case
+    permit = {'none':None,'dict':{},'object':object(),'unissued':_unissued_saved_permit(c.inputs)}[kind]
+    with pytest.raises(ValueError, match='issuer remains closed'): cli.construct_saved_stage(c.inputs, permit)
+    assert not c.inputs.constructor_claimed and c.calls == [] and c.child._view is not None
+
+
+def test_saved_owner_core_rejects_native_factory_and_foreign_unit_token(saved_owner_case):
+    from src.staged_rts24_process_guard_v1 import OwnedChild
+    c = saved_owner_case
+    for factory in (OwnedChild, type('Subclass', (OwnedChild,), {})):
+        with pytest.raises(TypeError): cli._construct_saved_stage_for_test(c.inputs, owner_factory=factory)
+        with pytest.raises(ValueError): cli._construct_saved_stage(c.inputs, None, factory)
+    with pytest.raises(ValueError): cli._construct_saved_stage_for_test(c.inputs, script=object())
+    assert c.calls == [] and not c.inputs.constructor_claimed
+
+
+@pytest.mark.parametrize('fault', ['none', 'before_commit', 'keyboard_interrupt', 'system_exit'])
+def test_saved_owner_permit_and_input_state_commit_together_without_issuance(saved_owner_case, monkeypatch, fault):
+    c = saved_owner_case; permit = _unissued_saved_permit(c.inputs)
+    initial = c.inputs._attempt_state
+    if fault != 'none':
+        primary = {'before_commit': c.primary, 'keyboard_interrupt': KeyboardInterrupt(), 'system_exit': SystemExit()}[fault]
+        original = cli.digest
+        def digest(value):
+            if type(value) is tuple and len(value) == 8 and value[-1] is True: raise primary
+            return original(value)
+        with monkeypatch.context() as scoped:
+            scoped.setattr(cli, 'digest', digest)
+            with pytest.raises(type(primary)) as error: cli._commit_saved_attempt(c.inputs, permit)
+        assert error.value is primary and c.inputs._attempt_state is initial
+        assert permit.used is c.inputs.constructor_claimed is False
+        permit._binding_entry(c.inputs, used=False)
+    else:
+        cli._commit_saved_attempt(c.inputs, permit)
+        assert permit.used is c.inputs.constructor_claimed is True
+        assert c.inputs._attempt_state is not initial and c.inputs._attempt_state[2] is permit
+        permit._binding_entry(c.inputs, used=True)
+        with pytest.raises(ValueError): cli._commit_saved_attempt(c.inputs, permit)
+    with pytest.raises(ValueError): c.inputs.claim_constructor()
+    with pytest.raises(ValueError, match='issuer remains closed'): cli.construct_saved_stage(c.inputs, permit)
+    assert c.calls == []
+
+
+def test_saved_owner_constructor_claim_replay_does_not_close_existing_stage(saved_owner_case):
+    c = saved_owner_case; held = _construct_saved_unit(c)
+    with pytest.raises(ValueError, match='already claimed'):
+        cli._construct_saved_stage_for_test(c.inputs)
+    assert c.calls == ['init'] and c.child._view is not None
+    held.close()
+
+
+@pytest.mark.parametrize('fault', ['init_early', 'init_job', 'bind', 'startup', 'source', 'released', 'deadline'])
+def test_saved_owner_partial_constructor_retains_original_objects_and_cleans_once(saved_owner_case, monkeypatch, fault):
+    from types import SimpleNamespace
+    c = saved_owner_case; injected = c.primary
+    if fault == 'bind': monkeypatch.setattr(c.child, 'bind_owner', lambda *a: (_ for _ in ()).throw(injected))
+    elif fault == 'startup':
+        original = cli._saved_startup_image
+        monkeypatch.setattr(cli, '_saved_startup_image', lambda *a: dict(original(*a), excess='x'*17000))
+    elif fault in ('source', 'deadline'):
+        original = cli._saved_constructor_bookend
+        changed = deepcopy(cli.parse(c.store.raw)['source_pins']); changed[cli.NEW_SOURCES[0]]['sha256'] = '0'*64
+        def bookend(inputs, value, *, owner=None):
+            if owner is not None:
+                if fault == 'source': monkeypatch.setattr(cli, 'source_pins', lambda: changed)
+                else: monkeypatch.setattr(cli, 'time', SimpleNamespace(monotonic=lambda: c.inputs.reservation[1]+40.01))
+            return original(inputs, value, owner=owner)
+        monkeypatch.setattr(cli, '_saved_constructor_bookend', bookend)
+    with pytest.raises(cli.SavedStageUnresolved) as error:
+        _construct_saved_unit(c, fault if fault in cli._SAVED_UNIT_SCRIPTS else 'normal')
+    e = error.value
+    assert e.inputs is c.inputs and e.channel is c.child and c.inputs.constructor_claimed and c.child._view is None
+    if fault in ('init_early', 'init_job'): assert e.primary is c.primary
+    if fault == 'bind': assert e.primary is injected
+    assert c.calls.count('kill') <= 1 and c.calls.count('close') <= 1 and 'release' not in c.calls
+    import pickle
+    with pytest.raises(TypeError): pickle.dumps(e)
+
+
+def test_saved_owner_partial_constructor_preserves_all_cleanup_errors(saved_owner_case, monkeypatch):
+    c = saved_owner_case; close = c.child.close; injected = c.secondary['channel_close']
+    def channel_close(): close(); raise injected
+    monkeypatch.setattr(c.child, 'close', channel_close)
+    with pytest.raises(cli.SavedStageUnresolved) as error:
+        _construct_saved_unit(c, 'layers')
+    e = error.value
+    expected = dict(c.secondary, channel_close=injected)
+    assert e.primary is c.primary and {k:v for k,v in e.cleanup_objects} == expected
+    assert c.calls == ['init','kill','quiesce','close'] and c.child._view is None
+
+
+@pytest.mark.parametrize('fault', ['release', 'poll', 'sample', 'rss', 'commit', 'fast', 'nonzero', 'no_terminal',
+    'descendant', 'quiesce', 'inventory', 'close', 'bookend', 'channel_close'])
+def test_saved_owner_watch_failures_never_grant_success(saved_owner_case, monkeypatch, fault):
+    c = saved_owner_case
+    held = _construct_saved_unit(c, fault if fault in cli._SAVED_UNIT_SCRIPTS else 'normal')
+    if fault == 'bookend':
+        original = c.child.read_available
+        def available():
+            if 'quiesce' in c.calls: raise c.primary
+            return original()
+        monkeypatch.setattr(c.child, 'read_available', available)
+    elif fault == 'channel_close':
+        close = c.child.close
+        def channel_close(): close(); raise c.secondary['channel_close']
+        monkeypatch.setattr(c.child, 'close', channel_close)
+    record = cli.watch_saved_stage(held)
+    assert record['logic_path_completed'] is record['stage_process_observed_successfully'] is record['job_quiet_confirmed'] is False
+    assert record['primary_stop_reason'] and c.calls.count('kill') <= 1 and c.calls.count('close') == 1
+    assert c.child._view is None
+    assert all(record[k] is False for k in cli.GATES)
+
+
+@pytest.mark.parametrize('phase', ['inner_quiesce', 'inner_terminal'])
+def test_saved_owner_relay_failure_preserves_cleanup(saved_owner_case, monkeypatch, phase):
+    c = saved_owner_case; held = _construct_saved_unit(c)
+    original = c.upstream.enter
+    def enter(value):
+        if value == phase: raise c.primary
+        return original(value)
+    monkeypatch.setattr(c.upstream, 'enter', enter)
+    record = cli.watch_saved_stage(held)
+    assert record['relay_error']['message'] == str(c.primary) and record['logic_path_completed'] is False
+    assert c.calls.count('close') == 1 and 'quiesce' in c.calls
+
+
+def test_saved_owner_entry_drift_retains_stage_without_foreign_cleanup(saved_owner_case):
+    c = saved_owner_case; held = _construct_saved_unit(c)
+    object.__setattr__(held.launch_binding, 'upstream', object())
+    with pytest.raises(cli.SavedStageEntryUnresolved) as error: cli.watch_saved_stage(held)
+    assert error.value.stage is held and error.value.owner is held.owner and error.value.channel is held.channel
+    assert error.value.ownership_validated is False and c.calls == ['init']
+    held.owner.close(); held.channel.close()
+
+
+def test_saved_owner_clock_initialization_error_still_cleans_once(saved_owner_case, monkeypatch):
+    c = saved_owner_case; held = _construct_saved_unit(c)
+    original = cli.SavedStageBinding.prewatch; clock = cli.time
+    class Clock:
+        first = True
+        def monotonic(self):
+            if self.first: self.first = False; raise c.primary
+            return clock.monotonic()
+        def __getattr__(self, name): return getattr(clock, name)
+    def prewatch(self, stage): original(self, stage); monkeypatch.setattr(cli, 'time', Clock())
+    monkeypatch.setattr(cli.SavedStageBinding, 'prewatch', prewatch)
+    with pytest.raises(cli.SavedStageUnresolved) as error: cli.watch_saved_stage(held)
+    assert error.value.primary is c.primary and held._attempted and c.calls.count('kill') == c.calls.count('close') == 1
+
+
+def test_saved_owner_core_active_path_performs_no_source_or_artifact_reads(saved_owner_case, monkeypatch):
+    c = saved_owner_case; held = _construct_saved_unit(c)
+    original = cli._watch_owned_stage
+    def watch(*args, **kwargs):
+        monkeypatch.setattr(cli, 'read', lambda *a, **k: pytest.fail('active saved loop did file I/O'))
+        return original(*args, **kwargs)
+    monkeypatch.setattr(cli, '_watch_owned_stage', watch)
+    record = cli.watch_saved_stage(held)
+    assert record['logic_path_completed'] is True and record['artifact_contents_read'] is False
+
+
+def test_saved_owner_active_error_keeps_object_and_first_image(saved_owner_case, monkeypatch):
+    c = saved_owner_case; held = _construct_saved_unit(c, 'sample')
+    original = cli._stop_owned_job
+    def stop(*args):
+        c.primary.args = ('mutated after first image',)
+        return original(*args)
+    monkeypatch.setattr(cli, '_stop_owned_job', stop)
+    record = cli.watch_saved_stage(held)
+    monitor = next(row for row in held.launch_binding.errors if row[0] == 'monitor')
+    assert monitor[1] is c.primary and cli.parse(monitor[2]) == record['monitor_error']
+    assert record['monitor_error']['message'] == 'saved unit primary'
+    assert str(c.primary) == 'mutated after first image'
+
+
+def test_saved_owner_ordinary_saved_wrappers_reject_other_domain(saved_owner_case):
+    c = saved_owner_case; held = _construct_saved_unit(c)
+    with pytest.raises(ValueError): cli.watch_probe_stage(held)
+    with pytest.raises(ValueError): cli._watch_stage(held)
+    assert c.calls == ['init']; held.close()
+
+
+@pytest.mark.parametrize('method', ['__init__', 'release', 'sample'])
+def test_saved_owner_fixed_unit_rejects_changed_code_before_claim(saved_owner_case, monkeypatch, method):
+    c = saved_owner_case
+    def foreign(*args, **kwargs): raise AssertionError('foreign code executed')
+    with monkeypatch.context() as scoped:
+        scoped.setattr(getattr(cli._SavedUnitOwner, method), '__code__', foreign.__code__)
+        with pytest.raises(ValueError, match='fixed unit method changed'):
+            cli._construct_saved_stage_for_test(c.inputs)
+    assert not c.inputs.constructor_claimed and c.child._view is not None
+
+
+@pytest.mark.parametrize('method', ['release', 'sample', 'kernel', 'kernel_job_none'])
+def test_saved_owner_fixed_unit_post_bind_method_drift_retains_without_calling_foreign(saved_owner_case, monkeypatch, method):
+    from types import SimpleNamespace
+    c = saved_owner_case; held = _construct_saved_unit(c, 'sample'); called = []
+    with monkeypatch.context() as scoped:
+        if method == 'kernel': scoped.setattr(held.owner._k, 'TerminateJobObject', lambda *a: called.append(True))
+        elif method == 'kernel_job_none':
+            scoped.setattr(held.owner, '_job', None)
+            scoped.setattr(held.owner, '_k', SimpleNamespace(TerminateJobObject=lambda *a: called.append(True)))
+        else: scoped.setattr(held.owner, method, lambda *a: called.append(True))
+        with pytest.raises(cli.SavedStageEntryUnresolved) as error: cli.watch_saved_stage(held)
+        assert error.value.stage is held and error.value.primary is not None
+        assert c.calls == ['init'] and called == [] and c.child._view is not None
+    held.close()
+
+
+@pytest.mark.parametrize('drift', ['domain', 'binding', 'unit', 'late_method', 'late_unit'])
+def test_saved_owner_all_entry_drift_paths_retain_without_foreign_cleanup(saved_owner_case, monkeypatch, drift):
+    c = saved_owner_case; held = _construct_saved_unit(c)
+    domain, binding, unit = held.domain, held.launch_binding, held.owner.unit
+    replacement = cli._SavedUnitConstruction(c.inputs, 'sample')
+    original = cli.SavedStageBinding.prewatch
+    try:
+        with monkeypatch.context() as scoped:
+            if drift == 'domain': object.__setattr__(held, 'domain', 'ordinary')
+            elif drift == 'binding': object.__setattr__(held, 'launch_binding', object())
+            elif drift == 'unit': held.owner.unit = replacement
+            else:
+                def prewatch(self, stage):
+                    original(self, stage)
+                    if drift == 'late_unit': held.owner.unit = replacement
+                    else: scoped.setattr(held.owner, 'close', lambda: pytest.fail('foreign cleanup called'))
+                scoped.setattr(cli.SavedStageBinding, 'prewatch', prewatch)
+            with pytest.raises(cli.SavedStageEntryUnresolved) as error: cli.watch_saved_stage(held)
+            assert error.value.stage is held and error.value.entry_error is not None
+            assert c.calls == ['init'] and not held._attempted and c.child._view is not None
+    finally:
+        object.__setattr__(held, 'domain', domain); object.__setattr__(held, 'launch_binding', binding)
+        held.owner.unit = unit
+        held.close()
+
+
+@pytest.mark.parametrize('kind', ['keyboard', 'system'])
+def test_saved_owner_interrupt_after_state_commit_leaves_both_ledgers_spent(saved_owner_case, kind):
+    import sys
+    c = saved_owner_case; permit = _unissued_saved_permit(c.inputs)
+    primary = KeyboardInterrupt() if kind == 'keyboard' else SystemExit()
+    def trace(frame, event, arg):
+        if frame.f_code is cli._commit_saved_attempt.__code__ and event == 'return': raise primary
+        return trace
+    previous = sys.gettrace()
+    try:
+        sys.settrace(trace)
+        with pytest.raises(type(primary)) as error: cli._commit_saved_attempt(c.inputs, permit)
+    finally: sys.settrace(previous)
+    assert error.value is primary and permit.used is c.inputs.constructor_claimed is True
+    permit._binding_entry(c.inputs, used=True)
+    assert c.calls == []
+
+
+def test_saved_owner_active_deadline_uses_original_reservation_before_release(saved_owner_case, monkeypatch):
+    from types import SimpleNamespace
+    c = saved_owner_case; held = _construct_saved_unit(c)
+    original = cli.SavedStageBinding.prewatch; clock = cli.time
+    def prewatch(self, stage):
+        original(self, stage)
+        monkeypatch.setattr(cli, 'time', SimpleNamespace(monotonic=lambda: c.inputs.reservation[1]+40.001,
+            get_clock_info=clock.get_clock_info, sleep=lambda seconds: pytest.fail('expired owner slept')))
+    monkeypatch.setattr(cli.SavedStageBinding, 'prewatch', prewatch)
+    record = cli.watch_saved_stage(held)
+    assert record['primary_stop_reason'] == 'construction_or_total_budget'
+    assert record['total_deadline'] == c.inputs.reservation[1]+50
+    assert record['release_attempted'] is False and 'release' not in c.calls
+    assert c.calls.count('kill') == c.calls.count('close') == 1
+
+
+def test_saved_owner_oversized_terminal_encoding_retains_original_after_cleanup(saved_owner_case, monkeypatch):
+    c = saved_owner_case; held = _construct_saved_unit(c); original = cli.canonical
+    def canonical(value):
+        raw = original(value)
+        if type(value) is dict and value.get('schema') == 'staged_saved_F_saved_child_process_development_v1':
+            return raw+b' '*(131073-len(raw))
+        return raw
+    monkeypatch.setattr(cli, 'canonical', canonical)
+    with pytest.raises(cli.SavedStageUnresolved) as error: cli.watch_saved_stage(held)
+    assert error.value.stage is held and error.value.owner is c.owner
+    assert isinstance(error.value.primary, cli.StageChannelError)
+    assert held.last_observation['record_encoding_error'] and held.last_image is None
+    assert c.calls.count('close') == 1 and c.child._view is None
+    with pytest.raises(ValueError): cli.saved_stage_process_record(held)

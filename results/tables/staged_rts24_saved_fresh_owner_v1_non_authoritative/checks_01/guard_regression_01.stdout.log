@@ -1,0 +1,13 @@
+...................
+============================ slowest 10 durations =============================
+0.81s call     tests/test_staged_rts24_process_guard_v1.py::test_nested_jobs_both_close_complete_handle_inventories
+0.62s call     tests/test_staged_rts24_process_guard_v1.py::test_worker_exits_with_live_grandchild_whole_job_is_quiesced
+0.41s call     tests/test_staged_rts24_process_guard_v1.py::test_real_nonzero_exit_retains_code_and_quiet_job
+0.41s call     tests/test_staged_rts24_process_guard_v1.py::test_real_child_rss_and_normal_exit_are_observed
+0.21s call     tests/test_staged_rts24_process_guard_v1.py::test_real_timeout_quiesces_whole_job[wall]
+0.21s call     tests/test_staged_rts24_process_guard_v1.py::test_real_timeout_quiesces_whole_job[progress]
+0.20s call     tests/test_staged_rts24_process_guard_v1.py::test_faults_are_recorded_and_cleanup_is_not_assumed[storage]
+0.20s call     tests/test_staged_rts24_process_guard_v1.py::test_faults_are_recorded_and_cleanup_is_not_assumed[cleanup]
+0.20s call     tests/test_staged_rts24_process_guard_v1.py::test_faults_are_recorded_and_cleanup_is_not_assumed[close]
+0.09s call     tests/test_staged_rts24_process_guard_v1.py::test_unobserved_short_lived_descendant_forces_unknown
+19 passed in 4.66s

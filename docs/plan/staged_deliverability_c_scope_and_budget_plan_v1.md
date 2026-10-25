@@ -1,5 +1,9 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-25 saved owner相关绑定补验完成：见[最新交接](continuation_handoff_20261025_saved_fresh_owner_completion.md)。源码不变的18节点30.625s终态通过，与前143同SF49/三源snapshot、互斥合计161；两批预算225.639/240s与30.625/45s分别保存，原失败/超时不计通过。实际saved F/issuer/supervise/public CLI以及科学采用、资源和正式门禁仍未开放。
+
+2026-10-25 saved owner/watcher草稿：见[交接](continuation_handoff_20261025_saved_fresh_owner.md)。当前epoch143唯一节点终态通过（56 owner/68 stage/19 guard），pytest 225.639s/240s；18相关binding到帽无终态，另固定源码不变的45s/15s补验。固定unit stub无Native，issuer/public saved CLI/实际F及科学/资源/正式门禁仍关闭。旧77仅属于冻结snapshot，未全量继承到新源码。
+
 2026-10-25 冻结saved绑定检查补齐：见[交接](continuation_handoff_20261025_saved_fresh_binding_completion.md)与[合同](staged_deliverability_c_saved_fresh_binding_completion_contract_v1.md)。三源码未改，新49节点分22/16/11组终态通过，pytest39.266s/80s，静态另20s；与旧28同SF49/snapshot精确union77。77仅属冻结cc384f65/16a0d2c0源码的单位接口，不是实际saved进程或owner；未来改源码时保存checker将current匹配标false。下一步独立constructor/watcher及无issuer的closed launch permit；supervise/public入口、真实F、完整预算/资源和科学/正式门禁仍false/OPEN。
 
 2026-10-25 F saved子角色绑定接口：见[新交接](continuation_handoff_20261025_saved_fresh_binding.md)与[合同](staged_deliverability_c_saved_fresh_binding_development_contract_v1.md)。独立saved grammar/bootstrap已绑定context/role/tree/Open-only writer、source/EXE identity和完整受控环境；构造输入从held store/原reservation派生，末次书挡后一次消费、保留原start。当前59节点终态通过（28新单位/12关键回归/4接口/15完整ordinary角色矩阵），pytest全attempt238.315s＜240s。完整77新单位未在最终epoch全跑，早组/30s超时保留且不计当前。实际saved入口/constructor/watcher/supervise仍关闭，actual OUTPUT及父目录未建，单位正例含明确logical注入；完整调用/最大编码/180s/硬中断/资源及整包science/formal保持OPEN/false。

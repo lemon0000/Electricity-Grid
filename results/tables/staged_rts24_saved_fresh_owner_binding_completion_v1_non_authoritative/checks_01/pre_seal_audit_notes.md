@@ -1,0 +1,9 @@
+# Owner与相关绑定补验最终只读复核
+
+2026-10-25，DRAFT_NONAUTHORITATIVE。root整理既有独立只读reviewer `/root/f_scope_preseal` 的最终反馈；reviewer未写文件、未执行或轮询测试/checker、未分叉。未发现新的PRE_SEAL finding；这不是official verdict、receipt、seal或运行授权。
+
+复核确认：143+18精确互斥，合计161普通节点，同SF49/三源snapshot；新18终态30.625/45s、stderr空，原225.639/240s独立保存。原失败与两次25s超时不计通过，旧77只核冻结snapshot，不冒充current重跑。P1全683、旧导航原文还原pin、owner predecessor逐字preservation和current/frozen分离一致。最终saved_reopen_03计入后补验静态约3.964/15s；后续支持清单/最终重开仍按同15s累计帽计。
+
+所核关键SHA：ENTRY `6f9bef022379252b29bd2a71dc5d219349569939e6cc09e44c2174aa742560bb`，tests `a19d0c6434df6fd557294591aa08fc968e2bf5ef17f2bded26142f07d513f1ae`，scientific src `26b919e385f9d7042587db490dab694fc5bf1643665ab4bf94a1c9bac8087396`；补验contract `58f30be8d1bd316f3234fd65e727e4ef949fb13a4ba1d18a5ac27fc8c846e067`，report `bd2331b4f9e040c9fc26d3d23133ef577649c9234f10c45fa286c5128fca23b3`，handoff `865d994f634f04162b1525fd95d1d3c7b9780ea26d8c0546bc26f02d42b5a826`，saved checker `d727e2aab98354cb2d8f9a28299d2ce122441407f8193e5c912dee984701a91f`，unit closure `034ca813d87694c5e94218a672f6da3797be88649f8c1be4c4904ccbd7c0ae4d`。
+
+actual OUTPUT及父目录不存在。实际saved owner/F、fresh/parent adoption、issuer/public saved CLI、科学采用、资源准入与formal gates继续false/open；本包仅支持当前scope普通开发回归充分性。

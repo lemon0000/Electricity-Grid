@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_owner_v1_non_authoritative\checks_01\saved_checks.py", line 89, in <module>
+    if __name__ == '__main__': sys.stdout.buffer.write((json.dumps(verify(), sort_keys=True, indent=2)+'\n').encode())
+                                                                   ^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_owner_v1_non_authoritative\checks_01\saved_checks.py", line 71, in verify
+    old = prior.verify()
+          ^^^^^^^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_binding_completion_v1_non_authoritative\checks_01\saved_checks.py", line 54, in verify
+    for name, expected in read('document_checks.json')['document_pins'].items(): assert pin((ROOT/name).read_bytes()) == expected
+                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -753,19 +753,29 @@ class OwnedStage:
     last_observation: object
     last_image: object
     observation_commit: object
+    domain: str
+    launch_binding: object
+    _domain_binding: tuple
 
-    def __init__(self, owner, channel, startup, created, real_owner):
+    def __init__(self, owner, channel, startup, created, real_owner, *, domain='ordinary', launch_binding=None):
         require(type(startup) is bytes and type(created) is float and math.isfinite(created)
             and type(real_owner) is bool, 'typed retained owner binding required')
         binding = (id(owner), id(channel), sha256(startup).hexdigest(), created, real_owner,
             owner.pid, owner.creation_filetime, channel._binding_inputs)
         for name, value in dict(owner=owner, channel=channel, startup=startup, created_at=created,
                 real_owner=real_owner, _creator=(os.getpid(), get_ident()), _binding=binding,
-                _attempted=False, last_observation=None, last_image=None, observation_commit=None).items():
+                _attempted=False, last_observation=None, last_image=None, observation_commit=None,
+                domain=domain, launch_binding=launch_binding, _domain_binding=(domain, id(launch_binding))).items():
             object.__setattr__(self, name, value)
+        object.__setattr__(self, '_saved_error_retention_unresolved', ())
 
     def _entry(self):
         require(self._creator == (os.getpid(), get_ident()), 'creating PID/thread required for stage owner')
+        require((self.domain, id(self.launch_binding)) == self._domain_binding, 'held stage domain changed')
+        if self.domain == 'ordinary': require(self.launch_binding is None, 'ordinary owner cannot carry saved binding')
+        else:
+            require(self.domain == 'saved' and type(self.launch_binding) is SavedStageBinding, 'exact saved stage binding required')
+            self.launch_binding.entry(self)
         require((id(self.owner), id(self.channel)) == self._binding[:2], 'held owner/channel binding changed')
         require(type(self.startup) is bytes and sha256(self.startup).hexdigest() == self._binding[2]
             and type(self.created_at) is float and self.created_at == self._binding[3]
@@ -913,13 +923,34 @@ def watch_probe_stage(held, *, absolute_deadline=None):
 
 
 def _watch_stage(held, *, absolute_deadline=None, relay=None, invocation=None, initial_phase_deadline=None):
+    require(type(held) is OwnedStage, 'actual creating-thread probe owner required')
+    held._entry()
+    require(held.domain == 'ordinary' and held.channel.spec['mode'] == 'ordinary_owner_probe', 'production stage observation remains disabled')
+    return _watch_owned_stage(held, absolute_deadline=absolute_deadline, relay=relay,
+        invocation=invocation, initial_phase_deadline=initial_phase_deadline)
+
+
+def _watch_owned_stage(held, *, absolute_deadline=None, relay=None, invocation=None, initial_phase_deadline=None):
     """Active loop: kernel queries and fixed RAM only; no artifact/source I/O."""
     require(type(held) is OwnedStage, 'actual creating-thread probe owner required')
     held._entry(); require(not held._attempted, 'stage observation already attempted')
     owner, channel = held.owner, held.channel
     channel._live()
     spec = channel.spec
-    require(spec['mode'] == 'ordinary_owner_probe', 'production stage observation remains disabled')
+    saved = held.domain == 'saved'
+    if saved:
+        require(spec['mode'] == 'production_descriptor_only' and channel.descriptor == stage_descriptor(spec['role'])
+            and invocation is None and initial_phase_deadline is None
+            and relay is held.launch_binding.upstream and absolute_deadline == held.launch_binding.deadline,
+            'fixed saved stage supervision inputs required')
+    else: require(spec['mode'] == 'ordinary_owner_probe', 'production stage observation remains disabled')
+    def retain_error(layer, error):
+        if saved:
+            try: held.launch_binding.retain_error(layer, error)
+            except BaseException as retention_error:
+                pending = held._saved_error_retention_unresolved
+                if len(pending) < 9:
+                    object.__setattr__(held, '_saved_error_retention_unresolved', pending+((layer, error, retention_error),))
     relay_phases = None
     invocation_bridge = type(relay) is globals().get('InvocationRelay')
     if invocation_bridge:
@@ -942,7 +973,6 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None, invocation=None, i
     if absolute_deadline is not None:
         require(type(absolute_deadline) is float and math.isfinite(absolute_deadline), 'finite earlier stage deadline required')
         total_deadline = min(total_deadline, absolute_deadline)
-    object.__setattr__(held, '_attempted', True)
     active_deadline = total_deadline-spec['quiesce_seconds']-spec['terminal_seconds']
     phases, caps = spec['phases'], spec['phase_seconds']
     poll_interval = .01
@@ -969,7 +999,8 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None, invocation=None, i
         kill_requested = True
         termination_requested_at = time.monotonic()
         try: _stop_owned_job(owner); kill_succeeded = True
-        except BaseException as error: termination_error = _stage_error(error)
+        except BaseException as error:
+            retain_error('termination', error); termination_error = _stage_error(error)
 
     def sample():
         nonlocal samples, peak_rss, peak_commit, terminal_rss
@@ -985,6 +1016,7 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None, invocation=None, i
         return data
 
     try:
+        object.__setattr__(held, '_attempted', True)
         owner._live_owner()
         require(owner._released is (invocation is not None), 'unreleased owner or actual armed invocation required for phase clock')
         if start >= active_deadline: termination('construction_or_total_budget')
@@ -1017,7 +1049,7 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None, invocation=None, i
                                 if relay is not None:
                                     try: relay.enter(phase)
                                     except BaseException as error:
-                                        relay_error = _stage_error(error); raise
+                                        retain_error('relay_active', error); relay_error = _stage_error(error); raise
                         elif seen == len(phases) and phase == 'terminal':
                             terminal = True; terminal_accepted = now
                             candidates = dict(active=active_deadline, phase=phase_deadline, exit_cap=now+spec['terminal_seconds'])
@@ -1042,6 +1074,7 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None, invocation=None, i
                 if terminal_exit_deadline is not None: remaining = min(remaining, terminal_exit_deadline-time.monotonic())
                 if remaining > 0: time.sleep(min(poll_interval, remaining))
     except BaseException as error:
+        retain_error('monitor', error)
         if invocation is not None and invocation.active_error is None:
             object.__setattr__(invocation, 'active_error', error); invocation._commit()
         monitor_error = _stage_error(error)
@@ -1051,6 +1084,7 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None, invocation=None, i
         if relay is not None and not invocation_bridge:
             try: relay.enter(relay_phases[0])
             except BaseException as error:
+                retain_error('relay_quiesce', error)
                 relay_error = relay_error or _stage_error(error); termination('relay_unknown')
         quiesce_started = time.monotonic()
         quiet = False
@@ -1070,32 +1104,38 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None, invocation=None, i
             if peak_commit > spec['job_commit_bytes']: primary = primary or 'post_quiesce_commit_limit'
             if time.monotonic()-quiesce_started > spec['quiesce_seconds']: primary = primary or 'quiesce_budget'
         except BaseException as error:
+            retain_error('quiesce', error)
             quiesce_error = _stage_error(error); primary = primary or 'quiesce_unknown'
         try:
             final = channel.read_available()
             if final is None: raise StageChannelError('busy_final', 'final channel bookend unavailable')
             if len(final) != len(frames): raise StageChannelError('late_frame', 'transcript changed after exit observation')
         except BaseException as error:
+            retain_error('channel_bookend', error)
             final_bookend_error = _stage_error(error); primary = primary or 'channel_bookend_unknown'
         try: owner.close()
         except BaseException as error:
+            retain_error('owner_close', error)
             close_error = _stage_error(error); quiet = False; primary = primary or 'close_unknown'
         try: channel.close()
         except BaseException as error:
+            retain_error('channel_close', error)
             channel_close_error = _stage_error(error); primary = primary or 'channel_close_unknown'
         close_completed_at = time.monotonic()
         if (relay is not None and not invocation_bridge and relay_error is None and quiet
                 and all(error is None for error in (quiesce_error, close_error, channel_error, final_bookend_error, channel_close_error))):
             try: relay.enter(relay_phases[1])
             except BaseException as error:
+                retain_error('relay_terminal', error)
                 relay_error = _stage_error(error); primary = primary or 'relay_unknown'
         closed_at = time.monotonic()
         if closed_at > total_deadline: primary = primary or 'total_budget'
         if samples == 0: primary = primary or 'rss_observation_unavailable'
+    if saved and held._saved_error_retention_unresolved: primary = primary or 'saved_error_retention_unknown'
     completed = terminal and seen == len(phases)+1 and channel_error is final_bookend_error is None and not channel.pending_data
     success = primary is None and exit_code == 0 and quiet and completed and samples > 0
     startup = parse(held.startup)
-    record = dict(authority='DRAFT_NONAUTHORITATIVE', scope='ordinary_retained_owner_stage_process_only',
+    record = dict(authority='DRAFT_NONAUTHORITATIVE', scope='saved_retained_child_stage_development_only' if saved else 'ordinary_retained_owner_stage_process_only',
         owner_evidence='direct_owned_child' if held.real_owner else 'injected_unit_owner', startup=startup,
         descriptor=spec, exit_code=exit_code, primary_stop_reason=primary, monitor_error=monitor_error,
         termination_requested=kill_requested, termination_call_succeeded=kill_succeeded, termination_error=termination_error,
@@ -1122,6 +1162,7 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None, invocation=None, i
         clock=dict(implementation=time.get_clock_info('monotonic').implementation,
             resolution=time.get_clock_info('monotonic').resolution), poll_interval_seconds=poll_interval,
         F_launch_admitted=False, saved_P1_fresh_process_verified=False, saved_P1_parent_adoption_verified=False, **GATES)
+    if saved: record['schema'] = 'staged_saved_F_saved_child_process_development_v1'
     object.__setattr__(held, 'last_observation', record)
     if len(canonical(record)) > 131072:
         record['stage_process_observed_successfully'] = False
@@ -1393,7 +1434,7 @@ class RoleStore:
 
 
 def _held_role_process(held, store):
-    require(type(held) is OwnedStage, 'direct retained owner capability required')
+    require(type(held) is OwnedStage and held.domain == 'ordinary', 'direct ordinary retained owner capability required')
     held._entry()
     require(held._attempted and held.real_owner and type(held.last_image) is bytes
         and canonical(held.last_observation) == held.last_image and held.channel.context_sha == store.sha,
@@ -3260,24 +3301,54 @@ class SavedOwnerInputs:
     reservation: tuple
     channel: object
     creator: tuple
-    commit: str
+    _attempt_state: tuple
 
     def __init__(self, raw, store, reservation, channel):
         for name, value in dict(raw=raw, store=store, reservation=reservation, channel=channel,
                 creator=(os.getpid(), get_ident())).items(): object.__setattr__(self, name, value)
-        object.__setattr__(self, 'commit', digest(self._image()))
+        object.__setattr__(self, '_attempt_state', (False, digest((*self._base_image(), id(None), False)), None))
 
-    def _image(self):
+    @property
+    def constructor_claimed(self): return self._attempt_state[0]
+
+    @property
+    def commit(self): return self._attempt_state[1]
+
+    def _base_image(self):
         return pin(self.raw), id(self.store), id(self.reservation), self.reservation, id(self.channel), self.creator
 
-    def check(self):
+    def _image(self):
+        return (*self._base_image(), id(self._attempt_state[2]), self.constructor_claimed)
+
+    def immutable_entry(self):
         require(self.creator == (os.getpid(), get_ident()) and self.commit == digest(self._image()),
             'creating saved owner inputs required')
+        store = self.store
+        require(type(store) is RoleStore and store.creator == self.creator and store.schema == SCHEMA
+            and (str(store.root), store.sha, store.tree, store.writer, store.schema) == store.binding
+            and sha256(store.raw).hexdigest() == store.sha and self.reservation is store.child_reservation
+            and store.child_consumed is True and digest([store.child_reservation, True]) == store.reservation_commit,
+            'immutable saved store/reservation changed')
+        value = parse(self.raw)
+        require(value['context_sha'] == store.sha and value['tree_sha'] == digest(store.tree)
+            and value['writer'] == store.writer and value['role'] == self.reservation[0]
+            and canonical(value['reservation']) == canonical(list(self.reservation)), 'immutable saved input projection differs')
+        return value
+
+    def check(self):
+        self.immutable_entry()
+        require(self.constructor_claimed is False, 'saved constructor inputs already claimed')
+        return self._unbound_bookend()
+
+    def _unbound_bookend(self):
         value = parse(self.raw); context = _saved_owner_store(self.store, value['role'], self.reservation, consumed=True)
         _saved_owner_endpoint(self.channel, value['role'], self.store.sha)
         expected = _saved_owner_image(value['role'], context, self.store, self.reservation, self.channel)
         require(self.raw == canonical(expected), 'saved owner constructor inputs drift')
         return value
+
+    def claim_constructor(self):
+        raise ValueError('constructor claim requires the single attempt-state manager')
 
     def __reduce__(self): raise TypeError('saved constructor inputs cannot be serialized')
 
@@ -3326,6 +3397,444 @@ def saved_owner_inputs(role, store, reservation, *, channel):
     image = canonical(_saved_owner_image(role, context, store, reservation, channel))
     require(len(image) <= 16384, 'saved owner constructor input cap')
     return SavedOwnerInputs(image, store, reservation, channel)
+
+
+_SAVED_LAUNCH_ISSUER = None
+
+
+class _SavedLaunchIssuer:
+    def __new__(cls, *args, **kwargs): raise TypeError('saved launch issuer remains closed')
+    def check(self, permit, inputs): raise ValueError('saved launch issuer remains closed')
+
+
+class SavedChildLaunchPermit:
+    """No issuer exists in this draft. Binding state alone never authorizes launch."""
+    def __new__(cls, *args, **kwargs): raise TypeError('saved launch issuer remains closed')
+
+    def _image(self):
+        return (id(self.inputs), self.input_pin, id(self.inputs.store), id(self.inputs.reservation),
+            self.inputs.reservation, id(self.inputs.channel), id(self.issuer), self.creator)
+
+    @property
+    def used(self): return self.inputs.constructor_claimed and self.inputs._attempt_state[2] is self
+
+    @property
+    def commit(self): return self.binding_commit
+
+    def _binding_entry(self, inputs, *, used):
+        require(self.creator == (os.getpid(), get_ident()) and self.inputs is inputs and self.used is used
+            and inputs.constructor_claimed is used and self.commit == digest(self._image())
+            and self.input_pin == pin(inputs.raw), 'saved launch permit binding differs')
+        inputs.immutable_entry()
+
+    def _consume_binding(self, inputs):
+        _commit_saved_attempt(inputs, self)
+
+    def consume(self, inputs):
+        issuer = _saved_launch_issuer()
+        issuer.check(self, inputs)
+        self._consume_binding(inputs)
+
+    def __reduce__(self): raise TypeError('saved launch permit cannot be serialized')
+
+
+def _saved_launch_issuer():
+    require(type(_SAVED_LAUNCH_ISSUER) is _SavedLaunchIssuer, 'saved launch issuer remains closed')
+    return _SAVED_LAUNCH_ISSUER
+
+
+def construct_saved_stage(inputs, permit):
+    # Check authority before production preflight, allocation or factory lookup.
+    _saved_launch_issuer()
+    require(type(inputs) is SavedOwnerInputs and type(permit) is SavedChildLaunchPermit, 'issued saved child permit required')
+    return _construct_saved_stage(inputs, permit, None)
+
+
+def _construct_saved_stage_for_test(inputs, *, script='normal'):
+    return _construct_saved_stage(inputs, None, _SavedUnitConstruction(inputs, script))
+
+
+_SAVED_UNIT_SCRIPTS = ('normal', 'init_early', 'init_job', 'released', 'layers', 'release', 'poll', 'sample',
+    'rss', 'commit', 'fast', 'nonzero', 'no_terminal', 'descendant', 'quiesce', 'inventory', 'close')
+
+
+@dataclass(frozen=True, init=False)
+class _SavedUnitConstruction:
+    def __init__(self, inputs, script):
+        require(type(inputs) is SavedOwnerInputs, 'exact saved unit inputs required')
+        require(type(script) is str and script in _SAVED_UNIT_SCRIPTS, 'closed saved unit fault script required')
+        _saved_unit_code_check()
+        object.__setattr__(self, 'inputs', inputs); object.__setattr__(self, 'script', script)
+        object.__setattr__(self, 'identity', _own_process_identity(_stage_api()))
+        object.__setattr__(self, 'creator', (os.getpid(), get_ident()))
+        object.__setattr__(self, 'commit', digest((id(inputs), pin(inputs.raw), script, self.identity, self.creator)))
+
+    def entry(self, inputs):
+        require(self.creator == (os.getpid(), get_ident()) and self.inputs is inputs
+            and self.commit == digest((id(inputs), pin(inputs.raw), self.script, self.identity, self.creator)),
+            'creating unit constructor capability required')
+        _saved_unit_code_check()
+        return _SavedUnitOwner
+
+    def __reduce__(self): raise TypeError('unit construction capability cannot be serialized')
+
+
+def _saved_unit_emit(unit):
+    # The only transport effect is the already bound page-file RAM endpoint.
+    channel = unit.inputs.channel
+    writer = StageChannel.attach(channel.name, channel.nonce, channel.context_sha, channel.descriptor)
+    try:
+        writer.enter('fresh')
+        if unit.script != 'no_terminal': writer.enter('terminal')
+    finally: writer.close()
+
+
+class _SavedUnitKernel:
+    def __init__(self, owner): self.owner = owner
+    def TerminateJobObject(self, *args): return self.owner.kill()
+
+
+class _SavedUnitOwner:
+    """Fixed stub: no process, filesystem or arbitrary callback capability."""
+    def __init__(self, args, *, cwd, environment, max_process_commit_bytes, max_job_commit_bytes, _unit):
+        self.unit = _unit; self.calls = ['init']; self.args = tuple(args)
+        self.kwargs = dict(cwd=cwd, environment=dict(environment), max_process_commit_bytes=max_process_commit_bytes,
+            max_job_commit_bytes=max_job_commit_bytes)
+        self.pid, self.creation_filetime = _unit.identity
+        self._primary = ValueError('saved unit primary')
+        self._secondary = {n:OSError(n+' secondary') for n in ('termination', 'quiesce', 'owner_close', 'channel_close')}
+        self._process = self._thread = self._job = None; self._members = {}; self._released = False
+        self.quiescence_witness = None; self.polls = 0
+        if _unit.script == 'init_early': raise self._primary
+        self._job = 1; self._k = _SavedUnitKernel(self)
+        if _unit.script in ('init_job', 'layers'): raise self._primary
+        if _unit.script == 'released': self._released = True
+
+    def _live_owner(self): _saved_unit_code_check(self)
+    def kill(self):
+        self.calls.append('kill')
+        if self.unit.script == 'layers': raise self._secondary['termination']
+        return True
+
+    def release(self):
+        self.calls.append('release'); self._released = True
+        if self.unit.script == 'release': raise self._primary
+        _saved_unit_emit(self.unit)
+
+    def poll(self):
+        self.polls += 1
+        if self.unit.script == 'poll': raise self._primary
+        if self.unit.script == 'fast' or self.polls > 1: return 7 if self.unit.script == 'nonzero' else 0
+        return None
+
+    def sample(self):
+        self.calls.append('sample')
+        if self.unit.script == 'sample': raise self._primary
+        return dict(rss_bytes=1024**3+1 if self.unit.script == 'rss' else 100,
+            peak_job_commit_bytes=2*1024**3+1 if self.unit.script == 'commit' else 200,
+            pids=[self.pid+1] if self.unit.script == 'descendant' else [], processes=0)
+
+    def quiesce(self, *, max_seconds):
+        self.calls.append('quiesce'); require(0 < max_seconds <= 5, 'bounded unit quiescence required')
+        if self.unit.script in ('quiesce', 'layers'): raise self._secondary['quiesce']
+        self.quiescence_witness = dict(observed_unique_member_handles=1, all_handles_signaled=True,
+            member_identities=[dict(pid=self.pid, creation_filetime=self.creation_filetime)], total_processes=1,
+            final_pids=[], active_processes=0, complete_inventory=self.unit.script != 'inventory')
+
+    def close(self):
+        self.calls.append('close')
+        if self.unit.script in ('close', 'layers'): raise self._secondary['owner_close']
+        self._process = self._thread = self._job = None; self._members = {}
+
+
+_SAVED_UNIT_OWNER_TYPE = _SavedUnitOwner
+_SAVED_UNIT_KERNEL_TYPE = _SavedUnitKernel
+_SAVED_UNIT_SEAL = tuple((cls, name, getattr(cls, name), getattr(cls, name).__code__,
+    getattr(cls, name).__defaults__, getattr(cls, name).__closure__) for cls, names in (
+        (_SavedUnitOwner, ('__init__', '_live_owner', 'kill', 'release', 'poll', 'sample', 'quiesce', 'close')),
+        (_SavedUnitKernel, ('__init__', 'TerminateJobObject'))) for name in names)
+_SAVED_UNIT_EMIT_SEAL = _saved_unit_emit, _saved_unit_emit.__code__
+
+
+def _saved_unit_code_check(owner=None):
+    require(_SavedUnitOwner is _SAVED_UNIT_OWNER_TYPE and _SavedUnitKernel is _SAVED_UNIT_KERNEL_TYPE
+        and _saved_unit_emit is _SAVED_UNIT_EMIT_SEAL[0]
+        and _saved_unit_emit.__code__ is _SAVED_UNIT_EMIT_SEAL[1], 'fixed unit implementation changed')
+    for cls, name, method, code, defaults, closure in _SAVED_UNIT_SEAL:
+        require(getattr(cls, name) is method and method.__code__ is code and method.__defaults__ == defaults
+            and method.__closure__ is closure, 'fixed unit method changed')
+        if owner is not None and cls is _SAVED_UNIT_OWNER_TYPE:
+            bound = getattr(owner, name)
+            require(getattr(bound, '__func__', None) is method and getattr(bound, '__self__', None) is owner,
+                'fixed unit instance method changed')
+    if owner is not None:
+        require(type(owner) is _SAVED_UNIT_OWNER_TYPE, 'fixed unit owner required')
+        require(type(owner._k) is _SAVED_UNIT_KERNEL_TYPE and owner._k.owner is owner, 'fixed unit kernel required')
+        method = owner._k.TerminateJobObject
+        require(getattr(method, '__func__', None) is _SavedUnitKernel.TerminateJobObject
+            and getattr(method, '__self__', None) is owner._k, 'fixed unit kernel method changed')
+
+
+def _commit_saved_attempt(inputs, permit):
+    inputs.immutable_entry()
+    require(inputs.constructor_claimed is False, 'saved constructor inputs already claimed')
+    if permit is not None: permit._binding_entry(inputs, used=False)
+    # Permit use is derived from this exact state; there is no second ledger write.
+    state = (True, digest((*inputs._base_image(), id(permit), True)), permit)
+    object.__setattr__(inputs, '_attempt_state', state)
+
+
+def _saved_startup_image(value, inputs, real_owner):
+    return dict(schema='staged_saved_F_saved_CreateProcess_inputs_development_v1', authority='DRAFT_NONAUTHORITATIVE',
+        scope='saved_child_startup_development_only', role=value['role'], creator_pid=os.getpid(),
+        argv=value['argv'], command_line=value['command_line'], cwd=value['cwd'], environment_sha=value['environment_sha'],
+        context_sha=value['context_sha'], tree_sha=value['tree_sha'], source_sha=value['source_sha'], executable=value['executable'],
+        descriptor_sha=value['descriptor_sha'], channel_name=value['channel_name'], channel_nonce=value['channel_nonce'],
+        input_image_sha=sha256(inputs.raw).hexdigest(), reservation_start=inputs.reservation[1],
+        owner_pid=2**32-1, owner_creation_filetime=2**64-1,
+        native_owner_constructed=real_owner, actual_os_commandline_independently_verified=False)
+
+
+def _saved_constructor_bookend(inputs, value, *, owner=None):
+    require(inputs.constructor_claimed is True, 'claimed saved constructor inputs required')
+    inputs.immutable_entry()
+    context = _saved_owner_store(inputs.store, value['role'], inputs.reservation, consumed=True)
+    channel = inputs.channel; channel._live()
+    require(channel._reader and channel.context_sha == inputs.store.sha and channel.descriptor == stage_descriptor(value['role'])
+        and canonical(_saved_owner_image(value['role'], context, inputs.store, inputs.reservation, channel)) == inputs.raw,
+        'saved constructor binding changed')
+    if owner is not None:
+        require(owner._released is False and type(channel._header) is bytes, 'suspended captured saved owner required')
+        header = parse(_stage_decode(channel._header, STAGE_HEADER_COMMIT))
+        require((header['owner_pid'], header['owner_creation_filetime']) == (owner.pid, owner.creation_filetime), 'saved captured owner differs')
+    total = min(context['deadline'], inputs.reservation[1]+channel.spec['total_seconds'])
+    require(time.monotonic() < total-channel.spec['quiesce_seconds']-channel.spec['terminal_seconds'], 'saved constructor active deadline')
+    return context
+
+
+def _cleanup_saved_owner(owner, channel, deadline):
+    errors = []
+    if owner is not None:
+        if getattr(owner, '_job', None) is not None:
+            try: _stop_owned_job(owner)
+            except BaseException as error: errors.append(('termination', error))
+            try:
+                remaining = min(channel.spec['quiesce_seconds'], deadline-channel.spec['terminal_seconds']-time.monotonic())
+                owner.quiesce(max_seconds=remaining if remaining > 0 else channel.spec['quiesce_seconds'])
+            except BaseException as error: errors.append(('quiesce', error))
+        try: owner.close()
+        except BaseException as error: errors.append(('owner_close', error))
+    try: channel.close()
+    except BaseException as error: errors.append(('channel_close', error))
+    return errors
+
+
+class SavedStageUnresolved(StageConstructionUnresolved):
+    def __init__(self, inputs, permit, owner, channel, primary, cleanup, phase, stage=None):
+        self.inputs, self.permit, self.channel, self.primary = inputs, permit, channel, primary
+        self.cleanup_objects, self.phase, self.stage = tuple(cleanup), phase, stage
+        super().__init__(owner, primary, [dict(layer=layer, **_stage_error(error)) for layer, error in cleanup])
+        self.args = ('saved stage unresolved at '+phase,)
+
+
+def _saved_channel_image(channel):
+    name, nonce, sha, descriptor = channel._binding_inputs
+    return ((name, nonce, sha, pin(descriptor)),
+        (channel.name, channel.nonce, channel.context_sha, pin(channel.descriptor)), channel._reader,
+        channel._creator, pin(channel._header))
+
+
+@dataclass(frozen=True, init=False)
+class SavedStageBinding:
+    inputs: SavedOwnerInputs
+    permit: object
+    owner: object
+    upstream: StageChannel
+    bootstrap: SavedFileBootstrap
+    deadline: float
+    real_owner: bool
+    startup: bytes
+    creator: tuple
+    commit: str
+    errors: tuple
+    unit: object
+
+    def __init__(self, inputs, permit, owner, startup, deadline, real_owner, unit=None):
+        require(inputs.constructor_claimed is True and type(real_owner) is bool, 'claimed saved stage binding required')
+        if real_owner:
+            require(type(permit) is SavedChildLaunchPermit, 'consumed saved permit required')
+            require(type(permit.issuer) is _SavedLaunchIssuer, 'issued saved authority identity required')
+            permit._binding_entry(inputs, used=True)
+            require(unit is None, 'native owner cannot carry a unit script')
+        else:
+            require(permit is None and type(unit) is _SavedUnitConstruction and owner.unit is unit,
+                'exact unit owner capability required')
+            unit.entry(inputs)
+        bootstrap = _held_saved_bootstrap(inputs.store.writer, inputs.store.raw, inputs.store.sha, tree_sha=digest(inputs.store.tree))
+        for name, value in dict(inputs=inputs, permit=permit, owner=owner, upstream=bootstrap.channel,
+                bootstrap=bootstrap, deadline=deadline, real_owner=real_owner, startup=startup,
+                creator=(os.getpid(), get_ident()), errors=(), unit=unit).items(): object.__setattr__(self, name, value)
+        object.__setattr__(self, 'commit', digest(self._image()))
+
+    def _image(self):
+        return (id(self.inputs), self.inputs.commit, pin(self.inputs.raw), id(self.owner), self.owner.pid,
+            self.owner.creation_filetime, id(self.inputs.channel), _saved_channel_image(self.inputs.channel),
+            id(self.upstream), _saved_channel_image(self.upstream), id(self.bootstrap), self.bootstrap.commit, self.deadline,
+            self.real_owner, pin(self.startup), self.creator, id(self.permit), id(self.unit),
+            None if self.unit is None else (self.unit.commit, self.unit.script),
+            [(layer, id(error), pin(image)) for layer, error, image in self.errors])
+
+    def retain_error(self, layer, error):
+        require(self.creator == (os.getpid(), get_ident()) and self.commit == digest(self._image()), 'creating saved error holder required')
+        require(layer in ('termination', 'monitor', 'relay_active', 'relay_quiesce', 'relay_terminal',
+            'quiesce', 'channel_bookend', 'owner_close', 'channel_close'), 'closed saved error layer required')
+        if any(row[0] == layer for row in self.errors): return
+        object.__setattr__(self, 'errors', self.errors+((layer, error, canonical(_stage_error(error))),))
+        object.__setattr__(self, 'commit', digest(self._image()))
+
+    def entry(self, held):
+        require(self.creator == (os.getpid(), get_ident()) and self.commit == digest(self._image()), 'creating saved stage binding required')
+        self.inputs.immutable_entry()
+        if not self.real_owner:
+            require(self.owner.unit is self.unit, 'original unit capability required')
+            _saved_unit_code_check(self.owner); self.unit.entry(self.inputs)
+        require(not held._saved_error_retention_unresolved, 'saved error retention unresolved')
+        require(self.bootstrap is _SAVED_BOOTSTRAP and self.upstream is self.bootstrap.channel
+            and held.owner is self.owner and held.channel is self.inputs.channel and held.startup == self.startup
+            and held.real_owner is self.real_owner and held.created_at == self.inputs.reservation[1]
+            and self.inputs.constructor_claimed is True, 'exact saved held owner/relay required')
+        if self.real_owner:
+            self.permit._binding_entry(self.inputs, used=True)
+
+    def prewatch(self, held):
+        self.entry(held)
+        require(not held._attempted and self.upstream is _SAVED_BOOTSTRAP.channel
+            and self.inputs.store.writer == 'parent' and self.inputs.channel.spec['role'] == 'fresh', 'saved fresh-parent relay required')
+        self.upstream._live()
+        require(not self.upstream._reader and self.upstream.descriptor == stage_descriptor('parent')
+            and self.upstream.context_sha == self.inputs.store.sha, 'saved upstream binding differs')
+        value = parse(self.inputs.raw)
+        _saved_constructor_bookend(self.inputs, value, owner=self.owner)
+
+    def __reduce__(self): raise TypeError('live saved stage binding cannot be serialized')
+
+
+def _construct_saved_stage(inputs, permit, unit):
+    require(type(inputs) is SavedOwnerInputs, 'exact saved owner inputs required')
+    real_owner = unit is None
+    if real_owner:
+        issuer = _saved_launch_issuer()
+        require(type(permit) is SavedChildLaunchPermit, 'issued saved child permit required')
+        require(permit.issuer is issuer, 'saved issuer identity differs')
+        issuer.check(permit, inputs); permit._binding_entry(inputs, used=False)
+    else:
+        require(permit is None and type(unit) is _SavedUnitConstruction, 'injected unit saved construction capability required')
+        owner_factory = unit.entry(inputs)
+    inputs.immutable_entry()
+    require(inputs.constructor_claimed is False, 'saved constructor inputs already claimed')
+    owner = None; channel = inputs.channel; phase = 'claim'
+    deadline = parse(inputs.store.raw)['deadline']
+    try:
+        _commit_saved_attempt(inputs, permit)
+        value = inputs._unbound_bookend()
+        context = _saved_constructor_bookend(inputs, value)
+        startup = _saved_startup_image(value, inputs, real_owner)
+        require(len(canonical(startup)) <= 16384, 'saved startup image cap')
+        if real_owner:
+            from src.staged_rts24_process_guard_v1 import OwnedChild
+            factory = OwnedChild
+        else: factory = unit.entry(inputs)
+        phase = 'constructor'; owner = object.__new__(factory)
+        spawn_args, spawn_environment = list(value['argv']), dict(context['environment'])
+        factory.__init__(owner, spawn_args, cwd=ROOT, environment=spawn_environment,
+            max_process_commit_bytes=channel.spec['process_commit_bytes'], max_job_commit_bytes=channel.spec['job_commit_bytes'],
+            **({} if real_owner else {'_unit':unit}))
+        require(spawn_args == value['argv'] and spawn_environment == context['environment'], 'saved passed argv/environment changed')
+        phase = 'bind_owner'; channel.bind_owner(owner)
+        startup.update(owner_pid=owner.pid, owner_creation_filetime=owner.creation_filetime)
+        phase = 'startup_encode'; raw = canonical(startup); require(len(raw) <= 16384, 'saved captured startup cap')
+        phase = 'post_capture_bookend'; _saved_constructor_bookend(inputs, value, owner=owner)
+        binding = SavedStageBinding(inputs, permit, owner, raw, deadline, real_owner, unit)
+        return OwnedStage(owner, channel, raw, inputs.reservation[1], real_owner, domain='saved', launch_binding=binding)
+    except BaseException as primary:
+        cleanup = _cleanup_saved_owner(owner, channel, deadline)
+        raise SavedStageUnresolved(inputs, permit, owner, channel, primary, cleanup, phase) from primary
+
+
+def watch_saved_stage(held):
+    require(type(held) is OwnedStage, 'exact saved retained stage required')
+    try:
+        require(held.domain == 'saved' and type(held.launch_binding) is SavedStageBinding, 'exact saved binding required')
+        held._entry()
+    except BaseException as primary:
+        raise SavedStageEntryUnresolved(held, primary) from primary
+    binding = held.launch_binding
+    try:
+        binding.prewatch(held)
+        return _watch_owned_stage(held, relay=binding.upstream, absolute_deadline=binding.deadline)
+    except BaseException as primary:
+        cleanup = []
+        if not held._attempted:
+            try: held._entry()
+            except BaseException as entry_error:
+                raise SavedStageEntryUnresolved(held, primary, entry_error) from primary
+            object.__setattr__(held, '_attempted', True)
+            cleanup = _cleanup_saved_owner(held.owner, held.channel, binding.deadline)
+        raise SavedStageUnresolved(binding.inputs, binding.permit, binding.owner, binding.inputs.channel,
+            primary, cleanup, 'watch', stage=held) from primary
+
+
+class SavedStageEntryUnresolved(RuntimeError):
+    def __init__(self, stage, primary, entry_error=None):
+        self.stage, self.owner, self.channel, self.primary = stage, stage.owner, stage.channel, primary
+        self.entry_error = primary if entry_error is None else entry_error
+        self.ownership_validated = False
+        super().__init__('saved stage entry identity unresolved; original stage retained')
+
+    def __reduce__(self): raise TypeError('unresolved saved entry cannot be serialized')
+
+
+def saved_stage_process_record(held):
+    require(type(held) is OwnedStage and held.domain == 'saved', 'saved retained observation required')
+    held._entry(); require(held._attempted and type(held.last_image) is bytes, 'saved terminal record unavailable')
+    value = parse(held.last_image)
+    keys(value, 'schema authority scope owner_evidence startup descriptor exit_code primary_stop_reason monitor_error '
+        'termination_requested termination_call_succeeded termination_error quiesce_error close_error channel_error '
+        'final_bookend_error channel_close_error quiet_witness_consistent relay_error job_quiet_confirmed quiescence_witness '
+        'stage_process_observed_successfully logic_path_completed stage_transcript_complete frames_observed phases_observed '
+        'transcript_sha stage_header transcript_frames samples sampled_tree_peak_rss_bytes terminal_tree_rss_bytes peak_job_commit_bytes '
+        'release_attempted terminal_system_helpers construction_seconds observation_seconds remaining_total_seconds total_deadline terminal_accepted '
+        'terminal_exit_deadline terminal_exit_cap_seconds terminal_exit_limiting_deadline root_exit_observed_at termination_requested_at '
+        'quiesce_started_at quiesce_completed_at close_attempts_finished_at observation_finished_at active_io_scope artifact_contents_read '
+        'external_constructor_and_monitor_interrupt_bound_proved terminal_publication_bound_proved clock poll_interval_seconds '
+        'F_launch_admitted saved_P1_fresh_process_verified saved_P1_parent_adoption_verified '+' '.join(GATES))
+    require(value['schema'] == 'staged_saved_F_saved_child_process_development_v1'
+        and value['scope'] == 'saved_retained_child_stage_development_only' and value['authority'] == 'DRAFT_NONAUTHORITATIVE'
+        and canonical(value['startup']) == held.startup and value['descriptor'] == held.channel.spec
+        and value['owner_evidence'] == ('direct_owned_child' if held.real_owner else 'injected_unit_owner')
+        and canonical(value['stage_header']) == _stage_decode(held.channel._header, STAGE_HEADER_COMMIT)
+        and value['transcript_sha'] == sha256(b''.join(held.channel._history)).hexdigest()
+        and value['transcript_frames'] == [parse(_stage_decode(s, STAGE_COMMIT)) for s in held.channel._history]
+        and all(value[k] is False for k in (*GATES, 'F_launch_admitted', 'saved_P1_fresh_process_verified', 'saved_P1_parent_adoption_verified')),
+        'saved observation record binding differs')
+    return value
+
+
+def read_saved_after_quiet(store, name, held):
+    record = saved_stage_process_record(held)
+    binding = held.launch_binding
+    require(held.real_owner and binding.real_owner and binding.inputs.store is store
+        and record['stage_process_observed_successfully'] is record['job_quiet_confirmed'] is True
+        and held.owner._process is held.owner._job is held.owner._thread is None and not held.owner._members
+        and _stage_complete_witness(held.owner.quiescence_witness, held.owner.pid, held.owner.creation_filetime)
+        and canonical(held.owner.quiescence_witness) == canonical(record['quiescence_witness'])
+        and held.channel._view is held.channel._map is held.channel._mutex is None,
+        'closed real saved owner quiet required before content')
+    require(store.writer == 'parent' and name in TARGETS and name.startswith('worker/fresh/'), 'saved child target required')
+    _saved_owner_store(store, 'fresh', binding.inputs.reservation, consumed=True)
+    store.accounting(); raw = read(store.root/name)
+    require(len(raw) <= role_target_caps()[name], 'saved child target cap')
+    store.accounting(); return raw
 
 
 if __name__ == '__main__':

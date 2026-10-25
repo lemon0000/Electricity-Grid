@@ -1,0 +1,11 @@
+# Saved owner 开发只读复核记录
+
+2026-10-25，DRAFT_NONAUTHORITATIVE。root唯一writer；既有独立只读reviewer `/root/f_scope_preseal` 仅检查source/tests/contract，不写文件、不执行或轮询测试、不分叉。本页由root整理其findings与闭合依据；不构成official verdict、receipt、seal或运行授权。
+
+首次复核指出：任意factory可绕过“无Native”边界；双ledger多次写入可能留下半消费；watch时钟初始化异常可能漏清理；已持owner依赖可变global issuer会影响恢复。后续复核进一步否定仅用factory/code文件名约束任意callback。修为ENTRY内固定stub和闭集fault script，public默认无issuer，permit.used从唯一attempt-state tuple派生，clock初始化前不标attempted，已持binding不再依赖global issuer。
+
+第二轮指出原unit capability未进入binding，以及prewatch后二次entry失败仍可能清理foreign owner。修为强持原unit、提交identity/commit/script、要求owner.unit同对象；全部saved domain/binding/entry异常统一强持，pre-attempt cleanup前再次纯身份校验。对应normal→另一合法script、domain/binding及late method/unit负例。
+
+第三轮指出_job=None可跳过kernel身份校验。修为post-bind所有状态无条件核exact kernel type、owner back-reference与bound TerminateJobObject，包括close后；新增kernel_job_none + sample脚本负例，foreign调用与cleanup必须均未发生。
+
+最终静态复核确认上述必修已闭合，允许预登记普通单位与相关回归验证。所核ENTRY SHA `6f9bef022379252b29bd2a71dc5d219349569939e6cc09e44c2174aa742560bb`，tests SHA `a19d0c6434df6fd557294591aa08fc968e2bf5ef17f2bded26142f07d513f1ae`，contract SHA `1ebb9286e75cf352aea12e6d087a38927f548266a3e9e6e0226cd4d1ac2d15e3`。实际saved Native owner、issuer、public saved CLI和F执行仍未建立；科学采用、资源与正式门禁均关闭。测试终态和剩余覆盖以另存exit.json及本批报告为准。

@@ -1,0 +1,163 @@
+SAVED_BINDING_FIXTURE {"F_launch_admitted":false,"actual_saved_F_execution":false,"context_pin":{"bytes":560366,"sha256":"8d39c0fa3cf5b17b32076d759ef2f30bd794df45cf1f699c0d8ca26a094b847c"},"logical_output_parent_identity":true,"scope":"unit interface only"}
+F..
+================================== FAILURES ===================================
+_ test_saved_owner_normal_unit_transport_never_grants_physical_or_content_permission _
+
+inputs = SavedOwnerInputs(raw=b'{"F_launch_admitted":false,"argv":["D:\\\\Miniconda3\\\\envs\\\\compute\\\\python.exe","-B","-s...or=(37308, 37408), commit='d91ba91d6c8cc25ad99f372ba0c5dd56fecc57c716ace63ae656841f7c09b48e', constructor_claimed=True)
+permit = None, unit = _SavedUnitConstruction()
+
+    def _construct_saved_stage(inputs, permit, unit):
+        require(type(inputs) is SavedOwnerInputs, 'exact saved owner inputs required')
+        real_owner = unit is None
+        if real_owner:
+            issuer = _saved_launch_issuer()
+            require(type(permit) is SavedChildLaunchPermit, 'issued saved child permit required')
+            require(permit.issuer is issuer, 'saved issuer identity differs')
+            issuer.check(permit, inputs); permit._binding_entry(inputs, used=False)
+        else:
+            require(permit is None and type(unit) is _SavedUnitConstruction, 'injected unit saved construction capability required')
+            owner_factory = unit.entry(inputs)
+        inputs.immutable_entry()
+        require(inputs.constructor_claimed is False, 'saved constructor inputs already claimed')
+        owner = None; channel = inputs.channel; phase = 'claim'
+        deadline = parse(inputs.store.raw)['deadline']
+        try:
+            _commit_saved_attempt(inputs, permit)
+            value = inputs._unbound_bookend()
+            context = _saved_constructor_bookend(inputs, value)
+            startup = _saved_startup_image(value, inputs, real_owner)
+            require(len(canonical(startup)) <= 16384, 'saved startup image cap')
+            if real_owner:
+                from src.staged_rts24_process_guard_v1 import OwnedChild
+                factory = OwnedChild
+            else: factory = unit.entry(inputs)
+            phase = 'constructor'; owner = object.__new__(factory)
+            factory.__init__(owner, value['argv'], cwd=ROOT, environment=dict(context['environment']),
+                max_process_commit_bytes=channel.spec['process_commit_bytes'], max_job_commit_bytes=channel.spec['job_commit_bytes'])
+            phase = 'bind_owner'; channel.bind_owner(owner)
+            startup.update(owner_pid=owner.pid, owner_creation_filetime=owner.creation_filetime)
+            phase = 'startup_encode'; raw = canonical(startup); require(len(raw) <= 16384, 'saved captured startup cap')
+            phase = 'post_capture_bookend'; _saved_constructor_bookend(inputs, value, owner=owner)
+>           binding = SavedStageBinding(inputs, permit, owner, raw, deadline, real_owner)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:3639: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:3565: in __init__
+    object.__setattr__(self, 'commit', digest(self._image()))
+                                       ^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:61: in digest
+    return sha256(canonical(value)).hexdigest()
+                  ^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:57: in canonical
+    return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Miniconda3\envs\compute\Lib\json\__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+D:\Miniconda3\envs\compute\Lib\json\encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Miniconda3\envs\compute\Lib\json\encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <json.encoder.JSONEncoder object at 0x00000291E6151AC0>
+o = b'{"authority":"DRAFT_NONAUTHORITATIVE","job_commit_bytes":2147483648,"member_handles":1024,"mode":"production_descrip...esh","rss_bytes":1073741824,"schema":"staged_saved_F_owner_descriptor_v1","terminal_seconds":5.0,"total_seconds":50.0}'
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type bytes is not JSON serializable
+
+D:\Miniconda3\envs\compute\Lib\json\encoder.py:180: TypeError
+
+The above exception was the direct cause of the following exception:
+
+saved_owner_case = namespace(inputs=SavedOwnerInputs(raw=b'{"F_launch_admitted":false,"argv":["D:\\\\Miniconda3\\\\envs\\\\compute\\\\pyt...hannel_close secondary')}, factory=<class 'test_staged_rts24_saved_fresh_adoption_v1.saved_owner_case.<locals>.Owner'>)
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000291E61E7E60>
+
+    def test_saved_owner_normal_unit_transport_never_grants_physical_or_content_permission(saved_owner_case, monkeypatch):
+>       c = saved_owner_case; held = cli._construct_saved_stage_for_test(c.inputs, owner_factory=c.factory)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:2242: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:3440: in _construct_saved_stage_for_test
+    return _construct_saved_stage(inputs, None, _SavedUnitConstruction(inputs, owner_factory))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+inputs = SavedOwnerInputs(raw=b'{"F_launch_admitted":false,"argv":["D:\\\\Miniconda3\\\\envs\\\\compute\\\\python.exe","-B","-s...or=(37308, 37408), commit='d91ba91d6c8cc25ad99f372ba0c5dd56fecc57c716ace63ae656841f7c09b48e', constructor_claimed=True)
+permit = None, unit = _SavedUnitConstruction()
+
+    def _construct_saved_stage(inputs, permit, unit):
+        require(type(inputs) is SavedOwnerInputs, 'exact saved owner inputs required')
+        real_owner = unit is None
+        if real_owner:
+            issuer = _saved_launch_issuer()
+            require(type(permit) is SavedChildLaunchPermit, 'issued saved child permit required')
+            require(permit.issuer is issuer, 'saved issuer identity differs')
+            issuer.check(permit, inputs); permit._binding_entry(inputs, used=False)
+        else:
+            require(permit is None and type(unit) is _SavedUnitConstruction, 'injected unit saved construction capability required')
+            owner_factory = unit.entry(inputs)
+        inputs.immutable_entry()
+        require(inputs.constructor_claimed is False, 'saved constructor inputs already claimed')
+        owner = None; channel = inputs.channel; phase = 'claim'
+        deadline = parse(inputs.store.raw)['deadline']
+        try:
+            _commit_saved_attempt(inputs, permit)
+            value = inputs._unbound_bookend()
+            context = _saved_constructor_bookend(inputs, value)
+            startup = _saved_startup_image(value, inputs, real_owner)
+            require(len(canonical(startup)) <= 16384, 'saved startup image cap')
+            if real_owner:
+                from src.staged_rts24_process_guard_v1 import OwnedChild
+                factory = OwnedChild
+            else: factory = unit.entry(inputs)
+            phase = 'constructor'; owner = object.__new__(factory)
+            factory.__init__(owner, value['argv'], cwd=ROOT, environment=dict(context['environment']),
+                max_process_commit_bytes=channel.spec['process_commit_bytes'], max_job_commit_bytes=channel.spec['job_commit_bytes'])
+            phase = 'bind_owner'; channel.bind_owner(owner)
+            startup.update(owner_pid=owner.pid, owner_creation_filetime=owner.creation_filetime)
+            phase = 'startup_encode'; raw = canonical(startup); require(len(raw) <= 16384, 'saved captured startup cap')
+            phase = 'post_capture_bookend'; _saved_constructor_bookend(inputs, value, owner=owner)
+            binding = SavedStageBinding(inputs, permit, owner, raw, deadline, real_owner)
+            return OwnedStage(owner, channel, raw, inputs.reservation[1], real_owner, domain='saved', launch_binding=binding)
+        except BaseException as primary:
+            cleanup = _cleanup_saved_owner(owner, channel, deadline)
+>           raise SavedStageUnresolved(inputs, permit, owner, channel, primary, cleanup, phase) from primary
+E           experiments.staged_rts24_saved_fresh_adoption_v1.SavedStageUnresolved: saved stage unresolved at post_capture_bookend
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:3643: SavedStageUnresolved
+============================ slowest 10 durations =============================
+3.06s setup    tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_normal_unit_transport_never_grants_physical_or_content_permission
+1.54s setup    tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_partial_constructor_retains_original_objects_and_cleans_once[init_job]
+1.45s setup    tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_public_issuer_stays_closed_before_claim_or_allocation[none]
+1.05s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_normal_unit_transport_never_grants_physical_or_content_permission
+0.74s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_partial_constructor_retains_original_objects_and_cleans_once[init_job]
+
+(4 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_owner_normal_unit_transport_never_grants_physical_or_content_permission
+1 failed, 2 passed in 10.79s
