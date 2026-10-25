@@ -1,0 +1,459 @@
+{
+  "F_launch_admitted": false,
+  "actual_saved_F_execution": false,
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "caps": {
+    "binding_13": 40,
+    "data_a_08": 25,
+    "data_b_09": 25,
+    "data_smoke_07": 12,
+    "expectation_a_11": 32,
+    "expectation_b_12": 26,
+    "self_rest_20": 14,
+    "self_smoke_19": 10,
+    "source_expectation_10": 23
+  },
+  "failed_group_reserve_seconds": 20,
+  "groups": {
+    "binding_13": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_inputs_are_data_and_production_constructor_stays_closed",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[descriptor]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[reader]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[creator]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[writer_pair]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[equal_copy]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[tree]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_current_bookend_rejects_before_reservation_consumption[expired]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_current_bookend_rejects_before_reservation_consumption[exe]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_inputs_expire_after_creation_without_resetting_start",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[role]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[context]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[header]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[data]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[foreign_reservation]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[wrong_channel]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_current_bookend_rejects_before_reservation_consumption[source]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_current_bookend_rejects_before_reservation_consumption[environment]"
+    ],
+    "data_a_08": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[anchor_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[broker_identity]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[caller_expectation_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[deadline_profile_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[executable]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[formal_result]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[inherited_sources_pin]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[input_root]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[limits]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[output_mode]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[output_root]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[repo_root]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[resource_admission]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[schema]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[scope]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[stage_seconds]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[authority]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[deadline]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[environment_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[expectation_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[input_pins_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[invocation_started]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[nonce]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[repo_root]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[schema]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[source_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_independent_cross_field_constraints[environment]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_independent_cross_field_constraints[executable]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_independent_cross_field_constraints[caller_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_independent_cross_field_constraints[request_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_independent_cross_field_constraints[deadline_profile]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_independent_cross_field_constraints[broker_kernel]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[req_extra]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[schema]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[full_true]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[limit_bool]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[source_bool]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[broker_bool]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[exe_extra]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[env_alias]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[parent_identity]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[inherited]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[expectation_extra]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_only_checks_declared_time_domain[1000]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_only_checks_declared_time_domain[999.0]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_only_checks_declared_time_domain[nan]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_caps_raw_before_decoding[context_raw-2097152]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_caps_raw_before_decoding[expectation_raw-2097152]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_caps_raw_before_decoding[anchor_raw-8388608]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_caps_raw_before_decoding[deadline_contract_raw-65536]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_canonical_and_fixed_provenance[duplicate]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_canonical_and_fixed_provenance[depth]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_canonical_and_fixed_provenance[not_bytes]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_canonical_and_fixed_provenance[runtime_contract]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_canonical_and_fixed_provenance[request_contract]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_result_all_accessors_recheck_commit[_request_raw]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_result_all_accessors_recheck_commit[basis_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_result_all_accessors_recheck_commit[contract_shas]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_result_all_accessors_recheck_commit[anchor_sha]"
+    ],
+    "data_b_09": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[authority]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[caller_expectation_core]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[deadline]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[environment]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[expectation_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[full_P1_content_verified]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[input_files]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[invocation_started]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[native_authorized]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[output_parent_directories]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[public_P2_execution_enabled]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[request_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[runtime_binding_contract_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[scientific_evidence_adopted]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_context_field[source_pins]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[anchor_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[caller_expectation_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[deadline_profile_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[executable_pin]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[host_identity]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[input_root]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[limits]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[output_root]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[runtime_binding_contract_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_requires_each_request_field[scope]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_independent_cross_field_constraints[source]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_independent_cross_field_constraints[input]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_independent_cross_field_constraints[core]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_independent_cross_field_constraints[expectation_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_independent_cross_field_constraints[runtime_profile]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_independent_cross_field_constraints[start_deadline]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[ctx_extra]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[basis_extra]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[mode]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[gate_true]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[stage_change]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[source_total]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[host_zero]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[exe_python]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[env_value]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[input_alias]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[nonce]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_closed_types_and_domains[expectation_passes]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_only_checks_declared_time_domain[True]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_only_checks_declared_time_domain[1180.01]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_only_checks_declared_time_domain[inf]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_caps_raw_before_decoding[request_raw-32768]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_caps_raw_before_decoding[host_basis_raw-2097152]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_caps_raw_before_decoding[runtime_contract_raw-65536]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_caps_raw_before_decoding[request_contract_raw-65536]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_canonical_and_fixed_provenance[whitespace]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_canonical_and_fixed_provenance[nonfinite]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_canonical_and_fixed_provenance[anchor]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_canonical_and_fixed_provenance[deadline_contract]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_result_all_accessors_recheck_commit[_raw]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_result_all_accessors_recheck_commit[_expectation_raw]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_result_all_accessors_recheck_commit[spec_pin]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_result_all_accessors_recheck_commit[declared_now]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_result_all_accessors_recheck_commit[commit]"
+    ],
+    "data_smoke_07": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_positive_is_immutable_data_with_declared_time",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_version_is_frozen_and_io_is_not_observed",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_successor_static_result_has_no_legacy_role_or_launch_domain"
+    ],
+    "expectation_a_11": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_successor_context_is_rejected_by_all_legacy_entry_points",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_immutable_projection_rejects_drift[image]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[schema]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[caller_core]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[expectation_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[executable_extra]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_double_error_preserves_original_objects",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_unread_same_metadata_content_requires_full_verification[H3]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_gateway_rejects_untyped_or_wrong_phase[held]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_gateway_rejects_untyped_or_wrong_phase[bad_stage]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_input_rejects_mutable_or_identity_drift[raw_snapshot]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_bookend_failure_is_sticky",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_fixed_dependency_rejects_callable_drift[hold_code]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_metadata_rejects_extra_and_hardlinked_files",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_rejects_dependency_and_final_metadata_drift[anchor]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_probe_bookend_keeps_primary_and_final_context_error",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_probe_hold_always_checks_final_context_before_capability[False]"
+    ],
+    "expectation_b_12": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_immutable_projection_rejects_drift[raw]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_immutable_projection_rejects_drift[creator]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[full_P1_content_verified]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[caller_expectation_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[deadline]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_selected_content_mismatch_is_rejected",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_unread_same_metadata_content_requires_full_verification[G0]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_gateway_rejects_untyped_or_wrong_phase[expectation]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_gateway_rejects_untyped_or_wrong_phase[dict]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_input_rejects_mutable_or_identity_drift[held_identity]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_input_rejects_mutable_or_identity_drift[creator]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_fixed_dependency_rejects_callable_drift[hold_function]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_fixed_dependency_rejects_callable_drift[bookend_default]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_rejects_dependency_and_final_metadata_drift[source]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_rejects_dependency_and_final_metadata_drift[metadata_after]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_probe_hold_always_checks_final_context_before_capability[True]"
+    ],
+    "self_rest_20": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_each_state_tamper[_api]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_each_state_tamper[_functions]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_each_state_tamper[_bindings]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_each_state_tamper[creator]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_each_state_tamper[_pending]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_each_state_tamper[_raw]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_each_state_tamper[_phase]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_each_state_tamper[_failure]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_each_state_tamper[_commit]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_native_binding_drift[function]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_native_binding_drift[signature]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_another_python_thread",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_kernel_observation_drift[pid]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_kernel_observation_drift[tid]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_kernel_observation_drift[process_creation_filetime]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_kernel_observation_drift[thread_creation_filetime]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_kernel_observation_drift[image_path]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_kernel_observation_drift[command_line]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_open_failure_closes_only_acquired_handles[process]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_open_failure_closes_only_acquired_handles[thread]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_initial_or_final_query_failure_keeps_primary[1]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_initial_or_final_query_failure_keeps_primary[2]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_close_bookend_failure_still_closes_both",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_cleanup_failure_retains_partial_and_continues[False]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_cleanup_failure_retains_partial_and_continues[True]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_replayed_observation_without_query",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_noop_close_cannot_claim_closed",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_construction_and_cleanup_errors_are_both_retained[thread_open]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_construction_and_cleanup_errors_are_both_retained[first_query]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_uses_exact_query_access_and_current_ids",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_does_not_request_actor_transport_or_filesystem",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_rejects_oversize_raw_and_closes_handles"
+    ],
+    "self_smoke_19": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_observes_real_current_process_and_thread",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_closed_constructor_pickle_and_role_domains"
+    ],
+    "source_expectation_10": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_are_read_once_for_compile_and_freshly_per_call",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_wrong_pin_stops_before_compile",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_late_same_metadata_content_needs_full_final_guard",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_initial_read_keeps_primary_and_independent_final[False]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_initial_read_keeps_primary_and_independent_final[True]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_compile_keeps_primary_and_original_final_guard[False]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_compile_keeps_primary_and_original_final_guard[True]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_raw_budget_rejects_before_retaining_files[aggregate]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_raw_budget_rejects_before_retaining_files[boolean]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_raw_budget_rejects_before_retaining_files[negative]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_projection_has_equal_image_and_distinct_semantics",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_G0_G2_G3_and_H3_use_full_exact_local_inputs"
+    ]
+  },
+  "new_nodes": 34,
+  "pytest_cap_seconds": 240,
+  "regression_nodes": 184,
+  "source_epoch": "d217017c11d0b9c82e67b6300b0b413342da71f23816bf1a74c6d75889b3bbb4",
+  "source_pins": {
+    "configs/staged_deliverability_network_v1.DRAFT.yaml": {
+      "bytes": 915,
+      "sha256": "c6bb0cc30a330fed07a9d0b7f22dea7ce5096f20f1f58a8dc79dddc58059686b"
+    },
+    "configs/staged_deliverability_rts24_v1.DRAFT.yaml": {
+      "bytes": 1531,
+      "sha256": "6897979b6394a20b406031e9bcc8fadf5751c7815c996dc177956535679b7791"
+    },
+    "configs/staged_deliverability_small_case_v1.DRAFT.yaml": {
+      "bytes": 962,
+      "sha256": "5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5"
+    },
+    "docs/plan/staged_deliverability_c_saved_fresh_adoption_scope_budget_v1.md": {
+      "bytes": 23924,
+      "sha256": "a1aa2abdcfdbd15958f703088fa94ed79a17cd830b9f6d5a1571a5f75e6a4a98"
+    },
+    "docs/plan/staged_deliverability_c_saved_journal_check_contract_v1.md": {
+      "bytes": 6068,
+      "sha256": "55beecb99cb591354cd2bf97fb92a23cdac09a122256559cc0d0c79b9b16c356"
+    },
+    "docs/plan/staged_deliverability_c_saved_point_replay_contract_v1.md": {
+      "bytes": 4514,
+      "sha256": "e812bb03355a94187a12837293ec8fce6eab191fe836e9c8c60d63e16d512333"
+    },
+    "docs/plan/staged_deliverability_c_saved_prefix_replay_contract_v1.md": {
+      "bytes": 5933,
+      "sha256": "4b91dd0cf74cdc9a2dab6c9b013d42eff43d9a0133fa6b6b3886cb384d722c57"
+    },
+    "docs/plan/staged_deliverability_c_scientific_adoption_dag_v1.md": {
+      "bytes": 5719,
+      "sha256": "a55856ae0ca9b201ca7fe3c6ddafa842dc047a0ce9732495d66eea5b38495d16"
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py": {
+      "bytes": 298431,
+      "sha256": "474ee2f89fceceb0c2120159c638ec2c49a3a8ece0b598bb535fce5c884a3e76"
+    },
+    "src/__init__.py": {
+      "bytes": 38,
+      "sha256": "ad4caa31a8bd5d534f5c65b38b67a393b740a5efd947988f47e1b55642c4cfc0"
+    },
+    "src/grid/__init__.py": {
+      "bytes": 4412,
+      "sha256": "b2490e8dfc9a5727c475cdca757eeb7606bb1318993dd3d8b14240dbe94467ef"
+    },
+    "src/grid/ac_case.py": {
+      "bytes": 5231,
+      "sha256": "d0c8c8b8d37480a87edc17a3af54b62663dec6e8b9d56ee03e235bae6bb2bb91"
+    },
+    "src/grid/ac_restoration.py": {
+      "bytes": 16475,
+      "sha256": "59ba8af7047048e739f96c094373258bdb2548a6c2003a24939f2f3dfb5e0b74"
+    },
+    "src/grid/ac_validation.py": {
+      "bytes": 7527,
+      "sha256": "7e3488f966c979e103e436971b10996281c77e8c3a505e9103118baf3caf8a71"
+    },
+    "src/grid/chronological_dispatch.py": {
+      "bytes": 24444,
+      "sha256": "71d6c1da0e72942512810c651619c5cd73e915c3ac6d0d52684476d6133658ec"
+    },
+    "src/grid/contingency.py": {
+      "bytes": 6404,
+      "sha256": "7a08c582fe7113b8a43355ff4ab888dd6a334fb2c0e79d5da8cb7f03acfd03fb"
+    },
+    "src/grid/dc_opf.py": {
+      "bytes": 11996,
+      "sha256": "9e118d7e8c59e269274749a144654ea5a400e35c6b1cb371870329ff2601e827"
+    },
+    "src/grid/network_grid_need.py": {
+      "bytes": 37254,
+      "sha256": "ca4ae719c8e1c96d398af6912994937272e31f4a29f7d485c74e0836d2199170"
+    },
+    "src/grid/rts24.py": {
+      "bytes": 6109,
+      "sha256": "8c876b13fdc318ca98ab22309bae1aff0b8e56a12894f9aae98c84ed951eb8b5"
+    },
+    "src/grid/rts_gmlc.py": {
+      "bytes": 36900,
+      "sha256": "4180ab5ce86eb34a9de9e058ff9c56275ace3a6ffab06dbb464d93ef23382448"
+    },
+    "src/grid/rts_gmlc_scuc.py": {
+      "bytes": 82493,
+      "sha256": "1101b21cbdab0cdacd6755578208ce7d28cd3e6e04f932d397119a4dde2b6cfe"
+    },
+    "src/grid/scopf.py": {
+      "bytes": 18944,
+      "sha256": "cdd456ace5f704f31a80fab1c95dba272810cc815ffb6a4c71516e079982eb84"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/__init__.py": {
+      "bytes": 74,
+      "sha256": "23dcf6e6cc99671101ae4e4c05602f5345aae114aa011b89511839c208a33856"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/debt_cohorts.py": {
+      "bytes": 6483,
+      "sha256": "d10497c1e6ab5ff573dec8d938b5407a7e28277551b37a1e0d7f79b4241adaab"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/normal_process.py": {
+      "bytes": 13559,
+      "sha256": "ffc487c05c72d00a7c2e8d7515a29f16a3d0c8ac3f0efa6cdba36bbcea34d44f"
+    },
+    "src/staged_deliverability_development_v1.py": {
+      "bytes": 19642,
+      "sha256": "91bbc6aaaac458c8fcb23c11d830a98af99e1d50d42b3c0489246ec1922109e0"
+    },
+    "src/staged_rts24_audit_v1.py": {
+      "bytes": 13053,
+      "sha256": "ac29e1fe38831b7f37fbd56ab7ceafc8d87a619c5c1ba929004f907e21aab911"
+    },
+    "src/staged_rts24_causal_audit_v2.py": {
+      "bytes": 13435,
+      "sha256": "3344d346efc62b1bef8cbeab470eb3696a9818c4f452465394ab33806baf28d3"
+    },
+    "src/staged_rts24_causal_v1.py": {
+      "bytes": 19309,
+      "sha256": "12950e9f0ac321e7297b66aba42efb9e486e477869d767e40cd841665a7b0ead"
+    },
+    "src/staged_rts24_causal_v2.py": {
+      "bytes": 11081,
+      "sha256": "7d22dba435d3e89bd3062a1bd687a6584bb7ddc29c88b6bd723fa357932d1859"
+    },
+    "src/staged_rts24_child_optimality_v1.py": {
+      "bytes": 8256,
+      "sha256": "27071de638bceee8f6e0631ab44d8a9c3cebdba0c169ccd702c9c3392fcde543"
+    },
+    "src/staged_rts24_development_v1.py": {
+      "bytes": 26764,
+      "sha256": "d0c61bda61bfe4d275d2230533f2ecd74fa4fbf480f358c819f8cb86e1ba7add"
+    },
+    "src/staged_rts24_evidence_store_v1.py": {
+      "bytes": 16709,
+      "sha256": "54a23ba142d12abe0a394437cb6967b0029ed573eddff1b6efb7adbaca7883c6"
+    },
+    "src/staged_rts24_highs_backend_v1.py": {
+      "bytes": 14536,
+      "sha256": "cae8e98941f6d813b96413d67b96acce263997d2197e63ad090cff8f061dbccf"
+    },
+    "src/staged_rts24_journal_v2.py": {
+      "bytes": 30876,
+      "sha256": "5216b58cbaf1d2a2aa26ce00e71f3563bda793b9512dede023a013ef462bdb0e"
+    },
+    "src/staged_rts24_numeric_interface_v1.py": {
+      "bytes": 14093,
+      "sha256": "570cd1e52f5c78c1ee37f589fb28b646f4173dede32600ba3bff8ceeb447ec31"
+    },
+    "src/staged_rts24_p2_outer_observation_v1.py": {
+      "bytes": 10412,
+      "sha256": "8d80e035c2570d279360d67cf6bb93b125970fae81e5c638a396351f8dd78b91"
+    },
+    "src/staged_rts24_p2_outer_observation_v2.py": {
+      "bytes": 14886,
+      "sha256": "256ed39e3efc36578a08f24bb39d7b14ca4b693dbcc94c1dec379fe125266f04"
+    },
+    "src/staged_rts24_p2_package_check_v1.py": {
+      "bytes": 50876,
+      "sha256": "5794f8a35814cb5ad64fb38de2d8591e2e23e3bdb57921f0c84c853627466eb2"
+    },
+    "src/staged_rts24_process_guard_v1.py": {
+      "bytes": 12191,
+      "sha256": "02b6098e9a5b2cb6c2b862c81b9a375ee631e7cbee5e409310905a3ef2512fc2"
+    },
+    "src/staged_rts24_process_guard_v3.py": {
+      "bytes": 6548,
+      "sha256": "d3fe404aa7265c2a479423cd9991a54326c32e4d7b729bfff20f49fd1b2262c4"
+    },
+    "src/staged_rts24_reference_queries_v1.py": {
+      "bytes": 2618,
+      "sha256": "be02760eec2a0d010ec1a2187322edcca14af4774e7e6d0cbf4859a9375adb1a"
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py": {
+      "bytes": 17247,
+      "sha256": "26b919e385f9d7042587db490dab694fc5bf1643665ab4bf94a1c9bac8087396"
+    },
+    "src/staged_rts24_saved_point_replay_v1.py": {
+      "bytes": 16793,
+      "sha256": "f9f723e89bb6513b4ba25c61b427f363652f2be78707d132511f6929f3df95ad"
+    },
+    "src/staged_rts24_saved_prefix_replay_v1.py": {
+      "bytes": 11867,
+      "sha256": "22bee015d89d818b8e76a5f2f44cf3b2618fffe7641e73461e4481bd80738a4c"
+    },
+    "tests/test_staged_rts24_saved_fresh_adoption_v1.py": {
+      "bytes": 198313,
+      "sha256": "abbafff0a43ad501f309ed190eb304c71505abb73aeac6e887e28d170f172326"
+    },
+    "tests/test_staged_rts24_saved_journal_check_v1.py": {
+      "bytes": 12790,
+      "sha256": "6703ec2312a5e0ae8c24e8d1bdbf9922f62e72ae2f3b21430c9d08175abbfcd3"
+    },
+    "tests/test_staged_rts24_saved_point_replay_v1.py": {
+      "bytes": 20869,
+      "sha256": "024fce79bc940bcf0161d087b6fb6664b0531a78237c2954fec4e3605bae481e"
+    },
+    "tests/test_staged_rts24_saved_prefix_replay_v1.py": {
+      "bytes": 21479,
+      "sha256": "f5a629ea776c9c5063aa398eea0315266ea8cb82be4f49f974e08d7e21b2eddf"
+    }
+  },
+  "static_cap_seconds": 60,
+  "total_cap_seconds": 300
+}

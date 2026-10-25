@@ -1,0 +1,45 @@
+{
+  "sources": {
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py": {
+      "added": [
+        "SavedSelfAnchorUnresolved",
+        "SavedSelfProcessAnchor",
+        "_saved_self_api",
+        "_saved_self_checked_api",
+        "_saved_self_close_handle",
+        "_saved_self_creation",
+        "_saved_self_release",
+        "_saved_self_snapshot",
+        "_saved_self_state",
+        "open_saved_self_anchor"
+      ],
+      "all_unchanged": true,
+      "previous_definitions": 190
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py": {
+      "added": [],
+      "all_unchanged": true,
+      "previous_definitions": 16
+    },
+    "tests/test_staged_rts24_saved_fresh_adoption_v1.py": {
+      "added": [
+        "_assert_self_handle_closed",
+        "_independent_self_api",
+        "test_saved_self_anchor_cleanup_failure_retains_partial_and_continues",
+        "test_saved_self_anchor_close_bookend_failure_still_closes_both",
+        "test_saved_self_anchor_closed_constructor_pickle_and_role_domains",
+        "test_saved_self_anchor_initial_or_final_query_failure_keeps_primary",
+        "test_saved_self_anchor_observes_real_current_process_and_thread",
+        "test_saved_self_anchor_open_failure_closes_only_acquired_handles",
+        "test_saved_self_anchor_rejects_another_python_thread",
+        "test_saved_self_anchor_rejects_each_state_tamper",
+        "test_saved_self_anchor_rejects_kernel_observation_drift",
+        "test_saved_self_anchor_rejects_native_binding_drift",
+        "test_saved_self_anchor_rejects_oversize_raw_and_closes_handles"
+      ],
+      "all_unchanged": true,
+      "previous_definitions": 211
+    }
+  },
+  "unchanged_dependencies": 47
+}

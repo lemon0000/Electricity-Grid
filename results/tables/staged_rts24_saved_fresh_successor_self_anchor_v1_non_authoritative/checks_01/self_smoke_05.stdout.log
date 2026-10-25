@@ -1,0 +1,72 @@
+F
+================================== FAILURES ===================================
+_______ test_saved_self_anchor_observes_real_current_process_and_thread _______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024EFB3E7F80>
+
+    def test_saved_self_anchor_observes_real_current_process_and_thread(monkeypatch):
+        import ctypes
+        from ctypes import wintypes
+        import os
+        import threading
+>       anchor=cli.open_saved_self_anchor();handles=anchor._pending;api=_independent_self_api()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:3074: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:4618: in open_saved_self_anchor
+    _saved_self_state(anchor,'opening',(None,None))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:4576: in _saved_self_state
+    object.__setattr__(anchor,'_failure',failure); object.__setattr__(anchor,'_commit',digest(anchor._image()))
+                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:62: in digest
+    return sha256(canonical(value)).hexdigest()
+                  ^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:58: in canonical
+    return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Miniconda3\envs\compute\Lib\json\__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+D:\Miniconda3\envs\compute\Lib\json\encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Miniconda3\envs\compute\Lib\json\encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <json.encoder.JSONEncoder object at 0x0000024EFFE1E5A0>, o = b'null'
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type bytes is not JSON serializable
+
+D:\Miniconda3\envs\compute\Lib\json\encoder.py:180: TypeError
+============================ slowest 10 durations =============================
+
+(3 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_observes_real_current_process_and_thread
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed in 3.27s
+ORDINARY_HARNESS {"P1_write_attempts": 0, "actual_F_write_attempts": 0, "blocked_lscpu": 1, "native_owner_attempts": 0, "optional_Popen_attempts": 1, "unexpected_process_attempts": 0}

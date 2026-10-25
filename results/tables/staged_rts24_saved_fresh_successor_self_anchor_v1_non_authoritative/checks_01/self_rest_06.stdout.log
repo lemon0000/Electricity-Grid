@@ -1,0 +1,26 @@
+......................F
+================================== FAILURES ===================================
+_______ test_saved_self_anchor_close_bookend_failure_still_closes_both ________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000181459CFF50>
+
+    def test_saved_self_anchor_close_bookend_failure_still_closes_both(monkeypatch):
+        anchor=cli.open_saved_self_anchor();handles=anchor._pending;calls=[];api=_independent_self_api()
+        def query(value):calls.append(value);return json.loads(anchor._raw)['observation']
+        monkeypatch.setattr(cli,'_saved_self_snapshot',query)
+        with pytest.raises(ValueError,match='query callable'):anchor.close()
+>       assert not calls and anchor._phase=='closed' and anchor._pending==(None,None)
+E       AssertionError: assert (not [] and 'live' == 'closed'
+E         
+E         - closed
+E         + live)
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:3199: AssertionError
+============================ slowest 10 durations =============================
+
+(10 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_self_anchor_close_bookend_failure_still_closes_both
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 22 passed in 4.98s
+ORDINARY_HARNESS {"P1_write_attempts": 0, "actual_F_write_attempts": 0, "blocked_lscpu": 1, "native_owner_attempts": 0, "optional_Popen_attempts": 1, "unexpected_process_attempts": 0}

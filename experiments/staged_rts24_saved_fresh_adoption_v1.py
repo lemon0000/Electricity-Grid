@@ -4445,6 +4445,197 @@ def validate_saved_successor_data(context_raw, request_raw, *, expectation_raw, 
     return result.entry()
 
 
+def _saved_self_api():
+    require(os.name == 'nt', 'Windows self identity required')
+    api = C.WinDLL('kernel32', use_last_error=True)
+    definitions = {
+        'GetCurrentProcessId': ((), W.DWORD), 'GetCurrentThreadId': ((), W.DWORD),
+        'OpenProcess': ((W.DWORD,W.BOOL,W.DWORD), W.HANDLE),
+        'OpenThread': ((W.DWORD,W.BOOL,W.DWORD), W.HANDLE),
+        'GetProcessId': ((W.HANDLE,), W.DWORD), 'GetThreadId': ((W.HANDLE,), W.DWORD),
+        'GetProcessIdOfThread': ((W.HANDLE,), W.DWORD),
+        'GetProcessTimes': ((W.HANDLE,)+(C.POINTER(W.FILETIME),)*4, W.BOOL),
+        'GetThreadTimes': ((W.HANDLE,)+(C.POINTER(W.FILETIME),)*4, W.BOOL),
+        'QueryFullProcessImageNameW': ((W.HANDLE,W.DWORD,W.LPWSTR,C.POINTER(W.DWORD)), W.BOOL),
+        'GetCommandLineW': ((), W.LPWSTR),
+        'GetHandleInformation': ((W.HANDLE,C.POINTER(W.DWORD)), W.BOOL),
+        'CloseHandle': ((W.HANDLE,), W.BOOL),
+    }
+    functions = []
+    for name,(args,result) in definitions.items():
+        function = getattr(api,name); function.argtypes, function.restype = list(args),result
+        functions.append((name,function,args,result))
+    return api,tuple(functions)
+
+
+def _saved_self_checked_api(anchor):
+    require(type(anchor._api) is C.WinDLL, 'original self kernel DLL required')
+    for name,function,args,result in anchor._functions:
+        require(getattr(anchor._api,name) is function and tuple(function.argtypes) == args
+            and function.restype is result, 'self kernel function/signature changed')
+    return anchor._api
+
+
+def _saved_self_creation(function,handle):
+    created,ended,kernel,user = (W.FILETIME() for _ in range(4))
+    _native(function(handle,C.byref(created),C.byref(ended),C.byref(kernel),C.byref(user)))
+    value = created.dwLowDateTime | created.dwHighDateTime << 32
+    require(0 < value < 2**64, 'self creation time unavailable')
+    return value
+
+
+def _saved_self_snapshot(anchor):
+    api = _saved_self_checked_api(anchor)
+    pid,tid = _native(api.GetCurrentProcessId()),_native(api.GetCurrentThreadId())
+    require(anchor.creator == (pid,get_ident(),tid), 'creating self process/thread required')
+    process,thread = anchor._pending
+    require(type(process) is type(thread) is int and 0 < process != thread > 0
+        and api.GetProcessId(process) == api.GetProcessIdOfThread(thread) == pid
+        and api.GetThreadId(thread) == tid, 'retained self HANDLE identity differs')
+    for handle in (process,thread):
+        flags = W.DWORD(); _native(api.GetHandleInformation(handle,C.byref(flags)))
+        require(not flags.value & 1, 'self query HANDLE inherited')
+    image = C.create_unicode_buffer(32768); count = W.DWORD(len(image))
+    _native(api.QueryFullProcessImageNameW(process,0,image,C.byref(count)))
+    require(0 < count.value < len(image) and len(image.value) == count.value
+        and Path(image.value).is_absolute(), 'self kernel image unavailable')
+    command = api.GetCommandLineW()
+    require(type(command) is str and command and '\0' not in command
+        and len(command.encode('utf-16-le')) < 65536, 'self OS command line unavailable')
+    return dict(pid=pid,tid=tid,process_creation_filetime=_saved_self_creation(api.GetProcessTimes,process),
+        thread_creation_filetime=_saved_self_creation(api.GetThreadTimes,thread),
+        image_path=image.value,command_line=command)
+
+
+class SavedSelfAnchorUnresolved(Exception):
+    def __init__(self,anchor,primary,cleanup_errors):
+        self.anchor,self.primary,self.cleanup_errors = anchor,primary,tuple(cleanup_errors)
+        super().__init__('self HANDLE cleanup remains unresolved')
+    def __reduce__(self): raise TypeError('unresolved self HANDLE state cannot be serialized')
+
+
+@dataclass(frozen=True,init=False,eq=False,repr=False)
+class SavedSelfProcessAnchor:
+    """Current self query HANDLEs; not an upstream, role, owner or input capability."""
+    _api: object
+    _functions: tuple
+    _bindings: tuple
+    creator: tuple
+    _pending: tuple
+    _raw: bytes
+    _phase: str
+    _failure: object
+    _commit: str
+
+    def __new__(cls,*args,**kwargs): raise TypeError('self anchor requires current kernel observations')
+
+    def _image(self):
+        return (id(self._api),self._api._handle,
+            tuple((name,id(fn),tuple(map(id,args)),id(result)) for name,fn,args,result in self._functions),
+            tuple((name,id(fn),id(code),id(defaults),pin(kw),id(closure),cells)
+                for name,fn,code,defaults,kw,closure,cells in self._bindings),
+            self.creator,self._pending,pin(self._raw),self._phase,id(self._failure))
+
+    def _immutable_entry(self,*,check_query=True):
+        require(type(self) is SavedSelfProcessAnchor and self.creator[:2] == (os.getpid(),get_ident())
+            and type(self._pending) is tuple and len(self._pending) == 2
+            and type(self._raw) is bytes and len(self._raw) <= 131072
+            and self._commit == digest(self._image()), 'immutable creating self anchor required')
+        if check_query:
+            for name,fn,code,defaults,kw,closure,cells in self._bindings:
+                require(globals().get(name) is fn and fn.__code__ is code and fn.__defaults__ is defaults
+                    and canonical(fn.__kwdefaults__) == kw and fn.__closure__ is closure
+                    and tuple(id(cell.cell_contents) for cell in closure or ()) == cells,
+                    'self query callable changed')
+        return self
+
+    def entry(self):
+        self._immutable_entry(); require(self._phase == 'live', 'self anchor is not live')
+        value = parse(self._raw)
+        require(canonical(_saved_self_snapshot(self)) == canonical(value['observation']), 'self kernel bookend differs')
+        return self
+
+    @property
+    def raw(self): self.entry(); return self._raw
+
+    def close(self):
+        self._immutable_entry(check_query=False)
+        if self._phase == 'closed': return
+        if self._phase == 'unresolved':
+            raise SavedSelfAnchorUnresolved(self,*self._failure) from self._failure[0]
+        require(self._phase == 'live', 'self construction is incomplete')
+        primary = None
+        try: self.entry()
+        except BaseException as error: primary = error
+        _saved_self_release(self,primary)
+
+    def __reduce__(self): raise TypeError('retained self HANDLEs cannot be serialized')
+
+
+def _saved_self_state(anchor,phase,pending,*,failure=None):
+    object.__setattr__(anchor,'_phase',phase); object.__setattr__(anchor,'_pending',tuple(pending))
+    object.__setattr__(anchor,'_failure',failure); object.__setattr__(anchor,'_commit',digest(anchor._image()))
+
+
+def _saved_self_close_handle(function,handle):
+    require(tuple(function.argtypes) == (W.HANDLE,) and function.restype is W.BOOL,
+        'self close function signature changed')
+    _native(function(handle))
+
+
+def _saved_self_release(anchor,primary):
+    pending = list(anchor._pending); errors = []
+    closer = next(fn for name,fn,_,_ in anchor._functions if name == 'CloseHandle')
+    information = next(fn for name,fn,_,_ in anchor._functions if name == 'GetHandleInformation')
+    for index in (1,0):
+        handle = pending[index]
+        if handle is None: continue
+        try:
+            _saved_self_close_handle(closer,handle)
+            require(tuple(information.argtypes) == (W.HANDLE,C.POINTER(W.DWORD)) and information.restype is W.BOOL,
+                'self close witness signature changed')
+            flags = W.DWORD(); C.set_last_error(0)
+            still_valid = information(handle,C.byref(flags)); error = C.get_last_error()
+            require(not still_valid and error == 6, 'self HANDLE close is not confirmed')
+            pending[index] = None
+        except BaseException as error: errors.append(('thread' if index else 'process',error))
+    _saved_self_state(anchor,'unresolved' if errors else 'closed',pending,
+        failure=(primary,tuple(errors)) if errors else None)
+    if errors: raise SavedSelfAnchorUnresolved(anchor,primary,errors) from primary
+    if primary is not None: raise primary
+
+
+def open_saved_self_anchor():
+    """Open only current self query handles; never starts a role or imports science."""
+    api,functions = _saved_self_api(); anchor = object.__new__(SavedSelfProcessAnchor)
+    creator = (_native(api.GetCurrentProcessId()),get_ident(),_native(api.GetCurrentThreadId()))
+    bindings = []
+    for name in ('_saved_self_snapshot','_saved_self_checked_api','_saved_self_creation','_native'):
+        fn = globals()[name]
+        bindings.append((name,fn,fn.__code__,fn.__defaults__,canonical(fn.__kwdefaults__),fn.__closure__,
+            tuple(id(cell.cell_contents) for cell in fn.__closure__ or ())))
+    for name,value in dict(_api=api,_functions=functions,_bindings=tuple(bindings),creator=creator,_raw=b'').items():
+        object.__setattr__(anchor,name,value)
+    _saved_self_state(anchor,'opening',(None,None))
+    try:
+        process = _native(api.OpenProcess(0x1000,False,creator[0]))
+        _saved_self_state(anchor,'opening',(process,None))
+        thread = _native(api.OpenThread(0x0800,False,creator[2]))
+        _saved_self_state(anchor,'opening',(process,thread))
+        anchor._immutable_entry()
+        observation = _saved_self_snapshot(anchor)
+        raw = canonical(dict(schema='staged_saved_F_self_process_anchor_development_v1',
+            authority='DRAFT_NONAUTHORITATIVE',scope='current_process_thread_query_only',
+            observation=observation,query_process_access=0x1000,query_thread_access=0x0800,
+            local_self_handles_observed=True,role_bootstrap_verified=False,external_owner_verified=False,
+            full_runtime_closure_verified=False,full_P1_content_verified=False,run_authority=False,F_launch_admitted=False,**GATES))
+        require(len(raw) <= 131072, 'self observation raw cap')
+        object.__setattr__(anchor,'_raw',raw); _saved_self_state(anchor,'live',(process,thread))
+        return anchor.entry()
+    except BaseException as primary:
+        _saved_self_release(anchor,primary)
+
+
 if __name__ == '__main__':
     if sys.argv[1:2] == ['--ordinary-entry']: _ordinary_file_dispatch(sys.argv[1:])
     else: raise SystemExit('Saved F role execution and trusted invocation remain draft. F launch remains disabled.')

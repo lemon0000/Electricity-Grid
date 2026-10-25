@@ -3042,3 +3042,307 @@ def test_saved_successor_static_result_has_no_legacy_role_or_launch_domain(saved
         lambda:cli.construct_saved_stage(result,None),lambda:cli._construct_saved_stage_for_test(result)):
         with pytest.raises((ValueError,TypeError)):operation()
     assert not cli.OUTPUT.parent.exists()
+
+
+def _independent_self_api():
+    import ctypes
+    from ctypes import wintypes
+    api=ctypes.WinDLL('kernel32',use_last_error=True)
+    signatures=dict(GetProcessId=([wintypes.HANDLE],wintypes.DWORD),
+        GetThreadId=([wintypes.HANDLE],wintypes.DWORD),GetProcessIdOfThread=([wintypes.HANDLE],wintypes.DWORD),
+        GetHandleInformation=([wintypes.HANDLE,ctypes.POINTER(wintypes.DWORD)],wintypes.BOOL),
+        GetProcessTimes=([wintypes.HANDLE]+[ctypes.POINTER(wintypes.FILETIME)]*4,wintypes.BOOL),
+        GetThreadTimes=([wintypes.HANDLE]+[ctypes.POINTER(wintypes.FILETIME)]*4,wintypes.BOOL),
+        GetCommandLineW=([],wintypes.LPWSTR),CloseHandle=([wintypes.HANDLE],wintypes.BOOL))
+    for name,(args,result) in signatures.items():
+        function=getattr(api,name);function.argtypes,function.restype=args,result
+    return api
+
+
+def _assert_self_handle_closed(api,handle):
+    import ctypes
+    from ctypes import wintypes
+    flags=wintypes.DWORD();ctypes.set_last_error(0)
+    assert api.GetHandleInformation(handle,ctypes.byref(flags))==0 and ctypes.get_last_error()==6
+
+
+def test_saved_self_anchor_observes_real_current_process_and_thread(monkeypatch):
+    import ctypes
+    from ctypes import wintypes
+    import os
+    import threading
+    anchor=cli.open_saved_self_anchor();handles=anchor._pending;api=_independent_self_api()
+    try:
+        raw=anchor.raw;value=json.loads(raw);observed=value['observation'];process,thread=handles
+        assert observed['pid']==os.getpid()==api.GetProcessId(process)==api.GetProcessIdOfThread(thread)
+        assert observed['tid']==threading.get_native_id()==api.GetThreadId(thread)
+        assert Path(observed['image_path']).samefile(sys.executable)
+        assert observed['command_line']==api.GetCommandLineW()
+        for name,handle in [('process',process),('thread',thread)]:
+            times=[wintypes.FILETIME() for _ in range(4)]
+            assert getattr(api,'Get'+name.title()+'Times')(handle,*[ctypes.byref(v) for v in times])
+            assert observed[name+'_creation_filetime']==times[0].dwLowDateTime+(times[0].dwHighDateTime<<32)
+            flags=wintypes.DWORD();assert api.GetHandleInformation(handle,ctypes.byref(flags)) and flags.value&1==0
+        assert value['local_self_handles_observed'] is True
+        assert all(v is False for k,v in value.items() if k.endswith(('_verified','_authorized','_admission','_result','_adopted','_enabled','_authority','_admitted')))
+        with monkeypatch.context() as scoped:
+            scoped.setattr(sys,'argv',['different']);scoped.setattr(sys,'orig_argv',['different'])
+            assert anchor.raw==raw
+    finally:anchor.close()
+    assert anchor._phase=='closed' and anchor._pending==(None,None)
+    for handle in handles:_assert_self_handle_closed(api,handle)
+
+
+def test_saved_self_anchor_closed_constructor_pickle_and_role_domains():
+    import pickle
+    with pytest.raises(TypeError):cli.SavedSelfProcessAnchor()
+    anchor=cli.open_saved_self_anchor();handles=anchor._pending;api=_independent_self_api()
+    try:
+        with pytest.raises(TypeError):pickle.dumps(anchor)
+        for operation in (lambda:cli.validate_context(json.loads(anchor.raw)),
+            lambda:cli.RoleStore(anchor,'0'*64,'0'*64),lambda:cli.construct_saved_stage(anchor,None)):
+            with pytest.raises((TypeError,ValueError)):operation()
+    finally:anchor.close()
+    anchor.close()
+    with pytest.raises(ValueError):anchor.entry()
+    with pytest.raises(ValueError):_ = anchor.raw
+    for handle in handles:_assert_self_handle_closed(api,handle)
+
+
+@pytest.mark.parametrize('field',['_api','_functions','_bindings','creator','_pending','_raw','_phase','_failure','_commit'])
+def test_saved_self_anchor_rejects_each_state_tamper(field):
+    from types import SimpleNamespace
+    anchor=cli.open_saved_self_anchor();original=getattr(anchor,field)
+    replacement={'_api':SimpleNamespace(_handle=anchor._api._handle),'_functions':(),'_bindings':(),
+        'creator':(0,0,0),'_pending':(None,None),'_raw':b'{}','_phase':'closed','_failure':object(),'_commit':'0'*64}[field]
+    try:
+        object.__setattr__(anchor,field,replacement)
+        with pytest.raises(ValueError):anchor.entry()
+    finally:
+        object.__setattr__(anchor,field,original);anchor.close()
+
+
+@pytest.mark.parametrize('fault',['function','signature'])
+def test_saved_self_anchor_rejects_native_binding_drift(fault):
+    anchor=cli.open_saved_self_anchor();function=anchor._api.GetProcessId;args=function.argtypes
+    try:
+        if fault=='function':anchor._api.GetProcessId=lambda *args:0
+        else:function.argtypes=[]
+        with pytest.raises(ValueError,match='function/signature'):anchor.entry()
+    finally:
+        anchor._api.GetProcessId=function;function.argtypes=args;anchor.close()
+
+
+def test_saved_self_anchor_rejects_another_python_thread():
+    import threading
+    anchor=cli.open_saved_self_anchor();errors=[]
+    def attempted():
+        try:anchor.entry()
+        except BaseException as error:errors.append(error)
+    thread=threading.Thread(target=attempted)
+    try:
+        thread.start();thread.join(2)
+        assert not thread.is_alive() and len(errors)==1 and type(errors[0]) is ValueError
+        anchor.entry()
+    finally:anchor.close()
+
+
+@pytest.mark.parametrize('field',['pid','tid','process_creation_filetime','thread_creation_filetime','image_path','command_line'])
+def test_saved_self_anchor_rejects_kernel_observation_drift(monkeypatch,field):
+    anchor=cli.open_saved_self_anchor();original=cli._saved_self_snapshot
+    def changed(value):
+        result=original(value);result[field]=result[field]+1 if type(result[field]) is int else result[field]+' changed'
+        return result
+    try:
+        with monkeypatch.context() as scoped:
+            scoped.setattr(cli,'_saved_self_snapshot',changed)
+            with pytest.raises(ValueError,match='query callable'):anchor.entry()
+    finally:anchor.close()
+
+
+@pytest.mark.parametrize('stage',['process','thread'])
+def test_saved_self_anchor_open_failure_closes_only_acquired_handles(monkeypatch,stage):
+    factory=cli._saved_self_api;api_check=_independent_self_api();opened=[];primary=OSError('self open '+stage)
+    def api_factory():
+        api,functions=factory();original_process=api.OpenProcess
+        def process(*args):
+            if stage=='process':raise primary
+            handle=original_process(*args);opened.append(handle);return handle
+        def thread(*args):raise primary
+        api.OpenProcess=process;api.OpenThread=thread
+        return api,functions
+    monkeypatch.setattr(cli,'_saved_self_api',api_factory)
+    with pytest.raises(OSError) as error:cli.open_saved_self_anchor()
+    assert error.value is primary and len(opened)==(1 if stage=='thread' else 0)
+    for handle in opened:_assert_self_handle_closed(api_check,handle)
+
+
+@pytest.mark.parametrize('fail_at',[1,2])
+def test_saved_self_anchor_initial_or_final_query_failure_keeps_primary(monkeypatch,fail_at):
+    original=cli._saved_self_snapshot;seen=[];primary=OSError('self query failure');api=_independent_self_api()
+    def query(anchor):
+        seen.append((anchor,anchor._pending));result=original(anchor)
+        if len(seen)==fail_at:raise primary
+        return result
+    monkeypatch.setattr(cli,'_saved_self_snapshot',query)
+    with pytest.raises(OSError) as error:cli.open_saved_self_anchor()
+    assert error.value is primary and len(seen)==fail_at
+    anchor,handles=seen[0];assert anchor._phase=='closed' and anchor._pending==(None,None)
+    for handle in handles:_assert_self_handle_closed(api,handle)
+
+
+def test_saved_self_anchor_close_bookend_failure_still_closes_both(monkeypatch):
+    anchor=cli.open_saved_self_anchor();handles=anchor._pending;calls=[];api=_independent_self_api()
+    def query(value):calls.append(value);return json.loads(anchor._raw)['observation']
+    monkeypatch.setattr(cli,'_saved_self_snapshot',query)
+    with pytest.raises(ValueError,match='query callable'):anchor.close()
+    assert not calls and anchor._phase=='closed' and anchor._pending==(None,None)
+    for handle in handles:_assert_self_handle_closed(api,handle)
+
+
+@pytest.mark.parametrize('with_primary',[False,True])
+def test_saved_self_anchor_cleanup_failure_retains_partial_and_continues(monkeypatch,with_primary):
+    import pickle
+    original_close=cli._saved_self_close_handle
+    anchor=cli.open_saved_self_anchor();process,thread=anchor._pending;api=_independent_self_api();calls=[]
+    cleanup=OSError('thread close blocked')
+    def close(function,handle):
+        calls.append(handle)
+        if handle==thread:raise cleanup
+        original_close(function,handle)
+    try:
+        with monkeypatch.context() as scoped:
+            scoped.setattr(cli,'_saved_self_close_handle',close)
+            if with_primary:scoped.setattr(anchor._api,'GetProcessId',lambda *args:0)
+            with pytest.raises(cli.SavedSelfAnchorUnresolved) as error:anchor.close()
+            unresolved=error.value
+            assert unresolved.anchor is anchor and unresolved.cleanup_errors==(('thread',cleanup),)
+            assert type(unresolved.primary) is ValueError if with_primary else unresolved.primary is None
+            assert anchor._pending==(None,thread) and anchor._phase=='unresolved' and calls==[thread,process]
+            with pytest.raises(ValueError):anchor.entry()
+            with pytest.raises(TypeError):pickle.dumps(unresolved)
+            with pytest.raises(cli.SavedSelfAnchorUnresolved):anchor.close()
+            assert calls==[thread,process]
+        _assert_self_handle_closed(api,process)
+    finally:
+        # Explicit test-only recovery after restoring the real API. The
+        # unresolved object remains poisoned; it does not claim a closed state.
+        assert api.GetThreadId(thread)==anchor.creator[2] and api.GetProcessIdOfThread(thread)==anchor.creator[0]
+        assert api.CloseHandle(thread)
+    _assert_self_handle_closed(api,thread)
+
+
+def test_saved_self_anchor_rejects_replayed_observation_without_query(monkeypatch):
+    anchor=cli.open_saved_self_anchor();record=json.loads(anchor.raw)['observation'];calls=[]
+    def replay(value):calls.append(value);return record
+    try:
+        with monkeypatch.context() as scoped:
+            scoped.setattr(cli,'_saved_self_snapshot',replay)
+            with pytest.raises(ValueError,match='query callable'):anchor.entry()
+            with pytest.raises(ValueError,match='query callable'):_ = anchor.raw
+        assert calls==[]
+    finally:anchor.close()
+
+
+def test_saved_self_anchor_noop_close_cannot_claim_closed(monkeypatch):
+    anchor=cli.open_saved_self_anchor();handles=anchor._pending;api=_independent_self_api();calls=[]
+    def noop(function,handle):calls.append(handle)
+    try:
+        with monkeypatch.context() as scoped:
+            scoped.setattr(cli,'_saved_self_close_handle',noop)
+            with pytest.raises(cli.SavedSelfAnchorUnresolved) as error:anchor.close()
+            assert error.value.primary is None and len(error.value.cleanup_errors)==2
+            assert anchor._phase=='unresolved' and anchor._pending==handles and calls==list(reversed(handles))
+            with pytest.raises(cli.SavedSelfAnchorUnresolved):anchor.close()
+            assert calls==list(reversed(handles))
+    finally:
+        process,thread=handles
+        assert api.GetProcessId(process)==api.GetProcessIdOfThread(thread)==anchor.creator[0]
+        assert api.GetThreadId(thread)==anchor.creator[2]
+        for handle in reversed(handles):assert api.CloseHandle(handle)
+    for handle in handles:_assert_self_handle_closed(api,handle)
+
+
+@pytest.mark.parametrize('stage',['thread_open','first_query'])
+def test_saved_self_anchor_construction_and_cleanup_errors_are_both_retained(monkeypatch,stage):
+    factory=cli._saved_self_api;query=cli._saved_self_snapshot;close=cli._saved_self_close_handle
+    primary=OSError('construction primary');secondary=OSError('construction cleanup');seen=[];calls=[];api_check=_independent_self_api()
+    def api_factory():
+        api,functions=factory();process=api.OpenProcess
+        def opened(*args):
+            handle=process(*args);seen.append(handle);return handle
+        def failed(*args):raise primary
+        if stage=='thread_open':api.OpenProcess=opened;api.OpenThread=failed
+        return api,functions
+    def failed_query(anchor):
+        query(anchor);seen.extend(anchor._pending);raise primary
+    def failed_close(function,handle):
+        calls.append(handle)
+        if handle==seen[0]:raise secondary
+        close(function,handle)
+    anchor=None
+    try:
+        with monkeypatch.context() as scoped:
+            scoped.setattr(cli,'_saved_self_api',api_factory);scoped.setattr(cli,'_saved_self_close_handle',failed_close)
+            if stage=='first_query':scoped.setattr(cli,'_saved_self_snapshot',failed_query)
+            with pytest.raises(cli.SavedSelfAnchorUnresolved) as error:cli.open_saved_self_anchor()
+            unresolved=error.value;anchor=unresolved.anchor
+            assert unresolved.primary is primary and unresolved.cleanup_errors==(('process',secondary),)
+            assert anchor._phase=='unresolved' and anchor._pending==(seen[0],None)
+            assert calls==list(reversed(seen))
+            with pytest.raises(cli.SavedSelfAnchorUnresolved):anchor.close()
+            assert calls==list(reversed(seen))
+        if stage=='first_query':_assert_self_handle_closed(api_check,seen[1])
+    finally:
+        if anchor is not None:
+            assert api_check.GetProcessId(seen[0])==anchor.creator[0]
+            assert api_check.CloseHandle(seen[0])
+    for handle in seen:_assert_self_handle_closed(api_check,handle)
+
+
+def test_saved_self_anchor_uses_exact_query_access_and_current_ids(monkeypatch):
+    import os
+    import threading
+    factory=cli._saved_self_api;calls=[]
+    def api_factory():
+        api,functions=factory();changed={}
+        for name,fn,args,result in functions:
+            if name not in ('OpenProcess','OpenThread'):continue
+            def traced(*values,_name=name,_fn=fn):
+                calls.append((_name,values));return _fn(*values)
+            traced.argtypes,traced.restype=list(args),result
+            setattr(api,name,traced);changed[name]=traced
+        return api,tuple((name,changed.get(name,fn),args,result) for name,fn,args,result in functions)
+    monkeypatch.setattr(cli,'_saved_self_api',api_factory)
+    anchor=cli.open_saved_self_anchor()
+    try:assert calls==[('OpenProcess',(0x1000,False,os.getpid())),('OpenThread',(0x0800,False,threading.get_native_id()))]
+    finally:anchor.close()
+
+
+def test_saved_self_anchor_does_not_request_actor_transport_or_filesystem(monkeypatch):
+    import builtins
+    def denied(*args,**kwargs):raise AssertionError('self anchor requested an actor, transport or filesystem effect')
+    original=builtins.__import__;calls=[]
+    def imports(name,*args,**kwargs):
+        if name.startswith(('src','pyomo','highspy')):calls.append(name);denied()
+        return original(name,*args,**kwargs)
+    with monkeypatch.context() as scoped:
+        scoped.setattr(builtins,'__import__',imports);scoped.setattr(cli.subprocess,'Popen',denied)
+        scoped.setattr(sys.modules['src.staged_rts24_process_guard_v1'].OwnedChild,'__init__',denied)
+        scoped.setattr(f.prefix.point.backend,'make_model',denied);scoped.setattr(f.prefix.point.backend,'call_highs',denied)
+        for name in ('create','attach'):scoped.setattr(cli.StageChannel,name,denied)
+        scoped.setattr(Path,'mkdir',denied);scoped.setattr(Path,'open',denied);scoped.setattr(cli.os,'mkdir',denied)
+        anchor=cli.open_saved_self_anchor()
+        try:assert anchor.entry() is anchor
+        finally:anchor.close()
+    assert calls==[]
+
+
+def test_saved_self_anchor_rejects_oversize_raw_and_closes_handles(monkeypatch):
+    original=cli._saved_self_snapshot;seen=[];api=_independent_self_api()
+    def query(anchor):
+        seen.append((anchor,anchor._pending));result=original(anchor);result['command_line']='x'*131073;return result
+    monkeypatch.setattr(cli,'_saved_self_snapshot',query)
+    with pytest.raises(ValueError,match='raw cap'):cli.open_saved_self_anchor()
+    anchor,handles=seen[0];assert anchor._phase=='closed' and anchor._pending==(None,None)
+    for handle in handles:_assert_self_handle_closed(api,handle)

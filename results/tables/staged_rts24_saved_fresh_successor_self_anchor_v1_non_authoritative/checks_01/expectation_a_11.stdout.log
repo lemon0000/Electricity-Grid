@@ -1,0 +1,15 @@
+EXPECTATION_READ_PROOF {"F_launch_admitted":false,"actual_saved_F_execution":false,"expectation_image_sha":"079bccb1dfe1992c03f8cf28ccc8e67deb495e5855cd6ba53ebfefa6e09f7a8c","full_P1_content_verified":false,"full_content_reads":683,"metadata_passes":2,"selected_content_reads":53}
+.................
+============================ slowest 10 durations =============================
+4.23s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_bookend_failure_is_sticky
+3.98s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_probe_bookend_keeps_primary_and_final_context_error
+3.45s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_unread_same_metadata_content_requires_full_verification[H3]
+2.62s setup    tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_successor_context_is_rejected_by_all_legacy_entry_points
+2.60s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_input_rejects_mutable_or_identity_drift[raw_snapshot]
+2.49s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_probe_hold_always_checks_final_context_before_capability[False]
+0.94s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_successor_context_is_rejected_by_all_legacy_entry_points
+0.61s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[caller_core]
+0.61s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_double_error_preserves_original_objects
+0.57s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[executable_extra]
+17 passed in 27.02s
+ORDINARY_HARNESS {"P1_write_attempts": 0, "actual_F_write_attempts": 0, "blocked_lscpu": 1, "native_owner_attempts": 0, "optional_Popen_attempts": 1, "unexpected_process_attempts": 0}
