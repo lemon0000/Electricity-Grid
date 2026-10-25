@@ -46,6 +46,7 @@ STAGE_SECONDS = dict(prepare=10, parent=45, fresh=40, inner_quiesce=5, inner_ter
 GATES = dict(native_authorized=False, resource_admission=False, formal_result=False,
     scientific_evidence_adopted=False, public_P2_execution_enabled=False)
 _DIRECT_BOOTSTRAP = None
+_SAVED_BOOTSTRAP = None
 
 
 def require(value, message):
@@ -244,33 +245,28 @@ def make_context(output_root, *, started):
     return raw
 
 
-def argv_for(role, context_raw, context_sha):
-    require(role in ('supervise', 'parent', 'fresh'), 'unknown saved F role')
+def argv_for(role, context_raw, context_sha, *, tree_sha, channel_name, channel_nonce):
+    require(role in ('parent', 'fresh'), 'saved supervise requires a separate trusted invocation')
     context = check_context(context_raw, context_sha)
-    output = Path(context['output_root'])
-    args = [str(EXE), '-B', '-s', str(ROOT/NEW_SOURCES[1]), '--'+role,
-        '--context', str(output/'context.json'), '--context-sha', context_sha]
-    if role != 'supervise':
-        target = output/('worker' if role == 'parent' else 'worker/fresh')
-        args += ['--input-root', str(P1), '--output-root', str(target)]
-    return args
+    return _saved_file_tokens(role, str(Path(context['output_root'])/'context.json'), context_sha,
+        tree_sha, channel_name, channel_nonce)
 
 
 def validate_actual_entry(role, context_raw, context_sha):
-    expected = argv_for(role, context_raw, context_sha)
-    main = sys.modules.get('__main__')
-    require(main is not None and type(getattr(main, '__file__', None)) is str
-        and Path(main.__file__).absolute() == ROOT/NEW_SOURCES[1]
-        and list(sys.argv) == expected[3:], 'actual role entry/argv differs')
+    held = _held_saved_bootstrap(role, context_raw, context_sha)
+    transport = parse(held.transport)
+    expected = argv_for(role, context_raw, context_sha, tree_sha=transport['tree_sha'],
+        channel_name=transport['channel_name'], channel_nonce=transport['channel_nonce'])
+    main = _direct_main_shape(expected)
     context = parse(context_raw)
     require(pin(read(main.__file__)) == context['source_pins'][NEW_SOURCES[1]], 'actual entry bytes differ')
     return context
 
 
 def execution_context(role, context_raw, context_sha):
-    context = validate_actual_entry(role, context_raw, context_sha)
+    context = parse(context_raw)
     require(context['output_mode'] == 'saved_P1_F_validation', 'ordinary test context cannot enter F execution/adoption')
-    return context
+    return validate_actual_entry(role, context_raw, context_sha)
 
 
 @dataclass(frozen=True, init=False)
@@ -1299,6 +1295,7 @@ class RoleStore:
     creator: tuple
     binding: tuple
     writer: str
+    schema: str
     receipts: tuple
     receipt_commit: str
     child_reservation: object
@@ -1310,19 +1307,25 @@ class RoleStore:
     def __init__(self, raw, expected_sha, expected_tree_sha, writer='controller'):
         if _DIRECT_BOOTSTRAP is not None: _DIRECT_BOOTSTRAP.check()
         context = _role_context(raw, expected_sha)
+        if context['schema'] == SCHEMA:
+            _held_saved_bootstrap(writer, raw, expected_sha, tree_sha=expected_tree_sha, require_channel=False)
+        else: require(_SAVED_BOOTSTRAP is None, 'saved bootstrap cannot enter an ordinary store')
         require(writer in ('controller', 'parent', 'fresh'), 'closed role store writer required')
         root = Path(context['output_root']); tree = _role_tree(root)
         require(digest(tree) == expected_tree_sha and read(root/'context.json') == raw, 'external output/context binding differs')
-        values = dict(root=root, raw=raw, sha=expected_sha, tree=tree, writer=writer, creator=(os.getpid(), get_ident()),
+        values = dict(root=root, raw=raw, sha=expected_sha, tree=tree, writer=writer, schema=context['schema'], creator=(os.getpid(), get_ident()),
             receipts=(), receipt_commit=digest(()))
         values.update(child_reservation=None, child_consumed=False, reservation_commit=digest([None, False]))
         values.update(target_attempts=(), attempt_commit=digest(()))
-        values['binding'] = str(root), expected_sha, tree, writer
+        values['binding'] = str(root), expected_sha, tree, writer, context['schema']
         for name, value in values.items(): object.__setattr__(self, name, value)
 
     def check(self):
         if _DIRECT_BOOTSTRAP is not None: _DIRECT_BOOTSTRAP.check()
-        require(self.creator == (os.getpid(), get_ident()) and (str(self.root), self.sha, self.tree, self.writer) == self.binding
+        if self.schema == SCHEMA:
+            _held_saved_bootstrap(self.writer, self.raw, self.sha, tree_sha=digest(self.tree))
+        else: require(_SAVED_BOOTSTRAP is None, 'saved bootstrap cannot enter an ordinary store')
+        require(self.creator == (os.getpid(), get_ident()) and (str(self.root), self.sha, self.tree, self.writer, self.schema) == self.binding
             and type(self.raw) is bytes and sha256(self.raw).hexdigest() == self.sha, 'creating held role store required')
         require(_role_tree(self.root) == self.tree and read(self.root/'context.json') == self.raw, 'role output/context bookend differs')
         require(digest(self.receipts) == self.receipt_commit, 'held role publication receipts changed')
@@ -1360,7 +1363,8 @@ class RoleStore:
         return reservation
 
     def consume_child(self, role, reservation):
-        self.check()
+        if self.schema == SCHEMA: _saved_owner_store(self, role, reservation, consumed=False)
+        else: self.check()
         require(reservation is self.child_reservation and reservation[0] == role and reservation[3] == self.creator
             and not self.child_consumed, 'creating one-shot role reservation required')
         object.__setattr__(self, 'child_consumed', True)
@@ -2994,7 +2998,7 @@ class OrdinaryFileBootstrap:
 def _bind_ordinary_main(role, context_sha, expected, context):
     global _DIRECT_BOOTSTRAP
     _ordinary_bootstrap_context(role, context)
-    require(_DIRECT_BOOTSTRAP is None, 'single ordinary bootstrap required')
+    require(_DIRECT_BOOTSTRAP is _SAVED_BOOTSTRAP is None, 'single ordinary bootstrap required')
     main = _direct_main_shape(expected)
     existing = sys.modules.get(ENTRY_MODULE_NAME)
     require(existing is None or existing is main, 'canonical ENTRY module already occupied')
@@ -3075,6 +3079,253 @@ def _ordinary_file_dispatch(argv):
             values['ack_sha'], values['channel_name'], values['channel_nonce'], values['context_path'])
     return _ordinary_role_entry(values['role'], values['context_path'], values['context_sha'], values['tree_sha'],
         values['channel_name'], values['channel_nonce'])
+
+
+def _saved_file_tokens(role, context_path, context_sha, tree_sha, channel_name, channel_nonce):
+    require(role in ('parent', 'fresh'), 'saved supervise requires a separate trusted invocation')
+    require(type(context_path) is str and 0 < len(context_path) <= 4096 and '\0' not in context_path,
+        'bounded saved context path required')
+    path = Path(context_path)
+    require(path.is_absolute() and '..' not in path.parts and path.name == 'context.json'
+        and str(path.absolute()) == context_path, 'canonical saved context path required')
+    require(_hex64(context_sha) and _hex64(tree_sha) and _hex64(channel_nonce)
+        and type(channel_name) is str and channel_name.startswith(STAGE_PREFIX)
+        and _hex64(channel_name[len(STAGE_PREFIX):]), 'closed saved transport required')
+    values = [('context', context_path), ('context-sha', context_sha), ('tree-sha', tree_sha),
+        ('channel', channel_name), ('nonce', channel_nonce)]
+    return [str(EXE), '-B', '-s', str(ROOT/NEW_SOURCES[1]), '--saved-entry', '--'+role,
+        *(token for name, value in values for token in ('--'+name, value))]
+
+
+def saved_file_arguments(argv):
+    names = ['context', 'context-sha', 'tree-sha', 'channel', 'nonce']
+    require(type(argv) is list and len(argv) == 12 and all(type(v) is str and '\0' not in v for v in argv)
+        and argv[0] == '--saved-entry' and argv[1] in ('--parent', '--fresh')
+        and argv[2::2] == ['--'+n for n in names], 'closed saved argument order/count required')
+    role = argv[1][2:]; context_path, context_sha, tree_sha, channel_name, channel_nonce = argv[3::2]
+    require(_saved_file_tokens(role, context_path, context_sha, tree_sha, channel_name, channel_nonce)[4:] == argv,
+        'canonical saved arguments differ')
+    return dict(role=role, context_path=context_path, context_sha=context_sha, tree_sha=tree_sha,
+        channel_name=channel_name, channel_nonce=channel_nonce)
+
+
+def _saved_transport(role, context_sha, tree_sha, channel_name, channel_nonce):
+    # The role determines the descriptor. A caller cannot supply a different one.
+    _saved_file_tokens(role, str(OUTPUT/'context.json'), context_sha, tree_sha, channel_name, channel_nonce)
+    return dict(role=role, context_sha=context_sha, tree_sha=tree_sha, channel_name=channel_name,
+        channel_nonce=channel_nonce, descriptor_sha=sha256(stage_descriptor(role)).hexdigest())
+
+
+@dataclass(frozen=True, init=False)
+class SavedFileBootstrap:
+    """Held saved input binding; no lease, owner, scientific or run authority."""
+    raw: bytes
+    sha: str
+    transport: bytes
+    proof_raw: bytes
+    main: object
+    argv: tuple
+    paths: tuple
+    environment: tuple
+    creator: tuple
+    channel: object
+    commit: str
+
+    def __init__(self, raw, sha, transport, proof_raw, main, argv, paths):
+        values = dict(raw=raw, sha=sha, transport=canonical(transport), proof_raw=proof_raw, main=main,
+            argv=tuple(argv), paths=tuple(paths), environment=tuple(sorted(parse(raw)['environment'].items())),
+            creator=(os.getpid(), get_ident()), channel=None)
+        for name, value in values.items(): object.__setattr__(self, name, value)
+        object.__setattr__(self, 'commit', digest(self._image()))
+        self.check(transport['role'], raw, sha, require_channel=False)
+
+    def _image(self):
+        channel = self.channel
+        endpoint = None if channel is None else (id(channel), channel.name, channel.nonce, channel.context_sha,
+            sha256(channel.descriptor).hexdigest(), pin(channel._header) if type(channel._header) is bytes else None)
+        return (sha256(self.raw).hexdigest(), self.sha, sha256(self.transport).hexdigest(),
+            sha256(self.proof_raw).hexdigest(), id(self.main), self.argv, self.paths, self.environment, self.creator, endpoint)
+
+    def check(self, role, raw, sha, *, tree_sha=None, require_channel=True):
+        require(self.creator == (os.getpid(), get_ident()) and digest(self._image()) == self.commit
+            and type(raw) is bytes and raw == self.raw and sha == self.sha == sha256(raw).hexdigest(),
+            'creating saved bootstrap context required')
+        value = parse(self.transport)
+        require(role == value['role'] and (tree_sha is None or tree_sha == value['tree_sha']), 'saved role/tree binding differs')
+        require(_DIRECT_BOOTSTRAP is None and _direct_main_shape(list(self.argv)) is self.main
+            and sys.modules.get(ENTRY_MODULE_NAME) is self.main and tuple(sys.path) == self.paths,
+            'saved main/alias/path/argv drift')
+        _saved_environment_bookend(self.environment)
+        proof = parse(self.proof_raw); entry = ROOT/NEW_SOURCES[1]
+        require(list(identity(ordinary(entry))) == proof['entry_identity']
+            and [list(row) for row in directories(entry.parent)] == proof['entry_parent_directories'],
+            'saved entry file/parent identity drift')
+        if require_channel:
+            channel = self.channel
+            require(type(channel) is StageChannel and not channel._reader and type(channel._header) is bytes,
+                'held saved Open-only writer required')
+            channel._live()
+            require((channel.name, channel.nonce, channel.context_sha, sha256(channel.descriptor).hexdigest())
+                == (value['channel_name'], value['channel_nonce'], self.sha, value['descriptor_sha']), 'saved endpoint binding differs')
+        return self
+
+    def bind_channel(self, channel):
+        value = parse(self.transport); self.check(value['role'], self.raw, self.sha, require_channel=False)
+        require(self.channel is None and type(channel) is StageChannel and not channel._reader
+            and type(channel._header) is bytes, 'single saved Open-only writer required')
+        channel._live()
+        require((channel.name, channel.nonce, channel.context_sha, channel.descriptor)
+            == (value['channel_name'], value['channel_nonce'], self.sha, stage_descriptor(value['role'])),
+            'saved endpoint binding differs')
+        object.__setattr__(self, 'channel', channel); object.__setattr__(self, 'commit', digest(self._image()))
+        return self.check(value['role'], self.raw, self.sha)
+
+    def proof(self):
+        self.check(parse(self.transport)['role'], self.raw, self.sha)
+        return parse(self.proof_raw)
+
+    def __reduce__(self): raise TypeError('held saved bootstrap cannot be serialized')
+
+
+def _held_saved_bootstrap(role, raw, sha, *, tree_sha=None, require_channel=True):
+    require(type(_SAVED_BOOTSTRAP) is SavedFileBootstrap, 'creating saved file bootstrap required')
+    return _SAVED_BOOTSTRAP.check(role, raw, sha, tree_sha=tree_sha, require_channel=require_channel)
+
+
+def _saved_environment_bookend(expected):
+    require(environment() == dict(expected) and all(os.environ.get(k) == v for k, v in expected)
+        and not any(k in os.environ for k in ('PYTHONPATH', 'PYTHONHOME', 'PYTHONSTARTUP')), 'saved actual environment drift')
+
+
+def _bind_saved_main(role, raw, sha, tree_sha, channel_name, channel_nonce):
+    global _SAVED_BOOTSTRAP
+    require(_DIRECT_BOOTSTRAP is _SAVED_BOOTSTRAP is None, 'single saved bootstrap required')
+    context = check_context(raw, sha)
+    require(context['output_mode'] == 'saved_P1_F_validation' and context['output_root'] == str(OUTPUT),
+        'fixed saved execution input mode required')
+    expected = argv_for(role, raw, sha, tree_sha=tree_sha, channel_name=channel_name, channel_nonce=channel_nonce)
+    main = _direct_main_shape(expected)
+    existing = sys.modules.get(ENTRY_MODULE_NAME)
+    require(existing is None or existing is main, 'canonical saved ENTRY already occupied')
+    require(_ordinary_preimports(main) == [], 'project/science module preceded saved bootstrap')
+    require(all(os.environ.get(k) == v for k, v in context['environment'].items())
+        and not any(k in os.environ for k in ('PYTHONPATH', 'PYTHONHOME', 'PYTHONSTARTUP')), 'uncontrolled saved Python environment')
+    paths = _checked_entry_paths(tuple(sys.path), installed=False)
+    paths = _checked_entry_paths((str(ROOT), *paths[1:]), installed=True)
+    transport = _saved_transport(role, sha, tree_sha, channel_name, channel_nonce)
+    entry = Path(main.__file__); entry_identity = identity(ordinary(entry)); entry_parents = directories(entry.parent)
+    proof = dict(schema='staged_saved_F_file_binding_development_v1', authority='DRAFT_NONAUTHORITATIVE',
+        scope='saved_entry_binding_development_only', role=role, context_sha=sha, transport_sha=digest(transport),
+        entry_path=str(ROOT/NEW_SOURCES[1]), entry_pin=pin(read(entry)), entry_identity=list(entry_identity),
+        entry_parent_directories=[list(row) for row in entry_parents], executable=context['executable'],
+        argv_sha=digest(expected), orig_argv_sha=digest(list(sys.orig_argv)), sys_path_sha=digest(paths),
+        independent_OS_commandline_verified=False, full_runtime_closure_verified=False,
+        F_launch_admitted=False, saved_P1_fresh_process_verified=False, saved_P1_parent_adoption_verified=False, **GATES)
+    require(proof['entry_pin'] == context['source_pins'][NEW_SOURCES[1]], 'saved entry source bytes differ')
+    require(identity(ordinary(entry)) == entry_identity and directories(entry.parent) == entry_parents,
+        'saved entry identity changed during bootstrap')
+    image = canonical(proof); require(len(image) <= 16384, 'saved bootstrap proof cap')
+    sys.path[:] = paths; sys.modules[ENTRY_MODULE_NAME] = main
+    held = SavedFileBootstrap(raw, sha, transport, image, main, expected, paths)
+    _SAVED_BOOTSTRAP = held
+    return held
+
+
+def _open_saved_role_inputs(argv):
+    """Future saved role bootstrap seam. Opens transport; never runs science."""
+    values = saved_file_arguments(argv)
+    require(values['context_path'] == str(OUTPUT/'context.json'), 'fixed saved context path required')
+    raw = read(values['context_path'])
+    held = _bind_saved_main(values['role'], raw, values['context_sha'], values['tree_sha'],
+        values['channel_name'], values['channel_nonce'])
+    context = parse(raw)
+    require(values['context_path'] == str(Path(context['output_root'])/'context.json'), 'saved context path differs')
+    store = RoleStore(raw, values['context_sha'], values['tree_sha'], values['role'])
+    channel = StageChannel.attach(values['channel_name'], values['channel_nonce'], values['context_sha'], stage_descriptor(values['role']))
+    try:
+        held.bind_channel(channel); store.check()
+        return store, held, channel
+    except BaseException as primary:
+        try: channel.close()
+        except BaseException as cleanup:
+            raise StageChannelConstructionUnresolved(channel, primary, cleanup, 'saved_binding_cleanup') from primary
+        raise
+
+
+@dataclass(frozen=True, init=False)
+class SavedOwnerInputs:
+    """Immutable constructor data, deliberately without a launch operation."""
+    raw: bytes
+    store: object
+    reservation: tuple
+    channel: object
+    creator: tuple
+    commit: str
+
+    def __init__(self, raw, store, reservation, channel):
+        for name, value in dict(raw=raw, store=store, reservation=reservation, channel=channel,
+                creator=(os.getpid(), get_ident())).items(): object.__setattr__(self, name, value)
+        object.__setattr__(self, 'commit', digest(self._image()))
+
+    def _image(self):
+        return pin(self.raw), id(self.store), id(self.reservation), self.reservation, id(self.channel), self.creator
+
+    def check(self):
+        require(self.creator == (os.getpid(), get_ident()) and self.commit == digest(self._image()),
+            'creating saved owner inputs required')
+        value = parse(self.raw); context = _saved_owner_store(self.store, value['role'], self.reservation, consumed=True)
+        _saved_owner_endpoint(self.channel, value['role'], self.store.sha)
+        expected = _saved_owner_image(value['role'], context, self.store, self.reservation, self.channel)
+        require(self.raw == canonical(expected), 'saved owner constructor inputs drift')
+        return value
+
+    def __reduce__(self): raise TypeError('saved constructor inputs cannot be serialized')
+
+
+def _saved_owner_endpoint(channel, role, sha):
+    require(role in ('parent', 'fresh') and type(channel) is StageChannel, 'closed saved owner role/endpoint required')
+    channel._live()
+    require(channel._reader and channel._header is None and channel.context_sha == sha
+        and channel.descriptor == stage_descriptor(role), 'unbound saved observer endpoint required')
+
+
+def _saved_owner_store(store, role, reservation, *, consumed):
+    require(type(store) is RoleStore, 'held saved role store required')
+    store.check(); context = check_context(store.raw, store.sha)
+    _saved_environment_bookend(tuple(sorted(context['environment'].items())))
+    require(context['schema'] == SCHEMA and context['output_mode'] == 'saved_P1_F_validation'
+        and (store.writer, role) in (('controller', 'parent'), ('parent', 'fresh'))
+        and reservation is store.child_reservation and type(reservation) is tuple
+        and len(reservation) == 4 and reservation[0] == role and reservation[3] == store.creator
+        and type(reservation[1]) is float and math.isfinite(reservation[1]) and _hex64(reservation[2])
+        and context['invocation_started'] <= reservation[1] <= time.monotonic() <= context['deadline']
+        and store.child_consumed is consumed,
+        'saved store/role/reservation binding differs')
+    return context
+
+
+def _saved_owner_image(role, context, store, reservation, channel):
+    require(context['output_mode'] == 'saved_P1_F_validation' and context['output_root'] == str(OUTPUT), 'saved owner context required')
+    tree_sha = digest(store.tree)
+    args = _saved_file_tokens(role, str(OUTPUT/'context.json'), store.sha, tree_sha, channel.name, channel.nonce)
+    return dict(schema='staged_saved_F_owner_inputs_development_v1', authority='DRAFT_NONAUTHORITATIVE',
+        scope='saved_constructor_inputs_only', role=role, context_sha=store.sha, tree_sha=tree_sha,
+        writer=store.writer, reservation=list(reservation),
+        argv=args, command_line=subprocess.list2cmdline(args), cwd=str(ROOT), source_sha=digest(context['source_pins']),
+        executable=context['executable'], environment_sha=digest(context['environment']),
+        channel_name=channel.name, channel_nonce=channel.nonce, descriptor_sha=sha256(channel.descriptor).hexdigest(),
+        native_owner_constructed=False, run_authority=False, F_launch_admitted=False, **GATES)
+
+
+def saved_owner_inputs(role, store, reservation, *, channel):
+    context = _saved_owner_store(store, role, reservation, consumed=False)
+    _saved_owner_endpoint(channel, role, store.sha)
+    # Constructing one set of launch inputs spends the existing reservation.
+    # A future constructor must retain this exact object and original start.
+    store.consume_child(role, reservation)
+    image = canonical(_saved_owner_image(role, context, store, reservation, channel))
+    require(len(image) <= 16384, 'saved owner constructor input cap')
+    return SavedOwnerInputs(image, store, reservation, channel)
 
 
 if __name__ == '__main__':

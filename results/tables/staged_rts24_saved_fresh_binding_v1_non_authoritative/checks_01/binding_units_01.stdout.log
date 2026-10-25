@@ -1,0 +1,1691 @@
+EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE....EEEEEEE
+=================================== ERRORS ====================================
+_ ERROR at setup of test_saved_binding_canonical_grammar_and_separate_supervise[parent] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_canonical_grammar_and_separate_supervise[fresh] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+___ ERROR at setup of test_saved_binding_parser_rejects_before_io[ordinary] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+__ ERROR at setup of test_saved_binding_parser_rejects_before_io[supervise] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+__ ERROR at setup of test_saved_binding_parser_rejects_before_io[duplicate] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+___ ERROR at setup of test_saved_binding_parser_rejects_before_io[missing] ____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+____ ERROR at setup of test_saved_binding_parser_rejects_before_io[order] _____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+___ ERROR at setup of test_saved_binding_parser_rejects_before_io[unknown] ____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+__ ERROR at setup of test_saved_binding_parser_rejects_before_io[input_root] __
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_parser_rejects_before_io[output_root] __
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+___ ERROR at setup of test_saved_binding_parser_rejects_before_io[relative] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_parser_rejects_before_io[parent_path] __
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_____ ERROR at setup of test_saved_binding_parser_rejects_before_io[nul] ______
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+__ ERROR at setup of test_saved_binding_parser_rejects_before_io[uppercase] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+__ ERROR at setup of test_saved_binding_parser_rejects_before_io[short_sha] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_parser_rejects_before_io[bad_channel] __
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+____ ERROR at setup of test_saved_binding_parser_rejects_before_io[abbrev] ____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_unit_holds_exact_context_tree_and_open_writer[parent] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_unit_holds_exact_context_tree_and_open_writer[fresh] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+____ ERROR at setup of test_saved_binding_rejects_late_cross_binding[role] ____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+____ ERROR at setup of test_saved_binding_rejects_late_cross_binding[raw] _____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+____ ERROR at setup of test_saved_binding_rejects_late_cross_binding[sha] _____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+____ ERROR at setup of test_saved_binding_rejects_late_cross_binding[tree] ____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+__ ERROR at setup of test_saved_binding_rejects_late_cross_binding[channel] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+___ ERROR at setup of test_saved_binding_rejects_late_cross_binding[nonce] ____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_rejects_late_cross_binding[descriptor] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+___ ERROR at setup of test_saved_binding_rejects_late_cross_binding[closed] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+___ ERROR at setup of test_saved_binding_rejects_late_cross_binding[header] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+___ ERROR at setup of test_saved_binding_rejects_late_cross_binding[alias] ____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+____ ERROR at setup of test_saved_binding_rejects_late_cross_binding[argv] ____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_rejects_late_cross_binding[orig_argv] __
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+____ ERROR at setup of test_saved_binding_rejects_late_cross_binding[path] ____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+__ ERROR at setup of test_saved_binding_rejects_late_cross_binding[creator] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_rejects_late_cross_binding[transport] __
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+___ ERROR at setup of test_saved_binding_rejects_late_cross_binding[global] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+__ ERROR at setup of test_saved_binding_rejects_bootstrap_drift[environment] __
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+___ ERROR at setup of test_saved_binding_rejects_bootstrap_drift[main_file] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_____ ERROR at setup of test_saved_binding_rejects_bootstrap_drift[flags] _____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+__ ERROR at setup of test_saved_binding_rejects_bootstrap_drift[preimports] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_____ ERROR at setup of test_saved_binding_rejects_bootstrap_drift[alias] _____
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_____ ERROR at setup of test_saved_binding_rejects_bootstrap_drift[path] ______
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_____ ERROR at setup of test_saved_binding_rejects_bootstrap_drift[argv] ______
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+___ ERROR at setup of test_saved_binding_rejects_bootstrap_drift[orig_argv] ___
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_rejects_bootstrap_drift[exe_identity] __
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+__ ERROR at setup of test_saved_binding_ordinary_schema_cannot_cross_domains __
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_owner_inputs_are_data_and_production_constructor_stays_closed[parent] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_owner_inputs_are_data_and_production_constructor_stays_closed[fresh] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_store_checks_same_role_tree_and_context_before_science _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_open_seam_is_open_only_and_never_executes_science _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_owner_input_drift_never_constructs_native_owner[role] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_owner_input_drift_never_constructs_native_owner[descriptor] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_owner_input_drift_never_constructs_native_owner[context] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_owner_input_drift_never_constructs_native_owner[reader] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_owner_input_drift_never_constructs_native_owner[header] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_owner_input_drift_never_constructs_native_owner[creator] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+_ ERROR at setup of test_saved_binding_owner_input_drift_never_constructs_native_owner[data] _
+
+    @pytest.fixture(scope='module')
+    def saved_binding_context():
+        # Capture bytes only. No output tree, scientific replay, owner or child.
+        assert not cli.OUTPUT.exists()
+>       raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:1775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:237: in make_context
+    output_root=str(output), output_mode=mode, output_parent_directories=[list(row) for row in directories(output.parent)],
+                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:108: in directories
+    return tuple((str(p), s.st_dev, s.st_ino) for p in reversed((path, *path.parents))
+experiments\staged_rts24_saved_fresh_adoption_v1.py:109: in <genexpr>
+    for s in (ordinary(p, directory=True),))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/CUHKSZ/Research Project/electricity-grid/results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative')
+
+    def ordinary(path, *, directory=False, allow_links=False):
+>       info = os.lstat(path)
+               ^^^^^^^^^^^^^^
+E       FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'D:\\CUHKSZ\\Research Project\\electricity-grid\\results\\tables\\staged_rts24_saved_fresh_adoption_v1_non_authoritative'
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:99: FileNotFoundError
+============================ slowest 10 durations =============================
+1.62s setup    tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_canonical_grammar_and_separate_supervise[parent]
+0.16s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_public_cli_stays_disabled[parent]
+0.13s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_public_cli_stays_disabled[fresh]
+0.12s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_public_cli_stays_disabled[supervise]
+
+(6 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ===========================
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_canonical_grammar_and_separate_supervise[parent]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_canonical_grammar_and_separate_supervise[fresh]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[ordinary]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[supervise]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[duplicate]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[missing]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[order]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[unknown]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[input_root]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[output_root]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[relative]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[parent_path]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[nul]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[uppercase]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[short_sha]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[bad_channel]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_parser_rejects_before_io[abbrev]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_unit_holds_exact_context_tree_and_open_writer[parent]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_unit_holds_exact_context_tree_and_open_writer[fresh]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[role]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[raw]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[sha]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[tree]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[channel]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[nonce]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[descriptor]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[closed]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[header]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[alias]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[argv]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[orig_argv]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[path]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[creator]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[transport]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_late_cross_binding[global]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_bootstrap_drift[environment]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_bootstrap_drift[main_file]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_bootstrap_drift[flags]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_bootstrap_drift[preimports]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_bootstrap_drift[alias]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_bootstrap_drift[path]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_bootstrap_drift[argv]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_bootstrap_drift[orig_argv]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_rejects_bootstrap_drift[exe_identity]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_ordinary_schema_cannot_cross_domains
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_inputs_are_data_and_production_constructor_stays_closed[parent]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_inputs_are_data_and_production_constructor_stays_closed[fresh]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_store_checks_same_role_tree_and_context_before_science
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_open_seam_is_open_only_and_never_executes_science
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[role]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[descriptor]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[context]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[reader]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[header]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[creator]
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[data]
+4 passed, 56 errors in 24.85s

@@ -1,0 +1,294 @@
+"""Draft saved-P1 E/F adapter; no solver, writable journal, or run authority."""
+from dataclasses import dataclass
+from hashlib import sha256
+from pathlib import Path
+import sys
+
+from src import staged_rts24_saved_prefix_replay_v1 as prefix
+from src import staged_rts24_journal_v2 as journal
+
+core, codec, mechanical = prefix.core, prefix.codec, prefix.mechanical
+require = codec.require
+ROOT = prefix.ROOT
+P1 = ROOT/'results/tables/staged_rts24_native_v1_non_authoritative/p1_01'
+ANCHOR = P1.parent/'p1_execution_review_01/postcheck_03.stdout.json'
+ANCHOR_SHA = 'c6a25cd96c8a4a2cf293d41fe51bc7905db63fbc35253076f97e9239a4f22473'
+STATE_CAS_SHA = '29517379c102b40b0f0a0b77711db4d936357025e4f53283f5bdec04fcbc7a41'
+SCOPE = 'saved_P1_actual_21_and_journal_5h'
+SCHEMA = 'staged_rts24_saved_P1_fresh_metrics_development_v1'
+E_SOURCES = tuple(sorted(set(prefix.SOURCES+journal.SOURCE_PATHS+(
+    'tests/test_staged_rts24_saved_journal_check_v1.py',
+    'docs/plan/staged_deliverability_c_saved_journal_check_contract_v1.md'))))
+SOURCES = tuple(sorted(set(E_SOURCES+(
+    'src/staged_rts24_saved_fresh_adoption_v1.py',
+    'experiments/staged_rts24_saved_fresh_adoption_v1.py',
+    'tests/test_staged_rts24_saved_fresh_adoption_v1.py',
+    'docs/plan/staged_deliverability_c_saved_fresh_adoption_scope_budget_v1.md'))))
+METRIC_FIELDS = tuple(('state_sha state_cas_sha summary independent_audit scientific_outcome publication_outcome '
+    'terminal_entry_present state_certainty closed_entry_present unaccepted_attempt failure pending_terminal_checkpoint '
+    'pending_cas_objects unreferenced_final_cas_objects genesis_sha head_sha final_entries saved_objects resume_permitted').split())
+GATES = dict(journal_replayed=False, scientific_evidence_adopted=False,
+    expected_query_provenance_independently_verified=False, independent_139_verified=False,
+    full_fx_contract_verified=False, resource_admission=False, formal_result=False)
+
+
+def digest(value):
+    return sha256(codec.canonical(value)).hexdigest()
+
+
+def sources(expected):
+    """Check the caller-held selected group, including already loaded source paths."""
+    require(type(expected) is dict and set(expected) == set(SOURCES), 'closed 49-source group required')
+    held = codec.canonical(expected)
+    for value in expected.values(): mechanical.checked_pin(value)
+    actual = {name: mechanical.pin(codec.read_bytes(ROOT/name)) for name in SOURCES}
+    require(actual == expected, 'saved fresh source changed')
+    for name in SOURCES:
+        if not name.startswith('src/') or not name.endswith('.py'): continue
+        module = sys.modules.get(name[:-3].replace('/', '.').removesuffix('.__init__'))
+        if module is None: continue
+        require(type(getattr(module, '__file__', None)) is str
+            and Path(module.__file__).absolute() == (ROOT/name).absolute(), 'loaded saved fresh module differs')
+        require(mechanical.pin(codec.read_bytes(module.__file__)) == expected[name], 'loaded saved fresh source changed')
+    require(codec.canonical(expected) == held, 'caller source expectation changed')
+    return actual
+
+
+def stamp(path):
+    info = codec.ordinary(path)
+    return info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns
+
+
+@dataclass(frozen=True)
+class HeldInput:
+    files: dict
+    fixture: object
+    outer: dict
+    trusted: dict
+    expectations: dict
+    bindings: tuple
+    inventory: dict
+    source: dict
+    anchor_raw: bytes
+    anchor_identity: tuple
+    anchor_directories: tuple
+    root_directories: tuple
+    historical_metrics: dict
+    expected_evidence_refs: list
+    image: bytes
+
+
+def caller_image(held):
+    return codec.canonical(dict(files=held.files, fixture_sha=core.digest(held.fixture), outer=held.outer,
+        trusted=held.trusted, expectations=held.expectations, bindings=held.bindings, source=held.source,
+        anchor_path=str(ANCHOR), anchor_pin=mechanical.pin(held.anchor_raw), anchor_identity=held.anchor_identity,
+        anchor_directories=held.anchor_directories, root_directories=held.root_directories,
+        historical_metrics=held.historical_metrics, expected_evidence_refs=held.expected_evidence_refs,
+        inventory={k: held.inventory[k] for k in ('pins', 'files', 'directories')}))
+
+
+def capture(expected_sources):
+    """Trusted invocation's initial capture; never substitutes for external hold."""
+    source = sources(expected_sources)
+    anchor_identity = stamp(ANCHOR)
+    anchor_directories = codec.directory_identity(ANCHOR.parent)
+    root_directories = codec.directory_identity(P1)
+    raw = codec.read_bytes(ANCHOR)
+    require(sha256(raw).hexdigest() == ANCHOR_SHA, 'saved P1 external anchor differs')
+    # The postcheck is a historical pretty JSON report, not a canonical CAS root.
+    import json
+    files = json.loads(raw)['p1_files']
+    require(type(files) is dict and len(files) == 683 and sum(v['bytes'] for v in files.values()) == 2950863,
+        'saved P1 full inventory differs')
+    before = mechanical.inventory(P1)
+    require(before['pins'] == files, 'saved P1 bytes differ from external anchor')
+    data = before['raw']
+    fixture = core.load_fixture()
+    outer, trusted = codec.parse(data['launcher.json']), codec.parse(data['trusted_binding.json'])
+    prefix.point._outer(outer)
+    start = codec.parse(data['start.json'])
+    bindings = tuple(codec.parse(data[f'trusted_prefixes/prefix_{n:06d}.json']) for n in range(6))
+    expected = dict(fixture_sha=core.digest(fixture), initial_state_sha=bindings[0]['known_state_sha'],
+        after_state_shas=tuple(b['known_state_sha'] for b in bindings[1:]), pins_sha=core.digest(start['pins']),
+        registration_sha=start['registration_sha'], slots=tuple(codec.parse(data['request_schedule.json'])[:21]),
+        point_files={str(i): {n[len(f'points/point_{i:04d}/'):]: v for n, v in files.items()
+            if n.startswith(f'points/point_{i:04d}/')} for i in range(1, 22)})
+    historical_metrics = codec.parse(data['fresh.json'])['metrics']
+    validate_metrics(historical_metrics)
+    expected_refs = [dict(ordinal=i, role=expected['slots'][i-1]['role'],
+        query_sha=codec.parse(data[f'points/point_{i:04d}/request.json'])['query_sha'],
+        evidence_ref=codec.parse(data[f'points/point_{i:04d}/result.json'])['evidence_ref']) for i in range(1, 22)]
+    held = HeldInput(files, fixture, outer, trusted, expected, bindings, before, source, raw,
+        anchor_identity, anchor_directories, root_directories, historical_metrics, expected_refs, b'')
+    object.__setattr__(held, 'image', caller_image(held))
+    bookend(held, inventory=False)
+    return held
+
+
+def hold(expected_sources, expected_caller_image):
+    require(type(expected_caller_image) is bytes, 'external caller image required')
+    codec.parse(expected_caller_image)
+    held = capture(expected_sources)
+    require(held.image == expected_caller_image, 'external caller image differs')
+    return held
+
+
+def bookend(held, *, inventory=True):
+    require(caller_image(held) == held.image, 'saved fresh caller expectation changed')
+    require(codec.read_bytes(ANCHOR) == held.anchor_raw and stamp(ANCHOR) == held.anchor_identity
+        and codec.directory_identity(ANCHOR.parent) == held.anchor_directories, 'external anchor bookend differs')
+    require(codec.directory_identity(P1) == held.root_directories, 'saved P1 root bookend differs')
+    if inventory:
+        after = mechanical.inventory(P1)
+        require(all(after[k] == held.inventory[k] for k in ('pins', 'files', 'directories')), 'saved P1 inventory bookend differs')
+    require(sources(held.source) == held.source and caller_image(held) == held.image, 'saved fresh final source/caller differs')
+
+
+def project_metrics(reopened, state_cas_sha):
+    """The complete legacy metrics projection, reusing the checked join's CAS root."""
+    result = dict(state_sha=core.digest(reopened['state']), state_cas_sha=state_cas_sha,
+        summary=core.plain(reopened['summary']), independent_audit=core.plain(reopened['independent_audit']))
+    result.update({k: core.plain(reopened[k]) for k in METRIC_FIELDS if k not in result})
+    require(set(result) == set(METRIC_FIELDS), 'complete saved metrics fields differ')
+    validate_metrics(result)
+    return result
+
+
+def validate_metrics(value):
+    mechanical.keys(value, ' '.join(METRIC_FIELDS))
+    for key in ('state_sha', 'state_cas_sha', 'genesis_sha', 'head_sha'): mechanical.sha(value[key])
+    require(value['state_cas_sha'] == STATE_CAS_SHA, 'saved P1 typed state root differs')
+    require(value['scientific_outcome'] == 'missing_input' and value['publication_outcome'] == 'committed'
+        and value['state_certainty'] == 'known', 'saved P1 outcome differs')
+    require(value['terminal_entry_present'] is value['closed_entry_present'] is True
+        and value['resume_permitted'] is False, 'saved P1 terminal flags differ')
+    require(type(value['final_entries']) is int and value['final_entries'] == 6
+        and type(value['saved_objects']) is int and value['saved_objects'] == 130, 'saved P1 counts differ')
+    require(all(value[k] is None for k in ('unaccepted_attempt', 'failure', 'pending_terminal_checkpoint'))
+        and value['pending_cas_objects'] == [] and value['unreferenced_final_cas_objects'] == [],
+        'saved P1 pending/failure fields differ')
+    summary = value['summary']
+    require(type(summary) is dict and summary['coverage_complete'] is False
+        and summary['method_conditions_satisfied'] is summary['full_replay_conditions_satisfied'] is None
+        and type(summary['actual_accepted_hours']) is int and summary['actual_accepted_hours'] == 5
+        and type(summary['remaining_debt']) is str and summary['remaining_debt'] == '0', 'saved P1 summary differs')
+    require(type(value['independent_audit']) is dict, 'saved independent audit missing')
+    codec.canonical(value)
+
+
+class ReplayUnresolved(ValueError):
+    def __init__(self, primary, bookend_error):
+        from src.staged_rts24_process_guard_v3 import error_details
+        self.primary_error = error_details(primary)
+        self.bookend_error = error_details(bookend_error)
+        self.infeasibility_inferred = False
+        super().__init__('saved replay and final input/source bookend failed')
+
+
+def replay(held, context_sha):
+    try:
+        return _replay(held, context_sha)
+    except BaseException as primary:
+        try: bookend(held)
+        except BaseException as final:
+            raise ReplayUnresolved(primary, final) from primary
+        raise
+
+
+def _replay(held, context_sha):
+    """One complete original B/C/E reconstruction; no spawn or output writes."""
+    mechanical.sha(context_sha)
+    bookend(held, inventory=False)
+    left = prefix.replay_prefix(P1/'points', held.fixture, (-2, -1, 0, 1, 2), held.expectations,
+        held.outer, {n: held.source[n] for n in prefix.SOURCES})
+    right = journal.reopen(P1/'journal', held.fixture, prefix.PLAN, prefix.CLEAN, prefix.METHOD, held.trusted)
+    require(left['outcome'] == 'bounded_prefix_complete' and left['state_sha'] == right['state_sha']
+        == held.trusted['known_state_sha'], 'saved policy/journal state differs')
+    left_cas, right_cas = codec.pack(left['state'])[0], codec.pack(right['state'])[0]
+    require(left_cas == right_cas == STATE_CAS_SHA and right['state'].next_hour == 3, 'saved typed state join differs')
+    nodes = []
+    for row in right['state'].records:
+        evidence = row['prepared'].evidence
+        nodes.extend(node for node in (evidence.reference, evidence.raw, evidence.lower, evidence.upper, row['actual']) if node is not None)
+        require(row['actual_accepted'] is row['proposal_ledger_applied'] is True, 'saved accepted state differs')
+    require(len(nodes) == len(left['visited_points']) == 21, 'saved actual point count differs')
+    evidence_refs = []
+    for node, report in zip(nodes, left['visited_points']):
+        identity = codec.pack(node)[0]
+        require(identity == report['evidence_ref'] and node.query.identity == report['query_sha'], 'saved point join differs')
+        evidence_refs.append(dict(ordinal=report['ordinal'], role=node.query.request.role,
+            evidence_ref=identity, query_sha=node.query.identity))
+    require(left['accepted_prefix_summary'] == right['summary'], 'saved prefix summary differs')
+    for n, binding in enumerate(held.bindings):
+        name = 'journal/genesis.json' if n == 0 else f'journal/entry_{n:06d}.json'
+        raw = held.inventory['raw'][name]
+        entry = codec.parse(raw)
+        require(binding['known_entries'] == n and binding['closed'] is False and binding['failure_sha'] is None
+            and binding['known_state_sha'] == entry['after_state_sha']
+            and binding['known_head_sha'] == mechanical.pin(raw)['sha256']
+            and set(binding['known_cas_keys']) <= set(held.trusted['known_cas_keys']), 'saved trusted prefix differs')
+    metrics = project_metrics(right, right_cas)
+    bookend(held)
+    result = dict(schema=SCHEMA, authority='DRAFT_NONAUTHORITATIVE', scope=SCOPE, context_sha=context_sha,
+        caller_sha=sha256(held.image).hexdigest(), source_sha=digest(held.source),
+        input_pins_sha=digest(held.files), metrics=metrics, evidence_refs=evidence_refs,
+        prefix_bindings=core.plain(held.bindings), trusted_binding=core.plain(held.trusted), **GATES)
+    validate_payload(result)
+    bind_payload(result, held.image)
+    return result
+
+
+def validate_payload(value):
+    mechanical.keys(value, 'schema authority scope context_sha caller_sha source_sha input_pins_sha metrics evidence_refs prefix_bindings trusted_binding '
+        +' '.join(GATES))
+    require(value['schema'] == SCHEMA and value['authority'] == 'DRAFT_NONAUTHORITATIVE'
+        and value['scope'] == SCOPE and all(value[k] is False for k in GATES), 'saved metrics authority differs')
+    for name in ('context_sha', 'caller_sha', 'source_sha', 'input_pins_sha'): mechanical.sha(value[name])
+    validate_metrics(value['metrics'])
+    refs = value['evidence_refs']
+    require(type(refs) is list and len(refs) == 21, 'saved point references differ')
+    for n, item in enumerate(refs, 1):
+        mechanical.keys(item, 'ordinal role evidence_ref query_sha')
+        require(type(item['ordinal']) is int and item['ordinal'] == n
+            and type(item['role']) is str and 0 < len(item['role']) <= 64, 'saved point ordinal/role differs')
+        for name in ('evidence_ref', 'query_sha'): mechanical.sha(item[name])
+    bindings = value['prefix_bindings']
+    require(type(bindings) is list and len(bindings) == 6, 'saved prefix bindings differ')
+    fields = 'genesis_sha known_head_sha known_state_sha known_cas_keys known_entries scientific_outcome publication_outcome failure_sha closed'
+    for n, binding in enumerate(bindings):
+        mechanical.keys(binding, fields)
+        require(type(binding['known_entries']) is int and binding['known_entries'] == n
+            and binding['closed'] is False and binding['failure_sha'] is None, 'saved prefix binding state differs')
+    mechanical.keys(value['trusted_binding'], fields)
+    trusted = value['trusted_binding']
+    require(trusted['known_entries'] == 6 and trusted['closed'] is True and trusted['failure_sha'] is None
+        and trusted['known_state_sha'] == value['metrics']['state_sha']
+        and trusted['known_head_sha'] == value['metrics']['head_sha'], 'saved final trusted binding differs')
+    codec.canonical(value)
+
+
+def bind_payload(value, caller_image):
+    """Bind every saved domain to the external image; history is a cross-check."""
+    caller = codec.parse(caller_image)
+    require(value['caller_sha'] == sha256(caller_image).hexdigest()
+        and value['source_sha'] == digest(caller['source']) and value['input_pins_sha'] == digest(caller['files']),
+        'external payload input/source/caller binding differs')
+    for actual, expected in ((value['metrics'], caller['historical_metrics']),
+            (value['evidence_refs'], caller['expected_evidence_refs']),
+            (value['prefix_bindings'], caller['bindings']), (value['trusted_binding'], caller['trusted'])):
+        require(codec.canonical(actual) == codec.canonical(expected), 'complete saved domain differs from external caller image')
+
+
+def compare_payloads(parent_raw, fresh_raw, *, context_sha, source_sha, input_pins_sha, caller_sha, caller_image):
+    parent, fresh = codec.parse(parent_raw), codec.parse(fresh_raw)
+    validate_payload(parent); validate_payload(fresh)
+    require(parent_raw == fresh_raw, 'complete parent/fresh metrics differ')
+    require(parent['context_sha'] == context_sha and parent['source_sha'] == source_sha
+        and parent['input_pins_sha'] == input_pins_sha and parent['caller_sha'] == caller_sha,
+        'held parent/fresh binding differs')
+    require(sha256(caller_image).hexdigest() == caller_sha, 'external caller image SHA differs')
+    bind_payload(parent, caller_image)
+    bind_payload(fresh, caller_image)
+    return dict(scope=SCOPE, metrics_sha=digest(parent['metrics']), payload_sha=sha256(parent_raw).hexdigest(),
+        point_references=21, accepted_hours=5, payload_byte_equality_verified=True,
+        saved_P1_fresh_process_verified=False, saved_P1_parent_adoption_verified=False, **GATES)

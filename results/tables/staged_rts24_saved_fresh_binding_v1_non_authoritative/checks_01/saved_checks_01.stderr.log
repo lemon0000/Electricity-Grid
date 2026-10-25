@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_binding_v1_non_authoritative\checks_01\saved_checks.py", line 104, in <module>
+    if __name__ == '__main__': print(json.dumps(verify(), sort_keys=True, indent=2))
+                                                ^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_binding_v1_non_authoritative\checks_01\saved_checks.py", line 76, in verify
+    a = prior.process_oracle(parent, value['context_sha']); b = prior.process_oracle(fresh, value['context_sha'])
+                                     ~~~~~^^^^^^^^^^^^^^^
+KeyError: 'context_sha'

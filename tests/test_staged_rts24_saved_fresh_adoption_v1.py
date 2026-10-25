@@ -145,11 +145,13 @@ def test_context_binds_actual_compute_executable_inputs_sources_and_budget(conte
     assert context['executable']['path'] == str(Path(sys.executable).absolute())
     assert context['input_files'] == json.loads(cli.read(f.ANCHOR))['p1_files']
     assert all(context[k] is False for k in cli.GATES)
-    for role in ('supervise', 'parent', 'fresh'):
-        argv = cli.argv_for(role, raw, sha256(raw).hexdigest())
+    for role in ('parent', 'fresh'):
+        argv = _saved_argv(role, raw, sha256(raw).hexdigest())
         assert argv[:4] == [str(cli.EXE), '-B', '-s', str(cli.ROOT/cli.NEW_SOURCES[1])]
         assert '--'+role in argv
-    assert cli.argv_for('fresh', raw, sha256(raw).hexdigest())[-1] == str(Path(context['output_root'])/'worker/fresh')
+        assert '--input-root' not in argv and '--output-root' not in argv
+    with pytest.raises(ValueError, match='separate trusted invocation'):
+        _saved_argv('supervise', raw, sha256(raw).hexdigest())
 
 
 @pytest.mark.parametrize('fault', ['source', 'exe', 'environment', 'input_map', 'budget', 'expired', 'extra', 'overlap'])
@@ -271,7 +273,7 @@ def test_argv_requires_the_same_raw_context_and_sha(context):
     raw = cli.canonical(context)
     other = deepcopy(context); other['deadline'] -= 1
     with pytest.raises(ValueError, match='context SHA'):
-        cli.argv_for('fresh', raw, sha256(cli.canonical(other)).hexdigest())
+        _saved_argv('fresh', raw, sha256(cli.canonical(other)).hexdigest())
 
 
 def test_bootstrap_environment_matches_the_bound_original_without_importing_it():
@@ -283,10 +285,11 @@ def test_actual_entry_and_expanded_arguments_are_bound(context, monkeypatch):
     raw = cli.canonical(context); digest = sha256(raw).hexdigest()
     entry = str(cli.ROOT/cli.NEW_SOURCES[1])
     monkeypatch.setattr(sys.modules['__main__'], '__file__', entry)
-    monkeypatch.setattr(sys, 'argv', cli.argv_for('fresh', raw, digest)[3:])
-    assert cli.validate_actual_entry('fresh', raw, digest) == context
+    monkeypatch.setattr(sys, 'argv', _saved_argv('fresh', raw, digest)[3:])
+    with pytest.raises(ValueError, match='creating saved file bootstrap'):
+        cli.validate_actual_entry('fresh', raw, digest)
     monkeypatch.setattr(sys, 'argv', [entry, '--fresh'])
-    with pytest.raises(ValueError, match='actual role entry'): cli.validate_actual_entry('fresh', raw, digest)
+    with pytest.raises(ValueError, match='creating saved file bootstrap'): cli.validate_actual_entry('fresh', raw, digest)
 
 
 def test_safety_accounting_rejects_layer_roots_even_when_they_exist(context):
@@ -298,7 +301,7 @@ def test_safety_accounting_rejects_layer_roots_even_when_they_exist(context):
 def test_actual_test_argv_cannot_enter_F_execution_or_adoption(context, monkeypatch):
     raw = cli.canonical(context); digest = sha256(raw).hexdigest(); entry = str(cli.ROOT/cli.NEW_SOURCES[1])
     monkeypatch.setattr(sys.modules['__main__'], '__file__', entry)
-    monkeypatch.setattr(sys, 'argv', cli.argv_for('parent', raw, digest)[3:])
+    monkeypatch.setattr(sys, 'argv', _saved_argv('parent', raw, digest)[3:])
     with pytest.raises(ValueError, match='ordinary test context'):
         cli.execution_context('parent', raw, digest)
 
@@ -1757,3 +1760,379 @@ def test_file_entry_cached_owner_still_rejects_actual_live_python_descendant():
     assert result['job_quiet_confirmed'] is True and result['stage_process_observed_successfully'] is False
     assert any(value[1] == 'negative' for value in held.owner._ordinary_console_cache._entries.values())
     print('CONSOLE_CACHE_DESCENDANT '+cli.canonical(result).decode())
+
+
+def _saved_argv(role, raw, sha, **changes):
+    values = dict(tree_sha='c'*64, channel_name=cli.STAGE_PREFIX+'a'*64, channel_nonce='b'*64)
+    values.update(changes)
+    return cli.argv_for(role, raw, sha, **values)
+
+
+@pytest.fixture(scope='module')
+def saved_binding_context():
+    # Capture bytes only. No output tree, scientific replay, owner or child.
+    assert not cli.OUTPUT.exists()
+    directories = cli.directories
+    parent = cli.OUTPUT.parent
+    # Actual output parent does not exist. Its identity is a logical unit
+    # boundary, never a physical-input or readiness observation.
+    logical = (*directories(parent.parent), (str(parent), 0, 0))
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(cli, 'directories', lambda path: logical if Path(path) == parent else directories(path))
+        raw = cli.make_context(cli.OUTPUT, started=time.monotonic())
+        print('SAVED_BINDING_FIXTURE '+cli.canonical(dict(scope='unit interface only',
+            logical_output_parent_identity=True, actual_saved_F_execution=False, F_launch_admitted=False,
+            context_pin=cli.pin(raw))).decode())
+        yield raw, sha256(raw).hexdigest()
+    assert not cli.OUTPUT.exists()
+
+
+def _saved_unit_endpoint(role, sha, *, reader=False):
+    import os
+    from threading import get_ident
+    endpoint = object.__new__(cli.StageChannel)
+    endpoint.name = cli.STAGE_PREFIX+'a'*64; endpoint.nonce = 'b'*64
+    endpoint.context_sha = sha; endpoint.descriptor = cli.stage_descriptor(role)
+    endpoint._creator = os.getpid(), get_ident()
+    endpoint._view = endpoint._map = endpoint._mutex = 1  # Logical unit values, never native HANDLEs.
+    endpoint._binding_inputs = endpoint.name, endpoint.nonce, sha, endpoint.descriptor
+    endpoint._poison = None; endpoint._reader = reader; endpoint._header = None if reader else b'unit-header'
+    def close(): endpoint._view = endpoint._map = endpoint._mutex = None
+    endpoint.close = close
+    return endpoint
+
+
+def _saved_unit_main(monkeypatch, captured, *, role='fresh', tree_sha='c'*64):
+    from types import ModuleType
+    raw, sha = captured; args = _saved_argv(role, raw, sha, tree_sha=tree_sha)
+    main = ModuleType('__main__'); main.__file__ = str(cli.ROOT/cli.NEW_SOURCES[1]); main.__spec__ = None
+    flags = sys.flags
+    class UnitFlags:
+        dont_write_bytecode = no_user_site = 1
+        hash_randomization = 0
+        def __getattr__(self, name): return getattr(flags, name)
+    monkeypatch.setattr(sys, 'flags', UnitFlags())
+    monkeypatch.setattr(cli, '__name__', '__main__')
+    monkeypatch.setitem(sys.modules, '__main__', main)
+    monkeypatch.delitem(sys.modules, cli.ENTRY_MODULE_NAME, raising=False)
+    monkeypatch.setattr(sys, 'argv', args[3:]); monkeypatch.setattr(sys, 'orig_argv', list(args))
+    monkeypatch.setattr(sys, 'path', [str(cli.ROOT/'experiments'), str(cli.EXE.parent), str(cli.EXE.parent/'Lib')])
+    monkeypatch.setattr(cli, '_DIRECT_BOOTSTRAP', None); monkeypatch.setattr(cli, '_SAVED_BOOTSTRAP', None)
+    # Pytest has imported science already. Only this preimport boundary is
+    # injected; this fixture does not prove an actual saved process bootstrap.
+    monkeypatch.setattr(cli, '_ordinary_preimports', lambda main: [])
+    for name, value in [('PYTHONDONTWRITEBYTECODE', '1'), ('PYTHONNOUSERSITE', '1'), ('PYTHONHASHSEED', '0')]:
+        monkeypatch.setenv(name, value)
+    for name in ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS'): monkeypatch.setenv(name, '1')
+    for name in ('PYTHONPATH', 'PYTHONHOME', 'PYTHONSTARTUP'): monkeypatch.delenv(name, raising=False)
+    return raw, sha, args, main
+
+
+def _saved_unit_bound(monkeypatch, captured, *, role='fresh', tree_sha='c'*64):
+    raw, sha, args, main = _saved_unit_main(monkeypatch, captured, role=role, tree_sha=tree_sha)
+    held = cli._bind_saved_main(role, raw, sha, tree_sha, cli.STAGE_PREFIX+'a'*64, 'b'*64)
+    channel = _saved_unit_endpoint(role, sha); held.bind_channel(channel)
+    return raw, sha, args, main, held, channel
+
+
+def _saved_unit_store(monkeypatch, captured):
+    tree = (('unit_output_tree', ()),); tree_sha = cli.digest(tree)
+    raw, sha, args, main, held, channel = _saved_unit_bound(monkeypatch, captured, role='parent', tree_sha=tree_sha)
+    original = cli.read
+    monkeypatch.setattr(cli, '_role_tree', lambda root: tree)
+    monkeypatch.setattr(cli, 'read', lambda path, **kw: raw if Path(path) == cli.OUTPUT/'context.json' else original(path, **kw))
+    return cli.RoleStore(raw, sha, tree_sha, 'parent')
+
+
+@pytest.mark.parametrize('role', ['parent', 'fresh'])
+def test_saved_binding_canonical_grammar_and_separate_supervise(saved_binding_context, role):
+    raw, sha = saved_binding_context; args = _saved_argv(role, raw, sha)
+    assert args[4:6] == ['--saved-entry', '--'+role]
+    parsed = cli.saved_file_arguments(args[4:])
+    assert parsed['role'] == role and parsed['context_path'] == str(cli.OUTPUT/'context.json')
+    assert '--input-root' not in args and '--output-root' not in args
+    with pytest.raises(ValueError): cli.ordinary_file_arguments(args[4:])
+    with pytest.raises(ValueError, match='separate trusted invocation'): _saved_argv('supervise', raw, sha)
+
+
+@pytest.mark.parametrize('fault', ['ordinary', 'supervise', 'duplicate', 'missing', 'order', 'unknown',
+    'input_root', 'output_root', 'relative', 'parent_path', 'nul', 'uppercase', 'short_sha', 'bad_channel', 'abbrev'])
+def test_saved_binding_parser_rejects_before_io(saved_binding_context, monkeypatch, fault):
+    raw, sha = saved_binding_context; args = _saved_argv('fresh', raw, sha)[4:]
+    if fault == 'ordinary': args[0] = '--ordinary-entry'
+    elif fault == 'supervise': args[1] = '--supervise'
+    elif fault == 'duplicate': args += args[-2:]
+    elif fault == 'missing': args = args[:-2]
+    elif fault == 'order': args[2:6] = args[4:6]+args[2:4]
+    elif fault == 'unknown': args[2] = '--other'
+    elif fault in ('input_root', 'output_root'): args += ['--'+fault.replace('_', '-'), str(cli.P1)]
+    elif fault == 'relative': args[3] = 'context.json'
+    elif fault == 'parent_path': args[3] = str(cli.OUTPUT/'..'/'context.json')
+    elif fault == 'nul': args[3] += '\0'
+    elif fault == 'uppercase': args[7] = 'A'*64
+    elif fault == 'short_sha': args[5] = 'a'*63
+    elif fault == 'bad_channel': args[9] = 'Local\\wrong'
+    else: args[6] = '--tree'
+    monkeypatch.setattr(cli, 'read', lambda *a, **k: pytest.fail('malformed argv read content'))
+    monkeypatch.setattr(cli.StageChannel, 'attach', lambda *a: pytest.fail('malformed argv attached'))
+    with pytest.raises(ValueError): cli._open_saved_role_inputs(args)
+
+
+@pytest.mark.parametrize('role', ['parent', 'fresh'])
+def test_saved_binding_unit_holds_exact_context_tree_and_open_writer(saved_binding_context, monkeypatch, role):
+    raw, sha, args, main, held, channel = _saved_unit_bound(monkeypatch, saved_binding_context, role=role)
+    assert cli.execution_context(role, raw, sha) == cli.parse(raw)
+    proof = held.proof()
+    assert proof['context_sha'] == sha and proof['transport_sha'] == cli.digest(cli.parse(held.transport))
+    assert proof['executable']['identity'] == cli.parse(raw)['executable']['identity']
+    assert len(cli.canonical(proof)) <= 16384 and 'caller_core' not in proof and 'input_files' not in proof
+    assert proof['F_launch_admitted'] is proof['full_runtime_closure_verified'] is False
+    assert all(proof[k] is False for k in cli.GATES)
+    with pytest.raises(ValueError): held.bind_channel(channel)
+    import pickle
+    with pytest.raises(TypeError): pickle.dumps(held)
+
+
+@pytest.mark.parametrize('fault', ['role', 'raw', 'sha', 'tree', 'channel', 'nonce', 'descriptor', 'closed',
+    'header', 'alias', 'argv', 'orig_argv', 'path', 'creator', 'transport', 'global'])
+def test_saved_binding_rejects_late_cross_binding(saved_binding_context, monkeypatch, fault):
+    raw, sha, args, main, held, channel = _saved_unit_bound(monkeypatch, saved_binding_context)
+    role, tree = 'fresh', 'c'*64
+    if fault == 'role': role = 'parent'
+    elif fault == 'raw': raw += b' '
+    elif fault == 'sha': sha = '0'*64
+    elif fault == 'tree': tree = '0'*64
+    elif fault == 'channel': channel.name = cli.STAGE_PREFIX+'d'*64
+    elif fault == 'nonce': channel.nonce = 'd'*64
+    elif fault == 'descriptor': channel.descriptor = cli.stage_descriptor('parent')
+    elif fault == 'closed': channel.close()
+    elif fault == 'header': channel._header = b'changed'
+    elif fault == 'alias': sys.modules[cli.ENTRY_MODULE_NAME] = object()
+    elif fault == 'argv': sys.argv.append('--drift')
+    elif fault == 'orig_argv': sys.orig_argv.append('--drift')
+    elif fault == 'path': sys.path.append(str(cli.EXE.parent/'other'))
+    elif fault == 'creator': object.__setattr__(held, 'creator', (0, 0))
+    elif fault == 'transport': object.__setattr__(held, 'transport', b'{}')
+    else: monkeypatch.setattr(cli, '_SAVED_BOOTSTRAP', object())
+    with pytest.raises(ValueError): cli._held_saved_bootstrap(role, raw, sha, tree_sha=tree)
+
+
+@pytest.mark.parametrize('fault', ['environment', 'main_file', 'flags', 'preimports', 'alias', 'path', 'argv', 'orig_argv', 'exe_identity'])
+def test_saved_binding_rejects_bootstrap_drift(saved_binding_context, monkeypatch, fault):
+    raw, sha, args, main = _saved_unit_main(monkeypatch, saved_binding_context)
+    if fault == 'environment': monkeypatch.setenv('PYTHONHASHSEED', '1')
+    elif fault == 'main_file': main.__file__ = str(cli.ROOT/'other.py')
+    elif fault == 'flags': sys.flags.no_user_site = 0
+    elif fault == 'preimports': monkeypatch.setattr(cli, '_ordinary_preimports', lambda *a: ['src.unexpected'])
+    elif fault == 'alias': sys.modules[cli.ENTRY_MODULE_NAME] = object()
+    elif fault == 'path': sys.path.append('relative')
+    elif fault == 'argv': sys.argv.append('--drift')
+    elif fault == 'orig_argv': sys.orig_argv.append('--drift')
+    else:
+        original = cli.identity
+        def identity(info):
+            value = original(info)
+            return (value[0], value[1]+1, *value[2:]) if info.st_size == cli.EXE.stat().st_size else value
+        monkeypatch.setattr(cli, 'identity', identity)
+    with pytest.raises(ValueError): cli._bind_saved_main('fresh', raw, sha, 'c'*64, cli.STAGE_PREFIX+'a'*64, 'b'*64)
+    assert cli._SAVED_BOOTSTRAP is None
+
+
+def test_saved_binding_ordinary_schema_cannot_cross_domains(saved_binding_context, tmp_path):
+    raw, sha = saved_binding_context
+    with pytest.raises(ValueError): cli._ordinary_bootstrap_context('fresh', cli.parse(raw))
+    ordinary = cli.make_role_probe_context(tmp_path/'output')
+    with pytest.raises(ValueError):
+        cli._bind_saved_main('fresh', ordinary, sha256(ordinary).hexdigest(), 'c'*64, cli.STAGE_PREFIX+'a'*64, 'b'*64)
+
+
+def test_saved_binding_owner_inputs_are_data_and_production_constructor_stays_closed(saved_binding_context, monkeypatch):
+    store = _saved_unit_store(monkeypatch, saved_binding_context)
+    role, raw, sha = 'fresh', store.raw, store.sha
+    reservation = store.reserve_child(role); channel = _saved_unit_endpoint(role, sha, reader=True)
+    inputs = cli.saved_owner_inputs(role, store, reservation, channel=channel)
+    value = inputs.check()
+    assert value['argv'] == _saved_argv(role, raw, sha, tree_sha=cli.digest(store.tree))
+    assert value['reservation'] == cli.parse(cli.canonical(list(reservation))) and store.child_consumed
+    assert value['native_owner_constructed'] is value['run_authority'] is value['F_launch_admitted'] is False
+    assert value['descriptor_sha'] == sha256(cli.stage_descriptor(role)).hexdigest()
+    with pytest.raises(ValueError, match='production stage launch remains disabled'):
+        cli._construct_stage_owner(value['argv'], channel, 'saved_'+role)
+    with pytest.raises(TypeError): cli.saved_owner_inputs(role, store, reservation, channel=channel, owner_factory=object)
+    with pytest.raises(TypeError): cli.saved_owner_inputs(role, store, reservation, channel=channel, tree_sha='0'*64)
+    with pytest.raises(ValueError): cli.saved_owner_inputs(role, store, reservation, channel=channel)
+    import pickle
+    with pytest.raises(TypeError): pickle.dumps(inputs)
+    channel.close()
+    with pytest.raises(ValueError): inputs.check()
+
+
+def test_saved_binding_store_checks_same_role_tree_and_context_before_science(saved_binding_context, monkeypatch):
+    tree = (('unit_output_tree', ()),); tree_sha = cli.digest(tree)
+    raw, sha, args, main, held, channel = _saved_unit_bound(monkeypatch, saved_binding_context, tree_sha=tree_sha)
+    read = cli.read
+    monkeypatch.setattr(cli, '_role_tree', lambda root: tree)
+    monkeypatch.setattr(cli, 'read', lambda path, **kw: raw if Path(path) == cli.OUTPUT/'context.json' else read(path, **kw))
+    store = cli.RoleStore(raw, sha, tree_sha, 'fresh'); store.check()
+    with pytest.raises(ValueError): cli.RoleStore(raw, sha, tree_sha, 'parent')
+    with pytest.raises(ValueError): cli.RoleStore(raw, sha, '0'*64, 'fresh')
+    monkeypatch.setattr(f, 'replay', lambda *a, **k: pytest.fail('missing binding entered scientific replay'))
+    monkeypatch.setattr(cli, '_SAVED_BOOTSTRAP', None)
+    with pytest.raises(ValueError): cli._role_reconstruct(store, 'fresh')
+
+
+def test_saved_binding_open_seam_is_open_only_and_never_executes_science(saved_binding_context, monkeypatch):
+    raw, sha, args, main = _saved_unit_main(monkeypatch, saved_binding_context)
+    original = cli.read; calls = []
+    monkeypatch.setattr(cli, 'read', lambda path, **kw: raw if Path(path) == cli.OUTPUT/'context.json' else original(path, **kw))
+    class UnitStore:
+        def __init__(self, image, digest, tree, role):
+            assert (image, digest, tree, role) == (raw, sha, 'c'*64, 'fresh'); calls.append('store')
+            cli._held_saved_bootstrap(role, image, digest, tree_sha=tree, require_channel=False)
+        def check(self): calls.append('protected'); cli._held_saved_bootstrap('fresh', raw, sha, tree_sha='c'*64)
+    monkeypatch.setattr(cli, 'RoleStore', UnitStore)
+    channel = _saved_unit_endpoint('fresh', sha)
+    def attach(name, nonce, digest, descriptor):
+        assert (name, nonce, digest, descriptor) == (channel.name, channel.nonce, sha, cli.stage_descriptor('fresh'))
+        calls.append('open_only'); return channel
+    monkeypatch.setattr(cli.StageChannel, 'attach', attach)
+    monkeypatch.setattr(cli.StageChannel, 'create', lambda *a, **k: pytest.fail('saved binding created transport'))
+    monkeypatch.setattr(f, 'replay', lambda *a, **k: pytest.fail('binding ran science'))
+    store, held, writer = cli._open_saved_role_inputs(args[4:])
+    assert writer is channel and held is cli._SAVED_BOOTSTRAP and calls == ['store', 'open_only', 'protected']
+
+
+def test_saved_binding_terminal_image_conflict_stays_unresolved(monkeypatch):
+    owner, cache, state, sample = _console_unit(monkeypatch); cache.observe(owner, sample)
+    state['image'] = 'c:\\other.exe'
+    assert cache.classify(owner, {2}) is None and cache._entries[(2, 22)][1] == 'unresolved'
+    state.update(image='c:\\windows\\system32\\conhost.exe', query_error=True)
+    assert cache.classify(owner, {2}) is None
+
+
+@pytest.mark.parametrize('role', ['parent', 'fresh', 'supervise'])
+def test_saved_binding_public_cli_stays_disabled(role):
+    import subprocess
+    result = subprocess.run([str(cli.EXE), '-B', '-s', str(cli.ROOT/cli.NEW_SOURCES[1]),
+        '--saved-entry', '--'+role], cwd=cli.ROOT, capture_output=True, timeout=5)
+    assert result.returncode != 0 and b'F launch remains disabled' in result.stderr
+    assert not cli.OUTPUT.exists()
+
+
+@pytest.mark.parametrize('fault', ['role', 'descriptor', 'context', 'reader', 'header', 'creator', 'data'])
+def test_saved_binding_owner_input_drift_never_constructs_native_owner(saved_binding_context, monkeypatch, fault):
+    store = _saved_unit_store(monkeypatch, saved_binding_context); channel = _saved_unit_endpoint('fresh', store.sha, reader=True)
+    inputs = cli.saved_owner_inputs('fresh', store, store.reserve_child('fresh'), channel=channel)
+    if fault == 'role': object.__setattr__(inputs, 'raw', inputs.raw.replace(b'"role":"fresh"', b'"role":"parent"'))
+    elif fault == 'descriptor': channel.descriptor = cli.stage_descriptor('parent')
+    elif fault == 'context': channel.context_sha = '0'*64
+    elif fault == 'reader': channel._reader = False
+    elif fault == 'header': channel._header = b'bound'
+    elif fault == 'creator': object.__setattr__(inputs, 'creator', (0, 0))
+    else: object.__setattr__(store, 'raw', store.raw+b' ')
+    with pytest.raises(ValueError): inputs.check()
+
+
+@pytest.mark.parametrize('fault', ['writer_pair', 'foreign_reservation', 'equal_copy', 'wrong_channel', 'tree'])
+def test_saved_binding_constructor_inputs_require_store_reservation(saved_binding_context, monkeypatch, fault):
+    store = _saved_unit_store(monkeypatch, saved_binding_context)
+    reservation = store.reserve_child('fresh'); channel = _saved_unit_endpoint('fresh', store.sha, reader=True)
+    role = 'fresh'
+    if fault == 'writer_pair': role = 'parent'
+    elif fault == 'foreign_reservation': reservation = ('fresh', time.monotonic(), '0'*64, store.creator)
+    elif fault == 'equal_copy': reservation = tuple(list(reservation))
+    elif fault == 'wrong_channel': channel = _saved_unit_endpoint('parent', store.sha, reader=True)
+    else: object.__setattr__(store, 'tree', (('different', ()),))
+    with pytest.raises(ValueError): cli.saved_owner_inputs(role, store, reservation, channel=channel)
+    assert not store.child_consumed
+
+
+def test_saved_binding_existing_saved_capability_rejects_ordinary_store(saved_binding_context, tmp_path, monkeypatch):
+    _saved_unit_bound(monkeypatch, saved_binding_context)
+    ordinary = cli.make_role_probe_context(tmp_path/'output'); sha = sha256(ordinary).hexdigest()
+    with pytest.raises(ValueError, match='saved bootstrap cannot enter an ordinary store'):
+        cli.RoleStore(ordinary, sha, 'c'*64, 'fresh')
+    store = object.__new__(cli.RoleStore); object.__setattr__(store, 'raw', ordinary)
+    object.__setattr__(store, 'schema', cli.ROLE_PROBE_SCHEMA)
+    with pytest.raises(ValueError, match='saved bootstrap cannot enter an ordinary store'): store.check()
+
+
+@pytest.mark.parametrize('fault', ['entry_identity', 'entry_parent'])
+def test_saved_binding_same_bytes_new_entry_identity_is_rejected(saved_binding_context, monkeypatch, fault):
+    raw, sha, args, main, held, channel = _saved_unit_bound(monkeypatch, saved_binding_context)
+    proof = held.proof()
+    if fault == 'entry_identity':
+        original = cli.identity; expected = tuple(proof['entry_identity'])
+        monkeypatch.setattr(cli, 'identity', lambda info: (expected[0], expected[1]+1, *expected[2:])
+            if original(info) == expected else original(info))
+    else:
+        original = cli.directories
+        def directories(path):
+            values = original(path)
+            return (*values[:-1], (values[-1][0], values[-1][1], values[-1][2]+1)) if Path(path) == cli.ROOT/'experiments' else values
+        monkeypatch.setattr(cli, 'directories', directories)
+    with pytest.raises(ValueError, match='file/parent identity drift'): cli.execution_context('fresh', raw, sha)
+
+
+@pytest.mark.parametrize('fault', ['expired', 'source', 'exe', 'environment'])
+def test_saved_binding_current_bookend_rejects_before_reservation_consumption(saved_binding_context, monkeypatch, fault):
+    from types import SimpleNamespace
+    store = _saved_unit_store(monkeypatch, saved_binding_context)
+    reservation = store.reserve_child('fresh'); channel = _saved_unit_endpoint('fresh', store.sha, reader=True)
+    context = cli.parse(store.raw)
+    if fault == 'expired': monkeypatch.setattr(cli, 'time', SimpleNamespace(monotonic=lambda: context['deadline']+1.))
+    elif fault == 'source':
+        changed = deepcopy(context['source_pins']); changed[cli.NEW_SOURCES[0]]['sha256'] = '0'*64
+        monkeypatch.setattr(cli, 'source_pins', lambda: changed)
+    elif fault == 'exe':
+        original = cli.identity; expected = tuple(context['executable']['identity'])
+        monkeypatch.setattr(cli, 'identity', lambda info: (expected[0], expected[1]+1, *expected[2:])
+            if original(info) == expected else original(info))
+    else: monkeypatch.setenv('OMP_NUM_THREADS', '2')
+    with pytest.raises(ValueError): cli.saved_owner_inputs('fresh', store, reservation, channel=channel)
+    assert store.child_consumed is False
+
+
+def test_saved_binding_owner_inputs_expire_after_creation_without_resetting_start(saved_binding_context, monkeypatch):
+    from types import SimpleNamespace
+    store = _saved_unit_store(monkeypatch, saved_binding_context)
+    reservation = store.reserve_child('fresh'); channel = _saved_unit_endpoint('fresh', store.sha, reader=True)
+    inputs = cli.saved_owner_inputs('fresh', store, reservation, channel=channel)
+    assert inputs.check()['reservation'][1] == reservation[1]
+    monkeypatch.setattr(cli, 'time', SimpleNamespace(monotonic=lambda: cli.parse(store.raw)['deadline']+1.))
+    with pytest.raises(ValueError): inputs.check()
+    assert store.child_consumed is True
+
+
+def test_saved_binding_new_allowed_environment_key_is_rejected(saved_binding_context, monkeypatch):
+    raw, sha = saved_binding_context; value = cli.parse(raw)
+    # Use an allowed key absent at binding time, including on conda-launched hosts.
+    key = 'CONDA_DEFAULT_ENV'; monkeypatch.delenv(key, raising=False)
+    value['environment'].pop(key, None)
+    raw = cli.canonical(value); sha = sha256(raw).hexdigest()
+    _saved_unit_bound(monkeypatch, (raw, sha))
+    monkeypatch.setenv(key, 'late_environment_key')
+    with pytest.raises(ValueError, match='actual environment drift'):
+        cli._held_saved_bootstrap('fresh', raw, sha)
+
+
+@pytest.mark.parametrize('fault', ['expired', 'source', 'exe', 'environment'])
+def test_saved_binding_commit_bookend_rejects_drift_after_first_check(saved_binding_context, monkeypatch, fault):
+    from types import SimpleNamespace
+    store = _saved_unit_store(monkeypatch, saved_binding_context)
+    reservation = store.reserve_child('fresh'); channel = _saved_unit_endpoint('fresh', store.sha, reader=True)
+    original = cli._saved_owner_endpoint; context = cli.parse(store.raw)
+    def endpoint(*args):
+        original(*args)
+        if fault == 'expired': monkeypatch.setattr(cli, 'time', SimpleNamespace(monotonic=lambda: context['deadline']+1.))
+        elif fault == 'source':
+            changed = deepcopy(context['source_pins']); changed[cli.NEW_SOURCES[0]]['sha256'] = '0'*64
+            monkeypatch.setattr(cli, 'source_pins', lambda: changed)
+        elif fault == 'exe':
+            identity = cli.identity; expected = tuple(context['executable']['identity'])
+            monkeypatch.setattr(cli, 'identity', lambda info: (expected[0], expected[1]+1, *expected[2:])
+                if identity(info) == expected else identity(info))
+        else: monkeypatch.setenv('OMP_NUM_THREADS', '2')
+    monkeypatch.setattr(cli, '_saved_owner_endpoint', endpoint)
+    with pytest.raises(ValueError): cli.saved_owner_inputs('fresh', store, reservation, channel=channel)
+    assert store.child_consumed is False

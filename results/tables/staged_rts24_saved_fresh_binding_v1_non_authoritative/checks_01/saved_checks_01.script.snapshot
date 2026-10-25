@@ -1,0 +1,104 @@
+"""Read-only saved binding evidence; no scientific replay, owner or F run."""
+from hashlib import sha256
+import importlib.util
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[4]
+OUT = Path(__file__).resolve().parent
+ENTRY = 'experiments/staged_rts24_saved_fresh_adoption_v1.py'
+TESTS = 'tests/test_staged_rts24_saved_fresh_adoption_v1.py'
+
+
+def pin(raw): return dict(bytes=len(raw), sha256=sha256(raw).hexdigest())
+def read(name): return json.loads((OUT/name).read_bytes())
+def module(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    value = importlib.util.module_from_spec(spec); spec.loader.exec_module(value); return value
+
+
+def verify():
+    preserved = read('preservation_inventory.json')
+    assert len(preserved) == read('baseline_snapshot.json')['preserved_count'] == 2382
+    for name, expected in preserved.items(): assert pin((ROOT/name).read_bytes()) == expected, name
+    for name, expected in read('navigation_before.json').items():
+        raw = (ROOT/name).read_bytes()
+        assert raw.partition(b'\n\n')[0].decode() == expected['header']
+        assert pin(raw[-expected['body']['bytes']:]) == expected['body']
+    assert read('baseline_saved_01.exit.json')['exit_code'] == 0
+    baseline = read('baseline_saved_01.stdout.log')
+    assert baseline['current_source_terminal_pass_nodes'] == 72 and baseline['saved_F_workflow_executed'] is False
+    for name, item in read('baseline_source.json').items():
+        assert pin((ROOT/item['snapshot']).read_bytes()) == item['pin']
+    selected = read('component_source_pins.json'); assert len(selected) == 49
+    for name, expected in selected.items(): assert pin((ROOT/name).read_bytes()) == expected, name
+    summary = read('ordinary_check_summary.json'); assert summary['source_pins'] == selected
+    final = set(summary['final_groups']); current = []; total = 0.
+    for label, archived in summary['all_pytest_attempts'].items():
+        value = read(label+'.exit.json'); total += value['wall_seconds']
+        assert value['source_pins_unchanged'] is True
+        for suffix, expected in archived['pins'].items():
+            assert pin((OUT/(label+'.'+suffix)).read_bytes()) == expected
+        for name, item in read(value['snapshot_manifest'])['sources'].items():
+            assert pin((ROOT/item['snapshot']).read_bytes()) == item['pin'] == value['source_pins'][name]
+        if label in final:
+            assert value['source_pins'] == selected and value['exit_code'] == 0 and value['timed_out'] is False
+            assert value['wall_seconds'] <= value['timeout_seconds'] and (OUT/(label+'.stderr.log')).read_bytes() == b''
+            assert (str(len(value['nodes']))+' passed').encode() in (OUT/(label+'.stdout.log')).read_bytes()
+            current.extend(value['nodes'])
+    assert len(current) == len(set(current)) == summary['current_terminal_pass_node_count']
+    assert set(current) == set(summary['final_nodeids']) and abs(total-summary['pytest_actual_seconds']) < 1e-8 and total <= 240
+    assert read('binding_units_01.exit.json')['exit_code'] == 1
+    assert b'4 passed, 56 errors' in (OUT/'binding_units_01.stdout.log').read_bytes()
+    assert read('binding_owner_07.exit.json')['timed_out'] is True
+    assert all(label not in final for label in ('binding_units_01', 'binding_smoke_02', 'binding_affected_03',
+        'binding_fast_04', 'binding_late_05', 'binding_bootstrap_06', 'binding_owner_07'))
+    fixture_events = read('unit_fixture_events.json')
+    for event in fixture_events:
+        raw = (ROOT/event['source_log']).read_bytes(); assert pin(raw) == event['source_log_pin']
+        line = raw.splitlines()[event['line']-1].partition(b'SAVED_BINDING_FIXTURE ')[2]
+        assert pin(line) == event['pin'] and json.loads(line) == event['value']
+        assert event['value']['logical_output_parent_identity'] is True
+        assert event['value']['F_launch_admitted'] is event['value']['actual_saved_F_execution'] is False
+    derivation = module('saved_binding_derivation', OUT/'verify_invocation_derivation.py').verify()
+    assert derivation == read('derivation_01.stdout.log')
+    prior = module('saved_binding_process', ROOT/'results/tables/staged_rts24_saved_fresh_invocation_v1_non_authoritative/checks_01/saved_checks.py')
+    graphs = read('invocation_graph_snapshots.json')
+    role_rows = [row for row in graphs if row['label'] in final and row['graph_kind'] == 'role']
+    assert len(role_rows) == 14
+    for row in role_rows:
+        value = json.loads((ROOT/row['result']).read_bytes())
+        assert value['ordinary_graph_completed'] is (row['case'] == 'normal')
+        assert value['F_launch_admitted'] is value['scientific_evidence_adopted'] is value['resource_admission'] is value['formal_result'] is False
+        if row['case'] == 'normal':
+            def artifact(name): return json.loads((ROOT/row['files'][name]['archive']).read_bytes())
+            parent, fresh = artifact('worker/launcher.json'), artifact('worker/fresh/launcher.json')
+            a = prior.process_oracle(parent, value['context_sha']); b = prior.process_oracle(fresh, value['context_sha'])
+            assert b < a and len(a) == 4 and len(b) == 2
+    history = module('saved_binding_history', OUT/'historical_stage_domain.py').verify()
+    assert history == read('historical_stage_01.stdout.log') and history['counted_as_current_epoch_nodes'] is False
+    p1 = module('saved_binding_p1', ROOT/'results/tables/staged_rts24_saved_fresh_roles_v1_non_authoritative/checks_01/saved_checks.py')
+    assert p1.saved_P1_bytes() == 683
+    for name, expected in read('document_checks.json')['document_pins'].items():
+        assert pin((ROOT/name).read_bytes()) == expected
+    review = read('preseal_review.json'); assert review['remaining_required_code_findings'] == []
+    assert review['official_verdict'] is review['receipt'] is review['seal'] is None
+    assert all(selected[n] == expected for n, expected in review['source_pins'].items())
+    assert read('disabled_entry_01.exit.json')['exit_code'] == 1
+    assert b'F launch remains disabled' in (OUT/'disabled_entry_01.stderr.log').read_bytes()
+    assert not (ROOT/'results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative/draft_01').exists()
+    assert not (ROOT/'results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative').exists()
+    for name, expected in read('support_pins.json').items(): assert pin((ROOT/name).read_bytes()) == expected, name
+    return dict(authority='DRAFT_NONAUTHORITATIVE', scope='saved binding unit interfaces and ordinary role regression',
+        preserved_old_paths=2382, P1_file_bytes_unchanged=683, navigation_bodies_preserved=3,
+        current_terminal_pass_nodes=len(current), current_saved_binding_nodes=summary['current_saved_binding_nodes'],
+        full_saved_binding_suite_rerun=False, earlier_epoch_and_timeout_counted_as_current=False,
+        historical_generic_stage_guard_nodes=87, historical_stage_counted_as_current=False,
+        pytest_actual_seconds=total, raw_derivation=derivation, logical_output_parent_identity=True,
+        actual_saved_file_process_verified=False, actual_saved_owner_constructed=False,
+        saved_F_workflow_executed=False, F_launch_admitted=False, new_native_solver_calls=0,
+        saved_P1_fresh_process_verified=False, saved_P1_parent_adoption_verified=False,
+        scientific_evidence_adopted=False, resource_admission=False, formal_result=False)
+
+
+if __name__ == '__main__': print(json.dumps(verify(), sort_keys=True, indent=2))

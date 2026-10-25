@@ -1,0 +1,113 @@
+{
+  "admission_rule": "each group cap must fit actual remaining240; later groups may remain unrun",
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "automatic_actor_retries": 0,
+  "caps": {
+    "binding_commit_08": 20,
+    "binding_reservation_09": 25,
+    "binding_rest_10": 20,
+    "legacy_15": 15,
+    "normal_16": 10,
+    "role_graph_a_12": 30,
+    "role_graph_b_13": 20,
+    "role_graph_c_14": 15,
+    "role_units_11": 25
+  },
+  "groups": {
+    "binding_commit_08": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_unit_holds_exact_context_tree_and_open_writer[parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_unit_holds_exact_context_tree_and_open_writer[fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_inputs_are_data_and_production_constructor_stays_closed",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_inputs_expire_after_creation_without_resetting_start",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_new_allowed_environment_key_is_rejected",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_commit_bookend_rejects_drift_after_first_check[expired]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_commit_bookend_rejects_drift_after_first_check[source]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_commit_bookend_rejects_drift_after_first_check[exe]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_commit_bookend_rejects_drift_after_first_check[environment]"
+    ],
+    "binding_reservation_09": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[role]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[descriptor]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[context]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[reader]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[header]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[creator]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_owner_input_drift_never_constructs_native_owner[data]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[writer_pair]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[foreign_reservation]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[equal_copy]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[wrong_channel]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_constructor_inputs_require_store_reservation[tree]"
+    ],
+    "binding_rest_10": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_store_checks_same_role_tree_and_context_before_science",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_open_seam_is_open_only_and_never_executes_science",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_existing_saved_capability_rejects_ordinary_store",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_current_bookend_rejects_before_reservation_consumption[expired]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_current_bookend_rejects_before_reservation_consumption[source]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_current_bookend_rejects_before_reservation_consumption[exe]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_binding_current_bookend_rejects_before_reservation_consumption[environment]"
+    ],
+    "legacy_15": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_context_binds_actual_compute_executable_inputs_sources_and_budget",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_argv_requires_the_same_raw_context_and_sha",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_actual_entry_and_expanded_arguments_are_bound",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_actual_test_argv_cannot_enter_F_execution_or_adoption"
+    ],
+    "normal_16": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_real_external_host_holds_context_and_observes_complete_graph"
+    ],
+    "role_graph_a_12": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_actual_witness_and_full_record_are_checked_before_content",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_real_parent_fresh_graph_and_all_bookend_failures[normal]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_real_parent_fresh_graph_and_all_bookend_failures[fresh_error]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_real_parent_fresh_graph_and_all_bookend_failures[mismatch]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_real_parent_fresh_graph_and_all_bookend_failures[g0_error]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_real_parent_fresh_graph_and_all_bookend_failures[g1_error]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_real_parent_fresh_graph_and_all_bookend_failures[g2_error]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_real_parent_fresh_graph_and_all_bookend_failures[g3_error]"
+    ],
+    "role_graph_b_13": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_real_parent_fresh_graph_and_all_bookend_failures[entry_alias_occupied]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_real_parent_fresh_graph_and_all_bookend_failures[entry_alias_drift]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_real_parent_fresh_graph_and_all_bookend_failures[entry_path_drift]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_real_parent_fresh_graph_and_all_bookend_failures[entry_orig_argv_drift]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_real_parent_fresh_graph_and_all_bookend_failures[entry_repo_module]"
+    ],
+    "role_graph_c_14": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_outer_launcher_corruption_is_rejected_against_live_image",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_late_payload_drift_preserves_published_observation_but_refuses_return"
+    ],
+    "role_units_11": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_target_reservations_cover_all_writers_and_failure",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_publication_rejects_conflict_scope_and_alias[target]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_publication_rejects_conflict_scope_and_alias[pending]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_publication_rejects_conflict_scope_and_alias[wrong_writer]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_publication_rejects_conflict_scope_and_alias[extra]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_publication_rejects_conflict_scope_and_alias[oversized]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_publication_rejects_conflict_scope_and_alias[hardlink]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_publication_window_retains_expected_bytes_and_disallows_retry[before_open]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_publication_window_retains_expected_bytes_and_disallows_retry[after_write]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_publication_window_retains_expected_bytes_and_disallows_retry[after_fsync]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_publication_window_retains_expected_bytes_and_disallows_retry[after_pending_readback]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_publication_window_retains_expected_bytes_and_disallows_retry[before_rename]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_publication_window_retains_expected_bytes_and_disallows_retry[after_rename]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_publication_window_retains_expected_bytes_and_disallows_retry[after_final_readback]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_store_rejects_context_same_bytes_replacement_and_frozen_state",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_source_context_cannot_adopt_F_or_expand_fixture",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_child_reservation_is_consumed_once_including_constructor_failure",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_relay_tracks_actual_cleanup_and_preserves_failure_layers[None]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_relay_tracks_actual_cleanup_and_preserves_failure_layers[quiesce]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_relay_tracks_actual_cleanup_and_preserves_failure_layers[close]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_relay_tracks_actual_cleanup_and_preserves_failure_layers[relay]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_json_or_fake_owner_cannot_grant_worker_read",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_constructor_and_publication_cleanup_layers_remain_available",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_controller_retains_descendant_only_handle_capability",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_wrapper_keeps_watch_primary_and_stage_close_secondary[controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_wrapper_keeps_watch_primary_and_stage_close_secondary[parent]"
+    ]
+  },
+  "previous_pytest_seconds": 120.125,
+  "reason": "final PRE_SEAL-closed saved binding bytes; targeted constructors/consume/env and ordinary related regression",
+  "remaining_pytest_seconds": 119.875
+}
