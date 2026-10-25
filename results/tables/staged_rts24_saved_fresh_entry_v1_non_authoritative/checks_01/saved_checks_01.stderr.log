@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_entry_v1_non_authoritative\checks_01\saved_checks.py", line 151, in <module>
+    if __name__ == '__main__': sys.stdout.buffer.write((json.dumps(verify(), sort_keys=True, indent=2)+'\n').encode())
+                                                                   ^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_entry_v1_non_authoritative\checks_01\saved_checks.py", line 75, in verify
+    assert len(final_nodes) == len(set(final_nodes)) == 72 and final_nodes == summary['final_nodeids']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

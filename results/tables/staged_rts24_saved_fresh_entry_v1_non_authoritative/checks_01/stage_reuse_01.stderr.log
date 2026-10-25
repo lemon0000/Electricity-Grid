@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_entry_v1_non_authoritative\checks_01\stage_reuse_oracle.py", line 83, in <module>
+    if __name__ == '__main__': print(json.dumps(verify(), sort_keys=True, indent=2))
+                                                ^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_entry_v1_non_authoritative\checks_01\stage_reuse_oracle.py", line 71, in verify
+    assert pin((ROOT/'tests/test_staged_rts24_process_guard_v1.py').read_bytes()) == json.loads(
+                                                                                     ^^^^^^^^^^^
+KeyError: 'tests/test_staged_rts24_process_guard_v1.py'

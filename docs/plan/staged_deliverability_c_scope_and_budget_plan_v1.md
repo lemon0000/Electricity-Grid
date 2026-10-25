@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-25 F普通actor文件入口开发：见[新交接](continuation_handoff_20261025_saved_fresh_entry.md)及[合同](staged_deliverability_c_saved_fresh_entry_development_contract_v1.md)。controller/parent/fresh已接固定直接文件入口、main/argv/path/source自检与原Job/quiet；当前同源码72节点终态通过，全部pytest attempt236.781s＜240s。早epoch54/26仅作冻结事实，generic stage/guard87在未变域复用，均不计72。role_graph_07失败及role_graph_14的45s整组超时保留，后者不能记通过；isolated late payload已通过。1,724旧路径/三导航旧body/P1全683保持。真实root-exit残留helper窗口、terminal image冲突直接分支及完整role组终态仍OPEN；实际saved owner、完整调用/最大合法编码/整链180s/硬中断/整体资源未闭合，局部F与整包science/resource/formal全false。
+
 2026-10-25 F外部调用开发检查点：见[最新交接](continuation_handoff_20261025_saved_fresh_invocation.md)、[开发合同](staged_deliverability_c_saved_fresh_invocation_development_contract_v1.md)。ordinary外部Job、context独立持有/ACK、controller及parent/fresh连接、quiet后消费和阻塞/错误优先已通过最终epoch127项检查；pytest所有attempt累计220.750s＜240s，早epoch、31图原始档案和冻结复用另列。原SF49、17目标/四record cap、40＋5＋5/180s及科学边界保持；小帽观测未完成真实F、最大编码/完整调用、arming/host硬中断、整体资源或科学采用。下一步接通actual saved owner/entry前先核这些缺口；F_launch_admitted、局部saved verified、science/resource/formal全false。
 
 2026-10-25 F角色连接：见[交接](continuation_handoff_20261025_saved_fresh_roles.md)、[合同](staged_deliverability_c_saved_fresh_roles_development_contract_v1.md)。ordinary双进程与两层Job/relay/quiet/创建式发布/15→16库存已连接；140项以10/26/87/17分组终态通过，六次pytest含失败与30s timeout累计180.093s，collection7.281s，successor普通总帽仍300s。17 targets独立预留5,537,792B含四记录512KiB及failure128KiB；这是受控输出设计与小例，不是F/C整体资源准入。source adapter未改，旧科学重放仅复用未变域；actual saved owner与external deadline/合计资源/最终同步I/O仍待接通，原40＋5＋5/180s和全部整包/资源/正式门禁保持false/OPEN。

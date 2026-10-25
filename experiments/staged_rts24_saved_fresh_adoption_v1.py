@@ -16,6 +16,7 @@ import sys
 import tempfile
 from threading import get_ident
 import time
+from types import ModuleType
 
 ROOT = Path(__file__).absolute().parents[1]
 P1 = ROOT/'results/tables/staged_rts24_native_v1_non_authoritative/p1_01'
@@ -44,6 +45,7 @@ STAGE_SECONDS = dict(prepare=10, parent=45, fresh=40, inner_quiesce=5, inner_ter
     parent_compare=15, outer_quiesce=5, outer_terminal=10, final_check=15, final_publish=15, failure=15)
 GATES = dict(native_authorized=False, resource_admission=False, formal_result=False,
     scientific_evidence_adopted=False, public_P2_execution_enabled=False)
+_DIRECT_BOOTSTRAP = None
 
 
 def require(value, message):
@@ -864,7 +866,7 @@ def _construct_stage_owner(args, channel, label, *, owner_factory=None, started=
         actual_os_commandline_independently_verified=False)
     require(len(canonical(prospective)) <= 16384, 'bounded probe startup record required')
     from src.staged_rts24_process_guard_v1 import OwnedChild
-    factory = owner_factory or OwnedChild
+    factory = _stage_owner_factory(OwnedChild, owner_factory, label)
     # Allocate before __init__ so a partial constructor's actual handles remain reachable.
     owner = object.__new__(factory)
     if started is None: started = time.monotonic()
@@ -1138,7 +1140,8 @@ def _watch_stage(held, *, absolute_deadline=None, relay=None, invocation=None, i
 
 ROLE_PROBE_SCHEMA = 'staged_saved_F_ordinary_role_graph_v1'
 ROLE_PROBE_SCOPE = 'ordinary_role_algebra_only'
-ROLE_PROBE_CASES = ('normal', 'fresh_error', 'mismatch', 'g0_error', 'g1_error', 'g2_error', 'g3_error')
+ROLE_PROBE_CASES = ('normal', 'fresh_error', 'mismatch', 'g0_error', 'g1_error', 'g2_error', 'g3_error',
+    'entry_alias_occupied', 'entry_alias_drift', 'entry_path_drift', 'entry_orig_argv_drift', 'entry_repo_module')
 
 
 def role_target_caps():
@@ -1305,6 +1308,7 @@ class RoleStore:
     attempt_commit: str
 
     def __init__(self, raw, expected_sha, expected_tree_sha, writer='controller'):
+        if _DIRECT_BOOTSTRAP is not None: _DIRECT_BOOTSTRAP.check()
         context = _role_context(raw, expected_sha)
         require(writer in ('controller', 'parent', 'fresh'), 'closed role store writer required')
         root = Path(context['output_root']); tree = _role_tree(root)
@@ -1317,6 +1321,7 @@ class RoleStore:
         for name, value in values.items(): object.__setattr__(self, name, value)
 
     def check(self):
+        if _DIRECT_BOOTSTRAP is not None: _DIRECT_BOOTSTRAP.check()
         require(self.creator == (os.getpid(), get_ident()) and (str(self.root), self.sha, self.tree, self.writer) == self.binding
             and type(self.raw) is bytes and sha256(self.raw).hexdigest() == self.sha, 'creating held role store required')
         require(_role_tree(self.root) == self.tree and read(self.root/'context.json') == self.raw, 'role output/context bookend differs')
@@ -1538,10 +1543,8 @@ def prepare_role_probe_output(raw, expected_sha):
 
 def _role_child_argv(role, store, channel):
     require(role in ('parent', 'fresh'), 'closed child role required')
-    body = ("from experiments import staged_rts24_saved_fresh_adoption_v1 as e; "
-        f"e._ordinary_role_entry({role!r},{str(store.root/'context.json')!r},{store.sha!r},"
-        f"{digest(store.tree)!r},{channel.name!r},{channel.nonce!r})")
-    return [str(EXE), '-B', '-s', '-c', body]
+    return ordinary_file_argv(role, str(store.root/'context.json'), store.sha, channel.name, channel.nonce,
+        tree_sha=digest(store.tree))
 
 
 def _create_role_owner(role, store, reservation=None):
@@ -1681,7 +1684,9 @@ def _role_auxiliary(store, role):
     for name in names:
         require(store.writer == role and name in role_targets(role), 'fixed application log writer required')
         target = store.root/name
-        raw = canonical(dict(event='application_role_entered', role=role, context_sha=store.sha))+b'\n' if name.endswith('.jsonl') else b''
+        event = dict(event='application_role_entered', role=role, context_sha=store.sha)
+        if _DIRECT_BOOTSTRAP is not None: event['entry_bootstrap'] = _DIRECT_BOOTSTRAP.proof()
+        raw = canonical(event)+b'\n' if name.endswith('.jsonl') else b''
         with target.open('xb') as stream: stream.write(raw)
     store.accounting()
 
@@ -1758,14 +1763,21 @@ def _ordinary_role_entry(role, context_path, context_sha, tree_sha, channel_name
     raw = read(context_path); require(sha256(raw).hexdigest() == context_sha, 'held role entry context differs')
     context = parse(raw)
     require(context.get('schema') == ROLE_PROBE_SCHEMA and Path(context_path) == Path(context['output_root'])/'context.json', 'fixed ordinary role context path required')
+    context = check_role_probe_context(raw, context_sha)
+    expected = ordinary_file_argv(role, context_path, context_sha, channel_name, channel_nonce, tree_sha=tree_sha)
+    if role == 'fresh' and context['case'] == 'entry_alias_occupied': sys.modules[ENTRY_MODULE_NAME] = object()
+    if role == 'fresh' and context['case'] == 'entry_repo_module':
+        unexpected = ModuleType('entry_repo_module'); unexpected.__file__ = str(ROOT/'experiments/entry_fault.py')
+        sys.modules['entry_unrelated_name'] = unexpected
+    _bind_ordinary_main(role, context_sha, expected, context)
+    if role == 'fresh':
+        if context['case'] == 'entry_alias_drift': sys.modules[ENTRY_MODULE_NAME] = object()
+        elif context['case'] == 'entry_path_drift': sys.path.append(str(EXE.parent/'entry_fault'))
+        elif context['case'] == 'entry_orig_argv_drift': sys.orig_argv.append('--entry-fault')
+    store = RoleStore(raw, context_sha, tree_sha, role)
     descriptor = ordinary_stage_descriptor(role, 'role_graph')
     writer = StageChannel.attach(channel_name, channel_nonce, context_sha, descriptor)
-    store = None
     try:
-        store = RoleStore(raw, context_sha, tree_sha, role)
-        expected = _role_child_argv(role, store, writer)
-        require(sys.argv == ['-c'], 'ordinary role actual entry differs')
-        require(expected[:4] == [str(EXE), '-B', '-s', '-c'], 'fixed ordinary interpreter required')
         (_run_parent_role if role == 'parent' else _run_fresh_role)(store, writer)
     except BaseException as primary:
         cleanup_errors = []
@@ -2253,6 +2265,8 @@ def _system_console_path(api=None):
 def _terminal_console_helpers(owner, pids):
     """Ordinary graph only; this classification never substitutes for quiet."""
     if len(pids) != 1: return None
+    cache = getattr(owner, '_ordinary_console_cache', None)
+    if type(cache) is ConsoleImageCache: return cache.classify(owner, pids)
     try:
         pid = next(iter(pids)); matches = [(key, handle) for key, handle in owner._members.items() if key[0] == pid]
         if len(matches) != 1: return None
@@ -2264,6 +2278,89 @@ def _terminal_console_helpers(owner, pids):
         if buffer.value.lower() != _system_console_path(api): return None
         return [dict(pid=member_pid, creation_filetime=creation, image_path=buffer.value, observed_at=time.monotonic())]
     except Exception: return None
+
+
+def _console_image(owner, handle):
+    api = owner._k
+    api.QueryFullProcessImageNameW.argtypes = [W.HANDLE, W.DWORD, W.LPWSTR, C.POINTER(W.DWORD)]
+    api.QueryFullProcessImageNameW.restype = W.BOOL
+    buffer = C.create_unicode_buffer(32768); count = W.DWORD(len(buffer))
+    _native(api.QueryFullProcessImageNameW(handle, 0, buffer, C.byref(count)))
+    return buffer.value
+
+
+class ConsoleImageCache:
+    """One live query per retained identity; no new HANDLE or run authority."""
+    def __init__(self, owner):
+        self._owner_id = id(owner); self._creator = os.getpid(), get_ident()
+        self._entries = {}; self._system_path = None; self._commit = digest(self._image())
+
+    def _image(self):
+        return dict(system_path=self._system_path, entries=[[list(key), *value] for key, value in sorted(self._entries.items())])
+
+    def check(self, owner):
+        require(self._creator == (os.getpid(), get_ident()) and self._owner_id == id(owner)
+            and digest(self._image()) == self._commit, 'creating retained console cache required')
+
+    def observe(self, owner, sample):
+        self.check(owner)
+        for key, handle in tuple(owner._members.items()):
+            if key[0] == owner.pid or key[0] not in sample['pids'] or key in self._entries: continue
+            status, stamp = 'unresolved', None
+            try:
+                if owner._k.WaitForSingleObject(handle, 0) == 258:
+                    image = _console_image(owner, handle); stamp = time.monotonic()
+                    if self._system_path is None:
+                        system_path = _system_console_path(owner._k)
+                        require(len(system_path) <= 4096, 'bounded console system path required')
+                        self._system_path = system_path
+                    status = 'positive' if image.lower() == self._system_path else 'negative'
+            except Exception: pass
+            self._entries[key] = handle, status, stamp
+        self._commit = digest(self._image())
+
+    def classify(self, owner, pids):
+        try:
+            self.check(owner)
+            if len(pids) != 1: return None
+            pid = next(iter(pids)); matches = [(key, handle) for key, handle in owner._members.items() if key[0] == pid]
+            if len(matches) != 1: return None
+            key, handle = matches[0]; entry = self._entries.get(key)
+            if entry is None or entry[0] != handle or entry[1] != 'positive': return None
+            expected = _system_console_path(owner._k)
+            if self._system_path != expected or entry[2] is None or owner._k.WaitForSingleObject(handle, 0) not in (0, 258): return None
+            try:
+                current = _console_image(owner, handle)
+                if current.lower() != expected:
+                    self._entries[key] = handle, 'unresolved', entry[2]; self._commit = digest(self._image()); return None
+            except OSError:
+                # A signaled console process can no longer expose its image.
+                # The still-retained identity/HANDLE binds the earlier query.
+                pass
+            return [dict(pid=key[0], creation_filetime=key[1], image_path=expected, observed_at=time.monotonic())]
+        except Exception: return None
+
+    def __reduce__(self): raise TypeError('retained console image cache cannot be serialized')
+
+
+def _console_observed_factory(base):
+    class ConsoleObservedChild(base):
+        def __init__(self, *args, **kwargs):
+            self._ordinary_console_cache = ConsoleImageCache(self)
+            super().__init__(*args, **kwargs)
+
+        def sample(self):
+            value = super().sample()
+            self._ordinary_console_cache.observe(self, value)
+            return value
+    return ConsoleObservedChild
+
+
+def _stage_owner_factory(base, injected, label):
+    if injected is not None: return injected
+    if label in ('role_graph_parent', 'role_graph_fresh', 'invocation_broker', 'invocation_controller'):
+        return _console_observed_factory(base)
+    return base
 
 
 def arm_ordinary_invocation(output, case='normal'):
@@ -2353,9 +2450,9 @@ def _invocation_descriptor(ack_sha):
 
 
 def _invocation_controller_argv(mailbox, context_sha, ack_sha, channel):
-    code = ('from experiments import staged_rts24_saved_fresh_adoption_v1 as e; '
-        f'e._ordinary_invocation_controller({mailbox.name!r},{mailbox.request_sha!r},{context_sha!r},{ack_sha!r},{channel.name!r},{channel.nonce!r})')
-    return [str(EXE), '-B', '-s', '-c', code]
+    context_path = str(Path(_held_mailbox_request(mailbox)['output_root'])/'context.json')
+    return ordinary_file_argv('supervise', context_path, context_sha, channel.name, channel.nonce,
+        mailbox_name=mailbox.name, request_sha=mailbox.request_sha, ack_sha=ack_sha)
 
 
 def _check_controller_binding(mailbox, context_sha, ack_sha, binding):
@@ -2684,21 +2781,25 @@ def _ordinary_invocation_broker(name, request_sha, stage_name, stage_nonce):
         raise InvocationUnresolved((mailbox, writer, controller, channel, primary), primary, errors) from primary
 
 
-def _ordinary_invocation_controller(name, request_sha, context_sha, ack_sha, stage_name, stage_nonce):
+def _ordinary_invocation_controller(name, request_sha, context_sha, ack_sha, stage_name, stage_nonce, context_path):
     mailbox = writer = None
     try:
         mailbox = InvocationMailbox.attach(name, request_sha, 'controller')
         binding = mailbox.read_packet('binding', bookend=True, _wait=100)
         request = mailbox.read_packet('request', bookend=True, _wait=100)
         _check_controller_binding(mailbox, context_sha, ack_sha, binding)
-        writer = StageChannel.attach(stage_name, stage_nonce, context_sha, _invocation_descriptor(ack_sha))
-        writer.enter('prepare')
         offer = mailbox.read_packet('context', bookend=True, _wait=100)
         start = mailbox.read_packet('start', bookend=True, _wait=100); ack = mailbox.read_packet('ack', bookend=True, _wait=100)
         require(all(value is not None for value in (request, offer, start, ack)) and digest(ack) == ack_sha
             and canonical(ack) == canonical(_invocation_ack(mailbox, offer, start['started'])), 'controller host ACK differs')
         raw = _held_context_offer(request, start['started'], offer, parse(_invocation_decode(mailbox._header))['broker_identity'])
         require(sha256(raw).hexdigest() == context_sha, 'controller held context differs')
+        require(context_path == str(Path(request['output_root'])/'context.json'), 'controller fixed context path differs')
+        class Inputs:
+            name, nonce = stage_name, stage_nonce
+        _bind_ordinary_main('supervise', context_sha, _invocation_controller_argv(mailbox, context_sha, ack_sha, Inputs), request)
+        writer = StageChannel.attach(stage_name, stage_nonce, context_sha, _invocation_descriptor(ack_sha))
+        writer.enter('prepare')
         context = check_role_probe_context(raw, context_sha); root = Path(context['output_root'])
         require(read(root/'context.json') == raw and list(identity(ordinary(root/'context.json'))) == offer['context_receipt']['identity']
             and [list(row) for row in directories(root)] == offer['root_directories']
@@ -2708,7 +2809,7 @@ def _ordinary_invocation_controller(name, request_sha, context_sha, ack_sha, sta
         result = _run_role_controller(store, writer, invocation_case=request['case'])
         require(result['ordinary_graph_completed'] is True, 'controller ordinary graph failed')
         mailbox.write_packet('controller_return', dict(schema=INVOCATION_SCHEMA, request_sha=request_sha, context_sha=context_sha,
-            ack_sha=ack_sha, binding_sha=digest(binding), result=result))
+            ack_sha=ack_sha, binding_sha=digest(binding), entry_bootstrap=_DIRECT_BOOTSTRAP.proof(), result=result))
         writer.enter('terminal'); mailbox.close(); writer.close()
     except BaseException as primary:
         errors = []
@@ -2725,13 +2826,14 @@ def _ordinary_invocation_controller(name, request_sha, context_sha, ack_sha, sta
 
 
 def _check_controller_return(mailbox, value, binding):
-    keys(value, 'schema request_sha context_sha ack_sha binding_sha result')
+    keys(value, 'schema request_sha context_sha ack_sha binding_sha entry_bootstrap result')
     require(value['schema'] == INVOCATION_SCHEMA and value['request_sha'] == mailbox.request_sha
         and all(value[name] == binding[name] for name in ('context_sha', 'ack_sha')) and value['binding_sha'] == digest(binding),
         'controller return capture differs')
     result = value['result']; keys(result, 'authority scope ordinary_graph_completed observation_pin input_bookends output_inventory output_root '
         'F_launch_admitted saved_P1_fresh_process_verified saved_P1_parent_adoption_verified '+' '.join(GATES))
     request = _held_mailbox_request(mailbox)
+    checked_ordinary_bootstrap(value['entry_bootstrap'], 'supervise', binding['context_sha'], binding['startup']['argv'], request)
     require(result['authority'] == 'DRAFT_NONAUTHORITATIVE' and result['scope'] == ROLE_PROBE_SCOPE
         and result['ordinary_graph_completed'] is True and result['output_root'] == request['output_root']
         and all(result[name] is False for name in (*GATES, 'F_launch_admitted', 'saved_P1_fresh_process_verified', 'saved_P1_parent_adoption_verified'))
@@ -2793,5 +2895,188 @@ def _check_invocation_return(armed, value):
     return value
 
 
+ORDINARY_ENTRY_SCHEMA = 'staged_saved_F_ordinary_file_bootstrap_v1'
+ENTRY_MODULE_NAME = 'experiments.staged_rts24_saved_fresh_adoption_v1'
+
+
+def ordinary_file_argv(role, context_path, context_sha, channel_name, channel_nonce, *,
+        tree_sha=None, mailbox_name=None, request_sha=None, ack_sha=None):
+    """Closed pure-RAM argv builder; no filesystem lookup or user code."""
+    require(role in ('parent', 'fresh', 'supervise'), 'closed ordinary file role required')
+    require(type(context_path) is str and 0 < len(context_path) <= 4096 and '\0' not in context_path,
+        'bounded ordinary context path required')
+    path = Path(context_path)
+    require(path.is_absolute() and '..' not in path.parts and path.name == 'context.json'
+        and str(path.absolute()) == context_path, 'canonical absolute context path required')
+    require(_hex64(context_sha) and _hex64(channel_nonce) and type(channel_name) is str
+        and channel_name.startswith(STAGE_PREFIX) and _hex64(channel_name[len(STAGE_PREFIX):]), 'closed stage transport binding required')
+    fields = [('context', context_path), ('context-sha', context_sha)]
+    if role == 'supervise':
+        require(tree_sha is None and type(mailbox_name) is str and mailbox_name.startswith(INVOCATION_PREFIX)
+            and _hex64(mailbox_name[len(INVOCATION_PREFIX):]) and _hex64(request_sha) and _hex64(ack_sha), 'closed controller transport required')
+        fields += [('mailbox', mailbox_name), ('request-sha', request_sha), ('ack-sha', ack_sha)]
+    else:
+        require(_hex64(tree_sha) and mailbox_name is request_sha is ack_sha is None, 'closed child tree binding required')
+        fields += [('tree-sha', tree_sha)]
+    fields += [('channel', channel_name), ('nonce', channel_nonce)]
+    return [str(EXE), '-B', '-s', str(ROOT/NEW_SOURCES[1]), '--ordinary-entry', '--'+role,
+        *(token for key, value in fields for token in ('--'+key, value))]
+
+
+def ordinary_file_arguments(argv):
+    require(type(argv) is list and all(type(v) is str and '\0' not in v for v in argv)
+        and len(argv) >= 2 and argv[0] == '--ordinary-entry', 'closed ordinary file arguments required')
+    roles = {'--parent': 'parent', '--fresh': 'fresh', '--supervise': 'supervise'}
+    require(argv[1] in roles, 'closed ordinary file role flag required')
+    role = roles[argv[1]]
+    names = ['context', 'context-sha']+(['mailbox', 'request-sha', 'ack-sha'] if role == 'supervise' else ['tree-sha'])+['channel', 'nonce']
+    require(len(argv) == 2+2*len(names) and argv[2::2] == ['--'+n for n in names], 'ordinary file argument order/count differs')
+    values = dict(zip(names, argv[3::2]))
+    result = dict(role=role, context_path=values['context'], context_sha=values['context-sha'],
+        channel_name=values['channel'], channel_nonce=values['nonce'], tree_sha=values.get('tree-sha'),
+        mailbox_name=values.get('mailbox'), request_sha=values.get('request-sha'), ack_sha=values.get('ack-sha'))
+    require(ordinary_file_argv(**result)[4:] == argv, 'canonical ordinary file arguments differ')
+    return result
+
+
+def _direct_main_shape(expected):
+    main = sys.modules.get('__main__')
+    require(main is not None and main is sys.modules.get(__name__) and main.__name__ == '__main__'
+        and getattr(main, '__spec__', None) is None and type(getattr(main, '__file__', None)) is str
+        and Path(main.__file__).absolute() == ROOT/NEW_SOURCES[1], 'direct ordinary main module required')
+    require(sys.argv == expected[3:] and list(sys.orig_argv) == expected
+        and Path(sys.executable).absolute() == EXE and Path.cwd().absolute() == ROOT,
+        'direct ordinary argv/orig_argv/executable/cwd differs')
+    require(sys.flags.dont_write_bytecode == sys.flags.no_user_site == 1 and sys.flags.hash_randomization == 0,
+        'controlled ordinary interpreter flags required')
+    return main
+
+
+def _checked_entry_paths(paths, *, installed):
+    require(type(paths) in (list, tuple) and 1 <= len(paths) <= 32
+        and all(type(p) is str and 0 < len(p) <= 4096 and Path(p).is_absolute() and '..' not in Path(p).parts
+            and str(Path(p).absolute()) == p for p in paths), 'absolute bounded entry search paths required')
+    require(len({p.lower() for p in paths}) == len(paths), 'duplicate entry search path')
+    if installed:
+        require(paths[0] == str(ROOT) and all(Path(p).is_relative_to(EXE.parent) for p in paths[1:]), 'fixed ROOT-first search path required')
+    else:
+        require(paths[0] == str(ROOT/'experiments') and all(Path(p).is_relative_to(EXE.parent) for p in paths[1:]),
+            'fixed direct-file initial search path required')
+    return tuple(paths)
+
+
+@dataclass(frozen=True, init=False)
+class OrdinaryFileBootstrap:
+    raw: bytes
+    creator: tuple
+    main: object
+    argv: tuple
+    paths: tuple
+    binding: tuple
+
+    def __init__(self, raw, main, argv, paths):
+        values = dict(raw=raw, main=main, argv=tuple(argv), paths=tuple(paths), creator=(os.getpid(), get_ident()))
+        values['binding'] = sha256(raw).hexdigest(), id(main), tuple(argv), tuple(paths)
+        for name, value in values.items(): object.__setattr__(self, name, value)
+        self.check()
+
+    def check(self):
+        require(self.creator == (os.getpid(), get_ident()) and type(self.raw) is bytes
+            and (sha256(self.raw).hexdigest(), id(self.main), self.argv, self.paths) == self.binding,
+            'creating ordinary bootstrap binding required')
+        require(_direct_main_shape(list(self.argv)) is self.main and sys.modules.get(ENTRY_MODULE_NAME) is self.main
+            and tuple(sys.path) == self.paths, 'ordinary main alias/search path/argv drift')
+
+    def proof(self): self.check(); return parse(self.raw)
+    def __reduce__(self): raise TypeError('live ordinary file bootstrap cannot be serialized')
+
+
+def _bind_ordinary_main(role, context_sha, expected, context):
+    global _DIRECT_BOOTSTRAP
+    _ordinary_bootstrap_context(role, context)
+    require(_DIRECT_BOOTSTRAP is None, 'single ordinary bootstrap required')
+    main = _direct_main_shape(expected)
+    existing = sys.modules.get(ENTRY_MODULE_NAME)
+    require(existing is None or existing is main, 'canonical ENTRY module already occupied')
+    preimports = _ordinary_preimports(main)
+    require(preimports == [], 'project/science module preceded ordinary file bootstrap')
+    require(all(os.environ.get(k) == context['environment'][k] for k in
+        ('PYTHONDONTWRITEBYTECODE', 'PYTHONNOUSERSITE', 'PYTHONHASHSEED'))
+        and not any(k in os.environ for k in ('PYTHONPATH', 'PYTHONHOME', 'PYTHONSTARTUP')), 'uncontrolled ordinary Python environment')
+    require(pin(read(main.__file__)) == context['source_pins'][NEW_SOURCES[1]]
+        and context['executable'] == dict(path=str(EXE), pin=pin(read(EXE, allow_links=True)), python=sys.version)
+        and environment() == context['environment'], 'ordinary file source/executable/environment differs')
+    initial = _checked_entry_paths(tuple(sys.path), installed=False)
+    paths = _checked_entry_paths((str(ROOT), *initial[1:]), installed=True)
+    # The script directory is replaced by ROOT; no project module is imported here.
+    sys.path[:] = paths; sys.modules[ENTRY_MODULE_NAME] = main
+    value = dict(schema=ORDINARY_ENTRY_SCHEMA, authority='DRAFT_NONAUTHORITATIVE', scope='ordinary_file_entry_self_check_only',
+        role=role, context_sha=context_sha, entry_path=str(ROOT/NEW_SOURCES[1]), entry_pin=context['source_pins'][NEW_SOURCES[1]],
+        executable=context['executable'], cwd=str(ROOT), argv_sha=digest(expected), orig_argv_sha=digest(list(sys.orig_argv)),
+        sys_path=list(paths), sys_path_sha=digest(paths), main_is_canonical_module=True, main_spec_is_none=True,
+        project_imports_before_bootstrap=preimports, project_import_scan='module_file_paths_and_project_namespaces',
+        flags=dict(dont_write_bytecode=True, no_user_site=True, hash_randomization=False),
+        independent_OS_commandline_verified=False, full_runtime_closure_verified=False,
+        F_launch_admitted=False, saved_P1_fresh_process_verified=False, saved_P1_parent_adoption_verified=False, **GATES)
+    raw = canonical(value); require(len(raw) <= 16384, 'ordinary bootstrap proof cap')
+    checked_ordinary_bootstrap(value, role, context_sha, expected, context)
+    _DIRECT_BOOTSTRAP = OrdinaryFileBootstrap(raw, main, expected, paths)
+    return _DIRECT_BOOTSTRAP
+
+
+def _ordinary_bootstrap_context(role, context):
+    schemas = dict(parent=ROLE_PROBE_SCHEMA, fresh=ROLE_PROBE_SCHEMA, supervise=INVOCATION_SCHEMA)
+    require(role in schemas and type(context) is dict and context.get('schema') == schemas[role]
+        and context.get('authority') == 'DRAFT_NONAUTHORITATIVE' and context.get('scope') == ROLE_PROBE_SCOPE
+        and context.get('repo_root') == str(ROOT)
+        and all(context.get(k) is False for k in (*GATES, 'F_launch_admitted', 'saved_P1_fresh_process_verified',
+            'saved_P1_parent_adoption_verified')), 'closed ordinary bootstrap context required')
+    return context
+
+
+def _ordinary_preimports(main, *, modules=None):
+    found = []
+    for name, value in tuple((sys.modules if modules is None else modules).items()):
+        if value is main: continue
+        selected = name in ('src', 'experiments', 'tests') or name.startswith(('src.', 'experiments.', 'tests.', 'pyomo', 'highspy'))
+        file = vars(value).get('__file__') if isinstance(value, ModuleType) else None
+        if type(file) is str and file and not file.startswith('<'):
+            selected |= Path(os.path.abspath(file)).is_relative_to(ROOT)
+        if selected: found.append(name)
+    return sorted(found)
+
+
+def checked_ordinary_bootstrap(value, role, context_sha, argv, context):
+    _ordinary_bootstrap_context(role, context)
+    keys(value, 'schema authority scope role context_sha entry_path entry_pin executable cwd argv_sha orig_argv_sha '
+        'sys_path sys_path_sha main_is_canonical_module main_spec_is_none project_imports_before_bootstrap project_import_scan flags '
+        'independent_OS_commandline_verified full_runtime_closure_verified F_launch_admitted '
+        'saved_P1_fresh_process_verified saved_P1_parent_adoption_verified '+' '.join(GATES))
+    require(value['schema'] == ORDINARY_ENTRY_SCHEMA and value['authority'] == 'DRAFT_NONAUTHORITATIVE'
+        and value['scope'] == 'ordinary_file_entry_self_check_only' and value['role'] == role and value['context_sha'] == context_sha
+        and value['entry_path'] == str(ROOT/NEW_SOURCES[1]) and value['entry_pin'] == context['source_pins'][NEW_SOURCES[1]]
+        and value['executable'] == context['executable'] and value['cwd'] == str(ROOT)
+        and value['argv_sha'] == value['orig_argv_sha'] == digest(argv)
+        and value['main_is_canonical_module'] is value['main_spec_is_none'] is True and value['project_imports_before_bootstrap'] == []
+        and value['project_import_scan'] == 'module_file_paths_and_project_namespaces'
+        and canonical(value['flags']) == canonical(dict(dont_write_bytecode=True, no_user_site=True, hash_randomization=False))
+        and all(value[name] is False for name in (*GATES, 'F_launch_admitted', 'saved_P1_fresh_process_verified',
+            'saved_P1_parent_adoption_verified', 'independent_OS_commandline_verified', 'full_runtime_closure_verified')),
+        'ordinary file bootstrap diagnostic binding differs')
+    paths = _checked_entry_paths(value['sys_path'], installed=True)
+    require(value['sys_path_sha'] == digest(paths) and len(canonical(value)) <= 16384, 'ordinary bootstrap search path/proof cap differs')
+    return value
+
+
+def _ordinary_file_dispatch(argv):
+    values = ordinary_file_arguments(argv); expected = ordinary_file_argv(**values); _direct_main_shape(expected)
+    if values['role'] == 'supervise':
+        return _ordinary_invocation_controller(values['mailbox_name'], values['request_sha'], values['context_sha'],
+            values['ack_sha'], values['channel_name'], values['channel_nonce'], values['context_path'])
+    return _ordinary_role_entry(values['role'], values['context_path'], values['context_sha'], values['tree_sha'],
+        values['channel_name'], values['channel_nonce'])
+
+
 if __name__ == '__main__':
-    raise SystemExit('Saved F role execution and trusted invocation remain draft. F launch remains disabled.')
+    if sys.argv[1:2] == ['--ordinary-entry']: _ordinary_file_dispatch(sys.argv[1:])
+    else: raise SystemExit('Saved F role execution and trusted invocation remain draft. F launch remains disabled.')

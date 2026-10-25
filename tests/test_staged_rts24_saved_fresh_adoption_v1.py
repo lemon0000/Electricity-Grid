@@ -1072,6 +1072,12 @@ def test_role_real_parent_fresh_graph_and_all_bookend_failures(tmp_path, case):
     else:
         assert (root/'diagnostics/failure.json').exists()
         assert (root/'parent/parent_observation.json').exists() is (case == 'g3_error')
+        if case.startswith('entry_'):
+            inner = json.loads((root/'worker/fresh/launcher.json').read_bytes())
+            assert inner['frames_observed'] == 0 and inner['exit_code'] != 0
+            assert inner['job_quiet_confirmed'] is True and inner['stage_process_observed_successfully'] is False
+            assert inner['startup']['argv'][:4] == [str(cli.EXE), '-B', '-s', str(cli.ROOT/cli.NEW_SOURCES[1])]
+            assert not (root/'worker/fresh/events.jsonl').exists() and not (root/'worker/fresh/metrics.json').exists()
 
 
 def test_role_outer_launcher_corruption_is_rejected_against_live_image(tmp_path, monkeypatch):
@@ -1291,6 +1297,20 @@ def test_invocation_real_external_host_holds_context_and_observes_complete_graph
     member_sets = [{(m['pid'], m['creation_filetime']) for m in r['quiescence_witness']['member_identities']} for r in witnesses]
     assert member_sets[3] < member_sets[2] < member_sets[1] < member_sets[0]
     assert len(member_sets[0]) >= 8
+    context_value = cli.parse(bytes.fromhex(armed.held_context))
+    controller_proof = result['broker_return']['controller_return']['entry_bootstrap']
+    proofs = [controller_proof]
+    for name in ('worker/events.jsonl', 'worker/fresh/events.jsonl'):
+        event = cli.parse((tmp_path/'output'/name).read_bytes().splitlines()[0]); proofs.append(event['entry_bootstrap'])
+    for role, process, proof in zip(('supervise', 'parent', 'fresh'), witnesses[1:], proofs):
+        assert process['startup']['argv'][:4] == [str(cli.EXE), '-B', '-s', str(cli.ROOT/cli.NEW_SOURCES[1])]
+        assert process['startup']['argv'][4:6] == ['--ordinary-entry', '--'+role]
+        assert proof['entry_pin'] == context_value['source_pins'][cli.NEW_SOURCES[1]]
+        assert proof['argv_sha'] == proof['orig_argv_sha'] == cli.digest(process['startup']['argv'])
+        assert proof['sys_path'][0] == str(cli.ROOT) and proof['sys_path'].count(str(cli.ROOT)) == 1
+        assert proof['main_is_canonical_module'] is proof['main_spec_is_none'] is True
+        assert proof['project_imports_before_bootstrap'] == [] and proof['independent_OS_commandline_verified'] is False
+        assert proof['full_runtime_closure_verified'] is False and all(proof[k] is False for k in cli.GATES)
     assert result['broker_job_counted_once'] is True and result['resource_samples'] > 1
     assert result['final_host_observation']['after_payload_encoding'] is result['final_host_observation']['after_mailbox_close'] is True
     assert result['final_host_observation']['protocol_progress_permitted'] is False
@@ -1511,3 +1531,229 @@ def test_invocation_constructor_probe_rejects_wrong_case(case):
         phase='controller_constructor_native_wait', stamp=time.monotonic())
     with pytest.raises(ValueError, match='native wait marker differs'):
         cli._constructor_probe_value({'case': case}, 'a'*64, 'b'*64, 'c'*64, started, probe)
+
+
+def _file_entry_args(tmp_path, role='parent'):
+    return cli.ordinary_file_argv(role, str(tmp_path/'output/context.json'), 'a'*64,
+        cli.STAGE_PREFIX+'b'*64, 'c'*64, **(dict(tree_sha='d'*64) if role != 'supervise' else
+            dict(mailbox_name=cli.INVOCATION_PREFIX+'e'*64, request_sha='f'*64, ack_sha='1'*64)))
+
+
+@pytest.mark.parametrize('role', ['parent', 'fresh', 'supervise'])
+def test_file_entry_builder_binds_script_and_closed_transport(tmp_path, role):
+    argv = _file_entry_args(tmp_path, role); values = cli.ordinary_file_arguments(argv[4:])
+    assert argv[:4] == [str(cli.EXE), '-B', '-s', str(cli.ROOT/cli.NEW_SOURCES[1])]
+    assert values['role'] == role and values['context_path'] == str(tmp_path/'output/context.json')
+    assert values['context_sha'] == 'a'*64 and values['channel_name'] == cli.STAGE_PREFIX+'b'*64
+    assert values['channel_nonce'] == 'c'*64
+    if role == 'supervise': assert values['mailbox_name'] == cli.INVOCATION_PREFIX+'e'*64 and values['tree_sha'] is None
+    else: assert values['tree_sha'] == 'd'*64 and values['mailbox_name'] is None
+
+
+@pytest.mark.parametrize('fault', ['empty', 'mode', 'role', 'unknown', 'duplicate', 'order', 'missing', 'relative',
+    'dotdot', 'basename', 'sha', 'nonce', 'channel', 'factory', 'nul', 'upper_sha'])
+def test_file_entry_malformed_arguments_fail_before_io_or_transport(tmp_path, monkeypatch, fault):
+    argv = _file_entry_args(tmp_path)[4:]
+    if fault == 'empty': argv = []
+    elif fault == 'mode': argv[0] = '--ordinary'
+    elif fault == 'role': argv[1] = '--controller'
+    elif fault == 'unknown': argv += ['--unknown', 'x']
+    elif fault == 'duplicate': argv += ['--context-sha', 'a'*64]
+    elif fault == 'order': argv[2], argv[4] = argv[4], argv[2]
+    elif fault == 'missing': argv.pop()
+    elif fault == 'relative': argv[3] = 'output/context.json'
+    elif fault == 'dotdot': argv[3] = str(tmp_path/'other/../output/context.json')
+    elif fault == 'basename': argv[3] = str(tmp_path/'output/other.json')
+    elif fault == 'sha': argv[5] = 'a'*63
+    elif fault == 'upper_sha': argv[5] = 'A'*64
+    elif fault == 'nonce': argv[-1] = 'c'*65
+    elif fault == 'channel': argv[-3] = 'Global\\arbitrary'
+    elif fault == 'factory': argv += ['--factory', 'os.system']
+    elif fault == 'nul': argv[3] += '\0'
+    def forbidden(*args, **kwargs): pytest.fail('malformed file entry reached I/O or transport')
+    monkeypatch.setattr(cli, 'read', forbidden); monkeypatch.setattr(cli.StageChannel, 'attach', forbidden)
+    monkeypatch.setattr(cli.InvocationMailbox, 'attach', forbidden)
+    with pytest.raises(ValueError): cli._ordinary_file_dispatch(argv)
+
+
+def test_file_entry_imported_module_cannot_claim_direct_main(tmp_path, monkeypatch):
+    def forbidden(*args, **kwargs): pytest.fail('imported dispatcher reached context/transport')
+    monkeypatch.setattr(cli, 'read', forbidden); monkeypatch.setattr(cli.StageChannel, 'attach', forbidden)
+    with pytest.raises(ValueError, match='direct ordinary main'): cli._ordinary_file_dispatch(_file_entry_args(tmp_path)[4:])
+
+
+@pytest.mark.parametrize('args', [[], ['--help'], ['--supervise'], ['--parent'], ['--fresh'],
+    ['--ordinary-entry', '--factory', 'os.system']])
+def test_file_entry_default_and_saved_cli_remain_disabled(args):
+    import subprocess
+    run = subprocess.run([str(cli.EXE), '-B', '-s', str(cli.ROOT/cli.NEW_SOURCES[1]), *args],
+        cwd=cli.ROOT, env=cli.environment(), capture_output=True, timeout=4)
+    assert run.returncode != 0 and run.stdout == b''
+    if args[:1] != ['--ordinary-entry']: assert b'F launch remains disabled' in run.stderr
+
+
+@pytest.mark.parametrize('fault', ['context', 'argv', 'source', 'alias', 'flags_scalar', 'path_relative', 'path_duplicate',
+    'path_other_root', 'OS_claim', 'runtime_claim', 'gate', 'extra'])
+def test_file_entry_bootstrap_diagnostic_rejects_forged_fields(tmp_path, fault):
+    context = cli.parse(cli.make_role_probe_context(tmp_path/'output')); argv = _file_entry_args(tmp_path)
+    paths = [str(cli.ROOT), str(cli.EXE.parent/'Lib')]
+    proof = dict(schema=cli.ORDINARY_ENTRY_SCHEMA, authority='DRAFT_NONAUTHORITATIVE', scope='ordinary_file_entry_self_check_only',
+        role='parent', context_sha='a'*64, entry_path=str(cli.ROOT/cli.NEW_SOURCES[1]), entry_pin=context['source_pins'][cli.NEW_SOURCES[1]],
+        executable=context['executable'], cwd=str(cli.ROOT), argv_sha=cli.digest(argv), orig_argv_sha=cli.digest(argv),
+        sys_path=paths, sys_path_sha=cli.digest(paths), main_is_canonical_module=True, main_spec_is_none=True,
+        project_imports_before_bootstrap=[], project_import_scan='module_file_paths_and_project_namespaces',
+        flags=dict(dont_write_bytecode=True, no_user_site=True, hash_randomization=False),
+        independent_OS_commandline_verified=False, full_runtime_closure_verified=False, F_launch_admitted=False,
+        saved_P1_fresh_process_verified=False, saved_P1_parent_adoption_verified=False, **cli.GATES)
+    assert cli.checked_ordinary_bootstrap(proof, 'parent', 'a'*64, argv, context) == proof
+    proof = deepcopy(proof)
+    if fault == 'context': proof['context_sha'] = '0'*64
+    elif fault == 'argv': proof['argv_sha'] = '0'*64
+    elif fault == 'source': proof['entry_pin']['sha256'] = '0'*64
+    elif fault == 'alias': proof['main_is_canonical_module'] = False
+    elif fault == 'flags_scalar': proof['flags']['dont_write_bytecode'] = 1
+    elif fault == 'path_relative': proof['sys_path'] = ['.', str(cli.EXE.parent/'Lib')]
+    elif fault == 'path_duplicate': proof['sys_path'].append(str(cli.ROOT))
+    elif fault == 'path_other_root': proof['sys_path'].append(str(tmp_path))
+    elif fault == 'OS_claim': proof['independent_OS_commandline_verified'] = True
+    elif fault == 'runtime_claim': proof['full_runtime_closure_verified'] = True
+    elif fault == 'gate': proof['F_launch_admitted'] = True
+    elif fault == 'extra': proof['extra'] = None
+    with pytest.raises(ValueError): cli.checked_ordinary_bootstrap(proof, 'parent', 'a'*64, argv, context)
+
+
+@pytest.mark.parametrize('role', ['parent', 'fresh', 'supervise'])
+@pytest.mark.parametrize('fault', ['schema', 'authority', 'F_launch_admitted', 'saved_P1_fresh_process_verified', 'saved_P1_parent_adoption_verified'])
+def test_file_entry_context_domain_rejects_local_authority_before_main_or_io(tmp_path, monkeypatch, role, fault):
+    context = cli.parse(cli._invocation_request(tmp_path/'output', 'normal') if role == 'supervise'
+        else cli.make_role_probe_context(tmp_path/'output'))
+    assert cli._ordinary_bootstrap_context(role, context) == context
+    if fault == 'schema': context['schema'] = cli.ROLE_PROBE_SCHEMA if role == 'supervise' else cli.INVOCATION_SCHEMA
+    elif fault == 'authority': context['authority'] = 'FORMAL'
+    else: context[fault] = True
+    def forbidden(*args): pytest.fail('invalid context reached main/source/transport')
+    monkeypatch.setattr(cli, '_direct_main_shape', forbidden)
+    with pytest.raises(ValueError, match='bootstrap context'): cli._bind_ordinary_main(role, 'a'*64, [], context)
+
+
+def test_file_entry_preimport_scan_includes_noncanonical_repository_modules():
+    from types import ModuleType
+    main = ModuleType('__main__'); main.__file__ = str(cli.ROOT/cli.NEW_SOURCES[1])
+    other = ModuleType('innocent'); other.__file__ = str(cli.ROOT/'experiments/unrelated.py')
+    relative = ModuleType('relative'); relative.__file__ = 'tests/unrelated.py'
+    standard = ModuleType('standard'); standard.__file__ = str(cli.EXE.parent/'Lib/json/__init__.py')
+    found = cli._ordinary_preimports(main, modules={'__main__': main, cli.ENTRY_MODULE_NAME: main,
+        'innocent': other, 'relative': relative, 'standard': standard, 'experiments': ModuleType('experiments')})
+    assert found == ['experiments', 'innocent', 'relative']
+
+
+def _console_unit(monkeypatch, *, image='c:\\windows\\system32\\conhost.exe', signaled=False, query_error=False, system_error=False):
+    from types import SimpleNamespace
+    state = {'wait': 0 if signaled else 258, 'queries': 0, 'image': image, 'query_error': query_error, 'system_error': system_error}
+    owner = SimpleNamespace(pid=1, _members={(1, 11): 101, (2, 22): 202},
+        _k=SimpleNamespace(WaitForSingleObject=lambda *args: state['wait']))
+    def query(*args):
+        state['queries'] += 1
+        if state['query_error']: raise OSError('fixed image query failure')
+        return state['image']
+    def system(*args):
+        if state['system_error']: raise OSError('fixed system directory failure')
+        return 'c:\\windows\\system32\\conhost.exe'
+    monkeypatch.setattr(cli, '_console_image', query); monkeypatch.setattr(cli, '_system_console_path', system)
+    cache = cli.ConsoleImageCache(owner)
+    data = dict(pids=[1, 2], rss_bytes=17, peak_job_commit_bytes=23, processes=2)
+    return owner, cache, state, data
+
+
+@pytest.mark.parametrize('fault', ['creation', 'duplicate_creation', 'handle', 'missing', 'multiple', 'invalid_handle', 'corrupt'])
+def test_file_entry_console_cache_rejects_identity_handle_and_state_drift(monkeypatch, fault):
+    owner, cache, state, data = _console_unit(monkeypatch); cache.observe(owner, data)
+    assert cache.classify(owner, {2}) is not None
+    if fault == 'creation': owner._members = {(1, 11): 101, (2, 33): 202}
+    elif fault == 'duplicate_creation': owner._members[(2, 33)] = 303
+    elif fault == 'handle': owner._members[(2, 22)] = 303
+    elif fault == 'missing': del owner._members[(2, 22)]
+    elif fault == 'invalid_handle': state['wait'] = 0xffffffff
+    elif fault == 'corrupt': cache._entries[(2, 22)] = (202, 'positive', -1.)
+    assert cache.classify(owner, {2, 3} if fault == 'multiple' else {2}) is None
+
+
+@pytest.mark.parametrize('fault', ['negative', 'signaled', 'query', 'system'])
+def test_file_entry_console_cache_unknown_and_negative_are_sticky(monkeypatch, fault):
+    owner, cache, state, data = _console_unit(monkeypatch, image='c:\\other.exe' if fault == 'negative' else 'c:\\windows\\system32\\conhost.exe',
+        signaled=fault == 'signaled', query_error=fault == 'query', system_error=fault == 'system')
+    cache.observe(owner, data); first_queries = state['queries']
+    state.update(wait=258, image='c:\\windows\\system32\\conhost.exe', query_error=False, system_error=False)
+    for _ in range(3): cache.observe(owner, data)
+    assert state['queries'] == first_queries <= 1 and cache.classify(owner, {2}) is None
+
+
+def test_file_entry_console_cache_binds_live_query_when_terminal_query_fails(monkeypatch):
+    import time
+    owner, cache, state, data = _console_unit(monkeypatch); before = deepcopy(data)
+    assert cache.classify(owner, {2}) is None
+    cache.observe(owner, data); observed = cache._entries[(2, 22)][2]
+    assert observed is not None and data == before
+    state.update(wait=0, query_error=True)
+    helpers = cache.classify(owner, {2})
+    assert helpers[0]['pid'] == 2 and helpers[0]['creation_filetime'] == 22
+    assert observed <= helpers[0]['observed_at'] <= time.monotonic()
+    assert state['queries'] == 2 and cache.classify(owner, {2, 3}) is None
+
+
+def test_file_entry_console_factory_preserves_base_sample_and_injected_owner_scope(monkeypatch):
+    from types import SimpleNamespace
+    data = dict(pids=[1, 2], rss_bytes=17, peak_job_commit_bytes=23, processes=2)
+    def query(*args): return 'c:\\windows\\system32\\conhost.exe'
+    monkeypatch.setattr(cli, '_console_image', query); monkeypatch.setattr(cli, '_system_console_path', query)
+    class Base:
+        fail = False
+        def __init__(self):
+            self.pid = 1; self._members = {(1, 11): 101, (2, 22): 202}
+            self._k = SimpleNamespace(WaitForSingleObject=lambda *args: 258)
+        def sample(self):
+            if self.fail: raise ValueError('base sample original')
+            return data
+    assert cli._stage_owner_factory(Base, None, 'normal') is Base
+    assert cli._stage_owner_factory(Base, None, 'unknown') is Base
+    assert cli._stage_owner_factory(Base, Base, 'role_graph_fresh') is Base
+    factory = cli._stage_owner_factory(Base, None, 'role_graph_fresh'); owner = factory()
+    assert owner.sample() is data and owner._ordinary_console_cache.classify(owner, {2}) is not None
+    owner.fail = True
+    with pytest.raises(ValueError, match='base sample original'): owner.sample()
+    channel = cli.StageChannel.create('a'*64, cli.ordinary_stage_descriptor('fresh', 'role_graph'))
+    held = cli._construct_stage_owner([str(cli.EXE), '-B', '-s', '-c', 'pass'], channel, 'role_graph_fresh', owner_factory=_StageUnitOwner)
+    try: assert held.real_owner is False and not hasattr(held.owner, '_ordinary_console_cache')
+    finally: held.close()
+
+
+def test_file_entry_native_console_cache_classification_and_actual_quiet(tmp_path, monkeypatch):
+    armed = cli.arm_ordinary_invocation(tmp_path/'output'); owner = armed.stage.owner
+    cache = owner._ordinary_console_cache; cache.check(owner)
+    positives = [key for key, value in cache._entries.items() if value[1] == 'positive']
+    assert len(positives) == 1 and positives[0][0] != owner.pid
+    def fail(*args): raise OSError('fixed terminal image query failure')
+    monkeypatch.setattr(cli, '_console_image', fail)
+    helpers = cli._terminal_console_helpers(owner, {positives[0][0]})
+    assert len(helpers) == 1 and (helpers[0]['pid'], helpers[0]['creation_filetime']) == positives[0]
+    armed.close()
+    witness = owner.quiescence_witness
+    assert cli._stage_complete_witness(witness, owner.pid, owner.creation_filetime)
+    print('CONSOLE_CACHE_NATIVE '+cli.canonical(dict(scope='live metadata classification then actual close only',
+        helpers=helpers, witness=witness, stage_success_claimed=False, F_launch_admitted=False, **cli.GATES)).decode())
+
+
+def test_file_entry_cached_owner_still_rejects_actual_live_python_descendant():
+    channel = cli.StageChannel.create('a'*64, cli.ordinary_stage_descriptor('parent', 'role_graph'))
+    code = ('import os,time,subprocess; from experiments import staged_rts24_saved_fresh_adoption_v1 as e; '
+        f'w=e.StageChannel.attach({channel.name!r},{channel.nonce!r},{channel.context_sha!r},{channel.descriptor!r}); '
+        "w.enter('parent'); child=subprocess.Popen([str(e.EXE),'-B','-s','-c','import time; time.sleep(20)']); "
+        "w.enter('fresh'); time.sleep(.3); w.enter('inner_quiesce'); w.enter('inner_terminal'); "
+        "w.enter('parent_compare'); w.enter('terminal'); os._exit(0)")
+    held = cli._construct_stage_owner([str(cli.EXE), '-B', '-s', '-c', code], channel, 'role_graph_parent')
+    result = cli.watch_probe_stage(held)
+    assert held.real_owner and hasattr(held.owner, '_ordinary_console_cache')
+    assert result['primary_stop_reason'] == 'root_exited_with_descendants'
+    assert result['job_quiet_confirmed'] is True and result['stage_process_observed_successfully'] is False
+    assert any(value[1] == 'negative' for value in held.owner._ordinary_console_cache._entries.values())
+    print('CONSOLE_CACHE_DESCENDANT '+cli.canonical(result).decode())

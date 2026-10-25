@@ -1,0 +1,32 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "automatic_actor_retries": 0,
+  "caps": {
+    "invocation_edges_18": 20,
+    "invocation_graph_17": 25,
+    "late_payload_16": 15
+  },
+  "groups": {
+    "invocation_edges_18": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_ready_expires_and_cannot_be_reused_or_serialized",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_host_resource_failure_never_reads_return[normal]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_host_resource_failure_never_reads_return[constructor_wait]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_unknown_actual_quiet_blocks_return_consumption",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_busy_prestart_cannot_write_start",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_expiry_during_preflight_prevents_start"
+    ],
+    "invocation_graph_17": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_native_wait_in_constructor_or_publication_is_stopped_by_external_job[prepare_wait]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_native_wait_in_constructor_or_publication_is_stopped_by_external_job[constructor_wait]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_native_wait_in_constructor_or_publication_is_stopped_by_external_job[publication_wait]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_wrong_host_ack_is_diagnosed_before_controller_construct[nonce]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_invocation_wrong_host_ack_is_diagnosed_before_controller_construct[receipt_sha]"
+    ],
+    "late_payload_16": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_role_late_payload_drift_preserves_published_observation_but_refuses_return"
+    ]
+  },
+  "previous_pytest_seconds": 168.60900000000402,
+  "reason": "role_graph_14 timed out; retained as nonpassing; isolated late scene is a new bounded test invocation, no actor retry within invocation",
+  "remaining_pytest_seconds": 71.39099999999598
+}
