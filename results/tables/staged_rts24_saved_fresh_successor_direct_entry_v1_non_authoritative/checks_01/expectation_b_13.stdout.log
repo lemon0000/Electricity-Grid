@@ -1,0 +1,15 @@
+EXPECTATION_READ_PROOF {"F_launch_admitted":false,"actual_saved_F_execution":false,"expectation_image_sha":"0bcc00ed322f33ff614589dc339f2c0db2140659388b698a69d0bc349c84b8d1","full_P1_content_verified":false,"full_content_reads":683,"metadata_passes":2,"selected_content_reads":53}
+................
+============================ slowest 10 durations =============================
+3.69s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_unread_same_metadata_content_requires_full_verification[G0]
+2.85s setup    tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_immutable_projection_rejects_drift[raw]
+2.84s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_input_rejects_mutable_or_identity_drift[held_identity]
+2.79s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_verified_input_rejects_mutable_or_identity_drift[creator]
+2.44s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_probe_hold_always_checks_final_context_before_capability[True]
+0.97s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_rejects_dependency_and_final_metadata_drift[metadata_after]
+0.81s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_selected_content_mismatch_is_rejected
+0.57s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[deadline]
+0.57s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[caller_expectation_sha]
+0.56s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_context_closed_schema_rejects_drift[full_P1_content_verified]
+16 passed in 21.88s
+ORDINARY_HARNESS {"P1_write_attempts": 0, "actual_F_write_attempts": 0, "blocked_lscpu": 1, "native_owner_attempts": 0, "optional_Popen_attempts": 1, "unexpected_process_attempts": 0}

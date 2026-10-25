@@ -1,0 +1,30 @@
+"""Independent bounded ordinary-file/source reader for parent expected images."""
+from hashlib import sha256
+import os
+from pathlib import Path
+import stat
+
+def ordinary(path,directory=False,links=False):
+    info=path.lstat()
+    assert not stat.S_ISLNK(info.st_mode) and not getattr(info,'st_file_attributes',0)&0x400
+    assert stat.S_ISDIR(info.st_mode) if directory else stat.S_ISREG(info.st_mode) and (links or info.st_nlink==1)
+    return info
+
+def identity(info):return [info.st_dev,info.st_ino,info.st_size,info.st_mtime_ns]
+
+def record(path,links=False):
+    def parents():return [[str(p),s.st_dev,s.st_ino] for p in reversed(tuple(path.parents)) for s in (ordinary(p,True),)]
+    chain=parents();before=identity(ordinary(path,links=links));assert before[2]<=8*1024**2
+    with path.open('rb',buffering=0) as stream:
+        assert identity(os.fstat(stream.fileno()))==before
+        raw=stream.read(min(before[2],8*1024**2)+1)
+        assert identity(os.fstat(stream.fileno()))==before
+    assert len(raw)==before[2] and identity(ordinary(path,links=links))==before and parents()==chain
+    return dict(pin=dict(bytes=len(raw),sha256=sha256(raw).hexdigest()),identity=before,parents=chain)
+
+def files(root,names,exe):
+    assert len(names)==len(set(names))==49
+    assert sum(ordinary(root/n).st_size for n in names)<=2*1024**2
+    observed={n:record(root/n) for n in names}
+    assert sum(row['pin']['bytes'] for row in observed.values())<=2*1024**2
+    return dict(observed,**{'@executable':record(exe,True)})

@@ -1,5 +1,7 @@
 # C：阶段评价范围与整链成本审查计划
 
+2026-10-25 successor冷入口/父端独立比较：见[最新交接](continuation_handoff_20261025_saved_fresh_successor_direct_entry.md)。当前64新+218回归共282节点终态通过；8真实ordinary cold probes建立normal两侧比较、6按case绑定RAM拒绝及真实oversize清理。执行target账pytest156.314s、static/probe20.003s；旧wrapper漏计自身hash，完整workflow wall仍未证明。220执行文件冻结，机械封装另限32files并共享原时间账。实际角色/upstream/OwnedChild-Job/full runtime/F及科学/资源/正式门禁仍关闭。
+
 2026-10-25 successor角色切口/self锚：见[最新交接](continuation_handoff_20261025_saved_fresh_successor_self_anchor.md)。五角色上游切口已固定，当前process/thread query HANDLE锚实现；新34+重跑184共218节点终态通过，全部pytest attempt151.686/240s、静态另60s预算。3649历史路径/P1全683保全。self观察不构成角色bootstrap、外部owner或input/runtime能力；实际fresh/父端采用及科学/资源/正式门禁仍未开放。
 
 2026-10-25 successor静态数据接口：见[最新交接](continuation_handoff_20261025_saved_fresh_successor_data.md)。31字段context/20字段request及12cross-field数据校验已实现；当前新epoch184节点（121新+63回归）终态通过，全pytest attempt155.173/200s，静态另40s。返回不可变raw/commit，实际source/kernel/clock、full验证及运行权限恒false。3518历史路径/P1全683保全；真实角色能力、生产runtime政策及actual F/科学采用/资源/正式门禁仍未开放。

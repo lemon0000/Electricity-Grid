@@ -1,0 +1,41 @@
+{
+  "sources": {
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py": {
+      "added": [
+        "SavedDirectEntryObservation",
+        "SavedDirectEntryUnresolved",
+        "_direct_entry_control",
+        "_direct_entry_error_image",
+        "_direct_entry_files",
+        "_direct_entry_main",
+        "_direct_entry_restore",
+        "_ordinary_direct_entry_cli",
+        "capture_saved_direct_entry_observation"
+      ],
+      "all_unchanged": true,
+      "previous_definitions": 200
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py": {
+      "added": [],
+      "all_unchanged": true,
+      "previous_definitions": 16
+    },
+    "tests/test_staged_rts24_saved_fresh_adoption_v1.py": {
+      "added": [
+        "direct_entry_compare_case",
+        "direct_entry_failure_case",
+        "test_saved_direct_entry_bounded_pipe_runner_stops_and_closes",
+        "test_saved_direct_entry_comparator_rejects_binding_mutations",
+        "test_saved_direct_entry_comparator_rejects_noncanonical_raw",
+        "test_saved_direct_entry_comparator_uses_separate_parent_expected",
+        "test_saved_direct_entry_failure_comparator_preserves_error_layers",
+        "test_saved_direct_entry_failure_comparator_rejects_malformed_records",
+        "test_saved_direct_entry_failure_rejects_unrelated_case_error",
+        "test_saved_direct_entry_imported_main_and_constructor_reject_before_io"
+      ],
+      "all_unchanged": true,
+      "previous_definitions": 229
+    }
+  },
+  "unchanged_dependencies": 47
+}

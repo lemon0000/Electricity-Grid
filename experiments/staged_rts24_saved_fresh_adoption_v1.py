@@ -4636,6 +4636,279 @@ def open_saved_self_anchor():
         _saved_self_release(anchor,primary)
 
 
+DIRECT_ENTRY_PROBE_FLAG = '--ordinary-successor-entry-observe'
+DIRECT_ENTRY_PROBE_FAULTS = ('argv','alias','path','environment','helper','commit','oversize')
+_DIRECT_ENTRY_OBSERVATION_ATTEMPTED = False
+
+
+def _direct_entry_main():
+    main = sys.modules.get('__main__')
+    require(main is not None and main is sys.modules.get(__name__) and main.__name__ == '__main__'
+        and main.__spec__ is None and Path(main.__file__).absolute() == ROOT/NEW_SOURCES[1],
+        'direct successor observation main required')
+    require(Path.cwd().absolute() == ROOT and Path(sys.executable).absolute() == EXE
+        and sys.flags.dont_write_bytecode == sys.flags.no_user_site == 1
+        and sys.flags.hash_randomization == sys.flags.optimize == 0, 'controlled direct observation interpreter required')
+    return main
+
+
+def _direct_entry_control():
+    main = _direct_entry_main(); actual_environment = dict(os.environ)
+    require(actual_environment == environment() and not any(k in actual_environment
+        for k in ('PYTHONPATH','PYTHONHOME','PYTHONSTARTUP')), 'direct Python-visible environment differs')
+    require(all(type(v) is str and '\0' not in v and len(v) <= 4096 for v in (*sys.argv,*sys.orig_argv))
+        and len(sys.argv) <= 32 and len(sys.orig_argv) <= 35, 'bounded direct argv required')
+    return dict(main_name=main.__name__,main_spec_is_none=True,entry_path=str(Path(main.__file__).absolute()),
+        canonical_alias_is_main=sys.modules.get(ENTRY_MODULE_NAME) is main,argv=list(sys.argv),orig_argv=list(sys.orig_argv),
+        sys_path=list(sys.path),cwd=str(Path.cwd().absolute()),executable_path=str(Path(sys.executable).absolute()),
+        python=sys.version,environment=actual_environment,
+        flags=dict(dont_write_bytecode=True,no_user_site=True,hash_randomization=False,optimize=0))
+
+
+def _direct_entry_files():
+    names = source_names(); require(len(names) == 49, 'direct source set differs')
+    require(sum(ordinary(ROOT/name).st_size for name in names) <= 2*1024**2, 'direct source aggregate raw cap')
+    sources = {}; entry_raw = None
+    for name in (*names,'@executable'):
+        path = EXE if name == '@executable' else ROOT/name; links = name == '@executable'
+        before = identity(ordinary(path,allow_links=links)); parents = directories(path.parent)
+        raw = read(path,allow_links=links)
+        require(identity(ordinary(path,allow_links=links)) == before and directories(path.parent) == parents,
+            'direct source/EXE identity changed')
+        sources[name] = dict(pin=pin(raw),identity=list(before),parents=[list(row) for row in parents])
+        if name == NEW_SOURCES[1]: entry_raw = raw
+    require(sum(sources[name]['pin']['bytes'] for name in names) <= 2*1024**2, 'direct actual source aggregate cap')
+    return canonical(sources),entry_raw
+
+
+def _direct_entry_restore(main,initial,installed):
+    errors = []
+    if sys.modules.get(ENTRY_MODULE_NAME) is main: del sys.modules[ENTRY_MODULE_NAME]
+    else: errors.append(('alias_restore',ValueError('foreign direct alias was not overwritten')))
+    if tuple(sys.path) == installed: sys.path[:] = initial
+    else: errors.append(('path_restore',ValueError('foreign direct paths were not overwritten')))
+    return errors
+
+
+class SavedDirectEntryUnresolved(Exception):
+    def __init__(self,observation,anchor,primary,secondary):
+        self.observation,self.anchor,self.primary,self.secondary = observation,anchor,primary,tuple(secondary)
+        super().__init__('ordinary direct entry remains unresolved')
+    def __reduce__(self): raise TypeError('unresolved direct entry cannot be serialized')
+
+
+@dataclass(frozen=True,init=False,eq=False,repr=False)
+class SavedDirectEntryObservation:
+    """Ordinary local observation; never a trusted upstream or role capability."""
+    _main: object
+    _anchor: object
+    _initial: tuple
+    _paths: tuple
+    _control_raw: bytes
+    _files_raw: bytes
+    _kernel_raw: bytes
+    _module_code: object
+    _bindings: tuple
+    _creator: tuple
+    _owner: tuple
+    _owner_commit: str
+    _close_state: tuple
+    _phase: str
+    _failure: object
+    _commit: str
+
+    def __new__(cls,*args,**kwargs): raise TypeError('direct observation requires cold main mechanics')
+
+    def _image(self):
+        return (id(self._main),id(self._anchor),self._initial,self._paths,pin(self._control_raw),pin(self._files_raw),
+            pin(self._kernel_raw),id(self._module_code),self._creator,self._phase,id(self._failure),
+            id(self._owner),self._owner_commit,
+            tuple((name,id(fn),id(code),id(defaults),pin(kw),id(closure)) for name,fn,code,defaults,kw,closure in self._bindings))
+
+    def _intrinsic(self):
+        owner = self._ownership()
+        require(type(self) is SavedDirectEntryObservation and self._creator == (os.getpid(),get_ident())
+            and self._main is owner[0] and self._anchor is owner[1] and self._creator == owner[2]
+            and self._initial == owner[3] and self._paths == owner[4] and self._commit == digest(self._image()),
+            'creating immutable direct observation required')
+
+    def _ownership(self):
+        owner = self._owner
+        require(type(self) is SavedDirectEntryObservation and type(owner) is tuple and len(owner) == 5
+            and type(owner[1]) is SavedSelfProcessAnchor and owner[2] == (os.getpid(),get_ident())
+            and self._owner_commit == digest((id(owner[0]),id(owner[1]),owner[2],owner[3],owner[4]))
+            and type(self._close_state) is tuple and len(self._close_state) == 2 and type(self._close_state[0]) is bool
+            and self._close_state[1] == digest((id(owner),self._owner_commit,self._close_state[0])),
+            'direct cleanup ownership is unresolved')
+        return owner
+
+    def entry(self):
+        self._intrinsic(); require(self._phase == 'live', 'direct observation is not live')
+        for name,fn,code,defaults,kw,closure in self._bindings:
+            require(globals().get(name) is fn and fn.__code__ is code and fn.__defaults__ is defaults
+                and canonical(fn.__kwdefaults__) == kw and fn.__closure__ is closure, 'direct observation dependency changed')
+        require(_direct_entry_main() is self._main and tuple(sys.path) == self._paths
+            and canonical(_direct_entry_control()) == self._control_raw, 'direct entry control changed')
+        self._anchor.entry(); require(self._anchor.raw == self._kernel_raw, 'direct self anchor changed')
+        files,entry_raw = _direct_entry_files()
+        require(files == self._files_raw and self._module_code == compile(entry_raw,str(ROOT/NEW_SOURCES[1]),
+            'exec',dont_inherit=True,optimize=0), 'direct source read/identity or loaded code changed')
+        return self
+
+    @property
+    def raw(self):
+        self.entry()
+        raw = canonical(dict(schema='staged_saved_F_ordinary_direct_entry_observation_v1',authority='DRAFT_NONAUTHORITATIVE',
+            ordinary_probe=True,role_binding=False,external_Job_owner=False,full_runtime_closure_verified=False,
+            full_P1_content_verified=False,run_authority=False,F_launch_admitted=False,
+            initial_sys_path=list(self._initial),control=parse(self._control_raw),files=parse(self._files_raw),
+            self_observation=parse(self._kernel_raw),module_code_matches_disk=True,**GATES))
+        require(len(raw) <= 131072, 'direct observation raw cap'); return raw
+
+    def close(self):
+        try: owner = self._ownership()
+        except BaseException as primary:
+            raise SavedDirectEntryUnresolved(self,getattr(self,'_anchor',None),primary,(('ownership',primary),)) from primary
+        main,anchor,creator,initial,installed = owner
+        if self._close_state[0]:
+            require(self._phase == 'closed' and anchor._phase == 'closed', 'direct observation cleanup cannot be retried')
+            return
+        object.__setattr__(self,'_close_state',(True,digest((id(owner),self._owner_commit,True))))
+        errors = []
+        # Full binding drift is a final-bookend error; the separate immutable
+        # ownership tuple still identifies the resources that may be cleaned.
+        try: self.entry()
+        except BaseException as error: errors.append(('final_bookend',error))
+        try: errors.extend(_direct_entry_restore(main,initial,installed))
+        except BaseException as error: errors.append(('restore',error))
+        if ENTRY_MODULE_NAME in sys.modules or tuple(sys.path) != initial:
+            errors.append(('restore_witness',ValueError('direct alias/path restore is unresolved')))
+        try: anchor.close()
+        except BaseException as error: errors.append(('self_anchor_close',error))
+        object.__setattr__(self,'_phase','unresolved' if errors else 'closed')
+        object.__setattr__(self,'_failure',tuple(errors) if errors else None)
+        object.__setattr__(self,'_commit',digest(self._image()))
+        if errors: raise SavedDirectEntryUnresolved(self,anchor,None,errors)
+
+    def __reduce__(self): raise TypeError('ordinary direct observation cannot be serialized')
+
+
+def capture_saved_direct_entry_observation():
+    global _DIRECT_ENTRY_OBSERVATION_ATTEMPTED
+    main = _direct_entry_main()
+    require(_DIRECT_ENTRY_OBSERVATION_ATTEMPTED is False, 'single direct observation attempt required')
+    _DIRECT_ENTRY_OBSERVATION_ATTEMPTED = True
+    require(sys.modules.get(ENTRY_MODULE_NAME) is None and _ordinary_preimports(main) == [],
+        'cold direct observation requires no canonical alias/project preimports')
+    initial = _checked_entry_paths(tuple(sys.path),installed=False)
+    installed = _checked_entry_paths((str(ROOT),*initial[1:]),installed=True)
+    frame = sys._getframe(1); module_code = None
+    while frame is not None:
+        if frame.f_globals is vars(main) and frame.f_code.co_name == '<module>': module_code = frame.f_code; break
+        frame = frame.f_back
+    require(type(module_code) is CodeType, 'active direct module frame required')
+    anchor = observation = None; alias_installed = False; errors = []
+    try:
+        files,entry_raw = _direct_entry_files()
+        require(module_code == compile(entry_raw,str(ROOT/NEW_SOURCES[1]),'exec',dont_inherit=True,optimize=0),
+            'loaded direct module code differs from disk')
+        anchor = open_saved_self_anchor(); kernel = anchor.raw
+        require(str(Path(parse(kernel)['observation']['image_path']).absolute()).casefold() == str(EXE).casefold(),
+            'direct kernel executable image differs')
+        sys.path[:] = installed; sys.modules[ENTRY_MODULE_NAME] = main; alias_installed = True
+        bindings = []
+        for name in ('_direct_entry_main','_direct_entry_control','_direct_entry_files','read','source_names','directories','ordinary'):
+            fn = globals()[name]; bindings.append((name,fn,fn.__code__,fn.__defaults__,canonical(fn.__kwdefaults__),fn.__closure__))
+        observation = object.__new__(SavedDirectEntryObservation)
+        creator = (os.getpid(),get_ident()); owner = (main,anchor,creator,initial,installed)
+        owner_commit = digest((id(main),id(anchor),creator,initial,installed))
+        for name,value in dict(_main=main,_anchor=anchor,_initial=initial,_paths=installed,
+            _control_raw=canonical(_direct_entry_control()),_files_raw=files,_kernel_raw=kernel,
+            _module_code=module_code,_bindings=tuple(bindings),_creator=creator,_owner=owner,_owner_commit=owner_commit,
+            _close_state=(False,digest((id(owner),owner_commit,False))),_phase='live',_failure=None).items():
+            object.__setattr__(observation,name,value)
+        object.__setattr__(observation,'_commit',digest(observation._image())); observation._intrinsic()
+        return observation
+    except BaseException as primary:
+        if alias_installed:
+            try: errors.extend(_direct_entry_restore(main,initial,installed))
+            except BaseException as error: errors.append(('construction_restore',error))
+        if anchor is not None:
+            try: anchor.close()
+            except BaseException as error: errors.append(('construction_self_close',error))
+        if errors: raise SavedDirectEntryUnresolved(observation,anchor,primary,errors) from primary
+        raise
+
+
+def _direct_entry_error_image(error,budget,depth=3,seen=frozenset()):
+    if budget[0] <= 0 or depth < 0 or id(error) in seen:
+        return dict(type='BoundedError',message='error image limit',primary=None,secondary=[],truncated=True)
+    budget[0] -= 1; seen = seen|{id(error)}
+    primary = getattr(error,'primary',None)
+    children = getattr(error,'secondary',getattr(error,'cleanup_errors',()))
+    return dict(type=type(error).__name__[:64],message=str(error)[:192],
+        primary=None if primary is None else _direct_entry_error_image(primary,budget,depth-1,seen),
+        secondary=[dict(layer=str(layer)[:64],error=_direct_entry_error_image(child,budget,depth-1,seen))
+            for layer,child in tuple(children)[:8]],truncated=len(children)>8)
+
+
+def _ordinary_direct_entry_cli(argv):
+    counts = dict(process_attempts=0,P1_open_attempts=0,actual_F_open_attempts=0,write_attempts=0)
+    active = True
+    def audit(event,args):
+        if not active: return
+        if event == 'subprocess.Popen' or event == 'os.system' or event.startswith('os.spawn'):
+            counts['process_attempts'] += 1; raise ValueError('ordinary direct child cannot launch a process')
+        if event == 'open' and isinstance(args[0],(str,bytes,os.PathLike)):
+            path = os.path.normcase(os.path.abspath(os.fsdecode(args[0])))
+            for root,key in ((P1,'P1_open_attempts'),(OUTPUT.parent,'actual_F_open_attempts')):
+                prefix = os.path.normcase(str(root))
+                if path == prefix or path.startswith(prefix+os.sep):
+                    counts[key] += 1; raise ValueError('ordinary direct child attempted saved result access')
+            mode,flags = args[1:3]
+            if (type(mode) is str and any(c in mode for c in 'wax+')) or (type(flags) is int and flags&(os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND)):
+                counts['write_attempts'] += 1; raise ValueError('ordinary direct child attempted file write')
+        if event in ('os.mkdir','os.remove','os.rmdir','os.rename','os.link','os.symlink'):
+            counts['write_attempts'] += 1; raise ValueError('ordinary direct child attempted filesystem mutation')
+    sys.addaudithook(audit)
+    observation = None; primary = None; secondary = []; raw = None
+    try:
+        require(argv == [DIRECT_ENTRY_PROBE_FLAG] or (len(argv) == 3 and argv[:2] == [DIRECT_ENTRY_PROBE_FLAG,'--fault']
+            and argv[2] in DIRECT_ENTRY_PROBE_FAULTS), 'closed ordinary direct probe arguments required')
+        if len(argv) == 3 and argv[2] == 'oversize':
+            for _ in range(9): sys.stdout.buffer.write(b'x'*16384); sys.stdout.buffer.flush()
+            time.sleep(10)
+            raise ValueError('oversize runner failed to stop the ordinary child')
+        observation = capture_saved_direct_entry_observation()
+        fault = argv[2] if len(argv) == 3 else None
+        if fault == 'argv': sys.argv.append('ordinary-probe-drift')
+        elif fault == 'alias': sys.modules[ENTRY_MODULE_NAME] = ModuleType('ordinary_probe_foreign_alias')
+        elif fault == 'path': sys.path.append(str(ROOT/'ordinary_probe_foreign_path'))
+        elif fault == 'environment': os.environ['PYTHONPATH'] = 'ordinary-probe-injected'
+        elif fault == 'helper': globals()['_direct_entry_files'] = lambda: (observation._files_raw,b'')
+        elif fault == 'commit': object.__setattr__(observation,'_commit','ordinary-probe-commit-drift')
+        raw = observation.raw
+    except BaseException as error: primary = error
+    finally:
+        if observation is not None:
+            try: observation.close()
+            except BaseException as error: secondary.append(error)
+        active = False
+    closed = observation is not None and observation._anchor._phase == 'closed'
+    error_budget = [24]
+    value = dict(schema='staged_saved_F_ordinary_direct_probe_record_v1',authority='DRAFT_NONAUTHORITATIVE',
+        status='completed' if primary is None and not secondary else 'failed',ordinary_probe=True,
+        observation=parse(raw) if primary is None and not secondary else None,self_handles_closed=closed,
+        audit_window='ordinary_dispatch_to_cleanup',audit_counts=counts,audit_hook_active_at_end=False,
+        primary=None if primary is None else _direct_entry_error_image(primary,error_budget),
+        secondary=[_direct_entry_error_image(error,error_budget) for error in secondary],
+        role_binding=False,external_Job_owner=False,full_runtime_closure_verified=False,run_authority=False,F_launch_admitted=False,**GATES)
+    output = canonical(value); require(len(output) <= 131072, 'ordinary direct stdout cap')
+    sys.stdout.buffer.write(output+b'\n');sys.stdout.buffer.flush()
+    raise SystemExit(0 if value['status'] == 'completed' else 1)
+
+
 if __name__ == '__main__':
     if sys.argv[1:2] == ['--ordinary-entry']: _ordinary_file_dispatch(sys.argv[1:])
+    elif sys.argv[1:2] == [DIRECT_ENTRY_PROBE_FLAG]: _ordinary_direct_entry_cli(sys.argv[1:])
     else: raise SystemExit('Saved F role execution and trusted invocation remain draft. F launch remains disabled.')

@@ -1,0 +1,118 @@
+"""Independent parent-side comparison of serialized ordinary cold-entry facts."""
+from hashlib import sha256
+import json
+from pathlib import Path
+import subprocess
+
+GATES=('native_authorized','resource_admission','formal_result','scientific_evidence_adopted','public_P2_execution_enabled')
+
+def encode(value):return json.dumps(value,sort_keys=True,ensure_ascii=True,separators=(',',':'),allow_nan=False).encode('ascii')
+
+def decoded(raw):
+    assert type(raw) is bytes and len(raw)<=131072
+    def pairs(items):
+        value={}
+        for key,item in items:assert key not in value;value[key]=item
+        return value
+    value=json.loads(raw,object_pairs_hook=pairs)
+    assert encode(value)==raw
+    return value
+
+def closed(value,names):assert type(value) is dict and set(value)==set(names.split())
+def false(value,names):assert all(value[n] is False for n in names)
+
+def compare(raw,expected_raw,child_identity):
+    record=decoded(raw);expected=decoded(expected_raw)
+    closed(expected,'argv initial_paths installed_paths environment files cwd python')
+    closed(record,'schema authority status ordinary_probe observation self_handles_closed audit_window audit_counts '
+        'audit_hook_active_at_end primary secondary role_binding external_Job_owner full_runtime_closure_verified '
+        'run_authority F_launch_admitted '+' '.join(GATES))
+    assert record['schema']=='staged_saved_F_ordinary_direct_probe_record_v1' and record['authority']=='DRAFT_NONAUTHORITATIVE'
+    assert record['status']=='completed' and record['ordinary_probe'] is record['self_handles_closed'] is True
+    assert record['primary'] is None and record['secondary']==[]
+    assert record['audit_window']=='ordinary_dispatch_to_cleanup' and record['audit_hook_active_at_end'] is False
+    assert encode(record['audit_counts'])==encode(dict(process_attempts=0,P1_open_attempts=0,actual_F_open_attempts=0,write_attempts=0))
+    false(record,(*GATES,'role_binding','external_Job_owner','full_runtime_closure_verified','run_authority','F_launch_admitted'))
+    observation=record['observation']
+    closed(observation,'schema authority ordinary_probe role_binding external_Job_owner full_runtime_closure_verified '
+        'full_P1_content_verified run_authority F_launch_admitted initial_sys_path control files self_observation module_code_matches_disk '+' '.join(GATES))
+    assert observation['schema']=='staged_saved_F_ordinary_direct_entry_observation_v1'
+    assert observation['authority']=='DRAFT_NONAUTHORITATIVE' and observation['ordinary_probe'] is True
+    false(observation,(*GATES,'role_binding','external_Job_owner','full_runtime_closure_verified','full_P1_content_verified','run_authority','F_launch_admitted'))
+    assert observation['module_code_matches_disk'] is True
+    assert encode(observation['files'])==encode(expected['files']) and len(observation['files'])==50
+    assert observation['initial_sys_path']==expected['initial_paths']
+    control=observation['control']
+    closed(control,'main_name main_spec_is_none entry_path canonical_alias_is_main argv orig_argv sys_path cwd executable_path python environment flags')
+    assert control['main_name']=='__main__' and control['main_spec_is_none'] is control['canonical_alias_is_main'] is True
+    assert control['entry_path']==expected['argv'][3] and control['executable_path']==expected['argv'][0]
+    assert control['argv']==expected['argv'][3:] and control['orig_argv']==expected['argv']
+    assert control['sys_path']==expected['installed_paths'] and control['cwd']==expected['cwd'] and control['python']==expected['python']
+    assert encode(control['environment'])==encode(expected['environment'])
+    assert encode(control['flags'])==encode(dict(dont_write_bytecode=True,no_user_site=True,hash_randomization=False,optimize=0))
+    kernel=observation['self_observation']
+    closed(kernel,'schema authority scope observation query_process_access query_thread_access local_self_handles_observed '
+        'role_bootstrap_verified external_owner_verified full_runtime_closure_verified full_P1_content_verified run_authority F_launch_admitted '+' '.join(GATES))
+    assert kernel['schema']=='staged_saved_F_self_process_anchor_development_v1' and kernel['authority']=='DRAFT_NONAUTHORITATIVE'
+    assert kernel['scope']=='current_process_thread_query_only' and kernel['local_self_handles_observed'] is True
+    assert type(kernel['query_process_access']) is type(kernel['query_thread_access']) is int
+    assert kernel['query_process_access']==0x1000 and kernel['query_thread_access']==0x0800
+    false(kernel,(*GATES,'role_bootstrap_verified','external_owner_verified','full_runtime_closure_verified','full_P1_content_verified','run_authority','F_launch_admitted'))
+    own=kernel['observation'];closed(own,'pid tid process_creation_filetime thread_creation_filetime image_path command_line')
+    assert type(child_identity) is tuple and len(child_identity)==3 and all(type(v) is int and v>0 for v in child_identity[:2])
+    assert (own['pid'],own['process_creation_filetime'])==child_identity[:2]
+    assert type(own['pid']) is type(own['process_creation_filetime']) is int
+    assert type(own['tid']) is type(own['thread_creation_filetime']) is int and own['tid']>0 and own['thread_creation_filetime']>0
+    assert 0<own['pid']<2**32 and own['tid']<2**32 and 0<own['process_creation_filetime']<2**64 and own['thread_creation_filetime']<2**64
+    assert str(Path(own['image_path']).absolute()).casefold()==str(Path(expected['argv'][0]).absolute()).casefold()
+    assert str(Path(own['image_path']).absolute()).casefold()==str(Path(child_identity[2]).absolute()).casefold()
+    assert own['command_line']==subprocess.list2cmdline(expected['argv'])
+    return dict(ordinary_probe=True,independent_parent_expected_compared=True,child_identity_compared=True,
+        expected_sha256=sha256(expected_raw).hexdigest(),observation_sha256=sha256(raw).hexdigest(),
+        role_binding=False,external_Job_owner=False,full_runtime_closure_verified=False,F_launch_admitted=False,**{k:False for k in GATES})
+
+
+def compare_failure(raw,case):
+    specifications={
+        'argv':('direct entry control changed',['final_bookend']),
+        'alias':('direct entry control changed',['final_bookend','alias_restore','restore_witness']),
+        'path':('direct entry control changed',['final_bookend','path_restore','restore_witness']),
+        'environment':('direct Python-visible environment differs',['final_bookend']),
+        'helper':('direct observation dependency changed',['final_bookend']),
+        'commit':('creating immutable direct observation required',['final_bookend'])}
+    assert case in specifications
+    record=decoded(raw)
+    closed(record,'schema authority status ordinary_probe observation self_handles_closed audit_window audit_counts '
+        'audit_hook_active_at_end primary secondary role_binding external_Job_owner full_runtime_closure_verified '
+        'run_authority F_launch_admitted '+' '.join(GATES))
+    assert record['schema']=='staged_saved_F_ordinary_direct_probe_record_v1' and record['authority']=='DRAFT_NONAUTHORITATIVE'
+    assert record['status']=='failed' and record['ordinary_probe'] is record['self_handles_closed'] is True
+    assert record['observation'] is None and record['primary'] is not None and type(record['secondary']) is list
+    assert record['audit_window']=='ordinary_dispatch_to_cleanup' and record['audit_hook_active_at_end'] is False
+    assert encode(record['audit_counts'])==encode(dict(process_attempts=0,P1_open_attempts=0,actual_F_open_attempts=0,write_attempts=0))
+    false(record,(*GATES,'role_binding','external_Job_owner','full_runtime_closure_verified','run_authority','F_launch_admitted'))
+    remaining=[24];layers=[]
+    def error_image(value,depth):
+        assert depth<=4 and remaining[0]>0;remaining[0]-=1
+        closed(value,'type message primary secondary truncated')
+        assert type(value['type']) is type(value['message']) is str and 0<len(value['type'])<=64 and len(value['message'])<=192
+        assert value['truncated'] is False and type(value['secondary']) is list and len(value['secondary'])<=8
+        if value['primary'] is not None:error_image(value['primary'],depth+1)
+        for item in value['secondary']:
+            closed(item,'layer error');assert type(item['layer']) is str and 0<len(item['layer'])<=64
+            assert item['layer'] in {'final_bookend','alias_restore','path_restore','restore_witness','restore','self_anchor_close',
+                'construction_restore','construction_self_close','ownership','thread','process'}
+            layers.append(item['layer']);error_image(item['error'],depth+1)
+    error_image(record['primary'],0)
+    assert len(record['secondary'])<=8
+    for value in record['secondary']:error_image(value,0)
+    message,expected_layers=specifications[case]
+    assert record['primary']==dict(type='ValueError',message=message,primary=None,secondary=[],truncated=False)
+    assert len(record['secondary'])==1
+    close=record['secondary'][0]
+    assert close['type']=='SavedDirectEntryUnresolved' and close['message']=='ordinary direct entry remains unresolved'
+    assert close['primary'] is None and close['truncated'] is False and layers==expected_layers
+    assert close['secondary'][0]['error']==record['primary']
+    return dict(expected_RAM_fault_rejected=True,case=case,layered_errors_validated=True,layers=layers,
+        ordinary_probe=True,role_binding=False,external_Job_owner=False,full_runtime_closure_verified=False,F_launch_admitted=False,
+        **{k:False for k in GATES})

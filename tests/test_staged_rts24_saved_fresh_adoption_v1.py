@@ -3346,3 +3346,177 @@ def test_saved_self_anchor_rejects_oversize_raw_and_closes_handles(monkeypatch):
     with pytest.raises(ValueError,match='raw cap'):cli.open_saved_self_anchor()
     anchor,handles=seen[0];assert anchor._phase=='closed' and anchor._pending==(None,None)
     for handle in handles:_assert_self_handle_closed(api,handle)
+
+
+@pytest.fixture(scope='module')
+def direct_entry_compare_case():
+    import importlib.util
+    import subprocess
+    path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_successor_direct_entry_v1_non_authoritative/checks_01/probe_compare.py'
+    spec=importlib.util.spec_from_file_location('independent_direct_parent_compare',path)
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    # Synthetic comparator data only; actual cold-entry evidence is collected
+    # separately by probe_parent, with its pre-spawn expected bytes and HANDLE.
+    argv=[str(cli.EXE),'-B','-s',str(cli.ROOT/cli.NEW_SOURCES[1]),'--ordinary-successor-entry-observe']
+    files={str(n):dict(pin=dict(bytes=1,sha256='a'*64),identity=[1,n+1,1,4],parents=[]) for n in range(50)}
+    initial=[str(cli.ROOT/'experiments'),str(cli.EXE.parent/'Lib')];installed=[str(cli.ROOT),initial[1]]
+    env={'PYTHONHASHSEED':'0'}
+    expected=dict(argv=argv,initial_paths=initial,installed_paths=installed,environment=env,files=files,cwd=str(cli.ROOT),python='synthetic')
+    flags={k:False for k in cli.GATES}
+    kernel=dict(schema='staged_saved_F_self_process_anchor_development_v1',authority='DRAFT_NONAUTHORITATIVE',
+        scope='current_process_thread_query_only',query_process_access=4096,query_thread_access=2048,
+        local_self_handles_observed=True,role_bootstrap_verified=False,external_owner_verified=False,
+        full_runtime_closure_verified=False,full_P1_content_verified=False,run_authority=False,F_launch_admitted=False,
+        observation=dict(pid=1001,tid=1002,process_creation_filetime=2001,thread_creation_filetime=2002,
+            image_path=str(cli.EXE),command_line=subprocess.list2cmdline(argv)),**flags)
+    control=dict(main_name='__main__',main_spec_is_none=True,entry_path=argv[3],canonical_alias_is_main=True,
+        argv=argv[3:],orig_argv=argv,sys_path=installed,cwd=str(cli.ROOT),executable_path=str(cli.EXE),python='synthetic',environment=env,
+        flags=dict(dont_write_bytecode=True,no_user_site=True,hash_randomization=False,optimize=0))
+    observation=dict(schema='staged_saved_F_ordinary_direct_entry_observation_v1',authority='DRAFT_NONAUTHORITATIVE',
+        ordinary_probe=True,role_binding=False,external_Job_owner=False,full_runtime_closure_verified=False,
+        full_P1_content_verified=False,run_authority=False,F_launch_admitted=False,initial_sys_path=initial,
+        control=control,files=files,self_observation=kernel,module_code_matches_disk=True,**flags)
+    record=dict(schema='staged_saved_F_ordinary_direct_probe_record_v1',authority='DRAFT_NONAUTHORITATIVE',status='completed',
+        ordinary_probe=True,observation=observation,self_handles_closed=True,audit_window='ordinary_dispatch_to_cleanup',
+        audit_counts=dict(process_attempts=0,P1_open_attempts=0,actual_F_open_attempts=0,write_attempts=0),audit_hook_active_at_end=False,
+        primary=None,secondary=[],role_binding=False,external_Job_owner=False,full_runtime_closure_verified=False,
+        run_authority=False,F_launch_admitted=False,**flags)
+    return module,record,expected
+
+
+def test_saved_direct_entry_imported_main_and_constructor_reject_before_io(monkeypatch):
+    def denied(*args,**kwargs):pytest.fail('imported direct observation accessed a file or HANDLE')
+    monkeypatch.setattr(cli,'read',denied);monkeypatch.setattr(cli,'open_saved_self_anchor',denied)
+    with pytest.raises(TypeError):cli.SavedDirectEntryObservation()
+    with pytest.raises(ValueError,match='direct successor observation main'):cli.capture_saved_direct_entry_observation()
+
+
+def test_saved_direct_entry_comparator_uses_separate_parent_expected(direct_entry_compare_case):
+    module,record,expected=direct_entry_compare_case
+    result=module.compare(_successor_json(record),_successor_json(expected),(1001,2001,str(cli.EXE)))
+    assert result['ordinary_probe'] is result['independent_parent_expected_compared'] is True
+    assert all(value is False for key,value in result.items() if key in (*cli.GATES,'role_binding','external_Job_owner','full_runtime_closure_verified','F_launch_admitted'))
+    changed=deepcopy(expected);changed['argv'][-1]='different-parent-command'
+    with pytest.raises(AssertionError):module.compare(_successor_json(record),_successor_json(changed),(1001,2001,str(cli.EXE)))
+
+
+@pytest.mark.parametrize('fault',['record_extra','authority','status','ordinary','closed','parent_role','audit_bool','observation_extra',
+    'observation_schema','observation_role','full_true','source','initial_path','main_name','main_spec','alias','argv','orig_argv',
+    'installed_path','cwd','exe','python','environment','flag_type','code','kernel_extra','kernel_schema','kernel_access_bool',
+    'kernel_role','pid','pid_bool','creation','tid_bool','thread_time','image','OS_commandline','parent_identity','expected_extra'])
+def test_saved_direct_entry_comparator_rejects_binding_mutations(direct_entry_compare_case,fault):
+    module,base,expected_base=direct_entry_compare_case;record=deepcopy(base);expected=deepcopy(expected_base);identity=(1001,2001,str(cli.EXE))
+    obs=record['observation'];control=obs['control'];kernel=obs['self_observation'];own=kernel['observation']
+    if fault=='record_extra':record['permit']=True
+    elif fault=='authority':record['authority']='other'
+    elif fault=='status':record['status']='failed'
+    elif fault=='ordinary':record['ordinary_probe']=False
+    elif fault=='closed':record['self_handles_closed']=False
+    elif fault=='parent_role':record['role_binding']=True
+    elif fault=='audit_bool':record['audit_counts']['process_attempts']=False
+    elif fault=='observation_extra':obs['ack_sha']='a'*64
+    elif fault=='observation_schema':obs['schema']='other'
+    elif fault=='observation_role':obs['role_binding']=True
+    elif fault=='full_true':obs['full_P1_content_verified']=True
+    elif fault=='source':obs['files']['0']['pin']['sha256']='b'*64
+    elif fault=='initial_path':obs['initial_sys_path']=['different']
+    elif fault in ('main_name','main_spec','alias'):
+        key={'main_name':'main_name','main_spec':'main_spec_is_none','alias':'canonical_alias_is_main'}[fault]
+        control[key]='other' if fault=='main_name' else False
+    elif fault in ('argv','orig_argv'):control[fault][-1]='different'
+    elif fault=='installed_path':control['sys_path']=['different']
+    elif fault in ('cwd','python'):control[fault]='different'
+    elif fault=='exe':control['executable_path']='different'
+    elif fault=='environment':control['environment']['PYTHONHASHSEED']='1'
+    elif fault=='flag_type':control['flags']['optimize']=False
+    elif fault=='code':obs['module_code_matches_disk']=False
+    elif fault=='kernel_extra':kernel['future']=True
+    elif fault=='kernel_schema':kernel['schema']='other'
+    elif fault=='kernel_access_bool':kernel['query_process_access']=True
+    elif fault=='kernel_role':kernel['role_bootstrap_verified']=True
+    elif fault=='pid':own['pid']+=1
+    elif fault=='pid_bool':own['pid']=True
+    elif fault=='creation':own['process_creation_filetime']+=1
+    elif fault=='tid_bool':own['tid']=True
+    elif fault=='thread_time':own['thread_creation_filetime']=0
+    elif fault=='image':own['image_path']='C:/other/python.exe'
+    elif fault=='OS_commandline':own['command_line']+=' extra'
+    elif fault=='parent_identity':identity=(1001,2002,str(cli.EXE))
+    else:expected['extra']=True
+    with pytest.raises(AssertionError):module.compare(_successor_json(record),_successor_json(expected),identity)
+
+
+@pytest.mark.parametrize('kind',['duplicate','whitespace','not_bytes','oversize'])
+def test_saved_direct_entry_comparator_rejects_noncanonical_raw(direct_entry_compare_case,kind):
+    module,record,expected=direct_entry_compare_case;raw=_successor_json(record)
+    if kind=='duplicate':raw=b'{"schema":"x",'+raw[1:]
+    elif kind=='whitespace':raw+=b'\n'
+    elif kind=='not_bytes':raw=bytearray(raw)
+    else:raw=b' '*(131073)
+    with pytest.raises(AssertionError):module.compare(raw,_successor_json(expected),(1001,2001,str(cli.EXE)))
+
+
+@pytest.fixture(scope='module')
+def direct_entry_failure_case(direct_entry_compare_case):
+    module,normal,expected=direct_entry_compare_case;value=deepcopy(normal)
+    def error(kind,message):return dict(type=kind,message=message,primary=None,secondary=[],truncated=False)
+    value.update(status='failed',observation=None,primary=error('ValueError','direct entry control changed'),
+        secondary=[dict(error('SavedDirectEntryUnresolved','ordinary direct entry remains unresolved'),
+            secondary=[dict(layer='final_bookend',error=error('ValueError','direct entry control changed'))])])
+    return module,value
+
+
+def test_saved_direct_entry_failure_comparator_preserves_error_layers(direct_entry_failure_case):
+    module,value=direct_entry_failure_case;result=module.compare_failure(_successor_json(value),'argv')
+    assert result['layered_errors_validated'] is True and result['layers']==['final_bookend']
+
+
+@pytest.mark.parametrize('fault',['extra','gate','closed','audit','observation','primary','secondary','layer','truncated','no_bookend','duplicate','whitespace'])
+def test_saved_direct_entry_failure_comparator_rejects_malformed_records(direct_entry_failure_case,fault):
+    module,base=direct_entry_failure_case;value=deepcopy(base)
+    if fault=='extra':value['future']=True
+    elif fault=='gate':value['formal_result']=True
+    elif fault=='closed':value['self_handles_closed']=False
+    elif fault=='audit':value['audit_counts']['process_attempts']=False
+    elif fault=='observation':value['observation']={}
+    elif fault=='primary':value['primary']=None
+    elif fault=='secondary':value['secondary']=[{'type':'ValueError'}]
+    elif fault=='layer':value['secondary'][0]['secondary'][0]['layer']='invented-layer'
+    elif fault=='truncated':value['secondary'][0]['truncated']=True
+    elif fault=='no_bookend':value['secondary']=[]
+    raw=_successor_json(value)
+    if fault=='duplicate':raw=b'{"schema":"x",'+raw[1:]
+    elif fault=='whitespace':raw+=b'\n'
+    with pytest.raises(AssertionError):module.compare_failure(raw,'argv')
+
+
+@pytest.mark.parametrize('case',['alias','path','environment','helper','commit'])
+def test_saved_direct_entry_failure_rejects_unrelated_case_error(direct_entry_failure_case,case):
+    module,value=direct_entry_failure_case
+    with pytest.raises(AssertionError):module.compare_failure(_successor_json(value),case)
+
+
+@pytest.mark.parametrize('case',['oversize','timeout'])
+def test_saved_direct_entry_bounded_pipe_runner_stops_and_closes(case):
+    import importlib.util
+    import io
+    import threading
+    path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_successor_direct_entry_v1_non_authoritative/checks_01/bounded_child.py'
+    spec=importlib.util.spec_from_file_location('independent_direct_pipe_bound',path)
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    released=threading.Event()
+    class Hanging(io.BytesIO):
+        def read1(self,n):released.wait(.5);return b''
+    class FakeProcess:
+        def __init__(self):
+            self.stdout=io.BytesIO(b'x'*(module.STDOUT_BYTES+4096)) if case=='oversize' else Hanging()
+            self.stderr=io.BytesIO();self.returncode=None;self.kills=0
+        def poll(self):return self.returncode
+        def kill(self):self.kills+=1;self.returncode=1;released.set()
+        def wait(self,timeout):assert self.returncode==1;return self.returncode
+    process=FakeProcess();result=module.drain_child(process,.01)
+    assert result['stop_reason']==('stdout_limit' if case=='oversize' else 'timeout')
+    assert result['kill_requested'] and process.kills==1 and result['exit_code']==1
+    assert result['pipes_closed'] and result['reader_threads_terminal'] and result['cleanup']==[]
+    assert len(result['stdout'])<=module.STDOUT_BYTES and len(result['stderr'])<=module.STDERR_BYTES
+    assert process.stdout.closed and process.stderr.closed
