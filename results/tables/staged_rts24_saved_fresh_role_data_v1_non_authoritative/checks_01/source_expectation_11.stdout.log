@@ -1,0 +1,16 @@
+EXPECTATION_READ_PROOF {"F_launch_admitted":false,"actual_saved_F_execution":false,"expectation_image_sha":"0bb645064e59c2707e182f15951da4b50e8088af51bf8b3e14253a0f5f07c53a","full_P1_content_verified":false,"full_content_reads":683,"metadata_passes":2,"selected_content_reads":53}
+SOURCE_RAW_REUSE {"actual_saved_F_execution":false,"duplicate_code_reads":0,"each_call_selected_source_reads":134,"independent_calls":2,"loaded_sources":36,"raw_cap_bytes":2097152,"selected_sources":49,"source_raw_bytes":1293711}
+............
+============================ slowest 10 durations =============================
+6.28s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_G0_G2_G3_and_H3_use_full_exact_local_inputs
+1.89s setup    tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_are_read_once_for_compile_and_freshly_per_call
+0.44s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_are_read_once_for_compile_and_freshly_per_call
+0.19s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_compile_keeps_primary_and_original_final_guard[False]
+0.17s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_late_same_metadata_content_needs_full_final_guard
+0.14s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_compile_keeps_primary_and_original_final_guard[True]
+0.09s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_wrong_pin_stops_before_compile
+0.07s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_source_bytes_initial_read_keeps_primary_and_independent_final[False]
+0.05s call     tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_projection_has_equal_image_and_distinct_semantics
+0.01s setup    tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_expectation_G0_G2_G3_and_H3_use_full_exact_local_inputs
+12 passed in 12.37s
+ORDINARY_HARNESS {"P1_write_attempts": 0, "actual_F_write_attempts": 0, "blocked_lscpu": 1, "native_owner_attempts": 0, "optional_Popen_attempts": 1, "unexpected_process_attempts": 0}

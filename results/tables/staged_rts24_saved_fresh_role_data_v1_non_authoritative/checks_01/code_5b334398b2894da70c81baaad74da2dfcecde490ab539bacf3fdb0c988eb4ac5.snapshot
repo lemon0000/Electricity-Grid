@@ -1,0 +1,37 @@
+status: DRAFT_NONAUTHORITATIVE
+source_class: mechanism_assumption
+first_hour: -2
+last_hour: 7
+deadline_lag: 2
+flexible_fraction: '2/5'
+prehistory_clean: '3/5'
+parameters:
+  capacity: '1/5'
+  alpha: '4/5'
+  eta: '1'
+  beta: '1'
+  facility_factor: '5/4'
+  auxiliary_mw: '1/40'
+  fixed_headroom: '1/5'
+  max_recovery: '1/5'
+  max_debt: '2/5'
+  max_call_energy: '2/5'
+  call_ramp: '1/5'
+  max_events: 2
+  max_duration: 1
+  minimum_rest: 0
+equipment:
+  - {id: first_batch, capacity: '4/5', idle_mw: '2/25', start: -2, lead: 0, delay: 0}
+  - {id: second_batch, capacity: '2/5', idle_mw: '1/25', start: 0, lead: 2, delay: 0}
+workload: {before: '1/2', after: '7/10', change_hour: 3}
+grid:
+  start: 0
+  lead: 2
+  delays: {on_time: 0, delayed: 2}
+  before: '4/5'
+  after: '13/10'
+  temporary_hour: 1
+  temporary_limit: '5/8'
+clean_paths:
+  early: ['.60', '.50', '.84', '.84', '.84', '1.04', '.84', '.84']
+  late: ['.60', '.50', '.64', '.84', '1.04', '1.04', '.84', '.84']

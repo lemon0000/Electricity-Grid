@@ -4908,6 +4908,397 @@ def _ordinary_direct_entry_cli(argv):
     raise SystemExit(0 if value['status'] == 'completed' else 1)
 
 
+SAVED_ROLE_REGISTRY_PIN = (21981, 'd5e467a761ea5d50c939f9b76fd702775381341996c3a0aaf5e563025a62520b')
+SAVED_ROLE_TEMPLATE_PIN = (2231, '36cff2e3fa3a11da0d6a2de7a088e8be94d528a1f2a2c33e14a88f03d57a0d0a')
+_SAVED_ROLE_PRODUCERS = dict(controller='broker', parent='controller', fresh='parent')
+_SAVED_ROLE_PROJECTIONS = dict(controller=('broker_ACK_verified',),
+    parent=('controller_bootstrap','controller_G0','controller_store','controller_issuer'),
+    fresh=('parent_bootstrap','parent_hold','parent_store','parent_issuer'))
+
+
+def _saved_role_bytes(raw, cap):
+    require(type(raw) is bytes and 0 < len(raw) <= cap, 'role data raw byte cap')
+    return parse(raw)
+
+
+def _saved_role_time(value):
+    require(type(value) is float and math.isfinite(value) and 0 < value < 1e12, 'role declared time domain')
+
+
+def _saved_role_identity(value):
+    require(type(value) is list and len(value) == 2, 'role declared process identity shape')
+    _successor_integer(value[0],1,2**32-1); _successor_integer(value[1],1,2**64-1)
+
+
+def _saved_role_name(value):
+    require(type(value) is str and value.startswith('Local\\') and 6 < len(value) <= 192
+        and all(c in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.-' for c in value[6:]),
+        'role transport name domain')
+
+
+def _saved_role_shape(raw, name, registry):
+    spec = registry['schemas'][name]; value = _saved_role_bytes(raw,spec['encoded_value_cap'])
+    require(type(value) is dict and set(value) == set(spec['fields']), 'role frozen fields differ')
+    for field, rule in spec['fields'].items():
+        item = value[field]
+        if type(rule) is dict:
+            require(canonical(item) == canonical(rule['literal']), 'role frozen literal differs')
+        elif rule == 'sha256': require(_hex64(item), 'role SHA domain')
+        elif rule == 'identity': _saved_role_identity(item)
+        elif rule == 'time': _saved_role_time(item)
+        elif rule == 'path':
+            require(type(item) is str and '\0' not in item and Path(item).is_absolute()
+                and len(canonical(item)) <= 4096, 'role path domain')
+        elif rule == 'name': _saved_role_name(item)
+        elif rule == 'pin':
+            _successor_pin(item); require(item['bytes'] > 0, 'role positive pin bytes required')
+        elif rule == 'receipt':
+            keys(item,'bytes sha256 identity'); _successor_integer(item['bytes'],1,2*1024**2)
+            require(_hex64(item['sha256']) and type(item['identity']) is list and len(item['identity']) == 4, 'role receipt shape')
+            for part in item['identity']: _successor_integer(part,0,2**64-1)
+            require(item['identity'][2] == item['bytes'], 'role receipt declared size differs')
+        else: require(rule == 'true' and item is True, 'role data-only literal differs')
+    for field, rule in spec['field_equalities'].items():
+        require(value[field] == rule['literal'], 'role fixed artifact SHA differs')
+    return value
+
+
+def _saved_role_declaration(raw, name, producer, consumer, context, request, stage_nonce,
+        packet_sha, binding_sha, extra=''):
+    value = _saved_role_bytes(raw,65536)
+    keys(value,'schema data_only producer_role consumer_role context_sha request_sha stage_nonce packet_sha '
+        'permit_binding_sha declared_at '+extra)
+    require(value['schema'] == 'staged_saved_F_successor_'+name+'_declaration_data_v1'
+        and value['data_only'] is True and value['producer_role'] == producer and value['consumer_role'] == consumer,
+        'role declaration domain differs')
+    require(value['context_sha'] == context and value['request_sha'] == request and value['stage_nonce'] == stage_nonce
+        and value['packet_sha'] == packet_sha and value['permit_binding_sha'] == binding_sha,
+        'role declaration upstream binding differs')
+    _saved_role_time(value['declared_at'])
+    return value
+
+
+def _saved_role_publication(raw, tree_raw, context, request_sha):
+    value = _saved_role_bytes(raw,65536)
+    keys(value,'schema data_only producer_role consumer_role context_sha request_sha stage_nonce declared_at '
+        'tree_declared_at producer_identity context_path context_receipt root_directories role_tree_pin')
+    require(value['schema'] == 'staged_saved_F_successor_publication_declaration_data_v1'
+        and value['data_only'] is True and value['producer_role'] == 'broker'
+        and value['consumer_role'] == 'successor_entry_data_validation'
+        and value['context_sha'] == digest(context) and value['request_sha'] == request_sha
+        and _hex64(value['stage_nonce']), 'role publication declaration domain')
+    _saved_role_identity(value['producer_identity'])
+    broker = context['broker_identity']
+    require(value['producer_identity'] == [broker['pid'],broker['creation_filetime']], 'role publication producer declaration')
+    _saved_role_time(value['declared_at']); _saved_role_time(value['tree_declared_at'])
+    require(value['context_path'] == str(OUTPUT/'context.json'), 'role publication context path')
+    receipt = value['context_receipt']; keys(receipt,'bytes sha256 identity')
+    _successor_integer(receipt['bytes'],1,2*1024**2)
+    require(dict(bytes=receipt['bytes'],sha256=receipt['sha256']) == pin(canonical(context))
+        and type(receipt['identity']) is list and len(receipt['identity']) == 4, 'role publication receipt declaration')
+    for part in receipt['identity']: _successor_integer(part,0,2**64-1)
+    require(receipt['identity'][2] == receipt['bytes'], 'role publication receipt size')
+    _successor_directories(value['root_directories'],OUTPUT)
+    require(value['root_directories'][:-1] == context['output_parent_directories'], 'role publication root chain declaration')
+    tree = _saved_role_bytes(tree_raw,65536)
+    _successor_pin(value['role_tree_pin'])
+    require(type(tree) is list and len(tree) == 7 and value['role_tree_pin'] == pin(tree_raw), 'role tree image declaration')
+    for row, name in zip(tree[:6],('', 'worker','worker/fresh','worker/fresh_parent','parent','diagnostics')):
+        require(type(row) is list and len(row) == 2 and row[0] == name, 'role tree closed image')
+        _successor_directories(row[1],OUTPUT/name)
+        require(row[1][:len(value['root_directories'])] == value['root_directories'], 'role tree shared root declaration')
+    require(tree[-1] == ['context_file_identity',receipt['identity']], 'role tree context receipt declaration')
+    return value
+
+
+def _saved_role_object_reference(value, obj, *, creator=False):
+    keys(value,'object_id commit'+(' creator' if creator else ''))
+    _successor_integer(value['object_id'],1,2**64-1)
+    require(value['object_id'] == id(obj) and value['commit'] == obj.commit, 'role original data object required')
+    if creator:
+        require(type(value['creator']) is list and len(value['creator']) == 2, 'role original creator shape')
+        for part in value['creator']: _successor_integer(part,1,2**64-1)
+        require(value['creator'] == list(obj._creator), 'role original data creator required')
+
+
+@dataclass(frozen=True,init=False,eq=False,repr=False)
+class _SavedEntryData:
+    _raws: tuple
+    _context_data: SavedSuccessorDataCheck
+    _upstream_data: object
+    _creator: tuple
+    _object_id: int
+    _context_id: int
+    _context_commit: str
+    _upstream_id: int
+    _upstream_commit: object
+    declared_now: float
+    commit: str
+    def __new__(cls,*args,**kwargs): raise TypeError('validate role data explicitly')
+    def _image(self):
+        return (type(self).__name__,tuple(pin(raw) for raw in self._raws),self._creator,self._object_id,
+            self._context_id,self._context_commit,self._upstream_id,self._upstream_commit,self.declared_now)
+    @property
+    def raw(self): self.entry(); return self._raws[0]
+    @property
+    def permit_raw(self): self.entry(); return self._raws[1]
+    @property
+    def descriptor_raw(self): self.entry(); return self._raws[2]
+    @property
+    def packet_sha(self): return sha256(self.raw).hexdigest()
+    @property
+    def permit_sha(self): return sha256(self.permit_raw).hexdigest()
+    @property
+    def status_raw(self):
+        self.entry()
+        return canonical(dict(schema='staged_saved_F_role_static_entry_data_check_v1',data_only=True,
+            declared_inputs_consistent=True,declared_order_consistent=True,declared_time_consistent=True,
+            frozen_schema_family=10,development_declaration_schema_family=21,
+            full_projection_semantics_verified=False,producer_capability_verified=False,consumer_authorization_verified=False,
+            wire_header_transport_semantics_verified=False,actual_sources_verified=False,actual_kernel_identity_verified=False,
+            actual_filesystem_identity_verified=False,context_origin_creator_verified=False,clock_observed=False,deadline_enforced=False,
+            not_expired_physically_verified=False,role_bootstrap=False,reservation_consumed=False,permit_issued=False,
+            owned_child_created=False,full_P1_content_verified=False,full_runtime_verified=False,
+            run_authority=False,F_launch_admitted=False,native_authorized=False,resource_admission=False,
+            formal_result=False,scientific_evidence_adopted=False,public_P2_execution_enabled=False))
+    def __reduce__(self): raise TypeError('role data object is not transferable authority')
+
+
+@dataclass(frozen=True,init=False,eq=False,repr=False)
+class SavedControllerEntryData(_SavedEntryData):
+    def entry(self): return _saved_role_data_entry(self,SavedControllerEntryData,None)
+    def __init_subclass__(cls,**kwargs): raise TypeError('exact controller data type required')
+
+
+@dataclass(frozen=True,init=False,eq=False,repr=False)
+class SavedParentEntryData(_SavedEntryData):
+    def entry(self): return _saved_role_data_entry(self,SavedParentEntryData,SavedControllerEntryData)
+    def __init_subclass__(cls,**kwargs): raise TypeError('exact parent data type required')
+
+
+@dataclass(frozen=True,init=False,eq=False,repr=False)
+class SavedFreshEntryData(_SavedEntryData):
+    def entry(self): return _saved_role_data_entry(self,SavedFreshEntryData,SavedParentEntryData)
+    def __init_subclass__(cls,**kwargs): raise TypeError('exact fresh data type required')
+
+
+def _saved_role_data_entry(value, cls, upstream_cls):
+    require(type(value) is cls and value._creator == (os.getpid(),get_ident())
+        and value._object_id == id(value) and type(value._context_data) is SavedSuccessorDataCheck
+        and value._context_id == id(value._context_data), 'role exact original data/creator required')
+    value._context_data.entry()
+    require(value._context_commit == value._context_data.commit, 'role context data changed')
+    if upstream_cls is None:
+        require(value._upstream_data is None and value._upstream_id == id(None) and value._upstream_commit is None,
+            'controller data has no upstream role object')
+    else:
+        source = value._upstream_data
+        require(type(source) is upstream_cls and id(source) == value._upstream_id
+            and source._context_data is value._context_data, 'role original upstream/context data required')
+        source.entry(); require(source.commit == value._upstream_commit, 'role upstream data changed')
+    require(value.commit == digest(value._image()), 'role data immutable commit changed')
+    return value
+
+
+def _validate_saved_entry_data(role, cls, packet_raw, permit_raw, descriptor_raw, *, context_data,
+        upstream_data, publication_raw, tree_raw, transport_raw, basis_raw, projection_raws,
+        registry_raw, templates_raw, now, ack_raw=None, mailbox_header_raw=None, offer_raw=None):
+    require(type(context_data) is SavedSuccessorDataCheck, 'exact context data required'); context_data.entry()
+    _saved_role_time(now)
+    for raw, expected in ((registry_raw,SAVED_ROLE_REGISTRY_PIN),(templates_raw,SAVED_ROLE_TEMPLATE_PIN)):
+        require(type(raw) is bytes and len(raw) == expected[0]
+            and pin(raw) == dict(bytes=expected[0],sha256=expected[1]), 'role fixed data contract differs')
+    registry, templates = parse(registry_raw),parse(templates_raw)
+    context, request = parse(context_data.raw),parse(context_data.request_raw)
+    context_sha, request_sha = context_data.context_sha,context_data.request_sha
+    publication = _saved_role_publication(publication_raw,tree_raw,context,request_sha)
+    transport = _saved_role_bytes(transport_raw,65536)
+    keys(transport,'schema data_only producer_role consumer_role context_sha request_sha entry_transport_name '
+        'entry_transport_nonce stage_name stage_nonce')
+    producer = _SAVED_ROLE_PRODUCERS[role]
+    require(transport['schema'] == 'staged_saved_F_successor_'+role+'_transport_declaration_data_v1'
+        and transport['data_only'] is True and transport['producer_role'] == producer and transport['consumer_role'] == role
+        and transport['context_sha'] == context_sha and transport['request_sha'] == request_sha, 'role transport declaration domain')
+    for name in ('entry_transport_name','stage_name'): _saved_role_name(transport[name])
+    for name in ('entry_transport_nonce','stage_nonce'): require(_hex64(transport[name]), 'role transport nonce')
+    require(transport['entry_transport_name'] != transport['stage_name']
+        and transport['entry_transport_nonce'] != transport['stage_nonce'], 'role transport aliases')
+    basis = _saved_role_bytes(basis_raw,65536)
+    controller_fields = ' ack_pin mailbox_header_pin offer_pin host_direction_nonce ACK_declared_at' if role == 'controller' else ''
+    keys(basis,'schema data_only producer_role consumer_role context_sha request_sha stage_nonce packet_sha '
+        'permit_binding_sha producer_identity permit_nonce context_data_identity upstream_data_identity '
+        'local_episode projection_pins'+controller_fields)
+    require(basis['schema'] == 'staged_saved_F_successor_'+role+'_basis_declaration_data_v1'
+        and basis['data_only'] is True and basis['producer_role'] == producer and basis['consumer_role'] == role
+        and basis['context_sha'] == context_sha and basis['request_sha'] == request_sha
+        and _hex64(basis['permit_nonce']), 'role independent basis domain')
+    _saved_role_identity(basis['producer_identity']); _saved_role_object_reference(basis['context_data_identity'],context_data)
+    if role == 'controller':
+        require(upstream_data is None and basis['upstream_data_identity'] is None, 'controller upstream data domain')
+        require(basis['producer_identity'] == publication['producer_identity'], 'controller broker declaration differs')
+        source_packet_sha, source_binding_sha, source_stage = None,None,publication['stage_nonce']
+    else:
+        upstream_cls = SavedControllerEntryData if role == 'parent' else SavedParentEntryData
+        require(type(upstream_data) is upstream_cls, 'exact upstream role data required'); upstream_data.entry()
+        require(upstream_data._context_data is context_data, 'same original context data required')
+        require(upstream_data._raws[3:5] == (publication_raw,tree_raw), 'same original publication/tree declarations required')
+        _saved_role_object_reference(basis['upstream_data_identity'],upstream_data,creator=True)
+        source_packet_sha,source_binding_sha = upstream_data.packet_sha,upstream_data.permit_sha
+        source_stage = parse(upstream_data.raw)['stage_nonce']
+        require(basis['producer_identity'] != publication['producer_identity']
+            and basis['producer_identity'] != [request['host_identity']['pid'],request['host_identity']['creation_filetime']],
+            'downstream producer declaration aliases host/broker')
+        require(basis['producer_identity'] != parse(upstream_data._raws[6])['producer_identity'],
+            'downstream producer declaration aliases upstream producer')
+    require((basis['stage_nonce'],basis['packet_sha'],basis['permit_binding_sha']) ==
+        (source_stage,source_packet_sha,source_binding_sha), 'role independent upstream basis differs')
+    ancestor_names,ancestor_nonces = set(),{publication['stage_nonce']}
+    ancestor = upstream_data
+    while ancestor is not None:
+        ancestor.entry(); previous_transport = parse(ancestor._raws[5])
+        ancestor_names.update(previous_transport[n] for n in ('entry_transport_name','stage_name'))
+        ancestor_nonces.update(previous_transport[n] for n in ('entry_transport_nonce','stage_nonce'))
+        if type(ancestor) is SavedControllerEntryData:
+            ancestor_names.add(parse(ancestor._raws[-2])['mailbox_name'])
+        ancestor = ancestor._upstream_data
+    require(not {transport['entry_transport_name'],transport['stage_name']}.intersection(ancestor_names)
+        and not {transport['entry_transport_nonce'],transport['stage_nonce']}.intersection(ancestor_nonces),
+        'role transport aliases ancestor')
+    episode = basis['local_episode']
+    keys(episode,'schema data_only producer_role consumer_role context_sha request_sha stage_nonce packet_sha '
+        'permit_binding_sha producer_identity nonce started deadline')
+    episode_kind = 'attempt' if role == 'controller' else 'reservation'
+    require(episode['schema'] == 'staged_saved_F_successor_'+role+'_'+episode_kind+'_declaration_data_v1'
+        and episode['data_only'] is True and episode['producer_role'] == producer and episode['consumer_role'] == role
+        and episode['context_sha'] == context_sha and episode['request_sha'] == request_sha
+        and episode['producer_identity'] == basis['producer_identity'] and _hex64(episode['nonce'])
+        and (episode['stage_nonce'],episode['packet_sha'],episode['permit_binding_sha']) ==
+            (source_stage,source_packet_sha,source_binding_sha), 'role original local episode domain')
+    _saved_role_time(episode['started']); _saved_role_time(episode['deadline'])
+    _saved_role_identity(episode['producer_identity'])
+    descriptor = _saved_role_shape(descriptor_raw,role+'_stage_descriptor',registry)
+    total,tail = descriptor['total_seconds'],descriptor['quiesce_seconds']+descriptor['terminal_seconds']
+    start,deadline = context['invocation_started'],context['deadline']
+    require(episode['deadline'] == min(deadline,episode['started']+total), 'role original episode deadline differs')
+    active = min(start+templates['deadlines'][role][0],deadline,episode['deadline']-tail)
+    closed = min(start+templates['deadlines'][role][1],deadline,episode['deadline'])
+    require(start <= episode['started'] <= now <= active and episode['started'] < active <= closed <= deadline,
+        'role declared time/remaining original episode differs')
+    projection_names = _SAVED_ROLE_PROJECTIONS[role]
+    require(type(projection_raws) is tuple and len(projection_raws) == len(projection_names)
+        and type(basis['projection_pins']) is dict and set(basis['projection_pins']) == set(projection_names),
+        'role closed projection declarations required')
+    projections = []
+    for name, raw in zip(projection_names,projection_raws):
+        require(type(raw) is bytes and 0 < len(raw) <= 65536, 'role projection raw byte cap')
+        _successor_pin(basis['projection_pins'][name])
+        require(pin(raw) == basis['projection_pins'][name], 'role independent projection bytes differ')
+        extra = 'ACK_sha' if role == 'controller' else 'image_sha'
+        value = _saved_role_declaration(raw,name,producer,role,context_sha,request_sha,source_stage,
+            source_packet_sha,source_binding_sha,extra)
+        require(_hex64(value[extra]), 'role projection image SHA domain')
+        projections.append(value)
+    if role == 'controller':
+        for raw, name in ((ack_raw,'ack_pin'),(mailbox_header_raw,'mailbox_header_pin'),(offer_raw,'offer_pin')):
+            require(type(raw) is bytes and 0 < len(raw) <= 65536, 'controller upstream raw cap')
+            _successor_pin(basis[name]); require(pin(raw) == basis[name], 'controller independent upstream bytes differ')
+        ack = _saved_role_shape(ack_raw,'ACK',registry)
+        header = _saved_role_declaration(mailbox_header_raw,'mailbox_header','host','broker',None,request_sha,
+            source_stage,None,None,'host_identity broker_identity host_direction_nonce mailbox_name layout_sha')
+        offer = _saved_role_declaration(offer_raw,'offer','broker','host',context_sha,request_sha,
+            source_stage,None,None,'context_receipt_sha root_directories_sha')
+        host = [request['host_identity']['pid'],request['host_identity']['creation_filetime']]
+        _saved_role_identity(header['host_identity']); _saved_role_identity(header['broker_identity'])
+        _saved_role_name(header['mailbox_name'])
+        require(header['mailbox_name'] not in (transport['entry_transport_name'],transport['stage_name']),
+            'controller transport aliases mailbox')
+        require(_hex64(header['layout_sha']) and _hex64(basis['host_direction_nonce'])
+            and header['host_direction_nonce'] == ack['host_direction_nonce'] == basis['host_direction_nonce']
+            and header['host_identity'] == ack['host_identity'] == host
+            and header['broker_identity'] == ack['broker_identity'] == publication['producer_identity'], 'controller mailbox identity declaration')
+        require(ack['request_sha'] == request_sha and ack['context_sha'] == context_sha
+            and ack['offer_sha'] == sha256(offer_raw).hexdigest()
+            and ack['mailbox_header_sha'] == sha256(mailbox_header_raw).hexdigest()
+            and ack['context_receipt_sha'] == offer['context_receipt_sha'] == digest(publication['context_receipt'])
+            and ack['root_directories_sha'] == offer['root_directories_sha'] == digest(publication['root_directories'])
+            and ack['original_invocation_started'] == start and ack['original_invocation_deadline'] == deadline
+            and projections[0]['ACK_sha'] == sha256(ack_raw).hexdigest(), 'controller ACK declaration chain differs')
+        _saved_role_time(basis['ACK_declared_at'])
+        stamps = (start,header['declared_at'],publication['declared_at'],publication['tree_declared_at'],
+            offer['declared_at'],basis['ACK_declared_at'],projections[0]['declared_at'],episode['started'],now)
+        upstream_fields = dict(ACK_sha=sha256(ack_raw).hexdigest(),mailbox_header_sha=sha256(mailbox_header_raw).hexdigest(),
+            broker_ACK_verified_projection_sha=sha256(projection_raws[0]).hexdigest())
+    else:
+        require(start <= publication['declared_at'] <= publication['tree_declared_at'] <= projections[0]['declared_at'],
+            'role publication declaration order differs')
+        stamps = (upstream_data.declared_now,*(v['declared_at'] for v in projections),episode['started'],now)
+        upstream_fields = {name+'_projection_sha':sha256(raw).hexdigest() for name,raw in zip(projection_names,projection_raws)}
+        upstream_fields[producer+'_permit_binding_sha'] = source_binding_sha
+    require(all(a <= b for a,b in zip(stamps,stamps[1:])), 'role declared causal order differs')
+    permit = _saved_role_shape(permit_raw,role+'_permit_binding',registry)
+    packet = _saved_role_shape(packet_raw,role+'_entry_packet',registry)
+    expected = dict(context_sha=context_sha,request_sha=request_sha,original_invocation_started=start,
+        original_invocation_deadline=deadline,active_deadline=active,closed_deadline=closed,
+        role_tree_sha=sha256(tree_raw).hexdigest(),**upstream_fields)
+    if role == 'controller':
+        expected.update(controller_attempt_nonce=episode['nonce'],attempt_commit_sha=digest(episode),
+            attempt_started=episode['started'],attempt_deadline=episode['deadline'])
+    else:
+        expected.update(reservation_nonce=episode['nonce'],reservation_commit_sha=digest(episode),
+            reservation_started=episode['started'],reservation_deadline=episode['deadline'])
+    for value in (permit,packet):
+        require(all(canonical(value[n]) == canonical(v) for n,v in expected.items()), 'role independent declared binding differs')
+    require(permit['context_receipt_sha'] == digest(publication['context_receipt'])
+        and permit['producer_identity'] == basis['producer_identity'] and permit['permit_nonce'] == basis['permit_nonce'],
+        'role permit emission declaration differs')
+    require(packet['context_path'] == publication['context_path'] and packet['context_receipt'] == publication['context_receipt']
+        and packet['root_directories_sha'] == digest(publication['root_directories'])
+        and packet['source_sha'] == digest(context['source_pins']) and packet['environment_sha'] == digest(context['environment'])
+        and packet['ENTRY_pin'] == context['source_pins']['experiments/staged_rts24_saved_fresh_adoption_v1.py']
+        and packet['executable_pin'] == context['executable']['pin'], 'role packet independent publication/source declaration')
+    for name in ('entry_transport_name','entry_transport_nonce','stage_name','stage_nonce'):
+        require(packet[name] == transport[name], 'role independently held transport differs')
+    require(packet['permit_binding_sha'] == descriptor['permit_binding_sha'] == sha256(permit_raw).hexdigest()
+        and descriptor['packet_sha'] == sha256(packet_raw).hexdigest(), 'role packet descriptor digest chain differs')
+    result = object.__new__(cls)
+    raws = (packet_raw,permit_raw,descriptor_raw,publication_raw,tree_raw,transport_raw,basis_raw,
+        registry_raw,templates_raw,*projection_raws)+((ack_raw,mailbox_header_raw,offer_raw) if role == 'controller' else ())
+    for name, value in dict(_raws=raws,_context_data=context_data,_upstream_data=upstream_data,
+            _creator=(os.getpid(),get_ident()),_object_id=id(result),_context_id=id(context_data),
+            _context_commit=context_data.commit,_upstream_id=id(upstream_data),
+            _upstream_commit=None if upstream_data is None else upstream_data.commit,declared_now=now).items():
+        object.__setattr__(result,name,value)
+    object.__setattr__(result,'commit',digest(result._image()))
+    return result.entry()
+
+
+def validate_saved_controller_entry_data(packet_raw, permit_raw, descriptor_raw, *, context_data,
+        publication_raw, tree_raw, transport_raw, basis_raw, ack_raw, mailbox_header_raw, offer_raw,
+        broker_ack_raw, registry_raw, templates_raw, now):
+    return _validate_saved_entry_data('controller',SavedControllerEntryData,packet_raw,permit_raw,descriptor_raw,
+        context_data=context_data,upstream_data=None,publication_raw=publication_raw,tree_raw=tree_raw,
+        transport_raw=transport_raw,basis_raw=basis_raw,projection_raws=(broker_ack_raw,),registry_raw=registry_raw,
+        templates_raw=templates_raw,now=now,ack_raw=ack_raw,mailbox_header_raw=mailbox_header_raw,offer_raw=offer_raw)
+
+
+def validate_saved_parent_entry_data(packet_raw, permit_raw, descriptor_raw, *, context_data, controller_data,
+        publication_raw, tree_raw, transport_raw, basis_raw, controller_bootstrap_raw, controller_G0_raw,
+        controller_store_raw, controller_issuer_raw, registry_raw, templates_raw, now):
+    return _validate_saved_entry_data('parent',SavedParentEntryData,packet_raw,permit_raw,descriptor_raw,
+        context_data=context_data,upstream_data=controller_data,publication_raw=publication_raw,tree_raw=tree_raw,
+        transport_raw=transport_raw,basis_raw=basis_raw,projection_raws=(controller_bootstrap_raw,controller_G0_raw,
+            controller_store_raw,controller_issuer_raw),registry_raw=registry_raw,templates_raw=templates_raw,now=now)
+
+
+def validate_saved_fresh_entry_data(packet_raw, permit_raw, descriptor_raw, *, context_data, parent_data,
+        publication_raw, tree_raw, transport_raw, basis_raw, parent_bootstrap_raw, parent_hold_raw,
+        parent_store_raw, parent_issuer_raw, registry_raw, templates_raw, now):
+    return _validate_saved_entry_data('fresh',SavedFreshEntryData,packet_raw,permit_raw,descriptor_raw,
+        context_data=context_data,upstream_data=parent_data,publication_raw=publication_raw,tree_raw=tree_raw,
+        transport_raw=transport_raw,basis_raw=basis_raw,projection_raws=(parent_bootstrap_raw,parent_hold_raw,
+            parent_store_raw,parent_issuer_raw),registry_raw=registry_raw,templates_raw=templates_raw,now=now)
+
+
 if __name__ == '__main__':
     if sys.argv[1:2] == ['--ordinary-entry']: _ordinary_file_dispatch(sys.argv[1:])
     elif sys.argv[1:2] == [DIRECT_ENTRY_PROBE_FLAG]: _ordinary_direct_entry_cli(sys.argv[1:])

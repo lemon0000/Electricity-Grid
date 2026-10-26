@@ -3520,3 +3520,398 @@ def test_saved_direct_entry_bounded_pipe_runner_stops_and_closes(case):
     assert result['pipes_closed'] and result['reader_threads_terminal'] and result['cleanup']==[]
     assert len(result['stdout'])<=module.STDOUT_BYTES and len(result['stderr'])<=module.STDERR_BYTES
     assert process.stdout.closed and process.stderr.closed
+
+
+@pytest.fixture(scope='module')
+def saved_role_data_case():
+    import importlib.util
+    root=cli.ROOT/'results/tables/staged_rts24_saved_fresh_role_data_v1_non_authoritative/checks_01'
+    path=root/'fixture_builder.py';plan=json.loads((root/'admission.json').read_bytes())
+    expected=plan['helper_pins'][path.relative_to(cli.ROOT).as_posix()]
+    raw=path.read_bytes();assert dict(bytes=len(raw),sha256=sha256(raw).hexdigest())==expected
+    spec=importlib.util.spec_from_file_location('independent_role_data_fixture',path)
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    return module.build()
+
+
+def _role_data_invoke(role, args):
+    function={'controller':cli.validate_saved_controller_entry_data,'parent':cli.validate_saved_parent_entry_data,
+        'fresh':cli.validate_saved_fresh_entry_data}[role]
+    value=dict(args);packet=value.pop('packet_raw');permit=value.pop('permit_raw');descriptor=value.pop('descriptor_raw')
+    return function(packet,permit,descriptor,**value)
+
+
+@pytest.fixture(scope='module')
+def saved_role_data_bound(saved_role_data_case):
+    c=saved_role_data_case;context=_successor_call(c['base_context_case']);arguments={};results={}
+    for role in ('controller','parent','fresh'):
+        item=c['roles'][role];basis=deepcopy(item['basis'])
+        basis['context_data_identity']=dict(object_id=id(context),commit=context.commit)
+        value=dict(packet_raw=item['packet_raw'],permit_raw=item['permit_raw'],descriptor_raw=item['descriptor_raw'],
+            context_data=context,publication_raw=c['publication_raw'],tree_raw=c['tree_raw'],
+            transport_raw=_successor_json(item['transport']),registry_raw=c['registry_raw'],templates_raw=c['templates_raw'],now=item['now'])
+        if role=='controller':
+            value.update(ack_raw=c['ack_raw'],mailbox_header_raw=c['mailbox_header_raw'],offer_raw=c['offer_raw'],
+                broker_ack_raw=item['projection_raws']['broker_ACK_verified'])
+        else:
+            source=results['controller' if role=='parent' else 'parent']
+            basis['upstream_data_identity']=dict(object_id=id(source),commit=source.commit,creator=list(source._creator))
+            value[('controller_data' if role=='parent' else 'parent_data')]=source
+            value.update({name+'_raw':raw for name,raw in item['projection_raws'].items()})
+        value['basis_raw']=_successor_json(basis)
+        arguments[role]=value;results[role]=_role_data_invoke(role,value)
+    return arguments,results
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+def test_saved_role_data_positive(saved_role_data_bound,role):
+    arguments,original=saved_role_data_bound;result=_role_data_invoke(role,arguments[role])
+    expected={'controller':cli.SavedControllerEntryData,'parent':cli.SavedParentEntryData,'fresh':cli.SavedFreshEntryData}[role]
+    assert type(result) is expected and result is not original[role] and result.entry() is result
+    assert result.raw==arguments[role]['packet_raw'] and result.permit_raw==arguments[role]['permit_raw']
+    assert result.descriptor_raw==arguments[role]['descriptor_raw']
+    assert result.packet_sha==sha256(result.raw).hexdigest() and result.permit_sha==sha256(result.permit_raw).hexdigest()
+    status=json.loads(result.status_raw)
+    true_fields={'data_only','declared_inputs_consistent','declared_order_consistent','declared_time_consistent'}
+    assert all(status[n] is True for n in true_fields)
+    assert status['frozen_schema_family']==10 and status['development_declaration_schema_family']==21
+    assert all(v is False for n,v in status.items() if n not in true_fields|{'schema','frozen_schema_family','development_declaration_schema_family'})
+    assert not any(type(v) in (dict,list) for v in vars(result).values())
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+def test_saved_role_data_no_live_effects(saved_role_data_bound,monkeypatch,role):
+    from types import SimpleNamespace
+    import os
+    def denied(*args,**kwargs):raise AssertionError('role data validator requested live effect')
+    args=saved_role_data_bound[0][role]
+    with monkeypatch.context() as scoped:
+        scoped.setattr(cli,'os',SimpleNamespace(getpid=os.getpid))
+        scoped.setattr(cli,'time',SimpleNamespace(monotonic=denied,perf_counter=denied))
+        scoped.setattr(cli,'C',SimpleNamespace(WinDLL=denied))
+        for name in ('read','directories','ordinary','source_pins','_expectation_adapter','open_saved_self_anchor','_role_tree'):
+            scoped.setattr(cli,name,denied)
+        for name in ('open','read_bytes','read_text','stat','lstat','exists','is_file','is_dir','resolve','mkdir'):
+            scoped.setattr(Path,name,denied)
+        result=_role_data_invoke(role,args)
+        assert json.loads(result.status_raw)['actual_filesystem_identity_verified'] is False
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+def test_saved_role_data_closed_result_type(saved_role_data_bound,role):
+    import copy
+    import inspect
+    import pickle
+    args=saved_role_data_bound[0][role];result=_role_data_invoke(role,args);cls=type(result)
+    for operation in (lambda:cls(),lambda:pickle.dumps(result),lambda:copy.copy(result),lambda:type('Other',(cls,),{})):
+        with pytest.raises(TypeError):operation()
+    with pytest.raises((AttributeError,TypeError)):result.extra=True
+    with pytest.raises(TypeError):_role_data_invoke(role,{**args,'role':'fresh'})
+    function={'controller':cli.validate_saved_controller_entry_data,'parent':cli.validate_saved_parent_entry_data,'fresh':cli.validate_saved_fresh_entry_data}[role]
+    assert 'role' not in inspect.signature(function).parameters
+    assert not hasattr(cli,'validate_saved_role_entry_data')
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+@pytest.mark.parametrize('field',['_raws','_context_data','_upstream_data','_creator','_object_id','_context_id',
+    '_context_commit','_upstream_id','_upstream_commit','declared_now','commit'])
+def test_saved_role_data_commit_rechecks(saved_role_data_bound,role,field):
+    result=_role_data_invoke(role,saved_role_data_bound[0][role]);original=getattr(result,field)
+    changed=() if field=='_raws' else object() if field in ('_context_data','_upstream_data') else (0,0) if field=='_creator' else \
+        original+1 if type(original) in (int,float) else 'changed'
+    object.__setattr__(result,field,changed)
+    for operation in (result.entry,lambda:result.raw,lambda:result.permit_raw,lambda:result.descriptor_raw,lambda:result.status_raw):
+        with pytest.raises(ValueError):operation()
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+def test_saved_role_data_original_object_and_thread(saved_role_data_bound,role):
+    from threading import Thread
+    result=_role_data_invoke(role,saved_role_data_bound[0][role]);clone=object.__new__(type(result))
+    for name,value in vars(result).items():object.__setattr__(clone,name,value)
+    with pytest.raises(ValueError):clone.entry()
+    observed=[]
+    def other_thread():
+        try:result.entry()
+        except BaseException as error:observed.append(error)
+    thread=Thread(target=other_thread);thread.start();thread.join(timeout=2.)
+    assert not thread.is_alive() and len(observed)==1 and isinstance(observed[0],ValueError)
+    assert result.entry() is result
+
+
+@pytest.mark.parametrize('role',['parent','fresh'])
+@pytest.mark.parametrize('fault',['role','new_same_bytes','context'])
+def test_saved_role_data_upstream_object_binding(saved_role_data_bound,saved_role_data_case,role,fault):
+    arguments,results=saved_role_data_bound;args=dict(arguments[role]);source_role='controller' if role=='parent' else 'parent'
+    key=source_role+'_data'
+    if fault=='role':args[key]=results['fresh']
+    elif fault=='new_same_bytes':
+        replacement=_role_data_invoke(source_role,arguments[source_role])
+        assert replacement.raw==results[source_role].raw and replacement is not results[source_role]
+        args[key]=replacement
+    else:
+        other_context=_successor_call(saved_role_data_case['base_context_case']);assert other_context.raw==args['context_data'].raw
+        args['context_data']=other_context;basis=json.loads(args['basis_raw'])
+        basis['context_data_identity']=dict(object_id=id(other_context),commit=other_context.commit);args['basis_raw']=_successor_json(basis)
+    with pytest.raises(ValueError):_role_data_invoke(role,args)
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+@pytest.mark.parametrize('part',['packet_raw','permit_raw','descriptor_raw','publication_raw','transport_raw','basis_raw'])
+def test_saved_role_data_closed_fields(saved_role_data_bound,role,part):
+    original=saved_role_data_bound[0][role];value=json.loads(original[part])
+    for field in value:
+        changed=deepcopy(value);del changed[field]
+        with pytest.raises(ValueError):_role_data_invoke(role,{**original,part:_successor_json(changed)})
+    changed={**value,'unbound_extra':False}
+    with pytest.raises(ValueError):_role_data_invoke(role,{**original,part:_successor_json(changed)})
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+def test_saved_role_data_closed_episode_and_projection_domains(saved_role_data_bound,role):
+    args=saved_role_data_bound[0][role];basis=json.loads(args['basis_raw'])
+    for field in basis['local_episode']:
+        changed=deepcopy(basis);del changed['local_episode'][field]
+        with pytest.raises(ValueError):_role_data_invoke(role,{**args,'basis_raw':_successor_json(changed)})
+    keys=(['broker_ack_raw'] if role=='controller' else [n+'_raw' for n in basis['projection_pins']])
+    for key in keys:
+        declaration=json.loads(args[key]);name=('broker_ACK_verified' if key=='broker_ack_raw' else key.removesuffix('_raw'))
+        for field in declaration:
+            changed=deepcopy(declaration);del changed[field];raw=_successor_json(changed)
+            changed_basis=deepcopy(basis);changed_basis['projection_pins'][name]=dict(bytes=len(raw),sha256=sha256(raw).hexdigest())
+            with pytest.raises(ValueError):_role_data_invoke(role,{**args,key:raw,'basis_raw':_successor_json(changed_basis)})
+    if role!='controller':
+        first,second=keys[:2];swapped=args[second];changed_basis=deepcopy(basis)
+        changed_basis['projection_pins'][first.removesuffix('_raw')]=dict(bytes=len(swapped),sha256=sha256(swapped).hexdigest())
+        with pytest.raises(ValueError,match='declaration domain'):
+            _role_data_invoke(role,{**args,first:swapped,'basis_raw':_successor_json(changed_basis)})
+
+
+def _role_data_rehash(args,packet=None,permit=None):
+    result=dict(args);p=json.loads(result['packet_raw']) if packet is None else packet
+    b=json.loads(result['permit_raw']) if permit is None else permit
+    result['permit_raw']=_successor_json(b);p['permit_binding_sha']=sha256(result['permit_raw']).hexdigest()
+    result['packet_raw']=_successor_json(p);descriptor=json.loads(result['descriptor_raw'])
+    descriptor.update(packet_sha=sha256(result['packet_raw']).hexdigest(),permit_binding_sha=sha256(result['permit_raw']).hexdigest())
+    result['descriptor_raw']=_successor_json(descriptor)
+    return result
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+@pytest.mark.parametrize('field',['context_sha','request_sha','role_tree_sha','active_deadline','closed_deadline','original_invocation_started','original_invocation_deadline'])
+def test_saved_role_data_rehashed_pair_still_needs_independent_basis(saved_role_data_bound,role,field):
+    args=saved_role_data_bound[0][role];p=json.loads(args['packet_raw']);b=json.loads(args['permit_raw'])
+    altered='0'*64 if type(p[field]) is str else p[field]+1.
+    p[field]=b[field]=altered
+    with pytest.raises(ValueError):_role_data_invoke(role,_role_data_rehash(args,p,b))
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+def test_saved_role_data_original_episode_never_reset(saved_role_data_bound,role):
+    args=saved_role_data_bound[0][role];p=json.loads(args['packet_raw']);b=json.loads(args['permit_raw'])
+    fields=('controller_attempt_nonce','attempt_started','attempt_deadline','attempt_commit_sha') if role=='controller' else \
+        ('reservation_nonce','reservation_started','reservation_deadline','reservation_commit_sha')
+    for field in fields:
+        changed_p,changed_b=deepcopy(p),deepcopy(b)
+        changed_p[field]=changed_b[field]='0'*64 if type(p[field]) is str else p[field]+1.
+        with pytest.raises(ValueError):_role_data_invoke(role,_role_data_rehash(args,changed_p,changed_b))
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+@pytest.mark.parametrize('fault',['bool_identity','float_receipt','int_local_time','bad_nonce','bad_tree','bad_reference','wrong_profile','bad_now','expired'])
+def test_saved_role_data_primitive_types_and_bounds(saved_role_data_bound,role,fault):
+    args=dict(saved_role_data_bound[0][role])
+    if fault=='bool_identity':
+        b=json.loads(args['permit_raw']);b['producer_identity'][0]=True;args['permit_raw']=_successor_json(b)
+    elif fault=='float_receipt':
+        v=json.loads(args['publication_raw']);v['context_receipt']['bytes']=float(v['context_receipt']['bytes']);args['publication_raw']=_successor_json(v)
+    elif fault=='int_local_time':
+        v=json.loads(args['basis_raw']);v['local_episode']['started']=int(v['local_episode']['started']);args['basis_raw']=_successor_json(v)
+    elif fault=='bad_nonce':
+        v=json.loads(args['transport_raw']);v['stage_nonce']='x'*64;args['transport_raw']=_successor_json(v)
+    elif fault=='bad_tree':
+        v=json.loads(args['tree_raw']);v[1][1][-1][1]=True;args['tree_raw']=_successor_json(v)
+    elif fault=='bad_reference':
+        v=json.loads(args['basis_raw']);v['context_data_identity']['object_id']=True;args['basis_raw']=_successor_json(v)
+    elif fault=='wrong_profile':args['registry_raw']=args['registry_raw']+b' '
+    elif fault=='bad_now':args['now']=float('nan')
+    else:args['now']=1200.
+    with pytest.raises(ValueError):_role_data_invoke(role,args)
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+@pytest.mark.parametrize('part',['packet_raw','permit_raw','descriptor_raw','basis_raw','registry_raw'])
+def test_saved_role_data_raw_encoding_caps(saved_role_data_bound,role,part):
+    args=saved_role_data_bound[0][role];original=args[part]
+    samples=[bytearray(original),original+b' ',b'{"x":1,"x":1}',b'{"x":NaN}',b'x'*65537]
+    for raw in samples:
+        with pytest.raises((TypeError,ValueError)):_role_data_invoke(role,{**args,part:raw})
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+def test_saved_role_data_transport_name_boundary(saved_role_data_bound,role):
+    original=saved_role_data_bound[0][role]
+    for length in (192,193):
+        name='Local\\'+'a'*(length-6);packet=json.loads(original['packet_raw']);transport=json.loads(original['transport_raw'])
+        packet['entry_transport_name']=transport['entry_transport_name']=name
+        args=_role_data_rehash(original,packet);args['transport_raw']=_successor_json(transport)
+        if length==192:assert _role_data_invoke(role,args).entry()
+        else:
+            with pytest.raises(ValueError):_role_data_invoke(role,args)
+
+
+@pytest.mark.parametrize('fault',['header_after_publication','offer_before_publication','ACK_before_offer','ACK_after_broker_ack'])
+def test_saved_role_data_controller_causal_order(saved_role_data_bound,fault):
+    args=dict(saved_role_data_bound[0]['controller']);basis=json.loads(args['basis_raw'])
+    if fault in ('ACK_before_offer','ACK_after_broker_ack'):
+        basis['ACK_declared_at']=1000.16 if fault=='ACK_before_offer' else 1000.6
+    else:
+        key='mailbox_header_raw' if fault=='header_after_publication' else 'offer_raw'
+        value=json.loads(args[key]);value['declared_at']=1000.3 if key=='mailbox_header_raw' else 1000.05
+        raw=_successor_json(value);args[key]=raw;pin_name='mailbox_header_pin' if key=='mailbox_header_raw' else 'offer_pin'
+        basis[pin_name]=dict(bytes=len(raw),sha256=sha256(raw).hexdigest())
+    args['basis_raw']=_successor_json(basis)
+    with pytest.raises(ValueError):_role_data_invoke('controller',args)
+
+
+@pytest.mark.parametrize('role',['parent','fresh'])
+@pytest.mark.parametrize('name_index',[0,1,2,3])
+def test_saved_role_data_downstream_order_before_original_reservation(saved_role_data_bound,role,name_index):
+    args=dict(saved_role_data_bound[0][role]);basis=json.loads(args['basis_raw']);names=list(basis['projection_pins'])
+    name=names[name_index];key=name+'_raw';value=json.loads(args[key]);value['declared_at']=basis['local_episode']['started']+1.
+    raw=_successor_json(value);args[key]=raw;basis['projection_pins'][name]=dict(bytes=len(raw),sha256=sha256(raw).hexdigest())
+    args['basis_raw']=_successor_json(basis)
+    with pytest.raises(ValueError,match='causal order'):_role_data_invoke(role,args)
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+def test_saved_role_data_is_rejected_by_existing_authority_domains(saved_role_data_bound,monkeypatch,role):
+    result=_role_data_invoke(role,saved_role_data_bound[0][role]);raw=result.raw;sha=sha256(raw).hexdigest()
+    def denied(*args,**kwargs):pytest.fail('data result reached live authority effect')
+    for name in ('_production_preflight','directories','ordinary','_expectation_adapter'):
+        if hasattr(cli,name):monkeypatch.setattr(cli,name,denied)
+    operations=(lambda:cli.RoleStore(raw,sha,'0'*64),
+        lambda:cli.SavedFileBootstrap(result,sha,{},b'{}',object(),(),()),
+        lambda:cli.SavedChildLaunchPermit(result),lambda:cli._SavedLaunchIssuer(result),
+        lambda:cli.construct_saved_stage(result,None),lambda:cli._construct_saved_stage_for_test(result),
+        lambda:cli.saved_owner_inputs('parent',result,None,channel=None))
+    for operation in operations:
+        with pytest.raises((TypeError,ValueError)):operation()
+    inert=cli.SavedOwnerInputs(b'{}',result,(),None)
+    with pytest.raises(ValueError,match='store/reservation'):inert.immutable_entry()
+    assert not cli.OUTPUT.parent.exists()
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+def test_saved_role_data_status_does_not_read_mutable_global_gates(saved_role_data_bound,monkeypatch,role):
+    result=_role_data_invoke(role,saved_role_data_bound[0][role]);before=result.status_raw
+    with monkeypatch.context() as scoped:
+        scoped.setattr(cli,'GATES',{name:True for name in cli.GATES})
+        assert result.status_raw==before
+        assert _role_data_invoke(role,saved_role_data_bound[0][role]).status_raw==before
+    assert all(json.loads(before)[name] is False for name in ('native_authorized','resource_admission','formal_result',
+        'scientific_evidence_adopted','public_P2_execution_enabled','context_origin_creator_verified'))
+
+
+@pytest.mark.parametrize('role,ancestor_role',[('parent','controller'),('fresh','parent'),('fresh','controller')])
+@pytest.mark.parametrize('field',['entry_transport_name','stage_name','entry_transport_nonce','stage_nonce'])
+def test_saved_role_data_transport_cannot_alias_any_ancestor(saved_role_data_bound,role,ancestor_role,field):
+    arguments,results=saved_role_data_bound;args=arguments[role]
+    packet=json.loads(args['packet_raw']);transport=json.loads(args['transport_raw'])
+    previous=json.loads(results[ancestor_role].raw);packet[field]=transport[field]=previous[field]
+    changed=_role_data_rehash(args,packet);changed['transport_raw']=_successor_json(transport)
+    with pytest.raises(ValueError,match='transport aliases ancestor'):_role_data_invoke(role,changed)
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+def test_saved_role_data_stage_nonce_cannot_reuse_broker_stage(saved_role_data_bound,role):
+    args=saved_role_data_bound[0][role];packet=json.loads(args['packet_raw']);transport=json.loads(args['transport_raw'])
+    nonce=json.loads(args['publication_raw'])['stage_nonce'];packet['stage_nonce']=transport['stage_nonce']=nonce
+    changed=_role_data_rehash(args,packet);changed['transport_raw']=_successor_json(transport)
+    with pytest.raises(ValueError,match='transport aliases ancestor'):_role_data_invoke(role,changed)
+
+
+@pytest.mark.parametrize('part,pin_name',[('ack_raw','ack_pin'),('mailbox_header_raw','mailbox_header_pin'),('offer_raw','offer_pin')])
+def test_saved_role_data_controller_upstream_closed_fields(saved_role_data_bound,part,pin_name):
+    args=saved_role_data_bound[0]['controller'];original=json.loads(args[part])
+    variants=[]
+    for field in original:
+        value=deepcopy(original);del value[field];variants.append(value)
+    variants.append({**original,'unbound_extra':False})
+    for value in variants:
+        raw=_successor_json(value);basis=json.loads(args['basis_raw']);basis[pin_name]=dict(bytes=len(raw),sha256=sha256(raw).hexdigest())
+        with pytest.raises(ValueError):_role_data_invoke('controller',{**args,part:raw,'basis_raw':_successor_json(basis)})
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+@pytest.mark.parametrize('fault',['missing_row','extra_row','wrong_label','context_identity'])
+def test_saved_role_data_tree_closed_image(saved_role_data_bound,role,fault):
+    args=saved_role_data_bound[0][role];tree=json.loads(args['tree_raw'])
+    if fault=='missing_row':tree.pop(1)
+    elif fault=='extra_row':tree.append(['other',[]])
+    elif fault=='wrong_label':tree[1][0]='worker_alias'
+    else:tree[-1][1][1]+=1
+    raw=_successor_json(tree);publication=json.loads(args['publication_raw'])
+    publication['role_tree_pin']=dict(bytes=len(raw),sha256=sha256(raw).hexdigest())
+    with pytest.raises(ValueError):_role_data_invoke(role,{**args,'tree_raw':raw,'publication_raw':_successor_json(publication)})
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+def test_saved_role_data_frozen_path_rejects_embedded_nul(saved_role_data_bound,role):
+    args=saved_role_data_bound[0][role];packet=json.loads(args['packet_raw']);packet['context_path']+='\0tail'
+    registry=json.loads(args['registry_raw'])
+    with pytest.raises(ValueError,match='role path domain'):
+        cli._saved_role_shape(_successor_json(packet),role+'_entry_packet',registry)
+
+
+def _role_capture_module():
+    import importlib.util
+    path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_role_data_v1_non_authoritative/checks_01/run.py'
+    plan=json.loads((path.parent/'admission.json').read_bytes());raw=path.read_bytes()
+    assert dict(bytes=len(raw),sha256=sha256(raw).hexdigest())==plan['helper_pins'][path.relative_to(cli.ROOT).as_posix()]
+    spec=importlib.util.spec_from_file_location('role_data_capture_logic',path)
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    return module
+
+
+@pytest.mark.parametrize('case',['normal','stdout','stderr','timeout','reader_error'])
+def test_saved_role_data_capture_bounded_drain(case):
+    import io
+    from threading import Event
+    module=_role_capture_module();released=Event()
+    class Hanging:
+        closed=False
+        def read(self,size):released.wait(2.);return b''
+        def close(self):self.closed=True
+    class Broken(io.BytesIO):
+        def read(self,size):raise OSError('synthetic reader failure')
+    class Process:
+        pid=1234
+        def __init__(self):
+            self.returncode=0 if case=='normal' else None;self.kills=0
+            self.stdout=(Hanging() if case=='timeout' else Broken() if case=='reader_error' else
+                io.BytesIO(b'x'*(module.STDOUT_CAP+4096 if case=='stdout' else 10)))
+            self.stderr=io.BytesIO(b'e'*(module.STDERR_CAP+4096)) if case=='stderr' else io.BytesIO()
+        def poll(self):return self.returncode
+        def kill(self):self.kills+=1;self.returncode=-9;released.set()
+        def wait(self,timeout):assert self.returncode is not None;return self.returncode
+    process=Process();code,stdout,stderr,error,observed=module.drain(process,.02)
+    assert observed['child_created'] and observed['reader_threads_terminal'] and observed['pipes_closed'] and observed['cleanup']==[]
+    assert len(stdout)<=module.STDOUT_CAP and len(stderr)<=module.STDERR_CAP
+    if case=='normal':assert code==0 and error is None and process.kills==0
+    else:
+        assert code==-9 and process.kills==1
+        assert error==('timeout' if case=='timeout' else 'output_limit_or_reader_error')
+        if case in ('stdout','stderr'):assert observed[case+'_truncated']
+        if case=='reader_error':assert observed['reader_errors']
+
+
+def test_saved_role_data_capture_constructor_failure_is_a_recordable_attempt(monkeypatch):
+    from types import SimpleNamespace
+    module=_role_capture_module();calls=[]
+    def failed(*args,**kwargs):calls.append(args);raise OSError('synthetic process construction failure')
+    monkeypatch.setattr(module,'subprocess',SimpleNamespace(Popen=failed,PIPE=-1,DEVNULL=-3))
+    code,stdout,stderr,error,observed=module.spawn_and_drain(['ordinary-test'],1.)
+    assert len(calls)==1 and code==-3 and stdout==stderr==b'' and error=='popen_error'
+    assert observed['child_created'] is False and observed['popen_error_type']=='OSError'
+    assert observed['popen_error_message']=='synthetic process construction failure'

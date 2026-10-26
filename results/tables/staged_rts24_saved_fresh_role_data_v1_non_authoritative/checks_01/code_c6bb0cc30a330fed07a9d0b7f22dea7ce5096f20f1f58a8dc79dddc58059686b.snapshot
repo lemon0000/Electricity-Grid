@@ -1,0 +1,33 @@
+status: DRAFT_NONAUTHORITATIVE
+source_class: mechanism_assumption
+business_fixture: configs/staged_deliverability_small_case_v1.DRAFT.yaml
+business_sha256: 5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5
+network:
+  base_mva: '100'
+  source_bus: 1
+  poi_bus: 2
+  background_mw: '1/10'
+  generator_max_mw: '2'
+  hourly_generator_ramp_mw: '2'
+  reactance_pu: '1/10'
+  angle_limit_rad: '1/10'
+  line_rating_before_mw: '29/40'
+  line_rating_after_mw: '1'
+  project_start: 0
+  project_lead: 2
+  delays: {on_time: 0, delayed: 2}
+  actual_outages: {1: 0}
+  selected_outages: [0, 1]
+rights:
+  firm_before_mw: '3/5'
+  conditional_before_mw: '1/5'
+  firm_after_mw: '4/5'
+  conditional_after_mw: '1/2'
+x_envelope:
+  response_model: preventive_hourly_declared_line_outage
+  max_call_mw: '1/2'
+  max_ramp_mw_per_hour: '1/2'
+  max_energy_mwh: '1/2'
+  max_duration_hours: 1
+  max_events: 2
+  minimum_rest_hours: 0

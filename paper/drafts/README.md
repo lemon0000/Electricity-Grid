@@ -1,5 +1,7 @@
 # 项目介绍与论文草稿
 
+2026-10-26 三角色data-only入口开发验证：见[当前交接](../../docs/plan/continuation_handoff_20261025_saved_fresh_role_data.md)。当前Source版本480目标节点通过（旧282+新198），pytest计费含一次组超时；三次当前失败与旧失败均保存。最终保存状态以新root checkpoint/原exit为准。独立basis仅支持声明与pin一致性；actual fresh、最终父端采用、整包科学采用、资源和正式门禁仍未开放。
+
 2026-10-25 上游合同mechanical archive successor：见[当前交接](../../docs/plan/continuation_handoff_20261025_saved_fresh_upstream_archive.md)。本轮修复双LF标题段并独立重做保存审计；终态以新root原exit/checkpoint为准。旧两次失败原样保留，Source49与10域/59节点/21项静态设计不改，actual F及科学、资源、正式门禁仍关闭。
 
 2026-10-25 successor三角色上游数据合同（DRAFT_NONAUTHORITATIVE）。

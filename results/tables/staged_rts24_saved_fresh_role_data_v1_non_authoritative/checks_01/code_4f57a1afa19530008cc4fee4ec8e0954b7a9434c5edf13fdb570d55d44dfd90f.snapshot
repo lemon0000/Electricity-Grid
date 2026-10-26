@@ -1,0 +1,183 @@
+"""Bounded development captures; ordinary tests/static targets only."""
+import time
+STARTED=time.perf_counter()
+from hashlib import sha256
+import json
+from pathlib import Path
+import subprocess
+import sys
+from threading import Event,Thread
+
+OUT=Path(__file__).resolve().parent
+ROOT=OUT.parents[3]
+OLD=ROOT/'results/tables/staged_rts24_saved_fresh_upstream_archive_v1_non_authoritative'
+PACKAGE=OUT.parent/'final_package_01'
+SOURCES=tuple(json.loads((OLD/'checks_01/baseline.json').read_bytes())['sources'])
+MUTABLE={'experiments/staged_rts24_saved_fresh_adoption_v1.py','tests/test_staged_rts24_saved_fresh_adoption_v1.py'}
+STDOUT_CAP,STDERR_CAP=262144,32768
+
+def raw(value):return json.dumps(value,ensure_ascii=True,sort_keys=True,separators=(',',':'),allow_nan=False).encode('ascii')
+def pin(data):return dict(bytes=len(data),sha256=sha256(data).hexdigest())
+def read(path):return json.loads(path.read_bytes())
+def names(paths):return {p.relative_to(ROOT).as_posix():pin(p.read_bytes()) for p in paths}
+def save(path,value):
+    with path.open('xb') as stream:stream.write(raw(value))
+
+def source():return names(ROOT/n for n in SOURCES)
+def helpers():return [p for directory in (OUT,PACKAGE) if directory.exists() for p in directory.glob('*.py')]
+def fixed():
+    base_path=OUT/'baseline.json'
+    if base_path.exists():
+        base=read(base_path)
+        actual=names(ROOT/n for n in base['preserved'])
+        assert actual==base['preserved'],'historical bytes changed'
+        actual_source=source()
+        assert all(actual_source[n]==p for n,p in base['sources'].items() if n not in MUTABLE),'nonmutable Source changed'
+        return pin(raw(actual))
+    before=read(OLD/'checks_01/baseline.json')['preserved']
+    before.update(names(p for p in OLD.rglob('*') if p.is_file()))
+    return pin(raw(names(ROOT/n for n in before)))
+
+def snapshot(data):
+    path=OUT/('code_'+pin(data)['sha256']+'.snapshot')
+    if not path.exists():
+        with path.open('xb') as stream:stream.write(data)
+
+def drain(process,timeout):
+    overflow=Event();state={n:dict(data=bytearray(),observed_bytes=0,truncated=False,error=None)
+        for n in ('stdout','stderr')}
+    def reader(name,stream,limit):
+        row=state[name]
+        try:
+            while True:
+                block=stream.read(4096)
+                if not block:break
+                row['observed_bytes']+=len(block);remaining=limit-len(row['data'])
+                row['data'].extend(block[:remaining])
+                if len(block)>remaining:row['truncated']=True;overflow.set()
+        except BaseException as caught:
+            row['error']=type(caught).__name__+': '+str(caught)[:256];overflow.set()
+    threads=[Thread(target=reader,args=(name,getattr(process,name),cap),daemon=True)
+        for name,cap in (('stdout',STDOUT_CAP),('stderr',STDERR_CAP))]
+    for thread in threads:thread.start()
+    deadline=time.perf_counter()+timeout;reason=None;cleanup=[];killed=False
+    while process.poll() is None:
+        if overflow.is_set():reason='output_limit_or_reader_error';break
+        if time.perf_counter()>=deadline:reason='timeout';break
+        overflow.wait(.01)
+    if reason is not None and process.poll() is None:
+        try:process.kill();killed=True
+        except BaseException as caught:cleanup.append('kill:'+type(caught).__name__)
+    try:process.wait(timeout=1.)
+    except BaseException as caught:cleanup.append('wait:'+type(caught).__name__)
+    for thread in threads:thread.join(timeout=.5)
+    readers_closed=not any(t.is_alive() for t in threads);pipes_closed=False
+    if readers_closed:
+        for name in ('stdout','stderr'):
+            try:getattr(process,name).close()
+            except BaseException as caught:cleanup.append('pipe_close:'+type(caught).__name__)
+        pipes_closed=all(getattr(process,n).closed for n in ('stdout','stderr'))
+    if any(row['truncated'] or row['error'] is not None for row in state.values()):reason=reason or 'output_limit_or_reader_error'
+    if cleanup or not readers_closed or not pipes_closed or process.poll() is None:reason=reason or 'cleanup_unresolved'
+    return process.poll(),bytes(state['stdout']['data']),bytes(state['stderr']['data']),reason,dict(
+        child_created=True,
+        stdout_cap=STDOUT_CAP,stderr_cap=STDERR_CAP,chunk_bytes=4096,killed=killed,
+        stdout_observed_bytes=state['stdout']['observed_bytes'],stderr_observed_bytes=state['stderr']['observed_bytes'],
+        stdout_truncated=state['stdout']['truncated'],stderr_truncated=state['stderr']['truncated'],
+        reader_errors=[row['error'] for row in state.values() if row['error'] is not None],
+        reader_threads_terminal=readers_closed,pipes_closed=pipes_closed,cleanup=cleanup,direct_child_pid=process.pid)
+
+def spawn_and_drain(argv,timeout):
+    try:child=subprocess.Popen(argv,cwd=ROOT,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    except BaseException as caught:
+        return -3,b'',b'','popen_error',dict(child_created=False,stdout_cap=STDOUT_CAP,stderr_cap=STDERR_CAP,
+            stdout_observed_bytes=0,stderr_observed_bytes=0,stdout_truncated=False,stderr_truncated=False,
+            popen_error_type=type(caught).__name__,popen_error_message=str(caught)[:256],
+            reader_threads_terminal=True,pipes_closed=None,cleanup=[],direct_child_pid=None)
+    return drain(child,timeout)
+
+def main(action):
+    records={p.relative_to(ROOT).as_posix():read(p) for directory in (OUT,PACKAGE) if directory.exists() for p in directory.glob('*.exit.json')}
+    spent={kind:sum(v['charged_seconds'] for v in records.values() if v['kind']==kind) for kind in ('static','pytest')}
+    if action=='revision':label,script,args,cap='revision_08',OUT/'revision.py',[],10
+    elif action=='baseline':label,script,args,cap='baseline_01',OUT/'baseline.py',[],15
+    elif action=='collection':label,script,args,cap='collection_02',OUT/'pytest_harness.py',['--collect-only','collection_02'],12
+    elif action=='collection_retry':label,script,args,cap='collection_retry_04',OUT/'pytest_harness.py',['--collect-only','collection_retry_04'],20
+    elif action=='admission':label,script,args,cap='admission_03',OUT/'admission.py',[],5
+    elif action=='admission_retry':label,script,args,cap='admission_retry_07',OUT/'admission.py',[],20
+    elif action=='finalize':label,script,args,cap='finalizer_04',OUT/'finalize.py',[],12
+    elif action in ('saved','terminal'):
+        label,script,args,cap=('saved_05' if action=='saved' else 'terminal_06'),PACKAGE/'saved_checks.py',[],22
+    else:
+        plan=read(OUT/'admission_revision_08.json');assert action in plan['groups']
+        label,script,args,cap=action,OUT/'pytest_harness.py',['admission_revision_08.json',action],plan['caps'][action]
+    kind='pytest' if action not in ('revision','baseline','collection','collection_retry','admission','admission_retry','finalize','saved','terminal') else 'static'
+    total_cap=360 if kind=='pytest' else 120
+    assert spent[kind]+cap<=total_cap and sum(spent.values())+cap<=480
+    target_out=PACKAGE if action in ('saved','terminal') else OUT
+    for suffix in ('stdout.log','stderr.log','exit.json'):assert not (target_out/(label+'.'+suffix)).exists()
+    before_source=source();before_helpers=names(helpers());before_fixed=fixed()
+    if action=='collection_retry':
+        previous=read(OUT/'collection_02.exit.json')
+        assert previous['returncode']==1 and previous['accepted'] is False and previous['error']=='timeout'
+        assert previous['source_pins']==before_source
+    if action=='admission_retry':
+        previous=read(OUT/'admission_03.exit.json')
+        assert previous['returncode']==1 and previous['accepted'] is False and previous['error']=='timeout'
+        assert previous['source_pins']==before_source and not (OUT/'admission.json').exists()
+    for n in {*before_source,*before_helpers}:snapshot((ROOT/n).read_bytes())
+    argv=[sys.executable,'-B',str(script),*args]
+    file_cap,byte_cap=(24,2*1024**2) if target_out==PACKAGE else (160,12*1024**2)
+    metadata_cap=0 if target_out==PACKAGE else 2*1024**2 if action=='baseline' else 1024**2
+    metadata_files=0 if target_out==PACKAGE else 4 if action=='finalize' else 1
+    existing=[p for p in target_out.rglob('*') if p.is_file()]
+    assert len(existing)+metadata_files+3<=file_cap
+    assert sum(p.stat().st_size for p in existing)+metadata_cap+STDOUT_CAP+STDERR_CAP+65536<=byte_cap
+    preparation_seconds=time.perf_counter()-STARTED
+    timeout=cap-3.-preparation_seconds
+    target_start=time.perf_counter();error=None
+    if timeout<=0:
+        code,stdout,stderr,error=-4,b'',b'','preparation_budget_exhausted'
+        drain_state=dict(child_created=False,stdout_observed_bytes=0,stderr_observed_bytes=0,
+            stdout_truncated=False,stderr_truncated=False,reader_threads_terminal=True,
+            pipes_closed=None,cleanup=[],direct_child_pid=None)
+    else:code,stdout,stderr,error,drain_state=spawn_and_drain(argv,timeout)
+    target_seconds=time.perf_counter()-target_start
+    after_source=source();after_helpers=names(helpers());after_fixed=fixed()
+    post_ok=before_source==after_source and before_helpers==after_helpers and before_fixed==after_fixed
+    observed=time.perf_counter()-STARTED;charged=observed+.5
+    record=dict(authority='DRAFT_NONAUTHORITATIVE',label=label,kind=kind,argv=argv,returncode=code,error=error,
+        accepted=code==0 and error is None and post_ok and charged<=cap,stdout_pin=pin(stdout),stderr_pin=pin(stderr),
+        bounded_drain=drain_state,
+        source_pins=before_source,helper_pins=before_helpers,fixed_before=before_fixed,fixed_after=after_fixed,
+        source_epoch=sha256(raw(before_source)).hexdigest(),observed_capture_seconds=observed,tail_reserve_seconds=.5,
+        charged_seconds=charged,target_seconds=target_seconds,target_timeout_seconds=timeout,cap_seconds=cap,
+        preparation_seconds=preparation_seconds,
+        prior_record_pins={n:pin((ROOT/n).read_bytes()) for n in records},previous_charged_seconds=spent,
+        whole_workflow_wall_budget_verified=False,capture_python_startup_included=False,
+        actual_F=False,scientific_evidence_adopted=False,resource_admission=False,formal_result=False,
+        package_postcheck_verified=False)
+    if action=='collection_retry':record['retry_of']=dict(path=(OUT/'collection_02.exit.json').relative_to(ROOT).as_posix(),pin=pin((OUT/'collection_02.exit.json').read_bytes()))
+    if action=='admission_retry':record['retry_of']=dict(path=(OUT/'admission_03.exit.json').relative_to(ROOT).as_posix(),pin=pin((OUT/'admission_03.exit.json').read_bytes()))
+    files=[p for p in target_out.rglob('*') if p.is_file()]
+    upper=raw({**record,'accepted':False})
+    package_ok=len(files)+3<=file_cap and sum(p.stat().st_size for p in files)+len(stdout)+len(stderr)+len(upper)<=byte_cap
+    if not package_ok:
+        record.update(discarded_stdout_pin=pin(stdout),discarded_stderr_pin=pin(stderr),raw_retained=False)
+        stdout,stderr=b'',b'';record.update(accepted=False,error='prospective_package_limit',stdout_pin=pin(b''),stderr_pin=pin(b''))
+        upper=raw(record)
+        assert len(files)+3<=file_cap and sum(p.stat().st_size for p in files)+len(upper)<=byte_cap
+    record['package_postcheck_verified']=package_ok;record['accepted'] &= package_ok
+    payload=raw(record)
+    for suffix,data in (('stdout.log',stdout),('stderr.log',stderr)):
+        with (target_out/(label+'.'+suffix)).open('xb') as stream:stream.write(data)
+    with (target_out/(label+'.exit.json')).open('xb') as stream:stream.write(payload)
+    assert (target_out/(label+'.exit.json')).read_bytes()==payload
+    print(json.dumps(dict(label=label,kind=kind,returncode=code,accepted=record['accepted'],charged_seconds=charged,
+        cumulative_kind_seconds=spent[kind]+charged,files=len(files)+3,
+        bytes=sum(p.stat().st_size for p in files)+len(stdout)+len(stderr)+len(payload)),sort_keys=True))
+    if not record['accepted']:raise SystemExit(1)
+
+if __name__=='__main__':
+    assert len(sys.argv)==2
+    main(sys.argv[1])
