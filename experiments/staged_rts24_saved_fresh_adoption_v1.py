@@ -5299,6 +5299,518 @@ def validate_saved_fresh_entry_data(packet_raw, permit_raw, descriptor_raw, *, c
             parent_store_raw,parent_issuer_raw),registry_raw=registry_raw,templates_raw=templates_raw,now=now)
 
 
+SAVED_WIRE_CONTRACT_PINS = (
+    (72009,'d80a99d39535e2e3a73028f904e29896674c5033a37ae359646fcbf507d8964f'),
+    (2365,'4daee71484dda4eaeb97d54ae9ac333b90d15ca75e8ccd57c93339ef587affd7'),
+    (16540,'b2d1ab59add27a996d852f52387907e74e709434504e8d71594d97bbef84f67a'),
+    SAVED_ROLE_REGISTRY_PIN,SAVED_ROLE_TEMPLATE_PIN)
+
+
+@dataclass(frozen=True,init=False,eq=False,repr=False,slots=True)
+class _SavedWireData:
+    _raws: tuple
+    _links: tuple
+    _edges: tuple
+    _facts: bytes
+    _creator: tuple
+    _object_id: int
+    commit: str
+    _wire_final = False
+    def __new__(cls,*args,**kwargs): raise TypeError('validate wire data explicitly')
+    def __init_subclass__(cls,**kwargs):
+        if any(getattr(base,'_wire_final',False) for base in cls.__bases__): raise TypeError('exact wire data type required')
+    def _image(self):
+        return (type(self).__name__,tuple(pin(raw) for raw in self._raws),
+            tuple((name,id(kind),oid,commit,creator,context) for name,kind,oid,commit,creator,context in self._edges),
+            tuple(id(link) for link in self._links),pin(self._facts),self._creator,self._object_id)
+    def entry(self): return _saved_wire_walk(self,set(),{})
+    @property
+    def raw(self): self.entry(); return self._raws[0]
+    @property
+    def status_raw(self):
+        self.entry()
+        return canonical(dict(schema='staged_saved_F_wire_declared_data_check_v1',data_only=True,
+            declared_consistency_only=True,checked_scope=type(self).__name__,
+            producer_capability_verified=False,actual_sources_verified=False,actual_kernel_identity_verified=False,
+            actual_filesystem_identity_verified=False,actual_clock_verified=False,context_origin_creator_verified=False,
+            physical_commit_last_verified=False,concurrency_verified=False,full_runtime_verified=False,full_P1_content_verified=False,
+            actual_quiet_verified=False,payload_read_authorized=False,role_bootstrap=False,permit_issued=False,owned_child_created=False,
+            actual_fresh=False,final_parent_adoption=False,run_authority=False,F_launch_admitted=False,native_authorized=False,
+            scientific_evidence_adopted=False,resource_admission=False,formal_result=False,public_P2_execution_enabled=False))
+    def __reduce__(self): raise TypeError('wire data is not transferable authority')
+
+
+class SavedWireContractData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedMailboxHeaderData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedMailboxHandshakeData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedControllerWireData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedParentWireData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedFreshWireData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedControllerStartupJoinData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedParentStartupJoinData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedFreshStartupJoinData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedControllerBindingData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedWireTranscriptData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedWireFailureData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedControllerReturnData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedBrokerReturnData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedWireDiagnosticData(_SavedWireData): __slots__=(); _wire_final=True
+
+
+_SAVED_WIRE_TYPES = (SavedWireContractData,SavedMailboxHeaderData,SavedMailboxHandshakeData,
+    SavedControllerWireData,SavedParentWireData,SavedFreshWireData,SavedControllerStartupJoinData,
+    SavedParentStartupJoinData,SavedFreshStartupJoinData,SavedControllerBindingData,SavedWireTranscriptData,
+    SavedWireFailureData,SavedControllerReturnData,SavedBrokerReturnData,SavedWireDiagnosticData)
+
+
+def _saved_wire_context_id(value):
+    if type(value) is SavedSuccessorDataCheck: return id(value)
+    if type(value) in _SAVED_WIRE_TYPES and value._links and type(value._links[0]) is SavedSuccessorDataCheck:
+        return id(value._links[0])
+    return None
+
+
+def _saved_wire_walk(value,gray,done):
+    require(type(value) in _SAVED_WIRE_TYPES,'exact wire data required')
+    oid=id(value); require(oid not in gray,'wire data graph cycle')
+    if oid in done: return value
+    require(value._creator == (os.getpid(),get_ident()) and value._object_id == oid,'original creating wire data required')
+    require(type(value._raws) is tuple and all(type(raw) is bytes for raw in value._raws)
+        and sum(map(len,value._raws)) <= 8*1024**2 and type(value._facts) is bytes and len(value._facts) <= 65536,
+        'wire immutable raw budget')
+    require(type(value._links) is type(value._edges) is tuple and len(value._links)==len(value._edges)<=5,'wire data edge shape')
+    _saved_wire_layout(value)
+    if type(value) is SavedWireContractData:
+        require(len(value._raws)==len(SAVED_WIRE_CONTRACT_PINS) and all(
+            len(raw)==expected[0] and sha256(raw).hexdigest()==expected[1]
+            for raw,expected in zip(value._raws,SAVED_WIRE_CONTRACT_PINS)),'fixed wire contract changed')
+    gray.add(oid)
+    try:
+        for index,(link,edge) in enumerate(zip(value._links,value._edges)):
+            name,kind,expected_id,expected_commit,creator,context=edge
+            require(name==str(index) and type(link) is kind and id(link)==expected_id and link.commit==expected_commit,
+                'wire original edge object/type/commit required')
+            require(_saved_wire_context_id(link)==context,'wire original edge context required')
+            if kind is SavedSuccessorDataCheck:
+                require(creator is None,'context origin creator not observed')
+                if id(link) not in done: link.entry();done[id(link)]=link.commit
+            else:
+                require(kind in _SAVED_WIRE_TYPES and link._creator==creator==(os.getpid(),get_ident()),'wire edge creator differs')
+                _saved_wire_walk(link,gray,done)
+        require(value.commit==digest(value._image()),'wire data immutable commit changed')
+        done[oid]=value.commit
+    finally: gray.remove(oid)
+    return value
+
+
+def _saved_wire_new(cls,raws,links,facts):
+    require(cls in _SAVED_WIRE_TYPES,'closed wire result class')
+    value=object.__new__(cls)
+    edges=tuple((str(index),type(link),id(link),link.commit,
+        None if type(link) is SavedSuccessorDataCheck else link._creator,_saved_wire_context_id(link)) for index,link in enumerate(links))
+    for name,item in dict(_raws=tuple(raws),_links=tuple(links),_edges=edges,_facts=canonical(facts),
+            _creator=(os.getpid(),get_ident()),_object_id=id(value)).items():object.__setattr__(value,name,item)
+    object.__setattr__(value,'commit',digest(value._image()));return value.entry()
+
+
+def validate_saved_wire_contract_data(domains_raw,templates_raw,dag_raw,old_domains_raw,old_templates_raw):
+    raws=(domains_raw,templates_raw,dag_raw,old_domains_raw,old_templates_raw)
+    for data,expected in zip(raws,SAVED_WIRE_CONTRACT_PINS):
+        require(type(data) is bytes and len(data)==expected[0] and sha256(data).hexdigest()==expected[1],
+            'fixed wire contract bytes differ')
+    return _saved_wire_new(SavedWireContractData,raws,(),dict(schema_count=45,historical_design_sources_only=True))
+
+
+def _saved_wire_contracts(value):
+    require(type(value) is SavedWireContractData,'exact pinned wire contracts required');value.entry()
+    return parse(value._raws[0]),parse(value._raws[1]),parse(value._raws[3]),parse(value._raws[4])
+
+
+def _saved_wire_type(value,ref,contracts,context_data):
+    registry,template,old,old_templates=contracts
+    if type(ref) is dict:
+        if 'literal' in ref:require(canonical(value)==canonical(ref['literal']),'wire fixed literal differs');return
+        require(set(ref)=={'nullable'},'wire nullable rule')
+        if value is not None:_saved_wire_type(value,ref['nullable'],contracts,context_data)
+        return
+    if ref.startswith('type:'):return _saved_wire_type(value,ref[5:],contracts,context_data)
+    if ref.startswith('schema:'):return _saved_wire_named(value,ref[7:],contracts,context_data)
+    rule=registry['types'][ref];kind=rule['kind']
+    if kind=='sha':require(_hex64(value),'wire SHA domain')
+    elif kind=='uint':_successor_integer(value,rule['low'],rule['high'])
+    elif kind=='float':_saved_role_time(value)
+    elif kind=='bool':require(type(value) is bool,'wire exact bool required')
+    elif kind=='name':_saved_role_name(value)
+    elif kind in ('ascii','encoded_string'):
+        require(type(value) is str and len(canonical(value))<=rule['encoded_max'],'wire encoded string cap')
+        if kind=='ascii':require(len(value)<=rule['characters_max'] and value.isascii(),'wire ASCII type domain')
+    elif kind=='enum':require(type(value) is str and value in rule['values'],'wire enum differs')
+    elif kind=='nullable':
+        if value is not None:_saved_wire_type(value,rule['item'],contracts,context_data)
+    elif kind in ('tuple','array'):
+        require(type(value) is list,'wire exact array required')
+        if kind=='tuple':
+            require(len(value)==len(rule['items']),'wire tuple length')
+            for item,sub in zip(value,rule['items']):_saved_wire_type(item,sub,contracts,context_data)
+        else:
+            require(rule['min_items']<=len(value)<=rule['max_items'],'wire array item cap')
+            for item in value:_saved_wire_type(item,rule['item'],contracts,context_data)
+    elif kind=='object':
+        require(type(value) is dict and set(value)==set(rule['fields']),'wire closed object fields')
+        for name,sub in rule['fields'].items():_saved_wire_type(value[name],sub,contracts,context_data)
+        if ref=='pin':require(rule['bytes_lower']<=value['bytes']<=rule['bytes_upper'],'wire positive pin bytes')
+    elif kind=='fixed_directories':
+        require(type(value) is list and len(value)==len(rule['paths'])<=16,'wire directory chain')
+        for row,path in zip(value,rule['paths']):
+            require(type(row) is list and len(row)==3 and row[0]==path,'wire fixed directory path')
+            _successor_integer(row[1],0,2**64-1);_successor_integer(row[2],0,2**128-1)
+    elif kind=='command_line':
+        require(type(value) is str and '\0' not in value and len(canonical(value))<=16384,'wire command line domain')
+    elif kind=='union':
+        for choice in rule['choices']:
+            try:_saved_wire_type(value,choice,contracts,context_data)
+            except ValueError:continue
+            return
+        raise ValueError('wire union domain differs')
+    elif kind=='frozen':
+        encoded=canonical(value);require(len(encoded)<=rule['encoded_max'],'wire frozen encoded cap')
+        if 'frozen_schema' in rule:_saved_role_shape(encoded,rule['frozen_schema'],old)
+        elif ref=='old_context':
+            require(type(context_data) is SavedSuccessorDataCheck and encoded==context_data._raw,'wire original context data differs')
+        else:
+            require(ref=='receipt','unknown frozen wire type');keys(value,'bytes sha256 identity')
+            _successor_integer(value['bytes'],1,2097152);require(_hex64(value['sha256']),'wire receipt SHA')
+            require(type(value['identity']) is list and len(value['identity'])==4,'wire receipt identity')
+            for item in value['identity']:_successor_integer(item,0,2**64-1)
+            require(value['identity'][2]==value['bytes'],'wire receipt size')
+    else:raise ValueError('unknown fixed wire type')
+
+
+def _saved_wire_named(value,name,contracts,context_data):
+    spec=contracts[0]['schemas'][name]
+    require(type(value) is dict and set(value)==set(spec['fields']),'wire closed schema fields')
+    require(len(canonical(value))<=spec['value_cap'],'wire schema encoded cap')
+    for field,ref in spec['fields'].items():_saved_wire_type(value[field],ref,contracts,context_data)
+    return value
+
+
+def _saved_wire_raw(data,name,contracts,context_data):
+    require(type(data) is bytes and 0<len(data)<=contracts[0]['schemas'][name]['value_cap'],'wire raw schema cap')
+    return _saved_wire_named(parse(data),name,contracts,context_data)
+
+
+def _saved_wire_slot(raw,size,*,header=False):
+    require(type(raw) is bytes and type(size) is int and size in (4096,32768,2113580,4652,36908,18476,131116)
+        and 0<len(raw)<=size-44 and type(header) is bool,'wire slot byte cap')
+    marker=b'GRIDHDR1' if header else b'GRIDFRM1'
+    return struct.pack('<I',len(raw))+raw+b'\0'*(size-44-len(raw))+sha256(raw).digest()+marker
+
+
+def _saved_wire_decode(slot,size,*,header=False):
+    require(type(slot) is bytes and len(slot)==size and type(header) is bool,'wire physical slot size')
+    length=struct.unpack('<I',slot[:4])[0];marker=b'GRIDHDR1' if header else b'GRIDFRM1'
+    require(0<length<=size-44 and slot[-8:]==marker,'wire slot commit/length differs')
+    raw=slot[4:4+length]
+    require(slot[4+length:-40]==b'\0'*(size-44-length) and sha256(raw).digest()==slot[-40:-8],
+        'wire slot digest/zero tail differs')
+    return raw
+
+
+def _saved_wire_layout(value):
+    cls=type(value);ctx=SavedSuccessorDataCheck;contracts=SavedWireContractData
+    layouts={SavedWireContractData:(),SavedMailboxHeaderData:(ctx,contracts),
+        SavedMailboxHandshakeData:(ctx,contracts,SavedMailboxHeaderData),
+        SavedControllerWireData:(ctx,contracts,SavedMailboxHandshakeData),
+        SavedParentWireData:(ctx,contracts,SavedControllerStartupJoinData),SavedFreshWireData:(ctx,contracts,SavedParentStartupJoinData),
+        SavedControllerStartupJoinData:(ctx,contracts,SavedControllerWireData),SavedParentStartupJoinData:(ctx,contracts,SavedParentWireData),
+        SavedFreshStartupJoinData:(ctx,contracts,SavedFreshWireData),
+        SavedControllerBindingData:(ctx,contracts,SavedMailboxHandshakeData,SavedControllerStartupJoinData),
+        SavedWireFailureData:(contracts,),SavedControllerReturnData:(ctx,contracts,SavedControllerBindingData),
+        SavedWireDiagnosticData:(ctx,contracts,SavedControllerWireData)}
+    if cls is SavedBrokerReturnData:
+        require(len(value._links) in (3,4),'broker return link count')
+        expected=(ctx,contracts,SavedMailboxHeaderData)+((SavedControllerReturnData,) if len(value._links)==4 else ())
+    elif cls is SavedWireTranscriptData:
+        facts=parse(value._facts);role=facts['role'];require(role in ('controller','parent','fresh'),'stage role data domain')
+        choices=(SavedControllerWireData,SavedParentWireData,SavedFreshWireData) if facts['early'] else (
+            SavedControllerStartupJoinData,SavedParentStartupJoinData,SavedFreshStartupJoinData)
+        expected=(ctx,contracts,choices[('controller','parent','fresh').index(role)])
+    else:expected=layouts[cls]
+    require(tuple(type(link) for link in value._links)==expected,'wire fixed role/field edge differs')
+    own_context=_saved_wire_context_id(value)
+    if own_context is not None:
+        require(all(_saved_wire_context_id(link) in (None,own_context) for link in value._links),'wire shared original context required')
+
+
+def _saved_wire_ref(value,obj):
+    creator=type(obj) is not SavedSuccessorDataCheck
+    keys(value,'object_id commit'+(' creator' if creator else ''))
+    _successor_integer(value['object_id'],1,2**64-1)
+    require(value['object_id']==id(obj) and value['commit']==obj.commit,'wire caller original object differs')
+    if creator:
+        require(type(value['creator']) is list and value['creator']==list(obj._creator),'wire caller original creator differs')
+        for part in value['creator']:_successor_integer(part,1,2**64-1)
+
+
+def _saved_wire_basis(raw,role,context,upstream,contracts):
+    value=_saved_role_bytes(raw,65536)
+    keys(value,'schema context_ref upstream_ref producer_identity entry_name entry_nonce stage_name stage_nonce '
+        'permit_nonce episode_nonce episode_commit_sha episode_started episode_deadline upstream_stage_nonce role_tree_pin projection_pins projection_image_shas'+
+        ('' if role=='controller' else ' input_metadata_sha runtime_binding_sha receipt_commit_sha'))
+    require(value['schema']=='staged_saved_F_'+role+'_wire_basis_declaration_v1','wire local basis domain differs')
+    _saved_wire_ref(value['context_ref'],context);_saved_wire_ref(value['upstream_ref'],upstream)
+    _saved_role_identity(value['producer_identity'])
+    for name in ('entry_name','stage_name'):_saved_role_name(value[name])
+    for name in ('entry_nonce','stage_nonce','permit_nonce','episode_nonce','episode_commit_sha','upstream_stage_nonce'):
+        require(_hex64(value[name]),'wire independent basis SHA')
+    require(value['entry_name']!=value['stage_name'] and value['entry_nonce']!=value['stage_nonce'],'wire basis transport aliases')
+    for name in ('episode_started','episode_deadline'):_saved_role_time(value[name])
+    _saved_wire_type(value['role_tree_pin'],'pin',contracts,context)
+    names=contracts[0]['cross_field_constraints']['projections']['bundles'][role]
+    require(type(value['projection_pins']) is dict and set(value['projection_pins'])==set(names),'wire basis projection pin domain')
+    for p in value['projection_pins'].values():_saved_wire_type(p,'pin',contracts,context)
+    image_names={n for n in names if not n.endswith('_bootstrap_projection')}
+    require(type(value['projection_image_shas']) is dict and set(value['projection_image_shas'])==image_names,'wire independent projection image domain')
+    require(all(_hex64(v) for v in value['projection_image_shas'].values()),'wire independent image SHA')
+    if role!='controller':
+        require(all(_hex64(value[n]) for n in ('input_metadata_sha','runtime_binding_sha','receipt_commit_sha')),'wire independent opaque image SHA')
+    return value
+
+
+def _saved_wire_mailbox(slot,kind,header_data,contracts,*,previous=None,controller_identity=None):
+    require(type(header_data) is SavedMailboxHeaderData,'original mailbox header data required')
+    context=header_data._links[0];header=parse(_saved_wire_decode(header_data._raws[0],4096))
+    rule=contracts[0]['cross_field_constraints']['mailbox_kinds'][kind]
+    raw=_saved_wire_decode(slot,dict(contracts[1]['mailbox_slots'])[kind]);value=_saved_wire_raw(raw,'mailbox_envelope',contracts,context)
+    producer=controller_identity if rule['direction']=='controller' else header[
+        ('broker' if rule['direction'] in ('broker_terminal','broker_probe') else rule['direction'])+'_identity']
+    require(value['kind']==kind and value['sequence']==rule['sequence']
+        and value['previous_sha']==('0'*64 if previous is None else sha256(previous).hexdigest())
+        and value['producer_identity']==producer and value['direction_nonce']==header['direction_nonces'][rule['direction']]
+        and value['binding_sha']==sha256(header_data._raws[0]).hexdigest(),'wire mailbox independent envelope binding differs')
+    require((previous is None)==(rule['previous_kind'] is None),'wire mailbox predecessor required')
+    if previous is not None:require(parse(previous)['kind']==rule['previous_kind'],'wire mailbox predecessor kind differs')
+    _saved_wire_type(value['payload'],contracts[0]['mailbox_payloads'][kind],contracts,context)
+    return raw,value['payload']
+
+
+def validate_saved_mailbox_header_data(header_slot,*,context_data,contract_data,basis_raw):
+    require(type(context_data) is SavedSuccessorDataCheck,'wire exact context data required');context_data.entry()
+    contracts=_saved_wire_contracts(contract_data);context=parse(context_data._raw);request=parse(context_data._request_raw)
+    value=_saved_wire_raw(_saved_wire_decode(header_slot,4096),'mailbox_header',contracts,context_data)
+    basis=_saved_role_bytes(basis_raw,65536)
+    keys(basis,'schema context_ref mailbox_name direction_nonces context_receipt root_directories broker_stage_nonce broker_episode_commit_sha')
+    require(basis['schema']=='staged_saved_F_wire_handshake_basis_declaration_v1','wire handshake local basis domain')
+    _saved_wire_ref(basis['context_ref'],context_data);_saved_role_name(basis['mailbox_name'])
+    for name in ('broker_stage_nonce','broker_episode_commit_sha'):require(_hex64(basis[name]),'wire broker basis SHA')
+    _saved_wire_type(basis['direction_nonces'],'direction_nonces',contracts,context_data)
+    require(len(set(basis['direction_nonces'].values()))==5,'wire direction nonces alias')
+    _saved_wire_type(basis['context_receipt'],'receipt',contracts,context_data)
+    require({k:basis['context_receipt'][k] for k in ('bytes','sha256')}==pin(context_data._raw),'wire context receipt bytes differ')
+    _successor_directories(basis['root_directories'],OUTPUT)
+    require(basis['root_directories'][:-1]==context['output_parent_directories'],'wire published root chain differs')
+    host=request['host_identity'];broker=context['broker_identity']
+    require(value['name']==basis['mailbox_name'] and value['request_sha']==sha256(context_data._request_raw).hexdigest()
+        and value['direction_nonces']==basis['direction_nonces'] and value['host_identity']==[host['pid'],host['creation_filetime']]
+        and value['broker_identity']==[broker['pid'],broker['creation_filetime']],'wire original host/broker header differs')
+    return _saved_wire_new(SavedMailboxHeaderData,(header_slot,basis_raw),(context_data,contract_data),dict(header_only=True))
+
+
+def validate_saved_mailbox_handshake_data(header_data,request_slot,ready_slot,start_slot,offer_slot,ack_slot,*,now):
+    require(type(header_data) is SavedMailboxHeaderData,'exact mailbox header data required');header_data.entry();_saved_role_time(now)
+    context_data,contract_data=header_data._links;contracts=_saved_wire_contracts(contract_data)
+    context=parse(context_data._raw);request=parse(context_data._request_raw);basis=parse(header_data._raws[1])
+    header=parse(_saved_wire_decode(header_data._raws[0],4096));request_raw,wire_request=_saved_wire_mailbox(request_slot,'request',header_data,contracts)
+    require(canonical(wire_request)==context_data._request_raw,'wire independent original request differs')
+    ready_raw,ready=_saved_wire_mailbox(ready_slot,'ready',header_data,contracts)
+    start_raw,start=_saved_wire_mailbox(start_slot,'start',header_data,contracts,previous=request_raw)
+    offer_raw,offer=_saved_wire_mailbox(offer_slot,'context',header_data,contracts,previous=ready_raw)
+    _,ack=_saved_wire_mailbox(ack_slot,'ack',header_data,contracts,previous=start_raw)
+    request_sha=sha256(context_data._request_raw).hexdigest();context_sha=sha256(context_data._raw).hexdigest()
+    s,d=context['invocation_started'],context['deadline'];header_sha=sha256(header_data._raws[0]).hexdigest()
+    require(ready['request_sha']==start['request_sha']==offer['request_sha']==ack['request_sha']==request_sha
+        and ready['mailbox_header_sha']==start['mailbox_header_sha']==header_sha
+        and ready['broker_identity']==header['broker_identity'] and start['host_identity']==header['host_identity'],
+        'wire handshake request/header identities differ')
+    for data in (ready,start,ack):
+        require(data['original_invocation_started']==s and data['original_invocation_deadline']==d,'wire original invocation clock reset')
+    require(ready['standby_deadline']==min(s+10.,d) and s<=ready['ready_at']<=start['sent_at']<=offer['published_at']<=now<ready['standby_deadline'],
+        'wire READY/START/publication declared order/deadline')
+    require(start['READY_sha']==sha256(canonical(ready)).hexdigest() and offer['START_sha']==sha256(canonical(start)).hexdigest(),
+        'wire READY/START raw chain differs')
+    require(offer['context_sha']==context_sha and canonical(offer['context'])==context_data._raw
+        and offer['context_receipt']==basis['context_receipt'] and offer['root_directories']==basis['root_directories']
+        and offer['broker_identity']==header['broker_identity'],'wire independent context offer differs')
+    expected=dict(context_sha=context_sha,request_sha=request_sha,offer_sha=sha256(canonical(offer)).hexdigest(),
+        mailbox_header_sha=header_sha,context_receipt_sha=digest(basis['context_receipt']),root_directories_sha=digest(basis['root_directories']),
+        host_identity=header['host_identity'],broker_identity=header['broker_identity'],host_direction_nonce=header['direction_nonces']['host'],
+        runtime_binding_contract_sha=context['runtime_binding_contract_sha'],deadline_profile_sha=context['deadline_profile_sha'])
+    require(all(canonical(ack[k])==canonical(v) for k,v in expected.items()),'wire independently bound ACK differs')
+    return _saved_wire_new(SavedMailboxHandshakeData,(canonical(ack),request_slot,ready_slot,start_slot,offer_slot,ack_slot),
+        (context_data,contract_data,header_data),dict(now=now,context_sha=context_sha,request_sha=request_sha))
+
+
+def _saved_wire_handshake(value):
+    seen=set()
+    while type(value) is not SavedMailboxHandshakeData:
+        require(type(value) in (SavedControllerWireData,SavedParentWireData,SavedFreshWireData,
+            SavedControllerStartupJoinData,SavedParentStartupJoinData,SavedFreshStartupJoinData) and id(value) not in seen,
+            'wire original handshake ancestry required')
+        seen.add(id(value));value=value._links[2]
+    return value
+
+
+def _saved_wire_tree(raw,header_data):
+    tree=_saved_role_bytes(raw,65536);basis=parse(header_data._raws[1])
+    require(type(tree) is list and len(tree)==7,'wire role tree image')
+    for row,name in zip(tree[:6],('','worker','worker/fresh','worker/fresh_parent','parent','diagnostics')):
+        require(type(row) is list and len(row)==2 and row[0]==name,'wire fixed role tree names')
+        _successor_directories(row[1],OUTPUT/name)
+        require(row[1][:len(basis['root_directories'])]==basis['root_directories'],'wire tree original root differs')
+    require(tree[-1]==['context_file_identity',basis['context_receipt']['identity']],'wire tree original context identity differs')
+
+
+def _saved_wire_argv(role,packet_raw,descriptor_raw,header,handshake,contracts):
+    context=handshake._links[0];mailbox=handshake._links[2];mailbox_header=parse(_saved_wire_decode(mailbox._raws[0],4096))
+    values=dict(entry_transport_name=header['name'],entry_transport_nonce=header['entry_nonce'],stage_name=header['stage_name'],
+        stage_nonce=header['stage_nonce'],packet_sha=sha256(packet_raw).hexdigest(),descriptor_sha=sha256(descriptor_raw).hexdigest(),
+        context_sha=sha256(context._raw).hexdigest(),request_sha=sha256(context._request_raw).hexdigest(),
+        mailbox_name=mailbox_header['name'],ACK_sha=sha256(handshake._raws[0]).hexdigest())
+    grammar=contracts[0]['types'][role+'_argv'];result=[]
+    for token,item in zip(grammar['grammar'],grammar['items']):
+        result.append(values[token[1:-1]] if token.startswith('{') else item['literal'])
+    return result
+
+
+def _saved_wire_projections(role,bundle,basis,upstream,handshake,contracts,context_data,tree_raw):
+    context=parse(context_data._raw);context_sha=sha256(context_data._raw).hexdigest();request_sha=sha256(context_data._request_raw).hexdigest()
+    names=contracts[0]['cross_field_constraints']['projections']['bundles'][role]
+    require(all(pin(canonical(bundle[name]))==basis['projection_pins'][name] for name in names),'wire independent projection raw differs')
+    source_packet=source_binding=None
+    if role!='controller':
+        source_wire=upstream._links[2];source_packet=sha256(source_wire._raws[0]).hexdigest();source_binding=sha256(source_wire._raws[1]).hexdigest()
+        bootstrap=names[0];require(canonical(bundle[bootstrap])==upstream._raws[0],'wire original upstream bootstrap raw differs')
+        previous=parse(upstream._facts)['now'];bootstrap_sha=sha256(upstream._raws[0]).hexdigest()
+    else:previous=parse(handshake._facts)['now'];bootstrap_sha=None
+    for name in names:
+        value=bundle[name]
+        if name.endswith('_bootstrap_projection'):
+            require(value['self_identity']==basis['producer_identity'],'wire upstream bootstrap producer differs')
+            continue
+        require(value['context_sha']==context_sha and value['request_sha']==request_sha and value['producer_identity']==basis['producer_identity']
+            and value['stage_nonce']==basis['upstream_stage_nonce'] and value['source_packet_sha']==source_packet
+            and value['source_permit_binding_sha']==source_binding and value['source_image_sha']==basis['projection_image_shas'][name],
+            'wire independently declared projection binding differs')
+        require(previous<=value['observed_at']<=basis['episode_started'],'wire projection-before-episode order differs');previous=value['observed_at']
+        if role=='controller':
+            header=handshake._links[2];offer=parse(_saved_wire_decode(handshake._raws[4],2113580))['payload']
+            require(value['ACK_sha']==sha256(handshake._raws[0]).hexdigest() and value['mailbox_header_sha']==sha256(header._raws[0]).hexdigest()
+                and value['offer_sha']==sha256(canonical(offer)).hexdigest(),'wire broker ACK projection differs')
+            continue
+        require(value['bootstrap_image_sha']==bootstrap_sha,'wire bootstrap dependency image differs')
+        hold_name='controller_G0_projection' if role=='parent' else 'parent_hold_projection'
+        if name==hold_name:
+            require(value['input_files_sha']==digest(context['input_files']) and value['input_metadata_sha']==basis['input_metadata_sha']
+                and value['anchor_sha']==context['anchor_sha'] and value['source_sha']==digest(context['source_pins'])
+                and value['runtime_binding_sha']==basis['runtime_binding_sha'],'wire independent hold image differs')
+        elif name.endswith('_store_projection'):
+            field='G0_image_sha' if role=='parent' else 'hold_image_sha'
+            require(value[field]==sha256(canonical(bundle[hold_name])).hexdigest() and value['tree_sha']==sha256(tree_raw).hexdigest()
+                and value['receipt_commit_sha']==basis['receipt_commit_sha'],'wire store hold/tree dependency differs')
+        else:
+            field='G0_image_sha' if role=='parent' else 'hold_image_sha';store='controller_store_projection' if role=='parent' else 'parent_store_projection'
+            require(value[field]==sha256(canonical(bundle[hold_name])).hexdigest()
+                and value['store_image_sha']==sha256(canonical(bundle[store])).hexdigest(),'wire issuer original dependencies differ')
+            if role=='parent':require(value['ACK_sha']==sha256(handshake._raws[0]).hexdigest(),'wire controller issuer ACK differs')
+
+
+def _validate_saved_role_wire_data(role,cls,entry_slots,descriptor_raw,*,upstream_data,basis_raw,role_tree_raw,now):
+    upstream_cls=dict(controller=SavedMailboxHandshakeData,parent=SavedControllerStartupJoinData,fresh=SavedParentStartupJoinData)[role]
+    require(type(upstream_data) is upstream_cls,'wire fixed original upstream data required');upstream_data.entry();_saved_role_time(now)
+    context_data,contract_data=upstream_data._links[:2];contracts=_saved_wire_contracts(contract_data)
+    context=parse(context_data._raw);handshake=_saved_wire_handshake(upstream_data);mailbox=handshake._links[2]
+    mailbox_basis=parse(mailbox._raws[1]);mailbox_header=parse(_saved_wire_decode(mailbox._raws[0],4096))
+    basis=_saved_wire_basis(basis_raw,role,context_data,upstream_data,contracts)
+    _saved_wire_tree(role_tree_raw,mailbox);require(pin(role_tree_raw)==basis['role_tree_pin'],'wire independent role tree pin differs')
+    require(type(entry_slots) is tuple and len(entry_slots)==4,'wire complete four-slot entry prefix required')
+    header_raw=_saved_wire_decode(entry_slots[0],4096,header=True);header=_saved_wire_raw(header_raw,role+'_entry_header',contracts,context_data)
+    bundle_raw=_saved_wire_decode(entry_slots[1],18476);bundle=_saved_wire_raw(bundle_raw,role+'_projection_bundle',contracts,context_data)
+    binding_envelope_raw=_saved_wire_decode(entry_slots[2],4652);binding_envelope=_saved_wire_raw(binding_envelope_raw,role+'_binding_frame',contracts,context_data)
+    packet_envelope_raw=_saved_wire_decode(entry_slots[3],36908);packet_envelope=_saved_wire_raw(packet_envelope_raw,role+'_packet_frame',contracts,context_data)
+    permit_raw=canonical(binding_envelope['payload']);packet_raw=canonical(packet_envelope['payload'])
+    permit,packet=binding_envelope['payload'],packet_envelope['payload']
+    descriptor=_saved_role_shape(descriptor_raw,role+'_stage_descriptor',contracts[2])
+    context_sha=sha256(context_data._raw).hexdigest();request_sha=sha256(context_data._request_raw).hexdigest()
+    require(header['context_sha']==context_sha and header['request_sha']==request_sha and header['name']==basis['entry_name']
+        and header['entry_nonce']==basis['entry_nonce'] and header['stage_name']==basis['stage_name'] and header['stage_nonce']==basis['stage_nonce']
+        and header['producer_identity']==basis['producer_identity'],'wire caller-held entry header differs')
+    require(header['packet_sha']==descriptor['packet_sha']==sha256(packet_raw).hexdigest()
+        and header['permit_binding_sha']==descriptor['permit_binding_sha']==packet['permit_binding_sha']==sha256(permit_raw).hexdigest()
+        and header['descriptor_sha']==sha256(descriptor_raw).hexdigest() and header['projection_bundle_sha']==sha256(bundle_raw).hexdigest(),
+        'wire pre-owner hash DAG differs')
+    for frame in (binding_envelope,packet_envelope):
+        require(frame['producer_identity']==basis['producer_identity'] and frame['direction_nonce']==basis['entry_nonce']
+            and frame['binding_sha']==sha256(entry_slots[0]).hexdigest(),'wire entry frame header/producer differs')
+    require(binding_envelope['previous_sha']=='0'*64 and packet_envelope['previous_sha']==sha256(binding_envelope_raw).hexdigest(),
+        'wire complete entry frame chain differs')
+    expected_producer=mailbox_header['broker_identity'] if role=='controller' else parse(upstream_data._raws[0])['self_identity']
+    expected_stage=mailbox_basis['broker_stage_nonce'] if role=='controller' else parse(upstream_data._links[2]._raws[0])['stage_nonce']
+    require(basis['producer_identity']==expected_producer and basis['upstream_stage_nonce']==expected_stage,'wire producer/upstream stage differs')
+    ancestor_names={mailbox_header['name']};ancestor_nonces={mailbox_basis['broker_stage_nonce'],*mailbox_header['direction_nonces'].values()}
+    ancestor=None if role=='controller' else upstream_data._links[2]
+    while ancestor is not None:
+        previous=parse(ancestor._raws[7]);ancestor_names.update((previous['entry_name'],previous['stage_name']))
+        ancestor_nonces.update((previous['entry_nonce'],previous['stage_nonce']))
+        ancestor=None if type(ancestor) is SavedControllerWireData else ancestor._links[2]._links[2]
+    require(not {basis['entry_name'],basis['stage_name']}&ancestor_names and not {basis['entry_nonce'],basis['stage_nonce']}&ancestor_nonces,
+        'wire transport aliases ancestor')
+    s,d=context['invocation_started'],context['deadline'];tail=descriptor['quiesce_seconds']+descriptor['terminal_seconds']
+    require(basis['episode_deadline']==min(d,basis['episode_started']+descriptor['total_seconds']),'wire original episode deadline differs')
+    active=min(s+contracts[3]['deadlines'][role][0],d,basis['episode_deadline']-tail)
+    closed=min(s+contracts[3]['deadlines'][role][1],d,basis['episode_deadline'])
+    require(parse(upstream_data._facts)['now']<=basis['episode_started']<=now<=active and s<=basis['episode_started']<active<=closed<=d,
+        'wire original episode remaining declared time')
+    common=dict(context_sha=context_sha,request_sha=request_sha,original_invocation_started=s,original_invocation_deadline=d,
+        active_deadline=active,closed_deadline=closed,role_tree_sha=sha256(role_tree_raw).hexdigest())
+    if role=='controller':common.update(controller_attempt_nonce=basis['episode_nonce'],attempt_commit_sha=basis['episode_commit_sha'],
+        attempt_started=basis['episode_started'],attempt_deadline=basis['episode_deadline'],ACK_sha=sha256(handshake._raws[0]).hexdigest(),
+        mailbox_header_sha=sha256(mailbox._raws[0]).hexdigest())
+    else:common.update(reservation_nonce=basis['episode_nonce'],reservation_commit_sha=basis['episode_commit_sha'],
+        reservation_started=basis['episode_started'],reservation_deadline=basis['episode_deadline'],
+        **{('controller' if role=='parent' else 'parent')+'_permit_binding_sha':sha256(upstream_data._links[2]._raws[1]).hexdigest()})
+    for name,field in contracts[0]['cross_field_constraints']['projections']['packet_sha_fields'][role].items():
+        common[field]=sha256(canonical(bundle[name])).hexdigest()
+    for value in (permit,packet):require(all(canonical(value[k])==canonical(v) for k,v in common.items()),'wire independent packet/permit fields differ')
+    require(permit['producer_identity']==basis['producer_identity'] and permit['permit_nonce']==basis['permit_nonce']
+        and permit['context_receipt_sha']==digest(mailbox_basis['context_receipt']),'wire producer permit declaration differs')
+    require(packet['context_path']==str(OUTPUT/'context.json') and packet['context_receipt']==mailbox_basis['context_receipt']
+        and packet['root_directories_sha']==digest(mailbox_basis['root_directories']) and packet['source_sha']==digest(context['source_pins'])
+        and packet['environment_sha']==digest(context['environment']) and packet['ENTRY_pin']==context['source_pins']['experiments/staged_rts24_saved_fresh_adoption_v1.py']
+        and packet['executable_pin']==context['executable']['pin'],'wire independent source/publication declaration differs')
+    for field,key in (('entry_transport_name','entry_name'),('entry_transport_nonce','entry_nonce'),('stage_name','stage_name'),('stage_nonce','stage_nonce')):
+        require(packet[field]==basis[key],'wire independently declared packet transport differs')
+    require(header['original_invocation_started']==s and header['original_invocation_deadline']==d,'wire header original deadline differs')
+    _saved_wire_projections(role,bundle,basis,upstream_data,handshake,contracts,context_data,role_tree_raw)
+    require(header['argv_sha']==digest(_saved_wire_argv(role,packet_raw,descriptor_raw,header,handshake,contracts)),'wire frozen argv SHA differs')
+    return _saved_wire_new(cls,(packet_raw,permit_raw,descriptor_raw,*entry_slots,basis_raw,role_tree_raw),
+        (context_data,contract_data,upstream_data),dict(role=role,now=now))
+
+
+def validate_saved_controller_wire_data(entry_slots,descriptor_raw,*,handshake_data,basis_raw,role_tree_raw,now):
+    return _validate_saved_role_wire_data('controller',SavedControllerWireData,entry_slots,descriptor_raw,
+        upstream_data=handshake_data,basis_raw=basis_raw,role_tree_raw=role_tree_raw,now=now)
+
+
+def validate_saved_parent_wire_data(entry_slots,descriptor_raw,*,controller_join_data,basis_raw,role_tree_raw,now):
+    return _validate_saved_role_wire_data('parent',SavedParentWireData,entry_slots,descriptor_raw,
+        upstream_data=controller_join_data,basis_raw=basis_raw,role_tree_raw=role_tree_raw,now=now)
+
+
+def validate_saved_fresh_wire_data(entry_slots,descriptor_raw,*,parent_join_data,basis_raw,role_tree_raw,now):
+    return _validate_saved_role_wire_data('fresh',SavedFreshWireData,entry_slots,descriptor_raw,
+        upstream_data=parent_join_data,basis_raw=basis_raw,role_tree_raw=role_tree_raw,now=now)
+
+
 if __name__ == '__main__':
     if sys.argv[1:2] == ['--ordinary-entry']: _ordinary_file_dispatch(sys.argv[1:])
     elif sys.argv[1:2] == [DIRECT_ENTRY_PROBE_FLAG]: _ordinary_direct_entry_cli(sys.argv[1:])
