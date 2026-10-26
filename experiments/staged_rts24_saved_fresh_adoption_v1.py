@@ -5355,12 +5355,13 @@ class SavedWireFailureData(_SavedWireData): __slots__=(); _wire_final=True
 class SavedControllerReturnData(_SavedWireData): __slots__=(); _wire_final=True
 class SavedBrokerReturnData(_SavedWireData): __slots__=(); _wire_final=True
 class SavedWireDiagnosticData(_SavedWireData): __slots__=(); _wire_final=True
+class SavedWireFailureEventData(_SavedWireData): __slots__=(); _wire_final=True
 
 
 _SAVED_WIRE_TYPES = (SavedWireContractData,SavedMailboxHeaderData,SavedMailboxHandshakeData,
     SavedControllerWireData,SavedParentWireData,SavedFreshWireData,SavedControllerStartupJoinData,
     SavedParentStartupJoinData,SavedFreshStartupJoinData,SavedControllerBindingData,SavedWireTranscriptData,
-    SavedWireFailureData,SavedControllerReturnData,SavedBrokerReturnData,SavedWireDiagnosticData)
+    SavedWireFailureData,SavedControllerReturnData,SavedBrokerReturnData,SavedWireDiagnosticData,SavedWireFailureEventData)
 
 
 def _saved_wire_context_id(value):
@@ -5539,10 +5540,12 @@ def _saved_wire_layout(value):
         SavedFreshStartupJoinData:(ctx,contracts,SavedFreshWireData),
         SavedControllerBindingData:(ctx,contracts,SavedMailboxHandshakeData,SavedControllerStartupJoinData),
         SavedWireFailureData:(contracts,),SavedControllerReturnData:(ctx,contracts,SavedControllerBindingData),
-        SavedWireDiagnosticData:(ctx,contracts,SavedControllerWireData)}
+        SavedWireDiagnosticData:(ctx,contracts,SavedControllerWireData),SavedWireFailureEventData:(contracts,SavedWireFailureData)}
     if cls is SavedBrokerReturnData:
-        require(len(value._links) in (3,4),'broker return link count')
-        expected=(ctx,contracts,SavedMailboxHeaderData)+((SavedControllerReturnData,) if len(value._links)==4 else ())
+        facts=parse(value._facts)
+        require(type(facts['has_controller_return']) is type(facts['has_failure']) is bool,'broker return dependency flags')
+        expected=(ctx,contracts,SavedMailboxHeaderData)+((SavedControllerReturnData,) if facts['has_controller_return'] else ())+(
+            (SavedWireFailureData,) if facts['has_failure'] else ())
     elif cls is SavedWireTranscriptData:
         facts=parse(value._facts);role=facts['role'];require(role in ('controller','parent','fresh'),'stage role data domain')
         choices=(SavedControllerWireData,SavedParentWireData,SavedFreshWireData) if facts['early'] else (
@@ -5877,6 +5880,196 @@ def validate_saved_fresh_startup_join_data(wire_data,stage_header_slot,capture_r
         expected_owner_identity,expected_thread_id,bootstrap_source_image_sha,now):
     return _validate_saved_startup_join_data('fresh',SavedFreshStartupJoinData,wire_data,stage_header_slot,capture_raw,bootstrap_slot,
         expected_owner_identity=expected_owner_identity,expected_thread_id=expected_thread_id,bootstrap_source_image_sha=bootstrap_source_image_sha,now=now)
+
+
+def _validate_saved_stage_data(stage_header_slot,frame_slots,upstream,owner,now,require_error):
+    wire_types=(SavedControllerWireData,SavedParentWireData,SavedFreshWireData)
+    join_types=(SavedControllerStartupJoinData,SavedParentStartupJoinData,SavedFreshStartupJoinData)
+    require(type(upstream) in wire_types+join_types,'wire original stage dependency required');upstream.entry();_saved_role_time(now)
+    early=type(upstream) in wire_types;wire=upstream if early else upstream._links[2]
+    role=('controller','parent','fresh')[wire_types.index(type(wire))]
+    require(type(owner) is tuple and len(owner)==2,'stage independent owner tuple required');_saved_role_identity(list(owner))
+    context,contract=wire._links[:2];contracts=_saved_wire_contracts(contract)
+    header_raw=_saved_wire_decode(stage_header_slot,4096,header=True)
+    header=_saved_wire_raw(header_raw,role+'_stage_header',contracts,context);packet=parse(wire._raws[0])
+    require(header['context_sha']==sha256(context._raw).hexdigest() and header['nonce']==parse(wire._raws[7])['stage_nonce']
+        and canonical(header['descriptor'])==wire._raws[2] and header['entry_header_sha']==sha256(wire._raws[3]).hexdigest()
+        and (header['owner_pid'],header['owner_creation_filetime'])==owner,'stage original header/owner differs')
+    require(parse(upstream._facts)['now']<=now<=packet['closed_deadline'],'stage original observation window differs')
+    require(type(frame_slots) is tuple and len(frame_slots)==16 and all(type(s) is bytes and len(s)==4096 for s in frame_slots),'stage complete sixteen slots required')
+    count=next((i for i,s in enumerate(frame_slots) if s==b'\0'*4096),16)
+    require(count>0 and all(s==b'\0'*4096 for s in frame_slots[count:]),'stage complete zero suffix required')
+    rules=contracts[0]['cross_field_constraints']['stage_frames']['per_role'][role]
+    binding=sha256(stage_header_slot).hexdigest();previous='0'*64;stamp=parse(wire._facts)['now'];terminal=None
+    start=0
+    if not early:
+        require(stage_header_slot==upstream._raws[1] and frame_slots[0]==upstream._raws[3],'stage original startup bytes differ')
+        bootstrap=parse(upstream._raws[0]);require(tuple(bootstrap['self_identity'])==owner,'stage original self identity differs')
+        previous=sha256(upstream._raws[0]).hexdigest();stamp=bootstrap['observed_at'];start=1
+    for i in range(start,count):
+        frame_raw=_saved_wire_decode(frame_slots[i],4096);frame=_saved_wire_raw(frame_raw,role+'_stage_frame',contracts,context)
+        phase=frame['phase'];require(terminal is None,'stage absorbing terminal/error')
+        require(frame['sequence']==i and frame['previous_sha']==previous and frame['binding_sha']==binding
+            and (frame['producer_pid'],frame['producer_creation_filetime'])==owner,'stage sequence/chain/identity differs')
+        require(stamp<=frame['stamp']<=now<=packet['closed_deadline'],'stage declared time order/deadline differs')
+        if phase=='error':
+            require(i in rules['error_allowed_sequences'] and frame['error_code'] is not None,'stage compact error required');terminal='error'
+        else:
+            require(not early and frame['error_code'] is None,'stage normal frame cannot precede bootstrap or carry error')
+            if phase=='terminal':require(i==rules['terminal_sequence'],'stage terminal sequence differs');terminal='terminal'
+            else:
+                require(1<=i<=len(rules['phase_frames']) and phase==rules['phase_frames'][i-1]['phase']
+                    and frame['stamp']<=packet['active_deadline'],'stage original descriptor phase order differs')
+        previous=sha256(frame_raw).hexdigest();stamp=frame['stamp']
+    require(not early or count==1 and terminal=='error','stage pre-bootstrap failure must absorb slot zero')
+    require(terminal==('error' if require_error else 'terminal'),'stage complete terminal/error transcript required')
+    return _saved_wire_new(SavedWireTranscriptData,(stage_header_slot,*frame_slots),(context,contract,upstream),
+        dict(role=role,early=early,frame_count=count,terminal=terminal,now=now))
+
+
+def validate_saved_stage_transcript_data(stage_header_slot,frame_slots,*,startup_join_data,now):
+    require(type(startup_join_data) in (SavedControllerStartupJoinData,SavedParentStartupJoinData,SavedFreshStartupJoinData),
+        'stage original startup join required');startup_join_data.entry()
+    return _validate_saved_stage_data(stage_header_slot,frame_slots,startup_join_data,tuple(parse(startup_join_data._raws[0])['self_identity']),now,False)
+
+
+def validate_saved_stage_failure_data(stage_header_slot,frame_slots,*,upstream_data,expected_owner_identity,now):
+    return _validate_saved_stage_data(stage_header_slot,frame_slots,upstream_data,expected_owner_identity,now,True)
+
+
+def validate_saved_wire_failure_data(failure_raw,*,role,contract_data,expected_context_sha,expected_request_sha,
+        expected_owner_identity,expected_cleanup_indices,declared_quiet_known,not_before,now):
+    require(type(role) is str and role in ('host','broker','controller','parent','fresh'),'closed failure role required')
+    contracts=_saved_wire_contracts(contract_data);value=_saved_wire_raw(failure_raw,role+'_failure',contracts,None)
+    _saved_role_time(not_before);_saved_role_time(now)
+    require(not_before<=value['observed_at']<=now,'failure declared time order differs')
+    for name,expected in (('context_sha',expected_context_sha),('request_sha',expected_request_sha)):
+        require(expected is None or _hex64(expected),'failure independent SHA declaration required')
+        require(value[name]==expected,'failure independent context/request declaration differs')
+    rules=contracts[0]['cross_field_constraints']['failure']
+    require(value['context_sha'] is not None or value['phase'] in rules['context_nullable_phases'],'failure context unavailable in phase')
+    require(value['request_sha'] is not None or value['phase'] in rules['request_nullable_phases'],'failure request unavailable in phase')
+    if expected_owner_identity is not None:
+        require(type(expected_owner_identity) is tuple,'failure independent owner tuple required');_saved_role_identity(list(expected_owner_identity))
+    require(value['owner_identity']==(None if expected_owner_identity is None else list(expected_owner_identity)),'failure independent owner declaration differs')
+    indices=[n['index'] for n in value['exceptions']];cleanup=value['cleanup_indices']
+    require(len(indices)==len(set(indices)) and 0<=value['primary_index']<len(indices)
+        and value['primary_index'] in indices,'failure primary/exception indices differ')
+    require(type(expected_cleanup_indices) is tuple and cleanup==list(expected_cleanup_indices) and len(cleanup)==len(set(cleanup))
+        and all(i in indices and i!=value['primary_index'] for i in cleanup),'failure original cleanup order/indices differ')
+    for i in expected_cleanup_indices:_successor_integer(i,0,23)
+    require(value['incomplete']==(value['omitted_count']>0),'failure incomplete/omitted relation differs')
+    lossy=value['incomplete'] or any(n['truncated'] for n in value['exceptions'])
+    require(type(declared_quiet_known) is bool and value['quiet_known']==declared_quiet_known
+        and not (lossy and value['quiet_known']),'failure lossy or independent quiet declaration differs')
+    require(not value['may_have_published'] or value['expected_publication_pin'] is not None,'failure uncertain publication requires expected pin')
+    return _saved_wire_new(SavedWireFailureData,(failure_raw,),(contract_data,),dict(role=role,lossy=lossy,quiet_is_caller_declaration=True))
+
+
+def compose_saved_failure_event_data(prior_normal_raw,*,failure_data,failure_already_appended):
+    require(type(failure_data) is SavedWireFailureData,'validated failure data required');failure_data.entry()
+    role=parse(failure_data._facts)['role'];require(role in ('parent','fresh'),'failure JSONL carrier role differs')
+    require(type(failure_already_appended) is bool and not failure_already_appended,'failure append already declared consumed')
+    require(type(prior_normal_raw) is bytes and len(prior_normal_raw)<=32767
+        and (not prior_normal_raw or prior_normal_raw.endswith(b'\n')),'normal JSONL must preserve full failure reserve')
+    for line in (prior_normal_raw.split(b'\n')[:-1] if prior_normal_raw else ()):
+        value=parse(line);require(type(value) is dict and value.get('schema') not in (
+            'staged_saved_F_successor_'+r+'_failure_wire_v1' for r in ('host','broker','controller','parent','fresh')),'failure already in JSONL prefix')
+    event=prior_normal_raw+failure_data._raws[0]+b'\n';require(len(event)<=65536,'failure JSONL total cap')
+    return _saved_wire_new(SavedWireFailureEventData,(event,prior_normal_raw),
+        (failure_data._links[0],failure_data),dict(role=role,append_only_declaration=True,failure_records=1))
+
+
+def validate_saved_controller_binding_data(binding_slot,*,handshake_data,controller_join_data):
+    require(type(handshake_data) is SavedMailboxHandshakeData and type(controller_join_data) is SavedControllerStartupJoinData,'original binding dependencies required')
+    handshake_data.entry();controller_join_data.entry()
+    require(_saved_wire_handshake(controller_join_data) is handshake_data,'binding original handshake object differs')
+    context,contract,header=handshake_data._links;contracts=_saved_wire_contracts(contract)
+    previous=_saved_wire_decode(handshake_data._raws[4],2113580)
+    _,value=_saved_wire_mailbox(binding_slot,'binding',header,contracts,previous=previous)
+    wire=controller_join_data._links[2]
+    expected=dict(context_sha=sha256(context._raw).hexdigest(),request_sha=sha256(context._request_raw).hexdigest(),
+        ACK_sha=sha256(handshake_data._raws[0]).hexdigest(),entry_header_sha=sha256(wire._raws[3]).hexdigest(),
+        stage_header_sha=sha256(controller_join_data._raws[1]).hexdigest(),startup_capture=parse(controller_join_data._raws[2]))
+    require(all(canonical(value[n])==canonical(v) for n,v in expected.items()),'binding original startup/capture differs')
+    return _saved_wire_new(SavedControllerBindingData,(canonical(value),binding_slot),
+        (context,contract,handshake_data,controller_join_data),dict(declared_binding_only=True))
+
+
+def _saved_wire_return_matrix(value,role,contracts):
+    rule=contracts[0]['cross_field_constraints']['returns'][role][value['status']]
+    require(all(value[n] is not None for n in rule['required']) and all(value[n] is None for n in rule['null']),
+        'wire return status/reference matrix differs')
+
+
+def validate_saved_controller_return_data(return_slot,*,binding_data,expected_references_raw,expected_G2_image_sha):
+    require(type(binding_data) is SavedControllerBindingData,'original controller binding required');binding_data.entry()
+    context,contract,handshake,join=binding_data._links;header=handshake._links[2];contracts=_saved_wire_contracts(contract)
+    owner=parse(join._raws[0])['self_identity']
+    _,value=_saved_wire_mailbox(return_slot,'controller_return',header,contracts,controller_identity=owner)
+    wire=join._links[2];basis=parse(wire._raws[7]);ctx_sha=sha256(context._raw).hexdigest();req_sha=sha256(context._request_raw).hexdigest()
+    require(value['context_sha']==ctx_sha and value['request_sha']==req_sha and value['stage_nonce']==basis['stage_nonce']
+        and value['episode_commit_sha']==basis['episode_commit_sha'],'controller return original episode differs')
+    expected=_saved_role_bytes(expected_references_raw,32768)
+    fields=('final_observation_reference','controller_process_reference','parent_metrics_reference','fresh_metrics_reference','candidate_reference','failure_reference')
+    require(type(expected) is dict and set(expected)==set(fields),'closed independent reference declarations required')
+    writer_bindings={'controller':(basis['stage_nonce'],basis['episode_commit_sha'])}
+    for name in fields:
+        _saved_wire_type(expected[name],name+'_or_none',contracts,context)
+        require(canonical(value[name])==canonical(expected[name]),'controller return independent reference differs')
+        reference=value[name]
+        if reference is not None:
+            require(reference['context_sha']==ctx_sha and reference['request_sha']==req_sha,'return reference original context/request differs')
+            writer=reference['writer_role'];episode=(reference['stage_nonce'],reference['episode_commit_sha'])
+            require(writer not in writer_bindings or writer_bindings[writer]==episode,'return original writer episode differs');writer_bindings[writer]=episode
+    require(expected_G2_image_sha is None or _hex64(expected_G2_image_sha),'independent G2 image declaration required')
+    require(value['G2_image_sha']==expected_G2_image_sha,'controller return independent G2 declaration differs')
+    _saved_wire_return_matrix(value,'controller',contracts)
+    return _saved_wire_new(SavedControllerReturnData,(canonical(value),return_slot,expected_references_raw),(context,contract,binding_data),dict(references_are_declarations=True))
+
+
+def validate_saved_broker_return_data(return_slot,*,header_data,controller_return_data,failure_data,expected_broker_process_image_sha):
+    require(type(header_data) is SavedMailboxHeaderData,'original broker mailbox header required');header_data.entry()
+    context,contract=header_data._links;contracts=_saved_wire_contracts(contract)
+    _,value=_saved_wire_mailbox(return_slot,'broker_return',header_data,contracts);basis=parse(header_data._raws[1])
+    require(value['context_sha']==sha256(context._raw).hexdigest() and value['request_sha']==sha256(context._request_raw).hexdigest()
+        and value['stage_nonce']==basis['broker_stage_nonce'] and value['episode_commit_sha']==basis['broker_episode_commit_sha'],
+        'broker return original context/episode differs')
+    links=(context,contract,header_data)
+    if controller_return_data is not None:
+        require(type(controller_return_data) is SavedControllerReturnData,'original controller return required');controller_return_data.entry()
+        binding=controller_return_data._links[2]
+        require(binding._links[2]._links[2] is header_data,'broker return original controller mailbox differs')
+        require(value['controller_return_sha']==sha256(controller_return_data._raws[0]).hexdigest()
+            and value['controller_binding_sha']==sha256(binding._raws[0]).hexdigest(),'broker original controller return/binding SHA differs')
+        links+=(controller_return_data,)
+    else:require(value['controller_return_sha'] is value['controller_binding_sha'] is None,'broker return missing controller dependency')
+    if failure_data is not None:
+        require(type(failure_data) is SavedWireFailureData,'validated broker failure required');failure_data.entry()
+        require(failure_data._links[0] is contract and parse(failure_data._facts)['role']=='broker'
+            and canonical(value['failure_record'])==failure_data._raws[0],'broker return original failure differs')
+        failure=parse(failure_data._raws[0])
+        require(failure['context_sha']==value['context_sha'] and failure['request_sha']==value['request_sha'],'broker failure original context/request differs')
+        links+=(failure_data,)
+    else:require(value['failure_record'] is None,'broker validated failure dependency required')
+    require(expected_broker_process_image_sha is None or _hex64(expected_broker_process_image_sha),'independent broker process image declaration required')
+    require(value['broker_process_image_sha']==expected_broker_process_image_sha,'broker process image declaration differs')
+    _saved_wire_return_matrix(value,'broker',contracts)
+    require(value['status']!='returned_candidate' or parse(controller_return_data._raws[0])['status']=='returned_candidate',
+        'broker candidate requires controller candidate declaration')
+    return _saved_wire_new(SavedBrokerReturnData,(canonical(value),return_slot),links,
+        dict(has_controller_return=controller_return_data is not None,has_failure=failure_data is not None))
+
+
+def validate_saved_constructor_diagnostic_data(diagnostic_slot,*,controller_wire_data,now):
+    require(type(controller_wire_data) is SavedControllerWireData,'original controller entry required');controller_wire_data.entry();_saved_role_time(now)
+    context,contract,handshake=controller_wire_data._links;contracts=_saved_wire_contracts(contract);header=handshake._links[2]
+    _,value=_saved_wire_mailbox(diagnostic_slot,'constructor_probe',header,contracts);basis=parse(controller_wire_data._raws[7])
+    require(value['context_sha']==sha256(context._raw).hexdigest() and value['request_sha']==sha256(context._request_raw).hexdigest()
+        and value['ACK_sha']==sha256(handshake._raws[0]).hexdigest() and value['original_attempt_started']==basis['episode_started']
+        and basis['episode_started']<=value['observed_at']<=now<=parse(controller_wire_data._raws[0])['closed_deadline'],
+        'constructor diagnostic original attempt/context/time differs')
+    return _saved_wire_new(SavedWireDiagnosticData,(canonical(value),diagnostic_slot),(context,contract,controller_wire_data),dict(now=now))
 
 
 if __name__ == '__main__':

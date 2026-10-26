@@ -1,0 +1,456 @@
+{
+  "actual_F": false,
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "caps": {
+    "pytest_a": 40,
+    "pytest_b": 40
+  },
+  "current_prior_wire_nodes": 51,
+  "current_targeted_nodes": 215,
+  "formal_result": false,
+  "groups": {
+    "pytest_a": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_literal_roots",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_root_globals[1]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_root_globals[3]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_ram_startup_join[controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_ram_startup_join[fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[bootstrap_raw-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[hold_raw_store-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[hold_raw_issuer-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[store_raw_issuer-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[hold_image_changed-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[store_image_changed-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[bootstrap_declaration-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_coherent_images_remain_opaque_declarations[parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[owner-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[owner-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[thread-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[argv-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[argv-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[command_line-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[capture_time-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[capture_time-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[self_time-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[bootstrap_image-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[bootstrap_image-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_upstream_object_and_image_binding[fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_coherent_bootstrap_image_is_a_declaration[fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_success[parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[partial-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[partial-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[gap-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[suffix-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[suffix-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[previous-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[sequence-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[sequence-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[phase-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[normal_error-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[normal_error-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[owner-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[binding-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[binding-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[time-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[error_in_success-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[error_in_success-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_failure[True-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_failure[False-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_failure[False-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_roles[broker]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_roles[parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[duplicate-host]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[duplicate-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[duplicate-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[sparse_primary-broker]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[sparse_primary-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[cleanup_order-host]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[cleanup_order-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[cleanup_order-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[cleanup_primary-broker]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[cleanup_primary-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[omitted-host]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[omitted-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[omitted-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[lossy_quiet-broker]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[lossy_quiet-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[publication-host]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[publication-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[publication-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[null_context-broker]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[null_context-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[null_request-host]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[null_request-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[null_request-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[owner-broker]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[owner-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_nullable_early_phase[H0]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_nullable_early_phase[READY]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_nullable_early_phase[context]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_single_failure_jsonl[valid-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_single_failure_jsonl[reserve-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_single_failure_jsonl[no_LF-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_single_failure_jsonl[CRLF-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_single_failure_jsonl[previous_failure-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_single_failure_jsonl[consumed-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_binding_rejects[ACK]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_binding_rejects[stage]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_binding_rejects[nonce]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_returns_statuses[failed]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_controller_return_rejects[target]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_controller_return_rejects[kind]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_controller_return_rejects[controller_episode]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_controller_return_rejects[pin]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_controller_return_rejects[matrix]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_unknown_may_retain_optional_references",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_broker_return_rejects[binding_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_broker_return_rejects[episode]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_broker_return_rejects[status]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_constructor_diagnostic[start]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_constructor_diagnostic[ACK]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_results_are_local_immutable_data",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_final_boundaries[physical_previous]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_final_boundaries[now_after_closed]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_final_boundaries[early_previous]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_maximum_failure_reserve",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_original_edges_reject_equal_replacements[binding_join]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_original_edges_reject_equal_replacements[stage_wire]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_original_edges_reject_equal_replacements[broker_return]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_additional_return_matrix_edges[failed-failure_reference]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_broker_candidate_cannot_wrap_failed_controller"
+    ],
+    "pytest_b": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_root_globals[0]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_root_globals[2]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_root_globals[4]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_ram_startup_join[parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_ram_authority_stays_false",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[bootstrap_raw-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[hold_raw_store-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[hold_raw_issuer-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[store_raw_issuer-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[hold_image_changed-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[store_image_changed-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_dependency_images[bootstrap_declaration-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_coherent_images_remain_opaque_declarations[fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[owner-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[thread-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[thread-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[argv-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[command_line-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[command_line-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[capture_time-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[self_time-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[self_time-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_startup_independent_join[bootstrap_image-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_upstream_object_and_image_binding[parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_coherent_bootstrap_image_is_a_declaration[parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_success[controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_success[fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[partial-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[gap-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[gap-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[suffix-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[previous-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[previous-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[sequence-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[phase-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[phase-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[normal_error-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[owner-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[owner-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[binding-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[time-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[time-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_rejects[error_in_success-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_failure[True-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_failure[True-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_failure[False-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_roles[host]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_roles[controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_roles[fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[duplicate-broker]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[duplicate-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[sparse_primary-host]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[sparse_primary-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[sparse_primary-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[cleanup_order-broker]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[cleanup_order-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[cleanup_primary-host]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[cleanup_primary-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[cleanup_primary-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[omitted-broker]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[omitted-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[lossy_quiet-host]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[lossy_quiet-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[lossy_quiet-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[publication-broker]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[publication-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[null_context-host]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[null_context-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[null_context-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[null_request-broker]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[null_request-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[owner-host]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[owner-controller]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_relations[owner-fresh]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_nullable_early_phase[arming]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_failure_nullable_early_phase[START]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_single_failure_jsonl[valid-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_single_failure_jsonl[reserve-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_single_failure_jsonl[no_LF-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_single_failure_jsonl[CRLF-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_single_failure_jsonl[previous_failure-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_single_failure_jsonl[consumed-parent]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_binding_rejects[capture]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_binding_rejects[entry]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_binding_rejects[previous]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_returns_statuses[returned_candidate]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_returns_statuses[unknown]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_controller_return_rejects[writer]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_controller_return_rejects[context]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_controller_return_rejects[parent_episode]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_controller_return_rejects[G2]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_controller_return_rejects[G3]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_broker_return_rejects[controller_sha]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_broker_return_rejects[process_image]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_broker_return_rejects[failure]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_constructor_diagnostic[valid]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_constructor_diagnostic[observed]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_constructor_diagnostic[context]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_final_boundaries[post_terminal]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_final_boundaries[now_before_join]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_final_boundaries[early_sequence]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_stage_final_boundaries[short_slots]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_original_edges_reject_equal_replacements[binding_handshake]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_original_edges_reject_equal_replacements[stage_join]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_original_edges_reject_equal_replacements[broker_header]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_original_edges_reject_equal_replacements[broker_failure]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_completion_additional_return_matrix_edges[unknown-G2_image_sha]"
+    ]
+  },
+  "helper_pins": {
+    "results/tables/staged_rts24_saved_fresh_wire_data_v1_non_authoritative/checks_01/fixture_builder.py": {
+      "bytes": 16237,
+      "sha256": "3931c9ddca9673d76ac18d6e6097f3610e5d65c0e061081bf1b54d8afd938c0c"
+    },
+    "results/tables/staged_rts24_saved_fresh_wire_data_v1_non_authoritative/checks_02/capture.py": {
+      "bytes": 5740,
+      "sha256": "49554af2b64c880e82c11da6d718df2924e06eb60ed040ef544a4aabef086525"
+    },
+    "results/tables/staged_rts24_saved_fresh_wire_data_v1_non_authoritative/checks_02/fixture_builder.py": {
+      "bytes": 6065,
+      "sha256": "a9f8723db130fa16c38afd0bbf6616fd5133cdad087a3b0d367e2319b05bea0c"
+    },
+    "results/tables/staged_rts24_saved_fresh_wire_data_v1_non_authoritative/checks_02/pytest_harness.py": {
+      "bytes": 10265,
+      "sha256": "745609cdf1467def6daf98dfddd02ed00fd7cb01e6f9aaf2578d25ea35366331"
+    },
+    "results/tables/staged_rts24_saved_fresh_wire_data_v1_non_authoritative/final_package_02/oracle.py": {
+      "bytes": 10832,
+      "sha256": "861a0c486a10386432e3f0f3a0817bb14b5093f6d3d6d13403ccd38d13b4dd2b"
+    }
+  },
+  "historical_only_nodes": 480,
+  "new_nodes": 164,
+  "run_authority": false,
+  "source_epoch": "29baf5634a7552a1a16c97d623e53606cda42cb47d6c020ea0e8d039440f54f7",
+  "source_pins": {
+    "configs/staged_deliverability_network_v1.DRAFT.yaml": {
+      "bytes": 915,
+      "sha256": "c6bb0cc30a330fed07a9d0b7f22dea7ce5096f20f1f58a8dc79dddc58059686b"
+    },
+    "configs/staged_deliverability_rts24_v1.DRAFT.yaml": {
+      "bytes": 1531,
+      "sha256": "6897979b6394a20b406031e9bcc8fadf5751c7815c996dc177956535679b7791"
+    },
+    "configs/staged_deliverability_small_case_v1.DRAFT.yaml": {
+      "bytes": 962,
+      "sha256": "5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5"
+    },
+    "docs/plan/staged_deliverability_c_saved_fresh_adoption_scope_budget_v1.md": {
+      "bytes": 23924,
+      "sha256": "a1aa2abdcfdbd15958f703088fa94ed79a17cd830b9f6d5a1571a5f75e6a4a98"
+    },
+    "docs/plan/staged_deliverability_c_saved_journal_check_contract_v1.md": {
+      "bytes": 6068,
+      "sha256": "55beecb99cb591354cd2bf97fb92a23cdac09a122256559cc0d0c79b9b16c356"
+    },
+    "docs/plan/staged_deliverability_c_saved_point_replay_contract_v1.md": {
+      "bytes": 4514,
+      "sha256": "e812bb03355a94187a12837293ec8fce6eab191fe836e9c8c60d63e16d512333"
+    },
+    "docs/plan/staged_deliverability_c_saved_prefix_replay_contract_v1.md": {
+      "bytes": 5933,
+      "sha256": "4b91dd0cf74cdc9a2dab6c9b013d42eff43d9a0133fa6b6b3886cb384d722c57"
+    },
+    "docs/plan/staged_deliverability_c_scientific_adoption_dag_v1.md": {
+      "bytes": 5719,
+      "sha256": "a55856ae0ca9b201ca7fe3c6ddafa842dc047a0ce9732495d66eea5b38495d16"
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py": {
+      "bytes": 407755,
+      "sha256": "fe08380872b136bd1da955412a064e313f32c9e3ef97efc0c9a3e973d91b07b2"
+    },
+    "src/__init__.py": {
+      "bytes": 38,
+      "sha256": "ad4caa31a8bd5d534f5c65b38b67a393b740a5efd947988f47e1b55642c4cfc0"
+    },
+    "src/grid/__init__.py": {
+      "bytes": 4412,
+      "sha256": "b2490e8dfc9a5727c475cdca757eeb7606bb1318993dd3d8b14240dbe94467ef"
+    },
+    "src/grid/ac_case.py": {
+      "bytes": 5231,
+      "sha256": "d0c8c8b8d37480a87edc17a3af54b62663dec6e8b9d56ee03e235bae6bb2bb91"
+    },
+    "src/grid/ac_restoration.py": {
+      "bytes": 16475,
+      "sha256": "59ba8af7047048e739f96c094373258bdb2548a6c2003a24939f2f3dfb5e0b74"
+    },
+    "src/grid/ac_validation.py": {
+      "bytes": 7527,
+      "sha256": "7e3488f966c979e103e436971b10996281c77e8c3a505e9103118baf3caf8a71"
+    },
+    "src/grid/chronological_dispatch.py": {
+      "bytes": 24444,
+      "sha256": "71d6c1da0e72942512810c651619c5cd73e915c3ac6d0d52684476d6133658ec"
+    },
+    "src/grid/contingency.py": {
+      "bytes": 6404,
+      "sha256": "7a08c582fe7113b8a43355ff4ab888dd6a334fb2c0e79d5da8cb7f03acfd03fb"
+    },
+    "src/grid/dc_opf.py": {
+      "bytes": 11996,
+      "sha256": "9e118d7e8c59e269274749a144654ea5a400e35c6b1cb371870329ff2601e827"
+    },
+    "src/grid/network_grid_need.py": {
+      "bytes": 37254,
+      "sha256": "ca4ae719c8e1c96d398af6912994937272e31f4a29f7d485c74e0836d2199170"
+    },
+    "src/grid/rts24.py": {
+      "bytes": 6109,
+      "sha256": "8c876b13fdc318ca98ab22309bae1aff0b8e56a12894f9aae98c84ed951eb8b5"
+    },
+    "src/grid/rts_gmlc.py": {
+      "bytes": 36900,
+      "sha256": "4180ab5ce86eb34a9de9e058ff9c56275ace3a6ffab06dbb464d93ef23382448"
+    },
+    "src/grid/rts_gmlc_scuc.py": {
+      "bytes": 82493,
+      "sha256": "1101b21cbdab0cdacd6755578208ce7d28cd3e6e04f932d397119a4dde2b6cfe"
+    },
+    "src/grid/scopf.py": {
+      "bytes": 18944,
+      "sha256": "cdd456ace5f704f31a80fab1c95dba272810cc815ffb6a4c71516e079982eb84"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/__init__.py": {
+      "bytes": 74,
+      "sha256": "23dcf6e6cc99671101ae4e4c05602f5345aae114aa011b89511839c208a33856"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/debt_cohorts.py": {
+      "bytes": 6483,
+      "sha256": "d10497c1e6ab5ff573dec8d938b5407a7e28277551b37a1e0d7f79b4241adaab"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/normal_process.py": {
+      "bytes": 13559,
+      "sha256": "ffc487c05c72d00a7c2e8d7515a29f16a3d0c8ac3f0efa6cdba36bbcea34d44f"
+    },
+    "src/staged_deliverability_development_v1.py": {
+      "bytes": 19642,
+      "sha256": "91bbc6aaaac458c8fcb23c11d830a98af99e1d50d42b3c0489246ec1922109e0"
+    },
+    "src/staged_rts24_audit_v1.py": {
+      "bytes": 13053,
+      "sha256": "ac29e1fe38831b7f37fbd56ab7ceafc8d87a619c5c1ba929004f907e21aab911"
+    },
+    "src/staged_rts24_causal_audit_v2.py": {
+      "bytes": 13435,
+      "sha256": "3344d346efc62b1bef8cbeab470eb3696a9818c4f452465394ab33806baf28d3"
+    },
+    "src/staged_rts24_causal_v1.py": {
+      "bytes": 19309,
+      "sha256": "12950e9f0ac321e7297b66aba42efb9e486e477869d767e40cd841665a7b0ead"
+    },
+    "src/staged_rts24_causal_v2.py": {
+      "bytes": 11081,
+      "sha256": "7d22dba435d3e89bd3062a1bd687a6584bb7ddc29c88b6bd723fa357932d1859"
+    },
+    "src/staged_rts24_child_optimality_v1.py": {
+      "bytes": 8256,
+      "sha256": "27071de638bceee8f6e0631ab44d8a9c3cebdba0c169ccd702c9c3392fcde543"
+    },
+    "src/staged_rts24_development_v1.py": {
+      "bytes": 26764,
+      "sha256": "d0c61bda61bfe4d275d2230533f2ecd74fa4fbf480f358c819f8cb86e1ba7add"
+    },
+    "src/staged_rts24_evidence_store_v1.py": {
+      "bytes": 16709,
+      "sha256": "54a23ba142d12abe0a394437cb6967b0029ed573eddff1b6efb7adbaca7883c6"
+    },
+    "src/staged_rts24_highs_backend_v1.py": {
+      "bytes": 14536,
+      "sha256": "cae8e98941f6d813b96413d67b96acce263997d2197e63ad090cff8f061dbccf"
+    },
+    "src/staged_rts24_journal_v2.py": {
+      "bytes": 30876,
+      "sha256": "5216b58cbaf1d2a2aa26ce00e71f3563bda793b9512dede023a013ef462bdb0e"
+    },
+    "src/staged_rts24_numeric_interface_v1.py": {
+      "bytes": 14093,
+      "sha256": "570cd1e52f5c78c1ee37f589fb28b646f4173dede32600ba3bff8ceeb447ec31"
+    },
+    "src/staged_rts24_p2_outer_observation_v1.py": {
+      "bytes": 10412,
+      "sha256": "8d80e035c2570d279360d67cf6bb93b125970fae81e5c638a396351f8dd78b91"
+    },
+    "src/staged_rts24_p2_outer_observation_v2.py": {
+      "bytes": 14886,
+      "sha256": "256ed39e3efc36578a08f24bb39d7b14ca4b693dbcc94c1dec379fe125266f04"
+    },
+    "src/staged_rts24_p2_package_check_v1.py": {
+      "bytes": 50876,
+      "sha256": "5794f8a35814cb5ad64fb38de2d8591e2e23e3bdb57921f0c84c853627466eb2"
+    },
+    "src/staged_rts24_process_guard_v1.py": {
+      "bytes": 12191,
+      "sha256": "02b6098e9a5b2cb6c2b862c81b9a375ee631e7cbee5e409310905a3ef2512fc2"
+    },
+    "src/staged_rts24_process_guard_v3.py": {
+      "bytes": 6548,
+      "sha256": "d3fe404aa7265c2a479423cd9991a54326c32e4d7b729bfff20f49fd1b2262c4"
+    },
+    "src/staged_rts24_reference_queries_v1.py": {
+      "bytes": 2618,
+      "sha256": "be02760eec2a0d010ec1a2187322edcca14af4774e7e6d0cbf4859a9375adb1a"
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py": {
+      "bytes": 17247,
+      "sha256": "26b919e385f9d7042587db490dab694fc5bf1643665ab4bf94a1c9bac8087396"
+    },
+    "src/staged_rts24_saved_point_replay_v1.py": {
+      "bytes": 16793,
+      "sha256": "f9f723e89bb6513b4ba25c61b427f363652f2be78707d132511f6929f3df95ad"
+    },
+    "src/staged_rts24_saved_prefix_replay_v1.py": {
+      "bytes": 11867,
+      "sha256": "22bee015d89d818b8e76a5f2f44cf3b2618fffe7641e73461e4481bd80738a4c"
+    },
+    "tests/test_staged_rts24_saved_fresh_adoption_v1.py": {
+      "bytes": 270884,
+      "sha256": "e2eba8c7c82c2de86ced6224e72333d4421edf42efbefcc26505f72ddb54352b"
+    },
+    "tests/test_staged_rts24_saved_journal_check_v1.py": {
+      "bytes": 12790,
+      "sha256": "6703ec2312a5e0ae8c24e8d1bdbf9922f62e72ae2f3b21430c9d08175abbfcd3"
+    },
+    "tests/test_staged_rts24_saved_point_replay_v1.py": {
+      "bytes": 20869,
+      "sha256": "024fce79bc940bcf0161d087b6fb6664b0531a78237c2954fec4e3605bae481e"
+    },
+    "tests/test_staged_rts24_saved_prefix_replay_v1.py": {
+      "bytes": 21479,
+      "sha256": "f5a629ea776c9c5063aa398eea0315266ea8cb82be4f49f974e08d7e21b2eddf"
+    }
+  }
+}

@@ -4084,3 +4084,288 @@ def test_saved_wire_coherent_bootstrap_image_is_a_declaration(saved_wire_case,sa
     status=json.loads(result.status_raw)
     assert status['declared_consistency_only'] and status['producer_capability_verified'] is False
     assert all(status[n] is False for n in ('actual_kernel_identity_verified','role_bootstrap','run_authority','F_launch_admitted','scientific_evidence_adopted','formal_result'))
+
+
+@pytest.fixture(scope='module')
+def saved_wire_completion_case(saved_wire_case):
+    import importlib.util
+    import os
+    path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_wire_data_v1_non_authoritative/checks_02/fixture_builder.py'
+    plan=json.loads(Path(os.environ['EGRID_WIRE_DATA_PLAN']).read_bytes());data=path.read_bytes()
+    assert dict(bytes=len(data),sha256=sha256(data).hexdigest())==plan['helper_pins'][path.relative_to(cli.ROOT).as_posix()]
+    spec=importlib.util.spec_from_file_location('independent_completion_fixture',path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    return module,module.build(saved_wire_case[1])
+
+
+def _wire_failure_call(module,case,contract,role,value,**changes):
+    expected=dict(role=role,contract_data=contract,expected_context_sha=module.sha(case['base_case']['context_raw']),
+        expected_request_sha=module.sha(case['base_case']['request_raw']),expected_owner_identity=tuple(module.failure(case,role)['owner_identity']),
+        expected_cleanup_indices=(2,1),declared_quiet_known=False,not_before=1000.,now=1100.)
+    expected.update(changes)
+    return cli.validate_saved_wire_failure_data(module.raw(value),**expected)
+
+
+def _wire_controller_return_call(module,case,binding,value,**changes):
+    refs={n:v for n,v in value.items() if n.endswith('_reference')}
+    args=dict(binding_data=binding,expected_references_raw=module.raw(refs),expected_G2_image_sha=value['G2_image_sha'])
+    args.update(changes)
+    return cli.validate_saved_controller_return_data(module.mailbox(case,'controller_return',value),**args)
+
+
+@pytest.fixture(scope='module')
+def saved_wire_completion_bound(saved_wire_case,saved_wire_bound,saved_wire_completion_case):
+    case=saved_wire_case[1];context,contract,wires,joins,_=saved_wire_bound;module,extra=saved_wire_completion_case
+    handshake=wires['controller']._links[2];header=handshake._links[2]
+    binding=cli.validate_saved_controller_binding_data(module.mailbox(case,'binding',extra['binding']),handshake_data=handshake,controller_join_data=joins['controller'])
+    returns={status:_wire_controller_return_call(module,case,binding,value) for status,value in extra['returns'].items()}
+    failures={role:_wire_failure_call(module,case,contract,role,module.failure(case,role)) for role in ('host','broker','controller','parent','fresh')}
+    brokers={status:cli.validate_saved_broker_return_data(module.mailbox(case,'broker_return',value),header_data=header,
+        controller_return_data=returns['returned_candidate'],failure_data=None if status=='returned_candidate' else failures['broker'],
+        expected_broker_process_image_sha=value['broker_process_image_sha']) for status,value in extra['brokers'].items()}
+    return dict(binding=binding,returns=returns,failures=failures,brokers=brokers,header=header,handshake=handshake)
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+def test_saved_wire_completion_stage_success(saved_wire_case,saved_wire_bound,saved_wire_completion_case,role):
+    case=saved_wire_case[1];module,_=saved_wire_completion_case;item=case['roles'][role]
+    result=cli.validate_saved_stage_transcript_data(item['stage_header_slot'],module.stage(case,role),startup_join_data=saved_wire_bound[3][role],now=item['join_now']+1.)
+    facts=json.loads(result._facts);assert facts['terminal']=='terminal' and facts['frame_count']=={'controller':12,'parent':7,'fresh':3}[role]
+    assert len(result._raws)==17 and result._links[2] is saved_wire_bound[3][role]
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+@pytest.mark.parametrize('fault',['partial','gap','suffix','previous','sequence','phase','normal_error','owner','binding','time','error_in_success'])
+def test_saved_wire_completion_stage_rejects(saved_wire_case,saved_wire_bound,saved_wire_completion_case,role,fault):
+    case=saved_wire_case[1];module,_=saved_wire_completion_case;item=case['roles'][role];slots=list(module.stage(case,role))
+    terminal={'controller':11,'parent':6,'fresh':2}[role]
+    if fault=='partial':slots[terminal]=b'\0'*4096
+    elif fault=='gap':slots[1]=b'\0'*4096
+    elif fault=='suffix':slots[-1]=slots[1]
+    elif fault=='error_in_success':slots=list(module.stage(case,role,error_at=1))
+    else:
+        frame=json.loads(module.decode(slots[1]))
+        if fault=='previous':frame['previous_sha']='0'*64
+        elif fault=='sequence':frame['sequence']=2
+        elif fault=='phase':frame['phase']='terminal'
+        elif fault=='normal_error':frame['error_code']='unknown'
+        elif fault=='owner':frame['producer_pid']+=1
+        elif fault=='binding':frame['binding_sha']='f'*64
+        else:frame['stamp']=999.
+        slots[1]=module.slot(module.raw(frame))
+    with pytest.raises(ValueError):cli.validate_saved_stage_transcript_data(item['stage_header_slot'],tuple(slots),startup_join_data=saved_wire_bound[3][role],now=item['join_now']+1.)
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+@pytest.mark.parametrize('early',[True,False])
+def test_saved_wire_completion_stage_failure(saved_wire_case,saved_wire_bound,saved_wire_completion_case,role,early):
+    case=saved_wire_case[1];module,_=saved_wire_completion_case;item=case['roles'][role]
+    slots=module.stage(case,role,early=early,error_at=None if early else 1)
+    upstream=saved_wire_bound[2 if early else 3][role]
+    result=cli.validate_saved_stage_failure_data(item['stage_header_slot'],slots,upstream_data=upstream,expected_owner_identity=item['owner_identity'],now=item['join_now']+1.)
+    assert json.loads(result._facts)['early'] is early and json.loads(result._facts)['terminal']=='error'
+    with pytest.raises(ValueError):cli.validate_saved_stage_failure_data(item['stage_header_slot'],module.stage(case,role),
+        upstream_data=saved_wire_bound[3][role],expected_owner_identity=item['owner_identity'],now=item['join_now']+1.)
+
+
+@pytest.mark.parametrize('role',['host','broker','controller','parent','fresh'])
+def test_saved_wire_completion_failure_roles(saved_wire_case,saved_wire_bound,saved_wire_completion_case,role):
+    module,_=saved_wire_completion_case;case=saved_wire_case[1];value=module.failure(case,role)
+    result=_wire_failure_call(module,case,saved_wire_bound[1],role,value)
+    assert result.raw==module.raw(value) and json.loads(result._facts)['role']==role
+    quiet=deepcopy(value);quiet['quiet_known']=True
+    declared=_wire_failure_call(module,case,saved_wire_bound[1],role,quiet,declared_quiet_known=True)
+    assert json.loads(declared.status_raw)['actual_quiet_verified'] is False
+
+
+@pytest.mark.parametrize('role',['host','broker','controller','parent','fresh'])
+@pytest.mark.parametrize('fault',['duplicate','sparse_primary','cleanup_order','cleanup_primary','omitted','lossy_quiet','publication','null_context','null_request','owner'])
+def test_saved_wire_completion_failure_relations(saved_wire_case,saved_wire_bound,saved_wire_completion_case,role,fault):
+    module,_=saved_wire_completion_case;case=saved_wire_case[1];value=module.failure(case,role);changes={}
+    if fault=='duplicate':value['exceptions'][1]['index']=0
+    elif fault=='sparse_primary':value.update(exceptions=[{**value['exceptions'][0],'index':5}],primary_index=5,cleanup_indices=[]);changes['expected_cleanup_indices']=()
+    elif fault=='cleanup_order':value['cleanup_indices']=[1,2]
+    elif fault=='cleanup_primary':value['cleanup_indices']=[0];changes['expected_cleanup_indices']=(0,)
+    elif fault=='omitted':value['omitted_count']=1
+    elif fault=='lossy_quiet':value['exceptions'][0]['truncated']=True;value['quiet_known']=True;changes['declared_quiet_known']=True
+    elif fault=='publication':value['may_have_published']=True
+    elif fault=='null_context':value['context_sha']=None;changes['expected_context_sha']=None
+    elif fault=='null_request':value['request_sha']=None;changes['expected_request_sha']=None
+    else:value['owner_identity']=[0,0];changes['expected_owner_identity']=(0,0)
+    with pytest.raises(ValueError):_wire_failure_call(module,case,saved_wire_bound[1],role,value,**changes)
+
+
+@pytest.mark.parametrize('phase',['H0','arming','READY','START','context'])
+def test_saved_wire_completion_failure_nullable_early_phase(saved_wire_case,saved_wire_bound,saved_wire_completion_case,phase):
+    module,_=saved_wire_completion_case;case=saved_wire_case[1];value=module.failure(case,'host');value.update(phase=phase,context_sha=None,owner_identity=None)
+    changes=dict(expected_context_sha=None,expected_owner_identity=None)
+    if phase=='H0':value['request_sha']=None;changes['expected_request_sha']=None
+    assert _wire_failure_call(module,case,saved_wire_bound[1],'host',value,**changes).entry()
+
+
+@pytest.mark.parametrize('role',['parent','fresh'])
+@pytest.mark.parametrize('fault',['valid','reserve','no_LF','CRLF','previous_failure','consumed'])
+def test_saved_wire_completion_single_failure_jsonl(saved_wire_case,saved_wire_completion_case,saved_wire_completion_bound,role,fault):
+    module,_=saved_wire_completion_case;failure=saved_wire_completion_bound['failures'][role]
+    prior=b'{"event":"normal"}\n';consumed=False
+    if fault=='reserve':prior=b'x'*32768
+    elif fault=='no_LF':prior=prior[:-1]
+    elif fault=='CRLF':prior=prior[:-1]+b'\r\n'
+    elif fault=='previous_failure':prior=failure.raw+b'\n'
+    elif fault=='consumed':consumed=True
+    if fault=='valid':
+        result=cli.compose_saved_failure_event_data(prior,failure_data=failure,failure_already_appended=consumed)
+        assert result.raw==prior+failure.raw+b'\n' and result._links[1] is failure
+    else:
+        with pytest.raises(ValueError):cli.compose_saved_failure_event_data(prior,failure_data=failure,failure_already_appended=consumed)
+
+
+@pytest.mark.parametrize('fault',['capture','ACK','entry','stage','previous','nonce'])
+def test_saved_wire_completion_binding_rejects(saved_wire_case,saved_wire_bound,saved_wire_completion_case,fault):
+    case=saved_wire_case[1];module,extra=saved_wire_completion_case;value=deepcopy(extra['binding'])
+    if fault=='capture':value['startup_capture']['owner_identity'][0]+=1
+    elif fault in ('ACK','entry','stage'):value[{'ACK':'ACK_sha','entry':'entry_header_sha','stage':'stage_header_sha'}[fault]]='f'*64
+    slot=module.mailbox(case,'binding',value)
+    if fault in ('previous','nonce'):
+        envelope=json.loads(module.decode(slot));envelope['previous_sha' if fault=='previous' else 'direction_nonce']='f'*64;slot=module.slot(module.raw(envelope),32768)
+    with pytest.raises(ValueError):cli.validate_saved_controller_binding_data(slot,handshake_data=saved_wire_bound[2]['controller']._links[2],controller_join_data=saved_wire_bound[3]['controller'])
+
+
+@pytest.mark.parametrize('status',['returned_candidate','failed','unknown'])
+def test_saved_wire_completion_returns_statuses(saved_wire_completion_bound,status):
+    for result in (saved_wire_completion_bound['returns'][status],saved_wire_completion_bound['brokers'][status]):
+        assert json.loads(result.raw)['status']==status and result.entry() is result
+        assert json.loads(result.status_raw)['payload_read_authorized'] is False
+
+
+@pytest.mark.parametrize('fault',['target','writer','kind','context','controller_episode','parent_episode','pin','G2','matrix','G3'])
+def test_saved_wire_completion_controller_return_rejects(saved_wire_case,saved_wire_completion_case,saved_wire_completion_bound,fault):
+    module,extra=saved_wire_completion_case;case=saved_wire_case[1];value=deepcopy(extra['returns']['returned_candidate']);changes={}
+    reference=value['candidate_reference']
+    if fault in ('target','writer','kind'):reference[{'target':'target','writer':'writer_role','kind':'record_kind'}[fault]]='wrong'
+    elif fault=='context':reference['context_sha']='f'*64
+    elif fault=='controller_episode':value['controller_process_reference']['episode_commit_sha']='f'*64
+    elif fault=='parent_episode':reference['episode_commit_sha']='f'*64
+    elif fault=='pin':
+        expected=deepcopy({n:v for n,v in value.items() if n.endswith('_reference')});expected['candidate_reference']['pin']['sha256']='f'*64;changes['expected_references_raw']=module.raw(expected)
+    elif fault=='G2':changes['expected_G2_image_sha']='f'*64
+    elif fault=='matrix':value['candidate_reference']=None
+    else:value['G3_image_sha']='f'*64
+    with pytest.raises(ValueError):_wire_controller_return_call(module,case,saved_wire_completion_bound['binding'],value,**changes)
+
+
+def test_saved_wire_completion_unknown_may_retain_optional_references(saved_wire_case,saved_wire_completion_case,saved_wire_completion_bound):
+    module,extra=saved_wire_completion_case;value=deepcopy(extra['returns']['unknown']);value['parent_metrics_reference']=deepcopy(extra['references']['parent_metrics_reference'])
+    result=_wire_controller_return_call(module,saved_wire_case[1],saved_wire_completion_bound['binding'],value)
+    assert json.loads(result.raw)['parent_metrics_reference'] is not None
+
+
+@pytest.mark.parametrize('fault',['controller_sha','binding_sha','process_image','episode','failure','status'])
+def test_saved_wire_completion_broker_return_rejects(saved_wire_case,saved_wire_completion_case,saved_wire_completion_bound,fault):
+    module,extra=saved_wire_completion_case;value=deepcopy(extra['brokers']['returned_candidate']);bound=saved_wire_completion_bound
+    args=dict(header_data=bound['header'],controller_return_data=bound['returns']['returned_candidate'],failure_data=None,expected_broker_process_image_sha=value['broker_process_image_sha'])
+    if fault in ('controller_sha','binding_sha','process_image','episode'):
+        value[{'controller_sha':'controller_return_sha','binding_sha':'controller_binding_sha','process_image':'broker_process_image_sha','episode':'episode_commit_sha'}[fault]]='f'*64
+    elif fault=='failure':value['failure_record']=module.failure(saved_wire_case[1],'broker')
+    else:value['status']='failed'
+    with pytest.raises(ValueError):cli.validate_saved_broker_return_data(module.mailbox(saved_wire_case[1],'broker_return',value),**args)
+
+
+@pytest.mark.parametrize('fault',['valid','start','observed','ACK','context'])
+def test_saved_wire_completion_constructor_diagnostic(saved_wire_case,saved_wire_bound,saved_wire_completion_case,fault):
+    module,extra=saved_wire_completion_case;case=saved_wire_case[1];value=deepcopy(extra['diagnostic'])
+    if fault=='start':value['original_attempt_started']+=1.
+    elif fault=='observed':value['observed_at']=999.
+    elif fault in ('ACK','context'):value['ACK_sha' if fault=='ACK' else 'context_sha']='f'*64
+    def invoke():return cli.validate_saved_constructor_diagnostic_data(module.mailbox(case,'constructor_probe',value),controller_wire_data=saved_wire_bound[2]['controller'],now=case['roles']['controller']['join_now'])
+    if fault=='valid':assert invoke().entry()
+    else:
+        with pytest.raises(ValueError):invoke()
+
+
+def test_saved_wire_completion_results_are_local_immutable_data(saved_wire_case,saved_wire_bound,saved_wire_completion_case,saved_wire_completion_bound,monkeypatch):
+    import copy
+    import pickle
+    module,extra=saved_wire_completion_case;case=saved_wire_case[1]
+    results=[saved_wire_completion_bound['binding'],*saved_wire_completion_bound['returns'].values(),*saved_wire_completion_bound['brokers'].values(),*saved_wire_completion_bound['failures'].values()]
+    for role,item in case['roles'].items():
+        results.append(cli.validate_saved_stage_transcript_data(item['stage_header_slot'],module.stage(case,role),startup_join_data=saved_wire_bound[3][role],now=item['join_now']+1.))
+        for early in (True,False):results.append(cli.validate_saved_stage_failure_data(item['stage_header_slot'],module.stage(case,role,early=early,error_at=None if early else 1),
+            upstream_data=saved_wire_bound[2 if early else 3][role],expected_owner_identity=item['owner_identity'],now=item['join_now']+1.))
+    for role in ('parent','fresh'):results.append(cli.compose_saved_failure_event_data(b'',failure_data=saved_wire_completion_bound['failures'][role],failure_already_appended=False))
+    results.append(cli.validate_saved_constructor_diagnostic_data(module.mailbox(case,'constructor_probe',extra['diagnostic']),controller_wire_data=saved_wire_bound[2]['controller'],now=case['roles']['controller']['join_now']))
+    monkeypatch.setattr(cli,'GATES',{n:True for n in cli.GATES})
+    for result in results:
+        assert not hasattr(result,'__dict__')
+        for operation in (lambda:setattr(result,'_raws',(b'{}',)),lambda:copy.copy(result),lambda:pickle.dumps(result)):
+            with pytest.raises((AttributeError,TypeError)):operation()
+        status=json.loads(result.status_raw)
+        assert all(v is False for n,v in status.items() if n not in ('schema','checked_scope','data_only','declared_consistency_only'))
+
+
+@pytest.mark.parametrize('fault',['post_terminal','physical_previous','now_before_join','now_after_closed','early_sequence','early_previous','short_slots'])
+def test_saved_wire_completion_stage_final_boundaries(saved_wire_case,saved_wire_bound,saved_wire_completion_case,fault):
+    case=saved_wire_case[1];module,_=saved_wire_completion_case;role='fresh';item=case['roles'][role];now=item['join_now']+1.
+    early=fault.startswith('early_');slots=list(module.stage(case,role,early=early))
+    if fault in ('early_sequence','early_previous'):
+        frame=json.loads(module.decode(slots[0]));frame['sequence' if fault=='early_sequence' else 'previous_sha']=1 if fault=='early_sequence' else 'f'*64;slots[0]=module.slot(module.raw(frame))
+    elif fault=='post_terminal':
+        frame=json.loads(module.decode(slots[2]));frame.update(sequence=3,phase='error',error_code='unknown',previous_sha=module.sha(module.decode(slots[2])));slots[3]=module.slot(module.raw(frame))
+    elif fault=='physical_previous':
+        frame=json.loads(module.decode(slots[1]));frame['previous_sha']=module.sha(slots[0]);slots[1]=module.slot(module.raw(frame))
+    elif fault=='now_before_join':now=item['wire_now']
+    elif fault=='now_after_closed':now=item['packet']['closed_deadline']+.1
+    else:slots.pop()
+    with pytest.raises(ValueError):
+        if early:cli.validate_saved_stage_failure_data(item['stage_header_slot'],tuple(slots),upstream_data=saved_wire_bound[2][role],expected_owner_identity=item['owner_identity'],now=now)
+        else:cli.validate_saved_stage_transcript_data(item['stage_header_slot'],tuple(slots),startup_join_data=saved_wire_bound[3][role],now=now)
+
+
+def test_saved_wire_completion_maximum_failure_reserve(saved_wire_case,saved_wire_bound,saved_wire_completion_case):
+    module,_=saved_wire_completion_case;case=saved_wire_case[1];value=module.failure(case,'parent')
+    value.update(exceptions=[dict(index=i,code='unknown',exception_type='E'*128,message='m'*766,truncated=False) for i in range(24)],cleanup_indices=list(range(23,0,-1)))
+    failure=_wire_failure_call(module,case,saved_wire_bound[1],'parent',value,expected_cleanup_indices=tuple(value['cleanup_indices']))
+    empty=module.raw({'padding':''});prior=module.raw({'padding':'p'*(32767-len(empty)-1)})+b'\n';assert len(prior)==32767
+    result=cli.compose_saved_failure_event_data(prior,failure_data=failure,failure_already_appended=False)
+    assert len(failure.raw)<=32768 and len(result.raw)<=65536 and result.raw==prior+failure.raw+b'\n'
+    value.update(omitted_count=1,incomplete=True)
+    assert json.loads(_wire_failure_call(module,case,saved_wire_bound[1],'parent',value,expected_cleanup_indices=tuple(value['cleanup_indices']))._facts)['lossy']
+
+
+@pytest.mark.parametrize('kind',['binding_handshake','binding_join','stage_join','stage_wire','broker_header','broker_return','broker_failure'])
+def test_saved_wire_completion_original_edges_reject_equal_replacements(saved_wire_case,saved_wire_bound,saved_wire_completion_case,saved_wire_completion_bound,kind):
+    module,extra=saved_wire_completion_case;case=saved_wire_case[1];context,contract,wires,joins,ancestors=saved_wire_bound;bound=saved_wire_completion_bound
+    if kind.startswith('binding_'):
+        result=cli.validate_saved_controller_binding_data(module.mailbox(case,'binding',extra['binding']),handshake_data=bound['handshake'],controller_join_data=joins['controller'])
+        index=2 if kind=='binding_handshake' else 3
+        replacement=cli.validate_saved_mailbox_handshake_data(bound['header'],*(case['mail_slots'][n] for n in ('request','ready','start','context','ack')),now=case['handshake_now']) if index==2 else _wire_join('controller',case['roles']['controller'],wires['controller'])
+    elif kind.startswith('stage_'):
+        item=case['roles']['controller'];index=2
+        if kind=='stage_join':
+            result=cli.validate_saved_stage_transcript_data(item['stage_header_slot'],module.stage(case,'controller'),startup_join_data=joins['controller'],now=item['join_now']+1.)
+            replacement=_wire_join('controller',item,wires['controller'])
+        else:
+            result=cli.validate_saved_stage_failure_data(item['stage_header_slot'],module.stage(case,'controller',early=True),upstream_data=wires['controller'],expected_owner_identity=item['owner_identity'],now=item['join_now']+1.)
+            replacement=_wire_invoke('controller',item,context,ancestors['controller'])
+    else:
+        value=extra['brokers']['failed'];result=cli.validate_saved_broker_return_data(module.mailbox(case,'broker_return',value),header_data=bound['header'],controller_return_data=bound['returns']['returned_candidate'],failure_data=bound['failures']['broker'],expected_broker_process_image_sha=value['broker_process_image_sha'])
+        if kind=='broker_header':
+            index=2;replacement=cli.validate_saved_mailbox_header_data(case['header_slot'],context_data=context,contract_data=contract,basis_raw=bound['header']._raws[1])
+        elif kind=='broker_return':index=3;replacement=_wire_controller_return_call(module,case,bound['binding'],extra['returns']['returned_candidate'])
+        else:index=4;replacement=_wire_failure_call(module,case,contract,'broker',module.failure(case,'broker'))
+    original=result._links[index];assert replacement is not original and replacement.raw==original.raw and result.entry() is result
+    links=list(result._links);links[index]=replacement;object.__setattr__(result,'_links',tuple(links))
+    with pytest.raises(ValueError,match='original edge object'):result.entry()
+
+
+@pytest.mark.parametrize('status,field',[('failed','failure_reference'),('unknown','G2_image_sha')])
+def test_saved_wire_completion_additional_return_matrix_edges(saved_wire_case,saved_wire_completion_case,saved_wire_completion_bound,status,field):
+    module,extra=saved_wire_completion_case;value=deepcopy(extra['returns'][status]);value[field]=None if status=='failed' else 'f'*64
+    with pytest.raises(ValueError):_wire_controller_return_call(module,saved_wire_case[1],saved_wire_completion_bound['binding'],value)
+
+
+def test_saved_wire_completion_broker_candidate_cannot_wrap_failed_controller(saved_wire_case,saved_wire_completion_case,saved_wire_completion_bound):
+    module,extra=saved_wire_completion_case;bound=saved_wire_completion_bound;value=deepcopy(extra['brokers']['returned_candidate'])
+    value['controller_return_sha']=module.sha(bound['returns']['failed'].raw)
+    with pytest.raises(ValueError,match='controller candidate'):
+        cli.validate_saved_broker_return_data(module.mailbox(saved_wire_case[1],'broker_return',value),header_data=bound['header'],
+            controller_return_data=bound['returns']['failed'],failure_data=None,expected_broker_process_image_sha=value['broker_process_image_sha'])
