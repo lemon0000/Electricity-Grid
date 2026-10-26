@@ -1,0 +1,17 @@
+"""Create a non-authoritative checkpoint index after bounded tests and prose."""
+from hashlib import sha256
+import json
+from pathlib import Path
+OUT=Path(__file__).resolve().parent;ROOT=OUT.parents[3];PACKAGE=OUT.parent/'final_package_01'
+def raw(v):return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+def pin(v):return dict(bytes=len(v),sha256=sha256(v).hexdigest())
+plan=json.loads((OUT/'admission_r3.json').read_bytes());navigation=json.loads((OUT/'navigation_changes.json').read_bytes())
+paths=[p for p in OUT.rglob('*') if p.is_file()]+[PACKAGE/'saved_checks.py']
+paths.extend(ROOT/row['checkpoint_snapshot'] for row in navigation.values())
+paths.extend(ROOT/n for n in ('docs/plan/staged_deliverability_c_saved_fresh_wire_data_root_repair_v1.md',
+    'docs/plan/continuation_handoff_20261026_saved_fresh_wire_data_root_repair.md'))
+value=dict(authority='DRAFT_NONAUTHORITATIVE',production_seal=False,source_pins=plan['source_pins'],
+    source_epoch=plan['source_epoch'],bound_files={p.relative_to(ROOT).as_posix():pin(p.read_bytes()) for p in paths},navigation=navigation,
+    official_review=False,review_receipt_issued=False,run_authority=False,actual_F=False,scientific_evidence_adopted=False,resource_admission=False,formal_result=False)
+with (PACKAGE/'checkpoint_freeze.json').open('xb') as stream:stream.write(raw(value))
+print(json.dumps(dict(bound_files=len(value['bound_files']),production_seal=False),sort_keys=True))

@@ -1,0 +1,50 @@
+E
+=================================== ERRORS ====================================
+_______________ ERROR at setup of test_saved_wire_literal_roots _______________
+
+    @pytest.fixture(scope='module')
+    def saved_wire_case():
+        import importlib.util
+        import os
+        root=cli.ROOT/'results/tables/staged_rts24_saved_fresh_wire_data_v1_non_authoritative/checks_01'
+        plan=json.loads(Path(os.environ['EGRID_WIRE_DATA_PLAN']).read_bytes());path=root/'fixture_builder.py'
+        data=path.read_bytes();assert dict(bytes=len(data),sha256=sha256(data).hexdigest())==plan['helper_pins'][path.relative_to(cli.ROOT).as_posix()]
+        spec=importlib.util.spec_from_file_location('independent_wire_fixture',path)
+        module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+>       return module,module.build()
+                      ^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:3929: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def build():
+        previous=ROOT/'results/tables/staged_rts24_saved_fresh_role_data_v1_non_authoritative/checks_01/fixture_builder.py'
+        expected=json.loads((OUT/'baseline.json').read_bytes())['preserved'][previous.relative_to(ROOT).as_posix()]
+        assert pin(previous.read_bytes())==expected
+        spec=importlib.util.spec_from_file_location('independent_wire_context_fixture',previous);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        old_case=module.build();base=old_case['base_context_case'];ctx=json.loads(base['context_raw']);req=json.loads(base['request_raw'])
+        contract_raws=tuple((directory/name).read_bytes() for directory,name in ((WIRE,'wire_domains.json'),(WIRE,'wire_templates.json'),
+            (WIRE,'wire_dag_matrix.json'),(OLD,'protocol_domains.json'),(OLD,'fixed_templates.json')))
+        registry,template,old=json.loads(contract_raws[0]),json.loads(contract_raws[1]),json.loads(contract_raws[3])
+        def value(name,**items):
+            result={n:deepcopy(rule['literal']) for n,rule in registry['schemas'][name]['fields'].items() if isinstance(rule,dict) and 'literal' in rule}
+            result.update(items);assert set(result)==set(registry['schemas'][name]['fields']),(name,set(registry['schemas'][name]['fields'])-set(result))
+            return result
+        context_sha,request_sha=sha(base['context_raw']),sha(base['request_raw']);common=dict(context_sha=context_sha,request_sha=request_sha)
+        publication=json.loads(old_case['publication_raw']);receipt=publication['context_receipt'];directories=publication['root_directories']
+        identities=dict(host=[1001,2001],broker=[1002,2002],controller=[1003,2003],parent=[1004,2004],fresh=[1005,2005])
+        directions={n:image('direction_'+n) for n in template['mailbox_directions']};mailbox_name='Local\\electricity_grid_wire_fixture_mailbox'
+>       header=value('mailbox_header',name=mailbox_name,request_sha=request_sha,host_identity=identities['host'],broker_identity=identities['broker'],direction_nonces=directions)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: build.<locals>.value() got multiple values for argument 'name'
+
+results\tables\staged_rts24_saved_fresh_wire_data_v1_non_authoritative\checks_01\fixture_builder.py:36: TypeError
+============================ slowest 10 durations =============================
+0.17s setup    tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_literal_roots
+
+(1 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ===========================
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_wire_literal_roots
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 error in 3.65s
+ORDINARY_HARNESS {"P1_write_attempts": 0, "actual_F_write_attempts": 0, "blocked_lscpu": 1, "native_owner_attempts": 0, "optional_Popen_attempts": 1, "unexpected_process_attempts": 0}

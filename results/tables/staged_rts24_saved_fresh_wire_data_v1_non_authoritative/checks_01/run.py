@@ -109,13 +109,19 @@ def main(action):
     elif action=='wip':label,script,args,cap='wip_static_02',OUT/'wip_snapshot.py',[],10
     elif action=='wip_retry':label,script,args,cap='wip_static_retry_03',OUT/'wip_snapshot.py',[],10
     elif action=='collection':label,script,args,cap='collection_02',OUT/'pytest_harness.py',['--collect-only','collection_02'],20
+    elif action=='collection_r3':label,script,args,cap='collection_r3',OUT/'pytest_harness.py',['--collect-only','collection_r3'],20
     elif action=='admission':label,script,args,cap='admission_03',OUT/'admission.py',[],15
+    elif action=='admission_r3':label,script,args,cap='admission_r3',OUT/'admission_r3.py',[],8
+    elif action=='repair_admission':label,script,args,cap='repair_admission_04',OUT/'repair_admission.py',[],8
+    elif action=='freeze_checkpoint':label,script,args,cap='freeze_checkpoint',OUT/'freeze_checkpoint.py',[],8
+    elif action=='r4_old_expectation_a_12':label,script,args,cap=action,OUT/'pytest_harness.py',['admission_retry.json',action],32
     elif action in ('saved','terminal'):
-        label,script,args,cap=('saved_04' if action=='saved' else 'terminal_05'),PACKAGE/'saved_checks.py',[],30
+        label,script,args,cap=('saved_04' if action=='saved' else 'terminal_05'),PACKAGE/'saved_checks.py',[action],30
     else:
-        plan=read(OUT/'admission.json');assert action in plan['groups']
-        label,script,args,cap=action,OUT/'pytest_harness.py',['admission.json',action],plan['caps'][action]
-    kind='pytest' if action not in ('baseline','wip','wip_retry','collection','admission','saved','terminal') else 'static'
+        plan_name='admission_r3.json' if action.startswith('r3_') else 'admission_r2.json' if action.startswith('r2_') else 'admission.json'
+        plan=read(OUT/plan_name);assert action in plan['groups']
+        label,script,args,cap=action,OUT/'pytest_harness.py',[plan_name,action],plan['caps'][action]
+    kind='pytest' if action not in ('baseline','wip','wip_retry','collection','collection_r3','admission','admission_r3','repair_admission','freeze_checkpoint','saved','terminal') else 'static'
     total_cap=420 if kind=='pytest' else 120
     assert spent[kind]+cap<=total_cap and sum(spent.values())+cap<=540
     target_out=PACKAGE if action in ('saved','terminal') else OUT
@@ -146,6 +152,7 @@ def main(action):
         accepted=code==0 and error is None and post_ok and charged<=cap,stdout_pin=pin(stdout),stderr_pin=pin(stderr),
         bounded_drain=drain_state,
         source_pins=before_source,helper_pins=before_helpers,fixed_before=before_fixed,fixed_after=after_fixed,
+        after_source_pins=after_source,after_helper_pins=after_helpers,postcheck_pins_match=post_ok,
         source_epoch=sha256(raw(before_source)).hexdigest(),observed_capture_seconds=observed,tail_reserve_seconds=.5,
         charged_seconds=charged,target_seconds=target_seconds,target_timeout_seconds=timeout,cap_seconds=cap,
         preparation_seconds=preparation_seconds,

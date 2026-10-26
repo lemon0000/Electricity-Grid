@@ -5381,9 +5381,15 @@ def _saved_wire_walk(value,gray,done):
     require(type(value._links) is type(value._edges) is tuple and len(value._links)==len(value._edges)<=5,'wire data edge shape')
     _saved_wire_layout(value)
     if type(value) is SavedWireContractData:
-        require(len(value._raws)==len(SAVED_WIRE_CONTRACT_PINS) and all(
+        # Validation roots are literals in this function's code, not module-global pin data.
+        expected_pins=((72009,'d80a99d39535e2e3a73028f904e29896674c5033a37ae359646fcbf507d8964f'),
+            (2365,'4daee71484dda4eaeb97d54ae9ac333b90d15ca75e8ccd57c93339ef587affd7'),
+            (16540,'b2d1ab59add27a996d852f52387907e74e709434504e8d71594d97bbef84f67a'),
+            (21981,'d5e467a761ea5d50c939f9b76fd702775381341996c3a0aaf5e563025a62520b'),
+            (2231,'36cff2e3fa3a11da0d6a2de7a088e8be94d528a1f2a2c33e14a88f03d57a0d0a'))
+        require(len(value._raws)==5 and all(
             len(raw)==expected[0] and sha256(raw).hexdigest()==expected[1]
-            for raw,expected in zip(value._raws,SAVED_WIRE_CONTRACT_PINS)),'fixed wire contract changed')
+            for raw,expected in zip(value._raws,expected_pins)),'fixed wire contract changed')
     gray.add(oid)
     try:
         for index,(link,edge) in enumerate(zip(value._links,value._edges)):
@@ -5415,7 +5421,12 @@ def _saved_wire_new(cls,raws,links,facts):
 
 def validate_saved_wire_contract_data(domains_raw,templates_raw,dag_raw,old_domains_raw,old_templates_raw):
     raws=(domains_raw,templates_raw,dag_raw,old_domains_raw,old_templates_raw)
-    for data,expected in zip(raws,SAVED_WIRE_CONTRACT_PINS):
+    expected_pins=((72009,'d80a99d39535e2e3a73028f904e29896674c5033a37ae359646fcbf507d8964f'),
+        (2365,'4daee71484dda4eaeb97d54ae9ac333b90d15ca75e8ccd57c93339ef587affd7'),
+        (16540,'b2d1ab59add27a996d852f52387907e74e709434504e8d71594d97bbef84f67a'),
+        (21981,'d5e467a761ea5d50c939f9b76fd702775381341996c3a0aaf5e563025a62520b'),
+        (2231,'36cff2e3fa3a11da0d6a2de7a088e8be94d528a1f2a2c33e14a88f03d57a0d0a'))
+    for data,expected in zip(raws,expected_pins):
         require(type(data) is bytes and len(data)==expected[0] and sha256(data).hexdigest()==expected[1],
             'fixed wire contract bytes differ')
     return _saved_wire_new(SavedWireContractData,raws,(),dict(schema_count=45,historical_design_sources_only=True))
@@ -5465,7 +5476,9 @@ def _saved_wire_type(value,ref,contracts,context_data):
             require(type(row) is list and len(row)==3 and row[0]==path,'wire fixed directory path')
             _successor_integer(row[1],0,2**64-1);_successor_integer(row[2],0,2**128-1)
     elif kind=='command_line':
-        require(type(value) is str and '\0' not in value and len(canonical(value))<=16384,'wire command line domain')
+        items=registry['types'][rule['argv']]['items']
+        encoded_max=2*sum(len(canonical(item['literal'])) if type(item) is dict else registry['types'][item]['encoded_max'] for item in items)+4*len(items)+2
+        require(type(value) is str and '\0' not in value and len(canonical(value))<=encoded_max,'wire command line domain')
     elif kind=='union':
         for choice in rule['choices']:
             try:_saved_wire_type(value,choice,contracts,context_data)
@@ -5556,7 +5569,7 @@ def _saved_wire_basis(raw,role,context,upstream,contracts):
     value=_saved_role_bytes(raw,65536)
     keys(value,'schema context_ref upstream_ref producer_identity entry_name entry_nonce stage_name stage_nonce '
         'permit_nonce episode_nonce episode_commit_sha episode_started episode_deadline upstream_stage_nonce role_tree_pin projection_pins projection_image_shas'+
-        ('' if role=='controller' else ' input_metadata_sha runtime_binding_sha receipt_commit_sha'))
+        ('' if role=='controller' else ' bootstrap_source_image_sha input_metadata_sha runtime_binding_sha receipt_commit_sha'))
     require(value['schema']=='staged_saved_F_'+role+'_wire_basis_declaration_v1','wire local basis domain differs')
     _saved_wire_ref(value['context_ref'],context);_saved_wire_ref(value['upstream_ref'],upstream)
     _saved_role_identity(value['producer_identity'])
@@ -5573,7 +5586,7 @@ def _saved_wire_basis(raw,role,context,upstream,contracts):
     require(type(value['projection_image_shas']) is dict and set(value['projection_image_shas'])==image_names,'wire independent projection image domain')
     require(all(_hex64(v) for v in value['projection_image_shas'].values()),'wire independent image SHA')
     if role!='controller':
-        require(all(_hex64(value[n]) for n in ('input_metadata_sha','runtime_binding_sha','receipt_commit_sha')),'wire independent opaque image SHA')
+        require(all(_hex64(value[n]) for n in ('bootstrap_source_image_sha','input_metadata_sha','runtime_binding_sha','receipt_commit_sha')),'wire independent opaque image SHA')
     return value
 
 
@@ -5690,7 +5703,8 @@ def _saved_wire_projections(role,bundle,basis,upstream,handshake,contracts,conte
     if role!='controller':
         source_wire=upstream._links[2];source_packet=sha256(source_wire._raws[0]).hexdigest();source_binding=sha256(source_wire._raws[1]).hexdigest()
         bootstrap=names[0];require(canonical(bundle[bootstrap])==upstream._raws[0],'wire original upstream bootstrap raw differs')
-        previous=parse(upstream._facts)['now'];bootstrap_sha=sha256(upstream._raws[0]).hexdigest()
+        upstream_facts=parse(upstream._facts);previous=upstream_facts['now'];bootstrap_sha=upstream_facts['bootstrap_source_image_sha']
+        require(basis['bootstrap_source_image_sha']==bootstrap_sha,'wire original bootstrap image declaration differs')
     else:previous=parse(handshake._facts)['now'];bootstrap_sha=None
     for name in names:
         value=bundle[name]
@@ -5715,12 +5729,12 @@ def _saved_wire_projections(role,bundle,basis,upstream,handshake,contracts,conte
                 and value['runtime_binding_sha']==basis['runtime_binding_sha'],'wire independent hold image differs')
         elif name.endswith('_store_projection'):
             field='G0_image_sha' if role=='parent' else 'hold_image_sha'
-            require(value[field]==sha256(canonical(bundle[hold_name])).hexdigest() and value['tree_sha']==sha256(tree_raw).hexdigest()
+            require(value[field]==bundle[hold_name]['source_image_sha'] and value['tree_sha']==sha256(tree_raw).hexdigest()
                 and value['receipt_commit_sha']==basis['receipt_commit_sha'],'wire store hold/tree dependency differs')
         else:
             field='G0_image_sha' if role=='parent' else 'hold_image_sha';store='controller_store_projection' if role=='parent' else 'parent_store_projection'
-            require(value[field]==sha256(canonical(bundle[hold_name])).hexdigest()
-                and value['store_image_sha']==sha256(canonical(bundle[store])).hexdigest(),'wire issuer original dependencies differ')
+            require(value[field]==bundle[hold_name]['source_image_sha']
+                and value['store_image_sha']==bundle[store]['source_image_sha'],'wire issuer original dependencies differ')
             if role=='parent':require(value['ACK_sha']==sha256(handshake._raws[0]).hexdigest(),'wire controller issuer ACK differs')
 
 
@@ -5809,6 +5823,60 @@ def validate_saved_parent_wire_data(entry_slots,descriptor_raw,*,controller_join
 def validate_saved_fresh_wire_data(entry_slots,descriptor_raw,*,parent_join_data,basis_raw,role_tree_raw,now):
     return _validate_saved_role_wire_data('fresh',SavedFreshWireData,entry_slots,descriptor_raw,
         upstream_data=parent_join_data,basis_raw=basis_raw,role_tree_raw=role_tree_raw,now=now)
+
+
+def _validate_saved_startup_join_data(role,cls,wire_data,stage_header_slot,capture_raw,bootstrap_slot,*,
+        expected_owner_identity,expected_thread_id,bootstrap_source_image_sha,now):
+    wire_cls=dict(controller=SavedControllerWireData,parent=SavedParentWireData,fresh=SavedFreshWireData)[role]
+    require(type(wire_data) is wire_cls,'wire original fixed-role entry data required');wire_data.entry();_saved_role_time(now)
+    require(type(expected_owner_identity) is tuple and len(expected_owner_identity)==2,'wire independent owner identity tuple required')
+    _saved_role_identity(list(expected_owner_identity));_successor_integer(expected_thread_id,1,2**32-1)
+    require(_hex64(bootstrap_source_image_sha),'wire independent bootstrap image declaration required')
+    context_data,contract_data=wire_data._links[:2];contracts=_saved_wire_contracts(contract_data);context=parse(context_data._raw)
+    packet=parse(wire_data._raws[0]);basis=parse(wire_data._raws[7]);entry_header=parse(_saved_wire_decode(wire_data._raws[3],4096,header=True))
+    stage_header_raw=_saved_wire_decode(stage_header_slot,4096,header=True)
+    stage=_saved_wire_raw(stage_header_raw,role+'_stage_header',contracts,context_data)
+    capture=_saved_wire_raw(capture_raw,role+'_startup_capture',contracts,context_data)
+    bootstrap_raw=_saved_wire_decode(bootstrap_slot,4096);bootstrap=_saved_wire_raw(bootstrap_raw,role+'_bootstrap_projection',contracts,context_data)
+    owner=list(expected_owner_identity);context_sha=sha256(context_data._raw).hexdigest();request_sha=sha256(context_data._request_raw).hexdigest()
+    require(stage['context_sha']==context_sha and stage['nonce']==basis['stage_nonce'] and canonical(stage['descriptor'])==wire_data._raws[2]
+        and (stage['owner_pid'],stage['owner_creation_filetime'])==expected_owner_identity
+        and stage['entry_header_sha']==sha256(wire_data._raws[3]).hexdigest(),'wire independently declared stage owner/header differs')
+    handshake=_saved_wire_handshake(wire_data);argv=_saved_wire_argv(role,wire_data._raws[0],wire_data._raws[2],entry_header,handshake,contracts)
+    common=dict(context_sha=context_sha,request_sha=request_sha,entry_header_sha=sha256(wire_data._raws[3]).hexdigest(),
+        stage_header_sha=sha256(stage_header_slot).hexdigest(),packet_sha=sha256(wire_data._raws[0]).hexdigest(),
+        permit_binding_sha=sha256(wire_data._raws[1]).hexdigest(),descriptor_sha=sha256(wire_data._raws[2]).hexdigest(),
+        environment_sha=digest(context['environment']))
+    for value in (capture,bootstrap):require(all(canonical(value[n])==canonical(v) for n,v in common.items()),'wire original startup binding differs')
+    require(capture['producer_identity']==basis['producer_identity'] and capture['owner_identity']==owner
+        and capture['argv']==argv and capture['command_line']==subprocess.list2cmdline(argv) and capture['cwd']==str(ROOT)
+        and capture['ENTRY_pin']==context['source_pins']['experiments/staged_rts24_saved_fresh_adoption_v1.py']
+        and capture['executable_pin']==context['executable']['pin'],'wire independent parent startup capture differs')
+    require(bootstrap['self_identity']==owner and bootstrap['thread_id']==expected_thread_id and bootstrap['argv_sha']==digest(argv)
+        and bootstrap['source_sha']==digest(context['source_pins']) and bootstrap['runtime_binding_contract_sha']==context['runtime_binding_contract_sha'],
+        'wire independently declared child self proof differs')
+    require(parse(wire_data._facts)['now']<=capture['captured_at']<=bootstrap['observed_at']<=now<=packet['active_deadline'],
+        'wire capture/release/self-proof declared order differs')
+    return _saved_wire_new(cls,(bootstrap_raw,stage_header_slot,capture_raw,bootstrap_slot),(context_data,contract_data,wire_data),
+        dict(role=role,now=now,bootstrap_source_image_sha=bootstrap_source_image_sha,bootstrap_image_is_caller_declaration=True))
+
+
+def validate_saved_controller_startup_join_data(wire_data,stage_header_slot,capture_raw,bootstrap_slot,*,
+        expected_owner_identity,expected_thread_id,bootstrap_source_image_sha,now):
+    return _validate_saved_startup_join_data('controller',SavedControllerStartupJoinData,wire_data,stage_header_slot,capture_raw,bootstrap_slot,
+        expected_owner_identity=expected_owner_identity,expected_thread_id=expected_thread_id,bootstrap_source_image_sha=bootstrap_source_image_sha,now=now)
+
+
+def validate_saved_parent_startup_join_data(wire_data,stage_header_slot,capture_raw,bootstrap_slot,*,
+        expected_owner_identity,expected_thread_id,bootstrap_source_image_sha,now):
+    return _validate_saved_startup_join_data('parent',SavedParentStartupJoinData,wire_data,stage_header_slot,capture_raw,bootstrap_slot,
+        expected_owner_identity=expected_owner_identity,expected_thread_id=expected_thread_id,bootstrap_source_image_sha=bootstrap_source_image_sha,now=now)
+
+
+def validate_saved_fresh_startup_join_data(wire_data,stage_header_slot,capture_raw,bootstrap_slot,*,
+        expected_owner_identity,expected_thread_id,bootstrap_source_image_sha,now):
+    return _validate_saved_startup_join_data('fresh',SavedFreshStartupJoinData,wire_data,stage_header_slot,capture_raw,bootstrap_slot,
+        expected_owner_identity=expected_owner_identity,expected_thread_id=expected_thread_id,bootstrap_source_image_sha=bootstrap_source_image_sha,now=now)
 
 
 if __name__ == '__main__':

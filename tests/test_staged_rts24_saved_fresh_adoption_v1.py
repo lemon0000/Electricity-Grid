@@ -3915,3 +3915,172 @@ def test_saved_role_data_capture_constructor_failure_is_a_recordable_attempt(mon
     assert len(calls)==1 and code==-3 and stdout==stderr==b'' and error=='popen_error'
     assert observed['child_created'] is False and observed['popen_error_type']=='OSError'
     assert observed['popen_error_message']=='synthetic process construction failure'
+
+
+@pytest.fixture(scope='module')
+def saved_wire_case():
+    import importlib.util
+    import os
+    root=cli.ROOT/'results/tables/staged_rts24_saved_fresh_wire_data_v1_non_authoritative/checks_01'
+    plan=json.loads(Path(os.environ['EGRID_WIRE_DATA_PLAN']).read_bytes());path=root/'fixture_builder.py'
+    data=path.read_bytes();assert dict(bytes=len(data),sha256=sha256(data).hexdigest())==plan['helper_pins'][path.relative_to(cli.ROOT).as_posix()]
+    spec=importlib.util.spec_from_file_location('independent_wire_fixture',path)
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    return module,module.build()
+
+
+def _wire_ref(obj):
+    value=dict(object_id=id(obj),commit=obj.commit)
+    if type(obj) is not cli.SavedSuccessorDataCheck:value['creator']=list(obj._creator)
+    return value
+
+
+def _wire_invoke(role,item,context,upstream):
+    basis=deepcopy(item['basis']);basis.update(context_ref=_wire_ref(context),upstream_ref=_wire_ref(upstream))
+    function=getattr(cli,'validate_saved_'+role+'_wire_data')
+    key=dict(controller='handshake_data',parent='controller_join_data',fresh='parent_join_data')[role]
+    return function(item['entry_slots'],item['descriptor_raw'],**{key:upstream},basis_raw=_successor_json(basis),
+        role_tree_raw=item['tree_raw'],now=item['wire_now'])
+
+
+def _wire_join(role,item,wire,**changes):
+    args=dict(expected_owner_identity=item['owner_identity'],expected_thread_id=item['thread_id'],
+        bootstrap_source_image_sha=item['bootstrap_source_image_sha'],now=item['join_now'])
+    args.update(changes)
+    return getattr(cli,'validate_saved_'+role+'_startup_join_data')(wire,item['stage_header_slot'],item['capture_raw'],item['bootstrap_slot'],**args)
+
+
+@pytest.fixture(scope='module')
+def saved_wire_bound(saved_wire_case):
+    module,case=saved_wire_case;context=_successor_call(case['base_case'])
+    contracts=cli.validate_saved_wire_contract_data(*case['contract_raws'])
+    basis=deepcopy(case['header_basis']);basis['context_ref']=_wire_ref(context)
+    header=cli.validate_saved_mailbox_header_data(case['header_slot'],context_data=context,contract_data=contracts,basis_raw=_successor_json(basis))
+    upstream=cli.validate_saved_mailbox_handshake_data(header,*(case['mail_slots'][n] for n in ('request','ready','start','context','ack')),now=case['handshake_now'])
+    wires={};joins={};ancestors={}
+    for role in ('controller','parent','fresh'):
+        item=case['roles'][role];item['tree_raw']=case['tree_raw'];ancestors[role]=upstream
+        wires[role]=_wire_invoke(role,item,context,upstream);joins[role]=_wire_join(role,item,wires[role]);upstream=joins[role]
+    return context,contracts,wires,joins,ancestors
+
+
+def test_saved_wire_literal_roots(saved_wire_case):
+    import ast
+    import inspect
+    expected=tuple((len(v),sha256(v).hexdigest()) for v in saved_wire_case[1]['contract_raws'])
+    for function in (cli.validate_saved_wire_contract_data,cli._saved_wire_walk):
+        tree=ast.parse(inspect.getsource(function))
+        roots=[n for n in ast.walk(tree) if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='expected_pins' for t in n.targets)]
+        assert len(roots)==1 and ast.literal_eval(roots[0].value)==expected
+        assert not any(isinstance(n,ast.Name) and n.id in ('SAVED_WIRE_CONTRACT_PINS','SAVED_ROLE_REGISTRY_PIN','SAVED_ROLE_TEMPLATE_PIN') for n in ast.walk(tree))
+
+
+@pytest.mark.parametrize('index',range(5))
+def test_saved_wire_root_globals(saved_wire_case,monkeypatch,index):
+    raws=saved_wire_case[1]['contract_raws'];changed=list(raws);value=json.loads(changed[index]);key=next(iter(value))
+    value[key[:-1]+('X' if key[-1]!='X' else 'Y')]=value.pop(key);changed[index]=_successor_json(value)
+    assert len(changed[index])==len(raws[index]) and changed[index]!=raws[index]
+    held=cli.validate_saved_wire_contract_data(*raws)
+    pins=tuple((len(v),sha256(v).hexdigest()) for v in changed)
+    monkeypatch.setattr(cli,'SAVED_WIRE_CONTRACT_PINS',pins)
+    monkeypatch.setattr(cli,'SAVED_ROLE_REGISTRY_PIN',pins[3]);monkeypatch.setattr(cli,'SAVED_ROLE_TEMPLATE_PIN',pins[4])
+    assert cli.validate_saved_wire_contract_data(*raws).entry()
+    with pytest.raises(ValueError,match='fixed wire contract bytes differ'):cli.validate_saved_wire_contract_data(*changed)
+    object.__setattr__(held,'_raws',tuple(changed));object.__setattr__(held,'commit',cli.digest(held._image()))
+    with pytest.raises(ValueError,match='fixed wire contract changed'):held.entry()
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+def test_saved_wire_ram_startup_join(saved_wire_case,saved_wire_bound,role):
+    _,case=saved_wire_case;context,_,wires,joins,ancestors=saved_wire_bound;item=case['roles'][role]
+    again=_wire_invoke(role,item,context,ancestors[role]);joined=_wire_join(role,item,again)
+    assert joined is not joins[role] and joined.entry() is joined
+    assert json.loads(joined.raw)==item['bootstrap']
+    assert joined._links[2] is again and wires[role]._links[2] is ancestors[role]
+    assert json.loads(joined._facts)['bootstrap_source_image_sha']==item['bootstrap_source_image_sha']
+
+
+def test_saved_wire_ram_authority_stays_false(saved_wire_bound,monkeypatch):
+    _,contracts,wires,joins,_=saved_wire_bound
+    monkeypatch.setattr(cli,'GATES',{n:True for n in cli.GATES})
+    for result in (contracts,*wires.values(),*joins.values()):
+        status=json.loads(result.status_raw)
+        assert all(v is False for n,v in status.items() if n not in ('schema','checked_scope','data_only','declared_consistency_only'))
+        assert status['data_only'] and status['declared_consistency_only']
+    assert not cli.OUTPUT.parent.exists()
+
+
+@pytest.mark.parametrize('role',['parent','fresh'])
+@pytest.mark.parametrize('fault',['bootstrap_raw','hold_raw_store','hold_raw_issuer','store_raw_issuer','hold_image_changed','store_image_changed','bootstrap_declaration'])
+def test_saved_wire_dependency_images(saved_wire_case,saved_wire_bound,role,fault):
+    module,case=saved_wire_case;context,_,_,_,ancestors=saved_wire_bound;item=deepcopy(case['roles'][role])
+    bundle=item['bundle'];names=list(json.loads(case['contract_raws'][0])['cross_field_constraints']['projections']['bundles'][role])
+    boot,hold,store,issuer=names;field='G0_image_sha' if role=='parent' else 'hold_image_sha'
+    if fault=='bootstrap_raw':bundle[hold]['bootstrap_image_sha']=module.sha(module.raw(bundle[boot]))
+    elif fault=='hold_raw_store':bundle[store][field]=module.sha(module.raw(bundle[hold]))
+    elif fault=='hold_raw_issuer':bundle[issuer][field]=module.sha(module.raw(bundle[hold]))
+    elif fault=='store_raw_issuer':bundle[issuer]['store_image_sha']=module.sha(module.raw(bundle[store]))
+    elif fault in ('hold_image_changed','store_image_changed'):
+        name=hold if fault=='hold_image_changed' else store
+        bundle[name]['source_image_sha']=item['basis']['projection_image_shas'][name]='f'*64
+    else:
+        item['basis']['bootstrap_source_image_sha']='f'*64
+        for name in names[1:]:bundle[name]['bootstrap_image_sha']='f'*64
+    module.refresh(item,role)
+    with pytest.raises(ValueError,match='dependency|image declaration|original dependencies'):_wire_invoke(role,item,context,ancestors[role])
+
+
+@pytest.mark.parametrize('role',['parent','fresh'])
+def test_saved_wire_coherent_images_remain_opaque_declarations(saved_wire_case,saved_wire_bound,role):
+    module,case=saved_wire_case;context,_,_,_,ancestors=saved_wire_bound;item=deepcopy(case['roles'][role])
+    names=json.loads(case['contract_raws'][0])['cross_field_constraints']['projections']['bundles'][role];_,hold,store,issuer=names
+    field='G0_image_sha' if role=='parent' else 'hold_image_sha'
+    item['bundle'][hold]['source_image_sha']=item['basis']['projection_image_shas'][hold]='e'*64
+    for name in (store,issuer):item['bundle'][name][field]='e'*64
+    module.refresh(item,role)
+    status=json.loads(_wire_invoke(role,item,context,ancestors[role]).status_raw)
+    assert status['declared_consistency_only'] and status['producer_capability_verified'] is False
+
+
+@pytest.mark.parametrize('role',['controller','parent','fresh'])
+@pytest.mark.parametrize('fault',['owner','thread','argv','command_line','capture_time','self_time','bootstrap_image'])
+def test_saved_wire_startup_independent_join(saved_wire_case,saved_wire_bound,role,fault):
+    module,case=saved_wire_case;_,_,wires,_,_=saved_wire_bound;item=deepcopy(case['roles'][role]);changes={}
+    if fault=='owner':changes['expected_owner_identity']=(9999,9999)
+    elif fault=='thread':changes['expected_thread_id']=1
+    elif fault=='argv':item['capture']['argv'][-1]='0'*64
+    elif fault=='command_line':item['capture']['command_line']+=' extra'
+    elif fault=='capture_time':item['capture']['captured_at']=item['join_now']+1.
+    elif fault=='self_time':item['bootstrap']['observed_at']=1000.
+    else:changes['bootstrap_source_image_sha']='not-a-sha'
+    item['capture_raw']=module.raw(item['capture']);item['bootstrap_slot']=module.slot(module.raw(item['bootstrap']),4096)
+    with pytest.raises(ValueError):_wire_join(role,item,wires[role],**changes)
+
+
+@pytest.mark.parametrize('role',['parent','fresh'])
+def test_saved_wire_upstream_object_and_image_binding(saved_wire_case,saved_wire_bound,role):
+    _,case=saved_wire_case;context,_,wires,joins,ancestors=saved_wire_bound;previous='controller' if role=='parent' else 'parent'
+    replacement=_wire_join(previous,case['roles'][previous],wires[previous])
+    assert replacement is not joins[previous] and replacement.raw==joins[previous].raw
+    basis=json.loads(wires[role]._raws[7]);basis['upstream_ref']=_wire_ref(ancestors[role])
+    key='controller_join_data' if role=='parent' else 'parent_join_data'
+    with pytest.raises(ValueError,match='original object'):
+        getattr(cli,'validate_saved_'+role+'_wire_data')(case['roles'][role]['entry_slots'],case['roles'][role]['descriptor_raw'],
+            **{key:replacement},basis_raw=_successor_json(basis),role_tree_raw=case['tree_raw'],now=case['roles'][role]['wire_now'])
+    changed=_wire_join(previous,case['roles'][previous],wires[previous],bootstrap_source_image_sha='d'*64)
+    with pytest.raises(ValueError,match='bootstrap image declaration'):_wire_invoke(role,case['roles'][role],context,changed)
+
+
+@pytest.mark.parametrize('role',['parent','fresh'])
+def test_saved_wire_coherent_bootstrap_image_is_a_declaration(saved_wire_case,saved_wire_bound,role):
+    module,case=saved_wire_case;context,_,wires,_,_=saved_wire_bound
+    previous='controller' if role=='parent' else 'parent';image='c'*64
+    upstream=_wire_join(previous,case['roles'][previous],wires[previous],bootstrap_source_image_sha=image)
+    item=deepcopy(case['roles'][role]);item['basis']['bootstrap_source_image_sha']=image
+    names=json.loads(case['contract_raws'][0])['cross_field_constraints']['projections']['bundles'][role]
+    for name in names[1:]:item['bundle'][name]['bootstrap_image_sha']=image
+    module.refresh(item,role);result=_wire_invoke(role,item,context,upstream)
+    assert result._links[2] is upstream and json.loads(upstream._facts)['bootstrap_source_image_sha']==image
+    status=json.loads(result.status_raw)
+    assert status['declared_consistency_only'] and status['producer_capability_verified'] is False
+    assert all(status[n] is False for n in ('actual_kernel_identity_verified','role_bootstrap','run_authority','F_launch_admitted','scientific_evidence_adopted','formal_result'))
