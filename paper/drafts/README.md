@@ -1,5 +1,7 @@
 # 项目介绍与论文草稿
 
+2026-10-26 machinery单次取证已保存：见[最新交接](../../docs/plan/continuation_handoff_20261026_saved_fresh_machinery_diagnostic_v1.md)。唯一实测变化为Pyomo两个finder使meta_path由4项变6项，其余四类保持；小归档accepted，本scope10.4806011/18s、12文件/104128B。旧9条失败和组合存储超帽原样保留；下一步设计精确迁移，真实cold、actual F及科学/资源/正式门禁仍未闭合。
+
 2026-10-26 import policy冷导入WIP：见[最新交接](../../docs/plan/continuation_handoff_20261026_saved_fresh_import_policy_cold_v1.md)。真实normal已暴露post-import commit过期，最小修复后42项逻辑测试通过；修后cold三case与import machinery差异仍未闭合。9条失败/准备记录及原120/420/540账全部保留，归档因组合存储超帽挂绝，终账见WIP checkpoint；actual F及科学/资源/正式门禁仍false。
 
 2026-10-26 wire剩余8个data API已开发：stage／五类failure／JSONL／binding／两return／diagnostic在当前Source完成164新＋51原wire共215目标节点验证；原480只保留冻结epoch。原540s账和三次不接受记录继续保留；真实producer、actual F及科学/资源/正式门禁仍OPEN/false。 [handoff](../../docs/plan/continuation_handoff_20261026_saved_fresh_wire_completion.md)
