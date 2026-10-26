@@ -1,0 +1,95 @@
+"""Three ordinary fresh imports; exact Windows transport, no solver or role owner."""
+import importlib.util
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+OUT=Path(__file__).resolve().parent;ROOT=OUT.parents[3]
+EXE='D:\\Miniconda3\\envs\\compute\\python.exe'
+def raw(v):return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+def child(case):
+    plan_name='admission_repair.json' if (OUT/'collection_repair.exit.json').exists() else 'admission.json'
+    plan=json.loads((OUT/plan_name).read_bytes());policy_raw=(OUT/'import_policy.json').read_bytes();profile=json.loads(policy_raw)
+    counts=dict(P1_open=0,actual_F_open=0,write_attempts=0,mutation_attempts=0,unexpected_process=0,optional_seen=0,lifecycle_injections=0,function_mutation_audit_events=0)
+    roots={k:os.path.normcase(os.path.abspath(v)) for k,v in profile['protected_open_roots'].items()}
+    target_fn=None;injected=False;assignment_rejected=False;function_unchanged=None
+    def audit(event,args):
+        nonlocal target_fn,injected,assignment_rejected,function_unchanged
+        if case=='blocked_installation' and event=='sys.addaudithook':raise RuntimeError('fixed hook installation denial')
+        if event=='electricity_grid.saved_import.after_dependency_import' and case=='caught_effect' and not injected:
+            injected=True;counts['lifecycle_injections']+=1
+            target_fn=sys.modules['pyomo.common.deprecation'].MovedModuleFinder.find_spec;original=target_fn.__code__
+            try:target_fn.__code__=original
+            except module.SavedSuccessorImportRejected:assignment_rejected=True
+            function_unchanged=target_fn.__code__ is original
+        if event=='object.__setattr__' and target_fn is not None and args[0] is target_fn and args[1]=='__code__':counts['function_mutation_audit_events']+=1
+        if event in profile['process_events'] or event.startswith(tuple(profile['process_event_prefixes'])):
+            if event=='subprocess.Popen' and tuple(args)==(None,'lscpu',None,None):counts['optional_seen']+=1
+            else:counts['unexpected_process']+=1;raise AssertionError('cold unlisted process event')
+        if event in profile['mutation_events']:counts['mutation_attempts']+=1;raise AssertionError('cold filesystem mutation')
+        if event=='open':
+            path,mode,flags=args[:3]
+            if isinstance(path,(str,bytes,os.PathLike)):
+                target=os.path.normcase(os.path.abspath(os.fsdecode(path)))
+                for key,root in roots.items():
+                    if target==root or target.startswith(root+os.sep):counts[key+'_open']+=1;raise AssertionError('cold protected open')
+            if type(mode) is str and any(c in mode for c in 'wax+') or type(flags) is int and flags&(os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND):
+                counts['write_attempts']+=1;raise AssertionError('cold write')
+    sys.addaudithook(audit);sys.path.insert(0,str(ROOT))
+    entry=ROOT/'experiments/staged_rts24_saved_fresh_adoption_v1.py'
+    spec=importlib.util.spec_from_file_location('_successor_import_entry',entry);module=importlib.util.module_from_spec(spec);sys.modules[spec.name]=module;spec.loader.exec_module(module)
+    boundary=None;returned=False;error_type=None;details=[]
+    try:
+        adapter,boundary=module.load_saved_successor_dependencies(plan['source_pins'],policy_raw);returned=True
+    except BaseException as error:
+        error_type=type(error).__name__;boundary=getattr(error,'boundary',None)
+        def detail(label,caught):
+            frames=[];tb=None if caught is None else caught.__traceback__
+            while tb is not None:
+                if tb.tb_frame.f_code.co_filename==str(entry):frames.append([tb.tb_frame.f_code.co_name,tb.tb_lineno])
+                tb=tb.tb_next
+            return dict(label=label,error_type=None if caught is None else type(caught).__name__,entry_frames=frames)
+        details=[detail('primary',getattr(error,'primary',None))]+[detail(label,caught) for label,caught in getattr(error,'cleanup',())]
+    report=None if boundary is None else json.loads(boundary.report_raw)
+    result=dict(authority='DRAFT_NONAUTHORITATIVE',case=case,loader_returned=returned,error_type=error_type,boundary=report,counts=counts,failure_details=details,
+        function_assignment_rejected=assignment_rejected,function_code_unchanged=function_unchanged,
+        scientific_API_calls_instrumented=False,actual_F=False,run_authority=False,resource_admission=False,formal_result=False)
+    print(json.dumps(result,sort_keys=True),flush=True)
+    assert report is not None and not report['hook_active'] and all(counts[n]==0 for n in ('P1_open','actual_F_open','write_attempts','mutation_attempts','unexpected_process'))
+    if case=='normal':
+        assert returned and report['phase']=='CLOSED' and report['machinery_observed_stage']==report['machinery_authenticated_stage']==2
+        assert report['source49_bookend_equal'] and report['finder_function_metadata_bookend_verified'] and report['optional_Popen_attempts']==report['blocked_optional_attempts']==1 and report['internal_introspection_events']==6
+        raise SystemExit(0)
+    assert not returned and error_type=='SavedSuccessorImportUnresolved' and report['phase']=='FAULTED'
+    if case=='caught_effect':
+        assert assignment_rejected and function_unchanged and counts['function_mutation_audit_events']==counts['lifecycle_injections']==1
+        assert report['fault_kind']=='finder_function_mutation' and report['violations']==1 and report['machinery_authenticated_stage']==2
+    else:assert report['installation_sentinel_observed']==report['optional_Popen_attempts']==0
+    raise SystemExit(1)
+def parent():
+    spec=importlib.util.spec_from_file_location('transition_capture_support',OUT/'capture.py');support=importlib.util.module_from_spec(spec);spec.loader.exec_module(support)
+    cases=('normal','caught_effect','blocked_installation');allowed=[[EXE,'-B','-s',str(Path(__file__).resolve()),'--child',case] for case in cases];launches=[]
+    def audit(event,args):
+        if event=='subprocess.Popen':
+            assert len(launches)<3 and args[0]==EXE and args[1]==subprocess.list2cmdline(allowed[len(launches)]) and str(args[2])==str(ROOT) and args[3] is None
+            launches.append(True)
+    sys.addaudithook(audit);deadline=time.perf_counter()+25
+    for case,argv in zip(cases,allowed):
+        remaining=min(2.5 if case=='blocked_installation' else 10.,deadline-time.perf_counter()-.4)
+        code,stdout,stderr,error,state=support.bounded(argv,remaining)
+        child_record=None
+        try:child_record=json.loads(stdout)
+        except ValueError:pass
+        accepted=code==(0 if case=='normal' else 1) and error is None and not stderr and child_record is not None and child_record['case']==case and state['handle_closed'] and not state['cleanup']
+        row=dict(authority='DRAFT_NONAUTHORITATIVE',case=case,accepted=accepted,argv=argv,returncode=code,error=error,process_observation=state,
+            stdout_pin=support.pin(stdout),stderr_pin=support.pin(stderr),child_record=child_record,actual_F=False,run_authority=False,resource_admission=False,formal_result=False)
+        for suffix,payload in (('stdout.log',stdout),('stderr.log',stderr),('json',raw(row))):
+            with (OUT/('cold_'+case+'.'+suffix)).open('xb') as stream:stream.write(payload)
+        print(json.dumps(dict(case=case,accepted=accepted,returncode=code,error=error),sort_keys=True))
+        assert accepted
+    assert launches==[True,True,True]
+if __name__=='__main__':
+    if sys.argv[1:2]==['--child']:child(sys.argv[2])
+    else:parent()

@@ -6085,7 +6085,7 @@ class SavedSuccessorImportUnresolved(RuntimeError):
 
 
 def _saved_import_inputs(policy_raw):
-    require(type(policy_raw) is bytes and len(policy_raw)==2881 and sha256(policy_raw).hexdigest()=='5eb240e21709d154b7bb17ebcee7947c6300b0108cb147dbb40669744d8e7da7','fixed import input policy required')
+    require(type(policy_raw) is bytes and len(policy_raw)==3797 and sha256(policy_raw).hexdigest()=='1010bb4d10f29551ea3c4cdd639697ade004321fe70dcec0efe422e1b128acb9','fixed import input policy required')
     profile=parse(policy_raw)
     require(Path(sys.executable).absolute()==Path(profile['executable_path']) and sys.version==profile['python']
         and sys.dont_write_bytecode is True and sys.flags.optimize==0,'pinned import runtime and -B required')
@@ -6093,6 +6093,45 @@ def _saved_import_inputs(policy_raw):
     expected={profile['executable_path']:profile['executable_pin'],**profile['external_sources']}
     require({name:pin(value) for name,value in data.items()}==expected,'import external source/runtime pin differs')
     return data
+
+
+def _saved_import_finder_plan(data,profile):
+    """Compile fixed sources without executing them; all returned plan rows are tuples."""
+    import ast
+    result=[]
+    for rule in profile['machinery_transition']['finders']:
+        path=next(p for p in data if p.replace('\\','/').endswith('/pyomo/common/'+rule['module'].rsplit('.',1)[1]+'.py'))
+        tree=ast.parse(data[path]);unit=compile(data[path],path,'exec',dont_inherit=True,optimize=0)
+        def methods(node,code):
+            values=[]
+            for fn in node.body:
+                if type(fn) is not ast.FunctionDef:continue
+                require(not fn.decorator_list and not fn.args.kwonlyargs and fn.args.vararg is None and fn.args.kwarg is None,'fixed finder method signature required')
+                require(all(type(d) is ast.Constant and d.value is None for d in fn.args.defaults),'fixed finder defaults required')
+                candidates=[c for c in code.co_consts if type(c) is CodeType and c.co_name==fn.name]
+                require(len(candidates)==1,'unique fixed finder method required')
+                values.append((fn.name,candidates[0],len(fn.args.defaults)))
+            return tuple(values)
+        classes=[]
+        for name in (rule['finder'],rule['loader']):
+            nodes=[n for n in tree.body if type(n) is ast.ClassDef and n.name==name]
+            codes=[c for c in unit.co_consts if type(c) is CodeType and c.co_name==name]
+            require(len(nodes)==len(codes)==1 and not nodes[0].bases and not nodes[0].decorator_list and not nodes[0].keywords,'fixed plain finder class required')
+            registry=rule['registry'] if name==rule['finder'] else None
+            assigned=[n for n in nodes[0].body if type(n) is ast.Assign]
+            require((not assigned) if registry is None else len(assigned)==1 and len(assigned[0].targets)==1
+                and type(assigned[0].targets[0]) is ast.Name and assigned[0].targets[0].id==registry
+                and type(assigned[0].value) is ast.Dict and not assigned[0].value.keys,'fixed finder registry definition required')
+            classes.append((name,ast.get_docstring(nodes[0],clean=False),registry,methods(nodes[0],codes[0])))
+        extra=[]
+        if rule['tag']=='M':
+            fn=next(n for n in tree.body if type(n) is ast.FunctionDef and n.name=='deprecation_warning')
+            code=next(c for c in unit.co_consts if type(c) is CodeType and c.co_name==fn.name)
+            require(not fn.decorator_list and all(type(d) is ast.Constant and d.value is None for d in fn.args.defaults),'fixed warning binding required')
+            extra.append((fn.name,code,len(fn.args.defaults)))
+        result.append((rule['tag'],rule['module'],path,rule['finder'],rule['loader'],rule['registry'],rule['singleton'],tuple(classes),tuple(extra)))
+    require(tuple(r[0] for r in result)==('M','D'),'fixed finder order required')
+    return tuple(result)
 
 
 @dataclass(frozen=True,init=False,eq=False,repr=False,slots=True)
@@ -6112,6 +6151,12 @@ class SavedSuccessorImportBoundary:
     _paths: tuple
     _event_sets: tuple
     _import_machinery: tuple
+    _machinery_base: tuple
+    _finder_plan: tuple
+    _finder_bindings: tuple
+    _finder_authenticated: tuple
+    _observed_stage: int
+    _authenticated_stage: int
     _state: tuple
     _internal: object
     _busy: bool
@@ -6131,6 +6176,7 @@ class SavedSuccessorImportBoundary:
             tuple((n,id(fn),id(code),id(defaults),pin(kw),id(closure)) for n,fn,code,defaults,kw,closure in self._own_bindings),
             self._owner_commit,id(self._lock),tuple(id(code) for code in self._codes),self._numpy_path,
             None if self._numpy_state is None else (id(self._numpy_state[0]),self._numpy_state[1]),self._paths,self._event_sets,self._import_machinery,
+            id(self._machinery_base),id(self._finder_plan),id(self._finder_bindings),id(self._finder_authenticated),self._observed_stage,self._authenticated_stage,
             self._state,id(self._adapter),tuple((n,id(fn),id(code)) for n,fn,code in self._adapter_bindings),
             pin(self._source_raw) if self._source_raw is not None else None,id(self._failure),id(self._first_error),id(self._req))
     def _set(self,**changes):
@@ -6142,17 +6188,112 @@ class SavedSuccessorImportBoundary:
         self._req(creator==self._creator and self._owner_commit==digest((creator,id(callback),id(code),id(token))),
             'import guard ownership changed')
         return creator,callback,token
+    def _finder_class_shape(self,cls,spec):
+        name,doc,registry,methods=spec
+        self._req(type(cls) is type and cls.__bases__==(object,) and cls.__name__==cls.__qualname__==name,'fixed finder class differs')
+        namespace=vars(cls);expected={'__module__','__doc__','__dict__','__weakref__',*(m[0] for m in methods)}
+        if registry is not None:expected.add(registry)
+        self._req(set(namespace) in (expected,expected|{'__qualname__'}) and namespace['__doc__']==doc,'fixed finder class fields differ')
+        functions=tuple((name,namespace[name]) for name,code,count in methods)
+        self._req(all(type(fn) is FunctionType for name,fn in functions),'fixed finder functions required')
+        return functions
+    def _hold_finder(self,plan,finder):
+        tag,module_name,path,finder_name,loader_name,registry_name,singleton,classes,extra=plan
+        module=sys.modules.get(module_name)
+        self._req(type(module) is ModuleType,'fixed finder module required');namespace=vars(module)
+        self._req(type(namespace.get('__file__')) is str and Path(namespace['__file__']).absolute()==Path(path),'fixed finder module path differs')
+        cls=namespace.get(finder_name)
+        self._req(type(finder) is cls and type(vars(finder)) is dict and not vars(finder),'exact empty finder instance required')
+        held=[]
+        for spec in classes:
+            current=namespace.get(spec[0]);functions=self._finder_class_shape(current,spec)
+            self._req(vars(current)['__module__']==module_name,'fixed finder class module differs')
+            held.append((spec,current,functions))
+        registry=vars(cls)[registry_name];self._req(type(registry) is dict,'finder registry object required')
+        names=('sys','importlib',finder_name,loader_name)+(('NOTSET','deprecation_warning') if tag=='M' else (singleton,))
+        self._req(all(n in namespace for n in names) and namespace['sys'] is sys and namespace['importlib'] is self._machinery_base[8],'finder globals differ')
+        if singleton is not None:self._req(namespace[singleton] is finder,'finder singleton differs')
+        return (plan,module,namespace,finder,registry,tuple(held),tuple((n,namespace[n]) for n in names))
+    def _check_finder_structure(self,binding):
+        plan,module,namespace,finder,registry,classes,globals_held=binding
+        self._req(sys.modules.get(plan[1]) is module and vars(module) is namespace,'finder module identity differs')
+        self._req(type(namespace.get('__file__')) is str and Path(namespace['__file__']).absolute()==Path(plan[2]),'finder module path changed')
+        self._req(type(finder) is classes[0][1] and type(vars(finder)) is dict and not vars(finder),'finder instance changed')
+        self._req(vars(type(finder)).get(plan[5]) is registry,'finder registry identity changed')
+        for name,value in globals_held:self._req(namespace.get(name) is value,'finder global identity changed')
+        for spec,cls,functions in classes:
+            self._req(namespace.get(spec[0]) is cls and vars(cls)['__module__']==plan[1],'finder class identity changed')
+            current=self._finder_class_shape(cls,spec)
+            self._req(all(n==m and fn is original for (n,fn),(m,original) in zip(current,functions)),'finder method identity changed')
+    def _observe_machinery(self):
+        try:
+            base=self._machinery_base
+            self._req(sys.meta_path is base[3] and sys.path_hooks is base[4] and sys.path is base[5]
+                and sys.path_importer_cache is base[6] and sys.modules is base[7],'machinery container changed')
+            self._req(tuple(map(id,sys.path_hooks))==tuple(map(id,base[1])) and tuple(sys.path)==base[2],'machinery hooks/path changed')
+            live=tuple(sys.meta_path);original=base[0];stage=self._observed_stage
+            same=lambda a,b:len(a)==len(b) and all(x is y for x,y in zip(a,b))
+            expected=original if stage==0 else (*original,self._finder_bindings[0][3]) if stage==1 else (self._finder_bindings[1][3],*original,self._finder_bindings[0][3])
+            if not same(live,expected):
+                if stage==0 and len(live)==len(original)+1 and same(live[:-1],original):
+                    binding=self._hold_finder(self._finder_plan[0],live[-1])
+                    object.__setattr__(self,'_finder_bindings',(binding,));object.__setattr__(self,'_observed_stage',1);self._set()
+                elif stage==1 and len(live)==len(original)+2 and same(live[1:-1],original) and live[-1] is self._finder_bindings[0][3]:
+                    binding=self._hold_finder(self._finder_plan[1],live[0])
+                    object.__setattr__(self,'_finder_bindings',(*self._finder_bindings,binding));object.__setattr__(self,'_observed_stage',2);self._set()
+                else:self._fault('machinery_sequence')
+            for binding in self._finder_bindings:self._check_finder_structure(binding)
+        except SavedSuccessorImportRejected:raise
+        except BaseException as error:self._fault('machinery_binding',error)
+    def _check_finder_authentication(self):
+        try:
+            if self._busy:self._fault('finder_authentication_busy')
+            self._req(self._authenticated_stage in (0,2),'finder authentication stage differs')
+            if self._authenticated_stage==0:
+                self._req(not self._finder_authenticated,'pending finder code bindings differ');return
+            self._req(self._observed_stage==2 and self._finder_authenticated,'authenticated finder sequence differs')
+            for fn,code,defaults,namespace,expected,count in self._finder_authenticated:
+                self._req(fn.__globals__ is namespace and fn.__code__ is code and code==expected and fn.__defaults__ is defaults
+                    and (defaults is None if count==0 else type(defaults) is tuple and defaults==(None,)*count)
+                    and fn.__kwdefaults__ is None and fn.__closure__ is None,'authenticated finder function changed')
+        except SavedSuccessorImportRejected:raise
+        except BaseException as error:self._fault('finder_authentication',error)
+    def authenticate_machinery(self):
+        """Called once by the loader outside the audit callback, after dependency import."""
+        if self._state[6]:raise ValueError('terminal import authentication cannot restart')
+        try:
+            self._req(not self._busy and self._state[0]=='ACTIVE','active non-audit finder authentication required')
+            self._audit_entry();self._req(self._observed_stage==2 and self._authenticated_stage==0,'complete pending finder transition required')
+            authenticated=[]
+            for plan,module,namespace,finder,registry,classes,globals_held in self._finder_bindings:
+                for spec,cls,functions in classes:
+                    for (name,fn),(expected_name,expected,count) in zip(functions,spec[3]):
+                        self._req(name==expected_name and fn.__globals__ is namespace and fn.__code__==expected
+                            and (fn.__defaults__ is None if count==0 else type(fn.__defaults__) is tuple and fn.__defaults__==(None,)*count)
+                            and fn.__kwdefaults__ is None and fn.__closure__ is None,'fixed finder source function differs')
+                        authenticated.append((fn,fn.__code__,fn.__defaults__,namespace,expected,count))
+                for name,expected,count in plan[8]:
+                    fn=namespace[name]
+                    self._req(type(fn) is FunctionType and fn.__globals__ is namespace and fn.__code__==expected
+                        and (fn.__defaults__ is None if count==0 else type(fn.__defaults__) is tuple and fn.__defaults__==(None,)*count)
+                        and fn.__kwdefaults__ is None and fn.__closure__ is None,'fixed finder global function differs')
+                    authenticated.append((fn,fn.__code__,fn.__defaults__,namespace,expected,count))
+            object.__setattr__(self,'_finder_authenticated',tuple(authenticated));object.__setattr__(self,'_authenticated_stage',2);self._set()
+            self._check_finder_authentication();return self
+        except SavedSuccessorImportRejected:raise
+        except BaseException as error:self._fault('finder_authentication',error)
     def _audit_entry(self):
         for name,value,*_ in self._global_bindings:self._req(self._namespace.get(name) is value,'import module binding changed')
         for module,name,value in self._attribute_bindings:self._req(getattr(module,name) is value,'import system binding changed')
         self._ownership()
         self._req(self._creator==(os.getpid(),get_ident()) and self._commit==digest(self._image()),'original import guard required')
+        self._observe_machinery()
         return self
     def _entry(self):
         self._audit_entry()
         self._req(self._owner[1].__code__ is self._owner[3],'import callback changed')
-        self._req(len(self._profile_raw)==2881 and sha256(self._profile_raw).hexdigest()=='5eb240e21709d154b7bb17ebcee7947c6300b0108cb147dbb40669744d8e7da7','fixed import policy changed')
-        self._req((tuple(map(id,sys.meta_path)),tuple(map(id,sys.path_hooks)),tuple(sys.path),id(sys.path_importer_cache),id(sys.modules))==self._import_machinery,'import machinery bookend differs')
+        self._req(len(self._profile_raw)==3797 and sha256(self._profile_raw).hexdigest()=='1010bb4d10f29551ea3c4cdd639697ade004321fe70dcec0efe422e1b128acb9','fixed import policy changed')
+        self._check_finder_authentication()
         for name,fn,code,defaults,kw,closure in self._global_bindings:
             self._req(self._namespace.get(name) is fn,'import module binding changed')
             if code is not None:self._req(fn.__code__ is code and fn.__defaults__ is defaults and canonical(fn.__kwdefaults__)==kw and fn.__closure__ is closure,'import helper changed')
@@ -6200,7 +6341,10 @@ class SavedSuccessorImportBoundary:
     def _audit(self,event,args,token):
         if not self._state[1]:return
         process,process_prefixes,mutations=self._event_sets
-        selected=event in process or event.startswith(process_prefixes) or event in mutations or event=='open'
+        function_mutation=event in ('object.__setattr__','object.__delattr__') and len(args)>=2 and type(args[0]) is FunctionType and type(args[1]) is str and args[1] in ('__code__','__defaults__','__kwdefaults__') and any(
+            args[0] is value for binding in self._finder_bindings for value in (
+                *(fn for spec,cls,functions in binding[5] for name,fn in functions),*(value for name,value in binding[6])))
+        selected=event in process or event.startswith(process_prefixes) or event in mutations or event=='open' or function_mutation
         internal_event=event in ('object.__getattr__','sys._getframe')
         sentinel_event=event=='electricity_grid.saved_import.installation'
         if not (selected or sentinel_event or self._busy and internal_event):return
@@ -6214,6 +6358,7 @@ class SavedSuccessorImportBoundary:
             object.__setattr__(self,'_busy',True)
             try:
                 self._audit_entry()
+                if function_mutation:self._fault('finder_function_mutation')
                 if sentinel_event:
                     if self._state[0]!='INSTALLING' or len(args)!=1 or args[0] is not token or self._state[3]!=0:self._fault('installation_sentinel')
                     self._set(sentinel=1);return
@@ -6249,7 +6394,7 @@ class SavedSuccessorImportBoundary:
                 except BaseException as error:errors.append(('external_bookend',error))
             if set(sys._current_frames())!={creator[1]}:errors.append(('threads',ValueError('extra Python import thread')))
             if sys.getprofile() is not None or sys.gettrace() is not None:errors.append(('tracing',ValueError('import profile/trace remained active')))
-            if self._state[2:5]!=(1,1,0) or self._state[0]!='ACTIVE' or self._numpy_state is None:errors.append(('policy_terminal',ValueError('import policy did not complete')))
+            if self._state[2:5]!=(1,1,0) or self._state[0]!='ACTIVE' or self._numpy_state is None or self._observed_stage!=2 or self._authenticated_stage!=2:errors.append(('policy_terminal',ValueError('import policy did not complete')))
             if self._first_error is not None and self._first_error is not primary:errors.insert(0,('audit_primary',self._first_error))
             failed=primary is not None or bool(errors)
             if failed:object.__setattr__(self,'_failure',SavedSuccessorImportUnresolved(self,primary,errors))
@@ -6263,6 +6408,11 @@ class SavedSuccessorImportBoundary:
             installation_sentinel_observed=self._state[3],violations=self._state[4],internal_introspection_events=self._state[5],
             forced_numpy_SVE_false=self._state[2]==1 and self._numpy_state is not None and self._numpy_state[1] is False,fault_kind=self._state[7],callback_retained=True,hook_installation_observed=self._state[3]==1,hook_active=self._state[1],
             import_boundary_completed=self._state[0]=='CLOSED',source49_bookend_equal=self._source_raw is not None and self._state[0]=='CLOSED',
+            machinery_observed_stage=self._observed_stage,machinery_authenticated_stage=self._authenticated_stage,
+            machinery_authentication_pending=self._observed_stage!=self._authenticated_stage,
+            finder_registry_contents_verified=False,finder_behavior_closure_verified=False,unobserved_RAM_ABA_verified=False,
+            finder_function_metadata_bookend_verified=self._authenticated_stage==2 and self._state[0]=='CLOSED',
+            finder_function_mutation_guard_installed=self._state[3]==1,baseline_root_authenticated=False,
             source49_expected_truth_bound_by_import_boundary=False,cold_main_self_anchor_verified=False,independent_root_verified=False,
             full_runtime_binding_verified=False,actual_filesystem_alias_verified=False,arbitrary_native_effects_verified=False,
             full_P1_content_verified=False,role_bootstrap=False,permit_issued=False,actual_F=False,run_authority=False,
@@ -6276,20 +6426,26 @@ _SAVED_SUCCESSOR_IMPORT_ATTEMPTED=False
 def open_saved_successor_import_boundary(policy_raw):
     global _SAVED_SUCCESSOR_IMPORT_ATTEMPTED
     require(_SAVED_SUCCESSOR_IMPORT_ATTEMPTED is False,'single successor import attempt required');_SAVED_SUCCESSOR_IMPORT_ATTEMPTED=True
-    require(type(policy_raw) is bytes and len(policy_raw)==2881 and sha256(policy_raw).hexdigest()=='5eb240e21709d154b7bb17ebcee7947c6300b0108cb147dbb40669744d8e7da7','fixed import policy raw differs')
+    require(type(policy_raw) is bytes and len(policy_raw)==3797 and sha256(policy_raw).hexdigest()=='1010bb4d10f29551ea3c4cdd639697ade004321fe70dcec0efe422e1b128acb9','fixed import policy raw differs')
     profile=parse(policy_raw)
     require(sys.getprofile() is None and sys.gettrace() is None,'unprofiled dependency import required')
     require(not any(name==p or name.startswith(p+'.') for name in sys.modules for p in profile['required_cold_prefixes']),'dependency import must be cold')
     require(set(sys._current_frames())=={get_ident()},'single Python import thread required')
+    require(type(sys.meta_path) is list and len(sys.meta_path)==4 and type(sys.path_hooks) is list and type(sys.path) is list
+        and all(type(p) is str for p in sys.path),'fixed baseline machinery shape required')
     data=_saved_import_inputs(policy_raw)
+    finder_plan=_saved_import_finder_plan(data,profile)
     from threading import RLock
+    import importlib
+    from importlib import util,machinery
     guard=object.__new__(SavedSuccessorImportBoundary);token=object()
     def audit_hook(event,args):guard._audit(event,args,token)
     creator=(os.getpid(),get_ident());namespace=globals();bindings=[]
-    for name in ('sys','os','subprocess','get_ident','ROOT','EXE','read','pin','require','sha256','digest','Path','canonical','source_names','source_pins','ordinary','directories','identity','parse','keys','_saved_import_inputs'):
+    for name in ('sys','os','subprocess','get_ident','ROOT','EXE','read','pin','require','sha256','digest','Path','canonical','source_names','source_pins','ordinary','directories','identity','parse','keys','_saved_import_inputs','_saved_import_finder_plan','ModuleType','FunctionType','CodeType'):
         value=namespace[name];function=type(value) is FunctionType
         bindings.append((name,value,value.__code__ if function else None,value.__defaults__ if function else None,canonical(value.__kwdefaults__) if function else None,value.__closure__ if function else None))
-    attrs=[(sys,n,getattr(sys,n)) for n in ('addaudithook','audit','getprofile','gettrace','setprofile','settrace','modules','_current_frames','meta_path','path_hooks','path_importer_cache','version','executable','dont_write_bytecode')]+[(sys.modules['builtins'],'__import__',sys.modules['builtins'].__import__)]
+    attrs=[(sys,n,getattr(sys,n)) for n in ('addaudithook','audit','getprofile','gettrace','setprofile','settrace','modules','_current_frames','meta_path','path_hooks','path','path_importer_cache','version','executable','dont_write_bytecode')]+[(sys.modules['builtins'],'__import__',sys.modules['builtins'].__import__)]
+    attrs.extend((module,name,getattr(module,name)) for module,names in ((importlib,('util','machinery','import_module')),(util,('find_spec','spec_from_loader')),(machinery,('ModuleSpec',))) for name in names)
     own=tuple((name,value,value.__code__,value.__defaults__,canonical(value.__kwdefaults__),value.__closure__) for name,value in vars(SavedSuccessorImportBoundary).items() if type(value) is FunctionType)
     units={path:compile(raw,path,'exec',dont_inherit=True,optimize=0) for path,raw in data.items() if path.endswith('.py')}
     pool=[]
@@ -6306,6 +6462,8 @@ def open_saved_successor_import_boundary(policy_raw):
             _paths=tuple(os.path.normcase(os.path.abspath(v)) for v in profile['protected_open_roots'].values()),
             _event_sets=(tuple(profile['process_events']),tuple(profile['process_event_prefixes']),tuple(profile['mutation_events'])),
             _import_machinery=(tuple(map(id,sys.meta_path)),tuple(map(id,sys.path_hooks)),tuple(sys.path),id(sys.path_importer_cache),id(sys.modules)),
+            _machinery_base=(tuple(sys.meta_path),tuple(sys.path_hooks),tuple(sys.path),sys.meta_path,sys.path_hooks,sys.path,sys.path_importer_cache,sys.modules,importlib,util,machinery),
+            _finder_plan=finder_plan,_finder_bindings=(),_finder_authenticated=(),_observed_stage=0,_authenticated_stage=0,
             _state=('NEW',True,0,0,0,0,False,''),_internal=None,_busy=False,_adapter=None,_adapter_bindings=(),_source_raw=None,
             _failure=None,_first_error=None,_req=require).items():object.__setattr__(guard,name,value)
     object.__setattr__(guard,'_commit',digest(guard._image()));guard._set(phase='INSTALLING')
@@ -6322,6 +6480,7 @@ def load_saved_successor_dependencies(expected_sources,policy_raw):
         expected_raw=canonical(expected_sources)
         require(canonical(source_pins())==expected_raw,'caller-held source bookend differs before import')
         from src import staged_rts24_saved_fresh_adoption_v1 as adapter
+        guard.authenticate_machinery()
         numpy_module=sys.modules.get('numpy.testing._private.utils')
         require(type(numpy_module) is ModuleType and Path(numpy_module.__file__).absolute()==Path(guard._numpy_path)
             and numpy_module._SUPPORTS_SVE is False,'actual NumPy CPU fallback value differs')

@@ -1,0 +1,344 @@
+{
+  "actual_F": false,
+  "admission_written_by_collection_finish_before_test_calls": true,
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "caps": {
+    "pytest_repair": 25
+  },
+  "controls_pins": {
+    "results/tables/staged_rts24_saved_fresh_machinery_transition_v1_non_authoritative/checks_01/baseline.json": {
+      "bytes": 12034,
+      "sha256": "911576eaaea89183400ef4bf8660175ca6e13ff48c8079b89a5b998ebeb44597"
+    },
+    "results/tables/staged_rts24_saved_fresh_machinery_transition_v1_non_authoritative/checks_01/import_policy.json": {
+      "bytes": 3797,
+      "sha256": "1010bb4d10f29551ea3c4cdd639697ade004321fe70dcec0efe422e1b128acb9"
+    },
+    "results/tables/staged_rts24_saved_fresh_machinery_transition_v1_non_authoritative/checks_01/revision.json": {
+      "bytes": 9222,
+      "sha256": "fe0553d9c597f8998797fd7e214ba7efce93d5ef72852429eed32de087e0a59e"
+    },
+    "results/tables/staged_rts24_saved_fresh_machinery_transition_v1_non_authoritative/checks_01/revision_02.json": {
+      "bytes": 4428,
+      "sha256": "90c601edf2465cfab55bb2828887e7d511589d136a5ce91c5c41a088f2429b1d"
+    }
+  },
+  "current_targeted_nodes": 94,
+  "formal_result": false,
+  "groups": {
+    "pytest_repair": [
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_listed_effects_sticky[subprocess.Popen-args0]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_listed_effects_sticky[os.system-args1]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_listed_effects_sticky[os.exec-args2]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_listed_effects_sticky[os.posix_spawn-args3]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_listed_effects_sticky[os.fork-args4]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_listed_effects_sticky[os.startfile-args5]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_listed_effects_sticky[_winapi.CreateProcess-args6]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_listed_effects_sticky[pty.spawn-args7]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_listed_effects_sticky[os.rename-args8]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_listed_effects_sticky[os.mkdir-args9]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_listed_effects_sticky[open-args10]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_listed_effects_sticky[open-args11]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_fixed_paths_survive_global_replacement[P1]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_fixed_paths_survive_global_replacement[actual_F]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_installation_sentinel[valid]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_installation_sentinel[missing]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_installation_sentinel[duplicate]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_installation_sentinel[wrong_token]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_installation_sentinel[wrong_args]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_internal_introspection_is_narrow[valid]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_internal_introspection_is_narrow[object]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_internal_introspection_is_narrow[attribute]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_internal_introspection_is_narrow[duplicate]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_internal_introspection_is_narrow[process]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_internal_introspection_is_narrow[getframe]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_helper_rebinding_rejects[read]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_helper_rebinding_rejects[require]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_helper_rebinding_rejects[pin]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_helper_rebinding_rejects[source_pins]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_helper_rebinding_rejects[ROOT]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_cross_thread_faults",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_closed_local_result_never_opens_authority",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_factory_literal_and_single_attempt",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_persistent_trace_rejects[profile]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_persistent_trace_rejects[trace]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_fixed_external_hardlink_read_scope",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_external_reader_rejects_unpinned_domain[forged_dict]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_external_reader_rejects_unpinned_domain[extra_path]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_external_reader_rejects_unpinned_domain[external_policy]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_canonical_source_bookend[bool_alias]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_canonical_source_bookend[non_json_equality]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_adapter_commit_precedes_source_open",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_exact_machinery_stages",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_sequence_faults[replace_m]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_sequence_faults[replace_d]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_sequence_faults[replace_base]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_sequence_faults[extra]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_sequence_faults[duplicate_m]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_sequence_faults[delete_m]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_sequence_faults[delete_d]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_sequence_faults[reorder_base]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_sequence_faults[rollback_m]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_sequence_faults[rollback_base]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_sequence_faults[second_register]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_cannot_skip[skip]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_cannot_skip[d_first]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_cannot_skip[m_wrong_position]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_machinery_cannot_skip[wrong_m_type]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_pending_or_partial_close_rejects[0]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_pending_or_partial_close_rejects[1]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_pending_or_partial_close_rejects[2]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[module]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[class]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[singleton]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[registry_m]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[registry_d]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[sys]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[importlib]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[loader_class]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[loader_method]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[method_clone]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[module_file]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[instance_field]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[class_field]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[warning_function]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_bindings_reject[synchronized_m]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_code_bookend_rejects[code]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_code_bookend_rejects[equal_defaults]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_code_bookend_rejects[kwdefaults]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_code_bookend_rejects[closure]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_code_bookend_rejects[loader_code]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_finder_code_bookend_rejects[warning_defaults]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_pending_stage_keeps_effect_denial[process]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_pending_stage_keeps_effect_denial[write]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_pending_stage_keeps_effect_denial[mutation]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_pending_stage_keeps_effect_denial[P1]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_pending_stage_keeps_effect_denial[actual_F]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_registry_content_is_not_certified",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_observed_function_mutation_denied[object.__setattr__-__code__]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_observed_function_mutation_denied[object.__setattr__-__defaults__]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_observed_function_mutation_denied[object.__setattr__-__kwdefaults__]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_observed_function_mutation_denied[object.__delattr__-__code__]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_observed_function_mutation_denied[object.__delattr__-__defaults__]",
+      "tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_observed_function_mutation_denied[object.__delattr__-__kwdefaults__]"
+    ]
+  },
+  "helper_pins": {
+    "results/tables/staged_rts24_saved_fresh_machinery_transition_v1_non_authoritative/checks_01/capture.py": {
+      "bytes": 12148,
+      "sha256": "fe55cb029a7daf842f20673f3dd8a75a38efb906a5e8f0b9e20a3a3971f3858c"
+    },
+    "results/tables/staged_rts24_saved_fresh_machinery_transition_v1_non_authoritative/checks_01/cold.py": {
+      "bytes": 7716,
+      "sha256": "36d3a55a15ec94369dca815f11ea184aaa303ae355f1aef5c78973390db5ce4e"
+    },
+    "results/tables/staged_rts24_saved_fresh_machinery_transition_v1_non_authoritative/checks_01/oracle.py": {
+      "bytes": 13158,
+      "sha256": "8a3ac52fc92db3092ea4b3fd7e56242c1d019d32aff12d0ff7ccf891870d0a33"
+    },
+    "results/tables/staged_rts24_saved_fresh_machinery_transition_v1_non_authoritative/checks_01/pytest_harness.py": {
+      "bytes": 12685,
+      "sha256": "56d9cad51770e776ddf3a46cba6aaa60cafb3fa6ac35d330c37340960def36ae"
+    }
+  },
+  "run_authority": false,
+  "source_epoch": "acc4a25f3c1b2e59408a22394504b74223c9887016d42812b9dd1e61115e3875",
+  "source_pins": {
+    "configs/staged_deliverability_network_v1.DRAFT.yaml": {
+      "bytes": 915,
+      "sha256": "c6bb0cc30a330fed07a9d0b7f22dea7ce5096f20f1f58a8dc79dddc58059686b"
+    },
+    "configs/staged_deliverability_rts24_v1.DRAFT.yaml": {
+      "bytes": 1531,
+      "sha256": "6897979b6394a20b406031e9bcc8fadf5751c7815c996dc177956535679b7791"
+    },
+    "configs/staged_deliverability_small_case_v1.DRAFT.yaml": {
+      "bytes": 962,
+      "sha256": "5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5"
+    },
+    "docs/plan/staged_deliverability_c_saved_fresh_adoption_scope_budget_v1.md": {
+      "bytes": 23924,
+      "sha256": "a1aa2abdcfdbd15958f703088fa94ed79a17cd830b9f6d5a1571a5f75e6a4a98"
+    },
+    "docs/plan/staged_deliverability_c_saved_journal_check_contract_v1.md": {
+      "bytes": 6068,
+      "sha256": "55beecb99cb591354cd2bf97fb92a23cdac09a122256559cc0d0c79b9b16c356"
+    },
+    "docs/plan/staged_deliverability_c_saved_point_replay_contract_v1.md": {
+      "bytes": 4514,
+      "sha256": "e812bb03355a94187a12837293ec8fce6eab191fe836e9c8c60d63e16d512333"
+    },
+    "docs/plan/staged_deliverability_c_saved_prefix_replay_contract_v1.md": {
+      "bytes": 5933,
+      "sha256": "4b91dd0cf74cdc9a2dab6c9b013d42eff43d9a0133fa6b6b3886cb384d722c57"
+    },
+    "docs/plan/staged_deliverability_c_scientific_adoption_dag_v1.md": {
+      "bytes": 5719,
+      "sha256": "a55856ae0ca9b201ca7fe3c6ddafa842dc047a0ce9732495d66eea5b38495d16"
+    },
+    "experiments/staged_rts24_saved_fresh_adoption_v1.py": {
+      "bytes": 441013,
+      "sha256": "3bc91e1b3681c588ba73a44fad73357be60fc4aa2c925a89acdf8bf9d9b53348"
+    },
+    "src/__init__.py": {
+      "bytes": 38,
+      "sha256": "ad4caa31a8bd5d534f5c65b38b67a393b740a5efd947988f47e1b55642c4cfc0"
+    },
+    "src/grid/__init__.py": {
+      "bytes": 4412,
+      "sha256": "b2490e8dfc9a5727c475cdca757eeb7606bb1318993dd3d8b14240dbe94467ef"
+    },
+    "src/grid/ac_case.py": {
+      "bytes": 5231,
+      "sha256": "d0c8c8b8d37480a87edc17a3af54b62663dec6e8b9d56ee03e235bae6bb2bb91"
+    },
+    "src/grid/ac_restoration.py": {
+      "bytes": 16475,
+      "sha256": "59ba8af7047048e739f96c094373258bdb2548a6c2003a24939f2f3dfb5e0b74"
+    },
+    "src/grid/ac_validation.py": {
+      "bytes": 7527,
+      "sha256": "7e3488f966c979e103e436971b10996281c77e8c3a505e9103118baf3caf8a71"
+    },
+    "src/grid/chronological_dispatch.py": {
+      "bytes": 24444,
+      "sha256": "71d6c1da0e72942512810c651619c5cd73e915c3ac6d0d52684476d6133658ec"
+    },
+    "src/grid/contingency.py": {
+      "bytes": 6404,
+      "sha256": "7a08c582fe7113b8a43355ff4ab888dd6a334fb2c0e79d5da8cb7f03acfd03fb"
+    },
+    "src/grid/dc_opf.py": {
+      "bytes": 11996,
+      "sha256": "9e118d7e8c59e269274749a144654ea5a400e35c6b1cb371870329ff2601e827"
+    },
+    "src/grid/network_grid_need.py": {
+      "bytes": 37254,
+      "sha256": "ca4ae719c8e1c96d398af6912994937272e31f4a29f7d485c74e0836d2199170"
+    },
+    "src/grid/rts24.py": {
+      "bytes": 6109,
+      "sha256": "8c876b13fdc318ca98ab22309bae1aff0b8e56a12894f9aae98c84ed951eb8b5"
+    },
+    "src/grid/rts_gmlc.py": {
+      "bytes": 36900,
+      "sha256": "4180ab5ce86eb34a9de9e058ff9c56275ace3a6ffab06dbb464d93ef23382448"
+    },
+    "src/grid/rts_gmlc_scuc.py": {
+      "bytes": 82493,
+      "sha256": "1101b21cbdab0cdacd6755578208ce7d28cd3e6e04f932d397119a4dde2b6cfe"
+    },
+    "src/grid/scopf.py": {
+      "bytes": 18944,
+      "sha256": "cdd456ace5f704f31a80fab1c95dba272810cc815ffb6a4c71516e079982eb84"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/__init__.py": {
+      "bytes": 74,
+      "sha256": "23dcf6e6cc99671101ae4e4c05602f5345aae114aa011b89511839c208a33856"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/debt_cohorts.py": {
+      "bytes": 6483,
+      "sha256": "d10497c1e6ab5ff573dec8d938b5407a7e28277551b37a1e0d7f79b4241adaab"
+    },
+    "src/rq2_joint_deliverability_boundary_v1/normal_process.py": {
+      "bytes": 13559,
+      "sha256": "ffc487c05c72d00a7c2e8d7515a29f16a3d0c8ac3f0efa6cdba36bbcea34d44f"
+    },
+    "src/staged_deliverability_development_v1.py": {
+      "bytes": 19642,
+      "sha256": "91bbc6aaaac458c8fcb23c11d830a98af99e1d50d42b3c0489246ec1922109e0"
+    },
+    "src/staged_rts24_audit_v1.py": {
+      "bytes": 13053,
+      "sha256": "ac29e1fe38831b7f37fbd56ab7ceafc8d87a619c5c1ba929004f907e21aab911"
+    },
+    "src/staged_rts24_causal_audit_v2.py": {
+      "bytes": 13435,
+      "sha256": "3344d346efc62b1bef8cbeab470eb3696a9818c4f452465394ab33806baf28d3"
+    },
+    "src/staged_rts24_causal_v1.py": {
+      "bytes": 19309,
+      "sha256": "12950e9f0ac321e7297b66aba42efb9e486e477869d767e40cd841665a7b0ead"
+    },
+    "src/staged_rts24_causal_v2.py": {
+      "bytes": 11081,
+      "sha256": "7d22dba435d3e89bd3062a1bd687a6584bb7ddc29c88b6bd723fa357932d1859"
+    },
+    "src/staged_rts24_child_optimality_v1.py": {
+      "bytes": 8256,
+      "sha256": "27071de638bceee8f6e0631ab44d8a9c3cebdba0c169ccd702c9c3392fcde543"
+    },
+    "src/staged_rts24_development_v1.py": {
+      "bytes": 26764,
+      "sha256": "d0c61bda61bfe4d275d2230533f2ecd74fa4fbf480f358c819f8cb86e1ba7add"
+    },
+    "src/staged_rts24_evidence_store_v1.py": {
+      "bytes": 16709,
+      "sha256": "54a23ba142d12abe0a394437cb6967b0029ed573eddff1b6efb7adbaca7883c6"
+    },
+    "src/staged_rts24_highs_backend_v1.py": {
+      "bytes": 14536,
+      "sha256": "cae8e98941f6d813b96413d67b96acce263997d2197e63ad090cff8f061dbccf"
+    },
+    "src/staged_rts24_journal_v2.py": {
+      "bytes": 30876,
+      "sha256": "5216b58cbaf1d2a2aa26ce00e71f3563bda793b9512dede023a013ef462bdb0e"
+    },
+    "src/staged_rts24_numeric_interface_v1.py": {
+      "bytes": 14093,
+      "sha256": "570cd1e52f5c78c1ee37f589fb28b646f4173dede32600ba3bff8ceeb447ec31"
+    },
+    "src/staged_rts24_p2_outer_observation_v1.py": {
+      "bytes": 10412,
+      "sha256": "8d80e035c2570d279360d67cf6bb93b125970fae81e5c638a396351f8dd78b91"
+    },
+    "src/staged_rts24_p2_outer_observation_v2.py": {
+      "bytes": 14886,
+      "sha256": "256ed39e3efc36578a08f24bb39d7b14ca4b693dbcc94c1dec379fe125266f04"
+    },
+    "src/staged_rts24_p2_package_check_v1.py": {
+      "bytes": 50876,
+      "sha256": "5794f8a35814cb5ad64fb38de2d8591e2e23e3bdb57921f0c84c853627466eb2"
+    },
+    "src/staged_rts24_process_guard_v1.py": {
+      "bytes": 12191,
+      "sha256": "02b6098e9a5b2cb6c2b862c81b9a375ee631e7cbee5e409310905a3ef2512fc2"
+    },
+    "src/staged_rts24_process_guard_v3.py": {
+      "bytes": 6548,
+      "sha256": "d3fe404aa7265c2a479423cd9991a54326c32e4d7b729bfff20f49fd1b2262c4"
+    },
+    "src/staged_rts24_reference_queries_v1.py": {
+      "bytes": 2618,
+      "sha256": "be02760eec2a0d010ec1a2187322edcca14af4774e7e6d0cbf4859a9375adb1a"
+    },
+    "src/staged_rts24_saved_fresh_adoption_v1.py": {
+      "bytes": 17247,
+      "sha256": "26b919e385f9d7042587db490dab694fc5bf1643665ab4bf94a1c9bac8087396"
+    },
+    "src/staged_rts24_saved_point_replay_v1.py": {
+      "bytes": 16793,
+      "sha256": "f9f723e89bb6513b4ba25c61b427f363652f2be78707d132511f6929f3df95ad"
+    },
+    "src/staged_rts24_saved_prefix_replay_v1.py": {
+      "bytes": 11867,
+      "sha256": "22bee015d89d818b8e76a5f2f44cf3b2618fffe7641e73461e4481bd80738a4c"
+    },
+    "tests/test_staged_rts24_saved_fresh_adoption_v1.py": {
+      "bytes": 296400,
+      "sha256": "2dcedbba8868fe4bc690ce058e1ab27eb8afd24b1e52248d6f78de16e6914440"
+    },
+    "tests/test_staged_rts24_saved_journal_check_v1.py": {
+      "bytes": 12790,
+      "sha256": "6703ec2312a5e0ae8c24e8d1bdbf9922f62e72ae2f3b21430c9d08175abbfcd3"
+    },
+    "tests/test_staged_rts24_saved_point_replay_v1.py": {
+      "bytes": 20869,
+      "sha256": "024fce79bc940bcf0161d087b6fb6664b0531a78237c2954fec4e3605bae481e"
+    },
+    "tests/test_staged_rts24_saved_prefix_replay_v1.py": {
+      "bytes": 21479,
+      "sha256": "f5a629ea776c9c5063aa398eea0315266ea8cb82be4f49f974e08d7e21b2eddf"
+    }
+  }
+}

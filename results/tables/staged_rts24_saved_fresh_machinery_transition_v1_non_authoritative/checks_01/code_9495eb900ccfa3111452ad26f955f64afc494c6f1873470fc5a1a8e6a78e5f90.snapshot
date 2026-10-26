@@ -1,0 +1,107 @@
+"""Independent stdlib checks of current logical/cold evidence; no ENTRY import."""
+import ast
+from hashlib import sha256
+import json
+from pathlib import Path
+import sys
+OUT=Path(__file__).resolve().parent;BASE=OUT.parent;ROOT=BASE.parents[2]
+def raw(v):return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+def pin(v):return dict(bytes=len(v),sha256=sha256(v).hexdigest())
+def read(p):return json.loads(p.read_bytes())
+def names(paths):return {p.relative_to(ROOT).as_posix():pin(p.read_bytes()) for p in paths}
+APPROVED_AST={
+    '_saved_import_inputs':'c6b0f48324020705fd6243a99d177f6ba433260eb7ab5353780b06f708b14ef0',
+    '_saved_import_finder_plan':'35d20da16ececc2c750bd2bce876fed790a7bb05e4383c2a7fd2296c50e45ca0',
+    'SavedSuccessorImportBoundary':'2be8c8a497267120e2b22aee6e879781162344e34057d833d94589981c1d03ae',
+    'open_saved_successor_import_boundary':'380d94e1c94f78545a01197a65e05fdf3db127ec65c165afa449948f1757aba7',
+    'load_saved_successor_dependencies':'0b6a0db26dd40d27a8ba08b154ac69faff2a283a8137037a82d91bca4986cc6d',
+}
+def verify():
+    baseline=read(OUT/'baseline.json');repair=(OUT/'pytest_repair.exit.json').exists()
+    plan_path=OUT/('admission_repair.json' if repair else 'admission.json');plan=read(plan_path)
+    collection=read(OUT/('pytest_repair.exit.json' if repair else 'pytest_main.exit.json'))
+    assert collection['accepted'] and collection['child_artifact_pins'][plan_path.relative_to(ROOT).as_posix()]==pin(plan_path.read_bytes())
+    source=names(ROOT/n for n in plan['source_pins']);helpers=names(OUT.glob('*.py'));controls=names(OUT/n for n in ('baseline.json','import_policy.json','revision.json'))
+    assert len(source)==49 and source==plan['source_pins'] and helpers==plan['helper_pins'] and controls==plan['controls_pins']
+    assert plan['source_epoch']==sha256(raw(source)).hexdigest()
+    for name,p in baseline['predecessor_sources'].items():
+        if name not in baseline['predecessor_snapshot_refs']:assert source[name]==p
+    entry_name='experiments/staged_rts24_saved_fresh_adoption_v1.py';test_name='tests/test_staged_rts24_saved_fresh_adoption_v1.py'
+    snapshot_refs={}
+    for name in (entry_name,test_name):
+        old_blob=(ROOT/baseline['predecessor_snapshot_refs'][name]).read_bytes();assert pin(old_blob)==baseline['predecessor_sources'][name]
+        path=OUT/('code_'+source[name]['sha256']+'.snapshot');assert pin(path.read_bytes())==source[name];snapshot_refs[name]=path.relative_to(ROOT).as_posix()
+    before=ast.parse((ROOT/baseline['predecessor_snapshot_refs'][entry_name]).read_bytes());after=ast.parse((ROOT/entry_name).read_bytes());compile(after,entry_name,'exec',dont_inherit=True)
+    boundary=next(i for i,n in enumerate(before.body) if getattr(n,'name',None)=='SavedSuccessorImportRejected')
+    assert [ast.dump(n) for n in before.body[:boundary]]==[ast.dump(n) for n in after.body[:boundary]] and ast.dump(before.body[-1])==ast.dump(after.body[-1])
+    filtered=[n for n in after.body if getattr(n,'name',None)!='_saved_import_finder_plan'];assert len(filtered)==len(before.body)
+    for left,right in zip(before.body,filtered):
+        name=getattr(left,'name',None);assert type(left) is type(right) and name==getattr(right,'name',None)
+        if name in APPROVED_AST:assert sha256(ast.dump(right,include_attributes=False).encode()).hexdigest()==APPROVED_AST[name]
+        else:assert ast.dump(left)==ast.dump(right)
+    added=[n for n in after.body if getattr(n,'name',None)=='_saved_import_finder_plan'];assert len(added)==1 and sha256(ast.dump(added[0],include_attributes=False).encode()).hexdigest()==APPROVED_AST['_saved_import_finder_plan']
+    before_tests=ast.parse((ROOT/baseline['predecessor_snapshot_refs'][test_name]).read_bytes());after_tests=ast.parse((ROOT/test_name).read_bytes());compile(after_tests,test_name,'exec',dont_inherit=True)
+    test_boundary=next(i for i,n in enumerate(before_tests.body) if getattr(n,'name',None)=='import_policy_unit')
+    assert [ast.dump(n) for n in before_tests.body[:test_boundary]]==[ast.dump(n) for n in after_tests.body[:test_boundary]]
+    label='pytest_repair' if repair else 'pytest_main';harness=read(OUT/(label+'.harness.json'));unit=read(OUT/(label+'.exit.json'));nodes=plan['groups'][label]
+    assert unit['accepted'] and unit['returncode']==harness['pytest_exit_code']==0 and unit['source_pins']==unit['after_source_pins']==source
+    assert len(nodes)==len(set(nodes))==len(harness['passed_call_nodes']) and set(nodes)==set(harness['collected_nodes'])==set(harness['passed_call_nodes'])
+    assert harness['requested_nodes']==nodes and not harness['failed_phases'] and not harness['skipped_phases']
+    revision=read(OUT/'revision.json');assert set(revision['predecessor_nodes'])<=set(nodes)
+    assert plan['admission_written_by_collection_finish_before_test_calls']
+    assert harness['counts']==dict(optional_Popen_attempts=1,blocked_lscpu=1,unexpected_process_attempts=0,native_owner_attempts=0,P1_write_attempts=0,actual_F_write_attempts=0)
+    cold=read(OUT/'cold.exit.json');assert cold['accepted'] and cold['returncode']==0 and cold['source_pins']==source
+    for case in ('normal','caught_effect','blocked_installation'):
+        path=OUT/('cold_'+case+'.json');row=read(path);assert cold['child_artifact_pins'][path.relative_to(ROOT).as_posix()]==pin(path.read_bytes())
+        assert row['accepted'] and row['returncode']==(0 if case=='normal' else 1) and row['error'] is None
+        for suffix in ('stdout','stderr'):assert pin((OUT/('cold_'+case+'.'+suffix+'.log')).read_bytes())==row[suffix+'_pin']
+        state=row['process_observation'];assert state['handle_closed'] and not state['cleanup'] and state['peak_working_set_bytes'] is not None
+        assert state['bounded_drain']['reader_threads_terminal'] and state['bounded_drain']['pipes_closed'] and not state['bounded_drain']['cleanup']
+        child=row['child_record'];report=child['boundary'];counts=child['counts']
+        assert all(counts[n]==0 for n in ('P1_open','actual_F_open','write_attempts','mutation_attempts','unexpected_process'))
+        assert not report['hook_active'] and report['phase']==('CLOSED' if case=='normal' else 'FAULTED') and child['loader_returned']==(case=='normal')
+        if case=='normal':
+            assert report['machinery_observed_stage']==report['machinery_authenticated_stage']==2 and not report['machinery_authentication_pending']
+            assert report['source49_bookend_equal'] and report['finder_function_metadata_bookend_verified'] and report['optional_Popen_attempts']==report['blocked_optional_attempts']==1 and report['internal_introspection_events']==6
+        elif case=='caught_effect':
+            assert child['function_assignment_rejected'] and child['function_code_unchanged'] and counts['function_mutation_audit_events']==counts['lifecycle_injections']==1
+            assert report['fault_kind']=='finder_function_mutation' and report['violations']==1
+        else:assert report['installation_sentinel_observed']==report['optional_Popen_attempts']==0
+        assert all(report[n] is False for n in ('finder_registry_contents_verified','finder_behavior_closure_verified','unobserved_RAM_ABA_verified','baseline_root_authenticated','independent_root_verified','cold_main_self_anchor_verified','full_runtime_binding_verified','role_bootstrap','permit_issued','actual_F','run_authority','resource_admission','formal_result'))
+    assert names(ROOT/n for n in baseline['predecessor_failed_record_pins'])==baseline['predecessor_failed_record_pins'] and len(baseline['predecessor_failed_record_pins'])==9
+    assert baseline['predecessor_resource_admission'] is False
+    revision=read(OUT/'revision.json');assert names(ROOT/n for n in revision['preserved_pins'])==revision['preserved_pins']
+    records={p.relative_to(ROOT).as_posix():(p,read(p)) for p in OUT.glob('*.exit.json')};ordered=sorted(records,key=lambda n:len(records[n][1].get('prior_record_pins',{})))
+    spent=dict(static=baseline['registration_charged_seconds'],pytest=0.);revision_charged=False
+    for i,name in enumerate(ordered):
+        path,row=records[name];assert not row.get('partial_capture',False)
+        if row['label']!='collection' and not revision_charged:spent['static']+=revision['registration_charged_seconds'];revision_charged=True
+        assert row['prior_record_pins']=={n:pin(records[n][0].read_bytes()) for n in ordered[:i]}
+        assert all(abs(row['previous_charged_seconds'][k]-spent[k])<1e-7 for k in spent)
+        expected_controls={n:p for n,p in controls.items() if not n.endswith('/revision.json')} if row['label']=='collection' else controls
+        assert row['charged_seconds']<=row['cap_seconds'] and row['controls_pins']==row['after_controls_pins']==expected_controls
+        assert row['source_pins']==row['after_source_pins'] and row['helper_pins']==row['after_helper_pins']
+        for suffix in ('stdout','stderr'):assert pin(path.with_name(row['label']+'.'+suffix+'.log').read_bytes())==row[suffix+'_pin']
+        if row['accepted']:
+            assert row['postcheck_pins_match'] and not row['missing_child_artifacts'] and names(ROOT/n for n in row['child_artifact_pins'])==row['child_artifact_pins']
+        spent[row['kind']]+=row['charged_seconds']
+    assert spent['static']<=60 and spent['pytest']<=45 and sum(spent.values())<=105
+    review_raw=(OUT/'pre_seal_review.json').read_bytes();review=json.loads(review_raw);assert review['source_epoch']==plan['source_epoch'] and not review['remaining_implementation_findings']
+    assert review['official_verdict'] is None and review['production_seal'] is False and review['remaining_runtime_findings']
+    files=[p for p in BASE.rglob('*') if p.is_file()];assert len(files)<=48 and sum(p.stat().st_size for p in files)<=2*1024**2
+    assert (OUT/'pre_seal_review.json').read_bytes()==review_raw
+    return dict(authority='DRAFT_NONAUTHORITATIVE',source_epoch=plan['source_epoch'],current_logical_nodes=len(nodes),cold_cases_validated=['normal','caught_effect','blocked_installation'],
+        current_snapshot_refs=snapshot_refs,current_snapshot_pins=names(ROOT/n for n in snapshot_refs.values()),pre_seal_review_pin=pin(review_raw),
+        finder_binding_transition_validated=True,finder_registry_contents_verified=False,finder_behavior_closure_verified=False,baseline_root_authenticated=False,
+        successor_charged_before_capture=spent,predecessor_charged_seconds=baseline['predecessor_charged_seconds'],
+        predecessor_failed_records_preserved=9,predecessor_resource_admission=False,actual_F=False,run_authority=False,resource_admission=False,formal_result=False)
+if __name__=='__main__':
+    mode=sys.argv[1]
+    if mode=='terminal':
+        previous=read(OUT/'saved_report.json');anchor=read(OUT/'saved.exit.json')
+        assert anchor['accepted'] and anchor['child_artifact_pins'][(OUT/'saved_report.json').relative_to(ROOT).as_posix()]==pin((OUT/'saved_report.json').read_bytes())
+        assert names(ROOT/n for n in previous['bound_files'])==previous['bound_files'] and pin((OUT/'pre_seal_review.json').read_bytes())==previous['pre_seal_review_pin']
+    report=verify()
+    if mode=='saved':report['bound_files']=names(p for p in OUT.rglob('*') if p.is_file())
+    with (OUT/(mode+'_report.json')).open('xb') as stream:stream.write(raw(report))
+    print(json.dumps(report,sort_keys=True))

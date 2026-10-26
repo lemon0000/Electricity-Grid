@@ -4371,37 +4371,70 @@ def test_saved_wire_completion_broker_candidate_cannot_wrap_failed_controller(sa
             controller_return_data=bound['returns']['failed'],failure_data=None,expected_broker_process_image_sha=value['broker_process_image_sha'])
 
 
-@pytest.fixture
-def import_policy_unit():
-    """Logical state fixture only: no real hook is installed by this fixture."""
+@pytest.fixture(scope='module')
+def import_policy_model():
+    path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_machinery_transition_v1_non_authoritative/checks_01/import_policy.json'
+    raw=path.read_bytes();profile=json.loads(raw);data=cli._saved_import_inputs(raw)
+    plan=cli._saved_import_finder_plan(data,profile)
+    moved=sys.modules['pyomo.common.deprecation'];deferred=sys.modules['pyomo.common.dependencies']
+    m=next(x for x in sys.meta_path if type(x) is moved.MovedModuleFinder);d=deferred._DeferredImportCallbackFinder
+    return raw,profile,plan,m,d,tuple(x for x in sys.meta_path if x is not m and x is not d)
+
+
+def _make_import_policy_unit(monkeypatch,model,stage=2,authenticate=True):
+    """Explicit logical seed; no hook or runtime authority is constructed."""
     from threading import RLock
     from types import FunctionType
+    import importlib
+    from importlib import util,machinery
     import os
-    import sys
-    path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_import_policy_v2_non_authoritative/checks_01/import_policy.json'
-    raw=path.read_bytes();profile=json.loads(raw);guard=object.__new__(cli.SavedSuccessorImportBoundary);token=object()
+    raw,profile,plan,m,d,baseline=model;live=list(baseline);monkeypatch.setattr(sys,'meta_path',live)
+    guard=object.__new__(cli.SavedSuccessorImportBoundary);token=object()
     def callback(event,args):guard._audit(event,args,token)
     creator=(os.getpid(),cli.get_ident());owner=(creator,callback,token,callback.__code__)
-    names=('sys','os','subprocess','get_ident','ROOT','EXE','read','pin','require','sha256','digest','Path','canonical','source_names','source_pins','ordinary','directories','identity','parse','keys','_saved_import_inputs')
+    names=('sys','os','subprocess','get_ident','ROOT','EXE','read','pin','require','sha256','digest','Path','canonical','source_names','source_pins','ordinary','directories','identity','parse','keys','_saved_import_inputs','_saved_import_finder_plan','ModuleType','FunctionType','CodeType')
     bindings=[]
     for name in names:
         value=vars(cli)[name];function=type(value) is FunctionType
         bindings.append((name,value,value.__code__ if function else None,value.__defaults__ if function else None,cli.canonical(value.__kwdefaults__) if function else None,value.__closure__ if function else None))
     own=tuple((n,fn,fn.__code__,fn.__defaults__,cli.canonical(fn.__kwdefaults__),fn.__closure__) for n,fn in vars(cli.SavedSuccessorImportBoundary).items() if type(fn) is FunctionType)
-    attrs=tuple((sys,n,getattr(sys,n)) for n in ('addaudithook','audit','getprofile','gettrace','setprofile','settrace','modules','_current_frames','meta_path','path_hooks','path_importer_cache','version','executable','dont_write_bytecode'))
-    fields=dict(_profile_raw=raw,_creator=creator,_namespace=vars(cli),_global_bindings=tuple(bindings),_attribute_bindings=attrs,_own_bindings=own,
+    attrs=[(sys,n,getattr(sys,n)) for n in ('addaudithook','audit','getprofile','gettrace','setprofile','settrace','modules','_current_frames','meta_path','path_hooks','path','path_importer_cache','version','executable','dont_write_bytecode')]
+    attrs.extend((module,n,getattr(module,n)) for module,names in ((importlib,('util','machinery','import_module')),(util,('find_spec','spec_from_loader')),(machinery,('ModuleSpec',))) for n in names)
+    fields=dict(_profile_raw=raw,_creator=creator,_namespace=vars(cli),_global_bindings=tuple(bindings),_attribute_bindings=tuple(attrs),_own_bindings=own,
         _owner=owner,_owner_commit=cli.digest((creator,id(callback),id(callback.__code__),id(token))),_lock=RLock(),_codes=(),
         _numpy_path=next(p for p in profile['external_sources'] if p.replace('\\','/').endswith('/numpy/testing/_private/utils.py')),
         _numpy_state=(sys.modules['numpy.testing._private.utils'],False),
         _paths=tuple(os.path.normcase(os.path.abspath(v)) for v in profile['protected_open_roots'].values()),
         _event_sets=(tuple(profile['process_events']),tuple(profile['process_event_prefixes']),tuple(profile['mutation_events'])),
-        _import_machinery=(tuple(map(id,sys.meta_path)),tuple(map(id,sys.path_hooks)),tuple(sys.path),id(sys.path_importer_cache),id(sys.modules)),
+        _import_machinery=(tuple(map(id,live)),tuple(map(id,sys.path_hooks)),tuple(sys.path),id(sys.path_importer_cache),id(sys.modules)),
+        _machinery_base=(tuple(live),tuple(sys.path_hooks),tuple(sys.path),live,sys.path_hooks,sys.path,sys.path_importer_cache,sys.modules,importlib,util,machinery),
+        _finder_plan=plan,_finder_bindings=(),_finder_authenticated=(),_observed_stage=0,_authenticated_stage=0,
         _state=('ACTIVE',True,0,1,0,0,False,''),_internal=None,_busy=False,_adapter=None,_adapter_bindings=(),_source_raw=None,_failure=None,_first_error=None,_req=cli.require)
     for name,value in fields.items():object.__setattr__(guard,name,value)
     object.__setattr__(guard,'_commit',cli.digest(guard._image()))
-    yield guard,token,profile
+    if stage>=1:
+        live.append(m);guard._audit('open',('logical-read','rb',0),token)
+    if stage>=2:
+        live.insert(0,d);guard._audit('open',('logical-read','rb',0),token)
+        if authenticate:guard.authenticate_machinery()
+    return guard,token,profile
+
+
+@pytest.fixture
+def import_policy_unit(monkeypatch,import_policy_model):
+    result=_make_import_policy_unit(monkeypatch,import_policy_model);yield result
+    guard=result[0]
     if guard._state[1]:
         try:guard.close(ValueError('logical unit teardown'))
+        except cli.SavedSuccessorImportUnresolved:pass
+
+
+@pytest.fixture
+def import_policy_pending_unit(monkeypatch,import_policy_model):
+    result=_make_import_policy_unit(monkeypatch,import_policy_model,stage=0);yield result
+    guard=result[0]
+    if guard._state[1]:
+        try:guard.close(ValueError('logical pending teardown'))
         except cli.SavedSuccessorImportUnresolved:pass
 
 
@@ -4491,7 +4524,7 @@ def test_saved_import_policy_closed_local_result_never_opens_authority(import_po
 
 
 def test_saved_import_policy_factory_literal_and_single_attempt(monkeypatch):
-    path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_import_policy_v2_non_authoritative/checks_01/import_policy.json';raw=path.read_bytes();changed=json.loads(raw)
+    path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_machinery_transition_v1_non_authoritative/checks_01/import_policy.json';raw=path.read_bytes();changed=json.loads(raw)
     changed['protected_open_roots']['P1']='D:/wrong';mutated=_successor_json(changed)
     monkeypatch.setattr(cli,'_SAVED_SUCCESSOR_IMPORT_ATTEMPTED',False)
     monkeypatch.setattr(cli,'SAVED_IMPORT_POLICY_PIN',(len(mutated),sha256(mutated).hexdigest()),raising=False)
@@ -4511,7 +4544,7 @@ def test_saved_import_policy_persistent_trace_rejects(import_policy_unit,kind):
 
 
 def test_saved_import_policy_fixed_external_hardlink_read_scope(monkeypatch):
-    path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_import_policy_v2_non_authoritative/checks_01/import_policy.json';raw=path.read_bytes();profile=json.loads(raw)
+    path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_machinery_transition_v1_non_authoritative/checks_01/import_policy.json';raw=path.read_bytes();profile=json.loads(raw)
     expected={n:Path(n).read_bytes() for n in (profile['executable_path'],*profile['external_sources'])};calls=[]
     def read(name,*,allow_links=False):calls.append((name,allow_links));return expected[name]
     monkeypatch.setattr(cli,'read',read)
@@ -4521,7 +4554,7 @@ def test_saved_import_policy_fixed_external_hardlink_read_scope(monkeypatch):
 
 @pytest.mark.parametrize('fault',['forged_dict','extra_path','external_policy'])
 def test_saved_import_policy_external_reader_rejects_unpinned_domain(monkeypatch,fault):
-    path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_import_policy_v2_non_authoritative/checks_01/import_policy.json';raw=path.read_bytes();value=json.loads(raw);calls=[]
+    path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_machinery_transition_v1_non_authoritative/checks_01/import_policy.json';raw=path.read_bytes();value=json.loads(raw);calls=[]
     if fault=='extra_path':value['external_sources']['D:/unlisted']={'bytes':1,'sha256':'f'*64}
     elif fault=='external_policy':value['external_file_read_policy']['reject_reparse_paths']=False
     candidate=value if fault=='forged_dict' else _successor_json(value)
@@ -4560,7 +4593,147 @@ def test_saved_import_policy_adapter_commit_precedes_source_open(import_policy_u
     monkeypatch.setattr(cli,'open_saved_successor_import_boundary',lambda raw:guard)
     bindings=tuple((n,source,source.__code__,source.__defaults__,cli.canonical(source.__kwdefaults__),source.__closure__)
         if n=='source_pins' else row for row in guard._global_bindings for n in (row[0],))
-    object.__setattr__(guard,'_global_bindings',bindings);guard._set(optional=1)
+    object.__setattr__(guard,'_global_bindings',bindings);object.__setattr__(guard,'_finder_authenticated',());object.__setattr__(guard,'_authenticated_stage',0);guard._set(optional=1)
     adapter,closed=cli.load_saved_successor_dependencies(expected,b'logical-preloaded-guard')
     assert adapter is guard._adapter and closed is guard and calls==[True,True]
     assert json.loads(closed.report_raw)['phase']=='CLOSED' and not closed._state[1]
+
+
+def test_saved_import_policy_exact_machinery_stages(import_policy_pending_unit,import_policy_model):
+    guard,token,_=import_policy_pending_unit;m,d=import_policy_model[3:5]
+    assert guard._observed_stage==guard._authenticated_stage==0
+    sys.meta_path.append(m);guard._audit('open',('logical-read','rb',0),token)
+    assert (guard._observed_stage,guard._authenticated_stage)==(1,0)
+    sys.meta_path.insert(0,d);guard._audit('open',('logical-read','rb',0),token)
+    assert (guard._observed_stage,guard._authenticated_stage)==(2,0)
+    guard.authenticate_machinery();guard._set(optional=1);guard.close()
+    report=json.loads(guard.report_raw);assert report['phase']=='CLOSED' and not report['machinery_authentication_pending']
+    assert report['machinery_observed_stage']==report['machinery_authenticated_stage']==2
+    assert report['finder_registry_contents_verified'] is report['finder_behavior_closure_verified'] is report['unobserved_RAM_ABA_verified'] is False
+
+
+@pytest.mark.parametrize('fault',['replace_m','replace_d','replace_base','extra','duplicate_m','delete_m','delete_d','reorder_base','rollback_m','rollback_base','second_register'])
+def test_saved_import_policy_machinery_sequence_faults(import_policy_unit,import_policy_model,fault):
+    guard,token,_=import_policy_unit;m,d=import_policy_model[3:5];held=list(sys.meta_path)
+    try:
+        if fault=='replace_m':sys.meta_path[-1]=type(m)()
+        elif fault=='replace_d':sys.meta_path[0]=type(d)()
+        elif fault=='replace_base':sys.meta_path[1]=object()
+        elif fault=='extra':sys.meta_path.insert(2,object())
+        elif fault=='duplicate_m':sys.meta_path.append(m)
+        elif fault=='delete_m':sys.meta_path.pop()
+        elif fault=='delete_d':sys.meta_path.pop(0)
+        elif fault=='reorder_base':sys.meta_path[1],sys.meta_path[2]=sys.meta_path[2],sys.meta_path[1]
+        elif fault=='rollback_m':sys.meta_path.remove(d)
+        elif fault=='rollback_base':sys.meta_path[:]=guard._machinery_base[0]
+        else:sys.meta_path.append(type(d)())
+        with pytest.raises(cli.SavedSuccessorImportRejected):guard._audit('open',('logical-read','rb',0),token)
+    finally:sys.meta_path[:]=held
+    assert guard._state[0]=='FAULTED'
+    with pytest.raises(cli.SavedSuccessorImportUnresolved):guard.close()
+    assert not guard._state[1]
+
+
+@pytest.mark.parametrize('fault',['skip','d_first','m_wrong_position','wrong_m_type'])
+def test_saved_import_policy_machinery_cannot_skip(import_policy_pending_unit,import_policy_model,fault):
+    guard,token,_=import_policy_pending_unit;m,d=import_policy_model[3:5];held=list(sys.meta_path)
+    try:
+        if fault=='skip':sys.meta_path[:]=[d,*held,m]
+        elif fault=='d_first':sys.meta_path.insert(0,d)
+        elif fault=='m_wrong_position':sys.meta_path.insert(0,m)
+        else:sys.meta_path.append(object())
+        with pytest.raises(cli.SavedSuccessorImportRejected):guard._audit('open',('logical-read','rb',0),token)
+    finally:sys.meta_path[:]=held
+    assert guard._observed_stage==0 and guard._authenticated_stage==0 and guard._state[0]=='FAULTED'
+
+
+@pytest.mark.parametrize('stage',[0,1,2])
+def test_saved_import_policy_pending_or_partial_close_rejects(import_policy_pending_unit,import_policy_model,stage):
+    guard,token,_=import_policy_pending_unit;m,d=import_policy_model[3:5]
+    if stage>=1:sys.meta_path.append(m);guard._audit('open',('logical-read','rb',0),token)
+    if stage==2:sys.meta_path.insert(0,d);guard._audit('open',('logical-read','rb',0),token)
+    guard._set(optional=1)
+    with pytest.raises(cli.SavedSuccessorImportUnresolved):guard.close()
+    report=json.loads(guard.report_raw)
+    assert report['phase']=='FAULTED' and report['machinery_observed_stage']==stage and report['machinery_authenticated_stage']==0
+    assert not report['hook_active']
+
+
+@pytest.mark.parametrize('fault',['module','class','singleton','registry_m','registry_d','sys','importlib','loader_class','loader_method','method_clone','module_file','instance_field','class_field','warning_function','synchronized_m'])
+def test_saved_import_policy_finder_bindings_reject(import_policy_unit,import_policy_model,monkeypatch,fault):
+    from types import FunctionType,ModuleType
+    guard,token,_=import_policy_unit;m,d=import_policy_model[3:5]
+    moved=sys.modules['pyomo.common.deprecation'];deferred=sys.modules['pyomo.common.dependencies'];held=list(sys.meta_path)
+    try:
+        with monkeypatch.context() as scoped:
+            if fault=='module':
+                fake=ModuleType(moved.__name__);vars(fake).update(vars(moved));scoped.setitem(sys.modules,moved.__name__,fake)
+            elif fault=='class':scoped.setattr(moved,'MovedModuleFinder',type('MovedModuleFinder',(),{}))
+            elif fault=='singleton':scoped.setattr(deferred,'_DeferredImportCallbackFinder',type(d)())
+            elif fault=='registry_m':scoped.setattr(type(m),'mapping',dict(type(m).mapping))
+            elif fault=='registry_d':scoped.setattr(type(d),'_callbacks',dict(type(d)._callbacks))
+            elif fault=='sys':scoped.setattr(moved,'sys',object())
+            elif fault=='importlib':scoped.setattr(deferred,'importlib',object())
+            elif fault=='loader_class':scoped.setattr(moved,'MovedModuleLoader',type('MovedModuleLoader',(),{}))
+            elif fault=='loader_method':scoped.setattr(moved.MovedModuleLoader,'create_module',lambda self,spec:None)
+            elif fault=='method_clone':
+                fn=type(m).find_spec;clone=FunctionType(fn.__code__,fn.__globals__,fn.__name__,fn.__defaults__);scoped.setattr(type(m),'find_spec',clone)
+            elif fault=='module_file':scoped.setattr(moved,'__file__','D:/unlisted-module.py')
+            elif fault=='instance_field':scoped.setitem(vars(m),'unlisted',1)
+            elif fault=='class_field':scoped.setattr(type(d),'unlisted',1,raising=False)
+            elif fault=='warning_function':
+                fn=moved.deprecation_warning;scoped.setattr(moved,'deprecation_warning',FunctionType(fn.__code__,fn.__globals__,fn.__name__,fn.__defaults__))
+            else:
+                fake=ModuleType(moved.__name__);vars(fake).update(vars(moved));values={k:v for k,v in vars(type(m)).items() if k not in ('__dict__','__weakref__')};values['mapping']=dict(type(m).mapping)
+                cls=type('MovedModuleFinder',(),values);fake.MovedModuleFinder=cls;sys.meta_path[-1]=cls();scoped.setitem(sys.modules,moved.__name__,fake)
+            with pytest.raises(cli.SavedSuccessorImportRejected):guard._audit('open',('logical-read','rb',0),token)
+    finally:sys.meta_path[:]=held
+    assert guard._state[0]=='FAULTED'
+    with pytest.raises(cli.SavedSuccessorImportUnresolved):guard.close()
+
+
+@pytest.mark.parametrize('fault',['code','equal_defaults','kwdefaults','closure','loader_code','warning_defaults'])
+def test_saved_import_policy_finder_code_bookend_rejects(import_policy_unit,import_policy_model,monkeypatch,fault):
+    guard,_,_=import_policy_unit;m=import_policy_model[3];moved=sys.modules['pyomo.common.deprecation'];fn=type(m).find_spec
+    def alternate(self,fullname,path,target=None):return None
+    with monkeypatch.context() as scoped:
+        if fault=='code':scoped.setattr(fn,'__code__',alternate.__code__)
+        elif fault=='equal_defaults':scoped.setattr(fn,'__defaults__',tuple([None]))
+        elif fault=='kwdefaults':scoped.setattr(fn,'__kwdefaults__',{})
+        elif fault=='closure':
+            marker=object()
+            def with_closure(self,fullname,path,target=None):return marker
+            scoped.setattr(type(m),'find_spec',with_closure)
+        elif fault=='loader_code':scoped.setattr(moved.MovedModuleLoader.create_module,'__code__',alternate.__code__)
+        else:scoped.setattr(moved.deprecation_warning,'__defaults__',tuple([None]*4))
+        with pytest.raises(cli.SavedSuccessorImportRejected):guard._entry()
+    assert guard._state[0]=='FAULTED'
+    with pytest.raises(cli.SavedSuccessorImportUnresolved):guard.close()
+
+
+@pytest.mark.parametrize('effect',['process','write','mutation','P1','actual_F'])
+def test_saved_import_policy_pending_stage_keeps_effect_denial(import_policy_pending_unit,import_policy_model,effect):
+    guard,token,profile=import_policy_pending_unit;sys.meta_path.append(import_policy_model[3]);guard._audit('open',('logical-read','rb',0),token)
+    event,args=('os.system',(b'not-executed',)) if effect=='process' else ('open',('logical-write','wb',0)) if effect=='write' else ('os.mkdir',('not-created',0)) if effect=='mutation' else ('open',(profile['protected_open_roots'][effect]+'/not-read','rb',0))
+    with pytest.raises(cli.SavedSuccessorImportRejected):guard._audit(event,args,token)
+    assert guard._observed_stage==1 and guard._authenticated_stage==0 and guard._state[0]=='FAULTED'
+
+
+def test_saved_import_policy_registry_content_is_not_certified(import_policy_unit,import_policy_model):
+    guard,token,_=import_policy_unit;m,d=import_policy_model[3:5];key='__logical_unimported_registry_entry__'
+    try:
+        type(m).mapping[key]=None;type(d)._callbacks[key]=[]
+        guard._audit('open',('logical-read','rb',0),token);guard._set(optional=1);guard.close()
+        report=json.loads(guard.report_raw);assert report['phase']=='CLOSED' and report['finder_registry_contents_verified'] is False
+    finally:type(m).mapping.pop(key,None);type(d)._callbacks.pop(key,None)
+
+
+@pytest.mark.parametrize('attribute',['__code__','__defaults__','__kwdefaults__'])
+@pytest.mark.parametrize('event',['object.__setattr__','object.__delattr__'])
+def test_saved_import_policy_observed_function_mutation_denied(import_policy_unit,import_policy_model,attribute,event):
+    guard,token,_=import_policy_unit;fn=type(import_policy_model[3]).find_spec
+    before=(fn.__code__,fn.__defaults__,fn.__kwdefaults__)
+    args=(fn,attribute,None) if event=='object.__setattr__' else (fn,attribute)
+    with pytest.raises(cli.SavedSuccessorImportRejected):guard._audit(event,args,token)
+    assert (fn.__code__,fn.__defaults__,fn.__kwdefaults__)==before and guard._state[0]=='FAULTED'
+    with pytest.raises(cli.SavedSuccessorImportUnresolved):guard.close()
