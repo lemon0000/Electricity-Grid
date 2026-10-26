@@ -1,0 +1,341 @@
+"""Create-only NONAUTHORITATIVE wire contract; never import project implementation."""
+import ast
+import base64
+from hashlib import sha256
+import importlib.util
+import json
+from pathlib import Path
+import sys
+MAIN=Path(__file__).resolve().parent;ROOT=MAIN.parents[3];PACKAGE=MAIN.parent/'final_package_01'
+PREV=ROOT/'results/tables/staged_rts24_saved_fresh_role_data_v1_non_authoritative'
+OLD=ROOT/'results/tables/staged_rts24_saved_fresh_upstream_contract_v1_non_authoritative/checks_01'
+RUNTIME=ROOT/'results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01'
+SCOPE='docs/plan/staged_deliverability_c_saved_fresh_wire_scope_budget_v1.md'
+ROLES=dict(controller='broker',parent='controller',fresh='parent')
+def raw(v):return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+def pin(v):return dict(bytes=len(v),sha256=sha256(v).hexdigest())
+def read(p):return json.loads(p.read_bytes())
+def names(paths):return {p.relative_to(ROOT).as_posix():pin(p.read_bytes()) for p in paths}
+def save(n,v):
+    data=raw(v);assert len(data)<=2*1024**2
+    with (MAIN/n).open('xb') as f:f.write(data)
+def literal(v):return dict(literal=v)
+def fields(text,t='sha'):return dict.fromkeys(text.split(),t)
+def constant(n):
+    if isinstance(n,ast.Constant):return n.value
+    if isinstance(n,ast.BinOp) and isinstance(n.op,ast.Pow):return constant(n.left)**constant(n.right)
+    if isinstance(n,ast.BinOp) and isinstance(n.op,ast.Mult):return constant(n.left)*constant(n.right)
+    assert isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=='dict' and not n.args
+    return {v.arg:constant(v.value) for v in n.keywords}
+def baseline():
+    previous=read(PREV/'checks_01/baseline.json');preserved=dict(previous['preserved'])
+    preserved.update(names(p for p in PREV.rglob('*') if p.is_file()))
+    preserved.update({n:p for n,p in read(PREV/'checks_01/document_checks.json')['documents'].items() if n.startswith('docs/')})
+    assert len(preserved)==4290
+    sources=read(PREV/'checks_01/admission.json')['source_pins'];assert names(ROOT/n for n in sources)==sources
+    assert names(ROOT/n for n in preserved)==preserved
+    navigation={}
+    for n in read(PREV/'checks_01/document_checks.json')['navigation']:
+        data=(ROOT/n).read_bytes();header,sep,body=data.partition(b'\n\n');assert sep
+        navigation[n]=dict(header_base64=base64.b64encode(header).decode(),body=pin(body),full=pin(data))
+    helpers=names([*MAIN.glob('*.py'),*PACKAGE.glob('*.py')])
+    save('baseline.json',dict(authority='DRAFT_NONAUTHORITATIVE',base_head='147fa6162be10976eb16336ae71740e143f8d594',
+        sources=sources,preserved=preserved,navigation=navigation,helpers=helpers,scope_pin=pin((ROOT/SCOPE).read_bytes())))
+    print(json.dumps(dict(preserved_paths=4290,source_names=49,production_source_changed=False),sort_keys=True))
+def design():
+    base=read(MAIN/'baseline.json');old=read(OLD/'protocol_domains.json');old_dag=read(OLD/'protocol_dag.json')
+    frozen_templates=read(OLD/'fixed_templates.json');request=read(RUNTIME/'request_contract_v2.json')
+    source=(ROOT/'experiments/staged_rts24_saved_fresh_adoption_v1.py').read_bytes()
+    caps=next(constant(n.value) for n in ast.parse(source).body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='CAPS' for t in n.targets))
+    entry=ROOT/'experiments/staged_rts24_saved_fresh_adoption_v1.py'
+    output=ROOT/'results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative/draft_01'
+    slots=[['header',4096],['request',32768],['ready',4096],['start',4096],['context',2*1024**2+16384+44],
+        ['ack',4096],['binding',32768],['constructor_probe',4096],['controller_return',131072+44],['broker_return',131072+44]]
+    directions=dict(host=['request','start','ack'],broker=['ready','context','binding'],controller=['controller_return'],
+        broker_terminal=['broker_return'],broker_probe=['constructor_probe'])
+    template=dict(authority='DRAFT_NONAUTHORITATIVE',implemented=False,hash_inputs=names((OLD/n for n in ('fixed_templates.json','protocol_domains.json','protocol_dag.json'))),
+        mailbox_slots=slots,mailbox_directions=directions,physical_extra=44,envelope_extra_bound=363,
+        commit_last=True,tail_zero=True,same_snapshot_twice=True,create_only=True,retry_new_nonce=False,
+        entry_slots=[['header',4096],['binding',4652],['packet',36908],['projections',18476]],projection_bundle_value_cap=17408,
+        entry_commit_order=['header','projections','binding','packet'],reader_requires_complete_entry_prefix=True,
+        stage_slots=16,stage_slot_bytes=4096,stage_header_blocks=1,stage_mapping_bytes=17*4096,
+        stage_bootstrap_frame_index=0,stage_phase_frame_indices=list(range(1,16)),stage_append_only=True,
+        hash_domains=dict(mailbox_header_sha='physical committed header slot',entry_header_sha='physical committed header slot',
+            stage_header_sha='physical committed header slot',packet_sha='canonical payload raw',permit_binding_sha='canonical payload raw',
+            descriptor_sha='canonical payload raw',argv_sha='canonical argv array raw',projection_sha='canonical projection raw',
+            projection_bundle_sha='canonical bundle raw',previous_sha='canonical previous envelope raw'),
+        startup_target_cap=16384,failure_value_cap=32768,failure_target_cap=131072,max_exception_nodes=24,
+        producer_kernel_authentication_by_child=False,actual_deadline_enforced=False)
+    template_data=raw(template);template_pin=pin(template_data)
+    types=dict(sha=dict(kind='sha',encoded_max=66),uint32=dict(kind='uint',low=0,high=2**32-1,encoded_max=10),
+        pid=dict(kind='uint',low=1,high=2**32-1,encoded_max=10),uint64=dict(kind='uint',low=0,high=2**64-1,encoded_max=20),
+        uint128=dict(kind='uint',low=0,high=2**128-1,encoded_max=39),creation=dict(kind='uint',low=1,high=2**64-1,encoded_max=20),
+        time=dict(kind='float',low=0,high=1e12,finite=True,encoded_max=32),boolean=dict(kind='bool',encoded_max=5),
+        name=dict(kind='name',prefix='Local\\',alphabet='A-Za-z0-9_.-',characters_max=192,encoded_max=386),
+        message=dict(kind='encoded_string',encoded_max=768),exception_type=dict(kind='ascii',characters_max=128,encoded_max=130),
+        index=dict(kind='uint',low=0,high=23,encoded_max=2),old_context=dict(kind='frozen',pin=pin((RUNTIME/'successor_context_spec_v3.json').read_bytes()),encoded_max=2097152))
+    types['identity']=dict(kind='tuple',items=['pid','creation'])
+    types['identity_or_none']=dict(kind='nullable',item='identity');types['sha_or_none']=dict(kind='nullable',item='sha')
+    types['pin']=dict(kind='object',fields=dict(bytes='uint64',sha256='sha'),bytes_lower=1,bytes_upper=8388608)
+    types['pin_or_none']=dict(kind='nullable',item='pin')
+    types['receipt']=dict(kind='frozen',encoded_max=190,domain=old['types']['receipt']['domain'])
+    types['direction_nonces']=dict(kind='object',fields={n:'sha' for n in directions})
+    types['root_directories']=dict(kind='fixed_directories',paths=[str(p) for p in reversed((output,*output.parents))],
+        identity_types=['uint64','uint128'],max_depth=16)
+    types['error_code']=dict(kind='enum',values=['constructor','capture','bootstrap','schema','context','source','runtime','deadline',
+        'publication','readback','comparison','channel','relay','quiesce','close','unknown'])
+    types['status']=dict(kind='enum',values=['returned_candidate','failed','unknown'])
+    types['failure_phase']=dict(kind='enum',values=['H0','arming','READY','START','context','offer','ACK','permit','allocation','owner',
+        'header','capture','release','bootstrap','hold','replay','compare','G1','quiet','G2','publish','G3','H3','return','cleanup'])
+    types['error_node']=dict(kind='object',fields=dict(index='index',code='error_code',exception_type='exception_type',message='message',truncated='boolean'))
+    types['errors']=dict(kind='array',item='error_node',min_items=1,max_items=24)
+    types['cleanup_indices']=dict(kind='array',item='index',min_items=0,max_items=23)
+    hostid=dict(kind='object',fields=dict(pid='pid',creation_filetime='creation'));types['host_identity_object']=hostid
+    rf={}
+    for n,v in request['field_rules'].items():
+        if 'exact' in v:rf[n]=literal(v['exact'])
+        elif n=='limits':rf[n]=literal(caps)
+        elif n=='host_identity':rf[n]='host_identity_object'
+        elif n=='executable_pin':rf[n]='pin'
+        elif v['type']=='float':rf[n]='time'
+        else:rf[n]='sha'
+    types['request']=dict(kind='object',fields=rf,frozen_contract_pin=pin((RUNTIME/'request_contract_v2.json').read_bytes()))
+    for role,grammar in old['argv_grammars'].items():
+        tokens=[]
+        for token in grammar['tokens']:
+            if token=='EXE':tokens.append(literal('D:\\Miniconda3\\envs\\compute\\python.exe'))
+            elif token=='ENTRY':tokens.append(literal(str(entry)))
+            elif token.startswith('{'):tokens.append('name' if token in ('{entry_transport_name}','{stage_name}','{mailbox_name}') else 'sha')
+            else:tokens.append(literal(token))
+        types[role+'_argv']=dict(kind='tuple',items=tokens,grammar=grammar['tokens'])
+        types[role+'_command_line']=dict(kind='command_line',argv=role+'_argv',formula='2*sum(encoded_token_max)+4*argc+2')
+        for suffix in ('permit_binding','entry_packet','stage_descriptor'):
+            types['old_'+role+'_'+suffix]=dict(kind='frozen',encoded_max=old['schemas'][role+'_'+suffix]['encoded_value_cap'],
+                frozen_registry_pin=pin((OLD/'protocol_domains.json').read_bytes()),frozen_schema=role+'_'+suffix)
+    types['old_ACK']=dict(kind='frozen',encoded_max=3072,frozen_registry_pin=pin((OLD/'protocol_domains.json').read_bytes()),frozen_schema='ACK')
+    schemas={}
+    def add(name,producer,consumer,f,cap,requirements,**extra):
+        consumers=consumer if isinstance(consumer,list) else consumer.split('/')
+        schemas[name]=dict(producer=producer,consumers=consumers,fields={'schema':literal('staged_saved_F_successor_'+name+'_wire_v1'),**f},
+            value_cap=cap,capability_requirements=requirements,consumer_receives_capability=False,implemented=False,
+            producer_capability_verified=False,role_bootstrap=False,run_authority=False,actual_F=False,
+            scientific_evidence_adopted=False,resource_admission=False,formal_result=False,**extra)
+    common=fields('context_sha request_sha')
+    add('mailbox_header','host','broker',dict(name='name',request_sha='sha',host_identity='identity',broker_identity='identity',
+        direction_nonces='direction_nonces',layout_sha=literal(sha256(raw(slots)).hexdigest()),wire_template_sha=literal(template_pin['sha256'])),4096-44,
+        ['host independent request/expectation','actual retained suspended broker owner','unique original mailbox allocation'])
+    add('READY','broker','host',dict(request_sha='sha',mailbox_header_sha='sha',broker_identity='identity',ready_at='time',
+        standby_deadline='time',original_invocation_started='time',original_invocation_deadline='time',context_created=literal(False)),3072,
+        ['broker own self HANDLE anchor','host independently checks retained broker and pre-START context absence'])
+    add('START','host','broker',dict(request_sha='sha',READY_sha='sha',mailbox_header_sha='sha',host_identity='identity',
+        sent_at='time',original_invocation_started='time',original_invocation_deadline='time'),3072,
+        ['host same request/owner/READY','sent_at does not reset original start or deadline'])
+    add('offer','broker','host',dict(**common,context='old_context',START_sha='sha',context_receipt='receipt',root_directories='root_directories',
+        broker_identity='identity',published_at='time'),2097152+8192,
+        ['once-only complete successor context publication','host independent request/expectation and exact receipt/root verification'])
+    add('controller_binding','broker','host',dict(**common,ACK_sha='sha',entry_header_sha='sha',stage_header_sha='sha',
+        startup_capture='schema:controller_startup_capture'),32768-363-44,['same broker ACK capability and retained controller owner'])
+    references=dict(final_observation=('parent/parent_observation.json','controller','parent_observation'),
+        controller_process=('worker/launcher.json','controller','stage_process'),parent_metrics=('worker/parent_metrics.json','parent','metrics_payload'),
+        fresh_metrics=('worker/fresh/metrics.json','fresh','metrics_payload'),candidate=('worker/comparison_candidate.json','parent','comparison_candidate'),
+        failure=('diagnostics/failure.json','controller','failure_record'))
+    for name,(target,writer,kind) in references.items():
+        types[name+'_reference']=dict(kind='object',fields=dict(target=literal(target),writer_role=literal(writer),record_kind=literal(kind),
+            context_sha='sha',request_sha='sha',stage_nonce='sha',episode_commit_sha='sha',pin='pin'))
+        types[name+'_reference_or_none']=dict(kind='nullable',item=name+'_reference')
+    returns=dict(**common,status='status',stage_nonce='sha',episode_commit_sha='sha',
+        **{n+'_reference':n+'_reference_or_none' for n in references},G2_image_sha='sha_or_none',
+        G3_image_sha=literal(None),adoption_verified=literal(False),return_stability_verified=literal(False))
+    add('controller_return','controller','host/broker',returns,131072-363,['controller own final publication/bookends; host must still check owner quiet'])
+    add('broker_return','broker','host',dict(**common,status='status',controller_return_sha='sha_or_none',controller_binding_sha='sha_or_none',
+        stage_nonce='sha',episode_commit_sha='sha',broker_process_image_sha='sha_or_none',failure_record=dict(nullable='schema:broker_failure'),
+        host_consumption_authorized=literal(False)),131072-363,
+        ['broker retains direct controller owner through full cleanup','host retains own broker owner and independent H3'])
+    add('constructor_diagnostic','broker','host',dict(**common,ACK_sha='sha',phase=literal('controller_constructor'),
+        original_attempt_started='time',observed_at='time'),3072,['same sticky controller allocation attempt; diagnostic grants no retry'])
+    for role,producer in ROLES.items():
+        add(role+'_entry_header',producer,role,dict(**common,name='name',entry_nonce='sha',stage_name='name',stage_nonce='sha',
+            packet_sha='sha',permit_binding_sha='sha',descriptor_sha='sha',argv_sha='sha',projection_bundle_sha='sha',producer_identity='identity',
+            original_invocation_started='time',original_invocation_deadline='time',wire_template_sha=literal(template_pin['sha256']),
+            binding_raw_cap=literal(4608),packet_raw_cap=literal(36864)),4096-44,
+            ['exact '+producer+' local emission capability','sticky permit/attempt consumed before first allocation','no future child identity'])
+        for suffix,kind in (('binding','permit_binding'),('packet','entry_packet')):
+            name=role+'_'+suffix+'_frame'
+            add(name,producer,role,dict(kind=literal(suffix),sequence=literal(0 if suffix=='binding' else 1),previous_sha='sha',
+                producer_identity='identity',direction_nonce='sha',binding_sha='sha',payload='old_'+role+'_'+kind),
+                4608 if suffix=='binding' else 36864,['same original entry header and immutable raw payload'],envelope=True)
+            del schemas[name]['fields']['schema']
+        add(role+'_stage_header',producer,role,dict(**{'context_sha':'sha','nonce':'sha','descriptor':'old_'+role+'_stage_descriptor'},
+            owner_pid='pid',owner_creation_filetime='creation',slots=literal(16),slot_bytes=literal(4096),entry_header_sha='sha'),4052,
+            ['same retained suspended owner after create','exact complete role descriptor and original entry header'])
+        phasevalues=frozen_templates['production_descriptor_values'][role]['phases']+['terminal','error']
+        types[role+'_phase']=dict(kind='enum',values=phasevalues)
+        add(role+'_stage_frame',role,producer,dict(sequence='uint32',phase=role+'_phase',binding_sha='sha',previous_sha='sha',
+            producer_pid='pid',producer_creation_filetime='creation',stamp='time',error_code=dict(nullable='error_code')),4052,
+            ['same actual child self identity and bound stage header','strict phase/sequence/previous SHA','terminal/error exclusive'])
+        add(role+'_startup_capture',producer,producer+'/host',dict(**common,producer_identity='identity',owner_identity='identity',
+            argv=role+'_argv',command_line=role+'_command_line',cwd=literal(str(ROOT)),environment_sha='sha',ENTRY_pin='pin',
+            executable_pin='pin',entry_header_sha='sha',stage_header_sha='sha',packet_sha='sha',permit_binding_sha='sha',
+            descriptor_sha='sha',captured_at='time',actual_os_commandline_independently_verified=literal(False)),16384,
+            ['direct retained suspended owner','captured exact CreateProcess argv/commandline/cwd/environment before release'])
+        consumers=dict(controller=['broker','controller','parent'],parent=['controller','parent','fresh'],fresh=['parent','fresh'])
+        add(role+'_bootstrap_projection',role,consumers[role],
+            dict(**common,self_identity='identity',thread_id='pid',entry_header_sha='sha',stage_header_sha='sha',argv_sha='sha',
+                packet_sha='sha',permit_binding_sha='sha',descriptor_sha='sha',source_sha='sha',environment_sha='sha',
+                runtime_binding_contract_sha='sha',observed_at='time',parent_private_capture_sha=literal(None),
+                producer_kernel_authenticated=literal(False)),4052,
+            ['exact local successor '+role+' bootstrap with actual self HANDLE and direct-main/source/runtime/context bookends',
+             'parent separately joins own retained owner/capture with child self proof; child cannot certify private capture'],
+            carrier=dict(kind='first_append_only_stage_frame',frame_index=0,physical_cap=4096,additional_downstream_bundle=role!='fresh'))
+    extras={'broker_ACK_verified':('broker','controller','BrokerAckVerified','ACK_sha mailbox_header_sha offer_sha'),
+        'controller_G0':('controller','parent','SavedSuccessorG0Hold','bootstrap_image_sha input_files_sha input_metadata_sha anchor_sha source_sha runtime_binding_sha'),
+        'controller_store':('controller','parent','SavedSuccessorRoleStore','bootstrap_image_sha G0_image_sha tree_sha receipt_commit_sha'),
+        'controller_issuer':('controller','parent','SavedSuccessorControllerIssuer','bootstrap_image_sha G0_image_sha store_image_sha ACK_sha'),
+        'parent_hold':('parent','fresh','SavedSuccessorParentHold','bootstrap_image_sha input_files_sha input_metadata_sha anchor_sha source_sha runtime_binding_sha'),
+        'parent_store':('parent','fresh','SavedSuccessorRoleStore','bootstrap_image_sha hold_image_sha tree_sha receipt_commit_sha'),
+        'parent_issuer':('parent','fresh','SavedSuccessorParentIssuer','bootstrap_image_sha hold_image_sha store_image_sha')}
+    for name,(producer,consumer,cap,extra) in extras.items():
+        f=dict(**common,producer_identity='identity',source_packet_sha='sha_or_none',source_permit_binding_sha='sha_or_none',
+            stage_nonce='sha',source_image_sha='sha',observed_at='time',**fields(extra))
+        if name in ('controller_G0','parent_hold'):f.update(input_files=literal(683),input_bytes=literal(2950863),full_content_required=literal(True))
+        add(name+'_projection',producer,consumer,f,4096,['exact local '+cap,'same original bootstrap/context and dependencies; no object id crosses wire'],
+            local_capability_type=cap,full_projection_semantics_implemented=False)
+    bundle_keys=dict(controller=['broker_ACK_verified_projection'],parent=['controller_bootstrap_projection','controller_G0_projection','controller_store_projection','controller_issuer_projection'],
+        fresh=['parent_bootstrap_projection','parent_hold_projection','parent_store_projection','parent_issuer_projection'])
+    for role,producer in ROLES.items():
+        add(role+'_projection_bundle',producer,role,{name:'schema:'+name for name in bundle_keys[role]},17408,
+            ['immutable upstream projection raws before permit and packet','header binds bundle SHA and packet independently binds every projection SHA'],
+            carrier=dict(kind='entry_slot',slot='projections',physical_cap=18476))
+    carriers=dict(host=dict(kind='external_local_bytes',cap=32768,target=None,resource_admission=False),
+        broker=dict(kind='nested_return',schema='broker_return',field='failure_record',physical_cap=131116),
+        controller=dict(kind='fixed_file',target='diagnostics/failure.json',physical_cap=131072),
+        parent=dict(kind='single_failure_event',target='worker/events.jsonl',physical_cap=65536,newline_bytes=1,event_wrapper_bytes=0,
+            reserved_failure_bytes=32769,max_prior_normal_bytes=32767),
+        fresh=dict(kind='single_failure_event',target='worker/fresh/events.jsonl',physical_cap=65536,newline_bytes=1,event_wrapper_bytes=0,
+            reserved_failure_bytes=32769,max_prior_normal_bytes=32767))
+    for role in ('host','broker','controller','parent','fresh'):
+        consumers=dict(host=['host'],broker=['broker','host'],controller=['controller','broker','host'],parent=['parent','controller'],fresh=['fresh','parent'])
+        add(role+'_failure',role,consumers[role],dict(context_sha='sha_or_none',request_sha='sha_or_none',owner_identity='identity_or_none',
+            phase='failure_phase',primary_index='index',exceptions='errors',cleanup_indices='cleanup_indices',omitted_count='uint32',incomplete='boolean',
+            may_have_published='boolean',expected_publication_pin='pin_or_none',observed_at='time',
+            quiet_known='boolean',adoption_verified=literal(False),retry_authorized=literal(False)),32768,
+            ['retain original same-process exception/partial owner/cleanup objects','at most24 total nodes; incomplete never grants quiet/success'],
+            carrier=carriers[role],projection_rules=['primary index exists; unique indices; cleanup order preserved; shared total<=24',
+                'omitted_count>0 implies incomplete=true; incomplete cannot assert complete quiet or adoption',
+                'phase determines whether context/request/owner may be null; no sentinel identity',
+                'quiet_known requires independent actual retained-owner witness; error data cannot establish it'])
+    payloads=dict(request='type:request',ready='schema:READY',start='schema:START',context='schema:offer',ack='type:old_ACK',
+        binding='schema:controller_binding',constructor_probe='schema:constructor_diagnostic',controller_return='schema:controller_return',broker_return='schema:broker_return')
+    types['mailbox_kind']=dict(kind='enum',values=list(payloads));types['mailbox_sequence']=dict(kind='uint',low=0,high=2,encoded_max=1)
+    types['mailbox_payload']=dict(kind='union',choices=list(payloads.values()))
+    add('mailbox_envelope',['host','broker','controller'],['host','broker','controller'],dict(kind='mailbox_kind',sequence='mailbox_sequence',
+        previous_sha='sha',producer_identity='identity',direction_nonce='sha',binding_sha='sha',payload='mailbox_payload'),2097152+16384,
+        ['exact direction-specific predecessor and owner binding','payload schema selected by closed kind, never arbitrary role'],envelope=True)
+    del schemas['mailbox_envelope']['fields']['schema']
+    assert len(schemas)==45
+    edges=[list(e) for e in old_dag['data_order_edges']];roles=dict(old_dag['node_roles'])
+    edges.extend([['request','mailbox_header'],['broker_owner_armed','mailbox_header'],['mailbox_header','mailbox_request_committed'],
+        ['mailbox_request_committed','broker_ready']]);roles.update(mailbox_header='host',mailbox_request_committed='host')
+    for role,producer in ROLES.items():
+        for suffix,owner in (('projection_bundle',producer),('entry_transport_handles',producer),('entry_header',producer),('projection_committed',producer),
+                ('binding_committed',producer),('packet_committed',producer),('transport_commit_failed',producer),('startup_capture',producer),
+                ('bootstrap_projection',role),('constructor_failed',producer),('entry_transport_close_or_retain',producer)):
+            roles[role+'_'+suffix]=owner
+        edges.remove([role+'_allocation_attempt',role+'_owner_constructed'])
+        edges.append([role+'_projection_bundle',role+'_permit'])
+        edges.extend([[role+'_allocation_attempt',role+'_entry_transport_handles'],[role+'_entry_transport_handles',role+'_entry_header'],
+            [role+'_entry_header',role+'_projection_committed'],[role+'_projection_committed',role+'_binding_committed'],
+            [role+'_binding_committed',role+'_packet_committed'],[role+'_packet_committed',role+'_owner_constructed'],
+            [role+'_packet_committed',role+'_constructor_failed'],[role+'_entry_transport_handles',role+'_transport_commit_failed'],
+            [role+'_projection_committed',role+'_transport_commit_failed'],[role+'_binding_committed',role+'_transport_commit_failed'],
+            [role+'_transport_commit_failed',role+'_entry_transport_close_or_retain'],
+            [role+'_constructor_failed',role+'_entry_transport_close_or_retain']])
+        edges.remove([role+'_header_bound',role+'_release'])
+        edges.extend([[role+'_header_bound',role+'_startup_capture'],[role+'_startup_capture',role+'_release'],
+            [role+'_bootstrap',role+'_bootstrap_projection']])
+        if role!='fresh':edges.append([role+'_bootstrap_projection',('parent' if role=='controller' else 'fresh')+'_permit_binding'])
+    order=[];remaining=set(roles)
+    while remaining:
+        ready=sorted(n for n in remaining if not any(b==n and a in remaining for a,b in edges));assert ready,'cycle'
+        order.extend(ready);remaining.difference_update(ready)
+    obligations=[
+        'START keeps request original start/deadline; sent_at is only transmission observation',
+        'request/header/READY/START/context/offer/ACK independently joined with host expectation and retained owner',
+        'entry allocation sticky claim precedes all allocation; entry header has no future child identity',
+        'stage-header binds actual suspended owner and complete descriptor; capture then release then bootstrap',
+        'child projection has no parent private capture hash; parent independently joins self proof with retained owner',
+        'all projections are data; emitters require exact same-process capabilities and original context/episode',
+        'fresh has no issuer; no object id/capability crosses process boundary',
+        'failure preserves primary/ordered cleanup/publication uncertainty;24 nodes shared; incomplete cannot authorize success',
+        'success/known quiet/content reads need actual retained owners; return JSON cannot grant host consumption',
+        'runtime policy/source6500/33 roots/physical deadlines/full workflow resource and actual run authority remain OPEN']
+    for role,names_ in bundle_keys.items():
+        for name in names_:
+            node=name.removesuffix('_projection')
+            if node=='broker_ACK_verified':pass
+            elif node=='controller_G0':node='G0'
+            elif node.endswith('_bootstrap'):node+='_projection'
+            edges.append([node,role+'_projection_bundle'])
+    # Regenerate order after the explicit projection-carrier dependencies were added.
+    order=[];remaining=set(roles)
+    while remaining:
+        ready=sorted(n for n in remaining if not any(b==n and a in remaining for a,b in edges));assert ready,'projection cycle'
+        order.extend(ready);remaining.difference_update(ready)
+    kind_bindings={}
+    for direction,kinds in directions.items():
+        for sequence,kind in enumerate(kinds):
+            kind_bindings[kind]=dict(direction=direction,sequence=sequence,previous_kind=None if sequence==0 else kinds[sequence-1],
+                producer_binding='controller binding retained owner' if direction=='controller' else 'header.broker_identity' if direction in ('broker_terminal','broker_probe') else 'header.'+direction+'_identity',
+                direction_nonce='header.direction_nonces.'+direction,binding_sha='sha256(physical mailbox header slot)',
+                consumers=['broker'] if direction=='host' else ['broker','host'] if direction=='controller' else ['host'])
+    constraints=dict(mailbox_kinds=kind_bindings,
+        entry_frames=dict(binding=dict(sequence=0,previous_sha='0'*64),packet=dict(sequence=1,previous_sha='sha256(canonical accepted binding envelope raw)'),
+            producer_identity='header.producer_identity',direction_nonce='header.entry_nonce',binding_sha='sha256(physical entry header slot)'),
+        invocation=dict(start_source='request.invocation_started',deadline_source='request.deadline',deadline_offset=180,
+            standby='min(original start+10, original deadline)',order=['original start','READY.ready_at','START.sent_at','offer.published_at','ACK time'],
+            original_values_equal_in=['READY','START','context','ACK'],sent_at_resets_start=False),
+        stage_frames=dict(normal_error_code=None,error_phase='error',error_code_required=True,terminal_and_error_exclusive=True,
+            first_normal_sequence=1,first_normal_previous_sha='sha256(canonical accepted bootstrap projection raw)',
+            early_error_sequence=0,early_error_previous_sha='0'*64,
+            previous_sha='sha256(canonical accepted previous stage frame raw)',binding_sha='sha256(physical stage header slot)',
+            bootstrap_slot_excluded_from_phase_sequence=True),
+        returns=dict(controller=dict(returned_candidate=dict(required=[n+'_reference' for n in references if n!='failure']+['G2_image_sha'],
+                null=['failure_reference','G3_image_sha']),failed=dict(required=['failure_reference'],null=['G3_image_sha']),
+                unknown=dict(required=[],null=['G2_image_sha','G3_image_sha'])),
+            broker=dict(returned_candidate=dict(required=['controller_return_sha','controller_binding_sha','broker_process_image_sha'],null=['failure_record']),
+                failed=dict(required=['failure_record'],null=[]),unknown=dict(required=['failure_record'],null=[]))),
+        failure=dict(primary='0 <= primary_index < len(exceptions)',cleanup='unique original ordered indices in exceptions excluding primary',
+            incomplete='incomplete == (omitted_count > 0)',lossy='incomplete or any exception.truncated',
+            lossy_blocks_complete_quiet=True,quiet_true_requires='actual retained-owner complete witness',
+            may_have_published_requires='expected_publication_pin is not None',publication_adoption='unknown; no success from diagnostic',
+            context_nullable_phases=['H0','arming','READY','START','context'],request_nullable_phases=['H0'],
+            owner_nonnull_requires='direct kernel identity; never sentinel or packet self-report'),
+        projections=dict(bundles=bundle_keys,freeze_before='permit',bundle_hash_source='physical entry header projection_bundle_sha',
+            packet_sha_fields={r:{n:n+'_sha' for n in keys} for r,keys in bundle_keys.items()},
+            coherent_bundle_header_rehash_still_requires_packet_fields=True,
+            each_raw_hash_source='independent frozen packet projection SHA fields',bootstrap_carrier='first append-only stage frame index0; full raw+44<=4096',
+            bootstrap_before='first phase frame and scientific hold',
+            current_development_API_accepts_new_wire=False))
+    registry=dict(authority='DRAFT_NONAUTHORITATIVE',implemented=False,schema_count=45,types=types,schemas=schemas,cross_field_constraints=constraints,
+        wire_template_pin=template_pin,prior_registry_pin=pin((OLD/'protocol_domains.json').read_bytes()),
+        original_source_pins=base['sources'],request_contract_pin=pin((RUNTIME/'request_contract_v2.json').read_bytes()),
+        reference_obligations='fixed target/writer/kind; own captured context/request/stage/episode; actual quiet then independent exact read',
+        mailbox_payloads=payloads,obligations=obligations,production_validator_implemented=False,actual_F=False,
+        scientific_evidence_adopted=False,resource_admission=False,formal_result=False)
+    matrix=read(OLD/'verification_matrix.json')['runtime_fault_matrix']+[dict(case=v,status='UNRUN') for v in obligations]
+    local_edges=[*old_dag['same_process_capability_edges']]
+    for role in ROLES:
+        local_edges.extend([[role+'_allocation_attempt',role+'_entry_transport_handles'],
+            [role+'_entry_transport_handles',role+'_entry_header'],[role+'_constructor_failed',role+'_entry_transport_close_or_retain']])
+    graph=dict(authority='DRAFT_NONAUTHORITATIVE',implemented=False,prior_dag_pin=pin((OLD/'protocol_dag.json').read_bytes()),
+        node_roles=roles,topological_order=order,data_order_edges=edges,same_process_capability_edges=local_edges,
+        runtime_fault_matrix=matrix,hash_edges=[['frozen_template','wire_template'],['wire_template','wire_registry']],
+        allocation_failure_obligation='claim stays consumed; transport closed or same-process unresolved capability retained; no retry',
+        retained_failure_objects=['original_episode','sticky_claim','transport_handles','partial_owner_or_none','primary_exception','ordered_cleanup_exceptions'],
+        protocol_contract_complete=False,actual_F=False,scientific_evidence_adopted=False,resource_admission=False,formal_result=False)
+    for n,v in (('wire_templates.json',template),('wire_domains.json',registry),('wire_dag_matrix.json',graph)):save(n,v)
+    target=PACKAGE/'saved_checks.py';assert pin(target.read_bytes())==base['helpers'][target.relative_to(ROOT).as_posix()]
+    spec=importlib.util.spec_from_file_location('independent_wire_design_oracle',target);oracle=importlib.util.module_from_spec(spec);spec.loader.exec_module(oracle)
+    print(json.dumps(oracle.verify_design(),sort_keys=True))
+assert sys.argv[1:] in (['baseline'],['design'])
+baseline() if sys.argv[1]=='baseline' else design()

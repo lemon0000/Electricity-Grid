@@ -1,0 +1,176 @@
+"""Bounded ordinary static targets with retained raw bytes; never a role launcher."""
+import time
+STARTED=time.perf_counter()
+import base64
+from hashlib import sha256
+import json
+from pathlib import Path
+import re
+import subprocess
+import sys
+from threading import Event,Thread
+MAIN=Path(__file__).resolve().parent;ROOT=MAIN.parents[3];PACKAGE=MAIN.parent/'final_package_01'
+PREV=ROOT/'results/tables/staged_rts24_saved_fresh_role_data_v1_non_authoritative'
+SCOPE='docs/plan/staged_deliverability_c_saved_fresh_wire_scope_budget_v1.md'
+STDOUT_CAP,STDERR_CAP=262144,32768
+def raw(v):return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii')
+def pin(v):return dict(bytes=len(v),sha256=sha256(v).hexdigest())
+def read(p):return json.loads(p.read_bytes())
+def names(paths):return {p.relative_to(ROOT).as_posix():pin(p.read_bytes()) for p in paths}
+def save(p,v):
+    data=raw(v);assert len(data)<=2*1024**2
+    with p.open('xb') as f:f.write(data)
+def source():return names(ROOT/n for n in read(PREV/'checks_01/admission.json')['source_pins'])
+def preserved():
+    if (MAIN/'baseline.json').exists():expected=read(MAIN/'baseline.json')['preserved']
+    else:
+        expected=dict(read(PREV/'checks_01/baseline.json')['preserved'])
+        expected.update(names(p for p in PREV.rglob('*') if p.is_file()))
+        expected.update({n:p for n,p in read(PREV/'checks_01/document_checks.json')['documents'].items() if n.startswith('docs/')})
+    assert len(expected)==4290 and names(ROOT/n for n in expected)==expected
+    return pin(raw(expected))
+def helpers():return names([*MAIN.glob('*.py'),*PACKAGE.glob('*.py')])
+def snapshots(values):
+    for n,p in values.items():
+        target=MAIN/('helper_'+p['sha256']+'.snapshot')
+        if target.exists():assert pin(target.read_bytes())==p
+        else:
+            data=(ROOT/n).read_bytes();assert pin(data)==p
+            with target.open('xb') as f:f.write(data)
+def drain(child,timeout):
+    signal=Event();state={n:dict(data=bytearray(),observed=0,truncated=False,error=None) for n in ('stdout','stderr')}
+    def reader(name,cap):
+        row=state[name]
+        try:
+            while True:
+                block=getattr(child,name).read(4096)
+                if not block:break
+                row['observed']+=len(block);remaining=cap-len(row['data']);row['data'].extend(block[:remaining])
+                if len(block)>remaining:row['truncated']=True;signal.set()
+        except BaseException as e:row['error']=type(e).__name__+': '+str(e)[:256];signal.set()
+    threads=[Thread(target=reader,args=(n,c),daemon=True) for n,c in (('stdout',STDOUT_CAP),('stderr',STDERR_CAP))]
+    for t in threads:t.start()
+    deadline=time.perf_counter()+timeout;reason=None;cleanup=[];killed=False
+    while child.poll() is None:
+        if signal.is_set():reason='output_limit_or_reader_error';break
+        if time.perf_counter()>=deadline:reason='timeout';break
+        signal.wait(.01)
+    if reason and child.poll() is None:
+        try:child.kill();killed=True
+        except BaseException as e:cleanup.append('kill:'+type(e).__name__)
+    try:child.wait(timeout=1.)
+    except BaseException as e:cleanup.append('wait:'+type(e).__name__)
+    for t in threads:t.join(timeout=.5)
+    terminal=not any(t.is_alive() for t in threads);closed=False
+    if terminal:
+        for n in state:
+            try:getattr(child,n).close()
+            except BaseException as e:cleanup.append('close:'+type(e).__name__)
+        closed=all(getattr(child,n).closed for n in state)
+    if any(v['truncated'] or v['error'] for v in state.values()):reason=reason or 'output_limit_or_reader_error'
+    if cleanup or not terminal or not closed or child.poll() is None:reason=reason or 'cleanup_unresolved'
+    return child.poll(),bytes(state['stdout']['data']),bytes(state['stderr']['data']),reason,dict(child_created=True,
+        direct_child_pid=child.pid,killed=killed,stdout_observed_bytes=state['stdout']['observed'],stderr_observed_bytes=state['stderr']['observed'],
+        stdout_truncated=state['stdout']['truncated'],stderr_truncated=state['stderr']['truncated'],
+        reader_errors=[r['error'] for r in state.values() if r['error']],reader_threads_terminal=terminal,pipes_closed=closed,cleanup=cleanup,
+        stdout_cap=STDOUT_CAP,stderr_cap=STDERR_CAP,chunk_bytes=4096)
+def documentation():
+    baseline=read(MAIN/'baseline.json');navigation={};links=0
+    docs=[SCOPE,'docs/plan/continuation_handoff_20261026_saved_fresh_wire_contract.md',MAIN.parent.relative_to(ROOT).as_posix()+'/validation_report.md']
+    assert sum((ROOT/n).stat().st_size for n in docs)<=1024**2
+    texts=[(n,(ROOT/n).read_text(encoding='utf8')) for n in docs]
+    for n,v in baseline['navigation'].items():
+        data=(ROOT/n).read_bytes();header,sep,body=data.partition(b'\n\n')
+        assert sep and header==base64.b64decode(v['header_base64']) and pin(body[-v['body']['bytes']:])==v['body']
+        prefix=body[:-v['body']['bytes']];assert prefix.endswith(b'\n\n')
+        navigation[n]=dict(header_base64=v['header_base64'],prefix_base64=base64.b64encode(prefix).decode(),
+            before_full_pin=v['full'],before_body_pin=v['body'],after_body_pin=pin(body),after_full_pin=pin(data))
+        texts.append((n,prefix.decode('utf8')))
+    for n,text in texts:
+        assert '\ufffd' not in text
+        for target in re.findall(r'\]\(([^)]+)\)',text):
+            if '://' in target or target.startswith('#'):continue
+            assert (ROOT/n).parent.joinpath(target.split('#')[0]).resolve().exists(),(n,target)
+            links+=1
+    save(MAIN/'document_checks.json',dict(documents=names(ROOT/n for n in docs),navigation=navigation,checked_links=links))
+def main(action):
+    assert action in ('baseline','design','design_revision','saved','terminal')
+    labels=dict(baseline='baseline_01',design='design_02',design_revision='reserve_05',saved='saved_03',terminal='terminal_04')
+    prior={p.name.removesuffix('.exit.json'):p for d in (MAIN,PACKAGE) for p in d.glob('*.exit.json')}
+    index=list(labels).index(action);assert set(prior)==set(list(labels.values())[:index])
+    assert all(read(p)['accepted'] for p in prior.values())
+    bootstrap=read(MAIN/'bootstrap_failure_00.json')
+    spent=bootstrap['charged_seconds']+sum(read(p)['charged_seconds'] for p in prior.values());cap=18 if action=='design_revision' else 20 if action in ('baseline','design') else 30
+    assert spent+cap<=120
+    label=labels[action];target=MAIN if action in ('baseline','design','design_revision') else PACKAGE
+    for suffix in ('stdout.log','stderr.log','exit.json'):assert not (target/(label+'.'+suffix)).exists()
+    before_source=source();assert before_source==read(PREV/'checks_01/admission.json')['source_pins']
+    before_helpers=helpers();before_fixed=preserved();snapshots(before_helpers)
+    if action!='baseline':
+        baseline=read(MAIN/'baseline.json');revision_path=MAIN/'draft_revision_03.json'
+        if action=='design_revision':
+            assert not revision_path.exists()
+            assert set(before_helpers)==set(baseline['helpers'])
+            designs=names(MAIN/n for n in ('wire_templates.json','wire_domains.json','wire_dag_matrix.json'))
+            assert designs==read(MAIN/'design_02.exit.json')['design_output_pins']
+            for n,p in designs.items():
+                archive=MAIN/('design_02_'+p['sha256']+'.snapshot')
+                with archive.open('xb') as stream:stream.write((ROOT/n).read_bytes())
+                assert pin(archive.read_bytes())==p
+            save(revision_path,dict(authority='DRAFT_NONAUTHORITATIVE',reason='PRE_SEAL proof-before-hold and full stage phase order; finite accounting tolerance',
+                baseline_pin=pin((MAIN/'baseline.json').read_bytes()),helpers_before=baseline['helpers'],helpers_after=before_helpers,
+                prior_records={n:pin(p.read_bytes()) for n,p in prior.items()},original_design_output_pins=designs,source_changed=False))
+        expected_helpers=read(revision_path)['helpers_after'] if revision_path.exists() else baseline['helpers']
+        assert expected_helpers==before_helpers
+        assert baseline['sources']==before_source and pin((ROOT/SCOPE).read_bytes())==baseline['scope_pin']
+    if action=='saved':
+        documentation();files=names(p for p in MAIN.rglob('*') if p.is_file())
+        assert len(files)<=32 and sum(p['bytes'] for p in files.values())<=4*1024**2
+        save(PACKAGE/'execution_freeze.json',dict(files=files,count=len(files),bytes=sum(p['bytes'] for p in files.values()),root=pin(raw(files))))
+        save(PACKAGE/'support_pins.json',names((PACKAGE/n for n in ('execution_freeze.json','saved_checks.py'))))
+    if action in ('saved','terminal'):assert names(p for p in MAIN.rglob('*') if p.is_file())==read(PACKAGE/'execution_freeze.json')['files']
+    script=MAIN/'builder.py' if action in ('baseline','design','design_revision') else PACKAGE/'saved_checks.py'
+    argv=[sys.executable,'-B',str(script),*([action] if action in ('baseline','design','design_revision') else [])]
+    filecap,bytecap=(32,4*1024**2) if target==MAIN else (12,1024**2)
+    files=[p for p in target.rglob('*') if p.is_file()]
+    meta_files=1 if action=='baseline' else 3 if action in ('design','design_revision') else 0
+    meta_bytes=2*1024**2 if action=='baseline' else 1024**2 if action in ('design','design_revision') else 0
+    assert len(files)+meta_files+3<=filecap and sum(p.stat().st_size for p in files)+meta_bytes+STDOUT_CAP+STDERR_CAP+65536<=bytecap
+    preparation=time.perf_counter()-STARTED;timeout=cap-3.-preparation;target_start=time.perf_counter()
+    if timeout<=0:
+        code,out,err,error=-4,b'',b'','preparation_budget_exhausted';state=dict(child_created=False,reader_threads_terminal=True,pipes_closed=None,cleanup=[])
+    else:
+        try:child=subprocess.Popen(argv,cwd=ROOT,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        except BaseException as e:
+            code,out,err,error=-3,b'',b'','popen_error';state=dict(child_created=False,popen_error_type=type(e).__name__,popen_error_message=str(e)[:256],cleanup=[])
+        else:code,out,err,error,state=drain(child,timeout)
+    duration=time.perf_counter()-target_start
+    after_source=source();after_helpers=helpers();after_fixed=preserved()
+    post=after_source==before_source and after_helpers==before_helpers and after_fixed==before_fixed
+    if action in ('saved','terminal'):post &= names(p for p in MAIN.rglob('*') if p.is_file())==read(PACKAGE/'execution_freeze.json')['files']
+    observed=time.perf_counter()-STARTED;charge=observed+.5
+    record=dict(authority='DRAFT_NONAUTHORITATIVE',label=label,argv=argv,returncode=code,error=error,
+        accepted=code==0 and error is None and post and charge<=cap,source_pins=before_source,helper_pins=before_helpers,
+        fixed_before=before_fixed,fixed_after=after_fixed,stdout_pin=pin(out),stderr_pin=pin(err),bounded_drain=state,
+        preparation_seconds=preparation,target_timeout_seconds=timeout,target_seconds=duration,
+        observed_capture_seconds=observed,tail_reserve_seconds=.5,charged_seconds=charge,cap_seconds=cap,
+        previous_charged_seconds=spent,prior_records={n:pin(p.read_bytes()) for n,p in prior.items()},
+        package_postcheck_verified=False,capture_python_startup_included=False,whole_workflow_wall_budget_verified=False,
+        actual_F=False,scientific_evidence_adopted=False,resource_admission=False,formal_result=False)
+    if action!='baseline':record['design_output_pins']=names(MAIN/n for n in ('wire_templates.json','wire_domains.json','wire_dag_matrix.json') if (MAIN/n).exists())
+    if action in ('saved','terminal'):record['support_pin']=pin((PACKAGE/'support_pins.json').read_bytes())
+    if (MAIN/'draft_revision_03.json').exists():record['helper_revision_pin']=pin((MAIN/'draft_revision_03.json').read_bytes())
+    files=[p for p in target.rglob('*') if p.is_file()];payload=raw(record)
+    okay=len(files)+3<=filecap and sum(p.stat().st_size for p in files)+len(out)+len(err)+len(payload)<=bytecap
+    record['package_postcheck_verified']=okay;record['accepted'] &= okay
+    if not okay:
+        record.update(accepted=False,error='prospective_package_limit',raw_retained=False,discarded_stdout_pin=pin(out),discarded_stderr_pin=pin(err),stdout_pin=pin(b''),stderr_pin=pin(b''));out,err=b'',b''
+    payload=raw(record);assert len(files)+3<=filecap and sum(p.stat().st_size for p in files)+len(out)+len(err)+len(payload)<=bytecap
+    for suffix,data in (('stdout.log',out),('stderr.log',err),('exit.json',payload)):
+        with (target/(label+'.'+suffix)).open('xb') as f:f.write(data)
+    assert (target/(label+'.exit.json')).read_bytes()==payload
+    print(json.dumps(dict(label=label,accepted=record['accepted'],returncode=code,charged_seconds=charge,cumulative_static_seconds=spent+charge,
+        files=len(files)+3,bytes=sum(p.stat().st_size for p in files)+len(out)+len(err)+len(payload)),sort_keys=True))
+    if not record['accepted']:raise SystemExit(1)
+if __name__=='__main__':
+    assert len(sys.argv)==2;main(sys.argv[1])

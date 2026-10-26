@@ -1,0 +1,49 @@
+# C：successor wire、startup 与本地投影合同范围预算
+
+2026-10-26，DRAFT_NONAUTHORITATIVE。接续[三角色数据入口交接](continuation_handoff_20261025_saved_fresh_role_data.md)，起始 HEAD/origin `147fa6162be10976eb16336ae71740e143f8d594`。本轮先补齐真实角色连接所需的生产域设计；root 唯一 writer，既有独立 reviewer 只读 PRE_SEAL。实际 fresh、最终父端采用、整包科学采用及资源/正式门禁保持未开放。
+
+## 范围和出口
+
+保留 Source49、ENTRY/tests/科学 adapter、原31字段context/20字段request、冻结10-schema、21个development声明及全部前序字节。本轮输出45个新逻辑schema的字段/容量/生产消费角色/能力前提、独立wire模板、扩展依赖DAG和负例/实施矩阵。新域是未来生产实现合同，implemented=false；本轮不改变生产validator/CLI或构造任何实际actor。
+
+45域包括：mailbox header、READY、START、offer、controller binding、controller return、broker return、constructor diagnostic及判别式mailbox envelope共9；controller/parent/fresh每角色entry header、binding frame、packet frame、projection bundle、stage header、stage frame、startup capture、bootstrap projection和failure共27；broker ACK-verified、controller G0/store/issuer、parent hold/store/issuer共7个额外本地projection；host/broker failure共2。controller/parent bootstrap projection属于上述三角色域，不能重复计入。原request和ACK payload继续用冻结合同，不能变更其字段或hash域。
+
+交付只证明设计域、编码容量、无环顺序和拒绝被破坏的合同；不证明任何wire消息已由可信producer产生，不替代actor bootstrap或科学hold。当前480节点及其三个失败只复用；新增pytest、ordinary cold probe、模拟小时均为0。
+
+## 构造和能力依赖
+
+request raw/SHA先于header构造；实际wire提交顺序是header commit→request slot commit→READY→START→context→offer→ACK→broker ACK capability。原invocation_started s在request/H0前已固定；START的sent_at是发送时刻，不能据此重置s或deadline。context发布只发生一次；ACK不回写context。预启动entry header在permit/packet/descriptor/argv及sticky allocation claim之后、owner之前创建；先创建create-only transport handles，再提交header，绑定已定稿四者SHA和producer数据，不含未来child身份。constructor失败仍保留已消费claim；transport必须完成关闭或由不可序列化未决能力强持。stage header在suspended owner创建后绑定真实owner identity、entry-header SHA及完整descriptor；startup capture在stage-header后、release前形成；child bootstrap随后独立核自身/argv/context/两header。
+
+parent私有startup capture不是child可自行观察的事实。child bootstrap projection不包含未来parent capture SHA或独立producer认证；父端之后以自身retained owner/capture和收到的self proof做exact join。packet/descriptor都不反向引用entry/stage header、startup、child identity或自己的SHA。新wire template只pin冻结旧模板/布局和固定容量，不pin引用它的新registry，禁止hash环。
+
+同对象能力只存在于所属进程：broker ACK能力，controller bootstrap/G0/store/issuer，parent bootstrap/独立hold/store/issuer。wire projection保存有界image、身份和依赖摘要；issuer必须强持并重验真实同对象能力才能发射，新数据对象和JSON bool均不能发行permit。fresh无issuer。producer/consumer角色、实际builder义务及child无法独立认证producer的边界逐域列出；完整G0/parent/fresh/H3库存、runtime closure和earlier deadlines继续按原合同。
+
+10个projection的真实carrier分别固定：broker ACK projection、controller bootstrap/G0/store/issuer、parent bootstrap/hold/store/issuer，按1/4/4闭集放入下游角色entry transport的新projection-bundle slot。bundle raw在permit/packet之前冻结，header pin其SHA，机器表逐项绑定bundle field→冻结packet projection-SHA field；物理slot≤18476B、值≤17408B。transport提交顺序为header→projection→binding→packet，完整四slot prefix提交后才构造owner。
+
+stage沿用单独header加16个frame slot，即17×4096B mapping；逻辑frame index0为bootstrap projection（值≤4052B），随后phase/error/terminal用index1..15，按append-only顺序。正常phase首帧sequence=1且previous指向bootstrap raw；bootstrap前失败可在index0提交compact error并终止，不形成bootstrap/hold能力。fresh无下游bundle，其self proof经首帧交给parent；controller/parent自身proof还会进入其下游bundle。三类proof和五类failure的consumer均为闭集角色列表。未来validator应接受本轮生产projection域，原21个development声明与现有三data-only API不扩域或自动转换。
+
+## 编码、容量与失败
+
+沿用ASCII canonical JSON、sorted keys、无空白、拒绝duplicate/nonfinite与exact类型。使用逐字段最大编码长度求和，包含key/冒号/逗号/括号；结构化receipt、direction nonces、固定argv与Windows command line另列推导。不能拿一个representative packet大小当最大值。原path编码≤4096B、name≤192 ASCII、SHA/identity/time域不放宽；argv只允许原25/19/19-token固定grammar，EXE/ENTRY是当前冻结路径，所有变量token有界。
+
+mailbox原10个slot的物理布局、44B framing、commit-last/zero tail保留；payload/envelope逐项满足原slot。entry header独立4096B physical slot，binding/packet沿用4652/36908 physical帽；stage完整header嵌入3072B descriptor，header加16帧的17×4096 layout不变。entry frame采用原七字段envelope，logical role由绑定的header/固定schema contract约束；不为schema标志增加未计费wire字段。stage frame是直接canonical object，全部字段自身已包含phase/chain/identity，整值+44≤4096，不再外套七字段frame。startup capture≤16384B，是producer私有记录，child不消费它。
+
+五类完整failure各≤32768B canonical bytes，其carrier逐项固定：controller只写既有diagnostics/failure.json（≤128KiB）；parent/fresh各向自己的events.jsonl追加一次完整failure canonical object及单LF，无额外wrapper。两个64KiB文件在每次正常event追加前恒为failure保留32769B，因此此前正常事件合计≤32767B；failure不重试追加。broker将≤32KiB诊断嵌入broker_return的≤128KiB slot；host保留外部调用方本地≤32KiB诊断bytes，不在F17 targets新增文件。stage failure只传有界error_code，mailbox/return只传固定target/type的reference或其明确预算内broker诊断；任何32KiB记录都不能塞入4096B stage slot。原异常和未决owner仍由本进程强持；外部host完整资源/持久发布预算继续OPEN。
+
+failure固定primary、按原顺序的cleanup、phase、may-have-published、known/unknown和expected SHA；bounded摘要不伪造原异常对象，原异常/partial owner在本进程强持。最多24个exception摘要共享预算，超出计数并明确incomplete=true，禁止升级为成功或完整quiet。producer不能读取未确认quiet的child内容来补诊断。failure不退款episode或改nonce重试；失败/清理与成功共享原绝对总deadline。构造前未知context/owner使用明确nullable字段，不能用哨兵PID冒充实际kernel身份。
+
+返回payload以context/request、原episode/stage、固定target名称/唯一writer、record kind及pin构成具名reference；consumer在完整quiet/retained-owner验证后只独立读取对应固定target，拒绝不同target/role/type交换。包含worker/comparison_candidate.json的固定candidate reference，完整process/candidate/metrics依旧在原17 targets或实际retained对象中核验，不把完整128KiB记录嵌入另一个128KiB slot。controller return的G3_image_sha固定None，adoption/返回后稳定性自证固定false；三种status的必有/可有/必须空reference由机器矩阵固定。broker return不以child JSON授予host消费权。消息格式、pin和bool一致均不能代替quiet/retained owner。
+
+机器cross_field_constraints明确kind对应direction/sequence/predecessor/producer/nonce/header、entry两帧previous域、各header SHA的raw/physical域、READY/START原start/deadline链、normal/error frame的互斥error_code规则、return status/reference组合及failure index/遗漏/quiet/publication条件。独立oracle破坏这些约束表并验证拒绝；这是合同结构验证，不是实际消息语义已经执行。
+
+## 完整路径、费用与保存
+
+本轮唯一路径为baseline→设计生成及独立结构oracle→独立保存重核→terminal外部exit/Git；没有solver、模型、Job、数据下载或真实角色启动。逐次前后核Source49及4123+165结果文件+2份前序新文档=4290前序路径，保存当前helper exact bytes；保存阶段只执行pin绑定的前序stdlib archive，复用其480节点/P1全683及旧失败，不import当前ENTRY/helpers。新增runtime fault矩阵全部UNRUN，独立设计mutation不是runtime fault通过。
+
+普通静态总预算≤120s，预登记baseline_01 cap20、design_02 cap20、saved_03 cap30、terminal_04 cap30；reserve_05 cap20仅用于前述失败的已定位修复后独立重核。所有失败及原helper保留，真实charge超cap或pin漂移先停dependent action并重算剩余账；不扩大120s或自动重试。charge含本wrapper前后pins/快照/目标/外部保存检查，另列0.5s未实测尾部reserve；Python初始启动、编辑/review/Git不在capture账，不能称完整workflow wall/RSS或硬停止已证明。stdout≤262144B、stderr≤32768B、4096B读块，direct-child kill/wait、reader/pipes终态与清理错误显式保存；启动前无剩余窗口则不启动目标。
+
+首个wrapper在Python解析阶段因生成器括号错误退出，target未启动。原wrapper/scope snapshot与工具combined decoded输出分别保留，不能称为target分流raw。该工具观测0.8421054s加0.5s reserve，共1.3421054s计入原120s。四个目标帽合计100s后仅余18.6578946s，未用reserve降为最多18s；不扩大总账。修复后首次baseline尚未执行，所有新合同仍是同一可迭代draft。
+
+新root `results/tables/staged_rts24_saved_fresh_wire_contract_v1_non_authoritative`，checks_01≤32files/4MiB、final_package_01≤12files/1MiB；三份新文档合计≤1MiB，终态JSON≤64KiB，组合≤48files/7MiB。保存freeze在design外部exit之后建立；所有helper先做snapshot再freeze main，saved/terminal只写package。本次capture不在其进程内自证自己的exit，外部checkpoint与Git逐blob承接。四导航按原header+双LF+本轮prefix+完整旧body更新，旧失败与正文不重写。
+
+完成独立只读PRE_SEAL、结构负例、hash/diff/link/process核验后，按已有授权精确commit/push并核远端及空porcelain。下一实现按此45域补充exact validators/emitters和bootstrap join，再连接真实issuer/retained owner；生产NumPy probe政策、33根闭包、source6500/180s、完整workflow资源/停止能力及具体actual F运行授权继续OPEN，宽goal保持active。

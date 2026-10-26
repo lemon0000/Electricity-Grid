@@ -1,0 +1,405 @@
+"""Independent structural/saved oracle; no project implementation or builder import."""
+import base64
+import copy
+from hashlib import sha256
+import importlib.util
+import json
+from pathlib import Path
+import re
+import sys
+PACKAGE=Path(__file__).resolve().parent;MAIN=PACKAGE.parent/'checks_01';ROOT=MAIN.parents[3]
+OLD=ROOT/'results/tables/staged_rts24_saved_fresh_upstream_contract_v1_non_authoritative/checks_01'
+PREV=ROOT/'results/tables/staged_rts24_saved_fresh_role_data_v1_non_authoritative'
+RUNTIME=ROOT/'results/tables/staged_rts24_saved_fresh_runtime_binding_v1_non_authoritative/checks_01'
+ROLES=dict(controller='broker',parent='controller',fresh='parent')
+def raw(v):return json.dumps(v,ensure_ascii=True,sort_keys=True,separators=(',',':'),allow_nan=False).encode('ascii')
+def pin(v):return dict(bytes=len(v),sha256=sha256(v).hexdigest())
+def pairs(items):
+    out={}
+    for k,v in items:assert k not in out;out[k]=v
+    return out
+def read(p):
+    data=p.read_bytes();value=json.loads(data,object_pairs_hook=pairs,parse_constant=lambda _:(_ for _ in ()).throw(AssertionError('nonfinite')))
+    assert raw(value)==data,'noncanonical';return value
+def names(paths):return {p.relative_to(ROOT).as_posix():pin(p.read_bytes()) for p in paths}
+def load(path,expected,label):
+    assert pin(path.read_bytes())==expected
+    spec=importlib.util.spec_from_file_location(label,path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    assert pin(path.read_bytes())==expected;return module
+def size_object(fields,bound):return 2+max(0,len(fields)-1)+sum(len(raw(k))+1+bound(v) for k,v in fields.items())
+def structure(registry,template,graph):
+    assert registry['schema_count']==45 and registry['production_validator_implemented'] is False
+    assert registry['wire_template_pin']==pin(raw(template))
+    assert registry['prior_registry_pin']==pin((OLD/'protocol_domains.json').read_bytes())
+    assert registry['request_contract_pin']==pin((RUNTIME/'request_contract_v2.json').read_bytes())
+    assert template['hash_inputs']==names((OLD/n for n in ('fixed_templates.json','protocol_domains.json','protocol_dag.json')))
+    for v in (registry,template,graph):assert v['authority']=='DRAFT_NONAUTHORITATIVE' and v['implemented'] is False
+    for v in (registry,graph):assert all(v[n] is False for n in ('actual_F','scientific_evidence_adopted','resource_admission','formal_result'))
+    assert template['physical_extra']==44 and template['envelope_extra_bound']==363
+    assert template['entry_slots']==[['header',4096],['binding',4652],['packet',36908],['projections',18476]]
+    assert template['entry_commit_order']==['header','projections','binding','packet'] and template['projection_bundle_value_cap']==17408
+    assert template['reader_requires_complete_entry_prefix'] is True
+    assert template['stage_slots']==16 and template['stage_slot_bytes']==4096
+    assert template['stage_header_blocks']==1 and template['stage_mapping_bytes']==17*4096
+    assert template['stage_bootstrap_frame_index']==0 and template['stage_phase_frame_indices']==list(range(1,16)) and template['stage_append_only'] is True
+    assert template['hash_domains']==dict(mailbox_header_sha='physical committed header slot',entry_header_sha='physical committed header slot',
+        stage_header_sha='physical committed header slot',packet_sha='canonical payload raw',permit_binding_sha='canonical payload raw',
+        descriptor_sha='canonical payload raw',argv_sha='canonical argv array raw',projection_sha='canonical projection raw',
+        projection_bundle_sha='canonical bundle raw',previous_sha='canonical previous envelope raw')
+    assert template['startup_target_cap']==16384 and template['failure_value_cap']==32768 and template['failure_target_cap']==131072
+    assert template['max_exception_nodes']==24 and template['retry_new_nonce'] is False
+    assert all(template[n] is True for n in ('create_only','commit_last','tail_zero','same_snapshot_twice'))
+    assert template['producer_kernel_authentication_by_child'] is template['actual_deadline_enforced'] is False
+    slots=dict(template['mailbox_slots']);assert len(slots)==10 and slots==dict(header=4096,request=32768,ready=4096,start=4096,
+        context=2113580,ack=4096,binding=32768,constructor_probe=4096,controller_return=131116,broker_return=131116)
+    assert template['mailbox_directions']==dict(host=['request','start','ack'],broker=['ready','context','binding'],controller=['controller_return'],
+        broker_terminal=['broker_return'],broker_probe=['constructor_probe'])
+    schemas=registry['schemas'];types=registry['types'];old=read(OLD/'protocol_domains.json')
+    expected={'mailbox_header','READY','START','offer','controller_binding','controller_return','broker_return','constructor_diagnostic','mailbox_envelope',
+        'broker_ACK_verified_projection','controller_G0_projection','controller_store_projection','controller_issuer_projection',
+        'parent_hold_projection','parent_store_projection','parent_issuer_projection','host_failure','broker_failure'}
+    expected|={r+'_'+n for r in ROLES for n in ('entry_header','binding_frame','packet_frame','projection_bundle','stage_header','stage_frame','startup_capture','bootstrap_projection','failure')}
+    assert len(expected)==45 and set(schemas)==expected
+    active=set();cache={}
+    def bound(ref):
+        if isinstance(ref,dict):
+            assert len(ref)==1
+            if 'literal' in ref:return len(raw(ref['literal']))
+            assert 'nullable' in ref;return max(4,bound(ref['nullable']))
+        assert type(ref) is str
+        if ref.startswith('type:'):return bound(ref[5:])
+        if ref.startswith('schema:'):return domain_bound(ref[7:])
+        key='t:'+ref
+        if key in cache:return cache[key]
+        assert key not in active,'recursive type';active.add(key)
+        v=types[ref];kind=v['kind']
+        if kind=='sha':assert v['encoded_max']==66;result=66
+        elif kind=='uint':
+            assert type(v['low']) is type(v['high']) is int and 0<=v['low']<=v['high']<=2**128-1
+            result=len(str(v['high']));assert result==v['encoded_max']
+        elif kind=='float':assert v==dict(kind='float',low=0,high=1e12,finite=True,encoded_max=32);result=32
+        elif kind=='bool':assert v['encoded_max']==5;result=5
+        elif kind=='name':
+            assert v==dict(kind='name',prefix='Local\\',alphabet='A-Za-z0-9_.-',characters_max=192,encoded_max=386);result=386
+        elif kind=='encoded_string':assert v['encoded_max']==768;result=768
+        elif kind=='ascii':assert v['characters_max']==128 and v['encoded_max']==130;result=130
+        elif kind=='enum':
+            assert v['values'] and len(set(v['values']))==len(v['values']) and all(type(n) is str for n in v['values'])
+            result=max(map(lambda n:len(raw(n)),v['values']))
+        elif kind=='nullable':result=max(4,bound(v['item']))
+        elif kind=='tuple':result=2+max(0,len(v['items'])-1)+sum(bound(n) for n in v['items'])
+        elif kind=='array':
+            assert type(v['min_items']) is type(v['max_items']) is int and 0<=v['min_items']<=v['max_items']<=24
+            result=2+max(0,v['max_items']-1)+v['max_items']*bound(v['item'])
+        elif kind=='object':result=size_object(v['fields'],bound)
+        elif kind=='fixed_directories':
+            output=ROOT/'results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative/draft_01'
+            assert v['paths']==[str(p) for p in reversed((output,*output.parents))] and len(v['paths'])<=v['max_depth']==16
+            assert v['identity_types']==['uint64','uint128']
+            result=2+len(v['paths'])-1+sum(4+len(raw(n))+bound('uint64')+bound('uint128') for n in v['paths'])
+        elif kind=='command_line':
+            tokens=types[v['argv']]['items'];assert v['formula']=='2*sum(encoded_token_max)+4*argc+2'
+            result=2*sum(bound(n) for n in tokens)+4*len(tokens)+2
+        elif kind=='union':result=max(bound(n) for n in v['choices'])
+        elif kind=='frozen':
+            result=v['encoded_max']
+            if 'frozen_schema' in v:
+                assert v['frozen_registry_pin']==pin((OLD/'protocol_domains.json').read_bytes())
+                assert result==old['schemas'][v['frozen_schema']]['encoded_value_cap']
+                assert ref=='old_'+v['frozen_schema']
+            elif ref=='old_context':assert v['pin']==pin((RUNTIME/'successor_context_spec_v3.json').read_bytes()) and result==2097152
+            else:assert ref=='receipt' and result==190 and v['domain']==old['types']['receipt']['domain']
+        else:raise AssertionError(('unknown type',ref,kind))
+        active.remove(key);cache[key]=result;return result
+    def domain_bound(name):
+        key='s:'+name
+        if key in cache:return cache[key]
+        assert key not in active,'recursive schema';active.add(key)
+        result=size_object(schemas[name]['fields'],bound);cache[key]=result;active.remove(key);return result
+    assert types['identity']==dict(kind='tuple',items=['pid','creation']) and types['pid']['low']==types['creation']['low']==1
+    assert types['pin']['bytes_lower']==1 and types['pin']['bytes_upper']==8388608
+    assert types['errors']['max_items']==24 and types['cleanup_indices']['max_items']==23
+    request=read(RUNTIME/'request_contract_v2.json');assert set(types['request']['fields'])==set(request['fields'])
+    assert types['request']['frozen_contract_pin']==pin((RUNTIME/'request_contract_v2.json').read_bytes())
+    for n,v in request['field_rules'].items():
+        if 'exact' in v:assert types['request']['fields'][n]==dict(literal=v['exact'])
+    expected_caps=dict(wall_seconds=180,no_progress_seconds=65,rss_bytes=1073741824,process_commit_bytes=1073741824,
+        job_commit_bytes=2147483648,output_bytes=8388608,files=64,member_handles=1024,record_bytes=131072)
+    assert types['request']['fields']['limits']==dict(literal=expected_caps)
+    assert types['request']['fields']['host_identity']=='host_identity_object' and types['request']['fields']['executable_pin']=='pin'
+    mailbox_keys=dict(mailbox_header='schema name request_sha host_identity broker_identity direction_nonces layout_sha wire_template_sha',
+        READY='schema request_sha mailbox_header_sha broker_identity ready_at standby_deadline original_invocation_started original_invocation_deadline context_created',
+        START='schema request_sha READY_sha mailbox_header_sha host_identity sent_at original_invocation_started original_invocation_deadline',
+        offer='schema context_sha request_sha context START_sha context_receipt root_directories broker_identity published_at',
+        controller_binding='schema context_sha request_sha ACK_sha entry_header_sha stage_header_sha startup_capture',
+        controller_return='schema context_sha request_sha status stage_nonce episode_commit_sha final_observation_reference controller_process_reference parent_metrics_reference fresh_metrics_reference candidate_reference failure_reference G2_image_sha G3_image_sha adoption_verified return_stability_verified',
+        broker_return='schema context_sha request_sha status controller_return_sha controller_binding_sha stage_nonce episode_commit_sha broker_process_image_sha failure_record host_consumption_authorized',
+        constructor_diagnostic='schema context_sha request_sha ACK_sha phase original_attempt_started observed_at',
+        mailbox_envelope='kind sequence previous_sha producer_identity direction_nonce binding_sha payload')
+    for name,keys in mailbox_keys.items():assert set(schemas[name]['fields'])==set(keys.split())
+    assert schemas['READY']['fields']['context_created']==dict(literal=False)
+    assert schemas['broker_return']['fields']['host_consumption_authorized']==dict(literal=False)
+    assert schemas['mailbox_header']['fields']['layout_sha']==dict(literal=sha256(raw(template['mailbox_slots'])).hexdigest())
+    assert schemas['mailbox_header']['fields']['wire_template_sha']==dict(literal=registry['wire_template_pin']['sha256'])
+    for role,producer in ROLES.items():
+        for suffix in ('entry_header','binding_frame','packet_frame','stage_header','startup_capture'):
+            assert schemas[role+'_'+suffix]['producer']==producer
+        for suffix in ('stage_frame','bootstrap_projection','failure'):assert schemas[role+'_'+suffix]['producer']==role
+        e=schemas[role+'_entry_header'];assert e['value_cap']==4052
+        assert set(e['fields'])==set('schema context_sha request_sha name entry_nonce stage_name stage_nonce packet_sha permit_binding_sha descriptor_sha argv_sha projection_bundle_sha producer_identity original_invocation_started original_invocation_deadline wire_template_sha binding_raw_cap packet_raw_cap'.split())
+        assert not {'owner_identity','owner_pid','stage_header_sha','startup_capture_sha'}.intersection(e['fields'])
+        assert e['fields']['wire_template_sha']==dict(literal=registry['wire_template_pin']['sha256'])
+        h=schemas[role+'_stage_header'];assert h['value_cap']==4052
+        assert set(h['fields'])==set('schema context_sha nonce descriptor owner_pid owner_creation_filetime slots slot_bytes entry_header_sha'.split())
+        assert h['fields']['descriptor']=='old_'+role+'_stage_descriptor'
+        assert h['fields']['slots']==dict(literal=16) and h['fields']['slot_bytes']==dict(literal=4096)
+        b=schemas[role+'_bootstrap_projection'];assert b['value_cap']==4052
+        assert b['fields']['parent_private_capture_sha']==dict(literal=None) and b['fields']['producer_kernel_authenticated']==dict(literal=False)
+        assert b['carrier']==dict(kind='first_append_only_stage_frame',frame_index=0,physical_cap=4096,additional_downstream_bundle=role!='fresh')
+        expected_consumers=dict(controller=['broker','controller','parent'],parent=['controller','parent','fresh'],fresh=['parent','fresh'])
+        assert b['consumers']==expected_consumers[role]
+        assert domain_bound(role+'_bootstrap_projection')+44<=4096
+        c=schemas[role+'_startup_capture'];assert c['value_cap']==16384
+        assert c['fields']['actual_os_commandline_independently_verified']==dict(literal=False)
+        assert types[role+'_argv']['grammar']==old['argv_grammars'][role]['tokens']
+        assert len(types[role+'_argv']['items'])==old['argv_grammars'][role]['exact_count']
+        for token,item in zip(old['argv_grammars'][role]['tokens'],types[role+'_argv']['items']):
+            if token=='EXE':assert item==dict(literal='D:\\Miniconda3\\envs\\compute\\python.exe')
+            elif token=='ENTRY':assert item==dict(literal=str(ROOT/'experiments/staged_rts24_saved_fresh_adoption_v1.py'))
+            elif token.startswith('{'):assert item==('name' if token in ('{entry_transport_name}','{stage_name}','{mailbox_name}') else 'sha')
+            else:assert item==dict(literal=token)
+        for suffix,payload in (('binding','permit_binding'),('packet','entry_packet')):
+            f=schemas[role+'_'+suffix+'_frame'];assert set(f['fields'])==set('kind sequence previous_sha producer_identity direction_nonce binding_sha payload'.split())
+            assert f['fields']['payload']=='old_'+role+'_'+payload and f['fields']['sequence']==dict(literal=0 if suffix=='binding' else 1)
+            overhead=domain_bound(role+'_'+suffix+'_frame')-bound(f['fields']['payload']);assert overhead<=363
+            physical=4652 if suffix=='binding' else 36908
+            assert domain_bound(role+'_'+suffix+'_frame')<=f['value_cap'] and f['value_cap']+44==physical
+        assert domain_bound(role+'_stage_header')+44<=4096 and domain_bound(role+'_stage_frame')+44<=4096
+    refs=dict(final_observation=('parent/parent_observation.json','controller','parent_observation'),controller_process=('worker/launcher.json','controller','stage_process'),
+        parent_metrics=('worker/parent_metrics.json','parent','metrics_payload'),fresh_metrics=('worker/fresh/metrics.json','fresh','metrics_payload'),
+        candidate=('worker/comparison_candidate.json','parent','comparison_candidate'),failure=('diagnostics/failure.json','controller','failure_record'))
+    for n,(target,writer,kind) in refs.items():
+        f=types[n+'_reference']['fields'];assert f['target']==dict(literal=target) and f['writer_role']==dict(literal=writer) and f['record_kind']==dict(literal=kind)
+        assert set(f)==set('target writer_role record_kind context_sha request_sha stage_nonce episode_commit_sha pin'.split())
+    assert 'quiet' in registry['reference_obligations']
+    for role in ('host','broker','controller','parent','fresh'):
+        f=schemas[role+'_failure'];assert f['value_cap']==32768
+        assert f['fields']['adoption_verified']==f['fields']['retry_authorized']==dict(literal=False)
+        carrier=f['carrier']
+        assert len(f['projection_rules'])==4 and 'phase determines' in f['projection_rules'][2]
+        if role=='controller':assert carrier==dict(kind='fixed_file',target='diagnostics/failure.json',physical_cap=131072)
+        elif role in ('parent','fresh'):
+            assert carrier['target']==('worker/events.jsonl' if role=='parent' else 'worker/fresh/events.jsonl') and carrier['kind']=='single_failure_event'
+            assert carrier['newline_bytes']==1 and carrier['event_wrapper_bytes']==0 and carrier['reserved_failure_bytes']==32769
+            assert carrier['max_prior_normal_bytes']==32767 and f['value_cap']+1==carrier['reserved_failure_bytes']
+            assert carrier['max_prior_normal_bytes']+carrier['reserved_failure_bytes']==carrier['physical_cap']==65536
+        elif role=='broker':assert carrier==dict(kind='nested_return',schema='broker_return',field='failure_record',physical_cap=131116)
+        else:assert carrier==dict(kind='external_local_bytes',cap=32768,target=None,resource_admission=False)
+    payloads=registry['mailbox_payloads'];assert payloads==dict(request='type:request',ready='schema:READY',start='schema:START',
+        context='schema:offer',ack='type:old_ACK',binding='schema:controller_binding',constructor_probe='schema:constructor_diagnostic',
+        controller_return='schema:controller_return',broker_return='schema:broker_return')
+    assert set(payloads)==set(slots)-{'header'} and set(types['mailbox_kind']['values'])==set(payloads)
+    assert set(types['mailbox_payload']['choices'])==set(payloads.values())
+    constraints=registry['cross_field_constraints']
+    expected_kinds={}
+    for direction,kinds in template['mailbox_directions'].items():
+        for index,kind in enumerate(kinds):
+            expected_kinds[kind]=dict(direction=direction,sequence=index,previous_kind=None if index==0 else kinds[index-1],
+                producer_binding='controller binding retained owner' if direction=='controller' else 'header.broker_identity' if direction in ('broker_terminal','broker_probe') else 'header.'+direction+'_identity',
+                direction_nonce='header.direction_nonces.'+direction,binding_sha='sha256(physical mailbox header slot)',
+                consumers=['broker'] if direction=='host' else ['broker','host'] if direction=='controller' else ['host'])
+    assert constraints['mailbox_kinds']==expected_kinds
+    assert constraints['entry_frames']==dict(binding=dict(sequence=0,previous_sha='0'*64),packet=dict(sequence=1,previous_sha='sha256(canonical accepted binding envelope raw)'),
+        producer_identity='header.producer_identity',direction_nonce='header.entry_nonce',binding_sha='sha256(physical entry header slot)')
+    assert constraints['invocation']==dict(start_source='request.invocation_started',deadline_source='request.deadline',deadline_offset=180,
+        standby='min(original start+10, original deadline)',order=['original start','READY.ready_at','START.sent_at','offer.published_at','ACK time'],
+        original_values_equal_in=['READY','START','context','ACK'],sent_at_resets_start=False)
+    assert constraints['stage_frames']==dict(normal_error_code=None,error_phase='error',error_code_required=True,terminal_and_error_exclusive=True,
+        first_normal_sequence=1,first_normal_previous_sha='sha256(canonical accepted bootstrap projection raw)',early_error_sequence=0,early_error_previous_sha='0'*64,
+        previous_sha='sha256(canonical accepted previous stage frame raw)',binding_sha='sha256(physical stage header slot)',
+        bootstrap_slot_excluded_from_phase_sequence=True)
+    assert schemas['controller_return']['fields']['G3_image_sha']==dict(literal=None)
+    assert constraints['returns']==dict(controller=dict(returned_candidate=dict(required=[n+'_reference' for n in refs if n!='failure']+['G2_image_sha'],
+            null=['failure_reference','G3_image_sha']),failed=dict(required=['failure_reference'],null=['G3_image_sha']),unknown=dict(required=[],null=['G2_image_sha','G3_image_sha'])),
+        broker=dict(returned_candidate=dict(required=['controller_return_sha','controller_binding_sha','broker_process_image_sha'],null=['failure_record']),
+            failed=dict(required=['failure_record'],null=[]),unknown=dict(required=['failure_record'],null=[])))
+    assert constraints['failure']==dict(primary='0 <= primary_index < len(exceptions)',cleanup='unique original ordered indices in exceptions excluding primary',
+        incomplete='incomplete == (omitted_count > 0)',lossy='incomplete or any exception.truncated',lossy_blocks_complete_quiet=True,
+        quiet_true_requires='actual retained-owner complete witness',may_have_published_requires='expected_publication_pin is not None',publication_adoption='unknown; no success from diagnostic',
+        context_nullable_phases=['H0','arming','READY','START','context'],request_nullable_phases=['H0'],owner_nonnull_requires='direct kernel identity; never sentinel or packet self-report')
+    bundle_keys=dict(controller=['broker_ACK_verified_projection'],parent=['controller_bootstrap_projection','controller_G0_projection','controller_store_projection','controller_issuer_projection'],
+        fresh=['parent_bootstrap_projection','parent_hold_projection','parent_store_projection','parent_issuer_projection'])
+    assert constraints['projections']==dict(bundles=bundle_keys,freeze_before='permit',bundle_hash_source='physical entry header projection_bundle_sha',
+        packet_sha_fields={r:{n:n+'_sha' for n in keys} for r,keys in bundle_keys.items()},coherent_bundle_header_rehash_still_requires_packet_fields=True,
+        each_raw_hash_source='independent frozen packet projection SHA fields',bootstrap_carrier='first append-only stage frame index0; full raw+44<=4096',
+        bootstrap_before='first phase frame and scientific hold',current_development_API_accepts_new_wire=False)
+    for role,keys in bundle_keys.items():
+        bundle=schemas[role+'_projection_bundle'];assert bundle['value_cap']==17408
+        assert bundle['fields']=={'schema':dict(literal='staged_saved_F_successor_'+role+'_projection_bundle_wire_v1'),**{k:'schema:'+k for k in keys}}
+        assert bundle['carrier']==dict(kind='entry_slot',slot='projections',physical_cap=18476)
+        assert domain_bound(role+'_projection_bundle')<=17408 and domain_bound(role+'_projection_bundle')+44<=18476
+        assert all(field in old['schemas'][role+'_entry_packet']['fields'] for field in constraints['projections']['packet_sha_fields'][role].values())
+    env=schemas['mailbox_envelope'];overhead=domain_bound('mailbox_envelope')-bound('mailbox_payload');assert overhead<=363
+    for kind,ref in payloads.items():assert bound(ref)+overhead+44<=slots[kind],('slot overflow',kind,bound(ref),overhead,slots[kind])
+    sizes={}
+    for n,v in schemas.items():
+        assert type(v['consumers']) is list and 1<=len(v['consumers'])==len(set(v['consumers']))<=5
+        assert set(v['consumers'])<=set(('host','broker',*ROLES))
+        assert (type(v['producer']) is str and v['producer'] in ('host','broker',*ROLES)) or v['producer']==['host','broker','controller']
+        assert v['capability_requirements'] and v['consumer_receives_capability'] is False
+        assert all(v[k] is False for k in ('implemented','producer_capability_verified','role_bootstrap','run_authority','actual_F','scientific_evidence_adopted','resource_admission','formal_result'))
+        if not v.get('envelope'):assert v['fields']['schema']==dict(literal='staged_saved_F_successor_'+n+'_wire_v1')
+        sizes[n]=domain_bound(n);assert sizes[n]<=v['value_cap'],('domain overflow',n,sizes[n],v['value_cap'])
+    order=graph['topological_order'];assert len(order)==len(set(order))==len(graph['node_roles'])
+    positions={n:i for i,n in enumerate(order)}
+    edges=graph['data_order_edges'];assert len({tuple(e) for e in edges})==len(edges)
+    assert all(positions[a]<positions[b] for a,b in edges)
+    for a,b in graph['same_process_capability_edges']:assert graph['node_roles'][a]==graph['node_roles'][b]
+    assert ['request','mailbox_header'] in edges and ['mailbox_header','mailbox_request_committed'] in edges and ['mailbox_request_committed','broker_ready'] in edges
+    for r in ROLES:
+        chain=[r+'_'+n for n in ('allocation_attempt','entry_transport_handles','entry_header','projection_committed','binding_committed','packet_committed','owner_constructed','header_bound','startup_capture','release','bootstrap','bootstrap_projection')]
+        assert all(positions[a]<positions[b] for a,b in zip(chain,chain[1:]))
+        assert positions[r+'_projection_bundle']<positions[r+'_permit']
+        for name in bundle_keys[r]:
+            node=name.removesuffix('_projection')
+            if node=='controller_G0':node='G0'
+            elif node.endswith('_bootstrap'):node+='_projection'
+            assert [node,r+'_projection_bundle'] in edges
+        assert [r+'_constructor_failed',r+'_entry_transport_close_or_retain'] in edges
+    assert graph['hash_edges']==[['frozen_template','wire_template'],['wire_template','wire_registry']]
+    assert graph['retained_failure_objects']==['original_episode','sticky_claim','transport_handles','partial_owner_or_none','primary_exception','ordered_cleanup_exceptions']
+    assert graph['protocol_contract_complete'] is False and all(v['status']=='UNRUN' for v in graph['runtime_fault_matrix'])
+    return dict(schema_count=45,expanded_nodes=len(order),runtime_faults_unrun=len(graph['runtime_fault_matrix']),request_encoded_upper=bound('request'),
+        mailbox_envelope_upper=overhead,largest_startup_upper=max(sizes[r+'_startup_capture'] for r in ROLES),
+        largest_stage_header_upper=max(sizes[r+'_stage_header'] for r in ROLES),largest_failure_upper=max(sizes[r+'_failure'] for r in ('host','broker',*ROLES)),
+        encoded_bounds=sizes)
+def verify_design():
+    registry=read(MAIN/'wire_domains.json');template=read(MAIN/'wire_templates.json');graph=read(MAIN/'wire_dag_matrix.json')
+    assert registry['original_source_pins']==read(MAIN/'baseline.json')['sources']
+    result=structure(registry,template,graph)
+    cases=[('source role',lambda r,t,g:r['schemas']['parent_entry_header'].update(producer='parent')),
+        ('future child',lambda r,t,g:r['schemas']['fresh_entry_header']['fields'].update(owner_identity='identity')),
+        ('stage owner absent',lambda r,t,g:r['schemas']['controller_stage_header']['fields'].pop('owner_pid')),
+        ('private capture',lambda r,t,g:r['schemas']['fresh_bootstrap_projection']['fields'].update(parent_private_capture_sha='sha')),
+        ('commandline authority',lambda r,t,g:r['schemas']['parent_startup_capture']['fields'].update(actual_os_commandline_independently_verified=dict(literal=True))),
+        ('run authority',lambda r,t,g:r['schemas']['fresh_failure'].update(run_authority=True)),
+        ('startup cap',lambda r,t,g:r['schemas']['controller_startup_capture'].update(value_cap=1)),
+        ('slot shrink',lambda r,t,g:t.update(stage_slot_bytes=4095)),
+        ('frame extra',lambda r,t,g:r['schemas']['parent_binding_frame']['fields'].update(schema=dict(literal='hidden'))),
+        ('wide request',lambda r,t,g:r['types']['request']['fields'].update(output_root='name')),
+        ('message chars',lambda r,t,g:r['types']['message'].update(encoded_max=769)),
+        ('exception nodes',lambda r,t,g:r['types']['errors'].update(max_items=25)),
+        ('zero pid',lambda r,t,g:r['types']['pid'].update(low=0)),
+        ('infinite float',lambda r,t,g:r['types']['time'].update(finite=False)),
+        ('target swap',lambda r,t,g:r['types']['fresh_metrics_reference']['fields'].update(target=dict(literal='worker/parent_metrics.json'))),
+        ('record kind swap',lambda r,t,g:r['types']['controller_process_reference']['fields'].update(record_kind=dict(literal='metrics_payload'))),
+        ('READY precontext',lambda r,t,g:r['schemas']['READY']['fields'].update(context_created=dict(literal=True))),
+        ('host consumption',lambda r,t,g:r['schemas']['broker_return']['fields'].update(host_consumption_authorized=dict(literal=True))),
+        ('failure stage carrier',lambda r,t,g:r['schemas']['fresh_failure']['carrier'].update(kind='stage_slot',physical_cap=4096)),
+        ('alias cleanup budget',lambda r,t,g:r['schemas']['parent_failure']['carrier'].update(max_prior_normal_bytes=32768)),
+        ('schema omission',lambda r,t,g:r['schemas'].pop('broker_failure')),
+        ('hash cycle',lambda r,t,g:g['hash_edges'].append(['wire_registry','wire_template'])),
+        ('wire commit cycle',lambda r,t,g:g['data_order_edges'].append(['broker_ready','mailbox_header'])),
+        ('cross process cap',lambda r,t,g:g['same_process_capability_edges'].append(['parent_bootstrap','fresh_bootstrap'])),
+        ('runtime relabel',lambda r,t,g:g['runtime_fault_matrix'][0].update(status='passed')),
+        ('missing projection raw',lambda r,t,g:r['schemas']['parent_projection_bundle']['fields'].pop('controller_issuer_projection')),
+        ('bootstrap slot alias',lambda r,t,g:r['schemas']['fresh_bootstrap_projection']['carrier'].update(frame_index=1)),
+        ('mailbox direction',lambda r,t,g:r['cross_field_constraints']['mailbox_kinds']['ready'].update(direction='host')),
+        ('mailbox sequence',lambda r,t,g:r['cross_field_constraints']['mailbox_kinds']['start'].update(sequence=0)),
+        ('binding previous',lambda r,t,g:r['cross_field_constraints']['entry_frames']['binding'].update(previous_sha='1'*64)),
+        ('packet previous',lambda r,t,g:r['cross_field_constraints']['entry_frames']['packet'].update(previous_sha='0'*64)),
+        ('raw header domain',lambda r,t,g:r['cross_field_constraints']['entry_frames'].update(binding_sha='sha256(raw header)')),
+        ('clock reset',lambda r,t,g:r['cross_field_constraints']['invocation'].update(sent_at_resets_start=True)),
+        ('normal error code',lambda r,t,g:r['cross_field_constraints']['stage_frames'].update(normal_error_code='schema')),
+        ('error no code',lambda r,t,g:r['cross_field_constraints']['stage_frames'].update(error_code_required=False)),
+        ('return loses candidate',lambda r,t,g:r['cross_field_constraints']['returns']['controller']['returned_candidate']['required'].remove('candidate_reference')),
+        ('G3 prediction',lambda r,t,g:r['schemas']['controller_return']['fields'].update(G3_image_sha='sha_or_none')),
+        ('failure index unchecked',lambda r,t,g:r['cross_field_constraints']['failure'].update(primary='any index')),
+        ('failure omitted',lambda r,t,g:r['cross_field_constraints']['failure'].update(incomplete='false')),
+        ('projection SHA mapping swapped',lambda r,t,g:r['cross_field_constraints']['projections']['packet_sha_fields']['parent'].update(controller_G0_projection='controller_store_projection_sha')),
+        ('coherent bundle bypass',lambda r,t,g:r['cross_field_constraints']['projections'].update(coherent_bundle_header_rehash_still_requires_packet_fields=False)),
+        ('consumer words',lambda r,t,g:r['schemas']['fresh_bootstrap_projection'].update(consumers=['upstream diagnostic only'])),
+        ('owner before commits',lambda r,t,g:g['topological_order'].insert(g['topological_order'].index('parent_projection_committed'),g['topological_order'].pop(g['topological_order'].index('parent_owner_constructed'))))]
+    for name,mutate in cases:
+        r,t,g=copy.deepcopy((registry,template,graph));mutate(r,t,g)
+        r['wire_template_pin']=pin(raw(t))
+        for name in ('mailbox_header',*[role+'_entry_header' for role in ROLES]):
+            r['schemas'][name]['fields']['wire_template_sha']=dict(literal=r['wire_template_pin']['sha256'])
+        try:structure(r,t,g)
+        except (AssertionError,KeyError):continue
+        raise AssertionError(('accepted corrupt design',name))
+    hash_checks=0
+    for role,table in registry['cross_field_constraints']['projections']['packet_sha_fields'].items():
+        bundle={n:dict(synthetic_hash_fixture='original') for n in table}
+        packet={field:sha256(raw(bundle[n])).hexdigest() for n,field in table.items()}
+        first=next(iter(table));bundle[first]=dict(synthetic_hash_fixture='changed')
+        coherent_header_sha=sha256(raw(bundle)).hexdigest();assert coherent_header_sha==sha256(raw(bundle)).hexdigest()
+        assert any(sha256(raw(bundle[n])).hexdigest()!=packet[field] for n,field in table.items());hash_checks+=1
+    return dict(authority='DRAFT_NONAUTHORITATIVE',**result,design_mutations_rejected=len(cases),synthetic_hash_relation_rejections=hash_checks,production_validator_implemented=False,
+        new_pytest_nodes=0,new_cold_probes=0,new_simulated_hours=0,actual_F=False,scientific_evidence_adopted=False,resource_admission=False,formal_result=False)
+def guard(event,args):
+    if event=='subprocess.Popen' or event=='os.system' or event.startswith('os.spawn'):raise AssertionError('saved oracle process launch')
+    if event=='import' and args and str(args[0]).split('.')[0] in ('src','experiments','numpy','scipy','pyomo','highspy'):raise AssertionError('scientific import')
+def verify(require_current_sources=False,require_current_navigation=False):
+    baseline=read(MAIN/'baseline.json');assert len(baseline['preserved'])==4290
+    assert names(ROOT/n for n in baseline['preserved'])==baseline['preserved']
+    current=names(ROOT/n for n in baseline['sources'])==baseline['sources']
+    if require_current_sources:assert current
+    for n,p in baseline['helpers'].items():
+        assert pin((ROOT/n).read_bytes())==p and pin((MAIN/('helper_'+p['sha256']+'.snapshot')).read_bytes())==p
+    assert pin((ROOT/'docs/plan/staged_deliverability_c_saved_fresh_wire_scope_budget_v1.md').read_bytes())==baseline['scope_pin']
+    design=verify_design()
+    assert json.loads((MAIN/'design_02.stdout.log').read_bytes())==design
+    docs=read(MAIN/'document_checks.json');nav=True
+    for n,v in docs['navigation'].items():
+        data=(ROOT/n).read_bytes();header,sep,body=data.partition(b'\n\n');assert sep and header==base64.b64decode(v['header_base64'])
+        suffix=body[-v['after_body_pin']['bytes']:];prefix=base64.b64decode(v['prefix_base64']);assert pin(suffix)==v['after_body_pin'] and suffix.startswith(prefix)
+        old=suffix[len(prefix):];assert pin(old)==v['before_body_pin'] and pin(header+b'\n\n'+old)==v['before_full_pin']
+        nav &= pin(data)==v['after_full_pin']
+    if require_current_navigation:assert nav
+    for n,p in docs['documents'].items():assert pin((ROOT/n).read_bytes())==p
+    freeze=read(PACKAGE/'execution_freeze.json');files=names(p for p in MAIN.rglob('*') if p.is_file())
+    assert files==freeze['files'] and len(files)==freeze['count']<=32 and sum(p['bytes'] for p in files.values())==freeze['bytes']<=4*1024**2
+    assert freeze['root']==pin(raw(files))
+    support=read(PACKAGE/'support_pins.json');assert support==names((PACKAGE/n for n in ('execution_freeze.json','saved_checks.py')))
+    records={p.name.removesuffix('.exit.json'):(p,read(p)) for d in (MAIN,PACKAGE) for p in d.glob('*.exit.json')}
+    order=['baseline_01','design_02','saved_03','terminal_04'];assert set(records)==set(order[:len(records)])
+    bootstrap_path=MAIN/'bootstrap_failure_00.json';bootstrap=json.loads(bootstrap_path.read_bytes())
+    assert bootstrap['returncode']==1 and bootstrap['accepted'] is False and bootstrap['target_created'] is False
+    assert bootstrap['failure_kind']=='wrapper_parse_before_target' and bootstrap['observed_tool_wall_seconds']==.8421054
+    assert bootstrap['charged_seconds']==bootstrap['observed_tool_wall_seconds']+.5
+    assert bootstrap['original_wrapper_pin']==pin((MAIN/'bootstrap_capture_00.snapshot').read_bytes())
+    assert bootstrap['tool_output_pin']==pin((MAIN/'bootstrap_failure_00.tool_output.log').read_bytes())
+    assert bootstrap['original_scope_pin']==pin((MAIN/'scope_before_bootstrap_repair.snapshot').read_bytes())
+    assert bootstrap['stdout_stderr_separation_available'] is bootstrap['raw_target_streams_available'] is False
+    spent=bootstrap['charged_seconds']
+    for index,n in enumerate(order[:len(records)]):
+        p,r=records[n];assert r['label']==n and r['accepted'] and r['returncode']==0 and r['error'] is None
+        assert r['source_pins']==baseline['sources'] and r['helper_pins']==baseline['helpers']
+        assert r['fixed_before']==r['fixed_after']==pin(raw(baseline['preserved']))
+        assert r['stdout_pin']==pin(p.with_name(n+'.stdout.log').read_bytes()) and r['stderr_pin']==pin(p.with_name(n+'.stderr.log').read_bytes())==pin(b'')
+        assert r['previous_charged_seconds']==spent and r['tail_reserve_seconds']==.5
+        assert r['charged_seconds']==r['observed_capture_seconds']+.5<=r['cap_seconds']
+        assert r['prior_records']=={k:pin(records[k][0].read_bytes()) for k in order[:index]}
+        assert r['package_postcheck_verified'] and r['bounded_drain']['reader_threads_terminal'] and r['bounded_drain']['pipes_closed']
+        assert r['bounded_drain']['cleanup']==[] and not r['bounded_drain']['reader_errors']
+        if n!='baseline_01':assert r['design_output_pins']==names((MAIN/k for k in ('wire_templates.json','wire_domains.json','wire_dag_matrix.json')))
+        if n in ('saved_03','terminal_04'):assert r['support_pin']==pin((PACKAGE/'support_pins.json').read_bytes())
+        spent+=r['charged_seconds']
+    assert spent<=120
+    previous_path=PREV/'final_package_01/saved_checks.py'
+    previous=load(previous_path,baseline['preserved'][previous_path.relative_to(ROOT).as_posix()],'pinned_role_data_archive').verify(require_current_sources=require_current_sources)
+    assert previous['frozen_epoch_test_nodes']==480 and previous['P1_unchanged_files']==683 and previous['retained_current_failed_attempts']==3 and previous['ancestor_failures_retained']==2
+    assert previous['scientific_ENTRY_imported'] is False and previous['ancestor_archive_verified']
+    assert not (ROOT/'results/tables/staged_rts24_saved_fresh_adoption_v1_non_authoritative').exists()
+    package=[p for p in PACKAGE.rglob('*') if p.is_file()]
+    expected={'saved_checks.py','execution_freeze.json','support_pins.json'}|{n+'.'+suffix for n in ('saved_03','terminal_04') if n in records for suffix in ('stdout.log','stderr.log','exit.json')}
+    assert {p.name for p in package}==expected and len(package)<=12 and sum(p.stat().st_size for p in package)<=1024**2
+    return dict(**{k:v for k,v in design.items() if k!='encoded_bounds'},preserved_paths=4290,source_names=49,current_sources_match=current,
+        current_navigation_match=bool(nav),reused_frozen_epoch_test_nodes=480,new_executed_test_nodes=0,
+        P1_unchanged_files=683,retained_previous_failures=5,ancestor_archive_verified=True,scientific_ENTRY_imported=False,
+        completed_capture_records=len(records),retained_wrapper_parse_failures=1,completed_charged_static_seconds=spent,current_capture_excluded_until_external_exit=True,
+        execution_files=len(files),execution_bytes=freeze['bytes'],whole_workflow_wall_budget_verified=False)
+if __name__=='__main__':
+    assert not sys.argv[1:];sys.addaudithook(guard)
+    print(json.dumps(verify(require_current_sources=True,require_current_navigation=True),sort_keys=True))

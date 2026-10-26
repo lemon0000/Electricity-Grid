@@ -1,5 +1,7 @@
 # 当前问题与阶段门禁登记
 
+2026-10-26 successor wire/startup/projection设计：见[当前交接](../plan/continuation_handoff_20261026_saved_fresh_wire_contract.md)。45域/94节点修订版通过50结构负例及3合成hash关系；新pytest/冷探针/模拟小时均0，480仅复用。旧设计与wrapper解析失败保留；保存终态以新root checkpoint/原exit为准。真实validator/bootstrap/issuer/owner、actual fresh/最终父端采用及科学/资源/正式门禁仍OPEN。
+
 2026-10-26 三角色data-only入口开发验证：见[当前交接](../plan/continuation_handoff_20261025_saved_fresh_role_data.md)。当前Source版本480目标节点通过（旧282+新198），pytest计费含一次组超时；三次当前失败与旧失败均保存。最终保存状态以新root checkpoint/原exit为准。独立basis仅支持声明与pin一致性；actual fresh、最终父端采用、整包科学采用、资源和正式门禁仍未开放。
 
 2026-10-25 上游合同mechanical archive successor：见[当前交接](../plan/continuation_handoff_20261025_saved_fresh_upstream_archive.md)。本轮修复双LF标题段并独立重做保存审计；终态以新root原exit/checkpoint为准。旧两次失败原样保留，Source49与10域/59节点/21项静态设计不改，actual F及科学、资源、正式门禁仍关闭。
