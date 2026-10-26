@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_import_policy_v2_non_authoritative\checks_01\cold_import_revision_02.py", line 90, in <module>
+    else:parent()
+         ^^^^^^^^
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_import_policy_v2_non_authoritative\checks_01\cold_import_revision_02.py", line 74, in parent
+    process=subprocess.Popen(argv,cwd=ROOT,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Miniconda3\envs\compute\Lib\subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "D:\Miniconda3\envs\compute\Lib\subprocess.py", line 1534, in _execute_child
+    sys.audit("subprocess.Popen", executable, args, cwd, env)
+  File "D:\CUHKSZ\Research Project\electricity-grid\results\tables\staged_rts24_saved_fresh_import_policy_v2_non_authoritative\checks_01\cold_import_revision_02.py", line 69, in audit
+    assert len(launches)<len(allowed) and list(args[1])==allowed[len(launches)] and str(args[2])==str(ROOT)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

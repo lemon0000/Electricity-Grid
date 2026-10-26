@@ -6072,6 +6072,276 @@ def validate_saved_constructor_diagnostic_data(diagnostic_slot,*,controller_wire
     return _saved_wire_new(SavedWireDiagnosticData,(canonical(value),diagnostic_slot),(context,contract,controller_wire_data),dict(now=now))
 
 
+class SavedSuccessorImportRejected(RuntimeError): pass
+class _SavedImportCPUQueryDenied(OSError): pass
+class _SavedImportFrameMarker(Exception): pass
+
+
+class SavedSuccessorImportUnresolved(RuntimeError):
+    def __init__(self,boundary,primary,cleanup):
+        self.boundary,self.primary,self.cleanup=boundary,primary,tuple(cleanup)
+        super().__init__('successor dependency import did not complete')
+    def __reduce__(self):raise TypeError('import failure retains local state')
+
+
+def _saved_import_inputs(policy_raw):
+    require(type(policy_raw) is bytes and len(policy_raw)==2881 and sha256(policy_raw).hexdigest()=='5eb240e21709d154b7bb17ebcee7947c6300b0108cb147dbb40669744d8e7da7','fixed import input policy required')
+    profile=parse(policy_raw)
+    require(Path(sys.executable).absolute()==Path(profile['executable_path']) and sys.version==profile['python']
+        and sys.dont_write_bytecode is True and sys.flags.optimize==0,'pinned import runtime and -B required')
+    data={name:read(name,allow_links=True) for name in (profile['executable_path'],*profile['external_sources'])}
+    expected={profile['executable_path']:profile['executable_pin'],**profile['external_sources']}
+    require({name:pin(value) for name,value in data.items()}==expected,'import external source/runtime pin differs')
+    return data
+
+
+@dataclass(frozen=True,init=False,eq=False,repr=False,slots=True)
+class SavedSuccessorImportBoundary:
+    _profile_raw: bytes
+    _creator: tuple
+    _namespace: object
+    _global_bindings: tuple
+    _attribute_bindings: tuple
+    _own_bindings: tuple
+    _owner: tuple
+    _owner_commit: str
+    _lock: object
+    _codes: tuple
+    _numpy_path: str
+    _numpy_state: object
+    _paths: tuple
+    _event_sets: tuple
+    _import_machinery: tuple
+    _state: tuple
+    _internal: object
+    _busy: bool
+    _adapter: object
+    _adapter_bindings: tuple
+    _source_raw: object
+    _commit: str
+    _failure: object
+    _first_error: object
+    _req: object
+    def __new__(cls,*a,**k):raise TypeError('open the fixed successor import policy explicitly')
+    def __init_subclass__(cls,**kw):raise TypeError('exact successor import policy type required')
+    def _image(self):
+        return (pin(self._profile_raw),self._creator,id(self._namespace),
+            tuple((n,id(v),id(code),id(defaults),pin(kw) if type(kw) is bytes else None,id(closure)) for n,v,code,defaults,kw,closure in self._global_bindings),
+            tuple((id(m),n,id(v)) for m,n,v in self._attribute_bindings),
+            tuple((n,id(fn),id(code),id(defaults),pin(kw),id(closure)) for n,fn,code,defaults,kw,closure in self._own_bindings),
+            self._owner_commit,id(self._lock),tuple(id(code) for code in self._codes),self._numpy_path,
+            None if self._numpy_state is None else (id(self._numpy_state[0]),self._numpy_state[1]),self._paths,self._event_sets,self._import_machinery,
+            self._state,id(self._adapter),tuple((n,id(fn),id(code)) for n,fn,code in self._adapter_bindings),
+            pin(self._source_raw) if self._source_raw is not None else None,id(self._failure),id(self._first_error),id(self._req))
+    def _set(self,**changes):
+        state=dict(zip(('phase','enforcing','optional','sentinel','violations','internal_count','close_claimed','reason'),self._state))
+        state.update(changes);object.__setattr__(self,'_state',tuple(state.values()))
+        object.__setattr__(self,'_commit',digest(self._image()))
+    def _ownership(self):
+        creator,callback,token,code=self._owner
+        self._req(creator==self._creator and self._owner_commit==digest((creator,id(callback),id(code),id(token))),
+            'import guard ownership changed')
+        return creator,callback,token
+    def _audit_entry(self):
+        for name,value,*_ in self._global_bindings:self._req(self._namespace.get(name) is value,'import module binding changed')
+        for module,name,value in self._attribute_bindings:self._req(getattr(module,name) is value,'import system binding changed')
+        self._ownership()
+        self._req(self._creator==(os.getpid(),get_ident()) and self._commit==digest(self._image()),'original import guard required')
+        return self
+    def _entry(self):
+        self._audit_entry()
+        self._req(self._owner[1].__code__ is self._owner[3],'import callback changed')
+        self._req(len(self._profile_raw)==2881 and sha256(self._profile_raw).hexdigest()=='5eb240e21709d154b7bb17ebcee7947c6300b0108cb147dbb40669744d8e7da7','fixed import policy changed')
+        self._req((tuple(map(id,sys.meta_path)),tuple(map(id,sys.path_hooks)),tuple(sys.path),id(sys.path_importer_cache),id(sys.modules))==self._import_machinery,'import machinery bookend differs')
+        for name,fn,code,defaults,kw,closure in self._global_bindings:
+            self._req(self._namespace.get(name) is fn,'import module binding changed')
+            if code is not None:self._req(fn.__code__ is code and fn.__defaults__ is defaults and canonical(fn.__kwdefaults__)==kw and fn.__closure__ is closure,'import helper changed')
+        for module,name,value in self._attribute_bindings:self._req(getattr(module,name) is value,'import system binding changed')
+        for name,fn,code,defaults,kw,closure in self._own_bindings:
+            self._req(getattr(type(self),name) is fn and fn.__code__ is code and fn.__defaults__ is defaults
+                and canonical(fn.__kwdefaults__)==kw and fn.__closure__ is closure,'import guard method changed')
+        for name,fn,code in self._adapter_bindings:self._req(getattr(self._adapter,name) is fn and fn.__code__ is code,'imported direct adapter binding changed')
+        if self._numpy_state is not None:
+            module,value=self._numpy_state
+            self._req(sys.modules.get('numpy.testing._private.utils') is module and type(module) is ModuleType
+                and Path(module.__file__).absolute()==Path(self._numpy_path) and value is False and module._SUPPORTS_SVE is False,
+                'NumPy fallback value bookend differs')
+        return self
+    def _fault(self,reason,original=None):
+        error=SavedSuccessorImportRejected('dependency import rejected: '+reason)
+        if self._first_error is None:object.__setattr__(self,'_first_error',error if original is None else original)
+        self._set(phase='FAULTED',violations=self._state[4]+1,reason=self._state[7] or reason)
+        raise error
+    def _introspect(self,obj,attribute):
+        if self._internal is not None:self._fault('introspection_order')
+        object.__setattr__(self,'_internal',(obj,attribute))
+        result=getattr(obj,attribute)
+        if self._internal is not None:self._fault('introspection_missing')
+        return result
+    def _optional_stack(self):
+        marker=tb=frame=None
+        try:
+            try:raise _SavedImportFrameMarker()
+            except _SavedImportFrameMarker as caught:marker=caught;tb=caught.__traceback__
+            frame=self._introspect(tb,'tb_frame')
+            for _ in range(3):frame=frame.f_back
+            numpy_module=sys.modules.get('numpy.testing._private.utils')
+            if type(numpy_module) is not ModuleType:return False
+            subprocess_module=sys.modules.get('subprocess')
+            locations=((1534,subprocess_module),(1026,subprocess_module),(548,subprocess_module),(1247,numpy_module),(1253,numpy_module))
+            for expected_code,(line,module) in zip(self._codes,locations):
+                if frame is None or self._introspect(frame,'f_code')!=expected_code or frame.f_lineno!=line or frame.f_globals is not vars(module):return False
+                frame=frame.f_back
+            return True
+        finally:
+            if marker is not None:marker.__traceback__=None
+            object.__setattr__(self,'_internal',None)
+            marker=tb=frame=None
+    def _audit(self,event,args,token):
+        if not self._state[1]:return
+        process,process_prefixes,mutations=self._event_sets
+        selected=event in process or event.startswith(process_prefixes) or event in mutations or event=='open'
+        internal_event=event in ('object.__getattr__','sys._getframe')
+        sentinel_event=event=='electricity_grid.saved_import.installation'
+        if not (selected or sentinel_event or self._busy and internal_event):return
+        with self._lock:
+            if self._creator!=(os.getpid(),get_ident()):self._fault('foreign_thread')
+            if self._busy:
+                expected=self._internal
+                if event=='object.__getattr__' and expected is not None and len(args)==2 and args[0] is expected[0] and args[1]==expected[1]:
+                    object.__setattr__(self,'_internal',None);self._set(internal_count=self._state[5]+1);return
+                self._fault('reentrant_event')
+            object.__setattr__(self,'_busy',True)
+            try:
+                self._audit_entry()
+                if sentinel_event:
+                    if self._state[0]!='INSTALLING' or len(args)!=1 or args[0] is not token or self._state[3]!=0:self._fault('installation_sentinel')
+                    self._set(sentinel=1);return
+                if event=='subprocess.Popen':
+                    count=self._state[5]
+                    if self._state[0]=='ACTIVE' and self._state[2]==0 and tuple(args)==(None,'lscpu',None,None) and self._optional_stack() and self._state[5]-count==6:
+                        self._set(optional=1);raise _SavedImportCPUQueryDenied('fixed policy denies the NumPy CPU query')
+                    self._fault('process_event')
+                if event in process or event.startswith(process_prefixes):self._fault('process_event')
+                if event in mutations:self._fault('mutation_event')
+                if event=='open':
+                    path,mode,flags=args[:3]
+                    write=type(mode) is str and any(c in mode for c in 'wax+') or type(flags) is int and flags&(os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND)
+                    if write:self._fault('open_write')
+                    if isinstance(path,(str,bytes,os.PathLike)):
+                        target=os.path.normcase(os.path.abspath(os.fsdecode(path)))
+                        if any(target==p or target.startswith(p+os.sep) for p in self._paths):self._fault('protected_open')
+            except (_SavedImportCPUQueryDenied,SavedSuccessorImportRejected):raise
+            except BaseException as error:self._fault('classification_error',error)
+            finally:object.__setattr__(self,'_busy',False)
+    def close(self,primary=None):
+        creator,callback,token=self._ownership()
+        if creator!=(os.getpid(),get_ident()):raise SavedSuccessorImportUnresolved(self,ValueError('import close owner differs'),())
+        with self._lock:
+            if self._state[6]:
+                if self._failure is not None:raise self._failure
+                return
+            self._set(close_claimed=True);errors=[]
+            try:self._entry()
+            except BaseException as error:errors.append(('bindings',error))
+            if not errors:
+                try:_saved_import_inputs(self._profile_raw)
+                except BaseException as error:errors.append(('external_bookend',error))
+            if set(sys._current_frames())!={creator[1]}:errors.append(('threads',ValueError('extra Python import thread')))
+            if sys.getprofile() is not None or sys.gettrace() is not None:errors.append(('tracing',ValueError('import profile/trace remained active')))
+            if self._state[2:5]!=(1,1,0) or self._state[0]!='ACTIVE' or self._numpy_state is None:errors.append(('policy_terminal',ValueError('import policy did not complete')))
+            if self._first_error is not None and self._first_error is not primary:errors.insert(0,('audit_primary',self._first_error))
+            failed=primary is not None or bool(errors)
+            if failed:object.__setattr__(self,'_failure',SavedSuccessorImportUnresolved(self,primary,errors))
+            self._set(phase='FAULTED' if failed else 'CLOSED',enforcing=False)
+            if failed:raise self._failure from primary
+    @property
+    def report_raw(self):
+        self._ownership()
+        return canonical(dict(schema='staged_saved_F_successor_import_boundary_report_v1',authority='DRAFT_NONAUTHORITATIVE',
+            phase=self._state[0],optional_Popen_attempts=self._state[2],blocked_optional_attempts=self._state[2],
+            installation_sentinel_observed=self._state[3],violations=self._state[4],internal_introspection_events=self._state[5],
+            forced_numpy_SVE_false=self._state[2]==1 and self._numpy_state is not None and self._numpy_state[1] is False,fault_kind=self._state[7],callback_retained=True,hook_installation_observed=self._state[3]==1,hook_active=self._state[1],
+            import_boundary_completed=self._state[0]=='CLOSED',source49_bookend_equal=self._source_raw is not None and self._state[0]=='CLOSED',
+            source49_expected_truth_bound_by_import_boundary=False,cold_main_self_anchor_verified=False,independent_root_verified=False,
+            full_runtime_binding_verified=False,actual_filesystem_alias_verified=False,arbitrary_native_effects_verified=False,
+            full_P1_content_verified=False,role_bootstrap=False,permit_issued=False,actual_F=False,run_authority=False,
+            scientific_evidence_adopted=False,resource_admission=False,formal_result=False))
+    def __reduce__(self):raise TypeError('import guard is local and non-transferable')
+
+
+_SAVED_SUCCESSOR_IMPORT_ATTEMPTED=False
+
+
+def open_saved_successor_import_boundary(policy_raw):
+    global _SAVED_SUCCESSOR_IMPORT_ATTEMPTED
+    require(_SAVED_SUCCESSOR_IMPORT_ATTEMPTED is False,'single successor import attempt required');_SAVED_SUCCESSOR_IMPORT_ATTEMPTED=True
+    require(type(policy_raw) is bytes and len(policy_raw)==2881 and sha256(policy_raw).hexdigest()=='5eb240e21709d154b7bb17ebcee7947c6300b0108cb147dbb40669744d8e7da7','fixed import policy raw differs')
+    profile=parse(policy_raw)
+    require(sys.getprofile() is None and sys.gettrace() is None,'unprofiled dependency import required')
+    require(not any(name==p or name.startswith(p+'.') for name in sys.modules for p in profile['required_cold_prefixes']),'dependency import must be cold')
+    require(set(sys._current_frames())=={get_ident()},'single Python import thread required')
+    data=_saved_import_inputs(policy_raw)
+    from threading import RLock
+    guard=object.__new__(SavedSuccessorImportBoundary);token=object()
+    def audit_hook(event,args):guard._audit(event,args,token)
+    creator=(os.getpid(),get_ident());namespace=globals();bindings=[]
+    for name in ('sys','os','subprocess','get_ident','ROOT','EXE','read','pin','require','sha256','digest','Path','canonical','source_names','source_pins','ordinary','directories','identity','parse','keys','_saved_import_inputs'):
+        value=namespace[name];function=type(value) is FunctionType
+        bindings.append((name,value,value.__code__ if function else None,value.__defaults__ if function else None,canonical(value.__kwdefaults__) if function else None,value.__closure__ if function else None))
+    attrs=[(sys,n,getattr(sys,n)) for n in ('addaudithook','audit','getprofile','gettrace','setprofile','settrace','modules','_current_frames','meta_path','path_hooks','path_importer_cache','version','executable','dont_write_bytecode')]+[(sys.modules['builtins'],'__import__',sys.modules['builtins'].__import__)]
+    own=tuple((name,value,value.__code__,value.__defaults__,canonical(value.__kwdefaults__),value.__closure__) for name,value in vars(SavedSuccessorImportBoundary).items() if type(value) is FunctionType)
+    units={path:compile(raw,path,'exec',dont_inherit=True,optimize=0) for path,raw in data.items() if path.endswith('.py')}
+    pool=[]
+    def walk(code):
+        pool.append(code)
+        for value in code.co_consts:
+            if type(value) is CodeType:walk(value)
+    for code in units.values():walk(code)
+    codes=tuple(next(c for c in pool if c.co_qualname==name and c.co_firstlineno==line) for name,line,_ in profile['optional_stack'])
+    owner=(creator,audit_hook,token,audit_hook.__code__);owner_commit=digest((creator,id(audit_hook),id(audit_hook.__code__),id(token)))
+    for name,value in dict(_profile_raw=policy_raw,_creator=creator,_namespace=namespace,_global_bindings=tuple(bindings),
+            _attribute_bindings=tuple(attrs),_own_bindings=own,_owner=owner,_owner_commit=owner_commit,_lock=RLock(),_codes=codes,
+            _numpy_path=next(p for p in profile['external_sources'] if p.replace('\\','/').endswith('/numpy/testing/_private/utils.py')),_numpy_state=None,
+            _paths=tuple(os.path.normcase(os.path.abspath(v)) for v in profile['protected_open_roots'].values()),
+            _event_sets=(tuple(profile['process_events']),tuple(profile['process_event_prefixes']),tuple(profile['mutation_events'])),
+            _import_machinery=(tuple(map(id,sys.meta_path)),tuple(map(id,sys.path_hooks)),tuple(sys.path),id(sys.path_importer_cache),id(sys.modules)),
+            _state=('NEW',True,0,0,0,0,False,''),_internal=None,_busy=False,_adapter=None,_adapter_bindings=(),_source_raw=None,
+            _failure=None,_first_error=None,_req=require).items():object.__setattr__(guard,name,value)
+    object.__setattr__(guard,'_commit',digest(guard._image()));guard._set(phase='INSTALLING')
+    try:
+        sys.addaudithook(audit_hook);sys.audit('electricity_grid.saved_import.installation',token)
+        require(guard._state[3]==1,'audit hook installation not observed');guard._set(phase='ACTIVE');return guard._entry()
+    except BaseException as primary:guard.close(primary);raise
+
+
+def load_saved_successor_dependencies(expected_sources,policy_raw):
+    guard=open_saved_successor_import_boundary(policy_raw);adapter=None;primary=None
+    try:
+        require(type(expected_sources) is dict and len(expected_sources)==49,'exact caller-held Source49 dict required')
+        expected_raw=canonical(expected_sources)
+        require(canonical(source_pins())==expected_raw,'caller-held source bookend differs before import')
+        from src import staged_rts24_saved_fresh_adoption_v1 as adapter
+        numpy_module=sys.modules.get('numpy.testing._private.utils')
+        require(type(numpy_module) is ModuleType and Path(numpy_module.__file__).absolute()==Path(guard._numpy_path)
+            and numpy_module._SUPPORTS_SVE is False,'actual NumPy CPU fallback value differs')
+        object.__setattr__(guard,'_numpy_state',(numpy_module,False));guard._set()
+        require(type(adapter) is ModuleType and Path(adapter.__file__).absolute()==ROOT/NEW_SOURCES[0],'canonical dependency module required')
+        unit=compile(read(ROOT/NEW_SOURCES[0]),str(ROOT/NEW_SOURCES[0]),'exec',dont_inherit=True,optimize=0)
+        code_by_name={c.co_name:c for c in unit.co_consts if type(c) is CodeType};bindings=[]
+        for name in ('hold','capture','bookend','replay'):
+            fn=getattr(adapter,name);require(type(fn) is FunctionType and fn.__globals__ is vars(adapter) and fn.__code__==code_by_name[name],'direct imported adapter code differs')
+            bindings.append((name,fn,fn.__code__))
+        object.__setattr__(guard,'_adapter',adapter);object.__setattr__(guard,'_adapter_bindings',tuple(bindings));guard._set()
+        require(canonical(source_pins())==expected_raw and canonical(expected_sources)==expected_raw,'caller-held source bookend differs after import')
+        object.__setattr__(guard,'_source_raw',expected_raw);guard._set()
+        sys.audit('electricity_grid.saved_import.after_dependency_import')
+    except BaseException as error:primary=error
+    guard.close(primary)
+    if primary is not None:raise primary
+    return adapter,guard
+
+
 if __name__ == '__main__':
     if sys.argv[1:2] == ['--ordinary-entry']: _ordinary_file_dispatch(sys.argv[1:])
     elif sys.argv[1:2] == [DIRECT_ENTRY_PROBE_FLAG]: _ordinary_direct_entry_cli(sys.argv[1:])

@@ -1,0 +1,33 @@
+# C：successor 依赖导入策略实施范围
+
+2026-10-26，DRAFT_NONAUTHORITATIVE。接续[wire接口完成交接](continuation_handoff_20261026_saved_fresh_wire_completion.md)，起始HEAD `7e091fc3`。root唯一writer；独立只读PRE_SEAL，未生成生产seal、review receipt或真实F运行权限。
+
+## 必须先跨过的断点
+
+原runtime profile v2明确external_import_probe_policy=UNDECIDED_BLOCKING、actual_runtime_verification_implemented=false、admissible_for_production_execution=false。原33根是legacy候选inventory，包含永久关闭的issuer；旧SavedFileBootstrap/RoleStore/StageChannel与successor的31/20 context/request、25/19/19 argv、bootstrap-frame0格式不兼容。旧ordinary观察、VerifiedSavedInput或新wire data均不能转换成真实角色能力。
+
+本轮实现真实依赖导入路径需要的import-policy原语，供后续传递runtime lease直接消费；不新增ordinary观察类型。ENTRY中函数级literal固定新import_policy.json完整长度/SHA，旧v2字节和UNDECIDED状态保留。独立v3 proposal只引用新primitive，does_not_supersede_or_open_v2=true、整体admissible仍false；当前context/request的冻结profile SHA不变。
+
+## 行为与信任边界
+
+SavedSuccessorImportBoundary为一次性同PID/owner-thread的实际audit guard，普通构造/pickle/copy关闭，状态NEW→INSTALLING→ACTIVE→CLOSED或FAULTED；CLOSED/FAULTED不重启。只在project/scientific依赖尚未导入时安装；ENTRY先前已加载stdlib，因此不称whole-process pre-import guard。
+
+完整profile pin、compute EXE/Python、NumPy utils/subprocess原raw pins和code由ENTRY核验；审计安装以callback私有object sentinel、exact event args即时确认，未观察或重复/伪造sentinel永久fault。唯一例外是ACTIVE导入阶段的首个NumPy lscpu查询：五个连续实际frame依次为Popen._execute_child/__init__/run/check_support_sve/NumPy module，核code对象、module globals关系、固定行号及args；先消费attempt并记录blocked，再抛专用OSError，令原NumPy走明确False分支。第二次或不同stack/args均sticky拒绝。
+
+其余profile列举的Python process audit事件、open写模式及闭集mutation事件、policy内固定的P1和actual-F路径open均先记录sticky fault再抛；即使依赖捕获异常，最终loader也失败。路径用Windows normcase/normpath/absolute比较；junction/native alias、隐藏native I/O和任意native进程行为未认证。要求-B；hook留在进程内，终态惰化，原guard/state/callback/primary及有序cleanup错误保留。返回adapter前核Source49调用方期望与前后bookend相等、policy/EXE/两external source前后pins、目标module/path、一次fallback和完整CLOSE；不证明期望自身已可信、中窗无替换或33根闭包。
+
+五帧核验只在首个固定Popen分类中临时允许一个tb_frame和五个f_code的object.__getattr__事件，逐次先登记确切tb/frame对象和属性名后读取，观察后清除；sys._getframe不在白名单。其他覆盖事件的重入/乱序/重复均sticky fault。未知event不向JSON原样泄露args、env、路径或异常repr，只记录闭合类别/阶段/计数和有界异常类型。
+
+本primitive强持构造时的sys/os/subprocess、audit/import函数、选定ENTRY helper/code/default/closure及import machinery身份，拒绝其事后替换；构造之前的同步全局伪造仍由未来cold-main/self-anchor/传递runtime lease负责。independent_root_verified、source49_expected_truth_bound_by_import_boundary、cold_main_self_anchor_verified均为false，不能把局部guard当独立信任根。
+
+生产loader无test callback。冷故障例由独立父脚本在after-import-before-close生命周期audit事件处注入一个禁止的sys.audit事件，验证真实guard拒绝且不返回adapter，不执行实际launch。所有报告准确列attempt1/blocked1/forced_false；不写process attempts=0，也不证明数学结果、SIMD性能、whole-process source6500/180s、full-input、quiet/read/owner/issuer/F/science/resource/formal。
+
+## 普通验证预算与保存
+
+沿原wire总540s账续接：已用static65.1926359/120、pytest323.3654812/420，总388.5581171；不重置失败或预算。collection/准入≤12s，合并一个pytest组≤35s以减少重复冷导入，三个cold import child合计≤14s，saved/terminal各≤10s；总预留81s，剩余原账用于已定位失败的预登记修复，不自动扩帽。cold child各≤3.5s，parent另有9.5s总截止，外部超限kill/wait/reader收尾计入14s；三例为normal、after-import处手工event故障、已有hook阻止新hook安装。每例只由driver调用普通依赖导入，无OwnedChild/Job、solver、科学API调用或P1/actual-F读取；不安装科学call profiler，避免其frame读取与内部audit重入冲突，因此依赖内部任意科学调用没有独立计数证明。所有失败、原stdout/stderr/exit和执行snapshot保留。
+
+新root为results/tables/staged_rts24_saved_fresh_import_policy_v1_non_authoritative，≤64files/4MiB；原wire root保持≤204files/16MiB并冻结，组合新增预算明确≤268files/20MiB，不把原204帽改写。保全原root全部198文件及前序路径/旧文档，Source49名称集合、其他47源、原函数/类AST、科学adapter及CLI guard保持。新代码只追加ENTRY guard之前和测试尾部。新结果仅为policy单元与真实cold dependency-import证据；原215/531/480均按各自冻结epoch保留。
+
+独立保存oracle只读原records/snapshot与新profile/代码，不import当前ENTRY或测试helper。README、执行步骤与blocker按原header＋本轮前置段＋完整旧body更新；navigation metadata合入同一PRE_SEAL JSON，以保持原64files帽。Git只发布本轮前置段，并行论文和绘图改动原样保留。后续仍须建立真正cold-main/self-anchor/传递globals-class-builtin-native闭包、更新实际successor根catalog与版本化profile绑定，再连接retained owner/ACK/one-shot permit和新transport bootstrap；不能据此开启实际F。
+
+首次collection与pytest_a保留：pytest在image编码阶段因canonical bytes未转pin而失败，7.811273s照计，未启动cold child；初capture误指不存在的package02，因而未绑定package01 oracle helper，不能当新epoch完整helper证据。修正包路径并保存旧oracle原bytes后，增补终态profile/trace、实际NumPy False bookend和两项新反例；collection_retry重新收集改变后的tests，pytest_retry最多35s。原collection/admission/failed exit不覆盖，所有费用仍计原540s；helper全过程前后pins与最终freeze共同绑定实际修订版本。

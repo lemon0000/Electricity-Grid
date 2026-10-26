@@ -1,0 +1,52 @@
+...............................F
+================================== FAILURES ===================================
+_____ test_saved_import_policy_closed_local_result_never_opens_authority ______
+
+import_policy_unit = (<experiments.staged_rts24_saved_fresh_adoption_v1.SavedSuccessorImportBoundary object at 0x00000205FD8AA7A0>, <object...d_rts24_saved_fresh_adoption_v1', 'authority': 'DRAFT_NONAUTHORITATIVE', 'cold_main_self_anchor_verified': False, ...})
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205BB754E00>
+
+    def test_saved_import_policy_closed_local_result_never_opens_authority(import_policy_unit,monkeypatch):
+        import copy
+        import pickle
+>       guard,_,_=import_policy_unit;guard._set(optional=1);guard.close();guard.close()
+                                                            ^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:4481: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <experiments.staged_rts24_saved_fresh_adoption_v1.SavedSuccessorImportBoundary object at 0x00000205FD8AA7A0>
+primary = None
+
+    def close(self,primary=None):
+        creator,callback,token=self._ownership()
+        if creator!=(os.getpid(),get_ident()):raise SavedSuccessorImportUnresolved(self,ValueError('import close owner differs'),())
+        with self._lock:
+            if self._state[6]:
+                if self._failure is not None:raise self._failure
+                return
+            self._set(close_claimed=True);errors=[]
+            try:self._entry()
+            except BaseException as error:errors.append(('bindings',error))
+            if not errors:
+                try:_saved_import_inputs(parse(self._profile_raw))
+                except BaseException as error:errors.append(('external_bookend',error))
+            if set(sys._current_frames())!={creator[1]}:errors.append(('threads',ValueError('extra Python import thread')))
+            if sys.getprofile() is not None or sys.gettrace() is not None:errors.append(('tracing',ValueError('import profile/trace remained active')))
+            if self._state[2:5]!=(1,1,0) or self._state[0]!='ACTIVE' or self._numpy_state is None:errors.append(('policy_terminal',ValueError('import policy did not complete')))
+            if self._first_error is not None and self._first_error is not primary:errors.insert(0,('audit_primary',self._first_error))
+            failed=primary is not None or bool(errors)
+            if failed:object.__setattr__(self,'_failure',SavedSuccessorImportUnresolved(self,primary,errors))
+            self._set(phase='FAULTED' if failed else 'CLOSED',enforcing=False)
+>           if failed:raise self._failure from primary
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           experiments.staged_rts24_saved_fresh_adoption_v1.SavedSuccessorImportUnresolved: successor dependency import did not complete
+
+experiments\staged_rts24_saved_fresh_adoption_v1.py:6255: SavedSuccessorImportUnresolved
+============================ slowest 10 durations =============================
+
+(10 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ===========================
+FAILED tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_closed_local_result_never_opens_authority
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 31 passed in 4.78s
+ORDINARY_HARNESS {"P1_write_attempts": 0, "actual_F_write_attempts": 0, "blocked_lscpu": 1, "native_owner_attempts": 0, "optional_Popen_attempts": 1, "unexpected_process_attempts": 0}

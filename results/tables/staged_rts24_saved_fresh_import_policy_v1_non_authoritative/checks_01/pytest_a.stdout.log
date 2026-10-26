@@ -1,0 +1,86 @@
+E
+=================================== ERRORS ====================================
+_ ERROR at setup of test_saved_import_policy_listed_effects_sticky[subprocess.Popen-args0] _
+
+    @pytest.fixture
+    def import_policy_unit():
+        """Logical state fixture only: no real hook is installed by this fixture."""
+        from threading import RLock
+        from types import FunctionType
+        import os
+        import sys
+        path=cli.ROOT/'results/tables/staged_rts24_saved_fresh_import_policy_v1_non_authoritative/checks_01/import_policy.json'
+        raw=path.read_bytes();profile=json.loads(raw);guard=object.__new__(cli.SavedSuccessorImportBoundary);token=object()
+        def callback(event,args):guard._audit(event,args,token)
+        creator=(os.getpid(),cli.get_ident());owner=(creator,callback,token,callback.__code__)
+        names=('sys','os','subprocess','get_ident','ROOT','EXE','read','pin','require','sha256','digest','Path','canonical','source_names','source_pins','ordinary','directories','identity','parse','keys','_saved_import_inputs')
+        bindings=[]
+        for name in names:
+            value=vars(cli)[name];function=type(value) is FunctionType
+            bindings.append((name,value,value.__code__ if function else None,value.__defaults__ if function else None,cli.canonical(value.__kwdefaults__) if function else None,value.__closure__ if function else None))
+        own=tuple((n,fn,fn.__code__,fn.__defaults__,cli.canonical(fn.__kwdefaults__),fn.__closure__) for n,fn in vars(cli.SavedSuccessorImportBoundary).items() if type(fn) is FunctionType)
+        attrs=tuple((sys,n,getattr(sys,n)) for n in ('addaudithook','audit','modules','_current_frames','meta_path','path_hooks','path_importer_cache','version','executable','dont_write_bytecode'))
+        fields=dict(_profile_raw=raw,_creator=creator,_namespace=vars(cli),_global_bindings=tuple(bindings),_attribute_bindings=attrs,_own_bindings=own,
+            _owner=owner,_owner_commit=cli.digest((creator,id(callback),id(callback.__code__),id(token))),_lock=RLock(),_codes=(),
+            _paths=tuple(os.path.normcase(os.path.abspath(v)) for v in profile['protected_open_roots'].values()),
+            _event_sets=(tuple(profile['process_events']),tuple(profile['process_event_prefixes']),tuple(profile['mutation_events'])),
+            _import_machinery=(tuple(map(id,sys.meta_path)),tuple(map(id,sys.path_hooks)),tuple(sys.path),id(sys.path_importer_cache),id(sys.modules)),
+            _state=('ACTIVE',True,0,1,0,0,False,''),_internal=None,_busy=False,_adapter=None,_adapter_bindings=(),_source_raw=None,_failure=None,_first_error=None,_req=cli.require)
+        for name,value in fields.items():object.__setattr__(guard,name,value)
+>       object.__setattr__(guard,'_commit',cli.digest(guard._image()))
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_staged_rts24_saved_fresh_adoption_v1.py:4399: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\staged_rts24_saved_fresh_adoption_v1.py:62: in digest
+    return sha256(canonical(value)).hexdigest()
+                  ^^^^^^^^^^^^^^^^
+experiments\staged_rts24_saved_fresh_adoption_v1.py:58: in canonical
+    return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Miniconda3\envs\compute\Lib\json\__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+D:\Miniconda3\envs\compute\Lib\json\encoder.py:200: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Miniconda3\envs\compute\Lib\json\encoder.py:258: in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <json.encoder.JSONEncoder object at 0x0000022A1E2FBD40>
+o = b'{"allow_links":false}'
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type bytes is not JSON serializable
+
+D:\Miniconda3\envs\compute\Lib\json\encoder.py:180: TypeError
+============================ slowest 10 durations =============================
+
+(2 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ===========================
+ERROR tests/test_staged_rts24_saved_fresh_adoption_v1.py::test_saved_import_policy_listed_effects_sticky[subprocess.Popen-args0]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 error in 4.74s
+ORDINARY_HARNESS {"P1_write_attempts": 0, "actual_F_write_attempts": 0, "blocked_lscpu": 1, "native_owner_attempts": 0, "optional_Popen_attempts": 1, "unexpected_process_attempts": 0}
