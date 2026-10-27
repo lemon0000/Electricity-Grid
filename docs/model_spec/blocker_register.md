@@ -1,3 +1,5 @@
+> 2026-10-28：见[1024控制器完整单测与预算拒绝交接](../plan/continuation_handoff_20261028_saved_fresh_census1024_unit_terminal_v1.md)。当前14节点完整30帧/report/exit0及父端收尾已核；后续性能预算未闭合，pre_seal主动拒绝、checkpoint超1s帽，原7文件726621B保留。累计792.7747780000602s、不接受36条；本轮0 cold，真实证据仍512。另有未执行46s后继预算草稿；完整F与科学/资源/正式/运行权限仍false。
+
 > 2026-10-28：见[pin派生计算方法与1024后继交接](../plan/continuation_handoff_20261028_saved_fresh_pin_memo_v1.md)。8项方法unit、四次完整check及重放完成，全部2496次fresh读取保留；配对new/old为0.780/0.993，约39.6MB raw缓存未接入后续F。累计779.8053526000688s、不接受34条，原包17.533584500015422/30s与旧余量保留。真实1024尚未启动，另有独立控制器预算草稿；全部科学/资源/正式/运行权限仍false。
 
 > 2026-10-28：见[None1024封装超时与输入读取交接](../plan/continuation_handoff_20261028_saved_fresh_none1024_rejection_v1.md)。命令29705/30000；v3的14项test body完成，但子进程timeout、缺最终report，diagnostic_accepted=false、0 cold。只读校验为2496次读取/946路径；原包14.212736400011636/30s，累计776.484504500065s、不接受34条。下一步先核同阶段重复输入校验；F及全部正式权限仍未完成。
