@@ -1,0 +1,82 @@
+"""Appended to the held -c bootstrap only by the bounded development parent."""
+
+
+def _probe_main():
+    plan=guard=lease=owned=resource=None; primary=None; secondary=[]; phase='MANIFEST'; compiled=False; discovered=None; directory_closed=False
+    initial_finders=[type(v).__module__+'.'+type(v).__qualname__ if not isinstance(v,type) else v.__module__+'.'+v.__qualname__ for v in sys.meta_path]
+    try:
+        path=Path(sys.argv[2]); expected_parent=ROOT/'results/tables/staged_rts24_saved_fresh_pre_entry_lease_v1_non_authoritative'
+        require(path.parent==expected_parent and path.name.startswith('probe_') and path.name.endswith('.plan.json'),'fixed development manifest location')
+        size=path.lstat().st_size; require(size<=131072,'manifest file cap')
+        raw=read_file(path,dict(bytes=size,sha256=sys.argv[3])); plan=check_plan(raw)
+        require(path.name=='probe_'+plan['case']+'.plan.json','manifest case/path differs')
+        def observer(event,args):
+            if plan['case']=='partial_handle' and event=='electricity_grid.pre_entry.process_handle_opened':
+                raise ValueError('injected_after_process_handle_open')
+            if plan['case']=='transfer' and event=='electricity_grid.pre_entry.transfer_prepared':
+                raise ValueError('injected_transfer_prepare_failure')
+        if plan['case']=='discovery': discovered=startup_profile(plan)
+        else:
+            sys.addaudithook(observer)
+            guard=install_guard(plan)
+            if plan['case']=='early_source': read_file(ROOT/ENTRY,plan['source_pins'][ENTRY])
+            phase='SELF'; lease=open_local_pre_entry_lease(raw,guard); resource=lease._resource
+            phase='CONSUMER'
+            if plan['case']=='binding': globals()['read_file']=lambda *a,**k: b'forged'
+            owned=lease.transfer()
+            unit=compile(owned.source_bytes(ENTRY),str(ROOT/ENTRY),'exec',dont_inherit=True,optimize=0)
+            require(type(unit) is CodeType and unit.co_name=='<module>','held ENTRY compilation differs')
+            guard['events'].append('consumer_source_compile'); compiled=True
+    except BaseException as error:
+        primary=error
+        if isinstance(error,(LocalPreEntryUnresolved,LocalPreEntryConstructionFailed)):
+            resource=getattr(error.owner,'_resource',resource)
+    finally:
+        if resource is None and lease is not None: resource=lease._resource
+        if resource is not None:
+            owner=resource.owner
+            try: owner.close()
+            except BaseException as error: secondary.append(error)
+            if lease is not None and owner is not lease:
+                try: lease.close()
+                except BaseException as error: secondary.append(error)
+        if guard is not None: guard['active']=False
+        if _EARLY is not None: _EARLY['active']=False
+        try: _DLL_DIRECTORY.close(); directory_closed=True
+        except BaseException as error: secondary.append(error)
+    remaining=[32]
+    def image(error,depth=0):
+        if error is None: return None
+        if depth>5 or remaining[0]<=0: return dict(type=type(error).__name__,message='',primary=None,secondary=[],truncated=True)
+        remaining[0]-=1; layers=[]
+        for item in getattr(error,'secondary',()):
+            layer,value=item if type(item) is tuple and len(item)==2 and type(item[0]) is str else ('cleanup',item)
+            layers.append(dict(layer=layer,error=image(value,depth+1)))
+        return dict(type=type(error).__name__,message=str(error)[:160],primary=image(getattr(error,'primary',None),depth+1),secondary=layers,truncated=False)
+    closed_success=(resource is not None and not any(resource.pending) and resource.phase=='CLOSED' and resource.close_calls==[1,1]
+        and lease is not None and lease._phase=='CONSUMED' and owned is not None and owned._phase=='CLOSED' and compiled
+        and guard is not None and not guard['faults'] and guard['events'].index('self_handles_live')<guard['events'].index('source_read_begin'))
+    success=primary is None and not secondary and directory_closed and (discovered is not None and resource is None or closed_success)
+    counters=None if guard is None else {n:guard[n] for n in ('source_open_attempts','blocked_source_opens','protected_open_attempts','write_attempts','process_attempts','faults','sentinel','events')}
+    report=dict(schema='staged_saved_F_pre_entry_probe_record_v1',authority='DRAFT_NONAUTHORITATIVE',
+        case=None if plan is None else plan['case'],status=('discovery_only' if discovered is not None else 'completed') if success else 'failed',
+        primary=image(primary),secondary=[image(v) for v in secondary],failure_phase=None if primary is None else phase,
+        local_same_process_transfer_used=owned is not None,entry_compiled_after_self=compiled,
+        source_phase=None if lease is None else lease._phase,target_phase=None if owned is None else owned._phase,
+        self_handles_closed=None if resource is None else not any(resource.pending),
+        resource_phase=None if resource is None else resource.phase,
+        close_calls=None if resource is None else resource.close_calls,
+        kernel_identity=None if resource is None else resource.observation,
+        guard=counters,audit_hook_active_at_end=False,initial_finders=initial_finders,
+        dll_directory_close_returned=directory_closed,
+        startup_profile=discovered,conditional_tcb_assumption_id='controlled_compute_CPython_3_12_12_windows_vm_stdlib_native_kernel_v1',
+        selected_runtime_profile_matched=lease is not None and hasattr(lease,'_matched_startup_profile'),
+        local_pre_entry_continuity_was_held_and_consumed=closed_success,local_pre_entry_continuity_live_at_report=False,
+        early_audit_blocked=None if _EARLY is None else _EARLY['blocked'],
+        source_epoch=SOURCE_SHA,parent_independently_authenticated_python_object_graph=False,
+        **{k:v for k,v in FALSE_GATES.items() if k!='parent_independently_authenticated_python_object_graph'})
+    raw=canonical(report); require(len(raw)<=131072,'probe report cap'); sys.stdout.buffer.write(raw+b'\n')
+    raise SystemExit(0 if success else 1)
+
+
+if __name__=='__main__': _probe_main()

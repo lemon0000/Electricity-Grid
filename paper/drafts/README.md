@@ -1,5 +1,6 @@
 # 项目介绍与论文草稿
 
+2026-10-27 pre-ENTRY本地持有链已开发验证：见[最新交接](../../docs/plan/continuation_handoff_20261027_saved_fresh_pre_entry_lease_v2.md)。33/33单测、独立画像、九例cold及保存核验通过；正常路径先持self HANDLE再读Source49、同进程owner移交后关闭，ENTRY仅compile。两次新失败与原12条保留；含失败static7.1758692/50、unittest1.6352277/30，全61文件仍在64/8MiB内。条件性TCB、P/D/L不证明E/U；下一步接真实ENTRY namespace、新B_S import profile与live runtime。F/角色/科学/资源/正式/运行门禁仍OPEN/false。
 2026-10-26 根catalog已保存核验：见[最新交接](../../docs/plan/continuation_handoff_20261026_saved_fresh_root_catalog_v1.md)。28/28修复单测及fresh静态重算通过；54当前根/旧33逐项去向、2626符号/10984引用/76未实现证据节点。首轮1错误与原11不接受记录完整保留；本scope static4.4315186/30、unittest0.8414678/20。Source49不变，独立pre-ENTRY bootstrap/live lease/真实角色与F仍OPEN，运行/科学/资源/正式门禁false。
 2026-10-26 精确finder迁移已开发验证：见[最新交接](../../docs/plan/continuation_handoff_20261026_saved_fresh_machinery_transition_v1.md)。当前Source94/94隔离回归、真实normal CLOSED/caught mutation FAULTED/blocked install FAULTED及机械fresh重开通过；本实现static20.400935/60、pytest12.6672781/45。11条历史/当前不接受记录完整保留，旧资源超帽不变；transitive runtime、真实角色/producer及F仍OPEN，所有科学/资源/正式门禁false。
 2026-10-26 machinery单次取证已保存：见[最新交接](../../docs/plan/continuation_handoff_20261026_saved_fresh_machinery_diagnostic_v1.md)。唯一实测变化为Pyomo两个finder使meta_path由4项变6项，其余四类保持；小归档accepted，本scope10.4806011/18s、12文件/104128B。旧9条失败和组合存储超帽原样保留；下一步设计精确迁移，真实cold、actual F及科学/资源/正式门禁仍未闭合。
