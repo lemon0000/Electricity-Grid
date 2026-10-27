@@ -1,5 +1,7 @@
 # 当前问题与阶段门禁登记
 
+2026-10-27 audit census WIP：见[当前交接](../plan/continuation_handoff_20261027_saved_fresh_audit_census_wip_v1.md)。固定64-open分段取证草稿首次登记因30049/30000 UTF16拒绝，unit/cold/adapter均0。same-creator、sentinel初值、primary自引用cause、精确帧schedule四项PRE_SEAL finding仍OPEN，当前字节不可接续运行。原源码/失败/transport已冻结，保全后累计capture640.4603790s、不接受23条；Source49不变，B_S/F/运行/科学/资源/正式门禁仍OPEN/false。
+
 2026-10-27 cache候选cold诊断：见[最新交接](../plan/continuation_handoff_20261027_saved_fresh_runtime_cache_import_v1.md)。新命令29560/30000、5/5 unit与真实startup通过，cache helper已接线；唯一import仍在8s预算内未返回。2s native栈仅有importlib路径查询残片，capture完整，不能推出全时归因或冷提速。父端终态、child self-close未知；下一项先设计固定audit前缀的分段聚合取证。累计capture638.7529489s、不接受22条；Source49不变，完整B_S/F/运行/科学/资源/正式门禁仍OPEN/false。
 
 2026-10-27 cache路径构造复用：见[最新交接](../plan/continuation_handoff_20261027_saved_fresh_cache_path_v1.md)。仅改_check_cache，本次调用内复用Path，逐次全量扫描与身份/finder检查保持。8/8方法级unit通过，32-key三轮总new/old为0.8636685，中位数0.8640578，达到预定5%收益；单ROOT小例退化保留。候选尚未接入cold，完整import收益未知。scope capture2.1205566s、历史626.5458606s、不接受22条；Source49不变，B_S/F/运行/科学/资源/正式门禁仍OPEN/false。
