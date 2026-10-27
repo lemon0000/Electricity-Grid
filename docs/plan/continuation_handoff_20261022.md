@@ -1,3 +1,5 @@
+> 2026-10-28：见[真实1024窗口完成交接](continuation_handoff_20261028_saved_fresh_actual1024_v1.md)。本包14节点完整终态、startup/profile、唯一1024窗口及saved/checkpoint通过；预设stop1024、无kill/timeout，未自然返回，machinery observed2/auth0仍pending。audit8.7689/10s、scope33.3006/49s；NFC5准备拒绝与旧账保留，累计830.1274519000538s、不接受37条。后续2048仅未执行准入草稿；完整F与科学/资源/正式/运行权限仍false。
+
 > 2026-10-28：见[1024控制器完整单测与预算拒绝交接](continuation_handoff_20261028_saved_fresh_census1024_unit_terminal_v1.md)。当前14节点完整30帧/report/exit0及父端收尾已核；后续性能预算未闭合，pre_seal主动拒绝、checkpoint超1s帽，原7文件726621B保留。累计792.7747780000602s、不接受36条；本轮0 cold，真实证据仍512。另有未执行46s后继预算草稿；完整F与科学/资源/正式/运行权限仍false。
 
 > 2026-10-28：见[pin派生计算方法与1024后继交接](continuation_handoff_20261028_saved_fresh_pin_memo_v1.md)。8项方法unit、四次完整check及重放完成，全部2496次fresh读取保留；配对new/old为0.780/0.993，约39.6MB raw缓存未接入后续F。累计779.8053526000688s、不接受34条，原包17.533584500015422/30s与旧余量保留。真实1024尚未启动，另有独立控制器预算草稿；全部科学/资源/正式/运行权限仍false。
