@@ -1,0 +1,37 @@
+{
+  "schema": "staged_saved_F_runtime_handoff_pre_seal_open_v1",
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "official_review": false,
+  "production_seal": false,
+  "cold_launch_admitted": false,
+  "tested_successor": "core_v6_B_S_v2_probe_parent_tests_v2",
+  "unit_result": "20_of_20_completed_without_failure_error_or_skip",
+  "preserved_failure": "initial_17_node_unit_timed_out_after_15_dots_no_terminal_test_report",
+  "withdrawn_finding": "The earlier deterministic adapter-function-count failure used experiments ENTRY by mistake. Actual src adapter has 13 top-level functions and 2 classes; that finding was withdrawn.",
+  "must_fix": [
+    {
+      "id": "complete_builtins_expected_binding",
+      "source": "tests/staged_rts24_saved_fresh_runtime_handoff_probe_v2.py",
+      "issue": "The proof binds the builtins dictionary identity and a selected subset, but omits fallback names including set/next/map/zip/str/bytes/isinstance. Mutating an omitted member in the same dictionary is not rejected by this proof.",
+      "next": "Use the bootstrap-held native builtins tuple to bind the complete keyset and each value; add an omitted-builtin mutation counterexample in a versioned successor."
+    },
+    {
+      "id": "B_S_same_object_function_metadata_guard",
+      "source": "experiments/staged_rts24_saved_fresh_bootstrap_import_v2.py",
+      "issue": "The audit identity reader avoids code getters, but mutation classification protects only finder functions. Same-object changes to a B_S helper function code/defaults/kwdefaults can precede the next full metadata bookend.",
+      "next": "Strongly retain every function identified by the bootstrap expected proof and reject its metadata mutation events immediately, without code getters in the callback; add a same-object metadata mutation counterexample."
+    },
+    {
+      "id": "boundary_instance_req_self_check",
+      "source": "experiments/staged_rts24_saved_fresh_bootstrap_import_v2.py",
+      "issue": "Entry and audit entry use mutable instance slot self._req for their assertions, including the commit comparison. A no-op installed with object.__setattr__ can swallow the mismatch. The external module proof does not authenticate this instance slot before use.",
+      "next": "Use held native/default verifier roots to reject an unexpected _req and invalid instance image before invoking instance-provided callables. Add a Python-level _req-slot mutation rejection counterexample."
+    }
+  ],
+  "execution_boundary": "All executed helpers, controllers, admissions, snapshots and results are frozen. No cold child was launched. The current scope's one unit repair was consumed; no third unit or cap increase is admitted by this checkpoint.",
+  "actual_F": false,
+  "run_authority": false,
+  "scientific_evidence_adopted": false,
+  "resource_admission": false,
+  "formal_result": false
+}
