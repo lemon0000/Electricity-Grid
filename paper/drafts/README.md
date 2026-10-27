@@ -1,5 +1,7 @@
 # 项目介绍与论文草稿
 
+2026-10-28 当前F开发状态：[None identity方法候选交接](../../docs/plan/continuation_handoff_20261028_saved_fresh_image_none_v1.md)。12/12方法unit通过，synthetic审计分发总new/old=0.72162；尚未接入真实入口，不构成完整import、F或论文结果。失败与预算续记至762.2717681s/31条不接受；Source49与并行文稿保持，正式及科学门禁false。
+
 2026-10-28 优化helper真实512窗口完成：见[当前交接](../../docs/plan/continuation_handoff_20261028_saved_fresh_parts512_v1.md)。8/8 unit、startup/profile、唯一512窗口及saved/checkpoint均通过，audit4.6037233/8s，预设stop512、完整异常链/self HANDLE各close1与父端收尾保持，未kill。窗口1.0149128s，cache11→62，image_digest占entry59.11%、cache22.43%；仅指本次选定open窗口，tuple/JSON子项未独立计时。实际未自然返回、M/D仍0，无完整B_S/OBSERVED/F证据。scope16.7443298/28s，累计757.4680411s、不接受仍30条，Source49与39项并行dirty保留；运行/科学/资源/正式门禁继续false。
 
 2026-10-28 cache词法优化方法通过、完整import仍timeout：见[当前交接](../../docs/plan/continuation_handoff_20261028_saved_fresh_cache_parts_full_timeout_v1.md)。仅_check_cache body变化，128边界case及10/10 unit通过，48项fixture方法new/old总比0.19868、中位比0.19737；不解释完整链收益。ful_v2迁移计数拒绝已冻结，ful_v3唯一完整import在8s帽内被timeout终止，末观测before_adapter_import，无child report/adapter return/OBSERVED，child关闭与phase unknown；父端收尾完整。包实际18.8037414/原28s、29文件/1279912B，失败费/367070B archive不退款或重置；累计740.7237113s、不接受30条。Source49与39项并行dirty保留，完整F及运行/科学/资源/正式门禁继续OPEN/false。

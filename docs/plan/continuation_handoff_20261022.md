@@ -1,5 +1,7 @@
 # 新对话交接：达产背景下的分阶段接入与柔性可交付性
 
+2026-10-28 最新续接：[None identity方法候选交接](continuation_handoff_20261028_saved_fresh_image_none_v1.md)。12/12方法unit通过，synthetic分发new/old总0.72162，真实入口metadata proof待补、cold0、未采用候选。失败费用/快照保留，累计762.2717681s、不接受31；下一步先入口proof与命令尺寸，再审有限真实窗口，完整F仍OPEN。
+
 2026-10-28 优化helper真实512窗口完成：见[当前交接](continuation_handoff_20261028_saved_fresh_parts512_v1.md)。8/8 unit、startup/profile、唯一512窗口及saved/checkpoint均通过，audit4.6037233/8s，预设stop512、完整异常链/self HANDLE各close1与父端收尾保持，未kill。窗口1.0149128s，cache11→62，image_digest占entry59.11%、cache22.43%；仅指本次选定open窗口，tuple/JSON子项未独立计时。实际未自然返回、M/D仍0，无完整B_S/OBSERVED/F证据。scope16.7443298/28s，累计757.4680411s、不接受仍30条，Source49与39项并行dirty保留；运行/科学/资源/正式门禁继续false。
 
 2026-10-28 cache词法优化方法通过、完整import仍timeout：见[当前交接](continuation_handoff_20261028_saved_fresh_cache_parts_full_timeout_v1.md)。仅_check_cache body变化，128边界case及10/10 unit通过，48项fixture方法new/old总比0.19868、中位比0.19737；不解释完整链收益。ful_v2迁移计数拒绝已冻结，ful_v3唯一完整import在8s帽内被timeout终止，末观测before_adapter_import，无child report/adapter return/OBSERVED，child关闭与phase unknown；父端收尾完整。包实际18.8037414/原28s、29文件/1279912B，失败费/367070B archive不退款或重置；累计740.7237113s、不接受30条。Source49与39项并行dirty保留，完整F及运行/科学/资源/正式门禁继续OPEN/false。
