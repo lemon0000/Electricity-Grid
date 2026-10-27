@@ -1,5 +1,7 @@
 # 当前问题与阶段门禁登记
 
+2026-10-27 namespace成本调查：见[最新交接](../plan/continuation_handoff_20261027_saved_fresh_namespace_graph_timing_v1.md)。缓存候选34项完成、唯一失败为真实ENTRY旧/新SHA均696，NSv3不采用，累计不接受21条。原reader外层计时6/6通过，真实pre-import主动stop诊断完成：runtime owner/successor匹配，self HANDLE各close1，16次图包装合计0.5314062s、父端1.7768287s，adapter import0。原9秒超时未解释；下一步仅针对实际import内部取证。全历史capture610.6189090s，Source49不变，完整B_S/F/运行/科学/资源/正式门禁仍OPEN/false。
+
 2026-10-27 runtime guard三项修复已开发闭合：见[最新交接](../plan/continuation_handoff_20261027_saved_fresh_runtime_guard_stack_v1.md)。27/27 unit通过；原import发现超时及两次command登记拒绝、诊断SELF画像拒绝均保留，累计20条不接受记录。单次真实栈显示B_S factory的runtime入口在复核namespace图，采样时未到adapter import；没有child self-close见证。全历史capture600.2347797s；下一步先测同次图内CodeType缓存等价与成本，完整B_S/F/运行/科学/资源/正式门禁仍OPEN/false。
 
 2026-10-27 runtime owner / B_S接线WIP：见[最新交接](../plan/continuation_handoff_20261027_saved_fresh_runtime_handoff_wip_v1.md)。修复后继20/20 unit通过；首次17-node组在15 dots后timeout，原字节和费用保留，累计16条不接受记录。本scope static0.5057512/75、unittest19.9267490/35，共20.4325002/110s。尚余完整builtins、同对象函数metadata guard、实例_req自校验三项PRE_SEAL高风险；本轮未启动cold，当前字节不可接续cold路由。Source49不变，F/运行/科学/资源/正式门禁仍OPEN/false。
