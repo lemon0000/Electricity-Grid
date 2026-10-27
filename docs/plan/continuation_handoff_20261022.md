@@ -1,5 +1,7 @@
 # 新对话交接：达产背景下的分阶段接入与柔性可交付性
 
+2026-10-27 cache路径构造复用：见[最新交接](continuation_handoff_20261027_saved_fresh_cache_path_v1.md)。仅改_check_cache，本次调用内复用Path，逐次全量扫描与身份/finder检查保持。8/8方法级unit通过，32-key三轮总new/old为0.8636685，中位数0.8640578，达到预定5%收益；单ROOT小例退化保留。候选尚未接入cold，完整import收益未知。scope capture2.1205566s、历史626.5458606s、不接受22条；Source49不变，B_S/F/运行/科学/资源/正式门禁仍OPEN/false。
+
 2026-10-27 actual import内部诊断：见[最新交接](continuation_handoff_20261027_saved_fresh_runtime_import_timing_v1.md)。RTI1命令30044超帽拒绝并保留；prefix字典后实际29564/30000，5/5 unit与真实startup通过。唯一import在预算内未返回，2s watchdog采在PYPOWER导入期间的_check_cache→pathlib路径归属检查；child被kill，无self-close报告，父端已收尾。该单样本不证明全时占比或原超时根因。累计capture624.4253040s、不接受22条；Source49不变，完整B_S/F/运行/科学/资源/正式门禁仍OPEN/false。
 
 2026-10-27 namespace成本调查：见[最新交接](continuation_handoff_20261027_saved_fresh_namespace_graph_timing_v1.md)。缓存候选34项完成、唯一失败为真实ENTRY旧/新SHA均696，NSv3不采用，累计不接受21条。原reader外层计时6/6通过，真实pre-import主动stop诊断完成：runtime owner/successor匹配，self HANDLE各close1，16次图包装合计0.5314062s、父端1.7768287s，adapter import0。原9秒超时未解释；下一步仅针对实际import内部取证。全历史capture610.6189090s，Source49不变，完整B_S/F/运行/科学/资源/正式门禁仍OPEN/false。
