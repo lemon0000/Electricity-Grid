@@ -1,0 +1,13 @@
+# 同一30秒包的prefix压缩与传递commit后继
+
+2026-10-28，DRAFT_NONAUTHORITATIVE。继承[原1024范围](staged_deliverability_c_saved_fresh_none_census1024_scope_v1.md)。v1唯一size为30014/30000 UTF16，accepted=false；unit/cold均0。拒绝checkpoint已终态，原三输入+checkpoint四文件冻结，size.input_pins已绑定所有执行前源码，executed_input_bytes_verified=true。费用size0.6362207999991369+checkpoint0.16825349999999162=0.8044742999991286s，不退款；累计763.0762424000525s、不接受32条，static313.8789679000431/pytest366.48897970000326/unittest82.70829480000612。
+
+v2不放宽30000帽。prefix在原token minify后将每个非空/非纯comment物理行的4空格级缩为1；固定prefix必须没有多行STRING，拒绝tabs或非4倍数leading。所有同层代码行一起重写，重新tokenize核INDENT/DEDENT结构及除INDENT文本/位置外所有type/string相等；AST、行数、co_lines相等；递归CodeType核co_code、非code常量/嵌套code、exceptiontable、所有argcounts/nlocals/stacksize/flags/names/varnames/freevars/cellvars/name/qualname/filename/firstlineno。仅列位置/linetable可变，不声称prefix原字节、精确CodeType或完整traceback等价。payload原raw允许变换、位置AST和精确CodeType检查不变；最终marker、compressor zdict、orig_argv取出的prefix逐字一致。_MODULE_CODE仍与同一已pin实际transport重编译相等。
+
+补齐传递调用：_observe_machinery虽单独定义，却在_audit_entry内执行，其两个commit也必须held image；_audit_entry通过default-held _observe_fn调用它，_audit通过default-held _entry_fn调用_audit_entry，防止metadata getter或identity bookend之后的class binding替换重定向执行。probe27除同长root迁移外精确绑定这三项default。这样audit_entry及audit直接四个commit与machinery两个commit均held；native用例13在三条调用边注入class替换，检查替身未执行且当前或下次入口拒绝。不升级admit/authenticate/close等旧非audit TOCTOU，不认证未知hook/无事件ABA/native RAM。原_image方法、limit/schema/schedule和所有false权限保持。
+
+core29从core28只迁同长root两处；parent26通过纯constructor迁移root/core/probe/helper并压缩prefix；14项测试与native fixture使用独立路径，保留原oracle，test01补constructor、运行字段、行号及错误改变的反例。原v1代码/失败保持，不就地修执行输入。
+
+v2 DAG：size≤2→register≤2→唯一14项unit≤8→PRE_SEAL≤1.25→startup≤3→profile≤1.25→唯一1024/return≤8→saved≤2→checkpoint≤1，static≤20.5、unit≤8、总≤28.5。含v1最坏29.30447429999913≤原30s；旧余量不重置或转成重试，任何失败停止，仅保存拒绝checkpoint。原4文件/97300B计入30文件/4MiB包，v2 root≤26文件/4097004B；writer和登记回读原archive的精确bytes/pins。
+
+Source49原49raw/epoch、60本地module/call inventory、14单测的native-vs-scaffold边界和一unit+两cold上限全部沿原scope；本地科学调用0，external/native未认证。root唯一writer，既有reviewer只读PRE_SEAL，无official/seal/run authority。保留全部失败、预算和39项并行dirty；F未完成，宽goal active。

@@ -1,3 +1,5 @@
+> 2026-10-28：见[None1024封装超时与输入读取交接](../plan/continuation_handoff_20261028_saved_fresh_none1024_rejection_v1.md)。命令29705/30000；v3的14项test body完成，但子进程timeout、缺最终report，diagnostic_accepted=false、0 cold。只读校验为2496次读取/946路径；原包14.212736400011636/30s，累计776.484504500065s、不接受34条。下一步先核同阶段重复输入校验；F及全部正式权限仍未完成。
+
 # 当前问题与阶段门禁登记
 
 2026-10-28 None identity方法候选已验证：见[当前交接](../plan/continuation_handoff_20261028_saved_fresh_image_none_v1.md)。12/12 unit与独立PRE_SEAL、saved/checkpoint完成；固定synthetic非selected审计分发总new/old=0.72162、中位0.70105、gate惰化0.96479，达到预设门槛，不能外推真实import。v1登记字段错误及postfailure快照保留，原14s包实际4.803727s，累计762.2717681s、不接受31。真实_audit_entry尚须连续核_image code/default/native-id后才可接入cold；本轮cold0、未采用候选，Source49/39项并行dirty及全部F/运行/科学/资源/正式false门禁保持。
