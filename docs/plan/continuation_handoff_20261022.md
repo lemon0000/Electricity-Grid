@@ -1,5 +1,6 @@
 # 新对话交接：达产背景下的分阶段接入与柔性可交付性
 
+2026-10-26 根catalog已保存核验：见[最新交接](continuation_handoff_20261026_saved_fresh_root_catalog_v1.md)。28/28修复单测及fresh静态重算通过；54当前根/旧33逐项去向、2626符号/10984引用/76未实现证据节点。首轮1错误与原11不接受记录完整保留；本scope static4.4315186/30、unittest0.8414678/20。Source49不变，独立pre-ENTRY bootstrap/live lease/真实角色与F仍OPEN，运行/科学/资源/正式门禁false。
 2026-10-26 精确finder迁移已开发验证：见[最新交接](continuation_handoff_20261026_saved_fresh_machinery_transition_v1.md)。当前Source94/94隔离回归、真实normal CLOSED/caught mutation FAULTED/blocked install FAULTED及机械fresh重开通过；本实现static20.400935/60、pytest12.6672781/45。11条历史/当前不接受记录完整保留，旧资源超帽不变；transitive runtime、真实角色/producer及F仍OPEN，所有科学/资源/正式门禁false。
 2026-10-26 machinery单次取证已保存：见[最新交接](continuation_handoff_20261026_saved_fresh_machinery_diagnostic_v1.md)。唯一实测变化为Pyomo两个finder使meta_path由4项变6项，其余四类保持；小归档accepted，本scope10.4806011/18s、12文件/104128B。旧9条失败和组合存储超帽原样保留；下一步设计精确迁移，真实cold、actual F及科学/资源/正式门禁仍未闭合。
 
