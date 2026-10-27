@@ -1,6 +1,8 @@
 # 新对话交接：达产背景下的分阶段接入与柔性可交付性
 
-2026-10-27 runtime owner / B_S??WIP??[????](continuation_handoff_20261027_saved_fresh_runtime_handoff_wip_v1.md)?????20/20 unit?????17-node??15 dots?timeout????????????16????????scope static0.5057512/75?unittest19.9267490/35??20.4325002/110s?????builtins??????metadata guard???_req?????PRE_SEAL?????????cold?????????cold???Source49???F/??/??/??/?????OPEN/false?
+2026-10-27 runtime guard三项修复已开发闭合：见[最新交接](continuation_handoff_20261027_saved_fresh_runtime_guard_stack_v1.md)。27/27 unit通过；原import发现超时及两次command登记拒绝、诊断SELF画像拒绝均保留，累计20条不接受记录。单次真实栈显示B_S factory的runtime入口在复核namespace图，采样时未到adapter import；没有child self-close见证。全历史capture600.2347797s；下一步先测同次图内CodeType缓存等价与成本，完整B_S/F/运行/科学/资源/正式门禁仍OPEN/false。
+
+2026-10-27 runtime owner / B_S接线WIP：见[最新交接](continuation_handoff_20261027_saved_fresh_runtime_handoff_wip_v1.md)。修复后继20/20 unit通过；首次17-node组在15 dots后timeout，原字节和费用保留，累计16条不接受记录。本scope static0.5057512/75、unittest19.9267490/35，共20.4325002/110s。尚余完整builtins、同对象函数metadata guard、实例_req自校验三项PRE_SEAL高风险；本轮未启动cold，当前字节不可接续cold路由。Source49不变，F/运行/科学/资源/正式门禁仍OPEN/false。
 
 2026-10-27 真实ENTRY namespace已开发验证：见[最新交接](continuation_handoff_20261027_saved_fresh_entry_namespace_startup_v1.md)。当前26/26单测、五例cold及保存核验通过；正常reference/actual初始化2次、强持2940图对象，两个self HANDLE各close1。原23单测与冷启动失败保留，累计15条不接受记录；共享static7.4546367/40、unittest7.6323899/20。L仍为组合持有，B_S/owner handoff/adapter与F尚未接线；E/U及运行/科学/资源/正式门禁仍OPEN/false。
 2026-10-27 pre-ENTRY本地持有链已开发验证：见[最新交接](continuation_handoff_20261027_saved_fresh_pre_entry_lease_v2.md)。33/33单测、独立画像、九例cold及保存核验通过；正常路径先持self HANDLE再读Source49、同进程owner移交后关闭，ENTRY仅compile。两次新失败与原12条保留；含失败static7.1758692/50、unittest1.6352277/30，全61文件仍在64/8MiB内。条件性TCB、P/D/L不证明E/U；下一步接真实ENTRY namespace、新B_S import profile与live runtime。F/角色/科学/资源/正式/运行门禁仍OPEN/false。
