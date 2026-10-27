@@ -1,5 +1,7 @@
 # 当前问题与阶段门禁登记
 
+2026-10-28 image pin真实busy前缀已验证：见[当前交接](../plan/continuation_handoff_20261028_saved_fresh_image_pin_busy_prefix_v1.md)。AOC8新startup与exact64、saved/checkpoint全部通过，audit3.1986523/8s，预期AuditCensusStop、完整secondary及资源收尾保持；完整import未返回，runtime仍UNRESOLVED。AOC6来源表拒绝、两次只读诊断及AOC7阶段超帽均冻结保留，UTF16 codec预载顺序已查明并修复；同22s总帽内完成AOC8。累计capture689.9539113s、不接受27条，新unit0，Source49与39项并行dirty保持。下一门槛为完整B_S import及OBSERVED/LIVE/producer/父端采用，F与运行/科学/资源/正式门禁仍OPEN/false。
+
 2026-10-28 image pin局部复用：见[当前交接](../plan/continuation_handoff_20261028_saved_fresh_image_pin_v1.md)。仅_image内对exact bytes去重，9/9方法unit通过；三轮new/old总耗时比0.8342、中位数比0.8479，达到预定5%收益门槛，结论限于方法fixture。原image/完整digest与所有检查保持，真实busy audit仍待独立有限后继验证，本轮cold/ENTRY/adapter/F均0。scope3.3092703/13s，累计capture668.4250488s，不接受25条及全部原失败保留。Source49与39项并行dirty不变，完整B_S/LIVE/producer/F及运行/科学/资源/正式门禁仍OPEN/false。
 
 2026-10-27 audit census固定前缀：见[当前交接](../plan/continuation_handoff_20261027_saved_fresh_audit_census_prefix_v1.md)。原四项finding及float强持已开发修复，复用14/14并新增4/4通过；actual import路径取到完整64个guard-passed open前缀，audit阶段3.0704693/8s。第64实际open前按设计停止，child仍failed/UNRESOLVED/FAULTED，secondary未完成链保留；self HANDLE各close1，父端资源收尾终态。AOC2尺寸拒绝、AOC3单测失败和全部历史原样保留，累计capture665.1157785s、不接受25条。完整B_S import/LIVE/producer/F及运行/科学/资源/正式门禁仍OPEN/false。
