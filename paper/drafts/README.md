@@ -1,5 +1,7 @@
 # 项目介绍与论文草稿
 
+2026-10-27 audit census固定前缀：见[当前交接](../../docs/plan/continuation_handoff_20261027_saved_fresh_audit_census_prefix_v1.md)。原四项finding及float强持已开发修复，复用14/14并新增4/4通过；actual import路径取到完整64个guard-passed open前缀，audit阶段3.0704693/8s。第64实际open前按设计停止，child仍failed/UNRESOLVED/FAULTED，secondary未完成链保留；self HANDLE各close1，父端资源收尾终态。AOC2尺寸拒绝、AOC3单测失败和全部历史原样保留，累计capture665.1157785s、不接受25条。完整B_S import/LIVE/producer/F及运行/科学/资源/正式门禁仍OPEN/false。
+
 2026-10-27 audit census WIP：见[当前交接](../../docs/plan/continuation_handoff_20261027_saved_fresh_audit_census_wip_v1.md)。固定64-open分段取证草稿首次登记因30049/30000 UTF16拒绝，unit/cold/adapter均0。same-creator、sentinel初值、primary自引用cause、精确帧schedule四项PRE_SEAL finding仍OPEN，当前字节不可接续运行。原源码/失败/transport已冻结，保全后累计capture640.4603790s、不接受23条；Source49不变，B_S/F/运行/科学/资源/正式门禁仍OPEN/false。
 
 2026-10-27 cache候选cold诊断：见[最新交接](../../docs/plan/continuation_handoff_20261027_saved_fresh_runtime_cache_import_v1.md)。新命令29560/30000、5/5 unit与真实startup通过，cache helper已接线；唯一import仍在8s预算内未返回。2s native栈仅有importlib路径查询残片，capture完整，不能推出全时归因或冷提速。父端终态、child self-close未知；下一项先设计固定audit前缀的分段聚合取证。累计capture638.7529489s、不接受22条；Source49不变，完整B_S/F/运行/科学/资源/正式门禁仍OPEN/false。
