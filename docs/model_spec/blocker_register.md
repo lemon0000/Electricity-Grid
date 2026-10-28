@@ -1,3 +1,5 @@
+> 2026-10-28：见[完整producer桥接WIP交接](../plan/continuation_handoff_20261028_saved_fresh_full_producer_bridge_wip_v1.md)。NFC12同一LIVE owner的binding消费与关闭已完成；下一步prebound expectation构造器、4项测试和控制器为未登记/未执行草稿，第1—4组PRE_SEAL修补未验证，第5组失败记账与阶段/精确集合校验待修。新scope预留40s、已用受控费用0；累计1088.9926936999939s及39条不接受、全部旧失败/Source49与39项并行dirty保留。完整producer、父端采用、资源/科学/正式/run/F仍OPEN或false。
+
 > 2026-10-28：见[真实LIVE owner消费交接](../plan/continuation_handoff_20261028_saved_fresh_live_consumer_connected_v1.md)。NFC12唯一normal完成同对象LIVE→固定ENTRY binding consumer→CONSUMED→runtime/resource/boundary CLOSED；38图/7Source bookend、原NF9 profile逐字相等、saved/checkpoint均通过。复用原48项证据，本轮3项配对测试通过。本包51.3079/115s，累计1088.9926936999939s、受控不接受39条，旧预算/失败/Source49与39项并行dirty保留。下一步完整producer与父端采用；P1/角色/资源/科学/正式/run/F仍未完成或false。
 
 > 2026-10-28：见[XZ启动与manifest拒绝交接](../plan/continuation_handoff_20261028_saved_fresh_consumer_manifest_rejection_v1.md)。48项unit/98帧和PRE_SEAL通过，命令29956/30000；唯一真实XZ child在MANIFEST被旧core38 helper路径拒绝，未SELF/import/LIVE，失败原流和资源收尾已保全。本包39.4490/110s、累计1037.6847839999784s、受控不接受39条，另存工程超帽候选；旧预算/Source49与39项并行dirty保留。Core39/probe37/parent36仅未执行准备；下一步完整预算及parent/Core联合配对测试，再真实连接。F和全部科学/资源/正式/运行权限仍未完成。
