@@ -1,6 +1,12 @@
 # F：完整 producer 桥接草稿交接
 
-2026-10-28，DRAFT_NONAUTHORITATIVE。用户询问当前进度与是否需要新开对话，本检查点保存尚未执行的下一步，供新对话继续。宽 goal“持续推进计划”仍 active；完整 F 尚未完成。root 唯一 writer，既有 wire_root_review 只读 PRE_SEAL；没有 official verdict、receipt、production seal 或新增运行权限。
+2026-10-28，DRAFT_NONAUTHORITATIVE。用户已暂停目标并要求整理进度，准备新开对话。宽 goal“持续推进计划”的实时状态已确认是 **paused**；完整 F 尚未完成。本检查点保存尚未执行的下一步，供用户在新对话明确继续后接手。root 唯一 writer，既有 wire_root_review 只读 PRE_SEAL；没有 official verdict、receipt、production seal 或新增运行权限。
+
+## 暂停前最后核对
+
+WIP 发布 commit `c6713b85a7208de65b32834f2909ac4522805d12` 之后，仅完成 Git/进程、现有源码与规范、JSON 输入元数据的只读核对；四份 bridge draft 均未再修改，未登记、未运行 unit/child/P1。新 root 仍只有 driver.py，scope 40s 仍为受控已用 0，历史累计和失败账均未变化。暂停现场没有研究任务运行，仅见 VS Code Jedi language server。
+
+输入集合核对得到一项接手时必须保留的事实：NFC12 `registration.json` 的直接 `input_pins` 只有 **360 项**；其 `effective_input_count=1167` 对应继承输入展开后的集合。当前 bridge 控制器先调用冻结 NFC12 controller 的 `previous()` / `inherited_inputs()`，再合并直接登记 pins，并断言 1167。修复第 5 组时必须重建这套完整关系，不能用直接 360 项 map 替代完整前驱输入。新增 root/own inputs 后的最终精确 set/count 仍待按真实合并关系验证，不能从此清点直接宣称准入完成。
 
 ## 当前进度
 
