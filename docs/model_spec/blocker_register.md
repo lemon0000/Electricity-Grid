@@ -1,3 +1,5 @@
+> 2026-10-28：见[finder认证与14根失败交接](../plan/continuation_handoff_20261028_saved_fresh_post_return_roots_v1.md)。NFC8真实return后finder auth2/pending=false，旧loader要求13而冻结adapter实际14函数，唯一actual失败已完整保全；runtime UNRESOLVED、父子资源CLOSED，无kill/timeout。20项unit与startup/profile通过；32.2423/81s、累计898.7101957000225s、不接受38条。下一步固定完整14-name literal，旧失败/预算/Source49保持；OBSERVED/F及科学/资源/正式/运行权限仍未闭合。
+
 > 2026-10-28：见[真实import自然返回交接](../plan/continuation_handoff_20261028_saved_fresh_import_return_v1.md)。唯一2048诊断在1344 open后自然返回，347个native采样与父子收尾、saved/checkpoint通过；diagnostic stop后仍UNRESOLVED，finder auth0/pending、post-import boundary/OBSERVED/LIVE未闭合。scope36.3404/63s，累计866.467895100049s、不接受37条；旧预算/失败与Source49保持。下一步审返回后认证/图/bookend成本，不再扩大窗口；完整F及科学/资源/正式/运行权限仍false。
 
 > 2026-10-28：见[真实1024窗口完成交接](../plan/continuation_handoff_20261028_saved_fresh_actual1024_v1.md)。本包14节点完整终态、startup/profile、唯一1024窗口及saved/checkpoint通过；预设stop1024、无kill/timeout，未自然返回，machinery observed2/auth0仍pending。audit8.7689/10s、scope33.3006/49s；NFC5准备拒绝与旧账保留，累计830.1274519000538s、不接受37条。后续2048仅未执行准入草稿；完整F与科学/资源/正式/运行权限仍false。
