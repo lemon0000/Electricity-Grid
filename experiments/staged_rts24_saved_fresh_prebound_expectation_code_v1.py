@@ -1,4 +1,4 @@
-"""Source-bound expectation code derivation; never executes project/P1 operations."""
+"""Source-bound code derivation; never executes Source49 target modules or P1."""
 import ast
 import copy
 from hashlib import sha256

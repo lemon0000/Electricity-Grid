@@ -1,4 +1,4 @@
-"""Source derivation and hostile-AST tests; no project module or P1 execution."""
+"""Helper/AST tests; no Source49 target module execution or P1 reads."""
 import ast
 import copy
 import importlib.util

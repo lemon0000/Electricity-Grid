@@ -1,3 +1,5 @@
+> 2026-10-28：见[代码桥验证完成交接](continuation_handoff_20261028_saved_fresh_full_producer_bridge_completion_v3.md)。第5组控制器与原修补已在v3验证：16/16、34帧，unit8.9203/10s，saved/checkpoint通过；源码桥验证范围，完整producer/父端采用/F仍OPEN。v1编译上下文拒绝和v2外层超帽原样保留，累计1125.7064325000204s、不接受41条record；NFC12/Source49不变，未重跑NFC12，39项并行工作区bytes保留。
+
 > 2026-10-28：见[完整producer桥接WIP交接](continuation_handoff_20261028_saved_fresh_full_producer_bridge_wip_v1.md)。NFC12同一LIVE owner的binding消费与关闭已完成；下一步prebound expectation构造器、4项测试和控制器为未登记/未执行草稿，第1—4组PRE_SEAL修补未验证，第5组失败记账与阶段/精确集合校验待修。新scope预留40s、已用受控费用0；累计1088.9926936999939s及39条不接受、全部旧失败/Source49与39项并行dirty保留。完整producer、父端采用、资源/科学/正式/run/F仍OPEN或false。
 
 > 2026-10-28：见[真实LIVE owner消费交接](continuation_handoff_20261028_saved_fresh_live_consumer_connected_v1.md)。NFC12唯一normal完成同对象LIVE→固定ENTRY binding consumer→CONSUMED→runtime/resource/boundary CLOSED；38图/7Source bookend、原NF9 profile逐字相等、saved/checkpoint均通过。复用原48项证据，本轮3项配对测试通过。本包51.3079/115s，累计1088.9926936999939s、受控不接受39条，旧预算/失败/Source49与39项并行dirty保留。下一步完整producer与父端采用；P1/角色/资源/科学/正式/run/F仍未完成或false。
