@@ -1,3 +1,5 @@
+> 2026-10-29：见[retained producer逻辑生命周期检查点](../plan/continuation_handoff_20261029_saved_fresh_retained_producer_lifecycle_v1.md)。31项合成unit/64帧及PRE_SEAL、saved、checkpoint通过；排他slot、G0/G2/G3强持、sticky失败和close前后数据校验仅获逻辑开发验证，真实producer未执行。本包17.173681999964174/40s，累计1161.6025764999897s、不接受41条；下一账源61baf0d187724f066f9c9f629dc4f0c3ecf594b970de59e6e7d6c350885c806f。Source49/NFC12/旧失败与39项并行dirty保持；initial oracle、真实issuer、37模块图预算、父端采用、128MiB retention及完整F仍OPEN，全部科学/资源/正式/run gate false。
+
 > 2026-10-28：见[producer图组件交接](../plan/continuation_handoff_20261028_saved_fresh_producer_project_graph_v1.md)。跨项目continuity graph组件12/12、26帧、unit7.8381/10s，saved/checkpoint完成；本包18.72246200000518/40s，累计1144.4288945000255s、不接受41条。实际Source49初始oracle、retained lifecycle与runtime/P1/F仍OPEN，goal持续推进active；NFC12/Source49/旧失败及39项并行工作区bytes保留。
 
 > 2026-10-28：见[代码桥验证完成交接](../plan/continuation_handoff_20261028_saved_fresh_full_producer_bridge_completion_v3.md)。第5组控制器与原修补已在v3验证：16/16、34帧，unit8.9203/10s，saved/checkpoint通过；源码桥验证范围，完整producer/父端采用/F仍OPEN。v1编译上下文拒绝和v2外层超帽原样保留，累计1125.7064325000204s、不接受41条record；NFC12/Source49不变，未重跑NFC12，39项并行工作区bytes保留。
