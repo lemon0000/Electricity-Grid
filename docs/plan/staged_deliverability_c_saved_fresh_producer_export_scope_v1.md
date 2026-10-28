@@ -1,0 +1,23 @@
+# F：producer 关闭交接、延后 bundle 与独立失败清理
+
+2026-10-29，DRAFT_NONAUTHORITATIVE，登记前自身受控费用0。承接[权限检查点](continuation_handoff_20261029_saved_fresh_p1_permission_v2.md)。完整F仍需获批外层授权、真实同LIVE owner完整producer、Parent独立重开采用，以及whole-workflow wall/RAM/storage准入。本包完成必要的数据交接与失败窗口开发，保留现有closed root和全部历史字节。
+
+LC5在G3后的成功cleanup前，将原expectation/context/caller image与49-source、683-input映射因式分解成可逆canonical packet；cleanup后再比较同一数据，完成wire/report canonical和容量校验后，才清除owner、held、context、snapshot和revoke引用。packet绑定G0/G2/G3原pins、原始180秒invocation区间、精确schema/字段/gates和文件metadata身份/祖先目录，保持全部非权威标记。失败仍先撤销窗口、继续物理关闭、保留sticky primary/secondary及原引用证据，不能通过重试改写失败。
+
+packet包含683项pins与metadata，以及53个已解析P1文件所形成的outer/trusted、6项bindings、expectations、historical_metrics、21项evidence_refs等原expectation/context派生字段。原context还含绝对repo/input/output/executable路径、允许的PATH/USERPROFILE/APPDATA/TEMP/CONDA等environment字段、Python版本及dev/ino/mtime身份。它不携带683文件的raw payload；未来真实输出授权必须覆盖这些派生内容与本机元数据。本包只使用ordinary合成字段，不读取或发布真实P1内容。raw packet上限1MiB、每份还原输入2MiB、压缩wire 128KiB、完整coordinator对象256KiB；这些是fail-closed帽，真实代表尺寸尚未实证。未来child transport需要至少256KiB+1字节的完整行容量，旧128KiB捕获路线不能据此直接用于完整producer。
+
+Helper6在after_import只进入READY。B_S关闭后、仍处IMPORTING时应先prepare_consumer，随后finish_import达到profile-matched LIVE/PREPARED，才可请求bundle内的固定issuer，再由LC持有唯一runtime slot。现固定permission v1对issue/verify/claim始终拒绝；Helper6不接受consumer admission/callback，不从None、profile或manifest产生权限。真实issuer及成功发行诊断许可的observation schema必须另建获批后继。本包没有改变Core42/Loader3/Probe40的现有unadmitted路线；真实完整bootstrap接线仍在完整F待办中。
+
+coordinator要求creating-bootstrap在ADOPTED、DISABLED/NEW、admission=None时保留原始close和same-state revoke packet。capture核固定permission raw/revoke code、空builtins及exact native put；独立保留小namespace，失败第一步执行并确认DENY/CLOSED。bundle finalization、prepare返回前和producer运行中的异常均位于此cleanup边界；未占槽时保持PREPARED，已生成producer时保留LC sticky carrier及其secondary/runtime_close。成功在producer、resource、permission guard均关闭后release bridge引用，再返回纯数据。写盘及publish失败不能重新执行producer。
+
+Parent helper只核quiet后的纯数据关系，不打开P1，不采用结果为科研证据。真实Parent必须由其held child/process/drain receipt产生quiet事实，绑定child PID、完整stdout raw pin、reader/writer/pipe终态与零kill/truncation/cleanup；传入的dict本身不构成quiet oracle。codec先核源pin，再compile/exec已核的同一raw，避免二次路径读取。逐文件独立SHA核验、Python graph attestation、外部诊断许可、资源准入与F均不能由数据映射比较推出。
+
+唯一ordinary矩阵69项：保留31项生命周期与17项权限回归，新增21项覆盖关闭后无损还原、内部envelope/gates、完整maps/metadata、阶段与原期限、压缩/重复JSON边界、export失败、coordinator完整private链、bundle/prepare前失败、LC secondary保留、quiet/permission包拒绝、pin后单raw执行、deferred顺序、真实release分支、retire verifier坏时独立DENY、错误revoker capture拒绝、LC late-wire帽、complete late-cap/序列化失败保留引用，以及deferred固定issuer拒绝callback。fixture明确使用private mechanical seams，不执行Source49目标模块、真实P1或Native owner，不启动角色/模型/solver，不重跑NFC12，新增模拟跨度0h。
+
+DAG：register → 唯一unit → 独立只读PRE_SEAL保存 → saved原流重开 → checkpoint → scoped Git。每阶段一次；任何拒绝停止正常后续，仅保全checkpoint，登记后own输入冻结，修补另建successor。阶段5/12/5/5/5秒，unit child10秒；static25/unit15/总40秒，旧剩余不转用，费用和拒绝不退款或重置。ordinary原48项runner2.568s/outer5.413174s；新增packet/cleanup分支在相同10秒child帽内验证，超限按失败保留。stdout128KiB/stderr32KiB仅用于test frames；sampled256MiB/process、512MiB/pair，root10文件/4MiB、单record1MiB并预留checkpoint1MiB。
+
+账源固定permission v2 CP f4a933bb82a15473df9624941d8fe83baecd443e43fa1dc45b681121a4e50c9f，8188B；root6文件756489B。累计static618.4677970000005、pytest366.48897970000326、unittest279.8322197999987，总1264.7889965000024秒，拒绝48。完整继承expanded1330与root6扣driver重叠1后1335 inputs；archive231文件24642819B。自身12、重叠2，精确union1345，完整源/归档逐pin验证，不能缩为Source49/NFC12子集。
+
+完整路径调用量仍需包含outer发行、37模块构造、consumer prepare、LC run/G0/G2/G3/close、双次packet_capture、producer内3次packet_restore、parent解压/还原2次、物理P1重开、publication及失败分支；闭包检查未被数据包替代。原107次完整producer静态基线、构造43次观测帽与本包ordinary耗时都不构成真实整链资源准入；P1 I/O、外层激活、真实派生packet大小、父端内容核验及故障成本仍未知。按agent.md第9节准备具体校准包、预算及专项授权后再执行真实路线。
+
+root唯一writer，retained_lifecycle_review独立只读PRE_SEAL；不产生official verdict、receipt、production seal或runtime authority。原39项并行dirty、NFC12全部16文件、Source49、B1–B3、原P2七输入和全部旧source/scope/input/result原字节保留，role/permit/science/resource/formal/run/F门仍false。
