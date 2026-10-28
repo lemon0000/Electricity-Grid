@@ -1,6 +1,6 @@
 # 完整14函数根的返回后续接：未执行草稿
 
-2026-10-28，DRAFT_NONAUTHORITATIVE；未建立NFC9 controller、未登记/执行、未消耗新预算。依据[NFC8认证及根集合失败交接](continuation_handoff_20261028_saved_fresh_post_return_roots_v1.md)。宽goal继续active；本草稿不产生运行或正式权限。
+2026-10-28，DRAFT_NONAUTHORITATIVE；NFC9独立有界诊断合同，受控size前仍可修订，登记后已执行bytes冻结。依据[NFC8认证及根集合失败交接](continuation_handoff_20261028_saved_fresh_post_return_roots_v1.md)。宽goal继续active；本合同不产生F或正式运行权限。Root唯一writer，wire_root_review仅只读PRE_SEAL，无official verdict/receipt/production seal。
 
 前驱NFC8 checkpoint SHA39a8b3ac3e5ff68a5810b2d2809d3c16ca292b0ef0f76951a10d957206cd686e，15文件1191896B、diagnostic_accepted=false；累计898.7101957000225s、不接受38条。88文件6350636B及原包48.75769940002647s余量保留，不转用。
 
@@ -10,6 +10,16 @@
 
 沿用[NFC8的DAG、输出与采样限制](staged_deliverability_c_saved_fresh_post_return_admission_scope_v1.md)，重新绑定实际21-node单测、输入闭包和新版本。目标仍为OBSERVED→CLOSED，无独立profile匹配的LIVE。两次profile raw必须相等，且保存的是finish内部使用的同一raw；raw stdout/profile/schema/false claims与派生记录精确连接。成功名义计数30图=21 namespace+9 adapter、finder_check10、adapter_check8、profile2、source_bookends5；失败可提前结束，原raw和secondary完整保留。
 
-候选新独立预算81s：size6、register4、unit16、PRE_SEAL5、startup6、profile5、actual30、saved5、checkpoint4；static65+unit16。NFC8实测startup3.866s、unit9.368s、parent失败5.970s支持前段估计；尚未执行的adapter图/终态成本保持未知，只能在固定一次、30s诊断与原内存/输出帽内测出，不能当完整F性能准入。准备时重新核路径、command≤30000、registration≤786432、root≤17/4MiB及输出解析上界；不能改变原已执行bytes来适配。
+新独立预算81s：size6、register4、unit16、PRE_SEAL5、startup6、profile5、actual30、saved5、checkpoint4；static65+unit16。NFC8实测startup3.866s、unit9.368s、parent失败5.970s支持前段估计；尚未执行的adapter图/终态成本保持未知，只能在固定一次、30s诊断与原内存/输出帽内测出，不能当完整F性能准入。准备时重新核路径、command≤30000、registration≤786432、root≤17/4MiB及输出解析上界；不能改变原已执行bytes来适配。
+
+实际实现为core36/probe34/parent33、bootstrap_post_return_v2、post_return_transform_v2、post_return_checkpoint_v2及21-node post_return_v2 tests；复用已冻结namespace_post_return_v1、validation_v1及memory_drain_v1。constructor_v2依赖的冻结constructor_v1通过前驱registration闭包逐阶段fresh验证，不递归跑旧controller，只保留原v3 leaf。十四名称literal位于受绑定loader函数code constants；先核AST有序tuple，再核compiled_roots与unique map均14，然后逐项metadata。新test21仅编译Source函数code，构造14个FunctionType，不执行其body；NumPy/importer/graph/native ownership均为显式synthetic替身，正例证明loader bindings与返回，真实graph/ownership仍由唯一actual检验。
+
+执行DAG与规模：size→register→唯一21节点unit child→独立PRE_SEAL→唯一startup child→startup-profile admission→唯一import_discovery child→saved replay→checkpoint。成功时30图=pre15+post15；post6 namespace+9 adapter，图interval逐stage绑定。finder认证1、后续metadata_check10×14行，source_bookend 1pre+4post=5、post196次高层source read（98次active hook）、close EXE+4external读、profile2，finish内部raw交回probe精确比较。finish interval含紧接的显式runtime.entry。失败/清理可提前结束或增加扫描，仍受总图40/节点50000/depth256、image4MiB、getter每类1000000帽约束。
+
+原freshness扫描、compile/code/identity/default/closure、2类shape、全部graph与source/input前后bookend不跳过；跨调用cache缺少ABA/freshness等价证明，本包不采用。固定十四集合纠正实现与冻结输入不符，不改变科学阈值或Source49。静态工程重算command30000/30000；真正size/register必须各自再次重算相等，单字节漂移拒绝。本包输出上界为census21680B+graph5400B+22 stages1292B=28372B≤32768；saved固定body3084B≤4096。registration≤786432B、unit exit≤32768B、startup profile≤131072B、import profile≤1MiB（decode必须eof且无尾巴）、两receipt各≤1MiB、saved≤65536B、stdout≤131072B。root固定17文件/4MiB，失败不会继续saved；仅保存失败元数据checkpoint。
+
+原memory_drain_v1固定14253B/SHAe0c54dc42657c223a81e7df8e2316289de58f95ce60457080b27fdf52931bc2d。held原生actor、API/handle/PID/80B结构及cleanup前后元数据检查不变；parent pseudo+原child HANDLE，每进程256MiB及同次pair512MiB sampled WS/private停止，0.01s请求、最多4096样本、last_live_poll_only、O(1) maxima/last，无exit后补采。无连续/descendant/128MiB retention证明，continuous_bound_verified/combined_retention_verified/resource_admission=false。API定义沿NFC7原primary references，不开展新native校准。
+
+阶段硬caps包括完整输入加载/前后校验/失败/关闭重开/保存；不转用旧余量，不退款或自动延长。超时/无进展、query/PID/HANDLE/clock/内存/输出/样本帽或schema/profile/root错误即拒绝，保留原始stdout/stderr与primary/secondary。主线程deadline、采样与输出心跳按原controller执行，父端需kill/wait、pipes/readers/writer/stdin/HANDLE逐项终态；子端未知状态保持未知。捕获charge按phase逐项计费，工程编辑/独立审查/Git wall另计，不能把capture秒称全部开发耗时。
 
 先做静态完整路径/优化审查与新独立PRE_SEAL。所有新进程必须在独立startup/profile通过后启动；任何失败保留费用、终态和raw，不重试或自动延长。全部F/science/resource/formal/native行为认证/run gates继续false；原模型、服务语义和B1–B3/P2/发布绑定字节保持。
