@@ -128,11 +128,13 @@ def manifest(case,code):
         admitted=json.loads((OUT/'import_admission.json').read_bytes());assert admitted['accepted'] is True and admitted['transport_pin']==pin(code)
         assert admitted['profile_pin']==pin((OUT/'import_profile.json').read_bytes())
         import_profile=dict(path=str(OUT/'import_profile.json'),pin=admitted['profile_pin'])
-    return dict(schema='staged_saved_F_runtime_handoff_manifest_v1',authority='DRAFT_NONAUTHORITATIVE',nonce=secrets.token_hex(16),
+    plan=dict(schema='staged_saved_F_runtime_handoff_manifest_v1',authority='DRAFT_NONAUTHORITATIVE',nonce=secrets.token_hex(16),
         source_pins=source(),source_epoch=SOURCE_SHA,bootstrap_pin=pin(code),executable_pin=pin(EXE.read_bytes()),
         python='3.12.12 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 20:05:38) [MSC v.1929 64 bit (AMD64)]',
         environment=environment(),cwd=str(ROOT),initial_paths=[str(RUNTIME/'python312.zip'),str(RUNTIME/'DLLs'),str(RUNTIME/'Lib'),str(RUNTIME)],
         selected_runtime_file_observations=selected,startup_absent=absent,startup_profile=profile,namespace_helper=dict(path=str(ROOT/'experiments/staged_rts24_saved_fresh_entry_namespace_consumer_v2.py'),pin=pin((ROOT/'experiments/staged_rts24_saved_fresh_entry_namespace_consumer_v2.py').read_bytes())),import_helper=dict(path=str(ROOT/'experiments/staged_rts24_saved_fresh_bootstrap_post_return_v2.py'),pin=pin((ROOT/'experiments/staged_rts24_saved_fresh_bootstrap_post_return_v2.py').read_bytes())),import_policy=dict(path=str(OUT/'import_policy.json'),pin=pin((OUT/'import_policy.json').read_bytes())),import_profile=import_profile,case=case)
+    validate_manifest_pair(plan,code)
+    return plan
 
 
 def process_api():
@@ -581,3 +583,18 @@ def compare_child(case,code,stdout,stderr,child_code,identity,argv,writer_errors
 REFERENCE=load(ROOT/'experiments/staged_rts24_saved_fresh_live_profile_reference_v1.py','_live_frozen_profile_reference')
 
 TRANSPORT=load(ROOT/'experiments/staged_rts24_saved_fresh_xz_transport_v1.py','_registered_xz_transport')
+
+
+def validate_manifest_pair(plan,code):
+    core=load(CORE,'_paired_manifest_core')
+    assert core.check_plan(canonical(plan))==plan and plan['bootstrap_pin']==pin(code)
+    assert plan['case'] in ('discovery','normal')
+    for key,path in (('namespace_helper',ROOT/'experiments/staged_rts24_saved_fresh_entry_namespace_consumer_v2.py'),
+            ('import_helper',ROOT/'experiments/staged_rts24_saved_fresh_bootstrap_post_return_v2.py'),('import_policy',OUT/'import_policy.json')):
+        expected=dict(path=str(path),pin=pin(path.read_bytes()))
+        assert plan[key]==expected and core.read_file(path,plan[key]['pin'])==path.read_bytes()
+    if plan['case']=='normal':
+        assert plan['startup_profile']==dict(path=str(OUT/'startup_profile.json'),pin=pin((OUT/'startup_profile.json').read_bytes()))
+        assert plan['import_profile']==REFERENCE.reference()['reference']
+    else:assert plan['startup_profile'] is plan['import_profile'] is None
+    return plan

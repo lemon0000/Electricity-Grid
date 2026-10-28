@@ -126,7 +126,7 @@ def check_plan(raw):
     require(plan['case'] in ('discovery','import_discovery','normal','precommit','postcommit','blocked_installation','handoff_middle','M_only','after_D'), 'closed diagnostic case')
     require(type(plan['selected_runtime_file_observations']) is dict and set(plan['selected_runtime_file_observations'])==set(TCB_PATHS)
         and plan['startup_absent']==list(STARTUP_ABSENT), 'selected runtime observations')
-    require(plan['startup_profile'] is None if plan['case'] =='discovery' else type(plan['startup_profile']) is dict and set(plan['startup_profile'])=={'path','pin'},'two-stage startup profile')
+    require(plan['startup_profile'] is None if plan['case'] =='discovery' else type(plan['startup_profile']) is dict and set(plan['startup_profile'])=={'path','pin'} and plan['startup_profile']['path']==str(ROOT/'results/tables/staged_rts24_saved_fresh_nfc_v12_non_authoritative/startup_profile.json'),'two-stage startup profile')
     require(type(plan['namespace_helper']) is dict and set(plan['namespace_helper'])=={'path','pin'} and plan['namespace_helper']['path']==str(ROOT/'experiments/staged_rts24_saved_fresh_entry_namespace_consumer_v2.py'),'fixed namespace helper reference')
     for field in ('import_helper','import_policy'):
         require(type(plan[field]) is dict and set(plan[field])=={'path','pin'},'fixed runtime attachment reference')
