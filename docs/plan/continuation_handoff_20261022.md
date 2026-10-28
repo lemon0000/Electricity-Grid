@@ -1,3 +1,5 @@
+> 2026-10-28：见[真实import自然返回交接](continuation_handoff_20261028_saved_fresh_import_return_v1.md)。唯一2048诊断在1344 open后自然返回，347个native采样与父子收尾、saved/checkpoint通过；diagnostic stop后仍UNRESOLVED，finder auth0/pending、post-import boundary/OBSERVED/LIVE未闭合。scope36.3404/63s，累计866.467895100049s、不接受37条；旧预算/失败与Source49保持。下一步审返回后认证/图/bookend成本，不再扩大窗口；完整F及科学/资源/正式/运行权限仍false。
+
 > 2026-10-28：见[真实1024窗口完成交接](continuation_handoff_20261028_saved_fresh_actual1024_v1.md)。本包14节点完整终态、startup/profile、唯一1024窗口及saved/checkpoint通过；预设stop1024、无kill/timeout，未自然返回，machinery observed2/auth0仍pending。audit8.7689/10s、scope33.3006/49s；NFC5准备拒绝与旧账保留，累计830.1274519000538s、不接受37条。后续2048仅未执行准入草稿；完整F与科学/资源/正式/运行权限仍false。
 
 > 2026-10-28：见[1024控制器完整单测与预算拒绝交接](continuation_handoff_20261028_saved_fresh_census1024_unit_terminal_v1.md)。当前14节点完整30帧/report/exit0及父端收尾已核；后续性能预算未闭合，pre_seal主动拒绝、checkpoint超1s帽，原7文件726621B保留。累计792.7747780000602s、不接受36条；本轮0 cold，真实证据仍512。另有未执行46s后继预算草稿；完整F与科学/资源/正式/运行权限仍false。
