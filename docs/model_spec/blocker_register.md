@@ -1,3 +1,5 @@
+> 2026-10-28：见[XZ启动与manifest拒绝交接](../plan/continuation_handoff_20261028_saved_fresh_consumer_manifest_rejection_v1.md)。48项unit/98帧和PRE_SEAL通过，命令29956/30000；唯一真实XZ child在MANIFEST被旧core38 helper路径拒绝，未SELF/import/LIVE，失败原流和资源收尾已保全。本包39.4490/110s、累计1037.6847839999784s、受控不接受39条，另存工程超帽候选；旧预算/Source49与39项并行dirty保留。Core39/probe37/parent36仅未执行准备；下一步完整预算及parent/Core联合配对测试，再真实连接。F和全部科学/资源/正式/运行权限仍未完成。
+
 > 2026-10-28：见[一次性消费接口开发交接](../plan/continuation_handoff_20261028_saved_fresh_consumer_binding_unit_v1.md)。core38/helper v2/probe36与11声明Source49 oracle完成，41项unit、84帧、独立PRE_SEAL、saved/checkpoint通过；仅logical binding consumer开发验证，真实LIVE连接尚未执行。本包21.0828/90s，累计998.2357513999843s、不接受38条；旧预算/失败/Source49和39项并行dirty保留。下一步先新传输和完整资源准入，再真实同对象消费/父端采用；完整F及科学/正式/运行权限仍未完成。
 
 > 2026-10-28：见[冻结profile匹配LIVE交接](../plan/continuation_handoff_20261028_saved_fresh_profile_matched_live_v1.md)。NFC10 normal与原NF9 501203B profile逐字相等，parent前后reference/admission/manifest/raw及saved完整canonical重放闭合，真实LIVE→runtime/resource/boundary CLOSED；25项unit、357 native样本及checkpoint通过。包39.6642/85s，累计977.1529690999844s、不接受38条，旧预算/失败/Source49保留。下一步同进程producer/consumer连接与父端采用；独立TCB、资源、角色/permit、完整F和科学/正式/运行权限仍未完成。
