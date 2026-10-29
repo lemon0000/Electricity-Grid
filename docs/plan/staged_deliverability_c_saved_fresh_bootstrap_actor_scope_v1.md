@@ -1,0 +1,25 @@
+# F：pre-LIVE到producer的单一actor与retained Parent quiet
+
+2026-10-29，DRAFT_NONAUTHORITATIVE，登记前自身受控费用0。承接[producer交接检查点](continuation_handoff_20261029_saved_fresh_producer_export_v2.md)，完整F目标仍为获批outer → 同LIVE owner完整producer → held Parent内容重开采用 → whole-workflow资源准入。本包补pre-LIVE清理窗口及真正持有process/drain/writer的quiet组件，不授予实际P1、项目Native owner、角色、模型、solver或正式运行权限。
+
+BootstrapActor由固定Loader4在ADOPTED阶段创建，封装原bridge/Permission1/Coordinator2与原prepare_consumer/finish_import/close。Loader一次性保存cleanup，返回单一actor spec；B_S hook后、handoff前通过actor安装P1 guard。B_S返回且boundary CLOSED时，producer模式先在IMPORTING准备consumer，再完成独立profile匹配并要求LIVE/PREPARED，然后委托原Coordinator2完整run/G0/G2/G3/close。prepare_consumer自身已关闭的失败只补终态，finish/初始guard失败由held revoke/retire及原close补收尾；仅_cleanup_started=False才调用物理close。原primary、LC wrapper及已有cause均保留。未完成producer的close(None)进入FAILED；成功完整数据确认后才清actor大引用。
+
+Actor与coordinator用已保存CodeType/default/binding tuples逐次重建fresh functions，dispatch及recovery不从可替换的private convenience函数字典取code。固定源guard仍核原helper modules；信任边界为creating-bootstrap、已核raw及标准库/CPython，不声称抵御任意同解释器恶意代码或native副作用。
+
+派生Core43/Probe41/Namespace4/Loader4/DRAIN2为版本化接线草稿。Core增加producer case并要求新native root的独立import_profile路径；Probe调用actor完成prepare/finish/run，finally由actor负责唯一cleanup。原Core runtime class完整CodeType保持；旧Core42/Probe40/Namespace3/DRAIN1原字节不动。graph256与image4MiB为新路线停止帽，旧construction43只作冻结历史基线，新完整调用量仍未知，whole_workflow_admitted=false。新candidate输出上限327680B加newline，drain stdout327681/stderr131072；它们是未来候选停止帽，未形成真实代表尺寸/内存/墙钟准入。
+
+ParentQuietActor要求真实direct-child Popen、原argv与独立核验的pid/creation/image identity。它核DRAIN2原raw pin后在私有namespace执行该同一raw，自己保存原drain/closure并执行一次，不接caller drain callable。固定release帧由plan SHA内部生成，writer由actor私有创建、持有原stdin及不可变errors tuple；该帧是传输事实，绝不是外部授权源。drain结果保留canonical private副本，caller修改返回dict不能改实际quiet。原process HANDLE终态后由actor close并核Win32 invalid-handle6；finish要求原writer/pipes/readers/handle均终态、无kill/truncation/reader/cleanup故障，保存stdout/stderr/release/argv/manifest/transport及完整drain observation pins/数据。rc非0仍可有物理quiet，child_success与transport_success分别记录，由上层决定语义成功。成功释放live refs，保留纯数据；资源连续界、combined retention及resource admission保持false。
+
+Parent40/完整parent validator、accepted import-profile artifact关系、真实outer grant reservation/binding、Parent P1独立读许可与683逐SHA尚未接入。Permission1 public issue/verify/claim仍永久拒绝；Helper7/LC6/Coordinator2的False-permission schema原字节保持，genuine授权必须另建后继。stdin release、kernel identity、profile、snapshot、quiet或任何accepted/False-gate都不能mint权限。Source49 closed SavedLaunchIssuer不复用。当前Code不能据此启动真实Native/P1路线。
+
+唯一ordinary矩阵20项：12项actor/loader覆盖完整private顺序、consumer自关闭、prepare/finish错误、profile不匹配、premature close、method/source drift、foreign thread/sticky错误、private function replacement不执行、construction关闭，以及实际固定Loader创建并调用单actor；4项wiring覆盖原runtime CodeType、三个manifest case/闭集/profile路径、精确派生与分离stop caps、完整UTF16 transport不超过原30000；4项quiet覆盖两个真实微型stdlib children、非Popen/无actor-owned writer拒绝与private fault矩阵。原70项关闭交接/权限等证据逐pin继承复用，不重跑。
+
+两个微型child唯一程序为：读stdin EOF → sleep0.12秒 → 只向stdout写release原字节SHA JSON → exit0或3。它们不导入项目/Source49、P1、模型或solver；第二个在单位夹具中预关闭原stdin，验证writer失败无法被caller清除且rc3物理quiet保留。每child drain1秒，异常仅清理本测试创建的child/pipe/HANDLE，join0.5秒、wait1秒，stdout不足256B/stderr0。固定raw拒绝same-CodeType/伪closure，真实Popen下公开kernel identity/checker replacement不执行。Windows API仅用于这些普通toy process身份/句柄事实及普通unit memory采样，不是项目Native校准或资源准入。
+
+验证DAG：register → 唯一unit（20项，2次toy Popen；20 start/end+admission/report共42帧）→ 独立只读PRE_SEAL保存 → saved原流及终态重开 → checkpoint → scoped Git。source/metadata/hash/compile不执行Source49目标模块；不重跑NFC12，新增模拟跨度0h。任何拒绝停止正常后续，仅保全checkpoint，登记后own输入冻结，修补另建successor。阶段5/12/5/5/5秒、unit child10秒；static25/unit15/总40秒，unit capture仍stdout128KiB/stderr32KiB、256MiB/process/512MiB pair、root10文件/4MiB及单record1MiB，预留checkpoint1MiB。新Native候选较大stop caps不用于放宽本普通unit帽。两层toy进程不构成连续/descendant内存证明，按固定微型程序、数量和超时停止。
+
+完整真实路线还需在agent.md第9节下审查：spawn前真实外部grant reservation、spawn后exact child/manifest/transport/source/deadline绑定、独立签名/OS-backed capability或明确的approved Parent/pipe TCB、只读ANCHOR到exact689-path窗口、IMPORTING prepare与LIVE issue、full LC及packet、单帧输出、quiet后独立Parent P1读与publication/failure。原43/107静态或历史计数不能代替新路径实测；本包不按toy/普通测试耗时估算真实F。
+
+账源固定producer_export_v2 CP 898de661acd09bbbce60fa80e8ddebe44f8c8e9476870758abe04ad148cd200c，11133B，root6文件798029B。累计static624.0365631999841、pytest366.48897970000326、unittest297.9759714999709，总1288.5015143999583秒、49条拒绝。继承expanded1358加root6扣driver重叠1后1363 inputs，archive241文件26253509B；自身13、重叠2，精确union1374。完整源/归档逐pin，旧剩余不转用，旧费/失败不退款或重置。
+
+root唯一writer，retained_lifecycle_review独立只读PRE_SEAL；没有official verdict/receipt/production seal。原39项并行worktree字节、Source49/NFC12全部16文件、B1–B3、原P2七输入及所有冻结/失败source/config/input/result保持。role/permit/science/resource/formal/run/F gates均false，宽goal保持active。
