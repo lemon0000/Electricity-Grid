@@ -1,0 +1,25 @@
+# F：outer host 完整 context 协议与 suspended 顺序草稿
+
+2026-10-30，DRAFT_NONAUTHORITATIVE。承接 endpoint preparation v4；原八组 role 修补、cleanup binding、Core51、历史输入及失败字节全部保留。
+
+本步实现独立 `full_role_host_preentry_v1` 源码中的synthetic control flow/data DAG：完整683-input/Source49 context关系、request→OFFER→ACK、Core51 manifest投影→manifest SHA→descriptor→实际quoted argv、endpoint header→child binding→release ACK。host orchestration仅拥有outer controller的原prepare10秒；parent/fresh的独立source launcher及其阶段reservation仍待接线，generic descriptor数据builder支持三个角色，不给nested launch authority。
+
+公开Host constructor、open_full_role_host和mechanical issuer均无条件关闭。真实source-authenticated host Native provider尚未实现。普通测试仅在私有copy移除mechanical首raise，以明确synthetic effects执行其余原控制流；不把callbacks返回True、数据一致性或本地receipt当成真实身份/权限。完整context bytes为synthetic，49 pins来自保存记录；不读取P1或执行49项目模块。
+
+哈希DAG单向：context/request→offer→ack→descriptor_without_manifest_sha→manifest→full_descriptor→argv→actual child identity→header→binding→release ACK。manifest不包含自己的SHA或后生成的header/child identity。header与Core51闭合结构一致。测试由独立framing oracle核header，且使用未改Core51 endpoint控制流配synthetic Kernel读取host生成header。transport/payload、完整Core manifest、source context、publication和真实身份的检查接口都是未来source provider的必要责任；当前只证明显式synthetic域中的调用顺序与失败保留。
+
+原时钟唯一，deadline=start+180，外层preparation截止start+10，并保留failure15秒；clock持有last_now，不允许倒退。失败cleanup只取min(global_deadline, cleanup_start+15)，quiet再取min(cleanup_deadline, now+5)。每个close后核原剩余deadline；超时保存失败但仍尝试其他非等待资源关闭，不将其算作预算内成功。Native调用本身的wall/RSS及停止等价待专项诊断。
+
+operation单入口和effect前后image核查阻止吞掉重入异常后复活state。OFFER/ACK/built/child/publication/binding有独立held image；effect bookend核已提交artifact、所列生命周期ledger、acquisitions和close_states；escrow只允许对应acquisition effect写入指定槽位，其余槽位作前后比较。errors/clock等其他执行根不构成完整防篡改证明，coordinated execution-root corruption仍OPEN。Host不可copy、serialize或普通set/del重绑，HostUnresolved拒绝序列化。
+
+六Native resource由预分配escrow接收，独立acquisitions保留清理根；capture逐槽继续，secondary不能覆盖原primary。mapping/mutex/job/thread/process的kernel HANDLE须唯一；view属于独立地址域。每次Resume、host acceptance、Terminate与各close在调用前先记ISSUED；不确定结果不可重试。成功receipt未确认前发布不确定；原对象错误与secondary保留。source provider还必须验证真实Job-list、suspended状态、noninherit、PID/creation、marker-last与abandoned mutex规则；这些物理机制未由本步实现。
+
+child存在时先terminate并取得完整Job quiet。quiet须绑定held Job、完整唯一member identities与原child（partial process先取得实际identity），成员<=1024、active=0、retained handles signaled、observed count=total及final list空。Job/child identity缺失或quiet未知时保留所有Native resources；不会先拆通信。Job-only且无child允许零member quiet。quiet后依次thread/process/job/view/mutex/mapping，各自ISSUED/CLOSED/UNCERTAIN；某项失败继续其他项，重复调用只重抛同一失败。
+
+manifest是按nonce create-only永久保留的immutable forensic artifact，计入1 file/<=131072B，不做删除或重用；即使publish已完成但返回/receipt/readback失败，也永久消耗该nonce/path reservation并留UNCERTAIN。它属于原8MiB/64files内的额外artifact，四份terminal的512KiB/4slots仍预留。完整F其他输出与新增context文件的联合预算待整链审查；不能由这一文件推出整链admission。create-only/identity是未来物理provider责任，synthetic测试证明既有文件不会被本控制流覆盖。binding固定其receipt以及manifest、argv、完整command pins。
+
+host acceptance先完成全部本地bookends，ISSUED后外部返回不明记UNCERTAIN；DONE后若原prepare窗口已过则清理suspended child并保留已接受事实，不resume。test44只证明这一ledger与清理；没有真实broker cancellation/abort ACK，跨进程失败责任仍OPEN。未来broker terminal必须把该已接受/未release失败事实返回host；当前没有外部消息或目标进程。
+
+check_manifest/check_transport在fixture分别只核context SHA和bytes equality；test10只证Core51 endpoint/header消费兼容，不证完整manifest、真实argv/profile或实际transport/payload等价。上述真实检查及取消协议须通过独立source successor实现，不能把私有test copy转作运行入口。
+
+本包仅接受 `outer_host_protocol_and_suspended_order_synthetic_only`。后续完整F依赖：真实host creator/provider与外部root；Core完整context bytes载入及新manifest/case/profile；Namespace/Guard2完整parent/fresh生命周期；source-specific launch/quiet；Native返回窗口、partial construction、nested Job/kill传播与实际OS argv实证；整个DAG的调用量、wall/RSS/存储和专项授权。Core51与旧NFC12不改写、不重跑。
