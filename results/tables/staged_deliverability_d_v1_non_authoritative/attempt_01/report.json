@@ -1,0 +1,846 @@
+{
+  "aggregate_contract_release": false,
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "axes": {
+    "replay": "method verdict vs its own arrangement replayed under full temporal constraints",
+    "strategy": "method verdict vs the complete temporal strategy verdict on the same plan"
+  },
+  "created_utc": "2026-11-04T06:40:13.750032+00:00",
+  "external_downloads": 0,
+  "formal_result": false,
+  "grid": {
+    "business": [
+      "fast",
+      "slow"
+    ],
+    "cells": 8,
+    "clean": [
+      "early",
+      "late"
+    ],
+    "evaluations": 24,
+    "grid": [
+      "on_time",
+      "delayed"
+    ],
+    "methods": [
+      "instantaneous",
+      "fixed_headroom",
+      "full_temporal"
+    ]
+  },
+  "inputs": [
+    {
+      "bytes": 1643,
+      "path": "configs/staged_deliverability_d_v1.DRAFT.yaml",
+      "sha256": "4cc0eb27314d4a8b2c526833c257daa52e8e2cfb31dd54115fadda7395657a36"
+    },
+    {
+      "bytes": 962,
+      "path": "configs/staged_deliverability_small_case_v1.DRAFT.yaml",
+      "sha256": "5b334398b2894da70c81baaad74da2dfcecde490ab539bacf3fdb0c988eb4ac5"
+    }
+  ],
+  "resource_admission": false,
+  "rows": [
+    {
+      "business": "fast",
+      "clean": "early",
+      "hours": 10,
+      "label": "D1_false_pass",
+      "method": "instantaneous",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "1/5",
+      "method_scope": "instantaneous_conditions_only",
+      "method_verdict": true,
+      "native_violation_count": 0,
+      "plan": "on_time",
+      "reference_verdict": false,
+      "replay_coverage_complete": true,
+      "replay_observed_primary_deadline_miss": "1/5",
+      "replay_observed_through": 7,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": false,
+      "replay_verdict": false,
+      "replay_violation_count": 0,
+      "replay_violations": [],
+      "strategy_label": "D1_false_pass",
+      "trajectory": "fast:on_time:early:instantaneous"
+    },
+    {
+      "business": "fast",
+      "clean": "early",
+      "hours": 10,
+      "label": "D1_false_pass",
+      "method": "fixed_headroom",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "0",
+      "method_scope": "constant_headroom_approximation",
+      "method_verdict": true,
+      "native_violation_count": 1,
+      "plan": "on_time",
+      "reference_verdict": false,
+      "replay_coverage_complete": false,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 1,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": true,
+      "replay_verdict": false,
+      "replay_violation_count": 2,
+      "replay_violations": [
+        [
+          2,
+          [
+            "hourly_cfe",
+            "recovery_headroom"
+          ]
+        ]
+      ],
+      "strategy_label": "D1_false_pass",
+      "trajectory": "fast:on_time:early:fixed_headroom"
+    },
+    {
+      "business": "fast",
+      "clean": "early",
+      "hours": 10,
+      "label": "D4_agree_fail",
+      "method": "full_temporal",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "1/5",
+      "method_scope": "scalar_fixed_policy",
+      "method_verdict": false,
+      "native_violation_count": 0,
+      "plan": "on_time",
+      "reference_verdict": false,
+      "replay_coverage_complete": true,
+      "replay_observed_primary_deadline_miss": "1/5",
+      "replay_observed_through": 7,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": false,
+      "replay_verdict": false,
+      "replay_violation_count": 0,
+      "replay_violations": [],
+      "strategy_label": "D4_agree_fail",
+      "trajectory": "fast:on_time:early:full_temporal"
+    },
+    {
+      "business": "fast",
+      "clean": "late",
+      "hours": 10,
+      "label": "D1_false_pass",
+      "method": "instantaneous",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "2/5",
+      "method_scope": "instantaneous_conditions_only",
+      "method_verdict": true,
+      "native_violation_count": 1,
+      "plan": "on_time",
+      "reference_verdict": false,
+      "replay_coverage_complete": false,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 1,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": true,
+      "replay_verdict": false,
+      "replay_violation_count": 1,
+      "replay_violations": [
+        [
+          2,
+          [
+            "event_envelope"
+          ]
+        ]
+      ],
+      "strategy_label": "D1_false_pass",
+      "trajectory": "fast:on_time:late:instantaneous"
+    },
+    {
+      "business": "fast",
+      "clean": "late",
+      "hours": 10,
+      "label": "D4_agree_fail",
+      "method": "fixed_headroom",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "0",
+      "method_scope": "constant_headroom_approximation",
+      "method_verdict": false,
+      "native_violation_count": 3,
+      "plan": "on_time",
+      "reference_verdict": false,
+      "replay_coverage_complete": false,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 2,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": true,
+      "replay_verdict": false,
+      "replay_violation_count": 4,
+      "replay_violations": [
+        [
+          2,
+          [
+            "cfe_call_shortfall",
+            "hourly_cfe"
+          ]
+        ],
+        [
+          3,
+          [
+            "hourly_cfe",
+            "recovery_headroom"
+          ]
+        ]
+      ],
+      "strategy_label": "D4_agree_fail",
+      "trajectory": "fast:on_time:late:fixed_headroom"
+    },
+    {
+      "business": "fast",
+      "clean": "late",
+      "hours": 10,
+      "label": "D4_agree_fail",
+      "method": "full_temporal",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "1/5",
+      "method_scope": "scalar_fixed_policy",
+      "method_verdict": false,
+      "native_violation_count": 2,
+      "plan": "on_time",
+      "reference_verdict": false,
+      "replay_coverage_complete": true,
+      "replay_observed_primary_deadline_miss": "1/5",
+      "replay_observed_through": 7,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": false,
+      "replay_verdict": false,
+      "replay_violation_count": 2,
+      "replay_violations": [
+        [
+          2,
+          [
+            "cfe_call_shortfall",
+            "hourly_cfe"
+          ]
+        ]
+      ],
+      "strategy_label": "D4_agree_fail",
+      "trajectory": "fast:on_time:late:full_temporal"
+    },
+    {
+      "business": "fast",
+      "clean": "early",
+      "hours": 10,
+      "label": "D1_false_pass",
+      "method": "instantaneous",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "3/5",
+      "method_scope": "instantaneous_conditions_only",
+      "method_verdict": true,
+      "native_violation_count": 12,
+      "plan": "delayed",
+      "reference_verdict": false,
+      "replay_coverage_complete": false,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 1,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": true,
+      "replay_verdict": false,
+      "replay_violation_count": 1,
+      "replay_violations": [
+        [
+          2,
+          [
+            "event_envelope"
+          ]
+        ]
+      ],
+      "strategy_label": "D1_false_pass",
+      "trajectory": "fast:delayed:early:instantaneous"
+    },
+    {
+      "business": "fast",
+      "clean": "early",
+      "hours": 10,
+      "label": "D4_agree_fail",
+      "method": "fixed_headroom",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "1/5",
+      "method_scope": "constant_headroom_approximation",
+      "method_verdict": false,
+      "native_violation_count": 3,
+      "plan": "delayed",
+      "reference_verdict": false,
+      "replay_coverage_complete": false,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 1,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": true,
+      "replay_verdict": false,
+      "replay_violation_count": 2,
+      "replay_violations": [
+        [
+          2,
+          [
+            "grid_service_shortfall",
+            "scalar_supply"
+          ]
+        ]
+      ],
+      "strategy_label": "D4_agree_fail",
+      "trajectory": "fast:delayed:early:fixed_headroom"
+    },
+    {
+      "business": "fast",
+      "clean": "early",
+      "hours": 10,
+      "label": "D4_agree_fail",
+      "method": "full_temporal",
+      "method_coverage_complete": false,
+      "method_observed_primary_deadline_miss": "0",
+      "method_scope": "scalar_fixed_policy",
+      "method_verdict": false,
+      "native_violation_count": 2,
+      "plan": "delayed",
+      "reference_verdict": false,
+      "replay_coverage_complete": false,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 1,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": true,
+      "replay_verdict": false,
+      "replay_violation_count": 2,
+      "replay_violations": [
+        [
+          2,
+          [
+            "grid_service_shortfall",
+            "scalar_supply"
+          ]
+        ]
+      ],
+      "strategy_label": "D4_agree_fail",
+      "trajectory": "fast:delayed:early:full_temporal"
+    },
+    {
+      "business": "fast",
+      "clean": "late",
+      "hours": 10,
+      "label": "D4_agree_fail",
+      "method": "instantaneous",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "3/5",
+      "method_scope": "instantaneous_conditions_only",
+      "method_verdict": false,
+      "native_violation_count": 13,
+      "plan": "delayed",
+      "reference_verdict": false,
+      "replay_coverage_complete": false,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 1,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": true,
+      "replay_verdict": false,
+      "replay_violation_count": 2,
+      "replay_violations": [
+        [
+          2,
+          [
+            "cfe_call_shortfall",
+            "event_envelope"
+          ]
+        ]
+      ],
+      "strategy_label": "D4_agree_fail",
+      "trajectory": "fast:delayed:late:instantaneous"
+    },
+    {
+      "business": "fast",
+      "clean": "late",
+      "hours": 10,
+      "label": "D4_agree_fail",
+      "method": "fixed_headroom",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "1/5",
+      "method_scope": "constant_headroom_approximation",
+      "method_verdict": false,
+      "native_violation_count": 4,
+      "plan": "delayed",
+      "reference_verdict": false,
+      "replay_coverage_complete": false,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 1,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": true,
+      "replay_verdict": false,
+      "replay_violation_count": 4,
+      "replay_violations": [
+        [
+          2,
+          [
+            "grid_service_shortfall",
+            "cfe_call_shortfall",
+            "scalar_supply",
+            "hourly_cfe"
+          ]
+        ]
+      ],
+      "strategy_label": "D4_agree_fail",
+      "trajectory": "fast:delayed:late:fixed_headroom"
+    },
+    {
+      "business": "fast",
+      "clean": "late",
+      "hours": 10,
+      "label": "D4_agree_fail",
+      "method": "full_temporal",
+      "method_coverage_complete": false,
+      "method_observed_primary_deadline_miss": "0",
+      "method_scope": "scalar_fixed_policy",
+      "method_verdict": false,
+      "native_violation_count": 4,
+      "plan": "delayed",
+      "reference_verdict": false,
+      "replay_coverage_complete": false,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 1,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": true,
+      "replay_verdict": false,
+      "replay_violation_count": 4,
+      "replay_violations": [
+        [
+          2,
+          [
+            "grid_service_shortfall",
+            "cfe_call_shortfall",
+            "scalar_supply",
+            "hourly_cfe"
+          ]
+        ]
+      ],
+      "strategy_label": "D4_agree_fail",
+      "trajectory": "fast:delayed:late:full_temporal"
+    },
+    {
+      "business": "slow",
+      "clean": "early",
+      "hours": 10,
+      "label": "D1_false_pass",
+      "method": "instantaneous",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "1/5",
+      "method_scope": "instantaneous_conditions_only",
+      "method_verdict": true,
+      "native_violation_count": 0,
+      "plan": "on_time",
+      "reference_verdict": true,
+      "replay_coverage_complete": true,
+      "replay_observed_primary_deadline_miss": "1/5",
+      "replay_observed_through": 7,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": false,
+      "replay_verdict": false,
+      "replay_violation_count": 0,
+      "replay_violations": [],
+      "strategy_label": "D3_agree_pass",
+      "trajectory": "slow:on_time:early:instantaneous"
+    },
+    {
+      "business": "slow",
+      "clean": "early",
+      "hours": 10,
+      "label": "D3_agree_pass",
+      "method": "fixed_headroom",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "0",
+      "method_scope": "constant_headroom_approximation",
+      "method_verdict": true,
+      "native_violation_count": 0,
+      "plan": "on_time",
+      "reference_verdict": true,
+      "replay_coverage_complete": true,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 7,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": false,
+      "replay_verdict": true,
+      "replay_violation_count": 0,
+      "replay_violations": [],
+      "strategy_label": "D3_agree_pass",
+      "trajectory": "slow:on_time:early:fixed_headroom"
+    },
+    {
+      "business": "slow",
+      "clean": "early",
+      "hours": 10,
+      "label": "D3_agree_pass",
+      "method": "full_temporal",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "0",
+      "method_scope": "scalar_fixed_policy",
+      "method_verdict": true,
+      "native_violation_count": 0,
+      "plan": "on_time",
+      "reference_verdict": true,
+      "replay_coverage_complete": true,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 7,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": false,
+      "replay_verdict": true,
+      "replay_violation_count": 0,
+      "replay_violations": [],
+      "strategy_label": "D3_agree_pass",
+      "trajectory": "slow:on_time:early:full_temporal"
+    },
+    {
+      "business": "slow",
+      "clean": "late",
+      "hours": 10,
+      "label": "D1_false_pass",
+      "method": "instantaneous",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "1/5",
+      "method_scope": "instantaneous_conditions_only",
+      "method_verdict": true,
+      "native_violation_count": 0,
+      "plan": "on_time",
+      "reference_verdict": true,
+      "replay_coverage_complete": true,
+      "replay_observed_primary_deadline_miss": "1/5",
+      "replay_observed_through": 7,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": false,
+      "replay_verdict": false,
+      "replay_violation_count": 0,
+      "replay_violations": [],
+      "strategy_label": "D3_agree_pass",
+      "trajectory": "slow:on_time:late:instantaneous"
+    },
+    {
+      "business": "slow",
+      "clean": "late",
+      "hours": 10,
+      "label": "D1_false_pass",
+      "method": "fixed_headroom",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "0",
+      "method_scope": "constant_headroom_approximation",
+      "method_verdict": true,
+      "native_violation_count": 1,
+      "plan": "on_time",
+      "reference_verdict": true,
+      "replay_coverage_complete": false,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 1,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": true,
+      "replay_verdict": false,
+      "replay_violation_count": 2,
+      "replay_violations": [
+        [
+          2,
+          [
+            "hourly_cfe",
+            "recovery_headroom"
+          ]
+        ]
+      ],
+      "strategy_label": "D3_agree_pass",
+      "trajectory": "slow:on_time:late:fixed_headroom"
+    },
+    {
+      "business": "slow",
+      "clean": "late",
+      "hours": 10,
+      "label": "D3_agree_pass",
+      "method": "full_temporal",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "0",
+      "method_scope": "scalar_fixed_policy",
+      "method_verdict": true,
+      "native_violation_count": 0,
+      "plan": "on_time",
+      "reference_verdict": true,
+      "replay_coverage_complete": true,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 7,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": false,
+      "replay_verdict": true,
+      "replay_violation_count": 0,
+      "replay_violations": [],
+      "strategy_label": "D3_agree_pass",
+      "trajectory": "slow:on_time:late:full_temporal"
+    },
+    {
+      "business": "slow",
+      "clean": "early",
+      "hours": 10,
+      "label": "D1_false_pass",
+      "method": "instantaneous",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "1/5",
+      "method_scope": "instantaneous_conditions_only",
+      "method_verdict": true,
+      "native_violation_count": 0,
+      "plan": "delayed",
+      "reference_verdict": false,
+      "replay_coverage_complete": true,
+      "replay_observed_primary_deadline_miss": "1/5",
+      "replay_observed_through": 7,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": false,
+      "replay_verdict": false,
+      "replay_violation_count": 0,
+      "replay_violations": [],
+      "strategy_label": "D1_false_pass",
+      "trajectory": "slow:delayed:early:instantaneous"
+    },
+    {
+      "business": "slow",
+      "clean": "early",
+      "hours": 10,
+      "label": "D1_false_pass",
+      "method": "fixed_headroom",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "0",
+      "method_scope": "constant_headroom_approximation",
+      "method_verdict": true,
+      "native_violation_count": 1,
+      "plan": "delayed",
+      "reference_verdict": false,
+      "replay_coverage_complete": false,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 1,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": true,
+      "replay_verdict": false,
+      "replay_violation_count": 2,
+      "replay_violations": [
+        [
+          2,
+          [
+            "scalar_supply",
+            "recovery_headroom"
+          ]
+        ]
+      ],
+      "strategy_label": "D1_false_pass",
+      "trajectory": "slow:delayed:early:fixed_headroom"
+    },
+    {
+      "business": "slow",
+      "clean": "early",
+      "hours": 10,
+      "label": "D4_agree_fail",
+      "method": "full_temporal",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "1/5",
+      "method_scope": "scalar_fixed_policy",
+      "method_verdict": false,
+      "native_violation_count": 0,
+      "plan": "delayed",
+      "reference_verdict": false,
+      "replay_coverage_complete": true,
+      "replay_observed_primary_deadline_miss": "1/5",
+      "replay_observed_through": 7,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": false,
+      "replay_verdict": false,
+      "replay_violation_count": 0,
+      "replay_violations": [],
+      "strategy_label": "D4_agree_fail",
+      "trajectory": "slow:delayed:early:full_temporal"
+    },
+    {
+      "business": "slow",
+      "clean": "late",
+      "hours": 10,
+      "label": "D1_false_pass",
+      "method": "instantaneous",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "1/5",
+      "method_scope": "instantaneous_conditions_only",
+      "method_verdict": true,
+      "native_violation_count": 0,
+      "plan": "delayed",
+      "reference_verdict": false,
+      "replay_coverage_complete": true,
+      "replay_observed_primary_deadline_miss": "1/5",
+      "replay_observed_through": 7,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": false,
+      "replay_verdict": false,
+      "replay_violation_count": 0,
+      "replay_violations": [],
+      "strategy_label": "D1_false_pass",
+      "trajectory": "slow:delayed:late:instantaneous"
+    },
+    {
+      "business": "slow",
+      "clean": "late",
+      "hours": 10,
+      "label": "D1_false_pass",
+      "method": "fixed_headroom",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "0",
+      "method_scope": "constant_headroom_approximation",
+      "method_verdict": true,
+      "native_violation_count": 2,
+      "plan": "delayed",
+      "reference_verdict": false,
+      "replay_coverage_complete": false,
+      "replay_observed_primary_deadline_miss": "0",
+      "replay_observed_through": 1,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": true,
+      "replay_verdict": false,
+      "replay_violation_count": 3,
+      "replay_violations": [
+        [
+          2,
+          [
+            "scalar_supply",
+            "hourly_cfe",
+            "recovery_headroom"
+          ]
+        ]
+      ],
+      "strategy_label": "D1_false_pass",
+      "trajectory": "slow:delayed:late:fixed_headroom"
+    },
+    {
+      "business": "slow",
+      "clean": "late",
+      "hours": 10,
+      "label": "D4_agree_fail",
+      "method": "full_temporal",
+      "method_coverage_complete": true,
+      "method_observed_primary_deadline_miss": "1/5",
+      "method_scope": "scalar_fixed_policy",
+      "method_verdict": false,
+      "native_violation_count": 0,
+      "plan": "delayed",
+      "reference_verdict": false,
+      "replay_coverage_complete": true,
+      "replay_observed_primary_deadline_miss": "1/5",
+      "replay_observed_through": 7,
+      "replay_scope": "scalar_fixed_policy",
+      "replay_stopped": false,
+      "replay_verdict": false,
+      "replay_violation_count": 0,
+      "replay_violations": [],
+      "strategy_label": "D4_agree_fail",
+      "trajectory": "slow:delayed:late:full_temporal"
+    }
+  ],
+  "scope": "staged_deliverability_d_v1_grid",
+  "security_certified": false,
+  "solver_calls": 0,
+  "sources": [
+    {
+      "bytes": 12390,
+      "path": "src/staged_deliverability_d_grid_v1.py",
+      "sha256": "d53111ac194dd739bee7b2b7b560e1914d1059f864bdd4359ea110de6471c5a0"
+    },
+    {
+      "bytes": 12275,
+      "path": "src/staged_deliverability_replay_v1.py",
+      "sha256": "f9738c82308d2379e98e1c46318ff2198e7900fbc9d368e41176db75fd603c7c"
+    },
+    {
+      "bytes": 19642,
+      "path": "src/staged_deliverability_development_v1.py",
+      "sha256": "91bbc6aaaac458c8fcb23c11d830a98af99e1d50d42b3c0489246ec1922109e0"
+    },
+    {
+      "bytes": 3962,
+      "path": "experiments/staged_deliverability_d_v1.py",
+      "sha256": "9b05f482c8385c183b57217bdebf03d9bc7821382c6474c7395051ef8011b10c"
+    }
+  ],
+  "summary": {
+    "by_method": {
+      "fixed_headroom": {
+        "replay": {
+          "D1_false_pass": 4,
+          "D2_false_reject": 0,
+          "D3_agree_pass": 1,
+          "D4_agree_fail": 3,
+          "D5_undetermined": 0
+        },
+        "strategy": {
+          "D1_false_pass": 3,
+          "D2_false_reject": 0,
+          "D3_agree_pass": 2,
+          "D4_agree_fail": 3,
+          "D5_undetermined": 0
+        }
+      },
+      "full_temporal": {
+        "replay": {
+          "D1_false_pass": 0,
+          "D2_false_reject": 0,
+          "D3_agree_pass": 2,
+          "D4_agree_fail": 6,
+          "D5_undetermined": 0
+        },
+        "strategy": {
+          "D1_false_pass": 0,
+          "D2_false_reject": 0,
+          "D3_agree_pass": 2,
+          "D4_agree_fail": 6,
+          "D5_undetermined": 0
+        }
+      },
+      "instantaneous": {
+        "replay": {
+          "D1_false_pass": 7,
+          "D2_false_reject": 0,
+          "D3_agree_pass": 0,
+          "D4_agree_fail": 1,
+          "D5_undetermined": 0
+        },
+        "strategy": {
+          "D1_false_pass": 5,
+          "D2_false_reject": 0,
+          "D3_agree_pass": 2,
+          "D4_agree_fail": 1,
+          "D5_undetermined": 0
+        }
+      }
+    },
+    "counts": {
+      "D1_false_pass": 11,
+      "D2_false_reject": 0,
+      "D3_agree_pass": 3,
+      "D4_agree_fail": 10,
+      "D5_undetermined": 0
+    },
+    "formal_result": false,
+    "fractions": {
+      "D1_false_pass": 0.4583333333333333,
+      "D2_false_reject": 0.0,
+      "D3_agree_pass": 0.125,
+      "D4_agree_fail": 0.4166666666666667,
+      "D5_undetermined": 0.0
+    },
+    "interpretation": "counts cover the whole declared grid; D3/D4/D5 are reported, never omitted, D5 is excluded from D1-D4, and the replay and strategy axes are distinct comparisons",
+    "resource_admission": false,
+    "strategy_counts": {
+      "D1_false_pass": 8,
+      "D2_false_reject": 0,
+      "D3_agree_pass": 6,
+      "D4_agree_fail": 10,
+      "D5_undetermined": 0
+    },
+    "strategy_fractions": {
+      "D1_false_pass": 0.3333333333333333,
+      "D2_false_reject": 0.0,
+      "D3_agree_pass": 0.25,
+      "D4_agree_fail": 0.4166666666666667,
+      "D5_undetermined": 0.0
+    },
+    "total": 24
+  }
+}

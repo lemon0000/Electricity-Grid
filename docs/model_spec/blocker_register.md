@@ -1,27 +1,14 @@
-> 2026-10-29 F最新交接：[整链成本与整合入口](../plan/continuation_handoff_20261029_saved_fresh_whole_workflow_cost_v1.md)。静态模型16项验证已完成，完整F继续OPEN；下一步优先处理P1与source两项预算缺口并实施合法复用。当前账源、授权边界和后继实施条件见交接。
+## 论文题目与可交付性判据（2026-11-03 登记）
 
-> 2026-10-29 F更新：[source-held Parent 与失败封存检查点](../plan/continuation_handoff_20261029_saved_fresh_complete_parent_v2.md)。23项 ordinary、独立 PRE_SEAL 及 saved 原流重开已核验；完整 F 保持 OPEN。
-> 当前账源1330.4662248999914秒、52条拒绝，CP a66f0f68239fe1d1b46d69e523527cdfd5f489e826eab5163ebe681baa9f56e0。Parent40 为 post-spawn owner；真实 grant、profile anchor、exact graph、Parent 683 内容与 whole-workflow 资源准入仍待完成。
+论文题目定为**智算中心达产过程中的分阶段接入与柔性可交付性研究**，英文投稿题名建议`Assessing Flexibility Deliverability for Staged Interconnection of AI Data Centers During Ramp-Up`；`agent.md`第2节为唯一权威表述。
 
-> 2026-10-29 F更新：[pre-LIVE actor 与 Parent quiet 检查点](../plan/continuation_handoff_20261029_saved_fresh_bootstrap_actor_v3.md)。23项 ordinary、独立 PRE_SEAL 及 saved 原流重开已核验；完整 F 保持 OPEN。
-> 当前账源1309.5941497999695秒、51条拒绝，CP 369a5b87a1c979d357e3dcad6fa952d019e4c61d1dfbdad7b976102cb0e467d4。下一步为 Parent40/完整校验器、accepted profile 关系和真实 grant 绑定；Native/P1 与 whole-workflow 资源准入仍待完成。
+旧题名"智算中心分阶段接入与小时级绿电协同规划"及英文`Adaptive Phased Interconnection and Hourly Clean-Energy Matching for AI Data Centers under Ramp-Up and Grid-Expansion Delay Uncertainty`停用。停用理由：`Adaptive`与"协同规划"在IEEE语境下读作投资时序优化或自适应决策，而`agent.md`第5节明确投资开工联合优化属进一步研究，当前范围只到"评价给定计划"；沿用旧题会造成题目承诺与方法交付不符。
 
-> 2026-10-29 F更新：[producer交接与延后bundle检查点](../plan/continuation_handoff_20261029_saved_fresh_producer_export_v2.md)。70项ordinary、独立PRE_SEAL及saved replay已核验；完整F保持OPEN。
-> 当前账源1288.5015143999583秒、49条拒绝，CP 898de661acd09bbbce60fa80e8ddebe44f8c8e9476870758abe04ad148cd200c。真实外部授权、Parent内容核验和whole-workflow资源准入仍待完成。
+`docs/plan/智算中心分阶段接入与小时级绿电协同规划.docx`（2026-07-16，57450B）**保留为历史工件，不删除、不修改**。该文件已由下文"Word研究方案中文编码损坏"项登记：大量UTF-8中文被误存为乱码并含不可逆`U+FFFD`，Git初始提交与当前副本均无干净历史版本；删除会使19张既有表与版式永久不可恢复。当前范围依据为`agent.md`第2节、`paper/drafts/project_introduction.md`及本登记。
 
-> 2026-10-29：见[权限核验与持续guard交接](../plan/continuation_handoff_20261029_saved_fresh_p1_permission_v2.md)。LC4补固定源码权限核验、claim前失败撤销及独立cleanup；Loader3/Core42/Probe40/Parent39已接DISABLED program与持续guard。v1两项夹具失败/费用原样保留，独立v2唯一48项普通测试/98帧及saved/checkpoint通过；v2 10.207955999969272/40s，累计1264.7889965000024s、48条拒绝，账源CP f4a933bb82a15473df9624941d8fe83baecd443e43fa1dc45b681121a4e50c9f。外部root仍None，真实P1/Native/Source49 target未运行，NFC12未重跑；原39项并行dirty保留，真实issuer/完整producer/parent adoption/全链资源及完整F仍OPEN。
+可交付性三值判据（可交付／不可交付／未决）已写入`agent.md`第4节，作为题目承重定义与结果呈现口径；不新增模型变量、不改动冻结语义、不授予任何认证或运行权限。
 
-> 2026-10-29：见[构造终态与静态收尾交接](../plan/continuation_handoff_20261029_saved_fresh_construction_terminal_v2.md)。LC3修正CONSUMED namespace清理协议；Parent38补失败记账、43图/终态重开及失败profile保全。唯一29项普通测试/60帧通过；v1审查保存拒绝原样保留，v2仅静态复用原流，8.496565900015412/20s。累计1248.2905106000355s、47条拒绝，账源CP 0bc1887e3de8a9dbb49c180a97bd5ff7077fee01149f49789f92a68f7caa3240。NFC12未重跑，Source49与39项并行dirty保留；真实issuer/P1/同LIVE owner完整producer/全链资源及完整F仍OPEN。
-
-> 2026-10-29：见[bootstrap接线与transport检查点](../plan/continuation_handoff_20261029_saved_fresh_bootstrap_wiring_v1.md)。Core40/Probe38/Parent37的helper加载、closed refs与B_S定义期接线完成39项ordinary/80帧及保存核验；P1 token明确None，真实issuer尚缺。命令静态修至17970/30000 UTF-16 units，实际Unicode启动/profile/40图帽/terminal oracle仍OPEN。本包14.498082099977182/40s，累计1232.5224273000306s、46条不接受保留；下一账源99672dc648f0677868ac4449b08d24c0d5d49a8f3d8056c50781992da5f399e4。Source49/NFC12及39项并行dirty原字节保持；真实producer、父端reopen、128MiB retention和完整F未完成，所有科学/资源/正式/run gate false。
-
-> 2026-10-29：见[construction/graph/lifecycle联合检查点](../plan/continuation_handoff_20261029_saved_fresh_project_bootstrap_bundle_v1.md)。36项合成unit/74帧及PRE_SEAL、saved、checkpoint通过；construction→typed graph→同raw/registry bundle→held lifecycle接线仅获合成验证，真实37模块/owner producer未执行。本包12.008245999983046/40s，累计1218.0243452000534s、不接受46条，五个失败包原样保留；下一账源bad043eeae43dcfba7c7dd0c65d33e81271a29f6099e79e23f7a2700879891c8。Source49/NFC12及39项并行dirty保持；真实issuer、Core/probe/parent/profile/40图帽后继、父端reopen与128MiB retention/完整F仍OPEN，全部科学/资源/正式/run gate false。
-
-> 2026-10-29：见[retained producer逻辑生命周期检查点](../plan/continuation_handoff_20261029_saved_fresh_retained_producer_lifecycle_v1.md)。31项合成unit/64帧及PRE_SEAL、saved、checkpoint通过；排他slot、G0/G2/G3强持、sticky失败和close前后数据校验仅获逻辑开发验证，真实producer未执行。本包17.173681999964174/40s，累计1161.6025764999897s、不接受41条；下一账源61baf0d187724f066f9c9f629dc4f0c3ecf594b970de59e6e7d6c350885c806f。Source49/NFC12/旧失败与39项并行dirty保持；initial oracle、真实issuer、37模块图预算、父端采用、128MiB retention及完整F仍OPEN，全部科学/资源/正式/run gate false。
-
-> 2026-10-28：见[producer图组件交接](../plan/continuation_handoff_20261028_saved_fresh_producer_project_graph_v1.md)。跨项目continuity graph组件12/12、26帧、unit7.8381/10s，saved/checkpoint完成；本包18.72246200000518/40s，累计1144.4288945000255s、不接受41条。实际Source49初始oracle、retained lifecycle与runtime/P1/F仍OPEN，goal持续推进active；NFC12/Source49/旧失败及39项并行工作区bytes保留。
-
-> 2026-10-28：见[代码桥验证完成交接](../plan/continuation_handoff_20261028_saved_fresh_full_producer_bridge_completion_v3.md)。第5组控制器与原修补已在v3验证：16/16、34帧，unit8.9203/10s，saved/checkpoint通过；源码桥验证范围，完整producer/父端采用/F仍OPEN。v1编译上下文拒绝和v2外层超帽原样保留，累计1125.7064325000204s、不接受41条record；NFC12/Source49不变，未重跑NFC12，39项并行工作区bytes保留。
+**未闭合项**：`paper/drafts/project_introduction.pdf`与`project_introduction_en.pdf`仍对应2026-10-26题目措辞，与本轮英文题名及正文判据修订不一致；PDF重建按用户2026-11-03指示暂缓，重建前以对应MD为权威正文。`project_abstracts.md`已于2026-11-04复原并与新题目对齐。
 
 > 2026-10-28：见[完整producer桥接WIP交接](../plan/continuation_handoff_20261028_saved_fresh_full_producer_bridge_wip_v1.md)。NFC12同一LIVE owner的binding消费与关闭已完成；下一步prebound expectation构造器、4项测试和控制器为未登记/未执行草稿，第1—4组PRE_SEAL修补未验证，第5组失败记账与阶段/精确集合校验待修。新scope预留40s、已用受控费用0；累计1088.9926936999939s及39条不接受、全部旧失败/Source49与39项并行dirty保留。完整producer、父端采用、资源/科学/正式/run/F仍OPEN或false。
 
@@ -83,6 +70,7 @@
 2026-10-27 pre-ENTRY本地持有链已开发验证：见[最新交接](../plan/continuation_handoff_20261027_saved_fresh_pre_entry_lease_v2.md)。33/33单测、独立画像、九例cold及保存核验通过；正常路径先持self HANDLE再读Source49、同进程owner移交后关闭，ENTRY仅compile。两次新失败与原12条保留；含失败static7.1758692/50、unittest1.6352277/30，全61文件仍在64/8MiB内。条件性TCB、P/D/L不证明E/U；下一步接真实ENTRY namespace、新B_S import profile与live runtime。F/角色/科学/资源/正式/运行门禁仍OPEN/false。
 2026-10-26 根catalog已保存核验：见[最新交接](../plan/continuation_handoff_20261026_saved_fresh_root_catalog_v1.md)。28/28修复单测及fresh静态重算通过；54当前根/旧33逐项去向、2626符号/10984引用/76未实现证据节点。首轮1错误与原11不接受记录完整保留；本scope static4.4315186/30、unittest0.8414678/20。Source49不变，独立pre-ENTRY bootstrap/live lease/真实角色与F仍OPEN，运行/科学/资源/正式门禁false。
 2026-10-26 精确finder迁移已开发验证：见[最新交接](../plan/continuation_handoff_20261026_saved_fresh_machinery_transition_v1.md)。当前Source94/94隔离回归、真实normal CLOSED/caught mutation FAULTED/blocked install FAULTED及机械fresh重开通过；本实现static20.400935/60、pytest12.6672781/45。11条历史/当前不接受记录完整保留，旧资源超帽不变；transitive runtime、真实角色/producer及F仍OPEN，所有科学/资源/正式门禁false。
+
 2026-10-26 machinery单次取证已保存：见[最新交接](../plan/continuation_handoff_20261026_saved_fresh_machinery_diagnostic_v1.md)。唯一实测变化为Pyomo两个finder使meta_path由4项变6项，其余四类保持；小归档accepted，本scope10.4806011/18s、12文件/104128B。旧9条失败和组合存储超帽原样保留；下一步设计精确迁移，真实cold、actual F及科学/资源/正式门禁仍未闭合。
 
 2026-10-26 import policy冷导入WIP：见[最新交接](../plan/continuation_handoff_20261026_saved_fresh_import_policy_cold_v1.md)。真实normal已暴露post-import commit过期，最小修复后42项逻辑测试通过；修后cold三case与import machinery差异仍未闭合。9条失败/准备记录及原120/420/540账全部保留，归档因组合存储超帽挂绝，终账见WIP checkpoint；actual F及科学/资源/正式门禁仍false。

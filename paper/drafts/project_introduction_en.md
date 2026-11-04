@@ -1,6 +1,6 @@
-# Staged Interconnection and Flexibility Deliverability During AI Data Center Ramp-Up
+# Assessing Flexibility Deliverability for Staged Interconnection of AI Data Centers During Ramp-Up
 
-Updated: 2026-10-23. Project research introduction.
+Updated: 2026-11-04. Project research introduction. The title follows `agent.md` §2; this revision aligns the deliverability definition and comparison design in Sections 3–6 with the three-valued criterion defined there.
 
 ## 1 Background and project objective
 
@@ -12,13 +12,13 @@ These paths may become misaligned. Equipment and business may be ready while a g
 
 Ramp-up changes both the source and the limits of flexibility. Early operation may offer spare equipment for recovery but too little eligible work to defer. Later demand growth may increase deferrable work while reducing recovery headroom. Timely equipment additions may ease that pressure. Which stage is more deliverable therefore depends on the relative progress of business, equipment, and the grid.
 
-At one fixed point of interconnection, the project develops an hourly assessment of a small set of given construction and access plans. It identifies the stages in which each plan can deliver, the shortfalls that arise, and whether immediate response or recovery before deadlines is responsible.
+At one fixed point of interconnection, the project develops an hourly assessment of a small set of given construction and access plans. It checks stage delivery under a specified service contract and operating policy, identifying whether currently deferrable work or recovery resources before the original deadlines limit performance.
 
-Figure 1 connects the whole study: three given progress paths and common service rules feed three assessments. The full temporal assessment links deferral, debt, recovery, and metered power. Stage judgments are compared before the plan, capacity, and policy are frozen for execution on independent paths. Figures 2–4 expand recovery, progress mismatch, and network/CFE checks.
+Figure 1 shows the research architecture. Three given progress paths and common rules feed parallel assessments. Each method's own judgment is compared with the outcome of replaying its schedule under the actual path's temporal constraints. Plans, capacity, and policies are then frozen for causal execution on independent paths. Figures 2–4 expand task accounting and deadlines, progress mismatch, and metered-power/CFE checks.
 
 ![Figure 1 Overall project research framework](../figures/project_framework_en.svg)
 
-**Figure 1 From given progress paths to stage judgments and independent testing (overall framework).** Read downward through common inputs, three parallel assessments, stage judgments, and frozen-policy holdout. Blue folders are tasks; orange folders are deferred debt. Recovery needs equipment, power, hourly CFE, and compliance with original deadlines; debt and budgets persist across hours. Metered power P enters network and CFE checks. The frozen plan and an independent new path jointly feed holdout execution to identify applicability and failure regions. The figure depicts study design.
+**Figure 1 Research architecture for staged interconnection and flexibility deliverability.** (a) Separate business, equipment, and grid paths with common tasks, contracts, and external resources. (b) Three parallel assessments. (c) Temporal checks of each schedule on the actual path: q is deferral, r is recovery, and the dashed arrow carries state to the next hour. (d) Method judgments and actual-path outcomes enter comparison separately, supplying evidence for the proposed contributions. Frozen plans, D, and π jointly enter causal holdout execution with independent new paths. Full F/X contracts receive separate checks. The figure depicts study design.
 
 ## 2 Related research
 
@@ -48,27 +48,35 @@ Across accounting, procurement, scheduling, and supply planning, these studies c
 
 ### 2.5 Remaining gaps in the existing research
 
-The literature establishes methods for flexible access, workload recovery, staged construction, and hourly clean matching. For the continuous ramp-up of an individual AI data center, these findings need to be linked more explicitly in three respects.
+The closest studies incorporate queues and sustained response into capacity commitments [11], make-up and event constraints into capacity expansion [12], deadlines into minimum interconnection capacity [13], and transmission lead times or phased engineering into data-center development [18,20]. They provide a direct basis for this study. The further assessment question is bounded to continuous delivery of a given staged access plan at one data center along separate business, equipment, and grid progress paths.
 
-First, **construction progress and operational delivery.** Models of modular expansion, lead times, and demand growth provide a basis for stage assessment. Assessing a given access plan also requires an hourly account of how misaligned business, equipment, and grid progress changes deferrable work and recovery resources, so that delivery can be checked throughout ramp-up.
+First, **does the same deferrable share represent flexibility at every ramp-up stage?** Growing demand increases work that can be deferred while using equipment and power headroom needed for later recovery. Equipment additions and grid completion change those limits separately. The study needs to locate transitions between insufficient current work and insufficient recovery before deadlines, and check whether they change delivery outcomes under the specified policy.
 
-Second, **immediate response and recovery before deadlines.** Queues, make-up, and deadlines already have explicit models. During ramp-up, it remains necessary to distinguish insufficient deferrable work now from insufficient recovery resources later, and to test whether the timing of equipment, power, and clean-resource availability changes plan judgments under the same instantaneous flexible MW and comparable total clean resources.
+Second, **can the timing of recovery resources change delivery when total and peak clean energy are equal?** Recovery requires equipment, power, and clean allocations to be available together before the original deadlines. With immediate requests, delivered deferral, and debt at the start of recovery matched, the effect of shifting clean recovery allocations needs to be tested separately, distinguishing insufficient resources from resources arriving too late.
 
-Third, **assessment judgments and their applicability.** Findings on flexibility, construction, and clean matching need to inform judgments about given staged plans through comparisons with common service objectives. This requires identifying when simplified and full temporal assessments agree or differ, and where a selected plan remains applicable on independent new paths.
+Third, **under what conditions do simplified assessments change the stage judgment?** For the same given plan, comparisons need to distinguish immediate checks that pass despite violations observed in full replay, cases where a simplified assessment and the complete temporal strategy return different verdicts, and regions of agreement. Both directions are reported as observed. Independent paths then test whether frozen policies encounter similar limits.
 
 ### 2.6 Focus of this study
 
-The study addresses these gaps at one fixed point of interconnection. Business ramp-up, equipment commissioning, and grid construction are separate given paths. A small set of staged access plans is assessed under the same external tasks, deadlines, and clean resources. The focus is: **when does progress mismatch shift the binding limit from currently deferrable work to equipment, power, or clean recovery resources before deadlines, thereby changing the judgment of a given plan?** Matched comparisons of three assessments and independent holdout execution of frozen policies are used to explain these stage-specific bottlenecks and their applicability boundaries.
+The study fixes one point of interconnection and treats business ramp-up, equipment commissioning, and grid construction as separate given paths. A small set of staged access plans is assessed under the same external tasks, deadlines, and clean resources. The central question is: **under a specified contract and operating policy, which progress combinations create a mismatch between currently deferrable work and work that can be recovered before its original deadline, changing the stage-delivery judgment?** Bottleneck transitions are the central focus. Matched recovery timing tests the mechanism, while comparisons with simplified assessments and independent holdout execution test its applicability.
 
 ## 3 Contributions
 
-The study aims to make the following three contributions. Specific conclusions will depend on the subsequent comparisons and holdout results.
+The study aims to organize its results around three testable contributions. The specified policy's actual task-and-service paths provide the main evidence; full F/X access contracts receive separate checks. The assessment model provides common task, equipment, power, and network constraints. Specific conclusions will depend on the subsequent comparisons and holdout results.
 
-1. **A staged interconnection assessment framework for ramp-up.** Business growth, computing-equipment commissioning, and grid construction are represented separately. Tasks, commissioned computing capacity, and the built network at each stage are mapped to immediate response and recovery conditions before deadlines, supporting continuous delivery assessment of given construction and access plans at one connection point.
+1. **Conditions for transitions in delivery bottlenecks during ramp-up.** Currently deferrable work and equipment, power, and clean recovery resources before the original deadlines are recorded separately. Fast or slow business growth, on-time or delayed grid completion, and given equipment paths are compared to locate stages where the limiting resource changes. The intended result is a bottleneck-transition map indexed by workload occupancy and equipment/grid commissioning conditions, together with tests of whether these changes alter the specified policy's task-and-service outcomes on the actual path.
 
-2. **An account of stage-specific bottlenecks and decision boundaries under progress mismatch.** With the same external tasks, deadlines, and clean resources, the assessment separates limits from currently deferrable work, equipment capacity, network supply, and clean recovery resources. Mechanism comparisons with matched immediate calls seek to identify when recovery timing changes plan judgments under the same instantaneous MW and how the hourly CFE target affects that boundary.
+2. **Delivery differences caused by recovery timing under equal clean resources.** Where matched cases can be constructed, external tasks, equipment and network paths, adjustment capacity D, immediate grid and CFE requests, delivered deferral, and debt at the start of recovery are held fixed. Total and peak clean allocations over the evaluation period are equal, while the timing of clean recovery allocations changes. The intended result identifies when availability before the original deadline changes the outcome of the same recovery debt, specifying the conditions under which hourly CFE affects stage delivery.
 
-3. **Applicability boundaries for simplified assessments and selected plans.** Instantaneous-MW, fixed-recovery-headroom, and full temporal assessments are compared for the same given plan to determine whether recovery and deadline constraints explain different judgments. The plan, capacity, and operating policy are then frozen for execution on independent paths. Reporting includes agreement between assessments, conditions under which simpler assessments suffice, and delivery failures.
+3. **Regions where simplified assessments give different judgments.** Instantaneous-MW, fixed-recovery-headroom, and full temporal assessments are compared for the same plan and D. Three values are recorded separately: each method's own verdict, the verdict of its schedule replayed under the actual path's full temporal constraints, and the full temporal strategy's verdict on the same plan. The first comparison asks whether a simplification's own schedule survives the constraints it ignored; the second asks whether a simplification rejects a plan the complete strategy completes. Both simplifications compared here loosen constraints rather than tighten them — instantaneous assessment omits the event envelope, and fixed headroom replaces actual recovery headroom with a constant — so disagreements are expected to concentrate in the direction of a simplified pass with violations observed in replay. Whether the opposite direction occurs depends on the presence of a tightening simplification and is reported as observed rather than assumed. Plans, D, and policies are then frozen for execution on independent paths to test the applicability of these boundaries.
+
+Each proposed contribution has a concrete evidence requirement and a condition for narrowing its interpretation:
+
+| Proposed contribution | Evidence to deliver | Observation requiring a narrower claim |
+|---|---|---|
+| Stage bottleneck transitions | Stage maps linking progress combinations, limiting resources, and actual task-and-service outcomes | Resource headroom changes while actual-path delivery judgments remain unchanged |
+| Recovery-timing effects | Trajectories with matched immediate requests, deferral, recovery-start debt, and total and peak clean resources | Outcomes agree over complete follow-up, or differences accompany uncontrolled changes in requests, starting debt, or resources |
+| Simplified-assessment boundaries | Method verdicts, full temporal replay verdicts on the actual path, complete-strategy verdicts, and frozen-policy holdout performance | All verdicts agree in the compared region, or differences cannot be attributed to simplified recovery and deadline conditions |
 
 ## 4 Research object and key concepts
 
@@ -80,13 +88,15 @@ The study aims to make the following three contributions. Specific conclusions w
 | Workload flexibility | Eligible computation can be postponed and completed before its original deadline. |
 | Recovery debt | Deferred but unfinished work, tracked by arrival time, recovery efficiency, and deadline. |
 | Hourly CFE matching | A target share of consumption is matched with attributable carbon-free energy from the same hour and eligible region. |
-| Deliverability | Response, clean matching, and task completion can be met together under the stated network, service, and information conditions. |
+| Deliverability | Under the stated network, service, and information conditions, response, clean matching, and in-deadline recovery are checked hour by hour; each plan–stage–method combination takes one of three values: deliverable, not deliverable, or undetermined. |
 
 For example, an hour with 100 MWh consumption and an 80% target needs 80 MWh of eligible attributable CFE for that hour. Recovery consumption is included. This is energy-attribute accounting; allocation must conserve available resources and avoid duplicate attribution.
 
+The criterion is three-valued. Undetermined covers right-censoring when a deadline has not yet entered the observation window, plus missing solve or check evidence; it counts as neither success nor failure. Task completion reads only the original deadline, and recovery after a deadline does not erase the recorded overdue, so one task cohort can simultaneously show its work fully made up and its overdue retained. All three assessments must be evaluated under the same criterion, window, and accounting rules; each method's own verdict and the verdict of its schedule replayed under the actual path's full temporal constraints are stored separately, and their disagreement is the central object of this study.
+
 ![Figure 2 Recovery conditions and alternative outcomes for deferred tasks](../figures/project_recovery_en.svg)
 
-**Figure 2 How deferred tasks are recovered (expanded framework operation).** Follow 1 deferral now, 2 recovery in later hours, and 3 the original deadline check. Leaders identify the same orange cohort, spare equipment, power headroom, hourly CFE, and the original deadline; teal arrows connect task states. All three resources must be available in the recovery hour, with action budgets and recovery efficiency also respected. The upper outcome is on-time completion; the lower outcome records debt remaining at the deadline as overdue. Late recovery retains that violation; unobserved outcomes remain unresolved. Clocks and folder counts are illustrative.
+**Figure 2 Task debt, concurrent recovery resources, and deadline outcomes.** (a) Deferral, debt, and effective recovery for the same cohort obey work conservation; η is recovery efficiency. (b) Recovery jointly respects commissioned equipment, the built network, hourly clean allocations, and business/action limits. Once the original deadline is observed, remaining work at that time distinguishes on-time completion from overdue work. A deadline outside the observation window is right-censored; missing solve or check results are separately unresolved. Late recovery retains an observed violation. The figure shows mechanism relationships.
 
 ## 5 Method
 
@@ -98,7 +108,7 @@ Normal-state network checks cover the full F+X allowance. The declared contingen
 
 ![Figure 3 How progress mismatch changes operating and recovery conditions](../figures/project_rampup_en.svg)
 
-**Figure 3 How the three progress paths change constraints (expanded framework inputs).** Follow one center through early operation, pending reinforcement, and actual commissioning. Leaders identify current work w, commissioned K, unfinished reinforcement, possible deferral q, and the commissioned grid asset. Three steps below explain current-work limits, supply on the built network, and reassessment of calls and recovery supply after commissioning. Debt and budgets carry across stages; response, recovery, and deadline checks still determine stage judgments. Counts and spacing are illustrative.
+**Figure 3 Separate progress paths enter different operating and recovery constraints.** (a) Work, commissioned equipment, and the built network evolve over continuous time; steps illustrate relative timing without a numerical scale. (b) Current tasks limit deferral, equipment determines computing headroom, and the current network and clean allocations jointly constrain recovery supply. Calls and recovery limits are recomputed after actual commissioning. Recovery expressions apply when q=0, with a=γβ. Debt, original deadlines, and event budgets carry across stages.
 
 ### 5.2 Link execution, deferral, recovery, and metered power
 
@@ -108,17 +118,17 @@ Hourly states record task arrivals, baseline work w, deferral q, recovery r, and
 
 The initial model uses one aggregate action direction per hour, q·r=0. Deferral is limited by eligible current tasks. Recovery is limited by spare equipment, recovery efficiency, existing debt, and power conditions. Debt is accumulated and cleared by task batch; late completion retains the recorded deadline violation.
 
-Metered power P includes the idle consumption of commissioned equipment, task execution, recovery, and supporting loads. New equipment can therefore increase both computing capacity and electricity demand. Recovery efficiency determines how much original work is completed, while one consistent equipment mapping converts computing effort into power.
+Metered power P includes the idle consumption of commissioned equipment, task execution, recovery, and supporting loads. The initial homogeneous-equipment mapping is P=γ[P_idle+β(w−q+r)]+P_aux: β is incremental IT power per unit of active computing effort, γ is the facility-power multiplier, and a=γβ. The term P_aux contains only fixed auxiliary loads outside γ. New equipment can increase both computing capacity and electricity demand. Recovery efficiency determines how much original work is completed, while computing effort is converted to power through this same mapping.
 
 ### 5.3 Check network response and hourly clean matching together
 
-The model derives the full grid call from the current network and pre-response baseline power, then checks whether physical response covers it. Clean matching requires αPΔt≤y≤Y in each interval: α is the target share, Δt the interval duration, y the allocated energy, and Y the externally specified attributable limit. Power P includes idle and recovery consumption. Plans share the same external clean resources and allocation rules.
+The model derives the full grid call from the current network and pre-response baseline power, then checks whether physical response covers it. Clean matching requires 0≤y≤min(Y,PΔt) and αPΔt≤y in each interval: 0≤α≤1 is the target share, Δt the interval duration, y the allocated energy, and Y the externally specified attributable limit. Allocation is bounded by both the external limit and actual consumption. Power P includes idle and recovery consumption. Plans share the same external clean resources and allocation rules.
 
 The main comparison specifies independent reduction commitments: reductions separately promised to the grid and CFE services must be delivered using the same equipment, tasks, and recovery resources. Each unit of deferred work is allocated to one promise, and actual power is counted once. This is an explicit service-scenario assumption, consistently applied across comparisons; applicability to a particular project depends on its contract and metering arrangements.
 
 ![Figure 4 How metered power enters network and hourly CFE checks](../figures/project_network_en.svg)
 
-**Figure 4 From computing tasks to power and two checks (expanded framework constraints).** Read the leaders around the center, fixed-point meter, and external attribution ledger, then follow 1 computing resources, 2 total metered P, and 3 network/CFE checks. P includes idle, execution, recovery, and support loads. Consumption records and the external hourly limit Y enter clean accounting. Normal-state and contingency F/X access allowances receive their separate contractual checks. The thick blue cable is physical supply; dotted links denote records and attribution. Symbols are illustrative; network judgments remain within the declared DC model and contingency set.
+**Figure 4 Computing resources, metered power, and network/CFE checks.** (a) Workload actions determine computing effort, mapped to P including commissioned idle, execution, recovery, and support consumption. (b) Blue solid arrows denote physical supply; teal dashed arrows denote metering records and attribute accounting. Same-hour allocation y is bounded by both external quota Y and actual consumption PΔt. (c) Grid and CFE deferral promises are allocated separately, while physical P is counted once. Full F/X access contracts receive separate checks. Network judgments remain within the declared DC model and contingency set.
 
 ### 5.4 Preserve chronology and information
 
@@ -128,17 +138,17 @@ Construction and access plans are fixed before evaluation. The operating policy 
 
 ## 6 Comparisons and reporting
 
-The main experiment compares a small number of given plans under the same external workload, deadlines, clean resources, and evaluation criteria. Differences in equipment or grid commissioning remain explicit properties of the plans.
+Within each given business path, the main experiment compares a small number of given plans under the same external workload, deadlines, clean resources, and evaluation criteria. Plan comparisons are made separately for fast and slow business scenarios. Differences in equipment or grid commissioning remain explicit properties of the plans.
 
 | Comparison | Question addressed |
 |---|---|
 | Fast/slow business growth × on-time/delayed grid completion, with separate equipment paths | At which stage does progress misalignment become binding? |
-| Instantaneous MW, fixed recovery headroom, full temporal assessment | Do omitted recovery timing and deadlines change the plan judgment? |
-| Recovery-timing comparisons with matched immediate calls | Can later equipment, power, or clean windows change delivery under identical immediate response? |
+| Instantaneous MW, fixed recovery headroom, full temporal assessment (two comparison axes) | Does a simplification's own schedule survive full temporal constraints (method verdict × replay verdict); and does a simplification reject a plan the complete temporal strategy completes (method verdict × strategy verdict)? |
+| Recovery timing with matched immediate requests, deferral, recovery-start debt, and total and peak clean resources | With equipment and network paths fixed, does shifting only clean recovery allocations change deadline outcomes? |
 | Essential sensitivities in eligible share, deadlines, and CFE target | Where do judgments change, and is the main mechanism stable? |
 | Frozen plan and policy executed on independent holdout paths | Does the selected plan remain applicable on new paths? |
 
-Results report access allowances, commissioned capacity, workload occupancy, deferral and recovery trajectories, grid and CFE shortfalls, overdue tasks, and unfinished work by stage. Full contract and task delivery are assessed before attributing a bottleneck. Matched-call cases serve as mechanism diagnostics; actual plan comparisons retain calls that change with the network. Minimum capacity is reported as a point only with adequate bound evidence; otherwise the result remains an interval or unresolved.
+Results report access allowances, commissioned capacity, workload occupancy, deferral and recovery trajectories, grid and CFE shortfalls, overdue tasks, and unfinished work by stage, producing bottleneck-transition maps, matched recovery trajectories, and tables of assessment differences. The difference tables report both comparison axes separately and give the counts of every agreement and undetermined region, so no distribution is omitted because one direction did not occur. Method verdicts, actual path performance, and full contract evidence are reported separately; observed violations and unresolved outcomes are retained as distinct states. A fixed policy's failure means that policy did not deliver on that path. Matched recovery-timing cases serve as mechanism diagnostics; actual plan comparisons retain request and resource differences caused by equipment and network changes. Minimum workload-flexibility capacity D is reported as a point only with adequate bounds under the same contract and policy scope; otherwise the result remains an interval or unresolved.
 
 The data design uses traceable public network and workload sources and identifies the origins of equipment-power, deadline, stage-progress, and clean-allocation parameters separately. Cross-source records paired through stated assumptions support mechanism scenarios. Equal-weight comparisons of such scenarios do not estimate real ramp-up, construction-delay, or violation probabilities.
 
