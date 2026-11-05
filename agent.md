@@ -58,15 +58,21 @@
 
 本节是task classification、model routing、delegation和review rules的唯一权威来源。根目录`AGENTS.md`仅作为Codex自动发现的仓库入口，承载上下文bootstrap、工作区与实验安全和实施约束；不得复制、覆盖或另行定义本节的风险等级、model slug/effort、委派规则或审查状态机。
 
-按科学影响判断风险；常规任务无需展示分级过程。默认由当前主代理完成，项目默认模型为`gpt-6-astra`。下表的专用代理是可选执行路由，独立审查要求仍适用。仅在独立子任务足够大、委派有明确收益或需要独立审查时使用子代理。保留Luna的低成本只读角色、Terra的普通实现角色及Sol的领域和审查角色，不为匹配模型表而转交小任务。reasoning effort沿用有效配置，遇到实际难度或验证不足再调整，不因模型升级统一提高。主代理负责集成与证据核验。
+按科学影响判断风险；常规任务无需展示分级过程。默认由当前主代理完成。下表的专用代理是可选执行路由，独立审查要求仍适用。仅在独立子任务足够大、委派有明确收益或需要独立审查时使用子代理，不为匹配模型表而转交小任务。
 
-| 风险 | 可选专用路由 | 本项目典型任务 | 最低验证要求 |
-|---|---|---|---|
-| R0 | `luna_reader`（`gpt-5.6-luna`，`low`） | 文件inventory、日志解析、JSON/CSV提取、进度或产物清点 | 机械计数、schema、hash或直接来源证据 |
-| R1 | 只读任务可用`luna_reader`；写入任务可用`terra_worker` | 格式整理、明确的机械转换、孤立测试、范围很窄的低风险修复 | diff或格式检查；行为变化采用有意义的针对性测试 |
-| R2 | `terra_worker`（`gpt-5.6-terra`，`medium`） | data contract、非正式实验plumbing、不改变结果语义的复现工具和普通跨模块修复 | 针对性测试、相关回归；跨模块、持久化产物或长运行行为变化时独立审查 |
-| R3 | `sol_modeler`（`gpt-5.6-sol`，`xhigh`） | 模型变量、目标和约束，AC/DC/N-1语义，非预见性，solver certificate，正式runner或冻结工件语义 | 领域不变量、解析或小型合成例、针对性测试、相关广泛回归，并由`sol_reviewer`独立审查 |
-| R4 | `sol_modeler`（`gpt-5.6-sol`，`xhigh`） | preregistration、验收阈值、正式结果解释、certification状态和paper claims | 完整证据链、manifest/hash与回归证据，`sol_reviewer`独立审查及用户明确授权 |
+**执行档位（2026-11-05 改为本环境可执行的形式）。** 风险等级沿用 R0–R4；模型与思考强度按等级分配，写入任务恒由主代理执行（见下节"每项任务只能有一个写入代理"）。旧表使用的 `gpt-6-astra`/`luna`/`terra`/`sol` 属 Codex 环境，本仓库当前在 Claude Code 中运行，故按下列档位执行；若切回 Codex，风险等级与验证要求不变，仅恢复其 slug。
+
+| 风险 | 子代理类型 | 模型 | 思考强度 | 本项目典型任务 | 最低验证要求 |
+|---|---|---|---|---|---|
+| R0 | `Explore`（只读） | `haiku` | `low` | 文件清点、日志解析、JSON/CSV 提取、产物计数、口径残留扫描 | 机械计数、schema、hash 或直接来源证据 |
+| R1 | `Explore`（只读）；写入由主代理 | `haiku` | `low` | 格式整理、明确的机械转换、孤立测试、范围很窄的低风险修复 | diff 或格式检查；行为变化采用有意义的针对性测试 |
+| R2 | `general-purpose`（只读调研）；写入由主代理 | `sonnet` | `medium` | data contract、非正式实验 plumbing、不改变结果语义的复现工具、普通跨模块修复 | 针对性测试、相关回归；跨模块、持久化产物或长运行行为变化时独立审查 |
+| R3 | **主代理亲自**；审查用独立 `general-purpose` | `opus`（主）/ `opus`（审） | `high` | 模型变量、目标和约束，恢复语义，非预见性，solver certificate，正式 runner 或冻结工件语义 | 领域不变量、解析或小型合成例、针对性测试、相关广泛回归，并由未参与写入的独立审查方出一致性结论 |
+| R4 | **主代理亲自**；审查用独立 `general-purpose` | `opus`/`opus` | `max` | preregistration、验收阈值、正式结果解释、certification 状态与 paper claims | 完整证据链、manifest/hash 与回归证据，独立审查及用户明确授权 |
+
+思考强度按任务实际难度在表内等级基础上调整，不因模型升级统一提高。主代理负责集成与证据核验。
+
+**新对话的最小启动档位**：主代理 `opus`，`high`。仅在进入 R4 判断（冻结协议、验收阈值、论文主张）时提到 `max`；纯文档同步、索引更新可降到 `medium`。
 
 以下事项即使文本改动很小，也不得降级：
 

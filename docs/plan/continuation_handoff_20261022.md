@@ -1,27 +1,4 @@
-> 2026-10-29 F最新交接：[整链成本与整合入口](continuation_handoff_20261029_saved_fresh_whole_workflow_cost_v1.md)。静态模型16项验证已完成，完整F继续OPEN；下一步优先处理P1与source两项预算缺口并实施合法复用。当前账源、授权边界和后继实施条件见交接。
-
-> 2026-10-29 F更新：[source-held Parent 与失败封存检查点](continuation_handoff_20261029_saved_fresh_complete_parent_v2.md)。23项 ordinary、独立 PRE_SEAL 及 saved 原流重开已核验；完整 F 保持 OPEN。
-> 当前账源1330.4662248999914秒、52条拒绝，CP a66f0f68239fe1d1b46d69e523527cdfd5f489e826eab5163ebe681baa9f56e0。Parent40 为 post-spawn owner；真实 grant、profile anchor、exact graph、Parent 683 内容与 whole-workflow 资源准入仍待完成。
-
-> 2026-10-29 F更新：[pre-LIVE actor 与 Parent quiet 检查点](continuation_handoff_20261029_saved_fresh_bootstrap_actor_v3.md)。23项 ordinary、独立 PRE_SEAL 及 saved 原流重开已核验；完整 F 保持 OPEN。
-> 当前账源1309.5941497999695秒、51条拒绝，CP 369a5b87a1c979d357e3dcad6fa952d019e4c61d1dfbdad7b976102cb0e467d4。下一步为 Parent40/完整校验器、accepted profile 关系和真实 grant 绑定；Native/P1 与 whole-workflow 资源准入仍待完成。
-
-> 2026-10-29 F更新：[producer交接与延后bundle检查点](continuation_handoff_20261029_saved_fresh_producer_export_v2.md)。70项ordinary、独立PRE_SEAL及saved replay已核验；完整F保持OPEN。
-> 当前账源1288.5015143999583秒、49条拒绝，CP 898de661acd09bbbce60fa80e8ddebe44f8c8e9476870758abe04ad148cd200c。真实外部授权、Parent内容核验和whole-workflow资源准入仍待完成。
-
-> 2026-10-29：见[权限核验与持续guard交接](continuation_handoff_20261029_saved_fresh_p1_permission_v2.md)。LC4补固定源码权限核验、claim前失败撤销及独立cleanup；Loader3/Core42/Probe40/Parent39已接DISABLED program与持续guard。v1两项夹具失败/费用原样保留，独立v2唯一48项普通测试/98帧及saved/checkpoint通过；v2 10.207955999969272/40s，累计1264.7889965000024s、48条拒绝，账源CP f4a933bb82a15473df9624941d8fe83baecd443e43fa1dc45b681121a4e50c9f。外部root仍None，真实P1/Native/Source49 target未运行，NFC12未重跑；原39项并行dirty保留，真实issuer/完整producer/parent adoption/全链资源及完整F仍OPEN。
-
-> 2026-10-29：见[构造终态与静态收尾交接](continuation_handoff_20261029_saved_fresh_construction_terminal_v2.md)。LC3修正CONSUMED namespace清理协议；Parent38补失败记账、43图/终态重开及失败profile保全。唯一29项普通测试/60帧通过；v1审查保存拒绝原样保留，v2仅静态复用原流，8.496565900015412/20s。累计1248.2905106000355s、47条拒绝，账源CP 0bc1887e3de8a9dbb49c180a97bd5ff7077fee01149f49789f92a68f7caa3240。NFC12未重跑，Source49与39项并行dirty保留；真实issuer/P1/同LIVE owner完整producer/全链资源及完整F仍OPEN。
-
-> 2026-10-29：见[bootstrap接线与transport检查点](continuation_handoff_20261029_saved_fresh_bootstrap_wiring_v1.md)。Core40/Probe38/Parent37的helper加载、closed refs与B_S定义期接线完成39项ordinary/80帧及保存核验；P1 token明确None，真实issuer尚缺。命令静态修至17970/30000 UTF-16 units，实际Unicode启动/profile/40图帽/terminal oracle仍OPEN。本包14.498082099977182/40s，累计1232.5224273000306s、46条不接受保留；下一账源99672dc648f0677868ac4449b08d24c0d5d49a8f3d8056c50781992da5f399e4。Source49/NFC12及39项并行dirty原字节保持；真实producer、父端reopen、128MiB retention和完整F未完成，所有科学/资源/正式/run gate false。
-
-> 2026-10-29：见[construction/graph/lifecycle联合检查点](continuation_handoff_20261029_saved_fresh_project_bootstrap_bundle_v1.md)。36项合成unit/74帧及PRE_SEAL、saved、checkpoint通过；construction→typed graph→同raw/registry bundle→held lifecycle接线仅获合成验证，真实37模块/owner producer未执行。本包12.008245999983046/40s，累计1218.0243452000534s、不接受46条，五个失败包原样保留；下一账源bad043eeae43dcfba7c7dd0c65d33e81271a29f6099e79e23f7a2700879891c8。Source49/NFC12及39项并行dirty保持；真实issuer、Core/probe/parent/profile/40图帽后继、父端reopen与128MiB retention/完整F仍OPEN，全部科学/资源/正式/run gate false。
-
-> 2026-10-29：见[retained producer逻辑生命周期检查点](continuation_handoff_20261029_saved_fresh_retained_producer_lifecycle_v1.md)。31项合成unit/64帧及PRE_SEAL、saved、checkpoint通过；排他slot、G0/G2/G3强持、sticky失败和close前后数据校验仅获逻辑开发验证，真实producer未执行。本包17.173681999964174/40s，累计1161.6025764999897s、不接受41条；下一账源61baf0d187724f066f9c9f629dc4f0c3ecf594b970de59e6e7d6c350885c806f。Source49/NFC12/旧失败与39项并行dirty保持；initial oracle、真实issuer、37模块图预算、父端采用、128MiB retention及完整F仍OPEN，全部科学/资源/正式/run gate false。
-
-> 2026-10-28：见[producer图组件交接](continuation_handoff_20261028_saved_fresh_producer_project_graph_v1.md)。跨项目continuity graph组件12/12、26帧、unit7.8381/10s，saved/checkpoint完成；本包18.72246200000518/40s，累计1144.4288945000255s、不接受41条。实际Source49初始oracle、retained lifecycle与runtime/P1/F仍OPEN，goal持续推进active；NFC12/Source49/旧失败及39项并行工作区bytes保留。
-
-> 2026-10-28：见[代码桥验证完成交接](continuation_handoff_20261028_saved_fresh_full_producer_bridge_completion_v3.md)。第5组控制器与原修补已在v3验证：16/16、34帧，unit8.9203/10s，saved/checkpoint通过；源码桥验证范围，完整producer/父端采用/F仍OPEN。v1编译上下文拒绝和v2外层超帽原样保留，累计1125.7064325000204s、不接受41条record；NFC12/Source49不变，未重跑NFC12，39项并行工作区bytes保留。
+> 2026-11-05 **主线为 D 阶段比较**：见[D阶段比较交接](continuation_handoff_20261105.md)。题目已定、三值判据入`agent.md` §4；主网格24次评估与敏感性648次评估均完成，可行区内23/27组合出现假通过，D2假拒绝结构上不可达。**唯一硬阻塞是两包待独立R3审查**；E留出、RTS-24算例与正文6.3/6.4未开始。F链已降级为复现性附录。以下10-28及更早条目保留其生成时点原意。
 
 > 2026-10-28：见[完整producer桥接WIP交接](continuation_handoff_20261028_saved_fresh_full_producer_bridge_wip_v1.md)。NFC12同一LIVE owner的binding消费与关闭已完成；下一步prebound expectation构造器、4项测试和控制器为未登记/未执行草稿，第1—4组PRE_SEAL修补未验证，第5组失败记账与阶段/精确集合校验待修。新scope预留40s、已用受控费用0；累计1088.9926936999939s及39条不接受、全部旧失败/Source49与39项并行dirty保留。完整producer、父端采用、资源/科学/正式/run/F仍OPEN或false。
 
@@ -83,6 +60,7 @@
 2026-10-27 pre-ENTRY本地持有链已开发验证：见[最新交接](continuation_handoff_20261027_saved_fresh_pre_entry_lease_v2.md)。33/33单测、独立画像、九例cold及保存核验通过；正常路径先持self HANDLE再读Source49、同进程owner移交后关闭，ENTRY仅compile。两次新失败与原12条保留；含失败static7.1758692/50、unittest1.6352277/30，全61文件仍在64/8MiB内。条件性TCB、P/D/L不证明E/U；下一步接真实ENTRY namespace、新B_S import profile与live runtime。F/角色/科学/资源/正式/运行门禁仍OPEN/false。
 2026-10-26 根catalog已保存核验：见[最新交接](continuation_handoff_20261026_saved_fresh_root_catalog_v1.md)。28/28修复单测及fresh静态重算通过；54当前根/旧33逐项去向、2626符号/10984引用/76未实现证据节点。首轮1错误与原11不接受记录完整保留；本scope static4.4315186/30、unittest0.8414678/20。Source49不变，独立pre-ENTRY bootstrap/live lease/真实角色与F仍OPEN，运行/科学/资源/正式门禁false。
 2026-10-26 精确finder迁移已开发验证：见[最新交接](continuation_handoff_20261026_saved_fresh_machinery_transition_v1.md)。当前Source94/94隔离回归、真实normal CLOSED/caught mutation FAULTED/blocked install FAULTED及机械fresh重开通过；本实现static20.400935/60、pytest12.6672781/45。11条历史/当前不接受记录完整保留，旧资源超帽不变；transitive runtime、真实角色/producer及F仍OPEN，所有科学/资源/正式门禁false。
+
 2026-10-26 machinery单次取证已保存：见[最新交接](continuation_handoff_20261026_saved_fresh_machinery_diagnostic_v1.md)。唯一实测变化为Pyomo两个finder使meta_path由4项变6项，其余四类保持；小归档accepted，本scope10.4806011/18s、12文件/104128B。旧9条失败和组合存储超帽原样保留；下一步设计精确迁移，真实cold、actual F及科学/资源/正式门禁仍未闭合。
 
 2026-10-26 import policy冷导入WIP：见[最新交接](continuation_handoff_20261026_saved_fresh_import_policy_cold_v1.md)。真实normal已暴露post-import commit过期，最小修复后42项逻辑测试通过；修后cold三case与import machinery差异仍未闭合。9条失败/准备记录及原120/420/540账全部保留，归档因组合存储超帽挂绝，终账见WIP checkpoint；actual F及科学/资源/正式门禁仍false。
@@ -130,12 +108,16 @@ B2调用计数阅读时并看[运行后澄清](staged_deliverability_b2_count_cl
 
 - [中文正文](../../paper/drafts/project_introduction.md)及[中文PDF](../../paper/drafts/project_introduction.pdf)，PDF共10页。
 - [英文正文](../../paper/drafts/project_introduction_en.md)及[英文PDF](../../paper/drafts/project_introduction_en.pdf)，PDF共11页。
-- 当前介绍以[整体研究框架](../../paper/figures/project_framework_cn.svg)为图1，连接三条给定进度与共同规则、三种并列评价、阶段判断及冻结后的独立留出；图2—4分别展开任务恢复、进度错位、网络与小时CFE核查。总图原始PNG为`project_framework_cartoon_v3_{cn,en}.png`，三张局部图保留`project_{recovery,rampup,network}_cartoon_v2.png`。各图的中英文SVG嵌入原图，以可编辑文字和连线明确资源约束、总取电及检查关系，同名PDF与PNG用于导出和预览。两份介绍均在第2页横向展示总框架。[绘图说明](../../paper/figures/project_schematics.json)保留生成提示词、图像哈希及检查；[组装脚本](../../paper/figures/assemble_project_cartoons.py)可重建图版。
+- 当前介绍以[整体研究架构](../../paper/figures/project_framework_cn.svg)为图1，连接共同输入、三种并列评价、实际路径时序核验、方法自身判断与路径结局，以及冻结后的独立留出；图2—4分别展开任务债务和期限、三条进度、实际取电与CFE核查。8张活动SVG均保留原生文字、数学下标及矢量形状，同名PDF与300 dpi PNG从同一母版导出；两份介绍均在第2页横向展示230 mm宽总图。当前绘图入口为[矢量生成脚本](../../paper/figures/draw_project_schematics.py)，[范例与复现说明](../../paper/figures/README.md)、[几何记录](../../paper/figures/project_vector_geometry.json)、[核查记录](../../paper/figures/project_vector_audits.json)与[图稿元数据](../../paper/figures/project_schematics.json)对应当前版本。既有原始PNG及旧组装脚本保留其历史用途，旧生成来源和核对记录在图稿元数据history中保留。
 
 - [论文路线图](RQ2_论文路线图.md)、[研究缺口](../literature/research_gap.md)和[既有证据报告](RQ2_创新性核查与研究判断_20261021.md)已增加当前范围说明。
 - [文献库](../literature/literature_matrix.csv)共42条；[当前引用映射](../literature/introduction_reference_map_20261022.csv)将26条正文参考文献与库内ID逐项对应；[来源核对记录](../literature/introduction_source_checks_20261022.json)区分摘要、部分章节及既有全文依据；[建设专题证据表](../literature/construction_evidence_20261021.csv)保留原核验范围。
 
 2026-10-23介绍结构修订：按用户要求，第2节的四个主题先综述现有工作，第2.5节集中归纳不足，第2.6节引出本研究；原第4节研究问题改写为第3节“本文贡献”，三项分别对应阶段评价框架、瓶颈与判断边界、简化评价及所选计划的适用范围。原概念节移至第4节，第7节保留预期成果与交付。中英文MD和PDF同步，当前PDF为10/11页，各保留26个唯一HTTPS文献链接；方法、比较设计、26条书目、概念定义和图注保持一致。采用`literature-review-workflow`与`paper-novelty-design-v1`复核既有文献依据及前瞻贡献措辞，独立只读文档审阅无实质发现；后续比较与留出决定具体结论。本轮不改变实验、结果或运行权限。
+
+2026-10-26候选贡献具体化：介绍第2.5—3节以阶段瓶颈转换为主线，明确同资源恢复时段的匹配检验，以及简化评价与实际路径完整时序重放的判断差异；各项列出证据和收缩条件。即时请求、已兑现延期及恢复起点债务与清洁总量/峰值分别匹配；快慢业务情景内分别对照计划。给定策略的实际任务/服务路径与完整F/X接入合同分层，CFE归属补齐实际用电量上限。中英文MD/PDF及当前介绍索引、研究缺口与五项引用位置映射同步；中文10页、英文12页，各26个唯一HTTPS文献链接，全部正文和表格单元均可在PDF中回查。22页视觉检查及独立只读文档审阅完成，41个图版、方法和科学依据文件保持原字节；图稿元数据保留10月23日核对历史并记录当前PDF哈希。本轮仍为研究设计与写作修订，主比较和留出尚待实施，模型、实验输入、既有结果与运行门禁保持原含义。本机文档核对记录为`.git/intro_contributions_20261026/document_checks.json`。
+
+2026-10-26研究图重绘：实际查看Nature Communications分阶段规划Fig.1、Riepin等清洁计算作者版Fig.1及IEEE微网控制作者版Fig.2，并按科研矢量图规范重绘整体架构与三张机制图，中英文共8张。图1分别接入方法自身判断和实际路径结局，独立新路径显式进入因果留出；图2区分原期限已观察后的完成/逾期、期限未观察的右删失及核查缺失的未决；图3为无数值尺度的时序示意；图4区分计算单位、电功率、物理供电与清洁属性记录。8张SVG、原生PDF文字和碰撞检查均通过，图版PDF零位图，PNG为300 dpi；图形语义经独立只读复核。介绍PDF重建为中文10页、英文11页，各26条文献链接、全部正文可回查、均零位图，21页已目视核对。贡献第3节与文献书目保持原字节，16个方法、科学依据和历史图稿文件不变；β/γ/a的功耗映射仅按既有规格展开说明。可复现的绘图脚本、说明、几何/核查JSON与version5元数据已入仓库，旧完整provenance保留为history。本机核对记录为`.git/intro_vector_20261026/document_checks.json`；图稿仍表达研究设计，不改变模型、实验输入、既有结果或运行权限。
 
 2026-10-22卡通标注核查（历史）：三张局部图增加物件引线、上方读图顺序、下方编号解释及核心判断，中英文同步；总框架和全部原始PNG保持原字节。恢复图明确同批债务、补做所需三项资源、原任务期限与到期结局；进度图标明w、K、施工与投运、阶段重算和状态延续；网络图标明总取电、外部Y、用电记录及F/X另核。8张活动图版的原生SVG/PDF文字与碰撞检查通过，自动碰撞发现为0；六张修订局部图的对象指向、先后、结局、中英文对应与拥挤情况经只读复核，无剩余发现。固定PNG后可逐字节重建SVG，嵌入PNG与原始字节一致。两份PDF为10/12页，各保留26个唯一HTTPS文献链接；该轮仅改图注、图内标注与排版，叙述正文及26条书目保持一致。全页与重点图文预览已核对。可移植的来源、原始生成提示词、哈希、标注方式与检查范围见绘图说明；本机记录分别位于`.git/intro_pictorial_20261022/`、`.git/intro_framework_20261022/`和`.git/intro_annotations_20261022/`。该轮为介绍材料的概念插画与排版工作。
 

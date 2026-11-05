@@ -1,3 +1,28 @@
+## D 阶段比较主线与 R3 审查阻塞（2026-11-05 登记）
+
+**主线**：D 阶段比较，结论为"简化评价在可行区内稳健地产生假通过"。详见[D阶段比较交接](../plan/continuation_handoff_20261105.md)。
+
+**已完成**：
+- 主网格 `staged_deliverability_d_v1_non_authoritative/attempt_01`：24 次评估，零求解器，1.12 秒。轴一 D1=11、轴二 D1=8。
+- 敏感性 `staged_deliverability_d_sensitivity_v1_non_authoritative/attempt_05`：27 组合 × 24 评估 = 648 次，5.311 秒。**23/27 组合出现假通过**，f ≥ 2/5 的 18 组全部出现。
+- 动作外置与完整时序重放：P4 恒等检验 4/4 情景 `records_identical=True`。
+- 加载器等价：`baseline` 业务路径与 B1 冻结 fixture 的 `params` 与 10 个观测逐字段相等。
+- 测试：`test_staged_deliverability_replay_v1.py`（20）、`test_staged_deliverability_d_grid_v1.py`（19）、`test_staged_deliverability_d_sensitivity_v1.py`（37），共 **76 项通过**。
+
+**OPEN：R3 独立审查**。`src/staged_deliverability_replay_v1.py` 的动作外置、`replay_step`、`replay_full_temporal` 涉及恢复语义与非预见性，按`agent.md`第7节属 R3。当前仅有写入者自测，**不得作为正文证据**。解除条件：由未参与写入的独立审查方对 exact 字节出一致性结论，覆盖：给定 q 分解回 grid/cfe 的顺序、阻塞违约时停止而非继续的语义、恢复量超过真实余量的处理、`label_from` 的三值映射。解除前 6.3/6.4 正文不得落笔。
+
+**已确立的边界，不得在正文中越过**：
+1. **D2 假拒绝结构上不可达**。两种简化均放宽约束而非收紧，已由`test_approximations_are_structurally_permissive`固定。C3 只主张 D1 方向。
+2. **两轴不一致的 115 个单元不得合并解释**。固定余量 31 个含真实物理违约（小时2的`recovery_headroom`31、`hourly_cfe`19、`scalar_supply`12），属执行不可行；瞬时 84 个重放无任何违约码，差异源于瞬时判据不读期限未完成量，属判据定义性省略。
+3. **失效边界**：f=1/5 且 alpha ≥ 4/5 时延期空间不足以形成恢复债务，三种方法趋于一致判断。此为唯一稳定边界，可由参数直接读出。
+4. **加强型恢复时段匹配未做**。已兑现延期与恢复起点债务属策略运行结果，无法在输入层固定；C2 结论限定为外生额度时序一致的情形。
+
+**未扫描维度**：期限滞后、事件包络参数（`max_events`/`max_duration`/`minimum_rest`/`call_ramp`）、清洁路径形状、故障集合。
+
+**下一步**：R3 审查（硬阻塞）→ E 独立留出 → RTS-24 公共算例（可降级）→ 正文 6.3/6.4。
+
+**已降级**：F 可复现执行链降为论文"适用边界"声明，不再作为正式运行前置；RQ2 联合服务前沿因 70-cell `R1=0,R2=0,R3=69` 保留为历史资产。
+
 ## 论文题目与可交付性判据（2026-11-03 登记）
 
 论文题目定为**智算中心达产过程中的分阶段接入与柔性可交付性研究**，英文投稿题名建议`Assessing Flexibility Deliverability for Staged Interconnection of AI Data Centers During Ramp-Up`；`agent.md`第2节为唯一权威表述。
