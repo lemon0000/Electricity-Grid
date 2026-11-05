@@ -58,7 +58,7 @@
 
 | 步 | 内容 | 状态 |
 |---|---|---|
-| 1 | **R3 独立审查**动作外置与重放语义 | **未开始，唯一硬阻塞** |
+| 1 | **R3 独立审查**动作外置与重放语义 | **未开始，唯一硬阻塞。审查包已就绪：[R3审查包](staged_deliverability_d_r3_review_package_v1.md)** |
 | 2 | 敏感性已补完（性能审查 + 违约码分解） | 完成 |
 | 3 | C2 收缩为外生层面结论 | 已完成（文字层） |
 | 4 | E 独立留出：冻结计划/D/策略，在新路径执行 | **未开始** |
@@ -66,6 +66,18 @@
 | 6 | 写作：第2节 → 第4节 → 6.3 → 6.4 → 6.1/6.2 → 1/7/8 | 未开始 |
 
 未扫描的维度：期限滞后、事件包络参数（`max_events`/`max_duration`/`minimum_rest`/`call_ramp`）、清洁路径形状、故障集合。
+
+### 5.1 如何启动 R3 审查
+
+审查包为 [`staged_deliverability_d_r3_review_package_v1.md`](staged_deliverability_d_r3_review_package_v1.md)，自包含，审查方无需读本对话历史。要点：
+
+- **审查方必须是独立实例**，未参与写入。写入本模块的会话不能自审，也不宜在同一上下文延续。
+- 待审 `src/staged_deliverability_replay_v1.py`，SHA-256 `f9738c82308d2379e98e1c46318ff2198e7900fbc9d368e41176db75fd603c7c`，259 行；基准 `src/staged_deliverability_development_v1.py`（冻结），SHA-256 `91bbc6aaaac458c8fcb23c11d830a98af99e1d50d42b3c0489246ec1922109e0`。哈希不符须重新登记，不得按包判断。
+- 五个审查点：给定 q 的回分解顺序、恢复量超余量判定、阻塞违约停止划分、cohort 分配等价、三值映射边界。
+- 最可能出问题的两处已标注：审查点三（`recovery_headroom` 是新引入违约码，归入阻塞可能过严）与审查点四（分配规则与原实现形式不同，P4 恒等覆盖不到）。
+- 每点判 `PASS`/`REWORK`/`ESCALATE`，记录写入 `results/tables/staged_deliverability_d_v1_non_authoritative/r3_review.md`。
+- 运行命令：`D:\Miniconda3\envs\rq2-executor\python.exe -m pytest tests/test_staged_deliverability_replay_v1.py tests/test_staged_deliverability_d_grid_v1.py tests/test_staged_deliverability_d_sensitivity_v1.py -q`，预期 `76 passed`。
+- **PASS 只关闭独立审查门**，不授权 formal run、资源准入或论文主张。通过前 6.3/6.4 正文不得落笔。
 
 ## 6. 本文件写就时的 Git 状态
 
@@ -85,6 +97,7 @@
 2. 本文件 §3 的结果
 3. `docs/plan/thesis_outline_and_d_config_20261103.md` 的章节结构与贡献绑定
 4. 需要复现时再读两份 `validation_report.md` 与 `performance_review.md`
+5. **若任务是 R3 审查**：直接读 [`staged_deliverability_d_r3_review_package_v1.md`](staged_deliverability_d_r3_review_package_v1.md)，该包自包含，不必先读本文件其余部分，也不必读任何对话历史
 
 ## 9. 已知的文档滞后
 
