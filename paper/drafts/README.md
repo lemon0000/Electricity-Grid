@@ -1,27 +1,6 @@
-> 2026-10-29 F最新交接：[整链成本与整合入口](../../docs/plan/continuation_handoff_20261029_saved_fresh_whole_workflow_cost_v1.md)。静态模型16项验证已完成，完整F继续OPEN；下一步优先处理P1与source两项预算缺口并实施合法复用。当前账源、授权边界和后继实施条件见交接。
+> 2026-11-05 **当前主线转为 D 阶段比较**，F 链不再是主线。D attempt_01 已完成：24 次评估（2 业务进度 × 2 电网进度 × 2 清洁路径 × 3 方法），零求解器、1.12 秒。两条对照轴分别得到轴一假通过 11、轴二假通过 8；假拒绝在两种简化下结构上不可达，已由测试固定。证据见[验证报告](../../results/tables/staged_deliverability_d_v1_non_authoritative/attempt_01/validation_report.md)与[性能审查](../../results/tables/staged_deliverability_d_v1_non_authoritative/attempt_01/performance_review.md)。**该包尚待独立 R3 审查，不构成正文证据**；敏感性扫描、E 独立留出与 6.3/6.4 正文均未开始。论文骨架与 D 配置见[骨架](../../docs/plan/thesis_outline_and_d_config_20261103.md)，执行契约见[D合同](../../docs/plan/staged_deliverability_d_development_contract_v1.md)。
 
-> 2026-10-29 F更新：[source-held Parent 与失败封存检查点](../../docs/plan/continuation_handoff_20261029_saved_fresh_complete_parent_v2.md)。23项 ordinary、独立 PRE_SEAL 及 saved 原流重开已核验；完整 F 保持 OPEN。
-> 当前账源1330.4662248999914秒、52条拒绝，CP a66f0f68239fe1d1b46d69e523527cdfd5f489e826eab5163ebe681baa9f56e0。Parent40 为 post-spawn owner；真实 grant、profile anchor、exact graph、Parent 683 内容与 whole-workflow 资源准入仍待完成。
-
-> 2026-10-29 F更新：[pre-LIVE actor 与 Parent quiet 检查点](../../docs/plan/continuation_handoff_20261029_saved_fresh_bootstrap_actor_v3.md)。23项 ordinary、独立 PRE_SEAL 及 saved 原流重开已核验；完整 F 保持 OPEN。
-> 当前账源1309.5941497999695秒、51条拒绝，CP 369a5b87a1c979d357e3dcad6fa952d019e4c61d1dfbdad7b976102cb0e467d4。下一步为 Parent40/完整校验器、accepted profile 关系和真实 grant 绑定；Native/P1 与 whole-workflow 资源准入仍待完成。
-
-> 2026-10-29 F更新：[producer交接与延后bundle检查点](../../docs/plan/continuation_handoff_20261029_saved_fresh_producer_export_v2.md)。70项ordinary、独立PRE_SEAL及saved replay已核验；完整F保持OPEN。
-> 当前账源1288.5015143999583秒、49条拒绝，CP 898de661acd09bbbce60fa80e8ddebe44f8c8e9476870758abe04ad148cd200c。真实外部授权、Parent内容核验和whole-workflow资源准入仍待完成。
-
-> 2026-10-29：见[权限核验与持续guard交接](../../docs/plan/continuation_handoff_20261029_saved_fresh_p1_permission_v2.md)。LC4补固定源码权限核验、claim前失败撤销及独立cleanup；Loader3/Core42/Probe40/Parent39已接DISABLED program与持续guard。v1两项夹具失败/费用原样保留，独立v2唯一48项普通测试/98帧及saved/checkpoint通过；v2 10.207955999969272/40s，累计1264.7889965000024s、48条拒绝，账源CP f4a933bb82a15473df9624941d8fe83baecd443e43fa1dc45b681121a4e50c9f。外部root仍None，真实P1/Native/Source49 target未运行，NFC12未重跑；原39项并行dirty保留，真实issuer/完整producer/parent adoption/全链资源及完整F仍OPEN。
-
-> 2026-10-29：见[构造终态与静态收尾交接](../../docs/plan/continuation_handoff_20261029_saved_fresh_construction_terminal_v2.md)。LC3修正CONSUMED namespace清理协议；Parent38补失败记账、43图/终态重开及失败profile保全。唯一29项普通测试/60帧通过；v1审查保存拒绝原样保留，v2仅静态复用原流，8.496565900015412/20s。累计1248.2905106000355s、47条拒绝，账源CP 0bc1887e3de8a9dbb49c180a97bd5ff7077fee01149f49789f92a68f7caa3240。NFC12未重跑，Source49与39项并行dirty保留；真实issuer/P1/同LIVE owner完整producer/全链资源及完整F仍OPEN。
-
-> 2026-10-29：见[bootstrap接线与transport检查点](../../docs/plan/continuation_handoff_20261029_saved_fresh_bootstrap_wiring_v1.md)。Core40/Probe38/Parent37的helper加载、closed refs与B_S定义期接线完成39项ordinary/80帧及保存核验；P1 token明确None，真实issuer尚缺。命令静态修至17970/30000 UTF-16 units，实际Unicode启动/profile/40图帽/terminal oracle仍OPEN。本包14.498082099977182/40s，累计1232.5224273000306s、46条不接受保留；下一账源99672dc648f0677868ac4449b08d24c0d5d49a8f3d8056c50781992da5f399e4。Source49/NFC12及39项并行dirty原字节保持；真实producer、父端reopen、128MiB retention和完整F未完成，所有科学/资源/正式/run gate false。
-
-> 2026-10-29：见[construction/graph/lifecycle联合检查点](../../docs/plan/continuation_handoff_20261029_saved_fresh_project_bootstrap_bundle_v1.md)。36项合成unit/74帧及PRE_SEAL、saved、checkpoint通过；construction→typed graph→同raw/registry bundle→held lifecycle接线仅获合成验证，真实37模块/owner producer未执行。本包12.008245999983046/40s，累计1218.0243452000534s、不接受46条，五个失败包原样保留；下一账源bad043eeae43dcfba7c7dd0c65d33e81271a29f6099e79e23f7a2700879891c8。Source49/NFC12及39项并行dirty保持；真实issuer、Core/probe/parent/profile/40图帽后继、父端reopen与128MiB retention/完整F仍OPEN，全部科学/资源/正式/run gate false。
-
-> 2026-10-29：见[retained producer逻辑生命周期检查点](../../docs/plan/continuation_handoff_20261029_saved_fresh_retained_producer_lifecycle_v1.md)。31项合成unit/64帧及PRE_SEAL、saved、checkpoint通过；排他slot、G0/G2/G3强持、sticky失败和close前后数据校验仅获逻辑开发验证，真实producer未执行。本包17.173681999964174/40s，累计1161.6025764999897s、不接受41条；下一账源61baf0d187724f066f9c9f629dc4f0c3ecf594b970de59e6e7d6c350885c806f。Source49/NFC12/旧失败与39项并行dirty保持；initial oracle、真实issuer、37模块图预算、父端采用、128MiB retention及完整F仍OPEN，全部科学/资源/正式/run gate false。
-
-> 2026-10-28：见[producer图组件交接](../../docs/plan/continuation_handoff_20261028_saved_fresh_producer_project_graph_v1.md)。跨项目continuity graph组件12/12、26帧、unit7.8381/10s，saved/checkpoint完成；本包18.72246200000518/40s，累计1144.4288945000255s、不接受41条。实际Source49初始oracle、retained lifecycle与runtime/P1/F仍OPEN，goal持续推进active；NFC12/Source49/旧失败及39项并行工作区bytes保留。
-
-> 2026-10-28：见[代码桥验证完成交接](../../docs/plan/continuation_handoff_20261028_saved_fresh_full_producer_bridge_completion_v3.md)。第5组控制器与原修补已在v3验证：16/16、34帧，unit8.9203/10s，saved/checkpoint通过；源码桥验证范围，完整producer/父端采用/F仍OPEN。v1编译上下文拒绝和v2外层超帽原样保留，累计1125.7064325000204s、不接受41条record；NFC12/Source49不变，未重跑NFC12，39项并行工作区bytes保留。
+> 2026-11-04 题目与判据收敛：题目以`agent.md` §2 为准（智算中心达产过程中的分阶段接入与柔性可交付性研究），可交付性按三值（可交付／不可交付／未决）定义于`agent.md` §4。介绍、摘要与研究缺口已同步为两条对照轴的口径；恢复时段对照的匹配收缩至外生输入层，已兑现延期与恢复起点债务改为结果分层条件。
 
 > 2026-10-28：见[完整producer桥接WIP交接](../../docs/plan/continuation_handoff_20261028_saved_fresh_full_producer_bridge_wip_v1.md)。NFC12同一LIVE owner的binding消费与关闭已完成；下一步prebound expectation构造器、4项测试和控制器为未登记/未执行草稿，第1—4组PRE_SEAL修补未验证，第5组失败记账与阶段/精确集合校验待修。新scope预留40s、已用受控费用0；累计1088.9926936999939s及39条不接受、全部旧失败/Source49与39项并行dirty保留。完整producer、父端采用、资源/科学/正式/run/F仍OPEN或false。
 
@@ -83,6 +62,7 @@
 2026-10-27 pre-ENTRY本地持有链已开发验证：见[最新交接](../../docs/plan/continuation_handoff_20261027_saved_fresh_pre_entry_lease_v2.md)。33/33单测、独立画像、九例cold及保存核验通过；正常路径先持self HANDLE再读Source49、同进程owner移交后关闭，ENTRY仅compile。两次新失败与原12条保留；含失败static7.1758692/50、unittest1.6352277/30，全61文件仍在64/8MiB内。条件性TCB、P/D/L不证明E/U；下一步接真实ENTRY namespace、新B_S import profile与live runtime。F/角色/科学/资源/正式/运行门禁仍OPEN/false。
 2026-10-26 根catalog已保存核验：见[最新交接](../../docs/plan/continuation_handoff_20261026_saved_fresh_root_catalog_v1.md)。28/28修复单测及fresh静态重算通过；54当前根/旧33逐项去向、2626符号/10984引用/76未实现证据节点。首轮1错误与原11不接受记录完整保留；本scope static4.4315186/30、unittest0.8414678/20。Source49不变，独立pre-ENTRY bootstrap/live lease/真实角色与F仍OPEN，运行/科学/资源/正式门禁false。
 2026-10-26 精确finder迁移已开发验证：见[最新交接](../../docs/plan/continuation_handoff_20261026_saved_fresh_machinery_transition_v1.md)。当前Source94/94隔离回归、真实normal CLOSED/caught mutation FAULTED/blocked install FAULTED及机械fresh重开通过；本实现static20.400935/60、pytest12.6672781/45。11条历史/当前不接受记录完整保留，旧资源超帽不变；transitive runtime、真实角色/producer及F仍OPEN，所有科学/资源/正式门禁false。
+
 2026-10-26 machinery单次取证已保存：见[最新交接](../../docs/plan/continuation_handoff_20261026_saved_fresh_machinery_diagnostic_v1.md)。唯一实测变化为Pyomo两个finder使meta_path由4项变6项，其余四类保持；小归档accepted，本scope10.4806011/18s、12文件/104128B。旧9条失败和组合存储超帽原样保留；下一步设计精确迁移，真实cold、actual F及科学/资源/正式门禁仍未闭合。
 
 2026-10-26 import policy冷导入WIP：见[最新交接](../../docs/plan/continuation_handoff_20261026_saved_fresh_import_policy_cold_v1.md)。真实normal已暴露post-import commit过期，最小修复后42项逻辑测试通过；修后cold三case与import machinery差异仍未闭合。9条失败/准备记录及原120/420/540账全部保留，归档因组合存储超帽挂绝，终账见WIP checkpoint；actual F及科学/资源/正式门禁仍false。
@@ -104,13 +84,18 @@
 执行状态见[最新交接](../../docs/plan/continuation_handoff_20261025_saved_fresh_upstream_contract.md)与[范围预算](../../docs/plan/staged_deliverability_c_saved_fresh_upstream_contract_scope_budget_v1.md)。固定10域/59节点及三角色argv，静态预算≤6次/90s；生产validator、真实bootstrap/actual F及科学、资源、正式门禁仍OPEN。正文贡献与科学结论保持原口径。
 
 
-更新日期：2026-10-23。
+更新日期：2026-11-05。
 
-- **给老师阅读的中文项目介绍**：[PDF](project_introduction.pdf) · [可编辑正文](project_introduction.md)。第2节先综述现有工作，再集中总结不足并引出本研究；第3节为本文拟作的三项贡献，第4节解释研究对象与概念，随后展开方法、比较设计及预期交付。
-- **英文项目介绍**：[PDF](project_introduction_en.pdf) · [可编辑正文](project_introduction_en.md)。与中文采用相同的研究范围、方法和26条参考文献。
+**PDF 状态**：下列三份 PDF 均滞后于对应 Markdown，尚未按 2026-11-04 的题目与判据修订重建。按当前约定 Markdown 为权威正文，PDF 按需重建；重建前请勿以 PDF 引用题名或判据。
+
+- **摘要**：[中文与英文摘要](project_abstracts.md)。含三值可交付性判据、两条对照轴及恢复时段匹配的适用范围限定。
+- **给老师阅读的中文项目介绍**：[PDF（滞后）](project_introduction.pdf) · [可编辑正文](project_introduction.md)。第2节先综述现有工作，再集中说明具体评价问题；第3节将候选贡献落实为阶段瓶颈转换、同资源恢复时段作用和简化评价判断差异，并列出所需证据及收缩条件。第4节解释概念，随后展开方法、比较设计及预期交付。
+- **英文项目介绍**：[PDF（滞后）](project_introduction_en.pdf) · [可编辑正文](project_introduction_en.md)。与中文采用相同的候选贡献、匹配对照、判断边界、方法和26条参考文献。
 - **方法章草稿**：[PDF阅读版](staged_deliverability_methods.pdf) · [可编辑正文](staged_deliverability_methods.md) · [来源与适用范围核对](staged_deliverability_methods_sources.md)。整理三条进度、任务与功耗、三种评价、网络四层及连续终结；8页阅读版含23个编号公式，数值比较与留出仍待实施。
-- **科研卡通图解**：[整体研究框架](../figures/project_framework_cn.svg) · [任务延期与补做](../figures/project_recovery_cn.svg) · [进度错位](../figures/project_rampup_cn.svg) · [实际取电与CFE核查](../figures/project_network_cn.svg)。整体框架连接给定输入、三种评价、阶段判断与独立留出，三张局部图以物件引线标注、箭头含义和编号步骤，分别解释延期与补做、进度错位、实际取电与两类核查；图下逐步说明条件与结局。各图有中英文SVG、PDF及PNG预览；介绍PDF为整体框架单设横向页面。[绘图说明与生成提示词](../figures/project_schematics.json) · [图版组装脚本](../figures/assemble_project_cartoons.py)。
+- **论文骨架与D配置**：[骨架](../../docs/plan/thesis_outline_and_d_config_20261103.md)。章节结构、贡献与章节绑定、D1–D5判断差异标签口径及D最小可行配置。
+- **研究架构与机制示意**：[整体架构](../figures/project_framework_cn.svg) · [任务债务与期限](../figures/project_recovery_cn.svg) · [三条进度](../figures/project_rampup_cn.svg) · [实际取电与CFE核查](../figures/project_network_cn.svg)。总图连接共同输入、并列评价、实际路径时序核验、比较证据与独立留出；三张局部图展开工作守恒、状态变化及物理供电与属性核算。各图有中英文可编辑SVG、矢量PDF及300 dpi PNG；介绍PDF为整体架构单设横向页面。[论文范例与复现说明](../figures/README.md) · [图稿记录](../figures/project_schematics.json) · [生成脚本](../figures/draw_project_schematics.py)。
 - **引用核查**：[正文编号与文献库映射](../../docs/literature/introduction_reference_map_20261022.csv) · [来源核对记录](../../docs/literature/introduction_source_checks_20261022.json) · [核心文献库](../../docs/literature/literature_matrix.csv) · [建设专题证据表](../../docs/literature/construction_evidence_20261021.csv)。
 - **研究执行状态**：[科研执行步骤](../../docs/plan/科研项目执行步骤.md) · [blocker登记](../../docs/model_spec/blocker_register.md)。
+- **D阶段比较证据**：[执行契约](../../docs/plan/staged_deliverability_d_development_contract_v1.md) · [attempt_01验证报告](../../results/tables/staged_deliverability_d_v1_non_authoritative/attempt_01/validation_report.md) · [性能审查](../../results/tables/staged_deliverability_d_v1_non_authoritative/attempt_01/performance_review.md)。均为 `DRAFT_NONAUTHORITATIVE`，尚待独立 R3 审查。
 
 项目介绍面向导师，集中说明研究设计与预期成果；方法章按既有定义展开。执行状态、开发证据和历史结果分别在研究记录中维护。
