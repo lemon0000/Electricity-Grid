@@ -23,6 +23,63 @@
 
 **已降级**：F 可复现执行链降为论文"适用边界"声明，不再作为正式运行前置；RQ2 联合服务前沿因 70-cell `R1=0,R2=0,R3=69` 保留为历史资产。
 
+### 2026-11-06 更新：R3 门已闭合（不重写上方 2026-11-05 条目）
+
+**R3 状态**：v1 首轮独立审查为 `REWORK`（点一：`q` 超过两类请求之和时无守卫，静默吞掉越界调用量；记录见 `results/tables/staged_deliverability_d_v1_non_authoritative/r3_review.md` §一–§八）。按 `agent.md` §7 在新 successor 中修复：
+
+- `src/staged_deliverability_replay_v2.py` @ `5bd902125112af2c03bf02c9e5842bc1dc4d5db016b119fd284fc68efec6e446`，功能差异仅新增 `q > grid/slope + green/slope` 的 `ValueError` 守卫。
+- `src/staged_deliverability_d_grid_v2.py` @ `7041d9b9c8227a577f12e0e3187235e56bd89595e5020d92ee92fd34bd82077c`，仅改 import 来源。
+- v1 与其调用方字节未动，两代在 `attempt_01` 全部 24 行上逐字段相同；测试 87 项通过。
+- **independent R3 verdict: PASS**（v2 确切字节），见 `r3_review.md` §十一。
+
+**解除**：上方"解除前 6.3/6.4 正文不得落笔"对 6.3 已满足；6.3 草稿见 `paper/drafts/staged_deliverability_results_6_3.md`。
+
+**第 3 条边界更正**：原记"f=1/5 且 alpha ≥ 4/5"。实测 4 个无假通过组合为 f=1/5 且（α ≥ 4/5，或 K=1 且 α ≥ 7/10）；`f=1/5, α=7/10` 时 K=2/3 与 K=4/5 各 8 个 D1、K=1 为 0。原表述充分但不必要，以此联合条件为准。计数不变（敏感性验证报告 §3 同一处表述亦需更正）。
+
+**仍 OPEN**：E 独立留出（6.4）未产出，C3 后半条件未满足；敏感性包自身尚无独立审查记录（其结论已在 6.3 草稿中按 `DRAFT_NONAUTHORITATIVE` 标注）。
+
+### 2026-11-06 更新：E 独立留出已产出（弱成立，不关闭 C3）
+
+合同：[E 留出合同](../plan/staged_deliverability_e_holdout_contract_v1.md)。结果：`staged_deliverability_e_holdout_v1_non_authoritative/attempt_05`，`report.json` SHA-256 `b59c5d29841178c3a03f4d244c60f63b9987f26a3837bfdca61b8605cb9171f0`，8 单元 / 24 次评估，0.189 秒。
+
+- **信息单元 4 个，全部出现 D1**；重放 D1=8、策略 D1=4；D2=0、D5=0。
+- 另 4 个单元（`change_hour=1`）在 h1 结构性不可行：电网临时限额 `5/8`，请求 `3/5` 超过任何策略可达的 `room=1/5`。逐小时可行性筛在读取标签前标记，**只标记不丢弃**。
+- 机制与 D 同源：瞬时 4 个无违约码（判据不读期限），固定余量 4 个在 h2 带 `scalar_supply`/`recovery_headroom`（执行层越界）。
+- 判据 E1–E6 均通过；E4 记为**弱通过**。
+
+**限制（引用前必读）**：
+
+1. 信息单元仅 4 个，只覆盖一个达产时点（change_hour=4）、两个延迟、两个清洁路径。4/4 不是频率估计。
+2. **两处设计更正发生在看到 attempt_02/03 结果之后**：清洁路径的可行性下界与逐小时可行性筛。更正依据均为参数可读的结构性判据、与标签无关，但严格预注册已被破坏。
+3. 清洁路径只移动抬高那一小时（h2 vs h8），达产时段其余小时与 D 同为 `.84`。
+4. attempt_01–04 保留为失败/作废现场，不删除。
+
+**C3 状态**：证据为"D 主网格 + 敏感性 + 有限独立留出"，三者机制与量级一致。**C3 仍不得表述为已成立**——留出规模不足以支持频率主张或外推。6.4 正文可写，但须按上述限制表述。
+
+### 2026-11-06 更新：敏感性包 R3 审查已闭合
+
+独立只读实例审查 `staged_deliverability_d_sensitivity_v1.py` @ `a99f2ad0…`、`d_grid_v1` @ `d53111ac…`、`replay_v1` @ `f9738c82…`、`attempt_05/report.json` @ `fb2ffd8a…`，六项哈希与行数全部一致。记录见 `results/tables/staged_deliverability_d_v1_non_authoritative/r3_review_sensitivity.md`。
+
+- **实现与结果：PASS。** 可行性筛先于 `run_matrix` 调用且不排除任何组合（27 组全 `False`、648 行无缺失）；`cfe_binding_hours` 仅写入 combo 供读表，`aggregate` 从不引用；27 组 × 24 = 648 单元键唯一，重跑 648 × 16 字段与 `report.json` 零差异，6,210 条原生 step 记录无跳过；115 单元分解（31 固定余量全带码、84 瞬时全无码且 84/84 期限未完成量相同）、233/118 两个 D1 总数均独立复现。
+- **正文引用层：REWORK，已闭合。** 6.3 草稿 `:3` 原称"v2 与 v1 逐字节等价"，但 v2 唯一功能差异就是守卫，且本包走 v1 不走 v2；已改为"本包由 v1 运行，守卫对本包不可达"，并补 6,210 条记录零越界的实证。6.3.3 与 6.3.4 已标注"同一 fixture 骨架的参数扫描、非独立留出"。
+- **v1 越界缺陷对本包无影响**：`q = grid_served + cfe_served` 结构上不超过两类请求之和，实测最小余量恰为 0（只取等、不触发）。
+- **失效边界**：独立重算确认新表述"f=1/5 且（α≥4/5 或 K=1 且 α≥7/10）"在 27 组上是**精确刻画**（旧式漏 1 组）；`attempt_05/validation_report.md` §3 已补更正行。
+- **测试**：37 passed（本包），全量 119 passed。
+
+**仍 OPEN**：E 独立留出的信息单元仅 4 个、6.4 正文未写；敏感性包虽已审查，其结论仍受"非独立留出"限制。
+
+### 2026-11-06 更新：6.1/6.2 正文已产出（C1/C2 各自弱成立）
+
+**6.1 阶段瓶颈转换**：依据 D `attempt_01`。**C1 成立于一个对照**：`slow` 业务路径上只改电网投运时点（`on_time` vs `delayed`），限制来源从"无约束"变为"期限（恢复窗口）"，定值从可交付变为不可交付，`early`/`late` 两条清洁路径均成立。机制：h1 即时延期 `1/5`、期限 h3；按期时 h2 供电 `13/10` 可在期限内补足，延期时 h2–h3 供电仍 `4/5`，只能 h4 回收，逾期 `1/5` 保留。`fast` 路径上来源会变但判定恒为失败，按收缩条件只作"限制描述"。
+
+**6.2 恢复时段匹配对照**：新建匹配臂 `staged_deliverability_d_matching_v1_non_authoritative/attempt_02`，`report.json` SHA-256 `b9b41d2fd4d996be9aeb5b0528b569102f4ee3adf5fcbcd455cb82bc4f6452be`，72 次评估。**必需原因**：D 的 `early`/`late` 不满足匹配——`late` 在 h2 的 CFE 请求为 `1/4`、`early` 为 `0`，差异不能归因于到达时段（已由测试固定）。匹配臂三条路径总量 `317/50`、峰值 `26/25`、**逐小时请求完全相同**，仅把唯一高清洁小时置于 h3/h4/h5。
+
+- **C2 成立**：`fast/on_time` 上到达 h3（恰在期限小时）可交付，h4/h5 不可交付；重放轴 2/24 单元变化，策略轴 6/24 单元变化。
+- **连带后果**：h4/h5 时参考方判失败而两种简化仍判通过，策略轴 D3 变为 D1，策略轴 D1 由 6 增至 10。
+- **限制**：变化全部集中在 `fast/on_time` 单元族；只检验三个到达位置；加性匹配（已兑现延期、起点债务）未做，C2 结论限定为外生层匹配。
+
+**正文草稿**：`paper/drafts/staged_deliverability_results_6_1_6_2.md`；验证报告见两处 attempt 目录。全量测试 119 项通过。
+
 ## 论文题目与可交付性判据（2026-11-03 登记）
 
 论文题目定为**智算中心达产过程中的分阶段接入与柔性可交付性研究**，英文投稿题名建议`Assessing Flexibility Deliverability for Staged Interconnection of AI Data Centers During Ramp-Up`；`agent.md`第2节为唯一权威表述。
