@@ -1,0 +1,123 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "scope": "three_stage_flexibility_probe_v1",
+  "decision_variable": "flexible_fraction",
+  "tolerance": "1/100",
+  "formal_result": false,
+  "resource_admission": false,
+  "window": {
+    "first_hour": -2,
+    "last_hour": 21,
+    "deadline_lag": 3
+  },
+  "registration_end": 8,
+  "expected_last_hour": 21,
+  "staggers": [
+    {
+      "stagger": "aligned",
+      "ramp_hour": 3,
+      "equip_start": 0,
+      "equip_lead": 2,
+      "grid_lead": 2,
+      "grid_delay": 0,
+      "clean_high_hours": [
+        6
+      ],
+      "min_fraction": {
+        "instantaneous": "13/32",
+        "fixed_headroom": "13/32",
+        "full_temporal": "13/32"
+      },
+      "class": "same_threshold"
+    },
+    {
+      "stagger": "grid_late",
+      "ramp_hour": 3,
+      "equip_start": 0,
+      "equip_lead": 2,
+      "grid_lead": 6,
+      "grid_delay": 0,
+      "clean_high_hours": [
+        6
+      ],
+      "min_fraction": {
+        "instantaneous": "13/32",
+        "fixed_headroom": "None",
+        "full_temporal": "None"
+      },
+      "class": "no_fraction_suffices"
+    },
+    {
+      "stagger": "equip_late",
+      "ramp_hour": 3,
+      "equip_start": 4,
+      "equip_lead": 4,
+      "grid_lead": 2,
+      "grid_delay": 0,
+      "clean_high_hours": [
+        6
+      ],
+      "min_fraction": {
+        "instantaneous": "13/32",
+        "fixed_headroom": "13/32",
+        "full_temporal": "13/32"
+      },
+      "class": "same_threshold"
+    },
+    {
+      "stagger": "both_late",
+      "ramp_hour": 2,
+      "equip_start": 6,
+      "equip_lead": 4,
+      "grid_lead": 6,
+      "grid_delay": 2,
+      "clean_high_hours": [
+        14
+      ],
+      "min_fraction": {
+        "instantaneous": "13/32",
+        "fixed_headroom": "None",
+        "full_temporal": "None"
+      },
+      "class": "no_fraction_suffices"
+    },
+    {
+      "stagger": "clean_early_only",
+      "ramp_hour": 2,
+      "equip_start": 3,
+      "equip_lead": 3,
+      "grid_lead": 4,
+      "grid_delay": 1,
+      "clean_high_hours": [
+        2
+      ],
+      "min_fraction": {
+        "instantaneous": "13/32",
+        "fixed_headroom": "None",
+        "full_temporal": "None"
+      },
+      "class": "no_fraction_suffices"
+    },
+    {
+      "stagger": "clean_late_only",
+      "ramp_hour": 2,
+      "equip_start": 3,
+      "equip_lead": 3,
+      "grid_lead": 4,
+      "grid_delay": 1,
+      "clean_high_hours": [
+        16
+      ],
+      "min_fraction": {
+        "instantaneous": "13/32",
+        "fixed_headroom": "None",
+        "full_temporal": "None"
+      },
+      "class": "no_fraction_suffices"
+    }
+  ],
+  "verdict": [
+    "no_fraction_suffices",
+    "same_threshold"
+  ]
+}

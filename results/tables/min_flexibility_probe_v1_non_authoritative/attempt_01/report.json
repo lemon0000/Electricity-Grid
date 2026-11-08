@@ -1,0 +1,51 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "scope": "min_business_flexibility_probe_v1",
+  "decision_variable": "flexible_fraction",
+  "tolerance": "1/200",
+  "formal_result": false,
+  "resource_admission": false,
+  "cells": [
+    {
+      "cell": "fast/on_time/early",
+      "min_fraction": {
+        "instantaneous": "103/256",
+        "fixed_headroom": "103/256",
+        "full_temporal": "None"
+      },
+      "gap": 0.0,
+      "ordered": false
+    },
+    {
+      "cell": "fast/on_time/late",
+      "min_fraction": {
+        "instantaneous": "103/256",
+        "fixed_headroom": "None",
+        "full_temporal": "None"
+      },
+      "gap": null,
+      "ordered": false
+    },
+    {
+      "cell": "slow/on_time/early",
+      "min_fraction": {
+        "instantaneous": "103/256",
+        "fixed_headroom": "103/256",
+        "full_temporal": "103/256"
+      },
+      "gap": 0.0,
+      "ordered": true
+    },
+    {
+      "cell": "slow/delayed/early",
+      "min_fraction": {
+        "instantaneous": "103/256",
+        "fixed_headroom": "103/256",
+        "full_temporal": "None"
+      },
+      "gap": 0.0,
+      "ordered": false
+    }
+  ],
+  "verdict": "no_gap"
+}
