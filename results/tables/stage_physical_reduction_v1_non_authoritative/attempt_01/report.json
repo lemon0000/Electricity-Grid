@@ -1,0 +1,648 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "formal_result": false,
+  "rows": [
+    {
+      "key": [
+        "fast",
+        "on_time",
+        "early"
+      ],
+      "caps": [
+        {
+          "hour": -2,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": -1,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 0,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 1,
+          "physical_cap": "2/5",
+          "workload": "1/2"
+        },
+        {
+          "hour": 2,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 3,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 4,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 5,
+          "physical_cap": "9/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 6,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 7,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        }
+      ],
+      "assessment": {
+        "method": "full_temporal",
+        "scope": "scalar_fixed_policy",
+        "method_conditions_satisfied": false,
+        "coverage_complete": true,
+        "observed_through": 7,
+        "observed_primary_deadline_miss": "1/5",
+        "primary_right_censored": false,
+        "stopped": false,
+        "remaining_debt": "0",
+        "physical_replay_violations": [],
+        "fx_contract_status": "not_assessed_scalar_stub"
+      }
+    },
+    {
+      "key": [
+        "fast",
+        "on_time",
+        "late"
+      ],
+      "caps": [
+        {
+          "hour": -2,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": -1,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 0,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 1,
+          "physical_cap": "2/5",
+          "workload": "1/2"
+        },
+        {
+          "hour": 2,
+          "physical_cap": "1/2",
+          "workload": "7/10"
+        },
+        {
+          "hour": 3,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 4,
+          "physical_cap": "9/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 5,
+          "physical_cap": "9/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 6,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 7,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        }
+      ],
+      "assessment": {
+        "method": "full_temporal",
+        "scope": "scalar_fixed_policy",
+        "method_conditions_satisfied": false,
+        "coverage_complete": true,
+        "observed_through": 7,
+        "observed_primary_deadline_miss": "1/5",
+        "primary_right_censored": false,
+        "stopped": false,
+        "remaining_debt": "0",
+        "physical_replay_violations": [
+          [
+            2,
+            [
+              "cfe_call_shortfall",
+              "hourly_cfe"
+            ]
+          ]
+        ],
+        "fx_contract_status": "not_assessed_scalar_stub"
+      }
+    },
+    {
+      "key": [
+        "fast",
+        "delayed",
+        "early"
+      ],
+      "caps": [
+        {
+          "hour": -2,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": -1,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 0,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 1,
+          "physical_cap": "2/5",
+          "workload": "1/2"
+        },
+        {
+          "hour": 2,
+          "physical_cap": "1/2",
+          "workload": "7/10"
+        },
+        {
+          "hour": 3,
+          "physical_cap": "1/2",
+          "workload": "7/10"
+        },
+        {
+          "hour": 4,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 5,
+          "physical_cap": "9/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 6,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 7,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        }
+      ],
+      "assessment": {
+        "method": "full_temporal",
+        "scope": "scalar_fixed_policy",
+        "method_conditions_satisfied": false,
+        "coverage_complete": false,
+        "observed_through": 1,
+        "observed_primary_deadline_miss": "0",
+        "primary_right_censored": true,
+        "stopped": true,
+        "remaining_debt": "1/5",
+        "physical_replay_violations": [
+          [
+            2,
+            [
+              "grid_service_shortfall",
+              "scalar_supply"
+            ]
+          ]
+        ],
+        "fx_contract_status": "not_assessed_scalar_stub"
+      }
+    },
+    {
+      "key": [
+        "fast",
+        "delayed",
+        "late"
+      ],
+      "caps": [
+        {
+          "hour": -2,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": -1,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 0,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 1,
+          "physical_cap": "2/5",
+          "workload": "1/2"
+        },
+        {
+          "hour": 2,
+          "physical_cap": "1/2",
+          "workload": "7/10"
+        },
+        {
+          "hour": 3,
+          "physical_cap": "1/2",
+          "workload": "7/10"
+        },
+        {
+          "hour": 4,
+          "physical_cap": "9/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 5,
+          "physical_cap": "9/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 6,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 7,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        }
+      ],
+      "assessment": {
+        "method": "full_temporal",
+        "scope": "scalar_fixed_policy",
+        "method_conditions_satisfied": false,
+        "coverage_complete": false,
+        "observed_through": 1,
+        "observed_primary_deadline_miss": "0",
+        "primary_right_censored": true,
+        "stopped": true,
+        "remaining_debt": "1/5",
+        "physical_replay_violations": [
+          [
+            2,
+            [
+              "grid_service_shortfall",
+              "cfe_call_shortfall",
+              "scalar_supply",
+              "hourly_cfe"
+            ]
+          ]
+        ],
+        "fx_contract_status": "not_assessed_scalar_stub"
+      }
+    },
+    {
+      "key": [
+        "slow",
+        "on_time",
+        "early"
+      ],
+      "caps": [
+        {
+          "hour": -2,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": -1,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 0,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 1,
+          "physical_cap": "2/5",
+          "workload": "1/2"
+        },
+        {
+          "hour": 2,
+          "physical_cap": "7/10",
+          "workload": "1/2"
+        },
+        {
+          "hour": 3,
+          "physical_cap": "7/10",
+          "workload": "1/2"
+        },
+        {
+          "hour": 4,
+          "physical_cap": "7/10",
+          "workload": "1/2"
+        },
+        {
+          "hour": 5,
+          "physical_cap": "9/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 6,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 7,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        }
+      ],
+      "assessment": {
+        "method": "full_temporal",
+        "scope": "scalar_fixed_policy",
+        "method_conditions_satisfied": true,
+        "coverage_complete": true,
+        "observed_through": 7,
+        "observed_primary_deadline_miss": "0",
+        "primary_right_censored": false,
+        "stopped": false,
+        "remaining_debt": "0",
+        "physical_replay_violations": [],
+        "fx_contract_status": "not_assessed_scalar_stub"
+      }
+    },
+    {
+      "key": [
+        "slow",
+        "on_time",
+        "late"
+      ],
+      "caps": [
+        {
+          "hour": -2,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": -1,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 0,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 1,
+          "physical_cap": "2/5",
+          "workload": "1/2"
+        },
+        {
+          "hour": 2,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 3,
+          "physical_cap": "7/10",
+          "workload": "1/2"
+        },
+        {
+          "hour": 4,
+          "physical_cap": "9/10",
+          "workload": "1/2"
+        },
+        {
+          "hour": 5,
+          "physical_cap": "9/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 6,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 7,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        }
+      ],
+      "assessment": {
+        "method": "full_temporal",
+        "scope": "scalar_fixed_policy",
+        "method_conditions_satisfied": true,
+        "coverage_complete": true,
+        "observed_through": 7,
+        "observed_primary_deadline_miss": "0",
+        "primary_right_censored": false,
+        "stopped": false,
+        "remaining_debt": "0",
+        "physical_replay_violations": [],
+        "fx_contract_status": "not_assessed_scalar_stub"
+      }
+    },
+    {
+      "key": [
+        "slow",
+        "delayed",
+        "early"
+      ],
+      "caps": [
+        {
+          "hour": -2,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": -1,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 0,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 1,
+          "physical_cap": "2/5",
+          "workload": "1/2"
+        },
+        {
+          "hour": 2,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 3,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 4,
+          "physical_cap": "7/10",
+          "workload": "1/2"
+        },
+        {
+          "hour": 5,
+          "physical_cap": "9/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 6,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 7,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        }
+      ],
+      "assessment": {
+        "method": "full_temporal",
+        "scope": "scalar_fixed_policy",
+        "method_conditions_satisfied": false,
+        "coverage_complete": true,
+        "observed_through": 7,
+        "observed_primary_deadline_miss": "1/5",
+        "primary_right_censored": false,
+        "stopped": false,
+        "remaining_debt": "0",
+        "physical_replay_violations": [],
+        "fx_contract_status": "not_assessed_scalar_stub"
+      }
+    },
+    {
+      "key": [
+        "slow",
+        "delayed",
+        "late"
+      ],
+      "caps": [
+        {
+          "hour": -2,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": -1,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 0,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 1,
+          "physical_cap": "2/5",
+          "workload": "1/2"
+        },
+        {
+          "hour": 2,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 3,
+          "physical_cap": "1/2",
+          "workload": "1/2"
+        },
+        {
+          "hour": 4,
+          "physical_cap": "9/10",
+          "workload": "1/2"
+        },
+        {
+          "hour": 5,
+          "physical_cap": "9/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 6,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        },
+        {
+          "hour": 7,
+          "physical_cap": "7/10",
+          "workload": "7/10"
+        }
+      ],
+      "assessment": {
+        "method": "full_temporal",
+        "scope": "scalar_fixed_policy",
+        "method_conditions_satisfied": false,
+        "coverage_complete": true,
+        "observed_through": 7,
+        "observed_primary_deadline_miss": "1/5",
+        "primary_right_censored": false,
+        "stopped": false,
+        "remaining_debt": "0",
+        "physical_replay_violations": [],
+        "fx_contract_status": "not_assessed_scalar_stub"
+      }
+    }
+  ],
+  "hashes": {
+    "configs/staged_deliverability_d_v1.DRAFT.yaml": "4cc0eb27314d4a8b2c526833c257daa52e8e2cfb31dd54115fadda7395657a36",
+    "src/staged_deliverability_development_v1.py": "91bbc6aaaac458c8fcb23c11d830a98af99e1d50d42b3c0489246ec1922109e0",
+    "src/staged_deliverability_d_grid_v2.py": "7041d9b9c8227a577f12e0e3187235e56bd89595e5020d92ee92fd34bd82077c",
+    "src/rq2_joint_deliverability_boundary_v1/debt_cohorts.py": "d10497c1e6ab5ff573dec8d938b5407a7e28277551b37a1e0d7f79b4241adaab",
+    "experiments/stage_physical_reduction_v1.py": "b6a9418769e74fad5bd31d0e19f0c917a920959427929dc8e6c78c69b40b7848",
+    "docs/plan/stage_physical_reduction_v1_contract.md": "c5904df532e2983bd86075021638e77f9ef8c1ba53d9da6e0699812f1099dd85"
+  },
+  "physical_points": 720,
+  "recovery_checks": 59,
+  "ramp_counterexample": [
+    {
+      "trajectory": [
+        0,
+        2
+      ],
+      "static": true,
+      "dynamic": false
+    },
+    {
+      "trajectory": [
+        1,
+        2
+      ],
+      "static": true,
+      "dynamic": true
+    },
+    {
+      "trajectory": [
+        0,
+        1
+      ],
+      "static": true,
+      "dynamic": true
+    }
+  ],
+  "status": "completed",
+  "wall_seconds": 0.15794850000020233,
+  "python_peak_bytes": 148463,
+  "dependencies_unchanged": true
+}

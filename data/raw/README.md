@@ -1,3 +1,16 @@
+# Raw data provenance
+
+- 2026-11-13 ICARUS-PJM 节点系统解包：`icarus_pjm/0cb6a1af86e2bdfc1d160f44b6e4a7518ca3ffe3/nodal/`
+  —— 从 `upstream/icarus-pjm.zip` 内的 `data/output/PJM Nodal.zip` 取出并去掉一层目录，
+  17,467 母线 / 21,554 支路 / 21 分区 / 8,784 小时分区负荷（2016）。校验信息见该目录 `SOURCE_OBJECTS.json`。
+- 2026-11-13 CAISO 并网与输电升级成本索引：[`CAISO_INTERCONNECTION_COST_INDEX_20261113.md`](CAISO_INTERCONNECTION_COST_INDEX_20261113.md)，
+  字节级清单 [`caiso_interconnection_acquisition_20261113.json`](caiso_interconnection_acquisition_20261113.json)。
+- 2026-11-13 2020 气象／RTS-GMLC 拓扑／迁移开销／西岸电价索引：[`WECC_WEATHER_PRICE_LIT_INDEX_20261113.md`](WECC_WEATHER_PRICE_LIT_INDEX_20261113.md)，
+  字节级清单 [`wecc_weather_price_lit_acquisition_20261113.json`](wecc_weather_price_lit_acquisition_20261113.json)。
+- 2026-11-09 电网—任务耦合公开数据获取索引：[`EMPIRICAL_GRID_TASK_DATA_INDEX_20261109.md`](EMPIRICAL_GRID_TASK_DATA_INDEX_20261109.md)。
+- 2026-11-11 储能成本／并网与阻塞／算力 trace 获取索引：[`ENERGY_STORAGE_GRID_TASK_DATA_INDEX_20261111.md`](ENERGY_STORAGE_GRID_TASK_DATA_INDEX_20261111.md)，
+  字节级清单 [`energy_storage_grid_task_acquisition_20261111.json`](energy_storage_grid_task_acquisition_20261111.json)。
+
 # RTS-24 data provenance
 
 The project loads `case24_ieee_rts` directly from PYPOWER 5.1.19. No local

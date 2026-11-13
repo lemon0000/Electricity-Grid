@@ -1,0 +1,99 @@
+{
+  "acquired_date": "2026-11-13",
+  "note": "Public sources for the 2020 hourly weather replacement, RTS-GMLC topology check, cross-site migration overhead, compute-trace deadlines and western-US price benchmark. Acquisition does not authorize model execution or formal experiments.",
+  "files": [
+    {
+      "path": "data/raw/openmeteo_2020_3sites/v1/upstream/weather_lasvegas_2020.csv",
+      "bytes": 217022,
+      "sha256": "c7d39882fab3af92248525e8c2a437bcbf0d9883c468572e08f90c152a0f1893",
+      "original_url": null,
+      "retrieval": "unknown"
+    },
+    {
+      "path": "data/raw/openmeteo_2020_3sites/v1/upstream/weather_losangeles_2020.csv",
+      "bytes": 219013,
+      "sha256": "9e1ab00600839c543d0f44edc79d286393300fb4f81a90a45c467a958a8ae460",
+      "original_url": null,
+      "retrieval": "unknown"
+    },
+    {
+      "path": "data/raw/openmeteo_2020_3sites/v1/upstream/weather_phoenix_2020.csv",
+      "bytes": 218144,
+      "sha256": "d829a07b3f7ec8933e5c6162ea66eb389c5621e61d537764e7e0a11dac08182b",
+      "original_url": null,
+      "retrieval": "unknown"
+    },
+    {
+      "path": "data/raw/openmeteo_2020_3sites/v1/upstream/weather_phoenix_2020_america_phoenix_tz.csv",
+      "bytes": 218140,
+      "sha256": "cedc065054f8021ba7fb15ba07859457dbbc70b5f5ee9d017c592ae744f1b467",
+      "original_url": null,
+      "retrieval": "unknown"
+    },
+    {
+      "path": "data/raw/eia_state_electricity/v2026/upstream/avgprice_annual.xlsx",
+      "bytes": 253341,
+      "sha256": "27af5b91bd669756e72912c454eb58cea88a195cc5f67548eda12213aaa24522",
+      "original_url": null,
+      "retrieval": "unknown"
+    },
+    {
+      "path": "data/raw/eia_state_electricity/v2026/upstream/sales_annual.xlsx",
+      "bytes": 239257,
+      "sha256": "85ed8e09cec33e176f640855132dfccb2f44109c169fea97e21854e715191d6c",
+      "original_url": null,
+      "retrieval": "unknown"
+    },
+    {
+      "path": "data/raw/azure_wan_latency_doc/v1/upstream/azure-network-latency.html",
+      "bytes": 141235,
+      "sha256": "82e649ad0b982d95552bb0356858077ed095ed69ce6dc54aed298114c85e791c",
+      "original_url": null,
+      "retrieval": "unknown"
+    },
+    {
+      "path": "data/raw/elastic_training_migration_lit/v1/upstream/b4_jain_sigcomm2013.pdf",
+      "bytes": 4244387,
+      "sha256": "fa33360f00987cba69ed5364a2edeb4edeb4ab1b08957fe8d5c60e9dcfe92c52",
+      "original_url": "https://www.cs.columbia.edu/~lierranli/coms6998-10SDNFall2014/papers/B4-SIGCOMM2013.pdf",
+      "retrieval": "direct (https, resumed partial transfer)"
+    },
+    {
+      "path": "data/raw/elastic_training_migration_lit/v1/upstream/oobleck_arxiv2309.08125.pdf",
+      "bytes": 1361585,
+      "sha256": "e8f1948019857a15983e3062cb60232c8aa9cafef51641e188aac2eb54ff5159",
+      "original_url": "https://arxiv.org/pdf/2309.08125",
+      "retrieval": "direct"
+    },
+    {
+      "path": "data/raw/elastic_training_migration_lit/v1/upstream/varuna_arxiv2111.04007.pdf",
+      "bytes": 3520870,
+      "sha256": "9ea8fec7cfbb98f3eec505a89ae7736912c3ab402a6f25509b70dd1cc8d8b005",
+      "original_url": "https://arxiv.org/pdf/2111.04007",
+      "retrieval": "direct"
+    }
+  ],
+  "not_acquired": [
+    {
+      "name": "LBNL WECC/CAISO transmission-upgrade cost table",
+      "reason": "LBNL's 'Generator Interconnection Costs to the Transmission System' dataset covers MISO, PJM, SPP, ISO-NE, NYISO plus the non-ISO balancing authorities Duke, PacifiCorp and Bonneville Power Administration. It contains no CAISO, APS or NV Energy upgrade-cost table, so the WECC/CAISO Excel file described in the request does not exist there.",
+      "status": "scope_mismatch_needs_alternative_source"
+    },
+    {
+      "name": "Lu et al. (2026) checkpointed-training measurements",
+      "reason": "citation not present anywhere in this repository; the exact paper must be identified before it can be fetched",
+      "status": "unresolved_reference"
+    },
+    {
+      "name": "IEM ASOS raw observations (fallback route for the weather step)",
+      "reason": "not needed: the Open-Meteo route returned complete hourly series with no missing values",
+      "status": "not_downloaded_by_choice"
+    }
+  ],
+  "corrections": [
+    {
+      "when": "2026-11-13T18:20+08:00",
+      "what": "elastic_training_migration_lit replaced: wrong arXiv ids / wrong Google pubs id in the first pass; correct papers Varuna arXiv:2111.04007, Oobleck arXiv:2309.08125, B4 Jain et al. SIGCOMM 2013 now in place and content-verified."
+    }
+  ]
+}

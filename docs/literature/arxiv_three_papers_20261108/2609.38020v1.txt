@@ -1,0 +1,560 @@
+=== PDF PAGE 1 ===
+Grid Demand Flexibility Assessment of AI Data
+Centers via Batch Workload Temporal Shifting
+Suntao Su, Liang Du
+Dept. of Electrical & Computer Engineering
+Villanova University
+Villanova, PA USA
+ssu02@villanova.edu, liang.du@villanova.edu
+Shengyi Wang
+Dept. of Electrical & Computer Engineering
+University of Arkansas at Little Rock
+Little Rock, AR USA
+swang@ualr.edu
+Abstract—The rapid growth of artificial intelligence (AI) data
+centers has introduced new challenges to power system operation.
+As their power demand becomes larger and more variable, quan-
+titatively characterizing their demand flexibility is increasingly
+important for effective power system coordination. However,
+heterogeneous workload characteristics and resource require-
+ments make this flexibility difficult to characterize directly. This
+paper proposes a framework for assessing the grid-compatible
+demand flexibility of AI data centers via batch workload tem-
+poral shifting. An averaging-based resource usage processing
+method is developed to map fine-resolution CPU, GPU and
+memory usage into unified time intervals compatible with power
+system operation. A workload temporal scheduling model is then
+formulated to shift batch workloads while preserving execution
+continuity, delay constraints, and server resource capacities, and
+is coupled with a utilization-dependent server power model
+to translate workload scheduling decisions into server power
+demand. Two complementary flexibility metrics are evaluated:
+short-term peak demand shaving and the maximum duration of
+sustained power reduction. Numerical results based on real GPU
+cluster traces demonstrate that workload temporal shifting can
+provide quantifiable and grid-compatible demand flexibility for
+AI data centers with limited disruption to computing workloads.
+Index Terms—AI data center, demand flexibility assessment,
+batch workload, temporal shifting, resource utilization.
+I. INTRODUCTION
+The rapid development of artificial intelligence (AI) has
+led to a substantial increase in the deployment of large-
+scale data centers equipped with high-performance GPUs. As
+computing demand continues to grow, the power consumption
+of data centers is becoming increasingly significant and time-
+varying. Modern hyperscale AI data centers can require power
+capacities exceeding 100 MW, while some future facilities are
+expected to reach the gigawatt scale. Highly dynamic AI work-
+loads can introduce rapid and substantial power fluctuations
+that pose new challenges to power system operation [1].
+At the same time, data centers also offer new opportunities
+for power system operation as flexible demand-side resources.
+Emerald AI, Google and NVIDIA launched the AI Energy
+Management Alliance [2], which promotes flexible AI data
+centers that adjust electricity demand through workload shift-
+ing, energy storage, and on-site generation to support grid
+reliability and accelerate interconnection [3]. Experimental
+studies have also demonstrated that software-based workload
+orchestration can provide rapid and sustained grid-responsive
+flexibility in GPU-based AI data centers, including a 25%
+power reduction for three hours while maintaining workload
+quality of service [4], [5].
+Existing data center flexibility strategies can generally be
+divided into two main categories. On the one hand, several
+studies have demonstrated the inherent flexibility of support-
+ing infrastructures. A genetic-algorithm-based optimization
+method for cold-plate liquid-cooled data centers is proposed
+in [6], which jointly adjusts cooling-tower airflow and coolant
+flow rates under chip-temperature constraints. Reference [7]
+reviews AI data-center load characteristics, highlighting the
+role of coordinated server-, rack-, and grid-level energy storage
+in smoothing demand and supporting grid integration.
+On the other hand, extensive research has focused on
+information technology (IT)-based strategies. In [8], IT server
+power consumption is modeled as the sum of static power
+and dynamic power proportional to the cube of operating
+frequency and server utilization, enabling load flexibility
+through frequency adjustment under service-delay constraints.
+References [9] and [10] propose frameworks for evaluating
+the dispatchable capacity of cross-regional data centers by ex-
+plicitly modeling spatial flexibility through interregional work-
+load transfers while accounting for spatiotemporal scheduling
+coupling and data transmission constraints. Reference [11]
+estimates IT-side GPU power using a linear model, and pro-
+poses a latency-aware task-deferral strategy to provide demand
+response flexibility.
+However, two limitations remain: (1) existing flexibility
+assessment studies do not sufficiently address the temporal res-
+olution mismatch between fine-grained computing workload
+traces and the coarser intervals used in power system opera-
+tion, limiting their direct integration into grid scheduling and
+control. (2) existing studies either focus on servers dominated
+by CPU or GPU resource [11], [12]. Consequently, the com-
+bined effects of CPU, GPU, and memory resource utilization
+on workload flexibility have not been fully characterized.
+To address these limitations, this paper proposes a com-
+prehensive workload flexibility assessment framework that
+bridges heterogeneous computing workloads and grid-side
+demand flexibility. An averaging-based processing method
+is proposed to transform fine-resolution resource traces into
+arXiv:2609.38020v1  [eess.SY]  29 Sep 2026
+
+=== PDF PAGE 2 ===
+Fig. 1. The illustration of the hierarchical temporal relationship among jobs,
+tasks, and instances for online and offline jobs.
+modular data compatible with power system scheduling and
+operation time intervals. A workload power flexibility as-
+sessment model is formulated by integrating batch workload
+scheduling, multi-server resource capacity constraints, and a
+utilization-dependent server power model. The model directly
+maps workload scheduling decisions into power consumption.
+II. MODULARDATA OFWORKLOADS
+This section first introduces the potential temporal flexibility
+in workloads, then details the averaging-based resource usage
+processing method.
+A. Potential Temporal Flexibility in Workloads
+Due to heterogeneous workload characteristic and service
+requirements, not all jobs are suitable for temporal shifting.
+Workloads can generally be divided into two categories: on-
+line and offline jobs. Specifically, online jobs are typically
+delay-sensitive and have limited allowable shift time intervals,
+including interactive web services, video streaming, and online
+gaming. In contrast, offline jobs can tolerate longer waiting
+or processing times, typical examples include data backup,
+offline AI model training, and scientific simulations, etc. Such
+workloads are referred to as batch workloads, and only their
+flexibility is quantified in this paper.
+LetIandJ i denote the set of jobs and instances in job
+i, respectively. The hierarchical temporal relationship among
+jobs, tasks, and instances is shown in Fig. 1. As shown in this
+figure, after an offline jobiis submitted, the instances may
+not be executed immediately, resulting in a waiting interval
+between job submission and instance execution. The orange
+interval represents the job-instance latency, which provides
+the allowable temporal flexibility. Thus, from the operators’
+perspective, the execution interval of a batch workload can be
+shifted as long as the rescheduled execution remains within
+its allowable time window. This allows the required jobs to be
+completed within their predefined time limits while providing
+temporal flexibility to the power system.
+B. Deferrable Jobs
+Grid scheduling and market models commonly operate at
+time resolutions such as 5, 15, or 60 min, which are not di-
+rectly aligned with the second-level temporal resolution of the
+original workload dataset. This mismatch makes the workload
+traces difficult to directly use for power-system scheduling and
+demand-response applications. Therefore, the workload data
+are transformed into modular time intervals consistent with
+the temporal resolution required for grid operation.
+We define the time resolution asδ. Accordingly, each day
+is divided intoT= (24×60)/δuniform time intervalsT=
+{1,2,...,T}. A job is regarded as a deferrable batch workload
+if its execution is fully contained within the daily scheduling
+horizon and its maximum allowable shifting time intervalλ i
+is at least one time interval.
+Deferrablei ⇐⇒
+
+ajob s
+i ≥1,b job e
+i ≤T,λ i≥1.
+	
+,(1)
+wherea job s
+i andb job e
+i are the start and end times of theith
+job, respectively.
+The remaining jobs within the day are regarded as online
+workloads. To limit excessive workload delays and maintain
+acceptable service quality, we introduce a delay rateγ, which
+allows a batch workload to be delayed by up to an additional
+γDi intervals beyond its original allowable window, whereγ
+can be set based on different service requirements. Thus, we
+can derive the new maximum allowable shifting time interval
+λnew
+i =λ i +γD i.(2)
+C. Averaging-based Resource Usage Processing Method
+After identifying the deferrable jobs and defining the unified
+time resolutionδ, the original resource usage traces must be
+mapped to the corresponding scheduling intervals. Thus, the
+averaging-based data processing method is proposed.
+AI workloads typically consume multiple computing re-
+sources, including CPU, GPU, and memory. We assume that
+the resource usage attributed to an instance is constant during
+its execution time and equal to that allocated by the scheduler.
+For each instancej, the overlap between workload execution
+interval and each time intervaltis calculated as
+∆j,t = min(bins e
+j ,tδ)−max(a ins s
+j ,(t−1)δ),(3)
+wherea ins s
+j andb ins s
+j are the start and end times of the
+instancej, respectively.
+The averaged resource usage of instancejat time interval
+tis then computed as
+nre
+j,t =n re
+j ∆j,t/δ,(4)
+whereredenotes the one of the resource type of setRE=
+{CPU,GPU,memory}.
+Lastly, if multiple instances of the same job overlap with
+the same time interval, they would be aggregated. Therefore,
+the averaged resource usage of jobiat time intervaltcan be
+derived as follows
+nre
+i,t =
+X
+j∈Ji
+nre
+j,t.(5)
+III. FLEXIBILITYMODEL OFBATCHWORKLOADS
+In this section, the batch workload flexibility model is
+proposed, including the batch workloads shifting model and
+the data center IT power consumption model.
+
+=== PDF PAGE 3 ===
+A. Batch Workloads Shifting Model
+A batch workloadiis described by
+{ti,s,t i,e,D i,λ new
+i ,n CPU
+i ,n GPU
+i ,n memory
+i }, denoting its
+submission time interval, end time interval, execution
+duration, maximum allowable shifting time interval, and
+CPU, GPU and memory resource demand, respectively. For
+workloadi, its execution schedule is represented by a binary
+variablez i,k, wherez i,k = 1indicates that jobistarts at
+feasible time intervalk, andz i,k = 0otherwise.
+Considering the non-preemptive nature of the workloads,
+once a workload starts execution, it cannot be interrupted.
+Thus, each job must select exactly one feasible starting time,
+zi,k should satisfy the following constraint:
+X
+k∈Ki
+zi,k = 1,∀i∈I off,(6)
+whereK i ={0,1,...,λ new
+i }is the set of all feasible starting
+times of jobi;I off represents the set of all batch workloads.
+B. Power Consumption Model of Servers
+To evaluate the potential flexibility of servers, an estimated
+power consumption is required. After job submission, the
+schedulers dynamically assigns workloads to servers with
+sufficient available resources. In this paper, we assume that
+job schedulers use the predefined scheduling algorithm. The
+resource demand assigned to serversat time intervaltconsist
+of two components: online and offline workloads.
+ure
+s,t=k+r =
+X
+i∈Ioff
+wre
+s,i,rnre
+i,rzi,k +
+X
+i∈Ion
+ure
+s,i,r,(7)
+wherew re
+s,i,r denotes weights of jobi’s resource demand at
+time intervalrassigned to servers;r∈ R={1,...,D i}
+denotes the relative execution interval of jobi.
+The CPU, GPU and memory usage of each server must
+not exceed its corresponding resource capacity. The resource
+constraints in job scheduling decisions are described below.
+0≤u re
+s,t≤N re
+s ,(8)
+whereN re
+s is the available resource capacity of servers.
+For conventional CPU-dominated data centers, server power
+consumption is often estimated primarily from CPU utilization
+[13]. However, GPU utilization cannot be omitted in AI data
+centers, thus, we adopt the linear server power model in
+which power is approximately proportional to the utilization
+of CPU/GPU/memory resources. The objective is to obtain
+a workload-level estimate of electrical demand rather than
+a hardware-accurate server power model. Thus, the instanta-
+neous power consumption of server at time intervaltcan be
+calculated as follows
+P ser
+s,t =P idle
+s +
+X
+re∈RE
+C re
+s ure
+s,t/N re
+s ,(9)
+whereP ser
+s,t is the power consumption of servers;P idle
+s is the
+idle power of servers;C re
+s is the rated resource power.
+Finally, aggregating all physical servers to obtain the data
+center IT power load at time intervaltas follows
+P IT
+t =
+X
+s∈St
+P ser
+s,t,(10)
+whereS t is the set of active servers at time intervalt.
+IV. GRIDDEMANDFLEXIBILITYASSESSMENT
+FRAMEWORK
+To comprehensively characterize the workload demand flex-
+ibility, two optimization frameworks are developed to evaluate
+two operating capabilities: short-term peak demand shaving
+and sustained power reduction.
+A. Short-Term Peak Demand Shaving
+Short-term peak demand shaving focuses on the data cen-
+ter’s ability to rapidly reduce its power consumption during a
+critical high-demand period. The objective is to quantify the
+maximum grid demand flexibility by scheduling the minimum
+number of batch workloads.
+Let the requested grid-service event begin att 0 and last for
+Devt intervals. DefineT evt ={t 0,t 0 + 1,...,t 0 +D evt}. The
+number of controlled jobs in the assessment framework should
+be as small as possible, thus, we define a binary variablec i,
+wherec i = 1indicates that jobiis shifted from its original
+starting timek 0
+i , andc i = 0otherwise.
+Thus, the optimization problem can be modeled as follows
+min−F+α
+X
+i∈Ioff
+ci (11)
+s.t.(1)−(10),(12)
+ci = 1−z i,k0
+i
+,∀i∈I off,(13)
+F≤P orig
+t −P DC
+t , F≥0,∀t∈T evt,(14)
+whereFis the guaranteed grid-compatible flexibility;αis
+a coefficient that controls the trade-off, and the value ofα
+is set to 0.01 so that maximizingFremains the dominant
+objective, while the number of shifted workloads is minimized
+as a secondary consideration.;P orig
+t is the original power
+load of the workload at time intervalt, which is decided
+by the given job arrival traces; constraint (13) depicts the
+relationship betweenc i andz i; constraint (14) is equivalent
+toF= min t∈T evt(P orig
+t −P DC
+t )at the optimum.
+B. Sustained Power Reduction
+The practical value of data-center flexibility depends not
+only on the magnitude of the power reduction, but also on how
+long that reduction can be continuously maintained. Therefore,
+for the sustained duration assessment, the power reduction
+magnitude is fixed atF req, while the duration is optimized.
+We introduce a binary variabley t, wherey t = 1indicates
+that the requested power reduction is provided at time interval
+t, andy t = 0otherwise. To ensure that the selected flexibility
+intervals form a single continuous time block, an additional
+binary variableu t is introduced, whereu t = 1indicates the
+start of a sustained flexibility period, andu t = 0otherwise.
+
+=== PDF PAGE 4 ===
+Thus, the optimization problem can be modeled as
+min−
+X
+t∈T
+yt +α
+X
+i∈Ioff
+ci (15)
+s.t.(1)−(10),(16)
+ci = 1−z i,k0
+i
+,∀i∈I off,(17)
+P dc
+t ≤P ori
+t −F req +M(1−y t),∀t∈T,(18)
+y1≤u 1, yt−y t−1≤u t, t= 2,...,T,(19)X
+t∈T
+ut≤1,(20)
+where constraint (18) depicts the required power reduction
+represented using the linear big-M constraint;Mis the suffi-
+ciently large constant; constraint (19) identifies the beginning
+of a flexibility period; constraint (20) ensures only one contin-
+uous flexibility period is allowed over the scheduling horizon.
+V. NUMERICALRESULTS
+In this section, we conduct numerical experiments to val-
+idate the effectiveness of the proposed model. The workload
+traces are obtained from one day of the Alibaba Cluster Trace
+GPU v2020 dataset [14], containing a total of 7,828 jobs. The
+simulations are implemented in Python using Jupyter 6.3.0
+with Gurobi 13.0.3.
+A. Temporal and Power Characteristics of AI Workloads
+The temporal characteristics of batch and online workloads
+are shown in Fig. 2. As shown in this figure, the blue segments
+represent the waiting time, while the red segments indicate the
+execution time. For batch workloads, a considerable number of
+workloads exhibit non-negligible waiting intervals, indicating
+substantial temporal scheduling flexibility. In contrast, online
+workloads are executed almost immediately after submission
+and therefore contain little or no waiting time. This distinction
+highlights that batch workloads provide significantly greater
+temporal flexibility for workload shifting.
+In addition, Fig. 3 compares the averaged workload power
+profiles at different temporal resolutions. The fine resolution 1-
+s profile captures fluctuations in the original computing traces.
+Asδincreases, the power profiles become smoother, while
+the main daily load trend and peak characteristics remain well
+preserved. These results validate that the proposed averaging-
+based resource usage processing method reduces data gran-
+ularity while retaining the key power demand characteristics
+required for power system analysis and scheduling.
+B. Peak Power Demand Shaving
+The effectiveness of temporal workload shifting for peak
+power demand shaving under different delay rates is illustrated
+in Fig. 4, and the flexibility window is set to 15:00–15:25. The
+original data center power profile exhibits substantial temporal
+variability. Asγincreases, a wider temporal shifting range
+become available for flexible workloads, enabling greater
+reductions in power consumption. The enlarged view around
+the peak period further illustrates that the optimized pro-
+files remain below the original demand during the flexibility
+window. These results demonstrate that temporal workload
+Fig. 2. Submission and execution duration time interval of different workload
+types: (a) batch workload, (b) online workload.
+Fig. 3. Daily IT power profiles under different temporal resolutions.
+Fig. 4. Daily IT power profiles before and after temporal workload shifting.
+flexibility can effectively mitigate short term peak demand
+without directly curtailing workload execution.
+Two cases are considered to evaluate the impact of delay
+rate on workload flexibility. Case 1 considers only GPU power
+demand, whereas Case 2 incorporates the power consumption
+of CPU, GPU and memory resources. As shown in Table
+I, Case 2 consistently achieves higher flexibility across all
+delay rates. In particular, atγ= 1.0, the available flexibility
+increases from21.71kW in Case 1 to32.47kW in Case 2, rep-
+resenting a49.6%increase. Therefore, Case 2 provides a more
+comprehensive representation of workload power demand.
+Table I also shows that increasing the delay rateγgenerally
+enhances the available workload flexibility, withFincreasing
+from 10.76 kW atγ= 0to 32.47 kW atγ= 1.0in Case
+2. This corresponds to an increase in flexibility from about
+2% to 7% of the approximately 540 kW total demand. This
+improvement is accompanied by a larger number of shifted
+workloadsn w and, at higherγ, a longer average shifting time
+tshift, indicating that greater scheduling freedom enables more
+effective load shaving but requires more extensive temporal
+adjustment of workloads.
+
+=== PDF PAGE 5 ===
+TABLE I
+IMPACT OFDELAYRATE ONDATACENTERWORKLOADFLEXIBILITY
+γ Case 1 [11] Case 2
+F(kW)n w tshift (min)F(kW)n w tshift (min)
+0 8.690 33 97.42 10.76 37 90.27
+0.2 14.35 48 57.08 19.01 49 57.14
+0.4 17.35 64 64.14 25.86 70 61.29
+0.6 19.96 64 88.05 28.95 71 82.54
+0.8 21.16 68 119.0 31.17 77 115.7
+1.0 21.71 69 147.1 32.47 78 147.4
+Fig. 5. The power load profiles under different temporal resolutions. (a) 5
+min, (b) 15 min, (c) 60 min
+We further test the workload flexibility under different time
+resolutions, as shown in Fig. 5, with the flexibility window set
+to 15:00–16:00. As the temporal resolution becomes coarser,
+the maximum achievable flexibility decreases because fewer
+workloads can be effectively shifted. This result indicates that
+finer temporal resolutions preserve more workload scheduling
+opportunities and enable greater demand-side flexibility.
+C. Sustained Power Demand Reduction
+The maximum duration under different power reduction
+requirements and delay rates are shown in Table II. For a fixed
+delay rate, increasing the required power reduction shortens
+the duration for which that reduction can be continuously
+maintained. For example, underγ= 0.4, the maximum
+durationD max decreases from 340 min atF req = 10kW
+to 195 min at 15 kW and further to 120 min at 20 kW. A
+similar trend is observed forγ= 0, however,F req = 20ex-
+ceeds the maximum workload flexibility of data center. These
+results highlight an inherent magnitude–duration tradeoff in
+workload-based data center flexibility.
+VI. CONCLUSIONS
+This paper proposes a workload-level framework for as-
+sessing the grid-compatible demand flexibility of AI data
+centers through batch workload shifting. An averaging-based
+data processing method is developed to unify fine-resolution
+CPU, GPU, and memory traces with power system scheduling
+time intervals, and the workload model is coupled with server
+resource and power constraints. Numerical results show that
+greater workload delay tolerance increases short-term peak-
+shaving capability, while finer temporal resolutions preserve
+more scheduling flexibility. The sustained reduction analysis
+further reveals a clear tradeoff between the required power
+reduction and its maximum achievable duration. Overall, the
+proposed framework provides a practical means to quantify
+TABLE II
+MAXIMUMDURATIONUNDERDIFFERENTPOWERREDUCTION
+REQUIREMENTS
+F req (kW)γSustained IntervalD max (min)n w tshift (min)
+10 0 20:10–22:40 150 41 74.76
+0.4 09:55–15:35 340 121 90.74
+15 0 21:45–22:35 50 19 109.7
+0.4 12:25–15:40 195 224 51.09
+20 0 – – – –
+0.4 13:30–15:30 120 68 81.40
+both the magnitude and duration of AI data center demand
+flexibility for power system operation.
+REFERENCES
+[1] X. Chen, X. Wang, A. Colacelli, M. Lee, and L. Xie, “Electricity demand
+and grid impacts of ai data centers: Challenges and prospects,”arXiv
+preprint arXiv:2509.07218, 2025.
+[2] J. Parker, “Emerald AI, google and NVIDIA launch alliance to
+advance flexible AI data centers,” NVIDIA Blog, Sep. 2026, published:
+Sep. 16, 2026. Accessed: Sep. 22, 2026. [Online]. Available:
+https://blogs.nvidia.com/blog/ai-energy-management-alliance/
+[3] “Nvidia and google form AI energy alliance, aiming to transform
+data centers from power hogs into grid flexibility resources,”
+BigGo Finance, Sep. 2026, published: Sep. 16, 2026. Accessed:
+Sep. 22, 2026. [Online]. Available: https://finance.biggo.com/news/
+4a1a78dd-05aa-449a-9d5c-ba607c3ece0c
+[4] C. Williams, P. Colangelo, A. Coskun, E. Levine, A. Neale, C. Roberts,
+S. Sengupta, N. Shirolkar, V . Sivaram, S. Soareset al., “Power-flexible
+ai data centers: A new paradigm for grid-responsive compute,”arXiv
+preprint arXiv:2606.25098, 2026.
+[5] P. Colangelo, A. K. Coskun, J. Megrue, C. Roberts, S. Sengupta,
+V . Sivaram, E. Tiao, A. Vijaykar, C. Williams, D. C. Wilsonet al., “Ai
+data centres as grid-interactive assets,”Nature Energy, vol. 11, no. 2,
+pp. 254–261, 2026.
+[6] S. Qu, K. Duan, Y . Guo, Y . Feng, C. Wang, and Z. Xing, “Real-time
+optimization of the liquid-cooled data center based on cold plates under
+different ambient temperatures and thermal loads,”Applied Energy, vol.
+363, p. 123101, 2024.
+[7] S. Mohammadi, W. Wang, M. C. I. Wada, R. Haghighi, A. Hassan,
+H. Liu, A. Bhatnagar, A. Chen, and W. Su, “Grid integration of ai
+data centers: A critical review of energy storage solutions,”Advances in
+Applied Energy, p. 100291, 2026.
+[8] X. Long, Y . Li, Y . Li, Y . Liu, P. Yang, and Z. Zeng, “Flexible load
+scheduling of hydrogen energy data centers: An efficiency-preferred
+non-convex uncertain optimization approach,”IEEE Transactions on
+Power Systems, 2025.
+[9] J. Han, E. Du, B. Du, Y . Li, J. Guo, N. Zhang, and C. Kang, “Evaluating
+the dispatchable capacity of cross-regional data center clusters toward
+power system operation,”IEEE Transactions on Smart Grid, 2025.
+[10] S. Zhou, M. Zhou, Z. Wu, R. Shen, and G. Li, “Profit-sharing mechanism
+for geo-distributed data centers considering delay tolerance diversity
+in electric-computational coordination,”IEEE Transactions on Industry
+Applications, 2026.
+[11] A. Caprara, Y . Yu, F. Teng, A. Junyent-Ferr ´e, E. Bullich-Massagu ´e, and
+M. Arag¨u´es-Pe˜nalba, “Data center workload flexibility for power system
+demand response: Evidence from alibaba traces,”International Journal
+of Electrical Power & Energy Systems, vol. 178, p. 111940, 2026.
+[12] P. Wang, W. Liu, Y . Yan, Y . Cao, Z. Wang, P. Dehghanian, and Z. Ding,
+“Demand flexibility quantification for data centers: A chance constrained
+bi-level model,”IEEE Transactions on Industry Applications, 2025.
+[13] J. Ma, R. Yao, B. Zhang, Z. Wang, and Y . Yan, “Data-driven flexibility
+capability modeling of internet data center considering task dependency,”
+IEEE Internet of Things Journal, vol. 11, no. 14, pp. 24 538–24 550,
+2024.
+[14] Q. Weng, W. Xiao, Y . Yu, W. Wang, C. Wang, J. He, Y . Li,
+L. Zhang, W. Lin, and Y . Ding, “MLaaS in the wild: Workload analysis
+and scheduling in large-scale heterogeneous GPU clusters,” in19th
+{USENIX}Symposium on Networked Systems Design and Implemen-
+tation ({NSDI}22), 2022.

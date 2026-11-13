@@ -1,0 +1,60 @@
+{
+  "artifact": "battery_storage_cost_reference_v1",
+  "created": "2026-11-11",
+  "purpose": "Reference tables for storage parameters (c^E energy cost per kWh, c^P power cost per kW, eta round-trip efficiency, fixed O&M), derived from NREL ATB and PNNL ESGC cost databases.",
+  "not_an_experiment": true,
+  "sources": {
+    "nrel_atb": {
+      "files": [
+        "data/raw/nrel_atb/v2025.1.0.0/upstream/ATBe.csv",
+        "data/raw/nrel_atb/v2024.4.0.0/upstream/ATBe.csv"
+      ],
+      "technology_filter": "Utility-Scale Battery Storage",
+      "durations_h": [
+        2,
+        4,
+        6,
+        8,
+        10
+      ],
+      "retrieved_via": "OEDI data lake S3 (official ATB distribution host)"
+    },
+    "pnnl_esgc": {
+      "files": [
+        "data/raw/pnnl_esgc/v2024/upstream/ESGC_Cost_Performance_Database_v2024.xlsx"
+      ],
+      "technology_filter": "Lithium-ion LFP",
+      "retrieved_via": "Wayback Machine replay of pnnl.gov (origin host TLS-blocked from this network)"
+    }
+  },
+  "conventions": {
+    "atb_decomposition": "capex_usd_per_kw(h) = c_power_usd_per_kw + h * c_energy_usd_per_kwh (OLS over 2-10 h)",
+    "atb_capex_basis": "$/kW AC, total installed, ATB core metric CAPEX",
+    "pnnl_energy_side": "sum of $/kWh items (DC storage block, BOS, systems integration, EPC, project development)",
+    "pnnl_power_side": "sum of $/kW items (power equipment/PCS, grid integration, construction & commissioning)",
+    "rte": "round-trip efficiency as fraction"
+  },
+  "caveats": [
+    "ATB CAPEX is a modelled bottom-up cost, not a transacted price; scenario/case columns must be kept distinct.",
+    "PNNL 'Point' estimates for 100 MW plants are used; Low/High ranges are retained in the breakdown CSV.",
+    "Neither source splits grid-side network upgrade costs, which belong to c^F and are documented separately."
+  ],
+  "outputs": {
+    "atb_utility_battery_cost_by_duration.csv": {
+      "bytes": 105275,
+      "sha256": "b2ab57eb8a84ea374ae8dad17017b102e4705206bf4055e61d13b2ec4338f95e"
+    },
+    "atb_energy_power_decomposition.csv": {
+      "bytes": 21347,
+      "sha256": "27acdcb02fdad6ef44066a0075a23c84acc4ac8f7198b243a9908cab814299b0"
+    },
+    "pnnl_esgc_lfp_cost_breakdown.csv": {
+      "bytes": 293388,
+      "sha256": "029442f62873dedf31b2e6f670f0007e2d59c5913d7163a72c672d92e39c72c6"
+    },
+    "pnnl_esgc_lfp_energy_power_split.csv": {
+      "bytes": 1959,
+      "sha256": "17d6a0a85b7ee279c61d754fd1b12458e78397f569a3f113232ff0d7b1711de2"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "dataset": "Supplementary data and code for Shift or curtail? How much data-center flexibility is worth depends on the host power grid",
+  "concept_doi": "10.5281/zenodo.22016953",
+  "version": "v2",
+  "version_record_doi": "10.5281/zenodo.22680958",
+  "acquired_date": "2026-11-09",
+  "metadata_api": "https://zenodo.org/api/records/22680958",
+  "archive": {
+    "url": "https://zenodo.org/api/records/22680958/files/src.zip/content",
+    "local_path": "upstream/src.zip",
+    "expected_size_bytes": 1268476882,
+    "observed_size_bytes": 1268476882,
+    "expected_md5": "2bb602b6f4d65a2414516e34681b27af",
+    "observed_md5": "2bb602b6f4d65a2414516e34681b27af",
+    "observed_sha256": "cdab899fca885ece71af027332fa193371fb862a97e4cba935cfcc902953f929",
+    "verification": "whole-archive size, MD5 against the Zenodo record checksum, and ZIP integrity test passed",
+    "zip_entries": 9025,
+    "zip_testzip_result": "no corrupt member"
+  },
+  "metadata_files": [
+    "upstream/README.md",
+    "upstream/LICENSE.txt"
+  ],
+  "contents_observed": [
+    "src/PJM/ (Julia 21-zone model, processed inputs, DATA_SOURCES.md)",
+    "src/Korea/ (Julia model, TOML cases, config matrices)",
+    "src/Plots/ (plotting code, case manifests, PJM result tables)"
+  ],
+  "license": {
+    "software": "MIT",
+    "data_and_documentation": "CC BY 4.0",
+    "third_party_inputs": "Retain original terms; see bundled DATA_SOURCES.md"
+  },
+  "scope": {
+    "tier_shares_and_event_shape_parameters": "Literature model assumptions, not universal utility contract observations",
+    "korea_result_tables_included": false,
+    "pjm_result_tables_included": true,
+    "download_method_note": "Retrieved as eight parallel HTTP range requests from the same official record and assembled locally; the accepted file is byte-identical to the Zenodo checksum.",
+    "downloaded_data_does_not_authorize_or_imply_model_execution": true
+  }
+}

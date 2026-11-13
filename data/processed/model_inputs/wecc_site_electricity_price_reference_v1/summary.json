@@ -1,0 +1,31 @@
+{
+  "artifact": "wecc_site_electricity_price_reference_v1",
+  "created": "2026-11-13",
+  "purpose": "Operating-price benchmark for the three RTS-GMLC areas: Arizona (Phoenix), Nevada (Las Vegas), California (Los Angeles). Used to contrast the electricity-price gap against the PUE/heat-sink advantage when evaluating cross-site workload migration.",
+  "not_an_experiment": true,
+  "sources": {
+    "eia_avgprice_annual": "data/raw/eia_state_electricity/v2026/upstream/avgprice_annual.xlsx",
+    "eia_sales_annual": "data/raw/eia_state_electricity/v2026/upstream/sales_annual.xlsx",
+    "publisher": "U.S. Energy Information Administration, state electricity data (annual, through 2020)"
+  },
+  "conventions": {
+    "price": "average retail price, cents/kWh, 'Total Electric Industry' rows",
+    "sales": "retail sales, million kWh",
+    "region_mapping": {
+      "AZ": "Area 2 / Phoenix (APS territory)",
+      "NV": "Area 1 / Las Vegas (NV Energy)",
+      "CA": "Area 3 / Los Angeles (SCE/LADWP)"
+    }
+  },
+  "caveats": [
+    "EIA state averages blend all utilities in the state; Los Angeles load is served by LADWP plus SCE, and APS/NV Energy tariffs differ from the state average.",
+    "These files end at 2020, which matches the 2020 load and weather series but must not be extrapolated as current prices without a newer vintage.",
+    "State average prices include transmission and distribution charges; a large load's marginal price also depends on its voltage class and contract."
+  ],
+  "outputs": {
+    "eia_industrial_price_az_nv_ca.csv": {
+      "bytes": 825,
+      "sha256": "e29a8b34747147f14364677c44555c9a1dcf11727ae4a444f1f952ee8552b8cb"
+    }
+  }
+}

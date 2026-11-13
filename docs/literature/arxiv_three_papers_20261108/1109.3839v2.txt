@@ -1,0 +1,1514 @@
+=== PDF PAGE 1 ===
+Dynamic Deferral of Workload for Capacity
+Provisioning in Data Centers
+Muhammad Abdullah Adnan∗, Ryo Sugihara†, Yan Ma‡ and Rajesh K. Gupta∗
+∗University of California San Diego, †Amazon.com,‡Shandong University
+Abstract—Recent increase in energy prices has led researchers
+to ﬁnd better ways for capacity provisioning in data centers
+to reduce energy wastage due to the variation in workload.
+This paper explores the opportunity for cost saving utilizing
+the ﬂexibility from the Service Level Agreements (SLAs) and
+proposes a novel approach for capacity provisioning under
+bounded latency requirements of the workload. We investigate
+how many servers to be kept active and how much workload to
+be delayed for energy saving while meeting every deadline. We
+present an ofﬂine LP formulation for capacity provisioning by
+dynamic deferral and give two online algorithms to determine
+the capacity of the data center and the assignment of workload
+to servers dynamically. We prove the feasibility of the online
+algorithms and show that their worst case performance are
+bounded by a constant factor with respect to the ofﬂine formu-
+lation. We validate our algorithms on a MapReduce workload
+by provisioning capacity on a Hadoop cluster and show that the
+algorithms actually perform much better in practice compared
+to the naive ‘follow the workload’ provisioning, resulting in 20-
+40% cost-savings.
+I. I NTRODUCTION
+With the advent of cloud computing, data centers are
+emerging all over the world and their energy consumption
+becomes signiﬁcant; as estimated 61 million MWh per year,
+costing about 4.5 billion dollars [1]. Naturally, energy ef-
+ﬁciency in data centers has been pursued in various ways
+including the use of renewable energy [2], [3] and improved
+cooling efﬁciency [4], [5], [6], etc. Among these, improved
+scheduling algorithm is a promising approach for its broad
+applicability regardless of hardware conﬁgurations. Among
+the attempts to improve scheduling [6], [7], recent effort
+has focussed on optimization of schedule under performance
+constraints imposed by Service Level Agreements (SLAs).
+Typically, a SLA speciﬁcation provides a measure of ﬂexibil-
+ity in scheduling that can be exploited to improve performance
+and efﬁciency [8], [9]. To be speciﬁc, latency is an important
+performance metric for any web-based service and is of
+great interest for service providers who run their services
+on data centers. The goal of this paper is to utilize the
+ﬂexibility from the SLAs for different types of workload
+to reduce energy consumption. The idea of utilizing SLA
+information to improve performance and efﬁciency is not
+entirely new. Recent work explores utilization of application
+deadline information for improving the performance of the
+applications (e.g. see [9], [10]). But the opportunities for
+energy efﬁciency remain unexplored, certainly in a manner
+that seeks to establish bounds on the energy cost from the
+proposed solutions.
+In this paper, we are interested in minimizing the energy
+consumption of a data center under guarantees on latency/
+deadline. We use the deadline information to defer some tasks
+so that we can reduce the total cost for energy consumption
+for executing the workload and switching the state of the
+servers. We determine the portion of the released workload to
+be executed at the current time and the portions to be deferred
+to be executed at later time slots without violating deadlines.
+Our approach is similar to ‘valley ﬁlling’ that is widely used
+in data centers to utilize server capacity during the periods
+of low loads [7]. But the load that is used for valley ﬁlling
+is mostly background/maintenance tasks (e.g. web indexing,
+data backup) which is different from actual workload. In
+fact current valley ﬁlling approaches ignore the workload
+characteristics for capacity provisioning. In this paper, we
+determine how much work to defer for valley ﬁlling in order
+to reduce the current and future energy consumption while
+provably ensuring satisfaction of SLA requirements. Later we
+generalize our approach for more general workloads where
+different jobs have different deadlines.
+This paper makes three contributions. First, we present
+an LP formulation for capacity provisioning with dynamic
+deferral of workload. The formulation not only determines
+capacity but also determines the assignment of workload for
+each time slot. As a result the utilization of each server can be
+determined easily and resources can be allocated accordingly.
+Therefore this method well adapts to other scheduling policies
+that take into account dynamic resource allocation, priority
+aware scheduling, etc.
+Second, we design two optimization based online algo-
+rithms depending on the nature of the deadline. For uniform
+deadline, our algorithm named Valley Filling with Workload
+(VFW(δ)), looks ahead δ slots to optimize the total energy
+consumption. The algorithm uses the valley ﬁlling approach
+to defer some workload to execute in the periods of low loads.
+For nonuniform deadline, we design a Generalized Capacity
+Provisioning (GCP) algorithm that reduces the switching
+(on/off) of servers by balancing the workloads in adjacent
+time slots and thus reduces energy consumption. We prove
+the feasibility of the solutions and show that the performance
+of the online algorithms are bounded by a constant factor with
+respect to the ofﬂine formulation.
+Third, we validate our algorithms using MapReduce traces
+(representative workload for data centers) and evaluate cost
+savings achieved via dynamic deferral. We run simulations to
+deal with a wide range of settings and show signiﬁcant savings
+in each of them. Over a period of 24 hours, we ﬁnd more than
+40% total cost saving for GCP and around 20% total cost
+saving for VFW(δ) even for small deadline requirements. We
+compare the two online algorithms with different parameter
+settings and ﬁnd that GCP gives more cost savings than
+VFW(δ). In order to show that our algorithms work on real
+systems, we perform experiments on a 35 node Hadoop cluster
+and ﬁnd energy savings of ∼6.02% for VFW(δ) and ∼12%
+arXiv:1109.3839v2  [cs.NI]  13 Nov 2012
+
+=== PDF PAGE 2 ===
+(a) Original Workload
+ (b) Batch and Interactive Job
+Fig. 1. Illustration of (a) original workload and (b) distinction between batch
+and small interactive jobs.
+for GCP over a period of 4 hours. The experimental results
+show that the peak energy consumption for the operation of
+a data center can be reduced by provisioning capacity and
+scheduling workload using our algorithms.
+The rest of the paper is organized as follows. Section II
+presents the model that we use to formulate the optimization
+and gives the ofﬂine formulation. In Section III, we present
+the VFW(δ) algorithm for determining capacity and workload
+assignment dynamically when the deadline is uniform. In
+Section IV , we illustrate the GCP algorithm with nonuniform
+deadline. Section V discusses the extension of our algorithms
+for long jobs. In Section VI and VII, we illustrate the
+simulation and experimental results respectively. In Section
+VIII, we describe the state of the art research related to
+capacity provisioning and Section IX concludes the paper.
+II. M ODEL FORMULATION
+In this section, we describe the model we use for capacity
+provisioning via dynamic deferral. We note that the assump-
+tions used in this model are minimal and this formulation
+captures many properties of current data center capacity and
+workload characteristics.
+A. Workload Traces
+To build a realistic model, we need real workload from
+data centers but the data center providers are reluctant to
+publish their production traces due to privacy issues and
+competitive concerns. To overcome the scarcity of publicly
+available traces, efforts have been made to extract summary
+statistics from production traces and workload generators
+based on those statistics have been proposed [11], [12]. For
+the purposes of this paper, we use such a workload generator
+and use the MapReduce traces released by Chen et al [11].
+MapReduce framework is widely used in Data centers and acts
+as representative workload where each of the jobs consists
+of 3 steps of computation: map, shufﬂe and reduce [14].
+Figure 1(a) illustrates the statistical MapReduce traces over
+24 hours generated from real Facebook traces.
+Typically the workload traces consist of a mix of batch and
+interactive jobs. Chen et al. carried out an interactive analysis
+to classify the workload and showed that the workload is
+dominated (∼98%) by small and interactive jobs showing
+signiﬁcant and unpredictable variation with time. Table I
+illustrates the classiﬁcation on the MapReduce traces by k-
+means clustering based on the sizes of map, shufﬂe and reduce
+stages (in bytes) with k = 10 and Figure 1(b) shows the
+distinction in time variation between the long batch jobs and
+TABLE I
+CLUSTER SIZES AND MEDIANS BY k-MEANS CLUSTERING ON THE
+MAPREDUCE TRACE
+# Jobs % Jobs Input Shufﬂe Output
+5691 96.56 15 KB 0 685 KB
+116 1.97 44 GB 15 GB 84 MB
+27 0.46 56 GB 145 GB 16 GB
+23 0.39 123 GB 0 52 MB
+19 0.32 339 KB 0 48 GB
+8 0.14 203 GB 404 GB 3 GB
+5 0.08 529 GB 0 53 KB
+3 0.05 46 KB 0 199 GB
+1 0.02 7 TB 48 GB 101 GB
+1 0.02 913 GB 8 TB 61 KB
+small interactive jobs. To adapt with the large variation in
+the small and interactive workload, valley ﬁlling methods
+have been proposed using the low priority batch jobs to ﬁll
+in the periods of low workload [13]. However, Chen et al.
+have shown that the portion of low priority long jobs ( ∼2%)
+are insufﬁcient to reduce the variation (to smooth) in the
+workload curve [12]. In this paper, we propose valley ﬁlling
+with workload (mix of long and interactive jobs) and devise
+algorithms for capacity provisioning by scheduling jobs under
+bounded latency requirements.
+B. Workload Model
+We consider a workload model where the total workload
+varies over time. The time interval we are interested in is
+t∈{ 0, 1,...,T } whereT can be arbitrarily large. In practice,
+T can be a year and the length of a time slot τ could be
+as small as 2 minutes (the minimum time required to change
+power state of a server). In our model, each job has a deadline
+D (in terms of number of slots) associated with it, where D
+is a nonnegative integer. In other words, a job released at
+time t, needs to be executed within time slot t +D. We ﬁrst
+model for small interactive jobs having length less than τ.
+Later in Section V , we extend our model for mix of jobs with
+arbitrary lengths. Based on the nature of deadlines, we have
+two cases: (i) uniform deadline, when deadline is uniform for
+all the jobs; (ii) non-uniform deadlines, when different jobs
+have different deadlines. In Section II and III, we formulate
+model and algorithm for the case of uniform deadline and the
+non-uniform deadline case is considered in Section IV . Let
+Lt be the amount of workload released at time slot t. Since
+the deadline D is uniform for all the jobs, the total amount
+of work Lt must be executed by the end of time slot t +D.
+Since Lt varies over time, we often refer to it as a workload
+curve.
+We consider data center as a collection of homogeneous
+servers. The total number of servers M is ﬁxed and given
+but each server can be turned on/off to execute the workload.
+We normalize Lt by the processing capability of each server
+i.e. Lt denotes the number of servers required to execute the
+workload at time t. We assume for all t, Lt≤M. Let xi,d,t
+be the portion of the released workload Lt that is assigned to
+be executed at server i at time slot t +d where d represents
+the deferral with 0 ≤ d ≤ D. Let mt be the number of
+active servers during time slot t. Then ∑mt
+i=1
+∑D
+d=0xi,d,t =
+Lt and 0≤xi,d,t≤ 1.
+
+=== PDF PAGE 3 ===
+Letxi,t be the total workload assigned at time t to server i
+andxt be the total assignment at time t. Then we can think of
+xi,t as the utilization of the ith server at time t i.e. 0≤xi,t≤
+1. Thus ∑D
+d=0xi,d,t−d =xi,t and ∑mt
+i=1xi,t =xt. From the
+data center perspective, we focus on two important decisions
+during each time slot t: (i) determining mt, the number
+of active servers, and (ii) determining xi,d,t, assignment of
+workload to the servers.
+C. Cost Model
+The goal of this paper is to minimize the cost (price) of
+energy consumption in data centers. The energy cost function
+consists of two parts: operating cost and switching cost.
+Operating cost is the cost for executing the workload which
+in our model is proportional to the assigned workload. We use
+the common model for energy cost for typical servers which
+is an afﬁne function:
+C(x) = e0 +e1x
+where e0 and e1 are constants (e.g. see [15]) and x is the
+assigned workload (utilization) of a server at a time slot.
+Although we use this general model for cost function, other
+models considering nonlinear parameters such as temperature,
+frequency can easily be adopted in the model which will
+make it a nonlinear optimization problem. Our algorithms
+can be applied for such nonlinear models by using techniques
+for solving nonlinear optimizations as each optimization is
+considered as a single independent step in the algorithms.
+Switching cost β is the cost incurred for changing state
+(on/off) of a server. We consider the cost of both turning on
+and turning off a server. Switching cost at time t is deﬁned
+as follows:
+St =β|mt−mt−1|
+where β is a constant (e.g. see [7], [16]).
+D. Optimization Problem
+Given the models above, the goal of a data center is to
+choose the number of active servers (capacity) mt and the
+dispatching rulexi,d,t to minimize the total cost during [1,T ],
+which is captured by the following optimization:
+minxt,mt
+T∑
+t=1
+mt∑
+i=1
+C(xi,t) +β
+T∑
+t=1
+|mt−mt−1| (1)
+subject to
+mt∑
+i=1
+D∑
+d=0
+xi,d,t =Lt ∀t
+mt∑
+i=1
+D∑
+d=0
+xi,d,t−d≤mt ∀t
+D∑
+d=0
+xi,d,t−d≤ 1 ∀i,∀t
+0≤mt≤M ∀t
+xi,d,t≥ 0 ∀i,∀d,∀t.
+Since the servers are identical, we can simplify the problem
+by dropping the index i for x. More speciﬁcally, for any
+feasible solution xi,d,t, we can make another solution by
+xi,d,t = ∑mt
+i=1xi,d,t/mt (i.e., replacing every xi,d,t by the
+average of xi,d,t for all i) without changing the value of the
+objective function while satisfying all the constraints after
+this conversion. Then we have the following optimization
+equivalent to (1):
+minxt,mt
+T∑
+t=1
+mtC(xt/mt) +β
+T∑
+t=1
+|mt−mt−1| (2)
+subject to
+D∑
+d=0
+xd,t =Lt ∀t
+D∑
+d=0
+xd,t−d≤mt ∀t
+0≤mt≤M ∀t
+xd,t≥ 0 ∀d,∀t.
+where xd,t represents the portion of the workload Lt to be
+executed at a server at time t +d. We further simplify the
+problem by showing that any optimal assignment for (2) can
+be converted to an equivalent assignment that uses earliest
+deadline ﬁrst (EDF) policy (see Figure 2). More formally, we
+have the following lemma:
+Lemma 1: Let x∗
+tr and x∗
+ts be the optimal assignments of
+workload obtained from the solution of optimization (2) at
+timestr andts respectively where ts >t r andts−tr =θ<
+D. If ∃δ with ∑δ−1
+d=0x∗
+d,tr−d⁄= 0 and ∑D
+d=θ+δ+1x∗
+d,ts−d⁄=
+0 for any 0 < δ < (D−θ) then we can obtain another
+assignmentsxe
+tr =x∗
+tr andxe
+ts =x∗
+ts where ∑δ−1
+d=0xe
+d,tr−d =
+0 and ∑D
+d=θ+δ+1xe
+d,ts−d = 0.
+Proof: We prove it by constructing xe
+tr andxe
+ts fromx∗
+tr
+and x∗
+ts. We change the assignments x∗
+d,tr, 0≤d≤ (D−θ)
+and x∗
+d,ts, θ≤d≤D to obtain xe
+tr and xe
+ts as illustrated in
+Figure 2. We now determine δ. Note that all the workloads
+Fig. 2. Assignments can be determined from their release times and EDF
+policy.
+released between (including) time slots ts−D to tr can be
+executed at time tr without violating deadline since tr−D<
+ts−D<t r−δ <tr. Also all the workloads released between
+(including) time slots ts−D totr can be executed at time ts
+without violating deadline since ts−D < tr−δ < tr < ts.
+Hence the new assignment of workloads cannot violate any
+deadline. We determineδ at a point where ∑D−θ
+d=δ+1xe
+d,tr−d =∑D−θ
+d=δ+1x∗
+d,tr−d + ∑D
+d=θ+δ+1x∗
+d,ts−d and ∑δ−1
+d=0xe
+d,tr−d =
+0 and xe
+δ,tr−δ = ∑D−θ
+d=0 x∗
+d,tr− ∑D−θ
+d=δ+1xe
+d,tr−d such that
+xe
+tr = x∗
+tr. Similarly for xe
+ts, we have the new assignment
+as: ∑θ+δ−1
+d=θ xe
+d,ts−d = ∑δ−1
+d=0x∗
+d,tr−d + ∑θ+δ−1
+d=θ x∗
+d,ts−d and∑D
+d=θ+δ+1xe
+d,ts−d = 0 and xe
+θ+δ,ts−θ−δ = ∑D
+d=θx∗
+d,ts−∑θ+δ−1
+d=θ xe
+d,ts−d such that xe
+ts =x∗
+ts.
+According to lemma 1, we do not need both t and d as
+indices of x. We can use the release time t to determine
+
+=== PDF PAGE 4 ===
+(a) Ofﬂine optimal
+ (b) VFW(δ)
+Fig. 3. Illustration of (a) ofﬂine optimal solution and (b) VFW( δ) for
+arbitrary workload generated randomly; time slot length = 2 min, D = 15 ,
+δ = 10.
+the deadline t +D and differentiate between the jobs using
+their deadlines. Thus, we drop the index d of x. At time t,
+unassigned workload from Lt−D toLt is executed according
+to EDF policy while minimizing the objective function. To
+formulate the constraint that no assignment violates any dead-
+line we deﬁne delayed workload lt with maximum deadline
+D.
+lt =
+{
+0 if t≤D,
+Lt−D otherwise.
+We call the delayed curve lt for the workload as deadline
+curve. Thus we have two fundamental constraints on the
+assignment of workload for all t:
+(C1) Deadline Constraint: ∑t
+j=1lj≤ ∑t
+j=1xj
+(C2) Release Constraint: ∑t
+j=1xj≤ ∑t
+j=1Lj
+Condition (C1) says that all the workloads assigned up to
+time t cannot violate deadline and Condition (C2) says that
+the assigned workload up to time t cannot be greater than the
+total released workload up to time t. Using these constraints
+we reformulate the optimization (2) as follows:
+minxt,mt
+T∑
+t=1
+mtC(xt/mt) +β
+T∑
+t=1
+|mt−mt−1| (3)
+subject to
+t∑
+j=1
+lj≤
+t∑
+j=1
+xj≤
+t∑
+j=1
+Lj ∀t
+T∑
+j=1
+xj =
+T∑
+j=1
+Lj
+0≤xt≤mt≤M ∀t
+Since the operating cost function C(.) is an afﬁne function,
+the objective function is linear as well as the constraints.
+Hence it is clear that the optimization (3) is a linear program.
+Note that capacitymt in this formulation is not constrained to
+be an integer. This is acceptable because data centers consists
+of thousands of active servers and we can round the resulting
+solution with minimal increase in cost. Figure 3(a) illustrates
+the ofﬂine optimal solutions for xt and mt for a dynamic
+workload generated randomly. The performance of the optimal
+ofﬂine solution on two realistic workload are provided in
+Section VI.
+III. V ALLEY FILLING WITH WORKLOAD
+In this section, we consider the online case, where at
+any time t, we do not have information about the future
+workload Lt′ for t′ > t. At each time t, we determine the
+xt andmt by applying optimization over the already released
+unassigned workload which has deadline in future D slots.
+Note that the workload released at or before t, can not be
+delayed to be assigned after time slot t +D. Hence we do
+not optimize over more than D + 1 slots. We simplify the
+online optimization by solving only for mt and determine xt
+by makingxt =mt at timet. This makes the online algorithm
+not to waste any execution capacity that cannot be used later
+for executing workload. But the cost due to switching in the
+online algorithm may be higher than the ofﬂine algorithm.
+Thus our goal is to design strategies to reduce the switching
+cost. In the online algorithm, we reduce the switching cost by
+optimizing the total cost for the interval [t,t +D].
+When the deadline is uniform, we can reduce the switching
+cost even more by looking beyond D slots. We do that by
+accumulating some workload from periods of high loads and
+execute that amount of workload later in valleys without
+violating constraints (C1) and (C2). Note that by accumulation
+we do not violate deadline as at each slot, we execute a
+portion of the accumulated workload by swapping with the
+newly released workload by EDF policy. To determine the
+amount of accumulation and execution we use ‘ δ-delayed
+workload’. Thus the online algorithm namely Valley Filling
+with Workload (VFW( δ)) looks ahead δ slots to determine
+the amount of execution. Let lδ
+t be the δ-delayed curve with
+delay of δ slots for 0<δ <D .
+lδ
+t =
+{
+0 if t≤δ,
+Lt−δ otherwise.
+Then we can call the deadline curve as D-delayed curve and
+represent it by lD
+t . We determine the amount of accumulation
+and execution by controlling the set of feasible choices for mt
+in the optimization. For this purpose, we use the δ-delayed
+curve to restrict the amount of accumulation. By having a
+lower bound on mt for the valley (low workload) and an
+upper bound it for the high workload, we control the execution
+in the valley and accumulation in the other parts of the
+curve. Thus in the online algorithm, we have two types of
+optimizations: Local Optimization and Valley Optimization.
+Local Optimization is used to smooth the ‘wrinkles’ (we
+deﬁne wrinkles as the small variation in the workload in
+adjacent slots e.g. see Figure 4) within D consecutive slots
+and accumulate some workload. On the other hand, Valley
+Optimization ﬁlls the valleys with the accumulated workload.
+A. Local Optimization
+The local optimization applies optimization over future
+D slots and ﬁnds the optimum capacity for current slot by
+executing no more than δ-delayed workload. Let t be the
+current time slot. At this slot we apply a slightly modiﬁed
+version of ofﬂine optimization (3) in the interval [t,t +D].
+We apply the following optimization LOPT(lt, lδ
+t , mt−1, M)
+to determinemt in order to smooth the wrinkles by optimizing
+overD consecutive slots. We restrict the amount of execution
+to be no more than the δ-delayed workload while satisfying
+
+=== PDF PAGE 5 ===
+Fig. 4. The curves Lt and lδ
+t and their intersection points. The peak from
+thelδ
+t curve is cut and used to ﬁll the valley of the same curve. The amount
+of workload that is accumulated/delayed is bounded by mtD.
+the deadline constraint (C1).
+minmt (e0 +e1)
+t+D∑
+j=t
+mj +β
+t+D∑
+j=t
+|mj−mj−1| (4)
+subject to
+t∑
+j=1
+lD
+j ≤
+t∑
+j=1
+mj
+t+D∑
+j=1
+mj =
+t∑
+j=1
+lδ
+j
+0≤mk≤M t ≤k≤t +D
+After solving the local optimization, we get the value of
+mt for the current time slot and assign xt = mt. For the
+next time slot t + 1 we solve the local optimization again to
+ﬁnd the values for xt+1 and mt+1. Note that the deadline
+constraint (C1) and the release constraint (C2) are satisﬁed at
+time t, since from the formulation ∑t
+j=1lD
+j ≤ ∑t
+j=1mj≤∑t
+j=1lδ
+j≤ ∑t
+j=1Lj.
+B. Valley Optimization
+In valley optimization, the accumulated workload from the
+local optimization is executed in ‘global valleys’. Before
+giving the formulation for the valley optimization we need
+to detect a valley.
+Letp1,p 2,...,p n be the sequence of intersection points of
+Lt andlδ
+t curves (see Figure 4) in nondecreasing order of their
+x-coordinates (t values). Letp′
+1,p′
+2,...,p ′
+n be the sequence of
+points on lδ
+t with delay δ added with each intersection point
+p1,p 2,...,p n on lδ
+t such that t′
+s =ts +δ for all 1≤s≤n.
+We discard all the intersection points (if any) between ps and
+p′
+s from the sequence such that ts+1≥t′
+s. Note that at each
+intersection point ps, the curve from ps to p′
+s is known. To
+determine whether the curve lδ
+t betweenps andp′
+s is a valley,
+we calculate the area
+A =
+t′
+s∑
+t=ts
+(lδ
+t−lδ
+ts )
+IfA is negative, then we regard the curve between ps andp′
+s
+as a global valley though it may contain several small peaks
+and valleys. If the curve between ps andp′
+s is a global valley,
+we ﬁll the valley with some (possibly all) of the accumulated
+workload by executing more than the δ-delayed workload
+while satisfying the release constraint (C2). For each t, we
+apply the following optimization VOPT( lt, Lt, mt−1, M) in
+the interval [t,t +D] to ﬁnd the value ofmt wherets≤t≤t′
+s.
+minmt (e0 +e1)
+t+D∑
+j=t
+mj +β
+t+D∑
+j=t
+|mj−mj−1| (5)
+subject to
+t∑
+j=1
+lD
+j ≤
+t∑
+j=1
+mj
+t+D∑
+j=1
+mj =
+t∑
+j=1
+Lj
+0≤mk≤M t ≤k≤t +D
+Note that the deadline constraint (C1) and the release con-
+straint (C2) are satisﬁed at timet, since ∑t
+j=1lD
+j ≤ ∑t
+j=1mj
+≤ ∑t
+j=1Lj. We apply the valley optimization (5) for each
+ts ≤ t≤ t′
+s and local optimization (4) for each time slot
+t where t ∈ {[1,T − D− 1]− [ts,t′
+s]} for all ts. For
+each t∈ [T−D,T ] we apply the valley optimization (5)
+for global valley in the interval [t,T ] in order to execute
+all the accumulated workload. Algorithm 1 summarizes the
+procedures for VFW(δ). For each new time slott, Algorithm 1
+detects a valley by checking whether the curves lδ
+t and Lt
+intersects. If t is inside a valley, Algorithm 1 applies valley
+optimization (VOPT); local optimization (LOPT), otherwise.
+Figure 3(b) illustrates the nature of solutions from VFW(δ) for
+xt andmt. Note that δ is a parameter for the online algorithm
+VFW(δ).
+Algorithm 1 VFW(δ)
+1: valley← 0; m0← 0
+2: lD[1 : D]← 0; lδ[1 : δ]← 0
+3: for each new time slot t do
+4: lD[t +D]←L[t]
+5: lδ[t +δ]←L[t]
+6: if valley = 0 and lδ intersects L then
+7: Calculate Area A = ∑t′
+s
+t=ts (lδ
+t−lδ
+ts )
+8: if A< 0 then
+9: valley← 1
+10: end if
+11: else if valley >0 and valley≤δ then
+12: valley←valley + 1
+13: else
+14: valley← 0
+15: end if
+16: if valley = 0 then
+17: m[t :t +D]← LOPT(l[1 : t],lδ[1 : t],mt−1,M)
+18: else
+19: m[t :t +D]← VOPT(l[1 : t],L[1 : t],mt−1,M)
+20: end if
+21: xt←mt
+22: end for
+C. Analysis of the Algorithm
+We ﬁrst prove the feasibility of the solutions from the
+VFW(δ) algorithm and then analyze the competitive ratio of
+this algorithm with respect to the ofﬂine formulation (3). First,
+we have the following theorem about the feasibility.
+
+=== PDF PAGE 6 ===
+Theorem 2: The VFW(δ) algorithm gives feasible solution
+for any 0<δ <D .
+Proof: We prove this theorem inductively by showing that
+the choice of any feasible mt from an optimization applied
+in the interval [t,t +D] do not result in infeasibility in the
+optimization applied in the next time slot [t + 1,t +D + 1].
+Initially, the optimization in VFW(δ) is applied for the interval
+[1,D + 1] with ∑k
+j=1lD
+j = 0 for 1≤ k≤ D. Hence the
+optimization applied in the intervals [1,D + 1] gives feasible
+m1 because ∑k
+j=1lD
+j ≤ ∑k
+j=1lδ
+j≤ ∑k
+j=1Lj for 1≤k≤D.
+Now suppose the VFW(δ) gives feasible mt in an interval
+[t,t +D]. We have to prove that there exists feasible choice
+for mt for the optimization applied at [t + 1,t +D + 1]. The
+deadline constraint (C1) and the release constraint (C2) are
+satisﬁed for mt. Hence, ∑t
+j=1lD
+j ≤ ∑t
+j=1lδ
+j ≤ ∑t
+j=1Lj.
+Since 0 < δ < D, ∑t
+j=1lD
+j ≤ ∑t+1
+j=1lD
+j ≤ ∑t
+j=1lδ
+j ≤∑t+1
+j=1lδ
+j ≤ ∑t
+j=1Lj ≤ ∑t+1
+j=1Lj. Thus for any feasible
+choice ofmt, we can always obtain feasible solution formt+1
+such that the above inequality holds.
+We now analyze the competitive ratio of the online algo-
+rithm with respect to the ofﬂine formulation (3). We denote the
+operating cost of the solution vectors X = (x1,x 2,...,x T )
+and M = (m1,m 2,...,m T ) by costo(X,M ) = ∑T
+t=1mt·
+C(xt/mt), switching cost by costs(X,M ) = β ∑T
+t=1|mt−
+mt−1| and total cost by cost(X,M ) = costo(X,M ) +
+costs(X,M ). We have the following lemma.
+Lemma 3: costs(X,M )≤ 2β ∑T
+t=1mt
+Proof: Switching cost at time t isSt =β|mt−mt−1|≤
+β(mt + mt−1), since mt ≥ 0. Then costs(X,M ) ≤ β·∑T
+t=1(mt +mt−1)≤ 2β ∑T
+t=1mt where m0 = 0.
+Let X∗ and M∗ be the ofﬂine solution vectors from
+optimization (3). The following theorem proves that the
+competitive ratio of the VFW( δ) algorithm is bounded by a
+constant with respect to the ofﬂine formulation (3).
+Theorem 4: cost(X,M )≤ e0+e1+2β
+e0+e1
+cost(X∗,M∗).
+Proof: Since the ofﬂine optimization assigns all the work-
+load in the [1,T ] interval, ∑T
+t=1x∗
+t = ∑T
+t=1Lt≤ ∑T
+t=1m∗
+t ,
+where we used x∗
+t ≤ m∗
+t for all t. Hence cost(X∗,M∗)≥
+costo(X∗,M∗) = ∑T
+t=1m∗
+tC(x∗
+t/m∗
+t ) = ∑T
+t=1(e0m∗
+t +
+e1x∗
+t )≥ ∑T
+t=1(e0 +e1)Lt.
+In the online algorithm, we set xt = mt and ∑t
+j=1mj
+≤ ∑t
+j=1Lj for all t∈ [1,T ]. Hence by lemma 3, we have
+cost(X,M ) = costo(X,M ) + costs(X,M )≤ ∑T
+t=1(e0 +
+e1)mt + 2β ∑T
+t=1mt≤ (e0 +e1) ∑T
+t=1Lt + 2β ∑T
+t=1Lt =
+(e0 +e1 + 2β) ∑T
+t=1Lt.
+IV. G ENERALIZED CAPACITY PROVISIONING
+We now consider the general case where the deadline
+requirements are not same for all the jobs in a workload.
+Let ν be the maximum possible deadline. We decompose
+the workload according to their associated deadline. Suppose
+Ld,t≥ 0 be the portion of the workload released at time t
+and has deadline d for 0≤d≤ν. We have ∑ν
+d=0Ld,t =Lt.
+The workload to be executed at any time slot t can come
+from different previous slots t− d where 0 ≤ d ≤ ν as
+illustrated in Figure 5(a). Hence we redeﬁne the deadline
+curve lt and represent it by l′
+t. Assuming Ld,t = 0 if t≤ 0,
+we deﬁne l′
+t = ∑ν
+d=0Ld,(t−d). Then the ofﬂine formulation
+Fig. 5. Illustration of workload with different deadline requirements. (a)
+workload released at different times have different deadlines, (b) the delayed
+workload l′
+t, may increase the switching cost due to large variation, (c)
+distribution of workload in adjacent slots by GCP to reduce the variation
+in workload.
+remains the same as formulation (3) with the deadline curve
+lt replaced by l′
+t.
+minxt,mt
+T∑
+t=1
+mtC(xt/mt) +β
+T∑
+t=1
+|mt−mt−1| (6)
+subj. to
+t∑
+j=1
+l′
+j≤
+t∑
+j=1
+xj≤
+t∑
+j=1
+Lj ∀t
+T∑
+j=1
+xj =
+T∑
+j=1
+Lj
+0≤xt≤mt≤M ∀t
+We now consider the online case. Delaying the workload up
+to their maximum deadline may increase the switching cost
+since it may increase the variation in the workload compared
+to the original workload (see Figure 5(b)). Hence at each time
+we need to determine the optimum assignment and capacity
+that reduces the switching cost from the original workload
+while satisfying each individual deadline. We can apply the
+VFW(δ) algorithm from the previous section with D =Dmin
+where Dmin is the minimum deadline for the workload. If
+Dmin is small, VFW( δ) does not work well because δ <
+Dmin becomes too small to detect a valley. Hence we use a
+novel approach for distributing the workload Lt over the Dt
+slots such that the change in the capacity between adjacent
+time slots is minimal (see Figure 5(c)). We call this algorithm
+as Generalized Capacity Provisioning (GCP) algorithm.
+In the GCP algorithm, we apply optimization to determine
+mt at each time slot t and make xt =mt. The optimization
+is applied over the interval [t,t +ν] since at time slot t we
+can have workload that has deadline up to t +ν slots. Hence
+at each time t, the released workload is a vector of ν + 1
+dimension. Let, Lt = (L0,t,L 1,t,...,L ν,t) where Ld,t = 0
+if there is no workload with deadline d at time t. Let yt
+be the vector of unassigned workload released up to time
+t. The vector yt is updated from yt−1 at each time slot
+by subtracting the capacity mt−1 and then adding Lt. Note
+that mt−1 is subtracted from the vector yt−1 in order to use
+unused capacity to execute already released workload at time
+t−1 by following EDF policy (see lines 4-17 in Algorithm 2).
+Let y′
+t−1 = (y′
+0,t−1,y′
+1,t−1,y′
+2,t−1,...,y ′
+ν,t−1) be the vector
+after subtracting mt−1 with y′
+0,t−1 = 0 and y′
+j,t−1≥ 0 for
+1≤ j≤ ν. Then yt = Lt + (y′
+1,t−1,y′
+2,t−1,...,y ′
+ν,t−1, 0)
+where yt = (0, 0,..., 0) if t <= 0 . Then the optimization
+GCP-OPT(yt, mt−1, M) applied at each t over the interval
+
+=== PDF PAGE 7 ===
+Algorithm 2 GCP
+1: y[0 : ν]← 0
+2: m0← 0
+3: for each new time slot t do
+4: uc←mt−1{uc represents the unused capacity}
+5: fori = 0 to ν do
+6: if uc≤ 0 then
+7: y′[i]←y[i]
+8: else
+9: uc←uc−y[i]
+10: if uc≤ 0 then
+11: y′[i]←−uc
+12: else
+13: y′[i]← 0
+14: end if
+15: end if
+16: end for
+17: y[0 : ν] ={y′[1 : ν], 0} +Lt[0 : ν]
+18: m[t :t +ν]← GCP-OPT(y[0 : ν], mt−1, M)
+19: xt←mt
+20: end for
+[t,t +ν] is as follows:
+minmt (e0 +e1)
+t+ν∑
+j=t
+mj +β
+t+ν∑
+j=t
+|mj−mj−1| (7a)
+subject to
+ν∑
+j=0
+mt+j =
+ν∑
+j=0
+yj,t (7b)
+j∑
+k=0
+mt+k≥
+j∑
+k=0
+yk,t 0≤j≤ν− 1 (7c)
+0≤mt+j≤M 0≤j≤ν (7d)
+Note that the optimization (7) solves for ν + 1 values. We
+only use mt as the capacity and assignment of workload at
+timet. Algorithm 2 summarizes the procedures for GCP. The
+GCP algorithm gives feasible solutions because it works with
+the unassigned workload and constraint (7c) ensures deadline
+constraint (C1) and constraint (7b) ensures the release con-
+straint (C2). The competitive ratio for the GCP algorithm is
+same as the competitive ratio for VFW( δ) because in GCP,
+mt =xt and release constraint (C2) holds at every t making∑T
+t=1mt = ∑T
+t=1xt≤ ∑T
+t=1Lt.
+V. E XTENSION FOR LONG JOBS
+In this section, we extend our model for ‘Long Jobs’. By
+long jobs we mean the jobs that have length greater than the
+time slot length τ and each of which has a given deadline
+requirement greater than its length. To extend the model for
+long jobs we estimate the length of the long jobs, decompose
+the long jobs into small pieces ( ≤τ) and assign deadline to
+each of them.
+A. Estimation of Execution Time
+If all the jobs are short interactive jobs with execution time
+less than the time-slot length, then we do not need to estimate
+the completion time of the jobs. But for a mix of short and
+long jobs we need estimation.
+Since our targeted workload is MapReduce, we present
+a method for estimating execution time of a MapReduce
+job. The MapReduce performance model is illustrated in
+Fig. 6. MapReduce Performance Model.
+Figure 6. A MapReduce job J is deﬁned in [18] as a 7 tuple
+(S,S′,S′′,X,Y,f (x),g (x)), whereS is the size of map input
+data;S′ is the size of intermediate shufﬂe data; S′′ is the size
+of output reduce data; X is the number of mappers that J is
+divided into; Y is the number of reducers assigned for J to
+output; f (x) is the running time of a mapper with input size
+x; g(x) is the running time of a reducer with input size x.
+We compute the number of map and reduce tasks by dividing
+the input size S and output size S′′ by the HDFS (Hadoop
+Distributed File System) block size respectively. Let Vi, Vo
+and Vn be the data read rate, data output rate and network
+transfer rate respectively. Then the execution times of map,
+shufﬂe and reduce tasks can be estimated by the following
+equations [18].
+Tm = S
+XVi
++f (S
+X ) + S′
+XVo
+Ts = S′
+XYV n
+Tr =g(S′
+Y ) + S′′
+YVo
+The map and reduce tasks run in parallel and may need
+several rounds to ﬁnish if the total number of available task
+slots is less than the number of mappers or reducers. If at most
+M mappers andR reducers are completed at each round, then
+the number of rounds of map and reduce tasks are λm =
+⌈X/M⌉ and λr = ⌈Y/R⌉ respectively. Based on whether
+the reducers have to wait for data transfer to complete, we
+have two cases. If tm≥Mts, reducers have to wait for data
+transfers to complete and when tm < Mts, reducers do not
+need to wait for completion of mappers except during the ﬁrst
+round. Then the estimated execution time for job J is,
+TJ =
+{
+Tm +λr(XTs +Tr), Tm <MTs
+λmTm +MTs +λr(XTs +Tr), Tm≥MTs
+B. Decomposition and Deadline Assignment
+The long jobs can be preemptive and non-preemptive.
+Based on these two types we have two ways to decompose
+and assign deadlines to them.
+Preemptive Jobs: LetJ be a preemptive job with execution
+timeTJ (> τ), release time tJ and deadline D (in terms of
+number of slots). Then the length of the job J is𝓁 =⌈TJ/τ⌉
+
+=== PDF PAGE 8 ===
+time slots. Since the job is preemptive, we safely decompose
+it into small pieces J1,J 2,...J 𝓁 whereTJi ≤ τ for 1 ≤
+i≤𝓁. We assign the deadline for each of the small pieces to
+⌊D/𝓁⌋− 1 (see Figure 7(a)). We set the release time of the
+ﬁrst piece tJ1 =tJ and the release times of the other pieces
+to tJi = tJi−1 +⌊D/𝓁⌋ for 1 < i≤ 𝓁. Since a piece Ji is
+released after its preceding piece Ji−1, this technique satisﬁes
+any precedence constraint the particular job may have.
+(a) Preemptive Jobs
+ (b) Non-preemptive Jobs
+Fig. 7. Release times and deadlines for pieces of Long Jobs.
+Non-preemptive Jobs: To make scheduling decision for a
+job J, we consider it to be consisting of J1,J 2,...J 𝓁 small
+pieces whereTJi =τ for 1≤i<𝓁 andTJ𝓁≤τ. We schedule
+the ﬁrst chunk J1 with deadline D−𝓁 and suppose that our
+algorithm schedules it at time t′
+J1 (see Figure 7(b)). Then we
+assign the release time of the other pieces Ji for 1 < i≤ 𝓁
+to be tJi = t′
+Ji−1 + 1 and assign deadline D = 0 for each
+of them. Since the deadline is zero for the later pieces and
+they are released as soon as the previous piece ﬁnishes, the
+algorithm ensures enough capacity for the execution of the
+job without preemption.
+VI. S IMULATION
+In this section, we evaluate the cost incurred by the VFW(δ)
+and GCP algorithm relative to optimal solution in the context
+of workload generated from realistic data. First, we motivate
+our evaluation by a detailed analysis of simulation results.
+Then in Section VII, we validate the simulation results by
+performing experiments on a Hadoop cluster.
+A. Simulation Setup
+We use realistic parameters in the simulation setup and
+provide conservative estimates of cost savings resulting from
+our proposed VFW(δ) and GCP algorithms.
+Cost benchmark: Currently data centers typically do not
+use dynamic capacity provisioning based on the variation of
+the workload [7]. A naive approach for capacity provisioning
+is to follow the workload curve and determine the capacity and
+assignment of workload accordingly. Clearly it is not a good
+approach because for capacity provisioning it does not take
+into account the cost incurred due to switching. Yet this is a
+very conservative estimate as it does not waste any execution
+capacity and meets all the deadline. We compare the total
+cost from the VFW( δ) and GCP algorithms with the ‘follow
+the workload’ (x = m = L) strategy and evaluate the cost
+reduction.
+Cost function parameters: The total cost is characterized
+by e0 and e1 for the operating cost and β for the switching
+cost. In the operating cost, e0 represents the proportion of
+the ﬁxed cost and e1 represents the load dependent energy
+consumption. The energy consumption of the current servers
+is dominated by the ﬁxed cost [17]. Therefore we choose
+(a) Workload A
+ (b) Workload B
+Fig. 8. Illustration of the MapReduce traces as dynamic workload used in
+the experiments. The active jobs are shown with job length estimation.
+e0 = 1 ande1 = 0. The switching cost parameterβ represents
+the wear-and-tear due to changing power states in the servers.
+We choose β = 12 for slot length of 5 minutes such that it
+works as an estimate of the time a server should be powered
+down (typically one hour [7], [16]) to outweigh the switching
+cost with respect to the operating cost.
+Workload description: We use two publicly available
+MapReduce traces as examples of dynamic workload. The
+MapReduce traces were released by Chen et al. [11] which are
+produced from real Facebook traces for one day (24 hours)
+from a cluster of 600 machines. We count the number of
+different types of job submissions over a time slot length of
+5 minutes to ﬁnd the released workload curve (Figure 8). We
+then use the length estimation to ﬁnd the actual workload
+curve showing active jobs over time and use that as a dynamic
+workload (Figure 8) for simulation. The two samples we use
+represent strong diurnal properties and have variation from
+typical workload (Workload A) to bursty workload (Workload
+B). The released jobs will be delayed to reduce the variations
+in the active workload curve.
+Length estimation parameters: Since we do not know any
+parameters from the Facebook cluster, we assume that the
+cluster has enough task slots so that all the map and reduce
+tasks are completed in the ﬁrst round. Hence λm = 1 and
+λr = 1 . HDFS block size is typically 128MB. So X =
+⌈ S
+128MB⌉ and Y =⌈ S′′
+128MB⌉. We assume f (x) and g(x) to
+be linear, f (x) = α1x and g(x) = α2x where α1 = 0.8s/MB
+andα2 = 0.9s/MB [18]. We use typical values for data rates,
+Vi = 100 MB/s, Vo = 100 MB/s and Vn = 10 MB/s [8],
+[18]. For our experiments, we consider the jobs to be non-
+preemptive. Hence we do not need to decompose the jobs and
+only assign deadlines to them. Figure 8 shows the variation
+in active workload over time with estimation of job lengths.
+Deadline assignment: For VFW( δ), the deadline D is
+uniform and is assigned in terms of number of slots the
+workload can be delayed. For our simulation, We varyD from
+1− 12 slots which gives latency from 5 minutes upto 1 hour.
+This is realistic as deadlines of 8-30 minutes for MapReduce
+workload have been used in the literature [9], [23]. For GCP,
+we use k-means clustering to classify the workload into 10
+groups based on the map, shufﬂe and reduce bytes (S,S′,S′′).
+The characteristics of each group are depicted in Table II.
+From Table II, it is evident that smaller jobs dominate the
+workload mix, as discussed in Section IIA. For each new
+class of jobs we assign a deadline from 1− 10 slots such
+that smaller class has larger deadline and larger class of jobs
+has smaller deadline. The deadline for a job should not be
+
+=== PDF PAGE 9 ===
+TABLE II
+CLUSTER SIZES AND DEADLINES FOR WORKLOAD CLASSIFICATION FOR GCP
+Cluster Workload A Workload B Deadline
+# Jobs % Jobs S (MB) S′ (MB) S′′ (MB) # Jobs % Jobs S (MB) S′ (MB) S′′ (MB) (# slots)
+1 5691 96.56 0.02 0.00 0.67 6313 95.10 0.02 0.00 0.48 1
+2 116 1.97 44856.77 15493.69 83.89 223 3.36 39356.46 6594.93 99.26 2
+3 27 0.46 57121.85 148012.87 16090.40 41 0.62 110076.24 282.08 1.60 3
+4 23 0.39 125953.59 0.00 51.89 25 0.38 379363.01 0.00 521.45 4
+5 19 0.32 0.33 0.00 49045.29 16 0.24 0.04 0.00 40355.53 5
+6 8 0.14 207984.10 414045.45 3095.56 7 0.11 132529.27 383548.19 31344.38 6
+7 5 0.08 541522.77 0.00 0.05 4 0.06 258152.65 1020741.05 22631.52 7
+8 3 0.05 0.05 0.00 203880.59 3 0.05 0.29 0.00 311410.40 8
+9 1 0.02 7201446.27 48674.26 0.10 3 0.05 1182734.09 3.93 0.01 9
+10 1 0.02 934594.27 8413335.44 0.06 3 0.05 0.56 0.00 622103.12 10
+(a) Workload A
+ (b) Workload B
+Fig. 9. Impact of deadline on cost incurred by GCP-U, Ofﬂine and VFW( δ)
+with δ =D/2.
+less than the length of a job. If the assigned deadline is less
+than the job length, we update the deadline to be equal to the
+length of the job.
+B. Analysis of the Simulation
+We now analyze the impact of different parameters on cost
+savings provided by VFW( δ) and GCP. We then compare
+VFW(δ) and GCP for uniform deadline (GCP-U).
+Impact of deadline: The ﬁrst parameter we study is the
+impact of different deadline requirements of the workload on
+the cost savings. Figure 9 shows that even for deadline D
+as small as 2 slots, the cost is reduced by ∼40% for GCP-
+U,∼20% for VFW( δ) while the ofﬂine algorithm gives a
+cost saving of ∼60% compared to the naive algorithm. It
+also shows that for all the algorithms, large D gives more
+cost savings as more workload can be delayed to reduce
+the variation in the workload. As D grows larger the cost
+reduction from GCP-U and VFW( δ) approaches ofﬂine cost
+saving which is as much as 70%. For VFW(δ), the cost saving
+is always less than GCP-U for both the workload.
+Impact of δ for VFW(δ): The parameter δ is used as a
+lookahead to detect a valley in the VFW( δ) algorithm. If δ
+is large, valley detection performs well but it may be too
+late to ﬁll the valley due to the deadlines. On the other hand
+if δ is small, valley detection does not work well because
+the capacity has already gone down to the lowest value.
+Figure 10 illustrates the valley detection for small δ and large
+δ. Although the cost savings from VFW( δ) largely depends
+on the nature of the workload curve, Figure 11 shows that
+δ∼D/2 is a conservative estimate for better cost savings.
+Performance of GCP: We evaluated the cost savings from
+GCP by assigning different deadline by classifying the work-
+load as shown in Table II. For conservative estimates of
+deadline requirements (1-10), we found 47.66% cost reduction
+Fig. 10. Valley detection for (a) small δ and (b) large δ for VFW(δ).
+(a) Workload A
+ (b) Workload B
+Fig. 11. Impact of δ for VFW(δ) with deadline D = 12.
+for Workload A and 45.65% cost reduction for Workload B
+each of which remains close to the ofﬂine optimal solutions.
+Comparision of VFW( δ) and GCP: We compare GCP
+for uniform deadline (GCP-U) with VFW( δ) for δ = D/2.
+Figure 9 illustrates the cost reduction for VFW( δ) and GCP-
+U with different deadlinesD = 1−12. For both the workload,
+GCP-U performs better than VFW( δ). However for some
+workload, valley ﬁlling with workload as in VFW( δ) can be
+more beneﬁcial than provisioning capacity for D consecutive
+slots as in GCP. Hence we conclude that the comparative
+performance of the online algorithms depends largely on the
+nature of the workload. Since both the algorithms are based
+on linear program, they take around 10-12ms to compute
+schedule at each step.
+VII. E XPERIMENTATION
+In this section, we validate our algorithms on MapReduce
+workload by provisioning capacity on a Hadoop cluster. We
+evaluate the cost-savings by energy consumption calculated
+from common power model using different measured metrics.
+A. Experimental Setup
+We setup a Hadoop cluster (version 0.20.205) consisting
+of 35 nodes on Amazon’s Elastic Compute Cloud (EC2)
+
+=== PDF PAGE 10 ===
+[19], [20]. Each node in the cluster is a small instance
+with 1 virtual core, 1.7 GB memory, 160 GB storage. We
+conﬁgured one node as master and four core nodes to contain
+the Hadoop DFS and the other 30 nodes as task nodes.
+The provisioning is done on the task nodes dynamically. We
+used the Amazon Elastic MapReduce service for provisioning
+capacity on the Hadoop cluster. Amazon Elastic MapReduce
+takes care of provisioning machines and migration of tasks
+between machines while keeping all data available. We used
+the Statistical Workload Injector for MapReduce (SWIM) [11]
+to generate the MapReduce workload for our cluster using
+the Facebook traces from Figure 8(a). We run our experiment
+for 4 hours with slot length of 5 minutes. For the traces of
+Figure 8(a), 602 jobs were released in the ﬁrst 48 slots.
+We ﬁrst schedule the jobs and provision the task nodes
+by the ‘follow the workload’ strategy. We then schedule the
+same jobs and provision the task nodes using our algorithms as
+illustrated in Figure 12. In order to make comparison between
+VFW(δ) and GCP algorithms we used a uniform deadline of
+10 minutes (D = 2). In each of the experiments, we measured
+the seven metrics (available from Amazon Cloudwatch) for
+each of the ‘running’ nodes in each time slot over the time
+interval of 4 hours and 10 minutes (50 slots). In the last 2 slots,
+the capacity of the task nodes were provisioned to zero for the
+‘follow the workload’ algorithm while our algorithms execute
+the delayed workload in those slots. All the jobs released
+in the ﬁrst 48 slots were completed before the end of 50th
+slot. The seven metrics that are available for measurement
+for each virtual machines are: CPUUtilization, DiskRead-
+Bytes, DiskReadOps, DiskWriteBytes, DiskWriteOps, Net-
+workIn and NetworkOut.
+B. Experimental Results
+We now discuss the results from the experimentation and
+compare the energy consumption between different algo-
+rithms.
+Power Metering: We use the general power model to
+evaluate energy consumption for the algorithms [21], [22].
+The energy consumed by a virtual machine is represented
+as the sum of the energy consumption for utilization, disk
+operations and network IO,
+Evm(T ) = Eutil,vm(T ) +Edisk,vm(T ) +Enet,vm(T ) (8)
+where the energy consumption is over the duration T . The
+energy consumption for each of the components over a time
+slot t (of length τ) can be computed by the following
+equations.
+Eutil,vm(t) =αcpuucpu(t) +γcpu (9)
+Edisk,vm(t)=αrbbr(t) +αwbbw(t)
++αronr(t) +αwonw(t) +γdisk
+Enet,vm(t) =αnibin(t) +αnobout(t) +γnet
+where ucpu(t) is the average utilization, br(t) and bw(t) are
+the total bytes read and written to disk, nr(t) and nw(t) are
+the total number of disk read and writes andbin(t) andbout(t)
+are the total bytes of network IO for the virtual machine over
+the time interval t. Since the difference in energies for disk
+read and write and network input and output are negligible
+[21], we use common parameters bdb(t), bdo(t), and bnet(t)
+by taking the sum of the respective values. We normalize each
+of these values with their respective maximum values (in the
+interval T ) so that each of these become a fraction between
+0 and 1 and can be put in equation (8),
+Evm(t)=αcpuucpu(t) +γcpu (10)
++αdiskudisk(t) +γdisk +αdopsudops(t) +γdops
++αnetunet(t) +γnet
+whereudisk(t),udops(t) andunet(t) represent the normalized
+values of bdb(t), bdo(t), and bnet(t) respectively. If mt ma-
+chines are active at time slott, then the total energy consumed
+over the time interval T can be computed using the following
+equation:
+E(T ) =
+T∑
+t=1
+mt∑
+i=1
+Ei(t)∗ τ
+3600 Watt-hour (11)
+where Ei(t) is the energy consumed at machine i over time
+slot t. To compute energy consumption, we used parameters
+from [22] listed in Table III. Typical values are used for
+cpu utilization, disk I/O and network I/O. Idle disk/network
+powers are negligible with respect to dynamic power and scale
+of workload.
+TABLE III
+POWER MODEL PARAMETERS
+Parameter Comment Value
+αcpu Scaling factor: Utilization 25.70
+αdisk Scaling factor: Disk Rd/Wr. 7.21
+αdops Scaling factor: Disk Op. 0
+αnet Scaling factor: Network IO 0.66
+γcpu Idle cpu power consump. 60.30
+γdisk, γdops Idle disk power consump. 0
+γnet Idle network power consump. 0
+The total energy consumption and the % reduction with
+respect to ‘follow the workload’ in each of the metrics
+for different schedules are illustrated in Table IV. For the
+period of 4 hours 10 minutes (50 slots), GCP algorithm gives
+energy reduction of ∼12% which is signiﬁcantly better than
+the reduction of ∼6.02% from the VFW( δ) algorithm. The
+reductions from both the algorithms are far better with respect
+to workload schedule without provisioning. Table IV also
+shows that variation in CPU utilization, Disk I/O and Network
+I/O across different algorithms. This variation results from
+the difference in capacity provisioning across algorithms that
+changes migration of jobs and disk I/O in the cluster. Fig-
+ure 13 illustrates the average energy consumption within each
+slot over the time interval showing signiﬁcant reduction in
+the peak energy consumption. As the provisioning algorithms
+cut off peaks from the workload and provision the machines
+without wasting computation capacity, they reduce the peak
+energy consumption for the data center.
+VIII. R ELATED WORK
+With the importance of energy management in data centers,
+many scholars have applied energy-aware scheduling because
+of its low cost and practical applicability. In energy-aware
+scheduling, most work tries to ﬁnd a balance between energy
+cost and performance loss through DVFS (Dynamic V oltage
+
+=== PDF PAGE 11 ===
+(a) Follow the workload
+ (b) VFW(δ)
+ (c) GCP-U
+Fig. 12. The solutions for (a) Follow the workload, (b) VFW( δ) and (c) GCP-U algorithms with uniform deadline D = 2 slots, δ = 1 and time slot = 5
+mins.
+TABLE IV
+TOTAL ENERGY CONSUMPTION AND THE TOTAL VALUES FOR DIFFERENT METRICS FROM THE CLUSTER FOR DIFFERENT SCHEDULE
+Metrics No Provisioning Follow VFW(δ) % Reduction GCP-U % Reduction
+Energy Consumption(kWh) 8.60 4.46 4.19 6.02 3.93 11.96
+CPUUtilization(sum) 32505.95 22805.98 21014.51 7.86 20400.02 10.55
+DiskReadBytes(GB) 0.25 12.95 7.56 41.64 3.85 70.29
+DiskWriteBytes(GB) 10.42 8.01 8.44 -5.48 6.55 18.19
+DiskReadOps(count) 18883 1109320 710451 35.96 396070 64.30
+DiskWriteOps(count) 1746347 1134108 1020343 10.03 901860 20.48
+NetworkIn(GB) 45.69 42.30 43.69 -3.29 42.88 -1.38
+NetworkOut(GB) 44.21 42.45 38.64 8.97 41.48 2.29
+Fig. 13. Average energy consumption from the cluster with time slots of 5
+minutes, over a period of 4 hours.
+and Frequency Scaling) and DPM (Dynamic Power Man-
+agement), which are the most common system-level power
+saving methods. Beloglazov et al. [25] give the taxonomy
+and survey on energy management in data centers. Dynamic
+capacity provisioning is part of DPM technique. Chase et al.
+[26] introduce the executable utility functions to quantify the
+value of performance and use economic approach to achieve
+resource provisioning. Pinheiro et al. [27] consider resource
+provisioning in both application and operating system level.
+They dynamically turn on or turn off nodes to adapt to the
+changing load, but do not consider the switching cost.
+Most work on dynamic capacity provisioning for indepen-
+dent workload uses models based on queueing theory [28],
+[29], or control theory [30], [31]. Recently Lin et al. [7] used
+more general and common energy model and delay model
+and designed a provisioning algorithm for service jobs (e.g.
+HTTP requests) considering switching cost for the machines.
+They proposed a lazy capacity provisioning (LCP) algorithm
+which dynamically turns on/off servers in a data center to
+minimize energy cost and delay cost for scheduling workload.
+However their algorithm does not perform well for high peak-
+to-mean ratio (PMR) of the workload and does not provide
+bound on maximum delay. Moreover, LCP aims at minimizing
+the average delay while we regard latency as the deadline
+constraint. Instead of penalizing the delay, we purposely defer
+jobs within deadline in order to reduce the switching cost of
+the servers.
+Many applications in real world require delay bound or
+deadline constraint e.g. see Lee et al. [24]. In the context of
+energy conservation, deadline is usually a critical adjusting
+tool between performance loss and energy consumption. En-
+ergy efﬁcient deadline scheduling was ﬁrst studied by Yao et
+al. [32]. They proposed algorithms, which aim to minimize
+energy consumption for independent jobs with deadline con-
+straints on a single variable-speed processor. After that, a se-
+ries of work was done to consider online deadline scheduling
+in different scenarios, such as discrete-voltage processor, tree-
+structured tasks, processor with sleep state and overloaded
+system [33], [34]. In the context of data center, most prior
+work on energy management merely talks about minimizing
+the average delay without any bound on the delay. Recently,
+Mukherjee et al. [6] proposed online algorithms considering
+deadline constraints to minimize the computation, cooling and
+migration energy for machines. Goiri et al. [35] considered
+only batch jobs and proposed GreenSlot, a scheduler with
+deadline requirements for the jobs. GreenSlot predicts the
+amount of solar energy that will be available in near future
+and schedules the workload to maximize the green energy
+consumption while meeting the jobs’ deadline. However these
+works are on job assignment problem and not on dynamic
+resource provisioning problem, where the number of needed
+servers is given in advance.
+Recently researchers have used scheduling with deferral to
+
+=== PDF PAGE 12 ===
+improve performance of MapReduce jobs [10], [23]. Although
+MapReduce was designed for batch jobs, it has been increas-
+ingly used for small time-sensitive jobs. Delay scheduling
+with performance goals was proposed by Zaharia et al.
+[10] for scheduling jobs inside a Hadoop cluster with given
+resources. Verma et al. introduced a SLA-driven scheduling
+and resource provisioning framework considering given soft-
+deadline requirements for the MapReduce jobs [8], [9]. In
+contrast to these works, we consider hard-deadlines and
+schedule jobs within those deadlines and provision capacity to
+save energy. Recently, Chen et al. [12] identiﬁed a large class
+of interactive MapReduce workload and proposed policies for
+scheduling batch and small interactive jobs in separate cluster
+without any provisioning mechanism for the machines in the
+cluster. In contrast, we propose provisioning algorithms for
+the mix of batch and interactive jobs under bounded latency
+with constant competitive ratio.
+IX. C ONCLUSION
+We have shown that signiﬁcant reduction in energy con-
+sumption can be achieved by dynamic deferral of workload for
+capacity provisioning inside data centers. We have proposed
+two new algorithms, VFW( δ) and GCP, for provisioning the
+capacity and scheduling the workload while guaranteeing the
+deadlines. The algorithms take advantage from the ﬂexibility
+in the latency requirements of the workloads for energy
+savings and guarantee bounded cost and bounded latency
+under very general settings - arbitrary workload, general
+deadline and general energy cost models. Further both the
+VFW(δ) and GCP algorithms are simple to implement and do
+not require signiﬁcant computational overhead. Additionally,
+the algorithms have constant competitive ratios and offer
+noteworthy cost savings as proved by theory and demon-
+strated by simulations respectively. We have validated our
+algorithms on MapReduce workload by provisioning capacity
+on a Hadoop cluster. For a small interval of 4 hours, we found
+∼6.02% total energy savings for VFW(δ) and∼12% for GCP
+with respect to the naive ‘follow the workload’ approach.
+Both the algorithms achieve more than 50% reduction in
+energy consumption with respect to ‘no provisioning’ which
+is a common practice for the current data center providers.
+Although we have used MapReduce workload for validation,
+our algorithms can be applied for any workload as data centers
+have separate (physical/virtual) clusters for MapReduce and
+non-MapReduce jobs. The provisioning can be done on each
+such cluster. In order to reduce the energy consumption,
+the data center providers should provision their capacity
+(physical/virtual) and utilize the ﬂexibilities from SLAs via
+dynamic deferral.
+ACKNOWLEDGMENT
+This work was sponsored in part by the Multiscale Systems
+Center (MuSyC) and NSF Variability Expedition.
+REFERENCES
+[1] Server and Data Center Energy Efﬁciency, Final Report to Congress,
+U.S. Environmental Protection Agency, 2007.
+[2] Z. Liu, M. Lin, A. Wierman, S. Low, and L. Andrew, Greening Geo-
+graphical Load Balancing, in Proc. ACM SIGMETRICS, 2011.
+[3] C. Stewart and K. Shen, Some Joules Are More Precious Than Others:
+Managing Renewable Energy in the Datacenter, in Proc. Power Aware
+Comput. and Sys., October 2009.
+[4] E. Pakbaznia and M. Pedram, Minimizing data center cooling and server
+power costs, in Proc. ISLPED, 2009.
+[5] R. K. Sharma, C. E. Bash, C. D. Patel, R. J. Friedrich, J. S. Chase,
+Balance of Power: Dynamic Thermal Management for Internet Data
+Centers, IEEE Internet Computing, 9(1), pp. 42-49, 2005.
+[6] T. Mukherjee, A. Banerjee, G. Varsamopoulos, and S. K. S. Gupta,
+Spatio-Temporal Thermal-Aware Job Scheduling to Minimize Energy
+Consumption in Virtualized Heterogeneous Data Centers , Computer
+Networks, 53(17), 2009.
+[7] M. Lin, A. Wierman, L. H. Andrew, E. Thereska, Dynamic right-sizing
+for power-proportional data centers , in Proc. IEEE INFOCOM, 2011.
+[8] A. Verma, L. Cherkasova, R. Campbell, SLO- Driven Right-Sizing and
+Resource Provisioning of MapReduce Jobs , in Proc. LADIS, 2011.
+[9] A. Verma, L. Cherkasova, R. Campbell, Resource Provisioning Frame-
+work for MapReduce Jobs with Performance Goals, in Proc. Middleware,
+2011.
+[10] M. Zaharia, D. Borthakur, J. S. Sarma, K. Elmeleey, S. Shenker, and
+I. Stoica, Delay Scheduling: A Simple Technique for Achieving Locality
+and Fairness in Cluster Scheduling , in Proc. EuroSys, 2010.
+[11] Y . Chen, A. Ganapathi, R.Grifﬁth, R. Katz, The Case for Evaluating
+MapReduce Performance Using Workload Suites, in Proc. IEEE MAS-
+COTS, 2011.
+[12] Y . Chen, S. Alspaugh, D. Borthakur, R. Katz, Energy Efﬁciency for
+Large-Scale MapReduce Workloads with Signiﬁcant Interactive Analysis,
+in Proc. EuroSys, 2012.
+[13] D. Xu and X. Liu, Geographic trough ﬁlling for Internet datacenters,
+In Proc. of IEEE INFOCOM, 2012.
+[14] J. Dean and S. Ghemawat, MapReduce: Simpliﬁed Data Processing on
+Large Clusters, Comm. of the ACM, 51(1), pp. 107-113, 2008.
+[15] SPEC power data on SPEC website at http://www.spec.org.
+[16] P. Bodik, M. P. Armbrust, K. Canini, A. Fox, M. Jordan, and D.
+A. Patterson, A case for adaptive datacenters to conserve energy and
+improve reliability , UCBerkeley, Tech. Report UCB/EECS-2008-127,
+2008.
+[17] L. A. Barroso, and U. H ¨olzle, The case for energy-proportional com-
+puting. IEEE Computer, 40(12), pp. 33-37, 2007.
+[18] Y . Xiao, S. Jianling, Reliable Estimation of Execution Time of MapRe-
+duce Program, China Communications, 8(6), pp 11-18, 2011.
+[19] Amazon Elastic MapReduce. http://aws.amazon.com/elasticmapreduce/.
+[20] Apache Hadoop. http://hadoop.apache.org/.
+[21] A. Kansal, F. Zhao, J. Liu, N. Kothari, and A. Bhattacharya, Virtual
+Machine Power Metering and Provisioning, in Proc. SoCC, 2010.
+[22] R. Lent, Evaluating the performance and power consumption of systems
+with virtual machines, in Proc. IEEE CloudCom, Nov. 2011.
+[23] K. Kc and K. Anyanwu, Scheduling Hadoop Jobs to Meet Deadlines,
+in Proc. IEEE CloudCom, 2010.
+[24] C. B. Lee, and A. Snavely, Precise and realistic utility functions for
+user-centric performance analysis of schedulers , in Proc. IEEE HPDC,
+2007.
+[25] A. Beloglazov, R. Buyya, Y . C. Lee, A. Zomaya,A taxonomy and survey
+of energy-efﬁcient data centers and cloud computing systems , Advances
+in Computers, Elsevier: Amsterdam, 2011.
+[26] J. S. Chase, D. C. Anderson, P. N. Thakar, A. M. Vahdat, and R. P.
+Doyle, Managing energy and server resources in hosting centers, in Proc.
+ACM SOSP, pp. 103-116, 2001.
+[27] E. Pinheiro, R. Bianchini, E. Carrera, and T. Heath, Load balancing
+and unbalancing for power and performacne in cluster-based systems ,
+in Proc. Compilers and Operating Sys. for Low Power, 2001.
+[28] A. Gandhi, M. Harchol-Balter, R. Das, and C. Lefurgy, Optimal power
+allocation in server farms , in Proc. ACM Sigmetrics, 2009.
+[29] D. Meisner, B. T. Gold, and T. F. Wenisch, The PowerNap Server
+Architecture, ACM trans. Computer systems (TOCS), 29(1), 2011.
+[30] Y . Chen, A. Das, W. Qin, A. Sivasubramaniam, Q. Wang, and N.
+Gautam, Managing server energy and operational costs in hosting
+centers, in Proc. ACM Sigmetrics, 2005.
+[31] R. Urgaonkar, U. C. Kozat, K. Igarashi, and M. J. Neely, Dynamic
+resource allocation and power management in virtualized data centers,
+in Proc. IEEE/IFIP NOMS, 2010.
+[32] F. Yao, A. Demers, and S. Shenker, A scheduling model for reduced
+CPU energy, in Proc IEEE FOCS, pp. 374-382, 1995.
+[33] H. L. Chan, J. W. Chan, T. W. Lam, L. K. Lee, K. S. Mak, P. W. Wong,
+Optimizing throughput and energy in online deadline scheduling , ACM
+Trans. Algorithms 6(1), 1-10, 2009.
+[34] X. Han, T. W. Lam, L. K. Lee, I. K. To and P. W. Wong, Deadline
+scheduling and power management for speed bounded processors, Theor.
+Comput. Sci. 411(40-42), 3587-3600, 2010.
+[35] I. Goiri et al. GreenSlot: Scheduling Energy Consumption in Green
+Datacenters. In Proc. of Supercomputing, November 2011.

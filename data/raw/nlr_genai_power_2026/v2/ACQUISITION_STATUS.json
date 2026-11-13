@@ -1,0 +1,28 @@
+{
+  "dataset": "Dataset of Generative AI Workload Power Profiles",
+  "version": 2,
+  "doi": "10.7799/3025227",
+  "status": "not_downloaded_tls_handshake_failed",
+  "acquisition_attempt_date": "2026-11-09",
+  "official_landing_page": "https://data.nlr.gov/submissions/312",
+  "official_download_url": "https://data.nlr.gov/system/files/312/1775845072-dataset.zip",
+  "expected_size_bytes": 1070866623,
+  "expected_sha256": "dcad6de800fb565d850b163902e2eddae48aabd1ed1c7336f9a1cdaf3012f137",
+  "observed_error": "curl error 35: schannel failed to receive handshake, SSL/TLS connection failed",
+  "diagnostics": [
+    "Existing repository fetcher and frozen configuration checked",
+    "Direct data.nlr.gov URL attempted",
+    "datacatalog.stratus.nlr.gov canonical host attempted",
+    "IPv4, TLS 1.2, HTTP 1.1 and revocation-check-disabled connection diagnostics attempted",
+    "OSTI landing/API endpoints also unreachable from this environment",
+    "No alternate mirror substituted"
+  ],
+  "local_assets": {
+    "config": "configs/nlr_genai_power_profiles_v2.yaml",
+    "fetcher": "experiments/fetch_nlr_genai_power_2026.py",
+    "paper": "docs/literature/empirical_grid_task_20261109/2604.07345v1.pdf",
+    "asi_reanalysis_of_nlr": "data/raw/asi_trace_power/v1.0.1/upstream/asi-trace-power-v1.0.1.zip"
+  },
+  "retry_command": "PYTHONPATH=. conda run -n compute python experiments/fetch_nlr_genai_power_2026.py",
+  "important": "The NLR raw archive is not present. Do not mark this source as downloaded or calibrated-ready."
+}

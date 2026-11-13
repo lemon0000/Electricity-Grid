@@ -1,0 +1,40 @@
+{
+  "dataset": "asi-trace-power: hourly load and eligible-flexibility reconstruction from Alibaba cluster-trace-gpu-v2026",
+  "version": "v1.0.1 code and products; v1.0.0 aggregate-table release asset",
+  "acquired_date": "2026-11-09",
+  "paper": "Beyond Scalar Flexibility: From Eligible AI Workloads to Dependable Load Relief, arXiv:2609.05406v1",
+  "code_archive": {
+    "url": "https://zenodo.org/api/records/22308423/files/meiyilutaustin/asi-trace-power-v1.0.1.zip/content",
+    "record_doi": "10.5281/zenodo.22308423",
+    "size_bytes": 9818834,
+    "expected_md5": "2da1f01d3dceac3dde065b57fc09c167",
+    "local_path": "upstream/asi-trace-power-v1.0.1.zip"
+  },
+  "aggregate_table": {
+    "url": "https://github.com/meiyilutaustin/asi-trace-power/releases/download/v1.0.0/pod_hourly_agg.parquet",
+    "release_api": "https://api.github.com/repos/meiyilutaustin/asi-trace-power/releases/tags/v1.0.0",
+    "size_bytes": 50769491,
+    "expected_sha256": "46e99955d9c3db8cb2ad5c8ae8296a9fc00932f99a7ef4f5ab72212f966b85f7",
+    "local_path": "upstream/pod_hourly_agg.parquet",
+    "observed_rows": 1479356,
+    "observed_columns": 17
+  },
+  "license": {
+    "code": "MIT",
+    "derived_data_and_results": "CC BY-NC 4.0 and source-trace research/study-use terms",
+    "eia930_external_data": "public domain"
+  },
+  "scope": {
+    "source_trace": "Alibaba cluster-trace-gpu-v2026 production scheduler records, not direct facility power metering",
+    "raw_351_gb_trace_downloaded": false,
+    "derived_hourly_products_in_code_archive": true,
+    "aggregate_sufficient_statistics_downloaded": true,
+    "mw_are_reconstructed_using_power_model": true,
+    "k_surface_is_baseline_eligibility_not_intervention_deliverability": true
+  },
+  "notes": [
+    "The upstream paper/Zenodo description says 858,816 aggregate rows, but the byte-verified v1.0.0 release asset contains 1,479,356 rows and 17 columns. Use the observed Parquet schema and release hash, not the stale prose, for validation.",
+    "The code archive includes hourly fleet power, fleet and cluster envelopes, K surface, server aggregate, result tables and reproducibility code.",
+    "No paid query, raw 351 GB trace scan, model execution or solver run was performed during acquisition."
+  ]
+}

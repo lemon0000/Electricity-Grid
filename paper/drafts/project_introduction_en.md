@@ -1,211 +1,105 @@
-# Assessing Flexibility Deliverability for Staged Interconnection of AI Data Centers During Ramp-Up
+# Ramp-aware robust firm/flexible interconnection design for AI data centers with deadline-constrained workload recovery
 
-Updated: 2026-11-04. Project research introduction. The title follows `agent.md` §2; this revision aligns the deliverability definition and comparison design in Sections 3–6 with the three-valued criterion defined there.
+## Abstract
 
-## 1 Background and project objective
+Business demand, computing equipment, and grid reinforcement often grow on different schedules during AI data center ramp-up. Flexible interconnection permits curtailment when grid capacity is constrained, but deferred computation must still meet its deadline. Delivering a given curtailment depth therefore depends on spare installed equipment and subsequent import headroom. This paper studies stage-dependent firm capacity and storage design, together with hostable capacity on a given network. Contract calls or N-1 contingencies form the uncertain events in a two-stage adaptive robust model with hourly, deadline-constrained deferral and recovery. Column-and-constraint generation and an exact enumeration adversary solve the declared finite event problem. Under clean-reset conditions, single-call responses construct a non-anticipative policy for repeated calls; clustered calls require multistage treatment. A preliminary feasibility study using load reconstructed from production-cluster traces and the RTS-24 network indicates that the design impact depends on deficit duration, recovery deadlines, and ramp-up state. In the tested contract-call grid, design differences disappear with a 24-hour deadline. The research therefore focuses on conditions that make recovery-aware design necessary and those under which instantaneous assessment suffices.
 
-This project studies an AI data center as it ramps up toward its target operating scale. It asks whether workload flexibility can support given staged interconnection plans when business growth, computing-equipment commissioning, and grid construction progress at different rates, and which stages are limited by task recovery and hourly clean-electricity requirements.
+**Index Terms—** AI data centers, phased interconnection, firm capacity, adaptive robust optimization, workload deferral and recovery, non-anticipativity.
 
-Growing AI demand places pressure on electricity supply and grid access. The IEA's Energy and AI report examines the links between AI development, electricity demand, and infrastructure [1]. Mytton et al. discuss how geographically concentrated data-center demand can constrain local grid capacity [2]. For an individual project, the issue unfolds throughout ramp-up: tasks arrive gradually, computing modules are commissioned in batches, and supporting lines or transformers follow their own construction schedules.
+## I. Introduction
 
-These paths may become misaligned. Equipment and business may be ready while a grid reinforcement is still under construction, requiring lower electricity withdrawal during some hours. Eligible tasks can be deferred and completed later. Recovery, however, requires spare computing equipment, power headroom, and electricity that meets the clean-matching requirement before the original deadlines. Reducing demand now does not by itself guarantee later task completion.
+Artificial intelligence is increasing data center electricity demand and pressure on local grid connections [1,2]. AI data centers typically undergo sustained ramp-up: business grows, GPUs enter service in batches, and substations and lines follow separate construction schedules. When computing equipment and workload arrive before grid reinforcement, flexible interconnection can provide earlier access by adjusting imports under specified conditions [3]. This arrangement raises an operational question: can curtailed computation be recovered using the remaining resources before its business deadline?
 
-Ramp-up changes both the source and the limits of flexibility. Early operation may offer spare equipment for recovery but too little eligible work to defer. Later demand growth may increase deferrable work while reducing recovery headroom. Timely equipment additions may ease that pressure. Which stage is more deliverable therefore depends on the relative progress of business, equipment, and the grid.
+For deferrable work, present curtailment capability and subsequent recovery capability jointly determine whether an interconnection commitment can be delivered. At low business utilization, installed equipment may provide substantial recovery headroom. This headroom shrinks as business fills the equipment and may increase again with new equipment. Consequently, an unchanged contractual curtailment depth can require different firm capacities at different ramp-up stages. Interconnection design must connect the response during a call to completion before the deadline.
 
-At one fixed point of interconnection, the project develops an hourly assessment of a small set of given construction and access plans. It checks stage delivery under a specified service contract and operating policy, identifying whether currently deferrable work or recovery resources before the original deadlines limit performance.
+### A. Related Work
 
-Figure 1 shows the research architecture. Three given progress paths and common rules feed parallel assessments. Each method's own judgment is compared with the outcome of replaying its schedule under the actual path's temporal constraints. Plans, capacity, and policies are then frozen for causal execution on independent paths. Figures 2–4 expand task accounting and deadlines, progress mismatch, and metered-power/CFE checks.
+Data center demand-response research has established that task deferral, load shifting, and local energy resources can adjust grid imports [4,5]. GreenSlot incorporates job deadlines into computing schedules [6]. Recent studies examine how workload recovery, event constraints, and onsite resources affect flexibility value and minimum interconnection capacity [7,8]. These studies provide a basis for representing temporal coupling between deferral and subsequent recovery, and show why completion requirements matter for capacity assessment.
 
-![Figure 1 Overall project research framework](../figures/project_framework_en.svg)
+Grid-side flexibility studies address firm and flexible capacity allocation under network and service-quality constraints. Li et al. describe tiered products using an allowed curtailment depth δ and a bound ε on the probability of exceeding it, and solve capacity allocation through aggregation and a CVaR approximation [9]. Their model includes intertemporal generator ramping and a planning-horizon probability event; curtailment within the allowed depth is not frequency-limited. It does not explicitly represent deferred-work backlog, recovery deadlines, or data center ramp-up state. This motivates a direct comparison: for a specified δ/ε product, what depth can the equipment and workload at a particular stage actually deliver? The comparison must also distinguish probabilistic service guarantees from robust guarantees over a specified event set.
 
-**Figure 1 Research architecture for staged interconnection and flexibility deliverability.** (a) Separate business, equipment, and grid paths with common tasks, contracts, and external resources. (b) Three parallel assessments. (c) Temporal checks of each schedule on the actual path: q is deferral, r is recovery, and the dashed arrow carries state to the next hour. (d) Method judgments and actual-path outcomes enter comparison separately, supplying evidence for the proposed contributions. Frozen plans, D, and π jointly enter causal holdout execution with independent new paths. Full F/X contracts receive separate checks. The figure depicts study design.
+Existing research covers several components of workload scheduling and flexible interconnection. This paper examines a specific connection: incorporating both changing spare installed capacity and deadline-constrained recovery into interconnection design, and testing whether this connection changes the capacity decision. Its value must be assessed through both differences and agreement between methods.
 
-## 2 Related research
+### B. Research Question and Approach
 
-### 2.1 Data-center flexibility and grid interconnection
+The study considers a data center at one point of interconnection. Business demand, installed computing capacity, and grid supply limits are specified separately for each stage. First-stage decisions select firm capacity and optional storage; hourly recourse schedules deferral, recovery, and charging or discharging using information already available. Alternatively, a fixed unit-scale workload and equipment profile can be scaled to determine maximum hostable capacity on a given network.
 
-Kim et al. incorporate workload flexibility into planner-initiated data-center siting [3]. Chen and Zheng compare temporal deferral and spatial shifting for grid interconnection [4]. Wan and Li embed spatial and temporal load adjustments in security-constrained unit commitment to study congestion and operation [5]. Williams et al. demonstrate power-flexibility control by coordinating computing equipment with grid signals [6]. Together, these studies establish the value of flexibility through planning, scheduling, and practical control.
+The central question is whether the duration and depth of a deficit exceed the equipment and supply headroom available before the recovery deadline. A short peak may be absorbed through limited deferral, whereas a persistent deficit can accumulate substantial backlog. The timing of deferrable arrivals, recovery headroom, deadlines, and event information also matters. These temporal constraints provide the basis for studying when recovery-aware design is necessary and when instantaneous assessment suffices.
 
-### 2.2 Task deferral, recovery, and service deliverability
+### C. Present Work and Intended Contributions
 
-Wierman et al. review opportunities and practical constraints for data-center demand response [7]. Liu et al. examine workload shifting together with local generation for reducing peak withdrawal [8]. GreenSlot schedules batch jobs within their deadlines to use renewable energy [9]. Radovanović et al. develop carbon-aware scheduling for temporally flexible data-center workloads [10]. These studies link deferral to service requirements and subsequent execution capability.
+The paper formulates ramp-aware robust interconnection design by linking installed GPU capacity, business load, the deferrable share, and recovery deadlines. A common framework addresses firm capacity and storage required by contractual calls, as well as hostable data center capacity under declared N-1 conditions. Given trajectories describe resource differences between stages; the current implementation solves and compares stages independently.
 
-For flexibility commitments and service deliverability, Fan and Zhao jointly model workload queues and regulation-capacity commitments, checking instantaneous response and sustainability under cumulative calls [11]. Khanal et al. include workload make-up, event shape, and recovery restrictions in capacity expansion and compare flexibility across host grids [12]. Butt et al. connect task deadlines to minimum interconnection capacity under onsite PV, storage, and an investment budget [13].
+The solution uses column-and-constraint generation (C&CG) [10]. For a finite single-call set, the master chooses capacity and a nominal operating schedule, while the adversary checks every admissible call position and adds the worst event. Repeated calls are handled through conditional clean-reset separability: if each response clears its backlog and restores the nominal state before the next notification can arrive, single-call responses can be concatenated into a non-anticipative policy. Overlapping recovery processes require further treatment of the multistage information structure.
 
-These studies connect flexible demand to workload queues, make-up capability, deadlines, and resource allocation, extending assessment from immediate reductions to later task completion and service commitments.
+The preliminary study covers contract calls, storage, RTS-24 interconnection, and sensitivity. The next theoretical objective is to derive and test a criterion relating deficit duration and depth to recovery headroom and deadlines. Job-deadline and SLA evidence will define plausible parameter ranges, while a direct tiered-product comparison will quantify deliverable depths at each stage. The criterion and its domain remain to be completed; existing numerical results support this research direction.
 
-### 2.3 Staged construction and infrastructure planning
+## II. System Description and Problem Definition
 
-Multistage transmission-expansion methods already represent demand growth and staged investment [14]. Vafamehr et al. study uncertain expansion of data-center modules and data networks [15]. Shao et al. jointly plan long-term data-center and power-system development [16]. Zhao et al. explicitly consider cluster load growth, construction sequence, and staged energy-resource additions [17]. Zhu et al. co-optimize transmission construction with lead times and geographic workload migration [18]. Wang et al. propagate uncertain large-model growth into supporting power-infrastructure expansion [19]. Ghosh et al. propose a phased engineering architecture addressing equipment procurement and interconnection lead times [20].
+### A. Ramp-up State and Interconnection Decisions
 
-This research covers modular expansion, construction sequencing, transmission lead times, and long-term joint investment. It represents the relationship between growing demand and infrastructure development and incorporates construction progress into planning or engineering configurations.
+Each stage is represented by an hourly window with a tail sufficient to observe recovery within the specified deadline. Business IT load is denoted by s, installed IT capacity by K, and the deferrable share by κ. Demand is exogenous, only commissioned equipment provides computing capacity, and normal and contingency grid limits are specified at the interconnection point. Power conversion distinguishes computing resources, IT power, and facility imports.
 
-### 2.4 Hourly clean-electricity matching
+Capacity design minimizes declared costs over firm capacity F and optional storage energy and power capacities. Hosting-capacity design instead maximizes the scale of a fixed unit-scale workload and equipment profile on a given network. Independent stage solutions provide stage-dependent comparisons with explicit initial and tail conditions. Coupling investment and backlog across stages requires an additional model.
 
-De Chalendar and Benson discuss limitations of annual renewable-procurement metrics [21]. Miller et al. study hourly accounting of emissions from electricity consumption [22]. Riepin and Brown analyze procurement strategies, costs, and system effects of 24/7 carbon-free energy [23]. Riepin et al. discuss how round-the-clock matching can encourage advanced clean technologies [24] and investigate spatial and temporal workload shifting for clean computing [25]. Guo et al. coordinate wind, solar, storage, grid exchange, and hourly supply deliverability for private-wire data centers [26].
+### B. Deferral, Recovery, and Power Balance
 
-Across accounting, procurement, scheduling, and supply planning, these studies connect the timing of clean-electricity availability with consumption and distinguish annual energy balances from matching requirements at finer time scales.
+Hourly executed work equals nominal business demand minus deferred work plus recovered work, subject to installed capacity. Backlog increases with deferral and decreases with recovery; each deferred batch must be completed within its recovery deadline D. Cumulative deferral and recovery constraints can express this requirement in an hourly formulation. D is measured in hours, and recovery headroom is determined by the equipment and supply available at the time.
 
-### 2.5 Remaining gaps in the existing research
+Facility imports include execution, idle equipment draw, and supporting facility consumption, together with storage charging and discharging. Storage changes the timing of imports, but workload completion still occupies computing equipment. Design must therefore satisfy power, backlog, deadline, and storage-state constraints together. Initial backlog, terminal backlog, and state-of-charge conditions define feasibility; truncating an observation window does not establish completion.
 
-The closest studies incorporate queues and sustained response into capacity commitments [11], make-up and event constraints into capacity expansion [12], deadlines into minimum interconnection capacity [13], and transmission lead times or phased engineering into data-center development [18,20]. They provide a direct basis for this study. The further assessment question is bounded to continuous delivery of a given staged access plan at one data center along separate business, equipment, and grid progress paths.
+### C. Call Set and Non-anticipative Response
 
-First, **does the same deferrable share represent flexibility at every ramp-up stage?** Growing demand increases work that can be deferred while using equipment and power headroom needed for later recovery. Equipment additions and grid completion change those limits separately. The study needs to locate transitions between insufficient current work and insufficient recovery before deadlines, and check whether they change delivery outcomes under the specified policy.
+The contract specifies the maximum number of calls N per stage, call duration H, minimum recovery interval R between calls, and notice lead time n. During a call, firm capacity determines the import limit; normal operation follows the contractual normal import limit. Network cases construct events from declared N-1 supply conditions, fixing contingency types, durations, and permitted responses.
 
-Second, **can the timing of recovery resources change delivery when total and peak clean energy are equal?** Recovery requires equipment, power, and clean allocations to be available together before the original deadlines. With immediate requests held consistent and total and peak clean allocations equal, the effect of shifting when recovery allocations arrive needs to be tested separately, distinguishing insufficient resources from resources arriving too late. Delivered deferral and debt at the start of recovery are outcomes of policy execution rather than exogenous inputs; they cannot be fixed at the input level and are reported only as stratification conditions in the results.
+The policy depends only on information already revealed: event paths with the same observable history at a given time must use the same action. A common nominal schedule applies before notification. Exact enumeration covers the declared finite event set; it does not establish coverage of every potential contingency or arbitrary continuous call process.
 
-Third, **under what conditions do simplified assessments change the stage judgment?** For the same given plan, comparisons need to distinguish immediate checks that pass despite violations observed in full replay, cases where a simplified assessment and the complete temporal strategy return different verdicts, and regions of agreement. Both directions are reported as observed. Independent paths then test whether frozen policies encounter similar limits.
+### D. Repeated Calls and Comparison Principles
 
-### 2.6 Focus of this study
+Clean reset requires a nominal schedule with no deferral and a single-call response that clears backlog and returns to the nominal state by a specified time no later than the earliest next notification. For a call starting at τ, lasting H hours, followed by a minimum interval R and notice n, the corresponding reset boundary is τ+H+R−n. Without storage, these conditions support the bounds F₁ ≤ F_N ≤ F₁^reset. With storage, the corresponding state of charge must also be restored. When reset conditions cannot be met, repeated-call responses require a multistage non-anticipative formulation.
 
-The study fixes one point of interconnection and treats business ramp-up, equipment commissioning, and grid construction as separate given paths. A small set of staged access plans is assessed under the same external tasks, deadlines, and clean resources. The central question is: **under a specified contract and operating policy, which progress combinations create a mismatch between currently deferrable work and work that can be recovered before its original deadline, changing the stage-delivery judgment?** Bottleneck transitions are the central focus. Matched recovery timing tests the mechanism, while comparisons with simplified assessments and independent holdout execution test its applicability.
+Comparisons include firm-only, instantaneous, and recovery-aware designs. The instantaneous baseline retains present deferrable-share, equipment, and power limits but omits subsequent recovery obligations; all designs use the same stage data and event sets. Perfect-foresight results are labeled separately. Unconverged problems retain bounds and computational status: failure to converge does not establish infeasibility, and equal optima at finite test points do not imply general equivalence between information structures.
 
-## 3 Contributions
+## III. Preliminary Feasibility Evidence and Scope
 
-The study aims to organize its results around three testable contributions. The specified policy's actual task-and-service paths provide the main evidence; full F/X access contracts receive separate checks. The assessment model provides common task, equipment, power, and network constraints. Specific conclusions will depend on the subsequent comparisons and holdout results.
+The feasibility study uses ASI-derived data from 185 days of production-cluster traces [11] and the RTS-24 test network [12]. Data center MW values are reconstructed from computing traces and a power model, rather than measured at a facility meter; scaling the site is also a case-study assumption. Deferrable-load statistics require further mapping to business deadlines and cannot directly establish SLA requirements.
 
-1. **Conditions for transitions in delivery bottlenecks during ramp-up.** Currently deferrable work and equipment, power, and clean recovery resources before the original deadlines are recorded separately. Fast or slow business growth, on-time or delayed grid completion, and given equipment paths are compared to locate stages where the limiting resource changes. The intended result is a bottleneck-transition map indexed by workload occupancy and equipment/grid commissioning conditions, together with tests of whether these changes alter the specified policy's task-and-service outcomes on the actual path.
+![Figure 1. Firm capacity requirements across ramp-up weeks](../figures/ramp_robust_firm_en.png)
 
-2. **Delivery differences caused by recovery timing under equal clean resources.** Where matched cases can be constructed, external tasks, equipment and network paths, adjustment capacity D, and immediate grid and CFE requests are held fixed. Total and peak clean allocations over the evaluation period are equal, while the timing of clean recovery allocations changes. This match holds strictly at the exogenous-input level. Delivered deferral and debt at the start of recovery are outcomes of policy execution rather than exogenous inputs; they are not fixed in the design but reported as stratification conditions in the results, so conclusions about recovery timing are limited to cases where exogenous allocation timing matches while realised deferral and starting debt do not. The intended result identifies when availability before the original deadline changes the outcome of the same recovery debt, specifying the conditions under which hourly CFE affects stage delivery.
+**Fig. 1. Stage-dependent firm capacity in the preliminary study.** The upper panel compares recovery-aware designs and the instantaneous baseline over 26 ramp-up weeks; the lower panel gives the business-to-installed-capacity ratio. Vertical lines indicate new cluster commissioning. Results are reproduced from the current demo, with each H and D combination interpreted separately.
 
-3. **Regions where simplified assessments give different judgments.** Instantaneous-MW, fixed-recovery-headroom, and full temporal assessments are compared for the same plan and D. Three values are recorded separately: each method's own verdict, the verdict of its schedule replayed under the actual path's full temporal constraints, and the full temporal strategy's verdict on the same plan. The first comparison asks whether a simplification's own schedule survives the constraints it ignored; the second asks whether a simplification rejects a plan the complete strategy completes. Both simplifications compared here loosen constraints rather than tighten them — instantaneous assessment omits the event envelope, and fixed headroom replaces actual recovery headroom with a constant — so disagreements are expected to concentrate in the direction of a simplified pass with violations observed in replay. Whether the opposite direction occurs depends on the presence of a tightening simplification and is reported as observed rather than assumed. Plans, D, and policies are then frozen for execution on independent paths to test the applicability of these boundaries.
+Across the tested RTS-24 cases, flexibility increases hosting capacity by approximately 13%–19% relative to firm-only interconnection. At POI 7, where post-contingency deficits persist for several hours, instantaneous assessment overstates hosting capacity by up to approximately 7%–10%. POI 3 shows no difference; the difference at POI 15 is small, with a maximum no greater than 1.4%. These results suggest the importance of deficit shape. However, some generation-limited or unevaluable hours in the network-capacity series are interpolated, and contingency durations of 4–12 hours are assumed; the results are not engineering safety certification.
 
-Each proposed contribution has a concrete evidence requirement and a condition for narrowing its interpretation:
+![Figure 2. Sensitivity to recovery deadline and call duration](../figures/ramp_robust_sens_en.png)
 
-| Proposed contribution | Evidence to deliver | Observation requiring a narrower claim |
-|---|---|---|
-| Stage bottleneck transitions | Stage maps linking progress combinations, limiting resources, and actual task-and-service outcomes | Resource headroom changes while actual-path delivery judgments remain unchanged |
-| Recovery-timing effects | Trajectories with matched immediate requests, deferral, recovery-start debt, and total and peak clean resources | Outcomes agree over complete follow-up, or differences accompany uncontrolled changes in requests, starting debt, or resources |
-| Simplified-assessment boundaries | Method verdicts, full temporal replay verdicts on the actual path, complete-strategy verdicts, and frozen-policy holdout performance | All verdicts agree in the compared region, or differences cannot be attributed to simplified recovery and deadline conditions |
+**Fig. 2. Mean firm-capacity shortfall of instantaneous assessment over 13 sampled ramp-up weeks.** The left panel varies D at H=4 h; the right varies H at D=12 h. The zero difference at D=24 h applies only to this tested contract-call grid. These means should be distinguished from maxima reported elsewhere.
 
-## 4 Research object and key concepts
+The gap between the clean-reset upper bound and single-call value is zero in 7 of 21 stage–parameter combinations, no greater than 1% of peak in 15, and at most 9.8%. Two-call cases with R=4 h are still reported through bounds. A separate exact multistage attempt at R=12 h in week 12 had not converged after 10 iterations and approximately 17 minutes. For storage, non-anticipative and perfect-foresight designs have equal optimal values in four tested weeks. The sensitivity parameter β is the cost per MWh of storage energy capacity divided by the cost per MW of firm capacity over the same cost period, with units MW/MWh. At the tested β=0.2, total cost falls by 0.4%–3.6%; at β=0.4, no storage is selected. Actual interconnection and storage costs remain to be calibrated.
 
-| Concept | Meaning in this study |
-|---|---|
-| Business ramp-up | Externally arriving computing tasks approach the target operating scale; workload and deadlines define the common service objective. |
-| Equipment commissioning | A module contributes executable capacity K only after installation and commissioning. |
-| Staged interconnection | Given access allowances are checked against the built network and contract conditions. F is the firm portion; X is conditional on specified calls. |
-| Workload flexibility | Eligible computation can be postponed and completed before its original deadline. |
-| Recovery debt | Deferred but unfinished work, tracked by arrival time, recovery efficiency, and deadline. |
-| Hourly CFE matching | A target share of consumption is matched with attributable carbon-free energy from the same hour and eligible region. |
-| Deliverability | Under the stated network, service, and information conditions, response, clean matching, and in-deadline recovery are checked hour by hour; each plan–stage–method combination takes one of three values: deliverable, not deliverable, or undetermined. |
-
-For example, an hour with 100 MWh consumption and an 80% target needs 80 MWh of eligible attributable CFE for that hour. Recovery consumption is included. This is energy-attribute accounting; allocation must conserve available resources and avoid duplicate attribution.
-
-The criterion is three-valued. Undetermined covers right-censoring when a deadline has not yet entered the observation window, plus missing solve or check evidence; it counts as neither success nor failure. Task completion reads only the original deadline, and recovery after a deadline does not erase the recorded overdue, so one task cohort can simultaneously show its work fully made up and its overdue retained. All three assessments must be evaluated under the same criterion, window, and accounting rules; each method's own verdict and the verdict of its schedule replayed under the actual path's full temporal constraints are stored separately, and their disagreement is the central object of this study.
-
-![Figure 2 Recovery conditions and alternative outcomes for deferred tasks](../figures/project_recovery_en.svg)
-
-**Figure 2 Task debt, concurrent recovery resources, and deadline outcomes.** (a) Deferral, debt, and effective recovery for the same cohort obey work conservation; η is recovery efficiency. (b) Recovery jointly respects commissioned equipment, the built network, hourly clean allocations, and business/action limits. Once the original deadline is observed, remaining work at that time distinguishes on-time completion from overdue work. A deadline outside the observation window is right-censored; missing solve or check results are separately unresolved. Late recovery retains an observed violation. The figure shows mechanism relationships.
-
-## 5 Method
-
-### 5.1 Represent the three progress paths separately
-
-The model uses two or three equipment stages, one candidate grid project, and a small set of given access plans. Fast or slow business growth is crossed with on-time or delayed grid completion. Equipment paths separately define installation, construction, and availability. Commissioning follows the given start, lead time, and delay; only commissioned resources provide current capability.
-
-Normal-state network checks cover the full F+X allowance. The declared contingency set checks F and the contractually permitted calls on X. The built network determines required reductions and power headroom during recovery, recalculated for each plan. Workload adjustment capacity D and access allowance X are distinct, linked through tasks, electricity consumption, and network checks.
-
-![Figure 3 How progress mismatch changes operating and recovery conditions](../figures/project_rampup_en.svg)
-
-**Figure 3 Separate progress paths enter different operating and recovery constraints.** (a) Work, commissioned equipment, and the built network evolve over continuous time; steps illustrate relative timing without a numerical scale. (b) Current tasks limit deferral, equipment determines computing headroom, and the current network and clean allocations jointly constrain recovery supply. Calls and recovery limits are recomputed after actual commissioning. Recovery expressions apply when q=0, with a=γβ. Debt, original deadlines, and event budgets carry across stages.
-
-### 5.2 Link execution, deferral, recovery, and metered power
-
-Hourly states record task arrivals, baseline work w, deferral q, recovery r, and commissioned equipment K. The quantities w, q, r, K, and adjustment capacity D use a common computing-resource reference unit, MW_c. Equipment parameters translate these units into metered electrical MW. Execution and recovery satisfy:
-
-**0≤w−q+r≤K, q+r≤D.**
-
-The initial model uses one aggregate action direction per hour, q·r=0. Deferral is limited by eligible current tasks. Recovery is limited by spare equipment, recovery efficiency, existing debt, and power conditions. Debt is accumulated and cleared by task batch; late completion retains the recorded deadline violation.
-
-Metered power P includes the idle consumption of commissioned equipment, task execution, recovery, and supporting loads. The initial homogeneous-equipment mapping is P=γ[P_idle+β(w−q+r)]+P_aux: β is incremental IT power per unit of active computing effort, γ is the facility-power multiplier, and a=γβ. The term P_aux contains only fixed auxiliary loads outside γ. New equipment can increase both computing capacity and electricity demand. Recovery efficiency determines how much original work is completed, while computing effort is converted to power through this same mapping.
-
-### 5.3 Check network response and hourly clean matching together
-
-The model derives the full grid call from the current network and pre-response baseline power, then checks whether physical response covers it. Clean matching requires 0≤y≤min(Y,PΔt) and αPΔt≤y in each interval: 0≤α≤1 is the target share, Δt the interval duration, y the allocated energy, and Y the externally specified attributable limit. Allocation is bounded by both the external limit and actual consumption. Power P includes idle and recovery consumption. Plans share the same external clean resources and allocation rules.
-
-The main comparison specifies independent reduction commitments: reductions separately promised to the grid and CFE services must be delivered using the same equipment, tasks, and recovery resources. Each unit of deferred work is allocated to one promise, and actual power is counted once. This is an explicit service-scenario assumption, consistently applied across comparisons; applicability to a particular project depends on its contract and metering arrangements.
-
-![Figure 4 How metered power enters network and hourly CFE checks](../figures/project_network_en.svg)
-
-**Figure 4 Computing resources, metered power, and network/CFE checks.** (a) Workload actions determine computing effort, mapped to P including commissioned idle, execution, recovery, and support consumption. (b) Blue solid arrows denote physical supply; teal dashed arrows denote metering records and attribute accounting. Same-hour allocation y is bounded by both external quota Y and actual consumption PΔt. (c) Grid and CFE deferral promises are allocated separately, while physical P is counted once. Full F/X access contracts receive separate checks. Network judgments remain within the declared DC model and contingency set.
-
-### 5.4 Preserve chronology and information
-
-Task debt, budgets, and operating states carry between adjacent hours and across stage changes. Evaluation has explicit prior history and extends through registered task deadlines and required follow-up. Unobserved outcomes remain unresolved or right-censored; observed violations are retained.
-
-Construction and access plans are fixed before evaluation. The operating policy uses information observed at the time, with identical actions under identical observed histories. Independent holdout paths do not influence plan or parameter selection. Construction plans, capacity, and operating policies are frozen before execution on those paths.
-
-## 6 Comparisons and reporting
-
-Within each given business path, the main experiment compares a small number of given plans under the same external workload, deadlines, clean resources, and evaluation criteria. Plan comparisons are made separately for fast and slow business scenarios. Differences in equipment or grid commissioning remain explicit properties of the plans.
-
-| Comparison | Question addressed |
-|---|---|
-| Fast/slow business growth × on-time/delayed grid completion, with separate equipment paths | At which stage does progress misalignment become binding? |
-| Instantaneous MW, fixed recovery headroom, full temporal assessment (two comparison axes) | Does a simplification's own schedule survive full temporal constraints (method verdict × replay verdict); and does a simplification reject a plan the complete temporal strategy completes (method verdict × strategy verdict)? |
-| Recovery timing with matched immediate requests, deferral, recovery-start debt, and total and peak clean resources | With equipment and network paths fixed, does shifting only clean recovery allocations change deadline outcomes? |
-| Essential sensitivities in eligible share, deadlines, and CFE target | Where do judgments change, and is the main mechanism stable? |
-| Frozen plan and policy executed on independent holdout paths | Does the selected plan remain applicable on new paths? |
-
-Results report access allowances, commissioned capacity, workload occupancy, deferral and recovery trajectories, grid and CFE shortfalls, overdue tasks, and unfinished work by stage, producing bottleneck-transition maps, matched recovery trajectories, and tables of assessment differences. The difference tables report both comparison axes separately and give the counts of every agreement and undetermined region, so no distribution is omitted because one direction did not occur. Method verdicts, actual path performance, and full contract evidence are reported separately; observed violations and unresolved outcomes are retained as distinct states. A fixed policy's failure means that policy did not deliver on that path. Matched recovery-timing cases serve as mechanism diagnostics; actual plan comparisons retain request and resource differences caused by equipment and network changes. Minimum workload-flexibility capacity D is reported as a point only with adequate bounds under the same contract and policy scope; otherwise the result remains an interval or unresolved.
-
-The data design uses traceable public network and workload sources and identifies the origins of equipment-power, deadline, stage-progress, and clean-allocation parameters separately. Cross-source records paired through stated assumptions support mechanism scenarios. Equal-weight comparisons of such scenarios do not estimate real ramp-up, construction-delay, or violation probabilities.
-
-## 7 Expected outputs and deliverables
-
-Deliverables comprise an assessment model for given staged interconnection plans, figures explaining stage-specific bottlenecks and decision boundaries, traceable inputs and computational records, and the complete thesis. Conclusions follow the comparisons, including unchanged judgments and failure regions. Network conclusions are limited to the declared DC model and contingency set; engineering application requires the corresponding safety studies.
+These preliminary results support a conditional claim: recovery constraints can change stage-dependent design, with their impact determined jointly by deadlines, event shape, and available headroom. Further work must test the criterion, establish deadline and cost evidence, and compare tiered δ/ε products directly. If actual workloads generally allow long recovery periods, the emphasis should shift toward conditions under which instantaneous assessment is sufficient.
 
 ## References
 
-[1] International Energy Agency (2025). Energy and AI. IEA. <https://www.iea.org/reports/energy-and-ai>
+[1] International Energy Agency (2025). Energy and AI. IEA.
 
-[2] Mytton, D.; Ashtine, M.; Wheeler, S.; Wallom, D. (2023). Stretched grid? Managing data center energy demand and grid capacity. Oxford Open Energy, 2, oiad014. <https://doi.org/10.1093/ooenergy/oiad014>
+[2] Mytton, D.; Ashtine, M.; Wheeler, S.; Wallom, D. (2023). Stretched grid? Managing data center energy demand and grid capacity. Oxford Open Energy, 2, oiad014.
 
-[3] Kim, D.; Dong, L.; Xie, L. (2026). Flexibility-aware framework for efficient planner-initiated siting of data center. Nature Communications. <https://doi.org/10.1038/s41467-026-72324-9>
+[3] Brancucci, C.; et al. (2025). Flexible data centers: A faster, more affordable path to power. Camus Energy, encoord, and Princeton ZERO Lab, white paper.
 
-[4] Chen, Y.; Zheng, X. (2026). To Defer or To Shift? The Role of AI Data Center Flexibility on Grid Interconnection. DOI: 10.1145/3765611.3815593; arXiv:2604.05376. <https://doi.org/10.1145/3765611.3815593>
+[4] Wierman, A.; Liu, Z.; Liu, I.; Mohsenian-Rad, H. (2014). Opportunities and Challenges for Data Center Demand Response. International Green Computing Conference, 1–10.
 
-[5] Wan, H.; Li, X. (2026). Data Center Spatio-Temporal Load Flexibility in Security-Constrained Unit Commitment for Enhanced Grid Efficiency and Reliability. arXiv:2605.18517. <https://arxiv.org/abs/2605.18517>
+[5] Liu, Z.; Wierman, A.; Chen, Y.; Razon, B.; Chen, N. (2013). Data center demand response: Avoiding the coincident peak via workload shifting and local generation. SIGMETRICS, 341–342.
 
-[6] Williams, C.; Colangelo, P.; Coskun, A.; et al. (2026). Power-Flexible AI Data Centers: A New Paradigm for Grid-Responsive Compute. arXiv:2606.25098. <https://arxiv.org/abs/2606.25098>
+[6] Goiri, I.; Le, K.; Haque, M. E.; et al. (2011). GreenSlot: Scheduling Energy Consumption in Green Datacenters. SC, Article 20.
 
-[7] Wierman, A.; Liu, Z.; Liu, I.; Mohsenian-Rad, H. (2014). Opportunities and Challenges for Data Center Demand Response. International Green Computing Conference, 1-10. <https://doi.org/10.1109/IGCC.2014.7039172>
+[7] Khanal, S.; Roh, G.; Yao, B.; et al. (2026). Shift or curtail? How much data-center flexibility is worth depends on the host power grid. arXiv:2608.19622v1.
 
-[8] Liu, Z.; Wierman, A.; Chen, Y.; Razon, B.; Chen, N. (2013). Data center demand response: Avoiding the coincident peak via workload shifting and local generation. SIGMETRICS, 341-342. <https://doi.org/10.1145/2465529.2465740>
+[8] Butt, H. Z.; Fatima, R.; Li, X. (2026). Minimizing Grid Interconnection Capacity Requirements for AI Data Centers: A Developer-Side Planning Framework with Onsite Resources and Workload Flexibility. arXiv:2608.29359v1.
 
-[9] Goiri, I.; Le, K.; Haque, M. E.; et al. (2011). GreenSlot: Scheduling Energy Consumption in Green Datacenters. SC, Article 20. <https://doi.org/10.1145/2063384.2063411>
+[9] Li, S.; Fang, B.; Qin, J.; Chen, C. (2026). Priority-Aware Firm and Flexible Capacity Quantification for Large-Load Interconnection. arXiv:2611.13673v1.
 
-[10] Radovanović, A.; Koningstein, R.; Schneider, I.; et al. (2023). Carbon-Aware Computing for Datacenters. IEEE Transactions on Power Systems, 38(2), 1270-1280. <https://doi.org/10.1109/TPWRS.2022.3173250>
+[10] Zeng, B.; Zhao, L. (2013). Solving two-stage robust optimization problems using a column-and-constraint generation method. Operations Research Letters, 41(5), 457–461.
 
-[11] Fan, Y.; Zhao, J. (2026). Harnessing Flexible Spatial and Temporal Data Center Workloads for Grid Regulation Services. arXiv:2602.01508v1. <https://arxiv.org/abs/2602.01508v1>
+[11] Li, M. (2026). asi-trace-power: Hourly load and eligible-flexibility reconstruction from the Alibaba cluster-trace-gpu-v2026. Code and data, v1.0.1; companion paper arXiv:2609.05406.
 
-[12] Khanal, S.; Roh, G.; Yao, B.; et al. (2026). Shift or curtail? How much data-center flexibility is worth depends on the host power grid. arXiv:2608.19622v1. <https://arxiv.org/abs/2608.19622v1>
-
-[13] Butt, H. Z.; Fatima, R.; Li, X. (2026). Minimizing Grid Interconnection Capacity Requirements for AI Data Centers: A Developer-Side Planning Framework with Onsite Resources and Workload Flexibility. arXiv:2608.29359v1. <https://arxiv.org/abs/2608.29359v1>
-
-[14] Han, S.; Kim, H.-J.; Lee, D. (2020). A Long-Term Evaluation on Transmission Line Expansion Planning with Multistage Stochastic Programming. Energies, 13(8), 1899. <https://doi.org/10.3390/en13081899>
-
-[15] Vafamehr, A.; Khodayar, M. E.; Manshadi, S. D.; Ahmad, I.; Lin, J. (2019). A Framework for Expansion Planning of Data Centers in Electricity and Data Networks Under Uncertainty. IEEE Transactions on Smart Grid, 10(1), 305-316. <https://doi.org/10.1109/TSG.2017.2738444>
-
-[16] Shao, Z.; Yu, N.; Wong, D. (2025). Stochastic Long-Term Joint Decarbonization Planning for Power Systems and Data Centers: A Case Study in PJM. International Journal of Electrical Power & Energy Systems, 173, 111377. <https://doi.org/10.1016/j.ijepes.2025.111377>
-
-[17] Zhao, H.; Yu, C.; Fu, G.; et al. (2026). Source-Load Coordinated Multi-Stage Low-Carbon Planning for Data Center Clusters Considering Construction Sequence. Energies, 19(17), 4153. <https://doi.org/10.3390/en19174153>
-
-[18] Zhu, M.; Kai, Q.; Liu, Y.; Yan, Y.; Zhao, H. (2026). Virtual Transmission Lines from Data Center Workload Migration: Coordinated Multi-Year Transmission Expansion Planning. arXiv:2610.13032v1. <https://arxiv.org/abs/2610.13032v1>
-
-[19] Wang, Q.; Huang, T.; Liu, Q.; Na, J. (2026). Power-infrastructure expansion planning for training-oriented AI data centers under large-model scaling uncertainty. Energy and AI, 25, 100840. <https://doi.org/10.1016/j.egyai.2026.100840>
-
-[20] Ghosh, S.; Mohammed, N.; Sadi, M. A. H. (2026). A Phased Development Framework Enabling Islanded Operation of Sustainable AI Data Centers With Onsite Grid-Following and Grid-Forming Energy Architectures. arXiv:2607.17391v1. <https://arxiv.org/abs/2607.17391v1>
-
-[21] de Chalendar, J. A.; Benson, S. M. (2019). Why 100% Renewable Energy Is Not Enough. Joule, 3(6), 1389-1393. <https://doi.org/10.1016/j.joule.2019.05.002>
-
-[22] Miller, G. J.; Novan, K.; Jenn, A. (2022). Hourly accounting of carbon emissions from electricity consumption. Environmental Research Letters, 17(4), 044073. <https://doi.org/10.1088/1748-9326/ac6147>
-
-[23] Riepin, I.; Brown, T. (2024). On the means, costs, and system-level impacts of 24/7 carbon-free energy procurement. Energy Strategy Reviews, 54, 101488. <https://doi.org/10.1016/j.esr.2024.101488>
-
-[24] Riepin, I.; Jenkins, J. D.; Swezey, D.; Brown, T. (2025). 24/7 carbon-free electricity matching accelerates adoption of advanced clean energy technologies. Joule, 9, 101808. <https://doi.org/10.1016/j.joule.2024.101808>
-
-[25] Riepin, I.; Brown, T.; Zavala, V. M. (2025). Spatio-temporal load shifting for truly clean computing. Advances in Applied Energy, 17, 100202. <https://doi.org/10.1016/j.adapen.2024.100202>
-
-[26] Guo, F.; Soares, J.; Ma, L.; et al. (2026). Integrated planning of wind-solar-storage-grid systems for private-wire supplied data centers. Applied Energy, 414, 127841. <https://doi.org/10.1016/j.apenergy.2026.127841>
+[12] IEEE Reliability Test System Task Force (1979). IEEE reliability test system. IEEE Transactions on Power Apparatus and Systems, 98(6), 2047–2054.

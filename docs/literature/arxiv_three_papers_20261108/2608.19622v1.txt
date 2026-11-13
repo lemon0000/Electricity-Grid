@@ -1,0 +1,2297 @@
+=== PDF PAGE 1 ===
+Shift or curtail? How much data-center flexibility
+is worth depends on the host power grid
+Saroj Khanal 1, Geon Roh 2, Boyu Yao 3, Abraham Silverman 4,
+Dennice Gayme5, Charalambos Konstantinou 6, Jip Kim 2,
+Yury Dvorkin1,3*
+1*Department of Electrical and Computer Engineering, Johns Hopkins
+University, 3400 North Charles Street, Baltimore, 21218, MD, USA.
+2Department of Energy Engineering, Korea Institute of Energy
+Technology, 21 Kentech-gil, Naju-si, 58330, Republic of Korea.
+3*Department of Civil and Systems Engineering, Johns Hopkins
+University, 3400 North Charles Street, Baltimore, 21218, MD, USA.
+4Ralph O’Connor Sustainable Energy Institute, Johns Hopkins
+University, 3400 North Charles Street, Baltimore, 21218, MD, USA.
+5Department of Mechanical Engineering, Johns Hopkins University,
+3400 North Charles Street, Baltimore, 21218, MD, USA.
+6Division of Computer, Electrical and Mathematical Science and
+Engineering, King Abdullah University of Science and Technology, 4700
+King Abdullah University of Science and Technology, Thuwal,
+23955-6900, Saudi Arabia.
+*Corresponding author(s). E-mail(s): ydvorki1@jhu.edu;
+Contributing authors: skhanal8@jhu.edu; rohgeon1224@kentech.ac.kr;
+byao3@jhu.edu; asilve39@jh.edu; dennice@jhu.edu;
+charalambos.konstantinou@kaust.edu.sa; jipkim@kentech.ac.kr;
+Abstract
+Data-center growth risks overbuilding power grid infrastructure and stranding
+capital. Flexible data-center operation can defer infrastructure investments, but
+its value depends on the flexibility mechanism and the host power grid character-
+istics. We classify data-center load as firm, flexible or interruptible, and embed
+them in capacity expansion applied to market-organized, fossil-heavy PJM and
+1
+arXiv:2608.19622v1  [physics.soc-ph]  20 Aug 2026
+
+=== PDF PAGE 2 ===
+carbon-capped, centrally coordinated Korea. In PJM, the flexibility value is spa-
+tial: shifting workloads between zones reduces system cost by 6% in 2028 and
+19% in 2038, avoiding 4.4 GW and 8.9 GW of gas and nuclear generation. In
+Korea, it is temporal: shifting load into midday solar hours makes 0.5 GW of
+additional solar worth building in 2028 and avoids 1.2 GW of gas and 0.3 GW of
+batteries in 2038. In both, realistic event-shape limits diminish the value of cur-
+tailment. The results show that flexibility procurement and its value are driven
+by grid characteristics and policy objectives.
+Keywords:Data-center flexibility, Capacity expansion planning, Resource adequacy,
+PJM, Korea
+1 Introduction
+Electricity demand from data centers has moved from a marginal planning consider-
+ation to a leading driver of power system infrastructure investment [1, 2]. Individual
+hyperscale campuses request gigawatt-scale interconnection capacity, often concen-
+trated in a few locations, and recent forecasts attribute most near-term peak-load
+growth to data centers [1]. However, whether a data-center project materializes is
+uncertain, with local opposition [3] and equipment supply chains among the reasons
+[4, 5]. Power system planners use capacity expansion models (CEM) to decidehow
+muchnew generation, storage and transmission infrastructure to build andwhereto
+build it for a given target year. Rapid growth of data centers exacerbates a current-
+practice limitation of treating large loads as fixed, inelastic demand. Under this
+assumption, CEM outcomes are planned for a hypothetical peak demand, thus risking
+stranded investments whose costs are then recovered from non-data-center consumers
+through rates and interconnection charges.
+Capacity and transmission expansion driven by data-center load growth also con-
+tributes to affordability and resource-adequacy concerns [6, 7]. Operating data-center
+loads flexibly, i.e., by adjusting their power consumption in response to power grid
+conditions, is capable of alleviating the peak demand conditions that may otherwise
+trigger unnecessary capital investments. But data-center flexibility is not costless to
+data centers, if their expensive hardware is idle, and can be delivered via different phys-
+ical mechanisms, which affects its value to the power grid. For example, data-center
+flexibility can be exercised by shifting workload to later hours (temporal-shifting),
+moving it to another data center (spatial-shifting), or drawing less power from the
+grid while on-site generation resources, co-located with the data center, provide back
+up (curtailment). Hence, a central question ishowdata-center flexibility creates value
+for the grid and whether the same mechanism carries that value across different power
+grids.
+Data-center flexibility can be described from two perspectives. A data-center oper-
+ator classifies computing tasks by whether they must run now, can wait, can run at
+another site, or can be dropped. On the other hand, a grid operator sees only the net
+2
+
+=== PDF PAGE 3 ===
+Table 1:Mapping data-center flexibility options onto grid-facing tiers and
+mechanisms.Operational options reported by the Electric Power Research Institute
+(EPRI) Data Center Flexible Load Initiative (DCFlex) and related work [10, 19],
+each classified by the tier and mechanism it produces under the grid-operator view.
+Many distinct options collapse onto three tiers, because workload management and
+on-site supply shape a facility’s power withdrawal from the grid in the same ways.
+Entries marked (approx.) shape power withdrawal in the same direction but are not
+represented explicitly in the model.
+Operational option Tier Mechanism Representative
+studies
+(data-center view) (grid-operator view)
+Workload management
+Defer batch or training jobs Flexible Temporal-shifting [8, 9]
+Pre-cool or use thermal
+storage
+Flexible Temporal-shifting
+(approx.)
+[10]
+Migrate jobs to another site Flexible Spatial-shifting [11–14]
+Throttle or pause compute Interruptible Curtailment [14–16]
+Curtail under an
+interruptible tariff
+Interruptible Curtailment [16–18]
+On-site (co-located) supply
+Discharge on-site battery
+or UPS
+Flexible Temporal-shifting
+(approx.)
+[19]
+Run on-site or backup
+generation
+Interruptible Curtailment [19]
+Draw on co-located
+generation
+Interruptible Curtailment [20]
+No flexibility
+Serve all workload as it
+arrives
+Firm None [19, 20]
+power withdrawal at the point of interconnection and cannot differentiate, for exam-
+ple, a paused training task from using an on-site generation. Therefore, for assessing
+the grid value of data-center flexibility, this paper characterizes data-center load and
+its flexibility by how its power withdrawal from the grid is shaped. Data-center load
+is firm if it must be served immediately, flexible if it can be shifted in time or to
+another eligible data center, and interruptible if the power withdrawal can be reduced
+near-instantly (either by stopping computations or by using on-site generation), see
+Table 1. Each flexibility tier has its limits. The flexible tier is constrained by a make-
+up time or shift cap, and the interruptible tier is limited by its depth, duration, ramp
+and recovery.
+Two trends make the data-center operational options in Table 1 appealing for
+integration with CEM. First, a growing share of data-center workloads is schedulable
+[2, 7, 10, 18, 19]. Hardware measurements put the inherent power flexibility of repre-
+sentative training and inference workloads at 18–55% of average consumption [16]. The
+3
+
+=== PDF PAGE 4 ===
+compute industry has also begun to price urgent and delay-tolerant workloads differ-
+ently [21], in part to temporarily reduce consumption from the power grid while also
+protecting latency-critical jobs [14, 16]. Thus, the EPRI DCFlex initiative classifies
+workloads by how far they can move in time or space, from real-time (and stream-
+ing) tasks that must be served immediately through interactive and batch tasks that
+can wait hours or run at another site, to training (and pure-batch) tasks that can be
+switched off within annual limits [10]. Second, the same change in power withdrawal
+from the power grid can be achieved without altering the workload. On-site resources
+can reshape net power withdrawal [10, 22] by reducing or shifting it in time. Defin-
+ing the flexibility tiers by power withdrawal from the power grid therefore allows for
+assessing the value of data-center flexibility without committing to a specific delivery
+mechanism.
+The three flexibility tiers in Table 1 are not interchangeable, and each maps to
+a distinct demand-management practice. Shifting compute to later hours is a data-
+center analogue of deferrable-demand scheduling [8] and underlies workload shifting to
+avoid coincident peaks [9]. It pays off when the marginal cost of energy varies within
+a day, and the same intraday reshaping can be produced by on-site resources. Shifting
+workload to data centers with cheaper power is a planning counterpart of geographical
+load balancing [11, 12], and has been used to route compute toward renewable-surplus,
+lower-emission regions [13]. It yields value when locations differ in cost (of energy)
+or congestion. A recent field demonstration rerouted part of a live inference workload
+from a Virginia cluster to one in Illinois during a Dominion winter-peak event, holding
+user-facing latency essentially unchanged [14]. Curtailment is the cheapest mechanism,
+but is limited by how much power withdrawal a data center can actually give up. A
+hyperscale data center can potentially curtail roughly a quarter of its power for several
+hours through workload and chip-frequency scaling [15]. Field experiments have shown
+10–40% reductions for hours and met emergency dispatch within tens of seconds while
+protecting priority jobs [14]. Curtailment is therefore shape-limited, and Fig. 1 defines
+the limits a credible interruptible tier must specify: how deeply power withdrawal may
+be cut, how long the curtailment may last, how fast it may change, and how soon
+another event may follow.
+Utilities, grid operators and regulators are developing mechanisms to capture one
+or multiple flexibility tiers, allowing data centers to trade operational flexibility for
+faster or more favorable interconnection terms [7, 10]. Large-load customers have his-
+torically been offered a single firm-service level, with demand-response programs as
+a notable and often rare exception. Texas Senate Bill 6 (2025) requires large loads
+to install remote-disconnect capability and to curtail during grid emergencies, with
+implementation beginning in 2026 [23]. In June 2026 the Federal Energy Regulatory
+Commission (FERC) issued show cause orders to all six jurisdictional Regional Trans-
+mission Organizations (RTOs) and Independent System Operators (ISOs) to justify
+or reform their large-load tariffs and to develop new transmission services for flexible
+large loads [20]. Within PJM, such reforms would enable loads of 50 MW or more
+to connect on non-firm service terms in exchange for curtailing power consumption
+when the grid is constrained [6, 7]. These proposals and reforms remain contested, and
+loads may instead rely on on-site generation to preserve firm uptime. This underlines
+4
+
+=== PDF PAGE 5 ===
+Power withdrawal (% of nominal)
+Time (hours)
+100
+0
+depth
+duration
+ramp
+recovery
+Fig. 1:Event-shape limits on an interruptible data-center load.Each curtail-
+ment is bounded by its depth, duration, ramp and recovery, and the annual interrupted
+energy and interruption hours are capped as well.
+the importance of characterizing data-center flexibility tiers by their grid value rather
+than by how the flexibility is provided.
+Despite empirical evidence that the data-center flexibility tiers vary in their grid
+value, most CEMs reduce data-center flexibility to a single mechanism or study these
+mechanisms in isolation [24, 25]. Standards and industry bodies, including the North
+American Electric Reliability Corporation (NERC) and the EPRI DCFlex consortium,
+increasingly frame flexibility as a spectrum rather than a binary firm or non-firm
+choice [10, 18, 19]. System-level studies estimate how much new flexible load existing
+grids can absorb, i.e., the headroom available without new generation or transmission.
+Norris et al. [2] find that the 22 largest U.S. balancing authorities could host 76–
+126 GW of additional load at annual curtailment rates of 0.25–1%, with roughly
+18 GW of headroom in PJM alone at 0.5% curtailment. This assessment considers
+the new load as a fixed demand block, curtails it only when total demand exceeds
+each region’s historical seasonal peak, and leaves out transmission limits, power plant
+start-up and ramping constraints, and any changes in generation or transmission. It
+therefore assesseshow muchflexible load fits under present peaks, but notwhereon the
+network flexibility is needed,whenthe additional capacity it defers would otherwise
+be built, orwhichdata-center flexibility tiers create value once generation, storage
+and transmission are co-planned.
+A smaller set of studies embeds data-center flexibility directly into capacity expan-
+sion or interconnection planning, and each resolves part of the problem. Kim et al.
+[26] propose a data-center siting framework that represents each candidate as a small
+set of standardized flexibility profiles, pre-screens locations through system-wide mar-
+ket impacts, and identifies pre-certified sites that can connect without necessitating
+major grid upgrades. On a synthetic 2,000-bus Texas system with a 2 GW data
+5
+
+=== PDF PAGE 6 ===
+center, it expands viable siting options by up to 21% and shortens interconnection
+from years to months. That framework is a short-run siting tool for fast-track inter-
+connection, and long-run generation, storage and transmission investments are not
+considered. Senga et al. [27] quantify the value of temporal-shifting across Western
+Electricity Coordinating Council (WECC), Texas and mid-Atlantic testbeds, but use
+a single aggregate flexibility representation, with no interruptible tier and no event-
+shape limits. Zuluaga et al. [24] co-optimize data-center placement with transmission
+and generation investment, but their only mechanism is siting the data center itself,
+which is a one-time investment decision without considering operational detail. Gu
+et al. [28] examine interruptible and temporal-shifting flexibility for distribution-grid
+interconnection under limits on utility-controlled interventions. Chen et al. [29] model
+both temporal-shifting and spatial-shifting within a generation expansion model, but
+do not consider storage investment and resource adequacy and simplify transmission
+expansion. Hence, the model cannot capture how flexibility defers investment jointly
+in generation, storage and transmission, and its single spatial mechanism attributes
+all locational value to congestion relief. Shao et al. [30] co-optimize generation, stor-
+age, transmission for data-center siting on a 21-zone PJM system, but the flexibility
+is modeled using a limited spatial-shifting mechanism in which workload is relocated
+across zones but must still be served in the hour it arrives. Several of these models
+[24, 26, 28, 29] are, moreover, demonstrated on reduced-order, synthetic test systems
+with limited policy realism. No prior study comprehensively accounts for the three
+data-center flexibility tiers within a CEM that co-optimizes generation, storage and
+transmission subject to resource adequacy and policy constraints, and then applies
+that model to a structurally different and realistic system.
+This paper therefore seeks to characterize and identify the factors driving the value
+of data-center flexibility and to integrate the three data-center flexibility tiers into
+CEM-based planning. Data-center load at each site is divided into firm, flexible and
+interruptible tiers. The flexible tier can shift load to later hours, creating a backlog
+that must be made up within a fixed horizon [8], and can move it to other eligible
+locations [11]. The interruptible tier can be curtailed within an annual energy budget,
+optionally subject to limits on total interruption hours and to the shape of each
+event (as illustrated in Fig. 1). We hold the flexibility formulation, cost structure and
+reliability accounting fixed across cases and vary only the host grid.
+This study is instantiated on realistic PJM and Korean test systems, chosen to
+form a controlled comparison. The two systems are similar in scale, peak demand,
+population and load composition, and both face rapid, geographically concentrated
+data-center demand growth. They differ, however, in the features that determine how
+flexibility creates value. First, the generation mixes differ, with gas and coal plus
+proposed gas and renewable additions in PJM, against solar expansion and coal phase-
+out in Korea. Second, the planning institutions differ, with decentralized wholesale
+markets and multi-party stakeholder processes in PJM, against centralized national
+planning in Korea where a single plan sets load forecasts and candidate resources.
+Finally, the policy constraints differ, with varying state technology carve-outs and
+clean-energy requirements in PJM, against a single national carbon cap in Korea.
+6
+
+=== PDF PAGE 7 ===
+Holding the model fixed therefore isolates how these structural differences, rather than
+system size or growth rate, determine which tier and mechanism creates value.
+PJM is a focal point of US data-center growth. Most projected peak-demand
+growth over the next decade is attributed to data centers, with Northern Virginia’s
+Dominion zone hosting the world’s largest hyperscale data-center concentration [1].
+Recent capacity auctions have cleared at sharply higher prices, partly due to large-
+load additions, while debate over flexible interconnection intensifies [6, 7]. PJM, and
+Dominion in particular, is a policy-relevant test of whether flexibility can defer or
+relocate the supply-side capacity additions, transmission network upgrades and com-
+pliance investments that firm hyperscale load requires. By contrast, Korea plans
+centrally through the Basic Plan for Electricity Supply and Demand (BPESD). The
+11th BPESD projects data-center peak demand of 6.2 GW by 2038, about 8.9 GW
+of contract capacity [31]. The demand is geographically concentrated, with 60.4% of
+data centers in the metropolitan area in 2024, where new loads face congestion and
+grid-stability constraints [32]. Korea’s approach has focused on siting incentives that
+steer new facilities toward non-metropolitan regions [33, 34], and it has yet to develop
+a non-firm interconnection product [20].
+This study finds that exercising data-center flexibility using a grid-appropriate
+flexibility tier reduces total system cost in both systems, but through different path-
+ways. PJM monetizes data-center flexibility mainly by relocating load between zones
+in both the 2028 and 2038 instances, which avoids the capacity and compliance obliga-
+tions that firm load would create in Dominion. Korea’s data-center flexibility instead
+makes additional solar photovoltaic (PV) capacity worth building in 2028, then shifts
+load into midday solar hours in 2038 once the carbon cap binds and PV is already at
+its expansion limit. Varying the tier composition of data-center flexibility shows that
+their marginal values are host-grid dependent, with the preferred mix shifting with
+power grid structure, interruption limits and policy constraints. Fully interruptible
+load is the lowest-cost option in both systems, but its value depreciates when relia-
+bility limits, event-shape constraints and the opportunity cost of forgone compute are
+introduced.
+2 Results
+2.1 Modeling framework and cases
+We represent data-center demand at each location using the firm, flexible and inter-
+ruptible tiers, which vary across the case studies. The flexible tier carries a rolling
+24-hour backlog of workloads, which must be made up within the same day, and may
+also move load to other eligible data-center locations. The interruptible tier may cur-
+tail up to 5% of its own annual energy in the base case, with shape limits on each
+interruption event (Fig. 1) variably enforced as needed in specific case studies. Firm
+load may also be shed involuntarily, at the value of lost load.
+The complete CEM is given in Methods (Sec. 4). Resource adequacy is enforced
+through effective load-carrying capability (ELCC) accounting. This is the industry-
+standard method, and it credits each resource only with the firm capacity it reliably
+contributes at times of system stress. Flexible and interruptible tiers receive such a
+7
+
+=== PDF PAGE 8 ===
+Table 2:The 2028 outcomes for PJM and Korea.Columns are the all-firm baseline, the
+two remaining single-tier cases (all-flex, all-inter) and the realistic mix (0.3/0.5/0.2). Percentages
+are changes relative to the all-firm baseline of the same system. Costs are annualized$B; energy
+is TWh. Policy & Adequacy aggregates RPS, capacity carve-out and resource-adequacy shortfall
+costs.
+PJM (2028) Korea (2028)
+Metric All-firm All-flex All-inter Realistic All-firm All-flex All-inter Realistic
+Total cost ($B) 34.09−8.51%−20.01%−6.34% 18.50−0.16%−16.35%−0.26%
+Investment ($B) 2.80−37.89%−37.89%−21.72% 1.52 +4.52%−29.51% +2.23%
+Operation ($B) 18.56 +1.98%−19.09% +0.81% 16.97−0.62%−15.17%−0.50%
+Policy & Adequacy ($B) 12.73−17.42%−17.42%−13.41%∼0∼0∼0∼0
+Temporally-shifted (TWh)∼0 0.98∼0 0.16∼0 0.55∼0 0.29
+Spatially-shifted (TWh)∼0 1.75∼0 0.91∼0 0.42∼0 0.20
+Curtailed (TWh)∼0∼0 142.37 1.42∼0∼0 42.55 0.43
+credit as well. The same formulation, cost structure, ELCC accounting and flexibility
+parameters are applied to both systems, and only the input data differ. Data-center
+demand follows each system’s own forecast. In PJM it rises to 16.3 GW by 2028 and
+74.8 GW by 2038, and in Korea to 4.9 and 8.9 GW, respectively. Candidate generation,
+storage and transmission are drawn from the PJM interconnection queue and the
+BPESD in Korea (Table 5).
+For each power grid, we also model two planning horizons. The 2028 scenario
+captures near-term constraints on interconnection and equipment supply [4], and the
+2038 scenario allows longer-term co-planning of generation, storage and transmission.
+This isolates the value of data-center flexibility without assuming a specific expansion
+path between the target years. In each instance, we solve four data-center cases, three
+single-tier cases at 100% firm, flexible and interruptible, and a realistic mix of 30%
+firm, 50% flexible and 20% interruptible. This realistic mix reflects industry estimates
+that a minority of workloads are must-run, about half can wait or run elsewhere, and
+a smaller share can be curtailed [10]. In the all-interruptible case the annual energy
+cap is relaxed to 100% of the interruptible tier’s own annual energy (ϕ inter
+max = 1), so
+the tier may be curtailed in full.
+2.2 2028 results: data-center flexibility avoids gas in PJM and
+adds solar in Korea
+In PJM, the realistic mix reduces total annualized cost by 6.34%, even though operat-
+ing cost rises slightly. Table 2 summarizes the four data-center cases. The total saving
+comes from avoiding the capacity that firm data-center load would otherwise force
+into the system. Gas combined-cycle build falls from 14.09 GW in the all-firm case to
+6.37 GW in the all-flexible case, and the realistic mix builds an intermediate 9.67 GW
+(Fig. 2 and supplementary Fig. 8). Solar build is unchanged at 6.48 GW across these
+8
+
+=== PDF PAGE 9 ===
+All-firm All-flex All-inter Realistic
+0
+20
+40
+60
+80
+Added capacity (GW)
+PJM, 2028
+All-firm All-flex All-inter Realistic
+Korea, 2028
+All-firm All-flex All-inter Realistic
+0
+20
+40
+60
+80
+Added capacity (GW)
+PJM, 2038
+All-firm All-flex All-inter Realistic
+Korea, 2038
+Storage
+Nuclear
+Coal
+LNG
+Onshore Wind
+Offshore Wind
+PV
+Fig. 2:Generation and storage expansion.Data-center flexibility reduces gas
+expansion in PJM in 2028 and nuclear and storage expansion in 2038. In Korea, data-
+center flexibility supports the PV growth in 2028, then substitutes for storage and
+LNG capacity in 2038.
+PJM cases. Thus, the near-term PJM’s flexibility value is in the avoided capacity
+expansion, not in the renewable output absorbed.
+The way flexibility creates value in PJM in 2028 is spatial, changingwherethe
+load runs. The realistic case spatially shifts 0.91 TWh of load between zones, or 1.3%
+of the flexible-tier energy, which is half of total data-center energy in this mix, against
+only 0.16 TWh (0.2%) postponed in time (supplementary Fig. 9). The spatially-shifted
+workload concentrates into ComEd (0.91 TWh net) and is drawn fairly evenly from
+Dominion, PPL and PSEG at about 0.25 TWh each (supplementary Fig. 10). PJM’s
+data-center flexibility is valuable because it changes where the data-center load appears
+on the network and in the capacity accounting, not because it shifts energy between
+hours of the day.
+The 2028 results for Korea reveal a different pattern. The realistic mix saves only
+0.26% in total cost, raising annualized investment by 2.23% while lowering operating
+cost by 0.50%. This is not a contradiction. Data-center flexibility allows the model
+to build and use more solar PV, which is cheap to operate but contributes little firm
+capacity, so it is attractive only if demand can be reshaped to use it. PV generation
+expands from 7.70 GW in the all-firm case to 8.46 GW in the all-flexible case, and the
+9
+
+=== PDF PAGE 10 ===
+Table 3:The 2038 outcomes for PJM and Korea.Columns are the all-firm baseline, the
+two remaining single-tier cases (all-flex, all-inter) and the realistic mix (0.3/0.5/0.2). Percent-
+ages are changes relative to the all-firm baseline of the same system. Costs are annualized in
+$B; energy is in TWh. Policy & Adequacy aggregates RPS, capacity carve-out and resource-
+adequacy shortfall costs.
+PJM (2038) Korea (2038)
+Metric All-firm All-flex All-inter Realistic All-firm All-flex All-inter Realistic
+Total cost ($B) 96.15−25.49%−49.70%−19.43% 33.31−1.47%−25.81%−1.24%
+Investment ($B) 15.62−37.51%−60.44%−53.10% 12.95−0.33%−24.60%−1.15%
+Operation ($B) 37.14 +3.91%−51.47% +5.83% 20.36−2.87%−26.58%−1.67%
+Policy & adequacy ($B) 43.39−46.59%−44.32%−29.23%∼0∼0∼0∼0
+Temporally-shifted (TWh)∼0 7.70∼0 10.35∼0 13.51∼0 7.33
+Spatially-shifted (TWh)∼0 18.56∼0 11.83∼0 1.29∼0 0.68
+Curtailed (TWh)∼0∼0 655.40 6.55∼0∼0 77.87 0.78
+realistic mix requires building 8.20 GW (supplementary Fig. 11). Consistent with a
+system that is not yet capacity-tight, the flexible tier is used lightly, changingwhenthe
+workload runs by shifting it within the day (temporal-shifting, 1.4% of its flexible-tier
+energy) rather thanwhereit runs by moving it between zones (spatial-shifting, 0.6%).
+Korea’s near-term balancing need is to line demand up with the daily solar cycle, not
+to move load away from congested locations. The all-interruptible case is the cheapest
+at 16.35% below the all-firm baseline, but it builds the least solar PV at 5.58 GW,
+because curtailing the load eliminates the demand that would justify new solar. The
+realistic produces the results in between these extremes, with solar PV at 8.20 GW.
+Its main near-term effect is to make additional solar PV economically usable rather
+than to avoid capacity.
+Overall, the two grids lower cost in 2028 in opposite ways. PJM cuts investment
+by 21.7% and the cost of missing clean-energy and reliability requirements by 13.4%
+while operating cost rises slightly (+0.8%). Korea instead raises investment by 2.2% to
+build more solar PV, from 7.70 to 8.20 GW, and recovers that through lower operating
+cost (−0.5%). One system avoids capacity and compliance cost, the other adds solar,
+and both reach a net cost reduction.
+2.3 2038 results: data-center flexibility relocates load in PJM
+and shifts it into midday hours in Korea
+By 2038 data-center flexibility becomes more valuable in both grids, but the way
+it is valorized differs. In PJM, the realistic mix reduces total annualized cost by
+19.43% (Table 3). The flexible tier is still dominated by spatial-shifting rather than by
+temporal-shifting. The model relocates 11.83 TWh (3.6% of the flexible-tier energy),
+and shifts 10.35 TWh (3.2% of the flexible-tier energy) in time. The spatially-shifted
+load moves out of Dominion (9.03 TWh) and Dayton (1.13 TWh), almost entirely
+into ComEd (8.60 TWh net), with smaller inflows to PPL (0.70) and APS (0.44). The
+10
+
+=== PDF PAGE 11 ===
+0
+50
+100
+150
+200
+All-firm All-flex All-firm All-flex
+1 6 12 18 24
+Hour
+0
+50
+100
+150
+200
+All-inter
+1 6 12 18 24
+Hour
+Realistic
+1 6 12 18 24
+Hour
+All-inter
+1 6 12 18 24
+Hour
+Realistic
+Generation / flexible load (GW)
+PJM 2038, Day 223 Korea 2038, Day 201
+Nuclear
+Coal
+Coal-Ammonia Retrofit
+LNG
+LNG-Hydrogen Retrofit
+Onshore Wind
+Offshore Wind
+PV
+Hydro
+Storage discharge
+Other
+Data Center temporal shifting
+Data Center interruption
+Data Center makeup
+Storage charge
+(a) Generation dispatch (2038)
+−100
+0
+100
+Day 12, w=31d Day 34, w=16d Day 40, w=3d Day 29, w=25d Day 88, w=19d Day 113, w=38d
+−100
+0
+100
+Day 60, w=76d Day 140, w=76d Day 175, w=25d Day 115, w=20d Day 128, w=25d Day 139, w=57d
+−100
+0
+100
+Day 202, w=19d Day 205, w=10d Day 223, w=28d Day 181, w=21d Day 201, w=27d Day 243, w=34d
+1 6 12 18 24
+Hour
+−100
+0
+100
+Day 260, w=11d
+1 6 12 18 24
+Hour
+Day 304, w=48d
+1 6 12 18 24
+Hour
+Day 362, w=22d
+1 6 12 18 24
+Hour
+Day 285, w=37d
+1 6 12 18 24
+Hour
+Day 335, w=36d
+1 6 12 18 24
+Hour
+Day 349, w=26d
+0
+500
+1000
+0
+500
+1000
+0
+500
+1000
+0
+500
+1000
+0
+20
+40
+60
+0
+20
+40
+60
+0
+20
+40
+60
+0
+20
+40
+60
+PJM 2038 Korea 2038
+Temporal shifting / makeup (% of flexible Data Center load)
+Temporal backlog (GWh)
+Temporal backlog (GWh)
+Temporal Shifting Interruption Makeup Temporal backlog
+(b) Temporal-shifting, make-up and interruption for a representative day (2038).
+Fig. 3:Operations with data-center flexibility in 2038.Summer peak-day gen-
+eration stacks (a), and realistic-mix deferral, make-up and interruption profiles with
+the cyclic backlog in black (b), shown as a percentage of data-center capacity and in
+GWh. Korea’s flexible load acts as virtual storage, moving 7.33 TWh into midday solar
+hours while spatially shifting only 0.68 TWh. PJM divides more evenly (11.83 TWh
+spatially-shifted, 10.35 TWh temporally-shifted), but only spatial-shifting carries the
+capacity-facing value (Sec. 2.7).
+temporal-shifting carries far less value. Further, shrinking the make-up window from
+24 to 4 h changes PJM cost by under 0.02%, because the grid substitutes spatial-
+shifting for the temporal-shifting it can no longer perform (make-up-horizon panel
+of Fig. 7, where PJM’s cost curve stays essentially flat asH makeup falls from 24 to
+11
+
+=== PDF PAGE 12 ===
+4 h). The generation expansion is concentrated in the most capital-intensive capac-
+ity (Fig. 2 and supplementary Fig. 12). Thus, the realistic mix cuts nearly all of the
+8.97 GW of new nuclear expansion that firm load would require to just 0.07 GW, stor-
+age from 15.62 to 1.52 GW and transmission from 7.34 to 3.50 GW, while solar and
+gas expansion remains fixed at 30.90 and 26.62 GW. Thus, firm data-center load forces
+the most expensive, longest-lead capacity into the system, and data-center flexibility
+in the form of spatial-shifting is what allows the system to avoid it.
+The cost savings come from two sources. First, in the all-firm 2038 case the total
+cost consists of$43.4B policy and adequacy compliance,$37.1B operation and$15.6B
+of annualized (generation, storage and transmission) investment. The policy cost itself
+is$29.0B of RPS compliance,$7.6B of capacity carve-out and$6.8B of resource-
+adequacy shortfall penalty (Table 3). The larger saving is from the policy term, which
+falls to$30.7B (−29.2%). Both the adequacy-shortfall and RPS compliance penalties
+fall to$4.9B and$18.3B, because the flexible and interruptible tiers earn an ELCC
+demand-resource credit that reduces the accredited-capacity gap. Second, the invest-
+ment reduces from$15.6B to$7.3B (−53.10%) and this reduction is driven by the
+avoided nuclear, storage and transmission capacity. Operation cost, on the other hand,
+rises modestly to$39.3B (+5.83%) as workload is served in costlier hours and zones.
+PJM’s flexibility value is therefore split between avoided compliance (policy/adequacy)
+cost and avoided investment costs.
+In Korea the binding constraint is the carbon cap rather than load growth. The
+realistic mix reduces total cost by 1.24%, operation by 1.67% and investment by
+1.15%. Unlike in 2028, the CO2e emission constraint now binds, so solar PV is already
+at 40.93 GW in the all-firm, all-flex and realistic cases, and temporal flexibility no
+longer adds value at the margin since it can no longer exploit PV arbitrage. Instead,
+it acts as virtual storage, shifting 7.33 TWh in time while relocating only 0.68 TWh.
+This is valuable because it makes better use of the cap-mandated PV, substituting
+for physical balancing resources and reducing battery storage from 1.01 to 0.69 GW
+and gas from 20.58 to 19.36 GW (supplementary Fig. 13). Temporal-shifting reshapes
+demand around the renewable fleet without reducing it. Interruption is the only way
+that reduces it, and the all-interruptible case cuts PV from 40.93 to 35.83 GW and
+the LNG–hydrogen retrofit to nearly zero, because curtailing the load removes the
+demand that justified the solar expansion.
+The dispatch and backlog profiles make the PV arbitrage directly visible (Fig. 3
+and supplementary Fig. 14). In Korea the flexible tier is held back in the morning and
+evening and made up during midday solar hours, so the backlog fills and empties on a
+daily cycle. In PJM the same tier moves some load between hours, but the backlog can
+be emptied at no cost, because spatial-shifting stands in for whatever temporal-shifting
+is given up (Fig. 4).
+2.4 Locational capacity value drives PJM outcomes, the
+carbon cap drives Korean outcomes
+The expansion differences explain why the same flexibility portfolio produces different
+grid value. PJM is shaped by a geographically concentrated data-center load and by
+large differences between zones in the value of capacity, in how much firm capacity
+12
+
+=== PDF PAGE 13 ===
+200 km
+<= -10%
+0%
+>= 10%
+Net shift
+(% cap.)
+Projected Data Center
+Capacity (MW)
+1,000 MW
+100 MW
+200 km
+Fig. 4:Spatial-shifting of data-center load with the 2038 realistic mix.Circle
+size is the projected data-center load at each node; color is the net spatial shift relative
+to that node’s capacity.
+each resource is accredited for reliability, and in clean-energy compliance. Relocating
+workload to zones where it adds less to these requirements avoids local expansion
+even when it does not lower energy cost. This spatial value is not about relieving
+congested transmission lines, for two reasons. First, transmission is a small part of
+PJM’s total system cost. Enabling data-center flexibility keeps annualized transmission
+investment at about$0.18B in 2038 (against a roughly$96B total, i.e., under 0.2%).
+Furthermore, tightening every line’s flow rating from 70% to 60% changes PJM cost
+by at most 0.06% (see supplementary Fig. 15: PJM’s total cost is nearly flat as the
+contingency factorKfalls from 0.7 to 0.6, whereas Korea’s rises). Second, the flexible
+tier makes it possible to bypass any corridor that does start to bind. When lines are
+derated the model relocates more workload between zones rather than reinforcing the
+network, so the line limit rarely sets the cost at the margin. The binding driver is
+therefore where the load counts toward capacity and clean-energy requirements, not
+transmission scarcity. This is also why PJM’s realistic 2038 case raises operating cost
+by 5.83% while cutting total cost by 19.43%, with the value concentrated in avoided
+capacity, storage and compliance cost.
+Outcomes in Korea are shaped by a different constraint set. It has a nuclear-
+heavy base fleet, large PV expansion potential and the CO 2e cap that tightens from
+189.9 Mt in 2028 to 83.1 Mt in 2038, a 56% reduction following the 11th BPESD.
+This cap, rather than load growth, is the key mover of the Korean outcomes, and it is
+what makes the 2028 and 2038 results qualitatively different. In 2028, the cap is still
+comparatively loose, so data-center flexibility raises the value of additional PV, and
+investments rise while total cost falls slightly. The tighter 2038 cap forces the system
+to decarbonize regardless of data-center flexibility. PV is driven to its expansion limit
+in the all-firm, all-flexible and realistic cases, and the residual fossil fleet is squeezed
+13
+
+=== PDF PAGE 14 ===
+B/C off
+B
+B + C1 B + C2 B + C3 B + C4 B + C5
+B + C3 + C4 + C5
+Optional constraint
+0
+1
+2
+3
+4
+5
+Total Cost Change (%)
+PJM 2038
+B/C off
+B
+B + C1 B + C2 B + C3 B + C4 B + C5
+B + C3 + C4 + C5
+Optional constraint
+Korea 2038
+ϕinter
+max =5% ϕinter
+max =50%
+Fig. 5:Effect of interruption limits on total cost in 2038.Each point adds one
+optional constraint on the interruptible tier to the annual energy cap (ϕ inter
+max ), and the
+rightmost point combines three of them. Layer B caps the number of interruption hours
+per year. C1 caps how deeply power withdrawal may be cut in any hour, C2 restricts
+interruption to a fixed time-of-day window, C3 caps the hour-to-hour ramp, C4 caps
+consecutive interruption hours, and C5 sets a minimum recovery between events. All
+are defined formally in Sec. 4.4. The limits are nearly costless at an annual cap of 5%
+but raise cost by several percent at 50%, because a tighter energy cap already binds
+before the event-shape limits can.
+against the carbon constraint. Data-center flexibility therefore no longer changes the
+PV expansion and rather changes how the carbon-constrained system balances that
+PV.
+2.5 The value of the interruptible tier depends on
+event-shape limits
+The all-interruptible case is consistently the cheapest among all simulations (Tables 2
+and 3). It reduces total cost by 20.01% and 49.70% in PJM by 2028 and 2038 and
+by 16.35% and 25.81% in Korea 2028 and 2038. However, with the annual energy cap
+factor set to one and no event-shape limits, a fully interruptible tier is equivalent to
+removing the data-center load. The realistic data-center flexibility mix uses far less
+interruptions, at 1.42 TWh and 6.55 TWh in PJM in 2028 and 2038 and 0.43 TWh
+and 0.78 TWh in Korea in 2028 and 2038, because the 5% annual limit binds in every
+case.
+This gap in outcomes with different assumptions on interruptible data-center flex-
+ibility shows why this flexibility tier must be modeled with realistic service-quality
+limits rather than as an unconstrained (on/off) block (as in [2]). To test the effects
+of the event-shape limits for the interruptible tier we start from a looser case with
+the annual cap factor 0.5 rather than one, then add the event-shape limits one at a
+time (defined in Methods 4.4). Capping the number of interruption hours per year
+raises Korea’s total cost by 1.55% in 2028 and 2.81% in 2038. The largest additional
+14
+
+=== PDF PAGE 15 ===
+effect comes from capping how deeply the load may be cut in any single hour, which
+adds a further 0.13% in 2028 and 0.24% in 2038. PJM shows the same qualitative
+outcomes, with the depth cap again the most restrictive. Limiting how fast the inter-
+ruption may ramp adds only about 0.06% in Korea in 2028, and restricting the time
+of day, the maximum consecutive duration and the recovery time between events are
+each negligible at under 0.02%.
+Applied together, those three limits matter more than they do individually. In
+Korea they raise total cost by 0.15% in 2028 and 0.25% in 2038 relative to the hour
+cap alone. The same combination is more consequential in PJM, where the hour cap
+alone raises cost by 1.14% in 2028 and 4.16% in 2038, and the ramp, duration and
+recovery limits together add a further 0.11% in 2028 and 0.99% in 2038. The relative
+2038 effect in PJM is about four times Korea’s, and far larger than the sum of the
+three limits applied separately (0.26% in 2038). PJM’s larger interruptible value makes
+the credibility of event shape more consequential. Ignoring these limits entirely, as the
+all-interruptible case does, overstates how much flexibility is actually available.
+2.6 The least-cost flexible/interruptible composition is
+system- and policy-dependent
+The least-cost composition of data-center load is governed mainly by the interruption
+cap rather than by any particular balance (of mix) between the tiers (Fig. 6). In Korea,
+with the firm share fixed at 50%, the 2038 grid is nearly indifferent across compositions
+when the cap is tight. At a 5% cap all compositions fall within about$0.03B of
+$33.0B, written here as firm/flexible/interruptible. Relaxing the cap does not change
+which composition is cheapest, but it widens the gap: the 50%/0%/50% composition
+falls from$32.76B at a 10% cap to$32.26B at 20% and$31.26B at 40%, while the
+50%/50%/0% composition stays near$33.0B throughout, since a composition with no
+interruptible tier is unaffected by the cap.
+In PJM the same pattern holds and the gap is wider, so 50%/0%/50% is cheapest
+at every tested cap. This does not mean spatial-shifting has no value in PJM. When
+a large interruptible share is allowed and interruption carries little penalty, the cap
+is what sets the cheapest composition. Neither endpoint is a portfolio a data-center
+operator could actually offer, since the share of workload that tolerates being switched
+off is bounded well below one. Planners should therefore value the two tiers sepa-
+rately and design connection rules around the composition a data-center operator can
+credibly supply.
+2.7 Sensitivities confirm the spatial and temporal differences
+The main finding of the sensitivity analysis is robustness to network and policy factors.
+Each transmission corridor is operated at a fraction of its thermal rating to approx-
+imateN−1 security. Tightening the usable rating from default 70% to 60% raises
+Korea’s realistic mix cost by 2.80% in 2028 and 3.62% in 2038, while relaxing it to
+80% lowers cost by 0.76% and 2.02%, respectively. On the other hand, PJM exhibits
+less sensitivity , i.e., at most 0.06% across the same range, because its flexible tier can
+relocate around tighter corridors.
+15
+
+=== PDF PAGE 16 ===
+0 20 40 60 80 100
+Flexible share (%)
+0
+20
+40
+60
+80
+100
+Interruptible share (%)
+Realistic
+PJM 2038
+All-firm All-flex
+All-inter
+0 20 40 60 80 100
+Flexible share (%)
+0
+20
+40
+60
+80
+100
+Interruptible share (%)
+Realistic
+Korea 2038
+All-firm All-flex
+All-inter
+−24.12
+−18.09
+−12.06
+−6.03
+0.00
+6.03
+12.06
+18.09
+24.12
+Cost Δ
+vs Realistic
+(%)
+−1.258
+−0.943
+−0.629
+−0.314
+0.000
+0.314
+0.629
+0.943
+1.258
+Cost Δ
+vs Realistic
+(%)
+(a) Total cost across tier shares (2038).
+0 10 20 30 40 50
+Flex share σflex (%)
+−6
+−4
+−2
+0
+2
+Total Cost Change (%)
+PJM 2038
+0 10 20 30 40 50
+Flex share σflex (%)
+Korea 2038
+ϕinter
+max =5% ϕinter
+max =10% ϕinter
+max =20% ϕinter
+max =30% ϕinter
+max =40%
+(b) Total cost across tier shares at five interruption caps (2038), benchmarked against
+all-firm baseline.
+Fig. 6:Tier-share sensitivities in 2038.(a) Flexible and interruptible shares
+varied at 10% granularity, with the firm share as the residual. Color is the interpolated
+cost change relative to the realistic mix (firm: 30%, flexible: 50%, interruptible: 20%),
+marked by a star. The two panels use different color scales, and the PJM range is
+about twenty times Korea’s. Contour slopes differ between the two grids, so the relative
+value of the tiers is host-grid dependent. (b) The flexible share varied from 0 to 50%
+with the firm share fixed at 50%, at five values of the annual interruption cap. All five
+curves meet at a 50% flexible share, where no interruptible tier remains and the cap
+has no effect.
+The make-up horizon matters most in Korea in 2038, where the flexible tier is
+acting as virtual storage, though the effect is modest because most of the shifting is
+intraday (Fig. 7). Reducing the make-up horizon from 24 to 4 h raises cost in Korea in
+2038 by 0.17%, while the same change is essentially no effect in PJM, where the value
+is spatial rather than temporal. Raising the interruption cap lowers cost steadily in
+both systems: for the realistic mix, relaxing the annual cap from 5% to 100% reduces
+16
+
+=== PDF PAGE 17 ===
+4 12 24
+Make-up Horizon Hmakeup (h)
+−0.2
+−0.1
+0.0
+0.1
+0.2
+0.3
+0.4
+Total cost change (%)
+PJM
+4 12 24
+Make-up Horizon Hmakeup (h)
+Korea
+2028 2038
+(a) Make-up horizon sensitivities
+1% 5% 10% 20% 100%
+Inter annual energy cap ϕinter
+max
+−8
+−6
+−4
+−2
+0
+Total cost change (%)
+PJM
+1% 5% 10% 20% 100%
+Inter annual energy cap ϕinter
+max
+Korea
+2028 2038
+(b) Interruptible energy cap sensitivities
+Fig. 7:Make-up horizon and interruption cap sensitivities.Effect of varying
+the make-up horizon (Hmakeup) and the annual interruption cap (ϕinter
+max ) for the realistic
+mix in both grids. Korean 2038 cost rises by 0.17% asH makeup falls from 24 to 4 h,
+consistent with its temporal (storage-like) value being largely intraday, whereas PJM
+is nearly insensitive.
+total cost by 2.34% in 2028 and 7.54% in 2038 in PJM, and 3.17% in 2028 and 5.37%
+in 2038 in Korea.
+3 Discussion
+Embedding the data-center flexibility tiers into a CEM reveals that that data-center
+flexibility is not a single, one-size-fits-all resource. The same data-center flexibility
+options are valued and used differently across different power grids with some notable
+differences for planning horizons within the same grid. For example, PJM uses the
+flexible tier mainly for spatial-shifting between zones, irrespective of the target year.
+17
+
+=== PDF PAGE 18 ===
+Thus, in 2028 this is almost an exclusive mechanism to valorize data-center flexibil-
+ity. However, by 2038 even though temporal-shifting becomes comparable in volume,
+spatial-shifting still drives the savings, since shortening the make-up horizon barely
+reduces costs. The realistic data-center flexibility mix also moves workload out of zones
+where firm data-center load would increase capacity accreditation and clean-energy
+obligations, and this relocation concentrates on Dominion as its data-center load grows.
+Dominion is a source for about a third of the relocated energy in 2028 (a share com-
+parable to PSEG and PPL), which increases to about 85% by 2038, most of it flowing
+into ComEd. Thus, spatial-shifting reduces cost by changing where load counts toward
+the state RPS and capacity carve-out obligations and the zonal capacity-accreditation
+requirements, not by relieving congestion. As a result, the PJM case avoids the storage,
+transmission and compliance-driven (RPS, carve-out and resource-adequacy obliga-
+tions) expansion that firm data-center load would otherwise drive. On the other hand,
+Korea uses the flexible tier temporally, and its role shifts as the carbon cap tightens.
+In 2028 temporal-shifting is small and its main effect is to make additional solar PV
+worth building. In 2038, with solar PV at its expansion limit due to the BPESD candi-
+date PV capacity caps, intraday temporal-shifting becomes a heavily used storage-like
+resource that reduces LNG and battery capacity. These results indicate that data-
+center flexibility should therefore be valued against particular grid constraints, which
+also evolve over time, not against a single demand-response template.
+The difference between spatial and temporal value has concrete implications. First,
+it supports grid-specific flexibility incentives and demand-response accreditation. A
+product that rewards intraday load shaping would capture much of the Korea’s 2038
+value but could leave PJM’s spatial value unrewarded, which is directly tied to where
+flexible workload can be served. Second, spatial flexibility should be treated as an inter-
+connection and siting instrument, not only as an operating demand-response product.
+PJM’s spatial-shifting away from Dominion shows that data-center workload mobil-
+ity can relieve local expansion pressure even when it does not lower operating cost. A
+recent field demonstration moved inference workload from Dominion to ComEd dur-
+ing a Dominion winter peak, the same transfer our planning model finds [14]. Third,
+interruptible load must be accredited with realistic event-shape assumptions. At high
+interruption caps, omitting the annual-hour, depth, ramp and recovery limits materi-
+ally overstates its value. Fourth, the transmission the model adds should be interpreted
+as a signal of where the current capacity is worth upgrading, not as a construction
+schedule. Near-term transmission is constrained by grid-equipment supply chains [4],
+so a corridor appearing in the 2028 expansion cannot realistically be energized by then.
+Raising the capacity of existing corridors to accommodate data-center load growth is
+faster, and the June 2026 FERC orders direct ISOs to consider advanced transmis-
+sion technologies (grid-enhancing technologies like dynamic line rating or advanced
+conductors) in their large-load studies [20].
+Varying the composition of data-center flexibility between the flexible and inter-
+ruptible tiers cautions against a universal optimal mix rule. Korea’s least-cost
+composition depends on how much interruption is allowed. At the tightest annual
+interruptible energy cap the cost is nearly indifferent to the composition, but once the
+cap passes roughly 5 to 10% the all-interruptible composition becomes the cheapest
+18
+
+=== PDF PAGE 19 ===
+one. In PJM’s 2038 results the all-interruptible is cheapest across every tested cap,
+even though spatial-shifting remains valuable in the realistic mix. Neither extreme is
+a portfolio an operator could offer, since the share of workload that tolerates being
+switched off is limited. The value of a flexible or interruptible megawatt is therefore
+both system- and policy-dependent.
+Several limitations apply to these conclusions. We analyze two planning target
+years (2028 and 2038), and the model does not resolve the sequencing of investments
+between the target years or the option value of staging them. Resource adequacy mod-
+eling uses fixed ELCC class ratings plus a fixed demand-resource credit for the flexible
+and interruptible tiers. Because that credit is held at a single and arguably optimistic
+value, our estimate of the capacity-related value of flexibility is best interpreted as
+an upper bound. More conservative accreditation would shrink the avoided-adequacy
+and compliance savings, while the operational savings, which do not depend on the
+credit, would be largely unchanged. The data-center flexibility tiers are represented
+in aggregate, so they should be read as scenario assumptions rather than measured
+workload properties.
+Future work should make the demand-resource credit endogenous rather than fixed,
+move to a multi-stage stochastic formulation, and couple the data-center flexibility
+tiers to a representation of internal data-center scheduling. Because individual hyper-
+scale data centers are large enough to affect grid-wide investment decisions, designing
+flexibility products for them directly is a natural lever, and quantifying how those
+products interact with on-site resources is left to future work, [26].
+4 Methods
+4.1 Model overview
+We formulate a deterministic CEM that co-optimizes investment in candidate genera-
+tion, storage and transmission for a target year against the operation of the resulting
+power grid. We solve the model for two target years 2028 and 2038. Future-year oper-
+ation is evaluated over a set of representative days obtained byk-medoids clustering,
+each weighted by the number of days it represents,wo, and resolved at 24 cyclic hours,
+with an hourly resolution. The model is implemented in Julia/JuMP and solved with
+Gurobi with a MIP gap of 10−3. The same objective and constraint set apply to both
+host power grids, and only the input data and policy constraints differ as applicable
+for PJM and Korea.
+Sets and indices.
+Busesn∈N; existing generatorsg∈Gand candidate generatorsk∈K; existing and
+candidate storages∈S=S ext∪S cand; transmission corridorsl∈L=L ext∪L cand;
+demandsd∈Dwith data-center eligibility for spatial-shiftingD sh⊆D; representative
+scenarioso∈Owith intra-day hourst∈T,|T|= 24, wheret − denotes the preceding
+hour and wraps around the representative day,t− =t−1 fort>1 and 1 − = 24, so that
+intra-day storage and backlog dynamics are cyclic; data-center tiers{firm,flex,inter};
+reserve-providing resourcesR; policy areas (PJM states)a∈A, each covering the
+load zonesZ a.
+19
+
+=== PDF PAGE 20 ===
+4.2 Objective
+The CEM objective is to minimize the total system cost:
+minI gen +I line +I sto +O+C ls,firm +C ls,dc + Π (1)
+with the annualized investment costs in generation (gen), transmission (line) and
+storage (sto):
+Igen =
+X
+k∈K
+cann
+k xgen
+k , I line = CRFtx X
+l∈Lcand
+cinv
+ℓ xline
+ℓ , I sto =
+X
+s∈S cand
+(cann,p
+s xp
+s +c ann,e
+s xe
+s),
+(2)
+where generation and storage candidate costs are already annualized asc ann =
+CRFtech·OCC+FOM using a 6% discount rate and technology-specific lifetimes. Bat-
+tery Energy Storage System (BESS) assumes a 15-year life, most generation candidates
+use 30 years, and transmission uses a 40-year life. The transmission term annualizes a
+distance-scaled per-MW capital cost,c inv
+ℓ =c txLℓ, wherec tx = $1,500/MW-mile for
+PJM [35],c tx = $1,710/MW-km for Korea [36] andL ℓ is the corridor length, so that
+cinv
+ℓ xline
+ℓ is the overnight cost of buildingx line
+ℓ MW along corridorl. The expected
+operation cost is expressed as:
+O=
+X
+o∈O
+wo
+X
+t∈T
+X
+g∈G
+cop
+g pg,o,t +
+X
+k∈K
+cop
+k pcand
+k,o,t
+
+,(3)
+wherep g,o,t andp cand
+k,o,t are the hourly power outputs (MW) of existing generatorg
+and candidate generatorkin scenariooand hourt, andc op
+g andc op
+k are their variable
+operating costs ($/MWh), i.e., fuel plus variable O&M. Firm load-shedding and data-
+center flexibility costs are expressed as:
+Cls,firm =
+X
+o
+wo
+X
+t
+X
+d
+Clspls
+d,o,t,(4)
+Cls,dc =
+X
+o
+wo
+X
+t
+hX
+d
+ 
+Ctemporalpflex
+d,o,t +C ls,interpinter
+d,o,t
+
++
+X
+d
+X
+d′̸=d
+Cspatialpspatial
+d,d′,o,t
+i
+.
+(5)
+The flexible tier carries an adder for compute shifted in time and a smaller one for
+compute shifted in space. Interruption carries none, since the interruptible tier is
+constrained instead by its annual energy budget. Involuntary firm shedding is priced
+at the value of lost load.
+Policy-violation penalties include the renewable-portfolio standards (RPS), tech-
+nology carve-out and resource-adequacy slack variables:
+Π =
+X
+a∈A
+ 
+πrpsξrps
+a +π solξsol
+a +π windξwind
+a +π cvξcv
+a
+
++π raξra.(6)
+20
+
+=== PDF PAGE 21 ===
+Each slack is priced above the cost of meeting the constraint, so the constraint binds
+unless it is physically infeasible. The RPS and carve-out slack variables are priced per
+MWh of shortfall, and the capacity carve-out and resource-adequacy slack variables
+per MW-year. Table 4 lists the penalty prices, flexibility adders and the value of lost
+load. This penalty term Π applies only to PJM, whose clean-energy and resource-
+adequacy requirements are represented as priced slack variables; Korea carries no such
+penalties (Π = 0) and instead enforces its climate policy as a hard cap on total CO 2e
+emissions (Eq. 55), so the different policy regimes in PJM and Korea enter the same
+objective through different modeling mechanisms.
+Table 4: Penalty and flexibility cost parameters. The
+capacity carve-out penaltyπ cv is set at PJM’s Net
+Cost of New Entry (Net CONE) for a 4-hour bat-
+tery, the gross annual cost of the reference resource less
+its expected energy and ancillary-service revenue. The
+resource-adequacy penaltyπ ra is set at the upper price
+cap of PJM’s Variable Resource Requirement (VRR)
+capacity demand curve. Flexibility adders represent the
+value of compute displaced in time or space rather than
+lost.
+Parameter Symbol Value
+Policy slack penalties
+Total RPS shortfallπ rps $50/MWh
+Wind carve-out shortfallπ wind $50/MWh
+Solar carve-out shortfallπ sol $150/MWh
+Capacity carve-out shortfallπ cv $263,000/MW-yr
+Resource-adequacy shortfallπ ra $200,750/MW-yr
+Data-center flexibility adders
+Temporal-shiftingC temporal $10/MWh
+Spatial-shiftingC spatial $2/MWh
+InterruptionC ls,inter $0/MWh
+Involuntary shedding
+Value of lost loadC ls $2,000/MWh
+4.3 Network, generation and storage operation
+Power balance is enforced at every node, scenario and hour using a net-injection
+network model, in which corridor flows are limited by their contingency-derated ther-
+mal ratings. The power balance augments conventional supply/demand with the
+21
+
+=== PDF PAGE 22 ===
+data-center flexibility terms:
+X
+g∈Gn
+pg,o,t +
+X
+k∈Kn
+pcand
+k,o,t +
+X
+s∈Sn
+ 
+pdis
+s,o,t−p ch
+s,o,t
+
++
+X
+ℓ:jℓ=n
+fℓ,o,t−
+X
+ℓ:iℓ=n
+fℓ,o,t
+=µ n,o,tDn +D dc
+n +p ℓ
+n,o,t−p ls
+n,o,t−p temporal
+n,o,t −p inter
+n,o,t +m n,o,t +
+X
+d′∈Dsh
+d′̸=n
+pspatial
+d′,n,o,t−
+X
+d′∈Dsh
+d′̸=n
+pspatial
+n,d′,o,t,
+(7)
+wheremis flexible make-up consumption, the last two terms on the right-hand side
+are the spatial-shifted inflows and outflows associated with noden, andp ℓ
+n,o,t is the
+physical transmission-loss withdrawal assigned to noden. Losses follow a ReEDS-
+style linear model [35]: each line loses 1% of absolute flow per 100 miles, divided
+evenly between its two endpoint buses. Thusp ℓ
+n,o,t = 1
+2
+P
+ℓ∈L(n)λℓ|fℓ,o,t|, whereλ ℓ =
+0.01Lℓ/100 whenL ℓ is in miles.
+Candidate Generation, Storage and Transmission
+The investment in generation, storage and transmission capacity is constrained by the
+candidate set as follows:
+0≤x gen
+k ≤ ¯Pk ∀k∈K,(8)
+0≤x line
+ℓ ≤ ¯Fℓ ∀l∈L cand,(9)
+0≤x p
+s≤P s,∀s∈S cand,(10)
+0≤x e
+s≤Es,∀s∈S cand,(11)
+xe
+s =τx p
+s,∀s∈S cand,(12)
+(13)
+Storage investment is constrained by both energy and capacity, having a 4 hour
+duration (τ= 4) as a baseline.
+Generator Operation
+Generation operation is constrained as below, including operating reserve constraints
+where a system-wide minimum can be optionally included. Generators are limited by
+capacity (dispatchable) or by an availability factorκ ·,o,t times capacity (renewables);
+candidate generators are limited by their built capacityx gen
+k . Reserve provision is
+limited by remaining headroom and by ramp capability over a ∆t= 1
+6 h (10-minute)
+deliverability window.
+0≤p g,o,t≤ ¯Pg ∀g∈G disp,o,t,(14)
+0≤p g,o,t≤κ g,o,t ¯Pg ∀g∈G ren,o,t,(15)
+0≤p cand
+k,o,t≤x gen
+k ∀k∈K disp,o,t,(16)
+0≤p cand
+k,o,t≤κ k,o,txgen
+k ∀k∈K ren,o,t,(17)
+22
+
+=== PDF PAGE 23 ===
+0≤r g,o,t≤ ¯Pg−p g,o,t ∀g∈G disp,o,t,(18)
+0≤r g,o,t≤∆tρ g ∀g∈G disp,o,t,(19)
+0≤r k,o,t≤x gen
+k −p cand
+k,o,t ∀k∈K disp,o,t,(20)
+0≤r k,o,t≤∆tρ kxgen
+k ∀k∈K disp,o,t,(21)
+pg,o,t +r g,o,t−p g,o,t−≤ρ g ∀g∈G disp,o,t∈T \{1},(22)
+pg,o,t−p g,o,t−−r g,o,t−≥−ρ g ∀g∈G disp,o,t∈T \{1},(23)
+pcand
+k,o,t +r k,o,t−p cand
+k,o,t−≤ρ kxgen
+k ∀k∈K disp,o,t∈T \{1},(24)
+pcand
+k,o,t−p cand
+k,o,t−−r k,o,t−≥−ρ kxgen
+k ∀k∈K disp,o,t∈T \{1},(25)
+Network Operation
+We approximateN−1 security with a contingency factorKthat derates every corridor,
+rather than enumerating an explicit contingency set, following values used in large
+nodal CEMs [37–40]. We setK= 0.7 in all nominal cases and vary it from 0.6 to 0.8
+for sensitivity analysis (Fig. 15).
+−Kx line
+ℓ ≤f ℓ,o,t≤Kx line
+ℓ ∀l∈L cand,o,t,(26)
+−KF rev
+ℓ ≤f ℓ,o,t≤KF fwd
+ℓ ∀l∈L ext,o,t.(27)
+Candidate corridors are bounded by their built capacityx line
+ℓ , capped at the rated
+¯Fℓ), and existing corridors are constrained by their fixed forward/reverse ratings. The
+same multiplierKderates both ratings.
+Storage Operation
+Storage is modeled using standard state-of-charge dynamics with charging/discharging
+efficiencies, a 4-hour duration linkx e
+s =τx p
+s (τ= 4), and cyclic boundarye s,o,T =
+es,o,1:
+0≤p ch
+s,o,t≤P s,∀s∈S ext, o, t,(28)
+0≤p dis
+s,o,t≤P s,∀s∈S ext, o, t,(29)
+0≤e s,o,t≤Es,∀s∈S ext, o, t,(30)
+0≤p ch
+s,o,t≤x p
+s,∀s∈S cand, o, t,(31)
+0≤p dis
+s,o,t≤x p
+s,∀s∈S cand, o, t,(32)
+0≤e s,o,t≤x e
+s,∀s∈S cand, o, t,(33)
+es,o,t =e s,o,t−1 +η chpch
+s,o,t− 1
+ηdispdis
+s,o,t,∀s∈S, o, t∈T \{1},(34)
+es,o,1 = 0.5xe
+s +η chpch
+s,o,1− 1
+ηdispdis
+s,o,1,∀s∈S, o,(35)
+es,o,T =e s,o,1,∀s∈S, o,(36)
+rs,o,t +p dis
+s,o,t−p ch
+s,o,t≤x p
+s,∀s∈S, o, t,(37)
+23
+
+=== PDF PAGE 24 ===
+rs,o,t∆t≤η dises,o,t,∀s∈S, o, t,(38)
+(39)
+Firm Load Shedding
+Firm load shedding from the base load and firm data center load is constrained as
+follows:
+0≤p ls
+d,o,t≤µ d,o,tDd +σ firmDdc
+d ∀d,o,t.(40)
+4.4 Tiered data-center flexibility
+Data-center load at nodedis divided into firm, flexible and interruptible shares, and
+the shares are constrained asσ firm +σ flex +σ inter = 1. They correspond to the EPRI
+DCFlex definitions as classified in Table 1 of Sec. 1 [10]. The firm share enters the
+power balance as load and may only be involuntarily shed (p ls≤µD+σ firmDdc).
+The flexible and interruptible shares are governed by the three layers of constraints,
+which we label Layers A, B and C and state formally below. Layer A is always active
+and sets the structural limits on temporal-shifting, spatial-shifting and interruption.
+Layers B and C are optional and restrict how often and how sharply the interruptible
+share may be curtailed. Assigning distinct curtailment terms to distinct service classes
+follows the priority-service principle [17].
+Layer A: structural flexibility (always active).
+Per-hour tier bounds.Temporal-shifting plus spatial shift-out cannot exceed the flex-
+ible allotmentσ flexDdc
+d , and interruption cannot exceed the interruptible allotment
+σinterDdc
+d :
+ptemporal
+d,o,t +
+X
+d′̸=d
+pspatial
+d,d′,o,t≤σ flexDdc
+d , p inter
+d,o,t≤σ interDdc
+d .(41)
+Temporal backlog (cyclic).Following the treatment of deferrable and shiftable
+demand as a virtual energy buffer [8, 9, 12], curtailed flexible workload is conserved
+rather than lost: it accumulates in a buffer, which we call the temporal backlog, and
+must be made up within a horizonH makeup,
+bd,o,t =b d,o,t− +p temporal
+d,o,t −m d,o,t, b d,o,t≤H makeupσflexDdc
+d , b d,o,T =b d,o,1,(42)
+withm d,o,t +P
+d′̸=dpspatial
+d,d′,o,t≤σ flexDdc
+d . The cyclic boundaryb d,o,T =b d,o,1 ensures
+all deferred work is served within the representative horizon.
+Interruptible annual energy budget.The interruptible tier carries an availability-
+style limit on the total curtailed energy:
+X
+o
+X
+t
+wopinter
+d,o,t≤ϕ inter
+max σinterDdc
+d
+X
+o
+X
+t
+wo.(43)
+Inter-zonal workload shifting.Latency-tolerant workloads may migrate across
+zones, following geographical load balancing [11, 12] and realizing the spatial-shift
+24
+
+=== PDF PAGE 25 ===
+flexibility [10]. There is no self-shifting (p spatial
+d,d = 0), and outflow from each node is
+capped at a fraction of its flexible allotment:
+X
+d′̸=d
+pspatial
+d,d′,o,t≤σ sh
+maxσflexDdc
+d .(44)
+Layer B: annual interruption-hour cap (optional).
+Real interruptible tariffs cap the number of interruptionhoursrather than energy
+alone. A binary indicatorz d,o,t ∈ {0,1}flags each interruption hour; interruption
+may occur only in flagged hours, and the representative-day-weighted annual count is
+capped atH inter
+max :
+pinter
+d,o,t≤σ interDdc
+d zd,o,t,∀d,o,t,(45)
+X
+o
+X
+t
+wozd,o,t≤H inter
+max,∀d.(46)
+Layer C: event-shape restrictions (optional).
+Five further restrictions shape the interruptible tier’s curtailment profile to reflect
+a feasible interruption schedule. C1–C2 follow standard demand-response program
+design (depth-limited and peak-window curtailment), while C3–C5 adapt the classical
+unit-commitment ramping and minimum-up/-down-time formulations [41, 42] to the
+interruption indicator. They are disabled in the base case and enabled individually in
+the optional-constraint sensitivity; we lett⊕kdenote the cyclic forward hour index
+within a representative day.
+(C1) Per-hour depth cap.Interruption in any hour is bounded by a fractionδ max
+of the interruptible allotment:
+pinter
+d,o,t≤δ maxσinterDdc
+d ,∀d,o,t.(47)
+(C2) Time-of-day window.Interruption is permitted only during an allowed set of
+hoursH allow:
+pinter
+d,o,t = 0,∀d,o, t /∈H allow.(48)
+(C3) Notification / ramp limit.The hour-to-hour change in interruption is bounded
+two-sidedly byρ dc of the interruptible allotment:
+pinter
+d,o,t−p inter
+d,o,t−
+≤ρ dcσinterDdc
+d ,∀d,o,t.(49)
+(C4) Maximum consecutive interruption hours (duration limit).Over every cyclic
+window ofH consec +1 hours, at mostH consec may be interruption hours, which forbids
+runs longer thanH consec:
+H consec
+X
+k=0
+zd,o, t⊕k≤H consec,∀d,o,t.(50)
+25
+
+=== PDF PAGE 26 ===
+(C5) Minimum recovery between events.An event-start indicatoru d,o,t∈{0,1}
+marks the onset of an interruption, and at most one onset may occur within any cyclic
+window ofR rec + 1 hours, withR rec = 12:
+ud,o,t≥z d,o,t−z d,o,t−,∀d,o,t,(51)
+Rrec
+X
+k=0
+ud,o, t⊕k≤1,∀d,o,t.(52)
+Because C4 and C5 are expressed in terms of the interruption-hour indicatorz d,o,t,
+enabling either requires Layer B’s linking constraintpinter
+d,o,t≤σ interDdc
+d zd,o,t to be active
+as well, so thatzis tied to actual interruption rather than left free; the annual-hour
+cap itself (the second Layer B inequality) may remain relaxed if only the event-shape
+behavior is desired.
+4.5 Resource adequacy
+Resource adequacy is enforced as an accredited-capacity constraint in which each
+resource contributes its installed capacity times an effective load-carrying capa-
+bility (ELCC) class rating, and the data-center flexibility tiers earn a partial
+demand-resource credit:
+X
+g∈G
+γgP g +
+X
+k∈K
+γkxgen
+k +γ s
+ X
+s∈S ext
+P s +
+X
+s∈S cand
+xp
+s
+
++γ DRP DR
++γ DC,DRX
+d∈Ddc
+(σflex +σ inter)Ddc
+d ≥FPR·D peak.(53)
+For PJM, class ratings follow the 2027/28 Base Residual Auction final values [6].
+Existing units are credited by their plant type while candidate technologies are credited
+at the per-technology ELCC values reported in Table 6. A fixed demand-response
+portfolio of 8,396 MW is credited at 0.91, and the flexible and interruptible data-
+center flexibility tiers earn a demand-resource creditγ DC,DR = 0.50. The forecast-pool
+requirement uses an installed-reserve margin of 20% and a pool average-UCAP factor
+of 0.7834, giving FPR = 0.9401. For Korea, the same structure is used with a 20% and
+22% planning-reserve margin and a uniform 0.61 pool average-UCAP factor, giving
+FPR = 0.7364 and FPR = 0.7486 for 2028 and 2038, respectively.
+4.6 Policy Constraints
+Grid-specific policy constraints reflect the presentPJMandKoreastatus.
+PJM Policy Constraints
+PJM policy is enforced at the state level. Each load zone is assigned a primary state,
+and each statea∈Acarries an annual renewable-portfolio obligation equal to its
+RPS percentage times the firm energy of its zones, where the firm base is conventional
+26
+
+=== PDF PAGE 27 ===
+load plus the firm data-center shareσ firmDdc. Qualifying generation is accumulated
+by type, with hydro counted toward the total tier only where eligible:
+X
+o,t
+wo
+ 
+psol
+a,o,t +p wind
+a,o,t
+
++ξ rps
+a ≥RPS a
+X
+z∈Za
+X
+o,t
+wo
+ 
+µz,o,tDz +σ firmDdc
+z
+
+,(54)
+with separate solar and wind carve-out inequalities applied in the states that list them
+(e.g., the New Jersey solar carve-out). Capacity carve-outs are MW targets enforced
+on installed (existing + candidate) capacity of a given technology in a given state—
+offshore wind, solar PV and 4-hour storage (including the zonal battery carve-outs)—
+asPP+ Px≥T cv. All renewable and carve-out constraints carry the non-negative
+slack variablesξpriced at the penalties listed in the objective function, so they bind
+unless physically or economically infeasible.
+Korean Policy Constraints
+The CO2e emission goal derived from the Nationally Determined Contribution is the
+strongest planning pressure for the Korean power grid. The 11th Basic Plan for Long-
+Term Electricity Supply and Demand (BPESD) provides a CO 2e emission goal for
+each year until 2038. The CO 2e emission constraint is enforced as a hard constraint
+( ¯ECO2e = 189.9 and 83.1 Mt for 2028 and 2038, respectively):
+X
+o∈O
+wo
+X
+t∈T
+
+X
+g∈G
+εgpg,o,t +
+X
+k∈K
+εkpcand
+k,o,t
+
+≤ ¯ECO2e (55)
+whereε g is the CO 2-equivalent emission rate (tCO 2/MWh) of unitgas reported in
+the 11th BPESD.
+4.7 Representative days, systems, and scenarios
+Operating conditions are modeled via representative days usingk-medoids clustering
+on the joint load and renewable-availability series, each weighted by cluster size.
+PJMis represented as a 21-zone reduced network, consistent with PJM’s zones,
+with a large incumbent thermal fleet, RPS constraints (solar/wind/total by zone),
+a New Jersey solar carve-out, and zonal battery carve-outs, all enforced with slack
+penalties.
+Koreais represented on the KPG 193 system with generator, topology and
+capacity-factor data from KPG 193 (nuclear ramp capped at 3 %/h) [44]. Policy con-
+straints follow the 11th BPESD: CO 2e emission caps (189.9 Mt in 2028, 83.1 in 2038)
+and the 2038 case allows co-firing retrofits (green-hydrogen LNG and 20%-ammonia
+coal). For Korea, co-firing retrofit candidates are modeled as continuous investment
+options at eligible buses, and unidentified BPESD candidates including PV, wind,
+LNG and nuclear are optimized within eligible buses with capacity caps.
+27
+
+=== PDF PAGE 28 ===
+Table 5: Sources for the case study design for PJM and Korea.
+PJM Korea
+Item 2028 2038 2028 2038
+Generator Candidates PJM queue
+until 2028
+PJM queue
+until 2038
+BPESD until
+2028
+BPESD until
+2038
+Transmission Candidates
+In-Corridor
+Expansion
+(+100%)
+In-Corridor
+Expansion
+(+100%)
+BPESD until
+2028
+BPESD until
+2038
+Storage Candidates PJM queue
+until 2028
+PJM queue
+until 2038
+Buses with Top
+RE CF
+Buses with Top
+RE CF
+Data center capacity
+(GW) 16.3 74.8 4.9* 8.9**
+Emissions target
+(MtCO2eq) – – 189.9 83.1
+Carve-outs (GW)† 8.78 38.99 – –
+Retrofits – – – Coal & LNG
+Operating Reserve (GW,
+optional) – – 4.5 4.5
+* Extrapolated from data-center power use permits reported in the BPESD.
+** Post-calculated from the summer peak load in the 11th BPESD using the peak contract-
+capacity utilization rate [43].
+† PJM capacity carve-outs (battery storage, offshore wind, solar PV) summed across
+states. Statutory 2030–2045 MW targets are linearly interpolated, and back-extrapolated
+below 2030, in year-space to the model year; offshore-wind mandates therefore extrapolate
+to∼0 in 2028 (storage 3.55, solar 5.23 GW) and reach 25.66 GW by 2038 (storage 8.10,
+solar 5.23 GW). Korea carries no capacity carve-out.
+Scenarios.
+Two static generation-interconnection scenarios are each evaluated under four flexi-
+bility cases (100% firm; 100% flexible; 100% interruptible; realistic mix 0.3/0.5/0.2):
+target years 2028 and 2038 include candidate resources available through these years.
+These two snapshots are chosen deliberately to bracket the planning problem—an
+immediate, queue-constrained horizon and a longer-term one—rather than to approx-
+imate a continuous annual build, which would conflate the flexibility mechanisms with
+assumptions about the precise investment trajectory. Sensitivity analyses vary the
+flexible share with the firm share fixed at 0.5,H makeup,ϕ inter
+max , the transmission der-
+ating multiplier, the optional Layer B/C constraints, operating-reserve requirements
+and renewable-policy toggles. Reported costs are annualized; energy quantities are
+annualized by the representative-day weights.
+4.8 Cost Assumptions
+The cost assumptions for the CEM are presented in Table 6. Both systems annualize
+at a 6% real discount rate with technology-specific lifetimes (30 yr for generation,
+15 yr for 4h BESS), so the reference 30-yr CRF is 0.0726 and the 15-yr CRF is 0.1030.
+28
+
+=== PDF PAGE 29 ===
+Table 6: Capital cost and capacity-credit assumptions for PJM and Korea candidate tech-
+nologies. Overnight capital cost (OCC) is in$/kW, fixed O&M (FOM) in$/kW-yr; ELCC is
+the dimensionless capacity credit and Ann. is the annualized fixed charge (CRF·OCC + FOM,
+$/kW-yr).Notes: OCC includes grid-connection costs, incorporates the construction finance
+factor, and corresponds to the CAPEX reported in [46] for PJM and the OCC reported in [45]
+for Korea. The ELCC of PV and onshore wind reported in [49] for Korea.
+PJM Korea
+Technology Year OCC FOM ELCC Ann. OCC FOM ELCC Ann.
+$/kW$/kW-yr$/kW-yr$/kW$/kW-yr$/kW-yr
+LNG / NGCC 2028 1,455 32 0.74 137.7 1,251 42 0.74 132.9
+2038 1,329 29 0.74 125.6 1,469 42 0.74 148.7
+Coal 2028 3,949 84 0.83 370.9 1,670 66 0.83 187.3
+2038 3,692 79 0.83 347.2 1,961 66 0.83 208.5
+Nuclear 2028 7,616 175 0.95 728.3 3,459 139 0.95 390.3
+2038 6,705 175 0.95 662.1 4,450 139 0.95 462.3
+PV 2028 1,313 19 0.08 114.4 1,008 24 0.07 97.2
+2038 853 15 0.08 77.0 759 24 0.07 79.1
+Onshore wind 2028 1,472 30 0.41 136.9 1,875 46 0.16 182.2
+2038 1,291 28 0.41 121.8 1,563 46 0.16 159.6
+Offshore wind, fixed 2028 5,748 80 0.67 497.6 – – – –
+2038 3,648 73 0.67 338.0 – – – –
+4h BESS 2028 1,555 35 0.58 195.1 1,555 35 0.58 195.1
+2038 1,285 28 0.58 160.3 1,285 28 0.58 160.3
+Coal–ammonia retrofit 2028 – – – – 184 0 0.85 13.3
+2038 – – – – 216 0 0.85 15.7
+LNG–hydrogen retrofit 2028 – – – – 313 0 0.78 22.7
+2038 – – – – 367 0 0.78 26.7
+PJM overnight costs follow NREL ATB 2024; Korean costs follow the published data
+for generating units and ATB-2024 for BESS [45, 46]. Co-firing retrofits for green-
+hydrogen LNG and 20%-ammonia coal are available with the following costs with 1.5
+and 2.0 times multipliers for fuel costs [47, 48]. Dashes denote technologies that are
+existing-only (non-investable) or absent in that system.
+4.9 Data Center Data Collection
+Nodal data-center load forecasts in Korea were obtained by scaling the nation-wide
+data-center load to a given spatial distribution. The spatial distribution of data centers
+was collected from Data Center Map [50] as of May 14, 2026. Missing capacities
+were imputed using Bayesian ridge regression based on observed capacity, whitespace,
+market, and development-year features following the method of the PJM ICARUS
+data-center dataset [51]. Each data center is mapped to the nearest KPG 193 bus
+using the geographic distance between facility and bus coordinates.
+29
+
+=== PDF PAGE 30 ===
+Table 7:Data-center flexibility parameters.Baseline values applied identically
+to PJM and Korea. The basis for each value is given per row. Values marked as
+assumptions are adopted in this work and examined through the sensitivity analyses
+of Sec. 2.6 and Sec. 2.7.
+Parameter Symbol Baseline Basis
+Tier composition
+Firm shareσ firm 0.30 EPRI DCFlex workload classes [10];
+varied in Sec. 2.6
+Flexible shareσ flex 0.50 As above
+Interruptible shareσ inter 0.20 As above
+Flexible tier (Layer A)
+Make-up horizonH makeup 24 h Assumption; varied 4–24 h in Sec. 2.7
+Shift-out capσ shmax 0.30 Assumption
+Interruptible tier (Layer A)
+Annual energy capϕ intermax 0.05 Assumption, consistent with EPRI
+interruptible-tariff practice [10]. Equals
+5% of interruptible-tier energy, or 1%
+of data-center energy in the realistic
+mix, at the top of the 0.25–1%
+curtailment-headroom range of Norris
+et al. [2]. Varied 0.05–1 in Sec. 2.7
+Interruptible tier (Layer B, off by default)
+Annual hour capH intermax 480 h Assumption, within the 180–720 h/yr
+interruptible-tariff range [10]
+Event-shape restrictions (Layer C, off by default)
+Per-hour depth capδ max 0.30 Assumption, within the 25–50%
+turndown range [10], corroborated by
+measured 18–55% workload
+flexibility [16] and sustained 10–40%
+field reductions [14]
+Allowed hoursH allow 16–21 Assumption
+Ramp limitρ dc 0.25/h Assumption
+Max consecutiveH consec 4 h Assumption
+Min recoveryR rec 12 h Assumption
+Data availability
+The processed model inputs and the result tables underlying all figures and tables
+are available at Zenodo (https://doi.org/10.5281/zenodo.22016953). The underlying
+system datasets are third-party and subject to their respective use terms: the PJM
+21-zone reduction and ICARUS data-center dataset [51, 52], KPG 193 v2.0 [44], the
+11th BPESD [31], and the 2027/28 PJM Base Residual Auction [6].
+30
+
+=== PDF PAGE 31 ===
+Code availability
+The capacity expansion model, including the tiered data-center flexibility module,
+and the preprocessing and figure-generation scripts are available alongside the data
+at the same Zenodo record (https://doi.org/10.5281/zenodo.22016953) under an MIT
+license.
+Author contributions
+Y.D. and J.K. conceived and designed the study. S.K., J.K. and Y.D. developed
+the methodology, G.R. and B.Y. provided extensive feedback. S.K., G.R. and B.Y.
+performed the simulations for the PJM system; G.R. adapted the formulation to the
+Korean system and performed the simulations for it. S.K. and G.R. conducted the
+initial analysis and result synthesis; J.K. and Y.D. provided feedback. B.Y. contributed
+to the PJM data pipeline and the transmission representation. A.S. contributed the
+regulatory and policy framing. D.G. and C.K. advised on the modeling and analysis.
+S.K. and G.R. drafted the paper; Y.D. edited the manuscript. Y.D. and J.K. supervised
+the project and secured funding. All authors revised and approved the paper.
+Competing interests
+The authors declare no competing interests.
+Additional information
+Supplementary informationis available for this paper.
+Correspondence and requests for materialsshould be addressed to Y.D.
+References
+[1] Shehabi, A., Newkirk, A., Smith, S.J., Hubbard, A., Lei, N., Siddik, M.A.B.,
+Holecek, B., Koomey, J., Masanet, E., Sartor, D.: 2024 united states data center
+energy usage report (2024)
+[2] Norris, T., Profeta, T., Patino-Echeverri, D., Cowie-Haskell, A.: Rethinking load
+growth: Assessing the potential for integration of large flexible loads in us power
+systems (2025)
+[3] Rauh, A., Reece, M., Simko, T.: Local community opposition to data centers is
+clear and growing (2026)
+[4] Yao, B., Dvorkin, Y.: Grid-supporting equipment supply chains constrain the
+feasible pace of power system expansion. arXiv preprint arXiv:2604.18411 (2026)
+[5] Yao, B., Jeong, H., Mehrtash, M., Allan, B., Ockerman, D., Dvorkin, Y.: Under-
+standing supply chain constraints for the us clean energy transition. npj Clean
+Energy1(1), 9 (2025) https://doi.org/10.1038/s44406-025-00009-1
+31
+
+=== PDF PAGE 32 ===
+[6] PJM Interconnection: ELCC Class Ratings for the 2027/2028 Base Residual Auc-
+tion (2025). https://www.pjm.com/-/media/DotCom/planning/res-adeq/elcc/
+2027-28-bra-elcc-class-ratings.pdf
+[7] Brancucci, C., Cutler, D., Jenkins, J.: Flexible Data Centers: A Faster, More
+Affordable Path to Power. Camus Energy, Encoord, and Princeton ZERO Lab
+San Francisco, CA, USA (2025)
+[8] Papavasiliou, A., Oren, S.S.: Large-scale integration of deferrable demand and
+renewable energy sources. IEEE Transactions on Power Systems29(1), 489–499
+(2013)
+[9] Liu, Z., Wierman, A., Chen, Y., Razon, B., Chen, N.: Data center demand
+response: Avoiding the coincident peak via workload shifting and local gener-
+ation. In: Proceedings of the ACM SIGMETRICS/international Conference on
+Measurement and Modeling of Computer Systems, pp. 341–342 (2013)
+[10] Electric Power Research Institute: Grid flexibility needs and data center char-
+acteristics. White Paper 3002031504, Electric Power Research Institute (EPRI),
+Palo Alto, CA (jun 2025)
+[11] Liu, Z., Lin, M., Wierman, A., Low, S.H., Andrew, L.L.: Greening geographical
+load balancing. ACM SIGMETRICS Performance Evaluation Review39(1), 193–
+204 (2011)
+[12] Qureshi, A., Weber, R., Balakrishnan, H., Guttag, J., Maggs, B.: Cutting the
+electric bill for internet-scale systems. In: Proceedings of the ACM SIGCOMM
+2009 Conference on Data Communication, pp. 123–134 (2009)
+[13] Radovanovi´ c, A., Koningstein, R., Schneider, I., Chen, B., Duarte, A., Roy, B.,
+Xiao, D., Haridasan, M., Hung, P., Care, N.,et al.: Carbon-aware computing for
+datacenters. IEEE Transactions on Power Systems38(2), 1270–1280 (2022)
+[14] Williams, C., Colangelo, P., Coskun, A., Levine, E., Neale, A., Roberts, C.,
+Sengupta, S., Shirolkar, N., Sivaram, V., Soares, S., et al.: Power-flexible ai
+data centers: A new paradigm for grid-responsive compute. arXiv preprint
+arXiv:2606.25098 (2026)
+[15] Colangelo, P., Coskun, A.K., Megrue, J., Roberts, C., Sengupta, S., Sivaram,
+V., Tiao, E., Vijaykar, A., Williams, C., Wilson, D.C.,et al.: Ai data centres as
+grid-interactive assets. Nature Energy11(2), 254–261 (2026)
+[16] Acun, F., Hankendi, C., Levine, E., Reynolds, H., Bardwick, J., Coskun, A.K.:
+Investigating power consumption flexibility of ai data centers for demand response
+participation. In: Proceedings of the 17th ACM International Conference on
+Future and Sustainable Energy Systems, pp. 344–348 (2026)
+32
+
+=== PDF PAGE 33 ===
+[17] Chao, H.-p., Wilson, R.: Priority service: Pricing, investment, and market
+organization. The American Economic Review, 899–916 (1987)
+[18] NERC Large Loads Working Group: Assessment of gaps in existing prac-
+tices, requirements, and reliability standards for emerging large loads. White
+paper, North American Electric Reliability Corporation (NERC) (March
+2026). https://www.nerc.com/globalassets/our-work/guidelines/reliability/
+white-paper---assessment-of-gaps.pdf
+[19] Electric Power Research Institute (EPRI): Powering intelligence 2026: Updated
+scenarios of u.s. data center electricity use and power strategies. Technical Report
+3002034696, Electric Power Research Institute (EPRI) (February 2026). https:
+//www.epri.com/research/products/000000003002034696
+[20] Federal Energy Regulatory Commission: Show Cause Orders on
+the Integration of Large Loads onto the Transmission System
+(Items E-7 through E-12). Docket Nos. EL26-67-000 et al. Issued
+June 18, 2026 (2026). https://www.ferc.gov/news-events/news/
+fact-sheet-ferc-takes-action-supercharge-americas-grid-efficiency-reliability-and
+Accessed 2026-06-18
+[21] Loher, L., Harrirou, H.H.: New ways to balance cost and reliabil-
+ity in the Gemini API. https://blog.google/innovation-and-ai/technology/
+developers-tools/introducing-flex-and-priority-inference/. Google The Keyword
+Blog. Accessed: 2026-06-29 (2026)
+[22] Vaidhynathan, D., Prabakar, K., Martin, G., Ramesh, A., Wheeler, B., Coco, C.,
+Clidaras, J., Monsch, M., Kim, S., Talukdar, S., Marti, S.: Vulcan test platform:
+Demonstrating the data center as a flexible grid asset. Technical report, National
+Renewable Energy Laboratory (June 2025). https://doi.org/10.2172/2583521
+[23] Texas Legislature: Relating to the Planning For, Interconnection and Operation
+Of, and Costs Related to Providing Service for Certain Electrical Loads and to
+the Generation of Electric Power by a Water Supply or Sewer Service Corpora-
+tion. 89th Legislature, Regular Session. https://legiscan.com/TX/text/SB6/id/
+3248460
+[24] Zuluaga, T.V., Pang, S., Watson, J.-P.: Nodal capacity expansion planning with
+flexible large-scale load siting. Electric Power Systems Research263, 113786
+(2027)
+[25] Liu, S., Shin, S., Deka, D.: Watts vs. bytes: Turning data centers into grid assets
+via storage compute co-optimization. arXiv preprint arXiv:2605.16190 (2026)
+[26] Kim, D., Dong, L., Xie, L.: Flexibility-aware framework for efficient planner-
+initiated siting of data center. Nature Communications (2026)
+33
+
+=== PDF PAGE 34 ===
+[27] Senga, J.R.L., Wang, S., Knittel, C.R.: Flexible data centers reduce power system
+costs but can increase emissions. iScience (2026) https://doi.org/10.1016/j.isci.
+2026.116497
+[28] Gu, N., Chen, G., Qin, J.: The role of flexible connection in accelerating load
+interconnection in distribution networks. arXiv preprint arXiv:2510.11476 (2025)
+[29] Chen, Y., Zheng, X.: To defer or to shift? the role of ai data center flexibility on
+grid interconnection. In: Proceedings of the 2026 ACM Sustainability Week, pp.
+322–327 (2026)
+[30] Shao, Z., Yu, N., Wong, D.: Stochastic long-term joint decarbonization planning
+for power systems and data centers: A case study in pjm. International Journal
+of Electrical Power & Energy Systems173, 111377 (2025)
+[31] Ministry of Trade, Industry and Energy: Eleventh Basic Plan for Long-Term
+Electricity Supply and Demand (2024–2038). Technical Report MOTIE Notice
+No. 2025-169, Ministry of Trade, Industry and Energy, Republic of Korea
+(February 2025). https://www.motir.go.kr/kor/article/ATCLc01b2801b/70083/
+view Accessed 2026-06-13
+[32] Korea Energy Economics Institute: Domestic Data Center Status. KESIS
+Monthly Energy Statistics, Issue 82; based on KDCC data (2026). https://kesis.
+keei.re.kr/pdfOpenG.es?bid=0001&list no=105&seq=2
+[33] Republic of Korea: Distributed Energy Activation Act. Act establishing the
+power-grid impact assessment framework (2024). https://www.law.go.kr/lsInfoP.
+do?lsiSeq=251685
+[34] Ministry of Trade, Industry and Energy: Measures to Mitigate Data Center
+Concentration in the Seoul Metropolitan Area. Policy measures for regional
+dispersion of data centers (2023). https://eiec.kdi.re.kr/policy/callDownload.do?
+dtime=20230310162312&filenum=2&num=236270
+[35] Ho, J., Becker, J., Brown, M., Brown, P., Chernyakhovskiy, I., Cohen, S., Cole,
+W., Corcoran, S., Eurek, K., Frazier, W., et al.: Regional energy deployment
+system (reeds) model documentation (version 2020). Technical report, National
+Renewable Energy Laboratory (NREL), Golden, CO (United States) (2021)
+[36] Kang, D.-e.: Building One Kilometer of Transmission Line Costs
+Up to KRW 25.8 Billion: Cost Is Also an Issue. The Chosun
+Daily. https://www.chosun.com/economy/industry-company/2024/09/13/
+UHBU2RVL7VHMJNNEFPDSAHGYFA/ Accessed 2026-08-04
+[37] Lee, T., Sun, A.: Canopi: Contingency-aware nodal optimal power investments
+with high temporal resolution. arXiv preprint arXiv:2510.03484 (2025)
+34
+
+=== PDF PAGE 35 ===
+[38] Frysztacki, M.M., H¨ orsch, J., Hagenmeyer, V., Brown, T.: The strong effect of
+network resolution on electricity system models with high shares of wind and
+solar. Applied Energy291, 116726 (2021)
+[39] H¨ orsch, J., Ronellenfitsch, H., Witthaut, D., Brown, T.: Linear optimal power
+flow using cycle flows. Electric Power Systems Research158, 126–135 (2018)
+[40] H¨ orsch, J., Hofmann, F., Schlachtberger, D., Brown, T.: Pypsa-eur: An open
+optimisation model of the european transmission system. Energy strategy reviews
+22, 207–215 (2018)
+[41] Carri´ on, M., Arroyo, J.M.: A computationally efficient mixed-integer linear for-
+mulation for the thermal unit commitment problem. IEEE Transactions on power
+systems21(3), 1371–1378 (2006)
+[42] Rajan, D., Takriti, S.,et al.: Minimum up/down polytopes of the unit commit-
+ment problem with start-up costs. IBM Res. Rep23628, 1–14 (2005)
+[43] Ministry of Trade, Industry and Energy: Tenth Basic Plan for Long-Term Elec-
+tricity Supply and Demand (2022–2036). Technical Report MOTIE Notice No.
+2023-036, Ministry of Trade, Industry and Energy, Republic of Korea (January
+2023)
+[44] Song, G., Kim, J.: Kpg 193: A synthetic korean power grid test system for
+decarbonization studies. In: 2025 IEEE Power and Energy Society General
+Meeting (PESGM), pp. 1–5 (2025). https://doi.org/10.1109/PESGM52009.2025.
+11225382
+[45] Moon, H.S., Baik, S., Park, W.Y.: Assessing the levelized cost of energy in south
+korea. Energy Strategy Reviews62, 101897 (2025) https://doi.org/10.1016/j.esr.
+2025.101897
+[46] Mirletz, B., et al.: Annual technology baseline: The 2024 electricity update.
+Technical report, National Renewable Energy Laboratory (NREL) (2024). https:
+//doi.org/10.25984/2377191
+[47] BloombergNEF: Japan’s costly ammonia coal co-firing strat-
+egy. Technical report, BloombergNEF (September 2022).
+Bloomberg Finance L.P. https://assets.bbhub.io/professional/sites/24/
+BNEF-Japans-Costly-Ammonia-Coal-Co-Firing-Strategy FINAL.pdf
+[48] ¨Oberg, S., Odenberger, M., Johnsson, F.: Exploring the competitiveness of
+hydrogen-fueled gas turbines in future energy systems. International Journal of
+Hydrogen Energy47(1), 624–644 (2022) https://doi.org/10.1016/j.ijhydene.2021.
+10.035
+[49] Paik, C.-H.: Estimating the elcc-based marginal capacity credits of renewable
+35
+
+=== PDF PAGE 36 ===
+energy in korea. Journal of The Korean Solar Energy Society44(4), 67–76 (2024)
+[50] Data Center Map: South Korea Data Centers. https://www.datacentermap.com/
+south-korea/. Accessed: 2026-05-14 (2026)
+[51] Reed, O., Khanal, S., Yao, B., Combariza, D., Klemun, M., Dvorkin, Y.: ICARUS
+Data Center Dataset (ICARUS-DC). Versioned GitHub repository. Data licensed
+under CC BY 4.0. https://github.com/hopkinsicarus/ICARUS-DC-Dataset
+[52] Khanal, S., Yao, B., Villafa˜ ne-Delgado, M., Dvorkin, Y.: ICARUS PJM Dataset.
+Versioned GitHub repository. Data licensed under CC BY 4.0. https://github.
+com/HopkinsICARUS/ICARUS-PJM-Dataset
+36
+
+=== PDF PAGE 37 ===
+Supplementary Figures
+200 km
+ 200 km
+200 km
+ 200 km
+PJM 2028 Generation Expansion and Projected Data Center Capacity
+All-firm
+Gen 21.2; Stor 0.2 GW
+Tx 0.0; Data Center 16.3 GW
+All-flex
+Gen 13.4; Stor 0.2 GW
+Tx 0.0; Data Center 16.3 GW
+All-inter
+Gen 13.4; Stor 0.2 GW
+Tx 0.0; Data Center 16.3 GW
+Realistic
+Gen 16.7; Stor 0.2 GW
+Tx 0.0; Data Center 16.3 GW
+Generation / storage / transmission
+LNG
+Onshore Wind
+PV Storage New Tx build
+Build / Data Center area scale
+5 GW 15 GW 30 GW
+Generation / storage / transmission
+LNG
+Onshore Wind
+PV Storage New Tx build
+Build / Data Center area scale
+5 GW 15 GW 30 GW
+Projected Data Center capacity
+Fig. 8:PJM expansion, 2028.Generation, storage and transmission additions by
+zone under the all-firm baseline and the three flexibility cases.
+37
+
+=== PDF PAGE 38 ===
+0
+50
+100
+150
+All-firm All-flex All-firm All-flex
+1 6 12 18 24
+Hour
+0
+50
+100
+150
+All-inter
+1 6 12 18 24
+Hour
+Realistic
+1 6 12 18 24
+Hour
+All-inter
+1 6 12 18 24
+Hour
+Realistic
+Generation / flexible load (GW)
+PJM 2028, Day 170 Korea 2028, Day 201
+Nuclear
+Coal
+LNG
+Onshore Wind
+Offshore Wind
+PV
+Hydro
+Storage discharge
+Other
+Data Center temporal shifting
+Data Center interruption
+Data Center makeup
+Storage charge
+(a) Generation dispatch (2028)
+−100
+0
+100
+Day 17, w=5d Day 40, w=37d Day 47, w=52d Day 29, w=25d Day 88, w=19d Day 113, w=38d
+−100
+0
+100
+Day 145, w=104d Day 164, w=18d Day 170, w=20d Day 115, w=20d Day 128, w=25d Day 139, w=57d
+−100
+0
+100
+Day 216, w=30d Day 219, w=20d Day 223, w=7d Day 181, w=21d Day 201, w=27d Day 243, w=34d
+1 6 12 18 24
+Hour
+−100
+0
+100
+Day 250, w=24d
+1 6 12 18 24
+Hour
+Day 356, w=39d
+1 6 12 18 24
+Hour
+Day 362, w=9d
+1 6 12 18 24
+Hour
+Day 285, w=37d
+1 6 12 18 24
+Hour
+Day 335, w=36d
+1 6 12 18 24
+Hour
+Day 349, w=26d
+0
+100
+200
+0
+100
+200
+0
+100
+200
+0
+100
+200
+0
+10
+20
+30
+0
+10
+20
+30
+0
+10
+20
+30
+0
+10
+20
+30
+PJM 2028 Korea 2028
+Temporal shifting / makeup (% of flexible Data Center load)
+Temporal backlog (GWh)
+Temporal backlog (GWh)
+Temporal Shifting Interruption Makeup Temporal backlog
+(b) Temporal-shifting, make-up and interruption for a representative day (2028).
+Fig. 9:Flexible-tier operation in 2028.Summer peak-day generation stacks (a),
+and realistic-mix temporal-shifting, make-up and interruption profiles with the cyclic
+backlog in black (b), shown as a percentage of data-center capacity and in GWh. The
+pattern mirrors 2038 (Fig. 3) but at much lower volume, since the flexible tier is used
+lightly in both grids in 2028.
+38
+
+=== PDF PAGE 39 ===
+200 km
+<= -5%
+0%
+>= 5%
+Net shift
+(% cap.)
+Projected Data Center
+Capacity (MW)
+1,000 MW
+100 MW
+200 km
+Fig. 10:Spatial-shifting of data-center load with the 2028 realistic mix.
+Circle size is the projected data-center load at each node; color is the net spatial shift
+relative to that node’s capacity. PJM relocates 0.91 TWh, concentrating into ComEd,
+while Korea relocates 0.20 TWh.
+39
+
+=== PDF PAGE 40 ===
+200 km
+ 200 km
+200 km
+ 200 km
+Korea 2028 Generation Expansion and Projected Data Center Capacity
+All-firm
+Gen 12.8; Stor 0.0 GW
+Tx 2.4; Data Center 4.9 GW
+All-flex
+Gen 13.5; Stor 0.0 GW
+Tx 2.8; Data Center 4.9 GW
+All-inter
+Gen 8.9; Stor 0.0 GW
+Tx 2.6; Data Center 4.9 GW
+Realistic
+Gen 13.1; Stor 0.0 GW
+Tx 2.5; Data Center 4.9 GW
+Generation / storage / transmission
+LNG Onshore Wind PV New Tx 345 kV
+Build / Data Center area scale
+5 GW 15 GW 30 GW
+Generation / storage / transmission
+LNG Onshore Wind PV New Tx 345 kV
+Build / Data Center area scale
+5 GW 15 GW 30 GW
+Projected Data Center capacity
+Fig. 11:Korea expansion, 2028.Generation, storage and transmission additions
+by zone under the All-firm baseline and the three flexibility cases (All-flex, All-inter,
+Realistic).
+40
+
+=== PDF PAGE 41 ===
+200 km
+ 200 km
+200 km
+ 200 km
+PJM 2038 Generation Expansion and Projected Data Center Capacity
+All-firm
+Gen 71.5; Stor 15.6 GW
+Tx 7.3; Data Center 74.8 GW
+All-flex
+Gen 66.3; Stor 1.5 GW
+Tx 4.3; Data Center 74.8 GW
+All-inter
+Gen 50.6; Stor 1.5 GW
+Tx 0.9; Data Center 74.8 GW
+Realistic
+Gen 62.6; Stor 1.5 GW
+Tx 3.5; Data Center 74.8 GW
+Generation / storage / transmission
+Nuclear
+Coal
+LNG
+Onshore Wind
+Offshore Wind
+PV
+Storage
+New Tx build
+Build / Data Center area scale
+5 GW 15 GW 30 GW
+Generation / storage / transmission
+Nuclear
+Coal
+LNG
+Onshore Wind
+Offshore Wind
+PV
+Storage
+New Tx build
+Build / Data Center area scale
+5 GW 15 GW 30 GW
+Projected Data Center capacity
+Fig. 12:PJM expansion, 2038.Generation, storage and transmission additions
+by zone under the All-firm baseline and the three flexibility cases (All-flex, All-inter,
+Realistic).
+41
+
+=== PDF PAGE 42 ===
+200 km
+ 200 km
+200 km
+ 200 km
+Korea 2038 Generation Expansion and Projected Data Center Capacity
+All-firm
+Gen 87.1; Stor 1.0 GW
+Tx 63.5; Data Center 8.9 GW
+All-flex
+Gen 87.2; Stor 0.7 GW
+Tx 67.2; Data Center 8.9 GW
+All-inter
+Gen 66.5; Stor 0.2 GW
+Tx 48.4; Data Center 8.9 GW
+Realistic
+Gen 86.5; Stor 0.7 GW
+Tx 64.8; Data Center 8.9 GW
+Generation / storage / transmission
+Nuclear
+LNG
+Onshore Wind
+PV
+Storage New Tx 345 kV
+Build / Data Center area scale
+5 GW 15 GW 30 GW
+Generation / storage / transmission
+Nuclear
+LNG
+Onshore Wind
+PV
+Storage New Tx 345 kV
+Build / Data Center area scale
+5 GW 15 GW 30 GW
+Projected Data Center capacity
+Fig. 13:Korea expansion, 2038.Generation, storage and transmission additions
+by zone under the All-firm baseline and the three flexibility cases (All-flex, All-inter,
+Realistic).
+42
+
+=== PDF PAGE 43 ===
+0
+50
+100
+150
+All-firm All-flex All-firm All-flex
+1 6 12 18 24
+Hour
+0
+50
+100
+150
+All-inter
+1 6 12 18 24
+Hour
+Realistic
+1 6 12 18 24
+Hour
+All-inter
+1 6 12 18 24
+Hour
+Realistic
+Generation / flexible load (GW)
+PJM 2028, Day 219 Korea 2028, Day 88
+Nuclear
+Coal
+LNG
+Onshore Wind
+Offshore Wind
+PV
+Hydro
+Storage discharge
+Other
+Data Center temporal shifting
+Data Center interruption
+Data Center makeup
+Storage charge
+(a) Generation dispatch (2028)
+0
+50
+100
+150
+200
+All-firm All-flex All-firm All-flex
+1 6 12 18 24
+Hour
+0
+50
+100
+150
+200
+All-inter
+1 6 12 18 24
+Hour
+Realistic
+1 6 12 18 24
+Hour
+All-inter
+1 6 12 18 24
+Hour
+Realistic
+Generation / flexible load (GW)
+PJM 2038, Day 34 Korea 2038, Day 88
+Nuclear
+Coal
+Coal-Ammonia Retrofit
+LNG
+LNG-Hydrogen Retrofit
+Onshore Wind
+Offshore Wind
+PV
+Hydro
+Storage discharge
+Other
+Data Center temporal shifting
+Data Center interruption
+Data Center makeup
+Storage charge
+(b) Generation dispatch (2038)
+Fig. 14:Generation dispatch on a median-load day.Dispatch stacks for 2028
+(a) and 2038 (b) in both grids, for comparison with the summer peak-day stacks in
+Fig. 3 and Fig. 9. Flexibility is used less on a median day than at the peak, when the
+binding constraints are tightest.
+43
+
+=== PDF PAGE 44 ===
+0.6 0.7 0.8
+Line limit multiplier
+−2
+−1
+0
+1
+2
+3
+4
+Total Cost Change (%)
+PJM
+0.6 0.7 0.8
+Line limit multiplier
+Korea
+2028 2038
+Fig. 15:Transmission derating sensitivities.Total cost for the realistic mix as
+the contingency factorKvaries from 0.6 to 0.8. Korea’s 2038 cost rises by 3.62% as
+Kfalls from 0.7 to 0.6, whereas PJM is nearly insensitive, because PJM’s data-center
+load is spread across enough zones for spatial-shifting to route around tighter corridors
+while Korea’s is not.
+44

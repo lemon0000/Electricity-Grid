@@ -1,0 +1,17 @@
+{
+  "acquired_date": "2026-11-09",
+  "purpose": "Local evidence snapshots for empirical_grid_task_parameters_v2.json and empirical_grid_task_coupling_benchmarks.csv",
+  "acquired": [
+    {"file": "upstream/impact_eci_dcflex.html", "source": "https://impacteci.substack.com/p/data-center-flexibility-chapter-2", "evidence_class": "industry commentary, not primary regulation"},
+    {"file": "upstream/large_load_guide_section28.html", "source": "https://www.largeloadguide.com/section-28.html", "evidence_class": "secondary guide"},
+    {"file": "upstream/gridcog_flexible_connections.html", "source": "https://www.gridcog.com/blog/flexible-grid-connections-data-centres-gb-ireland", "evidence_class": "industry analysis"},
+    {"file": "upstream/datacenter_power_playbook.html", "source": "https://www.datacenterpower.ai/", "evidence_class": "industry website"},
+    {"file": "upstream/electric_era_ercot.html", "source": "https://electricera.tech/resources/data-center-flexibility-speed-to-power-and-profitability-via-autonomy-first-software-controls", "evidence_class": "industry analysis"},
+    {"file": "upstream/safeguard_interconnection.html", "source": "https://safeguard.sh/resources/blog/what-a-data-center-needs-to-connect-to-the-grid-steps-equipment-cost", "evidence_class": "industry analysis"}
+  ],
+  "not_acquired": [
+    {"name": "NGED Curtailment Analysis Data Usage Guidance", "url": "https://dso.nationalgrid.co.uk/downloads/15104/nged-curtailment-analysis-data-usage-guidance.pdf", "error": "HTTP 403 anti-bot challenge"},
+    {"name": "NFM Consulting ERCOT SB6 Guide", "url": "https://nfmconsulting.com/knowledge/texas-sb6-large-load-ercot-data-center-compliance/", "error": "HTTP 403"}
+  ],
+  "warning": "These HTML snapshots are provenance aids. Contract and grid-code claims require primary tariff, rulemaking or official guidance verification before scientific use."
+}

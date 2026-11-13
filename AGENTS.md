@@ -5,8 +5,9 @@ Applies to the entire repository. `AGENTS.md` is the auto-discovered entry point
 ## Read only the context needed
 
 - Routine lookups and low-risk edits: read the relevant source. Research work: read applicable `agent.md` sections, the current execution plan and blocker register, then relevant specs, configs, code, tests and result manifests.
-- On a new conversation, read the newest handoff linked at the top of `docs/plan/continuation_handoff_20261022.md` (that file is the rolling index; newer handoffs are prepended, never rewritten) and the current introduction index `paper/drafts/README.md`; verify live Git/process state. Reuse unchanged context already read.
-- The thesis title is fixed by `agent.md` §2, and the three-valued deliverability criterion in `agent.md` §4 is the reporting口径 for every D/E result table. Do not restate either here.
+- On a new conversation, first read the dated 2026-11-11 mainline section at the top of `agent.md`, then the relevant demo sources in the sibling `../ramp_flex_robust/` directory, including `RESULTS_complete_v1.md`. Verify live Git/process state. The sibling directory is outside this repository's Git publication scope. Reuse unchanged context already read.
+- For historical work, read the newest applicable handoff linked in `docs/plan/continuation_handoff_20261022.md` and `paper/drafts/README.md`. Their older mainline statements do not override the dated current mainline in `agent.md`.
+- The current thesis scope and completion criteria are defined in the dated 2026-11-11 mainline section of `agent.md`. Its historical §4 three-valued deliverability criterion continues to govern D/E result tables under their original contracts. New demo results remain preliminary feasibility evidence. Do not restate these definitions here.
 - `agent.md` section 7 alone defines classification, model routing, delegation, escalation and review. Read it before delegation or uncertain-risk work. Section 8 defines scientific invariants; section 9 defines experiment admission and performance review. Do not duplicate those rules here.
 - Communicate in Chinese by default; retain formulas and standard technical identifiers where clearer.
 

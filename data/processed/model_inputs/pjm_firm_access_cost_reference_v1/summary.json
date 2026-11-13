@@ -1,0 +1,33 @@
+{
+  "artifact": "pjm_firm_access_cost_reference_v1",
+  "created": "2026-11-11",
+  "purpose": "Tidy extracts of PJM RPM Base Residual Auction clearing prices and NITS zone rates, the two regulated $/MW-yr components behind the firm interconnection cost term c_F.",
+  "not_an_experiment": true,
+  "sources": {
+    "pjm_bra_results": [
+      "data/raw/pjm_bra/v2025_2026/upstream/2025-2026-base-residual-auction-results.xlsx",
+      "data/raw/pjm_bra/v2026_2027/upstream/2026-2027-bra-results.xlsx",
+      "data/raw/pjm_bra/v2027_2028/upstream/2027-2028-bra-results.xlsx"
+    ],
+    "pjm_nits": "data/raw/pjm_nits/v2026_10/upstream/network-integration-trans-service-october-2026.xlsx"
+  },
+  "conventions": {
+    "bra_price": "$/MW-day UCAP resource clearing price at each pricing point; annualised by x365 for a $/MW-yr figure",
+    "nits": "per transmission zone: annual revenue requirement (USD) and network integration transmission service rate",
+    "dom": "'DOM' is the Dominion zone pricing point, the data-centre-dense LDA referenced in the paper's discussion"
+  },
+  "caveats": [
+    "BRA prices are auction outcomes, not a tariff; they clear at the administratively set cap in tight years.",
+    "NITS rates are recovered from load-serving entities in the zone; a large load's actual obligation also depends on its transmission service request and any zonal/network upgrade agreements."
+  ],
+  "outputs": {
+    "pjm_bra_clearing_prices_by_pricing_point.csv": {
+      "bytes": 5101,
+      "sha256": "86f2e8e3f11ea4b1a9c7953cc94836b2a1a63e10c766705ffc4176d835b40285"
+    },
+    "pjm_nits_zone_rates_2026_10.csv": {
+      "bytes": 2897,
+      "sha256": "fcd76075ef192eb528506f002c6be944c6b93da643521371433a05f282fdb75f"
+    }
+  }
+}

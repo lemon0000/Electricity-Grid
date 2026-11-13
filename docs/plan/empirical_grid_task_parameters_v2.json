@@ -1,0 +1,240 @@
+{
+  "metadata": {
+    "title": "Empirical Grid-Task Coupling Parameter Pack for Staged Data Center Deliverability (v2)",
+    "date": "2026-11-09",
+    "purpose": "Replace mechanism_assumption scalar parameters with peer-reviewed empirical traces, hardware trial metrics, and utility interconnection contract parameters to break scalar hourly capacity reduction.",
+    "primary_repositories": {
+      "alibaba_155k_gpu_power_envelope_zenodo": "https://doi.org/10.5281/zenodo.22308423",
+      "alibaba_155k_gpu_power_envelope_github": "https://github.com/meiyilutaustin/asi-trace-power",
+      "pjm_korea_tiered_dc_cem_zenodo": "https://doi.org/10.5281/zenodo.22016953",
+      "hopkins_icarus_dc_dataset": "https://github.com/hopkinsicarus/ICARUS-DC-Dataset",
+      "hopkins_icarus_pjm_dataset": "https://github.com/HopkinsICARUS/ICARUS-PJM-Dataset"
+    }
+  },
+  "power_mapping_and_idle_floor": {
+    "source": "Li et al. (2026) arXiv:2609.05406v1 (155,410 GPUs, 185 days, 4,439 hours)",
+    "url": "https://arxiv.org/html/2609.05406v1",
+    "pue_central": 1.2,
+    "pue_range": [
+      1.1,
+      1.4
+    ],
+    "allocated_gpu_idle_fraction_phi": 0.2,
+    "allocated_gpu_idle_range": [
+      0.15,
+      0.25
+    ],
+    "online_inference_power_floor_tdp_fraction": 0.43,
+    "facility_power_median_mw": 55.83,
+    "facility_power_central_mw": 52.32,
+    "it_power_central_mw": 43.6,
+    "gpu_workload_power_central_mw": 29.37,
+    "semantic_layer_shares_of_workload": {
+      "must_run_floor": 0.4612,
+      "shiftable_high_priority_training_offline_inf": 0.3311,
+      "low_priority_preemptible_attributed": 0.2039,
+      "standby": 0.0039
+    },
+    "idle_retained_immediate_relief": {
+      "attributed_low_priority_mw": 5.99,
+      "retained_gpu_idle_mw": 2.44,
+      "net_immediate_relief_mw": 3.55,
+      "share_of_workload_power": 0.1208,
+      "share_of_median_facility_power": 0.0635
+    }
+  },
+  "duration_reliability_surface_K_alpha_h": {
+    "source": "Li et al. (2026) arXiv:2609.05406v1 Table 2 & Table 3",
+    "url": "https://arxiv.org/html/2609.05406v1",
+    "description": "Dependable curtailment capacity K_{alpha, h} decays with call duration h (hours), defeating any single hourly scalar capacity C_t representation.",
+    "portfolio_13_clusters_alpha_095": {
+      "mean_eligible_mw": 3.53,
+      "duration_hours": {
+        "1": {
+          "dependable_mw": 2.508,
+          "firmness": 0.71,
+          "mean_scalar_overstatement_ratio": 1.174,
+          "tail_4h_scalar_ratio": 0.936,
+          "independent_cluster_ratio": 1.073
+        },
+        "2": {
+          "dependable_mw": 2.42,
+          "firmness": 0.686
+        },
+        "4": {
+          "dependable_mw": 2.317,
+          "firmness": 0.656,
+          "mean_scalar_overstatement_ratio": 1.255,
+          "tail_4h_scalar_ratio": 1.0,
+          "independent_cluster_ratio": 1.11
+        },
+        "8": {
+          "dependable_mw": 2.16,
+          "firmness": 0.612
+        },
+        "24": {
+          "dependable_mw": 1.947,
+          "firmness": 0.551,
+          "mean_scalar_overstatement_ratio": 1.466,
+          "tail_4h_scalar_ratio": 1.169,
+          "independent_cluster_ratio": 1.197
+        }
+      }
+    },
+    "workload_share_multiplier_p_h_alpha": {
+      "1h": {
+        "alpha_0.50": 0.98,
+        "alpha_0.90": 0.88,
+        "alpha_0.95": 0.85,
+        "alpha_0.99": 0.74
+      },
+      "2h": {
+        "alpha_0.50": 0.96,
+        "alpha_0.90": 0.85,
+        "alpha_0.95": 0.83,
+        "alpha_0.99": 0.72
+      },
+      "4h": {
+        "alpha_0.50": 0.93,
+        "alpha_0.90": 0.83,
+        "alpha_0.95": 0.79,
+        "alpha_0.99": 0.7
+      },
+      "8h": {
+        "alpha_0.50": 0.89,
+        "alpha_0.90": 0.79,
+        "alpha_0.95": 0.74,
+        "alpha_0.99": 0.7
+      },
+      "24h": {
+        "alpha_0.50": 0.83,
+        "alpha_0.90": 0.73,
+        "alpha_0.95": 0.68,
+        "alpha_0.99": 0.61
+      }
+    }
+  },
+  "checkpoint_rollback_and_rebound_debt": {
+    "source": "Li et al. (2026) arXiv:2609.05406v1 Sec 3.6 & Appendix D; Williams et al. (2026) arXiv:2606.25098v1",
+    "url": "https://arxiv.org/html/2609.05406v1",
+    "formula_net_to_gross_energy": "1 - rho * (1 + T_ckpt / (2 * h))",
+    "debt_injection_multiplier_eta_inv": "1 + T_ckpt / (2 * h)",
+    "checkpoint_interval_hours_T_ckpt": 1.0,
+    "expected_lost_work_hours": 0.5,
+    "rebound_fraction_rho": 1.0,
+    "four_hour_call_benchmark": {
+      "call_duration_h": 4.0,
+      "offered_relief_mw": 2.32,
+      "gross_curtailed_energy_mwh": 9.28,
+      "rebound_energy_debt_mwh": 10.44,
+      "net_energy_saving_ratio": -0.125,
+      "max_recovery_absorption_rate_mw": 2.326,
+      "max_recovery_share_of_noneligible_load": 0.1,
+      "required_recovery_duration_hours": 4.49,
+      "min_call_cycle_spacing_hours": 8.49,
+      "max_calls_per_week": 19.8
+    },
+    "graceful_ramp_transition": {
+      "source_url": "https://arxiv.org/html/2606.25098v1",
+      "graceful_ramp_down_minutes": 15.0,
+      "graceful_ramp_up_minutes": 15.0,
+      "zero_notice_emergency_cut_seconds": [
+        40,
+        60
+      ],
+      "emergency_cut_depth_fraction": [
+        0.3,
+        0.4
+      ]
+    }
+  },
+  "contract_and_grid_event_envelope": {
+    "khanal_et_al_2026_cem_table7": {
+      "source_url": "https://arxiv.org/html/2608.19622v1",
+      "zenodo_url": "https://doi.org/10.5281/zenodo.22016953",
+      "tier_shares_realistic": {
+        "firm": 0.3,
+        "flexible": 0.5,
+        "interruptible": 0.2
+      },
+      "makeup_horizon_hours_H_makeup": 24,
+      "makeup_horizon_sensitivity_range": [
+        4,
+        24
+      ],
+      "spatial_shift_cap_sigma_sh_max": 0.3,
+      "annual_interruptible_energy_cap_phi_max": 0.05,
+      "annual_interruption_hour_cap_H_max": 480,
+      "annual_interruption_hour_range": [
+        180,
+        720
+      ],
+      "c1_hourly_depth_cap_delta_max": 0.3,
+      "c2_allowed_hours_window": [
+        16,
+        21
+      ],
+      "c3_hourly_ramp_limit_rho_dc": 0.25,
+      "c4_max_consecutive_hours_H_consec": 4,
+      "c5_min_recovery_hours_R_rec": 12,
+      "voll_firm_load_shed_usd_per_mwh": 2000.0,
+      "temporal_shift_adder_usd_per_mwh": 10.0,
+      "spatial_shift_adder_usd_per_mwh": 2.0
+    },
+    "camus_princeton_pjm_sites_2025": {
+      "source_url": "https://cdn.prod.website-files.com/60dbdcca2e4b1919e8894fa5/6930abf1be0f36db6fc27157_Whitepaper%20-%20With%20Appendix.pdf",
+      "site_nameplate_mw": 500.0,
+      "site_actual_peak_mw": 435.0,
+      "available_firm_capacity_mw_range": [
+        154.0,
+        326.0
+      ],
+      "conditional_flexible_capacity_mw_range": [
+        174.0,
+        346.0
+      ],
+      "annual_curtailed_hours_range": [
+        7,
+        35
+      ],
+      "moderate_sites_koala_whale_pony_max_duration_h": [
+        4,
+        5
+      ],
+      "severe_site_hare_max_duration_h": 16,
+      "koala_site_optimal_portfolio": {
+        "peak_curtailment_mw": 109.0,
+        "total_curtailment_hours_per_yr": 7,
+        "compute_flex_max_share": 0.25,
+        "compute_flex_max_hours_per_yr": 20,
+        "bess_power_mw": 49.0,
+        "bess_energy_mwh": 196.0,
+        "solar_pv_mw": 26.0,
+        "onsite_gas_mw": 11.0
+      }
+    },
+    "utility_grid_codes_and_contracts": {
+      "ercot_sb6_and_sced": {
+        "url": "https://nfmconsulting.com/knowledge/texas-sb6-large-load-ercot-data-center-compliance/",
+        "threshold_mw": 75.0,
+        "qse_sced_notice_minutes": 5.0,
+        "colocated_curtailment_notice_minutes": 30.0
+      },
+      "indiana_michigan_power_google_contract": {
+        "url": "https://www.largeloadguide.com/section-28.html",
+        "summer_max_duration_hours": 12,
+        "winter_max_duration_hours": 15
+      },
+      "eirgrid_ireland": {
+        "url": "https://www.gridcog.com/blog/flexible-grid-connections-data-centres-gb-ireland",
+        "acknowledge_minutes": 2.0,
+        "comply_minutes": 5.0
+      },
+      "grid_code_ramp_limits_mw_per_min": {
+        "url": "https://arxiv.org/html/2609.11649v1",
+        "aeso_max_ramp_mw_per_min": 10.0,
+        "energinet_max_ramp_mw_per_min": 60.0
+      }
+    }
+  }
+}

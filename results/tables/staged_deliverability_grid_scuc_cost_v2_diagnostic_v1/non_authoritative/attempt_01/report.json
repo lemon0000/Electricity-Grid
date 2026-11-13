@@ -1,0 +1,87 @@
+{
+  "authority": "DRAFT_NONAUTHORITATIVE",
+  "scope": "staged_deliverability_grid_scuc_cost_v2_diagnostic_v1",
+  "created_utc": "2026-11-07T11:34:41.777818+00:00",
+  "formal_result": false,
+  "purpose": "explain the B0(290.5 s) / B2(0.5 s) ordering inversion before either timing is cited",
+  "model_note": "identical model, window, load, cost and budget to v2; only the listed constraint family or solver symmetry setting differs",
+  "declared": {
+    "per_solve_time_limit_s": 120.0,
+    "total_budget_s": 360.0,
+    "interpretation_rule": "E1/E2 change the model; E3 changes only the solver setting. A speed-up under E3 alone is a solver-symmetry artifact and must not be reported as a property of the stiff formulation."
+  },
+  "environment": {
+    "python": "3.11.15",
+    "pyomo": "6.10.1",
+    "gurobi": "13.0.2"
+  },
+  "window": {
+    "start": 7,
+    "hours": 24,
+    "rule": "earliest servable window, same as v2"
+  },
+  "reference": {
+    "B0_seconds": 290.503,
+    "B0_objective": 1380391.1621663827,
+    "B2_seconds": 0.526,
+    "B2_objective": 1468306.8946349584,
+    "source": "v2 attempt_01"
+  },
+  "arms": [
+    {
+      "arm": "E1",
+      "ramp": true,
+      "min_up": false,
+      "symmetry": null,
+      "question": "ramp alone (4 h min up/down off)",
+      "window_start_hour": 7,
+      "vars": 4560,
+      "binaries": 768,
+      "integers": 0,
+      "constraints": 6208,
+      "solve_seconds": 92.985,
+      "termination": "optimal",
+      "upper_bound": 1420317.656124099,
+      "lower_bound": 1420317.6561240999,
+      "status": "optimal",
+      "objective": 1420317.65612409
+    },
+    {
+      "arm": "E2",
+      "ramp": false,
+      "min_up": true,
+      "symmetry": null,
+      "question": "minimum up/down alone (ramp off)",
+      "window_start_hour": 7,
+      "vars": 4560,
+      "binaries": 768,
+      "integers": 0,
+      "constraints": 6816,
+      "solve_seconds": 0.594,
+      "termination": "optimal",
+      "upper_bound": 1431805.2446083883,
+      "lower_bound": 1431805.2446083878,
+      "status": "optimal",
+      "objective": 1431805.244608378
+    },
+    {
+      "arm": "E3",
+      "ramp": false,
+      "min_up": false,
+      "symmetry": 2,
+      "question": "unchanged B0 model, aggressive solver symmetry detection",
+      "window_start_hour": 7,
+      "vars": 4560,
+      "binaries": 768,
+      "integers": 0,
+      "constraints": 5472,
+      "solve_seconds": 120.107,
+      "termination": "maxTimeLimit",
+      "upper_bound": 1380391.162217063,
+      "lower_bound": 1378407.2867712406,
+      "status": "hit_time_limit",
+      "objective": null
+    }
+  ],
+  "total_seconds": 213.89
+}

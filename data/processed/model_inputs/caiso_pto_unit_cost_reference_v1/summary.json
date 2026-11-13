@@ -1,0 +1,36 @@
+{
+  "artifact": "caiso_pto_unit_cost_reference_v1",
+  "created": "2026-11-13",
+  "purpose": "Unit costs published by each CAISO Participating Transmission Owner for generator interconnection facilities and network upgrades (substation bays, transformers, gen-tie line, protection). This is the CAISO-side basis for estimating $/unit transmission upgrade cost, i.e. the c_F component that LBNL's dataset does not cover for CAISO.",
+  "not_an_experiment": true,
+  "sources": {
+    "files": [
+      "data/raw/caiso_interconnection/v2025/upstream/pge-2025-per-unit-cost-guide-final.xlsx",
+      "data/raw/caiso_interconnection/v2025/upstream/sce-2025-per-unit-cost-guide-final.xlsx",
+      "data/raw/caiso_interconnection/v2025/upstream/sdge-2025-per-unit-cost-guide-final.xlsx",
+      "data/raw/caiso_interconnection/v2025/upstream/lspgc-2025-per-unit-cost-guide-final.xlsx",
+      "data/raw/caiso_interconnection/v2025/upstream/dcrt-2025-per-unit-cost-guide-final.xlsx",
+      "data/raw/caiso_interconnection/v2025/upstream/dslk-2025-per-unit-cost-guide-final.xlsx",
+      "data/raw/caiso_interconnection/v2025/upstream/glw-2025-per-unit-cost-guide-final.xlsx",
+      "data/raw/caiso_interconnection/v2025/upstream/hwt-2025-per-unit-cost-guide-final.xlsx",
+      "data/raw/caiso_interconnection/v2025/upstream/vea-2025-per-unit-cost-guide-final.xlsx"
+    ],
+    "publisher": "California ISO - PTO generator interconnection unit cost guides (2025)"
+  },
+  "conventions": {
+    "cost": "USD per unit, converted from the guides' $x1,000 scale",
+    "voltage_class": "voltage column header as published (e.g. 60/70 kV, 115 kV, 230 kV, 500 kV)",
+    "unit": "the guide's Units column (per unit, per mile, per substation, ...)"
+  },
+  "caveats": [
+    "Unit costs are planning-grade estimates for interconnection study purposes, not bid prices.",
+    "Layouts differ between PTOs; rows with no voltage-specific value are kept with cost_usd null.",
+    "These are facility unit costs. A project's actual network upgrade obligation also depends on the cluster study allocation and the reimbursement / cost-containment caps in the accompanying PDFs."
+  ],
+  "outputs": {
+    "caiso_pto_unit_costs_2025.csv": {
+      "bytes": 31626,
+      "sha256": "837171c5385bc6ded046ed565ff8cba82ce5f0546ab4426b2e19711c998de87e"
+    }
+  }
+}

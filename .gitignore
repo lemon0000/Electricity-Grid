@@ -41,6 +41,15 @@ data/raw/us_major_power_outages/*/upstream/
 data/raw/nlr_genai_power_2026/*/upstream/
 data/raw/wattgpu_2026/*/upstream/
 
+# 统一忽略各数据源目录下的第三方原始下载件（upstream/）：
+# 这些文件体量大（含超过 GitHub 100MB 单文件上限的 CSV/ZIP/parquet），
+# 且可由索引文档中记录的来源地址重新获取；采集清单、manifest、SHA256SUMS
+# 与索引文档仍然入库。
+data/raw/**/upstream/
+
+# 一次性下载暂存目录，不属于入库内容。
+.tmp_acquire/
+
 # 可由 experiments/process_*.py 从 data/raw 重新生成的大体量中间表。
 # 其 SHA256SUMS 与 summary.json 仍然入库，用于校验重生成结果是否一致。
 data/processed/alibaba_gpu_2020/*/jobs.csv.gz

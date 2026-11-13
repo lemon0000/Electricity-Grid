@@ -1,0 +1,847 @@
+PAGE 1
+Priority-Aware Firm and Flexible Capacity
+Quantification for Large-Load Interconnection
+Shaoze Li 1, Bohang Fang 1, Junjie Qin 2, and Cong Chen 1,∗
+Abstract—We study how to unlock existing transmission capac-
+ity to accelerate large-load interconnection under differentiated
+quality-of-service (QoS) requirements. We establish an efficient
+framework to quantify firm and flexible hosting capacities and
+assess marginal values of grid upgrades. Specifically, we define
+multiple flexible capacity tiers with differentiated QoS limits and
+design a two-layer priority rule to allocate curtailment among
+tiers. We then formulate a mixed-integer chance-constrained
+model to jointly quantify firm and flexible capacities under QoS
+and priority constraints. To improve computational efficiency,
+we derive an equivalent aggregate formulation that eliminates
+individual curtailment variables and priority binaries without
+changing the feasible capacity set. Numerical results show the
+computational advantage of aggregation. Multi-tier flexible ca-
+pacity increases total admitted capacity by 45.0% over the firm-
+only hosting capacity.
+Index Terms—Large-load interconnection, flexible capacity,
+curtailment priority.
+I. INTRODUCTION
+The rapid growth of large electricity loads, including AI
+data centers, is placing increasing pressure on transmission
+grid interconnection [1]. However, transmission grid expansion
+is slow and capital-intensive, making it difficult to keep pace
+with large-load interconnection requests. This paper focuses
+on accommodating this demand surge before network up-
+grades while meeting differentiated quality-of-service (QoS)
+requirements. Specifically, we consider multi-tier flexible in-
+terconnection, where different tiers have distinct QoS limits.
+Unlike firm capacity, which must be served under all planning
+conditions, flexible capacity (also known as non-firm load
+service) allows curtailment subject to agreed QoS limits.
+Existing studies demonstrate the benefits of such flexibility
+for load growth in U.S. power systems [2], distribution-level
+interconnection [3], and data-center siting in transmission
+networks [4]. However, large-load customers may differ in
+their QoS requirements, both in terms of allowed curtailment
+depth and the probability of exceeding that depth. These
+studies do not explicitly consider multiple flexible capacity
+tiers with differentiated QoS requirements.
+Another challenge is how to allocate curtailment when
+multiple flexible tiers share a bus. Their QoS limits do not
+specify how curtailment should be distributed among them.
+Priority-based allocation provides one efficient approach and
+1Shaoze Li, Bohang Fang, and Cong Chen are with the Thayer School of
+Engineering, Dartmouth College, Hanover, NH, USA.{Shaoze.Li.TH,
+Bohang.Fang, Cong.Chen}@dartmouth.edu. 2Junjie Qin is with
+the Elmore Family School of Electrical and Computer Engineering, Purdue
+University, West Lafayette, IN, USA.{jq@purdue.edu}.
+*Corresponding author: Cong Chen.
+has been studied in electricity markets [5]. PJM has also
+proposed curtailment priorities for certain large-load services
+[6]. However, these studies do not determine how much firm
+and tier-specific flexible capacity a transmission network can
+jointly admit while satisfying network and QoS constraints.
+Our contributions addressing these gaps are twofold. First,
+we develop a two-layer curtailment priority rule and formulate
+a unified mixed-integer chance-constrained model that maxi-
+mizes the preference-weighted firm and flexible interconnec-
+tion capacity subject to network, priority, and QoS limits. We
+then establish an exact aggregate reformulation that eliminates
+individual curtailment variables and priority binaries without
+changing the feasible set of capacity decisions. Second, to
+improve computational efficiency and guide grid upgrades, we
+first approximate the aggregate model by a linear program
+(LP) whose feasible solutions provably satisfy the QoS limits,
+then derive marginal upgrade values from the dual variables
+that indicate how much additional hosting capacity can be
+unlocked by the upgrade in transmission or generation ca-
+pacity. Numerical results on the PJM 5-bus system show that
+aggregation reduces solution time from 5801.5 s to 1.56 s
+while preserving the optimal objective value. On the IEEE RTS
+73-bus system, results show that multi-tier flexible capacity
+increases total admitted capacity by 45.0% over the firm-only
+hosting capacity.
+The paper is organized as follows. Section II defines the
+capacity products and formulates the individual model under
+the two-layer curtailment priority rule. Section III derives the
+equivalent aggregate model and the LP approximation, whose
+duals give marginal upgrade values. The experiments are given
+in Section IV.
+II. INDIVIDUALCAPACITYQUANTIFICATION
+In this section, we first introduce the QoS limits and the
+curtailment priority rule, and then formulate an individual
+model for capacity quantification. The grid planner performs
+this quantification to determine firm and flexible interconnec-
+tion capacities. In the next section, we derive an equivalent
+aggregate model and the LP approximation to improve com-
+putational efficiency and obtain marginal upgrade information.
+A. Firm and Flexible Capacity Products
+LetNandJdenote the sets of buses and transmission
+lines, respectively, and letI⊆Ndenote the candidate inter-
+connection buses. The planning horizon isT:={1,...,T},
+andK:={1,...,K}indexes flexible service tiers with
+arXiv:2611.13673v1  [eess.SY]  10 Nov 2026
+PAGE 2
+different QoS requirements. Existing nodal demand is repre-
+sented by a random trajectoryD:= (D t)t∈T , whereD t :=
+(Dit)i∈N ∈R |N| . Throughout the paper,PandEdenote
+probability and expectation under the distribution ofD. Unless
+otherwise specified,i∈ I,k∈ K, andt∈ Tthroughout
+the formulations. Bold symbols denote vectors and matrices,
+and vector inequalities are componentwise. Unindexed bold
+decision symbols collect the corresponding variables over all
+relevant indices.
+At busi,firm capacityc F
+i ≥0is served in full in every
+period and almost every realization.Flexible capacityc ik≥0
+belongs to service tierkand may be curtailed under specified
+conditions. Letc i := (cik)k∈K andc k := (cik)i∈N collect
+flexible capacities across tiers and buses, respectively, and let
+c:= (c ik)i∈I,k∈K collect all flexible capacity awards. The
+firm-capacity vector isc F := (cF
+i )i∈N . Each admitted flexible
+product requests its full capacity in every period. Product
+(i,k)refers to service tierkat busi. Lety ikt denote the
+curtailed amount of product(i,k)in periodt. The delivered
+flexible load is thenc ik−yikt, where0≤y ikt≤c ik. Define
+ykt := (y ikt)i∈N for the tier-kcurtailment vector. New-
+load capacities, request limits, and associated curtailments are
+extended by zero to buses outsideI.
+Each QoS tierkis defined by two parameters(δ k,ϵk). The
+parameterδ k determines the allowed curtailment depthδ kcik,
+whileϵ k limits the probability that this depth is exceeded at
+least once during the planning horizon:
+P
+
+max
+t∈T
+yikt >δ kcik
+
+≤ϵ k.(1)
+Curtailment within the allowed depth is not frequency-limited.
+These QoS parameters are specified in the interconnection
+agreement, allowing customers to plan on-site backup re-
+sources or load flexibility based on the agreed curtailment
+depth, while limiting the probability of deeper curtailment.
+Together, these provisions enable earlier interconnection under
+differentiated QoS requirements.
+The tiers are ordered from most to least reliable, with
+0≤δ 1≤···≤δ K <1,
+0<ϵ 1≤···≤ϵ K <1. (2)
+Thus, a more reliable tier has no larger allowed curtailment
+depth or exceedance-probability limit. We use common param-
+eters(δ k,ϵk)across buses for notational simplicity; the results
+also extend to bus-specific reliability parameters satisfying (2)
+at each bus. A flexible product(i,k)is called active ifc ik >0
+and inactive otherwise.
+B. The Two-Layer Curtailment Priority Rule
+Equation (1) specifies the QoS requirement of each flexible
+product but does not determine how curtailment is allocated.
+We therefore adopt a priority rule for products sharing a bus.
+Specifically, we adopt a two-layer rule: the allowed curtailment
+depths of all flexible products are used before any product is
+curtailed beyond its allowed depth. The first layer is the within-
+depth layer, with tranche sizesa ik :=δ kcik; the second layer
+is the exceedance layer, with tranche sizesb ik := (1−δ k)cik.
+Within each layer, less reliable tiers are curtailed before more
+reliable ones. Next, a small example of two products shows
+the curtailment priority. Fig. 1 illustrates this order for two
+products, with the bus index omitted. Curtailment first uses
+the 5 MW within-depth tranche of product 2, then the 2 MW
+within-depth tranche of product 1. Only after both within-
+depth tranches are exhausted does it use the 5 MW exceedance
+tranche of product 2, followed by the 8 MW of product 1.
+Total curtailment (MW)
+Curtailment step
+0 5 7 12 20
+1
+2
+3
+4
+a2 = 5
+Product 2
+a1 = 2
+Product 1 b2 = 5
+Product 2
+b1 = 8
+Product 1
+Within-depth layer Exceedance layer
+Fig. 1. A toy example for two-layer curtailment priority withc 1 =c 2 =
+10MW,δ 1 = 0.2, andδ 2 = 0.5, with the bus index omitted. Product 2 is
+less reliable. Curtailment follows the ordera 2→a 1→b 2→b 1. Tranche
+widths give the amount curtailed in each step.
+LetM:={1,...,2K}index all curtailment tranches at a
+bus. Following the two-layer rule, these tranches are curtailed
+in the order
+(di1(ci),...,d i,2K(ci)) := (aiK,...,a i1,biK,...,b i1).(3)
+Here,d im(ci)denotes the size of tranchem, which can be
+expressed as
+dim(ci) :=
+(
+δK−m+1ci,K−m+1,1≤m≤K,
+(1−δ 2K−m+1)ci,2K−m+1, K <m≤2K.
+Each tranche size is linear in the flexible capacity decisions.
+Under this ordering, tranchem+ 1can receive curtailment
+only after tranchemhas been fully curtailed.
+We next formulate the two-layer priority rule using linear
+constraints and binary variables. Letx imt denote the cur-
+tailed amount assigned to tranchemin periodt. To enforce
+the curtailment order, we introduce binary variablesβ imt
+form= 0,...,2K, with fixed endpointsβ i0t = 1and
+βi,2K,t = 0. For0< m <2K, settingβ imt = 1indicates
+that tranchemis fully curtailed, allowing the next tranche to
+receive curtailment. The priority rule is then represented by
+the following constraints:
+0≤x imt≤d im(ci),∀i,m,t,(4a)
+ximt≤Mβ i,m−1,t,∀i,m,t,(4b)
+ximt≥d im(ci)−M(1−β imt),∀i,m,t,(4c)
+βi,m−1,t≥β imt,∀i,m,t,(4d)
+yikt =x i,K−k+1,t +xi,2K−k+1,t,∀i,k,t,(4e)
+βi,0,t = 1, β i,2K,t = 0,∀i,t,(4f)
+βimt∈{0,1},∀i,m,t.(4g)
+Let ¯C F
+i and ¯Cik denote the maximum firm and
+tier-kcapacity requests at busi, respectively, and set
+¯ci := ( ¯Ci1,..., ¯CiK). A valid big-M constant isM:=
+maxi,mdim(¯ci), which bounds every feasible tranche size.
+Constraints (4a)–(4d), together with the fixed endpoints, en-
+sure that a tranche receives curtailment only after all earlier
+PAGE 3
+tranches are fully curtailed, leaving at most one partially
+curtailed tranche. Equation (4e) recovers each product’s cur-
+tailment by summing its two tranche curtailments, ensuring
+0≤y ikt≤c ik.
+C. Mixed-Integer Chance-Constrained Quantification Model
+Combining the curtailment priority rule with the generation
+and transmission network constraints, we formulate the fol-
+lowing model to determine the firm and flexible capacities.
+The capacitiesc F andcare first-stage decisions made before
+Dis realized;g,q,y,x, andβare recourse decision rules
+depending onD. We suppress this dependence and require the
+operational and priority constraints to hold almost surely.
+(Pind) max
+cF,c,g,q,
+y,x,β
+W(c F,c) := (w F)⊤cF +
+X
+k∈K
+w⊤
+k ck,(5a)
+s.t.0≤c F≤ ¯CF,0≤c k≤ ¯Ck,∀k,(5b)
+qt =g t−Dt−c F
+−
+X
+k∈K
+(ck−ykt),∀t,(5c)
+1⊤qt = 0,∀t,(5d)
+−¯f≤Sq t≤ ¯f,∀t,(5e)
+g≤g t≤ ¯g,∀t,(5f)
+−∆−≤g t−gt−1≤∆ +,∀t,(5g)
+P
+
+max
+t∈T
+yikt >δ kcik
+
+≤ϵ k,∀i,k,(5h)
+Priority constraints (4),(5i)
+wherew F := (w F
+i )i∈N andw k := (w ik)i∈N collect the
+preference weights for the capacities, andg t := (git)i∈N and
+qt := (qit)i∈N denote nodal generation and net injection. The
+objective (5a) maximizes the preference-weighted admitted
+capacity. Unit weights give the total admitted capacity in
+MW. Constraint (5b) imposes the capacity request limits.
+Constraints (5c)–(5g) describe the lossless DC network model.
+Constraint (5c) defines net injection, and (5d) enforces power
+balance, where1is the all-ones vector. Constraint (5e) limits
+transmission flows, whereS∈R |J|×|N| is the power transfer
+distribution factor (PTDF) matrix and ¯fdenotes the line rat-
+ings. Constraints (5f) and (5g) impose the generation limitsg
+and ¯gand the ramp-down/up limits∆ − and∆ +, respectively,
+withg 0 denoting the given initial dispatch. Constraint (5h)
+imposes product-level QoS limits defined in (1), while (5i)
+enforces the curtailment priority.
+III. AGGREGATEREFORMULATION
+ModelP ind captures the curtailment priority and the QoS
+requirements of each flexible product. However, the priority
+binaries and chance constraints make the model computa-
+tionally challenging. The key observation is that the network
+constraints (5c)–(5g) depend on the flexible products only
+through their total capacity and total curtailment at each bus.
+Inspired by this observation, we first develop an aggregate
+modelP agg and prove that it is equivalent toPind. This can im-
+prove computational efficiency, with a simulation comparison
+in Table I. We then apply a conservative conditional value-at-
+risk (CVaR) approximation to the remaining chance constraints
+to obtain a linear program (LP). The dual information of this
+LP can then be used to identify candidate upgrades.
+We begin by defining the total flexible capacity and aggre-
+gate curtailment at each busi∈N:
+Ci(ci) :=
+X
+k∈K
+cik, z it :=
+X
+k∈K
+yikt.(6)
+LetC(c) := (C i(ci))i∈N andz t := (z it)i∈N denote the
+corresponding vectors. Using (6) in (5c), together with0≤
+yikt≤c ik, gives
+qt =g t−Dt−c F−C(c) +z t,∀t,(7a)
+0≤z t≤C(c),∀t.(7b)
+In the aggregate model,z t is a recourse decision vector.
+A. Aggregate Representation of Curtailment Priority
+To preserve the curtailment priority in the aggregate model,
+we first show that the curtailment of each product can be
+recovered from the total curtailment at its bus. Define
+Γim(ci) :=
+mX
+h=1
+dih(ci), m= 0,...,2K,(8)
+as the cumulative size of the firstmtranches. Following (3),
+mranges from 0 to2Kbecause the two-layer priority rule
+has two tranches for each of theKtiers. Thus, tranchem
+occupies the interval[Γ i,m−1,Γim]of aggregate curtailment,
+whereΓ i0 = 0andΓ i,2K =C i. From (3), the within-depth
+tranchea ik of productkis at positionK−k+ 1, while its
+exceedance trancheb ik is at position2K−k+1. Their starting
+points are
+Aik(ci) := Γi,K−k(ci) =
+X
+r>k
+δrcir,
+Hik(ci) := Γi,2K−k(ci) =
+X
+r≤k
+δrcir +
+X
+r>k
+cir.
+(9)
+BothAik andHik are linear inci. For the example in Fig. 1,
+H2 =a 2+a1 = 7MW andH 1 =a 2+a1+b2 = 12MW. Thus,
+product 2 exceeds its allowed depth when total curtailment
+exceeds 7 MW, and product 1 exceeds its allowed depth when
+total curtailment exceeds 12 MW.
+The following proposition shows that aggregate curtailment
+uniquely determines individual curtailments under the two-
+layer priority rule. We fix a busi, a period, and a real-
+ization, and omit the period index and the argumentc i of
+dim,Γ im,A ik, andH ik. The positive part is defined as
+[u]+ := max{u,0}.
+Proposition 1(Recovery of individual curtailment).Let the
+capacities satisfy(5b). For everyz∈[0,C i], there exists an
+allocation satisfying(4)and P
+kyik =z. All such allocations
+have the same tranche and product curtailments, given by
+xim := min
+
+[z−Γ i,m−1]+, dim
+	
+, m∈M,(10)
+yik :=f ik(z;ci) := min
+
+[z−A ik]+, aik
+	
++ min
+
+[z−H ik]+, bik
+	
+.(11)
+The proof is given in Appendix A.
+PAGE 4
+We next show that the chance constraint of each product
+can also be expressed using aggregate curtailment. LetZ i :=
+maxt∈T zit denote the maximum aggregate curtailment at bus
+iover the planning horizon.
+Proposition 2(Equivalent chance constraints).Let(y,x,β)
+satisfy(4)in every realization, and letz it := P
+kyikt.
+Then, for every active product(i,k)withc ik >0and every
+realization,
+max
+t∈T
+yikt >δ kcik ⇐⇒Z i >H ik(ci).(12)
+Consequently,P(max t∈T yikt > δkcik) =P(Z i > Hik(ci)),
+and the individual chance constraint(5h)of product(i,k)
+holds if and only ifP
+ 
+Zi >H ik(ci)
+
+≤ϵ k.
+The proof is given in Appendix B.
+Proposition 2 is the key step in the feasibility argument
+of Theorem 1 below: it allows the product-level chance con-
+straints to be imposed directly on the aggregate curtailment.
+Next, we replace the individual curtailment variables with
+aggregate curtailment variables as follows:
+(Pagg) max
+cF,c,g,q,z
+W(c F,c)(13a)
+s.t. (5b),(5d)–(5g),(7),(13b)
+P
+ 
+Zi >H ik(ci)
+
+≤ϵ k,∀i,k.(13c)
+Theorem 1.Under(2),P ind andP agg have the same feasible
+set of capacity decisions(c F,c)and the same optimal value.
+The proof is given in Appendix C.
+The intuition behind Theorem 1 is that the network con-
+straints depend on the flexible products only through their
+total capacity and curtailment at each bus. For fixed capacities,
+the priority rule uniquely determines the individual curtail-
+ments from aggregate curtailment, and each active product’s
+depth-exceedance event is exactly captured by the aggregate
+threshold condition in (13c). These properties eliminate the
+individual curtailment variables and priority binaries without
+changing the optimal value.
+B. CVaR-Based Linear Program
+Although the aggregate model eliminates the priority bi-
+naries, its chance constraints (13c) remain nonconvex. For
+each product(i,k), define the lossL ik :=Z i−H ik(ci),
+so that (13c) becomesP(L ik >0)≤ϵ k. We conservatively
+replace this chance constraint withCVaR 1−ϵk(Lik)≤0,
+whereCVaR 1−ϵ(L)denotes the upper-tail conditional value-
+at-risk (CVaR) at confidence level1−ϵ.
+To obtain a finite LP, we considerSdemand trajectories
+Ds := (D s
+t)t∈T , indexed bys∈ S:={1,...,S}, with
+probabilitiesp s >0and P
+s∈Sps = 1. The superscriptsalso
+indexes the corresponding recourse variables, withg s
+0 :=g 0.
+Applying the scenario-based CVaR reformulation [7] yields
+the following LP.
+(PLP) max
+cF,c,g,q,
+z,τ,ξ
+W(c F,c)(14a)
+s.t.q s
+t =g s
+t−Ds
+t−c F
+−C(c) +zs
+t,∀t,s,(14b)
+0≤z s
+t≤C(c),∀t,s,(14c)
+1⊤qs
+t = 0,∀t,s,(14d)
+−¯f≤Sq s
+t≤ ¯f,∀t,s,(14e)
+g≤g s
+t≤ ¯g,∀t,s,(14f)
+−∆−≤g s
+t−gs
+t−1≤∆ +,∀t,s,(14g)
+ξs
+ik≥z s
+it−Hik(ci)−τ ik,∀i,k,t,s,(14h)
+τik + 1
+ϵk
+X
+s∈S
+psξs
+ik≤0,∀i,k,(14i)
+ξs
+ik≥0,(5b),∀i,k,s.(14j)
+To express the CVaR constraints in linear form, we introduce
+τik ∈Randξ s
+ik ≥0, collected inτandξ. The exact
+linearization of the finite-scenario CVaR formulation is derived
+in Appendix D.
+Proposition 3.For the same finite-scenario distribution, let
+(cF,c,g,q,z,τ,ξ)be feasible forP LP. Then(c F,c,g,q,z)
+is feasible forP agg. Consequently, the individual curtailments
+recovered by Proposition 1 form a feasible solution ofP ind
+and satisfy(1)for every product.
+The proof is given in Appendix E.
+ModelP LP is tractable, and its feasible solutions satisfy
+the sampled product-level QoS limits by Proposition 3. The
+vector pairs(ν s,∗
+t , ¯νs,∗
+t ),(ϕ s,∗
+t , ¯ϕ
+s,∗
+t ), and(ψ s,∗
+t , ¯ψ
+s,∗
+t )denote
+the nonnegative optimal dual multipliers for the lower and
+upper line (14e), generation (14f), and ramp bounds (14g). By
+the envelope theorem, the marginal values of relaxing both
+bounds for lineℓ∈J, generation, and ramping at busn∈N
+areλ ℓ := P
+t,s(νs,∗
+ℓt + ¯νs,∗
+ℓt ),λ G
+n := P
+t,s(ϕs,∗
+nt + ¯ϕs,∗
+nt ), and
+λR
+n :=P
+t,s(ψs,∗
+nt + ¯ψs,∗
+nt ).
+IV. NUMERICALSTUDY
+We use the PJM 5-bus system to examine model equiva-
+lence, sensitivity to QoS parameters, and upgrade values, and
+the IEEE RTS 73-bus system to assess scalability.
+A. PJM 5-Bus System
+We first consider the PJM 5-bus system [8], with a data
+center at bus D. The five PJM buses are denoted by A, B,
+..., E. Nominal bus loads are independently scaled by1 +η,
+whereη∼ N(0,0.05 2)is truncated to[−0.10,0.10]. For
+the three QoS tiers, the data center requests up to 200 MW
+of firm capacity and 120 MW per flexible tier. We set
+δ= (0.01,0.05,0.10),ϵ= (0.05,0.10,0.15),w F = 1, and
+w= (0.9,0.8,0.7). These weights express relative preferences
+for capacity at different reliability levels. All models use the
+empirical distribution withp s = 1/S, and models in each
+comparison use the same demand samples. We useS= 500
+for Table I andS= 2000for the other experiments. We ran
+all experiments using Gurobi 13.0.3 (default settings) on a
+Windows PC with a 20-core Intel Core Ultra 7 265 processor
+and 32 GiB of RAM.
+PAGE 5
+To assess the benefit of aggregation, we compareP ind and
+Pagg. Table I reports the same globally optimal objective value
+W⋆ for both models, as predicted by Theorem 1; their capacity
+awards also coincide in this test. Aggregation removes the
+2500 priority binaries. The remaining 1500 binaries enforce
+the chance constraints.
+Then, we use the duals ofP LP to evaluate PJM upgrades
+(S= 2000). We compute the marginal upgrade values in
+Table II. Ramp limits are nonbinding in this case. Table II
+identifies line D–E as the most valuable marginal upgrade,
+followed by generation at D, C, and A.
+TABLE I
+COMPARISON OF THEINDIVIDUAL ANDAGGREGATEMODELS(S= 500)
+ModelW ⋆ cF c1 c2 c3 Binaries Time (s)
+Pind 298.28 200.0 98.70 8.26 4.06 4000 5801.5
+Pagg 298.28 200.0 98.70 8.26 4.06 1500 1.56
+TABLE II
+MARGINALUPGRADEVALUES FROMP LP (S= 2000)
+Facility
+Line/generation
+capacity limits (MW)
+Marginal upgrade
+valueλ
+Line D–E 240 1.92
+Generation at D 200 0.92
+Generation at C 520 0.62
+Generation at A 210 0.21
+Next, we study the two QoS parameters separately to see
+how each affects flexible capacity. With one flexible tier and
+no firm capacity, we maximize the flexible award, and the
+flexible request limit is relaxed. Fig. 2 compares the aggregate
+and CVaR-based LP results. Both admit more capacity when
+eitherδorϵincreases. In the aggregate model, raisingδfrom
+0.01 to 0.20 increases the award from 306.4 to 379.1 MW
+(24%), while raisingϵfrom 0.01 to 0.20 increases it by 11%.
+The LP award is approximately 96.8% of the aggregate award.
+0.00 0.05 0.10 0.15 0.20
+Depth δ
+300
+320
+340
+360
+380
+Flexible capacity (MW)
+ε = 0.1
+Pagg
+PLP
+0.00 0.05 0.10 0.15 0.20
+Exceedance limit ε
+δ = 0.1
+Fig. 2. Effect of curtailment depthδ(left,ϵ= 0.1) and exceedance limitϵ
+(right,δ= 0.1) on single-tier flexible capacity (S= 2000,c F = 0).
+B. IEEE RTS 73-Bus System
+We also test the method on the PGLib-OPF IEEE RTS 73-
+bus system [9], using 24-h trajectories [10]. We apply multi-
+plicative Gaussian perturbations at the daily level (σ= 2%)
+and independently across bus-hours (σ= 3%), truncating both
+at±2σ. Three data centers, at buses 103, 214, and 319, each
+request up to 400 MW of firm capacity and 200 MW per
+flexible tier, with the same QoS parameters and weights as in
+the PJM case. Global optimality is not proven for eitherP ind
+orP agg within two hours. We therefore report the results of
+PLP, which is solved in 245 s.
+TABLE III
+RTS-73 CAPACITYAWARDS(MW)ANDMAXIMUMIN-SAMPLE
+DEPTH-EXCEEDANCERATES(S= 2000)
+cF Tier 1 Tier 2 Tier 3
+Bus 103 400.0 0.0 0.0 55.8
+Bus 214 400.0 0.0 0.0 128.8
+Bus 319 400.0 144.9 154.0 200.0
+Total 1200.0 144.9 154.0 384.6
+Max. in-sample (%) – 0.15 0.70 3.75
+For each active product, we recover individual curtailments
+using (11) and compute the fraction of the 2000 trajectories
+in which its allowed depth is exceeded. Table III reports the
+maximum of these fractions across active products in each
+tier. All rates remain below their limits, consistent with the in-
+sample guarantee of Proposition 3. All three firm requests are
+awarded in full, and the total admitted capacity is 1883.5 MW.
+This is 45.0% above the 1298.8 MW firm-only benchmark,
+computed on the same demand trajectories with relaxed firm-
+request upper bounds.
+V. CONCLUSION
+This paper studies large-load interconnection with firm
+capacity and multiple flexible capacity tiers under a two-layer
+curtailment priority rule. We show that the individual and
+aggregate quantification models have the same feasible set of
+capacity decisions. This removes the priority binaries without
+changing the optimal value, thus supporting the efficient
+quantification of hosting capacity. The CVaR approximation
+further yields an LP that satisfies the sampled individual QoS
+limits and provides dual information for screening possible
+grid upgrades.
+REFERENCES
+[1] Federal Energy Regulatory Commission (FERC), “Order on co-location
+of large loads at generating facilities in PJM,” Docket No. EL25-49-000,
+Dec. 18, 2025.
+[2] T. H. Norris, T. Profeta, D. Patiño-Echeverri, and A. Cowie-Haskell,
+“Rethinking load growth: Assessing the potential for integration of large
+flexible loads in US power systems,” Nicholas Institute for Energy,
+Environment & Sustainability, Duke University, Tech. Rep., Feb. 2025.
+[3] N. Gu, G. Chen, and J. Qin, “The role of flexible connection in
+accelerating load interconnection in distribution networks,” inProc.
+Hawaii Int. Conf. Syst. Sci. (HICSS), 2026.
+[4] D. Kim, L. Dong, and L. Xie, “Flexibility-aware framework for effi-
+cient planner-initiated siting of data center,”Nat. Commun., vol. 17,
+Art. no. 6512, 2026.
+[5] H.-p. Chao and R. Wilson, “Priority service: Pricing, investment, and
+market organization,”Amer. Econ. Rev., vol. 77, no. 5, pp. 899–916,
+Dec. 1987.
+[6] PJM Interconnection, “CIFP framework for service during periods of
+insufficient resource adequacy–PJM proposal: Executive summary,” Jul.
+27, 2026.
+[7] C. Chen, S. Bose, T. D. Mount, and L. Tong, “Wholesale market
+participation of DERAs: DSO-DERA-ISO coordination,”IEEE Trans.
+Power Syst., vol. 39, no. 5, pp. 6605–6614, 2024.
+PAGE 6
+[8] F. Li and R. Bo, “Small test systems for power system economic studies,”
+inProc. IEEE PES General Meeting, 2010, pp. 1–4.
+[9] S. Babaeinejadsarookolaeeet al., “The power grid library for bench-
+marking AC optimal power flow algorithms,” 2019, arXiv:1908.02788.
+[10] C. Grigget al., “The IEEE Reliability Test System-1996,”IEEE Trans.
+Power Syst., vol. 14, no. 3, pp. 1010–1020, Aug. 1999.
+[11] R. T. Rockafellar and S. Uryasev, “Optimization of conditional value-
+at-risk,”J. Risk, vol. 2, no. 3, pp. 21–41, 2000.
+APPENDIXA
+PROOF OFPROPOSITION1
+Proof.Fixz∈[0,C i]and definex im by (10). Setβ i0 = 1,
+βi,2K = 0, andβ im :=1{z≥Γ im}for0<m<2K. Here,
+1{·}denotes the indicator function. Obtainy ik from (4e).
+Since the intervals[Γ i,m−1,Γim]cover[0,C i], (10) allocates
+zacross the tranches in order, giving0≤x im≤d im andP
+mxim =z. We verify that this allocation satisfies the
+priority constraints. Ifβ i,m−1 = 0, thenz <Γ i,m−1 and
+xim = 0; otherwise,x im ≤d im ≤M. Thus, (4b) holds.
+Similarly, ifβ im = 1, thenz≥Γ im andx im =d im;
+otherwise, the lower bound in (4c) is nonpositive. Since
+Γim is nondecreasing inm, the binary variables satisfy (4d)
+and (4f). Finally, (4e) assigns each tranche to one product,
+so P
+kyik =P
+mxim =z. Hence all constraints in (4) are
+satisfied. Conversely, consider any feasible(x,y,β)with total
+curtailmentz. By (4d) and (4f), the binary variables form a
+nonincreasing sequence from1to0. Letm 0 := min{m:
+βim = 0}. Form < m 0, constraint (4c) forcesx im =d im,
+while form>m 0, constraint (4b) forcesx im = 0. Thus, only
+tranchem 0 can be partially curtailed. Since P
+mxim =z, we
+must have
+xi,m0 =z−Γ i,m0−1,Γ i,m0−1≤z≤Γ i,m0.
+Therefore, all tranche curtailments are uniquely determined by
+zand are given by (10).
+Each productkconsists of tranchesK−k+ 1and2K−
+k+ 1, with sizesa ik andb ik and starting pointsA ik andH ik,
+respectively. Applying (10) to these two tranches and summing
+their curtailments gives (11).
+APPENDIXB
+PROOF OFPROPOSITION2
+Proof.For an active product,b ik = (1−δ k)cik >0. By
+definition,H ik is the aggregate curtailment level at which the
+exceedance tranche of productkstarts. Moreover, from (9),
+Hik−Aik−aik =
+X
+r<k
+air +
+X
+r>k
+bir≥0,
+so the within-depth tranche is fully curtailed before the ex-
+ceedance tranche can be used.
+Fixz∈[0,C i]. Ifz≤H ik, the exceedance tranche receives
+no curtailment, and (11) givesf ik(z;ci)≤a ik =δ kcik.
+Ifz > H ik, the within-depth tranche is fully curtailed
+and the exceedance tranche receives positive curtailment, so
+fik(z;ci)> δkcik. Hence,f ik(z;ci)> δkcik if and only if
+z >Hik.
+By Proposition 1,y ikt =f ik(zit;ci)in every period.
+Therefore, productkexceeds its allowed depth during the
+planning horizon if and only if the aggregate curtailment
+exceedsH ik in at least one period:
+max
+t∈T
+yikt >δ kcik ⇐⇒ ∃t∈T:z it >H ik ⇐⇒Z i >H ik.
+This establishes (12). Since the two events coincide in every
+realization, their probabilities are equal, which proves the
+equivalence of the two chance constraints.
+APPENDIXC
+PROOF OFTHEOREM1
+Proof. FromP ind toP agg.Take a feasible solution ofP ind
+and setz it := P
+kyikt. By (4a) and (4e),0≤y ikt ≤
+aik +b ik =c ik, so (7b) holds. Substituting (6) into (5c)
+gives (7a) with the same nodal injections, while (5d)–(5g)
+remain unchanged. For each active product, Proposition 2
+shows that (5h) implies (13c). For an inactive product(i,k),
+suppose there is an active tier with index smaller thankand
+leth:= max{r < k:c ir >0}. All tiersrwithh < r≤k
+are inactive, soH ik =H ih by (9). Sinceϵ h≤ϵ k by (2), we
+haveP(Z i > Hik) =P(Z i > Hih)≤ϵ h≤ϵ k. If no suchh
+exists, thenc ir = 0for allr≤k, soH ik =C i≥Z i and the
+exceedance event is empty.
+FromP agg toP ind.Take a feasible solution ofP agg.
+For each candidate bus, period, and realization, (7b) gives
+zit ∈[0,C i]. By Proposition 1, sety ikt :=f ik(zit;ci)
+and obtainx imt from (10). Setβ i0t = 1,β i,2K,t = 0,
+andβ imt :=1{z it ≥Γ im}for0< m <2K. These
+variables satisfy (4) with P
+kyikt =z it. The recoveredxand
+yare continuous functions ofz it, and the binary variables
+are indicator functions ofz it, so these are valid recourse
+decisions. Since P
+kyikt =z it, (5c) gives the same nodal
+injections, and (5d)–(5g) remain satisfied. For each active
+product, Proposition 2 turns (13c) into (5h). For an inactive
+product,y ikt = 0, so its exceedance event is empty. The
+recovered solution is therefore feasible forP ind.
+Both mappings preserve(c F,c), so the two problems have
+the same feasible set of capacity decisions. Since their com-
+mon objectiveWdepends only on these capacities, their
+optimal values are also equal, and an optimal solution of either
+problem is mapped to an optimal solution of the other.
+APPENDIXD
+DERIVATION OF THECVAR-BASEDLINEARPROGRAM
+The loss of product(i,k)in trajectorysis
+Ls
+ik := max
+t∈T
+zs
+it−Hik(ci).(15)
+The minimization representation of CVaR [11] gives
+CVaR1−ϵk(Lik) = min
+τik∈R
+(
+τik + 1
+ϵk
+X
+s∈S
+ps[Ls
+ik−τik]+
+)
+.
+(16)
+PAGE 7
+For a finite scenario set and0< ϵ k <1, this minimum is
+attained. Hence,CVaR 1−ϵk(Lik)≤0holds if and only if
+there existτ ik∈Rand auxiliary variablesξ s
+ik such that
+τik + 1
+ϵk
+X
+s∈S
+psξs
+ik≤0,(17a)
+ξs
+ik≥[L s
+ik−τik]+,∀s∈S.(17b)
+Indeed, a feasible CVaR constraint admits a minimizingτ ik
+and the choiceξ s
+ik := [Ls
+ik−τik]+. Conversely, any variables
+satisfying (17) provide an upper bound on (16) that is at most
+zero.
+Using (15), the excess loss can be written as
+[Ls
+ik−τik]+ = max
+n
+0,max
+t∈T
+
+zs
+it−Hik(ci)−τ ik
+	o
+. (18)
+Therefore, (17b) is equivalent to
+ξs
+ik≥0,
+ξs
+ik≥z s
+it−Hik(ci)−τ ik,∀t∈T. (19)
+Thus, one variableξ s
+ik per product and trajectory accounts for
+the maximum over all periods. Imposing (17a) and (19) for
+every(i,k)andsyields (14h)–(14i) andξ s
+ik≥0.
+Retaining the capacity bounds (5b) and imposing the net-
+work constraints for each trajectory gives (14b)–(14g). Since
+the objective is linear andC(c)andH ik(ci)are affine in
+the capacity decisions, the resulting formulation is an LP.
+Introducingτandξpreserves the objective and feasible
+decisions in the original variables, soP LP is equivalent to
+the finite-scenario CVaR formulation.
+APPENDIXE
+PROOF OFPROPOSITION3
+Proof.Fix(i,k), writeϵ:=ϵ k andτ:=τ ik, and letL s :=
+maxt{zs
+it−Hik(ci)}. By (14h) and (14j),ξ s
+ik≥[L s−τ] +.
+Thus, (14i) gives
+τ+ 1
+ϵ
+X
+s∈S
+ps[Ls−τ] +≤0,
+which impliesτ≤0. Ifτ= 0, thenL s ≤0for everys
+becausep s >0. Ifτ <0, then[L s−τ] +≥(−τ)1{L s >0},
+and therefore
+P
+ 
+Zi >H ik(ci)
+
+=
+X
+s∈S
+ps1{Ls >0}
+≤ 1
+−τ
+X
+s∈S
+ps[Ls−τ] +≤ϵ.
+In both cases, (13c) holds. The remaining constraints ofP agg
+are also satisfied byP LP, so the solution is feasible forP agg.
+Theorem 1 then gives feasibility forP ind and the product-level
+reliability guarantee.
