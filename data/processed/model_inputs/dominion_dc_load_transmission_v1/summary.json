@@ -1,0 +1,30 @@
+{
+  "artifact": "dominion_dc_load_transmission_v1",
+  "created": "2026-11-14",
+  "purpose": "Two things the PJM/DOM case study needs as an industry anchor: (a) the data-centre contract pipeline by contract type, and (b) project-level transmission reinforcements with Dominion's own cost estimates, both taken from Dominion Energy's Integrated Resource Plan documents.",
+  "not_an_experiment": true,
+  "sources": {
+    "irp_2025_update": "data/raw/dominion_irp/v2025_2026/upstream/2025-integrated-resource-plan-update.pdf (Figure 2.1.15, p.27; project appendix pp.99-110)",
+    "irp_2026_update": "data/raw/dominion_irp/v2025_2026/upstream/2026-integrated-resource-plan-update.pdf (project appendix pp.364-371)",
+    "irp_2024": "data/raw/dominion_irp/v2025_2026/upstream/2024-irp-w_o_appendices.pdf (pp.148-156)"
+  },
+  "conventions": {
+    "contract_growth": "MW at the end of July of each year, as published in Figure 2.1.15",
+    "project_cost": "cost_musd is the dollar figure printed beside each project in the IRP appendix, in millions of USD, i.e. Dominion's own planning-grade estimate"
+  },
+  "caveats": [
+    "The four contract categories are not additive in the reader's intuition: ELOAs are early-stage agreements, so 'total contracts' is a pipeline measure, not energised load.",
+    "Costs are planning estimates from IRP appendices, not awarded contracts; the 2025 and 2026 updates differ for the same project (e.g. Mars-Golden: 342.9 in 2025 vs 565.0 in 2026).",
+    "Rows were parsed from PDF text with a regex; the parsed table is a convenience extract, the PDF remains the source of record."
+  ],
+  "outputs": {
+    "dominion_data_center_contract_growth_mw.csv": {
+      "bytes": 187,
+      "sha256": "d6e19523aa011bf608d0df68cc4561b6c8cb52aadc972b04da256769731df809"
+    },
+    "dominion_irp_transmission_projects.csv": {
+      "bytes": 48054,
+      "sha256": "eaaa870fae008498d531489ac61badbfc7e382ca0b8138ee239c41397fb0e15d"
+    }
+  }
+}

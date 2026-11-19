@@ -1,8 +1,12 @@
 # Raw data provenance
 
-- 2026-11-13 ICARUS-PJM 节点系统解包：`icarus_pjm/0cb6a1af86e2bdfc1d160f44b6e4a7518ca3ffe3/nodal/`
-  —— 从 `upstream/icarus-pjm.zip` 内的 `data/output/PJM Nodal.zip` 取出并去掉一层目录，
-  17,467 母线 / 21,554 支路 / 21 分区 / 8,784 小时分区负荷（2016）。校验信息见该目录 `SOURCE_OBJECTS.json`。
+- 2026-11-14 2016 Dulles 气象／Dominion IRP 电网加强索引：[`DULLES_DOMINION_INDEX_20261114.md`](DULLES_DOMINION_INDEX_20261114.md)，
+  字节级清单 [`dulles_dominion_acquisition_20261114.json`](dulles_dominion_acquisition_20261114.json)。
+- 2026-11-13 ICARUS-PJM 全量解包：`icarus_pjm/0cb6a1af86e2bdfc1d160f44b6e4a7518ca3ffe3/` 下已把
+  `upstream/icarus-pjm.zip` 内的 5 个嵌套压缩包与说明文件解开到浅目录 —— `nodal/`（基准节点系统）、
+  `nodal_scenarios/`（8 个情景）、`zone21/`（21 分区）、`zone9/`（9 分区）、`genx_9zones_base/`、
+  `genx_9zones_datacenters/`（GenX 容量扩展模型）、`dataset_docs/`（README/LICENSE/IPM 对照表）。
+  共 150 个数据文件、217 MB；各目录的 `SOURCE_OBJECTS.json` 记录外层与内层 archive 的 SHA-256 及成员 CRC。
 - 2026-11-13 CAISO 并网与输电升级成本索引：[`CAISO_INTERCONNECTION_COST_INDEX_20261113.md`](CAISO_INTERCONNECTION_COST_INDEX_20261113.md)，
   字节级清单 [`caiso_interconnection_acquisition_20261113.json`](caiso_interconnection_acquisition_20261113.json)。
 - 2026-11-13 2020 气象／RTS-GMLC 拓扑／迁移开销／西岸电价索引：[`WECC_WEATHER_PRICE_LIT_INDEX_20261113.md`](WECC_WEATHER_PRICE_LIT_INDEX_20261113.md)，

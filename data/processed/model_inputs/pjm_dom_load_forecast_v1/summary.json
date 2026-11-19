@@ -1,0 +1,44 @@
+{
+  "artifact": "pjm_dom_load_forecast_v1",
+  "created": "2026-11-14",
+  "purpose": "PJM 2026 Load Forecast Report extracts for the Dominion (DOM) zone: monthly peak and energy forecast plus the annual peak series, used as the MW scale reference for the North-Virginia data-centre case study.",
+  "not_an_experiment": true,
+  "sources": {
+    "pjm_2026_load_report_data": "data/raw/pjm_load_forecast_2026/v2026/upstream/2026-load-report-data.xlsx (sheet 'DOM')",
+    "pjm_2026_load_report_docs": "data/raw/pjm_load_forecast_2026/v2026/upstream/dominion-documentation.pdf (Dominion letter to the PJM Load Analysis Team, 6 Jan 2026)"
+  },
+  "headline_facts_from_dominion_letter": {
+    "2025_data_center_coincident_peak_GW": 4,
+    "executed_contract_capacity_july_2025_GW": 47,
+    "contract_split_july_2025_GW": {
+      "ESA_connected": 9.8,
+      "CLOA_under_construction": 7.1,
+      "ELOA_engineering_only": 30.1
+    },
+    "forecast_data_center_demand_2046_GW": 16.6,
+    "quotes": [
+      "ELOAs are not considered firm load. The sum of the capacity values of all ELOAs is considered as potential long-term growth.",
+      "The sum of the capacity values of all ESAs is considered as near-term growth potential that supports the forecast.",
+      "as of July 2025, the capacity value of these contracts is 47 GW (9.8 ESA + 7.1 CLOA + 30.1 ELOA). The Company is forecasting 16.6 GW of demand by 2046, not the 47 GW of capacity."
+    ]
+  },
+  "conventions": {
+    "peak_mw": "zone summer peak from the report data workbook, MW",
+    "energy_gwh": "zone annual/monthly energy, GWh"
+  },
+  "caveats": [
+    "The 47 GW contract figure is capacity under contract, not demand; Dominion itself forecasts 16.6 GW of data-centre demand by 2046. Do not report 47 GW (or an 'ELOA' subset) as connected load.",
+    "DOM zone peak includes all Dominion load, not only data centres.",
+    "The monthly series is PJM's forecast, not observed load."
+  ],
+  "outputs": {
+    "pjm_dom_forecast_monthly_peak_energy.csv": {
+      "bytes": 6152,
+      "sha256": "543bfdd5393e177969dcad61fd4a2011ae652f3ac4d319ee270c07da5c4cfca1"
+    },
+    "pjm_dom_annual_peak_mw.csv": {
+      "bytes": 273,
+      "sha256": "8c5968c29e91f5657a2e35065cc84f63c299b137adc77f309b9c221d47d4635b"
+    }
+  }
+}

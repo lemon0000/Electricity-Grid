@@ -1,0 +1,310 @@
+#  ICARUS PJM Dataset
+
+[![Python Version](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/Software%20License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: CC BY 4.0](https://img.shields.io/badge/Data%20License-CC%20BY%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by/4.0/)
+[![Status: Active](https://img.shields.io/badge/Status-Active-success.svg)]()
+
+## What is ICARUS?
+
+ICARUS — _Infrastructure Centric Adaptation and Resiliency in the U.S._ — is a joint research initiative between the [**Ralph O’Connor Sustainable Energy Institute (ROSEI)**](https://energyinstitute.jhu.edu/) at [**Johns Hopkins University**](https://www.jhu.edu/), [**NSF Global Center EPICS**](https://energyinstitute.jhu.edu/epics/), and the [**Johns Hopkins Applied Physics Laboratory (APL)**](https://www.jhuapl.edu/work/mission-areas/research-and-exploratory-development), supported by a [**Johns Hopkins Discovery Award**](https://research.jhu.edu/major-initiatives/discovery-awards/2024-awardees/).
+
+ICARUS develops advanced data and modeling tools to strengthen the reliability, safety, and affordability of critical U.S. infrastructure. We focus on high-resolution projections of environmental conditions and other external stressors that affect large-scale infrastructure systems such as electric power, water supply, and transportation networks. By combining state-of-the-art computational and engineering expertise, the project produces actionable insights for planners and operators who must prepare infrastructure for a range of future scenarios—from extreme weather events to changing population patterns and demand surges.
+
+Our goal is to make these improved datasets, algorithms, and case studies publicly available so that researchers, policymakers, and practitioners can better **assess vulnerabilities, plan investments, and enhance the resilience of essential services** nationwide.
+
+## How Can ICARUS Help Energy Policymakers?
+<div style="background-color: #e7f3ff; padding: 15px; border-radius: 5px;">
+ICARUS aims to make energy policy analysis accessible to stakeholders who often lack the technical expertise, data, modeling, and computational resources needed to conduct quantitative energy policy analysis. ICARUS bridges this gap by providing expert analysis using our comprehensive PJM dataset and advanced modeling capabilities.
+To request an ICARUS analysis, we <a href="https://hopkinsicarus.github.io/ICARUS-PJM-Dataset/">invite stakeholders to submit their energy policy requests</a> concerning PJM.
+We are committed to maintaining stakeholder privacy—we will not release requests or identify who submitted them—and to responding promptly. When submitting a request, there is a field to indicate urgency.
+</div>
+
+## What are ICARUS deliverables?
+In addition to the policy-relevant assistance to energy policy makers (see above), ICARUS’s immediate goal is to create, release, and maintain datasets that directly inform infrastructure efficiency, reliability, and resiliency across the U.S. Our first priority is the [ICARUS PJM Dataset](data/output/PJM%209%20Zone.zip), a high-resolution, regularly updated resource designed to illuminate some of the region’s most pressing challenges:
+ - Data-center integration. Support reliable, just-in-time integration of the unprecedented growth in data centers across Virginia, Maryland, and Pennsylvania. See [WaPo](https://www.washingtonpost.com/business/2025/09/13/big-tech-data-centers-electricity-energy-power-texas-pennsylvania/f7ab00d8-9056-11f0-8260-0712daa5c125_story.html) for more details. 
+ - Resource adequacy. Enable deeper analysis of supply capacity shortages that have driven unprecedented capacity price increases in PJM states. See [NYTimes](https://www.nytimes.com/2025/07/23/business/energy-environment/governors-pjm-electric-grid.html) for more details.
+ - Policy guidance. Equip policymakers across 13 PJM states and the District of Columbia to steer transmission and generation investments that can contain rapid electricity rate growth. See [WSJ](https://www.wsj.com/finance/investing/higher-electricity-prices-arent-all-good-for-utilities-23113b91?reflink=desktopwebshare_permalink) for more details. 
+ - Transmission planning. Provide robust analytics for (inter)state transmission build-out, improving PJM reliability and efficiency while evaluating the “seven” benefits requested under FERC Order No. 1920, including generation of practical worst-case scenarios for resiliency assessments. See [FERC](https://www.ferc.gov/explainer-transmission-planning-and-cost-allocation-final-rule) for more details.
+
+We start with [PJM](https://en.wikipedia.org/wiki/PJM_Interconnection) because it is the largest multi-state, market-based interconnection in the country, spanning diverse generation fleets, load centers, and jurisdictional boundaries. This complexity makes it an ideal proving ground for data tools aimed at strengthening U.S. infrastructure resilience.
+
+## What is the need in ICARUS?
+While many modeling and decision-support tools exist (we recommend [GenX](https://github.com/GenXProject/GenX.jl), [HOPE](https://github.com/HOPE-Model-Project/HOPE), [SWITCH](https://github.com/switch-model/switch), [E4ST](https://github.com/e4st-dev/E4ST.jl), and [HAIKU](https://www.rff.org/topics/data-and-decision-tools/haiku-electricity-model/)), there is still no consistent effort to maintain an up-to-date public data set responsive to today’s needs. Our project addresses this gap by providing datasets in all common input formats to maximize usability, keeping time series current, and adding new features as they emerge (for example, few anticipated how challenging data-center modeling would become).
+Such efforts are not entirely new, but since the [dissolution of the Breakthrough data team](https://bescdn.breakthroughenergy.org/publications/MacroGridReport.pdf), we have repeatedly heard from stakeholders about the need for publicly maintained and regularly updated data resources. By creating such datasets, and starting with PJM, we aim to enable a wide range of stakeholders to be effective advocates in billion-dollar infrastructure decisions that must be made to keep the PJM grid reliable, efficient, and able to accommodate unprecedented electricity demand growth.
+
+---
+
+## ICARUS: Key Features
+* **Ready-to-Use Data**: Cleaned and processed CSV files, compatible with most common models (e.g., [GenX](https://github.com/GenXProject/GenX.jl)).
+* **Regional Filtering**: Easily filter the datasets for a specific region (e.g., PJM, MISO) by changing a single variable in the code.
+* **Detailed Visualizations**: Generate insightful maps of regional transmission infrastructure and connectivity.
+* **Transparent & Reproducible**: Python scripts are provided to show exactly how the raw EPA data was sourced and processed.
+* **Documentation**: Full transparency on data sources and processing steps is provided.
+* **Extensible**: A clear roadmap supports incorporation of new data, including (extreme) weather impacts, data centers, and FERC 1920 compliance.
+* **Community-Driven**: We encourage community input to enhance and refine the datasets.
+* **Long-Term Continuity**: As an academic project with a focus on community build-out, we are well-positioned to ensure long-term maintenance and growth.
+
+## Dataset Comparison (Preliminary)
+
+This table provides a high-level comparison of this dataset with other common public datasets.
+
+## How does ICARUS compare?
+
+| Dataset                              | Granularity (Spatial)          | Format         | Primary Focus                                                                 |
+| ------------------------------------ | ------------------------------- | ------------------------------- | ----------------------------------------------------------------------------- |
+| **ICARUS Dataset (This repo)**   | **Regional/Zonal (PJM & beyond)** | **CSV, Parquet** | **Generates input datasets for capacity expansion models in basic and standard formats** |
+| **[PUDL (Public Utility Data Liberation)](https://catalyst.coop/pudl/)** | Plant & utility-level (U.S.)   | SQLite, Parquet, CSV            | Integrates EIA/FERC data on fuel, generation, costs, and emissions for analysis |
+| **[PowerGenome](https://github.com/PowerGenome/PowerGenome)**                      | Regional (IPM regions, user-defined) | SQLite, CSV, Parquet            | Generates input datasets for capacity expansion models (e.g., GenX)     |
+
+
+## One-Click Downloads
+
+For convenience, pre-processed datasets for common regions are available for direct download.
+
+  * [**Download PJM Dataset (Base)**: US EPA-based 9 IPM regions](data/output/PJM%209%20Zone.zip)
+  * [**Download PJM Dataset (Base)**: PJM 21 zones](data/output/PJM%2021%20Zone.zip): Features full transmission topology based on NREL ReEDS county-level data. It includes existing generating units and interconnection queue projects (existing, planned, active, and cancelled) mapped directly to the 21 PJM load zones. Load profiles are based on the 2026 PJM Load Forecast Report.
+  * [**Download PJM Dataset (Nodal Scenarios)**: 8 BE MacroGrid scenario cases](data/output/PJM%20Nodal%20Scenarios.zip): The nodal testbed rebuilt from each Breakthrough Energy MacroGrid scenario (`2020`, three 2030 current-goals variants incl. storage and offshore wind, four 2030 ambitious-goals HVDC designs), each with its own MATPOWER case.
+  * [**Download PJM Dataset (Nodal)**: bus/branch-level testbed](data/output/PJM%20Nodal.zip): A 17,467-bus nodal PJM test system with per-unit line reactances and MVA ratings, assembled from the public data by the ICARUS team for entirety of the PJM footprint. (The released data is not GIS-linked, but the ICARUS team also has the GIS-linked data).    Ships as CSVs plus a ready-to-run MATPOWER case (`case_pjm.m`, AC power flow and DC OPF verified in MATPOWER 8.1). See [`src/pjm_nodal/README.md`](src/pjm_nodal/README.md) for full documentation.
+  * **PJM Dataset in [GenX](https://github.com/GenXProject/GenX.jl) format**<sup>†</sup> 
+    -  [**Download GenX_PJM_9zones_Base**: 9 IPM regions (with transfer limits)](data/output/GenX_PJM_9zones_Base.zip)
+    -  [**Download GenX_PJM_9zones_DataCenters**: 9 IPM regions (with transfer limits)](data/output/GenX_PJM_9zones_DataCenters.zip)
+
+<sup>†</sup> These versions are simplified, hard-coded conversions of the [**PJM Dataset (Base)**](data/output/PJM%209%20Zone.zip) into the [**GenX**](https://github.com/GenXProject/GenX.jl) format, following examples from the official [GenX repository](https://github.com/GenXProject/GenX.jl), where the corresponding **licenses and attribution requirements** are provided.
+
+### Future Enhancements
+
+We plan to expand the repository's scope to include emerging challenges and regulatory changes in the power sector.
+
+| Feature Area             | Description                                                               | Target      |
+| ------------------------ | ------------------------------------------------------------------------- | ----------- |
+| **Data Center Capacity** | Incorporate state-, zonal- and regional-level projections for data center demand.    | `Available as of Oct, 2025`, `Updated as of June, 2026`      |
+| **Downscaled Atmospheric Data** | Integrate other weather (year) data to model (extreme) weather impacts.     | `Soon`      |
+| **FERC Order 1920 Compliance** | Model transmission expansion scenarios based on the new FERC rule.  | `Soon`      |
+| **State/Utility representation** | Enhanced resolution spatially resolved upto PJM's 21 Zones and 9 IPM Regions for PJM, useful state/utility-level studies.  | `Available as of Nov, 2025`, `Updated as of Aug, 2026`      |
+| **Nodal representation** | Enhanced resolution to consider more detailed transmission network.  | `Available as of Sep, 2026`      |
+
+**Schematic Representation of PJM and Data Center Datasets**
+*Illustrative overview of planned and in-construction data center capacity in PJM (see details below).*
+![Schematic Representation of PJM and Data Center Datasets](data/figures/epa_ipm_trans_limits_PJM_dc_planned_plus_in_construction.png)
+
+---
+## About the Data
+
+### Data Procurement & Processing
+
+The power system data is sourced directly from the **[U.S. EPA Power Sector Modeling: 2025 Reference Case](https://www.epa.gov/power-sector-modeling/2025-reference-case)** documentation and associated data files.
+
+The Python script (`src/pjm_9_zone/make_data.py`) in this repository perform the following key tasks:
+1.  Load the raw Excel files provided by the EPA Power Sector Modeling platform.
+2.  Clean and standardize column names and data formats.
+3.  Reshape time-series data (like load and renewable generation profiles) from wide to long format.
+4.  Apply the specified regional filter.
+5.  Save the processed data into clean, easy-to-use CSV files.
+
+
+The Data Center Capacity are sourced from the **[U.S. DOE NREL Speed to Power Initiative](https://maps.nrel.gov/speed-to-power/?vL=6834e82591241decedd4ef8c%2C682746c9d58843cf7876093e%2C6838ae2891241decedd4ef8f%2C685c736d77a7c73f0a473a5d&b=%5B%5B-130.500647%2C25.796786%5D%2C%5B-56.785252%2C50.844826%5D%5D)**.
+The aggregated dataset for the contiguous United States (CONUS) is provided in [`data/processed/datacenter_cap_all.csv`](data/processed/datacenter_cap_all.csv), while region-specific subsets (e.g., for PJM) are located within their respective folders under `data/processed`, such as [`loads_datacenter_cap.csv`](data/processed/PJM/loads_datacenter_cap.csv).
+
+* [ ] More details to follow for 1) Downscaled Atmospheric Data and 2) FERC Order 1920 Compliance.
+
+#### Renewable Energy (RES) Data Structure
+
+The renewable generation data is stratified by several "class" types, which is crucial for detailed modeling:
+
+  * **Wind/Solar Class**: Represents the quality of the resource site. For wind, this corresponds to mean wind speed bands (1 = best), and for solar, it relates to solar irradiance levels.
+  * **Resource Class**: A finer subdivision of potential within a primary Wind/Solar Class, often linked to capacity slices or Levelized Cost of Energy (LCOE).
+  * **Cost Class**: An additional stratification by cost adders, such as those for transmission access or challenging siting conditions.
+
+-----
+
+### Generated Data Files
+
+When you run the script with a `REGION_PREFIX` (e.g., "PJM"), the following files are generated under `data/processed/PJM`:
+
+| File Name                                                 | Description                                                              |
+| --------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `generators.csv`                                          | List of active power plants in the region.                               |
+| `generators_retirement_by_2028.csv`                       | List of generators scheduled for retirement by 2028.                     |
+| `load_profiles.csv`                                       | Hourly load profiles for each sub-region.                                |
+| `lines.csv`                                               | Internal transmission lines within the region.                           |
+| `generators_interface.csv`                                | Transmission import capacity from other regions.                         |
+| `loads_interface.csv`                                     | Transmission export capacity to other regions.                           |
+| `generation_profiles_wind_onshore.csv`                    | Hourly generation profiles for onshore wind, stratified by class.        |
+| `generation_profiles_wind_offshore_fixed.csv`             | Hourly generation profiles for fixed-bottom offshore wind.               |
+| `generation_profiles_wind_offshore_floating.csv`          | Hourly generation profiles for floating offshore wind.                   |
+| `generation_profiles_solar.csv`                           | Hourly generation profiles for solar PV, stratified by class.            |
+
+For the higher-resolution 21-zone representation, the **PJM 21 Zone dataset** provides utility-level mappings and resources directly. The [PJM 21 Zone.zip](data/output/PJM%2021%20Zone.zip) archive contains the following standardized files:
+
+| File Name | Description |
+| :--- | :--- |
+| `generators.csv` | Active generating units directly mapped to the 21 PJM zones. |
+| `cycle_projects_queue.csv` | Interconnection queue covering all current cycle projects (existing, planned, active, and cancelled). |
+| `lines.csv` | Internal bidirectional AC transmission capacity between the 21 PJM zones. |
+| `interface.csv` | Transmission capacities connecting PJM zones to external regions (MISO, NYISO, Southeast). |
+| `load_profiles_zone.csv` | Hourly load profiles mapped to the 21 utility zones. |
+| `dc_demand_zone.csv` | Projected data center demand capacity by zone. |
+| `lbw_af.csv` | Hourly availability factors for land-based wind resources. |
+| `osw_af.csv` | Hourly availability factors for offshore wind resources. |
+| `spv_af.csv` | Hourly availability factors for solar PV resources. |
+| `tech_cost_ef_elcc.csv` | Technology cost metrics, emission factors, and Effective Load-Carrying Capability (ELCC). |
+
+These mappings are constructed using multiple sources, most notably:
+  * **IMMM-SFA Electricity Entity Boundaries** and **U.S. County Shapefiles** for county-to-zone spatial mapping.
+  * **NREL ReEDS NARIS 2024** for county-level transmission capacities.
+  * [PJM Manual 18:PJM Capacity Market Revision: 61 Effective Date: July 23, 2025](https://www.pjm.com/-/media/DotCom/documents/manuals/m18.ashx)
+  * The compiled cross-reference file: [`IPM Regions_State_Utilities.xlsx`](data/output/IPM%20Regions_State_Utilities.xlsx)
+
+Together, these references provide a consistent, utility-level mapping between EPA IPM regions (9 regions for PJM), states, and PJM transmission/load zones (21 zones) used throughout the dataset.
+
+### PJM Nodal Testbed
+
+For studies that need the transmission network itself (power flow, OPF, congestion, interface limits), the **PJM Nodal** dataset provides a bus/branch-level test system: **17,467 buses, 21,554 branches (18,196 AC lines + 3,358 transformers), 2,176 generating plants (226 GW)**, one synchronous island. The data set includes real per-unit `r`, `x`, `b` (100 MVA base) and MVA ratings — and clipped to the PJM footprint from the DHS HIFLD Control Areas shapefile, with boundary ties to MISO/NYISO/Southeast retained as  external buses. The [PJM Nodal.zip](data/output/PJM%20Nodal.zip) archive contains:
+
+| File Name | Description |
+| :--- | :--- |
+| `case_pjm.m` | Ready-to-run MATPOWER case (AC power flow and DC OPF **verified in MATPOWER 8.1**). |
+| `pjm_bus.csv` / `pjm_bus.geojson` | Buses: Pd/Qd, baseKV, coordinates, zone, `external` flag, load allocation factors. |
+| `pjm_branch.csv` | AC lines & transformers with per-unit r, x, b (100 MVA base) and rateA/B/C. |
+| `pjm_interface_branch.csv` | Boundary ties to MISO / NYISO / Southeast (one terminal outside PJM). |
+| `pjm_plant.csv` / `pjm_gencost.csv` | Generators (Pmax/Pmin, ramps, fuel type) and polynomial cost curves. |
+| `pjm_zone_demand.csv` | Hourly zone demand (8,784 h), allocatable to buses via `LAF_zone`. |
+| `pjm_dcline.csv` / `pjm_interface_dcline.csv` | DC lines touching the footprint. |
+| `validation_zonal_21.csv` | Reduction to the 21-zone topology: interzonal capacities and equivalent reactances, cross-validated against the PJM 21 Zone dataset (Spearman rho = 0.70). |
+| `validation_hifld_circuit_km.csv` | Circuit-km cross-check against HIFLD transmission lines (500 kV within ~2%). |
+
+Besides the base grid, `make_data.py --scenario all` rebuilds the testbed from every **BE MacroGrid scenario** `case.mat` (2020; 2030 current goals incl. storage and offshore-wind variants; 2030 ambitious goals with four HVDC designs) — see [PJM Nodal Scenarios.zip](data/output/PJM%20Nodal%20Scenarios.zip).
+
+We provide previously available data from prior efforts in `data/raw/` (`breakthrough-usa-test-system/`, `hifld/`, `pjm-map/`, `pjm-21-bus-system/`); the large ones are gitignored with download instructions in the nodal README. The generation pipeline (`src/pjm_nodal/make_data.py`), verification scripts and the full method documentation are in [`src/pjm_nodal/README.md`](src/pjm_nodal/README.md).
+
+![PJM Nodal Testbed](data/figures/pjm_nodal_testbed_map.png)
+
+-----
+
+### Raw and Extracted Data
+
+Not all tables listed in the [Documentation for EPA’s Power Sector Modeling Platform 2025 Using the Integrated Planning Model 2025 Reference Case](https://www.epa.gov/system/files/documents/2025-02/epa-2023-reference-case.pdf) are provided as spreadsheets in the [Documentation for 2025 Reference Case](https://www.epa.gov/power-sector-modeling/documentation-2025-reference-case).
+To ensure completeness, we manually extracted the missing tables and saved them as CSV files in [`data/raw/epa-2025-reference-case`](data/raw/epa-2025-reference-case).
+For convenience and to serve as a one-stop repository, we also included the original spreadsheets that were already available from the [Documentation for 2025 Reference Case](https://www.epa.gov/power-sector-modeling/documentation-2025-reference-case).
+
+Due to file size limitations, the folder [`data/raw/epa-2025-reference-case`](data/raw/epa-2025-reference-case) does **not** include the IPM v6 Regions shapefiles.
+Please manually download [`ipm_v6_regions.zip`](https://www.epa.gov/sites/production/files/2019-08/ipm_v6_regions.zip) and place it inside that directory.
+
+| Parameter                           | Source Document Tables                        |
+| ----------------------------------- | --------------------------------------------- |
+| Renewable Portfolio Standards (RPS) | 3-18                                          |
+| State RPS Solar Carve-outs          | 3-19                                          |
+| Clean Energy Standards (CES)        | 3-20                                          |
+| Offshore Wind Mandates              | 3-21                                          |
+| Fossil Generation Limits (GWh)      | 3-22                                          |
+| Life Extension Costs                | 4-10                                          |
+| Performance & Unit Costs            | 4-12, 4-15                                    |
+| VOM Assumptions                     | 4-8                                           |
+| FOM Assumptions                     | 4-9                                           |
+| Short-term Capital Cost Adders      | 4-13                                          |
+| Regional Cost Factors (RF)          | 4-14                                          |
+| Potential RES Capacity (MW)         | 4-16, 4-17                                    |
+| Reserve Margin Contribution         | 4-20, 4-21, 4-22, 4-26, 4-31                  |
+| Capital Cost Adders (CCA)           | 4-23, 4-24                                    |
+| Potential Non-powered Dam           | 4-29                                          |
+| Energy Storage Mandates             | 4-33                                          |
+
+
+-----
+
+## How-To Manual: Getting Started
+
+### 1. Download the Data & Code
+
+Clone this repository to your local machine:
+```bash
+git clone https://github.com/HopkinsICARUS/ICARUS-PJM-Dataset.git
+cd ICARUS-PJM-Dataset
+```
+
+### 2. Set Up Your Environment
+Install the required Python packages:
+
+```bash
+pip install numpy pandas geopandas matplotlib
+```
+
+### 3. Run the Processing Scripts
+
+To generate the dataset, run the main data processing script from your terminal, making current directory where Python scripts are located:
+
+```bash
+python src/pjm_9_zone/make_data.py
+```
+
+Scripts are organized per representation: `src/pjm_9_zone/` (EPA IPM 9-region model) and `src/pjm_nodal/` (bus/branch-level testbed). To (re)generate the nodal dataset, place the raw inputs listed in [`src/pjm_nodal/README.md`](src/pjm_nodal/README.md) under `data/raw/` and run:
+
+```bash
+python src/pjm_nodal/make_data.py       # data/processed/PJM Nodal/
+python src/pjm_nodal/plot_network.py    # data/figures/pjm_nodal_testbed_map.png
+python src/pjm_nodal/validate_zonal.py  # cross-check vs PJM 21 Zone dataset
+```
+
+_Note_: You can easily filter the entire datasets for a specific region other than the default, PJM. Open the `src/pjm_9_zone/make_data.py` script and modify the `REGION_PREFIX` variable:
+  * **For a specific region:** `REGION_PREFIX = "PJM"` (default) or `REGION_PREFIX = "MIS"`
+  * **For the complete US dataset:** `REGION_PREFIX = ""`
+
+When a prefix is set, the filtered data will be saved in a dedicated subfolder (e.g., `data/processed/PJM/`).
+
+## Regional Transmission Visualization
+
+The included Python scripts can generate detailed maps of the **EPA IPM regions** and their transmission interconnections, with clear distinctions between the region of interest and its neighboring regions. This map can be generated by running `python src/pjm_9_zone/plot_network.py`
+
+The example map below was generated by setting **`REGION_PREFIX = "PJM"`**, which highlights:  
+
+- **Internal Lines (Green):** Transmission corridors within the PJM territory.  
+- **Interface Lines (Red):** Corridors connecting PJM to neighboring regions.  
+- **External Lines (Grey):** All other transmission lines in the U.S. model.  
+
+![PJM Transmission Map](data/figures/epa_ipm_trans_limits_PJM.png)
+
+## Regional Transmission Visualization With Data Center Capacity
+
+The repository also includes visualization scripts to overlay **data center load capacities** on top of the EPA IPM regional transmission network.
+This enhanced map can be generated by running:
+
+```bash
+python src/pjm_9_zone/plot_network_datacenter.py
+```
+
+The script allows users to choose which category of data center loads to display using the parameter:
+
+```python
+# Options: "Operating", "In Construction", "Planned", "Planned + In Construction", "Total"
+DC_CAPACITY_TO_PLOT = "Planned"
+```
+
+When **`REGION_PREFIX = "PJM"`** is set, the resulting maps display the PJM regional boundaries, internal and interface transmission lines, and data center loads according to the selected status.
+
+### Example Visualizations
+
+* **Operating Data Center Capacity (MW):**
+  *U.S. (top) and PJM (bottom)*
+  ![Operating Data Center Capacity](data/figures/epa_ipm_trans_limits_PJM_dc_operating.png)
+
+* **In-Construction Data Center Capacity (MW):**
+  *U.S. (top) and PJM (bottom)*
+  ![In-Construction Data Center Capacity](data/figures/epa_ipm_trans_limits_PJM_dc_in_construction.png)
+
+* **Operating and In-Construction Data Center Capacity (MW):**
+  ![Operating and In-Construction Data Center Capacity](data/figures/epa_ipm_trans_limits_PJM_dc_operating_plus_in_construction.png)
+
+* **Planned Data Center Capacity (MW):**
+  *U.S. (top) and PJM (bottom)*
+  ![Planned Data Center Capacity](data/figures/epa_ipm_trans_limits_PJM_dc_planned.png)
+
+* **Planned and In-Construction Data Center Capacity (MW):**
+  *U.S. (top) and PJM (bottom)*
+  ![Planned and In-Construction Data Center Capacity](data/figures/epa_ipm_trans_limits_PJM_dc_planned_plus_in_construction.png)
+
+* **Total Data Center Load (MW):**
+  *U.S. (top) and PJM (bottom)*
+  ![Total Data Center Load (MW)](data/figures/epa_ipm_trans_limits_PJM_dc_total.png)
+
+-----
